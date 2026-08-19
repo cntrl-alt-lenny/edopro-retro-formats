@@ -10,7 +10,7 @@
       "date": "2006-11-04",
       "precision": "day",
       "status": "reported",
-      "kind": "retail",
+      "kind": "event",
       "sources": [
         "yugipedia-set-pages",
         "ygoprodeck-api"

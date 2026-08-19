@@ -42,5 +42,5 @@
   "sources": [
     "ygoprodeck-api"
   ],
-  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+  "notes": "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
 }

@@ -50,8 +50,10 @@
     "release_events": 508,
     "unmatched_cards": 8,
     "name_mismatches": 6,
-    "date_discrepancies": 64,
+    "date_discrepancies": 59,
     "products_without_printings": 4,
+    "yugipedia_only_products": 33,
+    "prefix_mismatched_printings": 3,
     "skipped_products": 3,
     "non_playable_skipped": 1,
     "ot_conflicts": 1
@@ -543,14 +545,6 @@
       }
     },
     {
-      "product": "Shonen Jump March 2010 subscription bonus",
-      "ygoprodeck": "2010-03-01",
-      "yugipedia": {
-        "na": "2010-01-01",
-        "en": "2010-01-01"
-      }
-    },
-    {
       "product": "Shonen Jump Scholastic Edition Vol. 9, Issue 1 promotional card",
       "ygoprodeck": "2011-01-01",
       "yugipedia": {
@@ -591,22 +585,6 @@
       }
     },
     {
-      "product": "Shonen Jump Vol. 5, Issue 11 promotional card",
-      "ygoprodeck": "2007-11-01",
-      "yugipedia": {
-        "na": "2007-01-01",
-        "en": "2007-01-01"
-      }
-    },
-    {
-      "product": "Shonen Jump Vol. 5, Issue 9 promotional card",
-      "ygoprodeck": "2007-09-01",
-      "yugipedia": {
-        "na": "2007-01-01",
-        "en": "2007-01-01"
-      }
-    },
-    {
       "product": "Shonen Jump Vol. 8, Issue 11 promotional card",
       "ygoprodeck": "2010-11-01",
       "yugipedia": {
@@ -623,27 +601,11 @@
       }
     },
     {
-      "product": "Shonen Jump Vol. 9, Issue 3 promotional card",
-      "ygoprodeck": "2011-03-01",
-      "yugipedia": {
-        "na": "2011-01-01",
-        "en": "2011-01-01"
-      }
-    },
-    {
       "product": "Structure Deck: Warrior's Triumph",
       "ygoprodeck": "2005-10-28",
       "yugipedia": {
         "na": "2005-11-02",
         "en": "2005-11-02"
-      }
-    },
-    {
-      "product": "Swedish Shonen Jump 2005, Issue 12 promotional card",
-      "ygoprodeck": "2005-11-01",
-      "yugipedia": {
-        "eu": "2005-01-01",
-        "en": "2005-01-01"
       }
     },
     {
@@ -669,6 +631,41 @@
     "Yu-Gi-Oh! World Championship 2006 prize cards",
     "Yu-Gi-Oh! World Championship 2007 prize cards"
   ],
+  "yugipedia_only_products": [
+    "Absolute Powerforce Plus",
+    "Ancient Prophecy Plus",
+    "Duel the Master: Orichalcos Challenge 2006 promotional card",
+    "Duelist Pack Collection Tin 2007",
+    "Mattel Action Figure promotional cards",
+    "Pharaoh Tour 2006 Final prize card",
+    "Pharaoh Tour 2006 Stop participation card",
+    "Shonen Jump Fifth Anniversary Collector's Issue promotional card",
+    "Shonen Jump May 2005 subscription bonus",
+    "Shonen Jump Vol. 3, Issue 11 promotional card",
+    "Shonen Jump Vol. 3, Issue 6 promotional card",
+    "Shonen Jump Vol. 3, Issue 9 promotional card",
+    "Shonen Jump Vol. 4, Issue 10 promotional card",
+    "Shonen Jump Vol. 4, Issue 2 promotional card",
+    "Shonen Jump Vol. 4, Issue 5 promotional card",
+    "Stardust Overdrive Plus",
+    "Starter Deck: Joey Deluxe Edition",
+    "Starter Deck: Pegasus Deluxe Edition",
+    "Token Pack Version 1.0",
+    "Token Pack Version 2.0",
+    "Toys \"R\" Us Geoffrey's Birthday Party promotional cards",
+    "Toys \"R\" Us Throwdown promotional cards",
+    "Upper Deck Entertainment promotional card",
+    "Yu-Gi-Oh! 5D's National Championship 2009 promotional cards",
+    "Yu-Gi-Oh! Duelist Volume 16 promotional card",
+    "Yu-Gi-Oh! Forbidden Memories Premium Edition promotional cards",
+    "Yu-Gi-Oh! Millennium World Volume 4 promotional card",
+    "Yu-Gi-Oh! The Movie Ani-Manga promotional card",
+    "Yu-Gi-Oh! World Championship 2004 tournament promotional cards",
+    "Yu-Gi-Oh! World Championship 2008 prize cards",
+    "Yu-Gi-Oh! World Championship 2009 prize cards",
+    "Yu-Gi-Oh! World Championship 2010 prize cards",
+    "Yu-Gi-Oh! the Movie VHS and DVD promotional cards"
+  ],
   "skipped_products": [
     {
       "product": "EFootball collaboration cards",
@@ -684,6 +681,7 @@
     }
   ],
   "non_playable_skipped": 1,
+  "prefix_mismatched_printings": 3,
   "ot_conflicts": [
     {
       "passcode": 96782886,

@@ -17,7 +17,10 @@
   "known_gaps": [
     "4 products have no printings (no YGOPRODeck card lists them; mostly repackagings and non-card products)",
     "8 in-window cards could not be matched to BabelCDB",
-    "64 products where YGOPRODeck's date matches no Yugipedia date (recorded in the report; Yugipedia governs)"
+    "59 products where YGOPRODeck's date matches no Yugipedia date (recorded in the report; Yugipedia governs)",
+    "33 Yugipedia-dated in-window products matched no YGOPRODeck set and are absent (no printing rosters available)",
+    "3 printings carry numbers from a different product's prefix (upstream set-membership quirks; validator warns per case)",
+    "Renamed products (Magic Ruler / Spell Ruler) import as two products sharing dates"
   ],
   "sources": [
     "yugipedia-set-pages",

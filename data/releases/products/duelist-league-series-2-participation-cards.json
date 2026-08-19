@@ -10,7 +10,7 @@
       "date": "2003-07-15",
       "precision": "day",
       "status": "reported",
-      "kind": "retail",
+      "kind": "event",
       "sources": [
         "yugipedia-set-pages"
       ]
@@ -20,7 +20,7 @@
       "date": "2004-01-01",
       "precision": "year",
       "status": "reported",
-      "kind": "retail",
+      "kind": "event",
       "sources": [
         "yugipedia-set-pages"
       ]

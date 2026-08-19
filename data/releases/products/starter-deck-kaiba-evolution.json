@@ -12,8 +12,7 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "yugipedia-set-pages",
-        "ygoprodeck-api"
+        "yugipedia-set-pages"
       ]
     },
     {

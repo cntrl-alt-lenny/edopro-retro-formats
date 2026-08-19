@@ -10,7 +10,7 @@
       "date": "2008-08-01",
       "precision": "month",
       "status": "reported",
-      "kind": "retail",
+      "kind": "event",
       "sources": [
         "yugipedia-set-pages"
       ]
