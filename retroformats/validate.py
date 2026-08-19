@@ -16,12 +16,18 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .model import (
+    EVENT_KINDS,
+    EVENT_STATUSES,
     IMPLEMENTATION_STATUSES,
+    PRECISIONS,
+    PRODUCT_KINDS,
     STATUS_TO_COUNT,
+    TERRITORIES,
     Banlist,
     Format,
     Pool,
 )
+from .releases import ReleaseIndex, default_scope, evaluate_cutoff
 from .repo import Repository
 
 ERROR = "ERROR"
@@ -33,6 +39,8 @@ _POOL_ID_RE = re.compile(r"^pool-[a-z0-9-]+$")
 _PROFILE_ID_RE = re.compile(r"^rules-[a-z0-9-]+$")
 _ERRATUM_ID_RE = re.compile(r"^erratum-[a-z0-9-]+$")
 _FLAG_RE = re.compile(r"^DUEL_[A-Z0-9_]+$")
+_PRODUCT_CODE_RE = re.compile(r"^[A-Z0-9][A-Za-z0-9-]{1,15}$")
+_PRODUCT_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,79}$")
 
 
 @dataclass(frozen=True)
@@ -135,6 +143,34 @@ class Validator:
         elif pool.kind == "release-cutoff":
             if not pool.cutoff or not self._date((pool.cutoff or {}).get("cutoff_date")):
                 self.error("pool.bad-cutoff", pool.path, "release-cutoff pool needs cutoff.cutoff_date")
+            else:
+                for territory in pool.cutoff.get("territories", []):
+                    if territory not in TERRITORIES:
+                        self.error("pool.bad-territory", pool.path, f"cutoff territory {territory!r}")
+                for key in ("include", "exclude"):
+                    for entry in pool.cutoff.get(key, []):
+                        card_ref = entry.get("card", {})
+                        try:
+                            passcode = int(card_ref.get("passcode"))
+                            name = str(card_ref.get("name"))
+                        except (TypeError, ValueError):
+                            self.error("pool.bad-exception", pool.path, f"cutoff.{key} entry {entry!r}")
+                            continue
+                        self._check_card(passcode, name, pool.path, f"cutoff.{key} entry")
+                        if not entry.get("reason"):
+                            self.error(
+                                "pool.exception-unreasoned",
+                                pool.path,
+                                f"cutoff.{key} {name}: historical exceptions must state a reason",
+                            )
+                        if not entry.get("sources"):
+                            self.error(
+                                "pool.exception-unsourced",
+                                pool.path,
+                                f"cutoff.{key} {name}: historical exceptions must cite sources",
+                            )
+                        else:
+                            self._check_sources(list(entry["sources"]), pool.path, None, f"cutoff.{key}")
         else:
             self.error("pool.bad-kind", pool.path, f"kind {pool.kind!r}")
         seen: set[int] = set()
@@ -312,7 +348,7 @@ class Validator:
                     f"banlist {banlist.id} was superseded on {superseded}, on/before snapshot {snapshot}",
                 )
 
-        if banlist is not None and pool is not None and pool.kind == "extensional":
+        if banlist is not None and pool is not None and pool.cards:
             pool_codes = pool.passcodes()
             for entry in banlist.entries:
                 if entry.status in ("limited", "semilimited") and entry.card.passcode not in pool_codes:
@@ -393,20 +429,186 @@ class Validator:
                         f"but implementation status is {erratum.implementation.get('status')!r}",
                     )
 
-    def _validate_releases(self) -> None:
-        for release_file in self.repo.releases:
-            raw = release_file["raw"]
-            path = release_file["path"]
-            seen: set[str] = set()
-            for product in raw.get("products", []):
-                code = product.get("code", "")
-                if code in seen:
-                    self.error("releases.duplicate-code", path, f"product code {code!r} listed twice")
-                seen.add(code)
-                if self._date(product.get("release_date")) is None:
-                    self.error("releases.bad-date", path, f"{code}: release_date {product.get('release_date')!r}")
-                if not product.get("sources"):
-                    self.error("releases.unsourced", path, f"product {code!r} cites no sources")
+    def _validate_event(self, event, path: Path, context: str) -> None:
+        if event.territory not in TERRITORIES:
+            self.error("releases.bad-territory", path, f"{context}: territory {event.territory!r}")
+        if event.precision not in PRECISIONS:
+            self.error("releases.bad-precision", path, f"{context}: precision {event.precision!r}")
+        if event.status not in EVENT_STATUSES:
+            self.error("releases.bad-status", path, f"{context}: status {event.status!r}")
+        if event.kind not in EVENT_KINDS:
+            self.error("releases.bad-event-kind", path, f"{context}: kind {event.kind!r}")
+        if self._date(event.date) is None:
+            self.error("releases.bad-date", path, f"{context}: date {event.date!r}")
+        if event.status == "disputed" and not event.dispute:
+            self.error(
+                "releases.dispute-missing",
+                path,
+                f"{context}: status is disputed but no dispute alternatives are recorded",
+            )
+        if event.dispute and event.status != "disputed":
+            self.error(
+                "releases.dispute-unexpected",
+                path,
+                f"{context}: dispute alternatives recorded but status is {event.status!r}",
+            )
+        for alt in event.dispute:
+            if self._date(str(alt.get("date"))) is None:
+                self.error("releases.bad-date", path, f"{context}: dispute date {alt.get('date')!r}")
+            if not alt.get("sources"):
+                self.error("releases.unsourced", path, f"{context}: a dispute alternative cites no sources")
+            else:
+                self._check_sources(list(alt["sources"]), path, None, f"{context} dispute")
+        self._check_sources(event.sources, path, None, f"{context} event")
+
+    def _validate_products(self) -> None:
+        for product in self.repo.products.values():
+            path = product.path
+            if not _PRODUCT_ID_RE.match(product.id):
+                self.error("releases.bad-id", path, f"product id {product.id!r} is not a slug")
+            if not _PRODUCT_CODE_RE.match(product.code):
+                self.error("releases.bad-code", path, f"product code {product.code!r}")
+            if path.stem != product.id:
+                self.error(
+                    "releases.id-file-mismatch",
+                    path,
+                    f"id {product.id!r} but file is {path.name!r}",
+                )
+            if product.kind not in PRODUCT_KINDS:
+                self.error("releases.bad-kind", path, f"kind {product.kind!r}")
+            if product.dating not in ("product", "per-printing"):
+                self.error("releases.bad-dating", path, f"dating {product.dating!r}")
+            if product.dating == "per-printing" and product.events:
+                self.error(
+                    "releases.dating-conflict",
+                    path,
+                    "dating=per-printing products must not carry product-level release_events",
+                )
+            if product.dating == "product" and not product.events:
+                self.warn(
+                    "releases.undated-product",
+                    path,
+                    "product has no release events; its printings grant no availability",
+                )
+            for event in product.events:
+                self._validate_event(event, path, f"product {product.code}")
+            seen: set[int] = set()
+            for printing in product.printings:
+                if printing.passcode in seen:
+                    self.error(
+                        "releases.duplicate-printing",
+                        path,
+                        f"passcode {printing.passcode} ({printing.name}) printed twice in {product.code}; "
+                        "merge the rows (numbers is a list)",
+                    )
+                seen.add(printing.passcode)
+                self._check_card(printing.passcode, printing.name, path, f"printing in {product.code}")
+                for number in printing.numbers:
+                    if not number.startswith(f"{product.code}-"):
+                        self.warn(
+                            "releases.number-prefix",
+                            path,
+                            f"printing number {number!r} does not start with {product.code!r}-",
+                        )
+                for event in printing.events:
+                    self._validate_event(event, path, f"printing {printing.passcode} in {product.code}")
+            self._check_sources(product.sources, path, None, f"product {product.code}")
+
+        # A canonical card that was printed but is undated everywhere can never
+        # enter a pool - fine for reprints, a research gap for first prints.
+        if self.repo.products:
+            index = ReleaseIndex.build(self.repo)
+            for canonical in sorted(index.by_canonical):
+                availability = index.by_canonical[canonical]
+                if not availability.events and availability.undated_printings:
+                    products = ", ".join(sorted({p for p, _ in availability.undated_printings}))
+                    self.warn(
+                        "releases.card-undated",
+                        f"data/releases/products ({products})",
+                        f"passcode {canonical}: every known printing is undated; "
+                        "the card cannot enter any release-cutoff pool until one is dated",
+                    )
+
+    def _validate_coverage(self) -> None:
+        coverage = self.repo.release_coverage
+        if coverage is None:
+            return
+        for i, window in enumerate(coverage.windows):
+            start = self._date(str(window.get("from")))
+            end = self._date(str(window.get("through")))
+            if start is None or end is None or start > end:
+                self.error(
+                    "coverage.bad-window",
+                    coverage.path,
+                    f"window {i}: from {window.get('from')!r} through {window.get('through')!r}",
+                )
+            for t in window.get("territories", []):
+                if t not in TERRITORIES:
+                    self.error("coverage.bad-territory", coverage.path, f"window {i}: {t!r}")
+            if window.get("status") not in IMPLEMENTATION_STATUSES:
+                self.error("coverage.bad-window", coverage.path, f"window {i}: status {window.get('status')!r}")
+        self._check_sources(coverage.sources, coverage.path, None, "release coverage")
+
+    def _validate_materialized_pools(self) -> None:
+        """A release-cutoff pool with cards committed must be exactly what the
+        release dataset derives - materialisation is a projection, not data."""
+        index = None
+        for pool in self.repo.pools.values():
+            if pool.kind != "release-cutoff" or not pool.raw.get("cards"):
+                continue
+            if not self._date((pool.cutoff or {}).get("cutoff_date")):
+                continue  # pool.bad-cutoff already reported
+            cutoff = _dt.date.fromisoformat(str(pool.cutoff["cutoff_date"]))
+            scope = frozenset(pool.cutoff.get("territories") or default_scope(pool.region))
+            coverage = self.repo.release_coverage
+            if coverage is None or not coverage.covers(cutoff, scope):
+                self.error(
+                    "pool.no-coverage",
+                    pool.path,
+                    f"pool is materialised but data/releases/coverage.json does not claim "
+                    f"complete coverage of {sorted(scope)} through {cutoff}",
+                )
+            if index is None:
+                index = ReleaseIndex.build(self.repo)
+            evaluation = evaluate_cutoff(pool, self.repo, index)
+            for code in sorted(evaluation.ambiguous):
+                refs = evaluation.ambiguous[code]
+                spans = "; ".join(
+                    f"{r.product_code} {r.event.date} ({r.event.precision}/{r.event.status})"
+                    for r in refs[:3]
+                )
+                self.error(
+                    "pool.cutoff-ambiguous",
+                    pool.path,
+                    f"passcode {code}: possible release dates straddle the cutoff ({spans}); "
+                    "resolve with a sourced cutoff.include/exclude entry",
+                )
+            committed = {c.passcode: c for c in pool.cards}
+            computed = {c["passcode"]: c for c in evaluation.cards()}
+            for code in sorted(computed.keys() - committed.keys())[:20]:
+                self.error(
+                    "pool.materialization-drift",
+                    pool.path,
+                    f"release data derives {code} ({computed[code]['name']}) but the committed pool lacks it; "
+                    "run: python -m retroformats materialize",
+                )
+            for code in sorted(committed.keys() - computed.keys())[:20]:
+                self.error(
+                    "pool.materialization-drift",
+                    pool.path,
+                    f"committed pool contains {code} ({committed[code].name}) but release data does not derive it; "
+                    "run: python -m retroformats materialize",
+                )
+            for code in sorted(committed.keys() & computed.keys()):
+                have = sorted(committed[code].variants)
+                want = sorted(computed[code].get("variant_passcodes", []))
+                if have != want:
+                    self.error(
+                        "pool.materialization-drift",
+                        pool.path,
+                        f"passcode {code}: committed variants {have} != derived {want}; "
+                        "run: python -m retroformats materialize",
+                    )
 
     # -- entry point -----------------------------------------------------
 
@@ -427,7 +629,9 @@ class Validator:
         self._validate_errata()
         for fmt in self.repo.formats.values():
             self._validate_format(fmt)
-        self._validate_releases()
+        self._validate_products()
+        self._validate_coverage()
+        self._validate_materialized_pools()
         return self.findings
 
     @property

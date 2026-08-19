@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-shining-darkness",
+  "code": "TSHD",
+  "name": "The Shining Darkness",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-05-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "edisonformat-what-is"
+      ]
+    }
+  ],
+  "printings": [],
+  "sources": [
+    "edisonformat-what-is"
+  ],
+  "notes": "Recorded because its NA release date defines the Edison pool cutoff (2010-05-10 is the day before). Its cards are post-Edison."
+}

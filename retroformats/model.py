@@ -16,6 +16,10 @@ from typing import Any
 STATUS_TO_COUNT = {"forbidden": 0, "limited": 1, "semilimited": 2}
 UNLIMITED_COUNT = 3
 
+# CARD_ARTWORK_VERSIONS_OFFSET in EDOPro's gframe/data_manager.h: a cdb alias
+# within this window marks an artwork variant of the same functional card.
+ARTWORK_OFFSET = 10
+
 IMPLEMENTATION_STATUSES = ("missing", "stub", "partial", "complete", "verified")
 
 
@@ -197,6 +201,198 @@ class Erratum:
         if not dates:
             return None
         return snapshot < min(dates)
+
+
+TERRITORIES = ("tcg", "tcg-na", "tcg-eu", "tcg-oce", "ocg", "ocg-jp", "ocg-kr", "ocg-asia")
+PRECISIONS = ("day", "month", "year")
+EVENT_STATUSES = ("verified", "reported", "disputed")
+EVENT_KINDS = ("retail", "event", "prerelease", "distribution-start")
+# Event kinds that made a card legally obtainable (sneak-peek/prerelease
+# availability is recorded but does not count toward tournament pools).
+AVAILABILITY_KINDS = ("retail", "event", "distribution-start")
+PRODUCT_KINDS = (
+    "booster", "structure", "starter", "tin", "special", "reprint-set",
+    "promo-magazine", "promo-videogame", "promo-tournament",
+    "promo-subscription", "promo-other", "other",
+)
+
+
+def territory_family(territory: str) -> str:
+    return "ocg" if territory.startswith("ocg") else "tcg"
+
+
+def territory_matches_scope(territory: str, scope: frozenset[str]) -> bool:
+    """True when an event in `territory` counts for a pool scoped to `scope`.
+
+    An umbrella territory ('tcg'/'ocg' - a source that did not distinguish)
+    satisfies any territory of its family, and a family umbrella in the scope
+    accepts any specific territory of that family.
+    """
+    if territory in scope:
+        return True
+    family = territory_family(territory)
+    if territory == family:  # umbrella event: matches any scoped territory of the family
+        return any(territory_family(s) == family for s in scope)
+    return family in scope  # specific event: matches an umbrella scope
+
+
+def _last_day_of_month(year: int, month: int) -> _dt.date:
+    if month == 12:
+        return _dt.date(year, 12, 31)
+    return _dt.date(year, month + 1, 1) - _dt.timedelta(days=1)
+
+
+@dataclass
+class ReleaseEvent:
+    territory: str
+    date: str
+    precision: str
+    status: str
+    kind: str
+    dispute: list[dict[str, Any]]
+    sources: list[str]
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "ReleaseEvent":
+        try:
+            return cls(
+                territory=str(raw["territory"]),
+                date=str(raw["date"]),
+                precision=str(raw.get("precision", "day")),
+                status=str(raw.get("status", "reported")),
+                kind=str(raw.get("kind", "retail")),
+                dispute=list(raw.get("dispute", [])),
+                sources=list(raw.get("sources", [])),
+                raw=raw,
+            )
+        except KeyError as exc:
+            raise DataError(path, f"release event {raw!r} missing {exc}") from exc
+
+    @staticmethod
+    def _bounds(date_str: str, precision: str) -> tuple[_dt.date, _dt.date]:
+        d = parse_date(date_str)
+        if precision == "month":
+            return _dt.date(d.year, d.month, 1), _last_day_of_month(d.year, d.month)
+        if precision == "year":
+            return _dt.date(d.year, 1, 1), _dt.date(d.year, 12, 31)
+        return d, d
+
+    def bounds(self) -> tuple[_dt.date, _dt.date]:
+        """(earliest, latest) possible real date, widened by precision and by
+        every recorded dispute alternative. Certainty about a cutoff exists
+        only when the whole range lies on one side of it."""
+        earliest, latest = self._bounds(self.date, self.precision)
+        for alt in self.dispute:
+            alt_date = alt.get("date")
+            if not alt_date:
+                continue
+            lo, hi = self._bounds(str(alt_date), str(alt.get("precision", "day")))
+            earliest = min(earliest, lo)
+            latest = max(latest, hi)
+        return earliest, latest
+
+
+@dataclass
+class Printing:
+    passcode: int
+    name: str
+    numbers: list[str]
+    events: list[ReleaseEvent]
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "Printing":
+        try:
+            return cls(
+                passcode=int(raw["passcode"]),
+                name=str(raw["name"]),
+                numbers=[str(n) for n in raw.get("numbers", [])],
+                events=[ReleaseEvent.load(e, path) for e in raw.get("release_events", [])],
+                raw=raw,
+            )
+        except (KeyError, TypeError, ValueError) as exc:
+            raise DataError(path, f"bad printing {raw!r}: {exc}") from exc
+
+
+@dataclass
+class Product:
+    id: str
+    code: str
+    name: str
+    kind: str
+    dating: str  # "product" | "per-printing"
+    events: list[ReleaseEvent]
+    printings: list[Printing]
+    sources: list[str]
+    path: Path
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "Product":
+        return cls(
+            id=str(raw.get("id", "")),
+            code=str(raw.get("code", "")),
+            name=str(raw.get("name", "")),
+            kind=str(raw.get("kind", "")),
+            dating=str(raw.get("dating", "product")),
+            events=[ReleaseEvent.load(e, path) for e in raw.get("release_events", [])],
+            printings=[Printing.load(p, path) for p in raw.get("printings", [])],
+            sources=list(raw.get("sources", [])),
+            path=path,
+            raw=raw,
+        )
+
+    def events_for(self, printing: Printing) -> list[ReleaseEvent]:
+        """The release events governing one printing: its own if present,
+        otherwise the product-level events (unless dating=per-printing, where
+        an event-less printing is deliberately undated - a reprint whose
+        serial-promo date is unresearched contributes no availability)."""
+        if printing.events:
+            return printing.events
+        if self.dating == "per-printing":
+            return []
+        return self.events
+
+
+@dataclass
+class ReleaseCoverage:
+    windows: list[dict[str, Any]]
+    known_gaps: list[str]
+    sources: list[str]
+    path: Path
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "ReleaseCoverage":
+        return cls(
+            windows=list(raw.get("windows", [])),
+            known_gaps=list(raw.get("known_gaps", [])),
+            sources=list(raw.get("sources", [])),
+            path=path,
+            raw=raw,
+        )
+
+    def covers(self, day: _dt.date, scope: frozenset[str]) -> bool:
+        """True when some claimed-complete window contains `day` and covers
+        every territory in `scope` (umbrella territories cover their family)."""
+        for window in self.windows:
+            if window.get("status") not in ("complete", "verified"):
+                continue
+            try:
+                start = parse_date(str(window.get("from")))
+                end = parse_date(str(window.get("through")))
+            except ValueError:
+                continue
+            if not (start <= day <= end):
+                continue
+            covered = set(window.get("territories", []))
+            if all(
+                t in covered or territory_family(t) in covered
+                for t in scope
+            ):
+                return True
+        return False
 
 
 @dataclass

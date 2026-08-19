@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "machina-mayhem-structure-deck",
+  "code": "SDMM",
+  "name": "Machina Mayhem Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-02-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "edisonformat-legal-sets"
+      ]
+    }
+  ],
+  "printings": [],
+  "sources": [
+    "edisonformat-legal-sets"
+  ],
+  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+}

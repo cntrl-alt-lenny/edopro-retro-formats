@@ -34,10 +34,16 @@ import datetime as _dt
 from dataclasses import dataclass
 
 from . import GENERATOR_NAME
-from .model import STATUS_TO_COUNT, UNLIMITED_COUNT, Banlist, Erratum, Format, Pool
+from .model import (
+    ARTWORK_OFFSET,  # re-exported; importers historically import it from here
+    STATUS_TO_COUNT,
+    UNLIMITED_COUNT,
+    Banlist,
+    Erratum,
+    Format,
+    Pool,
+)
 from .repo import Repository
-
-ARTWORK_OFFSET = 10  # CARD_ARTWORK_VERSIONS_OFFSET in gframe/data_manager.h
 
 _SECTION_ORDER = ("forbidden", "limited", "semilimited", "unlimited")
 _SECTION_HEADERS = {
@@ -143,7 +149,10 @@ class BuiltList:
 def build_lflist(fmt: Format, repo: Repository) -> BuiltList:
     banlist = repo.banlists[fmt.banlist_id]
     pool = repo.pools[fmt.pool_id]
-    if pool.kind == "extensional":
+    if pool.cards:
+        # Extensional pools always carry cards; release-cutoff pools carry
+        # them once materialised from the release dataset (the validator
+        # recomputes and cross-checks that projection on every run).
         return _build_whitelist(fmt, banlist, pool, repo)
     # Without a materialised pool we can still emit the historical
     # Forbidden/Limited list; the format is then only accurate for decks

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/releases-coverage.schema.json",
+  "title": "Release-data coverage claim",
+  "description": "What data/releases/products/ claims to cover. A release-cutoff pool is only materialisable when its cutoff date falls inside a claimed-complete window; the validator enforces this so missing coverage is an explicit error, never a silently smaller pool.",
+  "type": "object",
+  "required": ["windows", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "windows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["territories", "from", "through", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "territories": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "common.schema.json#/$defs/territory" }
+          },
+          "from": { "$ref": "common.schema.json#/$defs/isoDate" },
+          "through": { "$ref": "common.schema.json#/$defs/isoDate" },
+          "status": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Products or date ranges known to be missing or under-researched inside the claimed windows. Honest bookkeeping: gaps listed here still count as coverage for materialisation, so anything that would change a pool must be an explicit pool include/exclude instead."
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  }
+}

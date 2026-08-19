@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/product-release.schema.json",
+  "title": "Product release record",
+  "description": "One TCG/OCG product (booster set, structure deck, tin, promo series, ...) with its release events per territory and the card printings it contains. This is the raw historical fact layer: card availability is always DERIVED from these records (earliest applicable event), never stored as a single lossy per-card date. Reprints therefore cannot overwrite a card's original availability. One file per product under data/releases/products/<CODE>.json.",
+  "type": "object",
+  "required": ["id", "code", "name", "kind", "printings", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,79}$",
+      "description": "Unique slug identifying the product (usually derived from its name). The set-code prefix canNOT serve as the key: prefixes are shared across distinct products (a main set, its Sneak Peek participation card, and its Special Edition all use one prefix). The file is named <id>.json."
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Za-z0-9-]{1,15}$",
+      "description": "The product's set-code prefix as printed on its cards (ABPF, SDMM, JUMP, SJCS...). NOT unique across products."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "booster",
+        "structure",
+        "starter",
+        "tin",
+        "special",
+        "reprint-set",
+        "promo-magazine",
+        "promo-videogame",
+        "promo-tournament",
+        "promo-subscription",
+        "promo-other",
+        "other"
+      ]
+    },
+    "dating": {
+      "type": "string",
+      "enum": ["product", "per-printing"],
+      "default": "product",
+      "description": "product: all printings share the product-level release_events (normal sets). per-printing: the product is a serial series (magazine promos, tournament prizes) whose cards released individually over time; availability comes from each printing's own release_events and the product-level list must be empty."
+    },
+    "release_events": {
+      "$ref": "#/$defs/releaseEvents",
+      "description": "When and where the product became legally available. Multiple events express regional differences (e.g. a North American and a later European date)."
+    },
+    "printings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["passcode", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "passcode": { "$ref": "common.schema.json#/$defs/passcode", "description": "The passcode of the card as printed. Artwork variants use their own passcode; canonicalisation to the base card happens at derivation time via the card index's alias data." },
+          "name": { "type": "string", "minLength": 1, "description": "Modern canonical English name (validator cross-checks against the card index)." },
+          "numbers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Card numbers of this printing within the product (e.g. [\"ABPF-EN001\"]; older products may have several regional numberings)."
+          },
+          "release_events": {
+            "$ref": "#/$defs/releaseEvents",
+            "description": "Per-printing availability, for dating=per-printing products (each Shonen Jump promo has its own date) or genuine per-card exceptions inside a normal product. Omitted printings in a per-printing product contribute nothing to availability - safe for reprints whose promo date is unresearched, wrong for first prints (the validator flags a card whose ONLY printings are undated)."
+          }
+        }
+      }
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "releaseEvents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["territory", "date", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "territory": { "$ref": "common.schema.json#/$defs/territory" },
+          "date": { "$ref": "common.schema.json#/$defs/isoDate" },
+          "precision": {
+            "type": "string",
+            "enum": ["day", "month", "year"],
+            "default": "day",
+            "description": "How precise the date claim is. month/year dates are stored padded to the first day; derivation treats them as a range and refuses to silently resolve a cutoff that falls inside it."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["verified", "reported", "disputed"],
+            "default": "reported",
+            "description": "verified: 2+ independent sources agree. reported: single source. disputed: reputable sources disagree - the dispute block records the alternatives and derivation refuses cutoffs the disagreement straddles."
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["retail", "event", "prerelease", "distribution-start"],
+            "default": "retail",
+            "description": "What the date marks. prerelease (sneak peek) events are recorded but count toward availability only when a pool opts in."
+          },
+          "dispute": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["date", "sources"],
+              "additionalProperties": false,
+              "properties": {
+                "date": { "$ref": "common.schema.json#/$defs/isoDate" },
+                "precision": { "type": "string", "enum": ["day", "month", "year"] },
+                "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+                "note": { "type": "string" }
+              }
+            },
+            "description": "Alternative date claims from sources that disagree with the primary date. Required when status=disputed."
+          },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

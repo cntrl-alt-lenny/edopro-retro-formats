@@ -35,6 +35,11 @@
       "enum": ["TCG", "OCG", "Worldwide"],
       "description": "Which side of the game's split rules/card-pool history this record belongs to."
     },
+    "territory": {
+      "type": "string",
+      "enum": ["tcg", "tcg-na", "tcg-eu", "tcg-oce", "ocg", "ocg-jp", "ocg-kr", "ocg-asia"],
+      "description": "Where a release event happened, finer-grained than region. 'tcg' means the source gave one TCG-wide date without distinguishing territories; territory-specific events refine it. Availability derivation treats an unspecified 'tcg' event as satisfying any TCG territory scope."
+    },
     "implementationStatus": {
       "type": "string",
       "enum": ["missing", "stub", "partial", "complete", "verified"],

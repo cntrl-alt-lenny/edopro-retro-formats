@@ -30,11 +30,17 @@
     },
     "cutoff": {
       "type": "object",
-      "description": "release-cutoff: every card with a release_date <= cutoff_date in the given region is in the pool, then include/exclude exceptions apply. Must be present when kind=release-cutoff.",
+      "description": "release-cutoff: every card with a release event dated <= cutoff_date in one of the scoped territories (per data/releases/products/) is in the pool, then include/exclude exceptions apply. Must be present when kind=release-cutoff. Once releases coverage exists, `python -m retroformats materialize` writes the derived pool into `cards`; the validator recomputes it from release data on every run and fails on drift, so the committed list stays a reviewable projection of the release facts.",
       "required": ["cutoff_date"],
       "additionalProperties": false,
       "properties": {
         "cutoff_date": { "$ref": "common.schema.json#/$defs/isoDate" },
+        "territories": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "common.schema.json#/$defs/territory" },
+          "description": "Which territories' release events count toward availability. Defaults to every TCG territory when the pool region is TCG (historically, a card released anywhere in the TCG was tournament-legal TCG-wide - e.g. Europe-only Retro Pack cards at a US event). Narrow this for pools that genuinely track one territory's availability."
+        },
         "include": {
           "type": "array",
           "items": {

@@ -120,7 +120,71 @@ class TempRepoTest(unittest.TestCase):
         return payload
 
 
+    def add_product(self, code="SET1", printings=(), release_events=None, **kw):
+        payload = {
+            "id": code.lower(),
+            "code": code,
+            "name": f"Test Product {code}",
+            "kind": "booster",
+            "release_events": (
+                release_events
+                if release_events is not None
+                else [event("tcg-na", "2005-01-01")]
+            ),
+            "printings": list(printings),
+            "sources": ["test-source"],
+        }
+        payload.update(kw)
+        self.write(f"data/releases/products/{payload['id']}.json", payload)
+        return payload
+
+    def add_coverage(self, windows=None, **kw):
+        payload = {
+            "windows": windows
+            if windows is not None
+            else [
+                {
+                    "territories": ["tcg"],
+                    "from": "2002-01-01",
+                    "through": "2010-12-31",
+                    "status": "complete",
+                }
+            ],
+            "sources": ["test-source"],
+        }
+        payload.update(kw)
+        self.write("data/releases/coverage.json", payload)
+        return payload
+
+    def add_cutoff_pool(self, id="pool-cut", cutoff_date="2005-06-01", cards=None, **cutoff_kw):
+        payload = {
+            "id": id,
+            "region": "TCG",
+            "kind": "release-cutoff",
+            "cutoff": {"cutoff_date": cutoff_date, **cutoff_kw},
+            "sources": ["test-source"],
+        }
+        if cards is not None:
+            payload["cards"] = cards
+        self.write(f"data/pools/{id.removeprefix('pool-')}.json", payload)
+        return payload
+
+
 def card(passcode: int, name: str, **kw):
     ref = {"passcode": passcode, "name": name}
     ref.update(kw)
     return ref
+
+
+def event(territory: str, date: str, **kw):
+    ev = {"territory": territory, "date": date, "sources": ["test-source"]}
+    ev.update(kw)
+    return ev
+
+
+def printing(passcode: int, name: str, number: str | None = None, **kw):
+    row = {"passcode": passcode, "name": name}
+    if number:
+        row["numbers"] = [number]
+    row.update(kw)
+    return row

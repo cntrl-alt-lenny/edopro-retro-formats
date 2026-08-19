@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "absolute-powerforce",
+  "code": "ABPF",
+  "name": "Absolute Powerforce",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-02-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "edisonformat-legal-sets"
+      ]
+    }
+  ],
+  "printings": [],
+  "sources": [
+    "edisonformat-legal-sets"
+  ],
+  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+}

@@ -72,7 +72,89 @@ def cmd_report(args: argparse.Namespace) -> int:
             f"{fmt.id:<24} {s.get('banlist', '?'):<14} {s.get('card_pool', '?'):<10} "
             f"{s.get('rule_profile', '?'):<8} {s.get('errata', '?'):<8} {s.get('overall', '?')}"
         )
+    if repo.products:
+        from .releases import ReleaseIndex
+
+        index = ReleaseIndex.build(repo)
+        printings = sum(len(p.printings) for p in repo.products.values())
+        events = sum(
+            len(p.events) + sum(len(pr.events) for pr in p.printings)
+            for p in repo.products.values()
+        )
+        undated = sum(
+            1 for a in index.by_canonical.values() if not a.events and a.undated_printings
+        )
+        print(
+            f"\nreleases: {len(repo.products)} products, {printings} printings, "
+            f"{events} release events -> {index.dated_canonical_count()} dated canonical cards"
+            + (f", {undated} undated" if undated else "")
+        )
+        if repo.release_coverage:
+            for window in repo.release_coverage.windows:
+                print(
+                    f"  coverage [{window.get('status')}] {window.get('from')} .. {window.get('through')} "
+                    f"({', '.join(window.get('territories', []))})"
+                )
     return 0
+
+
+def cmd_materialize(args: argparse.Namespace) -> int:
+    from .importers.ignis_goat import write_json
+    from .releases import ReleaseIndex, default_scope, evaluate_cutoff
+
+    repo = _load(args)
+    targets = [
+        pool for pool in repo.pools.values()
+        if pool.kind == "release-cutoff" and (not args.pools or pool.id in args.pools)
+    ]
+    for wanted in args.pools or []:
+        if wanted not in {p.id for p in targets}:
+            print(f"materialize: no release-cutoff pool with id {wanted!r}", file=sys.stderr)
+            return 1
+    if not targets:
+        print("materialize: no release-cutoff pools found", file=sys.stderr)
+        return 1
+
+    index = ReleaseIndex.build(repo)
+    failed = False
+    for pool in sorted(targets, key=lambda p: p.id):
+        cutoff_date = (pool.cutoff or {}).get("cutoff_date")
+        scope = frozenset((pool.cutoff or {}).get("territories") or default_scope(pool.region))
+        coverage = repo.release_coverage
+        import datetime as _dt
+
+        if coverage is None or not coverage.covers(_dt.date.fromisoformat(str(cutoff_date)), scope):
+            print(
+                f"{pool.id}: refusing to materialise - data/releases/coverage.json does not claim "
+                f"complete coverage of {sorted(scope)} through {cutoff_date}",
+                file=sys.stderr,
+            )
+            failed = True
+            continue
+        evaluation = evaluate_cutoff(pool, repo, index)
+        if evaluation.ambiguous:
+            for code in sorted(evaluation.ambiguous):
+                refs = evaluation.ambiguous[code]
+                spans = "; ".join(
+                    f"{r.product_code} {r.event.date} ({r.event.precision}/{r.event.status})"
+                    for r in refs[:3]
+                )
+                print(
+                    f"{pool.id}: AMBIGUOUS passcode {code}: {spans} straddles cutoff {cutoff_date}; "
+                    "add a sourced cutoff.include/exclude entry",
+                    file=sys.stderr,
+                )
+            failed = True
+            continue
+        raw = dict(pool.raw)
+        raw["cards"] = evaluation.cards()
+        write_json(pool.path, raw)
+        print(
+            f"{pool.id}: materialised {len(evaluation.cards())} cards "
+            f"(cutoff {cutoff_date}, scope {'+'.join(sorted(scope))}, "
+            f"{len(evaluation.forced_in)} forced in, {len(evaluation.forced_out)} forced out)"
+        )
+    return 1 if failed else 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -95,6 +177,13 @@ def main(argv: list[str] | None = None) -> int:
 
     p_report = sub.add_parser("report", help="implementation status per format")
     p_report.set_defaults(func=cmd_report)
+
+    p_mat = sub.add_parser(
+        "materialize",
+        help="derive release-cutoff pool card lists from data/releases/ and write them into the pool files",
+    )
+    p_mat.add_argument("pools", nargs="*", help="pool ids (default: every release-cutoff pool)")
+    p_mat.set_defaults(func=cmd_materialize)
 
     args = parser.parse_args(argv)
     return args.func(args)

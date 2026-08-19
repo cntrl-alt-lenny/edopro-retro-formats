@@ -14,6 +14,8 @@ from .model import (
     Erratum,
     Format,
     Pool,
+    Product,
+    ReleaseCoverage,
     RuleProfile,
     Source,
 )
@@ -49,7 +51,8 @@ class Repository:
     global_sources: dict[str, Source] = field(default_factory=dict)
     format_sources: dict[str, dict[str, Source]] = field(default_factory=dict)
     card_index: CardIndex = field(default_factory=CardIndex)
-    releases: list[dict[str, Any]] = field(default_factory=list)
+    products: dict[str, Product] = field(default_factory=dict)
+    release_coverage: ReleaseCoverage | None = None
     load_errors: list[DataError] = field(default_factory=list)
 
     @classmethod
@@ -92,8 +95,15 @@ class Repository:
         if index_path.exists():
             try_load(index_path, repo._load_card_index)
 
-        for path in sorted((root / "data" / "releases").glob("*.json")):
-            try_load(path, lambda raw, p: repo.releases.append({"path": p, "raw": raw}))
+        for path in sorted((root / "data" / "releases" / "products").glob("*.json")):
+            try_load(path, lambda raw, p: repo._add(repo.products, Product.load(raw, p)))
+
+        coverage_path = root / "data" / "releases" / "coverage.json"
+        if coverage_path.exists():
+            try_load(
+                coverage_path,
+                lambda raw, p: setattr(repo, "release_coverage", ReleaseCoverage.load(raw, p)),
+            )
 
         return repo
 
