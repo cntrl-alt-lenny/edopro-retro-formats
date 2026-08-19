@@ -1,0 +1,84 @@
+{
+  "$schema": "../../schemas/rule-profile.schema.json",
+  "id": "rules-tcg-goat",
+  "name": "TCG 2005 (Goat era)",
+  "description": "The rule behaviour EDOPro/ocgcore uses for GOAT-format duels: the DUEL_MODE_GOAT composite, i.e. the Master Rule 1 baseline plus eleven TCG-specific era behaviours. Selecting the 'GOAT' Duel Rule preset in EDOPro's host dialog produces exactly this flag set.",
+  "era": {
+    "start": null,
+    "end": null,
+    "official_ruleset_label": "Pre-Master Rule TCG expert rules (era attribution of individual flags to official rulebook revisions is still unsourced; the flag composition below is what the engine confirms)"
+  },
+  "engine": {
+    "preset": "DUEL_MODE_GOAT",
+    "flags": [
+      "DUEL_OCG_OBSOLETE_IGNITION",
+      "DUEL_1ST_TURN_DRAW",
+      "DUEL_1_FACEUP_FIELD",
+      "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+      "DUEL_RETURN_TO_DECK_TRIGGERS",
+      "DUEL_CANNOT_SUMMON_OATH_OLD",
+      "DUEL_TCG_FAST_EFFECT_IGNITION",
+      "DUEL_USE_TRAPS_IN_NEW_CHAIN",
+      "DUEL_6_STEP_BATLLE_STEP",
+      "DUEL_TRIGGER_WHEN_PRIVATE_KNOWLEDGE",
+      "DUEL_EQUIP_NOT_SENT_IF_MISSING_TARGET",
+      "DUEL_0_ATK_DESTROYED",
+      "DUEL_STORE_ATTACK_REPLAYS",
+      "DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP",
+      "DUEL_CAN_REPOS_IF_NON_SUMPLAYER",
+      "DUEL_TCG_SEGOC_NONPUBLIC",
+      "DUEL_TCG_SEGOC_FIRSTTRIGGER"
+    ],
+    "ocgcore_reference": "46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57",
+    "starting_lp": 8000,
+    "starting_hand": 5,
+    "draw_count": 1
+  },
+  "client": {
+    "forbidden_card_types": ["TYPE_XYZ", "TYPE_PENDULUM", "TYPE_LINK"],
+    "main_deck": [40, 60],
+    "extra_deck": [0, 999],
+    "side_deck": [0, 15]
+  },
+  "differences_from_modern": [
+    {
+      "summary": "The turn player may activate ignition effects with priority (e.g. immediately after a summon) before the opponent can respond; the TCG variant applies at any empty-chain point and from any location.",
+      "engine_flag": "DUEL_TCG_FAST_EFFECT_IGNITION",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "The turn-1 player draws in their first Draw Phase.",
+      "engine_flag": "DUEL_1ST_TURN_DRAW",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "Only one Field Spell can be face-up at a time; activating one destroys the previous one by rule.",
+      "engine_flag": "DUEL_1_FACEUP_FIELD",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "Two 0-ATK monsters battling each other are both destroyed.",
+      "engine_flag": "DUEL_0_ATK_DESTROYED",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "Simultaneous-trigger (SEGOC) chains are built with TCG ordering: non-public triggers join the same pass and only triggers from the earliest event go on the chain.",
+      "engine_flag": "DUEL_TCG_SEGOC_NONPUBLIC",
+      "sources": ["ygopro-core"]
+    }
+  ],
+  "known_gaps": [
+    {
+      "summary": "Deck construction limits, forbidden card types and banlists are not engine flags; they are enforced client-side and must be configured by the host (the GOAT preset applies them automatically).",
+      "tracking": "docs/edopro-research.md",
+      "sources": ["edopro-source"]
+    },
+    {
+      "summary": "Attribution of each flag to a dated official rulebook/ruling change is unresearched; the engine encodes mechanics, not history. Era-accuracy of the composite is Project Ignis's curation.",
+      "tracking": "docs/roadmap.md",
+      "sources": ["ygopro-core"]
+    }
+  ],
+  "sources": ["ygopro-core", "edopro-source"],
+  "notes": "Flag expansion verified against ocgapi_constants.h:379-428 (DUEL_MODE_GOAT = DUEL_MODE_MR1 | 11 flags, computed 0x7F80D072C). The validator/tests recompute this expansion from the pinned ocgcore header facts."
+}

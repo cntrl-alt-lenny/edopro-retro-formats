@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sasuke-samurai-2",
+  "modern_card": {
+    "passcode": 11760174,
+    "name": "Sasuke Samurai #2"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
+      "modern_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700016,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700016.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

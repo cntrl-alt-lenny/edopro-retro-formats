@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ultimate-insect-lv3",
+  "modern_card": {
+    "passcode": 34088136,
+    "name": "Ultimate Insect LV3"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 300 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
+      "modern_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", while it remains on the field all of your opponent's monsters lose 300 ATK. During your Standby Phase, by sending this face-up card to the Graveyard, Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700057,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700057.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

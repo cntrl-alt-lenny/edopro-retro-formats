@@ -1,0 +1,149 @@
+{
+  "$schema": "../schemas/sources.schema.json",
+  "sources": [
+    {
+      "id": "ignis-lflists",
+      "kind": "repository",
+      "title": "Project Ignis LFLists (official EDOPro banlist repository)",
+      "url": "https://github.com/ProjectIgnis/LFLists",
+      "publisher": "Project Ignis",
+      "revision": "98ecbfd3752b4d81c2fb48281778aa3df75d1949",
+      "retrieved": "2026-08-19",
+      "used_for": "GOAT whitelist (card pool, counts, pre-errata code usage) as the reference implementation.",
+      "reliability_notes": "Community-vetted, actively maintained, and what EDOPro players actually use for GOAT; secondary source for the underlying April 2005 TCG list."
+    },
+    {
+      "id": "ignis-babelcdb",
+      "kind": "repository",
+      "title": "Project Ignis BabelCDB (card databases)",
+      "url": "https://github.com/ProjectIgnis/BabelCDB",
+      "publisher": "Project Ignis",
+      "revision": "da54f282c7fe8eb90b5574b87afa455391c08f0b",
+      "retrieved": "2026-08-19",
+      "used_for": "Card identities (passcode, name, alias, scope) from cards.cdb; pre-errata GOAT card versions and texts from goat-entries.cdb.",
+      "reliability_notes": "The canonical card database of the EDOPro ecosystem."
+    },
+    {
+      "id": "ignis-cardscripts",
+      "kind": "repository",
+      "title": "Project Ignis CardScripts",
+      "url": "https://github.com/ProjectIgnis/CardScripts",
+      "publisher": "Project Ignis",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "retrieved": "2026-08-19",
+      "used_for": "Lua implementations of pre-errata/GOAT card versions referenced by errata records.",
+      "reliability_notes": "The scripts EDOPro executes; behaviour claims about them should cite specific files."
+    },
+    {
+      "id": "ignis-distribution",
+      "kind": "repository",
+      "title": "Project Ignis Distribution (EDOPro install payload)",
+      "url": "https://github.com/ProjectIgnis/Distribution",
+      "publisher": "Project Ignis",
+      "revision": "54a6e2395c532648ff762540e9615319fac4f51b",
+      "retrieved": "2026-08-19",
+      "used_for": "Stock configs.json repository configuration, strings.conf system strings.",
+      "reliability_notes": ""
+    },
+    {
+      "id": "yugipedia-march-2010",
+      "kind": "wiki",
+      "title": "March 2010 Lists (TCG) - Yugipedia",
+      "url": "https://yugipedia.com/wiki/March_2010_Lists_(TCG)",
+      "publisher": "Yugipedia",
+      "revision": "pageid 328998, wikitext fetched via the MediaWiki parse API",
+      "retrieved": "2026-08-19",
+      "used_for": "Complete March 1, 2010 TCG Forbidden/Limited/Semi-Limited card names and the list's effective date range.",
+      "reliability_notes": "Community wiki; the page itself cites Konami's original list (see konami-limited-2010-03)."
+    },
+    {
+      "id": "konami-limited-2010-03",
+      "kind": "official",
+      "title": "LIMITED & FORBIDDEN LISTS - Effective March 1, 2010 (Konami, via Internet Archive)",
+      "url": "http://web.archive.org/web/20100825095431/http://www.yugioh-card.com/en/limited/10_03_list.html",
+      "publisher": "Konami",
+      "revision": "archive snapshot 2010-08-25",
+      "retrieved": "2026-08-19",
+      "used_for": "Primary source for the March 2010 TCG list; currently cited via the Yugipedia page's own references.",
+      "reliability_notes": "Direct entry-by-entry verification against this archive snapshot is still TODO (see roadmap)."
+    },
+    {
+      "id": "edisonformat-what-is",
+      "kind": "community-site",
+      "title": "What is Edison Format? - EdisonFormat.com",
+      "url": "https://www.edisonformat.com/what-is-edison-format.html",
+      "publisher": "EdisonFormat.com",
+      "retrieved": "2026-08-19",
+      "used_for": "Format name origin (75th SJC, Edison NJ, April 24-25 2010) and duration (March 1 - May 10, 2010, ending the day before The Shining Darkness's NA release)."
+    },
+    {
+      "id": "edisonformat-legal-sets",
+      "kind": "community-site",
+      "title": "Legal Sets - EdisonFormat.com",
+      "url": "https://www.edisonformat.com/legal-sets.html",
+      "publisher": "EdisonFormat.com",
+      "retrieved": "2026-08-19",
+      "used_for": "Card pool boundaries: last core set ABPF (2010-02-16 NA), side sets through DPKB (2010-04-20), SDMM (2010-02-23), Europe-only RP01/GX06 legality, promo cutoffs (Dark End Dragon SJCS-EN007, Cyber Eltanin JUMP-EN038, Elemental Hero Absolute Zero YG04-EN001).",
+      "reliability_notes": "Omits Duelist Pack Collection Tin 2010 (DPCT, source of Starlight Road) from its table even though the site's own pool link includes Starlight Road; see formats/2010-03-edison/notes.md."
+    },
+    {
+      "id": "edisonformat-rule-differences",
+      "kind": "community-site",
+      "title": "Edison Rule Differences - EdisonFormat.com",
+      "url": "https://www.edisonformat.com/edison-rule-differences.html",
+      "publisher": "EdisonFormat.com",
+      "retrieved": "2026-08-19",
+      "used_for": "Statement that SJC Edison was played under the 'TCG 2008 Rules Change (the equivalent of Master Rules)' plus 13 catalogued rule differences vs modern play."
+    },
+    {
+      "id": "formatlibrary-edison",
+      "kind": "community-site",
+      "title": "Format Library - Edison format record (live API)",
+      "url": "https://formatlibrary.com/api/formats/edison",
+      "publisher": "Format Library",
+      "retrieved": "2026-08-19",
+      "used_for": "Format Library's Edison definition: date 2010-04-24, banlist 'March 2010' (TCG), eventName 'SJC Edison - April 2010', chronology naming (previous 'Lightsworn', next 'Frog'), Starlight Road note."
+    },
+    {
+      "id": "formatlibrary-banlist-2010-03",
+      "kind": "community-site",
+      "title": "Format Library - March 2010 TCG banlist (live API)",
+      "url": "https://formatlibrary.com/api/banlists/march-2010?category=TCG",
+      "publisher": "Format Library",
+      "retrieved": "2026-08-19",
+      "used_for": "Independent cross-check of the March 2010 TCG list membership; matched the Yugipedia transcription exactly (43 forbidden / 70 limited / 19 semi-limited).",
+      "reliability_notes": "Format Library's 'previous status' change-markers were found unreliable in three cases (Destiny Draw, Royal Decree, Dark Strike Fighter); statuses themselves matched."
+    },
+    {
+      "id": "yugipedia-dpct-2010",
+      "kind": "wiki",
+      "title": "Duelist Pack Collection Tin 2010 - Yugipedia",
+      "url": "https://yugipedia.com/wiki/Duelist_Pack_Collection_Tin_2010",
+      "publisher": "Yugipedia",
+      "retrieved": "2026-08-19",
+      "used_for": "DPCT NA release date (2010-03-09) and that each tin contains Starlight Road DPCT-EN004."
+    },
+    {
+      "id": "edopro-source",
+      "kind": "repository",
+      "title": "EDOPro client source (edo9300/edopro)",
+      "url": "https://github.com/edo9300/edopro",
+      "publisher": "edo9300 / Project Ignis",
+      "revision": "9d6fb3e8417c88008ba1e08b5b7f751cbdba82ac",
+      "retrieved": "2026-08-19",
+      "used_for": "lflist parser semantics, banlist hash, deck validation, repository loading, duel-rule preset behaviour (docs/edopro-research.md).",
+      "reliability_notes": "Primary source for engine/client behaviour claims."
+    },
+    {
+      "id": "ygopro-core",
+      "kind": "repository",
+      "title": "ocgcore (edo9300/ygopro-core)",
+      "url": "https://github.com/edo9300/ygopro-core",
+      "publisher": "edo9300 / Project Ignis",
+      "revision": "46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57",
+      "retrieved": "2026-08-19",
+      "used_for": "DUEL_* flag definitions and composite mode macros used by rule profiles.",
+      "reliability_notes": "Primary source for rules-engine behaviour claims."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "../../schemas/pool.schema.json",
+  "id": "pool-edison-2010",
+  "region": "TCG",
+  "kind": "release-cutoff",
+  "cutoff": {
+    "cutoff_date": "2010-05-10",
+    "include": [],
+    "exclude": []
+  },
+  "completeness": "stub",
+  "sources": ["edisonformat-what-is", "edisonformat-legal-sets"],
+  "notes": "Everything TCG-released through 2010-05-10 (the day before The Shining Darkness's NA release), per EdisonFormat.com. Not yet materialisable: the data/releases dataset does not cover 2002-2010 yet. Known nuances to encode when it does: Europe-only Retro Pack [RP01] and GX Tag Force 3 [GX06] promos are legal; promo cutoffs are Dark End Dragon (SJCS-EN007), Cyber Eltanin (JUMP-EN038), Elemental Hero Absolute Zero (YG04-EN001); Duelist Pack Collection Tin 2010 (Starlight Road) is legal per the site's own pool link and Format Library despite being absent from its legal-sets table."
+}

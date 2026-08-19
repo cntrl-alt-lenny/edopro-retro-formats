@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-energy-drain",
+  "modern_card": {
+    "passcode": 56916805,
+    "name": "Energy Drain"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "Select 1 face-up monster on your side of the field. Increase the ATK and DEF of the monster by an amount equal to the number of cards in your opponent's hand x 200 points until the End Phase.",
+      "modern_text": "Target 1 face-up monster you control; it gains 200 ATK/DEF for each card your opponent currently has in their hand, until the end of this turn.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700090,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700090.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

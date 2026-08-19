@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-cyber-jar",
+  "modern_card": {
+    "passcode": 34124316,
+    "name": "Cyber Jar"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "FLIP: Destroy all monsters on the field. Both players then pick up 5 cards from the top of their respective Decks and Special Summon all Level 4 or lower Monster Cards among them on the field in face-up Attack Position or face-down Defense Position. The rest of the cards picked up are added to their respective hands.",
+      "modern_text": "FLIP: Destroy all monsters on the field, then both players reveal the top 5 cards from their Decks, then Special Summon all revealed Level 4 or lower monsters in face-up Attack Position or face-down Defense Position, also add any remaining cards to their hand. (If either player has less than 5 cards in their Deck, reveal as many as possible.)",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700188,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700188.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

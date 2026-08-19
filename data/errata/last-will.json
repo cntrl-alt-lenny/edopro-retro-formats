@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-last-will",
+  "modern_card": {
+    "passcode": 85602018,
+    "name": "Last Will"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "You can only use this card's effect once, and only during this turn. When a monster on your side of the field is sent to your Graveyard, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck. Then shuffle your Deck.",
+      "modern_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700147,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700147.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schemas/releases.schema.json",
+  "region": "TCG",
+  "coverage": {
+    "status": "stub",
+    "note": "Only the products framing the Edison proof-of-concept format. Systematic 2002-present coverage (likely imported from Format Library's Sets/Prints data or Yugipedia) is a roadmap item."
+  },
+  "products": [
+    {
+      "code": "ABPF",
+      "name": "Absolute Powerforce",
+      "release_date": "2010-02-16",
+      "kind": "booster",
+      "sources": ["edisonformat-legal-sets"]
+    },
+    {
+      "code": "SDMM",
+      "name": "Machina Mayhem Structure Deck",
+      "release_date": "2010-02-23",
+      "kind": "structure",
+      "sources": ["edisonformat-legal-sets"]
+    },
+    {
+      "code": "DPCT",
+      "name": "Duelist Pack Collection Tin 2010",
+      "release_date": "2010-03-09",
+      "kind": "tin",
+      "sources": ["yugipedia-dpct-2010"]
+    },
+    {
+      "code": "DPKB",
+      "name": "Duelist Pack: Kaiba",
+      "release_date": "2010-04-20",
+      "kind": "booster",
+      "sources": ["edisonformat-legal-sets"]
+    },
+    {
+      "code": "TSHD",
+      "name": "The Shining Darkness",
+      "release_date": "2010-05-11",
+      "kind": "booster",
+      "sources": ["edisonformat-what-is"]
+    }
+  ],
+  "sources": ["edisonformat-legal-sets", "edisonformat-what-is", "yugipedia-dpct-2010"]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-chaosrider-gustaph",
+  "modern_card": {
+    "passcode": 47829960,
+    "name": "Chaosrider Gustaph"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "You can remove up to 2 Spell Cards in your Graveyard from play to increase the ATK of this monster by 300 points for each card removed from play until the end of your opponent's next turn. This effect can only be used once during your turn.",
+      "modern_text": "Once per turn: You can banish up to 2 Spells from your GY, and if you do, this card gains 300 ATK for each card banished by this effect, until the end of your opponent's turn.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700078,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700078.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

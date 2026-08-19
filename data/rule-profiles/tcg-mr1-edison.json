@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schemas/rule-profile.schema.json",
+  "id": "rules-tcg-mr1-edison",
+  "name": "TCG 2010 (Edison era, Master Rule 1 baseline)",
+  "description": "The closest EDOPro preset for March-2010 TCG play: the DUEL_MODE_MR1 composite (pre-March-2011 mechanics: ignition priority, first-turn draw, single face-up Field Spell, old negation/oath counting, deck-return triggers). Synchro Monsters are legal; Xyz/Pendulum/Link do not exist yet.",
+  "era": {
+    "start": null,
+    "end": null,
+    "official_ruleset_label": "'Master Rule' era rulebook (the official label/date range for this rules era still needs a sourced citation; EDOPro calls the preset 'Master Rule 1')"
+  },
+  "engine": {
+    "preset": "DUEL_MODE_MR1",
+    "flags": [
+      "DUEL_OCG_OBSOLETE_IGNITION",
+      "DUEL_1ST_TURN_DRAW",
+      "DUEL_1_FACEUP_FIELD",
+      "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+      "DUEL_RETURN_TO_DECK_TRIGGERS",
+      "DUEL_CANNOT_SUMMON_OATH_OLD"
+    ],
+    "ocgcore_reference": "46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57",
+    "starting_lp": 8000,
+    "starting_hand": 5,
+    "draw_count": 1
+  },
+  "client": {
+    "forbidden_card_types": ["TYPE_XYZ", "TYPE_PENDULUM", "TYPE_LINK"],
+    "main_deck": [40, 60],
+    "extra_deck": [0, 15],
+    "side_deck": [0, 15]
+  },
+  "differences_from_modern": [
+    {
+      "summary": "The turn player may activate ignition effects with priority after a summon or chain end (OCG-style condition in the MR1 composite).",
+      "engine_flag": "DUEL_OCG_OBSOLETE_IGNITION",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "The turn-1 player draws in their first Draw Phase.",
+      "engine_flag": "DUEL_1ST_TURN_DRAW",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "Only one Field Spell can be face-up at a time.",
+      "engine_flag": "DUEL_1_FACEUP_FIELD",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "A negated Special Summon still counts against 'only once per turn/duel' summon restrictions.",
+      "engine_flag": "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+      "sources": ["ygopro-core"]
+    }
+  ],
+  "known_gaps": [
+    {
+      "summary": "The MR1 composite uses the OCG-style ignition-priority condition; ocgcore also has the broader DUEL_TCG_FAST_EFFECT_IGNITION and the TCG SEGOC flags (used by the GOAT composite). Whether 2010 TCG play requires those TCG variants instead is unresearched — a sourced ruling comparison should decide, and this profile updated to a custom flag set if so.",
+      "tracking": "docs/roadmap.md",
+      "sources": ["ygopro-core"]
+    },
+    {
+      "summary": "Extra Deck size limit for 2010 (15) is entered here from the EDOPro MR1 preset defaults, not yet from a period rulebook citation.",
+      "tracking": "docs/roadmap.md",
+      "sources": ["edopro-source"]
+    }
+  ],
+  "sources": ["ygopro-core", "edopro-source"],
+  "notes": "Named -edison to leave room for splitting the long 'MR1' span into finer sourced eras later; nothing in it is Edison-specific today."
+}

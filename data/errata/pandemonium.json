@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-pandemonium",
+  "modern_card": {
+    "passcode": 94585852,
+    "name": "Pandemonium"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
+      "modern_text": "Neither player has to pay LP during the Standby Phase for \"Archfiend\" monsters. When an \"Archfiend\" monster is destroyed and sent to the GY, except by battle: Its owner can add 1 \"Archfiend\" monster from their Deck to their hand with a lower Level than the destroyed card.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700165,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700165.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

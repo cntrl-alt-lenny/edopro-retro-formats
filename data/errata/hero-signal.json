@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-hero-signal",
+  "modern_card": {
+    "passcode": 22020907,
+    "name": "Hero Signal"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "date_effective": null,
+      "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
+      "modern_text": "When a monster you control is destroyed by battle and sent to the GY: Special Summon 1 Level 4 or lower \"Elemental HERO\" monster from your hand or Deck.",
+      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "sources": [
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700031,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "c504700031.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists"
+  ],
+  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+}

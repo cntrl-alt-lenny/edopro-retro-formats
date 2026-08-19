@@ -1,0 +1,940 @@
+{
+  "$schema": "../../../schemas/banlist.schema.json",
+  "id": "tcg-2010-03",
+  "region": "TCG",
+  "effective_date": "2010-03-01",
+  "superseded_by_date": "2010-09-01",
+  "supersedes": null,
+  "entries": [
+    {
+      "card": {
+        "passcode": 3078576,
+        "name": "Yata-Garasu"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 4031928,
+        "name": "Change of Heart"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 8131171,
+        "name": "Sinister Serpent"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 12580477,
+        "name": "Raigeki"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 17375316,
+        "name": "Confiscation"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 17484499,
+        "name": "Exchange of the Spirit"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 18144506,
+        "name": "Harpie's Feather Duster"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 21593977,
+        "name": "Makyura the Destructor"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 23557835,
+        "name": "Dimension Fusion"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 28566710,
+        "name": "Last Turn"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 31560081,
+        "name": "Magician of Faith"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 32646477,
+        "name": "Dark Strike Fighter"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 33184167,
+        "name": "Tribe-Infecting Virus"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 34124316,
+        "name": "Cyber Jar"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 34206604,
+        "name": "Magical Scientist"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 34853266,
+        "name": "Tsukuyomi"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 35316708,
+        "name": "Time Seal"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 40737112,
+        "name": "Dark Magician of Chaos"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 41482598,
+        "name": "Mirage of Nightmare"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 42829885,
+        "name": "The Forceful Sentry"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 44763025,
+        "name": "Delinquent Duo"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 44910027,
+        "name": "Victory Dragon"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 45986603,
+        "name": "Snatch Steal"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 46411259,
+        "name": "Metamorphosis"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 53129443,
+        "name": "Dark Hole"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 55144522,
+        "name": "Pot of Greed"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 56570271,
+        "name": "Destiny HERO - Disk Commander"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 57728570,
+        "name": "Crush Card Virus"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 57953380,
+        "name": "Card of Safe Return"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 61740673,
+        "name": "Imperial Order"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 63519819,
+        "name": "Thousand-Eyes Restrict"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 69015963,
+        "name": "Cyber-Stein"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 69243953,
+        "name": "Butterfly Dagger - Elma"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 70828912,
+        "name": "Premature Burial"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 72989439,
+        "name": "Black Luster Soldier - Envoy of the Beginning"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 74191942,
+        "name": "Painful Choice"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 78010363,
+        "name": "Witch of the Black Forest"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 78706415,
+        "name": "Fiber Jar"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 79571449,
+        "name": "Graceful Charity"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 82301904,
+        "name": "Chaos Emperor Dragon - Envoy of the End"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 83555666,
+        "name": "Ring of Destruction"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 83764718,
+        "name": "Monster Reborn"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 85602018,
+        "name": "Last Will"
+      },
+      "status": "forbidden"
+    },
+    {
+      "card": {
+        "passcode": 423585,
+        "name": "Summoner Monk"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 1475311,
+        "name": "Allure of Darkness"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 2009101,
+        "name": "Blackwing - Gale the Whirlwind"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 2295440,
+        "name": "One for One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 3136426,
+        "name": "Level Limit - Area B"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 3659803,
+        "name": "Overload Fusion"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 4906301,
+        "name": "Necro Gardna"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 5318639,
+        "name": "Mystical Space Typhoon"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 7391448,
+        "name": "Goyo Guardian"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 7902349,
+        "name": "Left Arm of the Forbidden One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 8124921,
+        "name": "Right Leg of the Forbidden One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 9596126,
+        "name": "Chaos Sorcerer"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 14878871,
+        "name": "Rescue Cat"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 15800838,
+        "name": "Mind Crush"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 16226786,
+        "name": "Night Assailant"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 17078030,
+        "name": "Wall of Revealing Light"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 19613556,
+        "name": "Heavy Storm"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 22046459,
+        "name": "Megamorph"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 23171610,
+        "name": "Limiter Removal"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 23205979,
+        "name": "Spirit Reaper"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 26202165,
+        "name": "Sangan"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 27174286,
+        "name": "Return from the Different Dimension"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 28297833,
+        "name": "Necroface"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 29843091,
+        "name": "Ojama Trio"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 31305911,
+        "name": "Marshmallon"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 32723153,
+        "name": "Magical Explosion"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 32807846,
+        "name": "Reinforcement of the Army"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 33396948,
+        "name": "Exodia the Forbidden One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 33420078,
+        "name": "Plaguespreader Zombie"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 33508719,
+        "name": "Morphing Jar"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 36468556,
+        "name": "Ceasefire"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 37520316,
+        "name": "Mind Control"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 40044918,
+        "name": "Elemental HERO Stratos"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 41420027,
+        "name": "Solemn Judgment"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 41470137,
+        "name": "Gladiator Beast Bestiari"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 42703248,
+        "name": "Giant Trunade"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 43040603,
+        "name": "Monster Gate"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 44095762,
+        "name": "Mirror Force"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 44330098,
+        "name": "Gorz the Emissary of Darkness"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 44519536,
+        "name": "Left Leg of the Forbidden One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 45809008,
+        "name": "Destiny Draw"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 46052429,
+        "name": "Advanced Ritual Art"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 46652477,
+        "name": "The Transmigration Prophecy"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 48976825,
+        "name": "Burial from a Different Dimension"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 50321796,
+        "name": "Brionac, Dragon of the Ice Barrier"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 53582587,
+        "name": "Torrential Tribute"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 58577036,
+        "name": "Reasoning"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 60682203,
+        "name": "Cold Wave"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 62279055,
+        "name": "Magic Cylinder"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 64697231,
+        "name": "Trap Dustshoot"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 65192027,
+        "name": "Dark Armed Dragon"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 67723438,
+        "name": "Emergency Teleport"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 70903634,
+        "name": "Right Arm of the Forbidden One"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 72302403,
+        "name": "Swords of Revealing Light"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 72892473,
+        "name": "Card Destruction"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 73580471,
+        "name": "Black Rose Dragon"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 73915051,
+        "name": "Scapegoat"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 77565204,
+        "name": "Future Fusion"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 80344569,
+        "name": "Neo-Spacian Grand Mole"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 81439173,
+        "name": "Foolish Burial"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 84290642,
+        "name": "Snipe Hunter"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 85087012,
+        "name": "Card Trooper"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 85742772,
+        "name": "Gravity Bind"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 87910978,
+        "name": "Brain Control"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 92826944,
+        "name": "Mezuki"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 94886282,
+        "name": "Charge of the Light Brigade"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 95503687,
+        "name": "Lumina, Lightsworn Summoner"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 96782886,
+        "name": "Mind Master"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 97077563,
+        "name": "Call of the Haunted"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 98777036,
+        "name": "Tragoedia"
+      },
+      "status": "limited"
+    },
+    {
+      "card": {
+        "passcode": 9411399,
+        "name": "Destiny HERO - Malicious"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 12538374,
+        "name": "Treeborn Frog"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 15341821,
+        "name": "Dandylion"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 29401950,
+        "name": "Bottomless Trap Hole"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 37742478,
+        "name": "Honest"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 48686504,
+        "name": "Lonefire Blossom"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 51452091,
+        "name": "Royal Decree"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 56747793,
+        "name": "United We Stand"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 57774843,
+        "name": "Judgment Dragon"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 63665875,
+        "name": "Goblin Zombie"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 70095154,
+        "name": "Cyber Dragon"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 72426662,
+        "name": "Demise, King of Armageddon"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 75500286,
+        "name": "Gold Sarcophagus"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 80604091,
+        "name": "Ultimate Offering"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 82732705,
+        "name": "Skill Drain"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 91351370,
+        "name": "Black Whirlwind"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 91623717,
+        "name": "Chain Strike"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 93016201,
+        "name": "Royal Oppression"
+      },
+      "status": "semilimited"
+    },
+    {
+      "card": {
+        "passcode": 98494543,
+        "name": "Magical Stone Excavation"
+      },
+      "status": "semilimited"
+    }
+  ],
+  "completeness": "complete",
+  "sources": [
+    "yugipedia-march-2010",
+    "konami-limited-2010-03"
+  ],
+  "notes": "Transcribed from Yugipedia page 'March 2010 Lists (TCG)' (MediaWiki parse API); the page cites Konami's own list (see the source registry entries). Names resolved to passcodes against ProjectIgnis/BabelCDB cards.cdb, preferring base printings (alias=0). Yugipedia also records: no_longer_on_list = ['Mask of Darkness', 'Smashing Ground']."
+}
