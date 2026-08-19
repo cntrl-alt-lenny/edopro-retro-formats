@@ -56,6 +56,55 @@ class RealDataTest(unittest.TestCase):
         self.assertNotIn(26202165, built.entries)
         self.assertEqual(1, built.entries[504700178])
 
+    def test_edison_pool_cardinality(self):
+        pool = self.repo.pools["pool-edison-2010"]
+        self.assertEqual(
+            3673,
+            len(pool.cards),
+            "Edison pool cardinality changed - re-run the comparison against "
+            "YGOPRODeck's Edison tag and termitaklk before accepting",
+        )
+
+    def test_edison_pool_edge_cases(self):
+        codes = self.repo.pools["pool-edison-2010"].passcodes()
+        legal = {
+            88643579: "Dark End Dragon (SJCS-EN007, the SJC prize promo cutoff)",
+            33093439: "Cyber Eltanin (JUMP-EN038, the JUMP promo cutoff)",
+            40854197: "Elemental HERO Absolute Zero (YG04-EN001, the manga promo cutoff)",
+            58120309: "Starlight Road (Duelist Pack Collection Tin 2010)",
+            30915572: "Gallis the Star Beast (GX Tag Force 3, Europe-only release)",
+            31038159: "Genesis Dragon (JUMP-EN034, sourced include)",
+            39980304: "Chain Material (PTDN-EN067; YGOPRODeck tag false negative)",
+            52352005: "XX-Saber Gottoms (ANPR-EN044; YGOPRODeck tag false negative)",
+        }
+        illegal = {
+            95453143: "Hundred Eyes Dragon (JUMP-EN039, after the JUMP promo cutoff)",
+            88071625: "The Tyrant Neptune (May 2010 subscription bonus)",
+            135598: "Key Mouse (The Shining Darkness - EU date inside window, set excluded)",
+            5998840: "XX-Saber Boggart Knight (TSHD Sneak Peek participation card)",
+            10026986: "Worm King (Duel Terminal 1 machine-only)",
+            66661678: "Royal Knight of the Ice Barrier (Duel Terminal 1 machine-only)",
+            68811206: "Tyler the Great Warrior (one-of-one charity card)",
+        }
+        for code, why in legal.items():
+            self.assertIn(code, codes, f"must be Edison-legal: {why}")
+        for code, why in illegal.items():
+            self.assertNotIn(code, codes, f"must NOT be Edison-legal: {why}")
+
+    def test_edison_whitelist_enforces_pool_and_banlist(self):
+        built = build_lflist(self.repo.formats["2010-03-edison"], self.repo)
+        self.assertIn("$whitelist", built.text)
+        by_count = {}
+        for _, count in built.entries.items():
+            by_count[count] = by_count.get(count, 0) + 1
+        self.assertEqual(43, by_count.get(0), "forbidden entries")
+        self.assertEqual(70, by_count.get(1), "limited entries")
+        self.assertEqual(19, by_count.get(2), "semi-limited entries")
+        pool = self.repo.pools["pool-edison-2010"]
+        self.assertEqual(len(pool.cards), len(built.entries))
+        # A post-Edison staple must not appear at all (whitelist rejects it).
+        self.assertNotIn(66661678, built.entries)
+
     def test_edison_banlist_counts(self):
         banlist = self.repo.banlists["tcg-2010-03"]
         by_status = {}

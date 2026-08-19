@@ -2,7 +2,9 @@
   "$schema": "../../schemas/format.schema.json",
   "id": "2010-03-edison",
   "name": "Edison Format",
-  "aliases": ["Edison"],
+  "aliases": [
+    "Edison"
+  ],
   "region": "TCG",
   "period": {
     "start": "2010-03-01",
@@ -21,23 +23,33 @@
     {
       "name": "Shonen Jump Championship Edison, New Jersey (75th SJC)",
       "date": "2010-04-24",
-      "sources": ["edisonformat-what-is", "formatlibrary-edison"]
+      "sources": [
+        "edisonformat-what-is",
+        "formatlibrary-edison"
+      ]
     }
   ],
-  "relevant_products": ["ABPF", "SDMM", "DPCT", "DPKB"],
+  "relevant_products": [
+    "ABPF",
+    "SDMM",
+    "DPCT",
+    "DPKB"
+  ],
   "implementation_status": {
     "banlist": "complete",
-    "card_pool": "stub",
+    "card_pool": "verified",
     "rule_profile": "partial",
     "errata": "missing",
     "overall": "partial"
   },
   "sources": [
-    "edisonformat-what-is",
     "edisonformat-legal-sets",
     "edisonformat-rule-differences",
+    "edisonformat-what-is",
     "formatlibrary-edison",
-    "yugipedia-march-2010"
+    "ygoprodeck-api",
+    "yugipedia-march-2010",
+    "yugipedia-set-pages"
   ],
-  "notes": "period: the March 2010 TCG list took effect 2010-03-01 and EdisonFormat.com bounds the format at 2010-05-10, the day before The Shining Darkness's NA release; snapshot is SJC Edison day 1 (2010-04-24), the event the format is named for. chronology: Format Library names the neighbours 'Lightsworn' (previous) and 'Frog' (next); left null here until those formats exist in this repository. errata: functional errata relevant to 2010 (e.g. cards later errata'd) are not yet dated in data/errata/, so no overrides apply — the generated list uses modern implementations for now; see docs/roadmap.md."
+  "notes": "period: the March 2010 TCG list took effect 2010-03-01 and EdisonFormat.com bounds the format at 2010-05-10, the day before The Shining Darkness's NA release; snapshot is SJC Edison day 1 (2010-04-24), the event the format is named for. chronology: Format Library names the neighbours 'Lightsworn' (previous) and 'Frog' (next); left null here until those formats exist in this repository. card_pool: materialised from data/releases/ and cross-checked against YGOPRODeck's Edison tag and the termitaklk community whitelist (see the pool record's notes for the adjudicated differences). errata: functional errata relevant to 2010 (e.g. cards later errata'd) are not yet dated in data/errata/, so no overrides apply — the generated list uses modern implementations for now; see docs/roadmap.md."
 }
