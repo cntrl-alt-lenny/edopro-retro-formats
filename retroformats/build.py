@@ -25,6 +25,8 @@ def build_all(repo: Repository, dist: Path | None = None) -> dict[str, Path]:
             continue  # validator reports the broken reference
         built = build_lflist(fmt, repo)
         out = lflist_dir / f"{fmt.id}.lflist.conf"
-        out.write_text(built.text, encoding="utf-8", newline="\n")
+        # open() instead of write_text(): the newline kwarg needs 3.10+
+        with out.open("w", encoding="utf-8", newline="\n") as fh:
+            fh.write(built.text)
         written[fmt.id] = out
     return written
