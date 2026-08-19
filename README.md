@@ -46,7 +46,9 @@ The key architectural point: **neither format is special**. GOAT is an import of
 existing reference implementation; Edison is built from primary-ish sources. A future
 `1999-05-yugi-kaiba` or `2011-09-tengu` uses exactly the same records and tooling.
 
-Run it yourself (Python 3.10+, standard library only — no installs):
+Run it yourself (Python 3.10+, standard library only — no installs; CI tests the
+3.10 floor and the current release. Older interpreters may happen to work — macOS's
+system 3.9 does today — but are not supported targets):
 
 ```console
 $ python3 -m retroformats validate      # semantic checks over all canonical data
