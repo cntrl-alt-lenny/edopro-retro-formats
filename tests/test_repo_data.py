@@ -1,0 +1,114 @@
+"""Integration tests over the repository's REAL canonical data.
+
+These are the guarantees the project makes about its shipped content:
+- the canonical data validates with zero errors;
+- the generated GOAT list is semantically identical (same code->count map,
+  hence the same EDOPro banlist hash) to Project Ignis's reference
+  GOAT.lflist.conf (vendored under tests/fixtures/ with provenance);
+- dist/ is exactly what the canonical data regenerates (no hand edits).
+"""
+
+from __future__ import annotations
+
+import unittest
+from pathlib import Path
+
+from retroformats.build import build_all
+from retroformats.lflist import build_lflist, lflist_hash, parse_lflist
+from retroformats.repo import Repository
+from retroformats.validate import Validator
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+FIXTURES = Path(__file__).resolve().parent / "fixtures"
+
+# The EDOPro content hash of the deduplicated Ignis GOAT list entries.
+# (Ignis's shipped file currently duplicates one line - 511000868 - which the
+# client's line-folding XOR cancels out, so the file's *runtime* hash differs;
+# see docs/edopro-research.md "banlist hash" notes.)
+IGNIS_GOAT_MAP_HASH = 0x28E9FC02
+
+
+class RealDataTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = Repository.load(REPO_ROOT)
+
+    def test_canonical_data_validates_without_errors(self):
+        validator = Validator(self.repo)
+        validator.validate()
+        self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+
+    def test_goat_matches_ignis_reference(self):
+        fixture = (FIXTURES / "ignis-GOAT.lflist.conf").read_text(encoding="utf-8")
+        ((_, reference_map),) = parse_lflist(fixture).items()
+        built = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
+        self.assertEqual(reference_map, built.entries)
+        self.assertEqual(IGNIS_GOAT_MAP_HASH, built.hash)
+        self.assertEqual(IGNIS_GOAT_MAP_HASH, lflist_hash(reference_map))
+
+    def test_goat_forbids_modern_versions_of_overridden_cards(self):
+        built = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
+        # Modern Chaos Emperor Dragon (82301904) must not appear; the
+        # pre-errata implementation (511000819) must, at 0 copies.
+        self.assertNotIn(82301904, built.entries)
+        self.assertEqual(0, built.entries[511000819])
+        # Modern Sangan must be replaced by Sangan (GOAT), limited to 1.
+        self.assertNotIn(26202165, built.entries)
+        self.assertEqual(1, built.entries[504700178])
+
+    def test_edison_banlist_counts(self):
+        banlist = self.repo.banlists["tcg-2010-03"]
+        by_status = {}
+        for entry in banlist.entries:
+            by_status[entry.status] = by_status.get(entry.status, 0) + 1
+        self.assertEqual(
+            {"forbidden": 43, "limited": 70, "semilimited": 19},
+            by_status,
+            "March 2010 TCG list cardinality changed - re-verify against sources",
+        )
+
+    def test_dist_is_up_to_date(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            written = build_all(self.repo, dist=Path(tmp))
+            self.assertTrue(written, "expected at least one buildable format")
+            for fmt_id, path in written.items():
+                committed = REPO_ROOT / "dist" / "lflists" / path.name
+                self.assertTrue(committed.exists(), f"dist file missing for {fmt_id}")
+                self.assertEqual(
+                    committed.read_text(encoding="utf-8"),
+                    path.read_text(encoding="utf-8"),
+                    f"dist/lflists/{path.name} is stale: run python -m retroformats build",
+                )
+
+    def test_rule_profile_flags_match_preset_expansions(self):
+        # Expansions verified against ocgapi_constants.h (see the rule profile
+        # records and docs/edopro-research.md).
+        mr1 = {
+            "DUEL_OCG_OBSOLETE_IGNITION",
+            "DUEL_1ST_TURN_DRAW",
+            "DUEL_1_FACEUP_FIELD",
+            "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+            "DUEL_RETURN_TO_DECK_TRIGGERS",
+            "DUEL_CANNOT_SUMMON_OATH_OLD",
+        }
+        goat_extra = {
+            "DUEL_TCG_FAST_EFFECT_IGNITION",
+            "DUEL_USE_TRAPS_IN_NEW_CHAIN",
+            "DUEL_6_STEP_BATLLE_STEP",
+            "DUEL_TRIGGER_WHEN_PRIVATE_KNOWLEDGE",
+            "DUEL_EQUIP_NOT_SENT_IF_MISSING_TARGET",
+            "DUEL_0_ATK_DESTROYED",
+            "DUEL_STORE_ATTACK_REPLAYS",
+            "DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP",
+            "DUEL_CAN_REPOS_IF_NON_SUMPLAYER",
+            "DUEL_TCG_SEGOC_NONPUBLIC",
+            "DUEL_TCG_SEGOC_FIRSTTRIGGER",
+        }
+        self.assertEqual(mr1, set(self.repo.rule_profiles["rules-tcg-mr1-edison"].flags))
+        self.assertEqual(mr1 | goat_extra, set(self.repo.rule_profiles["rules-tcg-goat"].flags))
+
+
+if __name__ == "__main__":
+    unittest.main()

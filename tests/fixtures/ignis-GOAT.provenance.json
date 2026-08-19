@@ -1,0 +1,7 @@
+{
+  "file": "ignis-GOAT.lflist.conf",
+  "copied_from": "https://github.com/ProjectIgnis/LFLists",
+  "revision": "98ecbfd3752b4d81c2fb48281778aa3df75d1949",
+  "retrieved": "2026-08-19",
+  "purpose": "Regression baseline: the generated 2005-04-goat list must stay semantically identical (same code->count map) to this reference implementation."
+}

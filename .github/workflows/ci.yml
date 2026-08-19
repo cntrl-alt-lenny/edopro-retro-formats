@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate canonical data
+        run: python -m retroformats validate
+      - name: Rebuild dist and require no drift
+        run: python -m retroformats build --check
+      - name: Run tests
+        run: python -m unittest discover -t . -s tests -v
