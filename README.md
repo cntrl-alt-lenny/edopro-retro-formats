@@ -37,10 +37,17 @@ Two fixture formats exercise the whole pipeline end-to-end:
 | | GOAT (`2005-04-goat`) | Edison (`2010-03-edison`) |
 |---|---|---|
 | Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) |
-| Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | rule-based (everything released ≤ 2010-05-10), not yet materialisable — needs release-date data |
+| Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* (everything TCG-released ≤ 2010-05-10 in any territory, with every boundary case explicitly resolved and sourced), cross-checked against two independent community pools |
 | Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | `DUEL_MODE_MR1` baseline (open question: TCG-variant flags) |
 | Errata | 211 historical card versions mapped to Project Ignis's `goat-entries.cdb` / `cards-unofficial.cdb` implementations | recorded as missing (dating the errata corpus is the next research task) |
-| Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | Forbidden/Limited blacklist (pool enforcement pending) |
+| Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected) |
+
+Behind the Edison pool sits the project's first shared backbone dataset:
+**`data/releases/`** — 369 TCG products (2002–2010) with per-territory,
+precision-aware, cited release events and 8,445 printings, from which any
+release-cutoff pool is derived and continuously re-verified. Adding release
+coverage is how future formats get their pools for free; see
+[docs/releases.md](docs/releases.md).
 
 The key architectural point: **neither format is special**. GOAT is an import of an
 existing reference implementation; Edison is built from primary-ish sources. A future
@@ -53,8 +60,9 @@ system 3.9 does today — but are not supported targets):
 ```console
 $ python3 -m retroformats validate      # semantic checks over all canonical data
 $ python3 -m retroformats build         # regenerate dist/ deterministically
-$ python3 -m retroformats report        # per-format implementation status
-$ python3 -m unittest discover -t . -s tests   # 28 tests incl. the Ignis-parity regression
+$ python3 -m retroformats materialize   # derive release-cutoff pools from data/releases/
+$ python3 -m retroformats report        # per-format status + release-data coverage
+$ python3 -m unittest discover -t . -s tests   # 82 tests incl. the Ignis-parity and Edison regressions
 ```
 
 ## Repository layout
@@ -66,7 +74,7 @@ data/
   pools/          card-pool definitions (extensional lists or release-cutoff rules)
   rule-profiles/  reusable rules-era profiles mapped to ocgcore DUEL_* flags
   errata/         per-card historical-behaviour records (one file per card)
-  releases/       product release dates (feeds cutoff-based pools)
+  releases/       per-product release events + printings (feeds cutoff pools)
   cards/          generated card index (passcode<->name/alias ground truth)
   sources.json    the provenance registry every record cites into
 formats/<id>/     format records: format.json + notes.md (id = yyyy-mm-slug)

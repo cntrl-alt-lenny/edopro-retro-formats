@@ -43,7 +43,8 @@ Three layers, with strict rules about what may flow between them:
 | card pool | `data/pools/*.json` | pool id | yes |
 | rule profile | `data/rule-profiles/*.json` | profile id | yes — one profile serves every format in its era |
 | erratum | `data/errata/<card>.json` | modern card | global — applicability per format is *computed* |
-| release | `data/releases/*.json` | product code | global |
+| product release | `data/releases/products/<id>.json` | product slug (set-code prefixes are not unique) | global — one dataset serves every cutoff pool |
+| release coverage | `data/releases/coverage.json` | — | gates which cutoffs are materialisable |
 | format | `formats/<id>/format.json` | `yyyy-mm-slug` | ties the above together |
 | sources | `data/sources.json` (+ per-format `sources.json`) | source id | global registry + local extensions |
 
@@ -59,9 +60,13 @@ Design rules that keep formats cheap to add:
   does this today, mirroring the imported reference; the list shrinks as dates land).
 - **Two pool representations.** *Extensional* (explicit passcode list — used when a
   vetted external definition exists, like Ignis's GOAT whitelist) and *release-cutoff*
-  (a rule — "everything TCG-released ≤ 2010-05-10" — materialised against
-  `data/releases/` at build time once coverage exists). A pool may eventually carry
-  both, and the validator cross-checks them.
+  (a rule — "everything TCG-released ≤ 2010-05-10" — plus sourced exceptions).
+  `python -m retroformats materialize` derives a cutoff pool's card list from
+  `data/releases/` and writes it into the pool file as a **reviewable projection**;
+  the validator recomputes it on every run and fails on drift, missing coverage,
+  or boundary dates too imprecise to call (which must be resolved by explicit,
+  sourced include/exclude entries — see [releases.md](releases.md)). Edison is
+  built this way end-to-end.
 
 ## Card identity model
 

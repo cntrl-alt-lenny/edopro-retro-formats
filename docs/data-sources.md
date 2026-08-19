@@ -85,6 +85,50 @@ with structured fields (`forbidden`/`limited`/`semi_limited`/`no_longer_on_list`
 URLs (via Internet Archive). Be a good API citizen: cache fetches, identify requests,
 low volume.
 
+**Set pages (surveyed 2026-08-19, now the release-date authority):** Semantic
+MediaWiki `action=ask` works, and set pages carry distinct `North American English
+release date` / `European English release date` / `Oceanic` / `Worldwide` /
+`English release date` properties. One `ask` query enumerates every TCG product in a
+date window (384 for 2002–2010). **Parse dates from the SMW `raw` field
+(`1/YYYY[/M[/D]]`) — precision is encoded there; the accompanying timestamp silently
+pads to the 1st.** Set card lists (`Set Card Lists:<Set> (TCG-XX)`) are
+semicolon-delimited `{{Set list}}` wikitext; card-number pages redirect to card
+pages (used to spot-verify printings). The published API policy (1 req/s, descriptive
+UA with contact, ~30-day caching, `recentchanges` for sync) explicitly names card
+database building as an anticipated use.
+
+### YGOPRODeck (db.ygoprodeck.com, surveyed 2026-08-19)
+
+`cardinfo.php?misc=yes` with zero filters is their documented single-request bulk
+download (14,516 cards, ~25 MB); `cardsets.php` lists all sets. **Printings authority
+only.** Verified pitfalls: the per-set `tcg_date` is region-inconsistent (EU for
+Absolute Powerforce/The Shining Darkness, NA for Generation Force/Duelist Revolution)
+and `misc_info.tcg_date` sometimes bakes in Sneak Peek dates; promo sets can carry
+`YYYY-MM-01`/`YYYY-01-01` placeholders; the top-level card `id` is not always the
+canonical printed passcode (match against the full `card_images[].id` list); set-code
+prefixes collide across 142 groups (join by `set_name`). Its `misc_info.formats`
+Edison tag was used as a comparison target — with adjudicated false negatives (15
+confirmed pre-cutoff cards missing) and internal inconsistency on Duel Terminal
+cards.
+
+### Other structured sources (surveyed, not currently ingested)
+
+- **YGOJSON** (iconmaster5326/YGOJSON, MIT, bulk ZIPs): the only other source with
+  explicit `na`/`eu` set dates; snapshot was ~4 months stale at survey time. Good
+  future cross-check.
+- **YGOResources** (db.ygoresources.com): mirrors Konami's own DB; per-locale
+  `prints[]` with dates per card. Etiquette requires incremental use (revision
+  manifest); best for adjudicating individual conflicts.
+- **yaml-yugi** (DawnbrandBots, git, daily): per-locale set membership per card, no
+  dates; `yaml-yugi-limit-regulation` holds banlist history (TCG lists carry
+  EMEA effective dates — mind NA divergence).
+- **Konami DB** (db.yugioh-card.com): authoritative but HTML-only behind a WAF, one
+  date per locale with no NA/EU split; manual spot-checks only.
+- **Community Edison whitelists** (comparison targets, cached in research notes):
+  termitaklk's hand-maintained pre-errata whitelist (independent lineage; agreed with
+  our derivation on all 15 adjudicated keepers) and SantiagoRivera92/TimeWizard
+  (generated from YGOPRODeck set dates; includes all Duel Terminal cards).
+
 ### EdisonFormat.com
 
 Prose site; used as the source for Edison's definition (name origin, 2010-03-01 →

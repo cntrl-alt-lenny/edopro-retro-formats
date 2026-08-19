@@ -20,11 +20,23 @@ reflects that.
    deviations if found.
 3. **Verify March 2010 against the Konami archive snapshot** (Internet Archive was
    unreachable this session); upgrade the banlist to `verified`.
-4. **Materialise the Edison pool.** Populate `data/releases/` for TCG 2002–2010 —
-   candidate sources: Format Library's Sets/Prints API (after agreeing terms with the
-   maintainer) or Yugipedia set pages. Then implement pool materialisation
-   (release-cutoff → extensional) in the build, emit the Edison whitelist, and encode
-   the sourced special cases (Europe-only RP01/GX06, promo cutoffs, DPCT).
+4. ~~**Materialise the Edison pool.**~~ **Done (2026-08-19).** `data/releases/`
+   covers TCG 2002–2010 (369 products / 8,445 printings, Yugipedia per-territory
+   dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every
+   boundary case explicitly resolved and sourced, the generated lflist is a full
+   `$whitelist`, and regression tests lock cardinality + sixteen edge cases.
+   See docs/releases.md. Follow-ups now tracked below (4a–4c).
+
+   4a. **Upgrade release events from `reported` to `verified`** for the products
+   that define format boundaries (ABPF, TSHD, DPKB, DPCT, the promo cutoffs) by
+   citing period sources (archived Konami/UDE product pages) alongside Yugipedia.
+   4b. **Per-artwork printing dates** (far-alias alternate arts like Arkana Dark
+   Magician are currently absent from cutoff pools unless force-included; audit
+   which mattered in-period and encode them).
+   4c. **Duel Terminal ruling dossier**: the pool excludes DT01-machine-only cards
+   per EdisonFormat.com's set list; collect period tournament-policy evidence
+   (UDE/Konami floor rules) to upgrade that decision from community consensus to
+   primary-sourced.
 5. **Edison rules review.** Compare EdisonFormat.com's 13 rule differences against the
    ocgcore flag axes; decide whether the profile should add TCG-variant flags
    (`DUEL_TCG_FAST_EFFECT_IGNITION`, SEGOC flags, 6-step damage step) beyond plain
