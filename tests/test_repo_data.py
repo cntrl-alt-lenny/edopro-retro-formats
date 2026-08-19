@@ -102,8 +102,9 @@ class RealDataTest(unittest.TestCase):
         self.assertEqual(19, by_count.get(2), "semi-limited entries")
         pool = self.repo.pools["pool-edison-2010"]
         self.assertEqual(len(pool.cards), len(built.entries))
-        # A post-Edison staple must not appear at all (whitelist rejects it).
-        self.assertNotIn(66661678, built.entries)
+        # A card from the following set era must not appear at all (Key Mouse,
+        # The Shining Darkness - the whitelist rejects unlisted cards).
+        self.assertNotIn(135598, built.entries)
 
     def test_edison_banlist_counts(self):
         banlist = self.repo.banlists["tcg-2010-03"]

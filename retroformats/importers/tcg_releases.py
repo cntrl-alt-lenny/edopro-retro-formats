@@ -39,7 +39,7 @@ import re
 import sys
 from pathlib import Path
 
-from ..model import ARTWORK_OFFSET
+from ..model import ARTWORK_OFFSET, ReleaseEvent
 from ..repo import find_repo_root
 from .ignis_goat import git_head, read_cdb, slugify, write_json
 
@@ -181,44 +181,79 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
         "name_mismatches": [],
         "date_discrepancies": [],
         "products_without_printings": [],
+        "yugipedia_only_products": [],
         "skipped_products": [],
         "non_playable_skipped": 0,
+        "prefix_mismatched_printings": 0,
         "ot_conflicts": [],
     }
     yugipedia = merge_yugipedia(cache_data["yugipedia"])
     yugipedia_by_norm = {normalise_name(t): t for t in yugipedia}
+    matched_titles: set[str] = set()
+
+    def bounds(iso: str, precision: str):
+        return ReleaseEvent._bounds(iso, precision)
 
     # -- product table -----------------------------------------------------
     products: dict[str, dict] = {}  # keyed by normalised ygoprodeck set_name
     for ygo_set in cache_data["sets"]:
         set_name = str(ygo_set["set_name"])
         norm = normalise_name(set_name)
+        if norm in products:
+            report["skipped_products"].append(
+                {"product": set_name,
+                 "reason": f"normalised name collides with {products[norm]['name']!r}"}
+            )
+            continue
         title = yugipedia_by_norm.get(norm)
+        if title:
+            matched_titles.add(title)
         wiki = yugipedia.get(title, {}) if title else {}
         dates = dict(wiki.get("dates", {}))
         ygo_date = ygo_set.get("tcg_date")
 
+        # Sneak Peek / participation promos were handed out at events, not
+        # sold at retail. Both kinds grant availability; the label is for
+        # honesty and future per-kind policy.
+        name_l = set_name.lower()
+        event_kind = "event" if ("sneak peek" in name_l or "participation" in name_l) else "retail"
+
         events = []
+        # Territory-specific properties are authoritative; the generic
+        # "English release date" is a derived earliest-English value and is
+        # used only when nothing else exists (verified: no 2002-2010 product
+        # has it earlier than every territory date).
         if any(s in dates for s in ("na", "eu", "oce", "ww")):
             date_slugs = [s for s in ("na", "eu", "oce", "ww") if s in dates]
         elif "en" in dates:
             date_slugs = ["en"]
         else:
             date_slugs = []
+        corroborated = False
+        consistent = False
         for slug in date_slugs:
             iso, precision = dates[slug]
             sources = [SRC_YUGIPEDIA]
-            if ygo_date == iso:
-                sources.append(SRC_YGOPRODECK)
-            event = {
-                "territory": TERRITORY_BY_SLUG[slug],
-                "date": iso,
-                "precision": precision,
-                "status": "reported",
-                "kind": "retail",
-                "sources": sources,
-            }
-            events.append(event)
+            if ygo_date:
+                lo, hi = bounds(iso, precision)
+                if precision == "day" and str(ygo_date) == iso:
+                    # exact same day claim: genuine corroboration
+                    sources.append(SRC_YGOPRODECK)
+                    corroborated = True
+                elif lo.isoformat() <= str(ygo_date) <= hi.isoformat():
+                    # inside a coarse-precision window: consistent, but a
+                    # padded-date match must not fabricate corroboration
+                    consistent = True
+            events.append(
+                {
+                    "territory": TERRITORY_BY_SLUG[slug],
+                    "date": iso,
+                    "precision": precision,
+                    "status": "reported",
+                    "kind": event_kind,
+                    "sources": sources,
+                }
+            )
         if not events and ygo_date:
             events.append(
                 {
@@ -226,11 +261,11 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
                     "date": str(ygo_date),
                     "precision": "day",
                     "status": "reported",
-                    "kind": "retail",
+                    "kind": event_kind,
                     "sources": [SRC_YGOPRODECK],
                 }
             )
-        elif events and ygo_date and all(e["date"] != ygo_date for e in events):
+        elif events and ygo_date and not corroborated and not consistent:
             report["date_discrepancies"].append(
                 {
                     "product": set_name,
@@ -239,13 +274,15 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
                 }
             )
 
-        earliest = min((e["date"] for e in events), default=None)
-        if earliest is None:
+        if not events:
             report["skipped_products"].append({"product": set_name, "reason": "no release date"})
             continue
+        event_bounds = [bounds(e["date"], e["precision"]) for e in events]
+        earliest = min(lo for lo, _ in event_bounds).isoformat()
+        latest = max(hi for _, hi in event_bounds).isoformat()
         if earliest > through:
             continue  # after the import window; not an error
-        if max(e["date"] for e in events) < WINDOW_START:
+        if latest < WINDOW_START:
             report["skipped_products"].append(
                 {"product": set_name, "reason": f"predates the TCG ({earliest})"}
             )
@@ -258,8 +295,21 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
             "kind": product_kind(set_name, wiki.get("set_type")),
             "events": events,
             "yugipedia_page": title,
+            "yugipedia_dated": bool(date_slugs),
             "printings": {},  # canonical passcode -> {name, numbers set}
         }
+
+    # Yugipedia products with in-window dates that matched no YGOPRODeck set:
+    # they get no printings and are therefore absent from the dataset - an
+    # honest gap, not a silent one.
+    for title, entry in yugipedia.items():
+        if title in matched_titles or not entry["dates"]:
+            continue
+        parsed = [bounds(iso, precision) for iso, precision in entry["dates"].values()]
+        earliest = min(lo for lo, _ in parsed).isoformat()
+        latest = max(hi for _, hi in parsed).isoformat()
+        if earliest <= through and latest >= WINDOW_START:
+            report["yugipedia_only_products"].append(title)
 
     # -- printings ----------------------------------------------------------
     for card in cache_data["cards"]:
@@ -317,6 +367,10 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
             }
             for passcode, slot in sorted(product["printings"].items())
         ]
+        report["prefix_mismatched_printings"] += sum(
+            1 for p in printings
+            if p["numbers"] and not any(n.startswith(f"{product['code']}-") for n in p["numbers"])
+        )
         sources = sorted({s for e in product["events"] for s in e["sources"]} | {SRC_YGOPRODECK})
         record = {
             "$schema": "../../../schemas/product-release.schema.json",
@@ -328,10 +382,10 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
             "printings": printings,
             "sources": sources,
         }
-        if product["yugipedia_page"]:
+        if product["yugipedia_dated"]:
             record["notes"] = f"Dates from Yugipedia set page {product['yugipedia_page']!r}; printings from the YGOPRODeck bulk dump."
         else:
-            record["notes"] = "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+            record["notes"] = "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
         records.append(record)
 
     # deterministic report
@@ -339,6 +393,7 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
     report["name_mismatches"].sort(key=lambda r: r["passcode"])
     report["date_discrepancies"].sort(key=lambda r: r["product"])
     report["products_without_printings"].sort()
+    report["yugipedia_only_products"].sort()
     report["skipped_products"].sort(key=lambda r: r["product"])
     report["ot_conflicts"].sort(key=lambda r: r["passcode"])
     return records, report
@@ -380,6 +435,11 @@ def run(cache: Path, babelcdb: Path, root: Path, through: str) -> int:
             f"{len(report['unmatched_cards'])} in-window cards could not be matched to BabelCDB",
             f"{len(report['date_discrepancies'])} products where YGOPRODeck's date matches no "
             "Yugipedia date (recorded in the report; Yugipedia governs)",
+            f"{len(report['yugipedia_only_products'])} Yugipedia-dated in-window products matched "
+            "no YGOPRODeck set and are absent (no printing rosters available)",
+            f"{report['prefix_mismatched_printings']} printings carry numbers from a different "
+            "product's prefix (upstream set-membership quirks; validator warns per case)",
+            "Renamed products (Magic Ruler / Spell Ruler) import as two products sharing dates",
         ],
         "sources": [SRC_YUGIPEDIA, SRC_YGOPRODECK],
     }
@@ -393,6 +453,8 @@ def run(cache: Path, babelcdb: Path, root: Path, through: str) -> int:
         "name_mismatches": len(report["name_mismatches"]),
         "date_discrepancies": len(report["date_discrepancies"]),
         "products_without_printings": len(report["products_without_printings"]),
+        "yugipedia_only_products": len(report["yugipedia_only_products"]),
+        "prefix_mismatched_printings": report["prefix_mismatched_printings"],
         "skipped_products": len(report["skipped_products"]),
         "non_playable_skipped": report["non_playable_skipped"],
         "ot_conflicts": len(report["ot_conflicts"]),

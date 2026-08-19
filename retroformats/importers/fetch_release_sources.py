@@ -100,6 +100,9 @@ def fetch_yugipedia_products(
             url = _ask_query(prop, window_start, window_end, offset)
             print(f"fetch   yugipedia ask {prop!r} offset {offset}")
             payload = json.loads(_fetch(url))
+            if "error" in payload or "query" not in payload:
+                # never cache an error response as an empty result set
+                raise RuntimeError(f"yugipedia ask failed for {prop!r}: {payload.get('error', payload)}")
             results = payload.get("query", {}).get("results", {})
             # api_version=2 returns a dict keyed by page title
             pages.update(results)

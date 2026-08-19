@@ -137,6 +137,9 @@ class Validator:
     def _validate_pool(self, pool: Pool) -> None:
         if not _POOL_ID_RE.match(pool.id):
             self.error("pool.bad-id", pool.path, f"id {pool.id!r} does not match pool-<slug>")
+        if pool.region not in ("TCG", "OCG", "Worldwide"):
+            # An unknown region would silently widen default territory scoping.
+            self.error("pool.bad-region", pool.path, f"region {pool.region!r}")
         if pool.kind == "extensional":
             if not pool.cards:
                 self.error("pool.empty", pool.path, "extensional pool has no cards")
@@ -171,7 +174,10 @@ class Validator:
                         self._check_sources(list(entry["sources"]), pool.path, None, "cutoff.exclude_products")
                 for key in ("include", "exclude"):
                     for entry in pool.cutoff.get(key, []):
-                        card_ref = entry.get("card", {})
+                        if not isinstance(entry, dict) or not isinstance(entry.get("card"), dict):
+                            self.error("pool.bad-exception", pool.path, f"cutoff.{key} entry {entry!r}")
+                            continue
+                        card_ref = entry["card"]
                         try:
                             passcode = int(card_ref.get("passcode"))
                             name = str(card_ref.get("name"))
@@ -179,6 +185,15 @@ class Validator:
                             self.error("pool.bad-exception", pool.path, f"cutoff.{key} entry {entry!r}")
                             continue
                         self._check_card(passcode, name, pool.path, f"cutoff.{key} entry")
+                        row = self.repo.card_index.by_passcode.get(passcode)
+                        alias = row.get("alias_of") if row else None
+                        if alias and abs(int(alias) - passcode) < 10:
+                            self.error(
+                                "pool.exception-noncanonical",
+                                pool.path,
+                                f"cutoff.{key} {name}: passcode {passcode} is an artwork variant "
+                                f"of {alias}; exceptions must reference the canonical passcode",
+                            )
                         if not entry.get("reason"):
                             self.error(
                                 "pool.exception-unreasoned",
@@ -477,6 +492,16 @@ class Validator:
         for alt in event.dispute:
             if self._date(str(alt.get("date"))) is None:
                 self.error("releases.bad-date", path, f"{context}: dispute date {alt.get('date')!r}")
+            alt_precision = alt.get("precision")
+            if alt_precision is not None and alt_precision not in PRECISIONS:
+                # bounds() would otherwise silently read an unknown precision
+                # as day-precise - narrowing exactly the uncertainty the
+                # dispute records.
+                self.error(
+                    "releases.bad-precision",
+                    path,
+                    f"{context}: dispute precision {alt_precision!r}",
+                )
             if not alt.get("sources"):
                 self.error("releases.unsourced", path, f"{context}: a dispute alternative cites no sources")
             else:
@@ -571,9 +596,26 @@ class Validator:
                 self.error("coverage.bad-window", coverage.path, f"window {i}: status {window.get('status')!r}")
         self._check_sources(coverage.sources, coverage.path, None, "release coverage")
 
+    def _release_data_has_errors(self) -> bool:
+        return any(
+            f.severity == ERROR and f.code.startswith(("releases.", "coverage.", "load."))
+            for f in self.findings
+        )
+
     def _validate_materialized_pools(self) -> None:
         """A release-cutoff pool with cards committed must be exactly what the
         release dataset derives - materialisation is a projection, not data."""
+        if self._release_data_has_errors():
+            # Derivation assumes structurally valid release data; evaluating
+            # over broken records would crash or mislead. The structural
+            # errors above already fail validation.
+            self.warn(
+                "pool.not-cross-checked",
+                "data/pools",
+                "materialised pools were not recomputed because the release "
+                "dataset has structural errors (fix those first)",
+            )
+            return
         index = None
         for pool in self.repo.pools.values():
             if pool.kind != "release-cutoff" or not pool.raw.get("cards"):
@@ -592,7 +634,18 @@ class Validator:
                 )
             if index is None:
                 index = ReleaseIndex.build(self.repo)
-            evaluation = evaluate_cutoff(pool, self.repo, index)
+            try:
+                evaluation = evaluate_cutoff(pool, self.repo, index)
+            except (ValueError, TypeError, KeyError) as exc:
+                # e.g. a malformed cutoff exception entry; the specific defect
+                # is reported by _validate_pool - this keeps the contract that
+                # validate() returns findings instead of raising.
+                self.error(
+                    "pool.evaluation-failed",
+                    pool.path,
+                    f"could not recompute the pool from release data: {exc}",
+                )
+                continue
             for code in sorted(evaluation.ambiguous):
                 refs = evaluation.ambiguous[code]
                 spans = "; ".join(

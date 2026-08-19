@@ -144,6 +144,57 @@ class BuildProductsTest(unittest.TestCase):
         self.assertEqual(1, len(record["release_events"]))  # only the Yugipedia event
         self.assertEqual(1, len(report["date_discrepancies"]))
 
+    def test_coarse_precision_padded_match_is_not_corroboration(self):
+        # Yugipedia says "May 2010" (month precision, padded to 2010-05-01);
+        # YGOPRODeck says 2010-05-01. That is consistent, but it must neither
+        # add YGOPRODeck as a corroborating source nor report a discrepancy.
+        cache = self.cache(
+            sets=[{"set_name": "Vague Set", "set_code": "VAG", "tcg_date": "2010-05-01"}],
+            cards=[],
+            yugipedia_results=smw("Vague Set", {
+                "North American English release date": date_value("1/2010/5"),
+            }),
+        )
+        (record,), report = build_products(cache, self.CDB, "2010-12-31")
+        (ev,) = record["release_events"]
+        self.assertEqual("month", ev["precision"])
+        self.assertEqual([SRC_YUGIPEDIA], ev["sources"])
+        self.assertEqual([], report["date_discrepancies"])
+
+    def test_year_precision_product_spanning_window_start_is_kept(self):
+        # padded "2002" starts 2002-01-01, before the TCG's 2002-03 launch;
+        # the pre-TCG skip must use the latest possible date, not the padding.
+        cache = self.cache(
+            sets=[{"set_name": "Vague 2002", "set_code": "V02", "tcg_date": "2002-06-01"}],
+            cards=[],
+            yugipedia_results=smw("Vague 2002", {
+                "North American English release date": date_value("1/2002"),
+            }),
+        )
+        records, report = build_products(cache, self.CDB, "2010-12-31")
+        self.assertEqual(["vague-2002"], [r["id"] for r in records])
+        self.assertEqual([], report["skipped_products"])
+
+    def test_sneak_peek_distribution_is_kind_event(self):
+        cache = self.cache(
+            sets=[{"set_name": "Test Set Sneak Peek Participation Card", "set_code": "TST",
+                   "tcg_date": "2005-01-01"}],
+            cards=[], yugipedia_results={},
+        )
+        (record,), _ = build_products(cache, self.CDB, "2010-12-31")
+        self.assertEqual("event", record["release_events"][0]["kind"])
+
+    def test_unmatched_yugipedia_products_are_reported(self):
+        cache = self.cache(
+            sets=[],
+            cards=[],
+            yugipedia_results=smw("Ghost Product", {
+                "North American English release date": date_value("1/2005/1/10"),
+            }),
+        )
+        _, report = build_products(cache, self.CDB, "2010-12-31")
+        self.assertEqual(["Ghost Product"], report["yugipedia_only_products"])
+
     def test_window_filtering(self):
         cache = self.cache(
             sets=[

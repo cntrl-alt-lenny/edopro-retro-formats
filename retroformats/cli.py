@@ -99,10 +99,27 @@ def cmd_report(args: argparse.Namespace) -> int:
 
 
 def cmd_materialize(args: argparse.Namespace) -> int:
+    import datetime as _dt
+
     from .importers.ignis_goat import write_json
-    from .releases import ReleaseIndex, default_scope, evaluate_cutoff
+    from .releases import ReleaseIndex, default_scope, materialize_pool
 
     repo = _load(args)
+
+    # Same contract as build: never derive from invalid data. This is also
+    # what keeps malformed dates from surfacing as raw tracebacks here.
+    validator = Validator(repo)
+    validator.validate()
+    blocking = [
+        f for f in validator.errors
+        if f.code.startswith(("releases.", "coverage.", "load.", "pool.", "card.", "sources."))
+    ]
+    if blocking:
+        for finding in blocking:
+            print(finding, file=sys.stderr)
+        print("materialize: refusing to derive pools from invalid data", file=sys.stderr)
+        return 1
+
     targets = [
         pool for pool in repo.pools.values()
         if pool.kind == "release-cutoff" and (not args.pools or pool.id in args.pools)
@@ -121,8 +138,6 @@ def cmd_materialize(args: argparse.Namespace) -> int:
         cutoff_date = (pool.cutoff or {}).get("cutoff_date")
         scope = frozenset((pool.cutoff or {}).get("territories") or default_scope(pool.region))
         coverage = repo.release_coverage
-        import datetime as _dt
-
         if coverage is None or not coverage.covers(_dt.date.fromisoformat(str(cutoff_date)), scope):
             print(
                 f"{pool.id}: refusing to materialise - data/releases/coverage.json does not claim "
@@ -131,7 +146,7 @@ def cmd_materialize(args: argparse.Namespace) -> int:
             )
             failed = True
             continue
-        evaluation = evaluate_cutoff(pool, repo, index)
+        raw, evaluation = materialize_pool(pool, repo, index)
         if evaluation.ambiguous:
             for code in sorted(evaluation.ambiguous):
                 refs = evaluation.ambiguous[code]
@@ -146,11 +161,9 @@ def cmd_materialize(args: argparse.Namespace) -> int:
                 )
             failed = True
             continue
-        raw = dict(pool.raw)
-        raw["cards"] = evaluation.cards()
         write_json(pool.path, raw)
         print(
-            f"{pool.id}: materialised {len(evaluation.cards())} cards "
+            f"{pool.id}: materialised {len(raw['cards'])} cards "
             f"(cutoff {cutoff_date}, scope {'+'.join(sorted(scope))}, "
             f"{len(evaluation.forced_in)} forced in, {len(evaluation.forced_out)} forced out)"
         )

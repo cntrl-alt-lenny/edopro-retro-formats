@@ -62,7 +62,7 @@ $ python3 -m retroformats validate      # semantic checks over all canonical dat
 $ python3 -m retroformats build         # regenerate dist/ deterministically
 $ python3 -m retroformats materialize   # derive release-cutoff pools from data/releases/
 $ python3 -m retroformats report        # per-format status + release-data coverage
-$ python3 -m unittest discover -t . -s tests   # 82 tests incl. the Ignis-parity and Edison regressions
+$ python3 -m unittest discover -t . -s tests   # 101 tests incl. the Ignis-parity and Edison regressions
 ```
 
 ## Repository layout

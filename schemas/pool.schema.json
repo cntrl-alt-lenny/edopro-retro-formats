@@ -7,6 +7,7 @@
   "required": ["id", "region", "kind", "sources"],
   "additionalProperties": false,
   "properties": {
+    "$schema": { "type": "string" },
     "id": { "type": "string", "pattern": "^pool-[a-z0-9-]+$" },
     "region": { "$ref": "common.schema.json#/$defs/region" },
     "kind": { "type": "string", "enum": ["extensional", "release-cutoff"] },

@@ -7,6 +7,7 @@
   "required": ["id", "modern_card", "classification", "changes", "implementation", "sources"],
   "additionalProperties": false,
   "properties": {
+    "$schema": { "type": "string" },
     "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
     "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
     "classification": {

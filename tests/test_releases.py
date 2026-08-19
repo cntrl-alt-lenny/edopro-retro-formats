@@ -51,6 +51,14 @@ class CutoffTest(TempRepoTest):
         result = self.evaluate()
         self.assertIn(100, result.included)
 
+    def test_card_released_on_cutoff_day_is_included(self):
+        # the cutoff is inclusive: "released <= cutoff_date"
+        self.seed_cards(card(100, "Alpha"))
+        self.add_product(code="EDGE", release_events=[event("tcg-na", CUTOFF)],
+                         printings=[printing(100, "Alpha")])
+        self.add_cutoff_pool()
+        self.assertIn(100, self.evaluate().included)
+
     def test_card_released_after_cutoff_is_excluded(self):
         self.seed_cards(card(100, "Alpha"), card(200, "Beta"))
         self.add_product(code="OLD", release_events=[event("tcg-na", "2005-01-01")],
@@ -175,6 +183,27 @@ class CutoffTest(TempRepoTest):
         self.assertNotIn(100, result.ambiguous)
         self.assertIn(100, result.forced_in)
 
+    def test_specific_event_satisfies_umbrella_scope(self):
+        self.seed_cards(card(100, "Alpha"))
+        self.add_product(code="OLD", release_events=[event("tcg-na", "2005-01-01")],
+                         printings=[printing(100, "Alpha")])
+        self.add_cutoff_pool(territories=["tcg"])
+        self.assertIn(100, self.evaluate().included)
+
+    def test_forced_include_variants_ignore_excluded_products(self):
+        # A forced-in card must not whitelist an artwork variant whose only
+        # printing is in a product this pool explicitly excludes.
+        self.seed_cards(card(100, "Alpha"), card(101, "Alpha", alias_of=100))
+        self.add_product(code="EXC", release_events=[event("tcg-na", "2005-01-01")],
+                         printings=[printing(101, "Alpha")])
+        self.add_cutoff_pool(
+            include=[{"card": card(100, "Alpha"), "reason": "documented", "sources": ["test-source"]}],
+            exclude_products=[{"product": "exc", "reason": "machine-only", "sources": ["test-source"]}],
+        )
+        result = self.evaluate()
+        self.assertIn(100, result.included)
+        self.assertNotIn("variant_passcodes", result.included[100])
+
     def test_excluded_product_grants_no_availability(self):
         # A product-level exclusion removes its events, but cards stay in the
         # pool when another (non-excluded) product released them in time.
@@ -266,6 +295,46 @@ class CutoffTest(TempRepoTest):
         self.assertEqual([100, 200], [c["passcode"] for c in first])
 
 
+class CoverageTest(TempRepoTest):
+    """ReleaseCoverage.covers() - the gate on pool materialisation."""
+
+    def load_coverage(self):
+        from retroformats.repo import Repository
+
+        return Repository.load(self.root).release_coverage
+
+    def test_covers_inside_complete_window(self):
+        import datetime as dt
+
+        self.add_coverage()
+        cov = self.load_coverage()
+        self.assertTrue(cov.covers(dt.date(2005, 6, 1), frozenset({"tcg-na"})))
+
+    def test_does_not_cover_outside_window(self):
+        import datetime as dt
+
+        self.add_coverage()
+        cov = self.load_coverage()
+        self.assertFalse(cov.covers(dt.date(2011, 1, 1), frozenset({"tcg-na"})))
+        self.assertFalse(cov.covers(dt.date(2001, 1, 1), frozenset({"tcg-na"})))
+
+    def test_partial_window_does_not_count(self):
+        import datetime as dt
+
+        self.add_coverage(windows=[{"territories": ["tcg"], "from": "2002-01-01",
+                                    "through": "2010-12-31", "status": "partial"}])
+        self.assertFalse(self.load_coverage().covers(dt.date(2005, 6, 1), frozenset({"tcg"})))
+
+    def test_umbrella_window_covers_family_scope(self):
+        import datetime as dt
+
+        self.add_coverage(windows=[{"territories": ["tcg"], "from": "2002-01-01",
+                                    "through": "2010-12-31", "status": "complete"}])
+        cov = self.load_coverage()
+        self.assertTrue(cov.covers(dt.date(2005, 6, 1), frozenset({"tcg-na", "tcg-eu"})))
+        self.assertFalse(cov.covers(dt.date(2005, 6, 1), frozenset({"ocg"})))
+
+
 class ReleaseValidationTest(TempRepoTest):
     def _seed_valid(self):
         self.add_card_index([card(100, "Alpha"), card(200, "Beta"), card(300, "Gamma")])
@@ -321,6 +390,54 @@ class ReleaseValidationTest(TempRepoTest):
                          printings=[printing(100, "Alpha", "SET1-EN001")])
         self.assertIn("releases.card-undated", warning_codes(validate(self.root)))
 
+    def test_bad_dispute_precision_fails(self):
+        self._seed_valid()
+        self.add_product(release_events=[event(
+            "tcg-na", "2005-01-01", status="disputed",
+            dispute=[{"date": "2005-06-01", "precision": "montth", "sources": ["test-source"]}],
+        )])
+        self.assertIn("releases.bad-precision", error_codes(validate(self.root)))
+
+    def test_bad_pool_region_fails(self):
+        self._seed_valid()
+        self.add_pool(id="pool-typo", cards=[card(100, "Alpha")], region="TGC")
+        self.assertIn("pool.bad-region", error_codes(validate(self.root)))
+
+    def test_unresolved_exclude_product_fails(self):
+        self._seed_valid()
+        self.add_product(printings=[printing(100, "Alpha")])
+        self.add_cutoff_pool(
+            exclude_products=[{"product": "no-such-product", "reason": "typo", "sources": ["test-source"]}]
+        )
+        self.assertIn("pool.unresolved-product", error_codes(validate(self.root)))
+
+    def test_noncanonical_exception_passcode_fails(self):
+        self._seed_valid()
+        self.add_card_index([card(100, "Alpha"), card(101, "Alpha", alias_of=100),
+                             card(200, "Beta"), card(300, "Gamma")])
+        self.add_cutoff_pool(
+            include=[{"card": card(101, "Alpha"), "reason": "promo", "sources": ["test-source"]}]
+        )
+        self.assertIn("pool.exception-noncanonical", error_codes(validate(self.root)))
+
+    def test_malformed_exception_entry_reports_without_crashing(self):
+        self._seed_valid()
+        self.add_cutoff_pool(include=["not-a-dict"])
+        validator = validate(self.root)  # must not raise
+        self.assertIn("pool.bad-exception", error_codes(validator))
+
+    def test_bad_event_date_reports_without_crashing_despite_materialised_pool(self):
+        # The validator's contract: every problem becomes a Finding, even when
+        # a materialised pool would otherwise make it recompute over bad data.
+        self._seed_valid()
+        self.add_coverage()
+        self.add_product(release_events=[event("tcg-na", "not-a-date")],
+                         printings=[printing(100, "Alpha")])
+        self.add_cutoff_pool(cards=[card(100, "Alpha")])
+        validator = validate(self.root)  # must not raise
+        self.assertIn("releases.bad-date", error_codes(validator))
+        self.assertIn("pool.not-cross-checked", warning_codes(validator))
+
     def test_cutoff_exception_without_sources_fails(self):
         self._seed_valid()
         self.add_coverage()
@@ -360,6 +477,31 @@ class MaterializedPoolValidationTest(TempRepoTest):
     def test_materialised_pool_without_coverage_fails(self):
         self._seed(pool_cards=[card(100, "Alpha")], coverage=False)
         self.assertIn("pool.no-coverage", error_codes(validate(self.root)))
+
+    def test_variant_drift_fails(self):
+        self.add_card_index([card(100, "Alpha"), card(101, "Alpha", alias_of=100), card(200, "Beta")])
+        self.add_rule_profile()
+        self.add_coverage()
+        self.add_product(code="OLD", release_events=[event("tcg-na", "2005-01-01")],
+                         printings=[printing(100, "Alpha"), printing(101, "Alpha")])
+        # committed entry lacks the derived variant 101
+        self.add_cutoff_pool(cards=[card(100, "Alpha")])
+        self.assertIn("pool.materialization-drift", error_codes(validate(self.root)))
+
+    def test_exclude_resolves_straddling_ambiguity(self):
+        self.add_card_index([card(100, "Alpha"), card(200, "Beta")])
+        self.add_rule_profile()
+        self.add_coverage()
+        self.add_product(code="OLD", release_events=[event("tcg-na", "2005-01-01")],
+                         printings=[printing(100, "Alpha")])
+        self.add_product(code="VAGUE", release_events=[event("tcg-na", "2005-06-01", precision="month")],
+                         printings=[printing(200, "Beta")])
+        self.add_cutoff_pool(
+            cards=[card(100, "Alpha")],
+            exclude=[{"card": card(200, "Beta"), "reason": "documented as later", "sources": ["test-source"]}],
+        )
+        validator = validate(self.root)
+        self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
 
     def test_unresolved_ambiguity_fails_validation(self):
         self.add_card_index([card(100, "Alpha"), card(200, "Beta")])

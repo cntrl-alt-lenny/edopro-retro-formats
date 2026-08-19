@@ -7,6 +7,7 @@
   "required": ["id", "name", "engine", "sources"],
   "additionalProperties": false,
   "properties": {
+    "$schema": { "type": "string" },
     "id": { "type": "string", "pattern": "^rules-[a-z0-9-]+$" },
     "name": { "type": "string" },
     "description": { "type": "string" },

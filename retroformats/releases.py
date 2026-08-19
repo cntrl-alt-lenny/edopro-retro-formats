@@ -201,10 +201,12 @@ def evaluate_cutoff(pool: Pool, repo: Repository, index: ReleaseIndex | None = N
             availability = index.by_canonical.get(code)
             if availability:
                 # variants that were themselves printed by the cutoff, under
-                # the widest reading of the forced-in card's events
+                # the widest reading of the forced-in card's events; excluded
+                # products grant nothing here either
                 definite = [
                     ref for ref in availability.events
-                    if territory_matches_scope(ref.event.territory, scope)
+                    if ref.product_id not in excluded_products
+                    and territory_matches_scope(ref.event.territory, scope)
                     and ref.event.bounds()[0] <= cutoff
                 ]
                 variants = _variants_of(code, definite)
