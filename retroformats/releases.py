@@ -69,7 +69,7 @@ def default_scope(region: str) -> frozenset[str]:
 class EventRef:
     """One availability-granting event, traced back to where it came from."""
 
-    product_code: str
+    product_id: str
     printed_passcode: int
     number: str | None
     event: ReleaseEvent
@@ -105,7 +105,7 @@ class ReleaseIndex:
                 canonical = index._canonicalise(printing.passcode, card_index)
                 if canonical is None:
                     index.unknown_printings.append(
-                        (product.code, printing.passcode, printing.name)
+                        (product.id, printing.passcode, printing.name)
                     )
                     continue
                 slot = index.by_canonical.setdefault(canonical, CardAvailability(canonical))
@@ -118,14 +118,14 @@ class ReleaseIndex:
                     dated = True
                     slot.events.append(
                         EventRef(
-                            product_code=product.code,
+                            product_id=product.id,
                             printed_passcode=printing.passcode,
                             number=printing.numbers[0] if printing.numbers else None,
                             event=event,
                         )
                     )
                 if not dated:
-                    slot.undated_printings.append((product.code, printing.passcode))
+                    slot.undated_printings.append((product.id, printing.passcode))
         return index
 
     @staticmethod
@@ -168,6 +168,9 @@ def evaluate_cutoff(pool: Pool, repo: Repository, index: ReleaseIndex | None = N
     index = index or ReleaseIndex.build(repo)
     cutoff = _dt.date.fromisoformat(str(pool.cutoff["cutoff_date"]))
     scope = frozenset(pool.cutoff.get("territories") or default_scope(pool.region))
+    excluded_products = {
+        str(entry.get("product")) for entry in pool.cutoff.get("exclude_products", [])
+    }
 
     result = CutoffEvaluation(scope=scope)
     name_of = repo.card_index.name_of
@@ -175,7 +178,8 @@ def evaluate_cutoff(pool: Pool, repo: Repository, index: ReleaseIndex | None = N
     for canonical, availability in index.by_canonical.items():
         in_scope = [
             ref for ref in availability.events
-            if territory_matches_scope(ref.event.territory, scope)
+            if ref.product_id not in excluded_products
+            and territory_matches_scope(ref.event.territory, scope)
         ]
         if not in_scope:
             continue

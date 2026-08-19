@@ -147,6 +147,28 @@ class Validator:
                 for territory in pool.cutoff.get("territories", []):
                     if territory not in TERRITORIES:
                         self.error("pool.bad-territory", pool.path, f"cutoff territory {territory!r}")
+                for entry in pool.cutoff.get("exclude_products", []):
+                    product_id = str(entry.get("product", ""))
+                    if self.repo.products and product_id not in self.repo.products:
+                        self.error(
+                            "pool.unresolved-product",
+                            pool.path,
+                            f"cutoff.exclude_products references unknown product id {product_id!r}",
+                        )
+                    if not entry.get("reason"):
+                        self.error(
+                            "pool.exception-unreasoned",
+                            pool.path,
+                            f"cutoff.exclude_products {product_id}: historical exceptions must state a reason",
+                        )
+                    if not entry.get("sources"):
+                        self.error(
+                            "pool.exception-unsourced",
+                            pool.path,
+                            f"cutoff.exclude_products {product_id}: historical exceptions must cite sources",
+                        )
+                    else:
+                        self._check_sources(list(entry["sources"]), pool.path, None, "cutoff.exclude_products")
                 for key in ("include", "exclude"):
                     for entry in pool.cutoff.get(key, []):
                         card_ref = entry.get("card", {})
@@ -574,7 +596,7 @@ class Validator:
             for code in sorted(evaluation.ambiguous):
                 refs = evaluation.ambiguous[code]
                 spans = "; ".join(
-                    f"{r.product_code} {r.event.date} ({r.event.precision}/{r.event.status})"
+                    f"{r.product_id} {r.event.date} ({r.event.precision}/{r.event.status})"
                     for r in refs[:3]
                 )
                 self.error(

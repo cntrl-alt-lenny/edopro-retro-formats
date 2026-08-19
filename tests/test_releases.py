@@ -175,6 +175,22 @@ class CutoffTest(TempRepoTest):
         self.assertNotIn(100, result.ambiguous)
         self.assertIn(100, result.forced_in)
 
+    def test_excluded_product_grants_no_availability(self):
+        # A product-level exclusion removes its events, but cards stay in the
+        # pool when another (non-excluded) product released them in time.
+        self.seed_cards(card(100, "Alpha"), card(200, "Beta"))
+        self.add_product(code="MACH", release_events=[event("tcg-na", "2005-01-01")],
+                         printings=[printing(100, "Alpha"), printing(200, "Beta")])
+        self.add_product(code="OLD", release_events=[event("tcg-na", "2005-02-01")],
+                         printings=[printing(200, "Beta")])
+        self.add_cutoff_pool(
+            exclude_products=[{"product": "mach", "reason": "machine-only distribution",
+                               "sources": ["test-source"]}]
+        )
+        result = self.evaluate()
+        self.assertNotIn(100, result.included)
+        self.assertIn(200, result.included)
+
     def test_explicit_exclude_overrides_derivation(self):
         self.seed_cards(card(100, "Alpha"))
         self.add_product(code="OLD", release_events=[event("tcg-na", "2005-01-01")],
@@ -380,7 +396,7 @@ class ReleaseIndexTest(TempRepoTest):
         index = ReleaseIndex.build(Repository.load(self.root))
         self.assertIn(100, index.by_canonical)
         self.assertNotIn(999, index.by_canonical)
-        self.assertEqual([("SET1", 999, "Ghost")], index.unknown_printings)
+        self.assertEqual([("set1", 999, "Ghost")], index.unknown_printings)
 
 
 if __name__ == "__main__":

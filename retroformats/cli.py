@@ -136,7 +136,7 @@ def cmd_materialize(args: argparse.Namespace) -> int:
             for code in sorted(evaluation.ambiguous):
                 refs = evaluation.ambiguous[code]
                 spans = "; ".join(
-                    f"{r.product_code} {r.event.date} ({r.event.precision}/{r.event.status})"
+                    f"{r.product_id} {r.event.date} ({r.event.precision}/{r.event.status})"
                     for r in refs[:3]
                 )
                 print(

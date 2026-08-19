@@ -41,6 +41,20 @@
           "items": { "$ref": "common.schema.json#/$defs/territory" },
           "description": "Which territories' release events count toward availability. Defaults to every TCG territory when the pool region is TCG (historically, a card released anywhere in the TCG was tournament-legal TCG-wide - e.g. Europe-only Retro Pack cards at a US event). Narrow this for pools that genuinely track one territory's availability."
         },
+        "exclude_products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["product", "reason", "sources"],
+            "additionalProperties": false,
+            "properties": {
+              "product": { "type": "string", "description": "Product id (data/releases/products/<id>.json) whose release events do not count toward this pool. Cards remain if available through another product." },
+              "reason": { "type": "string" },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          },
+          "description": "Product-level availability exceptions - e.g. a format defined against one territory's street date (The Shining Darkness's European release preceding the NA-anchored cutoff), or product classes the format's definition omits (Duel Terminal machines)."
+        },
         "include": {
           "type": "array",
           "items": {
