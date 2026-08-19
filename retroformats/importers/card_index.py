@@ -27,12 +27,21 @@ def collect_referenced_passcodes(repo: Repository) -> set[int]:
         for card in pool.cards:
             refs.add(card.passcode)
             refs.update(card.variants)
+        for key in ("include", "exclude"):
+            for entry in (pool.cutoff or {}).get(key, []):
+                try:
+                    refs.add(int(entry.get("card", {}).get("passcode")))
+                except (TypeError, ValueError):
+                    pass  # validator reports the malformed entry
     for erratum in repo.errata.values():
         refs.add(erratum.modern_card.passcode)
         hist = erratum.implementation.get("historical_passcode")
         if hist:
             refs.add(int(hist))
         refs.update(int(v) for v in erratum.implementation.get("historical_variant_passcodes", []))
+    for product in repo.products.values():
+        for printing in product.printings:
+            refs.add(printing.passcode)
     return refs
 
 
