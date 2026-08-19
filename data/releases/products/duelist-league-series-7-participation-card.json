@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-series-7-participation-card",
+  "code": "DL7",
+  "name": "Duelist League Series 7 participation card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-04-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 15270885,
+      "name": "Toon Goblin Attack Force",
+      "numbers": [
+        "DL7-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Series 7 participation card'; printings from the YGOPRODeck bulk dump."
+}

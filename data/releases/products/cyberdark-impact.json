@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "cyberdark-impact",
+  "code": "CDIP",
+  "name": "Cyberdark Impact",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-11-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1845204,
+      "name": "Instant Fusion",
+      "numbers": [
+        "CDIP-EN040"
+      ]
+    },
+    {
+      "passcode": 2561846,
+      "name": "Corruption Cell \"A\"",
+      "numbers": [
+        "CDIP-EN037"
+      ]
+    },
+    {
+      "passcode": 3019642,
+      "name": "Cyberdark Keel",
+      "numbers": [
+        "CDIP-EN003"
+      ]
+    },
+    {
+      "passcode": 3784434,
+      "name": "Rampaging Rhynos",
+      "numbers": [
+        "CDIP-EN031"
+      ]
+    },
+    {
+      "passcode": 8806072,
+      "name": "Combo Fighter",
+      "numbers": [
+        "CDIP-EN028"
+      ]
+    },
+    {
+      "passcode": 9628664,
+      "name": "Iris, the Earth Mother",
+      "numbers": [
+        "CDIP-EN025"
+      ]
+    },
+    {
+      "passcode": 10963799,
+      "name": "Barrier Statue of the Torrent",
+      "numbers": [
+        "CDIP-EN019"
+      ]
+    },
+    {
+      "passcode": 11685347,
+      "name": "Blast Asmodian",
+      "numbers": [
+        "CDIP-EN016"
+      ]
+    },
+    {
+      "passcode": 12694768,
+      "name": "Abaki",
+      "numbers": [
+        "CDIP-EN013"
+      ]
+    },
+    {
+      "passcode": 12817939,
+      "name": "Dark Lucius LV6",
+      "numbers": [
+        "CDIP-EN010"
+      ]
+    },
+    {
+      "passcode": 19740112,
+      "name": "Barrier Statue of the Drought",
+      "numbers": [
+        "CDIP-EN022"
+      ]
+    },
+    {
+      "passcode": 23756165,
+      "name": "Allure Queen LV5",
+      "numbers": [
+        "CDIP-EN007"
+      ]
+    },
+    {
+      "passcode": 24838456,
+      "name": "Vanity's Call",
+      "numbers": [
+        "CDIP-EN059"
+      ]
+    },
+    {
+      "passcode": 25050038,
+      "name": "Chain Healing",
+      "numbers": [
+        "CDIP-EN053"
+      ]
+    },
+    {
+      "passcode": 25173686,
+      "name": "Straight Flush",
+      "numbers": [
+        "CDIP-EN050"
+      ]
+    },
+    {
+      "passcode": 36935434,
+      "name": "Byroad Sacrifice",
+      "numbers": [
+        "CDIP-EN055"
+      ]
+    },
+    {
+      "passcode": 36995273,
+      "name": "Degenerate Circuit",
+      "numbers": [
+        "CDIP-EN047"
+      ]
+    },
+    {
+      "passcode": 37011715,
+      "name": "Miraculous Rebirth",
+      "numbers": [
+        "CDIP-EN044"
+      ]
+    },
+    {
+      "passcode": 37057012,
+      "name": "Cyber Ogre 2",
+      "numbers": [
+        "CDIP-EN036"
+      ]
+    },
+    {
+      "passcode": 38834303,
+      "name": "Counter Cleaner",
+      "numbers": [
+        "CDIP-EN041"
+      ]
+    },
+    {
+      "passcode": 39188539,
+      "name": "Storm Shooter",
+      "numbers": [
+        "CDIP-EN032"
+      ]
+    },
+    {
+      "passcode": 39956951,
+      "name": "Flash of the Forbidden Spell",
+      "numbers": [
+        "CDIP-EN038"
+      ]
+    },
+    {
+      "passcode": 40418351,
+      "name": "Cyberdark Dragon",
+      "numbers": [
+        "CDIP-EN035"
+      ]
+    },
+    {
+      "passcode": 41230939,
+      "name": "Cyberdark Horn",
+      "numbers": [
+        "CDIP-EN001"
+      ]
+    },
+    {
+      "passcode": 44800181,
+      "name": "Combo Master",
+      "numbers": [
+        "CDIP-EN029"
+      ]
+    },
+    {
+      "passcode": 45023678,
+      "name": "Lightning Punisher",
+      "numbers": [
+        "CDIP-EN026"
+      ]
+    },
+    {
+      "passcode": 46145256,
+      "name": "Barrier Statue of the Heavens",
+      "numbers": [
+        "CDIP-EN023"
+      ]
+    },
+    {
+      "passcode": 47084486,
+      "name": "Vanity's Fiend",
+      "numbers": [
+        "CDIP-EN017"
+      ]
+    },
+    {
+      "passcode": 47961808,
+      "name": "Barrier Statue of the Inferno",
+      "numbers": [
+        "CDIP-EN020"
+      ]
+    },
+    {
+      "passcode": 50140163,
+      "name": "Allure Queen LV7",
+      "numbers": [
+        "CDIP-EN008"
+      ]
+    },
+    {
+      "passcode": 50323155,
+      "name": "Black Horn of Heaven",
+      "numbers": [
+        "CDIP-EN060"
+      ]
+    },
+    {
+      "passcode": 51449743,
+      "name": "Chain Detonation",
+      "numbers": [
+        "CDIP-EN054"
+      ]
+    },
+    {
+      "passcode": 58098303,
+      "name": "Flame Ogre",
+      "numbers": [
+        "CDIP-EN014"
+      ]
+    },
+    {
+      "passcode": 58206034,
+      "name": "Dark Lucius LV8",
+      "numbers": [
+        "CDIP-EN011"
+      ]
+    },
+    {
+      "passcode": 62271284,
+      "name": "Justi-Break",
+      "numbers": [
+        "CDIP-EN051"
+      ]
+    },
+    {
+      "passcode": 63323539,
+      "name": "Trojan Blast",
+      "numbers": [
+        "CDIP-EN056"
+      ]
+    },
+    {
+      "passcode": 63394872,
+      "name": "Senet Switch",
+      "numbers": [
+        "CDIP-EN048"
+      ]
+    },
+    {
+      "passcode": 63516460,
+      "name": "Mystical Wind Typhoon",
+      "numbers": [
+        "CDIP-EN045"
+      ]
+    },
+    {
+      "passcode": 64238008,
+      "name": "Linear Accelerator Cannon",
+      "numbers": [
+        "CDIP-EN042"
+      ]
+    },
+    {
+      "passcode": 64268668,
+      "name": "Cyber Ogre",
+      "numbers": [
+        "CDIP-EN004"
+      ]
+    },
+    {
+      "passcode": 65450690,
+      "name": "Ritual Foregone",
+      "numbers": [
+        "CDIP-EN039"
+      ]
+    },
+    {
+      "passcode": 71395725,
+      "name": "Man Beast of Ares",
+      "numbers": [
+        "CDIP-EN030"
+      ]
+    },
+    {
+      "passcode": 71411377,
+      "name": "Queen's Bodyguard",
+      "numbers": [
+        "CDIP-EN027"
+      ]
+    },
+    {
+      "passcode": 72634965,
+      "name": "Vanity's Ruler",
+      "numbers": [
+        "CDIP-EN024"
+      ]
+    },
+    {
+      "passcode": 73356503,
+      "name": "Barrier Statue of the Stormwinds",
+      "numbers": [
+        "CDIP-EN021"
+      ]
+    },
+    {
+      "passcode": 76573247,
+      "name": "Alien Infiltrator",
+      "numbers": [
+        "CDIP-EN033"
+      ]
+    },
+    {
+      "passcode": 77625948,
+      "name": "Cyberdark Edge",
+      "numbers": [
+        "CDIP-EN002"
+      ]
+    },
+    {
+      "passcode": 84290642,
+      "name": "Snipe Hunter",
+      "numbers": [
+        "CDIP-EN015"
+      ]
+    },
+    {
+      "passcode": 84478195,
+      "name": "Barrier Statue of the Abyss",
+      "numbers": [
+        "CDIP-EN018"
+      ]
+    },
+    {
+      "passcode": 85313220,
+      "name": "Dark Lucius LV4",
+      "numbers": [
+        "CDIP-EN009"
+      ]
+    },
+    {
+      "passcode": 86209650,
+      "name": "Stray Asmodian",
+      "numbers": [
+        "CDIP-EN012"
+      ]
+    },
+    {
+      "passcode": 87257460,
+      "name": "Allure Queen LV3",
+      "numbers": [
+        "CDIP-EN006"
+      ]
+    },
+    {
+      "passcode": 90440725,
+      "name": "Cyber Shadow Gardna",
+      "numbers": [
+        "CDIP-EN058"
+      ]
+    },
+    {
+      "passcode": 90500169,
+      "name": "Level Down!?",
+      "numbers": [
+        "CDIP-EN046"
+      ]
+    },
+    {
+      "passcode": 91623717,
+      "name": "Chain Strike",
+      "numbers": [
+        "CDIP-EN043"
+      ]
+    },
+    {
+      "passcode": 91663373,
+      "name": "Cyber Esper",
+      "numbers": [
+        "CDIP-EN005"
+      ]
+    },
+    {
+      "passcode": 98444741,
+      "name": "Accumulated Fortune",
+      "numbers": [
+        "CDIP-EN057"
+      ]
+    },
+    {
+      "passcode": 98666339,
+      "name": "Dimensional Inversion",
+      "numbers": [
+        "CDIP-EN052"
+      ]
+    },
+    {
+      "passcode": 99532708,
+      "name": "Alien Mars",
+      "numbers": [
+        "CDIP-EN034"
+      ]
+    },
+    {
+      "passcode": 99788587,
+      "name": "Blasting Fuse",
+      "numbers": [
+        "CDIP-EN049"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Cyberdark Impact'; printings from the YGOPRODeck bulk dump."
+}

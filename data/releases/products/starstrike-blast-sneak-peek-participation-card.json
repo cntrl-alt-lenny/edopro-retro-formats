@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starstrike-blast-sneak-peek-participation-card",
+  "code": "STBL",
+  "name": "Starstrike Blast Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-11-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 31766317,
+      "name": "Archfiend Empress",
+      "numbers": [
+        "STBL-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starstrike Blast Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

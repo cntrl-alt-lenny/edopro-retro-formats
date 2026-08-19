@@ -1,0 +1,178 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-three",
+  "code": "CP03",
+  "name": "Champion Pack: Game Three",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-05-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2007-05-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 16956455,
+      "name": "Chiron the Mage",
+      "numbers": [
+        "CP03-EN013"
+      ]
+    },
+    {
+      "passcode": 20315854,
+      "name": "Fairy Dragon",
+      "numbers": [
+        "CP03-EN012"
+      ]
+    },
+    {
+      "passcode": 22790789,
+      "name": "B.E.S. Crystal Core",
+      "numbers": [
+        "CP03-EN015"
+      ]
+    },
+    {
+      "passcode": 23205979,
+      "name": "Spirit Reaper",
+      "numbers": [
+        "CP03-EN002"
+      ]
+    },
+    {
+      "passcode": 24317029,
+      "name": "Gravekeeper's Spy",
+      "numbers": [
+        "CP03-EN003"
+      ]
+    },
+    {
+      "passcode": 34627841,
+      "name": "Kaibaman",
+      "numbers": [
+        "CP03-EN014"
+      ]
+    },
+    {
+      "passcode": 36045450,
+      "name": "Magicians Unite",
+      "numbers": [
+        "CP03-EN001"
+      ]
+    },
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "CP03-EN020"
+      ]
+    },
+    {
+      "passcode": 49140998,
+      "name": "A Feather of the Phoenix",
+      "numbers": [
+        "CP03-EN018"
+      ]
+    },
+    {
+      "passcode": 61166988,
+      "name": "Wild Nature's Release",
+      "numbers": [
+        "CP03-EN017"
+      ]
+    },
+    {
+      "passcode": 62473983,
+      "name": "Gravekeeper's Chief",
+      "numbers": [
+        "CP03-EN016"
+      ]
+    },
+    {
+      "passcode": 69035382,
+      "name": "Contract with the Abyss",
+      "numbers": [
+        "CP03-EN019"
+      ]
+    },
+    {
+      "passcode": 70074904,
+      "name": "D.D. Assailant",
+      "numbers": [
+        "CP03-EN006"
+      ]
+    },
+    {
+      "passcode": 74270067,
+      "name": "Pikeru's Circle of Enchantment",
+      "numbers": [
+        "CP03-EN010"
+      ]
+    },
+    {
+      "passcode": 77121851,
+      "name": "Manticore of Darkness",
+      "numbers": [
+        "CP03-EN008"
+      ]
+    },
+    {
+      "passcode": 77754944,
+      "name": "Widespread Ruin",
+      "numbers": [
+        "CP03-EN011"
+      ]
+    },
+    {
+      "passcode": 78004197,
+      "name": "Goldd, Wu-Lord of Dark World",
+      "numbers": [
+        "CP03-EN007"
+      ]
+    },
+    {
+      "passcode": 84290642,
+      "name": "Snipe Hunter",
+      "numbers": [
+        "CP03-EN004"
+      ]
+    },
+    {
+      "passcode": 91345518,
+      "name": "The Agent of Judgment - Saturn",
+      "numbers": [
+        "CP03-EN009"
+      ]
+    },
+    {
+      "passcode": 93554166,
+      "name": "Dark World Lightning",
+      "numbers": [
+        "CP03-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Three'; printings from the YGOPRODeck bulk dump."
+}

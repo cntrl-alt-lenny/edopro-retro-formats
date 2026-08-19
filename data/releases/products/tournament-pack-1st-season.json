@@ -1,0 +1,277 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-1st-season",
+  "code": "TP1",
+  "name": "Tournament Pack: 1st Season",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-09-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-11-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2370081,
+      "name": "Steel Shell",
+      "numbers": [
+        "TP1-007",
+        "TP1-E007"
+      ]
+    },
+    {
+      "passcode": 7359741,
+      "name": "Mechanicalchaser",
+      "numbers": [
+        "TP1-001",
+        "TP1-E001"
+      ]
+    },
+    {
+      "passcode": 10262698,
+      "name": "The Statue of Easter Island",
+      "numbers": [
+        "TP1-019",
+        "TP1-E019"
+      ]
+    },
+    {
+      "passcode": 18937875,
+      "name": "Burning Spear",
+      "numbers": [
+        "TP1-010",
+        "TP1-E010"
+      ]
+    },
+    {
+      "passcode": 20871001,
+      "name": "Blue Medicine",
+      "numbers": [
+        "TP1-008",
+        "TP1-E008"
+      ]
+    },
+    {
+      "passcode": 27324313,
+      "name": "Wattkid",
+      "numbers": [
+        "TP1-016",
+        "TP1-E016"
+      ]
+    },
+    {
+      "passcode": 28003512,
+      "name": "The Judgement Hand",
+      "numbers": [
+        "TP1-026",
+        "TP1-E026"
+      ]
+    },
+    {
+      "passcode": 33413638,
+      "name": "Cockroach Knight",
+      "numbers": [
+        "TP1-029",
+        "TP1-E029"
+      ]
+    },
+    {
+      "passcode": 34290067,
+      "name": "Corroding Shark",
+      "numbers": [
+        "TP1-020",
+        "TP1-E020"
+      ]
+    },
+    {
+      "passcode": 39897277,
+      "name": "Elf's Light",
+      "numbers": [
+        "TP1-006",
+        "TP1-E006"
+      ]
+    },
+    {
+      "passcode": 41762634,
+      "name": "Giant Flea",
+      "numbers": [
+        "TP1-017",
+        "TP1-E017"
+      ]
+    },
+    {
+      "passcode": 42883273,
+      "name": "Wodan the Resident of the Forest",
+      "numbers": [
+        "TP1-027",
+        "TP1-E027"
+      ]
+    },
+    {
+      "passcode": 43487744,
+      "name": "White Hole",
+      "numbers": [
+        "TP1-005",
+        "TP1-E005"
+      ]
+    },
+    {
+      "passcode": 48305365,
+      "name": "Axe Raider",
+      "numbers": [
+        "TP1-002",
+        "TP1-E002"
+      ]
+    },
+    {
+      "passcode": 49791927,
+      "name": "Tiger Axe",
+      "numbers": [
+        "TP1-012",
+        "TP1-E012"
+      ]
+    },
+    {
+      "passcode": 50259460,
+      "name": "Versago the Destroyer",
+      "numbers": [
+        "TP1-015",
+        "TP1-E015"
+      ]
+    },
+    {
+      "passcode": 52584282,
+      "name": "Hercules Beetle",
+      "numbers": [
+        "TP1-025",
+        "TP1-E025"
+      ]
+    },
+    {
+      "passcode": 53493204,
+      "name": "Goddess with the Third Eye",
+      "numbers": [
+        "TP1-013",
+        "TP1-E013"
+      ]
+    },
+    {
+      "passcode": 55321970,
+      "name": "Gust Fan",
+      "numbers": [
+        "TP1-011",
+        "TP1-E011"
+      ]
+    },
+    {
+      "passcode": 56260110,
+      "name": "Raimei",
+      "numbers": [
+        "TP1-009",
+        "TP1-E009"
+      ]
+    },
+    {
+      "passcode": 57405307,
+      "name": "Winged Dragon, Guardian of the Fortress #2",
+      "numbers": [
+        "TP1-022",
+        "TP1-E022"
+      ]
+    },
+    {
+      "passcode": 60802233,
+      "name": "Kuwagata α",
+      "numbers": [
+        "TP1-030",
+        "TP1-E030"
+      ]
+    },
+    {
+      "passcode": 69750536,
+      "name": "Wow Warrior",
+      "numbers": [
+        "TP1-021",
+        "TP1-E021"
+      ]
+    },
+    {
+      "passcode": 75559356,
+      "name": "Cyber Soldier of Darkworld",
+      "numbers": [
+        "TP1-028",
+        "TP1-E028"
+      ]
+    },
+    {
+      "passcode": 76775123,
+      "name": "Patrol Robo",
+      "numbers": [
+        "TP1-004",
+        "TP1-E004"
+      ]
+    },
+    {
+      "passcode": 82065276,
+      "name": "Oscillo Hero",
+      "numbers": [
+        "TP1-023",
+        "TP1-E023"
+      ]
+    },
+    {
+      "passcode": 82085619,
+      "name": "Shining Friendship",
+      "numbers": [
+        "TP1-024",
+        "TP1-E024"
+      ]
+    },
+    {
+      "passcode": 84990171,
+      "name": "Bean Soldier",
+      "numbers": [
+        "TP1-018",
+        "TP1-E018"
+      ]
+    },
+    {
+      "passcode": 95144193,
+      "name": "Kwagar Hercules",
+      "numbers": [
+        "TP1-003",
+        "TP1-E003"
+      ]
+    },
+    {
+      "passcode": 99426834,
+      "name": "Beastking of the Swamps",
+      "numbers": [
+        "TP1-014",
+        "TP1-E014"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack: 1st Season'; printings from the YGOPRODeck bulk dump."
+}

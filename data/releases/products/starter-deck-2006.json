@@ -1,0 +1,307 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-2006",
+  "code": "YSD",
+  "name": "Starter Deck 2006",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-03-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 5818798,
+      "name": "Gazelle the King of Mythical Beasts",
+      "numbers": [
+        "YSD-EN001"
+      ]
+    },
+    {
+      "passcode": 11091375,
+      "name": "Luster Dragon",
+      "numbers": [
+        "YSD-EN005"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "YSD-EN004"
+      ]
+    },
+    {
+      "passcode": 15960641,
+      "name": "Mirage Dragon",
+      "numbers": [
+        "YSD-EN018"
+      ]
+    },
+    {
+      "passcode": 17658803,
+      "name": "Luster Dragon #2",
+      "numbers": [
+        "YSD-EN003"
+      ]
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements",
+      "numbers": [
+        "YSD-EN032"
+      ]
+    },
+    {
+      "passcode": 19523799,
+      "name": "Ookazi",
+      "numbers": [
+        "YSD-EN020"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "YSD-EN027"
+      ]
+    },
+    {
+      "passcode": 20721928,
+      "name": "Elemental HERO Sparkman",
+      "numbers": [
+        "YSD-EN010"
+      ]
+    },
+    {
+      "passcode": 21844576,
+      "name": "Elemental HERO Avian",
+      "numbers": [
+        "YSD-EN007"
+      ]
+    },
+    {
+      "passcode": 31553716,
+      "name": "Spear Dragon",
+      "numbers": [
+        "YSD-EN015"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "YSD-EN012"
+      ]
+    },
+    {
+      "passcode": 31785398,
+      "name": "Ready for Intercepting",
+      "numbers": [
+        "YSD-EN034"
+      ]
+    },
+    {
+      "passcode": 38199696,
+      "name": "Red Medicine",
+      "numbers": [
+        "YSD-EN024"
+      ]
+    },
+    {
+      "passcode": 38479725,
+      "name": "The Trojan Horse",
+      "numbers": [
+        "YSD-EN017"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "YSD-EN013"
+      ]
+    },
+    {
+      "passcode": 44209392,
+      "name": "Castle Walls",
+      "numbers": [
+        "YSD-EN033"
+      ]
+    },
+    {
+      "passcode": 48659020,
+      "name": "Spirit Caller",
+      "numbers": [
+        "YSD-EN016"
+      ]
+    },
+    {
+      "passcode": 51371017,
+      "name": "Princess of Tsurugi",
+      "numbers": [
+        "YSD-EN014"
+      ]
+    },
+    {
+      "passcode": 51394546,
+      "name": "Cemetary Bomb",
+      "numbers": [
+        "YSD-EN039"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "YSD-EN037"
+      ]
+    },
+    {
+      "passcode": 56594520,
+      "name": "Gaia Power",
+      "numbers": [
+        "YSD-EN022"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "YSD-EN008"
+      ]
+    },
+    {
+      "passcode": 59793705,
+      "name": "Elemental HERO Bladedge",
+      "numbers": [
+        "YSD-EN019"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "YSD-EN035"
+      ]
+    },
+    {
+      "passcode": 60694662,
+      "name": "Skelengel",
+      "numbers": [
+        "YSD-EN011"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "YSD-EN040"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "YSD-EN021"
+      ]
+    },
+    {
+      "passcode": 66073051,
+      "name": "Warrior of Zera",
+      "numbers": [
+        "YSD-EN006"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "YSD-EN025"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "YSD-EN023"
+      ]
+    },
+    {
+      "passcode": 74848038,
+      "name": "Monster Reincarnation",
+      "numbers": [
+        "YSD-EN030"
+      ]
+    },
+    {
+      "passcode": 75953262,
+      "name": "Warrior Dai Grepher",
+      "numbers": [
+        "YSD-EN002"
+      ]
+    },
+    {
+      "passcode": 79759861,
+      "name": "Tribute to The Doomed",
+      "numbers": [
+        "YSD-EN026"
+      ]
+    },
+    {
+      "passcode": 83968380,
+      "name": "Jar of Greed",
+      "numbers": [
+        "YSD-EN036"
+      ]
+    },
+    {
+      "passcode": 84327329,
+      "name": "Elemental HERO Clayman",
+      "numbers": [
+        "YSD-EN009"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "YSD-EN031"
+      ]
+    },
+    {
+      "passcode": 90928333,
+      "name": "Dark Factory of Mass Production",
+      "numbers": [
+        "YSD-EN029"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "YSD-EN038"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "YSD-EN028"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck 2006'; printings from the YGOPRODeck bulk dump."
+}

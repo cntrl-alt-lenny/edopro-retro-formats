@@ -1,0 +1,194 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "turbo-pack-booster-three",
+  "code": "TU03",
+  "name": "Turbo Pack: Booster Three",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-07-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-07-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-07-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 612115,
+      "name": "Gladiator Beast Retiari",
+      "numbers": [
+        "TU03-EN006"
+      ]
+    },
+    {
+      "passcode": 674561,
+      "name": "Dark Eruption",
+      "numbers": [
+        "TU03-EN010"
+      ]
+    },
+    {
+      "passcode": 8323633,
+      "name": "Cloak and Dagger",
+      "numbers": [
+        "TU03-EN018"
+      ]
+    },
+    {
+      "passcode": 9748752,
+      "name": "Caius the Shadow Monarch",
+      "numbers": [
+        "TU03-EN000"
+      ]
+    },
+    {
+      "passcode": 11052544,
+      "name": "Saber Slash",
+      "numbers": [
+        "TU03-EN011"
+      ]
+    },
+    {
+      "passcode": 12435193,
+      "name": "Koa'ki Meiru Drago",
+      "numbers": [
+        "TU03-EN015"
+      ]
+    },
+    {
+      "passcode": 13093792,
+      "name": "Destiny HERO - Diamond Dude",
+      "numbers": [
+        "TU03-EN012"
+      ]
+    },
+    {
+      "passcode": 14536035,
+      "name": "Dark Grepher",
+      "numbers": [
+        "TU03-EN001"
+      ]
+    },
+    {
+      "passcode": 14878871,
+      "name": "Rescue Cat",
+      "numbers": [
+        "TU03-EN002"
+      ]
+    },
+    {
+      "passcode": 24508238,
+      "name": "D.D. Crow",
+      "numbers": [
+        "TU03-EN013"
+      ]
+    },
+    {
+      "passcode": 43385557,
+      "name": "Magical Android",
+      "numbers": [
+        "TU03-EN009"
+      ]
+    },
+    {
+      "passcode": 51808422,
+      "name": "XX-Saber Faultroll",
+      "numbers": [
+        "TU03-EN007"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "TU03-EN017"
+      ]
+    },
+    {
+      "passcode": 74845897,
+      "name": "Rekindling",
+      "numbers": [
+        "TU03-EN004"
+      ]
+    },
+    {
+      "passcode": 87292536,
+      "name": "XX-Saber Ragigura",
+      "numbers": [
+        "TU03-EN008"
+      ]
+    },
+    {
+      "passcode": 88240808,
+      "name": "Kycoo the Ghost Destroyer",
+      "numbers": [
+        "TU03-EN016"
+      ]
+    },
+    {
+      "passcode": 88307361,
+      "name": "Superancient Deepsea King Coelacanth",
+      "numbers": [
+        "TU03-EN014"
+      ]
+    },
+    {
+      "passcode": 91078716,
+      "name": "Pollinosis",
+      "numbers": [
+        "TU03-EN020"
+      ]
+    },
+    {
+      "passcode": 93542102,
+      "name": "Morphtronic Celfon",
+      "numbers": [
+        "TU03-EN003"
+      ]
+    },
+    {
+      "passcode": 96216229,
+      "name": "Gladiator Beast War Chariot",
+      "numbers": [
+        "TU03-EN019"
+      ]
+    },
+    {
+      "passcode": 99590524,
+      "name": "Treacherous Trap Hole",
+      "numbers": [
+        "TU03-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Turbo Pack: Booster Three'; printings from the YGOPRODeck bulk dump."
+}

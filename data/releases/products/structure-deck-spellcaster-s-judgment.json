@@ -1,0 +1,279 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-spellcaster-s-judgment",
+  "code": "SD6",
+  "name": "Structure Deck: Spellcaster's Judgment",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-01-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2314238,
+      "name": "Dark Magic Attack",
+      "numbers": [
+        "SD6-EN026"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD6-EN018"
+      ]
+    },
+    {
+      "passcode": 6337436,
+      "name": "Rapid-Fire Magician",
+      "numbers": [
+        "SD6-EN016"
+      ]
+    },
+    {
+      "passcode": 9156135,
+      "name": "Apprentice Magician",
+      "numbers": [
+        "SD6-EN007"
+      ]
+    },
+    {
+      "passcode": 9596126,
+      "name": "Chaos Sorcerer",
+      "numbers": [
+        "SD6-EN012"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD6-EN023"
+      ]
+    },
+    {
+      "passcode": 21051146,
+      "name": "Blast Magician",
+      "numbers": [
+        "SD6-EN014"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD6-EN025"
+      ]
+    },
+    {
+      "passcode": 25774450,
+      "name": "Mystic Box",
+      "numbers": [
+        "SD6-EN030"
+      ]
+    },
+    {
+      "passcode": 28553439,
+      "name": "Magical Dimension",
+      "numbers": [
+        "SD6-EN029"
+      ]
+    },
+    {
+      "passcode": 29436665,
+      "name": "Dark Eradicator Warlock",
+      "numbers": [
+        "SD6-EN001"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "SD6-EN005"
+      ]
+    },
+    {
+      "passcode": 34029630,
+      "name": "Pitch-Black Power Stone",
+      "numbers": [
+        "SD6-EN034"
+      ]
+    },
+    {
+      "passcode": 34853266,
+      "name": "Tsukuyomi",
+      "numbers": [
+        "SD6-EN011"
+      ]
+    },
+    {
+      "passcode": 38275183,
+      "name": "Spell Shield Type-8",
+      "numbers": [
+        "SD6-EN033"
+      ]
+    },
+    {
+      "passcode": 46128076,
+      "name": "Ebon Magician Curran",
+      "numbers": [
+        "SD6-EN015"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "SD6-EN003"
+      ]
+    },
+    {
+      "passcode": 49010598,
+      "name": "Divine Wrath",
+      "numbers": [
+        "SD6-EN035"
+      ]
+    },
+    {
+      "passcode": 51481927,
+      "name": "Spell Absorption",
+      "numbers": [
+        "SD6-EN027"
+      ]
+    },
+    {
+      "passcode": 55424270,
+      "name": "Mythical Beast Cerberus",
+      "numbers": [
+        "SD6-EN002"
+      ]
+    },
+    {
+      "passcode": 58775978,
+      "name": "Nightmare's Steelcage",
+      "numbers": [
+        "SD6-EN031"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "SD6-EN036"
+      ]
+    },
+    {
+      "passcode": 69140098,
+      "name": "Gemini Elf",
+      "numbers": [
+        "SD6-EN004"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SD6-EN028"
+      ]
+    },
+    {
+      "passcode": 70791313,
+      "name": "Royal Magical Library",
+      "numbers": [
+        "SD6-EN010"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SD6-EN020"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SD6-EN019"
+      ]
+    },
+    {
+      "passcode": 71413901,
+      "name": "Breaker the Magical Warrior",
+      "numbers": [
+        "SD6-EN009"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "SD6-EN021"
+      ]
+    },
+    {
+      "passcode": 72630549,
+      "name": "Chaos Command Magician",
+      "numbers": [
+        "SD6-EN008"
+      ]
+    },
+    {
+      "passcode": 73752131,
+      "name": "Skilled Dark Magician",
+      "numbers": [
+        "SD6-EN006"
+      ]
+    },
+    {
+      "passcode": 81383947,
+      "name": "White Magician Pikeru",
+      "numbers": [
+        "SD6-EN013"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "SD6-EN022"
+      ]
+    },
+    {
+      "passcode": 87880531,
+      "name": "Diffusion Wave-Motion",
+      "numbers": [
+        "SD6-EN024"
+      ]
+    },
+    {
+      "passcode": 91819979,
+      "name": "Magical Blast",
+      "numbers": [
+        "SD6-EN017"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD6-EN032"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Structure Deck: Spellcaster's Judgment\"; printings from the YGOPRODeck bulk dump."
+}

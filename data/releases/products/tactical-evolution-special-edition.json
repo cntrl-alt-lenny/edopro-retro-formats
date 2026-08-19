@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tactical-evolution-special-edition",
+  "code": "TAEV",
+  "name": "Tactical Evolution: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-09-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2007-09-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 22610082,
+      "name": "The Mask of Remnants",
+      "numbers": [
+        "TAEV-ENSE2"
+      ]
+    },
+    {
+      "passcode": 48948935,
+      "name": "Masked Beast Des Gardius",
+      "numbers": [
+        "TAEV-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tactical Evolution: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-elemental-hero-collection-2",
+  "code": "EHC2",
+  "name": "Yu-Gi-Oh! Elemental Hero Collection 2",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-11-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 20721928,
+      "name": "Elemental HERO Sparkman",
+      "numbers": [
+        "EHC2-EN001"
+      ]
+    },
+    {
+      "passcode": 61204971,
+      "name": "Elemental HERO Thunder Giant",
+      "numbers": [
+        "EHC2-EN004"
+      ]
+    },
+    {
+      "passcode": 84327329,
+      "name": "Elemental HERO Clayman",
+      "numbers": [
+        "EHC2-EN002"
+      ]
+    },
+    {
+      "passcode": 86188410,
+      "name": "Elemental HERO Wildheart",
+      "numbers": [
+        "EHC2-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Elemental Hero Collection 2'; printings from the YGOPRODeck bulk dump."
+}

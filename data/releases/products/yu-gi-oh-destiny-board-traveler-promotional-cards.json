@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-destiny-board-traveler-promotional-cards",
+  "code": "DBT",
+  "name": "Yu-Gi-Oh! Destiny Board Traveler promotional cards",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-10-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2005-09-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 43580269,
+      "name": "Emes the Infinity",
+      "numbers": [
+        "DBT-EN001"
+      ]
+    },
+    {
+      "passcode": 70074904,
+      "name": "D.D. Assailant",
+      "numbers": [
+        "DBT-EN002"
+      ]
+    },
+    {
+      "passcode": 82035781,
+      "name": "Twinheaded Beast",
+      "numbers": [
+        "DBT-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Destiny Board Traveler promotional cards'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "anniversary-pack",
+  "code": "YAP1",
+  "name": "Anniversary Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-12-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27416701,
+      "name": "Shiba-Warrior Taro",
+      "numbers": [
+        "YAP1-EN008"
+      ]
+    },
+    {
+      "passcode": 31122090,
+      "name": "Gyakutenno Megami",
+      "numbers": [
+        "YAP1-EN005"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "YAP1-EN003"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "YAP1-EN002"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "YAP1-EN007"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "YAP1-EN006"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "YAP1-EN001"
+      ]
+    },
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian",
+      "numbers": [
+        "YAP1-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Anniversary Pack'; printings from the YGOPRODeck bulk dump."
+}

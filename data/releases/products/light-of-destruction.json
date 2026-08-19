@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "light-of-destruction",
+  "code": "LODT",
+  "name": "Light of Destruction",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-05-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27551,
+      "name": "Limit Reverse",
+      "numbers": [
+        "LODT-EN063"
+      ]
+    },
+    {
+      "passcode": 131182,
+      "name": "Miracle Flipper",
+      "numbers": [
+        "LODT-EN003"
+      ]
+    },
+    {
+      "passcode": 313513,
+      "name": "Spell Gear",
+      "numbers": [
+        "LODT-EN049"
+      ]
+    },
+    {
+      "passcode": 691925,
+      "name": "Solar Recharge",
+      "numbers": [
+        "LODT-EN052"
+      ]
+    },
+    {
+      "passcode": 1149109,
+      "name": "Deck Lockdown",
+      "numbers": [
+        "LODT-EN060"
+      ]
+    },
+    {
+      "passcode": 1539051,
+      "name": "Space Gift",
+      "numbers": [
+        "LODT-EN046"
+      ]
+    },
+    {
+      "passcode": 2084239,
+      "name": "Wetlands",
+      "numbers": [
+        "LODT-EN054"
+      ]
+    },
+    {
+      "passcode": 2362787,
+      "name": "Light of Redemption",
+      "numbers": [
+        "LODT-EN057"
+      ]
+    },
+    {
+      "passcode": 6061630,
+      "name": "Magical Exemplar",
+      "numbers": [
+        "LODT-EN084"
+      ]
+    },
+    {
+      "passcode": 6614221,
+      "name": "Fog King",
+      "numbers": [
+        "LODT-EN098"
+      ]
+    },
+    {
+      "passcode": 6849042,
+      "name": "Super-Ancient Dinobeast",
+      "numbers": [
+        "LODT-EN088"
+      ]
+    },
+    {
+      "passcode": 7183277,
+      "name": "Aurkus, Lightsworn Druid",
+      "numbers": [
+        "LODT-EN081"
+      ]
+    },
+    {
+      "passcode": 8396952,
+      "name": "Arcana Force I - The Magician",
+      "numbers": [
+        "LODT-EN009"
+      ]
+    },
+    {
+      "passcode": 9201964,
+      "name": "D - Fortune",
+      "numbers": [
+        "LODT-EN066"
+      ]
+    },
+    {
+      "passcode": 9418534,
+      "name": "Jinzo - Returner",
+      "numbers": [
+        "LODT-EN006"
+      ]
+    },
+    {
+      "passcode": 9720537,
+      "name": "Owner's Seal",
+      "numbers": [
+        "LODT-EN094"
+      ]
+    },
+    {
+      "passcode": 12652643,
+      "name": "Ultimate Ancient Gear Golem",
+      "numbers": [
+        "LODT-EN043"
+      ]
+    },
+    {
+      "passcode": 13474291,
+      "name": "Cloudian - Storm Dragon",
+      "numbers": [
+        "LODT-EN040"
+      ]
+    },
+    {
+      "passcode": 14506878,
+      "name": "DUCKER Mobile Cannon",
+      "numbers": [
+        "LODT-EN037"
+      ]
+    },
+    {
+      "passcode": 14729426,
+      "name": "Interplanetary Invader \"A\"",
+      "numbers": [
+        "LODT-EN034"
+      ]
+    },
+    {
+      "passcode": 17286057,
+      "name": "Helios Trice Megistus",
+      "numbers": [
+        "LODT-EN095"
+      ]
+    },
+    {
+      "passcode": 19441018,
+      "name": "Batteryman Industrial Strength",
+      "numbers": [
+        "LODT-EN031"
+      ]
+    },
+    {
+      "passcode": 20663556,
+      "name": "Substitoad",
+      "numbers": [
+        "LODT-EN028"
+      ]
+    },
+    {
+      "passcode": 21502796,
+      "name": "Ryko, Lightsworn Hunter",
+      "numbers": [
+        "LODT-EN022"
+      ]
+    },
+    {
+      "passcode": 21785144,
+      "name": "Gragonith, Lightsworn Dragon",
+      "numbers": [
+        "LODT-EN025"
+      ]
+    },
+    {
+      "passcode": 22624373,
+      "name": "Lyla, Lightsworn Sorceress",
+      "numbers": [
+        "LODT-EN019"
+      ]
+    },
+    {
+      "passcode": 23516703,
+      "name": "Summon Limit",
+      "numbers": [
+        "LODT-EN079"
+      ]
+    },
+    {
+      "passcode": 23639291,
+      "name": "Raging Cloudian",
+      "numbers": [
+        "LODT-EN076"
+      ]
+    },
+    {
+      "passcode": 23846921,
+      "name": "Arcana Force XXI - The World",
+      "numbers": [
+        "LODT-EN016"
+      ]
+    },
+    {
+      "passcode": 27769400,
+      "name": "Tualatin",
+      "numbers": [
+        "LODT-EN090"
+      ]
+    },
+    {
+      "passcode": 30707994,
+      "name": "Maximum Six",
+      "numbers": [
+        "LODT-EN097"
+      ]
+    },
+    {
+      "passcode": 32233746,
+      "name": "Vanquishing Light",
+      "numbers": [
+        "LODT-EN089"
+      ]
+    },
+    {
+      "passcode": 33455338,
+      "name": "Maniacal Servant",
+      "numbers": [
+        "LODT-EN085"
+      ]
+    },
+    {
+      "passcode": 34351849,
+      "name": "Froggy Forcefield",
+      "numbers": [
+        "LODT-EN073"
+      ]
+    },
+    {
+      "passcode": 34568403,
+      "name": "Arcana Force VII - The Chariot",
+      "numbers": [
+        "LODT-EN013"
+      ]
+    },
+    {
+      "passcode": 35577420,
+      "name": "Light Spiral",
+      "numbers": [
+        "LODT-EN070"
+      ]
+    },
+    {
+      "passcode": 35781051,
+      "name": "Arcana Force III - The Empress",
+      "numbers": [
+        "LODT-EN010"
+      ]
+    },
+    {
+      "passcode": 35803249,
+      "name": "Jinzo - Lord",
+      "numbers": [
+        "LODT-EN007"
+      ]
+    },
+    {
+      "passcode": 36099620,
+      "name": "Realm of Light",
+      "numbers": [
+        "LODT-EN053"
+      ]
+    },
+    {
+      "passcode": 36625827,
+      "name": "Destiny HERO - Dread Servant",
+      "numbers": [
+        "LODT-EN004"
+      ]
+    },
+    {
+      "passcode": 36690018,
+      "name": "Reversal of Fate",
+      "numbers": [
+        "LODT-EN067"
+      ]
+    },
+    {
+      "passcode": 37412656,
+      "name": "Hero Blast",
+      "numbers": [
+        "LODT-EN064"
+      ]
+    },
+    {
+      "passcode": 37534148,
+      "name": "Ribbon of Rebirth",
+      "numbers": [
+        "LODT-EN061"
+      ]
+    },
+    {
+      "passcode": 37742478,
+      "name": "Honest",
+      "numbers": [
+        "LODT-EN001"
+      ]
+    },
+    {
+      "passcode": 37812118,
+      "name": "Cup of Ace",
+      "numbers": [
+        "LODT-EN050"
+      ]
+    },
+    {
+      "passcode": 40991587,
+      "name": "The Lady in Wight",
+      "numbers": [
+        "LODT-EN038"
+      ]
+    },
+    {
+      "passcode": 41113025,
+      "name": "Diskblade Rider",
+      "numbers": [
+        "LODT-EN035"
+      ]
+    },
+    {
+      "passcode": 42009836,
+      "name": "Fossil Dyna Pachycephalo",
+      "numbers": [
+        "LODT-EN099"
+      ]
+    },
+    {
+      "passcode": 44178886,
+      "name": "Ehren, Lightsworn Monk",
+      "numbers": [
+        "LODT-EN082"
+      ]
+    },
+    {
+      "passcode": 48156348,
+      "name": "Gladiator Beast Gyzarus",
+      "numbers": [
+        "LODT-EN044"
+      ]
+    },
+    {
+      "passcode": 48356796,
+      "name": "Mystical Cards of Light",
+      "numbers": [
+        "LODT-EN058"
+      ]
+    },
+    {
+      "passcode": 48934760,
+      "name": "Demise of the Land",
+      "numbers": [
+        "LODT-EN047"
+      ]
+    },
+    {
+      "passcode": 49479374,
+      "name": "Quick Charger",
+      "numbers": [
+        "LODT-EN055"
+      ]
+    },
+    {
+      "passcode": 49879995,
+      "name": "Phantom Dragon",
+      "numbers": [
+        "LODT-EN041"
+      ]
+    },
+    {
+      "passcode": 56052205,
+      "name": "Unifrog",
+      "numbers": [
+        "LODT-EN029"
+      ]
+    },
+    {
+      "passcode": 56784842,
+      "name": "Angel O7",
+      "numbers": [
+        "LODT-EN092"
+      ]
+    },
+    {
+      "passcode": 56839613,
+      "name": "Batteryman Micro-Cell",
+      "numbers": [
+        "LODT-EN032"
+      ]
+    },
+    {
+      "passcode": 57774843,
+      "name": "Judgment Dragon",
+      "numbers": [
+        "LODT-EN026"
+      ]
+    },
+    {
+      "passcode": 57844634,
+      "name": "Nimble Musasabi",
+      "numbers": [
+        "LODT-EN086"
+      ]
+    },
+    {
+      "passcode": 57902462,
+      "name": "Divine Knight Ishzark",
+      "numbers": [
+        "LODT-EN091"
+      ]
+    },
+    {
+      "passcode": 58996430,
+      "name": "Wulf, Lightsworn Beast",
+      "numbers": [
+        "LODT-EN023"
+      ]
+    },
+    {
+      "passcode": 59019082,
+      "name": "Garoth, Lightsworn Warrior",
+      "numbers": [
+        "LODT-EN020"
+      ]
+    },
+    {
+      "passcode": 59905358,
+      "name": "Dice Try!",
+      "numbers": [
+        "LODT-EN080"
+      ]
+    },
+    {
+      "passcode": 60399954,
+      "name": "Union Attack",
+      "numbers": [
+        "LODT-EN093"
+      ]
+    },
+    {
+      "passcode": 60627999,
+      "name": "Sanguine Swamp",
+      "numbers": [
+        "LODT-EN077"
+      ]
+    },
+    {
+      "passcode": 60953118,
+      "name": "Arcana Force XIV - Temperance",
+      "numbers": [
+        "LODT-EN014"
+      ]
+    },
+    {
+      "passcode": 61175706,
+      "name": "Arcana Force IV - The Emperor",
+      "numbers": [
+        "LODT-EN011"
+      ]
+    },
+    {
+      "passcode": 61840587,
+      "name": "Portable Battery Pack",
+      "numbers": [
+        "LODT-EN074"
+      ]
+    },
+    {
+      "passcode": 61962135,
+      "name": "Glorious Illusion",
+      "numbers": [
+        "LODT-EN071"
+      ]
+    },
+    {
+      "passcode": 62784717,
+      "name": "Tour of Doom",
+      "numbers": [
+        "LODT-EN068"
+      ]
+    },
+    {
+      "passcode": 62892347,
+      "name": "Arcana Force 0 - The Fool",
+      "numbers": [
+        "LODT-EN008"
+      ]
+    },
+    {
+      "passcode": 63014935,
+      "name": "Volcanic Queen",
+      "numbers": [
+        "LODT-EN005"
+      ]
+    },
+    {
+      "passcode": 63806265,
+      "name": "Rainbow Gravity",
+      "numbers": [
+        "LODT-EN065"
+      ]
+    },
+    {
+      "passcode": 69831560,
+      "name": "Arcana Force EX - The Dark Ruler",
+      "numbers": [
+        "LODT-EN017"
+      ]
+    },
+    {
+      "passcode": 70676581,
+      "name": "Dark General Freed",
+      "numbers": [
+        "LODT-EN083"
+      ]
+    },
+    {
+      "passcode": 71799173,
+      "name": "Guardian of Order",
+      "numbers": [
+        "LODT-EN000"
+      ]
+    },
+    {
+      "passcode": 73146473,
+      "name": "Cross Porter",
+      "numbers": [
+        "LODT-EN002"
+      ]
+    },
+    {
+      "passcode": 73206827,
+      "name": "Light Barrier",
+      "numbers": [
+        "LODT-EN051"
+      ]
+    },
+    {
+      "passcode": 74029853,
+      "name": "Golden Bamboo Sword",
+      "numbers": [
+        "LODT-EN062"
+      ]
+    },
+    {
+      "passcode": 74329404,
+      "name": "D - Formation",
+      "numbers": [
+        "LODT-EN048"
+      ]
+    },
+    {
+      "passcode": 74741494,
+      "name": "Level Tuning",
+      "numbers": [
+        "LODT-EN059"
+      ]
+    },
+    {
+      "passcode": 75141056,
+      "name": "Hero Mask",
+      "numbers": [
+        "LODT-EN045"
+      ]
+    },
+    {
+      "passcode": 75967082,
+      "name": "Short Circuit",
+      "numbers": [
+        "LODT-EN056"
+      ]
+    },
+    {
+      "passcode": 76263644,
+      "name": "Destiny End Dragoon",
+      "numbers": [
+        "LODT-EN042"
+      ]
+    },
+    {
+      "passcode": 76895648,
+      "name": "Dangerous Machine Type-6",
+      "numbers": [
+        "LODT-EN096"
+      ]
+    },
+    {
+      "passcode": 79444933,
+      "name": "Flame Spirit Ignis",
+      "numbers": [
+        "LODT-EN087"
+      ]
+    },
+    {
+      "passcode": 82324312,
+      "name": "Goblin Recon Squad",
+      "numbers": [
+        "LODT-EN033"
+      ]
+    },
+    {
+      "passcode": 83269557,
+      "name": "Dark Valkyria",
+      "numbers": [
+        "LODT-EN027"
+      ]
+    },
+    {
+      "passcode": 83446909,
+      "name": "Batteryman Charger",
+      "numbers": [
+        "LODT-EN030"
+      ]
+    },
+    {
+      "passcode": 86489182,
+      "name": "Simorgh, Bird of Ancestry",
+      "numbers": [
+        "LODT-EN039"
+      ]
+    },
+    {
+      "passcode": 87102774,
+      "name": "Golden Ladybug",
+      "numbers": [
+        "LODT-EN036"
+      ]
+    },
+    {
+      "passcode": 94381039,
+      "name": "Celestia, Lightsworn Angel",
+      "numbers": [
+        "LODT-EN024"
+      ]
+    },
+    {
+      "passcode": 95503687,
+      "name": "Lumina, Lightsworn Summoner",
+      "numbers": [
+        "LODT-EN021"
+      ]
+    },
+    {
+      "passcode": 96012004,
+      "name": "Lucky Chance",
+      "numbers": [
+        "LODT-EN078"
+      ]
+    },
+    {
+      "passcode": 96235275,
+      "name": "Jain, Lightsworn Paladin",
+      "numbers": [
+        "LODT-EN018"
+      ]
+    },
+    {
+      "passcode": 97234686,
+      "name": "Gladiator Lash",
+      "numbers": [
+        "LODT-EN075"
+      ]
+    },
+    {
+      "passcode": 97452817,
+      "name": "Arcana Force XVIII - The Moon",
+      "numbers": [
+        "LODT-EN015"
+      ]
+    },
+    {
+      "passcode": 97574404,
+      "name": "Arcana Force VI - The Lovers",
+      "numbers": [
+        "LODT-EN012"
+      ]
+    },
+    {
+      "passcode": 98956134,
+      "name": "Destruction Jammer",
+      "numbers": [
+        "LODT-EN072"
+      ]
+    },
+    {
+      "passcode": 99189322,
+      "name": "Arcana Call",
+      "numbers": [
+        "LODT-EN069"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Light of Destruction'; printings from the YGOPRODeck bulk dump."
+}

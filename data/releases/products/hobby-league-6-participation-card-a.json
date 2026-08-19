@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-6-participation-card-a",
+  "code": "HL06",
+  "name": "Hobby League 6 participation card A",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-01-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "HL06-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 6 participation card A'; printings from the YGOPRODeck bulk dump."
+}

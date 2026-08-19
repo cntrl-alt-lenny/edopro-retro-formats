@@ -1,0 +1,132 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2010-wave-1",
+  "code": "CT07",
+  "name": "Collectible Tins 2010 Wave 1",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-08-31",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 9012916,
+      "name": "Black-Winged Dragon",
+      "numbers": [
+        "CT07-EN002"
+      ]
+    },
+    {
+      "passcode": 14017402,
+      "name": "Dragon Knight Draco-Equiste",
+      "numbers": [
+        "CT07-EN003"
+      ]
+    },
+    {
+      "passcode": 19665973,
+      "name": "Battle Fader",
+      "numbers": [
+        "CT07-EN009"
+      ]
+    },
+    {
+      "passcode": 24857466,
+      "name": "Van'Dalgyon the Dark Dragon Lord",
+      "numbers": [
+        "CT07-EN007"
+      ]
+    },
+    {
+      "passcode": 38109772,
+      "name": "Dragonic Knight",
+      "numbers": [
+        "CT07-EN017"
+      ]
+    },
+    {
+      "passcode": 39439590,
+      "name": "Cyber Dinosaur",
+      "numbers": [
+        "CT07-EN008"
+      ]
+    },
+    {
+      "passcode": 40044918,
+      "name": "Elemental HERO Stratos",
+      "numbers": [
+        "CT07-EN006"
+      ]
+    },
+    {
+      "passcode": 46668237,
+      "name": "Green Baboon, Defender of the Forest",
+      "numbers": [
+        "CT07-EN010"
+      ]
+    },
+    {
+      "passcode": 50287060,
+      "name": "Archfiend of Gilfer",
+      "numbers": [
+        "CT07-EN014"
+      ]
+    },
+    {
+      "passcode": 57793869,
+      "name": "The Wicked Eraser",
+      "numbers": [
+        "CT07-EN011"
+      ]
+    },
+    {
+      "passcode": 62180201,
+      "name": "The Wicked Dreadroot",
+      "numbers": [
+        "CT07-EN015"
+      ]
+    },
+    {
+      "passcode": 65192027,
+      "name": "Dark Armed Dragon",
+      "numbers": [
+        "CT07-EN016"
+      ]
+    },
+    {
+      "passcode": 67030233,
+      "name": "Majestic Red Dragon",
+      "numbers": [
+        "CT07-EN001"
+      ]
+    },
+    {
+      "passcode": 72714392,
+      "name": "Blackwing - Vayu the Emblem of Honor",
+      "numbers": [
+        "CT07-EN012"
+      ]
+    },
+    {
+      "passcode": 79229522,
+      "name": "Chimeratech Fortress Dragon",
+      "numbers": [
+        "CT07-EN013"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2010 Wave 1'; printings from the YGOPRODeck bulk dump."
+}

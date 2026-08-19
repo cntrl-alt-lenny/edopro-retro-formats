@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-series-2-participation-cards",
+  "code": "DL2",
+  "name": "Duelist League Series 2 participation cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-07-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 31829185,
+      "name": "Dark Necrofear",
+      "numbers": [
+        "DL2-002",
+        "DL2-EN002"
+      ]
+    },
+    {
+      "passcode": 49064413,
+      "name": "The Masked Beast",
+      "numbers": [
+        "DL2-001",
+        "DL2-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Series 2 participation cards'; printings from the YGOPRODeck bulk dump."
+}

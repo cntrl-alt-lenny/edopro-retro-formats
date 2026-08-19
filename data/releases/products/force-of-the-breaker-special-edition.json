@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "force-of-the-breaker-special-edition",
+  "code": "FOTB",
+  "name": "Force of the Breaker: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-06-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 18430390,
+      "name": "Winged Rhynos",
+      "numbers": [
+        "FOTB-ENSE2"
+      ]
+    },
+    {
+      "passcode": 70969517,
+      "name": "Phantom Beast Rock-Lizard",
+      "numbers": [
+        "FOTB-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Force of the Breaker: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

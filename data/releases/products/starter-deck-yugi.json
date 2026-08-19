@@ -1,0 +1,442 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-yugi",
+  "code": "SDY",
+  "name": "Starter Deck: Yugi",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-03-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2002-12-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2003-09-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4031928,
+      "name": "Change of Heart",
+      "numbers": [
+        "SDY-032",
+        "SDY-E030"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "SDY-027",
+        "SDY-E025"
+      ]
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight",
+      "numbers": [
+        "SDY-007",
+        "SDY-E006"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "SDY-040",
+        "SDY-E036"
+      ]
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone",
+      "numbers": [
+        "SDY-013",
+        "SDY-E011"
+      ]
+    },
+    {
+      "passcode": 13429800,
+      "name": "Great White",
+      "numbers": [
+        "SDY-011",
+        "SDY-E009"
+      ]
+    },
+    {
+      "passcode": 13723605,
+      "name": "Man-Eating Treasure Chest",
+      "numbers": [
+        "SDY-037"
+      ]
+    },
+    {
+      "passcode": 13945283,
+      "name": "Wall of Illusion",
+      "numbers": [
+        "SDY-034",
+        "SDY-E032"
+      ]
+    },
+    {
+      "passcode": 15025844,
+      "name": "Mystical Elf",
+      "numbers": [
+        "SDY-001",
+        "SDY-E001"
+      ]
+    },
+    {
+      "passcode": 16972957,
+      "name": "Doma The Angel of Silence",
+      "numbers": [
+        "SDY-015",
+        "SDY-E013"
+      ]
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements",
+      "numbers": [
+        "SDY-031",
+        "SDY-E029"
+      ]
+    },
+    {
+      "passcode": 19159413,
+      "name": "De-Spell",
+      "numbers": [
+        "SDY-029",
+        "SDY-E027"
+      ]
+    },
+    {
+      "passcode": 28279543,
+      "name": "Curse of Dragon",
+      "numbers": [
+        "SDY-008",
+        "SDY-E007"
+      ]
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior",
+      "numbers": [
+        "SDY-005"
+      ]
+    },
+    {
+      "passcode": 36304921,
+      "name": "Witty Phantom",
+      "numbers": [
+        "SDY-017",
+        "SDY-E015"
+      ]
+    },
+    {
+      "passcode": 37120512,
+      "name": "Sword of Dark Destruction",
+      "numbers": [
+        "SDY-020",
+        "SDY-E018"
+      ]
+    },
+    {
+      "passcode": 40374923,
+      "name": "Mammoth Graveyard",
+      "numbers": [
+        "SDY-010"
+      ]
+    },
+    {
+      "passcode": 41218256,
+      "name": "Claw Reacher",
+      "numbers": [
+        "SDY-018",
+        "SDY-E016"
+      ]
+    },
+    {
+      "passcode": 41392891,
+      "name": "Feral Imp",
+      "numbers": [
+        "SDY-002",
+        "SDY-E002"
+      ]
+    },
+    {
+      "passcode": 44209392,
+      "name": "Castle Walls",
+      "numbers": [
+        "SDY-049",
+        "SDY-E045"
+      ]
+    },
+    {
+      "passcode": 46461247,
+      "name": "Trap Master",
+      "numbers": [
+        "SDY-043",
+        "SDY-E039"
+      ]
+    },
+    {
+      "passcode": 46474915,
+      "name": "Magical Ghost",
+      "numbers": [
+        "SDY-025",
+        "SDY-E023"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "SDY-006",
+        "SDY-E005"
+      ]
+    },
+    {
+      "passcode": 47060154,
+      "name": "Mystic Clown",
+      "numbers": [
+        "SDY-019",
+        "SDY-E017"
+      ]
+    },
+    {
+      "passcode": 48365709,
+      "name": "Ansatsu",
+      "numbers": [
+        "SDY-016",
+        "SDY-E014"
+      ]
+    },
+    {
+      "passcode": 49218300,
+      "name": "Sorcerer of the Doomed",
+      "numbers": [
+        "SDY-038",
+        "SDY-E034"
+      ]
+    },
+    {
+      "passcode": 50045299,
+      "name": "Dragon Capture Jar",
+      "numbers": [
+        "SDY-044",
+        "SDY-E040"
+      ]
+    },
+    {
+      "passcode": 50930991,
+      "name": "Neo the Magic Swordsman",
+      "numbers": [
+        "SDY-035"
+      ]
+    },
+    {
+      "passcode": 51482758,
+      "name": "Remove Trap",
+      "numbers": [
+        "SDY-048",
+        "SDY-E044"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "SDY-022",
+        "SDY-E020"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "SDY-046",
+        "SDY-E042"
+      ]
+    },
+    {
+      "passcode": 59197169,
+      "name": "Yami",
+      "numbers": [
+        "SDY-045",
+        "SDY-E041"
+      ]
+    },
+    {
+      "passcode": 66672569,
+      "name": "Dragon Zombie",
+      "numbers": [
+        "SDY-014",
+        "SDY-E012"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "SDY-026",
+        "SDY-E024"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "SDY-041",
+        "SDY-E037"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "SDY-E004"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "SDY-042",
+        "SDY-E038"
+      ]
+    },
+    {
+      "passcode": 77622396,
+      "name": "Reverse Trap",
+      "numbers": [
+        "SDY-047",
+        "SDY-E043"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "SDY-050",
+        "SDY-E046"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "SDY-030",
+        "SDY-E028"
+      ]
+    },
+    {
+      "passcode": 83887306,
+      "name": "Two-Pronged Attack",
+      "numbers": [
+        "SDY-028",
+        "SDY-E026"
+      ]
+    },
+    {
+      "passcode": 84257639,
+      "name": "Dian Keto the Cure Master",
+      "numbers": [
+        "SDY-023",
+        "SDY-E021"
+      ]
+    },
+    {
+      "passcode": 85602018,
+      "name": "Last Will",
+      "numbers": [
+        "SDY-039",
+        "SDY-E035"
+      ]
+    },
+    {
+      "passcode": 86325596,
+      "name": "Baron of the Fiend Sword",
+      "numbers": [
+        "SDY-036",
+        "SDY-E033"
+      ]
+    },
+    {
+      "passcode": 87557188,
+      "name": "The Stern Mystic",
+      "numbers": [
+        "SDY-033",
+        "SDY-E031"
+      ]
+    },
+    {
+      "passcode": 87796900,
+      "name": "Winged Dragon, Guardian of the Fortress #1",
+      "numbers": [
+        "SDY-003",
+        "SDY-E003"
+      ]
+    },
+    {
+      "passcode": 90357090,
+      "name": "Silver Fang",
+      "numbers": [
+        "SDY-012",
+        "SDY-E010"
+      ]
+    },
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian",
+      "numbers": [
+        "SDY-009",
+        "SDY-E008"
+      ]
+    },
+    {
+      "passcode": 91595718,
+      "name": "Book of Secret Arts",
+      "numbers": [
+        "SDY-021",
+        "SDY-E019"
+      ]
+    },
+    {
+      "passcode": 93221206,
+      "name": "Ancient Elf",
+      "numbers": [
+        "SDY-024",
+        "SDY-E022"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Yugi'; printings from the YGOPRODeck bulk dump."
+}

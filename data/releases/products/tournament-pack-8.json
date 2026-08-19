@@ -1,0 +1,189 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-8",
+  "code": "TP8",
+  "name": "Tournament Pack 8",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-04-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2006-04-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2006-04-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 732302,
+      "name": "Temple of Skulls",
+      "numbers": [
+        "TP8-EN016"
+      ]
+    },
+    {
+      "passcode": 4929256,
+      "name": "Mobius the Frost Monarch",
+      "numbers": [
+        "TP8-EN008"
+      ]
+    },
+    {
+      "passcode": 12493482,
+      "name": "Dunames Dark Witch",
+      "numbers": [
+        "TP8-EN004"
+      ]
+    },
+    {
+      "passcode": 15507080,
+      "name": "Sectarian of Secrets",
+      "numbers": [
+        "TP8-EN019"
+      ]
+    },
+    {
+      "passcode": 17238333,
+      "name": "Wretched Ghost of the Attic",
+      "numbers": [
+        "TP8-EN018"
+      ]
+    },
+    {
+      "passcode": 18144506,
+      "name": "Harpie's Feather Duster",
+      "numbers": [
+        "TP8-EN002"
+      ]
+    },
+    {
+      "passcode": 19737320,
+      "name": "Gatekeeper",
+      "numbers": [
+        "TP8-EN013"
+      ]
+    },
+    {
+      "passcode": 26205777,
+      "name": "Thestalos the Firestorm Monarch",
+      "numbers": [
+        "TP8-EN009"
+      ]
+    },
+    {
+      "passcode": 34743446,
+      "name": "Blocker",
+      "numbers": [
+        "TP8-EN017"
+      ]
+    },
+    {
+      "passcode": 39168895,
+      "name": "Berserk Gorilla",
+      "numbers": [
+        "TP8-EN011"
+      ]
+    },
+    {
+      "passcode": 51945556,
+      "name": "Zaborg the Thunder Monarch",
+      "numbers": [
+        "TP8-EN006"
+      ]
+    },
+    {
+      "passcode": 60229110,
+      "name": "Granmarg the Rock Monarch",
+      "numbers": [
+        "TP8-EN007"
+      ]
+    },
+    {
+      "passcode": 61454890,
+      "name": "Necrolancer the Time-lord",
+      "numbers": [
+        "TP8-EN020"
+      ]
+    },
+    {
+      "passcode": 78577570,
+      "name": "Garma Sword Oath",
+      "numbers": [
+        "TP8-EN010"
+      ]
+    },
+    {
+      "passcode": 78636495,
+      "name": "Slate Warrior",
+      "numbers": [
+        "TP8-EN003"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "TP8-EN012"
+      ]
+    },
+    {
+      "passcode": 90844184,
+      "name": "Garma Sword",
+      "numbers": [
+        "TP8-EN005"
+      ]
+    },
+    {
+      "passcode": 94022093,
+      "name": "Behegon",
+      "numbers": [
+        "TP8-EN014"
+      ]
+    },
+    {
+      "passcode": 94042337,
+      "name": "Violent Rain",
+      "numbers": [
+        "TP8-EN015"
+      ]
+    },
+    {
+      "passcode": 96008713,
+      "name": "Magical Arm Shield",
+      "numbers": [
+        "TP8-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack 8'; printings from the YGOPRODeck bulk dump."
+}

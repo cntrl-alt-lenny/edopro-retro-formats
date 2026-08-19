@@ -1,0 +1,387 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-joey",
+  "code": "SDJ",
+  "name": "Starter Deck: Joey",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-03-30",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-03-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 423705,
+      "name": "Gearfried the Iron Knight",
+      "numbers": [
+        "SDJ-012"
+      ]
+    },
+    {
+      "passcode": 1435851,
+      "name": "Dragon Treasure",
+      "numbers": [
+        "SDJ-038"
+      ]
+    },
+    {
+      "passcode": 3027001,
+      "name": "Fake Trap",
+      "numbers": [
+        "SDJ-049"
+      ]
+    },
+    {
+      "passcode": 3573512,
+      "name": "Swordsman of Landstar",
+      "numbers": [
+        "SDJ-002"
+      ]
+    },
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "SDJ-048"
+      ]
+    },
+    {
+      "passcode": 4031928,
+      "name": "Change of Heart",
+      "numbers": [
+        "SDJ-030"
+      ]
+    },
+    {
+      "passcode": 4042268,
+      "name": "Island Turtle",
+      "numbers": [
+        "SDJ-005"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "SDJ-043"
+      ]
+    },
+    {
+      "passcode": 5388481,
+      "name": "Darkfire Soldier #1",
+      "numbers": [
+        "SDJ-010"
+      ]
+    },
+    {
+      "passcode": 7489323,
+      "name": "Milus Radiant",
+      "numbers": [
+        "SDJ-014"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "SDJ-046"
+      ]
+    },
+    {
+      "passcode": 15150365,
+      "name": "White Magical Hat",
+      "numbers": [
+        "SDJ-021"
+      ]
+    },
+    {
+      "passcode": 15480588,
+      "name": "Armored Lizard",
+      "numbers": [
+        "SDJ-009"
+      ]
+    },
+    {
+      "passcode": 16430187,
+      "name": "The Reliable Guardian",
+      "numbers": [
+        "SDJ-033"
+      ]
+    },
+    {
+      "passcode": 16768387,
+      "name": "Big Eye",
+      "numbers": [
+        "SDJ-018"
+      ]
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements",
+      "numbers": [
+        "SDJ-044"
+      ]
+    },
+    {
+      "passcode": 19159413,
+      "name": "De-Spell",
+      "numbers": [
+        "SDJ-029"
+      ]
+    },
+    {
+      "passcode": 23289281,
+      "name": "Karate Man",
+      "numbers": [
+        "SDJ-013"
+      ]
+    },
+    {
+      "passcode": 23771716,
+      "name": "7 Colored Fish",
+      "numbers": [
+        "SDJ-008"
+      ]
+    },
+    {
+      "passcode": 24068492,
+      "name": "Just Desserts",
+      "numbers": [
+        "SDJ-042"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "SDJ-036"
+      ]
+    },
+    {
+      "passcode": 25880422,
+      "name": "Block Attack",
+      "numbers": [
+        "SDJ-031"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "SDJ-019"
+      ]
+    },
+    {
+      "passcode": 30532390,
+      "name": "Sky Scout",
+      "numbers": [
+        "SDJ-011"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "SDJ-017"
+      ]
+    },
+    {
+      "passcode": 34460851,
+      "name": "Flame Manipulator",
+      "numbers": [
+        "SDJ-006"
+      ]
+    },
+    {
+      "passcode": 41462083,
+      "name": "Thousand Dragon",
+      "numbers": [
+        "SDJ-023"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "SDJ-032"
+      ]
+    },
+    {
+      "passcode": 44209392,
+      "name": "Castle Walls",
+      "numbers": [
+        "SDJ-045"
+      ]
+    },
+    {
+      "passcode": 44287299,
+      "name": "Masaki the Legendary Swordsman",
+      "numbers": [
+        "SDJ-007"
+      ]
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman",
+      "numbers": [
+        "SDJ-024"
+      ]
+    },
+    {
+      "passcode": 50913601,
+      "name": "Mountain",
+      "numbers": [
+        "SDJ-037"
+      ]
+    },
+    {
+      "passcode": 51371017,
+      "name": "Princess of Tsurugi",
+      "numbers": [
+        "SDJ-020"
+      ]
+    },
+    {
+      "passcode": 51482758,
+      "name": "Remove Trap",
+      "numbers": [
+        "SDJ-034"
+      ]
+    },
+    {
+      "passcode": 52097679,
+      "name": "Shield & Sword",
+      "numbers": [
+        "SDJ-040"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "SDJ-026"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "SDJ-028"
+      ]
+    },
+    {
+      "passcode": 71625222,
+      "name": "Time Wizard",
+      "numbers": [
+        "SDJ-015"
+      ]
+    },
+    {
+      "passcode": 73915051,
+      "name": "Scapegoat",
+      "numbers": [
+        "SDJ-041"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "SDJ-001"
+      ]
+    },
+    {
+      "passcode": 77622396,
+      "name": "Reverse Trap",
+      "numbers": [
+        "SDJ-050"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "SDJ-047"
+      ]
+    },
+    {
+      "passcode": 80770678,
+      "name": "Spirit of the Harp",
+      "numbers": [
+        "SDJ-004"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "SDJ-035"
+      ]
+    },
+    {
+      "passcode": 84257639,
+      "name": "Dian Keto the Cure Master",
+      "numbers": [
+        "SDJ-027"
+      ]
+    },
+    {
+      "passcode": 88819587,
+      "name": "Baby Dragon",
+      "numbers": [
+        "SDJ-003"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "SDJ-016"
+      ]
+    },
+    {
+      "passcode": 93920745,
+      "name": "Penguin Soldier",
+      "numbers": [
+        "SDJ-022"
+      ]
+    },
+    {
+      "passcode": 95051344,
+      "name": "Eternal Rest",
+      "numbers": [
+        "SDJ-039"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "SDJ-025"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Joey'; printings from the YGOPRODeck bulk dump."
+}

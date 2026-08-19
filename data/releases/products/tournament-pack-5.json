@@ -1,0 +1,189 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-5",
+  "code": "TP5",
+  "name": "Tournament Pack 5",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2004-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2204140,
+      "name": "Book of Life",
+      "numbers": [
+        "TP5-EN008"
+      ]
+    },
+    {
+      "passcode": 2926176,
+      "name": "Curse of Royal",
+      "numbers": [
+        "TP5-EN018"
+      ]
+    },
+    {
+      "passcode": 3055837,
+      "name": "Trap of Board Eraser",
+      "numbers": [
+        "TP5-EN009"
+      ]
+    },
+    {
+      "passcode": 5616412,
+      "name": "Destruction Punch",
+      "numbers": [
+        "TP5-EN013"
+      ]
+    },
+    {
+      "passcode": 11091375,
+      "name": "Luster Dragon",
+      "numbers": [
+        "TP5-EN004"
+      ]
+    },
+    {
+      "passcode": 30451366,
+      "name": "Mystical Sheep #1",
+      "numbers": [
+        "TP5-EN016"
+      ]
+    },
+    {
+      "passcode": 40133511,
+      "name": "Bazoo the Soul-Eater",
+      "numbers": [
+        "TP5-EN007"
+      ]
+    },
+    {
+      "passcode": 41855169,
+      "name": "Jowgen the Spiritualist",
+      "numbers": [
+        "TP5-EN011"
+      ]
+    },
+    {
+      "passcode": 50259460,
+      "name": "Versago the Destroyer",
+      "numbers": [
+        "TP5-EN015"
+      ]
+    },
+    {
+      "passcode": 53119267,
+      "name": "Magical Thorn",
+      "numbers": [
+        "TP5-EN003"
+      ]
+    },
+    {
+      "passcode": 53493204,
+      "name": "Goddess with the Third Eye",
+      "numbers": [
+        "TP5-EN010"
+      ]
+    },
+    {
+      "passcode": 57482479,
+      "name": "Luminous Soldier",
+      "numbers": [
+        "TP5-EN001"
+      ]
+    },
+    {
+      "passcode": 65240384,
+      "name": "Big Shield Gardna",
+      "numbers": [
+        "TP5-EN002"
+      ]
+    },
+    {
+      "passcode": 71283180,
+      "name": "Tornado Bird",
+      "numbers": [
+        "TP5-EN012"
+      ]
+    },
+    {
+      "passcode": 77044671,
+      "name": "Pyramid Turtle",
+      "numbers": [
+        "TP5-EN017"
+      ]
+    },
+    {
+      "passcode": 78053598,
+      "name": "Dark Designator",
+      "numbers": [
+        "TP5-EN020"
+      ]
+    },
+    {
+      "passcode": 81843628,
+      "name": "Needle Worm",
+      "numbers": [
+        "TP5-EN005"
+      ]
+    },
+    {
+      "passcode": 87523462,
+      "name": "Winged Sage Falcos",
+      "numbers": [
+        "TP5-EN019"
+      ]
+    },
+    {
+      "passcode": 88240808,
+      "name": "Kycoo the Ghost Destroyer",
+      "numbers": [
+        "TP5-EN006"
+      ]
+    },
+    {
+      "passcode": 99426834,
+      "name": "Beastking of the Swamps",
+      "numbers": [
+        "TP5-EN014"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack 5'; printings from the YGOPRODeck bulk dump."
+}

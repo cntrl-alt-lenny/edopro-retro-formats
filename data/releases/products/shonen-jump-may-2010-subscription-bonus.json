@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-may-2010-subscription-bonus",
+  "code": "JUMP",
+  "name": "Shonen Jump May 2010 subscription bonus",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-05-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 66094973,
+      "name": "Transforming Sphere",
+      "numbers": [
+        "JUMP-EN042"
+      ]
+    },
+    {
+      "passcode": 88071625,
+      "name": "The Tyrant Neptune",
+      "numbers": [
+        "JUMP-EN041"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

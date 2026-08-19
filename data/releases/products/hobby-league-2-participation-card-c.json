@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-2-participation-card-c",
+  "code": "HL2",
+  "name": "Hobby League 2 participation card C",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-03-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "HL2-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 2 participation card C'; printings from the YGOPRODeck bulk dump."
+}

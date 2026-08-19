@@ -1,0 +1,132 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "premium-pack-tcg",
+  "code": "PP01",
+  "name": "Premium Pack (TCG)",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-07-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3072077,
+      "name": "Return Zombie",
+      "numbers": [
+        "PP01-EN006"
+      ]
+    },
+    {
+      "passcode": 26932788,
+      "name": "Javelin Beetle",
+      "numbers": [
+        "PP01-EN013"
+      ]
+    },
+    {
+      "passcode": 30208479,
+      "name": "Magician of Black Chaos",
+      "numbers": [
+        "PP01-EN001"
+      ]
+    },
+    {
+      "passcode": 30461781,
+      "name": "Legacy of Yata-Garasu",
+      "numbers": [
+        "PP01-EN009"
+      ]
+    },
+    {
+      "passcode": 30683373,
+      "name": "Shield Crush",
+      "numbers": [
+        "PP01-EN007"
+      ]
+    },
+    {
+      "passcode": 31305911,
+      "name": "Marshmallon",
+      "numbers": [
+        "PP01-EN003"
+      ]
+    },
+    {
+      "passcode": 41182875,
+      "name": "Javelin Beetle Pact",
+      "numbers": [
+        "PP01-EN012"
+      ]
+    },
+    {
+      "passcode": 64335804,
+      "name": "Red-Eyes Black Metal Dragon",
+      "numbers": [
+        "PP01-EN015"
+      ]
+    },
+    {
+      "passcode": 66865880,
+      "name": "Marshmallon Glasses",
+      "numbers": [
+        "PP01-EN004"
+      ]
+    },
+    {
+      "passcode": 67688478,
+      "name": "Gemini Imps",
+      "numbers": [
+        "PP01-EN005"
+      ]
+    },
+    {
+      "passcode": 68540058,
+      "name": "Metalmorph",
+      "numbers": [
+        "PP01-EN014"
+      ]
+    },
+    {
+      "passcode": 69123138,
+      "name": "Zera the Mant",
+      "numbers": [
+        "PP01-EN011"
+      ]
+    },
+    {
+      "passcode": 76792184,
+      "name": "Black Magic Ritual",
+      "numbers": [
+        "PP01-EN002"
+      ]
+    },
+    {
+      "passcode": 81756897,
+      "name": "Zera Ritual",
+      "numbers": [
+        "PP01-EN010"
+      ]
+    },
+    {
+      "passcode": 99789342,
+      "name": "Dark Magic Curtain",
+      "numbers": [
+        "PP01-EN008"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Premium Pack (TCG)'; printings from the YGOPRODeck bulk dump."
+}

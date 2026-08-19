@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "stardust-overdrive",
+  "code": "SOVR",
+  "name": "Stardust Overdrive",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-11-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2420921,
+      "name": "Shire, Lightsworn Spirit",
+      "numbers": [
+        "SOVR-EN082"
+      ]
+    },
+    {
+      "passcode": 7841112,
+      "name": "Majestic Star Dragon",
+      "numbers": [
+        "SOVR-EN040"
+      ]
+    },
+    {
+      "passcode": 8903700,
+      "name": "Djinn Releaser of Rituals",
+      "numbers": [
+        "SOVR-EN037"
+      ]
+    },
+    {
+      "passcode": 9126351,
+      "name": "Swap Frog",
+      "numbers": [
+        "SOVR-EN034"
+      ]
+    },
+    {
+      "passcode": 9848939,
+      "name": "Woodland Archer",
+      "numbers": [
+        "SOVR-EN031"
+      ]
+    },
+    {
+      "passcode": 10060427,
+      "name": "Koa'ki Meiru Rooklord",
+      "numbers": [
+        "SOVR-EN028"
+      ]
+    },
+    {
+      "passcode": 11366199,
+      "name": "Dark Simorgh",
+      "numbers": [
+        "SOVR-EN092"
+      ]
+    },
+    {
+      "passcode": 14462257,
+      "name": "Ice Queen",
+      "numbers": [
+        "SOVR-EN094"
+      ]
+    },
+    {
+      "passcode": 15187079,
+      "name": "Earthbound Immortal Uru",
+      "numbers": [
+        "SOVR-EN025"
+      ]
+    },
+    {
+      "passcode": 16909657,
+      "name": "Reptilianne Scylla",
+      "numbers": [
+        "SOVR-EN022"
+      ]
+    },
+    {
+      "passcode": 17021204,
+      "name": "Mother Spider",
+      "numbers": [
+        "SOVR-EN019"
+      ]
+    },
+    {
+      "passcode": 17243896,
+      "name": "Ground Spider",
+      "numbers": [
+        "SOVR-EN016"
+      ]
+    },
+    {
+      "passcode": 17874674,
+      "name": "Seal of Wickedness",
+      "numbers": [
+        "SOVR-EN079"
+      ]
+    },
+    {
+      "passcode": 18096222,
+      "name": "Gemini Booster",
+      "numbers": [
+        "SOVR-EN076"
+      ]
+    },
+    {
+      "passcode": 18712704,
+      "name": "Infernity Force",
+      "numbers": [
+        "SOVR-EN073"
+      ]
+    },
+    {
+      "passcode": 20057949,
+      "name": "Inherited Fortune",
+      "numbers": [
+        "SOVR-EN067"
+      ]
+    },
+    {
+      "passcode": 20210570,
+      "name": "Regulus",
+      "numbers": [
+        "SOVR-EN007"
+      ]
+    },
+    {
+      "passcode": 20457551,
+      "name": "Iron Core Armor",
+      "numbers": [
+        "SOVR-EN053"
+      ]
+    },
+    {
+      "passcode": 20932152,
+      "name": "Quickdraw Synchron",
+      "numbers": [
+        "SOVR-EN004"
+      ]
+    },
+    {
+      "passcode": 21159309,
+      "name": "Majestic Dragon",
+      "numbers": [
+        "SOVR-EN001"
+      ]
+    },
+    {
+      "passcode": 21179143,
+      "name": "Reptilianne Spawn",
+      "numbers": [
+        "SOVR-EN050"
+      ]
+    },
+    {
+      "passcode": 21879581,
+      "name": "Synchro Barrier",
+      "numbers": [
+        "SOVR-EN064"
+      ]
+    },
+    {
+      "passcode": 22123627,
+      "name": "Moray of Greed",
+      "numbers": [
+        "SOVR-EN058"
+      ]
+    },
+    {
+      "passcode": 22991179,
+      "name": "Insect Neglect",
+      "numbers": [
+        "SOVR-EN061"
+      ]
+    },
+    {
+      "passcode": 27970830,
+      "name": "Gateway of the Six",
+      "numbers": [
+        "SOVR-EN089"
+      ]
+    },
+    {
+      "passcode": 28966434,
+      "name": "Solitaire Magician",
+      "numbers": [
+        "SOVR-EN013"
+      ]
+    },
+    {
+      "passcode": 29088922,
+      "name": "Fortune Lady Water",
+      "numbers": [
+        "SOVR-EN010"
+      ]
+    },
+    {
+      "passcode": 29934351,
+      "name": "Earthbound Wave",
+      "numbers": [
+        "SOVR-EN070"
+      ]
+    },
+    {
+      "passcode": 32391631,
+      "name": "Savage Colosseum",
+      "numbers": [
+        "SOVR-EN047"
+      ]
+    },
+    {
+      "passcode": 33236860,
+      "name": "Blackwing - Silverwind the Ascendant",
+      "numbers": [
+        "SOVR-EN041"
+      ]
+    },
+    {
+      "passcode": 33413279,
+      "name": "Explosive Magician",
+      "numbers": [
+        "SOVR-EN044"
+      ]
+    },
+    {
+      "passcode": 33846209,
+      "name": "Gemini Spark",
+      "numbers": [
+        "SOVR-EN055"
+      ]
+    },
+    {
+      "passcode": 33900648,
+      "name": "Clear World",
+      "numbers": [
+        "SOVR-EN099"
+      ]
+    },
+    {
+      "passcode": 34022290,
+      "name": "Guardian Eatos",
+      "numbers": [
+        "SOVR-EN097"
+      ]
+    },
+    {
+      "passcode": 34358408,
+      "name": "Djinn Presider of Rituals",
+      "numbers": [
+        "SOVR-EN038"
+      ]
+    },
+    {
+      "passcode": 35514096,
+      "name": "Lord British Space Fighter",
+      "numbers": [
+        "SOVR-EN035"
+      ]
+    },
+    {
+      "passcode": 37792478,
+      "name": "Metabo-Shark",
+      "numbers": [
+        "SOVR-EN086"
+      ]
+    },
+    {
+      "passcode": 38815069,
+      "name": "Rinyan, Lightsworn Rogue",
+      "numbers": [
+        "SOVR-EN083"
+      ]
+    },
+    {
+      "passcode": 39037517,
+      "name": "Koa'ki Meiru Beetle",
+      "numbers": [
+        "SOVR-EN000"
+      ]
+    },
+    {
+      "passcode": 41181774,
+      "name": "Earthbound Immortal Wiraqocha Rasca",
+      "numbers": [
+        "SOVR-EN026"
+      ]
+    },
+    {
+      "passcode": 42303365,
+      "name": "Reptilianne Viper",
+      "numbers": [
+        "SOVR-EN023"
+      ]
+    },
+    {
+      "passcode": 43262273,
+      "name": "Appointer of the Red Lotus",
+      "numbers": [
+        "SOVR-EN080"
+      ]
+    },
+    {
+      "passcode": 43426903,
+      "name": "Reptilianne Gorgon",
+      "numbers": [
+        "SOVR-EN020"
+      ]
+    },
+    {
+      "passcode": 46237548,
+      "name": "Knight of the Red Lotus",
+      "numbers": [
+        "SOVR-EN032"
+      ]
+    },
+    {
+      "passcode": 47459126,
+      "name": "Tuned Magician",
+      "numbers": [
+        "SOVR-EN029"
+      ]
+    },
+    {
+      "passcode": 54094821,
+      "name": "Ritual Buster",
+      "numbers": [
+        "SOVR-EN077"
+      ]
+    },
+    {
+      "passcode": 54248491,
+      "name": "Relinquished Spider",
+      "numbers": [
+        "SOVR-EN017"
+      ]
+    },
+    {
+      "passcode": 54360049,
+      "name": "Catoblepas and the Witch of Fate",
+      "numbers": [
+        "SOVR-EN014"
+      ]
+    },
+    {
+      "passcode": 55117418,
+      "name": "Nega-Ton Corepanel",
+      "numbers": [
+        "SOVR-EN074"
+      ]
+    },
+    {
+      "passcode": 55586621,
+      "name": "Fortune Lady Dark",
+      "numbers": [
+        "SOVR-EN011"
+      ]
+    },
+    {
+      "passcode": 56051648,
+      "name": "Spider Egg",
+      "numbers": [
+        "SOVR-EN068"
+      ]
+    },
+    {
+      "passcode": 56209279,
+      "name": "Infernity Necromancer",
+      "numbers": [
+        "SOVR-EN008"
+      ]
+    },
+    {
+      "passcode": 56339050,
+      "name": "Roar of the Earthbound Immortal",
+      "numbers": [
+        "SOVR-EN071"
+      ]
+    },
+    {
+      "passcode": 57274196,
+      "name": "Enlightenment",
+      "numbers": [
+        "SOVR-EN065"
+      ]
+    },
+    {
+      "passcode": 57421866,
+      "name": "Level Eater",
+      "numbers": [
+        "SOVR-EN005"
+      ]
+    },
+    {
+      "passcode": 57441100,
+      "name": "Herculean Power",
+      "numbers": [
+        "SOVR-EN054"
+      ]
+    },
+    {
+      "passcode": 59509952,
+      "name": "Archlord Kristya",
+      "numbers": [
+        "SOVR-EN096"
+      ]
+    },
+    {
+      "passcode": 60234913,
+      "name": "Ritual of Grace",
+      "numbers": [
+        "SOVR-EN056"
+      ]
+    },
+    {
+      "passcode": 60634565,
+      "name": "Reptilianne Hydra",
+      "numbers": [
+        "SOVR-EN042"
+      ]
+    },
+    {
+      "passcode": 61757117,
+      "name": "Divine Grace - Northwemko",
+      "numbers": [
+        "SOVR-EN039"
+      ]
+    },
+    {
+      "passcode": 64187086,
+      "name": "Earthbound Immortal Revival",
+      "numbers": [
+        "SOVR-EN087"
+      ]
+    },
+    {
+      "passcode": 65026212,
+      "name": "Koa'ki Meiru Maximus",
+      "numbers": [
+        "SOVR-EN081"
+      ]
+    },
+    {
+      "passcode": 65303664,
+      "name": "Yellow Baboon, Archer of the Forest",
+      "numbers": [
+        "SOVR-EN084"
+      ]
+    },
+    {
+      "passcode": 65422840,
+      "name": "Shutendoji",
+      "numbers": [
+        "SOVR-EN095"
+      ]
+    },
+    {
+      "passcode": 68396778,
+      "name": "Faustian Bargain",
+      "numbers": [
+        "SOVR-EN062"
+      ]
+    },
+    {
+      "passcode": 68543408,
+      "name": "Stardust Xiaolong",
+      "numbers": [
+        "SOVR-EN002"
+      ]
+    },
+    {
+      "passcode": 68663748,
+      "name": "Fortune's Future",
+      "numbers": [
+        "SOVR-EN051"
+      ]
+    },
+    {
+      "passcode": 68786330,
+      "name": "Attack Pheromones",
+      "numbers": [
+        "SOVR-EN048"
+      ]
+    },
+    {
+      "passcode": 69112325,
+      "name": "Spiritual Forest",
+      "numbers": [
+        "SOVR-EN059"
+      ]
+    },
+    {
+      "passcode": 69408987,
+      "name": "Spider Web",
+      "numbers": [
+        "SOVR-EN045"
+      ]
+    },
+    {
+      "passcode": 71519605,
+      "name": "Oshaleon",
+      "numbers": [
+        "SOVR-EN036"
+      ]
+    },
+    {
+      "passcode": 72631243,
+      "name": "Energy Bravery",
+      "numbers": [
+        "SOVR-EN033"
+      ]
+    },
+    {
+      "passcode": 73853830,
+      "name": "Crusader of Endymion",
+      "numbers": [
+        "SOVR-EN030"
+      ]
+    },
+    {
+      "passcode": 74576482,
+      "name": "Koa'ki Meiru Sea Panther",
+      "numbers": [
+        "SOVR-EN027"
+      ]
+    },
+    {
+      "passcode": 75162696,
+      "name": "Victoria",
+      "numbers": [
+        "SOVR-EN093"
+      ]
+    },
+    {
+      "passcode": 79798060,
+      "name": "Earthbound Immortal Ccarayhua",
+      "numbers": [
+        "SOVR-EN024"
+      ]
+    },
+    {
+      "passcode": 80637190,
+      "name": "Spyder Spider",
+      "numbers": [
+        "SOVR-EN018"
+      ]
+    },
+    {
+      "passcode": 81489939,
+      "name": "Stygian Dirge",
+      "numbers": [
+        "SOVR-EN078"
+      ]
+    },
+    {
+      "passcode": 81601517,
+      "name": "Gemini Counter",
+      "numbers": [
+        "SOVR-EN075"
+      ]
+    },
+    {
+      "passcode": 81759748,
+      "name": "Dark Spider",
+      "numbers": [
+        "SOVR-EN015"
+      ]
+    },
+    {
+      "passcode": 82324105,
+      "name": "Limit Impulse",
+      "numbers": [
+        "SOVR-EN072"
+      ]
+    },
+    {
+      "passcode": 82693917,
+      "name": "Fortune Lady Wind",
+      "numbers": [
+        "SOVR-EN009"
+      ]
+    },
+    {
+      "passcode": 82878489,
+      "name": "Shine Palace",
+      "numbers": [
+        "SOVR-EN091"
+      ]
+    },
+    {
+      "passcode": 82971335,
+      "name": "Fortune Lady Earth",
+      "numbers": [
+        "SOVR-EN012"
+      ]
+    },
+    {
+      "passcode": 83546647,
+      "name": "Wolf in Sheep's Clothing",
+      "numbers": [
+        "SOVR-EN069"
+      ]
+    },
+    {
+      "passcode": 89810518,
+      "name": "Reptilianne Medusa",
+      "numbers": [
+        "SOVR-EN021"
+      ]
+    },
+    {
+      "passcode": 90576781,
+      "name": "Reptilianne Poison",
+      "numbers": [
+        "SOVR-EN088"
+      ]
+    },
+    {
+      "passcode": 91798373,
+      "name": "Gemini Scorpion",
+      "numbers": [
+        "SOVR-EN085"
+      ]
+    },
+    {
+      "passcode": 93816465,
+      "name": "Zero Gardna",
+      "numbers": [
+        "SOVR-EN006"
+      ]
+    },
+    {
+      "passcode": 94068856,
+      "name": "Time Passage",
+      "numbers": [
+        "SOVR-EN052"
+      ]
+    },
+    {
+      "passcode": 94484482,
+      "name": "Slip Summon",
+      "numbers": [
+        "SOVR-EN063"
+      ]
+    },
+    {
+      "passcode": 94538053,
+      "name": "Max Warrior",
+      "numbers": [
+        "SOVR-EN003"
+      ]
+    },
+    {
+      "passcode": 94662235,
+      "name": "Bending Destiny",
+      "numbers": [
+        "SOVR-EN066"
+      ]
+    },
+    {
+      "passcode": 95507060,
+      "name": "Raging Mad Plants",
+      "numbers": [
+        "SOVR-EN060"
+      ]
+    },
+    {
+      "passcode": 95784434,
+      "name": "Molting Escape",
+      "numbers": [
+        "SOVR-EN049"
+      ]
+    },
+    {
+      "passcode": 96029574,
+      "name": "Black Brutdrago",
+      "numbers": [
+        "SOVR-EN043"
+      ]
+    },
+    {
+      "passcode": 96729612,
+      "name": "Preparation of Rites",
+      "numbers": [
+        "SOVR-EN057"
+      ]
+    },
+    {
+      "passcode": 96907086,
+      "name": "Earthbound Whirlwind",
+      "numbers": [
+        "SOVR-EN046"
+      ]
+    },
+    {
+      "passcode": 97811903,
+      "name": "Clear Vice Dragon",
+      "numbers": [
+        "SOVR-EN098"
+      ]
+    },
+    {
+      "passcode": 99261403,
+      "name": "Dark Rabbit",
+      "numbers": [
+        "SOVR-EN090"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Stardust Overdrive'; printings from the YGOPRODeck bulk dump."
+}

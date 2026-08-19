@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "soul-of-the-duelist",
+  "code": "SOD",
+  "name": "Soul of the Duelist",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-10-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 980973,
+      "name": "Armed Dragon LV3",
+      "numbers": [
+        "SOD-EN013"
+      ]
+    },
+    {
+      "passcode": 1102515,
+      "name": "Dark Mimic LV3",
+      "numbers": [
+        "SOD-EN010"
+      ]
+    },
+    {
+      "passcode": 4041838,
+      "name": "Ninja Grandmaster Sasuke",
+      "numbers": [
+        "SOD-EN019"
+      ]
+    },
+    {
+      "passcode": 4929256,
+      "name": "Mobius the Frost Monarch",
+      "numbers": [
+        "SOD-EN022"
+      ]
+    },
+    {
+      "passcode": 9264485,
+      "name": "Horus' Servant",
+      "numbers": [
+        "SOD-EN016"
+      ]
+    },
+    {
+      "passcode": 11224103,
+      "name": "Horus the Black Flame Dragon LV6",
+      "numbers": [
+        "SOD-EN007"
+      ]
+    },
+    {
+      "passcode": 12057781,
+      "name": "Goblin Calligrapher",
+      "numbers": [
+        "SOD-EN004"
+      ]
+    },
+    {
+      "passcode": 13179332,
+      "name": "Charcoal Inpachi",
+      "numbers": [
+        "SOD-EN001"
+      ]
+    },
+    {
+      "passcode": 15800838,
+      "name": "Mind Crush",
+      "numbers": [
+        "SOD-EN056"
+      ]
+    },
+    {
+      "passcode": 25290459,
+      "name": "Level Up!",
+      "numbers": [
+        "SOD-EN041"
+      ]
+    },
+    {
+      "passcode": 25578802,
+      "name": "Two-Man Cell Battle",
+      "numbers": [
+        "SOD-EN045"
+      ]
+    },
+    {
+      "passcode": 26022485,
+      "name": "Enervating Mist",
+      "numbers": [
+        "SOD-EN053"
+      ]
+    },
+    {
+      "passcode": 26412047,
+      "name": "Hammer Shot",
+      "numbers": [
+        "SOD-EN038"
+      ]
+    },
+    {
+      "passcode": 27134689,
+      "name": "Master of Oz",
+      "numbers": [
+        "SOD-EN035"
+      ]
+    },
+    {
+      "passcode": 27744077,
+      "name": "Absolute End",
+      "numbers": [
+        "SOD-EN050"
+      ]
+    },
+    {
+      "passcode": 27967615,
+      "name": "Fusion Weapon",
+      "numbers": [
+        "SOD-EN047"
+      ]
+    },
+    {
+      "passcode": 28357177,
+      "name": "Hade-Hane",
+      "numbers": [
+        "SOD-EN032"
+      ]
+    },
+    {
+      "passcode": 30314994,
+      "name": "Element Dragon",
+      "numbers": [
+        "SOD-EN023"
+      ]
+    },
+    {
+      "passcode": 31440542,
+      "name": "Rafflesia Seduction",
+      "numbers": [
+        "SOD-EN020"
+      ]
+    },
+    {
+      "passcode": 36262024,
+      "name": "Black Dragon's Chick",
+      "numbers": [
+        "SOD-EN017"
+      ]
+    },
+    {
+      "passcode": 38479725,
+      "name": "The Trojan Horse",
+      "numbers": [
+        "SOD-EN029"
+      ]
+    },
+    {
+      "passcode": 39191307,
+      "name": "Masked Dragon",
+      "numbers": [
+        "SOD-EN026"
+      ]
+    },
+    {
+      "passcode": 46384672,
+      "name": "Armed Dragon LV5",
+      "numbers": [
+        "SOD-EN014"
+      ]
+    },
+    {
+      "passcode": 47507260,
+      "name": "Mystic Swordsman LV2",
+      "numbers": [
+        "SOD-EN011"
+      ]
+    },
+    {
+      "passcode": 48229808,
+      "name": "Horus the Black Flame Dragon LV8",
+      "numbers": [
+        "SOD-EN008"
+      ]
+    },
+    {
+      "passcode": 49441499,
+      "name": "Ultimate Insect LV1",
+      "numbers": [
+        "SOD-EN005"
+      ]
+    },
+    {
+      "passcode": 49563947,
+      "name": "Neo Aqua Madoor",
+      "numbers": [
+        "SOD-EN002"
+      ]
+    },
+    {
+      "passcode": 51394546,
+      "name": "Cemetary Bomb",
+      "numbers": [
+        "SOD-EN059"
+      ]
+    },
+    {
+      "passcode": 51562916,
+      "name": "Big Wave Small Wave",
+      "numbers": [
+        "SOD-EN046"
+      ]
+    },
+    {
+      "passcode": 52417194,
+      "name": "Heavy Slump",
+      "numbers": [
+        "SOD-EN054"
+      ]
+    },
+    {
+      "passcode": 52648457,
+      "name": "Gorgon's Eye",
+      "numbers": [
+        "SOD-EN058"
+      ]
+    },
+    {
+      "passcode": 52684508,
+      "name": "Inferno Fire Blast",
+      "numbers": [
+        "SOD-EN042"
+      ]
+    },
+    {
+      "passcode": 52817046,
+      "name": "Mind Wipe",
+      "numbers": [
+        "SOD-EN039"
+      ]
+    },
+    {
+      "passcode": 53239672,
+      "name": "Spirit Barrier",
+      "numbers": [
+        "SOD-EN051"
+      ]
+    },
+    {
+      "passcode": 53539634,
+      "name": "Sanwitch",
+      "numbers": [
+        "SOD-EN036"
+      ]
+    },
+    {
+      "passcode": 54351224,
+      "name": "Ritual Weapon",
+      "numbers": [
+        "SOD-EN048"
+      ]
+    },
+    {
+      "passcode": 64751286,
+      "name": "Penumbral Soldier Lady",
+      "numbers": [
+        "SOD-EN033"
+      ]
+    },
+    {
+      "passcode": 65878864,
+      "name": "Nobleman-Eater Bug",
+      "numbers": [
+        "SOD-EN030"
+      ]
+    },
+    {
+      "passcode": 66690411,
+      "name": "Mind on Air",
+      "numbers": [
+        "SOD-EN027"
+      ]
+    },
+    {
+      "passcode": 66712593,
+      "name": "Element Soldier",
+      "numbers": [
+        "SOD-EN024"
+      ]
+    },
+    {
+      "passcode": 67934141,
+      "name": "Ultimate Baseball Kid",
+      "numbers": [
+        "SOD-EN021"
+      ]
+    },
+    {
+      "passcode": 72657739,
+      "name": "Malice Doll of Demise",
+      "numbers": [
+        "SOD-EN018"
+      ]
+    },
+    {
+      "passcode": 73879377,
+      "name": "Armed Dragon LV7",
+      "numbers": [
+        "SOD-EN015"
+      ]
+    },
+    {
+      "passcode": 74591968,
+      "name": "Mystic Swordsman LV4",
+      "numbers": [
+        "SOD-EN012"
+      ]
+    },
+    {
+      "passcode": 74713516,
+      "name": "Dark Mimic LV1",
+      "numbers": [
+        "SOD-EN009"
+      ]
+    },
+    {
+      "passcode": 75830094,
+      "name": "Horus the Black Flame Dragon LV4",
+      "numbers": [
+        "SOD-EN006"
+      ]
+    },
+    {
+      "passcode": 80863132,
+      "name": "Muko",
+      "numbers": [
+        "SOD-EN057"
+      ]
+    },
+    {
+      "passcode": 86652646,
+      "name": "Skull Dog Marron",
+      "numbers": [
+        "SOD-EN003"
+      ]
+    },
+    {
+      "passcode": 88089103,
+      "name": "The Graveyard in the Fourth Dimension",
+      "numbers": [
+        "SOD-EN044"
+      ]
+    },
+    {
+      "passcode": 88789641,
+      "name": "Hallowed Life Barrier",
+      "numbers": [
+        "SOD-EN060"
+      ]
+    },
+    {
+      "passcode": 89405199,
+      "name": "Greed",
+      "numbers": [
+        "SOD-EN055"
+      ]
+    },
+    {
+      "passcode": 89628781,
+      "name": "Ninjitsu Art of Decoy",
+      "numbers": [
+        "SOD-EN052"
+      ]
+    },
+    {
+      "passcode": 89801755,
+      "name": "Abyssal Designator",
+      "numbers": [
+        "SOD-EN040"
+      ]
+    },
+    {
+      "passcode": 90140980,
+      "name": "Ojama King",
+      "numbers": [
+        "SOD-EN034"
+      ]
+    },
+    {
+      "passcode": 90740329,
+      "name": "Taunt",
+      "numbers": [
+        "SOD-EN049"
+      ]
+    },
+    {
+      "passcode": 90928333,
+      "name": "Dark Factory of Mass Production",
+      "numbers": [
+        "SOD-EN037"
+      ]
+    },
+    {
+      "passcode": 91862578,
+      "name": "Enraged Muka Muka",
+      "numbers": [
+        "SOD-EN031"
+      ]
+    },
+    {
+      "passcode": 92084010,
+      "name": "Unshaven Angler",
+      "numbers": [
+        "SOD-EN028"
+      ]
+    },
+    {
+      "passcode": 93107608,
+      "name": "Howling Insect",
+      "numbers": [
+        "SOD-EN025"
+      ]
+    },
+    {
+      "passcode": 97342942,
+      "name": "Ectoplasmer",
+      "numbers": [
+        "SOD-EN043"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Soul of the Duelist'; printings from the YGOPRODeck bulk dump."
+}

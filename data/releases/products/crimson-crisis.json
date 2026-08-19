@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "crimson-crisis",
+  "code": "CRMS",
+  "name": "Crimson Crisis",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-03-03",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 564541,
+      "name": "Totem Dragon",
+      "numbers": [
+        "CRMS-EN085"
+      ]
+    },
+    {
+      "passcode": 652362,
+      "name": "Alien Ammonite",
+      "numbers": [
+        "CRMS-EN039"
+      ]
+    },
+    {
+      "passcode": 1287123,
+      "name": "Prime Material Falcon",
+      "numbers": [
+        "CRMS-EN082"
+      ]
+    },
+    {
+      "passcode": 1474910,
+      "name": "Bee List Soldier",
+      "numbers": [
+        "CRMS-EN036"
+      ]
+    },
+    {
+      "passcode": 1596508,
+      "name": "Dimension Fortress Weapon",
+      "numbers": [
+        "CRMS-EN033"
+      ]
+    },
+    {
+      "passcode": 1764972,
+      "name": "Doomkaiser Dragon/Assault Mode",
+      "numbers": [
+        "CRMS-EN019"
+      ]
+    },
+    {
+      "passcode": 2009101,
+      "name": "Blackwing - Gale the Whirlwind",
+      "numbers": [
+        "CRMS-EN008"
+      ]
+    },
+    {
+      "passcode": 2619149,
+      "name": "Gladiator Beast Samnite",
+      "numbers": [
+        "CRMS-EN027"
+      ]
+    },
+    {
+      "passcode": 2779999,
+      "name": "Wall of Thorns",
+      "numbers": [
+        "CRMS-EN079"
+      ]
+    },
+    {
+      "passcode": 2986553,
+      "name": "Twilight Rose Knight",
+      "numbers": [
+        "CRMS-EN011"
+      ]
+    },
+    {
+      "passcode": 3167573,
+      "name": "Puppet King",
+      "numbers": [
+        "CRMS-EN093"
+      ]
+    },
+    {
+      "passcode": 3431737,
+      "name": "Assault Beast",
+      "numbers": [
+        "CRMS-EN024"
+      ]
+    },
+    {
+      "passcode": 3891471,
+      "name": "Psychic Tuning",
+      "numbers": [
+        "CRMS-EN076"
+      ]
+    },
+    {
+      "passcode": 13821299,
+      "name": "Trap Eater",
+      "numbers": [
+        "CRMS-EN005"
+      ]
+    },
+    {
+      "passcode": 14553285,
+      "name": "Arcanite Magician/Assault Mode",
+      "numbers": [
+        "CRMS-EN021"
+      ]
+    },
+    {
+      "passcode": 14613029,
+      "name": "Morphtronic Mix-up",
+      "numbers": [
+        "CRMS-EN073"
+      ]
+    },
+    {
+      "passcode": 14730606,
+      "name": "Ivy Shackles",
+      "numbers": [
+        "CRMS-EN070"
+      ]
+    },
+    {
+      "passcode": 14943837,
+      "name": "Debris Dragon",
+      "numbers": [
+        "CRMS-EN002"
+      ]
+    },
+    {
+      "passcode": 15175429,
+      "name": "Spell Reactor ・RE",
+      "numbers": [
+        "CRMS-EN014"
+      ]
+    },
+    {
+      "passcode": 15552258,
+      "name": "Half or Nothing",
+      "numbers": [
+        "CRMS-EN067"
+      ]
+    },
+    {
+      "passcode": 16674846,
+      "name": "Spirit Force",
+      "numbers": [
+        "CRMS-EN064"
+      ]
+    },
+    {
+      "passcode": 16898077,
+      "name": "Flying Fortress SKY FIRE",
+      "numbers": [
+        "CRMS-EN016"
+      ]
+    },
+    {
+      "passcode": 17896384,
+      "name": "Arcane Barrier",
+      "numbers": [
+        "CRMS-EN061"
+      ]
+    },
+    {
+      "passcode": 20686759,
+      "name": "Morphtronic Rusty Engine",
+      "numbers": [
+        "CRMS-EN049"
+      ]
+    },
+    {
+      "passcode": 21702241,
+      "name": "Vengeful Servant",
+      "numbers": [
+        "CRMS-EN046"
+      ]
+    },
+    {
+      "passcode": 27827272,
+      "name": "Makiu, the Magical Mist",
+      "numbers": [
+        "CRMS-EN091"
+      ]
+    },
+    {
+      "passcode": 28529976,
+      "name": "Super Solar Nutrient",
+      "numbers": [
+        "CRMS-EN058"
+      ]
+    },
+    {
+      "passcode": 28741524,
+      "name": "Telekinetic Power Well",
+      "numbers": [
+        "CRMS-EN055"
+      ]
+    },
+    {
+      "passcode": 29863101,
+      "name": "Assault Teleport",
+      "numbers": [
+        "CRMS-EN052"
+      ]
+    },
+    {
+      "passcode": 31924889,
+      "name": "Arcanite Magician",
+      "numbers": [
+        "CRMS-EN043"
+      ]
+    },
+    {
+      "passcode": 32646477,
+      "name": "Dark Strike Fighter",
+      "numbers": [
+        "CRMS-EN040"
+      ]
+    },
+    {
+      "passcode": 35984222,
+      "name": "Ido the Supreme Magical Force",
+      "numbers": [
+        "CRMS-EN096"
+      ]
+    },
+    {
+      "passcode": 36737092,
+      "name": "Synchro Change",
+      "numbers": [
+        "CRMS-EN089"
+      ]
+    },
+    {
+      "passcode": 37169670,
+      "name": "Hyper Psychic Blaster/Assault Mode",
+      "numbers": [
+        "CRMS-EN020"
+      ]
+    },
+    {
+      "passcode": 37675138,
+      "name": "Bone Crusher",
+      "numbers": [
+        "CRMS-EN083"
+      ]
+    },
+    {
+      "passcode": 37869028,
+      "name": "Hydra Viper",
+      "numbers": [
+        "CRMS-EN037"
+      ]
+    },
+    {
+      "passcode": 37953640,
+      "name": "Royal Swamp Eel",
+      "numbers": [
+        "CRMS-EN086"
+      ]
+    },
+    {
+      "passcode": 38898779,
+      "name": "Colossal Fighter/Assault Mode",
+      "numbers": [
+        "CRMS-EN000"
+      ]
+    },
+    {
+      "passcode": 38981606,
+      "name": "Desert Protector",
+      "numbers": [
+        "CRMS-EN034"
+      ]
+    },
+    {
+      "passcode": 39163598,
+      "name": "Planet Pollutant Virus",
+      "numbers": [
+        "CRMS-EN080"
+      ]
+    },
+    {
+      "passcode": 39703254,
+      "name": "Inmato",
+      "numbers": [
+        "CRMS-EN031"
+      ]
+    },
+    {
+      "passcode": 40012727,
+      "name": "Assault Slash",
+      "numbers": [
+        "CRMS-EN074"
+      ]
+    },
+    {
+      "passcode": 40048324,
+      "name": "Arcane Apprentice",
+      "numbers": [
+        "CRMS-EN022"
+      ]
+    },
+    {
+      "passcode": 40225398,
+      "name": "Twin-Sword Marauder",
+      "numbers": [
+        "CRMS-EN006"
+      ]
+    },
+    {
+      "passcode": 40348946,
+      "name": "Hyper Synchron",
+      "numbers": [
+        "CRMS-EN003"
+      ]
+    },
+    {
+      "passcode": 40703222,
+      "name": "Multiply",
+      "numbers": [
+        "CRMS-EN090"
+      ]
+    },
+    {
+      "passcode": 41234315,
+      "name": "Fake Explosion",
+      "numbers": [
+        "CRMS-EN071"
+      ]
+    },
+    {
+      "passcode": 42079445,
+      "name": "Descending Lost Star",
+      "numbers": [
+        "CRMS-EN065"
+      ]
+    },
+    {
+      "passcode": 42956963,
+      "name": "Nightmare Archfiends",
+      "numbers": [
+        "CRMS-EN068"
+      ]
+    },
+    {
+      "passcode": 46239604,
+      "name": "Dupe Frog",
+      "numbers": [
+        "CRMS-EN028"
+      ]
+    },
+    {
+      "passcode": 48381268,
+      "name": "Morphtronic Boarden",
+      "numbers": [
+        "CRMS-EN017"
+      ]
+    },
+    {
+      "passcode": 49003716,
+      "name": "Blackwing - Bora the Spear",
+      "numbers": [
+        "CRMS-EN009"
+      ]
+    },
+    {
+      "passcode": 49826746,
+      "name": "Night Wing Sorceress",
+      "numbers": [
+        "CRMS-EN025"
+      ]
+    },
+    {
+      "passcode": 49980185,
+      "name": "Supernatural Regeneration",
+      "numbers": [
+        "CRMS-EN077"
+      ]
+    },
+    {
+      "passcode": 50263751,
+      "name": "Greed Quasar",
+      "numbers": [
+        "CRMS-EN098"
+      ]
+    },
+    {
+      "passcode": 52286175,
+      "name": "Trap Reactor ・Y FI",
+      "numbers": [
+        "CRMS-EN013"
+      ]
+    },
+    {
+      "passcode": 53291093,
+      "name": "Mysterious Triangle",
+      "numbers": [
+        "CRMS-EN062"
+      ]
+    },
+    {
+      "passcode": 54913680,
+      "name": "Six Scrolls of the Samurai",
+      "numbers": [
+        "CRMS-EN059"
+      ]
+    },
+    {
+      "passcode": 55136228,
+      "name": "Indomitable Gladiator Beast",
+      "numbers": [
+        "CRMS-EN056"
+      ]
+    },
+    {
+      "passcode": 56074358,
+      "name": "Morphtronic Map",
+      "numbers": [
+        "CRMS-EN050"
+      ]
+    },
+    {
+      "passcode": 56252810,
+      "name": "Assault Revival",
+      "numbers": [
+        "CRMS-EN053"
+      ]
+    },
+    {
+      "passcode": 62379337,
+      "name": "Violet Witch",
+      "numbers": [
+        "CRMS-EN097"
+      ]
+    },
+    {
+      "passcode": 63253763,
+      "name": "Alien Overlord",
+      "numbers": [
+        "CRMS-EN038"
+      ]
+    },
+    {
+      "passcode": 63948258,
+      "name": "Submarine Frog",
+      "numbers": [
+        "CRMS-EN087"
+      ]
+    },
+    {
+      "passcode": 64160836,
+      "name": "Alien Kid",
+      "numbers": [
+        "CRMS-EN084"
+      ]
+    },
+    {
+      "passcode": 64382839,
+      "name": "Zeta Reticulant",
+      "numbers": [
+        "CRMS-EN094"
+      ]
+    },
+    {
+      "passcode": 65282484,
+      "name": "Dark Voltanis",
+      "numbers": [
+        "CRMS-EN081"
+      ]
+    },
+    {
+      "passcode": 67196946,
+      "name": "Star Blast",
+      "numbers": [
+        "CRMS-EN047"
+      ]
+    },
+    {
+      "passcode": 68319538,
+      "name": "Cosmic Fortress Gol'gar",
+      "numbers": [
+        "CRMS-EN044"
+      ]
+    },
+    {
+      "passcode": 69031175,
+      "name": "Blackwing Armor Master",
+      "numbers": [
+        "CRMS-EN041"
+      ]
+    },
+    {
+      "passcode": 73333463,
+      "name": "Armoroid",
+      "numbers": [
+        "CRMS-EN099"
+      ]
+    },
+    {
+      "passcode": 74976215,
+      "name": "Cross-Sword Beetle",
+      "numbers": [
+        "CRMS-EN035"
+      ]
+    },
+    {
+      "passcode": 75198893,
+      "name": "Scanner",
+      "numbers": [
+        "CRMS-EN032"
+      ]
+    },
+    {
+      "passcode": 75498415,
+      "name": "Blackwing - Sirocco the Dawn",
+      "numbers": [
+        "CRMS-EN010"
+      ]
+    },
+    {
+      "passcode": 75775867,
+      "name": "Morphtronic Slingen",
+      "numbers": [
+        "CRMS-EN018"
+      ]
+    },
+    {
+      "passcode": 75937826,
+      "name": "B.E.S. Big Core MK-2",
+      "numbers": [
+        "CRMS-EN030"
+      ]
+    },
+    {
+      "passcode": 76214441,
+      "name": "Lifeforce Harmonizer",
+      "numbers": [
+        "CRMS-EN026"
+      ]
+    },
+    {
+      "passcode": 76384284,
+      "name": "Trojan Gladiator Beast",
+      "numbers": [
+        "CRMS-EN078"
+      ]
+    },
+    {
+      "passcode": 76407432,
+      "name": "Assault Counter",
+      "numbers": [
+        "CRMS-EN075"
+      ]
+    },
+    {
+      "passcode": 76614003,
+      "name": "Dark Tinker",
+      "numbers": [
+        "CRMS-EN007"
+      ]
+    },
+    {
+      "passcode": 77036039,
+      "name": "Assault Mercenary",
+      "numbers": [
+        "CRMS-EN023"
+      ]
+    },
+    {
+      "passcode": 77229910,
+      "name": "Morphtronic Forcefield",
+      "numbers": [
+        "CRMS-EN072"
+      ]
+    },
+    {
+      "passcode": 77336644,
+      "name": "Red Dragon Archfiend/Assault Mode",
+      "numbers": [
+        "CRMS-EN004"
+      ]
+    },
+    {
+      "passcode": 80280737,
+      "name": "Assault Mode Activate",
+      "numbers": [
+        "CRMS-EN063"
+      ]
+    },
+    {
+      "passcode": 80402389,
+      "name": "Verdant Sanctuary",
+      "numbers": [
+        "CRMS-EN060"
+      ]
+    },
+    {
+      "passcode": 81278754,
+      "name": "Flip Flop Frog",
+      "numbers": [
+        "CRMS-EN029"
+      ]
+    },
+    {
+      "passcode": 81524977,
+      "name": "Seed Cannon",
+      "numbers": [
+        "CRMS-EN057"
+      ]
+    },
+    {
+      "passcode": 87148330,
+      "name": "Tethys, Goddess of Light",
+      "numbers": [
+        "CRMS-EN095"
+      ]
+    },
+    {
+      "passcode": 88190790,
+      "name": "Assault Armor",
+      "numbers": [
+        "CRMS-EN092"
+      ]
+    },
+    {
+      "passcode": 88341502,
+      "name": "Ebon Arrow",
+      "numbers": [
+        "CRMS-EN069"
+      ]
+    },
+    {
+      "passcode": 88559132,
+      "name": "Turret Warrior",
+      "numbers": [
+        "CRMS-EN001"
+      ]
+    },
+    {
+      "passcode": 88671720,
+      "name": "Black Salvo",
+      "numbers": [
+        "CRMS-EN015"
+      ]
+    },
+    {
+      "passcode": 89493368,
+      "name": "Summon Reactor ・SK",
+      "numbers": [
+        "CRMS-EN012"
+      ]
+    },
+    {
+      "passcode": 89563150,
+      "name": "Shining Silver Force",
+      "numbers": [
+        "CRMS-EN066"
+      ]
+    },
+    {
+      "passcode": 92346415,
+      "name": "Psychic Sword",
+      "numbers": [
+        "CRMS-EN054"
+      ]
+    },
+    {
+      "passcode": 93469007,
+      "name": "Assault Overload",
+      "numbers": [
+        "CRMS-EN051"
+      ]
+    },
+    {
+      "passcode": 94303232,
+      "name": "Prevention Star",
+      "numbers": [
+        "CRMS-EN045"
+      ]
+    },
+    {
+      "passcode": 94681654,
+      "name": "Raptor Wing Strike",
+      "numbers": [
+        "CRMS-EN048"
+      ]
+    },
+    {
+      "passcode": 95526884,
+      "name": "Hyper Psychic Blaster",
+      "numbers": [
+        "CRMS-EN042"
+      ]
+    },
+    {
+      "passcode": 99342953,
+      "name": "Code A Ancient Ruins",
+      "numbers": [
+        "CRMS-EN088"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Crimson Crisis'; printings from the YGOPRODeck bulk dump."
+}

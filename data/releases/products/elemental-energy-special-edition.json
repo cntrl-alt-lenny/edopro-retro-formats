@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "elemental-energy-special-edition",
+  "code": "EEN",
+  "name": "Elemental Energy: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-11-30",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 48229808,
+      "name": "Horus the Black Flame Dragon LV8",
+      "numbers": [
+        "EEN-ENSE1"
+      ]
+    },
+    {
+      "passcode": 61441708,
+      "name": "Sacred Phoenix of Nephthys",
+      "numbers": [
+        "EEN-ENSE3"
+      ]
+    },
+    {
+      "passcode": 61505339,
+      "name": "The Creator",
+      "numbers": [
+        "EEN-ENSE2"
+      ]
+    },
+    {
+      "passcode": 74388798,
+      "name": "Silent Swordsman LV5",
+      "numbers": [
+        "EEN-ENSE4"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Elemental Energy: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

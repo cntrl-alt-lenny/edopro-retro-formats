@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-1",
+  "code": "DT01",
+  "name": "Duel Terminal 1",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-01-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2314238,
+      "name": "Dark Magic Attack",
+      "numbers": [
+        "DT01-EN040"
+      ]
+    },
+    {
+      "passcode": 4904812,
+      "name": "Genex Undine",
+      "numbers": [
+        "DT01-EN060"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "DT01-EN093"
+      ]
+    },
+    {
+      "passcode": 7093411,
+      "name": "Crystal Beast Sapphire Pegasus",
+      "numbers": [
+        "DT01-EN058"
+      ]
+    },
+    {
+      "passcode": 7391448,
+      "name": "Goyo Guardian",
+      "numbers": [
+        "DT01-EN087"
+      ]
+    },
+    {
+      "passcode": 10026986,
+      "name": "Worm King",
+      "numbers": [
+        "DT01-EN085"
+      ]
+    },
+    {
+      "passcode": 11159464,
+      "name": "Worm Hope",
+      "numbers": [
+        "DT01-EN082"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "DT01-EN050"
+      ]
+    },
+    {
+      "passcode": 14936691,
+      "name": "Worm Erokin",
+      "numbers": [
+        "DT01-EN030"
+      ]
+    },
+    {
+      "passcode": 15471265,
+      "name": "Berserker Crush",
+      "numbers": [
+        "DT01-EN044"
+      ]
+    },
+    {
+      "passcode": 15658249,
+      "name": "Worm Barses",
+      "numbers": [
+        "DT01-EN027"
+      ]
+    },
+    {
+      "passcode": 16589042,
+      "name": "Swift Gaia the Fierce Knight",
+      "numbers": [
+        "DT01-EN056"
+      ]
+    },
+    {
+      "passcode": 17449108,
+      "name": "Nobleman of Extermination",
+      "numbers": [
+        "DT01-EN038"
+      ]
+    },
+    {
+      "passcode": 17655904,
+      "name": "Burst Stream of Destruction",
+      "numbers": [
+        "DT01-EN039"
+      ]
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements",
+      "numbers": [
+        "DT01-EN049"
+      ]
+    },
+    {
+      "passcode": 18013090,
+      "name": "Nitro Warrior",
+      "numbers": [
+        "DT01-EN086"
+      ]
+    },
+    {
+      "passcode": 19204398,
+      "name": "Ally of Justice Light Gazer",
+      "numbers": [
+        "DT01-EN090"
+      ]
+    },
+    {
+      "passcode": 21615956,
+      "name": "Flamvell Guard",
+      "numbers": [
+        "DT01-EN018"
+      ]
+    },
+    {
+      "passcode": 22371016,
+      "name": "Ally of Justice Unknown Crusher",
+      "numbers": [
+        "DT01-EN079"
+      ]
+    },
+    {
+      "passcode": 22837504,
+      "name": "Mist Valley Soldier",
+      "numbers": [
+        "DT01-EN015"
+      ]
+    },
+    {
+      "passcode": 23093604,
+      "name": "X-Saber Pashuul",
+      "numbers": [
+        "DT01-EN076"
+      ]
+    },
+    {
+      "passcode": 23115241,
+      "name": "X-Saber Anu Piranha",
+      "numbers": [
+        "DT01-EN073"
+      ]
+    },
+    {
+      "passcode": 23950192,
+      "name": "Cryomancer of the Ice Barrier",
+      "numbers": [
+        "DT01-EN012"
+      ]
+    },
+    {
+      "passcode": 25247218,
+      "name": "Big Piece Golem",
+      "numbers": [
+        "DT01-EN053"
+      ]
+    },
+    {
+      "passcode": 25771826,
+      "name": "Ally of Justice Garadholg",
+      "numbers": [
+        "DT01-EN024"
+      ]
+    },
+    {
+      "passcode": 26593852,
+      "name": "Ally of Justice Catastor",
+      "numbers": [
+        "DT01-EN035"
+      ]
+    },
+    {
+      "passcode": 26993374,
+      "name": "X-Saber Uruz",
+      "numbers": [
+        "DT01-EN021"
+      ]
+    },
+    {
+      "passcode": 27315304,
+      "name": "Mist Wurm",
+      "numbers": [
+        "DT01-EN032"
+      ]
+    },
+    {
+      "passcode": 28332833,
+      "name": "Flamvell Poun",
+      "numbers": [
+        "DT01-EN070"
+      ]
+    },
+    {
+      "passcode": 29054481,
+      "name": "Mist Valley Watcher",
+      "numbers": [
+        "DT01-EN067"
+      ]
+    },
+    {
+      "passcode": 30276969,
+      "name": "Reese the Ice Mistress",
+      "numbers": [
+        "DT01-EN064"
+      ]
+    },
+    {
+      "passcode": 30399511,
+      "name": "Genex Power Planner",
+      "numbers": [
+        "DT01-EN061"
+      ]
+    },
+    {
+      "passcode": 34016756,
+      "name": "Riryoku",
+      "numbers": [
+        "DT01-EN092"
+      ]
+    },
+    {
+      "passcode": 37580756,
+      "name": "Michizure",
+      "numbers": [
+        "DT01-EN096"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "DT01-EN007"
+      ]
+    },
+    {
+      "passcode": 42941100,
+      "name": "Ojama Yellow",
+      "numbers": [
+        "DT01-EN004"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DT01-EN002"
+      ]
+    },
+    {
+      "passcode": 47421985,
+      "name": "Hydro Genex",
+      "numbers": [
+        "DT01-EN088"
+      ]
+    },
+    {
+      "passcode": 50321796,
+      "name": "Brionac, Dragon of the Ice Barrier",
+      "numbers": [
+        "DT01-EN031"
+      ]
+    },
+    {
+      "passcode": 50323155,
+      "name": "Black Horn of Heaven",
+      "numbers": [
+        "DT01-EN100"
+      ]
+    },
+    {
+      "passcode": 50604950,
+      "name": "X-Saber Galahad",
+      "numbers": [
+        "DT01-EN074"
+      ]
+    },
+    {
+      "passcode": 51043243,
+      "name": "Worm Cartaros",
+      "numbers": [
+        "DT01-EN028"
+      ]
+    },
+    {
+      "passcode": 52098461,
+      "name": "Wrath of Neos",
+      "numbers": [
+        "DT01-EN042"
+      ]
+    },
+    {
+      "passcode": 52265835,
+      "name": "Ally of Justice Rudra",
+      "numbers": [
+        "DT01-EN025"
+      ]
+    },
+    {
+      "passcode": 52684508,
+      "name": "Inferno Fire Blast",
+      "numbers": [
+        "DT01-EN041"
+      ]
+    },
+    {
+      "passcode": 52875873,
+      "name": "Evolution Burst",
+      "numbers": [
+        "DT01-EN045"
+      ]
+    },
+    {
+      "passcode": 53100061,
+      "name": "X-Saber Axel",
+      "numbers": [
+        "DT01-EN019"
+      ]
+    },
+    {
+      "passcode": 53388413,
+      "name": "Commander Gottoms, Swordmaster",
+      "numbers": [
+        "DT01-EN022"
+      ]
+    },
+    {
+      "passcode": 53714009,
+      "name": "Flamvell Uruquizas",
+      "numbers": [
+        "DT01-EN033"
+      ]
+    },
+    {
+      "passcode": 54326448,
+      "name": "Flamvell Archer",
+      "numbers": [
+        "DT01-EN071"
+      ]
+    },
+    {
+      "passcode": 56830749,
+      "name": "Share the Pain",
+      "numbers": [
+        "DT01-EN091"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "DT01-EN008"
+      ]
+    },
+    {
+      "passcode": 57543573,
+      "name": "Worm Illidan",
+      "numbers": [
+        "DT01-EN083"
+      ]
+    },
+    {
+      "passcode": 57882509,
+      "name": "Mask of Weakness",
+      "numbers": [
+        "DT01-EN047"
+      ]
+    },
+    {
+      "passcode": 58621589,
+      "name": "Shadow of Eyes",
+      "numbers": [
+        "DT01-EN097"
+      ]
+    },
+    {
+      "passcode": 58760121,
+      "name": "Worm Falco",
+      "numbers": [
+        "DT01-EN080"
+      ]
+    },
+    {
+      "passcode": 59482302,
+      "name": "Ally Salvo",
+      "numbers": [
+        "DT01-EN077"
+      ]
+    },
+    {
+      "passcode": 59965151,
+      "name": "Ghost Gardna",
+      "numbers": [
+        "DT01-EN052"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "DT01-EN046"
+      ]
+    },
+    {
+      "passcode": 60161788,
+      "name": "Blizzed, Defender of the Ice Barrier",
+      "numbers": [
+        "DT01-EN010"
+      ]
+    },
+    {
+      "passcode": 62325062,
+      "name": "Adhesion Trap Hole",
+      "numbers": [
+        "DT01-EN098"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "DT01-EN094"
+      ]
+    },
+    {
+      "passcode": 65549080,
+      "name": "Mist Condor",
+      "numbers": [
+        "DT01-EN068"
+      ]
+    },
+    {
+      "passcode": 66661678,
+      "name": "Royal Knight of the Ice Barrier",
+      "numbers": [
+        "DT01-EN065"
+      ]
+    },
+    {
+      "passcode": 67483216,
+      "name": "Genex Searcher",
+      "numbers": [
+        "DT01-EN062"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "DT01-EN036"
+      ]
+    },
+    {
+      "passcode": 68226653,
+      "name": "Flamvell Dragnov",
+      "numbers": [
+        "DT01-EN016"
+      ]
+    },
+    {
+      "passcode": 68505803,
+      "name": "Genex Controller",
+      "numbers": [
+        "DT01-EN059"
+      ]
+    },
+    {
+      "passcode": 69448290,
+      "name": "Mist Valley Thunderbird",
+      "numbers": [
+        "DT01-EN013"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "DT01-EN009"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "DT01-EN003"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "DT01-EN048"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "DT01-EN006"
+      ]
+    },
+    {
+      "passcode": 80108118,
+      "name": "X-Saber Urbellum",
+      "numbers": [
+        "DT01-EN034"
+      ]
+    },
+    {
+      "passcode": 83810690,
+      "name": "X-Saber Wayne",
+      "numbers": [
+        "DT01-EN089"
+      ]
+    },
+    {
+      "passcode": 84932271,
+      "name": "Worm Jetelikpse",
+      "numbers": [
+        "DT01-EN084"
+      ]
+    },
+    {
+      "passcode": 85754829,
+      "name": "Worm Gulse",
+      "numbers": [
+        "DT01-EN081"
+      ]
+    },
+    {
+      "passcode": 85876417,
+      "name": "Ally of Justice Thousand Arms",
+      "numbers": [
+        "DT01-EN078"
+      ]
+    },
+    {
+      "passcode": 88438982,
+      "name": "Worm Dimikles",
+      "numbers": [
+        "DT01-EN029"
+      ]
+    },
+    {
+      "passcode": 88650530,
+      "name": "Worm Apocalypse",
+      "numbers": [
+        "DT01-EN026"
+      ]
+    },
+    {
+      "passcode": 89086566,
+      "name": "Detonate",
+      "numbers": [
+        "DT01-EN043"
+      ]
+    },
+    {
+      "passcode": 89386122,
+      "name": "Ally of Justice Clausolas",
+      "numbers": [
+        "DT01-EN023"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DT01-EN001"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "DT01-EN005"
+      ]
+    },
+    {
+      "passcode": 90508760,
+      "name": "X-Saber Airbellum",
+      "numbers": [
+        "DT01-EN020"
+      ]
+    },
+    {
+      "passcode": 91711547,
+      "name": "Flamvell Fiend",
+      "numbers": [
+        "DT01-EN072"
+      ]
+    },
+    {
+      "passcode": 91932350,
+      "name": "Harpie Lady 1",
+      "numbers": [
+        "DT01-EN057"
+      ]
+    },
+    {
+      "passcode": 92065772,
+      "name": "Numbing Grub in the Ice Barrier",
+      "numbers": [
+        "DT01-EN066"
+      ]
+    },
+    {
+      "passcode": 92933195,
+      "name": "Mist Valley Windmaster",
+      "numbers": [
+        "DT01-EN069"
+      ]
+    },
+    {
+      "passcode": 93882364,
+      "name": "Genex Worker",
+      "numbers": [
+        "DT01-EN063"
+      ]
+    },
+    {
+      "passcode": 95443805,
+      "name": "Mist Valley Shaman",
+      "numbers": [
+        "DT01-EN014"
+      ]
+    },
+    {
+      "passcode": 95621257,
+      "name": "Flamvell Magician",
+      "numbers": [
+        "DT01-EN017"
+      ]
+    },
+    {
+      "passcode": 96099959,
+      "name": "X-Saber Palomuro",
+      "numbers": [
+        "DT01-EN075"
+      ]
+    },
+    {
+      "passcode": 96182448,
+      "name": "Nitro Synchron",
+      "numbers": [
+        "DT01-EN051"
+      ]
+    },
+    {
+      "passcode": 96331676,
+      "name": "Crystal Raigeki",
+      "numbers": [
+        "DT01-EN099"
+      ]
+    },
+    {
+      "passcode": 96565487,
+      "name": "Blizzard Warrior",
+      "numbers": [
+        "DT01-EN011"
+      ]
+    },
+    {
+      "passcode": 97021916,
+      "name": "Dark Resonator",
+      "numbers": [
+        "DT01-EN054"
+      ]
+    },
+    {
+      "passcode": 97687912,
+      "name": "Fairy Meteor Crush",
+      "numbers": [
+        "DT01-EN095"
+      ]
+    },
+    {
+      "passcode": 97904474,
+      "name": "Handcuffs Dragon",
+      "numbers": [
+        "DT01-EN055"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "DT01-EN037"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal 1'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,992 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "labyrinth-of-nightmare",
+  "code": "LON",
+  "name": "Labyrinth of Nightmare",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-03-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3573512,
+      "name": "Swordsman of Landstar",
+      "numbers": [
+        "LON-002",
+        "LON-E002",
+        "LON-EN002"
+      ]
+    },
+    {
+      "passcode": 5434080,
+      "name": "Headless Knight",
+      "numbers": [
+        "LON-054",
+        "LON-E054",
+        "LON-EN054"
+      ]
+    },
+    {
+      "passcode": 5494820,
+      "name": "Cyclon Laser",
+      "numbers": [
+        "LON-095",
+        "LON-E095",
+        "LON-EN095"
+      ]
+    },
+    {
+      "passcode": 5600127,
+      "name": "Humanoid Worm Drake",
+      "numbers": [
+        "LON-005",
+        "LON-E005",
+        "LON-EN005"
+      ]
+    },
+    {
+      "passcode": 5616412,
+      "name": "Destruction Punch",
+      "numbers": [
+        "LON-085",
+        "LON-E085",
+        "LON-EN085"
+      ]
+    },
+    {
+      "passcode": 6343408,
+      "name": "Miracle Dig",
+      "numbers": [
+        "LON-100",
+        "LON-E100",
+        "LON-EN100"
+      ]
+    },
+    {
+      "passcode": 6733059,
+      "name": "Skull Lair",
+      "numbers": [
+        "LON-082",
+        "LON-E082",
+        "LON-EN082"
+      ]
+    },
+    {
+      "passcode": 7165085,
+      "name": "Bait Doll",
+      "numbers": [
+        "LON-096",
+        "LON-E096",
+        "LON-EN096"
+      ]
+    },
+    {
+      "passcode": 7565547,
+      "name": "Collected Power",
+      "numbers": [
+        "LON-078",
+        "LON-E078",
+        "LON-EN078"
+      ]
+    },
+    {
+      "passcode": 8687195,
+      "name": "Dreamsprite",
+      "numbers": [
+        "LON-073",
+        "LON-E073",
+        "LON-EN073"
+      ]
+    },
+    {
+      "passcode": 10352095,
+      "name": "Scroll of Bewitchment",
+      "numbers": [
+        "LON-048",
+        "LON-E048",
+        "LON-EN048"
+      ]
+    },
+    {
+      "passcode": 12800777,
+      "name": "Garuda the Wind Spirit",
+      "numbers": [
+        "LON-070",
+        "LON-E070",
+        "LON-EN070"
+      ]
+    },
+    {
+      "passcode": 12883044,
+      "name": "Flame Dancer",
+      "numbers": [
+        "LON-058",
+        "LON-E058",
+        "LON-EN058"
+      ]
+    },
+    {
+      "passcode": 12953226,
+      "name": "Nuvia the Wicked",
+      "numbers": [
+        "LON-013",
+        "LON-E013",
+        "LON-EN013"
+      ]
+    },
+    {
+      "passcode": 13522325,
+      "name": "Spirit of Flames",
+      "numbers": [
+        "LON-067",
+        "LON-E067",
+        "LON-EN067"
+      ]
+    },
+    {
+      "passcode": 13676474,
+      "name": "Grand Tiki Elder",
+      "numbers": [
+        "LON-011",
+        "LON-E011",
+        "LON-EN011"
+      ]
+    },
+    {
+      "passcode": 14644902,
+      "name": "Summoner of Illusions",
+      "numbers": [
+        "LON-063",
+        "LON-E063",
+        "LON-EN063"
+      ]
+    },
+    {
+      "passcode": 15866454,
+      "name": "Spiritualism",
+      "numbers": [
+        "LON-094",
+        "LON-E094",
+        "LON-EN094"
+      ]
+    },
+    {
+      "passcode": 18605135,
+      "name": "Tornado Wall",
+      "numbers": [
+        "LON-023",
+        "LON-E023",
+        "LON-EN023"
+      ]
+    },
+    {
+      "passcode": 19230407,
+      "name": "Offerings to the Doomed",
+      "numbers": [
+        "LON-051",
+        "LON-E051",
+        "LON-EN051"
+      ]
+    },
+    {
+      "passcode": 19827717,
+      "name": "Return of the Doomed",
+      "numbers": [
+        "LON-021",
+        "LON-E021",
+        "LON-EN021"
+      ]
+    },
+    {
+      "passcode": 20765952,
+      "name": "Mask of Dispel",
+      "numbers": [
+        "LON-017",
+        "LON-E017",
+        "LON-EN017"
+      ]
+    },
+    {
+      "passcode": 21175632,
+      "name": "St. Joan",
+      "numbers": [
+        "LON-045",
+        "LON-E045",
+        "LON-EN045"
+      ]
+    },
+    {
+      "passcode": 21297224,
+      "name": "Hysteric Fairy",
+      "numbers": [
+        "LON-042",
+        "LON-E042",
+        "LON-EN042"
+      ]
+    },
+    {
+      "passcode": 21558682,
+      "name": "Jam Defender",
+      "numbers": [
+        "LON-028",
+        "LON-E028",
+        "LON-EN028"
+      ]
+    },
+    {
+      "passcode": 21598948,
+      "name": "Fairy Box",
+      "numbers": [
+        "LON-024",
+        "LON-E024",
+        "LON-EN024"
+      ]
+    },
+    {
+      "passcode": 21770260,
+      "name": "Jam Breeding Machine",
+      "numbers": [
+        "LON-026",
+        "LON-E026",
+        "LON-EN026"
+      ]
+    },
+    {
+      "passcode": 21888494,
+      "name": "Chosen One",
+      "numbers": [
+        "LON-014",
+        "LON-E014",
+        "LON-EN014"
+      ]
+    },
+    {
+      "passcode": 22419772,
+      "name": "Fairy Guardian",
+      "numbers": [
+        "LON-039",
+        "LON-E039",
+        "LON-EN039"
+      ]
+    },
+    {
+      "passcode": 27132350,
+      "name": "Fire Sorcerer",
+      "numbers": [
+        "LON-036",
+        "LON-E036",
+        "LON-EN036"
+      ]
+    },
+    {
+      "passcode": 27671321,
+      "name": "Lightning Conger",
+      "numbers": [
+        "LON-060",
+        "LON-E060",
+        "LON-EN060"
+      ]
+    },
+    {
+      "passcode": 28358902,
+      "name": "Crimson Sentry",
+      "numbers": [
+        "LON-033",
+        "LON-E033",
+        "LON-EN033"
+      ]
+    },
+    {
+      "passcode": 29549364,
+      "name": "Mask of Restrict",
+      "numbers": [
+        "LON-018",
+        "LON-E018",
+        "LON-EN018"
+      ]
+    },
+    {
+      "passcode": 30170981,
+      "name": "Spirit Message \"L\"",
+      "numbers": [
+        "LON-092",
+        "LON-E092",
+        "LON-EN092"
+      ]
+    },
+    {
+      "passcode": 30606547,
+      "name": "The Dark Door",
+      "numbers": [
+        "LON-093",
+        "LON-E093",
+        "LON-EN093"
+      ]
+    },
+    {
+      "passcode": 31709826,
+      "name": "Revival Jam",
+      "numbers": [
+        "LON-006",
+        "LON-E006",
+        "LON-EN006"
+      ]
+    },
+    {
+      "passcode": 31829185,
+      "name": "Dark Necrofear",
+      "numbers": [
+        "LON-065",
+        "LON-E065",
+        "LON-EN065"
+      ]
+    },
+    {
+      "passcode": 31893528,
+      "name": "Spirit Message \"I\"",
+      "numbers": [
+        "LON-089",
+        "LON-E089",
+        "LON-EN089"
+      ]
+    },
+    {
+      "passcode": 31987274,
+      "name": "Flying Fish",
+      "numbers": [
+        "LON-007",
+        "LON-E007",
+        "LON-EN007"
+      ]
+    },
+    {
+      "passcode": 32015116,
+      "name": "Blind Destruction",
+      "numbers": [
+        "LON-086",
+        "LON-E086",
+        "LON-EN086"
+      ]
+    },
+    {
+      "passcode": 32437102,
+      "name": "Dragonic Attack",
+      "numbers": [
+        "LON-101",
+        "LON-E101",
+        "LON-EN101"
+      ]
+    },
+    {
+      "passcode": 32541773,
+      "name": "The Portrait's Secret",
+      "numbers": [
+        "LON-052",
+        "LON-E052",
+        "LON-EN052"
+      ]
+    },
+    {
+      "passcode": 33550694,
+      "name": "Fusion Gate",
+      "numbers": [
+        "LON-098",
+        "LON-E098",
+        "LON-EN098"
+      ]
+    },
+    {
+      "passcode": 33737664,
+      "name": "Graverobber's Retribution",
+      "numbers": [
+        "LON-083",
+        "LON-E083",
+        "LON-EN083"
+      ]
+    },
+    {
+      "passcode": 33950246,
+      "name": "Royal Command",
+      "numbers": [
+        "LON-080",
+        "LON-E080",
+        "LON-EN080"
+      ]
+    },
+    {
+      "passcode": 38480590,
+      "name": "Lady Panther",
+      "numbers": [
+        "LON-030",
+        "LON-E030",
+        "LON-EN030"
+      ]
+    },
+    {
+      "passcode": 40133511,
+      "name": "Bazoo the Soul-Eater",
+      "numbers": [
+        "LON-064",
+        "LON-E064",
+        "LON-EN064"
+      ]
+    },
+    {
+      "passcode": 40916023,
+      "name": "Aqua Spirit",
+      "numbers": [
+        "LON-068",
+        "LON-E068",
+        "LON-EN068"
+      ]
+    },
+    {
+      "passcode": 41855169,
+      "name": "Jowgen the Spiritualist",
+      "numbers": [
+        "LON-061",
+        "LON-E061",
+        "LON-EN061"
+      ]
+    },
+    {
+      "passcode": 44072894,
+      "name": "Supply",
+      "numbers": [
+        "LON-075",
+        "LON-E075",
+        "LON-EN075"
+      ]
+    },
+    {
+      "passcode": 45894482,
+      "name": "Gilasaurus",
+      "numbers": [
+        "LON-071",
+        "LON-E071",
+        "LON-EN071"
+      ]
+    },
+    {
+      "passcode": 46821314,
+      "name": "Humanoid Slime",
+      "numbers": [
+        "LON-003",
+        "LON-E003",
+        "LON-EN003"
+      ]
+    },
+    {
+      "passcode": 49064413,
+      "name": "The Masked Beast",
+      "numbers": [
+        "LON-001",
+        "LON-E001",
+        "LON-EN001"
+      ]
+    },
+    {
+      "passcode": 52121290,
+      "name": "Spherous Lady",
+      "numbers": [
+        "LON-059",
+        "LON-E059",
+        "LON-EN059"
+      ]
+    },
+    {
+      "passcode": 53530069,
+      "name": "Spirit of the Breeze",
+      "numbers": [
+        "LON-037",
+        "LON-E037",
+        "LON-EN037"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "LON-025",
+        "LON-E025",
+        "LON-EN025"
+      ]
+    },
+    {
+      "passcode": 55226821,
+      "name": "Lightning Blade",
+      "numbers": [
+        "LON-022",
+        "LON-E022",
+        "LON-EN022"
+      ]
+    },
+    {
+      "passcode": 56747793,
+      "name": "United We Stand",
+      "numbers": [
+        "LON-049",
+        "LON-E049",
+        "LON-EN049"
+      ]
+    },
+    {
+      "passcode": 56948373,
+      "name": "Mask of the Accursed",
+      "numbers": [
+        "LON-019",
+        "LON-E019",
+        "LON-EN019"
+      ]
+    },
+    {
+      "passcode": 57579381,
+      "name": "Darklord Marie",
+      "numbers": [
+        "LON-046",
+        "LON-E046",
+        "LON-EN046"
+      ]
+    },
+    {
+      "passcode": 57882509,
+      "name": "Mask of Weakness",
+      "numbers": [
+        "LON-015",
+        "LON-E015",
+        "LON-EN015"
+      ]
+    },
+    {
+      "passcode": 57953380,
+      "name": "Card of Safe Return",
+      "numbers": [
+        "LON-029",
+        "LON-E029",
+        "LON-EN029"
+      ]
+    },
+    {
+      "passcode": 58696829,
+      "name": "Bio-Mage",
+      "numbers": [
+        "LON-043",
+        "LON-E043",
+        "LON-EN043"
+      ]
+    },
+    {
+      "passcode": 58818411,
+      "name": "Empress Mantis",
+      "numbers": [
+        "LON-040",
+        "LON-E040",
+        "LON-EN040"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "LON-104",
+        "LON-E104",
+        "LON-EN104"
+      ]
+    },
+    {
+      "passcode": 64752646,
+      "name": "Fire Princess",
+      "numbers": [
+        "LON-034",
+        "LON-E034",
+        "LON-EN034"
+      ]
+    },
+    {
+      "passcode": 65475294,
+      "name": "The Unfriendly Amazon",
+      "numbers": [
+        "LON-031",
+        "LON-E031",
+        "LON-EN031"
+      ]
+    },
+    {
+      "passcode": 66989694,
+      "name": "The Earl of Demise",
+      "numbers": [
+        "LON-056",
+        "LON-E056",
+        "LON-EN056"
+      ]
+    },
+    {
+      "passcode": 67105242,
+      "name": "Earthbound Spirit",
+      "numbers": [
+        "LON-055",
+        "LON-E055",
+        "LON-EN055"
+      ]
+    },
+    {
+      "passcode": 67287533,
+      "name": "Spirit Message \"N\"",
+      "numbers": [
+        "LON-090",
+        "LON-E090",
+        "LON-EN090"
+      ]
+    },
+    {
+      "passcode": 67371383,
+      "name": "Amphibian Beast",
+      "numbers": [
+        "LON-008",
+        "LON-E008",
+        "LON-EN008"
+      ]
+    },
+    {
+      "passcode": 68049471,
+      "name": "The Gross Ghost of Fled Dreams",
+      "numbers": [
+        "LON-053",
+        "LON-E053",
+        "LON-EN053"
+      ]
+    },
+    {
+      "passcode": 68400115,
+      "name": "The Emperor's Holiday",
+      "numbers": [
+        "LON-087",
+        "LON-E087",
+        "LON-EN087"
+      ]
+    },
+    {
+      "passcode": 69122763,
+      "name": "Deal of Phantom",
+      "numbers": [
+        "LON-084",
+        "LON-E084",
+        "LON-EN084"
+      ]
+    },
+    {
+      "passcode": 69140098,
+      "name": "Gemini Elf",
+      "numbers": [
+        "LON-000",
+        "LON-E000",
+        "LON-EN000"
+      ]
+    },
+    {
+      "passcode": 69832741,
+      "name": "Spirit Elimination",
+      "numbers": [
+        "LON-102",
+        "LON-E102",
+        "LON-EN102"
+      ]
+    },
+    {
+      "passcode": 69954399,
+      "name": "Ekibyo Drakmord",
+      "numbers": [
+        "LON-099",
+        "LON-E099",
+        "LON-EN099"
+      ]
+    },
+    {
+      "passcode": 70344351,
+      "name": "Riryoku Field",
+      "numbers": [
+        "LON-081",
+        "LON-E081",
+        "LON-EN081"
+      ]
+    },
+    {
+      "passcode": 71283180,
+      "name": "Tornado Bird",
+      "numbers": [
+        "LON-072",
+        "LON-E072",
+        "LON-EN072"
+      ]
+    },
+    {
+      "passcode": 71466592,
+      "name": "Maryokutai",
+      "numbers": [
+        "LON-076",
+        "LON-E076",
+        "LON-EN076"
+      ]
+    },
+    {
+      "passcode": 73216412,
+      "name": "Worm Drake",
+      "numbers": [
+        "LON-004",
+        "LON-E004",
+        "LON-EN004"
+      ]
+    },
+    {
+      "passcode": 76305638,
+      "name": "The Rock Spirit",
+      "numbers": [
+        "LON-069",
+        "LON-E069",
+        "LON-EN069"
+      ]
+    },
+    {
+      "passcode": 77527210,
+      "name": "Soul of Purity and Light",
+      "numbers": [
+        "LON-066",
+        "LON-E066",
+        "LON-EN066"
+      ]
+    },
+    {
+      "passcode": 82432018,
+      "name": "Mask of Brutality",
+      "numbers": [
+        "LON-020",
+        "LON-E020",
+        "LON-EN020"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "LON-050",
+        "LON-E050",
+        "LON-EN050"
+      ]
+    },
+    {
+      "passcode": 83968380,
+      "name": "Jar of Greed",
+      "numbers": [
+        "LON-047",
+        "LON-E047",
+        "LON-EN047"
+      ]
+    },
+    {
+      "passcode": 84080938,
+      "name": "The Forgiving Maiden",
+      "numbers": [
+        "LON-044",
+        "LON-E044",
+        "LON-EN044"
+      ]
+    },
+    {
+      "passcode": 85802526,
+      "name": "Cure Mermaid",
+      "numbers": [
+        "LON-041",
+        "LON-E041",
+        "LON-EN041"
+      ]
+    },
+    {
+      "passcode": 86099788,
+      "name": "The Last Warrior from Another Planet",
+      "numbers": [
+        "LON-077",
+        "LON-E077",
+        "LON-EN077"
+      ]
+    },
+    {
+      "passcode": 86281779,
+      "name": "Gadget Soldier",
+      "numbers": [
+        "LON-010",
+        "LON-E010",
+        "LON-EN010"
+      ]
+    },
+    {
+      "passcode": 86569121,
+      "name": "Melchid the Four-Face Beast",
+      "numbers": [
+        "LON-012",
+        "LON-E012",
+        "LON-EN012"
+      ]
+    },
+    {
+      "passcode": 87303357,
+      "name": "Shining Abyss",
+      "numbers": [
+        "LON-009",
+        "LON-E009",
+        "LON-EN009"
+      ]
+    },
+    {
+      "passcode": 88240808,
+      "name": "Kycoo the Ghost Destroyer",
+      "numbers": [
+        "LON-062",
+        "LON-E062",
+        "LON-EN062"
+      ]
+    },
+    {
+      "passcode": 88472456,
+      "name": "Zombyra the Dark",
+      "numbers": [
+        "LON-074",
+        "LON-E074",
+        "LON-EN074"
+      ]
+    },
+    {
+      "passcode": 90147755,
+      "name": "Lady Assailant of Flames",
+      "numbers": [
+        "LON-035",
+        "LON-E035",
+        "LON-EN035"
+      ]
+    },
+    {
+      "passcode": 90925163,
+      "name": "Dancing Fairy",
+      "numbers": [
+        "LON-038",
+        "LON-E038",
+        "LON-EN038"
+      ]
+    },
+    {
+      "passcode": 91869203,
+      "name": "Amazoness Archer",
+      "numbers": [
+        "LON-032",
+        "LON-E032",
+        "LON-EN032"
+      ]
+    },
+    {
+      "passcode": 93599951,
+      "name": "Dark Spirit of the Silent",
+      "numbers": [
+        "LON-079",
+        "LON-E079",
+        "LON-EN079"
+      ]
+    },
+    {
+      "passcode": 94163677,
+      "name": "Infinite Cards",
+      "numbers": [
+        "LON-027",
+        "LON-E027",
+        "LON-EN027"
+      ]
+    },
+    {
+      "passcode": 94212438,
+      "name": "Destiny Board",
+      "numbers": [
+        "LON-088",
+        "LON-E088",
+        "LON-EN088"
+      ]
+    },
+    {
+      "passcode": 94377247,
+      "name": "Curse of the Masked Beast",
+      "numbers": [
+        "LON-016",
+        "LON-E016",
+        "LON-EN016"
+      ]
+    },
+    {
+      "passcode": 94772232,
+      "name": "Spirit Message \"A\"",
+      "numbers": [
+        "LON-091",
+        "LON-E091",
+        "LON-EN091"
+      ]
+    },
+    {
+      "passcode": 95220856,
+      "name": "Vengeful Bog Spirit",
+      "numbers": [
+        "LON-103",
+        "LON-E103",
+        "LON-EN103"
+      ]
+    },
+    {
+      "passcode": 95286165,
+      "name": "De-Fusion",
+      "numbers": [
+        "LON-097",
+        "LON-E097",
+        "LON-EN097"
+      ]
+    },
+    {
+      "passcode": 98456117,
+      "name": "Boneheimer",
+      "numbers": [
+        "LON-057",
+        "LON-E057",
+        "LON-EN057"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Labyrinth of Nightmare'; printings from the YGOPRODeck bulk dump."
+}

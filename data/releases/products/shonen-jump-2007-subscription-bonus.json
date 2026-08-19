@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-2007-subscription-bonus",
+  "code": "JUMP",
+  "name": "Shonen Jump 2007 subscription bonus",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-07-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 46668237,
+      "name": "Green Baboon, Defender of the Forest",
+      "numbers": [
+        "JUMP-EN014"
+      ]
+    },
+    {
+      "passcode": 66973070,
+      "name": "Dreadscythe Harvester",
+      "numbers": [
+        "JUMP-EN015"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump 2007 subscription bonus'; printings from the YGOPRODeck bulk dump."
+}

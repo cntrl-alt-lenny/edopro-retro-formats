@@ -12,13 +12,737 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "edisonformat-legal-sets"
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-02-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-02-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
       ]
     }
   ],
-  "printings": [],
-  "sources": [
-    "edisonformat-legal-sets"
+  "printings": [
+    {
+      "passcode": 2203790,
+      "name": "XX-Saber Hyunlei",
+      "numbers": [
+        "ABPF-EN044"
+      ]
+    },
+    {
+      "passcode": 2980764,
+      "name": "Consecrated Light",
+      "numbers": [
+        "ABPF-EN033"
+      ]
+    },
+    {
+      "passcode": 3381441,
+      "name": "Gravekeeper's Priestess",
+      "numbers": [
+        "ABPF-EN000"
+      ]
+    },
+    {
+      "passcode": 3429238,
+      "name": "Drill Warrior",
+      "numbers": [
+        "ABPF-EN041"
+      ]
+    },
+    {
+      "passcode": 3603242,
+      "name": "Shreddder",
+      "numbers": [
+        "ABPF-EN030"
+      ]
+    },
+    {
+      "passcode": 3825890,
+      "name": "Gravekeeper's Visionary",
+      "numbers": [
+        "ABPF-EN027"
+      ]
+    },
+    {
+      "passcode": 4141820,
+      "name": "Djinn Prognosticator of Rituals",
+      "numbers": [
+        "ABPF-EN038"
+      ]
+    },
+    {
+      "passcode": 4404099,
+      "name": "The Dragon Dwelling in the Deep",
+      "numbers": [
+        "ABPF-EN086"
+      ]
+    },
+    {
+      "passcode": 4796100,
+      "name": "Chimera the Flying Mythical Beast",
+      "numbers": [
+        "ABPF-EN092"
+      ]
+    },
+    {
+      "passcode": 4941482,
+      "name": "Informer Spider",
+      "numbers": [
+        "ABPF-EN024"
+      ]
+    },
+    {
+      "passcode": 5220687,
+      "name": "Super-Nimble Mega Hamster",
+      "numbers": [
+        "ABPF-EN083"
+      ]
+    },
+    {
+      "passcode": 5373478,
+      "name": "Cyber Dragon Zwei",
+      "numbers": [
+        "ABPF-EN035"
+      ]
+    },
+    {
+      "passcode": 5763020,
+      "name": "Weeping Idol",
+      "numbers": [
+        "ABPF-EN021"
+      ]
+    },
+    {
+      "passcode": 15684835,
+      "name": "Evil Blast",
+      "numbers": [
+        "ABPF-EN094"
+      ]
+    },
+    {
+      "passcode": 15939448,
+      "name": "Shield Worm",
+      "numbers": [
+        "ABPF-EN099"
+      ]
+    },
+    {
+      "passcode": 16008155,
+      "name": "Reptilianne Servant",
+      "numbers": [
+        "ABPF-EN015"
+      ]
+    },
+    {
+      "passcode": 16229315,
+      "name": "Gale Dogra",
+      "numbers": [
+        "ABPF-EN090"
+      ]
+    },
+    {
+      "passcode": 16678947,
+      "name": "Psi-Curse",
+      "numbers": [
+        "ABPF-EN078"
+      ]
+    },
+    {
+      "passcode": 16886617,
+      "name": "Reptilianne Vaskii",
+      "numbers": [
+        "ABPF-EN018"
+      ]
+    },
+    {
+      "passcode": 17490535,
+      "name": "Alien Brain",
+      "numbers": [
+        "ABPF-EN075"
+      ]
+    },
+    {
+      "passcode": 17720747,
+      "name": "Witch of the Black Rose",
+      "numbers": [
+        "ABPF-EN012"
+      ]
+    },
+    {
+      "passcode": 18517177,
+      "name": "Core Blast",
+      "numbers": [
+        "ABPF-EN072"
+      ]
+    },
+    {
+      "passcode": 18739764,
+      "name": "Destruct Potion",
+      "numbers": [
+        "ABPF-EN069"
+      ]
+    },
+    {
+      "passcode": 18842395,
+      "name": "Power Invader",
+      "numbers": [
+        "ABPF-EN009"
+      ]
+    },
+    {
+      "passcode": 19451302,
+      "name": "Serpent Suppression",
+      "numbers": [
+        "ABPF-EN066"
+      ]
+    },
+    {
+      "passcode": 19665973,
+      "name": "Battle Fader",
+      "numbers": [
+        "ABPF-EN006"
+      ]
+    },
+    {
+      "passcode": 20797524,
+      "name": "Tricular",
+      "numbers": [
+        "ABPF-EN003"
+      ]
+    },
+    {
+      "passcode": 22858242,
+      "name": "Zeman the Ape King",
+      "numbers": [
+        "ABPF-EN097"
+      ]
+    },
+    {
+      "passcode": 24673894,
+      "name": "Changing Destiny",
+      "numbers": [
+        "ABPF-EN063"
+      ]
+    },
+    {
+      "passcode": 25518020,
+      "name": "Machine Assembly Line",
+      "numbers": [
+        "ABPF-EN057"
+      ]
+    },
+    {
+      "passcode": 25796442,
+      "name": "Ritual Cage",
+      "numbers": [
+        "ABPF-EN060"
+      ]
+    },
+    {
+      "passcode": 26640671,
+      "name": "Spiders' Lair",
+      "numbers": [
+        "ABPF-EN054"
+      ]
+    },
+    {
+      "passcode": 27863269,
+      "name": "Rocket Pilder",
+      "numbers": [
+        "ABPF-EN051"
+      ]
+    },
+    {
+      "passcode": 28859794,
+      "name": "Shield Wing",
+      "numbers": [
+        "ABPF-EN095"
+      ]
+    },
+    {
+      "passcode": 30213599,
+      "name": "Gravekeeper's Descendant",
+      "numbers": [
+        "ABPF-EN028"
+      ]
+    },
+    {
+      "passcode": 30492798,
+      "name": "Djinn Disserere of Rituals",
+      "numbers": [
+        "ABPF-EN087"
+      ]
+    },
+    {
+      "passcode": 30646525,
+      "name": "Garlandolf, King of Destruction",
+      "numbers": [
+        "ABPF-EN039"
+      ]
+    },
+    {
+      "passcode": 30770156,
+      "name": "Core Transport Unit",
+      "numbers": [
+        "ABPF-EN089"
+      ]
+    },
+    {
+      "passcode": 30936186,
+      "name": "Koa'ki Meiru Urnight",
+      "numbers": [
+        "ABPF-EN025"
+      ]
+    },
+    {
+      "passcode": 31615285,
+      "name": "Cactus Bouncer",
+      "numbers": [
+        "ABPF-EN084"
+      ]
+    },
+    {
+      "passcode": 31768112,
+      "name": "Oilman",
+      "numbers": [
+        "ABPF-EN036"
+      ]
+    },
+    {
+      "passcode": 38589847,
+      "name": "Advance Force",
+      "numbers": [
+        "ABPF-EN048"
+      ]
+    },
+    {
+      "passcode": 38975369,
+      "name": "Gundari",
+      "numbers": [
+        "ABPF-EN034"
+      ]
+    },
+    {
+      "passcode": 39091951,
+      "name": "Pandaborg",
+      "numbers": [
+        "ABPF-EN031"
+      ]
+    },
+    {
+      "passcode": 39701395,
+      "name": "Cards of Consonance",
+      "numbers": [
+        "ABPF-EN045"
+      ]
+    },
+    {
+      "passcode": 39823987,
+      "name": "Sun Dragon Inti",
+      "numbers": [
+        "ABPF-EN042"
+      ]
+    },
+    {
+      "passcode": 41158734,
+      "name": "Apocatequil",
+      "numbers": [
+        "ABPF-EN022"
+      ]
+    },
+    {
+      "passcode": 42167046,
+      "name": "Widespread Dud",
+      "numbers": [
+        "ABPF-EN079"
+      ]
+    },
+    {
+      "passcode": 42280216,
+      "name": "Oracle of the Sun",
+      "numbers": [
+        "ABPF-EN019"
+      ]
+    },
+    {
+      "passcode": 42737833,
+      "name": "XX-Saber Emmersblade",
+      "numbers": [
+        "ABPF-EN081"
+      ]
+    },
+    {
+      "passcode": 43002864,
+      "name": "Reptilianne Gardna",
+      "numbers": [
+        "ABPF-EN016"
+      ]
+    },
+    {
+      "passcode": 43889633,
+      "name": "Forgotten Temple of the Deep",
+      "numbers": [
+        "ABPF-EN076"
+      ]
+    },
+    {
+      "passcode": 44125452,
+      "name": "Rose Fairy",
+      "numbers": [
+        "ABPF-EN013"
+      ]
+    },
+    {
+      "passcode": 44341034,
+      "name": "Dark Bug",
+      "numbers": [
+        "ABPF-EN010"
+      ]
+    },
+    {
+      "passcode": 44901281,
+      "name": "Saber Hole",
+      "numbers": [
+        "ABPF-EN073"
+      ]
+    },
+    {
+      "passcode": 45133463,
+      "name": "Call of the Reaper",
+      "numbers": [
+        "ABPF-EN070"
+      ]
+    },
+    {
+      "passcode": 50078509,
+      "name": "Fiendish Chain",
+      "numbers": [
+        "ABPF-EN064"
+      ]
+    },
+    {
+      "passcode": 51790181,
+      "name": "Pot of Benevolence",
+      "numbers": [
+        "ABPF-EN061"
+      ]
+    },
+    {
+      "passcode": 52913738,
+      "name": "Ritual of Destruction",
+      "numbers": [
+        "ABPF-EN058"
+      ]
+    },
+    {
+      "passcode": 53039326,
+      "name": "Iron Core Specimen Lab",
+      "numbers": [
+        "ABPF-EN055"
+      ]
+    },
+    {
+      "passcode": 55063681,
+      "name": "Power Supplier",
+      "numbers": [
+        "ABPF-EN007"
+      ]
+    },
+    {
+      "passcode": 56043446,
+      "name": "Viser Des",
+      "numbers": [
+        "ABPF-EN093"
+      ]
+    },
+    {
+      "passcode": 56286179,
+      "name": "Drill Synchron",
+      "numbers": [
+        "ABPF-EN004"
+      ]
+    },
+    {
+      "passcode": 56856951,
+      "name": "Meteor Flare",
+      "numbers": [
+        "ABPF-EN067"
+      ]
+    },
+    {
+      "passcode": 57308711,
+      "name": "Unicycular",
+      "numbers": [
+        "ABPF-EN001"
+      ]
+    },
+    {
+      "passcode": 62782218,
+      "name": "Skull Conductor",
+      "numbers": [
+        "ABPF-EN098"
+      ]
+    },
+    {
+      "passcode": 63465535,
+      "name": "Underground Arachnid",
+      "numbers": [
+        "ABPF-EN096"
+      ]
+    },
+    {
+      "passcode": 63851864,
+      "name": "Break! Draw!",
+      "numbers": [
+        "ABPF-EN052"
+      ]
+    },
+    {
+      "passcode": 64973456,
+      "name": "Viper's Rebirth",
+      "numbers": [
+        "ABPF-EN049"
+      ]
+    },
+    {
+      "passcode": 65196094,
+      "name": "Variety Comes Out",
+      "numbers": [
+        "ABPF-EN046"
+      ]
+    },
+    {
+      "passcode": 65496056,
+      "name": "Codarus",
+      "numbers": [
+        "ABPF-EN032"
+      ]
+    },
+    {
+      "passcode": 66818682,
+      "name": "Moon Dragon Quilla",
+      "numbers": [
+        "ABPF-EN043"
+      ]
+    },
+    {
+      "passcode": 67030233,
+      "name": "Majestic Red Dragon",
+      "numbers": [
+        "ABPF-EN040"
+      ]
+    },
+    {
+      "passcode": 67987302,
+      "name": "Earthbound Linewalker",
+      "numbers": [
+        "ABPF-EN088"
+      ]
+    },
+    {
+      "passcode": 70284332,
+      "name": "Tuner's Scheme",
+      "numbers": [
+        "ABPF-EN077"
+      ]
+    },
+    {
+      "passcode": 70406920,
+      "name": "Machine King - 3000 B.C.",
+      "numbers": [
+        "ABPF-EN074"
+      ]
+    },
+    {
+      "passcode": 76218643,
+      "name": "Black Potan",
+      "numbers": [
+        "ABPF-EN029"
+      ]
+    },
+    {
+      "passcode": 77153811,
+      "name": "Djinn Cursenchanter of Rituals",
+      "numbers": [
+        "ABPF-EN037"
+      ]
+    },
+    {
+      "passcode": 77207191,
+      "name": "Berfomet",
+      "numbers": [
+        "ABPF-EN091"
+      ]
+    },
+    {
+      "passcode": 77330185,
+      "name": "XX-Saber Garsem",
+      "numbers": [
+        "ABPF-EN026"
+      ]
+    },
+    {
+      "passcode": 78009994,
+      "name": "Dragonic Guard",
+      "numbers": [
+        "ABPF-EN085"
+      ]
+    },
+    {
+      "passcode": 78121572,
+      "name": "Alchemist of Black Spells",
+      "numbers": [
+        "ABPF-EN082"
+      ]
+    },
+    {
+      "passcode": 78275321,
+      "name": "Fire Ant Ascator",
+      "numbers": [
+        "ABPF-EN020"
+      ]
+    },
+    {
+      "passcode": 78552773,
+      "name": "Supay",
+      "numbers": [
+        "ABPF-EN023"
+      ]
+    },
+    {
+      "passcode": 79161790,
+      "name": "Inverse Universe",
+      "numbers": [
+        "ABPF-EN080"
+      ]
+    },
+    {
+      "passcode": 79491903,
+      "name": "Reptilianne Naga",
+      "numbers": [
+        "ABPF-EN017"
+      ]
+    },
+    {
+      "passcode": 80513550,
+      "name": "Dragon Queen of Tragic Endings",
+      "numbers": [
+        "ABPF-EN014"
+      ]
+    },
+    {
+      "passcode": 81128478,
+      "name": "Lair Wire",
+      "numbers": [
+        "ABPF-EN071"
+      ]
+    },
+    {
+      "passcode": 81336148,
+      "name": "Sword Master",
+      "numbers": [
+        "ABPF-EN011"
+      ]
+    },
+    {
+      "passcode": 82340056,
+      "name": "Offering to the Immortals",
+      "numbers": [
+        "ABPF-EN068"
+      ]
+    },
+    {
+      "passcode": 82458280,
+      "name": "Magic Hole Golem",
+      "numbers": [
+        "ABPF-EN008"
+      ]
+    },
+    {
+      "passcode": 82670878,
+      "name": "Ogre of the Scarlet Sorrow",
+      "numbers": [
+        "ABPF-EN005"
+      ]
+    },
+    {
+      "passcode": 83392426,
+      "name": "Bicular",
+      "numbers": [
+        "ABPF-EN002"
+      ]
+    },
+    {
+      "passcode": 83467607,
+      "name": "Nature's Reflection",
+      "numbers": [
+        "ABPF-EN065"
+      ]
+    },
+    {
+      "passcode": 88289295,
+      "name": "Synchro Control",
+      "numbers": [
+        "ABPF-EN062"
+      ]
+    },
+    {
+      "passcode": 88301833,
+      "name": "Ascending Soul",
+      "numbers": [
+        "ABPF-EN059"
+      ]
+    },
+    {
+      "passcode": 90246973,
+      "name": "Power Pickaxe",
+      "numbers": [
+        "ABPF-EN053"
+      ]
+    },
+    {
+      "passcode": 91468551,
+      "name": "Temple of the Sun",
+      "numbers": [
+        "ABPF-EN050"
+      ]
+    },
+    {
+      "passcode": 91580102,
+      "name": "Reptilianne Rage",
+      "numbers": [
+        "ABPF-EN047"
+      ]
+    },
+    {
+      "passcode": 99523325,
+      "name": "Gravekeeper's Stele",
+      "numbers": [
+        "ABPF-EN056"
+      ]
+    }
   ],
-  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Absolute Powerforce'; printings from the YGOPRODeck bulk dump."
 }

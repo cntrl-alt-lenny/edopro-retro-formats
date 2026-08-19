@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-5d-s-world-championship-2010-reverse-of-arcadia-promotional-cards",
+  "code": "WC10",
+  "name": "Yu-Gi-Oh! 5D's World Championship 2010: Reverse of Arcadia promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-02-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-04-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 14344682,
+      "name": "Samurai Sword Baron",
+      "numbers": [
+        "WC10-EN001"
+      ]
+    },
+    {
+      "passcode": 50732780,
+      "name": "Stygian Security",
+      "numbers": [
+        "WC10-EN002"
+      ]
+    },
+    {
+      "passcode": 86137485,
+      "name": "Stygian Sergeants",
+      "numbers": [
+        "WC10-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! 5D's World Championship 2010: Reverse of Arcadia promotional cards\"; printings from the YGOPRODeck bulk dump."
+}

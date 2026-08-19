@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "booster-pack-collectors-tins-2002",
+  "code": "BPT",
+  "name": "Booster Pack Collectors Tins 2002",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-10-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 11901678,
+      "name": "Black Skull Dragon",
+      "numbers": [
+        "BPT-006"
+      ]
+    },
+    {
+      "passcode": 17985575,
+      "name": "Lord of D.",
+      "numbers": [
+        "BPT-004"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "BPT-001"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "BPT-002"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "BPT-005"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "BPT-003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Booster Pack Collectors Tins 2002'; printings from the YGOPRODeck bulk dump."
+}

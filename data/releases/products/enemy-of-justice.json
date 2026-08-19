@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "enemy-of-justice",
+  "code": "EOJ",
+  "name": "Enemy of Justice",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-05-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 191749,
+      "name": "Hero Flash!!",
+      "numbers": [
+        "EOJ-EN042"
+      ]
+    },
+    {
+      "passcode": 213326,
+      "name": "E - Emergency Call",
+      "numbers": [
+        "EOJ-EN039"
+      ]
+    },
+    {
+      "passcode": 1036974,
+      "name": "Misfortune",
+      "numbers": [
+        "EOJ-EN037"
+      ]
+    },
+    {
+      "passcode": 2158562,
+      "name": "Cyber Prima",
+      "numbers": [
+        "EOJ-EN007"
+      ]
+    },
+    {
+      "passcode": 3370104,
+      "name": "Cyber Phoenix",
+      "numbers": [
+        "EOJ-EN009"
+      ]
+    },
+    {
+      "passcode": 6924874,
+      "name": "Harpie's Pet Baby Dragon",
+      "numbers": [
+        "EOJ-EN013"
+      ]
+    },
+    {
+      "passcode": 12117532,
+      "name": "Shattered Axe",
+      "numbers": [
+        "EOJ-EN059"
+      ]
+    },
+    {
+      "passcode": 13093792,
+      "name": "Destiny HERO - Diamond Dude",
+      "numbers": [
+        "EOJ-EN003"
+      ]
+    },
+    {
+      "passcode": 14225239,
+      "name": "Elemental HERO Mariner",
+      "numbers": [
+        "EOJ-EN034"
+      ]
+    },
+    {
+      "passcode": 17178486,
+      "name": "Life Equalizer",
+      "numbers": [
+        "EOJ-EN049"
+      ]
+    },
+    {
+      "passcode": 20529766,
+      "name": "Super-Electromagnetic Voltech Dragon",
+      "numbers": [
+        "EOJ-EN031"
+      ]
+    },
+    {
+      "passcode": 20951752,
+      "name": "Voltanis the Adjudicator",
+      "numbers": [
+        "EOJ-EN023"
+      ]
+    },
+    {
+      "passcode": 21074344,
+      "name": "Herald of Green Light",
+      "numbers": [
+        "EOJ-EN018"
+      ]
+    },
+    {
+      "passcode": 28890974,
+      "name": "Celestial Transformation",
+      "numbers": [
+        "EOJ-EN044"
+      ]
+    },
+    {
+      "passcode": 29013526,
+      "name": "Storming Wynn",
+      "numbers": [
+        "EOJ-EN029"
+      ]
+    },
+    {
+      "passcode": 29139104,
+      "name": "Avalanching Aussa",
+      "numbers": [
+        "EOJ-EN026"
+      ]
+    },
+    {
+      "passcode": 30241314,
+      "name": "Macro Cosmos",
+      "numbers": [
+        "EOJ-EN057"
+      ]
+    },
+    {
+      "passcode": 32296881,
+      "name": "Bountiful Artemis",
+      "numbers": [
+        "EOJ-EN020"
+      ]
+    },
+    {
+      "passcode": 32918479,
+      "name": "Majestic Mech - Senku",
+      "numbers": [
+        "EOJ-EN014"
+      ]
+    },
+    {
+      "passcode": 35464895,
+      "name": "Destiny Signal",
+      "numbers": [
+        "EOJ-EN052"
+      ]
+    },
+    {
+      "passcode": 36586443,
+      "name": "Elemental Recharge",
+      "numbers": [
+        "EOJ-EN050"
+      ]
+    },
+    {
+      "passcode": 37318031,
+      "name": "R - Righteous Justice",
+      "numbers": [
+        "EOJ-EN040"
+      ]
+    },
+    {
+      "passcode": 38430673,
+      "name": "Grand Convergence",
+      "numbers": [
+        "EOJ-EN046"
+      ]
+    },
+    {
+      "passcode": 40591390,
+      "name": "Destiny HERO - Dreadmaster",
+      "numbers": [
+        "EOJ-EN004"
+      ]
+    },
+    {
+      "passcode": 41436536,
+      "name": "Elemental HERO Phoenix Enforcer",
+      "numbers": [
+        "EOJ-EN032"
+      ]
+    },
+    {
+      "passcode": 41613948,
+      "name": "Destiny HERO - Doom Lord",
+      "numbers": [
+        "EOJ-EN001"
+      ]
+    },
+    {
+      "passcode": 43340443,
+      "name": "Forced Back",
+      "numbers": [
+        "EOJ-EN060"
+      ]
+    },
+    {
+      "passcode": 48653261,
+      "name": "Guard Penalty",
+      "numbers": [
+        "EOJ-EN045"
+      ]
+    },
+    {
+      "passcode": 49375719,
+      "name": "Cyber Tutu",
+      "numbers": [
+        "EOJ-EN005"
+      ]
+    },
+    {
+      "passcode": 53567095,
+      "name": "Icarus Attack",
+      "numbers": [
+        "EOJ-EN055"
+      ]
+    },
+    {
+      "passcode": 54289683,
+      "name": "Power Capsule",
+      "numbers": [
+        "EOJ-EN043"
+      ]
+    },
+    {
+      "passcode": 55401221,
+      "name": "Batteryman D",
+      "numbers": [
+        "EOJ-EN030"
+      ]
+    },
+    {
+      "passcode": 55615891,
+      "name": "Elemental HERO Wild Wingman",
+      "numbers": [
+        "EOJ-EN035"
+      ]
+    },
+    {
+      "passcode": 56524813,
+      "name": "Raging Eria",
+      "numbers": [
+        "EOJ-EN027"
+      ]
+    },
+    {
+      "passcode": 57346400,
+      "name": "Guard Dog",
+      "numbers": [
+        "EOJ-EN024"
+      ]
+    },
+    {
+      "passcode": 62868900,
+      "name": "D - Shield",
+      "numbers": [
+        "EOJ-EN054"
+      ]
+    },
+    {
+      "passcode": 62980542,
+      "name": "Destruction of Destiny",
+      "numbers": [
+        "EOJ-EN051"
+      ]
+    },
+    {
+      "passcode": 63703130,
+      "name": "O - Oversoul",
+      "numbers": [
+        "EOJ-EN041"
+      ]
+    },
+    {
+      "passcode": 67468948,
+      "name": "Layard the Liberator",
+      "numbers": [
+        "EOJ-EN021"
+      ]
+    },
+    {
+      "passcode": 67646312,
+      "name": "Searchlightman",
+      "numbers": [
+        "EOJ-EN010"
+      ]
+    },
+    {
+      "passcode": 68280530,
+      "name": "Royal Knight",
+      "numbers": [
+        "EOJ-EN017"
+      ]
+    },
+    {
+      "passcode": 69303178,
+      "name": "Majestic Mech - Ohka",
+      "numbers": [
+        "EOJ-EN015"
+      ]
+    },
+    {
+      "passcode": 74825788,
+      "name": "H - Heated Heart",
+      "numbers": [
+        "EOJ-EN038"
+      ]
+    },
+    {
+      "passcode": 75041269,
+      "name": "Clock Tower Prison",
+      "numbers": [
+        "EOJ-EN048"
+      ]
+    },
+    {
+      "passcode": 76763417,
+      "name": "Cyber Gymnast",
+      "numbers": [
+        "EOJ-EN006"
+      ]
+    },
+    {
+      "passcode": 76986005,
+      "name": "Cyber Kirin",
+      "numbers": [
+        "EOJ-EN008"
+      ]
+    },
+    {
+      "passcode": 77608643,
+      "name": "Destiny HERO - Captain Tenacious",
+      "numbers": [
+        "EOJ-EN002"
+      ]
+    },
+    {
+      "passcode": 80551130,
+      "name": "Miraculous Descent",
+      "numbers": [
+        "EOJ-EN058"
+      ]
+    },
+    {
+      "passcode": 81003500,
+      "name": "Elemental HERO Necroid Shaman",
+      "numbers": [
+        "EOJ-EN036"
+      ]
+    },
+    {
+      "passcode": 81674782,
+      "name": "Dimensional Fissure",
+      "numbers": [
+        "EOJ-EN047"
+      ]
+    },
+    {
+      "passcode": 81896370,
+      "name": "Swift Birdman Joe",
+      "numbers": [
+        "EOJ-EN012"
+      ]
+    },
+    {
+      "passcode": 88820235,
+      "name": "Elemental HERO Shining Phoenix Enforcer",
+      "numbers": [
+        "EOJ-EN033"
+      ]
+    },
+    {
+      "passcode": 92518817,
+      "name": "Blazing Hiita",
+      "numbers": [
+        "EOJ-EN028"
+      ]
+    },
+    {
+      "passcode": 93130021,
+      "name": "Victory Viper XX03",
+      "numbers": [
+        "EOJ-EN011"
+      ]
+    },
+    {
+      "passcode": 93730409,
+      "name": "Whirlwind Weasel",
+      "numbers": [
+        "EOJ-EN025"
+      ]
+    },
+    {
+      "passcode": 94253609,
+      "name": "Elemental Absorber",
+      "numbers": [
+        "EOJ-EN056"
+      ]
+    },
+    {
+      "passcode": 94689635,
+      "name": "Herald of Purple Light",
+      "numbers": [
+        "EOJ-EN019"
+      ]
+    },
+    {
+      "passcode": 94853057,
+      "name": "Banisher of the Radiance",
+      "numbers": [
+        "EOJ-EN022"
+      ]
+    },
+    {
+      "passcode": 95701283,
+      "name": "Majestic Mech - Goryu",
+      "numbers": [
+        "EOJ-EN016"
+      ]
+    },
+    {
+      "passcode": 99075257,
+      "name": "D - Time",
+      "numbers": [
+        "EOJ-EN053"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Enemy of Justice'; printings from the YGOPRODeck bulk dump."
+}

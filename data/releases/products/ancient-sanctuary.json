@@ -1,0 +1,811 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "ancient-sanctuary",
+  "code": "AST",
+  "name": "Ancient Sanctuary",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 303660,
+      "name": "Amplifier",
+      "numbers": [
+        "AST-040"
+      ]
+    },
+    {
+      "passcode": 2314238,
+      "name": "Dark Magic Attack",
+      "numbers": [
+        "AST-095"
+      ]
+    },
+    {
+      "passcode": 2468169,
+      "name": "Sealmaster Meisei",
+      "numbers": [
+        "AST-003"
+      ]
+    },
+    {
+      "passcode": 3136426,
+      "name": "Level Limit - Area B",
+      "numbers": [
+        "AST-092"
+      ]
+    },
+    {
+      "passcode": 4081094,
+      "name": "The Second Sarcophagus",
+      "numbers": [
+        "AST-100"
+      ]
+    },
+    {
+      "passcode": 4259068,
+      "name": "Spell Economics",
+      "numbers": [
+        "AST-089"
+      ]
+    },
+    {
+      "passcode": 4869446,
+      "name": "Judgment of the Desert",
+      "numbers": [
+        "AST-103"
+      ]
+    },
+    {
+      "passcode": 5371656,
+      "name": "Sword of the Soul-Eater",
+      "numbers": [
+        "AST-086"
+      ]
+    },
+    {
+      "passcode": 5703682,
+      "name": "Thousand Energy",
+      "numbers": [
+        "AST-097"
+      ]
+    },
+    {
+      "passcode": 6103294,
+      "name": "Emissary of the Oasis",
+      "numbers": [
+        "AST-083"
+      ]
+    },
+    {
+      "passcode": 6133894,
+      "name": "Mazera DeVille",
+      "numbers": [
+        "AST-111"
+      ]
+    },
+    {
+      "passcode": 10035717,
+      "name": "Weapon Change",
+      "numbers": [
+        "AST-041"
+      ]
+    },
+    {
+      "passcode": 11448373,
+      "name": "Grave Protector",
+      "numbers": [
+        "AST-077"
+      ]
+    },
+    {
+      "passcode": 12160911,
+      "name": "Elephant Statue of Disaster",
+      "numbers": [
+        "AST-074"
+      ]
+    },
+    {
+      "passcode": 13386503,
+      "name": "Ghost Knight of Jackal",
+      "numbers": [
+        "AST-071"
+      ]
+    },
+    {
+      "passcode": 13409151,
+      "name": "Desertapir",
+      "numbers": [
+        "AST-068"
+      ]
+    },
+    {
+      "passcode": 16226786,
+      "name": "Night Assailant",
+      "numbers": [
+        "AST-080"
+      ]
+    },
+    {
+      "passcode": 16255442,
+      "name": "Beckoning Light",
+      "numbers": [
+        "AST-053"
+      ]
+    },
+    {
+      "passcode": 17078030,
+      "name": "Wall of Revealing Light",
+      "numbers": [
+        "AST-050"
+      ]
+    },
+    {
+      "passcode": 17655904,
+      "name": "Burst Stream of Destruction",
+      "numbers": [
+        "AST-038"
+      ]
+    },
+    {
+      "passcode": 18190572,
+      "name": "Micro Ray",
+      "numbers": [
+        "AST-047"
+      ]
+    },
+    {
+      "passcode": 18378582,
+      "name": "Archlord Zerato",
+      "numbers": [
+        "AST-034"
+      ]
+    },
+    {
+      "passcode": 18590133,
+      "name": "Goblin King",
+      "numbers": [
+        "AST-031"
+      ]
+    },
+    {
+      "passcode": 19312169,
+      "name": "Talisman of Trap Sealing",
+      "numbers": [
+        "AST-044"
+      ]
+    },
+    {
+      "passcode": 19612721,
+      "name": "Disc Fighter",
+      "numbers": [
+        "AST-028"
+      ]
+    },
+    {
+      "passcode": 24221739,
+      "name": "Protector of the Sanctuary",
+      "numbers": [
+        "AST-065"
+      ]
+    },
+    {
+      "passcode": 24435369,
+      "name": "Mermaid Knight",
+      "numbers": [
+        "AST-025"
+      ]
+    },
+    {
+      "passcode": 25343280,
+      "name": "Spirit of the Pharaoh",
+      "numbers": [
+        "AST-062"
+      ]
+    },
+    {
+      "passcode": 25551951,
+      "name": "Blowback Dragon",
+      "numbers": [
+        "AST-022"
+      ]
+    },
+    {
+      "passcode": 25773409,
+      "name": "Legendary Jujitsu Master",
+      "numbers": [
+        "AST-017"
+      ]
+    },
+    {
+      "passcode": 26495087,
+      "name": "Vampire Lady",
+      "numbers": [
+        "AST-013"
+      ]
+    },
+    {
+      "passcode": 26566878,
+      "name": "Fiend Scorpion",
+      "numbers": [
+        "AST-059"
+      ]
+    },
+    {
+      "passcode": 27288416,
+      "name": "Mokey Mokey",
+      "numbers": [
+        "AST-057"
+      ]
+    },
+    {
+      "passcode": 27618634,
+      "name": "The Unhappy Girl",
+      "numbers": [
+        "AST-010"
+      ]
+    },
+    {
+      "passcode": 30190809,
+      "name": "Gear Golem the Moving Fortress",
+      "numbers": [
+        "AST-018"
+      ]
+    },
+    {
+      "passcode": 30353551,
+      "name": "Human-Wave Tactics",
+      "numbers": [
+        "AST-104"
+      ]
+    },
+    {
+      "passcode": 30531525,
+      "name": "Enchanting Fitting Room",
+      "numbers": [
+        "AST-093"
+      ]
+    },
+    {
+      "passcode": 30653113,
+      "name": "Blessings of the Nile",
+      "numbers": [
+        "AST-090"
+      ]
+    },
+    {
+      "passcode": 31076103,
+      "name": "The First Sarcophagus",
+      "numbers": [
+        "AST-101"
+      ]
+    },
+    {
+      "passcode": 31476755,
+      "name": "Dust Barrier",
+      "numbers": [
+        "AST-087"
+      ]
+    },
+    {
+      "passcode": 31812496,
+      "name": "Stone Statue of the Aztecs",
+      "numbers": [
+        "AST-014"
+      ]
+    },
+    {
+      "passcode": 32298781,
+      "name": "Triangle Power",
+      "numbers": [
+        "AST-098"
+      ]
+    },
+    {
+      "passcode": 38730226,
+      "name": "The Agent of Wisdom - Mercury",
+      "numbers": [
+        "AST-007"
+      ]
+    },
+    {
+      "passcode": 39019325,
+      "name": "Order to Smash",
+      "numbers": [
+        "AST-110"
+      ]
+    },
+    {
+      "passcode": 39131963,
+      "name": "Des Counterblow",
+      "numbers": [
+        "AST-107"
+      ]
+    },
+    {
+      "passcode": 39552864,
+      "name": "Mystical Shine Ball",
+      "numbers": [
+        "AST-004"
+      ]
+    },
+    {
+      "passcode": 39674352,
+      "name": "Gogiga Gagagigo",
+      "numbers": [
+        "AST-001"
+      ]
+    },
+    {
+      "passcode": 39719977,
+      "name": "Delta Attacker",
+      "numbers": [
+        "AST-096"
+      ]
+    },
+    {
+      "passcode": 42598242,
+      "name": "Special Hurricane",
+      "numbers": [
+        "AST-084"
+      ]
+    },
+    {
+      "passcode": 43040603,
+      "name": "Monster Gate",
+      "numbers": [
+        "AST-039"
+      ]
+    },
+    {
+      "passcode": 43250041,
+      "name": "Draining Shield",
+      "numbers": [
+        "AST-054"
+      ]
+    },
+    {
+      "passcode": 43714890,
+      "name": "Man-Thro' Tro'",
+      "numbers": [
+        "AST-081"
+      ]
+    },
+    {
+      "passcode": 44436472,
+      "name": "Double Coston",
+      "numbers": [
+        "AST-078"
+      ]
+    },
+    {
+      "passcode": 44472639,
+      "name": "Solar Ray",
+      "numbers": [
+        "AST-051"
+      ]
+    },
+    {
+      "passcode": 44595286,
+      "name": "Light of Judgment",
+      "numbers": [
+        "AST-048"
+      ]
+    },
+    {
+      "passcode": 44762290,
+      "name": "Opti-Camouflage Armor",
+      "numbers": [
+        "AST-035"
+      ]
+    },
+    {
+      "passcode": 45311864,
+      "name": "Goblin Thief",
+      "numbers": [
+        "AST-045"
+      ]
+    },
+    {
+      "passcode": 45985838,
+      "name": "Solar Flare Dragon",
+      "numbers": [
+        "AST-032"
+      ]
+    },
+    {
+      "passcode": 48659020,
+      "name": "Spirit Caller",
+      "numbers": [
+        "AST-075"
+      ]
+    },
+    {
+      "passcode": 49771608,
+      "name": "Absorbing Kid from the Sky",
+      "numbers": [
+        "AST-072"
+      ]
+    },
+    {
+      "passcode": 50593156,
+      "name": "Sand Gambler",
+      "numbers": [
+        "AST-069"
+      ]
+    },
+    {
+      "passcode": 50823978,
+      "name": "Piranha Army",
+      "numbers": [
+        "AST-026"
+      ]
+    },
+    {
+      "passcode": 51616747,
+      "name": "Nubian Guard",
+      "numbers": [
+        "AST-066"
+      ]
+    },
+    {
+      "passcode": 51838385,
+      "name": "Theban Nightmare",
+      "numbers": [
+        "AST-063"
+      ]
+    },
+    {
+      "passcode": 51945556,
+      "name": "Zaborg the Thunder Monarch",
+      "numbers": [
+        "AST-023"
+      ]
+    },
+    {
+      "passcode": 52550973,
+      "name": "Pharaoh's Servant",
+      "numbers": [
+        "AST-060"
+      ]
+    },
+    {
+      "passcode": 52768103,
+      "name": "KA-2 Des Scissors",
+      "numbers": [
+        "AST-019"
+      ]
+    },
+    {
+      "passcode": 53776525,
+      "name": "Gigobyte",
+      "numbers": [
+        "AST-056"
+      ]
+    },
+    {
+      "passcode": 53890795,
+      "name": "Rocket Jumper",
+      "numbers": [
+        "AST-015"
+      ]
+    },
+    {
+      "passcode": 55001420,
+      "name": "Arcane Archer of the Forest",
+      "numbers": [
+        "AST-029"
+      ]
+    },
+    {
+      "passcode": 56433456,
+      "name": "The Sanctuary in the Sky",
+      "numbers": [
+        "AST-042"
+      ]
+    },
+    {
+      "passcode": 63012333,
+      "name": "Soul-Absorbing Bone Tower",
+      "numbers": [
+        "AST-011"
+      ]
+    },
+    {
+      "passcode": 64734921,
+      "name": "The Agent of Creation - Venus",
+      "numbers": [
+        "AST-008"
+      ]
+    },
+    {
+      "passcode": 65403020,
+      "name": "The End of Anubis",
+      "numbers": [
+        "AST-000"
+      ]
+    },
+    {
+      "passcode": 65957473,
+      "name": "Metal Armored Bug",
+      "numbers": [
+        "AST-005"
+      ]
+    },
+    {
+      "passcode": 66073051,
+      "name": "Warrior of Zera",
+      "numbers": [
+        "AST-002"
+      ]
+    },
+    {
+      "passcode": 66526672,
+      "name": "Labyrinth of Nightmare",
+      "numbers": [
+        "AST-108"
+      ]
+    },
+    {
+      "passcode": 66742250,
+      "name": "Curse of Anubis",
+      "numbers": [
+        "AST-105"
+      ]
+    },
+    {
+      "passcode": 66926224,
+      "name": "The Law of the Normal",
+      "numbers": [
+        "AST-094"
+      ]
+    },
+    {
+      "passcode": 67048711,
+      "name": "7",
+      "numbers": [
+        "AST-091"
+      ]
+    },
+    {
+      "passcode": 67464807,
+      "name": "Dora of Fate",
+      "numbers": [
+        "AST-102"
+      ]
+    },
+    {
+      "passcode": 70821187,
+      "name": "Regenerating Mummy",
+      "numbers": [
+        "AST-079"
+      ]
+    },
+    {
+      "passcode": 70861343,
+      "name": "Ninjitsu Art of Transformation",
+      "numbers": [
+        "AST-052"
+      ]
+    },
+    {
+      "passcode": 71983925,
+      "name": "Talisman of Spell Sealing",
+      "numbers": [
+        "AST-049"
+      ]
+    },
+    {
+      "passcode": 75043725,
+      "name": "Emissary of the Afterlife",
+      "numbers": [
+        "AST-076"
+      ]
+    },
+    {
+      "passcode": 78697395,
+      "name": "The Third Sarcophagus",
+      "numbers": [
+        "AST-099"
+      ]
+    },
+    {
+      "passcode": 78864369,
+      "name": "Soul Reversal",
+      "numbers": [
+        "AST-088"
+      ]
+    },
+    {
+      "passcode": 78986941,
+      "name": "Order to Charge",
+      "numbers": [
+        "AST-085"
+      ]
+    },
+    {
+      "passcode": 79109599,
+      "name": "King of the Swamp",
+      "numbers": [
+        "AST-082"
+      ]
+    },
+    {
+      "passcode": 79649195,
+      "name": "Armor Break",
+      "numbers": [
+        "AST-055"
+      ]
+    },
+    {
+      "passcode": 80161395,
+      "name": "Mystik Wok",
+      "numbers": [
+        "AST-036"
+      ]
+    },
+    {
+      "passcode": 81383947,
+      "name": "White Magician Pikeru",
+      "numbers": [
+        "AST-033"
+      ]
+    },
+    {
+      "passcode": 82005435,
+      "name": "Lady Ninja Yae",
+      "numbers": [
+        "AST-030"
+      ]
+    },
+    {
+      "passcode": 82705573,
+      "name": "Backfire",
+      "numbers": [
+        "AST-046"
+      ]
+    },
+    {
+      "passcode": 82828051,
+      "name": "Earthquake",
+      "numbers": [
+        "AST-043"
+      ]
+    },
+    {
+      "passcode": 83228073,
+      "name": "Two Thousand Needles",
+      "numbers": [
+        "AST-027"
+      ]
+    },
+    {
+      "passcode": 84550200,
+      "name": "Sonic Jammer",
+      "numbers": [
+        "AST-021"
+      ]
+    },
+    {
+      "passcode": 85166216,
+      "name": "Elephant Statue of Blessing",
+      "numbers": [
+        "AST-073"
+      ]
+    },
+    {
+      "passcode": 86988864,
+      "name": "3-Hump Lacooda",
+      "numbers": [
+        "AST-070"
+      ]
+    },
+    {
+      "passcode": 87010442,
+      "name": "Legacy Hunter",
+      "numbers": [
+        "AST-067"
+      ]
+    },
+    {
+      "passcode": 87340664,
+      "name": "Atomic Firefly",
+      "numbers": [
+        "AST-024"
+      ]
+    },
+    {
+      "passcode": 88236094,
+      "name": "Aswan Apparition",
+      "numbers": [
+        "AST-064"
+      ]
+    },
+    {
+      "passcode": 89959682,
+      "name": "Pharaonic Protector",
+      "numbers": [
+        "AST-061"
+      ]
+    },
+    {
+      "passcode": 90407382,
+      "name": "The Kick Man",
+      "numbers": [
+        "AST-012"
+      ]
+    },
+    {
+      "passcode": 91123920,
+      "name": "The Agent of Force - Mars",
+      "numbers": [
+        "AST-009"
+      ]
+    },
+    {
+      "passcode": 91345518,
+      "name": "The Agent of Judgment - Saturn",
+      "numbers": [
+        "AST-006"
+      ]
+    },
+    {
+      "passcode": 92924317,
+      "name": "Soul Resurrection",
+      "numbers": [
+        "AST-109"
+      ]
+    },
+    {
+      "passcode": 93747864,
+      "name": "Desert Sunlight",
+      "numbers": [
+        "AST-106"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "AST-037"
+      ]
+    },
+    {
+      "passcode": 98162242,
+      "name": "Needle Burrower",
+      "numbers": [
+        "AST-020"
+      ]
+    },
+    {
+      "passcode": 99171160,
+      "name": "Kozaky",
+      "numbers": [
+        "AST-058"
+      ]
+    },
+    {
+      "passcode": 99284890,
+      "name": "Avatar of The Pot",
+      "numbers": [
+        "AST-016"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Ancient Sanctuary'; printings from the YGOPRODeck bulk dump."
+}

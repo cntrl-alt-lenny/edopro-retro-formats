@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-1-issue-1-promotional-card",
+  "code": "JMP",
+  "name": "Shonen Jump Vol. 1, Issue 1 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-11-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "JMP-001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 1, Issue 1 promotional card'; printings from the YGOPRODeck bulk dump."
+}

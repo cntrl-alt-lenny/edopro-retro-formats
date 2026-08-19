@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "crossroads-of-chaos-special-edition",
+  "code": "CSOC",
+  "name": "Crossroads of Chaos: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-12-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2008-12-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2008-12-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 70595331,
+      "name": "Il Blud",
+      "numbers": [
+        "CSOC-ENSE2"
+      ]
+    },
+    {
+      "passcode": 85399281,
+      "name": "Harvest Angel of Wisdom",
+      "numbers": [
+        "CSOC-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Crossroads of Chaos: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

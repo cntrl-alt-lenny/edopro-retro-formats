@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-aster-phoenix",
+  "code": "DP05",
+  "name": "Duelist Pack: Aster Phoenix",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-02-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1036974,
+      "name": "Misfortune",
+      "numbers": [
+        "DP05-EN014"
+      ]
+    },
+    {
+      "passcode": 8698851,
+      "name": "D - Counter",
+      "numbers": [
+        "DP05-EN029"
+      ]
+    },
+    {
+      "passcode": 9411399,
+      "name": "Destiny HERO - Malicious",
+      "numbers": [
+        "DP05-EN011"
+      ]
+    },
+    {
+      "passcode": 13093792,
+      "name": "Destiny HERO - Diamond Dude",
+      "numbers": [
+        "DP05-EN003"
+      ]
+    },
+    {
+      "passcode": 15294090,
+      "name": "Destiny Mirage",
+      "numbers": [
+        "DP05-EN027"
+      ]
+    },
+    {
+      "passcode": 17132130,
+      "name": "Destiny HERO - Dogma",
+      "numbers": [
+        "DP05-EN007"
+      ]
+    },
+    {
+      "passcode": 22147147,
+      "name": "Cyclone Blade",
+      "numbers": [
+        "DP05-EN018"
+      ]
+    },
+    {
+      "passcode": 28355718,
+      "name": "Destiny HERO - Double Dude",
+      "numbers": [
+        "DP05-EN005"
+      ]
+    },
+    {
+      "passcode": 35464895,
+      "name": "Destiny Signal",
+      "numbers": [
+        "DP05-EN024"
+      ]
+    },
+    {
+      "passcode": 35787450,
+      "name": "Eternal Dread",
+      "numbers": [
+        "DP05-EN030"
+      ]
+    },
+    {
+      "passcode": 36586443,
+      "name": "Elemental Recharge",
+      "numbers": [
+        "DP05-EN022"
+      ]
+    },
+    {
+      "passcode": 40591390,
+      "name": "Destiny HERO - Dreadmaster",
+      "numbers": [
+        "DP05-EN004"
+      ]
+    },
+    {
+      "passcode": 41436536,
+      "name": "Elemental HERO Phoenix Enforcer",
+      "numbers": [
+        "DP05-EN012"
+      ]
+    },
+    {
+      "passcode": 41613948,
+      "name": "Destiny HERO - Doom Lord",
+      "numbers": [
+        "DP05-EN001"
+      ]
+    },
+    {
+      "passcode": 43405287,
+      "name": "D - Chain",
+      "numbers": [
+        "DP05-EN028"
+      ]
+    },
+    {
+      "passcode": 45809008,
+      "name": "Destiny Draw",
+      "numbers": [
+        "DP05-EN020"
+      ]
+    },
+    {
+      "passcode": 48653261,
+      "name": "Guard Penalty",
+      "numbers": [
+        "DP05-EN015"
+      ]
+    },
+    {
+      "passcode": 53527835,
+      "name": "Dark City",
+      "numbers": [
+        "DP05-EN019"
+      ]
+    },
+    {
+      "passcode": 54749427,
+      "name": "Destiny HERO - Defender",
+      "numbers": [
+        "DP05-EN006"
+      ]
+    },
+    {
+      "passcode": 55461064,
+      "name": "Destiny HERO - Blade Master",
+      "numbers": [
+        "DP05-EN008"
+      ]
+    },
+    {
+      "passcode": 62868900,
+      "name": "D - Shield",
+      "numbers": [
+        "DP05-EN026"
+      ]
+    },
+    {
+      "passcode": 62980542,
+      "name": "Destruction of Destiny",
+      "numbers": [
+        "DP05-EN023"
+      ]
+    },
+    {
+      "passcode": 72204747,
+      "name": "Over Destiny",
+      "numbers": [
+        "DP05-EN021"
+      ]
+    },
+    {
+      "passcode": 75041269,
+      "name": "Clock Tower Prison",
+      "numbers": [
+        "DP05-EN016"
+      ]
+    },
+    {
+      "passcode": 77608643,
+      "name": "Destiny HERO - Captain Tenacious",
+      "numbers": [
+        "DP05-EN002"
+      ]
+    },
+    {
+      "passcode": 80744121,
+      "name": "Destiny HERO - Fear Monger",
+      "numbers": [
+        "DP05-EN009"
+      ]
+    },
+    {
+      "passcode": 81866673,
+      "name": "Destiny HERO - Dasher",
+      "numbers": [
+        "DP05-EN010"
+      ]
+    },
+    {
+      "passcode": 88820235,
+      "name": "Elemental HERO Shining Phoenix Enforcer",
+      "numbers": [
+        "DP05-EN013"
+      ]
+    },
+    {
+      "passcode": 89899996,
+      "name": "D - Spirit",
+      "numbers": [
+        "DP05-EN017"
+      ]
+    },
+    {
+      "passcode": 99075257,
+      "name": "D - Time",
+      "numbers": [
+        "DP05-EN025"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Aster Phoenix'; printings from the YGOPRODeck bulk dump."
+}

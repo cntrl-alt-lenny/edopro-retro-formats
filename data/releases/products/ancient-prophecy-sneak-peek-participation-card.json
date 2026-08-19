@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "ancient-prophecy-sneak-peek-participation-card",
+  "code": "ANPR",
+  "name": "Ancient Prophecy Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-08-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-08-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 42024143,
+      "name": "XX-Saber Gardestrike",
+      "numbers": [
+        "ANPR-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Ancient Prophecy Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

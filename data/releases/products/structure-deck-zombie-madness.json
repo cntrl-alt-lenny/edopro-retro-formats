@@ -1,0 +1,223 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-zombie-madness",
+  "code": "SD2",
+  "name": "Structure Deck: Zombie Madness",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-01-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2204140,
+      "name": "Book of Life",
+      "numbers": [
+        "SD2-EN021"
+      ]
+    },
+    {
+      "passcode": 4861205,
+      "name": "Call of the Mummy",
+      "numbers": [
+        "SD2-EN022"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD2-EN014"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD2-EN019"
+      ]
+    },
+    {
+      "passcode": 22056710,
+      "name": "Vampire Genesis",
+      "numbers": [
+        "SD2-EN001"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD2-EN023"
+      ]
+    },
+    {
+      "passcode": 23205979,
+      "name": "Spirit Reaper",
+      "numbers": [
+        "SD2-EN006"
+      ]
+    },
+    {
+      "passcode": 24530661,
+      "name": "Master Kyonshee",
+      "numbers": [
+        "SD2-EN002"
+      ]
+    },
+    {
+      "passcode": 26495087,
+      "name": "Vampire Lady",
+      "numbers": [
+        "SD2-EN010"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SD2-EN020"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "SD2-EN027"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "SD2-EN015"
+      ]
+    },
+    {
+      "passcode": 44436472,
+      "name": "Double Coston",
+      "numbers": [
+        "SD2-EN011"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SD2-EN013"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "SD2-EN025"
+      ]
+    },
+    {
+      "passcode": 53839837,
+      "name": "Vampire Lord",
+      "numbers": [
+        "SD2-EN003"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "SD2-EN017"
+      ]
+    },
+    {
+      "passcode": 57281778,
+      "name": "Ryu Kokki",
+      "numbers": [
+        "SD2-EN008"
+      ]
+    },
+    {
+      "passcode": 57953380,
+      "name": "Card of Safe Return",
+      "numbers": [
+        "SD2-EN018"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SD2-EN024"
+      ]
+    },
+    {
+      "passcode": 63012333,
+      "name": "Soul-Absorbing Bone Tower",
+      "numbers": [
+        "SD2-EN009"
+      ]
+    },
+    {
+      "passcode": 70821187,
+      "name": "Regenerating Mummy",
+      "numbers": [
+        "SD2-EN012"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SD2-EN016"
+      ]
+    },
+    {
+      "passcode": 71200730,
+      "name": "Despair from the Dark",
+      "numbers": [
+        "SD2-EN007"
+      ]
+    },
+    {
+      "passcode": 77044671,
+      "name": "Pyramid Turtle",
+      "numbers": [
+        "SD2-EN005"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "SD2-EN026"
+      ]
+    },
+    {
+      "passcode": 89111398,
+      "name": "Dark Dust Spirit",
+      "numbers": [
+        "SD2-EN004"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "SD2-EN028"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Zombie Madness'; printings from the YGOPRODeck bulk dump."
+}

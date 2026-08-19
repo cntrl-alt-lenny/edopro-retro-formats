@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-8-issue-11-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 8, Issue 11 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-09-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 88643579,
+      "name": "Dark End Dragon",
+      "numbers": [
+        "JUMP-EN044"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 8, Issue 11 promotional card'; printings from the YGOPRODeck bulk dump."
+}

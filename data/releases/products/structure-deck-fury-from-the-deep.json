@@ -1,0 +1,251 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-fury-from-the-deep",
+  "code": "SD4",
+  "name": "Structure Deck: Fury from the Deep",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-05-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 218704,
+      "name": "Fenrir",
+      "numbers": [
+        "SD4-EN008"
+      ]
+    },
+    {
+      "passcode": 295517,
+      "name": "A Legendary Ocean",
+      "numbers": [
+        "SD4-EN020"
+      ]
+    },
+    {
+      "passcode": 4929256,
+      "name": "Mobius the Frost Monarch",
+      "numbers": [
+        "SD4-EN012"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD4-EN016"
+      ]
+    },
+    {
+      "passcode": 8201910,
+      "name": "Star Boy",
+      "numbers": [
+        "SD4-EN006"
+      ]
+    },
+    {
+      "passcode": 10485110,
+      "name": "Ocean Dragon Lord - Neo-Daedalus",
+      "numbers": [
+        "SD4-EN001"
+      ]
+    },
+    {
+      "passcode": 18605135,
+      "name": "Tornado Wall",
+      "numbers": [
+        "SD4-EN029"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD4-EN019"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD4-EN022"
+      ]
+    },
+    {
+      "passcode": 23771716,
+      "name": "7 Colored Fish",
+      "numbers": [
+        "SD4-EN002"
+      ]
+    },
+    {
+      "passcode": 24435369,
+      "name": "Mermaid Knight",
+      "numbers": [
+        "SD4-EN011"
+      ]
+    },
+    {
+      "passcode": 26412047,
+      "name": "Hammer Shot",
+      "numbers": [
+        "SD4-EN024"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SD4-EN021"
+      ]
+    },
+    {
+      "passcode": 33184167,
+      "name": "Tribe-Infecting Virus",
+      "numbers": [
+        "SD4-EN007"
+      ]
+    },
+    {
+      "passcode": 36119641,
+      "name": "Space Mambo",
+      "numbers": [
+        "SD4-EN004"
+      ]
+    },
+    {
+      "passcode": 37721209,
+      "name": "Levia-Dragon - Daedalus",
+      "numbers": [
+        "SD4-EN010"
+      ]
+    },
+    {
+      "passcode": 38275183,
+      "name": "Spell Shield Type-8",
+      "numbers": [
+        "SD4-EN031"
+      ]
+    },
+    {
+      "passcode": 42071342,
+      "name": "Sea Serpent Warrior of Darkness",
+      "numbers": [
+        "SD4-EN003"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SD4-EN015"
+      ]
+    },
+    {
+      "passcode": 51562916,
+      "name": "Big Wave Small Wave",
+      "numbers": [
+        "SD4-EN025"
+      ]
+    },
+    {
+      "passcode": 52571838,
+      "name": "Creeping Doom Manta",
+      "numbers": [
+        "SD4-EN014"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "SD4-EN030"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "SD4-EN018"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "SD4-EN005"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SD4-EN026"
+      ]
+    },
+    {
+      "passcode": 64342551,
+      "name": "Amphibious Bugroth MK-3",
+      "numbers": [
+        "SD4-EN009"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SD4-EN017"
+      ]
+    },
+    {
+      "passcode": 76515293,
+      "name": "Xing Zhen Hu",
+      "numbers": [
+        "SD4-EN032"
+      ]
+    },
+    {
+      "passcode": 85742772,
+      "name": "Gravity Bind",
+      "numbers": [
+        "SD4-EN028"
+      ]
+    },
+    {
+      "passcode": 92084010,
+      "name": "Unshaven Angler",
+      "numbers": [
+        "SD4-EN013"
+      ]
+    },
+    {
+      "passcode": 96947648,
+      "name": "Salvage",
+      "numbers": [
+        "SD4-EN023"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD4-EN027"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Fury from the Deep'; printings from the YGOPRODeck bulk dump."
+}

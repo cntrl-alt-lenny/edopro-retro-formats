@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2005",
+  "code": "CT2",
+  "name": "Collectible Tins 2005",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-09-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 14898066,
+      "name": "Vorse Raider",
+      "numbers": [
+        "CT2-EN003"
+      ]
+    },
+    {
+      "passcode": 30860696,
+      "name": "Rocket Warrior",
+      "numbers": [
+        "CT2-EN005"
+      ]
+    },
+    {
+      "passcode": 36354007,
+      "name": "Gilford the Lightning",
+      "numbers": [
+        "CT2-EN001"
+      ]
+    },
+    {
+      "passcode": 38033121,
+      "name": "Dark Magician Girl",
+      "numbers": [
+        "CT2-EN004"
+      ]
+    },
+    {
+      "passcode": 42035044,
+      "name": "Panther Warrior",
+      "numbers": [
+        "CT2-EN006"
+      ]
+    },
+    {
+      "passcode": 63749102,
+      "name": "Exarion Universe",
+      "numbers": [
+        "CT2-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2005'; printings from the YGOPRODeck bulk dump."
+}

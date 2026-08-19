@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-february-2009-subscription-bonus",
+  "code": "JUMP",
+  "name": "Shonen Jump February 2009 subscription bonus",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-02-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 15341821,
+      "name": "Dandylion",
+      "numbers": [
+        "JUMP-EN029"
+      ]
+    },
+    {
+      "passcode": 88264978,
+      "name": "Red-Eyes Darkness Metal Dragon",
+      "numbers": [
+        "JUMP-EN030"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump February 2009 subscription bonus'; printings from the YGOPRODeck bulk dump."
+}

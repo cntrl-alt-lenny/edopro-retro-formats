@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2006-wave-1",
+  "code": "CT03",
+  "name": "Collectible Tins 2006 Wave 1",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-09-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 69890967,
+      "name": "Raviel, Lord of Phantasms",
+      "numbers": [
+        "CT03-EN003"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "CT03-EN002"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "CT03-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2006 Wave 1'; printings from the YGOPRODeck bulk dump."
+}

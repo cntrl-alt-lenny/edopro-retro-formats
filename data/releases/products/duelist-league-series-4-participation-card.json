@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-series-4-participation-card",
+  "code": "DL4",
+  "name": "Duelist League Series 4 participation card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 46700124,
+      "name": "Machine King",
+      "numbers": [
+        "DL4-001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Series 4 participation card'; printings from the YGOPRODeck bulk dump."
+}

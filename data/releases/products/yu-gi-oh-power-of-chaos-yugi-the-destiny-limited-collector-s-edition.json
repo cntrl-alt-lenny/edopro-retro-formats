@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-power-of-chaos-yugi-the-destiny-limited-collector-s-edition",
+  "code": "PCY",
+  "name": "Yu-Gi-Oh! Power of Chaos: Yugi the Destiny Limited Collector's Edition",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-eu",
+      "date": "2003-11-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "PCY-004",
+        "PCY-E004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! Power of Chaos: Yugi the Destiny Limited Collector's Edition\"; printings from the YGOPRODeck bulk dump."
+}

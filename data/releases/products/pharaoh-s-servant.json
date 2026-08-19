@@ -1,0 +1,992 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "pharaoh-s-servant",
+  "code": "PSV",
+  "name": "Pharaoh's Servant",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-10-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-12-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 296499,
+      "name": "The Regulation of Tribe",
+      "numbers": [
+        "PSV-027",
+        "PSV-E027",
+        "PSV-EN027"
+      ]
+    },
+    {
+      "passcode": 423705,
+      "name": "Gearfried the Iron Knight",
+      "numbers": [
+        "PSV-101",
+        "PSV-E101",
+        "PSV-EN101"
+      ]
+    },
+    {
+      "passcode": 473469,
+      "name": "Driving Snow",
+      "numbers": [
+        "PSV-018",
+        "PSV-E018",
+        "PSV-EN018"
+      ]
+    },
+    {
+      "passcode": 1248895,
+      "name": "Chain Destruction",
+      "numbers": [
+        "PSV-006",
+        "PSV-E006",
+        "PSV-EN006"
+      ]
+    },
+    {
+      "passcode": 1918087,
+      "name": "Minor Goblin Official",
+      "numbers": [
+        "PSV-052",
+        "PSV-E052",
+        "PSV-EN052"
+      ]
+    },
+    {
+      "passcode": 2130625,
+      "name": "Numinous Healer",
+      "numbers": [
+        "PSV-023",
+        "PSV-E023",
+        "PSV-EN023"
+      ]
+    },
+    {
+      "passcode": 2311603,
+      "name": "Overdrive",
+      "numbers": [
+        "PSV-060",
+        "PSV-E060",
+        "PSV-EN060"
+      ]
+    },
+    {
+      "passcode": 3134241,
+      "name": "Flying Kamakiri #2",
+      "numbers": [
+        "PSV-048",
+        "PSV-E048",
+        "PSV-EN048"
+      ]
+    },
+    {
+      "passcode": 3643300,
+      "name": "The Legendary Fisherman",
+      "numbers": [
+        "PSV-076",
+        "PSV-E076",
+        "PSV-EN076"
+      ]
+    },
+    {
+      "passcode": 4042268,
+      "name": "Island Turtle",
+      "numbers": [
+        "PSV-095",
+        "PSV-E095",
+        "PSV-EN095"
+      ]
+    },
+    {
+      "passcode": 4266839,
+      "name": "Kiseitai",
+      "numbers": [
+        "PSV-046",
+        "PSV-E046",
+        "PSV-EN046"
+      ]
+    },
+    {
+      "passcode": 4920010,
+      "name": "Souls of the Forgotten",
+      "numbers": [
+        "PSV-098",
+        "PSV-E098",
+        "PSV-EN098"
+      ]
+    },
+    {
+      "passcode": 5265750,
+      "name": "Skull Mariner",
+      "numbers": [
+        "PSV-092",
+        "PSV-E092",
+        "PSV-EN092"
+      ]
+    },
+    {
+      "passcode": 5388481,
+      "name": "Darkfire Soldier #1",
+      "numbers": [
+        "PSV-043",
+        "PSV-E043",
+        "PSV-EN043"
+      ]
+    },
+    {
+      "passcode": 6104968,
+      "name": "Bubonic Vermin",
+      "numbers": [
+        "PSV-057",
+        "PSV-E057",
+        "PSV-EN057"
+      ]
+    },
+    {
+      "passcode": 8951260,
+      "name": "Respect Play",
+      "numbers": [
+        "PSV-032",
+        "PSV-E032",
+        "PSV-EN032"
+      ]
+    },
+    {
+      "passcode": 9074847,
+      "name": "Major Riot",
+      "numbers": [
+        "PSV-029",
+        "PSV-E029",
+        "PSV-EN029"
+      ]
+    },
+    {
+      "passcode": 10992251,
+      "name": "Gradius",
+      "numbers": [
+        "PSV-089",
+        "PSV-E089",
+        "PSV-EN089"
+      ]
+    },
+    {
+      "passcode": 11761845,
+      "name": "Beast of Talwar",
+      "numbers": [
+        "PSV-103",
+        "PSV-E103",
+        "PSV-EN103"
+      ]
+    },
+    {
+      "passcode": 12253117,
+      "name": "World Suppression",
+      "numbers": [
+        "PSV-020",
+        "PSV-E020",
+        "PSV-EN020"
+      ]
+    },
+    {
+      "passcode": 16227556,
+      "name": "Inspection",
+      "numbers": [
+        "PSV-038",
+        "PSV-E038",
+        "PSV-EN038"
+      ]
+    },
+    {
+      "passcode": 17449108,
+      "name": "Nobleman of Extermination",
+      "numbers": [
+        "PSV-035",
+        "PSV-E035",
+        "PSV-EN035"
+      ]
+    },
+    {
+      "passcode": 21015833,
+      "name": "Hayabusa Knight",
+      "numbers": [
+        "PSV-086",
+        "PSV-E086",
+        "PSV-EN086"
+      ]
+    },
+    {
+      "passcode": 21237481,
+      "name": "Type Zero Magic Crusher",
+      "numbers": [
+        "PSV-074",
+        "PSV-E074",
+        "PSV-EN074"
+      ]
+    },
+    {
+      "passcode": 22359980,
+      "name": "Mirror Wall",
+      "numbers": [
+        "PSV-016",
+        "PSV-E016",
+        "PSV-EN016"
+      ]
+    },
+    {
+      "passcode": 22959079,
+      "name": "Dimensionhole",
+      "numbers": [
+        "PSV-069",
+        "PSV-E069",
+        "PSV-EN069"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "PSV-064",
+        "PSV-E064",
+        "PSV-EN064"
+      ]
+    },
+    {
+      "passcode": 23471572,
+      "name": "Solomon's Lawbook",
+      "numbers": [
+        "PSV-013",
+        "PSV-E013",
+        "PSV-EN013"
+      ]
+    },
+    {
+      "passcode": 23615409,
+      "name": "Insect Barrier",
+      "numbers": [
+        "PSV-102",
+        "PSV-E102",
+        "PSV-EN102"
+      ]
+    },
+    {
+      "passcode": 24128274,
+      "name": "Deepsea Warrior",
+      "numbers": [
+        "PSV-079",
+        "PSV-E079",
+        "PSV-EN079"
+      ]
+    },
+    {
+      "passcode": 24294108,
+      "name": "Burning Land",
+      "numbers": [
+        "PSV-061",
+        "PSV-E061",
+        "PSV-EN061"
+      ]
+    },
+    {
+      "passcode": 27125110,
+      "name": "Thousand-Eyes Idol",
+      "numbers": [
+        "PSV-083",
+        "PSV-E083",
+        "PSV-EN083"
+      ]
+    },
+    {
+      "passcode": 27911549,
+      "name": "Parasite Paracide",
+      "numbers": [
+        "PSV-003",
+        "PSV-E003",
+        "PSV-EN003"
+      ]
+    },
+    {
+      "passcode": 30325729,
+      "name": "Dokuroyaiba",
+      "numbers": [
+        "PSV-099",
+        "PSV-E099",
+        "PSV-EN099"
+      ]
+    },
+    {
+      "passcode": 30532390,
+      "name": "Sky Scout",
+      "numbers": [
+        "PSV-049",
+        "PSV-E049",
+        "PSV-EN049"
+      ]
+    },
+    {
+      "passcode": 30655537,
+      "name": "Cyber Falcon",
+      "numbers": [
+        "PSV-047",
+        "PSV-E047",
+        "PSV-EN047"
+      ]
+    },
+    {
+      "passcode": 31447217,
+      "name": "Wingweaver",
+      "numbers": [
+        "PSV-096",
+        "PSV-E096",
+        "PSV-EN096"
+      ]
+    },
+    {
+      "passcode": 31477025,
+      "name": "Mr. Volcano",
+      "numbers": [
+        "PSV-044",
+        "PSV-E044",
+        "PSV-EN044"
+      ]
+    },
+    {
+      "passcode": 32269855,
+      "name": "The All-Seeing White Tiger",
+      "numbers": [
+        "PSV-093",
+        "PSV-E093",
+        "PSV-EN093"
+      ]
+    },
+    {
+      "passcode": 34694160,
+      "name": "The Eye of Truth",
+      "numbers": [
+        "PSV-010",
+        "PSV-E010",
+        "PSV-EN010"
+      ]
+    },
+    {
+      "passcode": 35316708,
+      "name": "Time Seal",
+      "numbers": [
+        "PSV-007",
+        "PSV-E007",
+        "PSV-EN007"
+      ]
+    },
+    {
+      "passcode": 35346968,
+      "name": "Solemn Wishes",
+      "numbers": [
+        "PSV-055",
+        "PSV-E055",
+        "PSV-EN055"
+      ]
+    },
+    {
+      "passcode": 36280194,
+      "name": "Backup Soldier",
+      "numbers": [
+        "PSV-028",
+        "PSV-E028",
+        "PSV-EN028"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "PSV-030",
+        "PSV-E030",
+        "PSV-EN030"
+      ]
+    },
+    {
+      "passcode": 36868108,
+      "name": "Armored Glass",
+      "numbers": [
+        "PSV-019",
+        "PSV-E019",
+        "PSV-EN019"
+      ]
+    },
+    {
+      "passcode": 37313786,
+      "name": "Gamble",
+      "numbers": [
+        "PSV-053",
+        "PSV-E053",
+        "PSV-EN053"
+      ]
+    },
+    {
+      "passcode": 37580756,
+      "name": "Michizure",
+      "numbers": [
+        "PSV-051",
+        "PSV-E051",
+        "PSV-EN051"
+      ]
+    },
+    {
+      "passcode": 42599677,
+      "name": "Flame Champion",
+      "numbers": [
+        "PSV-041",
+        "PSV-E041",
+        "PSV-EN041"
+      ]
+    },
+    {
+      "passcode": 43434803,
+      "name": "The Shallow Grave",
+      "numbers": [
+        "PSV-036",
+        "PSV-E036",
+        "PSV-EN036"
+      ]
+    },
+    {
+      "passcode": 43711255,
+      "name": "Prohibition",
+      "numbers": [
+        "PSV-039",
+        "PSV-E039",
+        "PSV-EN039"
+      ]
+    },
+    {
+      "passcode": 48539234,
+      "name": "Appropriate",
+      "numbers": [
+        "PSV-024",
+        "PSV-E024",
+        "PSV-EN024"
+      ]
+    },
+    {
+      "passcode": 49251811,
+      "name": "Mystic Probe",
+      "numbers": [
+        "PSV-021",
+        "PSV-E021",
+        "PSV-EN021"
+      ]
+    },
+    {
+      "passcode": 49587034,
+      "name": "Lightforce Sword",
+      "numbers": [
+        "PSV-005",
+        "PSV-E005",
+        "PSV-EN005"
+      ]
+    },
+    {
+      "passcode": 50122883,
+      "name": "Bite Shoes",
+      "numbers": [
+        "PSV-080",
+        "PSV-E080",
+        "PSV-EN080"
+      ]
+    },
+    {
+      "passcode": 51345461,
+      "name": "Sword Hunter",
+      "numbers": [
+        "PSV-077",
+        "PSV-E077",
+        "PSV-EN077"
+      ]
+    },
+    {
+      "passcode": 52675689,
+      "name": "Invitation to a Dark Sleep",
+      "numbers": [
+        "PSV-082",
+        "PSV-E082",
+        "PSV-EN082"
+      ]
+    },
+    {
+      "passcode": 54109233,
+      "name": "Infinite Dismissal",
+      "numbers": [
+        "PSV-072",
+        "PSV-E072",
+        "PSV-EN072"
+      ]
+    },
+    {
+      "passcode": 56387350,
+      "name": "Vampire Baby",
+      "numbers": [
+        "PSV-090",
+        "PSV-E090",
+        "PSV-EN090"
+      ]
+    },
+    {
+      "passcode": 57409948,
+      "name": "Bombardment Beetle",
+      "numbers": [
+        "PSV-087",
+        "PSV-E087",
+        "PSV-EN087"
+      ]
+    },
+    {
+      "passcode": 58621589,
+      "name": "Shadow of Eyes",
+      "numbers": [
+        "PSV-075",
+        "PSV-E075",
+        "PSV-EN075"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "PSV-071",
+        "PSV-E071",
+        "PSV-EN071"
+      ]
+    },
+    {
+      "passcode": 59560625,
+      "name": "Shift",
+      "numbers": [
+        "PSV-067",
+        "PSV-E067",
+        "PSV-EN067"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "PSV-011",
+        "PSV-E011",
+        "PSV-EN011"
+      ]
+    },
+    {
+      "passcode": 60682203,
+      "name": "Cold Wave",
+      "numbers": [
+        "PSV-062",
+        "PSV-E062",
+        "PSV-EN062"
+      ]
+    },
+    {
+      "passcode": 60866277,
+      "name": "Earthshaker",
+      "numbers": [
+        "PSV-014",
+        "PSV-E014",
+        "PSV-EN014"
+      ]
+    },
+    {
+      "passcode": 61705417,
+      "name": "Graverobber",
+      "numbers": [
+        "PSV-008",
+        "PSV-E008",
+        "PSV-EN008"
+      ]
+    },
+    {
+      "passcode": 61740673,
+      "name": "Imperial Order",
+      "numbers": [
+        "PSV-104",
+        "PSV-E104",
+        "PSV-EN104"
+      ]
+    },
+    {
+      "passcode": 62867251,
+      "name": "Light of Intervention",
+      "numbers": [
+        "PSV-031",
+        "PSV-E031",
+        "PSV-EN031"
+      ]
+    },
+    {
+      "passcode": 63519819,
+      "name": "Thousand-Eyes Restrict",
+      "numbers": [
+        "PSV-084",
+        "PSV-E084",
+        "PSV-EN084"
+      ]
+    },
+    {
+      "passcode": 63689843,
+      "name": "Attack and Receive",
+      "numbers": [
+        "PSV-054",
+        "PSV-E054",
+        "PSV-EN054"
+      ]
+    },
+    {
+      "passcode": 66362965,
+      "name": "The Fiend Megacyber",
+      "numbers": [
+        "PSV-100",
+        "PSV-E100",
+        "PSV-EN100"
+      ]
+    },
+    {
+      "passcode": 66719324,
+      "name": "Rain of Mercy",
+      "numbers": [
+        "PSV-065",
+        "PSV-E065",
+        "PSV-EN065"
+      ]
+    },
+    {
+      "passcode": 66927994,
+      "name": "Oni Tank T-34",
+      "numbers": [
+        "PSV-059",
+        "PSV-E059",
+        "PSV-EN059"
+      ]
+    },
+    {
+      "passcode": 67049542,
+      "name": "Dark Bat",
+      "numbers": [
+        "PSV-058",
+        "PSV-E058",
+        "PSV-EN058"
+      ]
+    },
+    {
+      "passcode": 67532912,
+      "name": "Science Soldier",
+      "numbers": [
+        "PSV-097",
+        "PSV-E097",
+        "PSV-EN097"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "PSV-037",
+        "PSV-E037",
+        "PSV-EN037"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "PSV-034",
+        "PSV-E034",
+        "PSV-EN034"
+      ]
+    },
+    {
+      "passcode": 73079365,
+      "name": "Gust",
+      "numbers": [
+        "PSV-017",
+        "PSV-E017",
+        "PSV-EN017"
+      ]
+    },
+    {
+      "passcode": 74701381,
+      "name": "DNA Surgery",
+      "numbers": [
+        "PSV-026",
+        "PSV-E026",
+        "PSV-EN026"
+      ]
+    },
+    {
+      "passcode": 74923978,
+      "name": "Forced Requisition",
+      "numbers": [
+        "PSV-025",
+        "PSV-E025",
+        "PSV-EN025"
+      ]
+    },
+    {
+      "passcode": 75646520,
+      "name": "Metal Detector",
+      "numbers": [
+        "PSV-022",
+        "PSV-E022",
+        "PSV-EN022"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "PSV-000",
+        "PSV-E000",
+        "PSV-EN000"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "PSV-050",
+        "PSV-E050",
+        "PSV-EN050"
+      ]
+    },
+    {
+      "passcode": 78423643,
+      "name": "Three-Headed Geedo",
+      "numbers": [
+        "PSV-002",
+        "PSV-E002",
+        "PSV-EN002"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "PSV-094",
+        "PSV-E094",
+        "PSV-EN094"
+      ]
+    },
+    {
+      "passcode": 78861134,
+      "name": "Darkfire Soldier #2",
+      "numbers": [
+        "PSV-045",
+        "PSV-E045",
+        "PSV-EN045"
+      ]
+    },
+    {
+      "passcode": 78984772,
+      "name": "Twin-Headed Fire Dragon",
+      "numbers": [
+        "PSV-042",
+        "PSV-E042",
+        "PSV-EN042"
+      ]
+    },
+    {
+      "passcode": 79106360,
+      "name": "Morphing Jar #2",
+      "numbers": [
+        "PSV-040",
+        "PSV-E040",
+        "PSV-EN040"
+      ]
+    },
+    {
+      "passcode": 79870141,
+      "name": "Mad Sword Beast",
+      "numbers": [
+        "PSV-091",
+        "PSV-E091",
+        "PSV-EN091"
+      ]
+    },
+    {
+      "passcode": 81210420,
+      "name": "Magical Hats",
+      "numbers": [
+        "PSV-033",
+        "PSV-E033",
+        "PSV-EN033"
+      ]
+    },
+    {
+      "passcode": 83994646,
+      "name": "4-Starred Ladybug of Doom",
+      "numbers": [
+        "PSV-088",
+        "PSV-E088",
+        "PSV-EN088"
+      ]
+    },
+    {
+      "passcode": 84620194,
+      "name": "Girochin Kuwagata",
+      "numbers": [
+        "PSV-085",
+        "PSV-E085",
+        "PSV-EN085"
+      ]
+    },
+    {
+      "passcode": 85742772,
+      "name": "Gravity Bind",
+      "numbers": [
+        "PSV-073",
+        "PSV-E073",
+        "PSV-EN073"
+      ]
+    },
+    {
+      "passcode": 86198326,
+      "name": "7 Completed",
+      "numbers": [
+        "PSV-004",
+        "PSV-E004",
+        "PSV-EN004"
+      ]
+    },
+    {
+      "passcode": 87511987,
+      "name": "Spikebot",
+      "numbers": [
+        "PSV-081",
+        "PSV-E081",
+        "PSV-EN081"
+      ]
+    },
+    {
+      "passcode": 88733579,
+      "name": "Drill Bug",
+      "numbers": [
+        "PSV-078",
+        "PSV-E078",
+        "PSV-EN078"
+      ]
+    },
+    {
+      "passcode": 90502999,
+      "name": "Ground Collapse",
+      "numbers": [
+        "PSV-070",
+        "PSV-E070",
+        "PSV-EN070"
+      ]
+    },
+    {
+      "passcode": 90908427,
+      "name": "Steel Ogre Grotto #2",
+      "numbers": [
+        "PSV-001",
+        "PSV-E001",
+        "PSV-EN001"
+      ]
+    },
+    {
+      "passcode": 93108433,
+      "name": "Monster Recovery",
+      "numbers": [
+        "PSV-066",
+        "PSV-E066",
+        "PSV-EN066"
+      ]
+    },
+    {
+      "passcode": 96355986,
+      "name": "Enchanted Javelin",
+      "numbers": [
+        "PSV-015",
+        "PSV-E015",
+        "PSV-EN015"
+      ]
+    },
+    {
+      "passcode": 96965364,
+      "name": "Insect Imitation",
+      "numbers": [
+        "PSV-068",
+        "PSV-E068",
+        "PSV-EN068"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "PSV-012",
+        "PSV-E012",
+        "PSV-EN012"
+      ]
+    },
+    {
+      "passcode": 97687912,
+      "name": "Fairy Meteor Crush",
+      "numbers": [
+        "PSV-063",
+        "PSV-E063",
+        "PSV-EN063"
+      ]
+    },
+    {
+      "passcode": 98139712,
+      "name": "Skull Invitation",
+      "numbers": [
+        "PSV-056",
+        "PSV-E056",
+        "PSV-EN056"
+      ]
+    },
+    {
+      "passcode": 98299011,
+      "name": "Gift of The Mystical Elf",
+      "numbers": [
+        "PSV-009",
+        "PSV-E009",
+        "PSV-EN009"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Pharaoh's Servant\"; printings from the YGOPRODeck bulk dump."
+}

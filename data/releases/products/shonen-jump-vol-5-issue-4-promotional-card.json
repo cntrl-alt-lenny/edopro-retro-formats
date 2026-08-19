@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-5-issue-4-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 5, Issue 4 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-04-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 40044918,
+      "name": "Elemental HERO Stratos",
+      "numbers": [
+        "JUMP-EN012"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 5, Issue 4 promotional card'; printings from the YGOPRODeck bulk dump."
+}

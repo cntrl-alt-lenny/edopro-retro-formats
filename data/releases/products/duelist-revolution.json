@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-revolution",
+  "code": "DREV",
+  "name": "Duelist Revolution",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-08-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 712559,
+      "name": "Amazoness Village",
+      "numbers": [
+        "DREV-EN053"
+      ]
+    },
+    {
+      "passcode": 1050684,
+      "name": "Scrapyard",
+      "numbers": [
+        "DREV-EN047"
+      ]
+    },
+    {
+      "passcode": 1834107,
+      "name": "Wattcine",
+      "numbers": [
+        "DREV-EN050"
+      ]
+    },
+    {
+      "passcode": 2772236,
+      "name": "Wattchimera",
+      "numbers": [
+        "DREV-EN044"
+      ]
+    },
+    {
+      "passcode": 6459419,
+      "name": "Amazoness Shamanism",
+      "numbers": [
+        "DREV-EN088"
+      ]
+    },
+    {
+      "passcode": 7304544,
+      "name": "Naturia Pineapple",
+      "numbers": [
+        "DREV-EN082"
+      ]
+    },
+    {
+      "passcode": 7582066,
+      "name": "Psychic Nightmare",
+      "numbers": [
+        "DREV-EN085"
+      ]
+    },
+    {
+      "passcode": 9999961,
+      "name": "Beast Rage",
+      "numbers": [
+        "DREV-EN056"
+      ]
+    },
+    {
+      "passcode": 13521194,
+      "name": "Stygian Street Patrol",
+      "numbers": [
+        "DREV-EN099"
+      ]
+    },
+    {
+      "passcode": 13995824,
+      "name": "Voltic Bicorn",
+      "numbers": [
+        "DREV-EN041"
+      ]
+    },
+    {
+      "passcode": 14017402,
+      "name": "Dragon Knight Draco-Equiste",
+      "numbers": [
+        "DREV-EN038"
+      ]
+    },
+    {
+      "passcode": 15839054,
+      "name": "Synchro Fusionist",
+      "numbers": [
+        "DREV-EN035"
+      ]
+    },
+    {
+      "passcode": 15951532,
+      "name": "Amazoness Queen",
+      "numbers": [
+        "DREV-EN032"
+      ]
+    },
+    {
+      "passcode": 17285476,
+      "name": "Naturia Mosquito",
+      "numbers": [
+        "DREV-EN027"
+      ]
+    },
+    {
+      "passcode": 18407024,
+      "name": "Wattbetta",
+      "numbers": [
+        "DREV-EN024"
+      ]
+    },
+    {
+      "passcode": 19139516,
+      "name": "Scrap Beast",
+      "numbers": [
+        "DREV-EN021"
+      ]
+    },
+    {
+      "passcode": 20138923,
+      "name": "Anti-Magic Prism",
+      "numbers": [
+        "DREV-EN078"
+      ]
+    },
+    {
+      "passcode": 20174189,
+      "name": "Naturia Bamboo Shoot",
+      "numbers": [
+        "DREV-EN029"
+      ]
+    },
+    {
+      "passcode": 20351153,
+      "name": "Hypnocorn",
+      "numbers": [
+        "DREV-EN018"
+      ]
+    },
+    {
+      "passcode": 20474741,
+      "name": "Trident Warrior",
+      "numbers": [
+        "DREV-EN015"
+      ]
+    },
+    {
+      "passcode": 21296383,
+      "name": "Unibird",
+      "numbers": [
+        "DREV-EN012"
+      ]
+    },
+    {
+      "passcode": 21350571,
+      "name": "Horn of the Phantom Beast",
+      "numbers": [
+        "DREV-EN075"
+      ]
+    },
+    {
+      "passcode": 21636650,
+      "name": "Miracle's Wake",
+      "numbers": [
+        "DREV-EN093"
+      ]
+    },
+    {
+      "passcode": 22082163,
+      "name": "Amazoness Willpower",
+      "numbers": [
+        "DREV-EN072"
+      ]
+    },
+    {
+      "passcode": 22205600,
+      "name": "Chain Whirlwind",
+      "numbers": [
+        "DREV-EN069"
+      ]
+    },
+    {
+      "passcode": 22318971,
+      "name": "Uni-Horned Familiar",
+      "numbers": [
+        "DREV-EN009"
+      ]
+    },
+    {
+      "passcode": 23327298,
+      "name": "Parallel Selection",
+      "numbers": [
+        "DREV-EN066"
+      ]
+    },
+    {
+      "passcode": 23535429,
+      "name": "Stronghold Guardian",
+      "numbers": [
+        "DREV-EN006"
+      ]
+    },
+    {
+      "passcode": 28332833,
+      "name": "Flamvell Poun",
+      "numbers": [
+        "DREV-EN094"
+      ]
+    },
+    {
+      "passcode": 30399511,
+      "name": "Genex Power Planner",
+      "numbers": [
+        "DREV-EN098"
+      ]
+    },
+    {
+      "passcode": 32854013,
+      "name": "Super Rush Recklessly",
+      "numbers": [
+        "DREV-EN089"
+      ]
+    },
+    {
+      "passcode": 33970665,
+      "name": "Guts of Steel",
+      "numbers": [
+        "DREV-EN086"
+      ]
+    },
+    {
+      "passcode": 34149830,
+      "name": "Desperate Tag",
+      "numbers": [
+        "DREV-EN063"
+      ]
+    },
+    {
+      "passcode": 34257001,
+      "name": "Dash Warrior",
+      "numbers": [
+        "DREV-EN003"
+      ]
+    },
+    {
+      "passcode": 35262428,
+      "name": "Wiseman's Chalice",
+      "numbers": [
+        "DREV-EN060"
+      ]
+    },
+    {
+      "passcode": 35563539,
+      "name": "Mystical Refpanel",
+      "numbers": [
+        "DREV-EN090"
+      ]
+    },
+    {
+      "passcode": 36100154,
+      "name": "Amazoness Fighting Spirit",
+      "numbers": [
+        "DREV-EN054"
+      ]
+    },
+    {
+      "passcode": 36484016,
+      "name": "Miracle Synchro Fusion",
+      "numbers": [
+        "DREV-EN057"
+      ]
+    },
+    {
+      "passcode": 37322745,
+      "name": "Naturia Forest",
+      "numbers": [
+        "DREV-EN051"
+      ]
+    },
+    {
+      "passcode": 40101111,
+      "name": "Ultimate Axon Kicker",
+      "numbers": [
+        "DREV-EN039"
+      ]
+    },
+    {
+      "passcode": 41224658,
+      "name": "Ambitious Gofer",
+      "numbers": [
+        "DREV-EN036"
+      ]
+    },
+    {
+      "passcode": 44789585,
+      "name": "Naturia Beans",
+      "numbers": [
+        "DREV-EN028"
+      ]
+    },
+    {
+      "passcode": 44792253,
+      "name": "D.D. Destroyer",
+      "numbers": [
+        "DREV-EN083"
+      ]
+    },
+    {
+      "passcode": 45586855,
+      "name": "Ally of Justice Cyclone Creator",
+      "numbers": [
+        "DREV-EN092"
+      ]
+    },
+    {
+      "passcode": 45801022,
+      "name": "Wattlemur",
+      "numbers": [
+        "DREV-EN025"
+      ]
+    },
+    {
+      "passcode": 45815891,
+      "name": "Scrap Archfiend",
+      "numbers": [
+        "DREV-EN000"
+      ]
+    },
+    {
+      "passcode": 47217354,
+      "name": "Fabled Raven",
+      "numbers": [
+        "DREV-EN091"
+      ]
+    },
+    {
+      "passcode": 48445393,
+      "name": "Scrapstorm",
+      "numbers": [
+        "DREV-EN048"
+      ]
+    },
+    {
+      "passcode": 49267971,
+      "name": "Blind Spot Strike",
+      "numbers": [
+        "DREV-EN045"
+      ]
+    },
+    {
+      "passcode": 49389523,
+      "name": "Lightning Tricorn",
+      "numbers": [
+        "DREV-EN042"
+      ]
+    },
+    {
+      "passcode": 52346240,
+      "name": "Lock Cat",
+      "numbers": [
+        "DREV-EN033"
+      ]
+    },
+    {
+      "passcode": 53162898,
+      "name": "Amazoness Sage",
+      "numbers": [
+        "DREV-EN030"
+      ]
+    },
+    {
+      "passcode": 54326448,
+      "name": "Flamvell Archer",
+      "numbers": [
+        "DREV-EN095"
+      ]
+    },
+    {
+      "passcode": 55624610,
+      "name": "Scrap Hunter",
+      "numbers": [
+        "DREV-EN022"
+      ]
+    },
+    {
+      "passcode": 56532632,
+      "name": "Chivalry",
+      "numbers": [
+        "DREV-EN079"
+      ]
+    },
+    {
+      "passcode": 56746202,
+      "name": "Scrap Chimera",
+      "numbers": [
+        "DREV-EN019"
+      ]
+    },
+    {
+      "passcode": 57355219,
+      "name": "Paradox Fusion",
+      "numbers": [
+        "DREV-EN076"
+      ]
+    },
+    {
+      "passcode": 57568840,
+      "name": "Delta Flyer",
+      "numbers": [
+        "DREV-EN016"
+      ]
+    },
+    {
+      "passcode": 58477767,
+      "name": "Queen's Pawn",
+      "numbers": [
+        "DREV-EN073"
+      ]
+    },
+    {
+      "passcode": 58685438,
+      "name": "Bicorn Re'em",
+      "numbers": [
+        "DREV-EN013"
+      ]
+    },
+    {
+      "passcode": 58807980,
+      "name": "Monoceros",
+      "numbers": [
+        "DREV-EN010"
+      ]
+    },
+    {
+      "passcode": 59699355,
+      "name": "Scrap Rage",
+      "numbers": [
+        "DREV-EN070"
+      ]
+    },
+    {
+      "passcode": 60312997,
+      "name": "Reanimation Wave",
+      "numbers": [
+        "DREV-EN067"
+      ]
+    },
+    {
+      "passcode": 60534585,
+      "name": "Battle Instinct",
+      "numbers": [
+        "DREV-EN064"
+      ]
+    },
+    {
+      "passcode": 60741115,
+      "name": "Damage Eater",
+      "numbers": [
+        "DREV-EN004"
+      ]
+    },
+    {
+      "passcode": 61650133,
+      "name": "Summoning Curse",
+      "numbers": [
+        "DREV-EN061"
+      ]
+    },
+    {
+      "passcode": 61864793,
+      "name": "Earthquake Giant",
+      "numbers": [
+        "DREV-EN001"
+      ]
+    },
+    {
+      "passcode": 62472614,
+      "name": "Pestilence",
+      "numbers": [
+        "DREV-EN058"
+      ]
+    },
+    {
+      "passcode": 63595262,
+      "name": "Unicorn Beacon",
+      "numbers": [
+        "DREV-EN055"
+      ]
+    },
+    {
+      "passcode": 69529567,
+      "name": "Playful Possum",
+      "numbers": [
+        "DREV-EN007"
+      ]
+    },
+    {
+      "passcode": 70187958,
+      "name": "Dark Desertapir",
+      "numbers": [
+        "DREV-EN084"
+      ]
+    },
+    {
+      "passcode": 71209500,
+      "name": "Amazoness Scouts",
+      "numbers": [
+        "DREV-EN081"
+      ]
+    },
+    {
+      "passcode": 74439492,
+      "name": "Scrap Sheen",
+      "numbers": [
+        "DREV-EN049"
+      ]
+    },
+    {
+      "passcode": 74717840,
+      "name": "Landoise's Luminous Moss",
+      "numbers": [
+        "DREV-EN052"
+      ]
+    },
+    {
+      "passcode": 75652080,
+      "name": "Double Cyclone",
+      "numbers": [
+        "DREV-EN046"
+      ]
+    },
+    {
+      "passcode": 76774528,
+      "name": "Scrap Dragon",
+      "numbers": [
+        "DREV-EN043"
+      ]
+    },
+    {
+      "passcode": 77506119,
+      "name": "Thunder Unicorn",
+      "numbers": [
+        "DREV-EN040"
+      ]
+    },
+    {
+      "passcode": 79965360,
+      "name": "Amazoness Heirloom",
+      "numbers": [
+        "DREV-EN087"
+      ]
+    },
+    {
+      "passcode": 81896771,
+      "name": "Wattpheasant",
+      "numbers": [
+        "DREV-EN026"
+      ]
+    },
+    {
+      "passcode": 82012319,
+      "name": "Scrap Golem",
+      "numbers": [
+        "DREV-EN023"
+      ]
+    },
+    {
+      "passcode": 83027236,
+      "name": "Light of Destruction",
+      "numbers": [
+        "DREV-EN080"
+      ]
+    },
+    {
+      "passcode": 83135907,
+      "name": "Scrap Goblin",
+      "numbers": [
+        "DREV-EN020"
+      ]
+    },
+    {
+      "passcode": 83957459,
+      "name": "Rhinotaurus",
+      "numbers": [
+        "DREV-EN017"
+      ]
+    },
+    {
+      "passcode": 84749824,
+      "name": "Solemn Warning",
+      "numbers": [
+        "DREV-EN077"
+      ]
+    },
+    {
+      "passcode": 84962466,
+      "name": "Beast Rising",
+      "numbers": [
+        "DREV-EN074"
+      ]
+    },
+    {
+      "passcode": 87622767,
+      "name": "Final Psychic Ogre",
+      "numbers": [
+        "DREV-EN037"
+      ]
+    },
+    {
+      "passcode": 88845345,
+      "name": "Elephun",
+      "numbers": [
+        "DREV-EN034"
+      ]
+    },
+    {
+      "passcode": 89567993,
+      "name": "Amazoness Trainee",
+      "numbers": [
+        "DREV-EN031"
+      ]
+    },
+    {
+      "passcode": 91711547,
+      "name": "Flamvell Fiend",
+      "numbers": [
+        "DREV-EN096"
+      ]
+    },
+    {
+      "passcode": 93882364,
+      "name": "Genex Worker",
+      "numbers": [
+        "DREV-EN097"
+      ]
+    },
+    {
+      "passcode": 94079037,
+      "name": "Mine Mole",
+      "numbers": [
+        "DREV-EN014"
+      ]
+    },
+    {
+      "passcode": 95084054,
+      "name": "Wattcannon",
+      "numbers": [
+        "DREV-EN071"
+      ]
+    },
+    {
+      "passcode": 95291684,
+      "name": "D.D. Unicorn Knight",
+      "numbers": [
+        "DREV-EN011"
+      ]
+    },
+    {
+      "passcode": 96146814,
+      "name": "A/D Changer",
+      "numbers": [
+        "DREV-EN005"
+      ]
+    },
+    {
+      "passcode": 96700602,
+      "name": "Barrier Wave",
+      "numbers": [
+        "DREV-EN068"
+      ]
+    },
+    {
+      "passcode": 96914272,
+      "name": "Egotistical Ape",
+      "numbers": [
+        "DREV-EN008"
+      ]
+    },
+    {
+      "passcode": 97268402,
+      "name": "Effect Veiler",
+      "numbers": [
+        "DREV-EN002"
+      ]
+    },
+    {
+      "passcode": 97922283,
+      "name": "Howl of the Wild",
+      "numbers": [
+        "DREV-EN065"
+      ]
+    },
+    {
+      "passcode": 98645731,
+      "name": "Pot of Duality",
+      "numbers": [
+        "DREV-EN062"
+      ]
+    },
+    {
+      "passcode": 98867329,
+      "name": "Cursed Armaments",
+      "numbers": [
+        "DREV-EN059"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Revolution'; printings from the YGOPRODeck bulk dump."
+}

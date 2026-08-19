@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "pharaoh-tour-2006-promotional-cards",
+  "code": "PT02",
+  "name": "Pharaoh Tour 2006 promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-eu",
+      "date": "2006-09-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 55713623,
+      "name": "Shrink",
+      "numbers": [
+        "PT02-EN001"
+      ]
+    },
+    {
+      "passcode": 90960358,
+      "name": "Toon Dark Magician Girl",
+      "numbers": [
+        "PT02-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Pharaoh Tour 2006 promotional cards'; printings from the YGOPRODeck bulk dump."
+}

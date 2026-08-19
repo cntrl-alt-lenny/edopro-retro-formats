@@ -1,0 +1,202 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-jesse-anderson",
+  "code": "DP07",
+  "name": "Duelist Pack: Jesse Anderson",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-01-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 8275702,
+      "name": "Crystal Promise",
+      "numbers": [
+        "DP07-EN016"
+      ]
+    },
+    {
+      "passcode": 9391354,
+      "name": "Gravi-Crush Dragon",
+      "numbers": [
+        "DP07-EN011"
+      ]
+    },
+    {
+      "passcode": 10004783,
+      "name": "Crystal Release",
+      "numbers": [
+        "DP07-EN019"
+      ]
+    },
+    {
+      "passcode": 11136371,
+      "name": "Counter Gem",
+      "numbers": [
+        "DP07-EN024"
+      ]
+    },
+    {
+      "passcode": 12958919,
+      "name": "Phantom Skyblaster",
+      "numbers": [
+        "DP07-EN007"
+      ]
+    },
+    {
+      "passcode": 21698716,
+      "name": "Crystal Beast Cobalt Eagle",
+      "numbers": [
+        "DP07-EN006"
+      ]
+    },
+    {
+      "passcode": 32710364,
+      "name": "Crystal Beast Ruby Carbuncle",
+      "numbers": [
+        "DP07-EN001"
+      ]
+    },
+    {
+      "passcode": 32933942,
+      "name": "Crystal Beast Amethyst Cat",
+      "numbers": [
+        "DP07-EN002"
+      ]
+    },
+    {
+      "passcode": 34487429,
+      "name": "Ancient City - Rainbow Ruins",
+      "numbers": [
+        "DP07-EN017"
+      ]
+    },
+    {
+      "passcode": 35486099,
+      "name": "Crystal Blessing",
+      "numbers": [
+        "DP07-EN014"
+      ]
+    },
+    {
+      "passcode": 45939841,
+      "name": "Twister",
+      "numbers": [
+        "DP07-EN012"
+      ]
+    },
+    {
+      "passcode": 47121070,
+      "name": "Crystal Pair",
+      "numbers": [
+        "DP07-EN025"
+      ]
+    },
+    {
+      "passcode": 47408488,
+      "name": "Crystal Tree",
+      "numbers": [
+        "DP07-EN020"
+      ]
+    },
+    {
+      "passcode": 48343627,
+      "name": "Grave Squirmer",
+      "numbers": [
+        "DP07-EN008"
+      ]
+    },
+    {
+      "passcode": 68215963,
+      "name": "Crystal Beast Emerald Tortoise",
+      "numbers": [
+        "DP07-EN003"
+      ]
+    },
+    {
+      "passcode": 69937550,
+      "name": "Crystal Beast Amber Mammoth",
+      "numbers": [
+        "DP07-EN005"
+      ]
+    },
+    {
+      "passcode": 72881007,
+      "name": "Crystal Abundance",
+      "numbers": [
+        "DP07-EN015"
+      ]
+    },
+    {
+      "passcode": 72903645,
+      "name": "Magna-Slash Dragon",
+      "numbers": [
+        "DP07-EN010"
+      ]
+    },
+    {
+      "passcode": 74519184,
+      "name": "Hand Destruction",
+      "numbers": [
+        "DP07-EN018"
+      ]
+    },
+    {
+      "passcode": 75732622,
+      "name": "Grinder Golem",
+      "numbers": [
+        "DP07-EN009"
+      ]
+    },
+    {
+      "passcode": 95326659,
+      "name": "Crystal Beacon",
+      "numbers": [
+        "DP07-EN013"
+      ]
+    },
+    {
+      "passcode": 95600067,
+      "name": "Crystal Beast Topaz Tiger",
+      "numbers": [
+        "DP07-EN004"
+      ]
+    },
+    {
+      "passcode": 96148285,
+      "name": "Triggered Summon",
+      "numbers": [
+        "DP07-EN021"
+      ]
+    },
+    {
+      "passcode": 96331676,
+      "name": "Crystal Raigeki",
+      "numbers": [
+        "DP07-EN023"
+      ]
+    },
+    {
+      "passcode": 97970833,
+      "name": "Last Resort",
+      "numbers": [
+        "DP07-EN022"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Jesse Anderson'; printings from the YGOPRODeck bulk dump."
+}

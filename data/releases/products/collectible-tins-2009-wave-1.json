@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2009-wave-1",
+  "code": "CT06",
+  "name": "Collectible Tins 2009 Wave 1",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2009-08-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2403771,
+      "name": "Power Tool Dragon",
+      "numbers": [
+        "CT06-EN001"
+      ]
+    },
+    {
+      "passcode": 25862681,
+      "name": "Ancient Fairy Dragon",
+      "numbers": [
+        "CT06-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2009 Wave 1'; printings from the YGOPRODeck bulk dump."
+}

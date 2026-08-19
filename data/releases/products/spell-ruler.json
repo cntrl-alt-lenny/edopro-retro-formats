@@ -1,0 +1,879 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "spell-ruler",
+  "code": "SRL",
+  "name": "Spell Ruler",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-09-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-10-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 596051,
+      "name": "Snake Fang",
+      "numbers": [
+        "SRL-050",
+        "SRL-EN050"
+      ]
+    },
+    {
+      "passcode": 2964201,
+      "name": "Ryu-Ran",
+      "numbers": [
+        "SRL-070",
+        "SRL-EN070"
+      ]
+    },
+    {
+      "passcode": 3056267,
+      "name": "Invader of the Throne",
+      "numbers": [
+        "SRL-026",
+        "SRL-EN026"
+      ]
+    },
+    {
+      "passcode": 3797883,
+      "name": "Slot Machine",
+      "numbers": [
+        "SRL-028",
+        "SRL-EN028"
+      ]
+    },
+    {
+      "passcode": 4849037,
+      "name": "Performance of Sword",
+      "numbers": [
+        "SRL-067",
+        "SRL-EN067"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SRL-047",
+        "SRL-EN047"
+      ]
+    },
+    {
+      "passcode": 7892180,
+      "name": "Psychic Kappa",
+      "numbers": [
+        "SRL-053",
+        "SRL-EN053"
+      ]
+    },
+    {
+      "passcode": 11324436,
+      "name": "Electric Snake",
+      "numbers": [
+        "SRL-008",
+        "SRL-EN008"
+      ]
+    },
+    {
+      "passcode": 12470447,
+      "name": "Curse of Fiend",
+      "numbers": [
+        "SRL-032",
+        "SRL-EN032"
+      ]
+    },
+    {
+      "passcode": 14015067,
+      "name": "Ancient One of the Deep Forest",
+      "numbers": [
+        "SRL-018",
+        "SRL-EN018"
+      ]
+    },
+    {
+      "passcode": 15023985,
+      "name": "Stone Ogre Grotto",
+      "numbers": [
+        "SRL-058",
+        "SRL-EN058"
+      ]
+    },
+    {
+      "passcode": 15083728,
+      "name": "House of Adhesive Tape",
+      "numbers": [
+        "SRL-064",
+        "SRL-EN064"
+      ]
+    },
+    {
+      "passcode": 15259703,
+      "name": "Toon World",
+      "numbers": [
+        "SRL-076",
+        "SRL-EN076"
+      ]
+    },
+    {
+      "passcode": 16430187,
+      "name": "The Reliable Guardian",
+      "numbers": [
+        "SRL-044",
+        "SRL-EN044"
+      ]
+    },
+    {
+      "passcode": 16762927,
+      "name": "Gravekeeper's Servant",
+      "numbers": [
+        "SRL-031",
+        "SRL-EN031"
+      ]
+    },
+    {
+      "passcode": 17375316,
+      "name": "Confiscation",
+      "numbers": [
+        "SRL-038",
+        "SRL-EN038"
+      ]
+    },
+    {
+      "passcode": 17653779,
+      "name": "Fairy's Hand Mirror",
+      "numbers": [
+        "SRL-041",
+        "SRL-EN041"
+      ]
+    },
+    {
+      "passcode": 18161786,
+      "name": "Mystic Plasma Zone",
+      "numbers": [
+        "SRL-101",
+        "SRL-EN101"
+      ]
+    },
+    {
+      "passcode": 18591904,
+      "name": "Final Destiny",
+      "numbers": [
+        "SRL-035",
+        "SRL-EN035"
+      ]
+    },
+    {
+      "passcode": 18807108,
+      "name": "Spellbinding Circle",
+      "numbers": [
+        "SRL-006",
+        "SRL-EN006"
+      ]
+    },
+    {
+      "passcode": 19384334,
+      "name": "Molten Destruction",
+      "numbers": [
+        "SRL-098",
+        "SRL-EN098"
+      ]
+    },
+    {
+      "passcode": 19406822,
+      "name": "Kotodama",
+      "numbers": [
+        "SRL-095",
+        "SRL-EN095"
+      ]
+    },
+    {
+      "passcode": 20228463,
+      "name": "Ceremonial Bell",
+      "numbers": [
+        "SRL-092",
+        "SRL-EN092"
+      ]
+    },
+    {
+      "passcode": 20624263,
+      "name": "Peacock",
+      "numbers": [
+        "SRL-011",
+        "SRL-EN011"
+      ]
+    },
+    {
+      "passcode": 21340051,
+      "name": "Boar Soldier",
+      "numbers": [
+        "SRL-089",
+        "SRL-EN089"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "SRL-061",
+        "SRL-EN061"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "SRL-086",
+        "SRL-EN086"
+      ]
+    },
+    {
+      "passcode": 23289281,
+      "name": "Karate Man",
+      "numbers": [
+        "SRL-083",
+        "SRL-EN083"
+      ]
+    },
+    {
+      "passcode": 23401839,
+      "name": "Senju of the Thousand Hands",
+      "numbers": [
+        "SRL-080",
+        "SRL-EN080"
+      ]
+    },
+    {
+      "passcode": 29692206,
+      "name": "Twin Long Rods #2",
+      "numbers": [
+        "SRL-057",
+        "SRL-EN057"
+      ]
+    },
+    {
+      "passcode": 30243636,
+      "name": "Hungry Burger",
+      "numbers": [
+        "SRL-068",
+        "SRL-EN068"
+      ]
+    },
+    {
+      "passcode": 32539892,
+      "name": "Minar",
+      "numbers": [
+        "SRL-015",
+        "SRL-EN015"
+      ]
+    },
+    {
+      "passcode": 34124316,
+      "name": "Cyber Jar",
+      "numbers": [
+        "SRL-077",
+        "SRL-EN077"
+      ]
+    },
+    {
+      "passcode": 34442949,
+      "name": "Mechanical Snail",
+      "numbers": [
+        "SRL-021",
+        "SRL-EN021"
+      ]
+    },
+    {
+      "passcode": 35565537,
+      "name": "Dark Witch",
+      "numbers": [
+        "SRL-019",
+        "SRL-EN019"
+      ]
+    },
+    {
+      "passcode": 36039163,
+      "name": "Penguin Knight",
+      "numbers": [
+        "SRL-001",
+        "SRL-EN001"
+      ]
+    },
+    {
+      "passcode": 38369349,
+      "name": "Manga Ryu-Ran",
+      "numbers": [
+        "SRL-071",
+        "SRL-EN071"
+      ]
+    },
+    {
+      "passcode": 38552107,
+      "name": "Horn of Light",
+      "numbers": [
+        "SRL-004",
+        "SRL-EN004"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "SRL-002",
+        "SRL-EN002"
+      ]
+    },
+    {
+      "passcode": 41426869,
+      "name": "Black Illusion Ritual",
+      "numbers": [
+        "SRL-051",
+        "SRL-EN051"
+      ]
+    },
+    {
+      "passcode": 42578427,
+      "name": "Eatgaboon",
+      "numbers": [
+        "SRL-065",
+        "SRL-EN065"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "SRL-048",
+        "SRL-EN048"
+      ]
+    },
+    {
+      "passcode": 42829885,
+      "name": "The Forceful Sentry",
+      "numbers": [
+        "SRL-045",
+        "SRL-EN045"
+      ]
+    },
+    {
+      "passcode": 43417563,
+      "name": "Commencement Dance",
+      "numbers": [
+        "SRL-062",
+        "SRL-EN062"
+      ]
+    },
+    {
+      "passcode": 43641473,
+      "name": "Tailor of the Fickle",
+      "numbers": [
+        "SRL-042",
+        "SRL-EN042"
+      ]
+    },
+    {
+      "passcode": 44656491,
+      "name": "Messenger of Peace",
+      "numbers": [
+        "SRL-102",
+        "SRL-EN102"
+      ]
+    },
+    {
+      "passcode": 44763025,
+      "name": "Delinquent Duo",
+      "numbers": [
+        "SRL-039",
+        "SRL-EN039"
+      ]
+    },
+    {
+      "passcode": 45778932,
+      "name": "Rising Air Current",
+      "numbers": [
+        "SRL-099",
+        "SRL-EN099"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SRL-036",
+        "SRL-EN036"
+      ]
+    },
+    {
+      "passcode": 46534755,
+      "name": "Fire Kraken",
+      "numbers": [
+        "SRL-014",
+        "SRL-EN014"
+      ]
+    },
+    {
+      "passcode": 47879985,
+      "name": "Guardian of the Throne Room",
+      "numbers": [
+        "SRL-013",
+        "SRL-EN013"
+      ]
+    },
+    {
+      "passcode": 53183600,
+      "name": "Blue-Eyes Toon Dragon",
+      "numbers": [
+        "SRL-000",
+        "SRL-EN000"
+      ]
+    },
+    {
+      "passcode": 54579801,
+      "name": "High Tide Gyojin",
+      "numbers": [
+        "SRL-025",
+        "SRL-EN025"
+      ]
+    },
+    {
+      "passcode": 55998462,
+      "name": "Metal Fish",
+      "numbers": [
+        "SRL-007",
+        "SRL-EN007"
+      ]
+    },
+    {
+      "passcode": 56594520,
+      "name": "Gaia Power",
+      "numbers": [
+        "SRL-096",
+        "SRL-EN096"
+      ]
+    },
+    {
+      "passcode": 56789759,
+      "name": "Tyhone #2",
+      "numbers": [
+        "SRL-017",
+        "SRL-EN017"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "SRL-093",
+        "SRL-EN093"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "SRL-090",
+        "SRL-EN090"
+      ]
+    },
+    {
+      "passcode": 58551308,
+      "name": "Spear Cretin",
+      "numbers": [
+        "SRL-087",
+        "SRL-EN087"
+      ]
+    },
+    {
+      "passcode": 59784896,
+      "name": "Dark Zebra",
+      "numbers": [
+        "SRL-084",
+        "SRL-EN084"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "SRL-081",
+        "SRL-EN081"
+      ]
+    },
+    {
+      "passcode": 61528025,
+      "name": "Banisher of the Light",
+      "numbers": [
+        "SRL-078",
+        "SRL-EN078"
+      ]
+    },
+    {
+      "passcode": 62397231,
+      "name": "Hyozanryu",
+      "numbers": [
+        "SRL-075",
+        "SRL-EN075"
+      ]
+    },
+    {
+      "passcode": 63162310,
+      "name": "Wall Shadow",
+      "numbers": [
+        "SRL-056",
+        "SRL-EN056"
+      ]
+    },
+    {
+      "passcode": 64047146,
+      "name": "Horn of the Unicorn",
+      "numbers": [
+        "SRL-054",
+        "SRL-EN054"
+      ]
+    },
+    {
+      "passcode": 64389297,
+      "name": "Magical Labyrinth",
+      "numbers": [
+        "SRL-059",
+        "SRL-EN059"
+      ]
+    },
+    {
+      "passcode": 64631466,
+      "name": "Relinquished",
+      "numbers": [
+        "SRL-029",
+        "SRL-EN029"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "SRL-003",
+        "SRL-EN003"
+      ]
+    },
+    {
+      "passcode": 65458948,
+      "name": "Toon Mermaid",
+      "numbers": [
+        "SRL-072",
+        "SRL-EN072"
+      ]
+    },
+    {
+      "passcode": 65570596,
+      "name": "Red Archery Girl",
+      "numbers": [
+        "SRL-030",
+        "SRL-EN030"
+      ]
+    },
+    {
+      "passcode": 66516792,
+      "name": "Serpent Night Dragon",
+      "numbers": [
+        "SRL-103",
+        "SRL-EN103"
+      ]
+    },
+    {
+      "passcode": 67284908,
+      "name": "Labyrinth Wall",
+      "numbers": [
+        "SRL-055",
+        "SRL-EN055"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "SRL-043",
+        "SRL-EN043"
+      ]
+    },
+    {
+      "passcode": 70368879,
+      "name": "Upstart Goblin",
+      "numbers": [
+        "SRL-033",
+        "SRL-EN033"
+      ]
+    },
+    {
+      "passcode": 72053645,
+      "name": "Weather Report",
+      "numbers": [
+        "SRL-020",
+        "SRL-EN020"
+      ]
+    },
+    {
+      "passcode": 73081602,
+      "name": "Queen Bird",
+      "numbers": [
+        "SRL-009",
+        "SRL-EN009"
+      ]
+    },
+    {
+      "passcode": 74191942,
+      "name": "Painful Choice",
+      "numbers": [
+        "SRL-049",
+        "SRL-EN049"
+      ]
+    },
+    {
+      "passcode": 74637266,
+      "name": "Octoberser",
+      "numbers": [
+        "SRL-052",
+        "SRL-EN052"
+      ]
+    },
+    {
+      "passcode": 76806714,
+      "name": "Turtle Oath",
+      "numbers": [
+        "SRL-066",
+        "SRL-EN066"
+      ]
+    },
+    {
+      "passcode": 79323590,
+      "name": "Chain Energy",
+      "numbers": [
+        "SRL-046",
+        "SRL-EN046"
+      ]
+    },
+    {
+      "passcode": 80168720,
+      "name": "Darkness Approaches",
+      "numbers": [
+        "SRL-040",
+        "SRL-EN040"
+      ]
+    },
+    {
+      "passcode": 80811661,
+      "name": "Hamburger Recipe",
+      "numbers": [
+        "SRL-063",
+        "SRL-EN063"
+      ]
+    },
+    {
+      "passcode": 81380218,
+      "name": "Chorus of Sanctuary",
+      "numbers": [
+        "SRL-037",
+        "SRL-EN037"
+      ]
+    },
+    {
+      "passcode": 81777047,
+      "name": "Luminous Spark",
+      "numbers": [
+        "SRL-100",
+        "SRL-EN100"
+      ]
+    },
+    {
+      "passcode": 81863068,
+      "name": "Hiro's Shadow Scout",
+      "numbers": [
+        "SRL-024",
+        "SRL-EN024"
+      ]
+    },
+    {
+      "passcode": 82003859,
+      "name": "Toll",
+      "numbers": [
+        "SRL-034",
+        "SRL-EN034"
+      ]
+    },
+    {
+      "passcode": 82999629,
+      "name": "Umiiruka",
+      "numbers": [
+        "SRL-097",
+        "SRL-EN097"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "SRL-094",
+        "SRL-EN094"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "SRL-091",
+        "SRL-EN091"
+      ]
+    },
+    {
+      "passcode": 90020065,
+      "name": "Jigen Bakudan",
+      "numbers": [
+        "SRL-074",
+        "SRL-EN074"
+      ]
+    },
+    {
+      "passcode": 91782219,
+      "name": "Crab Turtle",
+      "numbers": [
+        "SRL-069",
+        "SRL-EN069"
+      ]
+    },
+    {
+      "passcode": 91842653,
+      "name": "Toon Summoned Skull",
+      "numbers": [
+        "SRL-073",
+        "SRL-EN073"
+      ]
+    },
+    {
+      "passcode": 91996584,
+      "name": "Whiptail Crow",
+      "numbers": [
+        "SRL-027",
+        "SRL-EN027"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "SRL-012",
+        "SRL-EN012"
+      ]
+    },
+    {
+      "passcode": 93108297,
+      "name": "Liquid Beast",
+      "numbers": [
+        "SRL-023",
+        "SRL-EN023"
+      ]
+    },
+    {
+      "passcode": 95051344,
+      "name": "Eternal Rest",
+      "numbers": [
+        "SRL-060",
+        "SRL-EN060"
+      ]
+    },
+    {
+      "passcode": 95174353,
+      "name": "Ameba",
+      "numbers": [
+        "SRL-010",
+        "SRL-EN010"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "SRL-085",
+        "SRL-EN085"
+      ]
+    },
+    {
+      "passcode": 95744531,
+      "name": "Griggle",
+      "numbers": [
+        "SRL-016",
+        "SRL-EN016"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "SRL-088",
+        "SRL-EN088"
+      ]
+    },
+    {
+      "passcode": 96890582,
+      "name": "Flash Assailant",
+      "numbers": [
+        "SRL-082",
+        "SRL-EN082"
+      ]
+    },
+    {
+      "passcode": 96981563,
+      "name": "Giant Turtle Who Feeds on Flames",
+      "numbers": [
+        "SRL-022",
+        "SRL-EN022"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "SRL-079",
+        "SRL-EN079"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "SRL-005",
+        "SRL-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Spell Ruler'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-lost-millennium",
+  "code": "TLM",
+  "name": "The Lost Millennium",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 759393,
+      "name": "Hiita the Fire Charmer",
+      "numbers": [
+        "TLM-EN028"
+      ]
+    },
+    {
+      "passcode": 1571945,
+      "name": "White Ninja",
+      "numbers": [
+        "TLM-EN025"
+      ]
+    },
+    {
+      "passcode": 2694423,
+      "name": "Medusa Worm",
+      "numbers": [
+        "TLM-EN022"
+      ]
+    },
+    {
+      "passcode": 3810071,
+      "name": "Monk Fighter",
+      "numbers": [
+        "TLM-EN019"
+      ]
+    },
+    {
+      "passcode": 9637706,
+      "name": "Des Wombat",
+      "numbers": [
+        "TLM-EN031"
+      ]
+    },
+    {
+      "passcode": 10069180,
+      "name": "Spell-Stopping Statute",
+      "numbers": [
+        "TLM-EN058"
+      ]
+    },
+    {
+      "passcode": 10509340,
+      "name": "Ancient Gear Beast",
+      "numbers": [
+        "TLM-EN007"
+      ]
+    },
+    {
+      "passcode": 13532663,
+      "name": "Dummy Golem",
+      "numbers": [
+        "TLM-EN016"
+      ]
+    },
+    {
+      "passcode": 18654201,
+      "name": "Criosphinx",
+      "numbers": [
+        "TLM-EN013"
+      ]
+    },
+    {
+      "passcode": 19877898,
+      "name": "Ultimate Insect LV7",
+      "numbers": [
+        "TLM-EN010"
+      ]
+    },
+    {
+      "passcode": 20721928,
+      "name": "Elemental HERO Sparkman",
+      "numbers": [
+        "TLM-EN004"
+      ]
+    },
+    {
+      "passcode": 20781762,
+      "name": "Rock Bombardment",
+      "numbers": [
+        "TLM-EN055"
+      ]
+    },
+    {
+      "passcode": 21844576,
+      "name": "Elemental HERO Avian",
+      "numbers": [
+        "TLM-EN001"
+      ]
+    },
+    {
+      "passcode": 21908319,
+      "name": "Kozaky's Self-Destruct Button",
+      "numbers": [
+        "TLM-EN052"
+      ]
+    },
+    {
+      "passcode": 22020907,
+      "name": "Hero Signal",
+      "numbers": [
+        "TLM-EN049"
+      ]
+    },
+    {
+      "passcode": 23842445,
+      "name": "Nitro Unit",
+      "numbers": [
+        "TLM-EN046"
+      ]
+    },
+    {
+      "passcode": 23965037,
+      "name": "Doriado's Blessing",
+      "numbers": [
+        "TLM-EN043"
+      ]
+    },
+    {
+      "passcode": 34187685,
+      "name": "Double Attack",
+      "numbers": [
+        "TLM-EN040"
+      ]
+    },
+    {
+      "passcode": 35809262,
+      "name": "Elemental HERO Flame Wingman",
+      "numbers": [
+        "TLM-EN035"
+      ]
+    },
+    {
+      "passcode": 36021814,
+      "name": "King of the Skull Servants",
+      "numbers": [
+        "TLM-EN032"
+      ]
+    },
+    {
+      "passcode": 37744402,
+      "name": "Wynn the Wind Charmer",
+      "numbers": [
+        "TLM-EN029"
+      ]
+    },
+    {
+      "passcode": 37970940,
+      "name": "Aussa the Earth Charmer",
+      "numbers": [
+        "TLM-EN026"
+      ]
+    },
+    {
+      "passcode": 40937767,
+      "name": "Grave Ohja",
+      "numbers": [
+        "TLM-EN017"
+      ]
+    },
+    {
+      "passcode": 42664989,
+      "name": "Card of Sanctity",
+      "numbers": [
+        "TLM-EN037"
+      ]
+    },
+    {
+      "passcode": 45159319,
+      "name": "Moai Interceptor Cannons",
+      "numbers": [
+        "TLM-EN014"
+      ]
+    },
+    {
+      "passcode": 45871897,
+      "name": "Lost Guardian",
+      "numbers": [
+        "TLM-EN011"
+      ]
+    },
+    {
+      "passcode": 48092532,
+      "name": "D.D. Survivor",
+      "numbers": [
+        "TLM-EN023"
+      ]
+    },
+    {
+      "passcode": 49814180,
+      "name": "Master Monk",
+      "numbers": [
+        "TLM-EN020"
+      ]
+    },
+    {
+      "passcode": 56058888,
+      "name": "Royal Surrender",
+      "numbers": [
+        "TLM-EN059"
+      ]
+    },
+    {
+      "passcode": 56094445,
+      "name": "Ancient Gear Soldier",
+      "numbers": [
+        "TLM-EN008"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "TLM-EN005"
+      ]
+    },
+    {
+      "passcode": 57270476,
+      "name": "Grave Lure",
+      "numbers": [
+        "TLM-EN056"
+      ]
+    },
+    {
+      "passcode": 58015506,
+      "name": "Pikeru's Second Sight",
+      "numbers": [
+        "TLM-EN050"
+      ]
+    },
+    {
+      "passcode": 58392024,
+      "name": "Mispolymerization",
+      "numbers": [
+        "TLM-EN053"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "TLM-EN002"
+      ]
+    },
+    {
+      "passcode": 59237154,
+      "name": "Shifting Shadows",
+      "numbers": [
+        "TLM-EN047"
+      ]
+    },
+    {
+      "passcode": 60369732,
+      "name": "Final Ritual of the Ancients",
+      "numbers": [
+        "TLM-EN044"
+      ]
+    },
+    {
+      "passcode": 61181383,
+      "name": "Battery Charger",
+      "numbers": [
+        "TLM-EN041"
+      ]
+    },
+    {
+      "passcode": 61204971,
+      "name": "Elemental HERO Thunder Giant",
+      "numbers": [
+        "TLM-EN036"
+      ]
+    },
+    {
+      "passcode": 62420419,
+      "name": "Reshef the Dark Being",
+      "numbers": [
+        "TLM-EN033"
+      ]
+    },
+    {
+      "passcode": 63142001,
+      "name": "Batteryman AA",
+      "numbers": [
+        "TLM-EN030"
+      ]
+    },
+    {
+      "passcode": 71544954,
+      "name": "Megarock Dragon",
+      "numbers": [
+        "TLM-EN015"
+      ]
+    },
+    {
+      "passcode": 74364659,
+      "name": "Eria the Water Charmer",
+      "numbers": [
+        "TLM-EN027"
+      ]
+    },
+    {
+      "passcode": 75209824,
+      "name": "Guardian Statue",
+      "numbers": [
+        "TLM-EN021"
+      ]
+    },
+    {
+      "passcode": 75487237,
+      "name": "Mid Shield Gardna",
+      "numbers": [
+        "TLM-EN024"
+      ]
+    },
+    {
+      "passcode": 76321376,
+      "name": "Mine Golem",
+      "numbers": [
+        "TLM-EN018"
+      ]
+    },
+    {
+      "passcode": 82260502,
+      "name": "Hieracosphinx",
+      "numbers": [
+        "TLM-EN012"
+      ]
+    },
+    {
+      "passcode": 82452993,
+      "name": "Lone Wolf",
+      "numbers": [
+        "TLM-EN060"
+      ]
+    },
+    {
+      "passcode": 82482194,
+      "name": "Millennium Scorpion",
+      "numbers": [
+        "TLM-EN009"
+      ]
+    },
+    {
+      "passcode": 83104731,
+      "name": "Ancient Gear Golem",
+      "numbers": [
+        "TLM-EN006"
+      ]
+    },
+    {
+      "passcode": 83675475,
+      "name": "Token Feastevil",
+      "numbers": [
+        "TLM-EN057"
+      ]
+    },
+    {
+      "passcode": 84327329,
+      "name": "Elemental HERO Clayman",
+      "numbers": [
+        "TLM-EN003"
+      ]
+    },
+    {
+      "passcode": 84397023,
+      "name": "Level Conversion Lab",
+      "numbers": [
+        "TLM-EN054"
+      ]
+    },
+    {
+      "passcode": 85519211,
+      "name": "Minefield Eruption",
+      "numbers": [
+        "TLM-EN051"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "TLM-EN038"
+      ]
+    },
+    {
+      "passcode": 96458440,
+      "name": "Legendary Black Belt",
+      "numbers": [
+        "TLM-EN045"
+      ]
+    },
+    {
+      "passcode": 96631852,
+      "name": "Impenetrable Formation",
+      "numbers": [
+        "TLM-EN048"
+      ]
+    },
+    {
+      "passcode": 97570038,
+      "name": "Kaminote Blow",
+      "numbers": [
+        "TLM-EN042"
+      ]
+    },
+    {
+      "passcode": 98792570,
+      "name": "Gift of the Martyr",
+      "numbers": [
+        "TLM-EN039"
+      ]
+    },
+    {
+      "passcode": 99414168,
+      "name": "Elemental Mistress Doriado",
+      "numbers": [
+        "TLM-EN034"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Lost Millennium'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-forbidden-memories-promotional-cards",
+  "code": "FMR",
+  "name": "Yu-Gi-Oh! Forbidden Memories promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2002-11-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 52040216,
+      "name": "Harpie's Pet Dragon",
+      "numbers": [
+        "FMR-002"
+      ]
+    },
+    {
+      "passcode": 64335804,
+      "name": "Red-Eyes Black Metal Dragon",
+      "numbers": [
+        "FMR-001"
+      ]
+    },
+    {
+      "passcode": 68540058,
+      "name": "Metalmorph",
+      "numbers": [
+        "FMR-003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

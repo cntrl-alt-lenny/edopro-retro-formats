@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/releases-coverage.schema.json",
+  "windows": [
+    {
+      "territories": [
+        "tcg",
+        "tcg-na",
+        "tcg-eu",
+        "tcg-oce"
+      ],
+      "from": "2002-03-01",
+      "through": "2010-12-31",
+      "status": "complete",
+      "note": "English-family TCG products enumerated from Yugipedia set pages (all five English release-date properties) joined with the YGOPRODeck bulk dump; see data/imported/releases-report.json for known gaps."
+    }
+  ],
+  "known_gaps": [
+    "4 products have no printings (no YGOPRODeck card lists them; mostly repackagings and non-card products)",
+    "8 in-window cards could not be matched to BabelCDB",
+    "64 products where YGOPRODeck's date matches no Yugipedia date (recorded in the report; Yugipedia governs)"
+  ],
+  "sources": [
+    "yugipedia-set-pages",
+    "ygoprodeck-api"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "raging-battle-special-edition",
+  "code": "RGBT",
+  "name": "Raging Battle: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-06-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-07-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-07-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1475311,
+      "name": "Allure of Darkness",
+      "numbers": [
+        "RGBT-ENSE2"
+      ]
+    },
+    {
+      "passcode": 92719314,
+      "name": "The Dark Creator",
+      "numbers": [
+        "RGBT-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Raging Battle: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

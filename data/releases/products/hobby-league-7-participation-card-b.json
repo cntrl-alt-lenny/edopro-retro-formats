@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-7-participation-card-b",
+  "code": "HL07",
+  "name": "Hobby League 7 participation card B",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-08-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 80344569,
+      "name": "Neo-Spacian Grand Mole",
+      "numbers": [
+        "HL07-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 7 participation card B'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "crossroads-of-chaos",
+  "code": "CSOC",
+  "name": "Crossroads of Chaos",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-11-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 612115,
+      "name": "Gladiator Beast Retiari",
+      "numbers": [
+        "CSOC-EN086"
+      ]
+    },
+    {
+      "passcode": 1557341,
+      "name": "Rose, Warrior of Revenge",
+      "numbers": [
+        "CSOC-EN000"
+      ]
+    },
+    {
+      "passcode": 1834753,
+      "name": "Overdrive Teleporter",
+      "numbers": [
+        "CSOC-EN083"
+      ]
+    },
+    {
+      "passcode": 4857085,
+      "name": "Omega Goggles",
+      "numbers": [
+        "CSOC-EN062"
+      ]
+    },
+    {
+      "passcode": 5126490,
+      "name": "Neos Wiseman",
+      "numbers": [
+        "CSOC-EN097"
+      ]
+    },
+    {
+      "passcode": 5309481,
+      "name": "Revived King Ha Des",
+      "numbers": [
+        "CSOC-EN044"
+      ]
+    },
+    {
+      "passcode": 5973663,
+      "name": "The World Tree",
+      "numbers": [
+        "CSOC-EN059"
+      ]
+    },
+    {
+      "passcode": 6021033,
+      "name": "Doomkaiser Dragon",
+      "numbers": [
+        "CSOC-EN043"
+      ]
+    },
+    {
+      "passcode": 6795211,
+      "name": "Teleport",
+      "numbers": [
+        "CSOC-EN055"
+      ]
+    },
+    {
+      "passcode": 7030340,
+      "name": "Factory of 100 Machines",
+      "numbers": [
+        "CSOC-EN049"
+      ]
+    },
+    {
+      "passcode": 7817703,
+      "name": "Morphtronic Engine",
+      "numbers": [
+        "CSOC-EN052"
+      ]
+    },
+    {
+      "passcode": 8483333,
+      "name": "Mosaic Manticore",
+      "numbers": [
+        "CSOC-EN094"
+      ]
+    },
+    {
+      "passcode": 10097168,
+      "name": "Tiger Dragon",
+      "numbers": [
+        "CSOC-EN036"
+      ]
+    },
+    {
+      "passcode": 11819616,
+      "name": "Tytannial, Princess of Camellias",
+      "numbers": [
+        "CSOC-EN029"
+      ]
+    },
+    {
+      "passcode": 15935204,
+      "name": "Storm Caller",
+      "numbers": [
+        "CSOC-EN022"
+      ]
+    },
+    {
+      "passcode": 18489208,
+      "name": "Cursed Fig",
+      "numbers": [
+        "CSOC-EN028"
+      ]
+    },
+    {
+      "passcode": 18752938,
+      "name": "Seed of Deception",
+      "numbers": [
+        "CSOC-EN046"
+      ]
+    },
+    {
+      "passcode": 18960169,
+      "name": "Goblin Decoy Squad",
+      "numbers": [
+        "CSOC-EN032"
+      ]
+    },
+    {
+      "passcode": 19505896,
+      "name": "Nettles",
+      "numbers": [
+        "CSOC-EN024"
+      ]
+    },
+    {
+      "passcode": 19974580,
+      "name": "Iron Chain Dragon",
+      "numbers": [
+        "CSOC-EN040"
+      ]
+    },
+    {
+      "passcode": 20450925,
+      "name": "Hanewata",
+      "numbers": [
+        "CSOC-EN034"
+      ]
+    },
+    {
+      "passcode": 20546916,
+      "name": "Botanical Lion",
+      "numbers": [
+        "CSOC-EN099"
+      ]
+    },
+    {
+      "passcode": 23116808,
+      "name": "Goka, the Pyre of Malice",
+      "numbers": [
+        "CSOC-EN095"
+      ]
+    },
+    {
+      "passcode": 26157485,
+      "name": "Iron Chain Blaster",
+      "numbers": [
+        "CSOC-EN019"
+      ]
+    },
+    {
+      "passcode": 27340877,
+      "name": "DNA Checkup",
+      "numbers": [
+        "CSOC-EN078"
+      ]
+    },
+    {
+      "passcode": 27870033,
+      "name": "Pursuit Chaser",
+      "numbers": [
+        "CSOC-EN016"
+      ]
+    },
+    {
+      "passcode": 28002611,
+      "name": "Gadget Hauler",
+      "numbers": [
+        "CSOC-EN013"
+      ]
+    },
+    {
+      "passcode": 28062325,
+      "name": "Bamboo Scrap",
+      "numbers": [
+        "CSOC-EN075"
+      ]
+    },
+    {
+      "passcode": 28124263,
+      "name": "Morphtronic Cameran",
+      "numbers": [
+        "CSOC-EN010"
+      ]
+    },
+    {
+      "passcode": 28284902,
+      "name": "Morphtronic Monitron",
+      "numbers": [
+        "CSOC-EN072"
+      ]
+    },
+    {
+      "passcode": 29307554,
+      "name": "Lineage of Destruction",
+      "numbers": [
+        "CSOC-EN069"
+      ]
+    },
+    {
+      "passcode": 29947751,
+      "name": "Morphtronic Magnen",
+      "numbers": [
+        "CSOC-EN007"
+      ]
+    },
+    {
+      "passcode": 30069398,
+      "name": "Wall of Ivy",
+      "numbers": [
+        "CSOC-EN004"
+      ]
+    },
+    {
+      "passcode": 30123142,
+      "name": "Synchro Strike",
+      "numbers": [
+        "CSOC-EN066"
+      ]
+    },
+    {
+      "passcode": 31111109,
+      "name": "Elemental HERO Divine Neos",
+      "numbers": [
+        "CSOC-EN098"
+      ]
+    },
+    {
+      "passcode": 31245780,
+      "name": "Battle Mania",
+      "numbers": [
+        "CSOC-EN063"
+      ]
+    },
+    {
+      "passcode": 31281980,
+      "name": "Healing Wave Generator",
+      "numbers": [
+        "CSOC-EN001"
+      ]
+    },
+    {
+      "passcode": 31467372,
+      "name": "Everliving Underworld Cannon",
+      "numbers": [
+        "CSOC-EN060"
+      ]
+    },
+    {
+      "passcode": 32180819,
+      "name": "Psychokinesis",
+      "numbers": [
+        "CSOC-EN056"
+      ]
+    },
+    {
+      "passcode": 33302407,
+      "name": "Poison Chain",
+      "numbers": [
+        "CSOC-EN053"
+      ]
+    },
+    {
+      "passcode": 33420078,
+      "name": "Plaguespreader Zombie",
+      "numbers": [
+        "CSOC-EN031"
+      ]
+    },
+    {
+      "passcode": 36107810,
+      "name": "Night's End Sorcerer",
+      "numbers": [
+        "CSOC-EN087"
+      ]
+    },
+    {
+      "passcode": 37829468,
+      "name": "Rai-Jin",
+      "numbers": [
+        "CSOC-EN084"
+      ]
+    },
+    {
+      "passcode": 38041940,
+      "name": "Seed of Flame",
+      "numbers": [
+        "CSOC-EN081"
+      ]
+    },
+    {
+      "passcode": 41442341,
+      "name": "Puppet Master",
+      "numbers": [
+        "CSOC-EN090"
+      ]
+    },
+    {
+      "passcode": 43642620,
+      "name": "Zombie Mammoth",
+      "numbers": [
+        "CSOC-EN030"
+      ]
+    },
+    {
+      "passcode": 44364207,
+      "name": "Jade Knight",
+      "numbers": [
+        "CSOC-EN037"
+      ]
+    },
+    {
+      "passcode": 44424095,
+      "name": "Morphtronic Accelerator",
+      "numbers": [
+        "CSOC-EN050"
+      ]
+    },
+    {
+      "passcode": 44887817,
+      "name": "Miracle Fertilizer",
+      "numbers": [
+        "CSOC-EN057"
+      ]
+    },
+    {
+      "passcode": 45247637,
+      "name": "Mark of the Rose",
+      "numbers": [
+        "CSOC-EN047"
+      ]
+    },
+    {
+      "passcode": 45379225,
+      "name": "Psychic Lifetrancer",
+      "numbers": [
+        "CSOC-EN041"
+      ]
+    },
+    {
+      "passcode": 45500495,
+      "name": "Queen of Thorns",
+      "numbers": [
+        "CSOC-EN042"
+      ]
+    },
+    {
+      "passcode": 46195773,
+      "name": "Turbo Warrior",
+      "numbers": [
+        "CSOC-EN038"
+      ]
+    },
+    {
+      "passcode": 52430902,
+      "name": "Psychic Jumper",
+      "numbers": [
+        "CSOC-EN023"
+      ]
+    },
+    {
+      "passcode": 53152590,
+      "name": "Iron Chain Coil",
+      "numbers": [
+        "CSOC-EN020"
+      ]
+    },
+    {
+      "passcode": 53274132,
+      "name": "Iron Chain Repairman",
+      "numbers": [
+        "CSOC-EN017"
+      ]
+    },
+    {
+      "passcode": 53334471,
+      "name": "Gozen Match",
+      "numbers": [
+        "CSOC-EN079"
+      ]
+    },
+    {
+      "passcode": 54451023,
+      "name": "Plant Food Chain",
+      "numbers": [
+        "CSOC-EN076"
+      ]
+    },
+    {
+      "passcode": 54497620,
+      "name": "Gadget Driver",
+      "numbers": [
+        "CSOC-EN014"
+      ]
+    },
+    {
+      "passcode": 54591086,
+      "name": "Virus Cannon",
+      "numbers": [
+        "CSOC-EN092"
+      ]
+    },
+    {
+      "passcode": 55119278,
+      "name": "Morphtronic Radion",
+      "numbers": [
+        "CSOC-EN011"
+      ]
+    },
+    {
+      "passcode": 55673611,
+      "name": "Psychic Trigger",
+      "numbers": [
+        "CSOC-EN073"
+      ]
+    },
+    {
+      "passcode": 63101919,
+      "name": "Tempest Magician",
+      "numbers": [
+        "CSOC-EN088"
+      ]
+    },
+    {
+      "passcode": 63223467,
+      "name": "Rai-Mei",
+      "numbers": [
+        "CSOC-EN085"
+      ]
+    },
+    {
+      "passcode": 66331855,
+      "name": "Morphtronic Datatron",
+      "numbers": [
+        "CSOC-EN008"
+      ]
+    },
+    {
+      "passcode": 66395299,
+      "name": "Doppelganger",
+      "numbers": [
+        "CSOC-EN070"
+      ]
+    },
+    {
+      "passcode": 66457407,
+      "name": "Copy Plant",
+      "numbers": [
+        "CSOC-EN005"
+      ]
+    },
+    {
+      "passcode": 66518841,
+      "name": "Prideful Roar",
+      "numbers": [
+        "CSOC-EN067"
+      ]
+    },
+    {
+      "passcode": 67270095,
+      "name": "Turbo Synchron",
+      "numbers": [
+        "CSOC-EN002"
+      ]
+    },
+    {
+      "passcode": 67630339,
+      "name": "Confusion Chaff",
+      "numbers": [
+        "CSOC-EN064"
+      ]
+    },
+    {
+      "passcode": 68462976,
+      "name": "Secret Village of the Spellcasters",
+      "numbers": [
+        "CSOC-EN061"
+      ]
+    },
+    {
+      "passcode": 68722455,
+      "name": "Red Ogre",
+      "numbers": [
+        "CSOC-EN096"
+      ]
+    },
+    {
+      "passcode": 69584564,
+      "name": "Fragrance Storm",
+      "numbers": [
+        "CSOC-EN058"
+      ]
+    },
+    {
+      "passcode": 70423794,
+      "name": "Morphtronic Cord",
+      "numbers": [
+        "CSOC-EN051"
+      ]
+    },
+    {
+      "passcode": 71645242,
+      "name": "Black Garden",
+      "numbers": [
+        "CSOC-EN048"
+      ]
+    },
+    {
+      "passcode": 72767833,
+      "name": "Card Rotator",
+      "numbers": [
+        "CSOC-EN045"
+      ]
+    },
+    {
+      "passcode": 73580471,
+      "name": "Black Rose Dragon",
+      "numbers": [
+        "CSOC-EN039"
+      ]
+    },
+    {
+      "passcode": 74440055,
+      "name": "Cactus Fighter",
+      "numbers": [
+        "CSOC-EN082"
+      ]
+    },
+    {
+      "passcode": 79707116,
+      "name": "Paralyzing Chain",
+      "numbers": [
+        "CSOC-EN054"
+      ]
+    },
+    {
+      "passcode": 79814787,
+      "name": "The White Stone of Legend",
+      "numbers": [
+        "CSOC-EN035"
+      ]
+    },
+    {
+      "passcode": 80723580,
+      "name": "Giant Trap Hole",
+      "numbers": [
+        "CSOC-EN080"
+      ]
+    },
+    {
+      "passcode": 80769747,
+      "name": "Iron Chain Snake",
+      "numbers": [
+        "CSOC-EN018"
+      ]
+    },
+    {
+      "passcode": 80885324,
+      "name": "Search Striker",
+      "numbers": [
+        "CSOC-EN015"
+      ]
+    },
+    {
+      "passcode": 80955168,
+      "name": "Trap of the Imperial Tomb",
+      "numbers": [
+        "CSOC-EN077"
+      ]
+    },
+    {
+      "passcode": 80987696,
+      "name": "Time Machine",
+      "numbers": [
+        "CSOC-EN091"
+      ]
+    },
+    {
+      "passcode": 82116191,
+      "name": "Gigantic Cephalotus",
+      "numbers": [
+        "CSOC-EN025"
+      ]
+    },
+    {
+      "passcode": 82994509,
+      "name": "Horseytail",
+      "numbers": [
+        "CSOC-EN026"
+      ]
+    },
+    {
+      "passcode": 83602069,
+      "name": "Comrade Swordsman of Landstar",
+      "numbers": [
+        "CSOC-EN033"
+      ]
+    },
+    {
+      "passcode": 84824601,
+      "name": "Botanical Girl",
+      "numbers": [
+        "CSOC-EN027"
+      ]
+    },
+    {
+      "passcode": 89547299,
+      "name": "Power Injector",
+      "numbers": [
+        "CSOC-EN021"
+      ]
+    },
+    {
+      "passcode": 91078716,
+      "name": "Pollinosis",
+      "numbers": [
+        "CSOC-EN074"
+      ]
+    },
+    {
+      "passcode": 91607976,
+      "name": "Morphtronic Clocken",
+      "numbers": [
+        "CSOC-EN012"
+      ]
+    },
+    {
+      "passcode": 92720564,
+      "name": "Morphtronic Boomboxen",
+      "numbers": [
+        "CSOC-EN009"
+      ]
+    },
+    {
+      "passcode": 92890308,
+      "name": "Morphtransition",
+      "numbers": [
+        "CSOC-EN071"
+      ]
+    },
+    {
+      "passcode": 93542102,
+      "name": "Morphtronic Celfon",
+      "numbers": [
+        "CSOC-EN006"
+      ]
+    },
+    {
+      "passcode": 93912845,
+      "name": "Revival Gift",
+      "numbers": [
+        "CSOC-EN068"
+      ]
+    },
+    {
+      "passcode": 94634433,
+      "name": "Urgent Tuning",
+      "numbers": [
+        "CSOC-EN065"
+      ]
+    },
+    {
+      "passcode": 94664694,
+      "name": "Mad Archfiend",
+      "numbers": [
+        "CSOC-EN003"
+      ]
+    },
+    {
+      "passcode": 96938777,
+      "name": "Machine Lord Ür",
+      "numbers": [
+        "CSOC-EN093"
+      ]
+    },
+    {
+      "passcode": 99590524,
+      "name": "Treacherous Trap Hole",
+      "numbers": [
+        "CSOC-EN089"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Crossroads of Chaos'; printings from the YGOPRODeck bulk dump."
+}

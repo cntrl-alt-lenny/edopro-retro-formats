@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-dark-duel-stories-promotional-cards",
+  "code": "DDS",
+  "name": "Yu-Gi-Oh! Dark Duel Stories promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-03-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6740720,
+      "name": "Seiyaryu",
+      "numbers": [
+        "DDS-004"
+      ]
+    },
+    {
+      "passcode": 32268901,
+      "name": "Salamandra",
+      "numbers": [
+        "DDS-006"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "DDS-003"
+      ]
+    },
+    {
+      "passcode": 41356845,
+      "name": "Acid Trap Hole",
+      "numbers": [
+        "DDS-005"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DDS-002"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DDS-001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Dark Duel Stories promotional cards'; printings from the YGOPRODeck bulk dump."
+}

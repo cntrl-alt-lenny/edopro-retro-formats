@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-the-duelists-of-the-roses-promotional-cards",
+  "code": "DOR",
+  "name": "Yu-Gi-Oh! The Duelists of the Roses promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-02-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-09-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 11549357,
+      "name": "Gamma The Magnet Warrior",
+      "numbers": [
+        "DOR-003",
+        "DOR-E003"
+      ]
+    },
+    {
+      "passcode": 39256679,
+      "name": "Beta The Magnet Warrior",
+      "numbers": [
+        "DOR-002",
+        "DOR-E002"
+      ]
+    },
+    {
+      "passcode": 99785935,
+      "name": "Alpha The Magnet Warrior",
+      "numbers": [
+        "DOR-001",
+        "DOR-E001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! The Duelists of the Roses promotional cards'; printings from the YGOPRODeck bulk dump."
+}

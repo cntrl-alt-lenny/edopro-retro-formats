@@ -1,0 +1,692 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "gladiator-s-assault",
+  "code": "GLAS",
+  "name": "Gladiator's Assault",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-11-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 984114,
+      "name": "Expressroid",
+      "numbers": [
+        "GLAS-EN016"
+      ]
+    },
+    {
+      "passcode": 2196767,
+      "name": "Gambler of Legend",
+      "numbers": [
+        "GLAS-EN031"
+      ]
+    },
+    {
+      "passcode": 3030892,
+      "name": "Test Ape",
+      "numbers": [
+        "GLAS-EN025"
+      ]
+    },
+    {
+      "passcode": 3897065,
+      "name": "Super Vehicroid - Stealth Union",
+      "numbers": [
+        "GLAS-EN041"
+      ]
+    },
+    {
+      "passcode": 3918345,
+      "name": "Magical Reflect Slime",
+      "numbers": [
+        "GLAS-EN028"
+      ]
+    },
+    {
+      "passcode": 4253484,
+      "name": "Gladiator Beast Hoplomus",
+      "numbers": [
+        "GLAS-EN022"
+      ]
+    },
+    {
+      "passcode": 5975022,
+      "name": "Gladiator Beast Murmillo",
+      "numbers": [
+        "GLAS-EN019"
+      ]
+    },
+    {
+      "passcode": 16197610,
+      "name": "Cloudian - Turbulence",
+      "numbers": [
+        "GLAS-EN013"
+      ]
+    },
+    {
+      "passcode": 17032740,
+      "name": "Elemental HERO Chaos Neos",
+      "numbers": [
+        "GLAS-EN036"
+      ]
+    },
+    {
+      "passcode": 17810268,
+      "name": "Cloudian - Acid Cloud",
+      "numbers": [
+        "GLAS-EN010"
+      ]
+    },
+    {
+      "passcode": 18158397,
+      "name": "Natural Disaster",
+      "numbers": [
+        "GLAS-EN065"
+      ]
+    },
+    {
+      "passcode": 19763315,
+      "name": "An Unfortunate Report",
+      "numbers": [
+        "GLAS-EN080"
+      ]
+    },
+    {
+      "passcode": 19980975,
+      "name": "Diamond-Dust Cyclone",
+      "numbers": [
+        "GLAS-EN048"
+      ]
+    },
+    {
+      "passcode": 20003527,
+      "name": "Cloudian - Nimbusman",
+      "numbers": [
+        "GLAS-EN007"
+      ]
+    },
+    {
+      "passcode": 20985997,
+      "name": "Detonator Circle \"A\"",
+      "numbers": [
+        "GLAS-EN077"
+      ]
+    },
+    {
+      "passcode": 21007444,
+      "name": "Double-Edged Sword Technique",
+      "numbers": [
+        "GLAS-EN074"
+      ]
+    },
+    {
+      "passcode": 21947653,
+      "name": "Evil HERO Lightning Golem",
+      "numbers": [
+        "GLAS-EN039"
+      ]
+    },
+    {
+      "passcode": 22160245,
+      "name": "Evil HERO Inferno Wing",
+      "numbers": [
+        "GLAS-EN038"
+      ]
+    },
+    {
+      "passcode": 23282832,
+      "name": "Over Limit",
+      "numbers": [
+        "GLAS-EN063"
+      ]
+    },
+    {
+      "passcode": 24285858,
+      "name": "Gladiator's Return",
+      "numbers": [
+        "GLAS-EN059"
+      ]
+    },
+    {
+      "passcode": 25407406,
+      "name": "Gladiator Beast's Battle Gladius",
+      "numbers": [
+        "GLAS-EN056"
+      ]
+    },
+    {
+      "passcode": 26120084,
+      "name": "Super Double Summon",
+      "numbers": [
+        "GLAS-EN053"
+      ]
+    },
+    {
+      "passcode": 26533075,
+      "name": "Security Orb",
+      "numbers": [
+        "GLAS-EN089"
+      ]
+    },
+    {
+      "passcode": 26834022,
+      "name": "Disarm",
+      "numbers": [
+        "GLAS-EN071"
+      ]
+    },
+    {
+      "passcode": 26956670,
+      "name": "Release from Stone",
+      "numbers": [
+        "GLAS-EN068"
+      ]
+    },
+    {
+      "passcode": 27178262,
+      "name": "Cunning of the Six Samurai",
+      "numbers": [
+        "GLAS-EN061"
+      ]
+    },
+    {
+      "passcode": 27346636,
+      "name": "Gladiator Beast Heraklinos",
+      "numbers": [
+        "GLAS-EN044"
+      ]
+    },
+    {
+      "passcode": 27655513,
+      "name": "Skreech",
+      "numbers": [
+        "GLAS-EN086"
+      ]
+    },
+    {
+      "passcode": 28297833,
+      "name": "Necroface",
+      "numbers": [
+        "GLAS-EN090"
+      ]
+    },
+    {
+      "passcode": 28877100,
+      "name": "Defensive Tactics",
+      "numbers": [
+        "GLAS-EN083"
+      ]
+    },
+    {
+      "passcode": 29590752,
+      "name": "Gladiator Beast Octavius",
+      "numbers": [
+        "GLAS-EN000"
+      ]
+    },
+    {
+      "passcode": 30525991,
+      "name": "Witch Doctor of Sparta",
+      "numbers": [
+        "GLAS-EN026"
+      ]
+    },
+    {
+      "passcode": 31247589,
+      "name": "Gladiator Beast Dimacari",
+      "numbers": [
+        "GLAS-EN023"
+      ]
+    },
+    {
+      "passcode": 38280762,
+      "name": "Enishi, Shien's Chancellor",
+      "numbers": [
+        "GLAS-EN032"
+      ]
+    },
+    {
+      "passcode": 38445524,
+      "name": "Gil Garth",
+      "numbers": [
+        "GLAS-EN091"
+      ]
+    },
+    {
+      "passcode": 38468214,
+      "name": "Alien Hypno",
+      "numbers": [
+        "GLAS-EN035"
+      ]
+    },
+    {
+      "passcode": 39303359,
+      "name": "Ancient Gear Knight",
+      "numbers": [
+        "GLAS-EN029"
+      ]
+    },
+    {
+      "passcode": 41470137,
+      "name": "Gladiator Beast Bestiari",
+      "numbers": [
+        "GLAS-EN020"
+      ]
+    },
+    {
+      "passcode": 42534368,
+      "name": "Silent Doom",
+      "numbers": [
+        "GLAS-EN094"
+      ]
+    },
+    {
+      "passcode": 42592719,
+      "name": "Gladiator Beast Alexander",
+      "numbers": [
+        "GLAS-EN017"
+      ]
+    },
+    {
+      "passcode": 43318266,
+      "name": "Cloudian - Cirrostratus",
+      "numbers": [
+        "GLAS-EN011"
+      ]
+    },
+    {
+      "passcode": 44430454,
+      "name": "Chamberlain of the Six Samurai",
+      "numbers": [
+        "GLAS-EN001"
+      ]
+    },
+    {
+      "passcode": 45653036,
+      "name": "Rain Storm",
+      "numbers": [
+        "GLAS-EN066"
+      ]
+    },
+    {
+      "passcode": 51670553,
+      "name": "Soul Devouring Bamboo Sword",
+      "numbers": [
+        "GLAS-EN060"
+      ]
+    },
+    {
+      "passcode": 52228131,
+      "name": "Parry",
+      "numbers": [
+        "GLAS-EN072"
+      ]
+    },
+    {
+      "passcode": 52496105,
+      "name": "Gladiator Beast's Battle Manica",
+      "numbers": [
+        "GLAS-EN057"
+      ]
+    },
+    {
+      "passcode": 52518793,
+      "name": "Colosseum - Cage of the Gladiator Beasts",
+      "numbers": [
+        "GLAS-EN054"
+      ]
+    },
+    {
+      "passcode": 53341729,
+      "name": "Light-Imprisoning Mirror",
+      "numbers": [
+        "GLAS-EN069"
+      ]
+    },
+    {
+      "passcode": 54040221,
+      "name": "Royal Firestorm Guards",
+      "numbers": [
+        "GLAS-EN087"
+      ]
+    },
+    {
+      "passcode": 55375684,
+      "name": "Summon Cloud",
+      "numbers": [
+        "GLAS-EN049"
+      ]
+    },
+    {
+      "passcode": 56597272,
+      "name": "Cloudian - Sheep Cloud",
+      "numbers": [
+        "GLAS-EN008"
+      ]
+    },
+    {
+      "passcode": 57006589,
+      "name": "Energy-Absorbing Monolith",
+      "numbers": [
+        "GLAS-EN075"
+      ]
+    },
+    {
+      "passcode": 57384901,
+      "name": "Interdimensional Warp",
+      "numbers": [
+        "GLAS-EN078"
+      ]
+    },
+    {
+      "passcode": 57610714,
+      "name": "Cloudian - Eye of the Typhoon",
+      "numbers": [
+        "GLAS-EN005"
+      ]
+    },
+    {
+      "passcode": 58332301,
+      "name": "Evil HERO Dark Gaia",
+      "numbers": [
+        "GLAS-EN040"
+      ]
+    },
+    {
+      "passcode": 58554959,
+      "name": "Evil HERO Malicious Edge",
+      "numbers": [
+        "GLAS-EN003"
+      ]
+    },
+    {
+      "passcode": 60306104,
+      "name": "No Entry!!",
+      "numbers": [
+        "GLAS-EN064"
+      ]
+    },
+    {
+      "passcode": 60493189,
+      "name": "Elemental HERO Plasma Vice",
+      "numbers": [
+        "GLAS-EN037"
+      ]
+    },
+    {
+      "passcode": 61538782,
+      "name": "Truckroid",
+      "numbers": [
+        "GLAS-EN014"
+      ]
+    },
+    {
+      "passcode": 63741331,
+      "name": "Fog Control",
+      "numbers": [
+        "GLAS-EN051"
+      ]
+    },
+    {
+      "passcode": 64163367,
+      "name": "\"A\" Cell Incubator",
+      "numbers": [
+        "GLAS-EN062"
+      ]
+    },
+    {
+      "passcode": 64262809,
+      "name": "Dragon Ice",
+      "numbers": [
+        "GLAS-EN084"
+      ]
+    },
+    {
+      "passcode": 64463828,
+      "name": "Superalloy Beast Raptinus",
+      "numbers": [
+        "GLAS-EN042"
+      ]
+    },
+    {
+      "passcode": 65685470,
+      "name": "Spirit of the Six Samurai",
+      "numbers": [
+        "GLAS-EN033"
+      ]
+    },
+    {
+      "passcode": 65984457,
+      "name": "Gladiator Beast Torax",
+      "numbers": [
+        "GLAS-EN081"
+      ]
+    },
+    {
+      "passcode": 66707058,
+      "name": "Goblin Black Ops",
+      "numbers": [
+        "GLAS-EN030"
+      ]
+    },
+    {
+      "passcode": 67227834,
+      "name": "Magic Formula",
+      "numbers": [
+        "GLAS-EN093"
+      ]
+    },
+    {
+      "passcode": 69270537,
+      "name": "Contact Out",
+      "numbers": [
+        "GLAS-EN045"
+      ]
+    },
+    {
+      "passcode": 76520646,
+      "name": "Infinity Dark",
+      "numbers": [
+        "GLAS-EN027"
+      ]
+    },
+    {
+      "passcode": 77642288,
+      "name": "Gladiator Beast Secutor",
+      "numbers": [
+        "GLAS-EN024"
+      ]
+    },
+    {
+      "passcode": 78868776,
+      "name": "Gladiator Beast Laquari",
+      "numbers": [
+        "GLAS-EN021"
+      ]
+    },
+    {
+      "passcode": 79580323,
+      "name": "Gladiator Beast Spartacus",
+      "numbers": [
+        "GLAS-EN018"
+      ]
+    },
+    {
+      "passcode": 79703905,
+      "name": "Cloudian - Altus",
+      "numbers": [
+        "GLAS-EN012"
+      ]
+    },
+    {
+      "passcode": 80825553,
+      "name": "Cloudian - Smoke Ball",
+      "numbers": [
+        "GLAS-EN002"
+      ]
+    },
+    {
+      "passcode": 81510157,
+      "name": "Soul Taker",
+      "numbers": [
+        "GLAS-EN092"
+      ]
+    },
+    {
+      "passcode": 82760689,
+      "name": "Lucky Cloud",
+      "numbers": [
+        "GLAS-EN050"
+      ]
+    },
+    {
+      "passcode": 83604828,
+      "name": "Cloudian - Ghost Fog",
+      "numbers": [
+        "GLAS-EN006"
+      ]
+    },
+    {
+      "passcode": 83778600,
+      "name": "Foolish Revival",
+      "numbers": [
+        "GLAS-EN079"
+      ]
+    },
+    {
+      "passcode": 83982270,
+      "name": "Cloudian - Poison Cloud",
+      "numbers": [
+        "GLAS-EN009"
+      ]
+    },
+    {
+      "passcode": 84491298,
+      "name": "Cell Explosion Virus",
+      "numbers": [
+        "GLAS-EN076"
+      ]
+    },
+    {
+      "passcode": 84613836,
+      "name": "Swiftstrike Armor",
+      "numbers": [
+        "GLAS-EN073"
+      ]
+    },
+    {
+      "passcode": 90135989,
+      "name": "Cloudian Squall",
+      "numbers": [
+        "GLAS-EN052"
+      ]
+    },
+    {
+      "passcode": 90434926,
+      "name": "Veil of Darkness",
+      "numbers": [
+        "GLAS-EN088"
+      ]
+    },
+    {
+      "passcode": 90557975,
+      "name": "Updraft",
+      "numbers": [
+        "GLAS-EN067"
+      ]
+    },
+    {
+      "passcode": 90957527,
+      "name": "Gladiator Beast Gaiodiaz",
+      "numbers": [
+        "GLAS-EN043"
+      ]
+    },
+    {
+      "passcode": 91070115,
+      "name": "Alien Telepath",
+      "numbers": [
+        "GLAS-EN034"
+      ]
+    },
+    {
+      "passcode": 91250514,
+      "name": "Tongue Twister",
+      "numbers": [
+        "GLAS-EN085"
+      ]
+    },
+    {
+      "passcode": 92373006,
+      "name": "Test Tiger",
+      "numbers": [
+        "GLAS-EN082"
+      ]
+    },
+    {
+      "passcode": 94820406,
+      "name": "Dark Fusion",
+      "numbers": [
+        "GLAS-EN047"
+      ]
+    },
+    {
+      "passcode": 95943058,
+      "name": "Evil HERO Infernal Gainer",
+      "numbers": [
+        "GLAS-EN004"
+      ]
+    },
+    {
+      "passcode": 96765646,
+      "name": "Swing of Memories",
+      "numbers": [
+        "GLAS-EN046"
+      ]
+    },
+    {
+      "passcode": 98049038,
+      "name": "Stealthroid",
+      "numbers": [
+        "GLAS-EN015"
+      ]
+    },
+    {
+      "passcode": 98891840,
+      "name": "Gladiator Beast's Respite",
+      "numbers": [
+        "GLAS-EN058"
+      ]
+    },
+    {
+      "passcode": 99013397,
+      "name": "Gladiator Beast's Battle Halberd",
+      "numbers": [
+        "GLAS-EN055"
+      ]
+    },
+    {
+      "passcode": 99735427,
+      "name": "Shadow-Imprisoning Mirror",
+      "numbers": [
+        "GLAS-EN070"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Gladiator's Assault\"; printings from the YGOPRODeck bulk dump."
+}

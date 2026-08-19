@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-power-of-chaos-kaiba-the-revenge-promotional-cards",
+  "code": "PCK",
+  "name": "Yu-Gi-Oh! Power of Chaos: Kaiba the Revenge promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-04-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "PCK-001",
+        "PCK-E001"
+      ]
+    },
+    {
+      "passcode": 95132338,
+      "name": "Aqua Chorus",
+      "numbers": [
+        "PCK-002",
+        "PCK-E002"
+      ]
+    },
+    {
+      "passcode": 97809599,
+      "name": "Seal of the Ancients",
+      "numbers": [
+        "PCK-003",
+        "PCK-E003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Power of Chaos: Kaiba the Revenge promotional cards'; printings from the YGOPRODeck bulk dump."
+}

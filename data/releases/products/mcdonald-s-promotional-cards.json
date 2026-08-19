@@ -1,0 +1,132 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "mcdonald-s-promotional-cards",
+  "code": "MP1",
+  "name": "McDonald's Promotional Cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-12-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 5628232,
+      "name": "Flying Penguin",
+      "numbers": [
+        "MP1-011"
+      ]
+    },
+    {
+      "passcode": 7562372,
+      "name": "Megasonic Eye",
+      "numbers": [
+        "MP1-008"
+      ]
+    },
+    {
+      "passcode": 32012841,
+      "name": "Millennium Shield",
+      "numbers": [
+        "MP1-001"
+      ]
+    },
+    {
+      "passcode": 33734439,
+      "name": "Three-Legged Zombies",
+      "numbers": [
+        "MP1-010"
+      ]
+    },
+    {
+      "passcode": 38999506,
+      "name": "Cosmo Queen",
+      "numbers": [
+        "MP1-002"
+      ]
+    },
+    {
+      "passcode": 44073668,
+      "name": "Takriminos",
+      "numbers": [
+        "MP1-006"
+      ]
+    },
+    {
+      "passcode": 45895206,
+      "name": "Dark-Piercing Light",
+      "numbers": [
+        "MP1-015"
+      ]
+    },
+    {
+      "passcode": 48649353,
+      "name": "Ushi Oni",
+      "numbers": [
+        "MP1-013"
+      ]
+    },
+    {
+      "passcode": 67959180,
+      "name": "Goddess of Whim",
+      "numbers": [
+        "MP1-003"
+      ]
+    },
+    {
+      "passcode": 68401546,
+      "name": "Fairy's Gift",
+      "numbers": [
+        "MP1-012"
+      ]
+    },
+    {
+      "passcode": 68638985,
+      "name": "Slime Toad",
+      "numbers": [
+        "MP1-004"
+      ]
+    },
+    {
+      "passcode": 70345785,
+      "name": "Yamadron",
+      "numbers": [
+        "MP1-009"
+      ]
+    },
+    {
+      "passcode": 71068263,
+      "name": "Stuffed Animal",
+      "numbers": [
+        "MP1-007"
+      ]
+    },
+    {
+      "passcode": 71280811,
+      "name": "Yaranzo",
+      "numbers": [
+        "MP1-005"
+      ]
+    },
+    {
+      "passcode": 72929454,
+      "name": "Turtle Bird",
+      "numbers": [
+        "MP1-014"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"McDonald's Promotional Cards\"; printings from the YGOPRODeck bulk dump."
+}

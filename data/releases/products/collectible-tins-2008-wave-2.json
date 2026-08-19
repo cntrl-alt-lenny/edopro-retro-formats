@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2008-wave-2",
+  "code": "CT05",
+  "name": "Collectible Tins 2008 Wave 2",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-11-03",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 46195773,
+      "name": "Turbo Warrior",
+      "numbers": [
+        "CT05-EN004"
+      ]
+    },
+    {
+      "passcode": 73580471,
+      "name": "Black Rose Dragon",
+      "numbers": [
+        "CT05-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2008 Wave 2'; printings from the YGOPRODeck bulk dump."
+}

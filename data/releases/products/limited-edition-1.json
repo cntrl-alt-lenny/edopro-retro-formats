@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "limited-edition-1",
+  "code": "JUMP",
+  "name": "Limited Edition 1",
+  "kind": "promo-magazine",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-01-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 26302522,
+      "name": "Blast Sphere",
+      "numbers": [
+        "JUMP-EN019"
+      ]
+    },
+    {
+      "passcode": 26376390,
+      "name": "Copycat",
+      "numbers": [
+        "JUMP-EN020"
+      ]
+    },
+    {
+      "passcode": 37507488,
+      "name": "Relieve Monster",
+      "numbers": [
+        "JUMP-EN021"
+      ]
+    },
+    {
+      "passcode": 86871614,
+      "name": "Cloning",
+      "numbers": [
+        "JUMP-EN022"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Limited Edition 1'; printings from the YGOPRODeck bulk dump."
+}

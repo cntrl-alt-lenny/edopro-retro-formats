@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "premium-pack-2-tcg",
+  "code": "PP02",
+  "name": "Premium Pack 2 (TCG)",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-07-31",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1353770,
+      "name": "Valhalla, Hall of the Fallen",
+      "numbers": [
+        "PP02-EN020"
+      ]
+    },
+    {
+      "passcode": 8400623,
+      "name": "Evil Dragon Ananta",
+      "numbers": [
+        "PP02-EN017"
+      ]
+    },
+    {
+      "passcode": 9327502,
+      "name": "Elemental HERO Voltic",
+      "numbers": [
+        "PP02-EN014"
+      ]
+    },
+    {
+      "passcode": 25090294,
+      "name": "Rose Bud",
+      "numbers": [
+        "PP02-EN011"
+      ]
+    },
+    {
+      "passcode": 26509612,
+      "name": "Terra Firma Gravity",
+      "numbers": [
+        "PP02-EN013"
+      ]
+    },
+    {
+      "passcode": 33951077,
+      "name": "Super War-Lion",
+      "numbers": [
+        "PP02-EN001"
+      ]
+    },
+    {
+      "passcode": 46848859,
+      "name": "Carrierroid",
+      "numbers": [
+        "PP02-EN015"
+      ]
+    },
+    {
+      "passcode": 48964966,
+      "name": "Athena",
+      "numbers": [
+        "PP02-EN018"
+      ]
+    },
+    {
+      "passcode": 51085303,
+      "name": "Elemental HERO Poison Rose",
+      "numbers": [
+        "PP02-EN006"
+      ]
+    },
+    {
+      "passcode": 54539105,
+      "name": "War-Lion Ritual",
+      "numbers": [
+        "PP02-EN002"
+      ]
+    },
+    {
+      "passcode": 62107981,
+      "name": "Elemental HERO Knospe",
+      "numbers": [
+        "PP02-EN005"
+      ]
+    },
+    {
+      "passcode": 68745629,
+      "name": "Elemental HERO Inferno",
+      "numbers": [
+        "PP02-EN010"
+      ]
+    },
+    {
+      "passcode": 74711057,
+      "name": "Elemental HERO Terra Firma",
+      "numbers": [
+        "PP02-EN009"
+      ]
+    },
+    {
+      "passcode": 74968065,
+      "name": "Hecatrice",
+      "numbers": [
+        "PP02-EN019"
+      ]
+    },
+    {
+      "passcode": 75434695,
+      "name": "Elemental HERO Woodsman",
+      "numbers": [
+        "PP02-EN004"
+      ]
+    },
+    {
+      "passcode": 76232340,
+      "name": "Sengenjin",
+      "numbers": [
+        "PP02-EN003"
+      ]
+    },
+    {
+      "passcode": 76442616,
+      "name": "HERO's Bond",
+      "numbers": [
+        "PP02-EN012"
+      ]
+    },
+    {
+      "passcode": 92826944,
+      "name": "Mezuki",
+      "numbers": [
+        "PP02-EN016"
+      ]
+    },
+    {
+      "passcode": 95362816,
+      "name": "Elemental HERO Lady Heat",
+      "numbers": [
+        "PP02-EN008"
+      ]
+    },
+    {
+      "passcode": 98266377,
+      "name": "Elemental HERO Heat",
+      "numbers": [
+        "PP02-EN007"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Premium Pack 2 (TCG)'; printings from the YGOPRODeck bulk dump."
+}

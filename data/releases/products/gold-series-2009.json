@@ -1,0 +1,397 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "gold-series-2009",
+  "code": "GLD2",
+  "name": "Gold Series 2009",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-04-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-06-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-06-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4906301,
+      "name": "Necro Gardna",
+      "numbers": [
+        "GLD2-EN027"
+      ]
+    },
+    {
+      "passcode": 4929256,
+      "name": "Mobius the Frost Monarch",
+      "numbers": [
+        "GLD2-EN007"
+      ]
+    },
+    {
+      "passcode": 7576264,
+      "name": "Phantom Beast Wild-Horn",
+      "numbers": [
+        "GLD2-EN012"
+      ]
+    },
+    {
+      "passcode": 9748752,
+      "name": "Caius the Shadow Monarch",
+      "numbers": [
+        "GLD2-EN033"
+      ]
+    },
+    {
+      "passcode": 11102908,
+      "name": "Shien's Castle of Mist",
+      "numbers": [
+        "GLD2-EN041"
+      ]
+    },
+    {
+      "passcode": 12298909,
+      "name": "Prime Material Dragon",
+      "numbers": [
+        "GLD2-EN032"
+      ]
+    },
+    {
+      "passcode": 12538374,
+      "name": "Treeborn Frog",
+      "numbers": [
+        "GLD2-EN010"
+      ]
+    },
+    {
+      "passcode": 18430390,
+      "name": "Winged Rhynos",
+      "numbers": [
+        "GLD2-EN015"
+      ]
+    },
+    {
+      "passcode": 20374520,
+      "name": "Begone, Knave!",
+      "numbers": [
+        "GLD2-EN047"
+      ]
+    },
+    {
+      "passcode": 21007444,
+      "name": "Double-Edged Sword Technique",
+      "numbers": [
+        "GLD2-EN050"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "GLD2-EN001"
+      ]
+    },
+    {
+      "passcode": 26205777,
+      "name": "Thestalos the Firestorm Monarch",
+      "numbers": [
+        "GLD2-EN008"
+      ]
+    },
+    {
+      "passcode": 26725158,
+      "name": "Exile of the Wicked",
+      "numbers": [
+        "GLD2-EN034"
+      ]
+    },
+    {
+      "passcode": 27782503,
+      "name": "The Six Samurai - Irou",
+      "numbers": [
+        "GLD2-EN022"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "GLD2-EN045"
+      ]
+    },
+    {
+      "passcode": 31904181,
+      "name": "The Six Samurai - Nisashi",
+      "numbers": [
+        "GLD2-EN020"
+      ]
+    },
+    {
+      "passcode": 33365932,
+      "name": "Volcanic Shell",
+      "numbers": [
+        "GLD2-EN024"
+      ]
+    },
+    {
+      "passcode": 34961968,
+      "name": "Phantom Beast Thunder-Pegasus",
+      "numbers": [
+        "GLD2-EN013"
+      ]
+    },
+    {
+      "passcode": 37520316,
+      "name": "Mind Control",
+      "numbers": [
+        "GLD2-EN037"
+      ]
+    },
+    {
+      "passcode": 39180960,
+      "name": "Rigorous Reaver",
+      "numbers": [
+        "GLD2-EN005"
+      ]
+    },
+    {
+      "passcode": 40320754,
+      "name": "Lord Poison",
+      "numbers": [
+        "GLD2-EN004"
+      ]
+    },
+    {
+      "passcode": 41420027,
+      "name": "Solemn Judgment",
+      "numbers": [
+        "GLD2-EN044"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "GLD2-EN036"
+      ]
+    },
+    {
+      "passcode": 46874015,
+      "name": "Return of the Six Samurai",
+      "numbers": [
+        "GLD2-EN049"
+      ]
+    },
+    {
+      "passcode": 51945556,
+      "name": "Zaborg the Thunder Monarch",
+      "numbers": [
+        "GLD2-EN006"
+      ]
+    },
+    {
+      "passcode": 54040221,
+      "name": "Royal Firestorm Guards",
+      "numbers": [
+        "GLD2-EN030"
+      ]
+    },
+    {
+      "passcode": 60229110,
+      "name": "Granmarg the Rock Monarch",
+      "numbers": [
+        "GLD2-EN009"
+      ]
+    },
+    {
+      "passcode": 62543393,
+      "name": "Lekunga",
+      "numbers": [
+        "GLD2-EN003"
+      ]
+    },
+    {
+      "passcode": 63035430,
+      "name": "Skyscraper",
+      "numbers": [
+        "GLD2-EN038"
+      ]
+    },
+    {
+      "passcode": 63356631,
+      "name": "Phoenix Wing Wind Blast",
+      "numbers": [
+        "GLD2-EN048"
+      ]
+    },
+    {
+      "passcode": 64398890,
+      "name": "The Six Samurai - Yaichi",
+      "numbers": [
+        "GLD2-EN017"
+      ]
+    },
+    {
+      "passcode": 65192027,
+      "name": "Dark Armed Dragon",
+      "numbers": [
+        "GLD2-EN031"
+      ]
+    },
+    {
+      "passcode": 69025477,
+      "name": "The Six Samurai - Yariza",
+      "numbers": [
+        "GLD2-EN019"
+      ]
+    },
+    {
+      "passcode": 69884162,
+      "name": "Elemental HERO Neos Alius",
+      "numbers": [
+        "GLD2-EN028"
+      ]
+    },
+    {
+      "passcode": 70969517,
+      "name": "Phantom Beast Rock-Lizard",
+      "numbers": [
+        "GLD2-EN014"
+      ]
+    },
+    {
+      "passcode": 71181155,
+      "name": "Phantom Beast Cross-Wing",
+      "numbers": [
+        "GLD2-EN011"
+      ]
+    },
+    {
+      "passcode": 72345736,
+      "name": "Six Samurai United",
+      "numbers": [
+        "GLD2-EN042"
+      ]
+    },
+    {
+      "passcode": 73125233,
+      "name": "Raiza the Storm Monarch",
+      "numbers": [
+        "GLD2-EN026"
+      ]
+    },
+    {
+      "passcode": 75500286,
+      "name": "Gold Sarcophagus",
+      "numbers": [
+        "GLD2-EN040"
+      ]
+    },
+    {
+      "passcode": 76459806,
+      "name": "Volcanic Rocket",
+      "numbers": [
+        "GLD2-EN023"
+      ]
+    },
+    {
+      "passcode": 77565204,
+      "name": "Future Fusion",
+      "numbers": [
+        "GLD2-EN039"
+      ]
+    },
+    {
+      "passcode": 80908502,
+      "name": "Elemental HERO Captain Gold",
+      "numbers": [
+        "GLD2-EN025"
+      ]
+    },
+    {
+      "passcode": 81059524,
+      "name": "Des Volstgalph",
+      "numbers": [
+        "GLD2-EN002"
+      ]
+    },
+    {
+      "passcode": 84290642,
+      "name": "Snipe Hunter",
+      "numbers": [
+        "GLD2-EN016"
+      ]
+    },
+    {
+      "passcode": 90397998,
+      "name": "The Six Samurai - Kamon",
+      "numbers": [
+        "GLD2-EN018"
+      ]
+    },
+    {
+      "passcode": 90434926,
+      "name": "Veil of Darkness",
+      "numbers": [
+        "GLD2-EN043"
+      ]
+    },
+    {
+      "passcode": 90873992,
+      "name": "Warrior Elimination",
+      "numbers": [
+        "GLD2-EN035"
+      ]
+    },
+    {
+      "passcode": 92373006,
+      "name": "Test Tiger",
+      "numbers": [
+        "GLD2-EN029"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "GLD2-EN046"
+      ]
+    },
+    {
+      "passcode": 95519486,
+      "name": "The Six Samurai - Zanji",
+      "numbers": [
+        "GLD2-EN021"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Gold Series 2009'; printings from the YGOPRODeck bulk dump."
+}

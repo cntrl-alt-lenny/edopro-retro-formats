@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-tag-force-evolution-promotional-cards",
+  "code": "GX05",
+  "name": "Yu-Gi-Oh! GX Tag Force Evolution promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-01-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2007-12-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3701074,
+      "name": "Dark Cure",
+      "numbers": [
+        "GX05-EN002"
+      ]
+    },
+    {
+      "passcode": 30155789,
+      "name": "Brutal Potion",
+      "numbers": [
+        "GX05-EN003"
+      ]
+    },
+    {
+      "passcode": 67316075,
+      "name": "Darklord Nurse Reficule",
+      "numbers": [
+        "GX05-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Tag Force Evolution promotional cards'; printings from the YGOPRODeck bulk dump."
+}

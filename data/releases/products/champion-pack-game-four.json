@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-four",
+  "code": "CP04",
+  "name": "Champion Pack: Game Four",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-09-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 50755,
+      "name": "Magician's Circle",
+      "numbers": [
+        "CP04-EN011"
+      ]
+    },
+    {
+      "passcode": 9156135,
+      "name": "Apprentice Magician",
+      "numbers": [
+        "CP04-EN004"
+      ]
+    },
+    {
+      "passcode": 12538374,
+      "name": "Treeborn Frog",
+      "numbers": [
+        "CP04-EN020"
+      ]
+    },
+    {
+      "passcode": 13676474,
+      "name": "Grand Tiki Elder",
+      "numbers": [
+        "CP04-EN014"
+      ]
+    },
+    {
+      "passcode": 16556849,
+      "name": "Freed the Brave Wanderer",
+      "numbers": [
+        "CP04-EN007"
+      ]
+    },
+    {
+      "passcode": 17375316,
+      "name": "Confiscation",
+      "numbers": [
+        "CP04-EN006"
+      ]
+    },
+    {
+      "passcode": 22587018,
+      "name": "Hydrogeddon",
+      "numbers": [
+        "CP04-EN005"
+      ]
+    },
+    {
+      "passcode": 27174286,
+      "name": "Return from the Different Dimension",
+      "numbers": [
+        "CP04-EN009"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "CP04-EN003"
+      ]
+    },
+    {
+      "passcode": 31423101,
+      "name": "Divine Sword - Phoenix Blade",
+      "numbers": [
+        "CP04-EN008"
+      ]
+    },
+    {
+      "passcode": 47606319,
+      "name": "Gigantes",
+      "numbers": [
+        "CP04-EN015"
+      ]
+    },
+    {
+      "passcode": 48092532,
+      "name": "D.D. Survivor",
+      "numbers": [
+        "CP04-EN019"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "CP04-EN013"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "CP04-EN012"
+      ]
+    },
+    {
+      "passcode": 77936940,
+      "name": "Gernia",
+      "numbers": [
+        "CP04-EN001"
+      ]
+    },
+    {
+      "passcode": 79853073,
+      "name": "Cipher Soldier",
+      "numbers": [
+        "CP04-EN010"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "CP04-EN002"
+      ]
+    },
+    {
+      "passcode": 88279736,
+      "name": "Robbin' Goblin",
+      "numbers": [
+        "CP04-EN016"
+      ]
+    },
+    {
+      "passcode": 95492061,
+      "name": "Manju of the Ten Thousand Hands",
+      "numbers": [
+        "CP04-EN017"
+      ]
+    },
+    {
+      "passcode": 98446407,
+      "name": "Hand of Nephthys",
+      "numbers": [
+        "CP04-EN018"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Four'; printings from the YGOPRODeck bulk dump."
+}

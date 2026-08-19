@@ -1,0 +1,352 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "gold-series",
+  "code": "GLD1",
+  "name": "Gold Series",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-04-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2008-04-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2326738,
+      "name": "Des Lacooda",
+      "numbers": [
+        "GLD1-EN010"
+      ]
+    },
+    {
+      "passcode": 3510565,
+      "name": "Stealth Bird",
+      "numbers": [
+        "GLD1-EN017"
+      ]
+    },
+    {
+      "passcode": 4335645,
+      "name": "Newdoria",
+      "numbers": [
+        "GLD1-EN011"
+      ]
+    },
+    {
+      "passcode": 7572887,
+      "name": "D.D. Warrior Lady",
+      "numbers": [
+        "GLD1-EN015"
+      ]
+    },
+    {
+      "passcode": 14261867,
+      "name": "8-Claws Scorpion",
+      "numbers": [
+        "GLD1-EN007"
+      ]
+    },
+    {
+      "passcode": 14644902,
+      "name": "Summoner of Illusions",
+      "numbers": [
+        "GLD1-EN004"
+      ]
+    },
+    {
+      "passcode": 15383415,
+      "name": "Swarm of Scarabs",
+      "numbers": [
+        "GLD1-EN008"
+      ]
+    },
+    {
+      "passcode": 19230407,
+      "name": "Offerings to the Doomed",
+      "numbers": [
+        "GLD1-EN034"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "GLD1-EN031"
+      ]
+    },
+    {
+      "passcode": 20065549,
+      "name": "Non-Spellcasting Area",
+      "numbers": [
+        "GLD1-EN035"
+      ]
+    },
+    {
+      "passcode": 23771716,
+      "name": "7 Colored Fish",
+      "numbers": [
+        "GLD1-EN001"
+      ]
+    },
+    {
+      "passcode": 23995346,
+      "name": "Blue-Eyes Ultimate Dragon",
+      "numbers": [
+        "GLD1-EN028"
+      ]
+    },
+    {
+      "passcode": 25236056,
+      "name": "Rare Metal Dragon",
+      "numbers": [
+        "GLD1-EN020"
+      ]
+    },
+    {
+      "passcode": 32619583,
+      "name": "Sillva, Warlord of Dark World",
+      "numbers": [
+        "GLD1-EN023"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "GLD1-EN032"
+      ]
+    },
+    {
+      "passcode": 33950246,
+      "name": "Royal Command",
+      "numbers": [
+        "GLD1-EN042"
+      ]
+    },
+    {
+      "passcode": 38275183,
+      "name": "Spell Shield Type-8",
+      "numbers": [
+        "GLD1-EN045"
+      ]
+    },
+    {
+      "passcode": 38411870,
+      "name": "Needle Ceiling",
+      "numbers": [
+        "GLD1-EN041"
+      ]
+    },
+    {
+      "passcode": 40737112,
+      "name": "Dark Magician of Chaos",
+      "numbers": [
+        "GLD1-EN016"
+      ]
+    },
+    {
+      "passcode": 41872150,
+      "name": "Swarm of Locusts",
+      "numbers": [
+        "GLD1-EN009"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "GLD1-EN039"
+      ]
+    },
+    {
+      "passcode": 45141844,
+      "name": "Old Vindictive Magician",
+      "numbers": [
+        "GLD1-EN013"
+      ]
+    },
+    {
+      "passcode": 45985838,
+      "name": "Solar Flare Dragon",
+      "numbers": [
+        "GLD1-EN019"
+      ]
+    },
+    {
+      "passcode": 47529357,
+      "name": "Mist Body",
+      "numbers": [
+        "GLD1-EN036"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "GLD1-EN040"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "GLD1-EN002"
+      ]
+    },
+    {
+      "passcode": 57728570,
+      "name": "Crush Card Virus",
+      "numbers": [
+        "GLD1-EN038"
+      ]
+    },
+    {
+      "passcode": 64599569,
+      "name": "Chimeratech Overdragon",
+      "numbers": [
+        "GLD1-EN029"
+      ]
+    },
+    {
+      "passcode": 64752646,
+      "name": "Fire Princess",
+      "numbers": [
+        "GLD1-EN005"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "GLD1-EN022"
+      ]
+    },
+    {
+      "passcode": 70821187,
+      "name": "Regenerating Mummy",
+      "numbers": [
+        "GLD1-EN018"
+      ]
+    },
+    {
+      "passcode": 71413901,
+      "name": "Breaker the Magical Warrior",
+      "numbers": [
+        "GLD1-EN014"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "GLD1-EN030"
+      ]
+    },
+    {
+      "passcode": 76039636,
+      "name": "Doom Dozer",
+      "numbers": [
+        "GLD1-EN025"
+      ]
+    },
+    {
+      "passcode": 76922029,
+      "name": "Don Zaloog",
+      "numbers": [
+        "GLD1-EN012"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "GLD1-EN003"
+      ]
+    },
+    {
+      "passcode": 78004197,
+      "name": "Goldd, Wu-Lord of Dark World",
+      "numbers": [
+        "GLD1-EN024"
+      ]
+    },
+    {
+      "passcode": 81306586,
+      "name": "Nightmare Penguin",
+      "numbers": [
+        "GLD1-EN021"
+      ]
+    },
+    {
+      "passcode": 81843628,
+      "name": "Needle Worm",
+      "numbers": [
+        "GLD1-EN006"
+      ]
+    },
+    {
+      "passcode": 82213171,
+      "name": "Prometheus, King of the Shadows",
+      "numbers": [
+        "GLD1-EN027"
+      ]
+    },
+    {
+      "passcode": 82732705,
+      "name": "Skill Drain",
+      "numbers": [
+        "GLD1-EN044"
+      ]
+    },
+    {
+      "passcode": 83039729,
+      "name": "Grandmaster of the Six Samurai",
+      "numbers": [
+        "GLD1-EN026"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "GLD1-EN033"
+      ]
+    },
+    {
+      "passcode": 90846359,
+      "name": "Rivalry of Warlords",
+      "numbers": [
+        "GLD1-EN043"
+      ]
+    },
+    {
+      "passcode": 94585852,
+      "name": "Pandemonium",
+      "numbers": [
+        "GLD1-EN037"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Gold Series'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "movie-pack",
+  "code": "MOV",
+  "name": "Movie Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-08-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-08-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2004-09-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 53347303,
+      "name": "Blue-Eyes Shining Dragon",
+      "numbers": [
+        "MOV-EN001"
+      ]
+    },
+    {
+      "passcode": 53569894,
+      "name": "Pyramid of Light",
+      "numbers": [
+        "MOV-EN004"
+      ]
+    },
+    {
+      "passcode": 87774234,
+      "name": "Watapon",
+      "numbers": [
+        "MOV-EN003"
+      ]
+    },
+    {
+      "passcode": 88619463,
+      "name": "Sorcerer of Dark Magic",
+      "numbers": [
+        "MOV-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Movie Pack'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,247 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hidden-arsenal",
+  "code": "HA01",
+  "name": "Hidden Arsenal",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-11-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-11-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 14936691,
+      "name": "Worm Erokin",
+      "numbers": [
+        "HA01-EN021"
+      ]
+    },
+    {
+      "passcode": 15471265,
+      "name": "Berserker Crush",
+      "numbers": [
+        "HA01-EN029"
+      ]
+    },
+    {
+      "passcode": 15658249,
+      "name": "Worm Barses",
+      "numbers": [
+        "HA01-EN018"
+      ]
+    },
+    {
+      "passcode": 21615956,
+      "name": "Flamvell Guard",
+      "numbers": [
+        "HA01-EN009"
+      ]
+    },
+    {
+      "passcode": 22837504,
+      "name": "Mist Valley Soldier",
+      "numbers": [
+        "HA01-EN006"
+      ]
+    },
+    {
+      "passcode": 23950192,
+      "name": "Cryomancer of the Ice Barrier",
+      "numbers": [
+        "HA01-EN003"
+      ]
+    },
+    {
+      "passcode": 25771826,
+      "name": "Ally of Justice Garadholg",
+      "numbers": [
+        "HA01-EN015"
+      ]
+    },
+    {
+      "passcode": 26593852,
+      "name": "Ally of Justice Catastor",
+      "numbers": [
+        "HA01-EN026"
+      ]
+    },
+    {
+      "passcode": 26993374,
+      "name": "X-Saber Uruz",
+      "numbers": [
+        "HA01-EN012"
+      ]
+    },
+    {
+      "passcode": 27315304,
+      "name": "Mist Wurm",
+      "numbers": [
+        "HA01-EN023"
+      ]
+    },
+    {
+      "passcode": 50321796,
+      "name": "Brionac, Dragon of the Ice Barrier",
+      "numbers": [
+        "HA01-EN022"
+      ]
+    },
+    {
+      "passcode": 51043243,
+      "name": "Worm Cartaros",
+      "numbers": [
+        "HA01-EN019"
+      ]
+    },
+    {
+      "passcode": 52098461,
+      "name": "Wrath of Neos",
+      "numbers": [
+        "HA01-EN027"
+      ]
+    },
+    {
+      "passcode": 52265835,
+      "name": "Ally of Justice Rudra",
+      "numbers": [
+        "HA01-EN016"
+      ]
+    },
+    {
+      "passcode": 52875873,
+      "name": "Evolution Burst",
+      "numbers": [
+        "HA01-EN030"
+      ]
+    },
+    {
+      "passcode": 53100061,
+      "name": "X-Saber Axel",
+      "numbers": [
+        "HA01-EN010"
+      ]
+    },
+    {
+      "passcode": 53388413,
+      "name": "Commander Gottoms, Swordmaster",
+      "numbers": [
+        "HA01-EN013"
+      ]
+    },
+    {
+      "passcode": 53714009,
+      "name": "Flamvell Uruquizas",
+      "numbers": [
+        "HA01-EN024"
+      ]
+    },
+    {
+      "passcode": 60161788,
+      "name": "Blizzed, Defender of the Ice Barrier",
+      "numbers": [
+        "HA01-EN001"
+      ]
+    },
+    {
+      "passcode": 68226653,
+      "name": "Flamvell Dragnov",
+      "numbers": [
+        "HA01-EN007"
+      ]
+    },
+    {
+      "passcode": 69448290,
+      "name": "Mist Valley Thunderbird",
+      "numbers": [
+        "HA01-EN004"
+      ]
+    },
+    {
+      "passcode": 80108118,
+      "name": "X-Saber Urbellum",
+      "numbers": [
+        "HA01-EN025"
+      ]
+    },
+    {
+      "passcode": 88438982,
+      "name": "Worm Dimikles",
+      "numbers": [
+        "HA01-EN020"
+      ]
+    },
+    {
+      "passcode": 88650530,
+      "name": "Worm Apocalypse",
+      "numbers": [
+        "HA01-EN017"
+      ]
+    },
+    {
+      "passcode": 89086566,
+      "name": "Detonate",
+      "numbers": [
+        "HA01-EN028"
+      ]
+    },
+    {
+      "passcode": 89386122,
+      "name": "Ally of Justice Clausolas",
+      "numbers": [
+        "HA01-EN014"
+      ]
+    },
+    {
+      "passcode": 90508760,
+      "name": "X-Saber Airbellum",
+      "numbers": [
+        "HA01-EN011"
+      ]
+    },
+    {
+      "passcode": 95443805,
+      "name": "Mist Valley Shaman",
+      "numbers": [
+        "HA01-EN005"
+      ]
+    },
+    {
+      "passcode": 95621257,
+      "name": "Flamvell Magician",
+      "numbers": [
+        "HA01-EN008"
+      ]
+    },
+    {
+      "passcode": 96565487,
+      "name": "Blizzard Warrior",
+      "numbers": [
+        "HA01-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hidden Arsenal'; printings from the YGOPRODeck bulk dump."
+}

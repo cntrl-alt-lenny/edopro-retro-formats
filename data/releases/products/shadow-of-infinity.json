@@ -1,0 +1,446 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shadow-of-infinity",
+  "code": "SOI",
+  "name": "Shadow of Infinity",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2316186,
+      "name": "Princess Curran",
+      "numbers": [
+        "SOI-EN028"
+      ]
+    },
+    {
+      "passcode": 4162088,
+      "name": "Cyber Laser Dragon",
+      "numbers": [
+        "SOI-EN007"
+      ]
+    },
+    {
+      "passcode": 5285665,
+      "name": "Elemental HERO Neo Bubbleman",
+      "numbers": [
+        "SOI-EN004"
+      ]
+    },
+    {
+      "passcode": 6007213,
+      "name": "Uria, Lord of Searing Flames",
+      "numbers": [
+        "SOI-EN001"
+      ]
+    },
+    {
+      "passcode": 6137095,
+      "name": "Malfunction",
+      "numbers": [
+        "SOI-EN060"
+      ]
+    },
+    {
+      "passcode": 6859683,
+      "name": "Success Probability 0%",
+      "numbers": [
+        "SOI-EN057"
+      ]
+    },
+    {
+      "passcode": 7076131,
+      "name": "Next to be Lost",
+      "numbers": [
+        "SOI-EN054"
+      ]
+    },
+    {
+      "passcode": 8198712,
+      "name": "End of the World",
+      "numbers": [
+        "SOI-EN046"
+      ]
+    },
+    {
+      "passcode": 9910360,
+      "name": "D.3.S. Frog",
+      "numbers": [
+        "SOI-EN036"
+      ]
+    },
+    {
+      "passcode": 10032958,
+      "name": "Divine Dragon - Excelion",
+      "numbers": [
+        "SOI-EN033"
+      ]
+    },
+    {
+      "passcode": 12538374,
+      "name": "Treeborn Frog",
+      "numbers": [
+        "SOI-EN025"
+      ]
+    },
+    {
+      "passcode": 13250922,
+      "name": "Anteatereatingant",
+      "numbers": [
+        "SOI-EN022"
+      ]
+    },
+    {
+      "passcode": 14255590,
+      "name": "Malice Ascendant",
+      "numbers": [
+        "SOI-EN030"
+      ]
+    },
+    {
+      "passcode": 14472500,
+      "name": "Gokipon",
+      "numbers": [
+        "SOI-EN019"
+      ]
+    },
+    {
+      "passcode": 15317640,
+      "name": "B.E.S. Covered Core",
+      "numbers": [
+        "SOI-EN013"
+      ]
+    },
+    {
+      "passcode": 15595052,
+      "name": "Disciple of the Forbidden Spell",
+      "numbers": [
+        "SOI-EN016"
+      ]
+    },
+    {
+      "passcode": 26439287,
+      "name": "Proto-Cyber Dragon",
+      "numbers": [
+        "SOI-EN010"
+      ]
+    },
+    {
+      "passcode": 28378427,
+      "name": "Damage Condenser",
+      "numbers": [
+        "SOI-EN052"
+      ]
+    },
+    {
+      "passcode": 29590905,
+      "name": "Super Junior Confrontation",
+      "numbers": [
+        "SOI-EN049"
+      ]
+    },
+    {
+      "passcode": 29612557,
+      "name": "Cyclone Boomerang",
+      "numbers": [
+        "SOI-EN042"
+      ]
+    },
+    {
+      "passcode": 30435145,
+      "name": "Ancient Gear Factory",
+      "numbers": [
+        "SOI-EN039"
+      ]
+    },
+    {
+      "passcode": 31557782,
+      "name": "Ancient Gear",
+      "numbers": [
+        "SOI-EN008"
+      ]
+    },
+    {
+      "passcode": 32491822,
+      "name": "Hamon, Lord of Striking Thunder",
+      "numbers": [
+        "SOI-EN002"
+      ]
+    },
+    {
+      "passcode": 32679370,
+      "name": "Hero Kid",
+      "numbers": [
+        "SOI-EN005"
+      ]
+    },
+    {
+      "passcode": 33248692,
+      "name": "Option Hunter",
+      "numbers": [
+        "SOI-EN058"
+      ]
+    },
+    {
+      "passcode": 34460239,
+      "name": "Generation Shift",
+      "numbers": [
+        "SOI-EN055"
+      ]
+    },
+    {
+      "passcode": 40867519,
+      "name": "Silent Insect",
+      "numbers": [
+        "SOI-EN020"
+      ]
+    },
+    {
+      "passcode": 41249545,
+      "name": "Grass Phantom",
+      "numbers": [
+        "SOI-EN031"
+      ]
+    },
+    {
+      "passcode": 41589166,
+      "name": "Tenkabito Shien",
+      "numbers": [
+        "SOI-EN017"
+      ]
+    },
+    {
+      "passcode": 44182827,
+      "name": "Samsara",
+      "numbers": [
+        "SOI-EN048"
+      ]
+    },
+    {
+      "passcode": 45305419,
+      "name": "Symbol of Heritage",
+      "numbers": [
+        "SOI-EN043"
+      ]
+    },
+    {
+      "passcode": 46427957,
+      "name": "Ruin, Queen of Oblivion",
+      "numbers": [
+        "SOI-EN034"
+      ]
+    },
+    {
+      "passcode": 48700891,
+      "name": "Memory Crusher",
+      "numbers": [
+        "SOI-EN029"
+      ]
+    },
+    {
+      "passcode": 49522489,
+      "name": "Beelze Frog",
+      "numbers": [
+        "SOI-EN026"
+      ]
+    },
+    {
+      "passcode": 49645921,
+      "name": "Saber Beetle",
+      "numbers": [
+        "SOI-EN023"
+      ]
+    },
+    {
+      "passcode": 52702748,
+      "name": "D.D. Guide",
+      "numbers": [
+        "SOI-EN014"
+      ]
+    },
+    {
+      "passcode": 53828396,
+      "name": "Adhesive Explosive",
+      "numbers": [
+        "SOI-EN011"
+      ]
+    },
+    {
+      "passcode": 55985014,
+      "name": "Miracle Kids",
+      "numbers": [
+        "SOI-EN050"
+      ]
+    },
+    {
+      "passcode": 66607691,
+      "name": "Photon Generator Unit",
+      "numbers": [
+        "SOI-EN045"
+      ]
+    },
+    {
+      "passcode": 67829249,
+      "name": "Ancient Gear Drill",
+      "numbers": [
+        "SOI-EN040"
+      ]
+    },
+    {
+      "passcode": 67951831,
+      "name": "Hero Heart",
+      "numbers": [
+        "SOI-EN037"
+      ]
+    },
+    {
+      "passcode": 68774379,
+      "name": "Cyber Barrier Dragon",
+      "numbers": [
+        "SOI-EN006"
+      ]
+    },
+    {
+      "passcode": 69632396,
+      "name": "Goblin Out of the Frying Pan",
+      "numbers": [
+        "SOI-EN059"
+      ]
+    },
+    {
+      "passcode": 69890967,
+      "name": "Raviel, Lord of Phantasms",
+      "numbers": [
+        "SOI-EN003"
+      ]
+    },
+    {
+      "passcode": 70865988,
+      "name": "Full Salvo",
+      "numbers": [
+        "SOI-EN056"
+      ]
+    },
+    {
+      "passcode": 71587526,
+      "name": "Karma Cut",
+      "numbers": [
+        "SOI-EN053"
+      ]
+    },
+    {
+      "passcode": 72426662,
+      "name": "Demise, King of Armageddon",
+      "numbers": [
+        "SOI-EN035"
+      ]
+    },
+    {
+      "passcode": 72709014,
+      "name": "Trial of the Princesses",
+      "numbers": [
+        "SOI-EN044"
+      ]
+    },
+    {
+      "passcode": 73648243,
+      "name": "Sand Moth",
+      "numbers": [
+        "SOI-EN032"
+      ]
+    },
+    {
+      "passcode": 75917088,
+      "name": "Princess Pikeru",
+      "numbers": [
+        "SOI-EN027"
+      ]
+    },
+    {
+      "passcode": 76039636,
+      "name": "Doom Dozer",
+      "numbers": [
+        "SOI-EN024"
+      ]
+    },
+    {
+      "passcode": 77252217,
+      "name": "Chainsaw Insect",
+      "numbers": [
+        "SOI-EN021"
+      ]
+    },
+    {
+      "passcode": 80045583,
+      "name": "Ancient Gear Cannon",
+      "numbers": [
+        "SOI-EN009"
+      ]
+    },
+    {
+      "passcode": 87978805,
+      "name": "Parasitic Ticky",
+      "numbers": [
+        "SOI-EN018"
+      ]
+    },
+    {
+      "passcode": 88190453,
+      "name": "Chain Thrasher",
+      "numbers": [
+        "SOI-EN015"
+      ]
+    },
+    {
+      "passcode": 89222931,
+      "name": "Machine King Prototype",
+      "numbers": [
+        "SOI-EN012"
+      ]
+    },
+    {
+      "passcode": 91989718,
+      "name": "Attack Reflector Unit",
+      "numbers": [
+        "SOI-EN051"
+      ]
+    },
+    {
+      "passcode": 92001300,
+      "name": "Ancient Gear Castle",
+      "numbers": [
+        "SOI-EN047"
+      ]
+    },
+    {
+      "passcode": 93224848,
+      "name": "Phantasmal Martyrs",
+      "numbers": [
+        "SOI-EN041"
+      ]
+    },
+    {
+      "passcode": 94940436,
+      "name": "Magnet Circle LV2",
+      "numbers": [
+        "SOI-EN038"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shadow of Infinity'; printings from the YGOPRODeck bulk dump."
+}

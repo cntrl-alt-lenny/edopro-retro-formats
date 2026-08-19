@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "invasion-of-chaos-special-edition",
+  "code": "IOC",
+  "name": "Invasion of Chaos: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-04-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 102380,
+      "name": "Lava Golem",
+      "numbers": [
+        "IOC-SE4"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "IOC-SE2"
+      ]
+    },
+    {
+      "passcode": 69140098,
+      "name": "Gemini Elf",
+      "numbers": [
+        "IOC-SE1"
+      ]
+    },
+    {
+      "passcode": 83555666,
+      "name": "Ring of Destruction",
+      "numbers": [
+        "IOC-SE3"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Invasion of Chaos: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-5d-s-wheelie-breakers-promotional-cards",
+  "code": "WB01",
+  "name": "Yu-Gi-Oh! 5D's Wheelie Breakers Promotional Cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-05-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 26293219,
+      "name": "Burning Skull Head",
+      "numbers": [
+        "WB01-EN003"
+      ]
+    },
+    {
+      "passcode": 63804806,
+      "name": "Supersonic Skull Flame",
+      "numbers": [
+        "WB01-EN001"
+      ]
+    },
+    {
+      "passcode": 99899504,
+      "name": "Skull Flame",
+      "numbers": [
+        "WB01-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! 5D's Wheelie Breakers promotional cards\"; printings from the YGOPRODeck bulk dump."
+}

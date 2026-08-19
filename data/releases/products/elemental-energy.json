@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "elemental-energy",
+  "code": "EEN",
+  "name": "Elemental Energy",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-11-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4376658,
+      "name": "Familiar-Possessed - Hiita",
+      "numbers": [
+        "EEN-EN028"
+      ]
+    },
+    {
+      "passcode": 5498296,
+      "name": "Scarr, Scout of Dark World",
+      "numbers": [
+        "EEN-EN025"
+      ]
+    },
+    {
+      "passcode": 6214884,
+      "name": "Brron, Mad King of Dark World",
+      "numbers": [
+        "EEN-EN022"
+      ]
+    },
+    {
+      "passcode": 6337436,
+      "name": "Rapid-Fire Magician",
+      "numbers": [
+        "EEN-EN019"
+      ]
+    },
+    {
+      "passcode": 7459013,
+      "name": "Zure, Knight of Dark World",
+      "numbers": [
+        "EEN-EN001"
+      ]
+    },
+    {
+      "passcode": 10248389,
+      "name": "Cyber Blader",
+      "numbers": [
+        "EEN-EN032"
+      ]
+    },
+    {
+      "passcode": 10526791,
+      "name": "Elemental HERO Wildedge",
+      "numbers": [
+        "EEN-EN035"
+      ]
+    },
+    {
+      "passcode": 11460577,
+      "name": "Etoile Cyber",
+      "numbers": [
+        "EEN-EN016"
+      ]
+    },
+    {
+      "passcode": 18271561,
+      "name": "Chthonian Blast",
+      "numbers": [
+        "EEN-EN050"
+      ]
+    },
+    {
+      "passcode": 19394153,
+      "name": "Feather Shot",
+      "numbers": [
+        "EEN-EN042"
+      ]
+    },
+    {
+      "passcode": 22587018,
+      "name": "Hydrogeddon",
+      "numbers": [
+        "EEN-EN013"
+      ]
+    },
+    {
+      "passcode": 23309606,
+      "name": "Infernal Incinerator",
+      "numbers": [
+        "EEN-EN012"
+      ]
+    },
+    {
+      "passcode": 23421244,
+      "name": "Reborn Zombie",
+      "numbers": [
+        "EEN-EN009"
+      ]
+    },
+    {
+      "passcode": 24643836,
+      "name": "Ojamagic",
+      "numbers": [
+        "EEN-EN040"
+      ]
+    },
+    {
+      "passcode": 25366484,
+      "name": "Elemental HERO Shining Flare Wingman",
+      "numbers": [
+        "EEN-EN036"
+      ]
+    },
+    {
+      "passcode": 25652259,
+      "name": "Queen's Knight",
+      "numbers": [
+        "EEN-EN004"
+      ]
+    },
+    {
+      "passcode": 27581098,
+      "name": "Non-Fusion Area",
+      "numbers": [
+        "EEN-EN059"
+      ]
+    },
+    {
+      "passcode": 28604635,
+      "name": "Weed Out",
+      "numbers": [
+        "EEN-EN054"
+      ]
+    },
+    {
+      "passcode": 29826127,
+      "name": "The Forces of Darkness",
+      "numbers": [
+        "EEN-EN051"
+      ]
+    },
+    {
+      "passcode": 30548775,
+      "name": "Branch!",
+      "numbers": [
+        "EEN-EN046"
+      ]
+    },
+    {
+      "passcode": 31764353,
+      "name": "Familiar-Possessed - Wynn",
+      "numbers": [
+        "EEN-EN029"
+      ]
+    },
+    {
+      "passcode": 31887905,
+      "name": "Familiar-Possessed - Aussa",
+      "numbers": [
+        "EEN-EN026"
+      ]
+    },
+    {
+      "passcode": 32619583,
+      "name": "Sillva, Warlord of Dark World",
+      "numbers": [
+        "EEN-EN023"
+      ]
+    },
+    {
+      "passcode": 33731070,
+      "name": "Beiige, Vanguard of Dark World",
+      "numbers": [
+        "EEN-EN020"
+      ]
+    },
+    {
+      "passcode": 44676200,
+      "name": "Hero Barrier",
+      "numbers": [
+        "EEN-EN049"
+      ]
+    },
+    {
+      "passcode": 44954628,
+      "name": "B.E.S. Tetran",
+      "numbers": [
+        "EEN-EN017"
+      ]
+    },
+    {
+      "passcode": 45898858,
+      "name": "Bonding - H2O",
+      "numbers": [
+        "EEN-EN043"
+      ]
+    },
+    {
+      "passcode": 46910446,
+      "name": "Chthonian Alliance",
+      "numbers": [
+        "EEN-EN044"
+      ]
+    },
+    {
+      "passcode": 47737087,
+      "name": "Elemental HERO Rampart Blaster",
+      "numbers": [
+        "EEN-EN033"
+      ]
+    },
+    {
+      "passcode": 50916353,
+      "name": "Chthonian Soldier",
+      "numbers": [
+        "EEN-EN010"
+      ]
+    },
+    {
+      "passcode": 51638941,
+      "name": "V-Tiger Jet",
+      "numbers": [
+        "EEN-EN002"
+      ]
+    },
+    {
+      "passcode": 54976796,
+      "name": "Level Limit - Area A",
+      "numbers": [
+        "EEN-EN060"
+      ]
+    },
+    {
+      "passcode": 55008284,
+      "name": "The League of Uniform Nomenclature",
+      "numbers": [
+        "EEN-EN055"
+      ]
+    },
+    {
+      "passcode": 58071123,
+      "name": "Oxygeddon",
+      "numbers": [
+        "EEN-EN014"
+      ]
+    },
+    {
+      "passcode": 58859575,
+      "name": "VW-Tiger Catapult",
+      "numbers": [
+        "EEN-EN030"
+      ]
+    },
+    {
+      "passcode": 59793705,
+      "name": "Elemental HERO Bladedge",
+      "numbers": [
+        "EEN-EN007"
+      ]
+    },
+    {
+      "passcode": 61850482,
+      "name": "Level Modulation",
+      "numbers": [
+        "EEN-EN039"
+      ]
+    },
+    {
+      "passcode": 64788463,
+      "name": "King's Knight",
+      "numbers": [
+        "EEN-EN006"
+      ]
+    },
+    {
+      "passcode": 65824822,
+      "name": "Dark Deal",
+      "numbers": [
+        "EEN-EN052"
+      ]
+    },
+    {
+      "passcode": 66947414,
+      "name": "Boss Rush",
+      "numbers": [
+        "EEN-EN047"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "EEN-EN037"
+      ]
+    },
+    {
+      "passcode": 68881649,
+      "name": "Familiar-Possessed - Eria",
+      "numbers": [
+        "EEN-EN027"
+      ]
+    },
+    {
+      "passcode": 70948327,
+      "name": "Nanobreaker",
+      "numbers": [
+        "EEN-EN018"
+      ]
+    },
+    {
+      "passcode": 71060915,
+      "name": "Feather Wind",
+      "numbers": [
+        "EEN-EN058"
+      ]
+    },
+    {
+      "passcode": 72287557,
+      "name": "Chthonian Polymer",
+      "numbers": [
+        "EEN-EN057"
+      ]
+    },
+    {
+      "passcode": 78004197,
+      "name": "Goldd, Wu-Lord of Dark World",
+      "numbers": [
+        "EEN-EN024"
+      ]
+    },
+    {
+      "passcode": 79126789,
+      "name": "Broww, Huntsman of Dark World",
+      "numbers": [
+        "EEN-EN021"
+      ]
+    },
+    {
+      "passcode": 83121692,
+      "name": "Elemental HERO Tempest",
+      "numbers": [
+        "EEN-EN034"
+      ]
+    },
+    {
+      "passcode": 84243274,
+      "name": "VWXYZ-Dragon Catapult Cannon",
+      "numbers": [
+        "EEN-EN031"
+      ]
+    },
+    {
+      "passcode": 85066822,
+      "name": "Water Dragon",
+      "numbers": [
+        "EEN-EN015"
+      ]
+    },
+    {
+      "passcode": 86188410,
+      "name": "Elemental HERO Wildheart",
+      "numbers": [
+        "EEN-EN008"
+      ]
+    },
+    {
+      "passcode": 90374791,
+      "name": "Armed Changer",
+      "numbers": [
+        "EEN-EN045"
+      ]
+    },
+    {
+      "passcode": 90876561,
+      "name": "Jack's Knight",
+      "numbers": [
+        "EEN-EN005"
+      ]
+    },
+    {
+      "passcode": 91597389,
+      "name": "Roll Out!",
+      "numbers": [
+        "EEN-EN056"
+      ]
+    },
+    {
+      "passcode": 92219931,
+      "name": "Simultaneous Loss",
+      "numbers": [
+        "EEN-EN053"
+      ]
+    },
+    {
+      "passcode": 93431518,
+      "name": "Gateway to Dark World",
+      "numbers": [
+        "EEN-EN048"
+      ]
+    },
+    {
+      "passcode": 93554166,
+      "name": "Dark World Lightning",
+      "numbers": [
+        "EEN-EN038"
+      ]
+    },
+    {
+      "passcode": 96300057,
+      "name": "W-Wing Catapult",
+      "numbers": [
+        "EEN-EN011"
+      ]
+    },
+    {
+      "passcode": 97023549,
+      "name": "Blade Skater",
+      "numbers": [
+        "EEN-EN003"
+      ]
+    },
+    {
+      "passcode": 98259197,
+      "name": "Ojamuscle",
+      "numbers": [
+        "EEN-EN041"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Elemental Energy'; printings from the YGOPRODeck bulk dump."
+}

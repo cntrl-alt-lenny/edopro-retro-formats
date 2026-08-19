@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-series-3-participation-card",
+  "code": "DL3",
+  "name": "Duelist League Series 3 participation card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-02-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "DL3-001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Series 3 participation card'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-4",
+  "code": "TP4",
+  "name": "Tournament Pack 4",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-10-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1248895,
+      "name": "Chain Destruction",
+      "numbers": [
+        "TP4-004"
+      ]
+    },
+    {
+      "passcode": 16970158,
+      "name": "Call of the Grave",
+      "numbers": [
+        "TP4-009"
+      ]
+    },
+    {
+      "passcode": 17449108,
+      "name": "Nobleman of Extermination",
+      "numbers": [
+        "TP4-016"
+      ]
+    },
+    {
+      "passcode": 21015833,
+      "name": "Hayabusa Knight",
+      "numbers": [
+        "TP4-019"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "TP4-003"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "TP4-014"
+      ]
+    },
+    {
+      "passcode": 23289281,
+      "name": "Karate Man",
+      "numbers": [
+        "TP4-013"
+      ]
+    },
+    {
+      "passcode": 23401839,
+      "name": "Senju of the Thousand Hands",
+      "numbers": [
+        "TP4-012"
+      ]
+    },
+    {
+      "passcode": 26725158,
+      "name": "Exile of the Wicked",
+      "numbers": [
+        "TP4-008"
+      ]
+    },
+    {
+      "passcode": 28563545,
+      "name": "Dragon Seeker",
+      "numbers": [
+        "TP4-006"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "TP4-002"
+      ]
+    },
+    {
+      "passcode": 51452091,
+      "name": "Royal Decree",
+      "numbers": [
+        "TP4-001"
+      ]
+    },
+    {
+      "passcode": 58831685,
+      "name": "Giant Red Seasnake",
+      "numbers": [
+        "TP4-007"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "TP4-017"
+      ]
+    },
+    {
+      "passcode": 66362965,
+      "name": "The Fiend Megacyber",
+      "numbers": [
+        "TP4-005"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "TP4-010"
+      ]
+    },
+    {
+      "passcode": 79870141,
+      "name": "Mad Sword Beast",
+      "numbers": [
+        "TP4-020"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "TP4-015"
+      ]
+    },
+    {
+      "passcode": 85742772,
+      "name": "Gravity Bind",
+      "numbers": [
+        "TP4-018"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "TP4-011"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack 4'; printings from the YGOPRODeck bulk dump."
+}

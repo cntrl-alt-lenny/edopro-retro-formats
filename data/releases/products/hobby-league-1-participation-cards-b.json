@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-1-participation-cards-b",
+  "code": "HL1",
+  "name": "Hobby League 1 participation cards B",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-12-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 295517,
+      "name": "A Legendary Ocean",
+      "numbers": [
+        "HL1-EN003"
+      ]
+    },
+    {
+      "passcode": 37721209,
+      "name": "Levia-Dragon - Daedalus",
+      "numbers": [
+        "HL1-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 1 participation cards B'; printings from the YGOPRODeck bulk dump."
+}

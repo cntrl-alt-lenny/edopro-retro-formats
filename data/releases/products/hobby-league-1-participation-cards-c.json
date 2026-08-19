@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-1-participation-cards-c",
+  "code": "HL1",
+  "name": "Hobby League 1 participation cards C",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-02-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 33550694,
+      "name": "Fusion Gate",
+      "numbers": [
+        "HL1-EN005"
+      ]
+    },
+    {
+      "passcode": 79109599,
+      "name": "King of the Swamp",
+      "numbers": [
+        "HL1-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 1 participation cards C'; printings from the YGOPRODeck bulk dump."
+}

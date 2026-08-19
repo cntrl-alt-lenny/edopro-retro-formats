@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-2nd-season",
+  "code": "TP2",
+  "name": "Tournament Pack: 2nd Season",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-10-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3170832,
+      "name": "Takuhee",
+      "numbers": [
+        "TP2-022"
+      ]
+    },
+    {
+      "passcode": 3627449,
+      "name": "Skull Guardian",
+      "numbers": [
+        "TP2-007"
+      ]
+    },
+    {
+      "passcode": 4179849,
+      "name": "Queen of Autumn Leaves",
+      "numbers": [
+        "TP2-024"
+      ]
+    },
+    {
+      "passcode": 14037717,
+      "name": "Spirit of the Books",
+      "numbers": [
+        "TP2-020"
+      ]
+    },
+    {
+      "passcode": 14977074,
+      "name": "Garoozis",
+      "numbers": [
+        "TP2-026"
+      ]
+    },
+    {
+      "passcode": 16899564,
+      "name": "Beautiful Headhuntress",
+      "numbers": [
+        "TP2-011"
+      ]
+    },
+    {
+      "passcode": 16970158,
+      "name": "Call of the Grave",
+      "numbers": [
+        "TP2-005"
+      ]
+    },
+    {
+      "passcode": 26725158,
+      "name": "Exile of the Wicked",
+      "numbers": [
+        "TP2-004"
+      ]
+    },
+    {
+      "passcode": 28563545,
+      "name": "Dragon Seeker",
+      "numbers": [
+        "TP2-002"
+      ]
+    },
+    {
+      "passcode": 30451366,
+      "name": "Mystical Sheep #1",
+      "numbers": [
+        "TP2-013"
+      ]
+    },
+    {
+      "passcode": 31066283,
+      "name": "Revival of Dokurorider",
+      "numbers": [
+        "TP2-010"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "TP2-001"
+      ]
+    },
+    {
+      "passcode": 38277918,
+      "name": "Mikazukinoyaiba",
+      "numbers": [
+        "TP2-006"
+      ]
+    },
+    {
+      "passcode": 38289717,
+      "name": "Crawling Dragon #2",
+      "numbers": [
+        "TP2-027"
+      ]
+    },
+    {
+      "passcode": 38942059,
+      "name": "Sonic Maid",
+      "numbers": [
+        "TP2-012"
+      ]
+    },
+    {
+      "passcode": 43694075,
+      "name": "Novox's Prayer",
+      "numbers": [
+        "TP2-008"
+      ]
+    },
+    {
+      "passcode": 47852924,
+      "name": "Soul of the Pure",
+      "numbers": [
+        "TP2-015"
+      ]
+    },
+    {
+      "passcode": 56413937,
+      "name": "Warrior of Tradition",
+      "numbers": [
+        "TP2-014"
+      ]
+    },
+    {
+      "passcode": 58831685,
+      "name": "Giant Red Seasnake",
+      "numbers": [
+        "TP2-003"
+      ]
+    },
+    {
+      "passcode": 59053232,
+      "name": "Turu-Purun",
+      "numbers": [
+        "TP2-017"
+      ]
+    },
+    {
+      "passcode": 59983499,
+      "name": "Dancing Elf",
+      "numbers": [
+        "TP2-016"
+      ]
+    },
+    {
+      "passcode": 62762898,
+      "name": "Parrot Dragon",
+      "numbers": [
+        "TP2-028"
+      ]
+    },
+    {
+      "passcode": 71068263,
+      "name": "Stuffed Animal",
+      "numbers": [
+        "TP2-019"
+      ]
+    },
+    {
+      "passcode": 75582395,
+      "name": "Faith Bird",
+      "numbers": [
+        "TP2-021"
+      ]
+    },
+    {
+      "passcode": 79629370,
+      "name": "Maiden of the Moonlight",
+      "numbers": [
+        "TP2-023"
+      ]
+    },
+    {
+      "passcode": 93343894,
+      "name": "Water Magician",
+      "numbers": [
+        "TP2-030"
+      ]
+    },
+    {
+      "passcode": 94119974,
+      "name": "Two-Headed King Rex",
+      "numbers": [
+        "TP2-025"
+      ]
+    },
+    {
+      "passcode": 95288024,
+      "name": "Sky Dragon",
+      "numbers": [
+        "TP2-029"
+      ]
+    },
+    {
+      "passcode": 96967123,
+      "name": "Dharma Cannon",
+      "numbers": [
+        "TP2-018"
+      ]
+    },
+    {
+      "passcode": 99721536,
+      "name": "Dokurorider",
+      "numbers": [
+        "TP2-009"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack: 2nd Season'; printings from the YGOPRODeck bulk dump."
+}

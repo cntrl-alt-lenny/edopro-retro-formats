@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-5d-s-tag-force-5-promotional-cards",
+  "code": "TF05",
+  "name": "Yu-Gi-Oh! 5D's Tag Force 5 Promotional Cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-10-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-11-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 19642774,
+      "name": "Fleur Synchron",
+      "numbers": [
+        "TF05-EN001"
+      ]
+    },
+    {
+      "passcode": 45037489,
+      "name": "Chevalier de Fleur",
+      "numbers": [
+        "TF05-EN002"
+      ]
+    },
+    {
+      "passcode": 72022087,
+      "name": "Liberty at Last!",
+      "numbers": [
+        "TF05-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! 5D's Tag Force 5 promotional cards\"; printings from the YGOPRODeck bulk dump."
+}

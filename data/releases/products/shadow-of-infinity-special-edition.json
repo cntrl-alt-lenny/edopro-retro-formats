@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shadow-of-infinity-special-edition",
+  "code": "SOI",
+  "name": "Shadow of Infinity: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-04-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2006-04-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 34016756,
+      "name": "Riryoku",
+      "numbers": [
+        "SOI-ENSE2"
+      ]
+    },
+    {
+      "passcode": 41356845,
+      "name": "Acid Trap Hole",
+      "numbers": [
+        "SOI-ENSE1"
+      ]
+    },
+    {
+      "passcode": 48642904,
+      "name": "Mesmeric Control",
+      "numbers": [
+        "SOI-ENSE4"
+      ]
+    },
+    {
+      "passcode": 59744639,
+      "name": "Windstorm of Etaqua",
+      "numbers": [
+        "SOI-ENSE3"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shadow of Infinity: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

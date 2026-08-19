@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-one",
+  "code": "CP01",
+  "name": "Champion Pack: Game One",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-11-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1347977,
+      "name": "Mysterious Guard",
+      "numbers": [
+        "CP01-EN013"
+      ]
+    },
+    {
+      "passcode": 2851070,
+      "name": "Reflect Bounder",
+      "numbers": [
+        "CP01-EN009"
+      ]
+    },
+    {
+      "passcode": 3510565,
+      "name": "Stealth Bird",
+      "numbers": [
+        "CP01-EN018"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "CP01-EN002"
+      ]
+    },
+    {
+      "passcode": 15510988,
+      "name": "Thunder Kid",
+      "numbers": [
+        "CP01-EN012"
+      ]
+    },
+    {
+      "passcode": 16226786,
+      "name": "Night Assailant",
+      "numbers": [
+        "CP01-EN005"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "CP01-EN007"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "CP01-EN020"
+      ]
+    },
+    {
+      "passcode": 41420027,
+      "name": "Solemn Judgment",
+      "numbers": [
+        "CP01-EN008"
+      ]
+    },
+    {
+      "passcode": 46411259,
+      "name": "Metamorphosis",
+      "numbers": [
+        "CP01-EN003"
+      ]
+    },
+    {
+      "passcode": 50400231,
+      "name": "Satellite Cannon",
+      "numbers": [
+        "CP01-EN001"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "CP01-EN004"
+      ]
+    },
+    {
+      "passcode": 65240384,
+      "name": "Big Shield Gardna",
+      "numbers": [
+        "CP01-EN006"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "CP01-EN011"
+      ]
+    },
+    {
+      "passcode": 69279219,
+      "name": "My Body as a Shield",
+      "numbers": [
+        "CP01-EN015"
+      ]
+    },
+    {
+      "passcode": 75043725,
+      "name": "Emissary of the Afterlife",
+      "numbers": [
+        "CP01-EN019"
+      ]
+    },
+    {
+      "passcode": 82108372,
+      "name": "Mudora",
+      "numbers": [
+        "CP01-EN017"
+      ]
+    },
+    {
+      "passcode": 83986578,
+      "name": "King Tiger Wanghu",
+      "numbers": [
+        "CP01-EN014"
+      ]
+    },
+    {
+      "passcode": 95308449,
+      "name": "Final Countdown",
+      "numbers": [
+        "CP01-EN016"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "CP01-EN010"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game One'; printings from the YGOPRODeck bulk dump."
+}

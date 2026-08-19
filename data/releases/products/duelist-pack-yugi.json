@@ -1,0 +1,257 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-yugi",
+  "code": "DPYG",
+  "name": "Duelist Pack: Yugi",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-07-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-07-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-07-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 5405694,
+      "name": "Black Luster Soldier",
+      "numbers": [
+        "DPYG-EN017"
+      ]
+    },
+    {
+      "passcode": 5556668,
+      "name": "Exchange",
+      "numbers": [
+        "DPYG-EN021"
+      ]
+    },
+    {
+      "passcode": 13839120,
+      "name": "Yellow Gadget",
+      "numbers": [
+        "DPYG-EN014"
+      ]
+    },
+    {
+      "passcode": 13955608,
+      "name": "Stronghold the Moving Fortress",
+      "numbers": [
+        "DPYG-EN030"
+      ]
+    },
+    {
+      "passcode": 18807108,
+      "name": "Spellbinding Circle",
+      "numbers": [
+        "DPYG-EN026"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "DPYG-EN020"
+      ]
+    },
+    {
+      "passcode": 25652259,
+      "name": "Queen's Knight",
+      "numbers": [
+        "DPYG-EN003"
+      ]
+    },
+    {
+      "passcode": 31305911,
+      "name": "Marshmallon",
+      "numbers": [
+        "DPYG-EN015"
+      ]
+    },
+    {
+      "passcode": 38033121,
+      "name": "Dark Magician Girl",
+      "numbers": [
+        "DPYG-EN008"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "DPYG-EN005"
+      ]
+    },
+    {
+      "passcode": 41172955,
+      "name": "Green Gadget",
+      "numbers": [
+        "DPYG-EN012"
+      ]
+    },
+    {
+      "passcode": 42664989,
+      "name": "Card of Sanctity",
+      "numbers": [
+        "DPYG-EN025"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "DPYG-EN027"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DPYG-EN001"
+      ]
+    },
+    {
+      "passcode": 49587034,
+      "name": "Lightforce Sword",
+      "numbers": [
+        "DPYG-EN029"
+      ]
+    },
+    {
+      "passcode": 55761792,
+      "name": "Black Luster Ritual",
+      "numbers": [
+        "DPYG-EN022"
+      ]
+    },
+    {
+      "passcode": 64788463,
+      "name": "King's Knight",
+      "numbers": [
+        "DPYG-EN011"
+      ]
+    },
+    {
+      "passcode": 65240384,
+      "name": "Big Shield Gardna",
+      "numbers": [
+        "DPYG-EN009"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "DPYG-EN002"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "DPYG-EN018"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "DPYG-EN007"
+      ]
+    },
+    {
+      "passcode": 81210420,
+      "name": "Magical Hats",
+      "numbers": [
+        "DPYG-EN028"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "DPYG-EN019"
+      ]
+    },
+    {
+      "passcode": 86445415,
+      "name": "Red Gadget",
+      "numbers": [
+        "DPYG-EN013"
+      ]
+    },
+    {
+      "passcode": 87880531,
+      "name": "Diffusion Wave-Motion",
+      "numbers": [
+        "DPYG-EN023"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "DPYG-EN024"
+      ]
+    },
+    {
+      "passcode": 88619463,
+      "name": "Sorcerer of Dark Magic",
+      "numbers": [
+        "DPYG-EN010"
+      ]
+    },
+    {
+      "passcode": 90876561,
+      "name": "Jack's Knight",
+      "numbers": [
+        "DPYG-EN004"
+      ]
+    },
+    {
+      "passcode": 95727991,
+      "name": "Catapult Turtle",
+      "numbers": [
+        "DPYG-EN006"
+      ]
+    },
+    {
+      "passcode": 98502113,
+      "name": "Dark Paladin",
+      "numbers": [
+        "DPYG-EN016"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yugi'; printings from the YGOPRODeck bulk dump."
+}

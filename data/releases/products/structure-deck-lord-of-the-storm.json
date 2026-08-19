@@ -1,0 +1,279 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-lord-of-the-storm",
+  "code": "SD8",
+  "name": "Structure Deck: Lord of the Storm",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-07-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1804528,
+      "name": "Dark Coffin",
+      "numbers": [
+        "SD8-EN032"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD8-EN019"
+      ]
+    },
+    {
+      "passcode": 6924874,
+      "name": "Harpie's Pet Baby Dragon",
+      "numbers": [
+        "SD8-EN017"
+      ]
+    },
+    {
+      "passcode": 12181376,
+      "name": "Triangle Ecstasy Spark",
+      "numbers": [
+        "SD8-EN025"
+      ]
+    },
+    {
+      "passcode": 12206212,
+      "name": "Harpie Lady Sisters",
+      "numbers": [
+        "SD8-EN007"
+      ]
+    },
+    {
+      "passcode": 14989021,
+      "name": "Simorgh, Bird of Divinity",
+      "numbers": [
+        "SD8-EN001"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD8-EN022"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD8-EN023"
+      ]
+    },
+    {
+      "passcode": 27927359,
+      "name": "Harpie Lady 2",
+      "numbers": [
+        "SD8-EN014"
+      ]
+    },
+    {
+      "passcode": 28143906,
+      "name": "Roc from the Valley of Haze",
+      "numbers": [
+        "SD8-EN012"
+      ]
+    },
+    {
+      "passcode": 28470714,
+      "name": "Bladefly",
+      "numbers": [
+        "SD8-EN008"
+      ]
+    },
+    {
+      "passcode": 34100324,
+      "name": "Harpie Girl",
+      "numbers": [
+        "SD8-EN004"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "SD8-EN033"
+      ]
+    },
+    {
+      "passcode": 40384720,
+      "name": "Sonic Shooter",
+      "numbers": [
+        "SD8-EN002"
+      ]
+    },
+    {
+      "passcode": 45547649,
+      "name": "Birdface",
+      "numbers": [
+        "SD8-EN009"
+      ]
+    },
+    {
+      "passcode": 53567095,
+      "name": "Icarus Attack",
+      "numbers": [
+        "SD8-EN036"
+      ]
+    },
+    {
+      "passcode": 54415063,
+      "name": "Harpie Lady 3",
+      "numbers": [
+        "SD8-EN015"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "SD8-EN034"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SD8-EN029"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SD8-EN026"
+      ]
+    },
+    {
+      "passcode": 70861343,
+      "name": "Ninjitsu Art of Transformation",
+      "numbers": [
+        "SD8-EN035"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SD8-EN020"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "SD8-EN018"
+      ]
+    },
+    {
+      "passcode": 73001017,
+      "name": "Silpheed",
+      "numbers": [
+        "SD8-EN010"
+      ]
+    },
+    {
+      "passcode": 75782277,
+      "name": "Harpies' Hunting Ground",
+      "numbers": [
+        "SD8-EN024"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "SD8-EN031"
+      ]
+    },
+    {
+      "passcode": 77778835,
+      "name": "Hysteric Party",
+      "numbers": [
+        "SD8-EN027"
+      ]
+    },
+    {
+      "passcode": 78636495,
+      "name": "Slate Warrior",
+      "numbers": [
+        "SD8-EN005"
+      ]
+    },
+    {
+      "passcode": 81896370,
+      "name": "Swift Birdman Joe",
+      "numbers": [
+        "SD8-EN016"
+      ]
+    },
+    {
+      "passcode": 82005435,
+      "name": "Lady Ninja Yae",
+      "numbers": [
+        "SD8-EN011"
+      ]
+    },
+    {
+      "passcode": 84696266,
+      "name": "Sonic Duck",
+      "numbers": [
+        "SD8-EN003"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "SD8-EN006"
+      ]
+    },
+    {
+      "passcode": 90219263,
+      "name": "Elegant Egotist",
+      "numbers": [
+        "SD8-EN021"
+      ]
+    },
+    {
+      "passcode": 91932350,
+      "name": "Harpie Lady 1",
+      "numbers": [
+        "SD8-EN013"
+      ]
+    },
+    {
+      "passcode": 95132338,
+      "name": "Aqua Chorus",
+      "numbers": [
+        "SD8-EN028"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD8-EN030"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Lord of the Storm'; printings from the YGOPRODeck bulk dump."
+}

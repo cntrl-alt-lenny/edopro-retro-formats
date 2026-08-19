@@ -1,0 +1,510 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "strike-of-neos",
+  "code": "STON",
+  "name": "Strike of Neos",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-02-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6631034,
+      "name": "Frostosaurus",
+      "numbers": [
+        "STON-EN002"
+      ]
+    },
+    {
+      "passcode": 8323633,
+      "name": "Cloak and Dagger",
+      "numbers": [
+        "STON-EN059"
+      ]
+    },
+    {
+      "passcode": 9145181,
+      "name": "Ritual Sealing",
+      "numbers": [
+        "STON-EN056"
+      ]
+    },
+    {
+      "passcode": 9267769,
+      "name": "Flashbang",
+      "numbers": [
+        "STON-EN053"
+      ]
+    },
+    {
+      "passcode": 9845733,
+      "name": "Emblem of the Awakening",
+      "numbers": [
+        "STON-EN044"
+      ]
+    },
+    {
+      "passcode": 10489311,
+      "name": "Hero Medal",
+      "numbers": [
+        "STON-EN050"
+      ]
+    },
+    {
+      "passcode": 10667321,
+      "name": "Ancient Rules",
+      "numbers": [
+        "STON-EN037"
+      ]
+    },
+    {
+      "passcode": 10789972,
+      "name": "Cú Chulainn the Awakened",
+      "numbers": [
+        "STON-EN033"
+      ]
+    },
+    {
+      "passcode": 11102908,
+      "name": "Shien's Castle of Mist",
+      "numbers": [
+        "STON-EN047"
+      ]
+    },
+    {
+      "passcode": 11502550,
+      "name": "Elemental HERO Air Neos",
+      "numbers": [
+        "STON-EN034"
+      ]
+    },
+    {
+      "passcode": 11662742,
+      "name": "Gellenduo",
+      "numbers": [
+        "STON-EN067"
+      ]
+    },
+    {
+      "passcode": 12324546,
+      "name": "Legendary Ebon Steed",
+      "numbers": [
+        "STON-EN040"
+      ]
+    },
+    {
+      "passcode": 12398280,
+      "name": "Freya, Spirit of Victory",
+      "numbers": [
+        "STON-EN064"
+      ]
+    },
+    {
+      "passcode": 12510878,
+      "name": "Neo-Parshath, the Sky Paladin",
+      "numbers": [
+        "STON-EN061"
+      ]
+    },
+    {
+      "passcode": 12624008,
+      "name": "Radiant Spirit",
+      "numbers": [
+        "STON-EN029"
+      ]
+    },
+    {
+      "passcode": 13846680,
+      "name": "Firestorm Prominence",
+      "numbers": [
+        "STON-EN026"
+      ]
+    },
+    {
+      "passcode": 17732278,
+      "name": "Neo-Spacian Glow Moss",
+      "numbers": [
+        "STON-EN006"
+      ]
+    },
+    {
+      "passcode": 24508238,
+      "name": "D.D. Crow",
+      "numbers": [
+        "STON-EN024"
+      ]
+    },
+    {
+      "passcode": 24725825,
+      "name": "Electric Virus",
+      "numbers": [
+        "STON-EN021"
+      ]
+    },
+    {
+      "passcode": 25847467,
+      "name": "Kahkki, Guerilla of Dark World",
+      "numbers": [
+        "STON-EN018"
+      ]
+    },
+    {
+      "passcode": 26669055,
+      "name": "Sage of Silence",
+      "numbers": [
+        "STON-EN015"
+      ]
+    },
+    {
+      "passcode": 27782503,
+      "name": "The Six Samurai - Irou",
+      "numbers": [
+        "STON-EN012"
+      ]
+    },
+    {
+      "passcode": 31904181,
+      "name": "The Six Samurai - Nisashi",
+      "numbers": [
+        "STON-EN010"
+      ]
+    },
+    {
+      "passcode": 32626733,
+      "name": "Spiral Serpent",
+      "numbers": [
+        "STON-EN003"
+      ]
+    },
+    {
+      "passcode": 34717238,
+      "name": "Pulling the Rug",
+      "numbers": [
+        "STON-EN060"
+      ]
+    },
+    {
+      "passcode": 35539880,
+      "name": "Birthright",
+      "numbers": [
+        "STON-EN057"
+      ]
+    },
+    {
+      "passcode": 45939841,
+      "name": "Twister",
+      "numbers": [
+        "STON-EN042"
+      ]
+    },
+    {
+      "passcode": 46052429,
+      "name": "Advanced Ritual Art",
+      "numbers": [
+        "STON-EN045"
+      ]
+    },
+    {
+      "passcode": 46652477,
+      "name": "The Transmigration Prophecy",
+      "numbers": [
+        "STON-EN054"
+      ]
+    },
+    {
+      "passcode": 46874015,
+      "name": "Return of the Six Samurai",
+      "numbers": [
+        "STON-EN051"
+      ]
+    },
+    {
+      "passcode": 47060347,
+      "name": "Aegis of Gaia",
+      "numbers": [
+        "STON-EN068"
+      ]
+    },
+    {
+      "passcode": 47274077,
+      "name": "Neos Force",
+      "numbers": [
+        "STON-EN039"
+      ]
+    },
+    {
+      "passcode": 47596607,
+      "name": "Skyscraper 2 - Hero City",
+      "numbers": [
+        "STON-EN048"
+      ]
+    },
+    {
+      "passcode": 48712195,
+      "name": "Card Trader",
+      "numbers": [
+        "STON-EN046"
+      ]
+    },
+    {
+      "passcode": 48783998,
+      "name": "Nova Summoner",
+      "numbers": [
+        "STON-EN065"
+      ]
+    },
+    {
+      "passcode": 48996569,
+      "name": "Elemental HERO Grand Neos",
+      "numbers": [
+        "STON-EN035"
+      ]
+    },
+    {
+      "passcode": 49905576,
+      "name": "Meltiel, Sage of the Sky",
+      "numbers": [
+        "STON-EN062"
+      ]
+    },
+    {
+      "passcode": 50957346,
+      "name": "Raging Earth",
+      "numbers": [
+        "STON-EN027"
+      ]
+    },
+    {
+      "passcode": 51119924,
+      "name": "Puppet Plant",
+      "numbers": [
+        "STON-EN022"
+      ]
+    },
+    {
+      "passcode": 51232472,
+      "name": "Gren, Tactician of Dark World",
+      "numbers": [
+        "STON-EN019"
+      ]
+    },
+    {
+      "passcode": 54959865,
+      "name": "Neo-Spacian Air Hummingbird",
+      "numbers": [
+        "STON-EN004"
+      ]
+    },
+    {
+      "passcode": 58012107,
+      "name": "Alien Psychic",
+      "numbers": [
+        "STON-EN031"
+      ]
+    },
+    {
+      "passcode": 59235795,
+      "name": "Destruction Cyclone",
+      "numbers": [
+        "STON-EN028"
+      ]
+    },
+    {
+      "passcode": 62054060,
+      "name": "Sage of Stillness",
+      "numbers": [
+        "STON-EN016"
+      ]
+    },
+    {
+      "passcode": 63176202,
+      "name": "Great Shogun Shien",
+      "numbers": [
+        "STON-EN013"
+      ]
+    },
+    {
+      "passcode": 64398890,
+      "name": "The Six Samurai - Yaichi",
+      "numbers": [
+        "STON-EN007"
+      ]
+    },
+    {
+      "passcode": 69025477,
+      "name": "The Six Samurai - Yariza",
+      "numbers": [
+        "STON-EN009"
+      ]
+    },
+    {
+      "passcode": 69247929,
+      "name": "Gene-Warped Warwolf",
+      "numbers": [
+        "STON-EN001"
+      ]
+    },
+    {
+      "passcode": 71934924,
+      "name": "Swift Samurai Storm!",
+      "numbers": [
+        "STON-EN058"
+      ]
+    },
+    {
+      "passcode": 72150572,
+      "name": "Anti-Fusion Device",
+      "numbers": [
+        "STON-EN055"
+      ]
+    },
+    {
+      "passcode": 72446038,
+      "name": "Synthesis Spell",
+      "numbers": [
+        "STON-EN043"
+      ]
+    },
+    {
+      "passcode": 73262676,
+      "name": "\"A\" Cell Scatter Burst",
+      "numbers": [
+        "STON-EN041"
+      ]
+    },
+    {
+      "passcode": 73872164,
+      "name": "Eliminating the League",
+      "numbers": [
+        "STON-EN052"
+      ]
+    },
+    {
+      "passcode": 74095602,
+      "name": "Change of Hero - Reflector Ray",
+      "numbers": [
+        "STON-EN049"
+      ]
+    },
+    {
+      "passcode": 74117290,
+      "name": "Dark World Dealings",
+      "numbers": [
+        "STON-EN038"
+      ]
+    },
+    {
+      "passcode": 80344569,
+      "name": "Neo-Spacian Grand Mole",
+      "numbers": [
+        "STON-EN005"
+      ]
+    },
+    {
+      "passcode": 83039729,
+      "name": "Grandmaster of the Six Samurai",
+      "numbers": [
+        "STON-EN000"
+      ]
+    },
+    {
+      "passcode": 84177693,
+      "name": "Radiant Jeral",
+      "numbers": [
+        "STON-EN066"
+      ]
+    },
+    {
+      "passcode": 84385264,
+      "name": "Lycanthrope",
+      "numbers": [
+        "STON-EN032"
+      ]
+    },
+    {
+      "passcode": 85399281,
+      "name": "Harvest Angel of Wisdom",
+      "numbers": [
+        "STON-EN063"
+      ]
+    },
+    {
+      "passcode": 85507811,
+      "name": "Elemental HERO Glow Neos",
+      "numbers": [
+        "STON-EN036"
+      ]
+    },
+    {
+      "passcode": 86229493,
+      "name": "Umbral Soul",
+      "numbers": [
+        "STON-EN030"
+      ]
+    },
+    {
+      "passcode": 86442081,
+      "name": "Silent Abyss",
+      "numbers": [
+        "STON-EN025"
+      ]
+    },
+    {
+      "passcode": 87514539,
+      "name": "Marionette Mite",
+      "numbers": [
+        "STON-EN023"
+      ]
+    },
+    {
+      "passcode": 90397998,
+      "name": "The Six Samurai - Kamon",
+      "numbers": [
+        "STON-EN008"
+      ]
+    },
+    {
+      "passcode": 95519486,
+      "name": "The Six Samurai - Zanji",
+      "numbers": [
+        "STON-EN011"
+      ]
+    },
+    {
+      "passcode": 98336111,
+      "name": "Fusion Devourer",
+      "numbers": [
+        "STON-EN020"
+      ]
+    },
+    {
+      "passcode": 99458769,
+      "name": "Reign-Beaux, Overlord of Dark World",
+      "numbers": [
+        "STON-EN017"
+      ]
+    },
+    {
+      "passcode": 99675356,
+      "name": "Shien's Footsoldier",
+      "numbers": [
+        "STON-EN014"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Strike of Neos'; printings from the YGOPRODeck bulk dump."
+}

@@ -12,13 +12,317 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "edisonformat-legal-sets"
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-04-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-04-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
       ]
     }
   ],
-  "printings": [],
-  "sources": [
-    "edisonformat-legal-sets"
+  "printings": [
+    {
+      "passcode": 9433350,
+      "name": "Malefic Blue-Eyes White Dragon",
+      "numbers": [
+        "DPKB-EN023"
+      ]
+    },
+    {
+      "passcode": 9786492,
+      "name": "White Dragon Ritual",
+      "numbers": [
+        "DPKB-EN032"
+      ]
+    },
+    {
+      "passcode": 14898066,
+      "name": "Vorse Raider",
+      "numbers": [
+        "DPKB-EN008"
+      ]
+    },
+    {
+      "passcode": 17444133,
+      "name": "Kaiser Sea Horse",
+      "numbers": [
+        "DPKB-EN017"
+      ]
+    },
+    {
+      "passcode": 17985575,
+      "name": "Lord of D.",
+      "numbers": [
+        "DPKB-EN009"
+      ]
+    },
+    {
+      "passcode": 23265313,
+      "name": "Cost Down",
+      "numbers": [
+        "DPKB-EN033"
+      ]
+    },
+    {
+      "passcode": 23995346,
+      "name": "Blue-Eyes Ultimate Dragon",
+      "numbers": [
+        "DPKB-EN026"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "DPKB-EN028"
+      ]
+    },
+    {
+      "passcode": 24874630,
+      "name": "Fiend's Sanctuary",
+      "numbers": [
+        "DPKB-EN035"
+      ]
+    },
+    {
+      "passcode": 27174286,
+      "name": "Return from the Different Dimension",
+      "numbers": [
+        "DPKB-EN038"
+      ]
+    },
+    {
+      "passcode": 30113682,
+      "name": "Judge Man",
+      "numbers": [
+        "DPKB-EN003"
+      ]
+    },
+    {
+      "passcode": 34124316,
+      "name": "Cyber Jar",
+      "numbers": [
+        "DPKB-EN010"
+      ]
+    },
+    {
+      "passcode": 36261276,
+      "name": "Interdimensional Matter Transporter",
+      "numbers": [
+        "DPKB-EN037"
+      ]
+    },
+    {
+      "passcode": 43973174,
+      "name": "The Flute of Summoning Dragon",
+      "numbers": [
+        "DPKB-EN030"
+      ]
+    },
+    {
+      "passcode": 50005633,
+      "name": "Swordstalker",
+      "numbers": [
+        "DPKB-EN004"
+      ]
+    },
+    {
+      "passcode": 50939127,
+      "name": "Different Dimension Dragon",
+      "numbers": [
+        "DPKB-EN014"
+      ]
+    },
+    {
+      "passcode": 52624755,
+      "name": "Peten the Dark Clown",
+      "numbers": [
+        "DPKB-EN019"
+      ]
+    },
+    {
+      "passcode": 52824910,
+      "name": "Kaiser Glider",
+      "numbers": [
+        "DPKB-EN015"
+      ]
+    },
+    {
+      "passcode": 53839837,
+      "name": "Vampire Lord",
+      "numbers": [
+        "DPKB-EN013"
+      ]
+    },
+    {
+      "passcode": 54912977,
+      "name": "Ancient Lamp",
+      "numbers": [
+        "DPKB-EN021"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "DPKB-EN029"
+      ]
+    },
+    {
+      "passcode": 57728570,
+      "name": "Crush Card Virus",
+      "numbers": [
+        "DPKB-EN039"
+      ]
+    },
+    {
+      "passcode": 58641905,
+      "name": "Ring of Defense",
+      "numbers": [
+        "DPKB-EN034"
+      ]
+    },
+    {
+      "passcode": 61844784,
+      "name": "Magic Reflector",
+      "numbers": [
+        "DPKB-EN031"
+      ]
+    },
+    {
+      "passcode": 62651957,
+      "name": "X-Head Cannon",
+      "numbers": [
+        "DPKB-EN007"
+      ]
+    },
+    {
+      "passcode": 62873545,
+      "name": "Dragon Master Knight",
+      "numbers": [
+        "DPKB-EN027"
+      ]
+    },
+    {
+      "passcode": 64500000,
+      "name": "Z-Metal Tank",
+      "numbers": [
+        "DPKB-EN012"
+      ]
+    },
+    {
+      "passcode": 65622692,
+      "name": "Y-Dragon Head",
+      "numbers": [
+        "DPKB-EN011"
+      ]
+    },
+    {
+      "passcode": 66602787,
+      "name": "Saggi the Dark Clown",
+      "numbers": [
+        "DPKB-EN006"
+      ]
+    },
+    {
+      "passcode": 73398797,
+      "name": "Paladin of White Dragon",
+      "numbers": [
+        "DPKB-EN024"
+      ]
+    },
+    {
+      "passcode": 76184692,
+      "name": "Hitotsu-Me Giant",
+      "numbers": [
+        "DPKB-EN002"
+      ]
+    },
+    {
+      "passcode": 76909279,
+      "name": "Enraged Battle Ox",
+      "numbers": [
+        "DPKB-EN018"
+      ]
+    },
+    {
+      "passcode": 79814787,
+      "name": "The White Stone of Legend",
+      "numbers": [
+        "DPKB-EN022"
+      ]
+    },
+    {
+      "passcode": 82301904,
+      "name": "Chaos Emperor Dragon - Envoy of the End",
+      "numbers": [
+        "DPKB-EN016"
+      ]
+    },
+    {
+      "passcode": 83555666,
+      "name": "Ring of Destruction",
+      "numbers": [
+        "DPKB-EN036"
+      ]
+    },
+    {
+      "passcode": 86871614,
+      "name": "Cloning",
+      "numbers": [
+        "DPKB-EN040"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DPKB-EN001"
+      ]
+    },
+    {
+      "passcode": 89731911,
+      "name": "Familiar Knight",
+      "numbers": [
+        "DPKB-EN020"
+      ]
+    },
+    {
+      "passcode": 91998119,
+      "name": "XYZ-Dragon Cannon",
+      "numbers": [
+        "DPKB-EN025"
+      ]
+    },
+    {
+      "passcode": 97590747,
+      "name": "La Jinn the Mystical Genie of the Lamp",
+      "numbers": [
+        "DPKB-EN005"
+      ]
+    }
   ],
-  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Kaiba'; printings from the YGOPRODeck bulk dump."
 }

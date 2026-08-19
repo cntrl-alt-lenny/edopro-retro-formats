@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-duelist-genesis-special-edition",
+  "code": "TDGS",
+  "name": "The Duelist Genesis: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-10-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27346636,
+      "name": "Gladiator Beast Heraklinos",
+      "numbers": [
+        "TDGS-ENSE2"
+      ]
+    },
+    {
+      "passcode": 54974237,
+      "name": "Eradicator Epidemic Virus",
+      "numbers": [
+        "TDGS-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Duelist Genesis: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

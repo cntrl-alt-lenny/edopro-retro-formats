@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "master-collection-volume-2",
+  "code": "MC2",
+  "name": "Master Collection Volume 2",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-10-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 12600382,
+      "name": "Exodia Necross",
+      "numbers": [
+        "MC2-EN003"
+      ]
+    },
+    {
+      "passcode": 25551951,
+      "name": "Blowback Dragon",
+      "numbers": [
+        "MC2-EN005"
+      ]
+    },
+    {
+      "passcode": 40659562,
+      "name": "Guardian Sphinx",
+      "numbers": [
+        "MC2-EN001"
+      ]
+    },
+    {
+      "passcode": 71413901,
+      "name": "Breaker the Magical Warrior",
+      "numbers": [
+        "MC2-EN002"
+      ]
+    },
+    {
+      "passcode": 72989439,
+      "name": "Black Luster Soldier - Envoy of the Beginning",
+      "numbers": [
+        "MC2-EN004"
+      ]
+    },
+    {
+      "passcode": 87997872,
+      "name": "Theinen the Great Sphinx",
+      "numbers": [
+        "MC2-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Master Collection Volume 2'; printings from the YGOPRODeck bulk dump."
+}

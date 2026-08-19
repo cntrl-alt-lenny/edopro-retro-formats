@@ -1,0 +1,75 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-exclusive-2009",
+  "code": "CT06",
+  "name": "Collectible Tins Exclusive 2009",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-09-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-09-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-09-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 10875327,
+      "name": "Earthbound Immortal Aslla piscu",
+      "numbers": [
+        "CT06-ENS02"
+      ]
+    },
+    {
+      "passcode": 11613567,
+      "name": "Blackwing - Elphin the Raven",
+      "numbers": [
+        "CT06-ENS01"
+      ]
+    },
+    {
+      "passcode": 52352005,
+      "name": "XX-Saber Gottoms",
+      "numbers": [
+        "CT06-ENS04"
+      ]
+    },
+    {
+      "passcode": 69931927,
+      "name": "Earthbound Immortal Chacu Challhua",
+      "numbers": [
+        "CT06-ENS03"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins Exclusive 2009'; printings from the YGOPRODeck bulk dump."
+}

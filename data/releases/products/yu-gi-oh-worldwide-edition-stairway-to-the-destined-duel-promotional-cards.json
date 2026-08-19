@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-worldwide-edition-stairway-to-the-destined-duel-promotional-cards",
+  "code": "SDD",
+  "name": "Yu-Gi-Oh! Worldwide Edition: Stairway to the Destined Duel promotional cards",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-04-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-04-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6740720,
+      "name": "Seiyaryu",
+      "numbers": [
+        "SDD-E001"
+      ]
+    },
+    {
+      "passcode": 8131171,
+      "name": "Sinister Serpent",
+      "numbers": [
+        "SDD-002"
+      ]
+    },
+    {
+      "passcode": 18144506,
+      "name": "Harpie's Feather Duster",
+      "numbers": [
+        "SDD-003"
+      ]
+    },
+    {
+      "passcode": 32268901,
+      "name": "Salamandra",
+      "numbers": [
+        "SDD-E003"
+      ]
+    },
+    {
+      "passcode": 41356845,
+      "name": "Acid Trap Hole",
+      "numbers": [
+        "SDD-E002"
+      ]
+    },
+    {
+      "passcode": 75347539,
+      "name": "Valkyrion the Magna Warrior",
+      "numbers": [
+        "SDD-001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Worldwide Edition: Stairway to the Destined Duel promotional cards'; printings from the YGOPRODeck bulk dump."
+}

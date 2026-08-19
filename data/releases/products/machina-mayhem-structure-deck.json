@@ -12,13 +12,296 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "edisonformat-legal-sets"
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-02-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-02-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
       ]
     }
   ],
-  "printings": [],
-  "sources": [
-    "edisonformat-legal-sets"
+  "printings": [
+    {
+      "passcode": 3657444,
+      "name": "Cyber Valley",
+      "numbers": [
+        "SDMM-EN019"
+      ]
+    },
+    {
+      "passcode": 4334811,
+      "name": "Scrap Recycler",
+      "numbers": [
+        "SDMM-EN004"
+      ]
+    },
+    {
+      "passcode": 5556499,
+      "name": "Machina Fortress",
+      "numbers": [
+        "SDMM-EN001"
+      ]
+    },
+    {
+      "passcode": 12247206,
+      "name": "Inferno Reckless Summon",
+      "numbers": [
+        "SDMM-EN027"
+      ]
+    },
+    {
+      "passcode": 12503902,
+      "name": "Rare Metalmorph",
+      "numbers": [
+        "SDMM-EN034"
+      ]
+    },
+    {
+      "passcode": 13839120,
+      "name": "Yellow Gadget",
+      "numbers": [
+        "SDMM-EN017"
+      ]
+    },
+    {
+      "passcode": 22666164,
+      "name": "Commander Covington",
+      "numbers": [
+        "SDMM-EN005"
+      ]
+    },
+    {
+      "passcode": 23265594,
+      "name": "Heavy Mech Support Platform",
+      "numbers": [
+        "SDMM-EN012"
+      ]
+    },
+    {
+      "passcode": 23782705,
+      "name": "Machina Sniper",
+      "numbers": [
+        "SDMM-EN007"
+      ]
+    },
+    {
+      "passcode": 26302522,
+      "name": "Blast Sphere",
+      "numbers": [
+        "SDMM-EN011"
+      ]
+    },
+    {
+      "passcode": 26439287,
+      "name": "Proto-Cyber Dragon",
+      "numbers": [
+        "SDMM-EN014"
+      ]
+    },
+    {
+      "passcode": 31828916,
+      "name": "Machina Armored Unit",
+      "numbers": [
+        "SDMM-EN021"
+      ]
+    },
+    {
+      "passcode": 34004470,
+      "name": "The Big Saturn",
+      "numbers": [
+        "SDMM-EN020"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "SDMM-EN035"
+      ]
+    },
+    {
+      "passcode": 41172955,
+      "name": "Green Gadget",
+      "numbers": [
+        "SDMM-EN015"
+      ]
+    },
+    {
+      "passcode": 42940404,
+      "name": "Machina Gearframe",
+      "numbers": [
+        "SDMM-EN002"
+      ]
+    },
+    {
+      "passcode": 43711255,
+      "name": "Prohibition",
+      "numbers": [
+        "SDMM-EN022"
+      ]
+    },
+    {
+      "passcode": 46181000,
+      "name": "Frontline Base",
+      "numbers": [
+        "SDMM-EN025"
+      ]
+    },
+    {
+      "passcode": 48712195,
+      "name": "Card Trader",
+      "numbers": [
+        "SDMM-EN029"
+      ]
+    },
+    {
+      "passcode": 55713623,
+      "name": "Shrink",
+      "numbers": [
+        "SDMM-EN024"
+      ]
+    },
+    {
+      "passcode": 58054262,
+      "name": "Machina Force",
+      "numbers": [
+        "SDMM-EN009"
+      ]
+    },
+    {
+      "passcode": 60999392,
+      "name": "Machina Soldier",
+      "numbers": [
+        "SDMM-EN006"
+      ]
+    },
+    {
+      "passcode": 63995093,
+      "name": "Machine Duplication",
+      "numbers": [
+        "SDMM-EN026"
+      ]
+    },
+    {
+      "passcode": 67159705,
+      "name": "Armored Cybern",
+      "numbers": [
+        "SDMM-EN018"
+      ]
+    },
+    {
+      "passcode": 68540058,
+      "name": "Metalmorph",
+      "numbers": [
+        "SDMM-EN033"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "SDMM-EN013"
+      ]
+    },
+    {
+      "passcode": 70342110,
+      "name": "Dimensional Prison",
+      "numbers": [
+        "SDMM-EN032"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "SDMM-EN023"
+      ]
+    },
+    {
+      "passcode": 74519184,
+      "name": "Hand Destruction",
+      "numbers": [
+        "SDMM-EN028"
+      ]
+    },
+    {
+      "passcode": 78349103,
+      "name": "Machina Peacekeeper",
+      "numbers": [
+        "SDMM-EN003"
+      ]
+    },
+    {
+      "passcode": 79853073,
+      "name": "Cipher Soldier",
+      "numbers": [
+        "SDMM-EN010"
+      ]
+    },
+    {
+      "passcode": 80987696,
+      "name": "Time Machine",
+      "numbers": [
+        "SDMM-EN031"
+      ]
+    },
+    {
+      "passcode": 86445415,
+      "name": "Red Gadget",
+      "numbers": [
+        "SDMM-EN016"
+      ]
+    },
+    {
+      "passcode": 86780027,
+      "name": "Solidarity",
+      "numbers": [
+        "SDMM-EN030"
+      ]
+    },
+    {
+      "passcode": 91597389,
+      "name": "Roll Out!",
+      "numbers": [
+        "SDMM-EN037"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "SDMM-EN036"
+      ]
+    },
+    {
+      "passcode": 96384007,
+      "name": "Machina Defender",
+      "numbers": [
+        "SDMM-EN008"
+      ]
+    }
   ],
-  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Machina Mayhem Structure Deck'; printings from the YGOPRODeck bulk dump."
 }

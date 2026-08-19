@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-lost-millennium-sneak-peek-participation-card",
+  "code": "SP1",
+  "name": "The Lost Millennium Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-05-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 29654737,
+      "name": "Amazoness Chain Master",
+      "numbers": [
+        "SP1-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Lost Millennium Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

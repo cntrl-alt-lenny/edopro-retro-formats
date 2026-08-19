@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-elemental-hero-collection-1",
+  "code": "EHC1",
+  "name": "Yu-Gi-Oh! Elemental Hero Collection 1",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-11-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 21844576,
+      "name": "Elemental HERO Avian",
+      "numbers": [
+        "EHC1-EN001"
+      ]
+    },
+    {
+      "passcode": 35809262,
+      "name": "Elemental HERO Flame Wingman",
+      "numbers": [
+        "EHC1-EN004"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "EHC1-EN002"
+      ]
+    },
+    {
+      "passcode": 79979666,
+      "name": "Elemental HERO Bubbleman",
+      "numbers": [
+        "EHC1-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Elemental Hero Collection 1'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-series-5-participation-card",
+  "code": "DL5",
+  "name": "Duelist League Series 5 participation card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 99518961,
+      "name": "Restructer Revolution",
+      "numbers": [
+        "DL5-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Series 5 participation card'; printings from the YGOPRODeck bulk dump."
+}

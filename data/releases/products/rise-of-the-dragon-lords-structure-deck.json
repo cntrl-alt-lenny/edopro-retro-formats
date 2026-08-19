@@ -1,0 +1,286 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "rise-of-the-dragon-lords-structure-deck",
+  "code": "SDRL",
+  "name": "Rise of the Dragon Lords Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-10-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1224927,
+      "name": "Malevolent Catastrophe",
+      "numbers": [
+        "SDRL-EN032"
+      ]
+    },
+    {
+      "passcode": 2732323,
+      "name": "Decoy Dragon",
+      "numbers": [
+        "SDRL-EN004"
+      ]
+    },
+    {
+      "passcode": 3954901,
+      "name": "Felgrand Dragon",
+      "numbers": [
+        "SDRL-EN001"
+      ]
+    },
+    {
+      "passcode": 11224103,
+      "name": "Horus the Black Flame Dragon LV6",
+      "numbers": [
+        "SDRL-EN012"
+      ]
+    },
+    {
+      "passcode": 17444133,
+      "name": "Kaiser Sea Horse",
+      "numbers": [
+        "SDRL-EN008"
+      ]
+    },
+    {
+      "passcode": 28596933,
+      "name": "A Wingbeat of Giant Dragon",
+      "numbers": [
+        "SDRL-EN025"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "SDRL-EN007"
+      ]
+    },
+    {
+      "passcode": 36354007,
+      "name": "Gilford the Lightning",
+      "numbers": [
+        "SDRL-EN006"
+      ]
+    },
+    {
+      "passcode": 38120068,
+      "name": "Trade-In",
+      "numbers": [
+        "SDRL-EN019"
+      ]
+    },
+    {
+      "passcode": 39191307,
+      "name": "Masked Dragon",
+      "numbers": [
+        "SDRL-EN013"
+      ]
+    },
+    {
+      "passcode": 39343610,
+      "name": "Darkblaze Dragon",
+      "numbers": [
+        "SDRL-EN002"
+      ]
+    },
+    {
+      "passcode": 41089128,
+      "name": "Flame Ruler",
+      "numbers": [
+        "SDRL-EN016"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "SDRL-EN022"
+      ]
+    },
+    {
+      "passcode": 43250041,
+      "name": "Draining Shield",
+      "numbers": [
+        "SDRL-EN037"
+      ]
+    },
+    {
+      "passcode": 43434803,
+      "name": "The Shallow Grave",
+      "numbers": [
+        "SDRL-EN023"
+      ]
+    },
+    {
+      "passcode": 43586926,
+      "name": "Twin-Headed Behemoth",
+      "numbers": [
+        "SDRL-EN010"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "SDRL-EN036"
+      ]
+    },
+    {
+      "passcode": 58551308,
+      "name": "Spear Cretin",
+      "numbers": [
+        "SDRL-EN005"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SDRL-EN033"
+      ]
+    },
+    {
+      "passcode": 61127349,
+      "name": "Big Bang Shot",
+      "numbers": [
+        "SDRL-EN027"
+      ]
+    },
+    {
+      "passcode": 61505339,
+      "name": "The Creator",
+      "numbers": [
+        "SDRL-EN014"
+      ]
+    },
+    {
+      "passcode": 66337215,
+      "name": "Herald of Creation",
+      "numbers": [
+        "SDRL-EN003"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "SDRL-EN021"
+      ]
+    },
+    {
+      "passcode": 68007326,
+      "name": "Guardian Angel Joan",
+      "numbers": [
+        "SDRL-EN011"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SDRL-EN029"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SDRL-EN024"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "SDRL-EN026"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "SDRL-EN035"
+      ]
+    },
+    {
+      "passcode": 80161395,
+      "name": "Mystik Wok",
+      "numbers": [
+        "SDRL-EN028"
+      ]
+    },
+    {
+      "passcode": 80921533,
+      "name": "Mausoleum of the Emperor",
+      "numbers": [
+        "SDRL-EN031"
+      ]
+    },
+    {
+      "passcode": 81439173,
+      "name": "Foolish Burial",
+      "numbers": [
+        "SDRL-EN020"
+      ]
+    },
+    {
+      "passcode": 84290642,
+      "name": "Snipe Hunter",
+      "numbers": [
+        "SDRL-EN018"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "SDRL-EN030"
+      ]
+    },
+    {
+      "passcode": 94568601,
+      "name": "Tyrant Dragon",
+      "numbers": [
+        "SDRL-EN009"
+      ]
+    },
+    {
+      "passcode": 95701283,
+      "name": "Majestic Mech - Goryu",
+      "numbers": [
+        "SDRL-EN017"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SDRL-EN034"
+      ]
+    },
+    {
+      "passcode": 97093037,
+      "name": "The Creator Incarnate",
+      "numbers": [
+        "SDRL-EN015"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Rise of the Dragon Lords Structure Deck'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "exclusive-pack",
+  "code": "EP1",
+  "name": "Exclusive Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-07-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-08-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 14391920,
+      "name": "Inferno Tempest",
+      "numbers": [
+        "EP1-EN007"
+      ]
+    },
+    {
+      "passcode": 15013468,
+      "name": "Andro Sphinx",
+      "numbers": [
+        "EP1-EN002"
+      ]
+    },
+    {
+      "passcode": 25236056,
+      "name": "Rare Metal Dragon",
+      "numbers": [
+        "EP1-EN004"
+      ]
+    },
+    {
+      "passcode": 27174286,
+      "name": "Return from the Different Dimension",
+      "numbers": [
+        "EP1-EN008"
+      ]
+    },
+    {
+      "passcode": 51402177,
+      "name": "Sphinx Teleia",
+      "numbers": [
+        "EP1-EN003"
+      ]
+    },
+    {
+      "passcode": 52624755,
+      "name": "Peten the Dark Clown",
+      "numbers": [
+        "EP1-EN005"
+      ]
+    },
+    {
+      "passcode": 87997872,
+      "name": "Theinen the Great Sphinx",
+      "numbers": [
+        "EP1-EN001"
+      ]
+    },
+    {
+      "passcode": 89731911,
+      "name": "Familiar Knight",
+      "numbers": [
+        "EP1-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Exclusive Pack'; printings from the YGOPRODeck bulk dump."
+}

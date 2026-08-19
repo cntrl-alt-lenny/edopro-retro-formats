@@ -1,0 +1,278 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-warrior-s-triumph",
+  "code": "SD5",
+  "name": "Structure Deck: Warrior's Triumph",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-11-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 423705,
+      "name": "Gearfried the Iron Knight",
+      "numbers": [
+        "SD5-EN005"
+      ]
+    },
+    {
+      "passcode": 2460565,
+      "name": "Marauding Captain",
+      "numbers": [
+        "SD5-EN009"
+      ]
+    },
+    {
+      "passcode": 4041838,
+      "name": "Ninja Grandmaster Sasuke",
+      "numbers": [
+        "SD5-EN015"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD5-EN020"
+      ]
+    },
+    {
+      "passcode": 5438492,
+      "name": "Warrior Lady of the Wasteland",
+      "numbers": [
+        "SD5-EN002"
+      ]
+    },
+    {
+      "passcode": 7572887,
+      "name": "D.D. Warrior Lady",
+      "numbers": [
+        "SD5-EN011"
+      ]
+    },
+    {
+      "passcode": 10375182,
+      "name": "Command Knight",
+      "numbers": [
+        "SD5-EN008"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "SD5-EN003"
+      ]
+    },
+    {
+      "passcode": 12923641,
+      "name": "Swords of Concealing Light",
+      "numbers": [
+        "SD5-EN031"
+      ]
+    },
+    {
+      "passcode": 16589042,
+      "name": "Swift Gaia the Fierce Knight",
+      "numbers": [
+        "SD5-EN006"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD5-EN023"
+      ]
+    },
+    {
+      "passcode": 20188127,
+      "name": "Fairy of the Spring",
+      "numbers": [
+        "SD5-EN028"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD5-EN029"
+      ]
+    },
+    {
+      "passcode": 22609617,
+      "name": "Mataza the Zapper",
+      "numbers": [
+        "SD5-EN012"
+      ]
+    },
+    {
+      "passcode": 31423101,
+      "name": "Divine Sword - Phoenix Blade",
+      "numbers": [
+        "SD5-EN018"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "SD5-EN024"
+      ]
+    },
+    {
+      "passcode": 37684215,
+      "name": "Fusion Sword Murasame Blade",
+      "numbers": [
+        "SD5-EN026"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "SD5-EN021"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SD5-EN019"
+      ]
+    },
+    {
+      "passcode": 47507260,
+      "name": "Mystic Swordsman LV2",
+      "numbers": [
+        "SD5-EN013"
+      ]
+    },
+    {
+      "passcode": 51452091,
+      "name": "Royal Decree",
+      "numbers": [
+        "SD5-EN035"
+      ]
+    },
+    {
+      "passcode": 52077741,
+      "name": "Obnoxious Celtic Guard",
+      "numbers": [
+        "SD5-EN007"
+      ]
+    },
+    {
+      "passcode": 55226821,
+      "name": "Lightning Blade",
+      "numbers": [
+        "SD5-EN022"
+      ]
+    },
+    {
+      "passcode": 57046845,
+      "name": "Gearfried the Swordmaster",
+      "numbers": [
+        "SD5-EN016"
+      ]
+    },
+    {
+      "passcode": 68427465,
+      "name": "Wicked-Breaking Flamberge - Baou",
+      "numbers": [
+        "SD5-EN027"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SD5-EN030"
+      ]
+    },
+    {
+      "passcode": 69933858,
+      "name": "Gilford the Legend",
+      "numbers": [
+        "SD5-EN001"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "SD5-EN010"
+      ]
+    },
+    {
+      "passcode": 74591968,
+      "name": "Mystic Swordsman LV4",
+      "numbers": [
+        "SD5-EN014"
+      ]
+    },
+    {
+      "passcode": 75417459,
+      "name": "Release Restraint",
+      "numbers": [
+        "SD5-EN032"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "SD5-EN034"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "SD5-EN004"
+      ]
+    },
+    {
+      "passcode": 84430950,
+      "name": "Armed Samurai - Ben Kei",
+      "numbers": [
+        "SD5-EN017"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "SD5-EN025"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD5-EN033"
+      ]
+    },
+    {
+      "passcode": 98239899,
+      "name": "Blast with Chain",
+      "numbers": [
+        "SD5-EN036"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Structure Deck: Warrior's Triumph\"; printings from the YGOPRODeck bulk dump."
+}

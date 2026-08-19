@@ -1,0 +1,189 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-7",
+  "code": "TP7",
+  "name": "Tournament Pack 7",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2005-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2005-11-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 13945283,
+      "name": "Wall of Illusion",
+      "numbers": [
+        "TP7-EN014"
+      ]
+    },
+    {
+      "passcode": 29948642,
+      "name": "Dig Beak",
+      "numbers": [
+        "TP7-EN019"
+      ]
+    },
+    {
+      "passcode": 37043180,
+      "name": "D.D. Warrior",
+      "numbers": [
+        "TP7-EN001"
+      ]
+    },
+    {
+      "passcode": 43352213,
+      "name": "Nekogal #2",
+      "numbers": [
+        "TP7-EN020"
+      ]
+    },
+    {
+      "passcode": 46363422,
+      "name": "Skilled White Magician",
+      "numbers": [
+        "TP7-EN013"
+      ]
+    },
+    {
+      "passcode": 47986555,
+      "name": "Millennium Golem",
+      "numbers": [
+        "TP7-EN018"
+      ]
+    },
+    {
+      "passcode": 57482479,
+      "name": "Luminous Soldier",
+      "numbers": [
+        "TP7-EN004"
+      ]
+    },
+    {
+      "passcode": 62337487,
+      "name": "Fortress Whale",
+      "numbers": [
+        "TP7-EN003"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "TP7-EN010"
+      ]
+    },
+    {
+      "passcode": 71413901,
+      "name": "Breaker the Magical Warrior",
+      "numbers": [
+        "TP7-EN005"
+      ]
+    },
+    {
+      "passcode": 72630549,
+      "name": "Chaos Command Magician",
+      "numbers": [
+        "TP7-EN008"
+      ]
+    },
+    {
+      "passcode": 73752131,
+      "name": "Skilled Dark Magician",
+      "numbers": [
+        "TP7-EN012"
+      ]
+    },
+    {
+      "passcode": 73915051,
+      "name": "Scapegoat",
+      "numbers": [
+        "TP7-EN009"
+      ]
+    },
+    {
+      "passcode": 77454922,
+      "name": "Fortress Whale's Oath",
+      "numbers": [
+        "TP7-EN011"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "TP7-EN006"
+      ]
+    },
+    {
+      "passcode": 80234301,
+      "name": "Prisman",
+      "numbers": [
+        "TP7-EN017"
+      ]
+    },
+    {
+      "passcode": 84285623,
+      "name": "Haniwa",
+      "numbers": [
+        "TP7-EN016"
+      ]
+    },
+    {
+      "passcode": 85602018,
+      "name": "Last Will",
+      "numbers": [
+        "TP7-EN015"
+      ]
+    },
+    {
+      "passcode": 90873992,
+      "name": "Warrior Elimination",
+      "numbers": [
+        "TP7-EN002"
+      ]
+    },
+    {
+      "passcode": 94004268,
+      "name": "Amazoness Swords Woman",
+      "numbers": [
+        "TP7-EN007"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack 7'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-3",
+  "code": "DT03",
+  "name": "Duel Terminal 3",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-09-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 102380,
+      "name": "Lava Golem",
+      "numbers": [
+        "DT03-EN006"
+      ]
+    },
+    {
+      "passcode": 900787,
+      "name": "Dragunity Knight - Gae Bulg",
+      "numbers": [
+        "DT03-EN087"
+      ]
+    },
+    {
+      "passcode": 1533292,
+      "name": "R-Genex Magma",
+      "numbers": [
+        "DT03-EN024"
+      ]
+    },
+    {
+      "passcode": 2088870,
+      "name": "Worm Victory",
+      "numbers": [
+        "DT03-EN032"
+      ]
+    },
+    {
+      "passcode": 2956282,
+      "name": "Naturia Barkion",
+      "numbers": [
+        "DT03-EN038"
+      ]
+    },
+    {
+      "passcode": 3204467,
+      "name": "Worm Solid",
+      "numbers": [
+        "DT03-EN029"
+      ]
+    },
+    {
+      "passcode": 4335645,
+      "name": "Newdoria",
+      "numbers": [
+        "DT03-EN005"
+      ]
+    },
+    {
+      "passcode": 6256844,
+      "name": "R-Genex Turbo",
+      "numbers": [
+        "DT03-EN021"
+      ]
+    },
+    {
+      "passcode": 7478431,
+      "name": "Naturia Sunflower",
+      "numbers": [
+        "DT03-EN018"
+      ]
+    },
+    {
+      "passcode": 8233522,
+      "name": "Ally of Justice Cycle Reader",
+      "numbers": [
+        "DT03-EN080"
+      ]
+    },
+    {
+      "passcode": 8316661,
+      "name": "Fabled Miztoji",
+      "numbers": [
+        "DT03-EN012"
+      ]
+    },
+    {
+      "passcode": 8594079,
+      "name": "Jurrac Brachis",
+      "numbers": [
+        "DT03-EN015"
+      ]
+    },
+    {
+      "passcode": 9056100,
+      "name": "General Grunard of the Ice Barrier",
+      "numbers": [
+        "DT03-EN077"
+      ]
+    },
+    {
+      "passcode": 9411399,
+      "name": "Destiny HERO - Malicious",
+      "numbers": [
+        "DT03-EN055"
+      ]
+    },
+    {
+      "passcode": 9888196,
+      "name": "Ally of Justice Decisive Armor",
+      "numbers": [
+        "DT03-EN090"
+      ]
+    },
+    {
+      "passcode": 10178757,
+      "name": "R-Genex Oracle",
+      "numbers": [
+        "DT03-EN074"
+      ]
+    },
+    {
+      "passcode": 11012887,
+      "name": "Jurrac Guaiba",
+      "numbers": [
+        "DT03-EN068"
+      ]
+    },
+    {
+      "passcode": 11390349,
+      "name": "Naturia Fruitfly",
+      "numbers": [
+        "DT03-EN071"
+      ]
+    },
+    {
+      "passcode": 11722335,
+      "name": "Worm Xex",
+      "numbers": [
+        "DT03-EN082"
+      ]
+    },
+    {
+      "passcode": 12235475,
+      "name": "Fabled Ashenveil",
+      "numbers": [
+        "DT03-EN065"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "DT03-EN100"
+      ]
+    },
+    {
+      "passcode": 12652643,
+      "name": "Ultimate Ancient Gear Golem",
+      "numbers": [
+        "DT03-EN033"
+      ]
+    },
+    {
+      "passcode": 13361027,
+      "name": "Dragunity Darkspear",
+      "numbers": [
+        "DT03-EN062"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "DT03-EN093"
+      ]
+    },
+    {
+      "passcode": 14898066,
+      "name": "Vorse Raider",
+      "numbers": [
+        "DT03-EN001"
+      ]
+    },
+    {
+      "passcode": 14943837,
+      "name": "Debris Dragon",
+      "numbers": [
+        "DT03-EN051"
+      ]
+    },
+    {
+      "passcode": 16226786,
+      "name": "Night Assailant",
+      "numbers": [
+        "DT03-EN056"
+      ]
+    },
+    {
+      "passcode": 19439119,
+      "name": "Fabled Krus",
+      "numbers": [
+        "DT03-EN009"
+      ]
+    },
+    {
+      "passcode": 25366484,
+      "name": "Elemental HERO Shining Flare Wingman",
+      "numbers": [
+        "DT03-EN086"
+      ]
+    },
+    {
+      "passcode": 28183605,
+      "name": "Dragunity Dux",
+      "numbers": [
+        "DT03-EN059"
+      ]
+    },
+    {
+      "passcode": 28378427,
+      "name": "Damage Condenser",
+      "numbers": [
+        "DT03-EN048"
+      ]
+    },
+    {
+      "passcode": 29267084,
+      "name": "Shadow Spell",
+      "numbers": [
+        "DT03-EN049"
+      ]
+    },
+    {
+      "passcode": 30299166,
+      "name": "Worm Tentacles",
+      "numbers": [
+        "DT03-EN030"
+      ]
+    },
+    {
+      "passcode": 32744558,
+      "name": "R-Genex Overseer",
+      "numbers": [
+        "DT03-EN022"
+      ]
+    },
+    {
+      "passcode": 33866130,
+      "name": "Naturia Cliff",
+      "numbers": [
+        "DT03-EN019"
+      ]
+    },
+    {
+      "passcode": 35638627,
+      "name": "Worm Warlord",
+      "numbers": [
+        "DT03-EN081"
+      ]
+    },
+    {
+      "passcode": 35809262,
+      "name": "Elemental HERO Flame Wingman",
+      "numbers": [
+        "DT03-EN035"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "DT03-EN047"
+      ]
+    },
+    {
+      "passcode": 37806313,
+      "name": "Caravan of the Ice Barrier",
+      "numbers": [
+        "DT03-EN028"
+      ]
+    },
+    {
+      "passcode": 38354937,
+      "name": "Locomotion R-Genex",
+      "numbers": [
+        "DT03-EN039"
+      ]
+    },
+    {
+      "passcode": 38528901,
+      "name": "Shock Troops of the Ice Barrier",
+      "numbers": [
+        "DT03-EN025"
+      ]
+    },
+    {
+      "passcode": 39477584,
+      "name": "Fabled Leviathan",
+      "numbers": [
+        "DT03-EN036"
+      ]
+    },
+    {
+      "passcode": 40044918,
+      "name": "Elemental HERO Stratos",
+      "numbers": [
+        "DT03-EN058"
+      ]
+    },
+    {
+      "passcode": 43434803,
+      "name": "The Shallow Grave",
+      "numbers": [
+        "DT03-EN091"
+      ]
+    },
+    {
+      "passcode": 44689688,
+      "name": "Jurrac Spinos",
+      "numbers": [
+        "DT03-EN016"
+      ]
+    },
+    {
+      "passcode": 45450218,
+      "name": "Ally of Justice Omni-Weapon",
+      "numbers": [
+        "DT03-EN078"
+      ]
+    },
+    {
+      "passcode": 45711266,
+      "name": "Jurrac Ptera",
+      "numbers": [
+        "DT03-EN013"
+      ]
+    },
+    {
+      "passcode": 45809008,
+      "name": "Destiny Draw",
+      "numbers": [
+        "DT03-EN095"
+      ]
+    },
+    {
+      "passcode": 46502013,
+      "name": "Pixie Ring",
+      "numbers": [
+        "DT03-EN097"
+      ]
+    },
+    {
+      "passcode": 46572756,
+      "name": "R-Genex Ultimum",
+      "numbers": [
+        "DT03-EN075"
+      ]
+    },
+    {
+      "passcode": 46668237,
+      "name": "Green Baboon, Defender of the Forest",
+      "numbers": [
+        "DT03-EN057"
+      ]
+    },
+    {
+      "passcode": 46833854,
+      "name": "Fabled Topi",
+      "numbers": [
+        "DT03-EN010"
+      ]
+    },
+    {
+      "passcode": 47111934,
+      "name": "Worm Yagan",
+      "numbers": [
+        "DT03-EN083"
+      ]
+    },
+    {
+      "passcode": 47395382,
+      "name": "Fabled Ragin",
+      "numbers": [
+        "DT03-EN088"
+      ]
+    },
+    {
+      "passcode": 47432275,
+      "name": "Kuribon",
+      "numbers": [
+        "DT03-EN052"
+      ]
+    },
+    {
+      "passcode": 47795344,
+      "name": "Naturia Hydrangea",
+      "numbers": [
+        "DT03-EN072"
+      ]
+    },
+    {
+      "passcode": 48411996,
+      "name": "Jurrac Stauriko",
+      "numbers": [
+        "DT03-EN069"
+      ]
+    },
+    {
+      "passcode": 48976825,
+      "name": "Burial from a Different Dimension",
+      "numbers": [
+        "DT03-EN044"
+      ]
+    },
+    {
+      "passcode": 49003716,
+      "name": "Blackwing - Bora the Spear",
+      "numbers": [
+        "DT03-EN002"
+      ]
+    },
+    {
+      "passcode": 49633574,
+      "name": "Fabled Oltro",
+      "numbers": [
+        "DT03-EN066"
+      ]
+    },
+    {
+      "passcode": 50287060,
+      "name": "Archfiend of Gilfer",
+      "numbers": [
+        "DT03-EN054"
+      ]
+    },
+    {
+      "passcode": 54578613,
+      "name": "Dragunity Legionnaire",
+      "numbers": [
+        "DT03-EN060"
+      ]
+    },
+    {
+      "passcode": 56747793,
+      "name": "United We Stand",
+      "numbers": [
+        "DT03-EN092"
+      ]
+    },
+    {
+      "passcode": 59755122,
+      "name": "Dragunity Phalanx",
+      "numbers": [
+        "DT03-EN063"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "DT03-EN003"
+      ]
+    },
+    {
+      "passcode": 64926005,
+      "name": "Samurai of the Ice Barrier",
+      "numbers": [
+        "DT03-EN026"
+      ]
+    },
+    {
+      "passcode": 65149697,
+      "name": "R-Genex Crusher",
+      "numbers": [
+        "DT03-EN023"
+      ]
+    },
+    {
+      "passcode": 65749035,
+      "name": "Gungnir, Dragon of the Ice Barrier",
+      "numbers": [
+        "DT03-EN040"
+      ]
+    },
+    {
+      "passcode": 65961683,
+      "name": "Jurrac Velphito",
+      "numbers": [
+        "DT03-EN037"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "DT03-EN041"
+      ]
+    },
+    {
+      "passcode": 70083723,
+      "name": "Naturia Dragonfly",
+      "numbers": [
+        "DT03-EN017"
+      ]
+    },
+    {
+      "passcode": 70261145,
+      "name": "Naturia Tulip",
+      "numbers": [
+        "DT03-EN020"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "DT03-EN042"
+      ]
+    },
+    {
+      "passcode": 71106375,
+      "name": "Jurrac Iguanon",
+      "numbers": [
+        "DT03-EN014"
+      ]
+    },
+    {
+      "passcode": 71625222,
+      "name": "Time Wizard",
+      "numbers": [
+        "DT03-EN004"
+      ]
+    },
+    {
+      "passcode": 72328962,
+      "name": "Fabled Soulkius",
+      "numbers": [
+        "DT03-EN011"
+      ]
+    },
+    {
+      "passcode": 72845813,
+      "name": "Ally of Justice Quarantine",
+      "numbers": [
+        "DT03-EN079"
+      ]
+    },
+    {
+      "passcode": 73040500,
+      "name": "Fabled Urustos",
+      "numbers": [
+        "DT03-EN008"
+      ]
+    },
+    {
+      "passcode": 73061465,
+      "name": "Spellbreaker of the Ice Barrier",
+      "numbers": [
+        "DT03-EN076"
+      ]
+    },
+    {
+      "passcode": 73483491,
+      "name": "Vindikite R-Genex",
+      "numbers": [
+        "DT03-EN089"
+      ]
+    },
+    {
+      "passcode": 73783043,
+      "name": "R-Genex Accelerator",
+      "numbers": [
+        "DT03-EN073"
+      ]
+    },
+    {
+      "passcode": 74157028,
+      "name": "Cyber Twin Dragon",
+      "numbers": [
+        "DT03-EN085"
+      ]
+    },
+    {
+      "passcode": 74506079,
+      "name": "Worm Zero",
+      "numbers": [
+        "DT03-EN084"
+      ]
+    },
+    {
+      "passcode": 76683171,
+      "name": "Worm Ugly",
+      "numbers": [
+        "DT03-EN031"
+      ]
+    },
+    {
+      "passcode": 76714458,
+      "name": "Spell of Pain",
+      "numbers": [
+        "DT03-EN045"
+      ]
+    },
+    {
+      "passcode": 77754944,
+      "name": "Widespread Ruin",
+      "numbers": [
+        "DT03-EN050"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "DT03-EN099"
+      ]
+    },
+    {
+      "passcode": 81962318,
+      "name": "Dragunity Tribus",
+      "numbers": [
+        "DT03-EN061"
+      ]
+    },
+    {
+      "passcode": 82732705,
+      "name": "Skill Drain",
+      "numbers": [
+        "DT03-EN098"
+      ]
+    },
+    {
+      "passcode": 84905691,
+      "name": "Naturia Horneedle",
+      "numbers": [
+        "DT03-EN070"
+      ]
+    },
+    {
+      "passcode": 85028288,
+      "name": "Jurrac Titano",
+      "numbers": [
+        "DT03-EN067"
+      ]
+    },
+    {
+      "passcode": 86840720,
+      "name": "Fabled Dyf",
+      "numbers": [
+        "DT03-EN064"
+      ]
+    },
+    {
+      "passcode": 87102774,
+      "name": "Golden Ladybug",
+      "numbers": [
+        "DT03-EN053"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "DT03-EN094"
+      ]
+    },
+    {
+      "passcode": 89312388,
+      "name": "Elemental HERO Prisma",
+      "numbers": [
+        "DT03-EN007"
+      ]
+    },
+    {
+      "passcode": 90311614,
+      "name": "Dewdark of the Ice Barrier",
+      "numbers": [
+        "DT03-EN027"
+      ]
+    },
+    {
+      "passcode": 93217231,
+      "name": "Offering to the Snake Deity",
+      "numbers": [
+        "DT03-EN096"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "DT03-EN046"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "DT03-EN043"
+      ]
+    },
+    {
+      "passcode": 98502113,
+      "name": "Dark Paladin",
+      "numbers": [
+        "DT03-EN034"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal 3'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "phantom-darkness",
+  "code": "PTDN",
+  "name": "Phantom Darkness",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-02-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 674561,
+      "name": "Dark Eruption",
+      "numbers": [
+        "PTDN-EN054"
+      ]
+    },
+    {
+      "passcode": 1475311,
+      "name": "Allure of Darkness",
+      "numbers": [
+        "PTDN-EN084"
+      ]
+    },
+    {
+      "passcode": 1896112,
+      "name": "Dimension Explosion",
+      "numbers": [
+        "PTDN-EN051"
+      ]
+    },
+    {
+      "passcode": 3657444,
+      "name": "Cyber Valley",
+      "numbers": [
+        "PTDN-EN010"
+      ]
+    },
+    {
+      "passcode": 4440873,
+      "name": "Drastic Drop Off",
+      "numbers": [
+        "PTDN-EN074"
+      ]
+    },
+    {
+      "passcode": 4779091,
+      "name": "Yubel - Terror Incarnate",
+      "numbers": [
+        "PTDN-EN007"
+      ]
+    },
+    {
+      "passcode": 5562461,
+      "name": "Dark Illusion",
+      "numbers": [
+        "PTDN-EN071"
+      ]
+    },
+    {
+      "passcode": 5592689,
+      "name": "Samsara Lotus",
+      "numbers": [
+        "PTDN-EN004"
+      ]
+    },
+    {
+      "passcode": 7617253,
+      "name": "Rainbow Path",
+      "numbers": [
+        "PTDN-EN063"
+      ]
+    },
+    {
+      "passcode": 8730435,
+      "name": "Gladiator Beast's Battle Archfiend Shield",
+      "numbers": [
+        "PTDN-EN060"
+      ]
+    },
+    {
+      "passcode": 9952083,
+      "name": "Chain Summoning",
+      "numbers": [
+        "PTDN-EN057"
+      ]
+    },
+    {
+      "passcode": 11913700,
+      "name": "Instant Neo Space",
+      "numbers": [
+        "PTDN-EN048"
+      ]
+    },
+    {
+      "passcode": 12298909,
+      "name": "Prime Material Dragon",
+      "numbers": [
+        "PTDN-EN087"
+      ]
+    },
+    {
+      "passcode": 12735388,
+      "name": "Rainbow Veil",
+      "numbers": [
+        "PTDN-EN045"
+      ]
+    },
+    {
+      "passcode": 13314457,
+      "name": "Deepsea Macrotrema",
+      "numbers": [
+        "PTDN-EN083"
+      ]
+    },
+    {
+      "passcode": 13857930,
+      "name": "Neo-Spacian Twinkle Moss",
+      "numbers": [
+        "PTDN-EN042"
+      ]
+    },
+    {
+      "passcode": 14089428,
+      "name": "Blue Thunder T-45",
+      "numbers": [
+        "PTDN-EN038"
+      ]
+    },
+    {
+      "passcode": 14536035,
+      "name": "Dark Grepher",
+      "numbers": [
+        "PTDN-EN000"
+      ]
+    },
+    {
+      "passcode": 14702066,
+      "name": "Cannon Soldier MK-2",
+      "numbers": [
+        "PTDN-EN035"
+      ]
+    },
+    {
+      "passcode": 25924653,
+      "name": "Gladiator Beast Darius",
+      "numbers": [
+        "PTDN-EN031"
+      ]
+    },
+    {
+      "passcode": 26046205,
+      "name": "Vengeful Shinobi",
+      "numbers": [
+        "PTDN-EN028"
+      ]
+    },
+    {
+      "passcode": 26254876,
+      "name": "Gemini Lancer",
+      "numbers": [
+        "PTDN-EN025"
+      ]
+    },
+    {
+      "passcode": 26905245,
+      "name": "Metal Reflect Slime",
+      "numbers": [
+        "PTDN-EN094"
+      ]
+    },
+    {
+      "passcode": 26976414,
+      "name": "Atlantean Pikeman",
+      "numbers": [
+        "PTDN-EN002"
+      ]
+    },
+    {
+      "passcode": 27869883,
+      "name": "Shadowpriestess of Ohm",
+      "numbers": [
+        "PTDN-EN024"
+      ]
+    },
+    {
+      "passcode": 28985331,
+      "name": "Armageddon Knight",
+      "numbers": [
+        "PTDN-EN021"
+      ]
+    },
+    {
+      "passcode": 30042158,
+      "name": "Cyber Ouroboros",
+      "numbers": [
+        "PTDN-EN011"
+      ]
+    },
+    {
+      "passcode": 30834988,
+      "name": "All-Out Attacks",
+      "numbers": [
+        "PTDN-EN075"
+      ]
+    },
+    {
+      "passcode": 31550470,
+      "name": "Escape from the Dark Dimension",
+      "numbers": [
+        "PTDN-EN072"
+      ]
+    },
+    {
+      "passcode": 31764700,
+      "name": "Yubel - The Ultimate Nightmare",
+      "numbers": [
+        "PTDN-EN008"
+      ]
+    },
+    {
+      "passcode": 31986288,
+      "name": "Regenerating Rose",
+      "numbers": [
+        "PTDN-EN005"
+      ]
+    },
+    {
+      "passcode": 33655493,
+      "name": "Belial - Marquis of Darkness",
+      "numbers": [
+        "PTDN-EN099"
+      ]
+    },
+    {
+      "passcode": 34002992,
+      "name": "Rainbow Life",
+      "numbers": [
+        "PTDN-EN064"
+      ]
+    },
+    {
+      "passcode": 34294855,
+      "name": "Vampire's Curse",
+      "numbers": [
+        "PTDN-EN090"
+      ]
+    },
+    {
+      "passcode": 35224440,
+      "name": "Gladiator Proving Ground",
+      "numbers": [
+        "PTDN-EN061"
+      ]
+    },
+    {
+      "passcode": 35956022,
+      "name": "Acidic Downpour",
+      "numbers": [
+        "PTDN-EN058"
+      ]
+    },
+    {
+      "passcode": 36931229,
+      "name": "Castle Gate",
+      "numbers": [
+        "PTDN-EN091"
+      ]
+    },
+    {
+      "passcode": 38107923,
+      "name": "Dark Nephthys",
+      "numbers": [
+        "PTDN-EN018"
+      ]
+    },
+    {
+      "passcode": 38167722,
+      "name": "Dark Spirit Art - Greed",
+      "numbers": [
+        "PTDN-EN070"
+      ]
+    },
+    {
+      "passcode": 38247752,
+      "name": "Dark-Eyes Illusionist",
+      "numbers": [
+        "PTDN-EN092"
+      ]
+    },
+    {
+      "passcode": 39712330,
+      "name": "Cry Havoc!",
+      "numbers": [
+        "PTDN-EN078"
+      ]
+    },
+    {
+      "passcode": 39829561,
+      "name": "Destiny HERO - Departed",
+      "numbers": [
+        "PTDN-EN015"
+      ]
+    },
+    {
+      "passcode": 39980304,
+      "name": "Chain Material",
+      "numbers": [
+        "PTDN-EN067"
+      ]
+    },
+    {
+      "passcode": 40921744,
+      "name": "Darklord Zerato",
+      "numbers": [
+        "PTDN-EN081"
+      ]
+    },
+    {
+      "passcode": 45462639,
+      "name": "Dark Red Enchanter",
+      "numbers": [
+        "PTDN-EN097"
+      ]
+    },
+    {
+      "passcode": 46173679,
+      "name": "Fires of Doomsday",
+      "numbers": [
+        "PTDN-EN055"
+      ]
+    },
+    {
+      "passcode": 47295267,
+      "name": "Cybernetic Zone",
+      "numbers": [
+        "PTDN-EN052"
+      ]
+    },
+    {
+      "passcode": 48017809,
+      "name": "Mirage Tube",
+      "numbers": [
+        "PTDN-EN049"
+      ]
+    },
+    {
+      "passcode": 48130397,
+      "name": "Super Polymerization",
+      "numbers": [
+        "PTDN-EN046"
+      ]
+    },
+    {
+      "passcode": 48686504,
+      "name": "Lonefire Blossom",
+      "numbers": [
+        "PTDN-EN088"
+      ]
+    },
+    {
+      "passcode": 49352945,
+      "name": "Elemental HERO Storm Neos",
+      "numbers": [
+        "PTDN-EN043"
+      ]
+    },
+    {
+      "passcode": 49808196,
+      "name": "Metabo Globster",
+      "numbers": [
+        "PTDN-EN085"
+      ]
+    },
+    {
+      "passcode": 50074522,
+      "name": "Magnetic Mosquito",
+      "numbers": [
+        "PTDN-EN039"
+      ]
+    },
+    {
+      "passcode": 51196174,
+      "name": "The Calculator",
+      "numbers": [
+        "PTDN-EN036"
+      ]
+    },
+    {
+      "passcode": 52035300,
+      "name": "The Immortal Bushi",
+      "numbers": [
+        "PTDN-EN029"
+      ]
+    },
+    {
+      "passcode": 52248570,
+      "name": "Imprisoned Queen Archfiend",
+      "numbers": [
+        "PTDN-EN032"
+      ]
+    },
+    {
+      "passcode": 52319752,
+      "name": "Black Veloci",
+      "numbers": [
+        "PTDN-EN033"
+      ]
+    },
+    {
+      "passcode": 53257892,
+      "name": "Gigaplant",
+      "numbers": [
+        "PTDN-EN026"
+      ]
+    },
+    {
+      "passcode": 53461122,
+      "name": "Earth Effigy",
+      "numbers": [
+        "PTDN-EN040"
+      ]
+    },
+    {
+      "passcode": 53927679,
+      "name": "Fire Trooper",
+      "numbers": [
+        "PTDN-EN013"
+      ]
+    },
+    {
+      "passcode": 60406591,
+      "name": "Sinister Seeds",
+      "numbers": [
+        "PTDN-EN065"
+      ]
+    },
+    {
+      "passcode": 61623148,
+      "name": "Dark World Grimoire",
+      "numbers": [
+        "PTDN-EN062"
+      ]
+    },
+    {
+      "passcode": 63665875,
+      "name": "Goblin Zombie",
+      "numbers": [
+        "PTDN-EN098"
+      ]
+    },
+    {
+      "passcode": 64379430,
+      "name": "Doomsday Horror",
+      "numbers": [
+        "PTDN-EN022"
+      ]
+    },
+    {
+      "passcode": 65192027,
+      "name": "Dark Armed Dragon",
+      "numbers": [
+        "PTDN-EN019"
+      ]
+    },
+    {
+      "passcode": 65384019,
+      "name": "Alchemy Cycle",
+      "numbers": [
+        "PTDN-EN068"
+      ]
+    },
+    {
+      "passcode": 65743242,
+      "name": "Call of the Earthbound",
+      "numbers": [
+        "PTDN-EN096"
+      ]
+    },
+    {
+      "passcode": 66100045,
+      "name": "Transmigration Break",
+      "numbers": [
+        "PTDN-EN079"
+      ]
+    },
+    {
+      "passcode": 66214679,
+      "name": "Dark Horus",
+      "numbers": [
+        "PTDN-EN016"
+      ]
+    },
+    {
+      "passcode": 66436257,
+      "name": "Volcanic Counter",
+      "numbers": [
+        "PTDN-EN012"
+      ]
+    },
+    {
+      "passcode": 67045174,
+      "name": "Gemini Trap Hole",
+      "numbers": [
+        "PTDN-EN073"
+      ]
+    },
+    {
+      "passcode": 67159705,
+      "name": "Armored Cybern",
+      "numbers": [
+        "PTDN-EN009"
+      ]
+    },
+    {
+      "passcode": 67223587,
+      "name": "Double Tag Team",
+      "numbers": [
+        "PTDN-EN076"
+      ]
+    },
+    {
+      "passcode": 72345736,
+      "name": "Six Samurai United",
+      "numbers": [
+        "PTDN-EN059"
+      ]
+    },
+    {
+      "passcode": 73567374,
+      "name": "Unleash Your Power!",
+      "numbers": [
+        "PTDN-EN056"
+      ]
+    },
+    {
+      "passcode": 73680966,
+      "name": "The Beginning of the End",
+      "numbers": [
+        "PTDN-EN053"
+      ]
+    },
+    {
+      "passcode": 74402414,
+      "name": "Spell Chronicle",
+      "numbers": [
+        "PTDN-EN050"
+      ]
+    },
+    {
+      "passcode": 75081613,
+      "name": "Aztekipede, the Worm Warrior",
+      "numbers": [
+        "PTDN-EN089"
+      ]
+    },
+    {
+      "passcode": 75524092,
+      "name": "Vicious Claw",
+      "numbers": [
+        "PTDN-EN047"
+      ]
+    },
+    {
+      "passcode": 76203291,
+      "name": "Golden Flying Fish",
+      "numbers": [
+        "PTDN-EN086"
+      ]
+    },
+    {
+      "passcode": 76925842,
+      "name": "Darknight Parshath",
+      "numbers": [
+        "PTDN-EN082"
+      ]
+    },
+    {
+      "passcode": 78371393,
+      "name": "Yubel",
+      "numbers": [
+        "PTDN-EN006"
+      ]
+    },
+    {
+      "passcode": 79407975,
+      "name": "Rainbow Dark Dragon",
+      "numbers": [
+        "PTDN-EN003"
+      ]
+    },
+    {
+      "passcode": 79852326,
+      "name": "Zoma the Spirit",
+      "numbers": [
+        "PTDN-EN095"
+      ]
+    },
+    {
+      "passcode": 86346643,
+      "name": "Rainbow Neos",
+      "numbers": [
+        "PTDN-EN044"
+      ]
+    },
+    {
+      "passcode": 87685879,
+      "name": "Sea Koala",
+      "numbers": [
+        "PTDN-EN037"
+      ]
+    },
+    {
+      "passcode": 88307361,
+      "name": "Superancient Deepsea King Coelacanth",
+      "numbers": [
+        "PTDN-EN034"
+      ]
+    },
+    {
+      "passcode": 89529919,
+      "name": "Field-Commander Rahz",
+      "numbers": [
+        "PTDN-EN030"
+      ]
+    },
+    {
+      "passcode": 90464188,
+      "name": "Obsidian Dragon",
+      "numbers": [
+        "PTDN-EN023"
+      ]
+    },
+    {
+      "passcode": 90582719,
+      "name": "Gladiator Beast Andal",
+      "numbers": [
+        "PTDN-EN001"
+      ]
+    },
+    {
+      "passcode": 90642597,
+      "name": "Future Samurai",
+      "numbers": [
+        "PTDN-EN027"
+      ]
+    },
+    {
+      "passcode": 91596726,
+      "name": "Dark Crusader",
+      "numbers": [
+        "PTDN-EN020"
+      ]
+    },
+    {
+      "passcode": 92595643,
+      "name": "Fine",
+      "numbers": [
+        "PTDN-EN080"
+      ]
+    },
+    {
+      "passcode": 92719314,
+      "name": "The Dark Creator",
+      "numbers": [
+        "PTDN-EN017"
+      ]
+    },
+    {
+      "passcode": 92773018,
+      "name": "Cybernetic Hidden Technology",
+      "numbers": [
+        "PTDN-EN069"
+      ]
+    },
+    {
+      "passcode": 93217231,
+      "name": "Offering to the Snake Deity",
+      "numbers": [
+        "PTDN-EN077"
+      ]
+    },
+    {
+      "passcode": 93431862,
+      "name": "Destiny HERO - Dunker",
+      "numbers": [
+        "PTDN-EN014"
+      ]
+    },
+    {
+      "passcode": 93895605,
+      "name": "Hate Buster",
+      "numbers": [
+        "PTDN-EN066"
+      ]
+    },
+    {
+      "passcode": 99747800,
+      "name": "Legendary Fiend",
+      "numbers": [
+        "PTDN-EN093"
+      ]
+    },
+    {
+      "passcode": 99865167,
+      "name": "Wind Effigy",
+      "numbers": [
+        "PTDN-EN041"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Phantom Darkness'; printings from the YGOPRODeck bulk dump."
+}

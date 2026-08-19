@@ -1,0 +1,1343 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "metal-raiders",
+  "code": "MRD",
+  "name": "Metal Raiders",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-06-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-07-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 62121,
+      "name": "Castle of Dark Illusions",
+      "numbers": [
+        "MRD-073",
+        "MRD-E073",
+        "MRD-EN073"
+      ]
+    },
+    {
+      "passcode": 549481,
+      "name": "Prevent Rat",
+      "numbers": [
+        "MRD-084",
+        "MRD-E084",
+        "MRD-EN084"
+      ]
+    },
+    {
+      "passcode": 1184620,
+      "name": "Kojikocy",
+      "numbers": [
+        "MRD-010",
+        "MRD-E010",
+        "MRD-EN010"
+      ]
+    },
+    {
+      "passcode": 2118022,
+      "name": "Hyosube",
+      "numbers": [
+        "MRD-054",
+        "MRD-E054",
+        "MRD-EN054"
+      ]
+    },
+    {
+      "passcode": 2483611,
+      "name": "Water Omotics",
+      "numbers": [
+        "MRD-021",
+        "MRD-E021",
+        "MRD-EN021"
+      ]
+    },
+    {
+      "passcode": 2504891,
+      "name": "Skull Knight",
+      "numbers": [
+        "MRD-123",
+        "MRD-E123",
+        "MRD-EN123"
+      ]
+    },
+    {
+      "passcode": 3027001,
+      "name": "Fake Trap",
+      "numbers": [
+        "MRD-056",
+        "MRD-E056",
+        "MRD-EN056"
+      ]
+    },
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "MRD-129",
+        "MRD-E129",
+        "MRD-EN129"
+      ]
+    },
+    {
+      "passcode": 4031928,
+      "name": "Change of Heart",
+      "numbers": [
+        "MRD-060",
+        "MRD-E060",
+        "MRD-EN060"
+      ]
+    },
+    {
+      "passcode": 5758500,
+      "name": "Soul Release",
+      "numbers": [
+        "MRD-058",
+        "MRD-E058",
+        "MRD-EN058"
+      ]
+    },
+    {
+      "passcode": 5818798,
+      "name": "Gazelle the King of Mythical Beasts",
+      "numbers": [
+        "MRD-124",
+        "MRD-E124",
+        "MRD-EN124"
+      ]
+    },
+    {
+      "passcode": 5901497,
+      "name": "Queen's Double",
+      "numbers": [
+        "MRD-051",
+        "MRD-E051",
+        "MRD-EN051"
+      ]
+    },
+    {
+      "passcode": 7019529,
+      "name": "Insect Soldiers of the Sky",
+      "numbers": [
+        "MRD-101",
+        "MRD-E101",
+        "MRD-EN101"
+      ]
+    },
+    {
+      "passcode": 7489323,
+      "name": "Milus Radiant",
+      "numbers": [
+        "MRD-110",
+        "MRD-E110",
+        "MRD-EN110"
+      ]
+    },
+    {
+      "passcode": 7805359,
+      "name": "Niwatori",
+      "numbers": [
+        "MRD-112",
+        "MRD-E112",
+        "MRD-EN112"
+      ]
+    },
+    {
+      "passcode": 8201910,
+      "name": "Star Boy",
+      "numbers": [
+        "MRD-109",
+        "MRD-E109",
+        "MRD-EN109"
+      ]
+    },
+    {
+      "passcode": 8471389,
+      "name": "Giga-Tech Wolf",
+      "numbers": [
+        "MRD-096",
+        "MRD-E096",
+        "MRD-EN096"
+      ]
+    },
+    {
+      "passcode": 9653271,
+      "name": "Kaminari Attack",
+      "numbers": [
+        "MRD-041",
+        "MRD-E041",
+        "MRD-EN041"
+      ]
+    },
+    {
+      "passcode": 10071456,
+      "name": "Protector of the Throne",
+      "numbers": [
+        "MRD-087",
+        "MRD-E087",
+        "MRD-EN087"
+      ]
+    },
+    {
+      "passcode": 10189126,
+      "name": "Masked Sorcerer",
+      "numbers": [
+        "MRD-019",
+        "MRD-E019",
+        "MRD-EN019"
+      ]
+    },
+    {
+      "passcode": 10538007,
+      "name": "Leogun",
+      "numbers": [
+        "MRD-033",
+        "MRD-E033",
+        "MRD-EN033"
+      ]
+    },
+    {
+      "passcode": 11384280,
+      "name": "Cannon Soldier",
+      "numbers": [
+        "MRD-106",
+        "MRD-E106",
+        "MRD-EN106"
+      ]
+    },
+    {
+      "passcode": 11901678,
+      "name": "Black Skull Dragon",
+      "numbers": [
+        "MRD-018",
+        "MRD-E018",
+        "MRD-EN018"
+      ]
+    },
+    {
+      "passcode": 12206212,
+      "name": "Harpie Lady Sisters",
+      "numbers": [
+        "MRD-009",
+        "MRD-E009",
+        "MRD-EN009"
+      ]
+    },
+    {
+      "passcode": 12472242,
+      "name": "Leghul",
+      "numbers": [
+        "MRD-031",
+        "MRD-E031",
+        "MRD-EN031"
+      ]
+    },
+    {
+      "passcode": 13215230,
+      "name": "Dream Clown",
+      "numbers": [
+        "MRD-080",
+        "MRD-E080",
+        "MRD-EN080"
+      ]
+    },
+    {
+      "passcode": 13599884,
+      "name": "Steel Scorpion",
+      "numbers": [
+        "MRD-029",
+        "MRD-E029",
+        "MRD-EN029"
+      ]
+    },
+    {
+      "passcode": 14141448,
+      "name": "Great Moth",
+      "numbers": [
+        "MRD-070",
+        "MRD-E070",
+        "MRD-EN070"
+      ]
+    },
+    {
+      "passcode": 14851496,
+      "name": "Jellyfish",
+      "numbers": [
+        "MRD-072",
+        "MRD-E072",
+        "MRD-EN072"
+      ]
+    },
+    {
+      "passcode": 15150365,
+      "name": "White Magical Hat",
+      "numbers": [
+        "MRD-016",
+        "MRD-E016",
+        "MRD-EN016"
+      ]
+    },
+    {
+      "passcode": 15237615,
+      "name": "Empress Judge",
+      "numbers": [
+        "MRD-046",
+        "MRD-E046",
+        "MRD-EN046"
+      ]
+    },
+    {
+      "passcode": 15480588,
+      "name": "Armored Lizard",
+      "numbers": [
+        "MRD-005",
+        "MRD-E005",
+        "MRD-EN005"
+      ]
+    },
+    {
+      "passcode": 16768387,
+      "name": "Big Eye",
+      "numbers": [
+        "MRD-017",
+        "MRD-E017",
+        "MRD-EN017"
+      ]
+    },
+    {
+      "passcode": 16972957,
+      "name": "Doma The Angel of Silence",
+      "numbers": [
+        "MRD-015",
+        "MRD-E015",
+        "MRD-EN015"
+      ]
+    },
+    {
+      "passcode": 17358176,
+      "name": "Lady of Faith",
+      "numbers": [
+        "MRD-119",
+        "MRD-E119",
+        "MRD-EN119"
+      ]
+    },
+    {
+      "passcode": 18246479,
+      "name": "Battle Steer",
+      "numbers": [
+        "MRD-064",
+        "MRD-E064",
+        "MRD-EN064"
+      ]
+    },
+    {
+      "passcode": 19066538,
+      "name": "Roaring Ocean Snake",
+      "numbers": [
+        "MRD-020",
+        "MRD-E020",
+        "MRD-EN020"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "MRD-142",
+        "MRD-E142",
+        "MRD-EN142"
+      ]
+    },
+    {
+      "passcode": 20277860,
+      "name": "Armored Zombie",
+      "numbers": [
+        "MRD-013",
+        "MRD-E013",
+        "MRD-EN013"
+      ]
+    },
+    {
+      "passcode": 20394040,
+      "name": "Lava Battleguard",
+      "numbers": [
+        "MRD-115",
+        "MRD-E115",
+        "MRD-EN115"
+      ]
+    },
+    {
+      "passcode": 20436034,
+      "name": "Ring of Magnetism",
+      "numbers": [
+        "MRD-139",
+        "MRD-E139",
+        "MRD-EN139"
+      ]
+    },
+    {
+      "passcode": 21263083,
+      "name": "Pale Beast",
+      "numbers": [
+        "MRD-047",
+        "MRD-E047",
+        "MRD-EN047"
+      ]
+    },
+    {
+      "passcode": 21347810,
+      "name": "Rainbow Flower",
+      "numbers": [
+        "MRD-042",
+        "MRD-E042",
+        "MRD-EN042"
+      ]
+    },
+    {
+      "passcode": 21417692,
+      "name": "Dark Elf",
+      "numbers": [
+        "MRD-113",
+        "MRD-E113",
+        "MRD-EN113"
+      ]
+    },
+    {
+      "passcode": 21817254,
+      "name": "Mega Thunderball",
+      "numbers": [
+        "MRD-044",
+        "MRD-E044",
+        "MRD-EN044"
+      ]
+    },
+    {
+      "passcode": 23771716,
+      "name": "7 Colored Fish",
+      "numbers": [
+        "MRD-098",
+        "MRD-E098",
+        "MRD-EN098"
+      ]
+    },
+    {
+      "passcode": 24611934,
+      "name": "Ryu-Kishin Powered",
+      "numbers": [
+        "MRD-092",
+        "MRD-E092",
+        "MRD-EN092"
+      ]
+    },
+    {
+      "passcode": 24668830,
+      "name": "Germ Infection",
+      "numbers": [
+        "MRD-136",
+        "MRD-E136",
+        "MRD-EN136"
+      ]
+    },
+    {
+      "passcode": 25109950,
+      "name": "The Little Swordsman of Aile",
+      "numbers": [
+        "MRD-085",
+        "MRD-E085",
+        "MRD-EN085"
+      ]
+    },
+    {
+      "passcode": 25655502,
+      "name": "Bickuribox",
+      "numbers": [
+        "MRD-093",
+        "MRD-E093",
+        "MRD-EN093"
+      ]
+    },
+    {
+      "passcode": 25833572,
+      "name": "Gate Guardian",
+      "numbers": [
+        "MRD-000",
+        "MRD-E000",
+        "MRD-EN000"
+      ]
+    },
+    {
+      "passcode": 25880422,
+      "name": "Block Attack",
+      "numbers": [
+        "MRD-133",
+        "MRD-E133",
+        "MRD-EN133"
+      ]
+    },
+    {
+      "passcode": 25955164,
+      "name": "Sanga of the Thunder",
+      "numbers": [
+        "MRD-025",
+        "MRD-E025",
+        "MRD-EN025"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "MRD-069",
+        "MRD-E069",
+        "MRD-EN069"
+      ]
+    },
+    {
+      "passcode": 28470714,
+      "name": "Bladefly",
+      "numbers": [
+        "MRD-118",
+        "MRD-E118",
+        "MRD-EN118"
+      ]
+    },
+    {
+      "passcode": 28546905,
+      "name": "Illusionist Faceless Mage",
+      "numbers": [
+        "MRD-068",
+        "MRD-E068",
+        "MRD-EN068"
+      ]
+    },
+    {
+      "passcode": 28593363,
+      "name": "Deepsea Shark",
+      "numbers": [
+        "MRD-038",
+        "MRD-E038",
+        "MRD-EN038"
+      ]
+    },
+    {
+      "passcode": 28725004,
+      "name": "Tainted Wisdom",
+      "numbers": [
+        "MRD-081",
+        "MRD-E081",
+        "MRD-EN081"
+      ]
+    },
+    {
+      "passcode": 28933734,
+      "name": "Mask of Darkness",
+      "numbers": [
+        "MRD-014",
+        "MRD-E014",
+        "MRD-EN014"
+      ]
+    },
+    {
+      "passcode": 29155212,
+      "name": "Pumpking the King of Ghosts",
+      "numbers": [
+        "MRD-079",
+        "MRD-E079",
+        "MRD-EN079"
+      ]
+    },
+    {
+      "passcode": 29380133,
+      "name": "Yado Karu",
+      "numbers": [
+        "MRD-104",
+        "MRD-E104",
+        "MRD-EN104"
+      ]
+    },
+    {
+      "passcode": 30778711,
+      "name": "Shadow Ghoul",
+      "numbers": [
+        "MRD-090",
+        "MRD-E090",
+        "MRD-EN090"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "MRD-036",
+        "MRD-E036",
+        "MRD-EN036"
+      ]
+    },
+    {
+      "passcode": 31786629,
+      "name": "Thunder Dragon",
+      "numbers": [
+        "MRD-097",
+        "MRD-E097",
+        "MRD-EN097"
+      ]
+    },
+    {
+      "passcode": 32809211,
+      "name": "Jinzo #7",
+      "numbers": [
+        "MRD-035",
+        "MRD-E035",
+        "MRD-EN035"
+      ]
+    },
+    {
+      "passcode": 40240595,
+      "name": "Cocoon of Evolution",
+      "numbers": [
+        "MRD-011",
+        "MRD-E011",
+        "MRD-EN011"
+      ]
+    },
+    {
+      "passcode": 40453765,
+      "name": "Swamp Battleguard",
+      "numbers": [
+        "MRD-063",
+        "MRD-E063",
+        "MRD-EN063"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "MRD-071",
+        "MRD-E071",
+        "MRD-EN071"
+      ]
+    },
+    {
+      "passcode": 41142615,
+      "name": "The Cheerful Coffin",
+      "numbers": [
+        "MRD-059",
+        "MRD-E059",
+        "MRD-EN059"
+      ]
+    },
+    {
+      "passcode": 41392891,
+      "name": "Feral Imp",
+      "numbers": [
+        "MRD-001",
+        "MRD-E001",
+        "MRD-EN001"
+      ]
+    },
+    {
+      "passcode": 41396436,
+      "name": "Blue-Winged Crown",
+      "numbers": [
+        "MRD-122",
+        "MRD-E122",
+        "MRD-EN122"
+      ]
+    },
+    {
+      "passcode": 41420027,
+      "name": "Solemn Judgment",
+      "numbers": [
+        "MRD-127",
+        "MRD-E127",
+        "MRD-EN127"
+      ]
+    },
+    {
+      "passcode": 41462083,
+      "name": "Thousand Dragon",
+      "numbers": [
+        "MRD-143",
+        "MRD-E143",
+        "MRD-EN143"
+      ]
+    },
+    {
+      "passcode": 42431843,
+      "name": "Ancient Brain",
+      "numbers": [
+        "MRD-082",
+        "MRD-E082",
+        "MRD-EN082"
+      ]
+    },
+    {
+      "passcode": 43230671,
+      "name": "Ancient Lizard Warrior",
+      "numbers": [
+        "MRD-050",
+        "MRD-E050",
+        "MRD-EN050"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "MRD-138",
+        "MRD-E138",
+        "MRD-EN138"
+      ]
+    },
+    {
+      "passcode": 46657337,
+      "name": "Muka Muka",
+      "numbers": [
+        "MRD-107",
+        "MRD-E107",
+        "MRD-EN107"
+      ]
+    },
+    {
+      "passcode": 46918794,
+      "name": "Tremendous Fire",
+      "numbers": [
+        "MRD-088",
+        "MRD-E088",
+        "MRD-EN088"
+      ]
+    },
+    {
+      "passcode": 49888191,
+      "name": "Garnecia Elefantis",
+      "numbers": [
+        "MRD-125",
+        "MRD-E125",
+        "MRD-EN125"
+      ]
+    },
+    {
+      "passcode": 50152549,
+      "name": "Paralyzing Potion",
+      "numbers": [
+        "MRD-137",
+        "MRD-E137",
+        "MRD-EN137"
+      ]
+    },
+    {
+      "passcode": 51275027,
+      "name": "The Unhappy Maiden",
+      "numbers": [
+        "MRD-134",
+        "MRD-E134",
+        "MRD-EN134"
+      ]
+    },
+    {
+      "passcode": 51371017,
+      "name": "Princess of Tsurugi",
+      "numbers": [
+        "MRD-086",
+        "MRD-E086",
+        "MRD-EN086"
+      ]
+    },
+    {
+      "passcode": 51828629,
+      "name": "Giltia the D. Knight",
+      "numbers": [
+        "MRD-094",
+        "MRD-E094",
+        "MRD-EN094"
+      ]
+    },
+    {
+      "passcode": 52097679,
+      "name": "Shield & Sword",
+      "numbers": [
+        "MRD-131",
+        "MRD-E131",
+        "MRD-EN131"
+      ]
+    },
+    {
+      "passcode": 54752875,
+      "name": "Twin-Headed Thunder Dragon",
+      "numbers": [
+        "MRD-120",
+        "MRD-E120",
+        "MRD-EN120"
+      ]
+    },
+    {
+      "passcode": 55763552,
+      "name": "Dragon Piper",
+      "numbers": [
+        "MRD-067",
+        "MRD-E067",
+        "MRD-EN067"
+      ]
+    },
+    {
+      "passcode": 55784832,
+      "name": "Morinphen",
+      "numbers": [
+        "MRD-043",
+        "MRD-E043",
+        "MRD-EN043"
+      ]
+    },
+    {
+      "passcode": 55875323,
+      "name": "Electric Lizard",
+      "numbers": [
+        "MRD-048",
+        "MRD-E048",
+        "MRD-EN048"
+      ]
+    },
+    {
+      "passcode": 56830749,
+      "name": "Share the Pain",
+      "numbers": [
+        "MRD-140",
+        "MRD-E140",
+        "MRD-EN140"
+      ]
+    },
+    {
+      "passcode": 56907389,
+      "name": "Musician King",
+      "numbers": [
+        "MRD-103",
+        "MRD-E103",
+        "MRD-EN103"
+      ]
+    },
+    {
+      "passcode": 58192742,
+      "name": "Petit Moth",
+      "numbers": [
+        "MRD-023",
+        "MRD-E023",
+        "MRD-EN023"
+      ]
+    },
+    {
+      "passcode": 58314394,
+      "name": "Ground Attacker Bugroth",
+      "numbers": [
+        "MRD-022",
+        "MRD-E022",
+        "MRD-EN022"
+      ]
+    },
+    {
+      "passcode": 58861941,
+      "name": "Ooguchi",
+      "numbers": [
+        "MRD-032",
+        "MRD-E032",
+        "MRD-EN032"
+      ]
+    },
+    {
+      "passcode": 60862676,
+      "name": "Flame Cerebrus",
+      "numbers": [
+        "MRD-111",
+        "MRD-E111",
+        "MRD-EN111"
+      ]
+    },
+    {
+      "passcode": 62340868,
+      "name": "Kazejin",
+      "numbers": [
+        "MRD-026",
+        "MRD-E026",
+        "MRD-EN026"
+      ]
+    },
+    {
+      "passcode": 64501875,
+      "name": "Hibikime",
+      "numbers": [
+        "MRD-055",
+        "MRD-E055",
+        "MRD-EN055"
+      ]
+    },
+    {
+      "passcode": 66602787,
+      "name": "Saggi the Dark Clown",
+      "numbers": [
+        "MRD-066",
+        "MRD-E066",
+        "MRD-EN066"
+      ]
+    },
+    {
+      "passcode": 67494157,
+      "name": "Crawling Dragon",
+      "numbers": [
+        "MRD-012",
+        "MRD-E012",
+        "MRD-EN012"
+      ]
+    },
+    {
+      "passcode": 67629977,
+      "name": "Hoshiningen",
+      "numbers": [
+        "MRD-102",
+        "MRD-E102",
+        "MRD-EN102"
+      ]
+    },
+    {
+      "passcode": 68516705,
+      "name": "Mystic Horseman",
+      "numbers": [
+        "MRD-076",
+        "MRD-E076",
+        "MRD-EN076"
+      ]
+    },
+    {
+      "passcode": 68658728,
+      "name": "Little Chimera",
+      "numbers": [
+        "MRD-117",
+        "MRD-E117",
+        "MRD-EN117"
+      ]
+    },
+    {
+      "passcode": 68846917,
+      "name": "Rock Ogre Grotto #1",
+      "numbers": [
+        "MRD-004",
+        "MRD-E004",
+        "MRD-EN004"
+      ]
+    },
+    {
+      "passcode": 69455834,
+      "name": "King of Yamimakai",
+      "numbers": [
+        "MRD-074",
+        "MRD-E074",
+        "MRD-EN074"
+      ]
+    },
+    {
+      "passcode": 69572024,
+      "name": "Tongyo",
+      "numbers": [
+        "MRD-045",
+        "MRD-E045",
+        "MRD-EN045"
+      ]
+    },
+    {
+      "passcode": 70138455,
+      "name": "Blast Juggler",
+      "numbers": [
+        "MRD-034",
+        "MRD-E034",
+        "MRD-EN034"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "MRD-003",
+        "MRD-E003",
+        "MRD-EN003"
+      ]
+    },
+    {
+      "passcode": 71107816,
+      "name": "The Bistro Butcher",
+      "numbers": [
+        "MRD-108",
+        "MRD-E108",
+        "MRD-EN108"
+      ]
+    },
+    {
+      "passcode": 71625222,
+      "name": "Time Wizard",
+      "numbers": [
+        "MRD-065",
+        "MRD-E065",
+        "MRD-EN065"
+      ]
+    },
+    {
+      "passcode": 73481154,
+      "name": "Destroyer Golem",
+      "numbers": [
+        "MRD-040",
+        "MRD-E040",
+        "MRD-EN040"
+      ]
+    },
+    {
+      "passcode": 74703140,
+      "name": "Punished Eagle",
+      "numbers": [
+        "MRD-100",
+        "MRD-E100",
+        "MRD-EN100"
+      ]
+    },
+    {
+      "passcode": 76446915,
+      "name": "Disk Magician",
+      "numbers": [
+        "MRD-053",
+        "MRD-E053",
+        "MRD-EN053"
+      ]
+    },
+    {
+      "passcode": 76812113,
+      "name": "Harpie Lady",
+      "numbers": [
+        "MRD-008",
+        "MRD-E008",
+        "MRD-EN008"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "MRD-128",
+        "MRD-E128",
+        "MRD-EN128"
+      ]
+    },
+    {
+      "passcode": 78010363,
+      "name": "Witch of the Black Forest",
+      "numbers": [
+        "MRD-116",
+        "MRD-E116",
+        "MRD-EN116"
+      ]
+    },
+    {
+      "passcode": 78780140,
+      "name": "Trent",
+      "numbers": [
+        "MRD-052",
+        "MRD-E052",
+        "MRD-EN052"
+      ]
+    },
+    {
+      "passcode": 79759861,
+      "name": "Tribute to The Doomed",
+      "numbers": [
+        "MRD-057",
+        "MRD-E057",
+        "MRD-EN057"
+      ]
+    },
+    {
+      "passcode": 80141480,
+      "name": "Hunter Spider",
+      "numbers": [
+        "MRD-049",
+        "MRD-E049",
+        "MRD-EN049"
+      ]
+    },
+    {
+      "passcode": 80741828,
+      "name": "Witch's Apprentice",
+      "numbers": [
+        "MRD-121",
+        "MRD-E121",
+        "MRD-EN121"
+      ]
+    },
+    {
+      "passcode": 81386177,
+      "name": "Bottom Dweller",
+      "numbers": [
+        "MRD-039",
+        "MRD-E039",
+        "MRD-EN039"
+      ]
+    },
+    {
+      "passcode": 81480460,
+      "name": "Barrel Dragon",
+      "numbers": [
+        "MRD-126",
+        "MRD-E126",
+        "MRD-EN126"
+      ]
+    },
+    {
+      "passcode": 83225447,
+      "name": "Stim-Pack",
+      "numbers": [
+        "MRD-141",
+        "MRD-E141",
+        "MRD-EN141"
+      ]
+    },
+    {
+      "passcode": 84926738,
+      "name": "The Immortal of Thunder",
+      "numbers": [
+        "MRD-099",
+        "MRD-E099",
+        "MRD-EN099"
+      ]
+    },
+    {
+      "passcode": 86088138,
+      "name": "Ocubeam",
+      "numbers": [
+        "MRD-030",
+        "MRD-E030",
+        "MRD-EN030"
+      ]
+    },
+    {
+      "passcode": 87322377,
+      "name": "Launcher Spider",
+      "numbers": [
+        "MRD-095",
+        "MRD-E095",
+        "MRD-EN095"
+      ]
+    },
+    {
+      "passcode": 87564352,
+      "name": "Blackland Fire Dragon",
+      "numbers": [
+        "MRD-062",
+        "MRD-E062",
+        "MRD-EN062"
+      ]
+    },
+    {
+      "passcode": 87756343,
+      "name": "Larvae Moth",
+      "numbers": [
+        "MRD-007",
+        "MRD-E007",
+        "MRD-EN007"
+      ]
+    },
+    {
+      "passcode": 87796900,
+      "name": "Winged Dragon, Guardian of the Fortress #1",
+      "numbers": [
+        "MRD-002",
+        "MRD-E002",
+        "MRD-EN002"
+      ]
+    },
+    {
+      "passcode": 88279736,
+      "name": "Robbin' Goblin",
+      "numbers": [
+        "MRD-135",
+        "MRD-E135",
+        "MRD-EN135"
+      ]
+    },
+    {
+      "passcode": 88819587,
+      "name": "Baby Dragon",
+      "numbers": [
+        "MRD-061",
+        "MRD-E061",
+        "MRD-EN061"
+      ]
+    },
+    {
+      "passcode": 88979991,
+      "name": "Killer Needle",
+      "numbers": [
+        "MRD-006",
+        "MRD-E006",
+        "MRD-EN006"
+      ]
+    },
+    {
+      "passcode": 89112729,
+      "name": "Cyber Saurus",
+      "numbers": [
+        "MRD-105",
+        "MRD-E105",
+        "MRD-EN105"
+      ]
+    },
+    {
+      "passcode": 89272878,
+      "name": "Guardian of the Labyrinth",
+      "numbers": [
+        "MRD-083",
+        "MRD-E083",
+        "MRD-EN083"
+      ]
+    },
+    {
+      "passcode": 90219263,
+      "name": "Elegant Egotist",
+      "numbers": [
+        "MRD-024",
+        "MRD-E024",
+        "MRD-EN024"
+      ]
+    },
+    {
+      "passcode": 93221206,
+      "name": "Ancient Elf",
+      "numbers": [
+        "MRD-037",
+        "MRD-E037",
+        "MRD-EN037"
+      ]
+    },
+    {
+      "passcode": 93889755,
+      "name": "Crass Clown",
+      "numbers": [
+        "MRD-078",
+        "MRD-E078",
+        "MRD-EN078"
+      ]
+    },
+    {
+      "passcode": 93900406,
+      "name": "Mushroom Man #2",
+      "numbers": [
+        "MRD-114",
+        "MRD-E114",
+        "MRD-EN114"
+      ]
+    },
+    {
+      "passcode": 94773007,
+      "name": "Jirai Gumo",
+      "numbers": [
+        "MRD-089",
+        "MRD-E089",
+        "MRD-EN089"
+      ]
+    },
+    {
+      "passcode": 94905343,
+      "name": "Rabid Horseman",
+      "numbers": [
+        "MRD-077",
+        "MRD-E077",
+        "MRD-EN077"
+      ]
+    },
+    {
+      "passcode": 95727991,
+      "name": "Catapult Turtle",
+      "numbers": [
+        "MRD-075",
+        "MRD-E075",
+        "MRD-EN075"
+      ]
+    },
+    {
+      "passcode": 98049915,
+      "name": "Mystic Lamp",
+      "numbers": [
+        "MRD-028",
+        "MRD-E028",
+        "MRD-EN028"
+      ]
+    },
+    {
+      "passcode": 98069388,
+      "name": "Horn of Heaven",
+      "numbers": [
+        "MRD-130",
+        "MRD-E130",
+        "MRD-EN130"
+      ]
+    },
+    {
+      "passcode": 98434877,
+      "name": "Suijin",
+      "numbers": [
+        "MRD-027",
+        "MRD-E027",
+        "MRD-EN027"
+      ]
+    },
+    {
+      "passcode": 98495314,
+      "name": "Sword of Deep-Seated",
+      "numbers": [
+        "MRD-132",
+        "MRD-E132",
+        "MRD-EN132"
+      ]
+    },
+    {
+      "passcode": 99551425,
+      "name": "Labyrinth Tank",
+      "numbers": [
+        "MRD-091",
+        "MRD-E091",
+        "MRD-EN091"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Metal Raiders'; printings from the YGOPRODeck bulk dump."
+}

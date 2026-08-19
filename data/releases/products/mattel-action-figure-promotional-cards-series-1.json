@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "mattel-action-figure-promotional-cards-series-1",
+  "code": "MF01",
+  "name": "Mattel Action Figure promotional cards: Series 1",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-07-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 61204971,
+      "name": "Elemental HERO Thunder Giant",
+      "numbers": [
+        "MF01-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Mattel Action Figure promotional cards: Series 1'; printings from the YGOPRODeck bulk dump."
+}

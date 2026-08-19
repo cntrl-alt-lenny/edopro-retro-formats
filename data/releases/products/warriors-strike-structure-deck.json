@@ -1,0 +1,314 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "warriors-strike-structure-deck",
+  "code": "SDWS",
+  "name": "Warriors' Strike Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-10-27",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-10-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-10-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2460565,
+      "name": "Marauding Captain",
+      "numbers": [
+        "SDWS-EN007"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SDWS-EN023"
+      ]
+    },
+    {
+      "passcode": 7572887,
+      "name": "D.D. Warrior Lady",
+      "numbers": [
+        "SDWS-EN009"
+      ]
+    },
+    {
+      "passcode": 16984449,
+      "name": "Blazewing Butterfly",
+      "numbers": [
+        "SDWS-EN012"
+      ]
+    },
+    {
+      "passcode": 19041767,
+      "name": "Gemini Summoner",
+      "numbers": [
+        "SDWS-EN011"
+      ]
+    },
+    {
+      "passcode": 31423101,
+      "name": "Divine Sword - Phoenix Blade",
+      "numbers": [
+        "SDWS-EN027"
+      ]
+    },
+    {
+      "passcode": 32271987,
+      "name": "Featherizer",
+      "numbers": [
+        "SDWS-EN003"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "SDWS-EN025"
+      ]
+    },
+    {
+      "passcode": 35539880,
+      "name": "Birthright",
+      "numbers": [
+        "SDWS-EN037"
+      ]
+    },
+    {
+      "passcode": 37043180,
+      "name": "D.D. Warrior",
+      "numbers": [
+        "SDWS-EN013"
+      ]
+    },
+    {
+      "passcode": 37390589,
+      "name": "Kunai with Chain",
+      "numbers": [
+        "SDWS-EN033"
+      ]
+    },
+    {
+      "passcode": 37520316,
+      "name": "Mind Control",
+      "numbers": [
+        "SDWS-EN018"
+      ]
+    },
+    {
+      "passcode": 42534368,
+      "name": "Silent Doom",
+      "numbers": [
+        "SDWS-EN020"
+      ]
+    },
+    {
+      "passcode": 43422537,
+      "name": "Double Summon",
+      "numbers": [
+        "SDWS-EN028"
+      ]
+    },
+    {
+      "passcode": 44947065,
+      "name": "Burden of the Mighty",
+      "numbers": [
+        "SDWS-EN019"
+      ]
+    },
+    {
+      "passcode": 49681811,
+      "name": "Freed the Matchless General",
+      "numbers": [
+        "SDWS-EN006"
+      ]
+    },
+    {
+      "passcode": 52105192,
+      "name": "Hidden Armory",
+      "numbers": [
+        "SDWS-EN021"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "SDWS-EN034"
+      ]
+    },
+    {
+      "passcode": 58775978,
+      "name": "Nightmare's Steelcage",
+      "numbers": [
+        "SDWS-EN022"
+      ]
+    },
+    {
+      "passcode": 61127349,
+      "name": "Big Bang Shot",
+      "numbers": [
+        "SDWS-EN026"
+      ]
+    },
+    {
+      "passcode": 62271284,
+      "name": "Justi-Break",
+      "numbers": [
+        "SDWS-EN036"
+      ]
+    },
+    {
+      "passcode": 67045174,
+      "name": "Gemini Trap Hole",
+      "numbers": [
+        "SDWS-EN038"
+      ]
+    },
+    {
+      "passcode": 68366996,
+      "name": "Gemini Soldier",
+      "numbers": [
+        "SDWS-EN004"
+      ]
+    },
+    {
+      "passcode": 69488544,
+      "name": "Phoenix Gearfried",
+      "numbers": [
+        "SDWS-EN001"
+      ]
+    },
+    {
+      "passcode": 69954399,
+      "name": "Ekibyo Drakmord",
+      "numbers": [
+        "SDWS-EN024"
+      ]
+    },
+    {
+      "passcode": 73567374,
+      "name": "Unleash Your Power!",
+      "numbers": [
+        "SDWS-EN031"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "SDWS-EN008"
+      ]
+    },
+    {
+      "passcode": 77538567,
+      "name": "Dark Bribe",
+      "numbers": [
+        "SDWS-EN032"
+      ]
+    },
+    {
+      "passcode": 78794994,
+      "name": "Symbols of Duty",
+      "numbers": [
+        "SDWS-EN029"
+      ]
+    },
+    {
+      "passcode": 83269557,
+      "name": "Dark Valkyria",
+      "numbers": [
+        "SDWS-EN016"
+      ]
+    },
+    {
+      "passcode": 85087012,
+      "name": "Card Trooper",
+      "numbers": [
+        "SDWS-EN010"
+      ]
+    },
+    {
+      "passcode": 89529919,
+      "name": "Field-Commander Rahz",
+      "numbers": [
+        "SDWS-EN015"
+      ]
+    },
+    {
+      "passcode": 90642597,
+      "name": "Future Samurai",
+      "numbers": [
+        "SDWS-EN014"
+      ]
+    },
+    {
+      "passcode": 92924317,
+      "name": "Soul Resurrection",
+      "numbers": [
+        "SDWS-EN035"
+      ]
+    },
+    {
+      "passcode": 93187568,
+      "name": "Spell Striker",
+      "numbers": [
+        "SDWS-EN005"
+      ]
+    },
+    {
+      "passcode": 95750695,
+      "name": "Supervise",
+      "numbers": [
+        "SDWS-EN017"
+      ]
+    },
+    {
+      "passcode": 96765646,
+      "name": "Swing of Memories",
+      "numbers": [
+        "SDWS-EN030"
+      ]
+    },
+    {
+      "passcode": 96872283,
+      "name": "Evocator Chevalier",
+      "numbers": [
+        "SDWS-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Warriors' Strike Structure Deck\"; printings from the YGOPRODeck bulk dump."
+}

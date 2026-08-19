@@ -1,0 +1,783 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "magician-s-force",
+  "code": "MFC",
+  "name": "Magician's Force",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-10-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2111707,
+      "name": "XY-Dragon Cannon",
+      "numbers": [
+        "MFC-051"
+      ]
+    },
+    {
+      "passcode": 2903036,
+      "name": "Tribute Doll",
+      "numbers": [
+        "MFC-039"
+      ]
+    },
+    {
+      "passcode": 6390406,
+      "name": "Emblem of Dragon Destroyer",
+      "numbers": [
+        "MFC-090"
+      ]
+    },
+    {
+      "passcode": 6967870,
+      "name": "Dark Scorpion - Cliff the Trap Remover",
+      "numbers": [
+        "MFC-078"
+      ]
+    },
+    {
+      "passcode": 7180418,
+      "name": "Armor Exe",
+      "numbers": [
+        "MFC-075"
+      ]
+    },
+    {
+      "passcode": 7512044,
+      "name": "Gather Your Mind",
+      "numbers": [
+        "MFC-087"
+      ]
+    },
+    {
+      "passcode": 7625614,
+      "name": "Raregold Armor",
+      "numbers": [
+        "MFC-036"
+      ]
+    },
+    {
+      "passcode": 7802006,
+      "name": "Magical Plant Mandragola",
+      "numbers": [
+        "MFC-072"
+      ]
+    },
+    {
+      "passcode": 8034697,
+      "name": "Magical Marionette",
+      "numbers": [
+        "MFC-069"
+      ]
+    },
+    {
+      "passcode": 8634636,
+      "name": "Dark Cat with White Tail",
+      "numbers": [
+        "MFC-083"
+      ]
+    },
+    {
+      "passcode": 8842266,
+      "name": "Poison of the Old Man",
+      "numbers": [
+        "MFC-033"
+      ]
+    },
+    {
+      "passcode": 8964854,
+      "name": "Combination Attack",
+      "numbers": [
+        "MFC-030"
+      ]
+    },
+    {
+      "passcode": 9156135,
+      "name": "Apprentice Magician",
+      "numbers": [
+        "MFC-066"
+      ]
+    },
+    {
+      "passcode": 9786492,
+      "name": "White Dragon Ritual",
+      "numbers": [
+        "MFC-027"
+      ]
+    },
+    {
+      "passcode": 10209545,
+      "name": "Decayed Commander",
+      "numbers": [
+        "MFC-010"
+      ]
+    },
+    {
+      "passcode": 10809984,
+      "name": "Great Phantom Thief",
+      "numbers": [
+        "MFC-024"
+      ]
+    },
+    {
+      "passcode": 10979723,
+      "name": "Amazoness Tiger",
+      "numbers": [
+        "MFC-063"
+      ]
+    },
+    {
+      "passcode": 11021521,
+      "name": "Neko Mane King",
+      "numbers": [
+        "MFC-021"
+      ]
+    },
+    {
+      "passcode": 11091375,
+      "name": "Luster Dragon",
+      "numbers": [
+        "MFC-058"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "MFC-007"
+      ]
+    },
+    {
+      "passcode": 11743119,
+      "name": "Union Rider",
+      "numbers": [
+        "MFC-018"
+      ]
+    },
+    {
+      "passcode": 11813953,
+      "name": "Great Angus",
+      "numbers": [
+        "MFC-055"
+      ]
+    },
+    {
+      "passcode": 12143771,
+      "name": "People Running About",
+      "numbers": [
+        "MFC-001"
+      ]
+    },
+    {
+      "passcode": 12965761,
+      "name": "Des Dendle",
+      "numbers": [
+        "MFC-015"
+      ]
+    },
+    {
+      "passcode": 19086954,
+      "name": "Second Goblin",
+      "numbers": [
+        "MFC-013"
+      ]
+    },
+    {
+      "passcode": 20727787,
+      "name": "Disarmament",
+      "numbers": [
+        "MFC-102"
+      ]
+    },
+    {
+      "passcode": 21840375,
+      "name": "Hidden Spellbook",
+      "numbers": [
+        "MFC-099"
+      ]
+    },
+    {
+      "passcode": 24096228,
+      "name": "Double Spell",
+      "numbers": [
+        "MFC-106"
+      ]
+    },
+    {
+      "passcode": 25119460,
+      "name": "YZ-Tank Dragon",
+      "numbers": [
+        "MFC-054"
+      ]
+    },
+    {
+      "passcode": 26931058,
+      "name": "Formation Union",
+      "numbers": [
+        "MFC-049"
+      ]
+    },
+    {
+      "passcode": 27053506,
+      "name": "Secret Barrel",
+      "numbers": [
+        "MFC-046"
+      ]
+    },
+    {
+      "passcode": 32062913,
+      "name": "Mega Ton Magical Cannon",
+      "numbers": [
+        "MFC-094"
+      ]
+    },
+    {
+      "passcode": 32240937,
+      "name": "Ultimate Obedient Fiend",
+      "numbers": [
+        "MFC-082"
+      ]
+    },
+    {
+      "passcode": 32362575,
+      "name": "Magical Merchant",
+      "numbers": [
+        "MFC-079"
+      ]
+    },
+    {
+      "passcode": 33114323,
+      "name": "Metalsilver Armor",
+      "numbers": [
+        "MFC-037"
+      ]
+    },
+    {
+      "passcode": 33184167,
+      "name": "Tribe-Infecting Virus",
+      "numbers": [
+        "MFC-076"
+      ]
+    },
+    {
+      "passcode": 33784505,
+      "name": "Jar Robber",
+      "numbers": [
+        "MFC-091"
+      ]
+    },
+    {
+      "passcode": 34029630,
+      "name": "Pitch-Black Power Stone",
+      "numbers": [
+        "MFC-095"
+      ]
+    },
+    {
+      "passcode": 34206604,
+      "name": "Magical Scientist",
+      "numbers": [
+        "MFC-073"
+      ]
+    },
+    {
+      "passcode": 34236961,
+      "name": "Ante",
+      "numbers": [
+        "MFC-034"
+      ]
+    },
+    {
+      "passcode": 34906152,
+      "name": "Mass Driver",
+      "numbers": [
+        "MFC-088"
+      ]
+    },
+    {
+      "passcode": 35059553,
+      "name": "Kaiser Colosseum",
+      "numbers": [
+        "MFC-031"
+      ]
+    },
+    {
+      "passcode": 35429292,
+      "name": "Pixie Knight",
+      "numbers": [
+        "MFC-070"
+      ]
+    },
+    {
+      "passcode": 38033121,
+      "name": "Dark Magician Girl",
+      "numbers": [
+        "MFC-000"
+      ]
+    },
+    {
+      "passcode": 38275183,
+      "name": "Spell Shield Type-8",
+      "numbers": [
+        "MFC-043"
+      ]
+    },
+    {
+      "passcode": 38992735,
+      "name": "Wave-Motion Cannon",
+      "numbers": [
+        "MFC-040"
+      ]
+    },
+    {
+      "passcode": 45141844,
+      "name": "Old Vindictive Magician",
+      "numbers": [
+        "MFC-067"
+      ]
+    },
+    {
+      "passcode": 46181000,
+      "name": "Frontline Base",
+      "numbers": [
+        "MFC-028"
+      ]
+    },
+    {
+      "passcode": 46303688,
+      "name": "Roulette Barrel",
+      "numbers": [
+        "MFC-025"
+      ]
+    },
+    {
+      "passcode": 46363422,
+      "name": "Skilled White Magician",
+      "numbers": [
+        "MFC-064"
+      ]
+    },
+    {
+      "passcode": 46571052,
+      "name": "Vampiric Orchis",
+      "numbers": [
+        "MFC-014"
+      ]
+    },
+    {
+      "passcode": 47025270,
+      "name": "Helping Robo for Combat",
+      "numbers": [
+        "MFC-022"
+      ]
+    },
+    {
+      "passcode": 47415292,
+      "name": "Pitch-Dark Dragon",
+      "numbers": [
+        "MFC-008"
+      ]
+    },
+    {
+      "passcode": 47480070,
+      "name": "Amazoness Paladin",
+      "numbers": [
+        "MFC-059"
+      ]
+    },
+    {
+      "passcode": 47693640,
+      "name": "Zombie Tiger",
+      "numbers": [
+        "MFC-011"
+      ]
+    },
+    {
+      "passcode": 48148828,
+      "name": "D.D. Crazy Beast",
+      "numbers": [
+        "MFC-019"
+      ]
+    },
+    {
+      "passcode": 48202661,
+      "name": "Aitsu",
+      "numbers": [
+        "MFC-056"
+      ]
+    },
+    {
+      "passcode": 53112492,
+      "name": "Anti-Spell",
+      "numbers": [
+        "MFC-103"
+      ]
+    },
+    {
+      "passcode": 55821894,
+      "name": "Amazoness Fighter",
+      "numbers": [
+        "MFC-060"
+      ]
+    },
+    {
+      "passcode": 58538870,
+      "name": "Oppressed People",
+      "numbers": [
+        "MFC-002"
+      ]
+    },
+    {
+      "passcode": 59364406,
+      "name": "Burning Beast",
+      "numbers": [
+        "MFC-016"
+      ]
+    },
+    {
+      "passcode": 60391791,
+      "name": "Senri Eye",
+      "numbers": [
+        "MFC-089"
+      ]
+    },
+    {
+      "passcode": 60519422,
+      "name": "Kishido Spirit",
+      "numbers": [
+        "MFC-038"
+      ]
+    },
+    {
+      "passcode": 61127349,
+      "name": "Big Bang Shot",
+      "numbers": [
+        "MFC-086"
+      ]
+    },
+    {
+      "passcode": 62325062,
+      "name": "Adhesion Trap Hole",
+      "numbers": [
+        "MFC-050"
+      ]
+    },
+    {
+      "passcode": 62651957,
+      "name": "X-Head Cannon",
+      "numbers": [
+        "MFC-004"
+      ]
+    },
+    {
+      "passcode": 63442604,
+      "name": "Physical Double",
+      "numbers": [
+        "MFC-047"
+      ]
+    },
+    {
+      "passcode": 64274292,
+      "name": "Meteorain",
+      "numbers": [
+        "MFC-044"
+      ]
+    },
+    {
+      "passcode": 64500000,
+      "name": "Z-Metal Tank",
+      "numbers": [
+        "MFC-006"
+      ]
+    },
+    {
+      "passcode": 65396880,
+      "name": "Huge Revolution",
+      "numbers": [
+        "MFC-041"
+      ]
+    },
+    {
+      "passcode": 65622692,
+      "name": "Y-Dragon Head",
+      "numbers": [
+        "MFC-005"
+      ]
+    },
+    {
+      "passcode": 67987611,
+      "name": "Amazoness Archers",
+      "numbers": [
+        "MFC-096"
+      ]
+    },
+    {
+      "passcode": 68057622,
+      "name": "Continuous Destruction Punch",
+      "numbers": [
+        "MFC-085"
+      ]
+    },
+    {
+      "passcode": 68334074,
+      "name": "Miracle Restoring",
+      "numbers": [
+        "MFC-100"
+      ]
+    },
+    {
+      "passcode": 69279219,
+      "name": "My Body as a Shield",
+      "numbers": [
+        "MFC-092"
+      ]
+    },
+    {
+      "passcode": 69456283,
+      "name": "Koitsu",
+      "numbers": [
+        "MFC-080"
+      ]
+    },
+    {
+      "passcode": 69579761,
+      "name": "Des Koala",
+      "numbers": [
+        "MFC-077"
+      ]
+    },
+    {
+      "passcode": 70231910,
+      "name": "Dark Core",
+      "numbers": [
+        "MFC-035"
+      ]
+    },
+    {
+      "passcode": 70791313,
+      "name": "Royal Magical Library",
+      "numbers": [
+        "MFC-074"
+      ]
+    },
+    {
+      "passcode": 71413901,
+      "name": "Breaker the Magical Warrior",
+      "numbers": [
+        "MFC-071"
+      ]
+    },
+    {
+      "passcode": 71453557,
+      "name": "Autonomous Action Unit",
+      "numbers": [
+        "MFC-032"
+      ]
+    },
+    {
+      "passcode": 72575145,
+      "name": "Demotion",
+      "numbers": [
+        "MFC-029"
+      ]
+    },
+    {
+      "passcode": 72630549,
+      "name": "Chaos Command Magician",
+      "numbers": [
+        "MFC-068"
+      ]
+    },
+    {
+      "passcode": 73398797,
+      "name": "Paladin of White Dragon",
+      "numbers": [
+        "MFC-026"
+      ]
+    },
+    {
+      "passcode": 73414375,
+      "name": "Dimension Jar",
+      "numbers": [
+        "MFC-023"
+      ]
+    },
+    {
+      "passcode": 73574678,
+      "name": "Amazoness Blowpiper",
+      "numbers": [
+        "MFC-062"
+      ]
+    },
+    {
+      "passcode": 73698349,
+      "name": "Giant Orc",
+      "numbers": [
+        "MFC-012"
+      ]
+    },
+    {
+      "passcode": 73752131,
+      "name": "Skilled Dark Magician",
+      "numbers": [
+        "MFC-065"
+      ]
+    },
+    {
+      "passcode": 80193355,
+      "name": "Dramatic Rescue",
+      "numbers": [
+        "MFC-097"
+      ]
+    },
+    {
+      "passcode": 81325903,
+      "name": "Amazoness Spellcaster",
+      "numbers": [
+        "MFC-084"
+      ]
+    },
+    {
+      "passcode": 84636823,
+      "name": "Spell Canceller",
+      "numbers": [
+        "MFC-020"
+      ]
+    },
+    {
+      "passcode": 84696266,
+      "name": "Sonic Duck",
+      "numbers": [
+        "MFC-057"
+      ]
+    },
+    {
+      "passcode": 84814897,
+      "name": "Kiryu",
+      "numbers": [
+        "MFC-009"
+      ]
+    },
+    {
+      "passcode": 85359414,
+      "name": "Freezing Beast",
+      "numbers": [
+        "MFC-017"
+      ]
+    },
+    {
+      "passcode": 85936485,
+      "name": "United Resistance",
+      "numbers": [
+        "MFC-003"
+      ]
+    },
+    {
+      "passcode": 87880531,
+      "name": "Diffusion Wave-Motion",
+      "numbers": [
+        "MFC-107"
+      ]
+    },
+    {
+      "passcode": 90669991,
+      "name": "Pineapple Blast",
+      "numbers": [
+        "MFC-045"
+      ]
+    },
+    {
+      "passcode": 90846359,
+      "name": "Rivalry of Warlords",
+      "numbers": [
+        "MFC-048"
+      ]
+    },
+    {
+      "passcode": 91781589,
+      "name": "Thunder of Ruler",
+      "numbers": [
+        "MFC-042"
+      ]
+    },
+    {
+      "passcode": 91998119,
+      "name": "XYZ-Dragon Cannon",
+      "numbers": [
+        "MFC-052"
+      ]
+    },
+    {
+      "passcode": 94004268,
+      "name": "Amazoness Swords Woman",
+      "numbers": [
+        "MFC-061"
+      ]
+    },
+    {
+      "passcode": 94739788,
+      "name": "Remove Brainwashing",
+      "numbers": [
+        "MFC-101"
+      ]
+    },
+    {
+      "passcode": 95451366,
+      "name": "Exhausting Spell",
+      "numbers": [
+        "MFC-098"
+      ]
+    },
+    {
+      "passcode": 95841282,
+      "name": "Cat's Ear Tribe",
+      "numbers": [
+        "MFC-081"
+      ]
+    },
+    {
+      "passcode": 96677818,
+      "name": "Spellbook Organization",
+      "numbers": [
+        "MFC-093"
+      ]
+    },
+    {
+      "passcode": 98502113,
+      "name": "Dark Paladin",
+      "numbers": [
+        "MFC-105"
+      ]
+    },
+    {
+      "passcode": 99517131,
+      "name": "The Spell Absorbing Life",
+      "numbers": [
+        "MFC-104"
+      ]
+    },
+    {
+      "passcode": 99724761,
+      "name": "XZ-Tank Cannon",
+      "numbers": [
+        "MFC-053"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Magician's Force\"; printings from the YGOPRODeck bulk dump."
+}

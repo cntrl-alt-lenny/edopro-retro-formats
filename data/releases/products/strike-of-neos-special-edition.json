@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "strike-of-neos-special-edition",
+  "code": "STON",
+  "name": "Strike of Neos: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-03-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1546123,
+      "name": "Cyber End Dragon",
+      "numbers": [
+        "STON-ENSE1"
+      ]
+    },
+    {
+      "passcode": 55713623,
+      "name": "Shrink",
+      "numbers": [
+        "STON-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Strike of Neos: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-world-championship-tournament-2004-promotional-cards",
+  "code": "WC4",
+  "name": "Yu-Gi-Oh! World Championship Tournament 2004 promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-02-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-03-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 8131171,
+      "name": "Sinister Serpent",
+      "numbers": [
+        "WC4-E002"
+      ]
+    },
+    {
+      "passcode": 18144506,
+      "name": "Harpie's Feather Duster",
+      "numbers": [
+        "WC4-E003"
+      ]
+    },
+    {
+      "passcode": 45425051,
+      "name": "Fairy King Truesdale",
+      "numbers": [
+        "WC4-001"
+      ]
+    },
+    {
+      "passcode": 75347539,
+      "name": "Valkyrion the Magna Warrior",
+      "numbers": [
+        "WC4-E001"
+      ]
+    },
+    {
+      "passcode": 78636495,
+      "name": "Slate Warrior",
+      "numbers": [
+        "WC4-003"
+      ]
+    },
+    {
+      "passcode": 79853073,
+      "name": "Cipher Soldier",
+      "numbers": [
+        "WC4-002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! World Championship Tournament 2004 promotional cards'; printings from the YGOPRODeck bulk dump."
+}

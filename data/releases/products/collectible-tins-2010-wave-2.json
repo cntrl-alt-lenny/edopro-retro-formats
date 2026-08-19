@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2010-wave-2",
+  "code": "CT07",
+  "name": "Collectible Tins 2010 Wave 2",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-11-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 13893596,
+      "name": "Exodius the Ultimate Forbidden Lord",
+      "numbers": [
+        "CT07-EN024"
+      ]
+    },
+    {
+      "passcode": 21208154,
+      "name": "The Wicked Avatar",
+      "numbers": [
+        "CT07-EN023"
+      ]
+    },
+    {
+      "passcode": 24696097,
+      "name": "Shooting Star Dragon",
+      "numbers": [
+        "CT07-EN004"
+      ]
+    },
+    {
+      "passcode": 37195861,
+      "name": "Elemental HERO Ocean",
+      "numbers": [
+        "CT07-EN018"
+      ]
+    },
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "CT07-EN021"
+      ]
+    },
+    {
+      "passcode": 64681432,
+      "name": "Gandora the Dragon of Destruction",
+      "numbers": [
+        "CT07-EN020"
+      ]
+    },
+    {
+      "passcode": 66973070,
+      "name": "Dreadscythe Harvester",
+      "numbers": [
+        "CT07-EN019"
+      ]
+    },
+    {
+      "passcode": 70902743,
+      "name": "Red Dragon Archfiend",
+      "numbers": [
+        "CT07-EN025"
+      ]
+    },
+    {
+      "passcode": 80304126,
+      "name": "Magician's Valkyria",
+      "numbers": [
+        "CT07-EN022"
+      ]
+    },
+    {
+      "passcode": 97489701,
+      "name": "Red Nova Dragon",
+      "numbers": [
+        "CT07-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2010 Wave 2'; printings from the YGOPRODeck bulk dump."
+}

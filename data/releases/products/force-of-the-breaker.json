@@ -1,0 +1,510 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "force-of-the-breaker",
+  "code": "FOTB",
+  "name": "Force of the Breaker",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-05-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 114932,
+      "name": "Seismic Crasher",
+      "numbers": [
+        "FOTB-EN027"
+      ]
+    },
+    {
+      "passcode": 7093411,
+      "name": "Crystal Beast Sapphire Pegasus",
+      "numbers": [
+        "FOTB-EN007"
+      ]
+    },
+    {
+      "passcode": 7153114,
+      "name": "Field Barrier",
+      "numbers": [
+        "FOTB-EN042"
+      ]
+    },
+    {
+      "passcode": 8275702,
+      "name": "Crystal Promise",
+      "numbers": [
+        "FOTB-EN036"
+      ]
+    },
+    {
+      "passcode": 9391354,
+      "name": "Gravi-Crush Dragon",
+      "numbers": [
+        "FOTB-EN030"
+      ]
+    },
+    {
+      "passcode": 10236520,
+      "name": "Goe Goe the Gallant Ninja",
+      "numbers": [
+        "FOTB-EN024"
+      ]
+    },
+    {
+      "passcode": 11458071,
+      "name": "Sky Scourge Enrise",
+      "numbers": [
+        "FOTB-EN021"
+      ]
+    },
+    {
+      "passcode": 12171659,
+      "name": "Zeradias, Herald of Heaven",
+      "numbers": [
+        "FOTB-EN018"
+      ]
+    },
+    {
+      "passcode": 17393207,
+      "name": "Gravekeeper's Commandant",
+      "numbers": [
+        "FOTB-EN015"
+      ]
+    },
+    {
+      "passcode": 17415895,
+      "name": "Volcanic Slicer",
+      "numbers": [
+        "FOTB-EN012"
+      ]
+    },
+    {
+      "passcode": 17589298,
+      "name": "Sword of Dark Rites",
+      "numbers": [
+        "FOTB-EN067"
+      ]
+    },
+    {
+      "passcode": 21420702,
+      "name": "Tri-Blaze Accelerator",
+      "numbers": [
+        "FOTB-EN041"
+      ]
+    },
+    {
+      "passcode": 21481146,
+      "name": "Radiant Mirror Force",
+      "numbers": [
+        "FOTB-EN055"
+      ]
+    },
+    {
+      "passcode": 21698716,
+      "name": "Crystal Beast Cobalt Eagle",
+      "numbers": [
+        "FOTB-EN006"
+      ]
+    },
+    {
+      "passcode": 21768554,
+      "name": "Mass Hypnosis",
+      "numbers": [
+        "FOTB-EN058"
+      ]
+    },
+    {
+      "passcode": 28601770,
+      "name": "Mist Archfiend",
+      "numbers": [
+        "FOTB-EN064"
+      ]
+    },
+    {
+      "passcode": 29424328,
+      "name": "Diabolos, King of the Abyss",
+      "numbers": [
+        "FOTB-EN061"
+      ]
+    },
+    {
+      "passcode": 32543380,
+      "name": "Volcanic Doomfire",
+      "numbers": [
+        "FOTB-EN008"
+      ]
+    },
+    {
+      "passcode": 32603633,
+      "name": "Backs to the Wall",
+      "numbers": [
+        "FOTB-EN052"
+      ]
+    },
+    {
+      "passcode": 32710364,
+      "name": "Crystal Beast Ruby Carbuncle",
+      "numbers": [
+        "FOTB-EN001"
+      ]
+    },
+    {
+      "passcode": 32933942,
+      "name": "Crystal Beast Amethyst Cat",
+      "numbers": [
+        "FOTB-EN002"
+      ]
+    },
+    {
+      "passcode": 33365932,
+      "name": "Volcanic Shell",
+      "numbers": [
+        "FOTB-EN009"
+      ]
+    },
+    {
+      "passcode": 33725271,
+      "name": "Volcanic Recharge",
+      "numbers": [
+        "FOTB-EN049"
+      ]
+    },
+    {
+      "passcode": 34487429,
+      "name": "Ancient City - Rainbow Ruins",
+      "numbers": [
+        "FOTB-EN045"
+      ]
+    },
+    {
+      "passcode": 34541863,
+      "name": "\"A\" Cell Breeding Device",
+      "numbers": [
+        "FOTB-EN043"
+      ]
+    },
+    {
+      "passcode": 34664411,
+      "name": "Lucky Iron Axe",
+      "numbers": [
+        "FOTB-EN037"
+      ]
+    },
+    {
+      "passcode": 35486099,
+      "name": "Crystal Blessing",
+      "numbers": [
+        "FOTB-EN034"
+      ]
+    },
+    {
+      "passcode": 43797906,
+      "name": "Warrior of Atlantis",
+      "numbers": [
+        "FOTB-EN016"
+      ]
+    },
+    {
+      "passcode": 46508640,
+      "name": "Dweller in the Depths",
+      "numbers": [
+        "FOTB-EN028"
+      ]
+    },
+    {
+      "passcode": 47731128,
+      "name": "Mei-Kou, Master of Barriers",
+      "numbers": [
+        "FOTB-EN025"
+      ]
+    },
+    {
+      "passcode": 48453776,
+      "name": "Sky Scourge Norleras",
+      "numbers": [
+        "FOTB-EN022"
+      ]
+    },
+    {
+      "passcode": 48675364,
+      "name": "Archfiend General",
+      "numbers": [
+        "FOTB-EN019"
+      ]
+    },
+    {
+      "passcode": 54514594,
+      "name": "Volcanic Hammerer",
+      "numbers": [
+        "FOTB-EN013"
+      ]
+    },
+    {
+      "passcode": 54974237,
+      "name": "Eradicator Epidemic Virus",
+      "numbers": [
+        "FOTB-EN068"
+      ]
+    },
+    {
+      "passcode": 55696885,
+      "name": "Plague Wolf",
+      "numbers": [
+        "FOTB-EN065"
+      ]
+    },
+    {
+      "passcode": 55818463,
+      "name": "Lich Lord, King of the Underworld",
+      "numbers": [
+        "FOTB-EN062"
+      ]
+    },
+    {
+      "passcode": 57753602,
+      "name": "Gem Flash Energy",
+      "numbers": [
+        "FOTB-EN059"
+      ]
+    },
+    {
+      "passcode": 60876124,
+      "name": "Rare Value",
+      "numbers": [
+        "FOTB-EN033"
+      ]
+    },
+    {
+      "passcode": 60946968,
+      "name": "Otherworld - The \"A\" Zone",
+      "numbers": [
+        "FOTB-EN044"
+      ]
+    },
+    {
+      "passcode": 61068510,
+      "name": "Tornado",
+      "numbers": [
+        "FOTB-EN038"
+      ]
+    },
+    {
+      "passcode": 68215963,
+      "name": "Crystal Beast Emerald Tortoise",
+      "numbers": [
+        "FOTB-EN003"
+      ]
+    },
+    {
+      "passcode": 68815401,
+      "name": "Wild Fire",
+      "numbers": [
+        "FOTB-EN039"
+      ]
+    },
+    {
+      "passcode": 68875140,
+      "name": "Hard-sellin' Goblin",
+      "numbers": [
+        "FOTB-EN056"
+      ]
+    },
+    {
+      "passcode": 69091732,
+      "name": "Introduction to Gallantry",
+      "numbers": [
+        "FOTB-EN053"
+      ]
+    },
+    {
+      "passcode": 69537999,
+      "name": "Blaze Accelerator",
+      "numbers": [
+        "FOTB-EN040"
+      ]
+    },
+    {
+      "passcode": 69724380,
+      "name": "Terrible Deal",
+      "numbers": [
+        "FOTB-EN050"
+      ]
+    },
+    {
+      "passcode": 69750546,
+      "name": "Volcanic Scattershot",
+      "numbers": [
+        "FOTB-EN010"
+      ]
+    },
+    {
+      "passcode": 69937550,
+      "name": "Crystal Beast Amber Mammoth",
+      "numbers": [
+        "FOTB-EN005"
+      ]
+    },
+    {
+      "passcode": 72881007,
+      "name": "Crystal Abundance",
+      "numbers": [
+        "FOTB-EN035"
+      ]
+    },
+    {
+      "passcode": 72903645,
+      "name": "Magna-Slash Dragon",
+      "numbers": [
+        "FOTB-EN029"
+      ]
+    },
+    {
+      "passcode": 73125233,
+      "name": "Raiza the Storm Monarch",
+      "numbers": [
+        "FOTB-EN026"
+      ]
+    },
+    {
+      "passcode": 74841885,
+      "name": "Sky Scourge Invicil",
+      "numbers": [
+        "FOTB-EN023"
+      ]
+    },
+    {
+      "passcode": 75064463,
+      "name": "Harpie Queen",
+      "numbers": [
+        "FOTB-EN020"
+      ]
+    },
+    {
+      "passcode": 76459806,
+      "name": "Volcanic Rocket",
+      "numbers": [
+        "FOTB-EN000"
+      ]
+    },
+    {
+      "passcode": 80186010,
+      "name": "Destroyersaurus",
+      "numbers": [
+        "FOTB-EN017"
+      ]
+    },
+    {
+      "passcode": 80908502,
+      "name": "Elemental HERO Captain Gold",
+      "numbers": [
+        "FOTB-EN014"
+      ]
+    },
+    {
+      "passcode": 81020140,
+      "name": "Volcanic Blaster",
+      "numbers": [
+        "FOTB-EN011"
+      ]
+    },
+    {
+      "passcode": 81191584,
+      "name": "Recurring Nightmare",
+      "numbers": [
+        "FOTB-EN066"
+      ]
+    },
+    {
+      "passcode": 82213171,
+      "name": "Prometheus, King of the Shadows",
+      "numbers": [
+        "FOTB-EN063"
+      ]
+    },
+    {
+      "passcode": 94374859,
+      "name": "Hard-sellin' Zombie",
+      "numbers": [
+        "FOTB-EN057"
+      ]
+    },
+    {
+      "passcode": 94804055,
+      "name": "Firewall",
+      "numbers": [
+        "FOTB-EN060"
+      ]
+    },
+    {
+      "passcode": 95026693,
+      "name": "Soul of Fire",
+      "numbers": [
+        "FOTB-EN031"
+      ]
+    },
+    {
+      "passcode": 95096437,
+      "name": "Secrets of the Gallant",
+      "numbers": [
+        "FOTB-EN054"
+      ]
+    },
+    {
+      "passcode": 95326659,
+      "name": "Crystal Beacon",
+      "numbers": [
+        "FOTB-EN032"
+      ]
+    },
+    {
+      "passcode": 95600067,
+      "name": "Crystal Beast Topaz Tiger",
+      "numbers": [
+        "FOTB-EN004"
+      ]
+    },
+    {
+      "passcode": 96148285,
+      "name": "Triggered Summon",
+      "numbers": [
+        "FOTB-EN046"
+      ]
+    },
+    {
+      "passcode": 96218085,
+      "name": "Breakthrough!",
+      "numbers": [
+        "FOTB-EN051"
+      ]
+    },
+    {
+      "passcode": 96331676,
+      "name": "Crystal Raigeki",
+      "numbers": [
+        "FOTB-EN048"
+      ]
+    },
+    {
+      "passcode": 97970833,
+      "name": "Last Resort",
+      "numbers": [
+        "FOTB-EN047"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Force of the Breaker'; printings from the YGOPRODeck bulk dump."
+}

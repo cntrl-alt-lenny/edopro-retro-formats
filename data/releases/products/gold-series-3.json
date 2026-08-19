@@ -1,0 +1,398 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "gold-series-3",
+  "code": "GLD3",
+  "name": "Gold Series 3",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-06-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-06-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-06-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2009101,
+      "name": "Blackwing - Gale the Whirlwind",
+      "numbers": [
+        "GLD3-EN021"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "GLD3-EN040"
+      ]
+    },
+    {
+      "passcode": 9411399,
+      "name": "Destiny HERO - Malicious",
+      "numbers": [
+        "GLD3-EN009"
+      ]
+    },
+    {
+      "passcode": 10979723,
+      "name": "Amazoness Tiger",
+      "numbers": [
+        "GLD3-EN008"
+      ]
+    },
+    {
+      "passcode": 11159464,
+      "name": "Worm Hope",
+      "numbers": [
+        "GLD3-EN036"
+      ]
+    },
+    {
+      "passcode": 12398280,
+      "name": "Freya, Spirit of Victory",
+      "numbers": [
+        "GLD3-EN010"
+      ]
+    },
+    {
+      "passcode": 20586572,
+      "name": "Exploder Dragon",
+      "numbers": [
+        "GLD3-EN012"
+      ]
+    },
+    {
+      "passcode": 22835145,
+      "name": "Blackwing - Blizzard the Far North",
+      "numbers": [
+        "GLD3-EN024"
+      ]
+    },
+    {
+      "passcode": 25171661,
+      "name": "Infernity Dwarf",
+      "numbers": [
+        "GLD3-EN028"
+      ]
+    },
+    {
+      "passcode": 29054481,
+      "name": "Mist Valley Watcher",
+      "numbers": [
+        "GLD3-EN001"
+      ]
+    },
+    {
+      "passcode": 29654737,
+      "name": "Amazoness Chain Master",
+      "numbers": [
+        "GLD3-EN017"
+      ]
+    },
+    {
+      "passcode": 30276969,
+      "name": "Reese the Ice Mistress",
+      "numbers": [
+        "GLD3-EN030"
+      ]
+    },
+    {
+      "passcode": 33420078,
+      "name": "Plaguespreader Zombie",
+      "numbers": [
+        "GLD3-EN019"
+      ]
+    },
+    {
+      "passcode": 36733451,
+      "name": "Dimensional Alchemist",
+      "numbers": [
+        "GLD3-EN015"
+      ]
+    },
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "GLD3-EN037"
+      ]
+    },
+    {
+      "passcode": 45809008,
+      "name": "Destiny Draw",
+      "numbers": [
+        "GLD3-EN044"
+      ]
+    },
+    {
+      "passcode": 47060347,
+      "name": "Aegis of Gaia",
+      "numbers": [
+        "GLD3-EN050"
+      ]
+    },
+    {
+      "passcode": 47480070,
+      "name": "Amazoness Paladin",
+      "numbers": [
+        "GLD3-EN004"
+      ]
+    },
+    {
+      "passcode": 48783998,
+      "name": "Nova Summoner",
+      "numbers": [
+        "GLD3-EN011"
+      ]
+    },
+    {
+      "passcode": 49003716,
+      "name": "Blackwing - Bora the Spear",
+      "numbers": [
+        "GLD3-EN022"
+      ]
+    },
+    {
+      "passcode": 51566770,
+      "name": "Infernity Guardian",
+      "numbers": [
+        "GLD3-EN029"
+      ]
+    },
+    {
+      "passcode": 53567095,
+      "name": "Icarus Attack",
+      "numbers": [
+        "GLD3-EN049"
+      ]
+    },
+    {
+      "passcode": 54343893,
+      "name": "Vice Dragon",
+      "numbers": [
+        "GLD3-EN002"
+      ]
+    },
+    {
+      "passcode": 55821894,
+      "name": "Amazoness Fighter",
+      "numbers": [
+        "GLD3-EN005"
+      ]
+    },
+    {
+      "passcode": 57774843,
+      "name": "Judgment Dragon",
+      "numbers": [
+        "GLD3-EN016"
+      ]
+    },
+    {
+      "passcode": 58760121,
+      "name": "Worm Falco",
+      "numbers": [
+        "GLD3-EN034"
+      ]
+    },
+    {
+      "passcode": 58820853,
+      "name": "Blackwing - Shura the Blue Flame",
+      "numbers": [
+        "GLD3-EN025"
+      ]
+    },
+    {
+      "passcode": 63665875,
+      "name": "Goblin Zombie",
+      "numbers": [
+        "GLD3-EN013"
+      ]
+    },
+    {
+      "passcode": 65549080,
+      "name": "Mist Condor",
+      "numbers": [
+        "GLD3-EN032"
+      ]
+    },
+    {
+      "passcode": 67987611,
+      "name": "Amazoness Archers",
+      "numbers": [
+        "GLD3-EN046"
+      ]
+    },
+    {
+      "passcode": 69031175,
+      "name": "Blackwing Armor Master",
+      "numbers": [
+        "GLD3-EN038"
+      ]
+    },
+    {
+      "passcode": 69279219,
+      "name": "My Body as a Shield",
+      "numbers": [
+        "GLD3-EN041"
+      ]
+    },
+    {
+      "passcode": 71564252,
+      "name": "Thunder King Rai-Oh",
+      "numbers": [
+        "GLD3-EN020"
+      ]
+    },
+    {
+      "passcode": 73574678,
+      "name": "Amazoness Blowpiper",
+      "numbers": [
+        "GLD3-EN007"
+      ]
+    },
+    {
+      "passcode": 75498415,
+      "name": "Blackwing - Sirocco the Dawn",
+      "numbers": [
+        "GLD3-EN023"
+      ]
+    },
+    {
+      "passcode": 76913983,
+      "name": "Blackwing Armed Wing",
+      "numbers": [
+        "GLD3-EN039"
+      ]
+    },
+    {
+      "passcode": 80193355,
+      "name": "Dramatic Rescue",
+      "numbers": [
+        "GLD3-EN047"
+      ]
+    },
+    {
+      "passcode": 85215458,
+      "name": "Blackwing - Kalut the Moon Shadow",
+      "numbers": [
+        "GLD3-EN026"
+      ]
+    },
+    {
+      "passcode": 85754829,
+      "name": "Worm Gulse",
+      "numbers": [
+        "GLD3-EN035"
+      ]
+    },
+    {
+      "passcode": 89312388,
+      "name": "Elemental HERO Prisma",
+      "numbers": [
+        "GLD3-EN014"
+      ]
+    },
+    {
+      "passcode": 91351370,
+      "name": "Black Whirlwind",
+      "numbers": [
+        "GLD3-EN045"
+      ]
+    },
+    {
+      "passcode": 91869203,
+      "name": "Amazoness Archer",
+      "numbers": [
+        "GLD3-EN003"
+      ]
+    },
+    {
+      "passcode": 92065772,
+      "name": "Numbing Grub in the Ice Barrier",
+      "numbers": [
+        "GLD3-EN031"
+      ]
+    },
+    {
+      "passcode": 92826944,
+      "name": "Mezuki",
+      "numbers": [
+        "GLD3-EN018"
+      ]
+    },
+    {
+      "passcode": 92933195,
+      "name": "Mist Valley Windmaster",
+      "numbers": [
+        "GLD3-EN033"
+      ]
+    },
+    {
+      "passcode": 94004268,
+      "name": "Amazoness Swords Woman",
+      "numbers": [
+        "GLD3-EN006"
+      ]
+    },
+    {
+      "passcode": 96008713,
+      "name": "Magical Arm Shield",
+      "numbers": [
+        "GLD3-EN048"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "GLD3-EN042"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "GLD3-EN043"
+      ]
+    },
+    {
+      "passcode": 99177923,
+      "name": "Infernity Archfiend",
+      "numbers": [
+        "GLD3-EN027"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Gold Series 3'; printings from the YGOPRODeck bulk dump."
+}

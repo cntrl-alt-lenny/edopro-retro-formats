@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-5-issue-6-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 5, Issue 6 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 37195861,
+      "name": "Elemental HERO Ocean",
+      "numbers": [
+        "JUMP-EN013"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

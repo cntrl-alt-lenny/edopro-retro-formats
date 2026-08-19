@@ -1,0 +1,342 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-duelist-toolbox",
+  "code": "5DS3",
+  "name": "Starter Deck: Duelist Toolbox",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-05-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-05-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 255998,
+      "name": "Rapid Warrior",
+      "numbers": [
+        "5DS3-EN004"
+      ]
+    },
+    {
+      "passcode": 4178474,
+      "name": "Raigeki Break",
+      "numbers": [
+        "5DS3-EN032"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "5DS3-EN030"
+      ]
+    },
+    {
+      "passcode": 5464695,
+      "name": "Blazing Inpachi",
+      "numbers": [
+        "5DS3-EN002"
+      ]
+    },
+    {
+      "passcode": 9365703,
+      "name": "Speed Warrior",
+      "numbers": [
+        "5DS3-EN011"
+      ]
+    },
+    {
+      "passcode": 10012614,
+      "name": "Banner of Courage",
+      "numbers": [
+        "5DS3-EN024"
+      ]
+    },
+    {
+      "passcode": 20932152,
+      "name": "Quickdraw Synchron",
+      "numbers": [
+        "5DS3-EN018"
+      ]
+    },
+    {
+      "passcode": 21015833,
+      "name": "Hayabusa Knight",
+      "numbers": [
+        "5DS3-EN007"
+      ]
+    },
+    {
+      "passcode": 23571046,
+      "name": "Quillbolt Hedgehog",
+      "numbers": [
+        "5DS3-EN012"
+      ]
+    },
+    {
+      "passcode": 24268052,
+      "name": "Defense Draw",
+      "numbers": [
+        "5DS3-EN038"
+      ]
+    },
+    {
+      "passcode": 26412047,
+      "name": "Hammer Shot",
+      "numbers": [
+        "5DS3-EN026"
+      ]
+    },
+    {
+      "passcode": 27053506,
+      "name": "Secret Barrel",
+      "numbers": [
+        "5DS3-EN034"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "5DS3-EN022"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "5DS3-EN036"
+      ]
+    },
+    {
+      "passcode": 36643046,
+      "name": "Synchron Explorer",
+      "numbers": [
+        "5DS3-EN005"
+      ]
+    },
+    {
+      "passcode": 40225398,
+      "name": "Twin-Sword Marauder",
+      "numbers": [
+        "5DS3-EN016"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "5DS3-EN020"
+      ]
+    },
+    {
+      "passcode": 47766694,
+      "name": "Wild Tornado",
+      "numbers": [
+        "5DS3-EN029"
+      ]
+    },
+    {
+      "passcode": 48094997,
+      "name": "Battle Footballer",
+      "numbers": [
+        "5DS3-EN001"
+      ]
+    },
+    {
+      "passcode": 50604950,
+      "name": "X-Saber Galahad",
+      "numbers": [
+        "5DS3-EN013"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "5DS3-EN006"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "5DS3-EN035"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "5DS3-EN031"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "5DS3-EN010"
+      ]
+    },
+    {
+      "passcode": 66288028,
+      "name": "Fortress Warrior",
+      "numbers": [
+        "5DS3-EN014"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "5DS3-EN021"
+      ]
+    },
+    {
+      "passcode": 73048641,
+      "name": "Half Shut",
+      "numbers": [
+        "5DS3-EN019"
+      ]
+    },
+    {
+      "passcode": 74093656,
+      "name": "Tune Warrior",
+      "numbers": [
+        "5DS3-EN003"
+      ]
+    },
+    {
+      "passcode": 74848038,
+      "name": "Monster Reincarnation",
+      "numbers": [
+        "5DS3-EN027"
+      ]
+    },
+    {
+      "passcode": 74860293,
+      "name": "Junk Destroyer",
+      "numbers": [
+        "5DS3-EN039"
+      ]
+    },
+    {
+      "passcode": 76614003,
+      "name": "Dark Tinker",
+      "numbers": [
+        "5DS3-EN017"
+      ]
+    },
+    {
+      "passcode": 77252217,
+      "name": "Chainsaw Insect",
+      "numbers": [
+        "5DS3-EN008"
+      ]
+    },
+    {
+      "passcode": 78211862,
+      "name": "Rising Energy",
+      "numbers": [
+        "5DS3-EN037"
+      ]
+    },
+    {
+      "passcode": 80108118,
+      "name": "X-Saber Urbellum",
+      "numbers": [
+        "5DS3-EN040"
+      ]
+    },
+    {
+      "passcode": 83810690,
+      "name": "X-Saber Wayne",
+      "numbers": [
+        "5DS3-EN042"
+      ]
+    },
+    {
+      "passcode": 88559132,
+      "name": "Turret Warrior",
+      "numbers": [
+        "5DS3-EN015"
+      ]
+    },
+    {
+      "passcode": 88650530,
+      "name": "Worm Apocalypse",
+      "numbers": [
+        "5DS3-EN009"
+      ]
+    },
+    {
+      "passcode": 93382620,
+      "name": "Rope of Life",
+      "numbers": [
+        "5DS3-EN033"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "5DS3-EN023"
+      ]
+    },
+    {
+      "passcode": 97204936,
+      "name": "Gaia Knight, the Force of Earth",
+      "numbers": [
+        "5DS3-EN041"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "5DS3-EN025"
+      ]
+    },
+    {
+      "passcode": 98143165,
+      "name": "Synchro Boost",
+      "numbers": [
+        "5DS3-EN028"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Duelist Toolbox'; printings from the YGOPRODeck bulk dump."
+}

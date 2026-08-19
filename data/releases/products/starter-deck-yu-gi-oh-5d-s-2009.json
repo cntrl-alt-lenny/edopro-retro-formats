@@ -1,0 +1,348 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-yu-gi-oh-5d-s-2009",
+  "code": "5DS2",
+  "name": "Starter Deck: Yu-Gi-Oh! 5D's 2009",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-06-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-06-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-06-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27551,
+      "name": "Limit Reverse",
+      "numbers": [
+        "5DS2-EN037"
+      ]
+    },
+    {
+      "passcode": 2322421,
+      "name": "Road Warrior",
+      "numbers": [
+        "5DS2-EN041"
+      ]
+    },
+    {
+      "passcode": 4178474,
+      "name": "Raigeki Break",
+      "numbers": [
+        "5DS2-EN036"
+      ]
+    },
+    {
+      "passcode": 9365703,
+      "name": "Speed Warrior",
+      "numbers": [
+        "5DS2-EN015"
+      ]
+    },
+    {
+      "passcode": 13504844,
+      "name": "Gottoms' Emergency Call",
+      "numbers": [
+        "5DS2-EN033"
+      ]
+    },
+    {
+      "passcode": 16222645,
+      "name": "Sasuke Samurai",
+      "numbers": [
+        "5DS2-EN010"
+      ]
+    },
+    {
+      "passcode": 19523799,
+      "name": "Ookazi",
+      "numbers": [
+        "5DS2-EN031"
+      ]
+    },
+    {
+      "passcode": 23115241,
+      "name": "X-Saber Anu Piranha",
+      "numbers": [
+        "5DS2-EN004"
+      ]
+    },
+    {
+      "passcode": 23571046,
+      "name": "Quillbolt Hedgehog",
+      "numbers": [
+        "5DS2-EN013"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "5DS2-EN027"
+      ]
+    },
+    {
+      "passcode": 32441317,
+      "name": "De-Synchro",
+      "numbers": [
+        "5DS2-EN029"
+      ]
+    },
+    {
+      "passcode": 34815282,
+      "name": "Miniaturize",
+      "numbers": [
+        "5DS2-EN039"
+      ]
+    },
+    {
+      "passcode": 36472900,
+      "name": "Sonic Chick",
+      "numbers": [
+        "5DS2-EN017"
+      ]
+    },
+    {
+      "passcode": 36750412,
+      "name": "Magna Drago",
+      "numbers": [
+        "5DS2-EN018"
+      ]
+    },
+    {
+      "passcode": 37265642,
+      "name": "Sabersaurus",
+      "numbers": [
+        "5DS2-EN002"
+      ]
+    },
+    {
+      "passcode": 39674352,
+      "name": "Gogiga Gagagigo",
+      "numbers": [
+        "5DS2-EN001"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "5DS2-EN023"
+      ]
+    },
+    {
+      "passcode": 45939841,
+      "name": "Twister",
+      "numbers": [
+        "5DS2-EN028"
+      ]
+    },
+    {
+      "passcode": 48766543,
+      "name": "Cyber-Tech Alligator",
+      "numbers": [
+        "5DS2-EN003"
+      ]
+    },
+    {
+      "passcode": 49645921,
+      "name": "Saber Beetle",
+      "numbers": [
+        "5DS2-EN012"
+      ]
+    },
+    {
+      "passcode": 50604950,
+      "name": "X-Saber Galahad",
+      "numbers": [
+        "5DS2-EN020"
+      ]
+    },
+    {
+      "passcode": 50621530,
+      "name": "Powered Tuner",
+      "numbers": [
+        "5DS2-EN007"
+      ]
+    },
+    {
+      "passcode": 53046408,
+      "name": "Emergency Provisions",
+      "numbers": [
+        "5DS2-EN026"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "5DS2-EN035"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "5DS2-EN034"
+      ]
+    },
+    {
+      "passcode": 60694662,
+      "name": "Skelengel",
+      "numbers": [
+        "5DS2-EN016"
+      ]
+    },
+    {
+      "passcode": 60800381,
+      "name": "Junk Warrior",
+      "numbers": [
+        "5DS2-EN042"
+      ]
+    },
+    {
+      "passcode": 62991886,
+      "name": "Unstable Evolution",
+      "numbers": [
+        "5DS2-EN030"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "5DS2-EN014"
+      ]
+    },
+    {
+      "passcode": 69579761,
+      "name": "Des Koala",
+      "numbers": [
+        "5DS2-EN011"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "5DS2-EN022"
+      ]
+    },
+    {
+      "passcode": 71971554,
+      "name": "Road Synchron",
+      "numbers": [
+        "5DS2-EN006"
+      ]
+    },
+    {
+      "passcode": 77754944,
+      "name": "Widespread Ruin",
+      "numbers": [
+        "5DS2-EN040"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "5DS2-EN008"
+      ]
+    },
+    {
+      "passcode": 79759861,
+      "name": "Tribute to The Doomed",
+      "numbers": [
+        "5DS2-EN024"
+      ]
+    },
+    {
+      "passcode": 80108118,
+      "name": "X-Saber Urbellum",
+      "numbers": [
+        "5DS2-EN043"
+      ]
+    },
+    {
+      "passcode": 86016245,
+      "name": "Pride of the Weak",
+      "numbers": [
+        "5DS2-EN021"
+      ]
+    },
+    {
+      "passcode": 90508760,
+      "name": "X-Saber Airbellum",
+      "numbers": [
+        "5DS2-EN019"
+      ]
+    },
+    {
+      "passcode": 93346024,
+      "name": "The Dragon Dwelling in the Cave",
+      "numbers": [
+        "5DS2-EN005"
+      ]
+    },
+    {
+      "passcode": 93920745,
+      "name": "Penguin Soldier",
+      "numbers": [
+        "5DS2-EN009"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "5DS2-EN025"
+      ]
+    },
+    {
+      "passcode": 98143165,
+      "name": "Synchro Boost",
+      "numbers": [
+        "5DS2-EN032"
+      ]
+    },
+    {
+      "passcode": 98427577,
+      "name": "Scrap-Iron Scarecrow",
+      "numbers": [
+        "5DS2-EN038"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Starter Deck: Yu-Gi-Oh! 5D's 2009\"; printings from the YGOPRODeck bulk dump."
+}

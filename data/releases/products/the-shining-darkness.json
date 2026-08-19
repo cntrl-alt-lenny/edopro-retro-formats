@@ -12,13 +12,737 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "edisonformat-what-is"
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-05-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-05-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
       ]
     }
   ],
-  "printings": [],
-  "sources": [
-    "edisonformat-what-is"
+  "printings": [
+    {
+      "passcode": 135598,
+      "name": "Key Mouse",
+      "numbers": [
+        "TSHD-EN036"
+      ]
+    },
+    {
+      "passcode": 176392,
+      "name": "Koa'ki Meiru Prototype",
+      "numbers": [
+        "TSHD-EN082"
+      ]
+    },
+    {
+      "passcode": 402568,
+      "name": "Wattgiraffe",
+      "numbers": [
+        "TSHD-EN025"
+      ]
+    },
+    {
+      "passcode": 525110,
+      "name": "Cherry Inmato",
+      "numbers": [
+        "TSHD-EN022"
+      ]
+    },
+    {
+      "passcode": 1357146,
+      "name": "Ronintoadin",
+      "numbers": [
+        "TSHD-EN033"
+      ]
+    },
+    {
+      "passcode": 2843014,
+      "name": "Nimble Sunfish",
+      "numbers": [
+        "TSHD-EN084"
+      ]
+    },
+    {
+      "passcode": 4168871,
+      "name": "Cards for Black Feathers",
+      "numbers": [
+        "TSHD-EN046"
+      ]
+    },
+    {
+      "passcode": 4290468,
+      "name": "Splendid Rose",
+      "numbers": [
+        "TSHD-EN043"
+      ]
+    },
+    {
+      "passcode": 4904812,
+      "name": "Genex Undine",
+      "numbers": [
+        "TSHD-EN091"
+      ]
+    },
+    {
+      "passcode": 5998840,
+      "name": "XX-Saber Boggart Knight",
+      "numbers": [
+        "TSHD-EN000"
+      ]
+    },
+    {
+      "passcode": 9012916,
+      "name": "Black-Winged Dragon",
+      "numbers": [
+        "TSHD-EN040"
+      ]
+    },
+    {
+      "passcode": 9059700,
+      "name": "Infernity Barrier",
+      "numbers": [
+        "TSHD-EN089"
+      ]
+    },
+    {
+      "passcode": 11593137,
+      "name": "Chaos Trap Hole",
+      "numbers": [
+        "TSHD-EN080"
+      ]
+    },
+    {
+      "passcode": 11747708,
+      "name": "Spore",
+      "numbers": [
+        "TSHD-EN019"
+      ]
+    },
+    {
+      "passcode": 12079734,
+      "name": "Delta Tri",
+      "numbers": [
+        "TSHD-EN030"
+      ]
+    },
+    {
+      "passcode": 12216615,
+      "name": "Koa'ki Meiru Shield",
+      "numbers": [
+        "TSHD-EN077"
+      ]
+    },
+    {
+      "passcode": 12296376,
+      "name": "Wattwoodpecker",
+      "numbers": [
+        "TSHD-EN027"
+      ]
+    },
+    {
+      "passcode": 12469386,
+      "name": "Revival Rose",
+      "numbers": [
+        "TSHD-EN016"
+      ]
+    },
+    {
+      "passcode": 13438207,
+      "name": "Blossom Bombardment",
+      "numbers": [
+        "TSHD-EN074"
+      ]
+    },
+    {
+      "passcode": 13582837,
+      "name": "Infernity Randomizer",
+      "numbers": [
+        "TSHD-EN013"
+      ]
+    },
+    {
+      "passcode": 13708425,
+      "name": "Flare Resonator",
+      "numbers": [
+        "TSHD-EN010"
+      ]
+    },
+    {
+      "passcode": 14430063,
+      "name": "Archfiend Interceptor",
+      "numbers": [
+        "TSHD-EN007"
+      ]
+    },
+    {
+      "passcode": 14550855,
+      "name": "Infernity Inferno",
+      "numbers": [
+        "TSHD-EN071"
+      ]
+    },
+    {
+      "passcode": 15313433,
+      "name": "Infernity Reflector",
+      "numbers": [
+        "TSHD-EN068"
+      ]
+    },
+    {
+      "passcode": 19182751,
+      "name": "Genex Neutron",
+      "numbers": [
+        "TSHD-EN097"
+      ]
+    },
+    {
+      "passcode": 19204398,
+      "name": "Ally of Justice Light Gazer",
+      "numbers": [
+        "TSHD-EN096"
+      ]
+    },
+    {
+      "passcode": 23093604,
+      "name": "X-Saber Pashuul",
+      "numbers": [
+        "TSHD-EN094"
+      ]
+    },
+    {
+      "passcode": 25435080,
+      "name": "Blackwing - Bombardment",
+      "numbers": [
+        "TSHD-EN065"
+      ]
+    },
+    {
+      "passcode": 25652655,
+      "name": "Changer Synchron",
+      "numbers": [
+        "TSHD-EN004"
+      ]
+    },
+    {
+      "passcode": 26257572,
+      "name": "Corridor of Agony",
+      "numbers": [
+        "TSHD-EN062"
+      ]
+    },
+    {
+      "passcode": 26775203,
+      "name": "Blackwing - Ghibli the Searing Wind",
+      "numbers": [
+        "TSHD-EN001"
+      ]
+    },
+    {
+      "passcode": 27383110,
+      "name": "Dawn of the Herald",
+      "numbers": [
+        "TSHD-EN059"
+      ]
+    },
+    {
+      "passcode": 28506708,
+      "name": "Worm Call",
+      "numbers": [
+        "TSHD-EN056"
+      ]
+    },
+    {
+      "passcode": 29228350,
+      "name": "Dragon Laser",
+      "numbers": [
+        "TSHD-EN053"
+      ]
+    },
+    {
+      "passcode": 30562585,
+      "name": "ZERO-MAX",
+      "numbers": [
+        "TSHD-EN047"
+      ]
+    },
+    {
+      "passcode": 31383545,
+      "name": "XX-Saber Darksoul",
+      "numbers": [
+        "TSHD-EN081"
+      ]
+    },
+    {
+      "passcode": 31385077,
+      "name": "Chaos Goddess",
+      "numbers": [
+        "TSHD-EN044"
+      ]
+    },
+    {
+      "passcode": 35448319,
+      "name": "Snyffus",
+      "numbers": [
+        "TSHD-EN083"
+      ]
+    },
+    {
+      "passcode": 36407615,
+      "name": "Chaos King Archfiend",
+      "numbers": [
+        "TSHD-EN041"
+      ]
+    },
+    {
+      "passcode": 36560997,
+      "name": "Core Overclock",
+      "numbers": [
+        "TSHD-EN087"
+      ]
+    },
+    {
+      "passcode": 36629203,
+      "name": "Ally of Justice Core Destroyer",
+      "numbers": [
+        "TSHD-EN037"
+      ]
+    },
+    {
+      "passcode": 38837163,
+      "name": "Akz, the Pumer",
+      "numbers": [
+        "TSHD-EN085"
+      ]
+    },
+    {
+      "passcode": 39440937,
+      "name": "Intercept Wave",
+      "numbers": [
+        "TSHD-EN050"
+      ]
+    },
+    {
+      "passcode": 40555959,
+      "name": "Phantom Hand",
+      "numbers": [
+        "TSHD-EN072"
+      ]
+    },
+    {
+      "passcode": 44665365,
+      "name": "Herald of Perfection",
+      "numbers": [
+        "TSHD-EN039"
+      ]
+    },
+    {
+      "passcode": 46897277,
+      "name": "Wattfox",
+      "numbers": [
+        "TSHD-EN026"
+      ]
+    },
+    {
+      "passcode": 47346845,
+      "name": "Batteryman AAA",
+      "numbers": [
+        "TSHD-EN034"
+      ]
+    },
+    {
+      "passcode": 47421985,
+      "name": "Hydro Genex",
+      "numbers": [
+        "TSHD-EN095"
+      ]
+    },
+    {
+      "passcode": 47929865,
+      "name": "Magidog",
+      "numbers": [
+        "TSHD-EN023"
+      ]
+    },
+    {
+      "passcode": 48568432,
+      "name": "Trigon",
+      "numbers": [
+        "TSHD-EN031"
+      ]
+    },
+    {
+      "passcode": 48742406,
+      "name": "Fairy Archer",
+      "numbers": [
+        "TSHD-EN020"
+      ]
+    },
+    {
+      "passcode": 48868994,
+      "name": "Morphtronic Vacuumen",
+      "numbers": [
+        "TSHD-EN017"
+      ]
+    },
+    {
+      "passcode": 49080532,
+      "name": "Infernity Beetle",
+      "numbers": [
+        "TSHD-EN014"
+      ]
+    },
+    {
+      "passcode": 49600724,
+      "name": "Crevice Into the Different Dimension",
+      "numbers": [
+        "TSHD-EN078"
+      ]
+    },
+    {
+      "passcode": 49680980,
+      "name": "Koa'ki Meiru Sandman",
+      "numbers": [
+        "TSHD-EN028"
+      ]
+    },
+    {
+      "passcode": 49833312,
+      "name": "Morphtronics, Scramble!",
+      "numbers": [
+        "TSHD-EN075"
+      ]
+    },
+    {
+      "passcode": 50702124,
+      "name": "Synchro Magnet",
+      "numbers": [
+        "TSHD-EN011"
+      ]
+    },
+    {
+      "passcode": 51047350,
+      "name": "Card Breaker",
+      "numbers": [
+        "TSHD-EN005"
+      ]
+    },
+    {
+      "passcode": 51717541,
+      "name": "Infernity Break",
+      "numbers": [
+        "TSHD-EN069"
+      ]
+    },
+    {
+      "passcode": 51925772,
+      "name": "Dread Dragon",
+      "numbers": [
+        "TSHD-EN008"
+      ]
+    },
+    {
+      "passcode": 52833089,
+      "name": "Black Thunder",
+      "numbers": [
+        "TSHD-EN066"
+      ]
+    },
+    {
+      "passcode": 52869807,
+      "name": "Blackwing - Gust the Backblast",
+      "numbers": [
+        "TSHD-EN002"
+      ]
+    },
+    {
+      "passcode": 53656677,
+      "name": "Power Frame",
+      "numbers": [
+        "TSHD-EN063"
+      ]
+    },
+    {
+      "passcode": 53778229,
+      "name": "Silent Graveyard",
+      "numbers": [
+        "TSHD-EN060"
+      ]
+    },
+    {
+      "passcode": 63665606,
+      "name": "Wave-Motion Inferno",
+      "numbers": [
+        "TSHD-EN088"
+      ]
+    },
+    {
+      "passcode": 64990807,
+      "name": "Magic Triangle of the Ice Barrier",
+      "numbers": [
+        "TSHD-EN057"
+      ]
+    },
+    {
+      "passcode": 65612454,
+      "name": "Wattcube",
+      "numbers": [
+        "TSHD-EN054"
+      ]
+    },
+    {
+      "passcode": 66835946,
+      "name": "Pyramid of Wonders",
+      "numbers": [
+        "TSHD-EN051"
+      ]
+    },
+    {
+      "passcode": 66957584,
+      "name": "Infernity Launcher",
+      "numbers": [
+        "TSHD-EN048"
+      ]
+    },
+    {
+      "passcode": 67483216,
+      "name": "Genex Searcher",
+      "numbers": [
+        "TSHD-EN092"
+      ]
+    },
+    {
+      "passcode": 67779172,
+      "name": "Black-Winged Strafe",
+      "numbers": [
+        "TSHD-EN045"
+      ]
+    },
+    {
+      "passcode": 68505803,
+      "name": "Genex Controller",
+      "numbers": [
+        "TSHD-EN090"
+      ]
+    },
+    {
+      "passcode": 72896720,
+      "name": "Infernity Doom Dragon",
+      "numbers": [
+        "TSHD-EN042"
+      ]
+    },
+    {
+      "passcode": 73018302,
+      "name": "Hunter of Black Feathers",
+      "numbers": [
+        "TSHD-EN038"
+      ]
+    },
+    {
+      "passcode": 73318863,
+      "name": "Lyna the Light Charmer",
+      "numbers": [
+        "TSHD-EN024"
+      ]
+    },
+    {
+      "passcode": 73787254,
+      "name": "Saber Vault",
+      "numbers": [
+        "TSHD-EN086"
+      ]
+    },
+    {
+      "passcode": 74130411,
+      "name": "Biofalcon",
+      "numbers": [
+        "TSHD-EN021"
+      ]
+    },
+    {
+      "passcode": 74730899,
+      "name": "Batteryman Fuel Cell",
+      "numbers": [
+        "TSHD-EN035"
+      ]
+    },
+    {
+      "passcode": 74952447,
+      "name": "Testudo erat Numen",
+      "numbers": [
+        "TSHD-EN032"
+      ]
+    },
+    {
+      "passcode": 75105429,
+      "name": "Synchro Ejection",
+      "numbers": [
+        "TSHD-EN079"
+      ]
+    },
+    {
+      "passcode": 75252099,
+      "name": "Bird of Roses",
+      "numbers": [
+        "TSHD-EN018"
+      ]
+    },
+    {
+      "passcode": 75675029,
+      "name": "Memory Crush King",
+      "numbers": [
+        "TSHD-EN029"
+      ]
+    },
+    {
+      "passcode": 80367387,
+      "name": "Koa'ki Meiru Bergzak",
+      "numbers": [
+        "TSHD-EN099"
+      ]
+    },
+    {
+      "passcode": 85475641,
+      "name": "Infernity Avenger",
+      "numbers": [
+        "TSHD-EN015"
+      ]
+    },
+    {
+      "passcode": 86197239,
+      "name": "Infernity Mirage",
+      "numbers": [
+        "TSHD-EN012"
+      ]
+    },
+    {
+      "passcode": 86821010,
+      "name": "Power Break",
+      "numbers": [
+        "TSHD-EN076"
+      ]
+    },
+    {
+      "passcode": 87043568,
+      "name": "Assault Spirits",
+      "numbers": [
+        "TSHD-EN073"
+      ]
+    },
+    {
+      "passcode": 87106146,
+      "name": "Damage Gate",
+      "numbers": [
+        "TSHD-EN070"
+      ]
+    },
+    {
+      "passcode": 87319876,
+      "name": "Trust Guardian",
+      "numbers": [
+        "TSHD-EN009"
+      ]
+    },
+    {
+      "passcode": 88032368,
+      "name": "Second Booster",
+      "numbers": [
+        "TSHD-EN006"
+      ]
+    },
+    {
+      "passcode": 88928798,
+      "name": "Guard Mines",
+      "numbers": [
+        "TSHD-EN067"
+      ]
+    },
+    {
+      "passcode": 89040386,
+      "name": "Blackwing - Backlash",
+      "numbers": [
+        "TSHD-EN064"
+      ]
+    },
+    {
+      "passcode": 89258906,
+      "name": "Blackwing - Breeze the Zephyr",
+      "numbers": [
+        "TSHD-EN003"
+      ]
+    },
+    {
+      "passcode": 90263923,
+      "name": "Leeching the Light",
+      "numbers": [
+        "TSHD-EN061"
+      ]
+    },
+    {
+      "passcode": 91107093,
+      "name": "Electromagnetic Shield",
+      "numbers": [
+        "TSHD-EN055"
+      ]
+    },
+    {
+      "passcode": 91985515,
+      "name": "Koa'ki Meiru Initialize!",
+      "numbers": [
+        "TSHD-EN058"
+      ]
+    },
+    {
+      "passcode": 92223641,
+      "name": "The Fountain in the Sky",
+      "numbers": [
+        "TSHD-EN052"
+      ]
+    },
+    {
+      "passcode": 93946239,
+      "name": "Into the Void",
+      "numbers": [
+        "TSHD-EN049"
+      ]
+    },
+    {
+      "passcode": 96099959,
+      "name": "X-Saber Palomuro",
+      "numbers": [
+        "TSHD-EN093"
+      ]
+    },
+    {
+      "passcode": 98954375,
+      "name": "Infernity Destroyer",
+      "numbers": [
+        "TSHD-EN098"
+      ]
+    }
   ],
-  "notes": "Recorded because its NA release date defines the Edison pool cutoff (2010-05-10 is the day before). Its cards are post-Edison."
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Shining Darkness'; printings from the YGOPRODeck bulk dump."
 }

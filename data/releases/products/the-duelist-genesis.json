@@ -1,0 +1,738 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-duelist-genesis",
+  "code": "TDGS",
+  "name": "The Duelist Genesis",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-09-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2008-09-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1200843,
+      "name": "Mirror of Yata",
+      "numbers": [
+        "TDGS-EN056"
+      ]
+    },
+    {
+      "passcode": 4230620,
+      "name": "Psi-Station",
+      "numbers": [
+        "TDGS-EN051"
+      ]
+    },
+    {
+      "passcode": 5052212,
+      "name": "Battle Tuned",
+      "numbers": [
+        "TDGS-EN048"
+      ]
+    },
+    {
+      "passcode": 5519829,
+      "name": "Counselor Lily",
+      "numbers": [
+        "TDGS-EN081"
+      ]
+    },
+    {
+      "passcode": 5645210,
+      "name": "Splendid Venus",
+      "numbers": [
+        "TDGS-EN094"
+      ]
+    },
+    {
+      "passcode": 6178850,
+      "name": "Fighting Spirit",
+      "numbers": [
+        "TDGS-EN045"
+      ]
+    },
+    {
+      "passcode": 6544078,
+      "name": "Izanagi",
+      "numbers": [
+        "TDGS-EN030"
+      ]
+    },
+    {
+      "passcode": 7391448,
+      "name": "Goyo Guardian",
+      "numbers": [
+        "TDGS-EN042"
+      ]
+    },
+    {
+      "passcode": 10110717,
+      "name": "Mecha Bunny",
+      "numbers": [
+        "TDGS-EN027"
+      ]
+    },
+    {
+      "passcode": 11232355,
+      "name": "Destructotron",
+      "numbers": [
+        "TDGS-EN023"
+      ]
+    },
+    {
+      "passcode": 14778250,
+      "name": "The Tricky",
+      "numbers": [
+        "TDGS-EN090"
+      ]
+    },
+    {
+      "passcode": 17266660,
+      "name": "Herald of Orange Light",
+      "numbers": [
+        "TDGS-EN082"
+      ]
+    },
+    {
+      "passcode": 18013090,
+      "name": "Nitro Warrior",
+      "numbers": [
+        "TDGS-EN039"
+      ]
+    },
+    {
+      "passcode": 18235577,
+      "name": "Silent Strider",
+      "numbers": [
+        "TDGS-EN036"
+      ]
+    },
+    {
+      "passcode": 19327348,
+      "name": "Dharc the Dark Charmer",
+      "numbers": [
+        "TDGS-EN026"
+      ]
+    },
+    {
+      "passcode": 19357125,
+      "name": "Dark Hunter",
+      "numbers": [
+        "TDGS-EN033"
+      ]
+    },
+    {
+      "passcode": 19844995,
+      "name": "Power Filter",
+      "numbers": [
+        "TDGS-EN058"
+      ]
+    },
+    {
+      "passcode": 21454943,
+      "name": "Psychic Commander",
+      "numbers": [
+        "TDGS-EN020"
+      ]
+    },
+    {
+      "passcode": 21488686,
+      "name": "Psychic Rejuvenation",
+      "numbers": [
+        "TDGS-EN071"
+      ]
+    },
+    {
+      "passcode": 22171591,
+      "name": "Doctor Cranium",
+      "numbers": [
+        "TDGS-EN017"
+      ]
+    },
+    {
+      "passcode": 22201234,
+      "name": "Lightsworn Barrier",
+      "numbers": [
+        "TDGS-EN075"
+      ]
+    },
+    {
+      "passcode": 22754505,
+      "name": "Small Piece Golem",
+      "numbers": [
+        "TDGS-EN006"
+      ]
+    },
+    {
+      "passcode": 23303072,
+      "name": "Montage Dragon",
+      "numbers": [
+        "TDGS-EN014"
+      ]
+    },
+    {
+      "passcode": 23323812,
+      "name": "Telepathic Power",
+      "numbers": [
+        "TDGS-EN072"
+      ]
+    },
+    {
+      "passcode": 23571046,
+      "name": "Quillbolt Hedgehog",
+      "numbers": [
+        "TDGS-EN003"
+      ]
+    },
+    {
+      "passcode": 24025620,
+      "name": "Twin-Shield Defender",
+      "numbers": [
+        "TDGS-EN011"
+      ]
+    },
+    {
+      "passcode": 24268052,
+      "name": "Defense Draw",
+      "numbers": [
+        "TDGS-EN065"
+      ]
+    },
+    {
+      "passcode": 24545464,
+      "name": "Synchro Deflector",
+      "numbers": [
+        "TDGS-EN068"
+      ]
+    },
+    {
+      "passcode": 24661486,
+      "name": "Cold Enchanter",
+      "numbers": [
+        "TDGS-EN096"
+      ]
+    },
+    {
+      "passcode": 25247218,
+      "name": "Big Piece Golem",
+      "numbers": [
+        "TDGS-EN008"
+      ]
+    },
+    {
+      "passcode": 30502181,
+      "name": "Lightsworn Sabre",
+      "numbers": [
+        "TDGS-EN059"
+      ]
+    },
+    {
+      "passcode": 30888983,
+      "name": "The Selection",
+      "numbers": [
+        "TDGS-EN093"
+      ]
+    },
+    {
+      "passcode": 31328739,
+      "name": "Psi-Impulse",
+      "numbers": [
+        "TDGS-EN052"
+      ]
+    },
+    {
+      "passcode": 32393580,
+      "name": "Cyber Shark",
+      "numbers": [
+        "TDGS-EN086"
+      ]
+    },
+    {
+      "passcode": 32441317,
+      "name": "De-Synchro",
+      "numbers": [
+        "TDGS-EN049"
+      ]
+    },
+    {
+      "passcode": 32663969,
+      "name": "Domino Effect",
+      "numbers": [
+        "TDGS-EN046"
+      ]
+    },
+    {
+      "passcode": 32750510,
+      "name": "Ice Master",
+      "numbers": [
+        "TDGS-EN097"
+      ]
+    },
+    {
+      "passcode": 32907538,
+      "name": "Grapple Blocker",
+      "numbers": [
+        "TDGS-EN087"
+      ]
+    },
+    {
+      "passcode": 35480699,
+      "name": "Book of Eclipse",
+      "numbers": [
+        "TDGS-EN062"
+      ]
+    },
+    {
+      "passcode": 37390589,
+      "name": "Kunai with Chain",
+      "numbers": [
+        "TDGS-EN098"
+      ]
+    },
+    {
+      "passcode": 37694547,
+      "name": "Geartown",
+      "numbers": [
+        "TDGS-EN057"
+      ]
+    },
+    {
+      "passcode": 43385557,
+      "name": "Magical Android",
+      "numbers": [
+        "TDGS-EN043"
+      ]
+    },
+    {
+      "passcode": 43543777,
+      "name": "Izanami",
+      "numbers": [
+        "TDGS-EN083"
+      ]
+    },
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "TDGS-EN040"
+      ]
+    },
+    {
+      "passcode": 45452224,
+      "name": "Kinka-byo",
+      "numbers": [
+        "TDGS-EN034"
+      ]
+    },
+    {
+      "passcode": 45620686,
+      "name": "Noisy Gnat",
+      "numbers": [
+        "TDGS-EN037"
+      ]
+    },
+    {
+      "passcode": 48716139,
+      "name": "Sword of Kusanagi",
+      "numbers": [
+        "TDGS-EN054"
+      ]
+    },
+    {
+      "passcode": 56514812,
+      "name": "Kunoichi",
+      "numbers": [
+        "TDGS-EN031"
+      ]
+    },
+    {
+      "passcode": 57731460,
+      "name": "Gladiator Beast Equeste",
+      "numbers": [
+        "TDGS-EN024"
+      ]
+    },
+    {
+      "passcode": 58132856,
+      "name": "Toy Magician",
+      "numbers": [
+        "TDGS-EN099"
+      ]
+    },
+    {
+      "passcode": 58453942,
+      "name": "Psychic Snail",
+      "numbers": [
+        "TDGS-EN021"
+      ]
+    },
+    {
+      "passcode": 58843503,
+      "name": "Medium Piece Golem",
+      "numbers": [
+        "TDGS-EN007"
+      ]
+    },
+    {
+      "passcode": 58873391,
+      "name": "Fish Depth Charge",
+      "numbers": [
+        "TDGS-EN078"
+      ]
+    },
+    {
+      "passcode": 59575539,
+      "name": "Krebons",
+      "numbers": [
+        "TDGS-EN018"
+      ]
+    },
+    {
+      "passcode": 59695933,
+      "name": "Intercept",
+      "numbers": [
+        "TDGS-EN076"
+      ]
+    },
+    {
+      "passcode": 59718521,
+      "name": "Mind Over Matter",
+      "numbers": [
+        "TDGS-EN073"
+      ]
+    },
+    {
+      "passcode": 59797187,
+      "name": "Gonogo",
+      "numbers": [
+        "TDGS-EN015"
+      ]
+    },
+    {
+      "passcode": 59965151,
+      "name": "Ghost Gardna",
+      "numbers": [
+        "TDGS-EN004"
+      ]
+    },
+    {
+      "passcode": 60187739,
+      "name": "Turbo Booster",
+      "numbers": [
+        "TDGS-EN001"
+      ]
+    },
+    {
+      "passcode": 60410769,
+      "name": "Jutte Fighter",
+      "numbers": [
+        "TDGS-EN012"
+      ]
+    },
+    {
+      "passcode": 60930169,
+      "name": "Broken Blocker",
+      "numbers": [
+        "TDGS-EN069"
+      ]
+    },
+    {
+      "passcode": 61632317,
+      "name": "Sinister Sprocket",
+      "numbers": [
+        "TDGS-EN009"
+      ]
+    },
+    {
+      "passcode": 61656650,
+      "name": "Remote Revenge",
+      "numbers": [
+        "TDGS-EN066"
+      ]
+    },
+    {
+      "passcode": 62878208,
+      "name": "Equip Shot",
+      "numbers": [
+        "TDGS-EN063"
+      ]
+    },
+    {
+      "passcode": 62991886,
+      "name": "Unstable Evolution",
+      "numbers": [
+        "TDGS-EN060"
+      ]
+    },
+    {
+      "passcode": 67723438,
+      "name": "Emergency Teleport",
+      "numbers": [
+        "TDGS-EN053"
+      ]
+    },
+    {
+      "passcode": 68392533,
+      "name": "Telekinetic Charging Cell",
+      "numbers": [
+        "TDGS-EN088"
+      ]
+    },
+    {
+      "passcode": 69514125,
+      "name": "Avenging Knight Parshath",
+      "numbers": [
+        "TDGS-EN000"
+      ]
+    },
+    {
+      "passcode": 70050374,
+      "name": "Twin-Barrel Dragon",
+      "numbers": [
+        "TDGS-EN029"
+      ]
+    },
+    {
+      "passcode": 70780151,
+      "name": "Thought Ruler Archfiend",
+      "numbers": [
+        "TDGS-EN044"
+      ]
+    },
+    {
+      "passcode": 70902743,
+      "name": "Red Dragon Archfiend",
+      "numbers": [
+        "TDGS-EN041"
+      ]
+    },
+    {
+      "passcode": 71272951,
+      "name": "Overworked",
+      "numbers": [
+        "TDGS-EN080"
+      ]
+    },
+    {
+      "passcode": 71628381,
+      "name": "Multiple Piece Golem",
+      "numbers": [
+        "TDGS-EN038"
+      ]
+    },
+    {
+      "passcode": 74115234,
+      "name": "Orb of Yasaka",
+      "numbers": [
+        "TDGS-EN055"
+      ]
+    },
+    {
+      "passcode": 75622824,
+      "name": "Tricky Spell 4",
+      "numbers": [
+        "TDGS-EN091"
+      ]
+    },
+    {
+      "passcode": 78792195,
+      "name": "Hand of the Six Samurai",
+      "numbers": [
+        "TDGS-EN085"
+      ]
+    },
+    {
+      "passcode": 78845026,
+      "name": "Lightwave Tuning",
+      "numbers": [
+        "TDGS-EN050"
+      ]
+    },
+    {
+      "passcode": 79068663,
+      "name": "Junk Barrage",
+      "numbers": [
+        "TDGS-EN047"
+      ]
+    },
+    {
+      "passcode": 79766336,
+      "name": "Trap of Darkness",
+      "numbers": [
+        "TDGS-EN092"
+      ]
+    },
+    {
+      "passcode": 82556058,
+      "name": "Fiendish Engine Ω",
+      "numbers": [
+        "TDGS-EN095"
+      ]
+    },
+    {
+      "passcode": 82633308,
+      "name": "Psychic Overload",
+      "numbers": [
+        "TDGS-EN070"
+      ]
+    },
+    {
+      "passcode": 82841979,
+      "name": "Yamato-no-Kami",
+      "numbers": [
+        "TDGS-EN035"
+      ]
+    },
+    {
+      "passcode": 83239739,
+      "name": "Oyster Meister",
+      "numbers": [
+        "TDGS-EN028"
+      ]
+    },
+    {
+      "passcode": 83725008,
+      "name": "Jenis, Lightsworn Mender",
+      "numbers": [
+        "TDGS-EN025"
+      ]
+    },
+    {
+      "passcode": 83903521,
+      "name": "Beast of the Pharaoh",
+      "numbers": [
+        "TDGS-EN032"
+      ]
+    },
+    {
+      "passcode": 84055227,
+      "name": "Maiden of Macabre",
+      "numbers": [
+        "TDGS-EN084"
+      ]
+    },
+    {
+      "passcode": 84847656,
+      "name": "Telekinetic Shocker",
+      "numbers": [
+        "TDGS-EN022"
+      ]
+    },
+    {
+      "passcode": 84968490,
+      "name": "Needlebug Nest",
+      "numbers": [
+        "TDGS-EN079"
+      ]
+    },
+    {
+      "passcode": 85060248,
+      "name": "Mind Protector",
+      "numbers": [
+        "TDGS-EN019"
+      ]
+    },
+    {
+      "passcode": 85080048,
+      "name": "Judgment of Thunder",
+      "numbers": [
+        "TDGS-EN077"
+      ]
+    },
+    {
+      "passcode": 94886282,
+      "name": "Charge of the Light Brigade",
+      "numbers": [
+        "TDGS-EN089"
+      ]
+    },
+    {
+      "passcode": 95360850,
+      "name": "Shield Warrior",
+      "numbers": [
+        "TDGS-EN005"
+      ]
+    },
+    {
+      "passcode": 96182448,
+      "name": "Nitro Synchron",
+      "numbers": [
+        "TDGS-EN002"
+      ]
+    },
+    {
+      "passcode": 96216229,
+      "name": "Gladiator Beast War Chariot",
+      "numbers": [
+        "TDGS-EN074"
+      ]
+    },
+    {
+      "passcode": 96782886,
+      "name": "Mind Master",
+      "numbers": [
+        "TDGS-EN016"
+      ]
+    },
+    {
+      "passcode": 97021916,
+      "name": "Dark Resonator",
+      "numbers": [
+        "TDGS-EN010"
+      ]
+    },
+    {
+      "passcode": 97151365,
+      "name": "Spacegate",
+      "numbers": [
+        "TDGS-EN067"
+      ]
+    },
+    {
+      "passcode": 97904474,
+      "name": "Handcuffs Dragon",
+      "numbers": [
+        "TDGS-EN013"
+      ]
+    },
+    {
+      "passcode": 98273947,
+      "name": "Graceful Revival",
+      "numbers": [
+        "TDGS-EN064"
+      ]
+    },
+    {
+      "passcode": 99995595,
+      "name": "Recycling Batteries",
+      "numbers": [
+        "TDGS-EN061"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Duelist Genesis'; printings from the YGOPRODeck bulk dump."
+}

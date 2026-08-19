@@ -1,0 +1,308 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "zombie-world-structure-deck",
+  "code": "SDZW",
+  "name": "Zombie World Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-10-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2008-10-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2008-10-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2204140,
+      "name": "Book of Life",
+      "numbers": [
+        "SDZW-EN023"
+      ]
+    },
+    {
+      "passcode": 2326738,
+      "name": "Des Lacooda",
+      "numbers": [
+        "SDZW-EN013"
+      ]
+    },
+    {
+      "passcode": 3149764,
+      "name": "Tutan Mask",
+      "numbers": [
+        "SDZW-EN035"
+      ]
+    },
+    {
+      "passcode": 4064256,
+      "name": "Zombie World",
+      "numbers": [
+        "SDZW-EN017"
+      ]
+    },
+    {
+      "passcode": 4861205,
+      "name": "Call of the Mummy",
+      "numbers": [
+        "SDZW-EN024"
+      ]
+    },
+    {
+      "passcode": 5186893,
+      "name": "Red-Eyes Zombie Dragon",
+      "numbers": [
+        "SDZW-EN001"
+      ]
+    },
+    {
+      "passcode": 7153114,
+      "name": "Field Barrier",
+      "numbers": [
+        "SDZW-EN028"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "SDZW-EN036"
+      ]
+    },
+    {
+      "passcode": 16509093,
+      "name": "Royal Keeper",
+      "numbers": [
+        "SDZW-EN006"
+      ]
+    },
+    {
+      "passcode": 17259470,
+      "name": "Zombie Master",
+      "numbers": [
+        "SDZW-EN016"
+      ]
+    },
+    {
+      "passcode": 19153634,
+      "name": "Patrician of Darkness",
+      "numbers": [
+        "SDZW-EN005"
+      ]
+    },
+    {
+      "passcode": 21887179,
+      "name": "Getsu Fuhma",
+      "numbers": [
+        "SDZW-EN010"
+      ]
+    },
+    {
+      "passcode": 23205979,
+      "name": "Spirit Reaper",
+      "numbers": [
+        "SDZW-EN009"
+      ]
+    },
+    {
+      "passcode": 24530661,
+      "name": "Master Kyonshee",
+      "numbers": [
+        "SDZW-EN008"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "SDZW-EN034"
+      ]
+    },
+    {
+      "passcode": 30459350,
+      "name": "Imperial Iron Wall",
+      "numbers": [
+        "SDZW-EN032"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SDZW-EN022"
+      ]
+    },
+    {
+      "passcode": 31571902,
+      "name": "Malevolent Mech - Goku En",
+      "numbers": [
+        "SDZW-EN002"
+      ]
+    },
+    {
+      "passcode": 37534148,
+      "name": "Ribbon of Rebirth",
+      "numbers": [
+        "SDZW-EN030"
+      ]
+    },
+    {
+      "passcode": 55696885,
+      "name": "Plague Wolf",
+      "numbers": [
+        "SDZW-EN015"
+      ]
+    },
+    {
+      "passcode": 55713623,
+      "name": "Shrink",
+      "numbers": [
+        "SDZW-EN027"
+      ]
+    },
+    {
+      "passcode": 57281778,
+      "name": "Ryu Kokki",
+      "numbers": [
+        "SDZW-EN011"
+      ]
+    },
+    {
+      "passcode": 57953380,
+      "name": "Card of Safe Return",
+      "numbers": [
+        "SDZW-EN021"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SDZW-EN033"
+      ]
+    },
+    {
+      "passcode": 60682203,
+      "name": "Cold Wave",
+      "numbers": [
+        "SDZW-EN019"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "SDZW-EN026"
+      ]
+    },
+    {
+      "passcode": 68670547,
+      "name": "Paladin of the Cursed Dragon",
+      "numbers": [
+        "SDZW-EN003"
+      ]
+    },
+    {
+      "passcode": 70821187,
+      "name": "Regenerating Mummy",
+      "numbers": [
+        "SDZW-EN012"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "SDZW-EN031"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "SDZW-EN025"
+      ]
+    },
+    {
+      "passcode": 77044671,
+      "name": "Pyramid Turtle",
+      "numbers": [
+        "SDZW-EN007"
+      ]
+    },
+    {
+      "passcode": 77936940,
+      "name": "Gernia",
+      "numbers": [
+        "SDZW-EN004"
+      ]
+    },
+    {
+      "passcode": 81510157,
+      "name": "Soul Taker",
+      "numbers": [
+        "SDZW-EN029"
+      ]
+    },
+    {
+      "passcode": 87514539,
+      "name": "Marionette Mite",
+      "numbers": [
+        "SDZW-EN014"
+      ]
+    },
+    {
+      "passcode": 93260132,
+      "name": "Spell Shattering Arrow",
+      "numbers": [
+        "SDZW-EN018"
+      ]
+    },
+    {
+      "passcode": 96008713,
+      "name": "Magical Arm Shield",
+      "numbers": [
+        "SDZW-EN037"
+      ]
+    },
+    {
+      "passcode": 98494543,
+      "name": "Magical Stone Excavation",
+      "numbers": [
+        "SDZW-EN020"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Zombie World Structure Deck'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-zane-truesdale",
+  "code": "DP04",
+  "name": "Duelist Pack: Zane Truesdale",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-03-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1546123,
+      "name": "Cyber End Dragon",
+      "numbers": [
+        "DP04-EN012"
+      ]
+    },
+    {
+      "passcode": 3019642,
+      "name": "Cyberdark Keel",
+      "numbers": [
+        "DP04-EN009"
+      ]
+    },
+    {
+      "passcode": 3370104,
+      "name": "Cyber Phoenix",
+      "numbers": [
+        "DP04-EN006"
+      ]
+    },
+    {
+      "passcode": 3659803,
+      "name": "Overload Fusion",
+      "numbers": [
+        "DP04-EN022"
+      ]
+    },
+    {
+      "passcode": 4162088,
+      "name": "Cyber Laser Dragon",
+      "numbers": [
+        "DP04-EN003"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "DP04-EN015"
+      ]
+    },
+    {
+      "passcode": 10537981,
+      "name": "Return Soul",
+      "numbers": [
+        "DP04-EN028"
+      ]
+    },
+    {
+      "passcode": 11961740,
+      "name": "Different Dimension Capsule",
+      "numbers": [
+        "DP04-EN019"
+      ]
+    },
+    {
+      "passcode": 19252988,
+      "name": "Trap Jammer",
+      "numbers": [
+        "DP04-EN026"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "DP04-EN016"
+      ]
+    },
+    {
+      "passcode": 26439287,
+      "name": "Proto-Cyber Dragon",
+      "numbers": [
+        "DP04-EN004"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "DP04-EN018"
+      ]
+    },
+    {
+      "passcode": 37630732,
+      "name": "Power Bond",
+      "numbers": [
+        "DP04-EN020"
+      ]
+    },
+    {
+      "passcode": 40418351,
+      "name": "Cyberdark Dragon",
+      "numbers": [
+        "DP04-EN014"
+      ]
+    },
+    {
+      "passcode": 41230939,
+      "name": "Cyberdark Horn",
+      "numbers": [
+        "DP04-EN007"
+      ]
+    },
+    {
+      "passcode": 46031686,
+      "name": "Damage Polarizer",
+      "numbers": [
+        "DP04-EN029"
+      ]
+    },
+    {
+      "passcode": 47754278,
+      "name": "Infernal Dragon",
+      "numbers": [
+        "DP04-EN010"
+      ]
+    },
+    {
+      "passcode": 64599569,
+      "name": "Chimeratech Overdragon",
+      "numbers": [
+        "DP04-EN013"
+      ]
+    },
+    {
+      "passcode": 66607691,
+      "name": "Photon Generator Unit",
+      "numbers": [
+        "DP04-EN021"
+      ]
+    },
+    {
+      "passcode": 68774379,
+      "name": "Cyber Barrier Dragon",
+      "numbers": [
+        "DP04-EN002"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "DP04-EN001"
+      ]
+    },
+    {
+      "passcode": 73026394,
+      "name": "Fusion Guard",
+      "numbers": [
+        "DP04-EN030"
+      ]
+    },
+    {
+      "passcode": 73148972,
+      "name": "Ruthless Denial",
+      "numbers": [
+        "DP04-EN024"
+      ]
+    },
+    {
+      "passcode": 74157028,
+      "name": "Cyber Twin Dragon",
+      "numbers": [
+        "DP04-EN011"
+      ]
+    },
+    {
+      "passcode": 76986005,
+      "name": "Cyber Kirin",
+      "numbers": [
+        "DP04-EN005"
+      ]
+    },
+    {
+      "passcode": 77565204,
+      "name": "Future Fusion",
+      "numbers": [
+        "DP04-EN023"
+      ]
+    },
+    {
+      "passcode": 77625948,
+      "name": "Cyberdark Edge",
+      "numbers": [
+        "DP04-EN008"
+      ]
+    },
+    {
+      "passcode": 91989718,
+      "name": "Attack Reflector Unit",
+      "numbers": [
+        "DP04-EN027"
+      ]
+    },
+    {
+      "passcode": 95286165,
+      "name": "De-Fusion",
+      "numbers": [
+        "DP04-EN017"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "DP04-EN025"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Zane Truesdale'; printings from the YGOPRODeck bulk dump."
+}

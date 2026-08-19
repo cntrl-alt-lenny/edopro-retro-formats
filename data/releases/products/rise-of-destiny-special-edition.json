@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "rise-of-destiny-special-edition",
+  "code": "RDS",
+  "name": "Rise of Destiny: Special Edition",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-02-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 38033121,
+      "name": "Dark Magician Girl",
+      "numbers": [
+        "RDS-ENSE2"
+      ]
+    },
+    {
+      "passcode": 53839837,
+      "name": "Vampire Lord",
+      "numbers": [
+        "RDS-ENSE4"
+      ]
+    },
+    {
+      "passcode": 55256016,
+      "name": "Judgment of Anubis",
+      "numbers": [
+        "RDS-ENSE3"
+      ]
+    },
+    {
+      "passcode": 87880531,
+      "name": "Diffusion Wave-Motion",
+      "numbers": [
+        "RDS-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Rise of Destiny: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

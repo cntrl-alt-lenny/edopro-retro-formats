@@ -1,0 +1,783 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "pharaonic-guardian",
+  "code": "PGD",
+  "name": "Pharaonic Guardian",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-07-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 102380,
+      "name": "Lava Golem",
+      "numbers": [
+        "PGD-107"
+      ]
+    },
+    {
+      "passcode": 1082946,
+      "name": "Pyro Clock of Destiny",
+      "numbers": [
+        "PGD-050"
+      ]
+    },
+    {
+      "passcode": 1804528,
+      "name": "Dark Coffin",
+      "numbers": [
+        "PGD-047"
+      ]
+    },
+    {
+      "passcode": 2204140,
+      "name": "Book of Life",
+      "numbers": [
+        "PGD-033"
+      ]
+    },
+    {
+      "passcode": 2326738,
+      "name": "Des Lacooda",
+      "numbers": [
+        "PGD-030"
+      ]
+    },
+    {
+      "passcode": 2792265,
+      "name": "Servant of Catabolism",
+      "numbers": [
+        "PGD-012"
+      ]
+    },
+    {
+      "passcode": 2833249,
+      "name": "D. Tribe",
+      "numbers": [
+        "PGD-102"
+      ]
+    },
+    {
+      "passcode": 2926176,
+      "name": "Curse of Royal",
+      "numbers": [
+        "PGD-044"
+      ]
+    },
+    {
+      "passcode": 3055837,
+      "name": "Trap of Board Eraser",
+      "numbers": [
+        "PGD-099"
+      ]
+    },
+    {
+      "passcode": 3149764,
+      "name": "Tutan Mask",
+      "numbers": [
+        "PGD-041"
+      ]
+    },
+    {
+      "passcode": 3549275,
+      "name": "Dice Jar",
+      "numbers": [
+        "PGD-027"
+      ]
+    },
+    {
+      "passcode": 4035199,
+      "name": "Shapesnatch",
+      "numbers": [
+        "PGD-002"
+      ]
+    },
+    {
+      "passcode": 4178474,
+      "name": "Raigeki Break",
+      "numbers": [
+        "PGD-096"
+      ]
+    },
+    {
+      "passcode": 4335645,
+      "name": "Newdoria",
+      "numbers": [
+        "PGD-057"
+      ]
+    },
+    {
+      "passcode": 4861205,
+      "name": "Call of the Mummy",
+      "numbers": [
+        "PGD-038"
+      ]
+    },
+    {
+      "passcode": 5257687,
+      "name": "Jowls of Dark Demise",
+      "numbers": [
+        "PGD-009"
+      ]
+    },
+    {
+      "passcode": 5990062,
+      "name": "Reversal Quiz",
+      "numbers": [
+        "PGD-092"
+      ]
+    },
+    {
+      "passcode": 10012614,
+      "name": "Banner of Courage",
+      "numbers": [
+        "PGD-089"
+      ]
+    },
+    {
+      "passcode": 10248192,
+      "name": "Hieroglyph Lithograph",
+      "numbers": [
+        "PGD-086"
+      ]
+    },
+    {
+      "passcode": 11961740,
+      "name": "Different Dimension Capsule",
+      "numbers": [
+        "PGD-083"
+      ]
+    },
+    {
+      "passcode": 12183332,
+      "name": "Card Shuffle",
+      "numbers": [
+        "PGD-080"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "PGD-035"
+      ]
+    },
+    {
+      "passcode": 14261867,
+      "name": "8-Claws Scorpion",
+      "numbers": [
+        "PGD-024"
+      ]
+    },
+    {
+      "passcode": 15383415,
+      "name": "Swarm of Scarabs",
+      "numbers": [
+        "PGD-021"
+      ]
+    },
+    {
+      "passcode": 16222645,
+      "name": "Sasuke Samurai",
+      "numbers": [
+        "PGD-015"
+      ]
+    },
+    {
+      "passcode": 16509093,
+      "name": "Royal Keeper",
+      "numbers": [
+        "PGD-018"
+      ]
+    },
+    {
+      "passcode": 17192817,
+      "name": "Molten Behemoth",
+      "numbers": [
+        "PGD-001"
+      ]
+    },
+    {
+      "passcode": 17214465,
+      "name": "Maiden of the Aqua",
+      "numbers": [
+        "PGD-008"
+      ]
+    },
+    {
+      "passcode": 17597059,
+      "name": "Byser Shock",
+      "numbers": [
+        "PGD-103"
+      ]
+    },
+    {
+      "passcode": 23205979,
+      "name": "Spirit Reaper",
+      "numbers": [
+        "PGD-076"
+      ]
+    },
+    {
+      "passcode": 23927567,
+      "name": "An Owl of Luck",
+      "numbers": [
+        "PGD-073"
+      ]
+    },
+    {
+      "passcode": 24140059,
+      "name": "A Cat of Ill Omen",
+      "numbers": [
+        "PGD-070"
+      ]
+    },
+    {
+      "passcode": 24317029,
+      "name": "Gravekeeper's Spy",
+      "numbers": [
+        "PGD-059"
+      ]
+    },
+    {
+      "passcode": 24530661,
+      "name": "Master Kyonshee",
+      "numbers": [
+        "PGD-053"
+      ]
+    },
+    {
+      "passcode": 25262697,
+      "name": "Gravekeeper's Assailant",
+      "numbers": [
+        "PGD-067"
+      ]
+    },
+    {
+      "passcode": 26084285,
+      "name": "Gravekeeper's Watcher",
+      "numbers": [
+        "PGD-064"
+      ]
+    },
+    {
+      "passcode": 30450531,
+      "name": "Rite of Spirit",
+      "numbers": [
+        "PGD-100"
+      ]
+    },
+    {
+      "passcode": 31242786,
+      "name": "Souleater",
+      "numbers": [
+        "PGD-003"
+      ]
+    },
+    {
+      "passcode": 37101832,
+      "name": "Gravekeeper's Guard",
+      "numbers": [
+        "PGD-061"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "PGD-051"
+      ]
+    },
+    {
+      "passcode": 38299233,
+      "name": "Needle Wall",
+      "numbers": [
+        "PGD-048"
+      ]
+    },
+    {
+      "passcode": 38411870,
+      "name": "Needle Ceiling",
+      "numbers": [
+        "PGD-045"
+      ]
+    },
+    {
+      "passcode": 38699854,
+      "name": "Book of Taiyou",
+      "numbers": [
+        "PGD-034"
+      ]
+    },
+    {
+      "passcode": 38723936,
+      "name": "Question",
+      "numbers": [
+        "PGD-104"
+      ]
+    },
+    {
+      "passcode": 39537362,
+      "name": "Ordeal of a Traveler",
+      "numbers": [
+        "PGD-042"
+      ]
+    },
+    {
+      "passcode": 39711336,
+      "name": "Fushioh Richie",
+      "numbers": [
+        "PGD-031"
+      ]
+    },
+    {
+      "passcode": 40172183,
+      "name": "Narrow Pass",
+      "numbers": [
+        "PGD-097"
+      ]
+    },
+    {
+      "passcode": 40350910,
+      "name": "Timidity",
+      "numbers": [
+        "PGD-039"
+      ]
+    },
+    {
+      "passcode": 40659562,
+      "name": "Guardian Sphinx",
+      "numbers": [
+        "PGD-025"
+      ]
+    },
+    {
+      "passcode": 40933924,
+      "name": "Dark Scorpion Burglars",
+      "numbers": [
+        "PGD-028"
+      ]
+    },
+    {
+      "passcode": 41398771,
+      "name": "Curse of Aging",
+      "numbers": [
+        "PGD-094"
+      ]
+    },
+    {
+      "passcode": 41482598,
+      "name": "Mirage of Nightmare",
+      "numbers": [
+        "PGD-036"
+      ]
+    },
+    {
+      "passcode": 41872150,
+      "name": "Swarm of Locusts",
+      "numbers": [
+        "PGD-022"
+      ]
+    },
+    {
+      "passcode": 42364374,
+      "name": "Arsenal Bug",
+      "numbers": [
+        "PGD-007"
+      ]
+    },
+    {
+      "passcode": 42994702,
+      "name": "Wandering Mummy",
+      "numbers": [
+        "PGD-019"
+      ]
+    },
+    {
+      "passcode": 43716289,
+      "name": "Poison Mummy",
+      "numbers": [
+        "PGD-016"
+      ]
+    },
+    {
+      "passcode": 44913552,
+      "name": "Timeater",
+      "numbers": [
+        "PGD-010"
+      ]
+    },
+    {
+      "passcode": 45547649,
+      "name": "Birdface",
+      "numbers": [
+        "PGD-005"
+      ]
+    },
+    {
+      "passcode": 46411259,
+      "name": "Metamorphosis",
+      "numbers": [
+        "PGD-090"
+      ]
+    },
+    {
+      "passcode": 47233801,
+      "name": "Dark Snake Syndrome",
+      "numbers": [
+        "PGD-087"
+      ]
+    },
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "PGD-084"
+      ]
+    },
+    {
+      "passcode": 50412166,
+      "name": "Charm of Shabti",
+      "numbers": [
+        "PGD-074"
+      ]
+    },
+    {
+      "passcode": 50712728,
+      "name": "Gravekeeper's Curse",
+      "numbers": [
+        "PGD-060"
+      ]
+    },
+    {
+      "passcode": 51351302,
+      "name": "A Man with Wdjat",
+      "numbers": [
+        "PGD-068"
+      ]
+    },
+    {
+      "passcode": 51534754,
+      "name": "Yomi Ship",
+      "numbers": [
+        "PGD-071"
+      ]
+    },
+    {
+      "passcode": 51934376,
+      "name": "Kabazauls",
+      "numbers": [
+        "PGD-054"
+      ]
+    },
+    {
+      "passcode": 54704216,
+      "name": "Nightmare Wheel",
+      "numbers": [
+        "PGD-106"
+      ]
+    },
+    {
+      "passcode": 58577036,
+      "name": "Reasoning",
+      "numbers": [
+        "PGD-081"
+      ]
+    },
+    {
+      "passcode": 59290628,
+      "name": "Nightmare Horse",
+      "numbers": [
+        "PGD-077"
+      ]
+    },
+    {
+      "passcode": 62473983,
+      "name": "Gravekeeper's Chief",
+      "numbers": [
+        "PGD-065"
+      ]
+    },
+    {
+      "passcode": 63571750,
+      "name": "Pharaoh's Treasure",
+      "numbers": [
+        "PGD-052"
+      ]
+    },
+    {
+      "passcode": 63695531,
+      "name": "Gravekeeper's Spear Soldier",
+      "numbers": [
+        "PGD-062"
+      ]
+    },
+    {
+      "passcode": 64697231,
+      "name": "Trap Dustshoot",
+      "numbers": [
+        "PGD-049"
+      ]
+    },
+    {
+      "passcode": 65810489,
+      "name": "Statue of the Wicked",
+      "numbers": [
+        "PGD-046"
+      ]
+    },
+    {
+      "passcode": 65830223,
+      "name": "Coffin Seller",
+      "numbers": [
+        "PGD-093"
+      ]
+    },
+    {
+      "passcode": 70307656,
+      "name": "Mucus Yolk",
+      "numbers": [
+        "PGD-011"
+      ]
+    },
+    {
+      "passcode": 72405967,
+      "name": "Royal Tribute",
+      "numbers": [
+        "PGD-091"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "PGD-088"
+      ]
+    },
+    {
+      "passcode": 75109441,
+      "name": "Cobraman Sakuzy",
+      "numbers": [
+        "PGD-032"
+      ]
+    },
+    {
+      "passcode": 75285069,
+      "name": "Moisture Creature",
+      "numbers": [
+        "PGD-013"
+      ]
+    },
+    {
+      "passcode": 76052811,
+      "name": "Helpoemer",
+      "numbers": [
+        "PGD-058"
+      ]
+    },
+    {
+      "passcode": 76532077,
+      "name": "Bottomless Shifting Sand",
+      "numbers": [
+        "PGD-043"
+      ]
+    },
+    {
+      "passcode": 76754619,
+      "name": "Pyramid Energy",
+      "numbers": [
+        "PGD-040"
+      ]
+    },
+    {
+      "passcode": 76848240,
+      "name": "Non Aggression Area",
+      "numbers": [
+        "PGD-101"
+      ]
+    },
+    {
+      "passcode": 76922029,
+      "name": "Don Zaloog",
+      "numbers": [
+        "PGD-029"
+      ]
+    },
+    {
+      "passcode": 77044671,
+      "name": "Pyramid Turtle",
+      "numbers": [
+        "PGD-026"
+      ]
+    },
+    {
+      "passcode": 77561728,
+      "name": "Disturbance Strategy",
+      "numbers": [
+        "PGD-098"
+      ]
+    },
+    {
+      "passcode": 77876207,
+      "name": "Secret Pass to the Treasures",
+      "numbers": [
+        "PGD-037"
+      ]
+    },
+    {
+      "passcode": 78053598,
+      "name": "Dark Designator",
+      "numbers": [
+        "PGD-079"
+      ]
+    },
+    {
+      "passcode": 78266168,
+      "name": "Giant Axe Mummy",
+      "numbers": [
+        "PGD-023"
+      ]
+    },
+    {
+      "passcode": 78783370,
+      "name": "Barrel Behind the Door",
+      "numbers": [
+        "PGD-095"
+      ]
+    },
+    {
+      "passcode": 80233946,
+      "name": "Gora Turtle",
+      "numbers": [
+        "PGD-014"
+      ]
+    },
+    {
+      "passcode": 82642348,
+      "name": "Kryuel",
+      "numbers": [
+        "PGD-006"
+      ]
+    },
+    {
+      "passcode": 83555666,
+      "name": "Ring of Destruction",
+      "numbers": [
+        "PGD-000"
+      ]
+    },
+    {
+      "passcode": 83986578,
+      "name": "King Tiger Wanghu",
+      "numbers": [
+        "PGD-004"
+      ]
+    },
+    {
+      "passcode": 84740193,
+      "name": "Buster Rancher",
+      "numbers": [
+        "PGD-085"
+      ]
+    },
+    {
+      "passcode": 85562745,
+      "name": "Dark Room of Nightmare",
+      "numbers": [
+        "PGD-082"
+      ]
+    },
+    {
+      "passcode": 85684223,
+      "name": "Reaper on the Nightmare",
+      "numbers": [
+        "PGD-078"
+      ]
+    },
+    {
+      "passcode": 86801871,
+      "name": "Cobra Jar",
+      "numbers": [
+        "PGD-075"
+      ]
+    },
+    {
+      "passcode": 87523462,
+      "name": "Winged Sage Falcos",
+      "numbers": [
+        "PGD-072"
+      ]
+    },
+    {
+      "passcode": 88989706,
+      "name": "Great Dezard",
+      "numbers": [
+        "PGD-020"
+      ]
+    },
+    {
+      "passcode": 89111398,
+      "name": "Dark Dust Spirit",
+      "numbers": [
+        "PGD-017"
+      ]
+    },
+    {
+      "passcode": 90980792,
+      "name": "Dark Jeroid",
+      "numbers": [
+        "PGD-056"
+      ]
+    },
+    {
+      "passcode": 93382620,
+      "name": "Rope of Life",
+      "numbers": [
+        "PGD-105"
+      ]
+    },
+    {
+      "passcode": 97923414,
+      "name": "Inpachi",
+      "numbers": [
+        "PGD-055"
+      ]
+    },
+    {
+      "passcode": 98745000,
+      "name": "Mystical Knight of Jackal",
+      "numbers": [
+        "PGD-069"
+      ]
+    },
+    {
+      "passcode": 99690140,
+      "name": "Gravekeeper's Vassal",
+      "numbers": [
+        "PGD-063"
+      ]
+    },
+    {
+      "passcode": 99877698,
+      "name": "Gravekeeper's Cannonholder",
+      "numbers": [
+        "PGD-066"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Pharaonic Guardian'; printings from the YGOPRODeck bulk dump."
+}

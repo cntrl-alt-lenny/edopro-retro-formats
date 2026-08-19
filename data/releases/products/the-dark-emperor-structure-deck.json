@@ -1,0 +1,279 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-dark-emperor-structure-deck",
+  "code": "SDDE",
+  "name": "The Dark Emperor Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-04-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3773196,
+      "name": "D.D. Scout Plane",
+      "numbers": [
+        "SDDE-EN011"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SDDE-EN019"
+      ]
+    },
+    {
+      "passcode": 5758500,
+      "name": "Soul Release",
+      "numbers": [
+        "SDDE-EN021"
+      ]
+    },
+    {
+      "passcode": 7572887,
+      "name": "D.D. Warrior Lady",
+      "numbers": [
+        "SDDE-EN010"
+      ]
+    },
+    {
+      "passcode": 8628798,
+      "name": "D.D. Dynamite",
+      "numbers": [
+        "SDDE-EN035"
+      ]
+    },
+    {
+      "passcode": 9622164,
+      "name": "D.D.R. - Different Dimension Reincarnation",
+      "numbers": [
+        "SDDE-EN018"
+      ]
+    },
+    {
+      "passcode": 9748752,
+      "name": "Caius the Shadow Monarch",
+      "numbers": [
+        "SDDE-EN001"
+      ]
+    },
+    {
+      "passcode": 27174286,
+      "name": "Return from the Different Dimension",
+      "numbers": [
+        "SDDE-EN030"
+      ]
+    },
+    {
+      "passcode": 27408609,
+      "name": "Golden Homunculus",
+      "numbers": [
+        "SDDE-EN004"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "SDDE-EN032"
+      ]
+    },
+    {
+      "passcode": 30241314,
+      "name": "Macro Cosmos",
+      "numbers": [
+        "SDDE-EN036"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "SDDE-EN022"
+      ]
+    },
+    {
+      "passcode": 35011819,
+      "name": "By Order of the Emperor",
+      "numbers": [
+        "SDDE-EN029"
+      ]
+    },
+    {
+      "passcode": 36584821,
+      "name": "Gren Maju Da Eiza",
+      "numbers": [
+        "SDDE-EN013"
+      ]
+    },
+    {
+      "passcode": 36733451,
+      "name": "Dimensional Alchemist",
+      "numbers": [
+        "SDDE-EN002"
+      ]
+    },
+    {
+      "passcode": 37043180,
+      "name": "D.D. Warrior",
+      "numbers": [
+        "SDDE-EN006"
+      ]
+    },
+    {
+      "passcode": 40133511,
+      "name": "Bazoo the Soul-Eater",
+      "numbers": [
+        "SDDE-EN008"
+      ]
+    },
+    {
+      "passcode": 47829960,
+      "name": "Chaosrider Gustaph",
+      "numbers": [
+        "SDDE-EN012"
+      ]
+    },
+    {
+      "passcode": 48092532,
+      "name": "D.D. Survivor",
+      "numbers": [
+        "SDDE-EN014"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "SDDE-EN031"
+      ]
+    },
+    {
+      "passcode": 54493213,
+      "name": "Helios - The Primordial Sun",
+      "numbers": [
+        "SDDE-EN005"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "SDDE-EN033"
+      ]
+    },
+    {
+      "passcode": 61127349,
+      "name": "Big Bang Shot",
+      "numbers": [
+        "SDDE-EN024"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SDDE-EN026"
+      ]
+    },
+    {
+      "passcode": 70074904,
+      "name": "D.D. Assailant",
+      "numbers": [
+        "SDDE-EN017"
+      ]
+    },
+    {
+      "passcode": 70231910,
+      "name": "Dark Core",
+      "numbers": [
+        "SDDE-EN023"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SDDE-EN020"
+      ]
+    },
+    {
+      "passcode": 71587526,
+      "name": "Karma Cut",
+      "numbers": [
+        "SDDE-EN034"
+      ]
+    },
+    {
+      "passcode": 72237166,
+      "name": "Samsara Kaiser",
+      "numbers": [
+        "SDDE-EN003"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "SDDE-EN009"
+      ]
+    },
+    {
+      "passcode": 81674782,
+      "name": "Dimensional Fissure",
+      "numbers": [
+        "SDDE-EN028"
+      ]
+    },
+    {
+      "passcode": 82112775,
+      "name": "D.D.M. - Different Dimension Master",
+      "numbers": [
+        "SDDE-EN015"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "SDDE-EN027"
+      ]
+    },
+    {
+      "passcode": 88240808,
+      "name": "Kycoo the Ghost Destroyer",
+      "numbers": [
+        "SDDE-EN007"
+      ]
+    },
+    {
+      "passcode": 94853057,
+      "name": "Banisher of the Radiance",
+      "numbers": [
+        "SDDE-EN016"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "SDDE-EN025"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Dark Emperor Structure Deck'; printings from the YGOPRODeck bulk dump."
+}

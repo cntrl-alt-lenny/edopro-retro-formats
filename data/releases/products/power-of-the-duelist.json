@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "power-of-the-duelist",
+  "code": "POTD",
+  "name": "Power of the Duelist",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-08-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3659803,
+      "name": "Overload Fusion",
+      "numbers": [
+        "POTD-EN042"
+      ]
+    },
+    {
+      "passcode": 14772491,
+      "name": "Common Soul",
+      "numbers": [
+        "POTD-EN045"
+      ]
+    },
+    {
+      "passcode": 15294090,
+      "name": "Destiny Mirage",
+      "numbers": [
+        "POTD-EN049"
+      ]
+    },
+    {
+      "passcode": 15894048,
+      "name": "Ultimate Tyranno",
+      "numbers": [
+        "POTD-EN020"
+      ]
+    },
+    {
+      "passcode": 16616620,
+      "name": "Contact",
+      "numbers": [
+        "POTD-EN037"
+      ]
+    },
+    {
+      "passcode": 16946849,
+      "name": "Synthetic Seraphim",
+      "numbers": [
+        "POTD-EN059"
+      ]
+    },
+    {
+      "passcode": 17132130,
+      "name": "Destiny HERO - Dogma",
+      "numbers": [
+        "POTD-EN014"
+      ]
+    },
+    {
+      "passcode": 17955766,
+      "name": "Neo-Spacian Aqua Dolphin",
+      "numbers": [
+        "POTD-EN003"
+      ]
+    },
+    {
+      "passcode": 22147147,
+      "name": "Cyclone Blade",
+      "numbers": [
+        "POTD-EN043"
+      ]
+    },
+    {
+      "passcode": 23299957,
+      "name": "Vehicroid Connection Zone",
+      "numbers": [
+        "POTD-EN040"
+      ]
+    },
+    {
+      "passcode": 23869735,
+      "name": "Fossil Excavation",
+      "numbers": [
+        "POTD-EN058"
+      ]
+    },
+    {
+      "passcode": 24082387,
+      "name": "Crop Circles",
+      "numbers": [
+        "POTD-EN051"
+      ]
+    },
+    {
+      "passcode": 24104865,
+      "name": "Alien Mother",
+      "numbers": [
+        "POTD-EN028"
+      ]
+    },
+    {
+      "passcode": 24311595,
+      "name": "Rescueroid",
+      "numbers": [
+        "POTD-EN011"
+      ]
+    },
+    {
+      "passcode": 25034083,
+      "name": "Decoyroid",
+      "numbers": [
+        "POTD-EN010"
+      ]
+    },
+    {
+      "passcode": 25920413,
+      "name": "Alien Skull",
+      "numbers": [
+        "POTD-EN025"
+      ]
+    },
+    {
+      "passcode": 28355718,
+      "name": "Destiny HERO - Double Dude",
+      "numbers": [
+        "POTD-EN012"
+      ]
+    },
+    {
+      "passcode": 28677304,
+      "name": "Elemental HERO Dark Neos",
+      "numbers": [
+        "POTD-EN033"
+      ]
+    },
+    {
+      "passcode": 36042004,
+      "name": "Babycerasaurus",
+      "numbers": [
+        "POTD-EN022"
+      ]
+    },
+    {
+      "passcode": 36256625,
+      "name": "Super Vehicroid Jumbo Drill",
+      "numbers": [
+        "POTD-EN036"
+      ]
+    },
+    {
+      "passcode": 36378213,
+      "name": "Ambulanceroid",
+      "numbers": [
+        "POTD-EN009"
+      ]
+    },
+    {
+      "passcode": 37265642,
+      "name": "Sabersaurus",
+      "numbers": [
+        "POTD-EN002"
+      ]
+    },
+    {
+      "passcode": 41160595,
+      "name": "Spell Calling",
+      "numbers": [
+        "POTD-EN039"
+      ]
+    },
+    {
+      "passcode": 41382147,
+      "name": "Rallis the Star Bird",
+      "numbers": [
+        "POTD-EN007"
+      ]
+    },
+    {
+      "passcode": 42015635,
+      "name": "Neo Space",
+      "numbers": [
+        "POTD-EN046"
+      ]
+    },
+    {
+      "passcode": 42682609,
+      "name": "Chrysalis Dolphin",
+      "numbers": [
+        "POTD-EN006"
+      ]
+    },
+    {
+      "passcode": 43237273,
+      "name": "Neo-Spacian Dark Panther",
+      "numbers": [
+        "POTD-EN005"
+      ]
+    },
+    {
+      "passcode": 43405287,
+      "name": "D - Chain",
+      "numbers": [
+        "POTD-EN050"
+      ]
+    },
+    {
+      "passcode": 44702857,
+      "name": "Bitelon",
+      "numbers": [
+        "POTD-EN023"
+      ]
+    },
+    {
+      "passcode": 50470982,
+      "name": "The Paths of Destiny",
+      "numbers": [
+        "POTD-EN052"
+      ]
+    },
+    {
+      "passcode": 50684552,
+      "name": "Wonder Garage",
+      "numbers": [
+        "POTD-EN055"
+      ]
+    },
+    {
+      "passcode": 51192573,
+      "name": "Cosmic Horror Gangi'el",
+      "numbers": [
+        "POTD-EN029"
+      ]
+    },
+    {
+      "passcode": 53527835,
+      "name": "Dark City",
+      "numbers": [
+        "POTD-EN048"
+      ]
+    },
+    {
+      "passcode": 54749427,
+      "name": "Destiny HERO - Defender",
+      "numbers": [
+        "POTD-EN013"
+      ]
+    },
+    {
+      "passcode": 55171412,
+      "name": "Elemental HERO Aqua Neos",
+      "numbers": [
+        "POTD-EN031"
+      ]
+    },
+    {
+      "passcode": 55461064,
+      "name": "Destiny HERO - Blade Master",
+      "numbers": [
+        "POTD-EN015"
+      ]
+    },
+    {
+      "passcode": 59258334,
+      "name": "Brainwashing Beam",
+      "numbers": [
+        "POTD-EN060"
+      ]
+    },
+    {
+      "passcode": 62315111,
+      "name": "Alien Hunter",
+      "numbers": [
+        "POTD-EN026"
+      ]
+    },
+    {
+      "passcode": 62437709,
+      "name": "Alien Grey",
+      "numbers": [
+        "POTD-EN024"
+      ]
+    },
+    {
+      "passcode": 63259351,
+      "name": "Miracle Jurassic Egg",
+      "numbers": [
+        "POTD-EN021"
+      ]
+    },
+    {
+      "passcode": 63477921,
+      "name": "Cyber Summon Blaster",
+      "numbers": [
+        "POTD-EN057"
+      ]
+    },
+    {
+      "passcode": 64599569,
+      "name": "Chimeratech Overdragon",
+      "numbers": [
+        "POTD-EN034"
+      ]
+    },
+    {
+      "passcode": 77565204,
+      "name": "Future Fusion",
+      "numbers": [
+        "POTD-EN044"
+      ]
+    },
+    {
+      "passcode": 78387742,
+      "name": "Fake Hero",
+      "numbers": [
+        "POTD-EN038"
+      ]
+    },
+    {
+      "passcode": 79409334,
+      "name": "Black Stego",
+      "numbers": [
+        "POTD-EN019"
+      ]
+    },
+    {
+      "passcode": 80744121,
+      "name": "Destiny HERO - Fear Monger",
+      "numbers": [
+        "POTD-EN016"
+      ]
+    },
+    {
+      "passcode": 80921533,
+      "name": "Mausoleum of the Emperor",
+      "numbers": [
+        "POTD-EN047"
+      ]
+    },
+    {
+      "passcode": 81566151,
+      "name": "Elemental HERO Flare Neos",
+      "numbers": [
+        "POTD-EN032"
+      ]
+    },
+    {
+      "passcode": 81866673,
+      "name": "Destiny HERO - Dasher",
+      "numbers": [
+        "POTD-EN017"
+      ]
+    },
+    {
+      "passcode": 86742443,
+      "name": "Royal Writ of Taxation",
+      "numbers": [
+        "POTD-EN054"
+      ]
+    },
+    {
+      "passcode": 89621922,
+      "name": "Neo-Spacian Flare Scarab",
+      "numbers": [
+        "POTD-EN004"
+      ]
+    },
+    {
+      "passcode": 89899996,
+      "name": "D - Spirit",
+      "numbers": [
+        "POTD-EN041"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "POTD-EN001"
+      ]
+    },
+    {
+      "passcode": 90654356,
+      "name": "Black Ptera",
+      "numbers": [
+        "POTD-EN018"
+      ]
+    },
+    {
+      "passcode": 96875080,
+      "name": "Orbital Bombardment",
+      "numbers": [
+        "POTD-EN053"
+      ]
+    },
+    {
+      "passcode": 97697678,
+      "name": "Flying Saucer Muusik'i",
+      "numbers": [
+        "POTD-EN030"
+      ]
+    },
+    {
+      "passcode": 97705809,
+      "name": "Supercharge",
+      "numbers": [
+        "POTD-EN056"
+      ]
+    },
+    {
+      "passcode": 98719226,
+      "name": "Alien Warrior",
+      "numbers": [
+        "POTD-EN027"
+      ]
+    },
+    {
+      "passcode": 98927491,
+      "name": "Ambulance Rescueroid",
+      "numbers": [
+        "POTD-EN035"
+      ]
+    },
+    {
+      "passcode": 99861526,
+      "name": "Submarineroid",
+      "numbers": [
+        "POTD-EN008"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Power of the Duelist'; printings from the YGOPRODeck bulk dump."
+}

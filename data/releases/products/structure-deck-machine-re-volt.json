@@ -1,0 +1,286 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-machine-re-volt",
+  "code": "SD10",
+  "name": "Structure Deck: Machine Re-Volt",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-01-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1953925,
+      "name": "Ancient Gear Engineer",
+      "numbers": [
+        "SD10-EN003"
+      ]
+    },
+    {
+      "passcode": 4446672,
+      "name": "Ancient Gear Explosive",
+      "numbers": [
+        "SD10-EN019"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD10-EN024"
+      ]
+    },
+    {
+      "passcode": 7359741,
+      "name": "Mechanicalchaser",
+      "numbers": [
+        "SD10-EN005"
+      ]
+    },
+    {
+      "passcode": 10035717,
+      "name": "Weapon Change",
+      "numbers": [
+        "SD10-EN028"
+      ]
+    },
+    {
+      "passcode": 10509340,
+      "name": "Ancient Gear Beast",
+      "numbers": [
+        "SD10-EN013"
+      ]
+    },
+    {
+      "passcode": 11384280,
+      "name": "Cannon Soldier",
+      "numbers": [
+        "SD10-EN009"
+      ]
+    },
+    {
+      "passcode": 12503902,
+      "name": "Rare Metalmorph",
+      "numbers": [
+        "SD10-EN035"
+      ]
+    },
+    {
+      "passcode": 13316346,
+      "name": "Boot-Up Soldier - Dread Dynamo",
+      "numbers": [
+        "SD10-EN004"
+      ]
+    },
+    {
+      "passcode": 13839120,
+      "name": "Yellow Gadget",
+      "numbers": [
+        "SD10-EN008"
+      ]
+    },
+    {
+      "passcode": 13955608,
+      "name": "Stronghold the Moving Fortress",
+      "numbers": [
+        "SD10-EN031"
+      ]
+    },
+    {
+      "passcode": 18190572,
+      "name": "Micro Ray",
+      "numbers": [
+        "SD10-EN034"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD10-EN026"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "SD10-EN025"
+      ]
+    },
+    {
+      "passcode": 23265594,
+      "name": "Heavy Mech Support Platform",
+      "numbers": [
+        "SD10-EN011"
+      ]
+    },
+    {
+      "passcode": 30190809,
+      "name": "Gear Golem the Moving Fortress",
+      "numbers": [
+        "SD10-EN010"
+      ]
+    },
+    {
+      "passcode": 30435145,
+      "name": "Ancient Gear Factory",
+      "numbers": [
+        "SD10-EN021"
+      ]
+    },
+    {
+      "passcode": 31557782,
+      "name": "Ancient Gear",
+      "numbers": [
+        "SD10-EN015"
+      ]
+    },
+    {
+      "passcode": 37457534,
+      "name": "Ancient Gear Tank",
+      "numbers": [
+        "SD10-EN018"
+      ]
+    },
+    {
+      "passcode": 40830387,
+      "name": "Ancient Gear Fist",
+      "numbers": [
+        "SD10-EN020"
+      ]
+    },
+    {
+      "passcode": 41172955,
+      "name": "Green Gadget",
+      "numbers": [
+        "SD10-EN006"
+      ]
+    },
+    {
+      "passcode": 50933533,
+      "name": "Ancient Gear Gadjiltron Dragon",
+      "numbers": [
+        "SD10-EN001"
+      ]
+    },
+    {
+      "passcode": 56094445,
+      "name": "Ancient Gear Soldier",
+      "numbers": [
+        "SD10-EN014"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "SD10-EN033"
+      ]
+    },
+    {
+      "passcode": 59811955,
+      "name": "Ancient Gear Workshop",
+      "numbers": [
+        "SD10-EN017"
+      ]
+    },
+    {
+      "passcode": 63995093,
+      "name": "Machine Duplication",
+      "numbers": [
+        "SD10-EN029"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "SD10-EN030"
+      ]
+    },
+    {
+      "passcode": 67829249,
+      "name": "Ancient Gear Drill",
+      "numbers": [
+        "SD10-EN022"
+      ]
+    },
+    {
+      "passcode": 74458486,
+      "name": "Covering Fire",
+      "numbers": [
+        "SD10-EN036"
+      ]
+    },
+    {
+      "passcode": 80045583,
+      "name": "Ancient Gear Cannon",
+      "numbers": [
+        "SD10-EN016"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "SD10-EN032"
+      ]
+    },
+    {
+      "passcode": 83104731,
+      "name": "Ancient Gear Golem",
+      "numbers": [
+        "SD10-EN012"
+      ]
+    },
+    {
+      "passcode": 86321248,
+      "name": "Ancient Gear Gadjiltron Chimera",
+      "numbers": [
+        "SD10-EN002"
+      ]
+    },
+    {
+      "passcode": 86445415,
+      "name": "Red Gadget",
+      "numbers": [
+        "SD10-EN007"
+      ]
+    },
+    {
+      "passcode": 91597389,
+      "name": "Roll Out!",
+      "numbers": [
+        "SD10-EN037"
+      ]
+    },
+    {
+      "passcode": 92001300,
+      "name": "Ancient Gear Castle",
+      "numbers": [
+        "SD10-EN023"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "SD10-EN027"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Machine Re-Volt'; printings from the YGOPRODeck bulk dump."
+}

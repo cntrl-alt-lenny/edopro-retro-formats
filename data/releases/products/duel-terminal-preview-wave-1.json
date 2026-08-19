@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-preview-wave-1",
+  "code": "DTP1",
+  "name": "Duel Terminal - Preview Wave 1",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-07-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2314238,
+      "name": "Dark Magic Attack",
+      "numbers": [
+        "DTP1-EN014"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "DTP1-EN020"
+      ]
+    },
+    {
+      "passcode": 17449108,
+      "name": "Nobleman of Extermination",
+      "numbers": [
+        "DTP1-EN012"
+      ]
+    },
+    {
+      "passcode": 17655904,
+      "name": "Burst Stream of Destruction",
+      "numbers": [
+        "DTP1-EN013"
+      ]
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements",
+      "numbers": [
+        "DTP1-EN019"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "DTP1-EN007"
+      ]
+    },
+    {
+      "passcode": 42941100,
+      "name": "Ojama Yellow",
+      "numbers": [
+        "DTP1-EN004"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DTP1-EN002"
+      ]
+    },
+    {
+      "passcode": 52684508,
+      "name": "Inferno Fire Blast",
+      "numbers": [
+        "DTP1-EN015"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "DTP1-EN008"
+      ]
+    },
+    {
+      "passcode": 57882509,
+      "name": "Mask of Weakness",
+      "numbers": [
+        "DTP1-EN017"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "DTP1-EN016"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "DTP1-EN010"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "DTP1-EN009"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "DTP1-EN003"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "DTP1-EN018"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "DTP1-EN006"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DTP1-EN001"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "DTP1-EN005"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "DTP1-EN011"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal - Preview Wave 1'; printings from the YGOPRODeck bulk dump."
+}

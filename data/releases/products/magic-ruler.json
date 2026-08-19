@@ -1,0 +1,1046 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "magic-ruler",
+  "code": "MRL",
+  "name": "Magic Ruler",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2002-09-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 596051,
+      "name": "Snake Fang",
+      "numbers": [
+        "MRL-050",
+        "MRL-E050"
+      ]
+    },
+    {
+      "passcode": 1641882,
+      "name": "Fusionist",
+      "numbers": [
+        "MRL-E113"
+      ]
+    },
+    {
+      "passcode": 2964201,
+      "name": "Ryu-Ran",
+      "numbers": [
+        "MRL-070",
+        "MRL-E070"
+      ]
+    },
+    {
+      "passcode": 3056267,
+      "name": "Invader of the Throne",
+      "numbers": [
+        "MRL-026",
+        "MRL-E026"
+      ]
+    },
+    {
+      "passcode": 3797883,
+      "name": "Slot Machine",
+      "numbers": [
+        "MRL-028",
+        "MRL-E028"
+      ]
+    },
+    {
+      "passcode": 4849037,
+      "name": "Performance of Sword",
+      "numbers": [
+        "MRL-067",
+        "MRL-E067"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "MRL-047",
+        "MRL-E047"
+      ]
+    },
+    {
+      "passcode": 7089711,
+      "name": "Hane-Hane",
+      "numbers": [
+        "MRL-E110"
+      ]
+    },
+    {
+      "passcode": 7892180,
+      "name": "Psychic Kappa",
+      "numbers": [
+        "MRL-053",
+        "MRL-E053"
+      ]
+    },
+    {
+      "passcode": 11324436,
+      "name": "Electric Snake",
+      "numbers": [
+        "MRL-008",
+        "MRL-E008"
+      ]
+    },
+    {
+      "passcode": 12470447,
+      "name": "Curse of Fiend",
+      "numbers": [
+        "MRL-032",
+        "MRL-E032"
+      ]
+    },
+    {
+      "passcode": 13723605,
+      "name": "Man-Eating Treasure Chest",
+      "numbers": [
+        "MRL-E106"
+      ]
+    },
+    {
+      "passcode": 14015067,
+      "name": "Ancient One of the Deep Forest",
+      "numbers": [
+        "MRL-018",
+        "MRL-E018"
+      ]
+    },
+    {
+      "passcode": 15023985,
+      "name": "Stone Ogre Grotto",
+      "numbers": [
+        "MRL-058",
+        "MRL-E058"
+      ]
+    },
+    {
+      "passcode": 15083728,
+      "name": "House of Adhesive Tape",
+      "numbers": [
+        "MRL-064",
+        "MRL-E064"
+      ]
+    },
+    {
+      "passcode": 15259703,
+      "name": "Toon World",
+      "numbers": [
+        "MRL-076",
+        "MRL-E076"
+      ]
+    },
+    {
+      "passcode": 16430187,
+      "name": "The Reliable Guardian",
+      "numbers": [
+        "MRL-044",
+        "MRL-E044"
+      ]
+    },
+    {
+      "passcode": 16762927,
+      "name": "Gravekeeper's Servant",
+      "numbers": [
+        "MRL-031",
+        "MRL-E031"
+      ]
+    },
+    {
+      "passcode": 17375316,
+      "name": "Confiscation",
+      "numbers": [
+        "MRL-038",
+        "MRL-E038"
+      ]
+    },
+    {
+      "passcode": 17653779,
+      "name": "Fairy's Hand Mirror",
+      "numbers": [
+        "MRL-041",
+        "MRL-E041"
+      ]
+    },
+    {
+      "passcode": 18161786,
+      "name": "Mystic Plasma Zone",
+      "numbers": [
+        "MRL-101",
+        "MRL-E101"
+      ]
+    },
+    {
+      "passcode": 18591904,
+      "name": "Final Destiny",
+      "numbers": [
+        "MRL-035",
+        "MRL-E035"
+      ]
+    },
+    {
+      "passcode": 18807108,
+      "name": "Spellbinding Circle",
+      "numbers": [
+        "MRL-006",
+        "MRL-E006"
+      ]
+    },
+    {
+      "passcode": 19384334,
+      "name": "Molten Destruction",
+      "numbers": [
+        "MRL-098",
+        "MRL-E098"
+      ]
+    },
+    {
+      "passcode": 19406822,
+      "name": "Kotodama",
+      "numbers": [
+        "MRL-095",
+        "MRL-E095"
+      ]
+    },
+    {
+      "passcode": 19523799,
+      "name": "Ookazi",
+      "numbers": [
+        "MRL-E108"
+      ]
+    },
+    {
+      "passcode": 20228463,
+      "name": "Ceremonial Bell",
+      "numbers": [
+        "MRL-092",
+        "MRL-E092"
+      ]
+    },
+    {
+      "passcode": 20624263,
+      "name": "Peacock",
+      "numbers": [
+        "MRL-011",
+        "MRL-E011"
+      ]
+    },
+    {
+      "passcode": 21263083,
+      "name": "Pale Beast",
+      "numbers": [
+        "MRL-E109"
+      ]
+    },
+    {
+      "passcode": 21340051,
+      "name": "Boar Soldier",
+      "numbers": [
+        "MRL-089",
+        "MRL-E089"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "MRL-061",
+        "MRL-E061"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "MRL-086",
+        "MRL-E086"
+      ]
+    },
+    {
+      "passcode": 23289281,
+      "name": "Karate Man",
+      "numbers": [
+        "MRL-083",
+        "MRL-E083"
+      ]
+    },
+    {
+      "passcode": 23401839,
+      "name": "Senju of the Thousand Hands",
+      "numbers": [
+        "MRL-080",
+        "MRL-E080"
+      ]
+    },
+    {
+      "passcode": 29692206,
+      "name": "Twin Long Rods #2",
+      "numbers": [
+        "MRL-057",
+        "MRL-E057"
+      ]
+    },
+    {
+      "passcode": 30243636,
+      "name": "Hungry Burger",
+      "numbers": [
+        "MRL-068",
+        "MRL-E068"
+      ]
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior",
+      "numbers": [
+        "MRL-E103"
+      ]
+    },
+    {
+      "passcode": 32539892,
+      "name": "Minar",
+      "numbers": [
+        "MRL-015",
+        "MRL-E015"
+      ]
+    },
+    {
+      "passcode": 33064647,
+      "name": "One-Eyed Shield Dragon",
+      "numbers": [
+        "MRL-E127"
+      ]
+    },
+    {
+      "passcode": 34124316,
+      "name": "Cyber Jar",
+      "numbers": [
+        "MRL-077",
+        "MRL-E077"
+      ]
+    },
+    {
+      "passcode": 34442949,
+      "name": "Mechanical Snail",
+      "numbers": [
+        "MRL-021",
+        "MRL-E021"
+      ]
+    },
+    {
+      "passcode": 35565537,
+      "name": "Dark Witch",
+      "numbers": [
+        "MRL-019",
+        "MRL-E019"
+      ]
+    },
+    {
+      "passcode": 36039163,
+      "name": "Penguin Knight",
+      "numbers": [
+        "MRL-001",
+        "MRL-E001"
+      ]
+    },
+    {
+      "passcode": 38142739,
+      "name": "Petit Angel",
+      "numbers": [
+        "MRL-E114"
+      ]
+    },
+    {
+      "passcode": 38369349,
+      "name": "Manga Ryu-Ran",
+      "numbers": [
+        "MRL-071",
+        "MRL-E071"
+      ]
+    },
+    {
+      "passcode": 38552107,
+      "name": "Horn of Light",
+      "numbers": [
+        "MRL-004",
+        "MRL-E004"
+      ]
+    },
+    {
+      "passcode": 40374923,
+      "name": "Mammoth Graveyard",
+      "numbers": [
+        "MRL-E104"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "MRL-002",
+        "MRL-E002"
+      ]
+    },
+    {
+      "passcode": 41426869,
+      "name": "Black Illusion Ritual",
+      "numbers": [
+        "MRL-051",
+        "MRL-E051"
+      ]
+    },
+    {
+      "passcode": 42578427,
+      "name": "Eatgaboon",
+      "numbers": [
+        "MRL-065",
+        "MRL-E065"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "MRL-048",
+        "MRL-E048"
+      ]
+    },
+    {
+      "passcode": 42829885,
+      "name": "The Forceful Sentry",
+      "numbers": [
+        "MRL-045",
+        "MRL-E045"
+      ]
+    },
+    {
+      "passcode": 43417563,
+      "name": "Commencement Dance",
+      "numbers": [
+        "MRL-062",
+        "MRL-E062"
+      ]
+    },
+    {
+      "passcode": 43641473,
+      "name": "Tailor of the Fickle",
+      "numbers": [
+        "MRL-042",
+        "MRL-E042"
+      ]
+    },
+    {
+      "passcode": 44287299,
+      "name": "Masaki the Legendary Swordsman",
+      "numbers": [
+        "MRL-E116"
+      ]
+    },
+    {
+      "passcode": 44656491,
+      "name": "Messenger of Peace",
+      "numbers": [
+        "MRL-102",
+        "MRL-E102"
+      ]
+    },
+    {
+      "passcode": 44763025,
+      "name": "Delinquent Duo",
+      "numbers": [
+        "MRL-039",
+        "MRL-E039"
+      ]
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman",
+      "numbers": [
+        "MRL-E111"
+      ]
+    },
+    {
+      "passcode": 45778932,
+      "name": "Rising Air Current",
+      "numbers": [
+        "MRL-099",
+        "MRL-E099"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "MRL-036",
+        "MRL-E036"
+      ]
+    },
+    {
+      "passcode": 46130346,
+      "name": "Hinotama",
+      "numbers": [
+        "MRL-E120"
+      ]
+    },
+    {
+      "passcode": 46534755,
+      "name": "Fire Kraken",
+      "numbers": [
+        "MRL-014",
+        "MRL-E014"
+      ]
+    },
+    {
+      "passcode": 47879985,
+      "name": "Guardian of the Throne Room",
+      "numbers": [
+        "MRL-013",
+        "MRL-E013"
+      ]
+    },
+    {
+      "passcode": 50913601,
+      "name": "Mountain",
+      "numbers": [
+        "MRL-E119"
+      ]
+    },
+    {
+      "passcode": 50930991,
+      "name": "Neo the Magic Swordsman",
+      "numbers": [
+        "MRL-E105"
+      ]
+    },
+    {
+      "passcode": 53183600,
+      "name": "Blue-Eyes Toon Dragon",
+      "numbers": [
+        "MRL-000",
+        "MRL-E000"
+      ]
+    },
+    {
+      "passcode": 54541900,
+      "name": "Karbonala Warrior",
+      "numbers": [
+        "MRL-E121"
+      ]
+    },
+    {
+      "passcode": 54579801,
+      "name": "High Tide Gyojin",
+      "numbers": [
+        "MRL-025",
+        "MRL-E025"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "MRL-E129"
+      ]
+    },
+    {
+      "passcode": 55998462,
+      "name": "Metal Fish",
+      "numbers": [
+        "MRL-007",
+        "MRL-E007"
+      ]
+    },
+    {
+      "passcode": 56342351,
+      "name": "M-Warrior #1",
+      "numbers": [
+        "MRL-E123"
+      ]
+    },
+    {
+      "passcode": 56594520,
+      "name": "Gaia Power",
+      "numbers": [
+        "MRL-096",
+        "MRL-E096"
+      ]
+    },
+    {
+      "passcode": 56789759,
+      "name": "Tyhone #2",
+      "numbers": [
+        "MRL-017",
+        "MRL-E017"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "MRL-093",
+        "MRL-E093"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "MRL-090",
+        "MRL-E090"
+      ]
+    },
+    {
+      "passcode": 58551308,
+      "name": "Spear Cretin",
+      "numbers": [
+        "MRL-087",
+        "MRL-E087"
+      ]
+    },
+    {
+      "passcode": 59784896,
+      "name": "Dark Zebra",
+      "numbers": [
+        "MRL-084",
+        "MRL-E084"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "MRL-081",
+        "MRL-E081"
+      ]
+    },
+    {
+      "passcode": 61528025,
+      "name": "Banisher of the Light",
+      "numbers": [
+        "MRL-078",
+        "MRL-E078"
+      ]
+    },
+    {
+      "passcode": 62397231,
+      "name": "Hyozanryu",
+      "numbers": [
+        "MRL-075",
+        "MRL-E075"
+      ]
+    },
+    {
+      "passcode": 63162310,
+      "name": "Wall Shadow",
+      "numbers": [
+        "MRL-056",
+        "MRL-E056"
+      ]
+    },
+    {
+      "passcode": 64047146,
+      "name": "Horn of the Unicorn",
+      "numbers": [
+        "MRL-054",
+        "MRL-E054"
+      ]
+    },
+    {
+      "passcode": 64389297,
+      "name": "Magical Labyrinth",
+      "numbers": [
+        "MRL-059",
+        "MRL-E059"
+      ]
+    },
+    {
+      "passcode": 64631466,
+      "name": "Relinquished",
+      "numbers": [
+        "MRL-029",
+        "MRL-E029"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "MRL-003",
+        "MRL-E003"
+      ]
+    },
+    {
+      "passcode": 65458948,
+      "name": "Toon Mermaid",
+      "numbers": [
+        "MRL-072",
+        "MRL-E072"
+      ]
+    },
+    {
+      "passcode": 65570596,
+      "name": "Red Archery Girl",
+      "numbers": [
+        "MRL-030",
+        "MRL-E030"
+      ]
+    },
+    {
+      "passcode": 66516792,
+      "name": "Serpent Night Dragon",
+      "numbers": [
+        "MRL-103",
+        "MRL-E130"
+      ]
+    },
+    {
+      "passcode": 67284908,
+      "name": "Labyrinth Wall",
+      "numbers": [
+        "MRL-055",
+        "MRL-E055"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "MRL-043",
+        "MRL-E043"
+      ]
+    },
+    {
+      "passcode": 70368879,
+      "name": "Upstart Goblin",
+      "numbers": [
+        "MRL-033",
+        "MRL-E033"
+      ]
+    },
+    {
+      "passcode": 70681994,
+      "name": "Dragoness the Wicked Knight",
+      "numbers": [
+        "MRL-E126"
+      ]
+    },
+    {
+      "passcode": 72053645,
+      "name": "Weather Report",
+      "numbers": [
+        "MRL-020",
+        "MRL-E020"
+      ]
+    },
+    {
+      "passcode": 73051941,
+      "name": "Sand Stone",
+      "numbers": [
+        "MRL-E128"
+      ]
+    },
+    {
+      "passcode": 73081602,
+      "name": "Queen Bird",
+      "numbers": [
+        "MRL-009",
+        "MRL-E009"
+      ]
+    },
+    {
+      "passcode": 74191942,
+      "name": "Painful Choice",
+      "numbers": [
+        "MRL-049",
+        "MRL-E049"
+      ]
+    },
+    {
+      "passcode": 74637266,
+      "name": "Octoberser",
+      "numbers": [
+        "MRL-052",
+        "MRL-E052"
+      ]
+    },
+    {
+      "passcode": 76184692,
+      "name": "Hitotsu-Me Giant",
+      "numbers": [
+        "MRL-E107"
+      ]
+    },
+    {
+      "passcode": 76806714,
+      "name": "Turtle Oath",
+      "numbers": [
+        "MRL-066",
+        "MRL-E066"
+      ]
+    },
+    {
+      "passcode": 77027445,
+      "name": "Power of Kaishin",
+      "numbers": [
+        "MRL-E118"
+      ]
+    },
+    {
+      "passcode": 77827521,
+      "name": "Trial of Nightmare",
+      "numbers": [
+        "MRL-E112"
+      ]
+    },
+    {
+      "passcode": 79323590,
+      "name": "Chain Energy",
+      "numbers": [
+        "MRL-046",
+        "MRL-E046"
+      ]
+    },
+    {
+      "passcode": 80168720,
+      "name": "Darkness Approaches",
+      "numbers": [
+        "MRL-040",
+        "MRL-E040"
+      ]
+    },
+    {
+      "passcode": 80811661,
+      "name": "Hamburger Recipe",
+      "numbers": [
+        "MRL-063",
+        "MRL-E063"
+      ]
+    },
+    {
+      "passcode": 81380218,
+      "name": "Chorus of Sanctuary",
+      "numbers": [
+        "MRL-037",
+        "MRL-E037"
+      ]
+    },
+    {
+      "passcode": 81777047,
+      "name": "Luminous Spark",
+      "numbers": [
+        "MRL-100",
+        "MRL-E100"
+      ]
+    },
+    {
+      "passcode": 81863068,
+      "name": "Hiro's Shadow Scout",
+      "numbers": [
+        "MRL-024",
+        "MRL-E024"
+      ]
+    },
+    {
+      "passcode": 82003859,
+      "name": "Toll",
+      "numbers": [
+        "MRL-034",
+        "MRL-E034"
+      ]
+    },
+    {
+      "passcode": 82999629,
+      "name": "Umiiruka",
+      "numbers": [
+        "MRL-097",
+        "MRL-E097"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "MRL-094",
+        "MRL-E094"
+      ]
+    },
+    {
+      "passcode": 83464209,
+      "name": "Mystical Sheep #2",
+      "numbers": [
+        "MRL-E115"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "MRL-091",
+        "MRL-E091"
+      ]
+    },
+    {
+      "passcode": 85705804,
+      "name": "Kurama",
+      "numbers": [
+        "MRL-E117"
+      ]
+    },
+    {
+      "passcode": 90020065,
+      "name": "Jigen Bakudan",
+      "numbers": [
+        "MRL-074",
+        "MRL-E074"
+      ]
+    },
+    {
+      "passcode": 91782219,
+      "name": "Crab Turtle",
+      "numbers": [
+        "MRL-069",
+        "MRL-E069"
+      ]
+    },
+    {
+      "passcode": 91842653,
+      "name": "Toon Summoned Skull",
+      "numbers": [
+        "MRL-073",
+        "MRL-E073"
+      ]
+    },
+    {
+      "passcode": 91996584,
+      "name": "Whiptail Crow",
+      "numbers": [
+        "MRL-027",
+        "MRL-E027"
+      ]
+    },
+    {
+      "passcode": 92731455,
+      "name": "M-Warrior #2",
+      "numbers": [
+        "MRL-E124"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "MRL-012",
+        "MRL-E012"
+      ]
+    },
+    {
+      "passcode": 93108297,
+      "name": "Liquid Beast",
+      "numbers": [
+        "MRL-023",
+        "MRL-E023"
+      ]
+    },
+    {
+      "passcode": 94675535,
+      "name": "Larvas",
+      "numbers": [
+        "MRL-E122"
+      ]
+    },
+    {
+      "passcode": 95051344,
+      "name": "Eternal Rest",
+      "numbers": [
+        "MRL-060",
+        "MRL-E060"
+      ]
+    },
+    {
+      "passcode": 95174353,
+      "name": "Ameba",
+      "numbers": [
+        "MRL-010",
+        "MRL-E010"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "MRL-085",
+        "MRL-E085"
+      ]
+    },
+    {
+      "passcode": 95744531,
+      "name": "Griggle",
+      "numbers": [
+        "MRL-016",
+        "MRL-E016"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "MRL-088",
+        "MRL-E088"
+      ]
+    },
+    {
+      "passcode": 96890582,
+      "name": "Flash Assailant",
+      "numbers": [
+        "MRL-082",
+        "MRL-E082"
+      ]
+    },
+    {
+      "passcode": 96981563,
+      "name": "Giant Turtle Who Feeds on Flames",
+      "numbers": [
+        "MRL-022",
+        "MRL-E022"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "MRL-079",
+        "MRL-E079"
+      ]
+    },
+    {
+      "passcode": 98818516,
+      "name": "Frenzied Panda",
+      "numbers": [
+        "MRL-E125"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "MRL-005",
+        "MRL-E005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

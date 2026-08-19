@@ -1,0 +1,314 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-jaden-yuki",
+  "code": "YSDJ",
+  "name": "Starter Deck: Jaden Yuki",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-07-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4041838,
+      "name": "Ninja Grandmaster Sasuke",
+      "numbers": [
+        "YSDJ-EN014"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "YSDJ-EN034"
+      ]
+    },
+    {
+      "passcode": 10012614,
+      "name": "Banner of Courage",
+      "numbers": [
+        "YSDJ-EN025"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "YSDJ-EN003"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "YSDJ-EN039"
+      ]
+    },
+    {
+      "passcode": 16956455,
+      "name": "Chiron the Mage",
+      "numbers": [
+        "YSDJ-EN015"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "YSDJ-EN024"
+      ]
+    },
+    {
+      "passcode": 20721928,
+      "name": "Elemental HERO Sparkman",
+      "numbers": [
+        "YSDJ-EN008"
+      ]
+    },
+    {
+      "passcode": 20939559,
+      "name": "Shadowslayer",
+      "numbers": [
+        "YSDJ-EN016"
+      ]
+    },
+    {
+      "passcode": 21844576,
+      "name": "Elemental HERO Avian",
+      "numbers": [
+        "YSDJ-EN005"
+      ]
+    },
+    {
+      "passcode": 22609617,
+      "name": "Mataza the Zapper",
+      "numbers": [
+        "YSDJ-EN013"
+      ]
+    },
+    {
+      "passcode": 28933734,
+      "name": "Mask of Darkness",
+      "numbers": [
+        "YSDJ-EN010"
+      ]
+    },
+    {
+      "passcode": 34664411,
+      "name": "Lucky Iron Axe",
+      "numbers": [
+        "YSDJ-EN032"
+      ]
+    },
+    {
+      "passcode": 37318031,
+      "name": "R - Righteous Justice",
+      "numbers": [
+        "YSDJ-EN031"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "YSDJ-EN022"
+      ]
+    },
+    {
+      "passcode": 43250041,
+      "name": "Draining Shield",
+      "numbers": [
+        "YSDJ-EN038"
+      ]
+    },
+    {
+      "passcode": 43716289,
+      "name": "Poison Mummy",
+      "numbers": [
+        "YSDJ-EN009"
+      ]
+    },
+    {
+      "passcode": 48576971,
+      "name": "Necklace of Command",
+      "numbers": [
+        "YSDJ-EN027"
+      ]
+    },
+    {
+      "passcode": 48766543,
+      "name": "Cyber-Tech Alligator",
+      "numbers": [
+        "YSDJ-EN001"
+      ]
+    },
+    {
+      "passcode": 55226821,
+      "name": "Lightning Blade",
+      "numbers": [
+        "YSDJ-EN023"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "YSDJ-EN036"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "YSDJ-EN006"
+      ]
+    },
+    {
+      "passcode": 59793705,
+      "name": "Elemental HERO Bladedge",
+      "numbers": [
+        "YSDJ-EN018"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "YSDJ-EN033"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "YSDJ-EN040"
+      ]
+    },
+    {
+      "passcode": 69140098,
+      "name": "Gemini Elf",
+      "numbers": [
+        "YSDJ-EN002"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "YSDJ-EN029"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "YSDJ-EN021"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "YSDJ-EN011"
+      ]
+    },
+    {
+      "passcode": 74848038,
+      "name": "Monster Reincarnation",
+      "numbers": [
+        "YSDJ-EN028"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "YSDJ-EN035"
+      ]
+    },
+    {
+      "passcode": 79979666,
+      "name": "Elemental HERO Bubbleman",
+      "numbers": [
+        "YSDJ-EN017"
+      ]
+    },
+    {
+      "passcode": 84327329,
+      "name": "Elemental HERO Clayman",
+      "numbers": [
+        "YSDJ-EN007"
+      ]
+    },
+    {
+      "passcode": 84696266,
+      "name": "Sonic Duck",
+      "numbers": [
+        "YSDJ-EN004"
+      ]
+    },
+    {
+      "passcode": 86188410,
+      "name": "Elemental HERO Wildheart",
+      "numbers": [
+        "YSDJ-EN019"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "YSDJ-EN030"
+      ]
+    },
+    {
+      "passcode": 89252153,
+      "name": "Elemental HERO Necroshade",
+      "numbers": [
+        "YSDJ-EN000"
+      ]
+    },
+    {
+      "passcode": 90790253,
+      "name": "Little-Winguard",
+      "numbers": [
+        "YSDJ-EN012"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "YSDJ-EN037"
+      ]
+    },
+    {
+      "passcode": 96428622,
+      "name": "Cybernetic Cyclopean",
+      "numbers": [
+        "YSDJ-EN020"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "YSDJ-EN026"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Jaden Yuki'; printings from the YGOPRODeck bulk dump."
+}

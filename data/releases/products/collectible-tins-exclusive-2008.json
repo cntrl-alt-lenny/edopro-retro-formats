@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-exclusive-2008",
+  "code": "CT05",
+  "name": "Collectible Tins Exclusive 2008",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-09-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7391448,
+      "name": "Goyo Guardian",
+      "numbers": [
+        "CT05-ENS03"
+      ]
+    },
+    {
+      "passcode": 18013090,
+      "name": "Nitro Warrior",
+      "numbers": [
+        "CT05-ENS02"
+      ]
+    },
+    {
+      "passcode": 23303072,
+      "name": "Montage Dragon",
+      "numbers": [
+        "CT05-ENS01"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins Exclusive 2008'; printings from the YGOPRODeck bulk dump."
+}

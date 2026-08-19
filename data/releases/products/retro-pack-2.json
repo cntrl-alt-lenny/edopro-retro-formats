@@ -1,0 +1,743 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "retro-pack-2",
+  "code": "RP02",
+  "name": "Retro Pack 2",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-08-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-07-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 102380,
+      "name": "Lava Golem",
+      "numbers": [
+        "RP02-EN082"
+      ]
+    },
+    {
+      "passcode": 295517,
+      "name": "A Legendary Ocean",
+      "numbers": [
+        "RP02-EN062"
+      ]
+    },
+    {
+      "passcode": 423705,
+      "name": "Gearfried the Iron Knight",
+      "numbers": [
+        "RP02-EN025"
+      ]
+    },
+    {
+      "passcode": 1248895,
+      "name": "Chain Destruction",
+      "numbers": [
+        "RP02-EN004"
+      ]
+    },
+    {
+      "passcode": 2134346,
+      "name": "Asura Priest",
+      "numbers": [
+        "RP02-EN061"
+      ]
+    },
+    {
+      "passcode": 3078576,
+      "name": "Yata-Garasu",
+      "numbers": [
+        "RP02-EN051"
+      ]
+    },
+    {
+      "passcode": 3643300,
+      "name": "The Legendary Fisherman",
+      "numbers": [
+        "RP02-EN019"
+      ]
+    },
+    {
+      "passcode": 4335645,
+      "name": "Newdoria",
+      "numbers": [
+        "RP02-EN073"
+      ]
+    },
+    {
+      "passcode": 11549357,
+      "name": "Gamma The Magnet Warrior",
+      "numbers": [
+        "RP02-EN091"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "RP02-EN070"
+      ]
+    },
+    {
+      "passcode": 14531242,
+      "name": "Opticlops",
+      "numbers": [
+        "RP02-EN053"
+      ]
+    },
+    {
+      "passcode": 16589042,
+      "name": "Swift Gaia the Fierce Knight",
+      "numbers": [
+        "RP02-EN085"
+      ]
+    },
+    {
+      "passcode": 17444133,
+      "name": "Kaiser Sea Horse",
+      "numbers": [
+        "RP02-EN087"
+      ]
+    },
+    {
+      "passcode": 18036057,
+      "name": "Airknight Parshath",
+      "numbers": [
+        "RP02-EN058"
+      ]
+    },
+    {
+      "passcode": 18605135,
+      "name": "Tornado Wall",
+      "numbers": [
+        "RP02-EN033"
+      ]
+    },
+    {
+      "passcode": 21558682,
+      "name": "Jam Defender",
+      "numbers": [
+        "RP02-EN036"
+      ]
+    },
+    {
+      "passcode": 22359980,
+      "name": "Mirror Wall",
+      "numbers": [
+        "RP02-EN007"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "RP02-EN015"
+      ]
+    },
+    {
+      "passcode": 24317029,
+      "name": "Gravekeeper's Spy",
+      "numbers": [
+        "RP02-EN075"
+      ]
+    },
+    {
+      "passcode": 25262697,
+      "name": "Gravekeeper's Assailant",
+      "numbers": [
+        "RP02-EN077"
+      ]
+    },
+    {
+      "passcode": 27125110,
+      "name": "Thousand-Eyes Idol",
+      "numbers": [
+        "RP02-EN020"
+      ]
+    },
+    {
+      "passcode": 27911549,
+      "name": "Parasite Paracide",
+      "numbers": [
+        "RP02-EN002"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "RP02-EN064"
+      ]
+    },
+    {
+      "passcode": 29549364,
+      "name": "Mask of Restrict",
+      "numbers": [
+        "RP02-EN031"
+      ]
+    },
+    {
+      "passcode": 30170981,
+      "name": "Spirit Message \"L\"",
+      "numbers": [
+        "RP02-EN049"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "RP02-EN063"
+      ]
+    },
+    {
+      "passcode": 31553716,
+      "name": "Spear Dragon",
+      "numbers": [
+        "RP02-EN057"
+      ]
+    },
+    {
+      "passcode": 31709826,
+      "name": "Revival Jam",
+      "numbers": [
+        "RP02-EN028"
+      ]
+    },
+    {
+      "passcode": 31829185,
+      "name": "Dark Necrofear",
+      "numbers": [
+        "RP02-EN042"
+      ]
+    },
+    {
+      "passcode": 31893528,
+      "name": "Spirit Message \"I\"",
+      "numbers": [
+        "RP02-EN046"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "RP02-EN083"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "RP02-EN009"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "RP02-EN071"
+      ]
+    },
+    {
+      "passcode": 38699854,
+      "name": "Book of Taiyou",
+      "numbers": [
+        "RP02-EN069"
+      ]
+    },
+    {
+      "passcode": 39256679,
+      "name": "Beta The Magnet Warrior",
+      "numbers": [
+        "RP02-EN090"
+      ]
+    },
+    {
+      "passcode": 40133511,
+      "name": "Bazoo the Soul-Eater",
+      "numbers": [
+        "RP02-EN041"
+      ]
+    },
+    {
+      "passcode": 40659562,
+      "name": "Guardian Sphinx",
+      "numbers": [
+        "RP02-EN067"
+      ]
+    },
+    {
+      "passcode": 44330098,
+      "name": "Gorz the Emissary of Darkness",
+      "numbers": [
+        "RP02-EN000"
+      ]
+    },
+    {
+      "passcode": 44910027,
+      "name": "Victory Dragon",
+      "numbers": [
+        "RP02-EN098"
+      ]
+    },
+    {
+      "passcode": 45894482,
+      "name": "Gilasaurus",
+      "numbers": [
+        "RP02-EN043"
+      ]
+    },
+    {
+      "passcode": 46668237,
+      "name": "Green Baboon, Defender of the Forest",
+      "numbers": [
+        "RP02-EN099"
+      ]
+    },
+    {
+      "passcode": 47297616,
+      "name": "Light and Darkness Dragon",
+      "numbers": [
+        "RP02-EN095"
+      ]
+    },
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "RP02-EN079"
+      ]
+    },
+    {
+      "passcode": 48539234,
+      "name": "Appropriate",
+      "numbers": [
+        "RP02-EN008"
+      ]
+    },
+    {
+      "passcode": 49064413,
+      "name": "The Masked Beast",
+      "numbers": [
+        "RP02-EN027"
+      ]
+    },
+    {
+      "passcode": 49587034,
+      "name": "Lightforce Sword",
+      "numbers": [
+        "RP02-EN003"
+      ]
+    },
+    {
+      "passcode": 49681811,
+      "name": "Freed the Matchless General",
+      "numbers": [
+        "RP02-EN054"
+      ]
+    },
+    {
+      "passcode": 50287060,
+      "name": "Archfiend of Gilfer",
+      "numbers": [
+        "RP02-EN094"
+      ]
+    },
+    {
+      "passcode": 51452091,
+      "name": "Royal Decree",
+      "numbers": [
+        "RP02-EN084"
+      ]
+    },
+    {
+      "passcode": 52040216,
+      "name": "Harpie's Pet Dragon",
+      "numbers": [
+        "RP02-EN093"
+      ]
+    },
+    {
+      "passcode": 52077741,
+      "name": "Obnoxious Celtic Guard",
+      "numbers": [
+        "RP02-EN086"
+      ]
+    },
+    {
+      "passcode": 53046408,
+      "name": "Emergency Provisions",
+      "numbers": [
+        "RP02-EN055"
+      ]
+    },
+    {
+      "passcode": 53347303,
+      "name": "Blue-Eyes Shining Dragon",
+      "numbers": [
+        "RP02-EN096"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "RP02-EN034"
+      ]
+    },
+    {
+      "passcode": 53982768,
+      "name": "Dark Ruler Ha Des",
+      "numbers": [
+        "RP02-EN052"
+      ]
+    },
+    {
+      "passcode": 54704216,
+      "name": "Nightmare Wheel",
+      "numbers": [
+        "RP02-EN081"
+      ]
+    },
+    {
+      "passcode": 55226821,
+      "name": "Lightning Blade",
+      "numbers": [
+        "RP02-EN032"
+      ]
+    },
+    {
+      "passcode": 56747793,
+      "name": "United We Stand",
+      "numbers": [
+        "RP02-EN038"
+      ]
+    },
+    {
+      "passcode": 57953380,
+      "name": "Card of Safe Return",
+      "numbers": [
+        "RP02-EN037"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "RP02-EN017"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "RP02-EN005"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "RP02-EN050"
+      ]
+    },
+    {
+      "passcode": 62473983,
+      "name": "Gravekeeper's Chief",
+      "numbers": [
+        "RP02-EN076"
+      ]
+    },
+    {
+      "passcode": 62873545,
+      "name": "Dragon Master Knight",
+      "numbers": [
+        "RP02-EN097"
+      ]
+    },
+    {
+      "passcode": 63519819,
+      "name": "Thousand-Eyes Restrict",
+      "numbers": [
+        "RP02-EN021"
+      ]
+    },
+    {
+      "passcode": 66973070,
+      "name": "Dreadscythe Harvester",
+      "numbers": [
+        "RP02-EN100"
+      ]
+    },
+    {
+      "passcode": 67287533,
+      "name": "Spirit Message \"N\"",
+      "numbers": [
+        "RP02-EN047"
+      ]
+    },
+    {
+      "passcode": 69140098,
+      "name": "Gemini Elf",
+      "numbers": [
+        "RP02-EN026"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "RP02-EN012"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "RP02-EN011"
+      ]
+    },
+    {
+      "passcode": 75347539,
+      "name": "Valkyrion the Magna Warrior",
+      "numbers": [
+        "RP02-EN092"
+      ]
+    },
+    {
+      "passcode": 75745607,
+      "name": "Hino-Kagu-Tsuchi",
+      "numbers": [
+        "RP02-EN060"
+      ]
+    },
+    {
+      "passcode": 76052811,
+      "name": "Helpoemer",
+      "numbers": [
+        "RP02-EN074"
+      ]
+    },
+    {
+      "passcode": 76862289,
+      "name": "Yamata Dragon",
+      "numbers": [
+        "RP02-EN059"
+      ]
+    },
+    {
+      "passcode": 76922029,
+      "name": "Don Zaloog",
+      "numbers": [
+        "RP02-EN068"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "RP02-EN001"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "RP02-EN013"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "RP02-EN024"
+      ]
+    },
+    {
+      "passcode": 78783370,
+      "name": "Barrel Behind the Door",
+      "numbers": [
+        "RP02-EN080"
+      ]
+    },
+    {
+      "passcode": 79575620,
+      "name": "Injection Fairy Lily",
+      "numbers": [
+        "RP02-EN065"
+      ]
+    },
+    {
+      "passcode": 79870141,
+      "name": "Mad Sword Beast",
+      "numbers": [
+        "RP02-EN023"
+      ]
+    },
+    {
+      "passcode": 81210420,
+      "name": "Magical Hats",
+      "numbers": [
+        "RP02-EN010"
+      ]
+    },
+    {
+      "passcode": 83555666,
+      "name": "Ring of Destruction",
+      "numbers": [
+        "RP02-EN066"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "RP02-EN039"
+      ]
+    },
+    {
+      "passcode": 83994646,
+      "name": "4-Starred Ladybug of Doom",
+      "numbers": [
+        "RP02-EN022"
+      ]
+    },
+    {
+      "passcode": 85562745,
+      "name": "Dark Room of Nightmare",
+      "numbers": [
+        "RP02-EN078"
+      ]
+    },
+    {
+      "passcode": 85742772,
+      "name": "Gravity Bind",
+      "numbers": [
+        "RP02-EN018"
+      ]
+    },
+    {
+      "passcode": 86569121,
+      "name": "Melchid the Four-Face Beast",
+      "numbers": [
+        "RP02-EN029"
+      ]
+    },
+    {
+      "passcode": 88240808,
+      "name": "Kycoo the Ghost Destroyer",
+      "numbers": [
+        "RP02-EN040"
+      ]
+    },
+    {
+      "passcode": 90980792,
+      "name": "Dark Jeroid",
+      "numbers": [
+        "RP02-EN072"
+      ]
+    },
+    {
+      "passcode": 91512835,
+      "name": "Insect Queen",
+      "numbers": [
+        "RP02-EN088"
+      ]
+    },
+    {
+      "passcode": 93599951,
+      "name": "Dark Spirit of the Silent",
+      "numbers": [
+        "RP02-EN044"
+      ]
+    },
+    {
+      "passcode": 94163677,
+      "name": "Infinite Cards",
+      "numbers": [
+        "RP02-EN035"
+      ]
+    },
+    {
+      "passcode": 94212438,
+      "name": "Destiny Board",
+      "numbers": [
+        "RP02-EN045"
+      ]
+    },
+    {
+      "passcode": 94377247,
+      "name": "Curse of the Masked Beast",
+      "numbers": [
+        "RP02-EN030"
+      ]
+    },
+    {
+      "passcode": 94568601,
+      "name": "Tyrant Dragon",
+      "numbers": [
+        "RP02-EN056"
+      ]
+    },
+    {
+      "passcode": 94772232,
+      "name": "Spirit Message \"A\"",
+      "numbers": [
+        "RP02-EN048"
+      ]
+    },
+    {
+      "passcode": 96965364,
+      "name": "Insect Imitation",
+      "numbers": [
+        "RP02-EN016"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "RP02-EN006"
+      ]
+    },
+    {
+      "passcode": 98139712,
+      "name": "Skull Invitation",
+      "numbers": [
+        "RP02-EN014"
+      ]
+    },
+    {
+      "passcode": 99785935,
+      "name": "Alpha The Magnet Warrior",
+      "numbers": [
+        "RP02-EN089"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Retro Pack 2'; printings from the YGOPRODeck bulk dump."
+}

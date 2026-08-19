@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-r-volume-1-promotional-card",
+  "code": "YR01",
+  "name": "Yu-Gi-Oh! R Volume 1 promotional card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2009-06-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 24857466,
+      "name": "Van'Dalgyon the Dark Dragon Lord",
+      "numbers": [
+        "YR01-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! R Volume 1 promotional card'; printings from the YGOPRODeck bulk dump."
+}

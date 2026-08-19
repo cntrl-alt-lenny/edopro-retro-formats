@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "make-a-wish-foundation-promotional-card",
+  "code": "TYL",
+  "name": "Make-A-Wish Foundation promotional card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-08-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 68811206,
+      "name": "Tyler the Great Warrior",
+      "numbers": [
+        "TYL-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Make-A-Wish Foundation promotional card'; printings from the YGOPRODeck bulk dump."
+}

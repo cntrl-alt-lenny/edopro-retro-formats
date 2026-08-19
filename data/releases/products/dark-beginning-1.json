@@ -1,0 +1,1789 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "dark-beginning-1",
+  "code": "DB1",
+  "name": "Dark Beginning 1",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-10-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 423705,
+      "name": "Gearfried the Iron Knight",
+      "numbers": [
+        "DB1-EN204"
+      ]
+    },
+    {
+      "passcode": 1184620,
+      "name": "Kojikocy",
+      "numbers": [
+        "DB1-EN147"
+      ]
+    },
+    {
+      "passcode": 1248895,
+      "name": "Chain Destruction",
+      "numbers": [
+        "DB1-EN070"
+      ]
+    },
+    {
+      "passcode": 1784619,
+      "name": "Uraby",
+      "numbers": [
+        "DB1-EN125"
+      ]
+    },
+    {
+      "passcode": 1918087,
+      "name": "Minor Goblin Official",
+      "numbers": [
+        "DB1-EN171"
+      ]
+    },
+    {
+      "passcode": 2130625,
+      "name": "Numinous Healer",
+      "numbers": [
+        "DB1-EN079"
+      ]
+    },
+    {
+      "passcode": 3027001,
+      "name": "Fake Trap",
+      "numbers": [
+        "DB1-EN164"
+      ]
+    },
+    {
+      "passcode": 3056267,
+      "name": "Invader of the Throne",
+      "numbers": [
+        "DB1-EN013"
+      ]
+    },
+    {
+      "passcode": 3573512,
+      "name": "Swordsman of Landstar",
+      "numbers": [
+        "DB1-EN206"
+      ]
+    },
+    {
+      "passcode": 3643300,
+      "name": "The Legendary Fisherman",
+      "numbers": [
+        "DB1-EN190"
+      ]
+    },
+    {
+      "passcode": 3797883,
+      "name": "Slot Machine",
+      "numbers": [
+        "DB1-EN014"
+      ]
+    },
+    {
+      "passcode": 4031928,
+      "name": "Change of Heart",
+      "numbers": [
+        "DB1-EN168"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "DB1-EN118",
+        "DB5"
+      ]
+    },
+    {
+      "passcode": 4266839,
+      "name": "Kiseitai",
+      "numbers": [
+        "DB1-EN093"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "DB1-EN031",
+        "DB13"
+      ]
+    },
+    {
+      "passcode": 5434080,
+      "name": "Headless Knight",
+      "numbers": [
+        "DB1-EN248"
+      ]
+    },
+    {
+      "passcode": 5556668,
+      "name": "Exchange",
+      "numbers": [
+        "DB1-EN170"
+      ]
+    },
+    {
+      "passcode": 5600127,
+      "name": "Humanoid Worm Drake",
+      "numbers": [
+        "DB1-EN209"
+      ]
+    },
+    {
+      "passcode": 5758500,
+      "name": "Soul Release",
+      "numbers": [
+        "DB1-EN166"
+      ]
+    },
+    {
+      "passcode": 6104968,
+      "name": "Bubonic Vermin",
+      "numbers": [
+        "DB1-EN176"
+      ]
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight",
+      "numbers": [
+        "DB1-EN103"
+      ]
+    },
+    {
+      "passcode": 7089711,
+      "name": "Hane-Hane",
+      "numbers": [
+        "DB1-EN132"
+      ]
+    },
+    {
+      "passcode": 7902349,
+      "name": "Left Arm of the Forbidden One",
+      "numbers": [
+        "DB1-EN138"
+      ]
+    },
+    {
+      "passcode": 8124921,
+      "name": "Right Leg of the Forbidden One",
+      "numbers": [
+        "DB1-EN135"
+      ]
+    },
+    {
+      "passcode": 8951260,
+      "name": "Respect Play",
+      "numbers": [
+        "DB1-EN085"
+      ]
+    },
+    {
+      "passcode": 9076207,
+      "name": "Armed Ninja",
+      "numbers": [
+        "DB1-EN130"
+      ]
+    },
+    {
+      "passcode": 10189126,
+      "name": "Masked Sorcerer",
+      "numbers": [
+        "DB1-EN154"
+      ]
+    },
+    {
+      "passcode": 10352095,
+      "name": "Scroll of Bewitchment",
+      "numbers": [
+        "DB1-EN243"
+      ]
+    },
+    {
+      "passcode": 10992251,
+      "name": "Gradius",
+      "numbers": [
+        "DB1-EN199"
+      ]
+    },
+    {
+      "passcode": 11324436,
+      "name": "Electric Snake",
+      "numbers": [
+        "DB1-EN007"
+      ]
+    },
+    {
+      "passcode": 11901678,
+      "name": "Black Skull Dragon",
+      "numbers": [
+        "DB1-EN153"
+      ]
+    },
+    {
+      "passcode": 12206212,
+      "name": "Harpie Lady Sisters",
+      "numbers": [
+        "DB1-EN146",
+        "DB43"
+      ]
+    },
+    {
+      "passcode": 12580477,
+      "name": "Raigeki",
+      "numbers": [
+        "DB1-EN114"
+      ]
+    },
+    {
+      "passcode": 12953226,
+      "name": "Nuvia the Wicked",
+      "numbers": [
+        "DB1-EN216"
+      ]
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone",
+      "numbers": [
+        "DB1-EN124"
+      ]
+    },
+    {
+      "passcode": 13676474,
+      "name": "Grand Tiki Elder",
+      "numbers": [
+        "DB1-EN213"
+      ]
+    },
+    {
+      "passcode": 15025844,
+      "name": "Mystical Elf",
+      "numbers": [
+        "DB1-EN120"
+      ]
+    },
+    {
+      "passcode": 15150365,
+      "name": "White Magical Hat",
+      "numbers": [
+        "DB1-EN151"
+      ]
+    },
+    {
+      "passcode": 15259703,
+      "name": "Toon World",
+      "numbers": [
+        "DB1-EN042"
+      ]
+    },
+    {
+      "passcode": 15480588,
+      "name": "Armored Lizard",
+      "numbers": [
+        "DB1-EN143"
+      ]
+    },
+    {
+      "passcode": 16430187,
+      "name": "The Reliable Guardian",
+      "numbers": [
+        "DB1-EN028"
+      ]
+    },
+    {
+      "passcode": 16762927,
+      "name": "Gravekeeper's Servant",
+      "numbers": [
+        "DB1-EN017"
+      ]
+    },
+    {
+      "passcode": 16768387,
+      "name": "Big Eye",
+      "numbers": [
+        "DB1-EN152"
+      ]
+    },
+    {
+      "passcode": 17375316,
+      "name": "Confiscation",
+      "numbers": [
+        "DB1-EN023"
+      ]
+    },
+    {
+      "passcode": 17449108,
+      "name": "Nobleman of Extermination",
+      "numbers": [
+        "DB1-EN089"
+      ]
+    },
+    {
+      "passcode": 17653779,
+      "name": "Fairy's Hand Mirror",
+      "numbers": [
+        "DB1-EN025"
+      ]
+    },
+    {
+      "passcode": 18161786,
+      "name": "Mystic Plasma Zone",
+      "numbers": [
+        "DB1-EN064"
+      ]
+    },
+    {
+      "passcode": 18591904,
+      "name": "Final Destiny",
+      "numbers": [
+        "DB1-EN020"
+      ]
+    },
+    {
+      "passcode": 18605135,
+      "name": "Tornado Wall",
+      "numbers": [
+        "DB1-EN226"
+      ]
+    },
+    {
+      "passcode": 18807108,
+      "name": "Spellbinding Circle",
+      "numbers": [
+        "DB1-EN006"
+      ]
+    },
+    {
+      "passcode": 19384334,
+      "name": "Molten Destruction",
+      "numbers": [
+        "DB1-EN061"
+      ]
+    },
+    {
+      "passcode": 19406822,
+      "name": "Kotodama",
+      "numbers": [
+        "DB1-EN058"
+      ]
+    },
+    {
+      "passcode": 19827717,
+      "name": "Return of the Doomed",
+      "numbers": [
+        "DB1-EN224"
+      ]
+    },
+    {
+      "passcode": 20228463,
+      "name": "Ceremonial Bell",
+      "numbers": [
+        "DB1-EN055"
+      ]
+    },
+    {
+      "passcode": 20277860,
+      "name": "Armored Zombie",
+      "numbers": [
+        "DB1-EN149"
+      ]
+    },
+    {
+      "passcode": 20765952,
+      "name": "Mask of Dispel",
+      "numbers": [
+        "DB1-EN220"
+      ]
+    },
+    {
+      "passcode": 21015833,
+      "name": "Hayabusa Knight",
+      "numbers": [
+        "DB1-EN196"
+      ]
+    },
+    {
+      "passcode": 21175632,
+      "name": "St. Joan",
+      "numbers": [
+        "DB1-EN240"
+      ]
+    },
+    {
+      "passcode": 21237481,
+      "name": "Type Zero Magic Crusher",
+      "numbers": [
+        "DB1-EN188"
+      ]
+    },
+    {
+      "passcode": 21297224,
+      "name": "Hysteric Fairy",
+      "numbers": [
+        "DB1-EN238"
+      ]
+    },
+    {
+      "passcode": 21558682,
+      "name": "Jam Defender",
+      "numbers": [
+        "DB1-EN231"
+      ]
+    },
+    {
+      "passcode": 21593977,
+      "name": "Makyura the Destructor",
+      "numbers": [
+        "DB1-EN169"
+      ]
+    },
+    {
+      "passcode": 21598948,
+      "name": "Fairy Box",
+      "numbers": [
+        "DB1-EN227"
+      ]
+    },
+    {
+      "passcode": 21770260,
+      "name": "Jam Breeding Machine",
+      "numbers": [
+        "DB1-EN229"
+      ]
+    },
+    {
+      "passcode": 21888494,
+      "name": "Chosen One",
+      "numbers": [
+        "DB1-EN217"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "DB1-EN037"
+      ]
+    },
+    {
+      "passcode": 22359980,
+      "name": "Mirror Wall",
+      "numbers": [
+        "DB1-EN078"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "DB1-EN051",
+        "DB40"
+      ]
+    },
+    {
+      "passcode": 22702055,
+      "name": "Umi",
+      "numbers": [
+        "DB1-EN112"
+      ]
+    },
+    {
+      "passcode": 22959079,
+      "name": "Dimensionhole",
+      "numbers": [
+        "DB1-EN183"
+      ]
+    },
+    {
+      "passcode": 23171610,
+      "name": "Limiter Removal",
+      "numbers": [
+        "DB1-EN179"
+      ]
+    },
+    {
+      "passcode": 23289281,
+      "name": "Karate Man",
+      "numbers": [
+        "DB1-EN049"
+      ]
+    },
+    {
+      "passcode": 23401839,
+      "name": "Senju of the Thousand Hands",
+      "numbers": [
+        "DB1-EN046"
+      ]
+    },
+    {
+      "passcode": 23615409,
+      "name": "Insect Barrier",
+      "numbers": [
+        "DB1-EN205"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "DB1-EN119"
+      ]
+    },
+    {
+      "passcode": 24128274,
+      "name": "Deepsea Warrior",
+      "numbers": [
+        "DB1-EN193"
+      ]
+    },
+    {
+      "passcode": 24294108,
+      "name": "Burning Land",
+      "numbers": [
+        "DB1-EN177"
+      ]
+    },
+    {
+      "passcode": 25955164,
+      "name": "Sanga of the Thunder",
+      "numbers": [
+        "DB1-EN157"
+      ]
+    },
+    {
+      "passcode": 27125110,
+      "name": "Thousand-Eyes Idol",
+      "numbers": [
+        "DB1-EN194"
+      ]
+    },
+    {
+      "passcode": 27911549,
+      "name": "Parasite Paracide",
+      "numbers": [
+        "DB1-EN068"
+      ]
+    },
+    {
+      "passcode": 28279543,
+      "name": "Curse of Dragon",
+      "numbers": [
+        "DB1-EN123"
+      ]
+    },
+    {
+      "passcode": 28933734,
+      "name": "Mask of Darkness",
+      "numbers": [
+        "DB1-EN150"
+      ]
+    },
+    {
+      "passcode": 29549364,
+      "name": "Mask of Restrict",
+      "numbers": [
+        "DB1-EN221"
+      ]
+    },
+    {
+      "passcode": 30532390,
+      "name": "Sky Scout",
+      "numbers": [
+        "DB1-EN094"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "DB1-EN163",
+        "DB48"
+      ]
+    },
+    {
+      "passcode": 31709826,
+      "name": "Revival Jam",
+      "numbers": [
+        "DB1-EN210"
+      ]
+    },
+    {
+      "passcode": 32274490,
+      "name": "Skull Servant",
+      "numbers": [
+        "DB1-EN101"
+      ]
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior",
+      "numbers": [
+        "DB1-EN121"
+      ]
+    },
+    {
+      "passcode": 32539892,
+      "name": "Minar",
+      "numbers": [
+        "DB1-EN010"
+      ]
+    },
+    {
+      "passcode": 32541773,
+      "name": "The Portrait's Secret",
+      "numbers": [
+        "DB1-EN246"
+      ]
+    },
+    {
+      "passcode": 32809211,
+      "name": "Jinzo #7",
+      "numbers": [
+        "DB1-EN162"
+      ]
+    },
+    {
+      "passcode": 33066139,
+      "name": "Reaper of the Cards",
+      "numbers": [
+        "DB1-EN127"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "DB1-EN139"
+      ]
+    },
+    {
+      "passcode": 34124316,
+      "name": "Cyber Jar",
+      "numbers": [
+        "DB1-EN043"
+      ]
+    },
+    {
+      "passcode": 34460851,
+      "name": "Flame Manipulator",
+      "numbers": [
+        "DB1-EN107"
+      ]
+    },
+    {
+      "passcode": 34694160,
+      "name": "The Eye of Truth",
+      "numbers": [
+        "DB1-EN074"
+      ]
+    },
+    {
+      "passcode": 35316708,
+      "name": "Time Seal",
+      "numbers": [
+        "DB1-EN071"
+      ]
+    },
+    {
+      "passcode": 35346968,
+      "name": "Solemn Wishes",
+      "numbers": [
+        "DB1-EN174"
+      ]
+    },
+    {
+      "passcode": 36039163,
+      "name": "Penguin Knight",
+      "numbers": [
+        "DB1-EN001"
+      ]
+    },
+    {
+      "passcode": 36280194,
+      "name": "Backup Soldier",
+      "numbers": [
+        "DB1-EN082",
+        "DB49"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "DB1-EN083",
+        "DB46"
+      ]
+    },
+    {
+      "passcode": 37313786,
+      "name": "Gamble",
+      "numbers": [
+        "DB1-EN172"
+      ]
+    },
+    {
+      "passcode": 38199696,
+      "name": "Red Medicine",
+      "numbers": [
+        "DB1-EN115"
+      ]
+    },
+    {
+      "passcode": 38369349,
+      "name": "Manga Ryu-Ran",
+      "numbers": [
+        "DB1-EN038"
+      ]
+    },
+    {
+      "passcode": 38552107,
+      "name": "Horn of Light",
+      "numbers": [
+        "DB1-EN004"
+      ]
+    },
+    {
+      "passcode": 40240595,
+      "name": "Cocoon of Evolution",
+      "numbers": [
+        "DB1-EN148"
+      ]
+    },
+    {
+      "passcode": 40374923,
+      "name": "Mammoth Graveyard",
+      "numbers": [
+        "DB1-EN105"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "DB1-EN002"
+      ]
+    },
+    {
+      "passcode": 41142615,
+      "name": "The Cheerful Coffin",
+      "numbers": [
+        "DB1-EN167"
+      ]
+    },
+    {
+      "passcode": 41392891,
+      "name": "Feral Imp",
+      "numbers": [
+        "DB1-EN140"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "DB1-EN032"
+      ]
+    },
+    {
+      "passcode": 42829885,
+      "name": "The Forceful Sentry",
+      "numbers": [
+        "DB1-EN029"
+      ]
+    },
+    {
+      "passcode": 43434803,
+      "name": "The Shallow Grave",
+      "numbers": [
+        "DB1-EN090"
+      ]
+    },
+    {
+      "passcode": 43641473,
+      "name": "Tailor of the Fickle",
+      "numbers": [
+        "DB1-EN026"
+      ]
+    },
+    {
+      "passcode": 44287299,
+      "name": "Masaki the Legendary Swordsman",
+      "numbers": [
+        "DB1-EN110"
+      ]
+    },
+    {
+      "passcode": 44519536,
+      "name": "Left Leg of the Forbidden One",
+      "numbers": [
+        "DB1-EN136"
+      ]
+    },
+    {
+      "passcode": 44656491,
+      "name": "Messenger of Peace",
+      "numbers": [
+        "DB1-EN065"
+      ]
+    },
+    {
+      "passcode": 44763025,
+      "name": "Delinquent Duo",
+      "numbers": [
+        "DB1-EN024"
+      ]
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman",
+      "numbers": [
+        "DB1-EN100"
+      ]
+    },
+    {
+      "passcode": 45778932,
+      "name": "Rising Air Current",
+      "numbers": [
+        "DB1-EN062"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "DB1-EN021"
+      ]
+    },
+    {
+      "passcode": 46130346,
+      "name": "Hinotama",
+      "numbers": [
+        "DB1-EN116"
+      ]
+    },
+    {
+      "passcode": 46821314,
+      "name": "Humanoid Slime",
+      "numbers": [
+        "DB1-EN207"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DB1-EN102"
+      ]
+    },
+    {
+      "passcode": 49064413,
+      "name": "The Masked Beast",
+      "numbers": [
+        "DB1-EN214"
+      ]
+    },
+    {
+      "passcode": 49587034,
+      "name": "Lightforce Sword",
+      "numbers": [
+        "DB1-EN069"
+      ]
+    },
+    {
+      "passcode": 50045299,
+      "name": "Dragon Capture Jar",
+      "numbers": [
+        "DB1-EN111"
+      ]
+    },
+    {
+      "passcode": 51345461,
+      "name": "Sword Hunter",
+      "numbers": [
+        "DB1-EN191"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "DB1-EN113",
+        "DB32"
+      ]
+    },
+    {
+      "passcode": 53183600,
+      "name": "Blue-Eyes Toon Dragon",
+      "numbers": [
+        "DB1-EN066"
+      ]
+    },
+    {
+      "passcode": 53375573,
+      "name": "Dark King of the Abyss",
+      "numbers": [
+        "DB1-EN108"
+      ]
+    },
+    {
+      "passcode": 53530069,
+      "name": "Spirit of the Breeze",
+      "numbers": [
+        "DB1-EN235"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "DB1-EN228"
+      ]
+    },
+    {
+      "passcode": 54109233,
+      "name": "Infinite Dismissal",
+      "numbers": [
+        "DB1-EN186"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "DB1-EN131"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "DB1-EN134"
+      ]
+    },
+    {
+      "passcode": 55226821,
+      "name": "Lightning Blade",
+      "numbers": [
+        "DB1-EN225"
+      ]
+    },
+    {
+      "passcode": 56387350,
+      "name": "Vampire Baby",
+      "numbers": [
+        "DB1-EN200"
+      ]
+    },
+    {
+      "passcode": 56594520,
+      "name": "Gaia Power",
+      "numbers": [
+        "DB1-EN059"
+      ]
+    },
+    {
+      "passcode": 56747793,
+      "name": "United We Stand",
+      "numbers": [
+        "DB1-EN244"
+      ]
+    },
+    {
+      "passcode": 56948373,
+      "name": "Mask of the Accursed",
+      "numbers": [
+        "DB1-EN222"
+      ]
+    },
+    {
+      "passcode": 57409948,
+      "name": "Bombardment Beetle",
+      "numbers": [
+        "DB1-EN197"
+      ]
+    },
+    {
+      "passcode": 57579381,
+      "name": "Darklord Marie",
+      "numbers": [
+        "DB1-EN241"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "DB1-EN056"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "DB1-EN053"
+      ]
+    },
+    {
+      "passcode": 57882509,
+      "name": "Mask of Weakness",
+      "numbers": [
+        "DB1-EN218"
+      ]
+    },
+    {
+      "passcode": 57953380,
+      "name": "Card of Safe Return",
+      "numbers": [
+        "DB1-EN232"
+      ]
+    },
+    {
+      "passcode": 58192742,
+      "name": "Petit Moth",
+      "numbers": [
+        "DB1-EN155"
+      ]
+    },
+    {
+      "passcode": 58621589,
+      "name": "Shadow of Eyes",
+      "numbers": [
+        "DB1-EN189"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "DB1-EN185"
+      ]
+    },
+    {
+      "passcode": 59560625,
+      "name": "Shift",
+      "numbers": [
+        "DB1-EN182"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "DB1-EN075",
+        "DB14"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "DB1-EN047"
+      ]
+    },
+    {
+      "passcode": 61528025,
+      "name": "Banisher of the Light",
+      "numbers": [
+        "DB1-EN044"
+      ]
+    },
+    {
+      "passcode": 61705417,
+      "name": "Graverobber",
+      "numbers": [
+        "DB1-EN072"
+      ]
+    },
+    {
+      "passcode": 61740673,
+      "name": "Imperial Order",
+      "numbers": [
+        "DB1-EN086"
+      ]
+    },
+    {
+      "passcode": 62340868,
+      "name": "Kazejin",
+      "numbers": [
+        "DB1-EN158"
+      ]
+    },
+    {
+      "passcode": 62397231,
+      "name": "Hyozanryu",
+      "numbers": [
+        "DB1-EN041"
+      ]
+    },
+    {
+      "passcode": 62867251,
+      "name": "Light of Intervention",
+      "numbers": [
+        "DB1-EN084"
+      ]
+    },
+    {
+      "passcode": 63102017,
+      "name": "Stop Defense",
+      "numbers": [
+        "DB1-EN128"
+      ]
+    },
+    {
+      "passcode": 63519819,
+      "name": "Thousand-Eyes Restrict",
+      "numbers": [
+        "DB1-EN195"
+      ]
+    },
+    {
+      "passcode": 63689843,
+      "name": "Attack and Receive",
+      "numbers": [
+        "DB1-EN173"
+      ]
+    },
+    {
+      "passcode": 64047146,
+      "name": "Horn of the Unicorn",
+      "numbers": [
+        "DB1-EN034"
+      ]
+    },
+    {
+      "passcode": 64631466,
+      "name": "Relinquished",
+      "numbers": [
+        "DB1-EN015"
+      ]
+    },
+    {
+      "passcode": 64752646,
+      "name": "Fire Princess",
+      "numbers": [
+        "DB1-EN234"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "DB1-EN003"
+      ]
+    },
+    {
+      "passcode": 65240384,
+      "name": "Big Shield Gardna",
+      "numbers": [
+        "DB1-EN097"
+      ]
+    },
+    {
+      "passcode": 65458948,
+      "name": "Toon Mermaid",
+      "numbers": [
+        "DB1-EN039"
+      ]
+    },
+    {
+      "passcode": 65570596,
+      "name": "Red Archery Girl",
+      "numbers": [
+        "DB1-EN016"
+      ]
+    },
+    {
+      "passcode": 66362965,
+      "name": "The Fiend Megacyber",
+      "numbers": [
+        "DB1-EN203"
+      ]
+    },
+    {
+      "passcode": 66719324,
+      "name": "Rain of Mercy",
+      "numbers": [
+        "DB1-EN180"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "DB1-EN117"
+      ]
+    },
+    {
+      "passcode": 66889139,
+      "name": "Gaia the Dragon Champion",
+      "numbers": [
+        "DB1-EN122"
+      ]
+    },
+    {
+      "passcode": 66989694,
+      "name": "The Earl of Demise",
+      "numbers": [
+        "DB1-EN250"
+      ]
+    },
+    {
+      "passcode": 67105242,
+      "name": "Earthbound Spirit",
+      "numbers": [
+        "DB1-EN249"
+      ]
+    },
+    {
+      "passcode": 67284908,
+      "name": "Labyrinth Wall",
+      "numbers": [
+        "DB1-EN035"
+      ]
+    },
+    {
+      "passcode": 67371383,
+      "name": "Amphibian Beast",
+      "numbers": [
+        "DB1-EN211"
+      ]
+    },
+    {
+      "passcode": 68049471,
+      "name": "The Gross Ghost of Fled Dreams",
+      "numbers": [
+        "DB1-EN247"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "DB1-EN027"
+      ]
+    },
+    {
+      "passcode": 70138455,
+      "name": "Blast Juggler",
+      "numbers": [
+        "DB1-EN161"
+      ]
+    },
+    {
+      "passcode": 70368879,
+      "name": "Upstart Goblin",
+      "numbers": [
+        "DB1-EN018",
+        "DB18"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "DB1-EN142"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "DB1-EN091"
+      ]
+    },
+    {
+      "passcode": 70903634,
+      "name": "Right Arm of the Forbidden One",
+      "numbers": [
+        "DB1-EN137"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "DB1-EN088"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "DB1-EN129",
+        "DB47"
+      ]
+    },
+    {
+      "passcode": 73216412,
+      "name": "Worm Drake",
+      "numbers": [
+        "DB1-EN208"
+      ]
+    },
+    {
+      "passcode": 74191942,
+      "name": "Painful Choice",
+      "numbers": [
+        "DB1-EN033"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "DB1-EN126"
+      ]
+    },
+    {
+      "passcode": 74701381,
+      "name": "DNA Surgery",
+      "numbers": [
+        "DB1-EN081"
+      ]
+    },
+    {
+      "passcode": 74923978,
+      "name": "Forced Requisition",
+      "numbers": [
+        "DB1-EN080"
+      ]
+    },
+    {
+      "passcode": 76184692,
+      "name": "Hitotsu-Me Giant",
+      "numbers": [
+        "DB1-EN099"
+      ]
+    },
+    {
+      "passcode": 76812113,
+      "name": "Harpie Lady",
+      "numbers": [
+        "DB1-EN145"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "DB1-EN067"
+      ]
+    },
+    {
+      "passcode": 78193831,
+      "name": "Buster Blader",
+      "numbers": [
+        "DB1-EN095"
+      ]
+    },
+    {
+      "passcode": 78658564,
+      "name": "Goblin Attack Force",
+      "numbers": [
+        "DB1-EN202"
+      ]
+    },
+    {
+      "passcode": 79106360,
+      "name": "Morphing Jar #2",
+      "numbers": [
+        "DB1-EN092"
+      ]
+    },
+    {
+      "passcode": 79323590,
+      "name": "Chain Energy",
+      "numbers": [
+        "DB1-EN030"
+      ]
+    },
+    {
+      "passcode": 79759861,
+      "name": "Tribute to The Doomed",
+      "numbers": [
+        "DB1-EN165"
+      ]
+    },
+    {
+      "passcode": 79870141,
+      "name": "Mad Sword Beast",
+      "numbers": [
+        "DB1-EN201"
+      ]
+    },
+    {
+      "passcode": 81210420,
+      "name": "Magical Hats",
+      "numbers": [
+        "DB1-EN087"
+      ]
+    },
+    {
+      "passcode": 81380218,
+      "name": "Chorus of Sanctuary",
+      "numbers": [
+        "DB1-EN022"
+      ]
+    },
+    {
+      "passcode": 81777047,
+      "name": "Luminous Spark",
+      "numbers": [
+        "DB1-EN063"
+      ]
+    },
+    {
+      "passcode": 81863068,
+      "name": "Hiro's Shadow Scout",
+      "numbers": [
+        "DB1-EN012"
+      ]
+    },
+    {
+      "passcode": 82003859,
+      "name": "Toll",
+      "numbers": [
+        "DB1-EN019"
+      ]
+    },
+    {
+      "passcode": 82432018,
+      "name": "Mask of Brutality",
+      "numbers": [
+        "DB1-EN223"
+      ]
+    },
+    {
+      "passcode": 82999629,
+      "name": "Umiiruka",
+      "numbers": [
+        "DB1-EN060"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "DB1-EN057"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "DB1-EN245"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "DB1-EN133"
+      ]
+    },
+    {
+      "passcode": 83968380,
+      "name": "Jar of Greed",
+      "numbers": [
+        "DB1-EN242"
+      ]
+    },
+    {
+      "passcode": 83994646,
+      "name": "4-Starred Ladybug of Doom",
+      "numbers": [
+        "DB1-EN198"
+      ]
+    },
+    {
+      "passcode": 84080938,
+      "name": "The Forgiving Maiden",
+      "numbers": [
+        "DB1-EN239"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "DB1-EN054"
+      ]
+    },
+    {
+      "passcode": 85639257,
+      "name": "Aqua Madoor",
+      "numbers": [
+        "DB1-EN109"
+      ]
+    },
+    {
+      "passcode": 85742772,
+      "name": "Gravity Bind",
+      "numbers": [
+        "DB1-EN187",
+        "DB9"
+      ]
+    },
+    {
+      "passcode": 85802526,
+      "name": "Cure Mermaid",
+      "numbers": [
+        "DB1-EN237"
+      ]
+    },
+    {
+      "passcode": 86569121,
+      "name": "Melchid the Four-Face Beast",
+      "numbers": [
+        "DB1-EN215"
+      ]
+    },
+    {
+      "passcode": 87303357,
+      "name": "Shining Abyss",
+      "numbers": [
+        "DB1-EN212"
+      ]
+    },
+    {
+      "passcode": 87756343,
+      "name": "Larvae Moth",
+      "numbers": [
+        "DB1-EN144"
+      ]
+    },
+    {
+      "passcode": 87796900,
+      "name": "Winged Dragon, Guardian of the Fortress #1",
+      "numbers": [
+        "DB1-EN141"
+      ]
+    },
+    {
+      "passcode": 88733579,
+      "name": "Drill Bug",
+      "numbers": [
+        "DB1-EN192"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DB1-EN098"
+      ]
+    },
+    {
+      "passcode": 90219263,
+      "name": "Elegant Egotist",
+      "numbers": [
+        "DB1-EN156"
+      ]
+    },
+    {
+      "passcode": 90357090,
+      "name": "Silver Fang",
+      "numbers": [
+        "DB1-EN106"
+      ]
+    },
+    {
+      "passcode": 90502999,
+      "name": "Ground Collapse",
+      "numbers": [
+        "DB1-EN184"
+      ]
+    },
+    {
+      "passcode": 90925163,
+      "name": "Dancing Fairy",
+      "numbers": [
+        "DB1-EN236"
+      ]
+    },
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian",
+      "numbers": [
+        "DB1-EN104"
+      ]
+    },
+    {
+      "passcode": 91842653,
+      "name": "Toon Summoned Skull",
+      "numbers": [
+        "DB1-EN040"
+      ]
+    },
+    {
+      "passcode": 91869203,
+      "name": "Amazoness Archer",
+      "numbers": [
+        "DB1-EN233"
+      ]
+    },
+    {
+      "passcode": 92377303,
+      "name": "Dark Sage",
+      "numbers": [
+        "DB1-EN096"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "DB1-EN009"
+      ]
+    },
+    {
+      "passcode": 93108433,
+      "name": "Monster Recovery",
+      "numbers": [
+        "DB1-EN181"
+      ]
+    },
+    {
+      "passcode": 94163677,
+      "name": "Infinite Cards",
+      "numbers": [
+        "DB1-EN230"
+      ]
+    },
+    {
+      "passcode": 94377247,
+      "name": "Curse of the Masked Beast",
+      "numbers": [
+        "DB1-EN219"
+      ]
+    },
+    {
+      "passcode": 95051344,
+      "name": "Eternal Rest",
+      "numbers": [
+        "DB1-EN036"
+      ]
+    },
+    {
+      "passcode": 95174353,
+      "name": "Ameba",
+      "numbers": [
+        "DB1-EN008"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "DB1-EN050"
+      ]
+    },
+    {
+      "passcode": 95744531,
+      "name": "Griggle",
+      "numbers": [
+        "DB1-EN011"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "DB1-EN052"
+      ]
+    },
+    {
+      "passcode": 96355986,
+      "name": "Enchanted Javelin",
+      "numbers": [
+        "DB1-EN077"
+      ]
+    },
+    {
+      "passcode": 96890582,
+      "name": "Flash Assailant",
+      "numbers": [
+        "DB1-EN048"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "DB1-EN045"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "DB1-EN076"
+      ]
+    },
+    {
+      "passcode": 97687912,
+      "name": "Fairy Meteor Crush",
+      "numbers": [
+        "DB1-EN178"
+      ]
+    },
+    {
+      "passcode": 98049915,
+      "name": "Mystic Lamp",
+      "numbers": [
+        "DB1-EN160"
+      ]
+    },
+    {
+      "passcode": 98139712,
+      "name": "Skull Invitation",
+      "numbers": [
+        "DB1-EN175"
+      ]
+    },
+    {
+      "passcode": 98299011,
+      "name": "Gift of The Mystical Elf",
+      "numbers": [
+        "DB1-EN073"
+      ]
+    },
+    {
+      "passcode": 98434877,
+      "name": "Suijin",
+      "numbers": [
+        "DB1-EN159"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "DB1-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Dark Beginning 1'; printings from the YGOPRODeck bulk dump."
+}

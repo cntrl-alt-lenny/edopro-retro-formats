@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-the-falsebound-kingdom-promotional-cards",
+  "code": "TFK",
+  "name": "Yu-Gi-Oh! The Falsebound Kingdom promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-11-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-11-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4149689,
+      "name": "Goblin Fan",
+      "numbers": [
+        "TFK-003"
+      ]
+    },
+    {
+      "passcode": 24311372,
+      "name": "Zoa",
+      "numbers": [
+        "TFK-001"
+      ]
+    },
+    {
+      "passcode": 45425051,
+      "name": "Fairy King Truesdale",
+      "numbers": [
+        "TFK-EN001"
+      ]
+    },
+    {
+      "passcode": 50705071,
+      "name": "Metalzoa",
+      "numbers": [
+        "TFK-002"
+      ]
+    },
+    {
+      "passcode": 78636495,
+      "name": "Slate Warrior",
+      "numbers": [
+        "TFK-EN003"
+      ]
+    },
+    {
+      "passcode": 79853073,
+      "name": "Cipher Soldier",
+      "numbers": [
+        "TFK-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! The Falsebound Kingdom promotional cards'; printings from the YGOPRODeck bulk dump."
+}

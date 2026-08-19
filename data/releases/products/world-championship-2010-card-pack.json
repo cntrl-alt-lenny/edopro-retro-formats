@@ -1,0 +1,178 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "world-championship-2010-card-pack",
+  "code": "WCPP",
+  "name": "World Championship 2010 Card Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-08-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-08-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1929294,
+      "name": "Key Mace",
+      "numbers": [
+        "WCPP-EN002"
+      ]
+    },
+    {
+      "passcode": 3366982,
+      "name": "Alligator's Sword Dragon",
+      "numbers": [
+        "WCPP-EN019"
+      ]
+    },
+    {
+      "passcode": 10485110,
+      "name": "Ocean Dragon Lord - Neo-Daedalus",
+      "numbers": [
+        "WCPP-EN012"
+      ]
+    },
+    {
+      "passcode": 14989021,
+      "name": "Simorgh, Bird of Divinity",
+      "numbers": [
+        "WCPP-EN016"
+      ]
+    },
+    {
+      "passcode": 19847532,
+      "name": "Infernal Flame Emperor",
+      "numbers": [
+        "WCPP-EN011"
+      ]
+    },
+    {
+      "passcode": 20541432,
+      "name": "Key Mace #2",
+      "numbers": [
+        "WCPP-EN005"
+      ]
+    },
+    {
+      "passcode": 22056710,
+      "name": "Vampire Genesis",
+      "numbers": [
+        "WCPP-EN010"
+      ]
+    },
+    {
+      "passcode": 29436665,
+      "name": "Dark Eradicator Warlock",
+      "numbers": [
+        "WCPP-EN014"
+      ]
+    },
+    {
+      "passcode": 50933533,
+      "name": "Ancient Gear Gadjiltron Dragon",
+      "numbers": [
+        "WCPP-EN018"
+      ]
+    },
+    {
+      "passcode": 55691901,
+      "name": "Great Bill",
+      "numbers": [
+        "WCPP-EN006"
+      ]
+    },
+    {
+      "passcode": 55737443,
+      "name": "Exxod, Master of The Guard",
+      "numbers": [
+        "WCPP-EN015"
+      ]
+    },
+    {
+      "passcode": 56713552,
+      "name": "Obese Marmot of Nefariousness",
+      "numbers": [
+        "WCPP-EN003"
+      ]
+    },
+    {
+      "passcode": 58074572,
+      "name": "Mooyan Curry",
+      "numbers": [
+        "WCPP-EN020"
+      ]
+    },
+    {
+      "passcode": 64428736,
+      "name": "Alligator's Sword",
+      "numbers": [
+        "WCPP-EN007"
+      ]
+    },
+    {
+      "passcode": 69933858,
+      "name": "Gilford the Legend",
+      "numbers": [
+        "WCPP-EN013"
+      ]
+    },
+    {
+      "passcode": 84133008,
+      "name": "Monster Eye",
+      "numbers": [
+        "WCPP-EN008"
+      ]
+    },
+    {
+      "passcode": 85520851,
+      "name": "Super Conductor Tyranno",
+      "numbers": [
+        "WCPP-EN017"
+      ]
+    },
+    {
+      "passcode": 92391084,
+      "name": "Wilmee",
+      "numbers": [
+        "WCPP-EN004"
+      ]
+    },
+    {
+      "passcode": 96561011,
+      "name": "Red-Eyes Darkness Dragon",
+      "numbers": [
+        "WCPP-EN009"
+      ]
+    },
+    {
+      "passcode": 97973387,
+      "name": "Droll Bird",
+      "numbers": [
+        "WCPP-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'World Championship 2010 Card Pack'; printings from the YGOPRODeck bulk dump."
+}

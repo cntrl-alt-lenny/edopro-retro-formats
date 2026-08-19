@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-card-almanac-promotional-cards",
+  "code": "YDB1",
+  "name": "Yu-Gi-Oh! GX Card Almanac promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-eu",
+      "date": "2007-11-30",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7200041,
+      "name": "Metal Shooter",
+      "numbers": [
+        "YDB1-EN002"
+      ]
+    },
+    {
+      "passcode": 33695750,
+      "name": "Des Mosquito",
+      "numbers": [
+        "YDB1-EN003"
+      ]
+    },
+    {
+      "passcode": 61802346,
+      "name": "Blizzard Dragon",
+      "numbers": [
+        "YDB1-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Card Almanac promotional cards'; printings from the YGOPRODeck bulk dump."
+}

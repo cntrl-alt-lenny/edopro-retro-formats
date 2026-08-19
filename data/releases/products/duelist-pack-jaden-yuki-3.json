@@ -1,0 +1,202 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-jaden-yuki-3",
+  "code": "DP06",
+  "name": "Duelist Pack: Jaden Yuki 3",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-01-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 10489311,
+      "name": "Hero Medal",
+      "numbers": [
+        "DP06-EN021"
+      ]
+    },
+    {
+      "passcode": 12071500,
+      "name": "Dark Calling",
+      "numbers": [
+        "DP06-EN019"
+      ]
+    },
+    {
+      "passcode": 13293158,
+      "name": "Evil HERO Wild Cyclone",
+      "numbers": [
+        "DP06-EN011"
+      ]
+    },
+    {
+      "passcode": 17732278,
+      "name": "Neo-Spacian Glow Moss",
+      "numbers": [
+        "DP06-EN003"
+      ]
+    },
+    {
+      "passcode": 18302224,
+      "name": "Reverse of Neos",
+      "numbers": [
+        "DP06-EN015"
+      ]
+    },
+    {
+      "passcode": 19024706,
+      "name": "Hero Counterattack",
+      "numbers": [
+        "DP06-EN023"
+      ]
+    },
+    {
+      "passcode": 23282832,
+      "name": "Over Limit",
+      "numbers": [
+        "DP06-EN024"
+      ]
+    },
+    {
+      "passcode": 43452193,
+      "name": "Mirror Gate",
+      "numbers": [
+        "DP06-EN022"
+      ]
+    },
+    {
+      "passcode": 47596607,
+      "name": "Skyscraper 2 - Hero City",
+      "numbers": [
+        "DP06-EN014"
+      ]
+    },
+    {
+      "passcode": 49469105,
+      "name": "Revoke Fusion",
+      "numbers": [
+        "DP06-EN020"
+      ]
+    },
+    {
+      "passcode": 50282757,
+      "name": "Evil HERO Infernal Sniper",
+      "numbers": [
+        "DP06-EN012"
+      ]
+    },
+    {
+      "passcode": 50304345,
+      "name": "Evil HERO Infernal Prodigy",
+      "numbers": [
+        "DP06-EN008"
+      ]
+    },
+    {
+      "passcode": 54959865,
+      "name": "Neo-Spacian Air Hummingbird",
+      "numbers": [
+        "DP06-EN001"
+      ]
+    },
+    {
+      "passcode": 58332301,
+      "name": "Evil HERO Dark Gaia",
+      "numbers": [
+        "DP06-EN010"
+      ]
+    },
+    {
+      "passcode": 58554959,
+      "name": "Evil HERO Malicious Edge",
+      "numbers": [
+        "DP06-EN006"
+      ]
+    },
+    {
+      "passcode": 69884162,
+      "name": "Elemental HERO Neos Alius",
+      "numbers": [
+        "DP06-EN005"
+      ]
+    },
+    {
+      "passcode": 80344569,
+      "name": "Neo-Spacian Grand Mole",
+      "numbers": [
+        "DP06-EN002"
+      ]
+    },
+    {
+      "passcode": 80908502,
+      "name": "Elemental HERO Captain Gold",
+      "numbers": [
+        "DP06-EN004"
+      ]
+    },
+    {
+      "passcode": 82639107,
+      "name": "Convert Contact",
+      "numbers": [
+        "DP06-EN016"
+      ]
+    },
+    {
+      "passcode": 85854214,
+      "name": "Hero's Rule 2",
+      "numbers": [
+        "DP06-EN025"
+      ]
+    },
+    {
+      "passcode": 86676862,
+      "name": "Evil HERO Malicious Fiend",
+      "numbers": [
+        "DP06-EN013"
+      ]
+    },
+    {
+      "passcode": 87798440,
+      "name": "Armor Breaker",
+      "numbers": [
+        "DP06-EN009"
+      ]
+    },
+    {
+      "passcode": 94820406,
+      "name": "Dark Fusion",
+      "numbers": [
+        "DP06-EN018"
+      ]
+    },
+    {
+      "passcode": 95943058,
+      "name": "Evil HERO Infernal Gainer",
+      "numbers": [
+        "DP06-EN007"
+      ]
+    },
+    {
+      "passcode": 96765646,
+      "name": "Swing of Memories",
+      "numbers": [
+        "DP06-EN017"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Jaden Yuki 3'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "ancient-prophecy-special-edition",
+  "code": "ANPR",
+  "name": "Ancient Prophecy: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-10-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-10-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-10-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 691925,
+      "name": "Solar Recharge",
+      "numbers": [
+        "ANPR-ENSE1"
+      ]
+    },
+    {
+      "passcode": 67300516,
+      "name": "Red-Eyes Wyvern",
+      "numbers": [
+        "ANPR-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Ancient Prophecy: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

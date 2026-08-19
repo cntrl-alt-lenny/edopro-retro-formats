@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-capsule-monster-coliseum-promotional-cards",
+  "code": "CMC",
+  "name": "Yu-Gi-Oh! Capsule Monster Coliseum promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-11-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 16469012,
+      "name": "Teva",
+      "numbers": [
+        "CMC-EN003"
+      ]
+    },
+    {
+      "passcode": 17185260,
+      "name": "Inferno Hammer",
+      "numbers": [
+        "CMC-EN002"
+      ]
+    },
+    {
+      "passcode": 18318842,
+      "name": "Abyss Soldier",
+      "numbers": [
+        "CMC-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Capsule Monster Coliseum promotional cards'; printings from the YGOPRODeck bulk dump."
+}

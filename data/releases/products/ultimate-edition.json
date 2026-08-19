@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "ultimate-edition",
+  "code": "JMP",
+  "name": "Ultimate Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-01-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 23995346,
+      "name": "Blue-Eyes Ultimate Dragon",
+      "numbers": [
+        "JMP-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No Yugipedia set page matched; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

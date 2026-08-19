@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-reshef-of-destruction-promotional-cards",
+  "code": "ROD",
+  "name": "Yu-Gi-Oh! Reshef of Destruction promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-06-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-08-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 13604200,
+      "name": "Sage's Stone",
+      "numbers": [
+        "ROD-EN003"
+      ]
+    },
+    {
+      "passcode": 50725996,
+      "name": "Dark Magician Knight",
+      "numbers": [
+        "ROD-EN001"
+      ]
+    },
+    {
+      "passcode": 87210505,
+      "name": "Knight's Title",
+      "numbers": [
+        "ROD-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Reshef of Destruction promotional cards'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,189 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-6",
+  "code": "TP6",
+  "name": "Tournament Pack 6",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2005-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2005-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1761063,
+      "name": "Nekogal #1",
+      "numbers": [
+        "TP6-EN018"
+      ]
+    },
+    {
+      "passcode": 6297941,
+      "name": "Burglar",
+      "numbers": [
+        "TP6-EN019"
+      ]
+    },
+    {
+      "passcode": 18036057,
+      "name": "Airknight Parshath",
+      "numbers": [
+        "TP6-EN007"
+      ]
+    },
+    {
+      "passcode": 26902560,
+      "name": "Fusion Sage",
+      "numbers": [
+        "TP6-EN003"
+      ]
+    },
+    {
+      "passcode": 28566710,
+      "name": "Last Turn",
+      "numbers": [
+        "TP6-EN015"
+      ]
+    },
+    {
+      "passcode": 31553716,
+      "name": "Spear Dragon",
+      "numbers": [
+        "TP6-EN006"
+      ]
+    },
+    {
+      "passcode": 40200834,
+      "name": "Sleeping Lion",
+      "numbers": [
+        "TP6-EN017"
+      ]
+    },
+    {
+      "passcode": 40473581,
+      "name": "Susa Soldier",
+      "numbers": [
+        "TP6-EN008"
+      ]
+    },
+    {
+      "passcode": 49868263,
+      "name": "Ryu Senshi",
+      "numbers": [
+        "TP6-EN011"
+      ]
+    },
+    {
+      "passcode": 51452091,
+      "name": "Royal Decree",
+      "numbers": [
+        "TP6-EN004"
+      ]
+    },
+    {
+      "passcode": 53046408,
+      "name": "Emergency Provisions",
+      "numbers": [
+        "TP6-EN012"
+      ]
+    },
+    {
+      "passcode": 66235877,
+      "name": "Fiend Skull Dragon",
+      "numbers": [
+        "TP6-EN013"
+      ]
+    },
+    {
+      "passcode": 70797118,
+      "name": "Thunder Nyan Nyan",
+      "numbers": [
+        "TP6-EN014"
+      ]
+    },
+    {
+      "passcode": 75889523,
+      "name": "Archfiend Marmot of Nefariousness",
+      "numbers": [
+        "TP6-EN016"
+      ]
+    },
+    {
+      "passcode": 76862289,
+      "name": "Yamata Dragon",
+      "numbers": [
+        "TP6-EN009"
+      ]
+    },
+    {
+      "passcode": 79875176,
+      "name": "Toon Cannon Soldier",
+      "numbers": [
+        "TP6-EN001"
+      ]
+    },
+    {
+      "passcode": 80071763,
+      "name": "Dark Balter the Terrible",
+      "numbers": [
+        "TP6-EN010"
+      ]
+    },
+    {
+      "passcode": 89997728,
+      "name": "Toon Table of Contents",
+      "numbers": [
+        "TP6-EN002"
+      ]
+    },
+    {
+      "passcode": 92667214,
+      "name": "Clown Zombie",
+      "numbers": [
+        "TP6-EN020"
+      ]
+    },
+    {
+      "passcode": 99518961,
+      "name": "Restructer Revolution",
+      "numbers": [
+        "TP6-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack 6'; printings from the YGOPRODeck bulk dump."
+}

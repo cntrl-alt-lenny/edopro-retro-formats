@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "master-collection-volume-1",
+  "code": "MC1",
+  "name": "Master Collection Volume 1",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 31829185,
+      "name": "Dark Necrofear",
+      "numbers": [
+        "MC1-EN005"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "MC1-EN001"
+      ]
+    },
+    {
+      "passcode": 53982768,
+      "name": "Dark Ruler Ha Des",
+      "numbers": [
+        "MC1-EN006"
+      ]
+    },
+    {
+      "passcode": 63519819,
+      "name": "Thousand-Eyes Restrict",
+      "numbers": [
+        "MC1-EN004"
+      ]
+    },
+    {
+      "passcode": 64631466,
+      "name": "Relinquished",
+      "numbers": [
+        "MC1-EN003"
+      ]
+    },
+    {
+      "passcode": 81480460,
+      "name": "Barrel Dragon",
+      "numbers": [
+        "MC1-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Master Collection Volume 1'; printings from the YGOPRODeck bulk dump."
+}

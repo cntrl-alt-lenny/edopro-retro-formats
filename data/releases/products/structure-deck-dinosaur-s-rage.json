@@ -1,0 +1,279 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-dinosaur-s-rage",
+  "code": "SD09",
+  "name": "Structure Deck: Dinosaur's Rage",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-10-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2671330,
+      "name": "Hyper Hammerhead",
+      "numbers": [
+        "SD09-EN007"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD09-EN023"
+      ]
+    },
+    {
+      "passcode": 6137095,
+      "name": "Malfunction",
+      "numbers": [
+        "SD09-EN035"
+      ]
+    },
+    {
+      "passcode": 10080320,
+      "name": "Jurassic World",
+      "numbers": [
+        "SD09-EN019"
+      ]
+    },
+    {
+      "passcode": 11925569,
+      "name": "Hunting Instinct",
+      "numbers": [
+        "SD09-EN028"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "SD09-EN033"
+      ]
+    },
+    {
+      "passcode": 15894048,
+      "name": "Ultimate Tyranno",
+      "numbers": [
+        "SD09-EN014"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD09-EN025"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "SD09-EN024"
+      ]
+    },
+    {
+      "passcode": 22537443,
+      "name": "Sebek's Blessing",
+      "numbers": [
+        "SD09-EN020"
+      ]
+    },
+    {
+      "passcode": 22587018,
+      "name": "Hydrogeddon",
+      "numbers": [
+        "SD09-EN010"
+      ]
+    },
+    {
+      "passcode": 23869735,
+      "name": "Fossil Excavation",
+      "numbers": [
+        "SD09-EN036"
+      ]
+    },
+    {
+      "passcode": 34016756,
+      "name": "Riryoku",
+      "numbers": [
+        "SD09-EN021"
+      ]
+    },
+    {
+      "passcode": 36042004,
+      "name": "Babycerasaurus",
+      "numbers": [
+        "SD09-EN016"
+      ]
+    },
+    {
+      "passcode": 37265642,
+      "name": "Sabersaurus",
+      "numbers": [
+        "SD09-EN003"
+      ]
+    },
+    {
+      "passcode": 38670435,
+      "name": "Black Tyranno",
+      "numbers": [
+        "SD09-EN008"
+      ]
+    },
+    {
+      "passcode": 42175079,
+      "name": "Volcanic Eruption",
+      "numbers": [
+        "SD09-EN030"
+      ]
+    },
+    {
+      "passcode": 45894482,
+      "name": "Gilasaurus",
+      "numbers": [
+        "SD09-EN005"
+      ]
+    },
+    {
+      "passcode": 48642904,
+      "name": "Mesmeric Control",
+      "numbers": [
+        "SD09-EN022"
+      ]
+    },
+    {
+      "passcode": 51934376,
+      "name": "Kabazauls",
+      "numbers": [
+        "SD09-EN002"
+      ]
+    },
+    {
+      "passcode": 58071123,
+      "name": "Oxygeddon",
+      "numbers": [
+        "SD09-EN011"
+      ]
+    },
+    {
+      "passcode": 58419204,
+      "name": "Survival Instinct",
+      "numbers": [
+        "SD09-EN029"
+      ]
+    },
+    {
+      "passcode": 63259351,
+      "name": "Miracle Jurassic Egg",
+      "numbers": [
+        "SD09-EN015"
+      ]
+    },
+    {
+      "passcode": 65287621,
+      "name": "Dark Driceratops",
+      "numbers": [
+        "SD09-EN006"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "SD09-EN026"
+      ]
+    },
+    {
+      "passcode": 69632396,
+      "name": "Goblin Out of the Frying Pan",
+      "numbers": [
+        "SD09-EN034"
+      ]
+    },
+    {
+      "passcode": 79409334,
+      "name": "Black Stego",
+      "numbers": [
+        "SD09-EN013"
+      ]
+    },
+    {
+      "passcode": 79569173,
+      "name": "Seismic Shockwave",
+      "numbers": [
+        "SD09-EN031"
+      ]
+    },
+    {
+      "passcode": 79870141,
+      "name": "Mad Sword Beast",
+      "numbers": [
+        "SD09-EN004"
+      ]
+    },
+    {
+      "passcode": 83235263,
+      "name": "Tyranno Infinity",
+      "numbers": [
+        "SD09-EN009"
+      ]
+    },
+    {
+      "passcode": 83682725,
+      "name": "Tail Swipe",
+      "numbers": [
+        "SD09-EN018"
+      ]
+    },
+    {
+      "passcode": 84808313,
+      "name": "Big Evolution Pill",
+      "numbers": [
+        "SD09-EN017"
+      ]
+    },
+    {
+      "passcode": 85520851,
+      "name": "Super Conductor Tyranno",
+      "numbers": [
+        "SD09-EN001"
+      ]
+    },
+    {
+      "passcode": 85852291,
+      "name": "Magical Mallet",
+      "numbers": [
+        "SD09-EN027"
+      ]
+    },
+    {
+      "passcode": 90654356,
+      "name": "Black Ptera",
+      "numbers": [
+        "SD09-EN012"
+      ]
+    },
+    {
+      "passcode": 96008713,
+      "name": "Magical Arm Shield",
+      "numbers": [
+        "SD09-EN032"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Structure Deck: Dinosaur's Rage\"; printings from the YGOPRODeck bulk dump."
+}

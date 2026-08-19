@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-deluxe-edition",
+  "code": "SD1",
+  "name": "Structure Deck: Deluxe Edition",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 73879377,
+      "name": "Armed Dragon LV7",
+      "numbers": [
+        "SD1-ENDE1"
+      ]
+    },
+    {
+      "passcode": 93382620,
+      "name": "Rope of Life",
+      "numbers": [
+        "SD2-ENDE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Deluxe Edition'; printings from the YGOPRODeck bulk dump."
+}

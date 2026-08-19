@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-lost-millennium-special-edition",
+  "code": "TLM",
+  "name": "The Lost Millennium: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-06-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6133894,
+      "name": "Mazera DeVille",
+      "numbers": [
+        "TLM-ENSE3"
+      ]
+    },
+    {
+      "passcode": 56647086,
+      "name": "Invader of Darkness",
+      "numbers": [
+        "TLM-ENSE1"
+      ]
+    },
+    {
+      "passcode": 65403020,
+      "name": "The End of Anubis",
+      "numbers": [
+        "TLM-ENSE4"
+      ]
+    },
+    {
+      "passcode": 82301904,
+      "name": "Chaos Emperor Dragon - Envoy of the End",
+      "numbers": [
+        "TLM-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Lost Millennium: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

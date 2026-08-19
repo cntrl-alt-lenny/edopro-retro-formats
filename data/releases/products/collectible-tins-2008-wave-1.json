@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2008-wave-1",
+  "code": "CT05",
+  "name": "Collectible Tins 2008 Wave 1",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-08-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "CT05-EN001"
+      ]
+    },
+    {
+      "passcode": 70902743,
+      "name": "Red Dragon Archfiend",
+      "numbers": [
+        "CT05-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2008 Wave 1'; printings from the YGOPRODeck bulk dump."
+}

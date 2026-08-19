@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-tag-force-promotional-cards",
+  "code": "GX02",
+  "name": "Yu-Gi-Oh! GX Tag Force promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-11-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2007-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7576264,
+      "name": "Phantom Beast Wild-Horn",
+      "numbers": [
+        "GX02-EN002"
+      ]
+    },
+    {
+      "passcode": 34961968,
+      "name": "Phantom Beast Thunder-Pegasus",
+      "numbers": [
+        "GX02-EN003"
+      ]
+    },
+    {
+      "passcode": 71181155,
+      "name": "Phantom Beast Cross-Wing",
+      "numbers": [
+        "GX02-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Tag Force promotional cards'; printings from the YGOPRODeck bulk dump."
+}

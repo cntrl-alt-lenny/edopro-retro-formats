@@ -1,0 +1,76 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-collection-tin-2009",
+  "code": "RGBT",
+  "name": "Duelist Pack Collection Tin 2009",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2009-03-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 16191953,
+      "name": "Master Gig",
+      "numbers": [
+        "RGBT-ENPP5"
+      ]
+    },
+    {
+      "passcode": 36623431,
+      "name": "Iron Core of Koa'ki Meiru",
+      "numbers": [
+        "RGBT-ENPP1"
+      ]
+    },
+    {
+      "passcode": 45041488,
+      "name": "Koa'ki Meiru Guardian",
+      "numbers": [
+        "RGBT-ENPP3"
+      ]
+    },
+    {
+      "passcode": 58820853,
+      "name": "Blackwing - Shura the Blue Flame",
+      "numbers": [
+        "RGBT-ENPP2"
+      ]
+    },
+    {
+      "passcode": 61257789,
+      "name": "Stardust Dragon/Assault Mode",
+      "numbers": [
+        "DPCT-EN003"
+      ]
+    },
+    {
+      "passcode": 86223870,
+      "name": "Level Retuner",
+      "numbers": [
+        "RGBT-ENPP6"
+      ]
+    },
+    {
+      "passcode": 94878265,
+      "name": "Moja",
+      "numbers": [
+        "RGBT-ENPP4"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack Collection Tin 2009'; printings from the YGOPRODeck bulk dump."
+}

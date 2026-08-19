@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-championship-2008-prize-card",
+  "code": "SJCS",
+  "name": "Shonen Jump Championship 2008 Prize Card",
+  "kind": "promo-tournament",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2008-03-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 78700060,
+      "name": "Doomcaliber Knight",
+      "numbers": [
+        "SJCS-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Championship 2008 Prize Card'; printings from the YGOPRODeck bulk dump."
+}

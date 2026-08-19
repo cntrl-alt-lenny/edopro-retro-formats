@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-double-pack-promotional-cards",
+  "code": "ROD",
+  "name": "Yu-Gi-Oh! Double Pack promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-02-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2006-03-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 50725996,
+      "name": "Dark Magician Knight",
+      "numbers": [
+        "ROD-EN001"
+      ]
+    },
+    {
+      "passcode": 87210505,
+      "name": "Knight's Title",
+      "numbers": [
+        "ROD-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Double Pack promotional cards'; printings from the YGOPRODeck bulk dump."
+}

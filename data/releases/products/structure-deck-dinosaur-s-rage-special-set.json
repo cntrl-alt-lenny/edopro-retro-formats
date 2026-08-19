@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-dinosaur-s-rage-special-set",
+  "code": "SD09",
+  "name": "Structure Deck: Dinosaur's Rage Special Set",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-10-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 99267150,
+      "name": "Five-Headed Dragon",
+      "numbers": [
+        "SD09-ENSS1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Structure Deck: Dinosaur's Rage Special Set\"; printings from the YGOPRODeck bulk dump."
+}

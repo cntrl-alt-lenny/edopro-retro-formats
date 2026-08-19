@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-ultimate-beginner-s-pack",
+  "code": "UBP1",
+  "name": "Yu-Gi-Oh! GX Ultimate Beginner's Pack",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-07-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7902349,
+      "name": "Left Arm of the Forbidden One",
+      "numbers": [
+        "UBP1-EN004"
+      ]
+    },
+    {
+      "passcode": 8124921,
+      "name": "Right Leg of the Forbidden One",
+      "numbers": [
+        "UBP1-EN001"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "UBP1-EN005"
+      ]
+    },
+    {
+      "passcode": 44519536,
+      "name": "Left Leg of the Forbidden One",
+      "numbers": [
+        "UBP1-EN002"
+      ]
+    },
+    {
+      "passcode": 70903634,
+      "name": "Right Arm of the Forbidden One",
+      "numbers": [
+        "UBP1-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! GX Ultimate Beginner's Pack\"; printings from the YGOPRODeck bulk dump."
+}

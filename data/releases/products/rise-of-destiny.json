@@ -1,0 +1,446 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "rise-of-destiny",
+  "code": "RDS",
+  "name": "Rise of Destiny",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 242146,
+      "name": "Ballista of Rampart Smashing",
+      "numbers": [
+        "RDS-EN046"
+      ]
+    },
+    {
+      "passcode": 1669772,
+      "name": "Spell Purification",
+      "numbers": [
+        "RDS-EN058"
+      ]
+    },
+    {
+      "passcode": 1781310,
+      "name": "Fuh-Rin-Ka-Zan",
+      "numbers": [
+        "RDS-EN055"
+      ]
+    },
+    {
+      "passcode": 1965724,
+      "name": "Mokey Mokey Smackdown",
+      "numbers": [
+        "RDS-EN043"
+      ]
+    },
+    {
+      "passcode": 1995985,
+      "name": "Silent Swordsman LV3",
+      "numbers": [
+        "RDS-EN009"
+      ]
+    },
+    {
+      "passcode": 8715625,
+      "name": "Bokoichi the Freightening Car",
+      "numbers": [
+        "RDS-EN003"
+      ]
+    },
+    {
+      "passcode": 12181376,
+      "name": "Triangle Ecstasy Spark",
+      "numbers": [
+        "RDS-EN039"
+      ]
+    },
+    {
+      "passcode": 12503902,
+      "name": "Rare Metalmorph",
+      "numbers": [
+        "RDS-EN052"
+      ]
+    },
+    {
+      "passcode": 13026402,
+      "name": "A-Team: Trap Disposal Unit",
+      "numbers": [
+        "RDS-EN033"
+      ]
+    },
+    {
+      "passcode": 13626450,
+      "name": "Malice Dispersion",
+      "numbers": [
+        "RDS-EN048"
+      ]
+    },
+    {
+      "passcode": 13803864,
+      "name": "Mokey Mokey King",
+      "numbers": [
+        "RDS-EN036"
+      ]
+    },
+    {
+      "passcode": 14148099,
+      "name": "B.E.S. Big Core",
+      "numbers": [
+        "RDS-EN030"
+      ]
+    },
+    {
+      "passcode": 15960641,
+      "name": "Mirage Dragon",
+      "numbers": [
+        "RDS-EN027"
+      ]
+    },
+    {
+      "passcode": 18891691,
+      "name": "Perfect Machine King",
+      "numbers": [
+        "RDS-EN012"
+      ]
+    },
+    {
+      "passcode": 23265594,
+      "name": "Heavy Mech Support Platform",
+      "numbers": [
+        "RDS-EN011"
+      ]
+    },
+    {
+      "passcode": 26082229,
+      "name": "Invasion of Flames",
+      "numbers": [
+        "RDS-EN024"
+      ]
+    },
+    {
+      "passcode": 26205777,
+      "name": "Thestalos the Firestorm Monarch",
+      "numbers": [
+        "RDS-EN021"
+      ]
+    },
+    {
+      "passcode": 27927359,
+      "name": "Harpie Lady 2",
+      "numbers": [
+        "RDS-EN018"
+      ]
+    },
+    {
+      "passcode": 28143906,
+      "name": "Roc from the Valley of Haze",
+      "numbers": [
+        "RDS-EN015"
+      ]
+    },
+    {
+      "passcode": 34088136,
+      "name": "Ultimate Insect LV3",
+      "numbers": [
+        "RDS-EN007"
+      ]
+    },
+    {
+      "passcode": 34100324,
+      "name": "Harpie Girl",
+      "numbers": [
+        "RDS-EN004"
+      ]
+    },
+    {
+      "passcode": 35322812,
+      "name": "Woodborg Inpachi",
+      "numbers": [
+        "RDS-EN001"
+      ]
+    },
+    {
+      "passcode": 35686187,
+      "name": "Tragedy",
+      "numbers": [
+        "RDS-EN049"
+      ]
+    },
+    {
+      "passcode": 37053871,
+      "name": "Astral Barrier",
+      "numbers": [
+        "RDS-EN059"
+      ]
+    },
+    {
+      "passcode": 37231841,
+      "name": "Lighten the Load",
+      "numbers": [
+        "RDS-EN047"
+      ]
+    },
+    {
+      "passcode": 40410110,
+      "name": "Homunculus the Alchemic Being",
+      "numbers": [
+        "RDS-EN034"
+      ]
+    },
+    {
+      "passcode": 47453433,
+      "name": "Back to Square One",
+      "numbers": [
+        "RDS-EN044"
+      ]
+    },
+    {
+      "passcode": 48276469,
+      "name": "Chain Burst",
+      "numbers": [
+        "RDS-EN056"
+      ]
+    },
+    {
+      "passcode": 48576971,
+      "name": "Necklace of Command",
+      "numbers": [
+        "RDS-EN040"
+      ]
+    },
+    {
+      "passcode": 49010598,
+      "name": "Divine Wrath",
+      "numbers": [
+        "RDS-EN050"
+      ]
+    },
+    {
+      "passcode": 49398568,
+      "name": "Serial Spell",
+      "numbers": [
+        "RDS-EN037"
+      ]
+    },
+    {
+      "passcode": 49998907,
+      "name": "Fruits of Kozaky's Studies",
+      "numbers": [
+        "RDS-EN053"
+      ]
+    },
+    {
+      "passcode": 51355346,
+      "name": "Gaia Soul the Combustible Collective",
+      "numbers": [
+        "RDS-EN028"
+      ]
+    },
+    {
+      "passcode": 51632798,
+      "name": "Fusilier Dragon, the Dual-Mode Beast",
+      "numbers": [
+        "RDS-EN031"
+      ]
+    },
+    {
+      "passcode": 52571838,
+      "name": "Creeping Doom Manta",
+      "numbers": [
+        "RDS-EN025"
+      ]
+    },
+    {
+      "passcode": 53693416,
+      "name": "Eagle Eye",
+      "numbers": [
+        "RDS-EN022"
+      ]
+    },
+    {
+      "passcode": 54415063,
+      "name": "Harpie Lady 3",
+      "numbers": [
+        "RDS-EN019"
+      ]
+    },
+    {
+      "passcode": 60482781,
+      "name": "Mystic Swordsman LV6",
+      "numbers": [
+        "RDS-EN008"
+      ]
+    },
+    {
+      "passcode": 61505339,
+      "name": "The Creator",
+      "numbers": [
+        "RDS-EN005"
+      ]
+    },
+    {
+      "passcode": 62327910,
+      "name": "Mighty Guard",
+      "numbers": [
+        "RDS-EN002"
+      ]
+    },
+    {
+      "passcode": 63995093,
+      "name": "Machine Duplication",
+      "numbers": [
+        "RDS-EN041"
+      ]
+    },
+    {
+      "passcode": 64538655,
+      "name": "Sasuke Samurai #4",
+      "numbers": [
+        "RDS-EN016"
+      ]
+    },
+    {
+      "passcode": 65260293,
+      "name": "Element Magician",
+      "numbers": [
+        "RDS-EN013"
+      ]
+    },
+    {
+      "passcode": 74270067,
+      "name": "Pikeru's Circle of Enchantment",
+      "numbers": [
+        "RDS-EN057"
+      ]
+    },
+    {
+      "passcode": 74458486,
+      "name": "Covering Fire",
+      "numbers": [
+        "RDS-EN060"
+      ]
+    },
+    {
+      "passcode": 74848038,
+      "name": "Monster Reincarnation",
+      "numbers": [
+        "RDS-EN045"
+      ]
+    },
+    {
+      "passcode": 75392615,
+      "name": "Mind Haxorz",
+      "numbers": [
+        "RDS-EN054"
+      ]
+    },
+    {
+      "passcode": 75560629,
+      "name": "Flint",
+      "numbers": [
+        "RDS-EN042"
+      ]
+    },
+    {
+      "passcode": 75782277,
+      "name": "Harpies' Hunting Ground",
+      "numbers": [
+        "RDS-EN038"
+      ]
+    },
+    {
+      "passcode": 76515293,
+      "name": "Xing Zhen Hu",
+      "numbers": [
+        "RDS-EN051"
+      ]
+    },
+    {
+      "passcode": 81306586,
+      "name": "Nightmare Penguin",
+      "numbers": [
+        "RDS-EN010"
+      ]
+    },
+    {
+      "passcode": 86805855,
+      "name": "Dark Blade the Dragon Knight",
+      "numbers": [
+        "RDS-EN035"
+      ]
+    },
+    {
+      "passcode": 87621407,
+      "name": "Dekoichi the Battlechanted Locomotive",
+      "numbers": [
+        "RDS-EN032"
+      ]
+    },
+    {
+      "passcode": 88753985,
+      "name": "Fox Fire",
+      "numbers": [
+        "RDS-EN029"
+      ]
+    },
+    {
+      "passcode": 88975532,
+      "name": "Pitch-Black Warwolf",
+      "numbers": [
+        "RDS-EN026"
+      ]
+    },
+    {
+      "passcode": 89698120,
+      "name": "Tactical Espionage Expert",
+      "numbers": [
+        "RDS-EN023"
+      ]
+    },
+    {
+      "passcode": 90810762,
+      "name": "Raging Flame Sprite",
+      "numbers": [
+        "RDS-EN020"
+      ]
+    },
+    {
+      "passcode": 91932350,
+      "name": "Harpie Lady 1",
+      "numbers": [
+        "RDS-EN017"
+      ]
+    },
+    {
+      "passcode": 92755808,
+      "name": "Element Saurus",
+      "numbers": [
+        "RDS-EN014"
+      ]
+    },
+    {
+      "passcode": 97093037,
+      "name": "The Creator Incarnate",
+      "numbers": [
+        "RDS-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Rise of Destiny'; printings from the YGOPRODeck bulk dump."
+}

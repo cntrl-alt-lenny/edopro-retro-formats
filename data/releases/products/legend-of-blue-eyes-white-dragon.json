@@ -1,0 +1,1168 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "legend-of-blue-eyes-white-dragon",
+  "code": "LOB",
+  "name": "Legend of Blue Eyes White Dragon",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2002-03-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2002-12-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2003-09-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 32864,
+      "name": "The 13th Grave",
+      "numbers": [
+        "LOB-014",
+        "LOB-E010",
+        "LOB-EN014"
+      ]
+    },
+    {
+      "passcode": 1435851,
+      "name": "Dragon Treasure",
+      "numbers": [
+        "LOB-092",
+        "LOB-E072",
+        "LOB-EN092"
+      ]
+    },
+    {
+      "passcode": 1557499,
+      "name": "Silver Bow and Arrow",
+      "numbers": [
+        "LOB-091",
+        "LOB-E071",
+        "LOB-EN091"
+      ]
+    },
+    {
+      "passcode": 1641882,
+      "name": "Fusionist",
+      "numbers": [
+        "LOB-022",
+        "LOB-EN022"
+      ]
+    },
+    {
+      "passcode": 1784619,
+      "name": "Uraby",
+      "numbers": [
+        "LOB-069",
+        "LOB-E055",
+        "LOB-EN069"
+      ]
+    },
+    {
+      "passcode": 2863439,
+      "name": "Fiend Reflection #2",
+      "numbers": [
+        "LOB-021",
+        "LOB-E017",
+        "LOB-EN021"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "LOB-058",
+        "LOB-E046",
+        "LOB-EN058"
+      ]
+    },
+    {
+      "passcode": 4614116,
+      "name": "Dark Energy",
+      "numbers": [
+        "LOB-088",
+        "LOB-E068",
+        "LOB-EN088"
+      ]
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight",
+      "numbers": [
+        "LOB-006",
+        "LOB-E004",
+        "LOB-EN006"
+      ]
+    },
+    {
+      "passcode": 7089711,
+      "name": "Hane-Hane",
+      "numbers": [
+        "LOB-110",
+        "LOB-EN110"
+      ]
+    },
+    {
+      "passcode": 7902349,
+      "name": "Left Arm of the Forbidden One",
+      "numbers": [
+        "LOB-123",
+        "LOB-E100",
+        "LOB-EN123"
+      ]
+    },
+    {
+      "passcode": 8124921,
+      "name": "Right Leg of the Forbidden One",
+      "numbers": [
+        "LOB-120",
+        "LOB-E097",
+        "LOB-EN120"
+      ]
+    },
+    {
+      "passcode": 9076207,
+      "name": "Armed Ninja",
+      "numbers": [
+        "LOB-106",
+        "LOB-E086",
+        "LOB-EN106"
+      ]
+    },
+    {
+      "passcode": 9159938,
+      "name": "Dark Gray",
+      "numbers": [
+        "LOB-011",
+        "LOB-E008",
+        "LOB-EN011"
+      ]
+    },
+    {
+      "passcode": 9293977,
+      "name": "Metal Dragon",
+      "numbers": [
+        "LOB-102",
+        "LOB-E082",
+        "LOB-EN102"
+      ]
+    },
+    {
+      "passcode": 10202894,
+      "name": "Skull Red Bird",
+      "numbers": [
+        "LOB-105",
+        "LOB-E085",
+        "LOB-EN105"
+      ]
+    },
+    {
+      "passcode": 11868825,
+      "name": "Goblin's Secret Remedy",
+      "numbers": [
+        "LOB-099",
+        "LOB-E079",
+        "LOB-EN099"
+      ]
+    },
+    {
+      "passcode": 12580477,
+      "name": "Raigeki",
+      "numbers": [
+        "LOB-053",
+        "LOB-E042",
+        "LOB-EN053"
+      ]
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone",
+      "numbers": [
+        "LOB-068",
+        "LOB-E054",
+        "LOB-EN068"
+      ]
+    },
+    {
+      "passcode": 15025844,
+      "name": "Mystical Elf",
+      "numbers": [
+        "LOB-062",
+        "LOB-E050",
+        "LOB-EN062"
+      ]
+    },
+    {
+      "passcode": 15052462,
+      "name": "Violet Crystal",
+      "numbers": [
+        "LOB-042",
+        "LOB-E033",
+        "LOB-EN042"
+      ]
+    },
+    {
+      "passcode": 15401633,
+      "name": "Kagemusha of the Blue Flame",
+      "numbers": [
+        "LOB-028",
+        "LOB-E022",
+        "LOB-EN028"
+      ]
+    },
+    {
+      "passcode": 16353197,
+      "name": "Drooling Lizard",
+      "numbers": [
+        "LOB-115",
+        "LOB-E093",
+        "LOB-EN115"
+      ]
+    },
+    {
+      "passcode": 17535588,
+      "name": "Armored Starfish",
+      "numbers": [
+        "LOB-116",
+        "LOB-E094",
+        "LOB-EN116"
+      ]
+    },
+    {
+      "passcode": 17881964,
+      "name": "Darkfire Dragon",
+      "numbers": [
+        "LOB-019",
+        "LOB-E015",
+        "LOB-EN019"
+      ]
+    },
+    {
+      "passcode": 18710707,
+      "name": "The Furious Sea King",
+      "numbers": [
+        "LOB-033",
+        "LOB-E027",
+        "LOB-EN033"
+      ]
+    },
+    {
+      "passcode": 20060230,
+      "name": "Hard Armor",
+      "numbers": [
+        "LOB-074",
+        "LOB-E059",
+        "LOB-EN074"
+      ]
+    },
+    {
+      "passcode": 22702055,
+      "name": "Umi",
+      "numbers": [
+        "LOB-050",
+        "LOB-E039",
+        "LOB-EN050"
+      ]
+    },
+    {
+      "passcode": 22910685,
+      "name": "Green Phantom King",
+      "numbers": [
+        "LOB-034",
+        "LOB-E028",
+        "LOB-EN034"
+      ]
+    },
+    {
+      "passcode": 23424603,
+      "name": "Wasteland",
+      "numbers": [
+        "LOB-047",
+        "LOB-E037",
+        "LOB-EN047"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "LOB-059",
+        "LOB-E047",
+        "LOB-EN059"
+      ]
+    },
+    {
+      "passcode": 25769732,
+      "name": "Machine Conversion Factory",
+      "numbers": [
+        "LOB-096",
+        "LOB-E076",
+        "LOB-EN096"
+      ]
+    },
+    {
+      "passcode": 28279543,
+      "name": "Curse of Dragon",
+      "numbers": [
+        "LOB-066",
+        "LOB-E053",
+        "LOB-EN066"
+      ]
+    },
+    {
+      "passcode": 29172562,
+      "name": "Steel Ogre Grotto #1",
+      "numbers": [
+        "LOB-112",
+        "LOB-E090",
+        "LOB-EN112"
+      ]
+    },
+    {
+      "passcode": 32274490,
+      "name": "Skull Servant",
+      "numbers": [
+        "LOB-004",
+        "LOB-E002",
+        "LOB-EN004"
+      ]
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior",
+      "numbers": [
+        "LOB-064",
+        "LOB-EN064"
+      ]
+    },
+    {
+      "passcode": 33064647,
+      "name": "One-Eyed Shield Dragon",
+      "numbers": [
+        "LOB-087",
+        "LOB-EN087"
+      ]
+    },
+    {
+      "passcode": 33066139,
+      "name": "Reaper of the Cards",
+      "numbers": [
+        "LOB-071",
+        "LOB-E057",
+        "LOB-EN071"
+      ]
+    },
+    {
+      "passcode": 33178416,
+      "name": "Misairuzame",
+      "numbers": [
+        "LOB-111",
+        "LOB-E089",
+        "LOB-EN111"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "LOB-124",
+        "LOB-E101",
+        "LOB-EN124"
+      ]
+    },
+    {
+      "passcode": 34460851,
+      "name": "Flame Manipulator",
+      "numbers": [
+        "LOB-016",
+        "LOB-E012",
+        "LOB-EN016"
+      ]
+    },
+    {
+      "passcode": 36121917,
+      "name": "Monster Egg",
+      "numbers": [
+        "LOB-017",
+        "LOB-E013",
+        "LOB-EN017"
+      ]
+    },
+    {
+      "passcode": 36304921,
+      "name": "Witty Phantom",
+      "numbers": [
+        "LOB-072",
+        "LOB-E058",
+        "LOB-EN072"
+      ]
+    },
+    {
+      "passcode": 36607978,
+      "name": "Mystical Moon",
+      "numbers": [
+        "LOB-094",
+        "LOB-E074",
+        "LOB-EN094"
+      ]
+    },
+    {
+      "passcode": 37313348,
+      "name": "Turtle Tiger",
+      "numbers": [
+        "LOB-023",
+        "LOB-E018",
+        "LOB-EN023"
+      ]
+    },
+    {
+      "passcode": 37421579,
+      "name": "Charubin the Fire Knight",
+      "numbers": [
+        "LOB-015",
+        "LOB-E011",
+        "LOB-EN015"
+      ]
+    },
+    {
+      "passcode": 37820550,
+      "name": "Electro-Whip",
+      "numbers": [
+        "LOB-093",
+        "LOB-E073",
+        "LOB-EN093"
+      ]
+    },
+    {
+      "passcode": 38142739,
+      "name": "Petit Angel",
+      "numbers": [
+        "LOB-025",
+        "LOB-EN025"
+      ]
+    },
+    {
+      "passcode": 38199696,
+      "name": "Red Medicine",
+      "numbers": [
+        "LOB-054",
+        "LOB-E043",
+        "LOB-EN054"
+      ]
+    },
+    {
+      "passcode": 39004808,
+      "name": "Root Water",
+      "numbers": [
+        "LOB-032",
+        "LOB-E026",
+        "LOB-EN032"
+      ]
+    },
+    {
+      "passcode": 39111158,
+      "name": "Tri-Horned Dragon",
+      "numbers": [
+        "LOB-000",
+        "LOB-E000",
+        "LOB-EN000"
+      ]
+    },
+    {
+      "passcode": 39774685,
+      "name": "Vile Germs",
+      "numbers": [
+        "LOB-090",
+        "LOB-E070",
+        "LOB-EN090"
+      ]
+    },
+    {
+      "passcode": 40374923,
+      "name": "Mammoth Graveyard",
+      "numbers": [
+        "LOB-009",
+        "LOB-EN009"
+      ]
+    },
+    {
+      "passcode": 40826495,
+      "name": "Dissolverock",
+      "numbers": [
+        "LOB-031",
+        "LOB-E025",
+        "LOB-EN031"
+      ]
+    },
+    {
+      "passcode": 43500484,
+      "name": "Darkworld Thorns",
+      "numbers": [
+        "LOB-114",
+        "LOB-E092",
+        "LOB-EN114"
+      ]
+    },
+    {
+      "passcode": 44287299,
+      "name": "Masaki the Legendary Swordsman",
+      "numbers": [
+        "LOB-038",
+        "LOB-EN038"
+      ]
+    },
+    {
+      "passcode": 44519536,
+      "name": "Left Leg of the Forbidden One",
+      "numbers": [
+        "LOB-121",
+        "LOB-E098",
+        "LOB-EN121"
+      ]
+    },
+    {
+      "passcode": 45042329,
+      "name": "Tripwire Beast",
+      "numbers": [
+        "LOB-104",
+        "LOB-E084",
+        "LOB-EN104"
+      ]
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman",
+      "numbers": [
+        "LOB-003",
+        "LOB-EN003"
+      ]
+    },
+    {
+      "passcode": 46009906,
+      "name": "Beast Fangs",
+      "numbers": [
+        "LOB-041",
+        "LOB-E032",
+        "LOB-EN041"
+      ]
+    },
+    {
+      "passcode": 46130346,
+      "name": "Hinotama",
+      "numbers": [
+        "LOB-056",
+        "LOB-EN056"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "LOB-005",
+        "LOB-E003",
+        "LOB-EN005"
+      ]
+    },
+    {
+      "passcode": 50045299,
+      "name": "Dragon Capture Jar",
+      "numbers": [
+        "LOB-045",
+        "LOB-E035",
+        "LOB-EN045"
+      ]
+    },
+    {
+      "passcode": 50913601,
+      "name": "Mountain",
+      "numbers": [
+        "LOB-048",
+        "LOB-EN048"
+      ]
+    },
+    {
+      "passcode": 51267887,
+      "name": "Raise Body Heat",
+      "numbers": [
+        "LOB-097",
+        "LOB-E077",
+        "LOB-EN097"
+      ]
+    },
+    {
+      "passcode": 51482758,
+      "name": "Remove Trap",
+      "numbers": [
+        "LOB-060",
+        "LOB-E048",
+        "LOB-EN060"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "LOB-052",
+        "LOB-E041",
+        "LOB-EN052"
+      ]
+    },
+    {
+      "passcode": 53153481,
+      "name": "Armaill",
+      "numbers": [
+        "LOB-079",
+        "LOB-E062",
+        "LOB-EN079"
+      ]
+    },
+    {
+      "passcode": 53293545,
+      "name": "Firegrass",
+      "numbers": [
+        "LOB-018",
+        "LOB-E014",
+        "LOB-EN018"
+      ]
+    },
+    {
+      "passcode": 53375573,
+      "name": "Dark King of the Abyss",
+      "numbers": [
+        "LOB-020",
+        "LOB-E016",
+        "LOB-EN020"
+      ]
+    },
+    {
+      "passcode": 54541900,
+      "name": "Karbonala Warrior",
+      "numbers": [
+        "LOB-067",
+        "LOB-EN067"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "LOB-108",
+        "LOB-E088",
+        "LOB-EN108"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "LOB-119",
+        "LOB-EN119"
+      ]
+    },
+    {
+      "passcode": 55291359,
+      "name": "Succubus Knight",
+      "numbers": [
+        "LOB-117",
+        "LOB-E095",
+        "LOB-EN117"
+      ]
+    },
+    {
+      "passcode": 55444629,
+      "name": "Lesser Dragon",
+      "numbers": [
+        "LOB-113",
+        "LOB-E091",
+        "LOB-EN113"
+      ]
+    },
+    {
+      "passcode": 56283725,
+      "name": "Kumootoko",
+      "numbers": [
+        "LOB-082",
+        "LOB-E064",
+        "LOB-EN082"
+      ]
+    },
+    {
+      "passcode": 56342351,
+      "name": "M-Warrior #1",
+      "numbers": [
+        "LOB-076",
+        "LOB-EN076"
+      ]
+    },
+    {
+      "passcode": 57305373,
+      "name": "Two-Mouth Darkruler",
+      "numbers": [
+        "LOB-030",
+        "LOB-E024",
+        "LOB-EN030"
+      ]
+    },
+    {
+      "passcode": 58528964,
+      "name": "Flame Ghost",
+      "numbers": [
+        "LOB-029",
+        "LOB-E023",
+        "LOB-EN029"
+      ]
+    },
+    {
+      "passcode": 59197169,
+      "name": "Yami",
+      "numbers": [
+        "LOB-051",
+        "LOB-E040",
+        "LOB-EN051"
+      ]
+    },
+    {
+      "passcode": 61854111,
+      "name": "Legendary Sword",
+      "numbers": [
+        "LOB-040",
+        "LOB-E031",
+        "LOB-EN040"
+      ]
+    },
+    {
+      "passcode": 63102017,
+      "name": "Stop Defense",
+      "numbers": [
+        "LOB-095",
+        "LOB-E075",
+        "LOB-EN095"
+      ]
+    },
+    {
+      "passcode": 63308047,
+      "name": "Terra the Terrible",
+      "numbers": [
+        "LOB-080",
+        "LOB-E063",
+        "LOB-EN080"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "LOB-057",
+        "LOB-E045",
+        "LOB-EN057"
+      ]
+    },
+    {
+      "passcode": 66889139,
+      "name": "Gaia the Dragon Champion",
+      "numbers": [
+        "LOB-125",
+        "LOB-E102",
+        "LOB-EN125"
+      ]
+    },
+    {
+      "passcode": 70681994,
+      "name": "Dragoness the Wicked Knight",
+      "numbers": [
+        "LOB-086",
+        "LOB-EN086"
+      ]
+    },
+    {
+      "passcode": 70903634,
+      "name": "Right Arm of the Forbidden One",
+      "numbers": [
+        "LOB-122",
+        "LOB-E099",
+        "LOB-EN122"
+      ]
+    },
+    {
+      "passcode": 71407486,
+      "name": "Fireyarou",
+      "numbers": [
+        "LOB-085",
+        "LOB-E067",
+        "LOB-EN085"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "LOB-101",
+        "LOB-E081",
+        "LOB-EN101"
+      ]
+    },
+    {
+      "passcode": 72842870,
+      "name": "Tyhone",
+      "numbers": [
+        "LOB-063",
+        "LOB-E051",
+        "LOB-EN063"
+      ]
+    },
+    {
+      "passcode": 73051941,
+      "name": "Sand Stone",
+      "numbers": [
+        "LOB-109",
+        "LOB-EN109"
+      ]
+    },
+    {
+      "passcode": 73134081,
+      "name": "Final Flame",
+      "numbers": [
+        "LOB-100",
+        "LOB-E080",
+        "LOB-EN100"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "LOB-070",
+        "LOB-E056",
+        "LOB-EN070"
+      ]
+    },
+    {
+      "passcode": 75356564,
+      "name": "Petit Dragon",
+      "numbers": [
+        "LOB-024",
+        "LOB-E019",
+        "LOB-EN024"
+      ]
+    },
+    {
+      "passcode": 75376965,
+      "name": "Enchanting Mermaid",
+      "numbers": [
+        "LOB-084",
+        "LOB-E066",
+        "LOB-EN084"
+      ]
+    },
+    {
+      "passcode": 76103675,
+      "name": "Sparks",
+      "numbers": [
+        "LOB-055",
+        "LOB-E044",
+        "LOB-EN055"
+      ]
+    },
+    {
+      "passcode": 76184692,
+      "name": "Hitotsu-Me Giant",
+      "numbers": [
+        "LOB-002",
+        "LOB-EN002"
+      ]
+    },
+    {
+      "passcode": 76211194,
+      "name": "Meda Bat",
+      "numbers": [
+        "LOB-083",
+        "LOB-E065",
+        "LOB-EN083"
+      ]
+    },
+    {
+      "passcode": 77007920,
+      "name": "Laser Cannon Armor",
+      "numbers": [
+        "LOB-089",
+        "LOB-E069",
+        "LOB-EN089"
+      ]
+    },
+    {
+      "passcode": 77027445,
+      "name": "Power of Kaishin",
+      "numbers": [
+        "LOB-044",
+        "LOB-EN044"
+      ]
+    },
+    {
+      "passcode": 77827521,
+      "name": "Trial of Nightmare",
+      "numbers": [
+        "LOB-012",
+        "LOB-EN012"
+      ]
+    },
+    {
+      "passcode": 80770678,
+      "name": "Spirit of the Harp",
+      "numbers": [
+        "LOB-078",
+        "LOB-E061",
+        "LOB-EN078"
+      ]
+    },
+    {
+      "passcode": 82542267,
+      "name": "Gravedigger Ghoul",
+      "numbers": [
+        "LOB-065",
+        "LOB-E052",
+        "LOB-EN065"
+      ]
+    },
+    {
+      "passcode": 83464209,
+      "name": "Mystical Sheep #2",
+      "numbers": [
+        "LOB-037",
+        "LOB-EN037"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "LOB-118",
+        "LOB-E096",
+        "LOB-EN118"
+      ]
+    },
+    {
+      "passcode": 83887306,
+      "name": "Two-Pronged Attack",
+      "numbers": [
+        "LOB-061",
+        "LOB-E049",
+        "LOB-EN061"
+      ]
+    },
+    {
+      "passcode": 84686841,
+      "name": "King Fog",
+      "numbers": [
+        "LOB-036",
+        "LOB-E030",
+        "LOB-EN036"
+      ]
+    },
+    {
+      "passcode": 85309439,
+      "name": "Ray & Temperature",
+      "numbers": [
+        "LOB-035",
+        "LOB-E029",
+        "LOB-EN035"
+      ]
+    },
+    {
+      "passcode": 85326399,
+      "name": "Spike Seadra",
+      "numbers": [
+        "LOB-103",
+        "LOB-E083",
+        "LOB-EN103"
+      ]
+    },
+    {
+      "passcode": 85639257,
+      "name": "Aqua Madoor",
+      "numbers": [
+        "LOB-027",
+        "LOB-E021",
+        "LOB-EN027"
+      ]
+    },
+    {
+      "passcode": 85705804,
+      "name": "Kurama",
+      "numbers": [
+        "LOB-039",
+        "LOB-EN039"
+      ]
+    },
+    {
+      "passcode": 86318356,
+      "name": "Sogen",
+      "numbers": [
+        "LOB-049",
+        "LOB-E038",
+        "LOB-EN049"
+      ]
+    },
+    {
+      "passcode": 87430998,
+      "name": "Forest",
+      "numbers": [
+        "LOB-046",
+        "LOB-E036",
+        "LOB-EN046"
+      ]
+    },
+    {
+      "passcode": 89091579,
+      "name": "Basic Insect",
+      "numbers": [
+        "LOB-008",
+        "LOB-E006",
+        "LOB-EN008"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "LOB-001",
+        "LOB-E001",
+        "LOB-EN001"
+      ]
+    },
+    {
+      "passcode": 90357090,
+      "name": "Silver Fang",
+      "numbers": [
+        "LOB-010",
+        "LOB-E007",
+        "LOB-EN010"
+      ]
+    },
+    {
+      "passcode": 90963488,
+      "name": "Nemuriko",
+      "numbers": [
+        "LOB-013",
+        "LOB-E009",
+        "LOB-EN013"
+      ]
+    },
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian",
+      "numbers": [
+        "LOB-007",
+        "LOB-E005",
+        "LOB-EN007"
+      ]
+    },
+    {
+      "passcode": 91595718,
+      "name": "Book of Secret Arts",
+      "numbers": [
+        "LOB-043",
+        "LOB-E034",
+        "LOB-EN043"
+      ]
+    },
+    {
+      "passcode": 92731455,
+      "name": "M-Warrior #2",
+      "numbers": [
+        "LOB-077",
+        "LOB-EN077"
+      ]
+    },
+    {
+      "passcode": 93553943,
+      "name": "Man Eater",
+      "numbers": [
+        "LOB-075",
+        "LOB-E060",
+        "LOB-EN075"
+      ]
+    },
+    {
+      "passcode": 94675535,
+      "name": "Larvas",
+      "numbers": [
+        "LOB-073",
+        "LOB-EN073"
+      ]
+    },
+    {
+      "passcode": 95952802,
+      "name": "Flower Wolf",
+      "numbers": [
+        "LOB-107",
+        "LOB-E087",
+        "LOB-EN107"
+      ]
+    },
+    {
+      "passcode": 96851799,
+      "name": "Hinotama Soul",
+      "numbers": [
+        "LOB-026",
+        "LOB-E020",
+        "LOB-EN026"
+      ]
+    },
+    {
+      "passcode": 98252586,
+      "name": "Follow Wind",
+      "numbers": [
+        "LOB-098",
+        "LOB-E078",
+        "LOB-EN098"
+      ]
+    },
+    {
+      "passcode": 98818516,
+      "name": "Frenzied Panda",
+      "numbers": [
+        "LOB-081",
+        "LOB-EN081"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Legend of Blue Eyes White Dragon'; printings from the YGOPRODeck bulk dump."
+}

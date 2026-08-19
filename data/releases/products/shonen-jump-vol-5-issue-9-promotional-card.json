@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-5-issue-9-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 5, Issue 9 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-01-01",
+      "precision": "year",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 57793869,
+      "name": "The Wicked Eraser",
+      "numbers": [
+        "JUMP-EN016"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 5, Issue 9 promotional card'; printings from the YGOPRODeck bulk dump."
+}

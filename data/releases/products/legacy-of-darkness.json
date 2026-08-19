@@ -1,0 +1,845 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "legacy-of-darkness",
+  "code": "LOD",
+  "name": "Legacy of Darkness",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-06-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2004-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 295517,
+      "name": "A Legendary Ocean",
+      "numbers": [
+        "LOD-078",
+        "LOD-EN078"
+      ]
+    },
+    {
+      "passcode": 403847,
+      "name": "The A. Forces",
+      "numbers": [
+        "LOD-027",
+        "LOD-EN027"
+      ]
+    },
+    {
+      "passcode": 1347977,
+      "name": "Mysterious Guard",
+      "numbers": [
+        "LOD-021",
+        "LOD-EN021"
+      ]
+    },
+    {
+      "passcode": 1412158,
+      "name": "Super Roboyarou",
+      "numbers": [
+        "LOD-074",
+        "LOD-EN074"
+      ]
+    },
+    {
+      "passcode": 1525329,
+      "name": "The Hunter with 7 Weapons",
+      "numbers": [
+        "LOD-024",
+        "LOD-EN024"
+      ]
+    },
+    {
+      "passcode": 2134346,
+      "name": "Asura Priest",
+      "numbers": [
+        "LOD-071",
+        "LOD-EN071"
+      ]
+    },
+    {
+      "passcode": 2356994,
+      "name": "Great Long Nose",
+      "numbers": [
+        "LOD-068",
+        "LOD-EN068"
+      ]
+    },
+    {
+      "passcode": 2460565,
+      "name": "Marauding Captain",
+      "numbers": [
+        "LOD-018",
+        "LOD-EN018"
+      ]
+    },
+    {
+      "passcode": 3078576,
+      "name": "Yata-Garasu",
+      "numbers": [
+        "LOD-000",
+        "LOD-EN000"
+      ]
+    },
+    {
+      "passcode": 3682106,
+      "name": "Double Snare",
+      "numbers": [
+        "LOD-015",
+        "LOD-EN015"
+      ]
+    },
+    {
+      "passcode": 6979239,
+      "name": "Woodland Sprite",
+      "numbers": [
+        "LOD-061",
+        "LOD-EN061"
+      ]
+    },
+    {
+      "passcode": 14291024,
+      "name": "Gradius' Option",
+      "numbers": [
+        "LOD-060",
+        "LOD-EN060"
+      ]
+    },
+    {
+      "passcode": 14318794,
+      "name": "Life Absorbing Machine",
+      "numbers": [
+        "LOD-012",
+        "LOD-EN012"
+      ]
+    },
+    {
+      "passcode": 14531242,
+      "name": "Opticlops",
+      "numbers": [
+        "LOD-009",
+        "LOD-EN009"
+      ]
+    },
+    {
+      "passcode": 15653824,
+      "name": "Skull Knight #2",
+      "numbers": [
+        "LOD-006",
+        "LOD-EN006"
+      ]
+    },
+    {
+      "passcode": 16475472,
+      "name": "Lesser Fiend",
+      "numbers": [
+        "LOD-003",
+        "LOD-EN003"
+      ]
+    },
+    {
+      "passcode": 17658803,
+      "name": "Luster Dragon #2",
+      "numbers": [
+        "LOD-050",
+        "LOD-EN050"
+      ]
+    },
+    {
+      "passcode": 18036057,
+      "name": "Airknight Parshath",
+      "numbers": [
+        "LOD-062",
+        "LOD-EN062"
+      ]
+    },
+    {
+      "passcode": 19153634,
+      "name": "Patrician of Darkness",
+      "numbers": [
+        "LOD-058",
+        "LOD-EN058"
+      ]
+    },
+    {
+      "passcode": 20831168,
+      "name": "Lizard Soldier",
+      "numbers": [
+        "LOD-038",
+        "LOD-EN038"
+      ]
+    },
+    {
+      "passcode": 24623598,
+      "name": "Disappear",
+      "numbers": [
+        "LOD-089",
+        "LOD-EN089"
+      ]
+    },
+    {
+      "passcode": 25345186,
+      "name": "After the Struggle",
+      "numbers": [
+        "LOD-086",
+        "LOD-EN086"
+      ]
+    },
+    {
+      "passcode": 27770341,
+      "name": "Super Rejuvenation",
+      "numbers": [
+        "LOD-047",
+        "LOD-EN047"
+      ]
+    },
+    {
+      "passcode": 28566710,
+      "name": "Last Turn",
+      "numbers": [
+        "LOD-099",
+        "LOD-EN099"
+      ]
+    },
+    {
+      "passcode": 28596933,
+      "name": "A Wingbeat of Giant Dragon",
+      "numbers": [
+        "LOD-044",
+        "LOD-EN044"
+      ]
+    },
+    {
+      "passcode": 29389368,
+      "name": "Nutrient Z",
+      "numbers": [
+        "LOD-096",
+        "LOD-EN096"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "LOD-092",
+        "LOD-EN092"
+      ]
+    },
+    {
+      "passcode": 29618570,
+      "name": "Gray Wing",
+      "numbers": [
+        "LOD-041",
+        "LOD-EN041"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "LOD-081",
+        "LOD-EN081"
+      ]
+    },
+    {
+      "passcode": 31553716,
+      "name": "Spear Dragon",
+      "numbers": [
+        "LOD-035",
+        "LOD-EN035"
+      ]
+    },
+    {
+      "passcode": 31785398,
+      "name": "Ready for Intercepting",
+      "numbers": [
+        "LOD-031",
+        "LOD-EN031"
+      ]
+    },
+    {
+      "passcode": 32807846,
+      "name": "Reinforcement of the Army",
+      "numbers": [
+        "LOD-028",
+        "LOD-EN028"
+      ]
+    },
+    {
+      "passcode": 36562627,
+      "name": "Second Coin Toss",
+      "numbers": [
+        "LOD-083",
+        "LOD-EN083"
+      ]
+    },
+    {
+      "passcode": 37406863,
+      "name": "Fengsheng Mirror",
+      "numbers": [
+        "LOD-075",
+        "LOD-EN075"
+      ]
+    },
+    {
+      "passcode": 37620434,
+      "name": "Shadow Tamer",
+      "numbers": [
+        "LOD-025",
+        "LOD-EN025"
+      ]
+    },
+    {
+      "passcode": 37684215,
+      "name": "Fusion Sword Murasame Blade",
+      "numbers": [
+        "LOD-079",
+        "LOD-EN079"
+      ]
+    },
+    {
+      "passcode": 38538445,
+      "name": "Fushi No Tori",
+      "numbers": [
+        "LOD-072",
+        "LOD-EN072"
+      ]
+    },
+    {
+      "passcode": 38742075,
+      "name": "Frontier Wiseman",
+      "numbers": [
+        "LOD-022",
+        "LOD-EN022"
+      ]
+    },
+    {
+      "passcode": 38916461,
+      "name": "Roboyarou",
+      "numbers": [
+        "LOD-055",
+        "LOD-EN055"
+      ]
+    },
+    {
+      "passcode": 39751093,
+      "name": "Otohime",
+      "numbers": [
+        "LOD-069",
+        "LOD-EN069"
+      ]
+    },
+    {
+      "passcode": 40473581,
+      "name": "Susa Soldier",
+      "numbers": [
+        "LOD-066",
+        "LOD-EN066"
+      ]
+    },
+    {
+      "passcode": 40633297,
+      "name": "Bad Reaction to Simochi",
+      "numbers": [
+        "LOD-093",
+        "LOD-EN093"
+      ]
+    },
+    {
+      "passcode": 40695128,
+      "name": "Maharaghi",
+      "numbers": [
+        "LOD-064",
+        "LOD-EN064"
+      ]
+    },
+    {
+      "passcode": 40703393,
+      "name": "The Puppet Magic of Dark Ruler",
+      "numbers": [
+        "LOD-013",
+        "LOD-EN013"
+      ]
+    },
+    {
+      "passcode": 41925941,
+      "name": "Bark of Dark Ruler",
+      "numbers": [
+        "LOD-010",
+        "LOD-EN010"
+      ]
+    },
+    {
+      "passcode": 42647539,
+      "name": "Ryu-Kishin Clown",
+      "numbers": [
+        "LOD-007",
+        "LOD-EN007"
+      ]
+    },
+    {
+      "passcode": 43586926,
+      "name": "Twin-Headed Behemoth",
+      "numbers": [
+        "LOD-063",
+        "LOD-EN063"
+      ]
+    },
+    {
+      "passcode": 44203504,
+      "name": "Robotic Knight",
+      "numbers": [
+        "LOD-051",
+        "LOD-EN051"
+      ]
+    },
+    {
+      "passcode": 49681811,
+      "name": "Freed the Matchless General",
+      "numbers": [
+        "LOD-016",
+        "LOD-EN016"
+      ]
+    },
+    {
+      "passcode": 49868263,
+      "name": "Ryu Senshi",
+      "numbers": [
+        "LOD-019",
+        "LOD-EN019"
+      ]
+    },
+    {
+      "passcode": 52860176,
+      "name": "Possessed Dark Soul",
+      "numbers": [
+        "LOD-004",
+        "LOD-EN004"
+      ]
+    },
+    {
+      "passcode": 53046408,
+      "name": "Emergency Provisions",
+      "numbers": [
+        "LOD-033",
+        "LOD-EN033"
+      ]
+    },
+    {
+      "passcode": 53982768,
+      "name": "Dark Ruler Ha Des",
+      "numbers": [
+        "LOD-001",
+        "LOD-EN001"
+      ]
+    },
+    {
+      "passcode": 54178050,
+      "name": "Dragon's Rage",
+      "numbers": [
+        "LOD-048",
+        "LOD-EN048"
+      ]
+    },
+    {
+      "passcode": 55013285,
+      "name": "Troop Dragon",
+      "numbers": [
+        "LOD-042",
+        "LOD-EN042"
+      ]
+    },
+    {
+      "passcode": 55773067,
+      "name": "Drop Off",
+      "numbers": [
+        "LOD-097",
+        "LOD-EN097"
+      ]
+    },
+    {
+      "passcode": 55991637,
+      "name": "Dragon's Gunfire",
+      "numbers": [
+        "LOD-045",
+        "LOD-EN045"
+      ]
+    },
+    {
+      "passcode": 56369281,
+      "name": "Wolf Axwielder",
+      "numbers": [
+        "LOD-052",
+        "LOD-EN052"
+      ]
+    },
+    {
+      "passcode": 56995655,
+      "name": "Ominous Fortunetelling",
+      "numbers": [
+        "LOD-094",
+        "LOD-EN094"
+      ]
+    },
+    {
+      "passcode": 61622107,
+      "name": "Bubble Crash",
+      "numbers": [
+        "LOD-090",
+        "LOD-EN090"
+      ]
+    },
+    {
+      "passcode": 61844784,
+      "name": "Magic Reflector",
+      "numbers": [
+        "LOD-087",
+        "LOD-EN087"
+      ]
+    },
+    {
+      "passcode": 62966332,
+      "name": "Convulsion of Nature",
+      "numbers": [
+        "LOD-084",
+        "LOD-EN084"
+      ]
+    },
+    {
+      "passcode": 63018132,
+      "name": "Dragon Manipulator",
+      "numbers": [
+        "LOD-026",
+        "LOD-EN026"
+      ]
+    },
+    {
+      "passcode": 63789924,
+      "name": "Smoke Grenade of the Thief",
+      "numbers": [
+        "LOD-080",
+        "LOD-EN080"
+      ]
+    },
+    {
+      "passcode": 64801562,
+      "name": "Heart of Clear Water",
+      "numbers": [
+        "LOD-077",
+        "LOD-EN077"
+      ]
+    },
+    {
+      "passcode": 66235877,
+      "name": "Fiend Skull Dragon",
+      "numbers": [
+        "LOD-039",
+        "LOD-EN039"
+      ]
+    },
+    {
+      "passcode": 67957315,
+      "name": "Spirit Ryu",
+      "numbers": [
+        "LOD-036",
+        "LOD-EN036"
+      ]
+    },
+    {
+      "passcode": 68170903,
+      "name": "A Feint Plan",
+      "numbers": [
+        "LOD-032",
+        "LOD-EN032"
+      ]
+    },
+    {
+      "passcode": 69296555,
+      "name": "Array of Revealing Light",
+      "numbers": [
+        "LOD-029",
+        "LOD-EN029"
+      ]
+    },
+    {
+      "passcode": 70797118,
+      "name": "Thunder Nyan Nyan",
+      "numbers": [
+        "LOD-059",
+        "LOD-EN059"
+      ]
+    },
+    {
+      "passcode": 71829750,
+      "name": "Serpentine Princess",
+      "numbers": [
+        "LOD-057",
+        "LOD-EN057"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "LOD-023",
+        "LOD-EN023"
+      ]
+    },
+    {
+      "passcode": 75745607,
+      "name": "Hino-Kagu-Tsuchi",
+      "numbers": [
+        "LOD-070",
+        "LOD-EN070"
+      ]
+    },
+    {
+      "passcode": 75923050,
+      "name": "Super Robolady",
+      "numbers": [
+        "LOD-073",
+        "LOD-EN073"
+      ]
+    },
+    {
+      "passcode": 75953262,
+      "name": "Warrior Dai Grepher",
+      "numbers": [
+        "LOD-020",
+        "LOD-EN020"
+      ]
+    },
+    {
+      "passcode": 76075810,
+      "name": "Throwstone Unit",
+      "numbers": [
+        "LOD-017",
+        "LOD-EN017"
+      ]
+    },
+    {
+      "passcode": 76297408,
+      "name": "Soul Demolition",
+      "numbers": [
+        "LOD-014",
+        "LOD-EN014"
+      ]
+    },
+    {
+      "passcode": 76862289,
+      "name": "Yamata Dragon",
+      "numbers": [
+        "LOD-067",
+        "LOD-EN067"
+      ]
+    },
+    {
+      "passcode": 77084837,
+      "name": "Inaba White Rabbit",
+      "numbers": [
+        "LOD-065",
+        "LOD-EN065"
+      ]
+    },
+    {
+      "passcode": 77910045,
+      "name": "Fatal Abacus",
+      "numbers": [
+        "LOD-011",
+        "LOD-EN011"
+      ]
+    },
+    {
+      "passcode": 78706415,
+      "name": "Fiber Jar",
+      "numbers": [
+        "LOD-056",
+        "LOD-EN056"
+      ]
+    },
+    {
+      "passcode": 79575620,
+      "name": "Injection Fairy Lily",
+      "numbers": [
+        "LOD-100",
+        "LOD-EN100"
+      ]
+    },
+    {
+      "passcode": 80071763,
+      "name": "Dark Balter the Terrible",
+      "numbers": [
+        "LOD-002",
+        "LOD-EN002"
+      ]
+    },
+    {
+      "passcode": 80163754,
+      "name": "Burst Breath",
+      "numbers": [
+        "LOD-049",
+        "LOD-EN049"
+      ]
+    },
+    {
+      "passcode": 81172176,
+      "name": "Fiend Comedian",
+      "numbers": [
+        "LOD-098",
+        "LOD-EN098"
+      ]
+    },
+    {
+      "passcode": 81385346,
+      "name": "Stamping Destruction",
+      "numbers": [
+        "LOD-046",
+        "LOD-EN046"
+      ]
+    },
+    {
+      "passcode": 83764996,
+      "name": "The Illusory Gentleman",
+      "numbers": [
+        "LOD-053",
+        "LOD-EN053"
+      ]
+    },
+    {
+      "passcode": 88132637,
+      "name": "Twin-Headed Wolf",
+      "numbers": [
+        "LOD-008",
+        "LOD-EN008"
+      ]
+    },
+    {
+      "passcode": 89258225,
+      "name": "Winged Minion",
+      "numbers": [
+        "LOD-005",
+        "LOD-EN005"
+      ]
+    },
+    {
+      "passcode": 92394653,
+      "name": "Spirit's Invitation",
+      "numbers": [
+        "LOD-095",
+        "LOD-EN095"
+      ]
+    },
+    {
+      "passcode": 92408984,
+      "name": "The Dragon's Bead",
+      "numbers": [
+        "LOD-043",
+        "LOD-EN043"
+      ]
+    },
+    {
+      "passcode": 92421852,
+      "name": "Robolady",
+      "numbers": [
+        "LOD-054",
+        "LOD-EN054"
+      ]
+    },
+    {
+      "passcode": 93016201,
+      "name": "Royal Oppression",
+      "numbers": [
+        "LOD-091",
+        "LOD-EN091"
+      ]
+    },
+    {
+      "passcode": 93220472,
+      "name": "Cave Dragon",
+      "numbers": [
+        "LOD-040",
+        "LOD-EN040"
+      ]
+    },
+    {
+      "passcode": 93346024,
+      "name": "The Dragon Dwelling in the Cave",
+      "numbers": [
+        "LOD-037",
+        "LOD-EN037"
+      ]
+    },
+    {
+      "passcode": 94425169,
+      "name": "Spring of Rebirth",
+      "numbers": [
+        "LOD-076",
+        "LOD-EN076"
+      ]
+    },
+    {
+      "passcode": 94568601,
+      "name": "Tyrant Dragon",
+      "numbers": [
+        "LOD-034",
+        "LOD-EN034"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "LOD-030",
+        "LOD-EN030"
+      ]
+    },
+    {
+      "passcode": 98239899,
+      "name": "Blast with Chain",
+      "numbers": [
+        "LOD-088",
+        "LOD-EN088"
+      ]
+    },
+    {
+      "passcode": 99173029,
+      "name": "Spiritual Energy Settle Machine",
+      "numbers": [
+        "LOD-082",
+        "LOD-EN082"
+      ]
+    },
+    {
+      "passcode": 99351431,
+      "name": "The Secret of the Bandit",
+      "numbers": [
+        "LOD-085",
+        "LOD-EN085"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Legacy of Darkness'; printings from the YGOPRODeck bulk dump."
+}

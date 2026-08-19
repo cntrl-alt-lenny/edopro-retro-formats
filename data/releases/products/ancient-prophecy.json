@@ -1,0 +1,727 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "ancient-prophecy",
+  "code": "ANPR",
+  "name": "Ancient Prophecy",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-09-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3972721,
+      "name": "Greed Grado",
+      "numbers": [
+        "ANPR-EN088"
+      ]
+    },
+    {
+      "passcode": 4694209,
+      "name": "Card Guard",
+      "numbers": [
+        "ANPR-EN085"
+      ]
+    },
+    {
+      "passcode": 5817857,
+      "name": "Koa'ki Meiru Ghoulungulate",
+      "numbers": [
+        "ANPR-EN082"
+      ]
+    },
+    {
+      "passcode": 6112401,
+      "name": "At One With the Sword",
+      "numbers": [
+        "ANPR-EN079"
+      ]
+    },
+    {
+      "passcode": 6142213,
+      "name": "Turbo Rocket",
+      "numbers": [
+        "ANPR-EN015"
+      ]
+    },
+    {
+      "passcode": 6150044,
+      "name": "Arcana Knight Joker",
+      "numbers": [
+        "ANPR-EN090"
+      ]
+    },
+    {
+      "passcode": 6320631,
+      "name": "Koa'ki Meiru Boulder",
+      "numbers": [
+        "ANPR-EN018"
+      ]
+    },
+    {
+      "passcode": 7264861,
+      "name": "Infernity Beast",
+      "numbers": [
+        "ANPR-EN012"
+      ]
+    },
+    {
+      "passcode": 7935043,
+      "name": "Aegis of the Ocean Dragon Lord",
+      "numbers": [
+        "ANPR-EN076"
+      ]
+    },
+    {
+      "passcode": 8057630,
+      "name": "Core Reinforcement",
+      "numbers": [
+        "ANPR-EN073"
+      ]
+    },
+    {
+      "passcode": 8279188,
+      "name": "Depth Amulet",
+      "numbers": [
+        "ANPR-EN070"
+      ]
+    },
+    {
+      "passcode": 8487449,
+      "name": "Jester Confit",
+      "numbers": [
+        "ANPR-EN009"
+      ]
+    },
+    {
+      "passcode": 9109991,
+      "name": "Blackwing - Fane the Steel Chain",
+      "numbers": [
+        "ANPR-EN006"
+      ]
+    },
+    {
+      "passcode": 9995766,
+      "name": "Imperial Custom",
+      "numbers": [
+        "ANPR-EN067"
+      ]
+    },
+    {
+      "passcode": 10118318,
+      "name": "Reinforce Truth",
+      "numbers": [
+        "ANPR-EN064"
+      ]
+    },
+    {
+      "passcode": 10321588,
+      "name": "Sunlight Unicorn",
+      "numbers": [
+        "ANPR-EN003"
+      ]
+    },
+    {
+      "passcode": 11052544,
+      "name": "Saber Slash",
+      "numbers": [
+        "ANPR-EN058"
+      ]
+    },
+    {
+      "passcode": 11830996,
+      "name": "Ancient Leaf",
+      "numbers": [
+        "ANPR-EN061"
+      ]
+    },
+    {
+      "passcode": 12174035,
+      "name": "Hydro Pressure Cannon",
+      "numbers": [
+        "ANPR-EN055"
+      ]
+    },
+    {
+      "passcode": 13574687,
+      "name": "Turbo Cannon",
+      "numbers": [
+        "ANPR-EN041"
+      ]
+    },
+    {
+      "passcode": 13997673,
+      "name": "Core Compression",
+      "numbers": [
+        "ANPR-EN052"
+      ]
+    },
+    {
+      "passcode": 14258627,
+      "name": "Gaia Plate the Earth Giant",
+      "numbers": [
+        "ANPR-EN094"
+      ]
+    },
+    {
+      "passcode": 16304628,
+      "name": "Elemental HERO Gaia",
+      "numbers": [
+        "ANPR-EN099"
+      ]
+    },
+    {
+      "passcode": 19028307,
+      "name": "Beast Machine King Barbaros Ür",
+      "numbers": [
+        "ANPR-EN097"
+      ]
+    },
+    {
+      "passcode": 20358953,
+      "name": "Shark Cruiser",
+      "numbers": [
+        "ANPR-EN028"
+      ]
+    },
+    {
+      "passcode": 20470500,
+      "name": "Armed Sea Hunter",
+      "numbers": [
+        "ANPR-EN025"
+      ]
+    },
+    {
+      "passcode": 23297235,
+      "name": "Flamvell Firedog",
+      "numbers": [
+        "ANPR-EN037"
+      ]
+    },
+    {
+      "passcode": 24019261,
+      "name": "Emergency Assistance",
+      "numbers": [
+        "ANPR-EN049"
+      ]
+    },
+    {
+      "passcode": 24419823,
+      "name": "Minefieldriller",
+      "numbers": [
+        "ANPR-EN034"
+      ]
+    },
+    {
+      "passcode": 25231813,
+      "name": "Silver Wing",
+      "numbers": [
+        "ANPR-EN046"
+      ]
+    },
+    {
+      "passcode": 25531465,
+      "name": "Magicat",
+      "numbers": [
+        "ANPR-EN031"
+      ]
+    },
+    {
+      "passcode": 25862681,
+      "name": "Ancient Fairy Dragon",
+      "numbers": [
+        "ANPR-EN040"
+      ]
+    },
+    {
+      "passcode": 25958491,
+      "name": "Ancient Sacred Wyvern",
+      "numbers": [
+        "ANPR-EN043"
+      ]
+    },
+    {
+      "passcode": 31692182,
+      "name": "Koa'ki Meiru Hydro Barrier",
+      "numbers": [
+        "ANPR-EN022"
+      ]
+    },
+    {
+      "passcode": 32207100,
+      "name": "A Major Upset",
+      "numbers": [
+        "ANPR-EN080"
+      ]
+    },
+    {
+      "passcode": 32314730,
+      "name": "Koa'ki Meiru Crusader",
+      "numbers": [
+        "ANPR-EN019"
+      ]
+    },
+    {
+      "passcode": 33323657,
+      "name": "Psychic Soul",
+      "numbers": [
+        "ANPR-EN077"
+      ]
+    },
+    {
+      "passcode": 33537328,
+      "name": "Earthbound Immortal Cusillu",
+      "numbers": [
+        "ANPR-EN016"
+      ]
+    },
+    {
+      "passcode": 34471458,
+      "name": "Fortune Lady Light",
+      "numbers": [
+        "ANPR-EN010"
+      ]
+    },
+    {
+      "passcode": 34545235,
+      "name": "Iron Core Luster",
+      "numbers": [
+        "ANPR-EN074"
+      ]
+    },
+    {
+      "passcode": 34659866,
+      "name": "Darksea Rescue",
+      "numbers": [
+        "ANPR-EN013"
+      ]
+    },
+    {
+      "passcode": 35268887,
+      "name": "Damage Translation",
+      "numbers": [
+        "ANPR-EN071"
+      ]
+    },
+    {
+      "passcode": 37955049,
+      "name": "Gaap the Divine Soldier",
+      "numbers": [
+        "ANPR-EN096"
+      ]
+    },
+    {
+      "passcode": 39967326,
+      "name": "Revival of the Immortals",
+      "numbers": [
+        "ANPR-EN089"
+      ]
+    },
+    {
+      "passcode": 40189917,
+      "name": "Flamvell Commando",
+      "numbers": [
+        "ANPR-EN086"
+      ]
+    },
+    {
+      "passcode": 41201555,
+      "name": "Koa'ki Meiru Gravirose",
+      "numbers": [
+        "ANPR-EN083"
+      ]
+    },
+    {
+      "passcode": 41753322,
+      "name": "Sauropod Brachion",
+      "numbers": [
+        "ANPR-EN095"
+      ]
+    },
+    {
+      "passcode": 42024143,
+      "name": "XX-Saber Gardestrike",
+      "numbers": [
+        "ANPR-EN000"
+      ]
+    },
+    {
+      "passcode": 42256406,
+      "name": "Card Blocker",
+      "numbers": [
+        "ANPR-EN093"
+      ]
+    },
+    {
+      "passcode": 43378048,
+      "name": "Armityle the Chaos Phantasm",
+      "numbers": [
+        "ANPR-EN091"
+      ]
+    },
+    {
+      "passcode": 45593005,
+      "name": "Morphtronic Magnen Bar",
+      "numbers": [
+        "ANPR-EN007"
+      ]
+    },
+    {
+      "passcode": 46480475,
+      "name": "Discord",
+      "numbers": [
+        "ANPR-EN068"
+      ]
+    },
+    {
+      "passcode": 46502013,
+      "name": "Pixie Ring",
+      "numbers": [
+        "ANPR-EN065"
+      ]
+    },
+    {
+      "passcode": 46710683,
+      "name": "Blackwing - Mistral the Silver Shield",
+      "numbers": [
+        "ANPR-EN004"
+      ]
+    },
+    {
+      "passcode": 47325505,
+      "name": "Fossil Dig",
+      "numbers": [
+        "ANPR-EN062"
+      ]
+    },
+    {
+      "passcode": 47432275,
+      "name": "Kuribon",
+      "numbers": [
+        "ANPR-EN001"
+      ]
+    },
+    {
+      "passcode": 48447192,
+      "name": "Sword of Sparkles",
+      "numbers": [
+        "ANPR-EN059"
+      ]
+    },
+    {
+      "passcode": 49669730,
+      "name": "Water Hazard",
+      "numbers": [
+        "ANPR-EN056"
+      ]
+    },
+    {
+      "passcode": 50418970,
+      "name": "Spirit Burner",
+      "numbers": [
+        "ANPR-EN050"
+      ]
+    },
+    {
+      "passcode": 50781944,
+      "name": "Ancient Crimson Ape",
+      "numbers": [
+        "ANPR-EN038"
+      ]
+    },
+    {
+      "passcode": 51020079,
+      "name": "Cyborg Doctor",
+      "numbers": [
+        "ANPR-EN032"
+      ]
+    },
+    {
+      "passcode": 51630558,
+      "name": "Advance Draw",
+      "numbers": [
+        "ANPR-EN047"
+      ]
+    },
+    {
+      "passcode": 51808422,
+      "name": "XX-Saber Faultroll",
+      "numbers": [
+        "ANPR-EN035"
+      ]
+    },
+    {
+      "passcode": 52352005,
+      "name": "XX-Saber Gottoms",
+      "numbers": [
+        "ANPR-EN044"
+      ]
+    },
+    {
+      "passcode": 52512994,
+      "name": "Kasha",
+      "numbers": [
+        "ANPR-EN098"
+      ]
+    },
+    {
+      "passcode": 59385322,
+      "name": "Core Blaster",
+      "numbers": [
+        "ANPR-EN053"
+      ]
+    },
+    {
+      "passcode": 59969392,
+      "name": "Archfiend Zombie-Skull",
+      "numbers": [
+        "ANPR-EN042"
+      ]
+    },
+    {
+      "passcode": 60530944,
+      "name": "Battle of the Elements",
+      "numbers": [
+        "ANPR-EN075"
+      ]
+    },
+    {
+      "passcode": 60718396,
+      "name": "Flamvell Counter",
+      "numbers": [
+        "ANPR-EN078"
+      ]
+    },
+    {
+      "passcode": 62742651,
+      "name": "Armored Axon Kicker",
+      "numbers": [
+        "ANPR-EN029"
+      ]
+    },
+    {
+      "passcode": 67964209,
+      "name": "Divine Dragon Aquabizarre",
+      "numbers": [
+        "ANPR-EN026"
+      ]
+    },
+    {
+      "passcode": 68087897,
+      "name": "Scary Moth",
+      "numbers": [
+        "ANPR-EN023"
+      ]
+    },
+    {
+      "passcode": 68809475,
+      "name": "Koa'ki Meiru Speeder",
+      "numbers": [
+        "ANPR-EN020"
+      ]
+    },
+    {
+      "passcode": 69931927,
+      "name": "Earthbound Immortal Chacu Challhua",
+      "numbers": [
+        "ANPR-EN017"
+      ]
+    },
+    {
+      "passcode": 70054514,
+      "name": "Darksea Float",
+      "numbers": [
+        "ANPR-EN014"
+      ]
+    },
+    {
+      "passcode": 71652522,
+      "name": "Battle Teleportation",
+      "numbers": [
+        "ANPR-EN072"
+      ]
+    },
+    {
+      "passcode": 71870152,
+      "name": "Fortune Lady Fire",
+      "numbers": [
+        "ANPR-EN011"
+      ]
+    },
+    {
+      "passcode": 72714392,
+      "name": "Blackwing - Vayu the Emblem of Honor",
+      "numbers": [
+        "ANPR-EN005"
+      ]
+    },
+    {
+      "passcode": 72885174,
+      "name": "Slip of Fortune",
+      "numbers": [
+        "ANPR-EN069"
+      ]
+    },
+    {
+      "passcode": 72992744,
+      "name": "Jester Lord",
+      "numbers": [
+        "ANPR-EN008"
+      ]
+    },
+    {
+      "passcode": 73507661,
+      "name": "Fairy Wind",
+      "numbers": [
+        "ANPR-EN066"
+      ]
+    },
+    {
+      "passcode": 73729209,
+      "name": "Skill Successor",
+      "numbers": [
+        "ANPR-EN063"
+      ]
+    },
+    {
+      "passcode": 73837870,
+      "name": "Sunny Pixie",
+      "numbers": [
+        "ANPR-EN002"
+      ]
+    },
+    {
+      "passcode": 74845897,
+      "name": "Rekindling",
+      "numbers": [
+        "ANPR-EN060"
+      ]
+    },
+    {
+      "passcode": 77584012,
+      "name": "Pseudo Space",
+      "numbers": [
+        "ANPR-EN087"
+      ]
+    },
+    {
+      "passcode": 77600660,
+      "name": "Psychic Emperor",
+      "numbers": [
+        "ANPR-EN084"
+      ]
+    },
+    {
+      "passcode": 78422252,
+      "name": "XX-Saber Fulhelmknight",
+      "numbers": [
+        "ANPR-EN081"
+      ]
+    },
+    {
+      "passcode": 79473793,
+      "name": "White Night Dragon",
+      "numbers": [
+        "ANPR-EN092"
+      ]
+    },
+    {
+      "passcode": 85668449,
+      "name": "Brain Research Lab",
+      "numbers": [
+        "ANPR-EN057"
+      ]
+    },
+    {
+      "passcode": 86170989,
+      "name": "Falchionβ",
+      "numbers": [
+        "ANPR-EN039"
+      ]
+    },
+    {
+      "passcode": 86780027,
+      "name": "Solidarity",
+      "numbers": [
+        "ANPR-EN054"
+      ]
+    },
+    {
+      "passcode": 87292536,
+      "name": "XX-Saber Ragigura",
+      "numbers": [
+        "ANPR-EN036"
+      ]
+    },
+    {
+      "passcode": 87624166,
+      "name": "Ancient Forest",
+      "numbers": [
+        "ANPR-EN048"
+      ]
+    },
+    {
+      "passcode": 87902575,
+      "name": "Future Visions",
+      "numbers": [
+        "ANPR-EN051"
+      ]
+    },
+    {
+      "passcode": 93369354,
+      "name": "Fishborg Blaster",
+      "numbers": [
+        "ANPR-EN027"
+      ]
+    },
+    {
+      "passcode": 94081496,
+      "name": "Shiny Black \"C\"",
+      "numbers": [
+        "ANPR-EN024"
+      ]
+    },
+    {
+      "passcode": 95204084,
+      "name": "Koa'ki Meiru Tornado",
+      "numbers": [
+        "ANPR-EN021"
+      ]
+    },
+    {
+      "passcode": 98024118,
+      "name": "White Potan",
+      "numbers": [
+        "ANPR-EN033"
+      ]
+    },
+    {
+      "passcode": 98147766,
+      "name": "Genetic Woman",
+      "numbers": [
+        "ANPR-EN030"
+      ]
+    },
+    {
+      "passcode": 98847704,
+      "name": "Release Restraint Wave",
+      "numbers": [
+        "ANPR-EN045"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Ancient Prophecy'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,657 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tactical-evolution",
+  "code": "TAEV",
+  "name": "Tactical Evolution",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-08-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2122975,
+      "name": "Trap Reclamation",
+      "numbers": [
+        "TAEV-EN077"
+      ]
+    },
+    {
+      "passcode": 3244563,
+      "name": "Shield Spear",
+      "numbers": [
+        "TAEV-EN074"
+      ]
+    },
+    {
+      "passcode": 4466015,
+      "name": "Venom Burn",
+      "numbers": [
+        "TAEV-EN071"
+      ]
+    },
+    {
+      "passcode": 4906301,
+      "name": "Necro Gardna",
+      "numbers": [
+        "TAEV-EN012"
+      ]
+    },
+    {
+      "passcode": 5128859,
+      "name": "Elemental HERO Marine Neos",
+      "numbers": [
+        "TAEV-EN041"
+      ]
+    },
+    {
+      "passcode": 5183693,
+      "name": "Amulet of Ambition",
+      "numbers": [
+        "TAEV-EN061"
+      ]
+    },
+    {
+      "passcode": 5915629,
+      "name": "The Gift of Greed",
+      "numbers": [
+        "TAEV-EN079"
+      ]
+    },
+    {
+      "passcode": 8062132,
+      "name": "Vennominaga the Deity of Poisonous Snakes",
+      "numbers": [
+        "TAEV-EN013"
+      ]
+    },
+    {
+      "passcode": 9284723,
+      "name": "Venom Boa",
+      "numbers": [
+        "TAEV-EN016"
+      ]
+    },
+    {
+      "passcode": 15305240,
+      "name": "Creature Seizure",
+      "numbers": [
+        "TAEV-EN058"
+      ]
+    },
+    {
+      "passcode": 16067089,
+      "name": "Rise of the Snake Deity",
+      "numbers": [
+        "TAEV-EN069"
+      ]
+    },
+    {
+      "passcode": 16241441,
+      "name": "Chrysalis Larva",
+      "numbers": [
+        "TAEV-EN010"
+      ]
+    },
+    {
+      "passcode": 16437822,
+      "name": "Flint Missile",
+      "numbers": [
+        "TAEV-EN055"
+      ]
+    },
+    {
+      "passcode": 16984449,
+      "name": "Blazewing Butterfly",
+      "numbers": [
+        "TAEV-EN089"
+      ]
+    },
+    {
+      "passcode": 17189677,
+      "name": "Snake Rain",
+      "numbers": [
+        "TAEV-EN052"
+      ]
+    },
+    {
+      "passcode": 17259470,
+      "name": "Zombie Master",
+      "numbers": [
+        "TAEV-EN039"
+      ]
+    },
+    {
+      "passcode": 17363041,
+      "name": "Chrysalis Chicky",
+      "numbers": [
+        "TAEV-EN008"
+      ]
+    },
+    {
+      "passcode": 17706537,
+      "name": "Fossil Tusker",
+      "numbers": [
+        "TAEV-EN086"
+      ]
+    },
+    {
+      "passcode": 18302224,
+      "name": "Reverse of Neos",
+      "numbers": [
+        "TAEV-EN046"
+      ]
+    },
+    {
+      "passcode": 18372968,
+      "name": "Razor Lizard",
+      "numbers": [
+        "TAEV-EN036"
+      ]
+    },
+    {
+      "passcode": 18828179,
+      "name": "Cranium Fish",
+      "numbers": [
+        "TAEV-EN083"
+      ]
+    },
+    {
+      "passcode": 19024706,
+      "name": "Hero Counterattack",
+      "numbers": [
+        "TAEV-EN064"
+      ]
+    },
+    {
+      "passcode": 19041767,
+      "name": "Gemini Summoner",
+      "numbers": [
+        "TAEV-EN000"
+      ]
+    },
+    {
+      "passcode": 19594506,
+      "name": "Neo Space Pathfinder",
+      "numbers": [
+        "TAEV-EN032"
+      ]
+    },
+    {
+      "passcode": 20438745,
+      "name": "King Pyron",
+      "numbers": [
+        "TAEV-EN026"
+      ]
+    },
+    {
+      "passcode": 21155323,
+      "name": "Goggle Golem",
+      "numbers": [
+        "TAEV-EN023"
+      ]
+    },
+    {
+      "passcode": 22377815,
+      "name": "Aquarian Alessa",
+      "numbers": [
+        "TAEV-EN020"
+      ]
+    },
+    {
+      "passcode": 22499463,
+      "name": "Venom Cobra",
+      "numbers": [
+        "TAEV-EN005"
+      ]
+    },
+    {
+      "passcode": 29216198,
+      "name": "Gravitic Orb",
+      "numbers": [
+        "TAEV-EN029"
+      ]
+    },
+    {
+      "passcode": 29246354,
+      "name": "Chrysalis Pinny",
+      "numbers": [
+        "TAEV-EN009"
+      ]
+    },
+    {
+      "passcode": 30643162,
+      "name": "Strike Slash",
+      "numbers": [
+        "TAEV-EN075"
+      ]
+    },
+    {
+      "passcode": 33112041,
+      "name": "Volcanic Rat",
+      "numbers": [
+        "TAEV-EN002"
+      ]
+    },
+    {
+      "passcode": 34334692,
+      "name": "Ritual Raven",
+      "numbers": [
+        "TAEV-EN035"
+      ]
+    },
+    {
+      "passcode": 36278828,
+      "name": "Venom Serpent",
+      "numbers": [
+        "TAEV-EN017"
+      ]
+    },
+    {
+      "passcode": 39526584,
+      "name": "Gift Card",
+      "numbers": [
+        "TAEV-EN078"
+      ]
+    },
+    {
+      "passcode": 40391316,
+      "name": "Ojama Knight",
+      "numbers": [
+        "TAEV-EN044"
+      ]
+    },
+    {
+      "passcode": 40465719,
+      "name": "Common Charity",
+      "numbers": [
+        "TAEV-EN072"
+      ]
+    },
+    {
+      "passcode": 41517968,
+      "name": "Elemental HERO Darkbright",
+      "numbers": [
+        "TAEV-EN042"
+      ]
+    },
+    {
+      "passcode": 41587307,
+      "name": "Broken Bamboo Sword",
+      "numbers": [
+        "TAEV-EN062"
+      ]
+    },
+    {
+      "passcode": 42239546,
+      "name": "Chrysalis Mole",
+      "numbers": [
+        "TAEV-EN011"
+      ]
+    },
+    {
+      "passcode": 42309337,
+      "name": "Counter Counter",
+      "numbers": [
+        "TAEV-EN080"
+      ]
+    },
+    {
+      "passcode": 42709949,
+      "name": "Phalanx Pike",
+      "numbers": [
+        "TAEV-EN059"
+      ]
+    },
+    {
+      "passcode": 43191636,
+      "name": "Phantom Dragonray Bronto",
+      "numbers": [
+        "TAEV-EN087"
+      ]
+    },
+    {
+      "passcode": 43422537,
+      "name": "Double Summon",
+      "numbers": [
+        "TAEV-EN056"
+      ]
+    },
+    {
+      "passcode": 43452193,
+      "name": "Mirror Gate",
+      "numbers": [
+        "TAEV-EN063"
+      ]
+    },
+    {
+      "passcode": 43644025,
+      "name": "Cocoon Rebirth",
+      "numbers": [
+        "TAEV-EN050"
+      ]
+    },
+    {
+      "passcode": 43751755,
+      "name": "Chrysalis Pantail",
+      "numbers": [
+        "TAEV-EN007"
+      ]
+    },
+    {
+      "passcode": 44223284,
+      "name": "Abyssal Kingshark",
+      "numbers": [
+        "TAEV-EN084"
+      ]
+    },
+    {
+      "passcode": 44584775,
+      "name": "Damage = Reptile",
+      "numbers": [
+        "TAEV-EN067"
+      ]
+    },
+    {
+      "passcode": 45045866,
+      "name": "Ocean's Keeper",
+      "numbers": [
+        "TAEV-EN081"
+      ]
+    },
+    {
+      "passcode": 54306223,
+      "name": "Venom Swamp",
+      "numbers": [
+        "TAEV-EN051"
+      ]
+    },
+    {
+      "passcode": 54766667,
+      "name": "Light Effigy",
+      "numbers": [
+        "TAEV-EN037"
+      ]
+    },
+    {
+      "passcode": 55428811,
+      "name": "Fifth Hope",
+      "numbers": [
+        "TAEV-EN045"
+      ]
+    },
+    {
+      "passcode": 55589254,
+      "name": "Frost and Flame Dragon",
+      "numbers": [
+        "TAEV-EN033"
+      ]
+    },
+    {
+      "passcode": 56605802,
+      "name": "Phantom Cricket",
+      "numbers": [
+        "TAEV-EN030"
+      ]
+    },
+    {
+      "passcode": 56641453,
+      "name": "Cocoon Veil",
+      "numbers": [
+        "TAEV-EN065"
+      ]
+    },
+    {
+      "passcode": 57549932,
+      "name": "Dawnbreak Gardna",
+      "numbers": [
+        "TAEV-EN024"
+      ]
+    },
+    {
+      "passcode": 57827484,
+      "name": "Shadow Delver",
+      "numbers": [
+        "TAEV-EN027"
+      ]
+    },
+    {
+      "passcode": 60606759,
+      "name": "Renge, Gatekeeper of Dark World",
+      "numbers": [
+        "TAEV-EN003"
+      ]
+    },
+    {
+      "passcode": 60728397,
+      "name": "Venom Shot",
+      "numbers": [
+        "TAEV-EN053"
+      ]
+    },
+    {
+      "passcode": 68762510,
+      "name": "Lucky Pied Piper",
+      "numbers": [
+        "TAEV-EN021"
+      ]
+    },
+    {
+      "passcode": 69884162,
+      "name": "Elemental HERO Neos Alius",
+      "numbers": [
+        "TAEV-EN018"
+      ]
+    },
+    {
+      "passcode": 70595331,
+      "name": "Il Blud",
+      "numbers": [
+        "TAEV-EN088"
+      ]
+    },
+    {
+      "passcode": 71717923,
+      "name": "Mormolith",
+      "numbers": [
+        "TAEV-EN085"
+      ]
+    },
+    {
+      "passcode": 72677437,
+      "name": "Vennominon the King of Poisonous Snakes",
+      "numbers": [
+        "TAEV-EN014"
+      ]
+    },
+    {
+      "passcode": 73899015,
+      "name": "Venom Snake",
+      "numbers": [
+        "TAEV-EN015"
+      ]
+    },
+    {
+      "passcode": 76137276,
+      "name": "Spell Reclamation",
+      "numbers": [
+        "TAEV-EN076"
+      ]
+    },
+    {
+      "passcode": 77859858,
+      "name": "Destructive Draw",
+      "numbers": [
+        "TAEV-EN073"
+      ]
+    },
+    {
+      "passcode": 77972406,
+      "name": "Ambush Fangs",
+      "numbers": [
+        "TAEV-EN070"
+      ]
+    },
+    {
+      "passcode": 78512663,
+      "name": "Elemental HERO Magma Neos",
+      "numbers": [
+        "TAEV-EN043"
+      ]
+    },
+    {
+      "passcode": 78734254,
+      "name": "Neo-Spacian Marine Dolphin",
+      "numbers": [
+        "TAEV-EN040"
+      ]
+    },
+    {
+      "passcode": 78794994,
+      "name": "Symbols of Duty",
+      "numbers": [
+        "TAEV-EN060"
+      ]
+    },
+    {
+      "passcode": 79816536,
+      "name": "Summoner's Art",
+      "numbers": [
+        "TAEV-EN057"
+      ]
+    },
+    {
+      "passcode": 79856792,
+      "name": "Rainbow Dragon",
+      "numbers": [
+        "TAEV-EN006"
+      ]
+    },
+    {
+      "passcode": 80033124,
+      "name": "Cyberdark Impact!",
+      "numbers": [
+        "TAEV-EN054"
+      ]
+    },
+    {
+      "passcode": 80368942,
+      "name": "Cocoon Party",
+      "numbers": [
+        "TAEV-EN048"
+      ]
+    },
+    {
+      "passcode": 80678380,
+      "name": "Snake Deity's Command",
+      "numbers": [
+        "TAEV-EN068"
+      ]
+    },
+    {
+      "passcode": 81434470,
+      "name": "Thousand-Eyes Jellyfish",
+      "numbers": [
+        "TAEV-EN082"
+      ]
+    },
+    {
+      "passcode": 81755371,
+      "name": "Dark Effigy",
+      "numbers": [
+        "TAEV-EN038"
+      ]
+    },
+    {
+      "passcode": 81791932,
+      "name": "Snake Whistle",
+      "numbers": [
+        "TAEV-EN066"
+      ]
+    },
+    {
+      "passcode": 81913510,
+      "name": "NEX",
+      "numbers": [
+        "TAEV-EN049"
+      ]
+    },
+    {
+      "passcode": 81977953,
+      "name": "Desert Twister",
+      "numbers": [
+        "TAEV-EN034"
+      ]
+    },
+    {
+      "passcode": 82099401,
+      "name": "Crystal Seer",
+      "numbers": [
+        "TAEV-EN031"
+      ]
+    },
+    {
+      "passcode": 82639107,
+      "name": "Convert Contact",
+      "numbers": [
+        "TAEV-EN047"
+      ]
+    },
+    {
+      "passcode": 83812099,
+      "name": "Flint Lock",
+      "numbers": [
+        "TAEV-EN028"
+      ]
+    },
+    {
+      "passcode": 94944637,
+      "name": "Doom Shaman",
+      "numbers": [
+        "TAEV-EN025"
+      ]
+    },
+    {
+      "passcode": 95166228,
+      "name": "Grasschopper",
+      "numbers": [
+        "TAEV-EN022"
+      ]
+    },
+    {
+      "passcode": 95888876,
+      "name": "Chthonian Emperor Dragon",
+      "numbers": [
+        "TAEV-EN019"
+      ]
+    },
+    {
+      "passcode": 96005454,
+      "name": "Hunter Dragon",
+      "numbers": [
+        "TAEV-EN004"
+      ]
+    },
+    {
+      "passcode": 97127906,
+      "name": "Alien Shocktrooper",
+      "numbers": [
+        "TAEV-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tactical Evolution'; printings from the YGOPRODeck bulk dump."
+}

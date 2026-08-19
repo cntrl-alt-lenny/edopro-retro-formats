@@ -12,13 +12,107 @@
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "yugipedia-dpct-2010"
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-03-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-03-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
       ]
     }
   ],
-  "printings": [],
-  "sources": [
-    "yugipedia-dpct-2010"
+  "printings": [
+    {
+      "passcode": 2295440,
+      "name": "One for One",
+      "numbers": [
+        "DPCT-ENY08"
+      ]
+    },
+    {
+      "passcode": 9365703,
+      "name": "Speed Warrior",
+      "numbers": [
+        "DPCT-ENY05"
+      ]
+    },
+    {
+      "passcode": 23571046,
+      "name": "Quillbolt Hedgehog",
+      "numbers": [
+        "DPCT-ENY02"
+      ]
+    },
+    {
+      "passcode": 35537860,
+      "name": "Synch Blast Wave",
+      "numbers": [
+        "DPCT-ENY03"
+      ]
+    },
+    {
+      "passcode": 51630558,
+      "name": "Advance Draw",
+      "numbers": [
+        "DPCT-ENY06"
+      ]
+    },
+    {
+      "passcode": 56286179,
+      "name": "Drill Synchron",
+      "numbers": [
+        "DPCT-ENY04"
+      ]
+    },
+    {
+      "passcode": 57421866,
+      "name": "Level Eater",
+      "numbers": [
+        "DPCT-ENY07"
+      ]
+    },
+    {
+      "passcode": 58120309,
+      "name": "Starlight Road",
+      "numbers": [
+        "DPCT-EN004"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "DPCT-ENY01"
+      ]
+    },
+    {
+      "passcode": 98427577,
+      "name": "Scrap-Iron Scarecrow",
+      "numbers": [
+        "DPCT-ENY09"
+      ]
+    }
   ],
-  "notes": "Migrated from the stub data/releases/tcg-2010.json; printings pending the release importer."
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack Collection Tin 2010'; printings from the YGOPRODeck bulk dump."
 }

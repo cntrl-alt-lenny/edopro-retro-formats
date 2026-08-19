@@ -1,0 +1,223 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-dragon-s-roar",
+  "code": "SD1",
+  "name": "Structure Deck: Dragon's Roar",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-01-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 980973,
+      "name": "Armed Dragon LV3",
+      "numbers": [
+        "SD1-EN005"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD1-EN011"
+      ]
+    },
+    {
+      "passcode": 11091375,
+      "name": "Luster Dragon",
+      "numbers": [
+        "SD1-EN003"
+      ]
+    },
+    {
+      "passcode": 19252988,
+      "name": "Trap Jammer",
+      "numbers": [
+        "SD1-EN027"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD1-EN016"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD1-EN019"
+      ]
+    },
+    {
+      "passcode": 30314994,
+      "name": "Element Dragon",
+      "numbers": [
+        "SD1-EN008"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SD1-EN018"
+      ]
+    },
+    {
+      "passcode": 36261276,
+      "name": "Interdimensional Matter Transporter",
+      "numbers": [
+        "SD1-EN026"
+      ]
+    },
+    {
+      "passcode": 36262024,
+      "name": "Black Dragon's Chick",
+      "numbers": [
+        "SD1-EN007"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "SD1-EN022"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "SD1-EN025"
+      ]
+    },
+    {
+      "passcode": 39191307,
+      "name": "Masked Dragon",
+      "numbers": [
+        "SD1-EN009"
+      ]
+    },
+    {
+      "passcode": 43586926,
+      "name": "Twin-Headed Behemoth",
+      "numbers": [
+        "SD1-EN004"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SD1-EN010"
+      ]
+    },
+    {
+      "passcode": 46384672,
+      "name": "Armed Dragon LV5",
+      "numbers": [
+        "SD1-EN006"
+      ]
+    },
+    {
+      "passcode": 54178050,
+      "name": "Dragon's Rage",
+      "numbers": [
+        "SD1-EN024"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "SD1-EN015"
+      ]
+    },
+    {
+      "passcode": 66742250,
+      "name": "Curse of Anubis",
+      "numbers": [
+        "SD1-EN028"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SD1-EN013"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SD1-EN012"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "SD1-EN014"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "SD1-EN002"
+      ]
+    },
+    {
+      "passcode": 81385346,
+      "name": "Stamping Destruction",
+      "numbers": [
+        "SD1-EN017"
+      ]
+    },
+    {
+      "passcode": 88089103,
+      "name": "The Graveyard in the Fourth Dimension",
+      "numbers": [
+        "SD1-EN020"
+      ]
+    },
+    {
+      "passcode": 92408984,
+      "name": "The Dragon's Bead",
+      "numbers": [
+        "SD1-EN023"
+      ]
+    },
+    {
+      "passcode": 96561011,
+      "name": "Red-Eyes Darkness Dragon",
+      "numbers": [
+        "SD1-EN001"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD1-EN021"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Structure Deck: Dragon's Roar\"; printings from the YGOPRODeck bulk dump."
+}

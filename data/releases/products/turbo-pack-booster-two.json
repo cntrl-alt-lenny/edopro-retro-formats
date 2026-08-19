@@ -1,0 +1,194 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "turbo-pack-booster-two",
+  "code": "TU02",
+  "name": "Turbo Pack: Booster Two",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-01-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-01-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-01-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2851070,
+      "name": "Reflect Bounder",
+      "numbers": [
+        "TU02-EN017"
+      ]
+    },
+    {
+      "passcode": 9596126,
+      "name": "Chaos Sorcerer",
+      "numbers": [
+        "TU02-EN001"
+      ]
+    },
+    {
+      "passcode": 16255442,
+      "name": "Beckoning Light",
+      "numbers": [
+        "TU02-EN005"
+      ]
+    },
+    {
+      "passcode": 17393207,
+      "name": "Gravekeeper's Commandant",
+      "numbers": [
+        "TU02-EN019"
+      ]
+    },
+    {
+      "passcode": 25262697,
+      "name": "Gravekeeper's Assailant",
+      "numbers": [
+        "TU02-EN002"
+      ]
+    },
+    {
+      "passcode": 27346636,
+      "name": "Gladiator Beast Heraklinos",
+      "numbers": [
+        "TU02-EN000"
+      ]
+    },
+    {
+      "passcode": 28553439,
+      "name": "Magical Dimension",
+      "numbers": [
+        "TU02-EN003"
+      ]
+    },
+    {
+      "passcode": 28601770,
+      "name": "Mist Archfiend",
+      "numbers": [
+        "TU02-EN009"
+      ]
+    },
+    {
+      "passcode": 36623431,
+      "name": "Iron Core of Koa'ki Meiru",
+      "numbers": [
+        "TU02-EN020"
+      ]
+    },
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "TU02-EN014"
+      ]
+    },
+    {
+      "passcode": 53112492,
+      "name": "Anti-Spell",
+      "numbers": [
+        "TU02-EN016"
+      ]
+    },
+    {
+      "passcode": 53341729,
+      "name": "Light-Imprisoning Mirror",
+      "numbers": [
+        "TU02-EN010"
+      ]
+    },
+    {
+      "passcode": 58921041,
+      "name": "Anti-Spell Fragrance",
+      "numbers": [
+        "TU02-EN012"
+      ]
+    },
+    {
+      "passcode": 63695531,
+      "name": "Gravekeeper's Spear Soldier",
+      "numbers": [
+        "TU02-EN006"
+      ]
+    },
+    {
+      "passcode": 69279219,
+      "name": "My Body as a Shield",
+      "numbers": [
+        "TU02-EN007"
+      ]
+    },
+    {
+      "passcode": 71453557,
+      "name": "Autonomous Action Unit",
+      "numbers": [
+        "TU02-EN015"
+      ]
+    },
+    {
+      "passcode": 80921533,
+      "name": "Mausoleum of the Emperor",
+      "numbers": [
+        "TU02-EN018"
+      ]
+    },
+    {
+      "passcode": 81439173,
+      "name": "Foolish Burial",
+      "numbers": [
+        "TU02-EN004"
+      ]
+    },
+    {
+      "passcode": 98494543,
+      "name": "Magical Stone Excavation",
+      "numbers": [
+        "TU02-EN008"
+      ]
+    },
+    {
+      "passcode": 99735427,
+      "name": "Shadow-Imprisoning Mirror",
+      "numbers": [
+        "TU02-EN011"
+      ]
+    },
+    {
+      "passcode": 99877698,
+      "name": "Gravekeeper's Cannonholder",
+      "numbers": [
+        "TU02-EN013"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Turbo Pack: Booster Two'; printings from the YGOPRODeck bulk dump."
+}

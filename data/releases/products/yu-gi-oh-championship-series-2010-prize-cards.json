@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-championship-series-2010-prize-cards",
+  "code": "YCSW",
+  "name": "Yu-Gi-Oh! Championship Series 2010 Prize Cards",
+  "kind": "promo-tournament",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-05-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-09-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-07-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 11260714,
+      "name": "Darklord Superbia",
+      "numbers": [
+        "YCSW-EN002"
+      ]
+    },
+    {
+      "passcode": 47664723,
+      "name": "Darklord Edeh Arae",
+      "numbers": [
+        "YCSW-EN003"
+      ]
+    },
+    {
+      "passcode": 85771019,
+      "name": "Darklord Asmodeus",
+      "numbers": [
+        "YCSW-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Championship Series 2010 Prize Cards'; printings from the YGOPRODeck bulk dump."
+}

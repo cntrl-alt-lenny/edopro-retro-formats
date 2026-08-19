@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-jaden-yuki",
+  "code": "DP1",
+  "name": "Duelist Pack: Jaden Yuki",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-02-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6480253,
+      "name": "Wroughtweiler",
+      "numbers": [
+        "DP1-EN007"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "DP1-EN027"
+      ]
+    },
+    {
+      "passcode": 19394153,
+      "name": "Feather Shot",
+      "numbers": [
+        "DP1-EN017"
+      ]
+    },
+    {
+      "passcode": 20721928,
+      "name": "Elemental HERO Sparkman",
+      "numbers": [
+        "DP1-EN004"
+      ]
+    },
+    {
+      "passcode": 21597117,
+      "name": "A Hero Emerges",
+      "numbers": [
+        "DP1-EN025"
+      ]
+    },
+    {
+      "passcode": 21844576,
+      "name": "Elemental HERO Avian",
+      "numbers": [
+        "DP1-EN001"
+      ]
+    },
+    {
+      "passcode": 22020907,
+      "name": "Hero Signal",
+      "numbers": [
+        "DP1-EN028"
+      ]
+    },
+    {
+      "passcode": 22479888,
+      "name": "Clay Charge",
+      "numbers": [
+        "DP1-EN030"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "DP1-EN014"
+      ]
+    },
+    {
+      "passcode": 25573054,
+      "name": "Transcendent Wings",
+      "numbers": [
+        "DP1-EN018"
+      ]
+    },
+    {
+      "passcode": 26902560,
+      "name": "Fusion Sage",
+      "numbers": [
+        "DP1-EN015"
+      ]
+    },
+    {
+      "passcode": 27191436,
+      "name": "Burst Return",
+      "numbers": [
+        "DP1-EN022"
+      ]
+    },
+    {
+      "passcode": 33875961,
+      "name": "Dark Catapulter",
+      "numbers": [
+        "DP1-EN008"
+      ]
+    },
+    {
+      "passcode": 35809262,
+      "name": "Elemental HERO Flame Wingman",
+      "numbers": [
+        "DP1-EN010"
+      ]
+    },
+    {
+      "passcode": 43250041,
+      "name": "Draining Shield",
+      "numbers": [
+        "DP1-EN026"
+      ]
+    },
+    {
+      "passcode": 47737087,
+      "name": "Elemental HERO Rampart Blaster",
+      "numbers": [
+        "DP1-EN012"
+      ]
+    },
+    {
+      "passcode": 53586134,
+      "name": "Bubble Blaster",
+      "numbers": [
+        "DP1-EN023"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "DP1-EN005"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "DP1-EN002"
+      ]
+    },
+    {
+      "passcode": 61204971,
+      "name": "Elemental HERO Thunder Giant",
+      "numbers": [
+        "DP1-EN011"
+      ]
+    },
+    {
+      "passcode": 61968753,
+      "name": "Bubble Shuffle",
+      "numbers": [
+        "DP1-EN019"
+      ]
+    },
+    {
+      "passcode": 63035430,
+      "name": "Skyscraper",
+      "numbers": [
+        "DP1-EN021"
+      ]
+    },
+    {
+      "passcode": 71060915,
+      "name": "Feather Wind",
+      "numbers": [
+        "DP1-EN029"
+      ]
+    },
+    {
+      "passcode": 79979666,
+      "name": "Elemental HERO Bubbleman",
+      "numbers": [
+        "DP1-EN009"
+      ]
+    },
+    {
+      "passcode": 80075749,
+      "name": "Bubble Illusion",
+      "numbers": [
+        "DP1-EN024"
+      ]
+    },
+    {
+      "passcode": 81197327,
+      "name": "Elemental HERO Steam Healer",
+      "numbers": [
+        "DP1-EN013"
+      ]
+    },
+    {
+      "passcode": 84327329,
+      "name": "Elemental HERO Clayman",
+      "numbers": [
+        "DP1-EN003"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "DP1-EN016"
+      ]
+    },
+    {
+      "passcode": 97362768,
+      "name": "Spark Blaster",
+      "numbers": [
+        "DP1-EN020"
+      ]
+    },
+    {
+      "passcode": 98585345,
+      "name": "Winged Kuriboh LV10",
+      "numbers": [
+        "DP1-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Jaden Yuki'; printings from the YGOPRODeck bulk dump."
+}

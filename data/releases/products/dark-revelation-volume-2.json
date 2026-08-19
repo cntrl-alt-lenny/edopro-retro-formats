@@ -1,0 +1,1599 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "dark-revelation-volume-2",
+  "code": "DR2",
+  "name": "Dark Revelation Volume 2",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-10-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 218704,
+      "name": "Fenrir",
+      "numbers": [
+        "DR2-EN020"
+      ]
+    },
+    {
+      "passcode": 303660,
+      "name": "Amplifier",
+      "numbers": [
+        "DR2-EN152"
+      ]
+    },
+    {
+      "passcode": 1434352,
+      "name": "Chaos Necromancer",
+      "numbers": [
+        "DR2-EN017"
+      ]
+    },
+    {
+      "passcode": 2314238,
+      "name": "Dark Magic Attack",
+      "numbers": [
+        "DR2-EN208"
+      ]
+    },
+    {
+      "passcode": 2468169,
+      "name": "Sealmaster Meisei",
+      "numbers": [
+        "DR2-EN115"
+      ]
+    },
+    {
+      "passcode": 2671330,
+      "name": "Hyper Hammerhead",
+      "numbers": [
+        "DR2-EN075"
+      ]
+    },
+    {
+      "passcode": 3136426,
+      "name": "Level Limit - Area B",
+      "numbers": [
+        "DR2-EN205"
+      ]
+    },
+    {
+      "passcode": 3493978,
+      "name": "Don Turtle",
+      "numbers": [
+        "DR2-EN072"
+      ]
+    },
+    {
+      "passcode": 3510565,
+      "name": "Stealth Bird",
+      "numbers": [
+        "DR2-EN069"
+      ]
+    },
+    {
+      "passcode": 3773196,
+      "name": "D.D. Scout Plane",
+      "numbers": [
+        "DR2-EN012"
+      ]
+    },
+    {
+      "passcode": 4081094,
+      "name": "The Second Sarcophagus",
+      "numbers": [
+        "DR2-EN213"
+      ]
+    },
+    {
+      "passcode": 4259068,
+      "name": "Spell Economics",
+      "numbers": [
+        "DR2-EN202"
+      ]
+    },
+    {
+      "passcode": 4542651,
+      "name": "Yellow Luster Shield",
+      "numbers": [
+        "DR2-EN037"
+      ]
+    },
+    {
+      "passcode": 4732017,
+      "name": "Molten Zombie",
+      "numbers": [
+        "DR2-EN065"
+      ]
+    },
+    {
+      "passcode": 4869446,
+      "name": "Judgment of the Desert",
+      "numbers": [
+        "DR2-EN216"
+      ]
+    },
+    {
+      "passcode": 4896788,
+      "name": "Spirit of the Pot of Greed",
+      "numbers": [
+        "DR2-EN009"
+      ]
+    },
+    {
+      "passcode": 5371656,
+      "name": "Sword of the Soul-Eater",
+      "numbers": [
+        "DR2-EN199"
+      ]
+    },
+    {
+      "passcode": 5464695,
+      "name": "Blazing Inpachi",
+      "numbers": [
+        "DR2-EN062"
+      ]
+    },
+    {
+      "passcode": 5703682,
+      "name": "Thousand Energy",
+      "numbers": [
+        "DR2-EN210"
+      ]
+    },
+    {
+      "passcode": 6103294,
+      "name": "Emissary of the Oasis",
+      "numbers": [
+        "DR2-EN196"
+      ]
+    },
+    {
+      "passcode": 6133894,
+      "name": "Mazera DeVille",
+      "numbers": [
+        "DR2-EN168"
+      ]
+    },
+    {
+      "passcode": 8251996,
+      "name": "Ojama Delta Hurricane!!",
+      "numbers": [
+        "DR2-EN034"
+      ]
+    },
+    {
+      "passcode": 9373534,
+      "name": "Fuhma Shuriken",
+      "numbers": [
+        "DR2-EN031"
+      ]
+    },
+    {
+      "passcode": 9596126,
+      "name": "Chaos Sorcerer",
+      "numbers": [
+        "DR2-EN023"
+      ]
+    },
+    {
+      "passcode": 10035717,
+      "name": "Weapon Change",
+      "numbers": [
+        "DR2-EN153"
+      ]
+    },
+    {
+      "passcode": 11448373,
+      "name": "Grave Protector",
+      "numbers": [
+        "DR2-EN190"
+      ]
+    },
+    {
+      "passcode": 12160911,
+      "name": "Elephant Statue of Disaster",
+      "numbers": [
+        "DR2-EN187"
+      ]
+    },
+    {
+      "passcode": 13386503,
+      "name": "Ghost Knight of Jackal",
+      "numbers": [
+        "DR2-EN184"
+      ]
+    },
+    {
+      "passcode": 13409151,
+      "name": "Desertapir",
+      "numbers": [
+        "DR2-EN181"
+      ]
+    },
+    {
+      "passcode": 13944422,
+      "name": "Granadora",
+      "numbers": [
+        "DR2-EN030"
+      ]
+    },
+    {
+      "passcode": 14618326,
+      "name": "Crimson Ninja",
+      "numbers": [
+        "DR2-EN006"
+      ]
+    },
+    {
+      "passcode": 15734813,
+      "name": "Soul Tiger",
+      "numbers": [
+        "DR2-EN003"
+      ]
+    },
+    {
+      "passcode": 16226786,
+      "name": "Night Assailant",
+      "numbers": [
+        "DR2-EN193"
+      ]
+    },
+    {
+      "passcode": 16255442,
+      "name": "Beckoning Light",
+      "numbers": [
+        "DR2-EN165"
+      ]
+    },
+    {
+      "passcode": 16556849,
+      "name": "Freed the Brave Wanderer",
+      "numbers": [
+        "DR2-EN014"
+      ]
+    },
+    {
+      "passcode": 16587243,
+      "name": "Neo Bug",
+      "numbers": [
+        "DR2-EN059"
+      ]
+    },
+    {
+      "passcode": 17078030,
+      "name": "Wall of Revealing Light",
+      "numbers": [
+        "DR2-EN162"
+      ]
+    },
+    {
+      "passcode": 17655904,
+      "name": "Burst Stream of Destruction",
+      "numbers": [
+        "DR2-EN150"
+      ]
+    },
+    {
+      "passcode": 18190572,
+      "name": "Micro Ray",
+      "numbers": [
+        "DR2-EN159"
+      ]
+    },
+    {
+      "passcode": 18378582,
+      "name": "Archlord Zerato",
+      "numbers": [
+        "DR2-EN146"
+      ]
+    },
+    {
+      "passcode": 18590133,
+      "name": "Goblin King",
+      "numbers": [
+        "DR2-EN143"
+      ]
+    },
+    {
+      "passcode": 19252988,
+      "name": "Trap Jammer",
+      "numbers": [
+        "DR2-EN111"
+      ]
+    },
+    {
+      "passcode": 19312169,
+      "name": "Talisman of Trap Sealing",
+      "numbers": [
+        "DR2-EN156"
+      ]
+    },
+    {
+      "passcode": 19612721,
+      "name": "Disc Fighter",
+      "numbers": [
+        "DR2-EN140"
+      ]
+    },
+    {
+      "passcode": 20374520,
+      "name": "Begone, Knave!",
+      "numbers": [
+        "DR2-EN108"
+      ]
+    },
+    {
+      "passcode": 20522190,
+      "name": "Dark Mirror Force",
+      "numbers": [
+        "DR2-EN054"
+      ]
+    },
+    {
+      "passcode": 20644748,
+      "name": "Spatial Collapse",
+      "numbers": [
+        "DR2-EN051"
+      ]
+    },
+    {
+      "passcode": 21219755,
+      "name": "Destruction Ring",
+      "numbers": [
+        "DR2-EN102"
+      ]
+    },
+    {
+      "passcode": 21466326,
+      "name": "Blasting the Ruins",
+      "numbers": [
+        "DR2-EN048"
+      ]
+    },
+    {
+      "passcode": 21597117,
+      "name": "A Hero Emerges",
+      "numbers": [
+        "DR2-EN105"
+      ]
+    },
+    {
+      "passcode": 21887179,
+      "name": "Getsu Fuhma",
+      "numbers": [
+        "DR2-EN090"
+      ]
+    },
+    {
+      "passcode": 22431243,
+      "name": "Ultra Evolution Pill",
+      "numbers": [
+        "DR2-EN098"
+      ]
+    },
+    {
+      "passcode": 22493811,
+      "name": "Multiplication of Ants",
+      "numbers": [
+        "DR2-EN099"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "DR2-EN045"
+      ]
+    },
+    {
+      "passcode": 22609617,
+      "name": "Mataza the Zapper",
+      "numbers": [
+        "DR2-EN087"
+      ]
+    },
+    {
+      "passcode": 23557835,
+      "name": "Dimension Fusion",
+      "numbers": [
+        "DR2-EN095",
+        "DR2-EN14"
+      ]
+    },
+    {
+      "passcode": 23701465,
+      "name": "Primal Seed",
+      "numbers": [
+        "DR2-EN042"
+      ]
+    },
+    {
+      "passcode": 24221739,
+      "name": "Protector of the Sanctuary",
+      "numbers": [
+        "DR2-EN178"
+      ]
+    },
+    {
+      "passcode": 24435369,
+      "name": "Mermaid Knight",
+      "numbers": [
+        "DR2-EN137"
+      ]
+    },
+    {
+      "passcode": 25343280,
+      "name": "Spirit of the Pharaoh",
+      "numbers": [
+        "DR2-EN175"
+      ]
+    },
+    {
+      "passcode": 25551951,
+      "name": "Blowback Dragon",
+      "numbers": [
+        "DR2-EN134"
+      ]
+    },
+    {
+      "passcode": 25773409,
+      "name": "Legendary Jujitsu Master",
+      "numbers": [
+        "DR2-EN129"
+      ]
+    },
+    {
+      "passcode": 26185991,
+      "name": "Pinch Hopper",
+      "numbers": [
+        "DR2-EN079"
+      ]
+    },
+    {
+      "passcode": 26495087,
+      "name": "Vampire Lady",
+      "numbers": [
+        "DR2-EN125"
+      ]
+    },
+    {
+      "passcode": 26566878,
+      "name": "Fiend Scorpion",
+      "numbers": [
+        "DR2-EN172"
+      ]
+    },
+    {
+      "passcode": 27288416,
+      "name": "Mokey Mokey",
+      "numbers": [
+        "DR2-EN170"
+      ]
+    },
+    {
+      "passcode": 27618634,
+      "name": "The Unhappy Girl",
+      "numbers": [
+        "DR2-EN122"
+      ]
+    },
+    {
+      "passcode": 30190809,
+      "name": "Gear Golem the Moving Fortress",
+      "numbers": [
+        "DR2-EN130"
+      ]
+    },
+    {
+      "passcode": 30353551,
+      "name": "Human-Wave Tactics",
+      "numbers": [
+        "DR2-EN217"
+      ]
+    },
+    {
+      "passcode": 30531525,
+      "name": "Enchanting Fitting Room",
+      "numbers": [
+        "DR2-EN206"
+      ]
+    },
+    {
+      "passcode": 30653113,
+      "name": "Blessings of the Nile",
+      "numbers": [
+        "DR2-EN203"
+      ]
+    },
+    {
+      "passcode": 30914564,
+      "name": "Sacred Crane",
+      "numbers": [
+        "DR2-EN070"
+      ]
+    },
+    {
+      "passcode": 31076103,
+      "name": "The First Sarcophagus",
+      "numbers": [
+        "DR2-EN214"
+      ]
+    },
+    {
+      "passcode": 31476755,
+      "name": "Dust Barrier",
+      "numbers": [
+        "DR2-EN200"
+      ]
+    },
+    {
+      "passcode": 31812496,
+      "name": "Stone Statue of the Aztecs",
+      "numbers": [
+        "DR2-EN126"
+      ]
+    },
+    {
+      "passcode": 32298781,
+      "name": "Triangle Power",
+      "numbers": [
+        "DR2-EN211"
+      ]
+    },
+    {
+      "passcode": 33423043,
+      "name": "D.D. Designator",
+      "numbers": [
+        "DR2-EN039"
+      ]
+    },
+    {
+      "passcode": 34370473,
+      "name": "Gryphon's Feather Duster",
+      "numbers": [
+        "DR2-EN092"
+      ]
+    },
+    {
+      "passcode": 34646691,
+      "name": "Stumbling",
+      "numbers": [
+        "DR2-EN035"
+      ]
+    },
+    {
+      "passcode": 35762283,
+      "name": "Heart of the Underdog",
+      "numbers": [
+        "DR2-EN032"
+      ]
+    },
+    {
+      "passcode": 36584821,
+      "name": "Gren Maju Da Eiza",
+      "numbers": [
+        "DR2-EN024"
+      ]
+    },
+    {
+      "passcode": 37721209,
+      "name": "Levia-Dragon - Daedalus",
+      "numbers": [
+        "DR2-EN084"
+      ]
+    },
+    {
+      "passcode": 37957847,
+      "name": "Insect Princess",
+      "numbers": [
+        "DR2-EN081"
+      ]
+    },
+    {
+      "passcode": 38670435,
+      "name": "Black Tyranno",
+      "numbers": [
+        "DR2-EN076"
+      ]
+    },
+    {
+      "passcode": 38730226,
+      "name": "The Agent of Wisdom - Mercury",
+      "numbers": [
+        "DR2-EN119"
+      ]
+    },
+    {
+      "passcode": 39019325,
+      "name": "Order to Smash",
+      "numbers": [
+        "DR2-EN223"
+      ]
+    },
+    {
+      "passcode": 39131963,
+      "name": "Des Counterblow",
+      "numbers": [
+        "DR2-EN220"
+      ]
+    },
+    {
+      "passcode": 39168895,
+      "name": "Berserk Gorilla",
+      "numbers": [
+        "DR2-EN013"
+      ]
+    },
+    {
+      "passcode": 39552864,
+      "name": "Mystical Shine Ball",
+      "numbers": [
+        "DR2-EN116"
+      ]
+    },
+    {
+      "passcode": 39674352,
+      "name": "Gogiga Gagagigo",
+      "numbers": [
+        "DR2-EN113"
+      ]
+    },
+    {
+      "passcode": 39719977,
+      "name": "Delta Attacker",
+      "numbers": [
+        "DR2-EN209"
+      ]
+    },
+    {
+      "passcode": 39892082,
+      "name": "Balloon Lizard",
+      "numbers": [
+        "DR2-EN073"
+      ]
+    },
+    {
+      "passcode": 40320754,
+      "name": "Lord Poison",
+      "numbers": [
+        "DR2-EN028"
+      ]
+    },
+    {
+      "passcode": 40737112,
+      "name": "Dark Magician of Chaos",
+      "numbers": [
+        "DR2-EN066",
+        "DR2-EN09"
+      ]
+    },
+    {
+      "passcode": 40884383,
+      "name": "Chopman the Desperate Outlaw",
+      "numbers": [
+        "DR2-EN010"
+      ]
+    },
+    {
+      "passcode": 41006930,
+      "name": "Strike Ninja",
+      "numbers": [
+        "DR2-EN007"
+      ]
+    },
+    {
+      "passcode": 41859700,
+      "name": "Burning Algae",
+      "numbers": [
+        "DR2-EN063"
+      ]
+    },
+    {
+      "passcode": 42071342,
+      "name": "Sea Serpent Warrior of Darkness",
+      "numbers": [
+        "DR2-EN060"
+      ]
+    },
+    {
+      "passcode": 42129512,
+      "name": "Big Koala",
+      "numbers": [
+        "DR2-EN004"
+      ]
+    },
+    {
+      "passcode": 42541548,
+      "name": "Coach Goblin",
+      "numbers": [
+        "DR2-EN015"
+      ]
+    },
+    {
+      "passcode": 42598242,
+      "name": "Special Hurricane",
+      "numbers": [
+        "DR2-EN197"
+      ]
+    },
+    {
+      "passcode": 42868711,
+      "name": "Gora Turtle of Illusion",
+      "numbers": [
+        "DR2-EN067"
+      ]
+    },
+    {
+      "passcode": 42941100,
+      "name": "Ojama Yellow",
+      "numbers": [
+        "DR2-EN001"
+      ]
+    },
+    {
+      "passcode": 43040603,
+      "name": "Monster Gate",
+      "numbers": [
+        "DR2-EN151"
+      ]
+    },
+    {
+      "passcode": 43250041,
+      "name": "Draining Shield",
+      "numbers": [
+        "DR2-EN166"
+      ]
+    },
+    {
+      "passcode": 43714890,
+      "name": "Man-Thro' Tro'",
+      "numbers": [
+        "DR2-EN194"
+      ]
+    },
+    {
+      "passcode": 43793530,
+      "name": "Giga Gagagigo",
+      "numbers": [
+        "DR2-EN057"
+      ]
+    },
+    {
+      "passcode": 44436472,
+      "name": "Double Coston",
+      "numbers": [
+        "DR2-EN191"
+      ]
+    },
+    {
+      "passcode": 44472639,
+      "name": "Solar Ray",
+      "numbers": [
+        "DR2-EN163"
+      ]
+    },
+    {
+      "passcode": 44595286,
+      "name": "Light of Judgment",
+      "numbers": [
+        "DR2-EN160"
+      ]
+    },
+    {
+      "passcode": 44762290,
+      "name": "Opti-Camouflage Armor",
+      "numbers": [
+        "DR2-EN147"
+      ]
+    },
+    {
+      "passcode": 45311864,
+      "name": "Goblin Thief",
+      "numbers": [
+        "DR2-EN157"
+      ]
+    },
+    {
+      "passcode": 45985838,
+      "name": "Solar Flare Dragon",
+      "numbers": [
+        "DR2-EN144"
+      ]
+    },
+    {
+      "passcode": 47606319,
+      "name": "Gigantes",
+      "numbers": [
+        "DR2-EN021",
+        "DR2-EN33"
+      ]
+    },
+    {
+      "passcode": 47829960,
+      "name": "Chaosrider Gustaph",
+      "numbers": [
+        "DR2-EN018"
+      ]
+    },
+    {
+      "passcode": 48659020,
+      "name": "Spirit Caller",
+      "numbers": [
+        "DR2-EN188"
+      ]
+    },
+    {
+      "passcode": 49771608,
+      "name": "Absorbing Kid from the Sky",
+      "numbers": [
+        "DR2-EN185"
+      ]
+    },
+    {
+      "passcode": 50593156,
+      "name": "Sand Gambler",
+      "numbers": [
+        "DR2-EN182"
+      ]
+    },
+    {
+      "passcode": 50823978,
+      "name": "Piranha Army",
+      "numbers": [
+        "DR2-EN138"
+      ]
+    },
+    {
+      "passcode": 51616747,
+      "name": "Nubian Guard",
+      "numbers": [
+        "DR2-EN179"
+      ]
+    },
+    {
+      "passcode": 51838385,
+      "name": "Theban Nightmare",
+      "numbers": [
+        "DR2-EN176"
+      ]
+    },
+    {
+      "passcode": 51945556,
+      "name": "Zaborg the Thunder Monarch",
+      "numbers": [
+        "DR2-EN135"
+      ]
+    },
+    {
+      "passcode": 52090844,
+      "name": "Bowganian",
+      "numbers": [
+        "DR2-EN029"
+      ]
+    },
+    {
+      "passcode": 52550973,
+      "name": "Pharaoh's Servant",
+      "numbers": [
+        "DR2-EN173"
+      ]
+    },
+    {
+      "passcode": 52768103,
+      "name": "KA-2 Des Scissors",
+      "numbers": [
+        "DR2-EN131"
+      ]
+    },
+    {
+      "passcode": 53776525,
+      "name": "Gigobyte",
+      "numbers": [
+        "DR2-EN169"
+      ]
+    },
+    {
+      "passcode": 53890795,
+      "name": "Rocket Jumper",
+      "numbers": [
+        "DR2-EN127"
+      ]
+    },
+    {
+      "passcode": 55001420,
+      "name": "Arcane Archer of the Forest",
+      "numbers": [
+        "DR2-EN141"
+      ]
+    },
+    {
+      "passcode": 56433456,
+      "name": "The Sanctuary in the Sky",
+      "numbers": [
+        "DR2-EN154"
+      ]
+    },
+    {
+      "passcode": 56647086,
+      "name": "Invader of Darkness",
+      "numbers": [
+        "DR2-EN112"
+      ]
+    },
+    {
+      "passcode": 56769674,
+      "name": "DNA Transplant",
+      "numbers": [
+        "DR2-EN109"
+      ]
+    },
+    {
+      "passcode": 56916805,
+      "name": "Energy Drain",
+      "numbers": [
+        "DR2-EN055"
+      ]
+    },
+    {
+      "passcode": 57139487,
+      "name": "Chain Disappearance",
+      "numbers": [
+        "DR2-EN052"
+      ]
+    },
+    {
+      "passcode": 57281778,
+      "name": "Ryu Kokki",
+      "numbers": [
+        "DR2-EN091"
+      ]
+    },
+    {
+      "passcode": 57585212,
+      "name": "Self-Destruct Button",
+      "numbers": [
+        "DR2-EN106"
+      ]
+    },
+    {
+      "passcode": 58607704,
+      "name": "Fiend's Hand Mirror",
+      "numbers": [
+        "DR2-EN103"
+      ]
+    },
+    {
+      "passcode": 58851034,
+      "name": "Cursed Seal of the Forbidden Spell",
+      "numbers": [
+        "DR2-EN049"
+      ]
+    },
+    {
+      "passcode": 59820352,
+      "name": "Earth Chant",
+      "numbers": [
+        "DR2-EN100"
+      ]
+    },
+    {
+      "passcode": 60764581,
+      "name": "Stray Lambs",
+      "numbers": [
+        "DR2-EN093"
+      ]
+    },
+    {
+      "passcode": 60912752,
+      "name": "D.D. Borderline",
+      "numbers": [
+        "DR2-EN040"
+      ]
+    },
+    {
+      "passcode": 61044390,
+      "name": "Chaos End",
+      "numbers": [
+        "DR2-EN036"
+      ]
+    },
+    {
+      "passcode": 61166988,
+      "name": "Wild Nature's Release",
+      "numbers": [
+        "DR2-EN033"
+      ]
+    },
+    {
+      "passcode": 62543393,
+      "name": "Lekunga",
+      "numbers": [
+        "DR2-EN027"
+      ]
+    },
+    {
+      "passcode": 63012333,
+      "name": "Soul-Absorbing Bone Tower",
+      "numbers": [
+        "DR2-EN123"
+      ]
+    },
+    {
+      "passcode": 63120904,
+      "name": "Orca Mega-Fortress of Darkness",
+      "numbers": [
+        "DR2-EN085"
+      ]
+    },
+    {
+      "passcode": 64306248,
+      "name": "Skull-Mark Ladybug",
+      "numbers": [
+        "DR2-EN080"
+      ]
+    },
+    {
+      "passcode": 64342551,
+      "name": "Amphibious Bugroth MK-3",
+      "numbers": [
+        "DR2-EN082"
+      ]
+    },
+    {
+      "passcode": 64734921,
+      "name": "The Agent of Creation - Venus",
+      "numbers": [
+        "DR2-EN120"
+      ]
+    },
+    {
+      "passcode": 65064143,
+      "name": "Anti-Aircraft Flower",
+      "numbers": [
+        "DR2-EN077"
+      ]
+    },
+    {
+      "passcode": 65287621,
+      "name": "Dark Driceratops",
+      "numbers": [
+        "DR2-EN074"
+      ]
+    },
+    {
+      "passcode": 65403020,
+      "name": "The End of Anubis",
+      "numbers": [
+        "DR2-EN224"
+      ]
+    },
+    {
+      "passcode": 65957473,
+      "name": "Metal Armored Bug",
+      "numbers": [
+        "DR2-EN117"
+      ]
+    },
+    {
+      "passcode": 66073051,
+      "name": "Warrior of Zera",
+      "numbers": [
+        "DR2-EN114"
+      ]
+    },
+    {
+      "passcode": 66526672,
+      "name": "Labyrinth of Nightmare",
+      "numbers": [
+        "DR2-EN221"
+      ]
+    },
+    {
+      "passcode": 66742250,
+      "name": "Curse of Anubis",
+      "numbers": [
+        "DR2-EN15",
+        "DR2-EN218"
+      ]
+    },
+    {
+      "passcode": 66926224,
+      "name": "The Law of the Normal",
+      "numbers": [
+        "DR2-EN207"
+      ]
+    },
+    {
+      "passcode": 67048711,
+      "name": "7",
+      "numbers": [
+        "DR2-EN204"
+      ]
+    },
+    {
+      "passcode": 67464807,
+      "name": "Dora of Fate",
+      "numbers": [
+        "DR2-EN215"
+      ]
+    },
+    {
+      "passcode": 68007326,
+      "name": "Guardian Angel Joan",
+      "numbers": [
+        "DR2-EN088"
+      ]
+    },
+    {
+      "passcode": 68073522,
+      "name": "Soul Absorption",
+      "numbers": [
+        "DR2-EN046"
+      ]
+    },
+    {
+      "passcode": 69196160,
+      "name": "Thunder Crash",
+      "numbers": [
+        "DR2-EN043"
+      ]
+    },
+    {
+      "passcode": 69542930,
+      "name": "Dedication through Light and Darkness",
+      "numbers": [
+        "DR2-EN096"
+      ]
+    },
+    {
+      "passcode": 70821187,
+      "name": "Regenerating Mummy",
+      "numbers": [
+        "DR2-EN192"
+      ]
+    },
+    {
+      "passcode": 70861343,
+      "name": "Ninjitsu Art of Transformation",
+      "numbers": [
+        "DR2-EN164"
+      ]
+    },
+    {
+      "passcode": 71983925,
+      "name": "Talisman of Spell Sealing",
+      "numbers": [
+        "DR2-EN161"
+      ]
+    },
+    {
+      "passcode": 72989439,
+      "name": "Black Luster Soldier - Envoy of the Beginning",
+      "numbers": [
+        "DR2-EN025"
+      ]
+    },
+    {
+      "passcode": 73001017,
+      "name": "Silpheed",
+      "numbers": [
+        "DR2-EN022"
+      ]
+    },
+    {
+      "passcode": 74823665,
+      "name": "Inferno",
+      "numbers": [
+        "DR2-EN019"
+      ]
+    },
+    {
+      "passcode": 75043725,
+      "name": "Emissary of the Afterlife",
+      "numbers": [
+        "DR2-EN189"
+      ]
+    },
+    {
+      "passcode": 75946257,
+      "name": "Witch Doctor of Chaos",
+      "numbers": [
+        "DR2-EN016"
+      ]
+    },
+    {
+      "passcode": 76909279,
+      "name": "Enraged Battle Ox",
+      "numbers": [
+        "DR2-EN071"
+      ]
+    },
+    {
+      "passcode": 77121851,
+      "name": "Manticore of Darkness",
+      "numbers": [
+        "DR2-EN068"
+      ]
+    },
+    {
+      "passcode": 77379481,
+      "name": "Sasuke Samurai #3",
+      "numbers": [
+        "DR2-EN011"
+      ]
+    },
+    {
+      "passcode": 77491079,
+      "name": "Gale Lizard",
+      "numbers": [
+        "DR2-EN008"
+      ]
+    },
+    {
+      "passcode": 78060096,
+      "name": "Terrorking Salmon",
+      "numbers": [
+        "DR2-EN061"
+      ]
+    },
+    {
+      "passcode": 78243409,
+      "name": "The Thing in the Crater",
+      "numbers": [
+        "DR2-EN064"
+      ]
+    },
+    {
+      "passcode": 78613627,
+      "name": "Des Kangaroo",
+      "numbers": [
+        "DR2-EN005"
+      ]
+    },
+    {
+      "passcode": 78697395,
+      "name": "The Third Sarcophagus",
+      "numbers": [
+        "DR2-EN212"
+      ]
+    },
+    {
+      "passcode": 78864369,
+      "name": "Soul Reversal",
+      "numbers": [
+        "DR2-EN201"
+      ]
+    },
+    {
+      "passcode": 78986941,
+      "name": "Order to Charge",
+      "numbers": [
+        "DR2-EN198"
+      ]
+    },
+    {
+      "passcode": 79109599,
+      "name": "King of the Swamp",
+      "numbers": [
+        "DR2-EN195"
+      ]
+    },
+    {
+      "passcode": 79182538,
+      "name": "Mad Dog of Darkness",
+      "numbers": [
+        "DR2-EN058"
+      ]
+    },
+    {
+      "passcode": 79335209,
+      "name": "Ojama Black",
+      "numbers": [
+        "DR2-EN002"
+      ]
+    },
+    {
+      "passcode": 79649195,
+      "name": "Armor Break",
+      "numbers": [
+        "DR2-EN167"
+      ]
+    },
+    {
+      "passcode": 80161395,
+      "name": "Mystik Wok",
+      "numbers": [
+        "DR2-EN148"
+      ]
+    },
+    {
+      "passcode": 81383947,
+      "name": "White Magician Pikeru",
+      "numbers": [
+        "DR2-EN145"
+      ]
+    },
+    {
+      "passcode": 82005435,
+      "name": "Lady Ninja Yae",
+      "numbers": [
+        "DR2-EN142"
+      ]
+    },
+    {
+      "passcode": 82301904,
+      "name": "Chaos Emperor Dragon - Envoy of the End",
+      "numbers": [
+        "DR2-EN056"
+      ]
+    },
+    {
+      "passcode": 82705573,
+      "name": "Backfire",
+      "numbers": [
+        "DR2-EN158"
+      ]
+    },
+    {
+      "passcode": 82828051,
+      "name": "Earthquake",
+      "numbers": [
+        "DR2-EN155"
+      ]
+    },
+    {
+      "passcode": 83133491,
+      "name": "Zero Gravity",
+      "numbers": [
+        "DR2-EN053"
+      ]
+    },
+    {
+      "passcode": 83228073,
+      "name": "Two Thousand Needles",
+      "numbers": [
+        "DR2-EN139"
+      ]
+    },
+    {
+      "passcode": 83258273,
+      "name": "Robbin' Zombie",
+      "numbers": [
+        "DR2-EN110"
+      ]
+    },
+    {
+      "passcode": 84550200,
+      "name": "Sonic Jammer",
+      "numbers": [
+        "DR2-EN133"
+      ]
+    },
+    {
+      "passcode": 84970821,
+      "name": "Curse of Darkness",
+      "numbers": [
+        "DR2-EN107"
+      ]
+    },
+    {
+      "passcode": 85166216,
+      "name": "Elephant Statue of Blessing",
+      "numbers": [
+        "DR2-EN186"
+      ]
+    },
+    {
+      "passcode": 86988864,
+      "name": "3-Hump Lacooda",
+      "numbers": [
+        "DR2-EN183"
+      ]
+    },
+    {
+      "passcode": 87010442,
+      "name": "Legacy Hunter",
+      "numbers": [
+        "DR2-EN180"
+      ]
+    },
+    {
+      "passcode": 87340664,
+      "name": "Atomic Firefly",
+      "numbers": [
+        "DR2-EN136"
+      ]
+    },
+    {
+      "passcode": 88236094,
+      "name": "Aswan Apparition",
+      "numbers": [
+        "DR2-EN177"
+      ]
+    },
+    {
+      "passcode": 89959682,
+      "name": "Pharaonic Protector",
+      "numbers": [
+        "DR2-EN174"
+      ]
+    },
+    {
+      "passcode": 90337190,
+      "name": "Torpedo Fish",
+      "numbers": [
+        "DR2-EN083"
+      ]
+    },
+    {
+      "passcode": 90407382,
+      "name": "The Kick Man",
+      "numbers": [
+        "DR2-EN124"
+      ]
+    },
+    {
+      "passcode": 91123920,
+      "name": "The Agent of Force - Mars",
+      "numbers": [
+        "DR2-EN121"
+      ]
+    },
+    {
+      "passcode": 91345518,
+      "name": "The Agent of Judgment - Saturn",
+      "numbers": [
+        "DR2-EN118"
+      ]
+    },
+    {
+      "passcode": 91559748,
+      "name": "Prickle Fairy",
+      "numbers": [
+        "DR2-EN078"
+      ]
+    },
+    {
+      "passcode": 92924317,
+      "name": "Soul Resurrection",
+      "numbers": [
+        "DR2-EN222"
+      ]
+    },
+    {
+      "passcode": 93747864,
+      "name": "Desert Sunlight",
+      "numbers": [
+        "DR2-EN219"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "DR2-EN104"
+      ]
+    },
+    {
+      "passcode": 94256039,
+      "name": "Tower of Babel",
+      "numbers": [
+        "DR2-EN050"
+      ]
+    },
+    {
+      "passcode": 95194279,
+      "name": "Dimension Distortion",
+      "numbers": [
+        "DR2-EN044"
+      ]
+    },
+    {
+      "passcode": 95214051,
+      "name": "Jade Insect Whistle",
+      "numbers": [
+        "DR2-EN101"
+      ]
+    },
+    {
+      "passcode": 95472621,
+      "name": "Big Burn",
+      "numbers": [
+        "DR2-EN047"
+      ]
+    },
+    {
+      "passcode": 95492061,
+      "name": "Manju of the Ten Thousand Hands",
+      "numbers": [
+        "DR2-EN089"
+      ]
+    },
+    {
+      "passcode": 95614612,
+      "name": "Cannonball Spear Shellfish",
+      "numbers": [
+        "DR2-EN086"
+      ]
+    },
+    {
+      "passcode": 96316857,
+      "name": "Recycle",
+      "numbers": [
+        "DR2-EN041"
+      ]
+    },
+    {
+      "passcode": 96947648,
+      "name": "Salvage",
+      "numbers": [
+        "DR2-EN097"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "DR2-EN094"
+      ]
+    },
+    {
+      "passcode": 97439308,
+      "name": "Chaos Greed",
+      "numbers": [
+        "DR2-EN038"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "DR2-EN149"
+      ]
+    },
+    {
+      "passcode": 98162242,
+      "name": "Needle Burrower",
+      "numbers": [
+        "DR2-EN132"
+      ]
+    },
+    {
+      "passcode": 99050989,
+      "name": "Drillago",
+      "numbers": [
+        "DR2-EN026"
+      ]
+    },
+    {
+      "passcode": 99171160,
+      "name": "Kozaky",
+      "numbers": [
+        "DR2-EN171"
+      ]
+    },
+    {
+      "passcode": 99284890,
+      "name": "Avatar of The Pot",
+      "numbers": [
+        "DR2-EN128"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Dark Revelation Volume 2'; printings from the YGOPRODeck bulk dump."
+}

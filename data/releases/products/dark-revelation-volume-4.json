@@ -1,0 +1,1742 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "dark-revelation-volume-4",
+  "code": "DR04",
+  "name": "Dark Revelation Volume 4",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-11-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 191749,
+      "name": "Hero Flash!!",
+      "numbers": [
+        "DR04-EN222"
+      ]
+    },
+    {
+      "passcode": 213326,
+      "name": "E - Emergency Call",
+      "numbers": [
+        "DR04-EN219"
+      ]
+    },
+    {
+      "passcode": 1036974,
+      "name": "Misfortune",
+      "numbers": [
+        "DR04-EN217"
+      ]
+    },
+    {
+      "passcode": 1546123,
+      "name": "Cyber End Dragon",
+      "numbers": [
+        "DR04-EN036"
+      ]
+    },
+    {
+      "passcode": 2158562,
+      "name": "Cyber Prima",
+      "numbers": [
+        "DR04-EN187"
+      ]
+    },
+    {
+      "passcode": 2316186,
+      "name": "Princess Curran",
+      "numbers": [
+        "DR04-EN148"
+      ]
+    },
+    {
+      "passcode": 3370104,
+      "name": "Cyber Phoenix",
+      "numbers": [
+        "DR04-EN189"
+      ]
+    },
+    {
+      "passcode": 4162088,
+      "name": "Cyber Laser Dragon",
+      "numbers": [
+        "DR04-EN127"
+      ]
+    },
+    {
+      "passcode": 4376658,
+      "name": "Familiar-Possessed - Hiita",
+      "numbers": [
+        "DR04-EN088"
+      ]
+    },
+    {
+      "passcode": 4483989,
+      "name": "Prepare to Strike Back",
+      "numbers": [
+        "DR04-EN060"
+      ]
+    },
+    {
+      "passcode": 5285665,
+      "name": "Elemental HERO Neo Bubbleman",
+      "numbers": [
+        "DR04-EN124"
+      ]
+    },
+    {
+      "passcode": 5368615,
+      "name": "Steam Gyroid",
+      "numbers": [
+        "DR04-EN033"
+      ]
+    },
+    {
+      "passcode": 5498296,
+      "name": "Scarr, Scout of Dark World",
+      "numbers": [
+        "DR04-EN085"
+      ]
+    },
+    {
+      "passcode": 5606466,
+      "name": "D.D. Trap Hole",
+      "numbers": [
+        "DR04-EN057"
+      ]
+    },
+    {
+      "passcode": 5728014,
+      "name": "A Rival Appears!",
+      "numbers": [
+        "DR04-EN054"
+      ]
+    },
+    {
+      "passcode": 6007213,
+      "name": "Uria, Lord of Searing Flames",
+      "numbers": [
+        "DR04-EN121"
+      ]
+    },
+    {
+      "passcode": 6137095,
+      "name": "Malfunction",
+      "numbers": [
+        "DR04-EN180"
+      ]
+    },
+    {
+      "passcode": 6214884,
+      "name": "Brron, Mad King of Dark World",
+      "numbers": [
+        "DR04-EN082"
+      ]
+    },
+    {
+      "passcode": 6337436,
+      "name": "Rapid-Fire Magician",
+      "numbers": [
+        "DR04-EN079"
+      ]
+    },
+    {
+      "passcode": 6480253,
+      "name": "Wroughtweiler",
+      "numbers": [
+        "DR04-EN012"
+      ]
+    },
+    {
+      "passcode": 6540606,
+      "name": "Spiritual Water Art - Aoi",
+      "numbers": [
+        "DR04-EN051"
+      ]
+    },
+    {
+      "passcode": 6859683,
+      "name": "Success Probability 0%",
+      "numbers": [
+        "DR04-EN177"
+      ]
+    },
+    {
+      "passcode": 6924874,
+      "name": "Harpie's Pet Baby Dragon",
+      "numbers": [
+        "DR04-EN193"
+      ]
+    },
+    {
+      "passcode": 7076131,
+      "name": "Next to be Lost",
+      "numbers": [
+        "DR04-EN174"
+      ]
+    },
+    {
+      "passcode": 7459013,
+      "name": "Zure, Knight of Dark World",
+      "numbers": [
+        "DR04-EN061"
+      ]
+    },
+    {
+      "passcode": 7602840,
+      "name": "UFOroid",
+      "numbers": [
+        "DR04-EN010"
+      ]
+    },
+    {
+      "passcode": 7672244,
+      "name": "Shien's Spy",
+      "numbers": [
+        "DR04-EN044"
+      ]
+    },
+    {
+      "passcode": 8198712,
+      "name": "End of the World",
+      "numbers": [
+        "DR04-EN166"
+      ]
+    },
+    {
+      "passcode": 9910360,
+      "name": "D.3.S. Frog",
+      "numbers": [
+        "DR04-EN156"
+      ]
+    },
+    {
+      "passcode": 10032958,
+      "name": "Divine Dragon - Excelion",
+      "numbers": [
+        "DR04-EN153"
+      ]
+    },
+    {
+      "passcode": 10248389,
+      "name": "Cyber Blader",
+      "numbers": [
+        "DR04-EN092"
+      ]
+    },
+    {
+      "passcode": 10456559,
+      "name": "T.A.D.P.O.L.E.",
+      "numbers": [
+        "DR04-EN027"
+      ]
+    },
+    {
+      "passcode": 10526791,
+      "name": "Elemental HERO Wildedge",
+      "numbers": [
+        "DR04-EN095"
+      ]
+    },
+    {
+      "passcode": 11460577,
+      "name": "Etoile Cyber",
+      "numbers": [
+        "DR04-EN076"
+      ]
+    },
+    {
+      "passcode": 11678191,
+      "name": "Protective Soul Ailin",
+      "numbers": [
+        "DR04-EN024"
+      ]
+    },
+    {
+      "passcode": 12117532,
+      "name": "Shattered Axe",
+      "numbers": [
+        "DR04-EN239"
+      ]
+    },
+    {
+      "passcode": 12538374,
+      "name": "Treeborn Frog",
+      "numbers": [
+        "DR04-EN145"
+      ]
+    },
+    {
+      "passcode": 13093792,
+      "name": "Destiny HERO - Diamond Dude",
+      "numbers": [
+        "DR04-EN183"
+      ]
+    },
+    {
+      "passcode": 13250922,
+      "name": "Anteatereatingant",
+      "numbers": [
+        "DR04-EN142"
+      ]
+    },
+    {
+      "passcode": 14225239,
+      "name": "Elemental HERO Mariner",
+      "numbers": [
+        "DR04-EN214"
+      ]
+    },
+    {
+      "passcode": 14255590,
+      "name": "Malice Ascendant",
+      "numbers": [
+        "DR04-EN150"
+      ]
+    },
+    {
+      "passcode": 14472500,
+      "name": "Gokipon",
+      "numbers": [
+        "DR04-EN139"
+      ]
+    },
+    {
+      "passcode": 15317640,
+      "name": "B.E.S. Covered Core",
+      "numbers": [
+        "DR04-EN133"
+      ]
+    },
+    {
+      "passcode": 15595052,
+      "name": "Disciple of the Forbidden Spell",
+      "numbers": [
+        "DR04-EN136"
+      ]
+    },
+    {
+      "passcode": 17178486,
+      "name": "Life Equalizer",
+      "numbers": [
+        "DR04-EN229"
+      ]
+    },
+    {
+      "passcode": 18271561,
+      "name": "Chthonian Blast",
+      "numbers": [
+        "DR04-EN110"
+      ]
+    },
+    {
+      "passcode": 18325492,
+      "name": "Gyroid",
+      "numbers": [
+        "DR04-EN007"
+      ]
+    },
+    {
+      "passcode": 18511384,
+      "name": "Fusion Recovery",
+      "numbers": [
+        "DR04-EN038"
+      ]
+    },
+    {
+      "passcode": 18895832,
+      "name": "System Down",
+      "numbers": [
+        "DR04-EN041"
+      ]
+    },
+    {
+      "passcode": 19394153,
+      "name": "Feather Shot",
+      "numbers": [
+        "DR04-EN102"
+      ]
+    },
+    {
+      "passcode": 19733961,
+      "name": "Batteryman C",
+      "numbers": [
+        "DR04-EN030"
+      ]
+    },
+    {
+      "passcode": 20529766,
+      "name": "Super-Electromagnetic Voltech Dragon",
+      "numbers": [
+        "DR04-EN211"
+      ]
+    },
+    {
+      "passcode": 20951752,
+      "name": "Voltanis the Adjudicator",
+      "numbers": [
+        "DR04-EN203"
+      ]
+    },
+    {
+      "passcode": 21074344,
+      "name": "Herald of Green Light",
+      "numbers": [
+        "DR04-EN198"
+      ]
+    },
+    {
+      "passcode": 22512237,
+      "name": "Mechanical Hound",
+      "numbers": [
+        "DR04-EN018"
+      ]
+    },
+    {
+      "passcode": 22587018,
+      "name": "Hydrogeddon",
+      "numbers": [
+        "DR04-EN073"
+      ]
+    },
+    {
+      "passcode": 22790789,
+      "name": "B.E.S. Crystal Core",
+      "numbers": [
+        "DR04-EN021"
+      ]
+    },
+    {
+      "passcode": 23309606,
+      "name": "Infernal Incinerator",
+      "numbers": [
+        "DR04-EN072"
+      ]
+    },
+    {
+      "passcode": 23421244,
+      "name": "Reborn Zombie",
+      "numbers": [
+        "DR04-EN069"
+      ]
+    },
+    {
+      "passcode": 23635815,
+      "name": "Jerry Beans Man",
+      "numbers": [
+        "DR04-EN004"
+      ]
+    },
+    {
+      "passcode": 24643836,
+      "name": "Ojamagic",
+      "numbers": [
+        "DR04-EN100"
+      ]
+    },
+    {
+      "passcode": 25366484,
+      "name": "Elemental HERO Shining Flare Wingman",
+      "numbers": [
+        "DR04-EN096"
+      ]
+    },
+    {
+      "passcode": 25573054,
+      "name": "Transcendent Wings",
+      "numbers": [
+        "DR04-EN045"
+      ]
+    },
+    {
+      "passcode": 25652259,
+      "name": "Queen's Knight",
+      "numbers": [
+        "DR04-EN064"
+      ]
+    },
+    {
+      "passcode": 26439287,
+      "name": "Proto-Cyber Dragon",
+      "numbers": [
+        "DR04-EN130"
+      ]
+    },
+    {
+      "passcode": 27581098,
+      "name": "Non-Fusion Area",
+      "numbers": [
+        "DR04-EN119"
+      ]
+    },
+    {
+      "passcode": 28378427,
+      "name": "Damage Condenser",
+      "numbers": [
+        "DR04-EN172"
+      ]
+    },
+    {
+      "passcode": 28604635,
+      "name": "Weed Out",
+      "numbers": [
+        "DR04-EN114"
+      ]
+    },
+    {
+      "passcode": 28890974,
+      "name": "Celestial Transformation",
+      "numbers": [
+        "DR04-EN224"
+      ]
+    },
+    {
+      "passcode": 29013526,
+      "name": "Storming Wynn",
+      "numbers": [
+        "DR04-EN209"
+      ]
+    },
+    {
+      "passcode": 29139104,
+      "name": "Avalanching Aussa",
+      "numbers": [
+        "DR04-EN206"
+      ]
+    },
+    {
+      "passcode": 29590905,
+      "name": "Super Junior Confrontation",
+      "numbers": [
+        "DR04-EN169"
+      ]
+    },
+    {
+      "passcode": 29612557,
+      "name": "Cyclone Boomerang",
+      "numbers": [
+        "DR04-EN162"
+      ]
+    },
+    {
+      "passcode": 29826127,
+      "name": "The Forces of Darkness",
+      "numbers": [
+        "DR04-EN111"
+      ]
+    },
+    {
+      "passcode": 30241314,
+      "name": "Macro Cosmos",
+      "numbers": [
+        "DR04-EN237"
+      ]
+    },
+    {
+      "passcode": 30435145,
+      "name": "Ancient Gear Factory",
+      "numbers": [
+        "DR04-EN159"
+      ]
+    },
+    {
+      "passcode": 30548775,
+      "name": "Branch!",
+      "numbers": [
+        "DR04-EN106"
+      ]
+    },
+    {
+      "passcode": 31000575,
+      "name": "Conscription",
+      "numbers": [
+        "DR04-EN058"
+      ]
+    },
+    {
+      "passcode": 31557782,
+      "name": "Ancient Gear",
+      "numbers": [
+        "DR04-EN128"
+      ]
+    },
+    {
+      "passcode": 31764353,
+      "name": "Familiar-Possessed - Wynn",
+      "numbers": [
+        "DR04-EN089"
+      ]
+    },
+    {
+      "passcode": 31887905,
+      "name": "Familiar-Possessed - Aussa",
+      "numbers": [
+        "DR04-EN086"
+      ]
+    },
+    {
+      "passcode": 32296881,
+      "name": "Bountiful Artemis",
+      "numbers": [
+        "DR04-EN200"
+      ]
+    },
+    {
+      "passcode": 32491822,
+      "name": "Hamon, Lord of Striking Thunder",
+      "numbers": [
+        "DR04-EN122"
+      ]
+    },
+    {
+      "passcode": 32619583,
+      "name": "Sillva, Warlord of Dark World",
+      "numbers": [
+        "DR04-EN083"
+      ]
+    },
+    {
+      "passcode": 32679370,
+      "name": "Hero Kid",
+      "numbers": [
+        "DR04-EN125"
+      ]
+    },
+    {
+      "passcode": 32723153,
+      "name": "Magical Explosion",
+      "numbers": [
+        "DR04-EN055"
+      ]
+    },
+    {
+      "passcode": 32752319,
+      "name": "UFOroid Fighter",
+      "numbers": [
+        "DR04-EN034"
+      ]
+    },
+    {
+      "passcode": 32918479,
+      "name": "Majestic Mech - Senku",
+      "numbers": [
+        "DR04-EN194"
+      ]
+    },
+    {
+      "passcode": 33248692,
+      "name": "Option Hunter",
+      "numbers": [
+        "DR04-EN178"
+      ]
+    },
+    {
+      "passcode": 33731070,
+      "name": "Beiige, Vanguard of Dark World",
+      "numbers": [
+        "DR04-EN080"
+      ]
+    },
+    {
+      "passcode": 33875961,
+      "name": "Dark Catapulter",
+      "numbers": [
+        "DR04-EN013"
+      ]
+    },
+    {
+      "passcode": 34460239,
+      "name": "Generation Shift",
+      "numbers": [
+        "DR04-EN175"
+      ]
+    },
+    {
+      "passcode": 34627841,
+      "name": "Kaibaman",
+      "numbers": [
+        "DR04-EN245"
+      ]
+    },
+    {
+      "passcode": 35464895,
+      "name": "Destiny Signal",
+      "numbers": [
+        "DR04-EN232"
+      ]
+    },
+    {
+      "passcode": 36354007,
+      "name": "Gilford the Lightning",
+      "numbers": [
+        "DR04-EN242"
+      ]
+    },
+    {
+      "passcode": 36586443,
+      "name": "Elemental Recharge",
+      "numbers": [
+        "DR04-EN230"
+      ]
+    },
+    {
+      "passcode": 37318031,
+      "name": "R - Righteous Justice",
+      "numbers": [
+        "DR04-EN220"
+      ]
+    },
+    {
+      "passcode": 37630732,
+      "name": "Power Bond",
+      "numbers": [
+        "DR04-EN037"
+      ]
+    },
+    {
+      "passcode": 38430673,
+      "name": "Grand Convergence",
+      "numbers": [
+        "DR04-EN226"
+      ]
+    },
+    {
+      "passcode": 40591390,
+      "name": "Destiny HERO - Dreadmaster",
+      "numbers": [
+        "DR04-EN184"
+      ]
+    },
+    {
+      "passcode": 40867519,
+      "name": "Silent Insect",
+      "numbers": [
+        "DR04-EN140"
+      ]
+    },
+    {
+      "passcode": 41249545,
+      "name": "Grass Phantom",
+      "numbers": [
+        "DR04-EN151"
+      ]
+    },
+    {
+      "passcode": 41436536,
+      "name": "Elemental HERO Phoenix Enforcer",
+      "numbers": [
+        "DR04-EN212"
+      ]
+    },
+    {
+      "passcode": 41589166,
+      "name": "Tenkabito Shien",
+      "numbers": [
+        "DR04-EN137"
+      ]
+    },
+    {
+      "passcode": 41613948,
+      "name": "Destiny HERO - Doom Lord",
+      "numbers": [
+        "DR04-EN181"
+      ]
+    },
+    {
+      "passcode": 42945701,
+      "name": "Spiritual Fire Art - Kurenai",
+      "numbers": [
+        "DR04-EN052"
+      ]
+    },
+    {
+      "passcode": 43061293,
+      "name": "Fire Darts",
+      "numbers": [
+        "DR04-EN049"
+      ]
+    },
+    {
+      "passcode": 43340443,
+      "name": "Forced Back",
+      "numbers": [
+        "DR04-EN240"
+      ]
+    },
+    {
+      "passcode": 43697559,
+      "name": "Jetroid",
+      "numbers": [
+        "DR04-EN011"
+      ]
+    },
+    {
+      "passcode": 44182827,
+      "name": "Samsara",
+      "numbers": [
+        "DR04-EN168"
+      ]
+    },
+    {
+      "passcode": 44676200,
+      "name": "Hero Barrier",
+      "numbers": [
+        "DR04-EN109"
+      ]
+    },
+    {
+      "passcode": 44729197,
+      "name": "Steamroid",
+      "numbers": [
+        "DR04-EN008"
+      ]
+    },
+    {
+      "passcode": 44883830,
+      "name": "Des Croaking",
+      "numbers": [
+        "DR04-EN042"
+      ]
+    },
+    {
+      "passcode": 44954628,
+      "name": "B.E.S. Tetran",
+      "numbers": [
+        "DR04-EN077"
+      ]
+    },
+    {
+      "passcode": 45305419,
+      "name": "Symbol of Heritage",
+      "numbers": [
+        "DR04-EN163"
+      ]
+    },
+    {
+      "passcode": 45898858,
+      "name": "Bonding - H2O",
+      "numbers": [
+        "DR04-EN103"
+      ]
+    },
+    {
+      "passcode": 45906428,
+      "name": "Miracle Fusion",
+      "numbers": [
+        "DR04-EN039"
+      ]
+    },
+    {
+      "passcode": 45945685,
+      "name": "Cycroid",
+      "numbers": [
+        "DR04-EN001"
+      ]
+    },
+    {
+      "passcode": 46128076,
+      "name": "Ebon Magician Curran",
+      "numbers": [
+        "DR04-EN031"
+      ]
+    },
+    {
+      "passcode": 46427957,
+      "name": "Ruin, Queen of Oblivion",
+      "numbers": [
+        "DR04-EN154"
+      ]
+    },
+    {
+      "passcode": 46910446,
+      "name": "Chthonian Alliance",
+      "numbers": [
+        "DR04-EN104"
+      ]
+    },
+    {
+      "passcode": 47737087,
+      "name": "Elemental HERO Rampart Blaster",
+      "numbers": [
+        "DR04-EN093"
+      ]
+    },
+    {
+      "passcode": 48653261,
+      "name": "Guard Penalty",
+      "numbers": [
+        "DR04-EN225"
+      ]
+    },
+    {
+      "passcode": 48700891,
+      "name": "Memory Crusher",
+      "numbers": [
+        "DR04-EN149"
+      ]
+    },
+    {
+      "passcode": 49375719,
+      "name": "Cyber Tutu",
+      "numbers": [
+        "DR04-EN185"
+      ]
+    },
+    {
+      "passcode": 49522489,
+      "name": "Beelze Frog",
+      "numbers": [
+        "DR04-EN146"
+      ]
+    },
+    {
+      "passcode": 49645921,
+      "name": "Saber Beetle",
+      "numbers": [
+        "DR04-EN143"
+      ]
+    },
+    {
+      "passcode": 50400231,
+      "name": "Satellite Cannon",
+      "numbers": [
+        "DR04-EN241"
+      ]
+    },
+    {
+      "passcode": 50916353,
+      "name": "Chthonian Soldier",
+      "numbers": [
+        "DR04-EN070"
+      ]
+    },
+    {
+      "passcode": 51638941,
+      "name": "V-Tiger Jet",
+      "numbers": [
+        "DR04-EN062"
+      ]
+    },
+    {
+      "passcode": 52702748,
+      "name": "D.D. Guide",
+      "numbers": [
+        "DR04-EN134"
+      ]
+    },
+    {
+      "passcode": 53567095,
+      "name": "Icarus Attack",
+      "numbers": [
+        "DR04-EN235"
+      ]
+    },
+    {
+      "passcode": 53828396,
+      "name": "Adhesive Explosive",
+      "numbers": [
+        "DR04-EN131"
+      ]
+    },
+    {
+      "passcode": 54289683,
+      "name": "Power Capsule",
+      "numbers": [
+        "DR04-EN223"
+      ]
+    },
+    {
+      "passcode": 54976796,
+      "name": "Level Limit - Area A",
+      "numbers": [
+        "DR04-EN120"
+      ]
+    },
+    {
+      "passcode": 55008284,
+      "name": "The League of Uniform Nomenclature",
+      "numbers": [
+        "DR04-EN115"
+      ]
+    },
+    {
+      "passcode": 55401221,
+      "name": "Batteryman D",
+      "numbers": [
+        "DR04-EN210"
+      ]
+    },
+    {
+      "passcode": 55615891,
+      "name": "Elemental HERO Wild Wingman",
+      "numbers": [
+        "DR04-EN215"
+      ]
+    },
+    {
+      "passcode": 55985014,
+      "name": "Miracle Kids",
+      "numbers": [
+        "DR04-EN170"
+      ]
+    },
+    {
+      "passcode": 56524813,
+      "name": "Raging Eria",
+      "numbers": [
+        "DR04-EN207"
+      ]
+    },
+    {
+      "passcode": 56840658,
+      "name": "Poison Draw Frog",
+      "numbers": [
+        "DR04-EN028"
+      ]
+    },
+    {
+      "passcode": 57062206,
+      "name": "Doitsu",
+      "numbers": [
+        "DR04-EN025"
+      ]
+    },
+    {
+      "passcode": 57346400,
+      "name": "Guard Dog",
+      "numbers": [
+        "DR04-EN204"
+      ]
+    },
+    {
+      "passcode": 58071123,
+      "name": "Oxygeddon",
+      "numbers": [
+        "DR04-EN074"
+      ]
+    },
+    {
+      "passcode": 58185394,
+      "name": "Giant Kozaky",
+      "numbers": [
+        "DR04-EN022"
+      ]
+    },
+    {
+      "passcode": 58859575,
+      "name": "VW-Tiger Catapult",
+      "numbers": [
+        "DR04-EN090"
+      ]
+    },
+    {
+      "passcode": 59023523,
+      "name": "Cybernetic Magician",
+      "numbers": [
+        "DR04-EN016"
+      ]
+    },
+    {
+      "passcode": 59793705,
+      "name": "Elemental HERO Bladedge",
+      "numbers": [
+        "DR04-EN067"
+      ]
+    },
+    {
+      "passcode": 59907935,
+      "name": "Cyber Archfiend",
+      "numbers": [
+        "DR04-EN019"
+      ]
+    },
+    {
+      "passcode": 60246171,
+      "name": "Soitsu",
+      "numbers": [
+        "DR04-EN002"
+      ]
+    },
+    {
+      "passcode": 61850482,
+      "name": "Level Modulation",
+      "numbers": [
+        "DR04-EN099"
+      ]
+    },
+    {
+      "passcode": 61968753,
+      "name": "Bubble Shuffle",
+      "numbers": [
+        "DR04-EN046"
+      ]
+    },
+    {
+      "passcode": 62868900,
+      "name": "D - Shield",
+      "numbers": [
+        "DR04-EN234"
+      ]
+    },
+    {
+      "passcode": 62980542,
+      "name": "Destruction of Destiny",
+      "numbers": [
+        "DR04-EN231"
+      ]
+    },
+    {
+      "passcode": 63035430,
+      "name": "Skyscraper",
+      "numbers": [
+        "DR04-EN048"
+      ]
+    },
+    {
+      "passcode": 63703130,
+      "name": "O - Oversoul",
+      "numbers": [
+        "DR04-EN221"
+      ]
+    },
+    {
+      "passcode": 63749102,
+      "name": "Exarion Universe",
+      "numbers": [
+        "DR04-EN243"
+      ]
+    },
+    {
+      "passcode": 64788463,
+      "name": "King's Knight",
+      "numbers": [
+        "DR04-EN066"
+      ]
+    },
+    {
+      "passcode": 65824822,
+      "name": "Dark Deal",
+      "numbers": [
+        "DR04-EN112"
+      ]
+    },
+    {
+      "passcode": 66607691,
+      "name": "Photon Generator Unit",
+      "numbers": [
+        "DR04-EN165"
+      ]
+    },
+    {
+      "passcode": 66947414,
+      "name": "Boss Rush",
+      "numbers": [
+        "DR04-EN107"
+      ]
+    },
+    {
+      "passcode": 67095270,
+      "name": "Dimension Wall",
+      "numbers": [
+        "DR04-EN059"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "DR04-EN097"
+      ]
+    },
+    {
+      "passcode": 67468948,
+      "name": "Layard the Liberator",
+      "numbers": [
+        "DR04-EN201"
+      ]
+    },
+    {
+      "passcode": 67646312,
+      "name": "Searchlightman",
+      "numbers": [
+        "DR04-EN190"
+      ]
+    },
+    {
+      "passcode": 67829249,
+      "name": "Ancient Gear Drill",
+      "numbers": [
+        "DR04-EN160"
+      ]
+    },
+    {
+      "passcode": 67951831,
+      "name": "Hero Heart",
+      "numbers": [
+        "DR04-EN157"
+      ]
+    },
+    {
+      "passcode": 68280530,
+      "name": "Royal Knight",
+      "numbers": [
+        "DR04-EN197"
+      ]
+    },
+    {
+      "passcode": 68774379,
+      "name": "Cyber Barrier Dragon",
+      "numbers": [
+        "DR04-EN126"
+      ]
+    },
+    {
+      "passcode": 68881649,
+      "name": "Familiar-Possessed - Eria",
+      "numbers": [
+        "DR04-EN087"
+      ]
+    },
+    {
+      "passcode": 69303178,
+      "name": "Majestic Mech - Ohka",
+      "numbers": [
+        "DR04-EN195"
+      ]
+    },
+    {
+      "passcode": 69632396,
+      "name": "Goblin Out of the Frying Pan",
+      "numbers": [
+        "DR04-EN179"
+      ]
+    },
+    {
+      "passcode": 69890967,
+      "name": "Raviel, Lord of Phantasms",
+      "numbers": [
+        "DR04-EN123"
+      ]
+    },
+    {
+      "passcode": 70074904,
+      "name": "D.D. Assailant",
+      "numbers": [
+        "DR04-EN244"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "DR04-EN015"
+      ]
+    },
+    {
+      "passcode": 70156997,
+      "name": "Spiritual Earth Art - Kurogane",
+      "numbers": [
+        "DR04-EN050"
+      ]
+    },
+    {
+      "passcode": 70278545,
+      "name": "Pot of Generosity",
+      "numbers": [
+        "DR04-EN043"
+      ]
+    },
+    {
+      "passcode": 70865988,
+      "name": "Full Salvo",
+      "numbers": [
+        "DR04-EN176"
+      ]
+    },
+    {
+      "passcode": 70948327,
+      "name": "Nanobreaker",
+      "numbers": [
+        "DR04-EN078"
+      ]
+    },
+    {
+      "passcode": 71060915,
+      "name": "Feather Wind",
+      "numbers": [
+        "DR04-EN118"
+      ]
+    },
+    {
+      "passcode": 71218746,
+      "name": "Drillroid",
+      "numbers": [
+        "DR04-EN009"
+      ]
+    },
+    {
+      "passcode": 71490127,
+      "name": "Dragon's Mirror",
+      "numbers": [
+        "DR04-EN040"
+      ]
+    },
+    {
+      "passcode": 71587526,
+      "name": "Karma Cut",
+      "numbers": [
+        "DR04-EN173"
+      ]
+    },
+    {
+      "passcode": 71930383,
+      "name": "Patroid",
+      "numbers": [
+        "DR04-EN006"
+      ]
+    },
+    {
+      "passcode": 72287557,
+      "name": "Chthonian Polymer",
+      "numbers": [
+        "DR04-EN117"
+      ]
+    },
+    {
+      "passcode": 72426662,
+      "name": "Demise, King of Armageddon",
+      "numbers": [
+        "DR04-EN155"
+      ]
+    },
+    {
+      "passcode": 72709014,
+      "name": "Trial of the Princesses",
+      "numbers": [
+        "DR04-EN164"
+      ]
+    },
+    {
+      "passcode": 73648243,
+      "name": "Sand Moth",
+      "numbers": [
+        "DR04-EN152"
+      ]
+    },
+    {
+      "passcode": 74157028,
+      "name": "Cyber Twin Dragon",
+      "numbers": [
+        "DR04-EN035"
+      ]
+    },
+    {
+      "passcode": 74825788,
+      "name": "H - Heated Heart",
+      "numbers": [
+        "DR04-EN218"
+      ]
+    },
+    {
+      "passcode": 75041269,
+      "name": "Clock Tower Prison",
+      "numbers": [
+        "DR04-EN228"
+      ]
+    },
+    {
+      "passcode": 75917088,
+      "name": "Princess Pikeru",
+      "numbers": [
+        "DR04-EN147"
+      ]
+    },
+    {
+      "passcode": 76039636,
+      "name": "Doom Dozer",
+      "numbers": [
+        "DR04-EN144"
+      ]
+    },
+    {
+      "passcode": 76763417,
+      "name": "Cyber Gymnast",
+      "numbers": [
+        "DR04-EN186"
+      ]
+    },
+    {
+      "passcode": 76986005,
+      "name": "Cyber Kirin",
+      "numbers": [
+        "DR04-EN188"
+      ]
+    },
+    {
+      "passcode": 77252217,
+      "name": "Chainsaw Insect",
+      "numbers": [
+        "DR04-EN141"
+      ]
+    },
+    {
+      "passcode": 77608643,
+      "name": "Destiny HERO - Captain Tenacious",
+      "numbers": [
+        "DR04-EN182"
+      ]
+    },
+    {
+      "passcode": 78004197,
+      "name": "Goldd, Wu-Lord of Dark World",
+      "numbers": [
+        "DR04-EN084"
+      ]
+    },
+    {
+      "passcode": 78211862,
+      "name": "Rising Energy",
+      "numbers": [
+        "DR04-EN056"
+      ]
+    },
+    {
+      "passcode": 79126789,
+      "name": "Broww, Huntsman of Dark World",
+      "numbers": [
+        "DR04-EN081"
+      ]
+    },
+    {
+      "passcode": 79333300,
+      "name": "Spiritual Wind Art - Miyabi",
+      "numbers": [
+        "DR04-EN053"
+      ]
+    },
+    {
+      "passcode": 79979666,
+      "name": "Elemental HERO Bubbleman",
+      "numbers": [
+        "DR04-EN014"
+      ]
+    },
+    {
+      "passcode": 80045583,
+      "name": "Ancient Gear Cannon",
+      "numbers": [
+        "DR04-EN129"
+      ]
+    },
+    {
+      "passcode": 80551130,
+      "name": "Miraculous Descent",
+      "numbers": [
+        "DR04-EN238"
+      ]
+    },
+    {
+      "passcode": 81003500,
+      "name": "Elemental HERO Necroid Shaman",
+      "numbers": [
+        "DR04-EN216"
+      ]
+    },
+    {
+      "passcode": 81674782,
+      "name": "Dimensional Fissure",
+      "numbers": [
+        "DR04-EN227"
+      ]
+    },
+    {
+      "passcode": 81896370,
+      "name": "Swift Birdman Joe",
+      "numbers": [
+        "DR04-EN192"
+      ]
+    },
+    {
+      "passcode": 82112775,
+      "name": "D.D.M. - Different Dimension Master",
+      "numbers": [
+        "DR04-EN032"
+      ]
+    },
+    {
+      "passcode": 83121692,
+      "name": "Elemental HERO Tempest",
+      "numbers": [
+        "DR04-EN094"
+      ]
+    },
+    {
+      "passcode": 83235263,
+      "name": "Tyranno Infinity",
+      "numbers": [
+        "DR04-EN029"
+      ]
+    },
+    {
+      "passcode": 84173492,
+      "name": "Indomitable Fighter Lei Lei",
+      "numbers": [
+        "DR04-EN023"
+      ]
+    },
+    {
+      "passcode": 84243274,
+      "name": "VWXYZ-Dragon Catapult Cannon",
+      "numbers": [
+        "DR04-EN091"
+      ]
+    },
+    {
+      "passcode": 84451804,
+      "name": "Des Frog",
+      "numbers": [
+        "DR04-EN026"
+      ]
+    },
+    {
+      "passcode": 85066822,
+      "name": "Water Dragon",
+      "numbers": [
+        "DR04-EN075"
+      ]
+    },
+    {
+      "passcode": 85306040,
+      "name": "Goblin Elite Attack Force",
+      "numbers": [
+        "DR04-EN020"
+      ]
+    },
+    {
+      "passcode": 86188410,
+      "name": "Elemental HERO Wildheart",
+      "numbers": [
+        "DR04-EN068"
+      ]
+    },
+    {
+      "passcode": 87978805,
+      "name": "Parasitic Ticky",
+      "numbers": [
+        "DR04-EN138"
+      ]
+    },
+    {
+      "passcode": 88190453,
+      "name": "Chain Thrasher",
+      "numbers": [
+        "DR04-EN135"
+      ]
+    },
+    {
+      "passcode": 88820235,
+      "name": "Elemental HERO Shining Phoenix Enforcer",
+      "numbers": [
+        "DR04-EN213"
+      ]
+    },
+    {
+      "passcode": 89222931,
+      "name": "Machine King Prototype",
+      "numbers": [
+        "DR04-EN132"
+      ]
+    },
+    {
+      "passcode": 90374791,
+      "name": "Armed Changer",
+      "numbers": [
+        "DR04-EN105"
+      ]
+    },
+    {
+      "passcode": 90876561,
+      "name": "Jack's Knight",
+      "numbers": [
+        "DR04-EN065"
+      ]
+    },
+    {
+      "passcode": 91597389,
+      "name": "Roll Out!",
+      "numbers": [
+        "DR04-EN116"
+      ]
+    },
+    {
+      "passcode": 91989718,
+      "name": "Attack Reflector Unit",
+      "numbers": [
+        "DR04-EN171"
+      ]
+    },
+    {
+      "passcode": 92001300,
+      "name": "Ancient Gear Castle",
+      "numbers": [
+        "DR04-EN167"
+      ]
+    },
+    {
+      "passcode": 92219931,
+      "name": "Simultaneous Loss",
+      "numbers": [
+        "DR04-EN113"
+      ]
+    },
+    {
+      "passcode": 92518817,
+      "name": "Blazing Hiita",
+      "numbers": [
+        "DR04-EN208"
+      ]
+    },
+    {
+      "passcode": 93130021,
+      "name": "Victory Viper XX03",
+      "numbers": [
+        "DR04-EN191"
+      ]
+    },
+    {
+      "passcode": 93224848,
+      "name": "Phantasmal Martyrs",
+      "numbers": [
+        "DR04-EN161"
+      ]
+    },
+    {
+      "passcode": 93431518,
+      "name": "Gateway to Dark World",
+      "numbers": [
+        "DR04-EN108"
+      ]
+    },
+    {
+      "passcode": 93554166,
+      "name": "Dark World Lightning",
+      "numbers": [
+        "DR04-EN098"
+      ]
+    },
+    {
+      "passcode": 93730409,
+      "name": "Whirlwind Weasel",
+      "numbers": [
+        "DR04-EN205"
+      ]
+    },
+    {
+      "passcode": 94253609,
+      "name": "Elemental Absorber",
+      "numbers": [
+        "DR04-EN236"
+      ]
+    },
+    {
+      "passcode": 94689635,
+      "name": "Herald of Purple Light",
+      "numbers": [
+        "DR04-EN199"
+      ]
+    },
+    {
+      "passcode": 94853057,
+      "name": "Banisher of the Radiance",
+      "numbers": [
+        "DR04-EN202"
+      ]
+    },
+    {
+      "passcode": 94940436,
+      "name": "Magnet Circle LV2",
+      "numbers": [
+        "DR04-EN158"
+      ]
+    },
+    {
+      "passcode": 95701283,
+      "name": "Majestic Mech - Goryu",
+      "numbers": [
+        "DR04-EN196"
+      ]
+    },
+    {
+      "passcode": 96300057,
+      "name": "W-Wing Catapult",
+      "numbers": [
+        "DR04-EN071"
+      ]
+    },
+    {
+      "passcode": 96428622,
+      "name": "Cybernetic Cyclopean",
+      "numbers": [
+        "DR04-EN017"
+      ]
+    },
+    {
+      "passcode": 97023549,
+      "name": "Blade Skater",
+      "numbers": [
+        "DR04-EN063"
+      ]
+    },
+    {
+      "passcode": 97240270,
+      "name": "Mad Lobster",
+      "numbers": [
+        "DR04-EN003"
+      ]
+    },
+    {
+      "passcode": 97362768,
+      "name": "Spark Blaster",
+      "numbers": [
+        "DR04-EN047"
+      ]
+    },
+    {
+      "passcode": 98259197,
+      "name": "Ojamuscle",
+      "numbers": [
+        "DR04-EN101"
+      ]
+    },
+    {
+      "passcode": 98585345,
+      "name": "Winged Kuriboh LV10",
+      "numbers": [
+        "DR04-EN005"
+      ]
+    },
+    {
+      "passcode": 99075257,
+      "name": "D - Time",
+      "numbers": [
+        "DR04-EN233"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Dark Revelation Volume 4'; printings from the YGOPRODeck bulk dump."
+}

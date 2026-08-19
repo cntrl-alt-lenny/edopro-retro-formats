@@ -1,0 +1,695 @@
+{
+  "importer": "retroformats.importers.tcg_releases",
+  "window": {
+    "from": "2002-03-01",
+    "through": "2010-12-31"
+  },
+  "source_revisions": {
+    "ProjectIgnis/BabelCDB": "da54f282c7fe8eb90b5574b87afa455391c08f0b",
+    "fetch_manifest": {
+      "cardinfo_full_misc.json": {
+        "url": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes",
+        "retrieved": "2026-08-19T18:00:00+00:00",
+        "bytes": 24758045
+      },
+      "cardsets.json": {
+        "url": "https://db.ygoprodeck.com/api/v7/cardsets.php",
+        "retrieved": "2026-08-19T18:00:00+00:00",
+        "bytes": 174543
+      },
+      "products_na.json": {
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-19T18:14:17+00:00",
+        "pages": 271
+      },
+      "products_eu.json": {
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-19T18:14:18+00:00",
+        "pages": 98
+      },
+      "products_oce.json": {
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-19T18:14:20+00:00",
+        "pages": 44
+      },
+      "products_ww.json": {
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-19T18:14:21+00:00",
+        "pages": 110
+      },
+      "products_en.json": {
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-19T18:14:23+00:00",
+        "pages": 384
+      }
+    }
+  },
+  "stats": {
+    "products": 369,
+    "printings": 8445,
+    "release_events": 508,
+    "unmatched_cards": 8,
+    "name_mismatches": 6,
+    "date_discrepancies": 64,
+    "products_without_printings": 4,
+    "skipped_products": 3,
+    "non_playable_skipped": 1,
+    "ot_conflicts": 1
+  },
+  "unmatched_cards": [
+    {
+      "ygoprodeck_id": 501000006,
+      "name": "Chimaera, the Master of Beasts",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2007 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000007,
+      "name": "Emperor of Lightning",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2007 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 111000561,
+      "name": "Get Your Game On!",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2007 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000002,
+      "name": "King of Destruction - Xexex",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2005 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000001,
+      "name": "Meteo the Matchless",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2004 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000003,
+      "name": "Queen of Fate - Eternia",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2005 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000004,
+      "name": "Testament of the Arcane Lords",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2006 prize cards"
+      ]
+    },
+    {
+      "ygoprodeck_id": 501000000,
+      "name": "Ulevo",
+      "sets": [
+        "Yu-Gi-Oh! World Championship 2004 prize cards"
+      ]
+    }
+  ],
+  "name_mismatches": [
+    {
+      "passcode": 10789972,
+      "babelcdb": "Cú Chulainn the Awakened",
+      "ygoprodeck": "Cu Chulainn the Awakened"
+    },
+    {
+      "passcode": 35537860,
+      "babelcdb": "Synch Blast Wave",
+      "ygoprodeck": "Synchro Blast Wave"
+    },
+    {
+      "passcode": 61032879,
+      "babelcdb": "Synch Realm",
+      "ygoprodeck": "Synchronized Realm"
+    },
+    {
+      "passcode": 82556058,
+      "babelcdb": "Fiendish Engine Ω",
+      "ygoprodeck": "Fiendish Engine Omega"
+    },
+    {
+      "passcode": 86170989,
+      "babelcdb": "Falchionβ",
+      "ygoprodeck": "Falchion Beta"
+    },
+    {
+      "passcode": 96938777,
+      "babelcdb": "Machine Lord Ür",
+      "ygoprodeck": "Machine Lord Ur"
+    }
+  ],
+  "date_discrepancies": [
+    {
+      "product": "Collectible Tins 2005",
+      "ygoprodeck": "2005-09-01",
+      "yugipedia": {
+        "ww": "2005-09-05",
+        "en": "2005-09-05"
+      }
+    },
+    {
+      "product": "Duel Terminal - Preview Wave 1",
+      "ygoprodeck": "2008-08-04",
+      "yugipedia": {
+        "na": "2008-07-24",
+        "en": "2008-07-24"
+      }
+    },
+    {
+      "product": "Duelist League Series 1 participation cards",
+      "ygoprodeck": "2003-01-01",
+      "yugipedia": {
+        "na": "2002-10-01",
+        "en": "2002-10-01"
+      }
+    },
+    {
+      "product": "Duelist League Series 2 participation cards",
+      "ygoprodeck": "2006-04-28",
+      "yugipedia": {
+        "na": "2003-07-15",
+        "ww": "2004-01-01",
+        "en": "2003-07-15"
+      }
+    },
+    {
+      "product": "Duelist League Series 3 participation card",
+      "ygoprodeck": "2006-04-28",
+      "yugipedia": {
+        "na": "2004-02-01",
+        "en": "2004-02-01"
+      }
+    },
+    {
+      "product": "Duelist League Series 4 participation card",
+      "ygoprodeck": "2006-04-28",
+      "yugipedia": {
+        "na": "2004-01-01",
+        "eu": "2004-01-01",
+        "en": "2004-01-01"
+      }
+    },
+    {
+      "product": "Duelist League Series 5 participation card",
+      "ygoprodeck": "2006-04-28",
+      "yugipedia": {
+        "ww": "2004-01-01",
+        "en": "2004-01-01"
+      }
+    },
+    {
+      "product": "Hobby League 1 participation cards B",
+      "ygoprodeck": "2004-01-01",
+      "yugipedia": {
+        "na": "2004-12-01",
+        "en": "2004-12-01"
+      }
+    },
+    {
+      "product": "Hobby League 1 participation cards C",
+      "ygoprodeck": "2005-01-01",
+      "yugipedia": {
+        "na": "2005-02-01",
+        "en": "2005-02-01"
+      }
+    },
+    {
+      "product": "Hobby League 2 participation card B",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-02-01",
+        "en": "2006-02-01"
+      }
+    },
+    {
+      "product": "Hobby League 2 participation card C",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-03-01",
+        "en": "2006-03-01"
+      }
+    },
+    {
+      "product": "Hobby League 2 participation card D",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-04-01",
+        "en": "2006-04-01"
+      }
+    },
+    {
+      "product": "Hobby League 2 participation card E",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-05-01",
+        "en": "2006-05-01"
+      }
+    },
+    {
+      "product": "Hobby League 2 participation card F",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-06-01",
+        "en": "2006-06-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card A",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-07-01",
+        "en": "2006-07-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card B",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-08-01",
+        "en": "2006-08-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card C",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-09-01",
+        "en": "2006-09-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card D",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-09-01",
+        "en": "2006-09-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card E",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-10-01",
+        "en": "2006-10-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card F",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-11-01",
+        "en": "2006-11-01"
+      }
+    },
+    {
+      "product": "Hobby League 3 participation card G",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-12-01",
+        "en": "2006-12-01"
+      }
+    },
+    {
+      "product": "Hobby League 4 participation card A",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-04-01",
+        "en": "2007-04-01"
+      }
+    },
+    {
+      "product": "Hobby League 4 participation card B",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-04-01",
+        "en": "2007-04-01"
+      }
+    },
+    {
+      "product": "Hobby League 4 participation card C",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-05-01",
+        "en": "2007-05-01"
+      }
+    },
+    {
+      "product": "Hobby League 4 participation card F",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-06-01",
+        "en": "2007-06-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card A",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-07-01",
+        "en": "2007-07-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card B",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-08-01",
+        "en": "2007-08-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card C",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-09-01",
+        "en": "2007-09-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card D",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-10-01",
+        "en": "2007-10-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card E",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-11-01",
+        "en": "2007-11-01"
+      }
+    },
+    {
+      "product": "Hobby League 5 participation card F",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2007-12-01",
+        "en": "2007-12-01"
+      }
+    },
+    {
+      "product": "Hobby League 6 participation card B",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-02-01",
+        "en": "2008-02-01"
+      }
+    },
+    {
+      "product": "Hobby League 6 participation card C",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-03-01",
+        "en": "2008-03-01"
+      }
+    },
+    {
+      "product": "Hobby League 6 participation card D",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-04-01",
+        "en": "2008-04-01"
+      }
+    },
+    {
+      "product": "Hobby League 6 participation card E",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-05-01",
+        "en": "2008-05-01"
+      }
+    },
+    {
+      "product": "Hobby League 6 participation card F",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-06-01",
+        "en": "2008-06-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card A",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-07-01",
+        "en": "2008-07-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card B",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-08-01",
+        "en": "2008-08-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card C",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-09-01",
+        "en": "2008-09-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card D",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-10-01",
+        "en": "2008-10-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card E",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-11-01",
+        "en": "2008-11-01"
+      }
+    },
+    {
+      "product": "Hobby League 7 participation card F",
+      "ygoprodeck": "2008-01-01",
+      "yugipedia": {
+        "na": "2008-12-01",
+        "en": "2008-12-01"
+      }
+    },
+    {
+      "product": "Master Collection Volume 2",
+      "ygoprodeck": "2005-10-18",
+      "yugipedia": {
+        "na": "2005-10-24",
+        "en": "2005-10-24"
+      }
+    },
+    {
+      "product": "Mattel Action Figure promotional cards: Series 1",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-07-12",
+        "en": "2006-07-12"
+      }
+    },
+    {
+      "product": "Mattel Action Figure promotional cards: Series 2",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2006-09-22",
+        "en": "2006-09-22"
+      }
+    },
+    {
+      "product": "Pharaoh Tour 2006 promotional cards",
+      "ygoprodeck": "2006-10-28",
+      "yugipedia": {
+        "eu": "2006-09-02",
+        "en": "2006-09-02"
+      }
+    },
+    {
+      "product": "Retro Pack 2",
+      "ygoprodeck": "2009-07-28",
+      "yugipedia": {
+        "na": "2009-08-04",
+        "eu": "2009-07-24",
+        "en": "2009-07-24"
+      }
+    },
+    {
+      "product": "Rise of Destiny",
+      "ygoprodeck": "2004-11-20",
+      "yugipedia": {
+        "ww": "2004-12-01",
+        "en": "2004-12-01"
+      }
+    },
+    {
+      "product": "Shadow of Infinity",
+      "ygoprodeck": "2006-02-18",
+      "yugipedia": {
+        "ww": "2006-03-01",
+        "en": "2006-03-01"
+      }
+    },
+    {
+      "product": "Shonen Jump March 2010 subscription bonus",
+      "ygoprodeck": "2010-03-01",
+      "yugipedia": {
+        "na": "2010-01-01",
+        "en": "2010-01-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Scholastic Edition Vol. 9, Issue 1 promotional card",
+      "ygoprodeck": "2011-01-01",
+      "yugipedia": {
+        "na": "2010-11-01",
+        "en": "2010-11-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 2, Issue 1 promotional card",
+      "ygoprodeck": "2004-01-01",
+      "yugipedia": {
+        "na": "2003-01-01",
+        "en": "2003-01-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 3, Issue 1 promotional card",
+      "ygoprodeck": "2005-01-01",
+      "yugipedia": {
+        "na": "2004-11-01",
+        "en": "2004-11-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 4, Issue 1 promotional card",
+      "ygoprodeck": "2006-01-01",
+      "yugipedia": {
+        "na": "2005-11-01",
+        "en": "2005-11-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 5, Issue 1 promotional card",
+      "ygoprodeck": "2007-01-01",
+      "yugipedia": {
+        "na": "2006-12-05",
+        "en": "2006-12-05"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 5, Issue 11 promotional card",
+      "ygoprodeck": "2007-11-01",
+      "yugipedia": {
+        "na": "2007-01-01",
+        "en": "2007-01-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 5, Issue 9 promotional card",
+      "ygoprodeck": "2007-09-01",
+      "yugipedia": {
+        "na": "2007-01-01",
+        "en": "2007-01-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 8, Issue 11 promotional card",
+      "ygoprodeck": "2010-11-01",
+      "yugipedia": {
+        "na": "2010-09-01",
+        "en": "2010-09-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 9, Issue 1 promotional card",
+      "ygoprodeck": "2011-01-01",
+      "yugipedia": {
+        "na": "2010-11-01",
+        "en": "2010-11-01"
+      }
+    },
+    {
+      "product": "Shonen Jump Vol. 9, Issue 3 promotional card",
+      "ygoprodeck": "2011-03-01",
+      "yugipedia": {
+        "na": "2011-01-01",
+        "en": "2011-01-01"
+      }
+    },
+    {
+      "product": "Structure Deck: Warrior's Triumph",
+      "ygoprodeck": "2005-10-28",
+      "yugipedia": {
+        "na": "2005-11-02",
+        "en": "2005-11-02"
+      }
+    },
+    {
+      "product": "Swedish Shonen Jump 2005, Issue 12 promotional card",
+      "ygoprodeck": "2005-11-01",
+      "yugipedia": {
+        "eu": "2005-01-01",
+        "en": "2005-01-01"
+      }
+    },
+    {
+      "product": "Tournament Pack: 3rd Season",
+      "ygoprodeck": "2003-03-01",
+      "yugipedia": {
+        "na": "2003-03-29",
+        "en": "2003-03-29"
+      }
+    },
+    {
+      "product": "Yu-Gi-Oh! Power of Chaos: Yugi the Destiny Limited Collector's Edition",
+      "ygoprodeck": "2003-11-18",
+      "yugipedia": {
+        "eu": "2003-11-28",
+        "en": "2003-11-28"
+      }
+    }
+  ],
+  "products_without_printings": [
+    "San Diego Comic-Con promotional cards",
+    "Yu-Gi-Oh! World Championship 2005 prize cards",
+    "Yu-Gi-Oh! World Championship 2006 prize cards",
+    "Yu-Gi-Oh! World Championship 2007 prize cards"
+  ],
+  "skipped_products": [
+    {
+      "product": "EFootball collaboration cards",
+      "reason": "no release date"
+    },
+    {
+      "product": "Nike collaboration cards",
+      "reason": "no release date"
+    },
+    {
+      "product": "Summoned Skull Sample promotional card",
+      "reason": "predates the TCG (2001-01-01)"
+    }
+  ],
+  "non_playable_skipped": 1,
+  "ot_conflicts": [
+    {
+      "passcode": 96782886,
+      "name": "Mind Master",
+      "ot": 1,
+      "note": "printed in a TCG product but cards.cdb ot lacks the TCG bit"
+    }
+  ]
+}

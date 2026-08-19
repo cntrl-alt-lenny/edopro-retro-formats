@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-5d-s-duel-transer-promotional-cards",
+  "code": "YDT1",
+  "name": "Yu-Gi-Oh! 5D's Duel Transer promotional cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-12-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4587638,
+      "name": "Roaring Earth",
+      "numbers": [
+        "YDT1-EN003"
+      ]
+    },
+    {
+      "passcode": 41098335,
+      "name": "Ape Fighter",
+      "numbers": [
+        "YDT1-EN001"
+      ]
+    },
+    {
+      "passcode": 78082039,
+      "name": "Closed Forest",
+      "numbers": [
+        "YDT1-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Yu-Gi-Oh! 5D's Duel Transer promotional cards\"; printings from the YGOPRODeck bulk dump."
+}

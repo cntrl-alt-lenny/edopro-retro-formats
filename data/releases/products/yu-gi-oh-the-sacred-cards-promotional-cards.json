@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-the-sacred-cards-promotional-cards",
+  "code": "TSC",
+  "name": "Yu-Gi-Oh! The Sacred Cards promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-11-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-02-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 126218,
+      "name": "Skull Dice",
+      "numbers": [
+        "TSC-E003"
+      ]
+    },
+    {
+      "passcode": 5556668,
+      "name": "Exchange",
+      "numbers": [
+        "TSC-E001"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "TSC-003"
+      ]
+    },
+    {
+      "passcode": 34016756,
+      "name": "Riryoku",
+      "numbers": [
+        "TSC-002"
+      ]
+    },
+    {
+      "passcode": 48579379,
+      "name": "Perfectly Ultimate Great Moth",
+      "numbers": [
+        "TSC-001"
+      ]
+    },
+    {
+      "passcode": 74137509,
+      "name": "Graceful Dice",
+      "numbers": [
+        "TSC-E002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! The Sacred Cards promotional cards'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,314 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-marik-tcg",
+  "code": "SDMA",
+  "name": "Structure Deck: Marik (TCG)",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-10-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-10-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-10-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 102380,
+      "name": "Lava Golem",
+      "numbers": [
+        "SDMA-EN014"
+      ]
+    },
+    {
+      "passcode": 1224927,
+      "name": "Malevolent Catastrophe",
+      "numbers": [
+        "SDMA-EN035"
+      ]
+    },
+    {
+      "passcode": 1475311,
+      "name": "Allure of Darkness",
+      "numbers": [
+        "SDMA-EN028"
+      ]
+    },
+    {
+      "passcode": 3825890,
+      "name": "Gravekeeper's Visionary",
+      "numbers": [
+        "SDMA-EN018"
+      ]
+    },
+    {
+      "passcode": 4335645,
+      "name": "Newdoria",
+      "numbers": [
+        "SDMA-EN006"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SDMA-EN020"
+      ]
+    },
+    {
+      "passcode": 5562461,
+      "name": "Dark Illusion",
+      "numbers": [
+        "SDMA-EN036"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "SDMA-EN023"
+      ]
+    },
+    {
+      "passcode": 17393207,
+      "name": "Gravekeeper's Commandant",
+      "numbers": [
+        "SDMA-EN017"
+      ]
+    },
+    {
+      "passcode": 24317029,
+      "name": "Gravekeeper's Spy",
+      "numbers": [
+        "SDMA-EN007"
+      ]
+    },
+    {
+      "passcode": 25262697,
+      "name": "Gravekeeper's Assailant",
+      "numbers": [
+        "SDMA-EN013"
+      ]
+    },
+    {
+      "passcode": 26905245,
+      "name": "Metal Reflect Slime",
+      "numbers": [
+        "SDMA-EN034"
+      ]
+    },
+    {
+      "passcode": 29762407,
+      "name": "Temple of the Kings",
+      "numbers": [
+        "SDMA-EN038"
+      ]
+    },
+    {
+      "passcode": 30213599,
+      "name": "Gravekeeper's Descendant",
+      "numbers": [
+        "SDMA-EN019"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SDMA-EN022"
+      ]
+    },
+    {
+      "passcode": 37101832,
+      "name": "Gravekeeper's Guard",
+      "numbers": [
+        "SDMA-EN009"
+      ]
+    },
+    {
+      "passcode": 38445524,
+      "name": "Gil Garth",
+      "numbers": [
+        "SDMA-EN001"
+      ]
+    },
+    {
+      "passcode": 41356845,
+      "name": "Acid Trap Hole",
+      "numbers": [
+        "SDMA-EN029"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "SDMA-EN030"
+      ]
+    },
+    {
+      "passcode": 47355498,
+      "name": "Necrovalley",
+      "numbers": [
+        "SDMA-EN025"
+      ]
+    },
+    {
+      "passcode": 50712728,
+      "name": "Gravekeeper's Curse",
+      "numbers": [
+        "SDMA-EN008"
+      ]
+    },
+    {
+      "passcode": 52090844,
+      "name": "Bowganian",
+      "numbers": [
+        "SDMA-EN016"
+      ]
+    },
+    {
+      "passcode": 54704216,
+      "name": "Nightmare Wheel",
+      "numbers": [
+        "SDMA-EN033"
+      ]
+    },
+    {
+      "passcode": 56043446,
+      "name": "Viser Des",
+      "numbers": [
+        "SDMA-EN003"
+      ]
+    },
+    {
+      "passcode": 58775978,
+      "name": "Nightmare's Steelcage",
+      "numbers": [
+        "SDMA-EN021"
+      ]
+    },
+    {
+      "passcode": 62473983,
+      "name": "Gravekeeper's Chief",
+      "numbers": [
+        "SDMA-EN011"
+      ]
+    },
+    {
+      "passcode": 63695531,
+      "name": "Gravekeeper's Spear Soldier",
+      "numbers": [
+        "SDMA-EN010"
+      ]
+    },
+    {
+      "passcode": 65830223,
+      "name": "Coffin Seller",
+      "numbers": [
+        "SDMA-EN032"
+      ]
+    },
+    {
+      "passcode": 81439173,
+      "name": "Foolish Burial",
+      "numbers": [
+        "SDMA-EN026"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "SDMA-EN002"
+      ]
+    },
+    {
+      "passcode": 85562745,
+      "name": "Dark Room of Nightmare",
+      "numbers": [
+        "SDMA-EN024"
+      ]
+    },
+    {
+      "passcode": 89194033,
+      "name": "Mystical Beast of Serket",
+      "numbers": [
+        "SDMA-EN037"
+      ]
+    },
+    {
+      "passcode": 90980792,
+      "name": "Dark Jeroid",
+      "numbers": [
+        "SDMA-EN005"
+      ]
+    },
+    {
+      "passcode": 98139712,
+      "name": "Skull Invitation",
+      "numbers": [
+        "SDMA-EN031"
+      ]
+    },
+    {
+      "passcode": 98494543,
+      "name": "Magical Stone Excavation",
+      "numbers": [
+        "SDMA-EN027"
+      ]
+    },
+    {
+      "passcode": 99050989,
+      "name": "Drillago",
+      "numbers": [
+        "SDMA-EN015"
+      ]
+    },
+    {
+      "passcode": 99747800,
+      "name": "Legendary Fiend",
+      "numbers": [
+        "SDMA-EN004"
+      ]
+    },
+    {
+      "passcode": 99877698,
+      "name": "Gravekeeper's Cannonholder",
+      "numbers": [
+        "SDMA-EN012"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Marik (TCG)'; printings from the YGOPRODeck bulk dump."
+}

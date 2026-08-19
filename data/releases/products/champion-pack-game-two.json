@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-two",
+  "code": "CP02",
+  "name": "Champion Pack: Game Two",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-02-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 18318842,
+      "name": "Abyss Soldier",
+      "numbers": [
+        "CP02-EN007"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "CP02-EN002"
+      ]
+    },
+    {
+      "passcode": 28553439,
+      "name": "Magical Dimension",
+      "numbers": [
+        "CP02-EN011"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "CP02-EN003"
+      ]
+    },
+    {
+      "passcode": 31786629,
+      "name": "Thunder Dragon",
+      "numbers": [
+        "CP02-EN015"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "CP02-EN009"
+      ]
+    },
+    {
+      "passcode": 36468556,
+      "name": "Ceasefire",
+      "numbers": [
+        "CP02-EN014"
+      ]
+    },
+    {
+      "passcode": 38699854,
+      "name": "Book of Taiyou",
+      "numbers": [
+        "CP02-EN017"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "CP02-EN006"
+      ]
+    },
+    {
+      "passcode": 43586926,
+      "name": "Twin-Headed Behemoth",
+      "numbers": [
+        "CP02-EN016"
+      ]
+    },
+    {
+      "passcode": 60764581,
+      "name": "Stray Lambs",
+      "numbers": [
+        "CP02-EN020"
+      ]
+    },
+    {
+      "passcode": 61127349,
+      "name": "Big Bang Shot",
+      "numbers": [
+        "CP02-EN019"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "CP02-EN013"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "CP02-EN018"
+      ]
+    },
+    {
+      "passcode": 77044671,
+      "name": "Pyramid Turtle",
+      "numbers": [
+        "CP02-EN004"
+      ]
+    },
+    {
+      "passcode": 83555666,
+      "name": "Ring of Destruction",
+      "numbers": [
+        "CP02-EN008"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "CP02-EN005"
+      ]
+    },
+    {
+      "passcode": 97642679,
+      "name": "Dark Master - Zorc",
+      "numbers": [
+        "CP02-EN010"
+      ]
+    },
+    {
+      "passcode": 98494543,
+      "name": "Magical Stone Excavation",
+      "numbers": [
+        "CP02-EN001"
+      ]
+    },
+    {
+      "passcode": 99030164,
+      "name": "Happy Lover",
+      "numbers": [
+        "CP02-EN012"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Two'; printings from the YGOPRODeck bulk dump."
+}

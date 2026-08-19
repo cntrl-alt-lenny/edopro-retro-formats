@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tournament-pack-3rd-season",
+  "code": "TP3",
+  "name": "Tournament Pack: 3rd Season",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-03-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7359741,
+      "name": "Mechanicalchaser",
+      "numbers": [
+        "TP3-003"
+      ]
+    },
+    {
+      "passcode": 11868825,
+      "name": "Goblin's Secret Remedy",
+      "numbers": [
+        "TP3-011"
+      ]
+    },
+    {
+      "passcode": 11901678,
+      "name": "Black Skull Dragon",
+      "numbers": [
+        "TP3-004"
+      ]
+    },
+    {
+      "passcode": 17881964,
+      "name": "Darkfire Dragon",
+      "numbers": [
+        "TP3-016"
+      ]
+    },
+    {
+      "passcode": 21417692,
+      "name": "Dark Elf",
+      "numbers": [
+        "TP3-018"
+      ]
+    },
+    {
+      "passcode": 28470714,
+      "name": "Bladefly",
+      "numbers": [
+        "TP3-020"
+      ]
+    },
+    {
+      "passcode": 42364257,
+      "name": "Anti Raigeki",
+      "numbers": [
+        "TP3-002"
+      ]
+    },
+    {
+      "passcode": 43487744,
+      "name": "White Hole",
+      "numbers": [
+        "TP3-009"
+      ]
+    },
+    {
+      "passcode": 48305365,
+      "name": "Axe Raider",
+      "numbers": [
+        "TP3-006"
+      ]
+    },
+    {
+      "passcode": 50045299,
+      "name": "Dragon Capture Jar",
+      "numbers": [
+        "TP3-010"
+      ]
+    },
+    {
+      "passcode": 54541900,
+      "name": "Karbonala Warrior",
+      "numbers": [
+        "TP3-015"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "TP3-014"
+      ]
+    },
+    {
+      "passcode": 68658728,
+      "name": "Little Chimera",
+      "numbers": [
+        "TP3-019"
+      ]
+    },
+    {
+      "passcode": 73134081,
+      "name": "Final Flame",
+      "numbers": [
+        "TP3-012"
+      ]
+    },
+    {
+      "passcode": 76775123,
+      "name": "Patrol Robo",
+      "numbers": [
+        "TP3-008"
+      ]
+    },
+    {
+      "passcode": 80770678,
+      "name": "Spirit of the Harp",
+      "numbers": [
+        "TP3-013"
+      ]
+    },
+    {
+      "passcode": 81843628,
+      "name": "Needle Worm",
+      "numbers": [
+        "TP3-001"
+      ]
+    },
+    {
+      "passcode": 90219263,
+      "name": "Elegant Egotist",
+      "numbers": [
+        "TP3-017"
+      ]
+    },
+    {
+      "passcode": 95144193,
+      "name": "Kwagar Hercules",
+      "numbers": [
+        "TP3-007"
+      ]
+    },
+    {
+      "passcode": 98069388,
+      "name": "Horn of Heaven",
+      "numbers": [
+        "TP3-005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tournament Pack: 3rd Season'; printings from the YGOPRODeck bulk dump."
+}

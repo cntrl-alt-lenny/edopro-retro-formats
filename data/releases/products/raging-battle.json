@@ -1,0 +1,747 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "raging-battle",
+  "code": "RGBT",
+  "name": "Raging Battle",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-05-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-06-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-06-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1073952,
+      "name": "Magic Planter",
+      "numbers": [
+        "RGBT-EN048"
+      ]
+    },
+    {
+      "passcode": 2295440,
+      "name": "One for One",
+      "numbers": [
+        "RGBT-EN045"
+      ]
+    },
+    {
+      "passcode": 2403771,
+      "name": "Power Tool Dragon",
+      "numbers": [
+        "RGBT-EN042"
+      ]
+    },
+    {
+      "passcode": 4130270,
+      "name": "G.B. Hunter",
+      "numbers": [
+        "RGBT-EN039"
+      ]
+    },
+    {
+      "passcode": 4252828,
+      "name": "Mermaid Archer",
+      "numbers": [
+        "RGBT-EN036"
+      ]
+    },
+    {
+      "passcode": 10591919,
+      "name": "Morphtronic Scopen",
+      "numbers": [
+        "RGBT-EN016"
+      ]
+    },
+    {
+      "passcode": 10651797,
+      "name": "Swallow Flip",
+      "numbers": [
+        "RGBT-EN079"
+      ]
+    },
+    {
+      "passcode": 10875327,
+      "name": "Earthbound Immortal Aslla piscu",
+      "numbers": [
+        "RGBT-EN019"
+      ]
+    },
+    {
+      "passcode": 11373345,
+      "name": "Proof of Powerlessness",
+      "numbers": [
+        "RGBT-EN076"
+      ]
+    },
+    {
+      "passcode": 11596936,
+      "name": "Reckoned Power",
+      "numbers": [
+        "RGBT-EN073"
+      ]
+    },
+    {
+      "passcode": 11613567,
+      "name": "Blackwing - Elphin the Raven",
+      "numbers": [
+        "RGBT-EN013"
+      ]
+    },
+    {
+      "passcode": 12435193,
+      "name": "Koa'ki Meiru Drago",
+      "numbers": [
+        "RGBT-EN024"
+      ]
+    },
+    {
+      "passcode": 15475415,
+      "name": "Alien Dog",
+      "numbers": [
+        "RGBT-EN033"
+      ]
+    },
+    {
+      "passcode": 16191953,
+      "name": "Master Gig",
+      "numbers": [
+        "RGBT-EN030"
+      ]
+    },
+    {
+      "passcode": 17313545,
+      "name": "Brain Golem",
+      "numbers": [
+        "RGBT-EN027"
+      ]
+    },
+    {
+      "passcode": 19642889,
+      "name": "Koa'ki Meiru Powerhand",
+      "numbers": [
+        "RGBT-EN022"
+      ]
+    },
+    {
+      "passcode": 20140382,
+      "name": "Overwhelm",
+      "numbers": [
+        "RGBT-EN088"
+      ]
+    },
+    {
+      "passcode": 21362970,
+      "name": "Beast Striker",
+      "numbers": [
+        "RGBT-EN085"
+      ]
+    },
+    {
+      "passcode": 21672573,
+      "name": "Emperor Sem",
+      "numbers": [
+        "RGBT-EN099"
+      ]
+    },
+    {
+      "passcode": 22628574,
+      "name": "Fake Feather",
+      "numbers": [
+        "RGBT-EN070"
+      ]
+    },
+    {
+      "passcode": 22835145,
+      "name": "Blackwing - Blizzard the Far North",
+      "numbers": [
+        "RGBT-EN010"
+      ]
+    },
+    {
+      "passcode": 23440062,
+      "name": "Wicked Rebirth",
+      "numbers": [
+        "RGBT-EN067"
+      ]
+    },
+    {
+      "passcode": 23558733,
+      "name": "Phoenixian Cluster Amaryllis",
+      "numbers": [
+        "RGBT-EN006"
+      ]
+    },
+    {
+      "passcode": 23770284,
+      "name": "Strong Wind Dragon",
+      "numbers": [
+        "RGBT-EN003"
+      ]
+    },
+    {
+      "passcode": 24566654,
+      "name": "Crimson Fire",
+      "numbers": [
+        "RGBT-EN064"
+      ]
+    },
+    {
+      "passcode": 25132288,
+      "name": "Light End Dragon",
+      "numbers": [
+        "RGBT-EN091"
+      ]
+    },
+    {
+      "passcode": 25401880,
+      "name": "Psychic Path",
+      "numbers": [
+        "RGBT-EN058"
+      ]
+    },
+    {
+      "passcode": 25789292,
+      "name": "Forbidden Chalice",
+      "numbers": [
+        "RGBT-EN061"
+      ]
+    },
+    {
+      "passcode": 32485518,
+      "name": "Immortal Ruler",
+      "numbers": [
+        "RGBT-EN082"
+      ]
+    },
+    {
+      "passcode": 36623431,
+      "name": "Iron Core of Koa'ki Meiru",
+      "numbers": [
+        "RGBT-EN055"
+      ]
+    },
+    {
+      "passcode": 37132349,
+      "name": "Ojama Red",
+      "numbers": [
+        "RGBT-EN096"
+      ]
+    },
+    {
+      "passcode": 37745919,
+      "name": "Junk Box",
+      "numbers": [
+        "RGBT-EN052"
+      ]
+    },
+    {
+      "passcode": 38568567,
+      "name": "Wonder Clover",
+      "numbers": [
+        "RGBT-EN049"
+      ]
+    },
+    {
+      "passcode": 38680149,
+      "name": "Mind Trust",
+      "numbers": [
+        "RGBT-EN046"
+      ]
+    },
+    {
+      "passcode": 39402797,
+      "name": "Trident Dragion",
+      "numbers": [
+        "RGBT-EN043"
+      ]
+    },
+    {
+      "passcode": 40529384,
+      "name": "Exploder Dragonwing",
+      "numbers": [
+        "RGBT-EN040"
+      ]
+    },
+    {
+      "passcode": 41160533,
+      "name": "Rose Tentacles",
+      "numbers": [
+        "RGBT-EN007"
+      ]
+    },
+    {
+      "passcode": 41741922,
+      "name": "Lava Dragon",
+      "numbers": [
+        "RGBT-EN037"
+      ]
+    },
+    {
+      "passcode": 42463414,
+      "name": "Spined Gillman",
+      "numbers": [
+        "RGBT-EN034"
+      ]
+    },
+    {
+      "passcode": 42685062,
+      "name": "Emissary from Pandemonium",
+      "numbers": [
+        "RGBT-EN031"
+      ]
+    },
+    {
+      "passcode": 43708640,
+      "name": "Minoan Centaur",
+      "numbers": [
+        "RGBT-EN028"
+      ]
+    },
+    {
+      "passcode": 45041488,
+      "name": "Koa'ki Meiru Guardian",
+      "numbers": [
+        "RGBT-EN023"
+      ]
+    },
+    {
+      "passcode": 46263076,
+      "name": "Earthbound Immortal Ccapac Apu",
+      "numbers": [
+        "RGBT-EN020"
+      ]
+    },
+    {
+      "passcode": 46609443,
+      "name": "Chaos-End Master",
+      "numbers": [
+        "RGBT-EN092"
+      ]
+    },
+    {
+      "passcode": 46656406,
+      "name": "Mirror of Oaths",
+      "numbers": [
+        "RGBT-EN080"
+      ]
+    },
+    {
+      "passcode": 47778083,
+      "name": "Bone Temple Block",
+      "numbers": [
+        "RGBT-EN077"
+      ]
+    },
+    {
+      "passcode": 47985614,
+      "name": "Gadget Arms",
+      "numbers": [
+        "RGBT-EN017"
+      ]
+    },
+    {
+      "passcode": 50164989,
+      "name": "Dark Verger",
+      "numbers": [
+        "RGBT-EN004"
+      ]
+    },
+    {
+      "passcode": 50951359,
+      "name": "Tuner Capture",
+      "numbers": [
+        "RGBT-EN065"
+      ]
+    },
+    {
+      "passcode": 51773900,
+      "name": "Calming Magic",
+      "numbers": [
+        "RGBT-EN062"
+      ]
+    },
+    {
+      "passcode": 51987571,
+      "name": "Rockstone Warrior",
+      "numbers": [
+        "RGBT-EN001"
+      ]
+    },
+    {
+      "passcode": 54520292,
+      "name": "Koa'ki Meiru Ice",
+      "numbers": [
+        "RGBT-EN025"
+      ]
+    },
+    {
+      "passcode": 56535497,
+      "name": "Berserking",
+      "numbers": [
+        "RGBT-EN089"
+      ]
+    },
+    {
+      "passcode": 57108202,
+      "name": "Morphtronic Remoten",
+      "numbers": [
+        "RGBT-EN014"
+      ]
+    },
+    {
+      "passcode": 58820853,
+      "name": "Blackwing - Shura the Blue Flame",
+      "numbers": [
+        "RGBT-EN011"
+      ]
+    },
+    {
+      "passcode": 58990631,
+      "name": "Automatic Laser",
+      "numbers": [
+        "RGBT-EN074"
+      ]
+    },
+    {
+      "passcode": 59042331,
+      "name": "Hedge Guard",
+      "numbers": [
+        "RGBT-EN008"
+      ]
+    },
+    {
+      "passcode": 59616123,
+      "name": "Trap Stun",
+      "numbers": [
+        "RGBT-EN071"
+      ]
+    },
+    {
+      "passcode": 59839761,
+      "name": "Delta Crow - Anti Reverse",
+      "numbers": [
+        "RGBT-EN068"
+      ]
+    },
+    {
+      "passcode": 62896588,
+      "name": "Natural Tune",
+      "numbers": [
+        "RGBT-EN059"
+      ]
+    },
+    {
+      "passcode": 63018036,
+      "name": "Iron Core Immediate Disposal",
+      "numbers": [
+        "RGBT-EN056"
+      ]
+    },
+    {
+      "passcode": 63730624,
+      "name": "Double Tool C&D",
+      "numbers": [
+        "RGBT-EN053"
+      ]
+    },
+    {
+      "passcode": 64627453,
+      "name": "Ojama Blue",
+      "numbers": [
+        "RGBT-EN097"
+      ]
+    },
+    {
+      "passcode": 64952266,
+      "name": "Against the Wind",
+      "numbers": [
+        "RGBT-EN050"
+      ]
+    },
+    {
+      "passcode": 65079854,
+      "name": "Thorn of Malice",
+      "numbers": [
+        "RGBT-EN047"
+      ]
+    },
+    {
+      "passcode": 67757079,
+      "name": "King of the Beasts",
+      "numbers": [
+        "RGBT-EN086"
+      ]
+    },
+    {
+      "passcode": 68473226,
+      "name": "Hardened Armed Dragon",
+      "numbers": [
+        "RGBT-EN083"
+      ]
+    },
+    {
+      "passcode": 69695704,
+      "name": "Battlestorm",
+      "numbers": [
+        "RGBT-EN000"
+      ]
+    },
+    {
+      "passcode": 71759912,
+      "name": "Tree Otter",
+      "numbers": [
+        "RGBT-EN095"
+      ]
+    },
+    {
+      "passcode": 72258771,
+      "name": "Koa'ki Meiru Valafar",
+      "numbers": [
+        "RGBT-EN021"
+      ]
+    },
+    {
+      "passcode": 76714458,
+      "name": "Spell of Pain",
+      "numbers": [
+        "RGBT-EN090"
+      ]
+    },
+    {
+      "passcode": 76891401,
+      "name": "Sea Dragon Lord Gishilnodon",
+      "numbers": [
+        "RGBT-EN044"
+      ]
+    },
+    {
+      "passcode": 76913983,
+      "name": "Blackwing Armed Wing",
+      "numbers": [
+        "RGBT-EN041"
+      ]
+    },
+    {
+      "passcode": 77135531,
+      "name": "Vanguard of the Dragon",
+      "numbers": [
+        "RGBT-EN038"
+      ]
+    },
+    {
+      "passcode": 78868119,
+      "name": "Deep Sea Diva",
+      "numbers": [
+        "RGBT-EN035"
+      ]
+    },
+    {
+      "passcode": 79080761,
+      "name": "Gigastone Omega",
+      "numbers": [
+        "RGBT-EN032"
+      ]
+    },
+    {
+      "passcode": 80102359,
+      "name": "Reinforced Human Psychic Borg",
+      "numbers": [
+        "RGBT-EN029"
+      ]
+    },
+    {
+      "passcode": 80925836,
+      "name": "Koa'ki Meiru Doom",
+      "numbers": [
+        "RGBT-EN026"
+      ]
+    },
+    {
+      "passcode": 82693042,
+      "name": "Sphere of Chaos",
+      "numbers": [
+        "RGBT-EN093"
+      ]
+    },
+    {
+      "passcode": 83266092,
+      "name": "Grave of the Super Ancient Organism",
+      "numbers": [
+        "RGBT-EN078"
+      ]
+    },
+    {
+      "passcode": 83370323,
+      "name": "Torapart",
+      "numbers": [
+        "RGBT-EN018"
+      ]
+    },
+    {
+      "passcode": 84389640,
+      "name": "Attack of the Cornered Rat",
+      "numbers": [
+        "RGBT-EN075"
+      ]
+    },
+    {
+      "passcode": 84592800,
+      "name": "Morphtronic Videon",
+      "numbers": [
+        "RGBT-EN015"
+      ]
+    },
+    {
+      "passcode": 85101228,
+      "name": "Morphtronic Bind",
+      "numbers": [
+        "RGBT-EN072"
+      ]
+    },
+    {
+      "passcode": 85215458,
+      "name": "Blackwing - Kalut the Moon Shadow",
+      "numbers": [
+        "RGBT-EN012"
+      ]
+    },
+    {
+      "passcode": 85431040,
+      "name": "Evil Thorn",
+      "numbers": [
+        "RGBT-EN009"
+      ]
+    },
+    {
+      "passcode": 86223870,
+      "name": "Level Retuner",
+      "numbers": [
+        "RGBT-EN069"
+      ]
+    },
+    {
+      "passcode": 87046457,
+      "name": "Overdoom Line",
+      "numbers": [
+        "RGBT-EN066"
+      ]
+    },
+    {
+      "passcode": 90011152,
+      "name": "Ojama Country",
+      "numbers": [
+        "RGBT-EN098"
+      ]
+    },
+    {
+      "passcode": 90239723,
+      "name": "Morphtronic Repair Unit",
+      "numbers": [
+        "RGBT-EN054"
+      ]
+    },
+    {
+      "passcode": 91133740,
+      "name": "Snowman Eater",
+      "numbers": [
+        "RGBT-EN094"
+      ]
+    },
+    {
+      "passcode": 91351370,
+      "name": "Black Whirlwind",
+      "numbers": [
+        "RGBT-EN051"
+      ]
+    },
+    {
+      "passcode": 94145683,
+      "name": "Swallow's Nest",
+      "numbers": [
+        "RGBT-EN087"
+      ]
+    },
+    {
+      "passcode": 94878265,
+      "name": "Moja",
+      "numbers": [
+        "RGBT-EN084"
+      ]
+    },
+    {
+      "passcode": 95090813,
+      "name": "Koa'ki Meiru War Arms",
+      "numbers": [
+        "RGBT-EN081"
+      ]
+    },
+    {
+      "passcode": 96553688,
+      "name": "Phoenixian Seed",
+      "numbers": [
+        "RGBT-EN005"
+      ]
+    },
+    {
+      "passcode": 97168905,
+      "name": "Miracle Locus",
+      "numbers": [
+        "RGBT-EN063"
+      ]
+    },
+    {
+      "passcode": 97385276,
+      "name": "Level Warrior",
+      "numbers": [
+        "RGBT-EN002"
+      ]
+    },
+    {
+      "passcode": 98380593,
+      "name": "Supremacy Berry",
+      "numbers": [
+        "RGBT-EN060"
+      ]
+    },
+    {
+      "passcode": 99002135,
+      "name": "Urgent Synthesis",
+      "numbers": [
+        "RGBT-EN057"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Raging Battle'; printings from the YGOPRODeck bulk dump."
+}

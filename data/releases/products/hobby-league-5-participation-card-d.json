@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hobby-league-5-participation-card-d",
+  "code": "HL05",
+  "name": "Hobby League 5 participation card D",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-10-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 87621407,
+      "name": "Dekoichi the Battlechanted Locomotive",
+      "numbers": [
+        "HL05-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hobby League 5 participation card D'; printings from the YGOPRODeck bulk dump."
+}

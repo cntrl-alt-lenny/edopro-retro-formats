@@ -1,0 +1,251 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-invincible-fortress",
+  "code": "SD7",
+  "name": "Structure Deck: Invincible Fortress",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-05-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2694423,
+      "name": "Medusa Worm",
+      "numbers": [
+        "SD7-EN014"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD7-EN017"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "SD7-EN026"
+      ]
+    },
+    {
+      "passcode": 18654201,
+      "name": "Criosphinx",
+      "numbers": [
+        "SD7-EN010"
+      ]
+    },
+    {
+      "passcode": 26412047,
+      "name": "Hammer Shot",
+      "numbers": [
+        "SD7-EN022"
+      ]
+    },
+    {
+      "passcode": 28120197,
+      "name": "Canyon",
+      "numbers": [
+        "SD7-EN016"
+      ]
+    },
+    {
+      "passcode": 31812496,
+      "name": "Stone Statue of the Aztecs",
+      "numbers": [
+        "SD7-EN007"
+      ]
+    },
+    {
+      "passcode": 37576645,
+      "name": "Reckless Greed",
+      "numbers": [
+        "SD7-EN031"
+      ]
+    },
+    {
+      "passcode": 39537362,
+      "name": "Ordeal of a Traveler",
+      "numbers": [
+        "SD7-EN030"
+      ]
+    },
+    {
+      "passcode": 40659562,
+      "name": "Guardian Sphinx",
+      "numbers": [
+        "SD7-EN005"
+      ]
+    },
+    {
+      "passcode": 40695128,
+      "name": "Maharaghi",
+      "numbers": [
+        "SD7-EN004"
+      ]
+    },
+    {
+      "passcode": 45159319,
+      "name": "Moai Interceptor Cannons",
+      "numbers": [
+        "SD7-EN011"
+      ]
+    },
+    {
+      "passcode": 47606319,
+      "name": "Gigantes",
+      "numbers": [
+        "SD7-EN006"
+      ]
+    },
+    {
+      "passcode": 52097679,
+      "name": "Shield & Sword",
+      "numbers": [
+        "SD7-EN020"
+      ]
+    },
+    {
+      "passcode": 52323207,
+      "name": "Golem Sentry",
+      "numbers": [
+        "SD7-EN008"
+      ]
+    },
+    {
+      "passcode": 55737443,
+      "name": "Exxod, Master of The Guard",
+      "numbers": [
+        "SD7-EN001"
+      ]
+    },
+    {
+      "passcode": 59237154,
+      "name": "Shifting Shadows",
+      "numbers": [
+        "SD7-EN025"
+      ]
+    },
+    {
+      "passcode": 59344077,
+      "name": "Magic Drain",
+      "numbers": [
+        "SD7-EN028"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SD7-EN018"
+      ]
+    },
+    {
+      "passcode": 71544954,
+      "name": "Megarock Dragon",
+      "numbers": [
+        "SD7-EN012"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "SD7-EN019"
+      ]
+    },
+    {
+      "passcode": 73648243,
+      "name": "Sand Moth",
+      "numbers": [
+        "SD7-EN015"
+      ]
+    },
+    {
+      "passcode": 75209824,
+      "name": "Guardian Statue",
+      "numbers": [
+        "SD7-EN013"
+      ]
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering",
+      "numbers": [
+        "SD7-EN027"
+      ]
+    },
+    {
+      "passcode": 82260502,
+      "name": "Hieracosphinx",
+      "numbers": [
+        "SD7-EN009"
+      ]
+    },
+    {
+      "passcode": 85852291,
+      "name": "Magical Mallet",
+      "numbers": [
+        "SD7-EN021"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "SD7-EN024"
+      ]
+    },
+    {
+      "passcode": 88279736,
+      "name": "Robbin' Goblin",
+      "numbers": [
+        "SD7-EN029"
+      ]
+    },
+    {
+      "passcode": 92736188,
+      "name": "Great Spirit",
+      "numbers": [
+        "SD7-EN002"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "SD7-EN032"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "SD7-EN003"
+      ]
+    },
+    {
+      "passcode": 97342942,
+      "name": "Ectoplasmer",
+      "numbers": [
+        "SD7-EN023"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Invincible Fortress'; printings from the YGOPRODeck bulk dump."
+}

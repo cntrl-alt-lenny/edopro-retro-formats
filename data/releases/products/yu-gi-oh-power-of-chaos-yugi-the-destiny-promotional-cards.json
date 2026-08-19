@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-power-of-chaos-yugi-the-destiny-promotional-cards",
+  "code": "PCY",
+  "name": "Yu-Gi-Oh! Power of Chaos: Yugi the Destiny promotional cards",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-11-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2003-11-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "PCY-005",
+        "PCY-E005"
+      ]
+    },
+    {
+      "passcode": 58921041,
+      "name": "Anti-Spell Fragrance",
+      "numbers": [
+        "PCY-002",
+        "PCY-E002"
+      ]
+    },
+    {
+      "passcode": 59744639,
+      "name": "Windstorm of Etaqua",
+      "numbers": [
+        "PCY-001",
+        "PCY-E001"
+      ]
+    },
+    {
+      "passcode": 63391643,
+      "name": "Thousand Knives",
+      "numbers": [
+        "PCY-003",
+        "PCY-E003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Power of Chaos: Yugi the Destiny promotional cards'; printings from the YGOPRODeck bulk dump."
+}

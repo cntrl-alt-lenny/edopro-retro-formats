@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-5-issue-1-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 5, Issue 1 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-12-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 44910027,
+      "name": "Victory Dragon",
+      "numbers": [
+        "JUMP-EN011"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 5, Issue 1 promotional card'; printings from the YGOPRODeck bulk dump."
+}

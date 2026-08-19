@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-five",
+  "code": "CP05",
+  "name": "Champion Pack: Game Five",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-01-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 14878871,
+      "name": "Rescue Cat",
+      "numbers": [
+        "CP05-EN015"
+      ]
+    },
+    {
+      "passcode": 17968114,
+      "name": "Amazon of the Seas",
+      "numbers": [
+        "CP05-EN012"
+      ]
+    },
+    {
+      "passcode": 24221739,
+      "name": "Protector of the Sanctuary",
+      "numbers": [
+        "CP05-EN013"
+      ]
+    },
+    {
+      "passcode": 24508238,
+      "name": "D.D. Crow",
+      "numbers": [
+        "CP05-EN016"
+      ]
+    },
+    {
+      "passcode": 24874630,
+      "name": "Fiend's Sanctuary",
+      "numbers": [
+        "CP05-EN001"
+      ]
+    },
+    {
+      "passcode": 25551951,
+      "name": "Blowback Dragon",
+      "numbers": [
+        "CP05-EN007"
+      ]
+    },
+    {
+      "passcode": 26412047,
+      "name": "Hammer Shot",
+      "numbers": [
+        "CP05-EN017"
+      ]
+    },
+    {
+      "passcode": 31829185,
+      "name": "Dark Necrofear",
+      "numbers": [
+        "CP05-EN006"
+      ]
+    },
+    {
+      "passcode": 32362575,
+      "name": "Magical Merchant",
+      "numbers": [
+        "CP05-EN003"
+      ]
+    },
+    {
+      "passcode": 34717238,
+      "name": "Pulling the Rug",
+      "numbers": [
+        "CP05-EN010"
+      ]
+    },
+    {
+      "passcode": 35027493,
+      "name": "Deck Devastation Virus",
+      "numbers": [
+        "CP05-EN009"
+      ]
+    },
+    {
+      "passcode": 38992735,
+      "name": "Wave-Motion Cannon",
+      "numbers": [
+        "CP05-EN004"
+      ]
+    },
+    {
+      "passcode": 44436472,
+      "name": "Double Coston",
+      "numbers": [
+        "CP05-EN014"
+      ]
+    },
+    {
+      "passcode": 53239672,
+      "name": "Spirit Barrier",
+      "numbers": [
+        "CP05-EN020"
+      ]
+    },
+    {
+      "passcode": 53982768,
+      "name": "Dark Ruler Ha Des",
+      "numbers": [
+        "CP05-EN008"
+      ]
+    },
+    {
+      "passcode": 58851034,
+      "name": "Cursed Seal of the Forbidden Spell",
+      "numbers": [
+        "CP05-EN019"
+      ]
+    },
+    {
+      "passcode": 58921041,
+      "name": "Anti-Spell Fragrance",
+      "numbers": [
+        "CP05-EN011"
+      ]
+    },
+    {
+      "passcode": 63391643,
+      "name": "Thousand Knives",
+      "numbers": [
+        "CP05-EN018"
+      ]
+    },
+    {
+      "passcode": 64697231,
+      "name": "Trap Dustshoot",
+      "numbers": [
+        "CP05-EN005"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "CP05-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Five'; printings from the YGOPRODeck bulk dump."
+}

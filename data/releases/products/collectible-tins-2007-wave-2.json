@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2007-wave-2",
+  "code": "CT04",
+  "name": "Collectible Tins 2007 Wave 2",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-11-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 32543380,
+      "name": "Volcanic Doomfire",
+      "numbers": [
+        "CT04-EN004"
+      ]
+    },
+    {
+      "passcode": 60493189,
+      "name": "Elemental HERO Plasma Vice",
+      "numbers": [
+        "CT04-EN006"
+      ]
+    },
+    {
+      "passcode": 79856792,
+      "name": "Rainbow Dragon",
+      "numbers": [
+        "CT04-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2007 Wave 2'; printings from the YGOPRODeck bulk dump."
+}

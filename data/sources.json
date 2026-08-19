@@ -144,6 +144,20 @@
       "retrieved": "2026-08-19",
       "used_for": "DUEL_* flag definitions and composite mode macros used by rule profiles.",
       "reliability_notes": "Primary source for rules-engine behaviour claims."
+    },
+    {
+      "id": "yugipedia-set-pages",
+      "kind": "wiki",
+      "title": "Yugipedia set pages (Semantic MediaWiki release-date properties, per territory)",
+      "url": "https://yugipedia.com/api.php?action=ask",
+      "notes": "Queried per the published API policy (1 req/s, descriptive UA, cached). Exact queries, retrieval dates, and page counts are stamped into data/imported/releases-report.json by the importer. Date precision parsed from SMW raw values (1/YYYY[/M[/D]]), never from padded timestamps."
+    },
+    {
+      "id": "ygoprodeck-api",
+      "kind": "community-site",
+      "title": "YGOPRODeck API v7 bulk dumps (cardinfo.php?misc=yes, cardsets.php)",
+      "url": "https://ygoprodeck.com/api-guide/",
+      "notes": "Single-request bulk download per their stated caching mandate. Printings/identity authority only: its per-set tcg_date is region-inconsistent (verified EU for some sets, NA for others), so it corroborates or falls back, never overrides Yugipedia dates. Retrieval stamped in data/imported/releases-report.json."
     }
   ]
 }

@@ -1,0 +1,259 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-yusei",
+  "code": "DP08",
+  "name": "Duelist Pack: Yusei",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-02-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-02-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-02-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 6178850,
+      "name": "Fighting Spirit",
+      "numbers": [
+        "DP08-EN017"
+      ]
+    },
+    {
+      "passcode": 9365703,
+      "name": "Speed Warrior",
+      "numbers": [
+        "DP08-EN002"
+      ]
+    },
+    {
+      "passcode": 18013090,
+      "name": "Nitro Warrior",
+      "numbers": [
+        "DP08-EN013"
+      ]
+    },
+    {
+      "passcode": 23571046,
+      "name": "Quillbolt Hedgehog",
+      "numbers": [
+        "DP08-EN005"
+      ]
+    },
+    {
+      "passcode": 24268052,
+      "name": "Defense Draw",
+      "numbers": [
+        "DP08-EN023"
+      ]
+    },
+    {
+      "passcode": 29071332,
+      "name": "Armory Arm",
+      "numbers": [
+        "DP08-EN016"
+      ]
+    },
+    {
+      "passcode": 30123142,
+      "name": "Synchro Strike",
+      "numbers": [
+        "DP08-EN028"
+      ]
+    },
+    {
+      "passcode": 31245780,
+      "name": "Battle Mania",
+      "numbers": [
+        "DP08-EN025"
+      ]
+    },
+    {
+      "passcode": 31281980,
+      "name": "Healing Wave Generator",
+      "numbers": [
+        "DP08-EN008"
+      ]
+    },
+    {
+      "passcode": 32663969,
+      "name": "Domino Effect",
+      "numbers": [
+        "DP08-EN018"
+      ]
+    },
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "DP08-EN014"
+      ]
+    },
+    {
+      "passcode": 46195773,
+      "name": "Turbo Warrior",
+      "numbers": [
+        "DP08-EN015"
+      ]
+    },
+    {
+      "passcode": 55465441,
+      "name": "Give and Take",
+      "numbers": [
+        "DP08-EN029"
+      ]
+    },
+    {
+      "passcode": 59965151,
+      "name": "Ghost Gardna",
+      "numbers": [
+        "DP08-EN006"
+      ]
+    },
+    {
+      "passcode": 60187739,
+      "name": "Turbo Booster",
+      "numbers": [
+        "DP08-EN003"
+      ]
+    },
+    {
+      "passcode": 60800381,
+      "name": "Junk Warrior",
+      "numbers": [
+        "DP08-EN012"
+      ]
+    },
+    {
+      "passcode": 61656650,
+      "name": "Remote Revenge",
+      "numbers": [
+        "DP08-EN024"
+      ]
+    },
+    {
+      "passcode": 62878208,
+      "name": "Equip Shot",
+      "numbers": [
+        "DP08-EN021"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "DP08-EN001"
+      ]
+    },
+    {
+      "passcode": 66288028,
+      "name": "Fortress Warrior",
+      "numbers": [
+        "DP08-EN010"
+      ]
+    },
+    {
+      "passcode": 67270095,
+      "name": "Turbo Synchron",
+      "numbers": [
+        "DP08-EN009"
+      ]
+    },
+    {
+      "passcode": 67630339,
+      "name": "Confusion Chaff",
+      "numbers": [
+        "DP08-EN026"
+      ]
+    },
+    {
+      "passcode": 72767833,
+      "name": "Card Rotator",
+      "numbers": [
+        "DP08-EN020"
+      ]
+    },
+    {
+      "passcode": 79068663,
+      "name": "Junk Barrage",
+      "numbers": [
+        "DP08-EN019"
+      ]
+    },
+    {
+      "passcode": 92450185,
+      "name": "Limiter Overload",
+      "numbers": [
+        "DP08-EN030"
+      ]
+    },
+    {
+      "passcode": 92676637,
+      "name": "Tuningware",
+      "numbers": [
+        "DP08-EN011"
+      ]
+    },
+    {
+      "passcode": 94634433,
+      "name": "Urgent Tuning",
+      "numbers": [
+        "DP08-EN027"
+      ]
+    },
+    {
+      "passcode": 95360850,
+      "name": "Shield Warrior",
+      "numbers": [
+        "DP08-EN007"
+      ]
+    },
+    {
+      "passcode": 96182448,
+      "name": "Nitro Synchron",
+      "numbers": [
+        "DP08-EN004"
+      ]
+    },
+    {
+      "passcode": 98273947,
+      "name": "Graceful Revival",
+      "numbers": [
+        "DP08-EN022"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yusei'; printings from the YGOPRODeck bulk dump."
+}

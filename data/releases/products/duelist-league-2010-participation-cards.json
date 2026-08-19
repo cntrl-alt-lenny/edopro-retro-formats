@@ -1,0 +1,187 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-2010-participation-cards",
+  "code": "DL09",
+  "name": "Duelist League 2010 participation cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-08-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-06-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-06-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "DL09-EN017"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "DL09-EN014"
+      ]
+    },
+    {
+      "passcode": 23693634,
+      "name": "Colossal Fighter",
+      "numbers": [
+        "DL09-EN012"
+      ]
+    },
+    {
+      "passcode": 25773409,
+      "name": "Legendary Jujitsu Master",
+      "numbers": [
+        "DL09-EN008"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "DL09-EN020"
+      ]
+    },
+    {
+      "passcode": 39507162,
+      "name": "Blade Knight",
+      "numbers": [
+        "DL09-EN007"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "DL09-EN003"
+      ]
+    },
+    {
+      "passcode": 49003716,
+      "name": "Blackwing - Bora the Spear",
+      "numbers": [
+        "DL09-EN011"
+      ]
+    },
+    {
+      "passcode": 51945556,
+      "name": "Zaborg the Thunder Monarch",
+      "numbers": [
+        "DL09-EN009"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "DL09-EN018"
+      ]
+    },
+    {
+      "passcode": 59575539,
+      "name": "Krebons",
+      "numbers": [
+        "DL09-EN010"
+      ]
+    },
+    {
+      "passcode": 65240384,
+      "name": "Big Shield Gardna",
+      "numbers": [
+        "DL09-EN004"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "DL09-EN013"
+      ]
+    },
+    {
+      "passcode": 73915051,
+      "name": "Scapegoat",
+      "numbers": [
+        "DL09-EN015"
+      ]
+    },
+    {
+      "passcode": 81510157,
+      "name": "Soul Taker",
+      "numbers": [
+        "DL09-EN016"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "DL09-EN006"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DL09-EN001"
+      ]
+    },
+    {
+      "passcode": 93920745,
+      "name": "Penguin Soldier",
+      "numbers": [
+        "DL09-EN002"
+      ]
+    },
+    {
+      "passcode": 94192409,
+      "name": "Compulsory Evacuation Device",
+      "numbers": [
+        "DL09-EN019"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "DL09-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League 2010 participation cards'; printings from the YGOPRODeck bulk dump."
+}

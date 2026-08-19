@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-tag-force-2-promotional-cards",
+  "code": "GX04",
+  "name": "Yu-Gi-Oh! GX Tag Force 2 promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-09-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2007-12-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4923662,
+      "name": "Chaos Burst",
+      "numbers": [
+        "GX04-EN003"
+      ]
+    },
+    {
+      "passcode": 31034919,
+      "name": "Mad Reloader",
+      "numbers": [
+        "GX04-EN001"
+      ]
+    },
+    {
+      "passcode": 77538567,
+      "name": "Dark Bribe",
+      "numbers": [
+        "GX04-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Tag Force 2 promotional cards'; printings from the YGOPRODeck bulk dump."
+}

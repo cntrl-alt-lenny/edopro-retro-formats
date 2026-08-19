@@ -1,0 +1,748 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starstrike-blast",
+  "code": "STBL",
+  "name": "Starstrike Blast",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-11-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-11-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-11-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3846170,
+      "name": "Karakuri Soldier mdl 236 \"Nisamu\"",
+      "numbers": [
+        "STBL-EN019"
+      ]
+    },
+    {
+      "passcode": 4068622,
+      "name": "Blackwing - Aurora the Northern Lights",
+      "numbers": [
+        "STBL-EN016"
+      ]
+    },
+    {
+      "passcode": 4638410,
+      "name": "Tyrant's Temper",
+      "numbers": [
+        "STBL-EN079"
+      ]
+    },
+    {
+      "passcode": 5577649,
+      "name": "Scrap Crash",
+      "numbers": [
+        "STBL-EN073"
+      ]
+    },
+    {
+      "passcode": 5780210,
+      "name": "Creation Resonator",
+      "numbers": [
+        "STBL-EN013"
+      ]
+    },
+    {
+      "passcode": 5851097,
+      "name": "Vanity's Emptiness",
+      "numbers": [
+        "STBL-EN076"
+      ]
+    },
+    {
+      "passcode": 6799227,
+      "name": "Half Counter",
+      "numbers": [
+        "STBL-EN070"
+      ]
+    },
+    {
+      "passcode": 6903857,
+      "name": "Power Breaker",
+      "numbers": [
+        "STBL-EN010"
+      ]
+    },
+    {
+      "passcode": 7025445,
+      "name": "Power Giant",
+      "numbers": [
+        "STBL-EN007"
+      ]
+    },
+    {
+      "passcode": 7811875,
+      "name": "Gravity Collapse",
+      "numbers": [
+        "STBL-EN067"
+      ]
+    },
+    {
+      "passcode": 10691144,
+      "name": "Mirror of the Ice Barrier",
+      "numbers": [
+        "STBL-EN055"
+      ]
+    },
+    {
+      "passcode": 11813722,
+      "name": "Barkion's Bark",
+      "numbers": [
+        "STBL-EN052"
+      ]
+    },
+    {
+      "passcode": 17841097,
+      "name": "Needle Soldier",
+      "numbers": [
+        "STBL-EN004"
+      ]
+    },
+    {
+      "passcode": 18634367,
+      "name": "Red Screen",
+      "numbers": [
+        "STBL-EN064"
+      ]
+    },
+    {
+      "passcode": 18756904,
+      "name": "White Elephant's Gift",
+      "numbers": [
+        "STBL-EN062"
+      ]
+    },
+    {
+      "passcode": 18964575,
+      "name": "Swift Scarecrow",
+      "numbers": [
+        "STBL-EN001"
+      ]
+    },
+    {
+      "passcode": 19578592,
+      "name": "Axe of Fools",
+      "numbers": [
+        "STBL-EN058"
+      ]
+    },
+    {
+      "passcode": 20630765,
+      "name": "Spellstone Sorcerer Karood",
+      "numbers": [
+        "STBL-EN083"
+      ]
+    },
+    {
+      "passcode": 21113684,
+      "name": "Supreme Arcanite Magician",
+      "numbers": [
+        "STBL-EN038"
+      ]
+    },
+    {
+      "passcode": 21249921,
+      "name": "Dragunity Knight - Vajrayana",
+      "numbers": [
+        "STBL-EN097"
+      ]
+    },
+    {
+      "passcode": 22339232,
+      "name": "Wightmare",
+      "numbers": [
+        "STBL-EN035"
+      ]
+    },
+    {
+      "passcode": 22371016,
+      "name": "Ally of Justice Unknown Crusher",
+      "numbers": [
+        "STBL-EN094"
+      ]
+    },
+    {
+      "passcode": 22539270,
+      "name": "Scrap Lube",
+      "numbers": [
+        "STBL-EN049"
+      ]
+    },
+    {
+      "passcode": 22751868,
+      "name": "Karakuri Showdown Castle",
+      "numbers": [
+        "STBL-EN046"
+      ]
+    },
+    {
+      "passcode": 23051413,
+      "name": "Naturia Stag Beetle",
+      "numbers": [
+        "STBL-EN032"
+      ]
+    },
+    {
+      "passcode": 23274061,
+      "name": "Wattsquirrel",
+      "numbers": [
+        "STBL-EN029"
+      ]
+    },
+    {
+      "passcode": 23874409,
+      "name": "Karakuri Shogun mdl 00 \"Burei\"",
+      "numbers": [
+        "STBL-EN043"
+      ]
+    },
+    {
+      "passcode": 24696097,
+      "name": "Shooting Star Dragon",
+      "numbers": [
+        "STBL-EN040"
+      ]
+    },
+    {
+      "passcode": 24996659,
+      "name": "Wattkiwi",
+      "numbers": [
+        "STBL-EN026"
+      ]
+    },
+    {
+      "passcode": 29417188,
+      "name": "Psi-Blocker",
+      "numbers": [
+        "STBL-EN086"
+      ]
+    },
+    {
+      "passcode": 29795530,
+      "name": "Mischief of the Yokai",
+      "numbers": [
+        "STBL-EN089"
+      ]
+    },
+    {
+      "passcode": 30127518,
+      "name": "Darkfall",
+      "numbers": [
+        "STBL-EN080"
+      ]
+    },
+    {
+      "passcode": 30230789,
+      "name": "Karakuri Merchant mdl 177 \"Inashichi\"",
+      "numbers": [
+        "STBL-EN020"
+      ]
+    },
+    {
+      "passcode": 31053337,
+      "name": "Blackwing - Abrolhos the Megaquake",
+      "numbers": [
+        "STBL-EN017"
+      ]
+    },
+    {
+      "passcode": 31175914,
+      "name": "Attack Gainer",
+      "numbers": [
+        "STBL-EN014"
+      ]
+    },
+    {
+      "passcode": 31766317,
+      "name": "Archfiend Empress",
+      "numbers": [
+        "STBL-EN000"
+      ]
+    },
+    {
+      "passcode": 31849106,
+      "name": "Different Dimension Ground",
+      "numbers": [
+        "STBL-EN077"
+      ]
+    },
+    {
+      "passcode": 32061744,
+      "name": "Wattkeeper",
+      "numbers": [
+        "STBL-EN074"
+      ]
+    },
+    {
+      "passcode": 32391566,
+      "name": "Extra Veiler",
+      "numbers": [
+        "STBL-EN011"
+      ]
+    },
+    {
+      "passcode": 33184236,
+      "name": "Karakuri Trick House",
+      "numbers": [
+        "STBL-EN071"
+      ]
+    },
+    {
+      "passcode": 34116027,
+      "name": "Dragunity Knight - Gae Dearg",
+      "numbers": [
+        "STBL-EN098"
+      ]
+    },
+    {
+      "passcode": 39118197,
+      "name": "Karakuri Bushi mdl 6318 \"Muzanichiha\"",
+      "numbers": [
+        "STBL-EN023"
+      ]
+    },
+    {
+      "passcode": 43014054,
+      "name": "Vice Berserker",
+      "numbers": [
+        "STBL-EN008"
+      ]
+    },
+    {
+      "passcode": 43906884,
+      "name": "Blackwing - Boobytrap",
+      "numbers": [
+        "STBL-EN068"
+      ]
+    },
+    {
+      "passcode": 44028461,
+      "name": "Blackback",
+      "numbers": [
+        "STBL-EN065"
+      ]
+    },
+    {
+      "passcode": 44236692,
+      "name": "Necro Linker",
+      "numbers": [
+        "STBL-EN005"
+      ]
+    },
+    {
+      "passcode": 45141013,
+      "name": "Heat Wave",
+      "numbers": [
+        "STBL-EN061"
+      ]
+    },
+    {
+      "passcode": 45358284,
+      "name": "Mirror Ladybug",
+      "numbers": [
+        "STBL-EN002"
+      ]
+    },
+    {
+      "passcode": 45688586,
+      "name": "Karakuri Spider",
+      "numbers": [
+        "STBL-EN090"
+      ]
+    },
+    {
+      "passcode": 46089249,
+      "name": "Koa'ki Ring",
+      "numbers": [
+        "STBL-EN056"
+      ]
+    },
+    {
+      "passcode": 46967601,
+      "name": "Cursed Bill",
+      "numbers": [
+        "STBL-EN059"
+      ]
+    },
+    {
+      "passcode": 50091196,
+      "name": "Formula Synchron",
+      "numbers": [
+        "STBL-EN041"
+      ]
+    },
+    {
+      "passcode": 50278554,
+      "name": "Scrap Twin Dragon",
+      "numbers": [
+        "STBL-EN044"
+      ]
+    },
+    {
+      "passcode": 57201737,
+      "name": "Leodrake's Mane",
+      "numbers": [
+        "STBL-EN053"
+      ]
+    },
+    {
+      "passcode": 58324930,
+      "name": "Anarchist Monk Ranshin",
+      "numbers": [
+        "STBL-EN036"
+      ]
+    },
+    {
+      "passcode": 58601383,
+      "name": "Gaia Drake, the Universal Force",
+      "numbers": [
+        "STBL-EN039"
+      ]
+    },
+    {
+      "passcode": 58924378,
+      "name": "Wattcastle",
+      "numbers": [
+        "STBL-EN050"
+      ]
+    },
+    {
+      "passcode": 59156966,
+      "name": "Golden Gearbox",
+      "numbers": [
+        "STBL-EN047"
+      ]
+    },
+    {
+      "passcode": 59482302,
+      "name": "Ally Salvo",
+      "numbers": [
+        "STBL-EN092"
+      ]
+    },
+    {
+      "passcode": 59546528,
+      "name": "Dance Princess of the Ice Barrier",
+      "numbers": [
+        "STBL-EN033"
+      ]
+    },
+    {
+      "passcode": 60668166,
+      "name": "Naturia Cherries",
+      "numbers": [
+        "STBL-EN030"
+      ]
+    },
+    {
+      "passcode": 61380658,
+      "name": "Watthopper",
+      "numbers": [
+        "STBL-EN027"
+      ]
+    },
+    {
+      "passcode": 65503206,
+      "name": "Scrap Soldier",
+      "numbers": [
+        "STBL-EN024"
+      ]
+    },
+    {
+      "passcode": 66165755,
+      "name": "Genex Ally Axel",
+      "numbers": [
+        "STBL-EN099"
+      ]
+    },
+    {
+      "passcode": 66625883,
+      "name": "Karakuri Strategist mdl 248 \"Nishipachi\"",
+      "numbers": [
+        "STBL-EN021"
+      ]
+    },
+    {
+      "passcode": 66661678,
+      "name": "Royal Knight of the Ice Barrier",
+      "numbers": [
+        "STBL-EN091"
+      ]
+    },
+    {
+      "passcode": 66816282,
+      "name": "Koa'ki Meiru Wall",
+      "numbers": [
+        "STBL-EN087"
+      ]
+    },
+    {
+      "passcode": 67038874,
+      "name": "Scrap Mind Reader",
+      "numbers": [
+        "STBL-EN084"
+      ]
+    },
+    {
+      "passcode": 67234805,
+      "name": "Powersink Stone",
+      "numbers": [
+        "STBL-EN078"
+      ]
+    },
+    {
+      "passcode": 67441435,
+      "name": "Glow-Up Bulb",
+      "numbers": [
+        "STBL-EN018"
+      ]
+    },
+    {
+      "passcode": 67750322,
+      "name": "Skull Meister",
+      "numbers": [
+        "STBL-EN081"
+      ]
+    },
+    {
+      "passcode": 68450517,
+      "name": "Genex Ally Duradark",
+      "numbers": [
+        "STBL-EN095"
+      ]
+    },
+    {
+      "passcode": 68456353,
+      "name": "Exterio's Fang",
+      "numbers": [
+        "STBL-EN075"
+      ]
+    },
+    {
+      "passcode": 70391588,
+      "name": "Star Siphon",
+      "numbers": [
+        "STBL-EN069"
+      ]
+    },
+    {
+      "passcode": 70630741,
+      "name": "Rescue Warrior",
+      "numbers": [
+        "STBL-EN006"
+      ]
+    },
+    {
+      "passcode": 71249758,
+      "name": "D2 Shield",
+      "numbers": [
+        "STBL-EN063"
+      ]
+    },
+    {
+      "passcode": 71353388,
+      "name": "Reed Butterfly",
+      "numbers": [
+        "STBL-EN003"
+      ]
+    },
+    {
+      "passcode": 71417170,
+      "name": "Defenders Intersect",
+      "numbers": [
+        "STBL-EN066"
+      ]
+    },
+    {
+      "passcode": 78564023,
+      "name": "Blackwing - Etesian of Two Swords",
+      "numbers": [
+        "STBL-EN015"
+      ]
+    },
+    {
+      "passcode": 79178930,
+      "name": "Karakuri Klock",
+      "numbers": [
+        "STBL-EN072"
+      ]
+    },
+    {
+      "passcode": 79418153,
+      "name": "Lancer Archfiend",
+      "numbers": [
+        "STBL-EN009"
+      ]
+    },
+    {
+      "passcode": 79796561,
+      "name": "Synchro Soldier",
+      "numbers": [
+        "STBL-EN012"
+      ]
+    },
+    {
+      "passcode": 82361206,
+      "name": "Tokkosho of Ghost Destroying",
+      "numbers": [
+        "STBL-EN060"
+      ]
+    },
+    {
+      "passcode": 83584898,
+      "name": "Darkworld Shackles",
+      "numbers": [
+        "STBL-EN057"
+      ]
+    },
+    {
+      "passcode": 84206435,
+      "name": "Medallion of the Ice Barrier",
+      "numbers": [
+        "STBL-EN054"
+      ]
+    },
+    {
+      "passcode": 84428023,
+      "name": "Wattjustment",
+      "numbers": [
+        "STBL-EN051"
+      ]
+    },
+    {
+      "passcode": 85541675,
+      "name": "Karakuri Anatomy",
+      "numbers": [
+        "STBL-EN048"
+      ]
+    },
+    {
+      "passcode": 85718645,
+      "name": "Delg the Dark Monarch",
+      "numbers": [
+        "STBL-EN037"
+      ]
+    },
+    {
+      "passcode": 85876417,
+      "name": "Ally of Justice Thousand Arms",
+      "numbers": [
+        "STBL-EN093"
+      ]
+    },
+    {
+      "passcode": 92300891,
+      "name": "Karakuri Barrel mdl 96 \"Shinkuro\"",
+      "numbers": [
+        "STBL-EN088"
+      ]
+    },
+    {
+      "passcode": 92901944,
+      "name": "Scrap Searcher",
+      "numbers": [
+        "STBL-EN025"
+      ]
+    },
+    {
+      "passcode": 93023479,
+      "name": "Gravekeeper's Recruiter",
+      "numbers": [
+        "STBL-EN085"
+      ]
+    },
+    {
+      "passcode": 93724592,
+      "name": "Karakuri Ninja mdl 339 \"Sazank\"",
+      "numbers": [
+        "STBL-EN022"
+      ]
+    },
+    {
+      "passcode": 94145021,
+      "name": "Droll & Lock Bird",
+      "numbers": [
+        "STBL-EN082"
+      ]
+    },
+    {
+      "passcode": 94845226,
+      "name": "The Fabled Rubyruda",
+      "numbers": [
+        "STBL-EN096"
+      ]
+    },
+    {
+      "passcode": 96363153,
+      "name": "Tuning",
+      "numbers": [
+        "STBL-EN045"
+      ]
+    },
+    {
+      "passcode": 96653775,
+      "name": "Naturia Pumpkin",
+      "numbers": [
+        "STBL-EN031"
+      ]
+    },
+    {
+      "passcode": 96930127,
+      "name": "Chain Dog",
+      "numbers": [
+        "STBL-EN034"
+      ]
+    },
+    {
+      "passcode": 97489701,
+      "name": "Red Nova Dragon",
+      "numbers": [
+        "STBL-EN042"
+      ]
+    },
+    {
+      "passcode": 97885363,
+      "name": "Wattdragonfly",
+      "numbers": [
+        "STBL-EN028"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starstrike Blast'; printings from the YGOPRODeck bulk dump."
+}

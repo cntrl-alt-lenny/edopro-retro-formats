@@ -1,0 +1,146 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-preview-wave-2",
+  "code": "DTP1",
+  "name": "Duel Terminal - Preview Wave 2",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-06-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7093411,
+      "name": "Crystal Beast Sapphire Pegasus",
+      "numbers": [
+        "DTP1-EN028"
+      ]
+    },
+    {
+      "passcode": 7391448,
+      "name": "Goyo Guardian",
+      "numbers": [
+        "DTP1-EN030"
+      ]
+    },
+    {
+      "passcode": 16589042,
+      "name": "Swift Gaia the Fierce Knight",
+      "numbers": [
+        "DTP1-EN026"
+      ]
+    },
+    {
+      "passcode": 17655904,
+      "name": "Burst Stream of Destruction",
+      "numbers": [
+        "DTP1-EN013"
+      ]
+    },
+    {
+      "passcode": 18013090,
+      "name": "Nitro Warrior",
+      "numbers": [
+        "DTP1-EN029"
+      ]
+    },
+    {
+      "passcode": 25247218,
+      "name": "Big Piece Golem",
+      "numbers": [
+        "DTP1-EN023"
+      ]
+    },
+    {
+      "passcode": 26593852,
+      "name": "Ally of Justice Catastor",
+      "numbers": [
+        "DTP1-EN031"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "DTP1-EN002"
+      ]
+    },
+    {
+      "passcode": 52684508,
+      "name": "Inferno Fire Blast",
+      "numbers": [
+        "DTP1-EN015"
+      ]
+    },
+    {
+      "passcode": 59965151,
+      "name": "Ghost Gardna",
+      "numbers": [
+        "DTP1-EN022"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "DTP1-EN009"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "DTP1-EN001"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "DTP1-EN005"
+      ]
+    },
+    {
+      "passcode": 91932350,
+      "name": "Harpie Lady 1",
+      "numbers": [
+        "DTP1-EN027"
+      ]
+    },
+    {
+      "passcode": 96182448,
+      "name": "Nitro Synchron",
+      "numbers": [
+        "DTP1-EN021"
+      ]
+    },
+    {
+      "passcode": 97021916,
+      "name": "Dark Resonator",
+      "numbers": [
+        "DTP1-EN024"
+      ]
+    },
+    {
+      "passcode": 97904474,
+      "name": "Handcuffs Dragon",
+      "numbers": [
+        "DTP1-EN025"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal - Preview Wave 2'; printings from the YGOPRODeck bulk dump."
+}

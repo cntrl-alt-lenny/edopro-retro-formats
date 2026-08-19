@@ -1,0 +1,885 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "dark-crisis",
+  "code": "DCR",
+  "name": "Dark Crisis",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2003-12-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2007-12-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 425934,
+      "name": "Goblin of Greed",
+      "numbers": [
+        "DCR-065",
+        "DCR-EN065"
+      ]
+    },
+    {
+      "passcode": 2851070,
+      "name": "Reflect Bounder",
+      "numbers": [
+        "DCR-012",
+        "DCR-EN012"
+      ]
+    },
+    {
+      "passcode": 6850209,
+      "name": "A Deal with Dark Ruler",
+      "numbers": [
+        "DCR-030",
+        "DCR-EN030"
+      ]
+    },
+    {
+      "passcode": 7369217,
+      "name": "Metallizing Parasite - Lunatite",
+      "numbers": [
+        "DCR-074",
+        "DCR-EN074"
+      ]
+    },
+    {
+      "passcode": 7572887,
+      "name": "D.D. Warrior Lady",
+      "numbers": [
+        "DCR-027",
+        "DCR-EN027"
+      ]
+    },
+    {
+      "passcode": 8581705,
+      "name": "Infernalqueen Archfiend",
+      "numbers": [
+        "DCR-071",
+        "DCR-EN071"
+      ]
+    },
+    {
+      "passcode": 8794435,
+      "name": "Maju Garzett",
+      "numbers": [
+        "DCR-024",
+        "DCR-EN024"
+      ]
+    },
+    {
+      "passcode": 9603356,
+      "name": "Shadowknight Archfiend",
+      "numbers": [
+        "DCR-068",
+        "DCR-EN068"
+      ]
+    },
+    {
+      "passcode": 9633505,
+      "name": "Guardian Kay'est",
+      "numbers": [
+        "DCR-009",
+        "DCR-EN009"
+      ]
+    },
+    {
+      "passcode": 9817927,
+      "name": "Gyaku-Gire Panda",
+      "numbers": [
+        "DCR-021",
+        "DCR-EN021"
+      ]
+    },
+    {
+      "passcode": 10755153,
+      "name": "Guardian Ceal",
+      "numbers": [
+        "DCR-006",
+        "DCR-EN006"
+      ]
+    },
+    {
+      "passcode": 11548522,
+      "name": "Outstanding Dog Marron",
+      "numbers": [
+        "DCR-062",
+        "DCR-EN062"
+      ]
+    },
+    {
+      "passcode": 11760174,
+      "name": "Sasuke Samurai #2",
+      "numbers": [
+        "DCR-059",
+        "DCR-EN059"
+      ]
+    },
+    {
+      "passcode": 11987744,
+      "name": "Nin-Ken Dog",
+      "numbers": [
+        "DCR-002",
+        "DCR-EN002"
+      ]
+    },
+    {
+      "passcode": 12482652,
+      "name": "Ojama Green",
+      "numbers": [
+        "DCR-056",
+        "DCR-EN056"
+      ]
+    },
+    {
+      "passcode": 12600382,
+      "name": "Exodia Necross",
+      "numbers": [
+        "DCR-020",
+        "DCR-EN020"
+      ]
+    },
+    {
+      "passcode": 13722870,
+      "name": "Dark Flare Knight",
+      "numbers": [
+        "DCR-017",
+        "DCR-EN017"
+      ]
+    },
+    {
+      "passcode": 16135253,
+      "name": "Agido",
+      "numbers": [
+        "DCR-080",
+        "DCR-EN080"
+      ]
+    },
+    {
+      "passcode": 16268841,
+      "name": "Zolga",
+      "numbers": [
+        "DCR-079",
+        "DCR-EN079"
+      ]
+    },
+    {
+      "passcode": 16435215,
+      "name": "Dragged Down into the Grave",
+      "numbers": [
+        "DCR-084",
+        "DCR-EN084"
+      ]
+    },
+    {
+      "passcode": 20065549,
+      "name": "Non-Spellcasting Area",
+      "numbers": [
+        "DCR-043",
+        "DCR-EN043"
+      ]
+    },
+    {
+      "passcode": 20188127,
+      "name": "Fairy of the Spring",
+      "numbers": [
+        "DCR-040",
+        "DCR-EN040"
+      ]
+    },
+    {
+      "passcode": 20858318,
+      "name": "Dark Scorpion Combination",
+      "numbers": [
+        "DCR-098",
+        "DCR-EN098"
+      ]
+    },
+    {
+      "passcode": 21070956,
+      "name": "Altar for Tribute",
+      "numbers": [
+        "DCR-095",
+        "DCR-EN095"
+      ]
+    },
+    {
+      "passcode": 21900719,
+      "name": "Twin Swords of Flashing Light - Tryce",
+      "numbers": [
+        "DCR-037",
+        "DCR-EN037"
+      ]
+    },
+    {
+      "passcode": 22796548,
+      "name": "Archfiend's Oath",
+      "numbers": [
+        "DCR-092",
+        "DCR-EN092"
+      ]
+    },
+    {
+      "passcode": 23265313,
+      "name": "Cost Down",
+      "numbers": [
+        "DCR-053",
+        "DCR-EN053"
+      ]
+    },
+    {
+      "passcode": 28106077,
+      "name": "Cestus of Dagla",
+      "numbers": [
+        "DCR-090",
+        "DCR-EN090"
+      ]
+    },
+    {
+      "passcode": 28121403,
+      "name": "Really Eternal Rest",
+      "numbers": [
+        "DCR-050",
+        "DCR-EN050"
+      ]
+    },
+    {
+      "passcode": 29228529,
+      "name": "Spell Reproduction",
+      "numbers": [
+        "DCR-083",
+        "DCR-EN083"
+      ]
+    },
+    {
+      "passcode": 29735721,
+      "name": "Spell Vanishing",
+      "numbers": [
+        "DCR-101",
+        "DCR-EN101"
+      ]
+    },
+    {
+      "passcode": 29843091,
+      "name": "Ojama Trio",
+      "numbers": [
+        "DCR-047",
+        "DCR-EN047"
+      ]
+    },
+    {
+      "passcode": 32022366,
+      "name": "Gravity Axe - Grarl",
+      "numbers": [
+        "DCR-034",
+        "DCR-EN034"
+      ]
+    },
+    {
+      "passcode": 32919136,
+      "name": "Falling Down",
+      "numbers": [
+        "DCR-088",
+        "DCR-EN088"
+      ]
+    },
+    {
+      "passcode": 33031674,
+      "name": "Incandescent Ordeal",
+      "numbers": [
+        "DCR-085",
+        "DCR-EN085"
+      ]
+    },
+    {
+      "passcode": 33244944,
+      "name": "Contract with Exodia",
+      "numbers": [
+        "DCR-031",
+        "DCR-EN031"
+      ]
+    },
+    {
+      "passcode": 33977496,
+      "name": "Thousand Needles",
+      "numbers": [
+        "DCR-028",
+        "DCR-EN028"
+      ]
+    },
+    {
+      "passcode": 34193084,
+      "name": "Fear from the Dark",
+      "numbers": [
+        "DCR-025",
+        "DCR-EN025"
+      ]
+    },
+    {
+      "passcode": 34853266,
+      "name": "Tsukuyomi",
+      "numbers": [
+        "DCR-075",
+        "DCR-EN075"
+      ]
+    },
+    {
+      "passcode": 35215622,
+      "name": "Blindly Loyal Goblin",
+      "numbers": [
+        "DCR-022",
+        "DCR-EN022"
+      ]
+    },
+    {
+      "passcode": 35798491,
+      "name": "Darkbishop Archfiend",
+      "numbers": [
+        "DCR-069",
+        "DCR-EN069"
+      ]
+    },
+    {
+      "passcode": 35975813,
+      "name": "Terrorking Archfiend",
+      "numbers": [
+        "DCR-072",
+        "DCR-EN072"
+      ]
+    },
+    {
+      "passcode": 36261276,
+      "name": "Interdimensional Matter Transporter",
+      "numbers": [
+        "DCR-052",
+        "DCR-EN052"
+      ]
+    },
+    {
+      "passcode": 39978267,
+      "name": "Cyber Raider",
+      "numbers": [
+        "DCR-011",
+        "DCR-EN011"
+      ]
+    },
+    {
+      "passcode": 46037213,
+      "name": "Guardian Tryce",
+      "numbers": [
+        "DCR-010",
+        "DCR-EN010"
+      ]
+    },
+    {
+      "passcode": 46820049,
+      "name": "Mefist the Infernal General",
+      "numbers": [
+        "DCR-066",
+        "DCR-EN066"
+      ]
+    },
+    {
+      "passcode": 47150851,
+      "name": "Guardian Grarl",
+      "numbers": [
+        "DCR-007",
+        "DCR-EN007"
+      ]
+    },
+    {
+      "passcode": 47372349,
+      "name": "Acrobat Monkey",
+      "numbers": [
+        "DCR-003",
+        "DCR-EN003"
+      ]
+    },
+    {
+      "passcode": 47942531,
+      "name": "Great Maju Garzett",
+      "numbers": [
+        "DCR-063",
+        "DCR-EN063"
+      ]
+    },
+    {
+      "passcode": 48094997,
+      "name": "Battle Footballer",
+      "numbers": [
+        "DCR-001",
+        "DCR-EN001"
+      ]
+    },
+    {
+      "passcode": 48768179,
+      "name": "Dark Scorpion - Gorg the Strong",
+      "numbers": [
+        "DCR-060",
+        "DCR-EN060"
+      ]
+    },
+    {
+      "passcode": 49003308,
+      "name": "Gagagigo",
+      "numbers": [
+        "DCR-054",
+        "DCR-EN054"
+      ]
+    },
+    {
+      "passcode": 49217579,
+      "name": "Mirage Knight",
+      "numbers": [
+        "DCR-018",
+        "DCR-EN018"
+      ]
+    },
+    {
+      "passcode": 49881766,
+      "name": "Archfiend Soldier",
+      "numbers": [
+        "DCR-057",
+        "DCR-EN057"
+      ]
+    },
+    {
+      "passcode": 50939127,
+      "name": "Different Dimension Dragon",
+      "numbers": [
+        "DCR-015",
+        "DCR-EN015"
+      ]
+    },
+    {
+      "passcode": 52503575,
+      "name": "Final Attack Orders",
+      "numbers": [
+        "DCR-045",
+        "DCR-EN045"
+      ]
+    },
+    {
+      "passcode": 52824910,
+      "name": "Kaiser Glider",
+      "numbers": [
+        "DCR-051",
+        "DCR-EN051"
+      ]
+    },
+    {
+      "passcode": 53839837,
+      "name": "Vampire Lord",
+      "numbers": [
+        "DCR-000",
+        "DCR-EN000"
+      ]
+    },
+    {
+      "passcode": 54878498,
+      "name": "Kelbek",
+      "numbers": [
+        "DCR-078",
+        "DCR-EN078"
+      ]
+    },
+    {
+      "passcode": 55256016,
+      "name": "Judgment of Anubis",
+      "numbers": [
+        "DCR-105",
+        "DCR-EN105"
+      ]
+    },
+    {
+      "passcode": 55348096,
+      "name": "Arsenal Robber",
+      "numbers": [
+        "DCR-048",
+        "DCR-EN048"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "DCR-102",
+        "DCR-EN102"
+      ]
+    },
+    {
+      "passcode": 56246017,
+      "name": "Archfiend's Roar",
+      "numbers": [
+        "DCR-099",
+        "DCR-EN099"
+      ]
+    },
+    {
+      "passcode": 56460688,
+      "name": "Different Dimension Gate",
+      "numbers": [
+        "DCR-044",
+        "DCR-EN044"
+      ]
+    },
+    {
+      "passcode": 57069605,
+      "name": "Frozen Soul",
+      "numbers": [
+        "DCR-096",
+        "DCR-EN096"
+      ]
+    },
+    {
+      "passcode": 57182235,
+      "name": "Token Thanksgiving",
+      "numbers": [
+        "DCR-041",
+        "DCR-EN041"
+      ]
+    },
+    {
+      "passcode": 60258960,
+      "name": "Legendary Flame Lord",
+      "numbers": [
+        "DCR-081",
+        "DCR-EN081"
+      ]
+    },
+    {
+      "passcode": 60365591,
+      "name": "Shinato's Ark",
+      "numbers": [
+        "DCR-029",
+        "DCR-EN029"
+      ]
+    },
+    {
+      "passcode": 61370518,
+      "name": "Skull Archfiend of Lightning",
+      "numbers": [
+        "DCR-073",
+        "DCR-EN073"
+      ]
+    },
+    {
+      "passcode": 61587183,
+      "name": "Dark Scorpion - Chick the Yellow",
+      "numbers": [
+        "DCR-026",
+        "DCR-EN026"
+      ]
+    },
+    {
+      "passcode": 68191243,
+      "name": "Mustering of the Dark Scorpions",
+      "numbers": [
+        "DCR-093",
+        "DCR-EN093"
+      ]
+    },
+    {
+      "passcode": 68304813,
+      "name": "Precious Cards from Beyond",
+      "numbers": [
+        "DCR-038",
+        "DCR-EN038"
+      ]
+    },
+    {
+      "passcode": 68427465,
+      "name": "Wicked-Breaking Flamberge - Baou",
+      "numbers": [
+        "DCR-035",
+        "DCR-EN035"
+      ]
+    },
+    {
+      "passcode": 69035382,
+      "name": "Contract with the Abyss",
+      "numbers": [
+        "DCR-086",
+        "DCR-EN086"
+      ]
+    },
+    {
+      "passcode": 69243953,
+      "name": "Butterfly Dagger - Elma",
+      "numbers": [
+        "DCR-032",
+        "DCR-EN032"
+      ]
+    },
+    {
+      "passcode": 69313735,
+      "name": "Checkmate",
+      "numbers": [
+        "DCR-089",
+        "DCR-EN089"
+      ]
+    },
+    {
+      "passcode": 71200730,
+      "name": "Despair from the Dark",
+      "numbers": [
+        "DCR-023",
+        "DCR-EN023"
+      ]
+    },
+    {
+      "passcode": 72192100,
+      "name": "Desrook Archfiend",
+      "numbers": [
+        "DCR-070",
+        "DCR-EN070"
+      ]
+    },
+    {
+      "passcode": 73219648,
+      "name": "Vilepawn Archfiend",
+      "numbers": [
+        "DCR-067",
+        "DCR-EN067"
+      ]
+    },
+    {
+      "passcode": 73431236,
+      "name": "Iron Blacksmith Kotetsu",
+      "numbers": [
+        "DCR-064",
+        "DCR-EN064"
+      ]
+    },
+    {
+      "passcode": 73544866,
+      "name": "Guardian Baou",
+      "numbers": [
+        "DCR-008",
+        "DCR-EN008"
+      ]
+    },
+    {
+      "passcode": 74153887,
+      "name": "Dark Scorpion - Meanae the Thorn",
+      "numbers": [
+        "DCR-061",
+        "DCR-EN061"
+      ]
+    },
+    {
+      "passcode": 74367458,
+      "name": "Guardian Elma",
+      "numbers": [
+        "DCR-005",
+        "DCR-EN005"
+      ]
+    },
+    {
+      "passcode": 75375465,
+      "name": "Pandemonium Watchbear",
+      "numbers": [
+        "DCR-058",
+        "DCR-EN058"
+      ]
+    },
+    {
+      "passcode": 80441106,
+      "name": "Keldo",
+      "numbers": [
+        "DCR-077",
+        "DCR-EN077"
+      ]
+    },
+    {
+      "passcode": 81985784,
+      "name": "Des Feral Imp",
+      "numbers": [
+        "DCR-014",
+        "DCR-EN014"
+      ]
+    },
+    {
+      "passcode": 82108372,
+      "name": "Mudora",
+      "numbers": [
+        "DCR-076",
+        "DCR-EN076"
+      ]
+    },
+    {
+      "passcode": 82529174,
+      "name": "Ray of Hope",
+      "numbers": [
+        "DCR-103",
+        "DCR-EN103"
+      ]
+    },
+    {
+      "passcode": 82732705,
+      "name": "Skill Drain",
+      "numbers": [
+        "DCR-049",
+        "DCR-EN049"
+      ]
+    },
+    {
+      "passcode": 83241722,
+      "name": "Dice Re-Roll",
+      "numbers": [
+        "DCR-100",
+        "DCR-EN100"
+      ]
+    },
+    {
+      "passcode": 85489096,
+      "name": "Arsenal Summoner",
+      "numbers": [
+        "DCR-004",
+        "DCR-EN004"
+      ]
+    },
+    {
+      "passcode": 85605684,
+      "name": "Berserk Dragon",
+      "numbers": [
+        "DCR-019",
+        "DCR-EN019"
+      ]
+    },
+    {
+      "passcode": 86327225,
+      "name": "Shinato, King of a Higher Plane",
+      "numbers": [
+        "DCR-016",
+        "DCR-EN016"
+      ]
+    },
+    {
+      "passcode": 86498013,
+      "name": "D.D. Trainer",
+      "numbers": [
+        "DCR-055",
+        "DCR-EN055"
+      ]
+    },
+    {
+      "passcode": 89041555,
+      "name": "Blast Held by a Tribute",
+      "numbers": [
+        "DCR-104",
+        "DCR-EN104"
+      ]
+    },
+    {
+      "passcode": 90790253,
+      "name": "Little-Winguard",
+      "numbers": [
+        "DCR-013",
+        "DCR-EN013"
+      ]
+    },
+    {
+      "passcode": 92854392,
+      "name": "Staunch Defender",
+      "numbers": [
+        "DCR-046",
+        "DCR-EN046"
+      ]
+    },
+    {
+      "passcode": 93671934,
+      "name": "Morale Boost",
+      "numbers": [
+        "DCR-042",
+        "DCR-EN042"
+      ]
+    },
+    {
+      "passcode": 94463200,
+      "name": "Battle-Scarred",
+      "numbers": [
+        "DCR-097",
+        "DCR-EN097"
+      ]
+    },
+    {
+      "passcode": 94585852,
+      "name": "Pandemonium",
+      "numbers": [
+        "DCR-094",
+        "DCR-EN094"
+      ]
+    },
+    {
+      "passcode": 94793422,
+      "name": "Rod of the Mind's Eye",
+      "numbers": [
+        "DCR-039",
+        "DCR-EN039"
+      ]
+    },
+    {
+      "passcode": 95308449,
+      "name": "Final Countdown",
+      "numbers": [
+        "DCR-091",
+        "DCR-EN091"
+      ]
+    },
+    {
+      "passcode": 95515060,
+      "name": "Rod of Silence - Kay'est",
+      "numbers": [
+        "DCR-036",
+        "DCR-EN036"
+      ]
+    },
+    {
+      "passcode": 95638658,
+      "name": "Shooting Star Bow - Ceal",
+      "numbers": [
+        "DCR-033",
+        "DCR-EN033"
+      ]
+    },
+    {
+      "passcode": 96420087,
+      "name": "Contract with the Dark Master",
+      "numbers": [
+        "DCR-087",
+        "DCR-EN087"
+      ]
+    },
+    {
+      "passcode": 97642679,
+      "name": "Dark Master - Zorc",
+      "numbers": [
+        "DCR-082",
+        "DCR-EN082"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Dark Crisis'; printings from the YGOPRODeck bulk dump."
+}

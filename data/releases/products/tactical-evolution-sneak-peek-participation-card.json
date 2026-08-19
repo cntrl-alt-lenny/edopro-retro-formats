@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "tactical-evolution-sneak-peek-participation-card",
+  "code": "TAEV",
+  "name": "Tactical Evolution Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-08-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 19041767,
+      "name": "Gemini Summoner",
+      "numbers": [
+        "TAEV-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Tactical Evolution Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-demo-2010",
+  "code": "DLDI",
+  "name": "Duelist League Demo 2010",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2009-08-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "DLDI-EN002"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "DLDI-EN003"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "DLDI-EN001"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "DLDI-EN005"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "DLDI-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League Demo 2010'; printings from the YGOPRODeck bulk dump."
+}

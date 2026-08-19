@@ -1,0 +1,258 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-yusei-2",
+  "code": "DP09",
+  "name": "Duelist Pack: Yusei 2",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-01-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-01-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-01-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2295440,
+      "name": "One for One",
+      "numbers": [
+        "DP09-EN018"
+      ]
+    },
+    {
+      "passcode": 2322421,
+      "name": "Road Warrior",
+      "numbers": [
+        "DP09-EN015"
+      ]
+    },
+    {
+      "passcode": 5609226,
+      "name": "Tuner's Barrier",
+      "numbers": [
+        "DP09-EN030"
+      ]
+    },
+    {
+      "passcode": 10118318,
+      "name": "Reinforce Truth",
+      "numbers": [
+        "DP09-EN027"
+      ]
+    },
+    {
+      "passcode": 14943837,
+      "name": "Debris Dragon",
+      "numbers": [
+        "DP09-EN004"
+      ]
+    },
+    {
+      "passcode": 16674846,
+      "name": "Spirit Force",
+      "numbers": [
+        "DP09-EN023"
+      ]
+    },
+    {
+      "passcode": 16825874,
+      "name": "Eccentric Boy",
+      "numbers": [
+        "DP09-EN014"
+      ]
+    },
+    {
+      "passcode": 20932152,
+      "name": "Quickdraw Synchron",
+      "numbers": [
+        "DP09-EN010"
+      ]
+    },
+    {
+      "passcode": 21159309,
+      "name": "Majestic Dragon",
+      "numbers": [
+        "DP09-EN008"
+      ]
+    },
+    {
+      "passcode": 25231813,
+      "name": "Silver Wing",
+      "numbers": [
+        "DP09-EN020"
+      ]
+    },
+    {
+      "passcode": 40348946,
+      "name": "Hyper Synchron",
+      "numbers": [
+        "DP09-EN005"
+      ]
+    },
+    {
+      "passcode": 42079445,
+      "name": "Descending Lost Star",
+      "numbers": [
+        "DP09-EN024"
+      ]
+    },
+    {
+      "passcode": 42810973,
+      "name": "Junk Archer",
+      "numbers": [
+        "DP09-EN016"
+      ]
+    },
+    {
+      "passcode": 51630558,
+      "name": "Advance Draw",
+      "numbers": [
+        "DP09-EN021"
+      ]
+    },
+    {
+      "passcode": 51987571,
+      "name": "Rockstone Warrior",
+      "numbers": [
+        "DP09-EN006"
+      ]
+    },
+    {
+      "passcode": 57421866,
+      "name": "Level Eater",
+      "numbers": [
+        "DP09-EN011"
+      ]
+    },
+    {
+      "passcode": 61257789,
+      "name": "Stardust Dragon/Assault Mode",
+      "numbers": [
+        "DP09-EN001"
+      ]
+    },
+    {
+      "passcode": 71971554,
+      "name": "Road Synchron",
+      "numbers": [
+        "DP09-EN002"
+      ]
+    },
+    {
+      "passcode": 73729209,
+      "name": "Skill Successor",
+      "numbers": [
+        "DP09-EN026"
+      ]
+    },
+    {
+      "passcode": 79205581,
+      "name": "Scrubbed Raid",
+      "numbers": [
+        "DP09-EN029"
+      ]
+    },
+    {
+      "passcode": 79337169,
+      "name": "Gauntlet Warrior",
+      "numbers": [
+        "DP09-EN013"
+      ]
+    },
+    {
+      "passcode": 80280737,
+      "name": "Assault Mode Activate",
+      "numbers": [
+        "DP09-EN022"
+      ]
+    },
+    {
+      "passcode": 88559132,
+      "name": "Turret Warrior",
+      "numbers": [
+        "DP09-EN003"
+      ]
+    },
+    {
+      "passcode": 93816465,
+      "name": "Zero Gardna",
+      "numbers": [
+        "DP09-EN012"
+      ]
+    },
+    {
+      "passcode": 94303232,
+      "name": "Prevention Star",
+      "numbers": [
+        "DP09-EN017"
+      ]
+    },
+    {
+      "passcode": 94484482,
+      "name": "Slip Summon",
+      "numbers": [
+        "DP09-EN028"
+      ]
+    },
+    {
+      "passcode": 94538053,
+      "name": "Max Warrior",
+      "numbers": [
+        "DP09-EN009"
+      ]
+    },
+    {
+      "passcode": 97168905,
+      "name": "Miracle Locus",
+      "numbers": [
+        "DP09-EN025"
+      ]
+    },
+    {
+      "passcode": 97385276,
+      "name": "Level Warrior",
+      "numbers": [
+        "DP09-EN007"
+      ]
+    },
+    {
+      "passcode": 98847704,
+      "name": "Release Restraint Wave",
+      "numbers": [
+        "DP09-EN019"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yusei 2'; printings from the YGOPRODeck bulk dump."
+}

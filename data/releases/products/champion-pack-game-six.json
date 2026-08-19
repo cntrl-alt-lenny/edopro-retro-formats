@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-six",
+  "code": "CP06",
+  "name": "Champion Pack: Game Six",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-05-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 303660,
+      "name": "Amplifier",
+      "numbers": [
+        "CP06-EN017"
+      ]
+    },
+    {
+      "passcode": 20529766,
+      "name": "Super-Electromagnetic Voltech Dragon",
+      "numbers": [
+        "CP06-EN008"
+      ]
+    },
+    {
+      "passcode": 39180960,
+      "name": "Rigorous Reaver",
+      "numbers": [
+        "CP06-EN001"
+      ]
+    },
+    {
+      "passcode": 39507162,
+      "name": "Blade Knight",
+      "numbers": [
+        "CP06-EN007"
+      ]
+    },
+    {
+      "passcode": 40044918,
+      "name": "Elemental HERO Stratos",
+      "numbers": [
+        "CP06-EN009"
+      ]
+    },
+    {
+      "passcode": 45141844,
+      "name": "Old Vindictive Magician",
+      "numbers": [
+        "CP06-EN003"
+      ]
+    },
+    {
+      "passcode": 51838385,
+      "name": "Theban Nightmare",
+      "numbers": [
+        "CP06-EN014"
+      ]
+    },
+    {
+      "passcode": 60682203,
+      "name": "Cold Wave",
+      "numbers": [
+        "CP06-EN018"
+      ]
+    },
+    {
+      "passcode": 63142001,
+      "name": "Batteryman AA",
+      "numbers": [
+        "CP06-EN013"
+      ]
+    },
+    {
+      "passcode": 63356631,
+      "name": "Phoenix Wing Wind Blast",
+      "numbers": [
+        "CP06-EN004"
+      ]
+    },
+    {
+      "passcode": 67095270,
+      "name": "Dimension Wall",
+      "numbers": [
+        "CP06-EN020"
+      ]
+    },
+    {
+      "passcode": 69303178,
+      "name": "Majestic Mech - Ohka",
+      "numbers": [
+        "CP06-EN015"
+      ]
+    },
+    {
+      "passcode": 69537999,
+      "name": "Blaze Accelerator",
+      "numbers": [
+        "CP06-EN005"
+      ]
+    },
+    {
+      "passcode": 77527210,
+      "name": "Soul of Purity and Light",
+      "numbers": [
+        "CP06-EN016"
+      ]
+    },
+    {
+      "passcode": 78637313,
+      "name": "Call of Darkness",
+      "numbers": [
+        "CP06-EN006"
+      ]
+    },
+    {
+      "passcode": 80744121,
+      "name": "Destiny HERO - Fear Monger",
+      "numbers": [
+        "CP06-EN002"
+      ]
+    },
+    {
+      "passcode": 80887952,
+      "name": "Helios Duo Megistus",
+      "numbers": [
+        "CP06-EN010"
+      ]
+    },
+    {
+      "passcode": 81210420,
+      "name": "Magical Hats",
+      "numbers": [
+        "CP06-EN019"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "CP06-EN011"
+      ]
+    },
+    {
+      "passcode": 85448931,
+      "name": "Sentinel of the Seas",
+      "numbers": [
+        "CP06-EN012"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Six'; printings from the YGOPRODeck bulk dump."
+}

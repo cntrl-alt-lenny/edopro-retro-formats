@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "stardust-overdrive-special-edition",
+  "code": "SOVR",
+  "name": "Stardust Overdrive: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-12-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-12-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-12-11",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 63101919,
+      "name": "Tempest Magician",
+      "numbers": [
+        "SOVR-ENSE1"
+      ]
+    },
+    {
+      "passcode": 94886282,
+      "name": "Charge of the Light Brigade",
+      "numbers": [
+        "SOVR-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Stardust Overdrive: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

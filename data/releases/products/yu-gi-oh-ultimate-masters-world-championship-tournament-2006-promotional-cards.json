@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-ultimate-masters-world-championship-tournament-2006-promotional-cards",
+  "code": "WC6",
+  "name": "Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006 promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-03-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27408609,
+      "name": "Golden Homunculus",
+      "numbers": [
+        "WC6-EN001"
+      ]
+    },
+    {
+      "passcode": 54493213,
+      "name": "Helios - The Primordial Sun",
+      "numbers": [
+        "WC6-EN002"
+      ]
+    },
+    {
+      "passcode": 80887952,
+      "name": "Helios Duo Megistus",
+      "numbers": [
+        "WC6-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006 promotional cards'; printings from the YGOPRODeck bulk dump."
+}

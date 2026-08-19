@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "flaming-eternity",
+  "code": "FET",
+  "name": "Flaming Eternity",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 967928,
+      "name": "Penalty Game!",
+      "numbers": [
+        "FET-EN051"
+      ]
+    },
+    {
+      "passcode": 1689516,
+      "name": "The Big March of Animals",
+      "numbers": [
+        "FET-EN048"
+      ]
+    },
+    {
+      "passcode": 1801154,
+      "name": "Centrifugal Field",
+      "numbers": [
+        "FET-EN045"
+      ]
+    },
+    {
+      "passcode": 8508055,
+      "name": "Chu-Ske the Mouse Fighter",
+      "numbers": [
+        "FET-EN003"
+      ]
+    },
+    {
+      "passcode": 8628798,
+      "name": "D.D. Dynamite",
+      "numbers": [
+        "FET-EN057"
+      ]
+    },
+    {
+      "passcode": 9744376,
+      "name": "Good Goblin Housekeeping",
+      "numbers": [
+        "FET-EN054"
+      ]
+    },
+    {
+      "passcode": 12923641,
+      "name": "Swords of Concealing Light",
+      "numbers": [
+        "FET-EN042"
+      ]
+    },
+    {
+      "passcode": 13756293,
+      "name": "King Dragun",
+      "numbers": [
+        "FET-EN036"
+      ]
+    },
+    {
+      "passcode": 14878871,
+      "name": "Rescue Cat",
+      "numbers": [
+        "FET-EN033"
+      ]
+    },
+    {
+      "passcode": 15090429,
+      "name": "Whirlwind Prodigy",
+      "numbers": [
+        "FET-EN030"
+      ]
+    },
+    {
+      "passcode": 15717011,
+      "name": "The Light - Hex-Sealed Fusion",
+      "numbers": [
+        "FET-EN027"
+      ]
+    },
+    {
+      "passcode": 16956455,
+      "name": "Chiron the Mage",
+      "numbers": [
+        "FET-EN021"
+      ]
+    },
+    {
+      "passcode": 20939559,
+      "name": "Shadowslayer",
+      "numbers": [
+        "FET-EN024"
+      ]
+    },
+    {
+      "passcode": 21051146,
+      "name": "Blast Magician",
+      "numbers": [
+        "FET-EN020"
+      ]
+    },
+    {
+      "passcode": 22873798,
+      "name": "Hyena",
+      "numbers": [
+        "FET-EN017"
+      ]
+    },
+    {
+      "passcode": 22996376,
+      "name": "Behemoth the King of All Animals",
+      "numbers": [
+        "FET-EN014"
+      ]
+    },
+    {
+      "passcode": 23118924,
+      "name": "Element Doom",
+      "numbers": [
+        "FET-EN011"
+      ]
+    },
+    {
+      "passcode": 33767325,
+      "name": "Meteor of Destruction",
+      "numbers": [
+        "FET-EN041"
+      ]
+    },
+    {
+      "passcode": 34830502,
+      "name": "Ultimate Insect LV5",
+      "numbers": [
+        "FET-EN007"
+      ]
+    },
+    {
+      "passcode": 35027493,
+      "name": "Deck Devastation Virus",
+      "numbers": [
+        "FET-EN058"
+      ]
+    },
+    {
+      "passcode": 35052053,
+      "name": "Insect Knight",
+      "numbers": [
+        "FET-EN004"
+      ]
+    },
+    {
+      "passcode": 35149085,
+      "name": "Beast Soul Swap",
+      "numbers": [
+        "FET-EN055"
+      ]
+    },
+    {
+      "passcode": 36119641,
+      "name": "Space Mambo",
+      "numbers": [
+        "FET-EN001"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "FET-EN052"
+      ]
+    },
+    {
+      "passcode": 37083210,
+      "name": "Cross Counter",
+      "numbers": [
+        "FET-EN049"
+      ]
+    },
+    {
+      "passcode": 40267580,
+      "name": "Brain Jacker",
+      "numbers": [
+        "FET-EN034"
+      ]
+    },
+    {
+      "passcode": 41089128,
+      "name": "Flame Ruler",
+      "numbers": [
+        "FET-EN031"
+      ]
+    },
+    {
+      "passcode": 48206762,
+      "name": "Fulfillment of the Contract",
+      "numbers": [
+        "FET-EN046"
+      ]
+    },
+    {
+      "passcode": 49140998,
+      "name": "A Feather of the Phoenix",
+      "numbers": [
+        "FET-EN037"
+      ]
+    },
+    {
+      "passcode": 49328340,
+      "name": "Spiral Spear Strike",
+      "numbers": [
+        "FET-EN043"
+      ]
+    },
+    {
+      "passcode": 51481927,
+      "name": "Spell Absorption",
+      "numbers": [
+        "FET-EN039"
+      ]
+    },
+    {
+      "passcode": 52101615,
+      "name": "The Dark - Hex-Sealed Fusion",
+      "numbers": [
+        "FET-EN028"
+      ]
+    },
+    {
+      "passcode": 52323207,
+      "name": "Golem Sentry",
+      "numbers": [
+        "FET-EN025"
+      ]
+    },
+    {
+      "passcode": 57046845,
+      "name": "Gearfried the Swordmaster",
+      "numbers": [
+        "FET-EN022"
+      ]
+    },
+    {
+      "passcode": 58268433,
+      "name": "Blade Rabbit",
+      "numbers": [
+        "FET-EN018"
+      ]
+    },
+    {
+      "passcode": 59380081,
+      "name": "Big-Tusked Mammoth",
+      "numbers": [
+        "FET-EN015"
+      ]
+    },
+    {
+      "passcode": 60102563,
+      "name": "Maji-Gire Panda",
+      "numbers": [
+        "FET-EN012"
+      ]
+    },
+    {
+      "passcode": 60229110,
+      "name": "Granmarg the Rock Monarch",
+      "numbers": [
+        "FET-EN009"
+      ]
+    },
+    {
+      "passcode": 61411502,
+      "name": "Elemental Burst",
+      "numbers": [
+        "FET-EN059"
+      ]
+    },
+    {
+      "passcode": 61441708,
+      "name": "Sacred Phoenix of Nephthys",
+      "numbers": [
+        "FET-EN005"
+      ]
+    },
+    {
+      "passcode": 62113340,
+      "name": "Divine Dragon Ragnarok",
+      "numbers": [
+        "FET-EN002"
+      ]
+    },
+    {
+      "passcode": 62633180,
+      "name": "Assault on GHQ",
+      "numbers": [
+        "FET-EN056"
+      ]
+    },
+    {
+      "passcode": 63356631,
+      "name": "Phoenix Wing Wind Blast",
+      "numbers": [
+        "FET-EN053"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "FET-EN040"
+      ]
+    },
+    {
+      "passcode": 73578229,
+      "name": "Pole Position",
+      "numbers": [
+        "FET-EN050"
+      ]
+    },
+    {
+      "passcode": 74388798,
+      "name": "Silent Swordsman LV5",
+      "numbers": [
+        "FET-EN008"
+      ]
+    },
+    {
+      "passcode": 74694807,
+      "name": "Re-Fusion",
+      "numbers": [
+        "FET-EN047"
+      ]
+    },
+    {
+      "passcode": 75417459,
+      "name": "Release Restraint",
+      "numbers": [
+        "FET-EN044"
+      ]
+    },
+    {
+      "passcode": 76539047,
+      "name": "Poison Fangs",
+      "numbers": [
+        "FET-EN038"
+      ]
+    },
+    {
+      "passcode": 84430950,
+      "name": "Armed Samurai - Ben Kei",
+      "numbers": [
+        "FET-EN023"
+      ]
+    },
+    {
+      "passcode": 87473172,
+      "name": "Firebird",
+      "numbers": [
+        "FET-EN032"
+      ]
+    },
+    {
+      "passcode": 87751584,
+      "name": "Gatling Dragon",
+      "numbers": [
+        "FET-EN035"
+      ]
+    },
+    {
+      "passcode": 88696724,
+      "name": "The Earth - Hex-Sealed Fusion",
+      "numbers": [
+        "FET-EN029"
+      ]
+    },
+    {
+      "passcode": 89718302,
+      "name": "Abare Ushioni",
+      "numbers": [
+        "FET-EN026"
+      ]
+    },
+    {
+      "passcode": 94667532,
+      "name": "Mecha-Dog Marron",
+      "numbers": [
+        "FET-EN019"
+      ]
+    },
+    {
+      "passcode": 95789089,
+      "name": "Kangaroo Champ",
+      "numbers": [
+        "FET-EN016"
+      ]
+    },
+    {
+      "passcode": 96501677,
+      "name": "Catnipped Kitty",
+      "numbers": [
+        "FET-EN013"
+      ]
+    },
+    {
+      "passcode": 97623219,
+      "name": "Element Valkyrie",
+      "numbers": [
+        "FET-EN010"
+      ]
+    },
+    {
+      "passcode": 97806240,
+      "name": "Forced Ceasefire",
+      "numbers": [
+        "FET-EN060"
+      ]
+    },
+    {
+      "passcode": 98446407,
+      "name": "Hand of Nephthys",
+      "numbers": [
+        "FET-EN006"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Flaming Eternity'; printings from the YGOPRODeck bulk dump."
+}

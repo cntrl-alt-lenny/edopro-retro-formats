@@ -1,0 +1,468 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hidden-arsenal-3",
+  "code": "HA03",
+  "name": "Hidden Arsenal 3",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-12-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-12-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2010-12-02",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 900787,
+      "name": "Dragunity Knight - Gae Bulg",
+      "numbers": [
+        "HA03-EN057"
+      ]
+    },
+    {
+      "passcode": 1533292,
+      "name": "R-Genex Magma",
+      "numbers": [
+        "HA03-EN017"
+      ]
+    },
+    {
+      "passcode": 2088870,
+      "name": "Worm Victory",
+      "numbers": [
+        "HA03-EN025"
+      ]
+    },
+    {
+      "passcode": 2956282,
+      "name": "Naturia Barkion",
+      "numbers": [
+        "HA03-EN028"
+      ]
+    },
+    {
+      "passcode": 3204467,
+      "name": "Worm Solid",
+      "numbers": [
+        "HA03-EN022"
+      ]
+    },
+    {
+      "passcode": 6256844,
+      "name": "R-Genex Turbo",
+      "numbers": [
+        "HA03-EN014"
+      ]
+    },
+    {
+      "passcode": 7478431,
+      "name": "Naturia Sunflower",
+      "numbers": [
+        "HA03-EN011"
+      ]
+    },
+    {
+      "passcode": 8233522,
+      "name": "Ally of Justice Cycle Reader",
+      "numbers": [
+        "HA03-EN052"
+      ]
+    },
+    {
+      "passcode": 8316661,
+      "name": "Fabled Miztoji",
+      "numbers": [
+        "HA03-EN005"
+      ]
+    },
+    {
+      "passcode": 8594079,
+      "name": "Jurrac Brachis",
+      "numbers": [
+        "HA03-EN008"
+      ]
+    },
+    {
+      "passcode": 9056100,
+      "name": "General Grunard of the Ice Barrier",
+      "numbers": [
+        "HA03-EN049"
+      ]
+    },
+    {
+      "passcode": 9888196,
+      "name": "Ally of Justice Decisive Armor",
+      "numbers": [
+        "HA03-EN060"
+      ]
+    },
+    {
+      "passcode": 10178757,
+      "name": "R-Genex Oracle",
+      "numbers": [
+        "HA03-EN046"
+      ]
+    },
+    {
+      "passcode": 11012887,
+      "name": "Jurrac Guaiba",
+      "numbers": [
+        "HA03-EN040"
+      ]
+    },
+    {
+      "passcode": 11390349,
+      "name": "Naturia Fruitfly",
+      "numbers": [
+        "HA03-EN043"
+      ]
+    },
+    {
+      "passcode": 11722335,
+      "name": "Worm Xex",
+      "numbers": [
+        "HA03-EN054"
+      ]
+    },
+    {
+      "passcode": 12235475,
+      "name": "Fabled Ashenveil",
+      "numbers": [
+        "HA03-EN037"
+      ]
+    },
+    {
+      "passcode": 13361027,
+      "name": "Dragunity Darkspear",
+      "numbers": [
+        "HA03-EN034"
+      ]
+    },
+    {
+      "passcode": 19439119,
+      "name": "Fabled Krus",
+      "numbers": [
+        "HA03-EN002"
+      ]
+    },
+    {
+      "passcode": 28183605,
+      "name": "Dragunity Dux",
+      "numbers": [
+        "HA03-EN031"
+      ]
+    },
+    {
+      "passcode": 30299166,
+      "name": "Worm Tentacles",
+      "numbers": [
+        "HA03-EN023"
+      ]
+    },
+    {
+      "passcode": 32744558,
+      "name": "R-Genex Overseer",
+      "numbers": [
+        "HA03-EN015"
+      ]
+    },
+    {
+      "passcode": 33866130,
+      "name": "Naturia Cliff",
+      "numbers": [
+        "HA03-EN012"
+      ]
+    },
+    {
+      "passcode": 35638627,
+      "name": "Worm Warlord",
+      "numbers": [
+        "HA03-EN053"
+      ]
+    },
+    {
+      "passcode": 37806313,
+      "name": "Caravan of the Ice Barrier",
+      "numbers": [
+        "HA03-EN021"
+      ]
+    },
+    {
+      "passcode": 38354937,
+      "name": "Locomotion R-Genex",
+      "numbers": [
+        "HA03-EN029"
+      ]
+    },
+    {
+      "passcode": 38528901,
+      "name": "Shock Troops of the Ice Barrier",
+      "numbers": [
+        "HA03-EN018"
+      ]
+    },
+    {
+      "passcode": 39477584,
+      "name": "Fabled Leviathan",
+      "numbers": [
+        "HA03-EN026"
+      ]
+    },
+    {
+      "passcode": 44689688,
+      "name": "Jurrac Spinos",
+      "numbers": [
+        "HA03-EN009"
+      ]
+    },
+    {
+      "passcode": 45450218,
+      "name": "Ally of Justice Omni-Weapon",
+      "numbers": [
+        "HA03-EN050"
+      ]
+    },
+    {
+      "passcode": 45711266,
+      "name": "Jurrac Ptera",
+      "numbers": [
+        "HA03-EN006"
+      ]
+    },
+    {
+      "passcode": 46572756,
+      "name": "R-Genex Ultimum",
+      "numbers": [
+        "HA03-EN047"
+      ]
+    },
+    {
+      "passcode": 46833854,
+      "name": "Fabled Topi",
+      "numbers": [
+        "HA03-EN003"
+      ]
+    },
+    {
+      "passcode": 47111934,
+      "name": "Worm Yagan",
+      "numbers": [
+        "HA03-EN055"
+      ]
+    },
+    {
+      "passcode": 47395382,
+      "name": "Fabled Ragin",
+      "numbers": [
+        "HA03-EN058"
+      ]
+    },
+    {
+      "passcode": 47795344,
+      "name": "Naturia Hydrangea",
+      "numbers": [
+        "HA03-EN044"
+      ]
+    },
+    {
+      "passcode": 48411996,
+      "name": "Jurrac Stauriko",
+      "numbers": [
+        "HA03-EN041"
+      ]
+    },
+    {
+      "passcode": 49633574,
+      "name": "Fabled Oltro",
+      "numbers": [
+        "HA03-EN038"
+      ]
+    },
+    {
+      "passcode": 54578613,
+      "name": "Dragunity Legionnaire",
+      "numbers": [
+        "HA03-EN032"
+      ]
+    },
+    {
+      "passcode": 59755122,
+      "name": "Dragunity Phalanx",
+      "numbers": [
+        "HA03-EN035"
+      ]
+    },
+    {
+      "passcode": 64926005,
+      "name": "Samurai of the Ice Barrier",
+      "numbers": [
+        "HA03-EN019"
+      ]
+    },
+    {
+      "passcode": 65149697,
+      "name": "R-Genex Crusher",
+      "numbers": [
+        "HA03-EN016"
+      ]
+    },
+    {
+      "passcode": 65749035,
+      "name": "Gungnir, Dragon of the Ice Barrier",
+      "numbers": [
+        "HA03-EN030"
+      ]
+    },
+    {
+      "passcode": 65961683,
+      "name": "Jurrac Velphito",
+      "numbers": [
+        "HA03-EN027"
+      ]
+    },
+    {
+      "passcode": 70083723,
+      "name": "Naturia Dragonfly",
+      "numbers": [
+        "HA03-EN010"
+      ]
+    },
+    {
+      "passcode": 70261145,
+      "name": "Naturia Tulip",
+      "numbers": [
+        "HA03-EN013"
+      ]
+    },
+    {
+      "passcode": 71106375,
+      "name": "Jurrac Iguanon",
+      "numbers": [
+        "HA03-EN007"
+      ]
+    },
+    {
+      "passcode": 72328962,
+      "name": "Fabled Soulkius",
+      "numbers": [
+        "HA03-EN004"
+      ]
+    },
+    {
+      "passcode": 72845813,
+      "name": "Ally of Justice Quarantine",
+      "numbers": [
+        "HA03-EN051"
+      ]
+    },
+    {
+      "passcode": 73040500,
+      "name": "Fabled Urustos",
+      "numbers": [
+        "HA03-EN001"
+      ]
+    },
+    {
+      "passcode": 73061465,
+      "name": "Spellbreaker of the Ice Barrier",
+      "numbers": [
+        "HA03-EN048"
+      ]
+    },
+    {
+      "passcode": 73483491,
+      "name": "Vindikite R-Genex",
+      "numbers": [
+        "HA03-EN059"
+      ]
+    },
+    {
+      "passcode": 73783043,
+      "name": "R-Genex Accelerator",
+      "numbers": [
+        "HA03-EN045"
+      ]
+    },
+    {
+      "passcode": 74506079,
+      "name": "Worm Zero",
+      "numbers": [
+        "HA03-EN056"
+      ]
+    },
+    {
+      "passcode": 76683171,
+      "name": "Worm Ugly",
+      "numbers": [
+        "HA03-EN024"
+      ]
+    },
+    {
+      "passcode": 81962318,
+      "name": "Dragunity Tribus",
+      "numbers": [
+        "HA03-EN033"
+      ]
+    },
+    {
+      "passcode": 84905691,
+      "name": "Naturia Horneedle",
+      "numbers": [
+        "HA03-EN042"
+      ]
+    },
+    {
+      "passcode": 85028288,
+      "name": "Jurrac Titano",
+      "numbers": [
+        "HA03-EN039"
+      ]
+    },
+    {
+      "passcode": 86840720,
+      "name": "Fabled Dyf",
+      "numbers": [
+        "HA03-EN036"
+      ]
+    },
+    {
+      "passcode": 90311614,
+      "name": "Dewdark of the Ice Barrier",
+      "numbers": [
+        "HA03-EN020"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hidden Arsenal 3'; printings from the YGOPRODeck bulk dump."
+}

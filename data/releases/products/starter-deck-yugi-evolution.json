@@ -1,0 +1,388 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-yugi-evolution",
+  "code": "SYE",
+  "name": "Starter Deck: Yugi Evolution",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2004-03-01",
+      "precision": "month",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "SYE-044"
+      ]
+    },
+    {
+      "passcode": 4031928,
+      "name": "Change of Heart",
+      "numbers": [
+        "SYE-030"
+      ]
+    },
+    {
+      "passcode": 4178474,
+      "name": "Raigeki Break",
+      "numbers": [
+        "SYE-050"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "SYE-041"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SYE-037"
+      ]
+    },
+    {
+      "passcode": 5405694,
+      "name": "Black Luster Soldier",
+      "numbers": [
+        "SYE-024"
+      ]
+    },
+    {
+      "passcode": 5818798,
+      "name": "Gazelle the King of Mythical Beasts",
+      "numbers": [
+        "SYE-013"
+      ]
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight",
+      "numbers": [
+        "SYE-007"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "SYE-015"
+      ]
+    },
+    {
+      "passcode": 12607053,
+      "name": "Waboku",
+      "numbers": [
+        "SYE-042"
+      ]
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone",
+      "numbers": [
+        "SYE-010"
+      ]
+    },
+    {
+      "passcode": 13429800,
+      "name": "Great White",
+      "numbers": [
+        "SYE-009"
+      ]
+    },
+    {
+      "passcode": 13945283,
+      "name": "Wall of Illusion",
+      "numbers": [
+        "SYE-016"
+      ]
+    },
+    {
+      "passcode": 15025844,
+      "name": "Mystical Elf",
+      "numbers": [
+        "SYE-002"
+      ]
+    },
+    {
+      "passcode": 16430187,
+      "name": "The Reliable Guardian",
+      "numbers": [
+        "SYE-034"
+      ]
+    },
+    {
+      "passcode": 18161786,
+      "name": "Mystic Plasma Zone",
+      "numbers": [
+        "SYE-038"
+      ]
+    },
+    {
+      "passcode": 18807108,
+      "name": "Spellbinding Circle",
+      "numbers": [
+        "SYE-045"
+      ]
+    },
+    {
+      "passcode": 24623598,
+      "name": "Disappear",
+      "numbers": [
+        "SYE-049"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "SYE-018"
+      ]
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior",
+      "numbers": [
+        "SYE-006"
+      ]
+    },
+    {
+      "passcode": 34694160,
+      "name": "The Eye of Truth",
+      "numbers": [
+        "SYE-046"
+      ]
+    },
+    {
+      "passcode": 36280194,
+      "name": "Backup Soldier",
+      "numbers": [
+        "SYE-047"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "SYE-035"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "SYE-019"
+      ]
+    },
+    {
+      "passcode": 41392891,
+      "name": "Feral Imp",
+      "numbers": [
+        "SYE-003"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "SYE-001"
+      ]
+    },
+    {
+      "passcode": 47060154,
+      "name": "Mystic Clown",
+      "numbers": [
+        "SYE-011"
+      ]
+    },
+    {
+      "passcode": 50930991,
+      "name": "Neo the Magic Swordsman",
+      "numbers": [
+        "SYE-012"
+      ]
+    },
+    {
+      "passcode": 51482758,
+      "name": "Remove Trap",
+      "numbers": [
+        "SYE-033"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "SYE-026"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "SYE-017"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "SYE-040"
+      ]
+    },
+    {
+      "passcode": 55761792,
+      "name": "Black Luster Ritual",
+      "numbers": [
+        "SYE-025"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "SYE-021"
+      ]
+    },
+    {
+      "passcode": 59560625,
+      "name": "Shift",
+      "numbers": [
+        "SYE-048"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "SYE-028"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "SYE-005"
+      ]
+    },
+    {
+      "passcode": 70791313,
+      "name": "Royal Magical Library",
+      "numbers": [
+        "SYE-023"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "SYE-039"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "SYE-032"
+      ]
+    },
+    {
+      "passcode": 75953262,
+      "name": "Warrior Dai Grepher",
+      "numbers": [
+        "SYE-014"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "SYE-043"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "SYE-029"
+      ]
+    },
+    {
+      "passcode": 84257639,
+      "name": "Dian Keto the Cure Master",
+      "numbers": [
+        "SYE-027"
+      ]
+    },
+    {
+      "passcode": 85602018,
+      "name": "Last Will",
+      "numbers": [
+        "SYE-031"
+      ]
+    },
+    {
+      "passcode": 87796900,
+      "name": "Winged Dragon, Guardian of the Fortress #1",
+      "numbers": [
+        "SYE-004"
+      ]
+    },
+    {
+      "passcode": 88472456,
+      "name": "Zombyra the Dark",
+      "numbers": [
+        "SYE-022"
+      ]
+    },
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian",
+      "numbers": [
+        "SYE-008"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "SYE-020"
+      ]
+    },
+    {
+      "passcode": 99597615,
+      "name": "Malevolent Nuzzler",
+      "numbers": [
+        "SYE-036"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Yugi Evolution'; printings from the YGOPRODeck bulk dump."
+}

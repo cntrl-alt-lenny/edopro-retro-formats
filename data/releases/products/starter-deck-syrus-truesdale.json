@@ -1,0 +1,314 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-syrus-truesdale",
+  "code": "YSDS",
+  "name": "Starter Deck: Syrus Truesdale",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-07-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 984114,
+      "name": "Expressroid",
+      "numbers": [
+        "YSDS-EN000"
+      ]
+    },
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "YSDS-EN034"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "YSDS-EN032"
+      ]
+    },
+    {
+      "passcode": 7459013,
+      "name": "Zure, Knight of Dark World",
+      "numbers": [
+        "YSDS-EN008"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "YSDS-EN003"
+      ]
+    },
+    {
+      "passcode": 12694768,
+      "name": "Abaki",
+      "numbers": [
+        "YSDS-EN020"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "YSDS-EN025"
+      ]
+    },
+    {
+      "passcode": 14315573,
+      "name": "Negate Attack",
+      "numbers": [
+        "YSDS-EN037"
+      ]
+    },
+    {
+      "passcode": 16956455,
+      "name": "Chiron the Mage",
+      "numbers": [
+        "YSDS-EN012"
+      ]
+    },
+    {
+      "passcode": 18325492,
+      "name": "Gyroid",
+      "numbers": [
+        "YSDS-EN014"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "YSDS-EN024"
+      ]
+    },
+    {
+      "passcode": 23635815,
+      "name": "Jerry Beans Man",
+      "numbers": [
+        "YSDS-EN007"
+      ]
+    },
+    {
+      "passcode": 24311595,
+      "name": "Rescueroid",
+      "numbers": [
+        "YSDS-EN019"
+      ]
+    },
+    {
+      "passcode": 28933734,
+      "name": "Mask of Darkness",
+      "numbers": [
+        "YSDS-EN010"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "YSDS-EN036"
+      ]
+    },
+    {
+      "passcode": 36378213,
+      "name": "Ambulanceroid",
+      "numbers": [
+        "YSDS-EN018"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "YSDS-EN023"
+      ]
+    },
+    {
+      "passcode": 43716289,
+      "name": "Poison Mummy",
+      "numbers": [
+        "YSDS-EN009"
+      ]
+    },
+    {
+      "passcode": 44203504,
+      "name": "Robotic Knight",
+      "numbers": [
+        "YSDS-EN002"
+      ]
+    },
+    {
+      "passcode": 44729197,
+      "name": "Steamroid",
+      "numbers": [
+        "YSDS-EN015"
+      ]
+    },
+    {
+      "passcode": 45945685,
+      "name": "Cycroid",
+      "numbers": [
+        "YSDS-EN006"
+      ]
+    },
+    {
+      "passcode": 47372349,
+      "name": "Acrobat Monkey",
+      "numbers": [
+        "YSDS-EN004"
+      ]
+    },
+    {
+      "passcode": 48766543,
+      "name": "Cyber-Tech Alligator",
+      "numbers": [
+        "YSDS-EN001"
+      ]
+    },
+    {
+      "passcode": 49140998,
+      "name": "A Feather of the Phoenix",
+      "numbers": [
+        "YSDS-EN029"
+      ]
+    },
+    {
+      "passcode": 49881766,
+      "name": "Archfiend Soldier",
+      "numbers": [
+        "YSDS-EN005"
+      ]
+    },
+    {
+      "passcode": 56120475,
+      "name": "Sakuretsu Armor",
+      "numbers": [
+        "YSDS-EN035"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "YSDS-EN038"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "YSDS-EN021"
+      ]
+    },
+    {
+      "passcode": 69162969,
+      "name": "Lightning Vortex",
+      "numbers": [
+        "YSDS-EN030"
+      ]
+    },
+    {
+      "passcode": 70046172,
+      "name": "Rush Recklessly",
+      "numbers": [
+        "YSDS-EN022"
+      ]
+    },
+    {
+      "passcode": 71218746,
+      "name": "Drillroid",
+      "numbers": [
+        "YSDS-EN016"
+      ]
+    },
+    {
+      "passcode": 71930383,
+      "name": "Patroid",
+      "numbers": [
+        "YSDS-EN013"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "YSDS-EN033"
+      ]
+    },
+    {
+      "passcode": 78211862,
+      "name": "Rising Energy",
+      "numbers": [
+        "YSDS-EN039"
+      ]
+    },
+    {
+      "passcode": 82828051,
+      "name": "Earthquake",
+      "numbers": [
+        "YSDS-EN028"
+      ]
+    },
+    {
+      "passcode": 87621407,
+      "name": "Dekoichi the Battlechanted Locomotive",
+      "numbers": [
+        "YSDS-EN011"
+      ]
+    },
+    {
+      "passcode": 87910978,
+      "name": "Brain Control",
+      "numbers": [
+        "YSDS-EN031"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "YSDS-EN026"
+      ]
+    },
+    {
+      "passcode": 97705809,
+      "name": "Supercharge",
+      "numbers": [
+        "YSDS-EN040"
+      ]
+    },
+    {
+      "passcode": 98045062,
+      "name": "Enemy Controller",
+      "numbers": [
+        "YSDS-EN027"
+      ]
+    },
+    {
+      "passcode": 99861526,
+      "name": "Submarineroid",
+      "numbers": [
+        "YSDS-EN017"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Syrus Truesdale'; printings from the YGOPRODeck bulk dump."
+}

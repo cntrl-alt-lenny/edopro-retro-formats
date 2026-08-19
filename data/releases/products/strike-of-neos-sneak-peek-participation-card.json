@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "strike-of-neos-sneak-peek-participation-card",
+  "code": "STON",
+  "name": "Strike of Neos Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2007-02-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 83039729,
+      "name": "Grandmaster of the Six Samurai",
+      "numbers": [
+        "STON-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Strike of Neos Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

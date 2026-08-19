@@ -1,0 +1,194 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "turbo-pack-booster-one",
+  "code": "TU01",
+  "name": "Turbo Pack: Booster One",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-08-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-09-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-09-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2619149,
+      "name": "Gladiator Beast Samnite",
+      "numbers": [
+        "TU01-EN004"
+      ]
+    },
+    {
+      "passcode": 5975022,
+      "name": "Gladiator Beast Murmillo",
+      "numbers": [
+        "TU01-EN015"
+      ]
+    },
+    {
+      "passcode": 9622164,
+      "name": "D.D.R. - Different Dimension Reincarnation",
+      "numbers": [
+        "TU01-EN020"
+      ]
+    },
+    {
+      "passcode": 14087893,
+      "name": "Book of Moon",
+      "numbers": [
+        "TU01-EN012"
+      ]
+    },
+    {
+      "passcode": 14878871,
+      "name": "Rescue Cat",
+      "numbers": [
+        "TU01-EN008"
+      ]
+    },
+    {
+      "passcode": 21502796,
+      "name": "Ryko, Lightsworn Hunter",
+      "numbers": [
+        "TU01-EN019"
+      ]
+    },
+    {
+      "passcode": 28985331,
+      "name": "Armageddon Knight",
+      "numbers": [
+        "TU01-EN011"
+      ]
+    },
+    {
+      "passcode": 38120068,
+      "name": "Trade-In",
+      "numbers": [
+        "TU01-EN010"
+      ]
+    },
+    {
+      "passcode": 41470137,
+      "name": "Gladiator Beast Bestiari",
+      "numbers": [
+        "TU01-EN016"
+      ]
+    },
+    {
+      "passcode": 50400231,
+      "name": "Satellite Cannon",
+      "numbers": [
+        "TU01-EN007"
+      ]
+    },
+    {
+      "passcode": 57728570,
+      "name": "Crush Card Virus",
+      "numbers": [
+        "TU01-EN006"
+      ]
+    },
+    {
+      "passcode": 57774843,
+      "name": "Judgment Dragon",
+      "numbers": [
+        "TU01-EN000"
+      ]
+    },
+    {
+      "passcode": 59019082,
+      "name": "Garoth, Lightsworn Warrior",
+      "numbers": [
+        "TU01-EN002"
+      ]
+    },
+    {
+      "passcode": 59575539,
+      "name": "Krebons",
+      "numbers": [
+        "TU01-EN003"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "TU01-EN013"
+      ]
+    },
+    {
+      "passcode": 74519184,
+      "name": "Hand Destruction",
+      "numbers": [
+        "TU01-EN014"
+      ]
+    },
+    {
+      "passcode": 76203291,
+      "name": "Golden Flying Fish",
+      "numbers": [
+        "TU01-EN018"
+      ]
+    },
+    {
+      "passcode": 78700060,
+      "name": "Doomcaliber Knight",
+      "numbers": [
+        "TU01-EN001"
+      ]
+    },
+    {
+      "passcode": 78868776,
+      "name": "Gladiator Beast Laquari",
+      "numbers": [
+        "TU01-EN017"
+      ]
+    },
+    {
+      "passcode": 83039729,
+      "name": "Grandmaster of the Six Samurai",
+      "numbers": [
+        "TU01-EN009"
+      ]
+    },
+    {
+      "passcode": 91351370,
+      "name": "Black Whirlwind",
+      "numbers": [
+        "TU01-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Turbo Pack: Booster One'; printings from the YGOPRODeck bulk dump."
+}

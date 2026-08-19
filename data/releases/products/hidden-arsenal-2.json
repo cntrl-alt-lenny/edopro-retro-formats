@@ -1,0 +1,457 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hidden-arsenal-2",
+  "code": "HA02",
+  "name": "Hidden Arsenal 2",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2010-07-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-07-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3648368,
+      "name": "Ally of Justice Searcher",
+      "numbers": [
+        "HA02-EN019"
+      ]
+    },
+    {
+      "passcode": 6588580,
+      "name": "Thermal Genex",
+      "numbers": [
+        "HA02-EN028"
+      ]
+    },
+    {
+      "passcode": 7700132,
+      "name": "Worm Noble",
+      "numbers": [
+        "HA02-EN025"
+      ]
+    },
+    {
+      "passcode": 8822710,
+      "name": "Ally of Justice Cosmic Gateway",
+      "numbers": [
+        "HA02-EN022"
+      ]
+    },
+    {
+      "passcode": 13761956,
+      "name": "Flamvell Baby",
+      "numbers": [
+        "HA02-EN016"
+      ]
+    },
+    {
+      "passcode": 14983497,
+      "name": "Mist Valley Baby Roc",
+      "numbers": [
+        "HA02-EN013"
+      ]
+    },
+    {
+      "passcode": 15605085,
+      "name": "Genex Solar",
+      "numbers": [
+        "HA02-EN010"
+      ]
+    },
+    {
+      "passcode": 16527176,
+      "name": "Naturia Leodrake",
+      "numbers": [
+        "HA02-EN058"
+      ]
+    },
+    {
+      "passcode": 16828633,
+      "name": "Genex Spare",
+      "numbers": [
+        "HA02-EN007"
+      ]
+    },
+    {
+      "passcode": 16940215,
+      "name": "Naturia Vein",
+      "numbers": [
+        "HA02-EN004"
+      ]
+    },
+    {
+      "passcode": 17649753,
+      "name": "Worm Rakuyeh",
+      "numbers": [
+        "HA02-EN055"
+      ]
+    },
+    {
+      "passcode": 20700531,
+      "name": "Pilgrim of the Ice Barrier",
+      "numbers": [
+        "HA02-EN046"
+      ]
+    },
+    {
+      "passcode": 23927545,
+      "name": "Jurrac Protops",
+      "numbers": [
+        "HA02-EN035"
+      ]
+    },
+    {
+      "passcode": 24040093,
+      "name": "Fabled Grimro",
+      "numbers": [
+        "HA02-EN032"
+      ]
+    },
+    {
+      "passcode": 24432029,
+      "name": "Genex Blastfan",
+      "numbers": [
+        "HA02-EN043"
+      ]
+    },
+    {
+      "passcode": 25654671,
+      "name": "Naturia Spiderfang",
+      "numbers": [
+        "HA02-EN040"
+      ]
+    },
+    {
+      "passcode": 27762803,
+      "name": "Naturia Beetle",
+      "numbers": [
+        "HA02-EN001"
+      ]
+    },
+    {
+      "passcode": 28465301,
+      "name": "Worm Opera",
+      "numbers": [
+        "HA02-EN052"
+      ]
+    },
+    {
+      "passcode": 29587993,
+      "name": "Mist Valley Apex Avian",
+      "numbers": [
+        "HA02-EN049"
+      ]
+    },
+    {
+      "passcode": 33198837,
+      "name": "Naturia Beast",
+      "numbers": [
+        "HA02-EN026"
+      ]
+    },
+    {
+      "passcode": 33972299,
+      "name": "Geo Genex",
+      "numbers": [
+        "HA02-EN029"
+      ]
+    },
+    {
+      "passcode": 36717258,
+      "name": "Jurrac Monoloph",
+      "numbers": [
+        "HA02-EN037"
+      ]
+    },
+    {
+      "passcode": 40155554,
+      "name": "Ally Mind",
+      "numbers": [
+        "HA02-EN017"
+      ]
+    },
+    {
+      "passcode": 41090784,
+      "name": "Dai-sojo of the Ice Barrier",
+      "numbers": [
+        "HA02-EN011"
+      ]
+    },
+    {
+      "passcode": 41978142,
+      "name": "Mist Valley Executor",
+      "numbers": [
+        "HA02-EN014"
+      ]
+    },
+    {
+      "passcode": 43925870,
+      "name": "Windmill Genex",
+      "numbers": [
+        "HA02-EN059"
+      ]
+    },
+    {
+      "passcode": 44811425,
+      "name": "Worm Linx",
+      "numbers": [
+        "HA02-EN023"
+      ]
+    },
+    {
+      "passcode": 45033006,
+      "name": "Ally of Justice Enemy Catcher",
+      "numbers": [
+        "HA02-EN020"
+      ]
+    },
+    {
+      "passcode": 51827737,
+      "name": "Genex Recycled",
+      "numbers": [
+        "HA02-EN044"
+      ]
+    },
+    {
+      "passcode": 52222372,
+      "name": "Genex Turbine",
+      "numbers": [
+        "HA02-EN008"
+      ]
+    },
+    {
+      "passcode": 53944920,
+      "name": "Genex Furnace",
+      "numbers": [
+        "HA02-EN005"
+      ]
+    },
+    {
+      "passcode": 54048462,
+      "name": "Fabled Valkyrus",
+      "numbers": [
+        "HA02-EN056"
+      ]
+    },
+    {
+      "passcode": 54161401,
+      "name": "Naturia Rock",
+      "numbers": [
+        "HA02-EN002"
+      ]
+    },
+    {
+      "passcode": 54860010,
+      "name": "Worm Prince",
+      "numbers": [
+        "HA02-EN053"
+      ]
+    },
+    {
+      "passcode": 55982698,
+      "name": "Ally of Justice Reverse Break",
+      "numbers": [
+        "HA02-EN050"
+      ]
+    },
+    {
+      "passcode": 56704140,
+      "name": "Geomancer of the Ice Barrier",
+      "numbers": [
+        "HA02-EN047"
+      ]
+    },
+    {
+      "passcode": 59312550,
+      "name": "Jurrac Velo",
+      "numbers": [
+        "HA02-EN036"
+      ]
+    },
+    {
+      "passcode": 60434101,
+      "name": "Fabled Gallabas",
+      "numbers": [
+        "HA02-EN033"
+      ]
+    },
+    {
+      "passcode": 61049315,
+      "name": "Naturia Rosewhip",
+      "numbers": [
+        "HA02-EN041"
+      ]
+    },
+    {
+      "passcode": 62701967,
+      "name": "Jurrac Tyrannus",
+      "numbers": [
+        "HA02-EN038"
+      ]
+    },
+    {
+      "passcode": 69461394,
+      "name": "Ally of Justice Field Marshal",
+      "numbers": [
+        "HA02-EN030"
+      ]
+    },
+    {
+      "passcode": 70583986,
+      "name": "Dewloren, Tiger King of the Ice Barrier",
+      "numbers": [
+        "HA02-EN027"
+      ]
+    },
+    {
+      "passcode": 71315423,
+      "name": "Worm Millidith",
+      "numbers": [
+        "HA02-EN024"
+      ]
+    },
+    {
+      "passcode": 71438011,
+      "name": "Ally of Justice Thunder Armor",
+      "numbers": [
+        "HA02-EN021"
+      ]
+    },
+    {
+      "passcode": 76650663,
+      "name": "Ally of Justice Nullfier",
+      "numbers": [
+        "HA02-EN018"
+      ]
+    },
+    {
+      "passcode": 77372241,
+      "name": "Flamvell Grunika",
+      "numbers": [
+        "HA02-EN015"
+      ]
+    },
+    {
+      "passcode": 80032567,
+      "name": "Jurrac Giganoto",
+      "numbers": [
+        "HA02-EN057"
+      ]
+    },
+    {
+      "passcode": 80555116,
+      "name": "Naturia Guardian",
+      "numbers": [
+        "HA02-EN003"
+      ]
+    },
+    {
+      "passcode": 81254059,
+      "name": "Worm Queen",
+      "numbers": [
+        "HA02-EN054"
+      ]
+    },
+    {
+      "passcode": 82199284,
+      "name": "Mist Valley Falcon",
+      "numbers": [
+        "HA02-EN048"
+      ]
+    },
+    {
+      "passcode": 82377606,
+      "name": "Ally of Justice Unlimiter",
+      "numbers": [
+        "HA02-EN051"
+      ]
+    },
+    {
+      "passcode": 88494899,
+      "name": "Medium of the Ice Barrier",
+      "numbers": [
+        "HA02-EN012"
+      ]
+    },
+    {
+      "passcode": 89211486,
+      "name": "Genex Doctor",
+      "numbers": [
+        "HA02-EN009"
+      ]
+    },
+    {
+      "passcode": 89310929,
+      "name": "Mist Valley Thunder Lord",
+      "numbers": [
+        "HA02-EN060"
+      ]
+    },
+    {
+      "passcode": 89333528,
+      "name": "Genex Gaia",
+      "numbers": [
+        "HA02-EN006"
+      ]
+    },
+    {
+      "passcode": 93211836,
+      "name": "Genex Army",
+      "numbers": [
+        "HA02-EN045"
+      ]
+    },
+    {
+      "passcode": 97439806,
+      "name": "Fabled Kushano",
+      "numbers": [
+        "HA02-EN034"
+      ]
+    },
+    {
+      "passcode": 97651498,
+      "name": "Fabled Lurrie",
+      "numbers": [
+        "HA02-EN031"
+      ]
+    },
+    {
+      "passcode": 98437424,
+      "name": "Naturia Cosmobeet",
+      "numbers": [
+        "HA02-EN042"
+      ]
+    },
+    {
+      "passcode": 99150062,
+      "name": "Naturia Antjaw",
+      "numbers": [
+        "HA02-EN039"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Hidden Arsenal 2'; printings from the YGOPRODeck bulk dump."
+}

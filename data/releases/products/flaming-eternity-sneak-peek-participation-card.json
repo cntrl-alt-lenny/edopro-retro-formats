@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "flaming-eternity-sneak-peek-participation-card",
+  "code": "SP1",
+  "name": "Flaming Eternity Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-02-26",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 80316585,
+      "name": "Cyber Harpie Lady",
+      "numbers": [
+        "SP1-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Flaming Eternity Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

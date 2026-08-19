@@ -1,0 +1,177 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "mcdonald-s-promotional-cards-2",
+  "code": "MDP2",
+  "name": "McDonald's Promotional Cards 2",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-12-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2007-04-27",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2830619,
+      "name": "Flame Viper",
+      "numbers": [
+        "MDP2-EN016"
+      ]
+    },
+    {
+      "passcode": 15367030,
+      "name": "Gokibore",
+      "numbers": [
+        "MDP2-EN009"
+      ]
+    },
+    {
+      "passcode": 20065322,
+      "name": "The Flute of Summoning Kuriboh",
+      "numbers": [
+        "MDP2-EN004"
+      ]
+    },
+    {
+      "passcode": 29343734,
+      "name": "Elemental HERO Electrum",
+      "numbers": [
+        "MDP2-EN001"
+      ]
+    },
+    {
+      "passcode": 33691040,
+      "name": "Pragtical",
+      "numbers": [
+        "MDP2-EN014"
+      ]
+    },
+    {
+      "passcode": 40173854,
+      "name": "Amphibious Bugroth",
+      "numbers": [
+        "MDP2-EN012"
+      ]
+    },
+    {
+      "passcode": 42348802,
+      "name": "Trakodon",
+      "numbers": [
+        "MDP2-EN017"
+      ]
+    },
+    {
+      "passcode": 45909477,
+      "name": "Moon Envoy",
+      "numbers": [
+        "MDP2-EN019"
+      ]
+    },
+    {
+      "passcode": 47529357,
+      "name": "Mist Body",
+      "numbers": [
+        "MDP2-EN005"
+      ]
+    },
+    {
+      "passcode": 51228280,
+      "name": "Dungeon Worm",
+      "numbers": [
+        "MDP2-EN018"
+      ]
+    },
+    {
+      "passcode": 52031567,
+      "name": "Elemental HERO Mudballman",
+      "numbers": [
+        "MDP2-EN002"
+      ]
+    },
+    {
+      "passcode": 58932615,
+      "name": "Elemental HERO Burstinatrix",
+      "numbers": [
+        "MDP2-EN003"
+      ]
+    },
+    {
+      "passcode": 64271667,
+      "name": "Meteor Dragon",
+      "numbers": [
+        "MDP2-EN008"
+      ]
+    },
+    {
+      "passcode": 68171737,
+      "name": "Stone Dragon",
+      "numbers": [
+        "MDP2-EN020"
+      ]
+    },
+    {
+      "passcode": 68339286,
+      "name": "Metal Guardian",
+      "numbers": [
+        "MDP2-EN010"
+      ]
+    },
+    {
+      "passcode": 73891874,
+      "name": "White-Horned Dragon",
+      "numbers": [
+        "MDP2-EN006"
+      ]
+    },
+    {
+      "passcode": 86100785,
+      "name": "Zone Eater",
+      "numbers": [
+        "MDP2-EN015"
+      ]
+    },
+    {
+      "passcode": 86164529,
+      "name": "Aqua Dragon",
+      "numbers": [
+        "MDP2-EN013"
+      ]
+    },
+    {
+      "passcode": 94566432,
+      "name": "Kaiser Dragon",
+      "numbers": [
+        "MDP2-EN011"
+      ]
+    },
+    {
+      "passcode": 97590747,
+      "name": "La Jinn the Mystical Genie of the Lamp",
+      "numbers": [
+        "MDP2-EN007"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"McDonald's Promotional Cards 2\"; printings from the YGOPRODeck bulk dump."
+}

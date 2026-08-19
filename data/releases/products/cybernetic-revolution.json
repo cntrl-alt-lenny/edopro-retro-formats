@@ -1,0 +1,447 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "cybernetic-revolution",
+  "code": "CRV",
+  "name": "Cybernetic Revolution",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2005-08-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1546123,
+      "name": "Cyber End Dragon",
+      "numbers": [
+        "CRV-EN036"
+      ]
+    },
+    {
+      "passcode": 4483989,
+      "name": "Prepare to Strike Back",
+      "numbers": [
+        "CRV-EN060"
+      ]
+    },
+    {
+      "passcode": 5368615,
+      "name": "Steam Gyroid",
+      "numbers": [
+        "CRV-EN033"
+      ]
+    },
+    {
+      "passcode": 5606466,
+      "name": "D.D. Trap Hole",
+      "numbers": [
+        "CRV-EN057"
+      ]
+    },
+    {
+      "passcode": 5728014,
+      "name": "A Rival Appears!",
+      "numbers": [
+        "CRV-EN054"
+      ]
+    },
+    {
+      "passcode": 6480253,
+      "name": "Wroughtweiler",
+      "numbers": [
+        "CRV-EN012"
+      ]
+    },
+    {
+      "passcode": 6540606,
+      "name": "Spiritual Water Art - Aoi",
+      "numbers": [
+        "CRV-EN051"
+      ]
+    },
+    {
+      "passcode": 7602840,
+      "name": "UFOroid",
+      "numbers": [
+        "CRV-EN010"
+      ]
+    },
+    {
+      "passcode": 7672244,
+      "name": "Shien's Spy",
+      "numbers": [
+        "CRV-EN044"
+      ]
+    },
+    {
+      "passcode": 10456559,
+      "name": "T.A.D.P.O.L.E.",
+      "numbers": [
+        "CRV-EN027"
+      ]
+    },
+    {
+      "passcode": 11678191,
+      "name": "Protective Soul Ailin",
+      "numbers": [
+        "CRV-EN024"
+      ]
+    },
+    {
+      "passcode": 18325492,
+      "name": "Gyroid",
+      "numbers": [
+        "CRV-EN007"
+      ]
+    },
+    {
+      "passcode": 18511384,
+      "name": "Fusion Recovery",
+      "numbers": [
+        "CRV-EN038"
+      ]
+    },
+    {
+      "passcode": 18895832,
+      "name": "System Down",
+      "numbers": [
+        "CRV-EN041"
+      ]
+    },
+    {
+      "passcode": 19733961,
+      "name": "Batteryman C",
+      "numbers": [
+        "CRV-EN030"
+      ]
+    },
+    {
+      "passcode": 22512237,
+      "name": "Mechanical Hound",
+      "numbers": [
+        "CRV-EN018"
+      ]
+    },
+    {
+      "passcode": 22790789,
+      "name": "B.E.S. Crystal Core",
+      "numbers": [
+        "CRV-EN021"
+      ]
+    },
+    {
+      "passcode": 23635815,
+      "name": "Jerry Beans Man",
+      "numbers": [
+        "CRV-EN004"
+      ]
+    },
+    {
+      "passcode": 25573054,
+      "name": "Transcendent Wings",
+      "numbers": [
+        "CRV-EN045"
+      ]
+    },
+    {
+      "passcode": 31000575,
+      "name": "Conscription",
+      "numbers": [
+        "CRV-EN058"
+      ]
+    },
+    {
+      "passcode": 32723153,
+      "name": "Magical Explosion",
+      "numbers": [
+        "CRV-EN055"
+      ]
+    },
+    {
+      "passcode": 32752319,
+      "name": "UFOroid Fighter",
+      "numbers": [
+        "CRV-EN034"
+      ]
+    },
+    {
+      "passcode": 33875961,
+      "name": "Dark Catapulter",
+      "numbers": [
+        "CRV-EN013"
+      ]
+    },
+    {
+      "passcode": 37630732,
+      "name": "Power Bond",
+      "numbers": [
+        "CRV-EN037"
+      ]
+    },
+    {
+      "passcode": 42945701,
+      "name": "Spiritual Fire Art - Kurenai",
+      "numbers": [
+        "CRV-EN052"
+      ]
+    },
+    {
+      "passcode": 43061293,
+      "name": "Fire Darts",
+      "numbers": [
+        "CRV-EN049"
+      ]
+    },
+    {
+      "passcode": 43697559,
+      "name": "Jetroid",
+      "numbers": [
+        "CRV-EN011"
+      ]
+    },
+    {
+      "passcode": 44729197,
+      "name": "Steamroid",
+      "numbers": [
+        "CRV-EN008"
+      ]
+    },
+    {
+      "passcode": 44883830,
+      "name": "Des Croaking",
+      "numbers": [
+        "CRV-EN042"
+      ]
+    },
+    {
+      "passcode": 45906428,
+      "name": "Miracle Fusion",
+      "numbers": [
+        "CRV-EN039"
+      ]
+    },
+    {
+      "passcode": 45945685,
+      "name": "Cycroid",
+      "numbers": [
+        "CRV-EN001"
+      ]
+    },
+    {
+      "passcode": 46128076,
+      "name": "Ebon Magician Curran",
+      "numbers": [
+        "CRV-EN031"
+      ]
+    },
+    {
+      "passcode": 56840658,
+      "name": "Poison Draw Frog",
+      "numbers": [
+        "CRV-EN028"
+      ]
+    },
+    {
+      "passcode": 57062206,
+      "name": "Doitsu",
+      "numbers": [
+        "CRV-EN025"
+      ]
+    },
+    {
+      "passcode": 58185394,
+      "name": "Giant Kozaky",
+      "numbers": [
+        "CRV-EN022"
+      ]
+    },
+    {
+      "passcode": 59023523,
+      "name": "Cybernetic Magician",
+      "numbers": [
+        "CRV-EN016"
+      ]
+    },
+    {
+      "passcode": 59907935,
+      "name": "Cyber Archfiend",
+      "numbers": [
+        "CRV-EN019"
+      ]
+    },
+    {
+      "passcode": 60246171,
+      "name": "Soitsu",
+      "numbers": [
+        "CRV-EN002"
+      ]
+    },
+    {
+      "passcode": 61968753,
+      "name": "Bubble Shuffle",
+      "numbers": [
+        "CRV-EN046"
+      ]
+    },
+    {
+      "passcode": 63035430,
+      "name": "Skyscraper",
+      "numbers": [
+        "CRV-EN048"
+      ]
+    },
+    {
+      "passcode": 67095270,
+      "name": "Dimension Wall",
+      "numbers": [
+        "CRV-EN059"
+      ]
+    },
+    {
+      "passcode": 70095154,
+      "name": "Cyber Dragon",
+      "numbers": [
+        "CRV-EN015"
+      ]
+    },
+    {
+      "passcode": 70156997,
+      "name": "Spiritual Earth Art - Kurogane",
+      "numbers": [
+        "CRV-EN050"
+      ]
+    },
+    {
+      "passcode": 70278545,
+      "name": "Pot of Generosity",
+      "numbers": [
+        "CRV-EN043"
+      ]
+    },
+    {
+      "passcode": 71218746,
+      "name": "Drillroid",
+      "numbers": [
+        "CRV-EN009"
+      ]
+    },
+    {
+      "passcode": 71490127,
+      "name": "Dragon's Mirror",
+      "numbers": [
+        "CRV-EN040"
+      ]
+    },
+    {
+      "passcode": 71930383,
+      "name": "Patroid",
+      "numbers": [
+        "CRV-EN006"
+      ]
+    },
+    {
+      "passcode": 74157028,
+      "name": "Cyber Twin Dragon",
+      "numbers": [
+        "CRV-EN035"
+      ]
+    },
+    {
+      "passcode": 78211862,
+      "name": "Rising Energy",
+      "numbers": [
+        "CRV-EN056"
+      ]
+    },
+    {
+      "passcode": 79333300,
+      "name": "Spiritual Wind Art - Miyabi",
+      "numbers": [
+        "CRV-EN053"
+      ]
+    },
+    {
+      "passcode": 79979666,
+      "name": "Elemental HERO Bubbleman",
+      "numbers": [
+        "CRV-EN014"
+      ]
+    },
+    {
+      "passcode": 82112775,
+      "name": "D.D.M. - Different Dimension Master",
+      "numbers": [
+        "CRV-EN032"
+      ]
+    },
+    {
+      "passcode": 83235263,
+      "name": "Tyranno Infinity",
+      "numbers": [
+        "CRV-EN029"
+      ]
+    },
+    {
+      "passcode": 84173492,
+      "name": "Indomitable Fighter Lei Lei",
+      "numbers": [
+        "CRV-EN023"
+      ]
+    },
+    {
+      "passcode": 84451804,
+      "name": "Des Frog",
+      "numbers": [
+        "CRV-EN026"
+      ]
+    },
+    {
+      "passcode": 85306040,
+      "name": "Goblin Elite Attack Force",
+      "numbers": [
+        "CRV-EN020"
+      ]
+    },
+    {
+      "passcode": 96428622,
+      "name": "Cybernetic Cyclopean",
+      "numbers": [
+        "CRV-EN017"
+      ]
+    },
+    {
+      "passcode": 97240270,
+      "name": "Mad Lobster",
+      "numbers": [
+        "CRV-EN003"
+      ]
+    },
+    {
+      "passcode": 97362768,
+      "name": "Spark Blaster",
+      "numbers": [
+        "CRV-EN047"
+      ]
+    },
+    {
+      "passcode": 98585345,
+      "name": "Winged Kuriboh LV10",
+      "numbers": [
+        "CRV-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Cybernetic Revolution'; printings from the YGOPRODeck bulk dump."
+}

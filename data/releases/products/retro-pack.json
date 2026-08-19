@@ -1,0 +1,744 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "retro-pack",
+  "code": "RP01",
+  "name": "Retro Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2024-08-23",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2008-07-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "RP01-EN047"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "RP01-EN007"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "RP01-EN057"
+      ]
+    },
+    {
+      "passcode": 5818798,
+      "name": "Gazelle the King of Mythical Beasts",
+      "numbers": [
+        "RP01-EN043"
+      ]
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight",
+      "numbers": [
+        "RP01-EN004"
+      ]
+    },
+    {
+      "passcode": 7089711,
+      "name": "Hane-Hane",
+      "numbers": [
+        "RP01-EN015"
+      ]
+    },
+    {
+      "passcode": 7902349,
+      "name": "Left Arm of the Forbidden One",
+      "numbers": [
+        "RP01-EN020"
+      ]
+    },
+    {
+      "passcode": 8124921,
+      "name": "Right Leg of the Forbidden One",
+      "numbers": [
+        "RP01-EN017"
+      ]
+    },
+    {
+      "passcode": 9076207,
+      "name": "Armed Ninja",
+      "numbers": [
+        "RP01-EN013"
+      ]
+    },
+    {
+      "passcode": 11384280,
+      "name": "Cannon Soldier",
+      "numbers": [
+        "RP01-EN041"
+      ]
+    },
+    {
+      "passcode": 11901678,
+      "name": "Black Skull Dragon",
+      "numbers": [
+        "RP01-EN028"
+      ]
+    },
+    {
+      "passcode": 12206212,
+      "name": "Harpie Lady Sisters",
+      "numbers": [
+        "RP01-EN026"
+      ]
+    },
+    {
+      "passcode": 12580477,
+      "name": "Raigeki",
+      "numbers": [
+        "RP01-EN005"
+      ]
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone",
+      "numbers": [
+        "RP01-EN010"
+      ]
+    },
+    {
+      "passcode": 13945283,
+      "name": "Wall of Illusion",
+      "numbers": [
+        "RP01-EN083"
+      ]
+    },
+    {
+      "passcode": 15259703,
+      "name": "Toon World",
+      "numbers": [
+        "RP01-EN066"
+      ]
+    },
+    {
+      "passcode": 16762927,
+      "name": "Gravekeeper's Servant",
+      "numbers": [
+        "RP01-EN055"
+      ]
+    },
+    {
+      "passcode": 17484499,
+      "name": "Exchange of the Spirit",
+      "numbers": [
+        "RP01-EN099"
+      ]
+    },
+    {
+      "passcode": 17985575,
+      "name": "Lord of D.",
+      "numbers": [
+        "RP01-EN086"
+      ]
+    },
+    {
+      "passcode": 19384334,
+      "name": "Molten Destruction",
+      "numbers": [
+        "RP01-EN079"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "RP01-EN048"
+      ]
+    },
+    {
+      "passcode": 22046459,
+      "name": "Megamorph",
+      "numbers": [
+        "RP01-EN061"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "RP01-EN071"
+      ]
+    },
+    {
+      "passcode": 23401839,
+      "name": "Senju of the Thousand Hands",
+      "numbers": [
+        "RP01-EN068"
+      ]
+    },
+    {
+      "passcode": 23995346,
+      "name": "Blue-Eyes Ultimate Dragon",
+      "numbers": [
+        "RP01-EN000"
+      ]
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization",
+      "numbers": [
+        "RP01-EN008"
+      ]
+    },
+    {
+      "passcode": 25833572,
+      "name": "Gate Guardian",
+      "numbers": [
+        "RP01-EN023"
+      ]
+    },
+    {
+      "passcode": 25955164,
+      "name": "Sanga of the Thunder",
+      "numbers": [
+        "RP01-EN030"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "RP01-EN036"
+      ]
+    },
+    {
+      "passcode": 26302522,
+      "name": "Blast Sphere",
+      "numbers": [
+        "RP01-EN091"
+      ]
+    },
+    {
+      "passcode": 26376390,
+      "name": "Copycat",
+      "numbers": [
+        "RP01-EN092"
+      ]
+    },
+    {
+      "passcode": 28279543,
+      "name": "Curse of Dragon",
+      "numbers": [
+        "RP01-EN009"
+      ]
+    },
+    {
+      "passcode": 28649820,
+      "name": "Embodiment of Apophis",
+      "numbers": [
+        "RP01-EN098"
+      ]
+    },
+    {
+      "passcode": 28933734,
+      "name": "Mask of Darkness",
+      "numbers": [
+        "RP01-EN027"
+      ]
+    },
+    {
+      "passcode": 29654737,
+      "name": "Amazoness Chain Master",
+      "numbers": [
+        "RP01-EN097"
+      ]
+    },
+    {
+      "passcode": 31560081,
+      "name": "Magician of Faith",
+      "numbers": [
+        "RP01-EN033"
+      ]
+    },
+    {
+      "passcode": 31786629,
+      "name": "Thunder Dragon",
+      "numbers": [
+        "RP01-EN040"
+      ]
+    },
+    {
+      "passcode": 33396948,
+      "name": "Exodia the Forbidden One",
+      "numbers": [
+        "RP01-EN021"
+      ]
+    },
+    {
+      "passcode": 34627841,
+      "name": "Kaibaman",
+      "numbers": [
+        "RP01-EN095"
+      ]
+    },
+    {
+      "passcode": 37507488,
+      "name": "Relieve Monster",
+      "numbers": [
+        "RP01-EN093"
+      ]
+    },
+    {
+      "passcode": 38369349,
+      "name": "Manga Ryu-Ran",
+      "numbers": [
+        "RP01-EN062"
+      ]
+    },
+    {
+      "passcode": 40619825,
+      "name": "Axe of Despair",
+      "numbers": [
+        "RP01-EN051"
+      ]
+    },
+    {
+      "passcode": 40640057,
+      "name": "Kuriboh",
+      "numbers": [
+        "RP01-EN037"
+      ]
+    },
+    {
+      "passcode": 41420027,
+      "name": "Solemn Judgment",
+      "numbers": [
+        "RP01-EN045"
+      ]
+    },
+    {
+      "passcode": 41426869,
+      "name": "Black Illusion Ritual",
+      "numbers": [
+        "RP01-EN060"
+      ]
+    },
+    {
+      "passcode": 41462083,
+      "name": "Thousand Dragon",
+      "numbers": [
+        "RP01-EN049"
+      ]
+    },
+    {
+      "passcode": 42703248,
+      "name": "Giant Trunade",
+      "numbers": [
+        "RP01-EN058"
+      ]
+    },
+    {
+      "passcode": 43973174,
+      "name": "The Flute of Summoning Dragon",
+      "numbers": [
+        "RP01-EN087"
+      ]
+    },
+    {
+      "passcode": 44519536,
+      "name": "Left Leg of the Forbidden One",
+      "numbers": [
+        "RP01-EN018"
+      ]
+    },
+    {
+      "passcode": 44656491,
+      "name": "Messenger of Peace",
+      "numbers": [
+        "RP01-EN082"
+      ]
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman",
+      "numbers": [
+        "RP01-EN002"
+      ]
+    },
+    {
+      "passcode": 45778932,
+      "name": "Rising Air Current",
+      "numbers": [
+        "RP01-EN080"
+      ]
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician",
+      "numbers": [
+        "RP01-EN003"
+      ]
+    },
+    {
+      "passcode": 53183600,
+      "name": "Blue-Eyes Toon Dragon",
+      "numbers": [
+        "RP01-EN050"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "RP01-EN014"
+      ]
+    },
+    {
+      "passcode": 54752875,
+      "name": "Twin-Headed Thunder Dragon",
+      "numbers": [
+        "RP01-EN042"
+      ]
+    },
+    {
+      "passcode": 54912977,
+      "name": "Ancient Lamp",
+      "numbers": [
+        "RP01-EN100"
+      ]
+    },
+    {
+      "passcode": 56594520,
+      "name": "Gaia Power",
+      "numbers": [
+        "RP01-EN077"
+      ]
+    },
+    {
+      "passcode": 57617178,
+      "name": "Sonic Bird",
+      "numbers": [
+        "RP01-EN075"
+      ]
+    },
+    {
+      "passcode": 57839750,
+      "name": "Mother Grizzly",
+      "numbers": [
+        "RP01-EN073"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "RP01-EN069"
+      ]
+    },
+    {
+      "passcode": 62340868,
+      "name": "Kazejin",
+      "numbers": [
+        "RP01-EN031"
+      ]
+    },
+    {
+      "passcode": 62397231,
+      "name": "Hyozanryu",
+      "numbers": [
+        "RP01-EN065"
+      ]
+    },
+    {
+      "passcode": 64631466,
+      "name": "Relinquished",
+      "numbers": [
+        "RP01-EN054"
+      ]
+    },
+    {
+      "passcode": 65169794,
+      "name": "Black Pendant",
+      "numbers": [
+        "RP01-EN052"
+      ]
+    },
+    {
+      "passcode": 65458948,
+      "name": "Toon Mermaid",
+      "numbers": [
+        "RP01-EN063"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "RP01-EN006"
+      ]
+    },
+    {
+      "passcode": 66889139,
+      "name": "Gaia the Dragon Champion",
+      "numbers": [
+        "RP01-EN022"
+      ]
+    },
+    {
+      "passcode": 70368879,
+      "name": "Upstart Goblin",
+      "numbers": [
+        "RP01-EN056"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "RP01-EN024"
+      ]
+    },
+    {
+      "passcode": 70903634,
+      "name": "Right Arm of the Forbidden One",
+      "numbers": [
+        "RP01-EN019"
+      ]
+    },
+    {
+      "passcode": 71625222,
+      "name": "Time Wizard",
+      "numbers": [
+        "RP01-EN035"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "RP01-EN012"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "RP01-EN084"
+      ]
+    },
+    {
+      "passcode": 73915051,
+      "name": "Scapegoat",
+      "numbers": [
+        "RP01-EN090"
+      ]
+    },
+    {
+      "passcode": 74191942,
+      "name": "Painful Choice",
+      "numbers": [
+        "RP01-EN059"
+      ]
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon",
+      "numbers": [
+        "RP01-EN011"
+      ]
+    },
+    {
+      "passcode": 76812113,
+      "name": "Harpie Lady",
+      "numbers": [
+        "RP01-EN025"
+      ]
+    },
+    {
+      "passcode": 77414722,
+      "name": "Magic Jammer",
+      "numbers": [
+        "RP01-EN046"
+      ]
+    },
+    {
+      "passcode": 79571449,
+      "name": "Graceful Charity",
+      "numbers": [
+        "RP01-EN088"
+      ]
+    },
+    {
+      "passcode": 80316585,
+      "name": "Cyber Harpie Lady",
+      "numbers": [
+        "RP01-EN096"
+      ]
+    },
+    {
+      "passcode": 81480460,
+      "name": "Barrel Dragon",
+      "numbers": [
+        "RP01-EN044"
+      ]
+    },
+    {
+      "passcode": 81777047,
+      "name": "Luminous Spark",
+      "numbers": [
+        "RP01-EN081"
+      ]
+    },
+    {
+      "passcode": 82999629,
+      "name": "Umiiruka",
+      "numbers": [
+        "RP01-EN078"
+      ]
+    },
+    {
+      "passcode": 83011277,
+      "name": "Mystic Tomato",
+      "numbers": [
+        "RP01-EN076"
+      ]
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn",
+      "numbers": [
+        "RP01-EN016"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "RP01-EN074"
+      ]
+    },
+    {
+      "passcode": 86871614,
+      "name": "Cloning",
+      "numbers": [
+        "RP01-EN094"
+      ]
+    },
+    {
+      "passcode": 88819587,
+      "name": "Baby Dragon",
+      "numbers": [
+        "RP01-EN034"
+      ]
+    },
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon",
+      "numbers": [
+        "RP01-EN001"
+      ]
+    },
+    {
+      "passcode": 90219263,
+      "name": "Elegant Egotist",
+      "numbers": [
+        "RP01-EN029"
+      ]
+    },
+    {
+      "passcode": 91842653,
+      "name": "Toon Summoned Skull",
+      "numbers": [
+        "RP01-EN064"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "RP01-EN053"
+      ]
+    },
+    {
+      "passcode": 93920745,
+      "name": "Penguin Soldier",
+      "numbers": [
+        "RP01-EN089"
+      ]
+    },
+    {
+      "passcode": 94773007,
+      "name": "Jirai Gumo",
+      "numbers": [
+        "RP01-EN039"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "RP01-EN070"
+      ]
+    },
+    {
+      "passcode": 95727991,
+      "name": "Catapult Turtle",
+      "numbers": [
+        "RP01-EN038"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "RP01-EN072"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "RP01-EN067"
+      ]
+    },
+    {
+      "passcode": 97590747,
+      "name": "La Jinn the Mystical Genie of the Lamp",
+      "numbers": [
+        "RP01-EN085"
+      ]
+    },
+    {
+      "passcode": 98434877,
+      "name": "Suijin",
+      "numbers": [
+        "RP01-EN032"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Retro Pack'; printings from the YGOPRODeck bulk dump."
+}

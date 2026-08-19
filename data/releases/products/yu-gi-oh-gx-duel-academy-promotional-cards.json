@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-duel-academy-promotional-cards",
+  "code": "GX1",
+  "name": "Yu-Gi-Oh! GX Duel Academy promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-01-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 26647858,
+      "name": "Hero Ring",
+      "numbers": [
+        "GX1-EN003"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "GX1-EN002"
+      ]
+    },
+    {
+      "passcode": 89252153,
+      "name": "Elemental HERO Necroshade",
+      "numbers": [
+        "GX1-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Duel Academy promotional cards'; printings from the YGOPRODeck bulk dump."
+}

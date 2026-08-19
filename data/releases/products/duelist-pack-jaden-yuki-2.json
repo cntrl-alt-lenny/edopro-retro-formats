@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-jaden-yuki-2",
+  "code": "DP03",
+  "name": "Duelist Pack: Jaden Yuki 2",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-02-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 191749,
+      "name": "Hero Flash!!",
+      "numbers": [
+        "DP03-EN020"
+      ]
+    },
+    {
+      "passcode": 213326,
+      "name": "E - Emergency Call",
+      "numbers": [
+        "DP03-EN017"
+      ]
+    },
+    {
+      "passcode": 10526791,
+      "name": "Elemental HERO Wildedge",
+      "numbers": [
+        "DP03-EN010"
+      ]
+    },
+    {
+      "passcode": 10759529,
+      "name": "Kid Guard",
+      "numbers": [
+        "DP03-EN030"
+      ]
+    },
+    {
+      "passcode": 11471117,
+      "name": "Light Laser",
+      "numbers": [
+        "DP03-EN025"
+      ]
+    },
+    {
+      "passcode": 14772491,
+      "name": "Common Soul",
+      "numbers": [
+        "DP03-EN023"
+      ]
+    },
+    {
+      "passcode": 16616620,
+      "name": "Contact",
+      "numbers": [
+        "DP03-EN021"
+      ]
+    },
+    {
+      "passcode": 17955766,
+      "name": "Neo-Spacian Aqua Dolphin",
+      "numbers": [
+        "DP03-EN005"
+      ]
+    },
+    {
+      "passcode": 28677304,
+      "name": "Elemental HERO Dark Neos",
+      "numbers": [
+        "DP03-EN014"
+      ]
+    },
+    {
+      "passcode": 29612557,
+      "name": "Cyclone Boomerang",
+      "numbers": [
+        "DP03-EN015"
+      ]
+    },
+    {
+      "passcode": 32679370,
+      "name": "Hero Kid",
+      "numbers": [
+        "DP03-EN004"
+      ]
+    },
+    {
+      "passcode": 37318031,
+      "name": "R - Righteous Justice",
+      "numbers": [
+        "DP03-EN018"
+      ]
+    },
+    {
+      "passcode": 42015635,
+      "name": "Neo Space",
+      "numbers": [
+        "DP03-EN024"
+      ]
+    },
+    {
+      "passcode": 42682609,
+      "name": "Chrysalis Dolphin",
+      "numbers": [
+        "DP03-EN008"
+      ]
+    },
+    {
+      "passcode": 43237273,
+      "name": "Neo-Spacian Dark Panther",
+      "numbers": [
+        "DP03-EN007"
+      ]
+    },
+    {
+      "passcode": 44676200,
+      "name": "Hero Barrier",
+      "numbers": [
+        "DP03-EN027"
+      ]
+    },
+    {
+      "passcode": 48976825,
+      "name": "Burial from a Different Dimension",
+      "numbers": [
+        "DP03-EN026"
+      ]
+    },
+    {
+      "passcode": 55171412,
+      "name": "Elemental HERO Aqua Neos",
+      "numbers": [
+        "DP03-EN012"
+      ]
+    },
+    {
+      "passcode": 55615891,
+      "name": "Elemental HERO Wild Wingman",
+      "numbers": [
+        "DP03-EN011"
+      ]
+    },
+    {
+      "passcode": 55985014,
+      "name": "Miracle Kids",
+      "numbers": [
+        "DP03-EN028"
+      ]
+    },
+    {
+      "passcode": 59793705,
+      "name": "Elemental HERO Bladedge",
+      "numbers": [
+        "DP03-EN002"
+      ]
+    },
+    {
+      "passcode": 63703130,
+      "name": "O - Oversoul",
+      "numbers": [
+        "DP03-EN019"
+      ]
+    },
+    {
+      "passcode": 74825788,
+      "name": "H - Heated Heart",
+      "numbers": [
+        "DP03-EN016"
+      ]
+    },
+    {
+      "passcode": 78387742,
+      "name": "Fake Hero",
+      "numbers": [
+        "DP03-EN022"
+      ]
+    },
+    {
+      "passcode": 81566151,
+      "name": "Elemental HERO Flare Neos",
+      "numbers": [
+        "DP03-EN013"
+      ]
+    },
+    {
+      "passcode": 84361420,
+      "name": "Edge Hammer",
+      "numbers": [
+        "DP03-EN029"
+      ]
+    },
+    {
+      "passcode": 85087012,
+      "name": "Card Trooper",
+      "numbers": [
+        "DP03-EN009"
+      ]
+    },
+    {
+      "passcode": 86188410,
+      "name": "Elemental HERO Wildheart",
+      "numbers": [
+        "DP03-EN003"
+      ]
+    },
+    {
+      "passcode": 89621922,
+      "name": "Neo-Spacian Flare Scarab",
+      "numbers": [
+        "DP03-EN006"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "DP03-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Jaden Yuki 2'; printings from the YGOPRODeck bulk dump."
+}

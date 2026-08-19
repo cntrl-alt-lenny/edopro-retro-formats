@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "crimson-crisis-special-edition",
+  "code": "CRMS",
+  "name": "Crimson Crisis: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2009-04-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2009-04-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2009-04-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 28297833,
+      "name": "Necroface",
+      "numbers": [
+        "CRMS-ENSE1"
+      ]
+    },
+    {
+      "passcode": 63665875,
+      "name": "Goblin Zombie",
+      "numbers": [
+        "CRMS-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Crimson Crisis: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

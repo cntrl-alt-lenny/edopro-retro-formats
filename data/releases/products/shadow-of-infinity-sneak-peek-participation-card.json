@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shadow-of-infinity-sneak-peek-participation-card",
+  "code": "SP2",
+  "name": "Shadow of Infinity Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2006-02-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 54912977,
+      "name": "Ancient Lamp",
+      "numbers": [
+        "SP2-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shadow of Infinity Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

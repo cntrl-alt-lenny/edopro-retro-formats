@@ -1,0 +1,237 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-chazz-princeton",
+  "code": "DP2",
+  "name": "Duelist Pack: Chazz Princeton",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2006-02-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 980973,
+      "name": "Armed Dragon LV3",
+      "numbers": [
+        "DP2-EN010"
+      ]
+    },
+    {
+      "passcode": 8251996,
+      "name": "Ojama Delta Hurricane!!",
+      "numbers": [
+        "DP2-EN018"
+      ]
+    },
+    {
+      "passcode": 12247206,
+      "name": "Inferno Reckless Summon",
+      "numbers": [
+        "DP2-EN025"
+      ]
+    },
+    {
+      "passcode": 12482652,
+      "name": "Ojama Green",
+      "numbers": [
+        "DP2-EN002"
+      ]
+    },
+    {
+      "passcode": 18271561,
+      "name": "Chthonian Blast",
+      "numbers": [
+        "DP2-EN028"
+      ]
+    },
+    {
+      "passcode": 23309606,
+      "name": "Infernal Incinerator",
+      "numbers": [
+        "DP2-EN009"
+      ]
+    },
+    {
+      "passcode": 24643836,
+      "name": "Ojamagic",
+      "numbers": [
+        "DP2-EN020"
+      ]
+    },
+    {
+      "passcode": 29843091,
+      "name": "Ojama Trio",
+      "numbers": [
+        "DP2-EN027"
+      ]
+    },
+    {
+      "passcode": 42941100,
+      "name": "Ojama Yellow",
+      "numbers": [
+        "DP2-EN003"
+      ]
+    },
+    {
+      "passcode": 46384672,
+      "name": "Armed Dragon LV5",
+      "numbers": [
+        "DP2-EN011"
+      ]
+    },
+    {
+      "passcode": 46910446,
+      "name": "Chthonian Alliance",
+      "numbers": [
+        "DP2-EN022"
+      ]
+    },
+    {
+      "passcode": 51638941,
+      "name": "V-Tiger Jet",
+      "numbers": [
+        "DP2-EN001"
+      ]
+    },
+    {
+      "passcode": 58641905,
+      "name": "Ring of Defense",
+      "numbers": [
+        "DP2-EN026"
+      ]
+    },
+    {
+      "passcode": 58859575,
+      "name": "VW-Tiger Catapult",
+      "numbers": [
+        "DP2-EN016"
+      ]
+    },
+    {
+      "passcode": 59464593,
+      "name": "Armed Dragon LV10",
+      "numbers": [
+        "DP2-EN013"
+      ]
+    },
+    {
+      "passcode": 61850482,
+      "name": "Level Modulation",
+      "numbers": [
+        "DP2-EN019"
+      ]
+    },
+    {
+      "passcode": 62651957,
+      "name": "X-Head Cannon",
+      "numbers": [
+        "DP2-EN005"
+      ]
+    },
+    {
+      "passcode": 64500000,
+      "name": "Z-Metal Tank",
+      "numbers": [
+        "DP2-EN007"
+      ]
+    },
+    {
+      "passcode": 65622692,
+      "name": "Y-Dragon Head",
+      "numbers": [
+        "DP2-EN006"
+      ]
+    },
+    {
+      "passcode": 72287557,
+      "name": "Chthonian Polymer",
+      "numbers": [
+        "DP2-EN029"
+      ]
+    },
+    {
+      "passcode": 73879377,
+      "name": "Armed Dragon LV7",
+      "numbers": [
+        "DP2-EN012"
+      ]
+    },
+    {
+      "passcode": 79335209,
+      "name": "Ojama Black",
+      "numbers": [
+        "DP2-EN004"
+      ]
+    },
+    {
+      "passcode": 84136000,
+      "name": "The Grave of Enkindling",
+      "numbers": [
+        "DP2-EN030"
+      ]
+    },
+    {
+      "passcode": 84243274,
+      "name": "VWXYZ-Dragon Catapult Cannon",
+      "numbers": [
+        "DP2-EN017"
+      ]
+    },
+    {
+      "passcode": 85852291,
+      "name": "Magical Mallet",
+      "numbers": [
+        "DP2-EN024"
+      ]
+    },
+    {
+      "passcode": 90140980,
+      "name": "Ojama King",
+      "numbers": [
+        "DP2-EN015"
+      ]
+    },
+    {
+      "passcode": 90374791,
+      "name": "Armed Changer",
+      "numbers": [
+        "DP2-EN023"
+      ]
+    },
+    {
+      "passcode": 91998119,
+      "name": "XYZ-Dragon Cannon",
+      "numbers": [
+        "DP2-EN014"
+      ]
+    },
+    {
+      "passcode": 96300057,
+      "name": "W-Wing Catapult",
+      "numbers": [
+        "DP2-EN008"
+      ]
+    },
+    {
+      "passcode": 98259197,
+      "name": "Ojamuscle",
+      "numbers": [
+        "DP2-EN021"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Chazz Princeton'; printings from the YGOPRODeck bulk dump."
+}

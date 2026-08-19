@@ -1,0 +1,244 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "structure-deck-blaze-of-destruction",
+  "code": "SD3",
+  "name": "Structure Deck: Blaze of Destruction",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2005-05-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3136426,
+      "name": "Level Limit - Area B",
+      "numbers": [
+        "SD3-EN024"
+      ]
+    },
+    {
+      "passcode": 4732017,
+      "name": "Molten Zombie",
+      "numbers": [
+        "SD3-EN007"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "SD3-EN015"
+      ]
+    },
+    {
+      "passcode": 5464695,
+      "name": "Blazing Inpachi",
+      "numbers": [
+        "SD3-EN003"
+      ]
+    },
+    {
+      "passcode": 11813953,
+      "name": "Great Angus",
+      "numbers": [
+        "SD3-EN002"
+      ]
+    },
+    {
+      "passcode": 19384334,
+      "name": "Molten Destruction",
+      "numbers": [
+        "SD3-EN016"
+      ]
+    },
+    {
+      "passcode": 19613556,
+      "name": "Heavy Storm",
+      "numbers": [
+        "SD3-EN021"
+      ]
+    },
+    {
+      "passcode": 19847532,
+      "name": "Infernal Flame Emperor",
+      "numbers": [
+        "SD3-EN001"
+      ]
+    },
+    {
+      "passcode": 22589918,
+      "name": "Reload",
+      "numbers": [
+        "SD3-EN023"
+      ]
+    },
+    {
+      "passcode": 26205777,
+      "name": "Thestalos the Firestorm Monarch",
+      "numbers": [
+        "SD3-EN011"
+      ]
+    },
+    {
+      "passcode": 33767325,
+      "name": "Meteor of Destruction",
+      "numbers": [
+        "SD3-EN026"
+      ]
+    },
+    {
+      "passcode": 38275183,
+      "name": "Spell Shield Type-8",
+      "numbers": [
+        "SD3-EN030"
+      ]
+    },
+    {
+      "passcode": 45985838,
+      "name": "Solar Flare Dragon",
+      "numbers": [
+        "SD3-EN008"
+      ]
+    },
+    {
+      "passcode": 45986603,
+      "name": "Snatch Steal",
+      "numbers": [
+        "SD3-EN014"
+      ]
+    },
+    {
+      "passcode": 48576971,
+      "name": "Necklace of Command",
+      "numbers": [
+        "SD3-EN025"
+      ]
+    },
+    {
+      "passcode": 51355346,
+      "name": "Gaia Soul the Combustible Collective",
+      "numbers": [
+        "SD3-EN012"
+      ]
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed",
+      "numbers": [
+        "SD3-EN019"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "SD3-EN027"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "SD3-EN004"
+      ]
+    },
+    {
+      "passcode": 67934141,
+      "name": "Ultimate Baseball Kid",
+      "numbers": [
+        "SD3-EN009"
+      ]
+    },
+    {
+      "passcode": 68658728,
+      "name": "Little Chimera",
+      "numbers": [
+        "SD3-EN005"
+      ]
+    },
+    {
+      "passcode": 70828912,
+      "name": "Premature Burial",
+      "numbers": [
+        "SD3-EN018"
+      ]
+    },
+    {
+      "passcode": 71044499,
+      "name": "Nobleman of Crossout",
+      "numbers": [
+        "SD3-EN017"
+      ]
+    },
+    {
+      "passcode": 74823665,
+      "name": "Inferno",
+      "numbers": [
+        "SD3-EN006"
+      ]
+    },
+    {
+      "passcode": 79759861,
+      "name": "Tribute to The Doomed",
+      "numbers": [
+        "SD3-EN020"
+      ]
+    },
+    {
+      "passcode": 82705573,
+      "name": "Backfire",
+      "numbers": [
+        "SD3-EN031"
+      ]
+    },
+    {
+      "passcode": 83968380,
+      "name": "Jar of Greed",
+      "numbers": [
+        "SD3-EN029"
+      ]
+    },
+    {
+      "passcode": 85562745,
+      "name": "Dark Room of Nightmare",
+      "numbers": [
+        "SD3-EN022"
+      ]
+    },
+    {
+      "passcode": 88753985,
+      "name": "Fox Fire",
+      "numbers": [
+        "SD3-EN013"
+      ]
+    },
+    {
+      "passcode": 90810762,
+      "name": "Raging Flame Sprite",
+      "numbers": [
+        "SD3-EN010"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "SD3-EN028"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Structure Deck: Blaze of Destruction'; printings from the YGOPRODeck bulk dump."
+}

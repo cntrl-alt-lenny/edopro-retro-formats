@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-shining-darkness-sneak-peek-participation-card",
+  "code": "TSHD",
+  "name": "The Shining Darkness Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2010-05-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 5998840,
+      "name": "XX-Saber Boggart Knight",
+      "numbers": [
+        "TSHD-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'The Shining Darkness Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-championship-2007-prize-card-b",
+  "code": "SJCS",
+  "name": "Shonen Jump Championship 2007 Prize Card B",
+  "kind": "promo-tournament",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2007-08-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 75500286,
+      "name": "Gold Sarcophagus",
+      "numbers": [
+        "SJCS-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Shonen Jump Championship 2007 Prize Card B'; printings from the YGOPRODeck bulk dump."
+}

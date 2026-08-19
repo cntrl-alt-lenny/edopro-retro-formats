@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "champion-pack-game-seven",
+  "code": "CP07",
+  "name": "Champion Pack: Game Seven",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2008-09-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1845204,
+      "name": "Instant Fusion",
+      "numbers": [
+        "CP07-EN017"
+      ]
+    },
+    {
+      "passcode": 10667321,
+      "name": "Ancient Rules",
+      "numbers": [
+        "CP07-EN019"
+      ]
+    },
+    {
+      "passcode": 14318794,
+      "name": "Life Absorbing Machine",
+      "numbers": [
+        "CP07-EN013"
+      ]
+    },
+    {
+      "passcode": 25773409,
+      "name": "Legendary Jujitsu Master",
+      "numbers": [
+        "CP07-EN002"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "CP07-EN003"
+      ]
+    },
+    {
+      "passcode": 37195861,
+      "name": "Elemental HERO Ocean",
+      "numbers": [
+        "CP07-EN006"
+      ]
+    },
+    {
+      "passcode": 40410110,
+      "name": "Homunculus the Alchemic Being",
+      "numbers": [
+        "CP07-EN015"
+      ]
+    },
+    {
+      "passcode": 41470137,
+      "name": "Gladiator Beast Bestiari",
+      "numbers": [
+        "CP07-EN004"
+      ]
+    },
+    {
+      "passcode": 42309337,
+      "name": "Counter Counter",
+      "numbers": [
+        "CP07-EN020"
+      ]
+    },
+    {
+      "passcode": 45425051,
+      "name": "Fairy King Truesdale",
+      "numbers": [
+        "CP07-EN007"
+      ]
+    },
+    {
+      "passcode": 47084486,
+      "name": "Vanity's Fiend",
+      "numbers": [
+        "CP07-EN009"
+      ]
+    },
+    {
+      "passcode": 48686504,
+      "name": "Lonefire Blossom",
+      "numbers": [
+        "CP07-EN005"
+      ]
+    },
+    {
+      "passcode": 48700891,
+      "name": "Memory Crusher",
+      "numbers": [
+        "CP07-EN016"
+      ]
+    },
+    {
+      "passcode": 51632798,
+      "name": "Fusilier Dragon, the Dual-Mode Beast",
+      "numbers": [
+        "CP07-EN014"
+      ]
+    },
+    {
+      "passcode": 71950093,
+      "name": "Shovel Crusher",
+      "numbers": [
+        "CP07-EN012"
+      ]
+    },
+    {
+      "passcode": 74117290,
+      "name": "Dark World Dealings",
+      "numbers": [
+        "CP07-EN010"
+      ]
+    },
+    {
+      "passcode": 93151201,
+      "name": "Voltic Kong",
+      "numbers": [
+        "CP07-EN001"
+      ]
+    },
+    {
+      "passcode": 93187568,
+      "name": "Spell Striker",
+      "numbers": [
+        "CP07-EN008"
+      ]
+    },
+    {
+      "passcode": 94944637,
+      "name": "Doom Shaman",
+      "numbers": [
+        "CP07-EN011"
+      ]
+    },
+    {
+      "passcode": 98666339,
+      "name": "Dimensional Inversion",
+      "numbers": [
+        "CP07-EN018"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Champion Pack: Game Seven'; printings from the YGOPRODeck bulk dump."
+}

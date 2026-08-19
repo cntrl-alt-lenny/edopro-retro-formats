@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-tag-force-3-promotional-cards",
+  "code": "GX06",
+  "name": "Yu-Gi-Oh! GX Tag Force 3 promotional cards",
+  "kind": "promo-videogame",
+  "release_events": [
+    {
+      "territory": "tcg-eu",
+      "date": "2008-11-28",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 30915572,
+      "name": "Gallis the Star Beast",
+      "numbers": [
+        "GX06-EN001"
+      ]
+    },
+    {
+      "passcode": 67300516,
+      "name": "Red-Eyes Wyvern",
+      "numbers": [
+        "GX06-EN002"
+      ]
+    },
+    {
+      "passcode": 93709215,
+      "name": "Darkness Destroyer",
+      "numbers": [
+        "GX06-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! GX Tag Force 3 promotional cards'; printings from the YGOPRODeck bulk dump."
+}

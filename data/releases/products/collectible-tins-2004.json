@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2004",
+  "code": "CT1",
+  "name": "Collectible Tins 2004",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2004-09-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 10375182,
+      "name": "Command Knight",
+      "numbers": [
+        "CT1-EN003"
+      ]
+    },
+    {
+      "passcode": 16589042,
+      "name": "Swift Gaia the Fierce Knight",
+      "numbers": [
+        "CT1-EN004"
+      ]
+    },
+    {
+      "passcode": 39507162,
+      "name": "Blade Knight",
+      "numbers": [
+        "CT1-EN002"
+      ]
+    },
+    {
+      "passcode": 52077741,
+      "name": "Obnoxious Celtic Guard",
+      "numbers": [
+        "CT1-EN006"
+      ]
+    },
+    {
+      "passcode": 75372290,
+      "name": "Total Defense Shogun",
+      "numbers": [
+        "CT1-EN001"
+      ]
+    },
+    {
+      "passcode": 91512835,
+      "name": "Insect Queen",
+      "numbers": [
+        "CT1-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2004'; printings from the YGOPRODeck bulk dump."
+}
