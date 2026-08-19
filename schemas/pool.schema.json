@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/pool.schema.json",
+  "title": "Card pool definition",
+  "description": "The set of cards legally available to players at a format's snapshot date. Two representations are supported: an intensional rule (release cutoff, resolved against the releases dataset at build time) and an extensional list (explicit passcodes, typically imported from a vetted external definition). A pool may carry both; the validator cross-checks them against each other where possible.",
+  "type": "object",
+  "required": ["id", "region", "kind", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^pool-[a-z0-9-]+$" },
+    "region": { "$ref": "common.schema.json#/$defs/region" },
+    "kind": { "type": "string", "enum": ["extensional", "release-cutoff"] },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["passcode", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "passcode": { "$ref": "common.schema.json#/$defs/passcode", "description": "The card's canonical (modern) passcode." },
+          "name": { "type": "string" },
+          "variant_passcodes": {
+            "type": "array",
+            "items": { "$ref": "common.schema.json#/$defs/passcode" },
+            "description": "Additional artwork-variant passcodes of this card that were also legal in period (cdb alias within +/-10 of the base code). Recorded explicitly so generated whitelists can reproduce reference lists code-for-code."
+          }
+        }
+      },
+      "description": "extensional: the full explicit pool, one entry per canonical card. Must be present when kind=extensional."
+    },
+    "cutoff": {
+      "type": "object",
+      "description": "release-cutoff: every card with a release_date <= cutoff_date in the given region is in the pool, then include/exclude exceptions apply. Must be present when kind=release-cutoff.",
+      "required": ["cutoff_date"],
+      "additionalProperties": false,
+      "properties": {
+        "cutoff_date": { "$ref": "common.schema.json#/$defs/isoDate" },
+        "include": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["card", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "card": { "$ref": "common.schema.json#/$defs/cardRef" },
+              "reason": { "type": "string" },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["card", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "card": { "$ref": "common.schema.json#/$defs/cardRef" },
+              "reason": { "type": "string" },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          }
+        }
+      }
+    },
+    "completeness": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    { "if": { "properties": { "kind": { "const": "extensional" } } }, "then": { "required": ["cards"] } },
+    { "if": { "properties": { "kind": { "const": "release-cutoff" } } }, "then": { "required": ["cutoff"] } }
+  ]
+}

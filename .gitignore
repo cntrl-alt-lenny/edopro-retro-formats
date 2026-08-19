@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Import caches: raw downloaded/scraped material is never committed.
+# Canonical data lives in data/ with provenance; regenerate caches with tools/import.
+.cache/
+cache/
+*.cdb
+!dist/databases/*.cdb
+
+# Editor noise
+.vscode/
+.idea/
+*.swp
+.DS_Store

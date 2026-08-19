@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/releases.schema.json",
+  "title": "Product releases",
+  "description": "Release dates of products (booster sets, structure decks, promos) per region. This dataset is what makes release-cutoff card pools computable. Coverage grows over time; the 'coverage' field says how complete a file claims to be.",
+  "type": "object",
+  "required": ["region", "coverage", "products", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "region": { "$ref": "common.schema.json#/$defs/region" },
+    "coverage": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "note": { "type": "string" }
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "release_date", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "description": "Set code, e.g. TLM, ABPF." },
+          "name": { "type": "string" },
+          "release_date": { "$ref": "common.schema.json#/$defs/isoDate" },
+          "kind": { "type": "string", "enum": ["booster", "structure", "starter", "promo", "tin", "special", "other"] },
+          "cards": {
+            "type": "array",
+            "items": { "$ref": "common.schema.json#/$defs/cardRef" },
+            "description": "Optional explicit card list for products whose contents matter to a pool computation. Usually omitted; pool building can also join through an external set-contents dataset."
+          },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        }
+      }
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+  }
+}

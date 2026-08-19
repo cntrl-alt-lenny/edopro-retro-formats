@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/rule-profile.schema.json",
+  "title": "Rule profile",
+  "description": "A reusable description of the game rules in force during an era, mapped onto the ocgcore engine. Many formats share a profile; a profile never belongs to a single format. Where the engine cannot reproduce a historical rule, the gap is recorded rather than silently dropped.",
+  "type": "object",
+  "required": ["id", "name", "engine", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^rules-[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "era": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "start": { "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }] },
+        "end": { "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }] },
+        "official_ruleset_label": {
+          "type": "string",
+          "description": "The official label players used at the time (e.g. 'pre-Master Rule expert rules', 'Master Rule (2008)'). Official labels do not always exactly reproduce historical TCG behaviour; the flags below are authoritative for what this profile actually configures."
+        }
+      }
+    },
+    "engine": {
+      "type": "object",
+      "required": ["flags"],
+      "additionalProperties": false,
+      "properties": {
+        "preset": {
+          "oneOf": [{ "type": "string" }, { "type": "null" }],
+          "description": "An ocgcore composite mode macro this profile corresponds to exactly, if one exists (e.g. DUEL_MODE_GOAT, DUEL_MODE_MR1). null when the profile is a custom flag combination."
+        },
+        "flags": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^DUEL_[A-Z0-9_]+$" },
+          "description": "Individual ocgcore DUEL_* flags (not composite MODE macros) that make up this profile. The build verifies that, when preset is set, this list equals the preset's expansion for the pinned ocgcore revision."
+        },
+        "ocgcore_reference": {
+          "type": "string",
+          "description": "Commit or tag of edo9300/ygopro-core against which the flag names/values were verified."
+        },
+        "starting_lp": { "type": "integer" },
+        "starting_hand": { "type": "integer" },
+        "draw_count": { "type": "integer" }
+      }
+    },
+    "client": {
+      "type": "object",
+      "description": "Settings enforced by the EDOPro client/server rather than ocgcore: banned card types and deck size ranges (HostInfo.forbiddentypes and sizes; see docs/edopro-research.md). Hosts must set these manually — they cannot ship in a data repo.",
+      "additionalProperties": false,
+      "properties": {
+        "forbidden_card_types": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^TYPE_[A-Z_]+$" }
+        },
+        "main_deck": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "extra_deck": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "side_deck": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 }
+      }
+    },
+    "differences_from_modern": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["summary"],
+        "additionalProperties": false,
+        "properties": {
+          "summary": { "type": "string" },
+          "engine_flag": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "The DUEL_* flag that reproduces this difference, or null if unrepresentable." },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        }
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["summary"],
+        "additionalProperties": false,
+        "properties": {
+          "summary": { "type": "string", "description": "A historical rule or ruling this profile cannot reproduce with current ocgcore flags." },
+          "tracking": { "type": "string", "description": "Issue link or note about how/whether this could be fixed upstream." },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        }
+      }
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  }
+}

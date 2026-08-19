@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/banlist.schema.json",
+  "title": "Banlist snapshot",
+  "description": "One historical Forbidden/Limited list as it took effect on a given date. Banlists are format-independent data: several formats may reference the same snapshot.",
+  "type": "object",
+  "required": ["id", "region", "effective_date", "entries", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(tcg|ocg|ww)-[0-9]{4}-[0-9]{2}$",
+      "description": "Canonical id, e.g. tcg-2010-03. Matches the file path data/banlists/<region>/<yyyy>-<mm>.json."
+    },
+    "region": { "$ref": "common.schema.json#/$defs/region" },
+    "effective_date": { "$ref": "common.schema.json#/$defs/isoDate" },
+    "superseded_by_date": {
+      "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+      "description": "Date the next list took effect, if known. null when unknown or still current."
+    },
+    "supersedes": {
+      "oneOf": [{ "type": "string" }, { "type": "null" }],
+      "description": "id of the previous list in the same region, when that list exists in this repository."
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["card", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "card": { "$ref": "common.schema.json#/$defs/cardRef" },
+          "status": { "type": "string", "enum": ["forbidden", "limited", "semilimited"] },
+          "changed": {
+            "type": "boolean",
+            "description": "true if this entry changed relative to the previous list (new to the list, moved category). Optional annotation for readers; not used by the build."
+          },
+          "notes": { "type": "string" }
+        }
+      },
+      "description": "Cards not listed are unlimited (3 copies). Statuses map to lflist counts: forbidden=0, limited=1, semilimited=2."
+    },
+    "completeness": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  }
+}

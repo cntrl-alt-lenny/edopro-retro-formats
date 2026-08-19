@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/sources.schema.json",
+  "title": "Source registry",
+  "description": "Provenance records. Used both for the global registry (data/sources.json) and per-format registries (formats/<id>/sources.json). Every factual claim in the datasets must trace to one of these.",
+  "type": "object",
+  "required": ["sources"],
+  "additionalProperties": false,
+  "properties": {
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "title"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$" },
+          "kind": {
+            "type": "string",
+            "enum": ["official", "wiki", "community-project", "community-site", "dataset", "repository", "other"],
+            "description": "official: Konami/UDE material. wiki: Yugipedia etc. community-project: e.g. Project Ignis data. community-site: e.g. Format Library, EdisonFormat.com. dataset/repository: machine-readable imports (record the exact revision)."
+          },
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "publisher": { "type": "string" },
+          "revision": { "type": "string", "description": "Git commit, API version or page revision id pinning exactly what was consulted." },
+          "retrieved": { "$ref": "common.schema.json#/$defs/isoDate" },
+          "used_for": { "type": "string", "description": "What facts this source backs in this repository." },
+          "reliability_notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

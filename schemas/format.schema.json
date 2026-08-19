@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/format.schema.json",
+  "title": "Historical format",
+  "description": "The top-level record tying together everything that defines one historical format. A format is mostly a set of REFERENCES into the shared datasets (banlists, pools, rule profiles); it should contain as little inline data as possible so that shared facts are stored exactly once.",
+  "type": "object",
+  "required": ["id", "name", "region", "period", "banlist", "card_pool", "rule_profile", "implementation_status", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[a-z0-9-]+$",
+      "description": "Chronologically sortable id, e.g. 2005-04-goat. Must match the directory name formats/<id>/."
+    },
+    "name": { "type": "string", "description": "Community name, e.g. 'Goat Format'." },
+    "aliases": { "type": "array", "items": { "type": "string" } },
+    "region": { "$ref": "common.schema.json#/$defs/region" },
+    "period": {
+      "type": "object",
+      "required": ["start", "snapshot"],
+      "additionalProperties": false,
+      "properties": {
+        "start": { "$ref": "common.schema.json#/$defs/isoDate", "description": "First day the format's defining conditions held (usually a banlist effective date)." },
+        "end": { "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }], "description": "Last day, if known. null while unresearched." },
+        "snapshot": { "$ref": "common.schema.json#/$defs/isoDate", "description": "The single representative date used for cutoff calculations (card pool, errata applicability). Usually the date of the format's defining event or the community-accepted reference point." }
+      }
+    },
+    "chronology": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "previous": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Format id of the predecessor. May name a format not yet in the repository; the validator warns (not fails) on unresolved ids." },
+        "next": { "oneOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "banlist": { "type": "string", "description": "id of a banlist snapshot in data/banlists/." },
+    "card_pool": { "type": "string", "description": "id of a pool definition in data/pools/." },
+    "rule_profile": { "type": "string", "description": "id of a rule profile in data/rule-profiles/." },
+    "errata_policy": {
+      "type": "string",
+      "enum": ["computed", "none"],
+      "default": "computed",
+      "description": "computed: tooling selects every erratum whose change post-dates this format's snapshot and applies the historical version. none: format explicitly opts out of historical card overrides."
+    },
+    "errata_overrides": {
+      "type": "object",
+      "description": "Explicit corrections to the computed erratum selection, used while change dates are still unresearched or when a source establishes format-specific applicability (e.g. a reference implementation). Dated errata should eventually make include entries unnecessary.",
+      "additionalProperties": false,
+      "properties": {
+        "include": { "type": "array", "items": { "type": "string" }, "description": "erratum ids whose historical version applies in this format regardless of (missing) dates." },
+        "exclude": { "type": "array", "items": { "type": "string" } },
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+      }
+    },
+    "defining_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "date": { "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }] },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        }
+      }
+    },
+    "relevant_products": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Set/product codes (matching data/releases/) that frame this format, e.g. the last legal set."
+    },
+    "implementation_status": {
+      "type": "object",
+      "required": ["banlist", "card_pool", "rule_profile", "errata", "overall"],
+      "additionalProperties": false,
+      "properties": {
+        "banlist": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "card_pool": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "rule_profile": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "errata": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "overall": { "$ref": "common.schema.json#/$defs/implementationStatus" }
+      }
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+    "notes": { "type": "string" }
+  }
+}
