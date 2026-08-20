@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-diffusion-wave-motion",
+  "modern_card": {
+    "passcode": 87880531,
+    "name": "Diffusion Wave-Motion"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2015-11-12",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Yugi's Legendary Decks (YGLD-ENB22), the last dated printing before the current text"
+      },
+      "historical_text": "Pay 1000 Life Points. Select 1 Level 7 or higher Spellcaster-Type monster you control. During this turn, only the selected monster can attack, and it must attack all monsters your opponent controls once each. The effects of monsters destroyed by battle with it are not activated.",
+      "modern_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
+      "summary": "Problem-Solving Card Text modernisation collapsing v3 (LCYW-EN066), v4 (DPYG-EN023 reprint) and v5 (YGLD-ENB22): 'Select' becomes 'target', 'Life Points' becomes 'LP', and 'The effects of monsters destroyed by battle with it are not activated' becomes 'The effects of Effect Monsters destroyed by these attacks do not activate and are negated'. Resolution is unchanged - the same single Level 7 or higher Spellcaster is compelled to attack every opposing monster once each while your other monsters cannot attack.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2019-03-28",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Speed Duel: Arena of Lost Souls (SBLS-EN008), the first printing carrying the added activation requirement"
+      },
+      "historical_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
+      "modern_text": "(This card is not treated as a \"Fusion\" card.)If your opponent controls a monster: Pay 1000 LP, then target 1 Level 7 or higher Spellcaster monster you control; this turn, it must attack all monsters your opponent controls once each, also other monsters you control cannot attack. The effects of monsters destroyed by these attacks cannot activate and are negated.",
+      "summary": "The current text gained an activation requirement the era card did not have: 'If your opponent controls a monster:'. Under the Edison-era printing (v2, DPYG-EN023) and every printing through v6 the card could be activated with the opponent controlling no monsters, paying 1000 LP and locking your other monsters out of attacking. The undated lineage entry v6 adds only the '(This card is not treated as a \"Fusion\" card.)' parenthetical and is folded into this transition.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Era text at the Edison snapshot (2010-04-24) is v2 (DPYG-EN023, 2009-07-07); the GOAT-era text is v1 (DR1-EN162, 2005-03-19) and differs from v2 only in wording ('must attack', 'your opponent controls'), so the recorded chain starts at v2 and v0 (MFC-107, 2003-10-10, which lacked 'once each') is left out of it. NO HISTORICAL IMPLEMENTATION IS RECORDED DESPITE THE FUNCTIONAL VERDICT: upstream's official/c87880531.lua gates activation on 'e1:SetCondition(s.condition)' where 's.condition' returns 'Duel.IsAbleToEnterBP()' only - it does not implement the printed 'If your opponent controls a monster:' requirement - so the shipped implementation already reproduces the era activation legality and nothing plays wrongly today. Flagged conflicting-evidence because upstream's script contradicts the card's own current printed text; if upstream ever implements that condition, this card needs a historical implementation and a reserved passcode. The packet's only upstream entry, 511600096 'Diffusion Wave-Motion (Manga)', implements the manga card (any Spellcaster, no Level restriction, no 'other monsters cannot attack' field effect) and is not a TCG-era implementation."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+  ]
+}

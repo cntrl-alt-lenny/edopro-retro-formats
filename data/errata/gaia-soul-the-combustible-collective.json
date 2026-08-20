@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-gaia-soul-the-combustible-collective",
+  "modern_card": {
+    "passcode": 51355346,
+    "name": "Gaia Soul the Combustible Collective"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-12-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the Duelist League 15 participation cards (DL15-EN004), the first printing carrying the once-per-turn limit"
+      },
+      "historical_text": "You can tribute up to 2 Pyro-Type monsters. If you do this, this card gains ATK equal to the number of Tributed monsters x 1000. During battle between this card and a Defense Position monster whose DEF is lower than the ATK of this card, inflict the difference as Battle Damage to your opponent. Destroy this card at the end of this turn.",
+      "modern_text": "Once per turn: You can Tribute up to 2 Pyro-Type monsters; this card gains 1000 ATK for each. If this card attacks a Defense Position monster, inflict piercing battle damage to your opponent. During the End Phase: Destroy this card.",
+      "summary": "'Once per turn:' was added to the Tribute-for-ATK effect. The era text - 'You can tribute up to 2 Pyro-Type monsters. If you do this, this card gains ATK equal to the number of Tributed monsters x 1000' - is an Ignition effect with no activation limit, so it could be used repeatedly in the same turn, stacking 1000 ATK per Pyro monster Tributed. The piercing clause ('During battle between this card and a Defense Position monster whose DEF is lower ...' to 'If this card attacks a Defense Position monster, inflict piercing battle damage') and the self-destruction ('at the end of this turn' to 'During the End Phase:') are reworded only.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "NO HISTORICAL IMPLEMENTATION IS RECORDED DESPITE THE FUNCTIONAL VERDICT: upstream's official/c51355346.lua registers the ATK effect as EFFECT_TYPE_IGNITION with s.atkcost and NO SetCountLimit, so the shipped implementation still permits repeated use in one turn and already reproduces the era behaviour; the only SetCountLimit(1) in the file is on the End Phase self-destruction trigger. Flagged conflicting-evidence because upstream's script contradicts the card's own current printed text ('Once per turn:', DL15-EN004, 2012-12-15). If upstream adds the count limit, this card needs a historical implementation and a reserved passcode. Era text at the Edison snapshot is v1 (DR3-EN088, 2006-11-25); v0 (RDS-EN028, 2004-12-01) differs only in wording ('increase the ATK of this monster by ... points', 'Destroy this card during the End Phase'), so the chain starts at v1. This card has no upstream historical or unofficial variant of any kind."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

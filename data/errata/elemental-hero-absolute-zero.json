@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-elemental-hero-absolute-zero",
+  "modern_card": {
+    "passcode": 40854197,
+    "name": "Elemental HERO Absolute Zero"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2017-08-03",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OTS Tournament Pack 5 (OP05-EN023), the printing carrying the current English wording"
+      },
+      "historical_text": "1 \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster + 1 WATER monsterThis monster cannot be Special Summoned except by Fusion Summon. This card gains 500 ATK for each face-up WATER monster on the field, except \"Elemental Hero Absolute Zero\". When this card is removed from the field, destroy all monsters your opponent controls.",
+      "modern_text": "1 \"HERO\" monster + 1 WATER monsterMust be Fusion Summoned. Gains 500 ATK for each WATER monster on the field, except \"Elemental HERO Absolute Zero\". If this card leaves the field: Destroy all monsters your opponent controls.",
+      "summary": "Wording modernisation only. The material line's three named archetypes ('Elemental Hero', 'Destiny Hero', 'Evil Hero') were folded into the 'HERO' umbrella at v1 (GENF-ENSE1), which cannot change the eligible material set in period play: every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. The summon restriction stays strict throughout ('This monster cannot be Special Summoned except by Fusion Summon' to 'Must be Fusion Summoned'), matching official/c40854197.lua's EFFECT_SPSUMMON_CONDITION with aux.fuslimit, and dropping 'face-up' from the ATK count is cosmetic because the script's atkfilter still requires IsFaceup().",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Era text at the Edison snapshot is v0 (YG04-EN001, 2010-01-05), the card's first TCG printing. One residual divergence was examined and judged cosmetic: the pinned cards.cdb text (unofficial OCG-functionality rendering) reads 'If this face-up card leaves the field', a qualifier no English printing carries - v2 (OP05-EN023, 2017) still says 'If this card leaves the field' - and official/c40854197.lua's s.descon requires IsPreviousPosition(POS_FACEUP). That qualifier codifies the general period rule that a face-down monster's effects do not apply, which the Edison community's own per-card rulings assert for the same structure on Cyber Phoenix, D.D. Survivor and Jade Knight ('a face-down ... attacked and destroyed cannot activate it'), so it is not treated as an era behaviour change. Material-set inertness was verified against data/pools/edison-2010.json cross-referenced with BabelCDB setcodes: 77 HERO monsters in the pool, all Elemental/Destiny/Evil HERO."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

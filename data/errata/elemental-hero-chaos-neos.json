@@ -1,0 +1,54 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-elemental-hero-chaos-neos",
+  "modern_card": {
+    "passcode": 17032740,
+    "name": "Elemental HERO Chaos Neos"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Collection 2: The Duel Academy Years Mega Pack (LCGX-EN065), the first printing carrying the errata'd text"
+      },
+      "historical_text": "\"Elemental Hero Neos\" + \"Neo-Spacian Dark Panther\" + \"Neo-Spacian Glow Moss\"This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck. (You do not use \"Polymerization\".) During the End Phase, return this card to the Fusion Deck then Set all face-up monsters currently on the field. Once per turn, you can toss a coin 3 times and apply the appropriate effect: ● 3 Heads: Destroy all monsters your opponent controls. ● 2 Heads: This turn, the effects of all face-up monsters your opponent controls are negated. ● 1 Head: Return all monsters you control to their owner's hand.",
+      "modern_text": "\"Elemental HERO Neos\" + \"Neo-Spacian Dark Panther\" + \"Neo-Spacian Glow Moss\"Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck. (You do not use \"Polymerization.\") During the End Phase: Shuffle this card into the Extra Deck, then Set all face-up monsters on the field. Once per turn, during your Main Phase 1: You can toss a coin 3 times. ● 3 Heads: Destroy all monsters your opponent controls. ● 2 Heads: For the rest of this turn, the effects of all face-up monsters your opponent controls are negated. ● 1 Head: Return all monsters you control to the hand.",
+      "summary": "Two behavioural changes arrived in one printing. First, the strict summon restriction 'This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck' became 'Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck', so the modern card may be revived from the Graveyard after one proper contact Fusion; official/c17032740.lua encodes the loose form, passing s.splimit (true whenever the card is not in the Extra Deck) to Fusion.AddContactProc. Second, the coin effect gained a phase restriction: the era text is a plain 'Once per turn, you can toss a coin 3 times' Ignition effect usable in either Main Phase, while the modern text and the script confine it to your Main Phase 1 (s.coincon returns Duel.IsPhase(PHASE_MAIN1)).",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the modern card refuses the 3-coin effect in Main Phase 2 and accepts revival from the Graveyard by Monster Reborn or Call of the Haunted, neither of which the Edison-era printing allowed.",
+      "sources": [
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Era text at the Edison snapshot is v0 (GLAS-EN036, 2007-11-14). Trailing cosmetic steps after the recorded change, not entered as changes: v2 (SHVA-EN035, 2018-08-16) added 'Once per turn,' and 'and if you do,' to the mandatory End Phase return, v3 (BLAR-EN055, 2020-07-23) adjusted the 'Polymerization' parenthetical and is what the pinned cards.cdb text matches, and v4 (BLC1-EN140, 2024-02-22) dropped that parenthetical. The 2-Heads option's 'This turn' to 'For the rest of this turn' and '1 Head' returning monsters 'to their owner's hand' to 'to the hand' are likewise cosmetic."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

@@ -31,9 +31,31 @@ content hash `0x28e9fc02`.
 
 - The banlist is *derived* from the Ignis whitelist, not yet cross-checked against the
   published April 2005 TCG list — hence `completeness: partial` (roadmap item 2).
-- The 211 errata records have no `date_effective` yet, so this format pins them via
-  `errata_overrides.include` (mirroring `data/imported/ignis-goat-report.json`). As
-  dates are researched the include list should shrink to nothing.
+- The 211-entry `errata_overrides.include` list is **gone**, replaced by one sourced
+  statement: `errata_overrides.reference_parity`. Goat Format is *defined* here as a
+  reproduction of Project Ignis's implementation — its pool and banlist were
+  decomposed from `GOAT.lflist.conf` — so the policy says exactly that, and the
+  reference decides the whole substitution set.
+
+  Membership is **provenance-based** (`provenance_source: ignis-lflists`): a record
+  counts as part of the reference only if it cites the reference list. This is not a
+  technicality — upstream ships pre-errata implementations for cards its own GOAT
+  list deliberately leaves modern (Mind Crush, Ultimate Offering), so "has an
+  upstream variant" and "the reference substitutes it" are different questions.
+
+  Because the reference governs, our own research can disagree with it, and every
+  disagreement is reported per card rather than hidden:
+
+  - `format.parity-substitutes-non-behavioural` — the reference ships a variant the
+    review found behaviourally identical to the modern card (period display text,
+    not behaviour). Nobleman of Crossout is the clearest: its GOAT script is
+    byte-identical to the modern one apart from comments, and the modern script
+    already performs the era's mutual deck reveal.
+  - `format.parity-contradicts-chronology` — the reference substitutes a card whose
+    change our chronology dates *before* the 2005 snapshot.
+  - `format.parity-omits-historical` — our chronology says a historical version
+    applies at 2005-04-01 but the reference leaves the card modern. These are
+    candidate contributions back upstream.
 - `period.end` is null pending a sourced answer to when the goat era is considered to
   end (list change vs Cybernetic Revolution release); `snapshot` = the list's
   effective date as a documented modeling choice.
