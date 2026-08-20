@@ -33,6 +33,9 @@ SANGAN_GOAT = 504700178
 SANGAN_PRE_ERRATA = 511002631
 IMPERIAL_ORDER_MODERN = 61740673
 IMPERIAL_ORDER_PRE = 511002996
+RESCUE_CAT_MODERN = 14878871
+RESCUE_CAT_PRE_ERRATA = 511002992
+NIMBLE_MOMONGA = 22567609  # Level 2 Beast: legal Rescue Cat target
 
 
 def scenario(flags: int, setup: str, seed: int = 7) -> H.Duel:
@@ -67,7 +70,7 @@ class SanganEraBehaviourTest(unittest.TestCase):
         duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
         duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
         duel.default_response(H.MSG_SELECT_CARD, H.answer_cards(0))
-        duel.run()
+        duel.run(turns=1)
         self.addCleanup(duel.close)
         return duel
 
@@ -112,6 +115,46 @@ class SanganEraBehaviourTest(unittest.TestCase):
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class RescueCatEraBehaviourTest(unittest.TestCase):
+    """Rescue Cat's 2017 erratum (DUSA-EN072) added a hard once-per-turn.
+    Edison plays the pre-errata card (511002992), which EdisonFormat.com's
+    Functional Errata list independently describes as having "no 'once per
+    name' restriction"."""
+
+    def _both_cats_try(self, cat_code: int) -> int:
+        setup = ""
+        for i, code in enumerate([NIMBLE_MOMONGA] * 4):
+            setup += f"Debug.AddCard({code},0,0,LOCATION_DECK,{i},POS_FACEDOWN_DEFENSE)\n"
+        setup += f"Debug.AddCard({cat_code},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+        setup += f"Debug.AddCard({cat_code},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
+        duel = scenario(DUEL_MODE_MR1, setup)
+        self.addCleanup(duel.close)
+        # Keep activating for as long as the engine offers an effect - the
+        # once-per-turn is what decides when it stops, not the script.
+        duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle_activate_or_end)
+        duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
+        duel.default_response(H.MSG_SELECT_POSITION, H.answer_position(H.POS_FACEUP_ATTACK))
+        duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
+        duel.default_response(H.MSG_SELECT_CARD, H.answer_cards(0, 1))
+        duel.run(turns=1)
+        return len(
+            [
+                m
+                for m in duel.moves()
+                if m["from"]["location"] == H.LOCATION_DECK
+                and m["to"]["location"] == H.LOCATION_MZONE
+            ]
+        )
+
+    def test_pre_errata_rescue_cat_has_no_once_per_turn(self):
+        # Two pre-errata copies each Special Summon a pair: four monsters.
+        self.assertEqual(4, self._both_cats_try(RESCUE_CAT_PRE_ERRATA))
+
+    def test_modern_rescue_cat_is_hard_once_per_turn(self):
+        self.assertEqual(2, self._both_cats_try(RESCUE_CAT_MODERN))
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
 class ImperialOrderEraBehaviourTest(unittest.TestCase):
     """Pre-errata Imperial Order: maintenance is OPTIONAL ('pay 700 LP or
     destroy this card' - the owner chooses in their own Standby Phase).
@@ -130,7 +173,7 @@ class ImperialOrderEraBehaviourTest(unittest.TestCase):
     def test_pre_errata_owner_chooses_and_may_let_it_die(self):
         duel = self._standby(IMPERIAL_ORDER_PRE)
         duel.respond(H.MSG_SELECT_YESNO, H.answer_int(0))  # decline the payment
-        duel.run()
+        duel.run(turns=1)
         self.assertTrue(
             duel.seen(H.MSG_SELECT_YESNO),
             "pre-errata Imperial Order must ASK its owner about the payment",
@@ -143,7 +186,7 @@ class ImperialOrderEraBehaviourTest(unittest.TestCase):
 
     def test_modern_payment_is_forced(self):
         duel = self._standby(IMPERIAL_ORDER_MODERN)
-        duel.run()
+        duel.run(turns=1)
         self.assertTrue(
             duel.seen(H.MSG_PAY_LPCOST),
             "modern Imperial Order takes its 700 LP without asking",

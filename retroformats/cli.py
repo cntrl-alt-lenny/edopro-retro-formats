@@ -129,7 +129,25 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
         )
     )
     multi = [e for e in errata if len(e.relevant_changes()) > 1]
-    tested = sum(1 for e in errata if e.implementation.get("tested"))
+    # Behavioural coverage is per IMPLEMENTATION, not per record: a card with
+    # three eras can have one of them executed against the engine.
+    tested = sum(
+        1
+        for e in errata
+        for impl in [e.implementation, *(c.get("resulting_implementation") for c in e.changes)]
+        if impl and impl.get("tested")
+    )
+    tested_records = sum(
+        1
+        for e in errata
+        if any(
+            impl and impl.get("tested")
+            for impl in [
+                e.implementation,
+                *(c.get("resulting_implementation") for c in e.changes),
+            ]
+        )
+    )
 
     print(
         f"\nerrata: {len(errata)} records ({len(reviewed)} reviewed) -> "
@@ -141,7 +159,8 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
     )
     print(
         "  strategies: " + ", ".join(f"{n} {s}" for s, n in sorted(strategies.items()))
-        + f"; {len(multi)} with multiple historical revisions; {tested} behaviourally tested"
+        + f"; {len(multi)} with multiple historical revisions; "
+        + f"{tested} implementations behaviourally tested across {tested_records} records"
     )
 
     for fmt_id in sorted(repo.formats):

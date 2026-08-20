@@ -25,7 +25,7 @@
         "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
         "script": "pre-errata/c511002631.lua",
         "status": "complete",
-        "tested": false
+        "tested": true
       },
       "sources": [
         "ignis-cardscripts",
@@ -73,7 +73,7 @@
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
     "script": "goat/c504700178.lua",
     "status": "complete",
-    "tested": false
+    "tested": true
   },
   "review": {
     "status": "reviewed",

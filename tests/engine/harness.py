@@ -379,11 +379,17 @@ class Duel:
 
     # -- driving ---------------------------------------------------------
 
-    def run(self, max_steps: int = 200) -> list[Message]:
+    def run(self, max_steps: int = 200, turns: int | None = None) -> list[Message]:
         """Process until the scripted responses are exhausted (the scenario's
         observation window), the duel ends, or max_steps passes. Responding
-        wrongly raises; running out of scripted answers just stops."""
+        wrongly raises; running out of scripted answers just stops.
+
+        `turns` bounds the window to that many turns, which a scenario driven
+        by standing defaults needs: without it, defaults keep answering the
+        opponent's turns forever and the duel never settles."""
         for _ in range(max_steps):
+            if turns is not None and len(self.seen(MSG_NEW_TURN)) > turns:
+                return self.messages
             status = self.lib.OCG_DuelProcess(self.duel)
             batch = self._drain_messages()
             self.messages.extend(batch)
@@ -516,6 +522,27 @@ def answer_battle(action: int, index: int = 0) -> bytes:
 
 def answer_position(position: int) -> bytes:
     return struct.pack("<i", position)
+
+
+def answer_idle_activate_or_end(prompt: Message) -> bytes:
+    """SELECT_IDLECMD: activate the first available effect, or end the turn
+    when none is offered. Lets a scenario ask "do it again" without knowing
+    whether the card's once-per-turn already stopped it.
+
+    Layout (playerop.cpp SelectIdleCmd): u8 player, then five card lists
+    (summonable / spsummonable / repositionable / msetable / ssetable), then
+    the activatable list. Each list is a u32 count followed by fixed-size
+    entries; only `repositionable` uses a u8 sequence, the others u32.
+    """
+    prompt._buf.seek(0)
+    prompt.u8()  # player
+    for entry_size in (10, 10, 7, 10, 10):  # code+con+loc+seq per list
+        count = prompt.u32()
+        prompt._buf.read(count * entry_size)
+    activatable = prompt.u32()
+    if activatable:
+        return answer_idle(5, 0)
+    return answer_idle(7)  # to End Phase
 
 
 def answer_place_first_free(prompt: Message) -> bytes:

@@ -386,6 +386,23 @@ def apply_decision(
         if earliest:
             max_earlier_start = max(max_earlier_start or earliest, earliest)
 
+    # `tested: true` is earned by an executable engine test, not by a
+    # decision file. Re-applying a review must never silently drop it, so
+    # carry it forward for any implementation of the same historical card.
+    previously_tested = set()
+    for impl in [
+        record.get("implementation"),
+        *(c.get("resulting_implementation") for c in record.get("changes", [])),
+    ]:
+        if impl and impl.get("tested") and impl.get("historical_passcode"):
+            previously_tested.add(int(impl["historical_passcode"]))
+    for impl in [
+        decision.get("baseline_implementation"),
+        *(c.get("resulting_implementation") for c in changes),
+    ]:
+        if impl and impl.get("historical_passcode") in previously_tested:
+            impl["tested"] = True
+
     record["classification"] = dominant
     record["changes"] = changes
     by_code = {
