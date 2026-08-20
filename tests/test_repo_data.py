@@ -136,6 +136,38 @@ class RealDataTest(unittest.TestCase):
         # The Shining Darkness - the whitelist rejects unlisted cards).
         self.assertNotIn(135598, built.entries)
 
+    def test_every_edison_substitution_rests_on_resolved_chronology(self):
+        """Edison has no reference implementation to copy, so every historical
+        version it uses must be justified by evidence that actually places the
+        change relative to 2010-04-24 - an exact date or attested bounds.
+        A substitution resting on unresolved chronology would be a guess."""
+        import datetime as _dt
+
+        from retroformats.lflist import select_applicable_errata
+
+        fmt = self.repo.formats["2010-03-edison"]
+        snapshot = _dt.date.fromisoformat(fmt.snapshot)
+        unjustified = []
+        for _, override in select_applicable_errata(fmt, self.repo).items():
+            erratum = override.erratum
+            if erratum.id in fmt.errata_include:
+                continue  # explicit adjudication, documented separately
+            selection = erratum.selection_at(snapshot)
+            relevant = erratum.relevant_changes()
+            if selection.version_index is None or selection.version_index >= len(relevant):
+                continue
+            effective = relevant[selection.version_index].get("effective") or {}
+            if not (
+                effective.get("date")
+                or effective.get("old_attested_through")
+                or effective.get("new_attested_from")
+            ):
+                unjustified.append(erratum.id)
+        self.assertEqual(
+            [], sorted(unjustified),
+            "these Edison substitutions rest on unresolved chronology",
+        )
+
     def test_edison_never_lists_a_modern_and_historical_version_together(self):
         """The failure that would let a player run six copies: the modern card
         and its historical implementation both legal in one list."""
