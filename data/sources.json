@@ -146,6 +146,34 @@
       "reliability_notes": "Primary source for rules-engine behaviour claims."
     },
     {
+      "id": "ude-card-rulings-archive",
+      "kind": "official",
+      "title": "Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings pages (Internet Archive captures, 2005-2009)",
+      "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+      "notes": "UDE's per-card rulings database, the ruling layer in force in the GOAT era. The 2005-06-16 capture (inside the April-October 2005 GOAT window) states the failed-search verification procedure verbatim for Sangan and Witch of the Black Forest: 'If you have no eligible monsters, your opponent gets to see your Deck to verify.' Reinforcement of the Army's entry then permitted activation with no valid target subject to the same verification; by the 2008-12-15 yugioh-card.com Card FAQ capture that had changed to 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck' - per-card activation-condition chronology differs from the shared verification chronology. Retrieved 2026-08-20."
+    },
+    {
+      "id": "konami-set-rulings-archive",
+      "kind": "official",
+      "title": "Konami per-set Card Rulings documents, 2010-2011 (yugioh-card.com, Internet Archive)",
+      "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+      "notes": "Konami's official rulings documents for the Konami era. 'Machina Mayhem Structure Deck - Card Rulings, Compiled as of April 6th, 2010' - eighteen days before the Edison snapshot - applies failed-search verification twice ('If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify'). Starstrike Blast (2010-11-16) extends it to the Extra Deck and Storm of Ragnarok (2011-02-02) to the hand; 2011-02-02 is the latest date the old state is positively attested. Retrieved 2026-08-20."
+    },
+    {
+      "id": "kde-tournament-policy-archive",
+      "kind": "official",
+      "title": "Konami Digital Entertainment Official Tournament Policy - 'Card/Hand/Deck Verification' (archived, 2019-2025)",
+      "url": "https://web.archive.org/web/20190403000000*/yugioh-card.com/en/*policy*",
+      "notes": "The modern state: KDE tournament policy forbids searching or verifying an opponent's Deck outside specific cases, using a failed Mystic Tomato search as its worked example. First located capture 2019-04-03; unchanged in KDE-US Tournament Policy v2.5 (in effect 2025-09-05). The KDE policy documents in force in April 2010 (Tournament Policy v1.0 valid 2010-02-01, Penalty Guidelines valid 2010-04-01) contain no failure-to-find clause at all - in that era the rule lived in the rulings layer, not policy. No dated announcement of the change was found: the transition interval 2011-02-02 .. 2019-04-03 remains open. Retrieved 2026-08-20."
+    },
+    {
+      "id": "formatlibrary-source",
+      "kind": "repository",
+      "title": "Format Library source repository (danielmcnelis/formatlibrary)",
+      "url": "https://github.com/danielmcnelis/formatlibrary",
+      "notes": "Nx monorepo behind formatlibrary.com. Inspected for its errata data model: libs/models/src/lib/Errata.js defines an 'erratas' table (cardName, cardId, description, effectiveDate, expirationDate, isOriginal, isActive) that no route, script or UI reads - schema-only. Period card texts actually live per printing in Print.description (populated by a Feb 2024 Yugipedia scrape) and are deliberately excluded from the card API response; the site-wide Card.description is the CURRENT text synced nightly from YGOPRODeck. Format-specific behaviour is carried by human-written Ruling rows keyed to a format, not by machine-readable period text. Retrieved 2026-08-20."
+    },
+    {
       "id": "ude-card-text-updates-archive",
       "kind": "official",
       "title": "Upper Deck Entertainment 'Card Text Updates / Errata & Card Text FAQ's' page (Internet Archive captures)",
