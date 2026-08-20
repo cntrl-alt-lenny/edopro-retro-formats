@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Negate the activation of any Spell Card that targets this 1 face-down monster. At that time, flip this card into face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
       "modern_text": "When a Spell Card is activated that targets this face-down card (and no other cards) (Quick Effect): Change this card to face-up Defense Position, and if you do, negate the activation. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c65240394.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

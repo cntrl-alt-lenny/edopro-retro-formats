@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only equip this card to a monster on your side of the field. Decrease the ATK and DEF of a monster equipped with this card by 500 points. In addition, all the monsters on your opponent's side of the field can only attack the monster equipped with this card, if they attack.",
       "modern_text": "You can only equip this card to a monster on your side of the field. Decrease the ATK and DEF of a monster equipped with this card by 500 points. In addition, all the monsters on your opponent's side of the field can only attack the monster equipped with this card, if they attack.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700030.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

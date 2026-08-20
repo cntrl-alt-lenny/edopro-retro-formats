@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Send this face-up card on your side of the field to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck to the field. The monsters Special Summoned in this way are destroyed during the End Phase.",
       "modern_text": "You can send this card to the GY; Special Summon 2 Level 3 or lower Beast monsters from your Deck, but their effects are negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700179.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

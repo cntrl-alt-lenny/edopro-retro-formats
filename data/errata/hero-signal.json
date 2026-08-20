@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
       "modern_text": "When a monster you control is destroyed by battle and sent to the GY: Special Summon 1 Level 4 or lower \"Elemental HERO\" monster from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700031.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

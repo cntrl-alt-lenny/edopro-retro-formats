@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: Discard 1 random card from your opponent's hand.",
       "modern_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: You can discard 1 random card from your opponent's hand.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700183.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

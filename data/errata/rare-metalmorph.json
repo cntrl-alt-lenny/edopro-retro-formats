@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Increase the ATK of 1 Machine-Type monster on the field by 500 points. Only once, negate the effect of a Spell Card that designates the monster. When the selected monster is removed from the field, destroy this card.",
       "modern_text": "Activate this card by targeting 1 Machine monster on the field; while this card is face-up on the field, that Machine monster gains 500 ATK, also negate the first Spell effect that targets that monster. When that monster leaves the field, destroy this card.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700017.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

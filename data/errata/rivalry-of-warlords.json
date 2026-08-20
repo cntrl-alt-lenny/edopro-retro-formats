@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Each player sends monsters from his/her side of the field to the Graveyard so that he/she only controls 1 Type of monster. As long as this card remains on the field, each player can only have 1 Type of monster on the field.",
       "modern_text": "Each player can only control 1 Type of monster. Send all other face-up monsters they control to the GY.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700158.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

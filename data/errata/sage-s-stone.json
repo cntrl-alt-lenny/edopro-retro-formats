@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this card when there is a face-up \"Dark Magician Girl\" on your side of the field. Special Summon 1 \"Dark Magician\" from your hand or Deck.",
       "modern_text": "If you control a face-up \"Dark Magician Girl\": Special Summon 1 \"Dark Magician\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700020.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

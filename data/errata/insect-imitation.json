@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Tribute 1 monster on your side of the field. Select 1 Insect-Type monster from your Deck that is 1 Level higher than the Tributed monster and Special Summon it on your side of the field in face-up Attack Position or face-down Defense Position. Then shuffle your Deck.",
       "modern_text": "Tribute 1 monster; Special Summon 1 Insect monster from your Deck whose Level is 1 higher than the Tributed monster had on the field.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700171.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

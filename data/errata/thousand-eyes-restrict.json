@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"\r\nAs long as this card remains face-up on the field, other monsters cannot change their Battle Positions or attack. Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead.",
       "modern_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"\r\nOther monsters on the field cannot change their battle positions or attack. Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card's ATK/DEF become equal to that equipped monster's. If this card would be destroyed by battle, destroy that equipped monster instead.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700102.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

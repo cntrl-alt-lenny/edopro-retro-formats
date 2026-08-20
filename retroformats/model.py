@@ -163,6 +163,77 @@ class RuleProfile:
         )
 
 
+# Change kinds that require a different card implementation for the era before
+# them. Cosmetic (wording-only) and engine (rule-profile) transitions never do.
+IMPLEMENTATION_RELEVANT_KINDS = ("functional", "ruling")
+CHANGE_KINDS = ("functional", "cosmetic", "ruling", "engine")
+# Dominance order for deriving a record's summary classification.
+KIND_SEVERITY = {"functional": 3, "ruling": 2, "engine": 1, "cosmetic": 0}
+EFFECTIVE_STATUSES = ("verified", "reported")
+
+OLD, NEW, AMBIGUOUS = "old", "new", "ambiguous"
+
+
+def _precision_bounds(date_str: str, precision: str) -> tuple[_dt.date, _dt.date]:
+    d = parse_date(date_str)
+    if precision == "month":
+        return _dt.date(d.year, d.month, 1), _last_day_of_month(d.year, d.month)
+    if precision == "year":
+        return _dt.date(d.year, 1, 1), _dt.date(d.year, 12, 31)
+    return d, d
+
+
+def change_state_at(change: dict[str, Any], snapshot: _dt.date) -> str:
+    """Whether `snapshot` falls before (OLD), on/after (NEW), or inside the
+    uncertainty interval (AMBIGUOUS) of one change's effective chronology.
+
+    On the effective date itself the NEW behaviour applies. A month/year-
+    precise date widens into an interval; bounded chronology uses the latest
+    attestation of the old behaviour and the earliest of the new. Unknown
+    chronology is AMBIGUOUS — never silently old or new.
+    """
+    effective = change.get("effective") or {}
+    date = effective.get("date")
+    if date:
+        lo, hi = _precision_bounds(str(date), str(effective.get("precision") or "day"))
+        if snapshot < lo:
+            return OLD
+        if snapshot >= hi:
+            return NEW
+        return AMBIGUOUS
+    old_through = effective.get("old_attested_through")
+    new_from = effective.get("new_attested_from")
+    if old_through and snapshot <= parse_date(str(old_through)):
+        return OLD
+    if new_from and snapshot >= parse_date(str(new_from)):
+        return NEW
+    return AMBIGUOUS
+
+
+@dataclass(frozen=True)
+class ErratumSelection:
+    """The implementation decision for one erratum at one snapshot date.
+
+    state:
+      "modern"     — the modern implementation is correct (or accepted:
+                     the selected version's strategy is none-needed);
+      "historical" — `implementation` (a dict) must substitute the modern card;
+      "ambiguous"  — the snapshot falls inside an unresolved transition
+                     interval; selection must not proceed without explicit,
+                     documented adjudication;
+      "gap"        — the chronology is determinate but the selected version
+                     has no usable implementation (strategy unresolved or no
+                     historical passcode).
+    version_index counts implementation-relevant transitions that have
+    occurred by the snapshot (0 = baseline version).
+    """
+
+    state: str
+    implementation: dict[str, Any] | None = None
+    version_index: int | None = None
+    ambiguous_changes: tuple[int, ...] = ()
+
+
 @dataclass
 class Erratum:
     id: str
@@ -187,20 +258,62 @@ class Erratum:
             raw=raw,
         )
 
-    def historical_behaviour_applies_on(self, snapshot: _dt.date) -> bool | None:
-        """True if, at `snapshot`, the card behaved per its oldest recorded text.
+    @property
+    def review_status(self) -> str:
+        review = self.raw.get("review") or {}
+        return str(review.get("status", "imported"))
 
-        Returns None when no change carries a usable date (undecidable yet).
-        Only meaningful for classifications that alter behaviour.
+    def relevant_changes(self) -> list[dict[str, Any]]:
+        """The changes that require a different card implementation for the
+        era before them (functional and ruling transitions)."""
+        return [c for c in self.changes if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS]
+
+    def implementation_for_version(self, version_index: int) -> dict[str, Any] | None:
+        """The implementation of version `version_index` (0 = baseline, k>0 =
+        the version created by the k-th implementation-relevant change).
+        Returns None for the modern version or when nothing is recorded."""
+        relevant = self.relevant_changes()
+        if version_index >= len(relevant):
+            return None  # the modern card — implemented by cards.cdb
+        if version_index == 0:
+            return self.implementation
+        recorded = relevant[version_index - 1].get("resulting_implementation")
+        return dict(recorded) if recorded else None
+
+    def selection_at(self, snapshot: _dt.date) -> ErratumSelection:
+        """Which implementation this card needs at `snapshot`, fail-safe.
+
+        Walks the implementation-relevant changes: the version in force is
+        determined by how many transitions had taken effect by the snapshot.
+        Any transition whose state at the snapshot is ambiguous makes the
+        whole selection ambiguous unless the determinate transitions already
+        pin the version (they cannot: states are monotone when chronology is
+        consistent, so one ambiguous straddling change is always decisive).
         """
-        dates = []
-        for change in self.changes:
-            eff = change.get("date_effective")
-            if eff:
-                dates.append(parse_date(eff))
-        if not dates:
-            return None
-        return snapshot < min(dates)
+        relevant = self.relevant_changes()
+        if not relevant:
+            return ErratumSelection(state="modern")
+        states = [change_state_at(c, snapshot) for c in relevant]
+        definite_new = sum(1 for s in states if s == NEW)
+        definite_old = sum(1 for s in states if s == OLD)
+        k_min = definite_new
+        k_max = len(relevant) - definite_old
+        if k_min != k_max:
+            ambiguous = tuple(i for i, s in enumerate(states) if s == AMBIGUOUS)
+            return ErratumSelection(state="ambiguous", ambiguous_changes=ambiguous)
+        version = k_min
+        if version >= len(relevant):
+            return ErratumSelection(state="modern", version_index=version)
+        impl = self.implementation_for_version(version)
+        if impl is None or impl.get("strategy") == "unresolved":
+            return ErratumSelection(state="gap", version_index=version)
+        if impl.get("strategy") == "none-needed":
+            # A documented decision that the modern implementation stands in
+            # for this version (e.g. a ruling difference not reproduced).
+            return ErratumSelection(state="modern", implementation=impl, version_index=version)
+        if not impl.get("historical_passcode"):
+            return ErratumSelection(state="gap", version_index=version)
+        return ErratumSelection(state="historical", implementation=impl, version_index=version)
 
 
 TERRITORIES = ("tcg", "tcg-na", "tcg-eu", "tcg-oce", "ocg", "ocg-jp", "ocg-kr", "ocg-asia")

@@ -242,7 +242,8 @@ def run(lflists_dir: Path, babelcdb_dir: Path, root: Path) -> int:
             "classification": "functional",
             "changes": [
                 {
-                    "date_effective": None,
+                    "kind": "functional",
+                    "effective": {"date": None},
                     "historical_text": goat_row["desc"],
                     "modern_text": cards_cdb[canon]["desc"],
                     "summary": (
@@ -266,11 +267,12 @@ def run(lflists_dir: Path, babelcdb_dir: Path, root: Path) -> int:
                 "status": "complete",
                 "tested": False,
             },
+            "review": {"status": "imported"},
             "sources": [SRC_BABELCDB, SRC_LFLISTS],
             "notes": (
                 "Auto-imported. classification=functional mirrors upstream's decision to ship a "
-                "separate implementation; the effective date of the modern text and a per-card "
-                "review (functional vs ruling) are still TODO."
+                "separate implementation; the effective chronology of the modern text and a "
+                "per-card review (kind, behaviour, implementation era) are still TODO."
             ),
         }
         write_json(root / "data" / "errata" / f"{base_slug}.json", record)

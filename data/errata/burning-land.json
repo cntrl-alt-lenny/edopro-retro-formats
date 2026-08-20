@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Destroy all Field Spell Cards on the field. Inflict 500 points of damage to each player's Life Points during his/her Standby Phase.",
       "modern_text": "When this card is activated: If there are any Field Spell Cards on the field, destroy them. During each player's Standby Phase: The turn player takes 500 damage.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700043.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
       "modern_text": "If you control \"Blue-Eyes White Dragon\": Destroy all monsters your opponent controls. \"Blue-Eyes White Dragon\" you control cannot attack the turn you activate this card.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700026.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

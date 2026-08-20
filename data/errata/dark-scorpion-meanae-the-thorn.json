@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this card inflicts Battle Damage to your opponent's Life Points, you can select and activate 1 of the following effects:\r\n● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Deck to your hand.\r\n● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Graveyard to your hand.",
       "modern_text": "When this card inflicts battle damage to your opponent, you can activate 1 of these effects:\r\n● Add 1 \"Dark Scorpion\" card from your Deck to your hand.\r\n● Target 1 \"Dark Scorpion\" card in your GY; add that target to your hand.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700125.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

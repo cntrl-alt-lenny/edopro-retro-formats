@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "FLIP: Increase the ATK and DEF of this monster by 500 points. The ATK and DEF of a monster that destroys this monster as a result of battle is decreased by 500 points.",
       "modern_text": "FLIP: This card gains 500 ATK and DEF.\nIf this card is destroyed by battle: The monster that destroyed it loses 500 ATK and DEF.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700136.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

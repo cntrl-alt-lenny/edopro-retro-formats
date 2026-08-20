@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this monster destroys the following number of monsters as a result of battle, the following effects are activated in order:\r\nOne: As long as this card remains face-up on the field, negate the activation and effects of all Spell and Trap Cards that target this card and destroy them.\r\nTwo: You can Special Summon 1 \"Fushioh Richie\" from your hand or your Deck by Tributing this card during your Main Phase.",
       "modern_text": "When this monster destroys the following number of monsters as a result of battle, the following effects are activated in order:\nOne: As long as this card remains face-up on the field, negate the activation and effects of all Spell and Trap Cards that target this card and destroy them.\nTwo: You can Special Summon 1 \"Fushioh Richie\" from your hand or your Deck by Tributing this card during your Main Phase.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700154.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

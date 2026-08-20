@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
       "modern_text": "When this card is destroyed by battle and sent to the GY: You can add 1 \"Harpie Lady\" from your Deck to your hand.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700073.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

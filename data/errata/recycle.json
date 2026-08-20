@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "During your Standby Phase: You can pay 300 LP, then target 1 non-monster in your Graveyard; return it to the bottom of your Deck.",
       "modern_text": "During your Standby Phase, by paying 300 Life Points, select 1 non-Monster Card in your Graveyard and return it to the bottom of your Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511002983.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

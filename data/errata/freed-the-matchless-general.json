@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Negate the effect of any Spell Card that targets this card and destroy it. As long as this card remains face-up on the field, you can add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand per turn instead of drawing 1 card from your Deck during your Draw Phase. Then shuffle your Deck.",
       "modern_text": "Negate any Spell effect that targets this card on the field when it resolves, and if you do, destroy that card. During your Draw Phase, before you draw: You can give up your normal draw this turn, and if you do, add 1 Level 4 or lower Warrior monster from your Deck to your hand. This card must be face-up on the field to activate and to resolve this effect.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700082.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

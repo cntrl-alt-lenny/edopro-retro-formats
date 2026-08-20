@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Each time this card destroys your opponent's monster as a result of battle, draw 1 card, then select and return 1 card from your hand to the bottom of your Deck.",
       "modern_text": "If this card destroys an opponent's monster by battle: Draw 1 card, then return 1 card from your hand to the bottom of the Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700076.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV3\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 500 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV7\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned or flipped face-up.)",
       "modern_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV3\", while it remains on the field all of your opponent's monsters lose 500 ATK. During your Standby Phase, by sending this face-up card to the Graveyard, Special Summon 1 \"Ultimate Insect LV7\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700058.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n● FIRE: Increase the ATK of this card by 500 points.\r\n● WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
       "modern_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n● FIRE: This card gains 500 ATK.\r\n● WIND: If this card destroyed your opponent's monster by battle, it can attack once again in a row.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700053.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

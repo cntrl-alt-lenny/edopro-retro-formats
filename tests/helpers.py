@@ -120,6 +120,30 @@ class TempRepoTest(unittest.TestCase):
         return payload
 
 
+    def add_erratum(
+        self,
+        id="erratum-beta",
+        modern=None,
+        classification="functional",
+        changes=None,
+        impl=None,
+        review="reviewed",
+        **kw,
+    ):
+        payload = {
+            "id": id,
+            "modern_card": modern or {"passcode": 200, "name": "Beta"},
+            "classification": classification,
+            "changes": changes if changes is not None else [change()],
+            "implementation": impl
+            or {"strategy": "reuse-upstream", "historical_passcode": 510000000, "status": "complete"},
+            "review": {"status": review},
+            "sources": ["test-source"],
+        }
+        payload.update(kw)
+        self.write(f"data/errata/{id.removeprefix('erratum-')}.json", payload)
+        return payload
+
     def add_product(self, code="SET1", printings=(), release_events=None, **kw):
         payload = {
             "id": code.lower(),
@@ -205,6 +229,27 @@ def card(passcode: int, name: str, **kw):
     ref = {"passcode": passcode, "name": name}
     ref.update(kw)
     return ref
+
+
+def change(kind="functional", date=None, summary="changed", **kw):
+    """An erratum change entry in the evolved shape. Effective-chronology
+    fields (precision, status, old_attested_through, new_attested_from, basis)
+    are passed via effective_* keywords."""
+    effective = {"date": date}
+    for key in ("precision", "status", "old_attested_through", "new_attested_from", "basis"):
+        if f"effective_{key}" in kw:
+            effective[key] = kw.pop(f"effective_{key}")
+    entry = {"kind": kind, "effective": effective, "summary": summary, "sources": ["test-source"]}
+    entry.update(kw)
+    return entry
+
+
+def implementation(strategy="reuse-upstream", historical_passcode=None, status="complete", **kw):
+    impl = {"strategy": strategy, "status": status}
+    if historical_passcode is not None:
+        impl["historical_passcode"] = historical_passcode
+    impl.update(kw)
+    return impl
 
 
 def event(territory: str, date: str, **kw):

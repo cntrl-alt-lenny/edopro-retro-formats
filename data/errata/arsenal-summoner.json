@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "FLIP: Add 1 card that includes \"Guardian\" in its card name from your Deck to your hand. You cannot add \"Celtic Guardian\", \"Winged Dragon, Guardian of the Fortress #1\", \"Winged Dragon, Guardian of the Fortress #2\", \"Guardian of of the Labyrinth\", or \"The Reliable Guardian\".",
       "modern_text": "FLIP: Add 1 \"Guardian\" card from your Deck to your hand, except \"Celtic Guardian\", \"Winged Dragon, Guardian of the Fortress #1\", \"Winged Dragon, Guardian of the Fortress #2\", \"Guardian of the Labyrinth\", or \"The Reliable Guardian\".",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700146.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

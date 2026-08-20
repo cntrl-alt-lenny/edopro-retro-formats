@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this card is destroyed as a result of battle and sent to the Graveyard, you can Special Summon 1 EARTH monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
       "modern_text": "When this card is destroyed by battle and sent to the GY: You can Special Summon 1 EARTH monster with 1500 or less ATK from your Deck in Attack Position.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700172.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

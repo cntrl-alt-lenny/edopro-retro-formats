@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Select 1 Machine-Type monster with an ATK of 500 or less on your side of the field and activate this card. You can Special Summon up to 2 cards with the same name from your Deck.",
       "modern_text": "Target 1 Machine monster you control with 500 or less ATK; Special Summon up to 2 monsters from your Deck with the same name as that face-up monster.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700104.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

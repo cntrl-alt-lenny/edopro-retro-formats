@@ -2,39 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://edopro-retro-formats/schemas/erratum.schema.json",
   "title": "Card erratum / historical override",
-  "description": "Records that a card behaved or read differently in the past than its modern EDOPro implementation, and how (or whether) the historical behaviour is reproduced. One file per card that ever needs historical consideration. A record with classification 'cosmetic' documents that NO override is needed — absence of a record means 'not yet reviewed', not 'no erratum'.",
+  "description": "Records that a card behaved or read differently in the past than its modern EDOPro implementation, and how (or whether) the historical behaviour is reproduced. One file per card that ever needs historical consideration. A record with classification 'cosmetic' documents that NO override is needed — absence of a record means 'not yet reviewed', not 'no erratum'. A card's history is a chain of versions: the baseline version, then one new version per entry in changes[] (oldest to newest, the last one being the modern card). Which version a format uses is COMPUTED from each change's effective chronology against the format snapshot; when the snapshot falls inside an unresolved transition interval the tooling refuses to choose silently.",
   "type": "object",
   "required": ["id", "modern_card", "classification", "changes", "implementation", "sources"],
   "additionalProperties": false,
-  "properties": {
-    "$schema": { "type": "string" },
-    "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
-    "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
-    "classification": {
-      "type": "string",
-      "enum": ["functional", "cosmetic", "ruling", "engine"],
-      "description": "functional: printed/official text change that alters behaviour — needs a historical card implementation. cosmetic: wording/PSCT modernisation only — modern script is period-correct. ruling: official interpretation changed with no text change — may need script or engine handling. engine: behaviour difference caused by rules-era interactions, handled by rule profiles rather than card overrides."
-    },
-    "changes": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": ["summary", "sources"],
-        "additionalProperties": false,
-        "properties": {
-          "date_effective": {
-            "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
-            "description": "When the NEW (post-change) text/ruling took effect, if known. Formats whose snapshot date is before this use the historical behaviour."
-          },
-          "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before the change, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
-          "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
-          "summary": { "type": "string", "description": "Plain-language description of the behavioural difference." },
-          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
-        }
-      },
-      "description": "Ordered oldest-to-newest. A card errata'd twice has two entries."
-    },
+  "$defs": {
     "implementation": {
       "type": "object",
       "required": ["strategy", "status"],
@@ -43,7 +15,7 @@
         "strategy": {
           "type": "string",
           "enum": ["none-needed", "reuse-upstream", "custom-script", "unresolved"],
-          "description": "none-needed: modern implementation is period-correct (cosmetic). reuse-upstream: Project Ignis already ships a historical version (e.g. BabelCDB goat-entries.cdb) — reference it instead of duplicating. custom-script: this project must provide a historical passcode, database row and Lua script. unresolved: known difference, approach not yet decided."
+          "description": "none-needed: the modern implementation is period-correct for this version (cosmetic difference, or a documented decision that the difference is not reproduced). reuse-upstream: Project Ignis already ships this historical version (e.g. BabelCDB goat-entries.cdb) — reference it instead of duplicating. custom-script: this project must provide a historical passcode, database row and Lua script. unresolved: known difference, approach not yet decided — formats needing this version fail validation until it is decided or they exclude the record with documentation."
         },
         "historical_passcode": {
           "oneOf": [{ "$ref": "common.schema.json#/$defs/passcode" }, { "type": "null" }],
@@ -60,12 +32,99 @@
         },
         "script": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Path of the Lua script implementing the historical behaviour (upstream path or dist/scripts path)." },
         "status": { "$ref": "common.schema.json#/$defs/implementationStatus" },
-        "tested": { "type": "boolean", "description": "true once an executable regression test covers the historical behaviour." }
+        "tested": { "type": "boolean", "description": "true ONLY once an executable engine-level test demonstrates the historical behaviour — never merely because the script exists." }
       }
+    }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
+    "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
+    "classification": {
+      "type": "string",
+      "enum": ["functional", "cosmetic", "ruling", "engine"],
+      "description": "The DOMINANT kind across changes[] (severity order functional > ruling > engine > cosmetic; the validator enforces agreement). functional: printed/official text change that alters behaviour — needs a historical card implementation. cosmetic: wording/PSCT modernisation only — modern script is period-correct. ruling: official interpretation changed with no behavioural text change — may need script or engine handling. engine: behaviour difference caused by rules-era interactions, handled by rule profiles rather than card overrides."
+    },
+    "changes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "effective", "summary", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["functional", "cosmetic", "ruling", "engine"],
+            "description": "What kind of transition THIS change is. Only functional and ruling changes make a card-implementation difference; cosmetic and engine changes never substitute a historical passcode."
+          },
+          "effective": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date"],
+            "properties": {
+              "date": {
+                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+                "description": "When the NEW (post-change) text/behaviour took effect in this region, if known. On the effective date itself the new behaviour applies. null while unresearched or when only bounds are known — never invent a day to satisfy the schema."
+              },
+              "precision": {
+                "type": "string",
+                "enum": ["day", "month", "year"],
+                "description": "Precision of `date` (default day). A month/year-precise date widens into an interval; snapshots inside it are treated as ambiguous, exactly like release-event precision."
+              },
+              "status": {
+                "type": "string",
+                "enum": ["verified", "reported"],
+                "description": "verified: corroborated by a period/primary source or two independent reliable sources. reported: single secondary source."
+              },
+              "old_attested_through": {
+                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+                "description": "Bounded chronology: the latest date the OLD text/behaviour is positively attested in force (e.g. a printing or ruling document of that date). Used when no effective date is known."
+              },
+              "new_attested_from": {
+                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+                "description": "Bounded chronology: the earliest date the NEW text/behaviour is positively attested in force (e.g. the release date of the first printing carrying it)."
+              },
+              "basis": {
+                "oneOf": [{ "type": "string" }, { "type": "null" }],
+                "description": "What event the chronology is anchored to, e.g. 'TCG release of the first printing with the new text (DPRP, 2016-09-16)' or 'Konami strategy-site errata announcement'."
+              }
+            }
+          },
+          "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before the change, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
+          "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text after the change, transcribed from a cited source." },
+          "summary": { "type": "string", "description": "Plain-language description of the behavioural difference (or the wording change, for cosmetic entries), citing script/database evidence where the difference is behavioural." },
+          "resulting_implementation": {
+            "$ref": "#/$defs/implementation",
+            "description": "Implementation of the version this change CREATED, when that version is itself historical (i.e. this is not the final change) and behaviourally distinct. The record-level implementation covers the baseline (pre-first-change) version; the final change's result is the modern card and must not carry one."
+          },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        }
+      },
+      "description": "Ordered oldest-to-newest. A card errata'd twice has two entries; ruling-policy shifts and rules-era transitions are entries of the corresponding kind."
+    },
+    "implementation": {
+      "$ref": "#/$defs/implementation",
+      "description": "Implementation of the BASELINE version (the card as it behaved before the earliest recorded change)."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["imported", "reviewed"],
+          "description": "imported: mechanically created from an upstream implementation's existence; classification and chronology are unverified, and formats apply the record only via explicit errata_overrides. reviewed: a per-card review has confirmed classification, chronology (or its explicit uncertainty), and implementation mapping; computed applicability applies and ambiguity becomes a hard error."
+        },
+        "date": { "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }] },
+        "notes": { "type": "string" }
+      },
+      "description": "Research state of this record. Absent means 'imported'."
     },
     "applicable_formats_note": {
       "type": "string",
-      "description": "Optional prose note. Which formats actually use the historical version is COMPUTED by tooling from each change's date_effective vs the format snapshot date; it is not hand-listed here."
+      "description": "Optional prose note. Which formats actually use the historical version is COMPUTED by tooling from each change's effective chronology vs the format snapshot date; it is not hand-listed here."
     },
     "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
     "notes": { "type": "string" }

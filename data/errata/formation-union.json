@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Select and activate 1 of the following effects:\r\n● Equip 1 Union Monster on your side of the field to an appropriate monster on your side of the field as an Equip Spell Card.\r\n● Unequip 1 of your equipped Union Monsters and Special Summon it to your side of the field in face-up Attack Position.",
       "modern_text": "Activate 1 of these effects;\r\n● Target 2 monsters you control (1 Union monster, and 1 appropriate monster for it to be equipped to); equip the first target to the second target.\r\n● Target 1 equipped Union Monster Card in your Spell & Trap Zone; Special Summon it in Attack Position.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700048.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

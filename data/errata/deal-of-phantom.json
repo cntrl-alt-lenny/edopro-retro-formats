@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
       "modern_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700112.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

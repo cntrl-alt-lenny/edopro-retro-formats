@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Add 1 \"Gather Your Mind\" card from your Deck to your hand. Your Deck is then shuffled. You can only use 1 \"Gather Your Mind\" per turn.",
       "modern_text": "Add 1 \"Gather Your Mind\" card from your Deck to your hand. Your Deck is then shuffled. You can only use 1 \"Gather Your Mind\" per turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700011.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this effect during your Battle Step, if this card battles during your turn. Discard 1 Dragon-Type monster from your hand to the Graveyard to increase the ATK and DEF of this card by 1000 points until the End Step.",
       "modern_text": "During your Battle Step, if this card battles (Quick Effect): You can discard 1 Dragon monster to the GY; this card gains 1000 ATK/DEF until the end of the Battle Phase.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700185.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

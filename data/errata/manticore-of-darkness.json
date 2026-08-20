@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "During the End Phase, if this card is in the GY because it was sent there this turn: You can send 1 Beast, Beast-Warrior, or Winged Beast monster from your hand or face-up field to the GY; Special Summon this card from your GY.",
       "modern_text": "During the End Phase, if this card is in the GY because it was sent there this turn: You can send 1 Beast, Beast-Warrior, or Winged Beast monster from your hand or face-up field to the GY; Special Summon this card from your GY.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700186.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
       "modern_text": "At the start of the Damage Step, if this card attacked a face-down Defense Position monster: Destroy that monster. During the End Phase, if this card destroyed a monster by battle this turn: You can send this face-up card to the Graveyard; Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700077.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

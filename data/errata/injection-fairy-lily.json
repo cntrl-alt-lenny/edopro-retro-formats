@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card's effect can only be activated during the Damage Step of either player's turn when this card battles. Pay 2000 Life Points to increase the ATK of this monster by 3000 points during the Damage Step only.",
       "modern_text": "If this card attacks or is attacked, during damage calculation (in either player's turn): You can pay 2000 LP once per battle; this card gains 3000 ATK during that damage calculation only.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700138.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

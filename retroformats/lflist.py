@@ -107,29 +107,79 @@ def parse_lflist(text: str) -> dict[str, dict[int, int]]:
     return lists
 
 
-def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Erratum]:
-    """{modern passcode: erratum} for every historical override active in fmt.
+@dataclass(frozen=True)
+class SelectedOverride:
+    """One card whose modern implementation must be substituted in a format:
+    the erratum record plus the implementation of the version its chronology
+    (or an explicit include) selected for the snapshot."""
 
-    An erratum applies when its earliest dated change post-dates the format
-    snapshot (i.e. the modern behaviour did not exist yet), or when the format
-    explicitly includes it via errata_overrides (used while dates are still
-    unresearched). Explicit excludes always win. Only errata that actually
-    carry a usable historical implementation are returned."""
-    selected: dict[int, Erratum] = {}
+    erratum: Erratum
+    implementation: dict
+
+
+class ErrataSelectionError(ValueError):
+    """Raised when a format's errata applicability cannot be decided safely:
+    a reviewed record's chronology is ambiguous at the snapshot, or the
+    selected version has no usable implementation, and the format does not
+    adjudicate it via errata_overrides. The validator reports the same
+    conditions as errors; this exception keeps direct build calls fail-safe."""
+
+    def __init__(self, fmt_id: str, problems: list[str]):
+        super().__init__(
+            f"{fmt_id}: errata applicability is undecidable for {len(problems)} record(s):\n  "
+            + "\n  ".join(problems)
+        )
+        self.problems = problems
+
+
+def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, SelectedOverride]:
+    """{modern passcode: selected override} for every historical substitution
+    active in fmt, computed fail-safe from each record's chronology.
+
+    - Explicit excludes always win (the format keeps the modern card).
+    - Explicit includes pin the BASELINE version (used while chronology is
+      unresearched, and for documented community-semantics deviations).
+    - Otherwise, REVIEWED records select the version whose era contains the
+      snapshot; an ambiguous or implementation-less selection raises
+      ErrataSelectionError rather than silently choosing. Imported
+      (not-yet-reviewed) records never apply computationally — the historical
+      substitution is opt-in via include until a review lands.
+    """
+    selected: dict[int, SelectedOverride] = {}
+    problems: list[str] = []
     snapshot = _dt.date.fromisoformat(fmt.snapshot) if fmt.snapshot else None
     for erratum in repo.errata.values():
         if erratum.id in fmt.errata_exclude:
             continue
-        impl = erratum.implementation
-        if impl.get("strategy") not in ("reuse-upstream", "custom-script"):
+        if erratum.id in fmt.errata_include:
+            impl = erratum.implementation
+            if impl.get("strategy") in ("reuse-upstream", "custom-script") and impl.get(
+                "historical_passcode"
+            ):
+                selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
             continue
-        if not impl.get("historical_passcode"):
+        if snapshot is None or not erratum.relevant_changes():
             continue
-        applies = erratum.id in fmt.errata_include
-        if not applies and snapshot is not None:
-            applies = erratum.historical_behaviour_applies_on(snapshot) is True
-        if applies:
-            selected[erratum.modern_card.passcode] = erratum
+        if erratum.review_status != "reviewed":
+            continue
+        selection = erratum.selection_at(snapshot)
+        if selection.state == "historical":
+            selected[erratum.modern_card.passcode] = SelectedOverride(
+                erratum, selection.implementation
+            )
+        elif selection.state == "ambiguous":
+            problems.append(
+                f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
+                "(adjudicate with a documented errata_overrides include/exclude, "
+                "or narrow the change's effective chronology)"
+            )
+        elif selection.state == "gap":
+            problems.append(
+                f"{erratum.id}: version {selection.version_index} applies at {snapshot} "
+                "but has no usable implementation (record one, or exclude with documentation)"
+            )
+    if problems:
+        raise ErrataSelectionError(fmt.id, problems)
     return selected
 
 
@@ -193,11 +243,11 @@ def _build_whitelist(fmt: Format, banlist: Banlist, pool: Pool, repo: Repository
         status = status_by_code.get(card.passcode, "unlimited")
         count = STATUS_TO_COUNT.get(status, UNLIMITED_COUNT)
         section = status if status in sections else "unlimited"
-        erratum = overrides.get(card.passcode)
-        if erratum is not None:
+        override = overrides.get(card.passcode)
+        if override is not None:
             # The modern implementation is period-incorrect: emit ONLY the
-            # historical passcode (and its artwork variants).
-            impl = erratum.implementation
+            # selected historical passcode (and its artwork variants).
+            impl = override.implementation
             emit_codes = [
                 int(impl["historical_passcode"]),
                 *(int(v) for v in impl.get("historical_variant_passcodes", [])),

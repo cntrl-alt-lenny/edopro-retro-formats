@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Destroy 1 face-down monster and remove it from play. If the monster is a Flip Effect Monster, both players check their respective Decks and remove all monsters of the same name from play. Then shuffle the Decks.",
       "modern_text": "Target 1 face-down monster on the field; destroy that target, and if you do, banish it, then, if it was a Flip monster, each player reveals their Main Deck, then banishes all cards from it with that monster's name.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700116.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

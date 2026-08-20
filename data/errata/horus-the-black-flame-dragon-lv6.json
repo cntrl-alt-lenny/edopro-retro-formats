@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "As long as this card remains face-up on your side of the field, it is unaffected by any Spell Cards. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard, Special Summon 1 \"Horus the Black Flame Dragon LV8\" from your hand or Deck.",
       "modern_text": "This card is unaffected by Spell effects. During the End Phase, if this card destroyed a monster by battle this turn: You can send this face-up card to the Graveyard; Special Summon 1 \"Horus the Black Flame Dragon LV8\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700015.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

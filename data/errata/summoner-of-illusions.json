@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "FLIP: Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this card is activated.",
       "modern_text": "FLIP: Tribute 1 other monster, and if you do, Special Summon 1 Fusion Monster from your Extra Deck, but destroy it during the End Phase of this turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700184.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

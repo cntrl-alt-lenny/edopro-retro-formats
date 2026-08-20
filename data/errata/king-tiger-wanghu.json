@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "As long as this card remains face-up on the field, destroy all monsters with an ATK equal to 1400 or less that are Normal Summoned or Special Summoned.",
       "modern_text": "When a monster(s) with 1400 or less ATK is Normal Summoned or Special Summoned: Destroy those monsters with 1400 or less ATK. This card must be face-up on the field to activate and to resolve this effect.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700143.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can Special Summon this card (from your hand). When you do: Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field.",
       "modern_text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their GY.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511003006.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

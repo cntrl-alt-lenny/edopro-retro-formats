@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Select 1 face-up \"Red-Eyes Black Dragon\" on your side of the field to activate this card. Inflict damage to your opponent's Life Points equal to the original ATK of the selected \"Red-Eyes Black Dragon\". \"Red-Eyes Black Dragon\" cannot attack during the turn you use this card.",
       "modern_text": "Target 1 \"Red-Eyes Black Dragon\" in your Monster Zone; inflict damage to your opponent equal to the original ATK of that \"Red-Eyes Black Dragon\". \"Red-Eyes Black Dragon\" cannot attack the turn you activate this card.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700085.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

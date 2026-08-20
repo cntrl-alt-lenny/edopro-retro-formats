@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "FLIP: Target 1 monster your opponent controls; destroy that target.\r\nWhen this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except this card; return that target to the hand.",
       "modern_text": "FLIP: Target 1 monster your opponent controls; destroy that target.\r\nIf this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except \"Night Assailant\"; add that target to your hand.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c16226796.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

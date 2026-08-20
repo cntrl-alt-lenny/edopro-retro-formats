@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
       "modern_text": "Neither player has to pay LP during the Standby Phase for \"Archfiend\" monsters. When an \"Archfiend\" monster is destroyed and sent to the GY, except by battle: Its owner can add 1 \"Archfiend\" monster from their Deck to their hand with a lower Level than the destroyed card.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700165.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

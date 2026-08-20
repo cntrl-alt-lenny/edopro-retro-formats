@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "If this card is sent from the field to the Graveyard: Each player adds 1 Level 3 or lower Normal Monster from their Deck to their hand. Each player who didn't add a monster to their hand must reveal their Deck to their opponent.",
       "modern_text": "When this card is sent from the field to the Graveyard: Each player adds 1 Level 3 or lower Normal Monster from their Deck to their hand.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511003027.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

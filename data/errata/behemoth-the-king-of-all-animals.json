@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
       "modern_text": "You can Normal Summon/Set this card with 1 Tribute, but its original ATK becomes 2000. When this card is Tribute Summoned: You can target Beast monsters in your GY equal to the number of monsters Tributed; return those targets to the hand.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700035.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
       "modern_text": "(This card is always treated as an \"Archfiend\" card.)\nIf a Level 8 or higher monster under your control was sent to the Graveyard this turn: Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700010.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

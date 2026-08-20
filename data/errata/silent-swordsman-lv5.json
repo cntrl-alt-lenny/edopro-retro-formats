@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card is unaffected by your opponent's Spell Cards. If this card successfully attacks your opponent's Life Points directly, during your next Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Silent Swordsman LV7\" from your hand or Deck.",
       "modern_text": "Unaffected by your opponent's Spell effects. During your next Standby Phase after this card inflicts battle damage to your opponent by a direct attack: You can send this face-up card to the Graveyard; Special Summon 1 \"Silent Swordsman LV7\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700126.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

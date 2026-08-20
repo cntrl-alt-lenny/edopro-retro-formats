@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "While this card is face-up on the field, battle positions of all face-up Insect-Type monsters on your opponent's side of the field are changed into Attack Position. Each time this card destroys an Insect-Type monster as a result of battle, increase the ATK of this card by 500 points.",
       "modern_text": "All Insect monsters your opponent controls are changed to Attack Position. If this card destroys an Insect monster by battle: This card gains 500 ATK.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700061.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

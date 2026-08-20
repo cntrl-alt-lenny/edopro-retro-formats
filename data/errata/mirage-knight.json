@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by the effect of \"Dark Flare Knight\". When this card battles another monster, during damage calculation increase the ATK of this card by the original ATK of the opponent's monster. During the End Phase after this card was involved in battle, remove this card from play.",
       "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways. During damage calculation only, this card gains ATK equal to the original ATK of the opponent's monster it is battling. During the End Phase of a turn this card attacked or was attacked: Banish this card.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700080.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

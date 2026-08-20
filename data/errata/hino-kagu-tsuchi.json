@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent's Life Points, your opponent discards all cards in their hand during the next Draw Phase, before they draw.",
       "modern_text": "This card cannot be Special Summoned. This card returns to its owner's hand during the End Phase of the turn it is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent, they discard all cards in their hand during the next Draw Phase, before they draw.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700131.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

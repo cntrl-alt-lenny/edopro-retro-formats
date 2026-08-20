@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "If you activate this card, you cannot Normal Summon, Flip Summon or Special Summon during this turn. Special Summon 4 \"Sheep Tokens\" (Beast-Type/EARTH/Level 1/ATK 0/DEF 0) in Defense Position to your side of the field. The \"Sheep Tokens\" cannot be used as a Tribute for a Tribute Summon (or Set).",
       "modern_text": "Special Summon 4 \"Sheep Tokens\" (Beast/EARTH/Level 1/ATK 0/DEF 0) in Defense Position. They cannot be Tributed for a Tribute Summon. You cannot Summon other monsters the turn you activate this card (but you can Normal Set).",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700123.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

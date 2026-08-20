@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this card is Normal Summoned, Flip Summoned, or Special Summoned successfully, select 1 face-up monster on the field. As long as the monster remains face-up on the field, decrease its ATK by 800 points.",
       "modern_text": "If this card is Summoned: Target 1 face-up monster on the field; it loses 800 ATK.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700159.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

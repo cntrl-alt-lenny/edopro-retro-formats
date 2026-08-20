@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "All \"Gravekeeper's\" monsters gain 500 ATK/DEF. Cards in the Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.",
       "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK/DEF. Cards in the GY cannot be banished. Negate any card effect that would move a card in the GY to a different place. Negate any card effect that changes Types or Attributes in the GY.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511002998.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

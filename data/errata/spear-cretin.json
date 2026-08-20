@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "FLIP: After this card is flipped, when it is sent to the Graveyard, both you and your opponent select 1 monster from your respective Graveyards and Special Summon it on the field in face-up Attack Position or face-down Defense Position (no Tribute is required for monsters of Level 5 or more).",
       "modern_text": "FLIP: When this card is sent to the Graveyard after being flipped, each player selects 1 monster from their Graveyard, and Special Summons it in face-up Attack Position or face-down Defense Position.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700095.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

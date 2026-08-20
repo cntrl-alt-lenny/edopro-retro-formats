@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this face-up card on the field attacks or is attacked and it is destroyed as a result of battle, the player who destroyed it takes 1000 points of damage.",
       "modern_text": "When this face-up card on the field attacks or is attacked and it is destroyed as a result of battle, the player who destroyed it takes 1000 points of damage.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700150.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

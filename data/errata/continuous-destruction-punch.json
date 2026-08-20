@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "If the DEF of the attacked Defense Position monster on your side of the field is higher than the ATK of the attacking monster on your opponent's side of the field, destroy the attacking monster. Damage calculation is applied normally.",
       "modern_text": "If the DEF of the attacked Defense Position monster on your side of the field is higher than the ATK of the attacking monster on your opponent's side of the field, destroy the attacking monster. Damage calculation is applied normally.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700110.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Once per turn, you can either: Target 1 Machine-Type monster you control, equip this card to that target, OR: Unequip this card and Special Summon it in Attack Position. While equipped by this effect, the equipped monster gains 500 ATK/DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
       "modern_text": "Once per turn, you can either: Target 1 Machine monster you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 500 ATK/DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511002851.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

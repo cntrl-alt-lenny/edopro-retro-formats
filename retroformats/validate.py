@@ -17,6 +17,8 @@ from pathlib import Path
 
 from .model import (
     AVAILABILITY_KINDS,
+    CHANGE_KINDS,
+    EFFECTIVE_STATUSES,
     EVENT_KINDS,
     EVENT_STATUSES,
     GAP_IMPACTS,
@@ -24,6 +26,7 @@ from .model import (
     GAP_RATIONALES,
     GAP_STATUSES,
     IMPLEMENTATION_STATUSES,
+    KIND_SEVERITY,
     PRECISIONS,
     PRODUCT_KINDS,
     STATUS_TO_COUNT,
@@ -34,6 +37,7 @@ from .model import (
     normalise_name,
     territory_matches_scope,
 )
+from .model import _precision_bounds as _model_precision_bounds
 from .releases import ReleaseIndex, default_scope, evaluate_cutoff
 from .repo import Repository
 
@@ -271,54 +275,198 @@ class Validator:
         for erratum in self.repo.errata.values():
             if not _ERRATUM_ID_RE.match(erratum.id):
                 self.error("erratum.bad-id", erratum.path, f"id {erratum.id!r} does not match erratum-<slug>")
-            if erratum.classification not in ("functional", "cosmetic", "ruling", "engine"):
+            if erratum.classification not in CHANGE_KINDS:
                 self.error("erratum.bad-classification", erratum.path, f"{erratum.classification!r}")
             self._check_card(
                 erratum.modern_card.passcode, erratum.modern_card.name, erratum.path, "erratum modern_card"
             )
             if not erratum.changes:
                 self.error("erratum.no-changes", erratum.path, "changes[] is empty")
-            for change in erratum.changes:
-                eff = change.get("date_effective")
-                if eff is not None and self._date(eff) is None:
-                    self.error("erratum.bad-date", erratum.path, f"date_effective {eff!r} is not a valid date")
+            max_earlier_start: _dt.date | None = None
+            for i, change in enumerate(erratum.changes):
+                kind = change.get("kind")
+                if kind not in CHANGE_KINDS:
+                    self.error("erratum.bad-change-kind", erratum.path, f"changes[{i}].kind {kind!r}")
+                bounds = self._validate_effective(erratum, i, change)
+                if bounds is not None:
+                    earliest, latest = bounds
+                    # Definite inversion only: this change certainly finished
+                    # taking effect before an earlier change could have begun.
+                    # Overlapping uncertainty intervals are legitimate.
+                    if (
+                        latest is not None
+                        and max_earlier_start is not None
+                        and latest < max_earlier_start
+                    ):
+                        self.error(
+                            "erratum.changes-out-of-order",
+                            erratum.path,
+                            f"changes[{i}] took effect by {latest}, before an earlier change "
+                            f"could have begun ({max_earlier_start}); changes[] must be "
+                            "ordered oldest to newest",
+                        )
+                    if earliest is not None:
+                        max_earlier_start = max(max_earlier_start or earliest, earliest)
                 if not change.get("sources"):
                     self.error("erratum.change-unsourced", erratum.path, "a change entry cites no sources")
                 else:
                     self._check_sources(change["sources"], erratum.path, None, "erratum change")
-            impl = erratum.implementation
-            strategy = impl.get("strategy")
-            if strategy not in ("none-needed", "reuse-upstream", "custom-script", "unresolved"):
-                self.error("erratum.bad-strategy", erratum.path, f"implementation.strategy {strategy!r}")
-            if impl.get("status") not in IMPLEMENTATION_STATUSES:
-                self.error("erratum.bad-status", erratum.path, f"implementation.status {impl.get('status')!r}")
-            if strategy in ("reuse-upstream", "custom-script") and not impl.get("historical_passcode"):
-                self.warn(
-                    "erratum.no-historical-passcode",
+                resulting = change.get("resulting_implementation")
+                if resulting is not None:
+                    if i == len(erratum.changes) - 1:
+                        self.error(
+                            "erratum.modern-implementation-recorded",
+                            erratum.path,
+                            f"changes[{i}] is the final change; the version it creates is the "
+                            "modern card, implemented by cards.cdb — resulting_implementation "
+                            "must not be recorded for it",
+                        )
+                    self._validate_implementation(erratum, resulting, f"changes[{i}].resulting_implementation")
+            self._validate_implementation(erratum, erratum.implementation, "implementation")
+            strategy = erratum.implementation.get("strategy")
+
+            # The record's summary classification must equal the dominant
+            # change kind, so tools filtering on classification see the truth.
+            kinds = [c.get("kind") for c in erratum.changes if c.get("kind") in CHANGE_KINDS]
+            if kinds:
+                dominant = max(kinds, key=lambda k: KIND_SEVERITY[k])
+                if erratum.classification in CHANGE_KINDS and erratum.classification != dominant:
+                    self.error(
+                        "erratum.classification-mismatch",
+                        erratum.path,
+                        f"classification {erratum.classification!r} but the dominant change "
+                        f"kind is {dominant!r} (severity functional > ruling > engine > cosmetic)",
+                    )
+
+            relevant = erratum.relevant_changes()
+            if not relevant and strategy in ("reuse-upstream", "custom-script"):
+                self.error(
+                    "erratum.no-behavioural-change-with-override",
                     erratum.path,
-                    f"strategy {strategy} but no historical_passcode recorded yet",
+                    "no functional or ruling change is recorded, so a historical card "
+                    "implementation must not substitute the modern one (cosmetic and "
+                    "engine differences never change the card implementation)",
                 )
-            hist = impl.get("historical_passcode")
-            if hist:
-                self._check_card_alias(int(hist), erratum)
-            if erratum.classification == "cosmetic" and strategy not in ("none-needed", "unresolved"):
+            if relevant and erratum.classification == "functional" and strategy == "none-needed":
                 self.warn(
-                    "erratum.cosmetic-with-override",
+                    "erratum.functional-none-needed",
                     erratum.path,
-                    "cosmetic errata should not need a historical implementation",
+                    "a functional text change normally requires a historical implementation; "
+                    "none-needed must be a documented, deliberate decision",
                 )
-            if erratum.classification in ("functional", "ruling") and not any(
-                c.get("date_effective") for c in erratum.changes
+
+            review = erratum.raw.get("review") or {}
+            if review and review.get("status") not in ("imported", "reviewed"):
+                self.error("erratum.bad-review-status", erratum.path, f"review.status {review.get('status')!r}")
+            if erratum.review_status != "reviewed":
+                self.warn(
+                    "erratum.unreviewed",
+                    erratum.path,
+                    "record is imported but not yet reviewed; classification and chronology "
+                    "are unverified, and formats apply it only via explicit errata_overrides",
+                )
+            elif relevant and not any(
+                (c.get("effective") or {}).get("date")
+                or (c.get("effective") or {}).get("old_attested_through")
+                or (c.get("effective") or {}).get("new_attested_from")
+                for c in relevant
             ):
                 self.warn(
                     "erratum.undated",
                     erratum.path,
-                    "no change has a date_effective; per-format applicability relies on "
-                    "explicit errata_overrides.include until the date is researched",
+                    "reviewed, but no behavioural change carries any effective chronology; "
+                    "formats whose snapshot could straddle it must adjudicate explicitly",
                 )
             self._check_sources(erratum.sources, erratum.path, None, "erratum")
 
-    def _check_card_alias(self, historical_passcode: int, erratum) -> None:
+    def _validate_effective(
+        self, erratum, index: int, change: dict
+    ) -> tuple[_dt.date | None, _dt.date | None] | None:
+        """Check one change's effective chronology; returns (earliest, latest)
+        possible effect date for ordering checks, or None if malformed."""
+        effective = change.get("effective")
+        if not isinstance(effective, dict):
+            self.error(
+                "erratum.no-effective",
+                erratum.path,
+                f"changes[{index}] has no effective chronology object",
+            )
+            return None
+        date = effective.get("date")
+        precision = effective.get("precision")
+        status = effective.get("status")
+        old_through = self._date(effective.get("old_attested_through"))
+        new_from = self._date(effective.get("new_attested_from"))
+        if effective.get("old_attested_through") and old_through is None:
+            self.error("erratum.bad-date", erratum.path, f"changes[{index}] old_attested_through is not a date")
+        if effective.get("new_attested_from") and new_from is None:
+            self.error("erratum.bad-date", erratum.path, f"changes[{index}] new_attested_from is not a date")
+        if precision is not None and precision not in PRECISIONS:
+            self.error("erratum.bad-precision", erratum.path, f"changes[{index}] precision {precision!r}")
+            precision = None
+        if status is not None and status not in EFFECTIVE_STATUSES:
+            self.error("erratum.bad-effective-status", erratum.path, f"changes[{index}] status {status!r}")
+        if old_through and new_from and old_through >= new_from:
+            self.error(
+                "erratum.bounds-inverted",
+                erratum.path,
+                f"changes[{index}]: old text attested through {old_through} but new text "
+                f"attested from {new_from}; the old attestation must precede the new one",
+            )
+        if date is None:
+            if new_from or old_through:
+                return (old_through, None) if new_from is None else (old_through, new_from)
+            return (None, None)
+        if self._date(date) is None:
+            self.error("erratum.bad-date", erratum.path, f"changes[{index}] effective.date {date!r}")
+            return None
+        try:
+            lo, hi = _model_precision_bounds(str(date), str(precision or "day"))
+        except ValueError:
+            self.error("erratum.bad-date", erratum.path, f"changes[{index}] effective.date {date!r}")
+            return None
+        if old_through and old_through >= hi:
+            self.error(
+                "erratum.bounds-contradict-date",
+                erratum.path,
+                f"changes[{index}]: old text attested through {old_through}, but the effective "
+                f"date says the new text was in force by {hi}",
+            )
+        if new_from and new_from < lo:
+            self.error(
+                "erratum.bounds-contradict-date",
+                erratum.path,
+                f"changes[{index}]: new text attested from {new_from}, before the earliest "
+                f"possible effective date {lo}",
+            )
+        return (lo, hi)
+
+    def _validate_implementation(self, erratum, impl: dict, what: str) -> None:
+        strategy = impl.get("strategy")
+        if strategy not in ("none-needed", "reuse-upstream", "custom-script", "unresolved"):
+            self.error("erratum.bad-strategy", erratum.path, f"{what}.strategy {strategy!r}")
+        if impl.get("status") not in IMPLEMENTATION_STATUSES:
+            self.error("erratum.bad-status", erratum.path, f"{what}.status {impl.get('status')!r}")
+        if strategy in ("reuse-upstream", "custom-script") and not impl.get("historical_passcode"):
+            self.warn(
+                "erratum.no-historical-passcode",
+                erratum.path,
+                f"{what}: strategy {strategy} but no historical_passcode recorded yet",
+            )
+        hist = impl.get("historical_passcode")
+        if hist:
+            self._check_card_alias(int(hist), erratum, what)
+            for variant in impl.get("historical_variant_passcodes", []) or []:
+                if abs(int(variant) - int(hist)) >= 10:
+                    self.error(
+                        "erratum.variant-out-of-range",
+                        erratum.path,
+                        f"{what}: variant {variant} is not within +/-10 of {hist}; EDOPro "
+                        "treats farther codes as separate cards, not artwork variants",
+                    )
+                self._check_card_alias(int(variant), erratum, what)
+
+    def _check_card_alias(self, historical_passcode: int, erratum, what: str = "implementation") -> None:
         index = self.repo.card_index
         if not index.by_passcode:
             return
@@ -327,18 +475,23 @@ class Validator:
             self.warn(
                 "erratum.historical-passcode-unindexed",
                 erratum.path,
-                f"historical passcode {historical_passcode} is not in the card index "
+                f"{what}: historical passcode {historical_passcode} is not in the card index "
                 "(add it via the importer so alias/name can be cross-checked)",
             )
             return
         alias = row.get("alias_of")
         if alias and int(alias) != erratum.modern_card.passcode:
-            self.error(
-                "erratum.alias-mismatch",
-                erratum.path,
-                f"historical passcode {historical_passcode} aliases {alias}, "
-                f"but modern_card is {erratum.modern_card.passcode}",
-            )
+            # Artwork variants alias the base historical code instead of the
+            # modern card; those are validated against their base above.
+            base = index.by_passcode.get(int(alias))
+            base_alias = base.get("alias_of") if base else None
+            if not (base_alias and int(base_alias) == erratum.modern_card.passcode):
+                self.error(
+                    "erratum.alias-mismatch",
+                    erratum.path,
+                    f"{what}: historical passcode {historical_passcode} aliases {alias}, "
+                    f"but modern_card is {erratum.modern_card.passcode}",
+                )
 
     def _validate_format(self, fmt: Format) -> None:
         if not _FORMAT_ID_RE.match(fmt.id):
@@ -450,9 +603,12 @@ class Validator:
 
         self._check_sources(fmt.sources, fmt.path, fmt.id, "format")
 
-        # errata references and applicability: a functional erratum whose modern
-        # behaviour began after this snapshot means this format needs the
-        # historical version. Undated errata are reported once, in _validate_errata.
+        # errata references and applicability. Computed selection is fail-safe:
+        # a REVIEWED record whose chronology is ambiguous at this snapshot, or
+        # whose selected version lacks an implementation, is an ERROR unless
+        # the format adjudicates it via errata_overrides. Imported (unreviewed)
+        # records apply only via explicit include and are warned about once,
+        # in _validate_errata.
         for ref in [*fmt.errata_include, *fmt.errata_exclude]:
             if ref not in self.repo.errata:
                 self.error(
@@ -462,19 +618,80 @@ class Validator:
                 )
         if snapshot:
             for erratum in self.repo.errata.values():
-                if erratum.classification not in ("functional", "ruling"):
+                if not erratum.relevant_changes():
                     continue
-                if erratum.id in fmt.errata_exclude:
+                excluded = erratum.id in fmt.errata_exclude
+                included = erratum.id in fmt.errata_include and not excluded
+                if erratum.review_status != "reviewed":
+                    if included and erratum.implementation.get("status") in ("missing", "stub"):
+                        self.warn(
+                            "format.erratum-unimplemented",
+                            fmt.path,
+                            f"{erratum.modern_card.name}: included but implementation status "
+                            f"is {erratum.implementation.get('status')!r}",
+                        )
                     continue
-                applies = erratum.historical_behaviour_applies_on(snapshot)
-                if applies is None:
-                    applies = erratum.id in fmt.errata_include
-                if applies and erratum.implementation.get("status") in ("missing", "stub"):
+                selection = erratum.selection_at(snapshot)
+                if excluded:
+                    if selection.state == "historical":
+                        self.warn(
+                            "format.erratum-exclude-contradicts-chronology",
+                            fmt.path,
+                            f"{erratum.id}: chronology says the historical version applies at "
+                            f"{snapshot} but the format excludes it; document the deliberate "
+                            "deviation in the format notes",
+                        )
+                    continue
+                if included:
+                    if selection.state == "modern" and selection.version_index is not None:
+                        self.warn(
+                            "format.erratum-include-contradicts-chronology",
+                            fmt.path,
+                            f"{erratum.id}: chronology says the modern card applies at "
+                            f"{snapshot} but the format pins the baseline version; document "
+                            "the deliberate deviation in the format notes",
+                        )
+                    elif selection.state == "historical" and selection.version_index == 0:
+                        self.warn(
+                            "format.erratum-include-redundant",
+                            fmt.path,
+                            f"{erratum.id}: computed selection already chooses the baseline "
+                            "version; the explicit include can be removed",
+                        )
+                    elif selection.state == "historical":
+                        self.error(
+                            "format.erratum-include-wrong-version",
+                            fmt.path,
+                            f"{erratum.id}: chronology selects version "
+                            f"{selection.version_index} at {snapshot}, but an explicit include "
+                            "pins the baseline version; remove the include or fix the data",
+                        )
+                    continue
+                if selection.state == "ambiguous":
+                    self.error(
+                        "format.erratum-ambiguous",
+                        fmt.path,
+                        f"{erratum.id}: effective chronology is ambiguous at snapshot "
+                        f"{snapshot} (changes {list(selection.ambiguous_changes)}); narrow "
+                        "the chronology or adjudicate with a documented "
+                        "errata_overrides include/exclude — selection will not guess",
+                    )
+                elif selection.state == "gap":
+                    self.error(
+                        "format.erratum-implementation-gap",
+                        fmt.path,
+                        f"{erratum.id}: version {selection.version_index} applies at "
+                        f"{snapshot} but has no usable implementation; record one "
+                        "(reuse-upstream/custom-script) or exclude with documentation",
+                    )
+                elif selection.state == "historical" and selection.implementation.get(
+                    "status"
+                ) in ("missing", "stub"):
                     self.warn(
                         "format.erratum-unimplemented",
                         fmt.path,
                         f"{erratum.modern_card.name}: historical behaviour applies at {snapshot} "
-                        f"but implementation status is {erratum.implementation.get('status')!r}",
+                        f"but implementation status is {selection.implementation.get('status')!r}",
                     )
 
     def _validate_event(self, event, path: Path, context: str) -> None:

@@ -7,7 +7,7 @@ import unittest
 from retroformats.lflist import build_lflist, lflist_hash, parse_lflist
 from retroformats.repo import Repository
 
-from .helpers import TempRepoTest, card
+from .helpers import TempRepoTest, card, change
 
 
 class ParseAndHashTest(unittest.TestCase):
@@ -53,22 +53,10 @@ class WhitelistBuildTest(TempRepoTest):
             ]
         )
         self.add_rule_profile()
-        self.write(
-            "data/errata/beta.json",
-            {
-                "id": "erratum-beta",
-                "modern_card": card(200, "Beta"),
-                "classification": "functional",
-                "changes": [
-                    {"date_effective": "2010-01-01", "summary": "nerfed", "sources": ["test-source"]}
-                ],
-                "implementation": {
-                    "strategy": "reuse-upstream",
-                    "historical_passcode": 510000000,
-                    "status": "complete",
-                },
-                "sources": ["test-source"],
-            },
+        self.add_erratum(
+            id="erratum-beta",
+            modern=card(200, "Beta"),
+            changes=[change(date="2010-01-01", summary="nerfed")],
         )
         self.add_format()
 

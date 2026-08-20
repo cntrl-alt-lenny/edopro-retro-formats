@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Target 1 face-up monster; Destroy it, and if you do, inflict damage to both players equal to its ATK.",
       "modern_text": "During your opponent's turn: Target 1 face-up monster your opponent controls whose ATK is less than or equal to their LP; destroy that face-up monster, and if you do, take damage equal to its original ATK, then inflict damage to your opponent, equal to the damage you took. You can only activate 1 \"Ring of Destruction\" per turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -27,6 +30,9 @@
     "script": "c511000824.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

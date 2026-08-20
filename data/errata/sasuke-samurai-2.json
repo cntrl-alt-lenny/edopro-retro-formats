@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
       "modern_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700016.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

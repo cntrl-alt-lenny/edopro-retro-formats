@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Activate this card by Tributing 1 face-up monster on your side of the field that includes \"Ninja\" in its card name. Special Summon 1 Beast-Type, Winged Beast-Type, or Insect-Type monster with a Level equal to or less than the Level of the Tributed card + 3 from your hand or Deck to your side of the field. When this card is removed from your side of the field, destroy the monster.",
       "modern_text": "Activate this card by Tributing 1 face-up \"Ninja\" monster; Special Summon 1 Beast, Winged Beast, or Insect monster from your hand or Deck whose Level is less than or equal to the Level the Tributed monster had on the field +3. When this card leaves the field, destroy that monster.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700115.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

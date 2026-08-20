@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Send 1 Monster Card from your hand to the Graveyard to destroy 1 face-up monster on your opponent's side of the field with an ATK equal to or less than the ATK of the sent monster. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Armed Dragon LV7\" from your hand or Deck.",
       "modern_text": "You can send 1 monster from your hand to the GY, then target 1 monster your opponent controls with ATK less than or equal to the sent monster's ATK; destroy that target. During the End Phase, if this card destroyed a monster by battle this turn: You can send this card to the GY; Special Summon 1 \"Armed Dragon LV7\" from your hand or Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700075.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
       "modern_text": "(This card is always treated as an \"Archfiend\" card.)\nThe equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on the top of your Deck.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700068.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

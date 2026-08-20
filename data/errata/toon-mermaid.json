@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while \"Toon World\" is on your side the field. You can Special Summon this monster from your hand, but Tributes are required for monsters Level 5 or more. This card cannot attack in the turn that it is Summoned. Unless you pay 500 Life Points, this monster cannot attack. When \"Toon World\" on the field is destroyed, this card is also destroyed. If your opponent doesn't control a Toon Monster, this card can attack your opponent's Life Points directly. If a face-up Toon Monster is on your opponent's side of the field, you must select the Toon Monster as an attack target.",
       "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand), while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700108.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

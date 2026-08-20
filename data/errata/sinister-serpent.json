@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "During your Standby Phase, if there is a \"Sinister Serpent\" in your Graveyard: you can add this card from your Graveyard to your hand.",
       "modern_text": "During your Standby Phase, if this card is in your GY: You can return it to your hand, also banish 1 \"Sinister Serpent\" from your GY during your opponent's next End Phase. You can only use this effect of \"Sinister Serpent\" once per turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511000818.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

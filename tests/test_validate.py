@@ -133,24 +133,31 @@ class ValidRepoTest(TempRepoTest):
         self.add_format(banlist="tcg-9999-01")
         self.assertIn("format.unresolved-banlist", error_codes(run_validation(self.root)))
 
-    def test_undated_functional_erratum_warns(self):
+    def test_unreviewed_erratum_warns_but_does_not_block(self):
         self._seed_valid()
-        self.write(
-            "data/errata/alpha.json",
-            {
-                "id": "erratum-alpha",
-                "modern_card": card(100, "Alpha"),
-                "classification": "functional",
-                "changes": [
-                    {"date_effective": None, "summary": "changed", "sources": ["test-source"]}
-                ],
-                "implementation": {"strategy": "unresolved", "status": "missing"},
-                "sources": ["test-source"],
-            },
+        self.add_erratum(
+            id="erratum-alpha",
+            modern=card(100, "Alpha"),
+            impl={"strategy": "unresolved", "status": "missing"},
+            review="imported",
         )
         validator = run_validation(self.root)
         self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+        self.assertIn("erratum.unreviewed", {f.code for f in validator.warnings})
+
+    def test_reviewed_undated_erratum_warns_and_ambiguity_blocks(self):
+        self._seed_valid()
+        self.add_erratum(
+            id="erratum-alpha",
+            modern=card(100, "Alpha"),
+            impl={"strategy": "unresolved", "status": "missing"},
+            review="reviewed",
+        )
+        validator = run_validation(self.root)
         self.assertIn("erratum.undated", {f.code for f in validator.warnings})
+        # The format snapshot falls inside the (fully unknown) transition
+        # interval; selection must refuse rather than guess.
+        self.assertIn("format.erratum-ambiguous", error_codes(validator))
 
 
 if __name__ == "__main__":

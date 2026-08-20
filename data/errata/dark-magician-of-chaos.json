@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "When this card is Normal or Special Summoned: You can target 1 Spell in your Graveyard; add it to your hand. Banish any monster this card destroys by battle, instead of sending it to the Graveyard. If this face-up card would leave the field, banish it instead.",
       "modern_text": "During the End Phase, if this card was Normal or Special Summoned this turn: You can target 1 Spell in your GY; add it to your hand. You can only use this effect of \"Dark Magician of Chaos\" once per turn. If this card destroys an opponent's monster by battle, after damage calculation: Banish that opponent's monster. If this face-up card would leave the field, banish it instead.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511001039.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

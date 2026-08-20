@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Only once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next End Phase. When this card is destroyed, the effect is negated.",
       "modern_text": "Once during each of your Standby Phases: You can pay 700 LP, then target 1 Warrior or Machine monster you control; switch the current ATK and DEF of that target until the end of your opponent's next turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700014.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

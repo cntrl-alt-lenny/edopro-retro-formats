@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "During the End Phase, if this card was destroyed on the field and sent to the Graveyard this turn: Special Summon it from the Graveyard, and if you do, its ATK/DEF become 1000. You can only use the effect of each \"Twin-Headed Behemoth\" once per Duel.",
       "modern_text": "During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn: You can Special Summon this card, but its ATK/DEF become 1000. You can only use this effect of \"Twin-Headed Behemoth\" once per Duel.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c511000868.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

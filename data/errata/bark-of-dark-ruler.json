@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "You can only activate this card during the Damage Step of a Battle Phase if a Fiend-Type monster on your side of the field battles. Pay Life Points (in multiples of 100 points) to decrease 1 of your opponent's monster's ATK and DEF by the same amount of points until End Phase of that turn.",
       "modern_text": "If a Fiend monster you control battles, during the Damage Step: Pay LP in multiples of 100, then target the opponent's battling monster; that opponent's monster loses that much ATK and DEF, until the end of this turn.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700070.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

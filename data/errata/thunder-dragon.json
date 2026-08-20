@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your deck. You can only use this effect during your Main Phase.",
       "modern_text": "You can discard this card; add up to 2 \"Thunder Dragon\" from your Deck to your hand.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700054.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",

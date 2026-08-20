@@ -8,7 +8,10 @@
   "classification": "functional",
   "changes": [
     {
-      "date_effective": null,
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
       "historical_text": "\"X-Head Cannon\" + \"Z-Metal Tank\"\r\nThis card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 face-down Spell or Trap Card on your opponent's side of the field.",
       "modern_text": "\"X-Head Cannon\" + \"Z-Metal Tank\"\nMust first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) Cannot be Special Summoned from the GY. You can discard 1 card, then target 1 face-down Spell/Trap your opponent controls; destroy that target.",
       "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
@@ -24,6 +27,9 @@
     "script": "c504700177.lua",
     "status": "complete",
     "tested": false
+  },
+  "review": {
+    "status": "imported"
   },
   "sources": [
     "ignis-babelcdb",
