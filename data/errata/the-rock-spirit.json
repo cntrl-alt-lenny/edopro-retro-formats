@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-the-rock-spirit",
+  "modern_card": {
+    "passcode": 76305638,
+    "name": "The Rock Spirit"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2005-07-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Dark Beginning 2 (DB2-EN007), the first printing carrying the reordered wording"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This monster can only be Special Summoned by removing 1 EARTH monster in your Graveyard from play. Increase the ATK of this monster by 300 points during your opponent's Battle Phase.",
+      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. Increase the ATK of this monster by 300 points during your opponent's Battle Phase.",
+      "summary": "Word-order modernisation only: 'removing 1 EARTH monster in your Graveyard from play' becomes 'removing from play 1 EARTH monster in your Graveyard' (v1 LON-EN069 / Master Collection Volume 1 -> v2 DB2-EN007). The Normal Summon prohibition, the banish-an-EARTH-monster summoning procedure and the opponent's-Battle-Phase ATK gain all resolve identically.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2020-11-26",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SBCB-EN029, Speed Duel: Battle City Box)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. Increase the ATK of this monster by 300 points during your opponent's Battle Phase.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY. Gains 300 ATK during your opponent's Battle Phase only.",
+      "summary": "Functional erratum: the strict 'This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard' becomes 'Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY'. Under the period text every Special Summon of the card had to be that procedure, so the card could never be revived by any other means; the modern semi-Nomi wording permits any later Special Summon - Monster Reborn, Call of the Haunted, Premature Burial - once the card has been properly Special Summoned. The modern text also pins the inherent summon to the hand, which the period text left unstated.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the EDOPro card can be Special Summoned out of the Graveyard by revival cards after one proper summon, a line the period Nomi text forbade outright.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v1 (LON-EN069 / Master Collection Volume 1, 2004-12-01), the text in force at the GOAT snapshot; v2 (DB2-EN007, 2005-07-27) is the text in force at the Edison snapshot and is behaviourally identical to v1. The earlier v0 -> v1 transition (LON-069, 2003-03-01 -> LON-EN069, which added 'This card cannot be Normal Summoned or Set.') predates both recorded eras and is therefore not recorded as a change. The pinned BabelCDB text matches lineage v3 exactly (ratio 1.0). upstream_implementations is empty - Project Ignis ships neither a goat nor a pre-errata variant, so both the GOAT-era and Edison-era behaviour are unimplemented. The Rock Spirit does not appear on EdisonFormat.com's functional errata page, so there is no community corroboration for this record; the verdict rests on the printed lineage alone, where the Nomi -> 'Must first be Special Summoned' shift is the pattern the review instructions name explicitly as functional."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

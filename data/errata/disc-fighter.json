@@ -5,18 +5,19 @@
     "passcode": 19612721,
     "name": "Disc Fighter"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "If this card attacks a Defense Position monster with DEF 2000 or more, destroy the monster with this card's effect without applying Damage Calculation.",
-      "modern_text": "If this card attacks a Defense Position monster with DEF 2000 or more, destroy the monster with this card's effect without applying Damage Calculation.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "If this card attacks a Defense Position monster with DEF 2000 or more, destroy that monster with this card's effect without applying Damage Calculation.",
+      "summary": "Era trigger timing, not a text erratum: the goat script registers the forced destruction effect on EVENT_PRE_DAMAGE_CALCULATE and triggers whenever this card attacks any monster, checking Defense Position and DEF 2000 or more only at resolution (s.desop: `not t:IsAttackPos() and t:IsDefenseAbove(2000)`); the modern script triggers on EVENT_BATTLE_CONFIRM at attack declaration and requires the attacked monster to already be in Defense Position with DEF 2000 or more at that moment (s.destg). A monster whose battle position or DEF changes between attack declaration and damage calculation therefore resolves differently, and in the era version the forced trigger goes on the chain at the start of the Damage Step even when the attacked monster does not qualify. Chronology of this ruling is unresolved: no lineage text transition marks it and no shared chronology entry covers Damage Step trigger placement.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700029,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700029.lua",
+    "script": "goat/c504700029.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The English lineage has two versions, v0 (AST-028, 2004-06-01) and v1 (DR2-EN140, 2005-10-20), differing only in the capitalisation of 'Damage Calculation' - cosmetic, folded here rather than recorded as a change. Conflict worth reconciling: both the goat cdb entry and the pinned modern cards.cdb read 'destroy the monster' where every lineage version reads 'destroy that monster' (packet reports ratio 0.99, exact false, on both the historical and the modern side). The discrepancy is a single word, is identical on both sides, and is not behavioural, but it means the cdb text matches no lineage version exactly - flagged conflicting-evidence. Script equivalence checked against the repo: modern official/c19612721.lua vs goat/c504700029.lua differ only in the two ways described in the change summary."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

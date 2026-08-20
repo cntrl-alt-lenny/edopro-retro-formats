@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-senet-switch",
+  "modern_card": {
+    "passcode": 63394872,
+    "name": "Senet Switch"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2022-08-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (TAMA-EN042, Tactical Masters)"
+      },
+      "historical_text": "Once per turn, during your Main Phase, you can move 1 monster on your side of the field to an adjacent (horizontal) unoccupied Monster Card Zone.",
+      "modern_text": "Once per turn: You can target 1 monster in your Main Monster Zone and choose 1 of its unused adjacent (horizontal) Monster Zones; move that target to the chosen adjacent zone.",
+      "summary": "Functional erratum: the destination zone is now chosen when the effect is activated ('choose 1 of its unused adjacent (horizontal) Monster Zones'), and the monster moved must be in your Main Monster Zone. The pre-errata script targets only the monster and calls tc:MoveAdjacent() at resolution, picking any still-free adjacent zone then; the modern script stores the chosen zone at target time (e:SetLabel(tc:SelectAdjacent())) and aborts at resolution if Duel.CheckLocation(tp,LOCATION_MZONE,seq) shows that zone has since been filled.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 63394882,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c63394882.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1, whose text the baseline's cdb entry matches exactly. v0 (CDIP-EN048, 2006-11-15) -> v1 adds only the '(horizontal)' parenthetical, so it precedes the baseline and is not recorded; v1 carries no printing - its caption is a web.archive.org capture of the Konami Card Database taken 2022-08-12 and explicitly labelled as prior to the TAMA release - which means v1 is the database text still in force immediately before the errata'd printing, and it is the text in force across both period snapshots. The Japanese table on the same errata page carries the matching erratum at DBTM-JP042 (Deck-Build Pack: Tactical Masters). This card is the dated analogue of Rampaging Rhynos and Storm Shooter in this batch: the same zone-move mechanism, but here the reformulated wording did reach an English printing, so the transition is dateable by set-release evidence."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

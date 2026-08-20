@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-a-hero-emerges",
+  "modern_card": {
+    "passcode": 21597117,
+    "name": "A Hero Emerges"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2010-05-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "Duel Terminal 2 printing DT02-EN048"
+      },
+      "historical_text": "You can only activate this card when your opponent declares an attack. Select 1 random card from your hand. If it is a Monster Card, Special Summon it on your side of the field. If not, send it to the Graveyard.",
+      "modern_text": "Activate only when your opponent declares an attack. Your opponent selects 1 random card from your hand. If it is a Monster Card, Special Summon it on your side of the field. If not, send it to the Graveyard.",
+      "summary": "Wording only: 'You can only activate this card when your opponent declares an attack' becomes 'Activate only when your opponent declares an attack', and the selector wording swings back from 'Select 1 random card from your hand' to 'Your opponent selects 1 random card from your hand'. The card picked is random either way, so nothing about the resolution changes.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-06-28",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (BP02-EN179, Battle Pack 2: War of the Giants)"
+      },
+      "historical_text": "Activate only when your opponent declares an attack. Your opponent selects 1 random card from your hand. If it is a Monster Card, Special Summon it on your side of the field. If not, send it to the Graveyard.",
+      "modern_text": "When an opponent's monster declares an attack: Your opponent chooses 1 random card from your hand, then if it is a monster that can be Special Summoned, Special Summon it. Otherwise, send it to the Graveyard.",
+      "summary": "Functional erratum: the disposal branch is rewritten from 'If it is a Monster Card, Special Summon it on your side of the field. If not, send it to the Graveyard.' to 'then if it is a monster that can be Special Summoned, Special Summon it. Otherwise, send it to the Graveyard.' Under the pre-BP02 text the send-to-Graveyard branch is reached only when the random card is not a monster at all, so a randomly chosen monster that cannot be Special Summoned (a Nomi/semi-Nomi monster such as Judgment Dragon or Dark Armed Dragon) is neither Summoned nor sent and stays in the hand; the errata'd text routes it to the GY.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format a random hit on a monster that cannot be Special Summoned should leave that card in the hand, but the shipped modern card sends it to the GY, giving Lightsworn/Dark Armed style hands free Graveyard setup off the opponent's attack.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty - Project Ignis ships no goat or pre-errata variant, so the chain is judged from the text lineage alone. Chain starts at v3 (IOC-EN104 reprint in Force of the Breaker: Special Edition, 2007-06-25), the text in force at the 2010-04-24 Edison snapshot; the DT02 reprint that follows it is dated 2010-05-25, one month AFTER that snapshot, which is why the cosmetic boundary is recorded there rather than folded away. Pre-baseline versions v0 (IOC-104, 2004-03-01), v1 (DR2-EN105, 2005-10-20) and v2 (DP1-EN025, 2006-02-08) only oscillate over who performs the random selection and over the 'You can only activate' phrasing; they are behaviourally identical to v3, so a GOAT-era snapshot mapped to the baseline shows v3's wording rather than v0's. Trailing v5 -> v6 (SGX1-ENA19, 2022-03-17) is the Graveyard->GY rewording and is not recorded. Conservatism note: the BP02 change is a PSCT rewrite, but it is not punctuation-only - it adds a condition ('that can be Special Summoned') and an 'Otherwise' catch-all that plainly relocates a monster the effect cannot Summon from the hand to the GY, which is why it is recorded functional rather than cosmetic. No period ruling was available in the packet to confirm what the pre-2013 text did with such a monster, so the verdict rests on the text as printed."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rainbow-neos",
+  "modern_card": {
+    "passcode": 86346643,
+    "name": "Rainbow Neos"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2021-11-18",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the current text (MGED-EN137, Maximum Gold: El Dorado)"
+      },
+      "historical_text": "\"Elemental Hero Neos\" + \"Rainbow Dragon\" or \"Rainbow Dark Dragon\"This card cannot be Special Summoned, except by Fusion Summon with the above Fusion Material Monsters. Once per turn, you can activate 1 of the following effects: ● Send 1 monster you control to the Graveyard to return all monsters your opponent controls to the Deck. ● Send 1 Spell or Trap Card you control to the Graveyard to return all Spell and Trap Cards your opponent controls to the Deck. ● Send 1 card from the top of your Deck to the Graveyard to return all cards in your opponent's Graveyard to the Deck.",
+      "modern_text": "\"Elemental HERO Neos\" + 1 \"Ultimate Crystal\" monsterMust be Fusion Summoned with the above Fusion Materials. Once per turn: You can activate 1 of these effects.● Send 1 monster you control to the GY; shuffle all monsters your opponent controls into the Deck. ● Send 1 Spell/Trap you control to the GY; shuffle all Spells and Traps your opponent controls into the Deck. ● Send 1 card from the top of your Deck to the GY; shuffle all cards from your opponent's GY into the Deck.",
+      "summary": "Wording modernisation only: v1 (LCGX-EN074) restated the restriction as 'Must be Fusion Summoned with the above Fusion Material Monsters and cannot be Special Summoned by other ways' and put the three bullets into PSCT cost/effect form ('Send 1 X you control to the Graveyard; shuffle all ... into the Deck'), the undated v2 generalised the named materials to '1 \"Ultimate Crystal\" monster', and v3 (MGED-EN137) dropped the now-redundant 'and cannot be Special Summoned by other ways' and moved to GY wording. Neither step changes resolution: 'Must be Fusion Summoned' without 'first' is still the strict form (the sibling card Rainbow Dark Dragon, which took the identical clause removal, is still implemented with EFFECT_SPSUMMON_CONDITION and no revive limit), and in a period card pool the only 'Ultimate Crystal' monsters are exactly the two the old text names.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty - a true no-upstream card - but the review resolves to cosmetic, so no implementation is needed. Edison- and GOAT-era text is v0 (PTDN-EN044, 2008-02-13). The two differences a sweep would flag are the material line and the dropped 'cannot be Special Summoned by other ways' clause, and I judged both non-behavioural. Material line: '\"Rainbow Dragon\" or \"Rainbow Dark Dragon\"' -> '1 \"Ultimate Crystal\" monster' widens the wording, but 'Ultimate Crystal' is a 2018 archetype and both period Rainbow monsters are treated as members by their own modern text, so within any Edison-legal pool the accepted material set is identical. This does depend on Rainbow Dragon (79856792) and Rainbow Dark Dragon (79407975) keeping their modern implementations, which is what the other two decisions in this batch record. Dropped clause: the corroboration is cross-card and comes from the Rainbow Dark Dragon packet in this same batch - that card's modern text dropped the same clause and its modern script still registers EFFECT_SPSUMMON_CONDITION with no value rather than EnableReviveLimit, i.e. the shortened wording is still the never-revivable form, not the 'Must first be' form. Lineage v2 is undated (number null), so the cosmetic entry is dated at v3. Modern cdb text matches v3 (ratio 0.9989)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+  ]
+}

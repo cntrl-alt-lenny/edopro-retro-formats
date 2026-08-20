@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-exchange-of-the-spirit",
+  "modern_card": {
+    "passcode": 17484499,
+    "name": "Exchange of the Spirit"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2015-03-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (PGL2-EN066, Premium Gold: Return of the Bling)"
+      },
+      "historical_text": "Activate only while there are 15 or more cards in your Graveyard. Pay 1000 Life Points. Both players swap the card(s) in their Graveyard with the card(s) in their Deck. Then, both players shuffle their Decks.",
+      "modern_text": "If both players have 15 or more cards in their Graveyards: Pay 1000 LP; each player swaps the cards in their Graveyard with the cards in their Deck, then shuffles their Deck. You can only activate 1 \"Exchange of the Spirit\" per Duel.",
+      "summary": "Functional erratum: the activation condition became 'If both players have 15 or more cards in their Graveyards', and a hard once-per-Duel activation limit was added. The pre-errata script's condition counts only the controller's Graveyard (Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)>=15) and registers no count limit, so the historical card can be activated while the opponent's Graveyard is nearly empty and a second copy can still be activated later in the same Duel; the modern script adds the opponent-side count and SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL).",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000820,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000820.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v2 (DLG1-EN100, 2008-11-21), which the baseline implements (cdb text is a PSCT-style paraphrase of v2, ratio 0.937 - it splits the LP payment out as a cost the way v2's text does). Earlier transitions v0 (SP1-EN004, 2005-11-05) -> v1 (RP01-EN099) -> v2 move the 1000 LP payment from the activation clause into a separate cost sentence and drop the 'put it on the Deck Zone' procedure wording; behaviourally identical, so not recorded. Trailing v3 -> v4 (MAMA-EN032, 2022-11-03) is Graveyard->GY only. Minor implementation detail with no observable effect: the modern operation swaps in turn-player order (Duel.GetTurnPlayer first), the pre-errata swaps controller-first. Data note: the packet's Retro Pack entry carries a tcg-na date of 2024-08-23 alongside tcg-eu 2008-07-08, which looks wrong, but v1 is not used to date anything here."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

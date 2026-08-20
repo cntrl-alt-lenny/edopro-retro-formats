@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rainbow-dark-dragon",
+  "modern_card": {
+    "passcode": 79407975,
+    "name": "Rainbow Dark Dragon"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2018-06-28",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first dated printing carrying the current text (BLRR-EN054, Battles of Legend: Relentless Revenge)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by removing from play 7 DARK monsters with different names from your Graveyard. You can remove from play all other DARK monsters you control and from your Graveyard to have this card gain 500 ATK for each card removed.",
+      "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 7 DARK monsters with different names from your GY. You can banish all other DARK monsters from your field and GY; this card gains 500 ATK for each card banished this way.",
+      "summary": "Wording modernisation only across v0 (PTDN-EN003) -> v1 (LCGX-EN243) -> v2 (undated) -> v3 (BLRR-EN054): 'remove from play' -> 'banish', the PSCT '(from your hand)' clarification of the self-Summon, the addition then removal of the redundant 'and cannot be Special Summoned by other ways', and 'all other DARK monsters you control and from your Graveyard' -> 'from your field and GY'. The summoning restriction did not loosen: the modern script registers EFFECT_SPSUMMON_CONDITION with no value (not EnableReviveLimit), i.e. the card can still only be Special Summoned by banishing 7 differently-named DARK monsters from the GY, and the ATK gain still banishes every other DARK monster on your field and in your GY for 500 ATK each.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Edison-era (2010-04-24) and GOAT-era text is v0 (PTDN-EN003, 2008-02-13); the first rewording is 2011-10-04, after both snapshots. I compared v0 to the modern text clause by clause and found no resolution difference, so this is a cosmetic record with no historical implementation needed. Two points I deliberately did not treat as functional: (1) '(from your hand)' added in v1 - a pre-PSCT 'cannot be Special Summoned except by [self-paid condition]' monster has no other legal Summon source, and the modern script's SPSUMMON_PROC is ranged LOCATION_HAND, so this codifies the era ruling; (2) the '(This card is always treated as an \"Ultimate Crystal\" card.)' line added in the undated v2 - no Edison- or GOAT-legal card references 'Ultimate Crystal' (the archetype is a 2018 creation), so the archetype membership is inert in a period pool, and it is what keeps the modern Rainbow Neos Fusion legal with this card. Lineage v2 has number null and no dating_set, so the cosmetic entry is dated at v3, the first dated printing carrying the current text. The packet's single upstream code, 511001139 'Rainbow Dark Dragon (Anime)', is a different card entirely (7 'Advanced Crystal Beast' names, a 1000-ATK-per-card Quick Effect, a Crystal Beast destruction-replacement and a self-banish check); it is not a historical TCG implementation and must not be substituted. Modern cdb text matches lineage v3 (ratio 0.9984)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+  ]
+}

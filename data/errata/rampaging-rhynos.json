@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rampaging-rhynos",
+  "modern_card": {
+    "passcode": 3784434,
+    "name": "Rampaging Rhynos"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If this card attacks the monster in its same column, this card gains 500 ATK during the Damage Step.",
+      "summary": "When the destination zone is chosen differs, with no English text change: the pre-errata script sets only aux.seqmovop, which picks a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which locks the destination in at activation (e:SetLabel(c:SelectAdjacent())) and aborts the move if Duel.CheckLocation shows that zone is no longer free when the effect resolves. Chronology is unresolved: no English printing in the lineage carries the change, and I did not date it from the OCG printing that does.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 3784444,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c3784444.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflict recorded, not resolved: the upstream variant is labelled '(Pre-Errata)' but its cdb text is byte-identical to lineage v1, which is also byte-identical to the modern text, so nothing in the English record marks it as a historical version. The English lineage has only v0 (CDIP-EN031, 2006-11-15) and v1, which adds '(horizontal)' and carries no printing - its caption is a Konami Card Database link with no capture date in the packet. The Japanese table on the same errata page does show a behavioural erratum: DE01-JP057 (Duelist Edition Volume 1) rewrote the effect as designating an unused adjacent Monster Card Zone and activating, then moving this card to that zone - exactly the choose-at-activation behaviour of the modern script - so an official OCG erratum exists that the English text never received. I did not convert that into a date: set-release evidence is only available for English lineage indices and DE01 is not one. Full scripts were read (pre-errata/c3784444.lua vs official/c3784434.lua); the zone-selection timing is the only difference, the 500 ATK column condition is identical. Compare Senet Switch and Storm Shooter in this batch, the same mechanism on two other Cyberdark Impact cards; Senet Switch's equivalent change IS dated by an English printing (TAMA-EN042, 2022-08-25), which is the closest available analogue but is not evidence for this card."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}

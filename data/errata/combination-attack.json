@@ -5,17 +5,18 @@
     "passcode": 8964854,
     "name": "Combination Attack"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
       "modern_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era eligibility semantics encoded per card with no text change: the goat script requires the chosen monster to have actually battled this turn (`c:GetBattledGroupCount()>0`, upstream-annotated \"If a replay occurred, the monster can be targeted\") where the modern script requires only that it announced an attack (`c:GetAttackAnnouncedCount()==0` rejects), and the goat equip filter additionally accepts a Union equipped by Union Rider (`c:GetFlagEffect(11743119)~=0`) beside EFFECT_UNION_STATUS, which the modern filter does not. The modern script also refuses the multi-Union case while its controller is affected by CARD_BLUEEYES_SPIRIT and checks free zones per controller, where the era script only needs a free zone for the equip card's owner. Chronology of these readings is unresolved.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +25,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700012,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700012.lua",
+    "script": "goat/c504700012.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical (goat 504700012 cdb text == pinned modern cards.cdb text) and the errata page (revid 5739966) lists only a Japanese lineage, so literal texts are carried on the change and no printing is available to date anything. Union Rider is passcode 11743119, confirmed from the header of official/c11743119.lua in the pinned CardScripts checkout. EdisonFormat's Union entry ('Machina Gearframe (and all Union Monsters)') concerns the Union monsters' own 1-Union-per-monster Condition, not this card, so it corroborates nothing here and is not cited as a source. The phase test differs in form only (`Duel.IsBattlePhase()` vs the PHASE_BATTLE_START..PHASE_BATTLE range)."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-crush-card-virus",
+  "modern_card": {
+    "passcode": 57728570,
+    "name": "Crush Card Virus"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2013-09-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the new text (DPKB-EN039, Silver Dragon Value Box)"
+      },
+      "historical_text": "Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.",
+      "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
+      "summary": "PSCT rewording only (v2, DPKB-EN039): the period sentence 'Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.' becomes the semicolon form with the same cost, the same three-turn draw-checking window and the same 1500-ATK destruction.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2015-03-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Premium Gold: Return of the Bling (PGL2-EN070), the first printing carrying the errata'd text"
+      },
+      "historical_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
+      "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; your opponent takes no damage until the end of the next turn, also, you look at your opponent's hand and all monsters they control, and if you do, destroy the monsters among them with 1500 or more ATK, then your opponent can destroy up to 3 monsters with 1500 or more ATK in their Deck.",
+      "summary": "Functional erratum: the ongoing three-turn check was replaced. The historical script registers a field effect on EVENT_DRAW with SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN,3) that confirms each drawn card and destroys drawn monsters with 1500 or more ATK for three of the opponent's turns; the modern script destroys only what is on the field and in the hand at resolution, then lets the opponent destroy up to 3 such monsters in their Deck, and adds damage immunity the old card never had (EFFECT_CHANGE_DAMAGE and EFFECT_NO_EFFECT_DAMAGE set to 0 against the opponent, reset after two phase ends).",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000822,
+    "historical_variant_passcodes": [
+      511000823
+    ],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000822.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "511000822 and 511000823 are artwork variants of one implementation (codes within 10, identical names, identical cdb text, both aliased to 57728570); folded with the lower code as the implementation and the other as a variant passcode. Their scripts differ only in vintage of the target filter - 822 uses c:IsAttackAbove(1500), 823 uses c:GetAttack()>=1500 and c:IsDestructable() - with the same three-turn draw-check machinery. Upstream also ships 513000009 'Crush Card Virus (Anime)', which targets a DARK monster you control and fires on its destruction, reaching the Deck as well; that is the anime card, not a historical TCG version, and is excluded. The baseline text matches v1 exactly (TU01-EN006, 2009-08-15), which is also the Edison-era printing; v0 (SJCS-EN004, 2007-01-27) -> v1 is a cosmetic rewording ('all monsters on your opponent's side of the field' -> 'all monsters your opponent controls') predating the baseline. Trailing v3 -> v4 (DPBC-EN020, 2015-06-19) only adds 'after this card resolves' to the damage-immunity window and is not recorded. One further period difference visible in the script: the historical version can be activated with no valid target at all ('if chk==0 then return true end') while the modern target function requires a qualifying or hidden card to exist."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

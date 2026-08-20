@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-blue-eyes-ultimate-dragon",
+  "modern_card": {
+    "passcode": 23995346,
+    "name": "Blue-Eyes Ultimate Dragon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2008-04-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Gold Series (GLD1-EN028), the printing that carries the reduced DEF"
+      },
+      "summary": "Stat-only erratum: the Gold Series printing dropped DEF from 3800 to 3000 (the lineage's English versions carry nothing but the DEF line - v0 'DEF/3800', v1 'DEF/3000'), and upstream's variant is exactly that card, cards-unofficial.cdb 511006007 at ATK 4500 / DEF 3000 against cards.cdb 23995346 at 4500 / 3800. The Fusion materials line and the card's own behaviour are untouched.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 511006007,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511006007.lua",
+        "status": "complete",
+        "tested": false
+      },
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2008-07-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Retro Pack (RP01-EN000), which restores DEF 3800"
+      },
+      "summary": "The reduced DEF was reverted: v2 (RP01-EN000) prints 'DEF/3800' again, which is the modern value in cards.cdb. After this transition the modern implementation is correct, so no historical implementation attaches to it.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The oldest recorded version (v0, JMP-EN005, DEF 3800) is identical to the modern card, so the baseline needs no substitution; the upstream variant belongs to the intermediate DEF-3000 version and is attached there. Recording both transitions matters: had only the restoration been recorded, every snapshot before it - including GOAT (2005-04-01), which predates the misprint entirely - would have selected the DEF-3000 card. As recorded, GOAT and Edison (2010-04-24) both resolve to the modern 3800 card and only the 2008-04-02 .. 2008-07-08 window selects 511006007. historical_text_version / modern_text_version are null deliberately: this errata page's English versions contain DEF markup only ('<center>DEF/3800</center>'), no card text, and the printed materials line is unchanged. Date anomaly, flagged: the packet's set_dates for Retro Pack list tcg-eu 2008-07-08 alongside tcg-na 2024-08-23 under one product id; the applier will take the earliest (2008-07-08), but the 2024 entry looks like a same-name product conflated into the release data and should be checked. Script difference is an API equivalence - Fusion.AddProcCodeRep(c,CARD_BLUEEYES_W_DRAGON,3,true,true) versus Fusion.AddProcMixN(c,true,true,CARD_BLUEEYES_W_DRAGON,3), both three named copies with substitutes allowed, both with EnableReviveLimit - with one caveat: the historical entry lacks s.material_setcode=SET_BLUE_EYES, metadata other (modern) cards read when checking a Fusion Monster's listed material archetype."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

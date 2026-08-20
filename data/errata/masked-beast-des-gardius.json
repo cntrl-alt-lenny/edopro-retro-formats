@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-masked-beast-des-gardius",
+  "modern_card": {
+    "passcode": 48948935,
+    "name": "Masked Beast Des Gardius"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2020-11-26",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SBCB-EN107, Speed Duel: Battle City Box)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by Tributing 2 monsters, including at least 1 \"Grand Tiki Elder\" or \"Melchid the Four-Face Beast\". When this card is sent from the field to the Graveyard, equip 1 \"The Mask of Remnants\" from your Deck to 1 monster on the field.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, including at least 1 \"Grand Tiki Elder\" or \"Melchid the Four-Face Beast\". If this card is sent from the field to your GY: Target 1 face-up monster your opponent controls; equip 1 \"The Mask of Remnants\" from your Deck to it.",
+      "summary": "Functional erratum on two points. (1) Summoning: the era text \"This card cannot be Special Summoned except by Tributing 2 monsters, including at least 1 \\\"Grand Tiki Elder\\\" or \\\"Melchid the Four-Face Beast\\\"\" is a strict nomi with no source zone, so Des Gardius can never be revived; the errata'd \"Must first be Special Summoned (from your hand) by Tributing ...\" is semi-nomi and hand-bound, so the modern card may afterwards be Special Summoned from the Graveyard by generic means. (2) The send-off Trigger: the era text equips \"The Mask of Remnants\" from the Deck \"to 1 monster on the field\" - any monster, either side, chosen on resolution and not targeted - while the errata'd text reads \"Target 1 face-up monster your opponent controls; equip 1 \\\"The Mask of Remnants\\\" from your Deck to it\", which targets on activation and restricts the recipient to a face-up opponent's monster.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format EDOPro refuses to resolve the Des Gardius Trigger onto a face-down opponent monster (or onto a monster its controller owns) and exposes the choice to targeting protection and to target-removal responses, none of which constrains the era's non-targeting \"equip ... to 1 monster on the field\" effect.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 48948935 exists upstream. The lineage records only two English texts, and v0 stands unchanged from the card's original release until 2020, so it is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). Dating caveat, recorded but not load-bearing: the packet dates v0 by TAEV-ENSE1 (Tactical Evolution: Special Edition, 2007-09-12), a reprint rather than the card's first printing, so v0's earliest_tcg_date understates how long that text was in force; the only recorded change is dated by v1, so the applier's chronology is unaffected. cards.cdb matches v1 exactly. Des Gardius does not appear on the EdisonFormat.com Functional Errata list."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-spiritual-energy-settle-machine",
+  "modern_card": {
+    "passcode": 99173029,
+    "name": "Spiritual Energy Settle Machine"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2005-07-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of DB2-EN191 (Dark Beginning 2), the second and final English text"
+      },
+      "historical_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases to keep this card's effect active. If you cannot discard, this card is destroyed. If this card is destroyed or removed from the field, all face-up Spirit monsters must return to the owners' hands immediately.",
+      "modern_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Normal Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases. If you do not, destroy this card. When this card is removed from the field, all face-up Spirit monsters return to the owners' hands.",
+      "summary": "English wording modernisation only (LOD-082 -> DB2-EN191): 'even if they are Summoned' became 'even if they are Normal Summoned' (Spirit monsters cannot be Special Summoned, so the scope is unchanged), and the maintenance and removal clauses were tightened without changing what happens. Both English printings already carry the removal clause returning all face-up Spirit monsters to their owners' hands, which is what the modern script implements, and the English text has not changed since 2005.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete",
+    "tested": false,
+    "reason": "The English/TCG card has carried the leave-field return clause since its first printing, so the modern script is period-correct for every TCG snapshot; upstream's historical variant reproduces an OCG-only text that no TCG printing ever had and must not be substituted."
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The upstream variant's cdb text ('Spirit monsters do not return to the hand during the End Phase. Once per turn, during your End Phase, discard 1 card or destroy this card.') matches no English lineage version - best ratio 0.393 - and is a translation of the pre-DL5 Japanese text; the Japanese table on the same errata page settles this, with ja lore0 (MA-34) lacking the removal clause and ja lore1 (DL5-073) inserting it. Full scripts were read: the ONLY difference is the missing leave-field return effect; the End Phase maintenance operation (s.mtop) is identical, including the Duel.SelectYesNo that makes the discard optional. One open nuance the classification does not resolve: v0 (LOD-082) reads 'Discard 1 card from your hand during each of your End Phases to keep this card's effect active. If you cannot discard, this card is destroyed', which can be read as mandatory-when-able, whereas v1 (DB2-EN191) 'If you do not, destroy this card' plainly makes skipping a choice; both upstream scripts implement the v1 reading, and since the GOAT snapshot (2005-04-01) predates DB2-EN191 (2005-07-27), v0 is the GOAT-era text and this reading is unverified for it. Escalation requested on two points: whether to drop upstream's variant from any period list, and whether the LOD-082 mandatory-discard reading needs a period ruling source."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

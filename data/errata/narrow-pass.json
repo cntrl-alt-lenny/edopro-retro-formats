@@ -5,18 +5,19 @@
     "passcode": 40172183,
     "name": "Narrow Pass"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "This card can only be activated when both players have 2 monsters or less on their respective sides of the field. Both players can only Normal Summon up to 2 additional monsters on their sides of the field.",
-      "modern_text": "This card can only be activated when both players have 2 monsters or less on their respective sides of the field. Both players can only Normal Summon up to 2 additional monsters on their sides of the field.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era reading of the Summon limit, no text difference: the goat script counts the Normal Summons each player performs after Narrow Pass resolves (an EFFECT_FLAG_CANNOT_DISABLE continuous effect on EVENT_SUMMON incrementing a per-card table s[c][player]) and blocks a Normal Summon once that player has made 2, so each player gets exactly 2 further Normal Summons while the card is face-up. The modern s.sumlimit instead blocks a Normal Summon whenever the summoning player already controls 2 or more monsters, which is a board-state cap rather than a summon budget - the two diverge as soon as monsters leave the field. Chronology of this ruling is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700066,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700066.lua",
+    "script": "goat/c504700066.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v1 (DR1-EN045, 2005-03-19), carried exactly by both the goat cdb entry and the pinned modern cards.cdb, so no text transition is recorded. The earlier v0 (PGD-097, 2003-07-18) wording - 'Once this card is activated, both players can only Normal Summon or Set up to 2 additional monsters as long as this card remains face-up on the field' - predates the baseline version; note that the goat script counts EVENT_SUMMON only and so tracks Normal Summons but not Sets, matching v1's 'Normal Summon' wording rather than v0's 'Normal Summon or Set'. Two script observations for whoever maintains the variant: goat s.condition zeroes only the activating player's counter (the opponent's is zeroed only at registration), and the counter table is keyed by the card object in the script global, which is shared per script rather than per duel."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

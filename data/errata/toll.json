@@ -5,18 +5,19 @@
     "passcode": 82003859,
     "name": "Toll"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Each player must pay 500 Life Points to declare an attack.",
-      "modern_text": "Each player must pay 500 Life Points to declare an attack.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era ruling on immunity encoded per card, with no text difference: the goat script gates the EFFECT_ATTACK_COST effect on s.atcon (`not c:IsImmuneToEffect(e)`) and short-circuits s.atcost for an immune attacker, so a monster unaffected by this card's effect - on either side, since the effect's target range is (1,1) - can declare an attack without paying 500 Life Points. The modern script charges the attacking player regardless of the attacking monster's immunity, because the cost sits on the player rather than on the monster. Chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700141,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700141.lua",
+    "script": "goat/c504700141.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v2 (DB1-EN019, 2004-10-12), carried exactly by both the goat cdb entry and the pinned modern cards.cdb, so there is no text transition to record. The earlier v1 (MRL-E034, 2002-09-16) - 'As long as this card remains face-up on the field, both you and your opponent must pay 500 Life Points per monster to attack' - predates the baseline version; later reprints oscillate between the two wordings (v3 SRL-034, Legendary Collection, 2010, back to v1's text; v4 SRL-EN034, 2023, back to v2's). Same immunity mechanism as Gravekeeper's Servant (504700024), differing only in that Toll's EFFECT_ATTACK_COST has target range (1,1) and so applies to both players rather than the opponent alone. Both scripts keep the multi-copy accumulation effect unchanged."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

@@ -54,9 +54,13 @@
           "type": "object",
           "required": ["reason", "sources"],
           "additionalProperties": false,
-          "description": "This format is DEFINED by reproducing an existing reference implementation, so it substitutes the upstream historical version of every card that has one — that is what the reference list does, and staying entry-for-entry identical to it is the point. Replaces a per-card include list with one sourced statement. Where our own researched chronology disagrees with the reference (it would pick the modern card, or the record is cosmetic), the validator warns per card so the divergence stays visible instead of hiding inside a list.",
+          "description": "This format is DEFINED by reproducing an existing reference implementation, so it substitutes the upstream historical version of every card THE REFERENCE ITSELF represents by one. Membership is provenance-based, not 'every card that happens to have an upstream variant': `provenance_source` names the source id a record must cite to count as part of the reference. That matters because upstream ships historical variants for cards its own list does not use (Mind Crush, Ultimate Offering), and substituting those would break parity. Replaces a per-card include list with one sourced statement; where our own researched chronology disagrees with the reference (it would pick the modern card, or the record is cosmetic), the validator warns per card so the divergence stays visible instead of hiding inside a list.",
           "properties": {
             "reason": { "type": "string" },
+            "provenance_source": {
+              "type": "string",
+              "description": "Source id that marks a record as part of the reference implementation (e.g. 'ignis-lflists'). Records not citing it fall through to ordinary computed selection. Omit to treat every record with a historical implementation as part of the reference."
+            },
             "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
           }
         },

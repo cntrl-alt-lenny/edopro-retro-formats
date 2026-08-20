@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-boss-rush",
+  "modern_card": {
+    "passcode": 66947414,
+    "name": "Boss Rush"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2026-02-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (OP30-EN017, OTS Tournament Pack 30)"
+      },
+      "historical_text": "You cannot Normal Summon or Set. During the End Phase of the turn that a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard, you can Special Summon 1 \"B.E.S.\" monster or 1 \"Big Core\" from your Deck.",
+      "modern_text": "Activate only if you did not Normal Summon/Set this turn. You cannot Normal Summon/Set. During the End Phase, if a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone: You can Special Summon 1 \"B.E.S.\" monster from your Deck.",
+      "summary": "Functional erratum on three counts. (1) An activation restriction appears that the DR04 text does not have: 'Activate only if you did not Normal Summon/Set this turn'. (2) The trigger narrows from 'a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard' - any such monster, either player's, face-up or face-down - to 'a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone'. (3) The Deck Summon narrows from '1 \"B.E.S.\" monster or 1 \"Big Core\"' to '1 \"B.E.S.\" monster', dropping the separately named 'Big Core'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison, Boss Rush can be activated on a turn you already Normal Summoned, triggers off any 'B.E.S.' monster or 'Big Core' destroyed and sent to the Graveyard (including the opponent's), and can Special Summon 'Big Core' itself from the Deck; the shipped card refuses all three.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. Elemental Energy released 2005-11-16, so the card postdates the 2005-04-01 GOAT snapshot and only the Edison pool is in scope; the text in force at 2010-04-24 is v1 (DR04-EN107, 2007-11-14), which is the baseline. Pre-baseline v0 (EEN-EN047, 2005-11-16) confines the trigger and the search to 'a monster on your side of the field'; v1's removal of that clause is itself a broadening, but it predates every configured period snapshot for this card, so it is recorded here rather than as a change. CONFLICT: the pinned cards.cdb text is flagged '* The above text is unofficial and describes the card's functionality in the OCG' and does not match v2 exactly (modern_text_matches_version ratio 0.6901) - it lacks v2's 'while this card was face-up in your Spell & Trap Zone' clause. The recorded boundary (OP30-EN017, 2026-02-11) is therefore the attested TCG date for the new text, not the date the OCG behaviour the simulator implements came into force, which the packet does not date and which certainly predates that printing. Either way the boundary sits far after the Edison snapshot, so format applicability is unaffected. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

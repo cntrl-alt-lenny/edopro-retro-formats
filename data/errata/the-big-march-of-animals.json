@@ -5,10 +5,10 @@
     "passcode": 1689516,
     "name": "The Big March of Animals"
   },
-  "classification": "engine",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "engine",
+      "kind": "ruling",
       "effective": {
         "date": null
       },

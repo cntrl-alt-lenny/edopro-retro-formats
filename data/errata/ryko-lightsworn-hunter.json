@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ryko-lightsworn-hunter",
+  "modern_card": {
+    "passcode": 21502796,
+    "name": "Ryko, Lightsworn Hunter"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-07-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (YS17-EN017, Starter Deck: Link Strike)"
+      },
+      "historical_text": "FLIP: Apply these effects in sequence.● You can target 1 card on the field; destroy that target.● Send the top 3 cards of your Deck to the Graveyard.",
+      "modern_text": "FLIP: Apply these effects (simultaneously).● You can destroy 1 card on the field.● Send the top 3 cards of your Deck to the GY.",
+      "summary": "Functional erratum: the destruction stopped targeting and the two bullets became simultaneous instead of sequential. The pre-errata script sets EFFECT_FLAG_CARD_TARGET and picks the card to destroy inside the FLIP effect's target function (Duel.SelectTarget at activation), then resolves Duel.Destroy -> Duel.BreakEffect() -> Duel.DiscardDeck, so the mill lands at a separate timing after the destruction and other cards can miss timing on it; the modern script has no targeting, chooses the card at resolution and omits BreakEffect, applying destruction and mill simultaneously.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003007,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003007.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v4 (SDLI-EN015, 2014-06-27), whose text the baseline's cdb entry matches exactly. Earlier transitions precede the baseline and are behaviourally identical, progressively formalising the same resolution: v0 (LODT-EN022, 2008-05-13, the printing in force at the Edison snapshot) 'You can destroy 1 card on the field'; v1 (GLD4-EN024, 2011-06-24) 'select 1 card on the field, and destroy it'; v2 (SDDC-EN023, 2012-02-03) PSCT 'target 1 card; destroy that target'; v3 (PGLD-EN086, 2014-03-28) adds '(if any), also, after that'; v4 splits into bullets 'Apply these effects in sequence'. EdisonFormat's entry confirms the era behaviour of the v0 printing matches what the v4-era script does, which is why starting the chain at v4 does not misdate the period behaviour. No trailing cosmetic transitions: v5 is the modern text."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

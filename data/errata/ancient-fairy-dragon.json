@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ancient-fairy-dragon",
+  "modern_card": {
+    "passcode": 25862681,
+    "name": "Ancient Fairy Dragon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2023-03-09",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Maze of Memories (MAZE-EN050), the first printing carrying the errata'd text"
+      },
+      "historical_text": "1 Tuner + 1+ non-Tuner monstersOnce per turn: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. Once per turn: You can destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add 1 Field Spell from your Deck to your hand.",
+      "modern_text": "1 Tuner + 1+ non-Tuner monstersDuring your Main Phase: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. During your Main Phase: You can destroy as many cards in the Field Zones as possible (min. 1), and if you do, gain 1000 LP, then you can add 1 Field Spell with a different name than the destroyed card(s), from your Deck to your hand. You can only use each effect of \"Ancient Fairy Dragon\" once per turn.",
+      "summary": "Functional erratum in three parts, each visible in the script diff. Both effects became hard once per turn by name (modern SetCountLimit(1,{id,0}) and SetCountLimit(1,{id,1}) against the historical plain SetCountLimit(1), which is once per turn per copy, so two copies each got a use). The destruction widened from Field Spells to 'as many cards in the Field Zones as possible (min. 1)'. And the follow-up search may no longer add a Field Spell sharing a name with a destroyed card - the modern thfilter takes Duel.GetOperatedGroup() and excludes those codes, while the historical thfilter only checks IsFieldSpell and IsAbleToHand.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 25862691,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c25862691.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v3, the version the baseline implements (text_matches_version index 3, ratio 0.9985). Earlier transitions v0 (CT06-EN002, 2009-08-18) -> v1 -> v2 (LC5D-EN238, 2014-10-23) -> v3 (LCKC-EN070, 2018-03-08) are PSCT rewordings ('destroy a Field Spell Card. If you do, gain 1000 Life Points, and you can add...' -> 'destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add...') which resolve identically, especially under the era's single shared Field Spell Zone; they predate the baseline and are not recorded. Caveat for display: the variant's cdb text is the 2018 LCKC wording, so an Edison snapshot shows a later printing's text than the era's CT06-EN002 while behaviour matches. EdisonFormat's entry corroborates the era resolution (non-targeting destruction; no LP gain or search if the Field Spell is not destroyed; destruction and LP gain simultaneous, search afterwards), and the historical script matches it exactly: 'if not (#dg>0 and Duel.Destroy(dg,REASON_EFFECT)>0 and Duel.Recover(tp,1000,REASON_EFFECT)>0) then return end'. Per the shared transcription, Ancient Fairy Dragon was only added to that community page between 2023-06-09 and 2023-12-03, so it is used as behavioural corroboration only, never as a chronology anchor. Remaining script differences (Duel.IsPhase vs Duel.GetCurrentPhase, RESET_PHASE|PHASE_END vs +) are equivalent forms. Card data is identical between 25862691 and 25862681 (2100/3000, Level 7, LIGHT, Dragon)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

@@ -5,18 +5,19 @@
     "passcode": 61622107,
     "name": "Bubble Crash"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
         "date": null
       },
       "historical_text": "This card can only be activated when any player has 6 or more cards on the field and/or in their hand. The player(s) then select and send cards to their respective Graveyards until the amount remaining on the field and in their hand is 5.",
-      "modern_text": "This card can only be activated when any player has 6 or more cards on the field and/or in their hand. The player(s) then select and send cards to their respective Graveyards until the amount remaining on the field and in their hand is 5.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "No implementation-relevant difference is attested: the goat entry's cdb text is byte-identical to the pinned modern text (both lineage v2, DB2-EN199), and the single behaviour upstream annotates — \"Cannot send itself\" — is implemented by the modern script too, which passes `local exc=c:IsRelateToEffect(e) and c or nil` as the selection exception for the activating player (the opponent only ever picks from their own cards). What remains in the diff is unattested implementation idiom: the goat script merges both players' picks into one group sent with REASON_EFFECT, while the modern script sends each player's picks in a separate call with REASON_RULE; 0xe and LOCATION_ONFIELD|LOCATION_HAND are the same locations.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700100,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700100.lua",
+    "script": "goat/c504700100.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Escalation reason: the residual script difference IS observable — REASON_EFFECT vs REASON_RULE decides whether the sent cards count as sent by a card effect, and one merged send vs two sequential sends decides whether both players' sent-to-Graveyard triggers (Sangan/Witch-style) enter one SEGOC chain or two — but no upstream annotation, ruling source or text supports either side as the era behaviour, and upstream's own stated reason for the variant is already satisfied by the modern script. I recorded the honest cosmetic verdict and flagged it rather than inventing an era ruling. Lineage v0 (LOD-090, 2003-06-06) -> v1 -> v2 are all cosmetic and v0/v1 predate the baseline version."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

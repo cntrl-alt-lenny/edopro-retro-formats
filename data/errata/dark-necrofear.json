@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dark-necrofear",
+  "modern_card": {
+    "passcode": 31829185,
+    "name": "Dark Necrofear"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2005-07-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DB2-EN004, Dark Beginning 2)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play. When this card is destroyed as a result of battle or by your opponent's card effect, it is treated as an Equip Spell Card at the end of the turn. Equip 1 of your opponent's monsters with this card. As long as it is equipped with this card, you control the equipped monster.",
+      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 3 Fiend-Type monsters in your Graveyard. If this card is destroyed as a result of battle or by your opponent's card effect while it is a Monster Card, it is treated as an Equip Card during the End Phase of this turn, and equip 1 of your opponent's monsters with this card. As long as it is equipped with this card, you control the equipped monster.",
+      "summary": "Functional erratum: DB2-EN004 adds 'while it is a Monster Card' to the destruction condition. The MC1 text in force at the GOAT snapshot reads only 'When this card is destroyed as a result of battle or by your opponent's card effect, it is treated as an Equip Spell Card at the end of the turn', so a Dark Necrofear already sitting on a stolen monster as an Equip Card and destroyed there by the opponent qualifies again and re-equips at the end of that turn; from DB2 on only a destruction suffered as a Monster Card counts.",
+      "resulting_implementation": {
+        "strategy": "unresolved",
+        "status": "missing",
+        "tested": false,
+        "gap": {
+          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+          "upstream_checked": true,
+          "behavioural_impact": "Wording only: 'it is treated as an Equip Card during the End Phase of this turn, and equip 1 of your opponent's monsters with this card. As long as it is equipped with this card, you control the equipped monster' is compressed to 'equip it to a monster your opponent controls during the End Phase of this turn. Take control of the equipped monster.' Same End Phase timing, same control theft.",
+          "sources": [
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
+      },
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2008-01-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "Champion Pack: Game Five printing CP05-EN006"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 3 Fiend-Type monsters in your Graveyard. If this card is destroyed as a result of battle or by your opponent's card effect while it is a Monster Card, it is treated as an Equip Card during the End Phase of this turn, and equip 1 of your opponent's monsters with this card. As long as it is equipped with this card, you control the equipped monster.",
+      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 3 Fiend-Type monsters in your Graveyard. If this card is destroyed by battle or by your opponent's card effect while it is a Monster Card, equip it to a monster your opponent controls during the End Phase of this turn. Take control of the equipped monster.",
+      "summary": "Wording only: 'it is treated as an Equip Card during the End Phase of this turn, and equip 1 of your opponent's monsters with this card. As long as it is equipped with this card, you control the equipped monster' is compressed to 'equip it to a monster your opponent controls during the End Phase of this turn. Take control of the equipped monster.' Same End Phase timing, same control theft.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LC03-EN002, Legendary Collection 3: Yugi's World)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 3 Fiend-Type monsters in your Graveyard. If this card is destroyed by battle or by your opponent's card effect while it is a Monster Card, equip it to a monster your opponent controls during the End Phase of this turn. Take control of the equipped monster.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 3 Fiend-Type monsters from your Graveyard. During the End Phase, if this card was destroyed by an opponent's card this turn (either by battle or by card effect) and sent to the Graveyard while it was a Monster Card in your possession: Target 1 face-up monster your opponent controls; equip this card from the Graveyard to that target. While this card is equipped to a monster by this effect, take control of that monster.",
+      "summary": "Functional erratum: 'This card can only be Special Summoned by removing from play 3 Fiend-Type monsters in your Graveyard' becomes 'Must first be Special Summoned (from your hand) by banishing 3 Fiend-Type monsters from your Graveyard.' The pre-2012 wording is a strict Nomi clause - the card can never reach the field by any other Special Summon, and its own procedure is not tied to the hand - while the errata'd wording confines the proper summon to the hand and, carrying no 'cannot be Special Summoned by other ways' rider, lets the card be revived by Monster Reborn, Call of the Haunted and the like afterwards. The same printing makes the End Phase equip a targeting effect and restricts it to a face-up monster ('Target 1 face-up monster your opponent controls').",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT, Dark Necrofear destroyed by the opponent while already equipped to a stolen monster should equip again at the end of that turn, and in both GOAT and Edison it should be unrevivable by Monster Reborn/Call of the Haunted and able to Special Summon itself from the Graveyard by its own banish procedure; the shipped card does none of these.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CAUTION on the packet's upstream entry: upstream_implementations lists passcode 511004006 'Dark Necrofear (Manga)' from cards-unofficial.cdb (unofficial/c511004006.lua, annotated 'Scripted by Edo9300'), a manga-only card with a different summon procedure (banish 3 monsters destroyed in Attack Position within the last 5 turns, as an Ignition effect with a cost) and a completely different second effect (Battle Phase attack negation with LP gain and burn instead of the equip/control theft). text_matches_version ratio 0.487. It is NOT a period implementation of the TCG card and must not be reused as baseline; hence the acknowledged-gap baseline and the conflicting-evidence flag. Chain starts at v2 (MC1-EN005, 2004-12-01), the text in force at the 2005-04-01 GOAT snapshot. Pre-baseline v0 (LON-065, 2003-03-01) and v1 (DL2-002, 2003-07-15) lack the 'This card cannot be Normal Summoned or Set' sentence entirely - a real difference, but one that ended before every configured period snapshot, so it is recorded here rather than as a change. The 2010-04-24 Edison snapshot lands on the version created by change 1 as reworded by change 2 (v4, CP05-EN006, 2008-01-08); no upstream implementation exists for it either, hence the unresolved/missing resulting_implementation on change 1. Trailing v5 -> v6 (DPBC-EN033, 2015-06-19) -> v7 (LED5-EN006, 2019-09-26, the pinned cdb text) restate the same End Phase condition ('in your possession' -> 'under your control' -> 'destroyed in your Monster Zone') and drop -Type/Graveyard for Fiend/GY; cosmetic, not recorded. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-swap-frog",
+  "modern_card": {
+    "passcode": 9126351,
+    "name": "Swap Frog"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2016-11-17",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (OP03-EN001, OTS Tournament Pack 3)"
+      },
+      "historical_text": "You can discard 1 WATER monster to Special Summon this card from your hand. When this card is Summoned, you can select and send 1 Level 2 or lower Aqua-Type WATER monster from your Deck or your side of the field to the Graveyard. Once per turn, you can return 1 monster you control to your hand to Normal Summon 1 \"Frog\" monster, except \"Swap Frog\" or \"Frog the Jam\", in addition to your Normal Summon or Set this turn.",
+      "modern_text": "You can Special Summon this card (from your hand) by discarding 1 other WATER monster. When this card is Summoned: You can send 1 Level 2 or lower Aqua-Type WATER monster from your Deck or face-up from your field to the Graveyard. Once per turn: You can return 1 monster you control to the hand; you can Normal Summon 1 \"Frog\" monster during your Main Phase this turn, except \"Swap Frog\", in addition to your Normal Summon/Set. (You can only gain this effect once per turn.)",
+      "summary": "Functional erratum with two real narrowings and one clarification. The Summon-trigger mill narrows from 'from your Deck or your side of the field' (v0, SOVR-EN034) to 'from your Deck or face-up from your field', so the modern card can no longer send a face-down Level 2 or lower Aqua WATER monster off your own field; and the extra Normal Summon loses its second exclusion, 'except \"Swap Frog\" or \"Frog the Jam\"' becoming 'except \"Swap Frog\"', so the modern card may grant that Summon to 'Frog the Jam'. The added parenthetical '(You can only gain this effect once per turn.)' is not a new restriction - it writes down the era ruling that each copy may use the effect while only one additional Normal Summon is ever gained - and 'discarding 1 other WATER monster' only spells out that the card being Summoned is not itself the discard.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format Swap Frog refuses to mill a face-down Level 2 or lower Aqua WATER monster from your own field, which the era card could do, and lets its extra Normal Summon be spent on 'Frog the Jam', which the era card forbids.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; the gap is real. Edison-era text is v0 (SOVR-EN034, 2009-11-17), which is 158 days before the Edison snapshot (2010-04-24); the erratum is 2016-11-17, so no period snapshot reaches it. Trailing cosmetic transition not recorded as a change: v1 -> v2 (DUOV-EN063, 2020-03-19) only reorders 'Aqua-Type WATER' to 'WATER Aqua' and moves to GY wording; modern cdb text matches v2 exactly (ratio 1.0). I deliberately did NOT record the once-per-turn parenthetical as the functional element, because edisonformat-functional-errata describes the era behaviour as already granting only one extra Normal Summon however many copies resolve - i.e. the parenthetical codifies the era ruling, and treating it as a new restriction would have overstated the erratum. The two differences that do survive that test are the face-up requirement on the field-send and the removal of the 'Frog the Jam' exclusion; both are narrow but concrete in a Frog deck, which is a real Edison archetype."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+  ]
+}

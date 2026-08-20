@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-super-vehicroid-stealth-union",
+  "modern_card": {
+    "passcode": 3897065,
+    "name": "Super Vehicroid - Stealth Union"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-06-01",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DL12-EN011, Duelist League participation cards)"
+      },
+      "historical_text": "\"Truckroid\" + \"Expressroid\" + \"Drillroid\" + \"Stealthroid\"When this card attacks, its original ATK is halved until the end of the Damage Step. During battle between this attacking card and a Defense Position monster whose DEF is lower than the ATK of this card, inflict the difference as Battle Damage to your opponent. Once per turn, you can select 1 monster you control, except a Machine-Type monster, and equip it to this card. While equipped by this effect, this card can attack all monsters your opponent controls once each.",
+      "modern_text": "\"Truckroid\" + \"Expressroid\" + \"Drillroid\" + \"Stealthroid\"When this card attacks, its original ATK is halved until the end of the Damage Step. During battle between this attacking card and a Defense Position monster whose DEF is lower than the ATK of this card, inflict the difference as Battle Damage to your opponent. Once per turn, during your Main Phase, you can select 1 face-up monster on the field, except a Machine-Type monster, and equip it to this card. While equipped by this effect, this card can attack all monsters your opponent controls once each.",
+      "summary": "Functional erratum: the equip target widens from 'select 1 monster you control, except a Machine-Type monster' (v0, GLAS-EN041) to 'select 1 face-up monster on the field, except a Machine-Type monster' (v1, DL12-EN011), so the modern card can equip - and thereby take off the field - a non-Machine monster the opponent controls, which the era text does not permit. The same printing added 'during your Main Phase', which is inert on an Ignition effect, and the 'face-up' qualifier; the attack-all-monsters grant, the halved original ATK on attacking and the piercing clause are unchanged.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format Super Vehicroid - Stealth Union can strip a face-up non-Machine monster off the opponent's field as an equip, a removal play the era text confines to monsters you control.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Edison-era text is v0 (GLAS-EN041, 2007-11-14); the erratum is 2011-06-01, after the Edison snapshot. Trailing cosmetic transition not recorded as a change: v1 -> v2 (DUOV-EN078, 2020-03-19) is PSCT only - 'select' -> 'target', the reordering of the ATK-halving and piercing sentences, and 'non-Machine' phrasing; I treated select -> target as cosmetic per the review rules because no script evidence for this card is in the packet to show an EFFECT_FLAG_CARD_TARGET change. CONFLICT recorded, not resolved: the pinned BabelCDB text is not official v2 (ratio 0.8738) - it keeps 'its original ATK is halved until the end of the Damage Step' where official v2 drops the duration, and it carries the footnote that the text is unofficial and describes the OCG functionality. The packet's upstream code 511002959 'Super Vehicroid - Stealth Union (Anime)' is a distinct card and not substitutable: its equip grants two attacks per Battle Phase instead of attacking all monsters (EFFECT_EXTRA_ATTACK vs EFFECT_ATTACK_ALL in the diff) and its ATK halving lasts to the end of the Battle Phase."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

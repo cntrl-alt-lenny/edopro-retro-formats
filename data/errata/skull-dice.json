@@ -5,10 +5,10 @@
     "passcode": 126218,
     "name": "Skull Dice"
   },
-  "classification": "engine",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "engine",
+      "kind": "ruling",
       "effective": {
         "date": null
       },

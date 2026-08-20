@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-gigantes",
+  "modern_card": {
+    "passcode": 47606319,
+    "name": "Gigantes"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2007-09-06",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Champion Pack: Game Four (CP04-EN015), the printing carrying the v2 wording"
+      },
+      "historical_text": "This card can only be Special Summoned by removing 1 EARTH monster in your Graveyard from play. When this card is destroyed and sent to the Graveyard as a result of battle, destroy all Spell and Trap Cards on the field.",
+      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
+      "summary": "Wording only. v1 (DR2-EN021) spells out \"This card cannot be Normal Summoned or Set\", which the v0 nomi clause \"This card can only be Special Summoned by ...\" already imposed, and v2 (CP04-EN015) replaces \"destroyed and sent to the Graveyard as a result of battle\" with \"destroyed by battle and sent to the Graveyard\". The summoning restriction and the destruction trigger resolve identically across v0-v2.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-04-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SR03-EN016, Structure Deck: Machine Reactor)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard. If this card is destroyed by battle and sent to the Graveyard: Destroy all Spell and Trap Cards on the field.",
+      "summary": "Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard\" - so Gigantes can never reach the field by any Special Summon other than its own procedure, and that procedure names no source zone. The errata'd text is semi-nomi, \"Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard\", which confines the self-Summon to the hand but lets a Gigantes that was properly Special Summoned once afterwards be Special Summoned by generic means such as Monster Reborn, Premature Burial or Call of the Haunted.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format EDOPro's Gigantes can be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted once it has been properly Special Summoned, which the era's strict \"can only be Special Summoned by removing from play 1 EARTH monster\" text forbids outright.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty - Project Ignis ships neither a goat nor a pre-errata variant of 47606319, so no baseline script exists. Era texts: GOAT (2005-04-01) falls on v0 (IOC-021, 2004-03-01; v1 DR2-EN021 only arrives 2005-10-20), Edison (2010-04-24) falls on v2 (CP04-EN015, 2007-09-06). Both precede the 2017 erratum. Trailing cosmetic revision v3 -> v4 (OP12-EN013, 2019-12-05: Graveyard -> GY, \"Spell and Trap Cards\" -> \"Spells and Traps\") is not recorded as a change; the pinned cards.cdb text matches v4 exactly. Gigantes does not appear on the EdisonFormat.com Functional Errata list."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

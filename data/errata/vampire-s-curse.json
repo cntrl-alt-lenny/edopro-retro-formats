@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-vampire-s-curse",
+  "modern_card": {
+    "passcode": 34294855,
+    "name": "Vampire's Curse"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2022-11-03",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Magnificent Mavens (MAMA-EN048), the latest printing in the English lineage"
+      },
+      "historical_text": "When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase. When this card is Special Summoned this way, it gains 500 ATK.",
+      "modern_text": "When this card is destroyed by battle and sent to the GY: You can pay 500 LP; Special Summon it during the Standby Phase of the next turn. If you do: It gains 500 ATK.",
+      "summary": "Wording modernisation only across the whole English lineage: v0 (PTDN-EN090) 'When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase.' becomes PSCT at v1 (DL16-EN003) and picks up GY / LP abbreviations plus 'If you do:' for the ATK gain at v2 (MAMA-EN048). Every printed version triggers on battle destruction, takes the 500 LP payment there, delays the Special Summon to the next turn's Standby Phase and grants 500 ATK, so the resolution is unchanged.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CONFLICTING PACKET EVIDENCE, escalated rather than resolved silently. (1) The pinned BabelCDB 'modern_text' matches no lineage version (best match v1 at ratio 0.5653) and carries its own disclaimer: 'The above text is unofficial and describes the card's functionality in the OCG.' It reads 'Once per turn, during the Standby Phase of the next turn after this card was destroyed by battle and sent to the GY: You can pay 500 Life Points; Special Summon this card from the GY', i.e. the effect activates in the Standby Phase with the LP paid there and a once-per-turn limit. (2) The modern side of the packet's script_diff corroborates that structure: a SINGLE+CONTINUOUS EVENT_BATTLE_DESTROYED effect that only registers a flag, plus a FIELD+TRIGGER_O effect at EVENT_PHASE|PHASE_STANDBY with range LOCATION_GRAVE and Cost.PayLP(500). (3) But every English TCG printing, including the current MAMA-EN048, still triggers on the battle destruction itself and pays the 500 LP at that moment. So the divergence here is TCG printed text versus Project Ignis's OCG-functionality implementation, NOT a dated erratum: there is no behavioural transition anywhere in the English lineage to date, and the divergence applies identically to modern EDOPro play and to any period snapshot, so it is not era-specific and no historical substitution is warranted by this project's scope. Recorded as cosmetic with no historical implementation needed, and flagged for a human to decide whether TCG/OCG fidelity is in scope. Separately, the only upstream_implementations entry is the manga card 511008509 (see era_mismatch_ack) and must not be adopted as a period variant of this card."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+  ]
+}

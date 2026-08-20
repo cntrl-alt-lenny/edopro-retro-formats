@@ -5,18 +5,19 @@
     "passcode": 16430187,
     "name": "The Reliable Guardian"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
-      "modern_text": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era damage-step legality, no text difference: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, moving the card's Damage Step activation window from the sub-steps before damage calculation (modern, PHASE_DAMAGE) to the damage-calculation sub-step itself (PHASE_DAMAGE_CAL). The other two diff lines are non-behavioural: the goat s.condition is the De Morgan equivalent of aux.StatChangeDamageStepCondition (utility.lua line 1413), and `RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END` is the literal expansion of RESETS_STANDARD_PHASE_END (constant.lua line 300). Chronology of this ruling is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700023,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700023.lua",
+    "script": "goat/c504700023.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v2 (SYE-034, Starter Deck: Yugi Evolution, earliest tcg-eu 2004-03, month precision), carried exactly by both the goat cdb entry and the pinned modern cards.cdb, so no text transition is recorded. The lineage oscillates cosmetically between 'Increase 1 monster's DEF by 700 points during the turn this card is activated' (v1 MRL-E044, 2002-09-16; v3 SRL-044, Legendary Collection, 2010) and the v2 'face-up ... until the end of this turn' wording (v4 SRL-EN044, Spell Ruler 25th Anniversary Edition, 2023); same resolution throughout. Identical mechanism to Snake Fang (504700002) - see that record for the corroborating flag-usage counts across the goat and official script sets, and for why this is ruling rather than engine (the activation window is per-card script data, not something a rule profile can rewrite)."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

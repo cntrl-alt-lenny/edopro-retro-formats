@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dark-master-zorc",
+  "modern_card": {
+    "passcode": 97642679,
+    "name": "Dark Master - Zorc"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2007-02-06",
+        "precision": "day",
+        "status": "reported",
+        "basis": "Champion Pack: Game Two printing CP02-EN010"
+      },
+      "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Contract with the Dark Master\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. During your turn, you can roll 1 six-sided die. If the result is 1 or 2, destroy all monsters on your opponent's side of the field. If the result is 3, 4, or 5, destroy 1 monster on your opponent's side of the field. If the result is 6, destroy all monsters on your side of the field.",
+      "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Contract with the Dark Master\". During your Main Phase, you can roll 1 six-sided die. On a 1 or 2, destroy all monsters on your opponent's side of the field. On a 3, 4, or 5, destroy 1 monster on your opponent's side of the field. On a 6, destroy all monsters on your side of the field.",
+      "summary": "Wording only: the redundant Ritual tribute sentence ('You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand') is dropped, since the Ritual Spell already dictates the tribute, and 'During your turn, you can roll 1 six-sided die' becomes 'During your Main Phase, you can roll 1 six-sided die', which restates the Main-Phase-only timing an Ignition Effect already has. The die outcomes are untouched.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN123, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Contract with the Dark Master\". During your Main Phase, you can roll 1 six-sided die. On a 1 or 2, destroy all monsters on your opponent's side of the field. On a 3, 4, or 5, destroy 1 monster on your opponent's side of the field. On a 6, destroy all monsters on your side of the field.",
+      "modern_text": "You can Ritual Summon this card with \"Contract with the Dark Master\". Once per turn: You can roll a six-sided die, then destroy all monsters your opponent controls if you roll 1 or 2, destroy 1 monster your opponent controls if you roll 3, 4 or 5, or destroy all monsters you control if you roll 6.",
+      "summary": "Functional erratum: LCYW-EN123 puts 'Once per turn:' in front of the die roll. No earlier printing limits how often the effect may be used - 'During your Main Phase, you can roll 1 six-sided die' caps the roll at one die per activation, not one activation per turn - so the period card can roll repeatedly in a Main Phase, re-rolling after a 3/4/5 single destruction or risking further 6s, while the errata'd card gets exactly one roll per turn.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT and Edison a resolved Dark Master - Zorc can roll its die as many times as its controller dares in a Main Phase, so a single Zorc can keep rolling until it clears the opponent's field (or wipes its own); the shipped card stops after one roll per turn.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. Chain starts at v1 (DR1-EN244, 2005-03-19), the text in force at the 2005-04-01 GOAT snapshot - Dark Revelation Volume 1 landed thirteen days before it. Pre-baseline v0 (DCR-082, 2003-12-01) differs only in the 'offer as a Tribute'/'Level Stars' phrasing of the same Ritual clause. The Edison snapshot (2010-04-24) falls after CP02-EN010 (2007-02-06), so Edison uses v2 and GOAT uses v1; both precede the 2012-09-29 erratum, so both need the unlimited-roll behaviour. On the cosmetic call for 'During your turn' -> 'During your Main Phase': an Ignition Effect is restricted to the controller's Main Phase by the game rules whatever the card says, so the reprint narrows the printed wording without narrowing the legal window - it is recorded cosmetic for that reason, and no separate implementation is needed between GOAT and Edison. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

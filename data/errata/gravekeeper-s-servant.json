@@ -5,18 +5,19 @@
     "passcode": 16762927,
     "name": "Gravekeeper's Servant"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Unless your opponent sends 1 card from the top of his/her Deck to the Graveyard, he/she cannot declare an attack.",
-      "modern_text": "Unless your opponent sends 1 card from the top of his/her Deck to the Graveyard, he/she cannot declare an attack.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era ruling on immunity encoded per card, with no text difference: the goat script gates the EFFECT_ATTACK_COST effect on s.atcon (`not c:IsImmuneToEffect(e)`) and short-circuits s.atcost for an immune attacker, so an opponent's monster unaffected by this card's effect can declare an attack without sending a card from the top of the Deck to the Graveyard. The modern script imposes the mill on the opponent regardless of the attacking monster's immunity, because the cost sits on the player rather than on the monster. Chronology is unresolved - nothing in the lineage or in the shared chronologies dates this interpretation.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700024,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700024.lua",
+    "script": "goat/c504700024.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v2 (DB1-EN017, 2004-10-12), the version the goat variant implements exactly and the version the pinned modern cards.cdb still carries exactly - so there is no text transition to record at all. The earlier v1 -> v2 transition (MRL-E031, 2002-09-16: 'Each time your opponent attacks with a monster, the opponent must send 1 card from the top of his/her Deck to the Graveyard' -> the v2 attack-cost wording) is a genuine behavioural rewrite from a post-attack mandatory trigger into an attack cost, but it predates the baseline implementation's era and so is recorded here rather than as a change. Later reprints oscillate cosmetically: v3 (RP01-EN055) 'Your opponent must send 1 card from the top of their Deck to the Graveyard to declare an attack', v4 (SRL-031, Legendary Collection, 2010) back to the v2 wording. Packet data oddity, not load-bearing for this decision: v3's Retro Pack dates list tcg-eu 2008-07-08 alongside tcg-na 2024-08-23."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

@@ -5,10 +5,10 @@
     "passcode": 29267084,
     "name": "Shadow Spell"
   },
-  "classification": "engine",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "engine",
+      "kind": "ruling",
       "effective": {
         "date": null
       },

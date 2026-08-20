@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-blaze-accelerator",
+  "modern_card": {
+    "passcode": 69537999,
+    "name": "Blaze Accelerator"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-02-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SDOK-EN025, Onslaught of the Fire Kings Structure Deck)"
+      },
+      "historical_text": "You can send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard to destroy 1 monster your opponent controls, but you cannot declare an attack during this turn if you do.",
+      "modern_text": "You can target 1 monster your opponent controls; send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard, and if you do, destroy that target. You cannot declare an attack during the turn you activate this effect.",
+      "summary": "Functional erratum: 'You can send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard to destroy 1 monster your opponent controls' is restructured into 'You can target 1 monster your opponent controls; send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard, and if you do, destroy that target.' The old 'send ... to destroy ...' construction pays the hand-send as a cost at activation and names no target; the PSCT text locks a target on activation and moves the send into the resolution, so if the target leaves the field first the modern card sends nothing while the period card has already put the Pyro monster in the Graveyard.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison a Volcanic player who activates Blaze Accelerator has already sent Volcanic Shell (or another small Pyro) to the Graveyard as a cost even if the destruction is answered, and the destroyed monster is not chosen until resolution; the shipped card targets on activation and keeps the Pyro monster in hand whenever the effect fails to resolve.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. Chain starts at v0 (FOTB-EN040, 2007-05-16), the text in force at the 2010-04-24 Edison snapshot (the card postdates the GOAT snapshot); the next printing, SDOK-EN025, is 2013-02-08. Trailing v1 -> v2 (SGX1-ENH14, 2022-03-17) is Pyro-Type->Pyro, Graveyard->GY and 'You cannot declare an attack' -> 'Your monsters cannot attack', which is the pinned cdb text and is cosmetic. Caveat on the targeting half of the call: the instructions require a script diff (EFFECT_FLAG_CARD_TARGET) before treating a targeting difference as functional, and no script diff exists for this card. The verdict here does not rest on a select->target rewording - the FOTB text contains no selection or targeting language at all, and the cost-versus-resolution placement of the hand-send is independently visible in the old 'to' construction versus the PSCT semicolon. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

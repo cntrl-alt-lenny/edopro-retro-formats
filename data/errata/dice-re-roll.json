@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dice-re-roll",
+  "modern_card": {
+    "passcode": 83241722,
+    "name": "Dice Re-Roll"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN271, Legendary Collection 4: Joey's World Mega Pack)"
+      },
+      "historical_text": "Once this turn, negate 1 six-sided die roll and re-roll it.",
+      "modern_text": "One time, during the rest of this turn, if either player(s) rolls a die (or dice), you can have the player(s) re-roll. (You can only gain this effect once per turn.)",
+      "summary": "Functional erratum: LCJW-EN271 adds the rider '(You can only gain this effect once per turn.)', which no earlier printing carries - under 'Once this turn, negate 1 six-sided die roll and re-roll it' each copy grants its own re-roll, so two copies activated in the same turn give two re-rolls, while the errata'd card grants nothing for the second copy. The same printing also widens the scope from '1 six-sided die roll' to any roll of 'a die (or dice)' by either player and drops the negation framing in favour of 'you can have the player(s) re-roll'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT and Edison, two copies of Dice Re-Roll activated in one turn should buy two re-rolls, and the effect is written for a six-sided die roll only; the shipped card grants the re-roll effect once per turn no matter how many copies are activated and applies to any die or dice.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. Chain starts at v1 (DR1-EN262, 2005-03-19), the text in force at the 2005-04-01 GOAT snapshot (Dark Revelation Volume 1 released thirteen days earlier) and still the current text at the 2010-04-24 Edison snapshot, since the next printing is LCJW-EN271 on 2013-10-11. Pre-baseline v0 (DCR-100, 2003-12-01) says the same thing at greater length ('After this card is activated, for the rest of this turn you can negate 1 six-sided die roll and re-roll it') and is behaviourally identical to v1. v2 is the pinned cdb text. The functional call rests on the added parenthetical, which is a per-turn cap on gaining the effect rather than on using it - the era text caps uses per copy, not per turn. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

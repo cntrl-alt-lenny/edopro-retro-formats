@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-spirit-s-invitation",
+  "modern_card": {
+    "passcode": 92394653,
+    "name": "Spirit's Invitation"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2005-07-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of DB2-EN204 (Dark Beginning 2)"
+      },
+      "historical_text": "Each time your Spirit monster returns to your hand, select 1 monster on your opponent's side of the field and return it to its owner's hand. Pay 500 Life Points during each of your Standby Phases. If you cannot, this card is destroyed.",
+      "modern_text": "Each time your Spirit monster returns to your hand, select 1 monster on your opponent's side of the field and return it to its owner's hand. Pay 500 Life Points during each of your Standby Phases. If you do not, destroy this card.",
+      "summary": "Wording only across the three English printings: 'If you cannot, this card is destroyed' (LOD-095) -> 'If you do not, this card is destroyed' (LOD-EN095) -> 'If you do not, destroy this card' (DB2-EN204). Every English version has the controller select the monster returned and destroys the card when the 500 Life Point Standby Phase payment is not made.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Each time your Spirit monster returns to your hand, select 1 monster on your opponent's side of the field and return it to its owner's hand. Pay 500 Life Points during each of your Standby Phases. If you do not, destroy this card.",
+      "summary": "The shipped implementation does not match any English printing, and its chronology is unresolved because no printing introduces it. BabelCDB's pinned text - self-labelled as unofficial and describing the OCG functionality - reads 'Your opponent chooses 1 monster they control, and you return it to the hand', whereas every English version reads 'select 1 monster on your opponent's side of the field and return it to its owner's hand': the choice of which monster is bounced moves from the Spirit's Invitation player to the opponent. The same text also narrows the trigger to a Spirit monster returning 'from the field' to your hand. No English erratum ever introduced either change, so no set-release date can be attached.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the opponent picks which of their monsters is returned, so the era player cannot aim Spirit's Invitation at the threat the English text lets them select.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; the gap is real. The English/TCG record for this card is cosmetic only - three printings, all 2003-2005, differing in one clause of wording - so there is no dated erratum to hang the behavioural difference on. What the sweep found is a divergence between the era English text and the shipped implementation, and I recorded it as an undated functional entry rather than inventing a transition: modern_text_matches_version is index 1 at ratio 0.5813, i.e. the cdb text matches no lineage version, and the cdb text itself carries the footnote that it is unofficial and describes the card's functionality in the OCG. Both halves of the divergence (opponent chooses the bounce target; trigger limited to Spirit monsters returning from the field) are stated only in that unofficial text. Chronology is left open with effective {} and flagged; I did not attempt to date a change that the TCG record does not contain. Note for the applier: modern_text_version is null on the functional entry because the modern text is off-lineage - the literal text is in the packet's modern_text field if a literal copy is preferred. The cosmetic entry is dated at DB2-EN204 (2005-07-27), which is after the GOAT snapshot (2005-04-01); v0/v1 and v2 are behaviourally identical, so the GOAT/Edison split across that date has no consequence."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

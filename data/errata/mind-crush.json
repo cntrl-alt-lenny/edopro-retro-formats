@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-mind-crush",
+  "modern_card": {
+    "passcode": 15800838,
+    "name": "Mind Crush"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Declare 1 card name. If that card is in your opponent's hand, they must discard all copies of it in their hand. If it is not, you randomly discard 1 card.",
+      "summary": "Period procedure bundled with a declaration-scope difference, not a text erratum: at resolution the pre-errata script reveals the opponent's entire hand to you (Duel.ConfirmCards(tp,hg)) and then shuffles it (Duel.ShuffleHand(1-tp)), the era's verification procedure for a declared-name call, which the modern script never does; and it declares through an unfiltered Duel.AnnounceCard(tp), so any name including an Extra Deck monster may be called, while the modern script blocks Extra Deck monsters with announce_filter. Chronology is unresolved: the verification element sits inside the shared search-verification bounds, but the declaration-scope element is undated in the packet, so no date evidence is claimed for the change as a whole. Every English lineage text from v0 to v4 is behaviourally identical.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003026,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003026.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The upstream variant's cdb text ('...otherwise you discard 1 random card and look at your opponent's hand.') matches no printed version - it is the modern v4 text (LCYW-EN295) with the era ruling appended, best ratio 0.887 - so the variant pins a ruling, not a printing; hence historical_text_version is taken from the lineage instead: v2 (CP08-EN003, 2009-01-05) is the printing in force across the Edison snapshot, and v0 (SOD-EN056, 2004-10-01) would be the GOAT-era text. Two conflicts preserved rather than resolved: (1) the variant's own appended clause and EdisonFormat both attach the reveal to a FAILED call only, but the script places Duel.ConfirmCards ahead of the branch and reveals unconditionally, and neither models the site's 'publicly accounted-for copies' exemption; (2) the announce filter. Recommendation for escalation: if a reviewer judges the modern announce_filter to be an engine-side declaration convenience rather than an era rules change, this change reduces to the verification procedure alone and should then take date_evidence {kind: shared-chronology, id: search-verification}, under which both GOAT (2005-04-01) and Edison (2010-04-24) sit determinately in the old era. I did not make that call myself, so the change is left with effective {}."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "edisonformat-functional-errata"
+  ]
+}

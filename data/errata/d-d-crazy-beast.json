@@ -5,18 +5,19 @@
     "passcode": 48148828,
     "name": "D.D. Crazy Beast"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "A monster that this card destroys as a result of battle is removed from play.",
-      "modern_text": "A monster that this card destroys as a result of battle is removed from play.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "The goat script requires the battle target to have genuinely been destroyed by battle — `bc:IsBattleDestroyed()`, defined in CardScripts utility.lua as `IsStatus(STATUS_BATTLE_DESTROYED) and IsReason(REASON_BATTLE)` — where the modern script banishes on the battle-destroyed status alone (`bc:IsStatus(STATUS_BATTLE_DESTROYED)`); the two files are otherwise identical. The difference bites exactly when a monster carries that status without an actual battle destruction, which is what the goat Continuous Destruction Punch script manufactures (it sets the status at damage calculation and then destroys by effect): under the era pair that monster is not banished, under the modern predicate it would be. Chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700079,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700079.lua",
+    "script": "goat/c504700079.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical: goat text == pinned modern cdb text == lineage v1 (DR1-EN074, 2005-03-19); the v0 (MFC-019, 2003-10-10) -> v1 rewording is cosmetic and predates the baseline version. Escalation: upstream ships NO annotation on this goat entry (the file has no comment header at all), so the 'ruling' verdict rests on reading the one changed predicate plus its coherence with the goat Continuous Destruction Punch encoding, not on an independent era source. A reviewer may prefer to demote this to cosmetic — but if the modern script is used, it must not be paired with the goat Continuous Destruction Punch script, or a monster destroyed by that card's effect gets banished."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

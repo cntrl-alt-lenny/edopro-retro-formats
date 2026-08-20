@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-strike-ninja",
+  "modern_card": {
+    "passcode": 41006930,
+    "name": "Strike Ninja"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2012-05-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of BATT-EN003 (Battle Pack Tournament Prize Cards)"
+      },
+      "historical_text": "You can remove this card from play until the End Phase of this turn by removing 2 DARK monsters in your Graveyard from play. You can use this effect during either player's turn. You can only use this effect once per turn.",
+      "modern_text": "Once per turn, during either player's turn: You can banish 2 DARK monsters from your Graveyard; banish this face-up card until the End Phase.",
+      "summary": "Rewording only across v0 (IOC-007) -> v1 (DR2-EN007) -> v2 (DL13-EN005) -> v3 (BATT-EN003): 'remove from play' -> 'banish', the separate sentence 'You can use this effect during either player's turn' folded into the 'Once per turn, during either player's turn:' opener, and v2's explicit 'You must control this face-up card to activate and to resolve this effect' compressed into 'banish this face-up card'. The banish-2-DARK-monsters cost, the self-banish until the End Phase and the per-copy once-per-turn limit are unchanged throughout.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2018-08-16",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SHVA-EN021, Shadows in Valhalla)"
+      },
+      "historical_text": "Once per turn, during either player's turn: You can banish 2 DARK monsters from your Graveyard; banish this face-up card until the End Phase.",
+      "modern_text": "(Quick Effect): You can banish 2 DARK monsters from your GY; banish this face-up card until the End Phase. You can only use this effect of \"Strike Ninja\" once per turn.",
+      "summary": "Functional erratum: the bare 'Once per turn' - a limit borne by each copy - becomes 'You can only use this effect of \"Strike Ninja\" once per turn', a hard once per turn by name. With two Strike Ninjas on the field the era text let each banish itself once in the same turn; the modern text permits one dodge in total. The accompanying '(Quick Effect)' replacing 'during either player's turn' is PSCT only.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format only one Strike Ninja per turn can banish itself to dodge removal, leaving a second copy exposed to a Torrential Tribute or Mirror Force that the era text let it evade.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's one upstream code, 153000011 'Strike Ninja (Deck Master)', is not a historical implementation: its monster-effect text is the modern v4 text verbatim, including the by-name once-per-turn, wrapped in a Deck Master ability block gated on 'if not DeckMaster then return end'. So no upstream historical version exists and the gap stands. Era texts: GOAT (2005-04-01) sits on v0 (IOC-007, 2004-03-01) and Edison (2010-04-24) sits on v1 (DR2-EN007, 2005-10-20); v0 and v1 differ only in word order and are behaviourally identical, which is why the cosmetic entry collapses v0 through v3. The erratum is 2018-08-16, long after both snapshots. edisonformat-functional-errata lists this card and states the era limit is per-card, which corroborates the functional verdict; per the brief it is cited as reported and is not used to date anything."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-storm-shooter",
+  "modern_card": {
+    "passcode": 39188539,
+    "name": "Storm Shooter"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Once per turn, you can select and activate 1 of these effects: ● Move this card to an adjacent (horizontal) unoccupied Monster Card Zone. ● Return 1 Spell, Trap or Monster Card on your opponent's side of the field in the same column as this card to its owner's hand.",
+      "summary": "When the destination zone is chosen differs, with no text change anywhere in the lineage: the pre-errata script sets aux.seqmovop on the move option, picking a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which fixes the destination at activation and aborts the move if that zone is no longer free at resolution. Chronology is unresolved: the errata page records no text version carrying this change in any language, so the difference is visible only in the script and no date is claimed.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 39188549,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c39188549.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflict recorded, not resolved: the variant is labelled '(Pre-Errata)' but its cdb text is byte-identical to lineage v1, which is byte-identical to the modern text. The lineage has only v0 (CDIP-EN032, 2006-11-15) and v1, which adds '(horizontal)' and carries no printing (caption is a Konami Card Database link, no capture date in the packet). Unlike Rampaging Rhynos, this errata page has NO Japanese section at all, so there is not even an OCG erratum attesting the zone-designation rewrite for this card - the only evidence of a behavioural difference is upstream's script. The second hunk of the script diff ('if tc and tc:IsRelateToEffect(e)' vs 'if tc:IsRelateToEffect(e)') is a defensive nil guard on the bounce option, not a behavioural difference. Cross-reference within this batch: Senet Switch received the reformulated wording in an English printing (TAMA-EN042, 2022-08-25) and Rampaging Rhynos received it in the OCG (DE01-JP057); neither is used to date this card."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}

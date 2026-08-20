@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ultimate-tyranno",
+  "modern_card": {
+    "passcode": 15894048,
+    "name": "Ultimate Tyranno"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-04-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN006, Dinosmasher's Fury Structure Deck)"
+      },
+      "historical_text": "If this card is in face-up Attack Position at the beginning of your Battle Phase, it must attack first, and attack all monsters your opponent controls once each.",
+      "modern_text": "This card can attack all monsters your opponent controls, once each. During your Battle Phase, if you control an \"Ultimate Tyranno\" that can attack, monsters other than \"Ultimate Tyranno\" cannot attack.",
+      "summary": "Functional erratum: the restriction moved from this card onto your other monsters. The pre-errata script puts EFFECT_FIRST_ATTACK and EFFECT_MUST_ATTACK on the card itself and conditions all three effects (including EFFECT_ATTACK_ALL) on s.facon - the opponent controls a monster, the card was in your Monster Zone when the Battle Phase started (flag registered by an EVENT_PHASE_START+PHASE_BATTLE_START operation), and no other monster of yours has declared the first attack (tracked by a global EVENT_ATTACK_ANNOUNCE handler). So it must attack, must attack first, and only gains attack-all-once-each if it was present at the start of the Battle Phase. The modern script drops all of that: EFFECT_ATTACK_ALL is unconditional and a field EFFECT_CANNOT_ATTACK targeting your own Monster Zone stops every monster except \"Ultimate Tyranno\" from attacking while a face-up Ultimate Tyranno that can attack is on your field - the modern card is never itself forced to attack.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003009,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003009.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The earlier transition v0 (POTD-EN020, 2006-08-16) -> v1 (DT02-EN059, 2010-05-25) precedes the baseline's recorded version and is cosmetic: \"first, you can and must attack all monsters on your opponent's side of the field once each with this card\" -> \"it must attack first, and attack all monsters your opponent controls once each\", plus the addition of \"face-up\" to \"Attack Position\". v0 is the text in force at the Edison snapshot (2010-04-24, four weeks before Duel Terminal 2) and resolves identically; the baseline's cdb text matches v1 apart from \"at the start of\" vs \"at the beginning of\" (packet ratio 0.9551). The card postdates the GOAT snapshot (first TCG printing 2006-08-16). Not listed on EdisonFormat's Functional Errata page; the verdict rests on the script diff and the lineage."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-vw-tiger-catapult",
+  "modern_card": {
+    "passcode": 58859575,
+    "name": "VW-Tiger Catapult"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2018-03-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN060, Legendary Collection Kaiba Mega Pack)"
+      },
+      "historical_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\"). You can discard 1 card to change the battle position of 1 monster your opponent controls. (Flip Effects are not activated at this time.)",
+      "modern_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position. (Flip Effects are not activated.)",
+      "summary": "Functional erratum: 'This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control' becomes 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control'. The period wording barred every Special Summon that was not that banish procedure, so the card could never be returned to the field once it left; the modern semi-Nomi wording allows any later Special Summon, revival from the Graveyard included, after the card has been properly Special Summoned once. The same printing also rewrote the discard effect into PSCT with explicit targeting ('You can discard 1 card to change the battle position of 1 monster your opponent controls' -> 'You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position'), with the discard remaining an activation cost in both.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison the EDOPro card can be revived from the Graveyard by Monster Reborn, Call of the Haunted or Premature Burial after one proper summon, which the period Nomi text forbade entirely.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v3, the 'Extra Deck' wording that was in force at the Edison snapshot. Caveat recorded: the packet lists v3 with number null, sets [] and dating_set null, so it carries no printing and no date - it is the post-2008 Fusion Deck / Extra Deck rename of v2 (DR04-EN090, 2007-11-14) and is behaviourally identical to it, and it is used here for display text only; no date evidence is drawn from it (the recorded change is dated by v4, LCKC-EN060, 2018-03-08). Earlier transitions precede the baseline and are not recorded: v0 (EEN-EN030, 2005-11-16) -> v1 (DP2-EN016, 2006-02-08) is a moved parenthesis, and v1 -> v2 (DR04-EN090) reworded 'on your side of the field' to 'you control' and 'By discarding 1 card from your hand, change...' to 'You can discard 1 card to change...'. Trailing v5 (SGX1-ENC22, 2022-03-17) drops the '(You do not use \"Polymerization\".)' reminder and lowercases 'Flip effects' - cosmetic, not recorded. The pinned BabelCDB text matches v5 at ratio 0.9981; the residue is the line break between the Fusion-material line and the effect text, not a wording difference. The card's first printing (2005-11-16) postdates the 2005-04-01 GOAT pool, so only Edison-era play is affected. upstream_implementations is empty; the card is not on EdisonFormat.com's functional errata page."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

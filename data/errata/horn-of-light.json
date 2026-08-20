@@ -5,18 +5,19 @@
     "passcode": 38552107,
     "name": "Horn of Light"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Increase the DEF of a monster equipped with this card by 800 points. When this card is sent from the field to the Graveyard, if you pay 500 Life Points, this card returns to the top of your Deck.",
-      "modern_text": "Increase the DEF of a monster equipped with this card by 800 points. When this card is sent from the field to the Graveyard, if you pay 500 Life Points, this card returns to the top of your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era miss-timing behaviour, no text difference: the goat script adds EFFECT_FLAG_DELAY to the optional 'when this card is sent from the field to the Graveyard' trigger, so it does not miss timing when Horn of Light leaves the field other than as the last thing to happen; the modern script carries EFFECT_FLAG_DAMAGE_STEP alone, making it a strict last-thing-to-happen trigger that misses timing. The remaining diff lines are non-behavioural and were verified against the repo: the inline s.tdcost is the body of Cost.PayLP(500) minus the modern cost_lp_paid bookkeeping, and `Duel.SendtoDeck(...,0,...)` is SEQ_DECKTOP (constant.lua line 28: SEQ_DECKTOP = 0). Chronology of the miss-timing ruling is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700063,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700063.lua",
+    "script": "goat/c504700063.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v2 (DB1-EN004, 2004-10-12), which both the goat cdb entry and the pinned modern cards.cdb carry exactly, so no text transition is recorded. The lineage oscillates cosmetically across reprints: v1 (MRL-004, Collectible Tins 2003) 'you can pay 500 Life Points to place it on top of your Deck' -> v2 'if you pay 500 Life Points, this card returns to the top of your Deck' -> v3 (SRL-004, Legendary Collection, 2010) back to the v1 wording -> v4 (SRL-EN004, Spell Ruler 25th Anniversary Edition, 2023) back to the v2 wording. All four are optional and resolve identically."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

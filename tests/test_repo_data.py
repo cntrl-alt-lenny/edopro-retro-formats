@@ -136,6 +136,31 @@ class RealDataTest(unittest.TestCase):
         # The Shining Darkness - the whitelist rejects unlisted cards).
         self.assertNotIn(135598, built.entries)
 
+    def test_pool_cards_are_tcg_scoped_in_the_card_database(self):
+        """A TCG format's pool must reference codes EDOPro treats as TCG cards
+        (cdb `ot` including SCOPE_TCG 0x2). A code scoped OCG-only would be
+        rejected in an official-cards room and would carry the OCG behaviour.
+
+        One documented exception, found by the errata review: Project Ignis
+        models Mind Master's TCG version as a SEPARATE entry (96782896,
+        ot=2, aliased to 96782886) because the canonical row carries the
+        OCG-only text, while our release-derived pool naturally references
+        the canonical passcode its TDGS-EN016 printing maps to. Recorded as an
+        open question in docs/roadmap.md rather than silently patched: it is a
+        card-identity question, not an errata chronology one.
+        """
+        known_exceptions = {96782886: "Mind Master (TCG version is upstream 96782896)"}
+        index = self.repo.card_index
+        for pool_id in ("pool-goat-2005-ignis", "pool-edison-2010"):
+            offenders = {}
+            for card in self.repo.pools[pool_id].cards:
+                row = index.by_passcode.get(card.passcode)
+                ot = row.get("ot") if row else None
+                if ot is not None and not (int(ot) & 0x2):
+                    offenders[card.passcode] = card.name
+            unexpected = {c: n for c, n in offenders.items() if c not in known_exceptions}
+            self.assertEqual({}, unexpected, f"{pool_id}: non-TCG-scoped pool cards")
+
     def test_every_edison_substitution_rests_on_resolved_chronology(self):
         """Edison has no reference implementation to copy, so every historical
         version it uses must be justified by evidence that actually places the

@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-trap-of-darkness",
+  "modern_card": {
+    "passcode": 79766336,
+    "name": "Trap of Darkness"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2018-04-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SR06-EN036, Structure Deck: Lair of Darkness)"
+      },
+      "historical_text": "Activate only by paying 1000 Life Points while you have 3000 Life Points or less. Select a Normal Trap Card in your Graveyard. This card's effect is the same as that Trap Card's. Remove from play that Normal Trap Card.",
+      "modern_text": "If your LP is 3000 or less: Pay 1000 LP, then target 1 Normal Trap in your GY, except \"Trap of Darkness\"; this card's effect becomes that target's activated effect, then banish that target.",
+      "summary": "Functional erratum: the modern text adds 'except \"Trap of Darkness\"' to the copy target, so a second copy of this card sitting in the Graveyard is no longer an eligible choice; the TDGS-EN092 text said only 'Select a Normal Trap Card in your Graveyard', which admits any Normal Trap including another 'Trap of Darkness'. Everything else is PSCT: the activation condition and the 1000 LP cost are re-templated ('Activate only by paying 1000 Life Points while you have 3000 Life Points or less' -> 'If your LP is 3000 or less: Pay 1000 LP'), select becomes target with the same designation at activation, and the trailing 'Remove from play that Normal Trap Card' becomes 'then banish that target'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison the EDOPro card refuses to copy a second 'Trap of Darkness' in the Graveyard, a target the period text made legal.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Only two English versions: v0 (TDGS-EN092, 2008-09-02), the text in force at the Edison snapshot, and v1 (SR06-EN036, 2018-04-19). Pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty. The self-exclusion clause is the ONLY behavioural delta I can see in the lineage; the packet carries no period ruling establishing whether the exclusion was already enforced by rulings in 2008-2010, so the verdict rests on the printed text alone, and the practical stakes are narrow (it takes a second copy of Trap of Darkness already in the Graveyard for the two texts to diverge). The card does not appear on EdisonFormat.com's functional errata page. The cost/effect split is unchanged in both readings: paying 1000 LP is an activation cost before and after."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

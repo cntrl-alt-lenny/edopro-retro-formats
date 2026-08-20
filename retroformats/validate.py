@@ -352,6 +352,23 @@ class Validator:
                     "the recorded implementation is usable only via an explicit "
                     "errata_overrides include (document why in the format notes)",
                 )
+            if erratum.classification == "engine" and strategy in (
+                "reuse-upstream",
+                "custom-script",
+            ):
+                # engine means "a rule profile reproduces this, not a card
+                # override". Carrying a historical card implementation
+                # contradicts that: the record is claiming both routes at
+                # once, and computed selection will use neither.
+                self.warn(
+                    "erratum.engine-with-card-implementation",
+                    erratum.path,
+                    "classification engine says a rule profile reproduces this, but the "
+                    f"record carries a {strategy} card implementation that computed "
+                    "selection can never use; if the difference is only reproducible "
+                    "per card (e.g. a per-effect damage-step flag no DUEL_* flag sets), "
+                    "classify it ruling instead",
+                )
             if relevant and erratum.classification == "functional" and strategy == "none-needed":
                 self.warn(
                     "erratum.functional-none-needed",
@@ -672,8 +689,25 @@ class Validator:
             for erratum in self.repo.errata.values():
                 if erratum.id in fmt.errata_exclude:
                     continue
-                from .lflist import parity_override
+                from .lflist import in_reference, parity_override
 
+                if not in_reference(erratum, fmt.reference_parity):
+                    # Outside the reference: our research may still say this
+                    # card needs a historical version here. Parity keeps the
+                    # modern card, but the finding is worth surfacing - it is
+                    # a candidate contribution back to the reference.
+                    if erratum.relevant_changes():
+                        selection = erratum.selection_at(snapshot)
+                        if selection.state == "historical":
+                            self.warn(
+                                "format.parity-omits-historical",
+                                fmt.path,
+                                f"{erratum.modern_card.name}: this record's chronology says "
+                                f"a historical version applies at {snapshot}, but the "
+                                "reference implementation does not substitute this card, "
+                                "so parity keeps the modern one",
+                            )
+                    continue
                 if parity_override(erratum) is None:
                     continue
                 if erratum.review_status != "reviewed":

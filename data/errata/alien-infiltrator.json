@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-alien-infiltrator",
+  "modern_card": {
+    "passcode": 76573247,
+    "name": "Alien Infiltrator"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If no Spell, Trap or Monster Card on your opponent's side of the field is in the same column as this card, it can attack your opponent directly.",
+      "summary": "Procedure difference with no text counterpart: upstream's historical script picks the destination Monster Card Zone during RESOLUTION (aux.seqmovop -> Card.MoveAdjacent), while the modern script picks it at activation as a target step (aux.seqmovtg stores the sequence via SelectAdjacent; aux.seqmovtgop then moves there only if Duel.CheckLocation still finds that zone free). On the modern card the choice is locked in and public from activation and the move fizzles if the zone is occupied in response; on the historical one the zone is chosen when the effect resolves. No printed English version carries the distinction, and nothing in the packet dates it, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 76573257,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c76573257.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The English lineage has exactly one transition: v0 (CDIP-EN033, 2006-11-15) -> v1, which inserts '(horizontal)' into 'adjacent unoccupied Monster Card Zone'. v1 carries no set number and no dating set in the packet, so it cannot be dated by set-release evidence; it is a clarification of what 'adjacent' means and is behaviourally cosmetic, hence not recorded as a change. Conflicting evidence: the entry is labelled 'Pre-Errata' yet its cdb text is byte-identical to v1 and to the modern cards.cdb text, and its card data is identical to modern 76573247 (ATK 800 / DEF 500, Level 2, LIGHT, Reptile, verified against cards.cdb and cards-unofficial.cdb), so the zone-selection timing in the Lua is the only thing distinguishing it. That leaves it ambiguous whether upstream encoded a real period ruling or preserved an older EDOPro implementation style; escalate before relying on it, and note that with effective {} the applier will block rather than choose a version."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}

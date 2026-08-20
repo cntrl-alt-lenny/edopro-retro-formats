@@ -148,6 +148,17 @@ def baseline_override(erratum: Erratum) -> dict | None:
     return _usable(erratum.implementation)
 
 
+def in_reference(erratum: Erratum, parity: dict) -> bool:
+    """Whether a record is part of the reference implementation this format
+    reproduces. Provenance decides it: upstream ships historical variants for
+    cards its own list does NOT use, so "has an upstream variant" is not the
+    same question as "the reference substitutes it"."""
+    marker = parity.get("provenance_source")
+    if not marker:
+        return True
+    return marker in erratum.sources
+
+
 def parity_override(erratum: Erratum) -> dict | None:
     """The historical implementation a reference-parity format must emit.
 
@@ -201,12 +212,16 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
                 selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
             continue
         if parity:
-            # Reproducing the reference implementation is the format's
-            # definition; disagreements with our chronology are reported by
-            # the validator rather than silently changing the output.
-            impl = parity_override(erratum)
-            if impl is not None:
-                selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
+            # The reference implementation defines the WHOLE substitution set:
+            # cards it represents historically are substituted, and cards it
+            # does not are left modern even where our own chronology would
+            # pick a historical version. Both directions of disagreement are
+            # reported per card by the validator rather than silently
+            # changing output that is regression-tested against the reference.
+            if in_reference(erratum, parity):
+                impl = parity_override(erratum)
+                if impl is not None:
+                    selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
             continue
         if snapshot is None or not erratum.relevant_changes():
             continue

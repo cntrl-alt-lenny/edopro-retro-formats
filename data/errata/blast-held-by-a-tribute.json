@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-blast-held-by-a-tribute",
+  "modern_card": {
+    "passcode": 89041555,
+    "name": "Blast Held by a Tribute"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DT05-EN099, Duel Terminal 5b)"
+      },
+      "historical_text": "You can only activate this card when your opponent declares an attack with a monster on his/her side of the field that has been Tribute Summoned or Set. Destroy all face-up Attack Position monsters on your opponent's side of the field and inflict 1000 points of damage to your opponent's Life Points.",
+      "modern_text": "Activate only when your opponent declares an attack with a Tribute Summoned monster they control. Destroy all face-up Attack Position monsters they control and inflict 1000 damage to your opponent.",
+      "summary": "Functional erratum: the DCR-104 activation condition is an attack by an opponent's monster 'that has been Tribute Summoned or Set'; DT05-EN099 drops 'or Set', leaving only 'a Tribute Summoned monster they control'. In a period format an opponent's monster that was Tribute Set and later turned face-up still lets the Trap resolve; after the erratum only a Tribute Summoned attacker does.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT and Edison an attack by an opponent's Tribute Set monster (a Set Monarch or similar, later flipped) should let Blast Held by a Tribute wipe their face-up Attack Position monsters for 1000 damage; the shipped card refuses to activate against it.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CAUTION on the packet's upstream entry: upstream_implementations lists passcode 511005091 'Blast Held by a Tribute (Anime)' from cards-unofficial.cdb (script unofficial/c511005091.lua, annotated 'original script by Shad3'). That is an anime-only card with an entirely different effect - it is chosen when Set, tracks the monster Tributed for the opponent's Tribute Summon, and destroys that attacker for damage equal to its ATK - and its text_matches_version ratio against the lineage is 0.4723. It is NOT a period implementation of the TCG card and must not be reused as a baseline; hence the acknowledged-gap baseline and the conflicting-evidence flag. Chain starts at v0 (DCR-104, 2003-12-01), the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots, since the DT05 reprint is 2011-09-29. Trailing v1 -> v2 (DPRP-EN034, 2016-09-15) is the PSCT rewrite ('Destroy as many face-up Attack Position monsters they control as possible, and if you do, inflict 1000 damage'), matching the pinned cdb text; it conditionalises the burn on at least one destruction, which is standard PSCT formalisation, so it is not recorded as a behavioural change. No entry for this card in edison-functional-errata.md."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

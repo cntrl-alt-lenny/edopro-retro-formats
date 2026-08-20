@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-red-eyes-wyvern",
+  "modern_card": {
+    "passcode": 67300516,
+    "name": "Red-Eyes Wyvern"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of LCJW-EN049 (Legendary Collection 4: Joey's World Mega Pack)"
+      },
+      "historical_text": "During your End Phase, if you did not Normal Summon or Set a monster that turn, you can remove from play this card from your Graveyard to Special Summon 1 \"Red-Eyes\" monster from your Graveyard, except \"Red-Eyes B. Chick\".",
+      "modern_text": "During your End Phase, if you did not Normal Summon/Set a monster this turn: You can banish this card from your Graveyard; Special Summon 1 \"Red-Eyes\" monster from your Graveyard, except \"Red-Eyes B. Chick\".",
+      "summary": "PSCT rewording only: 'remove from play' -> 'banish' and the pre-condition/cost repunctuation. The effect still requires that you did not Normal Summon or Set a monster that turn, still banishes itself from the GY as the cost, still Special Summons a 'Red-Eyes' monster from your GY without targeting, and still excludes 'Red-Eyes B. Chick'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2020-07-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LDS1-EN005, Legendary Duelists: Season 1)"
+      },
+      "historical_text": "During your End Phase, if you did not Normal Summon/Set a monster this turn: You can banish this card from your Graveyard; Special Summon 1 \"Red-Eyes\" monster from your Graveyard, except \"Red-Eyes B. Chick\".",
+      "modern_text": "Once per turn, during your End Phase: You can banish this card from your GY, then target 1 \"Red-Eyes\" monster in your GY; Special Summon that target. You cannot Normal Summon/Set during the turn you activate this effect.",
+      "summary": "Functional erratum with three separable changes: the 'if you did not Normal Summon/Set a monster this turn' activation requirement becomes a post-activation restriction ('You cannot Normal Summon/Set during the turn you activate this effect'); the revival becomes a targeting effect ('then target 1 \"Red-Eyes\" monster in your GY; Special Summon that target') where the old effect selected on resolution without targeting; and the 'except \"Red-Eyes B. Chick\"' exclusion is dropped, so the modern card can revive Red-Eyes B. Chick. An explicit 'Once per turn' is also added, which is inert on an effect that banishes itself as its cost.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the modern card revives 'Red-Eyes B. Chick' (which the era text excludes) and its Summon targets in the GY, so it can be stopped by targeting protection - and, under the era's targeting-only Necrovalley ruling, by Necrovalley - where the era effect resolved without targeting.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; Ignis ships neither a goat nor a pre-errata variant, so the gap is real and recorded. Edison-era text is v0 (GX06-EN002, 2008-11-28, tcg-eu); the first rewording is 2013-10-11 and the erratum 2020-07-02, so both snapshots sit on v0. The leading cosmetic entry is recorded separately from the functional one so that the erratum is dated at its own printing rather than at the reprint. Note the direction of the once-per-turn addition: it is not the usual per-copy-to-per-name tightening, because the cost banishes the card itself, so it changes nothing; the load-bearing differences are the targeting and the removed 'Red-Eyes B. Chick' exclusion. The replacement of the 'did not Normal Summon/Set this turn' requirement by a restriction is recorded as part of the same erratum; the packet does not settle whether the modern restriction also forbids activating after a Normal Summon has already been used, and I did not guess."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-anteatereatingant",
+  "modern_card": {
+    "passcode": 13250922,
+    "name": "Anteatereatingant"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard. You can destroy 1 Spell or Trap Card your opponent controls. If you activate this effect, this card cannot attack during this turn.",
+      "summary": "The shipped card differs from the last English printing in three ways. (1) Summoning restriction: 'This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard' is a strict Nomi condition that bars every other Special Summon and does not restrict its own procedure to the hand, while the shipped 'Must be Special Summoned (from your hand) by sending 2 Spells/Traps you control to the GY' both confines the proper summon to the hand and, lacking a 'cannot be Special Summoned by other ways' clause, lets the card be revived afterwards. (2) Use limit: the DR04 text puts no once-per-turn on the destruction effect; the shipped text is 'Once per turn'. (3) The shipped text destroys a targeted Spell/Trap, where the printed text names no selection at activation. Chronology is unresolved: no English printing carries the shipped text and no dated announcement of the change appears in the packet.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format Anteatereatingant should be unrevivable by Monster Reborn/Call of the Haunted and should be able to blow up a Spell/Trap more than once per turn (at the price of not attacking); the shipped card is revivable after a proper summon and is capped at one destruction per turn.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. The English lineage stops at v1 (DR04-EN142, 2007-11-14) - the card never received a later English printing - and the pinned cards.cdb text is explicitly marked '* The above text is unofficial and describes the card's functionality in the OCG', with modern_text_matches_version ratio 0.6121 against v1. So the divergence recorded here is between the last TCG text and an undated OCG-derived implementation, not a dated TCG erratum: that is why the change carries effective {} with no date_evidence and modern_text_version null (there is no lineage index holding the shipped text). Pre-baseline v0 (SOI-EN022, 2006-03-01) differs from v1 only in phrasing ('on your side of the field' -> 'you control', clause order of the attack restriction) and is behaviourally identical, so the chain starts at v1, the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots (the card postdates GOAT's snapshot in any case - Shadow of Infinity released 2006-03-01). Flagged conflicting-evidence because the cdb text matches no lineage version; flagged chronology-unresolved because dating the OCG change would require inventing a date."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}
