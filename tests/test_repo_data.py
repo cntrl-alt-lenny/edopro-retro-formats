@@ -136,6 +136,32 @@ class RealDataTest(unittest.TestCase):
         # The Shining Darkness - the whitelist rejects unlisted cards).
         self.assertNotIn(135598, built.entries)
 
+    def test_every_generated_code_is_identifiable(self):
+        """Found by adversarial review: a code the build emits must exist in
+        the card index, or the project is shipping a passcode whose identity
+        and alias it cannot verify. The index collector originally walked only
+        each record's BASELINE implementation, so the per-version
+        implementations the multi-revision schema introduced went unindexed
+        and 22 such codes reached the Edison whitelist."""
+        index = self.repo.card_index
+        for fmt_id in sorted(self.repo.formats):
+            fmt = self.repo.formats[fmt_id]
+            if fmt.banlist_id not in self.repo.banlists or fmt.pool_id not in self.repo.pools:
+                continue
+            built = build_lflist(fmt, self.repo)
+            unknown = sorted(c for c in built.entries if index.name_of(c) is None)
+            self.assertEqual([], unknown, f"{fmt_id}: emitted codes missing from the card index")
+
+    def test_card_index_covers_every_referenced_passcode(self):
+        from retroformats.importers.card_index import collect_referenced_passcodes
+
+        referenced = collect_referenced_passcodes(self.repo)
+        indexed = set(self.repo.card_index.by_passcode)
+        self.assertEqual(
+            [], sorted(referenced - indexed)[:20],
+            "run: python -m retroformats.importers.card_index --babelcdb <path>",
+        )
+
     def test_pool_cards_are_tcg_scoped_in_the_card_database(self):
         """A TCG format's pool must reference codes EDOPro treats as TCG cards
         (cdb `ot` including SCOPE_TCG 0x2). A code scoped OCG-only would be

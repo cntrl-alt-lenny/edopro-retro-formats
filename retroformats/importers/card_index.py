@@ -35,10 +35,20 @@ def collect_referenced_passcodes(repo: Repository) -> set[int]:
                     pass  # validator reports the malformed entry
     for erratum in repo.errata.values():
         refs.add(erratum.modern_card.passcode)
-        hist = erratum.implementation.get("historical_passcode")
-        if hist:
-            refs.add(int(hist))
-        refs.update(int(v) for v in erratum.implementation.get("historical_variant_passcodes", []))
+        # EVERY version's implementation, not just the baseline: a card with
+        # multiple historical revisions carries one per change, and a code the
+        # build can emit must be identifiable.
+        implementations = [
+            erratum.implementation,
+            *(c.get("resulting_implementation") for c in erratum.changes),
+        ]
+        for impl in implementations:
+            if not impl:
+                continue
+            hist = impl.get("historical_passcode")
+            if hist:
+                refs.add(int(hist))
+            refs.update(int(v) for v in impl.get("historical_variant_passcodes", []) or [])
     for product in repo.products.values():
         for printing in product.printings:
             refs.add(printing.passcode)

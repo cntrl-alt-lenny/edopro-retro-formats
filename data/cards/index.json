@@ -1014,6 +1014,12 @@
       "ot": 3
     },
     {
+      "passcode": 3784444,
+      "name": "Rampaging Rhynos (Pre-Errata)",
+      "alias_of": 3784434,
+      "ot": 8
+    },
+    {
       "passcode": 3797883,
       "name": "Slot Machine",
       "alias_of": null,
@@ -2578,6 +2584,12 @@
       "name": "Imperial Custom",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 9995776,
+      "name": "Imperial Custom (Pre-Errata)",
+      "alias_of": 9995766,
+      "ot": 8
     },
     {
       "passcode": 9999961,
@@ -6708,6 +6720,12 @@
       "ot": 3
     },
     {
+      "passcode": 25862691,
+      "name": "Ancient Fairy Dragon (Pre-Errata)",
+      "alias_of": 25862681,
+      "ot": 8
+    },
+    {
       "passcode": 25880422,
       "name": "Block Attack",
       "alias_of": null,
@@ -8688,6 +8706,12 @@
       "ot": 3
     },
     {
+      "passcode": 33900658,
+      "name": "Clear World (Pre-Errata)",
+      "alias_of": 33900648,
+      "ot": 8
+    },
+    {
       "passcode": 33950246,
       "name": "Royal Command",
       "alias_of": null,
@@ -10024,6 +10048,12 @@
       "name": "Storm Shooter",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 39188549,
+      "name": "Storm Shooter (Pre-Errata)",
+      "alias_of": 39188539,
+      "ot": 8
     },
     {
       "passcode": 39191307,
@@ -16086,6 +16116,12 @@
       "ot": 3
     },
     {
+      "passcode": 63394882,
+      "name": "Senet Switch (Pre-Errata)",
+      "alias_of": 63394872,
+      "ot": 8
+    },
+    {
       "passcode": 63442604,
       "name": "Physical Double",
       "alias_of": null,
@@ -19320,6 +19356,12 @@
       "ot": 3
     },
     {
+      "passcode": 76573257,
+      "name": "Alien Infiltrator (Pre-Errata)",
+      "alias_of": 76573247,
+      "ot": 8
+    },
+    {
       "passcode": 76614003,
       "name": "Dark Tinker",
       "alias_of": null,
@@ -22162,6 +22204,12 @@
       "name": "Red-Eyes Darkness Metal Dragon",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 88264988,
+      "name": "Red-Eyes Darkness Metal Dragon (Pre-Errata)",
+      "alias_of": 88264978,
+      "ot": 8
     },
     {
       "passcode": 88279736,
@@ -26070,6 +26118,12 @@
       "ot": 8
     },
     {
+      "passcode": 511000229,
+      "name": "Dark Strike Fighter (Pre-Errata)",
+      "alias_of": 32646477,
+      "ot": 8
+    },
+    {
       "passcode": 511000818,
       "name": "Sinister Serpent (Pre-Errata)",
       "alias_of": 8131171,
@@ -26079,6 +26133,24 @@
       "passcode": 511000819,
       "name": "Chaos Emperor Dragon - Envoy of the End (Pre-Errata)",
       "alias_of": 82301904,
+      "ot": 8
+    },
+    {
+      "passcode": 511000820,
+      "name": "Exchange of the Spirit (Pre-Errata)",
+      "alias_of": 17484499,
+      "ot": 8
+    },
+    {
+      "passcode": 511000822,
+      "name": "Crush Card Virus (Pre-Errata)",
+      "alias_of": 57728570,
+      "ot": 8
+    },
+    {
+      "passcode": 511000823,
+      "name": "Crush Card Virus (Pre-Errata)",
+      "alias_of": 57728570,
       "ot": 8
     },
     {
@@ -26106,6 +26178,12 @@
       "ot": 8
     },
     {
+      "passcode": 511002631,
+      "name": "Sangan (Pre-Errata)",
+      "alias_of": 26202165,
+      "ot": 8
+    },
+    {
       "passcode": 511002851,
       "name": "Heavy Mech Support Platform (Pre-Errata)",
       "alias_of": 23265594,
@@ -26124,6 +26202,12 @@
       "ot": 8
     },
     {
+      "passcode": 511002901,
+      "name": "W-Wing Catapult (Pre-Errata)",
+      "alias_of": 96300057,
+      "ot": 8
+    },
+    {
       "passcode": 511002982,
       "name": "Inspection (Pre-Errata)",
       "alias_of": 16227556,
@@ -26133,6 +26217,30 @@
       "passcode": 511002983,
       "name": "Recycle (Pre-Errata)",
       "alias_of": 96316857,
+      "ot": 8
+    },
+    {
+      "passcode": 511002991,
+      "name": "Cyber Blader (Pre-Errata)",
+      "alias_of": 10248389,
+      "ot": 8
+    },
+    {
+      "passcode": 511002992,
+      "name": "Rescue Cat (Pre-Errata)",
+      "alias_of": 14878871,
+      "ot": 8
+    },
+    {
+      "passcode": 511002993,
+      "name": "Brionac, Dragon of the Ice Barrier (Pre-Errata)",
+      "alias_of": 50321796,
+      "ot": 8
+    },
+    {
+      "passcode": 511002994,
+      "name": "Goyo Guardian (Pre-Errata)",
+      "alias_of": 7391448,
       "ot": 8
     },
     {
@@ -26148,6 +26256,12 @@
       "ot": 8
     },
     {
+      "passcode": 511002997,
+      "name": "Future Fusion (Pre-Errata)",
+      "alias_of": 77565204,
+      "ot": 8
+    },
+    {
       "passcode": 511002998,
       "name": "Necrovalley (Pre-Errata)",
       "alias_of": 47355498,
@@ -26160,6 +26274,54 @@
       "ot": 8
     },
     {
+      "passcode": 511003007,
+      "name": "Ryko, Lightsworn Hunter (Pre-Errata)",
+      "alias_of": 21502796,
+      "ot": 8
+    },
+    {
+      "passcode": 511003008,
+      "name": "Swords of Concealing Light (Pre-Errata)",
+      "alias_of": 12923641,
+      "ot": 8
+    },
+    {
+      "passcode": 511003009,
+      "name": "Ultimate Tyranno (Pre-Errata)",
+      "alias_of": 15894048,
+      "ot": 8
+    },
+    {
+      "passcode": 511003012,
+      "name": "Witch of the Black Forest (Pre-Errata)",
+      "alias_of": 78010363,
+      "ot": 8
+    },
+    {
+      "passcode": 511003020,
+      "name": "Wulf, Lightsworn Beast (Pre-Errata)",
+      "alias_of": 58996430,
+      "ot": 8
+    },
+    {
+      "passcode": 511003022,
+      "name": "Stronghold the Moving Fortress (Pre-Errata)",
+      "alias_of": 13955608,
+      "ot": 8
+    },
+    {
+      "passcode": 511003023,
+      "name": "Ultimate Offering (Pre-Errata)",
+      "alias_of": 80604091,
+      "ot": 8
+    },
+    {
+      "passcode": 511003026,
+      "name": "Mind Crush (Pre-Errata)",
+      "alias_of": 15800838,
+      "ot": 8
+    },
+    {
       "passcode": 511003027,
       "name": "Emissary of the Afterlife (Pre-Errata)",
       "alias_of": 75043725,
@@ -26169,6 +26331,30 @@
       "passcode": 511003028,
       "name": "Darkness Approaches (Pre-Errata)",
       "alias_of": 80168720,
+      "ot": 8
+    },
+    {
+      "passcode": 511003054,
+      "name": "Splendid Venus (Pre-Errata)",
+      "alias_of": 5645210,
+      "ot": 8
+    },
+    {
+      "passcode": 511003055,
+      "name": "Armored Cybern (Pre-Errata)",
+      "alias_of": 67159705,
+      "ot": 8
+    },
+    {
+      "passcode": 511003116,
+      "name": "Destiny HERO - Disk Commander (Pre-Errata)",
+      "alias_of": 56570271,
+      "ot": 8
+    },
+    {
+      "passcode": 511006007,
+      "name": "Blue-Eyes Ultimate Dragon (Pre-Errata)",
+      "alias_of": 23995346,
       "ot": 8
     }
   ]
