@@ -25,5 +25,6 @@
   "sources": [
     "yugipedia-set-pages",
     "ygoprodeck-api"
-  ]
+  ],
+  "notes": "known_gaps above are importer-detected anomaly tallies kept for bookkeeping, NOT unresolved certification failures: certification is governed by the gap ledger (data/releases/gaps.json), and the validator requires every anomaly counted here to be accounted for by a ledger record (unaccounted anomalies fail validation as gaps.unaccounted)."
 }

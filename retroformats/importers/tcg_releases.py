@@ -483,6 +483,13 @@ def run(cache: Path, babelcdb: Path, root: Path, through: str) -> int:
             "Renamed products (Magic Ruler / Spell Ruler) import as two products sharing dates",
         ],
         "sources": [SRC_YUGIPEDIA, SRC_YGOPRODECK],
+        "notes": (
+            "known_gaps above are importer-detected anomaly tallies kept for "
+            "bookkeeping, NOT unresolved certification failures: certification is "
+            "governed by the gap ledger (data/releases/gaps.json), and the validator "
+            "requires every anomaly counted here to be accounted for by a ledger "
+            "record (unaccounted anomalies fail validation as gaps.unaccounted)."
+        ),
     }
     write_json(root / "data" / "releases" / "coverage.json", coverage)
 
