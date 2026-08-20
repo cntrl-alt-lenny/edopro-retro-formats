@@ -8,15 +8,48 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
-      "modern_text": "(This card is always treated as an \"Archfiend\" card.)\nThe equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on the top of your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script adds EFFECT_FLAG_DELAY to the send-to-Deck trigger (upstream comment 'Doesn't miss timing'), so the optional 'When this card is sent from the field to the Graveyard' effect can still be activated when its trigger is not the last thing to have happened; the modern script omits DELAY and the effect misses timing. No printed text in the lineage carries this difference and no dated source for the change was found, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2012-05-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the PSCT text (BP01-EN067, Battle Pack: Epic Dawn)"
+      },
+      "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
+      "modern_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+      "summary": "Wording modernisation only across two printings (v4 RP01-EN051 'The equipped monster gains 1000 ATK ... you can Tribute 1 monster to return this card to the top of the Deck', v5 BP01-EN067 PSCT colon/semicolon form); the equip ATK boost and the optional Tribute-to-top-of-Deck trigger resolve identically.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-06-28",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the added name treatment (BP02-EN131, Battle Pack 2: War of the Giants)"
+      },
+      "historical_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+      "modern_text": "(This card is always treated as an \"Archfiend\" card.)The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+      "summary": "The BP02 printing added '(This card is always treated as an \"Archfiend\" card.)', giving the TCG card membership of the 'Archfiend' archetype that it did not previously have; any card keying on 'Archfiend' by name treats Axe of Despair differently before and after this printing. Archetype membership is carried by the cdb setcode rather than the Lua script, so it does not appear in the script diff.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +57,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700068,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700068.lua",
+    "script": "goat/c504700068.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Second script hunk is a no-op: the goat 'Duel.SendtoDeck(c,nil,0,REASON_EFFECT)' uses the literal 0, and constant.lua:28 defines SEQ_DECKTOP = 0, so it is identical to the modern SEQ_DECKTOP call. ERA MISMATCH on the cdb side: I queried both databases - goat-entries.cdb 504700068 and cards.cdb 40619825 both carry setcode 69 (0x45, Archfiend), so the GOAT variant already grants the 2013 'Archfiend' treatment about nine years early. It is behaviourally inert for GOAT/Edison (no period card keys on 'Archfiend' Spell cards), but the record should not pretend the historical entry is clean. No intermediate implementation is proposed between the undated ruling change and the 2013 functional change: the ruling change's chronology is unresolved, and both project snapshots (2005-04-01, 2010-04-24) precede 2013-06-28, so only the baseline is ever selected. Trailing cosmetics after v6: v7 (YS14-EN026, 2014-07-10, 'place this card on the top of your Deck') and v8 (LART-EN051, 2022-12-16, GY). The pinned modern cdb text matches v7 at 0.9976 (a line break after the parenthetical), not v8."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

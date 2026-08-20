@@ -100,9 +100,11 @@ def lineage_version(packet: dict, version_index: int) -> dict:
     raise DecisionError(f"lineage version {version_index} not in packet")
 
 
-def check_set_release(effective: dict, evidence: dict, packet: dict) -> None:
-    """A set-release date claim must equal the cited version's earliest TCG
-    date exactly, at the packet's recorded precision."""
+def apply_set_release(effective: dict, evidence: dict, packet: dict) -> dict:
+    """Populate the effective date from the research packet: the date a change
+    took effect is the earliest TCG release of the printing that introduced
+    the new text. The packet is the single source of truth - a reviewer never
+    types the date - and any date they DID claim must match it exactly."""
     version_index = evidence.get("introduces_version")
     if version_index is None:
         raise DecisionError("set-release evidence needs introduces_version")
@@ -112,20 +114,30 @@ def check_set_release(effective: dict, evidence: dict, packet: dict) -> None:
         raise DecisionError(
             f"lineage version {version_index} has no dated set in the packet"
         )
-    field = "date" if effective.get("date") else "new_attested_from"
+    merged = dict(effective)
+    field = "new_attested_from" if effective.get("new_attested_from") else "date"
     claimed = effective.get(field)
-    if claimed != earliest["date"]:
+    if claimed is not None and claimed != earliest["date"]:
         raise DecisionError(
             f"{field} {claimed!r} != packet earliest TCG date {earliest['date']!r} "
             f"for version {version_index} ({version.get('dating_set')})"
         )
-    if effective.get("date") and effective.get("precision", "day") != earliest.get(
-        "precision", "day"
-    ):
+    claimed_precision = effective.get("precision")
+    if claimed_precision is not None and claimed_precision != earliest.get("precision", "day"):
         raise DecisionError(
-            f"precision {effective.get('precision')!r} != packet precision "
+            f"precision {claimed_precision!r} != packet precision "
             f"{earliest.get('precision')!r} for version {version_index}"
         )
+    merged[field] = earliest["date"]
+    if field == "date":
+        merged["precision"] = earliest.get("precision", "day")
+    merged.setdefault("status", "reported")
+    if not merged.get("basis"):
+        merged["basis"] = (
+            f"TCG release of the first printing carrying the new text "
+            f"({version.get('number') or 'unknown number'}, {version.get('dating_set')})"
+        )
+    return merged
 
 
 import re as _re
@@ -172,18 +184,18 @@ def build_change(raw: dict, packet: dict, chronologies: dict) -> dict:
     has_chronology = any(
         effective.get(k) for k in ("date", "old_attested_through", "new_attested_from")
     )
-    if has_chronology:
-        if not evidence:
-            raise DecisionError(f"{kind} change carries chronology but no date_evidence")
+    if evidence:
         ev_kind = evidence.get("kind")
         if ev_kind == "set-release":
-            check_set_release(effective, evidence, packet)
+            effective = apply_set_release(effective, evidence, packet)
         elif ev_kind == "shared-chronology":
             effective = apply_shared(effective, evidence, chronologies)
         elif ev_kind == "external":
             check_external(effective, evidence)
         else:
             raise DecisionError(f"unknown date_evidence kind {ev_kind!r}")
+    elif has_chronology:
+        raise DecisionError(f"{kind} change carries chronology but no date_evidence")
     if not raw.get("summary"):
         raise DecisionError("change needs a summary")
     if not raw.get("sources"):

@@ -5,18 +5,35 @@
     "passcode": 95132338,
     "name": "Aqua Chorus"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
-      "modern_text": "If there are monsters with the same name on the field, those monsters gain 500 ATK/DEF.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era damage-step legality, not a text erratum: the GOAT script gives the activation EFFECT_FLAG_DAMAGE_CAL and no damage-step guard, so this Continuous Spell can be activated inside the damage-calculation substep and its 500 ATK/DEF boost applies to that damage calculation. The modern script uses EFFECT_FLAG_DAMAGE_STEP plus aux.StatChangeDamageStepCondition (utility.lua:1412, 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())'), which bars activation once damage calculation is reached. The printed text says nothing about the window in either version, and no dated source for when the TCG window changed was found, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2023-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the reworded text (SGX3-ENI34, Speed Duel GX: Duelists of Shadows)"
+      },
+      "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
+      "modern_text": "If there are monsters with the same name on the field, those monsters gain 500 ATK/DEF.",
+      "summary": "Wording modernisation only: 'increase the ATK and DEF of all of those monsters with the same name by 500 points' becomes 'those monsters gain 500 ATK/DEF'. The continuous field effect (EFFECT_UPDATE_ATTACK/DEFENSE +500 targeting face-up monsters sharing a name) is identical in both scripts.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +41,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700166,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700166.lua",
+    "script": "goat/c504700166.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The whole goat/modern script diff is the damage-window pair (EFFECT_FLAG_DAMAGE_CAL vs EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition); everything else is byte-identical. I checked whether the GOAT rule profile makes the substitution redundant: data/rule-profiles/tcg-goat.json sets DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP, but damage-step/damage-calculation activation legality in ocgcore is a per-effect property flag (EFFECT_FLAG_DAMAGE_STEP 0x4000 / EFFECT_FLAG_DAMAGE_CAL 0x8000, constant.lua:336-337), not something those duel flags set, so the card substitution is not redundant. The cached ocgcore subset here is headers plus a few .cpp files and does not include the processor sources, so I could not read the flags' implementation directly - stated as a limit, not a doubt about the per-effect flag being card-level. GOAT text (v0, PCK-002, 2004-04-06) matches the goat cdb entry exactly; the only other English version is the 2023 Speed Duel reprint."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

@@ -19,6 +19,17 @@
   "card_pool": "pool-edison-2010",
   "rule_profile": "rules-tcg-mr1-edison",
   "errata_policy": "computed",
+  "errata_overrides": {
+    "unresolved_policy": {
+      "choice": "modern",
+      "reason": "Edison has no reference implementation to reproduce (unlike Goat Format), so where a record's chronology cannot place a change relative to 2010-04-24 this format keeps the MODERN implementation rather than assert unproven period behaviour. Two things justify the conservative direction. First, the community's own definition of Edison-era card behaviour is enumerative: EdisonFormat.com publishes a Functional Errata list of exactly those cards whose 2010 behaviour differs, so a card absent from it has no documented era divergence to reproduce. Second, most unresolved records here are undated 2005-era ruling differences carried by Project Ignis's GOAT variants (damage-step activation windows, miss-timing registration); substituting a GOAT variant on unresolved chronology would assert 2005 behaviour for 2010 without evidence - precisely the inference this project exists to eliminate. Every card the policy is applied to is named individually by the validator (format.erratum-unresolved-defaulted) and counted by 'report', so the residual uncertainty is visible and shrinks as chronology is researched. Records whose chronology IS resolved ignore this policy entirely and select the correct historical version automatically.",
+      "sources": [
+        "edisonformat-functional-errata",
+        "edisonformat-rule-differences",
+        "ignis-cardscripts"
+      ]
+    }
+  },
   "defining_events": [
     {
       "name": "Shonen Jump Championship Edison, New Jersey (75th SJC)",

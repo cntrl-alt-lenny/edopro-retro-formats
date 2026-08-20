@@ -5,18 +5,34 @@
     "passcode": 17655904,
     "name": "Burst Stream of Destruction"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
-      "modern_text": "If you control \"Blue-Eyes White Dragon\": Destroy all monsters your opponent controls. \"Blue-Eyes White Dragon\" you control cannot attack the turn you activate this card.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era activation and restriction package, not a text erratum, spanning three concrete script differences: the GOAT script registers the 'no Blue-Eyes White Dragon can attack' lock at the end of s.activate (resolution) while the modern script registers it in s.cost, so under the era version a negated activation leaves no attack lock at all (upstream comment: 'If effect is negated, restriction doesn't apply'); the era lock omits EFFECT_FLAG_IGNORE_IMMUNE, so a Blue-Eyes immune to this card's effects can still attack ('If monsters are immuned, restruction doesn't apply'); and the era target function short-circuits to true where the modern one requires Duel.IsExistingMatchingCard(...,0,LOCATION_MZONE,1,nil), so the era card can be activated with the opponent controlling no monsters. No dated source for any of the three; chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2018-03-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the current text (LCKC-EN025, Legendary Collection Kaiba Mega Pack)"
+      },
+      "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
+      "modern_text": "If you control \"Blue-Eyes White Dragon\": Destroy all monsters your opponent controls. \"Blue-Eyes White Dragon\" you control cannot attack the turn you activate this card.",
+      "summary": "Wording modernisation across four printings (v2 DTP1-EN013 'Activate only while you control a face-up ...', v3 SDDC-EN025 PSCT colon form, v4 SDBE-EN021 plural 'Dragons' and no 'face-up', v5 LDK2-ENK19, v6 LCKC-EN025 'you control'). Recorded as cosmetic because no script encodes any of it: v6 narrows the attack lock on paper to Blue-Eyes you control, yet both the modern and the GOAT script register EFFECT_CANNOT_ATTACK_ANNOUNCE with SetTargetRange(LOCATION_MZONE,LOCATION_MZONE), i.e. both players' zones, and v4 drops 'face-up' from the activation condition while both scripts still require a face-up Blue-Eyes via aux.FaceupFilter.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +40,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700026,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700026.lua",
+    "script": "goat/c504700026.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CONFLICT preserved rather than resolved: the printed lineage records two changes (v4 dropping 'face-up' in 2013, v6 adding 'you control' in 2018) that upstream's own modern script does not implement, so on the text alone v5->v6 would read as functional while on the script alone there is no difference at all to implement. I recorded it inside the cosmetic entry and flagged it; if the project later decides the printed text governs, v5->v6 should be promoted to functional with effective 2018-03-08 (introduces_version 6) and the baseline still serves every pre-2018 snapshot. Chain starts at v1 (DR2-EN150) because that is the text the goat cdb entry carries exactly, even though its printing (2005-10-20) is about six months after the 2005-04-01 GOAT snapshot; the printing in circulation then is v0 (AST-038, 2004-06-01), which differs only in 'No \"Blue-Eyes White Dragon\" can attack' vs '\"Blue-Eyes White Dragon\" cannot attack' - the same scope, so no era-mismatch flag. I read both scripts in full rather than relying on the diff; the only other differences are goat's missing EFFECT_FLAG_OATH (irrelevant once the lock is registered at resolution) and the RESET_PHASE+PHASE_END vs | spelling."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

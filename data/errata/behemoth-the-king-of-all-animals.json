@@ -5,18 +5,34 @@
     "passcode": 22996376,
     "name": "Behemoth the King of All Animals"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
-      "modern_text": "You can Normal Summon/Set this card with 1 Tribute, but its original ATK becomes 2000. When this card is Tribute Summoned: You can target Beast monsters in your GY equal to the number of monsters Tributed; return those targets to the hand.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era summon-procedure availability, not a text erratum: the GOAT script calls aux.AddNormalSummonProcedure/AddNormalSetProcedure with opt=false and then re-registers the effect as EFFECT_SUMMON_PROC/EFFECT_SET_PROC, which strips the modern gate in aux.NormalSummonCondition1 ('(not opt or (tributes>0 and tributes~=max))', proc_normal.lua:39-50). The era version therefore offers the 1-Tribute/original-ATK-becomes-2000 procedure at any Level (upstream comment: 'Can be summoned with its procedure even if lv6'), while the modern version offers it only when the card's current Level would otherwise demand 2 Tributes, i.e. Level 7 or higher. The Tribute-Summon trigger also differs: goat tests IsSummonType(SUMMON_TYPE_TRIBUTE), modern tests IsTributeSummoned(). No dated source for either difference; chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2020-11-26",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the PSCT text (SBCB-EN052, Speed Duel: Battle City Box)"
+      },
+      "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
+      "modern_text": "You can Normal Summon/Set this card with 1 Tribute, but its original ATK becomes 2000. When this card is Tribute Summoned: You can target Beast monsters in your GY equal to the number of monsters Tributed; return them to the hand.",
+      "summary": "Wording modernisation only (v1 DR3-EN134 trims 'Tribute Monster'/'successfully', v2 SBCB-EN052 is the PSCT rewrite adding the word 'target'). The 'target' wording is not a targeting change: both scripts use Duel.SelectTarget with a chkc branch and neither script's activation effect gains or loses EFFECT_FLAG_CARD_TARGET in the diff.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +40,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700035,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700035.lua",
+    "script": "goat/c504700035.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CONFLICT: the pinned modern cards.cdb text matches no lineage version exactly (best match v2 at ratio 0.8296). It ends with '* The above text is unofficial and describes the card's functionality in the OCG.' and says 'return those targets to the hand' where v2 says 'return them to the hand' - i.e. BabelCDB is carrying an unofficial OCG-functionality text rather than the printed TCG text. The historical side is clean: the goat cdb text matches v0 (FET-EN014, 2005-03-01) exactly. Minor secondary script difference not recorded as its own change: at resolution the modern script re-filters the targets by RACE_BEAST while the goat script returns every target still related to the effect, so a target whose Race changed after targeting behaves differently. The rest of the diff (filter rename thfilter->filter, SetRange/SetReset reordering, LOCATION_MZONE|LOCATION_GRAVE vs +) is inert."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

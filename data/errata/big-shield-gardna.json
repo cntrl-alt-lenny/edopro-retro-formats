@@ -8,15 +8,37 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2009-08-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the reworded text (DL09-EN004, Duelist League 2010 participation cards)"
       },
       "historical_text": "Negate the activation of any Spell Card that targets this 1 face-down monster. At that time, flip this card into face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "modern_text": "When a Spell Card is activated that targets this face-down card (and no other cards) (Quick Effect): Change this card to face-up Defense Position, and if you do, negate the activation. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+      "summary": "Wording modernisation only across two printings (v3 DPYG-EN009 reorders to 'If this 1 face-down card is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position', v4 DL09-EN004 restores 'monster'). The negation is still written as an automatic consequence, not as an activated effect, and the single-target restriction ('this 1 face-down ...') is present throughout.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-05-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd Quick Effect text (BP01-EN176, Battle Pack: Epic Dawn)"
+      },
+      "historical_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+      "modern_text": "During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+      "summary": "Functional erratum: the negation becomes an activated Quick Effect ('During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation'). Before it, the pre-errata script implements the negation as a mandatory continuous effect registered on EVENT_CHAIN_ACTIVATING (upstream comment: 'The negate effect is a continuous effect rather than quick'), so it never goes on the chain, cannot be responded to or negated, and the position change and negation are not conditioned on each other; the modern script uses EFFECT_TYPE_QUICK_F on EVENT_CHAINING and negates only if the position change succeeds.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +46,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 65240394,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c65240394.lua",
+    "script": "official/c65240394.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No goat variant exists; the baseline is the pre-errata variant, whose cdb text matches lineage v2 (CP01-EN006, 2006-11-11) exactly. The 2005-04-01 GOAT snapshot actually falls on v1 (TP5-EN002, 2004-11-01), which differs from v2 only in 'designates' vs 'targets' and 'change the Battle Position of this card' vs 'change it' - behaviourally identical, so the chain starts at v2. Trailing cosmetic after the erratum: v6 (LEDD-ENA12, 2017-10-05) restates the same effect in the '(Quick Effect)' notation. The packet's second upstream entry, 511001595 'Big Shield Gardna (Manga)', is not an artwork variant of this implementation and is not folded in: it is a manga-only card carrying vanilla flavour text ('A legendary shield of a massive size...') with no script at all, and its text matches the lineage at only 0.288. Both scripts already require exactly one target ('#g~=1 then return' / '#tg==1'), so the '(and no other cards)' PSCT clause is not the functional part."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
 }

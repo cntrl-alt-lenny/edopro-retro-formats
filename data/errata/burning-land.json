@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2015-11-12",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENA31, Yugi's Legendary Decks)"
       },
       "historical_text": "Destroy all Field Spell Cards on the field. Inflict 500 points of damage to each player's Life Points during his/her Standby Phase.",
       "modern_text": "When this card is activated: If there are any Field Spell Cards on the field, destroy them. During each player's Standby Phase: The turn player takes 500 damage.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum: 'Destroy all Field Spell Cards on the field.' becomes 'When this card is activated: If there are any Field Spell Cards on the field, destroy them.', turning a standing effect into a one-shot on-activation effect. The GOAT script implements the era reading with two differences the modern script lacks - an activation requirement (its target function returns false unless Duel.GetFieldGroupCount(tp,LOCATION_FZONE,LOCATION_FZONE)>0) and a continuous EVENT_ADJUST field effect in the S/T Zone that destroys any Field Spell appearing later while Burning Land is face-up (upstream comment: 'Requires a field spell to be faceup to be activated, it'll always destroy any field spell').",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700043,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700043.lua",
+    "script": "goat/c504700043.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat cdb text matches v2 (DB1-EN177, 2004-10-12) exactly and the lineage has no English version between v2 (2004) and v3 (2015), so the erratum is dated only by that single printing. Versions v0/v1 (PSV, 2002-10-20) precede the baseline text and differ cosmetically ('Magic' -> 'Spell', 'both players take 500 points of Direct Damage' -> 'Inflict 500 points of damage to each player'). Remaining diff lines are inert: 'EVENT_PHASE+PHASE_STANDBY' equals 'EVENT_PHASE|PHASE_STANDBY', and Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE) covers the same cards as Duel.GetMatchingGroup(aux.TRUE,0,LOCATION_FZONE,LOCATION_FZONE,nil). The packet's second upstream entry, 511002578 'Burning Land (Anime)', is a different card - it destroys only the opponent's Field Spell via EFFECT_SELF_DESTRUCT and applies -700 DEF to the opponent's monsters, with no Standby Phase burn - and is not used. Upstream labels the goat entry's comment 'Burning Land (Pre-Errata)' even though the passcode lives in goat-entries.cdb; that is an upstream naming quirk, not an era claim I could not reconcile."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }
