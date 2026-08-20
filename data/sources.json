@@ -146,6 +146,13 @@
       "reliability_notes": "Primary source for rules-engine behaviour claims."
     },
     {
+      "id": "ude-card-text-updates-archive",
+      "kind": "official",
+      "title": "Upper Deck Entertainment 'Card Text Updates / Errata & Card Text FAQ's' page (Internet Archive captures)",
+      "url": "http://web.archive.org/web/20090220140225/http://entertainment.upperdeck.com/yugioh/en/gameplay/faqs/errata/default.aspx",
+      "notes": "UDE's official running list of TCG card-text corrections and updated texts, per card with the affected printings. A capture attests the OFFICIAL text as of the capture date, which bounds text-change chronology in the UDE era; Yugipedia's Card Errata pages cite this page for several UDE-announced errata (e.g. the XYZ union monsters). Local copy of the 2009-02-20 capture in the research cache; retrieved 2026-08-20."
+    },
+    {
       "id": "yugipedia-card-errata",
       "kind": "wiki",
       "title": "Yugipedia Card Errata pages (Card Errata: namespace, per-language {{Errata table}} text lineages)",

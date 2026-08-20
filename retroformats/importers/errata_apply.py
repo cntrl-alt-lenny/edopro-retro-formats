@@ -119,9 +119,26 @@ def check_set_release(effective: dict, evidence: dict, packet: dict) -> None:
         )
 
 
-def check_external(evidence: dict) -> None:
+import re as _re
+
+_WAYBACK_RE = _re.compile(r"web\.archive\.org/web/(\d{4})(\d{2})(\d{2})\d*")
+
+
+def check_external(effective: dict, evidence: dict) -> None:
     if not evidence.get("url") or not evidence.get("quote"):
         raise DecisionError("external evidence needs url and quote")
+    # An archive capture attests a state ON its capture date - a bound claimed
+    # from it must be exactly that date (other dates need other evidence).
+    m = _WAYBACK_RE.search(str(evidence.get("url")))
+    if m and not effective.get("date"):
+        capture = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+        for field in ("old_attested_through", "new_attested_from"):
+            claimed = effective.get(field)
+            if claimed and claimed != capture:
+                raise DecisionError(
+                    f"{field} {claimed!r} does not equal the cited archive capture "
+                    f"date {capture}; a capture attests only its own date"
+                )
 
 
 def apply_shared(effective: dict, evidence: dict, chronologies: dict) -> dict:
@@ -155,7 +172,7 @@ def build_change(raw: dict, packet: dict, chronologies: dict) -> dict:
         elif ev_kind == "shared-chronology":
             effective = apply_shared(effective, evidence, chronologies)
         elif ev_kind == "external":
-            check_external(evidence)
+            check_external(effective, evidence)
         else:
             raise DecisionError(f"unknown date_evidence kind {ev_kind!r}")
     if not raw.get("summary"):
