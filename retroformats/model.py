@@ -618,6 +618,8 @@ class Format:
     rule_profile_id: str
     errata_include: list[str]
     errata_exclude: list[str]
+    reference_parity: dict[str, Any] | None
+    unresolved_policy: dict[str, Any] | None
     implementation_status: dict[str, str]
     sources: list[str]
     path: Path
@@ -642,6 +644,8 @@ class Format:
             rule_profile_id=str(raw.get("rule_profile", "")),
             errata_include=list(overrides.get("include", [])),
             errata_exclude=list(overrides.get("exclude", [])),
+            reference_parity=overrides.get("reference_parity"),
+            unresolved_policy=overrides.get("unresolved_policy"),
             implementation_status=dict(raw.get("implementation_status", {})),
             sources=list(raw.get("sources", [])),
             path=path,

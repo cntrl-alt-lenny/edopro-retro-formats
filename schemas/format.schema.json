@@ -45,11 +45,36 @@
     },
     "errata_overrides": {
       "type": "object",
-      "description": "Explicit corrections to the computed erratum selection, used while change dates are still unresearched or when a source establishes format-specific applicability (e.g. a reference implementation). Dated errata should eventually make include entries unnecessary.",
+      "description": "How this format resolves historical card behaviour beyond what each erratum record's chronology decides on its own. Per-card include/exclude entries are adjudications of last resort; the two policies below express, once and with sources, the standing decisions that would otherwise become giant hand-maintained lists.",
       "additionalProperties": false,
       "properties": {
-        "include": { "type": "array", "items": { "type": "string" }, "description": "erratum ids whose historical version applies in this format regardless of (missing) dates." },
-        "exclude": { "type": "array", "items": { "type": "string" } },
+        "include": { "type": "array", "items": { "type": "string" }, "description": "erratum ids whose BASELINE historical version applies in this format regardless of (missing) chronology. A per-card adjudication: the validator reports entries that computed selection already agrees with (removable) and entries that contradict it (documented deviations)." },
+        "exclude": { "type": "array", "items": { "type": "string" }, "description": "erratum ids this format deliberately does NOT substitute, keeping the modern implementation. Document why in the format notes." },
+        "reference_parity": {
+          "type": "object",
+          "required": ["reason", "sources"],
+          "additionalProperties": false,
+          "description": "This format is DEFINED by reproducing an existing reference implementation, so it substitutes the upstream historical version of every card that has one — that is what the reference list does, and staying entry-for-entry identical to it is the point. Replaces a per-card include list with one sourced statement. Where our own researched chronology disagrees with the reference (it would pick the modern card, or the record is cosmetic), the validator warns per card so the divergence stays visible instead of hiding inside a list.",
+          "properties": {
+            "reason": { "type": "string" },
+            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+          }
+        },
+        "unresolved_policy": {
+          "type": "object",
+          "required": ["choice", "reason", "sources"],
+          "additionalProperties": false,
+          "description": "What this format does when a record's chronology is genuinely ambiguous at its snapshot. WITHOUT this, ambiguity is a hard error (the fail-safe default): selection never guesses. WITH it, the format states one sourced decision and the validator names every card it was applied to, so the choice is explicit and auditable rather than silent.",
+          "properties": {
+            "choice": {
+              "type": "string",
+              "enum": ["modern", "historical"],
+              "description": "modern: keep the modern implementation (conservative — claims no unproven historical behaviour). historical: use the baseline historical implementation."
+            },
+            "reason": { "type": "string" },
+            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+          }
+        },
         "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
       }
     },

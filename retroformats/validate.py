@@ -636,10 +636,75 @@ class Validator:
                     fmt.path,
                     f"errata_overrides references unknown erratum id {ref!r}",
                 )
+        overrides = fmt.raw.get("errata_overrides") or {}
+        for key, policy in (
+            ("reference_parity", fmt.reference_parity),
+            ("unresolved_policy", fmt.unresolved_policy),
+        ):
+            if not policy:
+                continue
+            if not policy.get("reason"):
+                self.error("format.policy-unjustified", fmt.path, f"{key}.reason is required")
+            if not policy.get("sources"):
+                self.error("format.policy-unjustified", fmt.path, f"{key}.sources is required")
+            else:
+                self._check_sources(list(policy["sources"]), fmt.path, fmt.id, key)
+        if fmt.unresolved_policy and fmt.unresolved_policy.get("choice") not in (
+            "modern",
+            "historical",
+        ):
+            self.error(
+                "format.bad-unresolved-policy",
+                fmt.path,
+                f"unresolved_policy.choice {fmt.unresolved_policy.get('choice')!r}",
+            )
+        if fmt.reference_parity and fmt.errata_include:
+            self.warn(
+                "format.parity-with-include-list",
+                fmt.path,
+                f"reference_parity already substitutes every record with a baseline "
+                f"historical implementation; the {len(fmt.errata_include)} include "
+                "entries are redundant",
+            )
+        if snapshot and fmt.reference_parity:
+            # Parity is the format's definition, but where our own research
+            # disagrees with the reference the divergence must stay visible.
+            for erratum in self.repo.errata.values():
+                if erratum.id in fmt.errata_exclude:
+                    continue
+                if erratum.implementation.get("strategy") not in (
+                    "reuse-upstream",
+                    "custom-script",
+                ) or not erratum.implementation.get("historical_passcode"):
+                    continue
+                if erratum.review_status != "reviewed":
+                    continue
+                if not erratum.relevant_changes():
+                    self.warn(
+                        "format.parity-substitutes-non-behavioural",
+                        fmt.path,
+                        f"{erratum.modern_card.name}: reference parity substitutes the "
+                        f"upstream variant, but the record finds no functional or ruling "
+                        f"change ({erratum.classification}) - the reference ships it for "
+                        "period text, not behaviour",
+                    )
+                    continue
+                selection = erratum.selection_at(snapshot)
+                if selection.state == "modern" and selection.version_index is not None:
+                    self.warn(
+                        "format.parity-contradicts-chronology",
+                        fmt.path,
+                        f"{erratum.modern_card.name}: reference parity substitutes the "
+                        f"upstream variant, but this record's chronology says the modern "
+                        f"card was already in force at {snapshot}",
+                    )
+
         if snapshot:
             for erratum in self.repo.errata.values():
                 if not erratum.relevant_changes():
                     continue
+                if fmt.reference_parity:
+                    continue  # parity governs; disagreements reported above
                 excluded = erratum.id in fmt.errata_exclude
                 included = erratum.id in fmt.errata_include and not excluded
                 if erratum.review_status != "reviewed":
@@ -688,14 +753,27 @@ class Validator:
                         )
                     continue
                 if selection.state == "ambiguous":
-                    self.error(
-                        "format.erratum-ambiguous",
-                        fmt.path,
-                        f"{erratum.id}: effective chronology is ambiguous at snapshot "
-                        f"{snapshot} (changes {list(selection.ambiguous_changes)}); narrow "
-                        "the chronology or adjudicate with a documented "
-                        "errata_overrides include/exclude — selection will not guess",
-                    )
+                    policy = fmt.unresolved_policy or {}
+                    if policy.get("choice") in ("modern", "historical"):
+                        # Explicit, sourced, and named per card: the choice is
+                        # auditable rather than silent.
+                        self.warn(
+                            "format.erratum-unresolved-defaulted",
+                            fmt.path,
+                            f"{erratum.modern_card.name}: chronology ambiguous at "
+                            f"{snapshot}; resolved as {policy['choice']!r} by this "
+                            "format's documented unresolved_policy",
+                        )
+                    else:
+                        self.error(
+                            "format.erratum-ambiguous",
+                            fmt.path,
+                            f"{erratum.id}: effective chronology is ambiguous at snapshot "
+                            f"{snapshot} (changes {list(selection.ambiguous_changes)}); "
+                            "narrow the chronology, adjudicate with a documented "
+                            "errata_overrides include/exclude, or state an "
+                            "errata_overrides.unresolved_policy — selection will not guess",
+                        )
                 elif selection.state == "gap":
                     gap = selection.acknowledged_gap
                     if gap:

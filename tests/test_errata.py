@@ -332,6 +332,151 @@ class FormatSelectionTest(TempRepoTest):
         self.assertNotIn(510000000, built.entries)
 
 
+class FormatPolicyTest(TempRepoTest):
+    """The two standing decisions a format may state instead of maintaining a
+    per-card list: reproducing a reference implementation, and how to resolve
+    genuinely ambiguous chronology."""
+
+    def _seed(self, **erratum_kw):
+        self.add_card_index(
+            [
+                card(100, "Alpha"),
+                card(200, "Beta"),
+                card(300, "Gamma"),
+                card(510000000, "Beta (Pre-Errata)", alias_of=200, ot=8),
+            ]
+        )
+        self.add_banlist(entries=[{"card": card(200, "Beta"), "status": "limited"}])
+        self.add_pool(cards=[card(100, "Alpha"), card(200, "Beta"), card(300, "Gamma")])
+        self.add_rule_profile()
+        self.add_erratum(**erratum_kw)
+
+    PARITY = {
+        "reason": "this format reproduces an existing reference implementation",
+        "sources": ["test-source"],
+    }
+
+    def test_reference_parity_substitutes_without_any_include_list(self):
+        self._seed(review="reviewed", changes=[change(date=None)])  # ambiguous
+        self.add_format(errata_overrides={"reference_parity": self.PARITY})
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(510000000, built.entries)
+        self.assertNotIn(200, built.entries)
+        validator = Validator(repo)
+        validator.validate()
+        self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+
+    def test_reference_parity_substitutes_cosmetic_records_but_says_so(self):
+        # The reference ships a period-text variant of a behaviourally equal
+        # card: parity keeps it (that IS the reference), and warns.
+        self._seed(
+            review="reviewed",
+            classification="cosmetic",
+            changes=[change(kind="cosmetic", date="2011-07-01")],
+        )
+        self.add_format(errata_overrides={"reference_parity": self.PARITY})
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(510000000, built.entries)
+        validator = Validator(repo)
+        validator.validate()
+        self.assertIn(
+            "format.parity-substitutes-non-behavioural", {f.code for f in validator.warnings}
+        )
+
+    def test_reference_parity_warns_when_chronology_disagrees(self):
+        # Change dated before the snapshot: our research says the modern card
+        # was already in force, but the reference still ships the variant.
+        self._seed(review="reviewed", changes=[change(date="2004-01-01")])
+        self.add_format(errata_overrides={"reference_parity": self.PARITY})
+        validator = Validator(Repository.load(self.root))
+        validator.validate()
+        self.assertIn(
+            "format.parity-contradicts-chronology", {f.code for f in validator.warnings}
+        )
+
+    def test_reference_parity_respects_explicit_excludes(self):
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format(
+            errata_overrides={"reference_parity": self.PARITY, "exclude": ["erratum-beta"]}
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(200, built.entries)
+        self.assertNotIn(510000000, built.entries)
+
+    def test_reference_parity_requires_reason_and_sources(self):
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format(errata_overrides={"reference_parity": {"reason": "", "sources": []}})
+        validator = Validator(Repository.load(self.root))
+        validator.validate()
+        self.assertIn("format.policy-unjustified", {f.code for f in validator.errors})
+
+    def test_unresolved_policy_modern_keeps_modern_and_names_each_card(self):
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format(
+            errata_overrides={
+                "unresolved_policy": {
+                    "choice": "modern",
+                    "reason": "no reference implementation exists for this format",
+                    "sources": ["test-source"],
+                }
+            }
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(200, built.entries)
+        self.assertNotIn(510000000, built.entries)
+        validator = Validator(repo)
+        validator.validate()
+        self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+        warned = [
+            f for f in validator.warnings if f.code == "format.erratum-unresolved-defaulted"
+        ]
+        self.assertEqual(1, len(warned))
+        self.assertIn("Beta", warned[0].message)
+
+    def test_unresolved_policy_historical_substitutes(self):
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format(
+            errata_overrides={
+                "unresolved_policy": {
+                    "choice": "historical",
+                    "reason": "period behaviour is the default for this era",
+                    "sources": ["test-source"],
+                }
+            }
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(510000000, built.entries)
+
+    def test_without_a_policy_ambiguity_is_still_a_hard_error(self):
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format()
+        validator = Validator(Repository.load(self.root))
+        validator.validate()
+        self.assertIn("format.erratum-ambiguous", {f.code for f in validator.errors})
+
+    def test_policy_does_not_override_resolved_chronology(self):
+        # A dated change is not ambiguous: the policy must not touch it.
+        self._seed(review="reviewed", changes=[change(date="2015-07-16")])
+        self.add_format(
+            errata_overrides={
+                "unresolved_policy": {
+                    "choice": "modern",
+                    "reason": "conservative default",
+                    "sources": ["test-source"],
+                }
+            }
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(510000000, built.entries)  # chronology wins
+        self.assertNotIn(200, built.entries)
+
+
 class FormatValidationTest(TempRepoTest):
     def _seed(self, **erratum_kw):
         self.add_card_index(

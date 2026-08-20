@@ -132,30 +132,55 @@ class ErrataSelectionError(ValueError):
         self.problems = problems
 
 
+def baseline_override(erratum: Erratum) -> dict | None:
+    """The erratum's baseline historical implementation, when it is usable as
+    a substitution (an upstream or custom historical passcode)."""
+    impl = erratum.implementation
+    if impl.get("strategy") in ("reuse-upstream", "custom-script") and impl.get(
+        "historical_passcode"
+    ):
+        return impl
+    return None
+
+
 def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, SelectedOverride]:
     """{modern passcode: selected override} for every historical substitution
     active in fmt, computed fail-safe from each record's chronology.
 
-    - Explicit excludes always win (the format keeps the modern card).
-    - Explicit includes pin the BASELINE version (used while chronology is
-      unresearched, and for documented community-semantics deviations).
-    - Otherwise, REVIEWED records select the version whose era contains the
-      snapshot; an ambiguous or implementation-less selection raises
-      ErrataSelectionError rather than silently choosing. Imported
-      (not-yet-reviewed) records never apply computationally — the historical
-      substitution is opt-in via include until a review lands.
+    Resolution order per record:
+
+    1. an explicit `exclude` wins outright (the format keeps the modern card);
+    2. an explicit `include` pins the BASELINE version — a per-card
+       adjudication of last resort;
+    3. `reference_parity`: the format is defined by reproducing an existing
+       reference implementation, so every record with a baseline historical
+       implementation is substituted (that is what the reference list does);
+    4. otherwise the record's own chronology decides, and only for REVIEWED
+       records — an imported record never applies computationally, so a
+       mechanically-guessed import cannot quietly change a format;
+    5. ambiguity resolves through `unresolved_policy` when the format states
+       one, and is a hard error otherwise. Selection never guesses silently.
     """
     selected: dict[int, SelectedOverride] = {}
     problems: list[str] = []
     snapshot = _dt.date.fromisoformat(fmt.snapshot) if fmt.snapshot else None
+    parity = fmt.reference_parity
+    policy = (fmt.unresolved_policy or {}).get("choice")
+
     for erratum in repo.errata.values():
         if erratum.id in fmt.errata_exclude:
             continue
         if erratum.id in fmt.errata_include:
-            impl = erratum.implementation
-            if impl.get("strategy") in ("reuse-upstream", "custom-script") and impl.get(
-                "historical_passcode"
-            ):
+            impl = baseline_override(erratum)
+            if impl is not None:
+                selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
+            continue
+        if parity:
+            # Reproducing the reference implementation is the format's
+            # definition; disagreements with our chronology are reported by
+            # the validator rather than silently changing the output.
+            impl = baseline_override(erratum)
+            if impl is not None:
                 selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
             continue
         if snapshot is None or not erratum.relevant_changes():
@@ -168,11 +193,19 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
                 erratum, selection.implementation
             )
         elif selection.state == "ambiguous":
-            problems.append(
-                f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
-                "(adjudicate with a documented errata_overrides include/exclude, "
-                "or narrow the change's effective chronology)"
-            )
+            if policy == "historical":
+                impl = baseline_override(erratum)
+                if impl is not None:
+                    selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
+            elif policy == "modern":
+                pass  # documented conservative default; validator names each card
+            else:
+                problems.append(
+                    f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
+                    "(narrow the change's effective chronology, adjudicate with a "
+                    "documented errata_overrides include/exclude, or state an "
+                    "errata_overrides.unresolved_policy)"
+                )
         elif selection.state == "gap" and not selection.acknowledged_gap:
             problems.append(
                 f"{erratum.id}: version {selection.version_index} applies at {snapshot} "
