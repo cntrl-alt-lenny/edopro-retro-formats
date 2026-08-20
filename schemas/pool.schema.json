@@ -84,6 +84,11 @@
         }
       }
     },
+    "legality_basis": {
+      "type": "string",
+      "enum": ["availability", "historical-policy", "community-retrospective"],
+      "description": "What this pool CLAIMS to be. Release events record physical availability; a pool is a LEGALITY POLICY over them, and the two are distinct concepts. availability: the pure derivation - every card physically obtainable in the scoped territories by the cutoff, no tournament-policy claim. historical-policy: reconstructs what period tournament policy actually permitted at a specific time/jurisdiction (requires period policy evidence for its exceptions). community-retrospective: follows the modern community's convention for a retrospectively-defined format (sourced to the community's own references); may deliberately differ from what was registerable at the historical event the format is named for."
+    },
     "completeness": { "$ref": "common.schema.json#/$defs/implementationStatus" },
     "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
     "notes": { "type": "string" }

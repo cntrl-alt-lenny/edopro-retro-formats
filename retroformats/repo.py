@@ -16,6 +16,7 @@ from .model import (
     Pool,
     Product,
     ReleaseCoverage,
+    ReleaseGap,
     RuleProfile,
     Source,
 )
@@ -53,6 +54,8 @@ class Repository:
     card_index: CardIndex = field(default_factory=CardIndex)
     products: dict[str, Product] = field(default_factory=dict)
     release_coverage: ReleaseCoverage | None = None
+    release_gaps: list[ReleaseGap] = field(default_factory=list)
+    import_report: dict[str, Any] = field(default_factory=dict)
     load_errors: list[DataError] = field(default_factory=list)
 
     @classmethod
@@ -104,6 +107,22 @@ class Repository:
                 coverage_path,
                 lambda raw, p: setattr(repo, "release_coverage", ReleaseCoverage.load(raw, p)),
             )
+
+        gaps_path = root / "data" / "releases" / "gaps.json"
+        if gaps_path.exists():
+            try_load(
+                gaps_path,
+                lambda raw, p: repo.release_gaps.extend(
+                    ReleaseGap.load(g, p) for g in raw.get("gaps", [])
+                ),
+            )
+
+        # The import report is a generated artifact, but the validator uses it
+        # to prove that every anomaly the importer detected is accounted for
+        # in the gap ledger.
+        report_path = root / "data" / "imported" / "releases-report.json"
+        if report_path.exists():
+            try_load(report_path, lambda raw, p: repo.import_report.update(raw))
 
         return repo
 

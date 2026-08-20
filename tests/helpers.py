@@ -156,6 +156,37 @@ class TempRepoTest(unittest.TestCase):
         self.write("data/releases/coverage.json", payload)
         return payload
 
+    def add_gaps(self, *gaps):
+        self.write(
+            "data/releases/gaps.json",
+            {"gaps": list(gaps), "sources": ["test-source"]},
+        )
+
+    def add_import_report(self, **kw):
+        # stats default to the products currently on disk so the validator's
+        # report-staleness binding passes; call AFTER add_product().
+        import json as _json
+
+        generated = curated = 0
+        products_dir = self.root / "data" / "releases" / "products"
+        if products_dir.is_dir():
+            for path in products_dir.glob("*.json"):
+                if _json.loads(path.read_text()).get("curated"):
+                    curated += 1
+                else:
+                    generated += 1
+        payload = {
+            "importer": "test",
+            "stats": {"products_written": generated, "curated_preserved": curated},
+            "yugipedia_only_products": [],
+            "products_without_printings": [],
+            "curated_covered_products": [],
+            "unmatched_cards": [],
+        }
+        payload.update(kw)
+        self.write("data/imported/releases-report.json", payload)
+        return payload
+
     def add_cutoff_pool(self, id="pool-cut", cutoff_date="2005-06-01", cards=None, **cutoff_kw):
         payload = {
             "id": id,
@@ -188,3 +219,18 @@ def printing(passcode: int, name: str, number: str | None = None, **kw):
         row["numbers"] = [number]
     row.update(kw)
     return row
+
+
+def gap(id="gap-test", **kw):
+    record = {
+        "id": id,
+        "kind": "missing-product-printings",
+        "subjects": ["Test Missing Product"],
+        "territories": ["tcg-na"],
+        "possible_from": "2005-03-01",
+        "status": "unresolved",
+        "impact": "pool-membership",
+        "sources": ["test-source"],
+    }
+    record.update(kw)
+    return record

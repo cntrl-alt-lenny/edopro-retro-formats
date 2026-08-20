@@ -80,8 +80,7 @@ def parse_smw_raw(raw: str) -> tuple[str, str] | None:
     return date, precision
 
 
-def normalise_name(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "", name.casefold())
+from ..model import normalise_name  # noqa: E402  (shared with the validator)
 
 
 def product_kind(name: str, set_type: str | None) -> str:
@@ -174,14 +173,25 @@ def merge_yugipedia(per_property: dict[str, dict]) -> dict[str, dict]:
     return merged
 
 
-def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tuple[list[dict], dict]:
-    """Pure normalisation: (product records sorted by id, report)."""
+def build_products(
+    cache_data: dict,
+    cdb: dict[int, dict],
+    through: str,
+    curated_names: set[str] | None = None,
+) -> tuple[list[dict], dict]:
+    """Pure normalisation: (product records sorted by id, report).
+
+    curated_names: normalised names of curated product records already in the
+    dataset - excluded from the yugipedia-only gap report since their rosters
+    are covered."""
+    curated_names = curated_names or set()
     report: dict = {
         "unmatched_cards": [],
         "name_mismatches": [],
         "date_discrepancies": [],
         "products_without_printings": [],
         "yugipedia_only_products": [],
+        "curated_covered_products": [],
         "skipped_products": [],
         "non_playable_skipped": 0,
         "prefix_mismatched_printings": 0,
@@ -305,6 +315,12 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
     for title, entry in yugipedia.items():
         if title in matched_titles or not entry["dates"]:
             continue
+        if normalise_name(title) in curated_names:
+            # Roster recovered into a curated product record. Reported under
+            # its own key - and still requiring a gap-ledger record - so a
+            # name-matching curated stub cannot silently erase the anomaly.
+            report["curated_covered_products"].append(title)
+            continue
         parsed = [bounds(iso, precision) for iso, precision in entry["dates"].values()]
         earliest = min(lo for lo, _ in parsed).isoformat()
         latest = max(hi for _, hi in parsed).isoformat()
@@ -394,6 +410,7 @@ def build_products(cache_data: dict, cdb: dict[int, dict], through: str) -> tupl
     report["date_discrepancies"].sort(key=lambda r: r["product"])
     report["products_without_printings"].sort()
     report["yugipedia_only_products"].sort()
+    report["curated_covered_products"].sort()
     report["skipped_products"].sort(key=lambda r: r["product"])
     report["ot_conflicts"].sort(key=lambda r: r["passcode"])
     return records, report
@@ -405,14 +422,38 @@ def run(cache: Path, babelcdb: Path, root: Path, through: str) -> int:
         print("cache has no yugipedia/products_*.json; run fetch_release_sources first", file=sys.stderr)
         return 1
     cdb = read_cdb(babelcdb / "cards.cdb")
-    records, report = build_products(cache_data, cdb, through)
 
+    # Curated product records (hand-recovered rosters, marked "curated": true)
+    # are preserved across re-imports and take precedence over generated ones.
     products_dir = root / "data" / "releases" / "products"
     products_dir.mkdir(parents=True, exist_ok=True)
+    curated_names: set[str] = set()
+    curated_ids: set[str] = set()
+    for path in sorted(products_dir.glob("*.json")):
+        existing = json.loads(path.read_text(encoding="utf-8"))
+        if existing.get("curated"):
+            curated_names.add(normalise_name(str(existing.get("name", ""))))
+            curated_ids.add(str(existing.get("id", "")))
+
+    records, report = build_products(
+        cache_data, cdb, through, curated_names=curated_names
+    )
+
     for stale in products_dir.glob("*.json"):
-        stale.unlink()
+        existing = json.loads(stale.read_text(encoding="utf-8"))
+        if not existing.get("curated"):
+            stale.unlink()
+    written = 0
     for record in records:
+        if record["id"] in curated_ids:
+            report["skipped_products"].append(
+                {"product": record["name"], "reason": "a curated record with this id exists"}
+            )
+            continue
         write_json(products_dir / f"{record['id']}.json", record)
+        written += 1
+    report["generated_products_written"] = written
+    report["curated_products_preserved"] = len(curated_ids)
 
     coverage = {
         "$schema": "../../schemas/releases-coverage.schema.json",
@@ -446,7 +487,8 @@ def run(cache: Path, babelcdb: Path, root: Path, through: str) -> int:
     write_json(root / "data" / "releases" / "coverage.json", coverage)
 
     stats = {
-        "products": len(records),
+        "products_written": report.get("generated_products_written", len(records)),
+        "curated_preserved": report.get("curated_products_preserved", 0),
         "printings": sum(len(r["printings"]) for r in records),
         "release_events": sum(len(r["release_events"]) for r in records),
         "unmatched_cards": len(report["unmatched_cards"]),

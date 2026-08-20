@@ -18,6 +18,10 @@
       "pattern": "^[A-Z0-9][A-Za-z0-9-]{1,15}$",
       "description": "The product's set-code prefix as printed on its cards (ABPF, SDMM, JUMP, SJCS...). NOT unique across products."
     },
+    "curated": {
+      "type": "boolean",
+      "description": "True for hand-maintained records (e.g. rosters recovered for products the bulk sources lack). The importer preserves curated files across re-imports and they take precedence over generated records with the same id. Curated records need the same provenance rigour as everything else."
+    },
     "name": { "type": "string", "minLength": 1 },
     "kind": {
       "type": "string",

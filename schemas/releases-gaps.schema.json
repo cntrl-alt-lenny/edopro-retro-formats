@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/releases-gaps.schema.json",
+  "title": "Release-data gap ledger",
+  "description": "Curated records accounting for every known hole in the release dataset. Coverage certification is EARNED through this ledger: a coverage window may only claim complete/verified - and a cutoff pool may only materialise - when no unresolved pool-impacting gap could alter card availability within the claimed range/scope. The validator cross-checks this ledger against the import report (nothing detected may go unaccounted) and mechanically verifies resolutions where possible (a cards-available-earlier claim is recomputed against the dataset, not trusted).",
+  "type": "object",
+  "required": ["gaps", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "subjects", "territories", "possible_from", "status", "impact", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^gap-[a-z0-9-]+$" },
+          "kind": {
+            "type": "string",
+            "enum": ["missing-product-printings", "unmatched-cards", "undated-availability", "other"],
+            "description": "missing-product-printings: a dated product exists (per an external source) but the dataset has no roster for it. unmatched-cards: printings whose cards could not be resolved to canonical passcodes. undated-availability: printings known but every date unresearched."
+          },
+          "subjects": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" },
+            "description": "What the gap is about, matching the import report's entries verbatim (product titles for missing-product-printings, card names for unmatched-cards) so the validator can prove every detected anomaly is accounted for."
+          },
+          "territories": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "common.schema.json#/$defs/territory" }
+          },
+          "possible_from": {
+            "$ref": "common.schema.json#/$defs/isoDate",
+            "description": "The earliest date the missing availability could begin (padded to the 1st for coarse precision). A gap is relevant to a cutoff when its earliest possible date is on or before that cutoff."
+          },
+          "date_precision": { "type": "string", "enum": ["day", "month", "year"], "default": "day" },
+          "status": {
+            "type": "string",
+            "enum": ["unresolved", "resolved-safe", "resolved-imported"],
+            "description": "unresolved: blocks coverage certification for overlapping cutoffs/scopes. resolved-safe: investigated and proven unable to alter any pool (resolution required, mechanically checked where possible). resolved-imported: the missing data was recovered and imported (resolution.product required)."
+          },
+          "impact": {
+            "type": "string",
+            "enum": ["pool-membership", "provenance-only"],
+            "description": "pool-membership: could change which cards a cutoff pool contains - gates certification. provenance-only: affects source quality but not membership."
+          },
+          "resolution": {
+            "type": "object",
+            "required": ["rationale", "detail", "sources"],
+            "additionalProperties": false,
+            "properties": {
+              "rationale": {
+                "type": "string",
+                "enum": ["no-playable-cards", "cards-available-earlier", "repackaging-only", "roster-imported"],
+                "description": "no-playable-cards: the subject contains nothing tournament-playable (tokens, passcode-less one-off prizes, non-game items). cards-available-earlier: every playable card was already available on or before the gap's earliest possible date via products in the dataset - cards[] is required and the validator RECOMPUTES each claim. repackaging-only: the subject only rebundles products already in the dataset (plus at most non-playable inserts) and introduces no new printings - products[] is required and the validator checks each id resolves; the temporal argument (a bundle cannot precede its contents' retail release) must be stated in detail with sources. roster-imported: the roster was recovered into a curated product record - product is required."
+              },
+              "detail": { "type": "string", "minLength": 1 },
+              "cards": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["passcode", "name"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "passcode": { "$ref": "common.schema.json#/$defs/passcode" },
+                    "name": { "type": "string" },
+                    "note": { "type": "string" }
+                  }
+                }
+              },
+              "product": { "type": "string", "description": "For roster-imported: the (curated) product id now carrying the roster." },
+              "products": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" },
+                "description": "For repackaging-only: the dataset product ids the subject rebundles."
+              },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          },
+          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+  }
+}

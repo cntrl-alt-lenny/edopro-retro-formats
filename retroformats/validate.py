@@ -16,8 +16,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .model import (
+    AVAILABILITY_KINDS,
     EVENT_KINDS,
     EVENT_STATUSES,
+    GAP_IMPACTS,
+    GAP_KINDS,
+    GAP_RATIONALES,
+    GAP_STATUSES,
     IMPLEMENTATION_STATUSES,
     PRECISIONS,
     PRODUCT_KINDS,
@@ -26,6 +31,8 @@ from .model import (
     Banlist,
     Format,
     Pool,
+    normalise_name,
+    territory_matches_scope,
 )
 from .releases import ReleaseIndex, default_scope, evaluate_cutoff
 from .repo import Repository
@@ -41,6 +48,7 @@ _ERRATUM_ID_RE = re.compile(r"^erratum-[a-z0-9-]+$")
 _FLAG_RE = re.compile(r"^DUEL_[A-Z0-9_]+$")
 _PRODUCT_CODE_RE = re.compile(r"^[A-Z0-9][A-Za-z0-9-]{1,15}$")
 _PRODUCT_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,79}$")
+_GAP_ID_RE = re.compile(r"^gap-[a-z0-9-]+$")
 
 
 @dataclass(frozen=True)
@@ -140,6 +148,9 @@ class Validator:
         if pool.region not in ("TCG", "OCG", "Worldwide"):
             # An unknown region would silently widen default territory scoping.
             self.error("pool.bad-region", pool.path, f"region {pool.region!r}")
+        basis = pool.raw.get("legality_basis")
+        if basis is not None and basis not in ("availability", "historical-policy", "community-retrospective"):
+            self.error("pool.bad-legality-basis", pool.path, f"legality_basis {basis!r}")
         if pool.kind == "extensional":
             if not pool.cards:
                 self.error("pool.empty", pool.path, "extensional pool has no cards")
@@ -576,6 +587,315 @@ class Validator:
                         "the card cannot enter any release-cutoff pool until one is dated",
                     )
 
+    def _validate_gaps(self) -> None:
+        """The gap ledger must be structurally sound, its resolutions must be
+        justified - and mechanically verified where possible - and every
+        anomaly the importer detected must be accounted for. Certification
+        inputs (the import report, the ledger) must themselves be present and
+        current whenever anything consumes certification."""
+        gaps = self.repo.release_gaps
+        coverage = self.repo.release_coverage
+        report = self.repo.import_report
+        gaps_location = "data/releases/gaps.json"
+
+        # -- certification consumers demand certification inputs -------------
+        consumers = bool(
+            coverage is not None
+            and any(w.get("status") in ("complete", "verified") for w in coverage.windows)
+        ) or any(
+            p.kind == "release-cutoff" and p.raw.get("cards") for p in self.repo.pools.values()
+        )
+        if consumers and not report:
+            self.error(
+                "coverage.no-import-report",
+                "data/imported/releases-report.json",
+                "coverage claims completeness (or a materialised pool exists) but the "
+                "import report is absent - anomaly accounting cannot be checked, so "
+                "certification cannot be defended",
+            )
+        if report:
+            # bind the committed report to the committed dataset so a stale or
+            # hand-edited report cannot vouch for anomalies it no longer reflects
+            stats = report.get("stats", {}) or {}
+            generated = sum(1 for p in self.repo.products.values() if not p.raw.get("curated"))
+            curated = len(self.repo.products) - generated
+            if (
+                stats.get("products_written") != generated
+                or stats.get("curated_preserved") != curated
+            ):
+                self.error(
+                    "coverage.report-stale",
+                    "data/imported/releases-report.json",
+                    f"import report stats (written={stats.get('products_written')}, "
+                    f"curated={stats.get('curated_preserved')}) do not match the dataset "
+                    f"(generated={generated}, curated={curated}); re-run the importer",
+                )
+
+        if not gaps and not report and coverage is None:
+            return
+
+        mechanical_ok = not self._release_data_has_errors()
+        if gaps and not mechanical_ok:
+            self.warn(
+                "gaps.not-cross-checked",
+                gaps_location,
+                "resolution recomputation skipped while the release data has structural errors",
+            )
+        seen_ids: set[str] = set()
+        availability_index: ReleaseIndex | None = None
+
+        def canonical(passcode: int) -> int:
+            row = self.repo.card_index.by_passcode.get(passcode)
+            alias = row.get("alias_of") if row else None
+            if alias and abs(int(alias) - passcode) < 10:
+                return int(alias)
+            return passcode
+
+        def provable_by(passcode: int, day, scope: frozenset[str]):
+            """The earliest date the card is PROVABLY available within `scope`
+            (min over scoped availability events of each event's latest bound).
+            Returns None when nothing proves availability."""
+            nonlocal availability_index
+            if availability_index is None:
+                availability_index = ReleaseIndex.build(self.repo)
+            availability = availability_index.by_canonical.get(passcode)
+            if not availability:
+                return None
+            bounds = [
+                ref.event.bounds()[1]
+                for ref in availability.events
+                if territory_matches_scope(ref.event.territory, scope)
+            ]
+            return min(bounds) if bounds else None
+
+        for gap in gaps:
+            path = gap.path
+            if not _GAP_ID_RE.match(gap.id):
+                self.error("gaps.bad-id", path, f"gap id {gap.id!r}")
+            if gap.id in seen_ids:
+                self.error("gaps.duplicate-id", path, f"gap id {gap.id!r} appears twice")
+            seen_ids.add(gap.id)
+            if gap.kind not in GAP_KINDS:
+                self.error("gaps.bad-kind", path, f"{gap.id}: kind {gap.kind!r}")
+            if gap.status not in GAP_STATUSES:
+                self.error("gaps.bad-status", path, f"{gap.id}: status {gap.status!r}")
+            if gap.impact not in GAP_IMPACTS:
+                self.error("gaps.bad-impact", path, f"{gap.id}: impact {gap.impact!r}")
+            elif gap.kind in ("missing-product-printings", "unmatched-cards", "undated-availability") and gap.impact != "pool-membership":
+                self.error(
+                    "gaps.bad-impact",
+                    path,
+                    f"{gap.id}: kind {gap.kind} is a pool-membership question by definition; "
+                    "impact provenance-only would let the anomaly bypass certification unexamined",
+                )
+            if not gap.subjects:
+                self.error("gaps.no-subjects", path, f"{gap.id}: subjects[] is empty")
+            if not gap.territories:
+                self.error(
+                    "gaps.no-territories",
+                    path,
+                    f"{gap.id}: territories[] is empty (blocks() treats this as everywhere, "
+                    "but the record must say where the gap applies)",
+                )
+            for territory in gap.territories:
+                if territory not in TERRITORIES:
+                    self.error("gaps.bad-territory", path, f"{gap.id}: territory {territory!r}")
+            if gap.date_precision not in PRECISIONS:
+                self.error("gaps.bad-precision", path, f"{gap.id}: date_precision {gap.date_precision!r}")
+            if self._date(gap.possible_from) is None:
+                self.error("gaps.bad-date", path, f"{gap.id}: possible_from {gap.possible_from!r}")
+            self._check_sources(gap.sources, path, None, f"gap {gap.id}")
+
+            if gap.status == "unresolved":
+                if gap.resolution:
+                    self.error(
+                        "gaps.resolution-unexpected",
+                        path,
+                        f"{gap.id}: unresolved gaps must not carry a resolution",
+                    )
+                continue
+
+            # resolved-*: the claim must be justified and, where possible, proven.
+            resolution = gap.resolution or {}
+            rationale = resolution.get("rationale")
+            if rationale not in GAP_RATIONALES:
+                self.error("gaps.bad-rationale", path, f"{gap.id}: resolution.rationale {rationale!r}")
+                continue
+            if not resolution.get("detail"):
+                self.error("gaps.unjustified", path, f"{gap.id}: resolution.detail is required")
+            if not resolution.get("sources"):
+                self.error("gaps.unjustified", path, f"{gap.id}: resolution.sources is required")
+            else:
+                self._check_sources(list(resolution["sources"]), path, None, f"gap {gap.id} resolution")
+
+            gap_start = gap.earliest_possible()
+            gap_scope = frozenset(gap.territories) if gap.territories else frozenset(TERRITORIES)
+
+            if gap.status == "resolved-imported" or rationale == "roster-imported":
+                product_id = resolution.get("product")
+                product = self.repo.products.get(str(product_id))
+                if product is None:
+                    self.error(
+                        "gaps.import-missing",
+                        path,
+                        f"{gap.id}: resolution.product {product_id!r} is not a product in the dataset",
+                    )
+                elif not product.printings:
+                    self.error(
+                        "gaps.import-missing",
+                        path,
+                        f"{gap.id}: resolution.product {product_id!r} has no printings",
+                    )
+                else:
+                    # the recovering product must BE the gap's subject, not just
+                    # any product that happens to exist
+                    subject_norms = {normalise_name(s) for s in gap.subjects}
+                    if normalise_name(product.name) not in subject_norms:
+                        self.error(
+                            "gaps.import-mismatch",
+                            path,
+                            f"{gap.id}: resolution.product {product_id!r} ({product.name!r}) "
+                            "does not match any gap subject",
+                        )
+                    dated = [
+                        e for e in product.events
+                        if e.kind in AVAILABILITY_KINDS
+                        and self._date(e.date) is not None
+                        and territory_matches_scope(e.territory, gap_scope)
+                    ]
+                    if not dated:
+                        self.error(
+                            "gaps.import-missing",
+                            path,
+                            f"{gap.id}: resolution.product {product_id!r} grants no dated "
+                            "availability in the gap's territories",
+                        )
+
+            if rationale == "repackaging-only":
+                rebundled = resolution.get("products") or []
+                if not rebundled:
+                    self.error(
+                        "gaps.unjustified",
+                        path,
+                        f"{gap.id}: repackaging-only requires resolution.products",
+                    )
+                for product_id in rebundled:
+                    product = self.repo.products.get(str(product_id))
+                    if product is None:
+                        self.error(
+                            "gaps.import-missing",
+                            path,
+                            f"{gap.id}: repackaged product {product_id!r} is not in the dataset",
+                        )
+                        continue
+                    if not mechanical_ok or gap_start is None:
+                        continue
+                    # a bundle cannot precede its contents: each rebundled
+                    # product must provably be at retail by the gap's earliest
+                    # possible date, in the gap's territories
+                    try:
+                        bounds = [
+                            e.bounds()[1]
+                            for e in product.events
+                            if e.kind in AVAILABILITY_KINDS
+                            and territory_matches_scope(e.territory, gap_scope)
+                        ]
+                    except ValueError:
+                        bounds = []
+                    earliest = min(bounds) if bounds else None
+                    if earliest is None or earliest > gap_start:
+                        self.error(
+                            "gaps.not-harmless",
+                            path,
+                            f"{gap.id}: rebundled product {product_id!r} is not provably at "
+                            f"retail by {gap_start} in {sorted(gap_scope)}; a bundle cannot "
+                            "precede its contents, so either the gap window or the product "
+                            "dates are wrong",
+                        )
+
+            if rationale == "cards-available-earlier":
+                cards = resolution.get("cards") or []
+                if not cards:
+                    self.error(
+                        "gaps.unjustified",
+                        path,
+                        f"{gap.id}: cards-available-earlier requires resolution.cards",
+                    )
+                if gap_start is None or not mechanical_ok:
+                    continue  # bad-date / structural errors already reported
+                for card in cards:
+                    try:
+                        raw_passcode = int(card.get("passcode"))
+                    except (TypeError, ValueError):
+                        self.error("gaps.unjustified", path, f"{gap.id}: bad card entry {card!r}")
+                        continue
+                    self._check_card(raw_passcode, str(card.get("name", "")), path, f"gap {gap.id} card")
+                    passcode = canonical(raw_passcode)
+                    try:
+                        earliest = provable_by(passcode, gap_start, gap_scope)
+                    except ValueError:
+                        earliest = None
+                    # The card must PROVABLY be available by the gap's earliest
+                    # possible date IN THE GAP'S TERRITORIES - availability
+                    # elsewhere cannot make a territory-scoped pool whole.
+                    if earliest is None or earliest > gap_start:
+                        self.error(
+                            "gaps.not-harmless",
+                            path,
+                            f"{gap.id}: {card.get('name')} ({passcode}) is not provably available "
+                            f"by {gap_start} in {sorted(gap_scope)} through the dataset; "
+                            "the gap could alter a pool",
+                        )
+
+        # -- accounting: nothing the importer detected may go unrecorded -----
+        if report:
+            accounted: set[str] = set()
+            for gap in gaps:
+                accounted.update(gap.subjects)
+            for key, label in (
+                ("yugipedia_only_products", "product"),
+                ("products_without_printings", "product"),
+                ("curated_covered_products", "curated-covered product"),
+            ):
+                for subject in report.get(key, []):
+                    if subject not in accounted:
+                        self.error(
+                            "gaps.unaccounted",
+                            gaps_location,
+                            f"import report lists {label} {subject!r} ({key}) "
+                            "but no gap record accounts for it",
+                        )
+            for card in report.get("unmatched_cards", []):
+                subject = str(card.get("name", ""))
+                if subject not in accounted:
+                    self.error(
+                        "gaps.unaccounted",
+                        gaps_location,
+                        f"import report lists unmatched card {subject!r} "
+                        "but no gap record accounts for it",
+                    )
+
+        # -- claims: a complete/verified window must not overlap an
+        #    unresolved pool-impacting gap ---------------------------------
+        if coverage is not None:
+            for i, window in enumerate(coverage.windows):
+                if window.get("status") not in ("complete", "verified"):
+                    continue
+                end = self._date(str(window.get("through")))
+                if end is None:
+                    continue  # coverage.bad-window already reported
+                window_scope = frozenset(window.get("territories", []))
+                for gap in gaps:
+                    if gap.blocks(end, window_scope):
+                        self.error(
+                            "coverage.gap-unresolved",
+                            coverage.path,
+                            f"window {i} claims {window.get('status')!r} coverage through "
+                            f"{window.get('through')} but gap {gap.id} "
+                            f"({gap.subjects[0] if gap.subjects else gap.kind}) is unresolved "
+                            "and could alter availability inside it",
+                        )
+
     def _validate_coverage(self) -> None:
         coverage = self.repo.release_coverage
         if coverage is None:
@@ -597,8 +917,13 @@ class Validator:
         self._check_sources(coverage.sources, coverage.path, None, "release coverage")
 
     def _release_data_has_errors(self) -> bool:
+        """Structural errors that would make derivation crash or mislead.
+
+        Only releases.* (malformed events feed bounds()) and load.* gate the
+        materialised-pool cross-check; gap/coverage findings are judgements
+        over structurally sound data and must not suppress pool checks."""
         return any(
-            f.severity == ERROR and f.code.startswith(("releases.", "coverage.", "load."))
+            f.severity == ERROR and f.code.startswith(("releases.", "load."))
             for f in self.findings
         )
 
@@ -625,12 +950,13 @@ class Validator:
             cutoff = _dt.date.fromisoformat(str(pool.cutoff["cutoff_date"]))
             scope = frozenset(pool.cutoff.get("territories") or default_scope(pool.region))
             coverage = self.repo.release_coverage
-            if coverage is None or not coverage.covers(cutoff, scope):
+            if coverage is None or not coverage.covers(cutoff, scope, self.repo.release_gaps):
                 self.error(
                     "pool.no-coverage",
                     pool.path,
-                    f"pool is materialised but data/releases/coverage.json does not claim "
-                    f"complete coverage of {sorted(scope)} through {cutoff}",
+                    f"pool is materialised but coverage of {sorted(scope)} through {cutoff} "
+                    "cannot be certified (no claimed-complete window, or an unresolved "
+                    "pool-impacting gap overlaps it)",
                 )
             if index is None:
                 index = ReleaseIndex.build(self.repo)
@@ -706,6 +1032,7 @@ class Validator:
             self._validate_format(fmt)
         self._validate_products()
         self._validate_coverage()
+        self._validate_gaps()
         self._validate_materialized_pools()
         return self.findings
 

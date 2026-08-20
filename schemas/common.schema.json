@@ -43,7 +43,7 @@
     "implementationStatus": {
       "type": "string",
       "enum": ["missing", "stub", "partial", "complete", "verified"],
-      "description": "missing: not started. stub: placeholder exists. partial: usable but incomplete. complete: believed complete. verified: complete and cross-checked against at least two independent sources or an executable test."
+      "description": "missing: not started. stub: placeholder exists. partial: usable but incomplete. complete: internally complete AND cross-checked against at least one independent (possibly modern/community) source or an executable test, with known gaps resolved or proven harmless. verified: complete AND the load-bearing historical claims are corroborated by strong primary/period evidence (archived official pages, period policy documents, period coverage) - not merely by modern community consensus. Statuses are earned, never aspirational; downgrade honestly when the evidence does not support the label."
     }
   }
 }

@@ -112,7 +112,7 @@ def cmd_materialize(args: argparse.Namespace) -> int:
     validator.validate()
     blocking = [
         f for f in validator.errors
-        if f.code.startswith(("releases.", "coverage.", "load.", "pool.", "card.", "sources."))
+        if f.code.startswith(("releases.", "coverage.", "gaps.", "load.", "pool.", "card.", "sources."))
     ]
     if blocking:
         for finding in blocking:
@@ -138,10 +138,13 @@ def cmd_materialize(args: argparse.Namespace) -> int:
         cutoff_date = (pool.cutoff or {}).get("cutoff_date")
         scope = frozenset((pool.cutoff or {}).get("territories") or default_scope(pool.region))
         coverage = repo.release_coverage
-        if coverage is None or not coverage.covers(_dt.date.fromisoformat(str(cutoff_date)), scope):
+        if coverage is None or not coverage.covers(
+            _dt.date.fromisoformat(str(cutoff_date)), scope, repo.release_gaps
+        ):
             print(
-                f"{pool.id}: refusing to materialise - data/releases/coverage.json does not claim "
-                f"complete coverage of {sorted(scope)} through {cutoff_date}",
+                f"{pool.id}: refusing to materialise - coverage of {sorted(scope)} through "
+                f"{cutoff_date} cannot be certified (no claimed-complete window, or an "
+                "unresolved pool-impacting gap overlaps it)",
                 file=sys.stderr,
             )
             failed = True

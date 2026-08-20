@@ -217,6 +217,14 @@ PRODUCT_KINDS = (
 )
 
 
+def normalise_name(name: str) -> str:
+    """Loose identity for product/set names across sources (case- and
+    punctuation-insensitive)."""
+    import re as _re
+
+    return _re.sub(r"[^a-z0-9]+", "", name.casefold())
+
+
 def territory_family(territory: str) -> str:
     return "ocg" if territory.startswith("ocg") else "tcg"
 
@@ -355,6 +363,73 @@ class Product:
         return self.events
 
 
+GAP_KINDS = ("missing-product-printings", "unmatched-cards", "undated-availability", "other")
+GAP_STATUSES = ("unresolved", "resolved-safe", "resolved-imported")
+GAP_IMPACTS = ("pool-membership", "provenance-only")
+GAP_RATIONALES = (
+    "no-playable-cards",
+    "cards-available-earlier",
+    "repackaging-only",
+    "roster-imported",
+)
+
+
+@dataclass
+class ReleaseGap:
+    id: str
+    kind: str
+    subjects: list[str]
+    territories: list[str]
+    possible_from: str
+    date_precision: str
+    status: str
+    impact: str
+    resolution: dict[str, Any] | None
+    sources: list[str]
+    path: Path
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "ReleaseGap":
+        return cls(
+            id=str(raw.get("id", "")),
+            kind=str(raw.get("kind", "")),
+            subjects=[str(s) for s in raw.get("subjects", [])],
+            territories=[str(t) for t in raw.get("territories", [])],
+            possible_from=str(raw.get("possible_from", "")),
+            date_precision=str(raw.get("date_precision", "day")),
+            status=str(raw.get("status", "")),
+            impact=str(raw.get("impact", "")),
+            resolution=raw.get("resolution"),
+            sources=list(raw.get("sources", [])),
+            path=path,
+            raw=raw,
+        )
+
+    def earliest_possible(self) -> _dt.date | None:
+        try:
+            lo, _ = ReleaseEvent._bounds(self.possible_from, self.date_precision)
+        except ValueError:
+            return None
+        return lo
+
+    def blocks(self, day: _dt.date, scope: frozenset[str]) -> bool:
+        """True when this gap could alter card availability for a cutoff at
+        `day` under territory `scope`: it is unresolved, could change pool
+        membership, could have begun on or before `day`, and touches a scoped
+        territory. An unparseable date blocks conservatively."""
+        if self.status != "unresolved" or self.impact != "pool-membership":
+            return False
+        earliest = self.earliest_possible()
+        if earliest is not None and earliest > day:
+            return False
+        if not self.territories:
+            # a gap that doesn't say where it applies blocks everywhere
+            # (the validator separately rejects the record)
+            return True
+        return any(territory_matches_scope(t, scope) for t in self.territories)
+
+
 @dataclass
 class ReleaseCoverage:
     windows: list[dict[str, Any]]
@@ -373,9 +448,20 @@ class ReleaseCoverage:
             raw=raw,
         )
 
-    def covers(self, day: _dt.date, scope: frozenset[str]) -> bool:
-        """True when some claimed-complete window contains `day` and covers
-        every territory in `scope` (umbrella territories cover their family)."""
+    def covers(
+        self,
+        day: _dt.date,
+        scope: frozenset[str],
+        gaps: "list[ReleaseGap] | tuple[ReleaseGap, ...]" = (),
+    ) -> bool:
+        """True when the dataset can DEFEND completeness for `day`/`scope`:
+        some claimed-complete window contains them (umbrella territories cover
+        their family) AND no unresolved pool-impacting gap could alter
+        availability at or before `day` in a scoped territory. Certification
+        is earned - a window's status flag alone is never sufficient."""
+        for gap in gaps:
+            if gap.blocks(day, scope):
+                return False
         for window in self.windows:
             if window.get("status") not in ("complete", "verified"):
                 continue

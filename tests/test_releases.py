@@ -456,6 +456,7 @@ class MaterializedPoolValidationTest(TempRepoTest):
                          printings=[printing(200, "Beta", "NEW-EN001")])
         if coverage:
             self.add_coverage()
+        self.add_import_report()
         self.add_cutoff_pool(cards=pool_cards, **cutoff_kw)
 
     def test_correct_materialisation_passes(self):
@@ -496,6 +497,7 @@ class MaterializedPoolValidationTest(TempRepoTest):
                          printings=[printing(100, "Alpha")])
         self.add_product(code="VAGUE", release_events=[event("tcg-na", "2005-06-01", precision="month")],
                          printings=[printing(200, "Beta")])
+        self.add_import_report()
         self.add_cutoff_pool(
             cards=[card(100, "Alpha")],
             exclude=[{"card": card(200, "Beta"), "reason": "documented as later", "sources": ["test-source"]}],
