@@ -5,18 +5,19 @@
     "passcode": 17814387,
     "name": "Reinforcements"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Increase 1 selected monster's ATK by 500 points during the turn this card is activated.",
-      "modern_text": "Target 1 face-up monster on the field; it gains 500 ATK until the end of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation once damage has been calculated, so Reinforcements can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET and the face-up-monster target filter are identical), and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700027,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700027.lua",
+    "script": "goat/c504700027.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v0 (SDY-031, Starter Deck: Yugi, 2002-03-29) exactly. v0 -> v4 (SS03-ENA26, 2019-08-01) is wording only: 'face-up' is added at v1 (YSD-EN032, 2006-03-23) although both scripts already require a face-up target; 'selected' -> 'Target'; and the duration alternates between 'until the end of this turn' (v1, v2, v4) and 'until the End Phase' (v3, DT01-EN049, 2010-01-29) with no script correlate. The chkc:IsLocation(LOCATION_MZONE) vs chkc:GetLocation()==LOCATION_MZONE difference is an idiom. Engine-vs-ruling: see the Pyramid Energy note - the GOAT rule profile's damage-step flags do not rewrite per-effect Damage Step legality, so the substitution is not redundant and this is 'ruling', not 'engine'."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

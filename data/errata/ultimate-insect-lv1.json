@@ -5,18 +5,33 @@
     "passcode": 49441499,
     "name": "Ultimate Insect LV1"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "As long as this card remains face-up on the field, it is unaffected by any Spell Cards. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV3\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
+      "summary": "Period procedure, not a text erratum: after this card is sent to the Graveyard as the cost, if no \"Ultimate Insect LV3\" can be Special Summoned, the goat script proves the whiff by revealing BOTH hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)), the era doctrine as extended to the hand; the modern script never reveals. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "As long as this card remains face-up on the field, it is unaffected by any Spell Cards. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV3\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
-      "modern_text": "While this card is on the field, it is unaffected by the effects of Spell Cards. During your Standby Phase, by sending this face-up card to the Graveyard, Special Summon 1 \"Ultimate Insect LV3\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card ruling: the goat script's activation check keeps only the free-zone test ('if chk==0 then return ft>0 end'), dropping the modern requirement that a Special Summonable \"Ultimate Insect LV3\" be in the hand or Deck, so the player may pay the cost (send this card to the Graveyard) with nothing to Summon and lose the card for no gain. Nothing in the packet dates when this allowance ended, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700081,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700081.lua",
+    "script": "goat/c504700081.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v0 (SOD-EN005, 2004-10-01, exact cdb match); trailing v0 -> v1 (DR3-EN005, 2006-11-25) is cosmetic ('As long as this card remains face-up on the field' -> 'While this card is on the field', 'unaffected by any Spell Cards' -> 'unaffected by the effects of Spell Cards', cost rewording), and the scripts confirm it: the immunity effect is unchanged apart from expressing the same test through the older API (te:IsActiveType(TYPE_SPELL) vs the modern te:IsSpellEffect()). The other diff lines are legacy-syntax artifacts with no behavioural content: EVENT_PHASE+PHASE_STANDBY for EVENT_PHASE|PHASE_STANDBY, LOCATION_HAND+LOCATION_DECK for the bitwise form, the raw 0x5d setcode for SET_ULTIMATE_INSECT, and an inline s.spcost doing exactly what the modern Cost.SelfToGrave helper does. Reveal and relaxed cost/activation are entangled in play (the reveal is only reachable because the condition is relaxed) but recorded separately because only the reveal has sourced bounds; the state between them needs no implementation, as GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

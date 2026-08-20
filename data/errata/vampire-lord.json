@@ -8,15 +8,49 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Each time this card inflicts Battle Damage to your opponent's Life Points, declare 1 card type (Monster, Spell, or Trap). Your opponent selects 1 card of that type from his/her Deck and sends it to the Graveyard. Also, if this card is destroyed and sent to your Graveyard by your opponent's card effect, it is Special Summoned to the field during your next Standby Phase.",
-      "modern_text": "If this card inflicts battle damage to your opponent: Declare 1 card type (Monster, Spell, or Trap); your opponent sends 1 card of that type from their Deck to the GY. Once per turn, during your next Standby Phase after this card in your possession was destroyed and sent to your GY by an opponent's card effect: Special Summon this card from the GY.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era scope of the self-revival: the GOAT script adds `c:IsPreviousLocation(LOCATION_SZONE)` to the exclusions in its EVENT_TO_GRAVE registrar, so Vampire Lord only arms its next-Standby-Phase return when it was destroyed as a monster in the Monster Zone; the modern script (official/c53839837.lua, read in full) arms it wherever on the field it was destroyed, including while it sat in the Spell/Trap Zone as an Equip Card. Upstream annotates it 'Only reborn when destroyed as monster'. No printing draws the distinction, so this is a period ruling with unresolved chronology.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of LCJW-EN191 (Legendary Collection 4: Joey's World Mega Pack)"
+      },
+      "historical_text": "Each time this card inflicts Battle Damage to your opponent's Life Points, declare 1 card type (Monster, Spell, or Trap). Your opponent selects 1 card of that type from his/her Deck and sends it to the Graveyard. Also, if this card is destroyed and sent to your Graveyard by your opponent's card effect, it is Special Summoned to the field during your next Standby Phase.",
+      "modern_text": "When this card inflicts battle damage to your opponent: Declare 1 card type (Monster, Spell, or Trap); your opponent sends 1 card of that type from their Deck to the Graveyard. During your next Standby Phase after this card in your possession was destroyed and sent to your Graveyard by an opponent's card effect: Special Summon this card from the Graveyard.",
+      "summary": "Wording modernisation only from v1 to v7: 'his/her' alternates with 'their', v4 (DPKB-EN013, 2010-04-16) adds the clarifying 'from your field', v5 (BP01-EN127) applies PSCT ('When this card inflicts Battle Damage to your opponent: Declare 1 card type ...; your opponent sends 1 card ...'), and v7 adds 'this card in your possession'. The opponent still chooses which card of the declared type to send, and the revival timing is unchanged.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2016-10-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SDKS-EN012 (Structure Deck: Seto Kaiba), the first printing carrying the added once-per-turn clause"
+      },
+      "historical_text": "When this card inflicts battle damage to your opponent: Declare 1 card type (Monster, Spell, or Trap); your opponent sends 1 card of that type from their Deck to the Graveyard. During your next Standby Phase after this card in your possession was destroyed and sent to your Graveyard by an opponent's card effect: Special Summon this card from the Graveyard.",
+      "modern_text": "When this card inflicts battle damage to your opponent: Declare 1 card type (Monster, Spell, or Trap); your opponent sends 1 card of that type from their Deck to the Graveyard. Once per turn, during your next Standby Phase after this card in your possession was destroyed and sent to your Graveyard by an opponent's card effect: Special Summon this card from the Graveyard.",
+      "summary": "Functional erratum: 'Once per turn,' was prefixed to the Standby Phase revival, capping it at a single activation per turn where the earlier text carried no such limit. Neither upstream script models the clause with an explicit count limit - both gate the revival on the same per-card flag effect, which the target function resets on activation - so the restriction is documented from the printed lineage rather than from a script difference.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +58,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700087,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700087.lua",
+    "script": "goat/c504700087.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text is v1 (SD2-EN003, 2005-01-01), an exact match to the goat cdb entry and the printing in force at the 2005-04-01 GOAT snapshot. Note for the Edison snapshot: v4 (DPKB-EN013) reached shelves 2010-04-16, eight days before 2010-04-24, so the Edison-era printing is v4; the cosmetic run is collapsed at v7 as instructed (at most one cosmetic entry between behavioural changes), which means period records will display v1's text - acceptable because v1 through v7 are behaviourally identical. Remaining script-diff hunks are API/macro-equivalent: `EVENT_PHASE|PHASE_STANDBY` vs '+', `(r&0x41)~=0x41` vs `r&(REASON_DESTROY|REASON_EFFECT)~=...` (0x41 is exactly REASON_DESTROY|REASON_EFFECT), `Duel.IsTurnPlayer`/`Duel.IsPhase` vs `Duel.GetTurnPlayer()==tp`/`Duel.GetCurrentPhase()==...`. Conflicting evidence preserved on the 2016 once-per-turn clause: it is a real printed restriction but is invisible in both scripts, so a reviewer may prefer to downgrade it to cosmetic. Trailing cosmetic v8 -> v11 (LCKC-EN024 2018-03-08 GY wording, SBSC-EN007 2019-08-01 'If this card inflicts', SGX3-ENC05 2023-03-30 'card type') is not recorded as a change."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

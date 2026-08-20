@@ -5,18 +5,22 @@
     "passcode": 89801755,
     "name": "Abyssal Designator"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "Pay 1000 Life Points. Declare a Type and an Attribute. Your opponent must send 1 monster with both the Type and Attribute declared from his/her hand or Deck to the Graveyard.",
-      "modern_text": "Pay 1000 Life Points. Declare a Type and an Attribute. Your opponent must send 1 monster with both the declared Type and Attribute from their hand or Deck to the Graveyard.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure, not a text erratum: the goat script adds an else-branch calling Duel.GoatConfirm on a failed search, so when the searched player holds no monster of the declared Type and Attribute in hand or Deck the failure is proven by a reveal-and-shuffle; the modern script resolves with no reveal. The 1000 LP payment, the Type/Attribute declaration and the send-to-Graveyard are otherwise identical - the goat variant merely inlines the modern Cost.PayLP(1000) helper as s.cost with the same CheckLPCost/PayLPCost calls.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700155,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700155.lua",
+    "script": "goat/c504700155.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v0 (SOD-EN040, 2004-10-01), matched exactly by the goat cdb text; the trailing v0 -> v1 rewording (DR3-EN040, 2006-11-25: 'the Type and Attribute declared' -> 'the declared Type and Attribute', 'his/her' -> 'their') is cosmetic and not recorded. Both target functions return true unconditionally, so there is no relaxed activation condition - this variant encodes (A) only. ESCALATION: the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), but the player who searches is the OPPONENT (the script does Duel.SetTargetPlayer(1-tp) and then Duel.SelectMatchingCard(p,...) with p=1-tp). Duel.GoatConfirm (CardScripts utility.lua line 2747) gathers Duel.GetFieldGroup(tp,...), i.e. the hand and Deck of the player passed as its first argument, and upstream's two other opponent-side goat scripts - Arsenal Robber c504700089 and Jade Insect Whistle c504700168 - correctly pass 1-tp. As shipped, this variant therefore reveals and shuffles the ACTIVATING player's own hand and Deck instead of the opponent's. The historical verdict is unaffected, but reusing the script needs a one-token fix (tp -> 1-tp) or an upstream report before it can be called period-correct."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

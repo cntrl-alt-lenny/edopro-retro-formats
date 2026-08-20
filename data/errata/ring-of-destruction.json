@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2015-03-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (PGL2-EN063, Premium Gold: Return of the Bling)"
       },
-      "historical_text": "Target 1 face-up monster; Destroy it, and if you do, inflict damage to both players equal to its ATK.",
+      "historical_text": "Target 1 face-up monster on the field; destroy that target, and if you do, inflict damage to both players equal to that target's ATK.",
       "modern_text": "During your opponent's turn: Target 1 face-up monster your opponent controls whose ATK is less than or equal to their LP; destroy that face-up monster, and if you do, take damage equal to its original ATK, then inflict damage to your opponent, equal to the damage you took. You can only activate 1 \"Ring of Destruction\" per turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum: the errata'd card may only be activated during your opponent's turn, may only target a face-up monster your opponent controls whose ATK is at most that opponent's LP, deals YOU damage first equal to the destroyed monster's ORIGINAL ATK and only then an equal amount to your opponent (and none if you are already at 0), and is limited to one activation of 'Ring of Destruction' per turn. The pre-errata script matches the older printed text: no turn condition (s.condition and Duel.IsTurnPlayer(1-tp) absent), any face-up monster on either field as target, no LP ceiling, no SetCountLimit, and simultaneous damage to both players computed from the monster's current ATK (two deferred Duel.Damage calls closed by Duel.RDComplete()).",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -27,16 +33,20 @@
       511000825
     ],
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511000824.lua",
+    "script": "pre-errata/c511000824.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream codes 511000824 and 511000825 are artwork variants of one implementation (identical cdb text, identical script diff, codes within +/-10), folded per instruction 4 with the lower code as historical_passcode. The third upstream entry, 511027037 'Ring of Destruction (Manga)' in the unofficial script folder, is a different card - it activates on EVENT_ATTACK_ANNOUNCE against the attacking monster and damages only the opponent - so it is not a period TCG implementation and is excluded rather than escalated. Pre-baseline lineage v0 -> v4 is cosmetic ('Direct Damage' -> 'damage', 'to the Life Points of both you and your opponent' -> 'to both players', 'Select and destroy' -> PSCT 'Target ... destroy that target, and if you do'); the pre-errata script keeps EFFECT_FLAG_CARD_TARGET, so the select/target rewording is not a targeting change. This card does not appear on EdisonFormat.com's Functional Errata page, so no community corroboration is cited; the erratum is dated solely from the lineage printing."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }

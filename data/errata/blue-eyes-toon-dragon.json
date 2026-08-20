@@ -37,7 +37,16 @@
       "resulting_implementation": {
         "strategy": "unresolved",
         "status": "missing",
-        "tested": false
+        "tested": false,
+        "gap": {
+          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+          "upstream_checked": true,
+          "behavioural_impact": "Functional erratum: the Special Summon cost becomes a flat 'by Tributing 2 monsters' instead of 'the same number of monsters needed for a Tribute Summon (normally 2)'. The GOAT script computes the count from the card's current Level ('local amt=(lv>6 and 2) or (lv>4 and 1) or 0'), so with the Level reduced the era card is Special Summoned for 1 Tribute or none; the modern script hard-codes 2 in both its condition and its release selection.",
+          "sources": [
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
       },
       "sources": [
         "yugipedia-card-errata",

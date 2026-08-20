@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2018-08-17",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OP08-EN024 (OTS Tournament Pack 8), the printing carrying the rewritten trigger text"
       },
       "historical_text": "This card can only be activated during your opponent's Damage Step. During this turn, if you take Battle Damage of 2000 points or more, increase your Life Points by 4000 points before the damage is subtracted from your Life Points.",
       "modern_text": "During damage calculation, when you are about to take 2000 or more battle damage: Gain 4000 LP first.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum replacing a bespoke activation window with an ordinary trigger. LOD-096 read 'This card can only be activated during your opponent's Damage Step', and the GOAT script builds exactly that: a globally registered EVENT_PRE_BATTLE_DAMAGE effect with EFFECT_FLAG_SET_AVAILABLE offers the activation whenever you are about to take 2000+ battle damage while the card sits in your hand or Spell/Trap Zone, then activates an EVENT_FREE_CHAIN effect gated by a flag effect, and it limits the remainder of that chain to Counter Traps and other copies of 'Nutrient Z' via Duel.SetChainLimitTillChainEnd. The OP08 text makes it a plain damage-calculation trigger, and the modern script matches - EVENT_PRE_DAMAGE_CALCULATE with condition Duel.GetBattleDamage(tp)>=2000, no hand-activation path and no chain limit.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700051,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700051.lua",
+    "script": "goat/c504700051.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream annotates the variant 'Very weird activation window', and its cdb text is exactly lineage v0 (LOD-096, 2003-06-06); the lineage has only two English versions, so the transition is cleanly dated by OP08-EN024 (2018-08-17) and both period snapshots fall before it. One nuance worth recording rather than smoothing over: the era text's 'During this turn, if you take Battle Damage of 2000 points or more' reads as if the gain could apply to a later battle in the same turn, but the GOAT script scopes it to the damage calculation in which it was offered (its flag effect uses RESET_PHASE+PHASE_DAMAGE_CAL). That is upstream's reading of an ambiguous pre-PSCT text, not a divergence I can resolve from the packet, and it does not affect the classification or the date."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

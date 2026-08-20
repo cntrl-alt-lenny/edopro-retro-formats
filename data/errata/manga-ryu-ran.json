@@ -8,15 +8,38 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Collection 3: Yugi's World Mega Pack (LCYW-EN104)"
       },
       "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while \"Toon World\" is on your side the field. You can Special Summon this monster from your hand, but Tributes are required for monsters Level 5 or more. This card cannot attack in the turn that it is Summoned. Unless you pay 500 Life Points, this monster cannot attack. When \"Toon World\" on the field is destroyed, this card is also destroyed. If your opponent doesn't control a Toon Monster, this card can attack your opponent's Life Points directly. If a face-up Toon Monster is on your opponent's side of the field, you must select the Toon Monster as an attack target.",
-      "modern_text": "(This card is always treated as a \"Toon\" card.)\r\nCannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 2). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+      "summary": "Wording modernisation only, collapsing v1 -> v2 (RP01-EN062) -> v3: 'This card can only be Special Summoned while \"Toon World\" is on your side the field' becomes 'Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 2)'. Both scripts implement the same summon restriction with c:EnableReviveLimit() plus an EFFECT_SPSUMMON_PROC conditioned on a face-up 'Toon World' (15259703) you control, and the Tribute requirement is still Level-dependent in v3, so nothing resolves differently.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2020-05-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing fixing the Tribute count at 2 (SS04-ENB05, Speed Duel Starter Decks: Match of the Millennium)"
+      },
+      "historical_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 2). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+      "modern_text": "(This card is always treated as a \"Toon\" card.)Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks.",
+      "summary": "Functional erratum: the era text charges Tributes only 'for monsters Level 5 or more' (v1/v2) or 'the same number of monsters needed for a Tribute Summon (normally 2)' (v3/v4), and the GOAT script computes the count from the card's current Level ('local amt=(lv>6 and 2) or (lv>4 and 1) or 0' in spcon). SS04 fixed the cost at 'Tributing 2 monsters' and the modern script hard-codes exactly two releases (Duel.CheckReleaseGroup(...,2,false,2,...) / Duel.SelectReleaseGroup(tp,aux.TRUE,2,2,...)). Manga Ryu-Ran is natively Level 7 in both cdb entries, so the two agree unless an effect changes its Level while it is in the hand, in which case the era card is Special Summoned for fewer Tributes.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +47,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700062,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700062.lua",
+    "script": "goat/c504700062.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DB1-EN038, 2004-10-12), the GOAT entry's exact text; v0 (MRL-071, 2002-09-16) predates it. Lineage v4 is deliberately not recorded as its own change: it has no set number and no date (dating_set is null), so it cannot carry set-release evidence, and its only difference from v3 is the added '(This card is always treated as a \"Toon\" card.)' parenthetical - which is not an implementation difference here, since both cdb entries carry the same setcode (goat-entries.cdb 504700062 and cards.cdb 38369349 both: level 7, ATK 2200, DEF 2600, setcode 98). Upstream script quirk in the baseline, worth a maintainer's eye: goat/c504700062.lua computes the Tribute count twice with different thresholds - spcon uses '(lv>6 and 2) or (lv>4 and 1) or 0' while sptg uses '(lv>6 and 2) or (lv>5 and 1) or 0' - so a Level-5 Manga Ryu-Ran passes a condition demanding 1 Tribute and then releases none, a free Special Summon. Packet dating oddity: lineage v2's dating set (Retro Pack, RP01-EN062) carries a tcg-na event of 2024-08-23 alongside tcg-eu 2008-07-08; v2 falls inside the collapsed cosmetic span and no date evidence here relies on it. The pinned cdb text matches lineage v5 at ratio 0.999 - a line-break difference after the Toon parenthetical only."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }

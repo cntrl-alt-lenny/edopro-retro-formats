@@ -5,17 +5,18 @@
     "passcode": 76754619,
     "name": "Pyramid Energy"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "You can select and activate 1 of the following effects:\n●Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\n●Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
       "modern_text": "You can select and activate 1 of the following effects:\r\n● Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\r\n● Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant carries EFFECT_FLAG_DAMAGE_CAL with a condition that only refuses activation once damage has already been calculated, so Pyramid Energy can be activated during damage calculation; the modern script carries EFFECT_FLAG_DAMAGE_STEP with aux.StatChangeDamageStepCondition, which confines it to the Damage Step before damage calculation. The remaining diff (RESETS_STANDARD_PHASE_END expanded into RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END) is the same constant written out, not a behaviour change. Chronology unresolved: nothing in the packet dates when the window narrowed.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +25,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700134,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700134.lua",
+    "script": "goat/c504700134.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The Yugipedia errata page carries NO English versions for this card (english_versions is empty; only a Japanese section exists), so both texts are passed literally from the packet per instruction 5 - flagged 'lineage-missing'. The GOAT cdb text and the pinned modern cards.cdb text differ only in line-break style (\\n vs \\r\\n) and the space after the bullet, which corroborates that no TCG text erratum exists and that the difference is purely script-level. Engine-vs-ruling question, checked rather than assumed: the project's GOAT rule profile (data/rule-profiles/tcg-goat.json, DUEL_MODE_GOAT) carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP, which govern battle-step structure and how many chains a damage substep allows; per-effect activation legality inside the Damage Step is carried by the effect's own EFFECT_FLAG_DAMAGE_STEP / EFFECT_FLAG_DAMAGE_CAL property, which no profile flag rewrites. The card substitution is therefore NOT redundant with the rule profile, and the change is recorded as 'ruling', not 'engine'. Same reasoning applies to Reinforcements, Rush Recklessly and Rare Metalmorph in this batch."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

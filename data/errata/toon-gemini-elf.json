@@ -5,18 +5,19 @@
     "passcode": 42386471,
     "name": "Toon Gemini Elf"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: Discard 1 random card from your opponent's hand.",
-      "modern_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: You can discard 1 random card from your opponent's hand.\r\n\r\n* The above text is unofficial and describes the card's functionality in the OCG.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Mandatory versus optional discard: the GOAT script registers the battle-damage effect as EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F while the modern script uses EFFECT_TYPE_TRIGGER_O, so historically the random discard is forced (and behaves as a mandatory trigger for miss-timing purposes) and today it may be declined. Upstream annotates the variant 'effect is mandatory'. Every English printing from DL6-EN001 (2004-12-01) to DPBC-EN045 (2015-06-19) words the discard unconditionally, so no TCG text change accompanies this; the optional reading comes only from the pinned cards.cdb text, which itself states it is unofficial and describes the OCG functionality. Chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700183,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700183.lua",
+    "script": "goat/c504700183.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The whole English lineage v0-v5 is cosmetic rewording (Life Points -> opponent, 'his/her' -> 'their', PSCT colon, 'When' -> 'If', 'This card cannot' -> 'Cannot'), so no text-driven change is recorded; earlier versions than the baseline's v5 are noted here per instruction 2. The other two script-diff hunks are macro-equivalent: RESETS_STANDARD_PHASE_END expands to RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END, and REASON_EFFECT|REASON_DISCARD equals the '+' form. Conflicting evidence preserved: the modern cards.cdb entry is explicitly marked as unofficial OCG functionality and is the only source for the optional 'You can discard' reading (modern_text_matches_version ratio 0.8769 against v5), while the TCG lineage never printed it - a reviewer may prefer to treat the modern implementation, not the historical one, as the deviation."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

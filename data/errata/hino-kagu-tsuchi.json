@@ -5,18 +5,18 @@
     "passcode": 75745607,
     "name": "Hino-Kagu-Tsuchi"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent's Life Points, your opponent discards all cards in their hand during the next Draw Phase, before they draw.",
-      "modern_text": "This card cannot be Special Summoned. This card returns to its owner's hand during the End Phase of the turn it is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent, they discard all cards in their hand during the next Draw Phase, before they draw.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era ruling on a skipped Draw Phase, not a text erratum: after battle damage the GOAT script registers the EVENT_PREDRAW discard plus two clones - one on EVENT_PHASE+PHASE_STANDBY and one on EVENT_ADJUST conditioned on the opponent's Main Phase - all resetting at Main Phase 1 and clearing each other once the hand is sent to the GY, so the discard still happens at the next available point if the opponent's Draw Phase never occurs. The modern script registers only the EVENT_PREDRAW effect with RESET_PHASE|PHASE_DRAW, so skipping the Draw Phase loses the discard entirely. Chronology is unresolved - nothing in the packet dates when the ruling changed.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700131,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700131.lua",
+    "script": "goat/c504700131.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream's goat header states the same thing: if the Draw Phase is skipped the effect is used during the next available phase. The Spirit return procedure and the EFFECT_SPSUMMON_CONDITION lock are identical in both scripts. Text lineage is cosmetic: v0 (LOD-070, 2003-06-06) -> v1 (DB2-EN182, 2005-07-27) drops the redundant 'Flip Summoned' (already covered by 'flipped face-up') and 'must discard' -> 'discards'; v1 -> v2 (RP02-EN060, tcg-eu 2009-07-24) is pronoun and 'Life Points' tidying, and v2 is the version pinned in the modern cards.cdb. A later v3 (SBC2-ENI03, 2024-12-13) restates the timing as 'the Draw Phase of the next turn, before the turn player draws'; it postdates the pinned modern text and is not evaluated as a change here."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

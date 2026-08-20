@@ -5,18 +5,23 @@
     "passcode": 75043725,
     "name": "Emissary of the Afterlife"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
-      "historical_text": "If this card is sent from the field to the Graveyard: Each player adds 1 Level 3 or lower Normal Monster from their Deck to their hand. Each player who didn't add a monster to their hand must reveal their Deck to their opponent.",
-      "modern_text": "When this card is sent from the field to the Graveyard: Each player adds 1 Level 3 or lower Normal Monster from their Deck to their hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "When this card is sent from the field to the Graveyard, each player selects 1 Level 3 or lower Normal Monster from their Deck, and adds it to their hand after showing it to the opponent. The Decks are then shuffled.",
+      "summary": "Period procedure, not a text erratum: in upstream's pre-errata script a player who adds no monster reveals their entire Deck to the opponent (Duel.GetFieldGroup(tp,LOCATION_DECK,0) followed by Duel.ConfirmCards), where the modern script confirms only a card that was actually added and reveals nothing on a whiff. Everything else resolves identically - a mandatory trigger (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F) on EVENT_TO_GRAVE from the field, each player picking a Level 3 or lower Normal Monster out of their own Deck, and activation unconditionally legal in both (the target function returns true without checking the Deck), so only the failed-search verification procedure differs.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +29,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511003027,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511003027.lua",
+    "script": "pre-errata/c511003027.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Packet conflict: upstream's pre-errata cdb text ('If this card is sent from the field to the Graveyard: Each player adds 1 Level 3 or lower Normal Monster from their Deck to their hand. Each player who didn't add a monster to their hand must reveal their Deck to their opponent.') matches no printed English version. It is the modern v2 sentence with 'When' swapped for 'If' and a prose reconstruction of the era verification ruling appended; the matcher lands on v1 at ratio 0.7294. No English printing ever carried the reveal sentence, and the If/When distinction is not implemented either way - both scripts are plain EFFECT_TYPE_TRIGGER_F on EVENT_TO_GRAVE with no EFFECT_FLAG_DELAY. Note also that the activation-condition question the shared brief separates out (whether the card can be used with no valid target) does not arise here: both scripts always activate, so this is procedure (A) only and the shared chronology applies cleanly. The chain is started at v1 (DR2-EN189, 2005-10-20), the text in force across the Edison snapshot. Earlier: v0 (AST-076, 2004-06-01), in force at the GOAT snapshot, differs from v1 only in pronouns (his/her -> their). Trailing: v1 -> v2 (LCYW-EN255, 2012-09-29) is PSCT dropping the 'after showing it to the opponent. The Decks are then shuffled.' procedural wording - cosmetic, and the modern script still performs the reveal of the added card."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

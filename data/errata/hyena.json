@@ -5,18 +5,18 @@
     "passcode": 22873798,
     "name": "Hyena"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon any \"Hyena\"(s) from the Deck to the field. Then shuffle your Deck.",
-      "modern_text": "When this card is destroyed by battle and sent to the Graveyard: You can Special Summon any number of \"Hyenas\" from your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period ruling package, not a text erratum. Activation condition: the modern `s.target` requires another \"Hyena\" to exist in the Deck (`Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...)`), while the goat target only checks `Duel.GetLocationCount(tp,LOCATION_MZONE)>0`, so the battle-destruction trigger may be used with no copy left. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)` to prove the whiff by revealing the Deck. Only the verification half is covered by the shared search-verification chronology, so the combined transition is recorded unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700034,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700034.lua",
+    "script": "goat/c504700034.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage v0 (FET-EN017, 2005-03-01) -> v1 (DR3-EN137, 2006-11-25) -> v2 (AP01-EN014, 2012-11-23) is cosmetic: \"sent to the Graveyard as a result of battle\" -> \"destroyed by battle and sent to the Graveyard\", \"any \\\"Hyena\\\"(s)\" -> \"any number of \\\"Hyenas\\\"\", and the dropped \"Then shuffle your Deck.\" procedural line. Both scripts use the identical EVENT_BATTLE_DESTROYED condition and the same multi-summon operation including the CARD_BLUEEYES_SPIRIT clamp. Packet/repo note: the packet's script_diff renders the goat name filter as `c:IsCode(MODID)` while the shipped goat/c504700034.lua uses the literal `c:IsCode(22873798)`; both are equivalent to modern's `c:IsCode(id)` because the goat file's own `id` is 504700034 - a rendering artifact, not a behavioural difference. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

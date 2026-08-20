@@ -5,18 +5,19 @@
     "passcode": 12503902,
     "name": "Rare Metalmorph"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Increase the ATK of 1 Machine-Type monster on the field by 500 points. Only once, negate the effect of a Spell Card that designates the monster. When the selected monster is removed from the field, destroy this card.",
-      "modern_text": "Activate this card by targeting 1 Machine monster on the field; while this card is face-up on the field, that Machine monster gains 500 ATK, also negate the first Spell effect that targets that monster. When that monster leaves the field, destroy this card.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Two period behaviours the printed text never showed, both carried by the GOAT variant. (1) Damage Step: the persistent procedure is registered with EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so the Continuous Trap can be activated during damage calculation, where the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition (before damage calculation only). (2) Negation scope: on resolution the GOAT variant looks for Spell Cards already sitting in either Spell/Trap Zone that hold the chosen Machine monster as a card target (s.tfilter1) and, if any exist, registers an EFFECT_DISABLE field effect against them (s.distg, bounded by the group's max field ID) - spending its one negation on a Spell already applying to the monster - and only falls back to the modern EVENT_CHAIN_SOLVING negation of the next Spell effect that targets the monster when no such Spell is present. Chronology unresolved: no printing or announcement in the packet dates either shift.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700017,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700017.lua",
+    "script": "goat/c504700017.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v0 (RDS-EN052, Rise of Destiny, 2004-12-01) exactly. v0 -> v5 (SBCB-EN080, 2020-11-26) is wording modernisation: 'designates' -> 'targets' at v1 (DR3-EN112, 2006-11-25) is the standard designate/target rewording and is not a targeting change (both scripts require EFFECT_FLAG_CARD_TARGET on the negated Spell effect); 'Only once' -> 'One time only' -> 'Once' -> 'the first'; 'Increase the ATK of 1 Machine-Type monster' -> PSCT 'Activate this card by targeting 1 Machine monster on the field; it gains 500 ATK'; and v5 adds 'while this card is face-up on the field' for the ATK gain, which both scripts already implement as a persistent effect. Both scripts share the same face-up Machine filter and the same destroy-this-card-when-the-monster-leaves effect (renamed e2 -> e3 only). Also note the modern-vs-GOAT idiom re:IsSpellEffect() vs re:IsActiveType(TYPE_SPELL) in the fallback path; it is not documented as a period difference here and no behaviour claim is made from it. Engine-vs-ruling for the Damage Step part: see the Pyramid Energy note - profile flags do not rewrite per-effect Damage Step legality, so the substitution stands and this is 'ruling'."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

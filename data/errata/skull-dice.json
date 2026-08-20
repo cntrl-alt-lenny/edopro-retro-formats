@@ -5,18 +5,19 @@
     "passcode": 126218,
     "name": "Skull Dice"
   },
-  "classification": "functional",
+  "classification": "engine",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "engine",
       "effective": {
         "date": null
       },
       "historical_text": "Roll 1 six-sided die. The result is multiplied by 100 points and subtracted from the ATK and DEF of all monsters in your opponent's control until the end of your turn. Monsters summoned after this card's activation are excluded.",
-      "modern_text": "Roll a six-sided die. All monsters your opponent currently controls lose ATK/DEF equal to the result x 100, until the end of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag on the Activate effect: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is the De Morgan equivalent of the modern inline condition, and the remaining diff is pure idiom - a hint-only CATEGORY_DEFCHANGE, aux.Next vs Group.Iter, and RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END which constant.lua defines as exactly RESETS_STANDARD_PHASE_END. That is a damage-step-structure matter the GOAT rule profile already sets globally (DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP), and nothing in the packet dates it, so its chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700000,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700000.lua",
+    "script": "goat/c504700000.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet lists a second upstream code, 511000540 'Skull Dice (Anime)' in unofficial/, but it is not a historical TCG version of this card: it implements the anime effect (on the opponent's attack declaration, divide the attacker's ATK by the die roll via EFFECT_SET_ATTACK_FINAL) and scores 0.3574 against the lineage. It is excluded from this record; only the goat variant 504700000 is period-relevant. Text lineage v0 (EDS-003, 2002-10-15) -> v1 (GLD4-EN046, 2011-06-24) -> v2 (LCJW-EN074, 2013-10-11) -> v3 (SS02-ENB17, 2019-01-24, = pinned modern text) is cosmetic: both scripts snapshot the opponent's face-up monsters at resolution (so monsters Summoned afterwards are excluded, exactly as v0's explicit sentence says) and both reset the -N*100 ATK/DEF at the End Phase of the current turn, which is what 'until the end of your turn' / 'until the End Phase' / 'until the end of this turn' all describe. One observation not amounting to a change: v2/v3 say 'All monsters your opponent currently controls' while BOTH scripts filter Card.IsFaceup, so the face-up restriction of v1 persists in the modern implementation as well - a modern-script fidelity question, identical on both sides of the diff. Escalation point is the same as for Shadow Spell and The Big March of Animals: the goat variant exists only for the DAMAGE_CAL/DAMAGE_STEP flag and may be redundant against the rule profile."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

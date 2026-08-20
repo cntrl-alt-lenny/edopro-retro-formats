@@ -92,19 +92,66 @@ class RealDataTest(unittest.TestCase):
             self.assertNotIn(code, codes, f"must NOT be Edison-legal: {why}")
 
     def test_edison_whitelist_enforces_pool_and_banlist(self):
-        built = build_lflist(self.repo.formats["2010-03-edison"], self.repo)
+        """Every pool card contributes exactly one *card* to the list at its
+        banlist count, but a card may emit several CODES: artwork variants,
+        and (for a substituted card) the historical implementation's own
+        artwork variants. Counting codes alone would drift whenever a
+        substitution lands, so the invariant is asserted per card."""
+        from retroformats.lflist import select_applicable_errata
+
+        fmt = self.repo.formats["2010-03-edison"]
+        built = build_lflist(fmt, self.repo)
         self.assertIn("$whitelist", built.text)
-        by_count = {}
-        for _, count in built.entries.items():
-            by_count[count] = by_count.get(count, 0) + 1
-        self.assertEqual(43, by_count.get(0), "forbidden entries")
-        self.assertEqual(70, by_count.get(1), "limited entries")
-        self.assertEqual(19, by_count.get(2), "semi-limited entries")
         pool = self.repo.pools["pool-edison-2010"]
-        self.assertEqual(len(pool.cards), len(built.entries))
+        banlist = self.repo.banlists["tcg-2010-03"]
+        status_by_code = {e.card.passcode: e.status for e in banlist.entries}
+        overrides = select_applicable_errata(fmt, self.repo)
+
+        expected_codes: dict[int, int] = {}
+        counts = {"forbidden": 0, "limited": 1, "semilimited": 2}
+        for card in pool.cards:
+            count = counts.get(status_by_code.get(card.passcode, ""), 3)
+            override = overrides.get(card.passcode)
+            if override is not None:
+                impl = override.implementation
+                codes = [
+                    int(impl["historical_passcode"]),
+                    *(int(v) for v in impl.get("historical_variant_passcodes", [])),
+                ]
+            else:
+                codes = [card.passcode, *card.variants]
+            for code in codes:
+                expected_codes[code] = count
+        self.assertEqual(expected_codes, built.entries)
+
+        # Per-card banlist cardinality is unchanged by substitution.
+        by_status: dict[str, int] = {}
+        for card in pool.cards:
+            status = status_by_code.get(card.passcode)
+            if status:
+                by_status[status] = by_status.get(status, 0) + 1
+        self.assertEqual({"forbidden": 43, "limited": 70, "semilimited": 19}, by_status)
+
         # A card from the following set era must not appear at all (Key Mouse,
         # The Shining Darkness - the whitelist rejects unlisted cards).
         self.assertNotIn(135598, built.entries)
+
+    def test_edison_never_lists_a_modern_and_historical_version_together(self):
+        """The failure that would let a player run six copies: the modern card
+        and its historical implementation both legal in one list."""
+        from retroformats.lflist import select_applicable_errata
+
+        fmt = self.repo.formats["2010-03-edison"]
+        built = build_lflist(fmt, self.repo)
+        for modern, override in select_applicable_errata(fmt, self.repo).items():
+            impl = override.implementation
+            self.assertNotIn(
+                modern,
+                built.entries,
+                f"{override.erratum.modern_card.name}: modern code still legal alongside "
+                f"its historical implementation {impl['historical_passcode']}",
+            )
+            self.assertIn(int(impl["historical_passcode"]), built.entries)
 
     def test_edison_banlist_counts(self):
         banlist = self.repo.banlists["tcg-2010-03"]

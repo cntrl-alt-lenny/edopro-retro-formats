@@ -5,18 +5,33 @@
     "passcode": 47507260,
     "name": "Mystic Swordsman LV2"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
+      "summary": "Period procedure, not a text erratum: if the End Phase effect resolves and no 'Mystic Swordsman LV4' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script has no reveal branch. No lineage version prints reveal wording.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
-      "modern_text": "At the start of the Damage Step, if this card attacked a face-down Defense Position monster: Destroy that monster. During the End Phase, if this card destroyed a monster by battle this turn: You can send this face-up card to the Graveyard; Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card era allowance: the goat sptg is `if chk==0 then return ft>0 end` where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`. In the period implementation the End Phase effect can therefore be activated and its cost paid - this card is sent to the Graveyard - with no LV4 anywhere to Summon, spending the monster for nothing; modern rules forbid the activation outright. No source dates when this card lost that allowance.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700077,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700077.lua",
+    "script": "goat/c504700077.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The remaining script differences are verified non-behavioural: the goat local s.spcost is byte-equivalent to the modern library's Cost.SelfToGrave (cardscripts/utility.lua:1434-1438, same IsAbleToGraveAsCost check and SendtoGrave(REASON_COST)); s.LVset=0x5f is the numeric value of SET_MYSTIC_SWORDSMAN; and RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END is the expansion of RESETS_STANDARD_PHASE_END (cardscripts/constant.lua:300). Text lineage v0 (SOD-EN011, 2004-10-01) -> v1 (SD5-EN013, 2005-11-02) -> v2 (DR3-EN011, 2006-11-25) -> v3 (LCYW-EN200, 2012-09-29) is PSCT formalisation of the same resolution: 'destroy the monster immediately ... without flipping it face-up or applying damage calculation' becomes 'At the start of the Damage Step ...: Destroy that monster', which both scripts already implement as an EVENT_BATTLE_START trigger; 'send this face-up card to the Graveyard' adds no face-up check in either script. Intermediate-state reasoning as for the other GoatConfirm cards: the two ruling transitions are unordered, no upstream implementation covers the state between them, and none is attached because GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

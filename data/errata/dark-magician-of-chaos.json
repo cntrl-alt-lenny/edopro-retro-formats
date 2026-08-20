@@ -10,12 +10,18 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2015-11-12",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENC02, Yugi's Legendary Decks)"
       },
-      "historical_text": "When this card is Normal or Special Summoned: You can target 1 Spell in your Graveyard; add it to your hand. Banish any monster this card destroys by battle, instead of sending it to the Graveyard. If this face-up card would leave the field, banish it instead.",
-      "modern_text": "During the End Phase, if this card was Normal or Special Summoned this turn: You can target 1 Spell in your GY; add it to your hand. You can only use this effect of \"Dark Magician of Chaos\" once per turn. If this card destroys an opponent's monster by battle, after damage calculation: Banish that opponent's monster. If this face-up card would leave the field, banish it instead.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "When this card is Normal or Special Summoned: You can target 1 Spell Card in your Graveyard; add that target to your hand. Banish any monster destroyed by battle with this card. If this face-up card would leave the field, banish it instead.",
+      "modern_text": "During the End Phase, if this card was Normal or Special Summoned this turn: You can target 1 Spell Card in your Graveyard; add it to your hand. You can only use this effect of \"Dark Magician of Chaos\" once per turn. If this card destroys an opponent's monster by battle, after damage calculation: Banish that opponent's monster. If this face-up card would leave the field, banish it instead.",
+      "summary": "Functional erratum on both effects. The Spell recovery moved from an immediate on-Summon trigger with no use limit (pre-errata/c511001039.lua registers two EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O effects on EVENT_SUMMON_SUCCESS and EVENT_SPSUMMON_SUCCESS) to a delayed End Phase trigger carrying a hard once-per-turn by name (modern EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O on EVENT_PHASE+PHASE_END with SetCountLimit(1,id) and a flag-effect cost proving the card was Summoned that turn). The battle banish changed from a continuous EFFECT_BATTLE_DESTROY_REDIRECT to LOCATION_REMOVED - which silently banishes any monster it destroys by battle - into a mandatory Trigger Effect on EVENT_BATTLED that starts a Chain, resolves after damage calculation and applies only to an opponent's monster; the modern leave-field redirect also gained EFFECT_FLAG_CANNOT_DISABLE, which the pre-errata one lacks.",
       "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511001039,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511001039.lua",
+    "script": "pre-errata/c511001039.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The pre-errata cdb text is a near (0.8706) not exact match to lineage v3 (BP01-EN007, 2012-05-24), differing in 'add it to your hand' vs 'add that target to your hand' and 'Banish any monster this card destroys by battle, instead of sending it to the Graveyard' vs 'Banish any monster destroyed by battle with this card'; the behaviour it encodes is v3's, so the chain starts at v3. Importantly for era fidelity, v3 is behaviourally identical to the earlier printings the period formats would have used - v1 (DR2-EN066, 2005-10-20) and v2 (GLD1-EN016, 2008-04-02) differ only by 'select and add' -> 'target ... add', 'removed from play' -> 'banish' and 'is destroyed or removed from the field' -> 'would leave the field' - so no era mismatch is flagged. One further behaviour is carried by the baseline but not by any text and is not recorded as its own change: the pre-errata resolution calls Duel.ConfirmCards(1-tp,tc), revealing the retrieved Spell to the opponent, a period procedure the packet does not date. Unrecorded because it predates the baseline: v0 (IOC-EN065, 2004-03-01) said 'When this card is destroyed or removed from the field' without the 'face-up' qualifier added in v1. Trailing v4 -> v5 (SR08-EN015, 2019-04-19) is the Graveyard -> GY rewording and is cosmetic."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
 }

@@ -5,18 +5,33 @@
     "passcode": 46384672,
     "name": "Armed Dragon LV5"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Send 1 Monster Card from your hand to the Graveyard to destroy 1 face-up monster on your opponent's side of the field with an ATK equal to or less than the ATK of the sent monster. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Armed Dragon LV7\" from your hand or Deck.",
-      "modern_text": "You can send 1 monster from your hand to the GY, then target 1 monster your opponent controls with ATK less than or equal to the sent monster's ATK; destroy that target. During the End Phase, if this card destroyed a monster by battle this turn: You can send this card to the GY; Special Summon 1 \"Armed Dragon LV7\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era activation semantics: on the End Phase revival effect the goat script's target function keeps only the free-Monster-Zone test, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...) check, so it can be activated with no \"Armed Dragon LV7\" in hand or Deck - and since sending Armed Dragon LV5 to the Graveyard is a cost, the card is thrown away for nothing. The modern script forbids the activation. No dated source for this card, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "Send 1 Monster Card from your hand to the Graveyard to destroy 1 face-up monster on your opponent's side of the field with an ATK equal to or less than the ATK of the sent monster. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Armed Dragon LV7\" from your hand or Deck.",
+      "summary": "Period procedure: when the End Phase resolution finds no \"Armed Dragon LV7\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script resolves with no reveal. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700075,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700075.lua",
+    "script": "goat/c504700075.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v0 (SOD-EN014, 2004-10-01), matched exactly by the goat cdb text. Trailing lineage v0 -> v5 is collapsed as cosmetic: 'by sending' cost phrasing (DP2-EN011, 2006-02-08 and DR3-EN014, 2006-11-25), 'you can ... select' (SDDL-EN019, 2011-03-04), PSCT 'target ...; destroy that target' (LCYW-EN204, 2012-09-29) and GY (LED2-EN026, 2018-02-22). The 'target' wording formalises existing targeting: the destroy effect carries EFFECT_FLAG_CARD_TARGET and Duel.SelectTarget in BOTH scripts (unchanged in the diff), and 'face-up' dropped at v4 is likewise unimplemented as a change - s.dfilter still tests Card.IsFaceup in both. Remaining diff items are refactoring drift: Cost.SelfToGrave inlined as s.spcost, SET_ARMED_DRAGON vs 0x111, RESETS_STANDARD_PHASE_END vs its expanded form, a nil-guard added to s.desop, and | vs + on location masks. One semantic-looking item is inert: the goat variant passes nolimit=true to IsCanBeSpecialSummoned/Duel.SpecialSummon where modern passes false, but ocgcore's SpSummonStep only consults nolimit for a revive-limited card in the GY/banished/Extra Deck, or in hand/Deck when nocheck is false - both scripts pass nocheck=true and summon from hand or Deck, so the flag cannot change the outcome. Change order: (B) before (A) for the Reinforcement of the Army precedent (allowance gone by 2008-12-15, before (A)'s earliest possible end of 2011-02-02); the true order for this card is unknown. No upstream implementation exists for the intermediate state and it is unreachable while (B) is undated, so no missing-implementation record is attached."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

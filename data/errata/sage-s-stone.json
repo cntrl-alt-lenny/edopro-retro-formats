@@ -5,18 +5,22 @@
     "passcode": 13604200,
     "name": "Sage's Stone"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "You can only activate this card when there is a face-up \"Dark Magician Girl\" on your side of the field. Special Summon 1 \"Dark Magician\" from your hand or Deck.",
-      "modern_text": "If you control a face-up \"Dark Magician Girl\": Special Summon 1 \"Dark Magician\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure plus a relaxed activation condition, not a text erratum: the GOAT script keeps only the free-Monster-Zone test in s.target (the modern Duel.IsExistingMatchingCard over Deck+hand is removed), so the Spell can be activated with no \"Dark Magician\" in hand or Deck, and the failed search is proven by revealing hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script requires an available \"Dark Magician\" to activate and never reveals. Every English text revision states the same \"Dark Magician Girl\" activation condition.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700020,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700020.lua",
+    "script": "goat/c504700020.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v0 (ROD-EN003, 2004-06-29), the text the GOAT variant carries exactly; v0->v1 (GLD4-EN038) and v1->v2 (LCYW-EN073, PSCT colon) are cosmetic restatements of the same activation condition. Flagged chronology-unresolved because the script encodes BOTH components of the era package and only one of them is dated here: the failed-search reveal is covered by the shared verification chronology, but the relaxed activation condition is a per-card ruling and this card has no entry in either the 2005-06-16 UDE Card Rulings capture or the 2008-12-15 Konami Card FAQ capture, so its own end date is unattested. Four cards in this same batch (Reinforcement of the Army, Rescue Cat, Skilled Dark Magician, Skilled White Magician) demonstrably lost that allowance by 2008-12-15, so the Edison-era applicability of this card's relaxed activation is not independently confirmed even though the GOAT-era applicability of the package is. The packet's second upstream code 511777009 is the annotated ANIME version (it places the card in the Monster Zone as \"Dark Magician\"; text ratio 0.378 against the lineage) and is not a historical TCG implementation."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

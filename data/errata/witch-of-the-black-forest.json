@@ -8,15 +8,48 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with a DEF of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
-      "modern_text": "If this card is sent from the field to the GY: Add 1 monster with 1500 or less DEF from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Witch of the Black Forest\" once per turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
+      "summary": "Period procedure, not a text erratum: the mandatory sent-to-Graveyard search is activated regardless (neither script gates activation on a valid target), and when no monster with 1500 or less DEF remains in the Deck the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)) - the ONLY behavioural line separating the goat variant from the pre-errata variant, which is otherwise identical. The printed text meanwhile shed only its procedural select/show/shuffle wording (v1 SKE-020 -> v3 BP01-EN001) with no change to what the effect does; the reveal of the added card itself (Duel.ConfirmCards) survives in the modern script.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 511003012,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511003012.lua",
+        "status": "complete",
+        "tested": false
+      },
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "edisonformat-functional-errata"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-07-06",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (BLLR-EN046, Battles of Legend: Light's Revenge)"
+      },
+      "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
+      "modern_text": "If this card is sent from the field to the GY: Add 1 monster with 1500 or less DEF from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Witch of the Black Forest\" once per turn.",
+      "summary": "Functional erratum: the added monster (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. Both historical scripts show the pre-erratum state - neither the goat nor the pre-errata variant registers the modern e1:SetCountLimit(1,id) nor the EFFECT_CANNOT_ACTIVATE name-lock block with s.aclimit - so before this printing the search had no name-lock and could resolve more than once per turn.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +57,21 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700144,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700144.lua",
+    "script": "goat/c504700144.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (SKE-020), the version the goat baseline implements; v0 (MRD-116, 2002) precedes it and is behaviourally identical. v2 (MRD-116 in Legendary Collection, 2010-10-01) is a cosmetic intermediate between v1 and v3 and is folded into the first change. Unlike the other searchers in this batch, the goat variant relaxes NO activation condition - Witch's trigger is mandatory and neither script tests for a valid target - so only the verification half of the era package applies here and both changes are datable; no chronology-unresolved flag. The shared verification chronology's own evidence includes the 2005-06-16 UDE ruling written for this card, and EdisonFormat.com's period reference corroborates the behaviour independently."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "edisonformat-functional-errata",
+    "yugipedia-set-pages"
+  ]
 }

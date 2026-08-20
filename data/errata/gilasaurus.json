@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2017-04-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN012, Dinosmasher's Fury Structure Deck)"
       },
       "historical_text": "You can Special Summon this card (from your hand). When you do: Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field.",
-      "modern_text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their GY.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their Graveyard.",
+      "summary": "Functional erratum: targeting was removed. v4 (BP01-EN177) reads 'Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field', and upstream's pre-errata script matches it - a Continuous Effect on EVENT_SPSUMMON_SUCCESS asks the opponent (Duel.SelectEffectYesNo) and, on yes, raises a custom event for a second effect that carries EFFECT_FLAG_CARD_TARGET and declares the Graveyard monster at activation through Duel.SelectTarget. v5 (SR04-EN012) reads 'Activate this effect; your opponent can Special Summon 1 monster from their Graveyard', and the modern script is a single mandatory trigger with no EFFECT_FLAG_CARD_TARGET that asks and picks entirely on resolution, its pool filtered by aux.NecroValleyFilter.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511003006,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511003006.lua",
+    "script": "pre-errata/c511003006.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Two unresolved problems sit behind an otherwise clean functional record. (1) Era mismatch: applying this record to a pre-2017 snapshot selects the pre-errata implementation, which reproduces the 2012 PSCT text. That is only right for Edison if v3 -> v4 (BP01-EN177, 2012-05-24) merely formalised targeting that v3's 'If you do, your opponent can Special Summon 1 monster from their Graveyard' already had; the packet contains no evidence either way, because upstream ships no implementation of v3. (2) A larger, undated gap sits before the baseline: v0 (LON-071, 2003-03-01) and v1 (DB2-EN008, 2005-07-27) read 'You may/can treat the Normal Summon of this card as a Special Summon', which on its face consumes your Normal Summon, and v2 (SD09-EN005, 2006-10-20) replaced that with 'You can Special Summon this card from your hand'. Both shipped scripts implement only the later reading - EFFECT_SPSUMMON_PROC from the hand with SetValue(1), which does not consume the Normal Summon - so the GOAT-era version of this card has no implementation at all and no chronology is asserted for that transition. Per the instructions the chain still starts at the version the baseline implements (v4), with these earlier transitions recorded here rather than invented into the chain. Trailing cosmetic: v5 -> v6 (SS03-ENA10, 2019-08-01) is Graveyard -> GY. Secondary observation: the pre-errata script omits aux.NecroValleyFilter, but since it targets in the Graveyard, era Necrovalley would stop it anyway under the interpretation EdisonFormat.com records (negation applies only to effects that target in a Graveyard)."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }

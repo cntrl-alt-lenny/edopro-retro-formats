@@ -5,18 +5,22 @@
     "passcode": 73431236,
     "name": "Iron Blacksmith Kotetsu"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "FLIP: Select 1 Equip Spell Card from your Deck and add it to your hand.",
-      "modern_text": "FLIP: Add 1 Equip Spell from your Deck to your hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure only, not a text erratum: the sole difference between goat/c504700120.lua and official/c73431236.lua is `else Duel.GoatConfirm(tp,LOCATION_DECK)` on the FLIP effect's failed search - if no Equip Spell is found the goat script reveals the Deck, the modern script does nothing. The activation condition is unchanged: `s.target` returns true unconditionally in BOTH scripts, because a FLIP effect is mandatory and always resolves, so this card carries the verification procedure alone and no relaxed activation semantics. That places it squarely under the shared search-verification chronology.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700120,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700120.lua",
+    "script": "goat/c504700120.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Verified by reading both full scripts: they are line-for-line identical apart from the added else-branch. Text lineage v0 (DCR-064, 2003-12-01) -> v1 (DL12-EN006, 2011-06-01) -> v2 (SBSC-EN034, 2019-08-01) is cosmetic: \"Select 1 Equip Spell Card from your Deck and add it to your hand\" -> \"Add 1 Equip Spell Card from your Deck to your hand\" -> \"Add 1 Equip Spell from your Deck to your hand\". No behavioural text transition, hence modern_text_version null. Because the difference is purely the verification procedure, both GOAT (2005-04-01) and Edison (2010-04-24) fall determinately in the old era and need this historical implementation."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

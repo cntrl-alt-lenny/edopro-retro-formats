@@ -5,18 +5,19 @@
     "passcode": 96316857,
     "name": "Recycle"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "During your Standby Phase: You can pay 300 LP, then target 1 non-monster in your Graveyard; return it to the bottom of your Deck.",
-      "modern_text": "During your Standby Phase, by paying 300 Life Points, select 1 non-Monster Card in your Graveyard and return it to the bottom of your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "During your Standby Phase, pay 300 Life Points to select 1 non-Monster Card in your Graveyard and return it to the bottom of your Deck.",
+      "summary": "The only implementation-relevant difference is once-per-turn tracking: the modern script puts e2:SetCountLimit(1) on the Standby Phase optional trigger, so the 300 LP / return-a-non-monster effect can be used once per turn; the pre-errata variant carries no count limit, so the effect can be activated repeatedly in the same Standby Phase, paying 300 LP each time and returning a further non-monster card each time. No printed English text in the lineage carries a once-per-turn clause, so nothing dates this and the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511002983,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511002983.lua",
+    "script": "pre-errata/c511002983.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CONFLICT, recorded rather than resolved: the upstream 'Recycle (Pre-Errata)' cdb text ('During your Standby Phase: You can pay 300 LP, then target 1 non-monster in your Graveyard; return it to the bottom of your Deck.') matches NO English lineage version (best ratio 0.85 against v0, IOC-041) and is written in modern PSCT style, while the pinned modern cards.cdb text is exactly lineage v1 (DR2-EN041, Dark Revelation Volume 2, 2005-10-20) - the older pre-PSCT wording. The Yugipedia errata page records only two English versions, v0 (IOC-041, 2004-03-01) and v1, differing by 'pay 300 Life Points to select' vs 'by paying 300 Life Points, select', which is cosmetic. So no text erratum in the packet supports the 'Pre-Errata' label. NEEDS ESCALATION: the rest of the script diff is pure idiom modernisation (EVENT_PHASE|PHASE_STANDBY vs +, Duel.IsTurnPlayer(tp) vs Duel.GetTurnPlayer()==tp, Cost.PayLP(300) vs a hand-written cost function, SEQ_DECKBOTTOM vs the literal 1, an added nil-guard, id vs MODID in the description), which is consistent with the variant being a stale fork of an older revision of the modern script; whether the missing SetCountLimit(1) is a deliberate period reconstruction or an artefact of that fork cannot be settled from this packet. Historical text is recorded as v0 (a genuine period printing, behaviourally identical to v1) because the variant's own cdb text matches no printing."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

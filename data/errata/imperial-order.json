@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2017-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN049, Duelist Saga)"
       },
-      "historical_text": "Negate all Spell effects on the field. Once per turn, during your Standby Phase, pay 700 LP or destroy this card.",
+      "historical_text": "Negate all Spell Card effects on the field. During each of your Standby Phases, pay 700 Life Points or destroy this card.",
       "modern_text": "Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum with two mechanisms. The maintenance cost moved from your own Standby Phase to every Standby Phase: the pre-errata script gates the effect on s.mtcon returning Duel.GetTurnPlayer()==tp, which the modern script drops, matching 'During each of your Standby Phases' becoming 'Once per turn, during the Standby Phase'. The payment also became mandatory: the pre-errata script wraps it in Duel.SelectYesNo so the controller may decline and let Imperial Order be destroyed, while the modern script pays whenever Duel.CheckLPCost succeeds, matching 'you must pay 700 LP (this is not optional)'.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511002996,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511002996.lua",
+    "script": "pre-errata/c511002996.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v4 (LCYW-EN178, 2012-09-29), where text_matches_version points. The pre-errata cdb string ('Once per turn, during your Standby Phase, pay 700 LP or destroy this card') matches no lineage version verbatim (0.837) - it is upstream's modern-wording rendering of v4's 'During each of your Standby Phases, pay 700 Life Points or destroy this card', semantically identical since you have exactly one Standby Phase per turn, and the script's SetCountLimit(1) is present in both variants. Earlier transitions predate the baseline and are not recorded: v0 -> v1 is Magic -> Spell, and v1 -> v2 (DB1-EN086, 2004-10-12) changes 'If you cannot, this card is destroyed' to 'If you do not', which reads as making the payment optional - potentially behavioural, but it sits before the version the baseline implements and is not evaluated here. The remaining script differences are equivalent modernisations of the negation check (s.distarget/s.disoperation renamed, tl==LOCATION_SZONE for a bitmask test, re:IsActiveType(TYPE_SPELL) for re:IsSpellEffect()), matching the cosmetic 'Spell Card effects' -> 'Spell effects' wording, and are not recorded as a change."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }

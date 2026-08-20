@@ -5,18 +5,18 @@
     "passcode": 74137509,
     "name": "Graceful Dice"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Roll 1 six-sided die. The result is multiplied by 100 points and added to the ATK and DEF of all monsters you control until the end of your turn. Monsters summoned after this card's activation are excluded.",
-      "modern_text": "Roll a six-sided die. All monsters you currently control gain ATK/DEF equal to the result x 100, until the end of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Damage Step activation legality, not a text erratum: the GOAT script's activation effect carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the two open different Damage Step sub-windows for this Quick-Play Spell. Everything else resolves identically - both block activation once damage has been calculated (modern via an inline condition, GOAT via s.condition with the same test), both roll one die at resolution and give every face-up monster you control ATK and DEF equal to the result x100 until the End Phase. No printed text in the lineage distinguishes the two windows and no dated source in the packet fixes when the window changed, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700124,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700124.lua",
+    "script": "goat/c504700124.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v1 (TSC-E002, 2003-11-04), which the goat cdb text matches exactly. The whole English lineage is cosmetic: v1 -> v2 (GLD4-EN037, 2011-06-24) restates 'result is multiplied by 100 points and added to the ATK and DEF of all monsters you control ... Monsters summoned after this card's activation are excluded' as 'The face-up monsters you currently control gain ATK and DEF equal to the result x 100'; v2 -> v3 (LCJW-EN065, 2013-10-11) drops 'face-up' although both scripts still filter Card.IsFaceup; v3 -> v4 (SS02-ENB16, 2019-01-24) is the ATK/DEF slash and 'until the end of this turn'. The remaining script diffs (category ATKCHANGE vs ATKCHANGE+DEFCHANGE, the description string, RESETS_STANDARD_PHASE_END spelled out, aux.Next vs Iter) are hints and equivalent spellings. ESCALATION: the sole behavioural difference is one activation-flag bit. It is recorded as a per-card ruling because the instructions place 'damage-step legality' under ruling, but the Edison brief lists the 7-timing Damage Step among the global rule-profile differences - a maintainer should confirm the goat rule profile does not already reproduce this window before shipping a card substitution. The packet's second upstream code 511000541 is the ANIME Graceful Dice (targets 1 monster with 500 ATK or less and multiplies its ATK by the roll); it is a different effect, not a historical TCG version, and is not a candidate baseline."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

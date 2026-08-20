@@ -5,17 +5,17 @@
     "passcode": 22359980,
     "name": "Mirror Wall"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Halve the ATK of all your opponent's attacking monsters. Pay 2000 Life Points during each of your Standby Phases. If you do not, destroy this card.",
-      "modern_text": "Halve the ATK of your opponent's attacking monsters. Once per turn, during your Standby Phase, pay 2000 LP or destroy this card.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Two period behaviours that no printed text carries. (1) ATK-modifier ordering: the halving is registered as EFFECT_SET_ATTACK in the GOAT script but EFFECT_SET_ATTACK_FINAL in the modern one (value function c:GetAttack()/2 in both), so in the era build an ATK boost applied after the halving is added on top of the halved value, while the modern halving is applied after every other modifier and overrides it. (2) Damage-step legality: the activation carries EFFECT_FLAG_DAMAGE_CAL with hint timing TIMING_DAMAGE_CAL instead of the modern EFFECT_FLAG_DAMAGE_STEP / TIMING_DAMAGE_STEP, under a timing condition that is logically identical to the modern aux helper, so the era card is activatable during damage calculation itself. Nothing in the packet dates either difference, so the chronology is unresolved.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +24,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700032,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700032.lua",
+    "script": "goat/c504700032.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's second upstream code, 513000002 'Mirror Wall (Anime)' in cards-unofficial.cdb, is the anime card - its text has no Standby Phase maintenance cost at all and its script deletes the maintenance effect (text match ratio 0.59) - so it is a different card, not an artwork variant or a historical TCG version, and it is not used here. Remaining script differences are refactors: EVENT_PHASE|PHASE_STANDBY vs +, RESET_EVENT|RESETS_STANDARD vs +, Duel.IsTurnPlayer(tp) vs Duel.GetTurnPlayer()==tp; both scripts register the persistent per-attacker flag with RESET_EVENT+RESETS_STANDARD, so the halving persists after the attack in both. Text lineage after the baseline is cosmetic: v1 (DB1-EN078, 2004-10-12, the goat cdb text) -> v2 (RP02, 2009) -> v3/v4 (Legendary Collection 2010, BP02 2013) spell out that monsters which attacked while Mirror Wall was face-up stay halved, which is what both scripts already do -> v5 (BP03 2014, 'LP') -> v6 (SBCB-EN193, 2020-11-26) 'Once per turn, during your Standby Phase', matching the SetCountLimit(1) both scripts carry. The earlier v0 (PSV-016, 2002) 'You must pay ... If you cannot, this card is destroyed' vs v1's optional 'If you do not' predates the baseline version. Chronology being unresolved, the applier will block rather than guess."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

@@ -5,18 +5,24 @@
     "passcode": 90980792,
     "name": "Dark Jeroid"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2020-05-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the printing carrying the current text (SS05-ENB18, Speed Duel Starter Decks: Twisted Nightmares)"
       },
       "historical_text": "When this card is Normal Summoned, Flip Summoned, or Special Summoned successfully, select 1 face-up monster on the field. As long as the monster remains face-up on the field, decrease its ATK by 800 points.",
       "modern_text": "If this card is Summoned: Target 1 face-up monster on the field; it loses 800 ATK.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Wording modernisation only: the GOAT script differs from the modern one in exactly one line, writing RESET_EVENT+RESETS_STANDARD where the modern writes RESET_EVENT|RESETS_STANDARD - the same value, since the flags are disjoint bits - so the two are behaviourally identical. Every English revision from v1 through v4 preserves the same resolution, including the v3 'select' -> 'Target' rewording, which both scripts already implement as a targeting effect, and the v1 -> v2 collapse of 'As long as the monster remains face-up on the field' into a plain 'It loses 800 ATK', which both scripts encode with the same RESETS_STANDARD reset set.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700159,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700159.lua",
+    "script": "goat/c504700159.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "This is the cleanest cosmetic case in the batch: the packet's script_diff is a single hunk containing only the + versus | notation swap, and the packet records no upstream annotations at all. The GOAT cdb text matches lineage v1 (DR1-EN004, 2005-03-19) exactly, so the chain starts there; v0 (PGD-056, 2003-07-18) additionally spelled out 'This effect lasts until the selected card is destroyed or removed from the field' and predates the baseline. Upstream ships the GOAT code for period display text only; behaviour is identical, so computed selection never needs it."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

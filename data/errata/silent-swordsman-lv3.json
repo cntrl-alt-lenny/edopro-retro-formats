@@ -5,18 +5,22 @@
     "passcode": 1995985,
     "name": "Silent Swordsman LV3"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "Negate the effects of your opponent's Spell Cards that designate this card. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Silent Swordsman LV5\" from your hand or Deck. (You cannot activate this effect the turn that this card is Normal Summoned, Special Summoned, or flipped face-up.)",
-      "modern_text": "Negate your opponent's Spell effects that target this card. During your Standby Phase: You can send this face-up card to the Graveyard; Special Summon 1 \"Silent Swordsman LV5\" from your hand or Deck. You cannot activate this effect the turn this card is Summoned or flipped face-up.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure plus a relaxed activation condition, not a text erratum: the GOAT script reduces s.sptg to the free-zone test alone (the modern Duel.IsExistingMatchingCard over hand+Deck is removed), so the Standby Phase effect can be activated - paying the send-this-card-to-the-Graveyard cost - with no \"Silent Swordsman LV5\" in hand or Deck, and the failure is proven by revealing hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script requires an available LV5 and never reveals.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700006,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700006.lua",
+    "script": "goat/c504700006.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v0 (RDS-EN009, 2004-12-01), the text the GOAT variant carries exactly. v0->v1 ('designate'->'target'), v1->v2 (DT05-EN009, explicit 'you can') and v2->v3 (LCYW-EN033, PSCT colon/semicolon, 'Summoned' collapsing 'Normal Summoned, Special Summoned') are cosmetic; the 2005 and 2008 rulings for this card concern only which opposing Spell effects the negation catches, which both scripts implement identically (the EFFECT_DISABLE hunk is unchanged in the diff). The remaining diff hunks - Cost.SelfToGrave written out as a local cost function, EVENT_PHASE+PHASE_STANDBY vs bitwise or, s.LVset=0xe7 vs the named SET_SILENT_SWORDSMAN constant - are upstream idiom, same values. Flagged chronology-unresolved because the script encodes both era components and only the reveal is dated: no per-card verification or activation ruling exists for this card in either archived capture, so the end date of the relaxed activation condition is unattested."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

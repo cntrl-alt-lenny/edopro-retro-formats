@@ -5,18 +5,22 @@
     "passcode": 24317029,
     "name": "Gravekeeper's Spy"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "FLIP: Special Summon 1 Monster Card that includes \"Gravekeeper's\" in its card name with an ATK of 1500 or less from your Deck.",
-      "modern_text": "FLIP: Special Summon 1 \"Gravekeeper's\" monster with 1500 or less ATK from your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure, not a text erratum: when the FLIP effect finds no \"Gravekeeper's\" monster with 1500 or less ATK in the Deck, the GOAT script reveals the Deck to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_DECK) in s.operation); the modern script simply ends the resolution. This is the card's ONLY implementation-relevant difference: both s.target functions return true unconditionally, so there is no relaxed activation condition here - the printed text and the FLIP trigger's legality are identical on both sides.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700044,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700044.lua",
+    "script": "goat/c504700044.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v1 (DR1-EN007, Dark Revelation Volume 1, 2005-03-19) exactly - in force at the 2005-04-01 GOAT snapshot. Surrounding lineage is cosmetic: v0 (PGD-059, 2003-07-18) spells out \"Select ... and Special Summon it in face-up Attack or Defense Position\" plus a shuffle sentence, which the shared POS_FACEUP Special Summon in both scripts already reproduces; v1 -> v2 (CP03-EN003, 2007-05-15) is the \"Gravekeeper's monster ... 1500 or less ATK\" contraction, so the Edison-era text differs from the baseline only in wording. The remaining script diff is a constant substitution (SET_GRAVEKEEPERS vs the literal 0x2e) in s.listed_series and s.filter. Because only the verification procedure differs, the shared chronology dates this record fully and both target eras fall determinately on the old side of it. Not listed on EdisonFormat.com's Functional Errata page."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

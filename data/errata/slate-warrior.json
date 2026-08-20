@@ -5,18 +5,18 @@
     "passcode": 78636495,
     "name": "Slate Warrior"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "FLIP: Increase the ATK and DEF of this monster by 500 points. The ATK and DEF of a monster that destroys this monster as a result of battle is decreased by 500 points.",
-      "modern_text": "FLIP: This card gains 500 ATK and DEF.\nIf this card is destroyed by battle: The monster that destroyed it loses 500 ATK and DEF.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era trigger timing, not a text erratum: the goat script fires the ATK/DEF-drain on EVENT_BATTLED gated by s.descon (e:GetHandler():IsBattleDestroyed()), so the mandatory Trigger Effect registers at the end of damage calculation while Slate Warrior is still on the field, whereas the modern script uses EVENT_BATTLE_DESTROYED and so triggers after it has already been sent to the Graveyard. Upstream annotates the variant 'Triggers on the field'. The -500 ATK/DEF applied to the destroying monster and the FLIP +500 are otherwise identical (the remaining diff is RESET_EVENT|RESETS_STANDARD vs the '+' spelling of the same bits). No evidence in the packet dates when the timing changed, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700136,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700136.lua",
+    "script": "goat/c504700136.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700136.lua matches lineage v0 (WC4-003, 2004-02-10) exactly. The whole English lineage is behaviourally unchanged and is not recorded as a change: v0 -> v1 (TP8-EN003, 2006-04-28, 'this monster' -> 'this card') -> v2 (DT05-EN011, 2011-05-29, 'This card gains 500 ATK and DEF. Any monster that destroys this card by battle loses 500 ATK and DEF.') -> v3 (BP01-EN121, 2012-05-24, PSCT 'If this card is destroyed by battle: The monster that destroyed it loses 500 ATK and DEF.', = pinned modern text). The v3 PSCT phrasing is the closest textual correlate of the modern EVENT_BATTLE_DESTROYED timing, but the packet gives no evidence that the BP01 printing is what changed the ruling, so I did not date the ruling change to it - effective is left empty rather than anchored to a printing that only plausibly matches."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

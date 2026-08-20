@@ -5,18 +5,18 @@
     "passcode": 58551308,
     "name": "Spear Cretin"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "FLIP: After this card is flipped, when it is sent to the Graveyard, both you and your opponent select 1 monster from your respective Graveyards and Special Summon it on the field in face-up Attack Position or face-down Defense Position (no Tribute is required for monsters of Level 5 or more).",
-      "modern_text": "FLIP: When this card is sent to the Graveyard after being flipped, each player selects 1 monster from their Graveyard, and Special Summons it in face-up Attack Position or face-down Defense Position.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era ruling package carried entirely by the script, with no text difference: the goat variant makes the revival an OPTIONAL Trigger Effect that activates from the Graveyard (EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O with SetRange(LOCATION_GRAVE) and EFFECT_FLAG_DAMAGE_STEP added, so it is usable at the damage-step timing where a battle-destroyed Flip monster reaches the GY), whereas the modern script is a mandatory EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F that cannot be declined. The goat variant also refuses every monster sent to the Graveyard in the same event - its SelectTarget calls exclude the whole group eg, and its chk==0 additionally requires eg:IsContains(e:GetHandler()) - while the modern script excludes only Spear Cretin itself, so monsters destroyed simultaneously with Spear Cretin are legal revival choices in the modern game and illegal in the era. Upstream's own annotations state both points: 'Optional' and 'You cannot choose monsters destroyed at the same time as cretin'. Nothing in the packet dates either shift, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700095,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700095.lua",
+    "script": "goat/c504700095.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700095.lua matches lineage v0 (MRL-087, Magic Ruler, 2002-09-16) exactly. The lineage is not monotonic and is worth recording as an observation: v2 (SRL-087, dated by the packet through the Legendary Collection reprint, tcg-eu 2010-10-01) reproduces v0's text verbatim, so the printed text in force at the Edison snapshot is behaviourally the same as the GOAT-era text. All text transitions are cosmetic and are not recorded as changes: v0/v2 'both you and your opponent select 1 monster ... and Special Summon it on the field ... (no Tribute is required for monsters of Level 5 or more)' vs v1 (SDRL-EN005, 2007-10-24) and v3 (DT05-EN006, 2011-05-29, = pinned modern text) 'each player selects 1 monster from their Graveyard, and Special Summons it' - the parenthetical only restates that this is a Special Summon, and both scripts summon in POS_FACEUP_ATTACK|POS_FACEDOWN_DEFENSE for each player independently. The optional/mandatory and simultaneous-destruction differences appear nowhere in any printed text, which is why this is recorded as ruling rather than functional."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

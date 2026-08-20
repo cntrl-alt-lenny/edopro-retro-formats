@@ -5,18 +5,33 @@
     "passcode": 39191307,
     "name": "Masked Dragon"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "When this card is destroyed and sent to the Graveyard as a result of battle, you can Special Summon 1 Dragon-Type monster with an ATK of 1500 or less to your side of the field from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves and no Dragon-Type monster with 1500 or less ATK is in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch at all. No lineage version ever printed reveal wording.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this card is destroyed and sent to the Graveyard as a result of battle, you can Special Summon 1 Dragon-Type monster with an ATK of 1500 or less to your side of the field from your Deck. Then shuffle your Deck.",
-      "modern_text": "When this card is destroyed by battle and sent to the Graveyard: You can Special Summon 1 Dragon-Type monster with 1500 or less ATK from your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card era allowance: the goat target checks only free zone space (`return Duel.GetLocationCount(tp,LOCATION_MZONE)>0`) where the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the trigger activate and resolve with no eligible Dragon in the Deck. No source in the packet dates when this card lost that allowance, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700064,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700064.lua",
+    "script": "goat/c504700064.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage v0 (SOD-EN026, 2004-10-01) -> v1 (DR3-EN026, 2006-11-25) -> v2 (SDRL-EN013, 2007-10-24) -> v3 (TU06-EN003, 2011-08-04) is cosmetic: 'destroyed and sent to the Graveyard as a result of battle' -> 'destroyed by battle and sent to the Graveyard', 'an ATK of 1500 or less' -> '1500 or less ATK', dropped 'to your side of the field' and 'Then shuffle your Deck', PSCT colon at v3. Incidental packet observation: the pinned modern cards.cdb text matches lineage v2 rather than the newest v3 (modern_text_matches_version = 2), i.e. the cdb lags the PSCT reprint; behaviourally identical, so no change recorded for it. Intermediate-state reasoning as for the other GoatConfirm searchers: the two ruling transitions cannot be ordered against each other, no upstream implementation covers the state between them, and none is attached because GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

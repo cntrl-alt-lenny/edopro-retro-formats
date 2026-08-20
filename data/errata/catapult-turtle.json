@@ -10,13 +10,20 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2014-06-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the once-per-turn text (DL18-EN001, Duelist League 18 participation cards)"
       },
       "historical_text": "You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
       "modern_text": "Once per turn: You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum: the Tribute-for-damage Ignition effect became a hard once per turn. The modern script carries e1:SetCountLimit(1) and pre-errata/c511000228.lua does not, so the historical card can Tribute monsters for damage repeatedly in one turn. EdisonFormat.com records the same period behaviour independently.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "edisonformat-functional-errata"
       ]
     }
   ],
@@ -24,16 +31,21 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511000228,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511000228.lua",
+    "script": "pre-errata/c511000228.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The pre-errata cdb text matches lineage v5 (LCYW-EN019, 2012-09-29) exactly, so the recorded chain starts there; the earlier transitions v0 (MRD-075, 2002) through v4 (DPYG-EN006, 2009) are wording modernisations of the same Tribute-for-half-ATK effect and predate the baseline implementation, so they are not recorded as changes. One further script difference is NOT text-driven and is not recorded as its own change: the modern script gates the Release cost on s.cfilter (c:GetAttack()>0) while the pre-errata script passes nil, so the historical implementation permits Tributing a 0-ATK monster for 0 damage. No source in the packet dates that refinement; it is carried by the baseline implementation, which every pre-2014-06-27 snapshot selects anyway, so it does not need its own (blocking) unresolved-chronology entry. The second upstream code 511004015 is 'Catapult Turtle (Anime)' - a different card with three anime-only effects - and is excluded rather than folded in as an artwork variant."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+  ]
 }

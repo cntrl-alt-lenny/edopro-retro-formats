@@ -8,15 +8,37 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2006-11-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Dark Revelation Volume 3 (DR3-EN060)"
       },
       "historical_text": "Discard 1 card from your hand. During this turn, any damage you take from your opponent becomes 0.",
-      "modern_text": "Discard 1 card; you take no damage from your opponent's cards this turn, also your monsters cannot be destroyed by battle this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
+      "summary": "Wording only: 'During this turn, any damage you take from your opponent becomes 0' becomes 'This turn, any damage you take from your opponent's cards and effects becomes 0'. Same resolution - all damage from the opponent is reduced to 0 for the turn, with the discard still a cost.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2022-03-17",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENE18, Speed Duel GX: Duel Academy Box)"
+      },
+      "historical_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
+      "modern_text": "Discard 1 card; you take no damage from your opponent's cards this turn, also your monsters cannot be destroyed by battle this turn.",
+      "summary": "Functional erratum: the card gained a second clause making your monsters immune to battle destruction for the turn. The GOAT script registers only the damage-to-zero field effect; the modern script additionally registers a field EFFECT_INDESTRUCTABLE_BATTLE with EFFECT_FLAG_IGNORE_IMMUNE over your Monster Zone, resetting at the End Phase. Before the erratum the card stops damage and nothing else.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +46,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700153,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700153.lua",
+    "script": "goat/c504700153.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream annotates the goat variant 'Doesn't prevent battle destruction', which matches the script diff exactly - the only removed lines are the EFFECT_INDESTRUCTABLE_BATTLE block. Remaining diff lines are bitwise-or vs addition of disjoint flags and are equivalent. Both GOAT (2005-04-01) and Edison (2010-04-24) fall well before the 2022 erratum, so both take the baseline implementation."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
 }

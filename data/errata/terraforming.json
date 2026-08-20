@@ -5,18 +5,33 @@
     "passcode": 73628505,
     "name": "Terraforming"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "Add 1 Field Spell Card from your Deck to your hand.",
+      "summary": "Period procedure, not a text erratum: when the effect resolves with no Field Spell left in the Deck, the goat script proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Add 1 Field Spell Card from your Deck to your hand.",
-      "modern_text": "Add 1 Field Spell from your Deck to your hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card ruling: the goat script removes the modern activation legality check that a Field Spell exist in the Deck ('if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' -> 'return true'), so the Normal Spell can be activated with nothing to fetch. Nothing in the packet dates when this card lost that allowance, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700121,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700121.lua",
+    "script": "goat/c504700121.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v1 (DR1-EN036, released 2005-03-19, i.e. in force at the GOAT snapshot); v0 (PGD-088, 2003) predates it and only differs by 'Field Magic Card' and the explicit shuffle sentence. Trailing v1 -> v2 (YS17-EN031, 2017) drops the word 'Card' - cosmetic. Reveal and relaxed activation are entangled in play but recorded separately because only the reveal has sourced bounds; the intermediate state needs no implementation, as GOAT (2005-04-01) and Edison (2010-04-24) both precede the earliest possible end of the old verification era (2011-02-02)."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

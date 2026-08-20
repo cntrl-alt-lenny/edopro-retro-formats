@@ -5,18 +5,18 @@
     "passcode": 68540058,
     "name": "Metalmorph"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "After activation, this card is used to equip a face-up monster. The monster equipped with this card increases its ATK and DEF by 300 points. When attacking with a monster equipped with this card, you can further increase its ATK by an amount equal to half the ATK of your target.",
-      "modern_text": "Target 1 face-up monster on the field; equip this card to that target. It gains 300 ATK/DEF. If it attacks, it gains ATK equal to half the ATK of the attack target, during damage calculation only.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Metalmorph may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore. The condition swap is a no-op (the inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' equals the modern aux.StatChangeDamageStepCondition, utility.lua:1412), as are 'Duel.IsPhase(PHASE_DAMAGE_CAL)' vs 'Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL' in atkcon, the RESET constant spelling, and the added nil guard on the equip target. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET in both), as is the half-attack-target-ATK boost applying during damage calculation only.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700111,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700111.lua",
+    "script": "goat/c504700111.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet lists a SECOND upstream code, 511006005 ('Metalmorph (Pre-Errata)', cards-unofficial.cdb, pre-errata/c511006005.lua). It is deliberately not attached as a resulting_implementation, because it is behaviourally identical to the modern script: it keeps EFFECT_FLAG_DAMAGE_STEP, and its entire diff against modern is the inline copy of aux.StatChangeDamageStepCondition (verified logically identical against CardScripts utility.lua:1412), the '|' -> '+' constant spellings, the Duel.IsPhase -> Duel.GetCurrentPhase rewrite, and a nil guard. Its cdb text is lineage v5 (BP02-EN173, 2013-06-28), which differs from the pinned modern text v6 (SBSC-EN030, 2019-08-01) only as '300 ATK and DEF' vs '300 ATK/DEF'. So it is an upstream period-text entry, not a distinct historical behaviour - hence the upstream-variant-cosmetic flag. The two codes are far apart (not artwork variants of one implementation) and implement different lineage versions, so the GOAT entry, which implements the oldest recorded version, is the baseline. The whole English lineage is cosmetic and is not recorded as a change: v0 (FMR-003, 2002-11-26, the GOAT entry's exact text) -> v1 (PP01-EN014, 2007-07-26) -> v2 (SDMM-EN033, 2010-02-19) -> v3 (WP11-EN020, 2011-08-13) -> v4 (SP13-EN042, 2013-03-01) -> v5 -> v6, across which 'a face-up monster' briefly becomes 'a monster' (v2/v3) before returning to 'face-up' (v4); the shared operation enforces tc:IsFaceup() in every version, and 'Target 1 monster' is not a targeting change since EFFECT_FLAG_CARD_TARGET is present throughout. Nothing dates the Damage Step window change, so effective is left empty."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

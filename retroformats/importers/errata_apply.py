@@ -151,6 +151,28 @@ import re as _re
 _WAYBACK_RE = _re.compile(r"web\.archive\.org/web/(\d{4})(\d{2})(\d{2})\d*")
 
 
+def _last_day_of_month(year: int, month: int) -> str:
+    if month == 12:
+        return f"{year}-12-31"
+    import datetime as _dt
+
+    return str(_dt.date(year, month + 1, 1) - _dt.timedelta(days=1))
+
+
+def _effective_bounds(effective: dict) -> tuple[str | None, str | None]:
+    """(earliest, latest) possible effect date of one change, as ISO strings."""
+    date = effective.get("date")
+    if date:
+        precision = effective.get("precision") or "day"
+        year, month = int(date[:4]), int(date[5:7])
+        if precision == "year":
+            return f"{year}-01-01", f"{year}-12-31"
+        if precision == "month":
+            return f"{year}-{month:02d}-01", _last_day_of_month(year, month)
+        return date, date
+    return effective.get("old_attested_through"), effective.get("new_attested_from")
+
+
 def capture_date(url: str) -> str | None:
     """The date an archive URL's capture attests, if it is one."""
     m = _WAYBACK_RE.search(str(url or ""))
@@ -348,6 +370,22 @@ def apply_decision(
             f"{slug}: classification {claimed!r} != dominant change kind {dominant!r}"
         )
 
+    # changes[] must be chronologically ordered. Only a DEFINITE inversion is
+    # an error: a change that certainly finished taking effect before an
+    # earlier one could have begun. Overlapping uncertainty is legitimate.
+    max_earlier_start = None
+    for i, change in enumerate(changes):
+        effective = change["effective"]
+        earliest, latest = _effective_bounds(effective)
+        if latest and max_earlier_start and latest < max_earlier_start:
+            raise DecisionError(
+                f"{slug}: changes[{i}] took effect by {latest}, before an earlier "
+                f"change could have begun ({max_earlier_start}); changes[] must be "
+                "ordered oldest to newest"
+            )
+        if earliest:
+            max_earlier_start = max(max_earlier_start or earliest, earliest)
+
     record["classification"] = dominant
     record["changes"] = changes
     by_code = {
@@ -391,6 +429,50 @@ def apply_decision(
                     f"implement version {want}; the variant may belong to a different "
                     "era (set era_mismatch_ack with an explanation if deliberate)"
                 )
+    # An unresolved version must SAY why it cannot be reproduced. Where the
+    # packet PROVES no upstream implementation covers that version, the
+    # acknowledgement is a verified fact and is recorded automatically (the
+    # behavioural impact comes from the reviewer's own summary). Where an
+    # upstream implementation does exist, the decision is rejected - the
+    # reviewer should have used it rather than declared a gap.
+    upstream_versions = {
+        (impl.get("text_matches_version") or {}).get("index")
+        for impl in packet.get("upstream_implementations", [])
+        if (impl.get("text_matches_version") or {}).get("exact")
+    }
+    for where, impl, summary in [
+        ("baseline_implementation", decision.get("baseline_implementation"),
+         changes[0]["summary"] if changes else ""),
+        *[
+            (f"changes[{i}].resulting_implementation", c.get("resulting_implementation"),
+             changes[i + 1]["summary"] if i + 1 < len(changes) else c["summary"])
+            for i, c in enumerate(changes)
+        ],
+    ]:
+        if not impl or impl.get("strategy") != "unresolved":
+            continue
+        gap = impl.get("gap") or {}
+        if gap.get("reason") and gap.get("sources"):
+            continue
+        version = claimed_version.get(where)
+        if version is not None and version in upstream_versions:
+            raise DecisionError(
+                f"{slug}: {where} declares an unresolved gap for lineage version "
+                f"{version}, but the packet DOES carry an upstream implementation of "
+                "that version; reuse it instead of recording a gap"
+            )
+        impl["gap"] = {
+            "reason": (
+                "Project Ignis ships no implementation matching this version: none of "
+                "the upstream historical variants in the pinned databases carries this "
+                "version's card text. Reproducing it needs a custom script and a "
+                "reserved passcode."
+            ),
+            "upstream_checked": True,
+            "behavioural_impact": summary,
+            "sources": ["ignis-babelcdb", "ignis-cardscripts"],
+        }
+
     if decision.get("baseline_implementation"):
         record["implementation"] = order(decision["baseline_implementation"], IMPL_ORDER)
     elif "implementation" not in record:

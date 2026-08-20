@@ -5,18 +5,33 @@
     "passcode": 9156135,
     "name": "Apprentice Magician"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
-      "modern_text": "If this card is Summoned: Target 1 face-up card on the field that you can place a Spell Counter on; place 1 Spell Counter on that target. When this card is destroyed by battle: You can Special Summon 1 Level 2 or lower Spellcaster monster from your Deck in face-down Defense Position.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Two era behaviours the printed text does not show, grouped because they share the same unknown chronology. (1) Trigger timing: the goat script registers the revival effect on EVENT_BATTLED with condition Card.IsBattleDestroyed() instead of the modern EVENT_BATTLE_DESTROYED - upstream annotates the variant 'Triggers on the field' - so it activates while Apprentice Magician still occupies its Monster Zone, which means the free-zone test and the face-down Special Summon must find a zone other than its own. (2) Activation condition: the goat target function keeps only Duel.GetLocationCount(tp,LOCATION_MZONE)>0, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...) check, so the effect can be activated with no Level 2 or lower Spellcaster left in the Deck. Neither has a dated source, so the chronology stays unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
+      "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no Level 2 or lower Spellcaster remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700013,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700013.lua",
+    "script": "goat/c504700013.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DR1-EN121, 2005-03-19), matched exactly by the goat cdb text; v0 (MFC-066, 2003-10-10, 'destroyed in battle') predates it. Lineage v1 -> v8 is collapsed as cosmetic: 'successfully Normal Summoned, Flip Summoned, or Special Summoned' -> 'Summoned', 'as a result of battle' -> 'by battle', and the PSCT target/place rewording. The 'Target' wording added at v5 (BATT-EN002, 2012-05-29) formalises existing targeting rather than introducing it - the counter effect carries EFFECT_FLAG_CARD_TARGET and Duel.SelectTarget in BOTH scripts, unchanged in the diff. One nuance left unrecorded: v8 (SBC1-ENA09, 2023-08-24) changes 'If this card is destroyed by battle:' to 'When ...:', a PSCT miss-timing distinction, but upstream ships a single modern script covering v5-v8, so there is no implementation difference to record and no bearing on the 2005/2010 snapshots. Change order: the undated pair is listed before (A) because the only dated per-card precedent for a withdrawn fail-to-find allowance (Reinforcement of the Army, gone by the 2008-12-15 Card FAQ) falls before (A)'s earliest possible end date (2011-02-02); the true order is unknown. No upstream implementation exists for the intermediate state and it is unreachable while the chronology is unresolved, so no missing-implementation record is attached. The last diff item, CATEGORY_SPECIAL_SUMMON+CATEGORY_SET -> CATEGORY_SPECIAL_SUMMON, is operation-info hinting, not behaviour."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

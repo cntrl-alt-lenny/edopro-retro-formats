@@ -5,18 +5,23 @@
     "passcode": 75417459,
     "name": "Release Restraint"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "Tribute 1 \"Gearfried the Iron Knight\" on your side of the field to Special Summon 1 \"Gearfried the Swordmaster\" from your hand or Deck.",
-      "modern_text": "Tribute 1 \"Gearfried the Iron Knight\"; Special Summon 1 \"Gearfried the Swordmaster\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script drops the modern Duel.IsExistingMatchingCard check over hand+Deck from the target function, so \"Gearfried the Iron Knight\" can be Tributed to activate with no \"Gearfried the Swordmaster\" available, and the failure is proven by revealing hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script requires an available Swordmaster to activate and never reveals. Official rulings state both halves of this in a single sentence for this card, still unchanged at the 2008-12-15 Card FAQ capture.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ude-card-rulings-archive",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +29,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700130,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700130.lua",
+    "script": "goat/c504700130.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v0 (FET-EN044, 2005-03-01), the text the GOAT variant carries exactly; v0->v1 (DR3-EN164, drops 'on your side of the field') and v1->v2 (LCJW-EN069, PSCT semicolon) are cosmetic. Unlike Reinforcement of the Army, this card's relaxed activation and the Deck/hand reveal are stated as one ruling and are still both in force at the 2008-12-15 capture, so the two components are dated together by the shared verification chronology rather than split. Flagged chronology-unresolved because the activation component (B) is only positively attested through 2008-12-15, sixteen months before the Edison snapshot, while the shared chronology's old state runs to 2011-02-02: the Edison-era applicability of the relaxed activation rests on the shared chronology, not on a per-card attestation. The packet's second upstream code 511027011 is the annotated ANIME version (cards-unofficial.cdb, Special Summons from hand, Deck or GY and uses aux.NecroValleyFilter); it is not a historical TCG implementation and is not a duplicate of the GOAT entry. The remaining GOAT/modern diff hunks (s.cfilter with an explicit free-zone/sequence test instead of aux.ReleaseCheckMMZ, label bookkeeping, LOCATION_A+LOCATION_B vs bitwise or) are upstream's older release/zone-check idiom with no behavioural difference identified."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+  ]
 }

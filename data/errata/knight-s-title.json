@@ -5,18 +5,18 @@
     "passcode": 87210505,
     "name": "Knight's Title"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Activate this card by offering 1 face-up \"Dark Magician\" on your side of the field as a Tribute. Special Summon 1 \"Dark Magician Knight\" from your hand, Deck or Graveyard.",
-      "modern_text": "Tribute 1 face-up \"Dark Magician\"; Special Summon 1 \"Dark Magician Knight\" from your hand, Deck or Graveyard.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period ruling package. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,...)`, while the goat target returns true, so the card can be activated - and the cost of Tributing your face-up \"Dark Magician\" paid - with no \"Dark Magician Knight\" anywhere, losing the Dark Magician for nothing. Failed-search verification: on a whiff the goat operation calls `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, revealing hand and Deck but not the Graveyard, which is already public. Only the verification half is dated by the shared search-verification chronology, so the change stays unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700149,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700149.lua",
+    "script": "goat/c504700149.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Cost structure is identical in both scripts (`s.cost` releases via `Duel.SelectReleaseGroupCost` as a cost, with the same `s.costfilter`), and neither script sets EFFECT_FLAG_CARD_TARGET, so no targeting change is involved. The goat operation's restructured if/else around `Duel.SpecialSummon` exists only to reach the else-branch; the success path is unchanged, `aux.NecroValleyFilter` is applied in both. Text lineage v0 (ROD-EN002, 2004-06-29) -> v1 (LCYW-EN072, 2012-09-29) is PSCT rewording only (\"Activate this card by offering 1 face-up \\\"Dark Magician\\\" on your side of the field as a Tribute.\" -> \"Tribute 1 face-up \\\"Dark Magician\\\";\"), hence modern_text_version null. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

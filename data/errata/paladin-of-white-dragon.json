@@ -8,15 +8,63 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "This monster can only be Ritual Summoned with the Ritual Spell Card, \"White Dragon Ritual.\" You must also Tribute monsters whose total Levels equal 4 or more from the field or your hand. When this monster attacks a face-down Defense Position monster, destroy the face-down monster with this card's effect. You can Tribute this card to Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or your Deck. (\"Blue-Eyes White Dragon\" cannot attack during that turn.)",
-      "modern_text": "You can Ritual Summon this card with \"White Dragon Ritual\". At the start of the Damage Step, if this card attacks a face-down Defense Position monster: Destroy that face-down monster. You can Tribute this card; Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or Deck, but \"Blue-Eyes White Dragon\" cannot attack for the rest of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card era allowance: the goat sptg is `if chk==0 then return ft>0 end` where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the Ignition effect be activated and this card Tributed as cost with no 'Blue-Eyes White Dragon' available to Summon. Nothing in the packet dates when this card lost that allowance.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2010-04-16",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Duelist Pack: Kaiba (DPKB-EN024)"
+      },
+      "historical_text": "This monster can only be Ritual Summoned with the Ritual Spell Card, \"White Dragon Ritual.\" You must also Tribute monsters whose total Levels equal 4 or more from the field or your hand. When this monster attacks a face-down Defense Position monster, destroy the face-down monster with this card's effect. You can Tribute this card to Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or your Deck. (\"Blue-Eyes White Dragon\" cannot attack during that turn.)",
+      "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"White Dragon Ritual\". If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. You can Tribute this card to Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or your Deck. (\"Blue-Eyes White Dragon\" cannot attack during that turn.)",
+      "summary": "Wording modernisation only (v1 DR1-EN081 -> v2 DPKB-EN024): the Ritual-material sentence 'You must also Tribute monsters whose total Levels equal 4 or more from the field or your hand' is dropped as redundant with the Ritual Spell, and the face-down destruction clause regains the pre-PSCT 'immediately ... without flipping it face-up or applying damage calculation' phrasing. Neither script's EVENT_BATTLE_START destruction trigger nor its Ritual procedure differs.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "This monster can only be Ritual Summoned with the Ritual Spell Card, \"White Dragon Ritual.\" You must also Tribute monsters whose total Levels equal 4 or more from the field or your hand. When this monster attacks a face-down Defense Position monster, destroy the face-down monster with this card's effect. You can Tribute this card to Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or your Deck. (\"Blue-Eyes White Dragon\" cannot attack during that turn.)",
+      "summary": "Period procedure, not a text erratum: after this card is Tributed as cost, if no 'Blue-Eyes White Dragon' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-09-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd attack restriction (DPKB-EN024 as reprinted in the Silver Dragon Value Box)"
+      },
+      "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"White Dragon Ritual\". If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. You can Tribute this card to Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or your Deck. (\"Blue-Eyes White Dragon\" cannot attack during that turn.)",
+      "modern_text": "You can Ritual Summon this card with \"White Dragon Ritual\". At the start of the Damage Step, if this card attacks a face-down Defense Position monster: Destroy that face-down monster. You can Tribute this card; Special Summon 1 \"Blue-Eyes White Dragon\" from your hand or Deck, but \"Blue-Eyes White Dragons\" cannot attack for the rest of this turn.",
+      "summary": "Functional erratum to the scope of the attack restriction. Through v2 the restriction is the parenthetical '(\"Blue-Eyes White Dragon\" cannot attack during that turn.)', which the goat script implements as an EFFECT_CANNOT_ATTACK registered on the Summoned monster alone (tc:RegisterEffect, reset when that monster leaves the field). From v3 the text reads 'but \"Blue-Eyes White Dragons\" cannot attack for the rest of this turn', and the modern script implements it as an EFFECT_TYPE_FIELD effect with TargetRange(LOCATION_MZONE,LOCATION_MZONE) matching Card.IsCode(CARD_BLUEEYES_W_DRAGON), so every Blue-Eyes White Dragon on either player's field - including copies already there and any Summoned later that turn - cannot attack. Upstream annotates the goat variant with exactly this: 'Attack restriction only affects the summoned monster'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +72,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700119,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700119.lua",
+    "script": "goat/c504700119.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat local s.spcost is byte-equivalent to the modern library's Cost.SelfTribute (cardscripts/utility.lua:1427-1431), and s.listed_names dropping 9786492 ('White Dragon Ritual') is search metadata only - both cosmetic. Trailing cosmetic transition not recorded as a change: v3 -> v4 (SBCB-EN185, Speed Duel: Battle City Box, 2020-11-26) returns the card name to the singular 'Blue-Eyes White Dragon'; under PSCT a bare quoted name still covers every card with that name and the modern script is unchanged, so resolution is the same as v3. The v3 plural is the clearest textual marker of the scope change, which is why it anchors the functional entry. No resulting_implementation is attached to the functional change: upstream ships no pre-errata variant of this card, and the intermediate version (name-wide restriction still combined with the era search rulings) is not reachable by either in-scope snapshot, since GOAT (2005-04-01) and Edison (2010-04-24) both precede the 2013-09-13 printing. The same holds for the two ruling transitions, whose order relative to each other and to the erratum is not established."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

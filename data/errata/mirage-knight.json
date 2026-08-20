@@ -5,18 +5,24 @@
     "passcode": 49217579,
     "name": "Mirage Knight"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of LCYW-EN024 (Legendary Collection 3: Yugi's World Mega Pack), the printing carrying the PSCT text"
       },
       "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by the effect of \"Dark Flare Knight\". When this card battles another monster, during damage calculation increase the ATK of this card by the original ATK of the opponent's monster. During the End Phase after this card was involved in battle, remove this card from play.",
       "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways. During damage calculation only, this card gains ATK equal to the original ATK of the opponent's monster it is battling. During the End Phase of a turn this card attacked or was attacked: Banish this card.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Wording modernisation only: the GOAT variant's script differs from the modern one by a single line, Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL in place of the equivalent Duel.IsPhase(PHASE_DAMAGE_CAL) wrapper, so the damage-calculation ATK gain and the End Phase banish resolve identically. The summon lock is unchanged in substance: 'Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways' keeps the strict prohibition of 'cannot be Special Summoned except by the effect of \"Dark Flare Knight\"', not the looser 'Must first be Special Summoned' formula that would allow later revival.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700080,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700080.lua",
+    "script": "goat/c504700080.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The v0 (DCR-018, 2003-12-01) -> v1 (DR1-EN180, 2005-03-19) transition added 'This card cannot be Normal Summoned or Set', a genuine restriction, but it predates the baseline implementation's version - upstream's GOAT cdb text is exactly v1 - so per the chain rule it is recorded here rather than as a change. Upstream ships the variant for period display text; behaviour is identical to modern, so computed selection never needs it."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

@@ -132,14 +132,39 @@ class ErrataSelectionError(ValueError):
         self.problems = problems
 
 
+def _usable(impl: dict | None) -> dict | None:
+    if (
+        impl
+        and impl.get("strategy") in ("reuse-upstream", "custom-script")
+        and impl.get("historical_passcode")
+    ):
+        return impl
+    return None
+
+
 def baseline_override(erratum: Erratum) -> dict | None:
     """The erratum's baseline historical implementation, when it is usable as
     a substitution (an upstream or custom historical passcode)."""
-    impl = erratum.implementation
-    if impl.get("strategy") in ("reuse-upstream", "custom-script") and impl.get(
-        "historical_passcode"
-    ):
-        return impl
+    return _usable(erratum.implementation)
+
+
+def parity_override(erratum: Erratum) -> dict | None:
+    """The historical implementation a reference-parity format must emit.
+
+    A reference list ships ONE historical variant per card, and reproducing it
+    is the whole point of parity — so if research mapped that variant to a
+    later revision than the baseline (leaving the baseline itself
+    unimplemented), parity still emits the variant the reference carries.
+    The validator separately reports where our chronology and the reference
+    disagree, so the mapping question stays visible.
+    """
+    usable = baseline_override(erratum)
+    if usable is not None:
+        return usable
+    for change in erratum.relevant_changes():
+        usable = _usable(change.get("resulting_implementation"))
+        if usable is not None:
+            return usable
     return None
 
 
@@ -179,7 +204,7 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
             # Reproducing the reference implementation is the format's
             # definition; disagreements with our chronology are reported by
             # the validator rather than silently changing the output.
-            impl = baseline_override(erratum)
+            impl = parity_override(erratum)
             if impl is not None:
                 selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
             continue

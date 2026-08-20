@@ -5,18 +5,33 @@
     "passcode": 31786629,
     "name": "Thunder Dragon"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
+      "summary": "Period procedure, not a text erratum: after the discard, if no \"Thunder Dragon\" remains in the Deck, the goat script proves the whiff by revealing the Deck - the else branch is guarded by 'elseif not Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) then Duel.GoatConfirm(tp,LOCATION_DECK)', so it fires only on a genuine failed search and not when the player merely declines to add. The modern script never reveals; the printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your deck. You can only use this effect during your Main Phase.",
-      "modern_text": "You can discard this card; add up to 2 \"Thunder Dragon\" from your Deck to your hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
+      "summary": "Two era allowances the printed text does not show: the goat script can be activated with no copy in the Deck (target check relaxed from Duel.IsExistingMatchingCard to 'return true', with SetOperationInfo count 1 -> 0), and it lets the player add ZERO copies (Duel.SelectMatchingCard minimum 1 -> 0), matching the netrep ruling upstream quotes in its annotation that this card \"may be discarded to search for 0\" copies. The modern script requires a copy in the Deck to activate and forces at least one to be added. Nothing in the packet dates either allowance, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700054,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700054.lua",
+    "script": "goat/c504700054.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v2 (DB2-EN058, exact cdb match); v0/v1 (MRD) precede it with the same behaviour. Trailing v2 -> v5 (LCKC-EN067) is cosmetic: cost/effect rewording ('Discard this card from your hand to the Graveyard to add' -> 'You can discard this card;') and, at v4 (RP01-EN040), the loss of the 'only during your Main Phase' clause. That clause loss is not recorded as functional: the effect registration (type, range, timing) is identical in the goat and modern scripts - the diff touches only the target/operation functions - so upstream implements the same activation window either way. The packet's Retro Pack NA date (2024-08-23) is anomalous against its EU date (2008-07-08); nothing here is dated from that printing. Reveal and the relaxed condition are recorded separately because only the reveal has sourced bounds; the intermediate state needs no implementation, as GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

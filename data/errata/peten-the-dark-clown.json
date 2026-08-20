@@ -5,18 +5,33 @@
     "passcode": 52624755,
     "name": "Peten the Dark Clown"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
+      "summary": "Period procedure, not a text erratum: after this card is banished as cost, if no other 'Peten the Dark Clown' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script simply resolves without effect. No lineage version prints reveal wording.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
-      "modern_text": "When this card is sent to the GY: You can banish this card from your GY; Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` where the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the Trigger be activated and this card banished from the Graveyard as cost with no second copy to Summon - permanently losing the copy for nothing. The packet dates no end for that allowance.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700084,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700084.lua",
+    "script": "goat/c504700084.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "I read both scripts in full: goat/c504700084.lua and official/c52624755.lua both set the cost to Cost.SelfBanish, so the era 'remove this card from the Graveyard' wording (v0, EP1-EN005, 2004-07-25) is already implemented as a banish and its clarification to 'remove from play' (v1, DPKB-EN019, 2010-04-16) and then 'banish' (v2, Silver Dragon Value Box, 2013-09-13) is cosmetic, as is the GY rewording at v3 (OP16-EN017, 2021-06-09). The remaining diff lines - MODID vs id resolving to 52624755, and LOCATION_DECK+LOCATION_HAND vs LOCATION_DECK|LOCATION_HAND - are non-behavioural. Intermediate-state reasoning as for the other GoatConfirm cards: the two ruling transitions are unordered, no upstream implementation covers the state between them, and none is attached because GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

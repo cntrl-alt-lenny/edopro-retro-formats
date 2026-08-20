@@ -5,18 +5,23 @@
     "passcode": 71829750,
     "name": "Serpentine Princess"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "If this face-up card is returned from the field to your Deck, select and Special Summon 1 Level 3 or lower monster from your Deck to your side of the field. Then shuffle your Deck.",
-      "modern_text": "If this face-up card is returned from the field to your Deck, select and Special Summon 1 Level 3 or lower monster from your Deck to your side of the field. Then shuffle your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure only, not a text erratum: both scripts fire the mandatory return-to-Deck trigger without checking that a Level 3 or lower monster remains in the Deck (s.sptg is `return true` in each), but the GOAT script proves a failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)) where the modern script silently does nothing. That single else-branch is the entire script difference.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +29,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700117,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700117.lua",
+    "script": "goat/c504700117.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Cleanest case in the batch: the GOAT variant's database text is character-identical to the modern cdb text and both equal lineage v1 (DB2-EN167), and the script diff is nothing but the Duel.GoatConfirm else-branch - so this is component (A) alone, with no relaxed activation condition to leave undated and no flag needed. v0 (LOD-057, 2003, 'returned directly from the field') and v2 (OP25-EN013, 2024, 'shuffled from the field into your Deck') are cosmetic; both scripts implement the trigger identically as EVENT_TO_DECK with IsPreviousPosition(POS_FACEUP) and IsPreviousLocation(LOCATION_ONFIELD). Minor note, not an era mismatch: the baseline text v1 was first printed 2005-07-27, about four months after the GOAT snapshot date, but it is behaviourally identical to v0, which was in print from 2003."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

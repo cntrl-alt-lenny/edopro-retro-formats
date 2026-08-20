@@ -5,18 +5,34 @@
     "passcode": 90219263,
     "name": "Elegant Egotist"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "You can only activate this card when there are 1 or more \"Harpie Lady\" on the field. Special Summon 1 \"Harpie Lady\" or \"Harpie Lady Sisters\" from your hand or your Deck.",
+      "summary": "Period procedure, not a text erratum: when the GOAT script's s.activate finds no \"Harpie Lady\" or \"Harpie Lady Sisters\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text is untouched by this procedure.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "You can only activate this card when there are 1 or more \"Harpie Lady\" on the field. Special Summon 1 \"Harpie Lady\" or \"Harpie Lady Sisters\" from your hand or your Deck.",
-      "modern_text": "If \"Harpie Lady\" is on the field: Special Summon 1 \"Harpie Lady\" or \"Harpie Lady Sisters\" from your hand or Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target keeps only the free-Monster-Zone check (Duel.GetLocationCount(tp,LOCATION_MZONE)>0) and drops the modern script's Duel.IsExistingMatchingCard(...,LOCATION_HAND|LOCATION_DECK,...), so the Spell can be activated with no Harpie to Special Summon. No source in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +40,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700157,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700157.lua",
+    "script": "goat/c504700157.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v2 (DB1-EN156, Dark Beginning 1, 2004-10-12) exactly - the text in force at the GOAT snapshot. The later lineage is treated as cosmetic: v3 (SD8-EN021, 2006-07-12) inserts \"face-up\" before \"Harpie Lady\", but upstream's GOAT variant leaves the condition function untouched and the shared s.cfilter already requires c:IsFaceup(), so no behavioural difference is encoded on either side of that printing; v4 (RP01-EN029, 2008-07-08), v5 (Legendary Collection, 2010-10-01) and v6 (LCJW-EN098, 2013-10-11) are wording/PSCT passes. Remaining script diffs are style only (LOCATION_HAND|LOCATION_DECK vs +, the if/else restructure of s.activate that hosts the GoatConfirm branch). Upstream ships one GOAT script encoding both ruling behaviours, so no implementation exists for a state in which only one had changed, and with (B) undated the pair cannot be sequenced. Not listed on EdisonFormat.com's Functional Errata page."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

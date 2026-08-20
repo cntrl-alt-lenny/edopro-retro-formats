@@ -5,18 +5,19 @@
     "passcode": 423705,
     "name": "Gearfried the Iron Knight"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When an Equip Spell Card is equipped to this card, destroy the Equip Spell Card.",
-      "modern_text": "If either player equips an Equip Card(s) to this card: Destroy that Equip Card(s).",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era effect category, not a text erratum: the GOAT script declares the equip-destruction as EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS - upstream's annotation 'effect is continuous' - and passes the destroy group through e:SetLabelObject/e:GetLabelObject, where the modern script declares EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F and routes it through Duel.SetTargetCard/Duel.GetTargetCards with SetOperationInfo. In the era version the destruction is a Continuous Effect that starts no Chain, so the opponent cannot respond to it and it cannot miss timing; in the modern version it is a mandatory Trigger Effect that does both. Chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700182,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700182.lua",
+    "script": "goat/c504700182.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-versus-script conflict worth recording: the variant carries the v1 text (DB1-EN204, 2004-10-12), which narrows the wording to 'Equip Spell Card', but its destroy filter is identical to the modern one - s.filter(c,ec) returns c:GetEquipTarget()==ec - so it destroys ANY Equip Card equipped to Gearfried, a Union monster equipped as an Equip Card or an equipping Trap included. Upstream did not treat 'Equip Spell Card' as a narrowing, so the v1 -> v2 (SD5-EN005, 2005-11-02) restoration of 'Equip Card' has no implementation counterpart; it is recorded as cosmetic on the script evidence, with the tension flagged rather than resolved. The rest of the lineage is cosmetic: v2 -> v3 (LCJW-EN030, 2013-10-11) adds '(s)' and PSCT punctuation, v3 -> v4 (DPBC-EN022, 2015-06-19) swaps 'the' for 'that', v4 -> v5 (SS02-ENB10, 2019-01-24) adds 'If either player equips', which both scripts already do since the effect fires on EVENT_EQUIP irrespective of who equipped. These are collapsed here rather than into a change entry because they are trailing. Earlier v0 (PSV-101, 2002-10-20), 'Any Equip Card this card is equipped with is automatically destroyed', predates the baseline - and reads closer to what both scripts actually do than v1 does, which is part of why the v1 wording looks like a translation artefact rather than a behavioural narrowing."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

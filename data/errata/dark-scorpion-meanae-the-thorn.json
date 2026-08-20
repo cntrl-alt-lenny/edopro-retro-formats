@@ -5,18 +5,33 @@
     "passcode": 74153887,
     "name": "Dark Scorpion - Meanae the Thorn"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "When this card inflicts Battle Damage to your opponent's Life Points, you can select and activate 1 of the following effects:\r\n● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Deck to your hand.\r\n● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Graveyard to your hand.",
-      "modern_text": "When this card inflicts battle damage to your opponent, you can activate 1 of these effects:\r\n● Add 1 \"Dark Scorpion\" card from your Deck to your hand.\r\n● Target 1 \"Dark Scorpion\" card in your GY; add that target to your hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "When this card inflicts Battle Damage to your opponent's Life Points, you can select and activate 1 of the following effects:● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Deck to your hand.● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Graveyard to your hand.",
+      "summary": "Era activation semantics: the goat script's target function returns true unconditionally and always offers the Deck option (offering the Graveyard option only when a valid target exists), where the modern script computes b1 (a \"Dark Scorpion\" card in the Deck) and b2 (one in the Graveyard) and refuses the activation unless one holds. So in the period version the battle-damage trigger can be activated, and the Deck branch chosen, with no \"Dark Scorpion\" card left in the Deck. No dated source for this card, so the chronology is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "When this card inflicts Battle Damage to your opponent's Life Points, you can select and activate 1 of the following effects:● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Deck to your hand.● Add 1 card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\", from your Graveyard to your hand.",
+      "summary": "Period procedure: when the Deck branch resolves and finds nothing, the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove the whiff; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700125,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700125.lua",
+    "script": "goat/c504700125.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DR1-EN223, 2005-03-19), matched exactly by the goat cdb text; v0 (DCR-061, 2003-12-01) predates it and differs only by 'Select ... and add it' vs 'Add'. Trailing lineage v1 -> v3 is collapsed as cosmetic: the archetype rewrite at v2 (GLD5-EN012, 2012-06-07) and the GY/lower-case 'battle damage' pass at v3 (SBCB-EN156, 2020-11-26). The archetype rewrite - 'card that includes \"Dark Scorpion\" in its card name, or is named \"Cliff the Trap Remover\"' becoming '\"Dark Scorpion\" card' - is cosmetic on evidence: both scripts filter with Card.IsSetCard(0x1a), and the pinned cards.cdb shows Cliff was renamed to 'Dark Scorpion - Cliff the Trap Remover' and carries setcode 0x1a, so the archetype covers exactly the era text's set (Meanae, Gorg, Chick, Cliff, Dark Scorpion Burglars, Dark Scorpion Combination, Mustering of the Dark Scorpions; Don Zaloog is outside both, setcode 0). The 'Target' wording added at v2 for the Graveyard branch formalises existing targeting - both scripts use Duel.SelectTarget and set EFFECT_FLAG_CARD_TARGET dynamically on that branch only. Change order: (B) before (A) for the Reinforcement of the Army precedent (allowance gone by 2008-12-15, before (A)'s earliest possible end of 2011-02-02); the true order is unknown. No upstream implementation exists for the intermediate state and it is unreachable while (B) is undated, so no missing-implementation record is attached."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

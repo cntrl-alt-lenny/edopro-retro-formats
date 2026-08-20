@@ -5,17 +5,17 @@
     "passcode": 43040603,
     "name": "Monster Gate"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Offer 1 monster on your side of the field as a Tribute. Pick up cards from your Deck until you pick up a monster than can be Normal Summoned, and Special Summon it. Send any other cards picked up to the Graveyard.",
-      "modern_text": "Tribute 1 monster; excavate cards from the top of your Deck until you excavate a monster that can be Normal Summoned/Set. Special Summon it, also send the other excavated cards to the GY.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era activation legality: the modern script's activation check requires Duel.IsExistingMatchingCard(Card.IsSummonableCard,tp,LOCATION_DECK,0,1,nil), i.e. a monster that can be Normal Summoned must still be in the Deck, while the GOAT script drops that clause entirely (upstream annotates it 'Doesn't check deck'), so the era card may be activated with no valid monster left and simply excavates the whole Deck to the Graveyard. This is the shared brief's separable behaviour (B), an activation-condition relaxation, not the failed-search reveal procedure - the script does not call Duel.GoatConfirm - so the search-verification chronology does not apply and this per-card allowance cannot be dated from the packet.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +24,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700071,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700071.lua",
+    "script": "goat/c504700071.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The other diff lines are zone-count plumbing and chain-info hints, not resolution: the cost filter takes a precomputed Duel.GetLocationCount instead of Duel.GetMZoneCount, and CATEGORY_DECKDES / SetOperationInfo / SetPossibleOperationInfo differences only change what the engine advertises about the effect. Text lineage after the baseline is cosmetic: v0 (AST-039, 2004-06-01, the goat cdb text) -> v1 (DR2-EN151, 2005-10-20) 'Offer as a Tribute' -> 'Tribute'; v2/v3 (SDDC 2012-02-03, BP01 2012-05-24) PSCT 'reveal cards from the top of your Deck'; v4 (OP01-EN024, 2016-03-18) 'excavate' and 'Normal Summoned/Set'; v5 (SR07-EN030, 2018-11-01) 'GY'. Both scripts use the same Card.IsSummonableCard filter for what stops the excavation, so the '/Set' and reveal->excavate wording carries no behavioural change. Chronology unresolved, so the applier blocks rather than guessing when the fail-to-find allowance ended for this card."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

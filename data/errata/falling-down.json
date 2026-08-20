@@ -5,18 +5,19 @@
     "passcode": 32919136,
     "name": "Falling Down"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Destroy this card if there is no Archfiend card on your side of the field. Take control of 1 of your opponent's monsters that is equipped with this card. You take 800 points of damage during each of your opponent's Standby Phases.",
-      "modern_text": "Activate this card by targeting an opponent's monster; equip this card to it. Take control of it. Destroy this card unless you control an \"Archfiend\" card. During each of your opponent's Standby Phases: You take 800 damage.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Two script-only differences, neither visible in any printed text. (1) The Standby Phase damage is conditional in the era version: the GOAT damcon adds 'not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)', so no 800 damage occurs while the equipped monster is immune to Falling Down's effect, where the modern damcon only checks the turn player - upstream annotates this 'If monster is immuned, no damage occurs'. (2) The equip/steal legality filter differs: the modern script passes aux.CheckStealEquip to aux.AddEquipProcedure, which requires the opponent's monster to be face-up and to have changeable control and, for Trap Monsters, Spell & Trap Zone room; the GOAT script passes Card.IsControlerCanBeChanged alone, so it will equip to and take control of a face-down opponent monster. Chronology of both is unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700056,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700056.lua",
+    "script": "goat/c504700056.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Difference (2) could not be settled and drives the escalation flag: aux.CheckStealEquip lives in the modern cards_specific_functions.lua and may simply post-date the variant, in which case the face-down allowance is an artefact rather than a period reconstruction - but the shipped implementation does behave differently, and the helper also carries Trap Monster Spell & Trap Zone accounting that the period rule profile handles globally, so the two layers overlap. Only difference (1) is annotated by upstream. Everything else in the diff is spelling: EVENT_PHASE|PHASE_STANDBY vs EVENT_PHASE+PHASE_STANDBY, SET_ARCHFIEND vs 0x45, and Duel.IsTurnPlayer(1-tp) vs tp~=Duel.GetTurnPlayer(), which are the same tests. The chain starts at v1 (DR1-EN250, 2005-03-19), which the variant carries verbatim; earlier v0 (DCR-088, 2003-12-01) required a 'face-up Archfiend card' and 'face-up' opponent monsters and predates the baseline - interestingly it is v0, not v1, that matches the modern script's face-up requirement. Trailing v1 -> v2 (AP03-EN006, 2013-09-13) is PSCT that spells out equip targeting both scripts already perform through aux.AddEquipProcedure's EFFECT_FLAG_CARD_TARGET, so it is cosmetic and is recorded here rather than as a change entry."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

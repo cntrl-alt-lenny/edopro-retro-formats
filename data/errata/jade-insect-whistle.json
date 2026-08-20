@@ -5,18 +5,22 @@
     "passcode": 95214051,
     "name": "Jade Insect Whistle"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
       "historical_text": "Your opponent selects 1 Insect-Type Monster from their Deck. After shuffling the Deck, place the card on top of the Deck.",
-      "modern_text": "Your opponent selects 1 Insect-Type Monster from their Deck. After shuffling the Deck, place the card on top of the Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure only: the sole difference between goat/c504700168.lua and official/c95214051.lua is `else Duel.GoatConfirm(1-tp,LOCATION_DECK)`. This card makes the OPPONENT search their own Deck for an Insect-Type monster, so the reveal runs against the opponent's Deck (`1-tp`) - if they hold no Insect they show their Deck to prove it, which the modern script never does. Both scripts' `s.target` checks only that the opponent's Deck is non-empty, so there is no activation-condition difference; this is the verification procedure alone, hence the shared chronology applies cleanly.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700168,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700168.lua",
+    "script": "goat/c504700168.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Both full scripts read; identical apart from the added else-branch. The lineage has only two English versions and the modern cdb text is byte-identical to lineage v1, which the goat variant also matches exactly - so across the recorded chain there is literally no text difference at all, only the era procedure (modern_text_version null). v0 (IOC-100, 2004-03-01) -> v1 (DR2-EN101, 2005-10-20) is a pronoun change (\"his/her\" -> \"their\"). This is a rare inversion of the usual verification case: the deck being revealed is the opponent's, not the controller's."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

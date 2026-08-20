@@ -5,18 +5,33 @@
     "passcode": 83011277,
     "name": "Mystic Tomato"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no DARK monster of 1500 or less ATK in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch. Printed text is behaviourally unchanged throughout the lineage.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
-      "modern_text": "When this card is destroyed by battle and sent to the GY: You can Special Summon 1 DARK monster with 1500 or less ATK from your Deck, in face-up Attack Position.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` while the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the trigger activate and resolve with nothing eligible in the Deck. No packet or brief source dates the end of that allowance for this card, so it is left unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts"
       ]
     }
   ],
@@ -24,16 +39,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700142,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700142.lua",
+    "script": "goat/c504700142.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Deliberate divergence from the supplied exemplar: exemplar-decisions.json models this card as a single ruling change (verification plus era activation semantics) dated by the search-verification chronology. Per the batch directive and shared brief 1's caution, I have split it - the deck-reveal procedure keeps the sourced shared chronology, while the relaxed activation condition is a per-card question with no dated evidence and is recorded unresolved. Corroboration for the reveal half: shared brief 1 records that KDE Tournament Policy's 'Card/Hand/Deck Verification' section uses a failed Mystic Tomato search as its worked example of Deck verification now being forbidden (earliest located capture 2019-04-03) - I have not re-fetched that document, so it is cited only through the shared chronology, not as an independent external citation. Text lineage: baseline is v1 (SKE-021, 2004-03-01); v0 (MRL-094, 2002-09-16) predates it and is behaviourally identical. v1 through v6 (DASA-EN046, 2018-05-24) and v7 (SBC2-ENI15, 2024-12-13) are cosmetic - 'as a result of battle' -> 'destroyed by battle', 'an ATK of' dropped, PSCT colon, Graveyard -> GY, 'face-up Attack Position' -> 'Attack Position' - with reprint churn (v3 SRL/Legendary Collection 2010-10-01 reverting to the older wording). Intermediate-state reasoning as for the other GoatConfirm searchers: the two ruling transitions are unordered, no upstream implementation covers the state between them, and none is attached because GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

@@ -10,13 +10,20 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2016-10-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SDKS-EN008, Structure Deck: Seto Kaiba); EdisonFormat.com independently attributes the removal of the Union Condition to the same 2016 Structure Deck"
       },
-      "historical_text": "Once per turn, you can either: Target 1 Machine-Type monster you control, equip this card to that target, OR: Unequip this card and Special Summon it in Attack Position. While equipped by this effect, the equipped monster gains 500 ATK/DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
-      "modern_text": "Once per turn, you can either: Target 1 Machine monster you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 500 ATK/DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it in Attack Position. While equipped by this effect, the equipped monster gains 500 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
+      "modern_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 500 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+      "summary": "Functional erratum: the parenthetical Condition 'A monster can only be equipped with 1 Union monster at a time' was removed and the ATK/DEF gain was rebound from 'While equipped by this effect' to 'A monster equipped with this card'. Upstream encodes the old state as aux.AddUnionProcedure(c,filter,true,false) plus e1:SetCondition(aux.IsUnionState): with oldequip=true the equip target must carry no other Union monster (proc_union's UnionFilter takes the ct1==0 branch and the card registers EFFECT_OLDUNION_STATUS), the unequip/Special Summon requires the union state and forces face-up Attack Position, and the +500 ATK/DEF applies only while the card is equipped by its own Union effect. The modern call passes no old-rule flags, so a monster may carry several Union monsters, the Special Summon takes any face-up position, and the +500 applies whenever a monster is equipped with this card by any means.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
       ]
     }
   ],
@@ -24,16 +31,21 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511002851,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511002851.lua",
+    "script": "pre-errata/c511002851.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v4 (SDGR-EN019, 2014-10-16), the version the pre-errata cdb text matches at 0.9918 - it differs only in a comma for a semicolon after 'you control' and 'ATK/DEF' for 'ATK and DEF'. Versions v0 (RDS-EN011, 2004-12-01) through v4 are behaviourally identical: each carries the 1-Union Condition, the face-up Attack Position Special Summon and the 'equipped by this effect' gain, so the earlier transitions (dropping 'during your Main Phase' and 'if you control this monster on the field', then the PSCT 'Target 1 ...; equip this card to that target' rewrite, whose targeting is the EFFECT_FLAG_CARD_TARGET already present in the shared union procedure) are cosmetic and are not recorded. The printing current at the Edison snapshot was v2 (SDMM-EN012, 2010-02-19) and at GOAT was v0, so the single recorded 2016 change puts both snapshots on the baseline correctly. Note the oldprotect argument is false in the pre-errata call, so proc_union's UnionReplace covers destruction by battle or effect in BOTH versions - the v5 wording 'destroyed by battle or card effect' only spells out what v4's unqualified 'would be destroyed' already did, and is not part of the behavioural change."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
 }

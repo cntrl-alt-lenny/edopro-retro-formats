@@ -10,13 +10,20 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2023-04-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the printing carrying the 'face-down Defense Position' text (SRL-EN040, Spell Ruler 25th Anniversary Edition)"
       },
-      "historical_text": "Discard 2 cards, then target 1 face-up monster; change that target to face-down in the same position.",
+      "historical_text": "Discard 2 cards from your hand. Select 1 face-up monster and flip it face-down, but do not change its battle position.",
       "modern_text": "Discard 2 cards from your hand. Select 1 face-up monster and change it to face-down Defense Position.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum: the historical card flips the chosen monster face-down without changing its battle position - pre-errata/c511003028.lua calls Duel.ChangePosition(tc,POS_FACEDOWN_ATTACK,0,POS_FACEDOWN_DEFENSE,0), so a face-up Attack Position monster becomes face-down ATTACK Position - matching v1's 'flip it face-down, but do not change its battle position'. The modern script calls Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE) unconditionally, matching v2's 'change it to face-down Defense Position'. EdisonFormat.com records the same era behaviour and notes that such a monster cannot attack but can be Flip Summoned.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "edisonformat-functional-errata"
       ]
     }
   ],
@@ -24,16 +31,21 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 511003028,
     "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "c511003028.lua",
+    "script": "pre-errata/c511003028.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflicting evidence preserved: the pre-errata cdb text ('Discard 2 cards, then target 1 face-up monster; change that target to face-down in the same position.') matches no lineage version literally - it is a PSCT paraphrase - and the packet's fuzzy matcher pointed it at v2 (ratio 0.7411), which is the wrong version. I assign historical_text_version 1 on behavioural grounds: 'in the same position' is v1's 'do not change its battle position', and the script's POS_FACEDOWN_ATTACK branch can only correspond to v1. Note also that this packet's lineage indices start at 1, with no index 0 present. Dating caveat, stated rather than resolved: v2 is dated only by the 2023-04-20 Spell Ruler (25th Anniversary Edition) reprint, so the recorded date is when the new text became available in print, not necessarily when the ruling changed; it may have moved earlier via the card database. That does not affect either period format - both the 2005 and 2010 snapshots sit well before any plausible date, and the Edison community source independently attests the position-preserving behaviour in 2010. The remaining diff lines (CATEGORY_SET announcement, REASON_COST|REASON_DISCARD vs +, the SetOperationInfo position argument) are announcement/notation only."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+  ]
 }

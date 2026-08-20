@@ -5,18 +5,18 @@
     "passcode": 60102563,
     "name": "Maji-Gire Panda"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "As long as this card remains face-up on the field, each time a Beast-Type monster(s) on the field is destroyed, increase the ATK of this card by 500 points.",
-      "modern_text": "Each time a Beast-Type monster(s) on the field is destroyed, this card gains 500 ATK.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period trigger timing, not a text erratum. The modern script has a single mandatory EVENT_DESTROYED field trigger whose filter inspects the destroyed monster's previous state (IsPreviousLocation(LOCATION_MZONE), IsPreviousPosition(POS_FACEUP), GetPreviousRaceOnField). The GOAT variant removes battle destruction from that trigger (adding 'not c:IsReason(REASON_BATTLE)' to the filter) and registers a clone on EVENT_BATTLED whose condition tests the attacker or attack target while it is still on the field: 'c:IsLocation(LOCATION_MZONE) and c:IsPosition(POS_FACEUP) and c:IsRace(RACE_BEAST) and c:IsBattleDestroyed()'. So in the era a Beast destroyed by battle registers the +500 ATK from its live on-field state during the battle, before the destruction is applied, instead of from its previous state afterwards. Upstream's note: 'Battle destroyed registers while the mosnter is on field.'",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700097,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700097.lua",
+    "script": "goat/c504700097.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The lineage has only one transition and it is cosmetic, so it is not recorded as a change: v0 (FET-EN012, 2005-03-01, the GOAT entry's exact text) -> v1 (DR3-EN132, 2006-11-25, the pinned cdb text) drops 'As long as this card remains face-up on the field' and modernises 'increase the ATK of this card by 500 points' to 'this card gains 500 ATK'. Both scripts already require the Panda to be face-up and related to the effect at target and resolution (atktg/atkop), so the dropped clause changes nothing. The remaining script difference (RESET_EVENT|RESETS_STANDARD vs RESET_EVENT+RESETS_STANDARD) is the same value. Nothing in the packet or the shared briefs dates the battle-destruction timing ruling, so effective is left empty."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

@@ -5,18 +5,23 @@
     "passcode": 32807846,
     "name": "Reinforcement of the Army"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-06-16",
+        "new_attested_from": "2008-12-15",
+        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no valid Warrior left in the Deck subject to Deck verification; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation without one."
       },
       "historical_text": "Add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand. Then shuffle your Deck.",
-      "modern_text": "Add 1 Level 4 or lower Warrior monster from your Deck to your hand.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script reduces s.target to `if chk==0 then return true end` (the modern Duel.IsExistingMatchingCard check over LOCATION_DECK is gone), so the card can be activated with no Level 4 or lower Warrior left in the Deck, and it proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script requires a valid target to activate and never reveals. The printed text is behaviourally identical across the whole English lineage.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ude-card-rulings-archive",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +29,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700055,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700055.lua",
+    "script": "goat/c504700055.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v1 (LOD-EN028 / Master Collection Volume 1), the text the GOAT variant carries exactly. v0->v1 ('Move'->'Add', shuffle wording), v1->v2 (HL06-EN004, 2008-04, drops 'Then shuffle your Deck') and v2->v3 (LEDD-ENA27, 2017, 'Warrior-Type'->'Warrior') are cosmetic and are not recorded as changes. This card is the shared brief's named counter-example, so the shared 'search-verification' chronology (old state attested through 2011-02-02) is deliberately NOT used: its activation allowance demonstrably ended earlier. I dated the change from the two archived official captures instead, which is a determinate result for both target eras - GOAT (2005-04-01) precedes 2005-06-16 and so uses the historical implementation; Edison (2010-04-24) follows 2008-12-15 and so uses the modern card. Residual not modelled as a version: between 2008-12-15 and the end of the general verification procedure, a whiff forced by a chain (rather than by a deliberately empty search) would presumably still have been verifiable; that intermediate state has no upstream implementation and no practical effect on play, so it is documented here rather than recorded as a version with a gap. Source id 'ude-card-rulings-archive' is the registered id in data/sources.json covering both the 2005 UDE rulings pages and the 2008-12-15 Card FAQ capture."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+  ]
 }

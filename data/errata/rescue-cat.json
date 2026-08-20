@@ -8,15 +8,47 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-06-16",
+        "new_attested_from": "2008-12-15",
+        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with 1 or 0 eligible Beasts in the Deck subject to a Deck check; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation in that case."
       },
       "historical_text": "Send this face-up card on your side of the field to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck to the field. The monsters Special Summoned in this way are destroyed during the End Phase.",
-      "modern_text": "You can send this card to the GY; Special Summon 2 Level 3 or lower Beast monsters from your Deck, but their effects are negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
+      "summary": "Period procedure plus a per-card activation ruling: the GOAT script removes the modern requirement that 2 Level 3 or lower Beasts exist in the Deck (Duel.IsExistingMatchingCard(...,2,...) is gone from s.sptg), so the effect can be activated with only 1 or 0 available, and it proves the shortfall by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)). Upstream's pre-errata script restores that 2-target requirement and never reveals, and is otherwise identical to the GOAT one - so this transition is exactly the loss of the era search procedure. The printed text only modernised its wording across v0-v2.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 511002992,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511002992.lua",
+        "status": "complete",
+        "tested": false
+      },
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ude-card-rulings-archive",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN072, Duelist Saga)"
+      },
+      "historical_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
+      "modern_text": "You can send this card to the Graveyard; Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck, but they have their effects negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
+      "summary": "Functional erratum: the two Special Summoned monsters now have their effects negated, and the effect becomes a hard once per turn. Neither the GOAT nor the pre-errata script registers EFFECT_DISABLE / EFFECT_DISABLE_EFFECT on the summoned monsters, and neither carries SetCountLimit(1,id), so in the earlier era the summoned Beasts kept their effects and multiple copies of the card could be used in the same turn.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
       ]
     }
   ],
@@ -24,16 +56,22 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700179,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700179.lua",
+    "script": "goat/c504700179.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v0 (FET-EN033, 2005-03-01), the text the GOAT variant carries exactly. v0->v1 (DR3-EN153) and v1->v2 (CP05-EN015, 2008-01-08) are cosmetic rewordings and are folded into the ruling change's text transition rather than recorded separately; the trailing v3->v4 (MGED-EN006, 2021: 'Graveyard'->'GY', 'Beast-Type'->'Beast') is cosmetic and not recorded. Like Reinforcement of the Army, this card lost its fail-to-find allowance before the general verification procedure ended, so the shared 'search-verification' chronology is not used; the archived captures bound the transition to 2005-06-16 .. 2008-12-15, which places GOAT (2005-04-01) on the GOAT script and Edison (2010-04-24) on the pre-errata script - the implementation Edison needs, since the community record also has the Edison-era card summoning without negation and without a once-per-turn limit. Observation, not treated as a conflict: upstream's pre-errata cdb text ('You can send this card to the Graveyard; Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck, but destroy them during the End Phase.') is a PSCT-style rendering matching no printed lineage version exactly (closest is v2 at ratio 0.889); its behaviour is v2's, which is what the record uses. EdisonFormat.com corroborates the functional verdict: 'in Edison it does NOT negate the effects of the monsters it Summons, and has no \\\"once per name\\\" restriction. The modern erratum added both the negation and the hard once-per-turn.'"
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
 }

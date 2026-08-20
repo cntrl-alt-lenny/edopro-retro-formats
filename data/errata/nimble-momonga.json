@@ -5,18 +5,22 @@
     "passcode": 22567609,
     "name": "Nimble Momonga"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, increase your Life Points by 1000 points. You can also Special Summon up to 2 \"Nimble Momonga\" cards from your Deck to your side of the field in face-down Defense Position. Then shuffle your Deck.",
-      "modern_text": "If this card is destroyed by battle and sent to the GY: Gain 1000 LP, then you can Special Summon any number of \"Nimble Momonga\" from your Deck in face-down Defense Position.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, increase your Life Points by 1000 points. You can also Special Summon up to 2 \"Nimble Momonga\" cards from your Deck to your side of the field in face-down Defence Position. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: the modern script only offers the optional Special Summon prompt when a copy is actually in the Deck (`if #g>0 and Duel.SelectYesNo(...)`), whereas the goat script offers the prompt unconditionally and, when the player accepts with no copy left, reveals the Deck to prove it (`if #g==0 then Duel.GoatConfirm(tp,LOCATION_DECK)`). The deck reveal is the entire behavioural difference; the LP gain and the Summon itself are identical.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +28,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700033,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700033.lua",
+    "script": "goat/c504700033.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "This is the one card in the batch that encodes only branch (A). I read both scripts in full: goat/c504700033.lua:21 and official/c22567609.lua:22 both have `if chk==0 then return true end` in the target function, so the mandatory TRIGGER_F's activation legality is identical and there is no relaxed activation condition to date - hence no chronology-unresolved flag. The remaining diff lines are non-behavioural: CATEGORY_SET is hint metadata, SetPossibleOperationInfo vs SetOperationInfo is chain-info hinting, IsReason(REASON_BATTLE) equals the bitmask test, and MODID/id resolve to the same 22567609. Two lineage observations recorded rather than flagged. First, the goat cdb text reads 'Defense' where lineage v1 (DB1-EN051, 2004-10-12) reads 'Defence' (packet ratio 0.9961) - an orthographic variant only. Second, the text limit 'up to 2 \"Nimble Momonga\"' (v1, v2 CP02-EN002 2007-02-06) becomes 'any number' at v3 (DLDI-EN002, 2009-08-01), but neither script implements a cap of 2: both do `g:Select(tp,1,ft,nil)` bounded only by free Monster Zones (goat/c504700033.lua:40, official/c22567609.lua:38). Upstream therefore does not treat that wording change as behavioural, and with a three-copy deck limit at most two copies can remain after this one is destroyed, so the printed cap could never bind. The rest of the lineage (v0 MRL-086 2002-09-16 through v5 EGO1-EN007 2021-06-17) is cosmetic PSCT/GY/LP modernisation."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

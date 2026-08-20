@@ -5,18 +5,18 @@
     "passcode": 34124316,
     "name": "Cyber Jar"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "FLIP: Destroy all monsters on the field. Both players then pick up 5 cards from the top of their respective Decks and Special Summon all Level 4 or lower Monster Cards among them on the field in face-up Attack Position or face-down Defense Position. The rest of the cards picked up are added to their respective hands.",
-      "modern_text": "FLIP: Destroy all monsters on the field, then both players reveal the top 5 cards from their Decks, then Special Summon all revealed Level 4 or lower monsters in face-up Attack Position or face-down Defense Position, also add any remaining cards to their hand. (If either player has less than 5 cards in their Deck, reveal as many as possible.)",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period procedure encoded only in goat/c504700188.lua: both players' five cards are revealed first (Duel.ConfirmDecktop(p,5) immediately followed by Duel.ConfirmDecktop(1-p,5)) and only then does each player Special Summon, whereas the modern script interleaves them - reveal for one player, that player summons, then reveal for the other. The upstream annotation states the difference outright ('Unlike OCG, first both players reveal, then both summon'), and it is behaviourally live: each player picks positions and zones knowing both reveals. Chronology is unresolved; nothing in the packet dates when the TCG adopted the interleaved sequence.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700188,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700188.lua",
+    "script": "goat/c504700188.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The GOAT cdb text matches lineage v1 (DB1-EN043, 2004-10-12) exactly, so the chain starts there. Lineage v1 -> v2 (DPKB-EN010, 2010-04-16) -> v3 (BP01-EN002, 2012-05-24) -> v4 (BP02-EN007, 2013-06-28) is cosmetic: 'pick up 5 cards' becomes 'reveal the top 5 cards', 'the rest ... added to their hands' becomes 'also add any remaining cards to their hand', and v3's parenthetical '(If either player has less than 5 cards in their Deck, reveal as many as possible.)' states what both scripts already do. The only other diff line is the CATEGORY_SET announcement bit dropped from the GOAT effect's category, which is chain-information only. Unrecorded because it predates the baseline: v0 (MRL-077, 2002-09-16) spelled out '(including this monster)' and '(not Draw)'."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

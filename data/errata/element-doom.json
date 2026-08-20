@@ -5,18 +5,19 @@
     "passcode": 23118924,
     "name": "Element Doom"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n●EARTH: Negate the effect of an Effect Monster that is destroyed by this monster as a result of battle.\r\n●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
-      "modern_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n● EARTH: Negate the effect of an Effect Monster that this card destroyed by battle.\r\n● WIND: If this card destroyed your opponent's monster by battle, it can attack once again in a row.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:●EARTH: Negate the effect of an Effect Monster that is destroyed by this monster as a result of battle.●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the WIND 'attack once again in a row' optional trigger on EVENT_BATTLED and re-checks the battle afterwards (Duel.GetAttacker()==this card, the attack target is the opponent's and IsBattleDestroyed()), where the modern script fires on EVENT_BATTLE_DESTROYING via aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'; the behavioural content is when the optional trigger's window opens and therefore whether it can miss timing. Chronology of this procedural change is unresolved - nothing in the packet or in chronologies.json bounds it.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700036,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700036.lua",
+    "script": "goat/c504700036.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage is cosmetic throughout, and trailing, so it is recorded here rather than as a change entry: v0 (FET-EN011, 2005-03-01) -> v1 (DR3-EN131, 2006-11-25) rewrites 'an Effect Monster that is destroyed by this monster as a result of battle' to 'an Effect Monster that this card destroyed by battle' and 'as a result of battle' to 'by battle'. The EARTH negation branch is unchanged behaviourally: the only diff lines touching it are RESET_EVENT|RESETS_STANDARD_EXC_GRAVE vs RESET_EVENT+RESETS_STANDARD_EXC_GRAVE, the same value written two ways. The battle-destruction timing doctrine sits next to the period rule profile's damage-step structure, but no rule-profile flag can make a card listen to a different event code, so it is a per-card ruling; upstream shipping a per-card variant solely for it supports that reading."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

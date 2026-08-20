@@ -5,18 +5,18 @@
     "passcode": 47025270,
     "name": "Helping Robo for Combat"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Each time this card destroys your opponent's monster as a result of battle, draw 1 card, then select and return 1 card from your hand to the bottom of your Deck.",
-      "modern_text": "If this card destroys an opponent's monster by battle: Draw 1 card, then return 1 card from your hand to the bottom of the Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script fires the mandatory draw on EVENT_BATTLED with a condition that the opponent's battle target was battle-destroyed, i.e. after the battle concludes, while the modern script fires on EVENT_BATTLE_DESTROYING, at the destruction itself. The trigger therefore takes a different position in the Damage Step relative to other battle triggers. The GOAT resolution also omits the modern Duel.ShuffleHand before you pick the card to send back and the Duel.BreakEffect separating the draw from the return. Chronology is unresolved - nothing in the packet dates the timing change.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700076,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700076.lua",
+    "script": "goat/c504700076.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream annotates the goat variant 'Activation timing', matching the EVENT_BATTLED/EVENT_BATTLE_DESTROYING split. The English lineage is cosmetic throughout: v0 (MFC-022, 2003-10-10) -> v1 (DR1-EN077, 2005-03-19) is 'this monster ... in battle' -> 'this card ... as a result of battle' and predates the baseline; v1 -> v2 (BP01-EN181, 2012-05-24) is the PSCT rewrite to 'When this card destroys an opponent's monster by battle:'; v3 is the same BP01 text listed a second time for a different rarity at the same date; v4 (SBTK-EN017, 2019-12-05) only swaps 'When' for 'If'. Neither script sets EFFECT_FLAG_DELAY and both use EFFECT_TYPE_TRIGGER_F, so the 'Each time' -> 'When' -> 'If' progression has no script correlate and is not treated as a miss-timing change. SEQ_DECKBOTTOM and the literal 1 in Duel.SendtoDeck are the same value."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

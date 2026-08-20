@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2006-11-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the 'while it is face-up on the field' limitation (DR3-EN214, Dark Revelation Volume 3)"
       },
       "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Doriado's Blessing\". The Attribute of this card is also treated as WIND, WATER, FIRE, and EARTH.",
       "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Doriado's Blessing\". The Attribute of this card is also treated as WIND, WATER, FIRE, and EARTH while it is face-up on the field.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Functional erratum: the added-Attribute effect gained a location limit. v0 (TLM-EN034) treats this card's Attribute as also WIND, WATER, FIRE and EARTH with no location clause; v1 (DR3-EN214) appends 'while it is face-up on the field'. The scripts match the text: the GOAT variant registers EFFECT_ADD_ATTRIBUTE with SetRange(0x16) - hand (0x2) + Monster Zone (0x4) + Graveyard (0x10), upstream's 'Effect applies in hand/GY as well' - while the modern script uses SetRange(LOCATION_MZONE); the value is the same four Attributes either way (0xf equals ATTRIBUTE_EARTH|ATTRIBUTE_WIND|ATTRIBUTE_FIRE|ATTRIBUTE_WATER). The era script additionally declares EFFECT_FLAG_CANNOT_DISABLE and a condition that switches the effect off entirely once another effect has changed this card's Attribute away from its originals; the modern script has neither.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700181,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700181.lua",
+    "script": "goat/c504700181.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Three behavioural differences are bundled into the single upstream variant and only the first is datable. (1) The location range - hand and Graveyard as well as the Monster Zone - is exactly what the v0 -> v1 text erratum removed, so it is dated by DR3-EN214's release. (2) EFFECT_FLAG_CANNOT_DISABLE, upstream's 'Effect cannot be negated because it is also a condition', and (3) the attribute-change condition, upstream's 'Effect never applies if its attribute is changed by another effect', are ruling-layer interpretations with no text counterpart and no datable transition; the packet gives no evidence for when, or whether, they stopped applying. Consequence to be aware of rather than papered over: because the recorded change is dated 2006-11-25, any snapshot after that date resolves to the modern implementation and loses (2) and (3) along with (1). Splitting them into a separate undated ruling change was rejected because it would manufacture an intermediate version that no upstream implementation covers. Upstream credits the variant to 'senpaizuri'."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
 }

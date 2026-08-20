@@ -8,15 +8,50 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"\r\nThis card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 card on your opponent's side of the field.",
-      "modern_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"\r\nMust first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) Cannot be Special Summoned from the GY. You can discard 1 card, then target 1 card your opponent controls; destroy that target.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 card on your opponent's side of the field.",
+      "summary": "Era restriction on contact-fusion material: the GOAT script's material filter gathers from LOCATION_MZONE while the modern one gathers from LOCATION_ONFIELD, so only the modern implementation lets an 'X-Head Cannon', 'Y-Dragon Head' or 'Z-Metal Tank' sitting in the Spell/Trap Zone as a Union equip be banished as material (upstream annotation: 'Only mo[n]sters in the mzone allowed as material'). No printing distinguishes the zones - the clause reads 'the above cards on your side of the field', later 'the above cards you control' - so this is a period ruling; chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2010-04-16",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of DPKB-EN025 (Duelist Pack: Kaiba)"
+      },
+      "historical_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 card on your opponent's side of the field.",
+      "modern_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\".) This card cannot be Special Summoned from the Graveyard. You can discard 1 card to destroy 1 card your opponent controls.",
+      "summary": "Wording modernisation only from v1 to v4: v2 (DP2-EN014, 2006-02-08) adds the redundant 'This card cannot be Special Summoned from the Graveyard' line and spells out 'from your Fusion Deck', v3 (undated) renames Fusion Deck to Extra Deck, and v4 shifts to 'the above cards you control' and 'You can discard 1 card to destroy 1 card your opponent controls'. Every one of them keeps the strict 'This card can only be Special Summoned' form, so the summoning restriction is unchanged.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-09-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the Silver Dragon Value Box reprint of DPKB-EN025, the first English text carrying the 'Must first be Special Summoned' wording"
+      },
+      "historical_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\".) This card cannot be Special Summoned from the Graveyard. You can discard 1 card to destroy 1 card your opponent controls.",
+      "modern_text": "\"X-Head Cannon\" + \"Y-Dragon Head\" + \"Z-Metal Tank\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) Cannot be Special Summoned from the Graveyard. You can discard 1 card, then target 1 card your opponent controls; destroy that target.",
+      "summary": "Functional erratum: 'This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control' became 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control', turning a strict nomi into a semi-nomi whose only remaining ban is the Graveyard. The GOAT script passes `true` as Fusion.AddContactProc's summon-condition argument, which builds an EFFECT_SPSUMMON_CONDITION with no value and forbids every other Special Summon; the modern script passes a function permitting any Special Summon except from the Extra Deck or Graveyard, so after a proper contact fusion the modern card can be Special Summoned from banishment. The same text applies PSCT targeting wording to the discard effect, which the script diff shows is not a targeting change.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +59,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700161,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700161.lua",
+    "script": "goat/c504700161.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text is v1 (DR1-EN107, 2005-03-19, matched at 0.9985), the printing in force at the 2005-04-01 GOAT snapshot; v0 (BPT-010, Collectible Tins 2003, month precision) says 'the above monsters' and predates it. Unlike its two siblings this card's errata'd text is dated by a reprint rather than a new number: Yugipedia lists v5 under the same code DPKB-EN025 as v4, with the Silver Dragon Value Box (2013-09-13) as its dating set, so XYZ-Dragon Cannon lost the strict nomi three years before XY-Dragon Cannon and XZ-Tank Cannon did with SDKS (2016-10-20). Both the 2005-04-01 and 2010-04-24 snapshots fall before 2013-09-13, so the baseline covers them. Lineage v3 is undated (no number, no set) but sits inside the collapsed cosmetic run, which is dated by v4, so no unresolved interval is introduced. Remaining script-diff hunks (`|` versus '+' in the REASON constants) are equivalent. The Monster-Zone material ruling cannot be sequenced against the erratum because it has no chronology."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

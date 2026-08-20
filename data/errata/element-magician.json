@@ -5,18 +5,19 @@
     "passcode": 65260293,
     "name": "Element Magician"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
-      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n●WATER: Control of this card cannot switch.\r\n●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
-      "modern_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:\r\n● WATER: Control of this card cannot switch.\r\n● WIND: If this card destroyed your opponent's monster by battle, it can attack once again in a row.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:●WATER: Control of this card cannot switch.●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the WIND 'attack once again in a row' optional trigger on EVENT_BATTLED with an inline condition (Duel.GetAttacker()==this card, the attack target is the opponent's and IsBattleDestroyed(), plus CanChainAttack and the WIND presence check), where the modern script fires on EVENT_BATTLE_DESTROYING via aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'. Chronology unresolved - nothing in the packet or in chronologies.json bounds it.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700107,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700107.lua",
+    "script": "goat/c504700107.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage is cosmetic and trailing, recorded here rather than as a change entry: v0 (RDS-EN013, 2004-12-01) -> v1 (DR3-EN073, 2006-11-25) changes only 'as a result of battle' to 'by battle'. The WATER 'Control of this card cannot switch' branch is untouched in both the text lineage and the script diff. The WIND presence check (Duel.IsExistingMatchingCard on s.filter with ATTRIBUTE_WIND) is identical either side; only the event code and the destruction re-check move. Per-card ruling rather than engine, since no rule-profile flag can redirect a card to a different event code."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

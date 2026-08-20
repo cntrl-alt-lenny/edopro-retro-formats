@@ -672,10 +672,9 @@ class Validator:
             for erratum in self.repo.errata.values():
                 if erratum.id in fmt.errata_exclude:
                     continue
-                if erratum.implementation.get("strategy") not in (
-                    "reuse-upstream",
-                    "custom-script",
-                ) or not erratum.implementation.get("historical_passcode"):
+                from .lflist import parity_override
+
+                if parity_override(erratum) is None:
                     continue
                 if erratum.review_status != "reviewed":
                     continue

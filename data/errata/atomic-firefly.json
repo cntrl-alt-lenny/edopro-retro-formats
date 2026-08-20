@@ -5,17 +5,18 @@
     "passcode": 87340664,
     "name": "Atomic Firefly"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "When this face-up card on the field attacks or is attacked and it is destroyed as a result of battle, the player who destroyed it takes 1000 points of damage.",
       "modern_text": "When this face-up card on the field attacks or is attacked and it is destroyed as a result of battle, the player who destroyed it takes 1000 points of damage.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the mandatory burn on `EVENT_BATTLED` with condition `IsPosition(POS_FACEUP) and IsBattleDestroyed()`, so it triggers while the Firefly is still face-up on the field during the Damage Step, whereas the modern script uses `EVENT_BATTLE_DESTROYED` with `IsReason(REASON_BATTLE) and IsPreviousPosition(POS_FACEUP)`, i.e. it triggers only after the card has left the field (upstream's own annotation on the variant is 'Triggers on field'). The era version's activation therefore does not depend on the destroyed Firefly reaching the Graveyard, and it takes its Damage-Step chain slot from the field rather than from the Graveyard. Both versions are mandatory (`EFFECT_TYPE_TRIGGER_F`) and both deal 1000 to the player who destroyed it; the cdb text is identical.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +25,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700150,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700150.lua",
+    "script": "goat/c504700150.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No Yugipedia Card Errata page (packet `errata_page.missing: true`); no text lineage, so literal texts are copied from the packet and are byte-identical between the GOAT entry and `modern_text` - the difference is entirely ruling-layer trigger timing. Verified against goat/c504700150.lua vs official/c87340664.lua: only the event code and the condition body differ; description, category, `EFFECT_FLAG_PLAYER_TARGET`, target and operation are unchanged. Considered `engine`: the GOAT rule profile's Damage-Step flags (DUEL_6_STEP_BATLLE_STEP, DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP, DUEL_TCG_SEGOC_*) shape when chains may be built inside the Damage Step but cannot relocate this card's trigger from the Graveyard back to the field, so the per-card variant is not redundant with a rule-profile flag. Chronology unresolved: no dated source for the trigger-timing change is available in the packet, and the card is absent from EdisonFormat.com's functional-errata list, so no date is asserted."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

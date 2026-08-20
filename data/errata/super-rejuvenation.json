@@ -10,13 +10,19 @@
     {
       "kind": "functional",
       "effective": {
-        "date": null
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN287, Legendary Collection 4: Joey's World Mega Pack)"
       },
       "historical_text": "During the End Phase of the turn this card is activated, draw 1 card from your Deck for each Dragon-Type monster discarded from your hand and/or Tributed during this turn.",
-      "modern_text": "During the End Phase of the turn this card was activated, draw a number of cards equal to the combined number of Dragon monsters you discarded or Tributed from your hand or field this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "During the End Phase of the turn this card was activated, draw a number of cards equal to the combined number of Dragon-Type monsters you discarded or Tributed from your hand or your side of the field this turn.",
+      "summary": "Functional erratum: the draw count changed from 'each Dragon-Type monster discarded from your hand and/or Tributed during this turn' to 'the combined number of Dragon monsters YOU discarded or Tributed from your hand or field this turn', and the attribution of a field Tribute changed with it. The goat script credits a Dragon Tributed from the Monster Zone to tc:GetPreviousControler() - its controller - so a Dragon of yours that your OPPONENT Tributes still counts for you; the modern script credits it to tc:GetReasonPlayer(), the player who performed the Tribute. Upstream annotates the variant 'Monsters tributed by the opponent on your field count among yours'. Hand discards are credited to the previous controller in both.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +30,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700049,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700049.lua",
+    "script": "goat/c504700049.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700049.lua matches lineage v2 (DB2-EN162, Dark Beginning 2, 2005-07-27) exactly, so the chain starts at v2; the earlier cosmetic steps v0 (LOD-047, 2003-06-06, 'offered as a Tribute') -> v1 (LOD-EN047 via Master Collection Volume 1, 2004-12-01, 'Tributed') -> v2 (adds 'from your Deck') predate the baseline implementation and are not recorded as changes. Both target eras precede the erratum (GOAT 2005-04-01 and Edison 2010-04-24 are both earlier than 2013-10-11), so both take the goat variant. Trailing cosmetic rewording v3 -> v4 (MYFI-EN052, 2019-11-21, 'Dragon-Type' -> 'Dragon' and 'from your hand or your side of the field' -> 'from your hand or field'; v4 is the pinned modern text) is not recorded as a change. The remaining diff item, RESET_PHASE|PHASE_END vs the '+' spelling, is identical."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
 }

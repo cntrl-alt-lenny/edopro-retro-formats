@@ -5,18 +5,19 @@
     "passcode": 87473172,
     "name": "Firebird"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "As long as this card remains face-up on the field, each time a Winged Beast-Type monster(s) on your side of the field is destroyed, increase the ATK of this card by 500 points.",
-      "modern_text": "Each time a Winged Beast-Type monster(s) on your side of the field is destroyed, this card gains 500 ATK.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script splits the ATK gain in two. The original destruction effect gains 'not c:IsReason(REASON_BATTLE)' so it now covers only non-battle destruction, and a cloned effect on EVENT_BATTLED covers battle destruction, requiring that the attacker or the attack target be a Winged Beast you control which IsBattleDestroyed() and is still IsLocation(LOCATION_MZONE) and IsPosition(POS_FACEUP) - literally upstream's annotation 'Battle destroyed registers while the mosnter is on field'. The modern script routes both cases through the single destruction event using previous-state checks (IsPreviousControler, IsPreviousLocation, IsPreviousPosition, GetPreviousRaceOnField). Chronology unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +25,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700151,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700151.lua",
+    "script": "goat/c504700151.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The behavioural content of the ruling is the state test: the era version evaluates a battle destruction on the destroyed Winged Beast's CURRENT state at the end of the battle (still in the Monster Zone, still face-up), whereas the modern version evaluates its PREVIOUS state at the destruction event. Text lineage is cosmetic and trailing, so it is recorded here rather than as a change entry: v0 (FET-EN032, 2005-03-01) -> v1 (DR3-EN152, 2006-11-25) drops the redundant 'As long as this card remains face-up on the field' clause and adopts 'this card gains 500 ATK'; both scripts register the ATK-gain effect from the Monster Zone regardless, and the remaining diff line (RESET_EVENT| vs RESET_EVENT+ RESETS_STANDARD) is the same value. Per-card ruling rather than engine: no rule-profile flag can add a second effect on a different event code."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

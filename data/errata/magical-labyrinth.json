@@ -5,18 +5,18 @@
     "passcode": 64389297,
     "name": "Magical Labyrinth"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "Equip \"Labyrinth Wall\" with this card. If you Tribute \"Labyrinth Wall\" equipped with this card, you can Special Summon \"Wall Shadow\" from your Deck.",
-      "modern_text": "Equip only to \"Labyrinth Wall\". You can Tribute the equipped monster; Special Summon \"Wall Shadow\" from your Deck.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Period ruling package. Activation condition: the modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` - a \"Wall Shadow\" in the Deck - while the goat target checks only for a free zone (`return ft>0`), so the Ignition effect can be used and its cost paid (both Magical Labyrinth and the equipped \"Labyrinth Wall\" are Released) with no \"Wall Shadow\" left, losing two cards for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
       "sources": [
-        "ignis-babelcdb"
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
       ]
     }
   ],
@@ -24,16 +24,19 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700105,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700105.lua",
+    "script": "goat/c504700105.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Equip procedure, cost (`s.spcost` Releasing the Group of both cards) and EFFECT_FLAG_BOTH_SIDE property are identical in both scripts; `e:GetHandler():GetEquipTarget():GetControler()==tp` is equivalent to the modern `:IsControler(tp)`. Chain starts at lineage v3 (SRL-059), which the goat cdb text matches exactly; v1 (MRL-E059) and v2 (SRL-EN059) are earlier cosmetic rewordings of the same Tribute-then-Summon effect and are not recorded, and trailing v3 -> v4 (LCJW-EN231, 2013-10-11) is PSCT rewording (\"Equip \\\"Labyrinth Wall\\\" with this card. If you Tribute ...\" -> \"Equip only to \\\"Labyrinth Wall\\\". You can Tribute the equipped monster;\"), hence modern_text_version null. PACKET DATING CONFLICT: the packet assigns lineage v3 a dating_set of \"Legendary Collection\" with earliest_tcg_date 2010-10-01, but v3's print number SRL-059 is the original North American Spell Ruler printing of 2002-09-16 that Legendary Collection merely reprinted - the packet's dating heuristic appears to have picked the later set from the version's set list. This is immaterial to the decision because no recorded change uses v3's date as evidence (the sole change is the undated ruling package), but it would matter to anyone later dating a transition off this version, and it also means the baseline text is era-correct for the 2005-04-01 GOAT snapshot rather than six years late as the packet's date would suggest. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
 }

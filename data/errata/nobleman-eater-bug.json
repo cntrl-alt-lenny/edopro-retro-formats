@@ -5,17 +5,18 @@
     "passcode": 65878864,
     "name": "Nobleman-Eater Bug"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "ruling",
       "effective": {
         "date": null
       },
       "historical_text": "FLIP: Destroy 2 monsters on the field.",
       "modern_text": "FLIP: Destroy 2 monsters on the field.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "summary": "Era target-count semantics, not a text erratum: the GOAT script targets UP TO 2 monsters - it counts targetable monsters, sets `ct=math.min(ct,2)` and calls `Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,ct,2,nil)`, so the Flip effect still works when only one monster can be targeted and destroys that one, and at resolution it destroys whatever targets remain (`if #sg<1 then return end`). The modern script requires two targetable monsters to exist (`Duel.IsExistingTarget(aux.TRUE,...,2,nil)`), selects exactly 2, and destroys nothing at all unless both targets are still related to the effect (`if #sg~=2 then return end`). Targeting itself is unchanged - `EFFECT_FLAG_CARD_TARGET` and the `chkc` Monster-Zone check are present in both - and the cdb text is identical, so this is a ruling-layer difference in how many targets the effect demands.",
       "sources": [
+        "ignis-cardscripts",
         "ignis-babelcdb"
       ]
     }
@@ -24,16 +25,18 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700109,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700109.lua",
+    "script": "goat/c504700109.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No Yugipedia Card Errata page (packet `errata_page.missing: true`); literal texts copied from the packet and byte-identical between the GOAT entry and `modern_text`, so the whole difference is ruling-layer. Verified against goat/c504700109.lua vs official/c65878864.lua; upstream's own annotation on the variant, 'It targets up to 2 monsters', matches the script. Two distinct in-play consequences follow and both are recorded in the summary: activation with a single targetable monster on the field, and partial resolution when one of two targets is no longer relatable. Considered `engine`: nothing in data/rule-profiles/tcg-goat.json governs per-card target-count requirements, so this is correctly a card-level ruling record and not a rule-profile matter. Chronology unresolved - no dated source for the era target-count semantics is available in the packet, and this card is absent from EdisonFormat.com's functional-errata list (the 'Nobleman' entries there are Nobleman of Crossout / Nobleman of Extermination, different cards, and are not evidence for this one)."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
 }

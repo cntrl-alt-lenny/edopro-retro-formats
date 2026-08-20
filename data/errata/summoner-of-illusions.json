@@ -8,15 +8,37 @@
   "classification": "functional",
   "changes": [
     {
-      "kind": "functional",
+      "kind": "cosmetic",
       "effective": {
-        "date": null
+        "date": "2008-04-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the new text (GLD1-EN004, Gold Series)"
       },
       "historical_text": "FLIP: Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this card is activated.",
-      "modern_text": "FLIP: Tribute 1 other monster, and if you do, Special Summon 1 Fusion Monster from your Extra Deck, but destroy it during the End Phase of this turn.",
-      "summary": "Project Ignis ships a distinct GOAT-era implementation of this card, establishing that its period behaviour/text differs from the modern implementation. Texts transcribed from the cited databases.",
+      "modern_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
+      "summary": "Wording modernisation only (v0 LON-063 -> v1 GLD1-EN004): 'Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck.' becomes 'Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck.' Both keep the pre-PSCT 'Tribute X to do Y' construction that the era ruled as a cost, and both keep the end-of-turn destruction of the Summoned Fusion Monster.",
       "sources": [
-        "ignis-babelcdb"
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the 'and if you do' text (LCYW-EN243, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
+      "modern_text": "FLIP: Tribute 1 other monster, and if you do, Special Summon 1 Fusion Monster from your Extra Deck. Destroy that Fusion Monster during the End Phase of this turn.",
+      "summary": "Functional erratum: the Tribute moved from a cost to part of the resolution. The goat script pays it as a cost - e1:SetCost(s.cost) using Duel.CheckReleaseGroupCost / Duel.SelectReleaseGroupCost / Duel.Release(g,REASON_COST) - so the FLIP effect cannot even activate unless a Tributable monster AND a Summonable Fusion Monster both exist, and the Tribute is paid even if the effect is subsequently negated. The modern script's target function returns true unconditionally and performs Duel.SelectReleaseGroup / Duel.Release(rg,REASON_EFFECT) inside the operation, matching v2's PSCT 'Tribute 1 other monster, and if you do, Special Summon ...', so the effect activates regardless and simply does nothing on resolution if the Tribute cannot be made. Upstream annotates the variant 'tributing monster is a cost'.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
       ]
     }
   ],
@@ -24,16 +46,20 @@
     "strategy": "reuse-upstream",
     "historical_passcode": 504700184,
     "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "c504700184.lua",
+    "script": "goat/c504700184.lua",
     "status": "complete",
     "tested": false
   },
   "review": {
-    "status": "imported"
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700184.lua matches lineage v0 (LON-063, Labyrinth of Nightmare, 2003-03-01) exactly. Both target eras fall before the v2 erratum (GOAT 2005-04-01 and Edison 2010-04-24 are both earlier than 2012-09-29), so both take the goat variant. Trailing cosmetic rewording v2 -> v3 (FUEN-EN038, 2017-02-23, '. Destroy that Fusion Monster during the End Phase of this turn' -> ', but destroy it during the End Phase of this turn'; v3 is the pinned modern text) is not recorded as a change. The classification is functional rather than cosmetic despite the transition being a PSCT rewording, because the script diff carries positive evidence of a resolution difference (SetCost vs an in-resolution Release) rather than mere formalisation; the remaining diff items - CATEGORY_RELEASE on the modern effect, where s.rfilter is defined, and RESETS_STANDARD_PHASE_END vs its expanded spelling - are hint-only or identical."
   },
   "sources": [
     "ignis-babelcdb",
-    "ignis-lflists"
-  ],
-  "notes": "Auto-imported. classification=functional mirrors upstream's decision to ship a separate implementation; the effective date of the modern text and a per-card review (functional vs ruling) are still TODO."
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
 }
