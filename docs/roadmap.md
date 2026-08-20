@@ -13,7 +13,7 @@ reflects that.
    chronologies and 125 explicitly unresolved. GOAT's 211-entry include list is
    gone (one sourced parity policy, parity unchanged) and Edison computes 72
    historical implementations from evidence alone. See docs/errata.md.
-   Follow-ups below (1a–1d).
+   Follow-ups below (1a-1e).
 
    1a. **Chronology for the undated era rulings.** 125 records are unresolved,
    almost all undated era *rulings* carried by upstream GOAT scripts —
