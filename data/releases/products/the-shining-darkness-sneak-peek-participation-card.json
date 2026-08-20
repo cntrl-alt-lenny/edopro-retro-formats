@@ -6,15 +6,27 @@
   "kind": "promo-other",
   "release_events": [
     {
-      "territory": "tcg",
+      "territory": "tcg-na",
       "date": "2010-05-01",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "event",
       "sources": [
         "yugipedia-set-pages",
-        "ygoprodeck-api"
-      ]
+        "konami-product-pages-2010-archive"
+      ],
+      "notes": "Official page: Sneak Peek events 'May 1 and/or May 2'; earliest distribution day recorded."
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2010-04-30",
+      "precision": "day",
+      "status": "verified",
+      "kind": "event",
+      "sources": [
+        "konami-product-pages-2010-archive"
+      ],
+      "notes": "Konami Europe: 'Sneak Peeks ... from April 30th to May 2nd'."
     }
   ],
   "printings": [
@@ -27,8 +39,10 @@
     }
   ],
   "sources": [
+    "konami-product-pages-2010-archive",
     "ygoprodeck-api",
     "yugipedia-set-pages"
   ],
-  "notes": "Dates from Yugipedia set page 'The Shining Darkness Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+  "notes": "CURATED (2026-08 certification): the previously recorded single 2010-05-01 date came from the bulk sources without regional detail; archived official Sneak Peek pages establish the real event days (NA/LatAm 2010-05-01/02, Europe 2010-04-30..05-02) - notably NOT the 'weekend before the 05-11 street date' pattern that was earlier assumed. The Edison pool excludes this product; see the pool record.",
+  "curated": true
 }

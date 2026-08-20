@@ -1,0 +1,789 @@
+{
+  "$schema": "../../schemas/releases-gaps.schema.json",
+  "gaps": [
+    {
+      "id": "gap-abpf-plus",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Absolute Powerforce Plus"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2010-02-12",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "repackaging-only",
+        "detail": "'Plus' value pack rebundling sealed boosters of the named set with a Token insert (tokens are not deck-legal); no new printings. Yugipedia dates the bundle only '2010'; a sealed-booster bundle cannot precede its contents, so its earliest possible date is anchored to Absolute Powerforce's first retail release (EU 2010-02-12, period-verified).",
+        "products": [
+          "absolute-powerforce"
+        ],
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-anpr-plus",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Ancient Prophecy Plus"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2009-11-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "repackaging-only",
+        "detail": "'Plus' value pack rebundling sealed boosters of the named set with a Token insert (tokens are not deck-legal); no new printings. Yugipedia dates the bundle 2009-11 (month); Ancient Prophecy itself was at retail 2009-09-01.",
+        "products": [
+          "ancient-prophecy"
+        ],
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-deluxe-starters",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Starter Deck: Joey Deluxe Edition",
+        "Starter Deck: Pegasus Deluxe Edition"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2003-04-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "repackaging-only",
+        "detail": "April 2003 bundles: the named Starter Deck plus two Labyrinth of Nightmare boosters, sleeves and a storage box (per the archived Upper Deck press item Yugipedia cites). No exclusive cards, no set prefix. Both components were at retail by 2003-03-30 (NA), before the bundles.",
+        "products": [
+          "starter-deck-joey",
+          "starter-deck-pegasus",
+          "labyrinth-of-nightmare"
+        ],
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-dpct-2007",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Duelist Pack Collection Tin 2007"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2007-03-07",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "repackaging-only",
+        "detail": "A tin containing six sealed Duelist Packs (2x Zane Truesdale, Jaden Yuki, Chazz Princeton, Jaden Yuki 2, Aster Phoenix) and a non-card Beginner's Guide. No tin-exclusive card and no prefix (YGOJSON likewise records zero cards). Every component pack was at retail on or before the tin's 2007-03-07 NA date.",
+        "products": [
+          "duelist-pack-zane-truesdale",
+          "duelist-pack-jaden-yuki",
+          "duelist-pack-chazz-princeton",
+          "duelist-pack-jaden-yuki-2",
+          "duelist-pack-aster-phoenix"
+        ],
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-duelist-vol16",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! Duelist Volume 16 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-08-01",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Yu-Jo Friendship: TCG-available since 2006-05 via shonen-jump-may-2006-subscription-bonus. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 81332143,
+            "name": "Yu-Jo Friendship"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-fm-premium-edition",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! Forbidden Memories Premium Edition promotional cards"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2002-11-25",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "This Yugipedia title is an alias of the same physical product the dataset already holds as yu-gi-oh-forbidden-memories-promotional-cards (FMR-001/002/003 bundled with the PS1 game's Premium Edition, NA 2002-11): identical trio, identical date.",
+        "cards": [
+          {
+            "passcode": 64335804,
+            "name": "Red-Eyes Black Metal Dragon"
+          },
+          {
+            "passcode": 52040216,
+            "name": "Harpie's Pet Dragon"
+          },
+          {
+            "passcode": 68540058,
+            "name": "Metalmorph"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-mattel-umbrella",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Mattel Action Figure promotional cards"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-07-12",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The umbrella page covers the MF01/MF02/MF03 series already in the dataset as three dated products (2006-07-12, 2006-09-22, 2006). Every one of the 16 Parallel Rare cards had a strictly earlier wide TCG release in 2005 via The Lost Millennium, Cybernetic Revolution, or Elemental Energy - recomputed by the validator against the earliest possible distribution date (Series 1, 2006-07-12).",
+        "cards": [
+          {
+            "passcode": 61204971,
+            "name": "Elemental HERO Thunder Giant"
+          },
+          {
+            "passcode": 83121692,
+            "name": "Elemental HERO Tempest"
+          },
+          {
+            "passcode": 10526791,
+            "name": "Elemental HERO Wildedge"
+          },
+          {
+            "passcode": 1546123,
+            "name": "Cyber End Dragon"
+          },
+          {
+            "passcode": 85066822,
+            "name": "Water Dragon"
+          },
+          {
+            "passcode": 21844576,
+            "name": "Elemental HERO Avian"
+          },
+          {
+            "passcode": 58932615,
+            "name": "Elemental HERO Burstinatrix"
+          },
+          {
+            "passcode": 84327329,
+            "name": "Elemental HERO Clayman"
+          },
+          {
+            "passcode": 20721928,
+            "name": "Elemental HERO Sparkman"
+          },
+          {
+            "passcode": 59793705,
+            "name": "Elemental HERO Bladedge"
+          },
+          {
+            "passcode": 35809262,
+            "name": "Elemental HERO Flame Wingman"
+          },
+          {
+            "passcode": 79979666,
+            "name": "Elemental HERO Bubbleman"
+          },
+          {
+            "passcode": 83104731,
+            "name": "Ancient Gear Golem"
+          },
+          {
+            "passcode": 70095154,
+            "name": "Cyber Dragon"
+          },
+          {
+            "passcode": 50916353,
+            "name": "Chthonian Soldier"
+          },
+          {
+            "passcode": 98585345,
+            "name": "Winged Kuriboh LV10"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ],
+      "notes": "The three series records remain the availability source; this record resolves the umbrella page title the importer cannot match to a YGOPRODeck set."
+    },
+    {
+      "id": "gap-millennium-world-vol4",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! Millennium World Volume 4 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-08-01",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Judgment of the Pharaoh: TCG-available since 2006-05 via shonen-jump-may-2006-subscription-bonus. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 55948544,
+            "name": "Judgment of the Pharaoh"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-movie-promos",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! The Movie Ani-Manga promotional card",
+        "Yu-Gi-Oh! the Movie VHS and DVD promotional cards"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu",
+        "tcg-oce"
+      ],
+      "possible_from": "2004-11-16",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "Both November 2004 distributions repackage Movie Pack prints ('These cards are the same prints as the four cards included in the Movie Pack' per Yugipedia): Pyramid of Light in US/AU home video, the other three via a US mail-in offer, Theinen via the French Ani-Manga edition (already out via Exclusive Pack, 2004-07/08), Blue-Eyes Shining Dragon via the Italian edition (Movie Pack, 2004-08-13). The English Ani-Manga card was the non-playable original Slifer the Sky Dragon (no passcode).",
+        "cards": [
+          {
+            "passcode": 53569894,
+            "name": "Pyramid of Light"
+          },
+          {
+            "passcode": 53347303,
+            "name": "Blue-Eyes Shining Dragon"
+          },
+          {
+            "passcode": 88619463,
+            "name": "Sorcerer of Dark Magic"
+          },
+          {
+            "passcode": 87774234,
+            "name": "Watapon"
+          },
+          {
+            "passcode": 87997872,
+            "name": "Theinen the Great Sphinx"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-nonplayable-promos",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump May 2005 subscription bonus",
+        "Upper Deck Entertainment promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2005-05-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "The May 2005 subscription bonus was the ORIGINAL Obelisk the Tormentor promo - a non-playable print with limitation text and no passcode (the tournament-legal Obelisk, 10000000, is the 2010 JUMP-EN037 effect version already in the dataset; mapping this 2005 print to it would be wrong). The UDE promotional card is the employee-only 'The Seal of Orichalcos' demo (~15 copies, different effect from any legal card, limitation text, never released).",
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-pharaoh-tour-2006",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Pharaoh Tour 2006 Final prize card",
+        "Pharaoh Tour 2006 Stop participation card"
+      ],
+      "territories": [
+        "tcg-eu"
+      ],
+      "possible_from": "2006-09-17",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The Final prize was an Ultra Rare Shrink (PT02); the Stop participation card was a Common Toon Dark Magician Girl (PT02). Both cards were TCG-available earlier through dataset products (Shrink via the 2006-05-06 SJC prize card; Toon Dark Magician Girl via the 2006-05-13 Enemy of Justice Sneak Peek), and both also appear in the dataset's pharaoh-tour-2006-promotional-cards record (tcg-eu 2006-09-02).",
+        "cards": [
+          {
+            "passcode": 55713623,
+            "name": "Shrink"
+          },
+          {
+            "passcode": 90960358,
+            "name": "Toon Dark Magician Girl"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-5th-anniversary",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Fifth Anniversary Collector's Issue promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2008-08-05",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Magician's Valkyria: reprint of the Vol. 4 Issue 11 promo, TCG-available since 2006-11 via shonen-jump-vol-4-issue-11-promotional-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 80304126,
+            "name": "Magician's Valkyria"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol3-issue11",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 3, Issue 11 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2005-11-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Embodiment of Apophis: TCG-available since 2005-08-06 via cybernetic-revolution-sneak-peek-participation-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 28649820,
+            "name": "Embodiment of Apophis"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol3-issue6",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 3, Issue 6 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2005-06-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Cyber Harpie Lady: TCG-available since 2005-02-26 via flaming-eternity-sneak-peek-participation-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 80316585,
+            "name": "Cyber Harpie Lady"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol3-issue9",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 3, Issue 9 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2005-09-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Amazoness Chain Master: TCG-available since 2005-05-28 via the-lost-millennium-sneak-peek-participation-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 29654737,
+            "name": "Amazoness Chain Master"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol4-issue10",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 4, Issue 10 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-08-01",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Unity: TCG-available since 2006-05 via shonen-jump-may-2006-subscription-bonus. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 14731897,
+            "name": "Unity"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol4-issue2",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 4, Issue 2 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-02-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Exchange of the Spirit: TCG-available since 2005-11-05 via elemental-energy-sneak-peek-participation-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 17484499,
+            "name": "Exchange of the Spirit"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sj-vol4-issue5",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Shonen Jump Vol. 4, Issue 5 promotional card"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2006-05-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The issue redistributed a single promo card, Ancient Lamp: TCG-available since 2006-02-18 via shadow-of-infinity-sneak-peek-participation-card. The validator recomputes this claim from release data.",
+        "cards": [
+          {
+            "passcode": 54912977,
+            "name": "Ancient Lamp"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-sovr-plus",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Stardust Overdrive Plus"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2009-12-01",
+      "date_precision": "month",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "repackaging-only",
+        "detail": "'Plus' value pack rebundling sealed boosters of the named set with a Token insert (tokens are not deck-legal); no new printings. Yugipedia dates the bundle 2009-12 (month); Stardust Overdrive itself was at retail 2009-11-17.",
+        "products": [
+          "stardust-overdrive"
+        ],
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-token-only-products",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Token Pack Version 1.0",
+        "Token Pack Version 2.0",
+        "Toys \"R\" Us Geoffrey's Birthday Party promotional cards",
+        "Toys \"R\" Us Throwdown promotional cards",
+        "Yu-Gi-Oh! 5D's National Championship 2009 promotional cards",
+        "Duel the Master: Orichalcos Challenge 2006 promotional card",
+        "San Diego Comic-Con promotional cards"
+      ],
+      "territories": [
+        "tcg-na",
+        "tcg-eu"
+      ],
+      "possible_from": "2006-07-20",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "All seven distributions contain only Token cards (TKN1/TKN2/TKN3/TKN4 series; the San Diego Comic-Con page is literally a redirect to the Orichalcos Challenge token). Tokens are game aids with no deck legality and no passcodes; they cannot enter any card pool.",
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-wc-match-winner-cards",
+      "kind": "unmatched-cards",
+      "subjects": [
+        "Chimaera, the Master of Beasts",
+        "Emperor of Lightning",
+        "Get Your Game On!",
+        "King of Destruction - Xexex",
+        "Meteo the Matchless",
+        "Queen of Fate - Eternia",
+        "Testament of the Arcane Lords",
+        "Ulevo"
+      ],
+      "territories": [
+        "tcg"
+      ],
+      "possible_from": "2004-07-25",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "The eight cards the importer could not match to BabelCDB are all one-of-a-kind World Championship match-winner prizes (2004-2007) or the WC2007 event-exclusive Spell 'Get Your Game On!' (whose own text restricts play to attendees of that event). None has a passcode; none was ever tournament legal. The lone tournament-legal match winner in history, Victory Dragon, was a normal Shonen Jump promo (not in this family) and was Forbidden about two months after release.",
+        "sources": [
+          "yugipedia-set-pages",
+          "ude-tournament-policy-appendix-a"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-wc-prize-products",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! World Championship 2005 prize cards",
+        "Yu-Gi-Oh! World Championship 2006 prize cards",
+        "Yu-Gi-Oh! World Championship 2007 prize cards",
+        "Yu-Gi-Oh! World Championship 2008 prize cards",
+        "Yu-Gi-Oh! World Championship 2009 prize cards",
+        "Yu-Gi-Oh! World Championship 2010 prize cards"
+      ],
+      "territories": [
+        "tcg"
+      ],
+      "possible_from": "2005-08-07",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "Each set is the year's World Championship winner prizes: one-of-a-kind English match-winner cards (Xexex/Eternia 2005; Testament/Armament 2006; Chimaera/Emperor of Lightning + the event-exclusive 'Get Your Game On!' 2007; Tyr/Lorelei 2008; Aggiba/Skuna 2009; Stardust Divinity/Grizzly 2010) plus an Asian-English reprint of a prior prize. Match winners carry printed limitation text ('This card cannot be used in a Duel'), have no passcodes (absent from BabelCDB; YGOPRODeck uses synthetic ids), and were never tournament legal; the Asian-English prints are OCG-backed and were banned from TCG play throughout the era per UDE Appendix A. No card in these products can enter any TCG pool.",
+        "sources": [
+          "yugipedia-set-pages",
+          "ude-tournament-policy-appendix-a"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ],
+      "notes": "The 2005/2006/2007 records exist in the dataset with deliberately empty printings; 2008-2010 have no YGOPRODeck sets at all."
+    },
+    {
+      "id": "gap-wc2004-tournament-promos",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! World Championship 2004 tournament promotional cards"
+      ],
+      "territories": [
+        "tcg-na"
+      ],
+      "possible_from": "2004-05-22",
+      "status": "resolved-imported",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "roster-imported",
+        "detail": "GENUINE GAP, now recovered: the participation promo Sengenjin (WCS-EN403) was distributed to every entrant of the WC2004 video-game preliminaries at US Toys 'R' Us stores on 2004-05-22 - earlier than the dataset's previous earliest Sengenjin record (the 2004-07-25 prize-card product, where the YGOPRODeck dump lumps this printing). Imported as a curated product. The winners' Kanan the Swordmistress was an Asian-English OCG print, never TCG-legal, and is deliberately excluded.",
+        "product": "yu-gi-oh-world-championship-2004-tournament-promotional-cards",
+        "sources": [
+          "yugipedia-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "sources": [
+    "yugipedia-set-pages",
+    "ygoprodeck-api",
+    "ude-tournament-policy-appendix-a"
+  ]
+}

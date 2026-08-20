@@ -46,6 +46,38 @@ a large functional-errata surface (many 2010 staples were errata'd later).
 - **Chronology.** Format Library names the neighbours "Lightsworn" (previous) and
   "Frog" (next); left null until those formats exist here.
 
+## The event versus the format
+
+Two related but distinct things bear the name "Edison":
+
+1. **The historical event** - the 75th Shonen Jump Championship, Edison NJ,
+   April 24-25, 2010. Konami's own pre-event FAQ (archived 2010-04-11, source
+   `sjc-edison-2010-faq`) defines what was legal *there*: boosters through
+   Absolute Powerforce and Duelist Pack: Kaiba ("Legal for play starting
+   4/20/2010"), Machina Mayhem, Shonen Jump promos **up until Hundred Eyes
+   Dragon**, GX manga promos through Angel O7, video-game promos through the
+   Reverse of Arcadia trio, and an explicit list of Duel Terminal exclusives
+   that were NOT legal.
+2. **The retrospective community format** - what EdisonFormat.com and the
+   community pools define and play today. It matches the event's pool on
+   everything except one deliberate divergence: the community's promo cutoff is
+   Cyber Eltanin (JUMP-EN038), excluding Hundred Eyes Dragon (JUMP-EN039)
+   even though the event's FAQ permitted it.
+
+Our pool declares `legality_basis: community-retrospective` and preserves the
+community convention; the divergence is documented (with the period evidence)
+on the Hundred Eyes Dragon exclusion entry. A future historical-event pool
+could reuse every shared record and differ only there.
+
+Period policy findings that ground the pool's other decisions (see
+docs/releases.md "Availability versus legality policy"): Duel Terminal
+machine exclusives were illegal in sanctioned play per Konami's own 2009-2010
+policy (not just community convention); Europe-only releases counted as legal
+in North America (UDE's worldwide-simultaneity clause; the 2009 US Nationals
+FAQ explicitly legalising the GX Tag Force 3 promos); and the TSHD Sneak Peek
+actually ran May 1-2 (NA) / April 30-May 2 (EU) per archived official pages -
+not the May 8-9 weekend earlier assumed.
+
 ## Playing it (current honesty level)
 
 `dist/lflists/2010-03-edison.lflist.conf` is now a full `$whitelist`: it enforces

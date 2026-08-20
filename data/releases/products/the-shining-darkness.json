@@ -9,21 +9,23 @@
       "territory": "tcg-na",
       "date": "2010-05-11",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-set-pages"
+        "yugipedia-set-pages",
+        "konami-product-pages-2010-archive"
       ]
     },
     {
       "territory": "tcg-eu",
       "date": "2010-05-07",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
         "yugipedia-set-pages",
-        "ygoprodeck-api"
+        "ygoprodeck-api",
+        "konami-product-pages-2010-archive"
       ]
     },
     {
@@ -741,8 +743,10 @@
     }
   ],
   "sources": [
+    "konami-product-pages-2010-archive",
     "ygoprodeck-api",
     "yugipedia-set-pages"
   ],
-  "notes": "Dates from Yugipedia set page 'The Shining Darkness'; printings from the YGOPRODeck bulk dump."
+  "notes": "Dates from Yugipedia set page 'The Shining Darkness'; printings from the YGOPRODeck bulk dump. CURATED (2026-08 certification): the marked release events are verified against archived 2010 Konami product pages carrying explicit Launch/Tournament Legal Date fields (see the konami-product-pages-2010-archive source entry). Printings frozen from the YGOPRODeck dump; the importer preserves this file.",
+  "curated": true
 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-world-championship-2004-tournament-promotional-cards",
+  "code": "WCS",
+  "name": "Yu-Gi-Oh! World Championship 2004 tournament promotional cards",
+  "kind": "promo-tournament",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2004-05-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 76232340,
+      "name": "Sengenjin",
+      "numbers": [
+        "WCS-EN403"
+      ]
+    }
+  ],
+  "sources": [
+    "yugipedia-set-pages"
+  ],
+  "notes": "Curated (recovered during the 2026-08 release-data certification): participation promo distributed to every entrant of the Yu-Gi-Oh! World Championship Tournament 2004 video-game preliminaries at 600+ US Toys 'R' Us stores on 2004-05-22 (also at the San Diego Comic-Con Wild Card Tournament, 2004-07-22). Moves Sengenjin's earliest TCG availability back from 2004-07-25 (the WC2004 prize-card record, where the YGOPRODeck dump lumps this printing). The winners' card, Kanan the Swordmistress, was an Asian-English OCG-backed print explicitly not TCG-legal and is deliberately absent."
+}

@@ -37,9 +37,10 @@
           "passcode": 95453143,
           "name": "Hundred Eyes Dragon"
         },
-        "reason": "JUMP-EN039, the Shonen Jump Vol. 8 Issue 5 (May 2010) promo - after EdisonFormat.com's promo cutoff (latest legal JUMP promo: Cyber Eltanin, JUMP-EN038). Its month-precision date straddles the 2010-05-10 cutoff, hence the explicit exclude. YGOPRODeck's Edison pool excludes it.",
+        "reason": "JUMP-EN039, the Shonen Jump May 2010 issue promo. THE COMMUNITY FORMAT AND THE HISTORICAL EVENT DIVERGE HERE, deliberately preserved on the community side (this pool's legality_basis is community-retrospective): EdisonFormat.com defines the latest legal JUMP promo as Cyber Eltanin (JUMP-EN038) and both independent community pools exclude Hundred Eyes Dragon - but Konami's own FAQ for the 75th SJC (captured 2010-04-11) answered 'What cards are legal for play?' with SHONEN JUMP promos 'up until Hundred Eyes Dragon', i.e. the card WAS legal at SJC Edison itself (the May cover issue shipped in April). A future historical-event pool would include it. Its month-precision date straddles the 2010-05-10 cutoff, hence the explicit entry.",
         "sources": [
           "edisonformat-legal-sets",
+          "sjc-edison-2010-faq",
           "ygoprodeck-api"
         ]
       }
@@ -47,32 +48,37 @@
     "exclude_products": [
       {
         "product": "the-shining-darkness",
-        "reason": "The format is defined as ending 2010-05-10, the day before The Shining Darkness's NORTH AMERICAN release (2010-05-11); its European street date (2010-05-07) falls inside the window but the set is explicitly outside the format - EdisonFormat.com's set list stops at Duelist Pack: Kaiba, and no community implementation includes TSHD cards.",
+        "reason": "The format is defined as ending 2010-05-10, the day before The Shining Darkness's NORTH AMERICAN release; both dates are period-verified against archived 2010 Konami product pages (NA Launch/Tournament Legal Date 5/11/10; Europe 05/07/10). The EU street date falls inside the window but the set is outside the format: EdisonFormat.com's set list stops at Duelist Pack: Kaiba and no community implementation includes TSHD cards.",
         "sources": [
           "edisonformat-what-is",
           "edisonformat-legal-sets",
+          "konami-product-pages-2010-archive",
           "ygoprodeck-api"
         ]
       },
       {
         "product": "the-shining-darkness-sneak-peek-participation-card",
-        "reason": "Distributed at TSHD Sneak Peek events (2010-05-08/09), nominally inside the cutoff, but it belongs to the TSHD era: EdisonFormat.com's set list omits it and both independent community pools (YGOPRODeck Edison tag, termitaklk whitelist) exclude XX-Saber Boggart Knight.",
+        "reason": "Distributed at TSHD Sneak Peek events - per archived official pages these ran 2010-05-01/02 in NA/LatAm and 2010-04-30..05-02 in Europe (correcting an earlier assumption of May 8-9), nominally inside the cutoff window and after SJC Edison (April 24-25). The community format excludes it: EdisonFormat.com's set list omits it and both independent community pools exclude XX-Saber Boggart Knight. The event's own FAQ (captured 2010-04-11) predates the Sneak Peek and does not list it either.",
         "sources": [
           "edisonformat-legal-sets",
+          "konami-product-pages-2010-archive",
+          "sjc-edison-2010-faq",
           "ygoprodeck-api"
         ]
       },
       {
         "product": "duel-terminal-1",
-        "reason": "Duel Terminal machine cards (DT01, NA 2010-01-29) are not part of the Edison pool as documented: EdisonFormat.com's legal-set list contains no Duel Terminal products, and both independent community pools exclude DT01-only cards. DT cards printed in legal products (e.g. Hidden Arsenal) remain available through those products.",
+        "reason": "PERIOD POLICY, not merely community convention: Konami's own rule throughout 2009-2010 was that Duel Terminal machine-exclusive cards were NOT legal in sanctioned play until released in another product (stated in premier-event FAQs from mid-2009, in Kevin Tewart's official strategy-site article of 2010-03-19 - before SJC Edison - and enumerated card-by-card in the June 2010 US WCQ FAQ; the SJC Edison FAQ itself lists the illegal Duel Terminal exclusives). Reprints inside DT sets were legal through their original products, which this product-level exclusion preserves. EdisonFormat.com's set list and both independent community pools agree.",
         "sources": [
+          "konami-event-faqs-2009-2010",
+          "sjc-edison-2010-faq",
           "edisonformat-legal-sets",
           "ygoprodeck-api"
         ]
       },
       {
         "product": "shonen-jump-may-2010-subscription-bonus",
-        "reason": "JUMP-EN041/EN042 are after EdisonFormat.com's promo cutoff (latest legal JUMP promo: Cyber Eltanin, JUMP-EN038); both community pools exclude The Tyrant Neptune and Transforming Sphere.",
+        "reason": "JUMP-EN041/EN042 are after the community format's promo cutoff (latest legal JUMP promo: Cyber Eltanin, JUMP-EN038, per EdisonFormat.com); both community pools exclude The Tyrant Neptune and Transforming Sphere. Note the deliberate divergence documented on the Hundred Eyes Dragon exclusion: the historical event's own FAQ set the boundary one promo later.",
         "sources": [
           "edisonformat-legal-sets",
           "ygoprodeck-api"
@@ -90,12 +96,15 @@
   },
   "completeness": "verified",
   "sources": [
-    "edisonformat-what-is",
     "edisonformat-legal-sets",
-    "yugipedia-set-pages",
-    "ygoprodeck-api"
+    "edisonformat-what-is",
+    "konami-event-faqs-2009-2010",
+    "konami-product-pages-2010-archive",
+    "sjc-edison-2010-faq",
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
   ],
-  "notes": "Materialised from data/releases/ (369 products, 2002-03-01..2010-12-31): every card whose earliest TCG release event (any TCG territory - NA, EU, Oceanic, or unspecified) is on or before 2010-05-10, minus five sourced product exclusions and plus/minus three sourced promo boundary resolutions (see cutoff.include/exclude/exclude_products). Cross-checked against YGOPRODeck's Edison format tag (3,659 canonical cards) and the independent termitaklk community whitelist: every reference card is present; our 15 extras are all confirmed pre-cutoff printings the YGOPRODeck tag wrongly omits (verified via Yugipedia set-number redirects, and 15/15 present in termitaklk). Known deliberate deviation: Royal Knight of the Ice Barrier (66661678) is excluded - its only pre-cutoff printing is Duel Terminal 1 (verified NOT in Hidden Arsenal via Yugipedia's set list), and the references that include it exclude every other DT01-only card, which is internally inconsistent. Europe-only products (Retro Pack, GX Tag Force 3) are IN via their tcg-eu events - no special-casing needed under all-TCG territory scoping.",
+  "notes": "LEGALITY BASIS community-retrospective: this pool reproduces the modern community's Edison Format convention (EdisonFormat.com's definition and its linked references), anchored to but distinct from what was registerable at SJC Edison on 2010-04-24 - the one documented divergence (Hundred Eyes Dragon, legal at the event per Konami's own FAQ, excluded by the community convention) is recorded on its exclusion entry. Materialised from data/releases/ under certified coverage: every card whose earliest TCG release event (any TCG territory) is on or before 2010-05-10, with five sourced product exclusions and three sourced promo boundary resolutions. VERIFIED status earned 2026-08-20 under the strict vocabulary: (1) internally complete and cross-checked against two independent community pools (YGOPRODeck Edison tag - every reference card present, our 15 extras all confirmed pre-cutoff printings its tag wrongly omits - and the termitaklk whitelist); (2) coverage certified through the gap ledger (data/releases/gaps.json - all 21 gaps resolved with evidence, mechanically recomputed where checkable); (3) the load-bearing historical claims corroborated by period primary sources: all five boundary product dates verified against archived 2010 Konami product pages, the Duel Terminal exclusion verified against Konami's 2009-2010 tournament policy, and the promo boundary anchored to the archived SJC Edison FAQ. Known deliberate deviation from the references: Royal Knight of the Ice Barrier (Duel Terminal-only) stays excluded - now backed by period policy, which made DT-machine exclusives illegal in sanctioned play; the references include it while excluding every other DT01-only card. Europe-only products (Retro Pack, GX Tag Force 3) are IN via all-TCG territory scoping - period-corroborated: UDE policy made TCG legality worldwide-simultaneous, and Konami-era event FAQs explicitly listed the GX Tag Force 3 promos as legal at US premier events.",
   "cards": [
     {
       "passcode": 27551,
@@ -14789,5 +14798,6 @@
       "passcode": 99995595,
       "name": "Recycling Batteries"
     }
-  ]
+  ],
+  "legality_basis": "community-retrospective"
 }

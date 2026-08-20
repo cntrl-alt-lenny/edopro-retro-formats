@@ -6818,5 +6818,6 @@
   "sources": [
     "ignis-lflists"
   ],
-  "notes": "Imported from Project Ignis's GOAT whitelist (community-vetted GOAT card pool, source list name '2005.4 GOAT'). Includes cards the list pins at 0 copies: they were printed in period and are forbidden via the banlist. Canonical passcodes; pre-errata implementation codes live in data/errata/."
+  "notes": "Imported from Project Ignis's GOAT whitelist (community-vetted GOAT card pool, source list name '2005.4 GOAT'). Includes cards the list pins at 0 copies: they were printed in period and are forbidden via the banlist. Canonical passcodes; pre-errata implementation codes live in data/errata/.",
+  "legality_basis": "community-retrospective"
 }

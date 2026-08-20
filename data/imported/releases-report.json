@@ -45,16 +45,17 @@
     }
   },
   "stats": {
-    "products": 369,
+    "products_written": 363,
+    "curated_preserved": 7,
     "printings": 8445,
     "release_events": 508,
     "unmatched_cards": 8,
     "name_mismatches": 6,
     "date_discrepancies": 59,
     "products_without_printings": 4,
-    "yugipedia_only_products": 33,
+    "yugipedia_only_products": 32,
     "prefix_mismatched_printings": 3,
-    "skipped_products": 3,
+    "skipped_products": 9,
     "non_playable_skipped": 1,
     "ot_conflicts": 1
   },
@@ -660,11 +661,13 @@
     "Yu-Gi-Oh! Forbidden Memories Premium Edition promotional cards",
     "Yu-Gi-Oh! Millennium World Volume 4 promotional card",
     "Yu-Gi-Oh! The Movie Ani-Manga promotional card",
-    "Yu-Gi-Oh! World Championship 2004 tournament promotional cards",
     "Yu-Gi-Oh! World Championship 2008 prize cards",
     "Yu-Gi-Oh! World Championship 2009 prize cards",
     "Yu-Gi-Oh! World Championship 2010 prize cards",
     "Yu-Gi-Oh! the Movie VHS and DVD promotional cards"
+  ],
+  "curated_covered_products": [
+    "Yu-Gi-Oh! World Championship 2004 tournament promotional cards"
   ],
   "skipped_products": [
     {
@@ -678,6 +681,30 @@
     {
       "product": "Summoned Skull Sample promotional card",
       "reason": "predates the TCG (2001-01-01)"
+    },
+    {
+      "product": "Absolute Powerforce",
+      "reason": "a curated record with this id exists"
+    },
+    {
+      "product": "Duelist Pack Collection Tin 2010",
+      "reason": "a curated record with this id exists"
+    },
+    {
+      "product": "Duelist Pack: Kaiba",
+      "reason": "a curated record with this id exists"
+    },
+    {
+      "product": "Machina Mayhem Structure Deck",
+      "reason": "a curated record with this id exists"
+    },
+    {
+      "product": "The Shining Darkness",
+      "reason": "a curated record with this id exists"
+    },
+    {
+      "product": "The Shining Darkness Sneak Peek Participation Card",
+      "reason": "a curated record with this id exists"
     }
   ],
   "non_playable_skipped": 1,
@@ -689,5 +716,7 @@
       "ot": 1,
       "note": "printed in a TCG product but cards.cdb ot lacks the TCG bit"
     }
-  ]
+  ],
+  "generated_products_written": 363,
+  "curated_products_preserved": 7
 }

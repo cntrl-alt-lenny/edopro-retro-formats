@@ -158,6 +158,34 @@
       "title": "YGOPRODeck API v7 bulk dumps (cardinfo.php?misc=yes, cardsets.php)",
       "url": "https://ygoprodeck.com/api-guide/",
       "notes": "Single-request bulk download per their stated caching mandate. Printings/identity authority only: its per-set tcg_date is region-inconsistent (verified EU for some sets, NA for others), so it corroborates or falls back, never overrides Yugipedia dates. Retrieval stamped in data/imported/releases-report.json."
+    },
+    {
+      "id": "konami-product-pages-2010-archive",
+      "kind": "official",
+      "title": "Konami US/EU product pages, 2010 (Internet Archive) - Launch Date and Konami Tournament Legal Date fields",
+      "url": "https://web.archive.org/web/2010*/yugioh-card.com",
+      "notes": "Period captures verifying the Edison boundary dates: ABPF US 2/16 (web.archive.org/web/20100208145649/http://www.yugioh-card.com/en/products/bp-abpf.html), ABPF UK 02/12 (…/20100202041527/…/uk/products/bp-apf.html), SDMM US 2/23 (…/20100208205100/…/en/products/sd-mm.html), SDMM UK 02/19 (…/20100129132136/…/uk/products/sd18.html), DPCT US 3/09 (…/20100208100547/…/en/products/tin-dp2010.html), DPKB US 4/20 (…/20100130/…/en/products/…kaiba), DPKB UK 04/16 (…/20100313160557/…/uk/products/kaiba.html), TSHD US 5/11 (…/20100214180551/…/en/products/bp-tshd.html), TSHD UK 05/07 (…/20100313160412/…/uk/products/shining.html), TSHD Sneak Peek 'May 1 and/or May 2' (…/20100425040441/…/en/events/sp/tshd-sneak.html), Europe 'April 30th to May 2nd' (Konami-EU news capture 2010-05-13). Local copies under the research cache; retrieved 2026-08-20."
+    },
+    {
+      "id": "sjc-edison-2010-faq",
+      "kind": "official",
+      "title": "75th Shonen Jump Championship (Edison, NJ) official FAQ - card legality for the event (captured 2010-04-11)",
+      "url": "https://web.archive.org/web/20100411073444/http://www.yugioh-card.com/en/events/sjc/2010_FAQ/SJC-75th_FAQ.html",
+      "notes": "Konami's own pre-event legality statement: SJ promos 'up until Hundred Eyes Dragon', GX manga promos through Angel O7, video-game promos through the Reverse of Arcadia trio, boosters through Absolute Powerforce and Duelist Pack Kaiba ('Legal for play starting 4/20/2010'), Machina Mayhem, plus an explicit list of Duel Terminal exclusives NOT legal."
+    },
+    {
+      "id": "ude-tournament-policy-appendix-a",
+      "kind": "official",
+      "title": "UDE Tournament Appendix A: Yu-Gi-Oh! Policies (Nov 2005 / Apr 2006 / Aug 2008 revisions, archived)",
+      "url": "https://web.archive.org/web/*/upperdeck*Appendix*",
+      "notes": "Period tournament-legality rules for the UDE era: 'Yu-Gi-Oh! TCG cards become tournament-legal around the world at the same time' (worldwide-simultaneous legality outside Asia); OCG/Asian-English cards banned; foreign-language TCG cards legal with translation; Currently Legal Promotional Cards lists include Europe-only products (MC1/MC2, ML01-03, UE02) and 'DTP1 (reprints)'. Local copies cached in the research cache; retrieved 2026-08-20."
+    },
+    {
+      "id": "konami-event-faqs-2009-2010",
+      "kind": "official",
+      "title": "Konami premier-event card-legality FAQs 2009-2010 (US Nationals 2009, Regionals, 2010 US WCQ; archived) and the 2010-03-19 Duel Terminal legality article",
+      "url": "https://web.archive.org/web/20090706172551/http://www.yugioh-card.com/en/events/US_nationalsfaq_2009.html",
+      "notes": "Konami-era legality practice: per-event dated legal lists. Evidence that Europe-only GX Tag Force 3 promos (Gallis the Star Beast, Red-Eyes Wyvern, Darkness Destroyer) were explicitly legal at US premier events 2009-2010, and that Duel Terminal machine-exclusive cards were NOT legal until released in another product (mid-2009 FAQs naming Ally of Justice Catastor; Kevin Tewart's 2010-03-19 strategy-site article; the June 2010 US WCQ FAQ enumerating still-illegal DT01/DT02 numbers). Local copies cached; retrieved 2026-08-20."
     }
   ]
 }
