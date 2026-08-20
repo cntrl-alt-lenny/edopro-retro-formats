@@ -27,16 +27,23 @@ reflects that.
    `$whitelist`, and regression tests lock cardinality + sixteen edge cases.
    See docs/releases.md. Follow-ups now tracked below (4a–4c).
 
-   4a. **Upgrade release events from `reported` to `verified`** for the products
-   that define format boundaries (ABPF, TSHD, DPKB, DPCT, the promo cutoffs) by
-   citing period sources (archived Konami/UDE product pages) alongside Yugipedia.
+   4a. ~~Upgrade boundary release events to `verified`~~ **Done (2026-08-20).**
+   All five Edison boundary products (plus the TSHD Sneak Peek and both new EU
+   dates) are now curated records verified against archived 2010 Konami product
+   pages with explicit Tournament Legal Date fields.
    4b. **Per-artwork printing dates** (far-alias alternate arts like Arkana Dark
    Magician are currently absent from cutoff pools unless force-included; audit
    which mattered in-period and encode them).
-   4c. **Duel Terminal ruling dossier**: the pool excludes DT01-machine-only cards
-   per EdisonFormat.com's set list; collect period tournament-policy evidence
-   (UDE/Konami floor rules) to upgrade that decision from community consensus to
-   primary-sourced.
+   4c. ~~Duel Terminal ruling dossier~~ **Done (2026-08-20).** Period policy
+   recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
+   event FAQs, Konami's 2010-03-19 article, the June 2010 WCQ FAQ's card list);
+   the pool exclusion is now primary-sourced.
+   4d. **Coverage certification shipped (2026-08-20):** the gap ledger
+   (data/releases/gaps.json) makes "complete" coverage an earned invariant -
+   all 45 importer-detected anomalies audited (1 roster recovered and imported,
+   the rest proven harmless with evidence, mechanically recomputed where
+   checkable). Future importer runs that surface new anomalies fail validation
+   until the ledger accounts for them.
 5. **Edison rules review.** Compare EdisonFormat.com's 13 rule differences against the
    ocgcore flag axes; decide whether the profile should add TCG-variant flags
    (`DUEL_TCG_FAST_EFFECT_IGNITION`, SEGOC flags, 6-step damage step) beyond plain

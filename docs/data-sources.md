@@ -137,6 +137,30 @@ quoted with URLs in `formats/2010-03-edison/` records. Internal inconsistency wo
 knowing: its legal-sets table omits Duelist Pack Collection Tin 2010 (Starlight Road)
 although its own linked card pool includes the card.
 
+### Period tournament-policy documents (surveyed 2026-08-20)
+
+Recovered via the Internet Archive during the release-data certification pass
+(registry ids `konami-product-pages-2010-archive`, `sjc-edison-2010-faq`,
+`ude-tournament-policy-appendix-a`, `konami-event-faqs-2009-2010`):
+
+- **UDE Tournament Appendix A** (Nov 2005 / Apr 2006 / Aug 2008 revisions):
+  worldwide-simultaneous TCG legality, OCG/Asian-English ban, foreign-language
+  allowance, the dated Currently-Legal product/promo lists (including
+  Europe-only products and "DTP1 (reprints)").
+- **Konami premier-event FAQs 2009-2010** (US Nationals 2009, Regionals,
+  2010 US WCQ): the Konami-era legality mechanism - per-event dated lists; the
+  Duel Terminal machine-exclusive prohibition; Europe-only video-game promos
+  explicitly legal at US events.
+- **Archived 2010 Konami product pages** (US + UK): explicit "Launch Date /
+  Konami Tournament Legal Date" fields for every Edison boundary product, plus
+  the Sneak Peek event pages.
+- **The 75th SJC (Edison) FAQ** (captured 2010-04-11): the event's own card
+  pool, promo cutoffs, and illegal-DT list.
+
+These are the project's model for what `verified` means: period, primary,
+archived, and cited. Local copies live in the (uncommitted) research cache;
+each registry entry records the capture URLs.
+
 ### Internet Archive
 
 Konami's own 2010 list page is archived and cited (see `konami-limited-2010-03`).

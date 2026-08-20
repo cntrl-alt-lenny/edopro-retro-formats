@@ -43,8 +43,9 @@ Three layers, with strict rules about what may flow between them:
 | card pool | `data/pools/*.json` | pool id | yes |
 | rule profile | `data/rule-profiles/*.json` | profile id | yes — one profile serves every format in its era |
 | erratum | `data/errata/<card>.json` | modern card | global — applicability per format is *computed* |
-| product release | `data/releases/products/<id>.json` | product slug (set-code prefixes are not unique) | global — one dataset serves every cutoff pool |
+| product release | `data/releases/products/<id>.json` | product slug (set-code prefixes are not unique) | global — one dataset serves every cutoff pool; `curated` records survive re-imports |
 | release coverage | `data/releases/coverage.json` | — | gates which cutoffs are materialisable |
+| gap ledger | `data/releases/gaps.json` | gap id | certification: unresolved gaps block coverage; resolutions are evidence-backed and mechanically recomputed where checkable |
 | format | `formats/<id>/format.json` | `yyyy-mm-slug` | ties the above together |
 | sources | `data/sources.json` (+ per-format `sources.json`) | source id | global registry + local extensions |
 

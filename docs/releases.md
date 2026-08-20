@@ -95,6 +95,81 @@ on unresolved boundary ambiguity (`pool.cutoff-ambiguous`). `build` then turns
 a materialised pool into an EDOPro `$whitelist` enforcing pool and banlist
 together.
 
+## Coverage certification: the gap ledger
+
+"Complete" coverage is an EARNED invariant, not an operator assertion. The gap
+ledger (`data/releases/gaps.json`) records every known hole in the dataset -
+products an external source dates but the dataset has no roster for, printings
+that could not be matched to canonical passcodes - and certification flows
+through it:
+
+1. **Nothing detected may go unaccounted.** The validator cross-checks the
+   import report against the ledger: every reported anomaly must be a subject
+   of some gap record (`gaps.unaccounted`).
+2. **Unresolved gaps block certification.** `covers(date, scope, gaps)` returns
+   true only when a claimed-complete window contains the date/scope AND no
+   unresolved pool-impacting gap could begin on or before that date in a scoped
+   territory. Materialisation and the materialised-pool cross-check both refuse
+   otherwise (`pool.no-coverage`), and a complete/verified window overlapping an
+   unresolved gap fails validation outright (`coverage.gap-unresolved`).
+3. **Resolutions must be justified - and are recomputed where checkable.**
+   `resolved-safe` requires a rationale, detail, and sources; a
+   `cards-available-earlier` claim is mechanically re-derived from the release
+   data (each card must be PROVABLY available by the gap's earliest possible
+   date - `gaps.not-harmless` otherwise); `repackaging-only` must name the
+   rebundled dataset products; `resolved-imported` must point at a real
+   (usually `curated`) product record carrying the recovered roster.
+
+The 2026-08 certification pass audited all 45 then-outstanding anomalies:
+one genuine gap was recovered and imported (the WC2004 Toys "R" Us
+participation promo, moving Sengenjin's first availability from 2004-07-25
+back to 2004-05-22), and the rest were proven harmless with cited evidence
+(one-of-a-kind match-winner prizes and token-only distributions with no
+passcodes; issue promos re-distributing cards already released; repackagings
+introducing no new printings).
+
+## Availability versus legality policy
+
+Release events record **physical availability** - when cards could actually be
+obtained in a territory. A pool is a **legality policy** over those facts, and
+the two are deliberately separate concepts: each pool declares a
+`legality_basis` (`availability`, `historical-policy`, or
+`community-retrospective`), and its territory scoping, product exclusions, and
+card include/excludes are the policy layer.
+
+What period tournament policy actually said (sources in
+`data/sources.json`; period documents cached in the research archive):
+
+- **UDE era (through 2008): legality was worldwide-simultaneous.** Appendix A
+  (all revisions 2005-2008) states verbatim that TCG cards "become
+  tournament-legal around the world at the same time"; its legal-promo lists
+  include Europe-only products. OCG/Asian-English cards were banned;
+  foreign-language TCG cards were legal with a translation reference.
+- **Konami era (2009 - mid-2010): per-event dated legal lists, still with no
+  released-in-your-region requirement.** The 2009 US Nationals FAQ explicitly
+  listed the Europe-only GX Tag Force 3 promos as legal in the United States.
+  Explicit per-country legality ("legal in a specific country on their release
+  date for that specific country") first appears in writing in late 2010 and is
+  codified in the May 2011 tournament policy - do not retro-apply it to
+  April 2010.
+- **Duel Terminal machine exclusives were NOT legal** until released in another
+  product - stated in premier-event FAQs from mid-2009 and in Konami's own
+  strategy-site article of 2010-03-19; the June 2010 US WCQ FAQ enumerates the
+  illegal DT01/DT02 numbers card-by-card.
+- **Prize cards:** SJC prize promos were tournament legal (UDE's legal-promo
+  lists include SJC/SJCS); the one-of-a-kind World Championship match winners
+  were never legal (printed limitation text; no passcodes).
+
+**Retrospective format vs historical event.** A community format named after an
+event need not equal the event's own legal pool. Edison is the proven example:
+Konami's archived FAQ for the 75th SJC lists Shonen Jump promos "up until
+Hundred Eyes Dragon" - the card was legal at SJC Edison itself - while the
+modern community convention (and therefore our `community-retrospective` pool)
+draws the line one promo earlier, at Cyber Eltanin. The divergence is recorded
+on the exclusion entry rather than silently resolved either way; a future
+`historical-policy` Edison-event pool could share every other record and
+differ only in that entry.
+
 ## Importer workflow
 
 ```
