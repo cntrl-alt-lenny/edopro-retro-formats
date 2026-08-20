@@ -146,6 +146,13 @@
       "reliability_notes": "Primary source for rules-engine behaviour claims."
     },
     {
+      "id": "yugipedia-card-errata",
+      "kind": "wiki",
+      "title": "Yugipedia Card Errata pages (Card Errata: namespace, per-language {{Errata table}} text lineages)",
+      "url": "https://yugipedia.com/wiki/Category:Card_Errata",
+      "notes": "One structured page per errata'd card: successive card texts with diff markup, each captioned with the printing (set + number) exemplifying that version. Fetched via the MediaWiki API by retroformats/importers/fetch_errata_sources.py (batched revisions queries, 1 req/s, descriptive UA); page revision ids are stamped into the research packets. Used for text lineages and for bounding when a new text was first available in the TCG (the introducing printing's set release date); wording is community-transcribed, so functional-vs-cosmetic judgements also cross-check the pinned BabelCDB texts."
+    },
+    {
       "id": "yugipedia-set-pages",
       "kind": "wiki",
       "title": "Yugipedia set pages (Semantic MediaWiki release-date properties, per territory)",
