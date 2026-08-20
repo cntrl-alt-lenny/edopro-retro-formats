@@ -340,12 +340,17 @@ class Validator:
 
             relevant = erratum.relevant_changes()
             if not relevant and strategy in ("reuse-upstream", "custom-script"):
-                self.error(
+                # Computed selection never substitutes such a record; only an
+                # explicit, documented format-level include can (e.g. to stay
+                # entry-for-entry identical to an upstream reference list that
+                # ships a period-text variant of a behaviourally equal card).
+                self.warn(
                     "erratum.no-behavioural-change-with-override",
                     erratum.path,
-                    "no functional or ruling change is recorded, so a historical card "
-                    "implementation must not substitute the modern one (cosmetic and "
-                    "engine differences never change the card implementation)",
+                    "no functional or ruling change is recorded: cosmetic and engine "
+                    "differences never substitute a historical card computationally; "
+                    "the recorded implementation is usable only via an explicit "
+                    "errata_overrides include (document why in the format notes)",
                 )
             if relevant and erratum.classification == "functional" and strategy == "none-needed":
                 self.warn(

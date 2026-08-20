@@ -302,23 +302,42 @@ class FormatValidationTest(TempRepoTest):
         validator.validate()
         return validator
 
-    def test_cosmetic_record_with_substitution_is_an_error(self):
+    def test_cosmetic_record_with_substitution_warns_and_never_computes(self):
         self._seed(
             classification="cosmetic",
             changes=[change(kind="cosmetic", date="2011-07-01")],
         )
         self.add_format()
         v = self._validator()
-        self.assertIn("erratum.no-behavioural-change-with-override", {f.code for f in v.errors})
+        self.assertIn(
+            "erratum.no-behavioural-change-with-override", {f.code for f in v.warnings}
+        )
+        # Computed selection must never substitute it - only an explicit
+        # include can (reference-parity for period-text variants).
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(200, built.entries)
+        self.assertNotIn(510000000, built.entries)
+        self.add_format(errata_overrides={"include": ["erratum-beta"], "exclude": []})
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(510000000, built.entries)
+        self.assertNotIn(200, built.entries)
 
-    def test_engine_record_with_substitution_is_an_error(self):
+    def test_engine_record_with_substitution_warns_and_never_computes(self):
         self._seed(
             classification="engine",
             changes=[change(kind="engine", date="2008-03-01")],
         )
         self.add_format()
         v = self._validator()
-        self.assertIn("erratum.no-behavioural-change-with-override", {f.code for f in v.errors})
+        self.assertIn(
+            "erratum.no-behavioural-change-with-override", {f.code for f in v.warnings}
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(200, built.entries)
+        self.assertNotIn(510000000, built.entries)
 
     def test_classification_must_match_dominant_kind(self):
         self._seed(
