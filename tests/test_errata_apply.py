@@ -234,11 +234,85 @@ class ApplierTest(unittest.TestCase):
         dec["changes"][0]["effective"] = {"new_attested_from": "2008-01-01"}
         with self.assertRaises(DecisionError) as ctx:
             self.apply(dec)
-        self.assertIn("capture date", str(ctx.exception))
+        self.assertIn("not attested by any cited archive capture", str(ctx.exception))
         # the capture's own date is accepted
         dec["changes"][0]["effective"] = {"new_attested_from": "2009-02-20"}
         _, record = self.apply(dec)
         self.assertEqual("2009-02-20", record["changes"][0]["effective"]["new_attested_from"])
+
+    def test_bounds_may_be_backed_by_the_decisions_own_citations(self):
+        # A reviewer who cites two archive captures and claims exactly those
+        # two dates as bounds needs no separate date_evidence block.
+        dec = decision(
+            classification="ruling",
+            baseline_implementation={
+                "strategy": "reuse-upstream",
+                "historical_passcode": 510000000,
+                "status": "complete",
+            },
+            changes=[
+                {
+                    "kind": "ruling",
+                    "effective": {
+                        "old_attested_through": "2005-06-16",
+                        "new_attested_from": "2008-12-15",
+                        "status": "verified",
+                    },
+                    "historical_text_version": 0,
+                    "summary": "per-card activation condition tightened",
+                    "sources": ["ignis-cardscripts"],
+                }
+            ],
+            external_citations=[
+                {
+                    "url": "http://web.archive.org/web/20050616025109/http://example.invalid/a",
+                    "quote": "you can activate it with none in your Deck",
+                    "used_for": "old_attested_through",
+                },
+                {
+                    "url": "http://web.archive.org/web/20081215065604/http://example.invalid/b",
+                    "quote": "you cannot activate it without one",
+                    "used_for": "new_attested_from",
+                },
+            ],
+        )
+        _, record = self.apply(dec)
+        effective = record["changes"][0]["effective"]
+        self.assertEqual("2005-06-16", effective["old_attested_through"])
+        self.assertEqual("2008-12-15", effective["new_attested_from"])
+
+    def test_a_bound_with_no_attesting_capture_is_still_rejected(self):
+        dec = decision(
+            classification="ruling",
+            baseline_implementation={
+                "strategy": "reuse-upstream",
+                "historical_passcode": 510000000,
+                "status": "complete",
+            },
+            changes=[
+                {
+                    "kind": "ruling",
+                    "effective": {
+                        "old_attested_through": "2005-06-16",
+                        "new_attested_from": "2007-01-01",  # nothing attests this
+                        "status": "verified",
+                    },
+                    "historical_text_version": 0,
+                    "summary": "invented tightening",
+                    "sources": ["ignis-cardscripts"],
+                }
+            ],
+            external_citations=[
+                {
+                    "url": "http://web.archive.org/web/20050616025109/http://example.invalid/a",
+                    "quote": "you can activate it with none in your Deck",
+                    "used_for": "old_attested_through",
+                }
+            ],
+        )
+        with self.assertRaises(DecisionError) as ctx:
+            self.apply(dec)
+        self.assertIn("not each attested by a cited archive capture", str(ctx.exception))
 
     def test_hand_transcribed_text_is_rejected(self):
         dec = decision()

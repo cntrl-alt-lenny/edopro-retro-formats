@@ -5,17 +5,23 @@ produces DECISION objects. This tool turns decisions into canonical
 data/errata/*.json updates under strict guards, so that no chronology claim
 can enter the dataset without machine-checkable evidence:
 
-- every change's effective date/bounds must carry a date_evidence object;
-- kind "set-release" evidence is RECOMPUTED against the research packet: the
-  claimed date must equal the cited set's earliest TCG release date (at its
-  recorded precision) or the decision is rejected;
-- kind "shared-chronology" evidence must reference an entry in the shared
-  chronology table (a sourced research artifact); the bounds are copied from
-  the table, never from the decision (single source of truth);
-- kind "external" evidence must carry a URL and a quote, and the change must
-  cite a source id that resolves in the registry;
-- historical/modern texts are copied from the packet's lineage (or the
-  pinned cdb texts) by version index - decisions never hand-transcribe text.
+- every change's chronology must be backed by evidence;
+- kind "set-release" evidence POPULATES the date from the research packet -
+  the earliest TCG release of the printing that introduced the new text, at
+  its recorded precision. The packet is the single source of truth: a
+  reviewer never types the date, and any date they do claim must match;
+- kind "shared-chronology" evidence names an entry in the sourced chronology
+  table and the bounds are copied FROM it, never from the decision;
+- kind "external" evidence needs a URL and a quote per citation, and every
+  bound claimed from an archive capture must equal that capture's own date -
+  a reviewer cannot widen a bound past what they read;
+- a change may also be backed by the decision's own external_citations, but
+  only when EVERY bound it claims is attested by a cited capture of exactly
+  that date;
+- historical/modern texts are copied from the packet's lineage (or must match
+  a packet-carried database text exactly) - never hand-transcribed;
+- a reuse-upstream implementation must exist in the packet AND its database
+  text must be the lineage version it claims to implement (era check).
 
 Deterministic output: stable key order, LF newlines, unchanged files are not
 rewritten. --dry-run reports what would change without writing.
@@ -145,21 +151,60 @@ import re as _re
 _WAYBACK_RE = _re.compile(r"web\.archive\.org/web/(\d{4})(\d{2})(\d{2})\d*")
 
 
-def check_external(effective: dict, evidence: dict) -> None:
-    if not evidence.get("url") or not evidence.get("quote"):
-        raise DecisionError("external evidence needs url and quote")
-    # An archive capture attests a state ON its capture date - a bound claimed
-    # from it must be exactly that date (other dates need other evidence).
-    m = _WAYBACK_RE.search(str(evidence.get("url")))
-    if m and not effective.get("date"):
-        capture = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-        for field in ("old_attested_through", "new_attested_from"):
-            claimed = effective.get(field)
-            if claimed and claimed != capture:
-                raise DecisionError(
-                    f"{field} {claimed!r} does not equal the cited archive capture "
-                    f"date {capture}; a capture attests only its own date"
-                )
+def capture_date(url: str) -> str | None:
+    """The date an archive URL's capture attests, if it is one."""
+    m = _WAYBACK_RE.search(str(url or ""))
+    return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
+
+
+def check_external(effective: dict, evidence) -> None:
+    """External evidence is one citation or a list of them. Each needs a URL
+    and a quote. An archive capture attests a state ON its capture date, so
+    every bound claimed here must be backed by a cited capture of exactly
+    that date - a reviewer cannot widen a bound past what they read."""
+    items = evidence if isinstance(evidence, list) else [evidence]
+    if not items:
+        raise DecisionError("external evidence is empty")
+    captures = set()
+    for item in items:
+        if not item.get("url") or not item.get("quote"):
+            raise DecisionError("external evidence needs url and quote")
+        day = capture_date(item["url"])
+        if day:
+            captures.add(day)
+    if not captures:
+        return  # non-archive citation: nothing mechanical to check
+    for field in ("old_attested_through", "new_attested_from"):
+        claimed = effective.get(field)
+        if claimed and claimed not in captures:
+            raise DecisionError(
+                f"{field} {claimed!r} is not attested by any cited archive capture "
+                f"({sorted(captures)}); a capture attests only its own date"
+            )
+    if effective.get("date") and effective["date"] not in captures:
+        raise DecisionError(
+            f"date {effective['date']!r} is not attested by any cited archive capture "
+            f"({sorted(captures)})"
+        )
+
+
+def citations_for_bounds(effective: dict, citations: list[dict]) -> list[dict] | None:
+    """Evidence assembled from the decision's own external citations: usable
+    only when EVERY chronology bound the change claims is backed by a cited
+    archive capture of exactly that date."""
+    if not citations:
+        return None
+    claimed = {
+        effective[f]
+        for f in ("date", "old_attested_through", "new_attested_from")
+        if effective.get(f)
+    }
+    if not claimed:
+        return None
+    backing = [c for c in citations if capture_date(c.get("url", "")) in claimed]
+    if claimed - {capture_date(c["url"]) for c in backing}:
+        return None  # some bound has no capture attesting it
+    return backing
 
 
 def apply_shared(effective: dict, evidence: dict, chronologies: dict) -> dict:
@@ -175,7 +220,7 @@ def apply_shared(effective: dict, evidence: dict, chronologies: dict) -> dict:
     return merged
 
 
-def build_change(raw: dict, packet: dict, chronologies: dict) -> dict:
+def build_change(raw: dict, packet: dict, chronologies: dict, citations: list[dict] | None = None) -> dict:
     kind = raw.get("kind")
     if kind not in KINDS:
         raise DecisionError(f"bad change kind {kind!r}")
@@ -191,11 +236,20 @@ def build_change(raw: dict, packet: dict, chronologies: dict) -> dict:
         elif ev_kind == "shared-chronology":
             effective = apply_shared(effective, evidence, chronologies)
         elif ev_kind == "external":
-            check_external(effective, evidence)
+            check_external(effective, evidence.get("citations") or evidence)
         else:
             raise DecisionError(f"unknown date_evidence kind {ev_kind!r}")
     elif has_chronology:
-        raise DecisionError(f"{kind} change carries chronology but no date_evidence")
+        # A change may instead be backed by the decision's own external
+        # citations, but only when every bound it claims is attested by a
+        # cited archive capture of exactly that date.
+        backing = citations_for_bounds(effective, citations)
+        if backing is None:
+            raise DecisionError(
+                f"{kind} change carries chronology but no date_evidence, and its "
+                "bounds are not each attested by a cited archive capture"
+            )
+        check_external(effective, backing)
     if not raw.get("summary"):
         raise DecisionError("change needs a summary")
     if not raw.get("sources"):
@@ -279,7 +333,11 @@ def apply_decision(
             "sources": [],
         }
 
-    changes = [build_change(dict(c), packet, chronologies) for c in decision["changes"]]
+    citations = list(decision.get("external_citations") or [])
+    changes = [
+        build_change(dict(c), packet, chronologies, citations)
+        for c in decision["changes"]
+    ]
     if not changes:
         raise DecisionError(f"{slug}: no changes in decision")
     kinds = [c["kind"] for c in changes]
