@@ -38,7 +38,7 @@
     "banlist": "partial",
     "card_pool": "complete",
     "rule_profile": "partial",
-    "errata": "partial",
+    "errata": "complete",
     "overall": "partial"
   },
   "sources": [

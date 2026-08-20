@@ -50,7 +50,7 @@
     "banlist": "complete",
     "card_pool": "verified",
     "rule_profile": "partial",
-    "errata": "missing",
+    "errata": "partial",
     "overall": "partial"
   },
   "sources": [

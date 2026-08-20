@@ -39,8 +39,21 @@ Two fixture formats exercise the whole pipeline end-to-end:
 | Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) |
 | Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* under certified coverage, cross-checked against two independent community pools, with the boundary dates, Duel Terminal exclusion, and promo cutoff corroborated by archived period Konami documents (including the event's own FAQ) |
 | Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | `DUEL_MODE_MR1` baseline (open question: TCG-variant flags) |
-| Errata | 211 historical card versions mapped to Project Ignis's `goat-entries.cdb` / `cards-unofficial.cdb` implementations | recorded as missing (dating the errata corpus is the next research task) |
+| Errata | **complete** — every substitution derived from one sourced parity policy instead of a 211-entry hand list; still entry-for-entry identical to the reference | **partial** — 72 historical implementations *computed* from evidence, with no hand-written Edison errata list |
 | Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected) |
+
+Behind both formats' card *behaviour* sits the second backbone dataset:
+**`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
+rather than imported, distinguishing genuine text errata (120 functional) from
+period *rulings* (155), from pure wording modernisation (21 cosmetic). Chronology
+carries its own uncertainty: 113 changes are exactly dated, 58 hold bounded
+"old attested through A, new attested from B" intervals, and 125 are explicitly
+unresolved. **Selection is fail-safe** — a format snapshot inside an unresolved
+transition interval blocks the build rather than silently choosing old or new
+behaviour. Applicability is *computed*: Edison's 72 historical implementations
+fall out of the evidence with no hand-written list, and GOAT's 211-entry list was
+replaced by a single sourced statement while staying byte-identical to the Project
+Ignis reference. See [docs/errata.md](docs/errata.md).
 
 Behind the Edison pool sits the project's first shared backbone dataset:
 **`data/releases/`** — 370 TCG products (2002–2010) with per-territory,
@@ -67,8 +80,9 @@ system 3.9 does today — but are not supported targets):
 $ python3 -m retroformats validate      # semantic checks over all canonical data
 $ python3 -m retroformats build         # regenerate dist/ deterministically
 $ python3 -m retroformats materialize   # derive release-cutoff pools from data/releases/
-$ python3 -m retroformats report        # per-format status + release-data coverage
-$ python3 -m unittest discover -t . -s tests   # 130 tests incl. the Ignis-parity and Edison regressions
+$ python3 -m retroformats report        # per-format status, errata certification, coverage
+$ python3 -m retroformats report -v     # ...plus which cards each format substitutes
+$ python3 -m unittest discover -t . -s tests   # 220 tests incl. the Ignis-parity and Edison regressions
 ```
 
 ## Repository layout
@@ -79,7 +93,8 @@ data/
   banlists/       one file per historical F/L list snapshot (region + effective date)
   pools/          card-pool definitions (extensional lists or release-cutoff rules)
   rule-profiles/  reusable rules-era profiles mapped to ocgcore DUEL_* flags
-  errata/         per-card historical-behaviour records (one file per card)
+  errata/         per-card historical-behaviour records (one file per card):
+                  kinds, precision-aware chronology, per-version implementations
   releases/       per-product release events + printings (feeds cutoff pools)
   cards/          generated card index (passcode<->name/alias ground truth)
   sources.json    the provenance registry every record cites into
@@ -125,7 +140,14 @@ Verified against the EDOPro/ocgcore source (all citations in
    committed.
 3. **Distinguish kinds of difference.** Cosmetic text modernisation, functional errata,
    changed rulings, and rules-era differences are different things and are modelled
-   differently (see [docs/format-schema.md](docs/format-schema.md)).
+   differently (see [docs/format-schema.md](docs/format-schema.md)). Only functional
+   and ruling changes can substitute a historical card; a rewording never does.
+6. **Fail safe on uncertainty.** When a format's snapshot falls inside an unresolved
+   transition interval, selection refuses rather than guessing old or new. A format
+   may state one sourced policy for such cases, and every card it touches is named.
+7. **Tested means executed.** `implementation.tested` is set only where a headless
+   ocgcore test demonstrates the historical behaviour (see
+   [docs/engine-testing.md](docs/engine-testing.md)) — never because a script exists.
 4. **Reuse vetted implementations.** Where Project Ignis already maintains a historical
    card implementation, we reference it (`reuse-upstream`) instead of forking it.
 5. **Regression-test against references.** The generated GOAT list is asserted, in CI,
@@ -134,9 +156,10 @@ Verified against the EDOPro/ocgcore source (all citations in
 
 ## Development status
 
-Early skeleton, working end-to-end. See [docs/roadmap.md](docs/roadmap.md) for the
-prioritised next steps (dating the errata corpus, release-date coverage to materialise
-cutoff pools, cross-checking the April 2005 list, more formats).
+Working end-to-end with two certified backbone datasets (releases, errata). See
+[docs/roadmap.md](docs/roadmap.md) for the prioritised next steps (the Edison rule
+profile review, the April 2005 banlist cross-check, broader behavioural test
+coverage, more formats).
 
 ## License
 

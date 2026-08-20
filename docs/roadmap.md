@@ -6,13 +6,43 @@ reflects that.
 
 ## Phase 1 — harden the two proof-of-concept formats
 
-1. **Date the errata corpus.** All 211 imported errata records lack
-   `date_effective` (the `erratum.undated` warnings). Research each card's errata
-   date (Yugipedia card-errata pages are structured and citable), which
-   (a) replaces GOAT's explicit include list with computed selection, and
-   (b) automatically surfaces which pre-errata versions Edison needs
-   (e.g. cards errata'd after 2010). Also classify each record properly
-   (functional vs ruling) instead of the imported blanket `functional`.
+1. ~~**Date the errata corpus.**~~ **Done (2026-08-20).** The corpus is now a
+   reviewed, source-backed, date-aware dataset: 296 records (211 imported + 85
+   found by sweeping the Edison-legal pool), every one reviewed, classified
+   155 ruling / 120 functional / 21 cosmetic, with 113 exact dates, 58 bounded
+   chronologies and 125 explicitly unresolved. GOAT's 211-entry include list is
+   gone (one sourced parity policy, parity unchanged) and Edison computes 72
+   historical implementations from evidence alone. See docs/errata.md.
+   Follow-ups below (1a–1d).
+
+   1a. **Chronology for the undated era rulings.** 125 records are unresolved,
+   almost all undated era *rulings* carried by upstream GOAT scripts —
+   damage-step activation windows, miss-timing registration, trigger
+   registration. Konami never announced these per card, so they need period
+   rulings documents (UDE Judge's List archives, Metagame.com judge columns,
+   per-set rulings PDFs). Each one resolved shrinks Edison's
+   `unresolved_policy` fallback.
+   1b. **Close the search-verification interval.** The old state is attested
+   through 2011-02-02 and the modern policy from 2019-04-03; no announcement of
+   the change was found. Narrowing this would firm up a large group of records
+   at once (both GOAT and Edison already sit determinately in the old era).
+   1c. **The 48 acknowledged implementation gaps** — period behaviours nothing
+   upstream reproduces. Each is a candidate for roadmap item 7 (`custom-script`
+   generation) once a reserved passcode range is chosen.
+   1d. **Contribute back upstream.** 21 cards where our chronology says GOAT
+   should use a historical version but Project Ignis's list leaves them modern
+   (`format.parity-omits-historical`), plus the cases where its variant is
+   behaviourally identical to the modern card (`upstream-variant-cosmetic`).
+
+   1e. **Card identity: TCG-versus-OCG entries.** Mind Master (96782886) is in
+   the Edison pool but BabelCDB scopes it OCG-only (`ot=1`) and ships the TCG
+   version as a *separate* entry (96782896, `ot=2`, aliased). Our release data
+   maps its TDGS-EN016 printing to the canonical code, so the pool references
+   a card EDOPro would reject in an official-cards room. This is a card-identity
+   question, not errata chronology: it needs a general rule for choosing the
+   region-correct implementation of a canonical card.
+   `tests/test_repo_data.py::test_pool_cards_are_tcg_scoped_in_the_card_database`
+   pins the invariant with this single documented exception.
 2. **Cross-check the April 2005 banlist.** The GOAT banlist is currently derived from
    Ignis's whitelist counts. Transcribe the published April 2005 TCG list (Yugipedia
    `April 2005 Lists (TCG)`) with the existing importer, reconcile, upgrade
@@ -86,12 +116,36 @@ reflects that.
 - **EDOPro (edo9300)**: a mechanism for a repo/lflist to *suggest* duel flags & deck
   sizes for a list (today presets are compiled in; historical formats need manual
   host setup) — even an advisory `#rules:` comment convention would help lobbies.
-- **Format Library (Daniel McNelis)**: API usage terms for bulk import; whether the
-  Errata table is populated and could get a public route; Sets/Prints export.
+- **Format Library (Daniel McNelis)**: API usage terms for bulk import; Sets/Prints
+  export. On errata specifically, the question is now sharper than "is the table
+  populated": the repository's `erratas` table has no reader or writer anywhere in
+  the codebase, while the period card texts that DO exist live per printing in
+  `Print.description` and are deliberately excluded from the card API response.
+  Worth asking whether those per-print texts could be exposed, and what the
+  unused Errata model's `effectiveDate`/`expirationDate` were intended to mean.
+  Details in `data/sources.json` (`formatlibrary-source`).
 
-## Engine-level regression testing (long-term)
+## Engine-level regression testing
 
-ocgcore is scriptable headlessly (`OCG_CreateDuel` + Lua). A future `tests/engine/`
-harness could replay scripted duel scenarios asserting era behaviours (ignition
-priority windows, 2005 Cyber Jar resolution order, TER trap-monster absorption) —
-the research notes identify exactly which flags/scripts encode each behaviour.
+~~long-term~~ **Shipped (2026-08-20).** `tests/engine/` drives the real ocgcore
+(OCG API 11) through ctypes with the pinned BabelCDB card data and CardScripts,
+building board states with the core's own `Debug.*` API. Eight tests assert era
+*gameplay*, each pairing a historical implementation against the modern one:
+Sangan's failed-search Deck reveal, Sangan's and Rescue Cat's post-errata hard
+once-per-turn, and Imperial Order's optional-versus-forced maintenance. See
+docs/engine-testing.md.
+
+Next steps, in value order:
+
+- **Coverage.** Four implementations across three records are behaviourally
+  tested; 234 reuse upstream implementations that are not. Prioritise the cards
+  Edison actually substitutes.
+- **Untested behaviour classes.** Damage-step activation legality (the largest
+  single group of unresolved era rulings — a scenario reaching the Battle Phase
+  would let those records be verified as well as dated), equip survival when
+  the target leaves, and miss-timing/`EFFECT_FLAG_DELAY` trigger registration.
+- **CI.** The engine tests skip without `RETROFORMATS_OCGCORE`, keeping the main
+  suite stdlib-only. A separate CI job could fetch DeltaBagooska's
+  `libocgcore.so` and the pinned checkouts to run them on Linux.
+- **A 64-bit Windows core.** DeltaBagooska ships only a 32-bit `ocgcore.dll`, so
+  Windows contributors must use WSL today.

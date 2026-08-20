@@ -39,10 +39,32 @@ a large functional-errata surface (many 2010 staples were errata'd later).
   composite; whether TCG-variant flags (fast-effect ignition, TCG SEGOC, 6-step
   damage step — all used by the GOAT composite) should be added is an open research
   question tracked in the profile's `known_gaps`.
-- **Errata — missing.** No overrides apply yet because the errata corpus is undated;
-  cards like Sangan played pre-errata in 2010 but the generated blacklist currently
-  points at modern implementations. Dating the corpus (roadmap item 1) fixes this
-  automatically via computed applicability.
+- **Errata — partial, and computed.** Edison substitutes historical implementations
+  for cards its snapshot date requires, derived entirely from each record's evidence:
+  **no hand-written Edison errata list exists.** Sangan, Rescue Cat, Sinister Serpent,
+  Chaos Emperor Dragon, Dark Magician of Chaos, Imperial Order, Ring of Destruction,
+  Makyura the Destructor and Witch of the Black Forest are among the cards that fall
+  out automatically. Run `python -m retroformats report -v` for the current list.
+
+  Two evidence routes reach 2010-04-24:
+
+  1. **Dated functional errata after 2010** — the modern text's first printing
+     post-dates the snapshot, so the pre-errata version applies.
+  2. **The period search-verification ruling** — a Deck search that failed to find
+     was verified by the opponent, and Konami's own *Machina Mayhem* rulings document
+     (compiled 2010-04-06, eighteen days before the snapshot) still says so. The old
+     state is attested through 2011-02-02 and the modern policy only from 2019-04-03,
+     so the interval stays open as bounded chronology — but 2010-04-24 sits
+     determinately inside the old era. Cards whose only implementation-relevant
+     difference is that procedure therefore use their period implementation here as
+     well as in GOAT.
+
+  Where chronology cannot place a change relative to the snapshot, this format's
+  documented `errata_overrides.unresolved_policy` keeps the **modern** implementation
+  rather than assert unproven period behaviour, and the validator names every card it
+  was applied to (`format.erratum-unresolved-defaulted`). Where a period behaviour is
+  known to differ but no implementation exists, the record acknowledges the gap and
+  the divergence is counted by `report`. Both sets shrink as research continues.
 - **Chronology.** Format Library names the neighbours "Lightsworn" (previous) and
   "Frog" (next); left null until those formats exist here.
 
@@ -81,7 +103,15 @@ not the May 8-9 weekend earlier assumed.
 ## Playing it (current honesty level)
 
 `dist/lflists/2010-03-edison.lflist.conf` is now a full `$whitelist`: it enforces
-the March 2010 F/L list AND rejects every non-period card. Pre-errata card
-behaviour is still pending (the errata corpus is undated), so cards errata'd
-after 2010 currently use modern implementations. Host with Duel Rule preset **Master Rule 1** and forbidden types
-Xyz/Pendulum/Link (the preset sets this), 40–60/0–15/0–15 decks.
+the March 2010 F/L list, rejects every non-period card, AND substitutes the
+historical implementation of every card whose evidence places its change after the
+snapshot. Host with Duel Rule preset **Master Rule 1** and forbidden types
+Xyz/Pendulum/Link (the preset sets this), 40–60/0–15/0–15 decks, and allowed cards
+**"Anything goes"** — the historical card versions carry `ot=8` and would otherwise
+be rejected as unofficial, exactly as GOAT is hosted.
+
+Honest bounds on accuracy: the rule profile is still plain `DUEL_MODE_MR1` (the
+TCG-variant flag question is open, roadmap item 5), records whose chronology is
+unresolved fall back to modern implementations, and the acknowledged divergences
+are behaviours nothing available reproduces. All three are enumerable rather than
+assumed — `python -m retroformats report -v` lists them.
