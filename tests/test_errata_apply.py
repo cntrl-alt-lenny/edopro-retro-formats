@@ -76,7 +76,20 @@ CHRONOLOGIES = {
         "new_attested_from": "2019-04-03",
         "status": "verified",
         "basis": "period rulings documents",
-    }
+        "corroboration": [
+            {
+                "url": "http://web.archive.org/web/20050616025109/http://example.invalid/rulings",
+                "title": "period rulings capture",
+                "quote": "your opponent gets to see your Deck to verify",
+                "archived": True,
+            }
+        ],
+    },
+    "unbacked-claim": {
+        "old_attested_through": "2011-02-02",
+        "status": "verified",
+        "basis": "someone was confident",
+    },
 }
 
 # The default decision records one functional change from lineage version 1
@@ -166,6 +179,32 @@ class ApplierTest(unittest.TestCase):
         self.assertEqual("2011-02-02", effective["old_attested_through"])
         self.assertEqual("2019-04-03", effective["new_attested_from"])
         self.assertEqual("verified", effective["status"])
+        # the table's evidence travels with the claim, so it stays checkable
+        self.assertEqual(1, len(effective["corroboration"]))
+        self.assertIn("see your Deck to verify", effective["corroboration"][0]["quote"])
+
+    def test_verified_status_without_corroboration_is_rejected(self):
+        dec = decision(
+            classification="ruling",
+            baseline_implementation={
+                "strategy": "reuse-upstream",
+                "historical_passcode": 510000000,
+                "status": "complete",
+            },
+            changes=[
+                {
+                    "kind": "ruling",
+                    "effective": {},
+                    "date_evidence": {"kind": "shared-chronology", "id": "unbacked-claim"},
+                    "historical_text_version": 0,
+                    "summary": "confidently asserted",
+                    "sources": ["ignis-cardscripts"],
+                }
+            ],
+        )
+        with self.assertRaises(DecisionError) as ctx:
+            self.apply(dec)
+        self.assertIn("records no corroboration", str(ctx.exception))
 
     def test_unknown_chronology_needs_no_evidence(self):
         dec = decision(
