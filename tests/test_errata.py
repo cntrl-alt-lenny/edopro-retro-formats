@@ -459,6 +459,64 @@ class FormatPolicyTest(TempRepoTest):
         validator.validate()
         self.assertIn("format.erratum-ambiguous", {f.code for f in validator.errors})
 
+    def test_modern_fallback_is_flagged_when_modern_is_provably_wrong(self):
+        """Found by adversarial review. When one change in a chain is dated
+        and another is not, the evidence can be unable to say WHICH historical
+        version applies while still proving the modern card is not one of
+        them. An unresolved_policy of "modern" then picks a card we know is
+        wrong, and that must be reported as a known divergence rather than as
+        a neutral default."""
+        self._seed(
+            review="reviewed",
+            changes=[
+                change(kind="ruling", date=None),  # unresolved
+                change(kind="functional", date="2015-07-16"),  # after the snapshot
+            ],
+        )
+        self.add_format(
+            errata_overrides={
+                "unresolved_policy": {
+                    "choice": "modern",
+                    "reason": "conservative default",
+                    "sources": ["test-source"],
+                }
+            }
+        )
+        repo = Repository.load(self.root)
+        erratum = repo.errata["erratum-beta"]
+        selection = erratum.selection_at(_dt.date(2005, 4, 1))
+        self.assertEqual("ambiguous", selection.state)
+        self.assertEqual((0, 1), selection.candidates)
+        self.assertEqual(2, selection.modern_version)
+        self.assertFalse(selection.modern_is_possible)
+        validator = Validator(repo)
+        validator.validate()
+        codes = {f.code for f in validator.warnings}
+        self.assertIn("format.erratum-modern-known-wrong", codes)
+        self.assertNotIn("format.erratum-unresolved-defaulted", codes)
+
+    def test_ordinary_ambiguity_still_reports_a_plain_default(self):
+        # Single unresolved change: modern IS one of the candidates, so the
+        # fallback is a neutral documented choice.
+        self._seed(review="reviewed", changes=[change(date=None)])
+        self.add_format(
+            errata_overrides={
+                "unresolved_policy": {
+                    "choice": "modern",
+                    "reason": "conservative default",
+                    "sources": ["test-source"],
+                }
+            }
+        )
+        repo = Repository.load(self.root)
+        selection = repo.errata["erratum-beta"].selection_at(_dt.date(2005, 4, 1))
+        self.assertTrue(selection.modern_is_possible)
+        validator = Validator(repo)
+        validator.validate()
+        codes = {f.code for f in validator.warnings}
+        self.assertIn("format.erratum-unresolved-defaulted", codes)
+        self.assertNotIn("format.erratum-modern-known-wrong", codes)
+
     def test_policy_does_not_override_resolved_chronology(self):
         # A dated change is not ambiguous: the policy must not touch it.
         self._seed(review="reviewed", changes=[change(date="2015-07-16")])

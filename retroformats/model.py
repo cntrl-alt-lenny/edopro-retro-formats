@@ -232,6 +232,18 @@ class ErratumSelection:
     implementation: dict[str, Any] | None = None
     version_index: int | None = None
     ambiguous_changes: tuple[int, ...] = ()
+    candidates: tuple[int, ...] = ()
+    modern_version: int | None = None
+
+    @property
+    def modern_is_possible(self) -> bool:
+        """Whether the MODERN implementation is among the versions the
+        evidence still allows. False means the chronology cannot say which
+        historical version applies, but it CAN say the modern card is wrong —
+        so falling back to modern is a known error, not a neutral default."""
+        if self.state != "ambiguous":
+            return True
+        return self.modern_version in self.candidates
 
     @property
     def acknowledged_gap(self) -> dict[str, Any] | None:
@@ -309,7 +321,12 @@ class Erratum:
         k_max = len(relevant) - definite_old
         if k_min != k_max:
             ambiguous = tuple(i for i, s in enumerate(states) if s == AMBIGUOUS)
-            return ErratumSelection(state="ambiguous", ambiguous_changes=ambiguous)
+            return ErratumSelection(
+                state="ambiguous",
+                ambiguous_changes=ambiguous,
+                candidates=tuple(range(k_min, k_max + 1)),
+                modern_version=len(relevant),
+            )
         version = k_min
         if version >= len(relevant):
             return ErratumSelection(state="modern", version_index=version)

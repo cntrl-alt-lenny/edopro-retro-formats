@@ -172,8 +172,9 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
         except Exception as exc:  # ErrataSelectionError and friends
             print(f"  {fmt.id}: SELECTION BLOCKED - {exc}")
             continue
-        divergences = []
+        divergences, known_wrong = [], []
         snapshot = _dt_date(fmt.snapshot)
+        policy = (fmt.unresolved_policy or {}).get("choice")
         for erratum in repo.errata.values():
             if erratum.id in fmt.errata_exclude or erratum.review_status != "reviewed":
                 continue
@@ -182,9 +183,16 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
             selection = erratum.selection_at(snapshot)
             if selection.state == "gap" and selection.acknowledged_gap:
                 divergences.append(erratum)
+            elif (
+                selection.state == "ambiguous"
+                and policy == "modern"
+                and not selection.modern_is_possible
+            ):
+                known_wrong.append(erratum)
         print(
             f"  {fmt.id}: {len(selected)} historical substitutions, "
-            f"{len(divergences)} acknowledged behavioural divergences"
+            f"{len(divergences)} acknowledged behavioural divergences, "
+            f"{len(known_wrong)} known-wrong modern fallbacks"
         )
         if verbose:
             for code, override in sorted(selected.items()):
@@ -195,6 +203,8 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
                 )
             for erratum in sorted(divergences, key=lambda e: e.modern_card.name):
                 print(f"      (divergence) {erratum.modern_card.name}")
+            for erratum in sorted(known_wrong, key=lambda e: e.modern_card.name):
+                print(f"      (known-wrong modern) {erratum.modern_card.name}")
 
 
 def _dt_date(value: str):

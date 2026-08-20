@@ -807,13 +807,30 @@ class Validator:
                     if policy.get("choice") in ("modern", "historical"):
                         # Explicit, sourced, and named per card: the choice is
                         # auditable rather than silent.
-                        self.warn(
-                            "format.erratum-unresolved-defaulted",
-                            fmt.path,
-                            f"{erratum.modern_card.name}: chronology ambiguous at "
-                            f"{snapshot}; resolved as {policy['choice']!r} by this "
-                            "format's documented unresolved_policy",
-                        )
+                        if policy["choice"] == "modern" and not selection.modern_is_possible:
+                            # Sharper than an ordinary default: the evidence
+                            # cannot say WHICH historical version applies, but
+                            # it can say the modern card is not one of them.
+                            # Falling back to modern is a known error, and is
+                            # reported as such rather than as a neutral choice.
+                            self.warn(
+                                "format.erratum-modern-known-wrong",
+                                fmt.path,
+                                f"{erratum.modern_card.name}: chronology is ambiguous at "
+                                f"{snapshot} between versions "
+                                f"{list(selection.candidates)}, and the modern card "
+                                f"(version {selection.modern_version}) is NOT among them - "
+                                "the unresolved_policy fallback to modern is a known "
+                                "divergence, not a neutral default",
+                            )
+                        else:
+                            self.warn(
+                                "format.erratum-unresolved-defaulted",
+                                fmt.path,
+                                f"{erratum.modern_card.name}: chronology ambiguous at "
+                                f"{snapshot}; resolved as {policy['choice']!r} by this "
+                                "format's documented unresolved_policy",
+                            )
                     else:
                         self.error(
                             "format.erratum-ambiguous",
