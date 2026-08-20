@@ -84,6 +84,15 @@ def lineage_text(packet: dict, version_index: int | None) -> str | None:
     raise DecisionError(f"lineage version {version_index} not in packet")
 
 
+def _historical_version(raw_changes: list[dict], index: int) -> int | None:
+    """The lineage version in force before change `index` (i.e. the version
+    the implementation of that era must reproduce)."""
+    if index < len(raw_changes):
+        value = raw_changes[index].get("historical_text_version")
+        return int(value) if value is not None else None
+    return None
+
+
 def lineage_version(packet: dict, version_index: int) -> dict:
     for version in (packet.get("errata_page") or {}).get("english_versions", []):
         if version.get("index") == version_index:
@@ -271,26 +280,47 @@ def apply_decision(
 
     record["classification"] = dominant
     record["changes"] = changes
-    upstream_codes = {
-        impl.get("passcode") for impl in packet.get("upstream_implementations", [])
+    by_code = {
+        impl.get("passcode"): impl for impl in packet.get("upstream_implementations", [])
     }
-    for impl, where in [
-        (decision.get("baseline_implementation"), "baseline_implementation"),
+    # Which lineage version each implementation is claimed to implement: the
+    # baseline implements the text the first change describes as historical;
+    # a change's resulting_implementation implements the text that change
+    # produced, i.e. the next change's historical text.
+    claimed_version = {"baseline_implementation": _historical_version(decision["changes"], 0)}
+    for i in range(len(changes)):
+        claimed_version[f"changes[{i}].resulting_implementation"] = _historical_version(
+            decision["changes"], i + 1
+        )
+    for where, impl in [
+        ("baseline_implementation", decision.get("baseline_implementation")),
         *[
-            (c.get("resulting_implementation"), f"changes[{i}].resulting_implementation")
+            (f"changes[{i}].resulting_implementation", c.get("resulting_implementation"))
             for i, c in enumerate(changes)
         ],
     ]:
         if not impl:
             continue
-        if impl.get("strategy") == "reuse-upstream" and impl.get(
-            "historical_passcode"
-        ) not in upstream_codes:
+        code = impl.get("historical_passcode")
+        if impl.get("strategy") == "reuse-upstream" and code not in by_code:
             raise DecisionError(
-                f"{slug}: {where} claims reuse-upstream passcode "
-                f"{impl.get('historical_passcode')} but the packet lists no such "
-                "upstream implementation"
+                f"{slug}: {where} claims reuse-upstream passcode {code} but the "
+                "packet lists no such upstream implementation"
             )
+        # Era consistency: the upstream variant's own database text must be
+        # the text of the version it is claimed to implement. Catches reusing
+        # a variant from the wrong historical revision.
+        upstream = by_code.get(code)
+        want = claimed_version.get(where)
+        if upstream and want is not None and not decision.get("era_mismatch_ack"):
+            match = upstream.get("text_matches_version") or {}
+            if match.get("exact") and match.get("index") != want:
+                raise DecisionError(
+                    f"{slug}: {where} reuses upstream {code}, whose database text is "
+                    f"lineage version {match.get('index')}, but it is claimed to "
+                    f"implement version {want}; the variant may belong to a different "
+                    "era (set era_mismatch_ack with an explanation if deliberate)"
+                )
     if decision.get("baseline_implementation"):
         record["implementation"] = order(decision["baseline_implementation"], IMPL_ORDER)
     elif "implementation" not in record:
