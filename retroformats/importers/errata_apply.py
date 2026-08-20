@@ -163,11 +163,30 @@ def build_change(raw: dict, packet: dict, chronologies: dict) -> dict:
     if not raw.get("sources"):
         raise DecisionError("change needs sources")
 
+    if kind not in ("functional", "ruling") and raw.get("resulting_implementation"):
+        raise DecisionError(
+            f"{kind} change carries resulting_implementation; only functional/ruling "
+            "changes create implementation-relevant versions"
+        )
+
     historical_text = raw.get("historical_text")
-    if historical_text is None and raw.get("historical_text_version") is not None:
+    if historical_text is not None:
+        # Literal text is allowed only as an exact copy of packet-carried
+        # database text (no lineage available) - never hand-transcription.
+        allowed = {packet.get("modern_text")} | {
+            impl.get("text") for impl in packet.get("upstream_implementations", [])
+        }
+        if historical_text not in allowed:
+            raise DecisionError(
+                "literal historical_text does not match any packet-carried cdb text"
+            )
+    elif raw.get("historical_text_version") is not None:
         historical_text = lineage_text(packet, raw["historical_text_version"])
     modern_text = raw.get("modern_text")
-    if modern_text is None and raw.get("modern_text_version") is not None:
+    if modern_text is not None:
+        if modern_text != packet.get("modern_text"):
+            raise DecisionError("literal modern_text does not match the packet's cdb text")
+    elif raw.get("modern_text_version") is not None:
         modern_text = lineage_text(packet, raw["modern_text_version"])
 
     change: dict = {
@@ -235,6 +254,26 @@ def apply_decision(
 
     record["classification"] = dominant
     record["changes"] = changes
+    upstream_codes = {
+        impl.get("passcode") for impl in packet.get("upstream_implementations", [])
+    }
+    for impl, where in [
+        (decision.get("baseline_implementation"), "baseline_implementation"),
+        *[
+            (c.get("resulting_implementation"), f"changes[{i}].resulting_implementation")
+            for i, c in enumerate(changes)
+        ],
+    ]:
+        if not impl:
+            continue
+        if impl.get("strategy") == "reuse-upstream" and impl.get(
+            "historical_passcode"
+        ) not in upstream_codes:
+            raise DecisionError(
+                f"{slug}: {where} claims reuse-upstream passcode "
+                f"{impl.get('historical_passcode')} but the packet lists no such "
+                "upstream implementation"
+            )
     if decision.get("baseline_implementation"):
         record["implementation"] = order(decision["baseline_implementation"], IMPL_ORDER)
     elif "implementation" not in record:
