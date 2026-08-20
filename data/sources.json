@@ -87,6 +87,15 @@
       "reliability_notes": "Omits Duelist Pack Collection Tin 2010 (DPCT, source of Starlight Road) from its table even though the site's own pool link includes Starlight Road; see formats/2010-03-edison/notes.md."
     },
     {
+      "id": "edisonformat-functional-errata",
+      "kind": "community-site",
+      "title": "Functional Errata / Relevant Functional Errata - EdisonFormat.com",
+      "url": "https://www.edisonformat.com/functional-errata.html",
+      "retrieved": "2026-08-20",
+      "used_for": "The Edison community's explicit per-card list of cards errata'd after 2010 whose 2010-era behaviour differs from the modern text, plus the period rulings corpus (Individual Card Rulings posts) documenting the era's failed-search Deck/hand verification card by card. Used as independent corroboration of functional/ruling classifications - e.g. Sangan (the searched monster's effects were usable), Rescue Cat (no negation, no once-per-name), Catapult Turtle / Brionac / Treeborn Frog / Destiny End Dragoon (no once-per-turn), Necrovalley (negation applied only to effects targeting in a Graveyard), Darkness Approaches (face-down ATTACK position), Goyo Guardian (non-EARTH Tuners legal as material), Union monsters (the one-Union-per-monster Condition, removed by later errata).",
+      "reliability_notes": "Community secondary source; the blog version (2020-07-01) cites Konami tournament-policy section IX.G as the reason post-2010 errata text governs sanctioned play, which is why the site documents the era behaviour separately. It corroborates behaviour, not chronology: the page dates nothing, so effective dates are anchored to printings or to primary rulings documents instead."
+    },
+    {
       "id": "edisonformat-rule-differences",
       "kind": "community-site",
       "title": "Edison Rule Differences - EdisonFormat.com",
