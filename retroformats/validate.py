@@ -458,6 +458,21 @@ class Validator:
                 erratum.path,
                 f"{what}: strategy {strategy} but no historical_passcode recorded yet",
             )
+        gap = impl.get("gap")
+        if gap is not None:
+            if strategy != "unresolved":
+                self.error(
+                    "erratum.gap-with-implementation",
+                    erratum.path,
+                    f"{what}: implementation.gap acknowledges an unreproducible version, "
+                    f"but strategy is {strategy!r}; a gap belongs on strategy 'unresolved'",
+                )
+            if not gap.get("reason"):
+                self.error("erratum.gap-unjustified", erratum.path, f"{what}: gap.reason is required")
+            if not gap.get("sources"):
+                self.error("erratum.gap-unjustified", erratum.path, f"{what}: gap.sources is required")
+            else:
+                self._check_sources(list(gap["sources"]), erratum.path, None, f"{what} gap")
         hist = impl.get("historical_passcode")
         if hist:
             self._check_card_alias(int(hist), erratum, what)
@@ -682,13 +697,29 @@ class Validator:
                         "errata_overrides include/exclude — selection will not guess",
                     )
                 elif selection.state == "gap":
-                    self.error(
-                        "format.erratum-implementation-gap",
-                        fmt.path,
-                        f"{erratum.id}: version {selection.version_index} applies at "
-                        f"{snapshot} but has no usable implementation; record one "
-                        "(reuse-upstream/custom-script) or exclude with documentation",
-                    )
+                    gap = selection.acknowledged_gap
+                    if gap:
+                        # A documented, examined divergence: the format keeps
+                        # the modern card and the shortfall stays visible
+                        # (report surfaces it) rather than blocking forever.
+                        self.warn(
+                            "format.erratum-known-divergence",
+                            fmt.path,
+                            f"{erratum.modern_card.name}: version {selection.version_index} "
+                            f"applies at {snapshot} but is not reproducible "
+                            f"({gap.get('reason')}); the modern implementation is used and "
+                            "the divergence is acknowledged on the record",
+                        )
+                    else:
+                        self.error(
+                            "format.erratum-implementation-gap",
+                            fmt.path,
+                            f"{erratum.id}: version {selection.version_index} applies at "
+                            f"{snapshot} but has no usable implementation and the record "
+                            "does not acknowledge the gap; record an implementation "
+                            "(reuse-upstream/custom-script), document implementation.gap, "
+                            "or exclude with documentation",
+                        )
                 elif selection.state == "historical" and selection.implementation.get(
                     "status"
                 ) in ("missing", "stub"):

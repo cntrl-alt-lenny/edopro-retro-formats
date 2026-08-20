@@ -235,6 +235,56 @@ class FormatSelectionTest(TempRepoTest):
         built = build_lflist(repo.formats["2005-04-test"], repo)
         self.assertIn(200, built.entries)  # modern card stays, documented deviation
 
+    def test_acknowledged_gap_keeps_modern_card_and_warns(self):
+        # A behaviour we KNOW differs but cannot reproduce: the record must
+        # say so explicitly. Then the format keeps the modern card, the
+        # divergence is visible as a warning, and the build does not fail.
+        self._seed(
+            review="reviewed",
+            changes=[change(date="2015-07-16")],
+            impl={
+                "strategy": "unresolved",
+                "status": "missing",
+                "gap": {
+                    "reason": "Project Ignis ships no historical version of this card",
+                    "upstream_checked": True,
+                    "sources": ["test-source"],
+                },
+            },
+        )
+        repo = Repository.load(self.root)
+        built = build_lflist(repo.formats["2005-04-test"], repo)
+        self.assertIn(200, built.entries)  # modern card, knowingly
+        validator = Validator(repo)
+        validator.validate()
+        self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+        self.assertIn("format.erratum-known-divergence", {f.code for f in validator.warnings})
+
+    def test_gap_acknowledgement_requires_reason_and_sources(self):
+        self._seed(
+            review="reviewed",
+            changes=[change(date="2015-07-16")],
+            impl={"strategy": "unresolved", "status": "missing", "gap": {"reason": "", "sources": []}},
+        )
+        validator = Validator(Repository.load(self.root))
+        validator.validate()
+        self.assertIn("erratum.gap-unjustified", {f.code for f in validator.errors})
+
+    def test_gap_on_a_resolved_strategy_is_an_error(self):
+        self._seed(
+            review="reviewed",
+            changes=[change(date="2015-07-16")],
+            impl={
+                "strategy": "reuse-upstream",
+                "historical_passcode": 510000000,
+                "status": "complete",
+                "gap": {"reason": "x", "sources": ["test-source"]},
+            },
+        )
+        validator = Validator(Repository.load(self.root))
+        validator.validate()
+        self.assertIn("erratum.gap-with-implementation", {f.code for f in validator.errors})
+
     def test_dated_boundary_governs_whitelist_substitution(self):
         self._seed(review="reviewed", changes=[change(date="2005-04-02")])
         repo = Repository.load(self.root)

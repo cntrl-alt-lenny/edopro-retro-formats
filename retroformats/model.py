@@ -233,6 +233,15 @@ class ErratumSelection:
     version_index: int | None = None
     ambiguous_changes: tuple[int, ...] = ()
 
+    @property
+    def acknowledged_gap(self) -> dict[str, Any] | None:
+        """For state 'gap': the record's documented acknowledgement of the
+        divergence, when it carries one. None means the gap is unexamined."""
+        if self.state != "gap" or not self.implementation:
+            return None
+        gap = self.implementation.get("gap")
+        return dict(gap) if gap else None
+
 
 @dataclass
 class Erratum:
@@ -306,13 +315,13 @@ class Erratum:
             return ErratumSelection(state="modern", version_index=version)
         impl = self.implementation_for_version(version)
         if impl is None or impl.get("strategy") == "unresolved":
-            return ErratumSelection(state="gap", version_index=version)
+            return ErratumSelection(state="gap", implementation=impl, version_index=version)
         if impl.get("strategy") == "none-needed":
             # A documented decision that the modern implementation stands in
             # for this version (e.g. a ruling difference not reproduced).
             return ErratumSelection(state="modern", implementation=impl, version_index=version)
         if not impl.get("historical_passcode"):
-            return ErratumSelection(state="gap", version_index=version)
+            return ErratumSelection(state="gap", implementation=impl, version_index=version)
         return ErratumSelection(state="historical", implementation=impl, version_index=version)
 
 

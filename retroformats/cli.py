@@ -72,6 +72,7 @@ def cmd_report(args: argparse.Namespace) -> int:
             f"{fmt.id:<24} {s.get('banlist', '?'):<14} {s.get('card_pool', '?'):<10} "
             f"{s.get('rule_profile', '?'):<8} {s.get('errata', '?'):<8} {s.get('overall', '?')}"
         )
+    _report_errata(repo, verbose=args.verbose)
     if repo.products:
         from .releases import ReleaseIndex
 
@@ -96,6 +97,91 @@ def cmd_report(args: argparse.Namespace) -> int:
                     f"({', '.join(window.get('territories', []))})"
                 )
     return 0
+
+
+def _report_errata(repo: Repository, verbose: bool = False) -> None:
+    """Certification state of the historical-card-behaviour dataset, and the
+    per-format consequences: which cards each format substitutes, and which
+    period behaviours it is knowingly NOT reproducing."""
+    from collections import Counter
+
+    from .lflist import select_applicable_errata
+
+    errata = list(repo.errata.values())
+    if not errata:
+        return
+    reviewed = [e for e in errata if e.review_status == "reviewed"]
+    kinds = Counter(e.classification for e in errata)
+    strategies = Counter(e.implementation.get("strategy") for e in errata)
+    dated = sum(
+        1
+        for e in reviewed
+        if any((c.get("effective") or {}).get("date") for c in e.relevant_changes())
+    )
+    bounded = sum(
+        1
+        for e in reviewed
+        if not any((c.get("effective") or {}).get("date") for c in e.relevant_changes())
+        and any(
+            (c.get("effective") or {}).get("old_attested_through")
+            or (c.get("effective") or {}).get("new_attested_from")
+            for c in e.relevant_changes()
+        )
+    )
+    multi = [e for e in errata if len(e.relevant_changes()) > 1]
+    tested = sum(1 for e in errata if e.implementation.get("tested"))
+
+    print(
+        f"\nerrata: {len(errata)} records ({len(reviewed)} reviewed) -> "
+        + ", ".join(f"{n} {k}" for k, n in sorted(kinds.items()))
+    )
+    print(
+        f"  chronology: {dated} exactly dated, {bounded} bounded, "
+        f"{len(reviewed) - dated - bounded} unresolved (of reviewed)"
+    )
+    print(
+        "  strategies: " + ", ".join(f"{n} {s}" for s, n in sorted(strategies.items()))
+        + f"; {len(multi)} with multiple historical revisions; {tested} behaviourally tested"
+    )
+
+    for fmt_id in sorted(repo.formats):
+        fmt = repo.formats[fmt_id]
+        if not fmt.snapshot:
+            continue
+        try:
+            selected = select_applicable_errata(fmt, repo)
+        except Exception as exc:  # ErrataSelectionError and friends
+            print(f"  {fmt.id}: SELECTION BLOCKED - {exc}")
+            continue
+        divergences = []
+        snapshot = _dt_date(fmt.snapshot)
+        for erratum in repo.errata.values():
+            if erratum.id in fmt.errata_exclude or erratum.review_status != "reviewed":
+                continue
+            if not erratum.relevant_changes():
+                continue
+            selection = erratum.selection_at(snapshot)
+            if selection.state == "gap" and selection.acknowledged_gap:
+                divergences.append(erratum)
+        print(
+            f"  {fmt.id}: {len(selected)} historical substitutions, "
+            f"{len(divergences)} acknowledged behavioural divergences"
+        )
+        if verbose:
+            for code, override in sorted(selected.items()):
+                impl = override.implementation
+                print(
+                    f"      {code} -> {impl.get('historical_passcode')} "
+                    f"{override.erratum.modern_card.name}"
+                )
+            for erratum in sorted(divergences, key=lambda e: e.modern_card.name):
+                print(f"      (divergence) {erratum.modern_card.name}")
+
+
+def _dt_date(value: str):
+    import datetime as _dt
+
+    return _dt.date.fromisoformat(value)
 
 
 def cmd_materialize(args: argparse.Namespace) -> int:
@@ -192,6 +278,12 @@ def main(argv: list[str] | None = None) -> int:
     p_build.set_defaults(func=cmd_build)
 
     p_report = sub.add_parser("report", help="implementation status per format")
+    p_report.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="list every historical substitution and acknowledged divergence per format",
+    )
     p_report.set_defaults(func=cmd_report)
 
     p_mat = sub.add_parser(

@@ -32,7 +32,28 @@
         },
         "script": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Path of the Lua script implementing the historical behaviour (upstream path or dist/scripts path)." },
         "status": { "$ref": "common.schema.json#/$defs/implementationStatus" },
-        "tested": { "type": "boolean", "description": "true ONLY once an executable engine-level test demonstrates the historical behaviour — never merely because the script exists." }
+        "tested": { "type": "boolean", "description": "true ONLY once an executable engine-level test demonstrates the historical behaviour — never merely because the script exists." },
+        "gap": {
+          "type": "object",
+          "required": ["reason", "sources"],
+          "additionalProperties": false,
+          "description": "Acknowledges that this version's behaviour is KNOWN to differ from the modern implementation but cannot be reproduced today (strategy: unresolved). An acknowledged gap is a documented, visible divergence: formats whose snapshot needs this version keep the modern card and the validator warns, rather than failing forever. An UNdocumented unresolved version is an error — a gap must be examined, not merely unfinished.",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Why no implementation exists, concretely (e.g. 'Project Ignis ships no historical version; reproducing it needs a custom script + reserved passcode')."
+            },
+            "upstream_checked": {
+              "type": "boolean",
+              "description": "true when the pinned Project Ignis databases/scripts were searched for a usable historical implementation and none matched this version's era."
+            },
+            "behavioural_impact": {
+              "type": "string",
+              "description": "What plays differently in affected formats while the gap stands."
+            },
+            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+          }
+        }
       }
     }
   },

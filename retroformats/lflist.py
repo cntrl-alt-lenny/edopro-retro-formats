@@ -173,11 +173,14 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
                 "(adjudicate with a documented errata_overrides include/exclude, "
                 "or narrow the change's effective chronology)"
             )
-        elif selection.state == "gap":
+        elif selection.state == "gap" and not selection.acknowledged_gap:
             problems.append(
                 f"{erratum.id}: version {selection.version_index} applies at {snapshot} "
-                "but has no usable implementation (record one, or exclude with documentation)"
+                "but has no usable implementation and the record does not acknowledge "
+                "the gap (record one, document implementation.gap, or exclude)"
             )
+        # An ACKNOWLEDGED gap deliberately falls through to the modern card:
+        # the divergence is recorded on the record and reported, not silent.
     if problems:
         raise ErrataSelectionError(fmt.id, problems)
     return selected
