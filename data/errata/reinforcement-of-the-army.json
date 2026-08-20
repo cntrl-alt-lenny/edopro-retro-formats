@@ -14,7 +14,19 @@
         "status": "verified",
         "old_attested_through": "2005-06-16",
         "new_attested_from": "2008-12-15",
-        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no valid Warrior left in the Deck subject to Deck verification; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation without one."
+        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no valid Warrior left in the Deck subject to Deck verification; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation without one.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "quote": "You can activate this card even if you have no Level 4 or lower Warrior-Type monsters remaining in your Deck, but you must let your opponent see your Deck to confirm.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+            "quote": "You cannot activate \"Reinforcement of the Army\" if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "Add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand. Then shuffle your Deck.",
       "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script reduces s.target to `if chk==0 then return true end` (the modern Duel.IsExistingMatchingCard check over LOCATION_DECK is gone), so the card can be activated with no Level 4 or lower Warrior left in the Deck, and it proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script requires a valid target to activate and never reveals. The printed text is behaviourally identical across the whole English lineage.",

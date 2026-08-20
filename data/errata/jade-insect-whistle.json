@@ -14,7 +14,27 @@
         "status": "verified",
         "old_attested_through": "2011-02-02",
         "new_attested_from": "2019-04-03",
-        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open."
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "Your opponent selects 1 Insect-Type Monster from their Deck. After shuffling the Deck, place the card on top of the Deck.",
       "summary": "Period procedure only: the sole difference between goat/c504700168.lua and official/c95214051.lua is `else Duel.GoatConfirm(1-tp,LOCATION_DECK)`. This card makes the OPPONENT search their own Deck for an Insect-Type monster, so the reveal runs against the opponent's Deck (`1-tp`) - if they hold no Insect they show their Deck to prove it, which the modern script never does. Both scripts' `s.target` checks only that the opponent's Deck is non-empty, so there is no activation-condition difference; this is the verification procedure alone, hence the shared chronology applies cleanly.",

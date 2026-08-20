@@ -96,7 +96,22 @@
               "status": {
                 "type": "string",
                 "enum": ["verified", "reported"],
-                "description": "verified: corroborated by a period/primary source or two independent reliable sources. reported: single secondary source."
+                "description": "verified: corroborated by a period/primary source, or by two independent reliable sources — and the corroboration must be RECORDED in `corroboration` below, so the claim can be checked. reported: single secondary source (e.g. a printing date derived from the Yugipedia text lineage)."
+              },
+              "corroboration": {
+                "type": "array",
+                "description": "Independent evidence supporting this chronology beyond the source that produced it. Required for status 'verified': the validator rejects a verified chronology that records none. Each entry quotes the operative sentence so the claim is checkable rather than asserted.",
+                "items": {
+                  "type": "object",
+                  "required": ["url", "quote"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "url": { "type": "string" },
+                    "title": { "type": "string" },
+                    "quote": { "type": "string", "description": "The operative sentence, verbatim." },
+                    "archived": { "type": "boolean", "description": "true when the URL is a web-archive capture of a period document." }
+                  }
+                }
               },
               "old_attested_through": {
                 "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],

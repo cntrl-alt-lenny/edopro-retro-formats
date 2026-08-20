@@ -51,7 +51,8 @@ IMPL_ORDER = [
     "upstream", "script", "status", "tested",
 ]
 EFFECTIVE_ORDER = [
-    "date", "precision", "status", "old_attested_through", "new_attested_from", "basis",
+    "date", "precision", "status", "old_attested_through", "new_attested_from",
+    "basis", "corroboration",
 ]
 
 KINDS = ("functional", "cosmetic", "ruling", "engine")
@@ -239,6 +240,10 @@ def apply_shared(effective: dict, evidence: dict, chronologies: dict) -> dict:
             merged[key] = entry[key]
     if entry.get("basis") and not merged.get("basis"):
         merged["basis"] = entry["basis"]
+    # The table is the single source of truth for its evidence too: a record
+    # citing a shared chronology inherits the corroboration that earned it.
+    if entry.get("corroboration"):
+        merged["corroboration"] = [dict(c) for c in entry["corroboration"]]
     return merged
 
 
@@ -272,6 +277,11 @@ def build_change(raw: dict, packet: dict, chronologies: dict, citations: list[di
                 "bounds are not each attested by a cited archive capture"
             )
         check_external(effective, backing)
+        effective = dict(effective)
+        effective["corroboration"] = [
+            {"url": c["url"], "quote": c["quote"], "archived": True}
+            for c in backing
+        ]
     if not raw.get("summary"):
         raise DecisionError("change needs a summary")
     if not raw.get("sources"):
@@ -302,6 +312,16 @@ def build_change(raw: dict, packet: dict, chronologies: dict, citations: list[di
             raise DecisionError("literal modern_text does not match the packet's cdb text")
     elif raw.get("modern_text_version") is not None:
         modern_text = lineage_text(packet, raw["modern_text_version"])
+
+    if raw.get("corroboration"):
+        effective = dict(effective)
+        effective["corroboration"] = [dict(c) for c in raw["corroboration"]]
+    # A verified chronology must record checkable corroboration.
+    if effective.get("status") == "verified" and not effective.get("corroboration"):
+        raise DecisionError(
+            f"{kind} change claims status 'verified' but records no corroboration; "
+            "cite the period/primary source (url + quoted sentence) or use 'reported'"
+        )
 
     change: dict = {
         "kind": kind,

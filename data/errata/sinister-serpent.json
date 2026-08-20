@@ -28,8 +28,28 @@
       "effective": {
         "date": "2015-03-19",
         "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (PGL2-EN027, Premium Gold: Return of the Bling)"
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (PGL2-EN027, Premium Gold: Return of the Bling) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20160408212739/https://yugiohblog.konami.com/articles/?p=7038",
+            "title": "Konami TCG Strategy Site, 'Updates: F&L Cards List, PGL2 Card Text, Rules for Winning During a Chain', 2015-03-20",
+            "quote": "Third, the text of 5 Forbidden cards has been altered, and they will become Limited cards on April 1st.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20150718225816/http://www.yugioh-card.com/en/limited/April_2015.html",
+            "title": "Konami, Forbidden & Limited Lists, effective April 1, 2015",
+            "quote": "FORBIDDEN & LIMITED LISTS Effective from April 1, 2015 UPDATED: 03/20/15",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
       "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can add it to your hand, also banish 1 \"Sinister Serpent\" from your Graveyard during your opponent's next End Phase. You can only use this effect of \"Sinister Serpent\" once per turn.",
@@ -60,6 +80,7 @@
     "ignis-lflists",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-cardscripts"
+    "ignis-cardscripts",
+    "konami-errata-announcements"
   ]
 }

@@ -155,6 +155,13 @@
       "reliability_notes": "Primary source for rules-engine behaviour claims."
     },
     {
+      "id": "konami-errata-announcements",
+      "kind": "official",
+      "title": "Konami TCG Strategy Site errata announcement articles and Forbidden & Limited List pages (archived)",
+      "url": "http://web.archive.org/web/20160408212739/https://yugiohblog.konami.com/articles/?p=7038",
+      "notes": "Konami's own announcements of TCG functional errata, plus the archived F/L list pages that carry an explicit 'Effective from <date>' and 'UPDATED: <date>'. Two announced waves cover most of the modern errata in this corpus: 2015-03-20 (effective 2015-04-01) for Sinister Serpent, Ring of Destruction, Crush Card Virus and Exchange of the Spirit - 'the text of 5 Forbidden cards has been altered, and they will become Limited cards on April 1st'; and 2017-03-27 (effective 2017-03-31, the Duelist Saga wave) for Rescue Cat, Imperial Order, Brain Control, Future Fusion, Goyo Guardian and Brionac. Konami's own CURRENT CARD ERRATA LIST PDFs (2009-07-30, 2010-01-05, 2010-11-05) and the Konami EU 'Errata Cards' page corroborate several others, and state the governing doctrine: 'If a card has errata, you should always play the card as if it had the corrected text.' Used to upgrade printing-derived dates from reported to verified; the printing remains the date anchor because it is when the text first became available in the TCG. Retrieved 2026-08-20."
+    },
+    {
       "id": "ude-card-rulings-archive",
       "kind": "official",
       "title": "Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings pages (Internet Archive captures, 2005-2009)",

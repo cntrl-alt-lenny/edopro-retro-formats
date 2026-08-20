@@ -14,7 +14,19 @@
         "status": "verified",
         "old_attested_through": "2005-06-16",
         "new_attested_from": "2008-12-15",
-        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with 1 or 0 eligible Beasts in the Deck subject to a Deck check; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation in that case."
+        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with 1 or 0 eligible Beasts in the Deck subject to a Deck check; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation in that case.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "quote": "You can activate the effect of \"Rescue Cat\" even if there is only 1 or zero Level 3 or lower Beast-Type monsters in your Deck ... your opponent gets to check your Deck to confirm",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+            "quote": "You cannot activate \"Rescue Cat's\" effect if there are 1 or less Level 3 or lower Beast-Type monsters in your Deck.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "Send this face-up card on your side of the field to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck to the field. The monsters Special Summoned in this way are destroyed during the End Phase.",
       "modern_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
@@ -38,8 +50,22 @@
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN072, Duelist Saga)"
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN072, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
       "modern_text": "You can send this card to the Graveyard; Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck, but they have their effects negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
@@ -72,6 +98,7 @@
     "ude-card-rulings-archive",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
   ]
 }

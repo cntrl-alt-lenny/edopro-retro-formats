@@ -12,8 +12,22 @@
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN075, Duelist Saga)"
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN075, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "1 Tuner + 1 or more non-Tuner monstersWhen this card destroys an opponent's monster by battle and sends it to the Graveyard: You can Special Summon that monster to your side of the field in Defense Position.",
       "modern_text": "1 EARTH Tuner + 1 or more non-Tuner monstersWhen this card destroys an opponent's monster by battle and sends it to the Graveyard: You can Special Summon that monster to your field in Defense Position.",
@@ -45,6 +59,7 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
   ]
 }

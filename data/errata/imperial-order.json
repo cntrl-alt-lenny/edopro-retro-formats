@@ -12,8 +12,22 @@
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN049, Duelist Saga)"
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN049, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
       },
       "historical_text": "Negate all Spell Card effects on the field. During each of your Standby Phases, pay 700 Life Points or destroy this card.",
       "modern_text": "Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.",
@@ -44,6 +58,7 @@
     "ignis-lflists",
     "yugipedia-card-errata",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-errata-announcements"
   ]
 }

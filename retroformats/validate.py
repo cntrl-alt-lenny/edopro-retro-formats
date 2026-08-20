@@ -428,6 +428,23 @@ class Validator:
             precision = None
         if status is not None and status not in EFFECTIVE_STATUSES:
             self.error("erratum.bad-effective-status", erratum.path, f"changes[{index}] status {status!r}")
+        corroboration = effective.get("corroboration") or []
+        if status == "verified" and not corroboration:
+            # "verified" is earned by recorded, checkable corroboration - not
+            # by a reviewer's confidence.
+            self.error(
+                "erratum.unverified-verified",
+                erratum.path,
+                f"changes[{index}] claims status 'verified' but records no corroboration; "
+                "cite the period/primary source (url + quoted sentence) or use 'reported'",
+            )
+        for item in corroboration:
+            if not item.get("url") or not item.get("quote"):
+                self.error(
+                    "erratum.bad-corroboration",
+                    erratum.path,
+                    f"changes[{index}] corroboration entry needs a url and a quoted sentence",
+                )
         if old_through and new_from and old_through >= new_from:
             self.error(
                 "erratum.bounds-inverted",
