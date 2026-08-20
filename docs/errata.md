@@ -220,6 +220,79 @@ Caches are never committed (`.gitignore`); pinned upstream revisions live in
   format-specific behaviour is carried by human-written per-format rulings.
   Details and quotes in `data/sources.json` (`formatlibrary-source`).
 
+## Adversarial self-review (2026-08-20)
+
+The subsystem was attacked after it was built, on the real data. What broke,
+and what held:
+
+**Two genuine defects, both fixed with regression tests:**
+
+1. **Unidentifiable generated codes.** The card index — the project's ground
+   truth for passcode identity and alias relationships — is generated from
+   "every passcode the repository references", but its collector walked only
+   each record's *baseline* implementation. The per-version implementations
+   the multi-revision schema introduced were never indexed, so **22 historical
+   codes reached the Edison whitelist with no verifiable identity**. Fixed by
+   walking every version; two tests now assert that every emitted code is
+   identifiable and that the committed index covers every reference.
+2. **Known-wrong modern fallbacks reported as neutral defaults.** When one
+   change in a chain is dated and another is not, the evidence can be unable
+   to say *which* historical version applies while still proving the modern
+   card is not one of them. Edison's `unresolved_policy: modern` then selects
+   a card we know is wrong — for **44 cards** — and reported it as an ordinary
+   default. Selection now exposes the candidate version set, and this case is
+   reported and counted separately (`format.erratum-modern-known-wrong`). The
+   behaviour is unchanged (there is no better determinate answer, and erroring
+   would block the format), but the accuracy claim is now honest.
+
+**What held under attack:**
+
+- *Boundary and precision*: 20 probes over the exact-date boundary, month
+  precision in December, year precision across a leap day, 30/31-day months,
+  touching and adjacent attestation bounds, date-plus-bounds together, and
+  malformed input. All correct; ambiguity is returned wherever the evidence
+  does not decide.
+- *Multi-revision selection*: three-revision chains at four era points,
+  ambiguous middle changes bracketed by definite ones, cosmetic/engine
+  changes interleaved with functional ones (version indices count the
+  implementation-relevant subsequence only, and `implementation_for_version`
+  indexes the same one), empty relevant-change sets, and an implementation
+  wrongly attached to the final change.
+- *Validator guards*: definite chronological inversion, inverted attestation
+  bounds, artwork variants outside the ±10 window, and a historical passcode
+  aliasing the wrong modern card all fire. Overlapping-but-uncertain intervals
+  are correctly *not* errors and resolve to ambiguity only inside the overlap.
+- *GOAT parity*: entry-for-entry identical to the reference with hash
+  `0x28e9fc02`. The provenance discriminator was checked for equivalence in
+  both directions — no record marked in-reference has its modern code in the
+  reference list, and no record marked out-of-reference has its historical
+  code there. Deliberate breaks (excluding a record, mislabelling one as
+  in-reference) were both caught by the parity test.
+- *Whitelist and identity*: no modern code is ever legal alongside its
+  historical implementation, no historical code is emitted for two cards, no
+  pool card is itself a historical code, and banlist counts transfer to every
+  emitted code including artwork variants (Ring of Destruction's
+  511000824/511000825 and Crush Card Virus's 511000822/511000823 each carry
+  their card's count).
+- *Edison version choice*: every GOAT-era variant Edison selects was diffed
+  against its modern script; the differences are the verification package, the
+  activation-condition relaxation that belongs to it, upstream metadata
+  refactors, or MR1 zone handling shared by both eras. None is 2005-only.
+- *Evidence integrity*: all 296 records were re-verified independently of the
+  applier — every recorded date matches a real printing date in its research
+  packet, every card text is verbatim from the packet, every `reuse-upstream`
+  code exists, and every unresolved version documents its gap.
+- *Classification consistency*: all 73 records whose upstream variant uses
+  `Duel.GoatConfirm` carry a `ruling` change — exactly the 73 scripts upstream
+  ships with it, with no drift.
+
+An earlier pass had already normalised three records that classified the
+damage-step activation window as `engine` while the rest called the identical
+phenomenon `ruling`; in ocgcore that window is a per-effect script flag no
+`DUEL_*` rule-profile flag can set, so only a card-level implementation
+reproduces it. `erratum.engine-with-card-implementation` now makes the
+incoherent combination visible.
+
 ## Behavioural verification
 
 `implementation.tested: true` means an executable test demonstrated the
