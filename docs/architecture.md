@@ -56,9 +56,13 @@ Design rules that keep formats cheap to add:
   status flags, and sources. Adding `2010-09-...` later reuses the same rule profile
   and much of the same infrastructure.
 - **Nothing is format-specific unless it must be.** Errata applicability is computed
-  from each change's `date_effective` vs the format's snapshot date. Only while dates
-  are unresearched does a format pin an explicit `errata_overrides.include` list (GOAT
-  does this today, mirroring the imported reference; the list shrinks as dates land).
+  per record from each change's `effective` chronology vs the format's snapshot date
+  (see [errata.md](errata.md)). A format states standing policy rather than
+  hand-listing cards: `reference_parity` (GOAT — substitute whatever the reproduced
+  reference substitutes) or `unresolved_policy` (Edison — what to do when chronology
+  is genuinely ambiguous). Per-card `include`/`exclude` remain available as
+  adjudications of last resort, reported by the validator when they agree or disagree
+  with computed selection.
 - **Two pool representations.** *Extensional* (explicit passcode list — used when a
   vetted external definition exists, like Ignis's GOAT whitelist) and *release-cutoff*
   (a rule — "everything TCG-released ≤ 2010-05-10" — plus sourced exceptions).
@@ -90,12 +94,16 @@ This mirrors how EDOPro/ocgcore actually work (citations in `edopro-research.md`
 
 ## The whitelist build algorithm
 
-For a format with an extensional pool, `retroformats/lflist.py`:
+For a format with a materialised pool (extensional, or release-cutoff once
+`materialize` has run — both GOAT and Edison qualify today), `retroformats/lflist.py`:
 
 1. maps banlist statuses onto pool cards (`forbidden`→0, `limited`→1,
    `semilimited`→2, unlisted→3);
-2. selects applicable errata (`date_effective` after snapshot, or explicitly included);
-3. for an overridden card, emits **only** the historical passcode(s) — the modern
+2. selects applicable errata via each record's fail-safe computed selection
+   (`select_applicable_errata` in `errata.md`) — chronology vs. the format's snapshot,
+   the format's `reference_parity`/`unresolved_policy` standing policy, and any
+   per-card `include`/`exclude` adjudication;
+3. for a selected substitution, emits **only** the historical passcode(s) — the modern
    implementation would behave incorrectly, and a whitelist bans anything unlisted
    (this reproduces upstream's choice: modern Chaos Emperor Dragon simply does not
    appear in the GOAT list);
@@ -113,9 +121,12 @@ EDOPro's line-folding XOR cancels duplicated identical lines out of its *runtime
 hash, so the file as shipped hashes differently in-client than its deduplicated
 entry set. Worth an upstream issue; tracked in the roadmap.)
 
-For a format whose pool is not yet materialisable (Edison), the build degrades
-honestly: a plain Forbidden/Limited blacklist whose header states that pool
-enforcement is pending.
+Both fixture formats build full `$whitelist` lists today: GOAT from its imported
+extensional pool, Edison from its release-cutoff pool once `materialize` has derived
+`cards` from `data/releases/` (see [releases.md](releases.md)). For a format whose
+pool cannot yet be materialised — no coverage over its cutoff/scope, or an unresolved
+release-data gap — the build degrades honestly instead of refusing outright: a plain
+Forbidden/Limited blacklist whose header states that pool enforcement is pending.
 
 ## Validation
 

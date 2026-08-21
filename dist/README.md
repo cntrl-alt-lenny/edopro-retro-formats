@@ -42,4 +42,4 @@ each format's `formats/<id>/notes.md`):
 | format | banlist | Duel Rule preset | allowed cards |
 |---|---|---|---|
 | `Retro 2005-04-goat` | whitelist (pool-enforcing) | GOAT | Anything goes (pre-errata cards are `ot=8`) |
-| `Retro 2010-03-edison` | blacklist (pool NOT yet enforced) | Master Rule 1 | OCG/TCG |
+| `Retro 2010-03-edison` | whitelist (pool-enforcing) | Master Rule 1 | Anything goes (historical cards are `ot=8`) |

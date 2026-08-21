@@ -33,9 +33,13 @@ The record-level `classification` is the dominant kind (severity
 agreement, so anything filtering on classification sees the truth.
 
 A record whose only changes are cosmetic or engine **cannot be selected
-computationally** even if it carries an upstream passcode. It can still be
-pinned by an explicit `errata_overrides.include` — the honest model for
-reference-parity cases (see *Nobleman of Crossout* below).
+computationally** even if it carries an upstream passcode. Such a record can
+still end up substituted through a format's `reference_parity` policy, when the
+reference implementation being reproduced ships a variant for it regardless of
+behaviour — Nobleman of Crossout is the worked example, in
+`formats/2005-04-goat/notes.md` (`format.parity-substitutes-non-behavioural`
+reports the case). Outside `reference_parity`, the only way to select such a
+record is an explicit per-card `errata_overrides.include`.
 
 ### Chronology carries its own uncertainty
 
