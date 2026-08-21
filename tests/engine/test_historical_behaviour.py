@@ -48,6 +48,14 @@ VANILLA_NORMAL_SUMMON = 97017120  # "Giant Rat": Level 4 EARTH, summon doesn't i
 DUEL_ATTACK_FIRST_TURN = 0x02  # not era-relevant here - only lets the puzzle attack on turn 1
 DUEL_0_ATK_DESTROYED = 0x10000000
 DUEL_TCG_FAST_EFFECT_IGNITION = 0x400000000
+DUEL_OCG_OBSOLETE_IGNITION = 0x100
+
+# MR1 with its own DUEL_OCG_OBSOLETE_IGNITION bit cleared - "configuration A"
+# in docs/research/edison-rules.md's approximation-choice writeup: no special
+# ignition-priority mechanism at all (case 8's very first check,
+# `!(is_flag(OCG_OBSOLETE_IGNITION) || is_flag(TCG_FAST_EFFECT_IGNITION))`,
+# returns immediately without ever queuing a candidate).
+DUEL_MODE_MR1_NO_IGNITION_FLAG = DUEL_MODE_MR1 & ~DUEL_OCG_OBSOLETE_IGNITION
 
 
 def scenario(flags: int, setup: str, seed: int = 7) -> H.Duel:
@@ -242,13 +250,22 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
     gate = Summon success ONLY (NOT also a bare chain-end with no Summon),
     location = unrestricted. This class tests all four corners of that 2x2
     (Summon vs non-Summon chain-end x candidate in the Monster Zone vs
-    elsewhere) against both existing configurations, to show precisely where
-    each one matches or overreaches relative to the derived historical rule -
-    scenarios A and B are exactly reproduced by MR1|TCG_FAST_EFFECT_IGNITION;
-    C and D are NOT, by either configuration, and are the reason
-    DUEL_TCG_FAST_EFFECT_IGNITION was NOT added to the Edison profile (see the
-    dossier's Decision section) - this is an ENGINE-LEVEL KNOWN GAP, not
-    something either flag combination can currently represent exactly.
+    elsewhere) against THREE actual engine configurations, to show precisely
+    where each one matches or diverges from the derived historical rule:
+    plain MR1 (DUEL_OCG_OBSOLETE_IGNITION), MR1|DUEL_TCG_FAST_EFFECT_IGNITION,
+    and MR1 with NEITHER ignition flag set (DUEL_MODE_MR1_NO_IGNITION_FLAG -
+    the "no special mechanism at all" option). Scenarios A and B are exactly
+    reproduced by MR1|TCG_FAST_EFFECT_IGNITION; C and D are NOT, by any of the
+    three configurations, and are the reason DUEL_TCG_FAST_EFFECT_IGNITION
+    was NOT added to the Edison profile (see the dossier's Decision section)
+    - this is an ENGINE-LEVEL KNOWN GAP, not something any configuration can
+    currently represent exactly. The shipped profile still uses plain MR1
+    (DUEL_OCG_OBSOLETE_IGNITION) rather than the flagless option, which is a
+    deliberate approximation choice, not an oversight - see the dossier's
+    "Approximation choice" section for the qualitative reasoning (in short:
+    the flagless option gets scenario A - the single most common,
+    tournament-relevant case - wrong on every scenario, where MR1 only gets
+    the rarer scenario B wrong).
 
     Every candidate card here is EFFECT_TYPE_IGNITION with no registered
     Cost.* callback (Abare Ushioni, Destiny HERO - Malicious's cost is a bare
@@ -295,17 +312,37 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
         return lists
 
     def _offered_via_priority_window(
-        self, flags: int, setup: str, first_action, candidate_code: int
+        self, flags: int, setup: str, first_action, candidate_code: int,
+        anchor_types: tuple[int, ...],
     ) -> bool:
         """Drive `first_action` (a callable(idle_lists) -> (action, index))
-        from the very first MSG_SELECT_IDLECMD, then scan every
-        MSG_SELECT_CHAIN afterwards for `candidate_code` offered to player 0 -
-        i.e. specifically the IMMEDIATE case-8 priority pop-up, not merely
-        "is it activatable via the normal idle-command menu" (which every
-        Ignition Effect always is, unconditionally, via a completely separate
-        always-on scan later in the same processor file - that is NOT what
-        DUEL_OCG_OBSOLETE_IGNITION/DUEL_TCG_FAST_EFFECT_IGNITION control, and
-        conflating the two was an earlier dead end in this investigation)."""
+        from the very first MSG_SELECT_IDLECMD, then check whether
+        `candidate_code` is offered to player 0 in the SPECIFIC immediate
+        case-8 priority window that follows the Summon/chain-end under test -
+        not merely "does it ever appear in any MSG_SELECT_CHAIN anywhere in
+        the run" (a scenario A capture shows why that distinction matters: a
+        Normal Summon produces TWO separate MSG_SELECT_CHAIN pairs -
+        MSG_SUMMONING -> [pair 1: "does anyone want to respond to the Summon
+        declaration itself", unrelated to ignition priority] -> MSG_SUMMONED
+        -> [pair 2: the actual case-8 ignition-priority window] ->
+        MSG_SELECT_IDLECMD; a chain-end scenario produces one such pair right
+        after MSG_CHAIN_END). This method anchors to the LAST message whose
+        type is in `anchor_types` (MSG_SUMMONED/MSG_SPSUMMONED for a Summon
+        scenario, MSG_CHAIN_END for a chain-end scenario) and scans only the
+        MSG_SELECT_CHAIN messages strictly between that anchor and the next
+        MSG_SELECT_IDLECMD (the window naturally closes there, since no
+        default response is registered for it and `duel.run()` stops). As a
+        structural self-check, it also asserts the candidate never appears in
+        any *earlier* MSG_SELECT_CHAIN (i.e. the pre-anchor window) - if that
+        ever fired, the anchor assumption above would be wrong and the test
+        would fail loudly rather than silently trusting the wrong window.
+
+        This is also NOT "is it activatable via the normal idle-command menu"
+        (every Ignition Effect always is, unconditionally, via a completely
+        separate always-on scan later in the same processor file - that is
+        NOT what DUEL_OCG_OBSOLETE_IGNITION/DUEL_TCG_FAST_EFFECT_IGNITION
+        control, and conflating the two was an earlier dead end in this
+        investigation)."""
         duel = H.Duel(flags=flags, seed=7)
         duel.load_scenario(
             f"Debug.ReloadFieldBegin({flags},0)\n"
@@ -326,9 +363,26 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
         duel.default_response(H.MSG_SELECT_POSITION, lambda p: H.answer_position(0x1))
         duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
         duel.run()
-        for m in duel.messages:
+
+        anchor_idx = next(
+            (i for i in range(len(duel.messages) - 1, -1, -1)
+             if duel.messages[i].type in anchor_types),
+            None,
+        )
+        self.assertIsNotNone(
+            anchor_idx,
+            f"scenario never reached the expected trigger ({anchor_types}) - "
+            f"message types seen: {[m.type for m in duel.messages]}",
+        )
+        window_end = next(
+            (i for i in range(anchor_idx + 1, len(duel.messages))
+             if duel.messages[i].type == H.MSG_SELECT_IDLECMD),
+            len(duel.messages),
+        )
+
+        def player0_codes(m: H.Message) -> list[int] | None:
             if m.type != H.MSG_SELECT_CHAIN:
-                continue
+                return None
             m._buf.seek(0)
             player = m.u8()
             m.u8(); m.u8(); m.u32(); m.u32()  # spe_count, forced, hint timings
@@ -337,7 +391,21 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
             for _ in range(count):
                 codes.append(m.u32())
                 m.u8(); m.u8(); m.u32()
-            if player == 0 and candidate_code in codes:
+            return codes if player == 0 else None
+
+        for m in duel.messages[:anchor_idx]:
+            codes = player0_codes(m)
+            self.assertFalse(
+                codes and candidate_code in codes,
+                f"{candidate_code} unexpectedly appeared in a pre-anchor "
+                "MSG_SELECT_CHAIN (the Summon/chain-declaration response "
+                "window) - the anchor assumption in this helper's docstring "
+                "is wrong and needs re-deriving from a fresh message dump",
+            )
+
+        for m in duel.messages[anchor_idx + 1 : window_end]:
+            codes = player0_codes(m)
+            if codes and candidate_code in codes:
                 return True
         return False
 
@@ -352,6 +420,7 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
             flags, setup,
             lambda lists: (0, lists["summonable"].index(VANILLA_NORMAL_SUMMON)),
             ABARE_USHIONI,
+            anchor_types=(H.MSG_SUMMONED, H.MSG_SPSUMMONED),
         )
 
     def _scenario_summon_gy(self, flags: int) -> bool:
@@ -368,6 +437,7 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
             flags, setup,
             lambda lists: (0, lists["summonable"].index(VANILLA_NORMAL_SUMMON)),
             MALICIOUS,
+            anchor_types=(H.MSG_SUMMONED, H.MSG_SPSUMMONED),
         )
 
     def _scenario_chainend_mzone(self, flags: int) -> bool:
@@ -384,6 +454,7 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
             flags, setup,
             lambda lists: (5, lists["activatable"].index(OOKAZI)),
             ABARE_USHIONI,
+            anchor_types=(H.MSG_CHAIN_END,),
         )
 
     def _scenario_chainend_gy(self, flags: int) -> bool:
@@ -398,6 +469,7 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
             flags, setup,
             lambda lists: (5, lists["activatable"].index(OOKAZI)),
             MALICIOUS,
+            anchor_types=(H.MSG_CHAIN_END,),
         )
 
     # -- A: Summon + Monster Zone - both configs match the derived rule -----
@@ -463,6 +535,26 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
         self.assertTrue(
             self._scenario_chainend_gy(DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION)
         )
+
+    # -- Third engine configuration (docs/research/edison-rules.md's --------
+    # -- approximation-choice review): MR1 with NO ignition-priority flag at -
+    # -- all. Confirms empirically, not just from source, that this option --
+    # -- gets scenario A (Summon + own-side Monster Zone ignition effect - --
+    # -- the paradigmatic, tournament-relevant case) wrong on EVERY scenario,
+    # -- which is why it is not the profile's approximation of choice even
+    # -- though it makes no C/D-style overreach at all.
+
+    def test_summon_mzone_not_offered_under_bare_config(self):
+        self.assertFalse(self._scenario_summon_mzone(DUEL_MODE_MR1_NO_IGNITION_FLAG))
+
+    def test_summon_gy_not_offered_under_bare_config(self):
+        self.assertFalse(self._scenario_summon_gy(DUEL_MODE_MR1_NO_IGNITION_FLAG))
+
+    def test_chainend_mzone_not_offered_under_bare_config(self):
+        self.assertFalse(self._scenario_chainend_mzone(DUEL_MODE_MR1_NO_IGNITION_FLAG))
+
+    def test_chainend_gy_not_offered_under_bare_config(self):
+        self.assertFalse(self._scenario_chainend_gy(DUEL_MODE_MR1_NO_IGNITION_FLAG))
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")

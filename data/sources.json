@@ -316,13 +316,6 @@
       "notes": "A period (\"Yu-Gi-Oh! Ruling Queries\") community Q&A thread, dated via wikitext timestamps to 2009-06-10 23:07 UTC (question) and 2009-06-11 04:54 UTC (answer, confirmed correct), ~10.5 months before Edison. States explicitly: the turn player may use priority to activate an Ignition Effect as Chain Link 1 only \"if the Chain ends with the Turn Player Special Summoning a monster\" - if not, only Spell-Speed-2-or-higher priority is available, not Ignition. The clearest single period statement located for the \"gate = Summon only, not any chain-end\" finding in docs/research/edison-rules.md #1."
     },
     {
-      "id": "yugipedia-forum-ignition-effect-priority-2010",
-      "kind": "wiki",
-      "title": "Yugipedia, three \"Yu-Gi-Oh! Ruling Queries\" community forum threads on Ignition Effect Priority, dated March-July 2010 (bracketing Edison)",
-      "url": "https://yugipedia.com/wiki/Forum:Ignition_Effect",
-      "notes": "Three separate, genuinely-dated period threads, all framing the immediate \"activate before the opponent can respond\" Ignition Effect window around a Summon specifically, none describing a broader \"any chain resolved\" gate: \"Forum:Costs_and_Priority\" (2010-03-07, The Big Saturn example), \"Forum:Priority....\" (2010-03-12, Red-Eyes Darkness Metal Dragon/Blue-Eyes example, last edit 2010-03-12), and this page, \"Forum:Ignition_Effect\" (question 2010-03-24, last edit 2010-03-25) - the last one only three weeks before SJC Edison (2010-04-24). A fourth, \"Forum:About_priority\" (2010-07-14/16, three months after Edison), corroborates the same Summon-framing with two more worked examples (Batteryman Fuel Cell, Destiny End Dragoon)."
-    },
-    {
       "id": "yugipedia-forum-sangan-priority-2010",
       "kind": "wiki",
       "title": "Yugipedia, \"Forum:Sangan and Priority\" (2010-10-01)",
@@ -356,6 +349,41 @@
       "title": "EdisonFormat.net, \"Ignition-Priority\" rules compendium page",
       "url": "https://web.archive.org/web/20250612014603/https://edisonformat.net/rules/compendium/ignition-priority",
       "notes": "A second, independently-authored (different domain/site from edisonformat.com) modern community reconstruction of the same Summon-gated, location-unrestricted Ignition Effect Priority rule, using a different worked example (Vorse Raider Normal Summoned, Plaguespreader Zombie's Ignition Effect activated from the GY immediately after). Not itself period evidence, but independent corroboration-in-shape of the period forum sources this project treats as primary for this question."
+    },
+    {
+      "id": "yugipedia-forum-costs-and-priority-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Forum:Costs and Priority\" (dated 2010-03-07)",
+      "url": "https://yugipedia.com/wiki/Forum:Costs_and_Priority",
+      "notes": "A period \"Yu-Gi-Oh! Ruling Queries\" community forum thread (same venue as yugipedia-forum-chain-resolution-priority-2009 and the other 2010 threads below - an independently-dated contemporaneous example, not an independent authority), dated 2010-03-07 (wikitext timestamp), ~7 weeks before Edison. Worked example: turn player Summons \"The Big Saturn\" (a cost-based Ignition Effect) and retains priority to activate it before the opponent's Bottomless Trap Hole - framed entirely around the Summon moment, consistent with the \"gate = Summon only\" reading, not \"any chain resolved.\""
+    },
+    {
+      "id": "yugipedia-forum-priority-dots-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Forum:Priority....\" (last edit 2010-03-12)",
+      "url": "https://yugipedia.com/wiki/Forum:Priority....",
+      "notes": "A period \"Yu-Gi-Oh! Ruling Queries\" community forum thread (same venue as the other 2010 threads - independently-dated, not independently-authored), last edited 2010-03-12, ~6 weeks before Edison. Worked example: turn player Special Summons \"Red-Eyes Darkness Metal Dragon\" and can activate its effect to revive Blue-Eyes White Dragon BEFORE (not after) the opponent's Bottomless Trap Hole - again framed entirely around the Summon moment. This is the real-world stakes of the mechanic: without the priority window, the opponent could Bottomless the just-Summoned monster before its controller ever gets to use a follow-up ignition effect."
+    },
+    {
+      "id": "yugipedia-forum-ignition-effect-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Forum:Ignition Effect\" (question 2010-03-24, last edit 2010-03-25)",
+      "url": "https://yugipedia.com/wiki/Forum:Ignition_Effect",
+      "notes": "A period \"Yu-Gi-Oh! Ruling Queries\" community forum thread (same venue as the other 2010 threads - independently-dated, not independently-authored), dated 2010-03-24/25, only THREE WEEKS before SJC Edison (2010-04-24) - the single closest-dated period source located for this question. States Ignition Effects \"can be used on the same turn as the monster was summoned\" and that \"you have priority in the activation, so you can use the effect of the monster before your opponent activate a card like Bottomless Trap Hole\" - Summon-framed, no mention of a broader any-chain-end gate."
+    },
+    {
+      "id": "yugipedia-forum-about-priority-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Forum:About priority\" (thread active 2010-07-14/16)",
+      "url": "https://yugipedia.com/wiki/Forum:About_priority",
+      "notes": "A period \"Yu-Gi-Oh! Ruling Queries\"/Help-desk community forum thread (same venue as the other 2010 threads - independently-dated, not independently-authored), active 2010-07-14 to 07-16, about three months after Edison. Establishes the general chain-building priority-passing mechanic with two worked examples (Batteryman Fuel Cell, Destiny End Dragoon), both still framed around a Summon. Included as an Edison-adjacent (not pre-Edison) corroborating data point, not as independent proof on its own."
+    },
+    {
+      "id": "yugipedia-priority-article-2010-01-revision",
+      "kind": "wiki",
+      "title": "Yugipedia \"Priority\" article, period revision (revid 2045531, timestamp 2010-01-28T03:47:54Z)",
+      "url": "https://yugipedia.com/index.php?title=Priority&oldid=2045531",
+      "notes": "A genuinely contemporaneous snapshot of the community reference article as it existed 2010-01-28 - not a document titled \"Priority Q\" (no such document was located under that title despite a dedicated search); the closest real period match found for that research lead. Its own worked example (Exiled Force Normal Summoned, its Ignition Effect usable via priority as Chain Link 1) confirms the basic Summon-triggered mechanic existed and was already documented three months before Edison, but this particular revision does NOT yet contain the \"didn't have to be the monster that was Summoned\" or location-unrestricted language (those were added to the article later, sometime 2010-2012) - cited only for confirming the mechanic's existence and basic shape at this date, not for the location-unrestricted or gate-excludes-non-Summon-chain-ends specifics, which rest on the other sources in this list."
     }
   ]
 }
