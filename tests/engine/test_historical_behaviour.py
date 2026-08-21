@@ -254,18 +254,33 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
     where each one matches or diverges from the derived historical rule:
     plain MR1 (DUEL_OCG_OBSOLETE_IGNITION), MR1|DUEL_TCG_FAST_EFFECT_IGNITION,
     and MR1 with NEITHER ignition flag set (DUEL_MODE_MR1_NO_IGNITION_FLAG -
-    the "no special mechanism at all" option). Scenarios A and B are exactly
-    reproduced by MR1|TCG_FAST_EFFECT_IGNITION; C and D are NOT, by any of the
-    three configurations, and are the reason DUEL_TCG_FAST_EFFECT_IGNITION
+    the "no special mechanism at all" option). The empirically-measured
+    matrix (right/wrong against the derived historical rule):
+
+        scenario:                A       B       C       D
+        no ignition flag:      wrong   wrong   right   right
+        DUEL_OCG_OBSOLETE_IGNITION:
+                                right   wrong   wrong   right (by accident,
+                                                          not because the
+                                                          gate is correct -
+                                                          see scenario C)
+        DUEL_TCG_FAST_EFFECT_IGNITION:
+                                right   right   wrong   wrong
+
+    No configuration is fully correct, which is why DUEL_TCG_FAST_EFFECT_IGNITION
     was NOT added to the Edison profile (see the dossier's Decision section)
     - this is an ENGINE-LEVEL KNOWN GAP, not something any configuration can
     currently represent exactly. The shipped profile still uses plain MR1
-    (DUEL_OCG_OBSOLETE_IGNITION) rather than the flagless option, which is a
-    deliberate approximation choice, not an oversight - see the dossier's
-    "Approximation choice" section for the qualitative reasoning (in short:
-    the flagless option gets scenario A - the single most common,
-    tournament-relevant case - wrong on every scenario, where MR1 only gets
-    the rarer scenario B wrong).
+    (DUEL_OCG_OBSOLETE_IGNITION) over the flagless option: this is a
+    deliberate, explicitly-argued PROJECT POLICY choice, not a claim that
+    period sources somehow prove it "closest" - see the dossier's
+    "Approximation choice" section for the full reasoning (in short: the
+    flagless option deletes the defining Summon-priority mechanic outright
+    - it gets BOTH Summon scenarios, A and B, wrong - while MR1 preserves
+    that mechanic for the Monster-Zone case and is wrong on B and C instead;
+    the project treats keeping the defining mechanic partially working as
+    preferable to removing it, without claiming this is quantitatively
+    "more common" or otherwise data-proven).
 
     Every candidate card here is EFFECT_TYPE_IGNITION with no registered
     Cost.* callback (Abare Ushioni, Destiny HERO - Malicious's cost is a bare
@@ -539,10 +554,11 @@ class IgnitionPriorityMatrixTest(unittest.TestCase):
     # -- Third engine configuration (docs/research/edison-rules.md's --------
     # -- approximation-choice review): MR1 with NO ignition-priority flag at -
     # -- all. Confirms empirically, not just from source, that this option --
-    # -- gets scenario A (Summon + own-side Monster Zone ignition effect - --
-    # -- the paradigmatic, tournament-relevant case) wrong on EVERY scenario,
-    # -- which is why it is not the profile's approximation of choice even
-    # -- though it makes no C/D-style overreach at all.
+    # -- gets BOTH Summon scenarios (A and B) wrong - it never grants the --
+    # -- special immediate window at all, deleting the Summon-priority     --
+    # -- mechanic outright - while getting both non-Summon scenarios (C   --
+    # -- and D) right. It is not the profile's chosen approximation; see  --
+    # -- the dossier's "Approximation choice" section for the reasoning.
 
     def test_summon_mzone_not_offered_under_bare_config(self):
         self.assertFalse(self._scenario_summon_mzone(DUEL_MODE_MR1_NO_IGNITION_FLAG))

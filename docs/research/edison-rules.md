@@ -78,18 +78,23 @@ the ids referenced per row.
   ignition-effect priority specifically (row 1), this Rulebook series' general prose
   turned out to be **insufficient on its own** — genuinely ambiguous about the exact
   Summon-vs-any-chain-end question — and the real answer came from a separate document
-  family instead: dated period community rulings forums, all six threads on Yugipedia's
-  "Yu-Gi-Oh! Ruling Queries" (`yugipedia-forum-chain-resolution-priority-2009` 2009-06,
-  `yugipedia-forum-costs-and-priority-2010` 2010-03-07, `yugipedia-forum-priority-dots-2010`
-  2010-03-12, `yugipedia-forum-ignition-effect-2010` 2010-03-24/25,
-  `yugipedia-forum-about-priority-2010` 2010-07, `yugipedia-forum-sangan-priority-2010`
+  family instead: dated period community rulings forums, all eight threads on the same
+  "Yu-Gi-Oh! Ruling Queries" forum (`yugiohwiki-forum-priority-q-2010` 2010-01-01 - legacy
+  Yu-Gi-Oh! Wiki/Fandom, answers the exact named Malicious/Summoned-Skull scenario directly
+  and states it applies to the TCG; `yugiohwiki-forum-priority-q-excl-2010` 2010-03-31 -
+  same legacy archive; `yugipedia-forum-chain-resolution-priority-2009` 2009-06;
+  `yugipedia-forum-costs-and-priority-2010` 2010-03-07; `yugipedia-forum-priority-dots-2010`
+  2010-03-12; `yugipedia-forum-ignition-effect-2010` 2010-03-24/25;
+  `yugipedia-forum-about-priority-2010` 2010-07; `yugipedia-forum-sangan-priority-2010`
   2010-10 — independently-dated contemporaneous examples from the *same* community forum,
   not independent authorities, see row 1's provenance note), plus a Konami OCG FAQ ruling
   accessed via a modern citation (`yugipedia-card-rulings-malicious`) and a weaker,
-  existence-only period snapshot of Yugipedia's own reference article
-  (`yugipedia-priority-article-2010-01-revision`, 2010-01-28 — the closest real match found
-  to a "Priority Q" lead that does not appear to exist under that title). Rulebook text
-  proved to be word-for-word stable across years except where a row below says otherwise.
+  separate period snapshot of Yugipedia's own reference article
+  (`yugipedia-priority-article-2010-01-revision`, 2010-01-28). An earlier pass of this
+  research incorrectly reported the "Priority Q" thread as not found; that was a genuine
+  research miss, corrected once the thread was directly located and independently
+  verified — see the provenance-correction banner under row 1. Rulebook text proved to be
+  word-for-word stable across years except where a row below says otherwise.
 - **The document families that do NOT answer these questions** (checked and confirmed
   empty, a useful negative result in its own right, and a correction to how this
   project's existing source notes characterised them): `ude-tournament-policy-appendix-a`
@@ -113,18 +118,38 @@ ocgcore · **E** the historical claim itself remains unresolved.
 
 | # | Historical behaviour | 2010 evidence | ocgcore mechanism (pinned commit, independently re-verified) | Currently in profile? | Action | Confidence |
 |---|---|---|---|---|---|---|
-| 1 | **Ignition Effect Priority: the turn player's special immediate window to activate an Ignition Effect as Chain Link 1, ahead of the opponent** (rewritten after correction — see banner above) | **[period-evidence, six independently-dated contemporaneous threads from the same community forum — not six independent authorities; see the provenance note below]** Not a general "any empty-chain moment" rule as the general Rulebook Priority prose alone might suggest, and not first-checked in this pass — the general prose (`konami-official-rulebook-v71-2010`: Ignition Effects usable "just by declaring its activation during your Main Phase"; "Turn Player's Priority... in each phase or step of their turn") is genuinely **ambiguous** on the exact question and is **insufficient on its own** to resolve it (an earlier pass in this research read it as supporting the broad rule; a reopened, adversarial pass found that reading too permissive). The question is resolved instead by **contemporaneous ruling discussions** — the strongest TCG-specific evidence found — all from Yugipedia's "Yu-Gi-Oh! Ruling Queries" community forum and all converging on the same shape: `yugipedia-forum-chain-resolution-priority-2009` (2009-06-10/11) states plainly that Ignition Effect Priority applies "if the Chain ends with the Turn Player Special Summoning a monster" and *not otherwise*; `yugipedia-forum-costs-and-priority-2010` (2010-03-07), `yugipedia-forum-priority-dots-2010` (2010-03-12), and `yugipedia-forum-ignition-effect-2010` (2010-03-24/25, three weeks before Edison) each frame a distinct worked example around a Summon; `yugipedia-forum-about-priority-2010` (2010-07-14/16) corroborates with two more Summon-framed examples; `yugipedia-forum-sangan-priority-2010` (2010-10-01) confirms the flip side — a Summon that itself triggers a Mandatory Trigger Effect does **not** grant the window. A period-adjacent Konami OCG FAQ ruling for the exact card this research's brief named (Destiny HERO - Malicious, discarded by Armageddon Knight — **not** a Summon), reached only via a modern secondary transcription (`yugipedia-card-rulings-malicious`), confirms **no** window in that negative case. A genuinely contemporaneous but weaker source, a 2010-01-28 snapshot of Yugipedia's own "Priority" reference article (`yugipedia-priority-article-2010-01-revision` — the closest real document found to the task's "Priority Q" lead, which does not appear to exist under that title), confirms the basic Summon-triggered mechanic already existed three months before Edison but does not itself state the location-unrestricted or gate-excludes-non-Summon specifics. **No period-primary Konami/UDE document stating the complete rule in its own words was found** — therefore confidence here is moderate-high, not absolute. None of these sources — nor edisonformat.com's own current, more detailed Priority page, which draws the identical distinction using the identical card (`edisonformat-priority-page`) — describe any Monster-Zone location restriction; Graveyard-resident Ignition Effects (Malicious, Plaguespreader Zombie) qualify equally. The TCG kept this exact rule until **2012-04-25**, two years after Edison (`average-duelist-2012-priority-change`). | See the behavioural matrix below — **no configuration tested** reproduces "gate = Summon-success only, location = unrestricted" exactly; each of the three real configurations evaluated couples the gate and location axes differently (`processor.cpp:796-836`, re-verified, and empirically confirmed by `tests/engine/test_historical_behaviour.py::IgnitionPriorityMatrixTest`). | Only the narrower `DUEL_OCG_OBSOLETE_IGNITION` (inherited from MR1) — **retained as a deliberate approximation, not an exact implementation; see "Approximation choice" below** | **D — cannot currently be reproduced exactly; recorded as a known_gap** (not **B**: adding `DUEL_TCG_FAST_EFFECT_IGNITION` was the earlier, now-reversed conclusion — it overreaches, see below) | **Moderate-high** for the historical rule itself (six independently-dated contemporaneous threads from one community forum plus a period-adjacent official-FAQ citation, no period source found describing a broader gate, but no period-primary document found stating the full rule directly); **high** for the engine-mismatch finding (direct source reading plus a 4-scenario, 3-configuration empirical test matrix). One agent in the reopened research flagged a legitimate tension worth recording: Konami's 2012 "Fast Effect Timing" replacement structurally treats "after a non-chain action" and "after a Chain resolves" as symmetric cases, which *could* be read to imply the pre-2012 rule also granted Ignition priority after any chain resolution — but no period-adjacent commentary ever describes the 2012 change that way, and every period source found is unanimous that only the Summon case granted it. |
+| 1 | **Ignition Effect Priority: the turn player's special immediate window to activate an Ignition Effect as Chain Link 1, ahead of the opponent** (rewritten after correction — see banner above; provenance corrected 2026-08-21, see second banner below) | **[period-evidence, eight independently-dated contemporaneous threads from the same community forum — not eight independent authorities; see the provenance note below]** Not a general "any empty-chain moment" rule as the general Rulebook Priority prose alone might suggest, and not first-checked in this pass — the general prose (`konami-official-rulebook-v71-2010`: Ignition Effects usable "just by declaring its activation during your Main Phase"; "Turn Player's Priority... in each phase or step of their turn") is genuinely **ambiguous** on the exact question and is **insufficient on its own** to resolve it (an earlier pass in this research read it as supporting the broad rule; a reopened, adversarial pass found that reading too permissive). The question is resolved instead by **contemporaneous ruling discussions** — the strongest TCG-specific evidence found, and the closest thing to a direct answer located in this entire research effort is `yugiohwiki-forum-priority-q-2010` (legacy Yu-Gi-Oh! Wiki/Fandom, question 2010-01-01 05:13 UTC, answer 06:05 UTC): asked whether Tribute-Summoning Summoned Skull using Destiny HERO - Malicious as tribute lets the turn player use priority to activate Malicious's Ignition Effect from the Graveyard, user Deus Ex Machina answers **yes** — "After Summoned Skull is Summoned, the last thing to happen is the Summon of a monster, so the Turn Player can has Priority to activate a monster's Ignition Effect... This applies to both \_CGs [OCG/TCG]" — then explicitly contrasts the negative case (Malicious sent to GY by Armageddon Knight/Foolish Burial, **not** a Summon): "the last thing to happen is something other than a monster being Summoned, so the Turn Player can't activate Ignition Effects at this time." This single thread directly supports **both** axes at once, using the exact card and exact scenario this research's brief named. `yugiohwiki-forum-priority-q-excl-2010` (2010-03-31, less than four weeks before Edison) independently corroborates the "doesn't have to be the Summoned monster" aspect with Catapult Turtle. Six more threads on the same forum converge on the same shape: `yugipedia-forum-chain-resolution-priority-2009` (2009-06-10/11) states plainly that Ignition Effect Priority applies "if the Chain ends with the Turn Player Special Summoning a monster" and *not otherwise*; `yugipedia-forum-costs-and-priority-2010` (2010-03-07), `yugipedia-forum-priority-dots-2010` (2010-03-12), and `yugipedia-forum-ignition-effect-2010` (2010-03-24/25) each frame a distinct worked example around a Summon; `yugipedia-forum-about-priority-2010` (2010-07-14/16) corroborates with two more Summon-framed examples; `yugipedia-forum-sangan-priority-2010` (2010-10-01) confirms the flip side — a Summon that itself triggers a Mandatory Trigger Effect does **not** grant the window. A period-adjacent Konami OCG FAQ ruling (the same #8231 citation `yugiohwiki-forum-priority-q-2010`'s own thread quotes), reached only via a modern secondary transcription (`yugipedia-card-rulings-malicious`), independently confirms the negative case. A weaker, separate contemporaneous source, a 2010-01-28 snapshot of Yugipedia's own "Priority" reference article (`yugipedia-priority-article-2010-01-revision`), confirms the basic Summon-triggered mechanic was already documented in the reference article at that date. **No period-primary Konami/UDE document stating the complete rule in its own words was found** — therefore confidence here is moderate-high, not absolute. None of these sources — nor edisonformat.com's own current, more detailed Priority page, which draws the identical distinction using the identical card (`edisonformat-priority-page`) — describe any Monster-Zone location restriction; Graveyard-resident Ignition Effects (Malicious, Plaguespreader Zombie) qualify equally. The TCG kept this exact rule until **2012-04-25**, two years after Edison (`average-duelist-2012-priority-change`). | See the behavioural matrix below — **no configuration tested** reproduces "gate = Summon-success only, location = unrestricted" exactly; each of the three real configurations evaluated couples the gate and location axes differently (`processor.cpp:796-836`, re-verified, and empirically confirmed by `tests/engine/test_historical_behaviour.py::IgnitionPriorityMatrixTest`). | Only the narrower `DUEL_OCG_OBSOLETE_IGNITION` (inherited from MR1) — **retained as a deliberate approximation, not an exact implementation; see "Approximation choice" below** | **D — cannot currently be reproduced exactly; recorded as a known_gap** (not **B**: adding `DUEL_TCG_FAST_EFFECT_IGNITION` was the earlier, now-reversed conclusion — it overreaches, see below) | **Moderate-high** for the historical rule itself (eight independently-dated contemporaneous threads from one community forum, including one — Forum:Priority Q — that answers the exact scenario named in this research's brief and states explicitly it applies to the TCG, plus a period-adjacent official-FAQ citation; no period source found describing a broader gate; but no period-primary Konami/UDE document found stating the full rule directly, so confidence is not raised to "high"); **high** for the engine-mismatch finding (direct source reading plus a 4-scenario, 3-configuration empirical test matrix). One agent in the reopened research flagged a legitimate tension worth recording: Konami's 2012 "Fast Effect Timing" replacement structurally treats "after a non-chain action" and "after a Chain resolves" as symmetric cases, which *could* be read to imply the pre-2012 rule also granted Ignition priority after any chain resolution — but no period-adjacent commentary ever describes the 2012 change that way, and every period source found is unanimous that only the Summon case granted it. |
 
-**Provenance note:** the six 2009–2010 threads above are all posts on the *same* Yugipedia
+> **Provenance correction (2026-08-21):** an earlier pass of this document stated that no
+> document titled "Priority Q" could be located and cited a 2010-01-28 Yugipedia article
+> revision as the closest real match. That was a genuine research miss, not a fabrication -
+> the exact thread exists (`yugiohwiki-forum-priority-q-2010`, on the legacy Yu-Gi-Oh!
+> Wiki/Fandom archive, dated 2010-01-01) and directly answers this research's central
+> question using the exact card and scenario the task's original brief named. A companion
+> thread, "Forum:Priority Q!" (`yugiohwiki-forum-priority-q-excl-2010`, 2010-03-31), was
+> also located and registered. Every statement claiming "Priority Q" was not found has been
+> removed from this document; the 2010-01-28 article revision remains cited as a separate,
+> weaker, genuinely contemporaneous source, not as a substitute for the now-located thread.
+
+**Provenance note:** the eight 2009–2010 threads above are all posts on the *same*
 "Yu-Gi-Oh! Ruling Queries" community forum (a period-contemporaneous venue, not an
-official Konami/UDE channel). They are cited as **independently-dated contemporaneous
-examples** — six separate points in time, from 2009-06 through 2010-10, each
-independently confirming the same shape of the rule with a different worked example — not
-as six *independent authorities* corroborating each other; a single incorrect community
-consensus on that forum could in principle have produced all six. This is why the table
-above still rates confidence "moderate-high," not "high": the convergence is real and
-meaningful (the same specific gate/location distinction recurs across ten months of
-unrelated worked examples, several volunteered by different users), but it is convergence
+official Konami/UDE channel) — six survive on the current Yugipedia site
+(`yugipedia.com`), and two (`yugiohwiki-forum-priority-q-2010`,
+`yugiohwiki-forum-priority-q-excl-2010`) were located on the *legacy* Yu-Gi-Oh! Wiki
+archive, now hosted at `yugioh.fandom.com` — the pre-fork wiki Yugipedia split from;
+identical-content mirrors of both also exist at the corresponding `yugipedia.com` URLs,
+carrying the same original timestamps, but this document cites the legacy
+`yugioh.fandom.com` URLs where that is where the page was actually located and verified,
+rather than silently relabelling them as native Yugipedia content. All eight are cited as
+**independently-dated contemporaneous examples** — eight separate points in time, from
+2009-06 through 2010-10, each independently confirming the same shape of the rule with a
+different worked example — not as eight *independent authorities* corroborating each
+other; a single incorrect community consensus on that forum could in principle have
+produced all eight. This is why the table above still rates confidence "moderate-high,"
+not "high": the convergence is real and meaningful (the same specific gate/location
+distinction recurs across sixteen months of unrelated worked examples, volunteered by
+several different users, including one thread — Forum:Priority Q — that answers the
+exact named scenario directly and states it applies to the TCG), but it is convergence
 within one community, not across independent communities or official documents.
 
 **Behavioural matrix for row 1** (docs cross-reference: `tests/engine/test_historical_behaviour.py::IgnitionPriorityMatrixTest`, 12 tests, all passing — engine facts below are empirically measured against the pinned core, not merely reasoned from source. Each cell is checked by locating the SPECIFIC message-sequence anchor for that scenario — the last `MSG_SUMMONED`/`MSG_SPSUMMONED` for the Summon scenarios, the last `MSG_CHAIN_END` for the chain-end scenarios — and scanning only the `MSG_SELECT_CHAIN` messages between that anchor and the next `MSG_SELECT_IDLECMD`, with a self-check asserting the candidate never appears in any *earlier* `MSG_SELECT_CHAIN` window; a Normal Summon produces an unrelated, earlier `MSG_SELECT_CHAIN` pair — "does anyone want to respond to the Summon declaration itself" — before `MSG_SUMMONED`, which an unanchored scan of the whole message list could in principle have conflated with the actual ignition-priority window):
@@ -140,11 +165,13 @@ No configuration is fully correct. `DUEL_TCG_FAST_EFFECT_IGNITION` fixes MR1's g
 error in scenario B but *introduces* a new error in scenario D that MR1 didn't have (MR1
 got D right by coincidence), while neither configuration fixes scenario C — adding it does
 not net improve accuracy, it just relocates the inaccuracy from one axis onto another. The
-flagless option gets both C and D right but is wrong on **both** Summon scenarios,
-including the single most common, tournament-relevant case (A). See "Approximation
-choice" below for why `DUEL_OCG_OBSOLETE_IGNITION` (plain MR1) is nonetheless the profile's
-choice, and what a minimal, *unimplemented* ygopro-core change would need to do to close
-this gap exactly: decouple `processor.cpp`'s single `is_flag(DUEL_TCG_FAST_EFFECT_IGNITION)`
+flagless option gets both C and D right but is wrong on **both** Summon scenarios (A and
+B) — it never grants the special immediate window at all, deleting the defining
+Summon-priority mechanic outright rather than approximating it imperfectly. See
+"Approximation choice" below for why `DUEL_OCG_OBSOLETE_IGNITION` (plain MR1) is
+nonetheless the profile's choice, and what a minimal, *unimplemented* ygopro-core change
+would need to do to close this gap exactly: decouple `processor.cpp`'s single
+`is_flag(DUEL_TCG_FAST_EFFECT_IGNITION)`
 check (currently gating BOTH the event-gate bypass at `processor.cpp:809` AND the
 location-filter bypass at `processor.cpp:826` together) into two independently settable
 flags/conditions — one controlling only the location filter (bypass it unconditionally, as
@@ -167,47 +194,47 @@ were evaluated, empirically, against all four scenarios (`IgnitionPriorityMatrix
 | `DUEL_OCG_OBSOLETE_IGNITION` (current) | Right | Wrong | Wrong | Right (by accident) |
 | `DUEL_TCG_FAST_EFFECT_IGNITION` | Right | Right | Wrong | Wrong |
 
-A naive cell-count says all three get exactly 2 of 4 right. That count is not the basis
-for this decision — what each configuration actually *permits a player to do* is:
+This is **not** a claim that period sources prove one configuration is objectively
+"closest" — no measurement of how often each scenario actually arose in 2010 tournament
+play exists, and none is claimed here. This project has not measured, and does not claim,
+that scenario A is the single most common priority situation, that non-Summon chain-end
+opportunities are quantitatively more frequent than Graveyard-ignition-after-Summon ones,
+or that scenario B is quantitatively rare. What follows is an explicit **project policy /
+modelling judgment**, stated as exactly that:
 
-- **No flag at all** silently removes Ignition Effect Priority as a mechanic entirely.
-  Concretely: a player who Normal Summons a monster and wants to immediately activate an
-  Ignition Effect (their own newly-Summoned monster's, or another Monster-Zone monster's)
-  loses the ability to lock that activation in as Chain Link 1 before the opponent gets a
-  chance to respond to anything. The period sources aren't abstract about the stakes here:
-  `yugipedia-forum-priority-dots-2010`'s own worked example is exactly this — Special
-  Summon Red-Eyes Darkness Metal Dragon, then activate its effect to revive Blue-Eyes
-  White Dragon *before* the opponent can Bottomless Trap Hole the newly-Summoned dragon.
-  Losing the flag doesn't just delay that activation to "later" - it can let the opponent's
-  removal resolve first, changing the outcome of the turn, not merely its ordering. This is
-  the single most common, paradigmatic use of the mechanic, and the flagless option gets it
-  wrong on every one of the four scenarios tested precisely because it gets this one wrong.
-- **`DUEL_OCG_OBSOLETE_IGNITION`** gets that paradigmatic case right (scenario A) and is
-  wrong in exactly one place: it withholds the window for a *different-location* ignition
-  effect after a Summon (scenario B, the Malicious case) and wrongly grants it after a
-  non-Summon chain-end restricted to the Monster Zone (scenario C). Its scenario-B failure
-  mode is a **denial** of an option the 2010 player should have had - annoying, and not
-  representative of the paradigmatic case, but the player is not left worse off than
-  turn-by-turn baseline play; nothing is taken away from them that they'd otherwise have
-  used to their advantage.
-- **`DUEL_TCG_FAST_EFFECT_IGNITION`** fixes scenario B but its scenario-C/D failure mode is
-  a **grant** of an option the 2010 player should NOT have had, and it fires on a much more
-  common trigger (any chain resolving, not specifically a Summon) than scenario B's trigger
-  (a Summon whose relevant ignition effect happens to sit in the Graveyard). A flag that
-  grants unearned options more often is judged the worse failure mode for representing a
-  historical ruleset, since it lets players do things 2010 Edison duelists genuinely could
-  not.
+- **No flag at all** deletes the defining Summon-priority mechanic entirely — the special
+  immediate "activate an Ignition Effect as Chain Link 1" window never exists under this
+  configuration, for any scenario, including the case the period sources most directly
+  illustrate: `yugipedia-forum-priority-dots-2010`'s own worked example is Special
+  Summoning Red-Eyes Darkness Metal Dragon, then activating its effect to revive Blue-Eyes
+  White Dragon *before* the opponent can Bottomless Trap Hole the newly-Summoned dragon -
+  losing the flag means that activation no longer happens first, which can change which
+  effect resolves, not merely reorder two effects that would have happened anyway.
+- **`DUEL_OCG_OBSOLETE_IGNITION`** preserves the Summon-priority mechanic for the
+  Monster-Zone case (scenario A) but has one false denial (scenario B: a Graveyard ignition
+  effect like Destiny HERO - Malicious's is wrongly withheld after a Summon) and one false
+  grant (scenario C: a Monster-Zone ignition effect is wrongly offered after an unrelated
+  chain resolves with no Summon at all).
+- **`DUEL_TCG_FAST_EFFECT_IGNITION`** preserves the mechanic for both Summon cases (A and
+  B) but grants historically-unsupported priority in both non-Summon cases (C and D) -
+  period sources describe no scenario in which a bare chain resolution (with no Summon)
+  grants Ignition Effect Priority.
 
-**Conclusion**: `DUEL_OCG_OBSOLETE_IGNITION` (i.e. plain MR1, unchanged) is retained as the
-profile's approximation, not because it is part of MR1's preset by default, but because
-it is judged - qualitatively, not by cell count - the least-wrong of the three real
-options: it protects the highest-stakes, most common case (A) that the flagless option
-loses entirely, while its own failure mode (B) is a narrower denial rather than the broader,
-more frequent over-grant `DUEL_TCG_FAST_EFFECT_IGNITION` introduces (C and D). This is an
-explicit compatibility choice, not an exact implementation, and both of its known-wrong
-cases (B: Graveyard/other-location ignition effects miss their priority window after a
-Summon; C: a Monster-Zone ignition effect wrongly gets a priority window after an unrelated
-chain resolves) remain recorded, unchanged, in `known_gaps`.
+**Project policy choice**: the project retains `DUEL_OCG_OBSOLETE_IGNITION` as a
+conservative compatibility compromise - it preserves the defining Summon-priority
+mechanic (partially - correctly for the Monster-Zone case, incorrectly for the Graveyard
+case) rather than deleting it outright (the flagless option), without expanding the
+privilege to every location after arbitrary non-Summon chain ends (what
+`DUEL_TCG_FAST_EFFECT_IGNITION` does). This is a modelling judgment about which kind of
+wrongness is more acceptable to ship, not a claim derived from the historical sources
+themselves, and it is not risk-free: denying a legal Ignition Effect Priority option
+(scenario B, this configuration's own failure mode) is a real rules deviation that can
+alter duel outcomes exactly as much as wrongly granting one can - the project does not
+claim the retained configuration is safe or harmless, only that it is the compromise
+chosen. This is an explicit compatibility choice, not an exact implementation, and both of
+its known-wrong cases (B: Graveyard/other-location ignition effects miss their priority
+window after a Summon; C: a Monster-Zone ignition effect wrongly gets a priority window
+after an unrelated chain resolves) remain recorded, unchanged, in `known_gaps`.
 | 2 | Continuous Trap's bare activation and its separately-usable trigger/quick effect forced into separate chains | **[period-adjacent, inconclusive]** No general rulebook statement found either way. A Konami TSHD rulings PDF (dated 2010-04-30, 6 days *after* Edison) shows one specifically-worded card (Roar of the Earthbound) whose activation and effect occur "on the same Chain," which is suggestive but does not confirm or refute the *general* mechanic, and postdates Edison anyway. | `DUEL_USE_TRAPS_IN_NEW_CHAIN` (`processor.cpp:3754`, re-verified): with the flag, the "combine into the same chain" prompt (message 94) is skipped and the combination is disallowed. | No | **E — unresolved** | Low. Leave the profile as-is (flag absent) rather than guess; the one card-specific data point available doesn't map cleanly onto the general mechanic. |
 | 3 | Damage Step chain-window structure: finer (~7 distinct sub-step timings) vs. coarser ("6-step") | **[period-evidence + period-adjacent]** Rulebook v7.0/v7.1 (pre-Edison) describes Damage Step activation limits in prose without naming sub-steps. A dated Pojo.com forum post (**2009-04-16, a full year before Edison**), citing the same rulebook's page numbers, documents an explicit **7-substep** structure matching (sub-step for sub-step) what EdisonFormat.com's "Rule 8" presents today. | `DUEL_6_STEP_BATLLE_STEP` (`processor.cpp:2305-2315`, re-verified): suppresses/merges some Damage Step chain windows into a coarser structure. | No | **Confirmed correct as-is — do not add.** | Medium-high. The finer (non-"6-step") structure is attested a year before Edison via a source citing the operative rulebook by page number; the exact 2005→2009 transition date remains `[unknown]`. |
 | 3b | The companion flag restricting damage-substep chains to one per window | Not independently researched by name; inferred from row 3 (same underlying Damage Step mechanism, always used together with it in the GOAT composite). | `DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP` (`processor.cpp:2315,2356,...`, re-verified mechanically but not period-researched). | No | **Inferred correct as-is — do not add**, lower confidence than row 3 | Low-medium (inference only, not directly researched). |
