@@ -74,10 +74,32 @@ reflects that.
    the rest proven harmless with evidence, mechanically recomputed where
    checkable). Future importer runs that surface new anomalies fail validation
    until the ledger accounts for them.
-5. **Edison rules review.** Compare EdisonFormat.com's 13 rule differences against the
-   ocgcore flag axes; decide whether the profile should add TCG-variant flags
-   (`DUEL_TCG_FAST_EFFECT_IGNITION`, SEGOC flags, 6-step damage step) beyond plain
-   MR1, with sources; record what the engine cannot reproduce in `known_gaps`.
+5. ~~**Edison rules review.**~~ **Done (2026-08-21).** Every GOAT-composite flag was
+   independently checked against period Konami rulebooks (2008/2010/2011 editions,
+   bracketing Edison) rather than assumed from GOAT or from EdisonFormat.com's naming.
+   Two flags are confirmed necessary and added, each backed by a period source and an
+   engine test that fails without it: `DUEL_TCG_FAST_EFFECT_IGNITION` (the TCG's broader
+   ignition-priority condition lasted until 2012, two years after Edison) and
+   `DUEL_0_ATK_DESTROYED` (the 0-ATK tie exception wasn't added until May 2011). Four
+   more were confirmed *not* needed — the modern ocgcore default already matches 2010
+   TCG play, so adding them would have imported behaviour Edison never had:
+   `DUEL_6_STEP_BATLLE_STEP`/`DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP`,
+   `DUEL_EQUIP_NOT_SENT_IF_MISSING_TARGET`, `DUEL_STORE_ATTACK_REPLAYS`. The profile
+   (`data/rule-profiles/tcg-mr1-edison.json`) is now a custom 8-flag combination rather
+   than a bare `DUEL_MODE_MR1` alias. See `docs/research/edison-rules.md` for the full
+   evidence table and the adversarial review. Follow-up below (5a).
+
+   5a. **SEGOC ordering remains unresolved.** The period-primary Official Rulebook
+   (stable 2008-2011) describes a simple two-tier simultaneous-trigger order with no
+   mandatory/optional split and no trigger-order tiebreak, directly contradicting
+   EdisonFormat.com's claimed four-tier structure, which is traceable only to a 2012
+   forum thread (not a period document). `DUEL_TCG_SEGOC_NONPUBLIC` and
+   `DUEL_TCG_SEGOC_FIRSTTRIGGER` are left out of the profile pending better evidence —
+   candidate lead: an unlocated Konami rulebook edition between v8.0 (Nov 2011) and v10
+   (2017) that may be where the stricter structure actually entered print. Three smaller
+   flags (`DUEL_USE_TRAPS_IN_NEW_CHAIN`, `DUEL_TRIGGER_WHEN_PRIVATE_KNOWLEDGE`,
+   `DUEL_CAN_REPOS_IF_NON_SUMPLAYER`) are similarly left unresolved in `known_gaps` for
+   lack of any period source in either direction.
 
 ## Phase 2 — framework completeness
 

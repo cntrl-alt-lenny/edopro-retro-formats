@@ -286,7 +286,13 @@ class RealDataTest(unittest.TestCase):
             "DUEL_TCG_SEGOC_NONPUBLIC",
             "DUEL_TCG_SEGOC_FIRSTTRIGGER",
         }
-        self.assertEqual(mr1, set(self.repo.rule_profiles["rules-tcg-mr1-edison"].flags))
+        # Edison is no longer a bare MR1 alias: docs/research/edison-rules.md's
+        # evidence table adds two flags researched and confirmed against period
+        # (2008-2011) Konami rulebooks - broader TCG ignition priority (in force
+        # until 2012, two years after Edison) and 0-ATK ties destroying both
+        # monsters (unexcepted until May 2011, 13 months after Edison).
+        edison_extra = {"DUEL_TCG_FAST_EFFECT_IGNITION", "DUEL_0_ATK_DESTROYED"}
+        self.assertEqual(mr1 | edison_extra, set(self.repo.rule_profiles["rules-tcg-mr1-edison"].flags))
         self.assertEqual(mr1 | goat_extra, set(self.repo.rule_profiles["rules-tcg-goat"].flags))
 
 

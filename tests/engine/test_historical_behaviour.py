@@ -36,12 +36,32 @@ IMPERIAL_ORDER_PRE = 511002996
 RESCUE_CAT_MODERN = 14878871
 RESCUE_CAT_PRE_ERRATA = 511002992
 NIMBLE_MOMONGA = 22567609  # Level 2 Beast: legal Rescue Cat target
+MAUSOLEUM_OF_THE_EMPEROR = 80921533  # Field Spell, ignition effect, LOCATION_FZONE
+DARK_HOLE = 53129443
+GIANT_RAT = 4335645
+MILLENNIUM_SHIELD = 32012841  # vanilla, ATK 0 / DEF 3000
+
+# Individual flags this test module checks in isolation, beyond the composite
+# modes above (values from the pinned ocgapi_constants.h; docs/research/
+# edison-rules.md records the source line for each).
+DUEL_ATTACK_FIRST_TURN = 0x02  # not era-relevant here - only lets the puzzle attack on turn 1
+DUEL_0_ATK_DESTROYED = 0x10000000
+DUEL_TCG_FAST_EFFECT_IGNITION = 0x400000000
 
 
 def scenario(flags: int, setup: str, seed: int = 7) -> H.Duel:
     duel = H.Duel(flags=flags, seed=seed)
     duel.load_scenario(
-        "Debug.ReloadFieldBegin(0x2000000,4)\n"  # DUEL_PSEUDO_SHUFFLE-free; flag param is for reload only
+        # Debug.ReloadFieldBegin(flag, rule, build) OVERWRITES field::core.duel_options
+        # with `flag` (libdebug.cpp ReloadFieldBegin: `pduel->game_field->core.duel_options
+        # = flag`, run AFTER OCG_CreateDuel already set it from `flags` via field::field()
+        # at field.cpp:68) - so `flag` here must be the SAME `flags` the scenario was built
+        # with, or the intended duel-options are silently discarded and every scenario runs
+        # under whatever `flag`/`rule` happened to be hardcoded instead. `rule=0` skips the
+        # rule>0-implies-OR-in-a-DUEL_MODE_MR<rule> convenience the API also offers (a bare
+        # 1-5 forwarded as `rule` ORs in that MR preset on top of `flag`; we pass our own
+        # complete flag set instead, so no preset should be added on top).
+        f"Debug.ReloadFieldBegin({flags},0)\n"
         "Debug.SetPlayerInfo(0,8000,0,0)\n"
         "Debug.SetPlayerInfo(1,8000,0,0)\n"
         + setup
@@ -195,6 +215,162 @@ class ImperialOrderEraBehaviourTest(unittest.TestCase):
             m for m in duel.moves() if m["to"]["location"] == H.LOCATION_GRAVE
         ]
         self.assertFalse(destroyed)
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class IgnitionPriorityFlagTest(unittest.TestCase):
+    """DUEL_TCG_FAST_EFFECT_IGNITION vs the OCG_OBSOLETE_IGNITION already in
+    every MR1-based profile (docs/research/edison-rules.md #1): after a chain
+    resolves (EVENT_CHAIN_END), the engine offers an automatic priority
+    chain-window for ignition effects, queued from `case 8` in
+    field::process(Processors::PointEvent) (processor.cpp). With ONLY
+    OCG_OBSOLETE_IGNITION, the candidate scan filters to
+    `phandler->current.location == LOCATION_MZONE` - a Field Spell's ignition
+    effect is never offered this way. With DUEL_TCG_FAST_EFFECT_IGNITION, that
+    location filter is bypassed entirely (`is_flag(...) || location==MZONE`),
+    so the SAME Field Spell effect IS offered.
+
+    Mausoleum of the Emperor (Field Spell, ignition, LOCATION_FZONE) makes
+    this the cleanest observable case: activate Dark Hole (destroys a monster,
+    chain resolves), then check whether the very next MSG_SELECT_CHAIN for
+    the turn player lists Mausoleum's code as a candidate.
+
+    (Both configurations must go through Debug.ReloadFieldBegin(flags, 0) -
+    passing `flags` positionally with rule=0, not a hardcoded (0x2000000,4) -
+    since ReloadFieldBegin OVERWRITES field::core.duel_options with its own
+    first argument (libdebug.cpp), discarding whatever OCG_CreateDuel was
+    given. `scenario()` above was fixed to do this; a test that bypasses it
+    would silently exercise the wrong flags for BOTH configurations, which is
+    exactly the failure mode that produced no observable difference in early
+    manual probing of this same flag pair before the fix.)
+    """
+
+    def _mausoleum_priority_after_chain_end(self, flags: int) -> bool:
+        duel = H.Duel(flags=flags, seed=7)
+        duel.load_scenario(
+            f"Debug.ReloadFieldBegin({flags},0)\n"
+            "Debug.SetPlayerInfo(0,8000,0,0)\n"
+            "Debug.SetPlayerInfo(1,8000,0,0)\n"
+            f"Debug.AddCard({MAUSOLEUM_OF_THE_EMPEROR},0,0,LOCATION_FZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({SUMMONED_SKULL},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+            f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
+            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            "Debug.ReloadFieldEnd()\n"
+        )
+        self.addCleanup(duel.close)
+        duel.start()
+        # Two ignition-type effects are offered from hand at Main Phase 1
+        # start: Mausoleum's own "activate" wrapper (index 0) and Dark Hole
+        # (index 1) - Mausoleum's own activation isn't what's under test here.
+        duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 1))  # activate Dark Hole
+        duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
+        duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
+        duel.run()
+        chain_end_at = next(
+            i for i, m in enumerate(duel.messages) if m.type == H.MSG_CHAIN_END
+        )
+        for m in duel.messages[chain_end_at + 1 :]:
+            if m.type != H.MSG_SELECT_CHAIN:
+                continue
+            m._buf.seek(0)
+            player = m.u8()
+            m.u8()  # spe_count
+            m.u8()  # forced
+            m.u32()  # hint timing 1
+            m.u32()  # hint timing 2
+            count = m.u32()
+            codes = []
+            for _ in range(count):
+                codes.append(m.u32())
+                m.u8()
+                m.u8()
+                m.u32()
+            if player == 0 and MAUSOLEUM_OF_THE_EMPEROR in codes:
+                return True
+        return False
+
+    def test_ocg_obsolete_ignition_alone_excludes_field_spell(self):
+        # Negative control: plain MR1 (rules-tcg-goat's baseline, and the
+        # Edison profile's own baseline before docs/research/edison-rules.md
+        # #1 added DUEL_TCG_FAST_EFFECT_IGNITION on top of it). This must
+        # FAIL to offer Mausoleum here, proving the OCG-style condition alone
+        # does not grant Field/Spell-zone ignition priority - the divergence
+        # the next test shows the flag actually fixes.
+        self.assertFalse(
+            self._mausoleum_priority_after_chain_end(DUEL_MODE_MR1),
+            "plain MR1 (OCG_OBSOLETE_IGNITION only) must not offer a "
+            "Field Spell's ignition effect via the priority chain window",
+        )
+
+    def test_tcg_fast_effect_ignition_offers_field_spell(self):
+        self.assertTrue(
+            self._mausoleum_priority_after_chain_end(
+                DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION
+            ),
+            "DUEL_TCG_FAST_EFFECT_IGNITION must offer a Field Spell's "
+            "ignition effect via the priority chain window right after a "
+            "chain ends - the location filter is bypassed for this flag",
+        )
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class ZeroAtkBattleFlagTest(unittest.TestCase):
+    """DUEL_0_ATK_DESTROYED (docs/research/edison-rules.md #4): two monsters
+    with equal ATK destroy each other in battle by default UNLESS that ATK is
+    0, per processor.cpp's battle-damage-calculation tie branch
+    (`if(a != 0 || is_flag(DUEL_0_ATK_DESTROYED)) { bd[0]=bd[1]=true; }`).
+    Two 0-ATK monsters (Millennium Shield, vanilla) battling each other are
+    therefore destroyed only with the flag set."""
+
+    def _both_zero_atk_destroyed(self, flags: int) -> int:
+        duel = H.Duel(flags=flags, seed=7)
+        duel.load_scenario(
+            f"Debug.ReloadFieldBegin({flags},0)\n"
+            "Debug.SetPlayerInfo(0,8000,0,0)\n"
+            "Debug.SetPlayerInfo(1,8000,0,0)\n"
+            f"Debug.AddCard({MILLENNIUM_SHIELD},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({MILLENNIUM_SHIELD},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            "Debug.ReloadFieldEnd()\n"
+        )
+        self.addCleanup(duel.close)
+        duel.start()
+        duel.respond(H.MSG_SELECT_IDLECMD, lambda p: H.answer_idle(6))  # to Battle Phase
+        duel.default_response(H.MSG_SELECT_IDLECMD, lambda p: H.answer_idle(7))  # else: to End Phase
+        duel.respond(H.MSG_SELECT_BATTLECMD, lambda p: H.answer_battle(1, 0))  # attack
+        duel.default_response(H.MSG_SELECT_BATTLECMD, lambda p: H.answer_battle(3))  # else: to End
+        duel.default_response(H.MSG_SELECT_CARD, H.answer_cards(0))
+        duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
+        duel.run(turns=1)
+        destroyed = [
+            m
+            for m in duel.moves()
+            if m["code"] == MILLENNIUM_SHIELD
+            and m["from"]["location"] == H.LOCATION_MZONE
+            and m["to"]["location"] == H.LOCATION_GRAVE
+        ]
+        return len(destroyed)
+
+    def test_modern_default_neither_zero_atk_monster_is_destroyed(self):
+        # Negative control: plain MR1 (rules-tcg-goat's baseline, and the
+        # Edison profile's own baseline before docs/research/edison-rules.md
+        # #6 added DUEL_0_ATK_DESTROYED on top of it). This must FAIL to
+        # destroy either monster, matching the modern default and showing
+        # the divergence the next test shows the flag actually fixes.
+        self.assertEqual(
+            0,
+            self._both_zero_atk_destroyed(DUEL_MODE_MR1 | DUEL_ATTACK_FIRST_TURN),
+            "without DUEL_0_ATK_DESTROYED, two 0-ATK monsters tying in "
+            "battle must NOT be destroyed (modern default)",
+        )
+
+    def test_flag_destroys_both_zero_atk_monsters(self):
+        self.assertEqual(
+            2,
+            self._both_zero_atk_destroyed(
+                DUEL_MODE_MR1 | DUEL_0_ATK_DESTROYED | DUEL_ATTACK_FIRST_TURN
+            ),
+            "DUEL_0_ATK_DESTROYED must destroy BOTH 0-ATK monsters in a tied battle",
+        )
 
 
 if __name__ == "__main__":

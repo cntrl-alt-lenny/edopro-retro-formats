@@ -244,6 +244,69 @@
       "title": "Konami premier-event card-legality FAQs 2009-2010 (US Nationals 2009, Regionals, 2010 US WCQ; archived) and the 2010-03-19 Duel Terminal legality article",
       "url": "https://web.archive.org/web/20090706172551/http://www.yugioh-card.com/en/events/US_nationalsfaq_2009.html",
       "notes": "Konami-era legality practice: per-event dated legal lists. Evidence that Europe-only GX Tag Force 3 promos (Gallis the Star Beast, Red-Eyes Wyvern, Darkness Destroyer) were explicitly legal at US premier events 2009-2010, and that Duel Terminal machine-exclusive cards were NOT legal until released in another product (mid-2009 FAQs naming Ally of Justice Catastor; Kevin Tewart's 2010-03-19 strategy-site article; the June 2010 US WCQ FAQ enumerating still-illegal DT01/DT02 numbers). Local copies cached; retrieved 2026-08-20."
+    },
+    {
+      "id": "konami-official-rulebook-v71-2010",
+      "kind": "official",
+      "title": "Konami \"OFFICIAL RULEBOOK Version 7.1\" (archived 2010-03-30, 25 days before SJC Edison)",
+      "url": "https://web.archive.org/web/20100330231827/http://www.yugioh-card.com:80/en/rulebook/YGO_BegGuide_Ver7-1.pdf",
+      "notes": "The general TCG rulebook current at Edison. Defines Ignition Effects as usable \"just by declaring its activation during your Main Phase\" (not gated to right-after-Summon or Monster-Zone-only) and describes the pre-2012 \"Priority\" turn-structure system in full. States the ATK-tie battle rule (\"both monsters are destroyed\") with no 0-ATK exception. Text verbatim-identical to the Dec-2008 V7.0 capture and the Nov-2011 V8.0 capture (which already includes Xyz Monsters), so this document brackets Edison on both sides. Retrieved 2026-08-21."
+    },
+    {
+      "id": "konami-rulebook-2008-v70",
+      "kind": "official",
+      "title": "Konami \"Official Rulebook\" Version 7.0 (archived 2008-12-30)",
+      "url": "https://web.archive.org/web/20081230072315/http://www.yugioh-card.com:80/en/gameplay/rulebook/V7_English_Rlbk_lores.pdf",
+      "notes": "Earlier bracket for the V7.1 (2010) rulebook comparison: confirms Ignition Effect/Priority wording and the ATK-tie battle rule were already the same 16 months before Edison, not a recent change."
+    },
+    {
+      "id": "konami-new-master-rules-rulebook-2011",
+      "kind": "official",
+      "title": "Konami \"New Master Rules\" rulebook edition (archived 2011-05-16)",
+      "url": "https://web.archive.org/web/20110516005009/http://www.yugioh-card.com:80/en/rulebook/EN_Rulebook_lr.pdf",
+      "notes": "First rulebook edition found to add the explicit \"0 ATK monsters... neither monster is destroyed\" exception (p.43) - dates the 0-ATK-destroyed-to-0-ATK-not-destroyed change to after this edition (13 months after Edison), not before it. Priority/Ignition-Effect prose is otherwise unchanged from the 2008/2010 editions."
+    },
+    {
+      "id": "konami-fast-effect-timing-page",
+      "kind": "official",
+      "title": "Konami \"Fast Effect Timing\" flowchart page (earliest capture 2012-04-27)",
+      "url": "https://web.archive.org/web/20120427213559/http://www.yugioh-card.com:80/en/gameplay/fasteffects_timing.html",
+      "notes": "The page EdisonFormat.com cites as its baseline for Ignition Effect Priority - but its earliest archive capture is two days after the TCG adopted the narrower OCG-style ignition condition (2012-04-25), i.e. it postdates Edison by two years and documents the era AFTER the one it is cited for. Not evidence of April 2010 TCG procedure by itself."
+    },
+    {
+      "id": "average-duelist-2012-priority-change",
+      "kind": "community-site",
+      "title": "Average Duelist blog, \"Rulebook Update: Fast Effects and Priority\" (2012-04-25)",
+      "url": "https://averageduelist.blogspot.com/2012/04/fast-effects-and-priority.html",
+      "notes": "Contemporaneous (dated the day of the change) community report that the TCG adopted the OCG's narrower ignition-priority ruling on 2012-04-25, explicitly confirming TCG and OCG differed on this point before that date - the change is two years after Edison."
+    },
+    {
+      "id": "edisonformat-priority-page",
+      "kind": "community-site",
+      "title": "EdisonFormat.com, \"What is Priority?\" (/priority.html)",
+      "url": "https://www.edisonformat.com/priority.html",
+      "notes": "The community's own formalization of \"Ignition Effect Priority\" for Edison, explicitly stated to be the community's OWN ADDITION on top of Konami's (much later, 2012-era) fast-effect-timing flowchart - a lead, not itself period evidence. Its narrower framing (Summon-response-only) is a pedagogical simplification; the period rulebook text (konami-official-rulebook-v71-2010) is broader."
+    },
+    {
+      "id": "konami-advanced-gameplay-faq-2008",
+      "kind": "official",
+      "title": "Konami \"Advanced Gameplay FAQ\" page, section \"Simultaneous Effects\" (archived 2008-12-15 / 2009-01-05)",
+      "url": "https://web.archive.org/web/20081215065552/http://www.yugioh-card.com:80/en/gameplay/faqs/advancedgameplay/",
+      "notes": "Official FAQ (not the rulebook booklet) describing SEGOC as a simple two-tier system - turn player's simultaneous Trigger Effects first (freely ordered), then the opponent's - citing \"pages 35-37 of the Official Rulebook version 6.0\", which pushes this rule's attested pedigree back to ~2007/08. No mandatory-before-optional split or trigger-order tiebreak appears in this text. Worked example given: Mystic Tomato vs. Mystic Tomato."
+    },
+    {
+      "id": "pojo-damage-step-2009",
+      "kind": "community-site",
+      "title": "Pojo.com Forums, \"Rulings FAQ: PLEASE READ BEFORE POSTING!\" post by gateguardian44 (2009-04-16)",
+      "url": "https://web.archive.org/web/20240105023004/https://www.pojo.biz/board/showpost.php?p=12985118&postcount=5",
+      "notes": "Dated a full year before Edison, explicitly citing 'Pgs. 34-36 of the rulebook (ver. 7.0)' and laying out a 7-Substep Damage Step structure essentially identical, sub-step for sub-step, to what edisonformat.com/.net present today as Edison's '7-timing Damage Step'. Period-adjacent secondary evidence that the finer (non-GOAT-'6-step') Damage Step structure was already in place at least a year before Edison; the exact 2005-to-2009 transition date remains unknown."
+    },
+    {
+      "id": "duelistgroundz-segoc-in-japan-2012",
+      "kind": "community-site",
+      "title": "DuelistGroundz \"OCG Land\" forum thread, \"SEGOC in Japan\" (posted 2012-06-26 through 2012-06-29)",
+      "url": "https://web.archive.org/web/20211017033702/http://duelistgroundz.com/index.php?/topic/145114-segoc-in-japan/",
+      "notes": "Two posters (ness00, AEtherchild) claim the four-tier mandatory-before-optional SEGOC structure with an earlier-trigger tiebreak was already unwritten TCG tournament-floor practice 'for years' before 2012, contradicting the period-primary Official Rulebook text (unchanged 2008-2011, konami-official-rulebook-v71-2010) which describes only a simple two-tier system. Two years after Edison and uncorroborated by any dated 2008-2011 document; presented as a genuine, unresolved tension rather than a settled answer - see docs/research/edison-rules.md."
     }
   ]
 }
