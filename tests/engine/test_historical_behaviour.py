@@ -36,10 +36,11 @@ IMPERIAL_ORDER_PRE = 511002996
 RESCUE_CAT_MODERN = 14878871
 RESCUE_CAT_PRE_ERRATA = 511002992
 NIMBLE_MOMONGA = 22567609  # Level 2 Beast: legal Rescue Cat target
-MAUSOLEUM_OF_THE_EMPEROR = 80921533  # Field Spell, ignition effect, LOCATION_FZONE
-DARK_HOLE = 53129443
-GIANT_RAT = 4335645
 MILLENNIUM_SHIELD = 32012841  # vanilla, ATK 0 / DEF 3000
+ABARE_USHIONI = 89718302  # ignition, LOCATION_MZONE, no cost/target/condition
+MALICIOUS = 9411399  # "Destiny HERO - Malicious": ignition, LOCATION_GRAVE, cost banishes itself
+OOKAZI = 19523799  # Normal Spell: no target/condition/deck dependency, resolves without touching the field
+VANILLA_NORMAL_SUMMON = 97017120  # "Giant Rat": Level 4 EARTH, summon doesn't itself start a chain
 
 # Individual flags this test module checks in isolation, beyond the composite
 # modes above (values from the pinned ocgapi_constants.h; docs/research/
@@ -218,98 +219,249 @@ class ImperialOrderEraBehaviourTest(unittest.TestCase):
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class IgnitionPriorityFlagTest(unittest.TestCase):
-    """DUEL_TCG_FAST_EFFECT_IGNITION vs the OCG_OBSOLETE_IGNITION already in
-    every MR1-based profile (docs/research/edison-rules.md #1): after a chain
-    resolves (EVENT_CHAIN_END), the engine offers an automatic priority
-    chain-window for ignition effects, queued from `case 8` in
-    field::process(Processors::PointEvent) (processor.cpp). With ONLY
-    OCG_OBSOLETE_IGNITION, the candidate scan filters to
-    `phandler->current.location == LOCATION_MZONE` - a Field Spell's ignition
-    effect is never offered this way. With DUEL_TCG_FAST_EFFECT_IGNITION, that
-    location filter is bypassed entirely (`is_flag(...) || location==MZONE`),
-    so the SAME Field Spell effect IS offered.
+class IgnitionPriorityMatrixTest(unittest.TestCase):
+    """Ignition Effect Priority (docs/research/edison-rules.md #1, corrected):
+    a 2x2 behavioural matrix, independently re-derived from the pinned core
+    after review flagged that the original single Mausoleum-of-the-Emperor
+    test could have been validating the WRONG Edison behaviour.
 
-    Mausoleum of the Emperor (Field Spell, ignition, LOCATION_FZONE) makes
-    this the cleanest observable case: activate Dark Hole (destroys a monster,
-    chain resolves), then check whether the very next MSG_SELECT_CHAIN for
-    the turn player lists Mausoleum's code as a candidate.
+    FreeChain's "case 8" (processor.cpp, the "obsolete ignition effect
+    ruling" block) grants a special IMMEDIATE priority window - activate an
+    Ignition Effect as Chain Link 1, before the opponent gets any response -
+    gated on two independent axes that the two existing flags each couple
+    together in a DIFFERENT single direction:
 
-    (Both configurations must go through Debug.ReloadFieldBegin(flags, 0) -
-    passing `flags` positionally with rule=0, not a hardcoded (0x2000000,4) -
-    since ReloadFieldBegin OVERWRITES field::core.duel_options with its own
-    first argument (libdebug.cpp), discarding whatever OCG_CreateDuel was
-    given. `scenario()` above was fixed to do this; a test that bypasses it
-    would silently exercise the wrong flags for BOTH configurations, which is
-    exactly the failure mode that produced no observable difference in early
-    manual probing of this same flag pair before the fix.)
+      gate:     "the event was EVENT_CHAIN_END, OR the turn player just
+                 Normal/Special/Flip-Summoned"           (OCG_OBSOLETE_IGNITION)
+             vs "any time the chain is empty in Main Phase" (TCG_FAST_EFFECT_IGNITION)
+      location: LOCATION_MZONE only                        (OCG_OBSOLETE_IGNITION)
+             vs unrestricted                                (TCG_FAST_EFFECT_IGNITION)
+
+    Period rulings research (docs/research/edison-rules.md #1) concluded 2010
+    TCG practice was a hybrid of these that NEITHER existing flag reproduces:
+    gate = Summon success ONLY (NOT also a bare chain-end with no Summon),
+    location = unrestricted. This class tests all four corners of that 2x2
+    (Summon vs non-Summon chain-end x candidate in the Monster Zone vs
+    elsewhere) against both existing configurations, to show precisely where
+    each one matches or overreaches relative to the derived historical rule -
+    scenarios A and B are exactly reproduced by MR1|TCG_FAST_EFFECT_IGNITION;
+    C and D are NOT, by either configuration, and are the reason
+    DUEL_TCG_FAST_EFFECT_IGNITION was NOT added to the Edison profile (see the
+    dossier's Decision section) - this is an ENGINE-LEVEL KNOWN GAP, not
+    something either flag combination can currently represent exactly.
+
+    Every candidate card here is EFFECT_TYPE_IGNITION with no registered
+    Cost.* callback (Abare Ushioni, Destiny HERO - Malicious's cost is a bare
+    self-banish, not a SetCost callback) - a card using SetCost(Cost.PayLP)
+    was tried first (Gear Golem the Moving Fortress) and never appeared as a
+    case-8 candidate under ANY flag configuration, including ones that must
+    logically include it; that turned out to be specific to how case 8's
+    synthetic empty event interacts with a registered Cost callback, not a
+    fact about the ignition-priority mechanism itself, so it was dropped as a
+    test subject to avoid conflating an unrelated card-script quirk with the
+    behaviour under test.
+
+    (All scenarios must go through Debug.ReloadFieldBegin(flags, 0) - passing
+    `flags` positionally with rule=0 - since ReloadFieldBegin OVERWRITES
+    field::core.duel_options with its own first argument (libdebug.cpp),
+    discarding whatever OCG_CreateDuel was given; `scenario()`'s docstring
+    above has the full explanation.)
     """
 
-    def _mausoleum_priority_after_chain_end(self, flags: int) -> bool:
+    @staticmethod
+    def _decode_idle(prompt: H.Message):
+        prompt._buf.seek(0)
+        prompt.u8()  # player
+        lists: dict[str, list[int]] = {}
+        for name, entry_size in (
+            ("summonable", 10),
+            ("spsummonable", 10),
+            ("repositionable", 7),
+            ("msetable", 10),
+            ("ssetable", 10),
+        ):
+            count = prompt.u32()
+            codes = []
+            for _ in range(count):
+                codes.append(prompt.u32())
+                prompt._buf.read(entry_size - 4)
+            lists[name] = codes
+        count = prompt.u32()
+        activatable = []
+        for _ in range(count):
+            activatable.append(prompt.u32())
+            prompt.u8(); prompt.u8(); prompt.u32(); prompt.u64(); prompt.u8()
+        lists["activatable"] = activatable
+        return lists
+
+    def _offered_via_priority_window(
+        self, flags: int, setup: str, first_action, candidate_code: int
+    ) -> bool:
+        """Drive `first_action` (a callable(idle_lists) -> (action, index))
+        from the very first MSG_SELECT_IDLECMD, then scan every
+        MSG_SELECT_CHAIN afterwards for `candidate_code` offered to player 0 -
+        i.e. specifically the IMMEDIATE case-8 priority pop-up, not merely
+        "is it activatable via the normal idle-command menu" (which every
+        Ignition Effect always is, unconditionally, via a completely separate
+        always-on scan later in the same processor file - that is NOT what
+        DUEL_OCG_OBSOLETE_IGNITION/DUEL_TCG_FAST_EFFECT_IGNITION control, and
+        conflating the two was an earlier dead end in this investigation)."""
         duel = H.Duel(flags=flags, seed=7)
         duel.load_scenario(
             f"Debug.ReloadFieldBegin({flags},0)\n"
             "Debug.SetPlayerInfo(0,8000,0,0)\n"
             "Debug.SetPlayerInfo(1,8000,0,0)\n"
-            f"Debug.AddCard({MAUSOLEUM_OF_THE_EMPEROR},0,0,LOCATION_FZONE,0,POS_FACEUP_ATTACK)\n"
-            f"Debug.AddCard({SUMMONED_SKULL},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-            "Debug.ReloadFieldEnd()\n"
+            + setup
+            + "Debug.ReloadFieldEnd()\n"
         )
         self.addCleanup(duel.close)
         duel.start()
-        # Two ignition-type effects are offered from hand at Main Phase 1
-        # start: Mausoleum's own "activate" wrapper (index 0) and Dark Hole
-        # (index 1) - Mausoleum's own activation isn't what's under test here.
-        duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 1))  # activate Dark Hole
-        duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
+
+        def respond_idle(prompt):
+            action, idx = first_action(self._decode_idle(prompt))
+            return H.answer_idle(action, idx)
+
+        duel.respond(H.MSG_SELECT_IDLECMD, respond_idle)
         duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
+        duel.default_response(H.MSG_SELECT_POSITION, lambda p: H.answer_position(0x1))
+        duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
         duel.run()
-        chain_end_at = next(
-            i for i, m in enumerate(duel.messages) if m.type == H.MSG_CHAIN_END
-        )
-        for m in duel.messages[chain_end_at + 1 :]:
+        for m in duel.messages:
             if m.type != H.MSG_SELECT_CHAIN:
                 continue
             m._buf.seek(0)
             player = m.u8()
-            m.u8()  # spe_count
-            m.u8()  # forced
-            m.u32()  # hint timing 1
-            m.u32()  # hint timing 2
+            m.u8(); m.u8(); m.u32(); m.u32()  # spe_count, forced, hint timings
             count = m.u32()
             codes = []
             for _ in range(count):
                 codes.append(m.u32())
-                m.u8()
-                m.u8()
-                m.u32()
-            if player == 0 and MAUSOLEUM_OF_THE_EMPEROR in codes:
+                m.u8(); m.u8(); m.u32()
+            if player == 0 and candidate_code in codes:
                 return True
         return False
 
-    def test_ocg_obsolete_ignition_alone_excludes_field_spell(self):
-        # Negative control: plain MR1 (rules-tcg-goat's baseline, and the
-        # Edison profile's own baseline before docs/research/edison-rules.md
-        # #1 added DUEL_TCG_FAST_EFFECT_IGNITION on top of it). This must
-        # FAIL to offer Mausoleum here, proving the OCG-style condition alone
-        # does not grant Field/Spell-zone ignition priority - the divergence
-        # the next test shows the flag actually fixes.
-        self.assertFalse(
-            self._mausoleum_priority_after_chain_end(DUEL_MODE_MR1),
-            "plain MR1 (OCG_OBSOLETE_IGNITION only) must not offer a "
-            "Field Spell's ignition effect via the priority chain window",
+    def _scenario_summon_mzone(self, flags: int) -> bool:
+        # A: successful Summon (of a DIFFERENT card), candidate already on
+        # the Monster Zone. Historically expected: offered.
+        setup = (
+            f"Debug.AddCard({ABARE_USHIONI},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({VANILLA_NORMAL_SUMMON},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+        )
+        return self._offered_via_priority_window(
+            flags, setup,
+            lambda lists: (0, lists["summonable"].index(VANILLA_NORMAL_SUMMON)),
+            ABARE_USHIONI,
         )
 
-    def test_tcg_fast_effect_ignition_offers_field_spell(self):
+    def _scenario_summon_gy(self, flags: int) -> bool:
+        # B: successful Summon (of a DIFFERENT card), candidate in the GY -
+        # the "Destiny HERO - Malicious" case period rulings describe.
+        # Historically expected: offered (does not have to be the summoned
+        # monster, does not have to be on the Monster Zone).
+        setup = (
+            f"Debug.AddCard({MALICIOUS},0,0,LOCATION_GRAVE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({MALICIOUS},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
+            f"Debug.AddCard({VANILLA_NORMAL_SUMMON},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+        )
+        return self._offered_via_priority_window(
+            flags, setup,
+            lambda lists: (0, lists["summonable"].index(VANILLA_NORMAL_SUMMON)),
+            MALICIOUS,
+        )
+
+    def _scenario_chainend_mzone(self, flags: int) -> bool:
+        # C: a chain resolves WITHOUT a Summon (Ookazi: no target, no
+        # condition, no deck dependency, doesn't touch the field), candidate
+        # on the Monster Zone. Historically expected: NOT offered - only
+        # ordinary Spell Speed 2+ priority applies here, not Ignition Effect
+        # Priority specifically.
+        setup = (
+            f"Debug.AddCard({ABARE_USHIONI},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({OOKAZI},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+        )
+        return self._offered_via_priority_window(
+            flags, setup,
+            lambda lists: (5, lists["activatable"].index(OOKAZI)),
+            ABARE_USHIONI,
+        )
+
+    def _scenario_chainend_gy(self, flags: int) -> bool:
+        # D: a chain resolves WITHOUT a Summon, candidate in the GY.
+        # Historically expected: NOT offered (same reasoning as C).
+        setup = (
+            f"Debug.AddCard({MALICIOUS},0,0,LOCATION_GRAVE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({MALICIOUS},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
+            f"Debug.AddCard({OOKAZI},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+        )
+        return self._offered_via_priority_window(
+            flags, setup,
+            lambda lists: (5, lists["activatable"].index(OOKAZI)),
+            MALICIOUS,
+        )
+
+    # -- A: Summon + Monster Zone - both configs match the derived rule -----
+
+    def test_summon_mzone_offered_under_ocg_obsolete_ignition(self):
+        self.assertTrue(self._scenario_summon_mzone(DUEL_MODE_MR1))
+
+    def test_summon_mzone_offered_under_tcg_fast_effect_ignition(self):
         self.assertTrue(
-            self._mausoleum_priority_after_chain_end(
-                DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION
-            ),
-            "DUEL_TCG_FAST_EFFECT_IGNITION must offer a Field Spell's "
-            "ignition effect via the priority chain window right after a "
-            "chain ends - the location filter is bypassed for this flag",
+            self._scenario_summon_mzone(DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION)
+        )
+
+    # -- B: Summon + Graveyard - only TCG_FAST_EFFECT_IGNITION matches ------
+
+    def test_summon_gy_not_offered_under_ocg_obsolete_ignition_alone(self):
+        # MR1's location==LOCATION_MZONE filter wrongly excludes this,
+        # relative to the derived Edison rule (Destiny HERO - Malicious from
+        # the GY, right after Summoning something else, is exactly the
+        # period-rulings example this scenario models).
+        self.assertFalse(self._scenario_summon_gy(DUEL_MODE_MR1))
+
+    def test_summon_gy_offered_under_tcg_fast_effect_ignition(self):
+        self.assertTrue(
+            self._scenario_summon_gy(DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION)
+        )
+
+    # -- C, D: non-Summon chain-end - a KNOWN ENGINE GAP, not reproduced by --
+    # -- either flag combination; these tests pin the CURRENT (imperfect)  --
+    # -- engine behaviour so a future engine change that closes the gap is --
+    # -- noticed, not silently re-broken. See docs/research/edison-rules.md #1.
+
+    def test_chainend_mzone_is_wrongly_offered_under_ocg_obsolete_ignition(self):
+        # KNOWN GAP: the derived Edison rule says this should NOT be offered
+        # (no Summon happened) - plain MR1 offers it anyway, because its gate
+        # is "chain-end OR Summon", not "Summon only".
+        self.assertTrue(self._scenario_chainend_mzone(DUEL_MODE_MR1))
+
+    def test_chainend_mzone_is_wrongly_offered_under_tcg_fast_effect_ignition(self):
+        # KNOWN GAP: same as above - TCG_FAST_EFFECT_IGNITION's gate is "any
+        # empty chain in Main Phase", which is even broader than MR1's.
+        self.assertTrue(
+            self._scenario_chainend_mzone(DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION)
+        )
+
+    def test_chainend_gy_not_offered_under_ocg_obsolete_ignition(self):
+        # Matches the derived rule here, but ONLY because MR1's
+        # location==LOCATION_MZONE filter happens to also exclude it - not
+        # because the gate correctly excludes non-Summon chain-ends (test
+        # above proves it doesn't). Kept to document that MR1's "accidental"
+        # correctness does not generalise to scenario C.
+        self.assertFalse(self._scenario_chainend_gy(DUEL_MODE_MR1))
+
+    def test_chainend_gy_is_wrongly_offered_under_tcg_fast_effect_ignition(self):
+        # KNOWN GAP: the derived Edison rule says this should NOT be offered.
+        # This is the scenario the original (pre-correction) version of this
+        # test suite got backwards: it used Mausoleum of the Emperor (a Field
+        # Zone ignition effect, i.e. this exact C/D shape) via Dark Hole (a
+        # non-Summon chain-end) and asserted TCG_FAST_EFFECT_IGNITION
+        # offering it was the DESIRED Edison behaviour. Per the corrected
+        # research, that was demonstrating exactly the overreach this test
+        # now documents as wrong, which is why DUEL_TCG_FAST_EFFECT_IGNITION
+        # is NOT in the Edison profile.
+        self.assertTrue(
+            self._scenario_chainend_gy(DUEL_MODE_MR1 | DUEL_TCG_FAST_EFFECT_IGNITION)
         )
 
 

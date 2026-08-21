@@ -2,7 +2,7 @@
   "$schema": "../../schemas/rule-profile.schema.json",
   "id": "rules-tcg-mr1-edison",
   "name": "TCG 2010 (Edison era, Master Rule 1 baseline)",
-  "description": "The DUEL_MODE_MR1 composite plus two additional flags researched and confirmed against period (2008-2011) Konami rulebooks and engine tests for TCG play at SJC Edison (2010-04-24): DUEL_TCG_FAST_EFFECT_IGNITION (the broader pre-2012 TCG ignition-priority condition) and DUEL_0_ATK_DESTROYED (0-ATK monsters still destroyed each other on a tie before the May-2011 rulebook added an exception). See docs/research/edison-rules.md for the full evidence table; several other candidate flags remain unresolved (known_gaps) rather than guessed. Synchro Monsters are legal; Xyz/Pendulum/Link do not exist yet.",
+  "description": "The DUEL_MODE_MR1 composite plus DUEL_0_ATK_DESTROYED, researched and confirmed against period (2008-2011) Konami rulebooks and an engine test for TCG play at SJC Edison (2010-04-24): two 0-ATK monsters still destroyed each other on a tie before Rulebook Version 7.2 (~March 2011) added an exception. DUEL_TCG_FAST_EFFECT_IGNITION was investigated and deliberately NOT added: period research shows 2010 TCG Ignition Effect Priority was gated to the Summon response window specifically (not any chain resolution) while being unrestricted by location - a hybrid neither DUEL_OCG_OBSOLETE_IGNITION nor DUEL_TCG_FAST_EFFECT_IGNITION reproduces exactly; this is recorded as an engine-level known_gap, not approximated by enabling the broader flag. See docs/research/edison-rules.md for the full evidence table and the correction record. Synchro Monsters are legal; Xyz/Pendulum/Link do not exist yet.",
   "era": {
     "start": null,
     "end": null,
@@ -17,7 +17,6 @@
       "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
       "DUEL_RETURN_TO_DECK_TRIGGERS",
       "DUEL_CANNOT_SUMMON_OATH_OLD",
-      "DUEL_TCG_FAST_EFFECT_IGNITION",
       "DUEL_0_ATK_DESTROYED"
     ],
     "ocgcore_reference": "46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57",
@@ -53,17 +52,17 @@
       "sources": ["ygopro-core"]
     },
     {
-      "summary": "Ignition Effects can be activated at any point the chain is empty during the turn player's Main Phase, from any location - not just as an immediate response to a Summon/chain-end event (broader TCG-style priority, in force until the TCG adopted the narrower OCG-style condition on 2012-04-25, two years after Edison). Confirmed against the Konami Official Rulebook (V7.0 Dec-2008 through V8.0 Nov-2011, wording unchanged across that whole span) and by an engine test that fails without this flag.",
-      "engine_flag": "DUEL_TCG_FAST_EFFECT_IGNITION",
-      "sources": ["konami-official-rulebook-v71-2010", "konami-rulebook-2008-v70", "average-duelist-2012-priority-change", "ygopro-core"]
-    },
-    {
-      "summary": "When two monsters with equal, non-zero-excepted ATK (including 0 ATK vs. 0 ATK) destroy each other in battle, both are destroyed - the 0-ATK exception ('neither is destroyed') was not added to the rulebook until the May-2011 'New Master Rules' edition, 13 months after Edison. Confirmed by an engine test that fails without this flag.",
+      "summary": "When two monsters with equal, non-zero-excepted ATK (including 0 ATK vs. 0 ATK) destroy each other in battle, both are destroyed - the 0-ATK exception ('neither is destroyed') was not added to the rulebook until Version 7.2 (packaged with Structure Deck: Dragunity Legion, TCG street date ~2011-03-04/08, ~10.5 months after Edison). Confirmed by an engine test that fails without this flag.",
       "engine_flag": "DUEL_0_ATK_DESTROYED",
-      "sources": ["konami-official-rulebook-v71-2010", "konami-new-master-rules-rulebook-2011", "ygopro-core"]
+      "sources": ["konami-official-rulebook-v71-2010", "konami-official-rulebook-v72-2011-dragunity", "pojo-atk0-rulebook-change-2011", "yugipedia-dragunity-legion-structure-deck", "ygopro-core"]
     }
   ],
   "known_gaps": [
+    {
+      "summary": "Ignition Effect Priority: neither existing ocgcore flag reproduces the researched 2010 TCG rule exactly. Period sources (a 2009-06-10/11 dated forum Q&A, three more genuinely-dated 2010 forum threads bracketing Edison on both sides, a period-adjacent Konami OCG FAQ ruling for Destiny HERO - Malicious, and independently-converging modern community reconstructions) consistently describe the immediate 'activate an Ignition Effect as Chain Link 1' window as gated to a successful Summon that does not itself start a chain, NOT to any chain resolution in general, while being unrestricted by the ignition-effect card's location (Graveyard-based effects qualified equally with Monster-Zone ones). DUEL_OCG_OBSOLETE_IGNITION (this profile's baseline) is too narrow on the location axis (Monster-Zone only) though correctly narrow on the gate axis for the Summon case; DUEL_TCG_FAST_EFFECT_IGNITION is correctly unrestricted on location but too broad on the gate axis (grants the window after ANY chain-end, including ones with no Summon at all, which period evidence says the TCG did not do). Confirmed empirically: an engine test matrix (tests/engine/test_historical_behaviour.py IgnitionPriorityMatrixTest) shows both flag combinations offer ignition priority in the non-Summon-chain-end scenarios that period evidence says should NOT be offered. Representing this exactly would need a small ygopro-core change decoupling the single flag's two currently-coupled axes (event gate vs. location filter) into independently settable dimensions - not implemented here. Left out of the flag set rather than approximated; see docs/research/edison-rules.md row 1 for the full evidence, the behavioural matrix, and the correction record (an earlier pass in this same research had wrongly concluded DUEL_TCG_FAST_EFFECT_IGNITION should be added).",
+      "tracking": "docs/research/edison-rules.md",
+      "sources": ["yugipedia-forum-chain-resolution-priority-2009", "yugipedia-forum-ignition-effect-priority-2010", "yugipedia-forum-sangan-priority-2010", "yugipedia-card-rulings-malicious", "edisonformat-priority-page", "edisonformat-net-ignition-priority", "konami-official-rulebook-v71-2010", "ygopro-core"]
+    },
     {
       "summary": "Simultaneous Trigger Effect ordering (SEGOC): the period-primary Official Rulebook (2008-2011, bracketing Edison) describes a simple two-tier system (turn player's triggers first, freely ordered; then the opponent's) with no mandatory-before-optional split and no 'earlier trigger first' tiebreak - contradicting EdisonFormat.com's own claimed four-tier structure, which is only traceable to a 2012 forum thread whose participants assert (without period documentation) that it was already tournament-floor practice. Neither of the two specific mechanics DUEL_TCG_SEGOC_NONPUBLIC/DUEL_TCG_SEGOC_FIRSTTRIGGER implement (hidden-zone trigger folding; first-event-only restriction among several simultaneous events) is addressed by any period source found in either direction. Left unresolved rather than guessed; see docs/research/edison-rules.md row 9 for the full evidence and a candidate research lead (an unlocated later rulebook edition between Nov-2011 and 2017).",
       "tracking": "docs/research/edison-rules.md",
@@ -85,14 +84,21 @@
     "edopro-source",
     "konami-official-rulebook-v71-2010",
     "konami-rulebook-2008-v70",
-    "konami-new-master-rules-rulebook-2011",
+    "konami-official-rulebook-v72-2011-dragunity",
     "konami-fast-effect-timing-page",
     "average-duelist-2012-priority-change",
     "edisonformat-rule-differences",
     "edisonformat-priority-page",
+    "edisonformat-net-ignition-priority",
     "duelistgroundz-segoc-in-japan-2012",
     "pojo-damage-step-2009",
-    "konami-advanced-gameplay-faq-2008"
+    "pojo-atk0-rulebook-change-2011",
+    "konami-advanced-gameplay-faq-2008",
+    "yugipedia-forum-chain-resolution-priority-2009",
+    "yugipedia-forum-ignition-effect-priority-2010",
+    "yugipedia-forum-sangan-priority-2010",
+    "yugipedia-card-rulings-malicious",
+    "yugipedia-dragunity-legion-structure-deck"
   ],
-  "notes": "Named -edison to leave room for splitting the long 'MR1' span into finer sourced eras later. As of the roadmap-item-5 research pass (docs/research/edison-rules.md), this is no longer a pure DUEL_MODE_MR1 profile: DUEL_TCG_FAST_EFFECT_IGNITION and DUEL_0_ATK_DESTROYED were added on period-rulebook evidence and confirmed with failing/passing engine tests (tests/engine/test_historical_behaviour.py). Several other candidate flags remain deliberately unresolved (known_gaps) rather than enabled on name-plausibility or uncorroborated community claims alone; this profile should stay 'partial' in format.json's implementation_status until those are settled."
+  "notes": "Named -edison to leave room for splitting the long 'MR1' span into finer sourced eras later. As of the roadmap-item-5 research pass (docs/research/edison-rules.md), this is no longer a pure DUEL_MODE_MR1 profile: DUEL_0_ATK_DESTROYED was added on period-rulebook evidence and confirmed with a failing/passing engine test (tests/engine/test_historical_behaviour.py). DUEL_TCG_FAST_EFFECT_IGNITION was investigated, found NOT to reproduce the researched 2010 TCG ignition-priority rule exactly (it overreaches into scenarios period evidence says Edison did not have), and deliberately left out as an engine-level known_gap rather than used as an approximation - this reverses an earlier pass's conclusion in this same research effort; see the dossier's correction record. Several other candidate flags remain deliberately unresolved (known_gaps) rather than enabled on name-plausibility or uncorroborated community claims alone; this profile should stay 'partial' in format.json's implementation_status until those are settled."
 }

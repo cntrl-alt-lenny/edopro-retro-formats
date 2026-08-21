@@ -74,20 +74,24 @@ reflects that.
    the rest proven harmless with evidence, mechanically recomputed where
    checkable). Future importer runs that surface new anomalies fail validation
    until the ledger accounts for them.
-5. ~~**Edison rules review.**~~ **Done (2026-08-21).** Every GOAT-composite flag was
-   independently checked against period Konami rulebooks (2008/2010/2011 editions,
-   bracketing Edison) rather than assumed from GOAT or from EdisonFormat.com's naming.
-   Two flags are confirmed necessary and added, each backed by a period source and an
-   engine test that fails without it: `DUEL_TCG_FAST_EFFECT_IGNITION` (the TCG's broader
-   ignition-priority condition lasted until 2012, two years after Edison) and
-   `DUEL_0_ATK_DESTROYED` (the 0-ATK tie exception wasn't added until May 2011). Four
-   more were confirmed *not* needed — the modern ocgcore default already matches 2010
-   TCG play, so adding them would have imported behaviour Edison never had:
+5. ~~**Edison rules review.**~~ **Done (2026-08-21, corrected 2026-08-21).** Every
+   GOAT-composite flag was independently checked against period Konami rulebooks
+   (2008/2010/2011 editions, bracketing Edison) rather than assumed from GOAT or from
+   EdisonFormat.com's naming. One flag is confirmed necessary and added, backed by a
+   period source and an engine test that fails without it: `DUEL_0_ATK_DESTROYED` (the
+   0-ATK tie exception wasn't added to the rulebook until Version 7.2, packaged with
+   Structure Deck: Dragunity Legion, ~10.5 months after Edison). A second candidate,
+   `DUEL_TCG_FAST_EFFECT_IGNITION`, was initially added on the same pass but **removed
+   again after an adversarial re-review** (see 5b below) found it overreaches - it is
+   tracked as an engine-level known gap instead, not approximated. Four more flags were
+   confirmed *not* needed — the modern ocgcore default already matches 2010 TCG play, so
+   adding them would have imported behaviour Edison never had:
    `DUEL_6_STEP_BATLLE_STEP`/`DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP`,
    `DUEL_EQUIP_NOT_SENT_IF_MISSING_TARGET`, `DUEL_STORE_ATTACK_REPLAYS`. The profile
-   (`data/rule-profiles/tcg-mr1-edison.json`) is now a custom 8-flag combination rather
+   (`data/rule-profiles/tcg-mr1-edison.json`) is now a custom 7-flag combination rather
    than a bare `DUEL_MODE_MR1` alias. See `docs/research/edison-rules.md` for the full
-   evidence table and the adversarial review. Follow-up below (5a).
+   evidence table, the adversarial review, and the correction record. Follow-ups below
+   (5a, 5b).
 
    5a. **SEGOC ordering remains unresolved.** The period-primary Official Rulebook
    (stable 2008-2011) describes a simple two-tier simultaneous-trigger order with no
@@ -100,6 +104,22 @@ reflects that.
    flags (`DUEL_USE_TRAPS_IN_NEW_CHAIN`, `DUEL_TRIGGER_WHEN_PRIVATE_KNOWLEDGE`,
    `DUEL_CAN_REPOS_IF_NON_SUMPLAYER`) are similarly left unresolved in `known_gaps` for
    lack of any period source in either direction.
+
+   5b. **Ignition Effect Priority is an engine-level gap, not a flag choice.**
+   Reopened, adversarial research (six independently-dated 2009-2010 period community
+   rulings sources, corroborated by a Konami OCG FAQ ruling for Destiny HERO - Malicious)
+   found the 2010 TCG rule was a hybrid neither existing flag reproduces: the immediate
+   "activate an Ignition Effect as Chain Link 1" window was gated to a **Summon that
+   doesn't itself start a chain**, unrestricted by **location**. `DUEL_OCG_OBSOLETE_IGNITION`
+   is too narrow on location (Monster Zone only); `DUEL_TCG_FAST_EFFECT_IGNITION` is
+   correctly unrestricted on location but too broad on the gate (it also fires after any
+   non-Summon chain-end, which period evidence says Edison did not have). Proven
+   empirically by a 4-scenario engine test matrix
+   (`tests/engine/test_historical_behaviour.py::IgnitionPriorityMatrixTest`). Reproducing
+   the historical rule exactly would need a small ygopro-core change decoupling the
+   existing flag's two currently-coupled axes into independent settings - not implemented
+   here, per the task's scope; see `docs/research/edison-rules.md` row 1 for the exact
+   change that would be needed.
 
 ## Phase 2 — framework completeness
 

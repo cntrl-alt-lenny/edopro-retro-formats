@@ -250,7 +250,7 @@
       "kind": "official",
       "title": "Konami \"OFFICIAL RULEBOOK Version 7.1\" (archived 2010-03-30, 25 days before SJC Edison)",
       "url": "https://web.archive.org/web/20100330231827/http://www.yugioh-card.com:80/en/rulebook/YGO_BegGuide_Ver7-1.pdf",
-      "notes": "The general TCG rulebook current at Edison. Defines Ignition Effects as usable \"just by declaring its activation during your Main Phase\" (not gated to right-after-Summon or Monster-Zone-only) and describes the pre-2012 \"Priority\" turn-structure system in full. States the ATK-tie battle rule (\"both monsters are destroyed\") with no 0-ATK exception. Text verbatim-identical to the Dec-2008 V7.0 capture and the Nov-2011 V8.0 capture (which already includes Xyz Monsters), so this document brackets Edison on both sides. Retrieved 2026-08-21."
+      "notes": "The general TCG rulebook current at Edison. Defines Ignition Effects as usable \"just by declaring its activation during your Main Phase\" and describes the general \"Turn Player's Priority\" rule (no card/effect activation while the turn player holds it) - this general prose is genuinely ambiguous on its own about whether the special immediate \"Ignition Effect Priority\" window (see docs/research/edison-rules.md #1) applies after any chain resolution or only after a Summon; period forum sources, not this rulebook text, resolve that question. States the ATK-tie battle rule (\"both monsters are destroyed\") with no 0-ATK exception. Text verbatim-identical to the Dec-2008 V7.0 capture and the Nov-2011 V8.0 capture (which already includes Xyz Monsters), so this document brackets Edison on both sides. Retrieved 2026-08-21."
     },
     {
       "id": "konami-rulebook-2008-v70",
@@ -260,11 +260,11 @@
       "notes": "Earlier bracket for the V7.1 (2010) rulebook comparison: confirms Ignition Effect/Priority wording and the ATK-tie battle rule were already the same 16 months before Edison, not a recent change."
     },
     {
-      "id": "konami-new-master-rules-rulebook-2011",
+      "id": "konami-official-rulebook-v72-2011-dragunity",
       "kind": "official",
-      "title": "Konami \"New Master Rules\" rulebook edition (archived 2011-05-16)",
+      "title": "Konami \"OFFICIAL RULEBOOK Version 7.2\" (packaged with Structure Deck: Dragunity Legion, TCG release ~2011-03-04/08; archived on the general rulebook download page 2011-05-16)",
       "url": "https://web.archive.org/web/20110516005009/http://www.yugioh-card.com:80/en/rulebook/EN_Rulebook_lr.pdf",
-      "notes": "First rulebook edition found to add the explicit \"0 ATK monsters... neither monster is destroyed\" exception (p.43) - dates the 0-ATK-destroyed-to-0-ATK-not-destroyed change to after this edition (13 months after Edison), not before it. Priority/Ignition-Effect prose is otherwise unchanged from the 2008/2010 editions."
+      "notes": "Adds the explicit \"0 ATK monsters... neither monster is destroyed\" exception (p.43), absent from V7.1/V7.0 - dates the 0-ATK-tie-destroys-both-to-0-ATK-tie-destroys-neither change to on or shortly before the Dragunity Legion Structure Deck's TCG street date (~10.5 months after Edison), not May 2011: the PDF's own embedded metadata (title \"3R03450 - SD Dragunity Rulebook EN.pdf\", CreationDate 2011-03-04) and cover text (\"OFFICIAL RULEBOOK Version 7.2\") confirm it is the same document Konami and community sources both call \"Version 7.2\", not a later \"New Master Rules\" edition (that name does not appear in this file or Konami's rulebook index page at any point in the archived history checked); the 2011-05-16 Wayback capture is simply when this already-released PDF was captured on the general public download page. Priority/Ignition-Effect prose is otherwise unchanged from the 2008/2010 editions. Corrected 2026-08-21 from an earlier, mislabeled \"New Master Rules\" / \"13 months after Edison\" citation - see docs/research/edison-rules.md #6 for the correction record."
     },
     {
       "id": "konami-fast-effect-timing-page",
@@ -307,6 +307,55 @@
       "title": "DuelistGroundz \"OCG Land\" forum thread, \"SEGOC in Japan\" (posted 2012-06-26 through 2012-06-29)",
       "url": "https://web.archive.org/web/20211017033702/http://duelistgroundz.com/index.php?/topic/145114-segoc-in-japan/",
       "notes": "Two posters (ness00, AEtherchild) claim the four-tier mandatory-before-optional SEGOC structure with an earlier-trigger tiebreak was already unwritten TCG tournament-floor practice 'for years' before 2012, contradicting the period-primary Official Rulebook text (unchanged 2008-2011, konami-official-rulebook-v71-2010) which describes only a simple two-tier system. Two years after Edison and uncorroborated by any dated 2008-2011 document; presented as a genuine, unresolved tension rather than a settled answer - see docs/research/edison-rules.md."
+    },
+    {
+      "id": "yugipedia-forum-chain-resolution-priority-2009",
+      "kind": "wiki",
+      "title": "Yugipedia (then \"Yu-Gi-Oh! Wiki\"), \"Forum:Chain Resolution and Priority\" (posted/answered 2009-06-10/11)",
+      "url": "https://yugipedia.com/wiki/Forum:Chain_Resolution_and_Priority",
+      "notes": "A period (\"Yu-Gi-Oh! Ruling Queries\") community Q&A thread, dated via wikitext timestamps to 2009-06-10 23:07 UTC (question) and 2009-06-11 04:54 UTC (answer, confirmed correct), ~10.5 months before Edison. States explicitly: the turn player may use priority to activate an Ignition Effect as Chain Link 1 only \"if the Chain ends with the Turn Player Special Summoning a monster\" - if not, only Spell-Speed-2-or-higher priority is available, not Ignition. The clearest single period statement located for the \"gate = Summon only, not any chain-end\" finding in docs/research/edison-rules.md #1."
+    },
+    {
+      "id": "yugipedia-forum-ignition-effect-priority-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, three \"Yu-Gi-Oh! Ruling Queries\" community forum threads on Ignition Effect Priority, dated March-July 2010 (bracketing Edison)",
+      "url": "https://yugipedia.com/wiki/Forum:Ignition_Effect",
+      "notes": "Three separate, genuinely-dated period threads, all framing the immediate \"activate before the opponent can respond\" Ignition Effect window around a Summon specifically, none describing a broader \"any chain resolved\" gate: \"Forum:Costs_and_Priority\" (2010-03-07, The Big Saturn example), \"Forum:Priority....\" (2010-03-12, Red-Eyes Darkness Metal Dragon/Blue-Eyes example, last edit 2010-03-12), and this page, \"Forum:Ignition_Effect\" (question 2010-03-24, last edit 2010-03-25) - the last one only three weeks before SJC Edison (2010-04-24). A fourth, \"Forum:About_priority\" (2010-07-14/16, three months after Edison), corroborates the same Summon-framing with two more worked examples (Batteryman Fuel Cell, Destiny End Dragoon)."
+    },
+    {
+      "id": "yugipedia-forum-sangan-priority-2010",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Forum:Sangan and Priority\" (2010-10-01)",
+      "url": "https://yugipedia.com/wiki/Forum:Sangan_and_Priority",
+      "notes": "A period ruling thread (five months after Edison) confirming the flip side of the Summon gate with a real tournament-relevant Synchro Summon combo: a Summon that itself triggers a Mandatory Trigger Effect at the same moment (Sangan used as Synchro Material) does NOT grant Ignition Effect Priority on the resulting monster - \"Priority is [automatically] passed to the opponent if the Mandatory Trigger Effect of a monster is activated at the moment a monster is summoned\" - i.e. confirms the gate is specifically \"a Summon that does not itself start a chain\", not Summons in general."
+    },
+    {
+      "id": "yugipedia-card-rulings-malicious",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Card Rulings:Destiny HERO - Malicious\", \"OCG Rulings\" section (citing Konami's official OCG rulings-FAQ database)",
+      "url": "https://yugipedia.com/wiki/Card_Rulings:Destiny_HERO_-_Malicious",
+      "notes": "Cites a Konami OCG FAQ entry (yugioh.faq.konami.jp, itself unarchived/unretrievable - the underlying primary document remains a gap) stating that when Malicious is discarded to the GY by Foolish Burial/Armageddon Knight (a card effect, not a Summon), the turn player CANNOT use Priority to activate its Ignition Effect - the exact negative case (non-Summon chain-end) that isolates the gate this project's research turns on, using the exact card the task's research lead named. Labeled \"OCG Rulings\" by Yugipedia; treated here as consistent-with rather than proof-of the equivalent TCG rule, corroborated independently by TCG-specific community sources."
+    },
+    {
+      "id": "pojo-atk0-rulebook-change-2011",
+      "kind": "community-site",
+      "title": "Pojo.com Forums, \"Rulebook Change for 0 vs 0 ATK monsters\" (posted 2011-03-08 by Konami TCG Judge Program Manager \"purity_reloaded\")",
+      "url": "https://web.archive.org/web/20220508131810/https://www.pojo.biz/board/showthread.php?t=934720",
+      "notes": "The precise, dated (2011-03-08) primary-adjacent announcement of the 0-ATK rulebook change, posted by a self-identified Konami TCG \"Judge Manager\": \"There has been an important change made to the latest version of the Yu-Gi-Oh! TCG Official Rulebook, which is included with the Structure Deck: Dragunity Legion. The current version is listed as Version 7.2... 0 ATK monsters - Monsters with 0 ATK cannot destroy anything by battle. If two Attack Position monsters with 0 ATK battle each other, neither monster is destroyed.\" Replying to \"I thought this was already true?\": \"Not until something was changed in the rulebook, it wasn't. At least for the TCG.\" This is also the exact source edisonformat.com itself cites for its own claim. Confirms both the exact wording and the exact date/product tying the change to the real world."
+    },
+    {
+      "id": "yugipedia-dragunity-legion-structure-deck",
+      "kind": "wiki",
+      "title": "Yugipedia, \"Dragunity Legion Structure Deck\" set-info page",
+      "url": "https://yugipedia.com/wiki/Dragunity_Legion_Structure_Deck",
+      "notes": "Gives the TCG regional street dates for the structure deck Rulebook Version 7.2 was packaged with: North America 2011-03-08, other TCG territories 2011-03-03/04 - used to pin the 0-ATK rulebook change to on or shortly before this date, ~10.5 months after SJC Edison (2010-04-24), not the ~13-months-later date an earlier, mislabeled citation in this project implied."
+    },
+    {
+      "id": "edisonformat-net-ignition-priority",
+      "kind": "community-site",
+      "title": "EdisonFormat.net, \"Ignition-Priority\" rules compendium page",
+      "url": "https://web.archive.org/web/20250612014603/https://edisonformat.net/rules/compendium/ignition-priority",
+      "notes": "A second, independently-authored (different domain/site from edisonformat.com) modern community reconstruction of the same Summon-gated, location-unrestricted Ignition Effect Priority rule, using a different worked example (Vorse Raider Normal Summoned, Plaguespreader Zombie's Ignition Effect activated from the GY immediately after). Not itself period evidence, but independent corroboration-in-shape of the period forum sources this project treats as primary for this question."
     }
   ]
 }
