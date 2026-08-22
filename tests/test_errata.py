@@ -189,28 +189,53 @@ class OrderingConstraintTest(unittest.TestCase):
     OLD/AMBIGUOUS/NEW states via two aggregate counts (definite_new,
     definite_old), not by propagating each change's definite state to its
     neighbours. schemas/erratum.schema.json documents changes[] as "Ordered
-    oldest-to-newest", which would license propagation: in a genuine
-    chronological chain, an earlier change confirmed OLD (hasn't happened)
-    forces every later change to also be OLD, and a later change confirmed
-    NEW (has happened) forces every earlier change to also be NEW.
+    oldest-to-newest", which would license propagation IF a given pair of
+    changes really is a validated chain: in a genuine chronological chain,
+    an earlier change confirmed OLD (hasn't happened) forces every later
+    change to also be OLD, and a later change confirmed NEW (has happened)
+    forces every earlier change to also be NEW.
 
     Two of the four two-change orderings below ([OLD, AMBIGUOUS] and
     [AMBIGUOUS, NEW]) are exactly where that propagation would narrow the
-    candidate range if changes[] really were a validated chain; the other
-    two ([NEW, AMBIGUOUS] and [AMBIGUOUS, OLD]) are already correct under
-    either interpretation, because a change happening earlier (or a later
-    change not yet happening) does not constrain a neighbour on the other
-    side.
+    candidate range *if* changes[] were a validated chain for the pair in
+    question; the other two ([NEW, AMBIGUOUS] and [AMBIGUOUS, OLD]) already
+    produce a valid, non-contradictory candidate set regardless of whether
+    the pair is a genuine chain or two independent axes, because a change
+    happening earlier (or a later change not yet happening) does not
+    constrain a neighbour on the other side either way.
 
-    This project deliberately does NOT patch selection_at() to propagate.
-    Every currently-affected real record (44 "known wrong" erratum records,
-    including the Giant Rat shape covered here and re-verified against the
-    real data file in tests/test_repo_data.py) has its own review notes
-    stating the two changes are independent, unsequenced ruling axes, not a
-    dated chain -- forcing propagation would manufacture false certainty
-    where genuine ambiguity (and, per the corrected A/B/C/D partition, an
-    unimplemented candidate) exists. See docs/research/edison-behaviour-gaps.md
-    (roadmap item 5c) for the full analysis and the proposed data-model fix.
+    IMPORTANT - these are characterization tests, not correctness tests for
+    the numeric candidate labels. They pin down what selection_at() *does*
+    today; they do NOT establish that a given candidate index correctly
+    represents any particular joint historical state. Whether a candidate
+    label is meaningful depends on the real relationship between the two
+    changes, which selection_at() cannot see:
+    - for a GENUINE chained pair (the ordinary case: 41 divergence records,
+      plus 6 of the 44 known-wrong-cluster's non-cluster-1 records - Axe of
+      Despair, Tyrant Dragon, Vampire Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon -
+      each pairing one undated ruling with a separate, later, unrelated
+      dated erratum), the current output is either already correct (the
+      [NEW, AMBIGUOUS] / [AMBIGUOUS, OLD] shapes) or would need genuine
+      propagation to become correct (the [OLD, AMBIGUOUS] / [AMBIGUOUS, NEW]
+      shapes) - propagation is safe here because the pair really is ordered;
+    - for a genuinely INDEPENDENT-AXIS pair (confirmed for exactly the
+      38-card failed-search/deck-verification cluster, via each record's own
+      review notes stating its two changes cannot be sequenced because they
+      are two aspects of one bundled upstream script - Giant Rat, tested
+      below, is one of 29 of the 38 with this exact [OLD, AMBIGUOUS] shape;
+      8 more plus Paladin of White Dragon list the same two axes in the
+      opposite order and so do NOT exhibit a self-contradictory candidate
+      set, even though the underlying independent-axis problem is identical)
+      - propagation would be WRONG: it would manufacture false certainty
+      about which of two truly independent rulings had happened, and no
+      candidate index, propagated or not, can represent a genuine joint
+      state without a different representation than a linear chain.
+
+    This project deliberately does NOT patch selection_at() to propagate,
+    because it cannot tell these two cases apart from changes[] alone. See
+    docs/research/edison-behaviour-gaps.md (roadmap item 5c), "Selection-model
+    ordering question" and "Independent-axis C vs. ordinary-linear-chain C",
+    for the full per-record analysis and the proposed data-model fix.
     """
 
     def test_earlier_definite_old_later_ambiguous_does_not_propagate(self):

@@ -18,19 +18,31 @@ structured facts already in this project's own `data/errata/*.json` records -
 no new web research was performed for this milestone, and no field below
 states anything the underlying erratum record doesn't already support.
 
-**Revision note:** an earlier version of this document classified all 44
-`format.erratum-modern-known-wrong` records as partition **A**
-(chronology-only) using an "at least one candidate has a usable
+**Revision note (two rounds).** The first version of this document
+classified all 44 `format.erratum-modern-known-wrong` records as partition
+**A** (chronology-only) using an "at least one candidate has a usable
 implementation" test. Adversarial review found that test too weak against
-the task's actual A/B/C definition, and a deeper look at the affected
-records' own `review.notes` found that `changes[]`'s schema-documented
-"ordered oldest-to-newest" chain assumption does not hold for any of them.
-Both issues are corrected below: the A/B/C/D partition is recomputed (see
-"A/B/C/D partition"), and the underlying data-model question is investigated
-and documented, not silently patched (see "Selection-model ordering
-question"). The 44/41/85 headline counts, the cluster groupings, and the 41
-divergence/B-partition records are unaffected and were independently
-re-verified during this revision.
+the task's actual A/B/C definition, and found that `changes[]`'s
+schema-documented "ordered oldest-to-newest" chain assumption does not hold
+for a significant slice of the data. The first correction fixed the
+A/B/C/D partition to A 0 / B 41 / C 44, but got two things wrong in the
+process: it described the Giant Rat "candidate 1" semantics backwards
+(inverting which joint state it formally represents), and it over-generalised
+the "independent, unsequenced ruling axes" finding to all 44 known-wrong
+records (flagging only Axe of Despair as an exception) when in fact only
+**38** of the 44 - the entire failed-search/deck-verification cluster - are
+genuinely independent-axis cases; the other 6 (Axe of Despair, Tyrant
+Dragon, Vampire Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon) are ordinary,
+partially-dated linear chains. This second correction fixes the Giant Rat
+semantics precisely (see "A/B/C/D partition"), establishes and reports the
+independent-axis (38) vs. ordinary-linear-chain (6) split explicitly (see
+"Independent-axis C vs. ordinary-linear-chain C"), corrects the resulting
+38-card cluster's remediation direction, which had been described backwards
+(see cluster 1 below), and corrects the roadmap-item attribution for the
+cluster's open question (1a, not 1b). The corrected A/B/C/D counts (A 0 / B
+41 / C 44) and the 44/41/85 headline counts are unchanged by this second
+correction; the 41 divergence/B-partition records remain unaffected by
+either correction.
 
 ## Reproduced state
 
@@ -135,49 +147,119 @@ had to be resolved first, though: whether `selection_at()`'s computed
 candidate set is even the *right* set of historically-plausible outcomes to
 run that test against - see "Selection-model ordering question".
 
-**Worked example (Giant Rat, `erratum-giant-rat`).** At the Edison snapshot
-(2010-04-24), `selection_at()` reports `state="ambiguous"`,
-`candidates=(0, 1)`:
+**Worked example (Giant Rat, `erratum-giant-rat`), corrected.** This
+document's first revision described Giant Rat's candidate 1 backwards, which
+leaked into the proposed remediation for the whole 38-card cluster. Corrected
+here, keeping the two readings explicitly separate as instructed.
 
-- candidate 0 (baseline): both ruling changes not yet in effect - implemented,
-  `historical_passcode: 504700172` (one upstream GOAT script encoding both
-  behaviours together).
-- candidate 1: the undated "era activation semantics" change already in
-  effect, the dated "Deck-verification-on-whiff" change not yet in effect (it
-  is independently attested through 2011-02-02, past the snapshot) -
-  `implementation_for_version(1)` is `None`. No upstream script implements
-  this combination.
+Giant Rat's two relevant changes, in `changes[]` order:
 
-Since candidate 1 is historically plausible (nothing rules it out - the
-undated change's chronology is, by its own review note, completely
-unresolved) and has no implementation, this is **C**, not A, exactly as the
-task's Giant Rat example specifies.
+- `changes[0]`: the Deck-verification/reveal-on-whiff ruling - DATED
+  (`old_attested_through: 2011-02-02`) - confirmed **OLD** at the Edison
+  snapshot (2010-04-24 predates 2011-02-02).
+- `changes[1]`: the activation-semantics (no-valid-target-required) ruling -
+  completely undated - **AMBIGUOUS**.
 
-**All 44 confirmed, not assumed.** Every one of the 44 known-wrong records -
-the 38-card failed-search/deck-verification cluster and the 6 other
-known-wrong cards elsewhere in the inventory (Axe of Despair, Tyrant Dragon,
-Vampire Lord, XY-Dragon Cannon, XYZ-Dragon Cannon, XZ-Tank Cannon) - was
-checked individually, not sampled. Every one has exactly two relevant
-changes: one with a real dated bound (almost always the shared
-`old_attested_through: 2011-02-02` / `new_attested_from: 2019-04-03`
-search-verification interval this roadmap's item 1b already tracks) and one
-that is completely undated (`effective: {"date": null}`, no bounds of any
-kind). 43 of the 44 records' own `review.notes` fields state, independently
-and in their own words, that (a) the two changes cannot be sequenced
-relative to each other and (b) no upstream implementation exists for the
-state in which only the undated change has taken effect. The 44th, Axe of
-Despair, has a different structural shape and its review note makes a
-narrower (and, per the live computation, mistaken) claim instead - see
-cluster 10 below for that one card's specific discrepancy. For all 44,
-though, live recomputation of `selection_at()` against the real data
-independently confirms the same candidate/implementation-coverage pattern
-regardless of what each record's prose says, which is the authoritative
-check per this document's own "every figure is recomputed directly from the
-model" method. That is a first-party,
-per-record admission that the "at least one candidate is implemented" test
-was checking the wrong thing for this shape of record - the unimplemented
-candidate is exactly as historically plausible as the implemented one, not a
-degenerate case to be waved through.
+*(A) What the current linear model's version index actually means.*
+`implementation_for_version(k)` is defined as "the implementation of the
+version created by `changes[k-1]`". So version 0 = neither change has
+happened; version 1 = `changes[0].resulting_implementation` = the version
+created once `changes[0]` (the **verification** change) alone has happened,
+i.e. **verification=NEW, activation=OLD**; version 2 (modern) = both have
+happened. `implementation_for_version(1)` is `None` for Giant Rat.
+
+*(B) The actual joint state historical evidence allows.* Verification is
+confirmed OLD at Edison, not ambiguous. Activation semantics is completely
+unknown. The two historically-plausible joint states are therefore
+**verification=OLD, activation=OLD** (the baseline/GOAT-era combination) and
+**verification=OLD, activation=NEW** (only activation-semantics has
+modernised). Verification=NEW is not live at this snapshot at all - it is
+ruled out by the record's own dating.
+
+**(A) and (B) do not match.** Candidate 1, in the linear model's own defined
+sense, means verification=NEW - a state the record's own dating already
+rules out at Edison, not merely an "unimplemented" one. It is not the same
+proposition as the real open question, verification=OLD/activation=NEW - and
+that real question has **no valid version index at all** in Giant Rat's
+`changes[]` ordering; it cannot be looked up via `implementation_for_version`,
+correctly or otherwise. C is justified directly from the record's own prose,
+not from candidate 1's slot happening to be empty: Giant Rat's `review.notes`
+states plainly that "upstream ships one GOAT script encoding both ruling
+behaviours ... so no implementation exists for a state in which only one had
+changed" - that is the actual evidentiary basis, independent of what version
+index the linear model happens to assign it.
+
+**This mislabelling is not universal across the 38-card cluster - `changes[]`
+list order flips it.** Giant Rat's dated-then-undated order is shared by
+**29 of the 38** cluster records, all with the same broken correspondence
+(candidate 1 requires an already-ruled-out state; the real intermediate state
+has no index at all): Dedication through Light and Darkness, Elegant
+Egotist, Emblem of Dragon Destroyer, Freed the Matchless General, Fusion
+Sage, Giant Rat, Great Dezard, Hand of Nephthys, Hero Signal, Horus the
+Black Flame Dragon LV4, Manju of the Ten Thousand Hands, Masked Dragon,
+Mother Grizzly, Mystic Swordsman LV2, Mystic Swordsman LV4, Mystic Tomato,
+Ninjitsu Art of Transformation, Pandemonium, Peten the Dark Clown, Pyramid
+Turtle, Skull Knight #2, Sonic Bird, Terraforming, Thunder Dragon, Toon
+Table of Contents, UFO Turtle, Ultimate Insect LV1, Ultimate Insect LV3,
+Ultimate Insect LV5. The remaining **8 list the changes in the opposite
+order** - undated activation-semantics first, dated verification second:
+A Deal with Dark Ruler, Apprentice Magician, Armed Dragon LV3, Armed Dragon
+LV5, Birdface, Bubonic Vermin, Dark Mimic LV1, Dark Scorpion - Meanae the
+Thorn. For these 8, `implementation_for_version(1)` (= `changes[0]`'s slot,
+and `changes[0]` here *is* the undated activation change) correctly and
+coherently represents "activation alone has changed, verification remains
+old" - the real intermediate state - and it is confirmed `None`, a genuine
+gap rather than a coincidence involving an impossible slot. One further
+cluster-1 record, Paladin of White Dragon, has three relevant changes (the
+same undated activation/dated verification pair plus an unrelated,
+already-resolved dated-2013 attack-restriction erratum its own review note
+treats as a separate axis); its candidate 1 is likewise valid, for the same
+list-order reason.
+
+So within the 38-card cluster: **29 records have a self-contradictory linear
+candidate set** with the true intermediate state unrepresented by any index;
+**9 (8 plus Paladin) have a linear candidate set that happens to be valid**,
+purely because of `changes[]` list order. In both groups the underlying
+real-world fact is identical - two independent, unsequenceable ruling axes,
+one pinned old by dating, one unknown - and every one of the 38 records' own
+review notes says so in its own words. Only the mechanical validity of
+`selection_at()`'s candidate *labels* differs, as an artifact of list order
+the data model does not currently constrain.
+
+**Independent-axis C vs. ordinary-linear-chain C: the required split.** Not
+every C record has this independent-axis problem, and the two kinds must not
+be conflated:
+
+- **Independent-axis C: 38** - the entire failed-search/deck-verification
+  cluster (all 38, spanning both the 29-broken and 9-valid groups above).
+  Every one of these records' two relevant changes are two aspects of the
+  *same* bundled ruling - upstream's single GOAT script encodes both the
+  reveal-on-whiff procedure and the no-valid-target activation allowance
+  together - and every one of their own review notes states outright that
+  the two cannot be sequenced against each other.
+- **Ordinary-linear-chain C: 6** - Axe of Despair, Tyrant Dragon, Vampire
+  Lord, XY-Dragon Cannon, XYZ-Dragon Cannon, XZ-Tank Cannon. Each pairs one
+  undated ruling with a *separate*, much later, mechanically-unrelated dated
+  functional/text erratum (e.g. Axe of Despair: an undated
+  `EFFECT_FLAG_DELAY` miss-timing ruling and an unrelated 2013 "always
+  treated as an Archfiend card" text addition; Tyrant Dragon: an undated
+  second-attack-condition ruling and an unrelated 2013 Graveyard-revival
+  Tribute-timing erratum). These are two distinct historical events in the
+  card's life, not two aspects of one bundled mechanic, and only one
+  happens to be undated. All six have the `[AMBIGUOUS, OLD]` shape (undated
+  ruling first, dated-and-necessarily-still-future erratum last), which is
+  *always* internally valid under the linear model regardless of substance,
+  because the dated change's already-confirmed-OLD status at Edison is
+  consistent with the undated change having happened at any point before it
+  - candidate 0 and candidate 1 are both ordinary, coherent chain positions.
+  C is earned here the ordinary way: the undated ruling's chronology is
+  unresolved, and the version it would create (candidate 1) has no recorded
+  implementation. **Audited individually, not assumed**: this document's
+  first revision incorrectly described all 6 as sharing Giant Rat's
+  independent-axis structure; only Axe of Despair was flagged as an
+  exception, when in fact all 6 are.
+
+Total: 38 + 6 = **44**.
 
 **B (41) and D (0) are unaffected.** The 41 divergence records were
 re-checked for the same defect and do not have it: every one with more than
@@ -234,59 +316,58 @@ the task asked is which of two conclusions follows from that gap:
   propagate would manufacture a false, overconfident answer, and the
   deficiency is in the data model, not the code.
 
-**Finding: (B), for all 44 currently-affected records.** This is not an
-inference from the shape of the data alone - it is what these records
-themselves say. Giant Rat's `review.notes` states this in as many words:
-"upstream ships one GOAT script encoding both ruling behaviours ... and with
-[the undated change] undated the pair cannot be sequenced." The same
-admission - independently worded, not copy-pasted - appears in all 38
-failed-search/deck-verification cluster records (read in full; sampled
-phrasing: *"the two ruling transitions cannot be ordered relative to one
-another and no upstream implementation exists for the state between them"*;
-*"Intermediate-state reasoning as for the other GoatConfirm cards: the two
-ruling transitions are unordered, no upstream implementation covers the
-state between them"*) and in 5 of the 6 other known-wrong records outside
-that cluster (the 6th, Axe of Despair, is the one exception noted above).
-Every one of the 44 pairs one dated change with one totally undated change;
-43 of them state outright in their own review notes that their relative
-order is unknown - the opposite of the "ordered oldest-to-newest" contract
-the schema's own description asserts for `changes[]` in general - and the
-44th exhibits the identical structural shape and the identical live
-selection outcome regardless of what its own (narrower, mistaken) note
-claims.
+**Finding: (B), for the 38-card independent-axis cluster specifically - not
+for all 44.** This document's first revision over-generalised this finding
+to all 44 known-wrong records, flagging only Axe of Despair as an exception.
+That was wrong: the "A/B/C/D partition" section above establishes, per
+record rather than by assumption, that only the **38 failed-search/
+deck-verification cluster cards** are genuinely independent-axis records -
+every one of their own review notes states, independently worded, that its
+two changes cannot be sequenced against each other because they are two
+aspects of one bundled GOAT script (Giant Rat's is quoted there in full).
+The other **6 known-wrong records** (Axe of Despair, Tyrant Dragon, Vampire
+Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon) are ordinary, if partially-dated,
+linear chains - two mechanically-unrelated historical events, not two
+aspects of one ruling - and are unaffected by the (A)/(B) question below;
+see "Independent-axis C vs. ordinary-linear-chain C" above for the full
+per-record accounting.
 
-This reconciles cleanly with the repository's own validator, which already
-does *not* enforce a fully-known total order:
+For the 38, this reconciles cleanly with the repository's own validator,
+which already does *not* enforce a fully-known total order:
 `Validator._validate_errata`'s ordering check
 (`retroformats/validate.py:285-309`) only rejects a *definite* inversion (a
 later change's latest possible date earlier than an earlier change's
 earliest possible date) and explicitly comments that "overlapping
 uncertainty intervals are legitimate." A change with no bounds at all (like
-every undated axis in these 44 records) can never trigger that check against
-anything, in either direction - the validator was already written to tolerate
-not knowing the exact order. What it was not written to tolerate - and what
+the undated axis in all 38) can never trigger that check against anything,
+in either direction - the validator was already written to tolerate not
+knowing the exact order. What it was not written to tolerate - and what
 this document is flagging - is a pair with essentially *no* shared timeline
 information at all being fed through the same linear "how many of these N
 changes have happened" arithmetic that works correctly for a partially-dated
-but genuinely single-axis chain.
+but genuinely single-axis chain (which is exactly what the other 6 records
+are, and exactly why they are not part of this finding).
 
-**Why not just patch `selection_at()` for these 44 anyway?** Because
-propagation would be *correct* for a genuine chain and *wrong* for
-independent axes, and nothing in `changes[]` currently distinguishes the two
-cases - the code has no signal to decide, on a given pair, whether
-propagating is safe. Patching it globally would silently convert Giant
-Rat's genuinely-two-dimensional uncertainty (which of 2 joint states applies)
-into a false one-dimensional certainty (a single "historical" answer),
-exactly the outcome the task warned against ("do not force a false
-sequence"). This document proposes a fix to the data model instead of the
-algorithm.
+**Why not just patch `selection_at()` for these 38 anyway?** Because
+propagation would be *correct* for a genuine chain (like the other 6 C
+records, or any of the 41 B records) and *wrong* for independent axes, and
+nothing in `changes[]` currently distinguishes the two cases - the code has
+no signal to decide, on a given pair, whether propagating is safe. Patching
+it globally would silently convert Giant Rat's genuinely-two-dimensional
+uncertainty (which of 2 joint states applies) into a false one-dimensional
+certainty (a single "historical" answer), exactly the outcome the task
+warned against ("do not force a false sequence"). This document proposes a
+fix to the data model instead of the algorithm, scoped to the 38 records
+that actually need it.
 
 **Proposed smallest correct representation.** Add an optional per-change
 field, e.g. `"order": "chained" | "independent"`, defaulting to `"chained"`
-(preserving current semantics for every existing multi-change record, which
-are all genuine dated chains). A change marked `"independent"` declares that
-its relative order to the preceding change(s) is not established - it is a
-separate behavioural axis, not a later position in the same timeline. Then:
+(preserving current semantics for every existing multi-change record,
+including all 6 ordinary-chain C records and all 41 B records, which are
+genuine dated or partially-dated chains). A change marked `"independent"`
+declares that its relative order to the preceding change(s) is not
+established - it is a separate behavioural axis, not a later position in the
+same timeline. Then:
 
 - for a run of `"chained"` changes, `selection_at()` performs the
   propagation described above (a strict improvement, safe because chained
@@ -294,34 +375,20 @@ separate behavioural axis, not a later position in the same timeline. Then:
 - for a run of `"independent"` changes, `selection_at()` computes the joint
   cross-product of per-axis OLD/AMBIGUOUS/NEW states rather than a single
   linear prefix index, and looks up implementation coverage per joint state
-  rather than per position. For the 2-independent-axis case that covers
-  100% of today's instances, the smallest viable storage change is for the
-  independent change to carry its own `resulting_implementation_alone` field
-  (the implementation for "only this axis has changed"), which for all 44
-  current records would be recorded as absent - turning today's
-  prose-only "no implementation exists for the state between them" into a
-  structured fact `selection_at()` and `validate.py` can check directly,
-  instead of relying on a linear index that happens, for exactly this
-  2-change shape, to still land on the right slot by coincidence (see next
-  paragraph).
+  rather than per position, instead of overloading a prefix-chain slot whose
+  formal meaning may or may not line up with the real state depending on
+  `changes[]` list order (see the 29-vs-9 split above - this is precisely
+  the representational hazard a joint-state model removes). For the
+  2-independent-axis case that covers 100% of the 38 affected records, the
+  smallest viable storage change is for the independent change to carry its
+  own `resulting_implementation_alone` field (the implementation for "only
+  this axis has changed"), which for all 38 would be recorded as absent -
+  turning today's prose-only "no implementation exists for the state between
+  them" into a structured fact `selection_at()` and `validate.py` can check
+  directly and consistently, regardless of list order.
 
-**A note on why the A→C reclassification is still correct despite the
-candidate-index caveat.** `selection_at()`'s candidate labels (0, 1) are
-formally "prefix positions in a chain," which is not quite the right
-semantics here - as shown above, candidate 1 formally asserts change 0 is
-NEW, contradicting change 0's own definite OLD state. But the *slot* that
-candidate 1 reads from (`implementation_for_version(1)`, i.e.
-`changes[0].resulting_implementation`) is exactly the slot every one of
-these 44 records' authors already used, by convention, to record "the
-implementation for the state where only the undated change has happened" -
-and every one of them left it empty on purpose, per their review notes. So
-the *practical* classification (one implemented candidate, one not, hence C)
-is robust even though the underlying index semantics are informally
-overloaded; this document does not rely on the coincidence holding for any
-future 3-or-more-independent-axis record, which is exactly why "propose,
-don't patch" is the right scope for this milestone. No format
-selection or warning count changes as a result of this section - only the
-A/B/C/D partition label, already covered above.
+No format selection or warning count changes as a result of this section -
+this is a proposal, not an implementation, per the task's explicit scope.
 
 ## Qualitative-field audit
 
@@ -374,59 +441,86 @@ ONE shared question that blocks it were resolved.
 ### 1. Failed-search / deck-verification behaviour — 38 cards, all partition C
 
 **By far the largest cluster, and still the highest-leverage item in the
-entire inventory - but not a chronology-only cluster.** All 38 cards share
-the *identical* two-change structure in their erratum records:
+entire inventory - but not a chronology-only cluster, and an independent-axis
+cluster whose candidate labelling is not uniform across all 38 (see below).**
+Every one of the 38 cards' erratum records pairs the *same two ruling axes*:
 
-1. An **entirely undated** "era activation semantics" change: the
-   goat/historical script variant lets the effect be activated even when no
-   legitimate target/match exists (in Deck, hand, or GY, depending on the
-   card) — modern requires a valid match to exist before allowing activation
-   at all.
-2. A change dated by the **same bracket on every single one of these 38
-   cards** — `old_attested_through: 2011-02-02`, `new_attested_from:
-   2019-04-03` — describing the accompanying procedure: on a proven failed
-   search, the goat/historical script reveals and shuffles the relevant
-   zone(s) (`Duel.GoatConfirm`) to prove the whiff to the opponent; the
-   modern script does neither (it simply can't activate, so there's nothing
-   to prove).
+- An **entirely undated** activation-semantics axis: the goat/historical
+  script variant lets the effect be activated even when no legitimate
+  target/match exists (in Deck, hand, or GY, depending on the card) — modern
+  requires a valid match to exist before allowing activation at all.
+- A verification/reveal-on-whiff axis, dated by the **same bracket on every
+  single one of these 38 cards** — `old_attested_through: 2011-02-02`,
+  `new_attested_from: 2019-04-03` — describing the accompanying procedure: on
+  a proven failed search, the goat/historical script reveals and shuffles
+  the relevant zone(s) (`Duel.GoatConfirm`) to prove the whiff to the
+  opponent; the modern script does neither (it simply can't activate, so
+  there's nothing to prove).
 
-At the Edison snapshot (2010-04-24), change 2 already resolves determinately
-(2010-04-24 predates 2011-02-02, so the *old* deck-verification procedure was
-still in force) — it is change 1's total absence of any date that is the
-actual source of the ambiguity: with change 2 pinned old, "modern" (which
-needs *both* changes to have happened) is already provably wrong, but
-whether change 1 had *also* already happened by April 2010 (candidate 1) or
-not (candidate 0) is genuinely unknown. This is the existing project
-roadmap's own long-standing "close the search-verification interval" item
-(roadmap 1b), now precisely reduced to a list of 38 named cards it would
-resolve - but, per the corrected partition above, resolving it does not by
-itself guarantee zero further work: candidate 0 (neither change in effect)
-has a working `reuse-upstream` implementation for all 38, but candidate 1
-(only the undated activation-semantics change in effect) has **no**
-implementation for any of them, and every one of the 38 records' own review
-notes states the two changes cannot currently be sequenced. That is the
-task definition's C, not A.
+At the Edison snapshot (2010-04-24), the verification axis already resolves
+determinately - **OLD** (2010-04-24 predates 2011-02-02, so the old
+Deck-verification procedure was confirmed still in force) - and this alone
+already rules out "modern" (which needs both axes to have changed). It is
+the activation-semantics axis's *total absence of any date* that is the
+actual source of the ambiguity: whether it had *also* already changed by
+April 2010 is genuinely unknown, and there is no implementation anywhere
+upstream for that combination (verification still old, activation already
+modern) - only for "both still old" (the existing `reuse-upstream`
+implementation, listed below) and "both modern" (the shipped card).
+**Narrowing the verification axis's own 2011-02-02..2019-04-03 bracket
+further (roadmap item 1b) would not change this cluster's classification at
+all** - Edison already sits determinately in the old era for that axis, as
+roadmap 1b's own text already notes. The actual open question for these 38
+cards is the completely *undated* activation-semantics axis, which falls
+under roadmap item 1a ("chronology for the undated era rulings"), not 1b.
+`changes[]` lists these two axes in *different orders* across the 38 records
+- 29 list the dated verification axis first (Giant Rat's order, under which
+`selection_at()`'s own candidate 1 formally represents a state the dating
+already rules out, and the true "verification-old/activation-new" state has
+no valid index at all) and 8 plus Paladin of White Dragon list the undated
+activation axis first (under which candidate 1 correctly represents that
+state) - see "A/B/C/D partition" above for the exact split and why it does
+not change the conclusion: every one of the 38 is **C**, argued from each
+record's own review notes rather than from the version index, because the
+activation axis's chronology is unresolved and the "verification-old,
+activation-new" joint state - however it is (or isn't) labelled by
+`selection_at()` - has no implementation.
 
-**Leverage is still real, just two-branched instead of one.** Because all
-38 cards share the *identical* two-change structure, the one shared
-chronology question still has very high leverage regardless of which way it
-resolves: **one dated period source** (a Konami ruling, judge-program
-communication, or tournament-policy note from 2010-2018 narrowing when TCG
-rulings began requiring a legitimate target to exist before these "search
-and reveal-on-failure" effects could be activated) either (a) confirms the
-activation-semantics change had *not* yet happened by 2010-04-24, in which
-case candidate 0's existing implementation is simply correct and this
-cluster needs zero further work, exactly as the first pass concluded; or
-(b) confirms it *had* already happened, in which case all 38 cards need the
-*same* small custom-script change (drop the reveal-on-whiff call, keep the
-no-target-check already removed) - one reusable Lua pattern, not 38 bespoke
-ones, comparable in shape to cluster 2's nomi-lock pattern below. Either
-answer is actionable for all 38 cards at once; only the research step
-(not the possible follow-up script) is in scope for this milestone, per the
-task's explicit instruction not to start implementation work yet.
+**Leverage is still real, just two-branched instead of one, and directional
+in a way the first pass got backwards.** Because all 38 cards share the
+identical pair of ruling axes, a period source resolving the shared
+activation-semantics question - *if* it turns out to govern this whole class
+of "search and reveal-on-failure" effects rather than being decided
+card-by-card (plausible, since all 38 share the same upstream script pattern
+and the same verification-axis dating, but not yet confirmed as one single
+historical policy announcement) - would have high leverage regardless of
+which way it resolves:
+
+- If it confirms activation-semantics had **not** yet modernised by
+  2010-04-24 (both axes still old), the existing `reuse-upstream`
+  implementation is simply correct and this cluster needs zero further work,
+  exactly as the first pass concluded.
+- If it confirms activation-semantics **had** already modernised by
+  2010-04-24 while verification/reveal-on-whiff remained old, the needed
+  custom script must **add** the modern-style valid-target-exists check at
+  activation (which the existing GOAT/baseline script lacks entirely, not
+  remove one - the baseline encodes the *old* activation semantics, which
+  has no such check), while *also* retaining the old-era reveal-on-whiff
+  procedure for the narrower case where an activation-legal target
+  subsequently becomes unavailable before resolution (a valid target existing
+  at activation does not guarantee one still exists at resolution, once
+  other chain links have resolved first - "requires a valid match to
+  activate" and "verify on a resolution-time whiff" are separate, not
+  mutually exclusive, behaviours). This is the reverse of what this
+  document's first revision described.
+
+Either answer is actionable for all 38 cards at once, once confirmed; only
+the research step (not the possible follow-up script) would be in scope for
+a future milestone - see "Recommended next milestone" below for why even the
+research step is not started in this commit.
 
 
-| Card | Passcode | Erratum ID | Missing valid-target check on | Baseline (candidate 0) implementation — no implementation exists for candidate 1 (all partition C) | Recommended action |
+| Card | Passcode | Erratum ID | Missing valid-target check on | Baseline (both axes old) implementation — no implementation exists for verification-old/activation-new (all partition C) | Recommended action |
 |---|---|---|---|---|---|
 | A Deal with Dark Ruler | 6850209 | `erratum-a-deal-with-dark-ruler` | Berserk Dragon | `504700010` | locate a dated period ruling (2010-2019) on when A Deal with Dark Ruler's activation began requiring a valid… |
 | Apprentice Magician | 9156135 | `erratum-apprentice-magician` | (see erratum record) | `504700013` | locate a dated period ruling on when Apprentice Magician's revival effect required a Level 2 or lower… |
@@ -448,20 +542,20 @@ task's explicit instruction not to start implementation work yet.
 | Horus the Black Flame Dragon LV4 | 75830094 | `erratum-horus-the-black-flame-dragon-lv4` | Horus the Black Flame Dragon LV6 | `504700132` | locate a dated period ruling on when Horus the Black Flame Dragon LV4 lost its no-target-required activation… |
 | Manju of the Ten Thousand Hands | 95492061 | `erratum-manju-of-the-ten-thousand-hands` | (see erratum record) | `504700169` | locate a dated period ruling on when Manju of the Ten Thousand Hands lost its no-target-required activation… |
 | Masked Dragon | 39191307 | `erratum-masked-dragon` | (see erratum record) | `504700064` | locate a dated period ruling on when Masked Dragon lost its no-target-required activation allowance for its… |
-| Mother Grizzly | 57839750 | `erratum-mother-grizzly` | (see erratum record) | `504700093` | locate a dated period ruling or policy update narrowing the 2011-02-02..2019-04-03 window for when Mother… |
-| Mystic Swordsman LV2 | 47507260 | `erratum-mystic-swordsman-lv2` | (see erratum record) | `504700077` | locate a dated period ruling or policy update narrowing the 2011-02-02..2019-04-03 window for when Mystic… |
-| Mystic Swordsman LV4 | 74591968 | `erratum-mystic-swordsman-lv4` | (see erratum record) | `504700128` | locate a dated period ruling or policy update narrowing the 2011-02-02..2019-04-03 window for when Mystic… |
-| Mystic Tomato | 83011277 | `erratum-mystic-tomato` | (see erratum record) | `504700142` | locate a dated period ruling or policy update narrowing the 2011-02-02..2019-04-03 window for when Mystic… |
+| Mother Grizzly | 57839750 | `erratum-mother-grizzly` | (see erratum record) | `504700093` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-reveal proof requirement ended; separately, no source at all dates when the activate-without-a-Deck-target allowance was tightened |
+| Mystic Swordsman LV2 | 47507260 | `erratum-mystic-swordsman-lv2` | (see erratum record) | `504700077` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the hand+Deck reveal requirement ended; separately, no source at all dates when the activate-without-an-LV4-target allowance was tightened |
+| Mystic Swordsman LV4 | 74591968 | `erratum-mystic-swordsman-lv4` | (see erratum record) | `504700128` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the hand+Deck reveal requirement ended; separately, no source at all dates when the activate-without-an-LV6-target allowance was tightened |
+| Mystic Tomato | 83011277 | `erratum-mystic-tomato` | (see erratum record) | `504700142` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-reveal proof requirement ended; separately, no source at all dates when the activate-without-a-Deck-target allowance was tightened |
 | Ninjitsu Art of Transformation | 70861343 | `erratum-ninjitsu-art-of-transformation` | (see erratum record) | `504700115` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the hand+Deck reveal requirement ended; separately, no source at all in the packet dates when the activate-without-a-target allowance for the Ninja-Tribute cost was tightened |
 | Paladin of White Dragon | 73398797 | `erratum-paladin-of-white-dragon` | (see erratum record) | `504700119` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the hand+Deck reveal requirement ended; separately, no source at all dates when the self-Tribute activate-without-a-Blue-Eyes-target allowance was tightened |
 | Pandemonium | 94585852 | `erratum-pandemonium` | (see erratum record) | `504700165` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-reveal proof requirement ended; separately, no source at all dates when the activate-without-a-Deck-target allowance was tightened |
 | Peten the Dark Clown | 52624755 | `erratum-peten-the-dark-clown` | (see erratum record) | `504700084` | locate a dated period ruling or tournament-policy note pinning when Deck/Hand verification for Peten's… |
 | Pyramid Turtle | 77044671 | `erratum-pyramid-turtle` | (see erratum record) | `504700135` | locate a dated period ruling pinning when Deck verification for Pyramid Turtle's Special Summon trigger… |
 | Skull Knight #2 | 15653824 | `erratum-skull-knight-2` | Skull Knight #2 | `504700022` | locate a dated period ruling pinning when Deck verification for Skull Knight #2's search ended (between… |
-| Sonic Bird | 57617178 | `erratum-sonic-bird` | (see erratum record) | `504700092` | locate a dated period ruling pinning when Sonic Bird's fail-to-find allowance and Deck-verification… |
-| Terraforming | 73628505 | `erratum-terraforming` | (see erratum record) | `504700121` | locate a dated period ruling pinning when Terraforming's fail-to-find allowance and Deck-verification… |
-| Thunder Dragon | 31786629 | `erratum-thunder-dragon` | Thunder Dragon | `504700054` | locate a dated period ruling pinning when Thunder Dragon's zero-copy/no-target discard allowance and its… |
-| Toon Table of Contents | 89997728 | `erratum-toon-table-of-contents` | Toon | `504700156` | locate a dated period ruling pinning when Toon Table of Contents' fail-to-find allowance and… |
+| Sonic Bird | 57617178 | `erratum-sonic-bird` | (see erratum record) | `504700092` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-verification requirement ended; separately, no source at all dates when the fail-to-find (no-target) activation allowance was tightened |
+| Terraforming | 73628505 | `erratum-terraforming` | (see erratum record) | `504700121` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-verification requirement ended; separately, no source at all dates when the fail-to-find (no-target) activation allowance was tightened |
+| Thunder Dragon | 31786629 | `erratum-thunder-dragon` | Thunder Dragon | `504700054` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-verification requirement ended; separately, no source at all dates when the zero-copy/no-target discard-activation allowance was tightened |
+| Toon Table of Contents | 89997728 | `erratum-toon-table-of-contents` | Toon | `504700156` | locate a dated period ruling narrowing the 2011-02-02..2019-04-03 window for when the Deck-verification requirement ended; separately, no source at all dates when the fail-to-find (no-target) activation allowance was tightened |
 | UFO Turtle | 60806437 | `erratum-ufo-turtle` | (see erratum record) | `504700098` | locate a dated period ruling establishing when UFO Turtle's trigger began requiring a valid… |
 | Ultimate Insect LV1 | 49441499 | `erratum-ultimate-insect-lv1` | Ultimate Insect LV3 | `504700081` | locate a dated period ruling establishing when Ultimate Insect LV1's cost began requiring a… |
 | Ultimate Insect LV3 | 34088136 | `erratum-ultimate-insect-lv3` | Ultimate Insect LV5 | `504700057` | locate a dated period ruling establishing when Ultimate Insect LV3's cost began requiring a… |
@@ -543,9 +637,12 @@ reuse across the sub-groups noted, not a single shared script.
 What a targeted effect may legally target changed — mostly (7 of 8)
 targeting-vs-non-targeting or scope-narrowing text errata with chronology
 already resolved and no shared sub-pattern beyond the general category (each
-needs its own bespoke script). One (XY-Dragon Cannon) is partition C - same
-undated-pair structure as cluster 1, sharing the Cannon-fusion
-contact-material question with the cost-payment cluster below.
+needs its own bespoke script). One (XY-Dragon Cannon) is partition C, but
+**not** an independent-axis case like cluster 1: it pairs an undated
+contact-fusion-material ruling with a separate, much later (2016), mechanically
+unrelated nomi-wording erratum - an ordinary partially-dated linear chain
+(see "Independent-axis C vs. ordinary-linear-chain C" above), sharing the
+Cannon-fusion contact-material question with the cost-payment cluster below.
 
 
 | Card | Passcode | Erratum ID | Partition | Existing implementation | Blocker (short) | Recommended action |
@@ -562,18 +659,19 @@ contact-material question with the cost-payment cluster below.
 
 ### 5. Cost/payment behaviour — 4 cards (2 partition C, 2 partition B)
 
-XYZ-Dragon Cannon and XZ-Tank Cannon (partition C, same undated-pair
-structure as cluster 1) share an unresolved chronology question with
-XY-Dragon Cannon in the target-legality cluster above: when TCG rulings on
-contact-fusion material eligibility for the "Cannon" lineage changed - **a
-second, smaller shared-chronology opportunity** (3 cards total across the
-two clusters, all C not A: candidate 0's `reuse-upstream` implementation is
-confirmed, but none of the three has any implementation for the candidate
-where only the undated activation-eligibility axis has changed) alongside
-the headline search-verification one. Blaze Accelerator and Tri-Blaze
-Accelerator (partition B) share a "Pyro-Type send must be an unconditional
-activation cost, not a conditional resolution step" pattern needing a
-custom script each.
+XYZ-Dragon Cannon and XZ-Tank Cannon (partition C - ordinary linear chains,
+like XY-Dragon Cannon, not independent-axis cases) share an unresolved
+chronology question with XY-Dragon Cannon in the target-legality cluster
+above: when TCG rulings on contact-fusion material eligibility for the
+"Cannon" lineage changed - **a second, smaller shared-chronology
+opportunity** (3 cards total across the two clusters, all C not A: the
+baseline `reuse-upstream` implementation is confirmed, but none of the three
+has any implementation for the candidate created once the undated
+material-eligibility ruling alone has changed) alongside the headline
+search-verification one. Blaze Accelerator and Tri-Blaze Accelerator
+(partition B) share a "Pyro-Type send must be an unconditional activation
+cost, not a conditional resolution step" pattern needing a custom script
+each.
 
 
 | Card | Passcode | Erratum ID | Partition | Existing implementation | Blocker (short) | Recommended action |
@@ -588,7 +686,12 @@ custom script each.
 
 No shared sub-pattern beyond the general category; each is a distinct
 activation-legality question (Main-Phase gating, attacker-condition scope, a
-Nomi condition, and a second-attack restriction on Tyrant Dragon).
+Nomi condition, and a second-attack restriction on Tyrant Dragon). Tyrant
+Dragon is partition C, but - like the other 5 reclassified non-cluster-1
+cards - an ordinary linear chain, not an independent-axis case: its undated
+ruling (a second-attack condition) and its dated 2013 functional erratum (a
+Graveyard-revival Tribute-timing change) are two mechanically unrelated
+historical events, not two aspects of one bundled ruling.
 
 
 | Card | Passcode | Erratum ID | Partition | Existing implementation | Blocker (short) | Recommended action |
@@ -620,7 +723,12 @@ filter, and a Summon-prevention effect scope change).
 Distinct from the miss-timing/EFFECT_FLAG_DELAY cluster below: these are
 about *which event* a trigger is registered against or *what it checks*
 (controller/face-up-state filters, REASON_EFFECT exclusions), not about
-whether the trigger exempts itself from missing the timing.
+whether the trigger exempts itself from missing the timing. Vampire Lord is
+partition C, but - like the other 5 reclassified non-cluster-1 cards - an
+ordinary linear chain, not an independent-axis case: its undated ruling
+(self-revival zone scope) and its dated 2016 functional erratum (a
+once-per-turn cap) are two mechanically unrelated historical events, not two
+aspects of one bundled ruling.
 
 
 | Card | Passcode | Erratum ID | Partition | Existing implementation | Blocker (short) | Recommended action |
@@ -645,22 +753,32 @@ given only two cards.
 
 ### 10. Miss-timing / EFFECT_FLAG_DELAY — 1 card, partition C
 
-Axe of Despair has a different structural shape from the other 5
-reclassified cards (its undated change is the *earlier* relevant one, not
-the later - `[AMBIGUOUS, OLD]` rather than `[OLD, AMBIGUOUS]` - which is one
-of the two orderings that is *not* affected by the propagation gap discussed
-above), but the conclusion is the same: `selection_at()` reports
-`candidates=(0, 1)` at the Edison snapshot, candidate 0 (baseline) is
-implemented, and candidate 1 (the undated `EFFECT_FLAG_DELAY` ruling change
-in effect, the dated 2013-06-28 "Archfiend" archetype change not yet in
-effect) has no `resulting_implementation`. That is C, not A. Note also: the
-record's own `review.notes` asserts "only the baseline is ever selected"
-because both project snapshots (2005-04-01, 2010-04-24) precede the dated
-2013 change - but that reasoning overlooks that the *undated* ruling change
-contributes its own, independent ambiguity regardless of the dated change's
-date, which is exactly what the live selection computation above shows.
-This is flagged here as a secondary finding from this audit, not corrected
-in the underlying data record (out of scope for an audit-only milestone).
+Axe of Despair is an **ordinary linear chain**, not an independent-axis
+case - the one this document's earlier revision used as the sole worked
+example of the distinction, and, per the corrected accounting above, the
+same shape (not a "different" one) as the other 5 reclassified
+non-cluster-1 cards: its undated change is the *earlier* relevant one, the
+dated one *later* - `[AMBIGUOUS, OLD]`, one of the two orderings that is
+*not* affected by the propagation gap discussed above. Its undated ruling
+(an `EFFECT_FLAG_DELAY` miss-timing exemption) and its dated 2013-06-28
+functional erratum (an unrelated "always treated as an Archfiend card" text
+addition) are two mechanically unrelated historical events in the card's
+life, not two aspects of one bundled ruling - the defining property of an
+ordinary-chain C record. `selection_at()` reports `candidates=(0, 1)` at the
+Edison snapshot: candidate 0 (baseline) is implemented, and candidate 1 (the
+undated `EFFECT_FLAG_DELAY` change in effect, the dated 2013 Archfiend
+change not yet in effect) has no `resulting_implementation` - a valid,
+non-contradictory chain position, unlike Giant Rat's candidate 1. That is C,
+not A, for the ordinary reason: chronology of the undated ruling is
+unresolved, and the version it would create has no recorded implementation.
+Note also: the record's own `review.notes` asserts "only the baseline is
+ever selected" because both project snapshots (2005-04-01, 2010-04-24)
+precede the dated 2013 change - but that reasoning overlooks that the
+*undated* ruling change contributes its own, independent ambiguity
+regardless of the dated change's date, which is exactly what the live
+selection computation above shows. This is flagged here as a secondary
+finding from this audit, not corrected in the underlying data record (out
+of scope for an audit-only milestone).
 
 
 | Card | Passcode | Erratum ID | Partition | Existing implementation | Blocker (short) | Recommended action |
@@ -677,8 +795,8 @@ not gathered sourced Edison-era tournament/deck data, and none is used here.
 
 | Rank | Cluster | Cards | What resolves it |
 |---|---|---|---|
-| 1 | Failed-search / deck-verification | **38** | one dated period source on the general "activate-without-a-valid-target" ruling - resolves *either* to "existing implementation is correct, zero further work" *or* to "all 38 need the same one shared custom-script pattern" (see cluster 1 above; not a chronology-only cluster) |
-| 2 | Cannon-lineage contact-fusion material (XY-/XYZ-/XZ- Dragon/Tank Cannon, split across target-legality + cost-payment above) | **3** | one dated period source on contact-fusion material eligibility for this lineage - same two-branch caveat as row 1 |
+| 1 | Failed-search / deck-verification | **38** | *if* a period source is found that governs the shared, completely undated activation-semantics question for this whole class of effect (not yet confirmed as one single historical policy, but plausible given the identical script pattern across all 38 - see cluster 1 above) - resolves *either* to "existing implementation is correct, zero further work" *or* to "all 38 need the same one shared custom-script pattern," not a chronology-only cluster. This is roadmap item 1a territory (undated era rulings), not 1b (the companion verification-axis interval, already resolved old at Edison and not the open question here) |
+| 2 | Cannon-lineage contact-fusion material (XY-/XYZ-/XZ- Dragon/Tank Cannon, split across target-legality + cost-payment above) | **3** | same shape and same 1a/not-1b caveat as row 1, for the separate undated contact-fusion-material-eligibility ruling shared by these three (an ordinary linear chain, not an independent-axis case - see "Independent-axis C vs. ordinary-linear-chain C" above) |
 | 3 | Nomi-to-semi-nomi wording (within cluster 2) | **~7** | one reusable "strict Nomi lock" Lua pattern (chronology already resolved) |
 | 4 | Union Condition removal (within cluster 2) | **2** | one reusable "Union equip restriction" Lua pattern (chronology already resolved) |
 | 5 | Once-per-turn/name-lock sub-groups (D.D. pair; die/coin-redo quartet; Standby-revival pair) | **8** of 9 | up to 3 reusable OPT-removal patterns (chronology already resolved) |
@@ -727,61 +845,86 @@ not a popularity judgement, is the basis for the recommendation below.
 
 ## Recommended next milestone
 
-**Unchanged in kind, corrected in framing: research and resolve the shared
-"activate-without-a-valid-target + Deck-verification-on-whiff" chronology
-question for the 38-card failed-search/deck-verification cluster - but as a
-question that determines which of two remediation paths applies, not as a
-chronology-only cluster that resolving automatically means "zero further
-work."**
+**Not the 38-card web research. Design and implement independent-axis /
+joint-state erratum modelling first.**
 
-This is still a RESEARCH task, not an implementation task - consistent with
-this milestone's explicit instruction not to start custom-script work yet -
-but the corrected partition (C, not A) means the honest framing of its
-payoff is "this research determines the remediation path for up to 38
-cards," not "this research is the entire remaining blocker for 38 cards."
+This document has now demonstrated a genuine structural contradiction
+between what the data model claims and what a substantial slice of the
+canonical data actually contains:
 
-- **How many Edison cards it touches:** up to 38 directly (44.7% of the 85
-  this audit covers, 86% of the 44 known-wrong records). Because all 38
-  share the *identical* two-change structure, the shared question resolves
-  identically for all of them: either (a) the undated activation-semantics
-  change had *not* yet happened by 2010-04-24, confirming the existing
-  `reuse-upstream` implementation is already correct and this cluster needs
-  zero further work - the original, happier reading - or (b) it *had*
-  already happened, in which case all 38 need the same one shared
-  custom-script pattern (drop the reveal-on-whiff call, keep the
-  no-target-check already removed), not 38 bespoke ones. Either answer is
-  high-value and applies to the whole cluster at once. A second, smaller
-  opportunity of the identical shape (3 cards: XY-/XYZ-/XZ- Dragon/Tank
-  Cannon, the contact-fusion-material question, also C not A) could be
-  picked up in the same research pass at low marginal cost, for up to 41
-  cards total.
-- **Why this still outranks the alternatives:** it is simultaneously the top
-  LEVERAGE item (38 cards resolved by one shared question, vs. at most ~9 for
-  any pure implementation-pattern cluster) and lands in the top SEVERITY tier
-  (functional lockout - the deviation blocks a legal action outright, not
-  merely its scope or timing) - both of those properties are about the
-  research question's reach and the deviation's nature, neither of which the
-  partition correction changes. The next-largest cluster
-  (other-shared-ruling-era-change, 12 cards, partition B) is already
-  chronology-resolved and blocked purely on missing Lua/CDB implementations -
-  exactly the kind of work this milestone's instructions say not to start
-  yet, and unlike cluster 1 it offers no research step to substitute in the
-  meantime. Every other cluster is smaller and less structurally uniform.
-- **What evidence it would require:** a dated period source (2010-2018 TCG
-  window - a Konami ruling/FAQ, judge-program communication, or tournament-
-  policy note) establishing when TCG tournament rulings began requiring a
-  legitimate target/match to already exist before these "search-type,
-  reveal-on-failure" effects could legally be activated - ideally dated
-  close enough to 2010-04-24 to resolve whether Edison itself falls before
-  or after the transition, narrowing the currently wide-open interval
-  bracketed only by `old_attested_through: 2011-02-02` /
-  `new_attested_from: 2019-04-03`. This is squarely a continuation of this
-  project's own pre-existing roadmap item 1a/1b ("chronology for the undated
-  era rulings" / "close the search-verification interval"), now reduced from
-  a vague generality to a precisely-scoped, 38-named-card target. No code
-  changes are implied by this recommendation - only research. If the
-  research lands on outcome (b) above, the shared custom-script pattern
-  itself would be a natural, well-scoped *follow-up* milestone, distinct
-  from and not started as part of this recommendation.
+- the schema documents `changes[]` as a linear, ordered, oldest-to-newest
+  version chain, and `selection_at()`'s candidate computation and
+  `implementation_for_version()`'s lookup are both built on that assumption;
+- **38 real erratum records** (confirmed individually, not sampled - see
+  "Independent-axis C vs. ordinary-linear-chain C" above) intentionally
+  contain two genuinely independent behavioural axes, not a chain, and say
+  so in their own review notes;
+- `selection_at()` has no way to represent the resulting joint-state space -
+  for **29 of the 38**, its own candidate labels are actively
+  self-contradictory (asserting a state the record's own dating already
+  rules out), and the real "only one axis changed" state has no valid index
+  at all, correct or otherwise;
+- `implementation_for_version()` cannot map an implementation (or an
+  explicit missing-implementation gap) to a joint state either - it can only
+  address chain positions, and for 29 of the 38 records even that address is
+  wrong.
+
+Continuing to walk more formats chronologically, or spending a research pass
+on any of the affected clusters, before this representation gap is closed
+would keep building on a model that - for at least 38 cards today - either
+mislabels its own output or cannot express the question being asked at all.
+That is the more urgent problem this audit surfaced, ahead of any individual
+chronology question.
+
+**Recommend as the next milestone: design and implement independent-axis /
+joint-state erratum modelling**, sized to be its own atomic task, with these
+requirements:
+
+- preserve ordinary linear chains exactly as they behave today - all 41 B
+  records and all 6 ordinary-linear-chain C records must be unaffected;
+- explicitly distinguish, per change, whether it is chained to its
+  neighbour(s) or represents an independent axis (see the `"order":
+  "chained" | "independent"` sketch under "Selection-model ordering
+  question" above - a concrete starting point, not a final design);
+- represent the possible joint behavioural states for a run of independent
+  axes without abusing a linear prefix index the way `changes[0]`'s
+  `resulting_implementation` slot is informally overloaded today;
+- map an implementation, or an explicit and structured missing-implementation
+  gap, to each historically-plausible joint state - not just to chain
+  positions;
+- `selection_at()` must return candidates whose labels are always
+  semantically meaningful and never self-contradictory, for chained and
+  independent-axis records alike;
+- the validator must check the new representation (equivalent in spirit to
+  today's `erratum.changes-out-of-order` check, extended to independent-axis
+  runs);
+- migrate the 38 currently-affected records, and audit the rest of the
+  296-record corpus for the same shape before assuming it is unique to
+  Edison's 85 - a quick scan during this revision found 46 records
+  project-wide with an adjacent dated/undated relevant-change pair, of which
+  2 (Insect Imitation, Last Will) are outside Edison's 44 known-wrong set;
+  a first check suggests those 2 do not currently trigger the same broken-
+  candidate symptom (their dated change is already confirmed NEW, not OLD,
+  at a relevant snapshot), but this was not audited to the same depth as
+  Edison's 44 and should be re-verified, not assumed, as part of the
+  redesign;
+- recompute every affected format's selection/warning counts once the
+  migration lands, and confirm the 44/41/85 headline counts either hold or
+  are explained;
+- add regression tests for both true chains (propagation now applies
+  correctly) and independent axes (joint-state candidates, not linear
+  prefixes) - `tests/test_errata.py::OrderingConstraintTest` and
+  `tests/test_repo_data.py::RealDataTest::test_giant_rat_selection_shape`,
+  added by this audit to characterise *current* behaviour, would need
+  re-authoring against the new, correct semantics once this lands.
+
+**Not implemented in this commit** - it is not tiny or obviously safe, and
+this commit's job was to make the audit and documentation truthful, not to
+redesign the data model. Once that redesign lands, the 38-card (and 3-card
+Cannon-lineage) chronology research recommended in earlier revisions of this
+document becomes a well-founded follow-on milestone - the underlying
+research value described above is real, it is simply premature to spend it
+against a representation that cannot yet record the answer correctly for
+29 of the 38 cards it would resolve.
 
 Not started in this commit, per the task's explicit instruction.

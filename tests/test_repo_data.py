@@ -42,18 +42,27 @@ class RealDataTest(unittest.TestCase):
     def test_giant_rat_selection_shape(self):
         """The real-data ordering-constraint case backing
         docs/research/edison-behaviour-gaps.md (roadmap item 5c) and
-        tests/test_errata.py's OrderingConstraintTest: Giant Rat has two
-        relevant ruling changes, one confirmed OLD at the Edison snapshot
-        (old_attested_through 2011-02-02) and one with completely unknown
-        chronology (no date, no bounds at all). selection_at reports
-        candidates (0, 1) without propagating change 0's definite OLD state
-        onto change 1 -- documented, not patched, because Giant Rat's own
-        review notes state the two changes are independent ruling axes that
-        "cannot be sequenced", not a validated chain (propagating would
-        manufacture false certainty). Candidate 1 (change 0's behaviour
-        applied, change 1's not) has no resulting_implementation, which is
-        why this record is classified C (chronology unresolved AND a
-        candidate lacks an implementation), not A.
+        tests/test_errata.py's OrderingConstraintTest. Giant Rat has two
+        relevant ruling changes: changes[0] is the Deck-verification/
+        reveal-on-whiff axis, confirmed OLD at the Edison snapshot
+        (old_attested_through 2011-02-02); changes[1] is the activation-
+        semantics (no-valid-target-required) axis, completely undated.
+
+        implementation_for_version(1) (= changes[0].resulting_implementation)
+        formally means "changes[0] alone has happened", i.e. verification=NEW
+        - a state changes[0]'s own dating already rules out at this snapshot,
+        NOT the real open question (verification=OLD, activation=NEW), which
+        has no valid version index at all under this record's changes[]
+        order. C is justified directly by Giant Rat's own review notes ("no
+        implementation exists for a state in which only one had changed"),
+        not by candidate 1 happening to be unimplemented - candidate 1 is
+        unimplemented AND represents the wrong (impossible) state; both facts
+        matter and must not be conflated. See docs/research/
+        edison-behaviour-gaps.md's "A/B/C/D partition" section for the full
+        per-record accounting, including the 8 sibling cluster-1 records
+        whose changes[] lists the same two axes in the opposite order, for
+        which candidate 1 *does* correctly represent the real intermediate
+        state.
         """
         erratum = self.repo.errata["erratum-giant-rat"]
         sel = erratum.selection_at(_dt.date(2010, 4, 24))
