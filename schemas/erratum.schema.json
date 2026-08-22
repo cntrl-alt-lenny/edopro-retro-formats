@@ -58,35 +58,81 @@
         }
       }
     },
-    "coverage": {
+    "coverageModern": {
       "type": "object",
       "required": ["kind"],
       "additionalProperties": false,
-      "description": "v2's closed implementation-coverage sum type (docs/research/erratum-state-model-v2.md §4). Exactly one of six kinds, replacing v1's untyped implementation dict for a given historical state (a down-set of events). The all-events (terminal) state is unconditionally 'modern' whether or not it is authored; every other reachable-but-unauthored state defaults to 'unresolved' with no other meaning attachable to its absence — both defaults are enforced by tooling, not by this schema.",
+      "properties": { "kind": { "const": "modern" } },
+      "description": "cards.cdb IS the implementation — nothing else to record. Only ever correct for the all-events (terminal) down-set; the schema cannot know a given `states[]` entry's full event set to enforce that placement (a validator concern), so this branch stays generically available on `authoredCoverage`, but is excluded entirely from `authoredBaselineCoverage` (the flattened sugar's `coverage`), which structurally always describes the non-terminal baseline down-set."
+    },
+    "coverageReuseUpstream": {
+      "type": "object",
+      "required": ["kind", "historical_passcode", "upstream"],
+      "additionalProperties": false,
       "properties": {
-        "kind": {
-          "type": "string",
-          "enum": ["modern", "reuse-upstream", "custom-script", "none-needed", "known-gap", "unresolved"],
-          "description": "modern: cards.cdb IS the implementation (structurally required for the all-events state, never valid to claim elsewhere without a reason). reuse-upstream: an existing Project Ignis historical variant reproduces this state. custom-script: this project provides a historical passcode + script. none-needed: a documented decision that the modern implementation stands in for this state. known-gap: confirmed missing — gap_reason + gap_sources required. unresolved: not yet investigated; never asserted explicitly, only ever the mechanical default for an unauthored reachable state."
+        "kind": { "const": "reuse-upstream" },
+        "historical_passcode": { "$ref": "common.schema.json#/$defs/passcode" },
+        "historical_variant_passcodes": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/passcode" },
+          "description": "Additional artwork-variant codes (within +/-10 of historical_passcode), when upstream ships several arts."
         },
-        "historical_passcode": {
-          "oneOf": [{ "$ref": "common.schema.json#/$defs/passcode" }, { "type": "null" }],
-          "description": "reuse-upstream / custom-script only."
-        },
+        "upstream": { "type": "string", "minLength": 1, "description": "Where the reused implementation lives, e.g. 'ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts'." },
+        "script": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Optional: the upstream script's own path, when worth recording." }
+      },
+      "description": "An existing Project Ignis historical variant reproduces this state. historical_passcode identifies it; upstream says where it lives — both required, matching this project's own established convention (every reuse-upstream implementation currently in the corpus populates both)."
+    },
+    "coverageCustomScript": {
+      "type": "object",
+      "required": ["kind", "historical_passcode", "script"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "custom-script" },
+        "historical_passcode": { "$ref": "common.schema.json#/$defs/passcode" },
         "historical_variant_passcodes": {
           "type": "array",
           "items": { "$ref": "common.schema.json#/$defs/passcode" }
         },
-        "upstream": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
-        "script": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
-        "gap_reason": { "type": "string", "description": "known-gap only: why no implementation exists, concretely." },
+        "script": { "type": "string", "minLength": 1, "description": "Path of the Lua script implementing the historical behaviour (this project's own dist/scripts path)." },
+        "upstream": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Rarely meaningful here — custom-script means the implementation is OURS, not upstream's; present only if genuinely relevant (e.g. adapted from an upstream starting point)." }
+      },
+      "description": "This project provides a historical passcode and Lua script. Both historical_passcode and script are required — this is exactly what distinguishes custom-script from reuse-upstream: the implementation is ours, not upstream's."
+    },
+    "coverageNoneNeeded": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": { "kind": { "const": "none-needed" } },
+      "description": "A documented decision that the modern implementation stands in for this state (e.g. a ruling difference not reproduced, or — on the flattened sugar's baseline down-set — the modern card already behaves correctly for the pre-transition era too). No historical-implementation or gap payload."
+    },
+    "coverageKnownGap": {
+      "type": "object",
+      "required": ["kind", "gap_reason", "gap_sources"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "known-gap" },
+        "gap_reason": { "type": "string", "minLength": 1, "description": "Why no implementation exists, concretely (e.g. 'Project Ignis ships no historical version; reproducing it needs a custom script + reserved passcode')." },
         "gap_sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
       },
-      "allOf": [
-        {
-          "if": { "properties": { "kind": { "const": "known-gap" } }, "required": ["kind"] },
-          "then": { "required": ["gap_reason", "gap_sources"] }
-        }
+      "description": "Confirmed missing: known to differ from the modern implementation but not reproduced today. gap_reason + gap_sources required. Forbids historical_passcode/upstream/script — a known gap has, by definition, nothing to reuse or script yet; once one exists, the state's coverage becomes reuse-upstream or custom-script instead."
+    },
+    "authoredCoverage": {
+      "description": "The five kinds an author may explicitly write in canonical JSON — v2's closed implementation-coverage sum type (docs/research/erratum-state-model-v2.md §4), one legal payload per kind rather than a shared bag of optional fields. This is narrower than the FULL six-way internal `Coverage` enum the design document specifies: 'unresolved' is real (the sixth kind) but is never authored — it is exclusively the mechanical default for a reachable, non-terminal down-set absent from `states[]`, so it has no branch here at all. Used by `state.coverage`, where any of the five (including 'modern') is structurally legal, since the schema cannot know which `states[]` entry is the all-events one — restricting 'modern' to the terminal state specifically remains a validator concern.",
+      "oneOf": [
+        { "$ref": "#/$defs/coverageModern" },
+        { "$ref": "#/$defs/coverageReuseUpstream" },
+        { "$ref": "#/$defs/coverageCustomScript" },
+        { "$ref": "#/$defs/coverageNoneNeeded" },
+        { "$ref": "#/$defs/coverageKnownGap" }
+      ]
+    },
+    "authoredBaselineCoverage": {
+      "description": "authoredCoverage, minus 'modern': the flattened single-event sugar's `coverage` field structurally always describes the {} (baseline, pre-transition) down-set, never the all-events/terminal one (which the sugar never authors at all — its 'modern' coverage is always synthesised). 'modern' is therefore excluded here at the schema level, not deferred to a validator: the baseline down-set is definitionally the card BEFORE its one recorded transition, so it is never correctly 'modern' — if the modern implementation happens to already represent that pre-transition behaviour too, the correct authored kind is 'none-needed', not 'modern'.",
+      "oneOf": [
+        { "$ref": "#/$defs/coverageReuseUpstream" },
+        { "$ref": "#/$defs/coverageCustomScript" },
+        { "$ref": "#/$defs/coverageNoneNeeded" },
+        { "$ref": "#/$defs/coverageKnownGap" }
       ]
     },
     "eventEffective": {
@@ -163,41 +209,65 @@
       "type": "object",
       "required": ["effective", "transitions"],
       "additionalProperties": false,
-      "description": "One historical-chronology node. Two or more transitions inside one event is a first-class, sourced co-occurrence claim ('these behaviours changed together, as one historical act') — a strictly stronger claim than the transitions merely sharing a subject; do not merge transitions into one event for thematic/'bundled' reasons alone (docs/research/erratum-state-model-v2.md §5 item 5).",
+      "description": "One historical-chronology node. Two or more transitions inside one event is a first-class, sourced co-occurrence claim ('these behaviours changed together, as one historical act') — a strictly stronger claim than the transitions merely sharing a subject; do not merge transitions into one event for thematic/'bundled' reasons alone (docs/research/erratum-state-model-v2.md §5 item 5). A 2+-transition event's co-occurrence is itself a chronology fact needing its own evidence (frozen validator invariant 10): `cooccurrence_sources` is required whenever `transitions` has 2 or more entries, and supports the SAME-EVENT assertion specifically — that these transitions happened together, as one act — never inferred from the individual transitions' own `sources`, which only support each transition's own content.",
       "properties": {
         "effective": { "$ref": "#/$defs/eventEffective" },
         "transitions": {
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "#/$defs/transition" }
+        },
+        "cooccurrence_sources": {
+          "$ref": "common.schema.json#/$defs/sourceRefs",
+          "description": "Required when `transitions` has 2+ entries: evidence for the co-occurrence claim itself, not for the transitions' individual content. Optional and rarely meaningful on a single-transition event, which makes no co-occurrence claim to source; not forced there."
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "transitions": { "minItems": 2 } },
+            "required": ["transitions"]
+          },
+          "then": { "required": ["cooccurrence_sources"] }
+        }
+      ]
     },
     "orderingEdge": {
       "type": "object",
       "required": ["before", "after", "basis"],
       "additionalProperties": false,
-      "description": "One explicit, evidence-carrying known-before/known-after constraint between two named events. Never inferred from declaration position — an omitted edge means no constraint, not 'chained to the previous entry' (docs/research/erratum-state-model-v2.md §2). before/after key into this record's own `events{}`; referential integrity and cycle detection are validator concerns, not schema concerns.",
+      "description": "One explicit, evidence-carrying known-before/known-after constraint between two named events. Never inferred from declaration position — an omitted edge means no constraint, not 'chained to the previous entry' (docs/research/erratum-state-model-v2.md §2). before/after key into this record's own `events{}`; referential integrity and cycle detection are validator concerns, not schema concerns. A top-level record `sources` list plus free prose is never sufficient to identify which source establishes which ordering claim — a directly-sourced edge cites its own `sources` here.",
       "properties": {
         "before": { "type": "string", "description": "Id of the event this edge asserts happened first (a key of this record's `events{}`)." },
         "after": { "type": "string", "description": "Id of the event this edge asserts happened second." },
         "basis": {
           "type": "string",
           "enum": ["date-proven", "directly-sourced", "researcher-inference"],
-          "description": "date-proven: chronology alone proves the order (§5's PROVEN test) — no further justification needed; asserted automatically when `ordering.chains` sugar desugars a provably-ordered pair, or written explicitly in `ordering.edges` when an author has already checked it. directly-sourced: a cited source directly states the relative order, independent of (and not provable from) the two events' own dates. researcher-inference: a researcher's judgement call, not a direct citation — the weakest tier, still required to be explicit rather than silent. Chronology that CONTRADICTS a declared edge is a hard validator error regardless of basis; chronology that is merely compatible-but-inconclusive requires a non-'date-proven' basis with an explanatory `note`."
+          "description": "date-proven: chronology alone proves the order (§5's PROVEN test) — no further justification needed; asserted automatically when `ordering.chains` sugar desugars a provably-ordered pair, or written explicitly in `ordering.edges` when an author has already checked it. directly-sourced: a cited source directly states the relative order, independent of (and not provable from) the two events' own dates — `sources` is required, citing the source(s) that directly state it. researcher-inference: a researcher's judgement call, not a direct citation — the weakest tier, still required to carry an explanatory `note` rather than be silent; `sources` is deliberately NOT required here (decision, not oversight — this tier exists precisely for the case where no direct citation states the order, so forcing a citation would either be padding or would blur it with directly-sourced; a researcher-inference edge MAY still cite `sources` that inform the judgement without directly stating the order). Chronology that CONTRADICTS a declared edge is a hard validator error regardless of basis; chronology that is merely compatible-but-inconclusive requires a non-'date-proven' basis with an explanatory `note`."
         },
         "note": {
           "type": "string",
           "description": "Required whenever basis is not 'date-proven': explains why this edge is believed, so a non-date-proven order is never asserted silently."
+        },
+        "sources": {
+          "$ref": "common.schema.json#/$defs/sourceRefs",
+          "description": "Required when basis is 'directly-sourced' (the source(s) that directly state the order). Optional, not required, when basis is 'researcher-inference' (see basis's own description for why). Not required (chronology proves it mechanically), but not forbidden, when basis is 'date-proven'."
         }
       },
       "allOf": [
         {
           "if": {
-            "properties": { "basis": { "const": "date-proven" } },
+            "properties": { "basis": { "const": "directly-sourced" } },
             "required": ["basis"]
           },
-          "else": { "required": ["before", "after", "basis", "note"] }
+          "then": { "required": ["note", "sources"] }
+        },
+        {
+          "if": {
+            "properties": { "basis": { "const": "researcher-inference" } },
+            "required": ["basis"]
+          },
+          "then": { "required": ["note"] }
         }
       ]
     },
@@ -211,8 +281,9 @@
           "items": {
             "type": "array",
             "minItems": 2,
+            "uniqueItems": true,
             "items": { "type": "string" },
-            "description": "Pure sugar for pairwise before/after edges between consecutive ids, each requiring basis 'date-proven' (§5's PROVEN test) — a chain the test does not prove for every consecutive pair must be expressed as explicit `edges` instead."
+            "description": "Pure sugar for pairwise before/after edges between consecutive ids, each requiring basis 'date-proven' (§5's PROVEN test) — a chain the test does not prove for every consecutive pair must be expressed as explicit `edges` instead. Repeating an id within one chain is structurally meaningless (uniqueItems). Overlap of ids ACROSS separate chains/edges, and cycle detection across the whole graph, are validator concerns."
           }
         },
         "edges": {
@@ -229,10 +300,11 @@
       "properties": {
         "events": {
           "type": "array",
+          "uniqueItems": true,
           "items": { "type": "string" },
-          "description": "Ids of this record's own `events{}` that have occurred in this state (a down-set — referential integrity and down-set validity are validator concerns)."
+          "description": "Ids of this record's own `events{}` that have occurred in this state (a down-set — order carries no meaning, so uniqueItems is the schema-level guarantee that this array is genuinely a SET, never a second textual encoding of the same set via a repeated id; referential integrity and down-set validity are validator concerns)."
         },
-        "coverage": { "$ref": "#/$defs/coverage" }
+        "coverage": { "$ref": "#/$defs/authoredCoverage" }
       }
     },
     "review": {
@@ -306,9 +378,9 @@
     "erratumV2": {
       "type": "object",
       "title": "v2: historical-event DAG",
-      "required": ["id", "modern_card", "classification", "events", "sources"],
+      "required": ["id", "modern_card", "classification", "events", "ordering", "sources"],
       "additionalProperties": false,
-      "description": "Not yet used by any canonical data file — the schema accepts this shape ahead of migration (docs/research/erratum-state-model-v2.md, frozen architecture). `implementation` and `changes` are deliberately absent from this shape: the baseline ({} down-set) coverage and every other state's coverage live in `states[]`, and the all-events down-set's 'modern' coverage is never authored.",
+      "description": "Not yet used by any canonical data file — the schema accepts this shape ahead of migration (docs/research/erratum-state-model-v2.md, frozen architecture). `implementation` and `changes` are deliberately absent from this shape: the baseline ({} down-set) coverage and every other state's coverage live in `states[]`, and the all-events down-set's 'modern' coverage is never authored. `ordering` is REQUIRED (though `{}` is a valid value) for this multi-event form specifically: these are precisely the records where order deserves conscious review, so the field's presence — even empty — records that a reviewer considered it, rather than merely omitted it. This does not change computational meaning either way: an absent edge never creates an edge, present or not. The single-event sugar (below) needs no such field at all, since it has nothing to order.",
       "properties": {
         "$schema": { "type": "string" },
         "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
@@ -374,8 +446,8 @@
           }
         },
         "coverage": {
-          "$ref": "#/$defs/coverage",
-          "description": "Coverage of the {} (baseline) down-set — the card as it behaved before this transition. The all-events down-set's coverage is always 'modern' and is never written here."
+          "$ref": "#/$defs/authoredBaselineCoverage",
+          "description": "Coverage of the {} (baseline) down-set — the card as it behaved before this transition. 'modern' is not a legal kind here (authoredBaselineCoverage excludes it): the all-events down-set's coverage is always 'modern' and is never written on this shape at all; if the modern card already represents this baseline behaviour too, the correct kind is 'none-needed'."
         },
         "review": { "$ref": "#/$defs/review" },
         "applicable_formats_note": { "type": "string" },
