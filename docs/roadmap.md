@@ -207,12 +207,27 @@ reflects that.
    for the full requirements list.
 
    5d. ~~**Erratum state-model architecture research.**~~ **Done (2026-08-22, design
-   only — no implementation; corrected twice after successive adversarial reviews —
-   round 1 found four architecture-level defects, round 2 found the ordering-edge
-   contradiction test's mathematics were wrong, the migration-time invariant was
-   tautological under the corrected model, one record was misclassified, "bundled" and
-   "co-occurrence" were being conflated, ordering edges needed an evidentiary basis, and
-   the API used fragile object-identity comparisons — all fixed below).** Chose and
+   only — no implementation; corrected three times after successive adversarial
+   reviews — round 1 found four architecture-level defects, round 2 found the
+   ordering-edge contradiction test's mathematics were wrong, the migration-time
+   invariant was tautological under the corrected model, one record was misclassified,
+   "bundled" and "co-occurrence" were being conflated, ordering edges needed an
+   evidentiary basis, and the API used fragile object-identity comparisons; round 3
+   found that the "48 self-contradictory records" count was being silently conflated
+   with "all records needing nontrivial migration" (YZ-Tank Dragon needs migration but
+   was never self-contradictory — it is undated on both sides, so v1 never
+   independently confirms either behaviour, only *omits* a fourth reachable state its
+   array-prefix model has no way to name), that "bundled/shared-package" was being
+   encoded as a shared `axis` label when axis is per-question and both of Giant Rat's
+   own bundled transitions already carry distinct labels, that the boundary-count bound
+   in §7's exact test understated itself by half, and — surfaced by round 3's own
+   adversarial re-verification of its "48 = 38 + 8 + 2" arithmetic — that two worked
+   examples (Tyrant Dragon, Axe of Despair) had been carrying a real, older bug since an
+   early pass: both were described as "not self-contradictory" on the reasoning that no
+   order had been asserted, the exact conflation this whole document exists to fix;
+   checked directly, both *are* self-contradictory from their functional erratum's
+   effective date onward, corrected in place — all fixed below, and the architecture is
+   now frozen for implementation.** Chose and
    proved a replacement for
    `changes[]`'s linear version-chain model: a **historical-event DAG** — events (not
    bare transitions) carry chronology and an explicit, evidence-only partial order
@@ -256,7 +271,15 @@ reflects that.
    critically, "bundled" and "co-occurrence" are corrected to no longer be conflated:
    bundled records migrate as two separate, unordered events exactly like
    mechanically-distinct ones, never merged into one event, since no record in the
-   corpus has evidence of genuine simultaneity, only of a shared subject. Full design,
+   corpus has evidence of genuine simultaneity, only of a shared subject — and the two
+   categories are not distinguished by `axis` either, since axis names one semantic
+   question per transition regardless of category; the bundled/mechanically-distinct
+   split is a research classification with no field in canonical v2 data at all, since
+   nothing computational reads it. "48" (the self-contradiction symptom count) and "49"
+   (38 + 9 + 2, the exhaustive count of records needing nontrivial, order-aware
+   migration) are corrected to no longer be conflated either: 48 ⊊ 49, and the one
+   member of 49 not in 48 is YZ-Tank Dragon, worked out as the counterexample. Full
+   design,
    three compared architectures (the third, axis-as-mandatory-grouping, is shown to
    collapse into "the first architecture plus a redundant layer" once the axis
    conflation is corrected), adversarial stress-testing (11 cases, including the
@@ -264,8 +287,11 @@ reflects that.
    the proposed 8-step atomic implementation sequence: `docs/research/
    erratum-state-model-v2.md`. No canonical data, `model.py`/`validate.py`/`lflist.py`,
    schema, or generated output changed in this milestone — design only, per this
-   milestone's explicit scope. Recommended next step (not started): that 8-step
-   sequence, beginning with schema v2 added alongside v1 with no behavioural change.
+   milestone's explicit scope. **The architecture is now frozen** (sixteen named
+   properties, listed at the document's end) — no further redesign is expected absent a
+   concrete counterexample discovered during implementation. Recommended next step (not
+   started as part of this milestone): that 8-step sequence, beginning with schema v2
+   added alongside v1 with no behavioural change.
 
 ## Phase 2 — framework completeness
 

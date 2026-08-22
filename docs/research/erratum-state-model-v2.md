@@ -6,6 +6,17 @@ changes, no generated `dist/` changes, no schema changes committed in this
 milestone. This document exists to choose an architecture and prove it
 against real records before any implementation work is scheduled.
 
+**Status: architecture FROZEN for implementation.** Three correction
+passes (bb2c6a7 → 9b34a79 → 8aa67b2 → this commit) is enough adversarial
+scrutiny for a first implementation attempt to begin. The historical-event
+DAG (§2's Architecture 1, as refined) is the accepted design; its
+foundational properties are frozen — §13 lists all sixteen. No further
+architecture exploration is expected unless implementation discovers a
+concrete counterexample the frozen model genuinely cannot represent; a
+found imprecision in a proof or a migration-spec inconsistency (as this
+pass's four corrections were) is grounds for a targeted fix, not grounds
+to reopen the choice of architecture.
+
 **Revision note.** This is a correction of the first version of this
 document (commit bb2c6a7), not a new design. Adversarial review found four
 architecture-level problems in that version, all fixed here: (1) the
@@ -514,7 +525,7 @@ the `events{}` object.
 ### B. A Deal with Dark Ruler — reversed declaration order relative to Giant Rat
 
 Same two events, same axes, but written in the opposite order in the JSON
-object (one of the 8 Edison cluster records where today's schema's
+object (one of the 9 Edison cluster records where today's schema's
 list-order-dependent arithmetic happens to land on the right answer by
 chance). Under Architecture 1, **object key order is not read at all** —
 the candidate computation depends only on event identity and the (empty)
@@ -552,19 +563,33 @@ revival cost timing), review notes explicit: *"cannot be sequenced against
 each other because the former has no chronology at all."* No `ordering`
 edge, no co-occurrence — two ordinary, separate, unordered events. At
 Edison: 2 candidates (`{}`, `{extra-attack}`), matching the committed
-result. At a hypothetical 2014-01-01 snapshot: 2 candidates
-(`{revival-timing}`, both) — **not** self-contradictory at either
-snapshot, because nothing was ever asserted about their relative order in
-either direction; this is the same result the first version of this
-document already established, unaffected by the event/transition
-restructuring.
+result, and genuinely not self-contradictory there — the revival-timing
+erratum (2013-10-11) is still confirmed OLD at Edison (2010-04-24), so
+candidate 1's positional claim that it has not occurred is unopposed.
+
+**Corrected by §7's exhaustive audit: this record is nonetheless one of
+the 48, at every snapshot from 2013-10-11 onward — including the
+"hypothetical 2014-01-01" this section used to illustrate.** This
+section's earlier claim that Tyrant Dragon is "not self-contradictory...
+because nothing was ever asserted about their relative order" repeated
+this document's own central mistake one layer down: the absence of an
+asserted order says nothing about whether a *positional* candidate can
+still collide with an event's own independently-computed status once one
+side becomes determinate. Once the revival-timing erratum is confirmed
+NEW, candidate 1 — positionally, "extra-attack occurred, revival-timing
+did not" — keeps claiming revival-timing has not occurred, directly
+contradicting its own confirmed status; verified directly against live
+code. This is the same shape as Sangan (§3.J), just discovered later.
 
 ### E. Axe of Despair — the second order-unknown, mechanically-distinct case
 
-Structurally identical to Tyrant Dragon; review notes silent rather than
-explicit about order, which — as established in the Edison audit and
-unchanged here — is not evidence of order either. Same treatment, same
-result.
+Structurally identical to Tyrant Dragon, including the correction just
+made: review notes silent rather than explicit about order, which — as
+established in the Edison audit and unchanged here — is not evidence of
+order either; not self-contradictory at Edison (the functional erratum,
+2013-06-28, is still confirmed OLD there), but — corrected here to match
+Tyrant Dragon — one of the 48 at every snapshot from 2013-06-28 onward,
+for the identical positional reason.
 
 ### F. Necrovalley — genuinely fully-dated multi-event record
 
@@ -604,6 +629,13 @@ because there is no default. `ordering: {}`. 4 down-sets, all surviving at
 any snapshot before either event's (unknown) date — the widest candidate
 set of any worked example in this document, correctly reflecting that this
 record currently has the least evidence of any record in the corpus.
+**This record is not one of §7's 48** — v1's three candidates (`0, 1, 2`)
+are never independently contradicted, since neither event is ever
+confirmed old or new — but it is still structurally affected: v1's
+array-prefix model can express only three of these four down-sets,
+permanently omitting `{summon-rule alone}`. §7 works this out as the
+dedicated counterexample distinguishing "48 records with a wrong label"
+from "49 records whose migration changes something."
 
 **Corrected classification.** An earlier pass in this research placed
 YZ-Tank Dragon in the bundled/independent-axis category, reasoning from
@@ -828,8 +860,10 @@ how large the space gets.
    positively true of every event pair unless (3) is declared, not merely
    true of pairs an author forgot to think about. Corpus evidence for this
    tier: the "cannot be sequenced" language already present, independently
-   worded, in the review notes of the vast majority of the 48 records
-   found in §7.
+   worded, in the review notes of the vast majority of the 49 records
+   found in §7 needing nontrivial migration (including YZ-Tank Dragon's
+   own notes — one of the 49, not one of the 48, but disclaiming order
+   just as explicitly).
 5. **Co-occurrence: two or more transitions belonging to one event** —
    a **first-class chronology fact**, not documentation: it removes real
    candidate states from the down-set space (§2's `policy-revision` worked
@@ -853,14 +887,30 @@ how large the space gets.
    mechanism would be asserting something the record's own evidence does
    not support. §7's migration procedure is corrected accordingly: **all
    38 bundled records, like the 9 mechanically-distinct records, migrate
-   as two separate, unordered events with no declared edge** — the only
-   difference between the two categories is the (purely descriptive,
-   computationally inert) `axis` label each event's transitions carry. The
-   co-occurrence mechanism remains fully specified (§2) and provably
-   correct (§12) for the day evidence like the task's own worked example
-   ("changed in the same policy revision, exact date unknown") actually
-   turns up in this corpus — it is simply not yet needed by any record
-   audited so far.
+   as two separate, unordered events with no declared edge.** **Corrected
+   in this follow-up pass: the two categories are not distinguished by
+   `axis` either.** `axis` names *one semantic behavioural question per
+   transition* — Giant Rat's own worked example (§2) already assigns its
+   two bundled transitions two genuinely *different* axis labels
+   (`search-reveal-procedure`, `search-activation-legality`), not a
+   shared one, precisely because a shared underlying ruling still poses
+   two distinct questions. Treating "shared/related axis" as the 38's
+   signature and "distinct axis" as the 9's would have been the same
+   category error this paragraph exists to correct, one layer down. **The
+   bundled-vs-mechanically-distinct split is a research/audit
+   classification, useful for this document's own accounting and nothing
+   else — it has no representation in canonical v2 data at all**, not
+   `axis`, not a new field: no part of the selection algorithm, the
+   validator, or the migration script treats the two categories
+   differently, so a field encoding the split would carry zero
+   computational use, exactly the kind of unused structure this redesign
+   exists to avoid. Where the relationship between two transitions is
+   worth recording per record, it belongs in that record's own
+   `review.notes` prose, as several already do. The co-occurrence
+   mechanism remains fully specified (§2) and provably correct (§12) for
+   the day evidence like the task's own worked example ("changed in the
+   same policy revision, exact date unknown") actually turns up in this
+   corpus — it is simply not yet needed by any record audited so far.
 6. **Order asserted by researcher inference, not by a direct source** —
    unchanged from the first revision, surfaced by Insect Imitation/Last
    Will (§3.I). Recommendation unchanged: a `basis` field distinguishing
@@ -987,20 +1037,38 @@ information," which missed Sangan). The second version fixed the
 *substance* of the test but ran it as a **snapshot sweep** — each
 transition's own dates plus a buffer, plus a yearly scan from 2000 to
 2030 — which is thorough but not exhaustive, and this document should not
-call a sweep "proven" when an exact method is available. It is: selection
-state changes only at the finite set of boundary dates where some
-transition's own OLD/AMBIGUOUS/NEW status changes (at most 2 boundary
-dates per relevant transition — where AMBIGUOUS begins, and where it
-ends), so evaluating the algorithm once at each such boundary, across the
-whole record, is a complete, finite case analysis, not a sample of one.
+call a sweep "proven" when an exact method is available. It is: each
+relevant transition's own status can change at most **twice** as a
+function of snapshot date — OLD→AMBIGUOUS (where its uncertainty window
+begins) and AMBIGUOUS→NEW (where it ends); day-precision collapses these
+to one instant (§12.6). That "two" is the count of status-changing
+*boundaries* per transition, not the count of calendar dates the test
+below evaluates — evaluating a boundary correctly means checking a
+representative point on each side of it, so the concrete date set is
+larger before deduplication (corrected below). Because no transition's
+status can change *between* two consecutive boundaries by construction,
+evaluating the algorithm at a representative point around each boundary,
+across the whole record, is a complete, finite case analysis, not a
+sample of one.
 
 **The exact test**, run against every one of the 296 records: for each
-record, collect every relevant transition's own boundary dates (for an
-exact date at precision P, the day before and the day of/after the
-precision-widened interval's start and end; for bounded chronology, the
-attested-through date and the day after it, and the day before
-attested-from and attested-from itself). This is a finite set, at most `2
-× (relevant transitions)` dates. At each one, compute `selection_at()`'s
+record, collect every relevant transition's own representative boundary
+dates — for an exact date at precision P, the day before *and* the day of
+the precision-widened interval's start, and the day before *and* the day
+of its end (four raw dates, collapsing toward fewer distinct calendar
+dates at day precision, where start and end coincide); for bounded
+chronology, the attested-through date and the day after it, and the day
+before attested-from and attested-from itself (up to four dates, fewer
+when only one bound is present). This is a finite set, **at most `4 ×
+(relevant transitions)` raw dates before deduplication** — not `2 ×`,
+which this document previously stated: that smaller number is the count
+of status-changing boundaries per transition (correct, above), not the
+count of calendar dates evaluated around them (double that, before the
+usual collapsing from shared dates across a record and day-precision
+degeneracy within one transition). This prose correction changes no
+result — the 296-record sweep already evaluated the fuller date set in
+code; only the earlier paragraph's stated bound was imprecise. At each
+date in the deduplicated set, compute `selection_at()`'s
 candidates and check every candidate index `k` against every transition's
 own, independently-computed status: candidate `k` claims transitions
 `0..k-1` have occurred and `k..end` have not; a candidate is
@@ -1019,6 +1087,68 @@ relative to the sweep — it upgrades the finding from "thorough" to
 completeness it has not actually verified. The 44 already established by
 the Edison audit, plus **Sangan, Witch of the Black Forest** (§3.J — both
 events dated, windows overlap) and **Insect Imitation, Last Will** (§3.I).
+
+**"48" is a symptom count, not the exhaustive set of structurally
+affected records — the two must not be conflated.** 48 is the exact
+count of records that produce a self-contradictory candidate label under
+**v1's** linear-chain model at *some* snapshot — a defect symptom that
+can only exist where v1's model asserts something and gets it wrong. A
+separate, larger set is the exhaustive scope of records whose migration
+to v2 is not a pure rename: the **49 records requiring nontrivial,
+order-aware migration** under this document's own taxonomy below — 38
+bundled/shared-package + 9 mechanically-distinct order-unknown + 2
+needs-manual-review, i.e. `296 − 236 trivial − 11 fully-ordered = 49`.
+Every one of the 48 falls inside the 49, by construction — self-
+contradiction requires an unproven-order pair of relevant changes, which
+is exactly the 49's membership condition; the 236 trivial and 11
+genuinely-proven-ordered records cannot produce it. Checked exhaustively
+against all 49: **all 38 bundled records, 8 of the 9 mechanically-
+distinct, and both of the 2 needs-manual-review are in the 48** (`38 + 8
++ 2 = 48`) — the sole exception, at every snapshot, forever, is
+**YZ-Tank Dragon**. **This "38 of 38" figure is not in tension with
+§3.B's "29 of the 38 Edison records self-contradictory... the other 9
+worked by accident": §3.B measures self-contradiction *at the Edison
+snapshot specifically* (2010-04-24) — a check this project already
+performs — while "48" measures it *exhaustively, at any snapshot,
+including many this project has never queried*. A record can pass the
+narrower, currently-relevant check and still be one of the 48 at a
+snapshot only a future format would reach — Tyrant Dragon and Axe of
+Despair (§3.D, §3.E) are worked examples of exactly this, corrected
+below.**
+
+**YZ-Tank Dragon, the worked counterexample.** Both of its relevant
+changes carry a null `effective.date` and no bounded attestation at all
+(§3.H) — `change_state_at()` returns AMBIGUOUS at every snapshot,
+forever; neither transition is ever independently *confirmed* old or
+new. Verified against live code: `selection_at()` returns
+`candidates=(0, 1, 2)` at every checked snapshot, and — confirmed by
+running this section's exact boundary test against it specifically — no
+candidate is ever flagged self-contradictory, because self-contradiction
+requires an independently-confirmed status that disagrees with a
+candidate's claim, and no such confirmation is ever possible for this
+record. YZ-Tank Dragon correctly, permanently, is not one of the 48.
+
+But v1's three candidates were never the full state space to begin with.
+Candidate index `k` under v1's model means "the first `k` entries of
+`changes[]`, in array order, have occurred" — a *prefix* of the array.
+For two relevant changes that structure admits exactly three subsets —
+`{}`, `{first}`, `{first, second}` — and cannot express `{second}` alone,
+because array-prefix membership is not the same thing as arbitrary
+subset membership, regardless of whether any candidate happens to be
+mislabeled. Under the accepted v2 model, YZ-Tank Dragon's two behaviours
+— the contact-fusion material-zone restriction, and the nomi-vs-semi-nomi
+summoning condition — are two separate, unordered events; the down-set
+space over two unordered events is the full power set: `{}`,
+`{material-rule}`, `{summon-rule}`, `{material-rule, summon-rule}` — four
+states (§3.H already establishes this). Migrating YZ-Tank Dragon to v2
+does not just relabel three states correctly — it adds a fourth,
+previously-*unrepresentable* state ("summon condition loosened,
+material-zone restriction not yet lifted") that v1's array-prefix model
+had no way to name at all, self-contradictory or not. A v1-vs-v2
+equivalence check that only asks "did any of the 48 stop being
+self-contradictory" cannot see this, because YZ-Tank Dragon was never
+self-contradictory to begin with — §10 and §13's cutover-check wording
+are corrected below to check for it explicitly.
 
 **Corrected taxonomy** — YZ-Tank Dragon reclassified (§3.H): its two
 questions (contact-fusion material zone; nomi-vs-semi-nomi condition) are
@@ -1063,17 +1193,17 @@ Because omitted ordering means no edge, a migration script cannot copy
 run §5's PROVEN test itself and emit an edge only when that test passes.
 Two further corrections from the second revision of this document:
 
-- **The 38 bundled and 9 mechanically-distinct records migrate
-  identically in chronology structure — as two separate, unordered
-  events, with no `ordering` edge, and no event-merging.** "Bundled" is a
+- **The 38 bundled and 9 mechanically-distinct records migrate to
+  byte-for-byte-identical JSON *shape* — two separate, unordered events,
+  with no `ordering` edge, and no event-merging.** "Bundled" is a
   research label (these two transitions are about the same underlying
   question), not a chronology claim (that they happened together) — §5.5
   corrects this conflation directly, and no record in the corpus has
-  evidence meeting the co-occurrence bar. The *only* difference between
-  the two categories in the migrated JSON is the `axis` label each
-  event's transitions carry (shared/related for the 38, distinct for the
-  9) — a documentation fact with zero effect on the computed candidate
-  set.
+  evidence meeting the co-occurrence bar. **They are not distinguished by
+  `axis` either** (§5.5): each event's transitions carry their own
+  accurate, per-question `axis` label regardless of category — the
+  bundled-vs-mechanically-distinct split itself has no field in canonical
+  v2 data at all, since nothing computational reads it.
 - **No edge is emitted anywhere without passing §5's PROVEN test or
   carrying an explicit, authored `basis`.** This applies uniformly:
 
@@ -1085,10 +1215,11 @@ Two further corrections from the second revision of this document:
     throughout," since sorting and proving are the same computation here.
   - **38 bundled + 9 mechanically-distinct = 47**: the migration script
     emits **no `ordering` edges at all** (§5's test does not pass for any
-    of them — every one is compatible-but-inconclusive) — only the
-    already-published classification (bundled vs. mechanically-distinct)
-    is transcribed into each event's `axis` label; no new research is
-    needed for these 47.
+    of them — every one is compatible-but-inconclusive); each event's
+    `axis` label is transcribed from that transition's own semantic
+    question (already documented per-record), not from its
+    bundled/mechanically-distinct category, which is not written into the
+    record at all — no new research is needed for these 47.
   - **2 needs-manual-review**: blocked on a human §5.6 decision before
     any emission at all — not even the "no edge" default is written
     automatically, since resolving whether their researcher-inferred
@@ -1106,12 +1237,21 @@ their statuses will always move together at every snapshot as a
 consequence of sharing a date, not as a consequence of any declared
 relationship.
 
-**Do not trust the Edison 44/85 as the entire affected population** —
-proven exactly, not swept: the exhaustive check found 4 records entirely
-outside Edison's known-wrong/divergence set with the identical defect,
+**Do not trust the Edison 44/85 as the entire affected population, and
+do not trust the corrected 48 as it either.** Proven exactly, not
+swept: the exhaustive check found 4 records entirely outside Edison's
+known-wrong/divergence set with the identical self-contradiction defect,
 none of which currently produce a *visible* symptom for any
 currently-defined format, exactly the risk this document's introduction
-describes.
+describes. But "48" only counts records where v1's model produces a
+*wrong* answer it asserts with false confidence — it is silent on
+YZ-Tank Dragon, where v1's model was never wrong about any of its three
+candidates, only *incomplete*, missing a fourth state it had no way to
+represent at all (worked above). The **49** — this document's exhaustive
+taxonomy of records needing nontrivial, order-aware migration — is the
+count to use for "how many records does this redesign actually change
+something about"; **48** remains the right count for "how many records
+does today's schema actively mislabel."
 
 ---
 
@@ -1362,9 +1502,26 @@ invariant":**
   v1 code path cannot silently regress it further before removal.
 - **A v1-vs-v2 equivalence/cutover check** — during migration (§8, §13),
   comparing the old sweep-based v1 output against the new v2 algorithm's
-  output confirms the migration actually *changes* behaviour for exactly
-  the records it should (the 48) and leaves every other record's computed
-  output untouched.
+  output, per migrated record, confirms:
+  - the 236 trivial + 11 mechanically-safe records preserve their v1
+    semantics exactly, at every checked snapshot;
+  - the 47 already-classified unordered records (38 bundled + 9
+    mechanically-distinct) each produce the **full** expected v2
+    down-set space — every structurally-reachable state, not merely the
+    subset v1's array-prefix model could name;
+  - the 48 legacy self-contradiction cases specifically **lose that
+    symptom** — no v2 candidate for these records is ever mislabeled the
+    way their v1 output was;
+  - **YZ-Tank Dragon specifically gains the previously-unrepresentable
+    fourth state** its v1 array-prefix model could never express, even
+    though it was never one of the 48 to begin with (§7's worked
+    counterexample);
+  - any further expected migration difference is stated explicitly and
+    covered by its own regression test.
+
+  **This check must never be phrased as "changes behaviour for exactly
+  the 48" — 49 records (§7) are expected to change in some way, and one
+  of them was never part of the 48 at all.**
 
 None of these three is "run on every future `validate` call against live
 v2 data" — that role belongs to invariants 6 and 7 above, which do the
@@ -1388,7 +1545,7 @@ sum-type coverage:
 | Importers | Unaffected — no importer currently generates multi-event records. |
 | Report output (`cli.py` `report -v`) | Cosmetic — prints state labels instead of version integers. |
 | Tests | `OrderingConstraintTest` and `test_giant_rat_selection_shape` rewritten against corrected semantics (unchanged conclusion from the first revision) — plus **new** regression tests for Sangan and Witch of the Black Forest specifically, since those two were not previously known to need one. |
-| Existing JSON records | Per §7 (corrected): 247 records (236 trivial + 11 genuinely, exactly ordered) migrate via a script that **proves** each `ordering.chains` edge it emits rather than copying `changes[]` position; a separate 47 records (38 bundled + 9 mechanically-distinct order-unknown) migrate as unordered event pairs with no `ordering` edge, only an `axis`-label transcription — all already researched (Edison audit + this document's own corpus re-audit — no new research needed for these 47); a further, disjoint 2 records (Insect Imitation, Last Will) are not yet researched at all and are blocked on a human §5.6 decision before any annotation can be written. |
+| Existing JSON records | Per §7 (corrected): 247 records (236 trivial + 11 genuinely, exactly ordered) migrate via a script that **proves** each `ordering.chains` edge it emits rather than copying `changes[]` position; a separate 47 records (38 bundled + 9 mechanically-distinct order-unknown) migrate as unordered event pairs with no `ordering` edge — the bundled-vs-mechanically-distinct split stays a research classification recorded in this document, not a field in canonical data — all already researched (Edison audit + this document's own corpus re-audit — no new research needed for these 47); a further, disjoint 2 records (Insect Imitation, Last Will) are not yet researched at all and are blocked on a human §5.6 decision before any annotation can be written. |
 | Generated `dist/` output | Must not change for any currently-defined format — the same regression gate as the first version of this document, unaffected by this revision's corrections. |
 
 ---
@@ -1617,16 +1774,22 @@ file-count sense once the 2 needs-manual-review records are resolved).
    Regression-gated.
 4. **Migrate the 47 records as unordered event pairs** (38
    bundled/shared-package + 9 mechanically-distinct order-unknown — no
-   `ordering` edge for either group, only an `axis`-label transcription
-   distinguishing them — using the already-published classifications from
-   the Edison audit and this document's corpus re-audit; no new research
-   needed for these 47).
+   `ordering` edge for either group; the bundled-vs-mechanically-distinct
+   split is a research classification recorded in this document, not a
+   field in the migrated JSON — using the already-published
+   classifications from the Edison audit and this document's corpus
+   re-audit; no new research needed for these 47).
    This commit is expected to *change* the computed candidate set for the
    29-of-38 Edison records already known to be self-contradictory today,
    **and, newly, for Sangan and Witch of the Black Forest at any snapshot
    after their overlap window begins** — verified against
    already-published expectations for the former, and against fresh
-   regression tests written specifically for the latter two (§11).
+   regression tests written specifically for the latter two (§11). It is
+   also expected to change **YZ-Tank Dragon's representable state
+   space** — v1's three array-prefix candidates become v2's four
+   event-subset states — even though YZ-Tank Dragon was never one of the
+   48; the equivalence check (§10) must assert this explicitly, not only
+   check the 48 for a resolved symptom.
 5. **Resolve the 2 needs-manual-review records** (Insect Imitation, Last
    Will) — a human decision on whether their researcher-inferred order
    (§5.6) licenses an `ordering` edge, then migrated per whichever tier is
@@ -1648,5 +1811,44 @@ file-count sense once the 2 needs-manual-review records are resolved).
 
 Each step remains independently committable and independently
 verifiable as a no-op against every currently-defined format's generated
-`dist/` output, except step 4, whose entire point is to correct behaviour
-for the now-48 (not 44) already-documented affected records.
+`dist/` output, except steps 4 and 5, whose entire point is to correct or
+complete the computed candidate/state set for the 49 records they touch.
+Step 4's 47-record scope (38 bundled + 9 mechanically-distinct) resolves
+the self-contradiction symptom for 46 of the 48 — every one except
+Insect Imitation and Last Will, the 2 needs-manual-review records outside
+its scope, resolved only once step 5 annotates them — and, separately,
+gives YZ-Tank Dragon (never one of the 48) the state its v1
+representation could never express at all (§7).
+
+---
+
+### Frozen for implementation
+
+The historical-event DAG architecture is **frozen**. The following
+properties are the accepted design and are not to be redesigned absent a
+concrete, implementation-discovered counterexample the frozen model
+cannot represent — a wrong proof, an imprecise bound, or a
+misclassified record (as every correction across this document's three
+passes has been) is fixed in place, not treated as grounds to reopen the
+architecture choice:
+
+- events are chronology nodes;
+- one event may contain multiple transitions only for sourced
+  co-occurrence;
+- transitions carry semantic behaviour, not chronology;
+- event declaration order has zero meaning;
+- omitted ordering means no edge;
+- ordering edges are explicit;
+- date-PROVEN edges need no extra basis;
+- chronology-CONTRADICTED edges are forbidden;
+- compatible/inconclusive edges require an explicit evidentiary basis;
+- behavioural axis is semantic metadata only;
+- state identity = event-set;
+- state implementation coverage is the six-way sum type;
+- terminal all-events state = MODERN;
+- unauthored reachable non-terminal state = UNRESOLVED;
+- chronology and coverage remain separate API dimensions;
+- UNKNOWN != GUESS.
+
+The proposed eight-step atomic implementation sequence above is the
+accepted next step.
