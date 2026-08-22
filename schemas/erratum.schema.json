@@ -2,10 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://edopro-retro-formats/schemas/erratum.schema.json",
   "title": "Card erratum / historical override",
-  "description": "Records that a card behaved or read differently in the past than its modern EDOPro implementation, and how (or whether) the historical behaviour is reproduced. One file per card that ever needs historical consideration. A record with classification 'cosmetic' documents that NO override is needed — absence of a record means 'not yet reviewed', not 'no erratum'. A card's history is a chain of versions: the baseline version, then one new version per entry in changes[] (oldest to newest, the last one being the modern card). Which version a format uses is COMPUTED from each change's effective chronology against the format snapshot; when the snapshot falls inside an unresolved transition interval the tooling refuses to choose silently.",
-  "type": "object",
-  "required": ["id", "modern_card", "classification", "changes", "implementation", "sources"],
-  "additionalProperties": false,
+  "description": "Records that a card behaved or read differently in the past than its modern EDOPro implementation, and how (or whether) the historical behaviour is reproduced. One file per card that ever needs historical consideration. A record with classification 'cosmetic' documents that NO override is needed — absence of a record means 'not yet reviewed', not 'no erratum'. Two record shapes are accepted side by side (docs/research/erratum-state-model-v2.md, frozen for implementation): the v1 shape (`changes[]`, a single linear oldest-to-newest chain, `implementation` for the baseline version) remains valid for every currently-migrated record; the v2 shape (`events{}` — a dict of chronology nodes, each carrying one or more chronology-free `transitions[]` — plus an explicit `ordering` graph and a `states[]` map keyed by event-set) is additive and not yet used by any canonical data file. A v2 record with exactly one event and one transition may instead use the flattened `event`/`coverage` sugar, which desugars to the same two-state shape as a minimal `events{}`/`states[]` record. Which shape a given file uses is determined structurally (each shape's required/forbidden fields are mutually exclusive), never declared explicitly.",
+  "oneOf": [
+    { "$ref": "#/$defs/erratumV1" },
+    { "$ref": "#/$defs/erratumV2" },
+    { "$ref": "#/$defs/erratumV2Sugar" }
+  ],
   "$defs": {
     "implementation": {
       "type": "object",
@@ -55,93 +57,183 @@
           }
         }
       }
-    }
-  },
-  "properties": {
-    "$schema": { "type": "string" },
-    "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
-    "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
-    "classification": {
-      "type": "string",
-      "enum": ["functional", "cosmetic", "ruling", "engine"],
-      "description": "The DOMINANT kind across changes[] (severity order functional > ruling > engine > cosmetic; the validator enforces agreement). functional: printed/official text change that alters behaviour — needs a historical card implementation. cosmetic: wording/PSCT modernisation only — modern script is period-correct. ruling: official interpretation changed with no behavioural text change — may need script or engine handling. engine: behaviour difference caused by rules-era interactions, handled by rule profiles rather than card overrides."
     },
-    "changes": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": ["kind", "effective", "summary", "sources"],
-        "additionalProperties": false,
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": ["functional", "cosmetic", "ruling", "engine"],
-            "description": "What kind of transition THIS change is. Only functional and ruling changes make a card-implementation difference; cosmetic and engine changes never substitute a historical passcode."
-          },
-          "effective": {
+    "coverage": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "description": "v2's closed implementation-coverage sum type (docs/research/erratum-state-model-v2.md §4). Exactly one of six kinds, replacing v1's untyped implementation dict for a given historical state (a down-set of events). The all-events (terminal) state is unconditionally 'modern' whether or not it is authored; every other reachable-but-unauthored state defaults to 'unresolved' with no other meaning attachable to its absence — both defaults are enforced by tooling, not by this schema.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["modern", "reuse-upstream", "custom-script", "none-needed", "known-gap", "unresolved"],
+          "description": "modern: cards.cdb IS the implementation (structurally required for the all-events state, never valid to claim elsewhere without a reason). reuse-upstream: an existing Project Ignis historical variant reproduces this state. custom-script: this project provides a historical passcode + script. none-needed: a documented decision that the modern implementation stands in for this state. known-gap: confirmed missing — gap_reason + gap_sources required. unresolved: not yet investigated; never asserted explicitly, only ever the mechanical default for an unauthored reachable state."
+        },
+        "historical_passcode": {
+          "oneOf": [{ "$ref": "common.schema.json#/$defs/passcode" }, { "type": "null" }],
+          "description": "reuse-upstream / custom-script only."
+        },
+        "historical_variant_passcodes": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/passcode" }
+        },
+        "upstream": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+        "script": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+        "gap_reason": { "type": "string", "description": "known-gap only: why no implementation exists, concretely." },
+        "gap_sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "known-gap" } }, "required": ["kind"] },
+          "then": { "required": ["gap_reason", "gap_sources"] }
+        }
+      ]
+    },
+    "eventEffective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date"],
+      "description": "An event's own chronology evidence — the same shape and semantics as v1's changes[].effective, now scoped to one event rather than one bare transition (transitions no longer carry chronology at all).",
+      "properties": {
+        "date": {
+          "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+          "description": "When the NEW (post-event) behaviour took effect in this region, if known. On the effective date itself the new behaviour applies. null while unresearched or when only bounds are known — never invent a day to satisfy the schema."
+        },
+        "precision": {
+          "type": "string",
+          "enum": ["day", "month", "year"],
+          "description": "Precision of `date` (default day). A month/year-precise date widens into an interval; snapshots inside it are treated as ambiguous, exactly like release-event precision."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["verified", "reported"],
+          "description": "verified: corroborated by a period/primary source, or by two independent reliable sources — and the corroboration must be RECORDED in `corroboration` below, so the claim can be checked. reported: single secondary source."
+        },
+        "corroboration": {
+          "type": "array",
+          "description": "Independent evidence supporting this chronology beyond the source that produced it. Required for status 'verified'.",
+          "items": {
             "type": "object",
+            "required": ["url", "quote"],
             "additionalProperties": false,
-            "required": ["date"],
             "properties": {
-              "date": {
-                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
-                "description": "When the NEW (post-change) text/behaviour took effect in this region, if known. On the effective date itself the new behaviour applies. null while unresearched or when only bounds are known — never invent a day to satisfy the schema."
-              },
-              "precision": {
-                "type": "string",
-                "enum": ["day", "month", "year"],
-                "description": "Precision of `date` (default day). A month/year-precise date widens into an interval; snapshots inside it are treated as ambiguous, exactly like release-event precision."
-              },
-              "status": {
-                "type": "string",
-                "enum": ["verified", "reported"],
-                "description": "verified: corroborated by a period/primary source, or by two independent reliable sources — and the corroboration must be RECORDED in `corroboration` below, so the claim can be checked. reported: single secondary source (e.g. a printing date derived from the Yugipedia text lineage)."
-              },
-              "corroboration": {
-                "type": "array",
-                "description": "Independent evidence supporting this chronology beyond the source that produced it. Required for status 'verified': the validator rejects a verified chronology that records none. Each entry quotes the operative sentence so the claim is checkable rather than asserted.",
-                "items": {
-                  "type": "object",
-                  "required": ["url", "quote"],
-                  "additionalProperties": false,
-                  "properties": {
-                    "url": { "type": "string" },
-                    "title": { "type": "string" },
-                    "quote": { "type": "string", "description": "The operative sentence, verbatim." },
-                    "archived": { "type": "boolean", "description": "true when the URL is a web-archive capture of a period document." }
-                  }
-                }
-              },
-              "old_attested_through": {
-                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
-                "description": "Bounded chronology: the latest date the OLD text/behaviour is positively attested in force (e.g. a printing or ruling document of that date). Used when no effective date is known."
-              },
-              "new_attested_from": {
-                "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
-                "description": "Bounded chronology: the earliest date the NEW text/behaviour is positively attested in force (e.g. the release date of the first printing carrying it)."
-              },
-              "basis": {
-                "oneOf": [{ "type": "string" }, { "type": "null" }],
-                "description": "What event the chronology is anchored to, e.g. 'TCG release of the first printing with the new text (DPRP, 2016-09-16)' or 'Konami strategy-site errata announcement'."
-              }
+              "url": { "type": "string" },
+              "title": { "type": "string" },
+              "quote": { "type": "string", "description": "The operative sentence, verbatim." },
+              "archived": { "type": "boolean", "description": "true when the URL is a web-archive capture of a period document." }
             }
-          },
-          "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before the change, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
-          "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text after the change, transcribed from a cited source." },
-          "summary": { "type": "string", "description": "Plain-language description of the behavioural difference (or the wording change, for cosmetic entries), citing script/database evidence where the difference is behavioural." },
-          "resulting_implementation": {
-            "$ref": "#/$defs/implementation",
-            "description": "Implementation of the version this change CREATED, when that version is itself historical (i.e. this is not the final change) and behaviourally distinct. The record-level implementation covers the baseline (pre-first-change) version; the final change's result is the modern card and must not carry one."
-          },
-          "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+          }
+        },
+        "old_attested_through": {
+          "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+          "description": "Bounded chronology: the latest date the OLD behaviour is positively attested in force. Used when no effective date is known."
+        },
+        "new_attested_from": {
+          "oneOf": [{ "$ref": "common.schema.json#/$defs/isoDate" }, { "type": "null" }],
+          "description": "Bounded chronology: the earliest date the NEW behaviour is positively attested in force."
+        },
+        "basis": {
+          "oneOf": [{ "type": "string" }, { "type": "null" }],
+          "description": "What event the chronology is anchored to, e.g. 'TCG release of the first printing with the new text (DPRP, 2016-09-16)', or, for a null date, 'Konami policy revision, exact date unresolved'."
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": ["kind", "summary", "sources"],
+      "additionalProperties": false,
+      "description": "One behavioural question an event answers. Chronology-free — an event's own `effective` block is the only chronology; a transition never carries a date. axis is optional, non-computational, semantic-labelling metadata only (docs/research/erratum-state-model-v2.md §1): it names which behavioural question this transition answers, decoupled from ordering, co-occurrence, and the bundled/mechanically-distinct research classification, none of which axis encodes.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["functional", "cosmetic", "ruling", "engine"],
+          "description": "What kind of transition this is. Only functional and ruling transitions make a card-implementation difference; cosmetic and engine transitions never substitute a historical passcode."
+        },
+        "axis": {
+          "oneOf": [{ "type": "string" }, { "type": "null" }],
+          "description": "Optional semantic label for the behavioural question this transition answers (e.g. 'search-reveal-procedure'). Documentation only — never read by the selection algorithm, the validator, or any ordering/co-occurrence computation."
+        },
+        "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before this transition, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
+        "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text after this transition, transcribed from a cited source." },
+        "summary": { "type": "string", "description": "Plain-language description of the behavioural difference (or the wording change, for cosmetic entries), citing script/database evidence where the difference is behavioural." },
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["effective", "transitions"],
+      "additionalProperties": false,
+      "description": "One historical-chronology node. Two or more transitions inside one event is a first-class, sourced co-occurrence claim ('these behaviours changed together, as one historical act') — a strictly stronger claim than the transitions merely sharing a subject; do not merge transitions into one event for thematic/'bundled' reasons alone (docs/research/erratum-state-model-v2.md §5 item 5).",
+      "properties": {
+        "effective": { "$ref": "#/$defs/eventEffective" },
+        "transitions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/transition" }
+        }
+      }
+    },
+    "orderingEdge": {
+      "type": "object",
+      "required": ["before", "after", "basis"],
+      "additionalProperties": false,
+      "description": "One explicit, evidence-carrying known-before/known-after constraint between two named events. Never inferred from declaration position — an omitted edge means no constraint, not 'chained to the previous entry' (docs/research/erratum-state-model-v2.md §2). before/after key into this record's own `events{}`; referential integrity and cycle detection are validator concerns, not schema concerns.",
+      "properties": {
+        "before": { "type": "string", "description": "Id of the event this edge asserts happened first (a key of this record's `events{}`)." },
+        "after": { "type": "string", "description": "Id of the event this edge asserts happened second." },
+        "basis": {
+          "type": "string",
+          "enum": ["date-proven", "directly-sourced", "researcher-inference"],
+          "description": "date-proven: chronology alone proves the order (§5's PROVEN test) — no further justification needed; asserted automatically when `ordering.chains` sugar desugars a provably-ordered pair, or written explicitly in `ordering.edges` when an author has already checked it. directly-sourced: a cited source directly states the relative order, independent of (and not provable from) the two events' own dates. researcher-inference: a researcher's judgement call, not a direct citation — the weakest tier, still required to be explicit rather than silent. Chronology that CONTRADICTS a declared edge is a hard validator error regardless of basis; chronology that is merely compatible-but-inconclusive requires a non-'date-proven' basis with an explanatory `note`."
+        },
+        "note": {
+          "type": "string",
+          "description": "Required whenever basis is not 'date-proven': explains why this edge is believed, so a non-date-proven order is never asserted silently."
         }
       },
-      "description": "Ordered oldest-to-newest. A card errata'd twice has two entries; ruling-policy shifts and rules-era transitions are entries of the corresponding kind."
+      "allOf": [
+        {
+          "if": {
+            "properties": { "basis": { "const": "date-proven" } },
+            "required": ["basis"]
+          },
+          "else": { "required": ["before", "after", "basis", "note"] }
+        }
+      ]
     },
-    "implementation": {
-      "$ref": "#/$defs/implementation",
-      "description": "Implementation of the BASELINE version (the card as it behaved before the earliest recorded change)."
+    "ordering": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The only source of event order in a v2 record. `{}` (both fields absent) is the explicit, valid statement that nothing is constrained — present in the schema rather than merely omittable, so a reviewer sees the absence of order was a decision.",
+      "properties": {
+        "chains": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "type": "string" },
+            "description": "Pure sugar for pairwise before/after edges between consecutive ids, each requiring basis 'date-proven' (§5's PROVEN test) — a chain the test does not prove for every consecutive pair must be expressed as explicit `edges` instead."
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/orderingEdge" }
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": ["events", "coverage"],
+      "additionalProperties": false,
+      "description": "One authored historical state: the down-set of event ids that have occurred, and its implementation coverage. The all-events down-set is exempt from authoring (always 'modern'); any other down-set the ordering/co-occurrence graph can produce but this array does not list defaults to 'unresolved'.",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ids of this record's own `events{}` that have occurred in this state (a down-set — referential integrity and down-set validity are validator concerns)."
+        },
+        "coverage": { "$ref": "#/$defs/coverage" }
+      }
     },
     "review": {
       "type": "object",
@@ -158,11 +250,138 @@
       },
       "description": "Research state of this record. Absent means 'imported'."
     },
-    "applicable_formats_note": {
-      "type": "string",
-      "description": "Optional prose note. Which formats actually use the historical version is COMPUTED by tooling from each change's effective chronology vs the format snapshot date; it is not hand-listed here."
+    "erratumV1": {
+      "type": "object",
+      "title": "v1: linear changes[] chain",
+      "required": ["id", "modern_card", "classification", "changes", "implementation", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": { "type": "string" },
+        "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
+        "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
+        "classification": {
+          "type": "string",
+          "enum": ["functional", "cosmetic", "ruling", "engine"],
+          "description": "The DOMINANT kind across changes[] (severity order functional > ruling > engine > cosmetic; the validator enforces agreement). functional: printed/official text change that alters behaviour — needs a historical card implementation. cosmetic: wording/PSCT modernisation only — modern script is period-correct. ruling: official interpretation changed with no behavioural text change — may need script or engine handling. engine: behaviour difference caused by rules-era interactions, handled by rule profiles rather than card overrides."
+        },
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["kind", "effective", "summary", "sources"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": ["functional", "cosmetic", "ruling", "engine"],
+                "description": "What kind of transition THIS change is. Only functional and ruling changes make a card-implementation difference; cosmetic and engine changes never substitute a historical passcode."
+              },
+              "effective": { "$ref": "#/$defs/eventEffective" },
+              "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before the change, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
+              "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text after the change, transcribed from a cited source." },
+              "summary": { "type": "string", "description": "Plain-language description of the behavioural difference (or the wording change, for cosmetic entries), citing script/database evidence where the difference is behavioural." },
+              "resulting_implementation": {
+                "$ref": "#/$defs/implementation",
+                "description": "Implementation of the version this change CREATED, when that version is itself historical (i.e. this is not the final change) and behaviourally distinct. The record-level implementation covers the baseline (pre-first-change) version; the final change's result is the modern card and must not carry one."
+              },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          },
+          "description": "Ordered oldest-to-newest. A card errata'd twice has two entries; ruling-policy shifts and rules-era transitions are entries of the corresponding kind. This positional ordering is load-bearing for v1 ONLY — v2 (below) never infers order from position."
+        },
+        "implementation": {
+          "$ref": "#/$defs/implementation",
+          "description": "Implementation of the BASELINE version (the card as it behaved before the earliest recorded change)."
+        },
+        "review": { "$ref": "#/$defs/review" },
+        "applicable_formats_note": {
+          "type": "string",
+          "description": "Optional prose note. Which formats actually use the historical version is COMPUTED by tooling from each change's effective chronology vs the format snapshot date; it is not hand-listed here."
+        },
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+        "notes": { "type": "string" }
+      }
     },
-    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
-    "notes": { "type": "string" }
+    "erratumV2": {
+      "type": "object",
+      "title": "v2: historical-event DAG",
+      "required": ["id", "modern_card", "classification", "events", "sources"],
+      "additionalProperties": false,
+      "description": "Not yet used by any canonical data file — the schema accepts this shape ahead of migration (docs/research/erratum-state-model-v2.md, frozen architecture). `implementation` and `changes` are deliberately absent from this shape: the baseline ({} down-set) coverage and every other state's coverage live in `states[]`, and the all-events down-set's 'modern' coverage is never authored.",
+      "properties": {
+        "$schema": { "type": "string" },
+        "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
+        "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
+        "classification": {
+          "type": "string",
+          "enum": ["functional", "cosmetic", "ruling", "engine"],
+          "description": "The DOMINANT kind across every event's transitions (severity order functional > ruling > engine > cosmetic)."
+        },
+        "events": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "type": "string", "minLength": 1 },
+          "additionalProperties": { "$ref": "#/$defs/event" },
+          "description": "Keyed by event id, never an array — object key order carries no meaning and is never read as evidence of chronology."
+        },
+        "ordering": { "$ref": "#/$defs/ordering" },
+        "states": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/state" },
+          "description": "Authored coverage per reachable down-set. Any reachable down-set with no matching entry here defaults to coverage.kind 'unresolved'; the all-events down-set is always 'modern' whether or not an entry is written for it (§4's named exception)."
+        },
+        "review": { "$ref": "#/$defs/review" },
+        "applicable_formats_note": {
+          "type": "string",
+          "description": "Optional prose note. Which formats actually use which state is COMPUTED by tooling from each event's effective chronology and the ordering/co-occurrence graph vs the format snapshot date; it is not hand-listed here."
+        },
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+        "notes": { "type": "string" }
+      }
+    },
+    "erratumV2Sugar": {
+      "type": "object",
+      "title": "v2: flattened single-event, single-transition sugar",
+      "required": ["id", "modern_card", "classification", "event", "coverage", "sources"],
+      "additionalProperties": false,
+      "description": "Sugar for the common case (docs/research/erratum-state-model-v2.md §13): a record with exactly one event and one transition. Desugars to the minimal events{}/states[] shape — `coverage` describes the {} (baseline, nothing-occurred) down-set; the all-events down-set's 'modern' coverage is synthesised, never authored here.",
+      "properties": {
+        "$schema": { "type": "string" },
+        "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
+        "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
+        "classification": {
+          "type": "string",
+          "enum": ["functional", "cosmetic", "ruling", "engine"],
+          "description": "Same kind as the single transition's own kind."
+        },
+        "event": {
+          "type": "object",
+          "required": ["effective", "kind", "summary", "sources"],
+          "additionalProperties": false,
+          "description": "The one event's chronology, flattened together with its one transition's fields for authoring convenience.",
+          "properties": {
+            "effective": { "$ref": "#/$defs/eventEffective" },
+            "kind": {
+              "type": "string",
+              "enum": ["functional", "cosmetic", "ruling", "engine"]
+            },
+            "axis": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+            "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+            "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+            "summary": { "type": "string" },
+            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+          }
+        },
+        "coverage": {
+          "$ref": "#/$defs/coverage",
+          "description": "Coverage of the {} (baseline) down-set — the card as it behaved before this transition. The all-events down-set's coverage is always 'modern' and is never written here."
+        },
+        "review": { "$ref": "#/$defs/review" },
+        "applicable_formats_note": { "type": "string" },
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+        "notes": { "type": "string" }
+      }
+    }
   }
 }
