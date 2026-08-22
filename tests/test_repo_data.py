@@ -10,6 +10,7 @@ These are the guarantees the project makes about its shipped content:
 
 from __future__ import annotations
 
+import datetime as _dt
 import unittest
 from pathlib import Path
 
@@ -37,6 +38,29 @@ class RealDataTest(unittest.TestCase):
         validator = Validator(self.repo)
         validator.validate()
         self.assertEqual([], validator.errors, msg="\n".join(map(str, validator.errors)))
+
+    def test_giant_rat_selection_shape(self):
+        """The real-data ordering-constraint case backing
+        docs/research/edison-behaviour-gaps.md (roadmap item 5c) and
+        tests/test_errata.py's OrderingConstraintTest: Giant Rat has two
+        relevant ruling changes, one confirmed OLD at the Edison snapshot
+        (old_attested_through 2011-02-02) and one with completely unknown
+        chronology (no date, no bounds at all). selection_at reports
+        candidates (0, 1) without propagating change 0's definite OLD state
+        onto change 1 -- documented, not patched, because Giant Rat's own
+        review notes state the two changes are independent ruling axes that
+        "cannot be sequenced", not a validated chain (propagating would
+        manufacture false certainty). Candidate 1 (change 0's behaviour
+        applied, change 1's not) has no resulting_implementation, which is
+        why this record is classified C (chronology unresolved AND a
+        candidate lacks an implementation), not A.
+        """
+        erratum = self.repo.errata["erratum-giant-rat"]
+        sel = erratum.selection_at(_dt.date(2010, 4, 24))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((0, 1), sel.candidates)
+        self.assertIsNotNone(erratum.implementation_for_version(0))
+        self.assertIsNone(erratum.implementation_for_version(1))
 
     def test_goat_matches_ignis_reference(self):
         fixture = (FIXTURES / "ignis-GOAT.lflist.conf").read_text(encoding="utf-8")

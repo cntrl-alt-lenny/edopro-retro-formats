@@ -122,28 +122,50 @@ reflects that.
    here, per the task's scope; see `docs/research/edison-rules.md` row 1 for the exact
    change that would be needed.
 
-   5c. ~~**Card-behaviour triage.**~~ **Done (2026-08-22, audit only).** Recomputed
-   Edison's two headline errata-warning counts from HEAD rather than trusting a
-   remembered figure — 44 `format.erratum-modern-known-wrong` + 41
-   `format.erratum-known-divergence` (not 48; "48" is the project-wide count of
-   `implementation.strategy: "unresolved"` records, 7 of which don't apply at Edison's
-   exact snapshot) = 85 unique cards, zero overlap, zero requiring a D
-   (identity/engine-issue) classification. Every one of the 85 partitions cleanly into
-   either **A** (chronology-only — a working implementation already exists, 44 cards) or
-   **B** (implementation-only — chronology is resolved, no script exists, 41 cards); none
-   needed both axes resolved. Clustered by root cause: **38 of the 44 A-partition cards
-   share one identical, already-partially-dated chronology question** (an "activate a
-   search/reveal-type effect without a valid target existing" ruling, bracketed by the
-   existing `2011-02-02..2019-04-03` search-verification interval this roadmap's own item
-   1b already tracks) — resolving it would fix up to 38 known-wrong records at once. The
-   41 B-partition cards cluster more finely (once-per-turn/name-lock 9, target-legality
-   8, a nomi-to-semi-nomi wording pattern ~7 and a Union-condition pattern 2 within a
-   12-card "other shared ruling-era change" group, plus smaller/bespoke groups) and feed
-   directly into item 7 below once that infrastructure exists. Full per-card inventory,
-   clustering, and both prioritisation views: `docs/research/edison-behaviour-gaps.md`.
-   No card behaviour or selection logic changed — audit only, per this milestone's scope.
-   Recommended next step (not started): research the shared 38-card chronology question
-   above.
+   5c. ~~**Card-behaviour triage.**~~ **Done (2026-08-22, audit only; corrected
+   2026-08-22 after adversarial review).** Recomputed Edison's two headline
+   errata-warning counts from HEAD rather than trusting a remembered figure — 44
+   `format.erratum-modern-known-wrong` + 41 `format.erratum-known-divergence` (not 48;
+   "48" is the project-wide count of `implementation.strategy: "unresolved"` records, 7
+   of which don't apply at Edison's exact snapshot) = 85 unique cards, zero overlap,
+   zero requiring a D (identity/engine-issue) classification — these counts are
+   unchanged by the correction below. An initial A/B/C/D partition (A 44 / B 41 / C 0)
+   used too weak a test for A ("at least one candidate implemented" instead of "every
+   historically-plausible candidate implemented") and, on top of that, treated all 44
+   `known_wrong` records' two-change structure as a validated chronological chain when
+   every one of them (checked individually, not sampled) states in its own review notes
+   that its two changes are independent/unsequenced ruling axes with **no
+   implementation for the state where only one has changed**. Corrected partition: **A
+   0 / B 41 (unchanged) / C 44 / D 0** — every known-wrong record needs *both*
+   chronology research *and*, if research lands on the "only the undated axis changed"
+   outcome, a small shared custom script; it is not true that resolving chronology alone
+   is guaranteed to finish these cards, though for the 38-card cluster below either
+   research outcome is still fully actionable across the whole cluster at once (either
+   the existing implementation is confirmed correct, or one reusable script pattern
+   covers all 38). The underlying `Erratum.selection_at()` candidate computation was
+   also found not to propagate a change's definite state to its chain neighbours (a
+   real gap against the schema's "ordered oldest-to-newest" contract) — deliberately
+   left unpatched, since propagating would be *correct* for a genuine chain but *wrong*
+   for these records' independent axes; regression tests pin the current behaviour and
+   a data-model fix (a per-change `order: chained|independent` marker) is proposed, not
+   implemented, in `docs/research/edison-behaviour-gaps.md`. Clustered by root cause:
+   **38 of the 44 C-partition cards share one identical, already-partially-dated
+   chronology question** (an "activate a search/reveal-type effect without a valid
+   target existing" ruling, bracketed by the existing `2011-02-02..2019-04-03`
+   search-verification interval this roadmap's own item 1b already tracks) — resolving
+   it still determines the remediation path for up to 38 known-wrong records at once.
+   The 41 B-partition cards (unaffected by the correction) cluster more finely
+   (once-per-turn/name-lock 9, target-legality 8, a nomi-to-semi-nomi wording pattern ~7
+   and a Union-condition pattern 2 within a 12-card "other shared ruling-era change"
+   group, plus smaller/bespoke groups) and feed directly into item 7 below once that
+   infrastructure exists. A systematic audit of all 85 rows' generated qualitative
+   fields against their canonical erratum records found and corrected 9 further
+   synthesis errors (directional inversions, unsupported chronology claims, and one
+   internal self-contradiction). Full per-card inventory, clustering, corrected
+   partition reasoning, and both prioritisation views:
+   `docs/research/edison-behaviour-gaps.md`. No card behaviour or selection logic
+   changed — audit only, per this milestone's scope. Recommended next step (not
+   started): research the shared 38-card chronology question above.
 
 ## Phase 2 — framework completeness
 

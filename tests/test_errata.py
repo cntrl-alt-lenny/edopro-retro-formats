@@ -184,6 +184,108 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual("modern", sel.state)
 
 
+class OrderingConstraintTest(unittest.TestCase):
+    """selection_at() computes a candidate *range* from the per-change
+    OLD/AMBIGUOUS/NEW states via two aggregate counts (definite_new,
+    definite_old), not by propagating each change's definite state to its
+    neighbours. schemas/erratum.schema.json documents changes[] as "Ordered
+    oldest-to-newest", which would license propagation: in a genuine
+    chronological chain, an earlier change confirmed OLD (hasn't happened)
+    forces every later change to also be OLD, and a later change confirmed
+    NEW (has happened) forces every earlier change to also be NEW.
+
+    Two of the four two-change orderings below ([OLD, AMBIGUOUS] and
+    [AMBIGUOUS, NEW]) are exactly where that propagation would narrow the
+    candidate range if changes[] really were a validated chain; the other
+    two ([NEW, AMBIGUOUS] and [AMBIGUOUS, OLD]) are already correct under
+    either interpretation, because a change happening earlier (or a later
+    change not yet happening) does not constrain a neighbour on the other
+    side.
+
+    This project deliberately does NOT patch selection_at() to propagate.
+    Every currently-affected real record (44 "known wrong" erratum records,
+    including the Giant Rat shape covered here and re-verified against the
+    real data file in tests/test_repo_data.py) has its own review notes
+    stating the two changes are independent, unsequenced ruling axes, not a
+    dated chain -- forcing propagation would manufacture false certainty
+    where genuine ambiguity (and, per the corrected A/B/C/D partition, an
+    unimplemented candidate) exists. See docs/research/edison-behaviour-gaps.md
+    (roadmap item 5c) for the full analysis and the proposed data-model fix.
+    """
+
+    def test_earlier_definite_old_later_ambiguous_does_not_propagate(self):
+        # [OLD, AMBIGUOUS] -- the Giant Rat shape. A true chain would force
+        # change 1 to also be OLD (it cannot happen before change 0, which
+        # is confirmed not to have happened yet), collapsing this to a
+        # determinate historical version 0. Current selection_at instead
+        # reports both 0 and 1, including a "candidate" (version 1) that
+        # requires change 0 to be NEW -- directly contradicting change 0's
+        # own definite OLD state at this snapshot.
+        e = erratum_of(changes=[
+            change(date=None, effective_old_attested_through="2011-02-02"),
+            change(date=None),
+        ])
+        sel = e.selection_at(day("2010-04-24"))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((0, 1), sel.candidates)
+
+    def test_earlier_ambiguous_later_definite_new_does_not_propagate(self):
+        # [AMBIGUOUS, NEW] -- the mirror image. A true chain would force
+        # change 0 to also be NEW (a later change cannot happen before an
+        # earlier one), collapsing this to a determinate modern result.
+        # Current selection_at instead reports both version 1 and modern.
+        e = erratum_of(changes=[
+            change(date=None),
+            change(date=None, effective_new_attested_from="2005-01-01"),
+        ])
+        sel = e.selection_at(day("2010-04-24"))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((1, 2), sel.candidates)
+        self.assertTrue(sel.modern_is_possible)
+
+    def test_earlier_definite_new_later_ambiguous_is_already_correct(self):
+        # [NEW, AMBIGUOUS] -- NOT a propagation gap. Change 0 having already
+        # happened says nothing about whether change 1 also has; both
+        # version 1 and modern are genuinely possible regardless of
+        # chain-vs-independent-axis interpretation, matching current output.
+        e = erratum_of(changes=[
+            change(date=None, effective_new_attested_from="2005-01-01"),
+            change(date=None),
+        ])
+        sel = e.selection_at(day("2010-04-24"))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((1, 2), sel.candidates)
+
+    def test_earlier_ambiguous_later_definite_old_is_already_correct(self):
+        # [AMBIGUOUS, OLD] -- also NOT a propagation gap. Change 1 not
+        # having happened yet says nothing about whether change 0 already
+        # has; both version 0 and version 1 are genuinely possible,
+        # matching current output.
+        e = erratum_of(changes=[
+            change(date=None),
+            change(date=None, effective_old_attested_through="2011-02-02"),
+        ])
+        sel = e.selection_at(day("2010-04-24"))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((0, 1), sel.candidates)
+
+    def test_multiple_ambiguous_transitions_widen_the_candidate_range(self):
+        # Three changes: the first definitely OLD, the remaining two both
+        # completely undated. Each additional ambiguous transition widens
+        # the candidate range by one with no upper propagation from change
+        # 0's definite OLD state, showing how quickly an unpropagated chain
+        # of ambiguous transitions widens.
+        e = erratum_of(changes=[
+            change(date=None, effective_old_attested_through="2011-02-02",
+                   resulting_implementation=implementation(historical_passcode=510000001)),
+            change(date=None, resulting_implementation=implementation(historical_passcode=510000002)),
+            change(date=None),
+        ])
+        sel = e.selection_at(day("2010-04-24"))
+        self.assertEqual("ambiguous", sel.state)
+        self.assertEqual((0, 1, 2), sel.candidates)
+
+
 class FormatSelectionTest(TempRepoTest):
     def _seed(self, **erratum_kw):
         self.add_card_index(
