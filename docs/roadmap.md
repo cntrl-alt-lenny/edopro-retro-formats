@@ -106,8 +106,9 @@ reflects that.
    lack of any period source in either direction.
 
    5b. **Ignition Effect Priority is an engine-level gap, not a flag choice.**
-   Reopened, adversarial research (six independently-dated 2009-2010 period community
-   rulings sources, corroborated by a Konami OCG FAQ ruling for Destiny HERO - Malicious)
+   Reopened, adversarial research (eight independently-dated 2009-2010 period community
+   rulings threads from the same forum, corroborated by a Konami OCG FAQ ruling for
+   Destiny HERO - Malicious)
    found the 2010 TCG rule was a hybrid neither existing flag reproduces: the immediate
    "activate an Ignition Effect as Chain Link 1" window was gated to a **Summon that
    doesn't itself start a chain**, unrestricted by **location**. `DUEL_OCG_OBSOLETE_IGNITION`
@@ -120,6 +121,29 @@ reflects that.
    existing flag's two currently-coupled axes into independent settings - not implemented
    here, per the task's scope; see `docs/research/edison-rules.md` row 1 for the exact
    change that would be needed.
+
+   5c. ~~**Card-behaviour triage.**~~ **Done (2026-08-22, audit only).** Recomputed
+   Edison's two headline errata-warning counts from HEAD rather than trusting a
+   remembered figure — 44 `format.erratum-modern-known-wrong` + 41
+   `format.erratum-known-divergence` (not 48; "48" is the project-wide count of
+   `implementation.strategy: "unresolved"` records, 7 of which don't apply at Edison's
+   exact snapshot) = 85 unique cards, zero overlap, zero requiring a D
+   (identity/engine-issue) classification. Every one of the 85 partitions cleanly into
+   either **A** (chronology-only — a working implementation already exists, 44 cards) or
+   **B** (implementation-only — chronology is resolved, no script exists, 41 cards); none
+   needed both axes resolved. Clustered by root cause: **38 of the 44 A-partition cards
+   share one identical, already-partially-dated chronology question** (an "activate a
+   search/reveal-type effect without a valid target existing" ruling, bracketed by the
+   existing `2011-02-02..2019-04-03` search-verification interval this roadmap's own item
+   1b already tracks) — resolving it would fix up to 38 known-wrong records at once. The
+   41 B-partition cards cluster more finely (once-per-turn/name-lock 9, target-legality
+   8, a nomi-to-semi-nomi wording pattern ~7 and a Union-condition pattern 2 within a
+   12-card "other shared ruling-era change" group, plus smaller/bespoke groups) and feed
+   directly into item 7 below once that infrastructure exists. Full per-card inventory,
+   clustering, and both prioritisation views: `docs/research/edison-behaviour-gaps.md`.
+   No card behaviour or selection logic changed — audit only, per this milestone's scope.
+   Recommended next step (not started): research the shared 38-card chronology question
+   above.
 
 ## Phase 2 — framework completeness
 
