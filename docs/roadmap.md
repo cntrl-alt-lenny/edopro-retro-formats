@@ -206,6 +206,30 @@ reflects that.
    closes; see `docs/research/edison-behaviour-gaps.md`'s "Recommended next milestone"
    for the full requirements list.
 
+   5d. ~~**Erratum state-model architecture research.**~~ **Done (2026-08-22, design
+   only — no implementation).** Chose and proved a replacement for `changes[]`'s linear
+   version-chain model: transitions with an explicit, evidence-only partial order
+   (`after` edges, defaulting to "chains to the previous entry" for authoring
+   ergonomics, overridable via `after: []`), plus implementation coverage keyed
+   explicitly by historical state rather than by chain position. Proved against 9 real
+   records including Giant Rat, Paladin of White Dragon (3 changes, mixed
+   relationships), and two records found during this research's own corpus re-audit
+   that are harder than anything in the Edison 44 — YZ-Tank Dragon (both changes
+   completely undated) and Insect Imitation/Last Will (a researcher-asserted, undated
+   order claim, a third evidence tier the Edison audit did not need). Migration scope
+   for the full 296-record corpus: 236 trivial + 13 fully-ordered multi-transition
+   records migrate mechanically; 39 bundled/independent-axis + 6 mechanically-distinct
+   order-unknown + 2 needs-manual-review records need explicit human annotation — this
+   is the corpus-wide population the Edison-specific 44/85 undercounted, confirming the
+   "do not trust the Edison 44 as the entire affected population" instruction. Full
+   design, three compared architectures, adversarial stress-testing, and the proposed
+   atomic implementation sequence: `docs/research/erratum-state-model-v2.md`. No
+   canonical data, `model.py`/`validate.py`/`lflist.py`, schema, or generated output
+   changed in this milestone — design only, per this milestone's explicit scope.
+   Recommended next step (not started): the 8-step implementation sequence in that
+   document's "Recommendation" section, beginning with schema v2 added alongside v1
+   with no behavioural change.
+
 ## Phase 2 — framework completeness
 
 6. **Deck-level validation tool**: check a `.ydk` against a format (pool + banlist +
