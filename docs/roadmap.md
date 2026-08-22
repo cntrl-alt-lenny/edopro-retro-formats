@@ -207,28 +207,48 @@ reflects that.
    for the full requirements list.
 
    5d. ~~**Erratum state-model architecture research.**~~ **Done (2026-08-22, design
-   only — no implementation).** Chose and proved a replacement for `changes[]`'s linear
-   version-chain model: transitions with an explicit, evidence-only partial order
-   (`after` edges, defaulting to "chains to the previous entry" for authoring
-   ergonomics, overridable via `after: []`), plus implementation coverage keyed
-   explicitly by historical state rather than by chain position. Proved against 9 real
-   records including Giant Rat, Paladin of White Dragon (3 changes, mixed
-   relationships), and two records found during this research's own corpus re-audit
-   that are harder than anything in the Edison 44 — YZ-Tank Dragon (both changes
-   completely undated) and Insect Imitation/Last Will (a researcher-asserted, undated
-   order claim, a third evidence tier the Edison audit did not need). Migration scope
-   for the full 296-record corpus: 236 trivial + 13 fully-ordered multi-transition
-   records migrate mechanically; 39 bundled/independent-axis + 6 mechanically-distinct
-   order-unknown + 2 needs-manual-review records need explicit human annotation — this
-   is the corpus-wide population the Edison-specific 44/85 undercounted, confirming the
-   "do not trust the Edison 44 as the entire affected population" instruction. Full
-   design, three compared architectures, adversarial stress-testing, and the proposed
-   atomic implementation sequence: `docs/research/erratum-state-model-v2.md`. No
-   canonical data, `model.py`/`validate.py`/`lflist.py`, schema, or generated output
-   changed in this milestone — design only, per this milestone's explicit scope.
-   Recommended next step (not started): the 8-step implementation sequence in that
-   document's "Recommendation" section, beginning with schema v2 added alongside v1
-   with no behavioural change.
+   only — no implementation; corrected once after adversarial review found four
+   architecture-level defects in the first pass).** Chose and proved a replacement for
+   `changes[]`'s linear version-chain model: a **historical-event DAG** — events (not
+   bare transitions) carry chronology and an explicit, evidence-only partial order
+   (`ordering.chains`/`ordering.edges`; omitted ordering means NO constraint, never a
+   default chain to the previous entry — the first pass's proposed default was itself
+   an instance of the exact array-order-as-evidence bug this research exists to fix,
+   and was retracted), each event bundling one or more behavioural transitions so that
+   genuine co-occurrence ("A and B changed together, exact date unknown") is
+   representable directly rather than reconstructed from same-date coincidence.
+   Implementation coverage is a closed six-way sum type (modern / reuse-upstream /
+   custom-script / none-needed / known-gap / unresolved), keyed by event-set, with
+   exactly one formally-defined meaning for an unauthored-but-reachable state
+   (`unresolved`) — never a bare `None`. "Behavioural axis" is corrected to a purely
+   semantic label, decoupled from the ordering graph (the first pass's "axis = maximal
+   chain" definition was a real conflation, not a stylistic issue). Proved against 10
+   real records, including Giant Rat, Paladin of White Dragon (3 events, mixed
+   relationships), YZ-Tank Dragon (both events completely undated, its own review notes
+   admitting `changes[]` order was chosen "for continuity" — first-party proof this
+   project has already made the mistake this research exists to prevent), and
+   Insect Imitation/Last Will (a researcher-asserted, undated order claim). Re-running
+   the migration audit with a fully mechanical test (not "does every transition have
+   some date," but "do the dated intervals actually prove the order," checked
+   computationally against every one of the 296 records) found the corrected-model
+   audit needed to catch: **48 records, not 44**, produce a self-contradictory candidate
+   label at some snapshot — Sangan and Witch of the Black Forest, both previously
+   misclassified as safely "fully-ordered" because every one of their changes carries
+   *some* dating information, in fact overlap in exactly the way that reproduces
+   Edison's defect at snapshots no currently-defined format queries. Migration scope for
+   the full 296-record corpus: 236 trivial + 11 genuinely, mechanically fully-ordered
+   records migrate via a script that proves each edge from dates directly (never by
+   copying list order); 39 bundled/independent-axis + 8 mechanically-distinct
+   order-unknown + 2 needs-manual-review records need explicit human annotation. Full
+   design, three compared architectures (the third, axis-as-mandatory-grouping, is shown
+   to collapse into "the first architecture plus a redundant layer" once the axis
+   conflation is corrected), adversarial stress-testing (11 cases, including the
+   two-valued chained/independent marker's retraction on two independent grounds), and
+   the proposed 8-step atomic implementation sequence: `docs/research/
+   erratum-state-model-v2.md`. No canonical data, `model.py`/`validate.py`/`lflist.py`,
+   schema, or generated output changed in this milestone — design only, per this
+   milestone's explicit scope. Recommended next step (not started): that 8-step
+   sequence, beginning with schema v2 added alongside v1 with no behavioural change.
 
 ## Phase 2 — framework completeness
 
