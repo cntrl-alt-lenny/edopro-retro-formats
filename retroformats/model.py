@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import datetime as _dt
 from dataclasses import dataclass, field
+from enum import Enum
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -340,6 +342,392 @@ class Erratum:
         if not impl.get("historical_passcode"):
             return ErratumSelection(state="gap", implementation=impl, version_index=version)
         return ErratumSelection(state="historical", implementation=impl, version_index=version)
+
+
+# ---------------------------------------------------------------------------
+# v2: historical-event DAG (docs/research/erratum-state-model-v2.md, frozen).
+#
+# Implementation step 2 of that document's revised sequence: this runtime
+# path exists ALONGSIDE Erratum/ErratumSelection above, which stay exactly
+# as they are. Every currently-canonical record is v1-shaped and continues
+# to load and select through the legacy classes, byte for byte unchanged.
+# No v1 concept (integer version_index, positional candidates) may leak into
+# the types below; no v2 concept (event-set state identity) may leak into
+# ErratumSelection above. See §8 of the design document for why: the two
+# are semantically incompatible for the 49 structurally affected records,
+# not merely differently shaped.
+# ---------------------------------------------------------------------------
+
+
+class SelectionError(Exception):
+    """A v2 record's chronology is contradictory at a snapshot: no
+    structurally reachable historical state is consistent with every
+    event's independently-computed OLD/AMBIGUOUS/NEW status. This is a
+    per-snapshot runtime condition, distinct from DataError (a record too
+    malformed to load at all) — step 3's ordering-edge validator invariants
+    are what should prevent a real record from ever reaching this state;
+    until they exist, this is the defined, explicit failure behaviour
+    rather than a silently invented answer."""
+
+
+class Coverage(Enum):
+    """The six-kind implementation-coverage sum type (design doc §4).
+    MODERN is never authored — it is synthesised, unconditionally, for the
+    all-events (terminal) down-set alone. UNRESOLVED is never authored
+    either — it is the mechanical default for any other reachable down-set
+    with no matching `states[]` entry. The other four are the only kinds a
+    `states[]`/flattened-sugar `coverage` entry may actually declare
+    (matching schemas/erratum.schema.json's `authoredCoverage`)."""
+
+    MODERN = "modern"
+    REUSE_UPSTREAM = "reuse-upstream"
+    CUSTOM_SCRIPT = "custom-script"
+    NONE_NEEDED = "none-needed"
+    KNOWN_GAP = "known-gap"
+    UNRESOLVED = "unresolved"
+
+
+@dataclass(frozen=True)
+class ImplementationCoverage:
+    kind: Coverage
+    historical_passcode: int | None = None
+    historical_variant_passcodes: tuple[int, ...] = ()
+    upstream: str | None = None
+    script: str | None = None
+    gap_reason: str | None = None
+    gap_sources: tuple[str, ...] = ()
+
+    @classmethod
+    def from_raw(cls, raw: dict[str, Any]) -> "ImplementationCoverage":
+        return cls(
+            kind=Coverage(raw.get("kind")),
+            historical_passcode=raw.get("historical_passcode"),
+            historical_variant_passcodes=tuple(raw.get("historical_variant_passcodes", [])),
+            upstream=raw.get("upstream"),
+            script=raw.get("script"),
+            gap_reason=raw.get("gap_reason"),
+            gap_sources=tuple(raw.get("gap_sources", [])),
+        )
+
+    @classmethod
+    def modern(cls) -> "ImplementationCoverage":
+        return cls(kind=Coverage.MODERN)
+
+    @classmethod
+    def unresolved(cls) -> "ImplementationCoverage":
+        return cls(kind=Coverage.UNRESOLVED)
+
+
+@dataclass(frozen=True)
+class HistoricalTransition:
+    """One behavioural question an event answers. Chronology-free — an
+    event's own `effective` block is the only chronology (design doc §1)."""
+
+    kind: str
+    axis: str | None
+    summary: str
+    historical_text: str | None
+    modern_text: str | None
+    sources: tuple[str, ...]
+    raw: dict[str, Any]
+
+    @classmethod
+    def from_raw(cls, raw: dict[str, Any]) -> "HistoricalTransition":
+        return cls(
+            kind=str(raw.get("kind", "")),
+            axis=raw.get("axis"),
+            summary=str(raw.get("summary", "")),
+            historical_text=raw.get("historical_text"),
+            modern_text=raw.get("modern_text"),
+            sources=tuple(raw.get("sources", [])),
+            raw=raw,
+        )
+
+    @property
+    def is_implementation_relevant(self) -> bool:
+        return self.kind in IMPLEMENTATION_RELEVANT_KINDS
+
+
+@dataclass(frozen=True)
+class HistoricalEvent:
+    """One historical-chronology node. A 2+-transition event is a sourced
+    co-occurrence claim, not two events (design doc §2, §5 item 5)."""
+
+    id: str
+    effective: dict[str, Any]
+    transitions: tuple[HistoricalTransition, ...]
+    cooccurrence_sources: tuple[str, ...]
+    raw: dict[str, Any]
+
+    @classmethod
+    def from_raw(cls, event_id: str, raw: dict[str, Any]) -> "HistoricalEvent":
+        return cls(
+            id=event_id,
+            effective=dict(raw.get("effective") or {}),
+            transitions=tuple(HistoricalTransition.from_raw(t) for t in raw.get("transitions", [])),
+            cooccurrence_sources=tuple(raw.get("cooccurrence_sources", [])),
+            raw=raw,
+        )
+
+    @property
+    def is_implementation_relevant(self) -> bool:
+        """An event creates a distinguishable HistoricalState dimension iff
+        at least one of its transitions does (design doc: cosmetic/engine-
+        only events never create an implementation-state bit)."""
+        return any(t.is_implementation_relevant for t in self.transitions)
+
+    def state_at(self, snapshot: _dt.date) -> str:
+        """OLD/AMBIGUOUS/NEW at `snapshot`, via the same chronology rule
+        v1 changes use — reused directly, unmodified, on a change-shaped
+        wrapper around this event's own `effective` block."""
+        return change_state_at({"effective": self.effective}, snapshot)
+
+
+@dataclass(frozen=True)
+class HistoricalState:
+    """A candidate historical state: which relevant events have occurred.
+    `events` (a frozenset of event ids) is this state's ONLY identity —
+    `label` and `coverage` are descriptive, never compared. Compare states
+    with `.events ==`, never `is` or whole-object `==` (design doc §9)."""
+
+    events: frozenset[str]
+    label: str
+    coverage: ImplementationCoverage
+
+
+@dataclass(frozen=True)
+class SemanticErratumSelection:
+    """The v2 selection result at one snapshot — chronology and per-
+    candidate coverage as separate dimensions (design doc §9), never an
+    integer version_index or positional candidates tuple."""
+
+    chronology: str  # "determinate" | "ambiguous"
+    candidates: tuple[HistoricalState, ...]
+    modern_state: HistoricalState
+
+    @property
+    def is_modern(self) -> bool:
+        return self.chronology == "determinate" and self.candidates[0].events == self.modern_state.events
+
+    @property
+    def modern_is_possible(self) -> bool:
+        return any(c.events == self.modern_state.events for c in self.candidates)
+
+    @property
+    def has_known_gap(self) -> bool:
+        return any(c.coverage.kind == Coverage.KNOWN_GAP for c in self.candidates)
+
+    @property
+    def needs_implementation_research(self) -> bool:
+        return any(c.coverage.kind == Coverage.UNRESOLVED for c in self.candidates)
+
+
+def _descendants_and_check_acyclic(
+    all_ids: frozenset[str], pairs: list[tuple[str, str]], record_id: str, path: Path
+) -> dict[str, frozenset[str]]:
+    """before_id -> set of after_ids transitively reachable through `pairs`.
+    Raises DataError for a dangling reference or a cycle — both structurally
+    unusable input for down-set enumeration, not a step-3 semantic concern."""
+    direct: dict[str, set[str]] = {node: set() for node in all_ids}
+    for before, after in pairs:
+        if before not in all_ids or after not in all_ids:
+            raise DataError(
+                path, f"{record_id}: ordering references unknown event id in ({before!r}, {after!r})"
+            )
+        direct[before].add(after)
+    descendants: dict[str, frozenset[str]] = {}
+    for node in all_ids:
+        seen: set[str] = set()
+        stack = list(direct[node])
+        while stack:
+            nxt = stack.pop()
+            if nxt in seen:
+                continue
+            seen.add(nxt)
+            stack.extend(direct[nxt])
+        if node in seen:
+            raise DataError(path, f"{record_id}: ordering graph contains a cycle through {node!r}")
+        descendants[node] = frozenset(seen)
+    return descendants
+
+
+def _predecessors_among(
+    relevant_ids: frozenset[str], descendants: dict[str, frozenset[str]]
+) -> dict[str, frozenset[str]]:
+    """For each relevant event B, every relevant event A transitively
+    ordered before it — even through a non-relevant intermediate event, e.g.
+    `relevant A -> cosmetic-only C -> relevant B` still yields A before B."""
+    return {
+        after: frozenset(
+            before for before in relevant_ids if before != after and after in descendants.get(before, ())
+        )
+        for after in relevant_ids
+    }
+
+
+def _reachable_down_sets(
+    relevant_ids: frozenset[str], predecessors: dict[str, frozenset[str]]
+) -> tuple[frozenset[str], ...]:
+    """Every down-set (order ideal) the ordering DAG can produce over
+    `relevant_ids` — exhaustive, not sampled; the corpus's largest record
+    has only a handful of implementation-relevant events. Deterministically
+    ordered by (size, sorted ids), never by declaration/JSON order."""
+    ids = tuple(sorted(relevant_ids))
+    valid: list[frozenset[str]] = []
+    for size in range(len(ids) + 1):
+        for combo in combinations(ids, size):
+            candidate = frozenset(combo)
+            if all(predecessors.get(member, frozenset()) <= candidate for member in candidate):
+                valid.append(candidate)
+    return tuple(sorted(valid, key=lambda s: (len(s), tuple(sorted(s)))))
+
+
+def _desugar_v2_sugar(raw: dict[str, Any]) -> dict[str, Any]:
+    """The flattened single-event/single-transition sugar -> the equivalent
+    full `events{}`/`ordering`/`states[]` shape, so exactly one parser
+    (`ErratumV2.load`) ever implements the semantics (design doc §13)."""
+    event_raw = raw.get("event") or {}
+    transition_raw = {
+        "kind": event_raw.get("kind"),
+        "axis": event_raw.get("axis"),
+        "historical_text": event_raw.get("historical_text"),
+        "modern_text": event_raw.get("modern_text"),
+        "summary": event_raw.get("summary"),
+        "sources": event_raw.get("sources", []),
+    }
+    desugared = {k: v for k, v in raw.items() if k not in ("event", "coverage")}
+    desugared["events"] = {
+        "event": {"effective": event_raw.get("effective") or {}, "transitions": [transition_raw]}
+    }
+    desugared["ordering"] = {}
+    coverage = raw.get("coverage")
+    desugared["states"] = [{"events": [], "coverage": coverage}] if coverage is not None else []
+    return desugared
+
+
+@dataclass
+class ErratumV2:
+    """A v2-shaped erratum record: the historical-event DAG (design doc
+    §2), parsed and selected entirely independently of `Erratum` above —
+    never sharing a code path, never inferring order from declaration
+    position. Construct via `.load()`, exactly like `Erratum`."""
+
+    id: str
+    modern_card: CardRef
+    classification: str
+    events: dict[str, HistoricalEvent]
+    raw_chains: tuple[tuple[str, ...], ...]
+    raw_edges: tuple[dict[str, Any], ...]
+    authored_states: dict[frozenset[str], ImplementationCoverage]
+    sources: list[str]
+    path: Path
+    raw: dict[str, Any]
+    _reachable: tuple[frozenset[str], ...]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "ErratumV2":
+        if "event" in raw:
+            raw = _desugar_v2_sugar(raw)
+        record_id = str(raw.get("id", ""))
+        events = {
+            event_id: HistoricalEvent.from_raw(event_id, event_raw)
+            for event_id, event_raw in (raw.get("events") or {}).items()
+        }
+        ordering = raw.get("ordering") or {}
+        raw_chains = tuple(tuple(chain) for chain in ordering.get("chains", []))
+        raw_edges = tuple(dict(edge) for edge in ordering.get("edges", []))
+        pairs: list[tuple[str, str]] = []
+        for chain in raw_chains:
+            pairs.extend(zip(chain, chain[1:]))
+        for edge in raw_edges:
+            pairs.append((str(edge.get("before")), str(edge.get("after"))))
+        all_ids = frozenset(events.keys())
+        descendants = _descendants_and_check_acyclic(all_ids, pairs, record_id, path)
+        relevant_ids = frozenset(e.id for e in events.values() if e.is_implementation_relevant)
+        predecessors = _predecessors_among(relevant_ids, descendants)
+        reachable = _reachable_down_sets(relevant_ids, predecessors)
+        try:
+            authored_states = {
+                frozenset(entry.get("events", [])): ImplementationCoverage.from_raw(entry.get("coverage") or {})
+                for entry in raw.get("states", [])
+            }
+        except ValueError as exc:
+            raise DataError(path, f"{record_id}: bad states[] coverage: {exc}") from exc
+        return cls(
+            id=record_id,
+            modern_card=CardRef.from_raw(raw.get("modern_card", {}), path),
+            classification=str(raw.get("classification", "")),
+            events=events,
+            raw_chains=raw_chains,
+            raw_edges=raw_edges,
+            authored_states=authored_states,
+            sources=list(raw.get("sources", [])),
+            path=path,
+            raw=raw,
+            _reachable=reachable,
+        )
+
+    def relevant_events(self) -> tuple[HistoricalEvent, ...]:
+        return tuple(
+            sorted((e for e in self.events.values() if e.is_implementation_relevant), key=lambda e: e.id)
+        )
+
+    def _state_for(self, down_set: frozenset[str], all_relevant_ids: frozenset[str]) -> HistoricalState:
+        if down_set == all_relevant_ids:
+            # Never read from authored_states: the terminal state's coverage
+            # is structurally, unconditionally MODERN (design doc §4) — an
+            # author may document it, but it is never trusted, only checked,
+            # and that check is step 3's job, not this constructor's.
+            coverage = ImplementationCoverage.modern()
+        else:
+            coverage = self.authored_states.get(down_set) or ImplementationCoverage.unresolved()
+        label = ", ".join(sorted(down_set)) if down_set else "baseline"
+        return HistoricalState(events=down_set, label=label, coverage=coverage)
+
+    def selection_at(self, snapshot: _dt.date) -> SemanticErratumSelection:
+        """Every structurally reachable down-set whose membership is
+        consistent with each relevant event's own independently-computed
+        status at `snapshot` (design doc §2/§9) — never a range of integer
+        positions, never inferred from declaration order."""
+        relevant = self.relevant_events()
+        all_relevant_ids = frozenset(e.id for e in relevant)
+        statuses = {e.id: e.state_at(snapshot) for e in relevant}
+        candidates = []
+        for down_set in self._reachable:
+            consistent = True
+            for event_id in all_relevant_ids:
+                status = statuses[event_id]
+                if event_id in down_set:
+                    if status == OLD:
+                        consistent = False
+                        break
+                elif status == NEW:
+                    consistent = False
+                    break
+            if consistent:
+                candidates.append(down_set)
+        if not candidates:
+            raise SelectionError(
+                f"{self.id}: no historical state at {snapshot} is consistent with its own chronology "
+                "(a contradictory v2 record — step 3's validator invariants should prevent this)"
+            )
+        states = tuple(self._state_for(s, all_relevant_ids) for s in candidates)
+        modern_state = self._state_for(all_relevant_ids, all_relevant_ids)
+        chronology = "determinate" if len(states) == 1 else "ambiguous"
+        return SemanticErratumSelection(chronology=chronology, candidates=states, modern_state=modern_state)
+
+
+def load_erratum_record(raw: dict[str, Any], path: Path) -> "Erratum | ErratumV2":
+    """Structural shape dispatch (design doc §13 step 2): a record's shape
+    is a fact about which top-level keys it has, mutually exclusive by
+    schema construction — never a heuristic, never inferred from content.
+    `changes` -> legacy v1; `events`/`event` -> v2 (sugar desugars inside
+    `ErratumV2.load`, so there is exactly one v2 parser, not two)."""
+    if "changes" in raw:
+        return Erratum.load(raw, path)
+    if "events" in raw or "event" in raw:
+        return ErratumV2.load(raw, path)
+    raise DataError(path, "erratum record matches neither the v1 (changes) nor v2 (events/event) shape")
 
 
 TERRITORIES = ("tcg", "tcg-na", "tcg-eu", "tcg-oce", "ocg", "ocg-jp", "ocg-kr", "ocg-asia")

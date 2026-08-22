@@ -12,6 +12,7 @@ from .model import (
     CardIndex,
     DataError,
     Erratum,
+    ErratumV2,
     Format,
     Pool,
     Product,
@@ -19,6 +20,7 @@ from .model import (
     ReleaseGap,
     RuleProfile,
     Source,
+    load_erratum_record,
 )
 
 
@@ -47,7 +49,7 @@ class Repository:
     banlists: dict[str, Banlist] = field(default_factory=dict)
     pools: dict[str, Pool] = field(default_factory=dict)
     rule_profiles: dict[str, RuleProfile] = field(default_factory=dict)
-    errata: dict[str, Erratum] = field(default_factory=dict)
+    errata: dict[str, Erratum | ErratumV2] = field(default_factory=dict)
     formats: dict[str, Format] = field(default_factory=dict)
     global_sources: dict[str, Source] = field(default_factory=dict)
     format_sources: dict[str, dict[str, Source]] = field(default_factory=dict)
@@ -75,7 +77,7 @@ class Repository:
         for path in sorted((root / "data" / "rule-profiles").glob("*.json")):
             try_load(path, lambda raw, p: repo._add(repo.rule_profiles, RuleProfile.load(raw, p)))
         for path in sorted((root / "data" / "errata").glob("*.json")):
-            try_load(path, lambda raw, p: repo._add(repo.errata, Erratum.load(raw, p)))
+            try_load(path, lambda raw, p: repo._add(repo.errata, load_erratum_record(raw, p)))
 
         sources_path = root / "data" / "sources.json"
         if sources_path.exists():
