@@ -207,8 +207,13 @@ reflects that.
    for the full requirements list.
 
    5d. ~~**Erratum state-model architecture research.**~~ **Done (2026-08-22, design
-   only — no implementation; corrected once after adversarial review found four
-   architecture-level defects in the first pass).** Chose and proved a replacement for
+   only — no implementation; corrected twice after successive adversarial reviews —
+   round 1 found four architecture-level defects, round 2 found the ordering-edge
+   contradiction test's mathematics were wrong, the migration-time invariant was
+   tautological under the corrected model, one record was misclassified, "bundled" and
+   "co-occurrence" were being conflated, ordering edges needed an evidentiary basis, and
+   the API used fragile object-identity comparisons — all fixed below).** Chose and
+   proved a replacement for
    `changes[]`'s linear version-chain model: a **historical-event DAG** — events (not
    bare transitions) carry chronology and an explicit, evidence-only partial order
    (`ordering.chains`/`ordering.edges`; omitted ordering means NO constraint, never a
@@ -228,20 +233,32 @@ reflects that.
    admitting `changes[]` order was chosen "for continuity" — first-party proof this
    project has already made the mistake this research exists to prevent), and
    Insect Imitation/Last Will (a researcher-asserted, undated order claim). Re-running
-   the migration audit with a fully mechanical test (not "does every transition have
-   some date," but "do the dated intervals actually prove the order," checked
-   computationally against every one of the 296 records) found the corrected-model
-   audit needed to catch: **48 records, not 44**, produce a self-contradictory candidate
-   label at some snapshot — Sangan and Witch of the Black Forest, both previously
-   misclassified as safely "fully-ordered" because every one of their changes carries
-   *some* dating information, in fact overlap in exactly the way that reproduces
-   Edison's defect at snapshots no currently-defined format queries. Migration scope for
-   the full 296-record corpus: 236 trivial + 11 genuinely, mechanically fully-ordered
-   records migrate via a script that proves each edge from dates directly (never by
-   copying list order); 39 bundled/independent-axis + 8 mechanically-distinct
-   order-unknown + 2 needs-manual-review records need explicit human annotation. Full
-   design, three compared architectures (the third, axis-as-mandatory-grouping, is shown
-   to collapse into "the first architecture plus a redundant layer" once the axis
+   the migration audit with an **exact, exhaustive** test (evaluated at every relevant
+   transition's own chronology-boundary date — a finite, complete case analysis, not a
+   sample — superseding an earlier sweep-based version of the same check) confirms
+   exactly **48 records, not 44**, produce a self-contradictory candidate label at some
+   snapshot — Sangan and Witch of the Black Forest, both previously misclassified as
+   safely "fully-ordered" because every one of their changes carries *some* dating
+   information, in fact overlap in exactly the way that reproduces Edison's defect at
+   snapshots no currently-defined format queries; verified live-code-exact, not merely
+   reasoned about. The ordering-edge validator rule is worked out precisely: an edge is
+   PROVEN when chronology alone guarantees it under every possible date assignment,
+   CONTRADICTED (hard error) when chronology rules it out under every assignment, and
+   otherwise merely compatible-but-inconclusive (Sangan's shape) — which requires an
+   explicit, authored evidentiary basis before the validator accepts it, never silent
+   inference from overlapping intervals. Migration scope for the full 296-record corpus:
+   236 trivial + 11 genuinely, exactly-proven-ordered records migrate via a script that
+   proves each edge from dates directly (never by copying list order); a *reclassified*
+   38 bundled/shared-package + 9 mechanically-distinct order-unknown (YZ-Tank Dragon
+   moved from bundled to mechanically-distinct — its two questions are the same *kind*
+   of unrelated pairing as its three Cannon-lineage siblings, not evidence of one
+   bundled ruling) + 2 needs-manual-review records need explicit annotation — and,
+   critically, "bundled" and "co-occurrence" are corrected to no longer be conflated:
+   bundled records migrate as two separate, unordered events exactly like
+   mechanically-distinct ones, never merged into one event, since no record in the
+   corpus has evidence of genuine simultaneity, only of a shared subject. Full design,
+   three compared architectures (the third, axis-as-mandatory-grouping, is shown to
+   collapse into "the first architecture plus a redundant layer" once the axis
    conflation is corrected), adversarial stress-testing (11 cases, including the
    two-valued chained/independent marker's retraction on two independent grounds), and
    the proposed 8-step atomic implementation sequence: `docs/research/

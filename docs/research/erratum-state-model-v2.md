@@ -236,19 +236,36 @@ it is **not** silently absent from the model — it mechanically defaults to
 
 ```jsonc
 "ordering": {
-  "chains": [["v1", "v2", "v3", "v4"]],       // sugar for pairwise "v1 before v2 before v3 before v4"
-  "edges": [{ "before": "b1", "after": "a2" }] // ad hoc pairwise constraint, for non-chain partial orders
+  "chains": [["v1", "v2", "v3", "v4"]],   // sugar for pairwise "v1 before v2 before v3 before v4",
+                                          // basis: "date-proven" for every edge in a chain of dated events
+  "edges": [
+    { "before": "b1", "after": "a2", "basis": "date-proven" },        // chronology alone proves it (§5)
+    { "before": "x1", "after": "x2", "basis": "researcher-inference",
+      "note": "..." }                                                  // chronology is inconclusive; requires
+                                                                        // this explicit justification, or the
+                                                                        // validator rejects the edge (§5)
+  ]
 }
 ```
 
 `chains` is pure sugar over `edges` — `["v1","v2","v3"]` desugars to
-`{before: v1, after: v2}` + `{before: v2, after: v3}`, nothing more. There
-is **no default chain inferred from `events{}`'s own key order** — a
-record with four events and no `ordering` block at all has *zero* declared
-edges, full stop, regardless of what order the events happen to be written
-in the JSON. This is the direct fix for the defect this whole document
-exists to close: **omitted ordering information means no edge, never "the
-previous item."**
+`{before: v1, after: v2}` + `{before: v2, after: v3}`, nothing more; the
+`basis` on each desugared edge is computed automatically as
+`"date-proven"` whenever §5's PROVEN test passes for that pair (true for
+every real chain in this corpus — §7), and the validator rejects the
+`chains` sugar outright for a pair it is not proven for, forcing the
+author to either use an ad hoc `edges` entry with an explicit `basis`
+instead, or leave the pair unordered. There is **no default chain inferred
+from `events{}`'s own key order** — a record with four events and no
+`ordering` block at all has *zero* declared edges, full stop, regardless
+of what order the events happen to be written in the JSON. This is the
+direct fix for the defect this whole document exists to close: **omitted
+ordering information means no edge, never "the previous item."** Every
+declared edge, chain-sugared or ad hoc, must additionally clear §5's
+PROVEN/CONTRADICTED/inconclusive test — an edge the dates contradict is a
+hard validator error regardless of any claimed `basis`; an edge in the
+inconclusive middle zone is rejected unless it carries an explicit,
+non-`"date-proven"` basis.
 
 **Co-occurrence, worked example** (the task's own evidence case:
 *"Behaviour A and behaviour B changed in the same Konami policy revision,
@@ -309,11 +326,13 @@ reference names a real event id (order-independent of declaration position
 real work, not declaration order, per the task's explicit instruction);
 `chains`/`edges` together must not contain a cycle; every `states[]` entry
 must be a down-set the DAG can actually produce; the all-events state must
-map to `coverage.kind == "modern"` and no other state may; §10.6's
-corrected, now-mechanical (not merely text-matching) check for
-undated/overlapping-bound event pairs with no declared edge, which §7's
-re-audit shows finds real, previously-undetected corpus defects, not just
-Edison-shaped ones.
+map to `coverage.kind == "modern"` and no other state may; every declared
+`ordering` edge must pass §5's exact PROVEN/CONTRADICTED test (§10.6) and,
+if not PROVEN by dates alone, carry an explicit evidentiary `basis`
+(§10.7) — §7's exhaustive corpus re-audit is what finds real,
+previously-undetected defects like Sangan's, but that audit is a
+migration-time and legacy-v1 tool (§10), not itself a standing v2 runtime
+check; the standing v2 checks are the edge-validity invariants themselves.
 
 **Migration complexity.** Revisited under the corrected, no-implicit-order
 rule in §7 — the honest answer is that *no* record migrates as a pure,
@@ -586,6 +605,25 @@ any snapshot before either event's (unknown) date — the widest candidate
 set of any worked example in this document, correctly reflecting that this
 record currently has the least evidence of any record in the corpus.
 
+**Corrected classification.** An earlier pass in this research placed
+YZ-Tank Dragon in the bundled/independent-axis category, reasoning from
+"both differences are encoded in one upstream script" by analogy to Giant
+Rat. That analogy does not hold up: the two behaviours here — a
+contact-fusion material-zone restriction, and a nomi-vs-semi-nomi
+summoning condition — are the *same two questions*, addressing the *same
+Cannon-fusion lineage*, as XY-/XYZ-/XZ-Dragon/Tank Cannon (YZ-Tank
+Dragon's own siblings, already correctly classified
+mechanically-distinct-order-unknown in the Edison audit, because a
+material-eligibility question and a re-Summon-restriction question are
+substantively unrelated, not two aspects of one ruling). Being encoded in
+one upstream script is a fact about *implementation reuse convenience*
+upstream, not evidence that the two questions are thematically one — the
+same is true of every sibling. YZ-Tank Dragon differs from its siblings
+only in being undated on *both* sides rather than one; that is a
+chronology fact, not a bundling fact, and does not change which category
+it belongs in. Corrected: **mechanically-distinct-order-unknown**, grouped
+with its three siblings and the other 5 records in that category (§7).
+
 ### I. Insect Imitation / Last Will — a researcher-asserted order claim
 
 Two events each: one exactly dated, one completely undated. Review notes
@@ -793,25 +831,36 @@ how large the space gets.
    worded, in the review notes of the vast majority of the 48 records
    found in §7.
 5. **Co-occurrence: two or more transitions belonging to one event** —
-   corrected from the first version of this document's "labelling fact
-   more than a constraint fact" framing. It is a **first-class chronology
-   fact now**, not merely documentation — it removes real candidate states
-   from the down-set space (§2's `policy-revision` worked example: 2
-   states instead of 4), which the first version of this document's
-   `bundled-independent-axis` label never actually did (it computed
-   identically to plain "order unknown," §3.A/§3.D of the prior revision
-   showed this explicitly). This is the corrected understanding: what
-   looked like a labelling-only distinction in the prior revision was
-   actually a symptom of not yet having co-occurrence as a real mechanism
-   at all — with one now available, some records currently read as
-   "bundled, order-unknown, 4 theoretical states" may, on a case-by-case
-   research basis, actually turn out to be genuine co-occurrence (2
-   states) once a reviewer asks the question directly. This document does
-   not reclassify any specific record on this basis (that is exactly the
-   "do not choose the schema/reclassify data in this documentation task"
-   line the earlier task explicitly drew) — it flags the question as a
-   new, real research avenue §7's migration work should ask per bundled
-   record, not resolve it here.
+   a **first-class chronology fact**, not documentation: it removes real
+   candidate states from the down-set space (§2's `policy-revision` worked
+   example: 2 states instead of 4). **Corrected in this pass: this is a
+   strictly stronger claim than "bundled/shared-package," and the two must
+   not be conflated** — an earlier pass in this research suggested the
+   two might turn out to be the same thing on further research; they do
+   not. "Bundled/shared-package" (§7's migration category, covering all 38
+   Edison cluster-1 records) is a *research/thematic* label: these two
+   transitions answer aspects of the *same underlying ruling question*,
+   and upstream happens to implement both together in one script. That is
+   evidence about *subject matter*, not about *timing* — none of it says
+   the two transitions happened at the same historical moment, only that
+   they are about the same thing. "Co-occurrence" is a *chronology* claim:
+   these two transitions are known to have happened together, as one
+   historical act. **No record in this corpus currently has evidence
+   meeting that bar** — every one of the 38 bundled records' own review
+   notes says the two transitions "cannot be sequenced" (order unknown),
+   which is evidence of *ignorance about order*, not evidence of
+   *simultaneity*. Migrating a bundled record using the co-occurrence
+   mechanism would be asserting something the record's own evidence does
+   not support. §7's migration procedure is corrected accordingly: **all
+   38 bundled records, like the 9 mechanically-distinct records, migrate
+   as two separate, unordered events with no declared edge** — the only
+   difference between the two categories is the (purely descriptive,
+   computationally inert) `axis` label each event's transitions carry. The
+   co-occurrence mechanism remains fully specified (§2) and provably
+   correct (§12) for the day evidence like the task's own worked example
+   ("changed in the same policy revision, exact date unknown") actually
+   turns up in this corpus — it is simply not yet needed by any record
+   audited so far.
 6. **Order asserted by researcher inference, not by a direct source** —
    unchanged from the first revision, surfaced by Insect Imitation/Last
    Will (§3.I). Recommendation unchanged: a `basis` field distinguishing
@@ -831,13 +880,82 @@ how large the space gets.
    done) — true co-occurrence (5) is a stronger claim, that they are not
    merely dated identically but are genuinely one occurrence.
 
+### The ordering-edge validation rule, worked out precisely
+
+**Corrected in this pass.** An earlier version of this section proposed
+rejecting a declared edge `{before: A, after: B}` whenever the two
+events' possible-date *intervals overlap* — that is wrong: overlapping
+intervals only mean the dates cannot *prove* the edge, not that they
+*contradict* it. Sangan (§3.J) is the concrete counter-example the
+correction was checked against: its two events' intervals overlap
+(2011-02-02..2019-04-03 and 2016-09-15), and the dates genuinely cannot
+say which came first — but nothing about that overlap makes "verification
+before name-lock" *impossible*, only *unproven*. The corrected rule
+distinguishes three cases, not two:
+
+For events A, B, define two derived quantities directly from the fields
+already in the schema (`effective.date`+`precision`, or
+`old_attested_through`/`new_attested_from`) — no new evidence kind, just a
+precise reading of the existing ones:
+
+- `last_confirmed_old(E)`: the latest date at which E is still guaranteed
+  not to have happened. For an exactly-dated event (day precision), this
+  is the day before the date; for month/year precision, the day before
+  the widened interval's start. For a bounded event, this is
+  `old_attested_through` directly. `None` (unbounded, arbitrarily far in
+  the past) if neither is present.
+- `first_confirmed_new(E)`: the earliest date at which E is guaranteed to
+  have already happened. For an exactly-dated event, the widened
+  interval's end (equal to the date itself at day precision — "on the
+  effective date itself the new behaviour applies," per
+  `change_state_at()`'s existing, unchanged semantics). For a bounded
+  event, `new_attested_from` directly. `None` (unbounded, arbitrarily far
+  in the future) if neither is present.
+
+Then, for an asserted edge "A before B":
+
+- **PROVEN** iff `first_confirmed_new(A) <= last_confirmed_old(B)` (both
+  defined). Meaning: even in A's *latest* possible scenario and B's
+  *earliest* possible scenario, A still precedes B — true under every
+  date assignment the evidence allows. Chronology alone is sufficient
+  basis; no additional evidence is required, and none of the 11
+  genuinely-fully-ordered records (§7) need any.
+- **CONTRADICTED** iff `last_confirmed_old(A) >= first_confirmed_new(B)`
+  (both defined). Meaning: even in A's *earliest* possible scenario and
+  B's *latest* possible scenario, A still does not precede B — impossible
+  under every date assignment the evidence allows. A **hard validator
+  error**, regardless of what basis an author claims for the edge — dates
+  that flatly rule out an order cannot be overridden by an assertion.
+- **Otherwise, compatible but inconclusive** (includes every case where
+  either quantity is `None`, and Sangan's case where both are defined but
+  neither inequality holds). The edge is neither proven nor forbidden by
+  chronology alone — **it requires an explicit, authored `basis`** (§5.6's
+  researcher-inference tier, or a directly cited source) before the
+  validator accepts it; an edge with no basis in this zone is rejected,
+  not silently allowed. This is the concrete mechanism behind item 6
+  above, generalised from "Insect Imitation/Last Will's specific shape"
+  to every edge in this zone.
+
+Verified computationally against the corpus, not merely derived
+abstractly: every consecutive pair in all 11 genuinely-fully-ordered
+records (§7) is **PROVEN** (confirming the category is correctly named,
+not merely "not yet found to be wrong"); Sangan's and Witch of the Black
+Forest's single pair, and Giant Rat's, and Tyrant Dragon's, are all
+**compatible but inconclusive** under this exact test — never
+contradicted, matching every record's own review notes, which assert
+"unknown," never "impossible." No record in the corpus currently declares
+(or, under this revision's corrected migration procedure, would need to
+declare) an edge that chronology contradicts — the CONTRADICTED case is
+included here because the validator must reject it if one ever is
+authored, not because one exists today.
+
 **The non-negotiable principle, restated and now enforced by construction
 rather than by convention:** UNKNOWN must remain UNKNOWN. §4's coverage
 rule and this section's ordering rule work together to guarantee it — a
 down-set is never excluded from the candidate space without either a
-declared `ordering` edge or a co-occurrence grouping backing the
-exclusion, and a candidate's coverage is never silently anything other
-than `UNRESOLVED` without an authored entry.
+PROVEN or explicitly-evidenced `ordering` edge or a co-occurrence grouping
+backing the exclusion, and a candidate's coverage is never silently
+anything other than `UNRESOLVED` without an authored entry.
 
 ---
 
@@ -861,106 +979,135 @@ this revision addresses, not just the array-order one.
 
 ---
 
-## 7. Migration analysis — corrected with a fully mechanical test
+## 7. Migration analysis — an exact, exhaustive test, not a sweep
 
-**The first version of this document's test was too weak, and this
-section exists specifically to correct it.** It classified a
-multi-transition record as `fully-ordered-multi-transition` whenever
-"every relevant change has some dating information" — sufficient to notice
-Giant Rat's shape (one event totally undated) but *not* sufficient to
-notice Sangan's (every event dated, but two dated windows overlapping),
-because it never checked whether the dated intervals were actually
-mutually exclusive.
+**Corrected twice over in this pass.** The first version of this
+document's test was too weak ("does every transition have some dating
+information," which missed Sangan). The second version fixed the
+*substance* of the test but ran it as a **snapshot sweep** — each
+transition's own dates plus a buffer, plus a yearly scan from 2000 to
+2030 — which is thorough but not exhaustive, and this document should not
+call a sweep "proven" when an exact method is available. It is: selection
+state changes only at the finite set of boundary dates where some
+transition's own OLD/AMBIGUOUS/NEW status changes (at most 2 boundary
+dates per relevant transition — where AMBIGUOUS begins, and where it
+ends), so evaluating the algorithm once at each such boundary, across the
+whole record, is a complete, finite case analysis, not a sample of one.
 
-**The corrected, fully mechanical test**, run against every one of the 296
-records, not sampled: for every record with 2+ implementation-relevant
-transitions, sweep a wide range of candidate snapshots (each transition's
-own date/bounds ± a buffer, plus a yearly sweep from 2000 to 2030 to catch
-anything the transitions' own dates don't suggest); at every snapshot
-where `selection_at()` reports `state="ambiguous"`, check every candidate
-index `k` against every relevant change's own, independently-computed
-OLD/AMBIGUOUS/NEW status: candidate `k` claims relevant changes `0..k-1`
-have occurred and `k..end` have not; if any change in the "has occurred"
-set is independently confirmed OLD, or any change in the "has not"
-set is independently confirmed NEW, that candidate is self-contradictory.
-This is precisely the mechanical form of "does chronology actually prove
-every edge" the task asked for, and it requires no judgement calls — it is
-a pure consistency check between what the candidate label formally asserts
-and what each transition's own dating evidence says.
+**The exact test**, run against every one of the 296 records: for each
+record, collect every relevant transition's own boundary dates (for an
+exact date at precision P, the day before and the day of/after the
+precision-widened interval's start and end; for bounded chronology, the
+attested-through date and the day after it, and the day before
+attested-from and attested-from itself). This is a finite set, at most `2
+× (relevant transitions)` dates. At each one, compute `selection_at()`'s
+candidates and check every candidate index `k` against every transition's
+own, independently-computed status: candidate `k` claims transitions
+`0..k-1` have occurred and `k..end` have not; a candidate is
+self-contradictory if any transition in the "occurred" set is
+independently confirmed OLD, or any in the "not occurred" set is
+independently confirmed NEW. Because no transition's status can change
+*between* two consecutive boundary dates by construction, checking every
+boundary date checks every distinct behaviour the record can ever exhibit,
+at any snapshot whatsoever — past, present, or any future format this
+project might add.
 
-**Result: 48 of 296 records fail this check, not 44.** The 44 already
-established by the Edison audit, plus four more found only by running this
-check corpus-wide rather than relying on "does every transition have some
-date": **Sangan, Witch of the Black Forest** (§3.J — both events dated,
-windows overlap), and **Insect Imitation, Last Will** (§3.I — already
-flagged as borderline in the prior revision; this mechanical check
-confirms they belong in the affected population, not merely near it).
+**Result, re-confirmed exactly: 48 of 296 records, the identical set the
+sweep found.** The exact method changes no record's classification
+relative to the sweep — it upgrades the finding from "thorough" to
+"exhaustive," which matters because this document should not claim
+completeness it has not actually verified. The 44 already established by
+the Edison audit, plus **Sangan, Witch of the Black Forest** (§3.J — both
+events dated, windows overlap) and **Insect Imitation, Last Will** (§3.I).
 
-| Category | Records | Change from prior revision |
-|---|---|---|
-| Trivial (0-1 relevant changes) | **236** | unchanged |
-| Genuinely, mechanically fully-ordered | **11** | down from 13 — Sangan and Witch of the Black Forest removed, reclassified below |
-| Bundled/independent-axis (Edison cluster-1: 38; YZ-Tank Dragon: 1) | **39** | unchanged |
-| Mechanically-distinct, order-unknown (Edison non-cluster: 6; Sangan, Witch of the Black Forest: 2) | **8** | up from 6 |
-| Needs manual review (researcher-inferred order: Insect Imitation, Last Will) | **2** | unchanged in count, now backed by the mechanical check rather than informal reading alone |
-| **Total** | **296** | 236 + 11 + 39 + 8 + 2 = 296 |
+**Corrected taxonomy** — YZ-Tank Dragon reclassified (§3.H): its two
+questions (contact-fusion material zone; nomi-vs-semi-nomi condition) are
+the same *kind* of pairing as its siblings XY-/XYZ-/XZ-Dragon/Tank Cannon,
+already correctly classified mechanically-distinct-order-unknown, not
+bundled — being undated on both sides is a chronology fact, not evidence
+the two questions are thematically one.
 
-**The 11 genuinely fully-ordered records**, re-verified individually
-against the mechanical check (zero self-contradictory candidates at any
-swept snapshot): Blackwing - Sirocco the Dawn, Blue-Eyes Toon Dragon,
-Blue-Eyes Ultimate Dragon, Dark Necrofear, Necrovalley, Night Assailant,
-Rescue Cat, Soul Rope, Swords of Concealing Light, Toon Mermaid, Toon
-Summoned Skull. Ten of these eleven carry only exact, day-precision dates
-throughout (order is then a direct, trivial comparison of the dates
-themselves, not an inference — §12.6 explains why this case can never fail
-the check by construction); the eleventh, Rescue Cat, has one bounded
-event whose window closes entirely before its dated sibling begins
-(2008-12-15 < 2017-03-30, no overlap, order genuinely proven despite the
-imprecision).
+| Category | Records |
+|---|---|
+| Trivial (0-1 relevant changes) | **236** |
+| Genuinely, exactly, exhaustively ordered | **11** |
+| Bundled/shared-package (Edison cluster-1 only) | **38** |
+| Mechanically-distinct, order-unknown (Edison non-cluster: 6; Sangan, Witch of the Black Forest, YZ-Tank Dragon: 3) | **9** |
+| Needs manual review (researcher-inferred order: Insect Imitation, Last Will) | **2** |
+| **Total** | **296** — 236 + 11 + 38 + 9 + 2 = 296 |
 
-**Why 48, not just "44 plus 4 more,"** matters for the migration plan: it
-confirms the task's own instruction — do not trust the Edison-scoped 44/85
-as the entire affected population — was correct, and shows *why* a
-scoped, format-specific audit (Edison's) cannot be trusted to find every
-instance of a corpus-wide representational defect, even when it is
-unusually thorough within its own scope. The mechanical check in this
-section is format-independent; it does not care whether any
-currently-defined format's snapshot happens to expose a given record's
-defect, which is exactly why it found Sangan (whose defect is invisible at
-GOAT and Edison, both of which precede the overlap window) and would find
-the next one too, whenever this project adds a format whose snapshot lands
-somewhere the four already-known-safe-looking records above have never
-been queried.
+**The 11 genuinely, exactly ordered records** — every consecutive pair
+independently verified **PROVEN** under §5's precise test, not merely
+"not found to be contradictory": Blackwing - Sirocco the Dawn, Blue-Eyes
+Toon Dragon, Blue-Eyes Ultimate Dragon, Dark Necrofear, Necrovalley, Night
+Assailant, Rescue Cat, Soul Rope, Swords of Concealing Light, Toon
+Mermaid, Toon Summoned Skull. Ten of these eleven carry only exact,
+day-precision dates throughout (§12.6: two exactly-dated events can never
+fail PROVEN, by construction — their order is a direct date comparison,
+not an inference); the eleventh, Rescue Cat, has one bounded event whose
+`new_attested_from` (2008-12-15) precedes its dated sibling's date
+(2017-03-30) — `first_confirmed_new(Rescue-Cat-event) <=
+last_confirmed_old(dated-sibling)` holds with room to spare, genuinely
+PROVEN despite the imprecision, not merely non-overlapping-by-inspection.
 
-**Migration proof burden, revised under the no-implicit-order rule (§2).**
-Because omitted ordering means no edge, a migration script cannot simply
-copy `changes[]` order into `ordering.chains` for every record — doing so
-would silently reintroduce exactly the array-order-as-evidence bug this
-document exists to remove, for any of the (currently unknown, and
-unknowable without per-record research) records whose list order does
-*not* reflect a real evidenced sequence. The correct mechanical migration
-procedure, by category:
+**Why exhaustive, not swept, matters for trusting "48":** a sweep can miss
+a narrow window between samples; an exact, boundary-only enumeration
+cannot, because it is not sampling a continuous space at all — it is
+enumerating a genuinely finite one. This section's "48" is now a claim
+this document can defend against "did you check *every* possible
+snapshot," not just "did you check enough of them."
 
-- **236 trivial**: no `ordering` possible or needed (single event) — pure,
-  safe rename.
-- **11 fully-ordered**: the migration script **emits `ordering.chains`
-  only where it can independently re-derive the order from the dates
-  themselves** — i.e. it re-runs the same non-overlap check used to find
-  this category, and only writes an edge where that check *passes*, never
-  by copying `changes[]` position. For all 11, this reduces to "sort by
-  date, chain the sorted order" — safe, because the sort order and the
-  proof are the same computation.
-- **39 bundled/independent-axis + 8 mechanically-distinct order-unknown**:
-  the migration script emits **no `ordering` edges at all** and, for the
-  39, emits explicit event-grouping per the already-published Edison
-  classification (no new research needed — already done and committed);
-  the `chains`-from-`changes[]` array-copy the naive approach would
-  produce is exactly what must *not* happen for these 47 records.
-- **2 needs-manual-review**: blocked on a human decision (§5.6) before any
-  mechanical emission — the script must not guess.
+**Migration procedure, corrected on two points from the prior revision.**
+Because omitted ordering means no edge, a migration script cannot copy
+`changes[]` order into `ordering.chains` for any record — it must instead
+run §5's PROVEN test itself and emit an edge only when that test passes.
+Two further corrections from the second revision of this document:
 
-**Do not trust the Edison 44/85 as the entire affected population** — now
-proven, not merely asserted: the mechanical check found 4 records entirely
+- **The 38 bundled and 9 mechanically-distinct records migrate
+  identically in chronology structure — as two separate, unordered
+  events, with no `ordering` edge, and no event-merging.** "Bundled" is a
+  research label (these two transitions are about the same underlying
+  question), not a chronology claim (that they happened together) — §5.5
+  corrects this conflation directly, and no record in the corpus has
+  evidence meeting the co-occurrence bar. The *only* difference between
+  the two categories in the migrated JSON is the `axis` label each
+  event's transitions carry (shared/related for the 38, distinct for the
+  9) — a documentation fact with zero effect on the computed candidate
+  set.
+- **No edge is emitted anywhere without passing §5's PROVEN test or
+  carrying an explicit, authored `basis`.** This applies uniformly:
+
+  - **236 trivial**: single event, no `ordering` possible or meaningful —
+    pure, safe rename.
+  - **11 fully-ordered**: the migration script emits `ordering.chains`
+    only for pairs its own PROVEN check passes — for all 11, this reduces
+    to "sort by date, chain the sorted order, `basis: date-proven`
+    throughout," since sorting and proving are the same computation here.
+  - **38 bundled + 9 mechanically-distinct = 47**: the migration script
+    emits **no `ordering` edges at all** (§5's test does not pass for any
+    of them — every one is compatible-but-inconclusive) — only the
+    already-published classification (bundled vs. mechanically-distinct)
+    is transcribed into each event's `axis` label; no new research is
+    needed for these 47.
+  - **2 needs-manual-review**: blocked on a human §5.6 decision before
+    any emission at all — not even the "no edge" default is written
+    automatically, since resolving whether their researcher-inferred
+    order should become an explicit `basis`-carrying edge is exactly the
+    open question.
+
+**Same-date, not-proven-co-occurring events**, per the task's explicit
+question: if two events happen to carry the identical exact date without
+any co-occurrence evidence, they remain two separate events (never
+auto-merged); no `ordering` edge is needed between them (§5.7/§12.6 — §5's
+PROVEN test does not actually hold in *either* direction for identical
+dates, and none is required, since their independently-computed statuses
+can never actually disagree regardless of order); and
+their statuses will always move together at every snapshot as a
+consequence of sharing a date, not as a consequence of any declared
+relationship.
+
+**Do not trust the Edison 44/85 as the entire affected population** —
+proven exactly, not swept: the exhaustive check found 4 records entirely
 outside Edison's known-wrong/divergence set with the identical defect,
 none of which currently produce a *visible* symptom for any
 currently-defined format, exactly the risk this document's introduction
@@ -977,8 +1124,8 @@ touched; not (C), a permanent dual-schema state. The one addition this
 revision makes: §7's migration-proof burden means the "normalise" step in
 (D) is not a passive re-shaping of v1 data into v2 structures. **49
 records, not 247, need an active research step before they can be
-migrated at all**, split into two disjoint groups (§7): 47 (39 bundled +
-8 mechanically-distinct order-unknown) whose research is *already done* —
+migrated at all**, split into two disjoint groups (§7): 47 (38 bundled +
+9 mechanically-distinct order-unknown) whose research is *already done* —
 the Edison audit's and this document's own corpus re-audit's
 classifications are the research, migration only needs to transcribe
 them — and a separate 2 (Insect Imitation, Last Will) whose research is
@@ -1000,12 +1147,28 @@ independent questions — is the *chronology* determinate, and what
 represent the task's own posed mixed case (ambiguous chronology, one
 candidate implemented, one a known gap). Split into two dimensions:
 
+**Corrected in this pass: no identity (`is`) comparison, and no reliance
+on the dataclass's default whole-object equality either.** The first
+version of this API used `self.candidates[0] is self.modern_state` and
+`self.modern_state in self.candidates` — both fragile, because
+`HistoricalState` is a plain `@dataclass(frozen=True)`, whose generated
+`__eq__` compares *every* field (`events`, `label`, `coverage`), not just
+the event-set that actually identifies which state something is. Two
+`HistoricalState` objects built independently (e.g. one from `candidates`,
+one as `modern_state`, on separate code paths) could carry the same
+`events` but a differently-worded `label`, and would then compare unequal
+under the default `__eq__` even though they represent the *same* state —
+exactly the kind of bug this whole document exists to stop tolerating,
+just relocated from the schema into the API. **A state's identity is its
+event-set, nothing else** — every comparison below is written against
+`.events` explicitly, never against a whole `HistoricalState`:
+
 ```python
 @dataclass(frozen=True)
 class HistoricalState:
-    events: frozenset[str]           # event ids applied in this state
-    label: str                       # human-readable, generated
-    coverage: ImplementationCoverage # §4 — never absent for a real candidate
+    events: frozenset[str]           # THE identity of a state — every comparison uses this field only
+    label: str                       # human-readable, descriptive only — never compared
+    coverage: ImplementationCoverage # §4 — descriptive only — never compared
 
 @dataclass(frozen=True)
 class ErratumSelection:
@@ -1015,11 +1178,12 @@ class ErratumSelection:
 
     @property
     def is_modern(self) -> bool:
-        return self.chronology == "determinate" and self.candidates[0] is self.modern_state
+        return (self.chronology == "determinate"
+                and self.candidates[0].events == self.modern_state.events)
 
     @property
     def modern_is_possible(self) -> bool:
-        return self.modern_state in self.candidates
+        return any(c.events == self.modern_state.events for c in self.candidates)
 
     @property
     def has_known_gap(self) -> bool:
@@ -1029,6 +1193,14 @@ class ErratumSelection:
     def needs_implementation_research(self) -> bool:
         return any(c.coverage.kind is Coverage.UNRESOLVED for c in self.candidates)
 ```
+
+Audited the rest of this document's API surface for the same class of
+mistake: §10's validator invariants (state-key uniqueness, unreachable
+states, the all-events/modern check) are all specified in terms of
+event-sets directly, not `HistoricalState` object comparisons, so they do
+not have this problem; §4's completeness rule keys `states[]` lookups by
+event-set from the start. This API section was the one place a
+whole-object comparison had crept in, now corrected.
 
 No third or fourth top-level enum value is needed — `"gap"` and
 `"modern"` are no longer chronology states at all, they are properties of
@@ -1115,59 +1287,89 @@ independently and unambiguously readable.
 
 ## 10. Validation design
 
-Ten invariants, three of them substantively changed from the first version
-of this document:
+**Corrected in this pass: the previous revision's invariant 6 (a
+permanent, standing "self-contradictory candidate" sweep, re-run on every
+`validate` invocation) is retired as a v2 invariant.** On reflection it is
+mostly tautological for v2 data: the down-set enumeration algorithm (§2)
+is *defined* so that a candidate is only ever generated if every included
+event is NEW-or-AMBIGUOUS and every excluded event is OLD-or-AMBIGUOUS —
+a v2 record, correctly parsed by a correctly-implemented algorithm,
+*cannot* produce a self-contradictory candidate, the same way a correctly
+implemented sort cannot return an unsorted list. Re-checking this on every
+record at every `validate` run would mostly be re-verifying the
+algorithm's own implementation once per record, which is what software
+tests are for, not what per-record data validation is for. What actually
+prevents "the next Sangan" in v2 is **not** a runtime sweep — it is the
+combination of (a) no implicit ordering (an author cannot accidentally
+assert an edge), (b) every explicit edge passing §5's PROVEN/CONTRADICTED
+test, and (c) candidates being generated from live per-event status, not
+from a stale positional label. The sweep's real, still-valuable uses are
+named explicitly below, in their own scoped subsection after the ten
+invariants, rather than smuggled in as a redundant v2 correctness check.
 
-1. **Every `ordering` reference names a real event id** — unchanged, still
-   new relative to today's schema.
-2. **No cycles in `chains`/`edges`** — unchanged; standard topological
-   sort, and, per the task's explicit instruction, **declaration order of
-   events plays no role in validity** — an `ordering` entry may reference
-   an event declared anywhere in `events{}`, forward or backward, and
-   cycle detection is the only thing that can reject a set of edges, not
-   the order they or the events they reference happen to be written in.
+Ten invariants:
+
+1. **Every `ordering` reference names a real event id.**
+2. **No cycles in `chains`/`edges`** — standard topological sort;
+   **declaration order of events plays no role in validity** — an
+   `ordering` entry may reference an event declared anywhere in
+   `events{}`, forward or backward, and cycle detection is the only thing
+   that can reject a set of edges.
 3. **Every `states[]` entry is a down-set the ordering/co-occurrence graph
-   can actually produce** — unchanged in spirit, re-scoped to events.
-4. **No duplicate state keys** — unchanged.
+   can actually produce.**
+4. **No duplicate state keys.**
 5. **The all-events state is unambiguously `coverage.kind == MODERN`, and
-   no other state may be** — unchanged in spirit, now phrased against the
-   sum type (§4) rather than an informal `"modern"` string.
-6. **CORRECTED, now the primary check, not a lint: the exact mechanical
-   overlap test from §7**, run at validation time, not just during a
-   one-off corpus audit. For every pair of events with no declared
-   `ordering` edge between them, the validator computes both events'
-   OLD/AMBIGUOUS/NEW status across a snapshot sweep (mirroring §7's
-   method) and asserts that no `states[]`-authored candidate — nor any
-   *mechanically defaulted* `UNRESOLVED` candidate — is ever
-   self-contradictory relative to either event's own independently-computed
-   status. This is what §7 ran as a one-time corpus audit; **as a
-   validator invariant it runs on every future `validate` invocation**,
-   which is what actually prevents the next Sangan from being merged
-   silently — a text-matching lint (this revision's predecessor's
-   proposal) would not have caught Sangan at all, since Sangan's review
-   notes never used "cannot be sequenced" language; only the mechanical
-   check does.
-7. **Every declared `ordering` edge that contradicts dated evidence is
-   rejected** — generalises today's `erratum.changes-out-of-order` check:
-   if event B declares `after: [A]` but B's earliest possible date
-   precedes A's latest possible date, that is a direct, structural
-   contradiction between the declared edge and the dated evidence, hard
-   error.
-8. **Unreachable state mappings are detected** — unchanged.
+   no other state may be** — per §4's named exception, this holds whether
+   or not an author writes an entry for it.
+6. **CORRECTED: every declared `ordering` edge must pass §5's exact
+   PROVEN/CONTRADICTED test, not the earlier (wrong) "intervals don't
+   overlap" test.** An edge the dates **CONTRADICT** —
+   `last_confirmed_old(A) >= first_confirmed_new(B)` for a declared
+   `before: A, after: B` — is a hard error unconditionally; overlapping
+   intervals alone (Sangan's shape) are explicitly **not** grounds for
+   rejection, only for requiring (7) below. This replaces, and corrects
+   the mathematics of, the previous revision's invariant 7.
+7. **Every edge not PROVEN by dates alone must carry an explicit
+   `basis`** (§5.6, §5's ordering-edge section) — `"date-proven"` is
+   asserted automatically only when §5's PROVEN test actually passes;
+   anything in the compatible-but-inconclusive zone with no `basis`, or
+   with `basis: "date-proven"` claimed falsely, is rejected. This is the
+   validator-enforced form of §5's "requires an explicit, authored basis"
+   rule, and is the actual, positive mechanism (not a sweep) that keeps
+   an unevidenced edge out of the corpus.
+8. **Unreachable state mappings are detected** — a `states[]` entry whose
+   down-set the ordering/co-occurrence graph can never actually produce
+   (dead data, most likely a typo or a stale edit) is flagged.
 9. **Ambiguity cannot silently fall back unless policy explicitly allows
    it** — unchanged in principle from today's `format.erratum-ambiguous`/
    `unresolved_policy` handling, operating over `ErratumSelection.
    candidates` (§9) instead of integers.
-10. **Co-occurrence claims require sources**, per §2's failure-mode note —
-    an `events{}` entry with 2+ transitions must cite `sources` supporting
-    the co-occurrence claim specifically, not merely sources for each
-    transition's own content, since asserting two things happened together
-    is evidentially a stronger claim than asserting each happened.
+10. **Co-occurrence claims require sources** — an `events{}` entry with
+    2+ transitions must cite `sources` supporting the co-occurrence claim
+    specifically, not merely sources for each transition's own content.
 
-Invariant 6 is the one this revision adds real teeth to. It is not a
-heuristic tuned to Edison's specific review-note phrasing; it is the same
-mechanical procedure §7 used to find Sangan and Witch of the Black Forest,
-generalised to run continuously rather than as a one-time audit.
+**The sweep is not deleted from this project's toolkit — it is
+re-scoped, explicitly, to three uses that are not "a standing v2
+invariant":**
+
+- **A one-time (or as-needed) legacy-v1 audit tool** — exactly what §7
+  used to find the 48 affected records and prove the 11 safe ones exactly,
+  run against `changes[]`-shaped data specifically to decide which records
+  can be mechanically chain-migrated and which need a human.
+- **A regression-test fixture** — `OrderingConstraintTest` and
+  `test_giant_rat_selection_shape` (§11) pin the *old*, known-buggy v1
+  behaviour precisely so a future change to the (deleted, post-migration)
+  v1 code path cannot silently regress it further before removal.
+- **A v1-vs-v2 equivalence/cutover check** — during migration (§8, §13),
+  comparing the old sweep-based v1 output against the new v2 algorithm's
+  output confirms the migration actually *changes* behaviour for exactly
+  the records it should (the 48) and leaves every other record's computed
+  output untouched.
+
+None of these three is "run on every future `validate` call against live
+v2 data" — that role belongs to invariants 6 and 7 above, which do the
+actual, positive work of keeping bad edges out, rather than re-deriving
+that the algorithm implements its own specification correctly.
 
 ---
 
@@ -1181,12 +1383,12 @@ sum-type coverage:
 |---|---|
 | `schemas/erratum.schema.json` | New `events{}` (keyed dict, not array — replaces `changes[]`), each with `effective` + `transitions[]` (no per-transition chronology); new `ordering.chains`/`ordering.edges`; new `states[]` keyed by event-id-sets with the `Coverage` sum type (§4) replacing today's `implementation.strategy` informally-typed shape; `changes[]` retained during the (D) transition period (§8). |
 | `retroformats/model.py` | `Erratum.relevant_changes()`/`implementation_for_version()`/`selection_at()` replaced by event-down-set enumeration + state lookup (§2, §9); `change_state_at()` reused, now applied to an event's `effective` block instead of a bare change's. |
-| `retroformats/validate.py` | `_validate_errata`'s ordering check generalised per §10.7; §10.6's mechanical overlap check is new; every integer-based `selection.version_index`/`.candidates` consumer becomes a `HistoricalState`/`Coverage` consumer; `format.erratum-include-wrong-version`/`-redundant` become event-set-equality checks instead of `== 0`. |
+| `retroformats/validate.py` | `_validate_errata`'s ordering check replaced by §10.6's PROVEN/CONTRADICTED edge test and §10.7's evidentiary-basis requirement (both new); every integer-based `selection.version_index`/`.candidates` consumer becomes a `HistoricalState`/`Coverage` consumer; `format.erratum-include-wrong-version`/`-redundant` become event-set-equality checks instead of `== 0`; the legacy self-contradictory-candidate sweep (§10) ships as a migration/audit utility, not a `validate.py` runtime path. |
 | `retroformats/lflist.py` | Smallest-touched of the three code files, as in the first version of this document — `select_applicable_errata()` and `baseline_override()`/`parity_override()` operate on `.chronology`/`.candidates[0].coverage` directly; `parity_override()`'s "walk in order, take first usable" logic needs a defined canonical walk order over states for a non-chain record (recommendation unchanged: fewest events applied first, ties broken by event id — degenerates to today's behaviour for every genuine chain). |
 | Importers | Unaffected — no importer currently generates multi-event records. |
 | Report output (`cli.py` `report -v`) | Cosmetic — prints state labels instead of version integers. |
 | Tests | `OrderingConstraintTest` and `test_giant_rat_selection_shape` rewritten against corrected semantics (unchanged conclusion from the first revision) — plus **new** regression tests for Sangan and Witch of the Black Forest specifically, since those two were not previously known to need one. |
-| Existing JSON records | Per §7 (corrected): 247 records (236 trivial + 11 genuinely fully-ordered) migrate via a script that **proves** each `ordering.chains` edge it emits rather than copying `changes[]` position; a separate 47 records (39 bundled + 8 mechanically-distinct order-unknown) need explicit event-grouping/no-ordering annotation, all already researched (Edison audit + this document's own corpus re-audit — no new research needed for these 47); a further, disjoint 2 records (Insect Imitation, Last Will) are not yet researched at all and are blocked on a human §5.6 decision before any annotation can be written. |
+| Existing JSON records | Per §7 (corrected): 247 records (236 trivial + 11 genuinely, exactly ordered) migrate via a script that **proves** each `ordering.chains` edge it emits rather than copying `changes[]` position; a separate 47 records (38 bundled + 9 mechanically-distinct order-unknown) migrate as unordered event pairs with no `ordering` edge, only an `axis`-label transcription — all already researched (Edison audit + this document's own corpus re-audit — no new research needed for these 47); a further, disjoint 2 records (Insect Imitation, Last Will) are not yet researched at all and are blocked on a human §5.6 decision before any annotation can be written. |
 | Generated `dist/` output | Must not change for any currently-defined format — the same regression gate as the first version of this document, unaffected by this revision's corrections. |
 
 ---
@@ -1233,9 +1435,17 @@ weakness here is real and unaffected by this revision).
 `B`, each with `effective.date: "2015-06-01"`, no co-occurrence declared.
 At every snapshot, `change_state_at()` gives both events identical
 OLD/NEW status (day-precision boundaries are deterministic and identical
-for identical dates), so no `ordering` edge is *required* for correctness
-— §10.6's mechanical check never fires a contradiction for this pair,
-because their independently-computed statuses can never disagree. This is
+for identical dates), so no `ordering` edge is *required* for correctness.
+Checked against §5's exact test (not just asserted): **neither direction
+is PROVEN** here — `first_confirmed_new(A)` (2015-06-01) is *not*
+`<= last_confirmed_old(B)` (2015-05-31) in either direction, since same-day
+events give each other no room to be strictly before one another — nor is
+either direction CONTRADICTED. This is the correct, expected answer: dates
+identical to the day cannot establish which (if either) came first within
+that day, and the record does not need them to, since — as established
+above — their statuses can never disagree regardless of order. An earlier
+draft of this stress case incorrectly claimed an edge here would be
+trivially PROVEN; corrected on review of the arithmetic. This is
 different from declaring them one *event*: two same-dated-but-separate
 events still, in principle, permit a future finding that they were not
 actually simultaneous (a day-precision date is not a certificate of
@@ -1377,11 +1587,13 @@ records needing explicit annotation.
 keyed by event-set, with the single, formally-defined default
 (`UNRESOLVED`) for any reachable-but-unauthored state.
 
-**Validator strategy.** §10's ten invariants, with invariant 6 (the
-mechanical overlap check, generalised from a one-time audit into a
-standing, per-`validate`-run check) as the single most consequential
-addition of this revision — it is what would have caught Sangan before
-merge, not after.
+**Validator strategy.** §10's ten invariants, with invariants 6 and 7 (the
+exact PROVEN/CONTRADICTED edge test, and the evidentiary-basis requirement
+for anything not PROVEN) as the two that actually keep bad edges out of
+v2 data going forward — the exhaustive sweep that *found* Sangan (§7)
+remains a legacy-v1 migration and audit tool, not a standing v2 check
+(§10), since a correctly-implemented v2 algorithm cannot generate a
+self-contradictory candidate by construction.
 
 **Expected files touched by the eventual implementation:** unchanged list
 from §11 (schema, `model.py`, `validate.py`, `lflist.py`, both erratum test
@@ -1403,10 +1615,12 @@ file-count sense once the 2 needs-manual-review records are resolved).
    **independently re-derives and proves** each `ordering.chains` edge for
    the 11 from their dates directly — never copies `changes[]` position.
    Regression-gated.
-4. **Migrate the 47 records needing explicit annotation** (39
-   bundled/independent-axis + 8 mechanically-distinct order-unknown, using
-   the already-published classifications from the Edison audit and this
-   document's corpus re-audit — no new research needed for these 47).
+4. **Migrate the 47 records as unordered event pairs** (38
+   bundled/shared-package + 9 mechanically-distinct order-unknown — no
+   `ordering` edge for either group, only an `axis`-label transcription
+   distinguishing them — using the already-published classifications from
+   the Edison audit and this document's corpus re-audit; no new research
+   needed for these 47).
    This commit is expected to *change* the computed candidate set for the
    29-of-38 Edison records already known to be self-contradictory today,
    **and, newly, for Sangan and Witch of the Black Forest at any snapshot
@@ -1419,9 +1633,11 @@ file-count sense once the 2 needs-manual-review records are resolved).
    chosen.
 6. **Switch `validate.py`/`lflist.py` to the new API directly**, remove
    deprecated integer-based compatibility shims. Implement §10's
-   invariant 6 (the mechanical overlap check) as a standing validator
-   check in this same commit — this is the change that prevents
-   regression, not merely documents past instances of it.
+   invariants 6 and 7 (the PROVEN/CONTRADICTED edge test, and the
+   evidentiary-`basis` requirement for every edge that test doesn't
+   settle) as standing validator checks in this same commit — this is the
+   change that prevents regression, not merely documents past instances
+   of it.
 7. **Delete v1 schema support.** (D) formally becomes (B).
 8. **Retire/rewrite the characterisation tests** pinning known-buggy
    behaviour (`OrderingConstraintTest`, `test_giant_rat_selection_shape`),
