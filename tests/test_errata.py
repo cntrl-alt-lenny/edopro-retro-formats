@@ -207,35 +207,53 @@ class OrderingConstraintTest(unittest.TestCase):
     IMPORTANT - these are characterization tests, not correctness tests for
     the numeric candidate labels. They pin down what selection_at() *does*
     today; they do NOT establish that a given candidate index correctly
-    represents any particular joint historical state. Whether a candidate
-    label is meaningful depends on the real relationship between the two
-    changes, which selection_at() cannot see:
-    - for a GENUINE chained pair (the ordinary case: 41 divergence records,
-      plus 6 of the 44 known-wrong-cluster's non-cluster-1 records - Axe of
-      Despair, Tyrant Dragon, Vampire Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon -
-      each pairing one undated ruling with a separate, later, unrelated
-      dated erratum), the current output is either already correct (the
-      [NEW, AMBIGUOUS] / [AMBIGUOUS, OLD] shapes) or would need genuine
-      propagation to become correct (the [OLD, AMBIGUOUS] / [AMBIGUOUS, NEW]
-      shapes) - propagation is safe here because the pair really is ordered;
-    - for a genuinely INDEPENDENT-AXIS pair (confirmed for exactly the
-      38-card failed-search/deck-verification cluster, via each record's own
-      review notes stating its two changes cannot be sequenced because they
-      are two aspects of one bundled upstream script - Giant Rat, tested
-      below, is one of 29 of the 38 with this exact [OLD, AMBIGUOUS] shape;
-      8 more plus Paladin of White Dragon list the same two axes in the
-      opposite order and so do NOT exhibit a self-contradictory candidate
-      set, even though the underlying independent-axis problem is identical)
-      - propagation would be WRONG: it would manufacture false certainty
-      about which of two truly independent rulings had happened, and no
-      candidate index, propagated or not, can represent a genuine joint
-      state without a different representation than a linear chain.
+    represents any particular joint historical state, and they do NOT
+    establish that any real multi-change record is a validated chain merely
+    because changes[] lists two changes in some order. changes[] list order
+    is not evidence of a real chronological relationship - it is exactly the
+    representation this project's research documentation is investigating.
+    Three real-record situations exist, and selection_at() cannot currently
+    tell them apart:
+    - a GENUINELY EVIDENCED CHAIN (all 41 divergence/B-partition records:
+      every relevant change carries a real, specific effective.date, so the
+      relative order is actually established, not merely listed) - here
+      propagation would be safe if implemented, and the current output is
+      either already correct (the [NEW, AMBIGUOUS] / [AMBIGUOUS, OLD]
+      shapes) or would need genuine propagation to become correct (the
+      [OLD, AMBIGUOUS] / [AMBIGUOUS, NEW] shapes);
+    - a BUNDLED INDEPENDENT-AXIS pair (the 38-card failed-search/
+      deck-verification cluster: each record's own review notes state its
+      two changes are aspects of one ruling package, bundled in a single
+      upstream script, and cannot be sequenced - Giant Rat, tested below, is
+      one of 29 of the 38 with the [OLD, AMBIGUOUS] shape, where candidate 1
+      is actively self-contradictory; 8 more plus Paladin of White Dragon
+      list the same two axes in the opposite order and so do not exhibit a
+      self-contradictory candidate at the Edison snapshot specifically,
+      though the underlying independent-axis problem is identical) -
+      propagation would be WRONG here: it would manufacture false certainty
+      about which of two truly independent rulings had happened;
+    - a MECHANICALLY-UNRELATED, ORDER-UNKNOWN pair (6 non-cluster-1 records
+      in this project's known-wrong set - Axe of Despair, Tyrant Dragon,
+      Vampire Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon - each pairing one
+      undated ruling with a separate, later, mechanically-unrelated dated
+      erratum whose relative order is simply never evidenced, not merely
+      unlisted) - propagation would ALSO be wrong here, for the same reason
+      as the bundled case, even though these records are not "independent
+      axes" in the bundled/substantive sense. Their candidate set happens to
+      be non-contradictory at the Edison snapshot only because the dated
+      member of each pair is confirmed not-yet-happened purely by its own
+      far-future date, independent of any ordering fact; re-evaluated at a
+      snapshot after that date, all 6 reproduce the identical
+      self-contradictory-candidate symptom the bundled cluster shows at
+      Edison - a snapshot-dependent coincidence, not evidence of a chain.
 
     This project deliberately does NOT patch selection_at() to propagate,
-    because it cannot tell these two cases apart from changes[] alone. See
+    because it cannot tell a genuinely evidenced chain apart from either
+    kind of order-unresolved pair using changes[] alone. See
     docs/research/edison-behaviour-gaps.md (roadmap item 5c), "Selection-model
-    ordering question" and "Independent-axis C vs. ordinary-linear-chain C",
-    for the full per-record analysis and the proposed data-model fix.
+    ordering question" and "A/B/C/D partition"'s "The 6 non-cluster C records
+    are NOT validated linear chains", for the full per-record analysis and
+    the proposed (not yet chosen) data-model fix.
     """
 
     def test_earlier_definite_old_later_ambiguous_does_not_propagate(self):

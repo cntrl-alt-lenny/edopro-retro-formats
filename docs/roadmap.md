@@ -123,31 +123,41 @@ reflects that.
    change that would be needed.
 
    5c. ~~**Card-behaviour triage.**~~ **Done (2026-08-22, audit only; corrected
-   2026-08-22 after adversarial review; corrected again 2026-08-22 after a second
-   adversarial review found a semantic inversion in the first correction).**
+   three times, 2026-08-22, after successive adversarial reviews).**
    Recomputed Edison's two headline errata-warning counts from HEAD rather than
    trusting a remembered figure — 44 `format.erratum-modern-known-wrong` + 41
    `format.erratum-known-divergence` (not 48; "48" is the project-wide count of
    `implementation.strategy: "unresolved"` records, 7 of which don't apply at Edison's
    exact snapshot) = 85 unique cards, zero overlap, zero requiring a D
-   (identity/engine-issue) classification — these counts are unaffected by either
+   (identity/engine-issue) classification — these counts are unaffected by any
    correction below. An initial A/B/C/D partition (A 44 / B 41 / C 0) used too weak a
    test for A ("at least one candidate implemented" instead of "every
    historically-plausible candidate implemented"). Corrected partition: **A 0 / B 41
    (unchanged) / C 44 / D 0**, verified by live recomputation against every record in
    the 296-record corpus, not just the 44. **Within the 44, two structurally different
-   kinds of C were found and must not be conflated**: 38 records (the entire
-   failed-search/deck-verification cluster) are genuinely **independent-axis** cases —
-   two behavioural axes bundled in one upstream GOAT script, which every one of their
-   own review notes says cannot be sequenced against each other, and for which no
-   implementation exists for the state where only one axis has changed. The other 6
-   (Axe of Despair, Tyrant Dragon, Vampire Lord, XY-/XYZ-/XZ- Dragon/Tank Cannon) are
-   **ordinary linear chains** — an undated ruling paired with a separate, much later,
-   mechanically-unrelated dated erratum — earning C the ordinary way (unresolved
-   chronology + an unimplemented chain position), not via independent axes; an earlier
-   pass wrongly generalised the independent-axis finding to all 44 (or, on the first
-   correction pass, to 43 of 44). It is not true that resolving chronology alone is
-   guaranteed to finish the 38 independent-axis cards: whichever way the undated
+   kinds of C were found and must not be conflated, and neither is a validated chain**:
+   38 records (the entire failed-search/deck-verification cluster) are **bundled
+   independent-axis** cases — two behavioural axes bundled in one upstream GOAT
+   script, which every one of their own review notes says cannot be sequenced against
+   each other, and for which no implementation exists for the state where only one
+   axis has changed. The other 6 (Axe of Despair, Tyrant Dragon, Vampire Lord,
+   XY-/XYZ-/XZ- Dragon/Tank Cannon) were first (wrongly) folded into that same
+   independent-axis bucket, then (also wrongly, on a later correction pass) called
+   "ordinary linear chains" on the theory that `changes[]` list order established
+   their relative sequence — but list order is not evidence, and a direct per-record
+   audit found **zero of the six have an evidenced relative order**: four say outright
+   "cannot be sequenced... because it has no chronology at all"; the other two simply
+   never address it. Their candidate sets only look non-contradictory at the Edison
+   snapshot because the dated member of each pair (2013 or 2016) is independently
+   confirmed not-yet-happened by its own date, regardless of any relationship to the
+   undated member — recomputed at a snapshot after that date, all six reproduce the
+   identical self-contradictory-candidate symptom Giant Rat shows at Edison. Corrected
+   taxonomy: **38 bundled/independent-axis + 6 order-uncertain/mechanically-distinct +
+   0 genuinely order-evidenced chains among the 44 C records** (the 41 B-partition/
+   divergence records are this corpus's genuinely order-evidenced chains — every
+   relevant change in each carries a real, specific date). It is not true that
+   resolving chronology alone is guaranteed to finish the 38 bundled cases: whichever
+   way the undated
    activation-semantics axis resolves, the *direction* of any needed follow-up custom
    script is to **add** a modern-style valid-target-exists check at activation (the
    existing baseline script has none) while *retaining* old-era reveal-on-whiff
@@ -158,18 +168,25 @@ reflects that.
    The underlying `Erratum.selection_at()` candidate computation was also found not to
    propagate a change's definite state to its chain neighbours (a real gap against the
    schema's "ordered oldest-to-newest" contract) for 2 of 4 possible two-change
-   orderings — deliberately left unpatched, since propagation is *correct* for the
-   ordinary-chain records but *wrong* for the 38 independent-axis records, and the code
-   cannot currently tell the two cases apart. A further, deeper finding: even the
-   *meaning* of a given candidate index depends on `changes[]` list order, which is
-   inconsistent across the 38 independent-axis records — 29 list the dated axis first
-   (producing a self-contradictory candidate 1 that asserts an already-ruled-out state,
-   with the true intermediate state unrepresented by any index) and 9 list the undated
-   axis first (producing a valid candidate 1). Regression tests pin the current
-   (characterization-only, not correctness-asserting) behaviour, and a data-model fix (a
-   per-change `order: chained|independent` marker) is proposed, not implemented, in
-   `docs/research/edison-behaviour-gaps.md`. The 41 B-partition cards (unaffected by
-   either correction) cluster more finely (once-per-turn/name-lock 9, target-legality 8,
+   orderings — deliberately left unpatched, since propagation is safe only where order
+   is genuinely evidenced (the 41 B records) and wrong for all 44 C records, bundled
+   and order-uncertain alike, and the code cannot currently tell evidenced order from
+   no evidence either way. A further, deeper finding: even the *meaning* of a given
+   candidate index depends on `changes[]` list order, which is inconsistent across the
+   38 bundled records — 29 list the dated axis first (producing a self-contradictory
+   candidate 1 that asserts an already-ruled-out state, with the true intermediate
+   state unrepresented by any index) and 9 list the undated axis first (producing a
+   valid candidate 1). Regression tests pin the current (characterization-only, not
+   correctness-asserting) behaviour. A data-model fix is proposed, not implemented, in
+   `docs/research/edison-behaviour-gaps.md` — scoped as a set of representational
+   requirements (ordered chains, unordered/independent axes, order-unknown transition
+   pairs, joint states, per-state implementation/gap coverage) rather than a single
+   chosen schema; an earlier pass's `order: chained|independent` two-value sketch
+   undersold the problem, since ordering is a relation between transitions, not a
+   per-change property, and Paladin of White Dragon alone has three relevant changes
+   spanning both a bundled pair and a separate order-uncertain one. The 41 B-partition
+   cards (unaffected by any correction) cluster more finely (once-per-turn/name-lock 9,
+   target-legality 8,
    a nomi-to-semi-nomi wording pattern ~7 and a Union-condition pattern 2 within a
    12-card "other shared ruling-era change" group, plus smaller/bespoke groups) and feed
    directly into item 7 below once that infrastructure exists. A systematic audit of all
@@ -179,12 +196,15 @@ reflects that.
    clustering, corrected partition reasoning, and both prioritisation views:
    `docs/research/edison-behaviour-gaps.md`. No card behaviour or selection logic
    changed — audit only, per this milestone's scope. **Recommended next step (not
-   started): design and implement independent-axis/joint-state erratum modelling before
-   spending a research pass on any chronology question this audit surfaced** — the data
-   model cannot yet correctly record the answer for 29 of the 38 independent-axis cards,
-   so chronology research is premature until that representation gap closes; see
-   `docs/research/edison-behaviour-gaps.md`'s "Recommended next milestone" for the full
-   requirements list.
+   started): design and implement a representation for ordered chains, unordered axes,
+   and order-unknown transitions — beginning with an architecture/design comparison,
+   not an assumed schema — before spending a research pass on any chronology question
+   this audit surfaced** — the data model cannot yet correctly record the answer for
+   any of the 44 C-partition cases at every snapshot (29 of the 38 bundled cases fail
+   already at Edison; the rest fail only at later snapshots this audit did not
+   evaluate), so chronology research is premature until that representation gap
+   closes; see `docs/research/edison-behaviour-gaps.md`'s "Recommended next milestone"
+   for the full requirements list.
 
 ## Phase 2 — framework completeness
 
