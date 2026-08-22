@@ -207,7 +207,7 @@ reflects that.
    for the full requirements list.
 
    5d. ~~**Erratum state-model architecture research.**~~ **Done (2026-08-22, design
-   only — no implementation; corrected three times after successive adversarial
+   only — no implementation; corrected four times after successive adversarial
    reviews — round 1 found four architecture-level defects, round 2 found the
    ordering-edge contradiction test's mathematics were wrong, the migration-time
    invariant was tautological under the corrected model, one record was misclassified,
@@ -226,8 +226,21 @@ reflects that.
    early pass: both were described as "not self-contradictory" on the reasoning that no
    order had been asserted, the exact conflation this whole document exists to fix;
    checked directly, both *are* self-contradictory from their functional erratum's
-   effective date onward, corrected in place — all fixed below, and the architecture is
-   now frozen for implementation.** Chose and
+   effective date onward, corrected in place; round 4 found the proposed migration
+   SEQUENCE itself was broken, not the architecture — the plan to normalise v1 and v2
+   into one shared internal representation during migration is impossible to satisfy for
+   the 49 structurally affected records (Giant Rat at Edison worked precisely: v1's
+   positional candidate 1 means "verification occurred" regardless of verification's own
+   OLD status; translating `changes[]` order into a declared edge collapses the candidate
+   set to `{}` alone, while correctly leaving the events unordered gives the right shape
+   but a different, non-corresponding candidate; neither reproduces v1's actual,
+   already-known-buggy output) — corrected to an explicit, temporary legacy/v2 boundary
+   instead: a v1-shaped record is parsed and selected only by the untouched legacy
+   algorithm until the specific commit that migrates it, a v2-shaped record only by the
+   semantic algorithm from the moment it exists, and the two are never merged into one
+   code path or one equivalence claim — all fixed below, and the architecture itself
+   (sixteen frozen properties, untouched by round 4) remains frozen for implementation.**
+   Chose and
    proved a replacement for
    `changes[]`'s linear version-chain model: a **historical-event DAG** — events (not
    bare transitions) carry chronology and an explicit, evidence-only partial order
@@ -285,13 +298,18 @@ reflects that.
    conflation is corrected), adversarial stress-testing (11 cases, including the
    two-valued chained/independent marker's retraction on two independent grounds), and
    the proposed 8-step atomic implementation sequence: `docs/research/
-   erratum-state-model-v2.md`. No canonical data, `model.py`/`validate.py`/`lflist.py`,
-   schema, or generated output changed in this milestone — design only, per this
+   erratum-state-model-v2.md`. No canonical data, `model.py`/`validate.py`/`lflist.py`, or
+   generated output changed in this design-research milestone — design only, per this
    milestone's explicit scope. **The architecture is now frozen** (sixteen named
    properties, listed at the document's end) — no further redesign is expected absent a
-   concrete counterexample discovered during implementation. Recommended next step (not
-   started as part of this milestone): that 8-step sequence, beginning with schema v2
-   added alongside v1 with no behavioural change.
+   concrete counterexample discovered during implementation. The corrected 8-step
+   implementation sequence has since begun as a natural continuation: **step 1 (schema v2
+   alongside v1, no behavioural change) is done** (`bec589c`, corrected `f01fc11` — added
+   co-occurrence evidence sourcing, sourced ordering-edge tiers, a real per-kind
+   `Coverage` sum type, and a dependency-free schema test suite; `changes[]`/
+   `implementation` untouched, no canonical record uses the new shape yet). Step 2 (the
+   v2 semantic model/parser/selector, implemented alongside the untouched v1 one — never
+   merged into it, per round 4's correction) is next, not yet started.
 
 ## Phase 2 — framework completeness
 

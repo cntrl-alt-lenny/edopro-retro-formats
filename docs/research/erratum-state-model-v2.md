@@ -6,16 +6,24 @@ changes, no generated `dist/` changes, no schema changes committed in this
 milestone. This document exists to choose an architecture and prove it
 against real records before any implementation work is scheduled.
 
-**Status: architecture FROZEN for implementation.** Three correction
-passes (bb2c6a7 → 9b34a79 → 8aa67b2 → this commit) is enough adversarial
-scrutiny for a first implementation attempt to begin. The historical-event
-DAG (§2's Architecture 1, as refined) is the accepted design; its
-foundational properties are frozen — §13 lists all sixteen. No further
-architecture exploration is expected unless implementation discovers a
-concrete counterexample the frozen model genuinely cannot represent; a
-found imprecision in a proof or a migration-spec inconsistency (as this
-pass's four corrections were) is grounds for a targeted fix, not grounds
-to reopen the choice of architecture.
+**Status: architecture FROZEN for implementation.** Four correction
+passes (bb2c6a7 → 9b34a79 → 8aa67b2 → 1e1d7c9 → this commit) is enough
+adversarial scrutiny for a first implementation attempt to begin. The
+historical-event DAG (§2's Architecture 1, as refined) is the accepted
+design; its foundational properties are frozen — §13 lists all sixteen,
+**untouched by this pass**. This pass corrects the migration SEQUENCE
+only (§8, §13): the previously-proposed "normalise v1 and v2 into one
+shared representation" transition step is retracted (§8's Giant Rat
+counterexample shows it is impossible to satisfy for the 49 structurally
+affected records, not merely awkward), replaced by an explicit, temporary
+legacy/v2 boundary — this is how an intentionally-buggy legacy data model
+coexists with its replacement during migration, not a change to what the
+replacement is. No further architecture exploration is expected unless
+implementation discovers a concrete counterexample the frozen model
+genuinely cannot represent; a found imprecision in a proof, a
+migration-spec inconsistency, or a transition-plan flaw (as this and
+every prior pass's corrections have been) is grounds for a targeted fix,
+not grounds to reopen the choice of architecture.
 
 **Revision note.** This is a correction of the first version of this
 document (commit bb2c6a7), not a new design. Adversarial review found four
@@ -1257,24 +1265,111 @@ does today's schema actively mislabel."
 
 ## 8. Backwards compatibility
 
-Unchanged in conclusion from the first version of this document — option
-(D), normalise both schema shapes into one internal representation during
-migration, converging to (B), schema-v2-only, once every record has been
-touched; not (C), a permanent dual-schema state. The one addition this
-revision makes: §7's migration-proof burden means the "normalise" step in
-(D) is not a passive re-shaping of v1 data into v2 structures. **49
-records, not 247, need an active research step before they can be
+**Corrected in this pass: the previous plan — normalise both v1 and v2
+data into ONE shared internal representation during migration, selected
+by a single algorithm throughout the transition — is retracted. It is
+not merely inconvenient, it is impossible to satisfy for the 49
+structurally affected records, and attempting it corrupts coverage
+mappings for the 236+11 safe ones too if the same code path is trusted
+for both.** The end state is unchanged: v2-only, v1 deleted. What changes
+is how the project gets there.
+
+**The Giant Rat counterexample, worked precisely.** At Edison
+(2010-04-24), Giant Rat's two changes are, by array position,
+`changes[0] = verification` (bounded, OLD at Edison) and `changes[1] =
+activation-semantics` (undated, AMBIGUOUS forever). v1's positional
+algorithm computes `k_min = 0`, `k_max = 1`, `candidates = (0, 1)` —
+candidate 0 means `{}` (baseline), candidate 1 means "`changes[0]` has
+occurred, `changes[1]` has not" — i.e. **"verification has occurred"**,
+positionally, regardless of verification's own independently-computed
+status. This is Giant Rat's actual, already-known self-contradiction
+(§3.A): candidate 1 claims verification occurred while verification is
+independently confirmed OLD (has not occurred) — one of the 48.
+
+Now ask: what does a *correct* event-DAG representation of this record
+produce?
+
+- **If `changes[]` array order is translated into a declared edge**
+  (`verification -> activation-semantics`, the exact array-order-as-
+  evidence move this whole document exists to forbid): a down-set
+  respecting that edge can only include `activation-semantics` if it
+  also includes `verification`. Verification is confirmed OLD — no valid
+  down-set may include it — so, transitively, no valid down-set may
+  include `activation-semantics` either. **The only candidate is `{}`.**
+- **If the events correctly remain unordered** (§2's actual rule: no
+  edge unless proven or sourced, and nothing here is either): both
+  `{}` and `{activation-semantics}` are valid down-sets. **This is the
+  correct v2 answer.**
+
+Neither of these is v1's `(0, 1)` / `{}, "verification occurred"`. The
+first produces a strict subset with no room for the second candidate at
+all; the second produces the right *shape* (2 candidates) but a
+different *meaning* for the non-empty one — v2's second candidate means
+"activation-semantics occurred, verification did not," the semantic
+opposite of what v1's candidate 1 (mis)labelled. **There is no
+event-down-set translation of this record that reproduces v1's actual
+output**, because v1's output is, in a precise sense, not a real
+historical state at all — it is a positional label. At any snapshot
+before a record's first transition becomes determinate that label
+trivially matches reality (`{}` always means "nothing has happened,"
+under v1 or v2 alike), but that is not the interesting case: at *some*
+snapshot, for 48 of the 49 structurally affected records (§7, Giant Rat
+included — its Edison-snapshot contradiction is the concrete case just
+worked through), the positional label openly contradicts an
+independently-computed event status. Mapping v1's candidate 1 onto v2's
+`{activation-semantics}` "to preserve the old implementation slot" would
+attach *verification's* authored coverage to a state that is actually
+about *activation-semantics alone* — silently corrupting the coverage
+mapping the moment it is read back, not merely producing a cosmetically
+different candidate set. **Do not do this, for any of the 49.**
+
+**The corrected approach: a hard, explicit, temporary legacy/v2
+boundary, not a shared representation.** For as long as both shapes
+exist in the corpus (schema v2 exists as of this document; canonical
+data does not use it until §13's step 4):
+
+- **A v1-shaped record** is parsed as legacy v1 and selected by the
+  existing, unmodified positional algorithm. Its known bugs (the 48,
+  and any future finding like §3.D/E's) remain exactly as
+  characterised, isolated to records that have not yet migrated, until
+  the record in question migrates.
+- **A v2-shaped record** is parsed into the frozen historical-event DAG
+  (§2) and selected *only* by the semantic event-down-set algorithm
+  (§9). No v2 code path ever reads `changes[]` array position as
+  evidence of anything.
+- **Repository loading may detect which shape a record uses and
+  dispatch accordingly** — that is a structural fact about the JSON
+  (§2's schema branches are already mutually exclusive by construction,
+  §1's implementation), not an inference. It must never *force* a
+  v1-shaped record through v2 semantics, or vice versa.
+- **No legacy numeric version semantics (`version_index`, integer
+  `candidates`) may appear inside `HistoricalState`/`ErratumSelection`**
+  (§9) — a consumer needing to bridge the two during the transition uses
+  the semantic helper operations §13's revised sequence describes
+  (chronology-ambiguous?, modern-possible?, determinate-coverage,
+  baseline-selected?, candidate labels/state keys), never a fabricated
+  integer standing in for a v2 down-set that has no linear position to
+  begin with.
+
+This dual path is acceptable *because* it is temporary, explicit, and
+narrow: every v1-shaped record keeps behaving exactly as it does today,
+completely unaffected by v2's existence, until the specific commit that
+migrates it; every v2-shaped record is understood only on its own,
+correct terms from the moment it exists. Nothing is ever asked to be
+both at once. §13's revised implementation sequence works out exactly
+which commit does what, and §10's revised equivalence-test policy states
+precisely what "correct" means at each stage — a blanket "v1 output ==
+v2 output" is *false by design* for the 49, so it is never the test.
+
+**49 records, not 247, need an active research step before they can be
 migrated at all**, split into two disjoint groups (§7): 47 (38 bundled +
-9 mechanically-distinct order-unknown) whose research is *already done* —
-the Edison audit's and this document's own corpus re-audit's
+9 mechanically-distinct order-unknown) whose research is *already
+done* — the Edison audit's and this document's own corpus re-audit's
 classifications are the research, migration only needs to transcribe
 them — and a separate 2 (Insect Imitation, Last Will) whose research is
 *not yet done at all*, blocked on a human choosing which §5 constraint
 tier their researcher-inferred order claim belongs to before any
-annotation, mechanical or otherwise, can be written. This does not change
-the recommended option, only
-sharpens what "migrate" means for those specific 47 records versus the 247
-that really are a mechanical rename.
+annotation, mechanical or otherwise, can be written.
 
 ---
 
@@ -1500,24 +1595,44 @@ invariant":**
   `test_giant_rat_selection_shape` (§11) pin the *old*, known-buggy v1
   behaviour precisely so a future change to the (deleted, post-migration)
   v1 code path cannot silently regress it further before removal.
-- **A v1-vs-v2 equivalence/cutover check** — during migration (§8, §13),
-  comparing the old sweep-based v1 output against the new v2 algorithm's
-  output, per migrated record, confirms:
-  - the 236 trivial + 11 mechanically-safe records preserve their v1
-    semantics exactly, at every checked snapshot;
-  - the 47 already-classified unordered records (38 bundled + 9
-    mechanically-distinct) each produce the **full** expected v2
-    down-set space — every structurally-reachable state, not merely the
-    subset v1's array-prefix model could name;
-  - the 48 legacy self-contradiction cases specifically **lose that
-    symptom** — no v2 candidate for these records is ever mislabeled the
-    way their v1 output was;
-  - **YZ-Tank Dragon specifically gains the previously-unrepresentable
-    fourth state** its v1 array-prefix model could never express, even
-    though it was never one of the 48 to begin with (§7's worked
-    counterexample);
-  - any further expected migration difference is stated explicitly and
-    covered by its own regression test.
+- **A v1-vs-v2 equivalence/cutover check** — during migration (§8, §13).
+  **Corrected in this pass: this is NOT a blanket "v1 output == v2
+  output for every record" assertion — that is false by design for the
+  49 (§8's Giant Rat counterexample proves it, not merely suggests it).**
+  Three distinct guarantees, not one, cover the whole corpus at every
+  point in the migration:
+
+  - **(A) While a record is still v1-shaped, its output stays exactly
+    legacy-compatible.** Not "equivalent to v2" — there is no v2 output
+    to compare against for a record that has not migrated. The legacy
+    positional algorithm runs unmodified, bugs and all, for exactly as
+    long as the record has not migrated (§8). This is the standing
+    guarantee that holds continuously through the whole transition, not
+    a one-time migration-commit check.
+  - **(B) For the 247 mechanically-safe migrations (236 trivial + 11
+    genuinely proven-ordered), v1 and v2 semantics must be equivalent**
+    at every checked snapshot — these are precisely the records §7
+    proved v1's array position already matched real evidenced order for,
+    so a v2 record built from the same evidence must compute the
+    identical candidate/state at every snapshot v1 did. Any divergence
+    here is a real migration bug, not an expected difference.
+  - **(C) For the 49 nontrivial migrations, differences are expected and
+    must be asserted explicitly, not merely tolerated:**
+    - the 48 legacy self-contradiction symptoms disappear, where the
+      record's own change_state_at() would have made them visible — no
+      v2 candidate for these records is ever mislabeled the way their
+      v1 output was;
+    - **YZ-Tank Dragon specifically gains the previously-unrepresentable
+      fourth state** its v1 array-prefix model could never express, even
+      though it was never one of the 48 to begin with (§7's worked
+      counterexample);
+    - every one of the 47 already-classified unordered records exposes
+      the **full** correct reachable state set — every
+      structurally-reachable down-set, not merely the subset v1's
+      array-prefix model could name;
+    - no *additional*, unexpected difference is produced beyond these —
+      a migration that changes something this list does not name is a
+      bug to investigate, not a difference to wave through.
 
   **This check must never be phrased as "changes behaviour for exactly
   the 48" — 49 records (§7) are expected to change in some way, and one
@@ -1538,10 +1653,10 @@ sum-type coverage:
 
 | File | What would change |
 |---|---|
-| `schemas/erratum.schema.json` | New `events{}` (keyed dict, not array — replaces `changes[]`), each with `effective` + `transitions[]` (no per-transition chronology); new `ordering.chains`/`ordering.edges`; new `states[]` keyed by event-id-sets with the `Coverage` sum type (§4) replacing today's `implementation.strategy` informally-typed shape; `changes[]` retained during the (D) transition period (§8). |
-| `retroformats/model.py` | `Erratum.relevant_changes()`/`implementation_for_version()`/`selection_at()` replaced by event-down-set enumeration + state lookup (§2, §9); `change_state_at()` reused, now applied to an event's `effective` block instead of a bare change's. |
-| `retroformats/validate.py` | `_validate_errata`'s ordering check replaced by §10.6's PROVEN/CONTRADICTED edge test and §10.7's evidentiary-basis requirement (both new); every integer-based `selection.version_index`/`.candidates` consumer becomes a `HistoricalState`/`Coverage` consumer; `format.erratum-include-wrong-version`/`-redundant` become event-set-equality checks instead of `== 0`; the legacy self-contradictory-candidate sweep (§10) ships as a migration/audit utility, not a `validate.py` runtime path. |
-| `retroformats/lflist.py` | Smallest-touched of the three code files, as in the first version of this document — `select_applicable_errata()` and `baseline_override()`/`parity_override()` operate on `.chronology`/`.candidates[0].coverage` directly; `parity_override()`'s "walk in order, take first usable" logic needs a defined canonical walk order over states for a non-chain record (recommendation unchanged: fewest events applied first, ties broken by event id — degenerates to today's behaviour for every genuine chain). |
+| `schemas/erratum.schema.json` | New `events{}` (keyed dict, not array — an alternative to `changes[]`, not a replacement of it yet), each with `effective` + `transitions[]` (no per-transition chronology); new `ordering.chains`/`ordering.edges`; new `states[]` keyed by event-id-sets with the `Coverage` sum type (§4). **Done (f01fc11) — `changes[]`/`implementation` remain fully valid and untouched alongside the new shape** for as long as any v1-shaped record exists (§8); deleted only at §13's final step, once none does. |
+| `retroformats/model.py` | **Corrected in this pass: additive, not a replacement, until §13's final deletion step.** `Erratum.relevant_changes()`/`implementation_for_version()`/`selection_at()` (the legacy positional algorithm) are left exactly as they are; a new, separate event-down-set enumeration + state lookup (§2, §9) is implemented alongside them, used only for v2-shaped records. `change_state_at()` is reused by both — its OLD/AMBIGUOUS/NEW semantics are unchanged by this whole redesign, only what it is applied to (a bare v1 change vs. a v2 event's `effective` block) differs. Only §13's final step deletes the v1 path, once it has nothing left to select for. |
+| `retroformats/validate.py` | **Corrected in this pass: a temporary, explicit dual branch (§13 step 3), not a replacement, until §13's final deletion step.** New checks for §10's invariants 6/7 (the PROVEN/CONTRADICTED edge test, the evidentiary-basis requirement) apply only to v2-shaped `ordering.edges`, wired in once `model.py`'s v2 path exists (before any v2 record actually lands, so the first real one is checked by the real invariants from day one); the existing v1 ordering check is untouched and keeps running for v1-shaped records. `format.erratum-include-wrong-version`/`-redundant` and similar consumers branch explicitly on which shape a record has — an integer check for v1, an event-set-equality check for v2 — never a fabricated integer standing in for a v2 state. The legacy self-contradictory-candidate sweep (§10) ships as a migration/audit utility, never a `validate.py` runtime path for v2 data. Only §13's final step removes the v1 branch and the integer-based compatibility shims. |
+| `retroformats/lflist.py` | Smallest-touched of the three code files, as in the first version of this document — same explicit, temporary dual-branch treatment as `validate.py`: `select_applicable_errata()` and `baseline_override()`/`parity_override()` branch on shape, using `.version_index`/`.candidates` for v1 and `.chronology`/`.candidates[0].coverage` for v2, never mixing the two inside one code path. `parity_override()`'s "walk in order, take first usable" logic needs a defined canonical walk order over v2 states for a non-chain record (recommendation unchanged: fewest events applied first, ties broken by event id — degenerates to today's behaviour for every genuine chain). Only §13's final step removes the v1 branch. |
 | Importers | Unaffected — no importer currently generates multi-event records. |
 | Report output (`cli.py` `report -v`) | Cosmetic — prints state labels instead of version integers. |
 | Tests | `OrderingConstraintTest` and `test_giant_rat_selection_shape` rewritten against corrected semantics (unchanged conclusion from the first revision) — plus **new** regression tests for Sangan and Witch of the Black Forest specifically, since those two were not previously known to need one. |
@@ -1729,16 +1844,25 @@ under §1's corrected axis definition, collapses into "Architecture 1 plus
 a redundant grouping layer" (§2) — not a distinct, competitive design once
 the conflation that made it attractive is removed.
 
-**Migration strategy.** §8's (D)→(B) plan, unchanged in shape; §7's
-corrected, per-category proof burden governs what the migration script may
-and may not infer automatically — critically, **the migration script must
-never emit an `ordering` edge it has not independently proven**, which
-rules out the "just copy `changes[]` order" shortcut for any of the 47
-records needing explicit annotation.
+**Migration strategy.** **Corrected in this pass (§8): NOT a "normalise
+into one shared representation" plan.** A hard, explicit, temporary
+legacy/v2 boundary instead — a v1-shaped record is parsed and selected
+exclusively by the unmodified legacy algorithm until the specific commit
+that migrates it; a v2-shaped record is parsed and selected exclusively
+by the semantic event-down-set algorithm from the moment it exists;
+nothing is ever asked to be both. §7's corrected, per-category proof
+burden still governs what a migration script may and may not infer
+automatically — critically, **the migration script must never emit an
+`ordering` edge it has not independently proven**, which rules out the
+"just copy `changes[]` order" shortcut for any of the 47 records needing
+explicit annotation.
 
 **Selection algorithm.** §2's event down-set enumeration, filtered by
 `change_state_at()` applied per-event; §9's two-dimensional
-`ErratumSelection` (chronology × per-candidate coverage).
+`ErratumSelection` (chronology × per-candidate coverage). This is the
+v2-only algorithm — during the transition it runs *alongside* the
+unmodified v1 positional algorithm (§8), never in place of it for a
+still-v1 record, and the two are never merged into one code path.
 
 **Implementation mapping strategy.** §4's closed `Coverage` sum type,
 keyed by event-set, with the single, formally-defined default
@@ -1755,68 +1879,103 @@ self-contradictory candidate by construction.
 **Expected files touched by the eventual implementation:** unchanged list
 from §11 (schema, `model.py`, `validate.py`, `lflist.py`, both erratum test
 files, plus the 49 records needing explicit annotation — up from 47 in the
-file-count sense once the 2 needs-manual-review records are resolved).
+file-count sense once the 2 needs-manual-review records are resolved) —
+**corrected in this pass: `model.py`/`validate.py`/`lflist.py` are each
+touched twice, not once** — first additively (the new sequence's steps
+2–3, standing up the v2 path beside the untouched v1 one), then
+subtractively (step 7, once every record has migrated and the v1 path
+has nothing left to select for).
 
-### Proposed atomic implementation sequence (revised)
+### Proposed atomic implementation sequence (corrected in this pass — replaces the "dual-shape parsing into one representation" step, which was not merely awkward but impossible to satisfy for the 49 structurally affected records; §8's Giant Rat counterexample)
 
-1. **Schema v2 alongside v1**, exactly as the first revision proposed, now
-   specified with `events{}` (keyed dict)/`ordering.chains`/`ordering.
-   edges`/`states[]` (event-set-keyed) and the `Coverage` sum type. Pure
+1. **Schema v2 alongside v1** (§13 step 1). **Done — `f01fc11`.** Pure
    schema addition, no `model.py` change, independently reviewable.
-2. **Dual-shape parsing into one internal representation** (§8 option D).
-   New `selection_at()`/`ErratumSelection`/`HistoricalState` implemented
-   against the internal event-down-set structure only. Gated by a v1-vs-v2
-   equivalence regression test at every currently-defined snapshot.
-3. **Migrate the 236 trivial + 11 genuinely fully-ordered records**, using
-   the single-event sugar for the 236 and a migration script that
-   **independently re-derives and proves** each `ordering.chains` edge for
-   the 11 from their dates directly — never copies `changes[]` position.
-   Regression-gated.
-4. **Migrate the 47 records as unordered event pairs** (38
-   bundled/shared-package + 9 mechanically-distinct order-unknown — no
-   `ordering` edge for either group; the bundled-vs-mechanically-distinct
-   split is a research classification recorded in this document, not a
-   field in the migrated JSON — using the already-published
-   classifications from the Edison audit and this document's corpus
-   re-audit; no new research needed for these 47).
-   This commit is expected to *change* the computed candidate set for the
-   29-of-38 Edison records already known to be self-contradictory today,
-   **and, newly, for Sangan and Witch of the Black Forest at any snapshot
-   after their overlap window begins** — verified against
-   already-published expectations for the former, and against fresh
-   regression tests written specifically for the latter two (§11). It is
-   also expected to change **YZ-Tank Dragon's representable state
-   space** — v1's three array-prefix candidates become v2's four
-   event-subset states — even though YZ-Tank Dragon was never one of the
-   48; the equivalence check (§10) must assert this explicitly, not only
-   check the 48 for a resolved symptom.
-5. **Resolve the 2 needs-manual-review records** (Insect Imitation, Last
-   Will) — a human decision on whether their researcher-inferred order
-   (§5.6) licenses an `ordering` edge, then migrated per whichever tier is
-   chosen.
-6. **Switch `validate.py`/`lflist.py` to the new API directly**, remove
-   deprecated integer-based compatibility shims. Implement §10's
-   invariants 6 and 7 (the PROVEN/CONTRADICTED edge test, and the
-   evidentiary-`basis` requirement for every edge that test doesn't
-   settle) as standing validator checks in this same commit — this is the
-   change that prevents regression, not merely documents past instances
-   of it.
-7. **Delete v1 schema support.** (D) formally becomes (B).
+2. **Implement the v2 semantic model/parser/selector ALONGSIDE the
+   existing v1 model/selector — not merged with it.** `HistoricalEvent`,
+   behavioural transitions, ordering-graph down-set enumeration,
+   `Coverage`/`ImplementationCoverage`, `HistoricalState`, the semantic
+   `ErratumSelection` (§2, §4, §9) — all new code, all reachable only
+   for v2-shaped records. **Existing v1 `selection_at()` behaviour is
+   unchanged, byte for byte.** `Repository` loading may detect a
+   record's shape structurally and dispatch to the matching parser, but
+   must never force a v1-shaped record through v2 semantics or vice
+   versa. No canonical records migrated yet; no `validate.py`/`lflist.py`
+   consumer switched over yet. Independently testable against the new
+   code path in isolation (no live v2 data exists to exercise it against
+   yet, so this step's own tests construct synthetic v2 fixtures).
+3. **Introduce the temporary consumer compatibility layer** —
+   `validate.py`, `lflist.py`, and any reporting code branch explicitly
+   and narrowly on record shape, so both a legacy v1 selection and a
+   semantic v2 selection can be consumed correctly side by side. **Never
+   fabricate a `version_index` for a non-linear v2 state** to satisfy an
+   integer-shaped consumer — prefer the semantic helper operations this
+   layer needs directly (chronology ambiguous?, modern possible?,
+   determinate coverage, baseline selected?, candidate labels/state
+   keys) over forcing both representations into one fake shared
+   structure. Wire §10's invariants 6 and 7 (the PROVEN/CONTRADICTED
+   edge test, the evidentiary-`basis` requirement) into `validate.py`
+   here too, so the very first v2 record step 4 lands is already
+   checked by the real invariants, not merely accepted by schema alone.
+   **With no canonical v2 records yet, this commit must preserve every
+   currently-generated `dist/` output exactly.**
+4. **Migrate the 236 trivial + 11 mechanically-PROVEN ordered records.**
+   These are the *only* records for which a v2 representation is
+   expected to preserve v1's historical semantics exactly (§10's
+   guarantee B) — single-event sugar for the 236, and for the 11, a
+   migration script that **independently re-derives and proves** each
+   `ordering.chains` edge from their dates directly, never copies
+   `changes[]` position. Regression-gated on guarantee B holding for
+   every one of the 247.
+5. **Migrate the 47 already-researched unordered records** (38
+   bundled/shared-package + 9 mechanically-distinct order-unknown) as
+   separate, unordered events — no `ordering` edge for either group; the
+   bundled-vs-mechanically-distinct split is a research classification
+   recorded in this document, not a field in the migrated JSON; no new
+   research needed, using the already-published classifications from
+   the Edison audit and this document's own corpus re-audit. **This is
+   where corrected semantic behaviour intentionally lands** (§10's
+   guarantee C): the computed candidate set changes for the 29-of-38
+   Edison records already known to be self-contradictory today, and,
+   newly, for Sangan and Witch of the Black Forest at any snapshot after
+   their overlap window begins — verified against already-published
+   expectations for the former, fresh regression tests for the latter
+   two (§11). **YZ-Tank Dragon gains its fourth, previously-
+   unrepresentable state** here too, despite never having been one of
+   the 48 (§7's worked counterexample) — the equivalence check (§10)
+   must assert this explicitly, not only check the 48 for a resolved
+   symptom.
+6. **Resolve and migrate the 2 needs-manual-review records** (Insect
+   Imitation, Last Will) — a human decision on whether their
+   researcher-inferred order (§5.6) licenses an `ordering` edge, then
+   migrated per whichever tier is chosen.
+7. **Delete: the legacy v1 selector; the v1 parser/normalisation path;
+   the temporary consumer branches step 3 introduced; the v1 schema
+   branch.** Only at this point does the project genuinely have one
+   internal representation and one selection algorithm — because, and
+   only because, every canonical record is v2-shaped by now. Deleting
+   this earlier, per §8, is exactly the move that corrupts coverage
+   mappings for records not yet migrated.
 8. **Retire/rewrite the characterisation tests** pinning known-buggy
-   behaviour (`OrderingConstraintTest`, `test_giant_rat_selection_shape`),
-   replaced with tests asserting the corrected semantics, **plus new
-   tests for Sangan and Witch of the Black Forest specifically** —
-   records this document found that the original Edison-scoped
-   characterisation tests had no way to know needed covering.
+   legacy behaviour (`OrderingConstraintTest`, `test_giant_rat_selection_
+   shape`), leaving the permanent v2 semantic regression suite in their
+   place — plus new tests for Sangan and Witch of the Black Forest
+   specifically, records this document found that the original
+   Edison-scoped characterisation tests had no way to know needed
+   covering.
 
-Each step remains independently committable and independently
+**The invariant every decomposition of this sequence must preserve, even
+if the exact commit boundaries above are refined later: no canonical
+unordered v2 record may land before consumers can understand semantic
+event-set selections** — i.e. step 3 (or its equivalent) must exist and
+land before step 5 (or its equivalent) does, in every ordering of this
+work. Each step remains independently committable and independently
 verifiable as a no-op against every currently-defined format's generated
-`dist/` output, except steps 4 and 5, whose entire point is to correct or
+`dist/` output, except steps 5 and 6, whose entire point is to correct or
 complete the computed candidate/state set for the 49 records they touch.
-Step 4's 47-record scope (38 bundled + 9 mechanically-distinct) resolves
+Step 5's 47-record scope (38 bundled + 9 mechanically-distinct) resolves
 the self-contradiction symptom for 46 of the 48 — every one except
 Insect Imitation and Last Will, the 2 needs-manual-review records outside
-its scope, resolved only once step 5 annotates them — and, separately,
+its scope, resolved only once step 6 annotates them — and, separately,
 gives YZ-Tank Dragon (never one of the 48) the state its v1
 representation could never express at all (§7).
 
@@ -1827,10 +1986,13 @@ representation could never express at all (§7).
 The historical-event DAG architecture is **frozen**. The following
 properties are the accepted design and are not to be redesigned absent a
 concrete, implementation-discovered counterexample the frozen model
-cannot represent — a wrong proof, an imprecise bound, or a
-misclassified record (as every correction across this document's three
-passes has been) is fixed in place, not treated as grounds to reopen the
-architecture choice:
+cannot represent — a wrong proof, an imprecise bound, a misclassified
+record, or (this pass) a transition-plan flaw in how legacy v1 data
+coexists with v2 during migration (as every correction across this
+document's four passes has been) is fixed in place, not treated as
+grounds to reopen the architecture choice. **This list is unchanged by
+this pass — the correction was to §8/§13's migration sequence, not to
+any property below:**
 
 - events are chronology nodes;
 - one event may contain multiple transitions only for sourced
