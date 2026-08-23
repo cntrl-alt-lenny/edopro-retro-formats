@@ -372,12 +372,19 @@ class SelectionError(Exception):
 
 class Coverage(Enum):
     """The six-kind implementation-coverage sum type (design doc §4).
-    MODERN is never authored — it is synthesised, unconditionally, for the
-    all-events (terminal) down-set alone. UNRESOLVED is never authored
-    either — it is the mechanical default for any other reachable down-set
-    with no matching `states[]` entry. The other four are the only kinds a
-    `states[]`/flattened-sugar `coverage` entry may actually declare
-    (matching schemas/erratum.schema.json's `authoredCoverage`)."""
+    MODERN is always synthesised, unconditionally, for the all-events
+    (terminal) down-set alone — an author MAY still write a terminal
+    `states[]` entry with kind 'modern' as redundant documentation (the
+    schema permits it), but this runtime never trusts or even reads that
+    entry: `_state_for()` synthesises MODERN for the terminal state
+    regardless of what, if anything, is authored there. Ensuring 'modern'
+    is never *wrongly* authored elsewhere is step 3's validator's job, not
+    this constructor's. UNRESOLVED is never authored at all — the schema's
+    `authoredCoverage` has no branch for it; it is exclusively the
+    mechanical default for a reachable non-terminal down-set with no
+    matching `states[]` entry. The other four (REUSE_UPSTREAM,
+    CUSTOM_SCRIPT, NONE_NEEDED, KNOWN_GAP) are the ordinary authored kinds
+    for any non-terminal state."""
 
     MODERN = "modern"
     REUSE_UPSTREAM = "reuse-upstream"
@@ -552,30 +559,31 @@ def _descendants_and_check_acyclic(
 
 
 def _predecessors_among(
-    relevant_ids: frozenset[str], descendants: dict[str, frozenset[str]]
+    ids: frozenset[str], descendants: dict[str, frozenset[str]]
 ) -> dict[str, frozenset[str]]:
-    """For each relevant event B, every relevant event A transitively
-    ordered before it — even through a non-relevant intermediate event, e.g.
-    `relevant A -> cosmetic-only C -> relevant B` still yields A before B."""
+    """For each event B in `ids`, every other event A in `ids` transitively
+    ordered before it — even through an intermediate not itself in `ids`,
+    e.g. `A -> some-intermediate -> B` still yields A before B. Called with
+    the FULL event id set (§9 correction): cosmetic/engine-only events
+    have their own predecessors too, needed for full-DAG consistency, not
+    only for propagating order past them."""
     return {
-        after: frozenset(
-            before for before in relevant_ids if before != after and after in descendants.get(before, ())
-        )
-        for after in relevant_ids
+        after: frozenset(before for before in ids if before != after and after in descendants.get(before, ()))
+        for after in ids
     }
 
 
 def _reachable_down_sets(
-    relevant_ids: frozenset[str], predecessors: dict[str, frozenset[str]]
+    ids: frozenset[str], predecessors: dict[str, frozenset[str]]
 ) -> tuple[frozenset[str], ...]:
     """Every down-set (order ideal) the ordering DAG can produce over
-    `relevant_ids` — exhaustive, not sampled; the corpus's largest record
-    has only a handful of implementation-relevant events. Deterministically
-    ordered by (size, sorted ids), never by declaration/JSON order."""
-    ids = tuple(sorted(relevant_ids))
+    `ids` — exhaustive, not sampled; the corpus's largest record has only
+    a handful of events. Deterministically ordered by (size, sorted ids),
+    never by declaration/JSON order."""
+    sorted_ids = tuple(sorted(ids))
     valid: list[frozenset[str]] = []
-    for size in range(len(ids) + 1):
-        for combo in combinations(ids, size):
+    for size in range(len(sorted_ids) + 1):
+        for combo in combinations(sorted_ids, size):
             candidate = frozenset(combo)
             if all(predecessors.get(member, frozenset()) <= candidate for member in candidate):
                 valid.append(candidate)
@@ -622,7 +630,13 @@ class ErratumV2:
     sources: list[str]
     path: Path
     raw: dict[str, Any]
-    _reachable: tuple[frozenset[str], ...]
+    # Full-event-DAG down-sets (over EVERY event, relevant or not) — §9's
+    # correction: a cosmetic/engine-only event still happened-or-didn't at
+    # a snapshot, and its own status can force a relevant predecessor to
+    # have occurred or a relevant successor not to have, even though the
+    # event itself never appears in a HistoricalState's identity. Projected
+    # onto relevant ids only inside selection_at(), never here.
+    _full_reachable: tuple[frozenset[str], ...]
 
     @classmethod
     def load(cls, raw: dict[str, Any], path: Path) -> "ErratumV2":
@@ -643,9 +657,13 @@ class ErratumV2:
             pairs.append((str(edge.get("before")), str(edge.get("after"))))
         all_ids = frozenset(events.keys())
         descendants = _descendants_and_check_acyclic(all_ids, pairs, record_id, path)
-        relevant_ids = frozenset(e.id for e in events.values() if e.is_implementation_relevant)
-        predecessors = _predecessors_among(relevant_ids, descendants)
-        reachable = _reachable_down_sets(relevant_ids, predecessors)
+        # Predecessors and down-sets are computed over the FULL event set,
+        # not just the relevant subset — a cosmetic/engine-only event still
+        # has real chronology and real ordering constraints; only its
+        # PROJECTION onto relevant ids is dropped, at selection time, never
+        # its participation in what "consistent" means (§9 correction).
+        predecessors = _predecessors_among(all_ids, descendants)
+        full_reachable = _reachable_down_sets(all_ids, predecessors)
         try:
             authored_states = {
                 frozenset(entry.get("events", [])): ImplementationCoverage.from_raw(entry.get("coverage") or {})
@@ -664,7 +682,7 @@ class ErratumV2:
             sources=list(raw.get("sources", [])),
             path=path,
             raw=raw,
-            _reachable=reachable,
+            _full_reachable=full_reachable,
         )
 
     def relevant_events(self) -> tuple[HistoricalEvent, ...]:
@@ -685,18 +703,29 @@ class ErratumV2:
         return HistoricalState(events=down_set, label=label, coverage=coverage)
 
     def selection_at(self, snapshot: _dt.date) -> SemanticErratumSelection:
-        """Every structurally reachable down-set whose membership is
-        consistent with each relevant event's own independently-computed
-        status at `snapshot` (design doc §2/§9) — never a range of integer
-        positions, never inferred from declaration order."""
-        relevant = self.relevant_events()
-        all_relevant_ids = frozenset(e.id for e in relevant)
-        statuses = {e.id: e.state_at(snapshot) for e in relevant}
-        candidates = []
-        for down_set in self._reachable:
+        """Every distinguishable HistoricalState consistent with `snapshot`
+        (design doc §2/§9) — never a range of integer positions, never
+        inferred from declaration order.
+
+        Correction (§9): a cosmetic/engine-only event creates no state
+        DIMENSION, but it still happened-or-didn't, and that fact can
+        force a relevant predecessor to have occurred (a confirmed-NEW
+        successor requires every predecessor, relevant or not) or block a
+        relevant successor (a confirmed-OLD predecessor forbids every
+        successor, relevant or not) — even though the non-relevant event
+        itself never appears in any state's identity. So: (1) find every
+        FULL-event down-set consistent with EVERY event's own status,
+        relevant or not; (2) project each survivor onto relevant ids only;
+        (3) deduplicate — a non-relevant event genuinely undetermined at
+        this snapshot must not fork one real implementation state into
+        several identical-looking candidates.
+        """
+        all_relevant_ids = frozenset(e.id for e in self.relevant_events())
+        statuses = {event_id: event.state_at(snapshot) for event_id, event in self.events.items()}
+        projected: set[frozenset[str]] = set()
+        for down_set in self._full_reachable:
             consistent = True
-            for event_id in all_relevant_ids:
-                status = statuses[event_id]
+            for event_id, status in statuses.items():
                 if event_id in down_set:
                     if status == OLD:
                         consistent = False
@@ -705,13 +734,14 @@ class ErratumV2:
                     consistent = False
                     break
             if consistent:
-                candidates.append(down_set)
-        if not candidates:
+                projected.add(down_set & all_relevant_ids)
+        if not projected:
             raise SelectionError(
                 f"{self.id}: no historical state at {snapshot} is consistent with its own chronology "
                 "(a contradictory v2 record — step 3's validator invariants should prevent this)"
             )
-        states = tuple(self._state_for(s, all_relevant_ids) for s in candidates)
+        ordered = sorted(projected, key=lambda s: (len(s), tuple(sorted(s))))
+        states = tuple(self._state_for(s, all_relevant_ids) for s in ordered)
         modern_state = self._state_for(all_relevant_ids, all_relevant_ids)
         chronology = "determinate" if len(states) == 1 else "ambiguous"
         return SemanticErratumSelection(chronology=chronology, candidates=states, modern_state=modern_state)
@@ -721,13 +751,26 @@ def load_erratum_record(raw: dict[str, Any], path: Path) -> "Erratum | ErratumV2
     """Structural shape dispatch (design doc §13 step 2): a record's shape
     is a fact about which top-level keys it has, mutually exclusive by
     schema construction — never a heuristic, never inferred from content.
-    `changes` -> legacy v1; `events`/`event` -> v2 (sugar desugars inside
-    `ErratumV2.load`, so there is exactly one v2 parser, not two)."""
-    if "changes" in raw:
+    `changes` -> legacy v1; `events` -> full v2; `event` -> v2 sugar
+    (desugars inside `ErratumV2.load`, so there is exactly one v2 parser,
+    not two). `Repository.load()` calls this directly, before any JSON
+    Schema validation runs — this function cannot assume schema-clean
+    input, so it enforces the mutual exclusion itself: EXACTLY one of the
+    three discriminators may be present, never zero, never two or more."""
+    has_changes = "changes" in raw
+    has_events = "events" in raw
+    has_event = "event" in raw
+    discriminators = (has_changes, has_events, has_event)
+    if sum(discriminators) != 1:
+        present = [name for name, flag in (("changes", has_changes), ("events", has_events), ("event", has_event)) if flag]
+        raise DataError(
+            path,
+            "erratum record must have exactly one of changes/events/event "
+            f"(v1/v2-full/v2-sugar); found {present or 'none'}",
+        )
+    if has_changes:
         return Erratum.load(raw, path)
-    if "events" in raw or "event" in raw:
-        return ErratumV2.load(raw, path)
-    raise DataError(path, "erratum record matches neither the v1 (changes) nor v2 (events/event) shape")
+    return ErratumV2.load(raw, path)
 
 
 TERRITORIES = ("tcg", "tcg-na", "tcg-eu", "tcg-oce", "ocg", "ocg-jp", "ocg-kr", "ocg-asia")

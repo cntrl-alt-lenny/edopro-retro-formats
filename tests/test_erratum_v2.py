@@ -403,16 +403,44 @@ class CosmeticEngineFilteringV2Test(unittest.TestCase):
 
 
 class TransitivityThroughNonRelevantEventV2Test(unittest.TestCase):
-    """§9.J: relevant A -> cosmetic-only C -> relevant B must still induce
-    A-before-B, even though C itself never appears in any state."""
+    """§9.J, corrected: relevant A -> cosmetic-only C -> relevant B must
+    still induce A-before-B structurally — but a non-relevant event's OWN
+    chronology status is a real historical fact too, not merely a graph
+    position. This class proves both halves: (1) the induced ORDER survives
+    a non-relevant intermediate, and (2) that intermediate's own OLD/NEW
+    status, not just its position, further constrains which projected
+    candidates are reachable — a distinction the previous, buggy version of
+    this test conflated by only checking case (1)."""
 
-    def test_induced_order_through_cosmetic_intermediate(self):
+    def test_C_confirmed_old_blocks_B_even_though_A_alone_survives(self):
+        # §9.C (corrected): at a snapshot where the cosmetic intermediate C
+        # is confirmed OLD, {A,B} must NOT be possible -- B transitively
+        # requires C, and C being OLD forbids C (and therefore B) from any
+        # surviving down-set. Only {} and {A} survive.
         erratum = erratum_v2_of(
             events={
                 "A": event(transitions=[transition(kind="ruling")]),
-                "C": event(
-                    effective={"date": "2012-01-01"}, transitions=[transition(kind="cosmetic")]
-                ),
+                "C": event(effective={"date": "2012-01-01"}, transitions=[transition(kind="cosmetic")]),
+                "B": event(transitions=[transition(kind="functional")]),
+            },
+            ordering={"chains": [["A", "C", "B"]]},
+        )
+        selection = erratum.selection_at(day("2010-04-24"))  # before C's date: C is OLD
+        got = event_sets(selection)
+        self.assertEqual(got, {frozenset(), frozenset({"A"})})
+        self.assertNotIn(frozenset({"A", "B"}), got)
+        self.assertNotIn(frozenset({"B"}), got)
+
+    def test_C_ambiguous_makes_A_B_reachable_again(self):
+        # The companion case the task asked for: make C itself AMBIGUOUS
+        # (undated) instead of confirmed OLD, so a full state containing C
+        # (and therefore {A,B} once projected) becomes reachable again --
+        # proving the earlier block was C's chronology, not the mere
+        # existence of an intermediate node.
+        erratum = erratum_v2_of(
+            events={
+                "A": event(transitions=[transition(kind="ruling")]),
+                "C": event(transitions=[transition(kind="cosmetic")]),  # undated -> ambiguous
                 "B": event(transitions=[transition(kind="functional")]),
             },
             ordering={"chains": [["A", "C", "B"]]},
@@ -420,10 +448,120 @@ class TransitivityThroughNonRelevantEventV2Test(unittest.TestCase):
         selection = erratum.selection_at(day("2010-04-24"))
         got = event_sets(selection)
         self.assertEqual(got, {frozenset(), frozenset({"A"}), frozenset({"A", "B"})})
-        self.assertNotIn(frozenset({"B"}), got)
-        for candidate in got:
-            if "B" in candidate:
-                self.assertIn("A", candidate)
+        self.assertNotIn(frozenset({"B"}), got)  # B still can never appear without A
+
+    def test_A_non_relevant_new_successor_forces_relevant_predecessor(self):
+        # §9's test A: relevant A (ambiguous) -> cosmetic C (confirmed NEW)
+        # -- C having definitely happened forces A to have happened too,
+        # even though C itself is never a candidate identity.
+        erratum = erratum_v2_of(
+            events={
+                "A": event(transitions=[transition(kind="ruling")]),  # undated -> ambiguous
+                "C": event(effective={"date": "2005-01-01"}, transitions=[transition(kind="cosmetic")]),
+            },
+            ordering={"chains": [["A", "C"]]},
+        )
+        selection = erratum.selection_at(day("2010-04-24"))  # after C's date: C is NEW
+        self.assertEqual(event_sets(selection), {frozenset({"A"})})
+
+    def test_B_non_relevant_old_predecessor_blocks_relevant_successor(self):
+        # §9's test B: cosmetic C (confirmed OLD) -> relevant B (ambiguous)
+        # -- C definitely NOT having happened forbids B from having
+        # happened either, forcing the sole projected candidate to {}.
+        erratum = erratum_v2_of(
+            events={
+                "C": event(effective={"date": "2020-01-01"}, transitions=[transition(kind="cosmetic")]),
+                "B": event(transitions=[transition(kind="ruling")]),  # undated -> ambiguous
+            },
+            ordering={"chains": [["C", "B"]]},
+        )
+        selection = erratum.selection_at(day("2010-04-24"))  # before C's date: C is OLD
+        self.assertEqual(event_sets(selection), {frozenset()})
+
+    def test_D_two_non_relevant_intermediates_survive_ordering_and_chronology(self):
+        # §9's test D: relevant A -> cosmetic C1 -> engine C2 -> relevant B.
+        # Confirm BOTH halves through two layers of non-relevant events:
+        # ordering projection (C1/C2 never appear in any candidate) AND
+        # chronology propagation (B's reachability tracks C1/C2's own
+        # status, not merely their graph position).
+        erratum = erratum_v2_of(
+            events={
+                "A": event(transitions=[transition(kind="ruling")]),
+                "C1": event(effective={"date": "2020-01-01"}, transitions=[transition(kind="cosmetic")]),
+                "C2": event(effective={"date": "2020-06-01"}, transitions=[transition(kind="engine")]),
+                "B": event(transitions=[transition(kind="functional")]),
+            },
+            ordering={"chains": [["A", "C1", "C2", "B"]]},
+        )
+        # Both C1 and C2 confirmed OLD here -> B (and even C1/C2) blocked.
+        before = erratum.selection_at(day("2010-04-24"))
+        got_before = event_sets(before)
+        self.assertEqual(got_before, {frozenset(), frozenset({"A"})})
+        self.assertNotIn(frozenset({"A", "B"}), got_before)
+        # Both C1 and C2 confirmed NEW here -> B becomes reachable, and
+        # neither C1 nor C2 ever appears as its own projected identity.
+        after = erratum.selection_at(day("2021-01-01"))
+        got_after = event_sets(after)
+        self.assertEqual(got_after, {frozenset({"A"}), frozenset({"A", "B"})})
+        for candidate in got_after:
+            self.assertNotIn("C1", candidate)
+            self.assertNotIn("C2", candidate)
+
+    def test_E_unordered_non_relevant_events_do_not_fork_candidates(self):
+        # §9's test E: an unordered, permanently-ambiguous cosmetic event
+        # with no ordering relation to anything doubles the FULL down-set
+        # space ({X} vs no-X for every combination) but must NOT double the
+        # number of distinct PROJECTED HistoricalState identities -- dedup
+        # must collapse X's own undetermined status.
+        erratum = erratum_v2_of(
+            events={
+                "A": event(transitions=[transition(kind="ruling")]),  # undated -> ambiguous
+                "X": event(transitions=[transition(kind="cosmetic")]),  # undated -> ambiguous, unordered
+            },
+            ordering={},
+        )
+        selection = erratum.selection_at(day("2010-04-24"))
+        self.assertEqual(event_sets(selection), {frozenset(), frozenset({"A"})})
+
+
+class NonRelevantEventFactsAreNotDiscardedTest(unittest.TestCase):
+    """§5's adversarial principle, tested directly: "does removing an
+    event from HistoricalState identity accidentally remove facts about
+    whether that historical event occurred?" The answer must be no —
+    proved here by holding every RELEVANT event's own chronology fixed
+    and changing ONLY a cosmetic event's chronology, then showing the
+    projected candidate set changes anyway, purely because of a fact
+    about an event that never appears in any candidate's identity."""
+
+    def _erratum(self, cosmetic_date: str | None) -> ErratumV2:
+        return erratum_v2_of(
+            events={
+                "A": event(transitions=[transition(kind="ruling")]),  # undated -> ambiguous, always
+                "cosmetic-gate": event(
+                    effective={"date": cosmetic_date}, transitions=[transition(kind="cosmetic")]
+                ),
+            },
+            ordering={"chains": [["A", "cosmetic-gate"]]},
+        )
+
+    def test_cosmetic_events_own_status_still_changes_the_projected_result(self):
+        undetermined = self._erratum(cosmetic_date=None)  # cosmetic-gate always AMBIGUOUS
+        confirmed_new = self._erratum(cosmetic_date="2005-01-01")  # NEW well before the snapshot
+
+        snapshot = day("2010-04-24")
+        undetermined_candidates = event_sets(undetermined.selection_at(snapshot))
+        confirmed_candidates = event_sets(confirmed_new.selection_at(snapshot))
+
+        # "A" alone is never provably excluded/required while cosmetic-gate
+        # is merely ambiguous (both {} and {A} survive)...
+        self.assertEqual(undetermined_candidates, {frozenset(), frozenset({"A"})})
+        # ...but once cosmetic-gate is CONFIRMED to have happened, A (its
+        # sole predecessor) is thereby forced to have happened too, even
+        # though cosmetic-gate itself is never part of either candidate
+        # set's identity. The fact was never in HistoricalState.events, but
+        # it was never discarded either -- it still changed the answer.
+        self.assertEqual(confirmed_candidates, {frozenset({"A"})})
+        self.assertNotEqual(undetermined_candidates, confirmed_candidates)
 
 
 class SugarFullV2EquivalenceTest(unittest.TestCase):
@@ -619,6 +757,63 @@ class ShapeDispatchTest(unittest.TestCase):
         }
         record = load_erratum_record(raw, Path("x.json"))
         self.assertIsInstance(record, ErratumV2)
+
+    def _base_raw(self) -> dict:
+        return {
+            "id": "erratum-shape-conflict",
+            "modern_card": {"passcode": 9, "name": "W"},
+            "classification": "functional",
+            "sources": ["s"],
+        }
+
+    def test_changes_and_events_both_present_is_rejected(self):
+        raw = self._base_raw()
+        raw["changes"] = [
+            {"kind": "functional", "effective": {"date": "2020-01-01"}, "summary": "s", "sources": ["s"]}
+        ]
+        raw["implementation"] = {"strategy": "none-needed", "status": "complete"}
+        raw["events"] = {"e1": event(transitions=[transition(kind="ruling")])}
+        raw["ordering"] = {}
+        with self.assertRaises(DataError):
+            load_erratum_record(raw, Path("x.json"))
+
+    def test_changes_and_event_both_present_is_rejected(self):
+        raw = self._base_raw()
+        raw["changes"] = [
+            {"kind": "functional", "effective": {"date": "2020-01-01"}, "summary": "s", "sources": ["s"]}
+        ]
+        raw["implementation"] = {"strategy": "none-needed", "status": "complete"}
+        raw["event"] = {"effective": {"date": "2020-01-01"}, "kind": "functional", "summary": "s", "sources": ["s"]}
+        raw["coverage"] = coverage(kind="none-needed")
+        with self.assertRaises(DataError):
+            load_erratum_record(raw, Path("x.json"))
+
+    def test_events_and_event_both_present_is_rejected(self):
+        raw = self._base_raw()
+        raw["events"] = {"e1": event(transitions=[transition(kind="ruling")])}
+        raw["ordering"] = {}
+        raw["event"] = {"effective": {"date": "2020-01-01"}, "kind": "functional", "summary": "s", "sources": ["s"]}
+        raw["coverage"] = coverage(kind="none-needed")
+        with self.assertRaises(DataError):
+            load_erratum_record(raw, Path("x.json"))
+
+    def test_changes_events_and_event_all_present_is_rejected(self):
+        raw = self._base_raw()
+        raw["changes"] = [
+            {"kind": "functional", "effective": {"date": "2020-01-01"}, "summary": "s", "sources": ["s"]}
+        ]
+        raw["implementation"] = {"strategy": "none-needed", "status": "complete"}
+        raw["events"] = {"e1": event(transitions=[transition(kind="ruling")])}
+        raw["ordering"] = {}
+        raw["event"] = {"effective": {"date": "2020-01-01"}, "kind": "functional", "summary": "s", "sources": ["s"]}
+        raw["coverage"] = coverage(kind="none-needed")
+        with self.assertRaises(DataError):
+            load_erratum_record(raw, Path("x.json"))
+
+    def test_none_of_the_three_discriminators_is_rejected(self):
+        raw = self._base_raw()
+        with self.assertRaises(DataError):
+            load_erratum_record(raw, Path("x.json"))
 
 
 if __name__ == "__main__":
