@@ -144,6 +144,32 @@ class TempRepoTest(unittest.TestCase):
         self.write(f"data/errata/{id.removeprefix('erratum-')}.json", payload)
         return payload
 
+    def add_erratum_v2(
+        self,
+        id="erratum-v2-beta",
+        modern=None,
+        classification="ruling",
+        events=None,
+        ordering=None,
+        states=None,
+        review="reviewed",
+        **kw,
+    ):
+        payload = {
+            "id": id,
+            "modern_card": modern or {"passcode": 200, "name": "Beta"},
+            "classification": classification,
+            "events": events if events is not None else {"e1": v2_event()},
+            "ordering": ordering if ordering is not None else {},
+            "review": {"status": review},
+            "sources": ["test-source"],
+        }
+        if states is not None:
+            payload["states"] = states
+        payload.update(kw)
+        self.write(f"data/errata/{id.removeprefix('erratum-')}.json", payload)
+        return payload
+
     def add_product(self, code="SET1", printings=(), release_events=None, **kw):
         payload = {
             "id": code.lower(),
@@ -242,6 +268,43 @@ def change(kind="functional", date=None, summary="changed", **kw):
     entry = {"kind": kind, "effective": effective, "summary": summary, "sources": ["test-source"]}
     entry.update(kw)
     return entry
+
+
+def v2_transition(kind="ruling", summary="changed", axis=None, **kw):
+    t = {"kind": kind, "summary": summary, "sources": ["test-source"]}
+    if axis is not None:
+        t["axis"] = axis
+    t.update(kw)
+    return t
+
+
+def v2_event(effective=None, transitions=None, cooccurrence_sources=None, **kw):
+    """One events{} entry for the v2 historical-event DAG. Effective
+    defaults to completely undated (permanently AMBIGUOUS) — pass an
+    explicit `effective` dict to pin a chronology."""
+    e = {
+        "effective": effective if effective is not None else {"date": None},
+        "transitions": transitions if transitions is not None else [v2_transition()],
+    }
+    if cooccurrence_sources is not None:
+        e["cooccurrence_sources"] = cooccurrence_sources
+    e.update(kw)
+    return e
+
+
+def v2_coverage(kind="reuse-upstream", **kw):
+    c = {"kind": kind}
+    if kind == "reuse-upstream":
+        c.setdefault("historical_passcode", 511000000)
+        c.setdefault("upstream", "ProjectIgnis/BabelCDB goat-entries.cdb")
+    elif kind == "custom-script":
+        c.setdefault("historical_passcode", 511000001)
+        c.setdefault("script", "dist/scripts/c511000001.lua")
+    elif kind == "known-gap":
+        c.setdefault("gap_reason", "no upstream implementation exists")
+        c.setdefault("gap_sources", ["test-source"])
+    c.update(kw)
+    return c
 
 
 def implementation(strategy="reuse-upstream", historical_passcode=None, status="complete", **kw):

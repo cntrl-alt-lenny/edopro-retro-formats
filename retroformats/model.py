@@ -212,6 +212,53 @@ def change_state_at(change: dict[str, Any], snapshot: _dt.date) -> str:
     return AMBIGUOUS
 
 
+PROVEN, CONTRADICTED, INCONCLUSIVE = "proven", "contradicted", "inconclusive"
+
+
+def last_confirmed_old(effective: dict[str, Any]) -> _dt.date | None:
+    """The latest date this event is GUARANTEED not to have happened yet, or
+    None if the evidence never guarantees that (design doc §5). Exact date:
+    the day before the precision-widened interval starts. Bounded: the
+    attested-through date. Undated: None."""
+    date = effective.get("date")
+    if date:
+        lo, _hi = _precision_bounds(str(date), str(effective.get("precision") or "day"))
+        return lo - _dt.timedelta(days=1)
+    old_through = effective.get("old_attested_through")
+    return parse_date(str(old_through)) if old_through else None
+
+
+def first_confirmed_new(effective: dict[str, Any]) -> _dt.date | None:
+    """The earliest date this event is GUARANTEED to have already happened,
+    or None if the evidence never guarantees that. Exact date: the
+    precision-widened interval's end (the effective date itself, at day
+    precision). Bounded: the attested-from date. Undated: None."""
+    date = effective.get("date")
+    if date:
+        _lo, hi = _precision_bounds(str(date), str(effective.get("precision") or "day"))
+        return hi
+    new_from = effective.get("new_attested_from")
+    return parse_date(str(new_from)) if new_from else None
+
+
+def ordering_proof(before_effective: dict[str, Any], after_effective: dict[str, Any]) -> str:
+    """PROVEN / CONTRADICTED / INCONCLUSIVE for the assertion `before` <
+    `after`, worked out precisely (design doc §5) from the SAME chronology
+    primitives `change_state_at()` uses — never a different combination of
+    the evidence. Overlapping intervals alone are never CONTRADICTED, only
+    INCONCLUSIVE; the two are provably mutually exclusive and dual
+    (PROVEN(A<B) <=> CONTRADICTED(B<A))."""
+    fcn_before = first_confirmed_new(before_effective)
+    lco_after = last_confirmed_old(after_effective)
+    if fcn_before is not None and lco_after is not None and fcn_before <= lco_after:
+        return PROVEN
+    lco_before = last_confirmed_old(before_effective)
+    fcn_after = first_confirmed_new(after_effective)
+    if lco_before is not None and fcn_after is not None and lco_before >= fcn_after:
+        return CONTRADICTED
+    return INCONCLUSIVE
+
+
 @dataclass(frozen=True)
 class ErratumSelection:
     """The implementation decision for one erratum at one snapshot date.
@@ -689,6 +736,32 @@ class ErratumV2:
         return tuple(
             sorted((e for e in self.events.values() if e.is_implementation_relevant), key=lambda e: e.id)
         )
+
+    def has_implementation_relevant_history(self) -> bool:
+        return bool(self.relevant_events())
+
+    @property
+    def review_status(self) -> str:
+        review = self.raw.get("review") or {}
+        return str(review.get("status", "imported"))
+
+    def structural_states(self) -> tuple[frozenset[str], ...]:
+        """Every relevant-event down-set the ordering DAG can structurally
+        produce, independent of any snapshot's chronology — the full-DAG
+        down-sets projected onto relevant ids, deduplicated and
+        deterministically ordered. Used for the reference-parity walk
+        (§13 step 5) and for validating `states[]` entries against real
+        structural reachability, neither of which is about a snapshot."""
+        all_relevant_ids = frozenset(e.id for e in self.relevant_events())
+        projected = {down_set & all_relevant_ids for down_set in self._full_reachable}
+        return tuple(sorted(projected, key=lambda s: (len(s), tuple(sorted(s)))))
+
+    def state_for(self, down_set: frozenset[str]) -> HistoricalState:
+        """Public entry point for `_state_for`, keyed only by the down-set —
+        callers outside this class (lflist.py, validate.py) should never
+        need to separately track `all_relevant_ids` themselves."""
+        all_relevant_ids = frozenset(e.id for e in self.relevant_events())
+        return self._state_for(down_set, all_relevant_ids)
 
     def _state_for(self, down_set: frozenset[str], all_relevant_ids: frozenset[str]) -> HistoricalState:
         if down_set == all_relevant_ids:

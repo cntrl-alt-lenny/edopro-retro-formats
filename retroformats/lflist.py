@@ -39,9 +39,13 @@ from .model import (
     STATUS_TO_COUNT,
     UNLIMITED_COUNT,
     Banlist,
+    Coverage,
     Erratum,
+    ErratumV2,
     Format,
+    ImplementationCoverage,
     Pool,
+    SelectionError,
 )
 from .repo import Repository
 
@@ -110,11 +114,26 @@ def parse_lflist(text: str) -> dict[str, dict[int, int]]:
 @dataclass(frozen=True)
 class SelectedOverride:
     """One card whose modern implementation must be substituted in a format:
-    the erratum record plus the implementation of the version its chronology
-    (or an explicit include) selected for the snapshot."""
+    the erratum record plus WHATEVER carries its historical identity for the
+    version its chronology (or an explicit include) selected — a v1
+    `implementation` dict, or a v2 `ImplementationCoverage`. Deliberately a
+    union, not a shared shape: converting v2 coverage into a fake v1 dict
+    just to avoid touching downstream code would hide exactly the
+    distinction §8's hard legacy/v2 boundary exists to keep visible. Use
+    `historical_identity()` to extract passcode/variants from either."""
 
-    erratum: Erratum
-    implementation: dict
+    erratum: Erratum | ErratumV2
+    implementation: dict | ImplementationCoverage
+
+
+def historical_identity(override: dict | ImplementationCoverage) -> tuple[int, tuple[int, ...]]:
+    """(historical_passcode, historical_variant_passcodes) from either
+    representation — the one place a v1 dict and a v2 ImplementationCoverage
+    are read through a common lens, and only for this one concrete fact,
+    never for anything about WHICH state/version was selected."""
+    if isinstance(override, ImplementationCoverage):
+        return int(override.historical_passcode), tuple(int(v) for v in override.historical_variant_passcodes)
+    return int(override["historical_passcode"]), tuple(int(v) for v in override.get("historical_variant_passcodes", []))
 
 
 class ErrataSelectionError(ValueError):
@@ -142,13 +161,31 @@ def _usable(impl: dict | None) -> dict | None:
     return None
 
 
-def baseline_override(erratum: Erratum) -> dict | None:
+def _usable_v2(coverage: ImplementationCoverage | None) -> ImplementationCoverage | None:
+    """A v2 coverage carries a concrete, executable historical substitution
+    only for REUSE_UPSTREAM/CUSTOM_SCRIPT with a passcode — the same two
+    kinds `historical_identity()` knows how to read (design doc §2 of this
+    task). NONE_NEEDED/KNOWN_GAP/UNRESOLVED/MODERN are never substitutions:
+    NONE_NEEDED means the modern executable already IS correct for this
+    state; the other three mean no concrete swap can be made at all."""
+    if coverage is not None and coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+        return coverage
+    return None
+
+
+def baseline_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCoverage | None:
     """The erratum's baseline historical implementation, when it is usable as
-    a substitution (an upstream or custom historical passcode)."""
+    a substitution (an upstream or custom historical passcode). v2's
+    baseline is the `frozenset()` down-set — never a different state merely
+    because baseline itself lacks a usable implementation (design doc §4 of
+    this task): a NONE_NEEDED/KNOWN_GAP/UNRESOLVED baseline yields no
+    substitution here, full stop, not a fallback to some other state."""
+    if isinstance(erratum, ErratumV2):
+        return _usable_v2(erratum.state_for(frozenset()).coverage)
     return _usable(erratum.implementation)
 
 
-def in_reference(erratum: Erratum, parity: dict) -> bool:
+def in_reference(erratum: Erratum | ErratumV2, parity: dict) -> bool:
     """Whether a record is part of the reference implementation this format
     reproduces. Provenance decides it: upstream ships historical variants for
     cards its own list does NOT use, so "has an upstream variant" is not the
@@ -159,7 +196,22 @@ def in_reference(erratum: Erratum, parity: dict) -> bool:
     return marker in erratum.sources
 
 
-def parity_override(erratum: Erratum) -> dict | None:
+def _v2_parity_walk_override(erratum: ErratumV2) -> ImplementationCoverage | None:
+    """The frozen design's deterministic structural walk (§5 of this task):
+    fewest relevant events first, ties broken by sorted event-id tuple,
+    starting from baseline — the first state in that walk carrying a usable
+    historical override. Purely structural (never chronology, never
+    declaration order): `structural_states()` is already keyed by event-set
+    and sorted (size, sorted ids), so this walk is invariant under
+    `events{}`'s declaration order by construction."""
+    for down_set in erratum.structural_states():
+        usable = _usable_v2(erratum.state_for(down_set).coverage)
+        if usable is not None:
+            return usable
+    return None
+
+
+def parity_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCoverage | None:
     """The historical implementation a reference-parity format must emit.
 
     A reference list ships ONE historical variant per card, and reproducing it
@@ -168,7 +220,14 @@ def parity_override(erratum: Erratum) -> dict | None:
     unimplemented), parity still emits the variant the reference carries.
     The validator separately reports where our chronology and the reference
     disagree, so the mapping question stays visible.
+
+    v2 (design doc §5 of this task): this is a PARITY-ONLY policy, not
+    chronology selection — it walks `structural_states()` deterministically
+    (never `events{}` declaration order, never a snapshot) and takes the
+    first usable historical override it finds.
     """
+    if isinstance(erratum, ErratumV2):
+        return _v2_parity_walk_override(erratum)
     usable = baseline_override(erratum)
     if usable is not None:
         return usable
@@ -176,6 +235,149 @@ def parity_override(erratum: Erratum) -> dict | None:
         usable = _usable(change.get("resulting_implementation"))
         if usable is not None:
             return usable
+    return None
+
+
+def _executable_outcome(coverage: ImplementationCoverage) -> tuple | None:
+    """A hashable summary of what a v2 coverage kind actually executes as,
+    for checking whether 2+ ambiguous non-modern candidates would produce
+    the SAME playable result under unresolved_policy 'historical' (design
+    doc §7 of this task). None means "no concrete outcome can be
+    established" (KNOWN_GAP/UNRESOLVED) and is never treated as agreeing
+    with anything, including another None."""
+    if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+        return ("substitute", coverage.historical_passcode, coverage.historical_variant_passcodes)
+    if coverage.kind == Coverage.NONE_NEEDED:
+        return ("modern",)
+    return None
+
+
+def _select_v1_override(
+    erratum: Erratum,
+    fmt: Format,
+    snapshot: _dt.date | None,
+    parity: dict | None,
+    policy: str | None,
+    problems: list[str],
+) -> dict | None:
+    """Unchanged legacy resolution — see select_applicable_errata's own
+    docstring for the 5-step order this implements."""
+    if erratum.id in fmt.errata_exclude:
+        return None
+    if erratum.id in fmt.errata_include:
+        return baseline_override(erratum)
+    if parity:
+        if in_reference(erratum, parity):
+            return parity_override(erratum)
+        return None
+    if snapshot is None or not erratum.relevant_changes():
+        return None
+    if erratum.review_status != "reviewed":
+        return None
+    selection = erratum.selection_at(snapshot)
+    if selection.state == "historical":
+        return selection.implementation
+    if selection.state == "ambiguous":
+        if policy == "historical":
+            return baseline_override(erratum)
+        if policy == "modern":
+            return None  # documented conservative default; validator names each card
+        problems.append(
+            f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
+            "(narrow the change's effective chronology, adjudicate with a "
+            "documented errata_overrides include/exclude, or state an "
+            "errata_overrides.unresolved_policy)"
+        )
+        return None
+    if selection.state == "gap" and not selection.acknowledged_gap:
+        problems.append(
+            f"{erratum.id}: version {selection.version_index} applies at {snapshot} "
+            "but has no usable implementation and the record does not acknowledge "
+            "the gap (record one, document implementation.gap, or exclude)"
+        )
+    # An ACKNOWLEDGED gap deliberately falls through to the modern card: the
+    # divergence is recorded on the record and reported, not silent.
+    return None
+
+
+def _select_v2_override(
+    erratum: ErratumV2,
+    fmt: Format,
+    snapshot: _dt.date | None,
+    parity: dict | None,
+    policy: str | None,
+    problems: list[str],
+) -> ImplementationCoverage | None:
+    """The v2 resolution, matching select_applicable_errata's 5-step order
+    in SHAPE only — v2 has no numeric version, so "historical" under
+    ambiguity is re-derived from event-set semantics, never a fallback to
+    "the first/smallest candidate" (design doc §§4-8 of this task)."""
+    if erratum.id in fmt.errata_exclude:
+        return None
+    if erratum.id in fmt.errata_include:
+        # include pins the BASELINE semantic state (frozenset()) — never a
+        # different v2 state merely because baseline lacks an override.
+        return _usable_v2(erratum.state_for(frozenset()).coverage)
+    if parity:
+        if in_reference(erratum, parity):
+            return _v2_parity_walk_override(erratum)
+        return None
+    if snapshot is None or not erratum.has_implementation_relevant_history():
+        return None
+    if erratum.review_status != "reviewed":
+        return None
+    try:
+        selection = erratum.selection_at(snapshot)
+    except SelectionError as exc:
+        # A genuinely contradictory record — the validator's ordering
+        # invariants (step 3) should have already caught the underlying
+        # CONTRADICTED edge, but a direct build call must still fail safe
+        # rather than crash uncaught.
+        problems.append(f"{erratum.id}: {exc}")
+        return None
+    all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
+    if selection.chronology == "determinate":
+        candidate = selection.candidates[0]
+        if candidate.events == all_relevant_ids:
+            return None  # terminal/modern: no override
+        coverage = candidate.coverage
+        if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+            return coverage
+        if coverage.kind in (Coverage.NONE_NEEDED, Coverage.KNOWN_GAP):
+            # NONE_NEEDED: the modern executable already IS correct for this
+            # state. KNOWN_GAP: an ACKNOWLEDGED divergence — keep modern,
+            # validate.py surfaces the documented gap; never a build error.
+            return None
+        problems.append(
+            f"{erratum.id}: determinate historical state {sorted(candidate.events)} applies "
+            f"at {snapshot} but its implementation coverage is unresolved (record one, "
+            "document a known-gap, or exclude)"
+        )
+        return None
+    # ambiguous
+    if policy == "modern":
+        return None  # validator names each card if modern is a known-wrong fallback
+    if policy == "historical":
+        non_modern = [c for c in selection.candidates if c.events != all_relevant_ids]
+        outcomes = [_executable_outcome(c.coverage) for c in non_modern]
+        if None in outcomes or len(set(outcomes)) != 1:
+            problems.append(
+                f"{erratum.id}: chronology ambiguous at snapshot {snapshot} between "
+                f"{[sorted(c.events) for c in selection.candidates]}, and unresolved_policy "
+                "'historical' cannot resolve to one concrete executable outcome — the "
+                "plausible non-modern candidates disagree, or one has no usable coverage; "
+                "adjudicate this card explicitly with errata_overrides"
+            )
+            return None
+        if outcomes[0][0] == "substitute":
+            return next(c.coverage for c in non_modern if _executable_outcome(c.coverage) == outcomes[0])
+        return None  # every plausible non-modern candidate agrees on NONE_NEEDED
+    problems.append(
+        f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
+        "(narrow an event's effective chronology, adjudicate with a "
+        "documented errata_overrides include/exclude, or state an "
+        "errata_overrides.unresolved_policy)"
+    )
     return None
 
 
@@ -196,6 +398,11 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
        mechanically-guessed import cannot quietly change a format;
     5. ambiguity resolves through `unresolved_policy` when the format states
        one, and is a hard error otherwise. Selection never guesses silently.
+
+    v1-shaped and v2-shaped records both follow this same 5-step order, but
+    through entirely separate resolution functions (`_select_v1_override`/
+    `_select_v2_override`) — never one shared code path, per design doc §8's
+    hard legacy/v2 boundary.
     """
     selected: dict[int, SelectedOverride] = {}
     problems: list[str] = []
@@ -204,56 +411,12 @@ def select_applicable_errata(fmt: Format, repo: Repository) -> dict[int, Selecte
     policy = (fmt.unresolved_policy or {}).get("choice")
 
     for erratum in repo.errata.values():
-        if erratum.id in fmt.errata_exclude:
-            continue
-        if erratum.id in fmt.errata_include:
-            impl = baseline_override(erratum)
-            if impl is not None:
-                selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
-            continue
-        if parity:
-            # The reference implementation defines the WHOLE substitution set:
-            # cards it represents historically are substituted, and cards it
-            # does not are left modern even where our own chronology would
-            # pick a historical version. Both directions of disagreement are
-            # reported per card by the validator rather than silently
-            # changing output that is regression-tested against the reference.
-            if in_reference(erratum, parity):
-                impl = parity_override(erratum)
-                if impl is not None:
-                    selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
-            continue
-        if snapshot is None or not erratum.relevant_changes():
-            continue
-        if erratum.review_status != "reviewed":
-            continue
-        selection = erratum.selection_at(snapshot)
-        if selection.state == "historical":
-            selected[erratum.modern_card.passcode] = SelectedOverride(
-                erratum, selection.implementation
-            )
-        elif selection.state == "ambiguous":
-            if policy == "historical":
-                impl = baseline_override(erratum)
-                if impl is not None:
-                    selected[erratum.modern_card.passcode] = SelectedOverride(erratum, impl)
-            elif policy == "modern":
-                pass  # documented conservative default; validator names each card
-            else:
-                problems.append(
-                    f"{erratum.id}: chronology ambiguous at snapshot {snapshot} "
-                    "(narrow the change's effective chronology, adjudicate with a "
-                    "documented errata_overrides include/exclude, or state an "
-                    "errata_overrides.unresolved_policy)"
-                )
-        elif selection.state == "gap" and not selection.acknowledged_gap:
-            problems.append(
-                f"{erratum.id}: version {selection.version_index} applies at {snapshot} "
-                "but has no usable implementation and the record does not acknowledge "
-                "the gap (record one, document implementation.gap, or exclude)"
-            )
-        # An ACKNOWLEDGED gap deliberately falls through to the modern card:
-        # the divergence is recorded on the record and reported, not silent.
+        if isinstance(erratum, ErratumV2):
+            override = _select_v2_override(erratum, fmt, snapshot, parity, policy, problems)
+        else:
+            override = _select_v1_override(erratum, fmt, snapshot, parity, policy, problems)
+        if override is not None:
+            selected[erratum.modern_card.passcode] = SelectedOverride(erratum, override)
     if problems:
         raise ErrataSelectionError(fmt.id, problems)
     return selected
@@ -322,12 +485,12 @@ def _build_whitelist(fmt: Format, banlist: Banlist, pool: Pool, repo: Repository
         override = overrides.get(card.passcode)
         if override is not None:
             # The modern implementation is period-incorrect: emit ONLY the
-            # selected historical passcode (and its artwork variants).
-            impl = override.implementation
-            emit_codes = [
-                int(impl["historical_passcode"]),
-                *(int(v) for v in impl.get("historical_variant_passcodes", [])),
-            ]
+            # selected historical passcode (and its artwork variants) — read
+            # through historical_identity() so a v1 dict and a v2
+            # ImplementationCoverage are handled by the one place that needs
+            # to know both shapes exist, not by this loop.
+            passcode, variants = historical_identity(override.implementation)
+            emit_codes = [passcode, *variants]
             label = f"{card.name} (pre-errata)"
         else:
             emit_codes = [card.passcode, *card.variants]

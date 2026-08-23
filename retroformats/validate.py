@@ -18,6 +18,7 @@ from pathlib import Path
 from .model import (
     AVAILABILITY_KINDS,
     CHANGE_KINDS,
+    CONTRADICTED,
     EFFECTIVE_STATUSES,
     EVENT_KINDS,
     EVENT_STATUSES,
@@ -28,13 +29,18 @@ from .model import (
     IMPLEMENTATION_STATUSES,
     KIND_SEVERITY,
     PRECISIONS,
+    PROVEN,
     PRODUCT_KINDS,
     STATUS_TO_COUNT,
     TERRITORIES,
     Banlist,
+    Coverage,
+    ErratumV2,
     Format,
     Pool,
+    SelectionError,
     normalise_name,
+    ordering_proof,
     territory_matches_scope,
 )
 from .model import _precision_bounds as _model_precision_bounds
@@ -273,6 +279,9 @@ class Validator:
 
     def _validate_errata(self) -> None:
         for erratum in self.repo.errata.values():
+            if isinstance(erratum, ErratumV2):
+                self._validate_erratum_v2(erratum)
+                continue
             if not _ERRATUM_ID_RE.match(erratum.id):
                 self.error("erratum.bad-id", erratum.path, f"id {erratum.id!r} does not match erratum-<slug>")
             if erratum.classification not in CHANGE_KINDS:
@@ -400,6 +409,589 @@ class Validator:
                     "formats whose snapshot could straddle it must adjudicate explicitly",
                 )
             self._check_sources(erratum.sources, erratum.path, None, "erratum")
+
+    # -- v2 (historical-event DAG) record checks --------------------------
+    # docs/research/erratum-state-model-v2.md, frozen. A dedicated branch,
+    # not a v1 changes[] fabrication: v2 has no changes[]/implementation at
+    # all. Covers the design doc's ten §10 invariants plus the same
+    # general-record checks v1 gets, adapted to events{}/transitions[].
+    # Invariants 1-2 (real event ids, no ordering cycles) are already
+    # enforced at ErratumV2.load() time — a malformed record never survives
+    # loading, and surfaces as a load.failed finding via repo.load_errors
+    # (see validate()) rather than being silently dropped.
+
+    def _validate_erratum_v2(self, erratum: ErratumV2) -> None:
+        if not _ERRATUM_ID_RE.match(erratum.id):
+            self.error("erratum.bad-id", erratum.path, f"id {erratum.id!r} does not match erratum-<slug>")
+        if erratum.classification not in CHANGE_KINDS:
+            self.error("erratum.bad-classification", erratum.path, f"{erratum.classification!r}")
+        self._check_card(
+            erratum.modern_card.passcode, erratum.modern_card.name, erratum.path, "erratum modern_card"
+        )
+        if not erratum.events:
+            self.error("erratum.no-events", erratum.path, "events{} is empty")
+
+        dominant_kinds: list[str] = []
+        for event_id, event in erratum.events.items():
+            dominant_kinds.extend(self._validate_v2_event(erratum, event_id, event))
+
+        if dominant_kinds:
+            dominant = max(dominant_kinds, key=lambda k: KIND_SEVERITY[k])
+            if erratum.classification in CHANGE_KINDS and erratum.classification != dominant:
+                self.error(
+                    "erratum.classification-mismatch",
+                    erratum.path,
+                    f"classification {erratum.classification!r} but the dominant transition "
+                    f"kind is {dominant!r} (severity functional > ruling > engine > cosmetic)",
+                )
+
+        self._validate_v2_ordering(erratum)
+        self._validate_v2_states(erratum)
+
+        review = erratum.raw.get("review") or {}
+        if review and review.get("status") not in ("imported", "reviewed"):
+            self.error("erratum.bad-review-status", erratum.path, f"review.status {review.get('status')!r}")
+        relevant = erratum.relevant_events()
+        if erratum.review_status != "reviewed":
+            self.warn(
+                "erratum.unreviewed",
+                erratum.path,
+                "record is imported but not yet reviewed; classification and chronology "
+                "are unverified, and formats apply it only via explicit errata_overrides",
+            )
+        elif relevant and not any(
+            e.effective.get("date")
+            or e.effective.get("old_attested_through")
+            or e.effective.get("new_attested_from")
+            for e in relevant
+        ):
+            self.warn(
+                "erratum.undated",
+                erratum.path,
+                "reviewed, but no behavioural event carries any effective chronology; "
+                "formats whose snapshot could straddle it must adjudicate explicitly",
+            )
+        self._check_sources(erratum.sources, erratum.path, None, "erratum")
+
+    def _validate_v2_event(self, erratum: ErratumV2, event_id: str, event) -> list[str]:
+        """One event's chronology and transitions; returns its transitions'
+        kinds for the record's dominant-classification check. Invariant 10
+        (co-occurrence sources) lives here: a 2+-transition event is a
+        first-class co-occurrence claim needing its own evidence, never
+        inferred from the individual transitions' own sources."""
+        self._validate_v2_effective(erratum, event_id, event.effective)
+        if len(event.transitions) >= 2:
+            sources = event.cooccurrence_sources
+            if not sources:
+                self.error(
+                    "erratum.cooccurrence-unsourced",
+                    erratum.path,
+                    f"events.{event_id}: {len(event.transitions)} transitions but no "
+                    "cooccurrence_sources — 2+ transitions in one event is a co-occurrence "
+                    "claim needing its own evidence, not merely each transition's own sources",
+                )
+            else:
+                self._check_sources(list(sources), erratum.path, None, f"events.{event_id} cooccurrence")
+        kinds: list[str] = []
+        if not event.transitions:
+            self.error("erratum.event-no-transitions", erratum.path, f"events.{event_id}: transitions[] is empty")
+        for i, transition in enumerate(event.transitions):
+            if transition.kind not in CHANGE_KINDS:
+                self.error(
+                    "erratum.bad-change-kind",
+                    erratum.path,
+                    f"events.{event_id}.transitions[{i}].kind {transition.kind!r}",
+                )
+            else:
+                kinds.append(transition.kind)
+            if not transition.sources:
+                self.error(
+                    "erratum.change-unsourced", erratum.path, f"events.{event_id}.transitions[{i}] cites no sources"
+                )
+            else:
+                self._check_sources(
+                    list(transition.sources), erratum.path, None, f"events.{event_id}.transitions[{i}]"
+                )
+        return kinds
+
+    def _validate_v2_effective(self, erratum: ErratumV2, event_id: str, effective: dict) -> None:
+        """The same effective-chronology soundness checks v1's changes[]
+        get (date/precision/status/corroboration/bounds), scoped to one v2
+        event's own `effective` block instead of one v1 change's."""
+        date = effective.get("date")
+        precision = effective.get("precision")
+        status = effective.get("status")
+        old_through = self._date(effective.get("old_attested_through"))
+        new_from = self._date(effective.get("new_attested_from"))
+        if effective.get("old_attested_through") and old_through is None:
+            self.error("erratum.bad-date", erratum.path, f"events.{event_id} old_attested_through is not a date")
+        if effective.get("new_attested_from") and new_from is None:
+            self.error("erratum.bad-date", erratum.path, f"events.{event_id} new_attested_from is not a date")
+        if precision is not None and precision not in PRECISIONS:
+            self.error("erratum.bad-precision", erratum.path, f"events.{event_id} precision {precision!r}")
+            precision = None
+        if status is not None and status not in EFFECTIVE_STATUSES:
+            self.error("erratum.bad-effective-status", erratum.path, f"events.{event_id} status {status!r}")
+        corroboration = effective.get("corroboration") or []
+        if status == "verified" and not corroboration:
+            self.error(
+                "erratum.unverified-verified",
+                erratum.path,
+                f"events.{event_id} claims status 'verified' but records no corroboration; "
+                "cite the period/primary source (url + quoted sentence) or use 'reported'",
+            )
+        for item in corroboration:
+            if not item.get("url") or not item.get("quote"):
+                self.error(
+                    "erratum.bad-corroboration",
+                    erratum.path,
+                    f"events.{event_id} corroboration entry needs a url and a quoted sentence",
+                )
+        if old_through and new_from and old_through >= new_from:
+            self.error(
+                "erratum.bounds-inverted",
+                erratum.path,
+                f"events.{event_id}: old attested through {old_through} but new attested from "
+                f"{new_from}; the old attestation must precede the new one",
+            )
+        if date is None:
+            return
+        if self._date(date) is None:
+            self.error("erratum.bad-date", erratum.path, f"events.{event_id} effective.date {date!r}")
+            return
+        try:
+            lo, hi = _model_precision_bounds(str(date), str(precision or "day"))
+        except ValueError:
+            self.error("erratum.bad-date", erratum.path, f"events.{event_id} effective.date {date!r}")
+            return
+        if old_through and old_through >= hi:
+            self.error(
+                "erratum.bounds-contradict-date",
+                erratum.path,
+                f"events.{event_id}: old attested through {old_through}, but the effective "
+                f"date says the new behaviour was in force by {hi}",
+            )
+        if new_from and new_from < lo:
+            self.error(
+                "erratum.bounds-contradict-date",
+                erratum.path,
+                f"events.{event_id}: new attested from {new_from}, before the earliest "
+                f"possible effective date {lo}",
+            )
+
+    def _validate_v2_ordering(self, erratum: ErratumV2) -> None:
+        """Invariants 6-7: every declared ordering constraint — chain-
+        desugared pairs AND explicit edges alike, never only literal
+        `ordering.edges` entries, since a chain is sugar over edges, not a
+        way to bypass the same proof burden — must pass the PROVEN/
+        CONTRADICTED chronology test, and anything not PROVEN must carry
+        an explicit, resolvable evidentiary basis (design doc §5, §10)."""
+        for chain in erratum.raw_chains:
+            for before_id, after_id in zip(chain, chain[1:]):
+                before_event = erratum.events.get(before_id)
+                after_event = erratum.events.get(after_id)
+                if before_event is None or after_event is None:
+                    continue  # dangling reference already a load.failed finding
+                proof = ordering_proof(before_event.effective, after_event.effective)
+                if proof == CONTRADICTED:
+                    self.error(
+                        "erratum.ordering-contradicted",
+                        erratum.path,
+                        f"ordering.chains edge {before_id!r} -> {after_id!r} is CONTRADICTED "
+                        "by chronology under every possible date assignment",
+                    )
+                elif proof != PROVEN:
+                    self.error(
+                        "erratum.ordering-chain-not-proven",
+                        erratum.path,
+                        f"ordering.chains edge {before_id!r} -> {after_id!r} is not PROVEN by "
+                        "chronology alone (chains sugar always requires basis 'date-proven'); "
+                        "use an explicit ordering.edges entry with a justified basis instead",
+                    )
+        for edge in erratum.raw_edges:
+            before_id, after_id, basis = edge.get("before"), edge.get("after"), edge.get("basis")
+            before_event = erratum.events.get(before_id)
+            after_event = erratum.events.get(after_id)
+            if before_event is None or after_event is None:
+                continue  # dangling reference already a load.failed finding
+            proof = ordering_proof(before_event.effective, after_event.effective)
+            if proof == CONTRADICTED:
+                self.error(
+                    "erratum.ordering-contradicted",
+                    erratum.path,
+                    f"ordering.edges edge {before_id!r} -> {after_id!r} (basis {basis!r}) is "
+                    "CONTRADICTED by chronology regardless of its claimed basis",
+                )
+                continue
+            if basis == "date-proven":
+                if proof != PROVEN:
+                    self.error(
+                        "erratum.ordering-basis-unproven",
+                        erratum.path,
+                        f"ordering.edges edge {before_id!r} -> {after_id!r} claims basis "
+                        "'date-proven' but chronology does not prove it",
+                    )
+            elif basis in ("directly-sourced", "researcher-inference"):
+                if not edge.get("note"):
+                    self.error(
+                        "erratum.ordering-edge-unjustified",
+                        erratum.path,
+                        f"ordering.edges edge {before_id!r} -> {after_id!r} (basis {basis!r}) "
+                        "needs an explanatory note",
+                    )
+                sources = edge.get("sources") or []
+                if basis == "directly-sourced" and not sources:
+                    self.error(
+                        "erratum.ordering-edge-unjustified",
+                        erratum.path,
+                        f"ordering.edges edge {before_id!r} -> {after_id!r}: basis "
+                        "'directly-sourced' needs sources citing what states the order",
+                    )
+                elif sources:
+                    self._check_sources(
+                        list(sources), erratum.path, None, f"ordering edge {before_id}->{after_id}"
+                    )
+            else:
+                self.error(
+                    "erratum.ordering-bad-basis",
+                    erratum.path,
+                    f"ordering.edges edge {before_id!r} -> {after_id!r}: basis {basis!r}",
+                )
+
+    def _validate_v2_states(self, erratum: ErratumV2) -> None:
+        """Invariants 3-5 (and 8, which the design document's own text
+        shows is the same underlying defect as 3 — one check, not two
+        noisy findings): authored `states[]` keys, read from the RAW array
+        (ErratumV2.authored_states is already a dict and would have
+        silently collapsed a duplicate before this ever ran) — every key
+        must reference real, implementation-relevant event ids and be a
+        structurally reachable down-set; no two entries may share a
+        semantic (frozenset) key even if their JSON arrays differ
+        textually; MODERN is legal only for the terminal (all-relevant-
+        events) state, and a terminal entry, if authored at all, must say
+        MODERN."""
+        relevant_ids = frozenset(e.id for e in erratum.relevant_events())
+        reachable = set(erratum.structural_states())
+        seen_keys: set[frozenset[str]] = set()
+        for i, entry in enumerate(erratum.raw.get("states") or []):
+            raw_event_ids = entry.get("events") or []
+            ids = frozenset(raw_event_ids)
+            location = f"states[{i}]"
+
+            unknown = [e for e in raw_event_ids if e not in erratum.events]
+            if unknown:
+                self.error(
+                    "erratum.state-unknown-event", erratum.path, f"{location}: unknown event id(s) {unknown}"
+                )
+                continue
+            non_relevant = [e for e in raw_event_ids if not erratum.events[e].is_implementation_relevant]
+            if non_relevant:
+                self.error(
+                    "erratum.state-non-relevant-event",
+                    erratum.path,
+                    f"{location}: cosmetic/engine-only event id(s) {non_relevant} cannot "
+                    "appear in an implementation-state key",
+                )
+                continue
+            if ids in seen_keys:
+                self.error(
+                    "erratum.state-duplicate-key",
+                    erratum.path,
+                    f"{location}: semantic key {sorted(ids)} duplicates an earlier states[] "
+                    "entry (array spelling differs but the event-set is the same)",
+                )
+            seen_keys.add(ids)
+            if ids not in reachable:
+                self.error(
+                    "erratum.state-unreachable",
+                    erratum.path,
+                    f"{location}: down-set {sorted(ids)} is not structurally reachable from "
+                    "the declared events{}/ordering",
+                )
+                continue
+            coverage_raw = entry.get("coverage") or {}
+            is_terminal = ids == relevant_ids
+            if is_terminal and coverage_raw.get("kind") != "modern":
+                self.error(
+                    "erratum.terminal-not-modern",
+                    erratum.path,
+                    f"{location}: the all-events state must be coverage.kind 'modern' if "
+                    f"authored at all; found {coverage_raw.get('kind')!r}",
+                )
+            elif not is_terminal and coverage_raw.get("kind") == "modern":
+                self.error(
+                    "erratum.non-terminal-modern",
+                    erratum.path,
+                    f"{location}: coverage.kind 'modern' is only valid for the all-events "
+                    f"state; {sorted(ids)} is not it",
+                )
+            self._validate_v2_coverage(erratum, location, coverage_raw)
+
+    def _validate_v2_coverage(self, erratum: ErratumV2, location: str, coverage: dict) -> None:
+        """Invariant 16 (of this task's numbering): semantic coverage
+        validation the schema also constrains structurally, but the
+        production validator must not assume ran — Repository.load()
+        parses raw JSON directly, the schema checker lives in tests."""
+        kind = coverage.get("kind")
+        if kind == "unresolved":
+            self.error(
+                "erratum.coverage-unresolved-authored",
+                erratum.path,
+                f"{location}.coverage: 'unresolved' must never be authored — it is "
+                "exclusively the mechanical default for an unauthored reachable state",
+            )
+            return
+        if kind in ("reuse-upstream", "custom-script"):
+            hist = coverage.get("historical_passcode")
+            if not hist:
+                self.error(
+                    "erratum.no-historical-passcode",
+                    erratum.path,
+                    f"{location}.coverage: strategy {kind} but no historical_passcode",
+                )
+            else:
+                self._check_card_alias(int(hist), erratum, f"{location}.coverage")
+                for variant in coverage.get("historical_variant_passcodes", []) or []:
+                    if abs(int(variant) - int(hist)) >= 10:
+                        self.error(
+                            "erratum.variant-out-of-range",
+                            erratum.path,
+                            f"{location}.coverage: variant {variant} is not within +/-10 of {hist}",
+                        )
+                    self._check_card_alias(int(variant), erratum, f"{location}.coverage")
+            if kind == "reuse-upstream" and not coverage.get("upstream"):
+                self.error(
+                    "erratum.no-upstream",
+                    erratum.path,
+                    f"{location}.coverage: strategy reuse-upstream but no upstream recorded",
+                )
+            if kind == "custom-script" and not coverage.get("script"):
+                self.error(
+                    "erratum.no-script",
+                    erratum.path,
+                    f"{location}.coverage: strategy custom-script but no script recorded",
+                )
+        elif kind == "known-gap":
+            if not coverage.get("gap_reason"):
+                self.error("erratum.gap-unjustified", erratum.path, f"{location}.coverage: gap_reason is required")
+            if not coverage.get("gap_sources"):
+                self.error("erratum.gap-unjustified", erratum.path, f"{location}.coverage: gap_sources is required")
+            else:
+                self._check_sources(list(coverage["gap_sources"]), erratum.path, None, f"{location}.coverage gap")
+        elif kind not in ("none-needed", "modern"):
+            self.error("erratum.bad-strategy", erratum.path, f"{location}.coverage: kind {kind!r}")
+
+    # -- v2 format-applicability checks (invariant 9 + §§6-8 of this task) -
+    # Mirror the v1 per-format loops in SHAPE (exclude/include/parity/
+    # chronology), never in mechanism — v2 has no numeric version, so each
+    # branch is re-derived from event-set semantics, matching exactly what
+    # lflist.py's _select_v2_override actually computes (so a record that
+    # validates cleanly here never surprises the builder).
+
+    def _validate_v2_parity(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
+        from .lflist import in_reference, parity_override
+
+        if erratum.id in fmt.errata_exclude:
+            return
+        all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
+        if not in_reference(erratum, fmt.reference_parity):
+            # Outside the reference: our own research may still say a
+            # historical state applies here. Parity keeps the modern card,
+            # but the finding is worth surfacing as a candidate contribution
+            # back to the reference.
+            if erratum.has_implementation_relevant_history():
+                try:
+                    selection = erratum.selection_at(snapshot)
+                except SelectionError:
+                    # A genuinely contradictory record — _validate_v2_ordering
+                    # (run once per record, unconditionally, before any format
+                    # is checked) has already reported the underlying
+                    # CONTRADICTED edge; this is not a second, independent
+                    # defect to name, only a consequence of the first.
+                    return
+                if selection.chronology == "determinate" and selection.candidates[0].events != all_relevant_ids:
+                    self.warn(
+                        "format.parity-omits-historical",
+                        fmt.path,
+                        f"{erratum.modern_card.name}: this record's chronology says a "
+                        f"historical state applies at {snapshot}, but the reference "
+                        "implementation does not substitute this card, so parity keeps "
+                        "the modern one",
+                    )
+            return
+        if parity_override(erratum) is None:
+            return
+        if erratum.review_status != "reviewed":
+            return
+        if not erratum.has_implementation_relevant_history():
+            self.warn(
+                "format.parity-substitutes-non-behavioural",
+                fmt.path,
+                f"{erratum.modern_card.name}: reference parity substitutes the upstream "
+                f"variant, but the record finds no functional or ruling transition "
+                f"({erratum.classification}) - the reference ships it for period text, "
+                "not behaviour",
+            )
+            return
+        try:
+            selection = erratum.selection_at(snapshot)
+        except SelectionError:
+            return  # already reported by _validate_v2_ordering; see above
+        if selection.chronology == "determinate" and selection.candidates[0].events == all_relevant_ids:
+            self.warn(
+                "format.parity-contradicts-chronology",
+                fmt.path,
+                f"{erratum.modern_card.name}: reference parity substitutes the upstream "
+                f"variant, but this record's chronology says the modern state was already "
+                f"in force at {snapshot}",
+            )
+
+    def _validate_v2_applicability(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
+        if not erratum.has_implementation_relevant_history():
+            return
+        if fmt.reference_parity:
+            return  # parity governs; disagreements reported above
+        excluded = erratum.id in fmt.errata_exclude
+        included = erratum.id in fmt.errata_include and not excluded
+        all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
+        if erratum.review_status != "reviewed":
+            if included and erratum.state_for(frozenset()).coverage.kind == Coverage.UNRESOLVED:
+                self.warn(
+                    "format.erratum-unimplemented",
+                    fmt.path,
+                    f"{erratum.modern_card.name}: included but baseline implementation "
+                    "coverage is unresolved",
+                )
+            return
+        try:
+            selection = erratum.selection_at(snapshot)
+        except SelectionError:
+            return  # already reported by _validate_v2_ordering; see _validate_v2_parity
+        if excluded:
+            if selection.chronology == "determinate" and selection.candidates[0].events != all_relevant_ids:
+                self.warn(
+                    "format.erratum-exclude-contradicts-chronology",
+                    fmt.path,
+                    f"{erratum.id}: chronology says a historical state applies at {snapshot} "
+                    "but the format excludes it; document the deliberate deviation in the "
+                    "format notes",
+                )
+            return
+        if included:
+            if selection.chronology == "determinate" and selection.candidates[0].events == all_relevant_ids:
+                self.warn(
+                    "format.erratum-include-contradicts-chronology",
+                    fmt.path,
+                    f"{erratum.id}: chronology says the modern state applies at {snapshot} "
+                    "but the format pins the baseline state; document the deliberate "
+                    "deviation in the format notes",
+                )
+            elif selection.chronology == "determinate" and selection.candidates[0].events == frozenset():
+                self.warn(
+                    "format.erratum-include-redundant",
+                    fmt.path,
+                    f"{erratum.id}: computed selection already chooses the baseline state; "
+                    "the explicit include can be removed",
+                )
+            elif selection.chronology == "determinate":
+                self.error(
+                    "format.erratum-include-wrong-version",
+                    fmt.path,
+                    f"{erratum.id}: chronology selects state "
+                    f"{sorted(selection.candidates[0].events)} at {snapshot}, but an explicit "
+                    "include pins the baseline state; remove the include or fix the data",
+                )
+            return
+        if selection.chronology == "ambiguous":
+            policy = fmt.unresolved_policy or {}
+            choice = policy.get("choice")
+            if choice == "modern":
+                if not selection.modern_is_possible:
+                    self.warn(
+                        "format.erratum-modern-known-wrong",
+                        fmt.path,
+                        f"{erratum.modern_card.name}: chronology is ambiguous at {snapshot} "
+                        f"between states {[sorted(c.events) for c in selection.candidates]}, "
+                        "and the modern state is NOT among them - the unresolved_policy "
+                        "fallback to modern is a known divergence, not a neutral default",
+                    )
+                else:
+                    self.warn(
+                        "format.erratum-unresolved-defaulted",
+                        fmt.path,
+                        f"{erratum.modern_card.name}: chronology ambiguous at {snapshot}; "
+                        "resolved as 'modern' by this format's documented unresolved_policy",
+                    )
+            elif choice == "historical":
+                self._validate_v2_historical_policy(erratum, fmt, snapshot, selection, all_relevant_ids)
+            else:
+                self.error(
+                    "format.erratum-ambiguous",
+                    fmt.path,
+                    f"{erratum.id}: effective chronology is ambiguous at snapshot {snapshot} "
+                    f"(events {sorted(erratum.events.keys())}); narrow the chronology, "
+                    "adjudicate with a documented errata_overrides include/exclude, or state "
+                    "an errata_overrides.unresolved_policy — selection will not guess",
+                )
+        elif selection.chronology == "determinate":
+            candidate = selection.candidates[0]
+            if candidate.events == all_relevant_ids:
+                return  # modern, nothing to report
+            coverage = candidate.coverage
+            if coverage.kind == Coverage.KNOWN_GAP:
+                self.warn(
+                    "format.erratum-known-divergence",
+                    fmt.path,
+                    f"{erratum.modern_card.name}: state {sorted(candidate.events)} applies at "
+                    f"{snapshot} but is not reproducible ({coverage.gap_reason}); the modern "
+                    "implementation is used and the divergence is acknowledged on the record",
+                )
+            elif coverage.kind == Coverage.UNRESOLVED:
+                self.error(
+                    "format.erratum-implementation-gap",
+                    fmt.path,
+                    f"{erratum.id}: state {sorted(candidate.events)} applies at {snapshot} but "
+                    "has no usable implementation coverage and the record does not acknowledge "
+                    "the gap; record one (reuse-upstream/custom-script), document a "
+                    "known-gap, or exclude with documentation",
+                )
+
+    def _validate_v2_historical_policy(
+        self,
+        erratum: ErratumV2,
+        fmt: Format,
+        snapshot: _dt.date,
+        selection,
+        all_relevant_ids: frozenset[str],
+    ) -> None:
+        """unresolved_policy 'historical' for v2 (design doc §7 of this
+        task): only ever resolvable when every plausible non-modern
+        candidate agrees on ONE concrete executable outcome — never "the
+        smallest state," never "baseline merely because it exists," never
+        candidates[0]. Reuses lflist.py's own agreement check
+        (`_executable_outcome`) so a record that validates cleanly here is
+        guaranteed to resolve identically at build time."""
+        from .lflist import _executable_outcome
+
+        non_modern = [c for c in selection.candidates if c.events != all_relevant_ids]
+        outcomes = [_executable_outcome(c.coverage) for c in non_modern]
+        if None in outcomes or len(set(outcomes)) != 1:
+            self.error(
+                "format.erratum-historical-policy-unresolved",
+                fmt.path,
+                f"{erratum.modern_card.name}: chronology ambiguous at {snapshot} between "
+                f"states {[sorted(c.events) for c in selection.candidates]}, and "
+                "unresolved_policy 'historical' cannot resolve to one concrete executable "
+                "outcome - the plausible non-modern candidates disagree, or one has no "
+                "usable coverage; adjudicate this card explicitly with errata_overrides",
+            )
+        else:
+            self.warn(
+                "format.erratum-unresolved-defaulted",
+                fmt.path,
+                f"{erratum.modern_card.name}: chronology ambiguous at {snapshot}; resolved "
+                "as 'historical' by this format's documented unresolved_policy",
+            )
 
     def _validate_effective(
         self, erratum, index: int, change: dict
@@ -704,6 +1296,9 @@ class Validator:
             # Parity is the format's definition, but where our own research
             # disagrees with the reference the divergence must stay visible.
             for erratum in self.repo.errata.values():
+                if isinstance(erratum, ErratumV2):
+                    self._validate_v2_parity(erratum, fmt, snapshot)
+                    continue
                 if erratum.id in fmt.errata_exclude:
                     continue
                 from .lflist import in_reference, parity_override
@@ -751,6 +1346,9 @@ class Validator:
 
         if snapshot:
             for erratum in self.repo.errata.values():
+                if isinstance(erratum, ErratumV2):
+                    self._validate_v2_applicability(erratum, fmt, snapshot)
+                    continue
                 if not erratum.relevant_changes():
                     continue
                 if fmt.reference_parity:

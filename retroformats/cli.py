@@ -105,14 +105,22 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
     period behaviours it is knowingly NOT reproducing."""
     from collections import Counter
 
-    from .lflist import select_applicable_errata
+    from .lflist import historical_identity, select_applicable_errata
+    from .model import ErratumV2
 
     errata = list(repo.errata.values())
     if not errata:
         return
-    reviewed = [e for e in errata if e.review_status == "reviewed"]
-    kinds = Counter(e.classification for e in errata)
-    strategies = Counter(e.implementation.get("strategy") for e in errata)
+    # v1 and v2 are entirely different record shapes (design doc §8's hard
+    # legacy/v2 boundary) — the existing v1-only stats block stays exactly
+    # as it was, scoped to v1 records, so today's all-v1 corpus prints
+    # byte-identical output; v2 gets its own small, separate summary line.
+    v1_errata = [e for e in errata if not isinstance(e, ErratumV2)]
+    v2_errata = [e for e in errata if isinstance(e, ErratumV2)]
+
+    reviewed = [e for e in v1_errata if e.review_status == "reviewed"]
+    kinds = Counter(e.classification for e in v1_errata)
+    strategies = Counter(e.implementation.get("strategy") for e in v1_errata)
     dated = sum(
         1
         for e in reviewed
@@ -128,18 +136,18 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
             for c in e.relevant_changes()
         )
     )
-    multi = [e for e in errata if len(e.relevant_changes()) > 1]
+    multi = [e for e in v1_errata if len(e.relevant_changes()) > 1]
     # Behavioural coverage is per IMPLEMENTATION, not per record: a card with
     # three eras can have one of them executed against the engine.
     tested = sum(
         1
-        for e in errata
+        for e in v1_errata
         for impl in [e.implementation, *(c.get("resulting_implementation") for c in e.changes)]
         if impl and impl.get("tested")
     )
     tested_records = sum(
         1
-        for e in errata
+        for e in v1_errata
         if any(
             impl and impl.get("tested")
             for impl in [
@@ -150,7 +158,7 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
     )
 
     print(
-        f"\nerrata: {len(errata)} records ({len(reviewed)} reviewed) -> "
+        f"\nerrata: {len(v1_errata)} records ({len(reviewed)} reviewed) -> "
         + ", ".join(f"{n} {k}" for k, n in sorted(kinds.items()))
     )
     print(
@@ -162,6 +170,13 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
         + f"; {len(multi)} with multiple historical revisions; "
         + f"{tested} implementations behaviourally tested across {tested_records} records"
     )
+    if v2_errata:
+        v2_reviewed = sum(1 for e in v2_errata if e.review_status == "reviewed")
+        v2_kinds = Counter(e.classification for e in v2_errata)
+        print(
+            f"  v2 (historical-event DAG): {len(v2_errata)} records ({v2_reviewed} reviewed) -> "
+            + ", ".join(f"{n} {k}" for k, n in sorted(v2_kinds.items()))
+        )
 
     for fmt_id in sorted(repo.formats):
         fmt = repo.formats[fmt_id]
@@ -177,6 +192,20 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
         policy = (fmt.unresolved_policy or {}).get("choice")
         for erratum in repo.errata.values():
             if erratum.id in fmt.errata_exclude or erratum.review_status != "reviewed":
+                continue
+            if isinstance(erratum, ErratumV2):
+                if not erratum.has_implementation_relevant_history():
+                    continue
+                from .model import Coverage
+
+                selection = erratum.selection_at(snapshot)
+                if (
+                    selection.chronology == "determinate"
+                    and selection.candidates[0].coverage.kind == Coverage.KNOWN_GAP
+                ):
+                    divergences.append(erratum)
+                elif selection.chronology == "ambiguous" and policy == "modern" and not selection.modern_is_possible:
+                    known_wrong.append(erratum)
                 continue
             if not erratum.relevant_changes():
                 continue
@@ -196,11 +225,8 @@ def _report_errata(repo: Repository, verbose: bool = False) -> None:
         )
         if verbose:
             for code, override in sorted(selected.items()):
-                impl = override.implementation
-                print(
-                    f"      {code} -> {impl.get('historical_passcode')} "
-                    f"{override.erratum.modern_card.name}"
-                )
+                passcode, _variants = historical_identity(override.implementation)
+                print(f"      {code} -> {passcode} {override.erratum.modern_card.name}")
             for erratum in sorted(divergences, key=lambda e: e.modern_card.name):
                 print(f"      (divergence) {erratum.modern_card.name}")
             for erratum in sorted(known_wrong, key=lambda e: e.modern_card.name):
