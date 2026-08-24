@@ -1293,28 +1293,23 @@ class Validator:
                 self._check_card_alias(variant_int, erratum, what)
 
     def _safe_passcode(self, value: object, erratum, what: str, field: str) -> int | None:
-        """int(value), guarded against non-integer/out-of-range passcode data
-        (schema's `passcode` def: an integer in 1..4294967295) -
-        `Repository.load()` keeps historical_passcode/historical_variant_
-        passcodes RAW and runs before any schema check, so malformed data
-        here must become an ERROR finding, never an uncaught ValueError."""
-        try:
-            n = int(value)
-        except (TypeError, ValueError):
-            self.error(
-                "erratum.malformed-passcode",
-                erratum.path,
-                f"{what}: {field} {value!r} is not an integer passcode",
-            )
-            return None
-        if not _is_valid_passcode(n):
-            self.error(
-                "erratum.malformed-passcode",
-                erratum.path,
-                f"{what}: {field} {n} is outside the valid passcode range 1..4294967295",
-            )
-            return None
-        return n
+        """Guarded against malformed passcode data (schema's `passcode` def:
+        an integer in 1..4294967295, matching `_is_valid_passcode()`'s
+        strict, non-coercive check) - `Repository.load()` keeps
+        historical_passcode/historical_variant_passcodes RAW and runs before
+        any schema check, so malformed data here must become an ERROR
+        finding, never an uncaught ValueError. Deliberately does NOT
+        `int(value)` first: coercing before validating would silently
+        accept "123", `True`, or 1.5 - none of which are a JSON integer -
+        exactly the gap a coercive check would reopen."""
+        if _is_valid_passcode(value):
+            return value
+        self.error(
+            "erratum.malformed-passcode",
+            erratum.path,
+            f"{what}: {field} {value!r} is not a valid passcode (schema: integer, 1..4294967295)",
+        )
+        return None
 
     def _check_card_alias(self, historical_passcode: int, erratum, what: str = "implementation") -> None:
         index = self.repo.card_index

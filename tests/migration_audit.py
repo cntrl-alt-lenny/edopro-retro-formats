@@ -97,7 +97,9 @@ from retroformats.model import (
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 # --- categories (a coarse, human-legible summary label - see the orthogonal
-# fields on each row for the facts it is derived from) ----------------------
+# fields on each row - research_status, migration_complexity,
+# parity_only_identity, ordering_structure - for the facts it is derived
+# from) ----------------------------------------------------------------------
 CAT_SUGAR = "sugar-eligible"
 CAT_FULL_SINGLE = "full-v2-single-event"
 CAT_MULTI_ORDERED = "full-v2-multi-event-ordered"
@@ -105,7 +107,36 @@ CAT_MULTI_UNORDERED = "full-v2-multi-event-unordered"
 CAT_NONRELEVANT_CHRONOLOGY = "nonrelevant-event-constrains-relevant"
 CAT_PARITY_ONLY = "parity-only-identity"
 CAT_COSMETIC_ONLY = "no-historical-state"
-CAT_BLOCKER = "manual-review-blocker"
+# The 49 not-equivalent records are NOT uniformly "manual review": the
+# frozen design document's own taxonomy (section 7) already researched 47 of
+# them (38 bundled/shared-package + 9 mechanically-distinct order-unknown -
+# that finer split is itself a research label with no computable signal in
+# the data, so this audit does not attempt to reproduce it); only 2
+# (Insect Imitation, Last Will) are blocked on an actual human decision
+# about a researcher-inferred order. Two distinct categories, not one.
+CAT_RESEARCHED_NONTRIVIAL = "researched-nontrivial"
+CAT_MANUAL_REVIEW = "manual-review-blocker"
+
+# The exact 2 records the design document names as genuinely blocked on a
+# human §5.6 decision (a researcher-inferred order, not yet promoted to a
+# proven or authored `basis`) - matching the document's own explicit,
+# already-published classification. This is NOT re-derived from a heuristic
+# (the document itself says the finer 38/9 split has no computable signal),
+# and it is not new research: it is the same 2 ids the frozen document
+# already names by name in section 7.
+MANUAL_REVIEW_IDS = frozenset({"erratum-insect-imitation", "erratum-last-will"})
+
+RESEARCH_NOT_APPLICABLE = "not-applicable"
+RESEARCH_ALREADY_RESEARCHED = "already-researched"
+RESEARCH_NEEDS_MANUAL_REVIEW = "needs-manual-review"
+
+COMPLEXITY_TRIVIAL_RENAME = "trivial-rename"
+COMPLEXITY_PROVEN_CHAIN = "proven-chain"
+COMPLEXITY_UNORDERED_RESEARCHED = "unordered-researched"
+COMPLEXITY_UNORDERED_MANUAL_REVIEW = "unordered-manual-review"
+COMPLEXITY_UNORDERED_EQUIVALENT = "unordered-equivalent"  # none in the current corpus; see categorise()
+COMPLEXITY_PARITY_ONLY_BLOCKED = "parity-only-blocked"
+COMPLEXITY_NO_HISTORICAL_STATE = "no-historical-state"
 
 # --- ordering structure: "has a proven edge" is NOT "fully ordered" --------
 ORDER_ZERO = "zero-relevant"
@@ -228,7 +259,17 @@ def _coverage_from_v1(impl: dict) -> dict | None:
     branch reads only fields the v1 record actually carries; none fabricates
     a default. `strategy == "unresolved"` with no gap returns None (no v2
     coverage is authored at all - v2's own UNRESOLVED default applies,
-    exactly matching what "unresolved, undocumented" already means)."""
+    exactly matching what "unresolved, undocumented" already means).
+
+    Optional fields the coverage schema permits are carried across when v1
+    actually authored them - `script` on reuse-upstream and `upstream` on
+    custom-script are both in `COVERAGE_FIELDS`' *allowed* set, not just
+    required. Dropping an authored optional field is exactly as much data
+    loss as dropping a required one; the two v1-corpus strategies currently
+    in use (`reuse-upstream`, `none-needed`, `unresolved` - `custom-script`
+    does not appear in the corpus yet) both commonly carry a `script`
+    alongside `upstream` (242 of 242 reuse-upstream implementations, per a
+    corpus scan), so this is not a hypothetical edge case."""
     strategy = impl.get("strategy")
     if strategy == "reuse-upstream":
         passcode, upstream = impl.get("historical_passcode"), impl.get("upstream")
@@ -238,12 +279,15 @@ def _coverage_from_v1(impl: dict) -> dict | None:
                 f"{'historical_passcode' if not passcode else 'upstream'} - v2 cannot author "
                 "this coverage without inventing a value"
             )
-        return {
+        coverage = {
             "kind": "reuse-upstream",
             "historical_passcode": passcode,
             "historical_variant_passcodes": list(impl.get("historical_variant_passcodes", [])),
             "upstream": upstream,
         }
+        if impl.get("script"):
+            coverage["script"] = impl["script"]
+        return coverage
     if strategy == "custom-script":
         passcode, script = impl.get("historical_passcode"), impl.get("script")
         if not passcode or not script:
@@ -252,12 +296,15 @@ def _coverage_from_v1(impl: dict) -> dict | None:
                 f"{'historical_passcode' if not passcode else 'script'} - v2 cannot author "
                 "this coverage without inventing a value"
             )
-        return {
+        coverage = {
             "kind": "custom-script",
             "historical_passcode": passcode,
             "historical_variant_passcodes": list(impl.get("historical_variant_passcodes", [])),
             "script": script,
         }
+        if impl.get("upstream"):
+            coverage["upstream"] = impl["upstream"]
+        return coverage
     if strategy == "none-needed":
         return {"kind": "none-needed"}
     gap = impl.get("gap") or {}
@@ -279,11 +326,78 @@ def _coverage_from_v1(impl: dict) -> dict | None:
     raise ValueError(f"no v2 coverage mapping for v1 strategy {strategy!r}")
 
 
+# Fields on a v1 implementation (or its `gap` sub-object) that have a direct
+# semantic representation in v2's coverage schema, per strategy. Used by
+# `_coverage_preserved()` below to check preservation INDEPENDENTLY of
+# `_coverage_from_v1()` - re-derived from the raw v1 record, then checked
+# against the REAL, already-parsed `ImplementationCoverage` the candidate
+# actually carries, not against `_coverage_from_v1()`'s own intermediate
+# dict. A bug in `_coverage_from_v1()` itself (e.g. silently dropping
+# `script`) would otherwise go undetected by a check that only re-verified
+# its own output against its own input.
+def _v1_expected_coverage_fields(impl: dict) -> dict:
+    strategy = impl.get("strategy")
+    if strategy == "reuse-upstream":
+        expected = {
+            "historical_passcode": impl.get("historical_passcode"),
+            "historical_variant_passcodes": tuple(impl.get("historical_variant_passcodes", [])),
+            "upstream": impl.get("upstream"),
+        }
+        if impl.get("script"):
+            expected["script"] = impl["script"]
+        return expected
+    if strategy == "custom-script":
+        expected = {
+            "historical_passcode": impl.get("historical_passcode"),
+            "historical_variant_passcodes": tuple(impl.get("historical_variant_passcodes", [])),
+            "script": impl.get("script"),
+        }
+        if impl.get("upstream"):
+            expected["upstream"] = impl["upstream"]
+        return expected
+    if strategy == "none-needed":
+        return {}
+    gap = impl.get("gap") or {}
+    if strategy == "unresolved" and gap:
+        return {"gap_reason": gap.get("reason"), "gap_sources": tuple(gap.get("sources") or ())}
+    return {}  # unresolved without a gap: nothing authored, nothing to preserve
+
+
+def _coverage_preserved(record: Erratum, v2: ErratumV2) -> bool:
+    """Independent of `candidate_v2()`'s own construction: re-derive what
+    each v1 implementation SHOULD carry directly from the v1 record, then
+    check the REAL PARSED v2 `ImplementationCoverage` in `v2.authored_states`
+    actually carries it - catching a bug in `candidate_v2()`/
+    `_coverage_from_v1()` itself, not merely confirming they agree with
+    themselves."""
+    relevant_indices = _relevant_indices(record)
+    versions = [None] + relevant_indices[:-1] if relevant_indices else [None]
+    for version, _ in enumerate(versions):
+        impl = record.implementation_for_version(version)
+        if impl is None:
+            continue
+        expected = _v1_expected_coverage_fields(impl)
+        if not expected:
+            continue  # none-needed / unauthored unresolved: nothing to check
+        down_set = frozenset(_event_id(i) for i in relevant_indices[:version])
+        coverage = v2.authored_states.get(down_set)
+        if coverage is None:
+            return False
+        for field, value in expected.items():
+            actual = getattr(coverage, field, None)
+            if field == "historical_variant_passcodes":
+                actual = tuple(actual)
+            if actual != value:
+                return False
+    return True
+
+
 def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
     """Migration must not silently drop documentation fields even where
     executable behaviour is unaffected: every change's historical_text,
     modern_text, summary and sources must survive verbatim into its
-    candidate event's sole transition."""
+    candidate event's sole transition, AND every coverage field with a
+    direct v2 representation (§_coverage_preserved) must survive too."""
     for index, change in enumerate(record.changes):
         event = v2.events.get(_event_id(index))
         if event is None or not event.transitions:
@@ -297,7 +411,68 @@ def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
             return False
         if tuple(transition.sources) != tuple(change.get("sources", [])):
             return False
-    return True
+    return _coverage_preserved(record, v2)
+
+
+# v1 implementation/gap metadata with NO direct representation in v2's
+# coverage schema at all (COVERAGE_FIELDS is closed per kind - these simply
+# have no destination field, not a bug to fix by widening a dict). Reported
+# by `metadata_inventory()` as an explicit, honest gap - UNKNOWN != DISCARD:
+# this is not proposed as a schema addition, only surfaced as a fact a
+# migration decision must eventually confront.
+UNREPRESENTED_METADATA_FIELDS = ("status", "tested", "gap.upstream_checked", "gap.behavioural_impact")
+
+
+def metadata_inventory(errata: dict) -> list[dict]:
+    """For every v1 implementation-metadata field with no v2 coverage
+    destination: how many records carry it, which ones (a sample), and
+    confirmation that migrating today would silently lose it. Also flags
+    ANY field on an implementation or its `gap` this function does not
+    already know about, rather than silently assuming the known list is
+    exhaustive forever."""
+    from collections import defaultdict
+
+    known_reason_fields = {"reason", "sources"}  # -> gap_reason/gap_sources, already preserved
+    known_impl_fields = {
+        "strategy",
+        "historical_passcode",
+        "historical_variant_passcodes",
+        "upstream",
+        "script",
+        "gap",
+    }
+    field_records: dict[str, list[str]] = defaultdict(list)
+    for record in errata.values():
+        if not isinstance(record, Erratum):
+            continue
+        impls = [record.implementation or {}]
+        for change in record.changes:
+            resulting = change.get("resulting_implementation")
+            if resulting:
+                impls.append(resulting)
+        for impl in impls:
+            for key in impl:
+                if key not in known_impl_fields:
+                    field_records[key].append(record.id)
+                elif key == "status" or key == "tested":
+                    field_records[key].append(record.id)
+            gap = impl.get("gap") or {}
+            for key in gap:
+                if key not in known_reason_fields:
+                    field_records[f"gap.{key}"].append(record.id)
+    inventory = []
+    for field in sorted(field_records):
+        ids = field_records[field]
+        inventory.append(
+            {
+                "field": field,
+                "record_count": len(ids),
+                "representative_ids": sorted(set(ids))[:5],
+                "has_v2_destination": False,
+                "would_be_lost_on_migration": True,
+            }
+        )
+    return inventory
 
 
 # --- semantic outcome comparison ---------------------------------------------
@@ -309,16 +484,33 @@ def _v1_coverage_signature(impl: dict | None) -> tuple:
     """What v1's OWN `selection_at()` determinate branch treats this
     implementation as executing, restated as a comparable tuple - mirrors
     that branch's exact logic rather than a reinvented rule, so "claimed"
-    can never silently drift from what v1 actually does when determinate."""
-    if impl is None or impl.get("strategy") == "unresolved":
-        gap = (impl or {}).get("gap")
-        return ("gap", "known") if gap else ("gap", "unresolved")
-    if impl.get("strategy") == "none-needed":
-        return ("modern",)
+    can never silently drift from what v1 actually does when determinate.
+
+    Distinguishes coverage KIND, not merely final executable identity:
+    reuse-upstream and custom-script at the same passcode are different
+    migration-data claims (different `COVERAGE_FIELDS` shapes, different
+    provenance), so they get different tags even though both execute as a
+    substitution today. A known-gap is never conflated with a bare
+    unresolved state merely because both currently fall back to modern
+    execution - a known-gap additionally carries the reason/sources that
+    document it, and two DIFFERENT known-gap reasons on the same record
+    must not compare equal either."""
+    if impl is None:
+        return ("unresolved",)
+    strategy = impl.get("strategy")
+    if strategy == "unresolved":
+        gap = impl.get("gap")
+        if gap:
+            return ("known-gap", gap.get("reason"), tuple(gap.get("sources") or ()))
+        return ("unresolved",)
+    if strategy == "none-needed":
+        return ("none-needed",)
     passcode = impl.get("historical_passcode")
     if not passcode or not _is_valid_passcode(passcode):
-        return ("gap", "unresolved")
-    return ("historical", passcode, tuple(impl.get("historical_variant_passcodes", ())))
+        return ("unresolved",)
+    variants = tuple(impl.get("historical_variant_passcodes", ()))
+    tag = "custom-script" if strategy == "custom-script" else "reuse-upstream"
+    return (tag, passcode, variants)
 
 
 def _v1_claimed_state(record: Erratum, relevant_indices: list[int], k: int) -> tuple:
@@ -350,15 +542,21 @@ def v1_claimed_states(record: Erratum, day: _dt.date) -> frozenset:
 
 
 def _v2_coverage_signature(coverage: ImplementationCoverage) -> tuple:
-    if coverage.kind in (Coverage.MODERN, Coverage.NONE_NEEDED):
+    """The v2-side counterpart of `_v1_coverage_signature()` - same
+    vocabulary, same kind-level distinctions, so the two are directly
+    comparable rather than both collapsing onto a shared coarser scheme."""
+    if coverage.kind == Coverage.MODERN:
         return ("modern",)
+    if coverage.kind == Coverage.NONE_NEEDED:
+        return ("none-needed",)
     if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
         if not coverage.historical_passcode or not _is_valid_passcode(coverage.historical_passcode):
-            return ("gap", "unresolved")
-        return ("historical", coverage.historical_passcode, tuple(coverage.historical_variant_passcodes))
+            return ("unresolved",)
+        tag = "custom-script" if coverage.kind == Coverage.CUSTOM_SCRIPT else "reuse-upstream"
+        return (tag, coverage.historical_passcode, tuple(coverage.historical_variant_passcodes))
     if coverage.kind == Coverage.KNOWN_GAP:
-        return ("gap", "known")
-    return ("gap", "unresolved")  # UNRESOLVED
+        return ("known-gap", coverage.gap_reason, tuple(coverage.gap_sources))
+    return ("unresolved",)  # Coverage.UNRESOLVED
 
 
 def v2_claimed_states(record: ErratumV2, day: _dt.date) -> frozenset | None:
@@ -454,11 +652,14 @@ def compare(record: Erratum) -> dict:
             data_preserved=False,
             legacy_self_contradictory=None,
             equivalent=False,
+            semantic_equivalent=False,
             mismatch_count=None,
             first_mismatches=[],
             contradictory_at=[],
             reason=f"candidate-v2 construction failed: {exc}",
-            category=CAT_BLOCKER,
+            category=CAT_MANUAL_REVIEW,
+            research_status=RESEARCH_NEEDS_MANUAL_REVIEW,
+            migration_complexity=COMPLEXITY_UNORDERED_MANUAL_REVIEW,
         )
         return row
 
@@ -489,25 +690,47 @@ def compare(record: Erratum) -> dict:
                 }
             )
     row["equivalent"] = not mismatches
+    row["semantic_equivalent"] = row["equivalent"]  # explicit alias (task's own vocabulary)
     row["mismatch_count"] = len(mismatches)
     row["first_mismatches"] = mismatches[:5]
     row["contradictory_at"] = contradictory_at
-    row["category"] = categorise(row, record, v2)
+    category, research_status, migration_complexity = categorise(row, record, v2)
+    row["category"] = category
+    row["research_status"] = research_status
+    row["migration_complexity"] = migration_complexity
     return row
 
 
-def categorise(row: dict, record: Erratum, v2: ErratumV2) -> str:
+def categorise(row: dict, record: Erratum, v2: ErratumV2) -> tuple[str, str, str]:
+    """(category, research_status, migration_complexity) - three views of
+    the same row kept in one function so they can never disagree with each
+    other. `category` is a coarse, human-legible summary; the 49
+    not-equivalent records are NOT uniformly `manual-review-blocker` - only
+    the 2 the frozen design document names (`MANUAL_REVIEW_IDS`) are; the
+    other (currently 47) already have a documented research classification
+    in section 7's taxonomy, even though its finer 38/9 split is not itself
+    computable from the data."""
     if row["relevant_event_count"] == 0:
-        return CAT_PARITY_ONLY if row["parity_only_identity"] else CAT_COSMETIC_ONLY
+        if row["parity_only_identity"]:
+            return CAT_PARITY_ONLY, RESEARCH_NOT_APPLICABLE, COMPLEXITY_PARITY_ONLY_BLOCKED
+        return CAT_COSMETIC_ONLY, RESEARCH_NOT_APPLICABLE, COMPLEXITY_NO_HISTORICAL_STATE
     if not row["equivalent"]:
         if row["nonrelevant_event_count"] and _nonrelevant_is_implicated(record, v2):
-            return CAT_NONRELEVANT_CHRONOLOGY
-        return CAT_BLOCKER
+            return CAT_NONRELEVANT_CHRONOLOGY, RESEARCH_NEEDS_MANUAL_REVIEW, COMPLEXITY_UNORDERED_MANUAL_REVIEW
+        if record.id in MANUAL_REVIEW_IDS:
+            return CAT_MANUAL_REVIEW, RESEARCH_NEEDS_MANUAL_REVIEW, COMPLEXITY_UNORDERED_MANUAL_REVIEW
+        return CAT_RESEARCHED_NONTRIVIAL, RESEARCH_ALREADY_RESEARCHED, COMPLEXITY_UNORDERED_RESEARCHED
     if row["sugar_eligible"]:
-        return CAT_SUGAR
+        return CAT_SUGAR, RESEARCH_NOT_APPLICABLE, COMPLEXITY_TRIVIAL_RENAME
     if row["relevant_event_count"] == 1:
-        return CAT_FULL_SINGLE
-    return CAT_MULTI_ORDERED if row["ordering_structure"] == ORDER_FULL else CAT_MULTI_UNORDERED
+        return CAT_FULL_SINGLE, RESEARCH_NOT_APPLICABLE, COMPLEXITY_TRIVIAL_RENAME
+    if row["ordering_structure"] == ORDER_FULL:
+        return CAT_MULTI_ORDERED, RESEARCH_NOT_APPLICABLE, COMPLEXITY_PROVEN_CHAIN
+    # Equivalent, 2+ relevant events, not fully ordered: none in the current
+    # corpus (every such record is non-equivalent there - see
+    # test_ordering_structure_never_conflates_any_edge_with_fully_ordered),
+    # but the label must still be honest if one ever appears.
+    return CAT_MULTI_UNORDERED, RESEARCH_NOT_APPLICABLE, COMPLEXITY_UNORDERED_EQUIVALENT
 
 
 def _nonrelevant_is_implicated(record: Erratum, v2: ErratumV2) -> bool:
@@ -540,9 +763,15 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         if not isinstance(record, Erratum):
             continue  # already v2; nothing to migrate
         rows.append(compare(record))
+    parity_only_count = sum(1 for r in rows if r.get("category") == CAT_PARITY_ONLY)
+    equivalent_count = sum(1 for r in rows if r["equivalent"])
     summary = {
         "records": len(rows),
-        "equivalent": sum(1 for r in rows if r["equivalent"]),
+        # SEMANTIC EQUIVALENCE: selection never changes at any chronology
+        # boundary. Necessary, not sufficient, for migration readiness -
+        # see immediately_migratable/parity_only_blocked below.
+        "equivalent": equivalent_count,
+        "semantic_equivalent": equivalent_count,  # explicit alias
         "not_equivalent": sum(1 for r in rows if not r["equivalent"]),
         "not_equivalent_ids": sorted(r["id"] for r in rows if not r["equivalent"]),
         "legacy_self_contradictory_count": sum(1 for r in rows if r.get("legacy_self_contradictory")),
@@ -550,8 +779,26 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "sugar_eligible_count": sum(1 for r in rows if r.get("sugar_eligible")),
         "ordering_structure": dict(Counter(r.get("ordering_structure") for r in rows)),
         "categories": dict(Counter(r["category"] for r in rows)),
+        "research_status": dict(Counter(r.get("research_status") for r in rows)),
+        "migration_complexity": dict(Counter(r.get("migration_complexity") for r in rows)),
         "data_not_preserved_ids": sorted(r["id"] for r in rows if r.get("data_preserved") is False),
+        # CURRENT DATA-PRESERVING MIGRATION READINESS: equivalence is
+        # necessary but not sufficient. Of the 247 semantically equivalent
+        # records, 11 (parity-only identity) are STILL blocked on a
+        # representation decision - they are equivalent in SELECTION but
+        # v2 as frozen cannot store the identity at all. Do not report 247
+        # as "safe to migrate" without this qualifier.
+        "immediately_migratable": equivalent_count - parity_only_count,
+        "parity_only_blocked": parity_only_count,
+        "parity_only_blocked_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
+        "nontrivial_migration_scope": sum(1 for r in rows if not r["equivalent"]),
+        "nontrivial_already_researched": sum(1 for r in rows if r.get("category") == CAT_RESEARCHED_NONTRIVIAL),
+        "nontrivial_needs_manual_review": sum(1 for r in rows if r.get("category") == CAT_MANUAL_REVIEW),
+        "nontrivial_needs_manual_review_ids": sorted(
+            r["id"] for r in rows if r.get("category") == CAT_MANUAL_REVIEW
+        ),
     }
+    summary["metadata_inventory"] = metadata_inventory(repo.errata)
     return {"summary": summary, "rows": rows}
 
 

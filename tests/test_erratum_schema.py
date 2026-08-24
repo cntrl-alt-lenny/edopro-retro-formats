@@ -18,7 +18,7 @@ import json
 import unittest
 from pathlib import Path
 
-from .schema_check import REPO_ROOT, Registry, validate_erratum
+from .schema_check import REPO_ROOT, Registry, validate as schema_validate, validate_erratum
 
 REGISTRY = Registry()
 
@@ -499,3 +499,40 @@ class CoverageFieldMapAgreesWithSchemaTest(unittest.TestCase):
             required, allowed = COVERAGE_FIELDS[kind]
             self.assertEqual(set(branch["required"]), set(required), f"{kind} required")
             self.assertEqual(set(branch["properties"]), set(allowed), f"{kind} allowed")
+
+
+class PasscodeValiditySchemaAgreementTest(unittest.TestCase):
+    """`retroformats.model._is_valid_passcode()` must classify every sample
+    EXACTLY as this project's own schema checker does for the `passcode`
+    $def (`type: integer, minimum: 1, maximum: 4294967295`) — never a
+    re-guessed notion of "integer" (a coercive `int(value)` would silently
+    accept "123", True, and 1.5, none of which this project's own
+    `_matches_type(v, "integer")` treats as a JSON integer)."""
+
+    SAMPLES = [
+        1,
+        4294967295,
+        4294967296,
+        0,
+        -1,
+        511000042,
+        "123",
+        "not-a-passcode",
+        1.5,
+        123.0,
+        True,
+        False,
+        None,
+        [1],
+        {},
+    ]
+
+    def test_agrees_with_schema_check_for_every_sample(self):
+        from retroformats.model import _is_valid_passcode
+
+        registry = Registry()
+        common = registry.docs["common.schema.json"]
+        passcode_schema = common["$defs"]["passcode"]
+        for value in self.SAMPLES:
+            errors = schema_validate(passcode_schema, value, registry, common)
+            self.assertEqual(not errors, _is_valid_passcode(value), f"value={value!r}")

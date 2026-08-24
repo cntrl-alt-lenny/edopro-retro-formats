@@ -334,19 +334,38 @@ reflects that.
      the corrected result exactly reproduces this document's own frozen §3/§7 figures —
      247 equivalent, 49 not equivalent, 48 self-contradictory, 236 trivial, 11 fully
      ordered, all independently re-derived, not assumed.
+     **A second, narrower hardening pass then corrected four remaining gaps**: the
+     candidate construction was silently dropping `script` (optional-but-allowed on
+     `reuse-upstream` coverage; affected all 242 reuse-upstream implementations, not
+     only the task's Giant Rat example) until a new, construction-independent
+     `_coverage_preserved()` check closed it, alongside an honest inventory of v1
+     implementation metadata with no v2 destination at all (`status`, `tested`,
+     `gap.upstream_checked`, `gap.behavioural_impact`); `_is_valid_passcode()` was
+     coercive (`int(value)`) rather than matching this project's own schema semantics
+     (`isinstance(v, int) and not isinstance(v, bool)` — rejecting numeric strings,
+     bools, and non-integral floats), now pinned against `tests/schema_check.py`'s own
+     type matcher; the migration-data comparator collapsed `reuse-upstream`/
+     `custom-script` and different `known-gap` reasons into shared signatures, now
+     kind-distinct; and the 49 not-equivalent records were labelled uniformly
+     `manual-review-blocker`, now correctly split into 47 already-researched
+     (design doc §7's taxonomy) and 2 genuinely needing human review (Insect
+     Imitation, Last Will, named by the document itself).
    - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
      migrated, and v1 schema/runtime remain fully supported. It is gated on the
      re-derived audit in `docs/research/erratum-v2-migration-audit.md`: **247 of 296**
-     records are mechanically equivalent (selection never changes) and **49** genuinely
+     records are semantically equivalent (selection never changes) and **49** genuinely
      are not (v1's positional model and v2's real chronology disagree at some boundary —
-     order-aware migration, not a rename). Independently of that split, **11 parity-only
-     identity records are blocked**: they carry a historical passcode with zero
-     implementation-relevant events, GOAT's `reference_parity` consumes all eleven today,
-     and v2 as frozen cannot represent that identity (their only state is terminal, so
-     its coverage is synthesised `modern` and any authored identity is discarded).
-     Migrating them as-is would break GOAT parity and silently discard canonical data.
-     How parity-only identity should be represented is an explicit open decision — no
-     schema field has been invented for it.
+     order-aware migration, not a rename; 47 already researched, 2 needing manual
+     review). Equivalence is necessary but not sufficient for migration readiness:
+     of the 247, only **236 are currently immediately migratable** — the remaining
+     **11 parity-only identity records are blocked** independently of equivalence:
+     they carry a historical passcode with zero implementation-relevant events, GOAT's
+     `reference_parity` consumes all eleven today, and v2 as frozen cannot represent
+     that identity (their only state is terminal, so its coverage is synthesised
+     `modern` and any authored identity is discarded). Migrating them as-is would break
+     GOAT parity and silently discard canonical data. How parity-only identity should
+     be represented is an explicit open decision — no schema field has been invented
+     for it.
 
 ## Phase 2 — framework completeness
 

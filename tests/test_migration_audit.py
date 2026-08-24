@@ -38,16 +38,20 @@ from retroformats.repo import Repository
 
 from . import migration_audit as audit
 from .migration_audit import (
-    CAT_BLOCKER,
     CAT_COSMETIC_ONLY,
     CAT_FULL_SINGLE,
+    CAT_MANUAL_REVIEW,
     CAT_MULTI_ORDERED,
     CAT_PARITY_ONLY,
+    CAT_RESEARCHED_NONTRIVIAL,
     CAT_SUGAR,
+    MANUAL_REVIEW_IDS,
     ORDER_FULL,
     ORDER_NONE,
     ORDER_SINGLE,
     ORDER_ZERO,
+    RESEARCH_ALREADY_RESEARCHED,
+    RESEARCH_NEEDS_MANUAL_REVIEW,
     audit_corpus,
     candidate_v2,
     v1_claimed_states,
@@ -154,18 +158,51 @@ class MigrationAuditPartitionTest(unittest.TestCase):
                 self.assertEqual(2 ** r["relevant_event_count"], r["structural_state_count"], r["id"])
 
     def test_partition_counts(self):
+        """The 49 not-equivalent records are NOT uniformly manual-review:
+        only the 2 the design document names by name are. The other 47
+        already have a documented (if not further-subdivided) research
+        classification."""
         self.assertEqual(
             {
                 CAT_SUGAR: 180,
                 CAT_FULL_SINGLE: 35,
                 CAT_MULTI_ORDERED: 11,
-                CAT_BLOCKER: 49,
+                CAT_RESEARCHED_NONTRIVIAL: 47,
+                CAT_MANUAL_REVIEW: 2,
                 CAT_PARITY_ONLY: 11,
                 CAT_COSMETIC_ONLY: 10,
             },
             self.summary["categories"],
         )
         self.assertEqual(296, sum(self.summary["categories"].values()))
+
+    def test_current_migration_readiness_accounting(self):
+        """Equivalence (247) is necessary, not sufficient: only 236 are
+        currently eligible to migrate without first solving the 11
+        parity-only representation problem. The bookkeeping must say so
+        explicitly rather than reporting '247 safe to migrate'."""
+        self.assertEqual(247, self.summary["semantic_equivalent"])
+        self.assertEqual(236, self.summary["immediately_migratable"])
+        self.assertEqual(11, self.summary["parity_only_blocked"])
+        self.assertEqual(236 + 11, self.summary["semantic_equivalent"])
+        self.assertEqual(49, self.summary["nontrivial_migration_scope"])
+        self.assertEqual(47, self.summary["nontrivial_already_researched"])
+        self.assertEqual(2, self.summary["nontrivial_needs_manual_review"])
+        self.assertEqual(
+            ["erratum-insect-imitation", "erratum-last-will"],
+            self.summary["nontrivial_needs_manual_review_ids"],
+        )
+        self.assertEqual(47 + 2, self.summary["nontrivial_migration_scope"])
+
+    def test_manual_review_ids_match_the_design_document(self):
+        self.assertEqual({"erratum-insect-imitation", "erratum-last-will"}, MANUAL_REVIEW_IDS)
+        for rid in MANUAL_REVIEW_IDS:
+            self.assertEqual(CAT_MANUAL_REVIEW, self.by_id[rid]["category"])
+            self.assertEqual(RESEARCH_NEEDS_MANUAL_REVIEW, self.by_id[rid]["research_status"])
+        for row in self.rows:
+            if row["category"] == CAT_RESEARCHED_NONTRIVIAL:
+                self.assertNotIn(row["id"], MANUAL_REVIEW_IDS)
+                self.assertEqual(RESEARCH_ALREADY_RESEARCHED, row["research_status"])
 
     def test_sugar_eligibility_requires_one_event_in_total(self):
         """Under full-event semantics every change is an event, including
@@ -244,7 +281,11 @@ class GiantRatWorkedExampleTest(unittest.TestCase):
     def test_not_equivalent_and_self_contradictory(self):
         self.assertFalse(self.row["equivalent"])
         self.assertTrue(self.row["legacy_self_contradictory"])
-        self.assertEqual(CAT_BLOCKER, self.row["category"])
+        # Giant Rat is not one of the design document's 2 named
+        # manual-review records - it already has a documented research
+        # classification (the Edison-audit "bundled" taxonomy).
+        self.assertEqual(CAT_RESEARCHED_NONTRIVIAL, self.row["category"])
+        self.assertNotIn(self.record.id, MANUAL_REVIEW_IDS)
 
     def test_v1_claims_verification_v2_proves_activation(self):
         v1_states = v1_claimed_states(self.record, self.EDISON)
@@ -268,7 +309,7 @@ class GiantRatWorkedExampleTest(unittest.TestCase):
         and reuse-upstream 504700172."""
         v1_states = v1_claimed_states(self.record, self.EDISON)
         v2_states = v2_claimed_states(self.v2, self.EDISON)
-        baseline = (frozenset(), ("historical", 504700172, ()))
+        baseline = (frozenset(), ("reuse-upstream", 504700172, ()))
         self.assertIn(baseline, v1_states)
         self.assertIn(baseline, v2_states)
 
@@ -281,8 +322,8 @@ class CardinalityCollapseRegressionTest(unittest.TestCase):
     treated them as the same state."""
 
     def test_equal_size_different_identity_states_compare_unequal(self):
-        a_state = (frozenset({"c0"}), ("historical", 1, ()))
-        b_state = (frozenset({"c1"}), ("historical", 1, ()))
+        a_state = (frozenset({"c0"}), ("reuse-upstream", 1, ()))
+        b_state = (frozenset({"c1"}), ("reuse-upstream", 1, ()))
         self.assertEqual(len(a_state[0]), len(b_state[0]), "same cardinality...")
         self.assertNotEqual(a_state, b_state, "...but not the same state")
         self.assertNotEqual({a_state}, {b_state})
@@ -517,9 +558,9 @@ class AuditSensitivityTest(unittest.TestCase):
         v1_states = v1_claimed_states(v1, self.SNAPSHOT)
         v2_states = v2_claimed_states(v2, self.SNAPSHOT)
         # v1 still thinks the pre-errata baseline is a live possibility...
-        self.assertIn((frozenset(), ("historical", 511000001, ())), v1_states)
+        self.assertIn((frozenset(), ("reuse-upstream", 511000001, ())), v1_states)
         # ...v2's full-event reasoning has already ruled it out.
-        self.assertNotIn((frozenset(), ("historical", 511000001, ())), v2_states)
+        self.assertNotIn((frozenset(), ("reuse-upstream", 511000001, ())), v2_states)
         self.assertNotEqual(v1_states, v2_states)
 
 
@@ -655,6 +696,172 @@ class AuditIsNotVacuousTest(unittest.TestCase):
             self.baseline_not_equivalent,
             "shifted coverage must break MORE records than the genuine 49",
         )
+
+
+class CoveragePreservationTest(unittest.TestCase):
+    """Task objective 1: every coverage field with a direct v2
+    representation must survive migration, not just executable identity.
+    `script` is optional-but-allowed on reuse-upstream coverage (schema's
+    `coverageReuseUpstream` permits it) and was previously silently
+    dropped - Giant Rat's baseline implementation is the concrete
+    counterexample the task names, but the fix applies to all 242
+    reuse-upstream implementations in the corpus, all of which carry a
+    `script` alongside `upstream`."""
+
+    def test_giant_rat_script_survives_migration(self):
+        repo = Repository.load(audit.REPO_ROOT)
+        record = repo.errata["erratum-giant-rat"]
+        v2 = candidate_v2(record)
+        baseline = v2.authored_states[frozenset()]
+        self.assertEqual("goat/c504700172.lua", baseline.script)
+        self.assertTrue(audit._coverage_preserved(record, v2))
+        self.assertTrue(audit._data_preserved(record, v2))
+
+    def test_all_296_records_pass_coverage_preservation(self):
+        repo = Repository.load(audit.REPO_ROOT)
+        for record in repo.errata.values():
+            if not isinstance(record, Erratum):
+                continue
+            v2 = audit.candidate_v2(record)
+            self.assertTrue(audit._coverage_preserved(record, v2), record.id)
+
+    def test_check_is_independent_of_construction_a_dropped_script_is_detected(self):
+        """Mutation test: if `_coverage_from_v1()` regressed and silently
+        dropped `script` again, `_coverage_preserved()` must notice - it
+        does NOT trust `candidate_v2()` merely because it constructed the
+        candidate itself; it re-derives the expectation from the v1 record
+        independently and checks the REAL parsed coverage."""
+        repo = Repository.load(audit.REPO_ROOT)
+        record = repo.errata["erratum-giant-rat"]
+        real_coverage_from_v1 = audit._coverage_from_v1
+
+        def dropping_script(impl):
+            coverage = real_coverage_from_v1(impl)
+            if coverage is not None:
+                coverage.pop("script", None)
+            return coverage
+
+        try:
+            audit._coverage_from_v1 = dropping_script
+            v2 = audit.candidate_v2(record)
+        finally:
+            audit._coverage_from_v1 = real_coverage_from_v1
+        self.assertFalse(audit._coverage_preserved(record, v2))
+
+
+class CoverageKindDistinctionTest(unittest.TestCase):
+    """Task objective 3: reuse-upstream and custom-script at the SAME
+    passcode are different migration-data claims (different provenance,
+    different `COVERAGE_FIELDS` shape) and must not compare equal merely
+    because both currently execute as the identical substitution; a
+    known-gap must not compare equal to a DIFFERENT known-gap merely
+    because both fall back to modern execution today."""
+
+    def test_reuse_upstream_and_custom_script_have_different_signatures(self):
+        self.assertNotEqual(
+            audit._v1_coverage_signature({"strategy": "reuse-upstream", "historical_passcode": 1}),
+            audit._v1_coverage_signature(
+                {"strategy": "custom-script", "historical_passcode": 1, "script": "x.lua"}
+            ),
+        )
+
+    def test_known_gap_reasons_are_not_conflated(self):
+        a = audit._v1_coverage_signature({"strategy": "unresolved", "gap": {"reason": "A", "sources": ["s"]}})
+        b = audit._v1_coverage_signature({"strategy": "unresolved", "gap": {"reason": "B", "sources": ["s"]}})
+        bare_unresolved = audit._v1_coverage_signature({"strategy": "unresolved"})
+        self.assertNotEqual(a, b)
+        self.assertNotEqual(a, bare_unresolved)
+        self.assertNotEqual(b, bare_unresolved)
+
+    def test_v2_side_agrees(self):
+        from retroformats.model import Coverage, ImplementationCoverage
+
+        ru = ImplementationCoverage(kind=Coverage.REUSE_UPSTREAM, historical_passcode=1)
+        cs = ImplementationCoverage(kind=Coverage.CUSTOM_SCRIPT, historical_passcode=1)
+        self.assertNotEqual(audit._v2_coverage_signature(ru), audit._v2_coverage_signature(cs))
+        gap_a = ImplementationCoverage(kind=Coverage.KNOWN_GAP, gap_reason="A", gap_sources=("s",))
+        gap_b = ImplementationCoverage(kind=Coverage.KNOWN_GAP, gap_reason="B", gap_sources=("s",))
+        self.assertNotEqual(audit._v2_coverage_signature(gap_a), audit._v2_coverage_signature(gap_b))
+
+    def test_mutation_swapping_coverage_kind_is_detected(self):
+        """A real, currently-equivalent reuse-upstream sugar record: swap
+        its candidate coverage to custom-script at the SAME passcode. The
+        audit MUST now report it non-equivalent - coverage KIND is part of
+        the migration-data claim, not just the final passcode."""
+        repo = Repository.load(audit.REPO_ROOT)
+        record = repo.errata["erratum-a-cat-of-ill-omen"]
+        baseline_row = audit.compare(record)
+        self.assertTrue(baseline_row["equivalent"])
+        self.assertEqual("reuse-upstream", record.implementation.get("strategy"))
+
+        real_candidate = audit.candidate_v2
+
+        def kind_swapped(rec):
+            v2 = real_candidate(rec)
+            if rec.id != record.id:
+                return v2
+            raw = dict(v2.raw)
+            states = []
+            for entry in raw.get("states", []):
+                entry = dict(entry)
+                coverage = dict(entry["coverage"])
+                if coverage.get("kind") == "reuse-upstream":
+                    coverage["kind"] = "custom-script"
+                    coverage.setdefault("script", "goat/mutated.lua")
+                    coverage.pop("upstream", None)
+                entry["coverage"] = coverage
+                states.append(entry)
+            raw["states"] = states
+            return ErratumV2.load(raw, Path(rec.path))
+
+        try:
+            audit.candidate_v2 = kind_swapped
+            mutated_row = audit.compare(record)
+        finally:
+            audit.candidate_v2 = real_candidate
+        self.assertFalse(
+            mutated_row["equivalent"],
+            "swapping reuse-upstream to custom-script at the same passcode must be detected",
+        )
+
+
+class MetadataInventoryTest(unittest.TestCase):
+    """Task objective 1's honest inventory: v1 implementation metadata with
+    NO v2 coverage destination must be reported explicitly, not silently
+    folded into "data_preserved=True" by omission. UNKNOWN != DISCARD."""
+
+    @classmethod
+    def setUpClass(cls):
+        repo = Repository.load(audit.REPO_ROOT)
+        cls.inventory = {row["field"]: row for row in audit.metadata_inventory(repo.errata)}
+
+    def test_known_unrepresented_fields_are_reported(self):
+        expected_counts = {
+            "status": 312,
+            "tested": 252,
+            "gap.upstream_checked": 56,
+            "gap.behavioural_impact": 56,
+        }
+        for field, count in expected_counts.items():
+            self.assertIn(field, self.inventory)
+            self.assertEqual(count, self.inventory[field]["record_count"], field)
+            self.assertFalse(self.inventory[field]["has_v2_destination"], field)
+            self.assertTrue(self.inventory[field]["would_be_lost_on_migration"], field)
+            self.assertTrue(self.inventory[field]["representative_ids"], field)
+
+    def test_represented_fields_are_not_in_the_inventory(self):
+        """Fields WITH a v2 destination (including the newly-fixed
+        `script`/`upstream` optional pair) must not appear as losses."""
+        for field in (
+            "historical_passcode",
+            "historical_variant_passcodes",
+            "upstream",
+            "script",
+            "strategy",
+            "gap.reason",
+            "gap.sources",
+        ):
+            self.assertNotIn(field, self.inventory, field)
 
 
 if __name__ == "__main__":

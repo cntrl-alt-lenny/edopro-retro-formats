@@ -905,3 +905,85 @@ class MalformedPasscodeHardeningTest(V2ConsumerTestBase):
         repo = self._repo()
         Validator(repo).validate()
         self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+
+
+class StrictPasscodeSemanticsTest(unittest.TestCase):
+    """`_is_valid_passcode()` must match the schema's `passcode` def
+    EXACTLY (`type: integer, minimum: 1, maximum: 4294967295`), not a
+    coercive `int(value)`: a numeric string, a bool, and a non-integral
+    float are all schema-invalid and must never silently become usable."""
+
+    def test_numeric_string_is_invalid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode("123"))
+
+    def test_non_integer_string_is_invalid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode("not-a-passcode"))
+
+    def test_non_integral_float_is_invalid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode(1.5))
+
+    def test_integral_float_is_still_invalid(self):
+        """123.0 is a JSON `number`, not a JSON `integer` - int(True) == 1
+        and int(123.0) == 123 tempt a coercive implementation, but this
+        project's own schema checker does not accept either as `integer`."""
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode(123.0))
+
+    def test_bool_is_invalid_despite_being_an_int_subclass(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode(True))
+        self.assertFalse(_is_valid_passcode(False))
+
+    def test_zero_is_below_minimum(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode(0))
+
+    def test_above_maximum_is_invalid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertFalse(_is_valid_passcode(4294967296))
+
+    def test_lower_and_upper_boundaries_are_valid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertTrue(_is_valid_passcode(1))
+        self.assertTrue(_is_valid_passcode(4294967295))
+
+    def test_ordinary_passcode_is_valid(self):
+        from retroformats.model import _is_valid_passcode
+
+        self.assertTrue(_is_valid_passcode(511000042))
+
+
+class NumericStringPasscodeIsReportedTest(V2ConsumerTestBase):
+    """The end-to-end regression: a numeric-STRING passcode must be
+    reported by the validator, not silently coerced into the integer it
+    looks like - the exact gap a coercive `int(value)` check would reopen."""
+
+    def test_v2_numeric_string_passcode_is_reported_not_silently_coerced(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "reuse-upstream",
+                        "historical_passcode": "511000900",
+                        "upstream": "ProjectIgnis",
+                    },
+                }
+            ],
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))

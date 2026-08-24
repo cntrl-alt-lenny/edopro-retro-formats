@@ -38,20 +38,28 @@ def parse_date(value: str) -> _dt.date:
     return _dt.date.fromisoformat(value)
 
 
-# The schema's own `passcode` def (schemas/common.schema.json): an integer in
-# 1..4294967295. `ImplementationCoverage`/v1 `implementation` dicts keep
-# historical_passcode/historical_variant_passcodes RAW (design doc: "fail
-# only on structurally unusable input" — semantic validation is the
-# validator's job) - but "raw" still means a non-integer value must never
+# The schema's own `passcode` def (schemas/common.schema.json): `type:
+# integer, minimum: 1, maximum: 4294967295`. "integer" here means EXACTLY
+# what tests/schema_check.py's own `_matches_type(v, "integer")` means for
+# this project's JSON model — `isinstance(v, int) and not isinstance(v,
+# bool)` — never a coercive `int(v)`. That excludes a numeric string
+# ("123"), a bool (`isinstance(True, int)` is True in Python, but `True` is
+# never a JSON integer), and a float even when integral (123.0 is a JSON
+# `number`, not a JSON `integer` — this project's own schema checker does
+# not treat it as one, so neither does this function). Pinned against
+# schema_check's own type matcher by
+# tests/test_erratum_schema.py::PasscodeValiditySchemaAgreementTest, so the
+# two cannot silently diverge. `ImplementationCoverage`/v1 `implementation`
+# dicts keep historical_passcode/historical_variant_passcodes RAW (design
+# doc: "fail only on structurally unusable input" — semantic validation is
+# the validator's job) - but "raw" still means a malformed value must never
 # reach a bare `int(...)` call anywhere fail-safety is promised. Used by
 # `Erratum.selection_at()` below, and imported into lflist.py/validate.py so
 # there is exactly one definition of "valid passcode", not three.
 def _is_valid_passcode(value: Any) -> bool:
-    try:
-        n = int(value)
-    except (TypeError, ValueError):
+    if not isinstance(value, int) or isinstance(value, bool):
         return False
-    return 1 <= n <= 4294967295
+    return 1 <= value <= 4294967295
 
 
 @dataclass(frozen=True)
