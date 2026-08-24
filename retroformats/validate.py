@@ -45,6 +45,7 @@ from .model import (
     territory_matches_scope,
 )
 from .model import _precision_bounds as _model_precision_bounds
+from .model import _is_valid_passcode
 from .releases import ReleaseIndex, default_scope, evaluate_cutoff
 from .repo import Repository
 
@@ -841,15 +842,22 @@ class Validator:
                     f"{location}.coverage: strategy {kind} but no historical_passcode",
                 )
             else:
-                self._check_card_alias(int(hist), erratum, f"{location}.coverage")
+                hist_int = self._safe_passcode(hist, erratum, f"{location}.coverage", "historical_passcode")
+                if hist_int is not None:
+                    self._check_card_alias(hist_int, erratum, f"{location}.coverage")
                 for variant in coverage.get("historical_variant_passcodes", []) or []:
-                    if abs(int(variant) - int(hist)) >= 10:
+                    variant_int = self._safe_passcode(
+                        variant, erratum, f"{location}.coverage", "historical_variant_passcodes entry"
+                    )
+                    if variant_int is None or hist_int is None:
+                        continue
+                    if abs(variant_int - hist_int) >= 10:
                         self.error(
                             "erratum.variant-out-of-range",
                             erratum.path,
                             f"{location}.coverage: variant {variant} is not within +/-10 of {hist}",
                         )
-                    self._check_card_alias(int(variant), erratum, f"{location}.coverage")
+                    self._check_card_alias(variant_int, erratum, f"{location}.coverage")
             if kind == "reuse-upstream" and not coverage.get("upstream"):
                 self.error(
                     "erratum.no-upstream",
@@ -1268,16 +1276,45 @@ class Validator:
                 self._check_sources(list(gap["sources"]), erratum.path, None, f"{what} gap")
         hist = impl.get("historical_passcode")
         if hist:
-            self._check_card_alias(int(hist), erratum, what)
+            hist_int = self._safe_passcode(hist, erratum, what, "historical_passcode")
+            if hist_int is not None:
+                self._check_card_alias(hist_int, erratum, what)
             for variant in impl.get("historical_variant_passcodes", []) or []:
-                if abs(int(variant) - int(hist)) >= 10:
+                variant_int = self._safe_passcode(variant, erratum, what, "historical_variant_passcodes entry")
+                if variant_int is None or hist_int is None:
+                    continue
+                if abs(variant_int - hist_int) >= 10:
                     self.error(
                         "erratum.variant-out-of-range",
                         erratum.path,
                         f"{what}: variant {variant} is not within +/-10 of {hist}; EDOPro "
                         "treats farther codes as separate cards, not artwork variants",
                     )
-                self._check_card_alias(int(variant), erratum, what)
+                self._check_card_alias(variant_int, erratum, what)
+
+    def _safe_passcode(self, value: object, erratum, what: str, field: str) -> int | None:
+        """int(value), guarded against non-integer/out-of-range passcode data
+        (schema's `passcode` def: an integer in 1..4294967295) -
+        `Repository.load()` keeps historical_passcode/historical_variant_
+        passcodes RAW and runs before any schema check, so malformed data
+        here must become an ERROR finding, never an uncaught ValueError."""
+        try:
+            n = int(value)
+        except (TypeError, ValueError):
+            self.error(
+                "erratum.malformed-passcode",
+                erratum.path,
+                f"{what}: {field} {value!r} is not an integer passcode",
+            )
+            return None
+        if not _is_valid_passcode(n):
+            self.error(
+                "erratum.malformed-passcode",
+                erratum.path,
+                f"{what}: {field} {n} is outside the valid passcode range 1..4294967295",
+            )
+            return None
+        return n
 
     def _check_card_alias(self, historical_passcode: int, erratum, what: str = "implementation") -> None:
         index = self.repo.card_index

@@ -5,6 +5,17 @@ exists as code, re-runnable, rather than as numbers pasted into prose: the
 migration partition is an OUTPUT derived from evidence, never an input
 assumption carried forward from an earlier pass.
 
+**Corrected pass**: the first version of this tool compared v1 and candidate-
+v2 outcomes by collapsing a v2 ambiguous candidate down to `len(candidate
+.events)` and comparing that INTEGER against v1's positional candidate index.
+That is invalid - it is exactly the cardinality abstraction v2 exists to
+replace, and it silently equates two candidates that are not the same state
+(`{A}` and `{B}` both have length 1). It produced a false 296/296 equivalence
+claim. The comparison below is a genuine SET comparison of (event-identity,
+coverage-signature) pairs: `{A}` and `{B}` compare unequal even though they
+are the same size, and a v1-claimed state that v2's real chronology proves
+impossible is reported as a real mismatch, not laundered through an integer.
+
 What it does, per v1 record:
 
 1. Builds the *candidate* v2 record the migration would produce:
@@ -19,14 +30,43 @@ What it does, per v1 record:
      v1's own semantics ARE positional, so this is a faithful reading of
      what the v1 record asserts about implementations - it is not used as
      ordering evidence.
+   - historical_text/modern_text/summary/sources are carried across
+     verbatim, never just the executable strategy - `_data_preserved()`
+     checks this independently of the outcome comparison (this task: "audit
+     preservation ... rather than checking executable behaviour alone").
+   - no field the v2 coverage schema requires is ever fabricated: a v1
+     implementation missing `upstream`/`script`/`gap.reason`/`gap.sources`
+     raises `MigrationDataMissing` rather than substituting a
+     plausible-looking placeholder (UNKNOWN != GUESS). No record in the
+     current 296-record corpus exercises this path (verified by scan); the
+     tool must not depend on that staying true.
 
-2. Compares v1 and candidate-v2 selection at EVERY chronology boundary the
-   record can have. The comparison is exact and finite, not sampled: an
+2. Compares v1's CLAIMED semantic states against v2's REAL semantic states at
+   EVERY chronology boundary the record can have. "Claimed" means: v1's
+   positional label `k` asserts that the first `k` relevant changes (in
+   array order) occurred and the rest did not - restated in v2's event-id
+   vocabulary so the two are directly comparable, purely for audit purposes.
+   This does NOT turn array order into v2 ordering evidence; it only asks
+   what the legacy label meant, then checks whether v2's real, chronology-
+   and-structure-derived candidate set contains that exact state, with the
+   exact same coverage. The comparison is exact and finite, not sampled: an
    event's OLD/AMBIGUOUS/NEW status only changes at the handful of dates its
    own evidence names, so the union of those dates (each probed at the day
    before, on, and the day after) covers every distinguishable snapshot.
 
-3. Classifies the record by WHY it is or is not equivalence-safe.
+3. Separately, exactly reproduces design doc section 7's legacy-48 self-
+   contradiction test: v1's own positional candidate `k` is self-
+   contradictory at a snapshot if it claims a transition occurred that is
+   independently confirmed OLD, or claims one has not occurred that is
+   independently confirmed NEW. This is a DIFFERENT question from
+   equivalence (a record can be self-contradictory yet still equivalent to
+   v2 once v2 excludes the impossible candidate, or vice versa) and is
+   reported as its own field, never folded into "equivalent".
+
+4. Classifies the record by WHY it is or is not equivalence-safe, and
+   reports orthogonal structural facts (sugar eligibility, ordering
+   structure - none/partial/fully-ordered, never "has any edge") separately
+   rather than forcing every record into one overloaded label.
 
 Nothing here writes to data/errata/. The audit is read-only.
 """
@@ -40,18 +80,24 @@ from pathlib import Path
 
 from retroformats.model import (
     IMPLEMENTATION_RELEVANT_KINDS,
-    _precision_bounds,
+    NEW,
+    OLD,
     PROVEN,
     Coverage,
     Erratum,
     ErratumV2,
+    ImplementationCoverage,
     SelectionError,
+    _is_valid_passcode,
+    _precision_bounds,
+    change_state_at,
     ordering_proof,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-# --- categories -------------------------------------------------------------
+# --- categories (a coarse, human-legible summary label - see the orthogonal
+# fields on each row for the facts it is derived from) ----------------------
 CAT_SUGAR = "sugar-eligible"
 CAT_FULL_SINGLE = "full-v2-single-event"
 CAT_MULTI_ORDERED = "full-v2-multi-event-ordered"
@@ -60,6 +106,21 @@ CAT_NONRELEVANT_CHRONOLOGY = "nonrelevant-event-constrains-relevant"
 CAT_PARITY_ONLY = "parity-only-identity"
 CAT_COSMETIC_ONLY = "no-historical-state"
 CAT_BLOCKER = "manual-review-blocker"
+
+# --- ordering structure: "has a proven edge" is NOT "fully ordered" --------
+ORDER_ZERO = "zero-relevant"
+ORDER_SINGLE = "single-event"
+ORDER_NONE = "no-proven-ordering"
+ORDER_PARTIAL = "partial-order"
+ORDER_FULL = "fully-ordered"
+
+
+class MigrationDataMissing(ValueError):
+    """A v1 record's authored implementation lacks a field v2's coverage
+    schema requires. Raised rather than papered over with a plausible-
+    looking default (`upstream or "ProjectIgnis"` and similar were removed
+    for exactly this reason) - UNKNOWN != GUESS applies to this tool's own
+    output, not only to canonical data."""
 
 
 def _event_id(index: int) -> str:
@@ -103,6 +164,10 @@ def boundary_dates(record: Erratum) -> list[_dt.date]:
     return sorted(probes)
 
 
+def _relevant_indices(record: Erratum) -> list[int]:
+    return [i for i, c in enumerate(record.changes) if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS]
+
+
 def candidate_v2(record: Erratum) -> ErratumV2:
     """The v2 record this v1 record would migrate to, under the rules in this
     module's docstring."""
@@ -113,6 +178,9 @@ def candidate_v2(record: Erratum) -> ErratumV2:
             "transitions": [
                 {
                     "kind": change.get("kind"),
+                    "axis": change.get("axis"),
+                    "historical_text": change.get("historical_text"),
+                    "modern_text": change.get("modern_text"),
                     "summary": change.get("summary", ""),
                     "sources": list(change.get("sources", [])),
                 }
@@ -131,9 +199,7 @@ def candidate_v2(record: Erratum) -> ErratumV2:
                 edges.append({"before": before, "after": after, "basis": "date-proven"})
 
     # states[]: v1's positional version chain, read faithfully.
-    relevant_indices = [
-        i for i, c in enumerate(record.changes) if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS
-    ]
+    relevant_indices = _relevant_indices(record)
     states = []
     for version, _ in enumerate([None] + relevant_indices[:-1] if relevant_indices else [None]):
         impl = record.implementation_for_version(version)
@@ -157,31 +223,53 @@ def candidate_v2(record: Erratum) -> ErratumV2:
     return ErratumV2.load(raw, record.path)
 
 
-def _coverage_from_v1(impl: dict) -> dict:
+def _coverage_from_v1(impl: dict) -> dict | None:
+    """Maps a v1 implementation to the v2 coverage it would author. Every
+    branch reads only fields the v1 record actually carries; none fabricates
+    a default. `strategy == "unresolved"` with no gap returns None (no v2
+    coverage is authored at all - v2's own UNRESOLVED default applies,
+    exactly matching what "unresolved, undocumented" already means)."""
     strategy = impl.get("strategy")
     if strategy == "reuse-upstream":
+        passcode, upstream = impl.get("historical_passcode"), impl.get("upstream")
+        if not passcode or not upstream:
+            raise MigrationDataMissing(
+                "reuse-upstream implementation is missing "
+                f"{'historical_passcode' if not passcode else 'upstream'} - v2 cannot author "
+                "this coverage without inventing a value"
+            )
         return {
             "kind": "reuse-upstream",
-            "historical_passcode": impl.get("historical_passcode"),
+            "historical_passcode": passcode,
             "historical_variant_passcodes": list(impl.get("historical_variant_passcodes", [])),
-            "upstream": impl.get("upstream") or "ProjectIgnis",
+            "upstream": upstream,
         }
     if strategy == "custom-script":
+        passcode, script = impl.get("historical_passcode"), impl.get("script")
+        if not passcode or not script:
+            raise MigrationDataMissing(
+                "custom-script implementation is missing "
+                f"{'historical_passcode' if not passcode else 'script'} - v2 cannot author "
+                "this coverage without inventing a value"
+            )
         return {
             "kind": "custom-script",
-            "historical_passcode": impl.get("historical_passcode"),
+            "historical_passcode": passcode,
             "historical_variant_passcodes": list(impl.get("historical_variant_passcodes", [])),
-            "script": impl.get("script") or "dist/scripts/unknown.lua",
+            "script": script,
         }
     if strategy == "none-needed":
         return {"kind": "none-needed"}
     gap = impl.get("gap") or {}
     if strategy == "unresolved" and gap:
-        return {
-            "kind": "known-gap",
-            "gap_reason": gap.get("reason") or "unspecified",
-            "gap_sources": list(gap.get("sources") or ["ignis-babelcdb"]),
-        }
+        reason, sources = gap.get("reason"), gap.get("sources")
+        if not reason or not sources:
+            raise MigrationDataMissing(
+                "unresolved implementation's gap is missing "
+                f"{'reason' if not reason else 'sources'} - v2 cannot author this known-gap "
+                "coverage without inventing a value"
+            )
+        return {"kind": "known-gap", "gap_reason": reason, "gap_sources": list(sources)}
     if strategy == "unresolved":
         # An unresolved v1 implementation with no acknowledged gap has no
         # authorable v2 coverage at all: 'unresolved' is never authored, it is
@@ -191,114 +279,243 @@ def _coverage_from_v1(impl: dict) -> dict:
     raise ValueError(f"no v2 coverage mapping for v1 strategy {strategy!r}")
 
 
-# --- outcome comparison -----------------------------------------------------
+def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
+    """Migration must not silently drop documentation fields even where
+    executable behaviour is unaffected: every change's historical_text,
+    modern_text, summary and sources must survive verbatim into its
+    candidate event's sole transition."""
+    for index, change in enumerate(record.changes):
+        event = v2.events.get(_event_id(index))
+        if event is None or not event.transitions:
+            return False
+        transition = event.transitions[0]
+        if transition.historical_text != change.get("historical_text"):
+            return False
+        if transition.modern_text != change.get("modern_text"):
+            return False
+        if transition.summary != change.get("summary", ""):
+            return False
+        if tuple(transition.sources) != tuple(change.get("sources", [])):
+            return False
+    return True
 
-def v1_outcome(record: Erratum, day: _dt.date) -> tuple:
-    """What legacy v1 selection would execute at `day`, as a comparable
-    tuple: the chronology verdict plus the concrete identity, if any."""
-    selection = record.selection_at(day)
-    if selection.state == "historical":
-        impl = selection.implementation or {}
-        return ("historical", impl.get("historical_passcode"),
-                tuple(impl.get("historical_variant_passcodes", ())))
-    if selection.state == "modern":
+
+# --- semantic outcome comparison ---------------------------------------------
+# A "state" is compared as (frozenset of event ids, coverage signature) - NEVER
+# as an integer, a cardinality, or a version index. Two states with the same
+# `len(events)` but different identities (`{A}` vs `{B}`) are different states.
+
+def _v1_coverage_signature(impl: dict | None) -> tuple:
+    """What v1's OWN `selection_at()` determinate branch treats this
+    implementation as executing, restated as a comparable tuple - mirrors
+    that branch's exact logic rather than a reinvented rule, so "claimed"
+    can never silently drift from what v1 actually does when determinate."""
+    if impl is None or impl.get("strategy") == "unresolved":
+        gap = (impl or {}).get("gap")
+        return ("gap", "known") if gap else ("gap", "unresolved")
+    if impl.get("strategy") == "none-needed":
         return ("modern",)
-    if selection.state == "gap":
-        return ("gap",)
-    return ("ambiguous", tuple(sorted(selection.candidates)))
+    passcode = impl.get("historical_passcode")
+    if not passcode or not _is_valid_passcode(passcode):
+        return ("gap", "unresolved")
+    return ("historical", passcode, tuple(impl.get("historical_variant_passcodes", ())))
 
 
-def v2_outcome(record: ErratumV2, day: _dt.date) -> tuple:
-    """The same question of the candidate v2 record, mapped onto the same
-    vocabulary so the two are directly comparable."""
+def _v1_claimed_state(record: Erratum, relevant_indices: list[int], k: int) -> tuple:
+    """What v1's positional label `k` CLAIMS, for audit purposes ONLY: the
+    down-set of the first `k` relevant events (array order) is v1's own
+    positional assumption about which transitions occurred, restated in
+    v2's event-id vocabulary so it is directly comparable to a REAL v2
+    candidate's `.events` identity. This does NOT turn array order into v2
+    ordering evidence - it only asks what the legacy label meant."""
+    events = frozenset(_event_id(i) for i in relevant_indices[:k])
+    if k >= len(relevant_indices):
+        return events, ("modern",)
+    return events, _v1_coverage_signature(record.implementation_for_version(k))
+
+
+def v1_claimed_states(record: Erratum, day: _dt.date) -> frozenset:
+    """Every (event-set, coverage-signature) pair v1 claims is plausible at
+    `day` - the full SET, not its size: one pair for a determinate
+    selection, one per candidate index for an ambiguous one."""
+    relevant_indices = _relevant_indices(record)
+    selection = record.selection_at(day)
+    if selection.state == "ambiguous":
+        ks = selection.candidates
+    elif selection.version_index is not None:
+        ks = (selection.version_index,)
+    else:
+        ks = (len(relevant_indices),)  # no relevant changes: always terminal/modern
+    return frozenset(_v1_claimed_state(record, relevant_indices, k) for k in ks)
+
+
+def _v2_coverage_signature(coverage: ImplementationCoverage) -> tuple:
+    if coverage.kind in (Coverage.MODERN, Coverage.NONE_NEEDED):
+        return ("modern",)
+    if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+        if not coverage.historical_passcode or not _is_valid_passcode(coverage.historical_passcode):
+            return ("gap", "unresolved")
+        return ("historical", coverage.historical_passcode, tuple(coverage.historical_variant_passcodes))
+    if coverage.kind == Coverage.KNOWN_GAP:
+        return ("gap", "known")
+    return ("gap", "unresolved")  # UNRESOLVED
+
+
+def v2_claimed_states(record: ErratumV2, day: _dt.date) -> frozenset | None:
+    """The REAL v2 candidate set at `day`: every structurally-and-
+    chronologically-consistent `HistoricalState`'s own (events, coverage)
+    identity, read directly off `selection_at()` - never reduced to a
+    cardinality. None means the candidate is contradictory at this
+    snapshot."""
     try:
         selection = record.selection_at(day)
     except SelectionError:
-        return ("contradictory",)
-    all_relevant = frozenset(e.id for e in record.relevant_events())
-    if selection.chronology == "determinate":
-        state = selection.candidates[0]
-        if state.events == all_relevant:
-            return ("modern",)
-        coverage = state.coverage
-        if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
-            return ("historical", coverage.historical_passcode,
-                    tuple(coverage.historical_variant_passcodes))
-        if coverage.kind == Coverage.NONE_NEEDED:
-            return ("modern",)
-        return ("gap",)
-    # Ambiguous: compare the SET of plausible relevant-event down-sets, as
-    # index-sets, against v1's candidate version indices.
-    relevant_sorted = [e.id for e in record.relevant_events()]
-    indices = []
-    for candidate in selection.candidates:
-        indices.append(len(candidate.events))
-    return ("ambiguous", tuple(sorted(set(indices))))
+        return None
+    return frozenset((c.events, _v2_coverage_signature(c.coverage)) for c in selection.candidates)
+
+
+def _fmt_states(states) -> list[dict]:
+    return [
+        {"events": sorted(events), "coverage": list(sig)}
+        for events, sig in sorted(states, key=lambda pair: (len(pair[0]), sorted(pair[0])))
+    ]
+
+
+def _ordering_structure(relevant_count: int, structural_state_count: int) -> str:
+    """none/partial/fully-ordered, from the RELEVANT-event down-set count the
+    ordering DAG structurally produces - never "has any proven edge", which
+    conflates a partial order (some pair proven, others not) with a total
+    one."""
+    if relevant_count == 0:
+        return ORDER_ZERO
+    if relevant_count == 1:
+        return ORDER_SINGLE
+    if structural_state_count == relevant_count + 1:
+        return ORDER_FULL
+    if structural_state_count == 2**relevant_count:
+        return ORDER_NONE
+    return ORDER_PARTIAL
+
+
+def _legacy_self_contradictory(record: Erratum, relevant_indices: list[int]) -> bool:
+    """Design doc section 7's EXACT test, implemented directly rather than
+    approximated: at some boundary date, v1's own `selection_at()` offers a
+    candidate index `k` that claims relevant transitions `0..k-1` occurred
+    and `k..end` did not, while at least one transition's OWN,
+    independently-computed OLD/AMBIGUOUS/NEW status contradicts that claim.
+    This is the "48" definition - never redefined as a proxy (modern-
+    excluded-at-some-format, ambiguous-at-a-snapshot, candidate count)."""
+    if len(relevant_indices) < 2:
+        return False  # self-contradiction requires an unproven-order pair
+    relevant_changes = [record.changes[i] for i in relevant_indices]
+    for day in boundary_dates(record):
+        selection = record.selection_at(day)
+        if selection.state != "ambiguous":
+            continue
+        statuses = [change_state_at(c, day) for c in relevant_changes]
+        for k in selection.candidates:
+            occurred, not_occurred = statuses[:k], statuses[k:]
+            if any(s == OLD for s in occurred) or any(s == NEW for s in not_occurred):
+                return True
+    return False
 
 
 def compare(record: Erratum) -> dict:
     """Full-boundary comparison of one record. Returns the audit row."""
+    relevant_indices = _relevant_indices(record)
+    impl = record.implementation or {}
     row: dict = {
         "id": record.id,
         "classification": record.classification,
-        "changes": len(record.changes),
-        "relevant_changes": len(record.relevant_changes()),
-        "nonrelevant_changes": len(record.changes) - len(record.relevant_changes()),
-        "baseline_strategy": (record.implementation or {}).get("strategy"),
-        "baseline_passcode": (record.implementation or {}).get("historical_passcode"),
+        "event_count": len(record.changes),
+        "relevant_event_count": len(relevant_indices),
+        "nonrelevant_event_count": len(record.changes) - len(relevant_indices),
+        "baseline_strategy": impl.get("strategy"),
+        "baseline_passcode": impl.get("historical_passcode"),
         "sources": list(record.sources),
         "change_kinds": [c.get("kind") for c in record.changes],
     }
+    row["parity_only_identity"] = (
+        not relevant_indices
+        and impl.get("strategy") in ("reuse-upstream", "custom-script")
+        and bool(impl.get("historical_passcode"))
+        and _is_valid_passcode(impl.get("historical_passcode"))
+    )
+    row["no_historical_state"] = not relevant_indices and not row["parity_only_identity"]
+
     try:
         v2 = candidate_v2(record)
     except Exception as exc:  # pragma: no cover - defensive
-        row.update(equivalent=False, reason=f"candidate-v2 construction failed: {exc}",
-                   category=CAT_BLOCKER)
+        row.update(
+            sugar_eligible=False,
+            ordering_structure="unknown",
+            structural_state_count=0,
+            proven_edge_count=0,
+            data_preserved=False,
+            legacy_self_contradictory=None,
+            equivalent=False,
+            mismatch_count=None,
+            first_mismatches=[],
+            contradictory_at=[],
+            reason=f"candidate-v2 construction failed: {exc}",
+            category=CAT_BLOCKER,
+        )
         return row
-    row["proven_edges"] = len(v2.raw_edges)
+
+    row["proven_edge_count"] = len(v2.raw_edges)
+    row["structural_state_count"] = len(v2.structural_states())
+    row["ordering_structure"] = _ordering_structure(len(relevant_indices), row["structural_state_count"])
+    row["sugar_eligible"] = row["event_count"] == 1 and row["relevant_event_count"] == 1
+    row["data_preserved"] = _data_preserved(record, v2)
+    row["legacy_self_contradictory"] = _legacy_self_contradictory(record, relevant_indices)
+
     mismatches = []
+    contradictory_at = []
     for day in boundary_dates(record):
-        a, b = v1_outcome(record, day), v2_outcome(v2, day)
-        if a != b:
-            mismatches.append({"date": day.isoformat(), "v1": list(a), "v2": list(b)})
+        v1_set = v1_claimed_states(record, day)
+        v2_set = v2_claimed_states(v2, day)
+        if v2_set is None:
+            contradictory_at.append(day.isoformat())
+            mismatches.append({"date": day.isoformat(), "v1": _fmt_states(v1_set), "v2": "contradictory"})
+            continue
+        if v1_set != v2_set:
+            mismatches.append(
+                {
+                    "date": day.isoformat(),
+                    "v1": _fmt_states(v1_set),
+                    "v2": _fmt_states(v2_set),
+                    "v1_only": _fmt_states(v1_set - v2_set),
+                    "v2_only": _fmt_states(v2_set - v1_set),
+                }
+            )
     row["equivalent"] = not mismatches
     row["mismatch_count"] = len(mismatches)
-    row["first_mismatches"] = mismatches[:3]
-    row["category"] = categorise(record, v2, row)
+    row["first_mismatches"] = mismatches[:5]
+    row["contradictory_at"] = contradictory_at
+    row["category"] = categorise(row, record, v2)
     return row
 
 
-def categorise(record: Erratum, v2: ErratumV2, row: dict) -> str:
-    relevant = row["relevant_changes"]
-    total = row["changes"]
-    if relevant == 0:
-        # No implementation-relevant history at all. Whether this is merely a
-        # cosmetic record or a parity-only IDENTITY question depends on
-        # whether v1 still carries a usable historical passcode.
-        impl = record.implementation or {}
-        usable = impl.get("strategy") in ("reuse-upstream", "custom-script") and impl.get(
-            "historical_passcode"
-        )
-        return CAT_PARITY_ONLY if usable else CAT_COSMETIC_ONLY
+def categorise(row: dict, record: Erratum, v2: ErratumV2) -> str:
+    if row["relevant_event_count"] == 0:
+        return CAT_PARITY_ONLY if row["parity_only_identity"] else CAT_COSMETIC_ONLY
     if not row["equivalent"]:
-        if row["nonrelevant_changes"] and _nonrelevant_is_implicated(record, v2):
+        if row["nonrelevant_event_count"] and _nonrelevant_is_implicated(record, v2):
             return CAT_NONRELEVANT_CHRONOLOGY
         return CAT_BLOCKER
-    if total == 1 and relevant == 1:
+    if row["sugar_eligible"]:
         return CAT_SUGAR
-    if relevant == 1:
+    if row["relevant_event_count"] == 1:
         return CAT_FULL_SINGLE
-    return CAT_MULTI_ORDERED if row["proven_edges"] else CAT_MULTI_UNORDERED
+    return CAT_MULTI_ORDERED if row["ordering_structure"] == ORDER_FULL else CAT_MULTI_UNORDERED
 
 
 def _nonrelevant_is_implicated(record: Erratum, v2: ErratumV2) -> bool:
     """Would the record become equivalent if its cosmetic/engine changes were
     dropped entirely? If so, the difference is CAUSED by a non-relevant
     event's chronology participating in down-set reasoning - the exact
-    behaviour a114ee3 introduced and the stale design text still denies."""
-    trimmed_changes = [
-        c for c in record.changes if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS
-    ]
+    behaviour a114ee3 introduced and the stale design text used to deny."""
+    trimmed_changes = [c for c in record.changes if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS]
     if len(trimmed_changes) == len(record.changes):
         return False
     trimmed = Erratum.load({**record.raw, "changes": trimmed_changes}, record.path)
@@ -307,7 +524,7 @@ def _nonrelevant_is_implicated(record: Erratum, v2: ErratumV2) -> bool:
     except Exception:  # pragma: no cover - defensive
         return False
     for day in boundary_dates(trimmed):
-        if v1_outcome(trimmed, day) != v2_outcome(trimmed_v2, day):
+        if v1_claimed_states(trimmed, day) != v2_claimed_states(trimmed_v2, day):
             return False
     return True
 
@@ -327,15 +544,24 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "records": len(rows),
         "equivalent": sum(1 for r in rows if r["equivalent"]),
         "not_equivalent": sum(1 for r in rows if not r["equivalent"]),
+        "not_equivalent_ids": sorted(r["id"] for r in rows if not r["equivalent"]),
+        "legacy_self_contradictory_count": sum(1 for r in rows if r.get("legacy_self_contradictory")),
+        "legacy_self_contradictory_ids": sorted(r["id"] for r in rows if r.get("legacy_self_contradictory")),
+        "sugar_eligible_count": sum(1 for r in rows if r.get("sugar_eligible")),
+        "ordering_structure": dict(Counter(r.get("ordering_structure") for r in rows)),
         "categories": dict(Counter(r["category"] for r in rows)),
+        "data_not_preserved_ids": sorted(r["id"] for r in rows if r.get("data_preserved") is False),
     }
     return {"summary": summary, "rows": rows}
 
 
 def parity_only_consumption(rows: list[dict]) -> dict:
-    """Objective 4: for every zero-relevant record that nevertheless carries a
-    usable historical identity, does any CURRENT format actually consume that
-    identity, and would dropping it change generated output?"""
+    """Objective 4 (prior pass) / kept separate and re-verified in this pass:
+    for every zero-relevant record that nevertheless carries a usable
+    historical identity, does any CURRENT format actually consume that
+    identity, and would dropping it change generated output? Selection
+    equivalence (above) does NOT imply this is safe to migrate - it is
+    checked independently, and is not gated on the equivalence result."""
     from retroformats.lflist import build_lflist, select_applicable_errata
     from retroformats.repo import Repository
 

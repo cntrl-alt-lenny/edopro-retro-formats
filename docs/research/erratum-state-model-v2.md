@@ -1966,19 +1966,31 @@ has nothing left to select for).
    checked by the real invariants, not merely accepted by schema alone.
    **With no canonical v2 records yet, this commit must preserve every
    currently-generated `dist/` output exactly.**
-4. **Migrate the 236 trivial + 11 mechanically-PROVEN ordered records.**
-   **Counts superseded — see `erratum-v2-migration-audit.md`.** The
-   re-derived partition is 180 sugar-eligible, 35 single-relevant records
-   that still need full v2 (cosmetic/engine events beside the relevant one),
-   17 multi-event records with date-PROVEN ordering, 43 multi-event records
-   with none, 10 pure cosmetic/engine records, and 11 parity-only identity
-   records that are BLOCKED. Guarantee B is now measured rather than
-   asserted: all 296 records are mechanically equivalent at every chronology
-   boundary — but equivalence is not sufficiency, and the 11 blockers prove
-   it (they migrate without changing selection, while silently losing the
-   historical identity GOAT parity depends on). Every ordering edge is still
-   independently re-derived and proved from dates, never copied from
-   `changes[]` position.
+4. **Migrate the 247 mechanically-equivalent records — re-derived and
+   RE-CONFIRMED exactly by `erratum-v2-migration-audit.md` after a
+   comparator bug in that audit's first pass was found and fixed (the bug
+   produced a false 296-of-296 claim; the corrected comparator reproduces
+   this document's own 247/49/48/236/11 figures exactly, independently
+   re-derived rather than assumed).** The shape split is finer than "single-
+   event sugar for the 236" — under full-event semantics every change is an
+   event, so only **180** of the 236 trivial records have exactly one event
+   in total and can use sugar; **35** have one relevant change with a
+   cosmetic/engine sibling event and need full v2 with no `ordering`; the
+   remaining **11** are the genuinely, exactly ordered multi-event records,
+   migrated via a script that **independently re-derives and proves** each
+   `ordering.chains` edge from their dates directly, never copies
+   `changes[]` position. Regression-gated on guarantee B holding for every
+   one of the 247 — `tests/migration_audit.py` derives this figure from the
+   runtime on every test run, rather than asserting it. **11 of the 247 are
+   parity-only identity records (zero relevant events, a usable historical
+   passcode from period-text-only reference divergence) and are EXCLUDED
+   from this step despite being equivalent**: equivalence is not
+   sufficiency, and these 11 prove it — migrating them as-is would silently
+   discard the identity GOAT's `reference_parity` depends on, since v2's
+   terminal state always synthesises MODERN coverage. See `erratum-v2-
+   migration-audit.md` for the full accounting; how their identity should be
+   represented remains an explicit open decision, not resolved by this
+   step.
 5. **Migrate the 47 already-researched unordered records** (38
    bundled/shared-package + 9 mechanically-distinct order-unknown) as
    separate, unordered events — no `ordering` edge for either group; the

@@ -38,6 +38,22 @@ def parse_date(value: str) -> _dt.date:
     return _dt.date.fromisoformat(value)
 
 
+# The schema's own `passcode` def (schemas/common.schema.json): an integer in
+# 1..4294967295. `ImplementationCoverage`/v1 `implementation` dicts keep
+# historical_passcode/historical_variant_passcodes RAW (design doc: "fail
+# only on structurally unusable input" — semantic validation is the
+# validator's job) - but "raw" still means a non-integer value must never
+# reach a bare `int(...)` call anywhere fail-safety is promised. Used by
+# `Erratum.selection_at()` below, and imported into lflist.py/validate.py so
+# there is exactly one definition of "valid passcode", not three.
+def _is_valid_passcode(value: Any) -> bool:
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        return False
+    return 1 <= n <= 4294967295
+
+
 @dataclass(frozen=True)
 class CardRef:
     passcode: int
@@ -386,7 +402,11 @@ class Erratum:
             # A documented decision that the modern implementation stands in
             # for this version (e.g. a ruling difference not reproduced).
             return ErratumSelection(state="modern", implementation=impl, version_index=version)
-        if not impl.get("historical_passcode"):
+        if not impl.get("historical_passcode") or not _is_valid_passcode(impl["historical_passcode"]):
+            # No usable identity to substitute — a non-integer passcode is
+            # exactly as unusable as a missing one, and gets the identical
+            # fail-safe fallback rather than an uncaught ValueError three
+            # layers downstream in historical_identity()/lflist.py.
             return ErratumSelection(state="gap", implementation=impl, version_index=version)
         return ErratumSelection(state="historical", implementation=impl, version_index=version)
 

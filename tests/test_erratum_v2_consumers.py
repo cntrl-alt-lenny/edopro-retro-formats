@@ -25,7 +25,7 @@ from retroformats.model import Coverage
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import TempRepoTest, card, v2_coverage, v2_event, v2_transition
+from .helpers import TempRepoTest, card, change, v2_coverage, v2_event, v2_transition
 
 
 def day(s: str) -> _dt.date:
@@ -779,3 +779,129 @@ class ProductionValidatorShapeTest(V2ConsumerTestBase):
             ],
         )
         self.assertEqual([], self._errors(repo, "erratum.coverage-incompatible-field"))
+
+
+class MalformedPasscodeHardeningTest(V2ConsumerTestBase):
+    """One remaining hole 5f7d2da did not close: `historical_passcode=None`
+    is fail-safe, but a non-integer/out-of-range PRESENT value is not.
+    `ImplementationCoverage.from_raw()` keeps the field RAW, and production
+    validation does `int(hist)`/`int(variant)` - previously unguarded, so
+    this crashed the validator itself rather than reporting an ERROR
+    finding. A non-integer passcode must be exactly as unusable as a
+    missing one everywhere: validator (report, never crash), direct build
+    (ErrataSelectionError, never a bare ValueError/TypeError/
+    MalformedHistoricalIdentity), and v1's own `selection_at()` (falls back
+    to 'gap', its existing safe behaviour for 'no usable passcode')."""
+
+    def test_v2_non_integer_passcode_is_reported_not_crashed(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "reuse-upstream",
+                        "historical_passcode": "not-a-passcode",
+                        "upstream": "ProjectIgnis",
+                    },
+                }
+            ],
+        )
+        repo = self._repo()
+        findings = Validator(repo).validate()
+        self.assertTrue(findings)  # completes; does not raise
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+
+    def test_v2_non_integer_variant_is_reported_not_crashed(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "reuse-upstream",
+                        "historical_passcode": 511000900,
+                        "historical_variant_passcodes": ["also-not-a-passcode"],
+                        "upstream": "ProjectIgnis",
+                    },
+                }
+            ],
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+
+    def test_v2_out_of_range_passcode_is_reported_not_crashed(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {"kind": "reuse-upstream", "historical_passcode": -5, "upstream": "ProjectIgnis"},
+                }
+            ],
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+
+    def test_v2_direct_build_never_leaks_a_bare_value_or_type_error(self):
+        """No validator run first - the exact regression objective 1 fixed
+        for a missing passcode must also hold for a malformed one."""
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event(effective={"date": "2020-01-01"})},  # OLD at snapshot
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "reuse-upstream",
+                        "historical_passcode": "not-a-passcode",
+                        "upstream": "ProjectIgnis",
+                    },
+                }
+            ],
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        with self.assertRaises(ErrataSelectionError):
+            build_lflist(fmt, repo)
+
+    def test_v2_usable_v2_rejects_non_integer_passcode(self):
+        from retroformats.lflist import _usable_v2
+        from retroformats.model import ImplementationCoverage
+
+        broken = ImplementationCoverage(kind=Coverage.CUSTOM_SCRIPT, historical_passcode="nope")
+        self.assertIsNone(_usable_v2(broken))
+
+    def test_v1_non_integer_passcode_falls_back_to_gap_not_a_crash(self):
+        """v1's `selection_at()` already treats a missing passcode as
+        'gap' - a non-integer one gets the identical, already-safe
+        fallback, never an uncaught int() failure three layers downstream
+        in historical_identity()."""
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum(
+            id="erratum-alpha",
+            modern={"passcode": 200, "name": "Beta"},
+            changes=[change(date="2020-01-01")],  # OLD (not yet occurred) at snapshot: baseline in force
+            impl={"strategy": "reuse-upstream", "historical_passcode": "not-a-passcode", "status": "complete"},
+        )
+        repo = self._repo()
+        record = repo.errata["erratum-alpha"]
+        snapshot = _dt.date.fromisoformat(self._fmt(repo).snapshot)
+        selection = record.selection_at(snapshot)
+        self.assertEqual("gap", selection.state)
+
+    def test_v1_non_integer_passcode_is_a_validator_error_not_a_crash(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum(
+            id="erratum-alpha",
+            modern={"passcode": 200, "name": "Beta"},
+            impl={"strategy": "reuse-upstream", "historical_passcode": "not-a-passcode", "status": "complete"},
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))

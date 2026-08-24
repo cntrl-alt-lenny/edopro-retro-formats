@@ -46,6 +46,7 @@ from .model import (
     ImplementationCoverage,
     Pool,
     SelectionError,
+    _is_valid_passcode,
 )
 from .repo import Repository
 
@@ -177,11 +178,21 @@ class ErrataSelectionError(ValueError):
         self.problems = problems
 
 
+def _valid_identity(passcode: object, variants: object) -> bool:
+    """The schema's `passcode` def is the sole authority (see
+    `_is_valid_passcode`): every historical_passcode and every entry of
+    historical_variant_passcodes must independently satisfy it. A value that
+    is present but not a valid passcode (e.g. a typo'd string) is exactly as
+    unusable as a missing one — never "usable but weird"."""
+    return _is_valid_passcode(passcode) and all(_is_valid_passcode(v) for v in (variants or ()))
+
+
 def _usable(impl: dict | None) -> dict | None:
     if (
         impl
         and impl.get("strategy") in ("reuse-upstream", "custom-script")
         and impl.get("historical_passcode")
+        and _valid_identity(impl.get("historical_passcode"), impl.get("historical_variant_passcodes"))
     ):
         return impl
     return None
@@ -210,7 +221,11 @@ def _usable_v2(coverage: ImplementationCoverage | None) -> ImplementationCoverag
     `historical_identity()` and died as `int(None)` mid-build. Malformed
     coverage is reported as a build PROBLEM by the callers that can
     (`_malformed_substitution()`), not silently dropped."""
-    if _claims_substitution(coverage) and coverage.historical_passcode is not None:
+    if (
+        _claims_substitution(coverage)
+        and coverage.historical_passcode is not None
+        and _valid_identity(coverage.historical_passcode, coverage.historical_variant_passcodes)
+    ):
         return coverage
     return None
 
@@ -219,7 +234,11 @@ def _malformed_substitution(coverage: ImplementationCoverage | None) -> bool:
     """Claims a substitution but cannot supply one — the case the validator
     reports as data corruption and a direct build must refuse rather than
     crash on."""
-    return _claims_substitution(coverage) and coverage.historical_passcode is None
+    if not _claims_substitution(coverage):
+        return False
+    if coverage.historical_passcode is None:
+        return True
+    return not _valid_identity(coverage.historical_passcode, coverage.historical_variant_passcodes)
 
 
 def baseline_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCoverage | None:
@@ -308,9 +327,13 @@ def _executable_outcome(coverage: ImplementationCoverage) -> tuple | None:
     established" (KNOWN_GAP/UNRESOLVED) and is never treated as agreeing
     with anything, including another None."""
     if _claims_substitution(coverage):
-        # A substitution with no passcode establishes no outcome at all: it
-        # must never be able to "agree" with a well-formed candidate.
-        if coverage.historical_passcode is None:
+        # A substitution with no usable passcode establishes no outcome at
+        # all: it must never be able to "agree" with a well-formed
+        # candidate, whether the passcode is missing OR simply not a valid
+        # integer passcode.
+        if coverage.historical_passcode is None or not _valid_identity(
+            coverage.historical_passcode, coverage.historical_variant_passcodes
+        ):
             return None
         return ("substitute", coverage.historical_passcode, coverage.historical_variant_passcodes)
     if coverage.kind == Coverage.NONE_NEEDED:

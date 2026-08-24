@@ -320,22 +320,33 @@ reflects that.
      are *not* filtered before down-set reasoning, as the design document originally
      claimed; that passage is now marked corrected in place.
    - **Step 3 — consumer/validator compatibility: implemented** (`842f84f`), with a
-     pre-migration hardening pass on top: historical-identity fail-safety (a coverage
-     claiming a substitution without a passcode can no longer reach `int(None)`, and a
-     direct `build` refuses cleanly instead of depending on the validator having run),
-     explicit v2 include/exclude semantics per coverage kind, ambiguous-selection
+     pre-migration hardening pass on top (`5f7d2da`): historical-identity fail-safety (a
+     coverage claiming a substitution without a passcode can no longer reach `int(None)`,
+     and a direct `build` refuses cleanly instead of depending on the validator having
+     run), explicit v2 include/exclude semantics per coverage kind, ambiguous-selection
      include/exclude diagnostics, and five production-validator holes the JSON Schema
-     states but `Repository.load()` never enforced.
+     states but `Repository.load()` never enforced. **That pass's own migration-audit
+     tool had a comparator bug** (it reduced a v2 candidate to `len(candidate.events)`
+     and compared that integer, silently equating differently-identified states of equal
+     size — e.g. Giant Rat's `{verification}` vs `{activation}`), producing a false
+     296-of-296 equivalence claim. **Corrected in a follow-up pass**: the comparator now
+     does a genuine set comparison of (event-identity, coverage-signature) pairs, and
+     the corrected result exactly reproduces this document's own frozen §3/§7 figures —
+     247 equivalent, 49 not equivalent, 48 self-contradictory, 236 trivial, 11 fully
+     ordered, all independently re-derived, not assumed.
    - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
      migrated, and v1 schema/runtime remain fully supported. It is gated on the
-     re-derived audit in `docs/research/erratum-v2-migration-audit.md`, which found all
-     296 records mechanically equivalent but **11 parity-only identity records blocked**:
-     they carry a historical passcode with zero implementation-relevant events, GOAT's
-     `reference_parity` consumes all eleven today, and v2 as frozen cannot represent that
-     identity (their only state is terminal, so its coverage is synthesised `modern` and
-     any authored identity is discarded). Migrating them as-is would break GOAT parity
-     and silently discard canonical data. How parity-only identity should be represented
-     is an explicit open decision — no schema field has been invented for it.
+     re-derived audit in `docs/research/erratum-v2-migration-audit.md`: **247 of 296**
+     records are mechanically equivalent (selection never changes) and **49** genuinely
+     are not (v1's positional model and v2's real chronology disagree at some boundary —
+     order-aware migration, not a rename). Independently of that split, **11 parity-only
+     identity records are blocked**: they carry a historical passcode with zero
+     implementation-relevant events, GOAT's `reference_parity` consumes all eleven today,
+     and v2 as frozen cannot represent that identity (their only state is terminal, so
+     its coverage is synthesised `modern` and any authored identity is discarded).
+     Migrating them as-is would break GOAT parity and silently discard canonical data.
+     How parity-only identity should be represented is an explicit open decision — no
+     schema field has been invented for it.
 
 ## Phase 2 — framework completeness
 
