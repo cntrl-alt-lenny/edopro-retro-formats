@@ -177,12 +177,16 @@ class MigrationAuditPartitionTest(unittest.TestCase):
         self.assertEqual(296, sum(self.summary["categories"].values()))
 
     def test_current_migration_readiness_accounting(self):
-        """Equivalence (247) is necessary, not sufficient: only 236 are
-        currently eligible to migrate without first solving the 11
-        parity-only representation problem. The bookkeeping must say so
-        explicitly rather than reporting '247 safe to migrate'."""
+        """Equivalence (247) is necessary, not sufficient: 236 of them have
+        no known chronology/shape obstacle once the 11 parity-only records
+        are set aside - but that is NOT a data-preservation or
+        migration-safety certification (v1 metadata with no v2
+        destination affects them too), and the bookkeeping must say so
+        explicitly rather than reporting '247 safe to migrate' or '236
+        immediately migratable'."""
         self.assertEqual(247, self.summary["semantic_equivalent"])
-        self.assertEqual(236, self.summary["immediately_migratable"])
+        self.assertEqual(236, self.summary["chronology_shape_ready"])
+        self.assertEqual(236, len(self.summary["chronology_shape_ready_ids"]))
         self.assertEqual(11, self.summary["parity_only_blocked"])
         self.assertEqual(236 + 11, self.summary["semantic_equivalent"])
         self.assertEqual(49, self.summary["nontrivial_migration_scope"])
@@ -193,6 +197,17 @@ class MigrationAuditPartitionTest(unittest.TestCase):
             self.summary["nontrivial_needs_manual_review_ids"],
         )
         self.assertEqual(47 + 2, self.summary["nontrivial_migration_scope"])
+
+    def test_data_preservation_is_explicitly_pending_not_certified(self):
+        """The false conflict the task flags: chronology_shape_ready=236
+        must never be readable as 'data-preserving' or 'safe to migrate'
+        while status/tested/gap.upstream_checked/gap.behavioural_impact
+        have no v2 destination at all."""
+        self.assertEqual("pending", self.summary["data_preservation_status"])
+        reason = self.summary["data_preservation_pending_reason"]
+        for keyword in ("status", "tested", "gap.upstream_checked", "gap.behavioural_impact"):
+            self.assertIn(keyword, reason)
+        self.assertNotIn("immediately_migratable", self.summary)
 
     def test_manual_review_ids_match_the_design_document(self):
         self.assertEqual({"erratum-insect-imitation", "erratum-last-will"}, MANUAL_REVIEW_IDS)
@@ -828,26 +843,88 @@ class CoverageKindDistinctionTest(unittest.TestCase):
 class MetadataInventoryTest(unittest.TestCase):
     """Task objective 1's honest inventory: v1 implementation metadata with
     NO v2 coverage destination must be reported explicitly, not silently
-    folded into "data_preserved=True" by omission. UNKNOWN != DISCARD."""
+    folded into "data_preserved=True" by omission. UNKNOWN != DISCARD.
+
+    **Corrected pass**: the prior version's `record_count` actually counted
+    IMPLEMENTATION-OBJECT occurrences, not records - a v1 record can carry
+    more than one implementation object (one baseline `implementation`,
+    plus one `resulting_implementation` per relevant change with a
+    recorded one), so "status: 312" in a 296-record corpus was silently
+    conflating 296 records with 312 implementation occurrences (296
+    baseline + 16 resulting, across 12 records that have at least one
+    resulting_implementation). This distinction is the concrete evidence
+    that some of this metadata is STATE-SPECIFIC, not record-wide."""
 
     @classmethod
     def setUpClass(cls):
         repo = Repository.load(audit.REPO_ROOT)
         cls.inventory = {row["field"]: row for row in audit.metadata_inventory(repo.errata)}
 
+    def test_occurrence_count_is_distinct_from_unique_record_count(self):
+        """The exact bug: 312 implementation-object occurrences of
+        `status` come from only 296 DISTINCT records (296 baseline + 16
+        resulting, across 12 records) - never call 312 "records"."""
+        status = self.inventory["status"]
+        self.assertEqual(312, status["implementation_occurrence_count"])
+        self.assertEqual(296, status["unique_record_count"])
+        self.assertEqual(296, len(status["unique_record_ids"]))
+        self.assertEqual(296, status["baseline_occurrence_count"])
+        self.assertEqual(12, status["resulting_implementation_occurrence_count"])
+        self.assertNotEqual(
+            status["implementation_occurrence_count"], status["unique_record_count"]
+        )
+
     def test_known_unrepresented_fields_are_reported(self):
         expected_counts = {
-            "status": 312,
-            "tested": 252,
-            "gap.upstream_checked": 56,
-            "gap.behavioural_impact": 56,
+            "status": (312, 296),
+            "tested": (252, 240),
+            "gap.upstream_checked": (56, 53),
+            "gap.behavioural_impact": (56, 53),
         }
-        for field, count in expected_counts.items():
+        for field, (occurrences, unique_records) in expected_counts.items():
             self.assertIn(field, self.inventory)
-            self.assertEqual(count, self.inventory[field]["record_count"], field)
-            self.assertFalse(self.inventory[field]["has_v2_destination"], field)
-            self.assertTrue(self.inventory[field]["would_be_lost_on_migration"], field)
-            self.assertTrue(self.inventory[field]["representative_ids"], field)
+            row = self.inventory[field]
+            self.assertEqual(occurrences, row["implementation_occurrence_count"], field)
+            self.assertEqual(unique_records, row["unique_record_count"], field)
+            self.assertEqual(unique_records, len(row["unique_record_ids"]), field)
+            self.assertFalse(row["has_v2_destination"], field)
+            self.assertTrue(row["would_be_lost_on_migration"], field)
+            self.assertTrue(row["representative_baseline_ids"] or row["representative_resulting_ids"], field)
+
+    def test_status_is_provably_state_specific_via_a_resulting_implementation(self):
+        """The task's required worked example: an erratum whose
+        `resulting_implementation` carries a DIFFERENT `status` than its
+        baseline `implementation` - proof that this metadata varies BY
+        STATE, not just by record, so a record-level field cannot preserve
+        it."""
+        status = self.inventory["status"]
+        self.assertIn("erratum-blue-eyes-toon-dragon", status["records_with_both_baseline_and_resulting"])
+        self.assertIn(
+            "erratum-blue-eyes-toon-dragon",
+            status["records_where_value_differs_between_baseline_and_resulting"],
+        )
+        repo = Repository.load(audit.REPO_ROOT)
+        record = repo.errata["erratum-blue-eyes-toon-dragon"]
+        baseline_status = (record.implementation or {}).get("status")
+        resulting_statuses = {
+            c["resulting_implementation"]["status"]
+            for c in record.changes
+            if c.get("resulting_implementation") and "status" in c["resulting_implementation"]
+        }
+        self.assertNotIn(baseline_status, resulting_statuses)
+
+    def test_tested_also_diverges_for_at_least_one_record(self):
+        tested = self.inventory["tested"]
+        self.assertIn("erratum-rescue-cat", tested["records_where_value_differs_between_baseline_and_resulting"])
+
+    def test_gap_upstream_checked_is_not_state_specific_in_current_data(self):
+        """A field CAN be uniformly True everywhere (no observed
+        divergence) while still being structurally state-specific
+        (authored per implementation object) - the two are different
+        claims, and the inventory must not overstate what the data shows."""
+        row = self.inventory["gap.upstream_checked"]
+        self.assertEqual([], row["records_where_value_differs_between_baseline_and_resulting"])
+        self.assertEqual({"True": 56}, row["value_distribution"])
 
     def test_represented_fields_are_not_in_the_inventory(self):
         """Fields WITH a v2 destination (including the newly-fixed

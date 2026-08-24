@@ -835,7 +835,11 @@ class Validator:
             return
         if kind in ("reuse-upstream", "custom-script"):
             hist = coverage.get("historical_passcode")
-            if not hist:
+            if hist is None:
+                # Absent or explicit null: genuinely nothing recorded yet.
+                # Distinct from PRESENT-but-invalid (0, a bool, a string, an
+                # out-of-range value) - `not hist` would treat 0 identically
+                # to missing and never reach `_safe_passcode()`'s ERROR.
                 self.error(
                     "erratum.no-historical-passcode",
                     erratum.path,
@@ -1253,7 +1257,12 @@ class Validator:
             self.error("erratum.bad-strategy", erratum.path, f"{what}.strategy {strategy!r}")
         if impl.get("status") not in IMPLEMENTATION_STATUSES:
             self.error("erratum.bad-status", erratum.path, f"{what}.status {impl.get('status')!r}")
-        if strategy in ("reuse-upstream", "custom-script") and not impl.get("historical_passcode"):
+        hist_missing = impl.get("historical_passcode") is None
+        if strategy in ("reuse-upstream", "custom-script") and hist_missing:
+            # Absent or explicit null only - a PRESENT but invalid value
+            # (0, a bool, a string, an out-of-range value) is not "not
+            # recorded yet", it is malformed data, and gets the ERROR below
+            # via `_safe_passcode()` instead of this WARN.
             self.warn(
                 "erratum.no-historical-passcode",
                 erratum.path,
@@ -1275,7 +1284,7 @@ class Validator:
             else:
                 self._check_sources(list(gap["sources"]), erratum.path, None, f"{what} gap")
         hist = impl.get("historical_passcode")
-        if hist:
+        if not hist_missing:
             hist_int = self._safe_passcode(hist, erratum, what, "historical_passcode")
             if hist_int is not None:
                 self._check_card_alias(hist_int, erratum, what)

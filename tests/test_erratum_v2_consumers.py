@@ -987,3 +987,124 @@ class NumericStringPasscodeIsReportedTest(V2ConsumerTestBase):
         repo = self._repo()
         Validator(repo).validate()
         self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+
+
+class PresentButFalsyPasscodeTest(V2ConsumerTestBase):
+    """A PRESENT but invalid falsy value (`0`) must not be treated
+    identically to an ABSENT one. `if hist:` (falsy-check) silently skipped
+    `_safe_passcode()` for `historical_passcode: 0` in both the v1 and v2
+    validation paths - `0` reached neither `erratum.no-historical-passcode`
+    (which no longer accurately describes a PRESENT value) nor
+    `erratum.malformed-passcode` (which never ran). Fixed by checking
+    `hist is None` (absent/null) instead of truthiness."""
+
+    def test_v2_zero_passcode_is_malformed_not_missing(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[{"events": [], "coverage": {"kind": "reuse-upstream", "historical_passcode": 0}}],
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+        self.assertEqual([], self._errors(repo, "erratum.no-historical-passcode"))
+
+    def test_v2_missing_passcode_is_still_reported_as_missing(self):
+        """The absent/null case must keep its own diagnostic, unaffected."""
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=[{"events": [], "coverage": {"kind": "reuse-upstream"}}],
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.no-historical-passcode"))
+        self.assertEqual([], self._errors(repo, "erratum.malformed-passcode"))
+
+    def test_v1_zero_passcode_is_malformed_not_missing(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum(
+            id="erratum-alpha",
+            modern={"passcode": 200, "name": "Beta"},
+            impl={"strategy": "reuse-upstream", "historical_passcode": 0, "status": "complete"},
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._errors(repo, "erratum.malformed-passcode"))
+        self.assertEqual([], self._warnings(repo, "erratum.no-historical-passcode"))
+
+    def test_v1_missing_passcode_is_still_reported_as_missing(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum(
+            id="erratum-alpha",
+            modern={"passcode": 200, "name": "Beta"},
+            impl={"strategy": "reuse-upstream", "status": "complete"},
+        )
+        repo = self._repo()
+        Validator(repo).validate()
+        self.assertTrue(self._warnings(repo, "erratum.no-historical-passcode"))
+        self.assertEqual([], self._errors(repo, "erratum.malformed-passcode"))
+
+
+class HistoricalIdentityStrictnessTest(unittest.TestCase):
+    """`historical_identity()` is documented as the final defensive
+    backstop - but a backstop that still coerces (`int("123")`, `int(True)`)
+    is not actually a backstop against a caller that bypasses `_usable()`/
+    `_usable_v2()`. It must use the same strict `_is_valid_passcode()`
+    authority as everything else, with zero coercion."""
+
+    def _v2(self, passcode, variants=()):
+        from retroformats.model import Coverage, ImplementationCoverage
+
+        return ImplementationCoverage(
+            kind=Coverage.REUSE_UPSTREAM, historical_passcode=passcode, historical_variant_passcodes=tuple(variants)
+        )
+
+    def test_numeric_string_is_rejected(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2("123"))
+
+    def test_bool_is_rejected(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2(True))
+
+    def test_non_integral_float_is_rejected(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2(1.5))
+
+    def test_zero_is_rejected(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2(0))
+
+    def test_above_maximum_is_rejected(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2(4294967296))
+
+    def test_malformed_variant_is_rejected_even_with_a_valid_passcode(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(self._v2(511000042, variants=["not-a-passcode"]))
+
+    def test_valid_identity_passes_through_unmodified(self):
+        from retroformats.lflist import historical_identity
+
+        passcode, variants = historical_identity(self._v2(511000042, variants=(511000043,)))
+        self.assertEqual(511000042, passcode)
+        self.assertEqual((511000043,), variants)
+
+    def test_v1_dict_form_also_rejects_numeric_string(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity({"strategy": "reuse-upstream", "historical_passcode": "123"})

@@ -350,22 +350,47 @@ reflects that.
      `manual-review-blocker`, now correctly split into 47 already-researched
      (design doc §7's taxonomy) and 2 genuinely needing human review (Insect
      Imitation, Last Will, named by the document itself).
+     **A third pass then corrected three narrow remaining holes and researched
+     (without implementing) two representation gaps**: `if hist:`-style truthiness
+     checks let a PRESENT-but-invalid `historical_passcode: 0` silently skip the
+     malformed-passcode check in both v1 and v2 validation paths (fixed by testing
+     `hist is None` instead); `historical_identity()`'s documented "backstop" still
+     called `int(...)`, so a caller bypassing `_usable()`/`_usable_v2()` could still
+     coerce `"123"` into a valid-looking passcode (fixed to use the same strict
+     `_is_valid_passcode()` authority, zero coercion); and `metadata_inventory()`'s
+     `record_count` was actually counting IMPLEMENTATION-OBJECT occurrences (312 for
+     `status`, from 296 baseline + 16 `resulting_implementation` objects across only
+     296 distinct records), now reported as separate occurrence/unique-record counts
+     with a baseline-vs-resulting breakdown that proves several fields (`status` for
+     6 records, `tested` for 1) are genuinely state-specific — see
+     `docs/research/erratum-v2-representation-gaps.md` for the full design research
+     into representing both this metadata and parity-only identity, and the
+     terminology correction below.
    - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
      migrated, and v1 schema/runtime remain fully supported. It is gated on the
      re-derived audit in `docs/research/erratum-v2-migration-audit.md`: **247 of 296**
      records are semantically equivalent (selection never changes) and **49** genuinely
      are not (v1's positional model and v2's real chronology disagree at some boundary —
      order-aware migration, not a rename; 47 already researched, 2 needing manual
-     review). Equivalence is necessary but not sufficient for migration readiness:
-     of the 247, only **236 are currently immediately migratable** — the remaining
-     **11 parity-only identity records are blocked** independently of equivalence:
-     they carry a historical passcode with zero implementation-relevant events, GOAT's
-     `reference_parity` consumes all eleven today, and v2 as frozen cannot represent
-     that identity (their only state is terminal, so its coverage is synthesised
-     `modern` and any authored identity is discarded). Migrating them as-is would break
-     GOAT parity and silently discard canonical data. How parity-only identity should
-     be represented is an explicit open decision — no schema field has been invented
-     for it.
+     review). Equivalence, chronology/shape readiness, and data-preservation
+     certification are three DIFFERENT questions — of the 247, **236 have no known
+     chronology/shape obstacle** once the 11 parity-only records are set aside, but
+     this is deliberately NOT called "immediately migratable," "data-preserving," or
+     "safe": v1 implementation metadata with no v2 coverage destination at all
+     (`status` on all 296 records, `tested` on 240, `gap.upstream_checked`/
+     `gap.behavioural_impact` on 53 each) affects the 236 too, and is demonstrably
+     state-specific (a change's `resulting_implementation` can carry a different
+     `status` than the record's baseline), so a record-level field cannot preserve it
+     without further design. Separately, **11 parity-only identity records are
+     blocked** independently of the above: they carry a historical passcode with zero
+     implementation-relevant events, GOAT's `reference_parity` consumes all eleven
+     today, and v2 as frozen cannot represent that identity (their only state is
+     terminal, so its coverage is synthesised `modern` and any authored identity is
+     discarded). Migrating them as-is would break GOAT parity and silently discard
+     canonical data. **Both representation gaps are researched, with candidate designs
+     compared, in `docs/research/erratum-v2-representation-gaps.md` — neither is
+     implemented, and neither the v2 schema nor any canonical record has been changed
+     for them.**
 
 ## Phase 2 — framework completeness
 

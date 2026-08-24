@@ -357,15 +357,43 @@ Not every v1 implementation field maps onto v2's coverage schema.
 schema), so these fields have **no destination to migrate into at all** —
 not a bug `_coverage_from_v1()` could fix, a genuine representation gap.
 **No schema extension is proposed here** — `metadata_inventory()` only
-reports the fact:
+reports the fact. **Corrected pass**: the previous version of this table
+called its count "records," but a v1 record can carry MORE THAN ONE
+implementation object — one baseline `implementation`, plus one
+`resulting_implementation` per relevant change that records one — so
+`status`'s 312 was 312 IMPLEMENTATION-OBJECT OCCURRENCES across only 296
+DISTINCT RECORDS (296 baseline + 16 resulting, spread across 12 records
+that have at least one `resulting_implementation`), never 312 records:
 
-| field | records carrying it | representative ids | v2 destination? | lost on migration? |
-|---|---:|---|---|---|
-| `status` | 312 (all) | `erratum-a-cat-of-ill-omen`, `erratum-a-deal-with-dark-ruler`, … | **no** | **yes** |
-| `tested` | 252 | `erratum-a-cat-of-ill-omen`, `erratum-a-deal-with-dark-ruler`, … | **no** | **yes** |
-| `gap.upstream_checked` | 56 | `erratum-a-hero-emerges`, `erratum-amazoness-fighter`, … | **no** | **yes** |
-| `gap.behavioural_impact` | 56 | `erratum-a-hero-emerges`, `erratum-amazoness-fighter`, … | **no** | **yes** |
-| `reason` (bare, on a `none-needed` implementation) | 1 | `erratum-spiritual-energy-settle-machine` | **no** | **yes** |
+| field | occurrences | unique records | baseline / resulting split | v2 destination? | lost on migration? |
+|---|---:|---:|---:|---|---|
+| `status` | 312 | 296 | 296 / 12 | **no** | **yes** |
+| `tested` | 252 | 240 | 236 / 12 | **no** | **yes** |
+| `gap.upstream_checked` | 56 | 53 | 48 / 7 | **no** | **yes** |
+| `gap.behavioural_impact` | 56 | 53 | 48 / 7 | **no** | **yes** |
+| `reason` (bare, on a `none-needed` implementation) | 1 | 1 | 1 / 0 | **no** | **yes** |
+
+**This distinction is load-bearing, not pedantic: it is direct evidence
+that `status` and `tested` are STATE-SPECIFIC, not record-wide.** For 12
+records, a change's `resulting_implementation` carries its OWN `status`/
+`tested`, independently of the record's baseline `implementation` — and
+for several of them the value genuinely differs between the two:
+
+- **`status` differs between baseline and a resulting state for 6
+  records**: `erratum-blue-eyes-toon-dragon`, `erratum-insect-imitation`,
+  `erratum-last-will`, `erratum-necrovalley`, `erratum-night-assailant`,
+  `erratum-yz-tank-dragon`. Worked example — **Blue-Eyes Toon Dragon**:
+  its baseline `implementation.status` is `"complete"`, but the
+  `resulting_implementation` on its one relevant change records `"missing"`
+  — the LATER historical state is LESS implemented than the baseline, a
+  fact a single record-level `status` field could not represent at all.
+- **`tested` differs for 1 record**: `erratum-rescue-cat`.
+- **`gap.upstream_checked`/`gap.behavioural_impact` show no observed
+  divergence in the current corpus** (`gap.upstream_checked` is `true` for
+  all 56 occurrences) — worth distinguishing from "not state-specific":
+  the field is still authored per-implementation-object, it simply
+  happens to agree everywhere so far. Absence of observed divergence is
+  not evidence the field is safely record-wide.
 
 `status`/`tested` are v1's implementation-completeness workflow fields
 (`missing`/`stub`/`partial`/`complete`/`verified`, and a tested/untested
@@ -376,10 +404,11 @@ document HOW a known gap was investigated, beyond the `gap_reason`/
 single record's ad hoc justification for a `none-needed` decision, which
 `none-needed` coverage (closed to just `{kind}`) has no field for either.
 **This is a migration decision, explicitly flagged as unresolved rather
-than silently discarded or answered by inventing a field.**
-`metadata_inventory()` also flags any implementation/gap field it does not
-already recognise, so a future field is reported rather than silently
-missed.
+than silently discarded or answered by inventing a field** — see
+`docs/research/erratum-v2-representation-gaps.md` for the full design
+comparison. `metadata_inventory()` also flags any implementation/gap field
+it does not already recognise, so a future field is reported rather than
+silently missed.
 
 ## Coverage signature distinguishes coverage KIND, not just final identity (task objective 3)
 
@@ -466,13 +495,49 @@ continues; a direct build (no validator run first) fails as
 `MalformedHistoricalIdentity`/silent coercion; v1's `selection_at()` falls
 back to its existing `"gap"` state.
 
-## What is safe to migrate, and what is not
+### Two narrower holes closed in this pass (task objective 3)
 
-**Do not report "247 safe to migrate."** Semantic equivalence and current
-data-preserving migration readiness are different questions, and
-conflating them is exactly what the previous pass's framing risked.
+**A. A PRESENT but falsy-invalid value (`historical_passcode: 0`) was
+indistinguishable from an ABSENT one.** Both `_validate_v2_coverage()` and
+`_validate_implementation()` (v1) used a truthiness check (`if not hist:` /
+`if hist:`) rather than an explicit-`None` check, so `0` — present, and
+invalid per the schema's `minimum: 1` — silently took the "nothing
+recorded yet" branch and never reached `_safe_passcode()` at all: no
+`erratum.malformed-passcode` ERROR, and (on the v1 side) a WARN whose text
+("no historical_passcode recorded yet") is actively misleading for a value
+that IS recorded. Fixed by checking `hist is None` (covers both an absent
+key and an explicit JSON `null` — both genuinely mean "nothing recorded")
+instead of falsiness; `0`, like any other invalid-but-present value, now
+reaches `_safe_passcode()` and is reported as `erratum.malformed-passcode`,
+while the missing-value diagnostic keeps its original meaning and text.
 
-**SEMANTIC EQUIVALENCE** (selection never changes at any chronology
+**B. `historical_identity()`'s "backstop" was not actually strict.** It is
+documented as the final defensive check for a caller that bypasses
+`_usable()`/`_usable_v2()` — but it still did `int(passcode)`/`int(v) for v
+in variants`, so a caller reaching it directly with `"123"` or `True` would
+have had it silently coerced rather than rejected. A backstop that
+re-opens the hole it exists to close is not a backstop. Rewritten to call
+`_is_valid_passcode()` directly (the same strict, non-coercive authority
+every other caller uses) and raise `MalformedHistoricalIdentity` for
+anything that fails it — zero `int(...)` calls remain anywhere in the
+passcode-handling path. `HistoricalIdentityStrictnessTest` covers `"123"`,
+`True`, `1.5`, `0`, `4294967296`, and a malformed variant alongside an
+otherwise-valid passcode.
+
+## Migration readiness — three separate questions, not one
+
+**Do not report "247 safe to migrate," "236 immediately migratable," or
+"236 data-preserving."** Semantic equivalence, chronology/shape readiness,
+and data-preservation certification are three DIFFERENT questions, and
+collapsing any two of them into one number is exactly what an earlier
+pass's framing risked doing (first by claiming an equivalence bug's output
+was total, then by letting "equivalent" quietly read as "safe"). Two
+representation gaps remain genuinely open — see
+`docs/research/erratum-v2-representation-gaps.md` for the full design
+research — and until they are resolved, no number below should be read as
+a green light.
+
+**1. SEMANTIC EQUIVALENCE** (selection never changes at any chronology
 boundary):
 
 - **247 of 296** — 180 sugar-eligible, 35 single-relevant-with-cosmetic-
@@ -482,19 +547,6 @@ boundary):
   chronology genuinely disagree at some boundary; migrating them as a
   rename would be wrong, not merely imprecise. Exact ids in
   `erratum-v2-migration-audit.json`'s `not_equivalent_ids`.
-
-**CURRENT DATA-PRESERVING MIGRATION READINESS** (equivalence is necessary,
-not sufficient — the 11 parity-only records prove it: equivalent in
-selection, but v2 as frozen cannot store their identity at all):
-
-- **236 immediately migratable** — 180 sugar-eligible + 35 single-relevant-
-  with-cosmetic-siblings + 11 fully-ordered multi-event, none of which
-  carry a parity-only representation problem.
-- **11 parity-only equivalent-but-blocked** — see above; blocked on a
-  representation decision, not on chronology.
-- **49 nontrivial semantic migrations, not a rename** — split further, so
-  the scope of *actual remaining human work* is visible rather than
-  buried inside one "manual review" label:
   - **47 already researched** — design doc §7's taxonomy (38
     bundled/shared-package + 9 mechanically-distinct order-unknown; that
     finer split is a research label with no computable signal in the
@@ -505,17 +557,39 @@ selection, but v2 as frozen cannot store their identity at all):
     `erratum-last-will` — blocked on a human decision about whether their
     researcher-inferred order should become an authored `basis`-carrying
     edge.
+
+**2. CHRONOLOGY/SHAPE READINESS** — a narrower, purely structural claim:
+does the record's chronology/event-set structure have any KNOWN obstacle to
+becoming v2 `events{}`/`states[]`? This is NOT a data-preservation or
+migration-safety claim.
+
+- **236 chronology/shape-ready** — 180 sugar-eligible + 35 single-relevant-
+  with-cosmetic-siblings + 11 fully-ordered multi-event: equivalent, and
+  none carry the parity-only representation problem.
+- **11 parity-only, separately blocked** — equivalent in selection, but v2
+  as frozen cannot store their identity at all (§ below); blocked on a
+  representation decision, not on chronology.
 - **10 pure cosmetic/engine, no historical state** — equivalent, and
   nothing to migrate at all (no historical identity exists to preserve).
 
-**Self-contradictory under the legacy schema (informational, orthogonal to
-the above, not a blocker by itself): 48 of the 49** — the specific symptom
-of v1's model actively asserting a false answer, as opposed to YZ-Tank
-Dragon's incompleteness. All 48 are already inside the 49.
+**3. DATA-PRESERVATION CERTIFICATION: PENDING for all 296, including the
+236.** `_data_preserved()`'s "0 failures" only means the fields it CHECKS
+(historical_text/modern_text/summary/sources, and every coverage field
+with a v2 destination) survive candidate construction — it says nothing
+about fields with NO v2 destination at all. `status` (all 296 records),
+`tested` (240), `gap.upstream_checked`/`gap.behavioural_impact` (53 each),
+and one bare `reason` currently have nowhere to go in v2 (§ the inventory
+above, and the full design research in
+`erratum-v2-representation-gaps.md`). **A record being chronology/shape-
+ready does not mean migrating it today would preserve everything it
+currently carries.** Certification is explicitly PENDING a representation
+decision for this metadata — `chronology_shape_ready`/`chronology_shape_
+ready_ids` in the JSON report are deliberately NOT named `migratable` or
+`safe`, and `data_preservation_status` is reported as the literal string
+`"pending"`.
 
-**Implementation metadata with no v2 destination** (`status`, `tested`,
-`gap.upstream_checked`, `gap.behavioural_impact`, one record's ad hoc
-`reason`) is a separate, still-open representation question affecting up
-to all 296 records regardless of the equivalence/readiness split above —
-see the inventory table earlier in this document. Not blocking, not
-resolved: reported honestly as unknown.
+**Self-contradictory under the legacy schema (informational, orthogonal to
+all three questions above, not a blocker by itself): 48 of the 49** — the
+specific symptom of v1's model actively asserting a false answer, as
+opposed to YZ-Tank Dragon's incompleteness. All 48 are already inside the
+49.

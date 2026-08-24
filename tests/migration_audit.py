@@ -425,12 +425,23 @@ UNREPRESENTED_METADATA_FIELDS = ("status", "tested", "gap.upstream_checked", "ga
 
 def metadata_inventory(errata: dict) -> list[dict]:
     """For every v1 implementation-metadata field with no v2 coverage
-    destination: how many records carry it, which ones (a sample), and
-    confirmation that migrating today would silently lose it. Also flags
-    ANY field on an implementation or its `gap` this function does not
-    already know about, rather than silently assuming the known list is
-    exhaustive forever."""
-    from collections import defaultdict
+    destination: how many IMPLEMENTATION OBJECTS carry it, versus how many
+    DISTINCT RECORDS - a v1 record can carry more than one implementation
+    object (one baseline `implementation`, plus one `resulting_
+    implementation` per relevant change), so "occurrences" and "records"
+    are genuinely different counts and must be reported as such, never
+    conflated as "records" the way a prior pass's `record_count` did (296
+    records but 312 implementation-object occurrences, because 16 changes
+    across 12 records carry their own `resulting_implementation`).
+
+    Also reports, per field, whether the SAME record's baseline and
+    resulting-implementation values for that field actually differ -
+    load-bearing evidence for whether the metadata is state-specific
+    (varies per implementation version within one card) or safely
+    record-wide (the same for every version). Flags ANY field this
+    function does not already recognise, rather than assuming the known
+    list is exhaustive forever."""
+    from collections import Counter, defaultdict
 
     known_reason_fields = {"reason", "sources"}  # -> gap_reason/gap_sources, already preserved
     known_impl_fields = {
@@ -441,33 +452,58 @@ def metadata_inventory(errata: dict) -> list[dict]:
         "script",
         "gap",
     }
-    field_records: dict[str, list[str]] = defaultdict(list)
+    # field -> list of (record_id, "baseline"|"resulting", value)
+    occurrences: dict[str, list[tuple[str, str, object]]] = defaultdict(list)
+
+    def _collect(record_id: str, impl: dict, slot: str) -> None:
+        for key, value in impl.items():
+            if key not in known_impl_fields or key in ("status", "tested"):
+                occurrences[key].append((record_id, slot, value))
+        gap = impl.get("gap") or {}
+        for key, value in gap.items():
+            if key not in known_reason_fields:
+                occurrences[f"gap.{key}"].append((record_id, slot, value))
+
     for record in errata.values():
         if not isinstance(record, Erratum):
             continue
-        impls = [record.implementation or {}]
+        _collect(record.id, record.implementation or {}, "baseline")
         for change in record.changes:
             resulting = change.get("resulting_implementation")
             if resulting:
-                impls.append(resulting)
-        for impl in impls:
-            for key in impl:
-                if key not in known_impl_fields:
-                    field_records[key].append(record.id)
-                elif key == "status" or key == "tested":
-                    field_records[key].append(record.id)
-            gap = impl.get("gap") or {}
-            for key in gap:
-                if key not in known_reason_fields:
-                    field_records[f"gap.{key}"].append(record.id)
+                _collect(record.id, resulting, "resulting")
+
     inventory = []
-    for field in sorted(field_records):
-        ids = field_records[field]
+    for field in sorted(occurrences):
+        entries = occurrences[field]
+        record_ids = {rid for rid, _, _ in entries}
+        baseline_ids = sorted({rid for rid, slot, _ in entries if slot == "baseline"})
+        resulting_ids = sorted({rid for rid, slot, _ in entries if slot == "resulting"})
+        by_record: dict[str, dict[str, object]] = defaultdict(dict)
+        for rid, slot, value in entries:
+            by_record[rid][slot] = value
+        has_both = sorted(rid for rid, slots in by_record.items() if {"baseline", "resulting"} <= slots.keys())
+        differs = sorted(
+            rid for rid in has_both if by_record[rid]["baseline"] != by_record[rid]["resulting"]
+        )
+        values = [v for _, _, v in entries]
+        distinct_values = {repr(v) for v in values}
+        value_distribution = (
+            {repr(v): c for v, c in Counter(values).items()} if len(distinct_values) <= 10 else None
+        )
         inventory.append(
             {
                 "field": field,
-                "record_count": len(ids),
-                "representative_ids": sorted(set(ids))[:5],
+                "implementation_occurrence_count": len(entries),
+                "unique_record_count": len(record_ids),
+                "unique_record_ids": sorted(record_ids),
+                "baseline_occurrence_count": len(baseline_ids),
+                "resulting_implementation_occurrence_count": len(resulting_ids),
+                "representative_baseline_ids": baseline_ids[:5],
+                "representative_resulting_ids": resulting_ids[:5],
+                "records_with_both_baseline_and_resulting": has_both,
+                "records_where_value_differs_between_baseline_and_resulting": differs,
+                "value_distribution": value_distribution,
                 "has_v2_destination": False,
                 "would_be_lost_on_migration": True,
             }
@@ -769,7 +805,10 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "records": len(rows),
         # SEMANTIC EQUIVALENCE: selection never changes at any chronology
         # boundary. Necessary, not sufficient, for migration readiness -
-        # see immediately_migratable/parity_only_blocked below.
+        # see chronology_shape_ready / parity_only_blocked /
+        # data_preservation_status below. Equivalence is a claim about
+        # SELECTION only; it says nothing about whether every field a v1
+        # record carries has a place to go in v2.
         "equivalent": equivalent_count,
         "semantic_equivalent": equivalent_count,  # explicit alias
         "not_equivalent": sum(1 for r in rows if not r["equivalent"]),
@@ -782,13 +821,35 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "research_status": dict(Counter(r.get("research_status") for r in rows)),
         "migration_complexity": dict(Counter(r.get("migration_complexity") for r in rows)),
         "data_not_preserved_ids": sorted(r["id"] for r in rows if r.get("data_preserved") is False),
-        # CURRENT DATA-PRESERVING MIGRATION READINESS: equivalence is
-        # necessary but not sufficient. Of the 247 semantically equivalent
-        # records, 11 (parity-only identity) are STILL blocked on a
-        # representation decision - they are equivalent in SELECTION but
-        # v2 as frozen cannot store the identity at all. Do not report 247
-        # as "safe to migrate" without this qualifier.
-        "immediately_migratable": equivalent_count - parity_only_count,
+        # CHRONOLOGY/SHAPE READINESS - deliberately NOT called "safe to
+        # migrate", "immediately migratable", or "data-preserving". Of the
+        # 247 semantically equivalent records, 11 (parity-only identity)
+        # are separately blocked on a representation decision (v2 as
+        # frozen cannot store their identity at all). The remaining 236
+        # have no known chronology/shape obstacle to becoming v2 events{}/
+        # states[] - but v1 implementation metadata with NO v2 coverage
+        # destination (status, tested, gap.upstream_checked,
+        # gap.behavioural_impact, one bare `reason` - see
+        # `metadata_inventory` below) affects records regardless of this
+        # split, INCLUDING these 236. Their data-PRESERVATION status is
+        # therefore explicitly PENDING a design decision
+        # (docs/research/erratum-v2-representation-gaps.md), not
+        # certified. Certification is a separate claim from either
+        # equivalence or chronology/shape readiness, and none of the three
+        # implies it.
+        "chronology_shape_ready": equivalent_count - parity_only_count,
+        "chronology_shape_ready_ids": sorted(
+            r["id"] for r in rows if r["equivalent"] and r.get("category") != CAT_PARITY_ONLY
+        ),
+        "data_preservation_status": "pending",
+        "data_preservation_pending_reason": (
+            "v1 implementation/gap metadata with no v2 coverage destination "
+            "(status, tested, gap.upstream_checked, gap.behavioural_impact, one "
+            "bare 'reason') has not been assigned a representation - see "
+            "metadata_inventory and docs/research/erratum-v2-representation-gaps.md. "
+            "Do not read chronology_shape_ready as a data-preservation or "
+            "migration-safety certification."
+        ),
         "parity_only_blocked": parity_only_count,
         "parity_only_blocked_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
         "nontrivial_migration_scope": sum(1 for r in rows if not r["equivalent"]),

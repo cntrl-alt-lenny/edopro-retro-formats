@@ -142,7 +142,11 @@ def historical_identity(override: dict | ImplementationCoverage) -> tuple[int, t
 
     Never called on a coverage that has not already passed `_usable_v2()` /
     `_usable()`; the explicit raise here is a backstop so a future caller
-    that forgets fails loudly and locally instead of producing `int(None)`."""
+    that forgets fails loudly and locally instead of producing `int(None)`
+    - or, since a backstop must not itself be the hole it guards against,
+    silently coercing a schema-invalid value (`int("123")`, `int(True)`)
+    into one that looks valid. Uses the same strict `_is_valid_passcode()`
+    authority every other caller does; never `int(...)`."""
     if isinstance(override, ImplementationCoverage):
         passcode = override.historical_passcode
         variants = override.historical_variant_passcodes
@@ -155,12 +159,18 @@ def historical_identity(override: dict | ImplementationCoverage) -> tuple[int, t
         raise MalformedHistoricalIdentity(
             f"{where} claims a historical substitution but records no historical_passcode"
         )
-    try:
-        return int(passcode), tuple(int(v) for v in variants)
-    except (TypeError, ValueError) as exc:
+    if not _is_valid_passcode(passcode):
         raise MalformedHistoricalIdentity(
-            f"{where}: historical passcode/variants are not integers ({exc})"
-        ) from exc
+            f"{where}: historical_passcode {passcode!r} is not a valid passcode "
+            "(schema: integer, 1..4294967295)"
+        )
+    for variant in variants:
+        if not _is_valid_passcode(variant):
+            raise MalformedHistoricalIdentity(
+                f"{where}: historical_variant_passcodes entry {variant!r} is not a valid passcode "
+                "(schema: integer, 1..4294967295)"
+            )
+    return passcode, tuple(variants)
 
 
 class ErrataSelectionError(ValueError):

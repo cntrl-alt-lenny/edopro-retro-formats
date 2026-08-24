@@ -1971,7 +1971,27 @@ has nothing left to select for).
    comparator bug in that audit's first pass was found and fixed (the bug
    produced a false 296-of-296 claim; the corrected comparator reproduces
    this document's own 247/49/48/236/11 figures exactly, independently
-   re-derived rather than assumed).** The shape split is finer than "single-
+   re-derived rather than assumed).**
+
+   **BLOCKED — do not begin this step yet, for TWO independent reasons, not
+   one.** It was already known that the 11 parity-only records must be
+   excluded (below). A second, later audit pass found that **the
+   remaining 236 are ALSO not yet clear to migrate**: v1 implementation
+   metadata with no v2 coverage destination at all (`status` on all 296
+   records, `tested` on 240, `gap.upstream_checked`/`gap.behavioural_
+   impact` on 53 each, one bare `reason`) is demonstrably STATE-SPECIFIC
+   (a change's `resulting_implementation` can and does carry a different
+   `status` than the record's baseline `implementation` — see
+   `erratum-v2-migration-audit.md`'s worked Blue-Eyes Toon Dragon example),
+   so it cannot be preserved by a record-level field, and no v2
+   representation for it has been designed yet. See
+   `docs/research/erratum-v2-representation-gaps.md` for the full
+   comparison of candidate representations for BOTH open gaps (this
+   metadata question and the parity-only identity question below). This
+   step may begin only once that design is resolved and, if it requires a
+   schema change, implemented — not before.
+
+   The shape split, once unblocked, is finer than "single-
    event sugar for the 236" — under full-event semantics every change is an
    event, so only **180** of the 236 trivial records have exactly one event
    in total and can use sugar; **35** have one relevant change with a
