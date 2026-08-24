@@ -126,14 +126,40 @@ class SelectedOverride:
     implementation: dict | ImplementationCoverage
 
 
+class MalformedHistoricalIdentity(ValueError):
+    """A coverage/implementation claims a concrete historical substitution
+    but carries no usable passcode. Raised rather than allowed to become
+    `int(None)`: a build that reached here would otherwise die with an
+    opaque TypeError deep inside whitelist emission."""
+
+
 def historical_identity(override: dict | ImplementationCoverage) -> tuple[int, tuple[int, ...]]:
     """(historical_passcode, historical_variant_passcodes) from either
     representation — the one place a v1 dict and a v2 ImplementationCoverage
     are read through a common lens, and only for this one concrete fact,
-    never for anything about WHICH state/version was selected."""
+    never for anything about WHICH state/version was selected.
+
+    Never called on a coverage that has not already passed `_usable_v2()` /
+    `_usable()`; the explicit raise here is a backstop so a future caller
+    that forgets fails loudly and locally instead of producing `int(None)`."""
     if isinstance(override, ImplementationCoverage):
-        return int(override.historical_passcode), tuple(int(v) for v in override.historical_variant_passcodes)
-    return int(override["historical_passcode"]), tuple(int(v) for v in override.get("historical_variant_passcodes", []))
+        passcode = override.historical_passcode
+        variants = override.historical_variant_passcodes
+        where = f"coverage kind {override.kind.value}"
+    else:
+        passcode = override.get("historical_passcode")
+        variants = override.get("historical_variant_passcodes", []) or []
+        where = f"implementation strategy {override.get('strategy')!r}"
+    if passcode is None:
+        raise MalformedHistoricalIdentity(
+            f"{where} claims a historical substitution but records no historical_passcode"
+        )
+    try:
+        return int(passcode), tuple(int(v) for v in variants)
+    except (TypeError, ValueError) as exc:
+        raise MalformedHistoricalIdentity(
+            f"{where}: historical passcode/variants are not integers ({exc})"
+        ) from exc
 
 
 class ErrataSelectionError(ValueError):
@@ -161,16 +187,39 @@ def _usable(impl: dict | None) -> dict | None:
     return None
 
 
+SUBSTITUTING_COVERAGE_KINDS = (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT)
+
+
+def _claims_substitution(coverage: ImplementationCoverage | None) -> bool:
+    """The coverage says a concrete historical card should replace the modern
+    one — regardless of whether it actually carries the identity to do it."""
+    return coverage is not None and coverage.kind in SUBSTITUTING_COVERAGE_KINDS
+
+
 def _usable_v2(coverage: ImplementationCoverage | None) -> ImplementationCoverage | None:
     """A v2 coverage carries a concrete, executable historical substitution
-    only for REUSE_UPSTREAM/CUSTOM_SCRIPT with a passcode — the same two
-    kinds `historical_identity()` knows how to read (design doc §2 of this
-    task). NONE_NEEDED/KNOWN_GAP/UNRESOLVED/MODERN are never substitutions:
-    NONE_NEEDED means the modern executable already IS correct for this
-    state; the other three mean no concrete swap can be made at all."""
-    if coverage is not None and coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+    only for REUSE_UPSTREAM/CUSTOM_SCRIPT **that actually record a
+    historical_passcode** — the same two kinds `historical_identity()` knows
+    how to read (design doc §2 of this task). NONE_NEEDED/KNOWN_GAP/
+    UNRESOLVED/MODERN are never substitutions: NONE_NEEDED means the modern
+    executable already IS correct for this state; the other three mean no
+    concrete swap can be made at all.
+
+    The passcode check mirrors legacy `_usable()` deliberately: without it a
+    malformed REUSE_UPSTREAM coverage passed straight through to
+    `historical_identity()` and died as `int(None)` mid-build. Malformed
+    coverage is reported as a build PROBLEM by the callers that can
+    (`_malformed_substitution()`), not silently dropped."""
+    if _claims_substitution(coverage) and coverage.historical_passcode is not None:
         return coverage
     return None
+
+
+def _malformed_substitution(coverage: ImplementationCoverage | None) -> bool:
+    """Claims a substitution but cannot supply one — the case the validator
+    reports as data corruption and a direct build must refuse rather than
+    crash on."""
+    return _claims_substitution(coverage) and coverage.historical_passcode is None
 
 
 def baseline_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCoverage | None:
@@ -196,7 +245,9 @@ def in_reference(erratum: Erratum | ErratumV2, parity: dict) -> bool:
     return marker in erratum.sources
 
 
-def _v2_parity_walk_override(erratum: ErratumV2) -> ImplementationCoverage | None:
+def _v2_parity_walk_override(
+    erratum: ErratumV2, problems: list[str] | None = None
+) -> ImplementationCoverage | None:
     """The frozen design's deterministic structural walk (§5 of this task):
     fewest relevant events first, ties broken by sorted event-id tuple,
     starting from baseline — the first state in that walk carrying a usable
@@ -205,7 +256,18 @@ def _v2_parity_walk_override(erratum: ErratumV2) -> ImplementationCoverage | Non
     and sorted (size, sorted ids), so this walk is invariant under
     `events{}`'s declaration order by construction."""
     for down_set in erratum.structural_states():
-        usable = _usable_v2(erratum.state_for(down_set).coverage)
+        coverage = erratum.state_for(down_set).coverage
+        if _malformed_substitution(coverage):
+            # Never silently walk past corrupt identity data and pick a later
+            # state as if this one had said nothing.
+            if problems is not None:
+                problems.append(
+                    f"{erratum.id}: state {sorted(down_set) or 'baseline'} declares coverage "
+                    f"{coverage.kind.value} but records no historical_passcode; parity cannot "
+                    "emit a substitution it has no identity for"
+                )
+            return None
+        usable = _usable_v2(coverage)
         if usable is not None:
             return usable
     return None
@@ -245,7 +307,11 @@ def _executable_outcome(coverage: ImplementationCoverage) -> tuple | None:
     doc §7 of this task). None means "no concrete outcome can be
     established" (KNOWN_GAP/UNRESOLVED) and is never treated as agreeing
     with anything, including another None."""
-    if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
+    if _claims_substitution(coverage):
+        # A substitution with no passcode establishes no outcome at all: it
+        # must never be able to "agree" with a well-formed candidate.
+        if coverage.historical_passcode is None:
+            return None
         return ("substitute", coverage.historical_passcode, coverage.historical_variant_passcodes)
     if coverage.kind == Coverage.NONE_NEEDED:
         return ("modern",)
@@ -316,11 +382,37 @@ def _select_v2_override(
         return None
     if erratum.id in fmt.errata_include:
         # include pins the BASELINE semantic state (frozenset()) — never a
-        # different v2 state merely because baseline lacks an override.
-        return _usable_v2(erratum.state_for(frozenset()).coverage)
+        # different v2 state merely because baseline lacks an override. What
+        # that pin MEANS depends on the baseline's coverage kind, and the
+        # five kinds are genuinely different answers, not one "no override":
+        #   REUSE_UPSTREAM/CUSTOM_SCRIPT -> substitute it;
+        #   NONE_NEEDED  -> keep modern; the modern executable IS the baseline
+        #                   behaviour, so the pin is satisfied;
+        #   KNOWN_GAP    -> keep modern, but the format is knowingly playing a
+        #                   divergent card; validate.py surfaces it;
+        #   UNRESOLVED   -> FAIL SAFE. An explicit include is a claim about
+        #                   WHICH state applies, never permission to ignore
+        #                   that we do not know how to build that state.
+        baseline = erratum.state_for(frozenset()).coverage
+        if _malformed_substitution(baseline):
+            problems.append(
+                f"{erratum.id}: explicitly included, and its baseline declares coverage "
+                f"{baseline.kind.value}, but it records no historical_passcode; there is no "
+                "identity to substitute"
+            )
+            return None
+        if baseline.kind == Coverage.UNRESOLVED:
+            problems.append(
+                f"{erratum.id}: explicitly included, but its baseline implementation coverage "
+                "is unresolved — an include says which state applies, not how to build it; "
+                "record coverage (reuse-upstream/custom-script/none-needed), document a "
+                "known-gap, or drop the include"
+            )
+            return None
+        return _usable_v2(baseline)
     if parity:
         if in_reference(erratum, parity):
-            return _v2_parity_walk_override(erratum)
+            return _v2_parity_walk_override(erratum, problems)
         return None
     if snapshot is None or not erratum.has_implementation_relevant_history():
         return None
@@ -329,10 +421,11 @@ def _select_v2_override(
     try:
         selection = erratum.selection_at(snapshot)
     except SelectionError as exc:
-        # A genuinely contradictory record — the validator's ordering
-        # invariants (step 3) should have already caught the underlying
-        # CONTRADICTED edge, but a direct build call must still fail safe
-        # rather than crash uncaught.
+        # A genuinely contradictory record, or one whose chronology cannot be
+        # parsed at all — the validator's ordering/effective invariants
+        # (step 3) should have already reported the underlying CONTRADICTED
+        # edge or bad date, but a direct build call must still fail safe
+        # rather than crash uncaught: it cannot assume validate ran first.
         problems.append(f"{erratum.id}: {exc}")
         return None
     all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
@@ -341,8 +434,16 @@ def _select_v2_override(
         if candidate.events == all_relevant_ids:
             return None  # terminal/modern: no override
         coverage = candidate.coverage
-        if coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT):
-            return coverage
+        if _claims_substitution(coverage):
+            usable = _usable_v2(coverage)
+            if usable is not None:
+                return usable
+            problems.append(
+                f"{erratum.id}: determinate historical state {sorted(candidate.events)} declares "
+                f"coverage {coverage.kind.value} at {snapshot} but records no "
+                "historical_passcode; there is no identity to substitute"
+            )
+            return None
         if coverage.kind in (Coverage.NONE_NEEDED, Coverage.KNOWN_GAP):
             # NONE_NEEDED: the modern executable already IS correct for this
             # state. KNOWN_GAP: an ACKNOWLEDGED divergence — keep modern,

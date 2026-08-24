@@ -818,3 +818,70 @@ class ShapeDispatchTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CosmeticEngineSugarRuntimeTest(unittest.TestCase):
+    """The runtime half of the sugar restriction. `Repository.load()` parses
+    records BEFORE any JSON Schema check runs, so the parser must refuse
+    cosmetic/engine sugar itself rather than rely on the schema - and the
+    full-v2 equivalent must load with no implementation dimension at all."""
+
+    @staticmethod
+    def _sugar(kind: str) -> dict:
+        return {
+            "id": "erratum-sugar-kind",
+            "modern_card": {"passcode": 200, "name": "Beta"},
+            "classification": kind,
+            "event": {
+                "effective": {"date": "2011-07-01"},
+                "kind": kind,
+                "summary": "x",
+                "sources": ["s"],
+            },
+            "coverage": {"kind": "none-needed"},
+            "sources": ["s"],
+        }
+
+    @staticmethod
+    def _full(kind: str) -> dict:
+        return {
+            "id": "erratum-full-kind",
+            "modern_card": {"passcode": 200, "name": "Beta"},
+            "classification": kind,
+            "events": {
+                "e1": {
+                    "effective": {"date": "2011-07-01"},
+                    "transitions": [{"kind": kind, "summary": "x", "sources": ["s"]}],
+                }
+            },
+            "ordering": {},
+            "sources": ["s"],
+        }
+
+    def test_cosmetic_sugar_is_rejected_at_load(self):
+        with self.assertRaises(DataError) as ctx:
+            load_erratum_record(self._sugar("cosmetic"), Path("x.json"))
+        self.assertIn("functional/ruling", str(ctx.exception))
+
+    def test_engine_sugar_is_rejected_at_load(self):
+        with self.assertRaises(DataError):
+            load_erratum_record(self._sugar("engine"), Path("x.json"))
+
+    def test_functional_sugar_still_loads(self):
+        record = load_erratum_record(self._sugar("functional"), Path("x.json"))
+        self.assertEqual(1, len(record.relevant_events()))
+
+    def test_full_v2_cosmetic_has_no_implementation_dimension(self):
+        record = load_erratum_record(self._full("cosmetic"), Path("x.json"))
+        self.assertEqual((), record.relevant_events())
+        self.assertFalse(record.has_implementation_relevant_history())
+        # Exactly one structural state, and it IS the terminal one, so its
+        # coverage is the synthesised MODERN - no historical state exists.
+        self.assertEqual((frozenset(),), record.structural_states())
+        self.assertEqual(Coverage.MODERN, record.state_for(frozenset()).coverage.kind)
+
+    def test_full_v2_engine_has_no_implementation_dimension(self):
+        record = load_erratum_record(self._full("engine"), Path("x.json"))
+        self.assertEqual((), record.relevant_events())
+        self.assertEqual((frozenset(),), record.structural_states())
+        self.assertEqual(Coverage.MODERN, record.state_for(frozenset()).coverage.kind)

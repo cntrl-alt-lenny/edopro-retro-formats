@@ -240,12 +240,19 @@ class IncludeExcludeTest(V2ConsumerTestBase):
         )
         # Event dated in the PAST relative to 2005-04-01 snapshot -> always
         # confirmed NEW -> the only chronology-consistent candidate is the
-        # terminal (modern) state, never baseline.
-        self.add_erratum_v2(events={"e1": v2_event(effective={"date": "2000-01-01"})})
+        # terminal (modern) state, never baseline. The baseline carries a
+        # usable coverage so what is under test is the CONTRADICTION
+        # diagnostic, not the separate unresolved-coverage failure.
+        self.add_erratum_v2(
+            events={"e1": v2_event(effective={"date": "2000-01-01"})},
+            states=[{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000077)}],
+        )
         repo = self._repo()
         fmt = self._fmt(repo)
         overrides = select_applicable_errata(fmt, repo)
-        self.assertNotIn(200, overrides)  # baseline has no usable coverage anyway
+        # The include is honoured - it is an explicit adjudication - but the
+        # disagreement with chronology is reported rather than hidden.
+        self.assertEqual(historical_identity(overrides[200].implementation), (511000077, ()))
         self.assertTrue(self._warnings(repo, "format.erratum-include-contradicts-chronology"))
 
     def test_L_exclude_while_modern_impossible_warns_contradiction(self):
@@ -425,3 +432,350 @@ class CooccurrenceValidationTest(V2ConsumerTestBase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MalformedHistoricalIdentityTest(V2ConsumerTestBase):
+    """Objective 1: a coverage that CLAIMS a substitution but records no
+    historical_passcode must never reach `historical_identity()` as
+    `int(None)`. `_usable_v2()` now checks the passcode exactly as legacy
+    `_usable()` always did, and a direct build refuses rather than crashing
+    - it must not depend on the validator having been run first."""
+
+    def test_reuse_upstream_without_passcode_is_not_usable(self):
+        from retroformats.lflist import _usable_v2
+        from retroformats.model import ImplementationCoverage
+
+        broken = ImplementationCoverage(kind=Coverage.REUSE_UPSTREAM, historical_passcode=None)
+        self.assertIsNone(_usable_v2(broken))
+        ok = ImplementationCoverage(kind=Coverage.REUSE_UPSTREAM, historical_passcode=511000042)
+        self.assertIs(_usable_v2(ok), ok)
+
+    def test_historical_identity_raises_instead_of_int_none(self):
+        from retroformats.lflist import MalformedHistoricalIdentity, historical_identity
+        from retroformats.model import ImplementationCoverage
+
+        broken = ImplementationCoverage(kind=Coverage.CUSTOM_SCRIPT, historical_passcode=None)
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity(broken)
+        with self.assertRaises(MalformedHistoricalIdentity):
+            historical_identity({"strategy": "reuse-upstream"})
+
+    def test_executable_outcome_never_agrees_on_a_missing_passcode(self):
+        from retroformats.lflist import _executable_outcome
+        from retroformats.model import ImplementationCoverage
+
+        broken = ImplementationCoverage(kind=Coverage.REUSE_UPSTREAM, historical_passcode=None)
+        self.assertIsNone(_executable_outcome(broken))
+
+    def test_direct_build_fails_cleanly_on_malformed_determinate_coverage(self):
+        """The regression: build_lflist called WITHOUT the validator first."""
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            events={"e1": v2_event(effective={"date": "2020-01-01"})},  # OLD at snapshot
+            states=[{"events": [], "coverage": {"kind": "reuse-upstream"}}],  # no passcode
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        with self.assertRaises(ErrataSelectionError) as ctx:
+            build_lflist(fmt, repo)
+        self.assertIn("no historical_passcode", str(ctx.exception))
+
+    def test_direct_build_fails_cleanly_on_malformed_parity_coverage(self):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={
+                "reference_parity": {"reason": "reproduces a reference list", "sources": ["test-source"]}
+            },
+        )
+        self.add_erratum_v2(
+            events={"e1": v2_event(effective={"date": "2020-01-01"})},
+            states=[{"events": [], "coverage": {"kind": "custom-script"}}],  # no passcode
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        with self.assertRaises(ErrataSelectionError) as ctx:
+            build_lflist(fmt, repo)
+        self.assertIn("no historical_passcode", str(ctx.exception))
+
+
+class ExplicitIncludeCoverageKindsTest(V2ConsumerTestBase):
+    """Objective 2: an explicit include pins the BASELINE state, and the
+    five coverage kinds are five different answers - not one silent
+    "no override"."""
+
+    def _include_fixture(self, coverage):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={"include": ["erratum-v2-beta"]},
+        )
+        # Undated event: permanently ambiguous, baseline always plausible, so
+        # the include is a legitimate adjudication and the coverage kind is
+        # the only variable under test.
+        self.add_erratum_v2(
+            events={"e1": v2_event()},
+            states=([{"events": [], "coverage": coverage}] if coverage is not None else None),
+        )
+        repo = self._repo()
+        return repo, self._fmt(repo)
+
+    def test_include_baseline_reuse_upstream_substitutes(self):
+        repo, fmt = self._include_fixture(
+            v2_coverage(kind="reuse-upstream", historical_passcode=511000201)
+        )
+        overrides = select_applicable_errata(fmt, repo)
+        self.assertEqual(historical_identity(overrides[200].implementation), (511000201, ()))
+        self.assertEqual([], self._errors(repo))
+
+    def test_include_baseline_none_needed_keeps_modern_and_is_valid(self):
+        repo, fmt = self._include_fixture(v2_coverage(kind="none-needed"))
+        overrides = select_applicable_errata(fmt, repo)
+        self.assertNotIn(200, overrides)
+        built = build_lflist(fmt, repo)
+        self.assertIn(200, built.entries)  # modern card stays legal
+        self.assertEqual([], self._errors(repo))
+
+    def test_include_baseline_known_gap_keeps_modern_and_surfaces_divergence(self):
+        repo, fmt = self._include_fixture(v2_coverage(kind="known-gap"))
+        overrides = select_applicable_errata(fmt, repo)
+        self.assertNotIn(200, overrides)
+        self.assertIn(200, build_lflist(fmt, repo).entries)
+        self.assertEqual([], self._errors(repo))
+        self.assertTrue(self._warnings(repo, "format.erratum-known-divergence"))
+
+    def test_include_baseline_unresolved_fails_safe(self):
+        repo, fmt = self._include_fixture(None)  # no states[] -> UNRESOLVED baseline
+        with self.assertRaises(ErrataSelectionError) as ctx:
+            select_applicable_errata(fmt, repo)
+        self.assertIn("unresolved", str(ctx.exception))
+        self.assertTrue(self._errors(repo, "format.erratum-include-unresolved-coverage"))
+
+    def test_include_baseline_claiming_substitution_without_passcode_fails_safe(self):
+        repo, fmt = self._include_fixture({"kind": "reuse-upstream"})
+        with self.assertRaises(ErrataSelectionError):
+            select_applicable_errata(fmt, repo)
+        self.assertTrue(self._errors(repo, "format.erratum-include-unresolved-coverage"))
+
+
+class AmbiguousAdjudicationDiagnosticsTest(V2ConsumerTestBase):
+    """Objective 2: include/exclude diagnostics must also fire when the
+    selection is AMBIGUOUS, which previously only the determinate branch
+    handled."""
+
+    def test_ambiguous_include_with_baseline_plausible_is_a_legitimate_adjudication(self):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={"include": ["erratum-v2-beta"]},
+        )
+        self.add_erratum_v2(
+            events={"e1": v2_event()},  # undated -> ambiguous, baseline plausible
+            states=[{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000301)}],
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        overrides = select_applicable_errata(fmt, repo)
+        self.assertEqual(historical_identity(overrides[200].implementation), (511000301, ()))
+        self.assertEqual([], self._errors(repo))
+        # Not a contradiction, not redundant: exactly the adjudication the
+        # ambiguity asks for.
+        self.assertEqual([], self._warnings(repo, "format.erratum-include-contradicts-chronology"))
+        self.assertEqual([], self._warnings(repo, "format.erratum-include-redundant"))
+
+    def test_ambiguous_include_with_baseline_impossible_is_reported(self):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={"include": ["erratum-v2-beta"]},
+        )
+        # e1 confirmed NEW at the snapshot (past date) forces every candidate
+        # to contain e1; e2 is undated, so the selection stays AMBIGUOUS
+        # between {e1} and {e1,e2} - and baseline {} is not among them.
+        self.add_erratum_v2(
+            events={
+                "e1": v2_event(effective={"date": "2000-01-01"}),
+                "e2": v2_event(),
+            },
+            states=[
+                {"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000302)},
+                {"events": ["e1"], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000303)},
+            ],
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        selection = repo.errata["erratum-v2-beta"].selection_at(day("2005-04-01"))
+        self.assertEqual("ambiguous", selection.chronology)
+        self.assertNotIn(frozenset(), {c.events for c in selection.candidates})
+        self.assertTrue(self._errors(repo, "format.erratum-include-wrong-version"))
+
+    def test_ambiguous_exclude_with_modern_impossible_is_reported(self):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={"exclude": ["erratum-v2-beta"]},
+        )
+        # e1 confirmed OLD (future date) forbids every state containing it,
+        # so the terminal/modern state is impossible; e2 undated keeps the
+        # selection ambiguous between {} and {e2}.
+        self.add_erratum_v2(
+            events={
+                "e1": v2_event(effective={"date": "2020-01-01"}),
+                "e2": v2_event(),
+            },
+            states=[
+                {"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000304)},
+                {"events": ["e2"], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000305)},
+            ],
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        selection = repo.errata["erratum-v2-beta"].selection_at(day("2005-04-01"))
+        self.assertEqual("ambiguous", selection.chronology)
+        self.assertFalse(selection.modern_is_possible)
+        overrides = select_applicable_errata(fmt, repo)
+        self.assertNotIn(200, overrides)  # exclude still wins outright
+        self.assertTrue(self._warnings(repo, "format.erratum-exclude-contradicts-chronology"))
+
+
+class ProductionValidatorShapeTest(V2ConsumerTestBase):
+    """Objective 6: guarantees the JSON Schema states but `Repository.load()`
+    never runs. It parses raw JSON directly, so each of these is a case where
+    the parser's own normalisation would otherwise make malformed data
+    indistinguishable from valid data."""
+
+    def _record(self, **kw):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(**kw)
+        return self._repo()
+
+    def test_A_repeated_id_in_one_states_events_array_is_an_error(self):
+        repo = self._record(
+            events={"e1": v2_event(), "e2": v2_event()},
+            states=[{"events": ["e1", "e1"], "coverage": v2_coverage(kind="none-needed")}],
+        )
+        self.assertTrue(self._errors(repo, "erratum.state-events-duplicate"))
+
+    def test_A_distinct_ids_are_fine(self):
+        repo = self._record(
+            events={"e1": v2_event(), "e2": v2_event()},
+            states=[{"events": ["e1", "e2"], "coverage": v2_coverage(kind="none-needed")}],
+        )
+        self.assertEqual([], self._errors(repo, "erratum.state-events-duplicate"))
+
+    def test_B_full_v2_missing_ordering_is_an_error(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        # add_erratum_v2 always writes `ordering`; drop it to model a raw
+        # authored record that omitted the block entirely.
+        self.add_erratum_v2(events={"e1": v2_event()})
+        path = self.root / "data/errata/v2-beta.json"
+        import json as _json
+
+        doc = _json.loads(path.read_text(encoding="utf-8"))
+        del doc["ordering"]
+        path.write_text(_json.dumps(doc, indent=2), encoding="utf-8")
+        repo = self._repo()
+        self.assertTrue(self._errors(repo, "erratum.missing-ordering"))
+
+    def test_B_sugar_needs_no_authored_ordering(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.write(
+            "data/errata/v2-sugar.json",
+            {
+                "id": "erratum-v2-sugar",
+                "modern_card": {"passcode": 200, "name": "Beta"},
+                "classification": "functional",
+                "event": {
+                    "effective": {"date": "2015-01-01"},
+                    "kind": "functional",
+                    "summary": "x",
+                    "sources": ["test-source"],
+                },
+                "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000900),
+                "review": {"status": "reviewed"},
+                "sources": ["test-source"],
+            },
+        )
+        repo = self._repo()
+        self.assertEqual([], self._errors(repo, "erratum.missing-ordering"))
+
+    def test_C_event_missing_effective_is_an_error(self):
+        repo = self._record(
+            events={"e1": {"transitions": [v2_transition(kind="functional")]}},
+        )
+        self.assertTrue(self._errors(repo, "erratum.event-missing-effective"))
+
+    def test_C_effective_missing_date_key_is_an_error(self):
+        repo = self._record(events={"e1": v2_event(effective={})})
+        self.assertTrue(self._errors(repo, "erratum.event-missing-effective"))
+
+    def test_C_explicit_null_date_is_valid_unknown_chronology(self):
+        repo = self._record(events={"e1": v2_event(effective={"date": None})})
+        self.assertEqual([], self._errors(repo, "erratum.event-missing-effective"))
+
+    def test_D_malformed_date_on_an_ordered_event_reports_and_does_not_crash(self):
+        repo = self._record(
+            events={
+                "e1": v2_event(effective={"date": "2010-13-45"}),
+                "e2": v2_event(effective={"date": "2015-01-01"}),
+            },
+            ordering={"chains": [["e1", "e2"]]},
+        )
+        # The whole validation run completes and reports, rather than dying
+        # with an uncaught ValueError out of ordering_proof().
+        v = Validator(repo)
+        findings = v.validate()
+        self.assertTrue(findings)
+        codes = {f.code for f in v.errors}
+        self.assertIn("erratum.ordering-uncheckable", codes)
+
+    def test_E_known_gap_with_historical_passcode_is_rejected(self):
+        repo = self._record(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "known-gap",
+                        "gap_reason": "none upstream",
+                        "gap_sources": ["test-source"],
+                        "historical_passcode": 511000001,
+                    },
+                }
+            ],
+        )
+        self.assertTrue(self._errors(repo, "erratum.coverage-incompatible-field"))
+
+    def test_E_none_needed_with_implementation_payload_is_rejected(self):
+        repo = self._record(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {"kind": "none-needed", "script": "dist/scripts/c1.lua"},
+                }
+            ],
+        )
+        self.assertTrue(self._errors(repo, "erratum.coverage-incompatible-field"))
+
+    def test_E_reuse_upstream_with_gap_fields_is_rejected(self):
+        repo = self._record(
+            events={"e1": v2_event()},
+            states=[
+                {
+                    "events": [],
+                    "coverage": {
+                        "kind": "reuse-upstream",
+                        "historical_passcode": 511000002,
+                        "upstream": "ProjectIgnis",
+                        "gap_reason": "should not be here",
+                    },
+                }
+            ],
+        )
+        self.assertTrue(self._errors(repo, "erratum.coverage-incompatible-field"))
+
+    def test_E_wellformed_coverages_are_accepted(self):
+        repo = self._record(
+            events={"e1": v2_event(), "e2": v2_event()},
+            states=[
+                {"events": [], "coverage": v2_coverage(kind="reuse-upstream")},
+                {"events": ["e1"], "coverage": v2_coverage(kind="known-gap")},
+            ],
+        )
+        self.assertEqual([], self._errors(repo, "erratum.coverage-incompatible-field"))

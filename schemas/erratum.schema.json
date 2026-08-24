@@ -417,15 +417,15 @@
       "title": "v2: flattened single-event, single-transition sugar",
       "required": ["id", "modern_card", "classification", "event", "coverage", "sources"],
       "additionalProperties": false,
-      "description": "Sugar for the common case (docs/research/erratum-state-model-v2.md §13): a record with exactly one event and one transition. Desugars to the minimal events{}/states[] shape — `coverage` describes the {} (baseline, nothing-occurred) down-set; the all-events down-set's 'modern' coverage is synthesised, never authored here.",
+      "description": "Sugar for the common case (docs/research/erratum-state-model-v2.md §13): a record with exactly one event and one transition, whose transition is FUNCTIONAL or RULING. Desugars to the minimal events{}/states[] shape — `coverage` describes the {} (baseline, nothing-occurred) down-set; the all-events down-set's 'modern' coverage is synthesised, never authored here. Cosmetic/engine-only records cannot use this shape: such an event creates no implementation-state dimension, so its relevant-event set is empty, {} IS the terminal state, and the terminal state's coverage is unconditionally 'modern' — which `authoredBaselineCoverage` rightly forbids. There is no baseline coverage to author because there is no distinct historical executable state. Write those as full v2 instead: events{} with the cosmetic/engine transition, ordering {}, and no states[] at all.",
       "properties": {
         "$schema": { "type": "string" },
         "id": { "type": "string", "pattern": "^erratum-[a-z0-9-]+$" },
         "modern_card": { "$ref": "common.schema.json#/$defs/cardRef" },
         "classification": {
           "type": "string",
-          "enum": ["functional", "cosmetic", "ruling", "engine"],
-          "description": "Same kind as the single transition's own kind."
+          "enum": ["functional", "ruling"],
+          "description": "Same kind as the single transition's own kind. Only functional/ruling: a cosmetic/engine-only record has no baseline implementation state to author, so it cannot take this shape (see this definition's description)."
         },
         "event": {
           "type": "object",
@@ -436,7 +436,8 @@
             "effective": { "$ref": "#/$defs/eventEffective" },
             "kind": {
               "type": "string",
-              "enum": ["functional", "cosmetic", "ruling", "engine"]
+              "enum": ["functional", "ruling"],
+              "description": "Only the two implementation-relevant kinds. A cosmetic/engine transition creates no implementation-state dimension and therefore has no baseline state for `coverage` to describe; use full v2 for those."
             },
             "axis": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
             "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },

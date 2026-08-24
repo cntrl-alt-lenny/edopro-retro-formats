@@ -17,6 +17,7 @@ from pathlib import Path
 
 from .model import (
     AVAILABILITY_KINDS,
+    COVERAGE_FIELDS,
     CHANGE_KINDS,
     CONTRADICTED,
     EFFECTIVE_STATUSES,
@@ -445,6 +446,7 @@ class Validator:
                     f"kind is {dominant!r} (severity functional > ruling > engine > cosmetic)",
                 )
 
+        self._validate_v2_shape(erratum)
         self._validate_v2_ordering(erratum)
         self._validate_v2_states(erratum)
 
@@ -579,6 +581,87 @@ class Validator:
                 f"possible effective date {lo}",
             )
 
+    def _safe_ordering_proof(
+        self, erratum: ErratumV2, before_id: str, after_id: str, before_eff: dict, after_eff: dict
+    ) -> str | None:
+        """`ordering_proof()` over chronology that `_validate_v2_effective`
+        may already have reported as malformed. A bad date must produce a
+        finding and let validation continue, never an uncaught ValueError
+        out of the whole run - the record is being validated precisely
+        BECAUSE it might be broken."""
+        try:
+            return ordering_proof(before_eff, after_eff)
+        except (ValueError, TypeError) as exc:
+            self.error(
+                "erratum.ordering-uncheckable",
+                erratum.path,
+                f"ordering edge {before_id!r} -> {after_id!r} cannot be checked: one of the "
+                f"events has malformed chronology ({exc})",
+            )
+            return None
+
+    def _validate_v2_shape(self, erratum: ErratumV2) -> None:
+        """Raw-shape guarantees the JSON Schema states but `Repository.load()`
+        never runs: it parses raw JSON directly, so anything the schema alone
+        enforces is unenforced in production until it is also checked here.
+
+        Each of these is a case where the parser's own normalisation would
+        otherwise make malformed data indistinguishable from valid data."""
+        raw = erratum.raw
+        # A. `states[].events` is a SET. frozenset() silently collapses a
+        # repeated id, so ["e1","e1"] would parse as {"e1"} and validate as
+        # if the author had written a different, well-formed document.
+        for index, entry in enumerate(raw.get("states") or []):
+            ids = entry.get("events")
+            if not isinstance(ids, list):
+                continue
+            seen: set[str] = set()
+            for event_id in ids:
+                if event_id in seen:
+                    self.error(
+                        "erratum.state-events-duplicate",
+                        erratum.path,
+                        f"states[{index}].events repeats {event_id!r}; a state's events are a "
+                        "SET of ids, and a repeated member is malformed rather than a second "
+                        "encoding of the same set",
+                    )
+                seen.add(event_id)
+        # B. Full v2 must author `ordering` explicitly, even as `{}` - saying
+        # "these events have no known order" is a claim, and its absence is
+        # an omission. Sugar has no authored ordering by construction.
+        if erratum.authored_shape == "full" and "ordering" not in raw:
+            self.error(
+                "erratum.missing-ordering",
+                erratum.path,
+                "full v2 records must state `ordering` explicitly, even when empty ({}): "
+                "an absent ordering block is an omission, not an assertion that no order "
+                "is known",
+            )
+        # C. An event's chronology must exist as a shape. A missing
+        # `effective`, or an `effective` with no `date` key at all, parses to
+        # exactly the same permanently-AMBIGUOUS behaviour as an explicit
+        # `"date": null` - so silence would masquerade as a researched
+        # "chronology unknown" claim.
+        for event_id, event_raw in (raw.get("events") or {}).items():
+            if not isinstance(event_raw, dict):
+                continue
+            if "effective" not in event_raw:
+                self.error(
+                    "erratum.event-missing-effective",
+                    erratum.path,
+                    f"events[{event_id!r}] has no `effective` block; explicit unknown "
+                    'chronology is written {"date": null}, never omitted',
+                )
+                continue
+            effective = event_raw.get("effective")
+            if not isinstance(effective, dict) or "date" not in effective:
+                self.error(
+                    "erratum.event-missing-effective",
+                    erratum.path,
+                    f"events[{event_id!r}].effective has no `date` key; explicit unknown "
+                    'chronology is written {"date": null}, never omitted',
+                )
+
     def _validate_v2_ordering(self, erratum: ErratumV2) -> None:
         """Invariants 6-7: every declared ordering constraint — chain-
         desugared pairs AND explicit edges alike, never only literal
@@ -592,7 +675,11 @@ class Validator:
                 after_event = erratum.events.get(after_id)
                 if before_event is None or after_event is None:
                     continue  # dangling reference already a load.failed finding
-                proof = ordering_proof(before_event.effective, after_event.effective)
+                proof = self._safe_ordering_proof(
+                    erratum, before_id, after_id, before_event.effective, after_event.effective
+                )
+                if proof is None:
+                    continue
                 if proof == CONTRADICTED:
                     self.error(
                         "erratum.ordering-contradicted",
@@ -614,7 +701,11 @@ class Validator:
             after_event = erratum.events.get(after_id)
             if before_event is None or after_event is None:
                 continue  # dangling reference already a load.failed finding
-            proof = ordering_proof(before_event.effective, after_event.effective)
+            proof = self._safe_ordering_proof(
+                erratum, before_id, after_id, before_event.effective, after_event.effective
+            )
+            if proof is None:
+                continue
             if proof == CONTRADICTED:
                 self.error(
                     "erratum.ordering-contradicted",
@@ -780,6 +871,23 @@ class Validator:
                 self._check_sources(list(coverage["gap_sources"]), erratum.path, None, f"{location}.coverage gap")
         elif kind not in ("none-needed", "modern"):
             self.error("erratum.bad-strategy", erratum.path, f"{location}.coverage: kind {kind!r}")
+        # The coverage sum type is CLOSED: each kind allows exactly the fields
+        # its schema branch allows (all of which are additionalProperties:
+        # false). A payload carrying another kind's fields - known-gap with a
+        # historical_passcode, none-needed with a script, modern with either -
+        # is materially incompatible data, not harmless extra detail, and the
+        # production validator must reject it even though it never runs the
+        # schema. COVERAGE_FIELDS is the single shared authority.
+        fields = COVERAGE_FIELDS.get(str(kind))
+        if fields is not None:
+            _required, allowed = fields
+            for field in sorted(set(coverage) - allowed):
+                self.error(
+                    "erratum.coverage-incompatible-field",
+                    erratum.path,
+                    f"{location}.coverage: kind {kind!r} does not allow field {field!r} "
+                    "(the coverage sum type is closed per kind)",
+                )
 
     # -- v2 format-applicability checks (invariant 9 + §§6-8 of this task) -
     # Mirror the v1 per-format loops in SHAPE (exclude/include/parity/
@@ -868,16 +976,61 @@ class Validator:
         except SelectionError:
             return  # already reported by _validate_v2_ordering; see _validate_v2_parity
         if excluded:
-            if selection.chronology == "determinate" and selection.candidates[0].events != all_relevant_ids:
+            # An exclude always keeps modern. The question worth reporting is
+            # whether the evidence says modern is WRONG here - and that is a
+            # property of the candidate set, not of determinacy: an ambiguous
+            # selection whose candidates all exclude the modern state is just
+            # as deliberate a contradiction as a determinate historical one,
+            # and used to go entirely unreported.
+            if not selection.modern_is_possible:
+                if selection.chronology == "determinate":
+                    detail = f"chronology says a historical state applies at {snapshot}"
+                else:
+                    detail = (
+                        f"chronology at {snapshot} is ambiguous between states "
+                        f"{[sorted(c.events) for c in selection.candidates]}, none of which is "
+                        "the modern state"
+                    )
                 self.warn(
                     "format.erratum-exclude-contradicts-chronology",
                     fmt.path,
-                    f"{erratum.id}: chronology says a historical state applies at {snapshot} "
-                    "but the format excludes it; document the deliberate deviation in the "
-                    "format notes",
+                    f"{erratum.id}: {detail} but the format excludes it, keeping the modern "
+                    "card; document the deliberate deviation in the format notes",
                 )
             return
         if included:
+            baseline_coverage = erratum.state_for(frozenset()).coverage
+            # First: what the pin can actually deliver, independent of chronology.
+            if baseline_coverage.kind == Coverage.UNRESOLVED:
+                self.error(
+                    "format.erratum-include-unresolved-coverage",
+                    fmt.path,
+                    f"{erratum.id}: explicitly included, but the baseline state's "
+                    "implementation coverage is unresolved; an include asserts WHICH state "
+                    "applies, never that an unknown implementation may be ignored - record "
+                    "coverage, document a known-gap, or drop the include",
+                )
+            elif baseline_coverage.kind == Coverage.KNOWN_GAP:
+                self.warn(
+                    "format.erratum-known-divergence",
+                    fmt.path,
+                    f"{erratum.modern_card.name}: explicitly included, but the baseline state "
+                    f"is not reproducible ({baseline_coverage.gap_reason}); the modern "
+                    "implementation is used and the divergence is acknowledged on the record",
+                )
+            elif (
+                baseline_coverage.kind in (Coverage.REUSE_UPSTREAM, Coverage.CUSTOM_SCRIPT)
+                and baseline_coverage.historical_passcode is None
+            ):
+                self.error(
+                    "format.erratum-include-unresolved-coverage",
+                    fmt.path,
+                    f"{erratum.id}: explicitly included, and its baseline declares coverage "
+                    f"{baseline_coverage.kind.value}, but records no historical_passcode; "
+                    "there is no identity to substitute",
+                )
+            # Second: whether chronology agrees baseline is the state to pin.
+            baseline_plausible = any(c.events == frozenset() for c in selection.candidates)
             if selection.chronology == "determinate" and selection.candidates[0].events == all_relevant_ids:
                 self.warn(
                     "format.erratum-include-contradicts-chronology",
@@ -901,6 +1054,20 @@ class Validator:
                     f"{sorted(selection.candidates[0].events)} at {snapshot}, but an explicit "
                     "include pins the baseline state; remove the include or fix the data",
                 )
+            elif not baseline_plausible:
+                # Ambiguous, but baseline is not among the states the evidence
+                # allows at all: the include is contradicted just as squarely
+                # as in the determinate case, and this used to be silent.
+                self.error(
+                    "format.erratum-include-wrong-version",
+                    fmt.path,
+                    f"{erratum.id}: chronology at {snapshot} is ambiguous between states "
+                    f"{[sorted(c.events) for c in selection.candidates]}, and the baseline "
+                    "state is not among them, but an explicit include pins the baseline; "
+                    "remove the include or fix the data",
+                )
+            # Ambiguous WITH baseline plausible: the include is exactly the
+            # documented adjudication the ambiguity calls for - no finding.
             return
         if selection.chronology == "ambiguous":
             policy = fmt.unresolved_policy or {}

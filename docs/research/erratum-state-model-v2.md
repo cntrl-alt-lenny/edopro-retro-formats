@@ -1725,11 +1725,45 @@ atomicity) — merging them into one event is a stronger, evidentially
 distinct claim (§5.7), and this stress case confirms the model does not
 force that stronger claim just because the dates happen to match.
 
-**7. Cosmetic changes interspersed with behavioural ones.** Unaffected —
-`kind in {functional, ruling}` filtering happens per-transition, before
-any transition's parent event enters the down-set machinery; an event
-containing only cosmetic/engine transitions never creates a distinguishable
-state, identical in effect to today's filtering.
+**7. Cosmetic changes interspersed with behavioural ones.**
+**CORRECTED (a114ee3) — the original text below was wrong about the
+implemented runtime and is retained struck through, because the difference
+is load-bearing for migration.**
+
+> ~~Unaffected — `kind in {functional, ruling}` filtering happens
+> per-transition, before any transition's parent event enters the down-set
+> machinery; an event containing only cosmetic/engine transitions never
+> creates a distinguishable state, identical in effect to today's
+> filtering.~~
+
+The correct rule, and the one `ErratumV2.selection_at()` implements:
+
+> **ALL historical events participate in chronology and order consistency.
+> ONLY functional/ruling events survive the projection into
+> implementation-state identity.**
+
+Filtering happens *after* down-set reasoning, not before it. A
+cosmetic/engine-only event still happened-or-didn't at a snapshot, and
+through the ordering DAG that fact can force a relevant predecessor to have
+occurred (a confirmed-NEW successor requires every predecessor, relevant or
+not) or forbid a relevant successor (a confirmed-OLD predecessor forbids
+every successor) — even though the event itself never appears in any
+`HistoricalState`'s identity. Reachable down-sets are computed over the FULL
+event set, projected onto relevant ids only at the end, and deduplicated so
+an undetermined cosmetic event cannot fork one real implementation state
+into several identical-looking candidates.
+
+This is observable, not theoretical:
+`tests/test_migration_audit.py::AuditSensitivityTest` exhibits a record where
+a cosmetic event's confirmed-NEW status collapses an otherwise ambiguous
+relevant event to a single determinate state — v1 says `ambiguous`, v2 says
+`modern`.
+
+It does **not** destabilise migration, for a reason that had to be proved
+rather than assumed: a *date-proven* ordering edge can never add a constraint
+the two events' own statuses already impose, and migration emits no other
+kind of edge. See `erratum-v2-migration-audit.md`, and
+`ProvenEdgesAddNoConstraintTest` for the exhaustive check.
 
 **8. An engine-level behaviour rather than a card-script behaviour.**
 Unchanged — explicitly out of scope, not unified with rule-profile
@@ -1817,8 +1851,22 @@ implicit structure to carry evidentiary weight, and a design that asks an
 author to type one extra nesting level is a small price for a design that
 cannot silently regress into the bug it exists to fix.
 
-**Mitigating the extra nesting for the common case (247 of 296 records):**
-a single-event, single-transition record may use flattened sugar —
+**Mitigating the extra nesting for the common case (180 of 296 records —
+re-derived; see `erratum-v2-migration-audit.md`):** a single-event,
+single-transition record whose transition is FUNCTIONAL or RULING may use
+flattened sugar. Two corrections to the figure once written here:
+
+- it is **180**, not 247. Under full-event semantics *every* change becomes
+  an event, so a record with one relevant change and a cosmetic change
+  beside it has two events and cannot use single-event sugar (35 such
+  records), and 21 records have no relevant change at all;
+- cosmetic/engine-only records **cannot** use this shape. Their
+  relevant-event set is empty, so `{}` IS the terminal state and its coverage
+  is unconditionally `modern` — which `authoredBaselineCoverage` rightly
+  forbids. There is no baseline state for `coverage` to describe. Those
+  records use full v2 with no authored `states[]`.
+
+The sugar shape:
 
 ```jsonc
 {
@@ -1919,13 +1967,18 @@ has nothing left to select for).
    **With no canonical v2 records yet, this commit must preserve every
    currently-generated `dist/` output exactly.**
 4. **Migrate the 236 trivial + 11 mechanically-PROVEN ordered records.**
-   These are the *only* records for which a v2 representation is
-   expected to preserve v1's historical semantics exactly (§10's
-   guarantee B) — single-event sugar for the 236, and for the 11, a
-   migration script that **independently re-derives and proves** each
-   `ordering.chains` edge from their dates directly, never copies
-   `changes[]` position. Regression-gated on guarantee B holding for
-   every one of the 247.
+   **Counts superseded — see `erratum-v2-migration-audit.md`.** The
+   re-derived partition is 180 sugar-eligible, 35 single-relevant records
+   that still need full v2 (cosmetic/engine events beside the relevant one),
+   17 multi-event records with date-PROVEN ordering, 43 multi-event records
+   with none, 10 pure cosmetic/engine records, and 11 parity-only identity
+   records that are BLOCKED. Guarantee B is now measured rather than
+   asserted: all 296 records are mechanically equivalent at every chronology
+   boundary — but equivalence is not sufficiency, and the 11 blockers prove
+   it (they migrate without changing selection, while silently losing the
+   historical identity GOAT parity depends on). Every ordering edge is still
+   independently re-derived and proved from dates, never copied from
+   `changes[]` position.
 5. **Migrate the 47 already-researched unordered records** (38
    bundled/shared-package + 9 mechanically-distinct order-unknown) as
    separate, unordered events — no `ordering` edge for either group; the

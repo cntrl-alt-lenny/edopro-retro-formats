@@ -377,3 +377,125 @@ class CorpusRegressionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CosmeticEngineSugarTest(unittest.TestCase):
+    """Sugar is only for a single FUNCTIONAL or RULING transition.
+
+    A cosmetic/engine-only event creates no implementation-state dimension,
+    so its relevant-event set is empty, `{}` IS the terminal state, and the
+    terminal state's coverage is unconditionally 'modern' - which the sugar's
+    required `authoredBaselineCoverage` rightly forbids. Permitting the shape
+    made a record that is schema-valid but has no consistent runtime meaning:
+    the authored coverage is silently discarded. Full v2 expresses these
+    records correctly, with no authored states at all."""
+
+    def test_cosmetic_sugar_is_rejected(self):
+        doc = flattened_sugar(
+            classification="cosmetic",
+            event={
+                "effective": {"date": "2011-07-01", "precision": "day"},
+                "kind": "cosmetic",
+                "summary": "PSCT rewording only.",
+                "sources": ["s1"],
+            },
+            coverage={"kind": "none-needed"},
+        )
+        self.assertFalse(is_valid(doc))
+
+    def test_engine_sugar_is_rejected(self):
+        doc = flattened_sugar(
+            classification="engine",
+            event={
+                "effective": {"date": "2008-03-01", "precision": "day"},
+                "kind": "engine",
+                "summary": "Rules-era difference.",
+                "sources": ["s1"],
+            },
+            coverage={"kind": "none-needed"},
+        )
+        self.assertFalse(is_valid(doc))
+
+    def test_functional_and_ruling_sugar_remain_valid(self):
+        self.assertTrue(is_valid(flattened_sugar()))
+        self.assertTrue(
+            is_valid(
+                flattened_sugar(
+                    classification="ruling",
+                    event={
+                        "effective": {"date": None},
+                        "kind": "ruling",
+                        "summary": "Era procedure.",
+                        "sources": ["s1"],
+                    },
+                )
+            )
+        )
+
+    def test_equivalent_full_v2_cosmetic_record_is_valid(self):
+        doc = {
+            "id": "erratum-cosmetic-full",
+            "modern_card": {"passcode": 33333333, "name": "Flattened"},
+            "classification": "cosmetic",
+            "events": {
+                "psct": {
+                    "effective": {"date": "2011-07-01", "precision": "day"},
+                    "transitions": [
+                        {"kind": "cosmetic", "summary": "PSCT rewording only.", "sources": ["s1"]}
+                    ],
+                }
+            },
+            "ordering": {},
+            "sources": ["s-top"],
+        }
+        self.assertTrue(is_valid(doc))
+
+    def test_equivalent_full_v2_engine_record_is_valid(self):
+        doc = {
+            "id": "erratum-engine-full",
+            "modern_card": {"passcode": 33333333, "name": "Flattened"},
+            "classification": "engine",
+            "events": {
+                "mr1": {
+                    "effective": {"date": "2008-03-01", "precision": "day"},
+                    "transitions": [
+                        {"kind": "engine", "summary": "Rules-era difference.", "sources": ["s1"]}
+                    ],
+                }
+            },
+            "ordering": {},
+            "sources": ["s-top"],
+        }
+        self.assertTrue(is_valid(doc))
+
+
+class CoverageFieldMapAgreesWithSchemaTest(unittest.TestCase):
+    """`retroformats.model.COVERAGE_FIELDS` is what the PRODUCTION validator
+    enforces (it never runs the schema). This proves the two cannot drift:
+    the map must equal the schema's own `coverage*` branches, field for
+    field, so there is one coverage model rather than two."""
+
+    def test_map_matches_schema_branches_exactly(self):
+        from retroformats.model import COVERAGE_FIELDS
+
+        schema = json.loads(
+            (REPO_ROOT / "schemas" / "erratum.schema.json").read_text(encoding="utf-8")
+        )
+        defs = schema["$defs"]
+        branches = {
+            "modern": "coverageModern",
+            "reuse-upstream": "coverageReuseUpstream",
+            "custom-script": "coverageCustomScript",
+            "none-needed": "coverageNoneNeeded",
+            "known-gap": "coverageKnownGap",
+        }
+        self.assertEqual(set(branches), set(COVERAGE_FIELDS))
+        for kind, def_name in branches.items():
+            branch = defs[def_name]
+            self.assertFalse(
+                branch.get("additionalProperties", True),
+                f"{def_name} must be a closed object for the map to be authoritative",
+            )
+            required, allowed = COVERAGE_FIELDS[kind]
+            self.assertEqual(set(branch["required"]), set(required), f"{kind} required")
+            self.assertEqual(set(branch["properties"]), set(allowed), f"{kind} allowed")

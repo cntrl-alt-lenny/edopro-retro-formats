@@ -1,0 +1,7285 @@
+{
+ "parity_only": {
+  "dist_impact": {
+   "2005-04-goat": {
+    "codes_gained": [
+     17449108,
+     47829960,
+     49217579,
+     61622107,
+     62340868,
+     71044499,
+     79575620,
+     79853073,
+     86327225,
+     90980792,
+     98434877
+    ],
+    "codes_lost": [
+     504700025,
+     504700078,
+     504700080,
+     504700100,
+     504700101,
+     504700116,
+     504700138,
+     504700139,
+     504700148,
+     504700159,
+     504700174
+    ],
+    "output_changes": true
+   },
+   "2010-03-edison": {
+    "codes_gained": [],
+    "codes_lost": [],
+    "output_changes": false
+   }
+  },
+  "records": [
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700100,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700100,
+    "id": "erratum-bubble-crash",
+    "modern_card": "Bubble Crash",
+    "modern_passcode": 61622107,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700078,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700078,
+    "id": "erratum-chaosrider-gustaph",
+    "modern_card": "Chaosrider Gustaph",
+    "modern_passcode": 47829960,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700139,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700139,
+    "id": "erratum-cipher-soldier",
+    "modern_card": "Cipher Soldier",
+    "modern_passcode": 79853073,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700159,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700159,
+    "id": "erratum-dark-jeroid",
+    "modern_card": "Dark Jeroid",
+    "modern_passcode": 90980792,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700138,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700138,
+    "id": "erratum-injection-fairy-lily",
+    "modern_card": "Injection Fairy Lily",
+    "modern_passcode": 79575620,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700101,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700101,
+    "id": "erratum-kazejin",
+    "modern_card": "Kazejin",
+    "modern_passcode": 62340868,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700080,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700080,
+    "id": "erratum-mirage-knight",
+    "modern_card": "Mirage Knight",
+    "modern_passcode": 49217579,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700116,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700116,
+    "id": "erratum-nobleman-of-crossout",
+    "modern_card": "Nobleman of Crossout",
+    "modern_passcode": 71044499,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700025,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700025,
+    "id": "erratum-nobleman-of-extermination",
+    "modern_card": "Nobleman of Extermination",
+    "modern_passcode": 17449108,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700148,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700148,
+    "id": "erratum-shinato-king-of-a-higher-plane",
+    "modern_card": "Shinato, King of a Higher Plane",
+    "modern_passcode": 86327225,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata"
+    ],
+    "strategy": "reuse-upstream"
+   },
+   {
+    "change_kinds": [
+     "cosmetic"
+    ],
+    "classification": "cosmetic",
+    "consumed_by": [
+     {
+      "emits": 504700174,
+      "format": "2005-04-goat",
+      "via": "reference_parity"
+     }
+    ],
+    "historical_passcode": 504700174,
+    "id": "erratum-suijin",
+    "modern_card": "Suijin",
+    "modern_passcode": 98434877,
+    "sources": [
+     "ignis-babelcdb",
+     "ignis-lflists",
+     "ignis-cardscripts",
+     "yugipedia-card-errata",
+     "yugipedia-set-pages"
+    ],
+    "strategy": "reuse-upstream"
+   }
+  ]
+ },
+ "rows": [
+  {
+   "baseline_passcode": 504700042,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-a-cat-of-ill-omen",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700010,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-a-deal-with-dark-ruler",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-a-hero-emerges",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700019,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-a-team-trap-disposal-unit",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700155,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-abyssal-designator",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 76573257,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-alien-infiltrator",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700180,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-altar-for-tribute",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-amazoness-fighter",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700041,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-an-owl-of-luck",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 25862691,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ancient-fairy-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700021,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-andro-sphinx",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-anteatereatingant",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700013,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-apprentice-magician",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700166,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-aqua-chorus",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700003,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-armed-dragon-lv3",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700075,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-armed-dragon-lv5",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003055,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-armored-cybern",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-armored-glass",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700089,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-arsenal-robber",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "konami-set-rulings-archive",
+    "kde-tournament-policy-archive"
+   ]
+  },
+  {
+   "baseline_passcode": 504700146,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-arsenal-summoner",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700150,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-atomic-firefly",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700103,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-attack-and-receive",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700068,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-axe-of-despair",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700065,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-balloon-lizard",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700070,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-bark-of-dark-ruler",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700035,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-behemoth-the-king-of-all-animals",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 65240394,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-big-shield-gardna",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700073,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-birdface",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700118,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-black-luster-soldier-envoy-of-the-beginning",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blackwing-sirocco-the-dawn",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 3,
+   "relevant_changes": 2,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blast-held-by-a-tribute",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700173,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blast-with-chain",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blaze-accelerator",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700086,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "cosmetic",
+    "functional",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blue-eyes-toon-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 3,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-blue-eyes-ultimate-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-boss-rush",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700052,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-bottomless-trap-hole",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511002995,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-brain-control",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 511002993,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-brionac-dragon-of-the-ice-barrier",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700100,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-bubble-crash",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700008,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-bubonic-vermin",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700043,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-burning-land",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700026,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-burst-stream-of-destruction",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700072,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-castle-walls",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511000228,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-catapult-turtle",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511000819,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-chaos-emperor-dragon-envoy-of-the-end",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700078,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-chaosrider-gustaph",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700139,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-cipher-soldier",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 33900658,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-clear-world",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700067,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-cocoon-of-evolution",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700012,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-combination-attack",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700110,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-continuous-destruction-punch",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700039,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-cost-down",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700127,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-covering-fire",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700187,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-crimson-sentry",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 511000822,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-crush-card-virus",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700069,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-curse-of-aging",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700133,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-curse-of-royal",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002991,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-cyber-blader",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700188,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-cyber-jar",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700079,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-d-d-crazy-beast",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-d-d-scout-plane",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-d-d-survivor",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700159,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-jeroid",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511001039,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-magician-of-chaos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-master-zorc",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700129,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-mimic-lv1",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-necrofear",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 3,
+   "relevant_changes": 2,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700125,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-scorpion-meanae-the-thorn",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511000229,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dark-strike-fighter",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511003028,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-darkness-approaches",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700112,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-deal-of-phantom",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700113,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dedication-through-light-and-darkness",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003116,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-destiny-hero-disk-commander",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dice-re-roll",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-diffusion-wave-motion",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dimension-distortion",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700029,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-disc-fighter",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-dragon-seeker",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700157,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elegant-egotist",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700036,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-element-doom",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700053,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-element-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700107,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-element-magician",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elemental-hero-absolute-zero",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elemental-hero-chaos-neos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elemental-hero-divine-neos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elemental-hero-stratos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700181,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-elemental-mistress-doriado",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700009,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-emblem-of-dragon-destroyer",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003027,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-emissary-of-the-afterlife",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700090,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-energy-drain",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-evil-hero-dark-gaia",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-evil-hero-infernal-prodigy",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 511000820,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-exchange-of-the-spirit",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-fairy-of-the-spring",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700056,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-falling-down",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700001,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-fenrir",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700151,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-firebird",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700145,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-flying-kamakiri-1",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700048,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-formation-union",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700082,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-freed-the-matchless-general",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-fushioh-richie",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700047,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-fusion-sage",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002997,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-future-fusion",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gaia-soul-the-combustible-collective",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-garuda-the-wind-spirit",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700011,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gather-your-mind",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700182,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gearfried-the-iron-knight",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700167,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-giant-germ",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700172,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-giant-rat",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gigantes",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 511003006,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gilasaurus",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gladiator-beast-heraklinos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-goddess-of-whim",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511002994,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-goyo-guardian",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700124,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-graceful-dice",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700024,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gravekeeper-s-servant",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700044,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-gravekeeper-s-spy",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700154,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-great-dezard",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-green-baboon-defender-of-the-forest",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700153,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-hallowed-life-barrier",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700175,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-hand-of-nephthys",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002851,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-heavy-mech-support-platform",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700076,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-helping-robo-for-combat",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700031,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-hero-signal",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700131,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-hino-kagu-tsuchi",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700063,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-horn-of-light",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700132,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-horus-the-black-flame-dragon-lv4",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700015,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-horus-the-black-flame-dragon-lv6",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700162,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-howling-insect",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700034,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-hyena",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ido-the-supreme-magical-force",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 9995776,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-imperial-custom",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511002996,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-imperial-order",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700085,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-inferno-fire-blast",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700138,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-injection-fairy-lily",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700171,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "functional",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-insect-imitation",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700061,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-insect-princess",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002982,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-inspection",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700120,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-iron-blacksmith-kotetsu",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700168,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-jade-insect-whistle",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700190,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-jirai-gumo",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700101,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-kazejin",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700137,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-king-of-the-swamp",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700143,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-king-tiger-wanghu",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700149,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-knight-s-title",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700147,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "functional",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-last-will",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700046,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-level-up",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700060,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-levia-dragon-daedalus",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700037,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-limiter-removal",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-machina-gearframe",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-machina-peacekeeper",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700104,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-machine-duplication",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700140,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-magical-hats",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700105,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-magical-labyrinth",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700097,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-maji-gire-panda",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 21593987,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-makyura-the-destructor",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-malefic-blue-eyes-white-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700176,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-malevolent-nuzzler",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700062,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-manga-ryu-ran",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700169,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-manju-of-the-ten-thousand-hands",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700186,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-manticore-of-darkness",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700091,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mask-of-the-accursed",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700094,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mask-of-weakness",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-masked-beast-des-gardius",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700064,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-masked-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700111,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-metalmorph",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-metalsilver-armor",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-metalzoa",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700059,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-michizure",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700028,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-micro-ray",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 511003026,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mind-crush",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700080,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mirage-knight",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700032,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mirror-wall",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700005,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mokey-mokey-smackdown",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700071,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-monster-gate",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700093,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mother-grizzly",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mustering-of-the-dark-scorpions",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700189,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-my-body-as-a-shield",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700088,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mysterious-puppeteer",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700077,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mystic-swordsman-lv2",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700128,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mystic-swordsman-lv4",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700142,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-mystic-tomato",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700066,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-narrow-pass",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "functional",
+    "functional",
+    "functional"
+   ],
+   "changes": 4,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-necrovalley",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 6,
+   "relevant_changes": 4,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-night-assailant",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700033,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-nimble-momonga",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700115,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ninjitsu-art-of-transformation",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700109,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-nobleman-eater-bug",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700116,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-nobleman-of-crossout",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700025,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-nobleman-of-extermination",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700051,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-nutrient-z",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700119,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "ruling",
+    "functional"
+   ],
+   "changes": 4,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-paladin-of-white-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 2,
+   "relevant_changes": 3,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700165,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-pandemonium",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700163,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-penguin-soldier",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700084,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-peten-the-dark-clown",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700134,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-pyramid-energy",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700135,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-pyramid-turtle",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rainbow-dark-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rainbow-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rainbow-neos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 3784444,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rampaging-rhynos",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700017,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rare-metalmorph",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700096,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-reasoning",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002983,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-recycle",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 88264988,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-red-eyes-darkness-metal-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-red-eyes-wyvern",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700055,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-reinforcement-of-the-army",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700027,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-reinforcements",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700130,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-release-restraint",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700106,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-relinquished",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700179,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rescue-cat",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 511000824,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ring-of-destruction",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700030,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ring-of-magnetism",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rise-of-the-snake-deity",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700158,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rivalry-of-warlords",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700114,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-rush-recklessly",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003007,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ryko-lightsworn-hunter",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700099,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sacred-phoenix-of-nephthys",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700020,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sage-s-stone",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700178,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sangan",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700016,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sasuke-samurai-2",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700123,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-scapegoat",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-second-coin-toss",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 63394882,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-senet-switch",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700040,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-senju-of-the-thousand-hands",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700117,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-serpentine-princess",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700050,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-shadow-spell",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700148,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-shinato-king-of-a-higher-plane",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700170,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-shining-angel",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700006,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-silent-swordsman-lv3",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700126,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-silent-swordsman-lv5",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511000818,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sinister-serpent",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "konami-errata-announcements"
+   ]
+  },
+  {
+   "baseline_passcode": 504700122,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-skilled-dark-magician",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700074,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-skilled-white-magician",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700000,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-skull-dice",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700022,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-skull-knight-2",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700136,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-slate-warrior",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700002,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-snake-fang",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700092,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sonic-bird",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-soul-rope",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700095,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-spear-cretin",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700083,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-sphinx-teleia",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700038,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-spirit-reaper",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700185,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-spirit-ryu",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-spirit-s-invitation",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-spiritual-energy-settle-machine",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511003054,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-splendid-venus",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 39188549,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-storm-shooter",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-strike-ninja",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003022,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-stronghold-the-moving-fortress",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700174,
+   "baseline_strategy": "reuse-upstream",
+   "category": "parity-only-identity",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-suijin",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700184,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-summoner-of-illusions",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700049,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-super-rejuvenation",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-super-vehicroid-stealth-union",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-swap-frog",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700018,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "functional",
+    "functional",
+    "functional",
+    "functional"
+   ],
+   "changes": 4,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-swords-of-concealing-light",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 6,
+   "relevant_changes": 4,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700121,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-terraforming",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700004,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-the-big-march-of-animals",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700023,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-the-reliable-guardian",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-the-rock-spirit",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700102,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "ruling",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-thousand-eyes-restrict",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700054,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-thunder-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700141,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toll",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700183,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toon-gemini-elf",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700108,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "cosmetic",
+    "functional",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toon-mermaid",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 3,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700160,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "cosmetic",
+    "functional",
+    "functional",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 5,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toon-summoned-skull",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 2,
+   "proven_edges": 10,
+   "relevant_changes": 3,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": 504700156,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toon-table-of-contents",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-toon-world",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-totem-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-trap-of-darkness",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-treeborn-frog",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-tri-blaze-accelerator",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 511000868,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "functional",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-twin-headed-behemoth",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700164,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-tyrant-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700098,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ufo-turtle",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700081,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ultimate-insect-lv1",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700057,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ultimate-insect-lv3",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700058,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "ruling"
+   ],
+   "changes": 2,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ultimate-insect-lv5",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511003023,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ultimate-offering",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511003009,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-ultimate-tyranno",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700087,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-vampire-lord",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "none-needed",
+   "category": "no-historical-state",
+   "change_kinds": [
+    "cosmetic"
+   ],
+   "changes": 1,
+   "classification": "cosmetic",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-vampire-s-curse",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 0,
+   "relevant_changes": 0,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-vw-tiger-catapult",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 511002901,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-w-wing-catapult",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700014,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-single-event",
+   "change_kinds": [
+    "functional",
+    "cosmetic"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-weapon-change",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": null,
+   "baseline_strategy": "unresolved",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-wild-fire",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+   ]
+  },
+  {
+   "baseline_passcode": 504700144,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-witch-of-the-black-forest",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "edisonformat-functional-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511003020,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-wulf-lightsworn-beast",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700007,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-xy-dragon-cannon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700161,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-ordered",
+   "change_kinds": [
+    "ruling",
+    "cosmetic",
+    "functional"
+   ],
+   "changes": 3,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-xyz-dragon-cannon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 1,
+   "proven_edges": 1,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 504700177,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-xz-tank-cannon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+   ]
+  },
+  {
+   "baseline_passcode": 511002852,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-y-dragon-head",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700045,
+   "baseline_strategy": "reuse-upstream",
+   "category": "full-v2-multi-event-unordered",
+   "change_kinds": [
+    "ruling",
+    "functional"
+   ],
+   "changes": 2,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-yz-tank-dragon",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 2,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 511002853,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "functional"
+   ],
+   "changes": 1,
+   "classification": "functional",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-z-metal-tank",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+   ]
+  },
+  {
+   "baseline_passcode": 504700152,
+   "baseline_strategy": "reuse-upstream",
+   "category": "sugar-eligible",
+   "change_kinds": [
+    "ruling"
+   ],
+   "changes": 1,
+   "classification": "ruling",
+   "equivalent": true,
+   "first_mismatches": [],
+   "id": "erratum-zombyra-the-dark",
+   "mismatch_count": 0,
+   "nonrelevant_changes": 0,
+   "proven_edges": 0,
+   "relevant_changes": 1,
+   "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+   ]
+  }
+ ],
+ "summary": {
+  "categories": {
+   "full-v2-multi-event-ordered": 17,
+   "full-v2-multi-event-unordered": 43,
+   "full-v2-single-event": 35,
+   "no-historical-state": 10,
+   "parity-only-identity": 11,
+   "sugar-eligible": 180
+  },
+  "equivalent": 296,
+  "not_equivalent": 0,
+  "records": 296
+ }
+}

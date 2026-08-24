@@ -303,13 +303,39 @@ reflects that.
    milestone's explicit scope. **The architecture is now frozen** (sixteen named
    properties, listed at the document's end) — no further redesign is expected absent a
    concrete counterexample discovered during implementation. The corrected 8-step
-   implementation sequence has since begun as a natural continuation: **step 1 (schema v2
-   alongside v1, no behavioural change) is done** (`bec589c`, corrected `f01fc11` — added
-   co-occurrence evidence sourcing, sourced ordering-edge tiers, a real per-kind
-   `Coverage` sum type, and a dependency-free schema test suite; `changes[]`/
-   `implementation` untouched, no canonical record uses the new shape yet). Step 2 (the
-   v2 semantic model/parser/selector, implemented alongside the untouched v1 one — never
-   merged into it, per round 4's correction) is next, not yet started.
+   implementation sequence has since begun as a natural continuation:
+
+   - **Step 1 — schema v2 alongside v1: done** (`bec589c`, corrected `f01fc11` — added
+     co-occurrence evidence sourcing, sourced ordering-edge tiers, a real per-kind
+     `Coverage` sum type, and a dependency-free schema test suite). Later corrected again
+     so the flattened sugar shape accepts only a FUNCTIONAL or RULING transition: a
+     cosmetic/engine-only record has no implementation-relevant event, so `{}` is its
+     terminal state and its coverage is unconditionally `modern`, which the sugar's
+     required baseline coverage rightly forbids — the shape was schema-valid but had no
+     consistent runtime meaning. Those records use full v2 with no authored `states[]`.
+   - **Step 2 — v2 semantic model/parser/selector: done, and corrected** (`9557708`,
+     corrected `a114ee3`). The correction matters for everything downstream: ALL events
+     participate in chronology and order consistency, and only functional/ruling events
+     survive the projection into implementation-state identity. Cosmetic/engine events
+     are *not* filtered before down-set reasoning, as the design document originally
+     claimed; that passage is now marked corrected in place.
+   - **Step 3 — consumer/validator compatibility: implemented** (`842f84f`), with a
+     pre-migration hardening pass on top: historical-identity fail-safety (a coverage
+     claiming a substitution without a passcode can no longer reach `int(None)`, and a
+     direct `build` refuses cleanly instead of depending on the validator having run),
+     explicit v2 include/exclude semantics per coverage kind, ambiguous-selection
+     include/exclude diagnostics, and five production-validator holes the JSON Schema
+     states but `Repository.load()` never enforced.
+   - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
+     migrated, and v1 schema/runtime remain fully supported. It is gated on the
+     re-derived audit in `docs/research/erratum-v2-migration-audit.md`, which found all
+     296 records mechanically equivalent but **11 parity-only identity records blocked**:
+     they carry a historical passcode with zero implementation-relevant events, GOAT's
+     `reference_parity` consumes all eleven today, and v2 as frozen cannot represent that
+     identity (their only state is terminal, so its coverage is synthesised `modern` and
+     any authored identity is discarded). Migrating them as-is would break GOAT parity
+     and silently discard canonical data. How parity-only identity should be represented
+     is an explicit open decision — no schema field has been invented for it.
 
 ## Phase 2 — framework completeness
 

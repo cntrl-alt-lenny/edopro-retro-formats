@@ -441,6 +441,32 @@ class Coverage(Enum):
     UNRESOLVED = "unresolved"
 
 
+# The coverage sum type's per-kind field sets, mirroring
+# schemas/erratum.schema.json's `coverage*` branches EXACTLY (each of which is
+# `additionalProperties: false`). Declared once here so the production
+# validator - which runs on raw JSON before any schema check - enforces the
+# same closed payload the schema does, instead of growing a second, drifting
+# coverage model. `tests/test_erratum_schema.py` asserts this map still equals
+# the schema's own branches, so the two cannot diverge unnoticed.
+COVERAGE_FIELDS: dict[str, tuple[frozenset[str], frozenset[str]]] = {
+    # kind: (required, allowed)
+    "modern": (frozenset({"kind"}), frozenset({"kind"})),
+    "reuse-upstream": (
+        frozenset({"kind", "historical_passcode", "upstream"}),
+        frozenset({"kind", "historical_passcode", "historical_variant_passcodes", "upstream", "script"}),
+    ),
+    "custom-script": (
+        frozenset({"kind", "historical_passcode", "script"}),
+        frozenset({"kind", "historical_passcode", "historical_variant_passcodes", "upstream", "script"}),
+    ),
+    "none-needed": (frozenset({"kind"}), frozenset({"kind"})),
+    "known-gap": (
+        frozenset({"kind", "gap_reason", "gap_sources"}),
+        frozenset({"kind", "gap_reason", "gap_sources"}),
+    ),
+}
+
+
 @dataclass(frozen=True)
 class ImplementationCoverage:
     kind: Coverage
@@ -637,11 +663,31 @@ def _reachable_down_sets(
     return tuple(sorted(valid, key=lambda s: (len(s), tuple(sorted(s)))))
 
 
-def _desugar_v2_sugar(raw: dict[str, Any]) -> dict[str, Any]:
+def _desugar_v2_sugar(raw: dict[str, Any], path: Path) -> dict[str, Any]:
     """The flattened single-event/single-transition sugar -> the equivalent
     full `events{}`/`ordering`/`states[]` shape, so exactly one parser
-    (`ErratumV2.load`) ever implements the semantics (design doc §13)."""
+    (`ErratumV2.load`) ever implements the semantics (design doc §13).
+
+    Sugar is only for a single FUNCTIONAL or RULING transition. A
+    cosmetic/engine-only event creates no implementation-state dimension, so
+    its relevant-event set is empty, `{}` IS the terminal state, and the
+    terminal state's coverage is unconditionally MODERN - while the sugar's
+    required `coverage` is an *authored baseline* coverage, which may never
+    be MODERN. Such a record is therefore schema-valid-looking but has no
+    consistent runtime meaning: the authored coverage would be silently
+    discarded. Rejected here rather than quietly ignored, because
+    `Repository.load()` runs before any JSON Schema check."""
     event_raw = raw.get("event") or {}
+    kind = event_raw.get("kind")
+    if kind not in IMPLEMENTATION_RELEVANT_KINDS:
+        raise DataError(
+            path,
+            f"{raw.get('id', '<no id>')}: flattened v2 sugar carries a {kind!r} transition, but "
+            "sugar is only for a single functional/ruling transition - a cosmetic/engine-only "
+            "event creates no implementation-state dimension, so there is no baseline state for "
+            "its `coverage` to describe. Write it as full v2 instead: events{} with the "
+            "transition, ordering {}, and no states[].",
+        )
     transition_raw = {
         "kind": event_raw.get("kind"),
         "axis": event_raw.get("axis"),
@@ -684,11 +730,18 @@ class ErratumV2:
     # event itself never appears in a HistoricalState's identity. Projected
     # onto relevant ids only inside selection_at(), never here.
     _full_reachable: tuple[frozenset[str], ...]
+    # "sugar" | "full": which shape the AUTHOR wrote. Sugar legitimately has
+    # no authored `ordering` (desugaring synthesises `{}`), while full v2
+    # requires an explicit one even when empty - a distinction the desugared
+    # `raw` can no longer show, so it is recorded at parse time.
+    authored_shape: str = "full"
 
     @classmethod
     def load(cls, raw: dict[str, Any], path: Path) -> "ErratumV2":
+        authored_shape = "full"
         if "event" in raw:
-            raw = _desugar_v2_sugar(raw)
+            authored_shape = "sugar"
+            raw = _desugar_v2_sugar(raw, path)
         record_id = str(raw.get("id", ""))
         events = {
             event_id: HistoricalEvent.from_raw(event_id, event_raw)
@@ -730,6 +783,7 @@ class ErratumV2:
             path=path,
             raw=raw,
             _full_reachable=full_reachable,
+            authored_shape=authored_shape,
         )
 
     def relevant_events(self) -> tuple[HistoricalEvent, ...]:
@@ -794,7 +848,21 @@ class ErratumV2:
         several identical-looking candidates.
         """
         all_relevant_ids = frozenset(e.id for e in self.relevant_events())
-        statuses = {event_id: event.state_at(snapshot) for event_id, event in self.events.items()}
+        try:
+            statuses = {
+                event_id: event.state_at(snapshot) for event_id, event in self.events.items()
+            }
+        except (ValueError, TypeError) as exc:
+            # Malformed chronology (an unparseable date) is a property of the
+            # RECORD, surfaced here as the one typed failure every caller
+            # already handles, rather than as a raw ValueError escaping from
+            # date parsing into whichever consumer happened to ask. The bad
+            # date itself is reported by the validator's own effective-block
+            # checks; this keeps a validation run - or a direct build - from
+            # dying on it.
+            raise SelectionError(
+                f"{self.id}: chronology cannot be evaluated at {snapshot}: {exc}"
+            ) from exc
         projected: set[frozenset[str]] = set()
         for down_set in self._full_reachable:
             consistent = True
