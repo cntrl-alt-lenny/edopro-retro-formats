@@ -630,6 +630,81 @@ class SemanticErratumSelection:
         return any(c.coverage.kind == Coverage.UNRESOLVED for c in self.candidates)
 
 
+@dataclass(frozen=True)
+class ImplementationMetadata:
+    """Workflow/research metadata about ONE HistoricalState (keyed by its
+    relevant-event down-set, `events`) — orthogonal to `Coverage` entirely
+    (representation-gaps.md, recommendation 1): never read by
+    `selection_at()`/`state_for()`/`structural_states()`, so an entry may
+    describe a state whose Coverage is mechanically UNRESOLVED, or the
+    terminal/MODERN state, without touching either's semantics. Mirrors
+    v1's own per-implementation-object fields 1:1 (`status`/`tested`/
+    `reason`/`gap.upstream_checked`/`gap.behavioural_impact`), so a
+    migration can carry them across without inventing new vocabulary.
+    Absence of a field, or of an entry for a state, means "not recorded" —
+    never a default."""
+
+    events: frozenset[str]
+    status: str | None = None
+    tested: bool | None = None
+    reason: str | None = None
+    gap_upstream_checked: bool | None = None
+    gap_behavioural_impact: str | None = None
+    raw: dict[str, Any] = field(default_factory=dict)
+
+    @classmethod
+    def from_raw(cls, events: frozenset[str], raw: dict[str, Any]) -> "ImplementationMetadata":
+        gap = raw.get("gap") or {}
+        return cls(
+            events=events,
+            status=raw.get("status"),
+            tested=raw.get("tested"),
+            reason=raw.get("reason"),
+            gap_upstream_checked=gap.get("upstream_checked"),
+            gap_behavioural_impact=gap.get("behavioural_impact"),
+            raw=raw,
+        )
+
+
+@dataclass(frozen=True)
+class ReferenceIdentity:
+    """One exact, sourced claim: "reference implementation `reference_id`
+    uses historical card entry `historical_passcode` for this card" —
+    orthogonal to `Coverage`/behavioural state entirely
+    (representation-gaps.md, recommendation 2). Never read by
+    `state_for()`/`selection_at()`; exists precisely because a
+    zero-relevant-event ("parity-only") record's only structural state IS
+    the terminal one, whose coverage is unconditionally synthesised
+    MODERN, so Coverage can never carry this identity.
+
+    `reference_id` identifies WHICH reference list/implementation;
+    `provenance_source` is WHERE the assertion is sourced from (a source
+    registry id) — the two are independent, never interchangeable: one
+    provenance source can host more than one reference list, and one
+    reference can draw on more than one provenance source, so
+    `provenance_source` uniqueness is never identity uniqueness."""
+
+    reference_id: str
+    provenance_source: str
+    historical_passcode: int | None
+    historical_variant_passcodes: tuple[int, ...]
+    upstream: str | None
+    script: str | None
+    raw: dict[str, Any] = field(default_factory=dict)
+
+    @classmethod
+    def from_raw(cls, raw: dict[str, Any]) -> "ReferenceIdentity":
+        return cls(
+            reference_id=str(raw.get("reference_id", "")),
+            provenance_source=str(raw.get("provenance_source", "")),
+            historical_passcode=raw.get("historical_passcode"),
+            historical_variant_passcodes=tuple(raw.get("historical_variant_passcodes", [])),
+            upstream=raw.get("upstream"),
+            script=raw.get("script"),
+            raw=raw,
+        )
+
+
 def _descendants_and_check_acyclic(
     all_ids: frozenset[str], pairs: list[tuple[str, str]], record_id: str, path: Path
 ) -> dict[str, frozenset[str]]:
@@ -763,6 +838,16 @@ class ErratumV2:
     # requires an explicit one even when empty - a distinction the desugared
     # `raw` can no longer show, so it is recorded at parse time.
     authored_shape: str = "full"
+    # Orthogonal to authored_states/Coverage entirely (representation-
+    # gaps.md) - never read by selection_at()/state_for()/
+    # structural_states(). Keyed the same way as authored_states (a
+    # relevant-event down-set), but a SEPARATE dict: a state may have
+    # coverage with no metadata, metadata with no (or mechanically-
+    # unresolved) coverage, or both.
+    implementation_metadata: dict[frozenset[str], ImplementationMetadata] = field(default_factory=dict)
+    # Exact reference-implementation identity claims, orthogonal to
+    # Coverage/behavioural state entirely - not keyed by event-set at all.
+    reference_identities: tuple[ReferenceIdentity, ...] = ()
 
     @classmethod
     def load(cls, raw: dict[str, Any], path: Path) -> "ErratumV2":
@@ -799,6 +884,20 @@ class ErratumV2:
             }
         except ValueError as exc:
             raise DataError(path, f"{record_id}: bad states[] coverage: {exc}") from exc
+        # Orthogonal to authored_states above - a SEPARATE dict, silently
+        # collapsing a duplicate down-set key exactly the way authored_states
+        # does (real duplicate detection is the validator's job, reading the
+        # RAW array, same pattern as states[]'s own erratum.state-duplicate-
+        # key check).
+        implementation_metadata = {
+            frozenset(entry.get("events", [])): ImplementationMetadata.from_raw(
+                frozenset(entry.get("events", [])), entry
+            )
+            for entry in raw.get("implementation_metadata", [])
+        }
+        reference_identities = tuple(
+            ReferenceIdentity.from_raw(entry) for entry in raw.get("reference_identities", [])
+        )
         return cls(
             id=record_id,
             modern_card=CardRef.from_raw(raw.get("modern_card", {}), path),
@@ -812,6 +911,8 @@ class ErratumV2:
             raw=raw,
             _full_reachable=full_reachable,
             authored_shape=authored_shape,
+            implementation_metadata=implementation_metadata,
+            reference_identities=reference_identities,
         )
 
     def relevant_events(self) -> tuple[HistoricalEvent, ...]:
@@ -844,6 +945,14 @@ class ErratumV2:
         need to separately track `all_relevant_ids` themselves."""
         all_relevant_ids = frozenset(e.id for e in self.relevant_events())
         return self._state_for(down_set, all_relevant_ids)
+
+    def metadata_for(self, down_set: frozenset[str]) -> ImplementationMetadata | None:
+        """The authored workflow/research metadata for `down_set`, or None
+        if none was recorded — deliberately NO synthesis or default (unlike
+        `state_for()`'s MODERN/UNRESOLVED defaults): absence of metadata is
+        just absence, never inferred, and this accessor never consults
+        `authored_states`/Coverage at all."""
+        return self.implementation_metadata.get(down_set)
 
     def _state_for(self, down_set: frozenset[str], all_relevant_ids: frozenset[str]) -> HistoricalState:
         if down_set == all_relevant_ids:

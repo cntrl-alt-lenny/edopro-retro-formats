@@ -198,16 +198,34 @@ class MigrationAuditPartitionTest(unittest.TestCase):
         )
         self.assertEqual(47 + 2, self.summary["nontrivial_migration_scope"])
 
-    def test_data_preservation_is_explicitly_pending_not_certified(self):
-        """The false conflict the task flags: chronology_shape_ready=236
-        must never be readable as 'data-preserving' or 'safe to migrate'
-        while status/tested/gap.upstream_checked/gap.behavioural_impact
-        have no v2 destination at all."""
-        self.assertEqual("pending", self.summary["data_preservation_status"])
-        reason = self.summary["data_preservation_pending_reason"]
-        for keyword in ("status", "tested", "gap.upstream_checked", "gap.behavioural_impact"):
-            self.assertIn(keyword, reason)
+    def test_representation_implemented_but_not_migrated(self):
+        """Both representation gaps now have a v2 destination
+        (implementation_metadata[]/reference_identities[]) and this
+        audit's own candidate construction verifies every record's v1
+        metadata/identity round-trips into them - but `chronology_shape_
+        ready=236` must still never be read as 'migrated': no
+        data/errata/*.json record has actually changed."""
+        self.assertEqual("representation-implemented-not-migrated", self.summary["data_preservation_status"])
+        self.assertEqual(0, self.summary["parity_only_unrepresented_count"])
+        self.assertEqual(0, self.summary["metadata_unrepresented_count"])
+        self.assertEqual([], self.summary["metadata_not_preserved_ids"])
+        self.assertEqual([], self.summary["reference_identity_not_preserved_ids"])
+        self.assertEqual([], self.summary["data_not_preserved_ids"])
+        detail = self.summary["data_preservation_status_detail"]
+        self.assertIn("No data/errata/*.json record has been migrated", detail)
         self.assertNotIn("immediately_migratable", self.summary)
+
+    def test_all_247_equivalent_records_pass_full_representation_preservation(self):
+        """The task's own required check: every one of the 247
+        semantically-equivalent records' candidate v2 preserves everything
+        `_data_preserved()` checks (transitions, coverage, metadata,
+        reference identity)."""
+        for row in self.rows:
+            if row["equivalent"]:
+                self.assertTrue(row["data_preserved"], row["id"])
+                self.assertTrue(row["coverage_preserved"], row["id"])
+                self.assertTrue(row["metadata_preserved"], row["id"])
+                self.assertTrue(row["reference_identity_preserved"], row["id"])
 
     def test_manual_review_ids_match_the_design_document(self):
         self.assertEqual({"erratum-insect-imitation", "erratum-last-will"}, MANUAL_REVIEW_IDS)
@@ -845,15 +863,21 @@ class MetadataInventoryTest(unittest.TestCase):
     NO v2 coverage destination must be reported explicitly, not silently
     folded into "data_preserved=True" by omission. UNKNOWN != DISCARD.
 
-    **Corrected pass**: the prior version's `record_count` actually counted
-    IMPLEMENTATION-OBJECT occurrences, not records - a v1 record can carry
-    more than one implementation object (one baseline `implementation`,
-    plus one `resulting_implementation` per relevant change with a
-    recorded one), so "status: 312" in a 296-record corpus was silently
-    conflating 296 records with 312 implementation occurrences (296
-    baseline + 16 resulting, across 12 records that have at least one
-    resulting_implementation). This distinction is the concrete evidence
-    that some of this metadata is STATE-SPECIFIC, not record-wide."""
+    **Corrected TWICE now.** First pass: `record_count` actually counted
+    IMPLEMENTATION-OBJECT occurrences, not records. Second pass: even after
+    that fix, `resulting_implementation_occurrence_count` was still
+    counting UNIQUE RECORDS with a resulting implementation (12), not
+    occurrences (16 - Necrovalley alone has three) - and worse,
+    `by_record[rid]["resulting"] = value` silently OVERWROTE one record's
+    earlier resulting_implementation with a later one before any
+    baseline-vs-resulting comparison ran, so a record whose FIRST resulting
+    state diverged from baseline but whose LAST one happened to match it
+    was invisible to the old divergence check. Fixed by giving every
+    occurrence an exact, never-overwritten locator (`"baseline"` or
+    `"resulting:<change-index>"`) and comparing ALL of a record's
+    occurrences together. The fix is not cosmetic: it found a genuinely
+    divergent record (`erratum-swords-of-concealing-light`) the previous,
+    already-"corrected" pass missed entirely."""
 
     @classmethod
     def setUpClass(cls):
@@ -861,47 +885,85 @@ class MetadataInventoryTest(unittest.TestCase):
         cls.inventory = {row["field"]: row for row in audit.metadata_inventory(repo.errata)}
 
     def test_occurrence_count_is_distinct_from_unique_record_count(self):
-        """The exact bug: 312 implementation-object occurrences of
-        `status` come from only 296 DISTINCT records (296 baseline + 16
-        resulting, across 12 records) - never call 312 "records"."""
+        """312 implementation-object occurrences of `status` come from
+        only 296 DISTINCT records (296 baseline + 16 resulting occurrences,
+        spread across only 12 distinct records) - never call 312 OR 12
+        "records" where occurrences are meant."""
         status = self.inventory["status"]
         self.assertEqual(312, status["implementation_occurrence_count"])
         self.assertEqual(296, status["unique_record_count"])
         self.assertEqual(296, len(status["unique_record_ids"]))
         self.assertEqual(296, status["baseline_occurrence_count"])
-        self.assertEqual(12, status["resulting_implementation_occurrence_count"])
+        self.assertEqual(16, status["resulting_implementation_occurrence_count"])
+        self.assertEqual(296, status["unique_baseline_record_count"])
+        self.assertEqual(12, status["unique_resulting_record_count"])
+        self.assertNotEqual(status["implementation_occurrence_count"], status["unique_record_count"])
         self.assertNotEqual(
-            status["implementation_occurrence_count"], status["unique_record_count"]
+            status["resulting_implementation_occurrence_count"], status["unique_resulting_record_count"]
         )
 
-    def test_known_unrepresented_fields_are_reported(self):
-        expected_counts = {
-            "status": (312, 296),
-            "tested": (252, 240),
-            "gap.upstream_checked": (56, 53),
-            "gap.behavioural_impact": (56, 53),
+    def test_known_metadata_fields_are_now_represented(self):
+        """**Corrected again**: these 4 fields (plus the bare `reason`) had
+        no v2 destination when this test was first written. This task
+        implements `implementation_metadata[]` as that destination
+        (representation-gaps.md), so `metadata_inventory()` now reports
+        them as REPRESENTED - `has_v2_destination: True`, `would_be_lost_
+        on_migration: False` - not because the data changed, but because a
+        place for it to go now exists in the schema/runtime."""
+        # field: (occurrences, unique records, baseline occ, resulting occ,
+        #         unique baseline records, unique resulting records)
+        expected = {
+            "status": (312, 296, 296, 16, 296, 12),
+            "tested": (252, 240, 236, 16, 236, 12),
+            "gap.upstream_checked": (56, 53, 48, 8, 48, 7),
+            "gap.behavioural_impact": (56, 53, 48, 8, 48, 7),
         }
-        for field, (occurrences, unique_records) in expected_counts.items():
+        for field, (occ, uniq, base_occ, res_occ, uniq_base, uniq_res) in expected.items():
             self.assertIn(field, self.inventory)
             row = self.inventory[field]
-            self.assertEqual(occurrences, row["implementation_occurrence_count"], field)
-            self.assertEqual(unique_records, row["unique_record_count"], field)
-            self.assertEqual(unique_records, len(row["unique_record_ids"]), field)
-            self.assertFalse(row["has_v2_destination"], field)
-            self.assertTrue(row["would_be_lost_on_migration"], field)
+            self.assertEqual(occ, row["implementation_occurrence_count"], field)
+            self.assertEqual(uniq, row["unique_record_count"], field)
+            self.assertEqual(uniq, len(row["unique_record_ids"]), field)
+            self.assertEqual(base_occ, row["baseline_occurrence_count"], field)
+            self.assertEqual(res_occ, row["resulting_implementation_occurrence_count"], field)
+            self.assertEqual(uniq_base, row["unique_baseline_record_count"], field)
+            self.assertEqual(uniq_res, row["unique_resulting_record_count"], field)
+            self.assertTrue(row["has_v2_destination"], field)
+            self.assertFalse(row["would_be_lost_on_migration"], field)
             self.assertTrue(row["representative_baseline_ids"] or row["representative_resulting_ids"], field)
+            self.assertTrue(row["representative_occurrences"], field)
+            for occurrence in row["representative_occurrences"]:
+                self.assertIn(occurrence["locator"].split(":")[0], ("baseline", "resulting"), field)
+
+    def test_bare_reason_is_also_represented(self):
+        row = self.inventory["reason"]
+        self.assertTrue(row["has_v2_destination"])
+        self.assertFalse(row["would_be_lost_on_migration"])
+
+    def test_a_genuinely_unknown_future_field_would_still_be_unrepresented(self):
+        """`KNOWN_METADATA_FIELDS` is exactly the frozen shape's fields,
+        not "everything metadata_inventory() might ever see" - a field
+        outside it must still be reported as a real gap."""
+        self.assertNotIn("some-future-field", audit.KNOWN_METADATA_FIELDS)
 
     def test_status_is_provably_state_specific_via_a_resulting_implementation(self):
         """The task's required worked example: an erratum whose
         `resulting_implementation` carries a DIFFERENT `status` than its
         baseline `implementation` - proof that this metadata varies BY
         STATE, not just by record, so a record-level field cannot preserve
-        it."""
+        it. 7 records now, not the previous (buggy) pass's 6."""
         status = self.inventory["status"]
-        self.assertIn("erratum-blue-eyes-toon-dragon", status["records_with_both_baseline_and_resulting"])
-        self.assertIn(
-            "erratum-blue-eyes-toon-dragon",
-            status["records_where_value_differs_between_baseline_and_resulting"],
+        self.assertEqual(
+            [
+                "erratum-blue-eyes-toon-dragon",
+                "erratum-insect-imitation",
+                "erratum-last-will",
+                "erratum-necrovalley",
+                "erratum-night-assailant",
+                "erratum-swords-of-concealing-light",
+                "erratum-yz-tank-dragon",
+            ],
+            status["records_with_multiple_distinct_values"],
         )
         repo = Repository.load(audit.REPO_ROOT)
         record = repo.errata["erratum-blue-eyes-toon-dragon"]
@@ -913,9 +975,34 @@ class MetadataInventoryTest(unittest.TestCase):
         }
         self.assertNotIn(baseline_status, resulting_statuses)
 
+    def test_the_previously_missed_record_has_a_non_final_divergent_occurrence(self):
+        """`erratum-swords-of-concealing-light`: baseline is `complete`, its
+        FIRST resulting_implementation is `missing`, its second and third
+        are `complete` again. The old (buggy) "keep only the last
+        resulting value" comparison saw complete-vs-complete and missed the
+        genuine divergence at change index 0 entirely."""
+        repo = Repository.load(audit.REPO_ROOT)
+        record = repo.errata["erratum-swords-of-concealing-light"]
+        baseline_status = (record.implementation or {}).get("status")
+        resulting_statuses = [
+            c["resulting_implementation"].get("status")
+            for c in record.changes
+            if c.get("resulting_implementation") and "status" in c["resulting_implementation"]
+        ]
+        self.assertEqual("complete", baseline_status)
+        self.assertEqual(["missing", "complete", "complete"], resulting_statuses)
+        self.assertNotEqual(baseline_status, resulting_statuses[0])
+        self.assertEqual(baseline_status, resulting_statuses[-1])
+
     def test_tested_also_diverges_for_at_least_one_record(self):
         tested = self.inventory["tested"]
-        self.assertIn("erratum-rescue-cat", tested["records_where_value_differs_between_baseline_and_resulting"])
+        self.assertIn("erratum-rescue-cat", tested["records_with_multiple_distinct_values"])
+
+    def test_gap_behavioural_impact_diverges_for_two_records(self):
+        row = self.inventory["gap.behavioural_impact"]
+        self.assertEqual(
+            ["erratum-dark-necrofear", "erratum-necrovalley"], row["records_with_multiple_distinct_values"]
+        )
 
     def test_gap_upstream_checked_is_not_state_specific_in_current_data(self):
         """A field CAN be uniformly True everywhere (no observed
@@ -923,8 +1010,9 @@ class MetadataInventoryTest(unittest.TestCase):
         (authored per implementation object) - the two are different
         claims, and the inventory must not overstate what the data shows."""
         row = self.inventory["gap.upstream_checked"]
-        self.assertEqual([], row["records_where_value_differs_between_baseline_and_resulting"])
-        self.assertEqual({"True": 56}, row["value_distribution"])
+        self.assertEqual([], row["records_with_multiple_distinct_values"])
+        self.assertTrue(row["records_with_multiple_occurrences"])  # multiple occurrences...
+        self.assertEqual({"True": 56}, row["value_distribution"])  # ...but always the same value
 
     def test_represented_fields_are_not_in_the_inventory(self):
         """Fields WITH a v2 destination (including the newly-fixed
@@ -939,6 +1027,209 @@ class MetadataInventoryTest(unittest.TestCase):
             "gap.sources",
         ):
             self.assertNotIn(field, self.inventory, field)
+
+
+class ReferenceIdentityCandidateTest(unittest.TestCase):
+    """Task section 8's REFERENCE IDENTITIES requirement: for the 11
+    parity-only records, derive the matching current reference consumer
+    from the repository's OWN format policy - never hard-code
+    'project-ignis-goat' inside generic migration logic - and produce
+    exactly one reference identity each, with the exact v1 passcode/
+    variants/upstream/script."""
+
+    PARITY_ONLY_IDS = (
+        "erratum-bubble-crash",
+        "erratum-chaosrider-gustaph",
+        "erratum-cipher-soldier",
+        "erratum-dark-jeroid",
+        "erratum-injection-fairy-lily",
+        "erratum-kazejin",
+        "erratum-mirage-knight",
+        "erratum-nobleman-of-crossout",
+        "erratum-nobleman-of-extermination",
+        "erratum-shinato-king-of-a-higher-plane",
+        "erratum-suijin",
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = Repository.load(audit.REPO_ROOT)
+
+    def test_derivation_reads_the_format_not_a_hard_coded_string(self):
+        """Proof this is genuinely DERIVED: point a synthetic format's
+        reference_parity at a different reference_id/provenance_source and
+        confirm the derivation follows it, rather than always emitting
+        'project-ignis-goat' regardless of what any format actually
+        declares."""
+        from retroformats.model import Format
+
+        record = self.repo.errata["erratum-nobleman-of-crossout"]
+        real = audit.derive_reference_identities(record, self.repo)
+        self.assertEqual("project-ignis-goat", real[0]["reference_id"])
+
+        fake_fmt = Format.load(
+            {
+                "id": "synthetic-fmt",
+                "name": "Synthetic",
+                "region": "TCG",
+                "period": {"start": "2005-04-01", "end": None, "snapshot": "2005-04-01"},
+                "banlist": "x",
+                "card_pool": "x",
+                "rule_profile": "x",
+                "errata_policy": "computed",
+                "errata_overrides": {
+                    "reference_parity": {
+                        "reference_id": "totally-different-id",
+                        "provenance_source": "ignis-lflists",
+                        "reason": "synthetic",
+                        "sources": ["ignis-lflists"],
+                    },
+                    "sources": ["ignis-lflists"],
+                },
+                "sources": ["ignis-lflists"],
+            },
+            record.path,
+        )
+        fake_repo = type("FakeRepo", (), {"formats": {"synthetic-fmt": fake_fmt}})()
+        derived = audit.derive_reference_identities(record, fake_repo)
+        self.assertEqual(1, len(derived))
+        self.assertEqual("totally-different-id", derived[0]["reference_id"])
+
+    def test_exactly_the_11_parity_only_records_get_exactly_one_entry(self):
+        for record in self.repo.errata.values():
+            if not isinstance(record, audit.Erratum):
+                continue
+            identities = audit.derive_reference_identities(record, self.repo)
+            if record.id in self.PARITY_ONLY_IDS:
+                self.assertEqual(1, len(identities), record.id)
+            else:
+                self.assertEqual([], identities, record.id)
+
+    def test_each_identity_round_trips_the_exact_v1_passcode_upstream_script(self):
+        for record_id in self.PARITY_ONLY_IDS:
+            record = self.repo.errata[record_id]
+            impl = record.implementation
+            identities = audit.derive_reference_identities(record, self.repo)
+            entry = identities[0]
+            self.assertEqual("project-ignis-goat", entry["reference_id"], record_id)
+            self.assertEqual("ignis-lflists", entry["provenance_source"], record_id)
+            self.assertEqual(impl["historical_passcode"], entry["historical_passcode"], record_id)
+            self.assertEqual(
+                list(impl.get("historical_variant_passcodes", [])),
+                entry["historical_variant_passcodes"],
+                record_id,
+            )
+            self.assertEqual(impl.get("upstream"), entry["upstream"], record_id)
+            self.assertEqual(impl.get("script"), entry["script"], record_id)
+
+    def test_candidate_v2_carries_the_identity_and_preservation_check_passes(self):
+        for record_id in self.PARITY_ONLY_IDS:
+            record = self.repo.errata[record_id]
+            identities = audit.derive_reference_identities(record, self.repo)
+            v2 = audit.candidate_v2(record, identities)
+            self.assertEqual(1, len(v2.reference_identities), record_id)
+            self.assertTrue(audit._reference_identity_preserved(record, v2), record_id)
+
+    def test_without_the_derived_identity_preservation_correctly_fails(self):
+        """The preservation check must have real teeth: a parity-only
+        record's candidate WITHOUT any reference_identities must fail the
+        check, proving it is not vacuously true for every input."""
+        record = self.repo.errata["erratum-nobleman-of-crossout"]
+        v2_without = audit.candidate_v2(record)  # no reference_identities passed
+        self.assertFalse(audit._reference_identity_preserved(record, v2_without))
+
+    def test_mutation_wrong_passcode_is_detected(self):
+        """Independent preservation test (task section 8): mutate the
+        derived identity's passcode and confirm the check notices."""
+        record = self.repo.errata["erratum-nobleman-of-crossout"]
+        identities = audit.derive_reference_identities(record, self.repo)
+        mutated = [dict(identities[0], historical_passcode=identities[0]["historical_passcode"] + 1)]
+        v2 = audit.candidate_v2(record, mutated)
+        self.assertFalse(audit._reference_identity_preserved(record, v2))
+
+
+class ImplementationMetadataCandidateTest(unittest.TestCase):
+    """Task section 8's IMPLEMENTATION METADATA requirement: map each v1
+    implementation OBJECT to the semantic state it describes (baseline ->
+    `events=[]`; a relevant change's `resulting_implementation` -> the
+    down-set that change CREATED, i.e. the same legacy-claimed prefix
+    event-set `states[]` already uses) and independently verify no
+    occurrence silently disappears."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = Repository.load(audit.REPO_ROOT)
+
+    def test_baseline_metadata_maps_to_the_empty_down_set(self):
+        record = self.repo.errata["erratum-a-cat-of-ill-omen"]
+        v2 = audit.candidate_v2(record)
+        baseline = v2.implementation_metadata.get(frozenset())
+        self.assertIsNotNone(baseline)
+        self.assertEqual(record.implementation.get("status"), baseline.status)
+        self.assertEqual(record.implementation.get("tested"), baseline.tested)
+
+    def test_resulting_implementation_maps_to_the_state_it_created(self):
+        """Blue-Eyes Toon Dragon: baseline status=complete at {}, the one
+        relevant change's resulting_implementation status=missing at the
+        down-set THAT CHANGE created ({c0})."""
+        record = self.repo.errata["erratum-blue-eyes-toon-dragon"]
+        relevant_indices = audit._relevant_indices(record)
+        v2 = audit.candidate_v2(record)
+        baseline = v2.implementation_metadata.get(frozenset())
+        self.assertEqual("complete", baseline.status)
+        created = v2.implementation_metadata.get(frozenset({audit._event_id(relevant_indices[0])}))
+        self.assertIsNotNone(created)
+        self.assertEqual("missing", created.status)
+
+    def test_metadata_never_changes_coverage_or_selection(self):
+        """implementation_metadata[] is orthogonal to Coverage entirely -
+        adding it must not change what selection_at()/state_for() return
+        for any real record."""
+        for record in self.repo.errata.values():
+            if not isinstance(record, audit.Erratum):
+                continue
+            v2 = audit.candidate_v2(record)
+            if not v2.implementation_metadata:
+                continue
+            for day in audit.boundary_dates(record):
+                with_metadata = audit.v2_claimed_states(v2, day)
+                v2_no_metadata = audit.candidate_v2(record)
+                v2_no_metadata.implementation_metadata.clear()
+                without_metadata = audit.v2_claimed_states(v2_no_metadata, day)
+                self.assertEqual(with_metadata, without_metadata, record.id)
+
+    def test_no_implementation_occurrence_silently_disappears(self):
+        """Independent preservation test (task section 8): every v1
+        implementation object that carries at least one metadata field
+        must have a corresponding, correctly-valued
+        implementation_metadata[] entry in the candidate."""
+        for record in self.repo.errata.values():
+            if not isinstance(record, audit.Erratum):
+                continue
+            v2 = audit.candidate_v2(record)
+            self.assertTrue(audit._metadata_preserved(record, v2), record.id)
+
+    def test_mutation_dropped_status_is_detected(self):
+        """Independent preservation test: monkeypatch
+        `_implementation_metadata_from_v1()` to silently drop `status` and
+        confirm `_metadata_preserved()` notices - it does not trust
+        `candidate_v2()` merely because it built the candidate itself."""
+        record = self.repo.errata["erratum-a-cat-of-ill-omen"]
+        self.assertIsNotNone((record.implementation or {}).get("status"))
+        real = audit._implementation_metadata_from_v1
+
+        def dropping_status(impl):
+            entry = real(impl)
+            if entry is not None:
+                entry.pop("status", None)
+            return entry or None
+
+        try:
+            audit._implementation_metadata_from_v1 = dropping_status
+            v2 = audit.candidate_v2(record)
+        finally:
+            audit._implementation_metadata_from_v1 = real
+        self.assertFalse(audit._metadata_preserved(record, v2))
 
 
 if __name__ == "__main__":

@@ -57,6 +57,11 @@
           "description": "This format is DEFINED by reproducing an existing reference implementation, so it substitutes the upstream historical version of every card THE REFERENCE ITSELF represents by one. Membership is provenance-based, not 'every card that happens to have an upstream variant': `provenance_source` names the source id a record must cite to count as part of the reference. That matters because upstream ships historical variants for cards its own list does not use (Mind Crush, Ultimate Offering), and substituting those would break parity. Replaces a per-card include list with one sourced statement; where our own researched chronology disagrees with the reference (it would pick the modern card, or the record is cosmetic), the validator warns per card so the divergence stays visible instead of hiding inside a list.",
           "properties": {
             "reason": { "type": "string" },
+            "reference_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Stable slug identifying WHICH reference implementation/list this format reproduces (e.g. 'project-ignis-goat') - distinct from provenance_source, which is WHERE a record's assertion about that reference comes from. `provenance_source` names an entire pinned source (e.g. the whole ignis-lflists repository), which can host more than one reference list; `reference_id` disambiguates which one. When a v2 erratum's own `reference_identities[]` carries an entry whose `reference_id` matches this value, that EXACT entry is used in preference to the structural parity walk (docs/research/erratum-v2-representation-gaps.md). Optional for backward compatibility: a format with no `reference_id` uses only the existing provenance-membership + structural-walk behaviour, unaffected by this field."
+            },
             "provenance_source": {
               "type": "string",
               "description": "Source id that marks a record as part of the reference implementation (e.g. 'ignis-lflists'). Records not citing it fall through to ordinary computed selection. Omit to treat every record with a historical implementation as part of the reference."

@@ -307,6 +307,82 @@
         "coverage": { "$ref": "#/$defs/authoredCoverage" }
       }
     },
+    "implementationMetadataEntry": {
+      "type": "object",
+      "required": ["events"],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "description": "Workflow/research metadata for ONE HistoricalState (its relevant-event down-set) - orthogonal to Coverage entirely: never read by selection_at()/state_for()/structural_states(), so it may describe a state whose Coverage is mechanically 'unresolved', or the terminal/'modern' state, without touching either's semantics. This array and states[] are deliberately independent: a state may have coverage with no metadata, metadata with no (or mechanically-unresolved) coverage, or both. Absence of an entry for a state means the metadata was not recorded - never inferred. At least one metadata field besides `events` is required; an entry with only `events` records nothing and is rejected.",
+      "properties": {
+        "events": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string" },
+          "description": "Ids of this record's own RELEVANT events that have occurred in the state this metadata describes - a down-set, same vocabulary as states[].events; referential integrity, relevance, and down-set reachability are validator concerns."
+        },
+        "status": { "$ref": "common.schema.json#/$defs/implementationStatus" },
+        "tested": {
+          "type": "boolean",
+          "description": "true ONLY once an executable engine-level test demonstrates this state's behaviour - never merely because a script exists."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why this state's coverage was decided the way it was, when that rationale is not already the coverage's own gap_reason (e.g. why a none-needed decision was made despite an available upstream variant)."
+        },
+        "gap": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "description": "Research-provenance detail about this state's gap, beyond the gap_reason/gap_sources the coverage sum type itself already carries.",
+          "properties": {
+            "upstream_checked": {
+              "type": "boolean",
+              "description": "true when the pinned Project Ignis databases/scripts were searched for a usable historical implementation of this state and none matched."
+            },
+            "behavioural_impact": {
+              "type": "string",
+              "minLength": 1,
+              "description": "What plays differently in affected formats while this state's gap stands."
+            }
+          }
+        }
+      }
+    },
+    "referenceIdentity": {
+      "type": "object",
+      "required": ["reference_id", "provenance_source", "historical_passcode", "upstream"],
+      "additionalProperties": false,
+      "description": "An exact, sourced claim that one specific reference implementation/list uses a particular historical card entry for this card, independent of Coverage/behavioural state entirely (design doc's frozen terminal-state-is-'modern' rule is unaffected: this fact is never read by state_for()/selection_at()). Exists precisely because a zero-relevant-event ('parity-only') record's only structural state IS the terminal one, whose coverage is unconditionally synthesised 'modern' - Coverage cannot carry this identity at all, so this is a deliberately separate, orthogonal fact.",
+      "properties": {
+        "reference_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable slug identifying WHICH reference implementation/list (e.g. 'project-ignis-goat') - distinct from provenance_source, which is WHERE the assertion is sourced from. Never conflate the two: a single provenance source can host more than one reference list, and one reference can draw on more than one provenance source over time, so provenance_source uniqueness is never identity uniqueness."
+        },
+        "provenance_source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Source id (resolved through the source registry, and expected to appear in this record's own `sources`) this identity claim is sourced from, e.g. 'ignis-lflists'."
+        },
+        "historical_passcode": { "$ref": "common.schema.json#/$defs/passcode" },
+        "historical_variant_passcodes": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/passcode" },
+          "description": "Additional artwork-variant codes (within +/-10 of historical_passcode) this reference ships."
+        },
+        "upstream": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Where the referenced implementation lives, e.g. 'ProjectIgnis/BabelCDB goat-entries.cdb'."
+        },
+        "script": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Path of the Lua script implementing it, when known."
+        }
+      }
+    },
     "review": {
       "type": "object",
       "additionalProperties": false,
@@ -403,6 +479,16 @@
           "items": { "$ref": "#/$defs/state" },
           "description": "Authored coverage per reachable down-set. Any reachable down-set with no matching entry here defaults to coverage.kind 'unresolved'; the all-events down-set is always 'modern' whether or not an entry is written for it (§4's named exception)."
         },
+        "implementation_metadata": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/implementationMetadataEntry" },
+          "description": "Workflow/research metadata per relevant-event down-set (status/tested/reason/gap detail) - orthogonal to `states[]`/Coverage, independently keyed, and independently validated. See `implementationMetadataEntry`."
+        },
+        "reference_identities": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/referenceIdentity" },
+          "description": "Exact reference-implementation identity claims, orthogonal to Coverage/behavioural state entirely. See `referenceIdentity`."
+        },
         "review": { "$ref": "#/$defs/review" },
         "applicable_formats_note": {
           "type": "string",
@@ -449,6 +535,16 @@
         "coverage": {
           "$ref": "#/$defs/authoredBaselineCoverage",
           "description": "Coverage of the {} (baseline) down-set — the card as it behaved before this transition. 'modern' is not a legal kind here (authoredBaselineCoverage excludes it): the all-events down-set's coverage is always 'modern' and is never written on this shape at all; if the modern card already represents this baseline behaviour too, the correct kind is 'none-needed'."
+        },
+        "implementation_metadata": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/implementationMetadataEntry" },
+          "description": "Workflow/research metadata, keyed by the sugar's own two down-sets: `[]` (baseline) or `[\"event\"]` (terminal, the sugar's one implicit event id) - subject to the same reachability rules as full v2. See `implementationMetadataEntry`. Sugar records the 180 single-event/single-transition records too; without this, their baseline status/tested metadata would have no v2 home and sugar would stop being a genuine 1:1 shape for them."
+        },
+        "reference_identities": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/referenceIdentity" },
+          "description": "Exact reference-implementation identity claims, orthogonal to event shape - allowed on sugar exactly as on full v2. See `referenceIdentity`."
         },
         "review": { "$ref": "#/$defs/review" },
         "applicable_formats_note": { "type": "string" },

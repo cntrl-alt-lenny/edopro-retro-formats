@@ -45,6 +45,7 @@ from .model import (
     Format,
     ImplementationCoverage,
     Pool,
+    ReferenceIdentity,
     SelectionError,
     _is_valid_passcode,
 )
@@ -117,14 +118,19 @@ class SelectedOverride:
     """One card whose modern implementation must be substituted in a format:
     the erratum record plus WHATEVER carries its historical identity for the
     version its chronology (or an explicit include) selected — a v1
-    `implementation` dict, or a v2 `ImplementationCoverage`. Deliberately a
-    union, not a shared shape: converting v2 coverage into a fake v1 dict
-    just to avoid touching downstream code would hide exactly the
-    distinction §8's hard legacy/v2 boundary exists to keep visible. Use
-    `historical_identity()` to extract passcode/variants from either."""
+    `implementation` dict, a v2 `ImplementationCoverage`, or a v2
+    `ReferenceIdentity` (an exact reference-provenance claim, orthogonal to
+    Coverage — representation-gaps.md). Deliberately a three-way union, not
+    a shared shape: converting a `ReferenceIdentity` into a fake `Coverage`
+    (or v2 coverage into a fake v1 dict) just to avoid touching downstream
+    code would hide exactly the distinctions this project's frozen
+    v1/v2/Coverage boundaries exist to keep visible. Use
+    `historical_identity()` to extract passcode/variants from any of the
+    three — the ONLY place that needs to know all three shapes exist; the
+    whitelist builder itself stays exactly as simple as before."""
 
     erratum: Erratum | ErratumV2
-    implementation: dict | ImplementationCoverage
+    implementation: dict | ImplementationCoverage | ReferenceIdentity
 
 
 class MalformedHistoricalIdentity(ValueError):
@@ -134,23 +140,31 @@ class MalformedHistoricalIdentity(ValueError):
     opaque TypeError deep inside whitelist emission."""
 
 
-def historical_identity(override: dict | ImplementationCoverage) -> tuple[int, tuple[int, ...]]:
-    """(historical_passcode, historical_variant_passcodes) from either
-    representation — the one place a v1 dict and a v2 ImplementationCoverage
-    are read through a common lens, and only for this one concrete fact,
-    never for anything about WHICH state/version was selected.
+def historical_identity(
+    override: dict | ImplementationCoverage | ReferenceIdentity,
+) -> tuple[int, tuple[int, ...]]:
+    """(historical_passcode, historical_variant_passcodes) from any of the
+    THREE representations — the one place a v1 dict, a v2
+    `ImplementationCoverage`, and a v2 `ReferenceIdentity` are all read
+    through a common lens, and only for this one concrete fact, never for
+    anything about WHICH state/version/reference was selected.
 
-    Never called on a coverage that has not already passed `_usable_v2()` /
-    `_usable()`; the explicit raise here is a backstop so a future caller
-    that forgets fails loudly and locally instead of producing `int(None)`
-    - or, since a backstop must not itself be the hole it guards against,
-    silently coercing a schema-invalid value (`int("123")`, `int(True)`)
-    into one that looks valid. Uses the same strict `_is_valid_passcode()`
-    authority every other caller does; never `int(...)`."""
+    Never called on a coverage/identity that has not already passed
+    `_usable_v2()`/`_usable()`/the reference-identity fail-safe checks; the
+    explicit raise here is a backstop so a future caller that forgets fails
+    loudly and locally instead of producing `int(None)` - or, since a
+    backstop must not itself be the hole it guards against, silently
+    coercing a schema-invalid value (`int("123")`, `int(True)`) into one
+    that looks valid. Uses the same strict `_is_valid_passcode()` authority
+    every other caller does; never `int(...)`."""
     if isinstance(override, ImplementationCoverage):
         passcode = override.historical_passcode
         variants = override.historical_variant_passcodes
         where = f"coverage kind {override.kind.value}"
+    elif isinstance(override, ReferenceIdentity):
+        passcode = override.historical_passcode
+        variants = override.historical_variant_passcodes
+        where = f"reference identity {override.reference_id!r}"
     else:
         passcode = override.get("historical_passcode")
         variants = override.get("historical_variant_passcodes", []) or []
@@ -274,27 +288,91 @@ def in_reference(erratum: Erratum | ErratumV2, parity: dict) -> bool:
     return marker in erratum.sources
 
 
+_NO_REFERENCE_ID_MATCH = object()
+"""Sentinel distinguishing 'this format names no reference_id, or this
+record has no matching reference_identities[] entry - fall through to the
+structural walk' from 'a matching entry exists but is malformed/mismatched
+- FAIL SAFE, do not fall through' (frozen precedence, task section 4).
+`None` alone cannot carry this distinction, since it is also the walk's own
+'nothing found' result."""
+
+
+def _reference_identity_override(
+    erratum: ErratumV2, parity: dict, problems: list[str]
+) -> "ReferenceIdentity | None | object":
+    """Step 3 of the frozen reference-parity precedence (task section 4):
+    an exact, authored `reference_identities[]` entry outranks the
+    structural Coverage walk for the SAME reference — it is a different,
+    more specific kind of fact ("reference X uses card entry Y"), not a
+    heuristic guess at one.
+
+    Returns `_NO_REFERENCE_ID_MATCH` when the format's parity policy names
+    no `reference_id`, or this record has no entry with that
+    `reference_id` — the caller MUST fall through to the existing
+    provenance-membership + structural-walk behaviour (step 4).
+
+    Returns `None` when a MATCHING entry exists but is malformed (no valid
+    passcode) or declares a `provenance_source` that contradicts the
+    format's own — a problem is appended and the caller MUST NOT fall
+    through: an exact assertion that turns out corrupt or misconfigured is
+    never silently replaced by a weaker heuristic's guess.
+
+    Returns the `ReferenceIdentity` itself when a matching, well-formed
+    entry is found."""
+    reference_id = parity.get("reference_id")
+    if not reference_id:
+        return _NO_REFERENCE_ID_MATCH
+    matching = next((r for r in erratum.reference_identities if r.reference_id == reference_id), None)
+    if matching is None:
+        return _NO_REFERENCE_ID_MATCH
+    if matching.historical_passcode is None or not _valid_identity(
+        matching.historical_passcode, matching.historical_variant_passcodes
+    ):
+        problems.append(
+            f"{erratum.id}: reference_identities[] entry for reference_id {reference_id!r} "
+            "records no usable historical_passcode; parity cannot emit a substitution it "
+            "has no identity for"
+        )
+        return None
+    expected_provenance = parity.get("provenance_source")
+    if expected_provenance and matching.provenance_source != expected_provenance:
+        problems.append(
+            f"{erratum.id}: reference_identities[] entry for reference_id {reference_id!r} "
+            f"declares provenance_source {matching.provenance_source!r}, but format "
+            f"reference_parity declares provenance_source {expected_provenance!r} - "
+            "configuration mismatch, refusing to guess which is correct"
+        )
+        return None
+    return matching
+
+
 def _v2_parity_walk_override(
-    erratum: ErratumV2, problems: list[str] | None = None
-) -> ImplementationCoverage | None:
-    """The frozen design's deterministic structural walk (§5 of this task):
-    fewest relevant events first, ties broken by sorted event-id tuple,
-    starting from baseline — the first state in that walk carrying a usable
+    erratum: ErratumV2, parity: dict | None = None, problems: list[str] | None = None
+) -> ImplementationCoverage | ReferenceIdentity | None:
+    """The frozen design's deterministic structural walk (§5 of the
+    original design task), now preceded by the exact reference-identity
+    check (task section 4's step 3) when `parity` is given: fewest
+    relevant events first, ties broken by sorted event-id tuple, starting
+    from baseline — the first state in that walk carrying a usable
     historical override. Purely structural (never chronology, never
     declaration order): `structural_states()` is already keyed by event-set
     and sorted (size, sorted ids), so this walk is invariant under
     `events{}`'s declaration order by construction."""
+    local_problems = problems if problems is not None else []
+    if parity:
+        reference_override = _reference_identity_override(erratum, parity, local_problems)
+        if reference_override is not _NO_REFERENCE_ID_MATCH:
+            return reference_override  # a ReferenceIdentity, or None (fail-safe; problem appended)
     for down_set in erratum.structural_states():
         coverage = erratum.state_for(down_set).coverage
         if _malformed_substitution(coverage):
             # Never silently walk past corrupt identity data and pick a later
             # state as if this one had said nothing.
-            if problems is not None:
-                problems.append(
-                    f"{erratum.id}: state {sorted(down_set) or 'baseline'} declares coverage "
-                    f"{coverage.kind.value} but records no historical_passcode; parity cannot "
-                    "emit a substitution it has no identity for"
-                )
+            local_problems.append(
+                f"{erratum.id}: state {sorted(down_set) or 'baseline'} declares coverage "
+                f"{coverage.kind.value} but records no historical_passcode; parity cannot "
+                "emit a substitution it has no identity for"
+            )
             return None
         usable = _usable_v2(coverage)
         if usable is not None:
@@ -302,7 +380,9 @@ def _v2_parity_walk_override(
     return None
 
 
-def parity_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCoverage | None:
+def parity_override(
+    erratum: Erratum | ErratumV2, parity: dict | None = None, problems: list[str] | None = None
+) -> dict | ImplementationCoverage | ReferenceIdentity | None:
     """The historical implementation a reference-parity format must emit.
 
     A reference list ships ONE historical variant per card, and reproducing it
@@ -313,12 +393,15 @@ def parity_override(erratum: Erratum | ErratumV2) -> dict | ImplementationCovera
     disagree, so the mapping question stays visible.
 
     v2 (design doc §5 of this task): this is a PARITY-ONLY policy, not
-    chronology selection — it walks `structural_states()` deterministically
-    (never `events{}` declaration order, never a snapshot) and takes the
-    first usable historical override it finds.
+    chronology selection — an exact `reference_identities[]` entry wins
+    first when `parity` names a matching `reference_id`; otherwise it walks
+    `structural_states()` deterministically (never `events{}` declaration
+    order, never a snapshot) and takes the first usable historical override
+    it finds. `parity`/`problems` are ignored on the v1 path - v1 records
+    never carry `reference_identities`.
     """
     if isinstance(erratum, ErratumV2):
-        return _v2_parity_walk_override(erratum)
+        return _v2_parity_walk_override(erratum, parity, problems)
     usable = baseline_override(erratum)
     if usable is not None:
         return usable
@@ -445,7 +528,7 @@ def _select_v2_override(
         return _usable_v2(baseline)
     if parity:
         if in_reference(erratum, parity):
-            return _v2_parity_walk_override(erratum, problems)
+            return _v2_parity_walk_override(erratum, parity, problems)
         return None
     if snapshot is None or not erratum.has_implementation_relevant_history():
         return None

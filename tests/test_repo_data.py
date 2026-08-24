@@ -79,6 +79,25 @@ class RealDataTest(unittest.TestCase):
         self.assertEqual(IGNIS_GOAT_MAP_HASH, built.hash)
         self.assertEqual(IGNIS_GOAT_MAP_HASH, lflist_hash(reference_map))
 
+    def test_goat_declares_its_reference_id(self):
+        """Task section 7: formats/2005-04-goat/format.json now names the
+        SPECIFIC reference implementation it reproduces
+        ('project-ignis-goat'), distinct from provenance_source (the
+        pinned ignis-lflists repository as a whole) - output-neutral: no
+        canonical erratum uses `reference_identities[]` yet (all 296
+        remain v1-shaped), so this is purely a format-policy addition and
+        `test_goat_matches_ignis_reference` above already proves the
+        generated list is unaffected byte-for-byte."""
+        fmt = self.repo.formats["2005-04-goat"]
+        self.assertEqual("project-ignis-goat", fmt.reference_parity.get("reference_id"))
+        self.assertEqual("ignis-lflists", fmt.reference_parity.get("provenance_source"))
+        from retroformats.model import Erratum
+
+        self.assertTrue(
+            all(isinstance(e, Erratum) for e in self.repo.errata.values()),
+            "every canonical erratum must still be v1-shaped - no migration in this task",
+        )
+
     def test_goat_forbids_modern_versions_of_overridden_cards(self):
         built = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
         # Modern Chaos Emperor Dragon (82301904) must not appear; the

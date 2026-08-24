@@ -1,12 +1,20 @@
-# Two open v2 representation gaps — design research (not implemented)
+# Two v2 representation gaps — design, and now implementation
 
-**Status: research only. No schema, runtime, validator, or canonical data
-changed by this document.** It exists to compare candidate representations
-before either gap is designed for real, per the frozen architecture's own
-discipline: UNKNOWN != GUESS applies to *how a fact should be represented*,
-not only to *what the fact is*.
+**Status: IMPLEMENTED. Canonical migration NOT started.** The design
+comparison below (sections 1-5) was written, reviewed, and — after one
+correction (section 3's `reference_id`, below) — accepted; sections 6-7 now
+describe what was actually built (`implementation_metadata[]`,
+`reference_identities[]`, their validators, and their consumer/precedence
+wiring), not a proposal. **No `data/errata/*.json` record has been
+migrated** — the schema/runtime/validator/consumer changes exist so a
+future migration has somewhere to put this data, and this task's own
+migration-audit tooling independently verifies every one of the 247
+semantically-equivalent records' v1 metadata/identity round-trips into the
+new representation, but the canonical data itself is untouched, and the
+247/49/48 partition (`erratum-v2-migration-audit.md`) is unchanged by any
+of this.
 
-Two genuine representation gaps survive the pre-migration hardening passes
+Two genuine representation gaps survived the pre-migration hardening passes
 in `erratum-v2-migration-audit.md`, both discovered by that audit rather
 than assumed going in:
 
@@ -41,41 +49,55 @@ top-level concepts — read by tooling and format policy, never by
 `erratum-v2-migration-audit.md`; reproduced here because this document is
 the design record for what to do about it.)
 
-`metadata_inventory()`'s prior version conflated implementation-object
-**occurrences** with **records** — a v1 record can carry more than one
-implementation object (one baseline `implementation`, plus one
-`resulting_implementation` per relevant change that records one), so
-"`status`: 312" in a 296-record corpus was 312 occurrences across only 296
-distinct records, not 312 records:
+**Corrected TWICE now.** First: `metadata_inventory()`'s original version
+conflated implementation-object **occurrences** with **records**. Second:
+even after that fix, it counted `resulting_implementation_occurrence_count`
+as the number of *records* with a resulting implementation, not the number
+of resulting-implementation *objects* (Necrovalley alone contributes
+three), and — more seriously — it silently overwrote one record's earlier
+`resulting_implementation` value with a later one before ever comparing it
+to the baseline, so a record whose FIRST resulting state diverged but whose
+LAST happened to match baseline was invisible to the divergence check. The
+fix gives every occurrence an exact, never-collapsed locator (`"baseline"`
+or `"resulting:<change-index>"`) and compares ALL of a record's occurrences
+together, not just the last one processed:
 
-| field | occurrences | unique records | baseline / resulting | v2 destination | value distribution |
-|---|---:|---:|---:|---|---|
-| `status` | 312 | 296 | 296 / 12 | none | `complete`: 256, `missing`: 56 |
-| `tested` | 252 | 240 | 236 / 12 | none | `false`: 248, `true`: 4 |
-| `gap.upstream_checked` | 56 | 53 | 48 / 7 | none | `true`: 56 (uniform) |
-| `gap.behavioural_impact` | 56 | 53 | 48 / 7 | none | free text, not tabulable |
-| `reason` (bare, on one `none-needed` implementation) | 1 | 1 | 1 / 0 | none | free text, 1 record |
+| field | occurrences | unique records | baseline / resulting occ | unique baseline / resulting records | v2 destination (now) | value distribution |
+|---|---:|---:|---:|---:|---|---|
+| `status` | 312 | 296 | 296 / 16 | 296 / 12 | `implementation_metadata[]` | `complete`: 256, `missing`: 56 |
+| `tested` | 252 | 240 | 236 / 16 | 236 / 12 | `implementation_metadata[]` | `false`: 248, `true`: 4 |
+| `gap.upstream_checked` | 56 | 53 | 48 / 8 | 48 / 7 | `implementation_metadata[]` | `true`: 56 (uniform) |
+| `gap.behavioural_impact` | 56 | 53 | 48 / 8 | 48 / 7 | `implementation_metadata[]` | free text, not tabulable |
+| `reason` (bare, on one `none-needed` implementation) | 1 | 1 | 1 / 0 | 1 / 0 | `implementation_metadata[]` | free text, 1 record |
 
-**12 records carry at least one `resulting_implementation`** (16
-objects total, since some records have more than one relevant change):
+**12 distinct records carry at least one `resulting_implementation`** (16
+occurrences total, since some records have more than one relevant change):
 `erratum-blue-eyes-toon-dragon`, `erratum-blue-eyes-ultimate-dragon`,
 `erratum-dark-necrofear`, `erratum-insect-imitation`, `erratum-last-will`,
 `erratum-necrovalley`, `erratum-night-assailant`, `erratum-rescue-cat`,
 `erratum-sangan`, `erratum-swords-of-concealing-light`,
 `erratum-witch-of-the-black-forest`, `erratum-yz-tank-dragon`.
 
-**State-specificity is not hypothetical — it is directly observed:**
+**State-specificity is not hypothetical — it is directly observed, and the
+fix found a record the previous "corrected" pass missed:**
 
 - **`status` differs between a record's baseline and at least one
-  resulting implementation for 6 records**: `erratum-blue-eyes-toon-
-  dragon`, `erratum-insect-imitation`, `erratum-last-will`, `erratum-
-  necrovalley`, `erratum-night-assailant`, `erratum-yz-tank-dragon`.
+  resulting implementation for 7 records** (was reported as 6): `erratum-
+  blue-eyes-toon-dragon`, `erratum-insect-imitation`, `erratum-last-will`,
+  `erratum-necrovalley`, `erratum-night-assailant`, `erratum-swords-of-
+  concealing-light`, `erratum-yz-tank-dragon`. **`erratum-swords-of-
+  concealing-light`** is the one the overwrite bug hid: baseline is
+  `complete`, its first resulting_implementation is `missing`, its second
+  and third are `complete` again — the old "keep only the last value seen"
+  comparison saw complete-vs-complete and missed the genuine divergence at
+  the first change entirely.
 - **`tested` differs for 1 record**: `erratum-rescue-cat`.
-- **`gap.upstream_checked`/`gap.behavioural_impact` show no observed
-  divergence** in the current corpus (`upstream_checked` is `true`
-  everywhere it appears) — this is evidence of *coincidence*, not evidence
-  the field is safely record-wide; it is still authored per implementation
-  object.
+- **`gap.behavioural_impact` differs for 2 records**: `erratum-dark-
+  necrofear`, `erratum-necrovalley`.
+- **`gap.upstream_checked` shows no observed divergence** in the current
+  corpus (`upstream_checked` is `true` everywhere it appears) — this is
+  evidence of *coincidence*, not evidence the field is safely record-wide;
+  it is still authored per implementation object.
 
 ### Worked example: Blue-Eyes Toon Dragon
 
@@ -162,11 +184,16 @@ is) instead of one.
 
 **Rejected.**
 
-### Option B — orthogonal metadata keyed by relevant-event set (recommended)
+### Option B — orthogonal metadata keyed by relevant-event set (recommended, and implemented)
 
 A new top-level array, structurally independent of `states[]`, keyed the
 same way (`events`, a down-set of relevant event ids) but carrying only
-descriptive/workflow fields, never anything `selection_at()` reads:
+descriptive/workflow fields, never anything `selection_at()` reads. **This
+is the frozen, implemented shape** (task section 2) — `status`/`tested`/
+`reason` map straight across from v1's own field names (the v1 bare
+`reason` field keeps its own name; it is NOT renamed to a generic `note`),
+and `gap.upstream_checked`/`gap.behavioural_impact` nest under `gap`,
+mirroring v1's `implementation.gap` shape exactly:
 
 ```jsonc
 "implementation_metadata": [
@@ -178,22 +205,17 @@ descriptive/workflow fields, never anything `selection_at()` reads:
   {
     "events": ["c0"],                      // the resulting (post-change) state
     "status": "missing",
-    "gap_upstream_checked": true,
-    "gap_behavioural_impact": "Functional erratum: the Special Summon cost becomes a flat 'by Tributing 2 monsters' instead of 'the same number of monsters needed for a Tribute Summon (normally 2)'. The GOAT script computes the count from the card's current Level ('local amt=(lv>6 and 2) or (lv>4 and 1) or 0'), so with the Level reduced the era card is Special Summoned for 1 Tribute or none; the modern script hard-codes 2 in both its condition and its release selection.",
-    "note": null
+    "gap": {
+      "upstream_checked": true,
+      "behavioural_impact": "Functional erratum: the Special Summon cost becomes a flat 'by Tributing 2 monsters' instead of 'the same number of monsters needed for a Tribute Summon (normally 2)'. The GOAT script computes the count from the card's current Level ('local amt=(lv>6 and 2) or (lv>4 and 1) or 0'), so with the Level reduced the era card is Special Summoned for 1 Tribute or none; the modern script hard-codes 2 in both its condition and its release selection."
+    }
   }
 ]
 ```
 
-(`gap_behavioural_impact` above is Blue-Eyes Toon Dragon's REAL
-`gap.behavioural_impact` text, reproduced verbatim to show actual content,
-not an invented placeholder — the field names around it are illustrative
-shape only, per the naming caveat below.)
-
-(Exact spelling of field names — `implementation_metadata` vs. e.g.
-`research_metadata`, `gap_upstream_checked` vs. `upstream_checked` nested
-under a `gap` sub-object — is an open naming question for whoever
-implements this, not resolved here.)
+(`gap.behavioural_impact` above is Blue-Eyes Toon Dragon's REAL
+`gap.behavioural_impact` text, reproduced verbatim to show actual
+content, not an invented placeholder.)
 
 **Why this satisfies the constraint option A cannot:** `implementation_
 metadata` entries are not coverage. An entry MAY exist for a down-set whose
@@ -275,7 +297,7 @@ field the inventory surfaces, on a field-by-field basis with the same
 burden of proof (show it is redundant/derivable, or show it has no project
 value) — it is not a blanket policy.
 
-### Recommendation: Option B
+### Recommendation: Option B — implemented, WITHOUT a cross-array warning
 
 A new, independent, event-set-keyed `implementation_metadata[]` array.
 Reasons, restated: it is the only option that can carry metadata for a
@@ -283,11 +305,20 @@ mechanically-UNRESOLVED state (A cannot); it keeps `Coverage`'s six-way sum
 type semantically closed to *executable* meaning only, never workflow
 metadata (A blurs this); it keeps "authored" unambiguous — a single,
 uniform test ("does a matching array entry exist") rather than a
-per-key-dependent one (C blurs this). Its risks (key duplication with
-`states[]`, drift) are real but shallow and have a direct, low-risk
-mitigation (a WARN-level cross-check, reusing existing validation
-primitives) rather than a structural problem with the representation
-itself.
+per-key-dependent one (C blurs this).
+
+**Decided against, on implementation: no WARN-level cross-check between
+`states[]` and `implementation_metadata[]`.** This document originally
+proposed one as a mitigation for the two arrays' key duplication/drift
+risk. Rejected before being built (task section 10): the arrays are
+DELIBERATELY independent — a state legitimately has coverage with no
+metadata, metadata with no (or mechanically-UNRESOLVED) coverage, or both
+— and a cross-array WARN would fire for every one of the hundreds of
+legitimate cases across the corpus where a record simply never authored
+metadata at all, drowning the one real signal (an actually malformed
+entry) in noise. `_validate_v2_implementation_metadata()` therefore checks
+ONLY that an authored entry is internally well-formed, never that a state
+also has (or lacks) a counterpart in the other array.
 
 ---
 
@@ -304,14 +335,27 @@ carry is not a fact about behaviour at all — it is a fact about **which
 card entry a reference implementation displays/uses for provenance
 reasons**, a category state Coverage was never designed to hold.
 
-### Option A — record-level reference-identity/provenance mapping (recommended)
+### Option A — record-level reference-identity/provenance mapping (recommended, and implemented)
 
 A new top-level array on the erratum record, orthogonal to `events{}`/
-`ordering`/`states[]` entirely:
+`ordering`/`states[]` entirely.
+
+**Corrected once, before implementation: keyed by `reference_id`, NOT
+solely by `provenance_source`.** The first version of this design used only
+`provenance_source` as the identity key. That conflates two different
+questions: `provenance_source` names an entire pinned SOURCE (e.g. the
+whole `ignis-lflists` repository), which can in principle host more than
+one distinct reference LIST — GOAT's `GOAT.lflist.conf` today, a
+hypothetical second historical reference list tomorrow, both still cited
+via `ignis-lflists`. Keying by `provenance_source` alone could not
+distinguish "reference X, sourced from repository R" from "reference Y,
+also sourced from repository R." The corrected shape adds a separate,
+stable `reference_id`:
 
 ```jsonc
 "reference_identities": [
   {
+    "reference_id": "project-ignis-goat",
     "provenance_source": "ignis-lflists",
     "historical_passcode": 504700116,
     "historical_variant_passcodes": [],
@@ -321,49 +365,67 @@ A new top-level array on the erratum record, orthogonal to `events{}`/
 ]
 ```
 
-`provenance_source` reuses the SAME string convention `reference_parity`
-format policy already uses (`fmt.reference_parity.provenance_source`,
-checked today by `in_reference()` against `erratum.sources` membership) —
-no new vocabulary, no new sourcing mechanism.
+- `reference_id` identifies WHICH reference implementation/list (e.g.
+  `"project-ignis-goat"`, GOAT's exact value once implemented) —
+  independent of where its assertions are sourced from.
+- `provenance_source` reuses the SAME string convention `reference_parity`
+  format policy already used for its own `provenance_source` (`fmt.
+  reference_parity.provenance_source`, checked by `in_reference()` against
+  `erratum.sources` membership) — no new sourcing mechanism, just no
+  longer doing double duty as an identity key too.
+- The two are never interchangeable: one provenance source can host more
+  than one reference list, and (in principle) one reference could draw on
+  more than one provenance source over time — `provenance_source`
+  uniqueness is never identity uniqueness.
+- A format's own `reference_parity` gains the matching field:
+  `{"reference_id": "project-ignis-goat", "provenance_source":
+  "ignis-lflists", ...}` — implemented for GOAT (section 7).
 
 **Generalises beyond GOAT by construction**: the array can hold more than
-one entry, one per reference implementation with its own provenance
-identity for this card. A future format reproducing a DIFFERENT reference
-list (a hypothetical `ocg-2007` format built from a different upstream
-database) would add its own `provenance_source` entry to the SAME array,
-on the SAME record, without touching GOAT's entry or GOAT's format
-definition. A card with no parity-only identity at all simply has an empty
-(or absent) array — nothing changes for the other 285 records.
+one entry, one per reference implementation this card has an identity
+claim for. A future format reproducing a DIFFERENT reference list (a
+hypothetical `ocg-2007` format built from a different reference,
+potentially even the SAME `provenance_source`) would add its own
+`reference_id`-keyed entry to the SAME array, on the SAME record, without
+touching GOAT's entry or GOAT's format definition. A card with no
+parity-only identity at all simply has an empty (or absent) array —
+nothing changes for the other 285 records.
 
-**How `reference_parity` would consume it:** today, `_v2_parity_walk_
-override()` walks `structural_states()` looking for the first usable
-historical `Coverage`. The proposed addition is a NEW, EARLIER-OR-
-FALLBACK resolution branch: when the format's `reference_parity.
-provenance_source` matches an entry in `reference_identities`, that
-entry's identity is used directly — no walk, no `Coverage` lookup, because
-this fact was never a `Coverage` fact to begin with. (Whether it takes
-priority over a genuine behavioural override when a record has BOTH is a
-real open sub-question for implementation-time, not resolved here; none of
-the current 11 records have any relevant events at all, so the question
-does not arise for them today.)
+**How `reference_parity` consumes it (implemented; frozen precedence,
+section 4 below):** an exact, matching `reference_identities[]` entry
+(same `reference_id` as the format's `reference_parity.reference_id`)
+outranks the structural `_v2_parity_walk_override()` walk for that same
+reference — it is a different, more specific kind of fact ("reference X
+uses card entry Y"), not a heuristic guess at one. A record with relevant
+behavioural events MAY also carry a `reference_identities` entry; the
+migration tooling itself only emits one for the 11 zero-relevant-event
+records (section 8), since a record with relevant events already has a
+working Coverage-based representation and a second, redundant entry is not
+what this task's migration scope calls for — but the schema/runtime/
+validator impose no such restriction, precisely so a future record with
+both genuine behavioural chronology AND a documented reference-provenance
+divergence can express both.
 
-**How the validator would verify provenance:**
+**How the validator verifies provenance (implemented):**
 
-- `provenance_source` must be non-empty, and (mirroring `in_reference()`'s
-  existing convention) SHOULD appear in the record's own `sources` list —
-  the same membership check already used to decide whether a record is
-  "in" a reference format at all, not a new sourcing mechanism;
+- `reference_id` must be non-empty, and unique within one record's
+  `reference_identities[]` (`erratum.reference-identity-missing-id` /
+  `erratum.reference-identity-duplicate-id`);
+- `provenance_source` must be non-empty, resolve through the source
+  registry (mirroring `_check_sources()`'s existing convention:
+  `erratum.reference-identity-missing-provenance` / `sources.unresolved`),
+  and appear in the record's own `sources` list
+  (`erratum.reference-identity-provenance-not-in-sources`);
 - `historical_passcode`/`historical_variant_passcodes` validated by the
-  SAME `_is_valid_passcode()`/`_check_card_alias()` machinery already
-  used for `Coverage`'s `historical_passcode` — no new passcode-validity
-  logic;
-- no two entries may share the same `provenance_source` (a record cannot
-  claim two different identities for the same reference list — new error,
-  shallow uniqueness check);
-- (open question, not resolved here) whether a record with 1+ relevant
-  events may ALSO carry `reference_identities`, and if so how a validator
-  should cross-check it doesn't contradict a genuine behavioural
-  `Coverage` claim for the same provenance passcode.
+  SAME `_safe_passcode()`/`_check_card_alias()` machinery `Coverage`'s
+  `historical_passcode` already uses — no new passcode-validity logic —
+  including the +/-10 artwork-variant rule
+  (`erratum.variant-out-of-range`);
+- `historical_passcode` must not equal `modern_card.passcode`
+  (`erratum.reference-identity-matches-modern`) — if the reference uses
+  the modern card, no entry is necessary at all;
+- `upstream` is required non-empty (`erratum.reference-identity-missing-
+  upstream`).
 
 ### Option B — format-local parity mapping
 
@@ -414,17 +476,19 @@ has no advantage over Option A that survives this cost — a per-record
 array achieves the same generality (multiple reference sources per card)
 without the indirection.
 
-### Recommendation: Option A
+### Recommendation: Option A — implemented, `reference_id`-keyed
 
 A new, record-level `reference_identities[]` array on the erratum record,
-orthogonal to `events{}`/`ordering`/`states[]`/`Coverage` entirely. It
-generalises beyond GOAT by construction (multiple entries, one per
-reference source), reuses every validation primitive that already exists
-(`_is_valid_passcode`, `_check_card_alias`, the `sources`-membership
-convention `in_reference()` already implements) rather than inventing new
-ones, and requires no change to the frozen `Coverage` sum type or the
-terminal-state-is-MODERN rule — because the fact it carries was never a
-`Coverage` fact.
+orthogonal to `events{}`/`ordering`/`states[]`/`Coverage` entirely, keyed
+by `reference_id` (WHICH reference) with `provenance_source` (WHERE it is
+sourced from) kept as a separate field, never doing double duty as the
+identity key. It generalises beyond GOAT by construction (multiple
+entries, one per reference), reuses every validation primitive that
+already exists (`_is_valid_passcode`, `_check_card_alias`, the `sources`-
+membership convention `in_reference()`/`_check_sources()` already
+implement) rather than inventing new ones, and requires no change to the
+frozen `Coverage` sum type or the terminal-state-is-MODERN rule — because
+the fact it carries was never a `Coverage` fact.
 
 ---
 
@@ -441,138 +505,247 @@ terminal-state-is-MODERN rule — because the fact it carries was never a
 | UNKNOWN != GUESS | both arrays are strictly additive/optional; absence means "not recorded," never inferred | same |
 | v1/v2 separate until migration completes | both are v2-only proposals; v1 shape is unchanged by this document | same |
 
-Neither proposal changes `selection_at()`, `ordering_proof()`,
+Neither changes `selection_at()`, `ordering_proof()`,
 `_reachable_down_sets()`, `_descendants_and_check_acyclic()`, or any
-`Coverage` branch. Both are read only by tooling (`metadata_inventory()`'s
-future successor) or by one narrowly-scoped format-policy consumer
-(`reference_parity`) — never by chronology or selection.
+`Coverage` branch. Both are read only by tooling (`metadata_inventory()`,
+`tests/migration_audit.py`'s candidate construction) or by one narrowly-
+scoped format-policy consumer (`reference_parity`) — never by chronology or
+selection.
+
+### Frozen reference-parity precedence (implemented)
+
+For a v2 erratum under a format's `reference_parity`:
+
+1. an explicit format `exclude` still wins outright;
+2. explicit `include` semantics remain exactly as before this task;
+3. if the format's `reference_parity` declares a `reference_id` AND this
+   erratum has a matching `reference_identities[]` entry (same
+   `reference_id`): **that exact identity is used**, before any structural
+   check;
+4. otherwise, fall back to the existing provenance-membership +
+   `_v2_parity_walk_override()` structural-walk behaviour, unchanged;
+5. ordinary chronology resolution remains after parity, exactly as before.
+
+**A matching-but-malformed identity, or one whose `provenance_source`
+contradicts the format's own, fails safe** — reported as a problem, never
+silently replaced by falling through to the structural walk (`_reference_
+identity_override()` returns a distinct sentinel for "no match, fall
+through" versus "matched but invalid, do not fall through"). A record with
+relevant behavioural events is allowed to carry a `reference_identities`
+entry too; if it disagrees with the record's own chronology-derived
+Coverage, reference parity still wins for that format (it is format-
+DEFINING, exactly like the existing structural-walk policy already is) —
+the validator surfaces the divergence as a finding, not a hard error,
+matching the existing `format.parity-*` philosophy of reporting disagreement
+rather than forbidding it.
 
 ---
 
-## 5. Recommended minimal representation (summary)
+## 5. Recommended minimal representation (summary, as implemented)
 
-1. **Implementation metadata**: `implementation_metadata: [{events: [...],
-   status?, tested?, gap_upstream_checked?, gap_behavioural_impact?,
-   note?}]` — new top-level array on `ErratumV2`, keyed by relevant-event
-   down-set, validated against `structural_states()` the same way
-   `states[]` already is, read by no runtime selection code.
-2. **Parity-only identity**: `reference_identities: [{provenance_source,
-   historical_passcode, historical_variant_passcodes?, upstream?,
-   script?}]` — new top-level array on `ErratumV2`, validated with the
-   SAME passcode/sources machinery `Coverage` already uses, consumed by
-   `reference_parity` format resolution as a fact that bypasses `Coverage`
-   rather than living inside it.
+1. **Implementation metadata**:
+   ```jsonc
+   "implementation_metadata": [
+     {"events": [...], "status": "...", "tested": false, "reason": "...",
+      "gap": {"upstream_checked": true, "behavioural_impact": "..."}}
+   ]
+   ```
+   New top-level array on `ErratumV2` (full v2 AND sugar), keyed by
+   relevant-event down-set (sugar: `[]` baseline, `["event"]` terminal),
+   validated against `structural_states()` the same way `states[]` already
+   is, read by no runtime selection code. At least one field besides
+   `events` is required per entry — an entry with only `events` is
+   rejected. `status`/`tested`/`reason` map straight across from v1;
+   `gap.upstream_checked`/`gap.behavioural_impact` nest under `gap`,
+   mirroring the v1 `implementation.gap` shape.
+2. **Parity-only identity**:
+   ```jsonc
+   "reference_identities": [
+     {"reference_id": "...", "provenance_source": "...",
+      "historical_passcode": ..., "historical_variant_passcodes": [...],
+      "upstream": "...", "script": "..."}
+   ]
+   ```
+   New top-level array on `ErratumV2` (full v2 AND sugar — orthogonal to
+   event shape), validated with the SAME passcode/sources machinery
+   `Coverage` already uses, consumed by `reference_parity` format
+   resolution as a fact that bypasses `Coverage` rather than living inside
+   it, per the frozen precedence above.
 
 Both are additive, optional, and orthogonal to every existing v2 field.
 
 ---
 
-## 6. Exact changes implementation would require (not made in this task)
+## 6. Exact changes this task implemented
 
-**Schema (`schemas/erratum.schema.json`)**
+**Schema (`schemas/erratum.schema.json`, `schemas/format.schema.json`)**
 
-- Add `implementation_metadata` (array, `additionalProperties: false`
-  items, `events` required) to the `erratumV2` branch (full shape only —
-  whether sugar-shaped records may use it, given they have at most one
-  event and one non-terminal state, is an open question for whoever
-  implements this).
-- Add `reference_identities` (array, `additionalProperties: false` items,
-  `provenance_source` + `historical_passcode` required) to the `erratumV2`
-  branch, and decide whether v1 records may also carry it (v1 is legacy
-  and not otherwise gaining new top-level fields, so the likely answer is
-  no — the 11 current records would gain it only once migrated).
+- New `$defs`: `implementationMetadataEntry` (required `events`,
+  `minProperties: 2`; optional `status`/`tested`/`reason`/`gap`) and
+  `referenceIdentity` (required `reference_id`/`provenance_source`/
+  `historical_passcode`/`upstream`; optional `historical_variant_
+  passcodes`/`script`).
+- `implementation_metadata`/`reference_identities` array properties added
+  to BOTH `erratumV2` and `erratumV2Sugar` — sugar support was resolved to
+  YES (task section 2): without it, the 180 sugar-eligible records could
+  not carry their baseline `status`/`tested` metadata and sugar would stop
+  being a genuine 1:1 shape for them.
+- `format.schema.json`'s `reference_parity` gains an optional
+  `reference_id` string property.
+- v1's `erratumV1`/`implementation` shape is untouched — neither array is
+  added there; v1 keeps its existing inline fields exactly as they are.
 
-**Runtime (`retroformats/model.py`)**
+**Runtime (`retroformats/model.py`)** — implemented
 
-- New frozen dataclasses (naming TBD): one for an `implementation_
-  metadata[]` entry, one for a `reference_identities[]` entry — following
-  the existing `HistoricalTransition`/`ImplementationCoverage` pattern
-  (`.from_raw()` classmethod, thin, no computed logic beyond parsing).
-- `ErratumV2.load()`: parse both arrays into two new fields on `ErratumV2`
-  (e.g. `implementation_metadata: dict[frozenset[str], ...]`,
-  `reference_identities: tuple[..., ...]`), alongside — never merged with
-  — `authored_states`.
+- Two new frozen dataclasses, following the existing `HistoricalTransition`/
+  `ImplementationCoverage` pattern (`.from_raw()` classmethod, thin, no
+  computed logic beyond parsing): `ImplementationMetadata` (`events`,
+  `status`, `tested`, `reason`, `gap_upstream_checked`,
+  `gap_behavioural_impact`, `raw`) and `ReferenceIdentity` (`reference_id`,
+  `provenance_source`, `historical_passcode`,
+  `historical_variant_passcodes`, `upstream`, `script`, `raw`).
+- `ErratumV2` gains `implementation_metadata: dict[frozenset[str],
+  ImplementationMetadata]` and `reference_identities: tuple[
+  ReferenceIdentity, ...]`, parsed in `.load()` alongside — never merged
+  into — `authored_states`. A new `metadata_for(down_set)` accessor mirrors
+  `state_for()` but performs NO synthesis: absence returns `None`, never a
+  default.
+- `_desugar_v2_sugar()` needed no change at all: both new top-level keys
+  already pass through its existing "copy every key except `event`/
+  `coverage`" behaviour.
 - No change to `_state_for()`, `selection_at()`, `structural_states()`, or
-  `_reachable_down_sets()`.
+  `_reachable_down_sets()` — verified by a dedicated test
+  (`test_metadata_never_changes_coverage_or_selection`) that strips
+  `implementation_metadata` from a real candidate and confirms
+  `selection_at()`'s output is byte-identical either way.
 
-**Validator (`retroformats/validate.py`)**
+**Validator (`retroformats/validate.py`)** — implemented
 
-- New `_validate_v2_implementation_metadata()`, mirroring `_validate_v2_
-  states()`: unknown/non-relevant event ids, duplicate down-set keys,
-  unreachable down-sets (reusing `structural_states()`); a WARN-level
-  cross-check against `states[]` for authors who likely meant to keep the
-  two in sync.
-- New `_validate_v2_reference_identities()`: `provenance_source` non-empty
-  and present in `erratum.sources`; `historical_passcode`/`historical_
-  variant_passcodes` validated via the existing `_safe_passcode`/`_check_
-  card_alias` calls; no duplicate `provenance_source` within one record.
+- `_validate_v2_implementation_metadata()`, mirroring `_validate_v2_
+  states()` exactly: unknown/non-relevant event ids
+  (`erratum.metadata-unknown-event`/`erratum.metadata-non-relevant-event`),
+  duplicate down-set keys including permutations
+  (`erratum.metadata-duplicate-key`), unreachable down-sets
+  (`erratum.metadata-unreachable`, reusing `structural_states()`),
+  repeated ids within one `events` array
+  (`erratum.metadata-events-duplicate`, in `_validate_v2_shape()`
+  alongside the existing `states[]` version of the same check), an entry
+  with no field besides `events` (`erratum.metadata-empty`), and bad
+  `status`/`tested`/`reason`/`gap` types
+  (`erratum.metadata-bad-status`/`erratum.metadata-bad-type`/
+  `erratum.metadata-bad-gap`). **No cross-array warning** for a state
+  present in one array but not the other (task section 10) — the two are
+  deliberately independent, and absence is never an error.
+- `_validate_v2_reference_identities()`: unique `reference_id`
+  (`erratum.reference-identity-duplicate-id`), `provenance_source`
+  resolves through the source registry AND appears in the record's own
+  `sources` (`sources.unresolved`/`erratum.reference-identity-provenance-
+  not-in-sources`), strict passcode/variant validation via the existing
+  `_safe_passcode()`/`_check_card_alias()`, the +/-10 artwork-variant rule,
+  `historical_passcode != modern_card.passcode`
+  (`erratum.reference-identity-matches-modern`), required `upstream`.
+- `_validate_v2_parity()` now threads `fmt.reference_parity` through to
+  `parity_override()` and surfaces any fail-safe problem (malformed match,
+  or `provenance_source` mismatch) as `erratum.reference-identity-invalid`
+  — the format-specific consumption check, distinct from the record-level
+  well-formedness checks above.
 
-**Consumers (`retroformats/lflist.py`)**
+**Consumers (`retroformats/lflist.py`)** — implemented
 
-- `implementation_metadata[]`: no consumer change required — it is
-  descriptive only.
-- `reference_identities[]`: `_v2_parity_walk_override()`/`parity_
-  override()` gain a resolution branch checked against `fmt.reference_
-  parity.provenance_source` before (or as a fallback to, TBD) the
-  structural-state walk.
+- `implementation_metadata[]`: no consumer change — descriptive only,
+  confirmed by the same selection-equivalence test above.
+- `SelectedOverride.implementation` widened to a THREE-way union: `dict |
+  ImplementationCoverage | ReferenceIdentity` — never a fake `Coverage` or
+  fake v1 dict. `historical_identity()` gained a third `isinstance`
+  branch, reading a `ReferenceIdentity` through the same strict,
+  non-coercive `_is_valid_passcode()` lens as the other two; the whitelist
+  builder itself needed zero changes (it only ever calls
+  `historical_identity(override.implementation)`).
+- `_v2_parity_walk_override()`/`parity_override()` gained an optional
+  `parity`/`problems` parameter and a new `_reference_identity_override()`
+  helper implementing the frozen precedence above, with a `_NO_REFERENCE_
+  ID_MATCH` sentinel distinguishing "no match, fall through" from "matched
+  but invalid, fail safe" — `None` alone could not carry that distinction,
+  since it is also the walk's own "nothing found" result.
 
-**Migration tooling (`tests/migration_audit.py`)**
+**Migration tooling (`tests/migration_audit.py`)** — implemented
 
-- `_coverage_from_v1()`/`candidate_v2()` gain companion mappings: v1's
-  `status`/`tested`/`gap.upstream_checked`/`gap.behavioural_impact`/bare
-  `reason` -> `implementation_metadata[]` entries; the 11 parity-only
-  records' baseline `reuse-upstream` claim -> a `reference_identities[]`
-  entry instead of a discarded `states[]` entry.
-- `metadata_inventory()` re-run after implementation should report an
-  EMPTY inventory (every currently-unrepresented field now has a
-  destination) — that emptiness becomes the acceptance criterion for
-  closing this gap, not a subjective judgement call.
-- `_data_preserved()`/`_coverage_preserved()` gain a third check
-  alongside transition-text and coverage-field preservation.
+- `_implementation_metadata_from_v1()` maps one v1 implementation OBJECT's
+  workflow fields onto an `implementation_metadata[]` entry;
+  `candidate_v2()` builds both `states[]` and `implementation_metadata[]`
+  from the SAME per-version v1 implementation object, independently (a
+  version can produce a `states[]` entry, a metadata entry, both, or
+  neither).
+- `derive_reference_identities(record, repo)` computes candidate
+  `reference_identities[]` entries FROM THE REPOSITORY'S OWN format
+  policies (never a hard-coded `"project-ignis-goat"` string) — for every
+  format whose `reference_parity` declares a `reference_id` and actually
+  consumes this record via the real `parity_override()` resolution, scoped
+  to records with zero relevant events (the 11 parity-only records
+  specifically; a record with relevant events already has a working
+  Coverage-based representation, so this migration tooling does not also
+  emit a redundant entry for it, even though the runtime/validator allow
+  one).
+- `metadata_inventory()`'s `has_v2_destination`/`would_be_lost_on_
+  migration` now reflect the real destination: all five known fields
+  (`status`/`tested`/`reason`/`gap.upstream_checked`/`gap.behavioural_
+  impact`) report `has_v2_destination: True` — a genuinely unrecognised
+  future field would still report `False`.
+- `_metadata_preserved()`/`_reference_identity_preserved()` — new,
+  independent preservation checks (re-deriving expectations from the raw
+  v1 record, then checking the REAL parsed candidate, exactly like the
+  existing `_coverage_preserved()`), wired into `_data_preserved()`
+  alongside it. Mutation tests (dropped `status`, wrong reference-identity
+  passcode) confirm both have real teeth.
+- **Result, confirmed by `audit_corpus()`**: `metadata_unrepresented_
+  count == 0`, `parity_only_unrepresented_count == 0`, every one of the
+  247 semantically-equivalent records' `data_preserved` is `True` — **and
+  247/49/48 are unchanged**, because none of this touches equivalence
+  logic at all.
 
-No canonical `data/errata/*.json` record changes for any of this — the
-gap is in the v2 REPRESENTATION, not in v1 data, which stays exactly as
-it is until migration.
+No canonical `data/errata/*.json` record changes — the gap was in the v2
+REPRESENTATION, not in v1 data, which remains exactly as it was.
 
 ---
 
-## 7. Migration sequencing after both gaps are resolved
+## 7. Migration sequencing — representation is ready; migration has not started
 
-This document is a proposal, not a decision — the sequencing below is
-conditional on both designs being reviewed, decided, and IMPLEMENTED
-(schema + runtime + validator + consumer + migration-tooling changes, all
-listed above) in a separate, later task.
-
-1. **Design review and decision** (human) on both representations —
-   including the open sub-questions flagged above: exact field naming,
-   whether sugar-shaped records may carry `implementation_metadata`,
-   whether a record may carry `reference_identities` alongside genuine
-   relevant events and how a validator should then cross-check it.
-2. **Implement** the schema/runtime/validator/consumer changes in section
-   6, as their own atomic commit(s) — not bundled with any canonical data
-   migration.
-3. **Re-run `tests/migration_audit.py`'s candidate construction** with
-   both new fields wired into `candidate_v2()`, and confirm two things
-   mechanically rather than by inspection: `metadata_inventory()` returns
-   empty (nothing left with `has_v2_destination: false`), and every one of
-   the 11 parity-only records' `reference_identities`-based candidate
-   round-trips its `historical_passcode` exactly (a `_coverage_preserved
-   ()`-style independent check, extended to the new array).
-4. **Only then does canonical migration begin**, in the order the design
-   document's §13 sequence already lays out — now genuinely gated on data
-   preservation, not merely chronology/shape readiness:
+1. ~~Design review and decision~~ **done** — the `reference_id` correction
+   in section 3 was made before implementation, not after.
+2. ~~Implement the schema/runtime/validator/consumer changes~~ **done**,
+   in this same task, as one atomic commit alongside this document's
+   corrections — not bundled with any canonical data migration.
+3. ~~Re-run `tests/migration_audit.py`'s candidate construction~~ **done**
+   — `metadata_unrepresented_count`/`parity_only_unrepresented_count` are
+   both `0`, confirmed mechanically, not by inspection.
+4. **Canonical migration itself has NOT begun**, and remains gated on a
+   separate, later decision to start it. Once it does, the design
+   document's §13 sequence applies, now genuinely data-preservation-ready
+   rather than merely chronology/shape-ready, for **all 247** semantically
+   equivalent records — not only 236:
    - the 180 sugar-eligible + 35 single-relevant-with-siblings + 11
-     fully-ordered records (step 4), now migrating WITH their
+     fully-ordered records (step 4), migrating WITH their
      `implementation_metadata`/`reference_identities` fields populated;
-   - the 11 parity-only records migrate alongside step 4 once `reference_
-     identities` exists, rather than needing their own separate future
-     step — the representation gap was the only thing blocking them,
-     and once it is closed they are exactly as safe as the other 236;
+   - the 11 parity-only records migrate alongside step 4 (no longer a
+     separate blocked step): each becomes a full-v2 record with its
+     cosmetic/engine events, no `states[]` (zero relevant events — nothing
+     for `states[]` to describe), `implementation_metadata[]` for any
+     workflow fields it carries, and exactly the one `reference_identities[]`
+     entry this task's tooling already derives and verifies;
+   - the **10 pure cosmetic/engine, no-historical-state records** — an
+     earlier version of this document's migration list omitted them
+     entirely. They migrate the same shape as the 11 parity-only records
+     minus `reference_identities[]` (nothing to reference — no format
+     substitutes them at all): `events{}` for their cosmetic/engine
+     chronology nodes, `ordering` proven where the dates allow it, no
+     `states[]` (zero relevant events), `implementation_metadata[]`
+     preserving whatever workflow metadata they carry;
    - the 47 already-researched unordered records (step 5);
    - the 2 manual-review records (step 6), after their order question is
      separately resolved by a human, unaffected by either representation
      gap.
 
-**This task changes no schema, no runtime, no validator, no canonical
-erratum record.** Both representations above are proposals for a FUTURE
-task to implement, review, and only then migrate against.
+**Full accounting of the 247**: 180 + 35 + 11 (fully-ordered) + 11
+(parity-only) + 10 (pure cosmetic/engine) = 247. Every one of them now has
+a verified-preserving v2 representation available; none has actually been
+migrated.

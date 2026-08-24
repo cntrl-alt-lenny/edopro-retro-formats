@@ -450,6 +450,8 @@ class Validator:
         self._validate_v2_shape(erratum)
         self._validate_v2_ordering(erratum)
         self._validate_v2_states(erratum)
+        self._validate_v2_implementation_metadata(erratum)
+        self._validate_v2_reference_identities(erratum)
 
         review = erratum.raw.get("review") or {}
         if review and review.get("status") not in ("imported", "reviewed"):
@@ -627,6 +629,24 @@ class Validator:
                         "encoding of the same set",
                     )
                 seen.add(event_id)
+        # A2. The same repeated-id check for implementation_metadata[].events
+        # - an independent array, but its `events` field is the same kind of
+        # set-shaped id list and has the same frozenset()-collapse hazard.
+        for index, entry in enumerate(raw.get("implementation_metadata") or []):
+            ids = entry.get("events")
+            if not isinstance(ids, list):
+                continue
+            seen_meta: set[str] = set()
+            for event_id in ids:
+                if event_id in seen_meta:
+                    self.error(
+                        "erratum.metadata-events-duplicate",
+                        erratum.path,
+                        f"implementation_metadata[{index}].events repeats {event_id!r}; an "
+                        "entry's events are a SET of ids, and a repeated member is malformed "
+                        "rather than a second encoding of the same set",
+                    )
+                seen_meta.add(event_id)
         # B. Full v2 must author `ordering` explicitly, even as `{}` - saying
         # "these events have no known order" is a claim, and its absence is
         # an omission. Sugar has no authored ordering by construction.
@@ -819,6 +839,195 @@ class Validator:
                 )
             self._validate_v2_coverage(erratum, location, coverage_raw)
 
+    def _validate_v2_implementation_metadata(self, erratum: ErratumV2) -> None:
+        """`implementation_metadata[]` (representation-gaps.md, task
+        section 2): deliberately INDEPENDENT of `_validate_v2_states()` -
+        this checks only that an AUTHORED entry is well-formed, never that
+        every state also has metadata or vice versa. A state may legitimately
+        have coverage with no metadata, metadata with no (or mechanically-
+        UNRESOLVED) coverage, or both; only a malformed entry is an error,
+        never a cross-array absence (task section 10)."""
+        reachable = set(erratum.structural_states())
+        seen_keys: set[frozenset[str]] = set()
+        for i, entry in enumerate(erratum.raw.get("implementation_metadata") or []):
+            raw_event_ids = entry.get("events") or []
+            ids = frozenset(raw_event_ids)
+            location = f"implementation_metadata[{i}]"
+
+            unknown = [e for e in raw_event_ids if e not in erratum.events]
+            if unknown:
+                self.error(
+                    "erratum.metadata-unknown-event",
+                    erratum.path,
+                    f"{location}: unknown event id(s) {unknown}",
+                )
+                continue
+            non_relevant = [e for e in raw_event_ids if not erratum.events[e].is_implementation_relevant]
+            if non_relevant:
+                self.error(
+                    "erratum.metadata-non-relevant-event",
+                    erratum.path,
+                    f"{location}: cosmetic/engine-only event id(s) {non_relevant} cannot "
+                    "appear in an implementation-metadata key",
+                )
+                continue
+            if ids in seen_keys:
+                self.error(
+                    "erratum.metadata-duplicate-key",
+                    erratum.path,
+                    f"{location}: semantic key {sorted(ids)} duplicates an earlier "
+                    "implementation_metadata[] entry (array spelling differs but the "
+                    "event-set is the same)",
+                )
+            seen_keys.add(ids)
+            if ids not in reachable:
+                self.error(
+                    "erratum.metadata-unreachable",
+                    erratum.path,
+                    f"{location}: down-set {sorted(ids)} is not structurally reachable from "
+                    "the declared events{}/ordering",
+                )
+                continue
+            payload_keys = set(entry) - {"events"}
+            if not payload_keys:
+                self.error(
+                    "erratum.metadata-empty",
+                    erratum.path,
+                    f"{location}: no metadata fields besides `events` - this entry records "
+                    "nothing",
+                )
+                continue
+            if "status" in entry and entry.get("status") not in IMPLEMENTATION_STATUSES:
+                self.error(
+                    "erratum.metadata-bad-status",
+                    erratum.path,
+                    f"{location}: status {entry.get('status')!r}",
+                )
+            if "tested" in entry and not isinstance(entry.get("tested"), bool):
+                self.error(
+                    "erratum.metadata-bad-type",
+                    erratum.path,
+                    f"{location}: tested must be a boolean",
+                )
+            if "reason" in entry and not (isinstance(entry.get("reason"), str) and entry.get("reason")):
+                self.error(
+                    "erratum.metadata-bad-type",
+                    erratum.path,
+                    f"{location}: reason must be a non-empty string",
+                )
+            gap = entry.get("gap")
+            if "gap" in entry:
+                if not isinstance(gap, dict) or not gap:
+                    self.error(
+                        "erratum.metadata-bad-gap",
+                        erratum.path,
+                        f"{location}.gap: must be a non-empty object",
+                    )
+                else:
+                    if "upstream_checked" in gap and not isinstance(gap.get("upstream_checked"), bool):
+                        self.error(
+                            "erratum.metadata-bad-type",
+                            erratum.path,
+                            f"{location}.gap: upstream_checked must be a boolean",
+                        )
+                    if "behavioural_impact" in gap and not (
+                        isinstance(gap.get("behavioural_impact"), str) and gap.get("behavioural_impact")
+                    ):
+                        self.error(
+                            "erratum.metadata-bad-type",
+                            erratum.path,
+                            f"{location}.gap: behavioural_impact must be a non-empty string",
+                        )
+
+    def _validate_v2_reference_identities(self, erratum: ErratumV2) -> None:
+        """`reference_identities[]` (representation-gaps.md, task section
+        3/6): unique `reference_id` per record; `provenance_source`
+        resolves through the source registry AND appears in this record's
+        own `sources`; strict passcode/variant validation (the same
+        authority Coverage uses); the +/-10 artwork-variant rule; card
+        alias points back to the modern card; `historical_passcode` must
+        not equal `modern_card.passcode` (if the reference uses the modern
+        card, no entry is necessary at all)."""
+        seen_reference_ids: set[str] = set()
+        for i, identity in enumerate(erratum.reference_identities):
+            location = f"reference_identities[{i}]"
+            if not identity.reference_id:
+                self.error(
+                    "erratum.reference-identity-missing-id",
+                    erratum.path,
+                    f"{location}: reference_id is required",
+                )
+                continue
+            if identity.reference_id in seen_reference_ids:
+                self.error(
+                    "erratum.reference-identity-duplicate-id",
+                    erratum.path,
+                    f"{location}: reference_id {identity.reference_id!r} duplicates an "
+                    "earlier reference_identities[] entry",
+                )
+            seen_reference_ids.add(identity.reference_id)
+
+            if not identity.provenance_source:
+                self.error(
+                    "erratum.reference-identity-missing-provenance",
+                    erratum.path,
+                    f"{location}: provenance_source is required",
+                )
+            else:
+                if self.repo.resolve_source(identity.provenance_source, None) is None:
+                    self.error(
+                        "sources.unresolved",
+                        erratum.path,
+                        f"{location}: cites unknown source id {identity.provenance_source!r}",
+                    )
+                if identity.provenance_source not in erratum.sources:
+                    self.error(
+                        "erratum.reference-identity-provenance-not-in-sources",
+                        erratum.path,
+                        f"{location}: provenance_source {identity.provenance_source!r} is not "
+                        "in this record's own `sources`",
+                    )
+
+            hist = identity.historical_passcode
+            if hist is None:
+                self.error(
+                    "erratum.no-historical-passcode",
+                    erratum.path,
+                    f"{location}: historical_passcode is required",
+                )
+            else:
+                hist_int = self._safe_passcode(hist, erratum, location, "historical_passcode")
+                if hist_int is not None:
+                    if hist_int == erratum.modern_card.passcode:
+                        self.error(
+                            "erratum.reference-identity-matches-modern",
+                            erratum.path,
+                            f"{location}: historical_passcode equals modern_card.passcode "
+                            f"({hist_int}) - if the reference uses the modern card, no "
+                            "reference_identities entry is necessary",
+                        )
+                    self._check_card_alias(hist_int, erratum, location)
+                for variant in identity.historical_variant_passcodes:
+                    variant_int = self._safe_passcode(
+                        variant, erratum, location, "historical_variant_passcodes entry"
+                    )
+                    if variant_int is None or hist_int is None:
+                        continue
+                    if abs(variant_int - hist_int) >= 10:
+                        self.error(
+                            "erratum.variant-out-of-range",
+                            erratum.path,
+                            f"{location}: variant {variant} is not within +/-10 of {hist}",
+                        )
+                    self._check_card_alias(variant_int, erratum, location)
+
+            if not identity.upstream:
+                self.error(
+                    "erratum.reference-identity-missing-upstream",
+                    erratum.path,
+                    f"{location}: upstream is required",
+                )
+
     def _validate_v2_coverage(self, erratum: ErratumV2, location: str, coverage: dict) -> None:
         """Invariant 16 (of this task's numbering): semantic coverage
         validation the schema also constrains structurally, but the
@@ -909,7 +1118,7 @@ class Validator:
     # validates cleanly here never surprises the builder).
 
     def _validate_v2_parity(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
-        from .lflist import in_reference, parity_override
+        from .lflist import ReferenceIdentity, in_reference, parity_override
 
         if erratum.id in fmt.errata_exclude:
             return
@@ -939,15 +1148,28 @@ class Validator:
                         "the modern one",
                     )
             return
-        if parity_override(erratum) is None:
+        problems: list[str] = []
+        override = parity_override(erratum, fmt.reference_parity, problems)
+        for problem in problems:
+            # A matching reference_identities[] entry that is malformed, or
+            # whose provenance_source contradicts this format's own
+            # declared one (task section 4/6) - fail-safe, surfaced here
+            # rather than silently falling back to the structural walk.
+            self.error("erratum.reference-identity-invalid", fmt.path, problem)
+        if override is None:
             return
         if erratum.review_status != "reviewed":
             return
         if not erratum.has_implementation_relevant_history():
+            via = (
+                "an authored reference_identities[] entry"
+                if isinstance(override, ReferenceIdentity)
+                else "reference parity"
+            )
             self.warn(
                 "format.parity-substitutes-non-behavioural",
                 fmt.path,
-                f"{erratum.modern_card.name}: reference parity substitutes the upstream "
+                f"{erratum.modern_card.name}: {via} substitutes the upstream "
                 f"variant, but the record finds no functional or ruling transition "
                 f"({erratum.classification}) - the reference ships it for period text, "
                 "not behaviour",

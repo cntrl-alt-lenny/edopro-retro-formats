@@ -366,6 +366,19 @@ reflects that.
      `docs/research/erratum-v2-representation-gaps.md` for the full design research
      into representing both this metadata and parity-only identity, and the
      terminology correction below.
+     **A fourth pass then IMPLEMENTED both representation gaps** — schema, runtime,
+     validator, and consumer changes, plus a fix to the metadata-inventory occurrence
+     accounting that the third pass's own fix had not fully closed
+     (`resulting_implementation_occurrence_count` was itself counting distinct
+     records, not occurrences, and a record's later `resulting_implementation` was
+     silently overwriting an earlier one before any divergence comparison ran — hiding
+     `erratum-swords-of-concealing-light`'s genuine `status` divergence entirely; the
+     corrected count is 7 state-specific records, not 6). The reference-identity
+     design was corrected before implementation: keyed by a new `reference_id` field
+     (WHICH reference list), not solely by `provenance_source` (WHERE an assertion is
+     sourced from — a source can host more than one reference list). Full detail,
+     including the frozen consumer precedence and every schema/runtime/validator
+     change, in `docs/research/erratum-v2-representation-gaps.md`.
    - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
      migrated, and v1 schema/runtime remain fully supported. It is gated on the
      re-derived audit in `docs/research/erratum-v2-migration-audit.md`: **247 of 296**
@@ -373,24 +386,22 @@ reflects that.
      are not (v1's positional model and v2's real chronology disagree at some boundary —
      order-aware migration, not a rename; 47 already researched, 2 needing manual
      review). Equivalence, chronology/shape readiness, and data-preservation
-     certification are three DIFFERENT questions — of the 247, **236 have no known
+     status are three DIFFERENT questions — of the 247, **236 have no known
      chronology/shape obstacle** once the 11 parity-only records are set aside, but
-     this is deliberately NOT called "immediately migratable," "data-preserving," or
-     "safe": v1 implementation metadata with no v2 coverage destination at all
-     (`status` on all 296 records, `tested` on 240, `gap.upstream_checked`/
-     `gap.behavioural_impact` on 53 each) affects the 236 too, and is demonstrably
-     state-specific (a change's `resulting_implementation` can carry a different
-     `status` than the record's baseline), so a record-level field cannot preserve it
-     without further design. Separately, **11 parity-only identity records are
-     blocked** independently of the above: they carry a historical passcode with zero
-     implementation-relevant events, GOAT's `reference_parity` consumes all eleven
-     today, and v2 as frozen cannot represent that identity (their only state is
-     terminal, so its coverage is synthesised `modern` and any authored identity is
-     discarded). Migrating them as-is would break GOAT parity and silently discard
-     canonical data. **Both representation gaps are researched, with candidate designs
-     compared, in `docs/research/erratum-v2-representation-gaps.md` — neither is
-     implemented, and neither the v2 schema nor any canonical record has been changed
-     for them.**
+     this is deliberately NOT called "immediately migratable" or "safe": data
+     preservation is now a REPRESENTATION-READY claim, not a pending one —
+     `implementation_metadata[]` (v1's `status`/`tested`/`reason`/`gap.upstream_
+     checked`/`gap.behavioural_impact`, previously nowhere to go, demonstrably
+     state-specific since a change's `resulting_implementation` can carry a different
+     `status` than the record's baseline) and `reference_identities[]` (the 11
+     parity-only records' historical passcode, which v2's terminal-state-is-MODERN
+     rule cannot hold as ordinary `Coverage`) both now exist, and this project's own
+     migration-audit tooling independently verifies every one of the 247 records'
+     v1 metadata/identity round-trips into them (`metadata_unrepresented_count == 0`,
+     `parity_only_unrepresented_count == 0`). **`data_preservation_status` is now the
+     literal string `"representation-implemented-not-migrated"`** — representation
+     readiness is still not migration: no canonical record has changed, and starting
+     migration remains a separate, later decision.
 
 ## Phase 2 — framework completeness
 

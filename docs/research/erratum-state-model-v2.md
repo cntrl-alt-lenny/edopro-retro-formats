@@ -1973,25 +1973,29 @@ has nothing left to select for).
    this document's own 247/49/48/236/11 figures exactly, independently
    re-derived rather than assumed).**
 
-   **BLOCKED — do not begin this step yet, for TWO independent reasons, not
-   one.** It was already known that the 11 parity-only records must be
-   excluded (below). A second, later audit pass found that **the
-   remaining 236 are ALSO not yet clear to migrate**: v1 implementation
-   metadata with no v2 coverage destination at all (`status` on all 296
-   records, `tested` on 240, `gap.upstream_checked`/`gap.behavioural_
-   impact` on 53 each, one bare `reason`) is demonstrably STATE-SPECIFIC
-   (a change's `resulting_implementation` can and does carry a different
-   `status` than the record's baseline `implementation` — see
-   `erratum-v2-migration-audit.md`'s worked Blue-Eyes Toon Dragon example),
-   so it cannot be preserved by a record-level field, and no v2
-   representation for it has been designed yet. See
-   `docs/research/erratum-v2-representation-gaps.md` for the full
-   comparison of candidate representations for BOTH open gaps (this
-   metadata question and the parity-only identity question below). This
-   step may begin only once that design is resolved and, if it requires a
-   schema change, implemented — not before.
+   **The representation blocker is LIFTED; canonical migration itself has
+   STILL not begun.** Two independent representation gaps held this step
+   back: v1 implementation metadata with no v2 coverage destination at all
+   (`status` on all 296 records, `tested` on 240, `gap.upstream_checked`/
+   `gap.behavioural_impact` on 53 each, one bare `reason` — demonstrably
+   STATE-SPECIFIC, since a change's `resulting_implementation` can and does
+   carry a different `status` than the record's baseline `implementation`
+   — see `erratum-v2-migration-audit.md`'s worked Blue-Eyes Toon Dragon
+   example), and the 11 parity-only records' identity (below). Both are
+   now designed AND implemented — `implementation_metadata[]` (keyed by
+   relevant-event down-set, orthogonal to `Coverage`) and
+   `reference_identities[]` (record-level, orthogonal to `Coverage`,
+   `reference_id`-keyed) — with a corrected schema, runtime, validator, and
+   consumer precedence rule, and this project's own migration-audit tooling
+   independently verifies every one of the 247 semantically-equivalent
+   records' v1 metadata/identity round-trips into them (`metadata_
+   unrepresented_count == 0`, `parity_only_unrepresented_count == 0`). See
+   `docs/research/erratum-v2-representation-gaps.md` for the full design
+   record. **This step still has not begun**: implementing the
+   representation is a prerequisite, not the migration itself — starting
+   step 4 for real remains a separate, later decision.
 
-   The shape split, once unblocked, is finer than "single-
+   The shape split, once migration begins, is finer than "single-
    event sugar for the 236" — under full-event semantics every change is an
    event, so only **180** of the 236 trivial records have exactly one event
    in total and can use sugar; **35** have one relevant change with a
@@ -2002,15 +2006,22 @@ has nothing left to select for).
    `changes[]` position. Regression-gated on guarantee B holding for every
    one of the 247 — `tests/migration_audit.py` derives this figure from the
    runtime on every test run, rather than asserting it. **11 of the 247 are
-   parity-only identity records (zero relevant events, a usable historical
-   passcode from period-text-only reference divergence) and are EXCLUDED
-   from this step despite being equivalent**: equivalence is not
-   sufficiency, and these 11 prove it — migrating them as-is would silently
-   discard the identity GOAT's `reference_parity` depends on, since v2's
-   terminal state always synthesises MODERN coverage. See `erratum-v2-
-   migration-audit.md` for the full accounting; how their identity should be
-   represented remains an explicit open decision, not resolved by this
-   step.
+   parity-only identity records** (zero relevant events, a usable
+   historical passcode from period-text-only reference divergence):
+   equivalence alone was never sufficiency, and these 11 proved it —
+   migrating them as ordinary `states[]` coverage would have silently
+   discarded the identity GOAT's `reference_parity` depends on, since v2's
+   terminal state always synthesises MODERN coverage. **No longer
+   excluded**: `reference_identities[]` (orthogonal to `Coverage`,
+   `reference_id`-keyed) now represents exactly this fact, implemented and
+   independently verified to round-trip all 11 records' identities exactly
+   (`docs/research/erratum-v2-representation-gaps.md`). They migrate
+   alongside the rest of this step, not as a separate future one, once
+   step 4 actually begins. The **10 pure cosmetic/engine, no-historical-
+   state records** also belong in this step's full accounting (180 + 35 +
+   11 + 11 + 10 = 247) — an earlier pass's migration-sequencing text
+   omitted them; they carry no behavioural identity to preserve, only
+   `implementation_metadata[]` for whatever workflow fields they have.
 5. **Migrate the 47 already-researched unordered records** (38
    bundled/shared-package + 9 mechanically-distinct order-unknown) as
    separate, unordered events — no `ordering` edge for either group; the

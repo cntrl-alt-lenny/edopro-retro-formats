@@ -199,9 +199,12 @@ def _relevant_indices(record: Erratum) -> list[int]:
     return [i for i, c in enumerate(record.changes) if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS]
 
 
-def candidate_v2(record: Erratum) -> ErratumV2:
+def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None) -> ErratumV2:
     """The v2 record this v1 record would migrate to, under the rules in this
-    module's docstring."""
+    module's docstring. `reference_identities` (task section 8) is derived
+    SEPARATELY, from the repository's own format policies
+    (`derive_reference_identities()`) - never hard-coded here - and merged
+    in verbatim when the caller has one; most records pass none."""
     events: dict[str, dict] = {}
     for index, change in enumerate(record.changes):
         events[_event_id(index)] = {
@@ -229,18 +232,26 @@ def candidate_v2(record: Erratum) -> ErratumV2:
             if ordering_proof(events[before]["effective"], events[after]["effective"]) == PROVEN:
                 edges.append({"before": before, "after": after, "basis": "date-proven"})
 
-    # states[]: v1's positional version chain, read faithfully.
+    # states[]: v1's positional version chain, read faithfully. Coverage
+    # (executable) and implementation_metadata (workflow/research,
+    # orthogonal - task section 2) are built from the SAME per-version v1
+    # implementation object but land in two SEPARATE arrays, independently:
+    # a version can produce a states[] entry, an implementation_metadata[]
+    # entry, both, or neither.
     relevant_indices = _relevant_indices(record)
     states = []
+    implementation_metadata = []
     for version, _ in enumerate([None] + relevant_indices[:-1] if relevant_indices else [None]):
         impl = record.implementation_for_version(version)
         if impl is None:
             continue
-        coverage = _coverage_from_v1(impl)
-        if coverage is None:
-            continue  # unauthored state: v2 defaults it to UNRESOLVED
         down_set = [_event_id(i) for i in relevant_indices[:version]]
-        states.append({"events": down_set, "coverage": coverage})
+        coverage = _coverage_from_v1(impl)
+        if coverage is not None:
+            states.append({"events": down_set, "coverage": coverage})
+        metadata_entry = _implementation_metadata_from_v1(impl)
+        if metadata_entry is not None:
+            implementation_metadata.append({"events": down_set, **metadata_entry})
     raw = {
         "id": record.id,
         "modern_card": {"passcode": record.modern_card.passcode, "name": record.modern_card.name},
@@ -248,10 +259,67 @@ def candidate_v2(record: Erratum) -> ErratumV2:
         "events": events,
         "ordering": {"edges": edges} if edges else {},
         "states": states,
+        "implementation_metadata": implementation_metadata,
+        "reference_identities": list(reference_identities or []),
         "review": record.raw.get("review") or {"status": "imported"},
         "sources": list(record.sources),
     }
     return ErratumV2.load(raw, record.path)
+
+
+def derive_reference_identities(record: Erratum, repo) -> list[dict]:
+    """Which `reference_identities[]` entries this record's candidate v2
+    would carry, derived from the REPOSITORY'S OWN format policies (task
+    section 8) - never hard-coded (no format id, `reference_id`, or
+    `provenance_source` string is assumed by this function). For every
+    format whose `reference_parity` declares a `reference_id` AND actually
+    consumes this record's historical identity (the real v1
+    `parity_override()` resolution - the same one `lflist.py` uses to
+    build formats today, not a re-derived approximation of it), emit one
+    entry - but ONLY for records with zero relevant events. The runtime and
+    validator support `reference_identities` on any record, relevant
+    events or none (task section 4: "a v2 record WITH relevant behavioural
+    events is allowed to carry a reference_identity"), but this migration
+    tool's SCOPE (section 8) is the 11 parity-only records specifically -
+    the ones Coverage cannot represent at all. A record with relevant
+    events already has a working Coverage-based representation of the same
+    passcode; authoring a second, redundant `reference_identities` entry
+    for it is not what this task asks the migration tooling to do, so this
+    function does not emit one. Most records therefore emit none; today
+    exactly the 11 parity-only records do, because only GOAT declares a
+    `reference_id` - but this generalises to any future reference-parity
+    format without special-casing GOAT."""
+    from retroformats.lflist import in_reference, parity_override
+
+    if record.relevant_changes():
+        return []
+    identities: list[dict] = []
+    seen_reference_ids: set[str] = set()
+    for fmt_id in sorted(repo.formats):
+        fmt = repo.formats[fmt_id]
+        parity = fmt.reference_parity
+        if not parity or not parity.get("reference_id"):
+            continue
+        reference_id = parity["reference_id"]
+        if reference_id in seen_reference_ids:
+            continue
+        if not in_reference(record, parity):
+            continue
+        usable = parity_override(record)
+        if usable is None:
+            continue
+        seen_reference_ids.add(reference_id)
+        identities.append(
+            {
+                "reference_id": reference_id,
+                "provenance_source": parity.get("provenance_source") or "",
+                "historical_passcode": usable.get("historical_passcode"),
+                "historical_variant_passcodes": list(usable.get("historical_variant_passcodes", [])),
+                "upstream": usable.get("upstream"),
+                "script": usable.get("script"),
+            }
+        )
+    return identities
 
 
 def _coverage_from_v1(impl: dict) -> dict | None:
@@ -392,12 +460,116 @@ def _coverage_preserved(record: Erratum, v2: ErratumV2) -> bool:
     return True
 
 
+def _implementation_metadata_from_v1(impl: dict) -> dict | None:
+    """Maps ONE v1 implementation object's workflow/research fields onto
+    the `implementation_metadata[]` entry it would author - independent of
+    `_coverage_from_v1()`, which handles only the executable Coverage
+    half. `status`/`tested`/`reason` map straight across; `gap.
+    upstream_checked`/`gap.behavioural_impact` nest under `gap`, mirroring
+    the schema exactly (representation-gaps.md's frozen shape, task
+    section 2). Returns None when the implementation carries no metadata
+    field at all - nothing to author, not an empty entry (the schema
+    forbids an entry with only `events`)."""
+    entry: dict[str, Any] = {}
+    if impl.get("status") is not None:
+        entry["status"] = impl["status"]
+    if impl.get("tested") is not None:
+        entry["tested"] = impl["tested"]
+    if impl.get("reason") is not None:
+        entry["reason"] = impl["reason"]
+    gap = impl.get("gap") or {}
+    gap_entry: dict[str, Any] = {}
+    if gap.get("upstream_checked") is not None:
+        gap_entry["upstream_checked"] = gap["upstream_checked"]
+    if gap.get("behavioural_impact") is not None:
+        gap_entry["behavioural_impact"] = gap["behavioural_impact"]
+    if gap_entry:
+        entry["gap"] = gap_entry
+    return entry or None
+
+
+# The exact v1 fields `_implementation_metadata_from_v1()` maps into
+# `implementation_metadata[]`, and therefore the fields `metadata_
+# inventory()` now reports as REPRESENTED (has_v2_destination: True) -
+# a genuinely different answer than before this task's implementation
+# landed. Any OTHER field `metadata_inventory()` discovers stays
+# unrepresented, exactly as it should: this set is not "everything we
+# might ever see," only what §2's frozen shape actually maps.
+KNOWN_METADATA_FIELDS = frozenset({"status", "tested", "reason", "gap.upstream_checked", "gap.behavioural_impact"})
+
+
+def _metadata_preserved(record: Erratum, v2: ErratumV2) -> bool:
+    """Independent of `candidate_v2()`'s own construction, exactly like
+    `_coverage_preserved()`: re-derive what each v1 implementation OBJECT
+    should carry directly from the v1 record, then check the REAL PARSED
+    `ImplementationMetadata` in `v2.implementation_metadata` actually
+    carries it. No implementation occurrence may silently disappear -
+    baseline AND every resulting_implementation are checked, each against
+    its own down-set, never collapsed into one."""
+    relevant_indices = _relevant_indices(record)
+    versions = [None] + relevant_indices[:-1] if relevant_indices else [None]
+    for version, _ in enumerate(versions):
+        impl = record.implementation_for_version(version)
+        if impl is None:
+            continue
+        expected = _implementation_metadata_from_v1(impl)
+        if expected is None:
+            continue  # nothing authored for this state: nothing to check
+        down_set = frozenset(_event_id(i) for i in relevant_indices[:version])
+        metadata = v2.implementation_metadata.get(down_set)
+        if metadata is None:
+            return False
+        if "status" in expected and metadata.status != expected["status"]:
+            return False
+        if "tested" in expected and metadata.tested != expected["tested"]:
+            return False
+        if "reason" in expected and metadata.reason != expected["reason"]:
+            return False
+        gap = expected.get("gap") or {}
+        if "upstream_checked" in gap and metadata.gap_upstream_checked != gap["upstream_checked"]:
+            return False
+        if "behavioural_impact" in gap and metadata.gap_behavioural_impact != gap["behavioural_impact"]:
+            return False
+    return True
+
+
+def _reference_identity_preserved(record: Erratum, v2: ErratumV2) -> bool:
+    """For a parity-only record (zero relevant events, a usable baseline
+    historical passcode): does the candidate's `reference_identities[]`
+    carry an entry whose (historical_passcode, historical_variant_
+    passcodes, upstream, script) exactly matches the v1 baseline's? For
+    every OTHER record (nothing to preserve here), trivially True."""
+    impl = record.implementation or {}
+    if impl.get("strategy") not in ("reuse-upstream", "custom-script"):
+        return True
+    passcode = impl.get("historical_passcode")
+    if not passcode or not _is_valid_passcode(passcode):
+        return True  # not a usable baseline identity in the first place
+    if record.relevant_changes():
+        return True  # not a parity-only record; this check does not apply
+    expected_variants = tuple(impl.get("historical_variant_passcodes", []))
+    expected_upstream = impl.get("upstream")
+    expected_script = impl.get("script")
+    for identity in v2.reference_identities:
+        if (
+            identity.historical_passcode == passcode
+            and identity.historical_variant_passcodes == expected_variants
+            and identity.upstream == expected_upstream
+            and identity.script == expected_script
+        ):
+            return True
+    return False
+
+
 def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
     """Migration must not silently drop documentation fields even where
     executable behaviour is unaffected: every change's historical_text,
     modern_text, summary and sources must survive verbatim into its
-    candidate event's sole transition, AND every coverage field with a
-    direct v2 representation (§_coverage_preserved) must survive too."""
+    candidate event's sole transition, every coverage field with a direct
+    v2 representation must survive (`_coverage_preserved`), every workflow/
+    research metadata field must survive (`_metadata_preserved`), and a
+    parity-only record's identity must survive into `reference_
+    identities[]` (`_reference_identity_preserved`)."""
     for index, change in enumerate(record.changes):
         event = v2.events.get(_event_id(index))
         if event is None or not event.transitions:
@@ -411,16 +583,11 @@ def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
             return False
         if tuple(transition.sources) != tuple(change.get("sources", [])):
             return False
-    return _coverage_preserved(record, v2)
-
-
-# v1 implementation/gap metadata with NO direct representation in v2's
-# coverage schema at all (COVERAGE_FIELDS is closed per kind - these simply
-# have no destination field, not a bug to fix by widening a dict). Reported
-# by `metadata_inventory()` as an explicit, honest gap - UNKNOWN != DISCARD:
-# this is not proposed as a schema addition, only surfaced as a fact a
-# migration decision must eventually confront.
-UNREPRESENTED_METADATA_FIELDS = ("status", "tested", "gap.upstream_checked", "gap.behavioural_impact")
+    return (
+        _coverage_preserved(record, v2)
+        and _metadata_preserved(record, v2)
+        and _reference_identity_preserved(record, v2)
+    )
 
 
 def metadata_inventory(errata: dict) -> list[dict]:
@@ -428,19 +595,22 @@ def metadata_inventory(errata: dict) -> list[dict]:
     destination: how many IMPLEMENTATION OBJECTS carry it, versus how many
     DISTINCT RECORDS - a v1 record can carry more than one implementation
     object (one baseline `implementation`, plus one `resulting_
-    implementation` per relevant change), so "occurrences" and "records"
-    are genuinely different counts and must be reported as such, never
-    conflated as "records" the way a prior pass's `record_count` did (296
-    records but 312 implementation-object occurrences, because 16 changes
-    across 12 records carry their own `resulting_implementation`).
+    implementation` PER RELEVANT CHANGE THAT RECORDS ONE - Necrovalley
+    alone has three), so "occurrences" and "records" are genuinely
+    different counts and must be reported as such, never conflated as
+    "records" the way a prior pass's `record_count` did, and never
+    collapsed into ONE "resulting" slot the way an even-later prior pass's
+    fix still did when a record had more than one resulting_implementation
+    (the second silently overwrote the first before any baseline/resulting
+    comparison ran).
 
-    Also reports, per field, whether the SAME record's baseline and
-    resulting-implementation values for that field actually differ -
-    load-bearing evidence for whether the metadata is state-specific
-    (varies per implementation version within one card) or safely
-    record-wide (the same for every version). Flags ANY field this
-    function does not already recognise, rather than assuming the known
-    list is exhaustive forever."""
+    Every occurrence gets an EXACT, never-overwritten locator -
+    `"baseline"` or `"resulting:<change-index>"` - so `records_with_
+    multiple_distinct_values` genuinely compares every value the record
+    carries (baseline AND every resulting_implementation, not just
+    whichever was processed last) for state-specificity. Flags ANY field
+    this function does not already recognise, rather than assuming the
+    known list is exhaustive forever."""
     from collections import Counter, defaultdict
 
     known_reason_fields = {"reason", "sources"}  # -> gap_reason/gap_sources, already preserved
@@ -452,60 +622,86 @@ def metadata_inventory(errata: dict) -> list[dict]:
         "script",
         "gap",
     }
-    # field -> list of (record_id, "baseline"|"resulting", value)
+    # field -> list of (record_id, locator, value). `locator` is EXACT and
+    # NEVER shared between two distinct implementation objects on the same
+    # record - "baseline" is unique per record by construction, and
+    # "resulting:<index>" is unique per change index, so N resulting
+    # objects on one record are N distinct list entries, never one
+    # overwritten slot.
     occurrences: dict[str, list[tuple[str, str, object]]] = defaultdict(list)
 
-    def _collect(record_id: str, impl: dict, slot: str) -> None:
+    def _collect(record_id: str, impl: dict, locator: str) -> None:
         for key, value in impl.items():
             if key not in known_impl_fields or key in ("status", "tested"):
-                occurrences[key].append((record_id, slot, value))
+                occurrences[key].append((record_id, locator, value))
         gap = impl.get("gap") or {}
         for key, value in gap.items():
             if key not in known_reason_fields:
-                occurrences[f"gap.{key}"].append((record_id, slot, value))
+                occurrences[f"gap.{key}"].append((record_id, locator, value))
 
     for record in errata.values():
         if not isinstance(record, Erratum):
             continue
         _collect(record.id, record.implementation or {}, "baseline")
-        for change in record.changes:
+        for index, change in enumerate(record.changes):
             resulting = change.get("resulting_implementation")
             if resulting:
-                _collect(record.id, resulting, "resulting")
+                _collect(record.id, resulting, f"resulting:{index}")
 
     inventory = []
     for field in sorted(occurrences):
         entries = occurrences[field]
         record_ids = {rid for rid, _, _ in entries}
-        baseline_ids = sorted({rid for rid, slot, _ in entries if slot == "baseline"})
-        resulting_ids = sorted({rid for rid, slot, _ in entries if slot == "resulting"})
-        by_record: dict[str, dict[str, object]] = defaultdict(dict)
-        for rid, slot, value in entries:
-            by_record[rid][slot] = value
-        has_both = sorted(rid for rid, slots in by_record.items() if {"baseline", "resulting"} <= slots.keys())
-        differs = sorted(
-            rid for rid in has_both if by_record[rid]["baseline"] != by_record[rid]["resulting"]
+        baseline_entries = [(rid, loc, v) for rid, loc, v in entries if loc == "baseline"]
+        resulting_entries = [(rid, loc, v) for rid, loc, v in entries if loc != "baseline"]
+        baseline_record_ids = {rid for rid, _, _ in baseline_entries}
+        resulting_record_ids = {rid for rid, _, _ in resulting_entries}
+
+        by_record: dict[str, list[tuple[str, object]]] = defaultdict(list)
+        for rid, loc, value in entries:
+            by_record[rid].append((loc, value))
+        # ALL occurrences of one record compared together - baseline AND
+        # every resulting:<index> - never just "the last one processed".
+        multiple_occurrences = sorted(rid for rid, occs in by_record.items() if len(occs) > 1)
+        multiple_distinct_values = sorted(
+            rid
+            for rid, occs in by_record.items()
+            if len(occs) > 1 and len({repr(v) for _, v in occs}) > 1
         )
+
         values = [v for _, _, v in entries]
         distinct_values = {repr(v) for v in values}
         value_distribution = (
             {repr(v): c for v, c in Counter(values).items()} if len(distinct_values) <= 10 else None
         )
+        # This task implemented `implementation_metadata[]` as the v2
+        # destination for exactly `KNOWN_METADATA_FIELDS` (representation-
+        # gaps.md's frozen shape) - those fields are REPRESENTED now, and
+        # would NOT be lost on a migration that populates the array. Any
+        # OTHER field this function discovers (the one-off bare `reason`
+        # is already inside KNOWN_METADATA_FIELDS; a genuinely new,
+        # unrecognised field would not be) stays reported as a real gap.
+        has_destination = field in KNOWN_METADATA_FIELDS
         inventory.append(
             {
                 "field": field,
                 "implementation_occurrence_count": len(entries),
                 "unique_record_count": len(record_ids),
                 "unique_record_ids": sorted(record_ids),
-                "baseline_occurrence_count": len(baseline_ids),
-                "resulting_implementation_occurrence_count": len(resulting_ids),
-                "representative_baseline_ids": baseline_ids[:5],
-                "representative_resulting_ids": resulting_ids[:5],
-                "records_with_both_baseline_and_resulting": has_both,
-                "records_where_value_differs_between_baseline_and_resulting": differs,
+                "baseline_occurrence_count": len(baseline_entries),
+                "resulting_implementation_occurrence_count": len(resulting_entries),
+                "unique_baseline_record_count": len(baseline_record_ids),
+                "unique_resulting_record_count": len(resulting_record_ids),
+                "representative_baseline_ids": sorted(baseline_record_ids)[:5],
+                "representative_resulting_ids": sorted(resulting_record_ids)[:5],
+                "representative_occurrences": [
+                    {"record": rid, "locator": loc, "value": value} for rid, loc, value in entries[:5]
+                ],
+                "records_with_multiple_occurrences": multiple_occurrences,
+                "records_with_multiple_distinct_values": multiple_distinct_values,
                 "value_distribution": value_distribution,
-                "has_v2_destination": False,
-                "would_be_lost_on_migration": True,
+                "has_v2_destination": has_destination,
+                "would_be_lost_on_migration": not has_destination,
             }
         )
     return inventory
@@ -654,8 +850,11 @@ def _legacy_self_contradictory(record: Erratum, relevant_indices: list[int]) -> 
     return False
 
 
-def compare(record: Erratum) -> dict:
-    """Full-boundary comparison of one record. Returns the audit row."""
+def compare(record: Erratum, reference_identities: list[dict] | None = None) -> dict:
+    """Full-boundary comparison of one record. Returns the audit row.
+    `reference_identities`, when given, is merged into the candidate v2
+    (task section 8) so `_data_preserved()` can verify a parity-only
+    record's identity actually round-trips."""
     relevant_indices = _relevant_indices(record)
     impl = record.implementation or {}
     row: dict = {
@@ -678,7 +877,7 @@ def compare(record: Erratum) -> dict:
     row["no_historical_state"] = not relevant_indices and not row["parity_only_identity"]
 
     try:
-        v2 = candidate_v2(record)
+        v2 = candidate_v2(record, reference_identities)
     except Exception as exc:  # pragma: no cover - defensive
         row.update(
             sugar_eligible=False,
@@ -703,6 +902,13 @@ def compare(record: Erratum) -> dict:
     row["structural_state_count"] = len(v2.structural_states())
     row["ordering_structure"] = _ordering_structure(len(relevant_indices), row["structural_state_count"])
     row["sugar_eligible"] = row["event_count"] == 1 and row["relevant_event_count"] == 1
+    # Individually-reported sub-checks, alongside the combined verdict
+    # `_data_preserved()` already computes (transition text/summary/
+    # sources + all three of these) - so a caller can see WHICH kind of
+    # preservation failed, not just that something did.
+    row["coverage_preserved"] = _coverage_preserved(record, v2)
+    row["metadata_preserved"] = _metadata_preserved(record, v2)
+    row["reference_identity_preserved"] = _reference_identity_preserved(record, v2)
     row["data_preserved"] = _data_preserved(record, v2)
     row["legacy_self_contradictory"] = _legacy_self_contradictory(record, relevant_indices)
 
@@ -798,8 +1004,14 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
     for record in sorted(repo.errata.values(), key=lambda e: e.id):
         if not isinstance(record, Erratum):
             continue  # already v2; nothing to migrate
-        rows.append(compare(record))
+        reference_identities = derive_reference_identities(record, repo)
+        rows.append(compare(record, reference_identities))
     parity_only_count = sum(1 for r in rows if r.get("category") == CAT_PARITY_ONLY)
+    unpreserved_data_ids = sorted(r["id"] for r in rows if r.get("data_preserved") is False)
+    unpreserved_metadata_ids = sorted(r["id"] for r in rows if r.get("metadata_preserved") is False)
+    unpreserved_reference_identity_ids = sorted(
+        r["id"] for r in rows if r.get("reference_identity_preserved") is False
+    )
     equivalent_count = sum(1 for r in rows if r["equivalent"])
     summary = {
         "records": len(rows),
@@ -820,38 +1032,41 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "categories": dict(Counter(r["category"] for r in rows)),
         "research_status": dict(Counter(r.get("research_status") for r in rows)),
         "migration_complexity": dict(Counter(r.get("migration_complexity") for r in rows)),
-        "data_not_preserved_ids": sorted(r["id"] for r in rows if r.get("data_preserved") is False),
+        "data_not_preserved_ids": unpreserved_data_ids,
+        "metadata_not_preserved_ids": unpreserved_metadata_ids,
+        "reference_identity_not_preserved_ids": unpreserved_reference_identity_ids,
         # CHRONOLOGY/SHAPE READINESS - deliberately NOT called "safe to
-        # migrate", "immediately migratable", or "data-preserving". Of the
-        # 247 semantically equivalent records, 11 (parity-only identity)
-        # are separately blocked on a representation decision (v2 as
-        # frozen cannot store their identity at all). The remaining 236
-        # have no known chronology/shape obstacle to becoming v2 events{}/
-        # states[] - but v1 implementation metadata with NO v2 coverage
-        # destination (status, tested, gap.upstream_checked,
-        # gap.behavioural_impact, one bare `reason` - see
-        # `metadata_inventory` below) affects records regardless of this
-        # split, INCLUDING these 236. Their data-PRESERVATION status is
-        # therefore explicitly PENDING a design decision
-        # (docs/research/erratum-v2-representation-gaps.md), not
-        # certified. Certification is a separate claim from either
-        # equivalence or chronology/shape readiness, and none of the three
-        # implies it.
+        # migrate" or "immediately migratable". Of the 247 semantically
+        # equivalent records, 11 are parity-only identity records; the
+        # remaining 236 have no known chronology/shape obstacle to
+        # becoming v2 events{}/states[].
         "chronology_shape_ready": equivalent_count - parity_only_count,
         "chronology_shape_ready_ids": sorted(
             r["id"] for r in rows if r["equivalent"] and r.get("category") != CAT_PARITY_ONLY
         ),
-        "data_preservation_status": "pending",
-        "data_preservation_pending_reason": (
-            "v1 implementation/gap metadata with no v2 coverage destination "
-            "(status, tested, gap.upstream_checked, gap.behavioural_impact, one "
-            "bare 'reason') has not been assigned a representation - see "
-            "metadata_inventory and docs/research/erratum-v2-representation-gaps.md. "
-            "Do not read chronology_shape_ready as a data-preservation or "
-            "migration-safety certification."
+        # REPRESENTATION status for the two gaps this task closes (task
+        # section 8): `implementation_metadata[]`/`reference_identities[]`
+        # now exist in the v2 schema/runtime/validator/consumer, and this
+        # audit's own candidate construction independently verifies every
+        # record's v1 metadata/identity round-trips into them
+        # (metadata_preserved/reference_identity_preserved per row).
+        # "representation-implemented" is NOT "migrated" - no
+        # data/errata/*.json record has actually been changed; this only
+        # reports that a destination now exists and preservation is
+        # verified against the CANDIDATE, not against real migrated data.
+        "data_preservation_status": "representation-implemented-not-migrated",
+        "data_preservation_status_detail": (
+            "implementation_metadata[]/reference_identities[] now exist (docs/research/"
+            "erratum-v2-representation-gaps.md); metadata_not_preserved_ids and "
+            "reference_identity_not_preserved_ids below are empty, meaning every "
+            "candidate v2 round-trips its v1 metadata/identity exactly. No "
+            "data/errata/*.json record has been migrated - this is a readiness "
+            "finding about the REPRESENTATION, not a migration status."
         ),
         "parity_only_blocked": parity_only_count,
         "parity_only_blocked_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
+        "parity_only_unrepresented_count": len(unpreserved_reference_identity_ids),
+        "metadata_unrepresented_count": len(unpreserved_metadata_ids),
         "nontrivial_migration_scope": sum(1 for r in rows if not r["equivalent"]),
         "nontrivial_already_researched": sum(1 for r in rows if r.get("category") == CAT_RESEARCHED_NONTRIVIAL),
         "nontrivial_needs_manual_review": sum(1 for r in rows if r.get("category") == CAT_MANUAL_REVIEW),
