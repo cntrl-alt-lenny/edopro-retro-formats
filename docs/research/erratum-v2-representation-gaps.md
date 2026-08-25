@@ -1,9 +1,9 @@
 # Two v2 representation gaps — design, and now implementation
 
-**Status: IMPLEMENTED. Canonical migration NOT started.** The design
-comparison below (sections 1-5) was written, reviewed, and — after one
-correction (section 3's `reference_id`, below) — accepted; sections 6-7 now
-describe what was actually built (`implementation_metadata[]`,
+**Status: IMPLEMENTED, then CORRECTED after review. Canonical migration
+NOT started.** The design comparison below (sections 1-5) was written,
+reviewed, and — after one correction (section 3's `reference_id`, below) —
+accepted; sections 6-7 now describe what was actually built (`implementation_metadata[]`,
 `reference_identities[]`, their validators, and their consumer/precedence
 wiring), not a proposal. **No `data/errata/*.json` record has been
 migrated** — the schema/runtime/validator/consumer changes exist so a
@@ -13,6 +13,12 @@ semantically-equivalent records' v1 metadata/identity round-trips into the
 new representation, but the canonical data itself is untouched, and the
 247/49/48 partition (`erratum-v2-migration-audit.md`) is unchanged by any
 of this.
+
+That round-trip claim was **not** valid as first implemented: two bugs,
+both found by review, are recorded and fixed in section 6a. The first one
+silently dropped the baseline metadata of 21 records and then confirmed
+itself, so the number it published was wrong rather than merely
+incomplete. Section 6a's figures are re-derived after the fix.
 
 Two genuine representation gaps survived the pre-migration hardening passes
 in `erratum-v2-migration-audit.md`, both discovered by that audit rather
@@ -691,17 +697,63 @@ Both are additive, optional, and orthogonal to every existing v2 field.
   (`status`/`tested`/`reason`/`gap.upstream_checked`/`gap.behavioural_
   impact`) report `has_v2_destination: True` — a genuinely unrecognised
   future field would still report `False`.
-- `_metadata_preserved()`/`_reference_identity_preserved()` — new,
+- `_metadata_preserved()`/`_reference_identity_preserved()` —
   independent preservation checks (re-deriving expectations from the raw
   v1 record, then checking the REAL parsed candidate, exactly like the
   existing `_coverage_preserved()`), wired into `_data_preserved()`
-  alongside it. Mutation tests (dropped `status`, wrong reference-identity
-  passcode) confirm both have real teeth.
-- **Result, confirmed by `audit_corpus()`**: `metadata_unrepresented_
-  count == 0`, `parity_only_unrepresented_count == 0`, every one of the
-  247 semantically-equivalent records' `data_preserved` is `True` — **and
-  247/49/48 are unchanged**, because none of this touches equivalence
-  logic at all.
+  alongside it. Mutation tests confirm both have real teeth: for metadata,
+  stripping the baseline entry from any of the 21 zero-relevant candidates
+  must fail the check; for identity, mutating ANY of the six fields in
+  `REFERENCE_IDENTITY_FIELDS` must fail it.
+
+### 6a. Correction — the first implementation of this was wrong twice
+
+Both bugs were found by review of the implementation commit, and both are
+fixed. They are recorded rather than quietly amended, because the first
+one produced a *falsely reassuring* number.
+
+**Metadata occurrences are not coverage occurrences.** Construction and
+the preservation checker both enumerated v1 implementation objects with
+`Erratum.implementation_for_version()`. For a record with zero
+implementation-relevant changes that returns `None` at version 0 — which
+is CORRECT for coverage, because `{}` is then also the terminal/MODERN
+state and the modern executable needs none. It is wrong for metadata: such
+a record still has an authored record-level `implementation` carrying
+`status`/`tested`/`reason`/`gap.*`. All **21** zero-relevant records (10
+pure cosmetic/engine, 11 parity-only) therefore lost their baseline
+metadata — and because the checker repeated the same lookup, it never
+looked for the entry it should have demanded, and reported preservation as
+complete. Fixed by giving metadata its own explicit vocabulary,
+`_v1_metadata_occurrences()`, which always yields baseline against the
+empty down-set (terminal or not, and implying nothing about whether a
+baseline *Coverage* state exists), plus one occurrence per relevant change
+carrying a `resulting_implementation`, keyed by the down-set that change
+creates. The checker shares that vocabulary — so the two cannot disagree
+about WHICH objects exist — but re-derives the expected VALUES from the
+raw v1 objects, so they cannot jointly agree on a wrong one.
+
+Every `resulting_implementation` in the corpus was audited against this
+mapping: **all of them sit on implementation-relevant changes**, so none
+is silently discarded or force-mapped. Construction now raises
+`MigrationMappingQuestion` if one ever appears elsewhere, rather than
+guessing.
+
+**Exact reference-id lookup must precede provenance membership.** Both the
+builder and the validator asked `in_reference()` first and only then
+consulted `reference_identities[]`, so for a record the provenance gate
+rejected the exact entry was unreachable — in exactly the case it exists
+to adjudicate. The frozen precedence is *exclude > include > exact
+matching entry > provenance membership + structural walk > chronology*,
+and it is now implemented once, in `resolve_v2_parity()`, which both
+callers use and neither reimplements.
+
+- **Result, re-derived by `audit_corpus()` after the fix** (not assumed as
+  an input): `metadata_unrepresented_count == 0`,
+  `parity_only_unrepresented_count == 0`,
+  `zero_relevant_baseline_metadata_represented_count == 21` of 21, and
+  every one of the 247 semantically-equivalent records' `data_preserved`
+  is `True` — **and 247/49/48 are unchanged**, because none of this
+  touches equivalence logic at all.
 
 No canonical `data/errata/*.json` record changes — the gap was in the v2
 REPRESENTATION, not in v1 data, which remains exactly as it was.
@@ -715,9 +767,13 @@ REPRESENTATION, not in v1 data, which remains exactly as it was.
 2. ~~Implement the schema/runtime/validator/consumer changes~~ **done**,
    in this same task, as one atomic commit alongside this document's
    corrections — not bundled with any canonical data migration.
-3. ~~Re-run `tests/migration_audit.py`'s candidate construction~~ **done**
-   — `metadata_unrepresented_count`/`parity_only_unrepresented_count` are
-   both `0`, confirmed mechanically, not by inspection.
+3. ~~Re-run `tests/migration_audit.py`'s candidate construction~~ **done,
+   and re-run again after the section 6a corrections** —
+   `metadata_unrepresented_count`/`parity_only_unrepresented_count` are
+   both `0`, and all 21 zero-relevant records' baseline metadata is
+   represented, confirmed mechanically rather than by inspection. The
+   first run reported the same zeroes while being wrong, which is why the
+   checker no longer shares the construction's occurrence lookup.
 4. **Canonical migration itself has NOT begun**, and remains gated on a
    separate, later decision to start it. Once it does, the design
    document's §13 sequence applies, now genuinely data-preservation-ready

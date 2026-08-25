@@ -199,6 +199,80 @@ def _relevant_indices(record: Erratum) -> list[int]:
     return [i for i, c in enumerate(record.changes) if c.get("kind") in IMPLEMENTATION_RELEVANT_KINDS]
 
 
+class MigrationMappingQuestion(Exception):
+    """A v1 shape this migration has no frozen answer for. Raised rather
+    than resolved by guessing: silently discarding the data, or
+    force-mapping it onto a down-set the frozen design never defined, are
+    both worse than stopping and asking."""
+
+
+def stray_resulting_implementations(record: Erratum) -> list[tuple[int, str]]:
+    """`(change index, kind)` for every `resulting_implementation` authored
+    on a change that is NOT implementation-relevant.
+
+    `_v1_metadata_occurrences()` maps a `resulting_implementation` onto the
+    down-set its change CREATES - and a non-relevant change creates no
+    event in that down-set vocabulary, so there is no defined v2 key for
+    one. Rather than let such an object vanish silently (or invent a
+    mapping), the corpus is checked and the question is raised. The current
+    corpus has none; this exists so that stays a verified fact rather than
+    an assumption."""
+    return [
+        (index, str(change.get("kind")))
+        for index, change in enumerate(record.changes)
+        if change.get("resulting_implementation") is not None
+        and change.get("kind") not in IMPLEMENTATION_RELEVANT_KINDS
+    ]
+
+
+def _v1_metadata_occurrences(record: Erratum) -> list[tuple[tuple[str, ...], dict, str]]:
+    """Every v1 implementation OBJECT whose workflow/research metadata must
+    survive migration, as `(ordered down-set event ids, implementation,
+    label)`.
+
+    Deliberately NOT `implementation_for_version()`. That function answers
+    a COVERAGE question - "which implementation is EXECUTABLE for version
+    k?" - and correctly returns None for version 0 of a zero-relevant
+    record, because `{}` is then also the terminal/MODERN state and the
+    modern executable needs no coverage authored for it. Metadata is a
+    different question with a different answer. A record with zero
+    implementation-relevant changes still has an AUTHORED record-level
+    `implementation` carrying `status`/`tested`/`reason`/`gap.
+    upstream_checked`/`gap.behavioural_impact`, and that authorship must
+    survive even though the state it describes is terminal. Coverage
+    occurrences and metadata occurrences are genuinely different concepts,
+    so they do not share a lookup - conflating them is what lost the
+    baseline metadata of all 21 zero-relevant records.
+
+    Yields, in order:
+
+      * `((), record.implementation, "baseline")` - ALWAYS, for every
+        record, zero-relevant ones included. Baseline metadata maps to the
+        empty down-set unconditionally. That remains true when `{}` is the
+        terminal/MODERN state, and it does NOT imply a baseline COVERAGE
+        state exists: the two arrays stay orthogonal exactly as designed.
+      * one entry per implementation-relevant change that records a
+        `resulting_implementation`, keyed by the down-set that change
+        CREATES (the prefix of relevant event ids up to and INCLUDING it),
+        labelled `resulting:<index into record.changes>`.
+
+    The event ids are emitted in the legacy record's own positional order,
+    which describes only the v1 state chain's claimed identity during
+    migration. It is never evidence of v2 ordering - v2 ordering comes
+    exclusively from date-proven edges."""
+    relevant_indices = _relevant_indices(record)
+    occurrences: list[tuple[tuple[str, ...], dict, str]] = [
+        ((), dict(record.implementation or {}), "baseline")
+    ]
+    for position, change_index in enumerate(relevant_indices):
+        resulting = record.changes[change_index].get("resulting_implementation")
+        if not resulting:
+            continue
+        down_set = tuple(_event_id(i) for i in relevant_indices[: position + 1])
+        occurrences.append((down_set, dict(resulting), f"resulting:{change_index}"))
+    return occurrences
+
+
 def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None) -> ErratumV2:
     """The v2 record this v1 record would migrate to, under the rules in this
     module's docstring. `reference_identities` (task section 8) is derived
@@ -239,19 +313,32 @@ def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None
     # a version can produce a states[] entry, an implementation_metadata[]
     # entry, both, or neither.
     relevant_indices = _relevant_indices(record)
+    stray = stray_resulting_implementations(record)
+    if stray:
+        raise MigrationMappingQuestion(
+            f"{record.id}: resulting_implementation authored on non-implementation-relevant "
+            f"change(s) {stray}; a non-relevant change creates no event, so there is no "
+            "defined v2 down-set for its metadata - this needs a mapping decision, not a guess"
+        )
+    # states[] is a COVERAGE question, answered by implementation_for_version:
+    # version 0 of a zero-relevant record is the terminal/MODERN state, which
+    # correctly authors no coverage.
     states = []
-    implementation_metadata = []
     for version, _ in enumerate([None] + relevant_indices[:-1] if relevant_indices else [None]):
         impl = record.implementation_for_version(version)
         if impl is None:
             continue
-        down_set = [_event_id(i) for i in relevant_indices[:version]]
         coverage = _coverage_from_v1(impl)
         if coverage is not None:
-            states.append({"events": down_set, "coverage": coverage})
+            states.append({"events": [_event_id(i) for i in relevant_indices[:version]], "coverage": coverage})
+    # implementation_metadata[] is a different question with a different
+    # answer, so it uses the metadata-occurrence vocabulary instead: baseline
+    # metadata is authored on EVERY record and maps to `[]`, terminal or not.
+    implementation_metadata = []
+    for down_set, impl, _label in _v1_metadata_occurrences(record):
         metadata_entry = _implementation_metadata_from_v1(impl)
         if metadata_entry is not None:
-            implementation_metadata.append({"events": down_set, **metadata_entry})
+            implementation_metadata.append({"events": list(down_set), **metadata_entry})
     raw = {
         "id": record.id,
         "modern_card": {"passcode": record.modern_card.passcode, "name": record.modern_card.name},
@@ -498,70 +585,178 @@ def _implementation_metadata_from_v1(impl: dict) -> dict | None:
 KNOWN_METADATA_FIELDS = frozenset({"status", "tested", "reason", "gap.upstream_checked", "gap.behavioural_impact"})
 
 
+def _v1_expected_metadata_fields(impl: dict) -> dict:
+    """What ONE raw v1 implementation object's workflow/research metadata
+    must become, re-derived straight from the RAW object rather than by
+    calling `_implementation_metadata_from_v1()`.
+
+    Deliberately a second, independent reading of the same v1 fields, for
+    the same reason `_v1_expected_coverage_fields()` is: a checker that
+    re-ran the construction helper and compared it against its own output
+    would confirm only that the helper agrees with itself. It would not
+    notice the helper dropping a field."""
+    expected: dict[str, Any] = {}
+    for field_name in ("status", "tested", "reason"):
+        if impl.get(field_name) is not None:
+            expected[field_name] = impl[field_name]
+    gap = impl.get("gap") or {}
+    for field_name in ("upstream_checked", "behavioural_impact"):
+        if gap.get(field_name) is not None:
+            expected[f"gap.{field_name}"] = gap[field_name]
+    return expected
+
+
 def _metadata_preserved(record: Erratum, v2: ErratumV2) -> bool:
     """Independent of `candidate_v2()`'s own construction, exactly like
     `_coverage_preserved()`: re-derive what each v1 implementation OBJECT
-    should carry directly from the v1 record, then check the REAL PARSED
-    `ImplementationMetadata` in `v2.implementation_metadata` actually
-    carries it. No implementation occurrence may silently disappear -
-    baseline AND every resulting_implementation are checked, each against
-    its own down-set, never collapsed into one."""
-    relevant_indices = _relevant_indices(record)
-    versions = [None] + relevant_indices[:-1] if relevant_indices else [None]
-    for version, _ in enumerate(versions):
-        impl = record.implementation_for_version(version)
-        if impl is None:
-            continue
-        expected = _implementation_metadata_from_v1(impl)
-        if expected is None:
+    should carry directly from the RAW v1 record, then check the REAL
+    PARSED `ImplementationMetadata` in `v2.implementation_metadata`
+    actually carries it. No implementation occurrence may silently
+    disappear - baseline AND every resulting_implementation are checked,
+    each against its own down-set, never collapsed into one.
+
+    Uses the SAME occurrence vocabulary as `candidate_v2()`
+    (`_v1_metadata_occurrences`) so the two cannot disagree about WHICH
+    objects exist, but derives the expected VALUES independently, so they
+    cannot jointly agree on a wrong one. Sharing the buggy
+    `implementation_for_version()` lookup between construction and checker
+    is precisely how the missing baseline metadata of 21 zero-relevant
+    records self-confirmed as preserved."""
+    field_to_attr = {
+        "status": "status",
+        "tested": "tested",
+        "reason": "reason",
+        "gap.upstream_checked": "gap_upstream_checked",
+        "gap.behavioural_impact": "gap_behavioural_impact",
+    }
+    for down_set_ids, impl, _label in _v1_metadata_occurrences(record):
+        expected = _v1_expected_metadata_fields(impl)
+        if not expected:
             continue  # nothing authored for this state: nothing to check
-        down_set = frozenset(_event_id(i) for i in relevant_indices[:version])
+        down_set = frozenset(down_set_ids)
         metadata = v2.implementation_metadata.get(down_set)
         if metadata is None:
             return False
-        if "status" in expected and metadata.status != expected["status"]:
-            return False
-        if "tested" in expected and metadata.tested != expected["tested"]:
-            return False
-        if "reason" in expected and metadata.reason != expected["reason"]:
-            return False
-        gap = expected.get("gap") or {}
-        if "upstream_checked" in gap and metadata.gap_upstream_checked != gap["upstream_checked"]:
-            return False
-        if "behavioural_impact" in gap and metadata.gap_behavioural_impact != gap["behavioural_impact"]:
-            return False
+        for field_name, value in expected.items():
+            if getattr(metadata, field_to_attr[field_name], None) != value:
+                return False
     return True
 
 
-def _reference_identity_preserved(record: Erratum, v2: ErratumV2) -> bool:
-    """For a parity-only record (zero relevant events, a usable baseline
-    historical passcode): does the candidate's `reference_identities[]`
-    carry an entry whose (historical_passcode, historical_variant_
-    passcodes, upstream, script) exactly matches the v1 baseline's? For
-    every OTHER record (nothing to preserve here), trivially True."""
+REFERENCE_IDENTITY_FIELDS = (
+    "reference_id",
+    "provenance_source",
+    "historical_passcode",
+    "historical_variant_passcodes",
+    "upstream",
+    "script",
+)
+"""Every field that is part of the assertion's identity, and therefore every
+field `_reference_identity_preserved()` compares. `reference_id` (WHICH
+reference) and `provenance_source` (WHERE the claim is sourced) are as much
+of the identity as the passcode payload is: an entry carrying the right
+passcode under the wrong reference_id is a different, wrong assertion, not a
+preserved one."""
+
+
+def _v1_expected_reference_identities(record: Erratum, repo) -> list[dict]:
+    """The EXACT `reference_identities[]` entries this record must carry,
+    re-derived from the repository's OWN format policies and the RAW v1
+    implementation - independently of `derive_reference_identities()`,
+    exactly as `_v1_expected_coverage_fields()` is independent of
+    `_coverage_from_v1()`. A checker that re-ran the construction helper
+    would confirm only that it agrees with itself.
+
+    No format id, `reference_id` or `provenance_source` string is hard-coded
+    (nothing here knows GOAT exists); membership is re-derived from raw
+    provenance rather than by calling `in_reference()`.
+
+    Raises `MigrationMappingQuestion` when two formats declare the SAME
+    `reference_id` with different provenance - "whichever format sorts
+    first wins" is a silent, arbitrary answer to a real configuration
+    conflict."""
     impl = record.implementation or {}
+    policies: dict[str, tuple[str, str]] = {}  # reference_id -> (provenance, format id)
+    for fmt_id in sorted(repo.formats):
+        parity = repo.formats[fmt_id].reference_parity
+        if not parity or not parity.get("reference_id"):
+            continue
+        reference_id = parity["reference_id"]
+        provenance = parity.get("provenance_source") or ""
+        previous = policies.get(reference_id)
+        if previous is not None and previous[0] != provenance:
+            raise MigrationMappingQuestion(
+                f"formats {previous[1]!r} and {fmt_id!r} both declare reference_id "
+                f"{reference_id!r} but disagree on provenance_source "
+                f"({previous[0]!r} vs {provenance!r}); refusing to pick one by sort order"
+            )
+        if previous is None:
+            policies[reference_id] = (provenance, fmt_id)
+
+    # Scope (task section 8): the parity-only records - zero relevant
+    # events and a usable baseline historical identity Coverage cannot
+    # represent at all.
+    if record.relevant_changes():
+        return []
     if impl.get("strategy") not in ("reuse-upstream", "custom-script"):
-        return True
+        return []
     passcode = impl.get("historical_passcode")
     if not passcode or not _is_valid_passcode(passcode):
-        return True  # not a usable baseline identity in the first place
-    if record.relevant_changes():
-        return True  # not a parity-only record; this check does not apply
-    expected_variants = tuple(impl.get("historical_variant_passcodes", []))
-    expected_upstream = impl.get("upstream")
-    expected_script = impl.get("script")
-    for identity in v2.reference_identities:
-        if (
-            identity.historical_passcode == passcode
-            and identity.historical_variant_passcodes == expected_variants
-            and identity.upstream == expected_upstream
-            and identity.script == expected_script
-        ):
-            return True
-    return False
+        return []
+    expected = []
+    for reference_id in sorted(policies):
+        provenance, _fmt_id = policies[reference_id]
+        if provenance and provenance not in record.sources:
+            continue  # this record is not part of that reference
+        expected.append(
+            {
+                "reference_id": reference_id,
+                "provenance_source": provenance,
+                "historical_passcode": passcode,
+                "historical_variant_passcodes": tuple(impl.get("historical_variant_passcodes", [])),
+                "upstream": impl.get("upstream"),
+                "script": impl.get("script"),
+            }
+        )
+    return expected
 
 
-def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
+def _reference_identity_preserved(
+    record: Erratum, v2: ErratumV2, expected_identities: list[dict] | None = None
+) -> bool:
+    """Does the candidate carry EXACTLY the reference-identity assertions
+    the v1 record and the repository's format policies imply - matched by
+    `reference_id`, then compared across every field in
+    `REFERENCE_IDENTITY_FIELDS`?
+
+    `expected_identities` comes from `_v1_expected_reference_identities()`,
+    derived independently of the candidate's own input. When None (a caller
+    that did not supply one), there is no expectation to check and this is
+    trivially True, the same answer it gave for every non-parity record
+    before.
+
+    Deliberately NOT "any entry with the same passcode payload": an entry
+    carrying the right passcode under the wrong `reference_id`, or sourced
+    to the wrong `provenance_source`, is a different assertion. Both are
+    part of the identity, so both are compared."""
+    for expected in expected_identities or []:
+        identity = next(
+            (r for r in v2.reference_identities if r.reference_id == expected["reference_id"]), None
+        )
+        if identity is None:
+            return False
+        for field_name in REFERENCE_IDENTITY_FIELDS:
+            actual = getattr(identity, field_name)
+            if field_name == "historical_variant_passcodes":
+                actual = tuple(actual)
+            if actual != expected[field_name]:
+                return False
+    return True
+
+
+def _data_preserved(
+    record: Erratum, v2: ErratumV2, expected_identities: list[dict] | None = None
+) -> bool:
     """Migration must not silently drop documentation fields even where
     executable behaviour is unaffected: every change's historical_text,
     modern_text, summary and sources must survive verbatim into its
@@ -586,7 +781,7 @@ def _data_preserved(record: Erratum, v2: ErratumV2) -> bool:
     return (
         _coverage_preserved(record, v2)
         and _metadata_preserved(record, v2)
-        and _reference_identity_preserved(record, v2)
+        and _reference_identity_preserved(record, v2, expected_identities)
     )
 
 
@@ -850,11 +1045,20 @@ def _legacy_self_contradictory(record: Erratum, relevant_indices: list[int]) -> 
     return False
 
 
-def compare(record: Erratum, reference_identities: list[dict] | None = None) -> dict:
+def compare(
+    record: Erratum,
+    reference_identities: list[dict] | None = None,
+    expected_identities: list[dict] | None = None,
+) -> dict:
     """Full-boundary comparison of one record. Returns the audit row.
+
     `reference_identities`, when given, is merged into the candidate v2
     (task section 8) so `_data_preserved()` can verify a parity-only
-    record's identity actually round-trips."""
+    record's identity actually round-trips. `expected_identities` is the
+    INDEPENDENT expectation (`_v1_expected_reference_identities()`, derived
+    from the repository's format policies and the raw v1 record) that the
+    round-trip is checked against - deliberately not the same list, so a
+    bug in the derivation cannot confirm itself."""
     relevant_indices = _relevant_indices(record)
     impl = record.implementation or {}
     row: dict = {
@@ -906,10 +1110,19 @@ def compare(record: Erratum, reference_identities: list[dict] | None = None) -> 
     # `_data_preserved()` already computes (transition text/summary/
     # sources + all three of these) - so a caller can see WHICH kind of
     # preservation failed, not just that something did.
+    # Reported separately from `metadata_preserved` because it is the exact
+    # thing the first implementation got wrong: for a zero-relevant record
+    # `{}` is the terminal/MODERN state, so the coverage lookup answers None
+    # and the authored baseline metadata silently had nowhere to go.
+    baseline_metadata = _v1_expected_metadata_fields(record.implementation or {})
+    row["baseline_metadata_fields"] = sorted(baseline_metadata)
+    row["baseline_metadata_represented"] = (
+        v2.implementation_metadata.get(frozenset()) is not None if baseline_metadata else None
+    )
     row["coverage_preserved"] = _coverage_preserved(record, v2)
     row["metadata_preserved"] = _metadata_preserved(record, v2)
-    row["reference_identity_preserved"] = _reference_identity_preserved(record, v2)
-    row["data_preserved"] = _data_preserved(record, v2)
+    row["reference_identity_preserved"] = _reference_identity_preserved(record, v2, expected_identities)
+    row["data_preserved"] = _data_preserved(record, v2, expected_identities)
     row["legacy_self_contradictory"] = _legacy_self_contradictory(record, relevant_indices)
 
     mismatches = []
@@ -1005,7 +1218,8 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         if not isinstance(record, Erratum):
             continue  # already v2; nothing to migrate
         reference_identities = derive_reference_identities(record, repo)
-        rows.append(compare(record, reference_identities))
+        expected_identities = _v1_expected_reference_identities(record, repo)
+        rows.append(compare(record, reference_identities, expected_identities))
     parity_only_count = sum(1 for r in rows if r.get("category") == CAT_PARITY_ONLY)
     unpreserved_data_ids = sorted(r["id"] for r in rows if r.get("data_preserved") is False)
     unpreserved_metadata_ids = sorted(r["id"] for r in rows if r.get("metadata_preserved") is False)
@@ -1013,6 +1227,13 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         r["id"] for r in rows if r.get("reference_identity_preserved") is False
     )
     equivalent_count = sum(1 for r in rows if r["equivalent"])
+    # The records the review's finding 1 was about: zero implementation-
+    # relevant changes, so `{}` is their only (terminal/MODERN) state.
+    # Reported explicitly because "no relevant events" is exactly the case
+    # where a coverage-shaped lookup answers None and authored baseline
+    # metadata can vanish without any check noticing.
+    zero_relevant = [r for r in rows if r["relevant_event_count"] == 0]
+    zero_relevant_with_metadata = [r for r in zero_relevant if r["baseline_metadata_fields"]]
     summary = {
         "records": len(rows),
         # SEMANTIC EQUIVALENCE: selection never changes at any chronology
@@ -1059,14 +1280,36 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
             "implementation_metadata[]/reference_identities[] now exist (docs/research/"
             "erratum-v2-representation-gaps.md); metadata_not_preserved_ids and "
             "reference_identity_not_preserved_ids below are empty, meaning every "
-            "candidate v2 round-trips its v1 metadata/identity exactly. No "
-            "data/errata/*.json record has been migrated - this is a readiness "
-            "finding about the REPRESENTATION, not a migration status."
+            "candidate v2 round-trips its v1 metadata/identity exactly. This figure is "
+            "trustworthy only because construction and checker no longer share the "
+            "coverage-shaped implementation_for_version() lookup: they did, so the "
+            "baseline metadata of all 21 zero-relevant records was dropped by BOTH and "
+            "self-confirmed as preserved. Metadata occurrences are now enumerated "
+            "separately (_v1_metadata_occurrences) and the expected VALUES are re-derived "
+            "from the raw v1 objects; see zero_relevant_* below for that population "
+            "reported explicitly. No data/errata/*.json record has been migrated - this "
+            "is a readiness finding about the REPRESENTATION, not a migration status."
         ),
         "parity_only_blocked": parity_only_count,
         "parity_only_blocked_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
         "parity_only_unrepresented_count": len(unpreserved_reference_identity_ids),
         "metadata_unrepresented_count": len(unpreserved_metadata_ids),
+        # Finding 1's population, and the proof it is now carried.
+        "zero_relevant_count": len(zero_relevant),
+        "zero_relevant_ids": sorted(r["id"] for r in zero_relevant),
+        "zero_relevant_with_baseline_metadata_count": len(zero_relevant_with_metadata),
+        "zero_relevant_baseline_metadata_represented_count": sum(
+            1 for r in zero_relevant_with_metadata if r["baseline_metadata_represented"]
+        ),
+        "zero_relevant_baseline_metadata_unrepresented_ids": sorted(
+            r["id"] for r in zero_relevant_with_metadata if not r["baseline_metadata_represented"]
+        ),
+        # Baseline metadata is authored on records of EVERY shape, not only
+        # zero-relevant ones; this is the corpus-wide count.
+        "baseline_metadata_represented_count": sum(1 for r in rows if r["baseline_metadata_represented"]),
+        "baseline_metadata_unrepresented_ids": sorted(
+            r["id"] for r in rows if r["baseline_metadata_represented"] is False
+        ),
         "nontrivial_migration_scope": sum(1 for r in rows if not r["equivalent"]),
         "nontrivial_already_researched": sum(1 for r in rows if r.get("category") == CAT_RESEARCHED_NONTRIVIAL),
         "nontrivial_needs_manual_review": sum(1 for r in rows if r.get("category") == CAT_MANUAL_REVIEW),

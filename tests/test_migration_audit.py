@@ -20,7 +20,9 @@ YZ-Tank Dragon as the sole record in the 49 that is not in the 48 - matching
 from __future__ import annotations
 
 import datetime as _dt
+import inspect
 import itertools
+import json
 import unittest
 from pathlib import Path
 
@@ -1127,25 +1129,29 @@ class ReferenceIdentityCandidateTest(unittest.TestCase):
             record = self.repo.errata[record_id]
             identities = audit.derive_reference_identities(record, self.repo)
             v2 = audit.candidate_v2(record, identities)
+            expected = audit._v1_expected_reference_identities(record, self.repo)
             self.assertEqual(1, len(v2.reference_identities), record_id)
-            self.assertTrue(audit._reference_identity_preserved(record, v2), record_id)
+            self.assertTrue(audit._reference_identity_preserved(record, v2, expected), record_id)
 
     def test_without_the_derived_identity_preservation_correctly_fails(self):
         """The preservation check must have real teeth: a parity-only
         record's candidate WITHOUT any reference_identities must fail the
         check, proving it is not vacuously true for every input."""
         record = self.repo.errata["erratum-nobleman-of-crossout"]
+        expected = audit._v1_expected_reference_identities(record, self.repo)
+        self.assertTrue(expected, "fixture must actually expect an identity")
         v2_without = audit.candidate_v2(record)  # no reference_identities passed
-        self.assertFalse(audit._reference_identity_preserved(record, v2_without))
+        self.assertFalse(audit._reference_identity_preserved(record, v2_without, expected))
 
     def test_mutation_wrong_passcode_is_detected(self):
         """Independent preservation test (task section 8): mutate the
         derived identity's passcode and confirm the check notices."""
         record = self.repo.errata["erratum-nobleman-of-crossout"]
         identities = audit.derive_reference_identities(record, self.repo)
+        expected = audit._v1_expected_reference_identities(record, self.repo)
         mutated = [dict(identities[0], historical_passcode=identities[0]["historical_passcode"] + 1)]
         v2 = audit.candidate_v2(record, mutated)
-        self.assertFalse(audit._reference_identity_preserved(record, v2))
+        self.assertFalse(audit._reference_identity_preserved(record, v2, expected))
 
 
 class ImplementationMetadataCandidateTest(unittest.TestCase):
@@ -1231,6 +1237,264 @@ class ImplementationMetadataCandidateTest(unittest.TestCase):
             audit._implementation_metadata_from_v1 = real
         self.assertFalse(audit._metadata_preserved(record, v2))
 
+
+
+class ZeroRelevantMetadataTest(unittest.TestCase):
+    """The review's finding 1, as regressions.
+
+    `implementation_for_version(0)` returns None for a record with zero
+    implementation-relevant changes, because version 0 is then also the
+    terminal/MODERN version and the modern executable needs no coverage.
+    That is the right answer for COVERAGE and the wrong one for METADATA:
+    such a record still has an authored record-level `implementation`
+    carrying status/tested/reason/gap detail. Because construction and
+    checker both used that one lookup, the loss self-confirmed as
+    preserved."""
+
+    @classmethod
+    def setUpClass(cls):
+        from retroformats.repo import Repository
+
+        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.zero_relevant = sorted(
+            (r for r in cls.repo.errata.values() if isinstance(r, audit.Erratum) and not r.relevant_changes()),
+            key=lambda r: r.id,
+        )
+
+    def _metadata_fields(self, impl):
+        fields = {k: impl[k] for k in ("status", "tested", "reason") if impl.get(k) is not None}
+        gap = impl.get("gap") or {}
+        fields.update(
+            {f"gap.{k}": gap[k] for k in ("upstream_checked", "behavioural_impact") if gap.get(k) is not None}
+        )
+        return fields
+
+    def test_the_corpus_still_has_exactly_the_reported_zero_relevant_records(self):
+        """21 = 10 pure cosmetic/engine + 11 parity-only. Derived, not
+        asserted as an input: if the corpus changes, this moves and the
+        audit must be re-derived."""
+        self.assertEqual(21, len(self.zero_relevant))
+        parity_only = [r for r in self.zero_relevant if (r.implementation or {}).get("strategy") == "reuse-upstream"]
+        self.assertEqual(11, len(parity_only))
+        self.assertEqual(10, len(self.zero_relevant) - len(parity_only))
+
+    def test_A_pure_cosmetic_record_baseline_status_survives(self):
+        """Regression A: a real pure cosmetic/engine record's baseline
+        status lands in implementation_metadata with events=[]."""
+        record = next(
+            r for r in self.zero_relevant if (r.implementation or {}).get("strategy") == "none-needed"
+        )
+        v2 = audit.candidate_v2(record)
+        entry = v2.implementation_metadata.get(frozenset())
+        self.assertIsNotNone(entry, f"{record.id}: baseline metadata vanished")
+        self.assertEqual(frozenset(), entry.events)
+        self.assertEqual(record.implementation["status"], entry.status)
+
+    def test_B_parity_only_record_keeps_metadata_and_identity_independently(self):
+        """Regression B: a real parity-only record's baseline metadata
+        survives into events=[] AND its reference identity survives into
+        reference_identities[] - two separate, orthogonal carriers."""
+        record = self.repo.errata["erratum-nobleman-of-crossout"]
+        self.assertFalse(record.relevant_changes())
+        identities = audit.derive_reference_identities(record, self.repo)
+        expected = audit._v1_expected_reference_identities(record, self.repo)
+        v2 = audit.candidate_v2(record, identities)
+
+        entry = v2.implementation_metadata.get(frozenset())
+        self.assertIsNotNone(entry)
+        self.assertEqual(record.implementation["status"], entry.status)
+        self.assertEqual(record.implementation.get("tested"), entry.tested)
+        self.assertTrue(audit._metadata_preserved(record, v2))
+
+        self.assertEqual(1, len(v2.reference_identities))
+        self.assertTrue(audit._reference_identity_preserved(record, v2, expected))
+
+        # Orthogonality: metadata exists on `{}` even though NO coverage
+        # state is authored there at all.
+        self.assertEqual([], list(v2.authored_states))
+
+    def test_C_every_zero_relevant_record_round_trips_every_metadata_field(self):
+        """Regression C: all 21, field by field, against the RAW v1 object."""
+        checked = 0
+        for record in self.zero_relevant:
+            expected = self._metadata_fields(record.implementation or {})
+            self.assertTrue(expected, f"{record.id}: fixture carries no metadata to preserve")
+            v2 = audit.candidate_v2(record)
+            entry = v2.implementation_metadata.get(frozenset())
+            self.assertIsNotNone(entry, f"{record.id}: no implementation_metadata entry for []")
+            attr = {
+                "status": "status",
+                "tested": "tested",
+                "reason": "reason",
+                "gap.upstream_checked": "gap_upstream_checked",
+                "gap.behavioural_impact": "gap_behavioural_impact",
+            }
+            for field_name, value in expected.items():
+                self.assertEqual(value, getattr(entry, attr[field_name]), f"{record.id}.{field_name}")
+            self.assertTrue(audit._metadata_preserved(record, v2), record.id)
+            checked += 1
+        self.assertEqual(21, checked)
+
+    def test_D_removing_baseline_metadata_is_detected(self):
+        """Regression D: the checker must have teeth. Strip the baseline
+        entry from a zero-relevant candidate and preservation must FAIL -
+        this is the exact assertion the old shared-lookup version could not
+        make, because it never looked for that entry in the first place."""
+        from retroformats.model import ErratumV2
+
+        for record in self.zero_relevant:
+            v2 = audit.candidate_v2(record)
+            self.assertTrue(audit._metadata_preserved(record, v2), record.id)
+            stripped = ErratumV2.load({**v2.raw, "implementation_metadata": []}, record.path)
+            self.assertFalse(
+                audit._metadata_preserved(record, stripped),
+                f"{record.id}: stripped baseline metadata went undetected",
+            )
+
+    def test_metadata_occurrences_never_use_the_coverage_lookup(self):
+        """The abstraction itself: baseline is always an occurrence, even
+        where `implementation_for_version(0)` is None."""
+        for record in self.zero_relevant:
+            self.assertIsNone(record.implementation_for_version(0), record.id)
+            occurrences = audit._v1_metadata_occurrences(record)
+            self.assertEqual((), occurrences[0][0])
+            self.assertEqual("baseline", occurrences[0][2])
+            self.assertEqual(record.implementation, occurrences[0][1])
+
+    def test_resulting_implementation_occurrences_key_on_the_creating_change(self):
+        """Every `resulting_implementation` maps to the down-set its change
+        CREATES (prefix up to and including it), labelled by its index into
+        `changes`."""
+        seen = 0
+        for record in self.repo.errata.values():
+            if not isinstance(record, audit.Erratum):
+                continue
+            relevant = audit._relevant_indices(record)
+            for down_set, impl, label in audit._v1_metadata_occurrences(record)[1:]:
+                index = int(label.split(":")[1])
+                self.assertIn(index, relevant, record.id)
+                position = relevant.index(index)
+                self.assertEqual(
+                    tuple(audit._event_id(i) for i in relevant[: position + 1]), down_set, record.id
+                )
+                self.assertEqual(record.changes[index]["resulting_implementation"], impl)
+                seen += 1
+        self.assertGreater(seen, 0, "corpus has no resulting_implementation to check")
+
+    def test_no_resulting_implementation_sits_on_a_nonrelevant_change(self):
+        """The review asked for this to be ASSERTED, not assumed: a
+        non-relevant change creates no event, so a
+        `resulting_implementation` there would have no defined v2 down-set.
+        The corpus has none; if one ever appears, candidate construction
+        raises rather than silently discarding or force-mapping it."""
+        offenders = {
+            record.id: audit.stray_resulting_implementations(record)
+            for record in self.repo.errata.values()
+            if isinstance(record, audit.Erratum) and audit.stray_resulting_implementations(record)
+        }
+        self.assertEqual({}, offenders)
+
+    def test_a_stray_resulting_implementation_stops_the_migration(self):
+        record = self.repo.errata["erratum-nobleman-of-crossout"]
+        raw = json.loads(json.dumps(record.raw))
+        raw["changes"].append(
+            {
+                "kind": "cosmetic",
+                "summary": "synthetic",
+                "sources": ["ignis-lflists"],
+                "effective": {"date": None},
+                "resulting_implementation": {"strategy": "none-needed", "status": "complete"},
+            }
+        )
+        mutated = audit.Erratum.load(raw, record.path)
+        self.assertTrue(audit.stray_resulting_implementations(mutated))
+        with self.assertRaises(audit.MigrationMappingQuestion):
+            audit.candidate_v2(mutated)
+
+
+class ReferenceIdentityFieldComparisonTest(unittest.TestCase):
+    """The review's finding 3: the identity of the assertion includes
+    `reference_id` and `provenance_source`, not only the passcode payload.
+    An entry carrying the right passcode under the wrong reference is a
+    different, wrong assertion - never a preserved one."""
+
+    @classmethod
+    def setUpClass(cls):
+        from retroformats.repo import Repository
+
+        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.record = cls.repo.errata["erratum-nobleman-of-crossout"]
+        cls.identities = audit.derive_reference_identities(cls.record, cls.repo)
+        cls.expected = audit._v1_expected_reference_identities(cls.record, cls.repo)
+
+    def _preserved_with(self, **mutation):
+        mutated = [dict(self.identities[0], **mutation)]
+        v2 = audit.candidate_v2(self.record, mutated)
+        return audit._reference_identity_preserved(self.record, v2, self.expected)
+
+    def test_every_identity_field_is_compared(self):
+        self.assertEqual(
+            (
+                "reference_id",
+                "provenance_source",
+                "historical_passcode",
+                "historical_variant_passcodes",
+                "upstream",
+                "script",
+            ),
+            audit.REFERENCE_IDENTITY_FIELDS,
+        )
+
+    def test_intact_identity_is_preserved(self):
+        v2 = audit.candidate_v2(self.record, self.identities)
+        self.assertTrue(audit._reference_identity_preserved(self.record, v2, self.expected))
+
+    def test_wrong_reference_id_fails(self):
+        self.assertFalse(self._preserved_with(reference_id="some-other-reference"))
+
+    def test_wrong_provenance_source_fails(self):
+        self.assertFalse(self._preserved_with(provenance_source="not-the-source"))
+
+    def test_wrong_passcode_fails(self):
+        self.assertFalse(self._preserved_with(historical_passcode=99999999))
+
+    def test_wrong_variants_fail(self):
+        self.assertFalse(self._preserved_with(historical_variant_passcodes=[123456789]))
+
+    def test_wrong_upstream_fails(self):
+        self.assertFalse(self._preserved_with(upstream="somewhere-else"))
+
+    def test_wrong_script_fails(self):
+        self.assertFalse(self._preserved_with(script="wrong/path.lua"))
+
+    def test_expectation_is_derived_without_hard_coding_any_reference_id(self):
+        """No GOAT id inside the generic derivation: it comes from the
+        repository's own format policies, so removing the policy removes
+        the expectation."""
+        source = inspect.getsource(audit._v1_expected_reference_identities)
+        self.assertNotIn("project-ignis-goat", source)
+        self.assertNotIn("ignis-lflists", source)
+        # ...and it really did derive the repository's actual values.
+        self.assertEqual("project-ignis-goat", self.expected[0]["reference_id"])
+        self.assertEqual("ignis-lflists", self.expected[0]["provenance_source"])
+
+    def test_conflicting_reference_id_declarations_are_reported(self):
+        """Two formats declaring the same reference_id with different
+        provenance is a configuration conflict, not a sort-order question."""
+
+        class _Fmt:
+            def __init__(self, parity):
+                self.reference_parity = parity
+
+        class _Repo:
+            formats = {
+                "fmt-a": _Fmt({"reference_id": "shared", "provenance_source": "source-A"}),
+                "fmt-b": _Fmt({"reference_id": "shared", "provenance_source": "source-B"}),
+            }
+
+        with self.assertRaises(audit.MigrationMappingQuestion) as caught:
+            audit._v1_expected_reference_identities(self.record, _Repo())
+        self.assertIn("shared", str(caught.exception))
 
 if __name__ == "__main__":
     unittest.main()

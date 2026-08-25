@@ -398,10 +398,24 @@ reflects that.
      rule cannot hold as ordinary `Coverage`) both now exist, and this project's own
      migration-audit tooling independently verifies every one of the 247 records'
      v1 metadata/identity round-trips into them (`metadata_unrepresented_count == 0`,
-     `parity_only_unrepresented_count == 0`). **`data_preservation_status` is now the
-     literal string `"representation-implemented-not-migrated"`** — representation
-     readiness is still not migration: no canonical record has changed, and starting
-     migration remains a separate, later decision.
+     `parity_only_unrepresented_count == 0`). **That round-trip claim was invalid as
+     first implemented and is only valid after a review-driven correction pass**:
+     construction and checker both enumerated v1 implementation objects with the
+     COVERAGE-shaped `implementation_for_version()` lookup, which correctly returns
+     `None` for the terminal state — so all 21 zero-relevant records silently lost
+     their authored baseline metadata, and the checker, repeating the same lookup,
+     confirmed the loss as preserved. Metadata now has its own occurrence vocabulary,
+     the checker re-derives expected values from raw v1 objects, and the audit reports
+     `zero_relevant_baseline_metadata_represented_count: 21` of 21 explicitly. The
+     same pass fixed the reference-parity precedence, which asked the old
+     `in_reference()` provenance gate BEFORE the exact `reference_identities[]`
+     lookup, making an exact entry unreachable for precisely the records it exists to
+     adjudicate; builder and validator now share one `resolve_v2_parity()` primitive.
+     247/49/48 is unchanged throughout — the semantic comparator was never touched.
+     **`data_preservation_status` is now the literal string
+     `"representation-implemented-not-migrated"`** — representation readiness is still
+     not migration: no canonical record has changed, and starting migration remains a
+     separate, later decision.
 
 ## Phase 2 — framework completeness
 

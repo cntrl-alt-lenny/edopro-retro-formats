@@ -311,6 +311,11 @@
  },
  "rows": [
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700042,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -348,6 +353,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700010,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -722,6 +732,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -759,6 +775,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700019,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -795,6 +816,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700155,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -832,6 +858,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 76573257,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -868,6 +899,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700180,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -904,6 +940,13 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -941,6 +984,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700041,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -978,6 +1026,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 25862691,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -1016,6 +1069,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700021,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -1052,6 +1110,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -1087,6 +1151,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700013,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -1461,6 +1530,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700166,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -1500,6 +1574,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700003,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -1874,6 +1953,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700075,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -2248,6 +2332,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003055,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2286,6 +2375,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -2321,6 +2416,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700089,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2360,6 +2460,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700146,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2397,6 +2502,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700150,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2433,6 +2543,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700103,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2470,6 +2585,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700068,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -2694,6 +2814,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700065,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -2731,6 +2856,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700070,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -2770,6 +2900,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700035,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -2809,6 +2944,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 65240394,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -2848,6 +2988,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700073,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -3222,6 +3367,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700118,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -3261,6 +3411,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-multi-event-ordered",
@@ -3299,6 +3455,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -3334,6 +3496,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700173,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -3373,6 +3540,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -3408,6 +3581,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700086,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-multi-event-ordered",
@@ -3448,6 +3626,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "full-v2-multi-event-ordered",
@@ -3485,6 +3667,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -3521,6 +3709,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700052,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -3560,6 +3753,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002995,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -3599,6 +3797,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002993,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -3638,6 +3841,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700100,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -3675,6 +3883,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700008,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -4049,6 +4262,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700043,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4087,6 +4305,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700026,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -4126,6 +4349,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700072,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4163,6 +4391,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000228,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4202,6 +4435,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000819,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4240,6 +4478,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700078,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -4278,6 +4521,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700139,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -4316,6 +4564,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 33900658,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4353,6 +4606,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700067,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4390,6 +4648,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700012,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4426,6 +4689,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700110,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4463,6 +4731,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700039,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -4502,6 +4775,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700127,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4539,6 +4817,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700187,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4575,6 +4858,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000822,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -4614,6 +4902,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700069,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4651,6 +4944,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700133,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4688,6 +4986,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002991,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4725,6 +5028,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700188,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4762,6 +5070,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700079,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4799,6 +5112,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -4835,6 +5154,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -4871,6 +5196,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700159,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -4909,6 +5239,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511001039,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -4947,6 +5282,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -4984,6 +5325,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700129,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -5358,6 +5704,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-multi-event-ordered",
@@ -5396,6 +5748,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700125,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -5770,6 +6127,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000229,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -5807,6 +6169,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003028,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -5846,6 +6213,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700112,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -5882,6 +6254,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700113,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -6250,6 +6627,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003116,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -6287,6 +6669,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -6323,6 +6711,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "full-v2-single-event",
@@ -6361,6 +6753,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -6399,6 +6797,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700029,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -6436,6 +6839,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -6472,6 +6879,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700157,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -6840,6 +7252,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700036,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -6877,6 +7294,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700053,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -6914,6 +7336,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700107,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -6951,6 +7378,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -6988,6 +7419,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -7025,6 +7462,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -7062,6 +7505,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -7099,6 +7546,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700181,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7137,6 +7589,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700009,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -7505,6 +7962,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003027,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7542,6 +8004,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700090,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7579,6 +8046,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -7616,6 +8089,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "sugar-eligible",
@@ -7653,6 +8130,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000820,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7691,6 +8173,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -7727,6 +8213,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700056,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7764,6 +8255,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700001,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7801,6 +8297,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700151,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7838,6 +8339,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700145,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7874,6 +8380,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700048,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -7911,6 +8422,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700082,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -8279,6 +8795,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -8315,6 +8837,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700047,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -8683,6 +9210,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002997,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -8722,6 +9254,10 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "sugar-eligible",
@@ -8759,6 +9295,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -8797,6 +9339,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700011,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -8833,6 +9380,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700182,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -8870,6 +9422,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700167,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -8907,6 +9464,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700172,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -9275,6 +9837,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -9312,6 +9880,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003006,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -9350,6 +9923,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -9387,6 +9966,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -9423,6 +10008,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002994,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -9462,6 +10052,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700124,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -9499,6 +10094,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700024,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -9536,6 +10136,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700044,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -9573,6 +10178,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700154,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -9941,6 +10551,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -9978,6 +10594,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700153,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -10017,6 +10638,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700175,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -10385,6 +11011,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002851,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -10424,6 +11055,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700076,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -10461,6 +11097,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700031,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -10829,6 +11470,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700131,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -10866,6 +11512,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700063,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -10903,6 +11554,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700132,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -11271,6 +11927,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700015,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11308,6 +11969,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700162,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11345,6 +12011,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700034,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11382,6 +12053,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -11419,6 +12096,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 9995776,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11456,6 +12138,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002996,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11495,6 +12182,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700085,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11532,6 +12224,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700138,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -11569,6 +12266,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700171,
    "baseline_strategy": "reuse-upstream",
    "category": "manual-review-blocker",
@@ -11747,6 +12449,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700061,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11784,6 +12491,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002982,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11821,6 +12533,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700120,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11858,6 +12575,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700168,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11895,6 +12617,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700190,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -11933,6 +12660,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700101,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -11970,6 +12702,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700137,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12007,6 +12744,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700143,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -12046,6 +12788,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700149,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12083,6 +12830,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700147,
    "baseline_strategy": "reuse-upstream",
    "category": "manual-review-blocker",
@@ -12261,6 +13013,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700046,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12298,6 +13055,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700060,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12335,6 +13097,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700037,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12372,6 +13139,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -12410,6 +13183,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -12448,6 +13227,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700104,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12485,6 +13269,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700140,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12522,6 +13311,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700105,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12559,6 +13353,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700097,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12596,6 +13395,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 21593987,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12634,6 +13438,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -12670,6 +13480,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700176,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -12707,6 +13522,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700062,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -12746,6 +13566,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700169,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -13114,6 +13939,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700186,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13151,6 +13981,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700091,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13188,6 +14023,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700094,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13225,6 +14065,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -13261,6 +14107,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700064,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -13629,6 +14480,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700111,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13666,6 +14522,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -13701,6 +14563,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -13737,6 +14605,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700059,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13775,6 +14648,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700028,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13811,6 +14689,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003026,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13848,6 +14731,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700080,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -13886,6 +14774,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700032,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13922,6 +14815,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700005,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13958,6 +14856,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700071,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -13994,6 +14897,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700093,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -14362,6 +15270,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -14399,6 +15313,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700189,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -14438,6 +15357,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700088,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -14476,6 +15400,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700077,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -14844,6 +15773,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700128,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -15212,6 +16146,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700142,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -15580,6 +16519,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700066,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -15617,6 +16561,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-multi-event-ordered",
@@ -15659,6 +16609,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-multi-event-ordered",
@@ -15698,6 +16654,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700033,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -15735,6 +16696,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700115,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -16103,6 +17069,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700109,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -16139,6 +17110,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700116,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -16176,6 +17152,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700025,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -16214,6 +17195,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700051,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -16252,6 +17238,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700119,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -16797,6 +17788,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700165,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -17165,6 +18161,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700163,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -17202,6 +18203,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700084,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -17570,6 +18576,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700134,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -17606,6 +18617,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700135,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -17974,6 +18990,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -18011,6 +19031,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -18047,6 +19071,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -18084,6 +19112,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 3784444,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18120,6 +19153,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700017,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18157,6 +19195,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700096,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18194,6 +19237,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002983,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18231,6 +19279,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 88264988,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -18270,6 +19323,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -18307,6 +19366,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700055,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18345,6 +19409,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700027,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18382,6 +19451,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700130,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18420,6 +19494,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700106,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18457,6 +19536,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700179,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-multi-event-ordered",
@@ -18499,6 +19583,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000824,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18538,6 +19627,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700030,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18575,6 +19669,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -18612,6 +19712,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700158,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18649,6 +19754,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700114,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18686,6 +19796,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003007,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18724,6 +19839,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700099,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18761,6 +19881,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700020,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -18798,6 +19923,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700178,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -19035,6 +20165,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700016,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19072,6 +20207,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700123,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19109,6 +20249,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -19145,6 +20291,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 63394882,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19182,6 +20333,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700040,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19219,6 +20375,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700117,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19256,6 +20417,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700050,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19293,6 +20459,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700148,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -19330,6 +20501,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700170,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19367,6 +20543,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700006,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19404,6 +20585,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700126,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19441,6 +20627,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000818,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -19481,6 +20672,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700122,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19519,6 +20715,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700074,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19557,6 +20758,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700000,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19594,6 +20800,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700022,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -19961,6 +21172,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700136,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -19998,6 +21214,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700002,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20035,6 +21256,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700092,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -20403,6 +21629,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-multi-event-ordered",
@@ -20441,6 +21673,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700095,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20478,6 +21715,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700083,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20515,6 +21757,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700038,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20552,6 +21799,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700185,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20590,6 +21842,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -20627,6 +21885,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "reason",
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -20664,6 +21928,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003054,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20701,6 +21970,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 39188549,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20737,6 +22011,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -20775,6 +22055,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003022,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20812,6 +22097,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700174,
    "baseline_strategy": "reuse-upstream",
    "category": "parity-only-identity",
@@ -20850,6 +22140,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700184,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -20889,6 +22184,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700049,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -20927,6 +22227,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -20963,6 +22269,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -21000,6 +22312,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700018,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-multi-event-ordered",
@@ -21041,6 +22358,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700121,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -21409,6 +22731,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700004,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -21446,6 +22773,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700023,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -21483,6 +22815,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -21520,6 +22858,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700102,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -21559,6 +22902,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700054,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -21927,6 +23275,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700141,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -21964,6 +23317,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700183,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -22001,6 +23359,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700108,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-multi-event-ordered",
@@ -22041,6 +23404,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700160,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-multi-event-ordered",
@@ -22083,6 +23451,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700156,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -22451,6 +23824,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -22488,6 +23865,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -22524,6 +23907,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -22560,6 +23949,12 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "full-v2-single-event",
@@ -22598,6 +23993,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -22634,6 +24035,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511000868,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -22673,6 +24079,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700164,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -22897,6 +24308,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700098,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -23265,6 +24681,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700081,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -23633,6 +25054,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700057,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -24001,6 +25427,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700058,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -24369,6 +25800,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003023,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -24406,6 +25842,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003009,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -24443,6 +25884,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700087,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -24667,6 +26113,10 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "none-needed",
    "category": "no-historical-state",
@@ -24704,6 +26154,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -24740,6 +26196,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002901,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -24778,6 +26239,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700014,
    "baseline_strategy": "reuse-upstream",
    "category": "full-v2-single-event",
@@ -24817,6 +26283,12 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "gap.behavioural_impact",
+    "gap.upstream_checked",
+    "status"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": null,
    "baseline_strategy": "unresolved",
    "category": "sugar-eligible",
@@ -24853,6 +26325,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700144,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -25089,6 +26566,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511003020,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -25126,6 +26608,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700007,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -25349,6 +26836,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700161,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -25573,6 +27065,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700177,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -25796,6 +27293,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002852,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -25835,6 +27337,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700045,
    "baseline_strategy": "reuse-upstream",
    "category": "researched-nontrivial",
@@ -26046,6 +27553,11 @@
    "sugar_eligible": false
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 511002853,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -26085,6 +27597,11 @@
    "sugar_eligible": true
   },
   {
+   "baseline_metadata_fields": [
+    "status",
+    "tested"
+   ],
+   "baseline_metadata_represented": true,
    "baseline_passcode": 504700152,
    "baseline_strategy": "reuse-upstream",
    "category": "sugar-eligible",
@@ -26123,6 +27640,8 @@
   }
  ],
  "summary": {
+  "baseline_metadata_represented_count": 296,
+  "baseline_metadata_unrepresented_ids": [],
   "categories": {
    "full-v2-multi-event-ordered": 11,
    "full-v2-single-event": 35,
@@ -26373,7 +27892,7 @@
   ],
   "data_not_preserved_ids": [],
   "data_preservation_status": "representation-implemented-not-migrated",
-  "data_preservation_status_detail": "implementation_metadata[]/reference_identities[] now exist (docs/research/erratum-v2-representation-gaps.md); metadata_not_preserved_ids and reference_identity_not_preserved_ids below are empty, meaning every candidate v2 round-trips its v1 metadata/identity exactly. No data/errata/*.json record has been migrated - this is a readiness finding about the REPRESENTATION, not a migration status.",
+  "data_preservation_status_detail": "implementation_metadata[]/reference_identities[] now exist (docs/research/erratum-v2-representation-gaps.md); metadata_not_preserved_ids and reference_identity_not_preserved_ids below are empty, meaning every candidate v2 round-trips its v1 metadata/identity exactly. This figure is trustworthy only because construction and checker no longer share the coverage-shaped implementation_for_version() lookup: they did, so the baseline metadata of all 21 zero-relevant records was dropped by BOTH and self-confirmed as preserved. Metadata occurrences are now enumerated separately (_v1_metadata_occurrences) and the expected VALUES are re-derived from the raw v1 objects; see zero_relevant_* below for that population reported explicitly. No data/errata/*.json record has been migrated - this is a readiness finding about the REPRESENTATION, not a migration status.",
   "equivalent": 247,
   "legacy_self_contradictory_count": 48,
   "legacy_self_contradictory_ids": [
@@ -27476,6 +28995,33 @@
    "not-applicable": 247
   },
   "semantic_equivalent": 247,
-  "sugar_eligible_count": 180
+  "sugar_eligible_count": 180,
+  "zero_relevant_baseline_metadata_represented_count": 21,
+  "zero_relevant_baseline_metadata_unrepresented_ids": [],
+  "zero_relevant_count": 21,
+  "zero_relevant_ids": [
+   "erratum-bubble-crash",
+   "erratum-chaosrider-gustaph",
+   "erratum-cipher-soldier",
+   "erratum-dark-jeroid",
+   "erratum-dragon-seeker",
+   "erratum-elemental-hero-absolute-zero",
+   "erratum-elemental-hero-stratos",
+   "erratum-fairy-of-the-spring",
+   "erratum-injection-fairy-lily",
+   "erratum-kazejin",
+   "erratum-mirage-knight",
+   "erratum-nobleman-of-crossout",
+   "erratum-nobleman-of-extermination",
+   "erratum-rainbow-dark-dragon",
+   "erratum-rainbow-dragon",
+   "erratum-rainbow-neos",
+   "erratum-shinato-king-of-a-higher-plane",
+   "erratum-spiritual-energy-settle-machine",
+   "erratum-suijin",
+   "erratum-toon-world",
+   "erratum-vampire-s-curse"
+  ],
+  "zero_relevant_with_baseline_metadata_count": 21
  }
 }

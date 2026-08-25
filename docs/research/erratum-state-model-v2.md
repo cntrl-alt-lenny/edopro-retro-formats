@@ -1989,8 +1989,17 @@ has nothing left to select for).
    consumer precedence rule, and this project's own migration-audit tooling
    independently verifies every one of the 247 semantically-equivalent
    records' v1 metadata/identity round-trips into them (`metadata_
-   unrepresented_count == 0`, `parity_only_unrepresented_count == 0`). See
-   `docs/research/erratum-v2-representation-gaps.md` for the full design
+   unrepresented_count == 0`, `parity_only_unrepresented_count == 0`).
+   Those figures hold only after a review-driven correction: the first
+   implementation enumerated metadata with the COVERAGE-shaped
+   `implementation_for_version()` lookup, dropping the authored baseline
+   metadata of all 21 zero-relevant records while a checker sharing the same
+   lookup reported it preserved; and it asked the old `in_reference()`
+   provenance gate BEFORE the exact `reference_identities[]` lookup, so an
+   exact entry was unreachable for the records it exists to adjudicate. Both
+   are fixed, with the consumer precedence now implemented once in a shared
+   `resolve_v2_parity()` primitive. See
+   `docs/research/erratum-v2-representation-gaps.md` §6a for the full
    record. **This step still has not begun**: implementing the
    representation is a prerequisite, not the migration itself — starting
    step 4 for real remains a separate, later decision.

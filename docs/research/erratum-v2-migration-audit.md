@@ -340,9 +340,50 @@ carry a `script` field**, so every one of them was silently losing it.
   dropped_script_is_detected` proves this by mutation: monkeypatching
   `_coverage_from_v1()` to drop `script` again, and confirming
   `_coverage_preserved()` notices.
-- **`_data_preserved()` now checks both**: transition text/summary/sources
-  AND coverage-field preservation. **Re-verified for all 296 records: 0
-  failures**, after the fix.
+- **`_data_preserved()` now checks all four**: transition text/summary/
+  sources, coverage-field preservation, workflow/research metadata
+  preservation, and reference-identity preservation. **Re-verified for all
+  296 records: 0 failures**, after the fixes.
+
+#### Correction: the metadata half of that check was itself wrong
+
+The first implementation of metadata preservation enumerated v1
+implementation objects with `Erratum.implementation_for_version()` — the
+same lookup `states[]`/coverage uses. That is right for COVERAGE and wrong
+for METADATA. For a record with zero implementation-relevant changes,
+`implementation_for_version(0)` returns `None`, because `{}` is then also
+the terminal/MODERN version and the modern executable needs no coverage
+authored for it. But such a record still carries an authored record-level
+`implementation` with `status`/`tested`/`reason`/`gap.*`.
+
+All **21** zero-relevant records (10 pure cosmetic/engine, 11 parity-only)
+therefore lost their baseline metadata during candidate construction — and
+because `_metadata_preserved()` repeated the same lookup, it never demanded
+the entry that was missing, and reported preservation as complete. The
+construction and the checker made the identical mistake and confirmed each
+other.
+
+Fixed by separating the two concepts. `_v1_metadata_occurrences()` is now
+the sole vocabulary for metadata: baseline is ALWAYS an occurrence, mapped
+to the empty down-set, terminal or not — which implies nothing about
+whether a baseline *Coverage* state exists, since the two arrays are
+orthogonal by design. The checker shares that occurrence vocabulary (so the
+two cannot disagree about which objects exist) but re-derives the expected
+VALUES from the raw v1 objects (so they cannot jointly agree on a wrong
+one), exactly as `_coverage_preserved()` already did for coverage.
+
+Every `resulting_implementation` in the corpus was then audited against the
+mapping: **all sit on implementation-relevant changes**, so none is
+discarded or force-mapped. `candidate_v2()` raises
+`MigrationMappingQuestion` if one ever appears on a non-relevant change,
+rather than guessing a down-set for it.
+
+Re-derived after the fix, and reported explicitly in the audit JSON:
+`zero_relevant_count: 21`,
+`zero_relevant_baseline_metadata_represented_count: 21`,
+`zero_relevant_baseline_metadata_unrepresented_ids: []`,
+`baseline_metadata_represented_count: 296`. The 247/49/48 partition is
+untouched — the semantic comparator was not modified.
 - **`_coverage_from_v1()` still fabricates nothing.** A v1 implementation
   missing a REQUIRED field (`historical_passcode`/`upstream` on
   reuse-upstream, `historical_passcode`/`script` on custom-script,

@@ -698,3 +698,299 @@ class SelectedOverrideCarrierTest(V2ConsumerTestBase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# =============================================================================
+# Review corrections: exact reference-id precedence, and fail-safety of a
+# matching-but-malformed identity. Both are regressions for real bugs found
+# by review of the first implementation, not speculative hardening.
+# =============================================================================
+
+
+class ExactReferenceIdPrecedenceTest(V2ConsumerTestBase):
+    """The frozen precedence is: exclude > include > exact matching
+    `reference_identities[]` entry > provenance membership + structural
+    walk > chronology.
+
+    The first implementation asked `in_reference()` FIRST in both the
+    builder and the validator, so a record the provenance gate rejected
+    never reached the exact lookup at all - the exact entry was unreachable
+    in precisely the case it exists to adjudicate. These tests pin the
+    order by constructing a record where the two answers DISAGREE."""
+
+    def _two_source_registry(self):
+        self.write(
+            "data/sources.json",
+            {
+                "sources": [
+                    {"id": "source-A", "kind": "other", "title": "A", "url": "https://a.invalid"},
+                    {"id": "source-B", "kind": "other", "title": "B", "url": "https://b.invalid"},
+                ]
+            },
+        )
+
+    def _fixture(self, *, identity_provenance, record_sources, format_provenance="source-A"):
+        self._standard_fixture(
+            pool_cards=[card(71044499, "Nobleman of Crossout")],
+            errata_overrides={
+                "reference_parity": {
+                    "reason": "test",
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": format_provenance,
+                    "sources": [format_provenance],
+                },
+                "sources": [format_provenance],
+            },
+        )
+        self._two_source_registry()
+        self.add_erratum_v2(
+            id="erratum-parity-only",
+            modern={"passcode": 71044499, "name": "Nobleman of Crossout"},
+            classification="cosmetic",
+            events={"e1": v2_event(transitions=[v2_transition(kind="cosmetic")])},
+            states=[],
+            sources=list(record_sources),
+            reference_identities=[
+                {
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": identity_provenance,
+                    "historical_passcode": 504700116,
+                    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb",
+                }
+            ],
+        )
+        repo = self._repo()
+        return repo, self._fmt(repo)
+
+    def test_exact_match_is_consulted_before_provenance_membership(self):
+        """The review's required regression. The format's parity provenance
+        is `source-A`; the record cites only `source-B`, so the OLD
+        `in_reference()` gate returns False and the old code returned None
+        silently ("outside the reference"). But the record DOES carry an
+        entry whose reference_id matches the format's, so step 3 applies
+        first - and that entry's provenance contradicts the format's, which
+        is a configuration error, not an absence."""
+        from retroformats.lflist import ErrataSelectionError, in_reference
+
+        repo, fmt = self._fixture(identity_provenance="source-B", record_sources=["source-B"])
+        erratum = repo.errata["erratum-parity-only"]
+
+        # Precondition: the OLD gate really would have said "not ours".
+        self.assertFalse(in_reference(erratum, fmt.reference_parity))
+
+        # Direct build fails safe rather than quietly keeping the modern card.
+        with self.assertRaises(ErrataSelectionError) as caught:
+            select_applicable_errata(fmt, repo)
+        self.assertIn("provenance_source", str(caught.exception))
+
+        # And the validator surfaces it as an ERROR, not as "outside the
+        # reference" (which would have been a silent pass, or at most the
+        # parity-omits-historical warning).
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-invalid", {e.code for e in v.errors})
+        self.assertNotIn("format.parity-omits-historical", {w.code for w in v.warnings})
+
+    def test_no_exact_match_still_uses_provenance_membership(self):
+        """Step 4 is unchanged when step 3 does not apply: a record with no
+        matching reference_id entry, outside the reference by provenance,
+        is still simply not substituted."""
+        self._standard_fixture(
+            pool_cards=[card(71044499, "Nobleman of Crossout")],
+            errata_overrides={
+                "reference_parity": {
+                    "reason": "test",
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": "source-A",
+                    "sources": ["source-A"],
+                },
+                "sources": ["source-A"],
+            },
+        )
+        self._two_source_registry()
+        self.add_erratum_v2(
+            id="erratum-v2-beta",
+            modern={"passcode": 71044499, "name": "Nobleman of Crossout"},
+            events={"e1": v2_event()},
+            states=[
+                {"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000077)}
+            ],
+            sources=["source-B"],  # outside the reference by provenance
+            reference_identities=[],  # and no exact entry to outrank it
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        self.assertNotIn(71044499, select_applicable_errata(fmt, repo))
+
+    def test_builder_and_validator_share_one_resolution_primitive(self):
+        """Guards the drift this correction exists to prevent: both call
+        `resolve_v2_parity` and neither reimplements the order."""
+        import inspect
+
+        from retroformats import lflist, validate
+
+        def code_only(source: str) -> str:
+            # Comments legitimately NAME the old gate when explaining why it
+            # moved; only executable lines are evidence of re-gating.
+            return chr(10).join(line.split("#", 1)[0] for line in source.splitlines())
+
+        builder = inspect.getsource(lflist._select_v2_override)
+        validator = inspect.getsource(validate.Validator._validate_v2_parity)
+        for source, who in ((builder, "_select_v2_override"), (validator, "_validate_v2_parity")):
+            self.assertIn("resolve_v2_parity", source, who)
+            self.assertNotIn(
+                "in_reference(", code_only(source), f"{who} must not re-gate on provenance itself"
+            )
+
+
+class ReferenceIdentityFailSafeTest(V2ConsumerTestBase):
+    """A MATCHING exact identity is usable only when its build-critical
+    identity is genuinely well formed. Direct `build_lflist()` never runs
+    the schema and cannot assume `validate` ran, so every case here must
+    fail as `ErrataSelectionError` - never a fallback to the structural
+    walk, never a silent modern card, never a raw ValueError/TypeError."""
+
+    def _build(self, identity, *, states=None):
+        self._standard_fixture(
+            pool_cards=[card(71044499, "Nobleman of Crossout")],
+            errata_overrides={
+                "reference_parity": {
+                    "reason": "test",
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": "test-source",
+                    "sources": ["test-source"],
+                },
+                "sources": ["test-source"],
+            },
+        )
+        self.add_erratum_v2(
+            id="erratum-parity-only",
+            modern={"passcode": 71044499, "name": "Nobleman of Crossout"},
+            classification="cosmetic",
+            events={"e1": v2_event(transitions=[v2_transition(kind="cosmetic")])},
+            # A structural fallback WOULD find this, so any test that passes
+            # here proves the walk did not silently rescue a bad identity.
+            states=states
+            if states is not None
+            else [{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=999888777)}],
+            reference_identities=[identity],
+        )
+        repo = self._repo()
+        return repo, self._fmt(repo)
+
+    def _valid(self, **overrides):
+        base = {
+            "reference_id": "project-ignis-goat",
+            "provenance_source": "test-source",
+            "historical_passcode": 504700116,
+            "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb",
+        }
+        base.update(overrides)
+        return base
+
+    def _assert_fails_safe(self, identity):
+        from retroformats.lflist import ErrataSelectionError
+
+        repo, fmt = self._build(identity)
+        with self.assertRaises(ErrataSelectionError):
+            select_applicable_errata(fmt, repo)
+
+    def test_wellformed_identity_still_builds(self):
+        repo, fmt = self._build(self._valid())
+        override = select_applicable_errata(fmt, repo)[71044499]
+        self.assertIsInstance(override.implementation, ReferenceIdentity)
+        self.assertEqual((504700116, ()), historical_identity(override.implementation))
+
+    def test_non_string_reference_id_that_matches_fails_safe(self):
+        """`from_raw()` coerces reference_id through `str()`, so a raw `123`
+        arrives as `"123"` and CAN match a format declaring that id. When it
+        does match, the build must refuse rather than trust it.
+
+        (A non-string id that coerces to something the format does not name
+        simply never matches, and correctly falls through to the structural
+        walk - that case is the validator's to report, not the builder's;
+        see `test_non_string_reference_id_is_a_validator_error`.)"""
+        from retroformats.lflist import ErrataSelectionError
+
+        self._standard_fixture(
+            pool_cards=[card(71044499, "Nobleman of Crossout")],
+            errata_overrides={
+                "reference_parity": {
+                    "reason": "test",
+                    "reference_id": "123",  # matches str(123)
+                    "provenance_source": "test-source",
+                    "sources": ["test-source"],
+                },
+                "sources": ["test-source"],
+            },
+        )
+        self.add_erratum_v2(
+            id="erratum-parity-only",
+            modern={"passcode": 71044499, "name": "Nobleman of Crossout"},
+            classification="cosmetic",
+            events={"e1": v2_event(transitions=[v2_transition(kind="cosmetic")])},
+            states=[
+                {"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=999888777)}
+            ],
+            reference_identities=[self._valid(reference_id=123)],
+        )
+        repo = self._repo()
+        with self.assertRaises(ErrataSelectionError):
+            select_applicable_errata(self._fmt(repo), repo)
+
+    def test_non_string_reference_id_is_a_validator_error(self):
+        """Production validation never runs the JSON Schema, so the raw
+        type must be checked there too - otherwise str() coercion silently
+        turns schema-invalid authored data into a valid-looking string."""
+        repo, _fmt = self._build(self._valid(reference_id=123))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+    def test_non_string_provenance_source_fails_safe(self):
+        self._assert_fails_safe(self._valid(provenance_source=7))
+
+    def test_empty_provenance_source_fails_safe(self):
+        self._assert_fails_safe(self._valid(provenance_source=""))
+
+    def test_missing_upstream_fails_safe(self):
+        identity = self._valid()
+        del identity["upstream"]
+        self._assert_fails_safe(identity)
+
+    def test_non_string_upstream_fails_safe(self):
+        self._assert_fails_safe(self._valid(upstream=42))
+
+    def test_non_string_script_fails_safe(self):
+        self._assert_fails_safe(self._valid(script=["not", "a", "string"]))
+
+    def test_malformed_passcode_fails_safe(self):
+        self._assert_fails_safe(self._valid(historical_passcode="504700116"))
+
+    def test_malformed_variant_fails_safe(self):
+        self._assert_fails_safe(self._valid(historical_variant_passcodes=[504700117, "nope"]))
+
+    def test_historical_equal_to_modern_passcode_fails_safe(self):
+        self._assert_fails_safe(self._valid(historical_passcode=71044499))
+
+    def test_provenance_not_in_record_sources_fails_safe(self):
+        self.write(
+            "data/sources.json",
+            {
+                "sources": [
+                    {"id": "test-source", "kind": "other", "title": "T", "url": "https://t.invalid"},
+                    {"id": "unrelated", "kind": "other", "title": "U", "url": "https://u.invalid"},
+                ]
+            },
+        )
+        self._assert_fails_safe(self._valid(provenance_source="unrelated"))
+
+    def test_malformed_identity_is_a_validator_error_too(self):
+        repo, _fmt = self._build(self._valid(upstream=42))
+        v = Validator(repo)
+        v.validate()
+        codes = {e.code for e in v.errors}
+        self.assertTrue(
+            codes & {"erratum.reference-identity-invalid", "erratum.reference-identity-malformed-upstream"},
+            f"expected a reference-identity error, got {sorted(codes)}",
+        )

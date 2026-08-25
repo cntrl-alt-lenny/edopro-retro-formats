@@ -325,25 +325,67 @@ def _reference_identity_override(
     matching = next((r for r in erratum.reference_identities if r.reference_id == reference_id), None)
     if matching is None:
         return _NO_REFERENCE_ID_MATCH
-    if matching.historical_passcode is None or not _valid_identity(
-        matching.historical_passcode, matching.historical_variant_passcodes
-    ):
+    fault = _reference_identity_fault(matching, erratum, parity)
+    if fault is not None:
         problems.append(
-            f"{erratum.id}: reference_identities[] entry for reference_id {reference_id!r} "
-            "records no usable historical_passcode; parity cannot emit a substitution it "
-            "has no identity for"
-        )
-        return None
-    expected_provenance = parity.get("provenance_source")
-    if expected_provenance and matching.provenance_source != expected_provenance:
-        problems.append(
-            f"{erratum.id}: reference_identities[] entry for reference_id {reference_id!r} "
-            f"declares provenance_source {matching.provenance_source!r}, but format "
-            f"reference_parity declares provenance_source {expected_provenance!r} - "
-            "configuration mismatch, refusing to guess which is correct"
+            f"{erratum.id}: reference_identities[] entry for reference_id {reference_id!r} {fault}"
         )
         return None
     return matching
+
+
+def _reference_identity_fault(
+    identity: ReferenceIdentity, erratum: ErratumV2, parity: dict
+) -> str | None:
+    """Why a MATCHING exact identity is not usable for a direct build, or
+    None when it is genuinely well formed.
+
+    A direct `build_lflist()` call cannot assume `validate` ran first, and
+    `ReferenceIdentity.from_raw()` deliberately does not police semantics —
+    it even coerces `reference_id`/`provenance_source` through `str()`, so
+    a schema-invalid authored value can arrive here looking like a string.
+    Every build-critical part of the identity is therefore re-checked
+    against the RAW authored entry, not the coerced dataclass, so obviously
+    malformed data can never be emitted. Nothing is coerced or repaired:
+    the caller fails safe with `ErrataSelectionError`, never a fallback to
+    the structural walk, a silent modern card, or a raw ValueError/
+    TypeError from deep inside the build."""
+    raw = identity.raw or {}
+    for field_name in ("reference_id", "provenance_source", "upstream"):
+        value = raw.get(field_name)
+        if not isinstance(value, str) or not value.strip():
+            return (
+                f"declares {field_name}={value!r}, which is not a non-empty string; "
+                "parity refuses to build from a malformed identity"
+            )
+    if "script" in raw and raw["script"] is not None and not isinstance(raw["script"], str):
+        return f"declares script={raw['script']!r}, which is not a string"
+    if identity.historical_passcode is None or not _valid_identity(
+        identity.historical_passcode, identity.historical_variant_passcodes
+    ):
+        return (
+            "records no usable historical_passcode; parity cannot emit a substitution it "
+            "has no identity for"
+        )
+    if identity.historical_passcode == erratum.modern_card.passcode:
+        return (
+            f"declares historical_passcode {identity.historical_passcode} equal to "
+            "modern_card.passcode; if the reference uses the modern card there is no "
+            "substitution to make"
+        )
+    if identity.provenance_source not in erratum.sources:
+        return (
+            f"declares provenance_source {identity.provenance_source!r}, which is not in "
+            "this record's own sources; the assertion cites a source the record does not carry"
+        )
+    expected_provenance = parity.get("provenance_source")
+    if expected_provenance and identity.provenance_source != expected_provenance:
+        return (
+            f"declares provenance_source {identity.provenance_source!r}, but format "
+            f"reference_parity declares provenance_source {expected_provenance!r} - "
+            "configuration mismatch, refusing to guess which is correct"
+        )
+    return None
 
 
 def _v2_parity_walk_override(
@@ -363,6 +405,13 @@ def _v2_parity_walk_override(
         reference_override = _reference_identity_override(erratum, parity, local_problems)
         if reference_override is not _NO_REFERENCE_ID_MATCH:
             return reference_override  # a ReferenceIdentity, or None (fail-safe; problem appended)
+    return _v2_structural_walk(erratum, local_problems)
+
+
+def _v2_structural_walk(erratum: ErratumV2, local_problems: list[str]) -> ImplementationCoverage | None:
+    """The structural half alone (step 4's second stage), with no exact-
+    identity check and no membership gate - split out so
+    `resolve_v2_parity()` can order the three stages itself."""
     for down_set in erratum.structural_states():
         coverage = erratum.state_for(down_set).coverage
         if _malformed_substitution(coverage):
@@ -378,6 +427,55 @@ def _v2_parity_walk_override(
         if usable is not None:
             return usable
     return None
+
+
+@dataclass(frozen=True)
+class ParityResolution:
+    """How one record resolved against one format's `reference_parity`.
+
+    `via` names WHICH stage of the frozen precedence decided, which the
+    validator needs in order to report accurately (an exact authored
+    assertion and a structural guess are different findings), and which
+    keeps "outside the reference" distinguishable from "inside it, but the
+    walk found nothing to substitute"."""
+
+    override: "ImplementationCoverage | ReferenceIdentity | None"
+    via: str  # reference-identity | structural-walk | outside-reference | unusable
+
+    @property
+    def outside_reference(self) -> bool:
+        return self.via == "outside-reference"
+
+
+def resolve_v2_parity(erratum: ErratumV2, parity: dict, problems: list[str]) -> ParityResolution:
+    """Steps 3-4 of the frozen v2 reference-parity precedence, in ONE place.
+
+    The full order is: 1 exclude, 2 include, 3 exact matching
+    `reference_identities[]` entry, 4 provenance membership then structural
+    parity walk, 5 chronology. Steps 1/2/5 belong to the callers; 3 and 4
+    live here, because they are the pair that must not be reordered - and
+    were: the builder and the validator each asked `in_reference()` FIRST
+    and so never reached the exact lookup for a record the provenance gate
+    rejected. An exact authored assertion ("reference X uses card entry Y")
+    is a different, more specific kind of fact than a membership heuristic,
+    and outranks it.
+
+    Both the builder (`_select_v2_override`) and the validator
+    (`_validate_v2_parity`) call this and nothing else, so they cannot
+    drift into different precedence again.
+
+    Note the asymmetry, which is deliberate: a matching-but-unusable
+    identity FAILS SAFE (`via="unusable"`, a problem appended) and is never
+    downgraded to the structural walk, whereas NO matching entry falls
+    through to the old behaviour untouched."""
+    identity = _reference_identity_override(erratum, parity, problems)
+    if identity is not _NO_REFERENCE_ID_MATCH:
+        if identity is None:
+            return ParityResolution(None, "unusable")
+        return ParityResolution(identity, "reference-identity")
+    if not in_reference(erratum, parity):
+        return ParityResolution(None, "outside-reference")
+    return ParityResolution(_v2_structural_walk(erratum, problems), "structural-walk")
 
 
 def parity_override(
@@ -489,7 +587,7 @@ def _select_v2_override(
     parity: dict | None,
     policy: str | None,
     problems: list[str],
-) -> ImplementationCoverage | None:
+) -> ImplementationCoverage | ReferenceIdentity | None:
     """The v2 resolution, matching select_applicable_errata's 5-step order
     in SHAPE only — v2 has no numeric version, so "historical" under
     ambiguity is re-derived from event-set semantics, never a fallback to
@@ -527,9 +625,12 @@ def _select_v2_override(
             return None
         return _usable_v2(baseline)
     if parity:
-        if in_reference(erratum, parity):
-            return _v2_parity_walk_override(erratum, parity, problems)
-        return None
+        # Step 3 (exact reference_identities[] entry) then step 4
+        # (provenance membership + structural walk), in that order and via
+        # the one primitive the validator also uses. Asking in_reference()
+        # first here is exactly the bug this replaces: it gated the exact
+        # lookup behind a weaker membership heuristic.
+        return resolve_v2_parity(erratum, parity, problems).override
     if snapshot is None or not erratum.has_implementation_relevant_history():
         return None
     if erratum.review_status != "reviewed":

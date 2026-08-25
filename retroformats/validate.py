@@ -951,6 +951,31 @@ class Validator:
         seen_reference_ids: set[str] = set()
         for i, identity in enumerate(erratum.reference_identities):
             location = f"reference_identities[{i}]"
+            # Raw primitive types FIRST. Production validation never runs the
+            # JSON Schema (Repository.load parses raw JSON; the schema checker
+            # lives in tests), and ReferenceIdentity.from_raw() coerces
+            # reference_id/provenance_source through str() - so a
+            # schema-invalid value would otherwise arrive here already looking
+            # like a valid string and pass every check below it. This closes
+            # that specific coercion hole rather than reimplementing the
+            # schema: the semantic checks that follow are unchanged.
+            raw_identity = identity.raw or {}
+            for field_name, required in (
+                ("reference_id", True),
+                ("provenance_source", True),
+                ("upstream", True),
+                ("script", False),
+            ):
+                if field_name not in raw_identity or raw_identity[field_name] is None:
+                    continue  # absence is handled by the required-field checks below
+                value = raw_identity[field_name]
+                if not isinstance(value, str) or not value.strip():
+                    self.error(
+                        "erratum.reference-identity-malformed-field",
+                        erratum.path,
+                        f"{location}.{field_name}: expected a non-empty string, got "
+                        f"{value!r} ({type(value).__name__})",
+                    )
             if not identity.reference_id:
                 self.error(
                     "erratum.reference-identity-missing-id",
@@ -1118,12 +1143,20 @@ class Validator:
     # validates cleanly here never surprises the builder).
 
     def _validate_v2_parity(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
-        from .lflist import ReferenceIdentity, in_reference, parity_override
+        from .lflist import ReferenceIdentity, resolve_v2_parity
 
         if erratum.id in fmt.errata_exclude:
             return
         all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
-        if not in_reference(erratum, fmt.reference_parity):
+        # ONE shared primitive with the builder, so the two cannot disagree
+        # about precedence: the exact reference_identities[] lookup happens
+        # BEFORE the provenance-membership gate, and a matching-but-unusable
+        # entry is reported here rather than silently downgraded to the walk.
+        problems: list[str] = []
+        resolution = resolve_v2_parity(erratum, fmt.reference_parity, problems)
+        for problem in problems:
+            self.error("erratum.reference-identity-invalid", fmt.path, problem)
+        if resolution.outside_reference:
             # Outside the reference: our own research may still say a
             # historical state applies here. Parity keeps the modern card,
             # but the finding is worth surfacing as a candidate contribution
@@ -1148,14 +1181,7 @@ class Validator:
                         "the modern one",
                     )
             return
-        problems: list[str] = []
-        override = parity_override(erratum, fmt.reference_parity, problems)
-        for problem in problems:
-            # A matching reference_identities[] entry that is malformed, or
-            # whose provenance_source contradicts this format's own
-            # declared one (task section 4/6) - fail-safe, surfaced here
-            # rather than silently falling back to the structural walk.
-            self.error("erratum.reference-identity-invalid", fmt.path, problem)
+        override = resolution.override
         if override is None:
             return
         if erratum.review_status != "reviewed":
