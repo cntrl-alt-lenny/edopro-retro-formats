@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-spirit-reaper",
+  "modern_card": {
+    "passcode": 23205979,
+    "name": "Spirit Reaper"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card is not destroyed as a result of battle. Destroy this card when it is targeted by the effect of a Spell, Trap, or Effect Monster. If this card successfully attacks your opponent's Life Points directly, your opponent discards 1 card randomly from his/her hand.",
+      "summary": "Era ruling, not a text erratum: in the goat variant Spirit Reaper does not destroy itself when the effect that targeted it was an Equip effect whose card is no longer in the Spell & Trap Zone at chain resolution - its s.desop1 adds the guard 'and not (re:IsHasCategory(CATEGORY_EQUIP) and not re:GetHandler():IsLocation(LOCATION_SZONE))' before Duel.Destroy. The modern script destroys Spirit Reaper regardless, so an Equip Spell that targeted it and was itself destroyed in response still kills it. Upstream annotates the variant: 'If it's targeted by an equip spell, but that card is destroyed before resolving, it doesn't self destruct'. Everything else in the diff is the REASON_DISCARD|REASON_EFFECT vs '+' spelling. No evidence in the packet dates the ruling, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700038,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700038.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700038.lua matches lineage v2 (SD2-EN006, Structure Deck: Zombie Madness, 2005-01-01) exactly, so the chain starts at v2; the earlier v0/v1 (both PGD-076, 2003-07-18) predate the baseline implementation and are not recorded. Trailing text run v2 -> v3 (CP03-EN002, 2007-05-15) -> v4 (GLD4-EN011, 2011-06-24) -> v5 (BATT-EN013, 2012-05-29, = pinned modern text) -> v6 (LCJW-EN190, 2013-10-11) -> v7 (RA03-EN122, 2024-11-07) is treated as cosmetic on the strength of the script diff: v5's 'After resolving a card effect that targets this face-up card, destroy this card' is exactly what BOTH scripts already do (EVENT_CHAIN_SOLVED, not EVENT_BECOME_TARGET, drives the destruction in each), and v2's 'If this card successfully attacks your opponent's Life Points directly' vs v4's 'When this card inflicts Battle Damage to your opponent by a direct attack' is the same EVENT_BATTLE_DAMAGE trigger with the same ep~=tp / GetAttackTarget()==nil condition in both scripts. Recording what I see rather than inferring: the v2->v4 shift from 'successfully attacks directly' to 'inflicts Battle Damage by a direct attack' is the one place where a difference could exist in play (a prevented-damage direct attack), and upstream's goat script does not model it as a difference."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

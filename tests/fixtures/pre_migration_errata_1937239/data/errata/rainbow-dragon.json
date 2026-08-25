@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rainbow-dragon",
+  "modern_card": {
+    "passcode": 79856792,
+    "name": "Rainbow Dragon"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2020-07-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the current text (LDS1-EN099, Legendary Duelists: Season 1)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned, except from your hand while you have 7 \"Crystal Beast\" cards with different names on the field or in your Graveyard. This card cannot activate its effects the turn it is Special Summoned. ● Send all \"Crystal Beast\" monsters you control to the Graveyard; this card gains 1000 ATK for each card sent. You can activate this effect during either player's turn. ● You can remove from play all \"Crystal Beast\" Monster Cards in your Graveyard to return all cards on the field to their owners' Decks.",
+      "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY. This card cannot activate the following effects the turn it is Special Summoned. (Quick Effect): You can send all \"Crystal Beast\" monsters you control to the GY; this card gains 1000 ATK for each monster sent to the GY. You can banish all \"Crystal Beast\" monsters from your GY; shuffle all cards on the field into the Deck.",
+      "summary": "Wording modernisation only from v0 (TAEV-EN006) through v3 (LDS1-EN099): the summoning restriction is restated as 'Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY', 'You can activate this effect during either player's turn' becomes '(Quick Effect)', and 'remove from play ... to return all cards on the field to their owners' Decks' becomes 'banish ...; shuffle all cards on the field into the Deck'. Resolution is unchanged: the same 7-name condition, the same send-all-Crystal-Beast-monsters-you-control cost for 1000 ATK each, and the same banish-your-GY-Crystal-Beasts field shuffle. The 'face-up' qualifier v2 (LED2-EN043) briefly put on the ATK effect was removed again in v3.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Edison- and GOAT-era text is v0 (TAEV-EN006, 2007-08-15); the first rewording is 2011-10-04. Two candidate 'functional' readings that I rejected: (1) v0's 'while you have 7 \"Crystal Beast\" cards with different names on the field or in your Graveyard' vs v1's 'on your field' - 'you have ... on the field' already scopes the count to your own cards, and the modern script counts only the controller's side (Duel.GetMatchingGroup(...,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,nil)); (2) 'on your field or in your Graveyard' -> 'and/or GY', which clarifies that the 7 names may be split across the two zones, something the modern script has always done by taking the two locations as one mask. CONFLICT recorded, not resolved: the pinned BabelCDB text is not any lineage version (ratio 0.9215) - it reads 'by having exactly 7' and carries the footnote that the text is unofficial and describes the OCG functionality, and the modern script enforces GetClassCount(Card.GetCode)==7 while no English printing says 'exactly'. This has no period consequence because exactly seven 'Crystal Beast' names exist in the Edison-legal pool, so >=7 and ==7 coincide; it would matter only with post-2010 Crystal Beast cards. Also noted: upstream's tdcost draws its banish group from LOCATION_MZONE|LOCATION_GRAVE in both the modern and the anime script although the text says GY only - identical on both sides, so not an errata matter. The packet's upstream code 511600140 is 'Rainbow Dragon (Anime)', a distinct card, not a historical TCG implementation."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

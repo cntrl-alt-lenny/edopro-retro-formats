@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-bubonic-vermin",
+  "modern_card": {
+    "passcode": 6104968,
+    "name": "Bubonic Vermin"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "FLIP: You can Special Summon 1 \"Bubonic Vermin\" from your Deck in face-down Defense Position. Then shuffle your Deck.",
+      "summary": "Era activation semantics: the goat script's target function keeps only Duel.GetLocationCount(tp,LOCATION_MZONE)>0, dropping the modern Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...) check, so the optional FLIP effect can be activated with no second \"Bubonic Vermin\" in the Deck; the modern script cannot be activated in that state. No dated source for this card, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "FLIP: You can Special Summon 1 \"Bubonic Vermin\" from your Deck in face-down Defense Position. Then shuffle your Deck.",
+      "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no second \"Bubonic Vermin\" remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700008,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700008.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DB1-EN176, Dark Beginning 1, 2004-10-12), which the goat cdb text matches exactly and which is ALSO the current text (modern_text_matches_version index 1, exact) - there is no text erratum after the baseline, so this is a pure ruling record. v0 (PSV-057, 2002-10-20) predates the baseline and differs only in procedure wording ('take ... and Special Summon it on the field', 'The Deck is then shuffled'). Remaining diff items carry no behaviour: CATEGORY_SPECIAL_SUMMON+CATEGORY_SET -> CATEGORY_SPECIAL_SUMMON is operation-info hinting, and Card.IsCode(id) -> Card.IsCode(MODID) just points the Deck filter at the modern passcode 6104968, which the goat row aliases. Change order: (B) before (A) for the Reinforcement of the Army precedent (allowance gone by 2008-12-15, before (A)'s earliest possible end of 2011-02-02); the true order is unknown. No upstream implementation exists for the intermediate state and it is unreachable while (B) is undated, so no missing-implementation record is attached."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

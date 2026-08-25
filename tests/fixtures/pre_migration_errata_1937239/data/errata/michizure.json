@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-michizure",
+  "modern_card": {
+    "passcode": 37580756,
+    "name": "Michizure"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2010-01-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the added Damage Step permission (DT01-EN096, Duel Terminal 1)"
+      },
+      "historical_text": "You can activate this card when a monster is sent from the field to your Graveyard. Destroy 1 monster on the field.",
+      "modern_text": "Activate only when a monster is sent from the field to your Graveyard. Select and destroy 1 monster on the field. (You can activate this card during the Damage Step.)",
+      "summary": "Functional change carried by a printing: DT01-EN096 added '(You can activate this card during the Damage Step.)', and the modern script grants EFFECT_FLAG_DAMAGE_STEP on the activation effect. The GOAT variant's only difference from modern is that it omits that flag, setting EFFECT_FLAG_CARD_TARGET alone, so the era card cannot be activated during the Damage Step at all - a monster sent from the field to your Graveyard by battle gives it no activation window. Upstream's note: 'Cannot be activated during the damage step.' Everything else (the EVENT_TO_GRAVE activation trigger and the targeted destruction) is byte-identical.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700059,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700059.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (PSV-E051), the GOAT entry's exact text; the v0 -> v1 change ('your monster ... to the Graveyard' -> 'a monster ... to your Graveyard') is within the same set (Pharaoh's Servant) and predates the baseline, so it is not recorded. Trailing v2 -> v3 (SBLS-EN044, 2019-03-28, the pinned cdb text) is cosmetic PSCT: 'even during the Damage Step' restates DT01's parenthetical, and 'Select and destroy 1 monster on the field' -> 'Target 1 monster on the field; destroy it' is not a targeting change, since EFFECT_FLAG_CARD_TARGET is present in both scripts. Worth noting for format computation: DT01-EN096's earliest TCG date (2010-01-29) falls before the Edison snapshot (2010-04-24) and after GOAT (2005-04-01), so the two formats land on opposite sides of this change."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

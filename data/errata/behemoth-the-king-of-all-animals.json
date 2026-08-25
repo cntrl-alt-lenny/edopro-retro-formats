@@ -6,44 +6,68 @@
     "name": "Behemoth the King of All Animals"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
-      "summary": "Era summon-procedure availability, not a text erratum: the GOAT script calls aux.AddNormalSummonProcedure/AddNormalSetProcedure with opt=false and then re-registers the effect as EFFECT_SUMMON_PROC/EFFECT_SET_PROC, which strips the modern gate in aux.NormalSummonCondition1 ('(not opt or (tributes>0 and tributes~=max))', proc_normal.lua:39-50). The era version therefore offers the 1-Tribute/original-ATK-becomes-2000 procedure at any Level (upstream comment: 'Can be summoned with its procedure even if lv6'), while the modern version offers it only when the card's current Level would otherwise demand 2 Tributes, i.e. Level 7 or higher. The Tribute-Summon trigger also differs: goat tests IsSummonType(SUMMON_TYPE_TRIBUTE), modern tests IsTributeSummoned(). No dated source for either difference; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
+          "modern_text": null,
+          "summary": "Era summon-procedure availability, not a text erratum: the GOAT script calls aux.AddNormalSummonProcedure/AddNormalSetProcedure with opt=false and then re-registers the effect as EFFECT_SUMMON_PROC/EFFECT_SET_PROC, which strips the modern gate in aux.NormalSummonCondition1 ('(not opt or (tributes>0 and tributes~=max))', proc_normal.lua:39-50). The era version therefore offers the 1-Tribute/original-ATK-becomes-2000 procedure at any Level (upstream comment: 'Can be summoned with its procedure even if lv6'), while the modern version offers it only when the card's current Level would otherwise demand 2 Tributes, i.e. Level 7 or higher. The Tribute-Summon trigger also differs: goat tests IsSummonType(SUMMON_TYPE_TRIBUTE), modern tests IsTributeSummoned(). No dated source for either difference; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2020-11-26",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the PSCT text (SBCB-EN052, Speed Duel: Battle City Box)"
       },
-      "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
-      "modern_text": "You can Normal Summon/Set this card with 1 Tribute, but its original ATK becomes 2000. When this card is Tribute Summoned: You can target Beast monsters in your GY equal to the number of monsters Tributed; return them to the hand.",
-      "summary": "Wording modernisation only (v1 DR3-EN134 trims 'Tribute Monster'/'successfully', v2 SBCB-EN052 is the PSCT rewrite adding the word 'target'). The 'target' wording is not a targeting change: both scripts use Duel.SelectTarget with a chkc branch and neither script's activation effect gains or loses EFFECT_FLAG_CARD_TARGET in the diff.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card can be Normal Summoned or Set with 1 Tribute Monster. In that case, the original ATK of this card becomes 2000. When this card is Tribute Summoned successfully, you can return from your Graveyard to the owner's hand a number of Beast-Type monsters equal to the number of Tributed monsters.",
+          "modern_text": "You can Normal Summon/Set this card with 1 Tribute, but its original ATK becomes 2000. When this card is Tribute Summoned: You can target Beast monsters in your GY equal to the number of monsters Tributed; return them to the hand.",
+          "summary": "Wording modernisation only (v1 DR3-EN134 trims 'Tribute Monster'/'successfully', v2 SBCB-EN052 is the PSCT rewrite adding the word 'target'). The 'target' wording is not a targeting change: both scripts use Duel.SelectTarget with a chkc branch and neither script's activation effect gains or loses EFFECT_FLAG_CARD_TARGET in the diff.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700035,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700035.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700035,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700035.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

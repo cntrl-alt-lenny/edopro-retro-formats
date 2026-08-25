@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-formation-union",
+  "modern_card": {
+    "passcode": 26931058,
+    "name": "Formation Union"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select and activate 1 of the following effects:● Equip 1 Union Monster on your side of the field to an appropriate monster on your side of the field as an Equip Spell Card.● Unequip 1 of your equipped Union Monsters and Special Summon it to your side of the field in face-up Attack Position.",
+      "summary": "Three script-only differences, none of them visible in any printed text. (1) The unequip-and-Special-Summon option in the GOAT script also accepts a Union monster carrying flag effect 11743119 ('Union Rider') in addition to EFFECT_UNION_STATUS - upstream's annotation 'Can summon an union equipped by Union Rider as well' - where the modern filter requires EFFECT_UNION_STATUS. (2) On the equip option, when the second target is no longer valid at resolution the modern script sends the Union monster to the Graveyard by rule (Duel.SendtoGrave(ec,REASON_RULE,PLAYER_NONE,PLAYER_NONE)); the GOAT script does nothing and the Union monster stays on the field. (3) The equip legality check is ec:CheckUnionTarget(c) in the modern script versus ec:CheckEquipTarget(c) in the GOAT one, with aux.CheckUnionEquip applied in both. Targeting itself is unchanged - both activation effects declare EFFECT_FLAG_CARD_TARGET. Chronology unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700048,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700048.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Packet conflict on the modern text: the pinned BabelCDB text ends '* The above text is unofficial and describes the card's functionality in the OCG' and matches the newest English lineage version (v2, SBCB-EN079, 2020-11-26) at only ratio 0.5052, so the record's modern text is left unset rather than asserting either side of the mismatch. Remaining diff lines are presentation or refactor - the missing SetDescription, SetHintTiming, Duel.SelectEffect vs Duel.SelectOption with an inverted 0/1 label, LOCATION_STZONE vs LOCATION_SZONE, and the omitted POS_FACEUP_ATTACK argument to IsCanBeSpecialSummoned in the GOAT filter. Text lineage is cosmetic from the baseline forward: the chain starts at v1 (DR1-EN104, 2005-03-19), which the variant carries verbatim; v1 -> v2 formalises the equip option's targeting ('Target 1 face-up Union monster you control; equip it to 1 appropriate monster you control'), which both scripts already perform via EFFECT_FLAG_CARD_TARGET, and restates the unequip option as 'Unequip 1 Union monster you control that is an Equip Card'. Earlier v0 (MFC-049, 2003-10-10) said 'Change 1 equipped Union Monster ... back into a monster in face-up Attack Position' and predates the baseline. Context rather than evidence for this record: EdisonFormat.com's functional-errata list records that in the era every Union Monster carried the 1-Union-per-monster Condition, removed in 2016 - that Condition sits on the Union monsters themselves, not on Formation Union, and it is none of the three differences above."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

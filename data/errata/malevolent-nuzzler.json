@@ -6,28 +6,14 @@
     "name": "Malevolent Nuzzler"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase the ATK of a monster equipped with this card by 700 points. When this card is sent from the field to the Graveyard, if you pay 500 Life Points, this card returns to the top of your Deck.",
-      "summary": "Period miss-timing behaviour, not a text erratum: the GOAT variant adds EFFECT_FLAG_DELAY to the optional 'sent from the field to the Graveyard' Trigger Effect, so it can still be activated when that send was not the last thing to happen; the modern script sets EFFECT_FLAG_DAMAGE_STEP alone, so the effect misses timing in exactly those cases. Upstream's note: 'Doesn't miss timing.' Nothing else differs: the variant's inline s.tdcost (Duel.CheckLPCost/Duel.PayLPCost of 500) is the expansion of the modern Cost.PayLP(500), and the literal 0 passed to Duel.SendtoDeck is the value of SEQ_DECKTOP (constant.lua:28).",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700176,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700176.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase the ATK of a monster equipped with this card by 700 points. When this card is sent from the field to the Graveyard, if you pay 500 Life Points, this card returns to the top of your Deck.",
+    "modern_text": null,
+    "summary": "Period miss-timing behaviour, not a text erratum: the GOAT variant adds EFFECT_FLAG_DELAY to the optional 'sent from the field to the Graveyard' Trigger Effect, so it can still be activated when that send was not the last thing to happen; the modern script sets EFFECT_FLAG_DAMAGE_STEP alone, so the effect misses timing in exactly those cases. Upstream's note: 'Doesn't miss timing.' Nothing else differs: the variant's inline s.tdcost (Duel.CheckLPCost/Duel.PayLPCost of 500) is the expansion of the modern Cost.PayLP(500), and the literal 0 passed to Duel.SendtoDeck is the value of SEQ_DECKTOP (constant.lua:28).",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700176,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700176.lua"
+  }
 }

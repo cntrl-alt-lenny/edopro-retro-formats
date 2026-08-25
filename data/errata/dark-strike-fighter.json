@@ -6,34 +6,14 @@
     "name": "Dark Strike Fighter"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2014-10-23",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Legendary Collection 5D's Mega Pack (LC5D-EN234), the first printing carrying the errata'd text"
-      },
-      "historical_text": "1 Tuner + 1 or more non-Tuner monstersYou can Tribute 1 monster to inflict damage to your opponent equal to its Level x 200.",
-      "modern_text": "1 Tuner + 1 or more non-Tuner monstersDuring your Main Phase 1: You can Tribute 1 monster; inflict damage to your opponent equal to the Tributed monster's Level on the field x 200. You can only use this effect of \"Dark Strike Fighter\" once per turn.",
-      "summary": "Functional erratum: the Tribute-for-damage Ignition effect gained both a hard once per turn and a Main Phase 1 restriction. The modern script adds e1:SetCountLimit(1,id) and e1:SetCondition(Duel.IsPhase(PHASE_MAIN1)); the historical script has neither, so it can be used repeatedly and in either Main Phase. Cost and damage are unchanged in both (Release 1 monster with Level above 0 as a cost, damage equal to its Level on the field x 200).",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000229,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000229.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2014-10-23",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Legendary Collection 5D's Mega Pack (LC5D-EN234), the first printing carrying the errata'd text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "1 Tuner + 1 or more non-Tuner monstersYou can Tribute 1 monster to inflict damage to your opponent equal to its Level x 200.",
+    "modern_text": "1 Tuner + 1 or more non-Tuner monstersDuring your Main Phase 1: You can Tribute 1 monster; inflict damage to your opponent equal to the Tributed monster's Level on the field x 200. You can only use this effect of \"Dark Strike Fighter\" once per turn.",
+    "summary": "Functional erratum: the Tribute-for-damage Ignition effect gained both a hard once per turn and a Main Phase 1 restriction. The modern script adds e1:SetCountLimit(1,id) and e1:SetCondition(Duel.IsPhase(PHASE_MAIN1)); the historical script has neither, so it can be used repeatedly and in either Main Phase. Cost and damage are unchanged in both (Release 1 monster with Level above 0 as a cost, damage equal to its Level on the field x 200).",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511000229,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000229.lua"
+  }
 }

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-inspection",
+  "modern_card": {
+    "passcode": 16227556,
+    "name": "Inspection"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "During your opponent's Standby Phase, you can pay 500 Life Points to randomly select 1 card in your opponent's hand and look at it.",
+      "summary": "The pre-errata script omits the modern script's e2:SetCountLimit(1) on the opponent's-Standby-Phase trigger; without that limit the effect is not held to one use per turn, so the pay-500-LP peek at a random card in the opponent's hand is not capped the way the modern implementation caps it. Every other line is an equivalent older spelling of the same code - a hand-written cost function for Cost.PayLP(500), Duel.GetTurnPlayer()~=tp for Duel.IsTurnPlayer(1-tp), addition for bitwise or, an explicit string id - and the operation body is byte-identical. Chronology is unresolved and the difference itself is unconfirmed as period behaviour (see review notes).",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002982,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002982.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "ESCALATION. The English lineage records no behavioural erratum at all: v1 (PSV-E038, 2002-10-20) and v3 (PSV-EN038, Pharaoh's Servant 25th Anniversary Edition, 2023-04-20) are the same string, v2 (PSV-EN038 via Master Collection Volume 1, 2004-12-01) only moves the payment into 'you can pay 500 Life Points to randomly select ...', and the pinned modern cards.cdb text is v1/v3 verbatim - so the current official text IS the original 2002 text. The entire case for a historical version rests on the single missing SetCountLimit(1) line, and two observations cut against reading it as period behaviour: upstream's own pre-errata Imperial Order (pre-errata/c511002996.lua) keeps SetCountLimit(1) on its Standby Phase effect, so the idiom is not era-dependent; and every other line of this file reads as an older snapshot of the official script, which is what an upstream modernisation artifact looks like. The variant carries no upstream annotation. Nothing in the packet dates the difference either way. Recorded as a ruling with unresolved chronology so the record stays fail-safe, but a human should confirm the behaviour before any substitution ships. Note also that the packet's English lineage has no index 0."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

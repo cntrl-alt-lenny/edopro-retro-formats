@@ -6,29 +6,14 @@
     "name": "Reinforcements"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase 1 selected monster's ATK by 500 points during the turn this card is activated.",
-      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation once damage has been calculated, so Reinforcements can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET and the face-up-monster target filter are identical), and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700027,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700027.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase 1 selected monster's ATK by 500 points during the turn this card is activated.",
+    "modern_text": null,
+    "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation once damage has been calculated, so Reinforcements can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET and the face-up-monster target filter are identical), and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700027,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700027.lua"
+  }
 }

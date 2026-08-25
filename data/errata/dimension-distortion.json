@@ -6,51 +6,74 @@
     "name": "Dimension Distortion"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2005-10-20",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Dark Revelation Volume 2 (DR2-EN044)"
       },
-      "historical_text": "You can only activate this card when there are no cards in your Graveyard. Select 1 monster that is removed from play and Special Summon it on your side of the field.",
-      "modern_text": "You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster and Special Summon it on your side of the field.",
-      "summary": "Reprint rewording only: 'You can only activate this card when there are no cards in your Graveyard. Select 1 monster that is removed from play' becomes 'You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster'. Same activation condition and same resolution.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can only activate this card when there are no cards in your Graveyard. Select 1 monster that is removed from play and Special Summon it on your side of the field.",
+          "modern_text": "You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster and Special Summon it on your side of the field.",
+          "summary": "Reprint rewording only: 'You can only activate this card when there are no cards in your Graveyard. Select 1 monster that is removed from play' becomes 'You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster'. Same activation condition and same resolution.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster and Special Summon it on your side of the field.",
-      "summary": "The eligible pool narrowed to your own banished monsters. Both English printings (v0 IOC-044, v1 DR2-EN044) say 'Select 1 removed from play monster and Special Summon it on your side of the field' with no owner restriction, while the implemented modern effect only reaches your side: official/c95194279.lua targets LOCATION_REMOVED with a player range of (tp,0) and its chkc test requires 'chkc:IsControler(tp)'. No English printing carries the narrower wording - the pinned cards.cdb text is flagged 'The above text is unofficial and describes the card's functionality in the OCG' - so the chronology of this change is unresolved and no date is asserted.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format the modern card cannot Special Summon a monster the opponent banished, so era lines that used Dimension Distortion to take a monster removed by Bottomless Trap Hole, D.D. Warrior Lady, Chaos Sorcerer or a Macro Cosmos / Dimensional Fissure lock are impossible.",
-      "sources": [
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "You can only activate this card if there are no cards in your Graveyard. Select 1 removed from play monster and Special Summon it on your side of the field.",
+          "modern_text": null,
+          "summary": "The eligible pool narrowed to your own banished monsters. Both English printings (v0 IOC-044, v1 DR2-EN044) say 'Select 1 removed from play monster and Special Summon it on your side of the field' with no owner restriction, while the implemented modern effect only reaches your side: official/c95194279.lua targets LOCATION_REMOVED with a player range of (tp,0) and its chkc test requires 'chkc:IsControler(tp)'. No English printing carries the narrower wording - the pinned cards.cdb text is flagged 'The above text is unofficial and describes the card's functionality in the OCG' - so the chronology of this change is unresolved and no date is asserted.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format the modern card cannot Special Summon a monster the opponent banished, so era lines that used Dimension Distortion to take a monster removed by Bottomless Trap Hole, D.D. Warrior Lady, Chaos Sorcerer or a Macro Cosmos / Dimensional Fissure lock are impossible."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

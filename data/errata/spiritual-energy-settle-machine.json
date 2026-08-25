@@ -6,32 +6,42 @@
     "name": "Spiritual Energy Settle Machine"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2005-07-27",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of DB2-EN191 (Dark Beginning 2), the second and final English text"
       },
-      "historical_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases to keep this card's effect active. If you cannot discard, this card is destroyed. If this card is destroyed or removed from the field, all face-up Spirit monsters must return to the owners' hands immediately.",
-      "modern_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Normal Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases. If you do not, destroy this card. When this card is removed from the field, all face-up Spirit monsters return to the owners' hands.",
-      "summary": "English wording modernisation only (LOD-082 -> DB2-EN191): 'even if they are Summoned' became 'even if they are Normal Summoned' (Spirit monsters cannot be Special Summoned, so the scope is unchanged), and the maintenance and removal clauses were tightened without changing what happens. Both English printings already carry the removal clause returning all face-up Spirit monsters to their owners' hands, which is what the modern script implements, and the English text has not changed since 2005.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases to keep this card's effect active. If you cannot discard, this card is destroyed. If this card is destroyed or removed from the field, all face-up Spirit monsters must return to the owners' hands immediately.",
+          "modern_text": "As long as this card remains face-up on the field, all Spirit monsters remain face-up on the field and do not return to their owners' hands during the End Phase even if they are Normal Summoned or flipped face-up. Discard 1 card from your hand during each of your End Phases. If you do not, destroy this card. When this card is removed from the field, all face-up Spirit monsters return to the owners' hands.",
+          "summary": "English wording modernisation only (LOD-082 -> DB2-EN191): 'even if they are Summoned' became 'even if they are Normal Summoned' (Spirit monsters cannot be Special Summoned, so the scope is unchanged), and the maintenance and removal clauses were tightened without changing what happens. Both English printings already carry the removal clause returning all face-up Spirit monsters to their owners' hands, which is what the modern script implements, and the English text has not changed since 2005.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete",
-    "tested": false,
-    "reason": "The English/TCG card has carried the leave-field return clause since its first printing, so the modern script is period-correct for every TCG snapshot; upstream's historical variant reproduces an OCG-only text that no TCG printing ever had and must not be substituted."
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false,
+      "reason": "The English/TCG card has carried the leave-field return clause since its first printing, so the modern script is period-correct for every TCG snapshot; upstream's historical variant reproduces an OCG-only text that no TCG printing ever had and must not be substituted."
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

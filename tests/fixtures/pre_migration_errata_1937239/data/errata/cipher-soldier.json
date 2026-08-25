@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-cipher-soldier",
+  "modern_card": {
+    "passcode": 79853073,
+    "name": "Cipher Soldier"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2016-11-17",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OP03-EN016 (OTS Tournament Pack 3), the printing that introduces the current text"
+      },
+      "historical_text": "When this card battles with a Warrior-Type monster, increase the ATK and DEF of this monster by 2000 points only during damage calculation.",
+      "modern_text": "If this card battles a Warrior-Type monster, during damage calculation: This card gains 2000 ATK and DEF during that damage calculation only.",
+      "summary": "Wording modernisation only. The goat script is behaviourally identical to the modern one — the sole diff is `RESET_PHASE+PHASE_DAMAGE_CAL` vs `RESET_PHASE|PHASE_DAMAGE_CAL`, the same bits — and every English revision from v0 (WC4-002) to v5 (OP03-EN016) keeps the same mandatory EVENT_PRE_DAMAGE_CALCULATE trigger granting +2000 ATK and DEF for that damage calculation only when this card battles a Warrior-Type monster.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700139,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700139.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Two non-adjacent upstream codes implement this card, which is the duplication oddity the instructions ask to flag. goat 504700139 carries lineage v0 (WC4-002, 2004-02-10), the text in force at the 2005-04 GOAT snapshot, and I picked it as baseline; pre-errata 511006006 carries text byte-identical to the pinned modern text (lineage v5) and a script differing from modern only by the string-id namespace and the same +/| constant, so it implements no distinct historical version and is unused. Intermediate cosmetic revisions v1 (CP04-EN010, 2007-09-06), v2/v4 (SDMM-EN010, 2010-02-19 / Machine Madness Value Box 2014-02-28) and v3 (TU06-EN013, 2011-08-04) are collapsed into the single cosmetic entry; v2's wording is what stood at the 2010-03 Edison snapshot and is behaviourally the same."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

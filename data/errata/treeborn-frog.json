@@ -6,55 +6,85 @@
     "name": "Treeborn Frog"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2013-06-28",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Battle Pack 2: War of the Giants (BP02-EN043), the second of the two PSCT reprints in this span"
       },
-      "historical_text": "If this card is in your Graveyard during your Standby Phase and you control no Spell or Trap Cards, you can Special Summon it. This effect cannot be activated if you control a face-up \"Treeborn Frog\".",
-      "modern_text": "During your Standby Phase, if this card is in your Graveyard and you do not control a \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
-      "summary": "PSCT reformatting across two reprints (v2 BP01-EN012, v3 BP02-EN043): the Standby Phase clause moves to the front of the trigger condition and the Spell/Trap requirement is spelled out as 'You must control no Spell/Trap Cards to activate and to resolve this effect', which is the same requirement the CP04-EN020 text already imposed. BP02 additionally dropped 'face-up' from the self-lock, so a Set 'Treeborn Frog' you control also blocks the effect from v3 onward; that narrowing takes effect in 2013, long after the recorded era, and does not change how the period card resolves.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "If this card is in your Graveyard during your Standby Phase and you control no Spell or Trap Cards, you can Special Summon it. This effect cannot be activated if you control a face-up \"Treeborn Frog\".",
+          "modern_text": "During your Standby Phase, if this card is in your Graveyard and you do not control a \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
+          "summary": "PSCT reformatting across two reprints (v2 BP01-EN012, v3 BP02-EN043): the Standby Phase clause moves to the front of the trigger condition and the Spell/Trap requirement is spelled out as 'You must control no Spell/Trap Cards to activate and to resolve this effect', which is the same requirement the CP04-EN020 text already imposed. BP02 additionally dropped 'face-up' from the self-lock, so a Set 'Treeborn Frog' you control also blocks the effect from v3 onward; that narrowing takes effect in 2013, long after the recorded era, and does not change how the period card resolves.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN058, Duelist Saga)"
       },
-      "historical_text": "During your Standby Phase, if this card is in your Graveyard and you do not control a \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
-      "modern_text": "Once per turn, during your Standby Phase, if this card is in your Graveyard and you do not control \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
-      "summary": "Functional erratum: 'Once per turn,' is prepended to the Standby Phase self-revival. Without that limit the period card could activate the revival again in the same Standby Phase whenever the first activation was negated and the card remained in the Graveyard with no Spell/Trap Cards on your field; the modern card gets one activation per turn. EdisonFormat.com's functional errata list records the same era behaviour for this card.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "edisonformat-functional-errata"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison the EDOPro Treeborn Frog cannot re-activate its Standby Phase revival after its activation is negated, so the era's repeat-activation line is unavailable and a negation trades one-for-one instead of being answered again the same phase.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "During your Standby Phase, if this card is in your Graveyard and you do not control a \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
+          "modern_text": "Once per turn, during your Standby Phase, if this card is in your Graveyard and you do not control \"Treeborn Frog\": You can Special Summon this card. You must control no Spell/Trap Cards to activate and to resolve this effect.",
+          "summary": "Functional erratum: 'Once per turn,' is prepended to the Standby Phase self-revival. Without that limit the period card could activate the revival again in the same Standby Phase whenever the first activation was negated and the card remained in the Graveyard with no Spell/Trap Cards on your field; the modern card gets one activation per turn. EdisonFormat.com's functional errata list records the same era behaviour for this card.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "edisonformat-functional-errata"
+          ]
+        }
       ]
     }
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison the EDOPro Treeborn Frog cannot re-activate its Standby Phase revival after its activation is negated, so the era's repeat-activation line is unavailable and a negation trades one-for-one instead of being answered again the same phase."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

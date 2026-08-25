@@ -6,34 +6,14 @@
     "name": "Ultimate Offering"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2006-05-15",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the phase restriction (SD7-EN027, Structure Deck: Invincible Fortress)"
-      },
-      "historical_text": "At the cost of 500 Life Points per monster, a player is allowed an extra Normal Summon or Set.",
-      "modern_text": "By paying 500 Life Points, Normal Summon or Set 1 extra monster. You can only activate this effect during your Main Phase or your opponent's Battle Phase.",
-      "summary": "Functional erratum: SD7-EN027 added \"You can only activate this effect during your Main Phase or your opponent's Battle Phase\", which the SDY-050 text did not have. The pre-errata script registers the EFFECT_TYPE_QUICK_O/EVENT_FREE_CHAIN effect with no SetCondition, so the extra Normal Summon/Set can be bought in any phase of either player's turn; the modern script gates the same effect with s.condition, which returns true only when you are the turn player in a Main Phase or the opponent is the turn player in the Battle Phase. The 500 LP cost, the per-chain flag effect counting how many monsters you could still Summon, and Duel.SummonOrSet in the operation are byte-for-byte the same in both.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003023,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003023.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-babelcdb",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2006-05-15",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the phase restriction (SD7-EN027, Structure Deck: Invincible Fortress)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "At the cost of 500 Life Points per monster, a player is allowed an extra Normal Summon or Set.",
+    "modern_text": "By paying 500 Life Points, Normal Summon or Set 1 extra monster. You can only activate this effect during your Main Phase or your opponent's Battle Phase.",
+    "summary": "Functional erratum: SD7-EN027 added \"You can only activate this effect during your Main Phase or your opponent's Battle Phase\", which the SDY-050 text did not have. The pre-errata script registers the EFFECT_TYPE_QUICK_O/EVENT_FREE_CHAIN effect with no SetCondition, so the extra Normal Summon/Set can be bought in any phase of either player's turn; the modern script gates the same effect with s.condition, which returns true only when you are the turn player in a Main Phase or the opponent is the turn player in the Battle Phase. The 500 LP cost, the per-chain flag effect counting how many monsters you could still Summon, and Duel.SummonOrSet in the operation are byte-for-byte the same in both.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003023,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003023.lua"
+  }
 }

@@ -6,34 +6,50 @@
     "name": "Dark Jeroid"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2020-05-15",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the printing carrying the current text (SS05-ENB18, Speed Duel Starter Decks: Twisted Nightmares)"
       },
-      "historical_text": "When this card is Normal Summoned, Flip Summoned, or Special Summoned successfully, select 1 face-up monster on the field. As long as the monster remains face-up on the field, decrease its ATK by 800 points.",
-      "modern_text": "If this card is Summoned: Target 1 face-up monster on the field; it loses 800 ATK.",
-      "summary": "Wording modernisation only: the GOAT script differs from the modern one in exactly one line, writing RESET_EVENT+RESETS_STANDARD where the modern writes RESET_EVENT|RESETS_STANDARD - the same value, since the flags are disjoint bits - so the two are behaviourally identical. Every English revision from v1 through v4 preserves the same resolution, including the v3 'select' -> 'Target' rewording, which both scripts already implement as a targeting effect, and the v1 -> v2 collapse of 'As long as the monster remains face-up on the field' into a plain 'It loses 800 ATK', which both scripts encode with the same RESETS_STANDARD reset set.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is Normal Summoned, Flip Summoned, or Special Summoned successfully, select 1 face-up monster on the field. As long as the monster remains face-up on the field, decrease its ATK by 800 points.",
+          "modern_text": "If this card is Summoned: Target 1 face-up monster on the field; it loses 800 ATK.",
+          "summary": "Wording modernisation only: the GOAT script differs from the modern one in exactly one line, writing RESET_EVENT+RESETS_STANDARD where the modern writes RESET_EVENT|RESETS_STANDARD - the same value, since the flags are disjoint bits - so the two are behaviourally identical. Every English revision from v1 through v4 preserves the same resolution, including the v3 'select' -> 'Target' rewording, which both scripts already implement as a targeting effect, and the v1 -> v2 collapse of 'As long as the monster remains face-up on the field' into a plain 'It loses 800 ATK', which both scripts encode with the same RESETS_STANDARD reset set.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700159,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700159.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700159,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700159.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

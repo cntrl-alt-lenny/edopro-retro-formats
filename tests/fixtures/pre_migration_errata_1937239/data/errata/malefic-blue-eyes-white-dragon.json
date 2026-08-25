@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-malefic-blue-eyes-white-dragon",
+  "modern_card": {
+    "passcode": 9433350,
+    "name": "Malefic Blue-Eyes White Dragon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-09-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (the Silver Dragon Value Box reprint of DPKB-EN023)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 \"Blue-Eyes White Dragon\" from your Deck. There can only be 1 face-up \"Malefic\" monster on the field. Other monsters you control cannot declare an attack. If there is no face-up Field Spell Card on the field, destroy this card.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 \"Blue-Eyes White Dragon\" from your Deck. There can only be 1 \"Malefic\" monster on the field. Other monsters you control cannot declare an attack. If there is no face-up Field Spell Card on the field, destroy this card.",
+      "summary": "Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned by removing from play 1 \\\"Blue-Eyes White Dragon\\\" from your Deck\" - naming no source zone and permitting no other Special Summon ever. The errata'd text is semi-nomi and zone-bound, \"Must first be Special Summoned (from your hand) by banishing 1 \\\"Blue-Eyes White Dragon\\\" from your Deck\", so the modern card may be revived by generic Special Summons once it has been properly Summoned. The same revision drops \"face-up\" from \"There can only be 1 face-up \\\"Malefic\\\" monster on the field\", widening the uniqueness Condition to any Malefic on the field regardless of position.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In an Edison snapshot EDOPro lets a Malefic Blue-Eyes that already hit the field be Special Summoned again from the Graveyard by Monster Reborn or Call of the Haunted, which the era's \"can only be Special Summoned by removing from play 1 \\\"Blue-Eyes White Dragon\\\" from your Deck\" text forbids.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations contains only 513000068 \"Malefic Blue-Eyes White Dragon (Anime)\" in cards-unofficial.cdb, which is a DIFFERENT card - it sends \"Blue-Eyes White Dragon\" from Deck to the Graveyard as its Summon cost, keys its self-destruction to \"Malefic World\" (Duel.IsEnvironment(27564031)) rather than any Field Spell, and has no attack-lock on your other monsters; text ratio 0.6517. It is not a historical implementation of 9433350 and cannot be a baseline, so this card remains a genuine gap. Era text: DPKB-EN023 released 2010-04-16 (EU/OCE) and 2010-04-20 (NA), days before the 2010-04-24 Edison snapshot, so v0 is the Edison text; the card postdates GOAT entirely. Trailing cosmetic revision v1 -> v2 (LDS2-EN005, 2021-01-21: \"Field Spell Card\" -> \"Field Spell\") is not recorded as a change; cards.cdb matches v2 exactly. The dropped \"face-up\" is near-inert in practice, since a Malefic monster cannot be Set, and is recorded only as part of the same printing's erratum. Malefic Blue-Eyes does not appear on the EdisonFormat.com Functional Errata list."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

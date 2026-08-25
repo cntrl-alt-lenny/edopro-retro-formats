@@ -6,28 +6,14 @@
     "name": "Hino-Kagu-Tsuchi"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent's Life Points, your opponent discards all cards in their hand during the next Draw Phase, before they draw.",
-      "summary": "Era ruling on a skipped Draw Phase, not a text erratum: after battle damage the GOAT script registers the EVENT_PREDRAW discard plus two clones - one on EVENT_PHASE+PHASE_STANDBY and one on EVENT_ADJUST conditioned on the opponent's Main Phase - all resetting at Main Phase 1 and clearing each other once the hand is sent to the GY, so the discard still happens at the next available point if the opponent's Draw Phase never occurs. The modern script registers only the EVENT_PREDRAW effect with RESET_PHASE|PHASE_DRAW, so skipping the Draw Phase loses the discard entirely. Chronology is unresolved - nothing in the packet dates when the ruling changed.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700131,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700131.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. If this card inflicts Battle Damage to your opponent's Life Points, your opponent discards all cards in their hand during the next Draw Phase, before they draw.",
+    "modern_text": null,
+    "summary": "Era ruling on a skipped Draw Phase, not a text erratum: after battle damage the GOAT script registers the EVENT_PREDRAW discard plus two clones - one on EVENT_PHASE+PHASE_STANDBY and one on EVENT_ADJUST conditioned on the opponent's Main Phase - all resetting at Main Phase 1 and clearing each other once the hand is sent to the GY, so the discard still happens at the next available point if the opponent's Draw Phase never occurs. The modern script registers only the EVENT_PREDRAW effect with RESET_PHASE|PHASE_DRAW, so skipping the Draw Phase loses the discard entirely. Chronology is unresolved - nothing in the packet dates when the ruling changed.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700131,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700131.lua"
+  }
 }

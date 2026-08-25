@@ -6,34 +6,14 @@
     "name": "Makyura the Destructor"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2020-09-24",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LED7-EN008, Legendary Duelists: Rage of Ra)"
-      },
-      "historical_text": "During the turn this card was sent to the Graveyard, you can activate Trap Cards from your hand.",
-      "modern_text": "If this card is sent from the Monster Zone to the GY: You can activate 1 Trap Card from your hand this turn. You can only use this effect of \"Makyura the Destructor\" once per turn.",
-      "summary": "Functional erratum. Pre-errata, the effect is EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS on EVENT_TO_GRAVE with no condition and no count limit: it applies by itself whenever Makyura is sent to the Graveyard from anywhere, does not start a Chain, and the field effect it registers has no count limit, so any number of Trap Cards may be activated from the hand for the rest of that turn. The errata'd card is an optional Trigger Effect (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O with EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY) that must be activated, is conditioned on having been sent from the Monster Zone (IsPreviousLocation(LOCATION_MZONE)), is a hard once per turn (SetCountLimit(1,id)), and grants exactly one Trap activation from the hand (SetCountLimit(1) on the granted field effect).",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 21593987,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c21593987.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2020-09-24",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LED7-EN008, Legendary Duelists: Rage of Ra)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "During the turn this card was sent to the Graveyard, you can activate Trap Cards from your hand.",
+    "modern_text": "If this card is sent from the Monster Zone to the GY: You can activate 1 Trap Card from your hand this turn. You can only use this effect of \"Makyura the Destructor\" once per turn.",
+    "summary": "Functional erratum. Pre-errata, the effect is EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS on EVENT_TO_GRAVE with no condition and no count limit: it applies by itself whenever Makyura is sent to the Graveyard from anywhere, does not start a Chain, and the field effect it registers has no count limit, so any number of Trap Cards may be activated from the hand for the rest of that turn. The errata'd card is an optional Trigger Effect (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O with EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY) that must be activated, is conditioned on having been sent from the Monster Zone (IsPreviousLocation(LOCATION_MZONE)), is a hard once per turn (SetCountLimit(1,id)), and grants exactly one Trap activation from the hand (SetCountLimit(1) on the granted field effect).",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 21593987,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c21593987.lua"
+  }
 }

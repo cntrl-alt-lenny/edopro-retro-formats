@@ -6,29 +6,14 @@
     "name": "Zombyra the Dark"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This card cannot attack a player directly. Each time this card destroys 1 monster as a result of battle, decrease the ATK of this card by 200 points.",
-      "summary": "Period trigger timing, not a text erratum: the GOAT script keys the mandatory -200 ATK trigger (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F) to EVENT_BATTLED with a condition that Zombyra's own battle target was battle-destroyed (Card.GetBattleTarget followed by Card.IsBattleDestroyed), so the ATK loss registers only once the battle has finished and only while Zombyra is still on the field with the effect active; the modern script fires on EVENT_BATTLE_DESTROYING with no condition, applying the loss at the destruction event itself, so its ATK is already reduced for the rest of the damage step. Upstream annotates the variant \"Activation timing\" and applies the same EVENT_BATTLED pattern across a family of GOAT variants annotated \"Battle destroyed registers while the mosnter is on field\". The printed text is behaviourally unchanged across the whole English lineage and nothing in the packet dates when the timing interpretation changed, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700152,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700152.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "This card cannot attack a player directly. Each time this card destroys 1 monster as a result of battle, decrease the ATK of this card by 200 points.",
+    "modern_text": null,
+    "summary": "Period trigger timing, not a text erratum: the GOAT script keys the mandatory -200 ATK trigger (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F) to EVENT_BATTLED with a condition that Zombyra's own battle target was battle-destroyed (Card.GetBattleTarget followed by Card.IsBattleDestroyed), so the ATK loss registers only once the battle has finished and only while Zombyra is still on the field with the effect active; the modern script fires on EVENT_BATTLE_DESTROYING with no condition, applying the loss at the destruction event itself, so its ATK is already reduced for the rest of the damage step. Upstream annotates the variant \"Activation timing\" and applies the same EVENT_BATTLED pattern across a family of GOAT variants annotated \"Battle destroyed registers while the mosnter is on field\". The printed text is behaviourally unchanged across the whole English lineage and nothing in the packet dates when the timing interpretation changed, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700152,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700152.lua"
+  }
 }

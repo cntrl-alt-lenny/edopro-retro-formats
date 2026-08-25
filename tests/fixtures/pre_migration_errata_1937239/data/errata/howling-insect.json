@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-howling-insect",
+  "modern_card": {
+    "passcode": 93107608,
+    "name": "Howling Insect"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is destroyed and sent to the Graveyard as a result of battle, you can Special Summon 1 Insect-Type monster with an ATK of 1500 or less to your side of the field from your Deck. Then shuffle your Deck.",
+      "summary": "Period ruling package, not a text erratum. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...)` - an Insect with 1500 or less ATK actually in the Deck - while the goat target requires only a free Monster Zone, so the battle-destruction trigger can be used on a whiff. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`, revealing the Deck to prove no eligible Insect remains. The verification half falls under the shared search-verification chronology; the relaxed activation condition is undated for this card, so the change is left chronologically unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700162,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700162.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Trigger condition, effect type (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O on EVENT_BATTLE_DESTROYED) and filter are byte-identical between goat/c504700162.lua and official/c93107608.lua; the only differences are the two listed above. Text lineage v0 (SOD-EN025, 2004-10-01) -> v1 (DR3-EN025, 2006-11-25) -> v2 (DL13-EN007, 2011-12-01) -> v3 (SBC1-END06, 2023-08-24) is entirely cosmetic: \"destroyed and sent to the Graveyard as a result of battle\" -> \"destroyed by battle and sent to the Graveyard/GY\", \"Insect-Type\" -> \"Insect\", and the dropped procedural line \"Then shuffle your Deck.\" No behavioural text transition, hence modern_text_version null. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

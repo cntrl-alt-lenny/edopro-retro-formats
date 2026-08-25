@@ -6,28 +6,14 @@
     "name": "Limiter Removal"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Double the ATK of all face-up Machine-Type monsters that are on your side of the field when you activate this card. During the End Phase, destroy all Monster Cards that were affected by this effect.",
-      "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Limiter Removal may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore, so the two flags license different sub-steps. The accompanying condition swap is a no-op: the variant's inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' is logically identical to the modern aux.StatChangeDamageStepCondition ('not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', CardScripts utility.lua:1412), and the hint timing follows the flag. 25 of upstream's 191 GOAT scripts carry the same substitution, so it is a systematic period-Damage-Step encoding rather than a per-card quirk.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700037,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700037.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Double the ATK of all face-up Machine-Type monsters that are on your side of the field when you activate this card. During the End Phase, destroy all Monster Cards that were affected by this effect.",
+    "modern_text": null,
+    "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Limiter Removal may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore, so the two flags license different sub-steps. The accompanying condition swap is a no-op: the variant's inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' is logically identical to the modern aux.StatChangeDamageStepCondition ('not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', CardScripts utility.lua:1412), and the hint timing follows the flag. 25 of upstream's 191 GOAT scripts carry the same substitution, so it is a systematic period-Damage-Step encoding rather than a per-card quirk.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700037,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700037.lua"
+  }
 }

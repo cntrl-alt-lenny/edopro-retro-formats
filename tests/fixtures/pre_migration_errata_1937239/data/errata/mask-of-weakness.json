@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-mask-of-weakness",
+  "modern_card": {
+    "passcode": 57882509,
+    "name": "Mask of Weakness"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Decrease the ATK of 1 attacking monster by 700 points until the end of the turn.",
+      "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Mask of Weakness may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore, so the two flags license different sub-steps. The condition swap is a no-op: the variant's inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' is logically identical to the modern aux.StatChangeDamageStepCondition (CardScripts utility.lua:1412). Targeting is unchanged - EFFECT_FLAG_CARD_TARGET is present in both - and 25 of upstream's 191 GOAT scripts carry the same flag substitution, so it is a systematic period-Damage-Step encoding.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700094,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700094.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Recorded as 'ruling', not 'engine': the difference lives in this card's own effect flags rather than in a global rule-profile setting. Chain starts at lineage v1 (DB1-EN218, 2004-10-12), the GOAT entry's exact text; the earlier v0 (LON-015, 2003-03-01) carried 'This card can only be activated in the Battle Phase', dropped at v1 - that transition predates the baseline and is not recorded. v1 through v6 (BP03-EN190, 2014-07-31, the pinned cdb text) is cosmetic: 'Decrease the ATK of 1 attacking monster' -> 'Select 1 attacking monster' -> 'Target 1 attacking monster; that target loses 700 ATK', with 'until the end of the turn' and 'until the End Phase' alternating; targeting did not actually change (EFFECT_FLAG_CARD_TARGET in both scripts) and the reset differs only in spelling (RESETS_STANDARD_PHASE_END = RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END, constant.lua:300). Lineage artifact, harmless here: v4 and v5 both cite DEM1-EN016 with the same release date (2011-02-12), so the 'Select' -> 'Target' step is not separately datable. The GOAT script keeps HintTiming TIMING_DAMAGE_STEP while changing the permission flag. Nothing dates the Damage Step window change, so effective is left empty."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

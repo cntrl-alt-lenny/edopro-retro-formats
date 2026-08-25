@@ -6,28 +6,14 @@
     "name": "Helping Robo for Combat"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Each time this card destroys your opponent's monster as a result of battle, draw 1 card, then select and return 1 card from your hand to the bottom of your Deck.",
-      "summary": "Era trigger timing, not a text erratum: the GOAT script fires the mandatory draw on EVENT_BATTLED with a condition that the opponent's battle target was battle-destroyed, i.e. after the battle concludes, while the modern script fires on EVENT_BATTLE_DESTROYING, at the destruction itself. The trigger therefore takes a different position in the Damage Step relative to other battle triggers. The GOAT resolution also omits the modern Duel.ShuffleHand before you pick the card to send back and the Duel.BreakEffect separating the draw from the return. Chronology is unresolved - nothing in the packet dates the timing change.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700076,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700076.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Each time this card destroys your opponent's monster as a result of battle, draw 1 card, then select and return 1 card from your hand to the bottom of your Deck.",
+    "modern_text": null,
+    "summary": "Era trigger timing, not a text erratum: the GOAT script fires the mandatory draw on EVENT_BATTLED with a condition that the opponent's battle target was battle-destroyed, i.e. after the battle concludes, while the modern script fires on EVENT_BATTLE_DESTROYING, at the destruction itself. The trigger therefore takes a different position in the Damage Step relative to other battle triggers. The GOAT resolution also omits the modern Duel.ShuffleHand before you pick the card to send back and the Duel.BreakEffect separating the draw from the return. Chronology is unresolved - nothing in the packet dates the timing change.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700076,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700076.lua"
+  }
 }

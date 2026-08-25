@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-insect-imitation",
+  "modern_card": {
+    "passcode": 96965364,
+    "name": "Insect Imitation"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2009-07-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Retro Pack 2 (RP02-EN016), the first printing whose text drops the battle-position clause"
+      },
+      "historical_text": "Tribute 1 monster on your side of the field. Select 1 Insect-Type monster from your Deck that is 1 Level higher than the Tributed monster and Special Summon it on your side of the field in face-up Attack Position or face-down Defense Position. Then shuffle your Deck.",
+      "modern_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
+      "summary": "Functional erratum: the pre-RP02 text summons the searched Insect \"in face-up Attack Position or face-down Defense Position\", and the goat script implements exactly that (`Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)`, with the same position mask passed to `IsCanBeSpecialSummoned` in `s.spfilter`). The RP02-EN016 text drops the clause and the modern script summons `POS_FACEUP` only, so the era card can Set a Deck monster face-down - upstream's own annotation on the variant reads \"summons monsters like cyber jar\" - while the modern card cannot.",
+      "resulting_implementation": {
+        "strategy": "unresolved",
+        "status": "missing",
+        "tested": false,
+        "gap": {
+          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+          "upstream_checked": true,
+          "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.cfilter` (the release-cost filter) also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv+1,e,tp)`, while the goat cfilter drops it, so the Tribute can be paid with no Insect of the right Level in the Deck. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
+          "sources": [
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
+      },
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
+      "summary": "Period ruling package on top of the text change. Activation condition: the modern `s.cfilter` (the release-cost filter) also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv+1,e,tp)`, while the goat cfilter drops it, so the Tribute can be paid with no Insect of the right Level in the Deck. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700171,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700171.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v2 (PSV-EN068 / Master Collection Volume 1, 2004-12-01), which the goat cdb text matches exactly; v1 (PSV-E068, 2002-10-20) is an earlier cosmetic rewording and is not recorded. Trailing v3 -> v4 (GRCR-EN052, 2022-01-27) adds \"had on the field\" and drops \"-Type\": cosmetic, since both scripts capture the Tributed monster's Level at cost time via `e:SetLabel(rg:GetFirst():GetLevel())` and never re-read it. Ordering rationale: the position erratum is anchored to a 2009 printing while the verification procedure is attested in force through 2011-02-02, so the functional change precedes the ruling change. IMPLEMENTATION GAP: the intermediate version - RP02 text (face-up only) still played under the era ruling package - has no upstream implementation, so any period snapshot after 2009-07-24 but before the ruling package lapsed has no correct script available."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

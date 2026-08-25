@@ -6,29 +6,46 @@
     "name": "Bubble Crash"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "This card can only be activated when any player has 6 or more cards on the field and/or in their hand. The player(s) then select and send cards to their respective Graveyards until the amount remaining on the field and in their hand is 5.",
-      "summary": "No implementation-relevant difference is attested: the goat entry's cdb text is byte-identical to the pinned modern text (both lineage v2, DB2-EN199), and the single behaviour upstream annotates — \"Cannot send itself\" — is implemented by the modern script too, which passes `local exc=c:IsRelateToEffect(e) and c or nil` as the selection exception for the activating player (the opponent only ever picks from their own cards). What remains in the diff is unattested implementation idiom: the goat script merges both players' picks into one group sent with REASON_EFFECT, while the modern script sends each player's picks in a separate call with REASON_RULE; 0xe and LOCATION_ONFIELD|LOCATION_HAND are the same locations.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card can only be activated when any player has 6 or more cards on the field and/or in their hand. The player(s) then select and send cards to their respective Graveyards until the amount remaining on the field and in their hand is 5.",
+          "modern_text": null,
+          "summary": "No implementation-relevant difference is attested: the goat entry's cdb text is byte-identical to the pinned modern text (both lineage v2, DB2-EN199), and the single behaviour upstream annotates — \"Cannot send itself\" — is implemented by the modern script too, which passes `local exc=c:IsRelateToEffect(e) and c or nil` as the selection exception for the activating player (the opponent only ever picks from their own cards). What remains in the diff is unattested implementation idiom: the goat script merges both players' picks into one group sent with REASON_EFFECT, while the modern script sends each player's picks in a separate call with REASON_RULE; 0xe and LOCATION_ONFIELD|LOCATION_HAND are the same locations.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700100,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700100.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700100,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700100.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,70 +6,115 @@
     "name": "Blackwing - Sirocco the Dawn"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2012-01-01",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the reworded text (TU07-EN018, Turbo Pack: Booster Seven)"
       },
-      "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributing. Once per turn, you can select 1 face-up \"Blackwing\" monster you control. It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself. Monsters other than the selected monster cannot attack the turn you activate this effect.",
-      "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributes. Once per turn: You can target 1 face-up \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters currently on the field, except itself. Monsters other than that target cannot attack during the turn you activate this effect.",
-      "summary": "The CRMS-EN010 text states no duration for the boost ('It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself') and sums the Blackwings on the field with no snapshot wording; TU07-EN018 writes the duration out as 'until the End Phase' and fixes the amount to the Blackwings 'currently on the field'. As printed, the period card's ATK gain has no expiry and the modern one lapses in the End Phase. The same printing converts 'select' to 'target'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributing. Once per turn, you can select 1 face-up \"Blackwing\" monster you control. It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself. Monsters other than the selected monster cannot attack the turn you activate this effect.",
+          "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributes. Once per turn: You can target 1 face-up \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters currently on the field, except itself. Monsters other than that target cannot attack during the turn you activate this effect.",
+          "summary": "The CRMS-EN010 text states no duration for the boost ('It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself') and sums the Blackwings on the field with no snapshot wording; TU07-EN018 writes the duration out as 'until the End Phase' and fixes the amount to the Blackwings 'currently on the field'. As printed, the period card's ATK gain has no expiry and the modern one lapses in the End Phase. The same printing converts 'select' to 'target'.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2013-12-13",
         "precision": "day",
         "status": "reported",
         "basis": "Duelist League 17 participation card DL17-EN007"
       },
-      "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributes. Once per turn: You can target 1 face-up \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters currently on the field, except itself. Monsters other than that target cannot attack during the turn you activate this effect.",
-      "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn: You can target 1 \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
-      "summary": "Wording only: 'Normal Summon or Set' becomes 'Normal Summon/Set', 'without Tributes' returns to 'without Tributing', and 'that target' becomes 'the targeted monster'. Same targeting, same amount, same attack lock.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributes. Once per turn: You can target 1 face-up \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters currently on the field, except itself. Monsters other than that target cannot attack during the turn you activate this effect.",
+          "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn: You can target 1 \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
+          "summary": "Wording only: 'Normal Summon or Set' becomes 'Normal Summon/Set', 'without Tributes' returns to 'without Tributing', and 'that target' becomes 'the targeted monster'. Same targeting, same amount, same attack lock.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c2": {
       "effective": {
         "date": "2014-10-23",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (LC5D-EN112, Legendary Collection 5D's Mega Pack)"
       },
-      "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn: You can target 1 \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
-      "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn, during your Main Phase 1: You can target 1 \"Blackwing\" monster you control; until the end of this turn, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
-      "summary": "Functional erratum: the effect gains an activation window - 'Once per turn, during your Main Phase 1' - which none of the CRMS/TU07/DL17 texts carry, so the period card's once-per-turn Ignition effect can also be used in Main Phase 2 while the errata'd card cannot. The same printing restates the duration as 'until the end of this turn'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison, Sirocco's boost is printed with no expiry and with no phase restriction on its use, so a Blackwing pumped by it should keep the ATK past the End Phase and the effect should be usable in Main Phase 2; the shipped card expires the gain at end of turn and refuses the effect outside Main Phase 1.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn: You can target 1 \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
+          "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn, during your Main Phase 1: You can target 1 \"Blackwing\" monster you control; until the end of this turn, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
+          "summary": "Functional erratum: the effect gains an activation window - 'Once per turn, during your Main Phase 1' - which none of the CRMS/TU07/DL17 texts carry, so the period card's once-per-turn Ignition effect can also be used in Main Phase 2 while the errata'd card cannot. The same printing restates the duration as 'until the end of this turn'.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     }
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c2",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c2",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison, Sirocco's boost is printed with no expiry and with no phase restriction on its use, so a Blackwing pumped by it should keep the ATK past the End Phase and the effect should be usable in Main Phase 2; the shipped card expires the gain at end of turn and refuses the effect outside Main Phase 1."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

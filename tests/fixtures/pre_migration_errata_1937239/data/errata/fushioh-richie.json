@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-fushioh-richie",
+  "modern_card": {
+    "passcode": 39711336,
+    "name": "Fushioh Richie"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned from your hand or your Deck by Tributing 1 \"Great Dezard\" that has fulfilled the condition. You can flip this card into face-down Defense Position once per turn during your Main Phase. As long as this monster remains face-up on the field, negate the activation and effects of all Spell and Trap Cards that target this card and destroy them. When this card is flipped face-up, you can Special Summon 1 Zombie-Type monster from your Graveyard.",
+      "summary": "Two behavioural differences separate the last English printing (v1, DB2-EN229) from the implemented modern card. First, the strict 'This card can only be Special Summoned from your hand or your Deck by Tributing 1 \"Great Dezard\" that has fulfilled the condition' became the 'Must first be Special Summoned by \"Great Dezard\"' form: official/c39711336.lua carries only c:EnableReviveLimit() with no EFFECT_SPSUMMON_CONDITION, so once properly summoned the modern card can be Special Summoned from the Graveyard by anything. Second, the era negation is continuous and chain-less - 'As long as this monster remains face-up on the field, negate the activation and effects of all Spell and Trap Cards that target this card and destroy them' - while the script implements a mandatory Quick Effect (EFFECT_TYPE_QUICK_F on EVENT_CHAINING) that forms its own chain link, answers only card activations (s.discon requires re:IsHasType(EFFECT_TYPE_ACTIVATE)) and only when it sits directly above them (Duel.GetCurrentChain()~=ev+1 aborts), so a targeting effect from an already-resolved or already-face-up Spell/Trap goes unnegated. No English printing carries the modern wording, so the chronology is unresolved and no date is asserted.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the modern card can be brought back from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, and its negation is a chain link that the opponent can respond to or negate instead of a continuous shield that stops the activation and the effects of every Spell/Trap targeting it.",
+      "sources": [
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The pinned cards.cdb text matches no lineage version (best match index 1 at ratio 0.4246) because it is an unofficial rendering of the OCG card's functionality; the English lineage stops at DB2-EN229 (2005-07-27), so the divergence cannot be dated from any printing and effective is left empty. Era text at Edison is v1; the GOAT snapshot (2005-04-01) predates v1 and falls on v0 (PGD-031, 2003-07-18), which additionally LACKS the 'This card cannot be Normal Summoned or Set' line that DB2 added - whether the PGD printing was actually Normal Summonable in 2005 play is not settled by anything in the packet, which is a second reason this card needs escalation. The remaining v0-to-v1 differences ('offering ... as a Tribute' to 'Tributing', 'Magic or Trap' to 'Spell and Trap', dropping the summoned-position choice) are cosmetic, as is the modern 'target 1 Zombie monster in your GY' for the flip-summon revival. This card has no upstream historical or unofficial variant of any kind."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}

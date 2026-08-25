@@ -6,30 +6,40 @@
     "name": "Rainbow Neos"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2021-11-18",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (MGED-EN137, Maximum Gold: El Dorado)"
       },
-      "historical_text": "\"Elemental Hero Neos\" + \"Rainbow Dragon\" or \"Rainbow Dark Dragon\"This card cannot be Special Summoned, except by Fusion Summon with the above Fusion Material Monsters. Once per turn, you can activate 1 of the following effects: ● Send 1 monster you control to the Graveyard to return all monsters your opponent controls to the Deck. ● Send 1 Spell or Trap Card you control to the Graveyard to return all Spell and Trap Cards your opponent controls to the Deck. ● Send 1 card from the top of your Deck to the Graveyard to return all cards in your opponent's Graveyard to the Deck.",
-      "modern_text": "\"Elemental HERO Neos\" + 1 \"Ultimate Crystal\" monsterMust be Fusion Summoned with the above Fusion Materials. Once per turn: You can activate 1 of these effects.● Send 1 monster you control to the GY; shuffle all monsters your opponent controls into the Deck. ● Send 1 Spell/Trap you control to the GY; shuffle all Spells and Traps your opponent controls into the Deck. ● Send 1 card from the top of your Deck to the GY; shuffle all cards from your opponent's GY into the Deck.",
-      "summary": "Wording modernisation only: v1 (LCGX-EN074) restated the restriction as 'Must be Fusion Summoned with the above Fusion Material Monsters and cannot be Special Summoned by other ways' and put the three bullets into PSCT cost/effect form ('Send 1 X you control to the Graveyard; shuffle all ... into the Deck'), the undated v2 generalised the named materials to '1 \"Ultimate Crystal\" monster', and v3 (MGED-EN137) dropped the now-redundant 'and cannot be Special Summoned by other ways' and moved to GY wording. Neither step changes resolution: 'Must be Fusion Summoned' without 'first' is still the strict form (the sibling card Rainbow Dark Dragon, which took the identical clause removal, is still implemented with EFFECT_SPSUMMON_CONDITION and no revive limit), and in a period card pool the only 'Ultimate Crystal' monsters are exactly the two the old text names.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "\"Elemental Hero Neos\" + \"Rainbow Dragon\" or \"Rainbow Dark Dragon\"This card cannot be Special Summoned, except by Fusion Summon with the above Fusion Material Monsters. Once per turn, you can activate 1 of the following effects: ● Send 1 monster you control to the Graveyard to return all monsters your opponent controls to the Deck. ● Send 1 Spell or Trap Card you control to the Graveyard to return all Spell and Trap Cards your opponent controls to the Deck. ● Send 1 card from the top of your Deck to the Graveyard to return all cards in your opponent's Graveyard to the Deck.",
+          "modern_text": "\"Elemental HERO Neos\" + 1 \"Ultimate Crystal\" monsterMust be Fusion Summoned with the above Fusion Materials. Once per turn: You can activate 1 of these effects.● Send 1 monster you control to the GY; shuffle all monsters your opponent controls into the Deck. ● Send 1 Spell/Trap you control to the GY; shuffle all Spells and Traps your opponent controls into the Deck. ● Send 1 card from the top of your Deck to the GY; shuffle all cards from your opponent's GY into the Deck.",
+          "summary": "Wording modernisation only: v1 (LCGX-EN074) restated the restriction as 'Must be Fusion Summoned with the above Fusion Material Monsters and cannot be Special Summoned by other ways' and put the three bullets into PSCT cost/effect form ('Send 1 X you control to the Graveyard; shuffle all ... into the Deck'), the undated v2 generalised the named materials to '1 \"Ultimate Crystal\" monster', and v3 (MGED-EN137) dropped the now-redundant 'and cannot be Special Summoned by other ways' and moved to GY wording. Neither step changes resolution: 'Must be Fusion Summoned' without 'first' is still the strict form (the sibling card Rainbow Dark Dragon, which took the identical clause removal, is still implemented with EFFECT_SPSUMMON_CONDITION and no revive limit), and in a period card pool the only 'Ultimate Crystal' monsters are exactly the two the old text names.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,29 +6,14 @@
     "name": "Rare Metalmorph"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase the ATK of 1 Machine-Type monster on the field by 500 points. Only once, negate the effect of a Spell Card that designates the monster. When the selected monster is removed from the field, destroy this card.",
-      "summary": "Two period behaviours the printed text never showed, both carried by the GOAT variant. (1) Damage Step: the persistent procedure is registered with EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so the Continuous Trap can be activated during damage calculation, where the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition (before damage calculation only). (2) Negation scope: on resolution the GOAT variant looks for Spell Cards already sitting in either Spell/Trap Zone that hold the chosen Machine monster as a card target (s.tfilter1) and, if any exist, registers an EFFECT_DISABLE field effect against them (s.distg, bounded by the group's max field ID) - spending its one negation on a Spell already applying to the monster - and only falls back to the modern EVENT_CHAIN_SOLVING negation of the next Spell effect that targets the monster when no such Spell is present. Chronology unresolved: no printing or announcement in the packet dates either shift.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700017,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700017.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase the ATK of 1 Machine-Type monster on the field by 500 points. Only once, negate the effect of a Spell Card that designates the monster. When the selected monster is removed from the field, destroy this card.",
+    "modern_text": null,
+    "summary": "Two period behaviours the printed text never showed, both carried by the GOAT variant. (1) Damage Step: the persistent procedure is registered with EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so the Continuous Trap can be activated during damage calculation, where the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition (before damage calculation only). (2) Negation scope: on resolution the GOAT variant looks for Spell Cards already sitting in either Spell/Trap Zone that hold the chosen Machine monster as a card target (s.tfilter1) and, if any exist, registers an EFFECT_DISABLE field effect against them (s.distg, bounded by the group's max field ID) - spending its one negation on a Spell already applying to the monster - and only falls back to the modern EVENT_CHAIN_SOLVING negation of the next Spell effect that targets the monster when no such Spell is present. Chronology unresolved: no printing or announcement in the packet dates either shift.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700017,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700017.lua"
+  }
 }

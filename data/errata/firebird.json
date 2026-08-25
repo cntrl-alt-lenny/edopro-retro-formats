@@ -6,29 +6,14 @@
     "name": "Firebird"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "As long as this card remains face-up on the field, each time a Winged Beast-Type monster(s) on your side of the field is destroyed, increase the ATK of this card by 500 points.",
-      "summary": "Era trigger timing, not a text erratum: the GOAT script splits the ATK gain in two. The original destruction effect gains 'not c:IsReason(REASON_BATTLE)' so it now covers only non-battle destruction, and a cloned effect on EVENT_BATTLED covers battle destruction, requiring that the attacker or the attack target be a Winged Beast you control which IsBattleDestroyed() and is still IsLocation(LOCATION_MZONE) and IsPosition(POS_FACEUP) - literally upstream's annotation 'Battle destroyed registers while the mosnter is on field'. The modern script routes both cases through the single destruction event using previous-state checks (IsPreviousControler, IsPreviousLocation, IsPreviousPosition, GetPreviousRaceOnField). Chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700151,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700151.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "As long as this card remains face-up on the field, each time a Winged Beast-Type monster(s) on your side of the field is destroyed, increase the ATK of this card by 500 points.",
+    "modern_text": null,
+    "summary": "Era trigger timing, not a text erratum: the GOAT script splits the ATK gain in two. The original destruction effect gains 'not c:IsReason(REASON_BATTLE)' so it now covers only non-battle destruction, and a cloned effect on EVENT_BATTLED covers battle destruction, requiring that the attacker or the attack target be a Winged Beast you control which IsBattleDestroyed() and is still IsLocation(LOCATION_MZONE) and IsPosition(POS_FACEUP) - literally upstream's annotation 'Battle destroyed registers while the mosnter is on field'. The modern script routes both cases through the single destruction event using previous-state checks (IsPreviousControler, IsPreviousLocation, IsPreviousPosition, GetPreviousRaceOnField). Chronology unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700151,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700151.lua"
+  }
 }

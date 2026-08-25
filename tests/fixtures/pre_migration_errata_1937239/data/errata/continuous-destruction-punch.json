@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-continuous-destruction-punch",
+  "modern_card": {
+    "passcode": 68057622,
+    "name": "Continuous Destruction Punch"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "If the DEF of the attacked Defense Position monster on your side of the field is higher than the ATK of the attacking monster on your opponent's side of the field, destroy the attacking monster. Damage calculation is applied normally.",
+      "summary": "Era destruction-status timing (upstream annotation: \"The monster is considered as having the destroyed status starting when they would normally be considered as such\"): the goat script adds an EVENT_BATTLED step that marks the over-attacking monster with STATUS_BATTLE_DESTROYED at damage calculation and only performs the destruction at EVENT_DAMAGE_STEP_END, so between those two points the attacker counts as battle-destroyed for everything that reads that status; the modern script simply destroys it at the end of the Damage Step and never sets the status. The goat condition additionally skips the effect when the attacker was already battle-destroyed. Destruction reason is REASON_EFFECT in both. Chronology of the timing change is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700110,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700110.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical: goat text == pinned modern cdb text == lineage v1 (DR1-EN140, 2005-03-19). The v0 (MFC-085, 2003-10-10) -> v1 transition only reverses the clause order of the same comparison and predates the baseline version, so it is not recorded. Cross-reference: this script is why the goat D.D. Crazy Beast entry tightens its own check to Card.IsBattleDestroyed (status AND REASON_BATTLE) — with the modern D.D. Crazy Beast predicate, a monster destroyed by this card's effect would be wrongly banished."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

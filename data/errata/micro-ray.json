@@ -6,28 +6,14 @@
     "name": "Micro Ray"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "The DEF of 1 face-up monster on the field becomes 0 until the end of the End Phase.",
-      "summary": "Period damage-step legality, not a text erratum: the GOAT variant declares the activation with EFFECT_FLAG_DAMAGE_CAL where the modern script declares EFFECT_FLAG_DAMAGE_STEP, so the era card is activatable during damage calculation itself rather than only in the pre-damage-calculation part of the Damage Step. Its inline condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is logically identical to the modern aux.StatChangeDamageStepCondition (utility.lua: not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the SetReset line is only RESETS_STANDARD_PHASE_END written out, so the property flag is the sole behavioural difference. No source in the packet dates the damage-step rule change, so the chronology is left unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700028,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700028.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -37,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "The DEF of 1 face-up monster on the field becomes 0 until the end of the End Phase.",
+    "modern_text": null,
+    "summary": "Period damage-step legality, not a text erratum: the GOAT variant declares the activation with EFFECT_FLAG_DAMAGE_CAL where the modern script declares EFFECT_FLAG_DAMAGE_STEP, so the era card is activatable during damage calculation itself rather than only in the pre-damage-calculation part of the Damage Step. Its inline condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is logically identical to the modern aux.StatChangeDamageStepCondition (utility.lua: not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the SetReset line is only RESETS_STANDARD_PHASE_END written out, so the property flag is the sole behavioural difference. No source in the packet dates the damage-step rule change, so the chronology is left unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700028,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700028.lua"
+  }
 }

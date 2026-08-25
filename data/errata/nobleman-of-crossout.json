@@ -6,30 +6,46 @@
     "name": "Nobleman of Crossout"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "Destroy 1 face-down monster and remove it from play. If the monster is a Flip Effect Monster, both players check their respective Decks and remove all monsters of the same name from play. Then shuffle the Decks.",
-      "modern_text": "Target 1 face-down monster on the field; destroy that target, and if you do, banish it, then, if it was a Flip monster, each player reveals their Main Deck, then banishes all cards from it with that monster's name.",
-      "summary": "Wording modernisation only: the goat variant's Lua script is byte-identical to the modern script (comment-only diff), and every English text revision (v3 through v10) preserves the same resolution, including the mandatory both-players deck check on a Flip monster hit.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Destroy 1 face-down monster and remove it from play. If the monster is a Flip Effect Monster, both players check their respective Decks and remove all monsters of the same name from play. Then shuffle the Decks.",
+          "modern_text": "Target 1 face-down monster on the field; destroy that target, and if you do, banish it, then, if it was a Flip monster, each player reveals their Main Deck, then banishes all cards from it with that monster's name.",
+          "summary": "Wording modernisation only: the goat variant's Lua script is byte-identical to the modern script (comment-only diff), and every English text revision (v3 through v10) preserves the same resolution, including the mandatory both-players deck check on a Flip monster hit.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700116,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700116.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700116,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700116.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,126 +6,228 @@
     "name": "Necrovalley"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2010-01-09",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of TU02-EN014 (Turbo Pack: Booster Two)"
       },
-      "historical_text": "As long as this card remains on the field, negate the effects of Spell, Trap, and Monster Cards that affect a card(s) in the Graveyard, and neither player can remove cards in the Graveyards from play. Also, as long as this card remains on the field, increase the ATK and DEF of all monsters that include \"Gravekeeper's\" in their card name by 500 points.",
-      "modern_text": "Negate the effects of Spells, Traps, and Effect Monsters that target a card(s) in either player's Graveyard. Cards in either player's Graveyard cannot be removed from play. All \"Gravekeeper's\" monsters gain 500 ATK and DEF.",
-      "summary": "Scope narrowed from negating effects that 'affect a card(s) in the Graveyard' (v2, DR1-EN032, 2005-03-19 - the newest text in force at the 2005-04-01 GOAT snapshot; v3 CP03-EN020 is the same rule reworded) to negating only effects that 'target a card(s) in either player's Graveyard'. The TU02 text is the one in force at the 2010-04-24 Edison snapshot, and EdisonFormat.com records the same era behaviour, so non-targeting Graveyard effects (Rekindling, Treeborn Frog, Red-Eyes Darkness Metal Dragon) resolve under Necrovalley in that era.",
-      "resulting_implementation": {
-        "strategy": "unresolved",
-        "status": "missing",
-        "tested": false,
-        "gap": {
-          "reason": "Project Ignis ships a single historical Necrovalley (511002998) implementing the 2012 revision; the two earlier intermediate revisions this lineage records have no upstream implementation, and reproducing them needs a custom script and a reserved passcode.",
-          "upstream_checked": true,
-          "behavioural_impact": "A format whose snapshot falls in one of the two intermediate eras uses the modern implementation, whose Graveyard-effect negation is broader than the period card's.",
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "As long as this card remains on the field, negate the effects of Spell, Trap, and Monster Cards that affect a card(s) in the Graveyard, and neither player can remove cards in the Graveyards from play. Also, as long as this card remains on the field, increase the ATK and DEF of all monsters that include \"Gravekeeper's\" in their card name by 500 points.",
+          "modern_text": "Negate the effects of Spells, Traps, and Effect Monsters that target a card(s) in either player's Graveyard. Cards in either player's Graveyard cannot be removed from play. All \"Gravekeeper's\" monsters gain 500 ATK and DEF.",
+          "summary": "Scope narrowed from negating effects that 'affect a card(s) in the Graveyard' (v2, DR1-EN032, 2005-03-19 - the newest text in force at the 2005-04-01 GOAT snapshot; v3 CP03-EN020 is the same rule reworded) to negating only effects that 'target a card(s) in either player's Graveyard'. The TU02 text is the one in force at the 2010-04-24 Edison snapshot, and EdisonFormat.com records the same era behaviour, so non-targeting Graveyard effects (Rekindling, Treeborn Frog, Red-Eyes Darkness Metal Dragon) resolve under Necrovalley in that era.",
           "sources": [
-            "ignis-babelcdb",
-            "ignis-cardscripts"
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "edisonformat-functional-errata"
           ]
         }
-      },
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2010-10-15",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SDMA-EN025 (Structure Deck: Marik)"
       },
-      "historical_text": "Negate the effects of Spells, Traps, and Effect Monsters that target a card(s) in either player's Graveyard. Cards in either player's Graveyard cannot be removed from play. All \"Gravekeeper's\" monsters gain 500 ATK and DEF.",
-      "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be removed from play. Cards in either player's Graveyard cannot be affected by card effects, except for their own effects.",
-      "summary": "Broadened well past targeting: 'Cards in either player's Graveyard cannot be affected by card effects, except for their own effects' replaces the targeting-only negation, so non-targeting effects touching the Graveyard are stopped too. Upstream ships no script for this intermediate version.",
-      "resulting_implementation": {
-        "strategy": "unresolved",
-        "status": "missing",
-        "tested": false,
-        "gap": {
-          "reason": "Project Ignis ships a single historical Necrovalley (511002998) implementing the 2012 revision; the two earlier intermediate revisions this lineage records have no upstream implementation, and reproducing them needs a custom script and a reserved passcode.",
-          "upstream_checked": true,
-          "behavioural_impact": "A format whose snapshot falls in one of the two intermediate eras uses the modern implementation, whose Graveyard-effect negation is broader than the period card's.",
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Negate the effects of Spells, Traps, and Effect Monsters that target a card(s) in either player's Graveyard. Cards in either player's Graveyard cannot be removed from play. All \"Gravekeeper's\" monsters gain 500 ATK and DEF.",
+          "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be removed from play. Cards in either player's Graveyard cannot be affected by card effects, except for their own effects.",
+          "summary": "Broadened well past targeting: 'Cards in either player's Graveyard cannot be affected by card effects, except for their own effects' replaces the targeting-only negation, so non-targeting effects touching the Graveyard are stopped too. Upstream ships no script for this intermediate version.",
           "sources": [
-            "ignis-babelcdb",
-            "ignis-cardscripts"
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
           ]
         }
-      },
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
       ]
     },
-    {
-      "kind": "functional",
+    "c2": {
       "effective": {
         "date": "2012-09-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of LCYW-EN194 (Legendary Collection 3: Yugi's World Mega Pack)"
       },
-      "historical_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be removed from play. Cards in either player's Graveyard cannot be affected by card effects, except for their own effects.",
-      "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.",
-      "summary": "Re-scoped to movement: 'Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.' This is the version Project Ignis's pre-errata script implements - its negation check passes re:GetHandler() as the exception when scanning the chain's target group (the 'other than itself' exemption) and it registers no EFFECT_CANNOT_SPECIAL_SUMMON field effect.",
-      "resulting_implementation": {
-        "strategy": "reuse-upstream",
-        "historical_passcode": 511002998,
-        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-        "script": "pre-errata/c511002998.lua",
-        "status": "complete",
-        "tested": false
-      },
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be removed from play. Cards in either player's Graveyard cannot be affected by card effects, except for their own effects.",
+          "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.",
+          "summary": "Re-scoped to movement: 'Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.' This is the version Project Ignis's pre-errata script implements - its negation check passes re:GetHandler() as the exception when scanning the chain's target group (the 'other than itself' exemption) and it registers no EFFECT_CANNOT_SPECIAL_SUMMON field effect.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c3": {
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of DUSA-EN050 (Duelist Saga)"
       },
-      "historical_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.",
-      "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in the Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard to a different place. Negate any card effect that changes Types or Attributes in the Graveyard.",
-      "summary": "The 'other than itself' exemption was dropped and a Type/Attribute clause added, so a card in the Graveyard can no longer move itself out. The modern script matches: it negates without the re:GetHandler() exception, and it adds a field EFFECT_CANNOT_SPECIAL_SUMMON (s.cannotsptg) that blocks non-activated effects from Special Summoning out of the Graveyard - neither exists in the pre-errata script.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships only one historical Necrovalley (cards-unofficial 511002998), and it implements the 2012 LCYW text; no upstream script implements the DR1 (v2) or TU02 (v4) era versions, so reproducing them needs custom scripts and reserved passcodes",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison, Necrovalley must negate only effects that target a card in a Graveyard; with the shipped script (or the modern card) non-targeting Graveyard effects such as Treeborn Frog's revival, Rekindling and Red-Eyes Darkness Metal Dragon are wrongly negated, which changes the legality of whole decks in the format.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "edisonformat-functional-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in either player's Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard, other than itself, to a different place.",
+          "modern_text": "All \"Gravekeeper's\" monsters gain 500 ATK and DEF. Cards in the Graveyard cannot be banished. Negate any card effect that would move a card in the Graveyard to a different place. Negate any card effect that changes Types or Attributes in the Graveyard.",
+          "summary": "The 'other than itself' exemption was dropped and a Type/Attribute clause added, so a card in the Graveyard can no longer move itself out. The modern script matches: it negates without the re:GetHandler() exception, and it adds a field EFFECT_CANNOT_SPECIAL_SUMMON (s.cannotsptg) that blocks non-activated effects from Special Summoning out of the Graveyard - neither exists in the pre-errata script.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c2",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c3",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c2",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c3",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c2",
+        "after": "c3",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships only one historical Necrovalley (cards-unofficial 511002998), and it implements the 2012 LCYW text; no upstream script implements the DR1 (v2) or TU02 (v4) era versions, so reproducing them needs custom scripts and reserved passcodes",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata",
+          "edisonformat-functional-errata"
+        ]
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships a single historical Necrovalley (511002998) implementing the 2012 revision; the two earlier intermediate revisions this lineage records have no upstream implementation, and reproducing them needs a custom script and a reserved passcode.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
+      }
+    },
+    {
+      "events": [
+        "c0",
+        "c1"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships a single historical Necrovalley (511002998) implementing the 2012 revision; the two earlier intermediate revisions this lineage records have no upstream implementation, and reproducing them needs a custom script and a reserved passcode.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
+      }
+    },
+    {
+      "events": [
+        "c0",
+        "c1",
+        "c2"
+      ],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511002998,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511002998.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison, Necrovalley must negate only effects that target a card in a Graveyard; with the shipped script (or the modern card) non-targeting Graveyard effects such as Treeborn Frog's revival, Rekindling and Red-Eyes Darkness Metal Dragon are wrongly negated, which changes the legality of whole decks in the format."
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "A format whose snapshot falls in one of the two intermediate eras uses the modern implementation, whose Graveyard-effect negation is broader than the period card's."
+      }
+    },
+    {
+      "events": [
+        "c0",
+        "c1"
+      ],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "A format whose snapshot falls in one of the two intermediate eras uses the modern implementation, whose Graveyard-effect negation is broader than the period card's."
+      }
+    },
+    {
+      "events": [
+        "c0",
+        "c1",
+        "c2"
+      ],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

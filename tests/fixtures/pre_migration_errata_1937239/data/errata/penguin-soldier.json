@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-penguin-soldier",
+  "modern_card": {
+    "passcode": 93920745,
+    "name": "Penguin Soldier"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "FLIP: You can return up to 2 Monster Cards from the field to the owner's hand.",
+      "summary": "Period trigger semantics with no text correlate: the GOAT variant registers the FLIP effect as a forced trigger (EFFECT_TYPE_TRIGGER_F, and without EFFECT_FLAG_DELAY) whose target selection accepts 0 to 2 monsters, so flipping Penguin Soldier compels the effect to activate while the controller may return nothing (upstream annotation: 'Forced trigger, but can select 0 targets'). The modern script is an optional trigger (EFFECT_TYPE_TRIGGER_O + EFFECT_FLAG_DELAY) that needs at least 1 target to activate. Both keep EFFECT_FLAG_CARD_TARGET, so targeting itself is unchanged. Chronology is unresolved: nothing in the packet dates when the trigger stopped being mandatory or when the 0-target selection was withdrawn.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700163,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700163.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v0 (SDJ-022, Starter Deck: Joey, earliest TCG 2003-03-01) exactly. The whole English lineage v0 -> v4 (YS12-EN015, 2012-04-13) is wording only: v1/v2/v3 alternate between 'the owner's hand' and 'their owners' hands', and v4 is the PSCT rewrite 'target up to 2 monsters on the field; return those targets to the hand'. The modern script's minimum of 1 target correlates with that v4 PSCT rewrite, but nothing in the packet ties the change to that printing, and the forced-vs-optional difference has no text correlate at all ('You can' appears in both v0 and v4) - so the whole script-level package is recorded as one ruling change with unresolved chronology rather than dated to YS12. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

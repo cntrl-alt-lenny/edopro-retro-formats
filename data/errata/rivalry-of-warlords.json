@@ -6,29 +6,14 @@
     "name": "Rivalry of Warlords"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Each player sends monsters from his/her side of the field to the Graveyard so that he/she only controls 1 Type of monster. As long as this card remains on the field, each player can only have 1 Type of monster on the field.",
-      "summary": "Two period behaviours with no text correlate. (1) The GOAT variant counts only face-up monsters that actually have a Type (s.faceupfil adds c:GetRace()~=0), both when enforcing the Type lock on Summons and when sweeping the field, so a card on the field as a monster with no Type - upstream names Magical Hats - is ignored; the modern script counts every face-up monster (Card.IsFaceup). (2) The modern script additionally registers an EFFECT_CANNOT_ACTIVATE field effect that blocks activating an effect whose cost changes the activating monster's own battle position when that monster's Type is not the controller's locked Type; the GOAT variant has no such restriction. Chronology unresolved: nothing in the packet dates either difference.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700158,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700158.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Each player sends monsters from his/her side of the field to the Graveyard so that he/she only controls 1 Type of monster. As long as this card remains on the field, each player can only have 1 Type of monster on the field.",
+    "modern_text": null,
+    "summary": "Two period behaviours with no text correlate. (1) The GOAT variant counts only face-up monsters that actually have a Type (s.faceupfil adds c:GetRace()~=0), both when enforcing the Type lock on Summons and when sweeping the field, so a card on the field as a monster with no Type - upstream names Magical Hats - is ignored; the modern script counts every face-up monster (Card.IsFaceup). (2) The modern script additionally registers an EFFECT_CANNOT_ACTIVATE field effect that blocks activating an effect whose cost changes the activating monster's own battle position when that monster's Type is not the controller's locked Type; the GOAT variant has no such restriction. Chronology unresolved: nothing in the packet dates either difference.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700158,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700158.lua"
+  }
 }

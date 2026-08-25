@@ -1,17 +1,59 @@
 # v1 → v2 errata migration audit
 
-**Status: pre-migration. No canonical record has been migrated.**
+**Status: canonical migration of the 247 semantically-equivalent records is
+COMPLETE** (commit immediately after
+`1937239d9fd0ebfb47dc850f298c11c3a60679b0`, the approved final pre-migration
+gate). `data/errata/` now holds 247 `ErratumV2` records (180 flattened sugar
++ 67 full-v2) and 49 `Erratum` (v1) records. **247 migrated successfully to
+v2; 49 intentionally remain v1** because migrating them is NOT
+semantics-preserving under the legacy positional model (order-aware/
+self-contradictory records genuinely need human research or an explicit
+ordering decision first — see "What remains" below). This is not "all
+errata migrated" and never will be claimed that way while the 49 stand.
 
-Every number below is DERIVED by `tests/migration_audit.py` from the runtime
-as implemented today, and re-derived on every test run by
-`tests/test_migration_audit.py`. The machine-readable form of this report is
-`erratum-v2-migration-audit.json` beside this file.
+Everything below this line describes the PRE-MIGRATION analysis that
+proved the migration correct and safe — kept as historical evidence, not
+rewritten, because it is exactly what was reviewed and approved before the
+real migration ran. It was computed by `tests/migration_audit.py` against
+the FROZEN pre-migration 296-record all-v1 corpus
+(`tests.pre_migration_fixture.load_pre_migration_repo()`, a verified
+byte-for-byte snapshot of `data/errata/` as it stood immediately before
+migration — see that module's docstring), not against the live repository.
+The frozen JSON form of this historical report is
+`erratum-v2-migration-audit-pre-migration.json` beside this file; the LIVE,
+current audit (`erratum-v2-migration-audit.json`) now reports only the 49
+records remaining v1 (`records: 49, equivalent: 0, not_equivalent: 49`) —
+that is the correct, intentional behaviour of `audit_corpus()`, which has
+always skipped `ErratumV2` records ("already v2; nothing to migrate"), not
+a loss of the historical evidence.
 
-Re-run with:
+Re-run the LIVE (post-migration) audit with:
 
 ```bash
 python -m tests.migration_audit
 ```
+
+Re-derive the FROZEN pre-migration figures (e.g. to double-check this
+document, or before starting the next migration phase) with:
+
+```python
+from tests.pre_migration_fixture import load_pre_migration_repo
+from tests.migration_audit import audit_corpus
+result = audit_corpus(load_pre_migration_repo())
+```
+
+## What remains: the 49
+
+The next project milestone is the explicit/order-aware migration of these
+49 — beginning with the 47 already-researched records (38 bundled/
+shared-package + 9 mechanically-distinct order-unknown, per
+`docs/research/erratum-state-model-v2.md` §7's taxonomy), and separately
+resolving the 2 records genuinely blocked on a human decision
+(`erratum-insect-imitation`, `erratum-last-will`). Not started, and not
+attempted in the migration commit that closed the 247 — see
+`docs/roadmap.md`.
+
+## Pre-migration analysis (historical evidence, frozen)
 
 ## Correction: the previous pass's "296 of 296" was wrong
 
@@ -256,7 +298,14 @@ additionally proves the comparator would have caught its own prior bug
 (equal-cardinality, different-identity states compare unequal), directly on
 Giant Rat's real data.
 
-## The 11 parity-only identity records — a SEPARATE, independent BLOCKER
+## The 11 parity-only identity records — a SEPARATE, independent CLASSIFICATION
+
+*(This section's heading originally said "BLOCKER" - accurate when first
+written, before `reference_identities[]` existed. That representation gap
+closed in a later pass (`docs/research/erratum-v2-representation-gaps.md`),
+and all 11 have since migrated successfully alongside the other 236 - see
+the status line at the top of this document. Kept as "the reasoning that
+proved these needed special handling," not "these are still blocked".)*
 
 **Selection equivalence does not imply migration-data-preserving safety —
 these 11 prove it.** Each has **zero implementation-relevant changes** yet

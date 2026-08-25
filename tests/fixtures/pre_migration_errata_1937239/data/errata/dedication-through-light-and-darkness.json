@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dedication-through-light-and-darkness",
+  "modern_card": {
+    "passcode": 69542930,
+    "name": "Dedication through Light and Darkness"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "You can only activate this card by Tributing \"Dark Magician\" on your side of the field. Select 1 \"Dark Magician of Chaos\" from your hand, your Graveyard or your Deck and Special Summon it.",
+      "summary": "Period procedure, not a text erratum: when the GOAT script resolves and finds no eligible \"Dark Magician of Chaos\", it proves the whiff by revealing the hand and Deck (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK) in s.activate); the modern script simply does nothing and never reveals. No printed text carries this procedure at any point in the lineage.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can only activate this card by Tributing \"Dark Magician\" on your side of the field. Select 1 \"Dark Magician of Chaos\" from your hand, your Graveyard or your Deck and Special Summon it.",
+      "summary": "Era activation semantics, separate from the verification procedure: the GOAT script's s.target returns true unconditionally where the modern script requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,...), so in the period build the card can be activated - and the \"Dark Magician\" Tributed as cost - with no \"Dark Magician of Chaos\" anywhere to Summon. Nothing in the packet or the shared briefs dates the end of this per-card allowance, so its chronology is left unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700113,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700113.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v1 (DR2-EN096, Dark Revelation Volume 2, 2005-10-20) exactly. Trailing text lineage is cosmetic throughout: v0 (IOC-095, 2004-03-01) -> v1 swaps \"offering ... as a Tribute\" for \"Tributing\"; v1 -> v2 (LCYW-EN069, 2012-09-29) is Problem-Solving Card Text with the same resolution. v1's printing postdates the 2005-04-01 GOAT snapshot by seven months, but the only difference from the then-current v0 is that cosmetic swap, so the variant's display text is period-faithful in substance. The two ruling behaviours are recorded separately because their chronologies differ: only the verification procedure is covered by the shared chronology. Upstream ships one GOAT script encoding both, so no implementation exists for a state in which only one of them had changed; since (B) is undated the pair cannot be sequenced and no intermediate version is asserted. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

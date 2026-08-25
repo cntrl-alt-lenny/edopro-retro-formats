@@ -6,50 +6,81 @@
     "name": "Summoner of Illusions"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2008-04-02",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the new text (GLD1-EN004, Gold Series)"
       },
-      "historical_text": "FLIP: Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this card is activated.",
-      "modern_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
-      "summary": "Wording modernisation only (v0 LON-063 -> v1 GLD1-EN004): 'Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck.' becomes 'Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck.' Both keep the pre-PSCT 'Tribute X to do Y' construction that the era ruled as a cost, and both keep the end-of-turn destruction of the Summoned Fusion Monster.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "FLIP: Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this card is activated.",
+          "modern_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
+          "summary": "Wording modernisation only (v0 LON-063 -> v1 GLD1-EN004): 'Offer 1 monster on your side of the field as a Tribute (excluding this monster). Special Summon 1 Fusion Monster Card from your Fusion Deck.' becomes 'Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck.' Both keep the pre-PSCT 'Tribute X to do Y' construction that the era ruled as a cost, and both keep the end-of-turn destruction of the Summoned Fusion Monster.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2012-09-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the 'and if you do' text (LCYW-EN243, Legendary Collection 3: Yugi's World Mega Pack)"
       },
-      "historical_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
-      "modern_text": "FLIP: Tribute 1 other monster, and if you do, Special Summon 1 Fusion Monster from your Extra Deck. Destroy that Fusion Monster during the End Phase of this turn.",
-      "summary": "Functional erratum: the Tribute moved from a cost to part of the resolution. The goat script pays it as a cost - e1:SetCost(s.cost) using Duel.CheckReleaseGroupCost / Duel.SelectReleaseGroupCost / Duel.Release(g,REASON_COST) - so the FLIP effect cannot even activate unless a Tributable monster AND a Summonable Fusion Monster both exist, and the Tribute is paid even if the effect is subsequently negated. The modern script's target function returns true unconditionally and performs Duel.SelectReleaseGroup / Duel.Release(rg,REASON_EFFECT) inside the operation, matching v2's PSCT 'Tribute 1 other monster, and if you do, Special Summon ...', so the effect activates regardless and simply does nothing on resolution if the Tribute cannot be made. Upstream annotates the variant 'tributing monster is a cost'.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "FLIP: Tribute 1 other monster to Special Summon 1 Fusion Monster from your Fusion Deck. The Fusion Monster is destroyed at the end of the turn this effect is activated.",
+          "modern_text": "FLIP: Tribute 1 other monster, and if you do, Special Summon 1 Fusion Monster from your Extra Deck. Destroy that Fusion Monster during the End Phase of this turn.",
+          "summary": "Functional erratum: the Tribute moved from a cost to part of the resolution. The goat script pays it as a cost - e1:SetCost(s.cost) using Duel.CheckReleaseGroupCost / Duel.SelectReleaseGroupCost / Duel.Release(g,REASON_COST) - so the FLIP effect cannot even activate unless a Tributable monster AND a Summonable Fusion Monster both exist, and the Tribute is paid even if the effect is subsequently negated. The modern script's target function returns true unconditionally and performs Duel.SelectReleaseGroup / Duel.Release(rg,REASON_EFFECT) inside the operation, matching v2's PSCT 'Tribute 1 other monster, and if you do, Special Summon ...', so the effect activates regardless and simply does nothing on resolution if the Tribute cannot be made. Upstream annotates the variant 'tributing monster is a cost'.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700184,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700184.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700184,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700184.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

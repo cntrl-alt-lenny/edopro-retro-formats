@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-bottomless-trap-hole",
+  "modern_card": {
+    "passcode": 29401950,
+    "name": "Bottomless Trap Hole"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
+      "summary": "Era resolution scope, not a text erratum: the GOAT script snapshots the opponent's Monster Zone at activation into a kept-alive group and, at resolution, destroys-and-banishes not only the monsters from the triggering Summon but every other opponent monster that arrived after activation, is face-up with 1500+ ATK and carries STATUS_SUMMON_TURN/STATUS_FLIP_SUMMON_TURN/STATUS_SPSUMMON_TURN (upstream comment: 'It affects all the monsters summoned during the current chain'). The modern script destroys only the cards in the triggering event group. No dated source for when this narrowed was found; chronology unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2015-01-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the current text (SDHS-EN038, HERO Strike Structure Deck)"
+      },
+      "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
+      "modern_text": "When your opponent Summons a monster(s) with 1500 or more ATK: Destroy that monster(s) with 1500 or more ATK, and if you do, banish it.",
+      "summary": "Wording modernisation only across four printings (v3 CP04-EN003 condenses the three Summon types to 'Summons', v4 SDZW-EN034 '1500 or more ATK', v5 GLD2-EN045 'Activate only when...', v6 LCYW-EN181 PSCT 'Destroy that monster(s) ... and if you do, banish it instead of sending it to the Graveyard', v7 SDHS-EN038 drops the trailing clause). Destruction followed by banishment is what both scripts do throughout (Duel.Destroy(...,REASON_EFFECT,LOCATION_REMOVED)).",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700052,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700052.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat cdb text matches v2 (DB2-EN201, 2005-07-27) exactly. Read the goat script in full to confirm the mechanism rather than inferring it from the diff: the label group is filled in s.target/s.target2 with Duel.GetFieldGroup(tp,0,LOCATION_MZONE) plus the event group, and s.activate/s.activate2 add Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,<label group>,tp), i.e. the label group is used as the exception set, so only monsters that were not already there at activation are swept in. Earlier versions v0 (LOD-092, 2003-06-06) and v1 (LOD-EN092) predate the baseline text and differ only in the '(s)' plural and passive/active phrasing."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

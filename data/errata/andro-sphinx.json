@@ -6,29 +6,14 @@
     "name": "Andro Sphinx"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the ATK of the destroyed monster.",
-      "modern_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the ATK of the destroyed monster.",
-      "summary": "Era trigger timing encoded per card (upstream annotation: \"Battle destroyed registers while the mo[n]ster is on field\"): the goat script hangs the burn on EVENT_BATTLED with condition `other:IsBattleDestroyed() and other:IsPosition(POS_DEFENSE)`, so it registers off the damage-calculation event and never asks whether Andro Sphinx itself still relates to the battle; the modern script uses EVENT_BATTLE_DESTROYING and requires `c:IsRelateToBattle()` plus the victim's battle position. In play the era version still inflicts the half-base-ATK burn when Andro Sphinx leaves the field or is destroyed in the same battle, and it reads the destroyed monster's current position rather than its battle position. Chronology of the timing change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700021,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700021.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the ATK of the destroyed monster.",
+    "modern_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the ATK of the destroyed monster.",
+    "summary": "Era trigger timing encoded per card (upstream annotation: \"Battle destroyed registers while the mo[n]ster is on field\"): the goat script hangs the burn on EVENT_BATTLED with condition `other:IsBattleDestroyed() and other:IsPosition(POS_DEFENSE)`, so it registers off the damage-calculation event and never asks whether Andro Sphinx itself still relates to the battle; the modern script uses EVENT_BATTLE_DESTROYING and requires `c:IsRelateToBattle()` plus the victim's battle position. In play the era version still inflicts the half-base-ATK burn when Andro Sphinx leaves the field or is destroyed in the same battle, and it reads the destroyed monster's current position rather than its battle position. Chronology of the timing change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700021,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700021.lua"
+  }
 }

@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dark-strike-fighter",
+  "modern_card": {
+    "passcode": 32646477,
+    "name": "Dark Strike Fighter"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2014-10-23",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Collection 5D's Mega Pack (LC5D-EN234), the first printing carrying the errata'd text"
+      },
+      "historical_text": "1 Tuner + 1 or more non-Tuner monstersYou can Tribute 1 monster to inflict damage to your opponent equal to its Level x 200.",
+      "modern_text": "1 Tuner + 1 or more non-Tuner monstersDuring your Main Phase 1: You can Tribute 1 monster; inflict damage to your opponent equal to the Tributed monster's Level on the field x 200. You can only use this effect of \"Dark Strike Fighter\" once per turn.",
+      "summary": "Functional erratum: the Tribute-for-damage Ignition effect gained both a hard once per turn and a Main Phase 1 restriction. The modern script adds e1:SetCountLimit(1,id) and e1:SetCondition(Duel.IsPhase(PHASE_MAIN1)); the historical script has neither, so it can be used repeatedly and in either Main Phase. Cost and damage are unchanged in both (Release 1 monster with Level above 0 as a cost, damage equal to its Level on the field x 200).",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000229,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000229.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Escalation, not about the erratum but about the shipped script: pre-errata/c511000229.lua omits c:EnableReviveLimit(), which official/c32646477.lua calls and which Synchro.AddProcedure does not set on its own. As it stands the historical entry can be Special Summoned back from the Graveyard without ever having been properly Synchro Summoned - an era-incorrect behaviour on top of the intended difference; it needs a one-line fix or a local override before use. The variant's cdb text is a PSCT-style rendering of v0 (CRMS-EN040, 2009-03-03), the Edison-era printing, rather than v0 verbatim (ratio 0.8253). Upstream also lists 513000079 'TBR - Dark Strike Fighter (Anime)', a Token-typed placeholder with the literal text 'Replaced by OCG/Pre-Errata' and no script - excluded. Card data of 511000229 matches modern exactly (2600/1800, Level 7, DARK, Machine, Synchro)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

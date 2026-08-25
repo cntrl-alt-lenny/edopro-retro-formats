@@ -6,28 +6,14 @@
     "name": "Slate Warrior"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "FLIP: Increase the ATK and DEF of this monster by 500 points. The ATK and DEF of a monster that destroys this monster as a result of battle is decreased by 500 points.",
-      "summary": "Era trigger timing, not a text erratum: the goat script fires the ATK/DEF-drain on EVENT_BATTLED gated by s.descon (e:GetHandler():IsBattleDestroyed()), so the mandatory Trigger Effect registers at the end of damage calculation while Slate Warrior is still on the field, whereas the modern script uses EVENT_BATTLE_DESTROYED and so triggers after it has already been sent to the Graveyard. Upstream annotates the variant 'Triggers on the field'. The -500 ATK/DEF applied to the destroying monster and the FLIP +500 are otherwise identical (the remaining diff is RESET_EVENT|RESETS_STANDARD vs the '+' spelling of the same bits). No evidence in the packet dates when the timing changed, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700136,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700136.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "FLIP: Increase the ATK and DEF of this monster by 500 points. The ATK and DEF of a monster that destroys this monster as a result of battle is decreased by 500 points.",
+    "modern_text": null,
+    "summary": "Era trigger timing, not a text erratum: the goat script fires the ATK/DEF-drain on EVENT_BATTLED gated by s.descon (e:GetHandler():IsBattleDestroyed()), so the mandatory Trigger Effect registers at the end of damage calculation while Slate Warrior is still on the field, whereas the modern script uses EVENT_BATTLE_DESTROYED and so triggers after it has already been sent to the Graveyard. Upstream annotates the variant 'Triggers on the field'. The -500 ATK/DEF applied to the destroying monster and the FLIP +500 are otherwise identical (the remaining diff is RESET_EVENT|RESETS_STANDARD vs the '+' spelling of the same bits). No evidence in the packet dates when the timing changed, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700136,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700136.lua"
+  }
 }

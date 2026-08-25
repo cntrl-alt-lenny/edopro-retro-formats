@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ufo-turtle",
+  "modern_card": {
+    "passcode": 60806437,
+    "name": "UFO Turtle"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 FIRE monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no FIRE monster of 1500 or less ATK left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 FIRE monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Separate per-card ruling: the goat script's activation legality keeps only the free-zone test ('if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end'), dropping the modern additional requirement that a Special Summonable FIRE monster with 1500 or less ATK actually be in the Deck, so the trigger may be activated on a search that cannot find anything. Nothing in the packet dates when this card lost that allowance, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700098,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700098.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v1 (DB1-EN047, 2004-10-12, exact cdb match); v0 (MRL-081, 2002) precedes it and only sheds the redundant 'no Tribute is required for Level 5 or more' parenthetical and the select/shuffle procedure. Trailing v1 -> v5 (SGX1-ENH04) is cosmetic: 'sent to the Graveyard as a result of battle' -> 'destroyed by battle and sent to the GY', PSCT colon, 'face-up Attack Position' -> 'Attack Position'. The lineage is non-monotonic - v3 (SRL-081 in Legendary Collection, 2010-10-01) reprints the older v1 wording after v2 (RP01-EN069) - and the packet's Retro Pack NA date (2024-08-23) is anomalous against its EU date (2008-07-08); neither affects this record, since no change here is dated from a printing. Reveal and relaxed activation are recorded separately because only the reveal has sourced bounds; the intermediate state needs no implementation, as GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

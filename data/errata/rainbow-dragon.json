@@ -6,29 +6,39 @@
     "name": "Rainbow Dragon"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2020-07-02",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (LDS1-EN099, Legendary Duelists: Season 1)"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned, except from your hand while you have 7 \"Crystal Beast\" cards with different names on the field or in your Graveyard. This card cannot activate its effects the turn it is Special Summoned. ● Send all \"Crystal Beast\" monsters you control to the Graveyard; this card gains 1000 ATK for each card sent. You can activate this effect during either player's turn. ● You can remove from play all \"Crystal Beast\" Monster Cards in your Graveyard to return all cards on the field to their owners' Decks.",
-      "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY. This card cannot activate the following effects the turn it is Special Summoned. (Quick Effect): You can send all \"Crystal Beast\" monsters you control to the GY; this card gains 1000 ATK for each monster sent to the GY. You can banish all \"Crystal Beast\" monsters from your GY; shuffle all cards on the field into the Deck.",
-      "summary": "Wording modernisation only from v0 (TAEV-EN006) through v3 (LDS1-EN099): the summoning restriction is restated as 'Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY', 'You can activate this effect during either player's turn' becomes '(Quick Effect)', and 'remove from play ... to return all cards on the field to their owners' Decks' becomes 'banish ...; shuffle all cards on the field into the Deck'. Resolution is unchanged: the same 7-name condition, the same send-all-Crystal-Beast-monsters-you-control cost for 1000 ATK each, and the same banish-your-GY-Crystal-Beasts field shuffle. The 'face-up' qualifier v2 (LED2-EN043) briefly put on the ATK effect was removed again in v3.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned, except from your hand while you have 7 \"Crystal Beast\" cards with different names on the field or in your Graveyard. This card cannot activate its effects the turn it is Special Summoned. ● Send all \"Crystal Beast\" monsters you control to the Graveyard; this card gains 1000 ATK for each card sent. You can activate this effect during either player's turn. ● You can remove from play all \"Crystal Beast\" Monster Cards in your Graveyard to return all cards on the field to their owners' Decks.",
+          "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY. This card cannot activate the following effects the turn it is Special Summoned. (Quick Effect): You can send all \"Crystal Beast\" monsters you control to the GY; this card gains 1000 ATK for each monster sent to the GY. You can banish all \"Crystal Beast\" monsters from your GY; shuffle all cards on the field into the Deck.",
+          "summary": "Wording modernisation only from v0 (TAEV-EN006) through v3 (LDS1-EN099): the summoning restriction is restated as 'Must be Special Summoned (from your hand) by having 7 \"Crystal Beast\" cards with different names on your field and/or GY', 'You can activate this effect during either player's turn' becomes '(Quick Effect)', and 'remove from play ... to return all cards on the field to their owners' Decks' becomes 'banish ...; shuffle all cards on the field into the Deck'. Resolution is unchanged: the same 7-name condition, the same send-all-Crystal-Beast-monsters-you-control cost for 1000 ATK each, and the same banish-your-GY-Crystal-Beasts field shuffle. The 'face-up' qualifier v2 (LED2-EN043) briefly put on the ATK effect was removed again in v3.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

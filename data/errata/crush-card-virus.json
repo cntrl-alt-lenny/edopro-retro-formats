@@ -6,25 +6,29 @@
     "name": "Crush Card Virus"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2013-09-13",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the new text (DPKB-EN039, Silver Dragon Value Box)"
       },
-      "historical_text": "Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.",
-      "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
-      "summary": "PSCT rewording only (v2, DPKB-EN039): the period sentence 'Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.' becomes the semicolon form with the same cost, the same three-turn draw-checking window and the same 1500-ATK destruction.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.",
+          "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
+          "summary": "PSCT rewording only (v2, DPKB-EN039): the period sentence 'Tribute 1 DARK monster with 1000 or less ATK. Check all monsters your opponent controls, your opponent's hand, and all cards they draw (until the end of your opponent's 3rd turn after this card's activation), and destroy all monsters with 1500 or more ATK.' becomes the semicolon form with the same cost, the same three-turn draw-checking window and the same 1500-ATK destruction.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2015-03-19",
         "precision": "day",
@@ -51,28 +55,54 @@
           }
         ]
       },
-      "historical_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
-      "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; your opponent takes no damage until the end of the next turn, also, you look at your opponent's hand and all monsters they control, and if you do, destroy the monsters among them with 1500 or more ATK, then your opponent can destroy up to 3 monsters with 1500 or more ATK in their Deck.",
-      "summary": "Functional erratum: the ongoing three-turn check was replaced. The historical script registers a field effect on EVENT_DRAW with SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN,3) that confirms each drawn card and destroys drawn monsters with 1500 or more ATK for three of the opponent's turns; the modern script destroys only what is on the field and in the hand at resolution, then lets the opponent destroy up to 3 such monsters in their Deck, and adds damage immunity the old card never had (EFFECT_CHANGE_DAMAGE and EFFECT_NO_EFFECT_DAMAGE set to 0 against the opponent, reset after two phase ends).",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Tribute 1 DARK monster with 1000 or less ATK; check your opponent's hand, all monsters they control, and all cards they draw until the end of your opponent's 3rd turn after this card's activation, and destroy all monsters with 1500 or more ATK.",
+          "modern_text": "Tribute 1 DARK monster with 1000 or less ATK; your opponent takes no damage until the end of the next turn, also, you look at your opponent's hand and all monsters they control, and if you do, destroy the monsters among them with 1500 or more ATK, then your opponent can destroy up to 3 monsters with 1500 or more ATK in their Deck.",
+          "summary": "Functional erratum: the ongoing three-turn check was replaced. The historical script registers a field effect on EVENT_DRAW with SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN,3) that confirms each drawn card and destroys drawn monsters with 1500 or more ATK for three of the opponent's turns; the modern script destroys only what is on the field and in the hand at resolution, then lets the opponent destroy up to 3 such monsters in their Deck, and adds damage immunity the old card never had (EFFECT_CHANGE_DAMAGE and EFFECT_NO_EFFECT_DAMAGE set to 0 against the opponent, reset after two phase ends).",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000822,
-    "historical_variant_passcodes": [
-      511000823
-    ],
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000822.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511000822,
+        "historical_variant_passcodes": [
+          511000823
+        ],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511000822.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

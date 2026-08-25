@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-element-dragon",
+  "modern_card": {
+    "passcode": 30314994,
+    "name": "Element Dragon"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:● FIRE: Increase the ATK of this card by 500 points.● WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the WIND 'attack once again in a row' optional trigger on EVENT_BATTLED and confirms the battle afterwards (Duel.GetAttacker()==this card, the attack target is the opponent's and IsBattleDestroyed()), where the modern script fires on EVENT_BATTLE_DESTROYING via aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'; what changes is when the optional trigger's window opens and therefore whether it can miss timing. Chronology unresolved - nothing in the packet or in chronologies.json bounds it.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700053,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700053.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage is cosmetic and trailing, so it is recorded here rather than as a change entry: v0 (SOD-EN023, 2004-10-01) -> v1 (DR3-EN023, 2006-11-25) rewords 'Increase the ATK of this card by 500 points' to 'This card gains 500 ATK' and 'as a result of battle' to 'by battle'. The FIRE branch appears nowhere in the script diff - the two scripts are identical on it. The only behavioural difference in the whole diff is the event code and its replacement condition, so this is a per-card ruling rather than an engine matter; a rule-profile flag cannot redirect a card to a different event."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

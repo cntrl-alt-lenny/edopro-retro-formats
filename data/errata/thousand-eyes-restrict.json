@@ -6,46 +6,70 @@
     "name": "Thousand-Eyes Restrict"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"As long as this card remains face-up on the field, other monsters cannot change their battle positions or attack. Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead.",
-      "summary": "Era stat-copy semantics for Trap Monsters: the GOAT script's ATK/DEF value functions drop the modern guard `g:GetFirst():GetOriginalType()&TYPE_MONSTER==0`, so an equipped card whose original type is not Monster (a Trap Monster such as Embodiment of Apophis) still hands Thousand-Eyes Restrict its printed ATK/DEF, whereas the modern script returns 0 in that case. Upstream states this directly in its annotation ('Gains stats of trap monsters as well'). No English printing distinguishes Trap Monsters, so this is a period interpretation rather than an erratum, and its chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"As long as this card remains face-up on the field, other monsters cannot change their battle positions or attack. Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead.",
+          "modern_text": null,
+          "summary": "Era stat-copy semantics for Trap Monsters: the GOAT script's ATK/DEF value functions drop the modern guard `g:GetFirst():GetOriginalType()&TYPE_MONSTER==0`, so an equipped card whose original type is not Monster (a Trap Monster such as Embodiment of Apophis) still hands Thousand-Eyes Restrict its printed ATK/DEF, whereas the modern script returns 0 in that case. Upstream states this directly in its annotation ('Gains stats of trap monsters as well'). No English printing distinguishes Trap Monsters, so this is a period interpretation rather than an erratum, and its chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2018-02-22",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of LED2-EN005 (Legendary Duelists: Ancient Millennium), the first printing carrying the final wording"
       },
-      "historical_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"As long as this card remains face-up on the field, other monsters cannot change their battle positions or attack. Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead.",
-      "modern_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"Other monsters on the field cannot change their battle positions or attack. Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card's ATK/DEF become equal to that equipped monster's. If this card would be destroyed by battle, destroy that equipped monster instead.",
-      "summary": "Wording modernisation only across v4 (RP02-EN021, 2009) condensing the equip clause, v5 (Legendary Collection) 'declare an attack', v6 (DPRP-EN046) PSCT colons plus 'target 1 monster ... equip that target', and v7 (LED2-EN005) '(max. 1)' and 'ATK/DEF'. The script diff carries no EFFECT_FLAG_CARD_TARGET difference, so the PSCT 'target' wording did not change targeting, and the once-per-turn equip and the battle-destruction substitution resolve identically throughout.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"As long as this card remains face-up on the field, other monsters cannot change their battle positions or attack. Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead.",
+          "modern_text": "\"Relinquished\" + \"Thousand-Eyes Idol\"Other monsters on the field cannot change their battle positions or attack. Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card's ATK/DEF become equal to that equipped monster's. If this card would be destroyed by battle, destroy that equipped monster instead.",
+          "summary": "Wording modernisation only across v4 (RP02-EN021, 2009) condensing the equip clause, v5 (Legendary Collection) 'declare an attack', v6 (DPRP-EN046) PSCT colons plus 'target 1 monster ... equip that target', and v7 (LED2-EN005) '(max. 1)' and 'ATK/DEF'. The script diff carries no EFFECT_FLAG_CARD_TARGET difference, so the PSCT 'target' wording did not change targeting, and the once-per-turn equip and the battle-destruction substitution resolve identically throughout.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700102,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700102.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700102,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700102.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

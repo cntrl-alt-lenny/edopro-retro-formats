@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-kazejin",
+  "modern_card": {
+    "passcode": 62340868,
+    "name": "Kazejin"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can only activate this card's effect during your opponent's damage calculation. Make the ATK of a monster attacking this card 0 during damage calculation. This effect can only be used once as long as this card remains face-up on the field.",
+      "modern_text": "Once while face-up on the field, during damage calculation in your opponent's turn, if this card is being attacked (Quick Effect): You can target the attacking monster; make that target's ATK 0 during damage calculation only.",
+      "summary": "Wording modernisation only: the goat variant's Lua differs from the modern script solely in two equivalent spellings - Duel.GetTurnPlayer()~=tp for Duel.IsTurnPlayer(1-tp) in the condition, and RESET_PHASE+PHASE_DAMAGE_CAL for RESET_PHASE|PHASE_DAMAGE_CAL on the ATK-setting effect - so the two are behaviourally identical. Every English revision from v1 (DB1-EN158) through v5 (SGX2-END08) preserves the same resolution: once while this card stays face-up, during damage calculation in the opponent's turn while this card is being attacked, the attacker's ATK becomes 0 for that damage calculation only. Both scripts select the attacker through the same target function, so v4's added 'You can target the attacking monster' is not a targeting change.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700101,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700101.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream ships the variant for period display text and gives it no behavioural annotation. The once-while-face-up limit is EFFECT_FLAG_NO_TURN_RESET with count limit 1 in both scripts. v0 (MRD-026, 2002-06-26) predates the version the baseline implements (v1, DB1-EN158, 2004-10-12) and is not recorded. The lineage is non-monotonic: v3 (MRD-026 reprinted in Legendary Collection, tcg-eu 2010-10-01) returns to near-original wording after v2 (RP01-EN031, tcg-eu 2008-07-08); v4 (LCJW-EN225, 2013-10-11) is the PSCT rewrite and v5 (SGX2-END08, 2022-10-06) fronts 'Once while face-up on the field' and is the version pinned in the modern cards.cdb. The packet's second upstream code 511002508 is the ANIME Kazejin - hand-to-Spell/Trap-Zone placement, an attack negation, and an ATK-sharing effect naming 'Sanga of the Thunder' and 'Suijin' - a different card, not a historical TCG version, and not a candidate baseline."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

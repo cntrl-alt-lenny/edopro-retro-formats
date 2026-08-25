@@ -6,29 +6,14 @@
     "name": "Deal of Phantom"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
-      "modern_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
-      "summary": "Era damage-step legality with no text change, the same pattern as Castle Walls: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the era version can be activated during damage calculation while the modern version is confined to the Damage Step before damage calculation. The condition attached is the same test in both (the goat's inline `Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()` is the body of aux.StatChangeDamageStepCondition) and the reset constant is the same bits expanded, so the activation window is the whole difference. Chronology of the window change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700112,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700112.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
+    "modern_text": "Select 1 monster face-up on the field. Increase the selected monster's ATK by 100 points for each monster in your Graveyard during the turn this card is activated. The number of monster(s) are applied when this card is activated.",
+    "summary": "Era damage-step legality with no text change, the same pattern as Castle Walls: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the era version can be activated during damage calculation while the modern version is confined to the Damage Step before damage calculation. The condition attached is the same test in both (the goat's inline `Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()` is the body of aux.StatChangeDamageStepCondition) and the reset constant is the same bits expanded, so the activation window is the whole difference. Chronology of the window change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700112,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700112.lua"
+  }
 }

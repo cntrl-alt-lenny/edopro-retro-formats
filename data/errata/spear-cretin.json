@@ -6,28 +6,14 @@
     "name": "Spear Cretin"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "FLIP: After this card is flipped, when it is sent to the Graveyard, both you and your opponent select 1 monster from your respective Graveyards and Special Summon it on the field in face-up Attack Position or face-down Defense Position (no Tribute is required for monsters of Level 5 or more).",
-      "summary": "Era ruling package carried entirely by the script, with no text difference: the goat variant makes the revival an OPTIONAL Trigger Effect that activates from the Graveyard (EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O with SetRange(LOCATION_GRAVE) and EFFECT_FLAG_DAMAGE_STEP added, so it is usable at the damage-step timing where a battle-destroyed Flip monster reaches the GY), whereas the modern script is a mandatory EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F that cannot be declined. The goat variant also refuses every monster sent to the Graveyard in the same event - its SelectTarget calls exclude the whole group eg, and its chk==0 additionally requires eg:IsContains(e:GetHandler()) - while the modern script excludes only Spear Cretin itself, so monsters destroyed simultaneously with Spear Cretin are legal revival choices in the modern game and illegal in the era. Upstream's own annotations state both points: 'Optional' and 'You cannot choose monsters destroyed at the same time as cretin'. Nothing in the packet dates either shift, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700095,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700095.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "FLIP: After this card is flipped, when it is sent to the Graveyard, both you and your opponent select 1 monster from your respective Graveyards and Special Summon it on the field in face-up Attack Position or face-down Defense Position (no Tribute is required for monsters of Level 5 or more).",
+    "modern_text": null,
+    "summary": "Era ruling package carried entirely by the script, with no text difference: the goat variant makes the revival an OPTIONAL Trigger Effect that activates from the Graveyard (EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O with SetRange(LOCATION_GRAVE) and EFFECT_FLAG_DAMAGE_STEP added, so it is usable at the damage-step timing where a battle-destroyed Flip monster reaches the GY), whereas the modern script is a mandatory EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F that cannot be declined. The goat variant also refuses every monster sent to the Graveyard in the same event - its SelectTarget calls exclude the whole group eg, and its chk==0 additionally requires eg:IsContains(e:GetHandler()) - while the modern script excludes only Spear Cretin itself, so monsters destroyed simultaneously with Spear Cretin are legal revival choices in the modern game and illegal in the era. Upstream's own annotations state both points: 'Optional' and 'You cannot choose monsters destroyed at the same time as cretin'. Nothing in the packet dates either shift, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700095,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700095.lua"
+  }
 }

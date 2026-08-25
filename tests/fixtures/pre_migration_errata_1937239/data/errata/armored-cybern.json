@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-armored-cybern",
+  "modern_card": {
+    "passcode": 67159705,
+    "name": "Armored Cybern"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-10-05",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Dragon Decks (LEDD-ENB10), the first printing carrying the errata'd text"
+      },
+      "historical_text": "Once per turn, you can either: Target 1 \"Cyber Dragon\" you control, or 1 Fusion Monster you control that lists \"Cyber Dragon\" as a Fusion Material Monster; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. Once per turn, while equipped to a monster by this effect: You can target 1 face-up monster on the field; the equipped monster loses exactly 1000 ATK, and if it does, destroy that target. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
+      "modern_text": "Once per turn, you can either: Target 1 \"Cyber Dragon\" you control, or 1 Fusion Monster you control that lists \"Cyber Dragon\" as Fusion Material; equip this card to that target, OR: Unequip this card and Special Summon it. Once per turn, while equipped to a monster by this effect: You can target 1 face-up monster on the field; the equipped monster loses exactly 1000 ATK (even if this card leaves the field), and if it does, destroy that target. If the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+      "summary": "Functional erratum with two behavioural parts. (a) The Union Condition was removed: the historical script calls aux.AddUnionProcedure(c,s.filter,true), whose oldequip flag both limits a monster to one equipped Union monster at a time and, through Auxiliary.UnionReplace(true), restricts the destruction substitution to REASON_BATTLE only; the modern call omits the flag, so any monster may carry several Unions and the substitution now covers effect destruction too ('destroyed by battle or card effect'). (b) The 1000 ATK loss became permanent: the historical script registers an EFFECT_UPDATE_ATTACK equip effect with RESET_EVENT+RESETS_STANDARD, so the ATK returns when Armored Cybern leaves the field, while the modern script applies ec:UpdateAttack(-1000,nil,c) and prints '(even if this card leaves the field)'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003055,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003055.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v2 (SDCR-EN011, 2014-02-06), which the baseline implements (ratio 0.9929). Earlier transitions predate it and are cosmetic for our purposes: v0 (PTDN-EN009, 2008-02-13) -> v1 (SDMM-EN018, 2010-02-19) only adds 'during your Main Phase' to an effect the era already treated as an Ignition effect, and v1 -> v2 is the PSCT formalisation of the same equip/unequip and ATK-loss-then-destroy sequence; the Edison-era printing is v1, in force 64 days before the 2010-04-24 snapshot, and behaves as the baseline implements. Upstream also ships 511002821 'Armored Cybern (Anime)', a different anime card (equips to any 'Cyber' Machine-Type monster and destroys 1 card the opponent controls, with no ATK-loss prerequisite structure) - not a historical version of the TCG card, excluded rather than escalated. EdisonFormat attributes the general Union-Condition removal to the 2016 Structure Deck: Seto Kaiba wave; for this card the lineage dates the removal to its own LEDD-ENB10 printing (2017-10-05), and per the shared brief set-release evidence is preferred over the site's claim. Card data is identical between 511003055 and 67159705 (0/2000, Level 4, LIGHT, Machine, Union)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

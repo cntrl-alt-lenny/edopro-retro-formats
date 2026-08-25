@@ -6,29 +6,14 @@
     "name": "Formation Union"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select and activate 1 of the following effects:● Equip 1 Union Monster on your side of the field to an appropriate monster on your side of the field as an Equip Spell Card.● Unequip 1 of your equipped Union Monsters and Special Summon it to your side of the field in face-up Attack Position.",
-      "summary": "Three script-only differences, none of them visible in any printed text. (1) The unequip-and-Special-Summon option in the GOAT script also accepts a Union monster carrying flag effect 11743119 ('Union Rider') in addition to EFFECT_UNION_STATUS - upstream's annotation 'Can summon an union equipped by Union Rider as well' - where the modern filter requires EFFECT_UNION_STATUS. (2) On the equip option, when the second target is no longer valid at resolution the modern script sends the Union monster to the Graveyard by rule (Duel.SendtoGrave(ec,REASON_RULE,PLAYER_NONE,PLAYER_NONE)); the GOAT script does nothing and the Union monster stays on the field. (3) The equip legality check is ec:CheckUnionTarget(c) in the modern script versus ec:CheckEquipTarget(c) in the GOAT one, with aux.CheckUnionEquip applied in both. Targeting itself is unchanged - both activation effects declare EFFECT_FLAG_CARD_TARGET. Chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700048,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700048.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select and activate 1 of the following effects:● Equip 1 Union Monster on your side of the field to an appropriate monster on your side of the field as an Equip Spell Card.● Unequip 1 of your equipped Union Monsters and Special Summon it to your side of the field in face-up Attack Position.",
+    "modern_text": null,
+    "summary": "Three script-only differences, none of them visible in any printed text. (1) The unequip-and-Special-Summon option in the GOAT script also accepts a Union monster carrying flag effect 11743119 ('Union Rider') in addition to EFFECT_UNION_STATUS - upstream's annotation 'Can summon an union equipped by Union Rider as well' - where the modern filter requires EFFECT_UNION_STATUS. (2) On the equip option, when the second target is no longer valid at resolution the modern script sends the Union monster to the Graveyard by rule (Duel.SendtoGrave(ec,REASON_RULE,PLAYER_NONE,PLAYER_NONE)); the GOAT script does nothing and the Union monster stays on the field. (3) The equip legality check is ec:CheckUnionTarget(c) in the modern script versus ec:CheckEquipTarget(c) in the GOAT one, with aux.CheckUnionEquip applied in both. Targeting itself is unchanged - both activation effects declare EFFECT_FLAG_CARD_TARGET. Chronology unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700048,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700048.lua"
+  }
 }

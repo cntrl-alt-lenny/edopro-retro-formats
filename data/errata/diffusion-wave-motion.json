@@ -6,46 +6,76 @@
     "name": "Diffusion Wave-Motion"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2015-11-12",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Yugi's Legendary Decks (YGLD-ENB22), the last dated printing before the current text"
       },
-      "historical_text": "Pay 1000 Life Points. Select 1 Level 7 or higher Spellcaster-Type monster you control. During this turn, only the selected monster can attack, and it must attack all monsters your opponent controls once each. The effects of monsters destroyed by battle with it are not activated.",
-      "modern_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
-      "summary": "Problem-Solving Card Text modernisation collapsing v3 (LCYW-EN066), v4 (DPYG-EN023 reprint) and v5 (YGLD-ENB22): 'Select' becomes 'target', 'Life Points' becomes 'LP', and 'The effects of monsters destroyed by battle with it are not activated' becomes 'The effects of Effect Monsters destroyed by these attacks do not activate and are negated'. Resolution is unchanged - the same single Level 7 or higher Spellcaster is compelled to attack every opposing monster once each while your other monsters cannot attack.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Pay 1000 Life Points. Select 1 Level 7 or higher Spellcaster-Type monster you control. During this turn, only the selected monster can attack, and it must attack all monsters your opponent controls once each. The effects of monsters destroyed by battle with it are not activated.",
+          "modern_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
+          "summary": "Problem-Solving Card Text modernisation collapsing v3 (LCYW-EN066), v4 (DPYG-EN023 reprint) and v5 (YGLD-ENB22): 'Select' becomes 'target', 'Life Points' becomes 'LP', and 'The effects of monsters destroyed by battle with it are not activated' becomes 'The effects of Effect Monsters destroyed by these attacks do not activate and are negated'. Resolution is unchanged - the same single Level 7 or higher Spellcaster is compelled to attack every opposing monster once each while your other monsters cannot attack.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2019-03-28",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Speed Duel: Arena of Lost Souls (SBLS-EN008), the first printing carrying the added activation requirement"
       },
-      "historical_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
-      "modern_text": "(This card is not treated as a \"Fusion\" card.)If your opponent controls a monster: Pay 1000 LP, then target 1 Level 7 or higher Spellcaster monster you control; this turn, it must attack all monsters your opponent controls once each, also other monsters you control cannot attack. The effects of monsters destroyed by these attacks cannot activate and are negated.",
-      "summary": "The current text gained an activation requirement the era card did not have: 'If your opponent controls a monster:'. Under the Edison-era printing (v2, DPYG-EN023) and every printing through v6 the card could be activated with the opponent controlling no monsters, paying 1000 LP and locking your other monsters out of attacking. The undated lineage entry v6 adds only the '(This card is not treated as a \"Fusion\" card.)' parenthetical and is folded into this transition.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Pay 1000 LP, then target 1 Level 7 or higher Spellcaster-Type monster you control; this turn, only that monster can attack, and it must attack all monsters your opponent controls, once each. The effects of Effect Monsters destroyed by these attacks do not activate and are negated.",
+          "modern_text": "(This card is not treated as a \"Fusion\" card.)If your opponent controls a monster: Pay 1000 LP, then target 1 Level 7 or higher Spellcaster monster you control; this turn, it must attack all monsters your opponent controls once each, also other monsters you control cannot attack. The effects of monsters destroyed by these attacks cannot activate and are negated.",
+          "summary": "The current text gained an activation requirement the era card did not have: 'If your opponent controls a monster:'. Under the Edison-era printing (v2, DPYG-EN023) and every printing through v6 the card could be activated with the opponent controlling no monsters, paying 1000 LP and locking your other monsters out of attacking. The undated lineage entry v6 adds only the '(This card is not treated as a \"Fusion\" card.)' parenthetical and is folded into this transition.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "none-needed"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

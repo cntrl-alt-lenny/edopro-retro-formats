@@ -6,29 +6,39 @@
     "name": "Fairy of the Spring"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2013-12-13",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the Duelist League 17 participation cards (DL17-EN016), the printing carrying the current text"
       },
-      "historical_text": "Add 1 Equip Spell Card from your Graveyard to your hand. You cannot activate that Equip Spell Card this turn.",
-      "modern_text": "Target 1 Equip Spell Card in your Graveyard; add that target to your hand. That Equip Spell Card cannot be activated this turn.",
-      "summary": "Problem-Solving Card Text rewording only. v0 (DCR-040) 'Select 1 Equip Spell Card from your Graveyard and add it to your hand' and v2 'Target 1 Equip Spell Card in your Graveyard; add that target to your hand' are the standard select-to-target modernisation with the same targeting - official/c20188127.lua carries EFFECT_FLAG_CARD_TARGET - and 'You cannot activate that Equip Spell Card this turn' becoming 'That Equip Spell Card cannot be activated this turn' restates one restriction, implemented as an EFFECT_CANNOT_TRIGGER registered on the retrieved card.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Add 1 Equip Spell Card from your Graveyard to your hand. You cannot activate that Equip Spell Card this turn.",
+          "modern_text": "Target 1 Equip Spell Card in your Graveyard; add that target to your hand. That Equip Spell Card cannot be activated this turn.",
+          "summary": "Problem-Solving Card Text rewording only. v0 (DCR-040) 'Select 1 Equip Spell Card from your Graveyard and add it to your hand' and v2 'Target 1 Equip Spell Card in your Graveyard; add that target to your hand' are the standard select-to-target modernisation with the same targeting - official/c20188127.lua carries EFFECT_FLAG_CARD_TARGET - and 'You cannot activate that Equip Spell Card this turn' becoming 'That Equip Spell Card cannot be activated this turn' restates one restriction, implemented as an EFFECT_CANNOT_TRIGGER registered on the retrieved card.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

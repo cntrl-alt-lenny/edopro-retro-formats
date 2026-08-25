@@ -6,35 +6,14 @@
     "name": "Y-Dragon Head"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2016-10-20",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of SDKS-EN006 (Structure Deck: Seto Kaiba), the first printing carrying the errata'd Union text"
-      },
-      "historical_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. While equipped by this effect, the equipped monster gains 400 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
-      "modern_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 400 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
-      "summary": "Functional erratum, the 2016 Union rewrite: the pre-errata script calls `aux.AddUnionProcedure(...,true)`, whose oldequip/oldprotect path (read in proc_union.lua) makes the equip target filter require the chosen monster to carry no Union monster at all (UnionFilter ct1==0, the printed 'A monster can only be equipped with 1 Union monster at a time' Condition), restricts the destruction replacement to REASON_BATTLE only, and forces the self-unequip Special Summon into face-up Attack Position; the modern script drops all three, counting only same-name Unions, substituting against battle or card effect destruction, and allowing any face-up position. The pre-errata script additionally gates the 400 ATK/DEF boost on `aux.IsUnionState`, matching the printed 'While equipped by this effect', so historically a Y-Dragon Head equipped by some other card's effect grants nothing, whereas the errata'd 'A monster equipped with this card gains 400 ATK/DEF' applies however it was equipped.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002852,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002852.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "ignis-cardscripts",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2016-10-20",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of SDKS-EN006 (Structure Deck: Seto Kaiba), the first printing carrying the errata'd Union text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. While equipped by this effect, the equipped monster gains 400 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
+    "modern_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 400 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+    "summary": "Functional erratum, the 2016 Union rewrite: the pre-errata script calls `aux.AddUnionProcedure(...,true)`, whose oldequip/oldprotect path (read in proc_union.lua) makes the equip target filter require the chosen monster to carry no Union monster at all (UnionFilter ct1==0, the printed 'A monster can only be equipped with 1 Union monster at a time' Condition), restricts the destruction replacement to REASON_BATTLE only, and forces the self-unequip Special Summon into face-up Attack Position; the modern script drops all three, counting only same-name Unions, substituting against battle or card effect destruction, and allowing any face-up position. The pre-errata script additionally gates the 400 ATK/DEF boost on `aux.IsUnionState`, matching the printed 'While equipped by this effect', so historically a Y-Dragon Head equipped by some other card's effect grants nothing, whereas the errata'd 'A monster equipped with this card gains 400 ATK/DEF' applies however it was equipped.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002852,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002852.lua"
+  }
 }

@@ -6,28 +6,14 @@
     "name": "Howling Insect"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "When this card is destroyed and sent to the Graveyard as a result of battle, you can Special Summon 1 Insect-Type monster with an ATK of 1500 or less to your side of the field from your Deck. Then shuffle your Deck.",
-      "summary": "Period ruling package, not a text erratum. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...)` - an Insect with 1500 or less ATK actually in the Deck - while the goat target requires only a free Monster Zone, so the battle-destruction trigger can be used on a whiff. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`, revealing the Deck to prove no eligible Insect remains. The verification half falls under the shared search-verification chronology; the relaxed activation condition is undated for this card, so the change is left chronologically unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700162,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700162.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "When this card is destroyed and sent to the Graveyard as a result of battle, you can Special Summon 1 Insect-Type monster with an ATK of 1500 or less to your side of the field from your Deck. Then shuffle your Deck.",
+    "modern_text": null,
+    "summary": "Period ruling package, not a text erratum. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...)` - an Insect with 1500 or less ATK actually in the Deck - while the goat target requires only a free Monster Zone, so the battle-destruction trigger can be used on a whiff. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`, revealing the Deck to prove no eligible Insect remains. The verification half falls under the shared search-verification chronology; the relaxed activation condition is undated for this card, so the change is left chronologically unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700162,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700162.lua"
+  }
 }

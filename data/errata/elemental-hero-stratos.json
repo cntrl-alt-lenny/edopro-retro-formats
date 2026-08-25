@@ -6,30 +6,40 @@
     "name": "Elemental HERO Stratos"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2018-12-06",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of OTS Tournament Pack 9 (OP09-EN001), the printing the pinned cards.cdb text matches"
       },
-      "historical_text": "When this card is Normal or Special Summoned, you can select and activate 1 of these effects:● Destroy Spell or Trap Cards on the field up to the number of \"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\" monsters you control (not counting this card).● Select and add 1 \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monster from your Deck to your hand.",
-      "modern_text": "When this card is Normal or Special Summoned: You can activate 1 of these effects.● Destroy Spells/Traps on the field, up to the number of \"HERO\" monsters you control, except this card.● Add 1 \"HERO\" monster from your Deck to your hand.",
-      "summary": "Wording modernisation only. The Edison-era text (v1, PT03-EN002) counts and searches '\"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\"' monsters; from v3 (LCGX-EN024) the three are folded into the 'HERO' umbrella, which cannot change either option's reach in period play because every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. '(not counting this card)' to 'except this card', 'Select and add 1' to 'Add 1', and the v3/v4/v5 wobble over a redundant 'You can destroy' all preserve the same resolution, which official/c40044918.lua implements as one optional Normal-or-Special-Summon trigger offering the two options.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is Normal or Special Summoned, you can select and activate 1 of these effects:● Destroy Spell or Trap Cards on the field up to the number of \"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\" monsters you control (not counting this card).● Select and add 1 \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monster from your Deck to your hand.",
+          "modern_text": "When this card is Normal or Special Summoned: You can activate 1 of these effects.● Destroy Spells/Traps on the field, up to the number of \"HERO\" monsters you control, except this card.● Add 1 \"HERO\" monster from your Deck to your hand.",
+          "summary": "Wording modernisation only. The Edison-era text (v1, PT03-EN002) counts and searches '\"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\"' monsters; from v3 (LCGX-EN024) the three are folded into the 'HERO' umbrella, which cannot change either option's reach in period play because every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. '(not counting this card)' to 'except this card', 'Select and add 1' to 'Add 1', and the v3/v4/v5 wobble over a redundant 'You can destroy' all preserve the same resolution, which official/c40044918.lua implements as one optional Normal-or-Special-Summon trigger offering the two options.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

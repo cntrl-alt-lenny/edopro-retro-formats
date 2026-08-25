@@ -6,29 +6,14 @@
     "name": "Falling Down"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Destroy this card if there is no Archfiend card on your side of the field. Take control of 1 of your opponent's monsters that is equipped with this card. You take 800 points of damage during each of your opponent's Standby Phases.",
-      "summary": "Two script-only differences, neither visible in any printed text. (1) The Standby Phase damage is conditional in the era version: the GOAT damcon adds 'not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)', so no 800 damage occurs while the equipped monster is immune to Falling Down's effect, where the modern damcon only checks the turn player - upstream annotates this 'If monster is immuned, no damage occurs'. (2) The equip/steal legality filter differs: the modern script passes aux.CheckStealEquip to aux.AddEquipProcedure, which requires the opponent's monster to be face-up and to have changeable control and, for Trap Monsters, Spell & Trap Zone room; the GOAT script passes Card.IsControlerCanBeChanged alone, so it will equip to and take control of a face-down opponent monster. Chronology of both is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700056,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700056.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Destroy this card if there is no Archfiend card on your side of the field. Take control of 1 of your opponent's monsters that is equipped with this card. You take 800 points of damage during each of your opponent's Standby Phases.",
+    "modern_text": null,
+    "summary": "Two script-only differences, neither visible in any printed text. (1) The Standby Phase damage is conditional in the era version: the GOAT damcon adds 'not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)', so no 800 damage occurs while the equipped monster is immune to Falling Down's effect, where the modern damcon only checks the turn player - upstream annotates this 'If monster is immuned, no damage occurs'. (2) The equip/steal legality filter differs: the modern script passes aux.CheckStealEquip to aux.AddEquipProcedure, which requires the opponent's monster to be face-up and to have changeable control and, for Trap Monsters, Spell & Trap Zone room; the GOAT script passes Card.IsControlerCanBeChanged alone, so it will equip to and take control of a face-down opponent monster. Chronology of both is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700056,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700056.lua"
+  }
 }

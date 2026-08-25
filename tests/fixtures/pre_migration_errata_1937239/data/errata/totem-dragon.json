@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-totem-dragon",
+  "modern_card": {
+    "passcode": 564541,
+    "name": "Totem Dragon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2023-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SGX3-ENB12, Speed Duel GX: Duelists of Shadows)"
+      },
+      "historical_text": "This card can be treated as 2 Tributes for the Tribute Summon of a Dragon-Type monster. If this card is in your Graveyard during your Standby Phase and you control no monsters, you can Special Summon this card in Attack Position. You cannot activate this effect if there are any monsters in your Graveyard that are not Dragon-Type. If this card is Special Summoned with this effect, remove it from play when it is removed from the field.",
+      "modern_text": "Can be treated as 2 Tributes for the Tribute Summon of a Dragon monster. Once per turn, during your Standby Phase, if this card is in your GY and all monsters in your GY are Dragon: You can Special Summon this card in Attack Position, but banish it when it leaves the field. You must control no monsters to activate and to resolve this effect.",
+      "summary": "Functional erratum: the modern text adds 'Once per turn' to the Standby Phase self-revival, a use limit the CRMS-EN085 text did not carry. With no limit the period card could activate the revival again in the same Standby Phase whenever the first activation was negated and the card was still in the Graveyard with no monsters on your side; the modern card gets one activation per turn regardless. The rewritten 'You must control no monsters to activate and to resolve this effect' is PSCT formalisation of the same no-monsters requirement, and the all-Dragon Graveyard requirement stays an activation-only check in both texts ('You cannot activate this effect if there are any monsters in your Graveyard that are not Dragon-Type' -> 'all monsters in your GY are Dragon:').",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison the EDOPro card refuses a second Standby Phase activation after the first one is negated, denying a revival the unlimited period text allowed.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Only two English versions exist: v0 (CRMS-EN085, 2009-03-03), the text in force at the Edison snapshot, and v1 (SGX3-ENB12, 2023-03-30). The pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty. The banish clause is unchanged in substance ('If this card is Special Summoned with this effect, remove it from play when it is removed from the field' -> 'but banish it when it leaves the field'), and the Dragon-double-Tribute clause is untouched. Totem Dragon itself is NOT listed on EdisonFormat.com's functional errata page, so the once-per-turn verdict rests on the printed lineage; the site's Treeborn Frog and Destiny End Dragoon entries document the same era pattern for Standby Phase self-revival triggers (no once-per-turn, so a negated activation can be repeated), but they are cited here only as a family analogy and not as evidence for this card - hence edisonformat-functional-errata is not listed as a source on the change."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

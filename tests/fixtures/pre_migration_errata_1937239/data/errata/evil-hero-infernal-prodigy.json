@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-evil-hero-infernal-prodigy",
+  "modern_card": {
+    "passcode": 50304345,
+    "name": "Evil HERO Infernal Prodigy"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2019-09-26",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Duelists: Immortal Destiny (LED5-EN019), the first printing carrying the once-per-turn limit"
+      },
+      "historical_text": "If you control no monsters, you can Special Summon this card from your hand in face-up Attack Position. If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase.",
+      "modern_text": "If you control no monsters, you can Special Summon this card (from your hand) in Attack Position. Once per turn, during the End Phase, if this card was Tributed this turn to Tribute Summon a \"HERO\" monster: Draw 1 card.",
+      "summary": "'Once per turn,' was added to the End Phase draw in 2019; the era text - 'If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase' - carries no activation limit. The other differences are inert: v1's rewrite to 'a \"HERO\" monster' cannot change which Tribute Summons qualify in period play (every HERO-setcode monster in the Edison-legal pool is an Elemental, Destiny or Evil HERO), and reframing the delayed draw as 'During the End Phase, if this card was Tributed this turn ...: Draw 1 card' preserves the resolution, as does 'in face-up Attack Position' becoming 'in Attack Position'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "NO HISTORICAL IMPLEMENTATION IS RECORDED DESPITE THE FUNCTIONAL VERDICT, and this is the weakest call in the batch - flagged for escalation. The added limit is a soft, per-card once-per-turn on an effect a single copy can normally satisfy at most once per turn; the only line where it could bite is the same copy being Tributed twice in one turn (Tribute Summon a HERO, revive Prodigy with Monster Reborn, then take a second Tribute Summon from Ultimate Offering or Double Summon). In that line upstream's official/c50304345.lua registers the draw effect onto the card while it sits in the Graveyard with SetReset(RESETS_STANDARD_PHASE_END), so the first registration is wiped the moment the card leaves the Graveyard and the End Phase draw count is 1 either way; whether the pre-2019 text would have produced two draws there is not settled by any evidence in the packet. If a reviewer decides it would, this becomes an implementation-gap card. Era text at the Edison snapshot is v0 (DP06-EN008, 2008-01-26). HERO-umbrella inertness verified against data/pools/edison-2010.json cross-referenced with BabelCDB setcodes."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

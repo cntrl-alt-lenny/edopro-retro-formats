@@ -6,44 +6,68 @@
     "name": "Blast with Chain"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "After activation, this card is treated as an Equip Card that increases the ATK of the equipped monster by 500 points. Equip a monster on your side of the field with this card. If this card is destroyed by the effect of another card while it is an Equip Card, select 1 card on the field and destroy it.",
-      "summary": "Era damage-step legality, not a text erratum: the GOAT script carries EFFECT_FLAG_DAMAGE_CAL on the activation, so this Trap can be activated inside the damage-calculation substep; the modern script carries only EFFECT_FLAG_DAMAGE_STEP, so the engine refuses activation there. The guard functions are equivalent - goat's s.condition ('Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()') is the same predicate as the modern aux.StatChangeDamageStepCondition (utility.lua:1412) - so the property flag is the whole difference. No dated source for when the TCG window changed was found; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "After activation, this card is treated as an Equip Card that increases the ATK of the equipped monster by 500 points. Equip a monster on your side of the field with this card. If this card is destroyed by the effect of another card while it is an Equip Card, select 1 card on the field and destroy it.",
+          "modern_text": null,
+          "summary": "Era damage-step legality, not a text erratum: the GOAT script carries EFFECT_FLAG_DAMAGE_CAL on the activation, so this Trap can be activated inside the damage-calculation substep; the modern script carries only EFFECT_FLAG_DAMAGE_STEP, so the engine refuses activation there. The guard functions are equivalent - goat's s.condition ('Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()') is the same predicate as the modern aux.StatChangeDamageStepCondition (utility.lua:1412) - so the property flag is the whole difference. No dated source for when the TCG window changed was found; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2014-07-31",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (BP03-EN194, Battle Pack 3: Monster League)"
       },
-      "historical_text": "After activation, this card is treated as an Equip Card that increases the ATK of the equipped monster by 500 points. Equip a monster on your side of the field with this card. If this card is destroyed by the effect of another card while it is an Equip Card, select 1 card on the field and destroy it.",
-      "modern_text": "Target 1 face-up monster you control; equip this card to that target. It gains 500 ATK. If this card is destroyed by a card effect while equipped: Target 1 card on the field; destroy that target.",
-      "summary": "Wording modernisation only (v3 BP01-EN093 is the PSCT rewrite to 'Target 1 face-up monster you control; equip this card to that target. It gains 500 ATK...', v4 BP03-EN194 changes 'When' to 'If' on the destruction trigger). Both scripts already carry EFFECT_FLAG_CARD_TARGET, so the explicit 'Target' wording is not a targeting change, and the destruction trigger's condition (destroyed by a card effect while equipped) is unchanged in the diff.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "After activation, this card is treated as an Equip Card that increases the ATK of the equipped monster by 500 points. Equip a monster on your side of the field with this card. If this card is destroyed by the effect of another card while it is an Equip Card, select 1 card on the field and destroy it.",
+          "modern_text": "Target 1 face-up monster you control; equip this card to that target. It gains 500 ATK. If this card is destroyed by a card effect while equipped: Target 1 card on the field; destroy that target.",
+          "summary": "Wording modernisation only (v3 BP01-EN093 is the PSCT rewrite to 'Target 1 face-up monster you control; equip this card to that target. It gains 500 ATK...', v4 BP03-EN194 changes 'When' to 'If' on the destruction trigger). Both scripts already carry EFFECT_FLAG_CARD_TARGET, so the explicit 'Target' wording is not a targeting change, and the destruction trigger's condition (destroyed by a card effect while equipped) is unchanged in the diff.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700173,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700173.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700173,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700173.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

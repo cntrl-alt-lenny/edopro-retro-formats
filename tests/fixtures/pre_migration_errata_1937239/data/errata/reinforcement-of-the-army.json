@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-reinforcement-of-the-army",
+  "modern_card": {
+    "passcode": 32807846,
+    "name": "Reinforcement of the Army"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-06-16",
+        "new_attested_from": "2008-12-15",
+        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no valid Warrior left in the Deck subject to Deck verification; Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation without one.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "quote": "You can activate this card even if you have no Level 4 or lower Warrior-Type monsters remaining in your Deck, but you must let your opponent see your Deck to confirm.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+            "quote": "You cannot activate \"Reinforcement of the Army\" if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "Add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand. Then shuffle your Deck.",
+      "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script reduces s.target to `if chk==0 then return true end` (the modern Duel.IsExistingMatchingCard check over LOCATION_DECK is gone), so the card can be activated with no Level 4 or lower Warrior left in the Deck, and it proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script requires a valid target to activate and never reveals. The printed text is behaviourally identical across the whole English lineage.",
+      "sources": [
+        "ignis-cardscripts",
+        "ude-card-rulings-archive",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700055,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700055.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v1 (LOD-EN028 / Master Collection Volume 1), the text the GOAT variant carries exactly. v0->v1 ('Move'->'Add', shuffle wording), v1->v2 (HL06-EN004, 2008-04, drops 'Then shuffle your Deck') and v2->v3 (LEDD-ENA27, 2017, 'Warrior-Type'->'Warrior') are cosmetic and are not recorded as changes. This card is the shared brief's named counter-example, so the shared 'search-verification' chronology (old state attested through 2011-02-02) is deliberately NOT used: its activation allowance demonstrably ended earlier. I dated the change from the two archived official captures instead, which is a determinate result for both target eras - GOAT (2005-04-01) precedes 2005-06-16 and so uses the historical implementation; Edison (2010-04-24) follows 2008-12-15 and so uses the modern card. Residual not modelled as a version: between 2008-12-15 and the end of the general verification procedure, a whiff forced by a chain (rather than by a deliberately empty search) would presumably still have been verifiable; that intermediate state has no upstream implementation and no practical effect on play, so it is documented here rather than recorded as a version with a gap. Source id 'ude-card-rulings-archive' is the registered id in data/sources.json covering both the 2005 UDE rulings pages and the 2008-12-15 Card FAQ capture."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "yugipedia-card-errata"
+  ]
+}

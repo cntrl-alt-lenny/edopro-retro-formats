@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-spirit-ryu",
+  "modern_card": {
+    "passcode": 67957315,
+    "name": "Spirit Ryu"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2019-01-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the '(Quick Effect)' text (SS02-ENA08, Speed Duel Starter Decks: Duelists of Tomorrow)"
+      },
+      "historical_text": "You can only activate this effect during your Battle Step, if this card battles during your turn. Discard 1 Dragon-Type monster from your hand to the Graveyard to increase the ATK and DEF of this card by 1000 points until the End Step.",
+      "modern_text": "During your Battle Step, if this card battles (Quick Effect): You can discard 1 Dragon monster to the GY; this card gains 1000 ATK/DEF until the end of the Battle Phase.",
+      "summary": "The ATK/DEF-boost effect changed Spell Speed. The goat script's s.adcon adds 'Duel.GetCurrentChain()==0' to the modern condition, so the effect can only ever be Chain Link 1 - it cannot be chained to anything - which upstream annotates as 'the effect is spell speed 1; implemented as quick effect that can only be CL1'. The modern script is a plain EFFECT_TYPE_QUICK_O with no chain restriction, matching v2's added '(Quick Effect)' wording, so it can be activated in response to another effect. The discard cost, the 'this card battles during your turn' requirement and the reset at the end of the Battle Phase are identical (the rest of the diff is TIMING_BATTLE_PHASE|TIMING_CHAIN_END vs '+' and the equivalent phase-range test).",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700185,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700185.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700185.lua matches lineage v1 (SKE-023, Starter Deck: Kaiba Evolution, tcg-eu 2004-03-01, month precision) exactly, so the chain starts at v1. Lineage v0 (LOD-036, 2003-06-06) is a materially different effect - 'Each time you discard 1 Dragon-Type monster ... during your Battle Step, increase the ATK and DEF ... by 1000' with no requirement that this card battles and no once-per-activation framing - but it predates the baseline implementation and is therefore recorded here rather than as a change. Chronology caveat, stated plainly: the only text in the lineage that declares a Quick Effect is v2 (SS02-ENA08, 2019-01-24), so the set-release anchor dates the availability of the Quick Effect text, not a dated ruling announcement; the packet contains no earlier evidence bearing on when the effect's Spell Speed changed. Both target eras (GOAT 2005-04-01, Edison 2010-04-24) fall well before that date and take the goat variant. 'until the End Step' (v1) vs 'until the end of the Battle Phase' (v2) is cosmetic - both scripts reset the boost at RESET_PHASE+PHASE_BATTLE."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

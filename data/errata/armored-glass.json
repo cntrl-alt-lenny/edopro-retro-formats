@@ -6,34 +6,17 @@
     "name": "Armored Glass"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can only activate this card when a monster is equipped with an Equip Spell Card. Negate the effects of all Equip Spell Cards on the field during the turn this card is activated.",
-      "modern_text": "You can only activate this card when a monster is equipped with an Equip Card. Negate the effects of all Equip Cards on the field during the turn this card is activated.",
-      "summary": "Functional scope change with no datable printing: 'Equip Spell Card' becomes 'Equip Card' in both halves of the effect, so both the activation condition (a monster equipped with an Equip Card) and the negation (the effects of all Equip Cards on the field) widen from Equip Spells alone to every card treated as an Equip Card - Union monsters equipped to a monster and Trap Cards that equip included. The lineage version that introduces the wording carries no card number and no set, so the date of the change cannot be established from the packet.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format Armored Glass should neither be activatable off, nor shut down, a Union monster equipped to a monster or an equipping Trap - only Equip Spells - whereas the shipped card negates every Equip Card on the field."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format Armored Glass should neither be activatable off, nor shut down, a Union monster equipped to a monster or an equipping Trap - only Equip Spells - whereas the shipped card negates every Equip Card on the field.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -42,5 +25,27 @@
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You can only activate this card when a monster is equipped with an Equip Spell Card. Negate the effects of all Equip Spell Cards on the field during the turn this card is activated.",
+    "modern_text": "You can only activate this card when a monster is equipped with an Equip Card. Negate the effects of all Equip Cards on the field during the turn this card is activated.",
+    "summary": "Functional scope change with no datable printing: 'Equip Spell Card' becomes 'Equip Card' in both halves of the effect, so both the activation condition (a monster equipped with an Equip Card) and the negation (the effects of all Equip Cards on the field) widen from Equip Spells alone to every card treated as an Equip Card - Union monsters equipped to a monster and Trap Cards that equip included. The lineage version that introduces the wording carries no card number and no set, so the date of the change cannot be established from the packet.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

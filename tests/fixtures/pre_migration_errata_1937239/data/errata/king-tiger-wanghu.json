@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-king-tiger-wanghu",
+  "modern_card": {
+    "passcode": 83986578,
+    "name": "King Tiger Wanghu"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2006-11-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Champion Pack: Game One (CP01-EN014)"
+      },
+      "historical_text": "As long as this card remains face-up on the field, destroy all monsters with an ATK equal to 1400 or less that are Normal Summoned or Special Summoned.",
+      "modern_text": "Destroy all monsters with an ATK of 1400 or less that are Normal Summoned or Special Summoned.",
+      "summary": "Wording modernisation only: CP01-EN014 drops the 'As long as this card remains face-up on the field' preamble and the 'an ATK equal to' phrasing. The mandatory destruction of every Normal or Special Summoned monster with 1400 or less ATK is unchanged.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-05-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the added 'This card must be face-up on the field to activate and to resolve this effect' clause (BP01-EN129, Battle Pack: Epic Dawn)"
+      },
+      "historical_text": "Destroy all monsters with an ATK of 1400 or less that are Normal Summoned or Special Summoned.",
+      "modern_text": "When a monster(s) with 1400 or less ATK is Normal Summoned or Special Summoned: Destroy those monsters with 1400 or less ATK. This card must be face-up on the field to activate and to resolve this effect.",
+      "summary": "Functional erratum: BP01 added 'This card must be face-up on the field to activate and to resolve this effect', which the modern script enforces with the extra clause 'not eg:IsContains(e:GetHandler())' in the condition of its mandatory summon trigger. Under the era text the trigger also fires when King Tiger Wanghu itself is part of the summoned group, so a simultaneous Special Summon of Wanghu together with monsters of 1400 or less ATK destroys those monsters; the modern card does not activate at all in that case. Everything else is identical in both scripts: a mandatory (TRIGGER_F) field trigger on EVENT_SUMMON_SUCCESS and EVENT_SPSUMMON_SUCCESS, filtering face-up monsters with 1400 or less ATK, suppressed while Wanghu is battle-destroyed.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700143,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700143.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DB2-EN207, 2005-07-27), the version the GOAT entry's text matches exactly. The earlier v0 (PGD-004, 2003-07-18) -> v1 transition dropped the '(excluding Flip Summon)' parenthetical; that is a clarification removal rather than a behaviour change (neither script hooks a Flip Summon event - only EVENT_SUMMON_SUCCESS and EVENT_SPSUMMON_SUCCESS), and it predates the baseline, so it is recorded here rather than in changes. Trailing lineage v4 (OP24-EN004, 2024-02-14) rewords to 'If a monster(s) ... is Normal or Special Summoned while you control this card'; the pinned cdb text is still v3, so v4 is not recorded. Upstream annotation on the GOAT script: 'Triggers on its own summon'."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
+}

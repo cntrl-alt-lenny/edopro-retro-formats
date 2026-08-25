@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-energy-drain",
+  "modern_card": {
+    "passcode": 56916805,
+    "name": "Energy Drain"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select 1 face-up monster on your side of the field. Increase the ATK and DEF of the monster by an amount equal to the number of cards in your opponent's hand x 200 points until the End Phase.",
+      "summary": "The single behavioural difference between the GOAT variant and the modern script is the declared damage-step activation window: the modern activation effect sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP (0x4000), the GOAT one sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL (0x8000) instead - two distinct constants that upstream's own modern scripts normally set together when an effect is meant to be usable across the whole Damage Step. Everything else in the diff is equivalent: aux.StatChangeDamageStepCondition() is defined as 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', which is exactly the GOAT inline condition, and RESETS_STANDARD_PHASE_END is defined as RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END, exactly the GOAT expansion. Chronology is unresolved, and so is which direction the flag swap resolves.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700090,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700090.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Could not settle the direction of the flag swap: only ocgcore binaries are cached (engine/ocgcore.dll, engine/libocgcore.so - no source), so whether EFFECT_FLAG_DAMAGE_CAL without EFFECT_FLAG_DAMAGE_STEP widens the window (activatable during damage calculation) or narrows it (blocked from the Damage Step outright) is not verifiable from the material available - hence needs-escalation. Classified ruling rather than engine because this is a per-card effect property that no rule-profile flag can set, though it plainly abuts the era damage-step structure the period rule profile handles; if a reviewer with engine source concludes the profile already reproduces it, the variant becomes redundant. Text lineage is cosmetic throughout: v0 (IOC-055, 2004-03-01) -> v1 (DR2-EN055, 2005-10-20) adds a comma; v1 -> v2 (SBTK-EN041, 2019-12-05) is PSCT ('Select' -> 'Target', 'until the End Phase' -> 'until the end of this turn'), with both scripts already carrying EFFECT_FLAG_CARD_TARGET and the identical End Phase reset, and both computing the boost from the opponent's hand count at resolution. The packet's second upstream code 511001307 'Energy Drain (Anime)' is not a historical TCG variant of this card - it implements a different anime effect ('its ATK becomes 0, also draw 1 card', EFFECT_SET_ATTACK_FINAL plus a draw, targeting the opponent's monster) - and is excluded rather than folded in."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

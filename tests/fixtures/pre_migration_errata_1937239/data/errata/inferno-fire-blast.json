@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-inferno-fire-blast",
+  "modern_card": {
+    "passcode": 52684508,
+    "name": "Inferno Fire Blast"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select 1 face-up \"Red-Eyes B. Dragon\" on your side of the field to activate this card. Inflict damage to your opponent's Life Points equal to the original ATK of the selected \"Red-Eyes B. Dragon\". \"Red-Eyes B. Dragon\" cannot attack during the turn you use this card.",
+      "summary": "Era handling of the attack restriction, not a text erratum: the GOAT script registers the '\"Red-Eyes B. Dragon\" cannot attack' field effect inside s.activate, on resolution, with no EFFECT_FLAG_OATH and no EFFECT_FLAG_IGNORE_IMMUNE, while the modern script registers it inside s.cost, at activation, carrying both flags. So in the era version a negated Inferno Fire Blast imposes no attack restriction at all, and a Red-Eyes immune to this card's effects can still attack, whereas the modern card restricts regardless of negation or immunity. Damage is the target's original ATK in both. Chronology is unresolved - no source in the packet dates the change.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700085,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700085.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat script's own header states both behaviours (restriction does not apply if the effect is negated; does not apply to immune monsters). The goat cdb text matches v0 (SOD-EN042, 2004-10-01) at 0.9774, differing only by writing the dragon's modern name 'Red-Eyes Black Dragon' where the lineage prints 'Red-Eyes B. Dragon'. The English lineage is cosmetic end to end: v0 -> v1 (DR3-EN042, 2006-11-25) drops 'Life Points' and shortens the restriction clause; v1 -> v2 (DTP1-EN015, 2008-07-24) folds the selection into the damage sentence; v2 -> v3 (SDDC-EN026, 2012-02-03) restores explicit 'Target 1'; v3 -> v4 (LEDU-EN007, 2017-09-07) is 'in your Monster Zone'; v4 -> v5 (LDS1-EN016, 2020-07-02) is the card's rename. Both scripts set EFFECT_FLAG_CARD_TARGET and select through Duel.SelectTarget, so the Select/Target wording churn is not a targeting change. The once-per-turn attack-activity gate (Duel.AddCustomActivityCounter / GetCustomActivityCount) is identical in both."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

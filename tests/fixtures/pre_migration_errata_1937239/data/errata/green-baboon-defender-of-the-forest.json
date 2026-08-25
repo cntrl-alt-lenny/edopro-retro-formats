@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-green-baboon-defender-of-the-forest",
+  "modern_card": {
+    "passcode": 46668237,
+    "name": "Green Baboon, Defender of the Forest"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN165, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "When a Beast-Type monster you control is destroyed and sent to the Graveyard, you can pay 1000 Life Points to Special Summon this card from your hand or the Graveyard.",
+      "modern_text": "If this card is in your hand or Graveyard when a face-up Beast-Type monster you control is destroyed and sent to the Graveyard (except during the Damage Step): You can pay 1000 Life Points; Special Summon this card.",
+      "summary": "Functional erratum on two points. The era text triggers off \"a Beast-Type monster you control is destroyed and sent to the Graveyard\" with no position requirement and no Damage Step exclusion; the errata'd text requires the destroyed Beast to have been face-up and adds \"(except during the Damage Step)\". So the era card can pay 1000 LP and Special Summon itself off a face-down Beast being destroyed, and can do so inside the Damage Step when a Beast is destroyed by battle - the exact window a period Beast deck uses. Both restrictions are baked into the modern implementation, whose trigger is EVENT_TO_GRAVE with a POS_FACEUP previous-position filter and no EFFECT_FLAG_DAMAGE_STEP property.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In an Edison snapshot EDOPro refuses the Damage Step Green Baboon revival after a Beast is destroyed by battle, and refuses it entirely when the destroyed Beast was face-down, so a period Beast deck loses plays that its 2007-2010 text allows.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's single upstream entry, 511001661 \"Green Baboon, Defender of the Forest (Manga)\" in cards-unofficial.cdb, is a DIFFERENT card, not a historical version of 46668237: it triggers off Insect/Beast/Plant/Beast-Warrior monsters on either side of the field and its text matches the lineage at only ratio 0.7277. It cannot serve as a baseline implementation, so this card remains a genuine gap. Its script is still useful corroboration: the older-style trigger is scripted with EVENT_DESTROYED plus EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY, while the modern Green Baboon script (the '-' side of the diff) uses EVENT_TO_GRAVE with no damage-step property - the script-level counterpart of the errata's added \"(except during the Damage Step)\". Era text: v0 (JUMP-EN014, 2007-07-15) is in force for Edison (2010-04-24); the card postdates GOAT. Trailing cosmetic revision v1 -> v2 (SBCB-EN053, 2020-11-26: GY wording, \"Beast monster\", location clause moved) is not recorded as a change; cards.cdb matches v2 exactly. Green Baboon is not on the EdisonFormat.com Functional Errata list."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

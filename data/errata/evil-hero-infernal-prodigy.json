@@ -6,30 +6,13 @@
     "name": "Evil HERO Infernal Prodigy"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2019-09-26",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Legendary Duelists: Immortal Destiny (LED5-EN019), the first printing carrying the once-per-turn limit"
-      },
-      "historical_text": "If you control no monsters, you can Special Summon this card from your hand in face-up Attack Position. If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase.",
-      "modern_text": "If you control no monsters, you can Special Summon this card (from your hand) in Attack Position. Once per turn, during the End Phase, if this card was Tributed this turn to Tribute Summon a \"HERO\" monster: Draw 1 card.",
-      "summary": "'Once per turn,' was added to the End Phase draw in 2019; the era text - 'If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase' - carries no activation limit. The other differences are inert: v1's rewrite to 'a \"HERO\" monster' cannot change which Tribute Summons qualify in period play (every HERO-setcode monster in the Edison-legal pool is an Elemental, Destiny or Evil HERO), and reframing the delayed draw as 'During the End Phase, if this card was Tributed this turn ...: Draw 1 card' preserves the resolution, as does 'in face-up Attack Position' becoming 'in Attack Position'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete"
     }
   ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -40,5 +23,27 @@
     "yugipedia-set-pages",
     "ignis-cardscripts",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2019-09-26",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Legendary Duelists: Immortal Destiny (LED5-EN019), the first printing carrying the once-per-turn limit"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "If you control no monsters, you can Special Summon this card from your hand in face-up Attack Position. If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase.",
+    "modern_text": "If you control no monsters, you can Special Summon this card (from your hand) in Attack Position. Once per turn, during the End Phase, if this card was Tributed this turn to Tribute Summon a \"HERO\" monster: Draw 1 card.",
+    "summary": "'Once per turn,' was added to the End Phase draw in 2019; the era text - 'If you Tribute this card to Tribute Summon an \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster, draw 1 card during this turn's End Phase' - carries no activation limit. The other differences are inert: v1's rewrite to 'a \"HERO\" monster' cannot change which Tribute Summons qualify in period play (every HERO-setcode monster in the Edison-legal pool is an Elemental, Destiny or Evil HERO), and reframing the delayed draw as 'During the End Phase, if this card was Tributed this turn ...: Draw 1 card' preserves the resolution, as does 'in face-up Attack Position' becoming 'in Attack Position'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "none-needed"
+  }
 }

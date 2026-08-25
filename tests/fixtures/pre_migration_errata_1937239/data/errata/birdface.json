@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-birdface",
+  "modern_card": {
+    "passcode": 45547649,
+    "name": "Birdface"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
+      "summary": "Era activation semantics: the goat script's target function returns true unconditionally where the modern one requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the battle-destruction trigger can be activated with no \"Harpie Lady\" left in the Deck; the modern script cannot be activated at all in that state. No dated source for this card, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
+      "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no \"Harpie Lady\" remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700073,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700073.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DB2-EN208, 2005-07-27), matched exactly by the goat cdb text - see era_mismatch_ack for the four-month overshoot past the GOAT snapshot; the delta from v0 is a single procedural sentence, so no implementation consequence follows. The trailing v1 -> v2 rewording (SS02-ENC08, 2019-01-24: 'sent to the Graveyard as a result of battle' -> 'destroyed by battle and sent to the GY') is cosmetic; both scripts use EVENT_BATTLE_DESTROYED with the identical condition 'IsLocation(LOCATION_GRAVE) and IsReason(REASON_BATTLE)', so the added 'destroyed by battle and' clause changes nothing implemented. Change order: (B) before (A) for the Reinforcement of the Army precedent (allowance gone by 2008-12-15, before (A)'s earliest possible end of 2011-02-02); the true order for this card is unknown. No upstream implementation exists for the intermediate state and it is unreachable while (B) is undated, so no missing-implementation record is attached."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

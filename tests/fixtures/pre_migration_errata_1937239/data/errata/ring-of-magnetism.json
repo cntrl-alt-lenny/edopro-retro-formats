@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ring-of-magnetism",
+  "modern_card": {
+    "passcode": 20436034,
+    "name": "Ring of Magnetism"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can only equip this card to a monster on your side of the field. Decrease the ATK and DEF of a monster equipped with this card by 500 points. In addition, all the monsters on your opponent's side of the field can only attack the monster equipped with this card, if they attack.",
+      "summary": "Era ruling on immunity, no text difference: the goat script extends the equip legality function s.eqlimit (the limit handed to aux.AddEquipProcedure) with `not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)`, so Ring of Magnetism cannot be equipped to - and does not remain equipped to - a monster unaffected by its effect. The modern script only requires the monster to be one you control, leaving the card equipped while its -500 ATK/DEF and its EFFECT_ONLY_ATTACK_MONSTER redirection simply fail to apply. Chronology of this ruling is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700030,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700030.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v5 (DB2-EN082, 2005-07-27), carried exactly by both the goat cdb entry and the pinned modern cards.cdb, so there is no text transition to record. Versions v0 through v4 (MRD-139 2002-06-26 through MRD-EN139, Master Collection Volume 1, 2004-12-01) are earlier printings that predate the baseline version; v1 carries no set number and no date in the packet, and the v0 -> v2 wording moves from 'All your opponent's monsters must attack...' to 'must attack ... if they choose to attack', all before the baseline. Confirmed against the repo that the single added line sits in s.eqlimit and not in s.atkcon, so the era behaviour is that the equip itself is illegal against an immune monster rather than that the redirection alone lapses."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,40 +6,18 @@
     "name": "Amazoness Fighter"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2005-03-19",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Dark Revelation Volume 1 (DR1-EN115), the first printing carrying the corrected 1500 ATK"
-      },
-      "historical_text": "All Battle Damage to this card's controller that he/she takes from a battle involving this monster becomes 0.",
-      "modern_text": "All Battle Damage to this card's controller that he/she takes from a battle involving this monster becomes 0.",
-      "summary": "Stat erratum, not an effect change: the original MFC-060 printing had 1300 ATK and DR1-EN115 corrected it to 1500 ATK - the lineage's raw entries show ATK/1300 deleted and ATK/1500 inserted while the effect text is word-for-word unchanged between v0 and v1. Upstream carries the difference in card data only: cards-unofficial.cdb 511006010 is ATK 1300 / DEF 1300 against cards.cdb 55821894 at ATK 1500 / DEF 1300, and pre-errata/c511006010.lua is behaviourally identical to official/c55821894.lua (single EFFECT_AVOID_BATTLE_DAMAGE effect; the packet's script diff is empty and the files differ only by a name comment).",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "Stat erratum, not an effect change: the original MFC-060 printing had 1300 ATK and DR1-EN115 corrected it to 1500 ATK - the lineage's raw entries show ATK/1300 deleted and ATK/1500 inserted while the effect text is word-for-word unchanged between v0 and v1. Upstream carries the difference in card data only: cards-unofficial.cdb 511006010 is ATK 1300 / DEF 1300 against cards.cdb 55821894 at ATK 1500 / DEF 1300, and pre-errata/c511006010.lua is behaviourally identical to official/c55821894.lua (single EFFECT_AVOID_BATTLE_DAMAGE effect; the packet's script diff is empty and the files differ only by a name comment)."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "tested": false,
-    "gap": {
-      "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
-      "upstream_checked": true,
-      "behavioural_impact": "Stat erratum, not an effect change: the original MFC-060 printing had 1300 ATK and DR1-EN115 corrected it to 1500 ATK - the lineage's raw entries show ATK/1300 deleted and ATK/1500 inserted while the effect text is word-for-word unchanged between v0 and v1. Upstream carries the difference in card data only: cards-unofficial.cdb 511006010 is ATK 1300 / DEF 1300 against cards.cdb 55821894 at ATK 1500 / DEF 1300, and pre-errata/c511006010.lua is behaviourally identical to official/c55821894.lua (single EFFECT_AVOID_BATTLE_DAMAGE effect; the packet's script diff is empty and the files differ only by a name comment).",
-      "sources": [
-        "ignis-babelcdb",
-        "ignis-cardscripts"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -50,5 +28,32 @@
     "ignis-babelcdb",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2005-03-19",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Dark Revelation Volume 1 (DR1-EN115), the first printing carrying the corrected 1500 ATK"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "All Battle Damage to this card's controller that he/she takes from a battle involving this monster becomes 0.",
+    "modern_text": "All Battle Damage to this card's controller that he/she takes from a battle involving this monster becomes 0.",
+    "summary": "Stat erratum, not an effect change: the original MFC-060 printing had 1300 ATK and DR1-EN115 corrected it to 1500 ATK - the lineage's raw entries show ATK/1300 deleted and ATK/1500 inserted while the effect text is word-for-word unchanged between v0 and v1. Upstream carries the difference in card data only: cards-unofficial.cdb 511006010 is ATK 1300 / DEF 1300 against cards.cdb 55821894 at ATK 1500 / DEF 1300, and pre-errata/c511006010.lua is behaviourally identical to official/c55821894.lua (single EFFECT_AVOID_BATTLE_DAMAGE effect; the packet's script diff is empty and the files differ only by a name comment).",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-babelcdb",
+      "ignis-cardscripts",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "ignis-cardscripts"
+    ]
+  }
 }

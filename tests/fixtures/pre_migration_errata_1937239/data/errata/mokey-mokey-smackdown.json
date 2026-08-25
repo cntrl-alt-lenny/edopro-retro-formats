@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-mokey-mokey-smackdown",
+  "modern_card": {
+    "passcode": 1965724,
+    "name": "Mokey Mokey Smackdown"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "While a face-up \"Mokey Mokey\" is on your side of the field, if a Fairy-Type monster on your side of the field is destroyed, the ATK of all \"Mokey Mokey\" on your side of the field becomes 3000 until the End Phase of this turn.",
+      "summary": "Era trigger timing with no text difference: the GOAT script excludes battle destruction from its EVENT_DESTROYED path (not c:IsReason(REASON_BATTLE)) and registers the ATK-setting flag from a cloned EVENT_BATTLED effect instead, testing Duel.GetAttacker()/Duel.GetAttackTarget() with Card.IsBattleDestroyed while the Fairy is still face-up in the Monster Zone - upstream annotates this 'Battle destroyed registers while the mosnter is on field'. It also tests the destroyed monster's race directly (Card.IsRace) where the modern script uses Card.IsPreviousRaceOnField, so a monster made Fairy only while on the field no longer qualifies once it is in the Graveyard. No source in the packet dates either difference, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700005,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700005.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage is cosmetic throughout: v0 (RDS-EN043, 2004-12-01, the goat cdb text) -> v1 (DR3-EN103, 2006-11-25) changes 'all' to 'each' and 'until the End Phase of this turn' to 'until the end of this turn' - both scripts reset the flag effect at RESET_PHASE+PHASE_END, so the duration is unchanged - and v1 -> v2 (SGX1-ENI17, 2022-03-17) is PSCT. Both versions gate the ATK change on the same flag effect and the same 'Mokey Mokey' (27288416) face-up requirement; only when the flag gets registered differs. Chronology unresolved means the applier blocks format selection rather than adopting a guessed date."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

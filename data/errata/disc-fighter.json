@@ -6,29 +6,14 @@
     "name": "Disc Fighter"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "If this card attacks a Defense Position monster with DEF 2000 or more, destroy that monster with this card's effect without applying Damage Calculation.",
-      "summary": "Era trigger timing, not a text erratum: the goat script registers the forced destruction effect on EVENT_PRE_DAMAGE_CALCULATE and triggers whenever this card attacks any monster, checking Defense Position and DEF 2000 or more only at resolution (s.desop: `not t:IsAttackPos() and t:IsDefenseAbove(2000)`); the modern script triggers on EVENT_BATTLE_CONFIRM at attack declaration and requires the attacked monster to already be in Defense Position with DEF 2000 or more at that moment (s.destg). A monster whose battle position or DEF changes between attack declaration and damage calculation therefore resolves differently, and in the era version the forced trigger goes on the chain at the start of the Damage Step even when the attacked monster does not qualify. Chronology of this ruling is unresolved: no lineage text transition marks it and no shared chronology entry covers Damage Step trigger placement.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700029,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700029.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "If this card attacks a Defense Position monster with DEF 2000 or more, destroy that monster with this card's effect without applying Damage Calculation.",
+    "modern_text": null,
+    "summary": "Era trigger timing, not a text erratum: the goat script registers the forced destruction effect on EVENT_PRE_DAMAGE_CALCULATE and triggers whenever this card attacks any monster, checking Defense Position and DEF 2000 or more only at resolution (s.desop: `not t:IsAttackPos() and t:IsDefenseAbove(2000)`); the modern script triggers on EVENT_BATTLE_CONFIRM at attack declaration and requires the attacked monster to already be in Defense Position with DEF 2000 or more at that moment (s.destg). A monster whose battle position or DEF changes between attack declaration and damage calculation therefore resolves differently, and in the era version the forced trigger goes on the chain at the start of the Damage Step even when the attacked monster does not qualify. Chronology of this ruling is unresolved: no lineage text transition marks it and no shared chronology entry covers Damage Step trigger placement.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700029,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700029.lua"
+  }
 }

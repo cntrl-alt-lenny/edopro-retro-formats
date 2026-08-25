@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-skull-knight-2",
+  "modern_card": {
+    "passcode": 15653824,
+    "name": "Skull Knight #2"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the trigger resolves and no second \"Skull Knight #2\" is left in the Deck, the goat script proves the failed search by revealing the Deck (else branch calling Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script simply does nothing. The printed text is untouched - the goat cdb entry is byte-identical to the pinned modern text.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
+      "summary": "Era trigger semantics the printed text does not show, and a separate question from the verification procedure: the goat variant clones the trigger onto EVENT_MSET (s.spcon2) so Tributing this card for a Tribute SET of a Fiend also triggers it, and it resolves for the player who Tributed it - the condition demands GetPreviousControler()==GetReasonPlayer() and the replacement is Special Summoned from that player's Deck via e:SetLabel(GetPreviousControler()), whereas the modern script has no controller test and resolves for the effect's controller once the card is in the Graveyard. Upstream annotates both behaviours (\"Triggers on tribute set as well\", \"Triggers for the player that used it\"); nothing in the packet dates either ruling, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700022,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700022.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's errata page (Card Errata:Skull Knight) carries NO English versions - only a Spanish entry - so there is no English text lineage to date anything from; the goat cdb text and the pinned modern text are byte-identical, so this is a pure ruling record and the historical text is passed literally from the goat implementation. Remaining diff lines (s.listed_names/IsCode id -> MODID) are variant-passcode plumbing, not behaviour. The two ruling changes are recorded separately because only the deck-reveal half has sourced bounds; the intermediate state between them needs no implementation, since both supported snapshots (GOAT 2005-04-01, Edison 2010-04-24) sit before the earliest possible end of the old verification era (2011-02-02)."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

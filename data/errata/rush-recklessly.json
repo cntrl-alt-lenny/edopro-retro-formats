@@ -6,29 +6,14 @@
     "name": "Rush Recklessly"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase 1 face-up monster's ATK by 700 points until the end of this turn.",
-      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so Rush Recklessly can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting and the 700 ATK boost are identical in both, and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700114,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700114.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase 1 face-up monster's ATK by 700 points until the end of this turn.",
+    "modern_text": null,
+    "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so Rush Recklessly can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting and the 700 ATK boost are identical in both, and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700114,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700114.lua"
+  }
 }

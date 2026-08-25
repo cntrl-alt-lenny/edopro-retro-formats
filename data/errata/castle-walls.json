@@ -6,29 +6,14 @@
     "name": "Castle Walls"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase a selected monster's DEF by 500 points during the turn this card is activated.",
-      "summary": "Era damage-step legality with no text change: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the era version is activatable during damage calculation while the modern version is confined to the Damage Step before damage calculation. The attached condition is the same test in both — the goat's inline `Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()` is literally the body of aux.StatChangeDamageStepCondition — and the reset constant is the same bits expanded, so the activation window is the entire behavioural difference. Chronology of the window change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700072,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700072.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase a selected monster's DEF by 500 points during the turn this card is activated.",
+    "modern_text": null,
+    "summary": "Era damage-step legality with no text change: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the era version is activatable during damage calculation while the modern version is confined to the Damage Step before damage calculation. The attached condition is the same test in both — the goat's inline `Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()` is literally the body of aux.StatChangeDamageStepCondition — and the reset constant is the same bits expanded, so the activation window is the entire behavioural difference. Chronology of the window change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700072,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700072.lua"
+  }
 }

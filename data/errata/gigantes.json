@@ -6,54 +6,84 @@
     "name": "Gigantes"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2007-09-06",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Champion Pack: Game Four (CP04-EN015), the printing carrying the v2 wording"
       },
-      "historical_text": "This card can only be Special Summoned by removing 1 EARTH monster in your Graveyard from play. When this card is destroyed and sent to the Graveyard as a result of battle, destroy all Spell and Trap Cards on the field.",
-      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
-      "summary": "Wording only. v1 (DR2-EN021) spells out \"This card cannot be Normal Summoned or Set\", which the v0 nomi clause \"This card can only be Special Summoned by ...\" already imposed, and v2 (CP04-EN015) replaces \"destroyed and sent to the Graveyard as a result of battle\" with \"destroyed by battle and sent to the Graveyard\". The summoning restriction and the destruction trigger resolve identically across v0-v2.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card can only be Special Summoned by removing 1 EARTH monster in your Graveyard from play. When this card is destroyed and sent to the Graveyard as a result of battle, destroy all Spell and Trap Cards on the field.",
+          "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
+          "summary": "Wording only. v1 (DR2-EN021) spells out \"This card cannot be Normal Summoned or Set\", which the v0 nomi clause \"This card can only be Special Summoned by ...\" already imposed, and v2 (CP04-EN015) replaces \"destroyed and sent to the Graveyard as a result of battle\" with \"destroyed by battle and sent to the Graveyard\". The summoning restriction and the destruction trigger resolve identically across v0-v2.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2017-04-13",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (SR03-EN016, Structure Deck: Machine Reactor)"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
-      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard. If this card is destroyed by battle and sent to the Graveyard: Destroy all Spell and Trap Cards on the field.",
-      "summary": "Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard\" - so Gigantes can never reach the field by any Special Summon other than its own procedure, and that procedure names no source zone. The errata'd text is semi-nomi, \"Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard\", which confines the self-Summon to the hand but lets a Gigantes that was properly Special Summoned once afterwards be Special Summoned by generic means such as Monster Reborn, Premature Burial or Call of the Haunted.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format EDOPro's Gigantes can be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted once it has been properly Special Summoned, which the era's strict \"can only be Special Summoned by removing from play 1 EARTH monster\" text forbids outright.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. When this card is destroyed by battle and sent to the Graveyard, destroy all Spell and Trap Cards on the field.",
+          "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard. If this card is destroyed by battle and sent to the Graveyard: Destroy all Spell and Trap Cards on the field.",
+          "summary": "Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard\" - so Gigantes can never reach the field by any Special Summon other than its own procedure, and that procedure names no source zone. The errata'd text is semi-nomi, \"Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your Graveyard\", which confines the self-Summon to the hand but lets a Gigantes that was properly Special Summoned once afterwards be Special Summoned by generic means such as Monster Reborn, Premature Burial or Call of the Haunted.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format EDOPro's Gigantes can be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted once it has been properly Special Summoned, which the era's strict \"can only be Special Summoned by removing from play 1 EARTH monster\" text forbids outright."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

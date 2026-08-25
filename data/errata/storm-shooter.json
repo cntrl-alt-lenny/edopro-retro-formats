@@ -6,29 +6,14 @@
     "name": "Storm Shooter"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Once per turn, you can select and activate 1 of these effects: ● Move this card to an adjacent (horizontal) unoccupied Monster Card Zone. ● Return 1 Spell, Trap or Monster Card on your opponent's side of the field in the same column as this card to its owner's hand.",
-      "summary": "When the destination zone is chosen differs, with no text change anywhere in the lineage: the pre-errata script sets aux.seqmovop on the move option, picking a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which fixes the destination at activation and aborts the move if that zone is no longer free at resolution. Chronology is unresolved: the errata page records no text version carrying this change in any language, so the difference is visible only in the script and no date is claimed.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 39188549,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c39188549.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,27 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Once per turn, you can select and activate 1 of these effects: ● Move this card to an adjacent (horizontal) unoccupied Monster Card Zone. ● Return 1 Spell, Trap or Monster Card on your opponent's side of the field in the same column as this card to its owner's hand.",
+    "modern_text": null,
+    "summary": "When the destination zone is chosen differs, with no text change anywhere in the lineage: the pre-errata script sets aux.seqmovop on the move option, picking a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which fixes the destination at activation and aborts the move if that zone is no longer free at resolution. Chronology is unresolved: the errata page records no text version carrying this change in any language, so the difference is visible only in the script and no date is claimed.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 39188549,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c39188549.lua"
+  }
 }

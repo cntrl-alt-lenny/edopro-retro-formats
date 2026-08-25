@@ -6,29 +6,14 @@
     "name": "Covering Fire"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "If your opponent's monster attacks a monster on your side of the field, you can activate this card during the Damage Step. Increase the ATK of your attacked monster by the ATK of 1 other face-up monster on your side of the field during the Damage Step.",
-      "summary": "Era implementation differences that no printed text shows, all read from goat/c504700127.lua against official/c74458486.lua: the activation is declared with EFFECT_FLAG_DAMAGE_CAL where the modern script uses EFFECT_FLAG_DAMAGE_STEP, so the sub-step of the Damage Step in which the Trap is legal differs; the GOAT condition requires only that the attacker belongs to the opponent and that an attack target exists, where the modern condition additionally requires your attacked monster to be face-up already. The GOAT target filter is Card.IsFaceup, so any face-up monster can lend its ATK, while the modern filter is Card.HasNonZeroAttack; at resolution the GOAT script omits the modern tc:IsControler(tp) re-check, and the ATK gain it registers lacks EFFECT_FLAG_CANNOT_DISABLE, so it can be negated. Chronology is unresolved: nothing in the packet dates any of these transitions.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700127,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700127.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "If your opponent's monster attacks a monster on your side of the field, you can activate this card during the Damage Step. Increase the ATK of your attacked monster by the ATK of 1 other face-up monster on your side of the field during the Damage Step.",
+    "modern_text": null,
+    "summary": "Era implementation differences that no printed text shows, all read from goat/c504700127.lua against official/c74458486.lua: the activation is declared with EFFECT_FLAG_DAMAGE_CAL where the modern script uses EFFECT_FLAG_DAMAGE_STEP, so the sub-step of the Damage Step in which the Trap is legal differs; the GOAT condition requires only that the attacker belongs to the opponent and that an attack target exists, where the modern condition additionally requires your attacked monster to be face-up already. The GOAT target filter is Card.IsFaceup, so any face-up monster can lend its ATK, while the modern filter is Card.HasNonZeroAttack; at resolution the GOAT script omits the modern tc:IsControler(tp) re-check, and the ATK gain it registers lacks EFFECT_FLAG_CANNOT_DISABLE, so it can be negated. Chronology is unresolved: nothing in the packet dates any of these transitions.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700127,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700127.lua"
+  }
 }

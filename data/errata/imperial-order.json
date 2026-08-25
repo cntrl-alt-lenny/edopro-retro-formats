@@ -6,48 +6,14 @@
     "name": "Imperial Order"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2017-03-30",
-        "precision": "day",
-        "status": "verified",
-        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN049, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
-        "corroboration": [
-          {
-            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
-            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
-            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
-            "archived": true
-          },
-          {
-            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
-            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
-            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
-            "archived": true
-          }
-        ]
-      },
-      "historical_text": "Negate all Spell Card effects on the field. During each of your Standby Phases, pay 700 Life Points or destroy this card.",
-      "modern_text": "Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.",
-      "summary": "Functional erratum with two mechanisms. The maintenance cost moved from your own Standby Phase to every Standby Phase: the pre-errata script gates the effect on s.mtcon returning Duel.GetTurnPlayer()==tp, which the modern script drops, matching 'During each of your Standby Phases' becoming 'Once per turn, during the Standby Phase'. The payment also became mandatory: the pre-errata script wraps it in Duel.SelectYesNo so the controller may decline and let Imperial Order be destroyed, while the modern script pays whenever Duel.CheckLPCost succeeds, matching 'you must pay 700 LP (this is not optional)'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": true
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002996,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002996.lua",
-    "status": "complete",
-    "tested": true
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -60,5 +26,45 @@
     "ignis-cardscripts",
     "yugipedia-set-pages",
     "konami-errata-announcements"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2017-03-30",
+      "precision": "day",
+      "status": "verified",
+      "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN049, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+      "corroboration": [
+        {
+          "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+          "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+          "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+          "archived": true
+        },
+        {
+          "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+          "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+          "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+          "archived": true
+        }
+      ]
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Negate all Spell Card effects on the field. During each of your Standby Phases, pay 700 Life Points or destroy this card.",
+    "modern_text": "Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.",
+    "summary": "Functional erratum with two mechanisms. The maintenance cost moved from your own Standby Phase to every Standby Phase: the pre-errata script gates the effect on s.mtcon returning Duel.GetTurnPlayer()==tp, which the modern script drops, matching 'During each of your Standby Phases' becoming 'Once per turn, during the Standby Phase'. The payment also became mandatory: the pre-errata script wraps it in Duel.SelectYesNo so the controller may decline and let Imperial Order be destroyed, while the modern script pays whenever Duel.CheckLPCost succeeds, matching 'you must pay 700 LP (this is not optional)'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002996,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002996.lua"
+  }
 }

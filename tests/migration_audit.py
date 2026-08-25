@@ -1421,10 +1421,24 @@ def _nonrelevant_is_implicated(record: Erratum, v2: ErratumV2) -> bool:
 
 # --- corpus driver ----------------------------------------------------------
 
-def audit_corpus(errata_dir: Path | None = None) -> dict:
+def audit_corpus(repo=None) -> dict:
+    """Audits whichever v1 (`Erratum`) records `repo` currently carries -
+    skipping any `ErratumV2` entirely ("already v2; nothing to migrate").
+    That is deliberate and unconditional: it is what makes this function
+    correct BOTH before a migration (296 v1 records) and after one (only
+    the records that remain v1) without needing two versions of the tool.
+
+    `repo` defaults to a fresh `Repository.load(REPO_ROOT)` - the LIVE
+    on-disk repository, whatever its current mix of v1/v2 is. Pass an
+    explicit `repo` (e.g. `tests.pre_migration_fixture.
+    load_pre_migration_repo()`) to audit a DIFFERENT repository, such as
+    the frozen pre-migration snapshot - never assume "the repo this
+    function audits" means "the full canonical corpus" once some of it
+    has migrated."""
     from retroformats.repo import Repository
 
-    repo = Repository.load(REPO_ROOT)
+    if repo is None:
+        repo = Repository.load(REPO_ROOT)
     rows = []
     for record in sorted(repo.errata.values(), key=lambda e: e.id):
         if not isinstance(record, Erratum):

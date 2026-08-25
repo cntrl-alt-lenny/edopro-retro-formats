@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ido-the-supreme-magical-force",
+  "modern_card": {
+    "passcode": 35984222,
+    "name": "Ido the Supreme Magical Force"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2024-09-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (MP24-EN026, 25th Anniversary Tin: Dueling Mirrors)"
+      },
+      "historical_text": "You cannot Summon monsters. You can only control 1 \"Ido the Supreme Magical Force\". If this card is destroyed by a card effect and sent to the Graveyard, Special Summon it from your Graveyard during the next turn's Standby Phase and destroy all other monsters you control.",
+      "modern_text": "You cannot Summon or Normal Set monsters. You can only control 1 \"Ido the Supreme Magical Force\". Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: Special Summon this card from the GY, and if you do, destroy all other monsters you control.",
+      "summary": "Functional erratum on the printed TCG text: the era text's Condition is \"You cannot Summon monsters\", which restricts Normal, Flip and Special Summons but leaves Normal Setting legal while you control Ido; the errata'd text reads \"You cannot Summon or Normal Set monsters\". The modern implementation enforces the errata'd wording - the current script registers EFFECT_CANNOT_MSET alongside EFFECT_CANNOT_SUMMON, EFFECT_CANNOT_SPECIAL_SUMMON and EFFECT_CANNOT_FLIP_SUMMON. The same revision restates the revival as \"Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: ... and if you do, destroy all other monsters you control\", which is PSCT formalisation of a mandatory trigger that can only register once per destruction.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In an Edison snapshot EDOPro blocks Normal Setting a monster while Ido is on the field, which the era's printed English text (\"You cannot Summon monsters\") does not state.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "UNSETTLED - see needs-escalation. The English lineage has two versions only: v0 (CRMS-EN096, 2009-03-03, the Edison-era text) and v1 (MP24-EN026, 2024-09-19). The single behavioural difference is the added Normal Set prohibition. I could not determine whether that is a true functional erratum or a correction of an English translation omission: BabelCDB's pinned text for 35984222 is \"While you control this card, you cannot Summon, and cannot Normal Set.\" and carries the cdb's own note \"* The above text is unofficial and describes the card's functionality in the OCG\", i.e. Ignis implements the OCG function, and the packet contains no period TCG ruling about Setting under Ido. Recorded as functional so the divergence stays visible; if a reviewer establishes that 2009-2010 TCG rulings already forbade Normal Setting, this record should collapse to cosmetic with baseline none-needed. Note also that cards.cdb matches no lineage version exactly (index 1, ratio 0.8194) because it carries the unofficial OCG description rather than the 2024 official text. The packet's one upstream entry, 511003208 \"Ido The Supreme Magical Force (Anime)\", is a different card (a continuous \"destroy all other monsters you control\" plus an End Phase self-revival; text ratio 0.3149) and is not usable as a historical implementation."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

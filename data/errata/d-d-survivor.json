@@ -6,38 +6,17 @@
     "name": "D.D. Survivor"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2011-10-04",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN224, Legendary Collection 2: The Duel Academy Years Mega Pack)"
-      },
-      "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
-      "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
-      "summary": "Functional erratum: LCGX-EN224 appends 'This effect can only activate once per turn' to a Trigger Effect that carried no use limit in any earlier printing ('When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase'). Without the limit the return can fire more than once in the same End Phase - the card comes back, is banished again in that End Phase, and returns again - which the errata'd card refuses. The same printing restates the trigger in PSCT form ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn').",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison, D.D. Survivor's End Phase return has no once-per-turn cap, so a copy banished a second time during that End Phase should return a second time; the shipped card allows one return per turn."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison, D.D. Survivor's End Phase return has no once-per-turn cap, so a copy banished a second time during that End Phase should return a second time; the shipped card allows one return per turn.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2011-10-04",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN224, Legendary Collection 2: The Duel Academy Years Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
+    "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
+    "summary": "Functional erratum: LCGX-EN224 appends 'This effect can only activate once per turn' to a Trigger Effect that carried no use limit in any earlier printing ('When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase'). Without the limit the return can fire more than once in the same End Phase - the card comes back, is banished again in that End Phase, and returns again - which the errata'd card refuses. The same printing restates the trigger in PSCT form ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn').",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

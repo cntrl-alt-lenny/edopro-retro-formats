@@ -6,29 +6,14 @@
     "name": "Attack and Receive"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can only activate this card when you take damage to your Life Points. Inflict 700 points of damage to your opponent's Life Points. Also, inflict 300 points of damage to your opponent's Life Points for each \"Attack and Receive\" card in your Graveyard.",
-      "summary": "Era activation semantics with no text change: the goat script adds `tp~=rp` to the activation check, so it may only be activated when the damage you took was inflicted by your opponent (upstream annotation: \"You can only use it when the oppo inflicts damage\"); the modern script asks only `ep==tp`, so damage you inflict on yourself with your own card also switches it on. The printed line 'when you take damage to your Life Points' is identical in the goat entry and the pinned modern text, so the difference is purely the era reading of who inflicts the damage. Chronology of that reading change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700103,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700103.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can only activate this card when you take damage to your Life Points. Inflict 700 points of damage to your opponent's Life Points. Also, inflict 300 points of damage to your opponent's Life Points for each \"Attack and Receive\" card in your Graveyard.",
+    "modern_text": null,
+    "summary": "Era activation semantics with no text change: the goat script adds `tp~=rp` to the activation check, so it may only be activated when the damage you took was inflicted by your opponent (upstream annotation: \"You can only use it when the oppo inflicts damage\"); the modern script asks only `ep==tp`, so damage you inflict on yourself with your own card also switches it on. The printed line 'when you take damage to your Life Points' is identical in the goat entry and the pinned modern text, so the difference is purely the era reading of who inflicts the damage. Chronology of that reading change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700103,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700103.lua"
+  }
 }

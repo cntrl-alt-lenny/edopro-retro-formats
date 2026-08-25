@@ -6,50 +6,81 @@
     "name": "Big Shield Gardna"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2009-08-15",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the reworded text (DL09-EN004, Duelist League 2010 participation cards)"
       },
-      "historical_text": "Negate the activation of any Spell Card that targets this 1 face-down monster. At that time, flip this card into face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "modern_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "summary": "Wording modernisation only across two printings (v3 DPYG-EN009 reorders to 'If this 1 face-down card is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position', v4 DL09-EN004 restores 'monster'). The negation is still written as an automatic consequence, not as an activated effect, and the single-target restriction ('this 1 face-down ...') is present throughout.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Negate the activation of any Spell Card that targets this 1 face-down monster. At that time, flip this card into face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+          "modern_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+          "summary": "Wording modernisation only across two printings (v3 DPYG-EN009 reorders to 'If this 1 face-down card is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position', v4 DL09-EN004 restores 'monster'). The negation is still written as an automatic consequence, not as an activated effect, and the single-target restriction ('this 1 face-down ...') is present throughout.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2012-05-24",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd Quick Effect text (BP01-EN176, Battle Pack: Epic Dawn)"
       },
-      "historical_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "modern_text": "During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
-      "summary": "Functional erratum: the negation becomes an activated Quick Effect ('During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation'). Before it, the pre-errata script implements the negation as a mandatory continuous effect registered on EVENT_CHAIN_ACTIVATING (upstream comment: 'The negate effect is a continuous effect rather than quick'), so it never goes on the chain, cannot be responded to or negated, and the position change and negation are not conditioned on each other; the modern script uses EFFECT_TYPE_QUICK_F on EVENT_CHAINING and negates only if the position change succeeds.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "If this 1 face-down monster is targeted by a Spell Card, negate that card's activation and change this card to face-up Defense Position. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+          "modern_text": "During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation. If this card is attacked, change it to Attack Position at the end of the Damage Step.",
+          "summary": "Functional erratum: the negation becomes an activated Quick Effect ('During either player's turn, when this face-down card (and no other cards) is targeted by a Spell Card: Change this card to face-up Defense Position, and if you do, negate the Spell Card's activation'). Before it, the pre-errata script implements the negation as a mandatory continuous effect registered on EVENT_CHAIN_ACTIVATING (upstream comment: 'The negate effect is a continuous effect rather than quick'), so it never goes on the chain, cannot be responded to or negated, and the position change and negation are not conditioned on each other; the modern script uses EFFECT_TYPE_QUICK_F on EVENT_CHAINING and negates only if the position change succeeds.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 65240394,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "official/c65240394.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 65240394,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "official/c65240394.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

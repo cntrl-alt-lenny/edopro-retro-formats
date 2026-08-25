@@ -1,0 +1,54 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-evil-hero-dark-gaia",
+  "modern_card": {
+    "passcode": 58332301,
+    "name": "Evil HERO Dark Gaia"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Collection 2: The Duel Academy Years Mega Pack (LCGX-EN069), the first printing carrying the errata'd text"
+      },
+      "historical_text": "1 Fiend-Type monster + 1 Rock-Type monsterThis monster cannot be Special Summoned except with \"Dark Fusion\". The original ATK of this card is equal to the combined ATK of the Fusion Material Monsters used to Fusion Summon it. When this card declares an attack, change all Defense Position monsters your opponent controls to face-up Attack Position. Flip Effects are not activated at this time.",
+      "modern_text": "1 Fiend-Type monster + 1 Rock-Type monsterMust be Special Summoned with \"Dark Fusion\" and cannot be Special Summoned by other ways. The original ATK of this card is equal to the combined original ATK of the Fusion Material Monsters used to Fusion Summon it. When this card declares an attack: You can change all Defense Position monsters your opponent controls to face-up Attack Position. (Flip Effects are not activated at this time.)",
+      "summary": "Two behavioural changes arrived in one printing. First, the ATK-setting clause gained 'original': the era text sets Dark Gaia's original ATK to 'the combined ATK of the Fusion Material Monsters used to Fusion Summon it', i.e. their ATK as boosted on the field at the moment of the Fusion Summon, whereas v2 onward say 'combined original ATK' and official/c58332301.lua sums the materials' ATK from c:GetMaterial() after they have been sent to the Graveyard, where field ATK modifications no longer apply. Second, the attack-declaration position change became optional: 'When this card declares an attack, change all Defense Position monsters your opponent controls to face-up Attack Position' was mandatory, while v2 reads 'You can change ...' and the script registers it as EFFECT_TYPE_TRIGGER_O on EVENT_ATTACK_ANNOUNCE.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the modern card ignores ATK boosts on the Fiend and Rock materials when setting its own ATK, and lets its controller decline the position change on every attack declaration, where the Edison-era card counted the materials' field ATK and forced all opposing Defense Position monsters face-up Attack Position.",
+      "sources": [
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Era text at the Edison snapshot is v1 (DP06-EN010, 2008-01-26); v0 (GLAS-EN040, 2007-11-14) differs only by parenthesising the Flip-effect reminder, so the chain starts at v1. Trailing cosmetic step after the recorded change, not entered as a change: v3 (LDS3-EN029, 2022-07-21, what the pinned cards.cdb text matches) writes '1 Fiend monster + 1 Rock monster', 'becomes' for 'is equal to', and trims 'and cannot be Special Summoned by other ways' - the standard redundancy trim, not a loosening; official/c58332301.lua still carries EFFECT_SPSUMMON_CONDITION with aux.EvilHeroLimit alongside c:EnableReviveLimit(), so the Dark Fusion-only restriction remains strict in every version. This card has no upstream historical or unofficial variant of any kind."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

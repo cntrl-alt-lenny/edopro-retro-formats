@@ -6,28 +6,14 @@
     "name": "Maji-Gire Panda"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "As long as this card remains face-up on the field, each time a Beast-Type monster(s) on the field is destroyed, increase the ATK of this card by 500 points.",
-      "summary": "Period trigger timing, not a text erratum. The modern script has a single mandatory EVENT_DESTROYED field trigger whose filter inspects the destroyed monster's previous state (IsPreviousLocation(LOCATION_MZONE), IsPreviousPosition(POS_FACEUP), GetPreviousRaceOnField). The GOAT variant removes battle destruction from that trigger (adding 'not c:IsReason(REASON_BATTLE)' to the filter) and registers a clone on EVENT_BATTLED whose condition tests the attacker or attack target while it is still on the field: 'c:IsLocation(LOCATION_MZONE) and c:IsPosition(POS_FACEUP) and c:IsRace(RACE_BEAST) and c:IsBattleDestroyed()'. So in the era a Beast destroyed by battle registers the +500 ATK from its live on-field state during the battle, before the destruction is applied, instead of from its previous state afterwards. Upstream's note: 'Battle destroyed registers while the mosnter is on field.'",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700097,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700097.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "As long as this card remains face-up on the field, each time a Beast-Type monster(s) on the field is destroyed, increase the ATK of this card by 500 points.",
+    "modern_text": null,
+    "summary": "Period trigger timing, not a text erratum. The modern script has a single mandatory EVENT_DESTROYED field trigger whose filter inspects the destroyed monster's previous state (IsPreviousLocation(LOCATION_MZONE), IsPreviousPosition(POS_FACEUP), GetPreviousRaceOnField). The GOAT variant removes battle destruction from that trigger (adding 'not c:IsReason(REASON_BATTLE)' to the filter) and registers a clone on EVENT_BATTLED whose condition tests the attacker or attack target while it is still on the field: 'c:IsLocation(LOCATION_MZONE) and c:IsPosition(POS_FACEUP) and c:IsRace(RACE_BEAST) and c:IsBattleDestroyed()'. So in the era a Beast destroyed by battle registers the +500 ATK from its live on-field state during the battle, before the destruction is applied, instead of from its previous state afterwards. Upstream's note: 'Battle destroyed registers while the mosnter is on field.'",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700097,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700097.lua"
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-king-of-the-swamp",
+  "modern_card": {
+    "passcode": 79109599,
+    "name": "King of the Swamp"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can substitute this card for any 1 Fusion Material Monster. When you do this, the other Fusion Material Monster(s) must be the correct one(s). Discard this card from your hand to the Graveyard to add a \"Polymerization\" from your Deck to your hand. The Deck is then shuffled.",
+      "summary": "Period ruling package. Activation condition: the modern `s.target` gates the Ignition effect on `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)` - a \"Polymerization\" actually in the Deck - while the goat target is `if chk==0 then return true end`, so you may discard King of the Swamp with none left, losing the card for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)` to prove the whiff. Only the verification half is dated by the shared search-verification chronology, so the transition is recorded unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700137,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700137.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat `s.cost` is byte-equivalent to `Cost.SelfDiscardToGrave` (utility.lua:1473-1477: same `IsDiscardable`/`IsAbleToGraveAsCost` pair, same `SendtoGrave` with REASON_DISCARD|REASON_COST), and `LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE` vs `|` is constant style. The Fusion-substitute effect (EFFECT_FUSION_SUBSTITUTE with the same `s.subcon` location test) is identical in both scripts, so the later text clauses - \"whose name is specifically listed on the Fusion Monster Card\" (v4, FUEN-EN040, 2017-02-23) and \"This card in your hand, field, or GY\" (v5, OP20-EN014, 2022-10-20) - are not implemented by upstream as behavioural differences and are treated as cosmetic codification. Whole lineage v1 -> v5 recorded as cosmetic; v0 (AST-082, 2004-06-01) predates the baseline and is not recorded. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,29 +6,14 @@
     "name": "Curse of Royal"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Negate the activation and the effect of a Spell or Trap Card that includes the effect of destroying 1 Spell or Trap Card and destroy it.",
-      "summary": "Behavioural difference: the modern script will only negate a chained card whose activation effect carries EFFECT_FLAG_CARD_TARGET and whose chain info holds exactly one target card, whereas goat/c504700133.lua drops both tests and inspects only the chain's CATEGORY_DESTROY operation info, so it can also negate non-targeting Spell/Trap destruction (the upstream annotation reads 'does not require targeting'). The modern BabelCDB text states the requirement explicitly - 'that targets 1 Spell/Trap on the field (and no other cards)' - but no English lineage version carries that text, so the change has no set-release anchor and its chronology is left unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700133,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700133.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Negate the activation and the effect of a Spell or Trap Card that includes the effect of destroying 1 Spell or Trap Card and destroy it.",
+    "modern_text": null,
+    "summary": "Behavioural difference: the modern script will only negate a chained card whose activation effect carries EFFECT_FLAG_CARD_TARGET and whose chain info holds exactly one target card, whereas goat/c504700133.lua drops both tests and inspects only the chain's CATEGORY_DESTROY operation info, so it can also negate non-targeting Spell/Trap destruction (the upstream annotation reads 'does not require targeting'). The modern BabelCDB text states the requirement explicitly - 'that targets 1 Spell/Trap on the field (and no other cards)' - but no English lineage version carries that text, so the change has no set-release anchor and its chronology is left unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700133,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700133.lua"
+  }
 }

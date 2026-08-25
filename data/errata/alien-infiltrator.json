@@ -6,29 +6,14 @@
     "name": "Alien Infiltrator"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If no Spell, Trap or Monster Card on your opponent's side of the field is in the same column as this card, it can attack your opponent directly.",
-      "summary": "Procedure difference with no text counterpart: upstream's historical script picks the destination Monster Card Zone during RESOLUTION (aux.seqmovop -> Card.MoveAdjacent), while the modern script picks it at activation as a target step (aux.seqmovtg stores the sequence via SelectAdjacent; aux.seqmovtgop then moves there only if Duel.CheckLocation still finds that zone free). On the modern card the choice is locked in and public from activation and the move fizzles if the zone is occupied in response; on the historical one the zone is chosen when the effect resolves. No printed English version carries the distinction, and nothing in the packet dates it, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 76573257,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c76573257.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,27 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If no Spell, Trap or Monster Card on your opponent's side of the field is in the same column as this card, it can attack your opponent directly.",
+    "modern_text": null,
+    "summary": "Procedure difference with no text counterpart: upstream's historical script picks the destination Monster Card Zone during RESOLUTION (aux.seqmovop -> Card.MoveAdjacent), while the modern script picks it at activation as a target step (aux.seqmovtg stores the sequence via SelectAdjacent; aux.seqmovtgop then moves there only if Duel.CheckLocation still finds that zone free). On the modern card the choice is locked in and public from activation and the move fizzles if the zone is occupied in response; on the historical one the zone is chosen when the effect resolves. No printed English version carries the distinction, and nothing in the packet dates it, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 76573257,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c76573257.lua"
+  }
 }

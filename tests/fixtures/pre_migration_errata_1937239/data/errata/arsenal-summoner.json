@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-arsenal-summoner",
+  "modern_card": {
+    "passcode": 85489096,
+    "name": "Arsenal Summoner"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "FLIP: Add 1 card that includes \"Guardian\" in its card name from your Deck to your hand. You cannot add \"Celtic Guardian\", \"Winged Dragon, Guardian of the Fortress #1\", \"Winged Dragon, Guardian of the Fortress #2\", \"Guardian of of the Labyrinth\", or \"The Reliable Guardian\".",
+      "summary": "Period procedure, not a text erratum: the goat script's only behavioural difference is an else-branch calling Duel.GoatConfirm(tp,LOCATION_DECK), so a FLIP search that finds no \"Guardian\" card in the Deck is proven by revealing the Deck, which is then shuffled; the modern script does nothing on a whiff. Both target functions return true unconditionally, so the activation condition is unchanged.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700146,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700146.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DR1-EN166, 2005-03-19), matched exactly by the goat cdb text; v0 (DCR-004, 2003-12-01) predates it and differs only by 'Select ... and add it' vs 'Add'. The trailing v1 -> v2 rewording (LCYW-EN247, 2012-09-29) replaces 'card that includes \"Guardian\" in its card name' with '\"Guardian\" card' and fixes the 'Guardian of of the Labyrinth' typo; I treated it as cosmetic on evidence, not assumption. Both scripts filter with Card.IsSetCard(0x52) (the goat variant only spells the constant as a literal), and querying the pinned cards.cdb for every card whose name contains 'Guardian' shows the archetype covers all of them except exactly the five the text excludes - Celtic Guardian (setcode 0xe4), Guardian of the Labyrinth, The Reliable Guardian and Winged Dragon, Guardian of the Fortress #1/#2 (all setcode 0). Sub-archetype codes 0x1052/0x2052 (Gate Guardian, Dark Guardian, Skull Guardian) still match a 0x52 IsSetCard test. So the name-based and archetype-based texts denote the same set. This variant encodes (A) verification only."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-second-coin-toss",
+  "modern_card": {
+    "passcode": 36562627,
+    "name": "Second Coin Toss"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN268, Legendary Collection 4: Joey's World Mega Pack)"
+      },
+      "historical_text": "As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss.",
+      "modern_text": "When a coin toss is performed, you can choose to redo the coin toss. (If the toss involved multiple coin flips, redo all of them.) You can only use the effect of \"Second Coin Toss\" once per turn.",
+      "summary": "Functional erratum: the once-per-turn limit moves from the individual card to the card name. The era text (LOD-EN083) reads 'As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss', which is a per-copy limit on a Continuous Spell, so two face-up copies granted two redos in a turn; v2 replaces it with 'You can only use the effect of \"Second Coin Toss\" once per turn', a hard once per turn by name. The same printing added the multi-flip clause '(If the toss involved multiple coin flips, redo all of them.)', which the era text left unstated for multi-flip cards such as Barrel Dragon.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format a player controlling two Second Coin Tosses gets one redo per turn instead of two, and the shipped implementation also redoes every flip of a multi-flip toss and only the controller's own tosses, neither of which the era text states.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; the gap is real. Edison- and GOAT-era text is the LOD printing (2003-06-06); the erratum is 2013-10-11. PACKET ODDITY: the english_versions array in this packet starts at index 1 - there is no index 0 - so the chain is recorded from index 1, which is the first (and only pre-errata) English text available. CONFLICT recorded, not resolved: the pinned BabelCDB text is not the official v2 (ratio 0.7914). It reads 'redo your coin toss' and 'redo all of yours' where the official English v2 reads 'redo the coin toss' and 'redo all of them', and it carries the footnote that the text is unofficial and describes the OCG functionality. So the shipped implementation restricts redoes to the controller's own tosses, a restriction no English printing states, on top of the dated erratum above; a custom era script should follow the era English text and not inherit that restriction. I did not treat the old text's 'negate the effects of a card requiring a coin toss' framing as a separate behavioural difference - it describes the same redo outcome - and I did not guess at the era ruling for 3-flip cards, which the packet cannot settle."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

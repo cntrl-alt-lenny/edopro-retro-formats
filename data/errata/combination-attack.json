@@ -6,29 +6,14 @@
     "name": "Combination Attack"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
-      "modern_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
-      "summary": "Era eligibility semantics encoded per card with no text change: the goat script requires the chosen monster to have actually battled this turn (`c:GetBattledGroupCount()>0`, upstream-annotated \"If a replay occurred, the monster can be targeted\") where the modern script requires only that it announced an attack (`c:GetAttackAnnouncedCount()==0` rejects), and the goat equip filter additionally accepts a Union equipped by Union Rider (`c:GetFlagEffect(11743119)~=0`) beside EFFECT_UNION_STATUS, which the modern filter does not. The modern script also refuses the multi-Union case while its controller is affected by CARD_BLUEEYES_SPIRIT and checks free zones per controller, where the era script only needs a free zone for the equip card's owner. Chronology of these readings is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700012,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700012.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
+    "modern_text": "During a Battle Phase, you can use this effect on 1 monster that has attacked this turn and is equipped with a Union Monster. Change the Union Monster back to a monster in face-up Attack or Defense Position. Also, the monster that was equipped with the Union Monster may attack again this turn.",
+    "summary": "Era eligibility semantics encoded per card with no text change: the goat script requires the chosen monster to have actually battled this turn (`c:GetBattledGroupCount()>0`, upstream-annotated \"If a replay occurred, the monster can be targeted\") where the modern script requires only that it announced an attack (`c:GetAttackAnnouncedCount()==0` rejects), and the goat equip filter additionally accepts a Union equipped by Union Rider (`c:GetFlagEffect(11743119)~=0`) beside EFFECT_UNION_STATUS, which the modern filter does not. The modern script also refuses the multi-Union case while its controller is affected by CARD_BLUEEYES_SPIRIT and checks free zones per controller, where the era script only needs a free zone for the equip card's owner. Chronology of these readings is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700012,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700012.lua"
+  }
 }

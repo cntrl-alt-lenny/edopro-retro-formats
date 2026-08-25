@@ -6,30 +6,40 @@
     "name": "Rainbow Dark Dragon"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2018-06-28",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first dated printing carrying the current text (BLRR-EN054, Battles of Legend: Relentless Revenge)"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by removing from play 7 DARK monsters with different names from your Graveyard. You can remove from play all other DARK monsters you control and from your Graveyard to have this card gain 500 ATK for each card removed.",
-      "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 7 DARK monsters with different names from your GY. You can banish all other DARK monsters from your field and GY; this card gains 500 ATK for each card banished this way.",
-      "summary": "Wording modernisation only across v0 (PTDN-EN003) -> v1 (LCGX-EN243) -> v2 (undated) -> v3 (BLRR-EN054): 'remove from play' -> 'banish', the PSCT '(from your hand)' clarification of the self-Summon, the addition then removal of the redundant 'and cannot be Special Summoned by other ways', and 'all other DARK monsters you control and from your Graveyard' -> 'from your field and GY'. The summoning restriction did not loosen: the modern script registers EFFECT_SPSUMMON_CONDITION with no value (not EnableReviveLimit), i.e. the card can still only be Special Summoned by banishing 7 differently-named DARK monsters from the GY, and the ATK gain still banishes every other DARK monster on your field and in your GY for 500 ATK each.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by removing from play 7 DARK monsters with different names from your Graveyard. You can remove from play all other DARK monsters you control and from your Graveyard to have this card gain 500 ATK for each card removed.",
+          "modern_text": "(This card is always treated as an \"Ultimate Crystal\" card.)Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 7 DARK monsters with different names from your GY. You can banish all other DARK monsters from your field and GY; this card gains 500 ATK for each card banished this way.",
+          "summary": "Wording modernisation only across v0 (PTDN-EN003) -> v1 (LCGX-EN243) -> v2 (undated) -> v3 (BLRR-EN054): 'remove from play' -> 'banish', the PSCT '(from your hand)' clarification of the self-Summon, the addition then removal of the redundant 'and cannot be Special Summoned by other ways', and 'all other DARK monsters you control and from your Graveyard' -> 'from your field and GY'. The summoning restriction did not loosen: the modern script registers EFFECT_SPSUMMON_CONDITION with no value (not EnableReviveLimit), i.e. the card can still only be Special Summoned by banishing 7 differently-named DARK monsters from the GY, and the ATK gain still banishes every other DARK monster on your field and in your GY for 500 ATK each.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

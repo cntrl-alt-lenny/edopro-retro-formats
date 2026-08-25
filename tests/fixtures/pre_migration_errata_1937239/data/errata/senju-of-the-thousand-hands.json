@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-senju-of-the-thousand-hands",
+  "modern_card": {
+    "passcode": 23401839,
+    "name": "Senju of the Thousand Hands"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card from your Deck and add it to your hand. Then shuffle your Deck.",
+      "summary": "Period procedure plus a relaxed activation condition, not a text erratum: the GOAT script reduces s.tg to `if chk==0 then return true end` (the modern Duel.IsExistingMatchingCard over LOCATION_DECK is removed), so the Normal/Flip Summon trigger can be used with no Ritual Monster left in the Deck, and the failed search is proven by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script requires a Ritual Monster in the Deck and never reveals. The only other diff, the Ritual-Monster filter written as the raw type mask (c:GetType()&0x81)==0x81 instead of c:IsRitualMonster(), is the same test.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700040,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700040.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v1 (DB1-EN046, 2004-10-12), the text the GOAT variant carries exactly. v0 (MRL-080, 2002, 'summoned to the field (excluding Special Summon)') predates the baseline and states the same trigger; v1->v2 (RP01-EN068) and v2->v3 (AP07-EN016, PSCT colon) drop the shuffle wording and 'Monster Card', both cosmetic. Flagged chronology-unresolved because the script encodes both components of the era package and only the reveal is dated: this card has no entry in the 2005-06-16 UDE Card Rulings capture or the 2008-12-15 Konami Card FAQ capture, so the end date of its relaxed activation condition is unattested, and four cards in this batch demonstrably lost that allowance by 2008-12-15. GOAT-era applicability of the package is not in doubt; Edison-era applicability of the activation component is not independently confirmed."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

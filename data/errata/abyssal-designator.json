@@ -6,52 +6,14 @@
     "name": "Abyssal Designator"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null,
-        "status": "verified",
-        "old_attested_through": "2011-02-02",
-        "new_attested_from": "2019-04-03",
-        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
-        "corroboration": [
-          {
-            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
-            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
-            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
-            "archived": true
-          },
-          {
-            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
-            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
-            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
-            "archived": true
-          },
-          {
-            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
-            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
-            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
-            "archived": true
-          }
-        ]
-      },
-      "historical_text": "Pay 1000 Life Points. Declare a Type and an Attribute. Your opponent must send 1 monster with both the Type and Attribute declared from his/her hand or Deck to the Graveyard.",
-      "summary": "Period procedure, not a text erratum: the goat script adds an else-branch calling Duel.GoatConfirm on a failed search, so when the searched player holds no monster of the declared Type and Attribute in hand or Deck the failure is proven by a reveal-and-shuffle; the modern script resolves with no reveal. The 1000 LP payment, the Type/Attribute declaration and the send-to-Graveyard are otherwise identical - the goat variant merely inlines the modern Cost.PayLP(1000) helper as s.cost with the same CheckLPCost/PayLPCost calls.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700155,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700155.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -62,5 +24,50 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null,
+      "status": "verified",
+      "old_attested_through": "2011-02-02",
+      "new_attested_from": "2019-04-03",
+      "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+      "corroboration": [
+        {
+          "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+          "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+          "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+          "archived": true
+        },
+        {
+          "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+          "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+          "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+          "archived": true
+        },
+        {
+          "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+          "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+          "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+          "archived": true
+        }
+      ]
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Pay 1000 Life Points. Declare a Type and an Attribute. Your opponent must send 1 monster with both the Type and Attribute declared from his/her hand or Deck to the Graveyard.",
+    "modern_text": null,
+    "summary": "Period procedure, not a text erratum: the goat script adds an else-branch calling Duel.GoatConfirm on a failed search, so when the searched player holds no monster of the declared Type and Attribute in hand or Deck the failure is proven by a reveal-and-shuffle; the modern script resolves with no reveal. The 1000 LP payment, the Type/Attribute declaration and the send-to-Graveyard are otherwise identical - the goat variant merely inlines the modern Cost.PayLP(1000) helper as s.cost with the same CheckLPCost/PayLPCost calls.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700155,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700155.lua"
+  }
 }

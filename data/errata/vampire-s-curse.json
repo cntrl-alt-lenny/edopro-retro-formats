@@ -6,30 +6,40 @@
     "name": "Vampire's Curse"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2022-11-03",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Magnificent Mavens (MAMA-EN048), the latest printing in the English lineage"
       },
-      "historical_text": "When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase. When this card is Special Summoned this way, it gains 500 ATK.",
-      "modern_text": "When this card is destroyed by battle and sent to the GY: You can pay 500 LP; Special Summon it during the Standby Phase of the next turn. If you do: It gains 500 ATK.",
-      "summary": "Wording modernisation only across the whole English lineage: v0 (PTDN-EN090) 'When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase.' becomes PSCT at v1 (DL16-EN003) and picks up GY / LP abbreviations plus 'If you do:' for the ATK gain at v2 (MAMA-EN048). Every printed version triggers on battle destruction, takes the 500 LP payment there, delays the Special Summon to the next turn's Standby Phase and grants 500 ATK, so the resolution is unchanged.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase. When this card is Special Summoned this way, it gains 500 ATK.",
+          "modern_text": "When this card is destroyed by battle and sent to the GY: You can pay 500 LP; Special Summon it during the Standby Phase of the next turn. If you do: It gains 500 ATK.",
+          "summary": "Wording modernisation only across the whole English lineage: v0 (PTDN-EN090) 'When this card is destroyed by battle and sent to the Graveyard, you can pay 500 Life Points. If you do, Special Summon it during the next turn's Standby Phase.' becomes PSCT at v1 (DL16-EN003) and picks up GY / LP abbreviations plus 'If you do:' for the ATK gain at v2 (MAMA-EN048). Every printed version triggers on battle destruction, takes the 500 LP payment there, delays the Special Summon to the next turn's Standby Phase and grants 500 ATK, so the resolution is unchanged.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

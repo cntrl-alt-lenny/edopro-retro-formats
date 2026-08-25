@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-manticore-of-darkness",
+  "modern_card": {
+    "passcode": 77121851,
+    "name": "Manticore of Darkness"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "During the End Phase, if this card is in the GY because it was sent there this turn: You can send 1 Beast, Beast-Warrior, or Winged Beast monster from your hand or face-up field to the GY; Special Summon this card from your GY.",
+      "summary": "Era timing ruling, no text difference: the goat script special-cases the End Phase hand-size adjustment (reason exactly REASON_RULE|REASON_DISCARD|REASON_ADJUST) by raising a custom single event that fires a cloned TRIGGER_O copy of the revival effect, so a Manticore discarded for hand size can still Special Summon itself during that same End Phase. The modern s.tgop returns early on REASON_ADJUST and never registers the flag the revival effect's condition reads, so the adjustment discard can never trigger it. Chronology of this ruling is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700186,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700186.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The goat variant implements lineage v4 (SBCB-EN049, Speed Duel: Battle City Box, 2020-11-26), the same version the pinned modern cards.cdb carries (exact on both sides). The whole English lineage therefore predates the baseline version and is recorded here rather than as changes: v0 (IOC-067, 2004-03-01, mandatory, 'the turn'), v1 (CP03-EN008, 2007-05-15, optional, 'any turn'), v2 (IOC-EN067, 2007-06-25, back to v0's wording), v3 (SDOK-EN005, 2013-02-08, PSCT), v4 (GY rewording). Note the v0 -> v1 transition is behavioural (mandatory to optional, 'the turn' to 'any turn') but sits entirely before the baseline version. Related but distinct from this record: EdisonFormat's 13 rules-era differences include 'no response to the end-of-turn discard', which is an engine-profile matter; what upstream encodes here is the per-card ability of this specific trigger to activate after the adjustment discard, so it is a ruling with its own implementation, not engine."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

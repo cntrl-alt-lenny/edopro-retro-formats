@@ -6,9 +6,8 @@
     "name": "Rescue Cat"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -28,25 +27,22 @@
           }
         ]
       },
-      "historical_text": "Send this face-up card on your side of the field to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck to the field. The monsters Special Summoned in this way are destroyed during the End Phase.",
-      "modern_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
-      "summary": "Period procedure plus a per-card activation ruling: the GOAT script removes the modern requirement that 2 Level 3 or lower Beasts exist in the Deck (Duel.IsExistingMatchingCard(...,2,...) is gone from s.sptg), so the effect can be activated with only 1 or 0 available, and it proves the shortfall by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)). Upstream's pre-errata script restores that 2-target requirement and never reveals, and is otherwise identical to the GOAT one - so this transition is exactly the loss of the era search procedure. The printed text only modernised its wording across v0-v2.",
-      "resulting_implementation": {
-        "strategy": "reuse-upstream",
-        "historical_passcode": 511002992,
-        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-        "script": "pre-errata/c511002992.lua",
-        "status": "complete",
-        "tested": true
-      },
-      "sources": [
-        "ignis-cardscripts",
-        "ude-card-rulings-archive",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Send this face-up card on your side of the field to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck to the field. The monsters Special Summoned in this way are destroyed during the End Phase.",
+          "modern_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
+          "summary": "Period procedure plus a per-card activation ruling: the GOAT script removes the modern requirement that 2 Level 3 or lower Beasts exist in the Deck (Duel.IsExistingMatchingCard(...,2,...) is gone from s.sptg), so the effect can be activated with only 1 or 0 available, and it proves the shortfall by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)). Upstream's pre-errata script restores that 2-target requirement and never reveals, and is otherwise identical to the GOAT one - so this transition is exactly the loss of the era search procedure. The printed text only modernised its wording across v0-v2.",
+          "sources": [
+            "ignis-cardscripts",
+            "ude-card-rulings-archive",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2017-03-30",
         "precision": "day",
@@ -67,25 +63,71 @@
           }
         ]
       },
-      "historical_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
-      "modern_text": "You can send this card to the Graveyard; Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck, but they have their effects negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
-      "summary": "Functional erratum: the two Special Summoned monsters now have their effects negated, and the effect becomes a hard once per turn. Neither the GOAT nor the pre-errata script registers EFFECT_DISABLE / EFFECT_DISABLE_EFFECT on the summoned monsters, and neither carries SetCountLimit(1,id), so in the earlier era the summoned Beasts kept their effects and multiple copies of the card could be used in the same turn.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "You can send this face-up card to the Graveyard to Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck. Those monsters are destroyed during the End Phase.",
+          "modern_text": "You can send this card to the Graveyard; Special Summon 2 Level 3 or lower Beast-Type monsters from your Deck, but they have their effects negated, also they are destroyed during the End Phase. You can only use this effect of \"Rescue Cat\" once per turn.",
+          "summary": "Functional erratum: the two Special Summoned monsters now have their effects negated, and the effect becomes a hard once per turn. Neither the GOAT nor the pre-errata script registers EFFECT_DISABLE / EFFECT_DISABLE_EFFECT on the summoned monsters, and neither carries SetCountLimit(1,id), so in the earlier era the summoned Beasts kept their effects and multiple copies of the card could be used in the same turn.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "edisonformat-functional-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700179,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700179.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700179,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700179.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511002992,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511002992.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "complete",
+      "tested": true
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

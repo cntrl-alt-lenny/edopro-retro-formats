@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-giant-rat",
+  "modern_card": {
+    "passcode": 97017120,
+    "name": "Giant Rat"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is destroyed as a result of battle and sent to the Graveyard, you can Special Summon 1 EARTH monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the GOAT script's s.operation finds no EARTH monster with 1500 or less ATK in the Deck, it reveals the Deck to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. No lineage version carries reveal wording.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is destroyed as a result of battle and sent to the Graveyard, you can Special Summon 1 EARTH monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target keeps only the free-Monster-Zone check and drops the modern script's Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the battle-destruction trigger can be activated with no eligible EARTH monster left in the Deck. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700172,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700172.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v2 (SD7-EN003, Structure Deck: Invincible Fortress, 2006-05-15) exactly. That printing postdates the 2005-04-01 GOAT snapshot, where v1 (SYE-020, 2004-03-01) was in force, but the difference is the \"sent to the Graveyard as a result of battle\" -> \"destroyed ... and sent to the Graveyard\" rewording, which is cosmetic by the review rules; v2 is the text in force for Edison. Trailing lineage v3 (RP01-EN067, 2008-07-08), v4 (Legendary Collection, 2010-10-01), v5 (YS11-EN012, 2011-07-08), v6 (SDGR-EN020, 2014-10-16) and v7 (SBCB-EN047, 2020-11-26) shuffle the same clauses and abbreviate Graveyard to GY, with v4 briefly reverting to the older phrasing - all cosmetic. Upstream ships one GOAT script encoding both ruling behaviours, so no implementation exists for a state in which only one had changed, and with (B) undated the pair cannot be sequenced. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

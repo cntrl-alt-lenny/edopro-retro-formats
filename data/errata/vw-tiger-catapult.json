@@ -6,38 +6,17 @@
     "name": "VW-Tiger Catapult"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-03-08",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN060, Legendary Collection Kaiba Mega Pack)"
-      },
-      "historical_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\"). You can discard 1 card to change the battle position of 1 monster your opponent controls. (Flip Effects are not activated at this time.)",
-      "modern_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position. (Flip Effects are not activated.)",
-      "summary": "Functional erratum: 'This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control' becomes 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control'. The period wording barred every Special Summon that was not that banish procedure, so the card could never be returned to the field once it left; the modern semi-Nomi wording allows any later Special Summon, revival from the Graveyard included, after the card has been properly Special Summoned once. The same printing also rewrote the discard effect into PSCT with explicit targeting ('You can discard 1 card to change the battle position of 1 monster your opponent controls' -> 'You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position'), with the discard remaining an activation cost in both.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison the EDOPro card can be revived from the Graveyard by Monster Reborn, Call of the Haunted or Premature Burial after one proper summon, which the period Nomi text forbade entirely."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison the EDOPro card can be revived from the Graveyard by Monster Reborn, Call of the Haunted or Premature Burial after one proper summon, which the period Nomi text forbade entirely.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-03-08",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN060, Legendary Collection Kaiba Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\"). You can discard 1 card to change the battle position of 1 monster your opponent controls. (Flip Effects are not activated at this time.)",
+    "modern_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position. (Flip Effects are not activated.)",
+    "summary": "Functional erratum: 'This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control' becomes 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control'. The period wording barred every Special Summon that was not that banish procedure, so the card could never be returned to the field once it left; the modern semi-Nomi wording allows any later Special Summon, revival from the Graveyard included, after the card has been properly Special Summoned once. The same printing also rewrote the discard effect into PSCT with explicit targeting ('You can discard 1 card to change the battle position of 1 monster your opponent controls' -> 'You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position'), with the discard remaining an activation cost in both.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

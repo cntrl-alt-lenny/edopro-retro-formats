@@ -6,44 +6,68 @@
     "name": "Black Luster Soldier - Envoy of the Beginning"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard. Once during each of your turns, you can select and activate 1 of the following effects:● Remove from play 1 monster on the field. If you activate this effect, this card cannot attack during this turn.● If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
-      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the second-attack effect on EVENT_BATTLED and evaluates the opponent's battling monster after the battle ('attg:IsBattleDestroyed()'), whereas the modern script registers it on EVENT_BATTLE_DESTROYING, which fires while the destruction is being applied during damage calculation (upstream comment: 'Battle destroyed registers while the mosnter is on field'). The era form therefore grants the extra attack from the post-battle state rather than from the destruction event itself, and the goat condition additionally requires the destroyed monster to be under the opponent's control. No dated source for when this timing changed was found; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard. Once during each of your turns, you can select and activate 1 of the following effects:● Remove from play 1 monster on the field. If you activate this effect, this card cannot attack during this turn.● If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+          "modern_text": null,
+          "summary": "Era trigger timing, not a text erratum: the GOAT script registers the second-attack effect on EVENT_BATTLED and evaluates the opponent's battling monster after the battle ('attg:IsBattleDestroyed()'), whereas the modern script registers it on EVENT_BATTLE_DESTROYING, which fires while the destruction is being applied during damage calculation (upstream comment: 'Battle destroyed registers while the mosnter is on field'). The era form therefore grants the extra attack from the post-battle state rather than from the destruction event itself, and the goat condition additionally requires the destroyed monster to be under the opponent's control. No dated source for when this timing changed was found; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2020-02-13",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (SDSH-EN012, Structure Deck: Shaddoll Showdown)"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard. Once during each of your turns, you can select and activate 1 of the following effects:● Remove from play 1 monster on the field. If you activate this effect, this card cannot attack during this turn.● If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
-      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your GY. Once per turn, you can activate 1 of these effects.● Target 1 monster on the field; banish it. This card cannot attack the turn this effect is activated.● If this attacking card destroys an opponent's monster by battle: It can make a second attack in a row.",
-      "summary": "Wording modernisation only across four printings (v2 GLD4-EN013 'by battle', v3 LCYW-EN025 PSCT with 'Target ... banish that target face-up' and 'During the Damage Step', v4 YGLD-ENA02 'after damage calculation', v5 DUSA-EN053, v6 SDSH-EN012 GY). No script difference tracks any of them: both scripts banish face-up (Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)), both already target via Duel.SelectTarget, and the damage-calculation phrasing that v3/v4 added and v5/v6 dropped is the same timing the modern script encodes.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard. Once during each of your turns, you can select and activate 1 of the following effects:● Remove from play 1 monster on the field. If you activate this effect, this card cannot attack during this turn.● If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+          "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your GY. Once per turn, you can activate 1 of these effects.● Target 1 monster on the field; banish it. This card cannot attack the turn this effect is activated.● If this attacking card destroys an opponent's monster by battle: It can make a second attack in a row.",
+          "summary": "Wording modernisation only across four printings (v2 GLD4-EN013 'by battle', v3 LCYW-EN025 PSCT with 'Target ... banish that target face-up' and 'During the Damage Step', v4 YGLD-ENA02 'after damage calculation', v5 DUSA-EN053, v6 SDSH-EN012 GY). No script difference tracks any of them: both scripts banish face-up (Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)), both already target via Duel.SelectTarget, and the damage-calculation phrasing that v3/v4 added and v5/v6 dropped is the same timing the modern script encodes.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700118,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700118.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700118,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700118.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

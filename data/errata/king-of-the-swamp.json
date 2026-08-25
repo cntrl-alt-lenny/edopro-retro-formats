@@ -6,28 +6,14 @@
     "name": "King of the Swamp"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can substitute this card for any 1 Fusion Material Monster. When you do this, the other Fusion Material Monster(s) must be the correct one(s). Discard this card from your hand to the Graveyard to add a \"Polymerization\" from your Deck to your hand. The Deck is then shuffled.",
-      "summary": "Period ruling package. Activation condition: the modern `s.target` gates the Ignition effect on `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)` - a \"Polymerization\" actually in the Deck - while the goat target is `if chk==0 then return true end`, so you may discard King of the Swamp with none left, losing the card for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)` to prove the whiff. Only the verification half is dated by the shared search-verification chronology, so the transition is recorded unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700137,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700137.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can substitute this card for any 1 Fusion Material Monster. When you do this, the other Fusion Material Monster(s) must be the correct one(s). Discard this card from your hand to the Graveyard to add a \"Polymerization\" from your Deck to your hand. The Deck is then shuffled.",
+    "modern_text": null,
+    "summary": "Period ruling package. Activation condition: the modern `s.target` gates the Ignition effect on `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)` - a \"Polymerization\" actually in the Deck - while the goat target is `if chk==0 then return true end`, so you may discard King of the Swamp with none left, losing the card for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)` to prove the whiff. Only the verification half is dated by the shared search-verification chronology, so the transition is recorded unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700137,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700137.lua"
+  }
 }

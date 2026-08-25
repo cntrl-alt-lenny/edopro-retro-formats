@@ -6,28 +6,14 @@
     "name": "Level Up!"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Send 1 face-up monster on your side of the field that has \"LV\" in its card name to the Graveyard to activate this card. Special Summon the monster that is written in the card text of that monster from your hand or Deck, ignoring the Summoning conditions.",
-      "summary": "Period activation legality, not a text erratum: the GOAT script's cost filter accepts any face-up 'LV' monster that lists card names (it ends with 'return c.listed_names'), so Level Up! can be activated - and the LV monster is sent to the Graveyard as a cost inside the target function - even when no monster named in the sent monster's text is in the hand or Deck, and the resolution then finds nothing. The modern script appends 'Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,c,e,tp)' to the same filter, making the existence of a summonable listed monster a requirement for activation. Both scripts share the identical spfilter, so what may be Summoned is unchanged. No printed text in the English lineage states either requirement.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700046,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700046.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Send 1 face-up monster on your side of the field that has \"LV\" in its card name to the Graveyard to activate this card. Special Summon the monster that is written in the card text of that monster from your hand or Deck, ignoring the Summoning conditions.",
+    "modern_text": null,
+    "summary": "Period activation legality, not a text erratum: the GOAT script's cost filter accepts any face-up 'LV' monster that lists card names (it ends with 'return c.listed_names'), so Level Up! can be activated - and the LV monster is sent to the Graveyard as a cost inside the target function - even when no monster named in the sent monster's text is in the hand or Deck, and the resolution then finds nothing. The modern script appends 'Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,c,e,tp)' to the same filter, making the existence of a summonable listed monster a requirement for activation. Both scripts share the identical spfilter, so what may be Summoned is unchanged. No printed text in the English lineage states either requirement.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700046,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700046.lua"
+  }
 }

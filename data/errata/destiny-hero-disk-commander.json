@@ -6,34 +6,14 @@
     "name": "Destiny HERO - Disk Commander"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-10-04",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Legendary Hero Decks (LEHD-ENA08), the first printing carrying the errata'd text"
-      },
-      "historical_text": "When this card is Special Summoned from the Graveyard: Draw 2 cards.",
-      "modern_text": "Cannot be Special Summoned from the GY the turn this card was sent to the GY. If this card is Special Summoned from the GY: You can draw 2 cards. You can only use this effect of \"Destiny HERO - Disk Commander\" once per Duel.",
-      "summary": "Functional erratum in three parts, all visible in the script diff. The draw became optional and once per Duel - modern EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O with SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL), against the historical EFFECT_TYPE_TRIGGER_F with no count limit, so historically every Special Summon from the Graveyard mandatorily drew 2. And the card gained 'Cannot be Special Summoned from the GY the turn this card was sent to the GY': the modern script adds a second effect on EVENT_TO_GRAVE that registers EFFECT_SPSUMMON_CONDITION until the end of that turn, which the historical script has no counterpart for. The modern trigger also carries EFFECT_FLAG_DELAY, which the historical mandatory trigger does not.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003116,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003116.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-10-04",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Legendary Hero Decks (LEHD-ENA08), the first printing carrying the errata'd text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When this card is Special Summoned from the Graveyard: Draw 2 cards.",
+    "modern_text": "Cannot be Special Summoned from the GY the turn this card was sent to the GY. If this card is Special Summoned from the GY: You can draw 2 cards. You can only use this effect of \"Destiny HERO - Disk Commander\" once per Duel.",
+    "summary": "Functional erratum in three parts, all visible in the script diff. The draw became optional and once per Duel - modern EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O with SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL), against the historical EFFECT_TYPE_TRIGGER_F with no count limit, so historically every Special Summon from the Graveyard mandatorily drew 2. And the card gained 'Cannot be Special Summoned from the GY the turn this card was sent to the GY': the modern script adds a second effect on EVENT_TO_GRAVE that registers EFFECT_SPSUMMON_CONDITION until the end of that turn, which the historical script has no counterpart for. The modern trigger also carries EFFECT_FLAG_DELAY, which the historical mandatory trigger does not.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003116,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003116.lua"
+  }
 }

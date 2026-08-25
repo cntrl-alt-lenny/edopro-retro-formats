@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-toon-world",
+  "modern_card": {
+    "passcode": 15259703,
+    "name": "Toon World"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2015-06-19",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the current PSCT text (DPBC-EN046, Duelist Pack: Battle City)"
+      },
+      "historical_text": "This card is activated by paying 1000 of your Life Points.",
+      "modern_text": "Activate this card by paying 1000 LP.",
+      "summary": "Wording modernisation only. Every English (TCG) printing from Spell Ruler (2002) to Duelist Pack: Battle City (2015) states nothing but the 1000 Life Point activation cost, the lineage merely alternating between \"This card is activated by paying 1000 of your Life Points\" (v1, v3) and \"Pay 1000 Life Points to activate this card\" (v2, v4) before settling on the PSCT \"Activate this card by paying 1000 LP\" (v5). No resolution differs; the modern script is a single EFFECT_TYPE_ACTIVATE with Cost.PayLP(1000), which implements all of them.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Packet conflict, investigated and resolved against the upstream variant. ProjectIgnis ships \"Toon World (Pre-Errata)\" (511004007, pre-errata/c511004007.lua) implementing a maintenance-cost version: a Field/Continuous effect on EVENT_PHASE+PHASE_STANDBY with count limit 1 that makes you pay 500 LP each of your Standby Phases or destroy the card (REASON_COST), plus a TRIGGER_F on EVENT_TO_GRAVE that recovers the accumulated maintenance LP. Its cdb text matches no English lineage version (packet text_matches_version index 3, ratio 0.2857). The cached errata page (C:\\\\Users\\\\leona\\\\.cache\\\\retroformats\\\\errata\\\\pages\\\\toon-world.json) shows why: that behaviour is the JAPANESE table's version 0 (PS-25, Pharaoh's Servant), whose Yugipedia translation reads \"Pay 1000 Life Points when played. In addition, if you do not pay 500 Life Points during each of your Standby Phases, this card will be destroyed. When this card is sent from the field to the Graveyard, add the Life Points you have paid to your Life Points.\" It is an OCG-only pre-errata text. On the English side, the packet's english_versions start at index 1 because the wikitext's version 0 (MRL-076, the North American Magic Ruler printing) carries no lore parameter at all - its recorded erratum is the card-type frame only (\"Magic Card\" -> \"Spell Card\" at v1), so its text equals v1. The TCG therefore never printed a maintenance cost, and adopting 511004007 in a TCG period format would add an effect no English printing ever had. Baseline is recorded as none-needed: the modern implementation is period-correct for both GOAT (2005-04-01) and Edison (2010-04-24). The upstream variant is left unused and flagged."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

@@ -6,34 +6,14 @@
     "name": "Burning Land"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2015-11-12",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENA31, Yugi's Legendary Decks)"
-      },
-      "historical_text": "Destroy all Field Spell Cards on the field. Inflict 500 points of damage to each player's Life Points during his/her Standby Phase.",
-      "modern_text": "When this card is activated: If there are any Field Spell Cards on the field, destroy them. During each player's Standby Phase: The turn player takes 500 damage.",
-      "summary": "Functional erratum: 'Destroy all Field Spell Cards on the field.' becomes 'When this card is activated: If there are any Field Spell Cards on the field, destroy them.', turning a standing effect into a one-shot on-activation effect. The GOAT script implements the era reading with two differences the modern script lacks - an activation requirement (its target function returns false unless Duel.GetFieldGroupCount(tp,LOCATION_FZONE,LOCATION_FZONE)>0) and a continuous EVENT_ADJUST field effect in the S/T Zone that destroys any Field Spell appearing later while Burning Land is face-up (upstream comment: 'Requires a field spell to be faceup to be activated, it'll always destroy any field spell').",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700043,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700043.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2015-11-12",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENA31, Yugi's Legendary Decks)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Destroy all Field Spell Cards on the field. Inflict 500 points of damage to each player's Life Points during his/her Standby Phase.",
+    "modern_text": "When this card is activated: If there are any Field Spell Cards on the field, destroy them. During each player's Standby Phase: The turn player takes 500 damage.",
+    "summary": "Functional erratum: 'Destroy all Field Spell Cards on the field.' becomes 'When this card is activated: If there are any Field Spell Cards on the field, destroy them.', turning a standing effect into a one-shot on-activation effect. The GOAT script implements the era reading with two differences the modern script lacks - an activation requirement (its target function returns false unless Duel.GetFieldGroupCount(tp,LOCATION_FZONE,LOCATION_FZONE)>0) and a continuous EVENT_ADJUST field effect in the S/T Zone that destroys any Field Spell appearing later while Burning Land is face-up (upstream comment: 'Requires a field spell to be faceup to be activated, it'll always destroy any field spell').",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700043,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700043.lua"
+  }
 }

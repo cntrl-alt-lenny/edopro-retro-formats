@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-manju-of-the-ten-thousand-hands",
+  "modern_card": {
+    "passcode": 95492061,
+    "name": "Manju of the Ten Thousand Hands"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
+      "summary": "Period procedure, not a text erratum: when the Summon trigger resolves with no Ritual Monster or Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK) in the else branch of the operation); the modern script never reveals. The printed text carries no reveal wording in any lineage version, so this is a ruling-layer difference only.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
+      "summary": "Separate per-card era allowance: the goat script's target function is `if chk==0 then return true end` where the modern script requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)`, so the period implementation lets the Normal/Flip Summon trigger activate and resolve with nothing eligible in the Deck. Nothing in the packet or the shared briefs dates when this card lost that allowance, so the chronology is left unresolved rather than borrowed from the verification-procedure interval.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700169,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700169.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage v0 (IOC-088, 2004-03-01) through v4 (HISU-EN047, 2018-11-15) is cosmetic throughout: 'select ... and add it to your hand' -> 'add ... to your hand', PSCT colon at v2, and 'Ritual Monster Card'/'Ritual Spell Card' -> 'Ritual Monster'/'Ritual Spell'. Both scripts reveal the added card with Duel.ConfirmCards(1-tp,g), so the search-reveal itself is unchanged. The two ruling transitions cannot be ordered relative to one another and no upstream implementation exists for the state between them; none is attached because both in-scope snapshots (GOAT 2005-04-01, Edison 2010-04-24) precede the search-verification interval's lower bound of 2011-02-02. If this card's activation allowance ended before 2010-04-24 - as Reinforcement of the Army's demonstrably had by the 2008-12-15 Card FAQ capture - the Edison implementation would need the modern activation check together with the era reveal, a combination upstream does not ship; that risk is what the chronology-unresolved flag records."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

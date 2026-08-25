@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-garuda-the-wind-spirit",
+  "modern_card": {
+    "passcode": 12800777,
+    "name": "Garuda the Wind Spirit"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2011-03-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the Dragunity Legion Structure Deck (SDDL-EN014)"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This monster can only be Special Summoned by removing 1 WIND monster in your Graveyard from play. As long as this monster remains face-up on the field, you may change the battle position of 1 of your opponent's face-up Monster Cards at each End Phase of your opponent's turn.",
+      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 WIND monster in your Graveyard. During your opponent's End Phase, you can select 1 face-up monster your opponent controls, and change its battle position.",
+      "summary": "Rewording only: the continuous framing 'As long as this monster remains face-up on the field, you may change the battle position of 1 of your opponent's face-up Monster Cards at each End Phase of your opponent's turn' becomes the trigger form 'During your opponent's End Phase, you can select 1 face-up monster your opponent controls, and change its battle position', which is how official/c12800777.lua implements it (EFFECT_TYPE_TRIGGER_O on EVENT_PHASE+PHASE_END with s.poscon requiring the opponent to be turn player). The summon restriction is still strict in this version ('This card can only be Special Summoned by removing from play 1 WIND monster in your Graveyard').",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2023-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Speed Duel GX: Duelists of Shadows (SGX3-ENI21), the first printing carrying the 'Must first' form"
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 WIND monster in your Graveyard. During your opponent's End Phase, you can select 1 face-up monster your opponent controls, and change its battle position.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 WIND monster from your GY. Once per turn, during your opponent's End Phase: You can target 1 face-up monster your opponent controls; change that target's battle position.",
+      "summary": "The strict summon restriction became the 'Must first' form: 'This card can only be Special Summoned by removing from play 1 WIND monster in your Graveyard' became 'Must first be Special Summoned (from your hand) by banishing 1 WIND monster from your GY', so the modern card may be Special Summoned from the Graveyard once it has been properly summoned - official/c12800777.lua carries c:EnableReviveLimit() plus an EFFECT_SPSUMMON_PROC ranged to LOCATION_HAND and no EFFECT_SPSUMMON_CONDITION. The same printing added 'Once per turn' (inert: the effect already fired at most once, in the opponent's End Phase) and '(from your hand)', which codifies where the self-summon procedure always drew from.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format the modern card can be Special Summoned from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted after one proper self-summon, which the GOAT- and Edison-era text forbids outright.",
+      "sources": [
+        "ignis-babelcdb",
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The text in force for both GOAT (2005-04-01) and Edison (2010-04-24) is v1 (LON-EN070, dated by Master Collection Volume 1, 2004-12-01), so the chain starts there; v0 (LON-070, 2003-03-01) differs only by lacking the explicit 'This card cannot be Normal Summoned or Set' line, which the Master Collection reprint restored before either snapshot date. 'select' to 'target' is the standard modernisation and the script carries EFFECT_FLAG_CARD_TARGET, and 'removing ... from play' to 'banishing' plus 'Graveyard' to 'GY' are vocabulary changes. This card has no upstream historical or unofficial variant of any kind."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

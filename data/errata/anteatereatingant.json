@@ -6,33 +6,17 @@
     "name": "Anteatereatingant"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard. You can destroy 1 Spell or Trap Card your opponent controls. If you activate this effect, this card cannot attack during this turn.",
-      "summary": "The shipped card differs from the last English printing in three ways. (1) Summoning restriction: 'This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard' is a strict Nomi condition that bars every other Special Summon and does not restrict its own procedure to the hand, while the shipped 'Must be Special Summoned (from your hand) by sending 2 Spells/Traps you control to the GY' both confines the proper summon to the hand and, lacking a 'cannot be Special Summoned by other ways' clause, lets the card be revived afterwards. (2) Use limit: the DR04 text puts no once-per-turn on the destruction effect; the shipped text is 'Once per turn'. (3) The shipped text destroys a targeted Spell/Trap, where the printed text names no selection at activation. Chronology is unresolved: no English printing carries the shipped text and no dated announcement of the change appears in the packet.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format Anteatereatingant should be unrevivable by Monster Reborn/Call of the Haunted and should be able to blow up a Spell/Trap more than once per turn (at the price of not attacking); the shipped card is revivable after a proper summon and is capped at one destruction per turn."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format Anteatereatingant should be unrevivable by Monster Reborn/Call of the Haunted and should be able to blow up a Spell/Trap more than once per turn (at the price of not attacking); the shipped card is revivable after a proper summon and is capped at one destruction per turn.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -41,5 +25,27 @@
   "sources": [
     "ignis-babelcdb",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard. You can destroy 1 Spell or Trap Card your opponent controls. If you activate this effect, this card cannot attack during this turn.",
+    "modern_text": null,
+    "summary": "The shipped card differs from the last English printing in three ways. (1) Summoning restriction: 'This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard' is a strict Nomi condition that bars every other Special Summon and does not restrict its own procedure to the hand, while the shipped 'Must be Special Summoned (from your hand) by sending 2 Spells/Traps you control to the GY' both confines the proper summon to the hand and, lacking a 'cannot be Special Summoned by other ways' clause, lets the card be revived afterwards. (2) Use limit: the DR04 text puts no once-per-turn on the destruction effect; the shipped text is 'Once per turn'. (3) The shipped text destroys a targeted Spell/Trap, where the printed text names no selection at activation. Chronology is unresolved: no English printing carries the shipped text and no dated announcement of the change appears in the packet.",
+    "sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

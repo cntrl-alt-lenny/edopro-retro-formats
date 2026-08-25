@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-gather-your-mind",
+  "modern_card": {
+    "passcode": 7512044,
+    "name": "Gather Your Mind"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Add 1 \"Gather Your Mind\" card from your Deck to your hand. Your Deck is then shuffled. You can only use 1 \"Gather Your Mind\" per turn.",
+      "modern_text": "Add 1 \"Gather Your Mind\" card from your Deck to your hand. Your Deck is then shuffled. You can only use 1 \"Gather Your Mind\" per turn.",
+      "summary": "Two era behaviours carried by the script, neither visible in the printed text. (1) Relaxed activation condition: the GOAT target check is `if chk==0 then return true end`, dropping the modern requirement that another copy of 'Gather Your Mind' still be in the Deck (`Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)`), so the card can be activated on an empty search. (2) Failed-search verification: when nothing is added the GOAT script reveals the Deck (`Duel.GoatConfirm(tp,LOCATION_DECK)`), which the modern script never does. (2) is the shared `search-verification` procedure; (1) is the separate per-card activation question that the shared brief warns changed per card at different dates and which nothing in the packet dates for this card, so the combined change is recorded with chronology unresolved. The once-per-turn oath count limit and the reveal of the added card are unchanged.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700011,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700011.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No Yugipedia Card Errata page (packet `errata_page.missing: true`); literal texts copied from the packet and byte-identical between the GOAT entry and `modern_text` - including the modern-style 'You can only use 1 \"Gather Your Mind\" per turn.' clause, so this record carries no period display text and the printed lineage cannot be checked. The diff lines rendering `id` -> `MODID` are variant plumbing, not behaviour: the on-disk goat/c504700011.lua literally hardcodes the official passcode 7512044 in `SetCountLimit(1,7512044,EFFECT_COUNT_CODE_OATH)` and `c:IsCode(7512044)` where official/c7512044.lua uses its own `id`; the unofficial entry aliases the official code, so the count limit and the search filter behave the same. The sole behavioural deltas are the activation check and the whiff-reveal branch. As with Flying Kamakiri #1, the change is not split into a dated verification half plus an undated activation half, because that would posit an intermediate version upstream does not implement. This card is not on EdisonFormat.com's functional-errata list."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

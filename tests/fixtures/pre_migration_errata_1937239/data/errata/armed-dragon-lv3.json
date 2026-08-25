@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-armed-dragon-lv3",
+  "modern_card": {
+    "passcode": 980973,
+    "name": "Armed Dragon LV3"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
+      "summary": "Era activation semantics: the goat script's target function keeps only the free-Monster-Zone test, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...) check, so the Standby Phase effect can be activated with no \"Armed Dragon LV5\" in hand or Deck. Because sending Armed Dragon LV3 to the Graveyard is a cost paid on activation, the period version lets you throw the card away for nothing; the modern script forbids the activation. No dated source for this card, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
+      "summary": "Period procedure: when the resolution finds no \"Armed Dragon LV5\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script resolves with no reveal. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700003,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700003.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v0 (SOD-EN013, Soul of the Duelist, 2004-10-01), matched exactly by the goat cdb text. The trailing lineage v0 -> v4 is collapsed as cosmetic: 'by sending' cost phrasing (DP2-EN010, 2006-02-08), 'you can send this face-up card from the field' (SDDL-EN018, 2011-03-04), PSCT colon/semicolon (LCYW-EN203, 2012-09-29) and Graveyard -> GY (LED2-EN025, 2018-02-22). Both scripts register the effect as EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O with the same self-send cost, so the 'you can' added at v2 formalises optionality that was already the ruling. Remaining diff items are refactoring drift with no behavioural content: Cost.SelfToGrave inlined as s.spcost (same IsAbleToGraveAsCost/SendtoGrave REASON_COST), SET_ARMED_DRAGON vs the literal 0x111, and | vs + on location masks. Change order: (B) before (A) because the only dated per-card precedent for a withdrawn fail-to-find allowance (Reinforcement of the Army, gone by 2008-12-15) falls before (A)'s earliest possible end date (2011-02-02); the true order for this card is unknown. No upstream implementation exists for the intermediate state and it is unreachable while (B) is undated, so no missing-implementation record is attached."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sinister-serpent",
+  "modern_card": {
+    "passcode": 8131171,
+    "name": "Sinister Serpent"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the new text (LCYW-EN154, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "During your Standby Phase, if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand.",
+      "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
+      "summary": "Problem-Solving Card Text rewording only (v0 SDD-002 -> v1 LCYW-EN154): 'if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand' becomes 'if this card is in your Graveyard: You can return it to your hand'. Same optional Standby Phase self-return, no banish clause and no use limit in either text.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2015-03-19",
+        "precision": "day",
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (PGL2-EN027, Premium Gold: Return of the Bling) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20160408212739/https://yugiohblog.konami.com/articles/?p=7038",
+            "title": "Konami TCG Strategy Site, 'Updates: F&L Cards List, PGL2 Card Text, Rules for Winning During a Chain', 2015-03-20",
+            "quote": "Third, the text of 5 Forbidden cards has been altered, and they will become Limited cards on April 1st.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20150718225816/http://www.yugioh-card.com/en/limited/April_2015.html",
+            "title": "Konami, Forbidden & Limited Lists, effective April 1, 2015",
+            "quote": "FORBIDDEN & LIMITED LISTS Effective from April 1, 2015 UPDATED: 03/20/15",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
+      "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can add it to your hand, also banish 1 \"Sinister Serpent\" from your Graveyard during your opponent's next End Phase. You can only use this effect of \"Sinister Serpent\" once per turn.",
+      "summary": "Functional erratum: the effect gains a hard once-per-turn limit and a delayed self-banish - after returning the card you must banish 1 \"Sinister Serpent\" from your GY during your opponent's next End Phase. The pre-errata script (pre-errata/c511000818.lua) has neither: its Standby Phase TRIGGER_O carries no SetCountLimit and its operation only does Duel.SendtoHand, while the modern script adds e1:SetCountLimit(1,id) and registers the opponent's-End-Phase Duel.Remove effect on resolution.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000818,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000818.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No goat variant exists for this card; the pre-errata variant is the baseline. Its cdb text ('During your Standby Phase, if there is a \"Sinister Serpent\" in your Graveyard: you can add this card from your Graveyard to your hand.') is not an exact copy of any lineage version - the packet scores it 0.7656 against v0 - it is a modernised paraphrase blending v0's 'if there is a \"Sinister Serpent\" in your Graveyard' condition with post-PSCT phrasing. Behaviourally it is v0/v1: optional, unlimited, no banish. Recorded as such rather than as a conflict, because the script unambiguously implements the pre-2015 effect. Trailing cosmetic rewordings after the erratum are not recorded as changes: v2 -> v3 (SBAD-EN037, 2019-05-30, Graveyard -> GY) and v3 -> v4 (SBC1-ENH09, 2023-08-24, 'add it' -> 'return it'); v4 is the pinned modern text."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "konami-errata-announcements"
+  ]
+}

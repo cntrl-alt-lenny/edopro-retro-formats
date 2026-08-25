@@ -6,29 +6,14 @@
     "name": "Penguin Soldier"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "FLIP: You can return up to 2 Monster Cards from the field to the owner's hand.",
-      "summary": "Period trigger semantics with no text correlate: the GOAT variant registers the FLIP effect as a forced trigger (EFFECT_TYPE_TRIGGER_F, and without EFFECT_FLAG_DELAY) whose target selection accepts 0 to 2 monsters, so flipping Penguin Soldier compels the effect to activate while the controller may return nothing (upstream annotation: 'Forced trigger, but can select 0 targets'). The modern script is an optional trigger (EFFECT_TYPE_TRIGGER_O + EFFECT_FLAG_DELAY) that needs at least 1 target to activate. Both keep EFFECT_FLAG_CARD_TARGET, so targeting itself is unchanged. Chronology is unresolved: nothing in the packet dates when the trigger stopped being mandatory or when the 0-target selection was withdrawn.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700163,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700163.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "FLIP: You can return up to 2 Monster Cards from the field to the owner's hand.",
+    "modern_text": null,
+    "summary": "Period trigger semantics with no text correlate: the GOAT variant registers the FLIP effect as a forced trigger (EFFECT_TYPE_TRIGGER_F, and without EFFECT_FLAG_DELAY) whose target selection accepts 0 to 2 monsters, so flipping Penguin Soldier compels the effect to activate while the controller may return nothing (upstream annotation: 'Forced trigger, but can select 0 targets'). The modern script is an optional trigger (EFFECT_TYPE_TRIGGER_O + EFFECT_FLAG_DELAY) that needs at least 1 target to activate. Both keep EFFECT_FLAG_CARD_TARGET, so targeting itself is unchanged. Chronology is unresolved: nothing in the packet dates when the trigger stopped being mandatory or when the 0-target selection was withdrawn.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700163,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700163.lua"
+  }
 }

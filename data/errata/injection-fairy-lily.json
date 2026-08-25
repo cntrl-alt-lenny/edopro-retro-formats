@@ -6,30 +6,46 @@
     "name": "Injection Fairy Lily"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "This card's effect can only be activated during the Damage Step of either player's turn when this card battles. Pay 2000 Life Points to increase the ATK of this monster by 3000 points during the Damage Step only.",
-      "modern_text": "If this card attacks or is attacked, during damage calculation (in either player's turn): You can pay 2000 LP once per battle; this card gains 3000 ATK during that damage calculation only.",
-      "summary": "Wording modernisation only: the goat variant's Lua differs from the modern script solely in writing RESET_PHASE+PHASE_DAMAGE_CAL for RESET_PHASE|PHASE_DAMAGE_CAL in two places, which is the same value, so the two are behaviourally identical. Every English revision from v1 (DB2-EN171) through v5 (YS14-ENA07) preserves the same resolution - during damage calculation of a battle involving this card, in either player's turn, pay 2000 LP to give it 3000 ATK for that damage calculation only, limited to one use per battle by the script's count-1 flag effect resetting at PHASE_DAMAGE_CAL.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card's effect can only be activated during the Damage Step of either player's turn when this card battles. Pay 2000 Life Points to increase the ATK of this monster by 3000 points during the Damage Step only.",
+          "modern_text": "If this card attacks or is attacked, during damage calculation (in either player's turn): You can pay 2000 LP once per battle; this card gains 3000 ATK during that damage calculation only.",
+          "summary": "Wording modernisation only: the goat variant's Lua differs from the modern script solely in writing RESET_PHASE+PHASE_DAMAGE_CAL for RESET_PHASE|PHASE_DAMAGE_CAL in two places, which is the same value, so the two are behaviourally identical. Every English revision from v1 (DB2-EN171) through v5 (YS14-ENA07) preserves the same resolution - during damage calculation of a battle involving this card, in either player's turn, pay 2000 LP to give it 3000 ATK for that damage calculation only, limited to one use per battle by the script's count-1 flag effect resetting at PHASE_DAMAGE_CAL.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700138,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700138.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700138,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700138.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

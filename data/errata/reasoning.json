@@ -6,28 +6,14 @@
     "name": "Reasoning"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Your opponent declares a monster Level. Then pick up cards from the top of your Deck until a monster that can be Normal Summoned is picked up. If that monster is the same Level as the one declared by your opponent, send all picked up cards to the Graveyard. If not, Special Summon the picked up monster and send the remaining cards to the Graveyard.",
-      "summary": "Period activation condition: the GOAT variant drops the modern activation requirement Duel.IsExistingMatchingCard(Card.IsSummonableCard,tp,LOCATION_DECK,0,1,nil) (upstream annotation 'Doesn't check deck'), so Reasoning can be activated with no Normal Summonable monster left in the Deck and simply excavates the Deck away; the modern script refuses the activation outright in that case. This is the per-card 'may it be activated with no valid target' question (brief 1B), NOT the failed-search deck-verification procedure - the script uses no Duel.GoatConfirm - so the shared search-verification chronology deliberately does not apply and the date this card lost the allowance is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700096,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700096.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Your opponent declares a monster Level. Then pick up cards from the top of your Deck until a monster that can be Normal Summoned is picked up. If that monster is the same Level as the one declared by your opponent, send all picked up cards to the Graveyard. If not, Special Summon the picked up monster and send the remaining cards to the Graveyard.",
+    "modern_text": null,
+    "summary": "Period activation condition: the GOAT variant drops the modern activation requirement Duel.IsExistingMatchingCard(Card.IsSummonableCard,tp,LOCATION_DECK,0,1,nil) (upstream annotation 'Doesn't check deck'), so Reasoning can be activated with no Normal Summonable monster left in the Deck and simply excavates the Deck away; the modern script refuses the activation outright in that case. This is the per-card 'may it be activated with no valid target' question (brief 1B), NOT the failed-search deck-verification procedure - the script uses no Duel.GoatConfirm - so the shared search-verification chronology deliberately does not apply and the date this card lost the allowance is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700096,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700096.lua"
+  }
 }

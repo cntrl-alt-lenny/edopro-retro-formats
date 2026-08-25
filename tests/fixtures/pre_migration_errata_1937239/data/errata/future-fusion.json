@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-future-fusion",
+  "modern_card": {
+    "passcode": 77565204,
+    "name": "Future Fusion"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-03-30",
+        "precision": "day",
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN062, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "Reveal 1 Fusion Monster in your Extra Deck and send, from your Main Deck to the Graveyard, the Fusion Material Monsters that are listed on that Fusion Monster Card. During your 2nd Standby Phase after this card's activation, Special Summon 1 of that Fusion Monster from your Extra Deck and target it with this card. (This Special Summon is treated as a Fusion Summon.) When this card leaves the field, destroy that target. When that target is destroyed, destroy this card.",
+      "modern_text": "During your 1st Standby Phase after this card's activation: Show 1 Fusion Monster in your Extra Deck and send the Fusion Materials listed on it from your Main Deck to the Graveyard. During your 2nd Standby Phase after this card's activation: Fusion Summon 1 Fusion Monster from your Extra Deck with the same name as the monster you showed, and target it with this card. When this card leaves the field, destroy that target. When that target is destroyed, destroy this card.",
+      "summary": "Functional erratum: the reveal-and-send of the Fusion Materials moved off the activation and became a separate Trigger Effect in your 1st Standby Phase, and the activation requirement disappeared. The pre-errata script performs the reveal, material selection and Duel.SendtoGrave inside the activation operation, and its target function refuses activation unless an Extra Deck Fusion Monster exists whose listed materials are present in the Main Deck; the modern script's activation cost only starts a turn counter (s.reg) and both the send (counter==1) and the Fusion Summon (counter==2) are Standby Phase trigger effects that can be responded to separately.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002997,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002997.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v4 (LCGX-EN186, 2011-10-04), the version the baseline implements (cdb text ratio 0.809 - an upstream condensation of v4 that keeps v4's 'Reveal 1 Fusion Monster in your Extra Deck', the 2nd Standby Phase Summon and the 'target it with this card' wording). Earlier transitions precede the baseline and are not recorded: v0 (POTD-EN044, 2006-08-16) -> v1 (DP04-EN023, 2007-03-07) adds the same-name clarification; v1 -> v2 is a UDE Card Reference text update whose caption on the errata page is a web.archive.org capture of Upper Deck's Official Card Reference (captured 2008-12-16) rather than a printing; v2 -> v3 (GLD2-EN039, 2009-04-21) is Fusion Deck -> Extra Deck. Trailing v5 -> v6 (LEDD-ENB17, 2017-10-05) is Graveyard->GY only. The packet's second upstream entry, 'Future Fusion (Anime)' 513000094, is an anime-effect card (Fusion Summons on activation and equips itself to the monster; cards-unofficial.cdb ot=4, anime scope), not a historical TCG printing, so it is excluded rather than folded in as a variant."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+  ]
+}

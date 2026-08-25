@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-curse-of-aging",
+  "modern_card": {
+    "passcode": 41398771,
+    "name": "Curse of Aging"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Discard 1 card from your hand. Decrease the ATK and DEF of all monsters on your opponent's side of the field by 500 points until the end of the turn this card is activated.",
+      "summary": "The single implementation difference is the Damage Step declaration: goat/c504700069.lua sets EFFECT_FLAG_DAMAGE_CAL on the activation where the modern script sets EFFECT_FLAG_DAMAGE_STEP, so the two disagree about which sub-step of the Damage Step this Trap may be activated in. Everything else is equivalent - the GOAT local condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is the De Morgan twin of the modern aux.StatChangeDamageStepCondition (not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the ATK/DEF reset expressions differ only in + versus | notation. Chronology is unresolved: no source in the packet dates the change.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700069,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700069.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Escalation requested because the whole record rests on one effect-property bit. I read utility.lua:1412 to confirm aux.StatChangeDamageStepCondition() is 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', i.e. logically identical to the GOAT condition, so the condition swap is a no-op and the flag is the only live difference. constant.lua gives EFFECT_FLAG_DAMAGE_STEP=0x4000 and EFFECT_FLAG_DAMAGE_CAL=0x8000 with PHASE_DAMAGE=0x20 and PHASE_DAMAGE_CAL=0x40 as distinct phases, and every one of the 311 official scripts using DAMAGE_CAL also sets DAMAGE_STEP - so a DAMAGE_CAL-only declaration is not merely legacy notation, but I could not verify the exact ocgcore gate because the effect implementation is absent from the local period-docs and only the compiled ocgcore.dll/libocgcore.so are cached. A reviewer with ocgcore's effect activation code should confirm whether this warrants a substitution at all, or whether the goat rule profile's damage-step handling already covers it and the variant is redundant. The GOAT cdb text matches lineage v0 (PGD-094, 2003-07-18) exactly; the only other lineage version, v1 (SGX3-ENF20, 2023-03-30), is pure PSCT rewording ('lose 500 ATK/DEF', 'currently controls')."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

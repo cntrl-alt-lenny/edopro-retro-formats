@@ -6,29 +6,14 @@
     "name": "The Big March of Animals"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Until the End Phase, increase the ATK of all face-up Beast-Type monsters on your side of the field by 200 points for each Beast-Type monster on your side of the field.",
-      "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag on the Activate effect: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a verbatim inlining of aux.StatChangeDamageStepCondition, and the rest of the diff is inert - a dead 'local tc=g:GetFirst()' before the loop, aux.Next vs Group.Iter, and RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END which constant.lua defines as exactly RESETS_STANDARD_PHASE_END. That is a damage-step-structure matter the GOAT rule profile already sets globally (DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP), and nothing in the packet dates it, so its chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700004,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700004.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Until the End Phase, increase the ATK of all face-up Beast-Type monsters on your side of the field by 200 points for each Beast-Type monster on your side of the field.",
+    "modern_text": null,
+    "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag on the Activate effect: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a verbatim inlining of aux.StatChangeDamageStepCondition, and the rest of the diff is inert - a dead 'local tc=g:GetFirst()' before the loop, aux.Next vs Group.Iter, and RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END which constant.lua defines as exactly RESETS_STANDARD_PHASE_END. That is a damage-step-structure matter the GOAT rule profile already sets globally (DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP), and nothing in the packet dates it, so its chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700004,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700004.lua"
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-a-team-trap-disposal-unit",
+  "modern_card": {
+    "passcode": 13026402,
+    "name": "A-Team: Trap Disposal Unit"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
+      "modern_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
+      "summary": "Era damage-step legality encoded per card, not a text erratum: the goat script refuses the Tribute-to-negate activation during the Damage Step whenever this card is itself the attacker or the attack target (condition `not (Duel.GetCurrentPhase()==PHASE_DAMAGE and (Duel.GetAttacker()==c or Duel.GetAttackTarget()==c))`, upstream-annotated \"Usable in the damage step only if it doesn't relate to battle\"), while the modern script keeps EFFECT_FLAG_DAMAGE_STEP with no battle-relation test and so can negate a Trap in the Damage Step of its own battle. The rest of the diff is idiom: Cost.SelfTribute is literally the goat's inline IsReleasable/Duel.Release cost and Effect.IsTrapEffect is defined as IsActiveType(TYPE_TRAP) (both verified in CardScripts utility.lua). Chronology of the damage-step restriction is unresolved: no dated source in the packet or the shared briefs bounds it.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700019,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700019.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical: the goat-entries.cdb text for 504700019 is byte-identical to the pinned modern cards.cdb text, and the Yugipedia errata page (revid 5386508) carries no English versions (and no other-language versions), so there is no printing available to date anything and no text transition to record; literal texts are carried on the change instead of lineage indices. I ran the engine-redundancy check the instructions call for: the GOAT rule profile (data/rule-profiles/tcg-goat.json: DUEL_6_STEP_BATLLE_STEP, DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP, verified against the pinned ocgapi_constants.h) alters damage-step structure globally but does not decide which effects may be activated while their own card is in the battle, so the per-card script is not redundant with the rule profile and this stays 'ruling' rather than 'engine'."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

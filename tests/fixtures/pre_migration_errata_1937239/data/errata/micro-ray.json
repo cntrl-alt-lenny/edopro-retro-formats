@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-micro-ray",
+  "modern_card": {
+    "passcode": 18190572,
+    "name": "Micro Ray"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "The DEF of 1 face-up monster on the field becomes 0 until the end of the End Phase.",
+      "summary": "Period damage-step legality, not a text erratum: the GOAT variant declares the activation with EFFECT_FLAG_DAMAGE_CAL where the modern script declares EFFECT_FLAG_DAMAGE_STEP, so the era card is activatable during damage calculation itself rather than only in the pre-damage-calculation part of the Damage Step. Its inline condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is logically identical to the modern aux.StatChangeDamageStepCondition (utility.lua: not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the SetReset line is only RESETS_STANDARD_PHASE_END written out, so the property flag is the sole behavioural difference. No source in the packet dates the damage-step rule change, so the chronology is left unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700028,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700028.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text lineage is cosmetic throughout: v0 (AST-047, 2004-06-01) 'until the end of the End Phase' -> v1 (SD10-EN034, 2007-01-17) 'until the end of this turn' is the same duration and both scripts reset the DEF change at RESET_PHASE+PHASE_END; v1 -> v2 (SD10-EN034 reprinted in Machine Madness Value Box, 2014-02-28) is PSCT targeting wording only, and both scripts already carry EFFECT_FLAG_CARD_TARGET, so targeting did not change. Verified aux.StatChangeDamageStepCondition (cardscripts/utility.lua:1412) and RESETS_STANDARD_PHASE_END (cardscripts/constant.lua:300) directly, which is what reduces the diff to the single property flag. Not redundant with the engine rule profile: docs/research/ocgcore-flags.md establishes that DUEL_MODE_GOAT's damage-step flags (DUEL_6_STEP_BATLLE_STEP, DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP) govern chain windows only and that no DUEL_ flag exists for per-card pre-errata behaviour, while per-effect damage-step activation legality lives in the script's EFFECT_FLAG_DAMAGE_STEP/EFFECT_FLAG_DAMAGE_CAL property. Because the chronology is unresolved the applier will block format selection rather than pick a version; that is preferred here to inventing a date."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

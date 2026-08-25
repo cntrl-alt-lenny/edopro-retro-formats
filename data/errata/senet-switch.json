@@ -6,34 +6,14 @@
     "name": "Senet Switch"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2022-08-25",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (TAMA-EN042, Tactical Masters)"
-      },
-      "historical_text": "Once per turn, during your Main Phase, you can move 1 monster on your side of the field to an adjacent (horizontal) unoccupied Monster Card Zone.",
-      "modern_text": "Once per turn: You can target 1 monster in your Main Monster Zone and choose 1 of its unused adjacent (horizontal) Monster Zones; move that target to the chosen adjacent zone.",
-      "summary": "Functional erratum: the destination zone is now chosen when the effect is activated ('choose 1 of its unused adjacent (horizontal) Monster Zones'), and the monster moved must be in your Main Monster Zone. The pre-errata script targets only the monster and calls tc:MoveAdjacent() at resolution, picking any still-free adjacent zone then; the modern script stores the chosen zone at target time (e:SetLabel(tc:SelectAdjacent())) and aborts at resolution if Duel.CheckLocation(tp,LOCATION_MZONE,seq) shows that zone has since been filled.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 63394882,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c63394882.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2022-08-25",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (TAMA-EN042, Tactical Masters)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once per turn, during your Main Phase, you can move 1 monster on your side of the field to an adjacent (horizontal) unoccupied Monster Card Zone.",
+    "modern_text": "Once per turn: You can target 1 monster in your Main Monster Zone and choose 1 of its unused adjacent (horizontal) Monster Zones; move that target to the chosen adjacent zone.",
+    "summary": "Functional erratum: the destination zone is now chosen when the effect is activated ('choose 1 of its unused adjacent (horizontal) Monster Zones'), and the monster moved must be in your Main Monster Zone. The pre-errata script targets only the monster and calls tc:MoveAdjacent() at resolution, picking any still-free adjacent zone then; the modern script stores the chosen zone at target time (e:SetLabel(tc:SelectAdjacent())) and aborts at resolution if Duel.CheckLocation(tp,LOCATION_MZONE,seq) shows that zone has since been filled.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 63394882,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c63394882.lua"
+  }
 }

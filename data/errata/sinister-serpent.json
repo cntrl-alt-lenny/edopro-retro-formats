@@ -6,25 +6,29 @@
     "name": "Sinister Serpent"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2012-09-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the new text (LCYW-EN154, Legendary Collection 3: Yugi's World Mega Pack)"
       },
-      "historical_text": "During your Standby Phase, if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand.",
-      "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
-      "summary": "Problem-Solving Card Text rewording only (v0 SDD-002 -> v1 LCYW-EN154): 'if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand' becomes 'if this card is in your Graveyard: You can return it to your hand'. Same optional Standby Phase self-return, no banish clause and no use limit in either text.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "During your Standby Phase, if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand.",
+          "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
+          "summary": "Problem-Solving Card Text rewording only (v0 SDD-002 -> v1 LCYW-EN154): 'if a \"Sinister Serpent\" exists in your Graveyard, you can return the \"Sinister Serpent\" to your hand' becomes 'if this card is in your Graveyard: You can return it to your hand'. Same optional Standby Phase self-return, no banish clause and no use limit in either text.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2015-03-19",
         "precision": "day",
@@ -51,25 +55,52 @@
           }
         ]
       },
-      "historical_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
-      "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can add it to your hand, also banish 1 \"Sinister Serpent\" from your Graveyard during your opponent's next End Phase. You can only use this effect of \"Sinister Serpent\" once per turn.",
-      "summary": "Functional erratum: the effect gains a hard once-per-turn limit and a delayed self-banish - after returning the card you must banish 1 \"Sinister Serpent\" from your GY during your opponent's next End Phase. The pre-errata script (pre-errata/c511000818.lua) has neither: its Standby Phase TRIGGER_O carries no SetCountLimit and its operation only does Duel.SendtoHand, while the modern script adds e1:SetCountLimit(1,id) and registers the opponent's-End-Phase Duel.Remove effect on resolution.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "During your Standby Phase, if this card is in your Graveyard: You can return it to your hand.",
+          "modern_text": "During your Standby Phase, if this card is in your Graveyard: You can add it to your hand, also banish 1 \"Sinister Serpent\" from your Graveyard during your opponent's next End Phase. You can only use this effect of \"Sinister Serpent\" once per turn.",
+          "summary": "Functional erratum: the effect gains a hard once-per-turn limit and a delayed self-banish - after returning the card you must banish 1 \"Sinister Serpent\" from your GY during your opponent's next End Phase. The pre-errata script (pre-errata/c511000818.lua) has neither: its Standby Phase TRIGGER_O carries no SetCountLimit and its operation only does Duel.SendtoHand, while the modern script adds e1:SetCountLimit(1,id) and registers the opponent's-End-Phase Duel.Remove effect on resolution.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000818,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000818.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511000818,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511000818.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

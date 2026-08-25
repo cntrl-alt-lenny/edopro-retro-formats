@@ -1,10 +1,10 @@
 """The v1 -> v2 migration audit, as a test rather than a number in prose.
 
 `docs/research/erratum-v2-migration-audit.md` reports a partition of the
-296-record corpus. That partition is DERIVED by `tests/migration_audit.py`
-from the current runtime, and these tests keep the derivation honest.
+v1 corpus. That partition is DERIVED by `tests/migration_audit.py` from a
+REPOSITORY it is given, and these tests keep the derivation honest.
 
-**Corrected pass.** The prior version of this file locked in a false
+**Corrected pass.** An earlier version of this file locked in a false
 296-of-296 equivalence claim, produced by a comparator that reduced a v2
 ambiguous candidate to `len(candidate.events)` and compared that INTEGER
 against v1's positional candidate index - silently equating `{A}` and `{B}`
@@ -15,6 +15,33 @@ signature) pairs, and it reproduces the frozen design document's own
 247-safe / 49-nontrivial / 48-self-contradictory partition exactly, with
 YZ-Tank Dragon as the sole record in the 49 that is not in the 48 - matching
 `docs/research/erratum-state-model-v2.md` section 7 by name.
+
+**POST-MIGRATION NOTE (canonical migration commit, immediately after
+1937239d9fd0ebfb47dc850f298c11c3a60679b0):** the real 247-record migration
+has HAPPENED. `data/errata/` now holds 247 `ErratumV2` records and 49
+`Erratum` (v1) records - `Repository.load(audit.REPO_ROOT)` returns THAT
+mixed, live reality, and `audit_corpus()` (unchanged: it always skipped
+`ErratumV2` - "already v2; nothing to migrate") now correctly reports only
+the 49 remaining v1 records against it.
+
+Most tests below exist to prove the AUDIT/MATERIALIZATION MACHINERY
+handles the full diversity of real v1 record shapes correctly - ordering
+proofs, cardinality-collapse detection, self-contradiction detection,
+reference-identity precedence, top-level/metadata preservation - using
+actual named canonical records as worked examples. That regression
+coverage remains valuable (it is what proved the migration itself safe to
+perform), so these tests load the FROZEN PRE-MIGRATION SNAPSHOT via
+`tests.pre_migration_fixture.load_pre_migration_repo()` (a verified
+byte-for-byte copy of `data/errata/` as it stood at commit
+1937239d9fd0ebfb47dc850f298c11c3a60679b0, immediately before migration -
+see that module's docstring) rather than `Repository.load(audit.REPO_ROOT)`
+directly. This is HISTORICAL EVIDENCE, read-only and never regenerated -
+it proves what the pre-migration corpus was and that the migration
+tooling analysed it correctly, not a claim about the current live corpus.
+Tests that need to prove something about the LIVE, current, mixed
+repository (`tests/test_repo_data.py`, `tests/test_shadow_migration.py`'s
+live-corpus assertions) use `Repository.load(audit.REPO_ROOT)` directly, as
+normal.
 """
 
 from __future__ import annotations
@@ -36,9 +63,9 @@ from retroformats.model import (
     change_state_at,
     ordering_proof,
 )
-from retroformats.repo import Repository
 
 from . import migration_audit as audit
+from .pre_migration_fixture import load_pre_migration_repo
 from .migration_audit import (
     CAT_COSMETIC_ONLY,
     CAT_FULL_SINGLE,
@@ -73,7 +100,7 @@ class MigrationAuditPartitionTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.result = audit_corpus()
+        cls.result = audit_corpus(load_pre_migration_repo())
         cls.rows = cls.result["rows"]
         cls.summary = cls.result["summary"]
         cls.by_id = {r["id"]: r for r in cls.rows}
@@ -334,7 +361,7 @@ class GiantRatWorkedExampleTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         cls.record = repo.errata["erratum-giant-rat"]
         cls.v2 = candidate_v2(cls.record)
         cls.row = audit.compare(cls.record)
@@ -392,7 +419,7 @@ class CardinalityCollapseRegressionTest(unittest.TestCase):
     def test_cardinality_alone_would_have_missed_giant_rat(self):
         """Reproduces the OLD bug's exact reduction, to prove it WOULD have
         called Giant Rat's mismatched states equal."""
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-giant-rat"]
         v2 = candidate_v2(record)
         edison = _dt.date(2010, 4, 24)
@@ -417,7 +444,7 @@ class YZTankDragonMissingStateTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         cls.record = repo.errata["erratum-yz-tank-dragon"]
         cls.relevant_indices = audit._relevant_indices(cls.record)
         cls.v2 = candidate_v2(cls.record)
@@ -451,7 +478,7 @@ class SanganAndWitchWorkedExamplesTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         cls.rows = {
             rid: audit.compare(repo.errata[rid])
             for rid in ("erratum-sangan", "erratum-witch-of-the-black-forest")
@@ -695,9 +722,9 @@ class AuditIsNotVacuousTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         cls.records = [e for e in repo.errata.values() if isinstance(e, Erratum)]
-        cls.baseline_not_equivalent = audit_corpus()["summary"]["not_equivalent"]
+        cls.baseline_not_equivalent = audit_corpus(load_pre_migration_repo())["summary"]["not_equivalent"]
 
     def test_C_ordering_copied_from_array_position_is_detected(self):
         """The shortcut this task forbids: treating `changes[]` order as an
@@ -770,7 +797,7 @@ class CoveragePreservationTest(unittest.TestCase):
     `script` alongside `upstream`."""
 
     def test_giant_rat_script_survives_migration(self):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-giant-rat"]
         v2 = candidate_v2(record)
         baseline = v2.authored_states[frozenset()]
@@ -779,7 +806,7 @@ class CoveragePreservationTest(unittest.TestCase):
         self.assertTrue(audit._data_preserved(record, v2))
 
     def test_all_296_records_pass_coverage_preservation(self):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         for record in repo.errata.values():
             if not isinstance(record, Erratum):
                 continue
@@ -792,7 +819,7 @@ class CoveragePreservationTest(unittest.TestCase):
         does NOT trust `candidate_v2()` merely because it constructed the
         candidate itself; it re-derives the expectation from the v1 record
         independently and checks the REAL parsed coverage."""
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-giant-rat"]
         real_coverage_from_v1 = audit._coverage_from_v1
 
@@ -825,7 +852,7 @@ class TopLevelPresencePreservationTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.repo = load_pre_migration_repo()
 
     def _record_with_empty_strings(self):
         base = self.repo.errata["erratum-a-cat-of-ill-omen"]
@@ -900,11 +927,11 @@ class TopLevelPresencePreservationTest(unittest.TestCase):
         self.assertFalse(audit._top_level_preserved(record, v2))
 
     def test_real_corpus_counts_are_still_zero(self):
-        """The fix is about SEMANTICS, not about the current corpus - the
-        real 296-record corpus authors neither field on any record, so
-        the counts must stay exactly what they were, computed correctly
-        rather than by coincidence."""
-        summary = audit.audit_corpus()["summary"]
+        """The fix is about SEMANTICS, not about the corpus - the frozen
+        pre-migration 296-record corpus authors neither field on any
+        record, so the counts must stay exactly what they were, computed
+        correctly rather than by coincidence."""
+        summary = audit.audit_corpus(load_pre_migration_repo())["summary"]
         self.assertEqual(0, summary["applicable_formats_note_count"])
         self.assertEqual(0, summary["notes_count"])
 
@@ -948,7 +975,7 @@ class CoverageKindDistinctionTest(unittest.TestCase):
         its candidate coverage to custom-script at the SAME passcode. The
         audit MUST now report it non-equivalent - coverage KIND is part of
         the migration-data claim, not just the final passcode."""
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-a-cat-of-ill-omen"]
         baseline_row = audit.compare(record)
         self.assertTrue(baseline_row["equivalent"])
@@ -1008,7 +1035,7 @@ class MetadataInventoryTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         cls.inventory = {row["field"]: row for row in audit.metadata_inventory(repo.errata)}
 
     def test_occurrence_count_is_distinct_from_unique_record_count(self):
@@ -1092,7 +1119,7 @@ class MetadataInventoryTest(unittest.TestCase):
             ],
             status["records_with_multiple_distinct_values"],
         )
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-blue-eyes-toon-dragon"]
         baseline_status = (record.implementation or {}).get("status")
         resulting_statuses = {
@@ -1108,7 +1135,7 @@ class MetadataInventoryTest(unittest.TestCase):
         are `complete` again. The old (buggy) "keep only the last
         resulting value" comparison saw complete-vs-complete and missed the
         genuine divergence at change index 0 entirely."""
-        repo = Repository.load(audit.REPO_ROOT)
+        repo = load_pre_migration_repo()
         record = repo.errata["erratum-swords-of-concealing-light"]
         baseline_status = (record.implementation or {}).get("status")
         resulting_statuses = [
@@ -1180,7 +1207,7 @@ class ReferenceIdentityCandidateTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.repo = load_pre_migration_repo()
 
     def test_derivation_reads_the_format_not_a_hard_coded_string(self):
         """Proof this is genuinely DERIVED: point a synthetic format's
@@ -1289,7 +1316,7 @@ class ImplementationMetadataCandidateTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.repo = load_pre_migration_repo()
 
     def test_baseline_metadata_maps_to_the_empty_down_set(self):
         record = self.repo.errata["erratum-a-cat-of-ill-omen"]
@@ -1378,9 +1405,7 @@ class ZeroRelevantMetadataTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        from retroformats.repo import Repository
-
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.repo = load_pre_migration_repo()
         cls.zero_relevant = sorted(
             (r for r in cls.repo.errata.values() if isinstance(r, audit.Erratum) and not r.relevant_changes()),
             key=lambda r: r.id,
@@ -1587,9 +1612,7 @@ class ReferenceIdentityFieldComparisonTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        from retroformats.repo import Repository
-
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        cls.repo = load_pre_migration_repo()
         cls.record = cls.repo.errata["erratum-nobleman-of-crossout"]
         cls.identities = audit.derive_reference_identities(cls.record, cls.repo)
         cls.expected = audit._v1_expected_reference_identities(cls.record, cls.repo)

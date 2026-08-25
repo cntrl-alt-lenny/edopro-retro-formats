@@ -6,34 +6,14 @@
     "name": "Ultimate Tyranno"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2017-04-13",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN006, Dinosmasher's Fury Structure Deck)"
-      },
-      "historical_text": "If this card is in face-up Attack Position at the beginning of your Battle Phase, it must attack first, and attack all monsters your opponent controls once each.",
-      "modern_text": "This card can attack all monsters your opponent controls, once each. During your Battle Phase, if you control an \"Ultimate Tyranno\" that can attack, monsters other than \"Ultimate Tyranno\" cannot attack.",
-      "summary": "Functional erratum: the restriction moved from this card onto your other monsters. The pre-errata script puts EFFECT_FIRST_ATTACK and EFFECT_MUST_ATTACK on the card itself and conditions all three effects (including EFFECT_ATTACK_ALL) on s.facon - the opponent controls a monster, the card was in your Monster Zone when the Battle Phase started (flag registered by an EVENT_PHASE_START+PHASE_BATTLE_START operation), and no other monster of yours has declared the first attack (tracked by a global EVENT_ATTACK_ANNOUNCE handler). So it must attack, must attack first, and only gains attack-all-once-each if it was present at the start of the Battle Phase. The modern script drops all of that: EFFECT_ATTACK_ALL is unconditional and a field EFFECT_CANNOT_ATTACK targeting your own Monster Zone stops every monster except \"Ultimate Tyranno\" from attacking while a face-up Ultimate Tyranno that can attack is on your field - the modern card is never itself forced to attack.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003009,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003009.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-babelcdb",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2017-04-13",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN006, Dinosmasher's Fury Structure Deck)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "If this card is in face-up Attack Position at the beginning of your Battle Phase, it must attack first, and attack all monsters your opponent controls once each.",
+    "modern_text": "This card can attack all monsters your opponent controls, once each. During your Battle Phase, if you control an \"Ultimate Tyranno\" that can attack, monsters other than \"Ultimate Tyranno\" cannot attack.",
+    "summary": "Functional erratum: the restriction moved from this card onto your other monsters. The pre-errata script puts EFFECT_FIRST_ATTACK and EFFECT_MUST_ATTACK on the card itself and conditions all three effects (including EFFECT_ATTACK_ALL) on s.facon - the opponent controls a monster, the card was in your Monster Zone when the Battle Phase started (flag registered by an EVENT_PHASE_START+PHASE_BATTLE_START operation), and no other monster of yours has declared the first attack (tracked by a global EVENT_ATTACK_ANNOUNCE handler). So it must attack, must attack first, and only gains attack-all-once-each if it was present at the start of the Battle Phase. The modern script drops all of that: EFFECT_ATTACK_ALL is unconditional and a field EFFECT_CANNOT_ATTACK targeting your own Monster Zone stops every monster except \"Ultimate Tyranno\" from attacking while a face-up Ultimate Tyranno that can attack is on your field - the modern card is never itself forced to attack.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003009,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003009.lua"
+  }
 }

@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-freed-the-matchless-general",
+  "modern_card": {
+    "passcode": 49681811,
+    "name": "Freed the Matchless General"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "Negate the effect of any Spell Card that targets this card and destroy it. As long as this card remains face-up on the field, you can add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand per turn instead of drawing 1 card from your Deck during your Draw Phase. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the GOAT script's draw-replacement search adds no Level 4 or lower Warrior, it reveals the Deck to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_DECK) in s.operation); the modern script simply ends the resolution. No lineage version carries reveal wording.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Negate the effect of any Spell Card that targets this card and destroy it. As long as this card remains face-up on the field, you can add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand per turn instead of drawing 1 card from your Deck during your Draw Phase. Then shuffle your Deck.",
+      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target returns true unconditionally where the modern script requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the player may give up the normal draw for the turn (the EFFECT_DRAW_COUNT 0 replacement is still registered) with no eligible Warrior in the Deck - a real cost paid for nothing. No source in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700082,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700082.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v2 (DB2-EN137, Dark Beginning 2, 2005-07-27) exactly; v2's printing postdates the 2005-04-01 GOAT snapshot, but its only difference from v1 (LOD-EN016, 2003-06-06) is \"designates this card as a target\" -> \"targets this card\" plus \"from your Deck\", both cosmetic, and v2 is the text in force for Edison. Trailing lineage v3 (RP02-EN054, 2009-07-24), v4 (BP01-EN123, 2012-05-24) and v5 (SBCB-EN149, 2020-11-26) are PSCT passes preserving the resolution. PACKET CONFLICT: the pinned modern cdb text matches no lineage version exactly (modern_text_matches_version = v5 at ratio 0.81) and self-describes as \"unofficial and describes the card's functionality in the OCG\"; recorded as seen rather than reconciled. Script divergences beyond the two ruling edits look like upstream staleness, not era encoding, and none of them was found to change a resolution: the EFFECT_DISABLE field effect uses SetTargetRange(0xff,0xff) in the GOAT copy against LOCATION_SZONE,LOCATION_SZONE modern (the companion EFFECT_SELF_DESTROY effect e3 still uses the narrow S/T-zone range in both, and an activated or equipped Spell sits in the S/T Zone either way), s.distg lacks the modern nil-target guard c:GetCardTargetCount()==0, s.disop tests re:IsActiveType(TYPE_SPELL) rather than re:IsSpellEffect(), and RESET_PHASE|PHASE_DRAW is written with +. The upstream GOAT script also carries the annotation \"If revived by premature burial, not destroyed\", recording the era ruling that a Freed revived by \"Premature Burial\" does not negate and destroy it. Upstream ships one GOAT script encoding both ruling behaviours, so no implementation exists for a state in which only one had changed, and with (B) undated the pair cannot be sequenced. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

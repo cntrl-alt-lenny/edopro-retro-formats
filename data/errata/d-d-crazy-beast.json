@@ -6,29 +6,14 @@
     "name": "D.D. Crazy Beast"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "A monster that this card destroys as a result of battle is removed from play.",
-      "summary": "The goat script requires the battle target to have genuinely been destroyed by battle — `bc:IsBattleDestroyed()`, defined in CardScripts utility.lua as `IsStatus(STATUS_BATTLE_DESTROYED) and IsReason(REASON_BATTLE)` — where the modern script banishes on the battle-destroyed status alone (`bc:IsStatus(STATUS_BATTLE_DESTROYED)`); the two files are otherwise identical. The difference bites exactly when a monster carries that status without an actual battle destruction, which is what the goat Continuous Destruction Punch script manufactures (it sets the status at damage calculation and then destroys by effect): under the era pair that monster is not banished, under the modern predicate it would be. Chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700079,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700079.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "A monster that this card destroys as a result of battle is removed from play.",
+    "modern_text": null,
+    "summary": "The goat script requires the battle target to have genuinely been destroyed by battle — `bc:IsBattleDestroyed()`, defined in CardScripts utility.lua as `IsStatus(STATUS_BATTLE_DESTROYED) and IsReason(REASON_BATTLE)` — where the modern script banishes on the battle-destroyed status alone (`bc:IsStatus(STATUS_BATTLE_DESTROYED)`); the two files are otherwise identical. The difference bites exactly when a monster carries that status without an actual battle destruction, which is what the goat Continuous Destruction Punch script manufactures (it sets the status at damage calculation and then destroys by effect): under the era pair that monster is not banished, under the modern predicate it would be. Chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700079,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700079.lua"
+  }
 }

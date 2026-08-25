@@ -6,28 +6,14 @@
     "name": "Mirror Wall"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Halve the ATK of all your opponent's attacking monsters. Pay 2000 Life Points during each of your Standby Phases. If you do not, destroy this card.",
-      "summary": "Two period behaviours that no printed text carries. (1) ATK-modifier ordering: the halving is registered as EFFECT_SET_ATTACK in the GOAT script but EFFECT_SET_ATTACK_FINAL in the modern one (value function c:GetAttack()/2 in both), so in the era build an ATK boost applied after the halving is added on top of the halved value, while the modern halving is applied after every other modifier and overrides it. (2) Damage-step legality: the activation carries EFFECT_FLAG_DAMAGE_CAL with hint timing TIMING_DAMAGE_CAL instead of the modern EFFECT_FLAG_DAMAGE_STEP / TIMING_DAMAGE_STEP, under a timing condition that is logically identical to the modern aux helper, so the era card is activatable during damage calculation itself. Nothing in the packet dates either difference, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700032,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700032.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -37,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Halve the ATK of all your opponent's attacking monsters. Pay 2000 Life Points during each of your Standby Phases. If you do not, destroy this card.",
+    "modern_text": null,
+    "summary": "Two period behaviours that no printed text carries. (1) ATK-modifier ordering: the halving is registered as EFFECT_SET_ATTACK in the GOAT script but EFFECT_SET_ATTACK_FINAL in the modern one (value function c:GetAttack()/2 in both), so in the era build an ATK boost applied after the halving is added on top of the halved value, while the modern halving is applied after every other modifier and overrides it. (2) Damage-step legality: the activation carries EFFECT_FLAG_DAMAGE_CAL with hint timing TIMING_DAMAGE_CAL instead of the modern EFFECT_FLAG_DAMAGE_STEP / TIMING_DAMAGE_STEP, under a timing condition that is logically identical to the modern aux helper, so the era card is activatable during damage calculation itself. Nothing in the packet dates either difference, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700032,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700032.lua"
+  }
 }

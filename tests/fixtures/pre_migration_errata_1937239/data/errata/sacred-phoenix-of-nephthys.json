@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sacred-phoenix-of-nephthys",
+  "modern_card": {
+    "passcode": 61441708,
+    "name": "Sacred Phoenix of Nephthys"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "If this card is destroyed by a card effect, Special Summon this card during your next Standby Phase. If you Special Summon this card successfully in this way, destroy all Spell and Trap Cards on the field.",
+      "summary": "Period behaviour with no text correlate: the GOAT variant adds c:IsPreviousLocation(LOCATION_SZONE) to the registration condition, so a Nephthys destroyed while it was in a Spell/Trap Zone - i.e. destroyed while being treated as an Equip Card - never registers the flag effect and does not revive in your next Standby Phase (upstream annotation: 'Doesn't resurrect if destroyed while equipped'). The modern script tests only that the card was destroyed by a card effect and revives it regardless of the zone it was destroyed in. Chronology unresolved: nothing in the packet dates the change.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700099,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700099.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v0 (FET-EN005, Flaming Eternity, 2005-03-01) exactly. v0 -> v7 (SR14-EN017, 2023-12-07) is wording modernisation: 'successfully' dropped at v1, 'from the Graveyard' spelled out at v2 (DR3-EN125, 2006-11-25), the v3 PSCT rewrite (DT06-EN009, 2012-02-03) restating the trigger as 'During your next Standby Phase after this card was destroyed by a card effect AND SENT TO THE GRAVEYARD' - a codification both scripts already implement, since the trigger lives in LOCATION_GRAVE and tests REASON_DESTROY|REASON_EFFECT - then 'When this card is Special Summoned this way' -> 'If you do' and Graveyard -> GY. WORTH RE-CHECKING IF REVISITED: v6 (AC18-EN013, 2018-10-25) prepends 'Once per turn,' to the trigger, which reads like a restriction, but the script diff shows no difference at all in the trigger registration, the flag effect or its counts between the GOAT variant and the modern script, so upstream treats the two as resolving identically and no functional change is recorded from it. Remaining diff is idiom (| vs +, Duel.IsTurnPlayer/Duel.IsPhase vs Duel.GetTurnPlayer()==tp/Duel.GetCurrentPhase()==, an inlined Card.IsSpellTrap replacing a local filter)."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,45 +6,69 @@
     "name": "Aqua Chorus"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
-      "summary": "Era damage-step legality, not a text erratum: the GOAT script gives the activation EFFECT_FLAG_DAMAGE_CAL and no damage-step guard, so this Continuous Spell can be activated inside the damage-calculation substep and its 500 ATK/DEF boost applies to that damage calculation. The modern script uses EFFECT_FLAG_DAMAGE_STEP plus aux.StatChangeDamageStepCondition (utility.lua:1412, 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())'), which bars activation once damage calculation is reached. The printed text says nothing about the window in either version, and no dated source for when the TCG window changed was found, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
+          "modern_text": null,
+          "summary": "Era damage-step legality, not a text erratum: the GOAT script gives the activation EFFECT_FLAG_DAMAGE_CAL and no damage-step guard, so this Continuous Spell can be activated inside the damage-calculation substep and its 500 ATK/DEF boost applies to that damage calculation. The modern script uses EFFECT_FLAG_DAMAGE_STEP plus aux.StatChangeDamageStepCondition (utility.lua:1412, 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())'), which bars activation once damage calculation is reached. The printed text says nothing about the window in either version, and no dated source for when the TCG window changed was found, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2023-03-30",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the reworded text (SGX3-ENI34, Speed Duel GX: Duelists of Shadows)"
       },
-      "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
-      "modern_text": "If there are monsters with the same name on the field, those monsters gain 500 ATK/DEF.",
-      "summary": "Wording modernisation only: 'increase the ATK and DEF of all of those monsters with the same name by 500 points' becomes 'those monsters gain 500 ATK/DEF'. The continuous field effect (EFFECT_UPDATE_ATTACK/DEFENSE +500 targeting face-up monsters sharing a name) is identical in both scripts.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "If there are monsters with the same name on the field, increase the ATK and DEF of all of those monsters with the same name by 500 points.",
+          "modern_text": "If there are monsters with the same name on the field, those monsters gain 500 ATK/DEF.",
+          "summary": "Wording modernisation only: 'increase the ATK and DEF of all of those monsters with the same name by 500 points' becomes 'those monsters gain 500 ATK/DEF'. The continuous field effect (EFFECT_UPDATE_ATTACK/DEFENSE +500 targeting face-up monsters sharing a name) is identical in both scripts.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700166,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700166.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700166,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700166.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

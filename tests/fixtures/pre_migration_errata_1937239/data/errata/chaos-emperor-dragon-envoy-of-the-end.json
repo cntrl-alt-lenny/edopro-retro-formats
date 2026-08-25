@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-chaos-emperor-dragon-envoy-of-the-end",
+  "modern_card": {
+    "passcode": 82301904,
+    "name": "Chaos Emperor Dragon - Envoy of the End"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2018-11-21",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (JUMP-EN086, Weekly Shonen Jump November 2018 membership promotional card)"
+      },
+      "historical_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your Graveyard. You can pay 1000 Life Points; send all cards in both players' hands and on the field to the Graveyard, then inflict 300 damage to your opponent for each card sent to the Graveyard by this effect.",
+      "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your GY. Once per turn: You can pay 1000 LP; send as many cards in both players' hands and on the field as possible to the GY, then inflict 300 damage to your opponent for each card sent to the opponent's GY by this effect. You cannot activate other cards or effects during the turn you activate this card's effect.",
+      "summary": "Functional erratum: the Ignition effect gained 'Once per turn' plus the 'you cannot activate other cards or effects during the turn you activate this card's effect' lock (modern e3:SetCountLimit(1), the ACTIVITY_CHAIN custom counter and the EFFECT_CANNOT_ACTIVATE oath registered in the cost - all absent from pre-errata/c511000819.lua), and its damage now counts only cards sent to the opponent's GY rather than every card sent by both players. The Summon restriction also became absolute: the pre-errata script registers only EFFECT_SPSUMMON_PROC alongside EnableReviveLimit, so after a proper Special Summon the card can be revived from the GY, while the modern script adds EFFECT_SPSUMMON_CONDITION, which forbids any Special Summon other than its own procedure.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000819,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000819.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflicting evidence preserved: lineage v3 and v4 both carry the card number DPKB-EN016 with different texts, and the packet dates v4 by its other printing, the Silver Dragon Value Box (2013-09-13). That places the baseline's text after both period snapshots. The unrecorded v3->v4 transition is not obviously cosmetic: v0-v3 read 'This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard' while v4 reads 'Must first be Special Summoned (from your hand) by banishing...', which adds an explicit hand restriction and the 'first' that permits later revival. The packet contains no ruling source settling how the era read the v0-v3 wording, and Project Ignis ships no implementation of v0-v3, so the transition is left in these notes rather than invented as a dated change. The cdb text is a near (0.9297) not exact match to v4, differing in 'in your Graveyard' vs 'from your Graveyard' and 'for each card sent this way' vs 'for each card sent to the Graveyard by this effect'. Also unrecorded because it predates the baseline: v0 (IOC-000) lacked the 'cannot be Normal Summoned or Set' clause added in v1."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
+}

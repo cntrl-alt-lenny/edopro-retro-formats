@@ -6,28 +6,14 @@
     "name": "Monster Gate"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Offer 1 monster on your side of the field as a Tribute. Pick up cards from your Deck until you pick up a monster than can be Normal Summoned, and Special Summon it. Send any other cards picked up to the Graveyard.",
-      "summary": "Era activation legality: the modern script's activation check requires Duel.IsExistingMatchingCard(Card.IsSummonableCard,tp,LOCATION_DECK,0,1,nil), i.e. a monster that can be Normal Summoned must still be in the Deck, while the GOAT script drops that clause entirely (upstream annotates it 'Doesn't check deck'), so the era card may be activated with no valid monster left and simply excavates the whole Deck to the Graveyard. This is the shared brief's separable behaviour (B), an activation-condition relaxation, not the failed-search reveal procedure - the script does not call Duel.GoatConfirm - so the search-verification chronology does not apply and this per-card allowance cannot be dated from the packet.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700071,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700071.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -37,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Offer 1 monster on your side of the field as a Tribute. Pick up cards from your Deck until you pick up a monster than can be Normal Summoned, and Special Summon it. Send any other cards picked up to the Graveyard.",
+    "modern_text": null,
+    "summary": "Era activation legality: the modern script's activation check requires Duel.IsExistingMatchingCard(Card.IsSummonableCard,tp,LOCATION_DECK,0,1,nil), i.e. a monster that can be Normal Summoned must still be in the Deck, while the GOAT script drops that clause entirely (upstream annotates it 'Doesn't check deck'), so the era card may be activated with no valid monster left and simply excavates the whole Deck to the Graveyard. This is the shared brief's separable behaviour (B), an activation-condition relaxation, not the failed-search reveal procedure - the script does not call Duel.GoatConfirm - so the search-verification chronology does not apply and this per-card allowance cannot be dated from the packet.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700071,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700071.lua"
+  }
 }

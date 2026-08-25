@@ -6,34 +6,50 @@
     "name": "Chaosrider Gustaph"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2023-03-30",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the printing carrying the current text (SGX3-ENF04, Speed Duel GX: Duelists of Shadows)"
       },
-      "historical_text": "You can remove up to 2 Spell Cards in your Graveyard from play to increase the ATK of this monster by 300 points for each card removed from play until the end of your opponent's next turn. This effect can only be used once during your turn.",
-      "modern_text": "Once per turn: You can banish up to 2 Spells from your GY; this card gains 300 ATK for each card banished by this effect, until the end of your opponent's turn.",
-      "summary": "Wording modernisation only: the GOAT variant and the modern script differ solely in reset notation - RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END with count 2 versus RESETS_STANDARD_DISABLE_PHASE_END|RESET_OPPO_TURN with the default count - which expire at the same point (the end of the opponent's next turn) for an Ignition effect only usable in your own Main Phase, plus a CATEGORY_REMOVE announcement and two hint calls. Neither script sets EFFECT_FLAG_CARD_TARGET, so the banish never targeted in either era, and e1:SetCountLimit(1) is present in both.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can remove up to 2 Spell Cards in your Graveyard from play to increase the ATK of this monster by 300 points for each card removed from play until the end of your opponent's next turn. This effect can only be used once during your turn.",
+          "modern_text": "Once per turn: You can banish up to 2 Spells from your GY; this card gains 300 ATK for each card banished by this effect, until the end of your opponent's turn.",
+          "summary": "Wording modernisation only: the GOAT variant and the modern script differ solely in reset notation - RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END with count 2 versus RESETS_STANDARD_DISABLE_PHASE_END|RESET_OPPO_TURN with the default count - which expire at the same point (the end of the opponent's next turn) for an Ignition effect only usable in your own Main Phase, plus a CATEGORY_REMOVE announcement and two hint calls. Neither script sets EFFECT_FLAG_CARD_TARGET, so the banish never targeted in either era, and e1:SetCountLimit(1) is present in both.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700078,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700078.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700078,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700078.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

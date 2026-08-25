@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sonic-bird",
+  "modern_card": {
+    "passcode": 57617178,
+    "name": "Sonic Bird"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the Normal/Flip Summon trigger resolves with no Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged across the whole lineage.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
+      "summary": "Separate per-card ruling: the goat script drops the modern activation requirement that a Ritual Spell actually be in the Deck - the target function's 'if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' becomes 'if chk==0 then return true end' - so the optional trigger may be activated on a search that cannot find anything. Nothing in the packet dates when this card lost its fail-to-find allowance (the shared verification chronology explicitly does not cover it), so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700092,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700092.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v2 (SYE-021, exact cdb match); v0/v1 (MRL, 2002) predate it and only swap 'Magic'->'Spell' and summon wording. Trailing lineage v2 -> v6 (SBAD-EN011) is cosmetic: 'select ... and add it to your hand. Then shuffle your Deck' -> 'add ... to your hand', PSCT colon, 'Ritual Spell Card' -> 'Ritual Spell'. One lineage oddity: v3 (GLD1-EN002, 2008) reads 'add 1 Ritual Spell Card' with no 'you can', which later printings (v4 RP01-EN075, v5, v6) and both scripts restore as optional, so no functional flip is recorded; the packet's Retro Pack NA date (2024-08-23) is anomalous against its EU date (2008-07-08) but nothing here is dated from that printing. The script's filter change (c:IsRitualSpell() -> c:GetType()==0x82) is the same test written with the raw TYPE_SPELL|TYPE_RITUAL mask. The two ruling changes are entangled in play - the reveal is only reachable because the activation condition is relaxed - but they are recorded separately because only the reveal half has sourced bounds; the state between them needs no implementation, as GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

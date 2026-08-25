@@ -1,18 +1,33 @@
 # Two v2 representation gaps — design, and now implementation
 
-**Status: IMPLEMENTED, then CORRECTED after review. Canonical migration
-NOT started.** The design comparison below (sections 1-5) was written,
-reviewed, and — after one correction (section 3's `reference_id`, below) —
-accepted; sections 6-7 now describe what was actually built (`implementation_metadata[]`,
-`reference_identities[]`, their validators, and their consumer/precedence
-wiring), not a proposal. **No `data/errata/*.json` record has been
-migrated** — the schema/runtime/validator/consumer changes exist so a
-future migration has somewhere to put this data, and this task's own
-migration-audit tooling independently verifies every one of the 247
-semantically-equivalent records' v1 metadata/identity round-trips into the
-new representation, but the canonical data itself is untouched, and the
-247/49/48 partition (`erratum-v2-migration-audit.md`) is unchanged by any
-of this.
+**Status: IMPLEMENTED, CORRECTED after review, and the 247-record
+canonical migration is now COMPLETE** (commit immediately after
+`1937239d9fd0ebfb47dc850f298c11c3a60679b0`). `implementation_metadata[]`
+and `reference_identities[]` are no longer merely a destination waiting
+for data — all 247 semantically-equivalent records (including the 11
+parity-only ones this document's design work exists for) have been
+migrated into them, verified schema-valid, load-clean, preservation-clean,
+and byte-identical-output at migration time
+(`docs/research/erratum-v2-migration-audit.md`'s status line). The 49
+non-equivalent records remain v1 - not started, not attempted here, a
+separate future milestone.
+
+The design comparison below (sections 1-5) was written, reviewed, and —
+after one correction (section 3's `reference_id`, below) — accepted;
+sections 6-7 describe what was actually built
+(`implementation_metadata[]`, `reference_identities[]`, their validators,
+and their consumer/precedence wiring). Everything in this document from
+here on describes the PRE-MIGRATION state of the work (design, then
+implementation, then verification) - kept as-is, historical and frozen,
+because it is exactly what was reviewed and approved before the real
+migration ran; it predates the migration itself, so its own "not yet
+migrated" statements are accurate for the moment they describe, not for
+today. This task's own migration-audit tooling independently verified
+every one of the 247 semantically-equivalent records' v1 metadata/
+identity round-tripped into the new representation BEFORE the migration
+ran, and the 247/49/48 partition (`erratum-v2-migration-audit.md`) is
+unchanged by any of this — the semantic comparator itself was never
+touched, at any point in this whole effort.
 
 That round-trip claim was **not** valid as first implemented: two bugs,
 both found by review, are recorded and fixed in section 6a. The first one

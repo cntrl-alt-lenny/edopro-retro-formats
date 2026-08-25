@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-fenrir",
+  "modern_card": {
+    "passcode": 218704,
+    "name": "Fenrir"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 2 WATER monsters in your Graveyard. When this card destroys an opponent's monster as a result of battle, your opponent skips their next Draw Phase.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the mandatory 'your opponent skips their next Draw Phase' trigger on EVENT_BATTLED with its own condition (GetBattleTarget() is the opponent's and IsBattleDestroyed()), where the modern script uses EVENT_BATTLE_DESTROYING with aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'. Chronology unresolved - nothing in the packet or in chronologies.json bounds it.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700001,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700001.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Era mismatch on the display text. v0 (IOC-020) lacks the sentence 'This card cannot be Normal Summoned or Set.' that v1 (SD4-EN008, 2005-05-09) added, and v2 (DR2-EN020, 2005-10-20) - the text the GOAT variant ships verbatim - only reshuffles v1's wording ('removing from play 2 WATER monsters' for 'removing 2 WATER monsters ... from play', 'their' for 'his/her'). No behavioural consequence is demonstrable from the packet: neither script registers any Normal Summon restriction (both are c:EnableReviveLimit() plus EFFECT_SPSUMMON_PROC from the hand, the prohibition being carried by the card's cdb type rather than by Lua), and apart from the trigger event and | vs + constant spelling the two scripts are identical. Recorded as an era mismatch of the period text rather than as a functional change, because the packet gives no script evidence either way for the v0 -> v1 sentence. Forward from the baseline, v2 -> v3 (IOC-EN020, Invasion of Chaos 25th Anniversary Edition, 2023-04-20) reverts to the v1 wording, which is exactly what the pinned modern cdb text matches - a trailing cosmetic transition, recorded here rather than as a change entry. The battle-destruction timing is a per-card ruling because no rule-profile flag can redirect a card to a different event code."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,34 +6,50 @@
     "name": "Cipher Soldier"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2016-11-17",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of OP03-EN016 (OTS Tournament Pack 3), the printing that introduces the current text"
       },
-      "historical_text": "When this card battles with a Warrior-Type monster, increase the ATK and DEF of this monster by 2000 points only during damage calculation.",
-      "modern_text": "If this card battles a Warrior-Type monster, during damage calculation: This card gains 2000 ATK and DEF during that damage calculation only.",
-      "summary": "Wording modernisation only. The goat script is behaviourally identical to the modern one — the sole diff is `RESET_PHASE+PHASE_DAMAGE_CAL` vs `RESET_PHASE|PHASE_DAMAGE_CAL`, the same bits — and every English revision from v0 (WC4-002) to v5 (OP03-EN016) keeps the same mandatory EVENT_PRE_DAMAGE_CALCULATE trigger granting +2000 ATK and DEF for that damage calculation only when this card battles a Warrior-Type monster.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card battles with a Warrior-Type monster, increase the ATK and DEF of this monster by 2000 points only during damage calculation.",
+          "modern_text": "If this card battles a Warrior-Type monster, during damage calculation: This card gains 2000 ATK and DEF during that damage calculation only.",
+          "summary": "Wording modernisation only. The goat script is behaviourally identical to the modern one — the sole diff is `RESET_PHASE+PHASE_DAMAGE_CAL` vs `RESET_PHASE|PHASE_DAMAGE_CAL`, the same bits — and every English revision from v0 (WC4-002) to v5 (OP03-EN016) keeps the same mandatory EVENT_PRE_DAMAGE_CALCULATE trigger granting +2000 ATK and DEF for that damage calculation only when this card battles a Warrior-Type monster.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700139,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700139.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700139,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700139.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

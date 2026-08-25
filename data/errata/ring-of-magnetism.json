@@ -6,29 +6,14 @@
     "name": "Ring of Magnetism"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can only equip this card to a monster on your side of the field. Decrease the ATK and DEF of a monster equipped with this card by 500 points. In addition, all the monsters on your opponent's side of the field can only attack the monster equipped with this card, if they attack.",
-      "summary": "Era ruling on immunity, no text difference: the goat script extends the equip legality function s.eqlimit (the limit handed to aux.AddEquipProcedure) with `not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)`, so Ring of Magnetism cannot be equipped to - and does not remain equipped to - a monster unaffected by its effect. The modern script only requires the monster to be one you control, leaving the card equipped while its -500 ATK/DEF and its EFFECT_ONLY_ATTACK_MONSTER redirection simply fail to apply. Chronology of this ruling is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700030,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700030.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can only equip this card to a monster on your side of the field. Decrease the ATK and DEF of a monster equipped with this card by 500 points. In addition, all the monsters on your opponent's side of the field can only attack the monster equipped with this card, if they attack.",
+    "modern_text": null,
+    "summary": "Era ruling on immunity, no text difference: the goat script extends the equip legality function s.eqlimit (the limit handed to aux.AddEquipProcedure) with `not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)`, so Ring of Magnetism cannot be equipped to - and does not remain equipped to - a monster unaffected by its effect. The modern script only requires the monster to be one you control, leaving the card equipped while its -500 ATK/DEF and its EFFECT_ONLY_ATTACK_MONSTER redirection simply fail to apply. Chronology of this ruling is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700030,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700030.lua"
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-chaosrider-gustaph",
+  "modern_card": {
+    "passcode": 47829960,
+    "name": "Chaosrider Gustaph"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2023-03-30",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the printing carrying the current text (SGX3-ENF04, Speed Duel GX: Duelists of Shadows)"
+      },
+      "historical_text": "You can remove up to 2 Spell Cards in your Graveyard from play to increase the ATK of this monster by 300 points for each card removed from play until the end of your opponent's next turn. This effect can only be used once during your turn.",
+      "modern_text": "Once per turn: You can banish up to 2 Spells from your GY; this card gains 300 ATK for each card banished by this effect, until the end of your opponent's turn.",
+      "summary": "Wording modernisation only: the GOAT variant and the modern script differ solely in reset notation - RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END with count 2 versus RESETS_STANDARD_DISABLE_PHASE_END|RESET_OPPO_TURN with the default count - which expire at the same point (the end of the opponent's next turn) for an Ignition effect only usable in your own Main Phase, plus a CATEGORY_REMOVE announcement and two hint calls. Neither script sets EFFECT_FLAG_CARD_TARGET, so the banish never targeted in either era, and e1:SetCountLimit(1) is present in both.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700078,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700078.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Verified against goat/c504700078.lua and official/c47829960.lua in full, not just the packet diff: the GOAT s.target keeps a chkc branch, but with no EFFECT_FLAG_CARD_TARGET on the effect it is unreachable, matching the upstream annotation 'Effect doesn't target'; the modern script does not target either. Text lineage v0 (IOC-018, 2004-03-01) -> v1 (DR2-EN018) -> v2 (SDDE-EN012) -> v3 (SGX3-ENF04) only moves the once-per-turn sentence to the front and modernises 'remove from play'/'ATK'/'GY' wording; the duration wording 'until the end of your opponent's next turn' -> 'until the end of your opponent's turn' names the same endpoint for an effect that can only be activated on your own turn. Minor packet note, not flagged: the pinned modern cdb text is not an exact match to v3 (0.7666) because BabelCDB carries an unofficial OCG-functionality rendering with an explicit footnote saying so, and writes 'and if you do,' where the printed text has a semicolon. Upstream ships the GOAT code for period display text only."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

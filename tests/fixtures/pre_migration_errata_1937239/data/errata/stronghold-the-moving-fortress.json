@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-stronghold-the-moving-fortress",
+  "modern_card": {
+    "passcode": 13955608,
+    "name": "Stronghold the Moving Fortress"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-10-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DPYG-EN030 Unlimited Edition, distributed in Duelist Pack: Yugi & Kaiba Special Edition)"
+      },
+      "historical_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card's ATK becomes 3000.",
+      "modern_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card gains 3000 ATK.",
+      "summary": "Functional erratum: \"this card's ATK becomes 3000\" became \"this card gains 3000 ATK\". The pre-errata script registers the three-Gadget effect as EFFECT_SET_ATTACK_FINAL with value 3000, so while the Gadgets are face-up the ATK is fixed at 3000 and every other ATK modifier is overridden; the modern script registers EFFECT_UPDATE_ATTACK 3000, an additive boost that stacks with other ATK changes. The two scripts are otherwise identical (same activation/Special Summon target check, same TYPE_TRAP+TYPE_EFFECT monster attribute, same face-up Gadget condition).",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003022,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003022.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Earlier transitions are cosmetic and precede the baseline's recorded version: v0 (SD10-EN031, 2007-01-17) -> v1 (DPYG-EN030 1st Edition, 2009-07-07) -> v2 (LCYW-EN101, 2012-09-29) -> v3 (BP02-EN188, 2013-06-28) only move the \"(This card is also still a Trap Card.)\" clause, drop \"After activation\", and reword the Gadget requirement (\"are all face-up on your side of the field\" -> \"you control\"); all keep \"ATK becomes 3000\" and all require face-up Gadgets, which both scripts check with a face-up filter. v1 is the text in force at the Edison snapshot (2010-04-24) and is behaviourally identical to v3, which is what the baseline's cdb text matches (it differs from v3 only by the article \"a\" before \"Green Gadget\"; packet ratio 0.9959). The card postdates the GOAT snapshot (first TCG printing 2007-01-17). Apparent date conflict at v4, resolved: the row bundles card number DPYG-EN030 again, but as the Unlimited Edition reprint distributed in Duelist Pack: Yugi & Kaiba Special Edition (2013-10-25), not the 2009 1st Edition; v2 (2012-09-29) and v3 (2013-06-28) still carry the old text, so the lineage ordering supports the 2013 dating the packet used. Trailing cosmetic changes v4 -> v5 (YGLD-ENC39, 2015-11-12) -> v6 (OP11-EN021, 2019-08-15) are Machine-Type -> Machine and Trap Card -> Trap only; not recorded as changes. The packet's second upstream code, 511015121 \"Stronghold the Moving Fortress (Manga)\", is a manga-only card with a different effect (negate a declared direct attack, then Special Summon itself face-up as a non-Trap Effect Monster) scripted under unofficial/; it is not a historical version of the TCG card and is not folded in."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

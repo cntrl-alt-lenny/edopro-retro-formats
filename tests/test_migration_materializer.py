@@ -1,11 +1,24 @@
 """Tests for the dry-run migration materializer (final pre-migration gate,
-task section 7/9). Everything here reads the CURRENT real corpus via
-`Repository.load()` - exactly like `test_migration_audit.py` - and never
-writes to `data/errata/`.
+task section 7/9).
+
+**POST-MIGRATION NOTE**: the real 247-record canonical migration has
+happened (commit immediately after
+1937239d9fd0ebfb47dc850f298c11c3a60679b0). `MaterializedCorpusTest` below
+now reads the FROZEN PRE-MIGRATION SNAPSHOT
+(`tests.pre_migration_fixture.load_pre_migration_repo()`), never the live
+`Repository.load(audit.REPO_ROOT)` - that would now return the mixed 247
+v2 + 49 v1 reality, on which the materializer only has 49 records left to
+work with. Reading the frozen snapshot instead means this class is now a
+REPRODUCIBILITY proof: it confirms the materializer, run again today
+against the exact same frozen pre-migration input, still deterministically
+produces the exact target set that was actually written to `data/
+errata/` - not merely that it once did. `ToSugarUnitTest` is unaffected
+either way: it uses synthetic fixtures, never the corpus.
 """
 
 from __future__ import annotations
 
+import json
 import unittest
 
 from retroformats.model import ErratumV2
@@ -13,19 +26,23 @@ from retroformats.repo import Repository
 
 from . import migration_audit as audit
 from . import migration_materializer as mm
+from .pre_migration_fixture import load_pre_migration_repo
 
 
 class MaterializedCorpusTest(unittest.TestCase):
-    """The section 9 headline: every one of the 247 semantically-equivalent
-    records' materialized target passes schema, load, preservation, and
-    production semantic validation - computed once per class, since a full
-    corpus materialize+verify pass is expensive and every test below reads
-    the SAME immutable result."""
+    """The section 9 headline, reproduced against the FROZEN pre-migration
+    snapshot: every one of the 247 semantically-equivalent records'
+    materialized target passes schema, load, preservation, and production
+    semantic validation - computed once per class, since a full corpus
+    materialize+verify pass is expensive and every test below reads the
+    SAME immutable result. This is now a reproducibility check (task
+    section 7): it proves the materializer, re-run today, still produces
+    exactly the migration that was actually performed."""
 
     @classmethod
     def setUpClass(cls):
-        cls.repo = Repository.load(audit.REPO_ROOT)
-        cls.audit_result = audit.audit_corpus()
+        cls.repo = load_pre_migration_repo()
+        cls.audit_result = audit.audit_corpus(cls.repo)
         cls.rows = cls.audit_result["rows"]
         cls.by_id = {r["id"]: r for r in cls.rows}
         cls.materialized = mm.materialize_corpus(cls.repo, cls.rows)
@@ -45,6 +62,34 @@ class MaterializedCorpusTest(unittest.TestCase):
         self.assertEqual([], self.verification["load_failures"])
         self.assertEqual([], self.verification["preservation_failures"])
         self.assertEqual([], self.verification["validation_errors"])
+
+    def test_every_target_matches_the_real_on_disk_file_exactly(self):
+        """The actual proof behind this class's own reproducibility claim
+        (found missing by adversarial review): every one of the 247
+        freshly re-materialized targets, computed here from the FROZEN
+        pre-migration snapshot, must equal - both structurally (parsed
+        dict equality) AND byte-for-byte (the exact JSON text) - the REAL
+        `data/errata/*.json` file currently on disk. Every other check in
+        this class only tests the in-memory materializer output's own
+        internal self-consistency; this is the one that actually compares
+        it against reality, so a future divergence between migration_
+        materializer.py's logic and the 247 committed files - from either
+        side changing - would be caught here, not silently missed."""
+        live_repo = Repository.load(audit.REPO_ROOT)
+        content_mismatches = []
+        byte_mismatches = []
+        for record_id, target in self.materialized["targets"].items():
+            path = live_repo.errata[record_id].path
+            on_disk_text = path.read_text(encoding="utf-8")
+            on_disk = json.loads(on_disk_text)
+            if on_disk != target:
+                content_mismatches.append(record_id)
+                continue
+            expected_text = json.dumps(target, indent=2, ensure_ascii=False) + "\n"
+            if expected_text != on_disk_text:
+                byte_mismatches.append(record_id)
+        self.assertEqual([], content_mismatches, "materialized content differs from the on-disk file")
+        self.assertEqual([], byte_mismatches, "content matches but JSON formatting differs from the on-disk file")
 
     def test_excluded_ids_are_exactly_the_frozen_49(self):
         self.assertEqual(49, len(self.materialized["excluded_ids"]))

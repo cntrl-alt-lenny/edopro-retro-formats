@@ -6,34 +6,14 @@
     "name": "Splendid Venus"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-01-18",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SR05-EN012, Structure Deck: Wave of Light)"
-      },
-      "historical_text": "All non-Fairy-Type monsters lose 500 ATK and DEF. The activation and effects of Spell/Trap Cards you control cannot be negated.",
-      "modern_text": "All non-Fairy monsters lose 500 ATK/DEF. The activation and effects of Spell/Trap Cards activated on your field cannot be negated.",
-      "summary": "Functional erratum: the protection narrowed from Spell/Trap Cards you control to Spell/Trap Cards activated on your field. The pre-errata script registers an extra EFFECT_CANNOT_DISABLE field effect over your whole Spell/Trap side (TargetRange(LOCATION_ONFIELD,0), EFFECT_FLAG_SET_AVAILABLE so Set cards are covered too), which the modern script does not have at all; and its effectfilter for EFFECT_CANNOT_INACTIVATE/EFFECT_CANNOT_DISEFFECT accepts any Spell/Trap-type effect whose activating player is you, while the modern filter additionally requires the triggering location to include LOCATION_ONFIELD, so effects you activate from outside the field are no longer covered.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003054,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003054.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-01-18",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SR05-EN012, Structure Deck: Wave of Light)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "All non-Fairy-Type monsters lose 500 ATK and DEF. The activation and effects of Spell/Trap Cards you control cannot be negated.",
+    "modern_text": "All non-Fairy monsters lose 500 ATK/DEF. The activation and effects of Spell/Trap Cards activated on your field cannot be negated.",
+    "summary": "Functional erratum: the protection narrowed from Spell/Trap Cards you control to Spell/Trap Cards activated on your field. The pre-errata script registers an extra EFFECT_CANNOT_DISABLE field effect over your whole Spell/Trap side (TargetRange(LOCATION_ONFIELD,0), EFFECT_FLAG_SET_AVAILABLE so Set cards are covered too), which the modern script does not have at all; and its effectfilter for EFFECT_CANNOT_INACTIVATE/EFFECT_CANNOT_DISEFFECT accepts any Spell/Trap-type effect whose activating player is you, while the modern filter additionally requires the triggering location to include LOCATION_ONFIELD, so effects you activate from outside the field are no longer covered.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003054,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003054.lua"
+  }
 }

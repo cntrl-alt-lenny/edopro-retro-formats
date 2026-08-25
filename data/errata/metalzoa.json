@@ -6,38 +6,17 @@
     "name": "Metalzoa"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2011-08-13",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (WP11-EN014, World Championship 2011 Card Pack)"
-      },
-      "historical_text": "This monster can only be Special Summoned from your Deck to your side of the field by offering \"Zoa\" equipped with \"Metalmorph\" as a Tribute.",
-      "modern_text": "Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \"Zoa\" equipped with \"Metalmorph\".",
-      "summary": "Functional erratum: the era text \"This monster can only be Special Summoned from your Deck to your side of the field by offering \\\"Zoa\\\" equipped with \\\"Metalmorph\\\" as a Tribute\" is a strict nomi - the Deck procedure is the only way Metalzoa can ever be Special Summoned, so a Metalzoa in the Graveyard is dead. The errata'd \"Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \\\"Zoa\\\" equipped with \\\"Metalmorph\\\"\" is semi-nomi: once it has been properly Summoned out of the Deck, the modern card may be Special Summoned again by generic revival. The explicit \"Cannot be Normal Summoned or Set\" line only spells out what the era nomi clause already imposed.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format EDOPro lets a Metalzoa that reached the field once be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, which the era's \"can only be Special Summoned from your Deck\" text forbids outright."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format EDOPro lets a Metalzoa that reached the field once be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, which the era's \"can only be Special Summoned from your Deck\" text forbids outright.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2011-08-13",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (WP11-EN014, World Championship 2011 Card Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "This monster can only be Special Summoned from your Deck to your side of the field by offering \"Zoa\" equipped with \"Metalmorph\" as a Tribute.",
+    "modern_text": "Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \"Zoa\" equipped with \"Metalmorph\".",
+    "summary": "Functional erratum: the era text \"This monster can only be Special Summoned from your Deck to your side of the field by offering \\\"Zoa\\\" equipped with \\\"Metalmorph\\\" as a Tribute\" is a strict nomi - the Deck procedure is the only way Metalzoa can ever be Special Summoned, so a Metalzoa in the Graveyard is dead. The errata'd \"Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \\\"Zoa\\\" equipped with \\\"Metalmorph\\\"\" is semi-nomi: once it has been properly Summoned out of the Deck, the modern card may be Special Summoned again by generic revival. The explicit \"Cannot be Normal Summoned or Set\" line only spells out what the era nomi clause already imposed.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

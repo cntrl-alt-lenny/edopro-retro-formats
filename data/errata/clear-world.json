@@ -6,34 +6,14 @@
     "name": "Clear World"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2025-03-13",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Maze of the Master (MZTM-EN098), the first printing carrying the errata'd text"
-      },
-      "historical_text": "During each of your End Phases, pay 500 Life Points or destroy this card. Each player receives effects, depending on the monster Attributes they control. ● LIGHT: Play with your hand revealed at all times. ● DARK: If you control 2 or more monsters, you cannot declare an attack. ● EARTH: During your Standby Phase: Target 1 face-up Defense Position monster you control; destroy that target. ● WATER: During your End Phase: Discard 1 card. ● FIRE: During your End Phase: Take 1000 damage. ● WIND: You must pay 500 Life Points to activate a Spell Card.",
-      "modern_text": "Once per turn, during your End Phase, pay 500 LP or destroy this card. Each player receives effects, depending on the monster Attributes they control.● LIGHT: Play with your hand revealed at all times.● DARK: If you control 2 or more monsters, you cannot declare an attack.● EARTH: During your Standby Phase, destroy 1 face-up Defense Position monster you control.● WATER: During your End Phase, discard 1 card.● FIRE: During your End Phase, take 1000 damage.● WIND: You must pay 500 LP to activate a Spell Card.",
-      "summary": "Functional erratum: the EARTH, WATER and FIRE penalties stopped being Trigger Effects that start a Chain. The historical script registers all three as EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F with EFFECT_FLAG_EVENT_PLAYER - mandatory triggers that form a chain link and can be responded to or negated - and gives the EARTH one EFFECT_FLAG_CARD_TARGET plus a SetTarget(s.destg) that targets the Defense Position monster at activation; the modern script registers the same three as EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS with no target step, so nothing is targeted and nothing can be chained to. The printed text tracks it: v1's 'During your Standby Phase: Target 1 face-up Defense Position monster you control; destroy that target' becomes v2's 'During your Standby Phase, destroy 1 face-up Defense Position monster you control', and the maintenance clause gains 'Once per turn'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 33900658,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c33900658.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2025-03-13",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Maze of the Master (MZTM-EN098), the first printing carrying the errata'd text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "During each of your End Phases, pay 500 Life Points or destroy this card. Each player receives effects, depending on the monster Attributes they control. ● LIGHT: Play with your hand revealed at all times. ● DARK: If you control 2 or more monsters, you cannot declare an attack. ● EARTH: During your Standby Phase: Target 1 face-up Defense Position monster you control; destroy that target. ● WATER: During your End Phase: Discard 1 card. ● FIRE: During your End Phase: Take 1000 damage. ● WIND: You must pay 500 Life Points to activate a Spell Card.",
+    "modern_text": "Once per turn, during your End Phase, pay 500 LP or destroy this card. Each player receives effects, depending on the monster Attributes they control.● LIGHT: Play with your hand revealed at all times.● DARK: If you control 2 or more monsters, you cannot declare an attack.● EARTH: During your Standby Phase, destroy 1 face-up Defense Position monster you control.● WATER: During your End Phase, discard 1 card.● FIRE: During your End Phase, take 1000 damage.● WIND: You must pay 500 LP to activate a Spell Card.",
+    "summary": "Functional erratum: the EARTH, WATER and FIRE penalties stopped being Trigger Effects that start a Chain. The historical script registers all three as EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F with EFFECT_FLAG_EVENT_PLAYER - mandatory triggers that form a chain link and can be responded to or negated - and gives the EARTH one EFFECT_FLAG_CARD_TARGET plus a SetTarget(s.destg) that targets the Defense Position monster at activation; the modern script registers the same three as EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS with no target step, so nothing is targeted and nothing can be chained to. The printed text tracks it: v1's 'During your Standby Phase: Target 1 face-up Defense Position monster you control; destroy that target' becomes v2's 'During your Standby Phase, destroy 1 face-up Defense Position monster you control', and the maintenance clause gains 'Once per turn'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 33900658,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c33900658.lua"
+  }
 }

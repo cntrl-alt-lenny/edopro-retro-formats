@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-jirai-gumo",
+  "modern_card": {
+    "passcode": 94773007,
+    "name": "Jirai Gumo"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2013-10-11",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the trigger-effect text (LCJW-EN227, Legendary Collection 4: Joey's World Mega Pack)"
+      },
+      "historical_text": "When you declare an attack with this card, toss a coin and call it. If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.",
+      "modern_text": "When this card declares an attack: Toss a coin and call it. If you call it wrong, lose half your Life Points.",
+      "summary": "Functional erratum: the coin toss stopped being part of declaring the attack and became a Trigger Effect. The GOAT script registers it as EFFECT_ATTACK_COST guarded by Duel.IsAttackCostPaid/Duel.AttackCostPaid, so it uses no chain link and cannot be responded to or negated - matching 'If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.' The modern script registers a mandatory EFFECT_TYPE_TRIGGER_F on EVENT_ATTACK_ANNOUNCE, which starts a chain and can be negated - matching 'When this card declares an attack: Toss a coin and call it.' The two also round differently on an odd LP total: the GOAT script leaves Duel.GetLP(tp)//2, the modern script math.ceil(Duel.GetLP(tp)/2), a one-point difference.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700190,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700190.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream's goat header states the era reading directly - tossing the coin is a cost to attack, not an effect. The date anchor is the printing that first carries the trigger-effect wording: v1 (DB2-EN054, 2005-07-27) and v2 (RP01-EN039, tcg-eu 2008-07-08) both keep the cost-shaped 'attack normally' / 'before attacking' clauses, and only v4 (LCJW-EN227, 2013-10-11) drops them for 'When this card declares an attack: ...'. The lineage is non-monotonic: v3 (MRD-089 reprinted in Legendary Collection, tcg-eu 2010-10-01) restores the original v0 wording after v2 had already reworded it, so the printing current at the Edison snapshot was still cost-shaped. v0 -> v1 predates the baseline. Trailing v5 (SGX2-END05, 2022-10-06) only abbreviates Life Points to LP and is the version pinned in the modern cards.cdb. The packet's second upstream code 511000475 is the MANGA Jirai Gumo - a Trap that Special Summons itself as an Insect Effect Monster with an ATK-reduction battle effect - a different card, not a historical TCG version, and not a candidate baseline."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-dragon-seeker",
+  "modern_card": {
+    "passcode": 28563545,
+    "name": "Dragon Seeker"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2005-07-27",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the new text (DB2-EN101, Dark Beginning 2)"
+      },
+      "historical_text": "When this card is Summoned (excluding Special Summoned), destroy 1 face-up Dragon-Type monster on the field.",
+      "modern_text": "When this card is Normal Summoned or Flip Summoned, destroy 1 face-up Dragon-Type monster on the field.",
+      "summary": "Wording clarification only: 'When this card is Summoned (excluding Special Summoned)' (TP2-002) became 'When this card is Normal Summoned or Flip Summoned' (DB2-EN101), which names the same two summon events - the modern script encodes exactly those, one mandatory targeting Trigger Effect on EVENT_SUMMON_SUCCESS cloned onto EVENT_FLIP_SUMMON_SUCCESS. No resolution changes, so no historical implementation is needed for either period snapshot.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflicting evidence, escalate. The variant's cdb text ('When a \"Dragon Seeker\" is changed to Attack Position: You can target 1 face-up Dragon-Type monster on the field; destroy it.') matches no lineage version (best match v1 at ratio 0.6036), and its script matches that text rather than the printed one: EVENT_CHANGE_POS with a previous-position-Defense / now-Attack condition, optional instead of mandatory, and requiring an existing valid target (Duel.IsExistingTarget) where the modern mandatory version activates regardless ('if chk==0 then return true end'). It also borrows its effect description from an unrelated card id (aux.Stringid(276357,0) is 'Shinobird Salvation'), which suggests a hand-rolled entry rather than a maintained period reconstruction. Card data is identical to modern (2000/2100, Level 6, DARK, Fiend), so the script is the only difference. Whether upstream encoded an OCG-original trigger - and if so when the TCG version diverged - cannot be settled from this packet; the English lineage's only transition is the cosmetic clarification recorded above, and no chronology for a position-change trigger exists here, so nothing is dated for it. Note also that the GOAT snapshot (2005-04-01) predates DB2-EN101 (2005-07-27), so a GOAT-era Dragon Seeker displays the TP2 text while behaving identically."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

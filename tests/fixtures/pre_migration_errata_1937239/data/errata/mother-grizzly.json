@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-mother-grizzly",
+  "modern_card": {
+    "passcode": 57839750,
+    "name": "Mother Grizzly"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 WATER monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no WATER monster of 1500 or less ATK in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is untouched by this in every lineage version.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 WATER monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+      "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` while the modern target additionally requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)`, so in the period implementation the trigger activates and resolves even with nothing eligible in the Deck. The packet dates no end for this per-card allowance, so the chronology stays unresolved.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700093,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700093.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The baseline implements lineage v1 (DB1-EN053, 2004-10-12); the earlier v0 (MRL-090, 2002-09-16) 'may select ... (no Tribute is required for monsters of Level 5 or more)' wording predates the baseline era and is behaviourally the same, so it is not recorded as a change. Everything from v1 to v7 (SGX3-ENH12, 2023-03-30) is cosmetic - 'as a result of battle' -> 'destroyed by battle', 'an ATK of 1500 or less' -> '1500 or less ATK', PSCT colon at v6, Graveyard -> GY at v7 - and the lineage is non-monotonic in date because of reprint churn (v3 RP01 tcg-eu 2008-07-08, v4 SRL/Legendary Collection 2010-10-01 reverting to the older wording, v5 DL12 2010-12-01); none of it changes resolution, so it is collapsed into these notes rather than a cosmetic change entry. Intermediate-state reasoning as for the other GoatConfirm searchers: the two ruling transitions are unordered, no upstream implementation covers the state between them, and none is attached because GOAT (2005-04-01) and Edison (2010-04-24) both precede 2011-02-02."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

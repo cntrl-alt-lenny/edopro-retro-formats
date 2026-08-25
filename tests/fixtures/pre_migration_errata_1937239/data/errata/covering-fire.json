@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-covering-fire",
+  "modern_card": {
+    "passcode": 74458486,
+    "name": "Covering Fire"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "If your opponent's monster attacks a monster on your side of the field, you can activate this card during the Damage Step. Increase the ATK of your attacked monster by the ATK of 1 other face-up monster on your side of the field during the Damage Step.",
+      "summary": "Era implementation differences that no printed text shows, all read from goat/c504700127.lua against official/c74458486.lua: the activation is declared with EFFECT_FLAG_DAMAGE_CAL where the modern script uses EFFECT_FLAG_DAMAGE_STEP, so the sub-step of the Damage Step in which the Trap is legal differs; the GOAT condition requires only that the attacker belongs to the opponent and that an attack target exists, where the modern condition additionally requires your attacked monster to be face-up already. The GOAT target filter is Card.IsFaceup, so any face-up monster can lend its ATK, while the modern filter is Card.HasNonZeroAttack; at resolution the GOAT script omits the modern tc:IsControler(tp) re-check, and the ATK gain it registers lacks EFFECT_FLAG_CANNOT_DISABLE, so it can be negated. Chronology is unresolved: nothing in the packet dates any of these transitions.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700127,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700127.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The GOAT cdb text matches lineage v0 (RDS-EN060, 2004-12-01) exactly, so the chain starts there. Lineage v0 -> v1 (DR3-EN120) -> v2 (BPW2-EN084) -> v3 (SGX1-ENH18) is cosmetic for this record: the 'Target 1 other face-up monster you control' introduced at v2 formalises targeting that BOTH scripts already carry as EFFECT_FLAG_CARD_TARGET, so it is not a targeting change. Caveat on the damage-step flag, kept explicit rather than resolved: ocgcore defines PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) as separate phases and all 311 official scripts that use EFFECT_FLAG_DAMAGE_CAL set it together with EFFECT_FLAG_DAMAGE_STEP, so a DAMAGE_CAL-only declaration gates a different window from a DAMAGE_STEP-only one; I could not confirm the exact gate from source because the ocgcore effect implementation is not in the local period-docs (only duel/operations/playerop/libdebug and the built binaries). The ruling verdict does not rest on that flag alone - the face-up, non-zero-ATK, control-recheck and CANNOT_DISABLE differences are unambiguous. The second upstream code 511002057 is 'Covering Fire (Manga)' - a continuous +500 ATK for Machines - and is excluded rather than folded in as a variant. The era Damage Step's global structure (the 7 timings) is a rule-profile matter and is deliberately not encoded here as a per-card substitution."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

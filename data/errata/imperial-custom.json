@@ -6,34 +6,14 @@
     "name": "Imperial Custom"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2020-07-09",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SDSA-EN038, Structure Deck: Sacred Beasts)"
-      },
-      "historical_text": "Face-up Continuous Trap Cards cannot be destroyed, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
-      "modern_text": "Face-up Continuous Traps cannot be destroyed by battle or card effect, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
-      "summary": "Functional erratum: the protection narrowed from 'cannot be destroyed' to 'cannot be destroyed by battle or card effect'. The pre-errata script registers EFFECT_INDESTRUCTABLE with SetValue(1), i.e. immunity to destruction for every reason, while the modern script's value function indesval returns true only when the reason includes REASON_EFFECT or REASON_BATTLE, so other destruction reasons (a card destroying itself as a cost, or game-rule destruction) now go through on face-up Continuous Traps.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 9995776,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c9995776.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2020-07-09",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SDSA-EN038, Structure Deck: Sacred Beasts)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Face-up Continuous Trap Cards cannot be destroyed, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
+    "modern_text": "Face-up Continuous Traps cannot be destroyed by battle or card effect, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
+    "summary": "Functional erratum: the protection narrowed from 'cannot be destroyed' to 'cannot be destroyed by battle or card effect'. The pre-errata script registers EFFECT_INDESTRUCTABLE with SetValue(1), i.e. immunity to destruction for every reason, while the modern script's value function indesval returns true only when the reason includes REASON_EFFECT or REASON_BATTLE, so other destruction reasons (a card destroying itself as a cost, or game-rule destruction) now go through on face-up Continuous Traps.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 9995776,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c9995776.lua"
+  }
 }

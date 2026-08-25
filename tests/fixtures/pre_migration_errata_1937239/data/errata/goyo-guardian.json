@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-goyo-guardian",
+  "modern_card": {
+    "passcode": 7391448,
+    "name": "Goyo Guardian"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-03-30",
+        "precision": "day",
+        "status": "verified",
+        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN075, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "1 Tuner + 1 or more non-Tuner monstersWhen this card destroys an opponent's monster by battle and sends it to the Graveyard: You can Special Summon that monster to your side of the field in Defense Position.",
+      "modern_text": "1 EARTH Tuner + 1 or more non-Tuner monstersWhen this card destroys an opponent's monster by battle and sends it to the Graveyard: You can Special Summon that monster to your field in Defense Position.",
+      "summary": "Functional erratum: the Synchro Material requirement narrowed from '1 Tuner' to '1 EARTH Tuner'. The pre-errata script calls Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99) with no Tuner filter, so any Tuner is legal material; the modern script passes an ATTRIBUTE_EARTH filter for the Tuner. The capture effect itself is unchanged by the erratum.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002994,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002994.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v3 (LC5D-EN231, 2014-10-23), which the baseline implements (cdb text ratio 0.975, differing only by '1+' vs '1 or more'). Earlier transitions v0 (TDGS-EN042, 2008-09-02) -> v1 (DTP1-EN030, 2009-06-20) -> v2 (DT01-EN087, 2010-01-29) -> v3 are punctuation/PSCT only; v0 is the printing in force at the Edison snapshot and is behaviourally identical to v3. Trailing v4 -> v5 (BLAR-EN057, 2020-07-23) is GY / '1+' cosmetic. Secondary script differences that the erratum did not cause and that no source documents as an era ruling: the pre-errata spells its trigger condition inline (requires Goyo to be related to the battle and face-up) instead of aux.bdogcon (which instead checks STATUS_OPPO_BATTLE), and its target check calls bc:IsCanBeSpecialSummoned(e,0,tp,false,false) without the POS_FACEUP_DEFENSE argument the modern check passes. Recorded here rather than in the summary because they are implementation drift, not the documented behavioural difference."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+  ]
+}

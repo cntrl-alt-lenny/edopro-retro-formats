@@ -6,29 +6,14 @@
     "name": "Recycle"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "During your Standby Phase, pay 300 Life Points to select 1 non-Monster Card in your Graveyard and return it to the bottom of your Deck.",
-      "summary": "The only implementation-relevant difference is once-per-turn tracking: the modern script puts e2:SetCountLimit(1) on the Standby Phase optional trigger, so the 300 LP / return-a-non-monster effect can be used once per turn; the pre-errata variant carries no count limit, so the effect can be activated repeatedly in the same Standby Phase, paying 300 LP each time and returning a further non-monster card each time. No printed English text in the lineage carries a once-per-turn clause, so nothing dates this and the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002983,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002983.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "During your Standby Phase, pay 300 Life Points to select 1 non-Monster Card in your Graveyard and return it to the bottom of your Deck.",
+    "modern_text": null,
+    "summary": "The only implementation-relevant difference is once-per-turn tracking: the modern script puts e2:SetCountLimit(1) on the Standby Phase optional trigger, so the 300 LP / return-a-non-monster effect can be used once per turn; the pre-errata variant carries no count limit, so the effect can be activated repeatedly in the same Standby Phase, paying 300 LP each time and returning a further non-monster card each time. No printed English text in the lineage carries a once-per-turn clause, so nothing dates this and the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002983,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002983.lua"
+  }
 }

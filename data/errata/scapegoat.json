@@ -6,29 +6,14 @@
     "name": "Scapegoat"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "If you activate this card, you cannot Normal Summon, Flip Summon or Special Summon during this turn. Special Summon 4 \"Sheep Tokens\" (Beast-Type/EARTH/Level 1/ATK 0/DEF 0) in Defense Position to your side of the field. The \"Sheep Tokens\" cannot be used as a Tribute for a Tribute Summon (or Set).",
-      "summary": "Period activation legality: the GOAT variant maintains its own summon-activity counter (an aux.GlobalCheck block that recomputes Summon + Flip Summon + Special Summon counts at EVENT_CHAIN_END and increments them on the actual EVENT_SUMMON / EVENT_FLIP_SUMMON / EVENT_SPSUMMON events, reset with aux.AddValuesReset) and, whenever Scapegoat is activated while a chain exists (Duel.GetCurrentChain(true)>0), tests that snapshot instead of Duel.GetActivityCount - so Scapegoat can still be chained to an effect that Special Summons (upstream annotation: 'Can be chained to an effect that special summons'), which the modern cost check refuses once the turn has registered such activity. With no chain in progress both scripts require zero Summon, Flip Summon and Special Summon activity for the turn. Chronology unresolved: nothing in the packet dates the change.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700123,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700123.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "If you activate this card, you cannot Normal Summon, Flip Summon or Special Summon during this turn. Special Summon 4 \"Sheep Tokens\" (Beast-Type/EARTH/Level 1/ATK 0/DEF 0) in Defense Position to your side of the field. The \"Sheep Tokens\" cannot be used as a Tribute for a Tribute Summon (or Set).",
+    "modern_text": null,
+    "summary": "Period activation legality: the GOAT variant maintains its own summon-activity counter (an aux.GlobalCheck block that recomputes Summon + Flip Summon + Special Summon counts at EVENT_CHAIN_END and increments them on the actual EVENT_SUMMON / EVENT_FLIP_SUMMON / EVENT_SPSUMMON events, reset with aux.AddValuesReset) and, whenever Scapegoat is activated while a chain exists (Duel.GetCurrentChain(true)>0), tests that snapshot instead of Duel.GetActivityCount - so Scapegoat can still be chained to an effect that Special Summons (upstream annotation: 'Can be chained to an effect that special summons'), which the modern cost check refuses once the turn has registered such activity. With no chain in progress both scripts require zero Summon, Flip Summon and Special Summon activity for the turn. Chronology unresolved: nothing in the packet dates the change.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700123,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700123.lua"
+  }
 }

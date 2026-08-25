@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-elemental-hero-stratos",
+  "modern_card": {
+    "passcode": 40044918,
+    "name": "Elemental HERO Stratos"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2018-12-06",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OTS Tournament Pack 9 (OP09-EN001), the printing the pinned cards.cdb text matches"
+      },
+      "historical_text": "When this card is Normal or Special Summoned, you can select and activate 1 of these effects:● Destroy Spell or Trap Cards on the field up to the number of \"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\" monsters you control (not counting this card).● Select and add 1 \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monster from your Deck to your hand.",
+      "modern_text": "When this card is Normal or Special Summoned: You can activate 1 of these effects.● Destroy Spells/Traps on the field, up to the number of \"HERO\" monsters you control, except this card.● Add 1 \"HERO\" monster from your Deck to your hand.",
+      "summary": "Wording modernisation only. The Edison-era text (v1, PT03-EN002) counts and searches '\"Elemental Hero\", \"Destiny Hero\" and \"Evil Hero\"' monsters; from v3 (LCGX-EN024) the three are folded into the 'HERO' umbrella, which cannot change either option's reach in period play because every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. '(not counting this card)' to 'except this card', 'Select and add 1' to 'Add 1', and the v3/v4/v5 wobble over a redundant 'You can destroy' all preserve the same resolution, which official/c40044918.lua implements as one optional Normal-or-Special-Summon trigger offering the two options.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "v0 (JUMP-EN012, 2007-04-21) omitted 'Evil Hero' from both options; v1 (PT03-EN002, earliest TCG date 2007-10-13, a European promo) added it. Both precede the Edison snapshot, so the chain starts at v1 and the v0-to-v1 widening is not recorded. Trailing v6 (BLC1-EN003, 2024-02-22) only swaps a period for a semicolon. HERO-umbrella inertness verified against data/pools/edison-2010.json cross-referenced with BabelCDB setcodes: the pool's other 'Hero'-named cards (Hero Kid, Oscillo Hero, Fake Hero, Hero Signal and the rest) carry no HERO setcode and were never eligible under either text."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

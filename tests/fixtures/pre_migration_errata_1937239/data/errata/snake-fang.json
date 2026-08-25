@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-snake-fang",
+  "modern_card": {
+    "passcode": 596051,
+    "name": "Snake Fang"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Decrease 1 selected monster's DEF by 500 points during the turn this card is activated.",
+      "summary": "Era damage-step legality, no text difference: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, moving the card's Damage Step activation window from the sub-steps before damage calculation (modern, PHASE_DAMAGE) to the damage-calculation sub-step itself (PHASE_DAMAGE_CAL). Nothing else differs behaviourally: the goat s.condition (`Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()`) is the De Morgan equivalent of aux.StatChangeDamageStepCondition (utility.lua line 1413: `not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())`), and `RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END` is the literal expansion of RESETS_STANDARD_PHASE_END (constant.lua line 300). Chronology of this ruling is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700002,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700002.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain starts at lineage v0 (MRL-050, 2002-09-16), carried exactly by both the goat cdb entry and the pinned modern cards.cdb, so no text transition is recorded. The lineage oscillates cosmetically: v1 (SRL-EN050, Master Collection Volume 1, 2004-12-01) reads 'Decrease 1 face-up monster's DEF by 500 points until the end of this turn' and v2 (SRL-050, Legendary Collection, 2010) returns to the v0 wording; same resolution throughout. Relationship to the engine layer, since EdisonFormat lists the 7-timing damage step among the era's global rules differences: the activation window here is per-card script data (the effect's EFFECT_FLAG_DAMAGE_STEP / EFFECT_FLAG_DAMAGE_CAL property), which an ocgcore rule profile cannot rewrite, so this is ruling and not engine - it needs the variant script. Corroboration that the flag choice is deliberate rather than an oversight: 25 goat variants set EFFECT_FLAG_DAMAGE_CAL, 23 of them without EFFECT_FLAG_DAMAGE_STEP, while 0 official scripts in the repo set DAMAGE_CAL without also setting DAMAGE_STEP."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

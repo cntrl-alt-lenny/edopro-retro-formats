@@ -6,28 +6,14 @@
     "name": "Knight's Title"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Activate this card by offering 1 face-up \"Dark Magician\" on your side of the field as a Tribute. Special Summon 1 \"Dark Magician Knight\" from your hand, Deck or Graveyard.",
-      "summary": "Period ruling package. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,...)`, while the goat target returns true, so the card can be activated - and the cost of Tributing your face-up \"Dark Magician\" paid - with no \"Dark Magician Knight\" anywhere, losing the Dark Magician for nothing. Failed-search verification: on a whiff the goat operation calls `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, revealing hand and Deck but not the Graveyard, which is already public. Only the verification half is dated by the shared search-verification chronology, so the change stays unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700149,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700149.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Activate this card by offering 1 face-up \"Dark Magician\" on your side of the field as a Tribute. Special Summon 1 \"Dark Magician Knight\" from your hand, Deck or Graveyard.",
+    "modern_text": null,
+    "summary": "Period ruling package. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,...)`, while the goat target returns true, so the card can be activated - and the cost of Tributing your face-up \"Dark Magician\" paid - with no \"Dark Magician Knight\" anywhere, losing the Dark Magician for nothing. Failed-search verification: on a whiff the goat operation calls `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, revealing hand and Deck but not the Graveyard, which is already public. Only the verification half is dated by the shared search-verification chronology, so the change stays unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700149,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700149.lua"
+  }
 }

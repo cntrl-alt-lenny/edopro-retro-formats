@@ -6,101 +6,192 @@
     "name": "Toon Summoned Skull"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2008-07-08",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of RP01-EN064 (Retro Pack)"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while \"Toon World\" is on your side the field. You can Special Summon this monster from your hand, but Tributes are required for monsters Level 5 or more. This card cannot attack in the turn that it is Summoned. Unless you pay 500 Life Points, this monster cannot attack. When \"Toon World\" on the field is destroyed, this card is also destroyed. If your opponent doesn't control a Toon Monster, this card can attack your opponent's Life Points directly. If a face-up Toon Monster is on your opponent's side of the field, you must select the Toon Monster as an attack target.",
-      "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while you control \"Toon World\". You can Special Summon this card from your hand (but Tributes are required if it is Level 5 or higher). This card cannot attack during the turn it is Summoned. This card cannot attack unless you pay 500 Life Points. When \"Toon World\" is destroyed, destroy this card. If your opponent doesn't control a Toon Monster, this card can attack your opponent directly. If your opponent controls a face-up Toon Monster, you must select it as an attack target.",
-      "summary": "Wording modernisation only: 'while \"Toon World\" is on your side the field' becomes 'while you control \"Toon World\"' and the Tribute proviso moves into parentheses. The Tribute requirement, the any-Summon attack lock, the 500 Life Point attack cost and the Toon attack redirection are unchanged.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while \"Toon World\" is on your side the field. You can Special Summon this monster from your hand, but Tributes are required for monsters Level 5 or more. This card cannot attack in the turn that it is Summoned. Unless you pay 500 Life Points, this monster cannot attack. When \"Toon World\" on the field is destroyed, this card is also destroyed. If your opponent doesn't control a Toon Monster, this card can attack your opponent's Life Points directly. If a face-up Toon Monster is on your opponent's side of the field, you must select the Toon Monster as an attack target.",
+          "modern_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while you control \"Toon World\". You can Special Summon this card from your hand (but Tributes are required if it is Level 5 or higher). This card cannot attack during the turn it is Summoned. This card cannot attack unless you pay 500 Life Points. When \"Toon World\" is destroyed, destroy this card. If your opponent doesn't control a Toon Monster, this card can attack your opponent directly. If your opponent controls a face-up Toon Monster, you must select it as an attack target.",
+          "summary": "Wording modernisation only: 'while \"Toon World\" is on your side the field' becomes 'while you control \"Toon World\"' and the Tribute proviso moves into parentheses. The Tribute requirement, the any-Summon attack lock, the 500 Life Point attack cost and the Toon attack redirection are unchanged.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2012-09-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of LCYW-EN106 (Legendary Collection 3: Yugi's World Mega Pack), the first printing narrowing the attack lock"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while you control \"Toon World\". You can Special Summon this card from your hand (but Tributes are required if it is Level 5 or higher). This card cannot attack during the turn it is Summoned. This card cannot attack unless you pay 500 Life Points. When \"Toon World\" is destroyed, destroy this card. If your opponent doesn't control a Toon Monster, this card can attack your opponent directly. If your opponent controls a face-up Toon Monster, you must select it as an attack target.",
-      "modern_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
-      "summary": "Functional erratum: 'This card cannot attack during the turn it is Summoned' became 'This card cannot attack the turn it is Special Summoned'. The GOAT script clones its attack-lock registration onto EVENT_SUMMON_SUCCESS and EVENT_FLIP_SUMMON_SUCCESS in addition to EVENT_SPSUMMON_SUCCESS, so under the historical text any Summon of Toon Summoned Skull locks its attack for the turn; the modern script (verified in official/c91842653.lua) registers only on Special Summon.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned while you control \"Toon World\". You can Special Summon this card from your hand (but Tributes are required if it is Level 5 or higher). This card cannot attack during the turn it is Summoned. This card cannot attack unless you pay 500 Life Points. When \"Toon World\" is destroyed, destroy this card. If your opponent doesn't control a Toon Monster, this card can attack your opponent directly. If your opponent controls a face-up Toon Monster, you must select it as an attack target.",
+          "modern_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+          "summary": "Functional erratum: 'This card cannot attack during the turn it is Summoned' became 'This card cannot attack the turn it is Special Summoned'. The GOAT script clones its attack-lock registration onto EVENT_SUMMON_SUCCESS and EVENT_FLIP_SUMMON_SUCCESS in addition to EVENT_SPSUMMON_SUCCESS, so under the historical text any Summon of Toon Summoned Skull locks its attack for the turn; the modern script (verified in official/c91842653.lua) registers only on Special Summon.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c2": {
       "effective": {
         "date": "2013-10-11",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of LCJW-EN237 (Legendary Collection 4: Joey's World Mega Pack), the first printing carrying the Archfiend line"
       },
-      "historical_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
-      "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
-      "summary": "Functional erratum: the printed text gained the treatment line making the card always treated as an 'Archfiend' card, which switches on Archfiend support and anti-support that did not touch the pre-2013 card. Neither upstream script implements the name treatment - official/c91842653.lua and goat/c504700160.lua were read in full and both register only the Special Summon procedure, the Toon World destruction, the attack effects and the attack cost - so the historical implementation is correct for the earlier era by omission while the modern implementation is unfaithful on this point.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control a face-up \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+          "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+          "summary": "Functional erratum: the printed text gained the treatment line making the card always treated as an 'Archfiend' card, which switches on Archfiend support and anti-support that did not touch the pre-2013 card. Neither upstream script implements the name treatment - official/c91842653.lua and goat/c504700160.lua were read in full and both register only the Special Summon procedure, the Toon World destruction, the attack effects and the attack cost - so the historical implementation is correct for the earlier era by omission while the modern implementation is unfaithful on this point.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c3": {
       "effective": {
         "date": "2019-01-24",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SS01-ENC07 (Speed Duel Starter Decks: Destiny Masters)"
       },
-      "historical_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
-      "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon monster. If they do control one, this card must target a Toon monster for its attacks.",
-      "summary": "Wording modernisation only: 'This card cannot attack' becomes 'Cannot attack' and 'Life Points' becomes 'LP'. The Tribute clause, the Toon World condition and the attack rules are untouched.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). This card cannot attack the turn it is Special Summoned. You must pay 500 Life Points to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon Monster. If they do control one, this card must target a Toon Monster for its attacks.",
+          "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon monster. If they do control one, this card must target a Toon monster for its attacks.",
+          "summary": "Wording modernisation only: 'This card cannot attack' becomes 'Cannot attack' and 'Life Points' becomes 'LP'. The Tribute clause, the Toon World condition and the attack rules are untouched.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c4": {
       "effective": {
         "date": "2020-05-15",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SS04-ENB09 (Speed Duel Starter Decks: Match of the Millennium), the first printing fixing the Tribute count"
       },
-      "historical_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon monster. If they do control one, this card must target a Toon monster for its attacks.",
-      "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks.",
-      "summary": "Functional erratum: 'by Tributing the same number of monsters needed for a Tribute Summon (normally 1)' became 'by Tributing 1 monster'. The GOAT script derives the Tribute count from the card's current Level (2 above Level 6, 1 above Level 4/5, otherwise 0) while the modern script hard-codes exactly one Release, so on a Toon Summoned Skull whose Level has been altered the two implementations demand different Tributes; on the printed Level 6 (confirmed from BabelCDB cards.cdb) both require 1.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Cannot be Special Summoned unless you control \"Toon World\". Must first be Special Summoned (from your hand) by Tributing the same number of monsters needed for a Tribute Summon (normally 1). Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. This card can attack your opponent directly, unless they control a Toon monster. If they do control one, this card must target a Toon monster for its attacks.",
+          "modern_text": "(This card is always treated as an \"Archfiend\" card.)Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks.",
+          "summary": "Functional erratum: 'by Tributing the same number of monsters needed for a Tribute Summon (normally 1)' became 'by Tributing 1 monster'. The GOAT script derives the Tribute count from the card's current Level (2 above Level 6, 1 above Level 4/5, otherwise 0) while the modern script hard-codes exactly one Release, so on a Toon Summoned Skull whose Level has been altered the two implementations demand different Tributes; on the printed Level 6 (confirmed from BabelCDB cards.cdb) both require 1.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700160,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700160.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c2",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c3",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c0",
+        "after": "c4",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c2",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c3",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c1",
+        "after": "c4",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c2",
+        "after": "c3",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c2",
+        "after": "c4",
+        "basis": "date-proven"
+      },
+      {
+        "before": "c3",
+        "after": "c4",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700160,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700160.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

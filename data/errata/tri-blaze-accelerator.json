@@ -6,38 +6,17 @@
     "name": "Tri-Blaze Accelerator"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2022-03-17",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENH15, Speed Duel GX: Duel Academy Box)"
-      },
-      "historical_text": "Activate only by sending 1 face-up \"Blaze Accelerator\" on your side of the field to the Graveyard. You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage to your opponent, but you cannot declare an attack during this turn if you do.",
-      "modern_text": "Activate this card by sending 1 face-up \"Blaze Accelerator\" you control to the GY. During your Main Phase: You can target 1 monster your opponent controls; send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage to your opponent. Your monsters cannot attack the turn you activate this effect.",
-      "summary": "Functional erratum: the FOTB-EN041 text sends the Pyro monster in the pre-PSCT cost construction 'You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage', where the send is paid up front and the destruction and the burn stand side by side; the modern text moves the send behind the semicolon so it happens during resolution and chains the results strictly - 'send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage' - so a failed send now cancels the destruction and a failed destruction now cancels the burn. The modern text also makes the destruction explicitly target at activation. The added 'During your Main Phase:' only spells out the Ignition-effect default and is not a new restriction.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison the EDOPro card only sends the Pyro monster during resolution and withholds the 500 damage whenever the destruction fails, where the period card paid the monster on activation and dealt the damage alongside the destruction."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison the EDOPro card only sends the Pyro monster during resolution and withholds the 500 damage whenever the destruction fails, where the period card paid the monster on activation and dealt the damage alongside the destruction.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2022-03-17",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENH15, Speed Duel GX: Duel Academy Box)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Activate only by sending 1 face-up \"Blaze Accelerator\" on your side of the field to the Graveyard. You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage to your opponent, but you cannot declare an attack during this turn if you do.",
+    "modern_text": "Activate this card by sending 1 face-up \"Blaze Accelerator\" you control to the GY. During your Main Phase: You can target 1 monster your opponent controls; send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage to your opponent. Your monsters cannot attack the turn you activate this effect.",
+    "summary": "Functional erratum: the FOTB-EN041 text sends the Pyro monster in the pre-PSCT cost construction 'You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage', where the send is paid up front and the destruction and the burn stand side by side; the modern text moves the send behind the semicolon so it happens during resolution and chains the results strictly - 'send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage' - so a failed send now cancels the destruction and a failed destruction now cancels the burn. The modern text also makes the destruction explicitly target at activation. The added 'During your Main Phase:' only spells out the Ignition-effect default and is not a new restriction.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

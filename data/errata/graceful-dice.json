@@ -6,28 +6,14 @@
     "name": "Graceful Dice"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Roll 1 six-sided die. The result is multiplied by 100 points and added to the ATK and DEF of all monsters you control until the end of your turn. Monsters summoned after this card's activation are excluded.",
-      "summary": "Damage Step activation legality, not a text erratum: the GOAT script's activation effect carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the two open different Damage Step sub-windows for this Quick-Play Spell. Everything else resolves identically - both block activation once damage has been calculated (modern via an inline condition, GOAT via s.condition with the same test), both roll one die at resolution and give every face-up monster you control ATK and DEF equal to the result x100 until the End Phase. No printed text in the lineage distinguishes the two windows and no dated source in the packet fixes when the window changed, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700124,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700124.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Roll 1 six-sided die. The result is multiplied by 100 points and added to the ATK and DEF of all monsters you control until the end of your turn. Monsters summoned after this card's activation are excluded.",
+    "modern_text": null,
+    "summary": "Damage Step activation legality, not a text erratum: the GOAT script's activation effect carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, so the two open different Damage Step sub-windows for this Quick-Play Spell. Everything else resolves identically - both block activation once damage has been calculated (modern via an inline condition, GOAT via s.condition with the same test), both roll one die at resolution and give every face-up monster you control ATK and DEF equal to the result x100 until the End Phase. No printed text in the lineage distinguishes the two windows and no dated source in the packet fixes when the window changed, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700124,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700124.lua"
+  }
 }

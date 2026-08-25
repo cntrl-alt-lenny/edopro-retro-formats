@@ -1,0 +1,1542 @@
+{
+ "full_count": 67,
+ "migrated_count": 247,
+ "records": [
+  {
+   "id": "erratum-a-cat-of-ill-omen",
+   "path": "data/errata/a-cat-of-ill-omen.json",
+   "sha256": "a72b7185149e045aef32dbfd753ffb818cbf5a01cbf1bbedc8d99acac41fc3b3",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-a-hero-emerges",
+   "path": "data/errata/a-hero-emerges.json",
+   "sha256": "dfa81af57e41aa8819add01feaa899498dd57f879376fefe4c23bb6d93d15f14",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-a-team-trap-disposal-unit",
+   "path": "data/errata/a-team-trap-disposal-unit.json",
+   "sha256": "a988604ba6ac91f5c53c92ee6203198518036cf295dd12100c80e454418364b0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-abyssal-designator",
+   "path": "data/errata/abyssal-designator.json",
+   "sha256": "3e392b989c445f65ce5bd78cf651e1d9433654edf43515e551f78180744257b0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-alien-infiltrator",
+   "path": "data/errata/alien-infiltrator.json",
+   "sha256": "ced8886894dfc6ca921d9f98b284270764a6d78d4d639d126b5c1af29a76e71b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-altar-for-tribute",
+   "path": "data/errata/altar-for-tribute.json",
+   "sha256": "56c2bcdceef0b383346321c795d7ee465824411f07685a193360dbcb4049519e",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-amazoness-fighter",
+   "path": "data/errata/amazoness-fighter.json",
+   "sha256": "fbb351d3b56562d29f613d92a304c6feafab50ab08224428176eea46420ef9cf",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-an-owl-of-luck",
+   "path": "data/errata/an-owl-of-luck.json",
+   "sha256": "0b3f4455eb0a1705ebfbc908507a624df08f53391bc0c38b7c036318943f3d39",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-ancient-fairy-dragon",
+   "path": "data/errata/ancient-fairy-dragon.json",
+   "sha256": "2f097177c9cee4873d9d9ae023d6aac7a41a490d6139980f391001b82c07a041",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-andro-sphinx",
+   "path": "data/errata/andro-sphinx.json",
+   "sha256": "affd8b64e4e37e6131739b3f49c49748054841949b74de247f855a650bb94062",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-anteatereatingant",
+   "path": "data/errata/anteatereatingant.json",
+   "sha256": "80c8528f01440578451564681082eca68bde1ffad6b6ce4def0c03218aed5a53",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-aqua-chorus",
+   "path": "data/errata/aqua-chorus.json",
+   "sha256": "d71f955f37bc5133e090466e2b719903af280a9630bfa2ac4bcc6cf58248210b",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-armored-cybern",
+   "path": "data/errata/armored-cybern.json",
+   "sha256": "109909f0e29108889de539097c41ccb2ce6f4542b2e50b6d607054ca030ce7b8",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-armored-glass",
+   "path": "data/errata/armored-glass.json",
+   "sha256": "f6fc8f1bbb91b0cac1d3b4b169b5df4a41646dda4fb2472bdf9068864691384f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-arsenal-robber",
+   "path": "data/errata/arsenal-robber.json",
+   "sha256": "47d55b4919a9cd5d0f65cb903cffcf6796cbf437c59f6abe8c38b3afc1974635",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-arsenal-summoner",
+   "path": "data/errata/arsenal-summoner.json",
+   "sha256": "bf5973fda945b6b7d17701e1d6abc03a4fb0a7ede5f488fcbc623bf4d853ffea",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-atomic-firefly",
+   "path": "data/errata/atomic-firefly.json",
+   "sha256": "18d0d4d3be480bf70fce74f2c2e5a82eb24d186f602d66387149f9b8e5f73205",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-attack-and-receive",
+   "path": "data/errata/attack-and-receive.json",
+   "sha256": "f13dca1ed5c605564beed7e896384321bd0a1417e063fdb6c12a118cc27886eb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-balloon-lizard",
+   "path": "data/errata/balloon-lizard.json",
+   "sha256": "381fa0fce0a19bcdc9f6c6330ea95cd92d8bf41cf2f53d16cc060957fa412dfd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-bark-of-dark-ruler",
+   "path": "data/errata/bark-of-dark-ruler.json",
+   "sha256": "6b38d4f42bbbbe5d46bee0f69130c64a5089de881f6a7ddd3cb7bb558b455037",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-behemoth-the-king-of-all-animals",
+   "path": "data/errata/behemoth-the-king-of-all-animals.json",
+   "sha256": "7d34a786aa8b67a974593adf4515223d1cb5e907d10f2db395870dcc40701cda",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-big-shield-gardna",
+   "path": "data/errata/big-shield-gardna.json",
+   "sha256": "fd2f4b847301db6057319875bc123fbc34253dda1e35a17460e6b175fddb42bf",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-black-luster-soldier-envoy-of-the-beginning",
+   "path": "data/errata/black-luster-soldier-envoy-of-the-beginning.json",
+   "sha256": "0c7f1ae1023832dc506ed2571e32b49dbe1369bfd8f47d37bae95d7dd3456cd0",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-blackwing-sirocco-the-dawn",
+   "path": "data/errata/blackwing-sirocco-the-dawn.json",
+   "sha256": "e4a0116dc81aad2fc2ef3feeca25dbcb1a9fe031b775e8ff0d7037c5f3f242e2",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-blast-held-by-a-tribute",
+   "path": "data/errata/blast-held-by-a-tribute.json",
+   "sha256": "b494f25ca206b8b814e63198f172a1f6840a2345ba1659381cd30cd89a4da006",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-blast-with-chain",
+   "path": "data/errata/blast-with-chain.json",
+   "sha256": "b12e01bf179fd2340a4f47ed99d6917774dd6b580e34365647113f92269c2476",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-blaze-accelerator",
+   "path": "data/errata/blaze-accelerator.json",
+   "sha256": "f9bb689e44610435f0441b3d6bbfebaf673854632137b32fb39b34a773bdf2e0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-blue-eyes-toon-dragon",
+   "path": "data/errata/blue-eyes-toon-dragon.json",
+   "sha256": "2d4ebd2718303366de5d521a8360cf80a82e5479edc16d1e6828891f52f7ef2d",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-blue-eyes-ultimate-dragon",
+   "path": "data/errata/blue-eyes-ultimate-dragon.json",
+   "sha256": "ed0ac544eb4c8405855833abd1ba73298f4feaa0ca1c1db1020f618c201f5414",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-boss-rush",
+   "path": "data/errata/boss-rush.json",
+   "sha256": "63bd91400d8edcb90774c275fc8e0bf65ec672c1f27ea21428eb8e7a4403c291",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-bottomless-trap-hole",
+   "path": "data/errata/bottomless-trap-hole.json",
+   "sha256": "a3283088d4fd2aa0295affd3c2f4480fd5fe410d1a5bbb55e59aab0b7ccfd2d8",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-brain-control",
+   "path": "data/errata/brain-control.json",
+   "sha256": "e1c96f7cf6d4c4e60fe6849b508815495073b48b32c9e5ca3a5b3850998023c6",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-brionac-dragon-of-the-ice-barrier",
+   "path": "data/errata/brionac-dragon-of-the-ice-barrier.json",
+   "sha256": "ee8de6bd4d28227b7e5b9a505742901a7f8eeb82fed42b3c7091e997ef473a5d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-bubble-crash",
+   "path": "data/errata/bubble-crash.json",
+   "sha256": "61593015fe68e494a41acdfd5ebba56b637939126ea2dd2cf0a1dfdc75894053",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-burning-land",
+   "path": "data/errata/burning-land.json",
+   "sha256": "19ee9f213885002baf3d6c30ea25c41311b7af1d273da501ae9690885aa98d14",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-burst-stream-of-destruction",
+   "path": "data/errata/burst-stream-of-destruction.json",
+   "sha256": "460ffccc1e54687512fb79b64af0c93de17b5f854af1dc3f2c3b08198610d0e3",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-castle-walls",
+   "path": "data/errata/castle-walls.json",
+   "sha256": "ab9e6bf2aa0feacf1bd1d12990f5a214e384b36bbaf97641aca2f8a7641e7b06",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-catapult-turtle",
+   "path": "data/errata/catapult-turtle.json",
+   "sha256": "a81db6eb2fcbb2c4ae12b0cccce4b83425567e1b9589ba91c775caed153e0e32",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-chaos-emperor-dragon-envoy-of-the-end",
+   "path": "data/errata/chaos-emperor-dragon-envoy-of-the-end.json",
+   "sha256": "0dcb37455e9b59f99920d2fa63e9e10942a9dd46f94371e99981c86311d21ad1",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-chaosrider-gustaph",
+   "path": "data/errata/chaosrider-gustaph.json",
+   "sha256": "e6772be35421ad9f975928d67d1db5427955e175c0db784da32411c29360c9d8",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-cipher-soldier",
+   "path": "data/errata/cipher-soldier.json",
+   "sha256": "084616ebd80de6c6a58dc2119c2dcfb63fe59dc9b2dff5a16ed6845715ff8a57",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-clear-world",
+   "path": "data/errata/clear-world.json",
+   "sha256": "a55b8773a9dc09847f4346ff1cd7bccec78dd64c126f49a488933c18ad5330b5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-cocoon-of-evolution",
+   "path": "data/errata/cocoon-of-evolution.json",
+   "sha256": "24ac9200756bf171b238901e160f03f0937c69c02c99c3bb6e4d2827367aa80f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-combination-attack",
+   "path": "data/errata/combination-attack.json",
+   "sha256": "63f64ecd7ccf6ad6571c6ad604127e4b06f4e4d54555b4e8ed41b16bee35b958",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-continuous-destruction-punch",
+   "path": "data/errata/continuous-destruction-punch.json",
+   "sha256": "3d855586209f7789b4639f9e979a29c69e74b8a922a6e8449acad444a6fec766",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-cost-down",
+   "path": "data/errata/cost-down.json",
+   "sha256": "0257a6b544cfc70d00c707ca707360bd516f27a8c28fa009be3844f444882a2c",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-covering-fire",
+   "path": "data/errata/covering-fire.json",
+   "sha256": "ef489afbd4ae7a0fae865ffb7ec00d78b852253c3362df32de1240b0e9aa6afd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-crimson-sentry",
+   "path": "data/errata/crimson-sentry.json",
+   "sha256": "d190161b05bd5d7c1ffa083f850a6fd44be5c6cf8be7d87ddeaabbc8e1d64a7b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-crush-card-virus",
+   "path": "data/errata/crush-card-virus.json",
+   "sha256": "c81f0a47ee07b4c95339afaa30a4be3fadb8d55fc32486085e2d49613b8886e2",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-curse-of-aging",
+   "path": "data/errata/curse-of-aging.json",
+   "sha256": "801259bafb84c324983f02dac3d3a1906f2e281e7b0d9ff2bd64ddbae4a0fc25",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-curse-of-royal",
+   "path": "data/errata/curse-of-royal.json",
+   "sha256": "2483c4c8f92ef13c822338d20c4a68953515210fb90a673874d5f0b0bfb1c187",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-cyber-blader",
+   "path": "data/errata/cyber-blader.json",
+   "sha256": "e7b69d50c93c88ec611f375b123e153a9e570e90bea79ac2b48e0ba9ba959234",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-cyber-jar",
+   "path": "data/errata/cyber-jar.json",
+   "sha256": "62e82c8a59565cc1729255ead432ea356bee1c66d76b49b203acd46fdad9c8c9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-d-d-crazy-beast",
+   "path": "data/errata/d-d-crazy-beast.json",
+   "sha256": "c0a40cc9f6e6aa54e9a7d6778f73e158f25644821631956198ca4115c428a692",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-d-d-scout-plane",
+   "path": "data/errata/d-d-scout-plane.json",
+   "sha256": "9ccc5eb7f2cb8f1ceacd8dbe7f12b8c673779499cfa92ff8957dcab46d68298f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-d-d-survivor",
+   "path": "data/errata/d-d-survivor.json",
+   "sha256": "b4a4daa4303f62db075aa36945b3f601c73ef6e050bbe6403366ab5e66cd8cf5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-dark-jeroid",
+   "path": "data/errata/dark-jeroid.json",
+   "sha256": "0382096f7e80963baae39973fcef0e0a18323cb6f9caa64986b15557067bfecc",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-dark-magician-of-chaos",
+   "path": "data/errata/dark-magician-of-chaos.json",
+   "sha256": "5663f3ea32c393438c5b6cfa55cec72cb3e91343c48d8ba7c41a36b6ebef2186",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-dark-master-zorc",
+   "path": "data/errata/dark-master-zorc.json",
+   "sha256": "f1bd328c2ca7e6bf3955119124e263bea489f148ae633f233c545bf91fbb87c8",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-dark-necrofear",
+   "path": "data/errata/dark-necrofear.json",
+   "sha256": "7a742b61f48fefe60ef1ca7eb7b571310b790a3a5da10aedf955d832d54bb9e3",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-dark-strike-fighter",
+   "path": "data/errata/dark-strike-fighter.json",
+   "sha256": "bf56a67dd6d864a4f2caf491929a5b36fb85a86627238ec6135851651faff9eb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-darkness-approaches",
+   "path": "data/errata/darkness-approaches.json",
+   "sha256": "3e8d2907bb6a6c5ea0ea582da89f76f1939332bf7f29192cf4d64df45f92eafd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-deal-of-phantom",
+   "path": "data/errata/deal-of-phantom.json",
+   "sha256": "ddfc4a2f36309b29f473c6431a6a290ba86c5a88e172b9c1cf348c4d390ad422",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-destiny-hero-disk-commander",
+   "path": "data/errata/destiny-hero-disk-commander.json",
+   "sha256": "adf46f20f52d5e9fee5fede4fdcd56941ac484c0b4d592fd9dd93879157f41e6",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-dice-re-roll",
+   "path": "data/errata/dice-re-roll.json",
+   "sha256": "1e6c3dc06940a59759882019030c9dc6910d9396f2246406d9d1644536d0139b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-diffusion-wave-motion",
+   "path": "data/errata/diffusion-wave-motion.json",
+   "sha256": "0e7b314d5be413320be599938d15b6dcf6a9f371ddc72facef98c477cc76cbdc",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-dimension-distortion",
+   "path": "data/errata/dimension-distortion.json",
+   "sha256": "d9e48df9b1187be260c72b60947f944dd37e8e7939b2977a9c1356d891430479",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-disc-fighter",
+   "path": "data/errata/disc-fighter.json",
+   "sha256": "2979d7488e6b2bab7ba046f1f3f120f072360b58096787e2841dfa81a91d5c56",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-dragon-seeker",
+   "path": "data/errata/dragon-seeker.json",
+   "sha256": "b0d7e7fa1b78515c4112e23b6c8118a76681e0a39199c9bd3457657a84aa69d5",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-element-doom",
+   "path": "data/errata/element-doom.json",
+   "sha256": "b1417fbd93274c75bcd7b9eb9c4324ef772f8528a7ed0bbc922742fac2a8fc1f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-element-dragon",
+   "path": "data/errata/element-dragon.json",
+   "sha256": "5968b06ec0c52d11de8378751a68b908f2ffb2af9dd7a305e2aed997b81870e7",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-element-magician",
+   "path": "data/errata/element-magician.json",
+   "sha256": "f5d2f6ad72b03bd9b42631c68189bcbc921ff246985bf2664ca9a36c414bb06a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-elemental-hero-absolute-zero",
+   "path": "data/errata/elemental-hero-absolute-zero.json",
+   "sha256": "ef628132a4087ea676429bd0374c0475f67c6bb7a3906db3718b262db17c2e0a",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-elemental-hero-chaos-neos",
+   "path": "data/errata/elemental-hero-chaos-neos.json",
+   "sha256": "0385714824b413d2497086e7fcefa9b9d6fde3cbfc78c2333e320f5a5658899c",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-elemental-hero-divine-neos",
+   "path": "data/errata/elemental-hero-divine-neos.json",
+   "sha256": "b6454794e8bcb0aa1c2852d5cb4e820c05040adfb61278390ed835193f95d54e",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-elemental-hero-stratos",
+   "path": "data/errata/elemental-hero-stratos.json",
+   "sha256": "d0104ace2338eccccaea957e37a19bb97f4a116539c73375b147855cd64e0792",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-elemental-mistress-doriado",
+   "path": "data/errata/elemental-mistress-doriado.json",
+   "sha256": "c618a19bb2a0a81077fff56955a4b6d05b7f54e6cb41d77b064b351c062576d3",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-emissary-of-the-afterlife",
+   "path": "data/errata/emissary-of-the-afterlife.json",
+   "sha256": "2fa86046b1f1a0ab0938fe42c389d0c087557a4214d625e7d45255f1ac30af14",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-energy-drain",
+   "path": "data/errata/energy-drain.json",
+   "sha256": "0837682350bd2f070e27d443261121bdc3fef065bd91183f610d9e0f7ecb5225",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-evil-hero-dark-gaia",
+   "path": "data/errata/evil-hero-dark-gaia.json",
+   "sha256": "688985bd8cb84ec54afd4dba9ddd1903e3162f27c20958e1ccbb0f0fefa55648",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-evil-hero-infernal-prodigy",
+   "path": "data/errata/evil-hero-infernal-prodigy.json",
+   "sha256": "c501d57f22f73217162f2396aa71b0c3ddf67d3f45eeedc8d2dcce1c45891a9b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-exchange-of-the-spirit",
+   "path": "data/errata/exchange-of-the-spirit.json",
+   "sha256": "f6f6348d65631aa7e05f58b21a89c2afc982d994fd6544fc1c6f25813a09cdb4",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-fairy-of-the-spring",
+   "path": "data/errata/fairy-of-the-spring.json",
+   "sha256": "036fd346fb20560f465a9f290dd195b180849e6859bbc47a496a56200b946d1e",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-falling-down",
+   "path": "data/errata/falling-down.json",
+   "sha256": "58ab21b82a7b463379768fcac00067135548e1762669cb292f8a955b955734a2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-fenrir",
+   "path": "data/errata/fenrir.json",
+   "sha256": "5ca91db6f8831060c5c82467597b96b4eaf191b48d584251830a4a9daed9d569",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-firebird",
+   "path": "data/errata/firebird.json",
+   "sha256": "38349145527e2c336bd200edbc2357c2c93c0ac8c6d3c9b271787fdd8bd4e6cd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-flying-kamakiri-1",
+   "path": "data/errata/flying-kamakiri-1.json",
+   "sha256": "9c9e3095b15954d2ede287a642c3af5f76bd27bf8e707f434969038bc0332771",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-formation-union",
+   "path": "data/errata/formation-union.json",
+   "sha256": "f945c561d29fc7c154d46aede75911212a500738d4ad28a57d92394dea2ed08a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-fushioh-richie",
+   "path": "data/errata/fushioh-richie.json",
+   "sha256": "ff913ee522f04ef3bd2276dc7255c93b50659127252953ffcc213a19a2396d82",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-future-fusion",
+   "path": "data/errata/future-fusion.json",
+   "sha256": "3aac2bf199b71e8eb25f2ff805baf4c9e30253bdc1d90133eaff47026bbe507e",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gaia-soul-the-combustible-collective",
+   "path": "data/errata/gaia-soul-the-combustible-collective.json",
+   "sha256": "2463487c60f91f7f391bce370d0c81d6a61b5a0b5b2abca35be21759d42afca2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-garuda-the-wind-spirit",
+   "path": "data/errata/garuda-the-wind-spirit.json",
+   "sha256": "9611ebc73123b0025a2deb7346972e13dd2d265cbee0d67abb9a55e42b5ab3c7",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-gather-your-mind",
+   "path": "data/errata/gather-your-mind.json",
+   "sha256": "37d5fe5936f1f6d816cc62db836c5646548b11df819bf55cb5fc58ed9ddbdfe2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gearfried-the-iron-knight",
+   "path": "data/errata/gearfried-the-iron-knight.json",
+   "sha256": "405bc332207008a0590ccb79310dd40f65545ca98be52fb96a442a8aecdda58a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-giant-germ",
+   "path": "data/errata/giant-germ.json",
+   "sha256": "67ccaa7d355cdf0ed7df3ed43943e41ada362e7adf8a8e9f6abab999356c66b6",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gigantes",
+   "path": "data/errata/gigantes.json",
+   "sha256": "eeb6f2c0f69f9ab42f06058c746d4f053cc839f323096673e191c15ae8da8901",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-gilasaurus",
+   "path": "data/errata/gilasaurus.json",
+   "sha256": "8d578d663e02710bcac5f1aa70352ce89e36070e4739f1d4d7d5ecd6ccc1bd4d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gladiator-beast-heraklinos",
+   "path": "data/errata/gladiator-beast-heraklinos.json",
+   "sha256": "996912a6ed44ef0b4d0d05746be5364d0743bde098509a3dc39fe01ed0e47afa",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-goddess-of-whim",
+   "path": "data/errata/goddess-of-whim.json",
+   "sha256": "029d6a6a0a746fda94e40f4b8c260ba357080f9d3eda8e28f9db247f822553e8",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-goyo-guardian",
+   "path": "data/errata/goyo-guardian.json",
+   "sha256": "9e7efb91bba476b0255377d49b01c40b30f28f1f78954a62ecbdc61f8fa74a19",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-graceful-dice",
+   "path": "data/errata/graceful-dice.json",
+   "sha256": "da08d74da52238489ae8b4b25d314b9ef6b4a283a6f384e67d337ab07265dd4d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gravekeeper-s-servant",
+   "path": "data/errata/gravekeeper-s-servant.json",
+   "sha256": "5e39749318e8904aa6817dc4e7b99474ce639c8df5ecddaff0cbb29fb766adb9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-gravekeeper-s-spy",
+   "path": "data/errata/gravekeeper-s-spy.json",
+   "sha256": "a826d88632523429f4b1be038e9b1bd2399d7854484bdc6b0f332d2ac829fe6d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-green-baboon-defender-of-the-forest",
+   "path": "data/errata/green-baboon-defender-of-the-forest.json",
+   "sha256": "abf75478c9611926bd2473bebd8235267eed5862e1c38b295dd00cfd8d04dbf0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-hallowed-life-barrier",
+   "path": "data/errata/hallowed-life-barrier.json",
+   "sha256": "e79bb135aaf52446e28790227c85905fa785d03d478cdc109cfcb0949c1d71c3",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-heavy-mech-support-platform",
+   "path": "data/errata/heavy-mech-support-platform.json",
+   "sha256": "898337705e1bb023153d48c91222ced3be868c34b3683d368da3f47f0fcad8f9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-helping-robo-for-combat",
+   "path": "data/errata/helping-robo-for-combat.json",
+   "sha256": "1a2e5bfe66a85ca4d56b431a2bfb99921deb19649474ba96c6ba5d3c57ed2dd2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-hino-kagu-tsuchi",
+   "path": "data/errata/hino-kagu-tsuchi.json",
+   "sha256": "1adaf4dfc0c378d8f73d6b1171fb99ac0a470bb501b2e2e41cd9306ad8322ffb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-horn-of-light",
+   "path": "data/errata/horn-of-light.json",
+   "sha256": "9a906974ff1513076575bda5a430e98fae5feeb89d1772c6117e20a11305f43d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-horus-the-black-flame-dragon-lv6",
+   "path": "data/errata/horus-the-black-flame-dragon-lv6.json",
+   "sha256": "d1e2be265817b61b23ba6972ad7361a91eb6ae194b61a927c5196a792c4b4dab",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-howling-insect",
+   "path": "data/errata/howling-insect.json",
+   "sha256": "7c8706bdefd547611511f59c966f73d6b1524c778a3f30b087c3b55650779285",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-hyena",
+   "path": "data/errata/hyena.json",
+   "sha256": "ecd36eab2d32a3bf23dc170a39267156aaa0615da60662c1ccff7607d862a752",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-ido-the-supreme-magical-force",
+   "path": "data/errata/ido-the-supreme-magical-force.json",
+   "sha256": "332c1143e7be8083211da89eecd4de8f9cff16fd0543e9d8d275b812a29b6f2c",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-imperial-custom",
+   "path": "data/errata/imperial-custom.json",
+   "sha256": "dd5f8e4af225735d8e4b9eaa3eb156962703da66abc35117efd6e2113c3aee95",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-imperial-order",
+   "path": "data/errata/imperial-order.json",
+   "sha256": "0d3515344dbbab72d2d88f1d1f511d5f6b9c4455e44c395e51dc85ce656184ee",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-inferno-fire-blast",
+   "path": "data/errata/inferno-fire-blast.json",
+   "sha256": "7dadb14dc877f3da13466b6d534bd3adb69abe75cff6947684689bc07d61dde1",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-injection-fairy-lily",
+   "path": "data/errata/injection-fairy-lily.json",
+   "sha256": "6099ebfdcc5f30f1c285179d663d431de2f6928ca79e2f8190383042b68719e1",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-insect-princess",
+   "path": "data/errata/insect-princess.json",
+   "sha256": "e2286908ce2de77d460e088ab33298fa8413be6436e00e04a77d7eb3ab6ecdb0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-inspection",
+   "path": "data/errata/inspection.json",
+   "sha256": "1fc706d82acced8d6fd5388409ef134314bc1299a3d7173a1d82257d21cb3811",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-iron-blacksmith-kotetsu",
+   "path": "data/errata/iron-blacksmith-kotetsu.json",
+   "sha256": "31e16cdfff73f6c62cd39c7d422074df342d26401c50c421626fafead3eadace",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-jade-insect-whistle",
+   "path": "data/errata/jade-insect-whistle.json",
+   "sha256": "2ec5ad1aba4692e48498c3d72539c725d1c1e7586e4076e5416dfc2c7e384c63",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-jirai-gumo",
+   "path": "data/errata/jirai-gumo.json",
+   "sha256": "541e325724a380e18d4160ba1024e55ba63af9f45bc3ff76049bbfbea998ada1",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-kazejin",
+   "path": "data/errata/kazejin.json",
+   "sha256": "19e0181bd320e042d87dd0a5290b55f13cc8044a29bf0015ee300c47dc8246df",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-king-of-the-swamp",
+   "path": "data/errata/king-of-the-swamp.json",
+   "sha256": "f884b531a5ad2ed8e3a05c2531f0e141dd9082859e7597faa62b109733ffcc6a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-king-tiger-wanghu",
+   "path": "data/errata/king-tiger-wanghu.json",
+   "sha256": "09e30963aaefeb2f0a5635128d62e47452de21bb3ab6665f483227a36a22ca17",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-knight-s-title",
+   "path": "data/errata/knight-s-title.json",
+   "sha256": "4adc2434e1a79bf8b5339218e3e96dd0283a6fe5f29005a5b1f074a9eb822727",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-level-up",
+   "path": "data/errata/level-up.json",
+   "sha256": "740e0b572a72cd4650d868f3eac4cfd519256e75545d87fce015f778b73d68de",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-levia-dragon-daedalus",
+   "path": "data/errata/levia-dragon-daedalus.json",
+   "sha256": "37047e28ab636052fcd77dad96a0f67f77b3c366a0665e7fc1ca238d22b6dcda",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-limiter-removal",
+   "path": "data/errata/limiter-removal.json",
+   "sha256": "8b62e7c2dd3600c3283654133460a7f7a9f139fa8e1f4e702caec2efdaf9fe43",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-machina-gearframe",
+   "path": "data/errata/machina-gearframe.json",
+   "sha256": "cace15170b130929de062367c8331b20873f9ead2e6417b6d8863a49ea7a6e22",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-machina-peacekeeper",
+   "path": "data/errata/machina-peacekeeper.json",
+   "sha256": "40d5c139226fb966fa82a23fea89887fb6b349eb89b963a838cef03032562c2c",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-machine-duplication",
+   "path": "data/errata/machine-duplication.json",
+   "sha256": "acdff865ee3ab2c390bd395b0c8a62d60eba3ec66d7c45b1c0f1ac41801f1cf2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-magical-hats",
+   "path": "data/errata/magical-hats.json",
+   "sha256": "323cad76ea9be769211c428ed33227d86f9359a08c26d7ea4c7dedc4f828a3a9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-magical-labyrinth",
+   "path": "data/errata/magical-labyrinth.json",
+   "sha256": "54e7d5a48c79df86e32ea67aa0fd7a28448e44e8b677c0378fb978f350b349bd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-maji-gire-panda",
+   "path": "data/errata/maji-gire-panda.json",
+   "sha256": "4ddd27894d5f6c453e332b6c12d6534af6d4afd92ea93aaf88c0454d08d9c4bd",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-makyura-the-destructor",
+   "path": "data/errata/makyura-the-destructor.json",
+   "sha256": "76b48e05bcbad1f555ef0b4a25c5c3ec0125ff414fdcb9c6bf07b916df13d7a2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-malefic-blue-eyes-white-dragon",
+   "path": "data/errata/malefic-blue-eyes-white-dragon.json",
+   "sha256": "eb7d22cf96d299968739ff8df854c00bce3e862a7ee17281823d1dc6a688e2fe",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-malevolent-nuzzler",
+   "path": "data/errata/malevolent-nuzzler.json",
+   "sha256": "bb4bdc8fd4f7d792b51405fc2400dd0358336d2a828d21ba4786201cd7b3a153",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-manga-ryu-ran",
+   "path": "data/errata/manga-ryu-ran.json",
+   "sha256": "18d4789b683e403c72de8242b2016e659f404e4a0e436cbe0ef03f5154c89741",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-manticore-of-darkness",
+   "path": "data/errata/manticore-of-darkness.json",
+   "sha256": "19960bd2394eac3bee238d8d5da744d0aef4fce5426b134706af6fc421c69387",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mask-of-the-accursed",
+   "path": "data/errata/mask-of-the-accursed.json",
+   "sha256": "70b8d74a2c1012ac19c29f5f4544c8aa58f59f2b6e1cf654f2d17a9ef941c0fc",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mask-of-weakness",
+   "path": "data/errata/mask-of-weakness.json",
+   "sha256": "3454dc80909b9ec7eb4820a0bbb301ab853d8b6608f141fb01dab80056ea2d73",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-masked-beast-des-gardius",
+   "path": "data/errata/masked-beast-des-gardius.json",
+   "sha256": "1fdb4f6aa20cf1025ef59d757e22c5e09caa2279d0e46abb1aa0d42b08d44b3f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-metalmorph",
+   "path": "data/errata/metalmorph.json",
+   "sha256": "e2f4bd361e20a371c74cbf9ce5a94f5b285aa3b11b94a11afbaf617e56a29d6c",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-metalsilver-armor",
+   "path": "data/errata/metalsilver-armor.json",
+   "sha256": "7952198294ac98444e287fe51dd775e2596cd05ea5661ac6e14ca4ab9a3a2bf3",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-metalzoa",
+   "path": "data/errata/metalzoa.json",
+   "sha256": "23d990ff087879206e96d871ded5c8ee683f2110d75ebd158153c11b0d4bcea8",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-michizure",
+   "path": "data/errata/michizure.json",
+   "sha256": "bb153fa5d14d9045fee0ded32493165cf320e5a21eec577a01f4d847c6875aef",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-micro-ray",
+   "path": "data/errata/micro-ray.json",
+   "sha256": "46c56d5fb076f1ec457fb1ae65223489df300a9cb020fd2cace6cc23cf0da252",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mind-crush",
+   "path": "data/errata/mind-crush.json",
+   "sha256": "566f86f699d7453176efdec9d1e3f3bff582e6fc23eb2f9d2c621b387ae68c87",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mirage-knight",
+   "path": "data/errata/mirage-knight.json",
+   "sha256": "86f45533cbceec77556053f84a6058a33287b1c3db704385077f26307eaba434",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-mirror-wall",
+   "path": "data/errata/mirror-wall.json",
+   "sha256": "a7d314781b81dd9b990f7c8831f62b0665150dfe616ab18a29ed6678f8daf40f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mokey-mokey-smackdown",
+   "path": "data/errata/mokey-mokey-smackdown.json",
+   "sha256": "f297b883c8a4bf94875fcc6b0697ac137538aea8d42c6ddb7ba0a1028ac3502f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-monster-gate",
+   "path": "data/errata/monster-gate.json",
+   "sha256": "1f667c864a0011e132cad9d7523447d8986438c4b5707e288718c60d8766c90d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mustering-of-the-dark-scorpions",
+   "path": "data/errata/mustering-of-the-dark-scorpions.json",
+   "sha256": "46e3e4a4a25ab08d92eea5e2b084a8ffe28c85bd810280f9d99e92833f0b8c2f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-my-body-as-a-shield",
+   "path": "data/errata/my-body-as-a-shield.json",
+   "sha256": "dea146d6ca0a1ada9ea1a99e3d30d5f1a5fe489052d199ca4b3e25d0a627c274",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-mysterious-puppeteer",
+   "path": "data/errata/mysterious-puppeteer.json",
+   "sha256": "fc6887d236816ffd54cf083af64c13843996f29d90082d186dee592c5682abdf",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-narrow-pass",
+   "path": "data/errata/narrow-pass.json",
+   "sha256": "4679296d2aa5135c55a3095d769069a76989653d688d6ef1e18f2ed3dedd4709",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-necrovalley",
+   "path": "data/errata/necrovalley.json",
+   "sha256": "2fc1d7b219b3a67f3957a32068b2e852907f15ea93b43eb0059d664aadef7034",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-night-assailant",
+   "path": "data/errata/night-assailant.json",
+   "sha256": "4022b856179735e41af88e80dcfc621a54b59b444473043fb38daeadfcbc668c",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-nimble-momonga",
+   "path": "data/errata/nimble-momonga.json",
+   "sha256": "29ab1452a012d534108f9918ce91778466179b3b44889e9728c3e9a69471298c",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-nobleman-eater-bug",
+   "path": "data/errata/nobleman-eater-bug.json",
+   "sha256": "099dfa556e6280504b9288125729f9866ae2fd9209eb9aeaf18903ed723a6522",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-nobleman-of-crossout",
+   "path": "data/errata/nobleman-of-crossout.json",
+   "sha256": "ec2519f8cbfda87cdc5af7b412a1210a54983e11a27594b8f1e52ffa8b693bb9",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-nobleman-of-extermination",
+   "path": "data/errata/nobleman-of-extermination.json",
+   "sha256": "001f26cca45703c03a7b2a93188b9b5ed6f8a0e45486c9560ebaa3f891296b79",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-nutrient-z",
+   "path": "data/errata/nutrient-z.json",
+   "sha256": "0799a0163cf9c5d5c1991daccd5b43c7b16fb323b050e4718bfc1afaa2fdf9d7",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-penguin-soldier",
+   "path": "data/errata/penguin-soldier.json",
+   "sha256": "7f47be7ed42d00b2b7a5ba7304044ccfdd96ae0d578edeb13841aaa1e0f69ad0",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-pyramid-energy",
+   "path": "data/errata/pyramid-energy.json",
+   "sha256": "7cd68a57779a3d686a846104ef6894d9abb819d2463920bb855500fa88fe9a10",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rainbow-dark-dragon",
+   "path": "data/errata/rainbow-dark-dragon.json",
+   "sha256": "992a750adf8c5d441f41de7fb1bea8dce2272a4eae1823ffd560044a2b92f64c",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-rainbow-dragon",
+   "path": "data/errata/rainbow-dragon.json",
+   "sha256": "a06d14f435721cc094bf3a97c0e869e66f452e76c304e0b8b404f114ac1d711f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-rainbow-neos",
+   "path": "data/errata/rainbow-neos.json",
+   "sha256": "45204a8287ea8ae4b0f62c5a41d046e367ef757adee4d555768f2d48088692b8",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-rampaging-rhynos",
+   "path": "data/errata/rampaging-rhynos.json",
+   "sha256": "49a290171c1d3e305d08641cd20d2e4f9b228e0376fa00acf9214c8ff6dc3f29",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rare-metalmorph",
+   "path": "data/errata/rare-metalmorph.json",
+   "sha256": "ce989d97001c64dcdbd1cbc063d4d9c1d1475566177b2acac26038730eee2621",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-reasoning",
+   "path": "data/errata/reasoning.json",
+   "sha256": "24f607d49aa00dd06173417d1ff21cc4798760e46c56f20ed9e40340a432aa66",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-recycle",
+   "path": "data/errata/recycle.json",
+   "sha256": "06c3376ccfb43b7ca19c7a59fb2179ad0c2ae608ef974dd92a3c3a9ba316a985",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-red-eyes-darkness-metal-dragon",
+   "path": "data/errata/red-eyes-darkness-metal-dragon.json",
+   "sha256": "fddde348e0a31eda1f90956ac4eb4eee8d7ee736abb3531a62423bd9054a9cce",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-red-eyes-wyvern",
+   "path": "data/errata/red-eyes-wyvern.json",
+   "sha256": "e2146d5a7562ed24b90bd16035a932b7ddc15dfb66706113c3f53ae46cd77bd0",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-reinforcement-of-the-army",
+   "path": "data/errata/reinforcement-of-the-army.json",
+   "sha256": "71f232f60f4d54cb8b6a9f7611ba1ededad66e3c8289a487f6b569ec71fdd2ce",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-reinforcements",
+   "path": "data/errata/reinforcements.json",
+   "sha256": "2bd1180bfef8ee92a4ca172774518dc57ecc2f3ea5042f44f377892f2240b474",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-release-restraint",
+   "path": "data/errata/release-restraint.json",
+   "sha256": "4f95030299410ce4a211c072d3dc9ee70dc9744a8e5e21b3aac168ea28593735",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-relinquished",
+   "path": "data/errata/relinquished.json",
+   "sha256": "69e1287a14a05b0ca992ef185e3c5cfe7a51fcf8d1b97552c3bea7d3d718e4eb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rescue-cat",
+   "path": "data/errata/rescue-cat.json",
+   "sha256": "23368a75681b567c9340b273ccc15c44a0d32a6f51b6ba4bf97a5bdafe8809df",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-ring-of-destruction",
+   "path": "data/errata/ring-of-destruction.json",
+   "sha256": "d55888a780ad871ae20bb228fcd9e161c41ecf47378bf6f7050afb0c0f56184b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-ring-of-magnetism",
+   "path": "data/errata/ring-of-magnetism.json",
+   "sha256": "0d419e20551ebb7dd11565ad712633d140a7b2ddfdc7786cad32c6214f0b3b73",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rise-of-the-snake-deity",
+   "path": "data/errata/rise-of-the-snake-deity.json",
+   "sha256": "3ffd268b98b14b6e7a72e19c7351325d5b40dbe7ed4df6adc9e6aaa3fe53f7c3",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rivalry-of-warlords",
+   "path": "data/errata/rivalry-of-warlords.json",
+   "sha256": "6e4b7a8b541f8c65b116f99a18314edc9a32a32ce8d4b472be89626c3eb95b8a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-rush-recklessly",
+   "path": "data/errata/rush-recklessly.json",
+   "sha256": "a0a902d55851097e2ebfbc990a559b2f61fa578bde1d7963405387e30cdb0c66",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-ryko-lightsworn-hunter",
+   "path": "data/errata/ryko-lightsworn-hunter.json",
+   "sha256": "36632a88508bc779c292e7db3bc25581cf682f35d40269b07718cfcbfc7f2828",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-sacred-phoenix-of-nephthys",
+   "path": "data/errata/sacred-phoenix-of-nephthys.json",
+   "sha256": "40fd2c0114f5cf5cbc41f33a67530f5e0d11f2b32ec86e31907e24dc3d0f8b84",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-sage-s-stone",
+   "path": "data/errata/sage-s-stone.json",
+   "sha256": "e362b6368631c95a1abfcb27354c89efb17308081c5da7c20bb9ac5c8985d685",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-sasuke-samurai-2",
+   "path": "data/errata/sasuke-samurai-2.json",
+   "sha256": "2fdb42869f9a4b3956e59590efdf7185291a1b3e500ba770495de8e0ca38408f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-scapegoat",
+   "path": "data/errata/scapegoat.json",
+   "sha256": "c4d32339735ec399b1f4ac22072978f3c6afb22abd821fd98684c19ec32bc2c7",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-second-coin-toss",
+   "path": "data/errata/second-coin-toss.json",
+   "sha256": "a54a9a618cbb76a702da43df279de0750ddc0b280e7eb23fe3499d4df54a634f",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-senet-switch",
+   "path": "data/errata/senet-switch.json",
+   "sha256": "15c9058a2a2b339fbbfb47c4a672fb376638e3422c7fda130488205bdf518422",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-senju-of-the-thousand-hands",
+   "path": "data/errata/senju-of-the-thousand-hands.json",
+   "sha256": "bf19eea9dfb71f8836115e2d620f9961db2425c7ce06a1871f02c1471887e580",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-serpentine-princess",
+   "path": "data/errata/serpentine-princess.json",
+   "sha256": "2d31bda3c4d458aea66819a562195d43727386d6b68f869b0a16ae38dc5ef593",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-shadow-spell",
+   "path": "data/errata/shadow-spell.json",
+   "sha256": "efcc960ad22d7948b56e99983da707589d33879e703795bb07019e971bb13668",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-shinato-king-of-a-higher-plane",
+   "path": "data/errata/shinato-king-of-a-higher-plane.json",
+   "sha256": "36fbb030b0b6e519c0065725f189528d1ceee09c22d949a1bbe09ae2fe528abd",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-shining-angel",
+   "path": "data/errata/shining-angel.json",
+   "sha256": "9a4db043bd2b89856f148971f1428a59ce5e8d10696b92839a28d52e304cbc1e",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-silent-swordsman-lv3",
+   "path": "data/errata/silent-swordsman-lv3.json",
+   "sha256": "177b679fea671910ffa6f908e2afa50b5250ecd6f36e365960ef5d21c1996f0d",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-silent-swordsman-lv5",
+   "path": "data/errata/silent-swordsman-lv5.json",
+   "sha256": "9ab1ec2b14a3a9c054f8568ac4533dc8763cd7f08516bab6f91d85b90b6e05d9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-sinister-serpent",
+   "path": "data/errata/sinister-serpent.json",
+   "sha256": "b4e59e58b4dc82b06d5ef8fa925710870b3e3e13202fbd2320b9be98066b973e",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-skilled-dark-magician",
+   "path": "data/errata/skilled-dark-magician.json",
+   "sha256": "8aa65614536dde072cfeaf3fc804d8b18141a35ba8e1aa8da9e8bde00f48e884",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-skilled-white-magician",
+   "path": "data/errata/skilled-white-magician.json",
+   "sha256": "b9b5814a7f18e808686921f0bb0c703d501c7c7cf3762d56d0199d53d8636c07",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-skull-dice",
+   "path": "data/errata/skull-dice.json",
+   "sha256": "76d7456edda95b8f79aa8521596bc3e8b13275c9180cc20edb9e728bfcb74a2b",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-slate-warrior",
+   "path": "data/errata/slate-warrior.json",
+   "sha256": "3ab3eaa75adf080f5009578768b872ee529308e2d38c1507e3e87c81a9c88379",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-snake-fang",
+   "path": "data/errata/snake-fang.json",
+   "sha256": "c7d6f18c3bd126dfefc27a034f89e8145b84962a6eb0e8494c214387d85fef98",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-soul-rope",
+   "path": "data/errata/soul-rope.json",
+   "sha256": "62172c47214f95eb2e8ccfec4b03f53c47c4436f52ed7c916c3c38a38558aeeb",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-spear-cretin",
+   "path": "data/errata/spear-cretin.json",
+   "sha256": "f2c12d8f5a817a1f43634a1f0088147032c045b68fad235bdafde96af4d772e5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-sphinx-teleia",
+   "path": "data/errata/sphinx-teleia.json",
+   "sha256": "48a1d8bcd5b972acb5294cb6b7fdb575f0bc5ba43515d1941ac6669af82c89c1",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-spirit-reaper",
+   "path": "data/errata/spirit-reaper.json",
+   "sha256": "7fb5ccdd686060d20d17ff680f080a8f1193e54f343dbc0e3a677012931fb1b2",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-spirit-ryu",
+   "path": "data/errata/spirit-ryu.json",
+   "sha256": "226359c4ba02873ea463adbe00e3d3a6de1c5002654cf3f96f58284866ba7dc9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-spirit-s-invitation",
+   "path": "data/errata/spirit-s-invitation.json",
+   "sha256": "edbaee1c175e2ba9dae2fcbc7285906eca03328159c6143b352460fa336a2a1c",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-spiritual-energy-settle-machine",
+   "path": "data/errata/spiritual-energy-settle-machine.json",
+   "sha256": "5ab2e80b5a892410ff1077658c93631ee9165d012619ccd051f237d0d1bfbc1a",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-splendid-venus",
+   "path": "data/errata/splendid-venus.json",
+   "sha256": "404eb5013a0cc0941d28846cf79aa44727096386fc8ee04525ef50db0ecd80bb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-storm-shooter",
+   "path": "data/errata/storm-shooter.json",
+   "sha256": "ada3705b601b3277989a2d774ad88b6634fb3450c5644ec3d028eee48b8981e5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-strike-ninja",
+   "path": "data/errata/strike-ninja.json",
+   "sha256": "ca5b1d4f9c0fec0370859c37b2adc6cfe6f48c4bc8102a48e1d6f7d8cac2a3a3",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-stronghold-the-moving-fortress",
+   "path": "data/errata/stronghold-the-moving-fortress.json",
+   "sha256": "0d9f4d18c98fd25fad188bbf9f20c359f8df7792759fff986a4428ef1ab2ca4c",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-suijin",
+   "path": "data/errata/suijin.json",
+   "sha256": "e108452f026a52678f97904826b38f0214abc3f8627a5bb423f9fcc43e6adeee",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-summoner-of-illusions",
+   "path": "data/errata/summoner-of-illusions.json",
+   "sha256": "e178b4dba63f72d86600ef09cbd28224e12e01d4cef38fdc7e531297fbec477e",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-super-rejuvenation",
+   "path": "data/errata/super-rejuvenation.json",
+   "sha256": "96b5cb69293a82777f4269dc00db18b1817fb862e31e5423a0f3eca78f2415e6",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-super-vehicroid-stealth-union",
+   "path": "data/errata/super-vehicroid-stealth-union.json",
+   "sha256": "f5f65b6f65a553f1dbfea7c317991d676fd9f00df7faa7801ea7589fa78a6c1a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-swap-frog",
+   "path": "data/errata/swap-frog.json",
+   "sha256": "2460f7e0e89b1923a24e7341ef7034ac695d036ce980123f01aa7d7b2d61b5ab",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-swords-of-concealing-light",
+   "path": "data/errata/swords-of-concealing-light.json",
+   "sha256": "ddedd4656d38463053006cbeff23ca396fac12b0c204b16f2ea106909be2d70f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-the-big-march-of-animals",
+   "path": "data/errata/the-big-march-of-animals.json",
+   "sha256": "fb328be9f3b98683702b96aa9b6a4aed6c407cee0de039cbff442008e1ec9647",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-the-reliable-guardian",
+   "path": "data/errata/the-reliable-guardian.json",
+   "sha256": "d607925f272fc2984edbaefffd818926539852b957b5cc6b6d258acaac1d5273",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-the-rock-spirit",
+   "path": "data/errata/the-rock-spirit.json",
+   "sha256": "8682a3593d10636b3b4fcf26005618166ae87e108cf59300330b69c4b28ea2a2",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-thousand-eyes-restrict",
+   "path": "data/errata/thousand-eyes-restrict.json",
+   "sha256": "b34890f872ca223f68f57871c6da82f61a576260e96aa26ab7626da74697106a",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-toll",
+   "path": "data/errata/toll.json",
+   "sha256": "f47e1d596d52d8ee30ebde247e15cc9f641e36ccb5da89ec74bebdba6313d975",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-toon-gemini-elf",
+   "path": "data/errata/toon-gemini-elf.json",
+   "sha256": "4ea3d625ecf70b29052913b4d1ba53d877dee117348cf80abf9dfa53a58bdf58",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-toon-mermaid",
+   "path": "data/errata/toon-mermaid.json",
+   "sha256": "229c618670772c75faa60222f8f42ab800a72da124fa06b367b796cade9bf39f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-toon-summoned-skull",
+   "path": "data/errata/toon-summoned-skull.json",
+   "sha256": "d170f44f5e8976e33443e824b027200cb45d00c6ad34e537ac1710d57074b81f",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-toon-world",
+   "path": "data/errata/toon-world.json",
+   "sha256": "115d3e0cfc12d6618ec783c3a3a04dcb1ef7ee0296d42142582ceb2013d42a0b",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-totem-dragon",
+   "path": "data/errata/totem-dragon.json",
+   "sha256": "81ccfc922bd11552f598cab0478f3233604f2f014f0341822ed51e343ec8494a",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-trap-of-darkness",
+   "path": "data/errata/trap-of-darkness.json",
+   "sha256": "61e3973628a19583b94b15c73161442bfbafa49cdb57cb86d5650ced66e6a7e8",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-treeborn-frog",
+   "path": "data/errata/treeborn-frog.json",
+   "sha256": "a50676f909cf5694721d266e6247d36057644acdd0efcd85dcd1f3f7dd363d65",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-tri-blaze-accelerator",
+   "path": "data/errata/tri-blaze-accelerator.json",
+   "sha256": "275201a45390cd5977b5c6747a508c3d63501604b1504cb75b39b93ad762676e",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-twin-headed-behemoth",
+   "path": "data/errata/twin-headed-behemoth.json",
+   "sha256": "b6bed376e82d5aebf8be0d59faab46f8befaa1d573e55ecf47df619bd1f0c1e2",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-ultimate-offering",
+   "path": "data/errata/ultimate-offering.json",
+   "sha256": "92a475b58621f9b62d9340083bf1c92e3f784bf88f4fad13bca01edd78c15ff5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-ultimate-tyranno",
+   "path": "data/errata/ultimate-tyranno.json",
+   "sha256": "b306cd5c3f352d20c31b2ea4e115429b8a5ab172a17177d6f03eb715df543b92",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-vampire-s-curse",
+   "path": "data/errata/vampire-s-curse.json",
+   "sha256": "1d803076f9983c1b7fb1db91755cdb980f8444acd017afb4a4ae71189317e569",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-vw-tiger-catapult",
+   "path": "data/errata/vw-tiger-catapult.json",
+   "sha256": "00df863e9916932d292923b882f01afd63796908ffb0a9e75fd80c566ac0b2a7",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-w-wing-catapult",
+   "path": "data/errata/w-wing-catapult.json",
+   "sha256": "3d7289ca2f35c35a763d546a822c67100d2ee0808dc5e2594e043d0d5115a8e9",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-weapon-change",
+   "path": "data/errata/weapon-change.json",
+   "sha256": "5c5ca6c642c5fb5195622d34045a94015b9a857572cb61c20a2767cb894c0f94",
+   "shape": "full"
+  },
+  {
+   "id": "erratum-wild-fire",
+   "path": "data/errata/wild-fire.json",
+   "sha256": "8d1ee12db2a83b914daa814159639ddf69218b5d18acda3d02579ed2c47f79ab",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-wulf-lightsworn-beast",
+   "path": "data/errata/wulf-lightsworn-beast.json",
+   "sha256": "543d21b6bfe7e68dcb99aa2861ade4f268073178cdf78d027c0ff1ce543cbff4",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-y-dragon-head",
+   "path": "data/errata/y-dragon-head.json",
+   "sha256": "40e84a33eb6a1b0c9606851ef30dd90a7727f343f1afd7a7d4038847f8d915cb",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-z-metal-tank",
+   "path": "data/errata/z-metal-tank.json",
+   "sha256": "c86a8d28f745a8f36d1ea20b844e3fac3cbc9b8383d2cbcb3e828ee0de6a0ad5",
+   "shape": "sugar"
+  },
+  {
+   "id": "erratum-zombyra-the-dark",
+   "path": "data/errata/zombyra-the-dark.json",
+   "sha256": "4b45497c8cc32798fbaea0d39c79d8bc271b1465e96f1975c010f64cedeff54f",
+   "shape": "sugar"
+  }
+ ],
+ "remaining_v1_count": 49,
+ "remaining_v1_ids": [
+  "erratum-a-deal-with-dark-ruler",
+  "erratum-apprentice-magician",
+  "erratum-armed-dragon-lv3",
+  "erratum-armed-dragon-lv5",
+  "erratum-axe-of-despair",
+  "erratum-birdface",
+  "erratum-bubonic-vermin",
+  "erratum-dark-mimic-lv1",
+  "erratum-dark-scorpion-meanae-the-thorn",
+  "erratum-dedication-through-light-and-darkness",
+  "erratum-elegant-egotist",
+  "erratum-emblem-of-dragon-destroyer",
+  "erratum-freed-the-matchless-general",
+  "erratum-fusion-sage",
+  "erratum-giant-rat",
+  "erratum-great-dezard",
+  "erratum-hand-of-nephthys",
+  "erratum-hero-signal",
+  "erratum-horus-the-black-flame-dragon-lv4",
+  "erratum-insect-imitation",
+  "erratum-last-will",
+  "erratum-manju-of-the-ten-thousand-hands",
+  "erratum-masked-dragon",
+  "erratum-mother-grizzly",
+  "erratum-mystic-swordsman-lv2",
+  "erratum-mystic-swordsman-lv4",
+  "erratum-mystic-tomato",
+  "erratum-ninjitsu-art-of-transformation",
+  "erratum-paladin-of-white-dragon",
+  "erratum-pandemonium",
+  "erratum-peten-the-dark-clown",
+  "erratum-pyramid-turtle",
+  "erratum-sangan",
+  "erratum-skull-knight-2",
+  "erratum-sonic-bird",
+  "erratum-terraforming",
+  "erratum-thunder-dragon",
+  "erratum-toon-table-of-contents",
+  "erratum-tyrant-dragon",
+  "erratum-ufo-turtle",
+  "erratum-ultimate-insect-lv1",
+  "erratum-ultimate-insect-lv3",
+  "erratum-ultimate-insect-lv5",
+  "erratum-vampire-lord",
+  "erratum-witch-of-the-black-forest",
+  "erratum-xy-dragon-cannon",
+  "erratum-xyz-dragon-cannon",
+  "erratum-xz-tank-cannon",
+  "erratum-yz-tank-dragon"
+ ],
+ "source_commit": "1937239d9fd0ebfb47dc850f298c11c3a60679b0",
+ "sugar_count": 180
+}

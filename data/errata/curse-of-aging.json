@@ -6,28 +6,14 @@
     "name": "Curse of Aging"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Discard 1 card from your hand. Decrease the ATK and DEF of all monsters on your opponent's side of the field by 500 points until the end of the turn this card is activated.",
-      "summary": "The single implementation difference is the Damage Step declaration: goat/c504700069.lua sets EFFECT_FLAG_DAMAGE_CAL on the activation where the modern script sets EFFECT_FLAG_DAMAGE_STEP, so the two disagree about which sub-step of the Damage Step this Trap may be activated in. Everything else is equivalent - the GOAT local condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is the De Morgan twin of the modern aux.StatChangeDamageStepCondition (not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the ATK/DEF reset expressions differ only in + versus | notation. Chronology is unresolved: no source in the packet dates the change.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700069,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700069.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Discard 1 card from your hand. Decrease the ATK and DEF of all monsters on your opponent's side of the field by 500 points until the end of the turn this card is activated.",
+    "modern_text": null,
+    "summary": "The single implementation difference is the Damage Step declaration: goat/c504700069.lua sets EFFECT_FLAG_DAMAGE_CAL on the activation where the modern script sets EFFECT_FLAG_DAMAGE_STEP, so the two disagree about which sub-step of the Damage Step this Trap may be activated in. Everything else is equivalent - the GOAT local condition (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) is the De Morgan twin of the modern aux.StatChangeDamageStepCondition (not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())), and the ATK/DEF reset expressions differ only in + versus | notation. Chronology is unresolved: no source in the packet dates the change.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700069,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700069.lua"
+  }
 }

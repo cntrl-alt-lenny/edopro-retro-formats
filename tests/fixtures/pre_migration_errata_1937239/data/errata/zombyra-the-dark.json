@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-zombyra-the-dark",
+  "modern_card": {
+    "passcode": 88472456,
+    "name": "Zombyra the Dark"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card cannot attack a player directly. Each time this card destroys 1 monster as a result of battle, decrease the ATK of this card by 200 points.",
+      "summary": "Period trigger timing, not a text erratum: the GOAT script keys the mandatory -200 ATK trigger (EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F) to EVENT_BATTLED with a condition that Zombyra's own battle target was battle-destroyed (Card.GetBattleTarget followed by Card.IsBattleDestroyed), so the ATK loss registers only once the battle has finished and only while Zombyra is still on the field with the effect active; the modern script fires on EVENT_BATTLE_DESTROYING with no condition, applying the loss at the destruction event itself, so its ATK is already reduced for the rest of the damage step. Upstream annotates the variant \"Activation timing\" and applies the same EVENT_BATTLED pattern across a family of GOAT variants annotated \"Battle destroyed registers while the mosnter is on field\". The printed text is behaviourally unchanged across the whole English lineage and nothing in the packet dates when the timing interpretation changed, so the chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700152,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700152.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline is the GOAT variant, whose cdb text matches lineage v1 (SYE-022, tcg-eu 2004-03, tcg-na 2004-03-01) exactly (ratio 1.0). Verified in the checked-out scripts: goat/c504700152.lua uses EVENT_BATTLED plus the GetBattleTarget/IsBattleDestroyed condition where official/c88472456.lua uses EVENT_BATTLE_DESTROYING with no condition; everything else (EFFECT_CANNOT_DIRECT_ATTACK, the -200 EFFECT_UPDATE_ATTACK registration and its reset) is identical, and RESET_EVENT|RESETS_STANDARD_DISABLE vs RESET_EVENT+RESETS_STANDARD_DISABLE is Lua idiom with the same value. The EVENT_BATTLED pattern recurs across upstream's GOAT variants under the annotation \"Battle destroyed registers while the mosnter is on field\" (goat/c504700001 Fenrir, c504700021 Andro Sphinx, c504700036 Element Doom, among others); Zombyra's own header comment is \"Activation timing\". Because upstream encodes it per card in a variant script rather than through a global flag, it is recorded as a ruling, matching the instructions' own trigger-timing example; no rule-profile source is present in the local cache (only prebuilt ocgcore binaries), so it could not be checked whether the goat profile's damage-step handling would reproduce the same timing globally and thereby make the variant redundant. The entire English lineage is cosmetic: v0 (LON-074, 2003-03-01) -> v1 \"destroys a monster in battle\" -> \"destroys 1 monster as a result of battle\"; v2 (BP01-EN120, 2012-05-24) is PSCT, \"If this card destroys a monster by battle: This card loses 200 ATK.\"; v3 (SBCB-EN094, 2020-11-26) and v4 (LART-EN059, 2023-06, the pinned modern text) trim the direct-attack clause to \"Cannot attack directly\". The v2 PSCT rewording is deliberately NOT used as a chronology anchor for the timing change, since \"as a result of battle\" -> \"by battle\" is classed cosmetic; the change therefore carries effective {} with no date_evidence and is flagged. Zombyra the Dark does not appear on EdisonFormat.com's functional errata page, so no community corroboration is available."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

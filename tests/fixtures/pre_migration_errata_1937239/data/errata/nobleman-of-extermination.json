@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-nobleman-of-extermination",
+  "modern_card": {
+    "passcode": 17449108,
+    "name": "Nobleman of Extermination"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2020-11-26",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SBCB-EN117 (Speed Duel: Battle City Box), the printing carrying the PSCT text"
+      },
+      "historical_text": "Destroy 1 face-down Spell or Trap Card and remove it from play. If the card is a Trap Card, both players must remove all Trap Cards of the same name from their respective Decks and remove them from play. The Decks are then shuffled.",
+      "modern_text": "Target 1 face-down Spell/Trap on the field; destroy that target, and if you do, banish it, then, if it was a Trap, each player reveals their Main Deck, then banishes all cards from it with that card's name.",
+      "summary": "Wording modernisation only: I read both scripts in full and they resolve identically - each destroys and banishes the targeted face-down Spell/Trap, and on a Trap hit banishes every same-named card from BOTH Decks, shows each player the other's whole Deck with Duel.ConfirmCards and shuffles both. The GOAT variant only reorders that block (banish before the mutual reveal instead of after) and drops UI/AI hints (SetDescription, SetPossibleOperationInfo) plus a self-exclusion in the target check that is unreachable, since the activating card is face-up while the filter looks for face-down cards.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700025,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700025.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "v0 (PSV-035, 2002-10-20) 'Magic' -> v1 (TP4-016, 2003-10-01) 'Spell' predates the baseline version; upstream's GOAT cdb text is exactly v1. Intermediate revisions are wording: v2 (DB1-EN089, 2004-10-12) 'all cards of the same name' means the same set as 'all Trap Cards of the same name' since the destroyed card is a Trap; v3 (DTP1, 2008-07-24) and v4 (DT01, 2010-01-29) compress it; v5 (DL11-EN015, 2010-12-01) adds 'Select,', which formalises targeting both scripts already perform through Duel.SelectTarget with EFFECT_FLAG_CARD_TARGET set - the diff shows no targeting-flag change. Same conclusion as its sibling Nobleman of Crossout: EdisonFormat.com lists this card for the era's mutual mandatory Deck reveal for Trap Cards, but the modern script and the modern text both already do it, so there is nothing behavioural to implement."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

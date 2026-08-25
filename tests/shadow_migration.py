@@ -2,22 +2,34 @@
 all 247 semantically-equivalent records IN MEMORY and compare every real
 consumer's output against the untouched baseline.
 
-Two in-memory repositories, built from the SAME on-disk data:
+Two in-memory repositories, built from the SAME `repo`:
 
-- **BASELINE**: `Repository.load()`, completely untouched - every record
-  stays v1.
-- **SHADOW**: the 247 semantically-equivalent records replaced by their
+- **BASELINE**: `repo` itself, completely untouched.
+- **SHADOW**: the equivalent records `rows` names replaced by their
   ACTUAL migration-materializer targets (`migration_materializer.py`'s
   real sugar/full-v2 shapes, parsed through the real `ErratumV2.load()`,
-  never `candidate_v2()`'s audit-only candidate); the 49 non-equivalent
-  records are left untouched v1, exactly as they will be after the real
-  (future) migration too, since this task migrates nothing else.
+  never `candidate_v2()`'s audit-only candidate); everything else in
+  `repo` is left untouched.
 
 Every real consumer function (`build_lflist`, `Validator`) is run against
 BOTH, unmodified - this module adds no special-cased "shadow mode" to any
 consumer. Nothing here writes to `data/errata/`; both repositories are
-built from the same on-disk files and neither is ever saved back.
-"""
+built in memory and neither is ever saved back.
+
+**POST-MIGRATION NOTE**: the real 247-record canonical migration has
+happened (commit immediately after
+1937239d9fd0ebfb47dc850f298c11c3a60679b0). `repo`/`rows` default to the
+LIVE on-disk repository, which now has only 49 v1 records left to
+shadow-migrate (the 247 already-migrated ones are skipped by
+`audit_corpus()`, exactly as designed) - so `run_shadow_migration()`
+called with no arguments now produces a near-empty, no-op shadow against
+current reality. `tests/test_shadow_migration.py` calls this with an
+EXPLICIT `repo=tests.pre_migration_fixture.load_pre_migration_repo()` for
+its reproducibility check (does re-running today's materializer against
+the frozen pre-migration snapshot still reproduce the migration that was
+actually performed?), and separately pins the LIVE repository's own
+post-migration guarantees directly, without going through shadow/baseline
+comparison at all - see that module's docstring for the split."""
 
 from __future__ import annotations
 

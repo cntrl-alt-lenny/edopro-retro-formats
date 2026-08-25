@@ -6,30 +6,46 @@
     "name": "Shinato, King of a Higher Plane"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
-      "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
-      "summary": "No behavioural or textual difference: the goat variant's script differs from the modern script by exactly one line, the absence of `s.listed_names={60365591}` ('Shinato's Ark'), which is card-name reference metadata consulted by other cards' name lookups and never touched during resolution. The damage trigger is identical on both sides (EVENT_BATTLE_DESTROYING, the same s.damcon Defense-Position battle check, and s.damtg inflicting the destroyed monster's GetBaseAttack). The goat cdb text and the pinned modern cards.cdb text are byte-identical and both match lineage v1 (DR1-EN178) exactly.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
+          "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
+          "summary": "No behavioural or textual difference: the goat variant's script differs from the modern script by exactly one line, the absence of `s.listed_names={60365591}` ('Shinato's Ark'), which is card-name reference metadata consulted by other cards' name lookups and never touched during resolution. The damage trigger is identical on both sides (EVENT_BATTLE_DESTROYING, the same s.damcon Defense-Position battle check, and s.damtg inflicting the destroyed monster's GetBaseAttack). The goat cdb text and the pinned modern cards.cdb text are byte-identical and both match lineage v1 (DR1-EN178) exactly.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700148,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700148.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700148,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700148.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

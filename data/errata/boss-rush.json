@@ -6,38 +6,17 @@
     "name": "Boss Rush"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2026-02-11",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (OP30-EN017, OTS Tournament Pack 30)"
-      },
-      "historical_text": "You cannot Normal Summon or Set. During the End Phase of the turn that a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard, you can Special Summon 1 \"B.E.S.\" monster or 1 \"Big Core\" from your Deck.",
-      "modern_text": "Activate only if you did not Normal Summon/Set this turn. You cannot Normal Summon/Set. During the End Phase, if a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone: You can Special Summon 1 \"B.E.S.\" monster from your Deck.",
-      "summary": "Functional erratum on three counts. (1) An activation restriction appears that the DR04 text does not have: 'Activate only if you did not Normal Summon/Set this turn'. (2) The trigger narrows from 'a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard' - any such monster, either player's, face-up or face-down - to 'a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone'. (3) The Deck Summon narrows from '1 \"B.E.S.\" monster or 1 \"Big Core\"' to '1 \"B.E.S.\" monster', dropping the separately named 'Big Core'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison, Boss Rush can be activated on a turn you already Normal Summoned, triggers off any 'B.E.S.' monster or 'Big Core' destroyed and sent to the Graveyard (including the opponent's), and can Special Summon 'Big Core' itself from the Deck; the shipped card refuses all three."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison, Boss Rush can be activated on a turn you already Normal Summoned, triggers off any 'B.E.S.' monster or 'Big Core' destroyed and sent to the Graveyard (including the opponent's), and can Special Summon 'Big Core' itself from the Deck; the shipped card refuses all three.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2026-02-11",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (OP30-EN017, OTS Tournament Pack 30)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You cannot Normal Summon or Set. During the End Phase of the turn that a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard, you can Special Summon 1 \"B.E.S.\" monster or 1 \"Big Core\" from your Deck.",
+    "modern_text": "Activate only if you did not Normal Summon/Set this turn. You cannot Normal Summon/Set. During the End Phase, if a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone: You can Special Summon 1 \"B.E.S.\" monster from your Deck.",
+    "summary": "Functional erratum on three counts. (1) An activation restriction appears that the DR04 text does not have: 'Activate only if you did not Normal Summon/Set this turn'. (2) The trigger narrows from 'a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard' - any such monster, either player's, face-up or face-down - to 'a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone'. (3) The Deck Summon narrows from '1 \"B.E.S.\" monster or 1 \"Big Core\"' to '1 \"B.E.S.\" monster', dropping the separately named 'Big Core'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

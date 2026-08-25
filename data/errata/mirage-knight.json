@@ -6,34 +6,50 @@
     "name": "Mirage Knight"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2012-09-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of LCYW-EN024 (Legendary Collection 3: Yugi's World Mega Pack), the printing carrying the PSCT text"
       },
-      "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by the effect of \"Dark Flare Knight\". When this card battles another monster, during damage calculation increase the ATK of this card by the original ATK of the opponent's monster. During the End Phase after this card was involved in battle, remove this card from play.",
-      "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways. During damage calculation only, this card gains ATK equal to the original ATK of the opponent's monster it is battling. During the End Phase of a turn this card attacked or was attacked: Banish this card.",
-      "summary": "Wording modernisation only: the GOAT variant's script differs from the modern one by a single line, Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL in place of the equivalent Duel.IsPhase(PHASE_DAMAGE_CAL) wrapper, so the damage-calculation ATK gain and the End Phase banish resolve identically. The summon lock is unchanged in substance: 'Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways' keeps the strict prohibition of 'cannot be Special Summoned except by the effect of \"Dark Flare Knight\"', not the looser 'Must first be Special Summoned' formula that would allow later revival.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by the effect of \"Dark Flare Knight\". When this card battles another monster, during damage calculation increase the ATK of this card by the original ATK of the opponent's monster. During the End Phase after this card was involved in battle, remove this card from play.",
+          "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways. During damage calculation only, this card gains ATK equal to the original ATK of the opponent's monster it is battling. During the End Phase of a turn this card attacked or was attacked: Banish this card.",
+          "summary": "Wording modernisation only: the GOAT variant's script differs from the modern one by a single line, Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL in place of the equivalent Duel.IsPhase(PHASE_DAMAGE_CAL) wrapper, so the damage-calculation ATK gain and the End Phase banish resolve identically. The summon lock is unchanged in substance: 'Must be Special Summoned by \"Dark Flare Knight\" and cannot be Special Summoned by other ways' keeps the strict prohibition of 'cannot be Special Summoned except by the effect of \"Dark Flare Knight\"', not the looser 'Must first be Special Summoned' formula that would allow later revival.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700080,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700080.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 504700080,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+      "script": "goat/c504700080.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

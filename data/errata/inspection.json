@@ -6,29 +6,14 @@
     "name": "Inspection"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "During your opponent's Standby Phase, you can pay 500 Life Points to randomly select 1 card in your opponent's hand and look at it.",
-      "summary": "The pre-errata script omits the modern script's e2:SetCountLimit(1) on the opponent's-Standby-Phase trigger; without that limit the effect is not held to one use per turn, so the pay-500-LP peek at a random card in the opponent's hand is not capped the way the modern implementation caps it. Every other line is an equivalent older spelling of the same code - a hand-written cost function for Cost.PayLP(500), Duel.GetTurnPlayer()~=tp for Duel.IsTurnPlayer(1-tp), addition for bitwise or, an explicit string id - and the operation body is byte-identical. Chronology is unresolved and the difference itself is unconfirmed as period behaviour (see review notes).",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002982,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002982.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "During your opponent's Standby Phase, you can pay 500 Life Points to randomly select 1 card in your opponent's hand and look at it.",
+    "modern_text": null,
+    "summary": "The pre-errata script omits the modern script's e2:SetCountLimit(1) on the opponent's-Standby-Phase trigger; without that limit the effect is not held to one use per turn, so the pay-500-LP peek at a random card in the opponent's hand is not capped the way the modern implementation caps it. Every other line is an equivalent older spelling of the same code - a hand-written cost function for Cost.PayLP(500), Duel.GetTurnPlayer()~=tp for Duel.IsTurnPlayer(1-tp), addition for bitwise or, an explicit string id - and the operation body is byte-identical. Chronology is unresolved and the difference itself is unconfirmed as period behaviour (see review notes).",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002982,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002982.lua"
+  }
 }

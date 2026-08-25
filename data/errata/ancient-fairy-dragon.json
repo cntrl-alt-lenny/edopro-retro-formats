@@ -6,35 +6,14 @@
     "name": "Ancient Fairy Dragon"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2023-03-09",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Maze of Memories (MAZE-EN050), the first printing carrying the errata'd text"
-      },
-      "historical_text": "1 Tuner + 1+ non-Tuner monstersOnce per turn: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. Once per turn: You can destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add 1 Field Spell from your Deck to your hand.",
-      "modern_text": "1 Tuner + 1+ non-Tuner monstersDuring your Main Phase: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. During your Main Phase: You can destroy as many cards in the Field Zones as possible (min. 1), and if you do, gain 1000 LP, then you can add 1 Field Spell with a different name than the destroyed card(s), from your Deck to your hand. You can only use each effect of \"Ancient Fairy Dragon\" once per turn.",
-      "summary": "Functional erratum in three parts, each visible in the script diff. Both effects became hard once per turn by name (modern SetCountLimit(1,{id,0}) and SetCountLimit(1,{id,1}) against the historical plain SetCountLimit(1), which is once per turn per copy, so two copies each got a use). The destruction widened from Field Spells to 'as many cards in the Field Zones as possible (min. 1)'. And the follow-up search may no longer add a Field Spell sharing a name with a destroyed card - the modern thfilter takes Duel.GetOperatedGroup() and excludes those codes, while the historical thfilter only checks IsFieldSpell and IsAbleToHand.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 25862691,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c25862691.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -46,5 +25,32 @@
     "ignis-babelcdb",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2023-03-09",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Maze of Memories (MAZE-EN050), the first printing carrying the errata'd text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "1 Tuner + 1+ non-Tuner monstersOnce per turn: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. Once per turn: You can destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add 1 Field Spell from your Deck to your hand.",
+    "modern_text": "1 Tuner + 1+ non-Tuner monstersDuring your Main Phase: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. During your Main Phase: You can destroy as many cards in the Field Zones as possible (min. 1), and if you do, gain 1000 LP, then you can add 1 Field Spell with a different name than the destroyed card(s), from your Deck to your hand. You can only use each effect of \"Ancient Fairy Dragon\" once per turn.",
+    "summary": "Functional erratum in three parts, each visible in the script diff. Both effects became hard once per turn by name (modern SetCountLimit(1,{id,0}) and SetCountLimit(1,{id,1}) against the historical plain SetCountLimit(1), which is once per turn per copy, so two copies each got a use). The destruction widened from Field Spells to 'as many cards in the Field Zones as possible (min. 1)'. And the follow-up search may no longer add a Field Spell sharing a name with a destroyed card - the modern thfilter takes Duel.GetOperatedGroup() and excludes those codes, while the historical thfilter only checks IsFieldSpell and IsAbleToHand.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 25862691,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c25862691.lua"
+  }
 }

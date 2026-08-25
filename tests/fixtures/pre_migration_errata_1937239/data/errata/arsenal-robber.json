@@ -1,0 +1,72 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-arsenal-robber",
+  "modern_card": {
+    "passcode": 55348096,
+    "name": "Arsenal Robber"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "Your opponent selects 1 Equip Spell Card from his/her Deck and sends it to the Graveyard.",
+      "modern_text": "Your opponent selects 1 Equip Spell Card from his/her Deck and sends it to the Graveyard.",
+      "summary": "Period procedure, not a text erratum: when the opponent's Deck contains no Equip Spell, the GOAT script proves the failed search by revealing the opponent's Deck (`Duel.GoatConfirm(1-tp,LOCATION_DECK)` in the else branch of the operation); the modern script simply resolves with nothing sent and no reveal. Activation legality is identical in both scripts (`Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>0` - only a non-empty opponent Deck is required), so this is purely the shared failed-search verification procedure with no relaxed activation condition attached. The cdb text is identical in the GOAT entry and the modern entry.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "ude-card-rulings-archive",
+        "konami-set-rulings-archive",
+        "kde-tournament-policy-archive"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700089,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700089.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No Yugipedia Card Errata page (packet `errata_page.missing: true`), so no text lineage exists; literal texts copied from the packet - the GOAT cdb text and `modern_text` are byte-identical, consistent with a pure ruling-layer difference. The whole script diff is the two added lines (`else` / `Duel.GoatConfirm(1-tp,LOCATION_DECK)`), which is case (A) of the shared brief and nothing else, so chronology IS resolvable here through the `search-verification` shared entry (old state attested through 2011-02-02, modern state from 2019-04-03) - both GOAT and Edison sit determinately in the old era, so no chronology-unresolved flag is warranted despite the missing errata page. Unusually, the reveal is of the OPPONENT's Deck (the opponent is the one who searches), which is why the call passes `1-tp`. This card is not itself on EdisonFormat.com's functional-errata list; that list's 21 VERIFICATION entries document the same era procedure on other cards but are not cited here as evidence for this one."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "ude-card-rulings-archive",
+    "konami-set-rulings-archive",
+    "kde-tournament-policy-archive"
+  ]
+}

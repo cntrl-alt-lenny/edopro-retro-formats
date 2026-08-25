@@ -6,34 +6,14 @@
     "name": "Mysterious Puppeteer"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2023-02-08",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of OP21-EN013 (OTS Tournament Pack 21), the printing that introduced the 'another monster' wording"
-      },
-      "historical_text": "Each time you or your opponent Normal Summons or Flip Summons a monster, increase your Life Points by 500 points.",
-      "modern_text": "(This card is not treated as a \"Puppet\" card.)If another monster is Normal or Flip Summoned: Gain 500 LP.",
-      "summary": "Functional erratum: the trigger now requires ANOTHER monster to be Normal or Flip Summoned. The GOAT script omits the modern condition 'not eg:IsContains(e:GetHandler())' - upstream annotates it 'Triggers on its own summon' - so the era card gains 500 LP off its own Normal or Flip Summon as well as off any other player's; the OP21 text ('If another monster is Normal or Flip Summoned: Gain 500 LP') excludes itself.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700088,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700088.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2023-02-08",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of OP21-EN013 (OTS Tournament Pack 21), the printing that introduced the 'another monster' wording"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Each time you or your opponent Normal Summons or Flip Summons a monster, increase your Life Points by 500 points.",
+    "modern_text": "(This card is not treated as a \"Puppet\" card.)If another monster is Normal or Flip Summoned: Gain 500 LP.",
+    "summary": "Functional erratum: the trigger now requires ANOTHER monster to be Normal or Flip Summoned. The GOAT script omits the modern condition 'not eg:IsContains(e:GetHandler())' - upstream annotates it 'Triggers on its own summon' - so the era card gains 500 LP off its own Normal or Flip Summon as well as off any other player's; the OP21 text ('If another monster is Normal or Flip Summoned: Gain 500 LP') excludes itself.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700088,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700088.lua"
+  }
 }

@@ -6,30 +6,40 @@
     "name": "Toon World"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2015-06-19",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current PSCT text (DPBC-EN046, Duelist Pack: Battle City)"
       },
-      "historical_text": "This card is activated by paying 1000 of your Life Points.",
-      "modern_text": "Activate this card by paying 1000 LP.",
-      "summary": "Wording modernisation only. Every English (TCG) printing from Spell Ruler (2002) to Duelist Pack: Battle City (2015) states nothing but the 1000 Life Point activation cost, the lineage merely alternating between \"This card is activated by paying 1000 of your Life Points\" (v1, v3) and \"Pay 1000 Life Points to activate this card\" (v2, v4) before settling on the PSCT \"Activate this card by paying 1000 LP\" (v5). No resolution differs; the modern script is a single EFFECT_TYPE_ACTIVATE with Cost.PayLP(1000), which implements all of them.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This card is activated by paying 1000 of your Life Points.",
+          "modern_text": "Activate this card by paying 1000 LP.",
+          "summary": "Wording modernisation only. Every English (TCG) printing from Spell Ruler (2002) to Duelist Pack: Battle City (2015) states nothing but the 1000 Life Point activation cost, the lineage merely alternating between \"This card is activated by paying 1000 of your Life Points\" (v1, v3) and \"Pay 1000 Life Points to activate this card\" (v2, v4) before settling on the PSCT \"Activate this card by paying 1000 LP\" (v5). No resolution differs; the modern script is a single EFFECT_TYPE_ACTIVATE with Cost.PayLP(1000), which implements all of them.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

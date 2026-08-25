@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-red-eyes-darkness-metal-dragon",
+  "modern_card": {
+    "passcode": 88264978,
+    "name": "Red-Eyes Darkness Metal Dragon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2016-07-07",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SR02-EN009 (Rise of the True Dragons Structure Deck), the printing that restores the pre-v4 wording"
+      },
+      "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+      "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+      "summary": "Reprint wording only between v3 (SDDC-EN013) and v5 (SR02-EN009); the self-Summon still banishes 1 face-up Dragon you control from the hand and the Ignition effect still revives 1 Dragon from hand or GY once per turn per copy. One anomaly inside the span: v4 (LCJW-EN050, 2013-10-11) dropped the 'face-up' qualifier from the banish cost and v5 restored it, so the requirement holds at both ends of this collapse.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-babelcdb"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2020-07-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LDS1-EN004, Legendary Duelists: Season 1)"
+      },
+      "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+      "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon monster you control. You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way. During your Main Phase: You can Special Summon 1 Dragon monster from your hand or GY, except \"Red-Eyes Darkness Metal Dragon\". You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn.",
+      "summary": "Functional erratum: the self-Summon gains a once-per-turn-by-name limit ('You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way') and the revival Ignition effect's plain 'Once per turn' becomes a hard once per turn by name ('You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn'). The script diff shows exactly this: the pre-errata e1 carries no SetCountLimit at all where the modern e1 has SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH), and the pre-errata e2 uses the per-copy SetCountLimit(1) where the modern e2 uses the by-name SetCountLimit(1,{id,1}) with s.listed_names={id}. Two copies could therefore each revive a Dragon in the same turn, and multiple copies could each Special Summon themselves.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 88264988,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "official/c88264988.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "CATEGORY MISMATCH, resolved in favour of the packet: this card was assigned in the 'gap-no-upstream' batch, but upstream_implementations is not empty - Project Ignis ships an official pre-errata variant, 88264988 'Red-Eyes Darkness Metal Dragon (Pre-Errata)', whose cdb text matches lineage v3 exactly (ratio 1.0). No gap shape is warranted; the record reuses that variant. The packet's second upstream code, 511000670 'Red-Eyes Darkness Metal Dragon (Anime)', is a distinct card (Tribute a Red-Eyes Darkness Dragon equipped with Metal Plus, ATK gain per GY Dragon, Spell negation) and is not an artwork variant of 88264988, so no code folding applies. Earlier lineage transitions that predate the baseline's version are behaviourally inert and are recorded here rather than as changes: v0 (JUMP-EN030, 2009-02, month precision) -> v1 (ABPF-ENSE2, 2010-03-26) added 'face-up' to the banish cost and 'during your Main Phase' to the revival; v1 -> v2 (DT04-EN060, 2011-01-25) added '(from your hand)'; v2 -> v3 dropped 'during your Main Phase'. Separate observation, not part of this card's errata record: edisonformat-functional-errata also claims the era revival does not target in the GY and so is not stopped by Necrovalley, but both the modern and the pre-errata upstream scripts apply aux.NecroValleyFilter identically, so that divergence lives in Necrovalley's own era ruling (Necrovalley is not in this batch) and cannot be fixed by substituting this card."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata"
+  ]
+}

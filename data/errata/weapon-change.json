@@ -6,51 +6,82 @@
     "name": "Weapon Change"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2007-01-17",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SD10-EN028 (Structure Deck: Machine Re-Volt), the first printing without the destruction clause"
       },
-      "historical_text": "Only once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next End Phase. When this card is destroyed, the effect is negated.",
-      "modern_text": "Once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next turn. When this card is destroyed, the effect is negated.",
-      "summary": "Functional erratum: the sentence 'When this card is destroyed, the effect is negated' was deleted, cutting the switched ATK/DEF loose from the Continuous Spell. The GOAT script gives the EFFECT_SET_ATTACK_FINAL/EFFECT_SET_DEFENSE_FINAL effects it puts on the target a condition that calls `e:Reset()` once the owning card is no longer in the Spell/Trap Zone and returns false while the owner is disabled, so destroying or negating Weapon Change restores the monster's ATK and DEF at once (upstream annotation: 'The atk/def is still linked to the spell'). The modern script registers the same two effects with no condition, so the switch runs its full duration regardless. The same printing changed 'until the end of your opponent's next End Phase' to 'until the end of your opponent's next turn', which is not a behavioural difference - both scripts reset after two End Phases.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Only once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next End Phase. When this card is destroyed, the effect is negated.",
+          "modern_text": "Once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next turn. When this card is destroyed, the effect is negated.",
+          "summary": "Functional erratum: the sentence 'When this card is destroyed, the effect is negated' was deleted, cutting the switched ATK/DEF loose from the Continuous Spell. The GOAT script gives the EFFECT_SET_ATTACK_FINAL/EFFECT_SET_DEFENSE_FINAL effects it puts on the target a condition that calls `e:Reset()` once the owning card is no longer in the Spell/Trap Zone and returns false while the owner is disabled, so destroying or negating Weapon Change restores the monster's ATK and DEF at once (upstream annotation: 'The atk/def is still linked to the spell'). The modern script registers the same two effects with no condition, so the switch runs its full duration regardless. The same printing changed 'until the end of your opponent's next End Phase' to 'until the end of your opponent's next turn', which is not a behavioural difference - both scripts reset after two End Phases.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2022-10-06",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SGX2-ENB14 (Speed Duel GX: Midterm Paradox)"
       },
-      "historical_text": "Once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next turn. When this card is destroyed, the effect is negated.",
-      "modern_text": "Once during each of your Standby Phases: You can pay 700 LP, then target 1 Warrior or Machine monster you control; switch the current ATK and DEF of that target until the end of your opponent's next turn.",
-      "summary": "Wording modernisation only: v3 (Machine Madness Value Box, 2014-02-28) applies PSCT - 'Once during each of your Standby Phases: You can pay 700 Life Points, then target 1 Warrior or Machine-Type monster you control; switch the current ATK and DEF of that target' - and v4 shortens Life Points to LP. The script diff carries no EFFECT_FLAG_CARD_TARGET difference, so the PSCT 'target' wording did not change targeting.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Once during each of your Standby Phases, you can pay 700 Life Points to activate this card's effect. Switch the ATK and DEF of 1 Warrior-Type or Machine-Type monster on your side of the field until the end of your opponent's next turn. When this card is destroyed, the effect is negated.",
+          "modern_text": "Once during each of your Standby Phases: You can pay 700 LP, then target 1 Warrior or Machine monster you control; switch the current ATK and DEF of that target until the end of your opponent's next turn.",
+          "summary": "Wording modernisation only: v3 (Machine Madness Value Box, 2014-02-28) applies PSCT - 'Once during each of your Standby Phases: You can pay 700 Life Points, then target 1 Warrior or Machine-Type monster you control; switch the current ATK and DEF of that target' - and v4 shortens Life Points to LP. The script diff carries no EFFECT_FLAG_CARD_TARGET difference, so the PSCT 'target' wording did not change targeting.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700014,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700014.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700014,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700014.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

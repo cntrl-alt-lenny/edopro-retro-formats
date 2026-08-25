@@ -1,0 +1,111 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sangan",
+  "modern_card": {
+    "passcode": 26202165,
+    "name": "Sangan"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with an ATK of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
+      "modern_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
+      "summary": "Period procedure, not a text erratum: under 2005-era TCG policy a search that finds no valid target is proven by revealing the deck (the goat script's Duel.GoatConfirm); the modern game dropped the verification procedure. Both scripts activate the mandatory trigger unconditionally (s.target is `return true` in each), so the reveal branch is the whole behavioural difference. The printed text also shed its procedural reveal-and-shuffle wording (v1 SYE-018 -> v2 RP01-EN036) with no change to what the effect does.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 511002631,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511002631.lua",
+        "status": "complete",
+        "tested": true
+      },
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2011-08-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the new text (TU06-EN001, Turbo Pack: Booster Six)"
+      },
+      "historical_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
+      "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
+      "summary": "Problem-Solving Card Text rewording (v3 Legendary Collection reprint, v4 TU06-EN001); no behavioural difference.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2016-09-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (DPRP-EN038, Duelist Pack: Rivals of the Pharaoh)"
+      },
+      "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
+      "modern_text": "If this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Sangan\" once per turn.",
+      "summary": "Functional erratum: the searched card (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. The pre-errata effect had no name-lock and no once-per-turn limit - the pre-errata script registers neither the EFFECT_CANNOT_ACTIVATE name-lock nor SetCountLimit(1,id).",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700178,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700178.lua",
+    "status": "complete",
+    "tested": true
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Earlier cosmetic rewording v0 (MRD-069, 2002) -> v1 (SYE-018, 2004) predates the baseline implementation's era and is behaviourally identical. Trailing GY rewording v5 -> v6 (YS17, 2017-07-20) is cosmetic and not recorded as a change. This card is a pure case of component (A): the GOAT script's only behavioural difference from the modern one, besides the erratum items, is the Duel.GoatConfirm else-branch - both scripts already activate the mandatory trigger with no check that an eligible monster exists, so there is no relaxed-activation component to leave undated. That is directly corroborated per card: the Konami Card FAQ capture of 2008-12-15 still carries the verification sentence for Sangan verbatim, inside the shared chronology's old era. EdisonFormat.com corroborates the functional verdict for the era behaviour: 'in Edison you CAN activate the effects of the monster you searched.'"
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-fairy-of-the-spring",
+  "modern_card": {
+    "passcode": 20188127,
+    "name": "Fairy of the Spring"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2013-12-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the Duelist League 17 participation cards (DL17-EN016), the printing carrying the current text"
+      },
+      "historical_text": "Add 1 Equip Spell Card from your Graveyard to your hand. You cannot activate that Equip Spell Card this turn.",
+      "modern_text": "Target 1 Equip Spell Card in your Graveyard; add that target to your hand. That Equip Spell Card cannot be activated this turn.",
+      "summary": "Problem-Solving Card Text rewording only. v0 (DCR-040) 'Select 1 Equip Spell Card from your Graveyard and add it to your hand' and v2 'Target 1 Equip Spell Card in your Graveyard; add that target to your hand' are the standard select-to-target modernisation with the same targeting - official/c20188127.lua carries EFFECT_FLAG_CARD_TARGET - and 'You cannot activate that Equip Spell Card this turn' becoming 'That Equip Spell Card cannot be activated this turn' restates one restriction, implemented as an EFFECT_CANNOT_TRIGGER registered on the retrieved card.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "none-needed",
+    "status": "complete"
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The text in force for both GOAT (2005-04-01) and Edison (2010-04-24) is v1 (DR1-EN202, 2005-03-19), a compressed Dark Revelation reprint that drops the selection verb entirely ('Add 1 Equip Spell Card from your Graveyard to your hand'). Read on its own that wording could be taken as non-targeting, which would matter if an opposing effect could remove the chosen Equip Spell from the Graveyard in response; the printing before it says 'Select' and the printing after it says 'Target', and nothing in the packet records an era ruling treating the DR1 wording as a de-targeting, so it is recorded as a printing artifact and the change is cosmetic. This card has no upstream historical or unofficial variant of any kind."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
+}

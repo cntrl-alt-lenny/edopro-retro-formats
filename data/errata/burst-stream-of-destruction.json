@@ -6,44 +6,68 @@
     "name": "Burst Stream of Destruction"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
-      "summary": "Era activation and restriction package, not a text erratum, spanning three concrete script differences: the GOAT script registers the 'no Blue-Eyes White Dragon can attack' lock at the end of s.activate (resolution) while the modern script registers it in s.cost, so under the era version a negated activation leaves no attack lock at all (upstream comment: 'If effect is negated, restriction doesn't apply'); the era lock omits EFFECT_FLAG_IGNORE_IMMUNE, so a Blue-Eyes immune to this card's effects can still attack ('If monsters are immuned, restruction doesn't apply'); and the era target function short-circuits to true where the modern one requires Duel.IsExistingMatchingCard(...,0,LOCATION_MZONE,1,nil), so the era card can be activated with the opponent controlling no monsters. No dated source for any of the three; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
+          "modern_text": null,
+          "summary": "Era activation and restriction package, not a text erratum, spanning three concrete script differences: the GOAT script registers the 'no Blue-Eyes White Dragon can attack' lock at the end of s.activate (resolution) while the modern script registers it in s.cost, so under the era version a negated activation leaves no attack lock at all (upstream comment: 'If effect is negated, restriction doesn't apply'); the era lock omits EFFECT_FLAG_IGNORE_IMMUNE, so a Blue-Eyes immune to this card's effects can still attack ('If monsters are immuned, restruction doesn't apply'); and the era target function short-circuits to true where the modern one requires Duel.IsExistingMatchingCard(...,0,LOCATION_MZONE,1,nil), so the era card can be activated with the opponent controlling no monsters. No dated source for any of the three; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2018-03-08",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (LCKC-EN025, Legendary Collection Kaiba Mega Pack)"
       },
-      "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
-      "modern_text": "If you control \"Blue-Eyes White Dragon\": Destroy all monsters your opponent controls. \"Blue-Eyes White Dragon\" you control cannot attack the turn you activate this card.",
-      "summary": "Wording modernisation across four printings (v2 DTP1-EN013 'Activate only while you control a face-up ...', v3 SDDC-EN025 PSCT colon form, v4 SDBE-EN021 plural 'Dragons' and no 'face-up', v5 LDK2-ENK19, v6 LCKC-EN025 'you control'). Recorded as cosmetic because no script encodes any of it: v6 narrows the attack lock on paper to Blue-Eyes you control, yet both the modern and the GOAT script register EFFECT_CANNOT_ATTACK_ANNOUNCE with SetTargetRange(LOCATION_MZONE,LOCATION_MZONE), i.e. both players' zones, and v4 drops 'face-up' from the activation condition while both scripts still require a face-up Blue-Eyes via aux.FaceupFilter.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can only activate this card while there is a face-up \"Blue-Eyes White Dragon\" on your side of the field. Destroy all monsters on your opponent's side of the field. No \"Blue-Eyes White Dragon\" can attack during the turn you activate this card.",
+          "modern_text": "If you control \"Blue-Eyes White Dragon\": Destroy all monsters your opponent controls. \"Blue-Eyes White Dragon\" you control cannot attack the turn you activate this card.",
+          "summary": "Wording modernisation across four printings (v2 DTP1-EN013 'Activate only while you control a face-up ...', v3 SDDC-EN025 PSCT colon form, v4 SDBE-EN021 plural 'Dragons' and no 'face-up', v5 LDK2-ENK19, v6 LCKC-EN025 'you control'). Recorded as cosmetic because no script encodes any of it: v6 narrows the attack lock on paper to Blue-Eyes you control, yet both the modern and the GOAT script register EFFECT_CANNOT_ATTACK_ANNOUNCE with SetTargetRange(LOCATION_MZONE,LOCATION_MZONE), i.e. both players' zones, and v4 drops 'face-up' from the activation condition while both scripts still require a face-up Blue-Eyes via aux.FaceupFilter.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700026,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700026.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700026,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700026.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

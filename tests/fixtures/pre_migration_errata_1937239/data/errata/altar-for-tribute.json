@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-altar-for-tribute",
+  "modern_card": {
+    "passcode": 21070956,
+    "name": "Altar for Tribute"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select 1 monster on your side of the field and send it to the Graveyard. Increase your Life Points by an amount equal to the original ATK of the monster.",
+      "modern_text": "Select 1 monster on your side of the field and send it to the Graveyard. Increase your Life Points by an amount equal to the original ATK of the monster.",
+      "summary": "Era cost eligibility, not a text erratum: the GOAT script's cost filter is `c:IsAbleToGraveAsCost() or c:IsType(TYPE_TOKEN)`, so a Token may be sent for the cost (its ATK is forced to 0, `local atk=(tc:IsType(TYPE_TOKEN) and 0) or tc:GetTextAttack()`, so the resolution recovers 0 LP), while the modern script filters on `Card.IsAbleToGraveAsCost` alone and refuses Tokens, making the card unactivatable when your field holds only Tokens. The cdb text of the GOAT entry and the modern cdb text are identical; the difference lives only in the script. Chronology is unresolved: the card has no Yugipedia Card Errata page and the packet carries no dated source for when Token cost eligibility changed.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700180,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700180.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "No Yugipedia Card Errata page for this card (packet `errata_page.missing: true`), so there is no English text lineage; literal texts are copied from the packet's GOAT implementation `text` and `modern_text` fields, which are byte-identical - the record carries no period display text and no set-release dating is possible. Verified against the on-disk scripts (goat/c504700180.lua vs official/c21070956.lua): the only substantive delta is the added `s.cfilter` Token clause and the Token-ATK-as-0 branch; activation timing, EVENT_FREE_CHAIN, and the LP-recovery resolution are unchanged. Considered `engine`: data/rule-profiles/tcg-goat.json (DUEL_MODE_GOAT expansion) carries no flag governing Token eligibility as a send-to-Graveyard cost, so the per-card script is the only carrier and this is not a redundant duplicate of a rule-profile flag. The card does not appear on EdisonFormat.com's functional-errata list, so no community corroboration is available. Chronology deliberately left unresolved rather than guessed."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

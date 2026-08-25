@@ -6,50 +6,81 @@
     "name": "Hallowed Life Barrier"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2006-11-25",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Dark Revelation Volume 3 (DR3-EN060)"
       },
-      "historical_text": "Discard 1 card from your hand. During this turn, any damage you take from your opponent becomes 0.",
-      "modern_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
-      "summary": "Wording only: 'During this turn, any damage you take from your opponent becomes 0' becomes 'This turn, any damage you take from your opponent's cards and effects becomes 0'. Same resolution - all damage from the opponent is reduced to 0 for the turn, with the discard still a cost.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Discard 1 card from your hand. During this turn, any damage you take from your opponent becomes 0.",
+          "modern_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
+          "summary": "Wording only: 'During this turn, any damage you take from your opponent becomes 0' becomes 'This turn, any damage you take from your opponent's cards and effects becomes 0'. Same resolution - all damage from the opponent is reduced to 0 for the turn, with the discard still a cost.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2022-03-17",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENE18, Speed Duel GX: Duel Academy Box)"
       },
-      "historical_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
-      "modern_text": "Discard 1 card; you take no damage from your opponent's cards this turn, also your monsters cannot be destroyed by battle this turn.",
-      "summary": "Functional erratum: the card gained a second clause making your monsters immune to battle destruction for the turn. The GOAT script registers only the damage-to-zero field effect; the modern script additionally registers a field EFFECT_INDESTRUCTABLE_BATTLE with EFFECT_FLAG_IGNORE_IMMUNE over your Monster Zone, resetting at the End Phase. Before the erratum the card stops damage and nothing else.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Discard 1 card from your hand. This turn, any damage you take from your opponent's cards and effects becomes 0.",
+          "modern_text": "Discard 1 card; you take no damage from your opponent's cards this turn, also your monsters cannot be destroyed by battle this turn.",
+          "summary": "Functional erratum: the card gained a second clause making your monsters immune to battle destruction for the turn. The GOAT script registers only the damage-to-zero field effect; the modern script additionally registers a field EFFECT_INDESTRUCTABLE_BATTLE with EFFECT_FLAG_IGNORE_IMMUNE over your Monster Zone, resetting at the End Phase. Before the erratum the card stops damage and nothing else.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700153,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700153.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700153,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700153.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

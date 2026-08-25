@@ -6,29 +6,14 @@
     "name": "Continuous Destruction Punch"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "If the DEF of the attacked Defense Position monster on your side of the field is higher than the ATK of the attacking monster on your opponent's side of the field, destroy the attacking monster. Damage calculation is applied normally.",
-      "summary": "Era destruction-status timing (upstream annotation: \"The monster is considered as having the destroyed status starting when they would normally be considered as such\"): the goat script adds an EVENT_BATTLED step that marks the over-attacking monster with STATUS_BATTLE_DESTROYED at damage calculation and only performs the destruction at EVENT_DAMAGE_STEP_END, so between those two points the attacker counts as battle-destroyed for everything that reads that status; the modern script simply destroys it at the end of the Damage Step and never sets the status. The goat condition additionally skips the effect when the attacker was already battle-destroyed. Destruction reason is REASON_EFFECT in both. Chronology of the timing change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700110,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700110.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "If the DEF of the attacked Defense Position monster on your side of the field is higher than the ATK of the attacking monster on your opponent's side of the field, destroy the attacking monster. Damage calculation is applied normally.",
+    "modern_text": null,
+    "summary": "Era destruction-status timing (upstream annotation: \"The monster is considered as having the destroyed status starting when they would normally be considered as such\"): the goat script adds an EVENT_BATTLED step that marks the over-attacking monster with STATUS_BATTLE_DESTROYED at damage calculation and only performs the destruction at EVENT_DAMAGE_STEP_END, so between those two points the attacker counts as battle-destroyed for everything that reads that status; the modern script simply destroys it at the end of the Damage Step and never sets the status. The goat condition additionally skips the effect when the attacker was already battle-destroyed. Destruction reason is REASON_EFFECT in both. Chronology of the timing change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700110,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700110.lua"
+  }
 }

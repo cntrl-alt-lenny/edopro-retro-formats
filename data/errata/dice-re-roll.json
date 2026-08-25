@@ -6,38 +6,17 @@
     "name": "Dice Re-Roll"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2013-10-11",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN271, Legendary Collection 4: Joey's World Mega Pack)"
-      },
-      "historical_text": "Once this turn, negate 1 six-sided die roll and re-roll it.",
-      "modern_text": "One time, during the rest of this turn, if either player(s) rolls a die (or dice), you can have the player(s) re-roll. (You can only gain this effect once per turn.)",
-      "summary": "Functional erratum: LCJW-EN271 adds the rider '(You can only gain this effect once per turn.)', which no earlier printing carries - under 'Once this turn, negate 1 six-sided die roll and re-roll it' each copy grants its own re-roll, so two copies activated in the same turn give two re-rolls, while the errata'd card grants nothing for the second copy. The same printing also widens the scope from '1 six-sided die roll' to any roll of 'a die (or dice)' by either player and drops the negation framing in favour of 'you can have the player(s) re-roll'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In GOAT and Edison, two copies of Dice Re-Roll activated in one turn should buy two re-rolls, and the effect is written for a six-sided die roll only; the shipped card grants the re-roll effect once per turn no matter how many copies are activated and applies to any die or dice."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In GOAT and Edison, two copies of Dice Re-Roll activated in one turn should buy two re-rolls, and the effect is written for a six-sided die roll only; the shipped card grants the re-roll effect once per turn no matter how many copies are activated and applies to any die or dice.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2013-10-11",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN271, Legendary Collection 4: Joey's World Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once this turn, negate 1 six-sided die roll and re-roll it.",
+    "modern_text": "One time, during the rest of this turn, if either player(s) rolls a die (or dice), you can have the player(s) re-roll. (You can only gain this effect once per turn.)",
+    "summary": "Functional erratum: LCJW-EN271 adds the rider '(You can only gain this effect once per turn.)', which no earlier printing carries - under 'Once this turn, negate 1 six-sided die roll and re-roll it' each copy grants its own re-roll, so two copies activated in the same turn give two re-rolls, while the errata'd card grants nothing for the second copy. The same printing also widens the scope from '1 six-sided die roll' to any roll of 'a die (or dice)' by either player and drops the negation framing in favour of 'you can have the player(s) re-roll'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

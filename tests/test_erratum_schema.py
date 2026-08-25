@@ -22,12 +22,21 @@ from .schema_check import REPO_ROOT, Registry, validate as schema_validate, vali
 
 REGISTRY = Registry()
 
-# The one pre-existing, unrelated data/schema mismatch in the corpus today
-# (data/errata/spiritual-energy-settle-machine.json has a stray top-level
-# `implementation.reason` field the schema has never allowed outside
-# `implementation.gap.reason`) — confirmed pre-existing against the prior
-# (v1-only) schema too, not introduced by the v2 addition. Flagged separately
-# for a data fix; not this schema's job to accept it.
+# RESOLVED by the real canonical migration (commit immediately after
+# 1937239d9fd0ebfb47dc850f298c11c3a60679b0), not by a data fix in this
+# schema task: `data/errata/spiritual-energy-settle-machine.json` used to
+# have a stray top-level v1 `implementation.reason` field the schema never
+# allowed outside `implementation.gap.reason` (confirmed pre-existing
+# against the v1-only schema too, unrelated to this task's v2 additions).
+# The record was one of the 247 semantically-equivalent records the
+# migration replaced entirely with a freshly-materialized v2 target (it
+# is now `events`-shaped) - the materializer only ever carries the
+# schema-recognised implementation_metadata fields
+# (status/tested/reason/gap.upstream_checked/gap.behavioural_impact) into
+# `implementation_metadata[]`, never a blind copy of the raw v1
+# `implementation` object, so the stray field had nowhere to survive to.
+# `CorpusRegressionTest` below keeps the historical record of this as a
+# pinned "no longer reproduces" fact, not a live exclusion.
 KNOWN_PRE_EXISTING_FAILURE = "spiritual-energy-settle-machine"
 
 
@@ -346,14 +355,17 @@ class NegativeShapeTest(unittest.TestCase):
 
 
 class CorpusRegressionTest(unittest.TestCase):
-    """Every currently-migrated (v1-shaped) record must still validate — this
-    pass's job was to ADD v2 alongside v1, not to change what v1 accepts."""
+    """Every canonical record - v1 or v2 - must validate against the real
+    schema. `data/errata/` now holds 247 `ErratumV2` + 49 `Erratum`
+    records (the real canonical migration, commit immediately after
+    1937239d9fd0ebfb47dc850f298c11c3a60679b0); this class checks all 296
+    uniformly, with no exclusion - the one that used to exist here
+    (`KNOWN_PRE_EXISTING_FAILURE`) was resolved BY that migration, not
+    worked around."""
 
-    def test_every_errata_record_validates_except_the_one_known_pre_existing_failure(self):
+    def test_every_errata_record_validates(self):
         failures = []
         for path in sorted(glob.glob(str(REPO_ROOT / "data" / "errata" / "*.json"))):
-            if KNOWN_PRE_EXISTING_FAILURE in path:
-                continue
             with open(path, encoding="utf-8") as f:
                 doc = json.load(f)
             errors = validate_erratum(doc, REGISTRY)
@@ -361,18 +373,21 @@ class CorpusRegressionTest(unittest.TestCase):
                 failures.append((Path(path).name, errors[:3]))
         self.assertEqual(failures, [], f"{len(failures)} record(s) unexpectedly failed schema validation")
 
-    def test_the_one_known_pre_existing_failure_is_still_exactly_that(self):
-        # Guards against silently masking a real regression as "the known
-        # one": if this ever starts passing, the mismatch was fixed elsewhere
-        # and this exclusion should be removed; if a DIFFERENT error appears,
-        # something about the schema or the file changed and needs a look.
+    def test_the_formerly_known_pre_existing_failure_now_validates_cleanly(self):
+        """Confirms the resolution is real, not assumed: the migration
+        replaced this record's content entirely with a freshly-
+        materialized v2 target (schema-verified as part of the 247-target
+        migration gate), which has nowhere for the old stray
+        `implementation.reason` field to have survived to. If this ever
+        starts failing again, something reintroduced the mismatch and it
+        needs a fresh look - this is a live check, not a historical note
+        alone."""
         path = REPO_ROOT / "data" / "errata" / f"{KNOWN_PRE_EXISTING_FAILURE}.json"
         with open(path, encoding="utf-8") as f:
             doc = json.load(f)
+        self.assertIn("events", doc, f"{KNOWN_PRE_EXISTING_FAILURE} is expected to be v2-shaped post-migration")
         errors = validate_erratum(doc, REGISTRY)
-        self.assertEqual(len(errors), 1)
-        self.assertIn("implementation", errors[0])
-        self.assertIn("reason", errors[0])
+        self.assertEqual([], errors)
 
 
 if __name__ == "__main__":

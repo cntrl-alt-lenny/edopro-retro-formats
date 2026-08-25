@@ -6,29 +6,14 @@
     "name": "Crimson Sentry"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
-      "modern_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
-      "summary": "Era procedure with no text change (upstream annotation: \"Works the same way as Last Will (GOAT)\"): the goat script drops the activation-time target entirely and instead registers a field watcher for the rest of the turn, so the Tribute pays for the NEXT of your monsters sent to the Graveyard by battle after activation — it then asks Yes/No and lets you send one of that group to the bottom of the Deck. The modern script targets, at activation, a monster already in your Graveyard that was destroyed by battle this turn (`c:GetTurnID()==tid and c:IsReason(REASON_BATTLE)`) and returns it mandatorily on resolution. The era version is therefore prospective, optional and non-targeting, limited to one use with the watcher reset in the End Phase. Chronology of the change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700187,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700187.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
+    "modern_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
+    "summary": "Era procedure with no text change (upstream annotation: \"Works the same way as Last Will (GOAT)\"): the goat script drops the activation-time target entirely and instead registers a field watcher for the rest of the turn, so the Tribute pays for the NEXT of your monsters sent to the Graveyard by battle after activation — it then asks Yes/No and lets you send one of that group to the bottom of the Deck. The modern script targets, at activation, a monster already in your Graveyard that was destroyed by battle this turn (`c:GetTurnID()==tid and c:IsReason(REASON_BATTLE)`) and returns it mandatorily on resolution. The era version is therefore prospective, optional and non-targeting, limited to one use with the watcher reset in the End Phase. Chronology of the change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700187,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700187.lua"
+  }
 }

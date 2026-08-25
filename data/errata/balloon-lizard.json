@@ -6,29 +6,14 @@
     "name": "Balloon Lizard"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Put 1 counter on this card during each of your Standby Phases. When this card is destroyed, inflict damage to the controller of the card that destroyed it equal to the number of counters x 400 points.",
-      "summary": "Era trigger timing encoded per card (upstream annotation: \"Battle destroyed registers while the monster is on field\"): the goat script splits the burn in two — a new EVENT_BATTLED trigger for the battle-destruction case that reads the counters straight off the card while it is still on the field and aims the damage at the controller of the monster it battled, plus the inherited EVENT_DESTROYED trigger now restricted to non-battle destruction (both `regop` and `damcon` bail out on `IsBattleDestroyed()`). The modern script has only the EVENT_DESTROYED trigger, so battle destruction is handled after the Lizard has left the field, using the leave-field counter snapshot and the destroying player `rp`. Chronology of the timing change is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700065,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700065.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Put 1 counter on this card during each of your Standby Phases. When this card is destroyed, inflict damage to the controller of the card that destroyed it equal to the number of counters x 400 points.",
+    "modern_text": null,
+    "summary": "Era trigger timing encoded per card (upstream annotation: \"Battle destroyed registers while the monster is on field\"): the goat script splits the burn in two — a new EVENT_BATTLED trigger for the battle-destruction case that reads the counters straight off the card while it is still on the field and aims the damage at the controller of the monster it battled, plus the inherited EVENT_DESTROYED trigger now restricted to non-battle destruction (both `regop` and `damcon` bail out on `IsBattleDestroyed()`). The modern script has only the EVENT_DESTROYED trigger, so battle destruction is handled after the Lizard has left the field, using the leave-field counter snapshot and the destroying player `rp`. Chronology of the timing change is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700065,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700065.lua"
+  }
 }

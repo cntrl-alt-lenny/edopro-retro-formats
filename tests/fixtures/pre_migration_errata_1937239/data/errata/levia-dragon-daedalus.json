@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-levia-dragon-daedalus",
+  "modern_card": {
+    "passcode": 37721209,
+    "name": "Levia-Dragon - Daedalus"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "By sending \"Umi\" on your side of the field to the Graveyard, destroy all cards on the field except this card.",
+      "summary": "Period ruling with no text counterpart: the GOAT script excludes Daedalus from its own mass destruction only while it is face-up ('e:GetHandler():IsFaceup() and e:GetHandler() or nil' in the exclusion argument of the operation's GetMatchingGroup), so a Daedalus turned face-down after the Ignition effect was activated is destroyed along with everything else. The modern script excludes it whenever it is still related to the effect ('local exc=c:IsRelateToEffect(e) and c or nil'). Upstream's own note on the variant: 'If the card is facedown, it's sent as well.' Cost and activation legality are the same in both: a face-up 'Umi' you control, sendable as cost, with at least one other card on either field.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700060,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700060.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DR2-EN084, 2005-10-20), the GOAT entry's exact text. The rest of the lineage is cosmetic and is not recorded: v0 (IOC-083, 2004-03-01) -> v1 is 'Send ... to destroy' -> 'By sending ..., destroy'; v2 (LCYW-EN249, 2012-09-29) is the PSCT rewrite where 'except this card' becomes 'destroy all other cards on the field' and '1 face-up \"Umi\" you control' codifies a requirement both scripts already enforce (cfilter/descostfilter both test IsFaceup and IsCode(CARD_UMI) on your side only); v3 (SBAD-EN025, 2019-05-30) is the GY rewording and is the pinned cdb text. The remaining script differences are non-behavioural: the operation-info recipient parameter (tp vs 0) and aux.TRUE vs a nil filter. No source in the packet dates the face-down self-destruction ruling, so effective is left empty rather than guessed."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

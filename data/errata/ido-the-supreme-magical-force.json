@@ -6,39 +6,17 @@
     "name": "Ido the Supreme Magical Force"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2024-09-19",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (MP24-EN026, 25th Anniversary Tin: Dueling Mirrors)"
-      },
-      "historical_text": "You cannot Summon monsters. You can only control 1 \"Ido the Supreme Magical Force\". If this card is destroyed by a card effect and sent to the Graveyard, Special Summon it from your Graveyard during the next turn's Standby Phase and destroy all other monsters you control.",
-      "modern_text": "You cannot Summon or Normal Set monsters. You can only control 1 \"Ido the Supreme Magical Force\". Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: Special Summon this card from the GY, and if you do, destroy all other monsters you control.",
-      "summary": "Functional erratum on the printed TCG text: the era text's Condition is \"You cannot Summon monsters\", which restricts Normal, Flip and Special Summons but leaves Normal Setting legal while you control Ido; the errata'd text reads \"You cannot Summon or Normal Set monsters\". The modern implementation enforces the errata'd wording - the current script registers EFFECT_CANNOT_MSET alongside EFFECT_CANNOT_SUMMON, EFFECT_CANNOT_SPECIAL_SUMMON and EFFECT_CANNOT_FLIP_SUMMON. The same revision restates the revival as \"Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: ... and if you do, destroy all other monsters you control\", which is PSCT formalisation of a mandatory trigger that can only register once per destruction.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In an Edison snapshot EDOPro blocks Normal Setting a monster while Ido is on the field, which the era's printed English text (\"You cannot Summon monsters\") does not state."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In an Edison snapshot EDOPro blocks Normal Setting a monster while Ido is on the field, which the era's printed English text (\"You cannot Summon monsters\") does not state.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -49,5 +27,32 @@
     "ignis-babelcdb",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2024-09-19",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (MP24-EN026, 25th Anniversary Tin: Dueling Mirrors)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You cannot Summon monsters. You can only control 1 \"Ido the Supreme Magical Force\". If this card is destroyed by a card effect and sent to the Graveyard, Special Summon it from your Graveyard during the next turn's Standby Phase and destroy all other monsters you control.",
+    "modern_text": "You cannot Summon or Normal Set monsters. You can only control 1 \"Ido the Supreme Magical Force\". Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: Special Summon this card from the GY, and if you do, destroy all other monsters you control.",
+    "summary": "Functional erratum on the printed TCG text: the era text's Condition is \"You cannot Summon monsters\", which restricts Normal, Flip and Special Summons but leaves Normal Setting legal while you control Ido; the errata'd text reads \"You cannot Summon or Normal Set monsters\". The modern implementation enforces the errata'd wording - the current script registers EFFECT_CANNOT_MSET alongside EFFECT_CANNOT_SUMMON, EFFECT_CANNOT_SPECIAL_SUMMON and EFFECT_CANNOT_FLIP_SUMMON. The same revision restates the revival as \"Once per turn, during the Standby Phase of the next turn after this card was destroyed by card effect and sent to the GY: ... and if you do, destroy all other monsters you control\", which is PSCT formalisation of a mandatory trigger that can only register once per destruction.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-babelcdb",
+      "ignis-cardscripts",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-a-deal-with-dark-ruler",
+  "modern_card": {
+    "passcode": 6850209,
+    "name": "A Deal with Dark Ruler"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
+      "summary": "Era activation semantics: the goat script's target function keeps only 's[tp] and Duel.GetLocationCount(tp,LOCATION_MZONE)>0', dropping the modern Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,...) requirement, so the card can be activated with no \"Berserk Dragon\" anywhere in hand or Deck; the modern script refuses the activation outright. Chronology is unresolved: the fail-to-find activation allowance was withdrawn card by card at different dates and no dated source for this card was found.",
+      "sources": [
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
+      "summary": "Period procedure: when the resolution finds no \"Berserk Dragon\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script has no else-branch and resolves with no reveal. The printed text is untouched by this.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700010,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700010.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v1 (DR1-EN192, 2005-03-19), matched exactly by the goat cdb text; v0 (DCR-030, 2003-12-01) predates the baseline and differs only in 'a monster with 8 or more Level Stars' vs 'a Level 8 or higher monster'. CONFLICT PRESERVED: lineage v2 (LCJW-EN241, 2013-10-11) adds '(This card is always treated as an \"Archfiend\" card.)' - TCG archetype membership the earlier prints did not grant - yet upstream's goat row 504700010 carries setcode 0x45, identical to the modern row 6850209. That identity is weak evidence either way: I checked all 12 goat rows in this batch and upstream copies modern card data (setcode, type, stats) verbatim into every one, so the setcode is upstream's default, not a period judgement. Because the card's own effect resolves identically with or without the clause, it is not recorded as a functional change; flagged conflicting-evidence so a human can decide whether the period card should lose the \"Archfiend\" setcode. Change order: (B) is listed before (A) because the only dated per-card precedent for a withdrawn fail-to-find allowance (Reinforcement of the Army, gone by the 2008-12-15 Card FAQ) falls before (A)'s earliest possible end date (2011-02-02); the true order for this card is unknown. No upstream implementation exists for the intermediate state (modern activation check plus period verification), and it is unreachable while (B)'s chronology is unresolved, so no missing-implementation record is attached. Remaining diff items are refactoring drift: LOCATION_DECK|LOCATION_HAND vs LOCATION_DECK+LOCATION_HAND is the same value. modern_text matches v2 at ratio 0.9974 only because of a line-break normalisation, not a text discrepancy."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

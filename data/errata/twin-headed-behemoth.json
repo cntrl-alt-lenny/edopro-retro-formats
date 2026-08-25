@@ -6,51 +6,82 @@
     "name": "Twin-Headed Behemoth"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2011-03-04",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SDDL-EN017 (Dragunity Legion Structure Deck), the first printing naming the card in its once-per-Duel restriction"
       },
-      "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. You can only use this effect once per Duel.",
-      "modern_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
-      "summary": "Functional erratum: the once-per-Duel limit changed from per-copy to per-name. The pre-errata script gates the End Phase revival with a cost that reads and sets a flag effect on the individual card (`c:GetFlagEffect(id)==0` / `c:RegisterFlagEffect(id,0,0,1)`), so each copy of Twin-Headed Behemoth may revive once per Duel; the modern script uses `SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)`, which spends the single use for every copy of the name. SDDL-EN017 is the first English text to say 'the effect of \"Twin-Headed Behemoth\"' instead of 'this effect'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. You can only use this effect once per Duel.",
+          "modern_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
+          "summary": "Functional erratum: the once-per-Duel limit changed from per-copy to per-name. The pre-errata script gates the End Phase revival with a cost that reads and sets a flag effect on the individual card (`c:GetFlagEffect(id)==0` / `c:RegisterFlagEffect(id,0,0,1)`), so each copy of Twin-Headed Behemoth may revive once per Duel; the modern script uses `SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)`, which spends the single use for every copy of the name. SDDL-EN017 is the first English text to say 'the effect of \"Twin-Headed Behemoth\"' instead of 'this effect'.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2019-01-24",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SS02-ENA06 (Speed Duel Starter Decks: Duelists of Tomorrow)"
       },
-      "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
-      "modern_text": "During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn: You can Special Summon this card, but its ATK/DEF become 1000. You can only use this effect of \"Twin-Headed Behemoth\" once per Duel.",
-      "summary": "Wording modernisation only from v4 to v8: 'Each player can only use' becomes 'You can only use' (the same per-player scope), PSCT restructures the trigger into 'During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn:', and Graveyard becomes GY. The AP08 printing (v7, 2015-10-23) also switched the imperative 'Special Summon it from the Graveyard' to 'You can Special Summon this card'; both upstream scripts register that revival as the same EFFECT_TYPE_TRIGGER_O effect, so no optionality difference is recorded here.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
+          "modern_text": "During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn: You can Special Summon this card, but its ATK/DEF become 1000. You can only use this effect of \"Twin-Headed Behemoth\" once per Duel.",
+          "summary": "Wording modernisation only from v4 to v8: 'Each player can only use' becomes 'You can only use' (the same per-player scope), PSCT restructures the trigger into 'During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn:', and Graveyard becomes GY. The AP08 printing (v7, 2015-10-23) also switched the imperative 'Special Summon it from the Graveyard' to 'You can Special Summon this card'; both upstream scripts register that revival as the same EFFECT_TYPE_TRIGGER_O effect, so no optionality difference is recorded here.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000868,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000868.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511000868,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511000868.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

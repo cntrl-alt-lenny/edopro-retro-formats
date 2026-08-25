@@ -6,34 +6,14 @@
     "name": "Dark Magician of Chaos"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2015-11-12",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENC02, Yugi's Legendary Decks)"
-      },
-      "historical_text": "When this card is Normal or Special Summoned: You can target 1 Spell Card in your Graveyard; add that target to your hand. Banish any monster destroyed by battle with this card. If this face-up card would leave the field, banish it instead.",
-      "modern_text": "During the End Phase, if this card was Normal or Special Summoned this turn: You can target 1 Spell Card in your Graveyard; add it to your hand. You can only use this effect of \"Dark Magician of Chaos\" once per turn. If this card destroys an opponent's monster by battle, after damage calculation: Banish that opponent's monster. If this face-up card would leave the field, banish it instead.",
-      "summary": "Functional erratum on both effects. The Spell recovery moved from an immediate on-Summon trigger with no use limit (pre-errata/c511001039.lua registers two EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O effects on EVENT_SUMMON_SUCCESS and EVENT_SPSUMMON_SUCCESS) to a delayed End Phase trigger carrying a hard once-per-turn by name (modern EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O on EVENT_PHASE+PHASE_END with SetCountLimit(1,id) and a flag-effect cost proving the card was Summoned that turn). The battle banish changed from a continuous EFFECT_BATTLE_DESTROY_REDIRECT to LOCATION_REMOVED - which silently banishes any monster it destroys by battle - into a mandatory Trigger Effect on EVENT_BATTLED that starts a Chain, resolves after damage calculation and applies only to an opponent's monster; the modern leave-field redirect also gained EFFECT_FLAG_CANNOT_DISABLE, which the pre-errata one lacks.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511001039,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511001039.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2015-11-12",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (YGLD-ENC02, Yugi's Legendary Decks)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When this card is Normal or Special Summoned: You can target 1 Spell Card in your Graveyard; add that target to your hand. Banish any monster destroyed by battle with this card. If this face-up card would leave the field, banish it instead.",
+    "modern_text": "During the End Phase, if this card was Normal or Special Summoned this turn: You can target 1 Spell Card in your Graveyard; add it to your hand. You can only use this effect of \"Dark Magician of Chaos\" once per turn. If this card destroys an opponent's monster by battle, after damage calculation: Banish that opponent's monster. If this face-up card would leave the field, banish it instead.",
+    "summary": "Functional erratum on both effects. The Spell recovery moved from an immediate on-Summon trigger with no use limit (pre-errata/c511001039.lua registers two EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O effects on EVENT_SUMMON_SUCCESS and EVENT_SPSUMMON_SUCCESS) to a delayed End Phase trigger carrying a hard once-per-turn by name (modern EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O on EVENT_PHASE+PHASE_END with SetCountLimit(1,id) and a flag-effect cost proving the card was Summoned that turn). The battle banish changed from a continuous EFFECT_BATTLE_DESTROY_REDIRECT to LOCATION_REMOVED - which silently banishes any monster it destroys by battle - into a mandatory Trigger Effect on EVENT_BATTLED that starts a Chain, resolves after damage calculation and applies only to an opponent's monster; the modern leave-field redirect also gained EFFECT_FLAG_CANNOT_DISABLE, which the pre-errata one lacks.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511001039,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511001039.lua"
+  }
 }

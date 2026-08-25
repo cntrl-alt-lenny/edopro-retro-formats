@@ -6,34 +6,14 @@
     "name": "Wulf, Lightsworn Beast"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2014-06-27",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SDLI-EN010, Realm of Light Structure Deck)"
-      },
-      "historical_text": "Cannot be Normal Summoned or Set. When this card is sent from your Deck to the Graveyard: Special Summon it.",
-      "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by a card effect, and cannot be Special Summoned by other ways. If this card is sent from your Deck to the Graveyard: Special Summon it.",
-      "summary": "Functional erratum: SDLI-EN010 added \"Must be Special Summoned by a card effect, and cannot be Special Summoned by other ways\". The modern script encodes it as an EFFECT_SPSUMMON_CONDITION (EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE) whose value function accepts a Special Summon only when its source effect IsHasType(EFFECT_TYPE_ACTIONS) - an activate, ignition, trigger or quick effect. The pre-errata script registers no summon restriction whatsoever, so any Special Summon of Wulf is legal, including ones performed by continuous effects or by Summoning procedures rather than by an activated card effect. Both keep c:EnableUnsummonable() and the identical mandatory TRIGGER_F on EVENT_TO_GRAVE that revives it when it is sent from the Deck to the Graveyard.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003020,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003020.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-babelcdb",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2014-06-27",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SDLI-EN010, Realm of Light Structure Deck)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Cannot be Normal Summoned or Set. When this card is sent from your Deck to the Graveyard: Special Summon it.",
+    "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned by a card effect, and cannot be Special Summoned by other ways. If this card is sent from your Deck to the Graveyard: Special Summon it.",
+    "summary": "Functional erratum: SDLI-EN010 added \"Must be Special Summoned by a card effect, and cannot be Special Summoned by other ways\". The modern script encodes it as an EFFECT_SPSUMMON_CONDITION (EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE) whose value function accepts a Special Summon only when its source effect IsHasType(EFFECT_TYPE_ACTIONS) - an activate, ignition, trigger or quick effect. The pre-errata script registers no summon restriction whatsoever, so any Special Summon of Wulf is legal, including ones performed by continuous effects or by Summoning procedures rather than by an activated card effect. Both keep c:EnableUnsummonable() and the identical mandatory TRIGGER_F on EVENT_TO_GRAVE that revives it when it is sent from the Deck to the Graveyard.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003020,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003020.lua"
+  }
 }

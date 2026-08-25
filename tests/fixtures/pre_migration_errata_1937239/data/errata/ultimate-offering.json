@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-ultimate-offering",
+  "modern_card": {
+    "passcode": 80604091,
+    "name": "Ultimate Offering"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2006-05-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the phase restriction (SD7-EN027, Structure Deck: Invincible Fortress)"
+      },
+      "historical_text": "At the cost of 500 Life Points per monster, a player is allowed an extra Normal Summon or Set.",
+      "modern_text": "By paying 500 Life Points, Normal Summon or Set 1 extra monster. You can only activate this effect during your Main Phase or your opponent's Battle Phase.",
+      "summary": "Functional erratum: SD7-EN027 added \"You can only activate this effect during your Main Phase or your opponent's Battle Phase\", which the SDY-050 text did not have. The pre-errata script registers the EFFECT_TYPE_QUICK_O/EVENT_FREE_CHAIN effect with no SetCondition, so the extra Normal Summon/Set can be bought in any phase of either player's turn; the modern script gates the same effect with s.condition, which returns true only when you are the turn player in a Main Phase or the opponent is the turn player in the Battle Phase. The 500 LP cost, the per-chain flag effect counting how many monsters you could still Summon, and Duel.SummonOrSet in the operation are byte-for-byte the same in both.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003023,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003023.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-version anchoring: the packet's text_matches_version points at v5 (ratio 0.7556) but that is an upstream text-authoring artifact - upstream wrote the modern PSCT wording with the phase clause deleted, a hybrid matching no printed version. The behaviour the script implements (no activation window restriction) is the v0 SDY-050 text, so the chain is anchored at v0. Era: GOAT (2005-04-01) precedes 2006-05-15 and gets the pre-errata card; Edison (2010-04-24) is after it, and v2's behaviour (CP04-EN002, 2007-09-06) is exactly what the modern script implements, so no intermediate implementation is needed. Later lineage steps: v2 moves the restriction sentence, v3 (DL13-EN019, 2011-12-01) is PSCT, v4 adds \"immediately after this effect resolves\" and v5 (LART-EN070, 2024-09-18) is LP wording. On v4: its row is card number SD10-EN032 as reprinted in the Machine Madness Value Box, which the packet dates 2014-02-28 - consistent with v3 (2011-12-01) still lacking the clause, so the 2007 Structure Deck: Machine Re-Volt listing in the same row is a same-number reprint artifact, not an earlier date. CONFLICT PRESERVED: EdisonFormat's Functional Errata page asserts a behavioural difference for exactly that v3 -> v4 wording - \"the Summon/Set occurs WHEN the Quick effect resolves, not immediately after, so Solemn Judgment cannot negate it; Torrential Tribute can respond if it was Chain Link 1\" - but neither upstream script encodes it: both call Duel.SummonOrSet inside the effect's operation, i.e. during resolution. There is no script-level difference to record, so it is documented here rather than recorded as a change; if the distinction is ever made implementable, this card needs revisiting for the 2006-05-15 .. 2014-02-28 window. The same page lists Ultimate Offering under VERIFICATION (\"Hand reveal required if you cannot perform every Normal Summon/Set you chained for\"); both scripts already register a RESET_CHAIN flag effect holding the count of Summonable monsters at cost time and decrement it per activation, so a whiffed chain link is unreachable and there is no verification behaviour left to implement - no ruling change recorded for it."
+  },
+  "sources": [
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

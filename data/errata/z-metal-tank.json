@@ -6,35 +6,14 @@
     "name": "Z-Metal Tank"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2016-10-20",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SDKS-EN007, Structure Deck: Seto Kaiba); EdisonFormat.com independently attributes the Union Condition removal to the same product"
-      },
-      "historical_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" or \"Y-Dragon Head\" you control; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. While equipped by this effect, the equipped monster gains 600 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
-      "modern_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" or \"Y-Dragon Head\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 600 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
-      "summary": "Union erratum with four concrete behavioural parts, all visible in both the text lineage and the script: the pre-errata script passes the old-Union flag to aux.AddUnionProcedure and additionally gates the 600 ATK/DEF boost behind aux.IsUnionState, so in the era build (a) the equip target may not already carry a Union monster (Auxiliary.UnionFilter's ct1==0 branch, the printed Condition \"A monster can only be equipped with 1 Union monster at a time\"), (b) the destruction replacement covers destruction by battle only (Auxiliary.UnionReplace's old branch returns true for REASON_BATTLE alone), (c) the boost, the unequip effect and the replacement all require the union state - this card must have equipped itself with its own effect - matching \"While equipped by this effect\", and (d) the unequip Special Summon is forced to POS_FACEUP_ATTACK. The modern card drops the Condition, replaces destruction by battle or card effect, boosts whatever it is equipped to however it got there (\"A monster equipped with this card gains 600 ATK/DEF\"), and is Special Summoned in either face-up position.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002853,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002853.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2016-10-20",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SDKS-EN007, Structure Deck: Seto Kaiba); EdisonFormat.com independently attributes the Union Condition removal to the same product"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" or \"Y-Dragon Head\" you control; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. While equipped by this effect, the equipped monster gains 600 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
+    "modern_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" or \"Y-Dragon Head\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 600 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+    "summary": "Union erratum with four concrete behavioural parts, all visible in both the text lineage and the script: the pre-errata script passes the old-Union flag to aux.AddUnionProcedure and additionally gates the 600 ATK/DEF boost behind aux.IsUnionState, so in the era build (a) the equip target may not already carry a Union monster (Auxiliary.UnionFilter's ct1==0 branch, the printed Condition \"A monster can only be equipped with 1 Union monster at a time\"), (b) the destruction replacement covers destruction by battle only (Auxiliary.UnionReplace's old branch returns true for REASON_BATTLE alone), (c) the boost, the unequip effect and the replacement all require the union state - this card must have equipped itself with its own effect - matching \"While equipped by this effect\", and (d) the unequip Special Summon is forced to POS_FACEUP_ATTACK. The modern card drops the Condition, replaces destruction by battle or card effect, boosts whatever it is equipped to however it got there (\"A monster equipped with this card gains 600 ATK/DEF\"), and is Special Summoned in either face-up position.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002853,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002853.lua"
+  }
 }

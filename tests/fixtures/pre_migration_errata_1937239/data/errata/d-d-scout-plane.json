@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-d-d-scout-plane",
+  "modern_card": {
+    "passcode": 3773196,
+    "name": "D.D. Scout Plane"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2008-04-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "The Dark Emperor Structure Deck printing SDDE-EN011"
+      },
+      "historical_text": "If this card is removed from play, Special Summon this card in face-up Attack Position on your side of the field during the End Phase of this turn.",
+      "modern_text": "If this card is removed from play, Special Summon it in face-up Attack Position during the End Phase of this turn.",
+      "summary": "Wording only: 'Special Summon this card in face-up Attack Position on your side of the field' is shortened to 'Special Summon it in face-up Attack Position'. Same mandatory End Phase return, same position.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN216, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "If this card is removed from play, Special Summon it in face-up Attack Position during the End Phase of this turn.",
+      "modern_text": "Once per turn, during the End Phase, if this card is currently banished, and was banished this turn: Special Summon it in face-up Attack Position.",
+      "summary": "Functional erratum: LCYW-EN216 adds a once-per-turn limit ('Once per turn, during the End Phase') and a still-banished check ('if this card is currently banished, and was banished this turn') that the DR2/SDDE texts do not carry. Without the limit the trigger can fire again in the same End Phase after the card has already come back and been banished a second time (for example by a Bottomless Trap Hole answering the first return); the errata'd card returns once per turn only.",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT and Edison, D.D. Scout Plane's End Phase return has no once-per-turn cap, so a copy banished again during that same End Phase should come back again; the shipped card allows only one return per turn.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. Packet anomaly: errata_page.english_versions begins at index 1 (DR2-EN012, 2005-10-20) - there is no index 0 in the packet, so the card's original-printing English text is not available and a GOAT-era snapshot maps to the v1 wording by default. v1 and v2 are behaviourally identical, so this does not affect resolution, only displayed text. Chain therefore starts at v1; the text in force at the 2010-04-24 Edison snapshot is v2 (SDDE-EN011, 2008-04-02), with the erratum arriving 2012-09-29, well after. Trailing v3 -> v4 (SGX3-ENF07, 2023-03-30) only moves the once-per-turn clause to the end as 'This effect can only activate once per turn'; it is the pinned cdb text and is cosmetic. No entry for this card in edison-functional-errata.md (its sibling D.D. Survivor does appear there)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

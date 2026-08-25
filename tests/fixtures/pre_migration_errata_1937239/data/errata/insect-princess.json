@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-insect-princess",
+  "modern_card": {
+    "passcode": 37957847,
+    "name": "Insect Princess"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "While this card is face-up on the field, battle positions of all face-up Insect-Type monsters on your opponent's side of the field are changed into Attack Position. Each time this card destroys an Insect-Type monster as a result of battle, increase the ATK of this card by 500 points.",
+      "summary": "Era trigger timing, not a text erratum: the GOAT script gains the 500 ATK from a single mandatory trigger on EVENT_BATTLED whose condition checks that the battled monster was destroyed and is an Insect, i.e. after the battle concludes. The modern script splits this into a continuous effect on EVENT_BATTLED that records a flag when the battle target is an Insect and a TRIGGER_F on EVENT_BATTLE_DESTROYING that reads the flag, so the boost triggers at the destruction itself. The GOAT operation also registers the boost without the modern c:IsRelateToEffect(e) guard. Chronology is unresolved - nothing in the packet dates the timing change.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700061,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700061.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Upstream annotates the goat variant 'Activation timing', matching the EVENT_BATTLED/EVENT_BATTLE_DESTROYING difference. The position-changing effect is identical in both scripts (EFFECT_SET_POSITION over the opponent's Insect monsters, value POS_FACEUP_ATTACK), so v2's dropped 'face-up' qualifier has no script correlate. Text lineage is cosmetic: v0 (IOC-080, 2004-03-01) -> v1 (DR2-EN081, 2005-10-20) is 'As long as this card remains face-up' -> 'While this card is face-up' and 'in battle' -> 'as a result of battle', and predates the baseline; v1 -> v2 (OP07-EN015, 2018-04-13) is the PSCT rewrite to 'If this card destroys an Insect monster by battle: This card gains 500 ATK.' The ATK boost reset (RESETS_STANDARD_DISABLE) is the same in both."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

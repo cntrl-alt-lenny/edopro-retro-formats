@@ -6,35 +6,14 @@
     "name": "W-Wing Catapult"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-03-08",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN083, Legendary Collection Kaiba Mega Pack)"
-      },
-      "historical_text": "Once per turn, you can equip this card to a \"V-Tiger Jet\" you control, OR unequip it to Special Summon this card in face-up Attack Position. When equipped to a monster by this card's effect, the equipped monster gains 400 ATK and DEF. (A monster can only be equipped with 1 Union Monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
-      "modern_text": "Once per turn, you can either: Target 1 \"V-Tiger Jet\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 400 ATK/DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
-      "summary": "Functional erratum with three concrete effects, encoded upstream by calling aux.AddUnionProcedure(c,s.filter,true) (old union rules) instead of the modern aux.AddUnionProcedure(c,aux.FilterBoolFunction(Card.IsCode,51638941)). (1) The era Condition \"(A monster can only be equipped with 1 Union Monster at a time)\": the pre-errata equip target must have GetUnionCount()==0, so a \"V-Tiger Jet\" already carrying a Union monster cannot be equipped, while the modern card has no such limit. (2) The destruction replacement is battle-only - Auxiliary.UnionReplace(true) returns true only for REASON_BATTLE - whereas the modern text and script also substitute for destruction by card effect. (3) Unequipping Special Summons the card specifically in face-up Attack Position (POS_FACEUP_ATTACK) rather than a position of the player's choice, and both the unequip option and the 400 ATK/DEF gain are conditioned on aux.IsUnionState (proper union status) instead of merely being equipped.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002901,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002901.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -46,5 +25,32 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-03-08",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN083, Legendary Collection Kaiba Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once per turn, you can equip this card to a \"V-Tiger Jet\" you control, OR unequip it to Special Summon this card in face-up Attack Position. When equipped to a monster by this card's effect, the equipped monster gains 400 ATK and DEF. (A monster can only be equipped with 1 Union Monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
+    "modern_text": "Once per turn, you can either: Target 1 \"V-Tiger Jet\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 400 ATK/DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+    "summary": "Functional erratum with three concrete effects, encoded upstream by calling aux.AddUnionProcedure(c,s.filter,true) (old union rules) instead of the modern aux.AddUnionProcedure(c,aux.FilterBoolFunction(Card.IsCode,51638941)). (1) The era Condition \"(A monster can only be equipped with 1 Union Monster at a time)\": the pre-errata equip target must have GetUnionCount()==0, so a \"V-Tiger Jet\" already carrying a Union monster cannot be equipped, while the modern card has no such limit. (2) The destruction replacement is battle-only - Auxiliary.UnionReplace(true) returns true only for REASON_BATTLE - whereas the modern text and script also substitute for destruction by card effect. (3) Unequipping Special Summons the card specifically in face-up Attack Position (POS_FACEUP_ATTACK) rather than a position of the player's choice, and both the unequip option and the 400 ATK/DEF gain are conditioned on aux.IsUnionState (proper union status) instead of merely being equipped.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002901,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002901.lua"
+  }
 }

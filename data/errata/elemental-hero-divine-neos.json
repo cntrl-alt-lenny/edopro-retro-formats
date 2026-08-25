@@ -6,40 +6,17 @@
     "name": "Elemental HERO Divine Neos"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2011-10-04",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of Legendary Collection 2: The Duel Academy Years Mega Pack (LCGX-EN077), the only printing carrying the errata'd text"
-      },
-      "historical_text": "This card cannot be Special Summoned except by a Fusion Summon of any 5 \"Neos\", \"Neo-Spacian\", \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monsters including at least 1 \"Neos\" monster, 1 \"Neo-Spacian\" monster and 1 \"Hero\" monster. Once per turn, you can remove from play 1 \"Neos\", \"Neo-Spacian\", \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monster from your Graveyard to have this card gain 500 ATK. It also gains the removed monster's effect(s), until the End Phase.",
-      "modern_text": "Must be Fusion Summoned using any 5 \"Neos\", \"Neo Space\", \"Neo-Spacian\", or \"HERO\" monsters, including at least 1 \"Neos\" or \"Neo Space\" monster, 1 \"Neo-Spacian\" monster, and 1 \"HERO\" monster, and cannot be Special Summoned by other ways. Once per turn: You can banish 1 \"Neos\", \"Neo Space\", \"Neo-Spacian\", or \"HERO\" monster from your Graveyard; this card gains 500 ATK, and until the End Phase it also gains the banished monster's effects.",
-      "summary": "The erratum widened both the Fusion Material list and the banish cost by adding '\"Neo Space\"' monsters, and widened the required 'at least 1 \"Neos\" monster' slot to 'at least 1 \"Neos\" or \"Neo Space\" monster'; the era text (CSOC-EN093) admits only 'Neos', 'Neo-Spacian', 'Elemental Hero', 'Destiny Hero' and 'Evil Hero' monsters. This is reachable inside the Edison pool: 'Neo Space Pathfinder' (TAEV-EN032, released 2007-08-15) is a 'Neo Space' monster, and BabelCDB gives it setcode 0x9 (SET_NEOS), so official/c31111109.lua's s.ffilter and s.costfilter accept it where the era card did not. Folding the three named HERO archetypes into 'HERO' is inert for period play, and the summon restriction stays strict (c:AddMustBeFusionSummoned()).",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format the modern card lets 'Neo Space Pathfinder' serve as one of the five Fusion Materials - including as the required 'Neos' member - and lets it be banished from the Graveyard for the +500 ATK and the effect copy, none of which the Edison-era text permitted."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format the modern card lets 'Neo Space Pathfinder' serve as one of the five Fusion Materials - including as the required 'Neos' member - and lets it be banished from the Graveyard for the +500 ATK and the effect copy, none of which the Edison-era text permitted.",
-      "sources": [
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -50,5 +27,33 @@
     "yugipedia-set-pages",
     "ignis-cardscripts",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2011-10-04",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of Legendary Collection 2: The Duel Academy Years Mega Pack (LCGX-EN077), the only printing carrying the errata'd text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "This card cannot be Special Summoned except by a Fusion Summon of any 5 \"Neos\", \"Neo-Spacian\", \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monsters including at least 1 \"Neos\" monster, 1 \"Neo-Spacian\" monster and 1 \"Hero\" monster. Once per turn, you can remove from play 1 \"Neos\", \"Neo-Spacian\", \"Elemental Hero\", \"Destiny Hero\" or \"Evil Hero\" monster from your Graveyard to have this card gain 500 ATK. It also gains the removed monster's effect(s), until the End Phase.",
+    "modern_text": "Must be Fusion Summoned using any 5 \"Neos\", \"Neo Space\", \"Neo-Spacian\", or \"HERO\" monsters, including at least 1 \"Neos\" or \"Neo Space\" monster, 1 \"Neo-Spacian\" monster, and 1 \"HERO\" monster, and cannot be Special Summoned by other ways. Once per turn: You can banish 1 \"Neos\", \"Neo Space\", \"Neo-Spacian\", or \"HERO\" monster from your Graveyard; this card gains 500 ATK, and until the End Phase it also gains the banished monster's effects.",
+    "summary": "The erratum widened both the Fusion Material list and the banish cost by adding '\"Neo Space\"' monsters, and widened the required 'at least 1 \"Neos\" monster' slot to 'at least 1 \"Neos\" or \"Neo Space\" monster'; the era text (CSOC-EN093) admits only 'Neos', 'Neo-Spacian', 'Elemental Hero', 'Destiny Hero' and 'Evil Hero' monsters. This is reachable inside the Edison pool: 'Neo Space Pathfinder' (TAEV-EN032, released 2007-08-15) is a 'Neo Space' monster, and BabelCDB gives it setcode 0x9 (SET_NEOS), so official/c31111109.lua's s.ffilter and s.costfilter accept it where the era card did not. Folding the three named HERO archetypes into 'HERO' is inert for period play, and the summon restriction stays strict (c:AddMustBeFusionSummoned()).",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  }
 }

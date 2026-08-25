@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-limiter-removal",
+  "modern_card": {
+    "passcode": 23171610,
+    "name": "Limiter Removal"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Double the ATK of all face-up Machine-Type monsters that are on your side of the field when you activate this card. During the End Phase, destroy all Monster Cards that were affected by this effect.",
+      "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Limiter Removal may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore, so the two flags license different sub-steps. The accompanying condition swap is a no-op: the variant's inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' is logically identical to the modern aux.StatChangeDamageStepCondition ('not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', CardScripts utility.lua:1412), and the hint timing follows the flag. 25 of upstream's 191 GOAT scripts carry the same substitution, so it is a systematic period-Damage-Step encoding rather than a per-card quirk.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700037,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700037.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Recorded as 'ruling', not 'engine': the difference lives in this card's own effect flags, not in a global rule-profile setting, so a rule-profile flag would not reproduce it and the variant is not redundant. Chronology is unresolved - nothing in the packet or the shared briefs dates when Limiter Removal's Damage Step window changed. Conflicting evidence preserved: the text lineage suggests a behavioural axis that neither implementation distinguishes. The baseline text v2 (DB1-EN179, 2004-10-12) doubles the ATK of Machine monsters 'on your side of the field when you activate this card'; v6 (DL16-EN013, 2013-07-01) and v7 (SDGR-EN022, 2014-10-16) read 'you controlled at both the activation and resolution of this card'; v5/v8/v9 read 'you currently control'. The script diff touches only the Damage Step flag, the condition, and constant spellings, so neither the GOAT nor the modern script implements an activation-time snapshot, and no functional change is claimed on that axis. Constant-only differences confirmed equal: RESETS_STANDARD_PHASE_END = RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END (constant.lua:300), and RESET_PHASE|PHASE_END vs RESET_PHASE+PHASE_END are the same value. Everything from v2 through v9 (LEDD-ENB18, 2017-10-05, the pinned cdb text) is otherwise cosmetic ('Machine-Type' -> 'Machine', 'until the End Phase' <-> 'until the end of this turn')."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

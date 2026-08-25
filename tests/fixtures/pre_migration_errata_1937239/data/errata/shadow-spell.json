@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-shadow-spell",
+  "modern_card": {
+    "passcode": 29267084,
+    "name": "Shadow Spell"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select 1 face-up monster on your opponent's side of the field. Decrease the ATK of the selected monster by 700 points. The monster cannot attack or change its battle position. When the selected monster is destroyed or removed from the field, this card is also destroyed.",
+      "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag passed to aux.AddPersistentProcedure: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a byte-for-byte inlining of aux.StatChangeDamageStepCondition (not (PHASE_DAMAGE and IsDamageCalculated())), and everything else in the diff is idiom (a space in Duel.Destroy). That is a damage-step-structure matter the GOAT rule profile already sets globally - DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP - not a card erratum, and nothing in the packet dates the flag change, so its chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700050,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700050.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700050.lua matches lineage v0 (SKE-041, Starter Deck: Kaiba Evolution) exactly. The whole English lineage v0 -> v1 (DT03-EN049, 2010-09-25) -> v2 (BP01-EN092, 2012-05-24) -> v3 (YS13-EN037, 2013-06-14, = pinned modern text) is cosmetic: 'Select' -> 'Target' does not change targeting because EFFECT_FLAG_CARD_TARGET is supplied by aux.AddPersistentProcedure in BOTH scripts, and 'when the selected monster is destroyed or removed from the field' -> 'when it leaves the field' is the same EVENT_LEAVE_FIELD trigger in both. The -700 ATK, cannot-attack and cannot-change-position continuous effects and the self-destroy trigger are identical. Escalation point: the goat variant appears to exist ONLY for the DAMAGE_CAL/DAMAGE_STEP flag; a human should decide whether that residual per-card flag difference is real era behaviour worth a substitution or is already subsumed by the GOAT rule profile, in which case the variant is redundant. I could not settle the exact ocgcore gating semantics of EFFECT_FLAG_DAMAGE_CAL vs EFFECT_FLAG_DAMAGE_STEP from the cached sources (effect.cpp/field.cpp are not in the repo cache), so I did not claim a concrete behavioural consequence."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

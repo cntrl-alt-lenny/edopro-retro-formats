@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-metalsilver-armor",
+  "modern_card": {
+    "passcode": 33114323,
+    "name": "Metalsilver Armor"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "As long as you control the monster equipped with this card, your opponent cannot use the effect of a Spell, Trap, or Effect Monster that targets 1 monster, except the equipped monster.",
+      "summary": "No English text erratum exists for this card: v1 (DR1-EN092, 2005-03-19) is still the newest official English text and is the text in force for both period snapshots. The divergence is at the implementation layer. BabelCDB pins \"While you control the equipped monster, your opponent cannot target monsters on the field, in either GY, or that are banished, except the equipped monster\", marked in the cdb itself as unofficial text describing the OCG functionality, which blocks any targeting of any monster; the printed English text blocks only \"the effect of a Spell, Trap, or Effect Monster that targets 1 monster, except the equipped monster\", so on its plain reading an opponent's effect that targets two or more monsters is not stopped. Chronology is unresolved - nothing in the packet dates when, or whether, the TCG interpretation moved to the OCG one.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "On the era text's plain reading an opponent's multi-target effect ignores Metalsilver Armor's protection, while EDOPro's OCG-functionality implementation blocks it, so period play sees a protection wider than the card's printed English text grants.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "ESCALATION - the classification is the unsettled part, not the chronology. upstream_implementations is empty. The English lineage has only two versions, v0 (MFC-037, 2003-10-10) and v1 (DR1-EN092, 2005-03-19); v1 landed 13 days before the GOAT snapshot (2005-04-01) and is therefore the era text for BOTH GOAT and Edison, and no English printing has revised it since. The v0 -> v1 transition (\"Monster Card\" -> \"Effect Monster\", \"specifically designates\" -> \"targets\", the explicit \"including monsters in the Graveyard\" dropped) is therefore out of scope for both target formats and is not recorded as a change. What IS recorded is the observable mismatch flagged by modern_text_matches_version (index 1, ratio 0.5122): the pinned cards.cdb text matches no English printing because it is an unofficial description of OCG functionality. I could not settle whether TCG rulings of the era read \"targets 1 monster\" narrowly (exactly one) or as any targeting effect, so the change is recorded as a ruling-layer divergence with effective {} rather than as an erratum with an invented date. A reviewer with period TCG rulings for Metalsilver Armor should either confirm the divergence (keep the gap) or collapse this record to cosmetic with baseline none-needed. Metalsilver Armor does not appear on the EdisonFormat.com Functional Errata list."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "yugipedia-card-errata"
+  ]
+}

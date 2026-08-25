@@ -6,29 +6,14 @@
     "name": "Element Doom"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:●EARTH: Negate the effect of an Effect Monster that is destroyed by this monster as a result of battle.●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
-      "summary": "Era trigger timing, not a text erratum: the GOAT script registers the WIND 'attack once again in a row' optional trigger on EVENT_BATTLED and re-checks the battle afterwards (Duel.GetAttacker()==this card, the attack target is the opponent's and IsBattleDestroyed()), where the modern script fires on EVENT_BATTLE_DESTROYING via aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'; the behavioural content is when the optional trigger's window opens and therefore whether it can miss timing. Chronology of this procedural change is unresolved - nothing in the packet or in chronologies.json bounds it.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700036,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700036.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "This monster gets the following effect(s) while there is a monster(s) with the following Attribute(s) on the field:●EARTH: Negate the effect of an Effect Monster that is destroyed by this monster as a result of battle.●WIND: If this card destroyed your opponent's monster as a result of battle, it can attack once again in a row.",
+    "modern_text": null,
+    "summary": "Era trigger timing, not a text erratum: the GOAT script registers the WIND 'attack once again in a row' optional trigger on EVENT_BATTLED and re-checks the battle afterwards (Duel.GetAttacker()==this card, the attack target is the opponent's and IsBattleDestroyed()), where the modern script fires on EVENT_BATTLE_DESTROYING via aux.bdocon at the instant of destruction. Upstream annotates the variant 'Battle destroyed registers while the mosnter is on field'; the behavioural content is when the optional trigger's window opens and therefore whether it can miss timing. Chronology of this procedural change is unresolved - nothing in the packet or in chronologies.json bounds it.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700036,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700036.lua"
+  }
 }

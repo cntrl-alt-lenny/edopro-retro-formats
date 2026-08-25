@@ -6,34 +6,14 @@
     "name": "Jirai Gumo"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2013-10-11",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the trigger-effect text (LCJW-EN227, Legendary Collection 4: Joey's World Mega Pack)"
-      },
-      "historical_text": "When you declare an attack with this card, toss a coin and call it. If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.",
-      "modern_text": "When this card declares an attack: Toss a coin and call it. If you call it wrong, lose half your Life Points.",
-      "summary": "Functional erratum: the coin toss stopped being part of declaring the attack and became a Trigger Effect. The GOAT script registers it as EFFECT_ATTACK_COST guarded by Duel.IsAttackCostPaid/Duel.AttackCostPaid, so it uses no chain link and cannot be responded to or negated - matching 'If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.' The modern script registers a mandatory EFFECT_TYPE_TRIGGER_F on EVENT_ATTACK_ANNOUNCE, which starts a chain and can be negated - matching 'When this card declares an attack: Toss a coin and call it.' The two also round differently on an odd LP total: the GOAT script leaves Duel.GetLP(tp)//2, the modern script math.ceil(Duel.GetLP(tp)/2), a one-point difference.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700190,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700190.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2013-10-11",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the trigger-effect text (LCJW-EN227, Legendary Collection 4: Joey's World Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When you declare an attack with this card, toss a coin and call it. If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.",
+    "modern_text": "When this card declares an attack: Toss a coin and call it. If you call it wrong, lose half your Life Points.",
+    "summary": "Functional erratum: the coin toss stopped being part of declaring the attack and became a Trigger Effect. The GOAT script registers it as EFFECT_ATTACK_COST guarded by Duel.IsAttackCostPaid/Duel.AttackCostPaid, so it uses no chain link and cannot be responded to or negated - matching 'If you call it right, attack normally. If you call it wrong, lose half your Life Points before attacking.' The modern script registers a mandatory EFFECT_TYPE_TRIGGER_F on EVENT_ATTACK_ANNOUNCE, which starts a chain and can be negated - matching 'When this card declares an attack: Toss a coin and call it.' The two also round differently on an odd LP total: the GOAT script leaves Duel.GetLP(tp)//2, the modern script math.ceil(Duel.GetLP(tp)/2), a one-point difference.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700190,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700190.lua"
+  }
 }

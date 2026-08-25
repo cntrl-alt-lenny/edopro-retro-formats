@@ -6,35 +6,14 @@
     "name": "My Body as a Shield"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2019-04-18",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of OP10-EN021 (OTS Tournament Pack 10), the first printing whose text drops '(except during the Damage Step)'"
-      },
-      "historical_text": "When your opponent activates a card that has an effect which destroys 1 or more monster(s) on the field, pay 1500 Life Points to negate the activation of that card and destroy it.",
-      "modern_text": "When your opponent activates a Spell/Trap Card or monster effect that would destroy a monster(s) on the field: Pay 1500 LP; negate the activation, and if you do, destroy it.",
-      "summary": "Functional erratum: the Damage Step restriction was removed. The GOAT script's only difference from the modern one is that it does not set EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL on the activation, so the era card cannot be activated during the Damage Step at all - upstream annotates it 'Cannot be used during the damage step'. The printed text stated that restriction outright from LCYW-EN135 (v5, 2012) through PGL2-EN074 (v6, 2015) and lost it at OP10-EN021 (v7), after which the modern implementation is correct.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700189,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700189.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2019-04-18",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of OP10-EN021 (OTS Tournament Pack 10), the first printing whose text drops '(except during the Damage Step)'"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When your opponent activates a card that has an effect which destroys 1 or more monster(s) on the field, pay 1500 Life Points to negate the activation of that card and destroy it.",
+    "modern_text": "When your opponent activates a Spell/Trap Card or monster effect that would destroy a monster(s) on the field: Pay 1500 LP; negate the activation, and if you do, destroy it.",
+    "summary": "Functional erratum: the Damage Step restriction was removed. The GOAT script's only difference from the modern one is that it does not set EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL on the activation, so the era card cannot be activated during the Damage Step at all - upstream annotates it 'Cannot be used during the damage step'. The printed text stated that restriction outright from LCYW-EN135 (v5, 2012) through PGL2-EN074 (v6, 2015) and lost it at OP10-EN021 (v7), after which the modern implementation is correct.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700189,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700189.lua"
+  }
 }

@@ -379,63 +379,48 @@ reflects that.
      sourced from — a source can host more than one reference list). Full detail,
      including the frozen consumer precedence and every schema/runtime/validator
      change, in `docs/research/erratum-v2-representation-gaps.md`.
-   - **Canonical migration — NOT started.** No `data/errata/*.json` record has been
-     migrated, and v1 schema/runtime remain fully supported. It is gated on the
-     re-derived audit in `docs/research/erratum-v2-migration-audit.md`: **247 of 296**
-     records are semantically equivalent (selection never changes) and **49** genuinely
-     are not (v1's positional model and v2's real chronology disagree at some boundary —
-     order-aware migration, not a rename; 47 already researched, 2 needing manual
-     review). **Headline, as of the final pre-migration gate: `representation_ready =
-     247`, `representation_blocked = 0`.** `implementation_metadata[]` (v1's
-     `status`/`tested`/`reason`/`gap.upstream_checked`/`gap.behavioural_impact`,
-     previously nowhere to go, demonstrably state-specific since a change's
-     `resulting_implementation` can carry a different `status` than the record's
-     baseline) and `reference_identities[]` (the 11 parity-only records' historical
-     passcode, which v2's terminal-state-is-MODERN rule cannot hold as ordinary
-     `Coverage`) both exist, and this project's own migration-audit tooling
-     independently verifies every one of the 247 records' v1 data round-trips into
-     them — not only metadata/identity but every top-level field both schemas support
-     and every change's complete transition, `effective` chronology block included
-     (`top_level_not_preserved_ids == []`, `transition_not_preserved_ids == []`,
-     `metadata_unrepresented_count == 0`, `parity_only_unrepresented_count == 0`).
-     The 11 parity-only records are now a CLASSIFICATION
-     (`parity_only_identity_count`/`parity_only_identity_ids`), not a blocker — an
-     earlier pass's `chronology_shape_ready = 236` / `parity_only_blocked = 11`
-     framing correctly described a real blocker at the time, but is now stale: it
-     would report those 11 as still blocked after their `reference_identities[]`
-     destination already exists and is verified. `chronology_shape_ready` remains in
-     the audit output as a narrower, still-true STRUCTURAL fact (does the record have
-     a `states[]`-shaped chronology), never the readiness verdict again.
-     **That round-trip claim was invalid as first implemented and is only valid
-     after two review-driven correction passes**: construction and checker both
-     enumerated v1 implementation objects with the COVERAGE-shaped
-     `implementation_for_version()` lookup, which correctly returns `None` for the
-     terminal state — so all 21 zero-relevant records silently lost their authored
-     baseline metadata, and the checker, repeating the same lookup, confirmed the
-     loss as preserved. Metadata now has its own occurrence vocabulary, the checker
-     re-derives expected values from raw v1 objects, and the audit reports
-     `zero_relevant_baseline_metadata_represented_count: 21` of 21 explicitly. The
-     same pass fixed the reference-parity precedence, which asked the old
-     `in_reference()` provenance gate BEFORE the exact `reference_identities[]`
-     lookup, making an exact entry unreachable for precisely the records it exists to
-     adjudicate; builder and validator now share one `resolve_v2_parity()`
-     primitive. A second pass then closed the remaining direct-build holes (a
-     malformed `historical_variant_passcodes` container crashed `Repository.load()`
-     outright rather than failing safe; a duplicate matching `reference_id` picked
-     the first entry silently; `script: null`/`""` were not rejected), brought the
-     VALIDATOR onto the SAME exclude-then-include-then-parity precedence the builder
-     already had (an explicitly-included card under a parity format used to get
-     parity diagnostics instead of include diagnostics — removed alongside the
-     blanket, not-generally-true `format.parity-with-include-list` warning), made
-     reference-identity preservation an EXACT SET comparison (an extra, invented
-     entry used to pass silently — only missing entries were checked), and added
-     the top-level/transition preservation audit above. 247/49/48 is unchanged
-     throughout both passes — the semantic comparator was never touched.
-     **`data_preservation_status` is now the literal string
-     `"representation-implemented-not-migrated"`** — representation readiness is still
-     not migration: no canonical record has changed, and starting migration remains a
-     separate, later decision gated on a reviewed dry-run migration materializer and
-     shadow-migration proof (`docs/research/erratum-v2-migration-audit.md`).
+   - **Canonical migration of the 247 equivalent records — COMPLETE** (commit
+     immediately after `1937239d9fd0ebfb47dc850f298c11c3a60679b0`, the approved
+     final pre-migration gate). `data/errata/` now holds **247 `ErratumV2`
+     records** (180 flattened sugar + 67 full-v2: 35 single-relevant-with-
+     nonrelevant-siblings + 11 fully-ordered multi-relevant + 11 parity-only-
+     identity + 10 pure cosmetic/engine) **and 49 `Erratum` (v1) records.**
+     **247 migrated successfully to v2; 49 intentionally remain v1** because
+     migrating them is NOT semantics-preserving under the legacy positional
+     model (v1's positional model and v2's real chronology disagree at some
+     boundary for each of the 49 — order-aware migration, not a rename; 47
+     already researched, 2 needing manual review: `erratum-insect-imitation`,
+     `erratum-last-will`). This is not "all errata migrated," and is never
+     described that way while the 49 stand.
+
+     The migration used the already-reviewed dry-run materializer
+     (`tests/migration_materializer.py`) verbatim — no manual rewriting, no
+     re-derived logic. Verified before and after writing: GOAT output
+     byte-identical (hash `0x28E9FC02`, `IGNIS_GOAT_MAP_HASH`), Edison output
+     byte-identical, `dist/` byte-identical, live repository validates with
+     zero errors, the 49 untouched records byte-identical to their
+     pre-migration form (sha256-verified), and the validator warning delta is
+     exactly the one legitimate representation change
+     (`erratum.no-behavioural-change-with-override: 11 -> 0`, superseded by
+     `reference_identities[]` on exactly the 11 parity-only records).
+     `docs/research/erratum-v2-migration-manifest.json` records provenance
+     (id/path/shape/sha256) for all 247, generated from the live repository,
+     never hand-maintained. The full design/implementation/verification
+     history — the representation-gap work, the two review-driven correction
+     passes, the shadow-migration gate, and the two narrow final corrections
+     (porting `erratum.functional-none-needed` to v2; fixing top-level
+     `notes`/`applicable_formats_note` preservation from truthiness to key
+     presence) — is preserved as historical evidence in
+     `docs/research/erratum-v2-migration-audit.md` (frozen pre-migration
+     snapshot: `erratum-v2-migration-audit-pre-migration.json`; live
+     post-migration audit, now correctly scoped to the 49 remaining v1
+     records: `erratum-v2-migration-audit.json`) and
+     `docs/research/erratum-v2-representation-gaps.md`.
+
+     **Next milestone**: the explicit/order-aware migration of the remaining
+     49, beginning with the 47 already-researched records and separately
+     resolving the 2 manual cases — not started, not attempted in the
+     migration commit that closed the 247.
 
 ## Phase 2 — framework completeness
 

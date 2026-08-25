@@ -6,38 +6,17 @@
     "name": "Trap of Darkness"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-04-19",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SR06-EN036, Structure Deck: Lair of Darkness)"
-      },
-      "historical_text": "Activate only by paying 1000 Life Points while you have 3000 Life Points or less. Select a Normal Trap Card in your Graveyard. This card's effect is the same as that Trap Card's. Remove from play that Normal Trap Card.",
-      "modern_text": "If your LP is 3000 or less: Pay 1000 LP, then target 1 Normal Trap in your GY, except \"Trap of Darkness\"; this card's effect becomes that target's activated effect, then banish that target.",
-      "summary": "Functional erratum: the modern text adds 'except \"Trap of Darkness\"' to the copy target, so a second copy of this card sitting in the Graveyard is no longer an eligible choice; the TDGS-EN092 text said only 'Select a Normal Trap Card in your Graveyard', which admits any Normal Trap including another 'Trap of Darkness'. Everything else is PSCT: the activation condition and the 1000 LP cost are re-templated ('Activate only by paying 1000 Life Points while you have 3000 Life Points or less' -> 'If your LP is 3000 or less: Pay 1000 LP'), select becomes target with the same designation at activation, and the trailing 'Remove from play that Normal Trap Card' becomes 'then banish that target'.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison the EDOPro card refuses to copy a second 'Trap of Darkness' in the Graveyard, a target the period text made legal."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison the EDOPro card refuses to copy a second 'Trap of Darkness' in the Graveyard, a target the period text made legal.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-04-19",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SR06-EN036, Structure Deck: Lair of Darkness)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Activate only by paying 1000 Life Points while you have 3000 Life Points or less. Select a Normal Trap Card in your Graveyard. This card's effect is the same as that Trap Card's. Remove from play that Normal Trap Card.",
+    "modern_text": "If your LP is 3000 or less: Pay 1000 LP, then target 1 Normal Trap in your GY, except \"Trap of Darkness\"; this card's effect becomes that target's activated effect, then banish that target.",
+    "summary": "Functional erratum: the modern text adds 'except \"Trap of Darkness\"' to the copy target, so a second copy of this card sitting in the Graveyard is no longer an eligible choice; the TDGS-EN092 text said only 'Select a Normal Trap Card in your Graveyard', which admits any Normal Trap including another 'Trap of Darkness'. Everything else is PSCT: the activation condition and the 1000 LP cost are re-templated ('Activate only by paying 1000 Life Points while you have 3000 Life Points or less' -> 'If your LP is 3000 or less: Pay 1000 LP'), select becomes target with the same designation at activation, and the trailing 'Remove from play that Normal Trap Card' becomes 'then banish that target'.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

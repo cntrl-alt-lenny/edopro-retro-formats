@@ -6,34 +6,14 @@
     "name": "Nutrient Z"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-08-17",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of OP08-EN024 (OTS Tournament Pack 8), the printing carrying the rewritten trigger text"
-      },
-      "historical_text": "This card can only be activated during your opponent's Damage Step. During this turn, if you take Battle Damage of 2000 points or more, increase your Life Points by 4000 points before the damage is subtracted from your Life Points.",
-      "modern_text": "During damage calculation, when you are about to take 2000 or more battle damage: Gain 4000 LP first.",
-      "summary": "Functional erratum replacing a bespoke activation window with an ordinary trigger. LOD-096 read 'This card can only be activated during your opponent's Damage Step', and the GOAT script builds exactly that: a globally registered EVENT_PRE_BATTLE_DAMAGE effect with EFFECT_FLAG_SET_AVAILABLE offers the activation whenever you are about to take 2000+ battle damage while the card sits in your hand or Spell/Trap Zone, then activates an EVENT_FREE_CHAIN effect gated by a flag effect, and it limits the remainder of that chain to Counter Traps and other copies of 'Nutrient Z' via Duel.SetChainLimitTillChainEnd. The OP08 text makes it a plain damage-calculation trigger, and the modern script matches - EVENT_PRE_DAMAGE_CALCULATE with condition Duel.GetBattleDamage(tp)>=2000, no hand-activation path and no chain limit.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700051,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700051.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-08-17",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of OP08-EN024 (OTS Tournament Pack 8), the printing carrying the rewritten trigger text"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "This card can only be activated during your opponent's Damage Step. During this turn, if you take Battle Damage of 2000 points or more, increase your Life Points by 4000 points before the damage is subtracted from your Life Points.",
+    "modern_text": "During damage calculation, when you are about to take 2000 or more battle damage: Gain 4000 LP first.",
+    "summary": "Functional erratum replacing a bespoke activation window with an ordinary trigger. LOD-096 read 'This card can only be activated during your opponent's Damage Step', and the GOAT script builds exactly that: a globally registered EVENT_PRE_BATTLE_DAMAGE effect with EFFECT_FLAG_SET_AVAILABLE offers the activation whenever you are about to take 2000+ battle damage while the card sits in your hand or Spell/Trap Zone, then activates an EVENT_FREE_CHAIN effect gated by a flag effect, and it limits the remainder of that chain to Counter Traps and other copies of 'Nutrient Z' via Duel.SetChainLimitTillChainEnd. The OP08 text makes it a plain damage-calculation trigger, and the modern script matches - EVENT_PRE_DAMAGE_CALCULATE with condition Duel.GetBattleDamage(tp)>=2000, no hand-activation path and no chain limit.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700051,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700051.lua"
+  }
 }

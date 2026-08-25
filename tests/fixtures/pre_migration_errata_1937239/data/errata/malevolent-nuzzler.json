@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-malevolent-nuzzler",
+  "modern_card": {
+    "passcode": 99597615,
+    "name": "Malevolent Nuzzler"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Increase the ATK of a monster equipped with this card by 700 points. When this card is sent from the field to the Graveyard, if you pay 500 Life Points, this card returns to the top of your Deck.",
+      "summary": "Period miss-timing behaviour, not a text erratum: the GOAT variant adds EFFECT_FLAG_DELAY to the optional 'sent from the field to the Graveyard' Trigger Effect, so it can still be activated when that send was not the last thing to happen; the modern script sets EFFECT_FLAG_DAMAGE_STEP alone, so the effect misses timing in exactly those cases. Upstream's note: 'Doesn't miss timing.' Nothing else differs: the variant's inline s.tdcost (Duel.CheckLPCost/Duel.PayLPCost of 500) is the expansion of the modern Cost.PayLP(500), and the literal 0 passed to Duel.SendtoDeck is the value of SEQ_DECKTOP (constant.lua:28).",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700176,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700176.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v3 (DB1-EN005, 2004-10-12), the GOAT entry's exact text; the whole lineage is behaviourally one card (equip, +700 ATK, optional 500 LP payment on being sent from the field to the Graveyard to place it on top of the Deck), so no text transition is recorded. The 'if you pay 500 Life Points, this card returns' phrasing of v2/v3 and the 'you can pay 500 Life Points to' phrasing of v1 and v4-v9 are both implemented as an optional trigger with a cost in both scripts. Nothing dates the miss-timing ruling, so effective is left empty. Conflicting evidence in the packet's lineage: index 5 and index 9 are both numbered SDSC-EN023 (Spellcaster's Command Structure Deck) but carry different texts, and index 9 - the PSCT text the pinned cdb entry matches - therefore carries earliest_tcg_date 2009-03-31, earlier than index 8 (BP02-EN132, 2013-06-28) which it follows. The lineage order is thus not monotonic in date, and index 9's date would understate when that text became available. This record does not depend on it (modern_text_version is null), but any later use of set-release evidence on version 9 would be unsafe. Lineage has no index 0 entry."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

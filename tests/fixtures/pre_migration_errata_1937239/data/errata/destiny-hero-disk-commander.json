@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-destiny-hero-disk-commander",
+  "modern_card": {
+    "passcode": 56570271,
+    "name": "Destiny HERO - Disk Commander"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2018-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Legendary Hero Decks (LEHD-ENA08), the first printing carrying the errata'd text"
+      },
+      "historical_text": "When this card is Special Summoned from the Graveyard: Draw 2 cards.",
+      "modern_text": "Cannot be Special Summoned from the GY the turn this card was sent to the GY. If this card is Special Summoned from the GY: You can draw 2 cards. You can only use this effect of \"Destiny HERO - Disk Commander\" once per Duel.",
+      "summary": "Functional erratum in three parts, all visible in the script diff. The draw became optional and once per Duel - modern EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O with SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL), against the historical EFFECT_TYPE_TRIGGER_F with no count limit, so historically every Special Summon from the Graveyard mandatorily drew 2. And the card gained 'Cannot be Special Summoned from the GY the turn this card was sent to the GY': the modern script adds a second effect on EVENT_TO_GRAVE that registers EFFECT_SPSUMMON_CONDITION until the end of that turn, which the historical script has no counterpart for. The modern trigger also carries EFFECT_FLAG_DELAY, which the historical mandatory trigger does not.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511003116,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003116.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v2 (RYMP-EN035, 2012-02-17), where text_matches_version points (ratio 0.9538). Earlier transitions are cosmetic and predate it: v0 (WC07-EN003, 2007-03-20) -> v1 (LCGX-EN133, 2011-10-04) is the PSCT colon, and v1 and v2 carry the same clean text in the packet, so nothing behavioural separates them; the Edison-era printing is v0 and behaves exactly as the baseline implements. The variant's cdb text uses 'If this card is Special Summoned from the Graveyard' where every printed version says 'When', which is upstream's wording rather than a printing - behaviour follows the script, which is a mandatory EVENT_SPSUMMON_SUCCESS trigger with the same graveyard-origin condition. Card data identical to modern (300/300, Level 1, DARK, Warrior)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

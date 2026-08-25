@@ -6,29 +6,14 @@
     "name": "Flying Kamakiri #1"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 WIND monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
-      "modern_text": "When this card is destroyed by battle and sent to the Graveyard: You can Special Summon 1 WIND monster with 1500 or less ATK from your Deck, in face-up Attack Position.",
-      "summary": "Two era behaviours carried by the script, neither visible in the printed text. (1) Relaxed activation condition: the GOAT target check is `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` alone, dropping the modern requirement that a WIND monster with 1500 or less ATK actually be Special Summonable from the Deck (`Duel.IsExistingMatchingCard(s.filter,...)`), so the optional Trigger may be activated on a whiff with only a free Monster Zone. (2) Failed-search verification: on a whiff the GOAT script reveals the Deck (`Duel.GoatConfirm(tp,LOCATION_DECK)`), which the modern script never does. (2) is the shared `search-verification` procedure, but (1) is the separate per-card question of activating with no valid target, which the shared brief warns changed per card at different dates; no source in the packet dates it for this card, so the combined change is recorded with chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700145,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700145.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 WIND monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+    "modern_text": "When this card is destroyed by battle and sent to the Graveyard: You can Special Summon 1 WIND monster with 1500 or less ATK from your Deck, in face-up Attack Position.",
+    "summary": "Two era behaviours carried by the script, neither visible in the printed text. (1) Relaxed activation condition: the GOAT target check is `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` alone, dropping the modern requirement that a WIND monster with 1500 or less ATK actually be Special Summonable from the Deck (`Duel.IsExistingMatchingCard(s.filter,...)`), so the optional Trigger may be activated on a whiff with only a free Monster Zone. (2) Failed-search verification: on a whiff the GOAT script reveals the Deck (`Duel.GoatConfirm(tp,LOCATION_DECK)`), which the modern script never does. (2) is the shared `search-verification` procedure, but (1) is the separate per-card question of activating with no valid target, which the shared brief warns changed per card at different dates; no source in the packet dates it for this card, so the combined change is recorded with chronology unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700145,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700145.lua"
+  }
 }

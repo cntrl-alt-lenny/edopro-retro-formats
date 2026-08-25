@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rivalry-of-warlords",
+  "modern_card": {
+    "passcode": 90846359,
+    "name": "Rivalry of Warlords"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Each player sends monsters from his/her side of the field to the Graveyard so that he/she only controls 1 Type of monster. As long as this card remains on the field, each player can only have 1 Type of monster on the field.",
+      "summary": "Two period behaviours with no text correlate. (1) The GOAT variant counts only face-up monsters that actually have a Type (s.faceupfil adds c:GetRace()~=0), both when enforcing the Type lock on Summons and when sweeping the field, so a card on the field as a monster with no Type - upstream names Magical Hats - is ignored; the modern script counts every face-up monster (Card.IsFaceup). (2) The modern script additionally registers an EFFECT_CANNOT_ACTIVATE field effect that blocks activating an effect whose cost changes the activating monster's own battle position when that monster's Type is not the controller's locked Type; the GOAT variant has no such restriction. Chronology unresolved: nothing in the packet dates either difference.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700158,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700158.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline implements lineage v1 (DR1-EN103, Dark Revelation Volume 1, 2005-03-19) exactly. v0 (MFC-048, 2003-10-10) -> v1 -> v4 (HISU-EN059, 2018-11-15) is wording only: v0's 'must send ... 1 Type of face-up monster ... can only Summon or control 1 Type of face-up monster at a time' loses 'face-up' at v1/v2 and regains it at v3 ('Send all other face-up monsters they control'), then Graveyard -> GY at v4; both scripts restrict the count to face-up monsters throughout, so none of it is implementation-relevant. One further diff line is left undocumented as a behaviour claim: the GOAT variant merges both players' groups and issues a single Duel.SendtoGrave(g,REASON_RULE), where the modern script sends each player's group separately with an explicit sending player (PLAYER_NONE,tp / PLAYER_NONE,1-tp); this could matter for simultaneity bookkeeping but the packet gives no period evidence either way, so no claim is made. Remaining diff is idiom (HintTiming | vs +, g:Iter() vs aux.Next(g), brace/newline style)."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

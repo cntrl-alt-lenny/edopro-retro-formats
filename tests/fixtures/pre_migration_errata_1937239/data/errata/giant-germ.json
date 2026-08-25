@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-giant-germ",
+  "modern_card": {
+    "passcode": 95178994,
+    "name": "Giant Germ"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "When this card is sent to the Graveyard as a result of battle, inflict 500 points of damage to your opponent's Life Points. You can also Special Summon up to 2 \"Giant Germ\" cards from your Deck to your side of the field in face-up Attack Position. Then shuffle your Deck.",
+      "summary": "Period procedure, not a text erratum: the modern script only offers the optional Special Summon when the Deck actually holds a copy (if #g>0 and Duel.SelectYesNo(...)), whereas the GOAT script offers it unconditionally (if Duel.SelectYesNo(...)) and, on an empty result, reveals the Deck to prove the whiff (Duel.GoatConfirm(tp,LOCATION_DECK)). The mandatory 500-damage trigger and its activation are identical on both sides - both s.target functions return true unconditionally - so this card's only implementation-relevant difference is the reveal procedure, with no relaxed activation condition involved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700167,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700167.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v1 (DB1-EN050, Dark Beginning 1, 2004-10-12) exactly. CONFLICTING EVIDENCE, preserved not resolved away: v1 and v2 (CP05-EN002, 2008-01-08) both cap the Special Summon at \"up to 2\" copies, and that cap was still the printed text across both target eras - \"any number\" only arrives with v3 (SRL-085 in Legendary Collection, 2010-10-01/2010-10-05), after the 2010-04-24 Edison snapshot - yet upstream's GOAT script enforces no cap at all: it selects g:Select(tp,1,ft,nil) up to the free Monster Zone count, exactly as the modern script does. The record treats the wording as cosmetic rather than functional for two reasons: at most two copies can remain in the Deck once one has been destroyed by battle, so the cap and \"any number\" coincide in ordinary play (they diverge only if a copy is returned to the Deck), and Project Ignis's own period variant encodes no cap. A reviewer who disagrees would need a custom script and a reserved passcode to reproduce a hard 2-copy limit. Lineage v0 (MRL-085, 2002-09-16) was itself uncapped, and v4 (LCYW-EN234, 2012-09-29) is PSCT. Other script diffs are non-behavioural: s.listed_names/s.filter constant substitution, SetPossibleOperationInfo -> SetOperationInfo in the target (chain-announcement only), and removal of a shadowed dead \"local ft\" line at the head of s.operation. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

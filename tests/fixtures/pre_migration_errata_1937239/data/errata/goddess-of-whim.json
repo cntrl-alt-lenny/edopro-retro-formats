@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-goddess-of-whim",
+  "modern_card": {
+    "passcode": 67959180,
+    "name": "Goddess of Whim"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN241, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.",
+      "modern_text": "Once per turn: You can toss a coin and call Heads or Tails. If you call it right, double this card's ATK during this turn. If you call it wrong, halve its ATK during this turn.",
+      "summary": "Functional erratum: the era text \"Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.\" carries no activation limit, so the Ignition effect may be activated more than once in the same Main Phase, each resolution again doubling or halving the card's current ATK. The errata'd text prefixes \"Once per turn:\", a hard once-per-turn cap. The remaining rewording (\"You can\", \"If you call it right, double this card's ATK\") is PSCT.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In a period format EDOPro allows only one coin toss per turn, so a player cannot chain repeated activations to push Goddess of Whim's ATK past 3800 (or gamble it down) the way the era text permits.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty; no historical variant of 67959180 exists upstream. The English lineage has only two versions: v0 (MP1-003, McDonald's Promotional Cards, 2002-12-20) and v1 (LCYW-EN241, 2012-09-29), so v0 is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). The pinned cards.cdb text matches v1 exactly. Goddess of Whim is not on the EdisonFormat.com Functional Errata list, so the once-per-turn addition is corroborated only by the lineage; the list does document the same pattern for other pre-2011 cards (Catapult Turtle, Brionac, Treeborn Frog \"no once-per-turn restriction in Edison\"), which is context, not evidence about this card."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

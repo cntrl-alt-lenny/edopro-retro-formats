@@ -6,44 +6,68 @@
     "name": "Bark of Dark Ruler"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "You can only activate this card during the Damage Step of a Battle Phase if a Fiend-Type monster on your side of the field battles. Pay Life Points (in multiples of 100 points) to decrease 1 of your opponent's monster's ATK and DEF by the same amount of points until the End Phase of that turn.",
-      "summary": "Era damage-step legality, not a text erratum: the GOAT script legalises the effect only inside the damage-calculation substep (EFFECT_FLAG_DAMAGE_CAL, hint TIMING_DAMAGE_CAL, condition rejecting anything where 'Duel.GetCurrentPhase()~=PHASE_DAMAGE_CAL or Duel.IsDamageCalculated()'), while the modern script legalises it in the damage step before damage calculation and rejects it once damage calculation is reached (EFFECT_FLAG_DAMAGE_STEP, 'phase~=PHASE_DAMAGE or Duel.IsDamageCalculated()'). PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct, so the two activation windows are disjoint. No dated source for when the window moved was found; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card during the Damage Step of a Battle Phase if a Fiend-Type monster on your side of the field battles. Pay Life Points (in multiples of 100 points) to decrease 1 of your opponent's monster's ATK and DEF by the same amount of points until the End Phase of that turn.",
+          "modern_text": null,
+          "summary": "Era damage-step legality, not a text erratum: the GOAT script legalises the effect only inside the damage-calculation substep (EFFECT_FLAG_DAMAGE_CAL, hint TIMING_DAMAGE_CAL, condition rejecting anything where 'Duel.GetCurrentPhase()~=PHASE_DAMAGE_CAL or Duel.IsDamageCalculated()'), while the modern script legalises it in the damage step before damage calculation and rejects it once damage calculation is reached (EFFECT_FLAG_DAMAGE_STEP, 'phase~=PHASE_DAMAGE or Duel.IsDamageCalculated()'). PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct, so the two activation windows are disjoint. No dated source for when the window moved was found; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2023-03-30",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (SGX3-ENE20, Speed Duel GX: Duelists of Shadows)"
       },
-      "historical_text": "You can only activate this card during the Damage Step of a Battle Phase if a Fiend-Type monster on your side of the field battles. Pay Life Points (in multiples of 100 points) to decrease 1 of your opponent's monster's ATK and DEF by the same amount of points until the End Phase of that turn.",
-      "modern_text": "If a Fiend monster you control battles, during the Damage Step: Pay LP in multiples of 100, then target the opponent's battling monster; that opponent's monster loses that much ATK and DEF, until the end of this turn.",
-      "summary": "Wording modernisation only across three printings (v3 BP03-EN191 PSCT rewrite, v4 SBCB-EN124, v5 SGX3-ENE20 'Pay LP in multiples of 100'). The PSCT text spells out 'then target the opponent's battling monster', but both scripts already carry EFFECT_FLAG_CARD_TARGET and both target the battling monster held in the condition's label object, so targeting did not change.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can only activate this card during the Damage Step of a Battle Phase if a Fiend-Type monster on your side of the field battles. Pay Life Points (in multiples of 100 points) to decrease 1 of your opponent's monster's ATK and DEF by the same amount of points until the End Phase of that turn.",
+          "modern_text": "If a Fiend monster you control battles, during the Damage Step: Pay LP in multiples of 100, then target the opponent's battling monster; that opponent's monster loses that much ATK and DEF, until the end of this turn.",
+          "summary": "Wording modernisation only across three printings (v3 BP03-EN191 PSCT rewrite, v4 SBCB-EN124, v5 SGX3-ENE20 'Pay LP in multiples of 100'). The PSCT text spells out 'then target the opponent's battling monster', but both scripts already carry EFFECT_FLAG_CARD_TARGET and both target the battling monster held in the condition's label object, so targeting did not change.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700070,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700070.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700070,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700070.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

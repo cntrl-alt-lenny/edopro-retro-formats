@@ -6,28 +6,14 @@
     "name": "Machine Duplication"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 Machine-Type monster with an ATK of 500 or less on your side of the field and activate this card. You can Special Summon up to 2 cards with the same name from your Deck.",
-      "summary": "Period ruling package. Activation condition: the modern `s.filter` requires, on top of face-up/Machine/500-or-less-ATK, that `Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)` - a Deck copy of the chosen monster's name - while the goat filter drops that clause, so the card can be activated targeting a Machine whose copies are all gone. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700104,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700104.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 Machine-Type monster with an ATK of 500 or less on your side of the field and activate this card. You can Special Summon up to 2 cards with the same name from your Deck.",
+    "modern_text": null,
+    "summary": "Period ruling package. Activation condition: the modern `s.filter` requires, on top of face-up/Machine/500-or-less-ATK, that `Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)` - a Deck copy of the chosen monster's name - while the goat filter drops that clause, so the card can be activated targeting a Machine whose copies are all gone. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700104,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700104.lua"
+  }
 }

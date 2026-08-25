@@ -6,29 +6,14 @@
     "name": "Shadow Spell"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 face-up monster on your opponent's side of the field. Decrease the ATK of the selected monster by 700 points. The monster cannot attack or change its battle position. When the selected monster is destroyed or removed from the field, this card is also destroyed.",
-      "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag passed to aux.AddPersistentProcedure: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a byte-for-byte inlining of aux.StatChangeDamageStepCondition (not (PHASE_DAMAGE and IsDamageCalculated())), and everything else in the diff is idiom (a space in Duel.Destroy). That is a damage-step-structure matter the GOAT rule profile already sets globally - DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP - not a card erratum, and nothing in the packet dates the flag change, so its chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700050,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700050.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 face-up monster on your opponent's side of the field. Decrease the ATK of the selected monster by 700 points. The monster cannot attack or change its battle position. When the selected monster is destroyed or removed from the field, this card is also destroyed.",
+    "modern_text": null,
+    "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag passed to aux.AddPersistentProcedure: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a byte-for-byte inlining of aux.StatChangeDamageStepCondition (not (PHASE_DAMAGE and IsDamageCalculated())), and everything else in the diff is idiom (a space in Duel.Destroy). That is a damage-step-structure matter the GOAT rule profile already sets globally - DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP - not a card erratum, and nothing in the packet dates the flag change, so its chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700050,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700050.lua"
+  }
 }

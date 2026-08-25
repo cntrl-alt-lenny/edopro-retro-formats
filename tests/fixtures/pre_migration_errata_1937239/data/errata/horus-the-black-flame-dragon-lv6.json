@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-horus-the-black-flame-dragon-lv6",
+  "modern_card": {
+    "passcode": 11224103,
+    "name": "Horus the Black Flame Dragon LV6"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "As long as this card remains face-up on your side of the field, it is unaffected by any Spell Cards. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard, Special Summon 1 \"Horus the Black Flame Dragon LV8\" from your hand or Deck.",
+      "summary": "The GOAT variant encodes two era behaviours that no printed text shows. Activation condition: modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...)`, while the goat target checks only for a free zone (`return ft>0`), so the End Phase effect can be used - and the send-this-card-to-the-Graveyard cost paid - with no \"Horus the Black Flame Dragon LV8\" in hand or Deck. Failed-search verification: when the Summon finds nothing the goat script reveals hand and Deck via `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, which the modern script never does. The verification half is bounded by the shared search-verification chronology, but the relaxed activation condition is undated for this card, so the transition as a whole is recorded unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700015,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700015.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Everything else in the diff is refactoring, verified against the shipped files: the goat `s.spcost` is byte-equivalent to `Cost.SelfToGrave` (utility.lua:1434, same `IsAbleToGraveAsCost` check and `Duel.SendtoGrave(c,REASON_COST)`); `te:IsActiveType(TYPE_SPELL)` is exactly what `Effect.IsSpellEffect` is defined as (utility.lua:789-791); `s.LVset=0x3` vs `SET_HORUS_BLACK_FLAME_DRAGON` and `RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END` vs `RESETS_STANDARD_PHASE_END` are constant-style only. Text lineage v0 (SOD-EN007, 2004-10-01) -> v1 (DR3-EN007, 2006) -> v2 (SDRL-EN012, 2007) -> v3 (LCYW-EN198, 2012) is cosmetic throughout: the Spell immunity wording is reworded three times with no script consequence. Worth noting but NOT recorded as a change: v0/v1 read as mandatory (\"send this card to the Graveyard, Special Summon 1 ...\") and only v2 adds \"you can\"; upstream's goat script, which matches v0 exactly, already registers the effect as EFFECT_TYPE_TRIGGER_O (optional), so upstream's own era implementation settles the ambiguity as optional and no functional transition exists. Chronology bound for the verification half only: old state attested through 2011-02-02, modern state from 2019-04-03 (shared entry search-verification)."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

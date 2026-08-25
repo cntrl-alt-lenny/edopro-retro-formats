@@ -6,28 +6,14 @@
     "name": "Magical Hats"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 2 non-Monster Cards from your Deck and 1 of your Monster Cards on the field, then shuffle your Deck. Shuffle the 3 selected cards and Set them on the field in face-down Defense Position. The 2 cards selected from your Deck are treated as monsters (ATK 0/DEF 0) and are destroyed at the end of the Battle Phase. You can only use this effect during your opponent's Battle Phase.",
-      "summary": "Period ruling package. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,2,nil,e,tp)` - two eligible Spell/Trap cards actually in the Deck - while the goat condition drops that clause entirely, so Magical Hats can be activated during the opponent's Battle Phase with fewer than two hats available. Failed-search verification: where the modern script bails out with `if #g<2 then return end`, the goat script substitutes `if #g<2 then Duel.GoatConfirm(tp,LOCATION_DECK) end`, revealing the Deck. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700140,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700140.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 2 non-Monster Cards from your Deck and 1 of your Monster Cards on the field, then shuffle your Deck. Shuffle the 3 selected cards and Set them on the field in face-down Defense Position. The 2 cards selected from your Deck are treated as monsters (ATK 0/DEF 0) and are destroyed at the end of the Battle Phase. You can only use this effect during your opponent's Battle Phase.",
+    "modern_text": null,
+    "summary": "Period ruling package. Activation condition: the modern `s.target` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,2,nil,e,tp)` - two eligible Spell/Trap cards actually in the Deck - while the goat condition drops that clause entirely, so Magical Hats can be activated during the opponent's Battle Phase with fewer than two hats available. Failed-search verification: where the modern script bails out with `if #g<2 then return end`, the goat script substitutes `if #g<2 then Duel.GoatConfirm(tp,LOCATION_DECK) end`, revealing the Deck. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700140,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700140.lua"
+  }
 }

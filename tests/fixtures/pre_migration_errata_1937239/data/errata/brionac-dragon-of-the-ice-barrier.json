@@ -1,0 +1,65 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-brionac-dragon-of-the-ice-barrier",
+  "modern_card": {
+    "passcode": 50321796,
+    "name": "Brionac, Dragon of the Ice Barrier"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-03-30",
+        "precision": "day",
+        "status": "verified",
+        "basis": "TCG release of Duelist Saga (DUSA-EN073), the first printing carrying the errata'd text Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "1 Tuner + 1 or more non-Tuner monstersYou can discard any number of cards to the Graveyard to target the same number of cards on the field; return those targets to the hand.",
+      "modern_text": "1 Tuner + 1 or more non-Tuner monstersYou can discard any number of cards to the Graveyard, then target the same number of cards your opponent controls; return those cards to the hand. You can only use this effect of \"Brionac, Dragon of the Ice Barrier\" once per turn.",
+      "summary": "Functional erratum: the discard-to-bounce Ignition effect gained a hard once per turn (modern e1:SetCountLimit(1,id); the historical script sets no count limit, so it can be used repeatedly in a turn) and its targets were narrowed to the opponent's side - modern Duel.SelectTarget(tp,Card.IsAbleToHand,tp,0,LOCATION_ONFIELD,...) against the historical tp,LOCATION_ONFIELD,LOCATION_ONFIELD, which reaches either player's field. The discard remains a cost in both (historical Duel.SendtoGrave(cg,REASON_COST+REASON_DISCARD) inside the cost function).",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002993,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002993.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v3 (H5SE-EN001, 2012-03-30), the version the baseline best matches. Earlier transitions v0 (HA01-EN022, 2009-11-05) -> v1 (undated) -> v2 (DT01-EN031, 2010-01-29) -> v3 are PSCT rewordings ('discard any number of cards to return the same number of cards from the field to the hand' -> 'discard ... to target the same number of cards on the field; return those targets to the hand') that formalise targeting without changing resolution; the Edison-era printing is v2 and behaves as the baseline implements. Trailing v4 -> v5 (DUDE-EN008, 2019-10-10) is the Graveyard/GY rewording, cosmetic, not recorded. Minor note: the variant's cdb text ('You can discard any number of cards, then target an equal number of cards on the field; return them to the hand.') is upstream's own paraphrase rather than any printed version (closest v3, ratio 0.8397), though it states the same behaviour as v2/v3. Card data identical to modern (2300/1400, Level 6, WATER, Sea Serpent, Synchro)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata",
+    "konami-errata-announcements"
+  ]
+}

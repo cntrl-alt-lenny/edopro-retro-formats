@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-d-d-survivor",
+  "modern_card": {
+    "passcode": 48092532,
+    "name": "D.D. Survivor"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN224, Legendary Collection 2: The Duel Academy Years Mega Pack)"
+      },
+      "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
+      "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
+      "summary": "Functional erratum: LCGX-EN224 appends 'This effect can only activate once per turn' to a Trigger Effect that carried no use limit in any earlier printing ('When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase'). Without the limit the return can fire more than once in the same End Phase - the card comes back, is banished again in that End Phase, and returns again - which the errata'd card refuses. The same printing restates the trigger in PSCT form ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn').",
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In Edison, D.D. Survivor's End Phase return has no once-per-turn cap, so a copy banished a second time during that End Phase should return a second time; the shipped card allows one return per turn.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "upstream_implementations is empty. The Lost Millennium released 2005-06-01, after the 2005-04-01 GOAT snapshot, so only the Edison pool is in scope; the text in force at 2010-04-24 is v3 (SDDE-EN014, 2008-04-02), which is the baseline. Pre-baseline versions are behaviourally the same trigger with drifting phrasing: v0 (TLM-EN023, 2005-06-01) 'this card is Special Summoned to the owner's side of the field', v1 (DR3-EN203, 2006-11-25), and v2 (CP04-EN019, 2007-09-06), which momentarily drops 'on your side of the field' before SDDE restores it. Trailing v4 -> v5 (SGX3-ENF06, 2023-03-30) is 'on your side of the field' -> 'on your field' and is the pinned cdb text. Independent corroboration that this card's era behaviour is documented as differing from the modern card: edisonformat.com's Functional Errata list carries a D.D. Survivor entry stating the End Phase return Trigger 'cannot activate if the card was face-down when attacked and destroyed' - a face-up-before-banishment requirement the era text states explicitly. That entry corroborates era-specific handling of this Trigger; it does not itself speak to the once-per-turn erratum recorded here, and per the shared briefs it dates nothing."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

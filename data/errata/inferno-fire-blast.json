@@ -6,28 +6,14 @@
     "name": "Inferno Fire Blast"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 face-up \"Red-Eyes B. Dragon\" on your side of the field to activate this card. Inflict damage to your opponent's Life Points equal to the original ATK of the selected \"Red-Eyes B. Dragon\". \"Red-Eyes B. Dragon\" cannot attack during the turn you use this card.",
-      "summary": "Era handling of the attack restriction, not a text erratum: the GOAT script registers the '\"Red-Eyes B. Dragon\" cannot attack' field effect inside s.activate, on resolution, with no EFFECT_FLAG_OATH and no EFFECT_FLAG_IGNORE_IMMUNE, while the modern script registers it inside s.cost, at activation, carrying both flags. So in the era version a negated Inferno Fire Blast imposes no attack restriction at all, and a Red-Eyes immune to this card's effects can still attack, whereas the modern card restricts regardless of negation or immunity. Damage is the target's original ATK in both. Chronology is unresolved - no source in the packet dates the change.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700085,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700085.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 face-up \"Red-Eyes B. Dragon\" on your side of the field to activate this card. Inflict damage to your opponent's Life Points equal to the original ATK of the selected \"Red-Eyes B. Dragon\". \"Red-Eyes B. Dragon\" cannot attack during the turn you use this card.",
+    "modern_text": null,
+    "summary": "Era handling of the attack restriction, not a text erratum: the GOAT script registers the '\"Red-Eyes B. Dragon\" cannot attack' field effect inside s.activate, on resolution, with no EFFECT_FLAG_OATH and no EFFECT_FLAG_IGNORE_IMMUNE, while the modern script registers it inside s.cost, at activation, carrying both flags. So in the era version a negated Inferno Fire Blast imposes no attack restriction at all, and a Red-Eyes immune to this card's effects can still attack, whereas the modern card restricts regardless of negation or immunity. Damage is the target's original ATK in both. Chronology is unresolved - no source in the packet dates the change.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700085,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700085.lua"
+  }
 }

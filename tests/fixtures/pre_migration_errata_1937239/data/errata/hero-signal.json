@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-hero-signal",
+  "modern_card": {
+    "passcode": 22020907,
+    "name": "Hero Signal"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Old state: UDE official card rulings (Sangan/Witch: 'If you have no eligible monsters, your opponent gets to see your Deck to verify', captured 2005-06-16) through Konami's own per-set rulings documents - Machina Mayhem (2010-04-06, 18 days before the Edison snapshot), Starstrike Blast (2010-11-16), Storm of Ragnarok (2011-02-02). New state: KDE-US Tournament Policy section 'Card/Hand/Deck Verification' forbids verifying the opponent's Deck (first located capture 2019-04-03; still current in v2.5, 2025-09-05). No dated announcement of the change was found, so the interval 2011-02-02 .. 2019-04-03 stays open.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16, inside the GOAT window)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010 (18 days before the Edison snapshot)",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011 - the latest positive attestation of the old state",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
+      "summary": "Period procedure, not a text erratum: when the GOAT script's s.operation finds no Level 4 or lower \"Elemental HERO\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
+      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target keeps only the free-Monster-Zone check and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the Trap can be activated off a battle destruction with no eligible \"Elemental HERO\" to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700031,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700031.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text matches lineage v0 (TLM-EN049, The Lost Millennium, 2005-06-01) exactly - the card's first TCG printing. Trailing lineage is cosmetic: v1 (DP1-EN028, 2006-02-08) reorders \"destroyed ... and sent to the Graveyard\"; v2 (DR3-EN229, 2006-11-25) contracts to \"Elemental Hero monster\" and \"Activate only when\"; v3 (LCGX-EN107, 2011-10-04) is PSCT with \"you control\"; v4 (SGX1-ENA20, 2022-03-17) abbreviates GY. The battle-destruction condition function s.cfilter is identical on both sides; the only other diffs are the SET_ELEMENTAL_HERO vs 0x3008 constant and | vs + location spelling. Separately noted: the card's first printing (2005-06-01) postdates the 2005-04-01 GOAT snapshot - a pool question for the format definition, not a text question. Upstream ships one GOAT script encoding both ruling behaviours, so no implementation exists for a state in which only one had changed, and with (B) undated the pair cannot be sequenced. Not listed on EdisonFormat.com's Functional Errata page."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

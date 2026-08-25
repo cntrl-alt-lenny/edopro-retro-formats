@@ -6,28 +6,14 @@
     "name": "Mokey Mokey Smackdown"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "While a face-up \"Mokey Mokey\" is on your side of the field, if a Fairy-Type monster on your side of the field is destroyed, the ATK of all \"Mokey Mokey\" on your side of the field becomes 3000 until the End Phase of this turn.",
-      "summary": "Era trigger timing with no text difference: the GOAT script excludes battle destruction from its EVENT_DESTROYED path (not c:IsReason(REASON_BATTLE)) and registers the ATK-setting flag from a cloned EVENT_BATTLED effect instead, testing Duel.GetAttacker()/Duel.GetAttackTarget() with Card.IsBattleDestroyed while the Fairy is still face-up in the Monster Zone - upstream annotates this 'Battle destroyed registers while the mosnter is on field'. It also tests the destroyed monster's race directly (Card.IsRace) where the modern script uses Card.IsPreviousRaceOnField, so a monster made Fairy only while on the field no longer qualifies once it is in the Graveyard. No source in the packet dates either difference, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700005,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700005.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -37,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "While a face-up \"Mokey Mokey\" is on your side of the field, if a Fairy-Type monster on your side of the field is destroyed, the ATK of all \"Mokey Mokey\" on your side of the field becomes 3000 until the End Phase of this turn.",
+    "modern_text": null,
+    "summary": "Era trigger timing with no text difference: the GOAT script excludes battle destruction from its EVENT_DESTROYED path (not c:IsReason(REASON_BATTLE)) and registers the ATK-setting flag from a cloned EVENT_BATTLED effect instead, testing Duel.GetAttacker()/Duel.GetAttackTarget() with Card.IsBattleDestroyed while the Fairy is still face-up in the Monster Zone - upstream annotates this 'Battle destroyed registers while the mosnter is on field'. It also tests the destroyed monster's race directly (Card.IsRace) where the modern script uses Card.IsPreviousRaceOnField, so a monster made Fairy only while on the field no longer qualifies once it is in the Graveyard. No source in the packet dates either difference, so the chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700005,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700005.lua"
+  }
 }

@@ -6,34 +6,14 @@
     "name": "Chaos Emperor Dragon - Envoy of the End"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2018-11-21",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (JUMP-EN086, Weekly Shonen Jump November 2018 membership promotional card)"
-      },
-      "historical_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your Graveyard. You can pay 1000 Life Points; send all cards in both players' hands and on the field to the Graveyard, then inflict 300 damage to your opponent for each card sent to the Graveyard by this effect.",
-      "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your GY. Once per turn: You can pay 1000 LP; send as many cards in both players' hands and on the field as possible to the GY, then inflict 300 damage to your opponent for each card sent to the opponent's GY by this effect. You cannot activate other cards or effects during the turn you activate this card's effect.",
-      "summary": "Functional erratum: the Ignition effect gained 'Once per turn' plus the 'you cannot activate other cards or effects during the turn you activate this card's effect' lock (modern e3:SetCountLimit(1), the ACTIVITY_CHAIN custom counter and the EFFECT_CANNOT_ACTIVATE oath registered in the cost - all absent from pre-errata/c511000819.lua), and its damage now counts only cards sent to the opponent's GY rather than every card sent by both players. The Summon restriction also became absolute: the pre-errata script registers only EFFECT_SPSUMMON_PROC alongside EnableReviveLimit, so after a proper Special Summon the card can be revived from the GY, while the modern script adds EFFECT_SPSUMMON_CONDITION, which forbids any Special Summon other than its own procedure.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000819,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000819.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2018-11-21",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (JUMP-EN086, Weekly Shonen Jump November 2018 membership promotional card)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your Graveyard. You can pay 1000 Life Points; send all cards in both players' hands and on the field to the Graveyard, then inflict 300 damage to your opponent for each card sent to the Graveyard by this effect.",
+    "modern_text": "Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 1 LIGHT and 1 DARK monster from your GY. Once per turn: You can pay 1000 LP; send as many cards in both players' hands and on the field as possible to the GY, then inflict 300 damage to your opponent for each card sent to the opponent's GY by this effect. You cannot activate other cards or effects during the turn you activate this card's effect.",
+    "summary": "Functional erratum: the Ignition effect gained 'Once per turn' plus the 'you cannot activate other cards or effects during the turn you activate this card's effect' lock (modern e3:SetCountLimit(1), the ACTIVITY_CHAIN custom counter and the EFFECT_CANNOT_ACTIVATE oath registered in the cost - all absent from pre-errata/c511000819.lua), and its damage now counts only cards sent to the opponent's GY rather than every card sent by both players. The Summon restriction also became absolute: the pre-errata script registers only EFFECT_SPSUMMON_PROC alongside EnableReviveLimit, so after a proper Special Summon the card can be revived from the GY, while the modern script adds EFFECT_SPSUMMON_CONDITION, which forbids any Special Summon other than its own procedure.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb",
+      "ignis-cardscripts"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511000819,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000819.lua"
+  }
 }

@@ -6,34 +6,14 @@
     "name": "Super Rejuvenation"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2013-10-11",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN287, Legendary Collection 4: Joey's World Mega Pack)"
-      },
-      "historical_text": "During the End Phase of the turn this card is activated, draw 1 card from your Deck for each Dragon-Type monster discarded from your hand and/or Tributed during this turn.",
-      "modern_text": "During the End Phase of the turn this card was activated, draw a number of cards equal to the combined number of Dragon-Type monsters you discarded or Tributed from your hand or your side of the field this turn.",
-      "summary": "Functional erratum: the draw count changed from 'each Dragon-Type monster discarded from your hand and/or Tributed during this turn' to 'the combined number of Dragon monsters YOU discarded or Tributed from your hand or field this turn', and the attribution of a field Tribute changed with it. The goat script credits a Dragon Tributed from the Monster Zone to tc:GetPreviousControler() - its controller - so a Dragon of yours that your OPPONENT Tributes still counts for you; the modern script credits it to tc:GetReasonPlayer(), the player who performed the Tribute. Upstream annotates the variant 'Monsters tributed by the opponent on your field count among yours'. Hand discards are credited to the previous controller in both.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700049,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700049.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2013-10-11",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCJW-EN287, Legendary Collection 4: Joey's World Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "During the End Phase of the turn this card is activated, draw 1 card from your Deck for each Dragon-Type monster discarded from your hand and/or Tributed during this turn.",
+    "modern_text": "During the End Phase of the turn this card was activated, draw a number of cards equal to the combined number of Dragon-Type monsters you discarded or Tributed from your hand or your side of the field this turn.",
+    "summary": "Functional erratum: the draw count changed from 'each Dragon-Type monster discarded from your hand and/or Tributed during this turn' to 'the combined number of Dragon monsters YOU discarded or Tributed from your hand or field this turn', and the attribution of a field Tribute changed with it. The goat script credits a Dragon Tributed from the Monster Zone to tc:GetPreviousControler() - its controller - so a Dragon of yours that your OPPONENT Tributes still counts for you; the modern script credits it to tc:GetReasonPlayer(), the player who performed the Tribute. Upstream annotates the variant 'Monsters tributed by the opponent on your field count among yours'. Hand discards are credited to the previous controller in both.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700049,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700049.lua"
+  }
 }

@@ -6,30 +6,14 @@
     "name": "Mind Crush"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Declare 1 card name. If that card is in your opponent's hand, they must discard all copies of it in their hand. If it is not, you randomly discard 1 card.",
-      "summary": "Period procedure bundled with a declaration-scope difference, not a text erratum: at resolution the pre-errata script reveals the opponent's entire hand to you (Duel.ConfirmCards(tp,hg)) and then shuffles it (Duel.ShuffleHand(1-tp)), the era's verification procedure for a declared-name call, which the modern script never does; and it declares through an unfiltered Duel.AnnounceCard(tp), so any name including an Extra Deck monster may be called, while the modern script blocks Extra Deck monsters with announce_filter. Chronology is unresolved: the verification element sits inside the shared search-verification bounds, but the declaration-scope element is undated in the packet, so no date evidence is claimed for the change as a whole. Every English lineage text from v0 to v4 is behaviourally identical.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003026,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003026.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -40,5 +24,28 @@
     "ignis-babelcdb",
     "yugipedia-card-errata",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Declare 1 card name. If that card is in your opponent's hand, they must discard all copies of it in their hand. If it is not, you randomly discard 1 card.",
+    "modern_text": null,
+    "summary": "Period procedure bundled with a declaration-scope difference, not a text erratum: at resolution the pre-errata script reveals the opponent's entire hand to you (Duel.ConfirmCards(tp,hg)) and then shuffles it (Duel.ShuffleHand(1-tp)), the era's verification procedure for a declared-name call, which the modern script never does; and it declares through an unfiltered Duel.AnnounceCard(tp), so any name including an Extra Deck monster may be called, while the modern script blocks Extra Deck monsters with announce_filter. Chronology is unresolved: the verification element sits inside the shared search-verification bounds, but the declaration-scope element is undated in the packet, so no date evidence is claimed for the change as a whole. Every English lineage text from v0 to v4 is behaviourally identical.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003026,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003026.lua"
+  }
 }

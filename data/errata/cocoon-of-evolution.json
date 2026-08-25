@@ -6,29 +6,14 @@
     "name": "Cocoon of Evolution"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can equip this card from your hand as an Equip Spell Card to a face-up \"Petit Moth\" on the field. If equipped, the ATK and DEF of \"Cocoon of Evolution\" is applied to \"Petit Moth\".",
-      "summary": "Two period behaviours the printed text never carried, both present only in goat/c504700067.lua: the equip activation takes a cost gated on Duel.CheckSummonedCount() and calls Duel.IncreaseSummonedCount(), so equipping this Monster Card from the hand consumes your Normal Summon for the turn; and its EFFECT_EQUIP_LIMIT is registered with EFFECT_FLAG_CANNOT_DISABLE, so the card stays equipped while Spell effects are negated (the upstream annotation names Imperial Order). The modern script has neither. Chronology is unresolved: nothing in the packet or the shared chronologies dates when either ruling stopped applying, so no effective bounds are asserted.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700067,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700067.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can equip this card from your hand as an Equip Spell Card to a face-up \"Petit Moth\" on the field. If equipped, the ATK and DEF of \"Cocoon of Evolution\" is applied to \"Petit Moth\".",
+    "modern_text": null,
+    "summary": "Two period behaviours the printed text never carried, both present only in goat/c504700067.lua: the equip activation takes a cost gated on Duel.CheckSummonedCount() and calls Duel.IncreaseSummonedCount(), so equipping this Monster Card from the hand consumes your Normal Summon for the turn; and its EFFECT_EQUIP_LIMIT is registered with EFFECT_FLAG_CANNOT_DISABLE, so the card stays equipped while Spell effects are negated (the upstream annotation names Imperial Order). The modern script has neither. Chronology is unresolved: nothing in the packet or the shared chronologies dates when either ruling stopped applying, so no effective bounds are asserted.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700067,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700067.lua"
+  }
 }

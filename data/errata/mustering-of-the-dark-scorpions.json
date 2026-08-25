@@ -6,54 +6,84 @@
     "name": "Mustering of the Dark Scorpions"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2005-03-19",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Dark Revelation Volume 1 (DR1-EN255), the printing carrying the v1 wording"
       },
-      "historical_text": "You can only activate this card when you have \"Don Zaloog\" face-up on your side of the field. You can Special Summon any of the cards from your hand that include \"Dark Scorpion\" in the card name, or are named \"Cliff the Trap Remover\". You cannot Special Summon 2 cards with the same card name by the effect of this card.",
-      "modern_text": "You can only activate this card when there is a face-up \"Don Zaloog\"(s) on your side of the field. You can Special Summon from your hand any of the cards that include \"Dark Scorpion\" in their card name, or are named \"Cliff the Trap Remover\". (You can only Special Summon up to 1 card with each card name.)",
-      "summary": "Wording only: the activation condition is restated (\"when you have \\\"Don Zaloog\\\" face-up on your side of the field\" -> \"when there is a face-up \\\"Don Zaloog\\\"(s) on your side of the field\") and the same-name limit is moved into a reminder bracket (\"You cannot Special Summon 2 cards with the same card name by the effect of this card\" -> \"(You can only Special Summon up to 1 card with each card name.)\"). The eligible-card clause - names containing \"Dark Scorpion\", or \"Cliff the Trap Remover\" - is unchanged, and the effect resolves identically.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can only activate this card when you have \"Don Zaloog\" face-up on your side of the field. You can Special Summon any of the cards from your hand that include \"Dark Scorpion\" in the card name, or are named \"Cliff the Trap Remover\". You cannot Special Summon 2 cards with the same card name by the effect of this card.",
+          "modern_text": "You can only activate this card when there is a face-up \"Don Zaloog\"(s) on your side of the field. You can Special Summon from your hand any of the cards that include \"Dark Scorpion\" in their card name, or are named \"Cliff the Trap Remover\". (You can only Special Summon up to 1 card with each card name.)",
+          "summary": "Wording only: the activation condition is restated (\"when you have \\\"Don Zaloog\\\" face-up on your side of the field\" -> \"when there is a face-up \\\"Don Zaloog\\\"(s) on your side of the field\") and the same-name limit is moved into a reminder bracket (\"You cannot Special Summon 2 cards with the same card name by the effect of this card\" -> \"(You can only Special Summon up to 1 card with each card name.)\"). The eligible-card clause - names containing \"Dark Scorpion\", or \"Cliff the Trap Remover\" - is unchanged, and the effect resolves identically.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2012-06-07",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (GLD5-EN042, Gold Series: Haunted Mine)"
       },
-      "historical_text": "You can only activate this card when there is a face-up \"Don Zaloog\"(s) on your side of the field. You can Special Summon from your hand any of the cards that include \"Dark Scorpion\" in their card name, or are named \"Cliff the Trap Remover\". (You can only Special Summon up to 1 card with each card name.)",
-      "modern_text": "If you control a face-up \"Don Zaloog\": You can Special Summon any number of \"Dark Scorpion\" monsters from your hand, but only 1 copy of each.",
-      "summary": "Functional erratum: the era text defines the Special Summonable set by English card-name matching plus one named exception - \"any of the cards that include \\\"Dark Scorpion\\\" in their card name, or are named \\\"Cliff the Trap Remover\\\"\" - while the errata'd text replaces both clauses with a single archetype reference, \"any number of \\\"Dark Scorpion\\\" monsters from your hand, but only 1 copy of each\". The dropped Cliff clause is itself the evidence that archetype membership is wider than name matching, and the archetype also contains \"Don Zaloog\", so the modern card can Special Summon a second \"Don Zaloog\" out of the hand where the era text could not reach it.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
-    }
-  ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In a period format EDOPro resolves Mustering against the \"Dark Scorpion\" archetype rather than the era's name-match-plus-Cliff list, so it will Special Summon a second \"Don Zaloog\" (and any other archetype member whose English name lacks the string) that the era text excludes.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "You can only activate this card when there is a face-up \"Don Zaloog\"(s) on your side of the field. You can Special Summon from your hand any of the cards that include \"Dark Scorpion\" in their card name, or are named \"Cliff the Trap Remover\". (You can only Special Summon up to 1 card with each card name.)",
+          "modern_text": "If you control a face-up \"Don Zaloog\": You can Special Summon any number of \"Dark Scorpion\" monsters from your hand, but only 1 copy of each.",
+          "summary": "Functional erratum: the era text defines the Special Summonable set by English card-name matching plus one named exception - \"any of the cards that include \\\"Dark Scorpion\\\" in their card name, or are named \\\"Cliff the Trap Remover\\\"\" - while the errata'd text replaces both clauses with a single archetype reference, \"any number of \\\"Dark Scorpion\\\" monsters from your hand, but only 1 copy of each\". The dropped Cliff clause is itself the evidence that archetype membership is wider than name matching, and the archetype also contains \"Don Zaloog\", so the modern card can Special Summon a second \"Don Zaloog\" out of the hand where the era text could not reach it.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In a period format EDOPro resolves Mustering against the \"Dark Scorpion\" archetype rather than the era's name-match-plus-Cliff list, so it will Special Summon a second \"Don Zaloog\" (and any other archetype member whose English name lacks the string) that the era text excludes."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

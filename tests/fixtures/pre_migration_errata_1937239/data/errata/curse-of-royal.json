@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-curse-of-royal",
+  "modern_card": {
+    "passcode": 2926176,
+    "name": "Curse of Royal"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Negate the activation and the effect of a Spell or Trap Card that includes the effect of destroying 1 Spell or Trap Card and destroy it.",
+      "summary": "Behavioural difference: the modern script will only negate a chained card whose activation effect carries EFFECT_FLAG_CARD_TARGET and whose chain info holds exactly one target card, whereas goat/c504700133.lua drops both tests and inspects only the chain's CATEGORY_DESTROY operation info, so it can also negate non-targeting Spell/Trap destruction (the upstream annotation reads 'does not require targeting'). The modern BabelCDB text states the requirement explicitly - 'that targets 1 Spell/Trap on the field (and no other cards)' - but no English lineage version carries that text, so the change has no set-release anchor and its chronology is left unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700133,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700133.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflicting evidence preserved: the pinned modern cdb text matches NO lineage version (best ratio 0.282 against v2). The English errata lineage ends at v2 (DB2-EN241, Dark Beginning 2, 2005-07-27) and the card appears never to have been reprinted in English since, so the current PSCT text exists only in the card database - hence set-release evidence is unavailable and effective is left empty rather than dated from memory. Chronology note, not flagged as an era mismatch: the GOAT variant implements v2, whose printing (2005-07-27) postdates the 2005-04-01 GOAT snapshot, but the only v1 -> v2 difference is the added 'and the effect' after 'Negate the activation', which is a clarification of what negating an activation already does, so the baseline is behaviourally correct for the GOAT snapshot's v1 (TP5-EN018, 2004-11-01) text. v0 -> v1 is the Magic -> Spell renaming."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,6 +6,18 @@ changes, no generated `dist/` changes, no schema changes committed in this
 milestone. This document exists to choose an architecture and prove it
 against real records before any implementation work is scheduled.
 
+**Status update (post-migration): the architecture this document freezes
+has now been used for a real canonical migration.** 247 of the 296
+records this document's §13 sequencing plans for are migrated (commit
+immediately after `1937239d9fd0ebfb47dc850f298c11c3a60679b0`) - 180
+sugar-eligible + 35 single-relevant-with-siblings + 11 fully-ordered + 11
+parity-only-identity + 10 pure cosmetic/engine, exactly the accounting
+this document works out below. The remaining 49 (this document's §7
+taxonomy: 47 already-researched + 2 manual-review) are the explicit next
+milestone, not started. `docs/research/erratum-v2-migration-audit.md` is
+the live status; this document remains the frozen architecture record and
+is not rewritten to describe the migration itself.
+
 **Status: architecture FROZEN for implementation.** Four correction
 passes (bb2c6a7 → 9b34a79 → 8aa67b2 → 1e1d7c9 → this commit) is enough
 adversarial scrutiny for a first implementation attempt to begin. The

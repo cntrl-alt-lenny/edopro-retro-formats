@@ -6,29 +6,14 @@
     "name": "A-Team: Trap Disposal Unit"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
-      "modern_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
-      "summary": "Era damage-step legality encoded per card, not a text erratum: the goat script refuses the Tribute-to-negate activation during the Damage Step whenever this card is itself the attacker or the attack target (condition `not (Duel.GetCurrentPhase()==PHASE_DAMAGE and (Duel.GetAttacker()==c or Duel.GetAttackTarget()==c))`, upstream-annotated \"Usable in the damage step only if it doesn't relate to battle\"), while the modern script keeps EFFECT_FLAG_DAMAGE_STEP with no battle-relation test and so can negate a Trap in the Damage Step of its own battle. The rest of the diff is idiom: Cost.SelfTribute is literally the goat's inline IsReleasable/Duel.Release cost and Effect.IsTrapEffect is defined as IsActiveType(TYPE_TRAP) (both verified in CardScripts utility.lua). Chronology of the damage-step restriction is unresolved: no dated source in the packet or the shared briefs bounds it.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700019,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700019.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
+    "modern_text": "This effect can be used during either player's turn. When your opponent activates a Trap Card, Tribute this face-up card to negate the activation of the Trap Card and destroy it.",
+    "summary": "Era damage-step legality encoded per card, not a text erratum: the goat script refuses the Tribute-to-negate activation during the Damage Step whenever this card is itself the attacker or the attack target (condition `not (Duel.GetCurrentPhase()==PHASE_DAMAGE and (Duel.GetAttacker()==c or Duel.GetAttackTarget()==c))`, upstream-annotated \"Usable in the damage step only if it doesn't relate to battle\"), while the modern script keeps EFFECT_FLAG_DAMAGE_STEP with no battle-relation test and so can negate a Trap in the Damage Step of its own battle. The rest of the diff is idiom: Cost.SelfTribute is literally the goat's inline IsReleasable/Duel.Release cost and Effect.IsTrapEffect is defined as IsActiveType(TYPE_TRAP) (both verified in CardScripts utility.lua). Chronology of the damage-step restriction is unresolved: no dated source in the packet or the shared briefs bounds it.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700019,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700019.lua"
+  }
 }

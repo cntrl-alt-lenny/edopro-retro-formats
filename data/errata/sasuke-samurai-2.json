@@ -6,30 +6,14 @@
     "name": "Sasuke Samurai #2"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
-      "modern_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
-      "summary": "Era reading of 'until the End Phase', no text difference: the goat script registers an extra EVENT_ADJUST continuous effect whose condition is `Duel.GetCurrentPhase()==PHASE_END` and whose operation resets the EFFECT_CANNOT_ACTIVATE lock, so Spell and Trap Cards become activatable as soon as that End Phase begins. The modern script leaves the lock in place until RESET_PHASE|PHASE_END fires at the end of the End Phase, so nothing can be activated during it. The other two diff lines are non-behavioural and were verified against the repo: the inline s.cost is the body of Cost.PayLP(800) minus the modern cost_lp_paid bookkeeping, and `re:IsActiveType(TYPE_SPELL+TYPE_TRAP)` is the literal body of Effect.IsSpellTrapEffect (utility.lua). Chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700016,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700016.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -40,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
+    "modern_text": "Once per turn, during your Main Phase, you can pay 800 Life Points. If you do this, until the End Phase, Spell and Trap Cards cannot be activated.",
+    "summary": "Era reading of 'until the End Phase', no text difference: the goat script registers an extra EVENT_ADJUST continuous effect whose condition is `Duel.GetCurrentPhase()==PHASE_END` and whose operation resets the EFFECT_CANNOT_ACTIVATE lock, so Spell and Trap Cards become activatable as soon as that End Phase begins. The modern script leaves the lock in place until RESET_PHASE|PHASE_END fires at the end of the End Phase, so nothing can be activated during it. The other two diff lines are non-behavioural and were verified against the repo: the inline s.cost is the body of Cost.PayLP(800) minus the modern cost_lp_paid bookkeeping, and `re:IsActiveType(TYPE_SPELL+TYPE_TRAP)` is the literal body of Effect.IsSpellTrapEffect (utility.lua). Chronology is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700016,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700016.lua"
+  }
 }

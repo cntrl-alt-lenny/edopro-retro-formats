@@ -6,28 +6,14 @@
     "name": "Horus the Black Flame Dragon LV6"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "As long as this card remains face-up on your side of the field, it is unaffected by any Spell Cards. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard, Special Summon 1 \"Horus the Black Flame Dragon LV8\" from your hand or Deck.",
-      "summary": "The GOAT variant encodes two era behaviours that no printed text shows. Activation condition: modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...)`, while the goat target checks only for a free zone (`return ft>0`), so the End Phase effect can be used - and the send-this-card-to-the-Graveyard cost paid - with no \"Horus the Black Flame Dragon LV8\" in hand or Deck. Failed-search verification: when the Summon finds nothing the goat script reveals hand and Deck via `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, which the modern script never does. The verification half is bounded by the shared search-verification chronology, but the relaxed activation condition is undated for this card, so the transition as a whole is recorded unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700015,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700015.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "As long as this card remains face-up on your side of the field, it is unaffected by any Spell Cards. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard, Special Summon 1 \"Horus the Black Flame Dragon LV8\" from your hand or Deck.",
+    "modern_text": null,
+    "summary": "The GOAT variant encodes two era behaviours that no printed text shows. Activation condition: modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...)`, while the goat target checks only for a free zone (`return ft>0`), so the End Phase effect can be used - and the send-this-card-to-the-Graveyard cost paid - with no \"Horus the Black Flame Dragon LV8\" in hand or Deck. Failed-search verification: when the Summon finds nothing the goat script reveals hand and Deck via `Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)`, which the modern script never does. The verification half is bounded by the shared search-verification chronology, but the relaxed activation condition is undated for this card, so the transition as a whole is recorded unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700015,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700015.lua"
+  }
 }

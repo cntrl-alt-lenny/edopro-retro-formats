@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-level-up",
+  "modern_card": {
+    "passcode": 25290459,
+    "name": "Level Up!"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Send 1 face-up monster on your side of the field that has \"LV\" in its card name to the Graveyard to activate this card. Special Summon the monster that is written in the card text of that monster from your hand or Deck, ignoring the Summoning conditions.",
+      "summary": "Period activation legality, not a text erratum: the GOAT script's cost filter accepts any face-up 'LV' monster that lists card names (it ends with 'return c.listed_names'), so Level Up! can be activated - and the LV monster is sent to the Graveyard as a cost inside the target function - even when no monster named in the sent monster's text is in the hand or Deck, and the resolution then finds nothing. The modern script appends 'Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,c,e,tp)' to the same filter, making the existence of a summonable listed monster a requirement for activation. Both scripts share the identical spfilter, so what may be Summoned is unchanged. No printed text in the English lineage states either requirement.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700046,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700046.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chronology deliberately left unresolved. Per shared brief 1 this is behaviour (B) - the per-card 'can you activate with nothing to find' allowance - and NOT (A), the failed-search deck verification: uses_goatconfirm is false and the script performs no reveal, so the 'search-verification' shared chronology does not apply and nothing else in the packet dates the change. The English text lineage v0 (SOD-EN041, 2004-10-01) -> v1 (DR3-EN041, 2006-11-25) -> v2 (LCYW-EN207, 2012-09-29) -> v3 (SS05-ENB22, 2020-05-15) is cosmetic throughout ('\"LV\" monster' shorthand, 'you control', PSCT semicolon, GY) and is not recorded. Conflict: the pinned cdb text is BabelCDB's explicitly unofficial OCG-functionality text (it carries the '* The above text is unofficial and describes the card's functionality in the OCG.' note) and matches no English lineage version (best match v3, ratio 0.676). It also reads 'Special Summon 1 \"LV\" monster that is mentioned in the sent monster's text', a restriction neither the TCG lineage ('1 monster ... that is listed in the sent monster's text') nor either script imposes - the shared spfilter only requires the summoned monster's code to appear in the sent monster's listed_names. modern_text_version is null here, so no text is copied from the mismatched cdb entry."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

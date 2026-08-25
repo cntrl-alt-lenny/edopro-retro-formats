@@ -6,28 +6,14 @@
     "name": "Metalmorph"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "After activation, this card is used to equip a face-up monster. The monster equipped with this card increases its ATK and DEF by 300 points. When attacking with a monster equipped with this card, you can further increase its ATK by an amount equal to half the ATK of your target.",
-      "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Metalmorph may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore. The condition swap is a no-op (the inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' equals the modern aux.StatChangeDamageStepCondition, utility.lua:1412), as are 'Duel.IsPhase(PHASE_DAMAGE_CAL)' vs 'Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL' in atkcon, the RESET constant spelling, and the added nil guard on the equip target. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET in both), as is the half-attack-target-ATK boost applying during damage calculation only.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700111,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700111.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "After activation, this card is used to equip a face-up monster. The monster equipped with this card increases its ATK and DEF by 300 points. When attacking with a monster equipped with this card, you can further increase its ATK by an amount equal to half the ATK of your target.",
+    "modern_text": null,
+    "summary": "Period Damage Step legality, carried per-card by the effect's own permission flag: the GOAT script swaps EFFECT_FLAG_DAMAGE_STEP (0x4000) for EFFECT_FLAG_DAMAGE_CAL (0x8000) on the activation effect, moving the window inside the Damage Step in which Metalmorph may be activated - PHASE_DAMAGE (0x20) and PHASE_DAMAGE_CAL (0x40) are distinct phases in ocgcore. The condition swap is a no-op (the inline 'Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()' equals the modern aux.StatChangeDamageStepCondition, utility.lua:1412), as are 'Duel.IsPhase(PHASE_DAMAGE_CAL)' vs 'Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL' in atkcon, the RESET constant spelling, and the added nil guard on the equip target. Targeting is unchanged (EFFECT_FLAG_CARD_TARGET in both), as is the half-attack-target-ATK boost applying during damage calculation only.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700111,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700111.lua"
+  }
 }

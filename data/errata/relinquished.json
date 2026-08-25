@@ -6,29 +6,14 @@
     "name": "Relinquished"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead, and any battle damage you received from the battle is also inflicted to your opponent's Life Points.",
-      "summary": "Period behaviour on equipped Trap Monsters: the modern ATK and DEF value functions return 0 when the equipped card's original type is not a monster (g:GetFirst():GetOriginalType()&TYPE_MONSTER==0), so equipping a Trap Monster leaves Relinquished at 0/0; the GOAT variant omits that test and copies the equipped Trap Monster's printed ATK/DEF, keeping only the face-down and negative-value guards (upstream annotation: 'Gains stats of trap monsters as well'). Chronology unresolved: nothing in the packet dates when the original-type test was introduced.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700106,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700106.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 monster on your opponent's side of the field and equip it to this card (this effect can only be used once per turn and you can only equip 1 monster at a time to this card). The ATK and DEF of this card become the same amounts as the monster equipped to this card. If this card is destroyed as a result of battle, the equipped monster is destroyed instead, and any battle damage you received from the battle is also inflicted to your opponent's Life Points.",
+    "modern_text": null,
+    "summary": "Period behaviour on equipped Trap Monsters: the modern ATK and DEF value functions return 0 when the equipped card's original type is not a monster (g:GetFirst():GetOriginalType()&TYPE_MONSTER==0), so equipping a Trap Monster leaves Relinquished at 0/0; the GOAT variant omits that test and copies the equipped Trap Monster's printed ATK/DEF, keeping only the face-down and negative-value guards (upstream annotation: 'Gains stats of trap monsters as well'). Chronology unresolved: nothing in the packet dates when the original-type test was introduced.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700106,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700106.lua"
+  }
 }

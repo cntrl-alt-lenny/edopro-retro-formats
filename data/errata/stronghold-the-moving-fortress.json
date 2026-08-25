@@ -6,34 +6,14 @@
     "name": "Stronghold the Moving Fortress"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2013-10-25",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (DPYG-EN030 Unlimited Edition, distributed in Duelist Pack: Yugi & Kaiba Special Edition)"
-      },
-      "historical_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card's ATK becomes 3000.",
-      "modern_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card gains 3000 ATK.",
-      "summary": "Functional erratum: \"this card's ATK becomes 3000\" became \"this card gains 3000 ATK\". The pre-errata script registers the three-Gadget effect as EFFECT_SET_ATTACK_FINAL with value 3000, so while the Gadgets are face-up the ATK is fixed at 3000 and every other ATK modifier is overridden; the modern script registers EFFECT_UPDATE_ATTACK 3000, an additive boost that stacks with other ATK changes. The two scripts are otherwise identical (same activation/Special Summon target check, same TYPE_TRAP+TYPE_EFFECT monster attribute, same face-up Gadget condition).",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003022,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003022.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -44,5 +24,31 @@
     "ignis-babelcdb",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2013-10-25",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (DPYG-EN030 Unlimited Edition, distributed in Duelist Pack: Yugi & Kaiba Special Edition)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card's ATK becomes 3000.",
+    "modern_text": "Special Summon this card in Defense Position as an Effect Monster (Machine-Type/EARTH/Level 4/ATK 0/DEF 2000). (This card is also still a Trap Card.) While you control a \"Green Gadget\", \"Red Gadget\", and \"Yellow Gadget\", this card gains 3000 ATK.",
+    "summary": "Functional erratum: \"this card's ATK becomes 3000\" became \"this card gains 3000 ATK\". The pre-errata script registers the three-Gadget effect as EFFECT_SET_ATTACK_FINAL with value 3000, so while the Gadgets are face-up the ATK is fixed at 3000 and every other ATK modifier is overridden; the modern script registers EFFECT_UPDATE_ATTACK 3000, an additive boost that stacks with other ATK changes. The two scripts are otherwise identical (same activation/Special Summon target check, same TYPE_TRAP+TYPE_EFFECT monster attribute, same face-up Gadget condition).",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003022,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003022.lua"
+  }
 }

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-the-big-march-of-animals",
+  "modern_card": {
+    "passcode": 1689516,
+    "name": "The Big March of Animals"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Until the End Phase, increase the ATK of all face-up Beast-Type monsters on your side of the field by 200 points for each Beast-Type monster on your side of the field.",
+      "summary": "The GOAT variant's only substantive difference from the modern script is the Damage Step activation-legality flag on the Activate effect: EFFECT_FLAG_DAMAGE_CAL instead of EFFECT_FLAG_DAMAGE_STEP. Its s.condition is a verbatim inlining of aux.StatChangeDamageStepCondition, and the rest of the diff is inert - a dead 'local tc=g:GetFirst()' before the loop, aux.Next vs Group.Iter, and RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END which constant.lua defines as exactly RESETS_STANDARD_PHASE_END. That is a damage-step-structure matter the GOAT rule profile already sets globally (DUEL_MODE_GOAT carries DUEL_6_STEP_BATLLE_STEP and DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP), and nothing in the packet dates it, so its chronology is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700004,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700004.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline goat/c504700004.lua matches lineage v0 (FET-EN048, Flaming Eternity, 2005-03-01) exactly. Text lineage v0 -> v1 (DR3-EN168, 2006-11-25) -> v2 (SBCB-EN055, 2020-11-26, = pinned modern text) is cosmetic: 'Until the End Phase, increase the ATK of all face-up Beast-Type monsters on your side of the field by 200 points for each Beast-Type monster on your side of the field' and 'All face-up Beast monsters you control gain 200 ATK for each Beast monster you control, until the end of this turn' resolve identically - both scripts count the same aux.FaceupFilter(Card.IsRace,RACE_BEAST) group, apply #g*200 to every member, and reset at the End Phase of the current turn. Same escalation point as Skull Dice and Shadow Spell: the goat variant appears to exist only for the DAMAGE_CAL/DAMAGE_STEP flag, which may be redundant against the GOAT rule profile; I could not settle the exact ocgcore gating semantics of the two flags from the cached sources, so I did not assert a concrete behavioural consequence."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,28 +6,14 @@
     "name": "Mask of the Accursed"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "The monster equipped with this card cannot attack. The controller of the equipped monster takes 500 points of damage during each of your Standby Phases.",
-      "summary": "Period ruling with no text counterpart, on two points. (1) Effect immunity: the GOAT variant's Standby Phase damage trigger does not activate at all when the equipped monster is immune to Mask of the Accursed's effect - its condition is 'Duel.GetTurnPlayer()==tp and e:GetHandler():GetEquipTarget()~=nil and not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)' - whereas the modern condition only checks that it is your turn (Duel.IsTurnPlayer(tp)) and inflicts the 500 damage regardless. Upstream's note: 'If monster is immuned, no damage occurs.' (2) Recipient and self-check: the GOAT operation aborts if the Mask itself is no longer related to the effect and reads the damaged player from the chain's target info (activation time), while the modern operation takes the player from GetEquipTarget():GetControler() at resolution and makes no such check. The GOAT effect also omits CATEGORY_DAMAGE, which is hint/AI metadata rather than a rules difference.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700091,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700091.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "The monster equipped with this card cannot attack. The controller of the equipped monster takes 500 points of damage during each of your Standby Phases.",
+    "modern_text": null,
+    "summary": "Period ruling with no text counterpart, on two points. (1) Effect immunity: the GOAT variant's Standby Phase damage trigger does not activate at all when the equipped monster is immune to Mask of the Accursed's effect - its condition is 'Duel.GetTurnPlayer()==tp and e:GetHandler():GetEquipTarget()~=nil and not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)' - whereas the modern condition only checks that it is your turn (Duel.IsTurnPlayer(tp)) and inflicts the 500 damage regardless. Upstream's note: 'If monster is immuned, no damage occurs.' (2) Recipient and self-check: the GOAT operation aborts if the Mask itself is no longer related to the effect and reads the damaged player from the chain's target info (activation time), while the modern operation takes the player from GetEquipTarget():GetControler() at resolution and makes no such check. The GOAT effect also omits CATEGORY_DAMAGE, which is hint/AI metadata rather than a rules difference.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700091,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700091.lua"
+  }
 }

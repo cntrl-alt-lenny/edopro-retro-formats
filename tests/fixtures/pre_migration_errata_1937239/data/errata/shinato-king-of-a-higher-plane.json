@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-shinato-king-of-a-higher-plane",
+  "modern_card": {
+    "passcode": 86327225,
+    "name": "Shinato, King of a Higher Plane"
+  },
+  "classification": "cosmetic",
+  "changes": [
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
+      "modern_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Shinato's Ark\". You must also Tribute monsters whose total Levels equal 8 or more from the field or your hand. When this card destroys a Defense Position monster and sends it to the Graveyard as a result of battle, inflict damage to your opponent's Life Points equal to the original ATK of the destroyed monster.",
+      "summary": "No behavioural or textual difference: the goat variant's script differs from the modern script by exactly one line, the absence of `s.listed_names={60365591}` ('Shinato's Ark'), which is card-name reference metadata consulted by other cards' name lookups and never touched during resolution. The damage trigger is identical on both sides (EVENT_BATTLE_DESTROYING, the same s.damcon Defense-Position battle check, and s.damtg inflicting the destroyed monster's GetBaseAttack). The goat cdb text and the pinned modern cards.cdb text are byte-identical and both match lineage v1 (DR1-EN178) exactly.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700148,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700148.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Two upstream codes appear in the packet, but only one is a historical TCG variant. 153000018 (cards-unofficial.cdb, 'Shinato, King of a Higher Plane (Deck Master)', scripted by Larry126) is a Deck Master-format card: its script returns immediately unless the DeckMaster module is loaded, it adds two Deck Master abilities (LP recovery on opponent damage, and a destruction-replacement that banishes itself outside the Duel), and its monster effect inflicts damage equal to half the opponent's LP rather than the destroyed monster's original ATK. It is not a period variant of this record and is not eligible as a baseline; baseline is the goat entry 504700148. The two codes are not within +/-10 but they are also not an upstream duplication of the same card, so no escalation flag - recorded here so the choice is auditable. Trailing lineage version v2 (SBC2-ENI01, Speed Duel: Battle City Finals, 2024-12-13) is a PSCT rewrite that the pinned modern cards.cdb has NOT adopted (the pinned modern text is still lineage v1), so it is not recorded as a change. Upstream ships the goat entry for reference-list parity; behaviour is identical, hence upstream-variant-cosmetic."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

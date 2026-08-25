@@ -1,0 +1,131 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-swords-of-concealing-light",
+  "modern_card": {
+    "passcode": 12923641,
+    "name": "Swords of Concealing Light"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2005-11-02",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the only printing carrying the 'except with a card effect' clause (SD5-EN031, Structure Deck: Warrior's Triumph)"
+      },
+      "historical_text": "When you activate this card, change all monsters on your opponent's side of the field to face-down Defense Position. As long as this card remains face-up on the field, monsters on your opponent's side of the field cannot change their Battle Positions. Destroy this card during your 2nd Standby Phase after activation.",
+      "modern_text": "When you activate this card, change all monsters on your opponent's side of the field to face-down Defense Position. While this card is face-up on the field, monsters on your opponent's side of the field cannot change their battle positions, except with a card effect. Destroy this card during your 2nd Standby Phase after activation.",
+      "summary": "The continuous position lock gained an exception: v1 reads 'monsters on your opponent's side of the field cannot change their battle positions, except with a card effect', where v0 imposes it without qualification. No upstream implementation exists for this text - both the goat variant and the pre-errata variant register a plain EFFECT_CANNOT_CHANGE_POSITION with EFFECT_FLAG_SET_AVAILABLE and no card-effect carve-out - so this intermediate version has no reproducible implementation.",
+      "resulting_implementation": {
+        "strategy": "unresolved",
+        "status": "missing",
+        "tested": false,
+        "gap": {
+          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+          "upstream_checked": true,
+          "behavioural_impact": "The 'except with a card effect' exception is dropped again and the unqualified position lock of v0 is restored; v2 differs from v0 only by shedding the redundant 'As long as this card remains face-up on the field' preamble, which a Continuous Spell implies anyway. The goat variant's script therefore implements this version as well as v0, which is why it is reattached here.",
+          "sources": [
+            "ignis-babelcdb",
+            "ignis-cardscripts"
+          ]
+        }
+      },
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2006-11-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the printing that drops the exception clause (DR3-EN162, Dark Revelation Volume 3)"
+      },
+      "historical_text": "When you activate this card, change all monsters on your opponent's side of the field to face-down Defense Position. While this card is face-up on the field, monsters on your opponent's side of the field cannot change their battle positions, except with a card effect. Destroy this card during your 2nd Standby Phase after activation.",
+      "modern_text": "When you activate this card, change all monsters on your opponent's side of the field to face-down Defense Position. Monsters on your opponent's side of the field cannot change their Battle Positions. Destroy this card during your 2nd Standby Phase after activation.",
+      "summary": "The 'except with a card effect' exception is dropped again and the unqualified position lock of v0 is restored; v2 differs from v0 only by shedding the redundant 'As long as this card remains face-up on the field' preamble, which a Continuous Spell implies anyway. The goat variant's script therefore implements this version as well as v0, which is why it is reattached here.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 504700018,
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700018.lua",
+        "status": "complete",
+        "tested": false
+      },
+      "sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "ignis-cardscripts"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN281, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "historical_text": "When you activate this card, change all monsters on your opponent's side of the field to face-down Defense Position. Monsters on your opponent's side of the field cannot change their Battle Positions. Destroy this card during your 2nd Standby Phase after activation.",
+      "modern_text": "When this card resolves, all monsters your opponent controlled when this card was activated are changed to face-down Defense Position. Monsters your opponent controls cannot change their battle positions. Destroy this card during your 2nd Standby Phase after activation.",
+      "summary": "Functional erratum: the flip is narrowed to 'all monsters your opponent controlled when this card was activated' and to monsters that can actually be turned face-down. The goat script flips Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil) at resolution - every opponent monster, with no Card.IsCanTurnSet filter, so Tokens and other monsters that cannot be Set are caught and end up in face-up Defense Position, which upstream annotates as 'Affects tokens as well, they're changed to faceup defense'. The pre-errata script adds Duel.SetTargetCard(g) at activation over the IsCanTurnSet group and flips only g:Filter(Card.IsRelateToEffect,...) at resolution, so the affected set is snapshotted at activation and unsettable monsters are excluded.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 511003008,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511003008.lua",
+        "status": "complete",
+        "tested": false
+      },
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2017-04-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing dropping the activation-time snapshot (SR04-EN026, Dinosmasher's Fury Structure Deck)"
+      },
+      "historical_text": "When this card resolves, all monsters your opponent controlled when this card was activated are changed to face-down Defense Position. Monsters your opponent controls cannot change their battle positions. Destroy this card during your 2nd Standby Phase after activation.",
+      "modern_text": "Destroy this card during your 2nd Standby Phase after activation. When this card resolves, change all monsters your opponent controls to face-down Defense Position. Monsters your opponent controls cannot change their battle positions.",
+      "summary": "Functional erratum: 'all monsters your opponent controlled when this card was activated' becomes 'all monsters your opponent controls', so the affected set is re-evaluated at resolution instead of snapshotted at activation. The modern script recomputes Duel.GetMatchingGroup(Card.IsCanTurnSet,...) inside s.activate with no SetTargetCard, so a monster the opponent Special Summons in response to the activation is also flipped face-down; the pre-errata script would leave it face-up.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700018,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700018.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Two upstream codes exist and they implement DIFFERENT historical versions, so they are not folded: goat 504700018 matches lineage v0 (FET-EN042, 2005-03-01) exactly and is the baseline; pre-errata 511003008 implements v3 (its cdb text is a 0.9639 active-voice paraphrase of LCYW-EN281 - 'Change all monsters your opponent controlled when this card was activated to face-down Defense Position' vs the lineage's passive 'are changed to') and is attached to change 3. Both target eras resolve cleanly: GOAT (2005-04-01) precedes the v1 window and takes the baseline; Edison (2010-04-24) falls in 2006-11-25 .. 2012-09-29 and takes change 2's goat implementation. The v1 excursion is recorded rather than smoothed because it is a real printed behavioural clause dated by two printings in the packet, but it is unimplemented by anyone - hence the implementation-gap flag and the deliberately fail-safe BLOCKED interval for any snapshot inside 2005-11-02 .. 2006-11-25. Change 2 reuses the baseline passcode as its resulting_implementation because v2's behaviour is v0's behaviour; that is intentional, not a duplication. Observation, not a change: lineage v5 (RA05-EN059, Rarity Collection 5, 2026-04-09) is newer than the pinned cards.cdb text and rewrites the flip again as 'When this card is activated: If your opponent controls a face-up monster, flip all monsters they control to face-down Defense Position'; the pinned modern text matches v4 exactly, so the record stops at v4 and the RA05 printing is left for a later refresh. Remaining diff items across both variants - CATEGORY_SET on the modern activate, the SetOperationInfo hint parameters, EVENT_PHASE|PHASE_STANDBY vs '+', the reset spelling and Duel.IsTurnPlayer(tp) vs GetTurnPlayer()==tp - are hint-only or identical; the 2nd-Standby-Phase self-destruction is the same turn-counter routine in all three scripts."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts"
+  ]
+}

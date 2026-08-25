@@ -6,44 +6,68 @@
     "name": "Bottomless Trap Hole"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
-      "summary": "Era resolution scope, not a text erratum: the GOAT script snapshots the opponent's Monster Zone at activation into a kept-alive group and, at resolution, destroys-and-banishes not only the monsters from the triggering Summon but every other opponent monster that arrived after activation, is face-up with 1500+ ATK and carries STATUS_SUMMON_TURN/STATUS_FLIP_SUMMON_TURN/STATUS_SPSUMMON_TURN (upstream comment: 'It affects all the monsters summoned during the current chain'). The modern script destroys only the cards in the triggering event group. No dated source for when this narrowed was found; chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
+          "modern_text": null,
+          "summary": "Era resolution scope, not a text erratum: the GOAT script snapshots the opponent's Monster Zone at activation into a kept-alive group and, at resolution, destroys-and-banishes not only the monsters from the triggering Summon but every other opponent monster that arrived after activation, is face-up with 1500+ ATK and carries STATUS_SUMMON_TURN/STATUS_FLIP_SUMMON_TURN/STATUS_SPSUMMON_TURN (upstream comment: 'It affects all the monsters summoned during the current chain'). The modern script destroys only the cards in the triggering event group. No dated source for when this narrowed was found; chronology unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2015-01-29",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the current text (SDHS-EN038, HERO Strike Structure Deck)"
       },
-      "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
-      "modern_text": "When your opponent Summons a monster(s) with 1500 or more ATK: Destroy that monster(s) with 1500 or more ATK, and if you do, banish it.",
-      "summary": "Wording modernisation only across four printings (v3 CP04-EN003 condenses the three Summon types to 'Summons', v4 SDZW-EN034 '1500 or more ATK', v5 GLD2-EN045 'Activate only when...', v6 LCYW-EN181 PSCT 'Destroy that monster(s) ... and if you do, banish it instead of sending it to the Graveyard', v7 SDHS-EN038 drops the trailing clause). Destruction followed by banishment is what both scripts do throughout (Duel.Destroy(...,REASON_EFFECT,LOCATION_REMOVED)).",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When your opponent Normal Summons, Flip Summons, or Special Summons a monster(s) with an ATK of 1500 or more, destroy and remove from play the monster(s).",
+          "modern_text": "When your opponent Summons a monster(s) with 1500 or more ATK: Destroy that monster(s) with 1500 or more ATK, and if you do, banish it.",
+          "summary": "Wording modernisation only across four printings (v3 CP04-EN003 condenses the three Summon types to 'Summons', v4 SDZW-EN034 '1500 or more ATK', v5 GLD2-EN045 'Activate only when...', v6 LCYW-EN181 PSCT 'Destroy that monster(s) ... and if you do, banish it instead of sending it to the Graveyard', v7 SDHS-EN038 drops the trailing clause). Destruction followed by banishment is what both scripts do throughout (Duel.Destroy(...,REASON_EFFECT,LOCATION_REMOVED)).",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700052,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700052.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700052,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700052.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

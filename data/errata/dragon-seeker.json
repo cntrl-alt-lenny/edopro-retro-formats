@@ -6,29 +6,39 @@
     "name": "Dragon Seeker"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2005-07-27",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the new text (DB2-EN101, Dark Beginning 2)"
       },
-      "historical_text": "When this card is Summoned (excluding Special Summoned), destroy 1 face-up Dragon-Type monster on the field.",
-      "modern_text": "When this card is Normal Summoned or Flip Summoned, destroy 1 face-up Dragon-Type monster on the field.",
-      "summary": "Wording clarification only: 'When this card is Summoned (excluding Special Summoned)' (TP2-002) became 'When this card is Normal Summoned or Flip Summoned' (DB2-EN101), which names the same two summon events - the modern script encodes exactly those, one mandatory targeting Trigger Effect on EVENT_SUMMON_SUCCESS cloned onto EVENT_FLIP_SUMMON_SUCCESS. No resolution changes, so no historical implementation is needed for either period snapshot.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is Summoned (excluding Special Summoned), destroy 1 face-up Dragon-Type monster on the field.",
+          "modern_text": "When this card is Normal Summoned or Flip Summoned, destroy 1 face-up Dragon-Type monster on the field.",
+          "summary": "Wording clarification only: 'When this card is Summoned (excluding Special Summoned)' (TP2-002) became 'When this card is Normal Summoned or Flip Summoned' (DB2-EN101), which names the same two summon events - the modern script encodes exactly those, one mandatory targeting Trigger Effect on EVENT_SUMMON_SUCCESS cloned onto EVENT_FLIP_SUMMON_SUCCESS. No resolution changes, so no historical implementation is needed for either period snapshot.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

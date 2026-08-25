@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-balloon-lizard",
+  "modern_card": {
+    "passcode": 39892082,
+    "name": "Balloon Lizard"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Put 1 counter on this card during each of your Standby Phases. When this card is destroyed, inflict damage to the controller of the card that destroyed it equal to the number of counters x 400 points.",
+      "summary": "Era trigger timing encoded per card (upstream annotation: \"Battle destroyed registers while the monster is on field\"): the goat script splits the burn in two — a new EVENT_BATTLED trigger for the battle-destruction case that reads the counters straight off the card while it is still on the field and aims the damage at the controller of the monster it battled, plus the inherited EVENT_DESTROYED trigger now restricted to non-battle destruction (both `regop` and `damcon` bail out on `IsBattleDestroyed()`). The modern script has only the EVENT_DESTROYED trigger, so battle destruction is handled after the Lizard has left the field, using the leave-field counter snapshot and the destroying player `rp`. Chronology of the timing change is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700065,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700065.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical: goat text == pinned modern cdb text == lineage v1. The v0 -> v1 rewording predates the baseline version and is cosmetic, so it is not recorded as a change. Remaining diff lines are idiom: EVENT_PHASE+PHASE_STANDBY == EVENT_PHASE|PHASE_STANDBY, and `Duel.GetTurnPlayer()==tp` == `Duel.IsTurnPlayer(tp)`."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

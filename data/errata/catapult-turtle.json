@@ -6,35 +6,14 @@
     "name": "Catapult Turtle"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2014-06-27",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the once-per-turn text (DL18-EN001, Duelist League 18 participation cards)"
-      },
-      "historical_text": "You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
-      "modern_text": "Once per turn: You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
-      "summary": "Functional erratum: the Tribute-for-damage Ignition effect became a hard once per turn. The modern script carries e1:SetCountLimit(1) and pre-errata/c511000228.lua does not, so the historical card can Tribute monsters for damage repeatedly in one turn. EdisonFormat.com records the same period behaviour independently.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511000228,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511000228.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "yugipedia-set-pages",
     "ignis-cardscripts",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2014-06-27",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the once-per-turn text (DL18-EN001, Duelist League 18 participation cards)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
+    "modern_text": "Once per turn: You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
+    "summary": "Functional erratum: the Tribute-for-damage Ignition effect became a hard once per turn. The modern script carries e1:SetCountLimit(1) and pre-errata/c511000228.lua does not, so the historical card can Tribute monsters for damage repeatedly in one turn. EdisonFormat.com records the same period behaviour independently.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb",
+      "ignis-cardscripts",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511000228,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000228.lua"
+  }
 }

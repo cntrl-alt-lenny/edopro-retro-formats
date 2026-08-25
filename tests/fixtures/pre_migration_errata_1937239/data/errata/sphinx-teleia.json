@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-sphinx-teleia",
+  "modern_card": {
+    "passcode": 51402177,
+    "name": "Sphinx Teleia"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
+      "modern_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
+      "summary": "Era trigger timing, no text difference: the goat script fires the Defense-Position burn on EVENT_BATTLED - after damage calculation - and requires the battle target to have actually been battle-destroyed and to be in Defense Position at that later point (`bc:IsBattleDestroyed() and bc:IsPosition(POS_DEFENSE)`). The modern script fires on EVENT_BATTLE_DESTROYING during damage calculation and checks only the position recorded for the battle (`bc:GetBattlePosition()&POS_DEFENSE`), so the burn occupies an earlier Damage Step window and can resolve where the era version's later, destruction-confirmed check would not. The reset diff is the expansion of RESETS_STANDARD_PHASE_END (constant.lua) and is not behavioural. Chronology of this ruling is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700083,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700083.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's errata page carries NO English versions at all (english_versions is empty; other_languages lists only Japanese), and both text_matches_version fields are null. There is therefore no TCG text lineage to work from: I passed literal historical_text and modern_text copied from the packet - the goat cdb text and the pinned modern text are identical strings - and left both lineage indices null. Flagging for escalation so someone can confirm that Yugipedia genuinely carries no English errata lineage for this movie-promo card rather than the fetch having failed. Second upstream code 513000029 (cards-unofficial.cdb, 'Sphinx Teleia (Anime)') is an anime variant with different text and a different script - Special Summon from the Deck with no LP cost, and a battle-negation continuous effect on EVENT_BATTLE_START replacing the burn entirely - so it is not a period TCG variant and is not eligible as a baseline; baseline is the goat entry 504700083. Nothing dates the trigger-timing ruling: no text transition exists and no shared chronology entry covers Damage Step trigger placement."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

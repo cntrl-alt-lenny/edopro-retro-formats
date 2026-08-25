@@ -6,28 +6,14 @@
     "name": "Cyber Jar"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "FLIP: Destroy all monsters on the field. Both players then pick up 5 cards from the top of their respective Decks and Special Summon all Level 4 or lower Monster Cards among them on the field in face-up Attack Position or face-down Defense Position. The rest of the cards picked up are added to their respective hands.",
-      "summary": "Period procedure encoded only in goat/c504700188.lua: both players' five cards are revealed first (Duel.ConfirmDecktop(p,5) immediately followed by Duel.ConfirmDecktop(1-p,5)) and only then does each player Special Summon, whereas the modern script interleaves them - reveal for one player, that player summons, then reveal for the other. The upstream annotation states the difference outright ('Unlike OCG, first both players reveal, then both summon'), and it is behaviourally live: each player picks positions and zones knowing both reveals. Chronology is unresolved; nothing in the packet dates when the TCG adopted the interleaved sequence.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700188,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700188.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "FLIP: Destroy all monsters on the field. Both players then pick up 5 cards from the top of their respective Decks and Special Summon all Level 4 or lower Monster Cards among them on the field in face-up Attack Position or face-down Defense Position. The rest of the cards picked up are added to their respective hands.",
+    "modern_text": null,
+    "summary": "Period procedure encoded only in goat/c504700188.lua: both players' five cards are revealed first (Duel.ConfirmDecktop(p,5) immediately followed by Duel.ConfirmDecktop(1-p,5)) and only then does each player Special Summon, whereas the modern script interleaves them - reveal for one player, that player summons, then reveal for the other. The upstream annotation states the difference outright ('Unlike OCG, first both players reveal, then both summon'), and it is behaviourally live: each player picks positions and zones knowing both reveals. Chronology is unresolved; nothing in the packet dates when the TCG adopted the interleaved sequence.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700188,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700188.lua"
+  }
 }

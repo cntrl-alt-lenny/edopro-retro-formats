@@ -6,38 +6,17 @@
     "name": "Wild Fire"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2022-03-17",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENH16, Speed Duel GX: Duel Academy Box)"
-      },
-      "historical_text": "Pay 500 Life Points. Destroy a face-up \"Blaze Accelerator\" card you control and destroy all monsters on the field. Then, Special Summon 1 \"Wild Fire Token\" (Pyro-Type/FIRE/LEVEL 3/ATK 1000/DEF 1000) in Attack Position. Also, you cannot declare an attack this turn.",
-      "modern_text": "Pay 500 LP; destroy all \"Blaze Accelerator\" cards you control, and if you do, destroy as many monsters on the field as possible, then, Special Summon 1 \"Wild Fire Token\" (Pyro/FIRE/Level 3/ATK 1000/DEF 1000) in Attack Position. Your monsters cannot attack the turn you activate this card.",
-      "summary": "Functional erratum on two counts. The FOTB-EN039 text destroys 'a face-up \"Blaze Accelerator\" card you control' - exactly one card, and only a face-up one - while the modern text destroys 'all \"Blaze Accelerator\" cards you control', face-down Set copies included, so controlling both 'Blaze Accelerator' and 'Tri-Blaze Accelerator' now costs you both. And the period text then destroyed all monsters on the field and Summoned the Token unconditionally, whereas the modern text makes the field wipe and the Token depend on that first destruction succeeding ('and if you do, destroy as many monsters on the field as possible, then, Special Summon 1 \"Wild Fire Token\"'). The 500 LP payment stays an activation cost and the attack restriction is unchanged in substance.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In Edison the EDOPro card destroys every 'Blaze Accelerator' card you control instead of a single face-up one, and skips the board wipe and the Token entirely whenever that destruction fails, where the period card wiped the field regardless."
+      }
     }
   ],
-  "implementation": {
-    "strategy": "unresolved",
-    "status": "missing",
-    "gap": {
-      "reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-      "upstream_checked": true,
-      "behavioural_impact": "In Edison the EDOPro card destroys every 'Blaze Accelerator' card you control instead of a single face-up one, and skips the board wipe and the Token entirely whenever that destruction fails, where the period card wiped the field regardless.",
-      "sources": [
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
-    }
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,31 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2022-03-17",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SGX1-ENH16, Speed Duel GX: Duel Academy Box)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Pay 500 Life Points. Destroy a face-up \"Blaze Accelerator\" card you control and destroy all monsters on the field. Then, Special Summon 1 \"Wild Fire Token\" (Pyro-Type/FIRE/LEVEL 3/ATK 1000/DEF 1000) in Attack Position. Also, you cannot declare an attack this turn.",
+    "modern_text": "Pay 500 LP; destroy all \"Blaze Accelerator\" cards you control, and if you do, destroy as many monsters on the field as possible, then, Special Summon 1 \"Wild Fire Token\" (Pyro/FIRE/Level 3/ATK 1000/DEF 1000) in Attack Position. Your monsters cannot attack the turn you activate this card.",
+    "summary": "Functional erratum on two counts. The FOTB-EN039 text destroys 'a face-up \"Blaze Accelerator\" card you control' - exactly one card, and only a face-up one - while the modern text destroys 'all \"Blaze Accelerator\" cards you control', face-down Set copies included, so controlling both 'Blaze Accelerator' and 'Tri-Blaze Accelerator' now costs you both. And the period text then destroyed all monsters on the field and Summoned the Token unconditionally, whereas the modern text makes the field wipe and the Token depend on that first destruction succeeding ('and if you do, destroy as many monsters on the field as possible, then, Special Summon 1 \"Wild Fire Token\"'). The 500 LP payment stays an activation cost and the attack restriction is unchanged in substance.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "known-gap",
+    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+    "gap_sources": [
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  }
 }

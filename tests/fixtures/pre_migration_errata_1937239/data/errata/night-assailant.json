@@ -1,0 +1,80 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-night-assailant",
+  "modern_card": {
+    "passcode": 16226786,
+    "name": "Night Assailant"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2010-09-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of DT03-EN056 (Duel Terminal 3)"
+      },
+      "historical_text": "FLIP: Select 1 monster on your opponent's side of the field and destroy it. When this card is sent directly from your hand to the Graveyard, return 1 Flip Effect Monster from your Graveyard to your hand.",
+      "modern_text": "FLIP: Select 1 monster your opponent controls, and destroy it. When this card is sent directly from your hand to the Graveyard, select 1 Flip Effect Monster in your Graveyard, except this card, and return it to your hand.",
+      "summary": "The hand-to-Graveyard retrieval gained a self-exclusion and an explicit selection step: AST-080 said only 'return 1 Flip Effect Monster from your Graveyard to your hand', naming no exception, so the Night Assailant just sent there is itself an eligible choice, while DT03-EN056 reads 'select 1 Flip Effect Monster in your Graveyard, except this card, and return it to your hand'. Project Ignis's pre-errata script implements the post-DT03 version - it targets and passes e:GetHandler() as the SelectTarget exception - so no upstream script reproduces the AST-era behaviour.",
+      "resulting_implementation": {
+        "strategy": "reuse-upstream",
+        "historical_passcode": 16226796,
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c16226796.lua",
+        "status": "complete",
+        "tested": false
+      },
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2022-06-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OP19-EN016 (OTS Tournament Pack 19)"
+      },
+      "historical_text": "FLIP: Target 1 monster your opponent controls; destroy that target.When this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except this card; return that target to the hand.",
+      "modern_text": "FLIP: Target 1 monster your opponent controls; destroy that target.If this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except \"Night Assailant\"; add that target to your hand.",
+      "summary": "Functional erratum: 'except this card' became 'except \"Night Assailant\"'. The pre-errata script excludes only the physical copy (SelectTarget exception e:GetHandler()), so a second copy of Night Assailant in the Graveyard is a legal retrieval; the modern filter adds 'not c:IsCode(id)', excluding every card with that name.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "unresolved",
+    "status": "missing",
+    "gap": {
+      "reason": "Project Ignis's only historical Night Assailant (cards-unofficial 16226796) implements the DT03-EN056 text; no upstream script implements the AST-080 text that both period snapshots need, so reproducing it needs a custom script and a reserved passcode",
+      "upstream_checked": true,
+      "behavioural_impact": "In GOAT and Edison a Night Assailant sent from the hand to the Graveyard should be able to return itself (the era text names no exception); with the shipped pre-errata or modern script that choice is blocked, removing a recursion line the era decks had.",
+      "sources": [
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The upstream code 16226796 is the card's own passcode +10, upstream's pre-errata convention, not an artwork variant. Its cdb text is exactly lineage v3 (SBCB-EN114, 2020-11-26), and v1 -> v2 (BP01-EN187, 2012-05-24, PSCT) -> v3 (GY wording) are cosmetic, so it implements the v1-v3 behaviour band. Remaining diff lines are cosmetic: the EFFECT_FLAG_CARD_TARGET property line is only reordered, function names differ (destg/desop vs target/operation), and the modern filter's added c:IsMonster() is redundant with TYPE_FLIP. The FLIP destruction half is unchanged across the whole lineage."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

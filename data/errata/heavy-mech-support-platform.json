@@ -6,35 +6,14 @@
     "name": "Heavy Mech Support Platform"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2016-10-20",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SDKS-EN008, Structure Deck: Seto Kaiba); EdisonFormat.com independently attributes the removal of the Union Condition to the same 2016 Structure Deck"
-      },
-      "historical_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it in Attack Position. While equipped by this effect, the equipped monster gains 500 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
-      "modern_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 500 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
-      "summary": "Functional erratum: the parenthetical Condition 'A monster can only be equipped with 1 Union monster at a time' was removed and the ATK/DEF gain was rebound from 'While equipped by this effect' to 'A monster equipped with this card'. Upstream encodes the old state as aux.AddUnionProcedure(c,filter,true,false) plus e1:SetCondition(aux.IsUnionState): with oldequip=true the equip target must carry no other Union monster (proc_union's UnionFilter takes the ct1==0 branch and the card registers EFFECT_OLDUNION_STATUS), the unequip/Special Summon requires the union state and forces face-up Attack Position, and the +500 ATK/DEF applies only while the card is equipped by its own Union effect. The modern call passes no old-rule flags, so a monster may carry several Union monsters, the Special Summon takes any face-up position, and the +500 applies whenever a monster is equipped with this card by any means.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002851,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002851.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "ignis-cardscripts",
     "yugipedia-set-pages",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2016-10-20",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SDKS-EN008, Structure Deck: Seto Kaiba); EdisonFormat.com independently attributes the removal of the Union Condition to the same 2016 Structure Deck"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it in Attack Position. While equipped by this effect, the equipped monster gains 500 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
+    "modern_text": "Once per turn, you can either: Target 1 Machine-Type monster you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 500 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+    "summary": "Functional erratum: the parenthetical Condition 'A monster can only be equipped with 1 Union monster at a time' was removed and the ATK/DEF gain was rebound from 'While equipped by this effect' to 'A monster equipped with this card'. Upstream encodes the old state as aux.AddUnionProcedure(c,filter,true,false) plus e1:SetCondition(aux.IsUnionState): with oldequip=true the equip target must carry no other Union monster (proc_union's UnionFilter takes the ct1==0 branch and the card registers EFFECT_OLDUNION_STATUS), the unequip/Special Summon requires the union state and forces face-up Attack Position, and the +500 ATK/DEF applies only while the card is equipped by its own Union effect. The modern call passes no old-rule flags, so a monster may carry several Union monsters, the Special Summon takes any face-up position, and the +500 applies whenever a monster is equipped with this card by any means.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002851,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002851.lua"
+  }
 }

@@ -6,29 +6,14 @@
     "name": "Nobleman-Eater Bug"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "FLIP: Destroy 2 monsters on the field.",
-      "modern_text": "FLIP: Destroy 2 monsters on the field.",
-      "summary": "Era target-count semantics, not a text erratum: the GOAT script targets UP TO 2 monsters - it counts targetable monsters, sets `ct=math.min(ct,2)` and calls `Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,ct,2,nil)`, so the Flip effect still works when only one monster can be targeted and destroys that one, and at resolution it destroys whatever targets remain (`if #sg<1 then return end`). The modern script requires two targetable monsters to exist (`Duel.IsExistingTarget(aux.TRUE,...,2,nil)`), selects exactly 2, and destroys nothing at all unless both targets are still related to the effect (`if #sg~=2 then return end`). Targeting itself is unchanged - `EFFECT_FLAG_CARD_TARGET` and the `chkc` Monster-Zone check are present in both - and the cdb text is identical, so this is a ruling-layer difference in how many targets the effect demands.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700109,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700109.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "FLIP: Destroy 2 monsters on the field.",
+    "modern_text": "FLIP: Destroy 2 monsters on the field.",
+    "summary": "Era target-count semantics, not a text erratum: the GOAT script targets UP TO 2 monsters - it counts targetable monsters, sets `ct=math.min(ct,2)` and calls `Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,ct,2,nil)`, so the Flip effect still works when only one monster can be targeted and destroys that one, and at resolution it destroys whatever targets remain (`if #sg<1 then return end`). The modern script requires two targetable monsters to exist (`Duel.IsExistingTarget(aux.TRUE,...,2,nil)`), selects exactly 2, and destroys nothing at all unless both targets are still related to the effect (`if #sg~=2 then return end`). Targeting itself is unchanged - `EFFECT_FLAG_CARD_TARGET` and the `chkc` Monster-Zone check are present in both - and the cdb text is identical, so this is a ruling-layer difference in how many targets the effect demands.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700109,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700109.lua"
+  }
 }

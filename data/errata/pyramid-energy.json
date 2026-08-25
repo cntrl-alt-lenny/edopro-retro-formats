@@ -6,29 +6,14 @@
     "name": "Pyramid Energy"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can select and activate 1 of the following effects:\n●Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\n●Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
-      "modern_text": "You can select and activate 1 of the following effects:\r\n● Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\r\n● Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
-      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant carries EFFECT_FLAG_DAMAGE_CAL with a condition that only refuses activation once damage has already been calculated, so Pyramid Energy can be activated during damage calculation; the modern script carries EFFECT_FLAG_DAMAGE_STEP with aux.StatChangeDamageStepCondition, which confines it to the Damage Step before damage calculation. The remaining diff (RESETS_STANDARD_PHASE_END expanded into RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END) is the same constant written out, not a behaviour change. Chronology unresolved: nothing in the packet dates when the window narrowed.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700134,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700134.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,26 @@
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can select and activate 1 of the following effects:\n●Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\n●Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
+    "modern_text": "You can select and activate 1 of the following effects:\r\n● Increase the ATK of all face-up monsters on your side of the field by 200 points until the End Phase of the turn this card is activated.\r\n● Increase the DEF of all face-up monsters on your side of the field by 500 points until the End Phase of the turn this card is activated.",
+    "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant carries EFFECT_FLAG_DAMAGE_CAL with a condition that only refuses activation once damage has already been calculated, so Pyramid Energy can be activated during damage calculation; the modern script carries EFFECT_FLAG_DAMAGE_STEP with aux.StatChangeDamageStepCondition, which confines it to the Damage Step before damage calculation. The remaining diff (RESETS_STANDARD_PHASE_END expanded into RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END) is the same constant written out, not a behaviour change. Chronology unresolved: nothing in the packet dates when the window narrowed.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700134,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700134.lua"
+  }
 }

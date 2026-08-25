@@ -6,29 +6,14 @@
     "name": "Energy Drain"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Select 1 face-up monster on your side of the field. Increase the ATK and DEF of the monster by an amount equal to the number of cards in your opponent's hand x 200 points until the End Phase.",
-      "summary": "The single behavioural difference between the GOAT variant and the modern script is the declared damage-step activation window: the modern activation effect sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP (0x4000), the GOAT one sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL (0x8000) instead - two distinct constants that upstream's own modern scripts normally set together when an effect is meant to be usable across the whole Damage Step. Everything else in the diff is equivalent: aux.StatChangeDamageStepCondition() is defined as 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', which is exactly the GOAT inline condition, and RESETS_STANDARD_PHASE_END is defined as RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END, exactly the GOAT expansion. Chronology is unresolved, and so is which direction the flag swap resolves.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700090,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700090.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Select 1 face-up monster on your side of the field. Increase the ATK and DEF of the monster by an amount equal to the number of cards in your opponent's hand x 200 points until the End Phase.",
+    "modern_text": null,
+    "summary": "The single behavioural difference between the GOAT variant and the modern script is the declared damage-step activation window: the modern activation effect sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP (0x4000), the GOAT one sets EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL (0x8000) instead - two distinct constants that upstream's own modern scripts normally set together when an effect is meant to be usable across the whole Damage Step. Everything else in the diff is equivalent: aux.StatChangeDamageStepCondition() is defined as 'not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())', which is exactly the GOAT inline condition, and RESETS_STANDARD_PHASE_END is defined as RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END, exactly the GOAT expansion. Chronology is unresolved, and so is which direction the flag swap resolves.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700090,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700090.lua"
+  }
 }

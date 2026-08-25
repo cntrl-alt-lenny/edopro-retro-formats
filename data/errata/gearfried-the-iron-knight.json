@@ -6,29 +6,14 @@
     "name": "Gearfried the Iron Knight"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "When an Equip Spell Card is equipped to this card, destroy the Equip Spell Card.",
-      "summary": "Era effect category, not a text erratum: the GOAT script declares the equip-destruction as EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS - upstream's annotation 'effect is continuous' - and passes the destroy group through e:SetLabelObject/e:GetLabelObject, where the modern script declares EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F and routes it through Duel.SetTargetCard/Duel.GetTargetCards with SetOperationInfo. In the era version the destruction is a Continuous Effect that starts no Chain, so the opponent cannot respond to it and it cannot miss timing; in the modern version it is a mandatory Trigger Effect that does both. Chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700182,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700182.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "When an Equip Spell Card is equipped to this card, destroy the Equip Spell Card.",
+    "modern_text": null,
+    "summary": "Era effect category, not a text erratum: the GOAT script declares the equip-destruction as EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS - upstream's annotation 'effect is continuous' - and passes the destroy group through e:SetLabelObject/e:GetLabelObject, where the modern script declares EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F and routes it through Duel.SetTargetCard/Duel.GetTargetCards with SetOperationInfo. In the era version the destruction is a Continuous Effect that starts no Chain, so the opponent cannot respond to it and it cannot miss timing; in the modern version it is a mandatory Trigger Effect that does both. Chronology unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700182,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700182.lua"
+  }
 }

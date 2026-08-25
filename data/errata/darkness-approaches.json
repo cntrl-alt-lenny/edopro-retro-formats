@@ -6,35 +6,14 @@
     "name": "Darkness Approaches"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2023-04-20",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the printing carrying the 'face-down Defense Position' text (SRL-EN040, Spell Ruler 25th Anniversary Edition)"
-      },
-      "historical_text": "Discard 2 cards from your hand. Select 1 face-up monster and flip it face-down, but do not change its battle position.",
-      "modern_text": "Discard 2 cards from your hand. Select 1 face-up monster and change it to face-down Defense Position.",
-      "summary": "Functional erratum: the historical card flips the chosen monster face-down without changing its battle position - pre-errata/c511003028.lua calls Duel.ChangePosition(tc,POS_FACEDOWN_ATTACK,0,POS_FACEDOWN_DEFENSE,0), so a face-up Attack Position monster becomes face-down ATTACK Position - matching v1's 'flip it face-down, but do not change its battle position'. The modern script calls Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE) unconditionally, matching v2's 'change it to face-down Defense Position'. EdisonFormat.com records the same era behaviour and notes that such a monster cannot attack but can be Flip Summoned.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "edisonformat-functional-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003028,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003028.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -47,5 +26,32 @@
     "yugipedia-set-pages",
     "ignis-cardscripts",
     "edisonformat-functional-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2023-04-20",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the printing carrying the 'face-down Defense Position' text (SRL-EN040, Spell Ruler 25th Anniversary Edition)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Discard 2 cards from your hand. Select 1 face-up monster and flip it face-down, but do not change its battle position.",
+    "modern_text": "Discard 2 cards from your hand. Select 1 face-up monster and change it to face-down Defense Position.",
+    "summary": "Functional erratum: the historical card flips the chosen monster face-down without changing its battle position - pre-errata/c511003028.lua calls Duel.ChangePosition(tc,POS_FACEDOWN_ATTACK,0,POS_FACEDOWN_DEFENSE,0), so a face-up Attack Position monster becomes face-down ATTACK Position - matching v1's 'flip it face-down, but do not change its battle position'. The modern script calls Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE) unconditionally, matching v2's 'change it to face-down Defense Position'. EdisonFormat.com records the same era behaviour and notes that such a monster cannot attack but can be Flip Summoned.",
+    "sources": [
+      "yugipedia-card-errata",
+      "yugipedia-set-pages",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "edisonformat-functional-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003028,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003028.lua"
+  }
 }

@@ -6,34 +6,14 @@
     "name": "Spirit Ryu"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2019-01-24",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the '(Quick Effect)' text (SS02-ENA08, Speed Duel Starter Decks: Duelists of Tomorrow)"
-      },
-      "historical_text": "You can only activate this effect during your Battle Step, if this card battles during your turn. Discard 1 Dragon-Type monster from your hand to the Graveyard to increase the ATK and DEF of this card by 1000 points until the End Step.",
-      "modern_text": "During your Battle Step, if this card battles (Quick Effect): You can discard 1 Dragon monster to the GY; this card gains 1000 ATK/DEF until the end of the Battle Phase.",
-      "summary": "The ATK/DEF-boost effect changed Spell Speed. The goat script's s.adcon adds 'Duel.GetCurrentChain()==0' to the modern condition, so the effect can only ever be Chain Link 1 - it cannot be chained to anything - which upstream annotates as 'the effect is spell speed 1; implemented as quick effect that can only be CL1'. The modern script is a plain EFFECT_TYPE_QUICK_O with no chain restriction, matching v2's added '(Quick Effect)' wording, so it can be activated in response to another effect. The discard cost, the 'this card battles during your turn' requirement and the reset at the end of the Battle Phase are identical (the rest of the diff is TIMING_BATTLE_PHASE|TIMING_CHAIN_END vs '+' and the equivalent phase-range test).",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700185,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700185.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2019-01-24",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the '(Quick Effect)' text (SS02-ENA08, Speed Duel Starter Decks: Duelists of Tomorrow)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You can only activate this effect during your Battle Step, if this card battles during your turn. Discard 1 Dragon-Type monster from your hand to the Graveyard to increase the ATK and DEF of this card by 1000 points until the End Step.",
+    "modern_text": "During your Battle Step, if this card battles (Quick Effect): You can discard 1 Dragon monster to the GY; this card gains 1000 ATK/DEF until the end of the Battle Phase.",
+    "summary": "The ATK/DEF-boost effect changed Spell Speed. The goat script's s.adcon adds 'Duel.GetCurrentChain()==0' to the modern condition, so the effect can only ever be Chain Link 1 - it cannot be chained to anything - which upstream annotates as 'the effect is spell speed 1; implemented as quick effect that can only be CL1'. The modern script is a plain EFFECT_TYPE_QUICK_O with no chain restriction, matching v2's added '(Quick Effect)' wording, so it can be activated in response to another effect. The discard cost, the 'this card battles during your turn' requirement and the reset at the end of the Battle Phase are identical (the rest of the diff is TIMING_BATTLE_PHASE|TIMING_CHAIN_END vs '+' and the equivalent phase-range test).",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700185,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700185.lua"
+  }
 }

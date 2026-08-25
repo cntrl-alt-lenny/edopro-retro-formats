@@ -6,29 +6,14 @@
     "name": "Toon Gemini Elf"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: Discard 1 random card from your opponent's hand.",
-      "summary": "Mandatory versus optional discard: the GOAT script registers the battle-damage effect as EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F while the modern script uses EFFECT_TYPE_TRIGGER_O, so historically the random discard is forced (and behaves as a mandatory trigger for miss-timing purposes) and today it may be declined. Upstream annotates the variant 'effect is mandatory'. Every English printing from DL6-EN001 (2004-12-01) to DPBC-EN045 (2015-06-19) words the discard unconditionally, so no TCG text change accompanies this; the optional reading comes only from the pinned cards.cdb text, which itself states it is unofficial and describes the OCG functionality. Chronology unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700183,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700183.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Cannot attack the turn it is Summoned. If \"Toon World\" on the field is destroyed, destroy this card. While you control \"Toon World\" and your opponent controls no Toon monsters, this card can attack your opponent directly. If this card inflicts battle damage to your opponent: Discard 1 random card from your opponent's hand.",
+    "modern_text": null,
+    "summary": "Mandatory versus optional discard: the GOAT script registers the battle-damage effect as EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F while the modern script uses EFFECT_TYPE_TRIGGER_O, so historically the random discard is forced (and behaves as a mandatory trigger for miss-timing purposes) and today it may be declined. Upstream annotates the variant 'effect is mandatory'. Every English printing from DL6-EN001 (2004-12-01) to DPBC-EN045 (2015-06-19) words the discard unconditionally, so no TCG text change accompanies this; the optional reading comes only from the pinned cards.cdb text, which itself states it is unofficial and describes the OCG functionality. Chronology unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700183,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700183.lua"
+  }
 }

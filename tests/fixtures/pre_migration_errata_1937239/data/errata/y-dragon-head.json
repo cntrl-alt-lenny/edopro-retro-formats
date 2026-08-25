@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-y-dragon-head",
+  "modern_card": {
+    "passcode": 65622692,
+    "name": "Y-Dragon Head"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2016-10-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SDKS-EN006 (Structure Deck: Seto Kaiba), the first printing carrying the errata'd Union text"
+      },
+      "historical_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it in face-up Attack Position. While equipped by this effect, the equipped monster gains 400 ATK and DEF. (A monster can only be equipped with 1 Union monster at a time. If the equipped monster would be destroyed by battle, destroy this card instead.)",
+      "modern_text": "Once per turn, you can either: Target 1 \"X-Head Cannon\" you control; equip this card to that target, OR: Unequip this card and Special Summon it. A monster equipped with this card gains 400 ATK and DEF, also if the equipped monster would be destroyed by battle or card effect, destroy this card instead.",
+      "summary": "Functional erratum, the 2016 Union rewrite: the pre-errata script calls `aux.AddUnionProcedure(...,true)`, whose oldequip/oldprotect path (read in proc_union.lua) makes the equip target filter require the chosen monster to carry no Union monster at all (UnionFilter ct1==0, the printed 'A monster can only be equipped with 1 Union monster at a time' Condition), restricts the destruction replacement to REASON_BATTLE only, and forces the self-unequip Special Summon into face-up Attack Position; the modern script drops all three, counting only same-name Unions, substituting against battle or card effect destruction, and allowing any face-up position. The pre-errata script additionally gates the 400 ATK/DEF boost on `aux.IsUnionState`, matching the printed 'While equipped by this effect', so historically a Y-Dragon Head equipped by some other card's effect grants nothing, whereas the errata'd 'A monster equipped with this card gains 400 ATK/DEF' applies however it was equipped.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002852,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002852.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v5 (the Silver Dragon Value Box reprint of DPKB-EN011, 2013-09-13), the last pre-errata English text and the one the pre-errata cdb entry matches at 0.9921 (the residue is 'ATK/DEF' versus 'ATK and DEF'). Everything earlier is cosmetic and is noted rather than recorded: v0 (MFC-005, 2003-10-10) through v4 (DPKB-EN011, 2010-04-16) move from 'Equip Spell Card' to 'Equip Card', drop 'if you control this card on the field' and 'during your Main Phase', and add PSCT targeting at v5, with no EFFECT_FLAG_CARD_TARGET difference in the script diff. The printing in force at the 2005-04-01 GOAT snapshot is v1 (DR1-EN060, 2005-03-19) and at the 2010-04-24 Edison snapshot is v4 (DPKB-EN011, 2010-04-16); both are behaviourally identical to v5, so using v5 as the historical text costs nothing behaviourally. Upstream also ships passcode 511019002, 'Y-Dragon Head (Manga)', in the same cdb: it is a manga-only entry with flavour text, script null, and it implements nothing, so it is not a second candidate baseline and is not folded in (the two codes are far outside the +/-10 artwork-variant window and do not implement the same card). Trailing cosmetic v6 -> v7 (LCKC-EN006, 2018-03-08, 'ATK/DEF') is not recorded as a change. EdisonFormat.com's Functional Errata page corroborates the era Condition and attributes its removal to Structure Deck: Seto Kaiba, which the lineage independently dates to 2016-10-20; the community page is used only as behavioural corroboration, never as the chronology anchor."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

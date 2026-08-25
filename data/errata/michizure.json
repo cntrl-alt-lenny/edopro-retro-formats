@@ -6,34 +6,14 @@
     "name": "Michizure"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2010-01-29",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the added Damage Step permission (DT01-EN096, Duel Terminal 1)"
-      },
-      "historical_text": "You can activate this card when a monster is sent from the field to your Graveyard. Destroy 1 monster on the field.",
-      "modern_text": "Activate only when a monster is sent from the field to your Graveyard. Select and destroy 1 monster on the field. (You can activate this card during the Damage Step.)",
-      "summary": "Functional change carried by a printing: DT01-EN096 added '(You can activate this card during the Damage Step.)', and the modern script grants EFFECT_FLAG_DAMAGE_STEP on the activation effect. The GOAT variant's only difference from modern is that it omits that flag, setting EFFECT_FLAG_CARD_TARGET alone, so the era card cannot be activated during the Damage Step at all - a monster sent from the field to your Graveyard by battle gives it no activation window. Upstream's note: 'Cannot be activated during the damage step.' Everything else (the EVENT_TO_GRAVE activation trigger and the targeted destruction) is byte-identical.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700059,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700059.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2010-01-29",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the added Damage Step permission (DT01-EN096, Duel Terminal 1)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You can activate this card when a monster is sent from the field to your Graveyard. Destroy 1 monster on the field.",
+    "modern_text": "Activate only when a monster is sent from the field to your Graveyard. Select and destroy 1 monster on the field. (You can activate this card during the Damage Step.)",
+    "summary": "Functional change carried by a printing: DT01-EN096 added '(You can activate this card during the Damage Step.)', and the modern script grants EFFECT_FLAG_DAMAGE_STEP on the activation effect. The GOAT variant's only difference from modern is that it omits that flag, setting EFFECT_FLAG_CARD_TARGET alone, so the era card cannot be activated during the Damage Step at all - a monster sent from the field to your Graveyard by battle gives it no activation window. Upstream's note: 'Cannot be activated during the damage step.' Everything else (the EVENT_TO_GRAVE activation trigger and the targeted destruction) is byte-identical.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700059,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700059.lua"
+  }
 }

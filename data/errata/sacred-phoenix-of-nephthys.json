@@ -6,29 +6,14 @@
     "name": "Sacred Phoenix of Nephthys"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "If this card is destroyed by a card effect, Special Summon this card during your next Standby Phase. If you Special Summon this card successfully in this way, destroy all Spell and Trap Cards on the field.",
-      "summary": "Period behaviour with no text correlate: the GOAT variant adds c:IsPreviousLocation(LOCATION_SZONE) to the registration condition, so a Nephthys destroyed while it was in a Spell/Trap Zone - i.e. destroyed while being treated as an Equip Card - never registers the flag effect and does not revive in your next Standby Phase (upstream annotation: 'Doesn't resurrect if destroyed while equipped'). The modern script tests only that the card was destroyed by a card effect and revives it regardless of the zone it was destroyed in. Chronology unresolved: nothing in the packet dates the change.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700099,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700099.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "If this card is destroyed by a card effect, Special Summon this card during your next Standby Phase. If you Special Summon this card successfully in this way, destroy all Spell and Trap Cards on the field.",
+    "modern_text": null,
+    "summary": "Period behaviour with no text correlate: the GOAT variant adds c:IsPreviousLocation(LOCATION_SZONE) to the registration condition, so a Nephthys destroyed while it was in a Spell/Trap Zone - i.e. destroyed while being treated as an Equip Card - never registers the flag effect and does not revive in your next Standby Phase (upstream annotation: 'Doesn't resurrect if destroyed while equipped'). The modern script tests only that the card was destroyed by a card effect and revives it regardless of the zone it was destroyed in. Chronology unresolved: nothing in the packet dates the change.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700099,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700099.lua"
+  }
 }

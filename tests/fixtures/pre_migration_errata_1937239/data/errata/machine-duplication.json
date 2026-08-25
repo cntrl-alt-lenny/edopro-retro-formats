@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-machine-duplication",
+  "modern_card": {
+    "passcode": 63995093,
+    "name": "Machine Duplication"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Select 1 Machine-Type monster with an ATK of 500 or less on your side of the field and activate this card. You can Special Summon up to 2 cards with the same name from your Deck.",
+      "summary": "Period ruling package. Activation condition: the modern `s.filter` requires, on top of face-up/Machine/500-or-less-ATK, that `Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)` - a Deck copy of the chosen monster's name - while the goat filter drops that clause, so the card can be activated targeting a Machine whose copies are all gone. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700104,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700104.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Targeting is unchanged: `e1:SetProperty(EFFECT_FLAG_CARD_TARGET)` is present in BOTH scripts and both call `Duel.SelectTarget`, so the lineage's \"Select 1 ...\" (v0-v2) -> \"Target 1 ...\" (v3, LCYW-EN145, 2012-09-29) is cosmetic per the explicit test in the review instructions. The \"face-up\" (added v2, SDMM-EN026, 2010-02-19) and \"you control\" clauses were already enforced by both scripts via `c:IsFaceup()` and the LOCATION_MZONE/controller check, and the resolution-time `tc:IsRelateToEffect(e) and tc:IsFaceup()` guard plus the CARD_BLUEEYES_SPIRIT clamp are identical in both. Whole text lineage v0 (RDS-EN041, 2004-12-01) through v5 (OP08-EN008, 2018-08-17) therefore recorded as cosmetic, hence modern_text_version null. Verification-half bounds: old attested through 2011-02-02, modern from 2019-04-03."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,29 +6,14 @@
     "name": "Rampaging Rhynos"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If this card attacks the monster in its same column, this card gains 500 ATK during the Damage Step.",
-      "summary": "When the destination zone is chosen differs, with no English text change: the pre-errata script sets only aux.seqmovop, which picks a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which locks the destination in at activation (e:SetLabel(c:SelectAdjacent())) and aborts the move if Duel.CheckLocation shows that zone is no longer free when the effect resolves. Chronology is unresolved: no English printing in the lineage carries the change, and I did not date it from the OCG printing that does.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 3784444,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c3784444.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +23,27 @@
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Once per turn, this card can move to an adjacent (horizontal) unoccupied Monster Card Zone. If this card attacks the monster in its same column, this card gains 500 ATK during the Damage Step.",
+    "modern_text": null,
+    "summary": "When the destination zone is chosen differs, with no English text change: the pre-errata script sets only aux.seqmovop, which picks a free adjacent Monster Card Zone at resolution, while the modern script sets aux.seqmovtg/aux.seqmovtgop, which locks the destination in at activation (e:SetLabel(c:SelectAdjacent())) and aborts the move if Duel.CheckLocation shows that zone is no longer free when the effect resolves. Chronology is unresolved: no English printing in the lineage carries the change, and I did not date it from the OCG printing that does.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 3784444,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c3784444.lua"
+  }
 }

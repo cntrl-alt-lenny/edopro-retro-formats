@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-my-body-as-a-shield",
+  "modern_card": {
+    "passcode": 69279219,
+    "name": "My Body as a Shield"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2019-04-18",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OP10-EN021 (OTS Tournament Pack 10), the first printing whose text drops '(except during the Damage Step)'"
+      },
+      "historical_text": "When your opponent activates a card that has an effect which destroys 1 or more monster(s) on the field, pay 1500 Life Points to negate the activation of that card and destroy it.",
+      "modern_text": "When your opponent activates a Spell/Trap Card or monster effect that would destroy a monster(s) on the field: Pay 1500 LP; negate the activation, and if you do, destroy it.",
+      "summary": "Functional erratum: the Damage Step restriction was removed. The GOAT script's only difference from the modern one is that it does not set EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL on the activation, so the era card cannot be activated during the Damage Step at all - upstream annotates it 'Cannot be used during the damage step'. The printed text stated that restriction outright from LCYW-EN135 (v5, 2012) through PGL2-EN074 (v6, 2015) and lost it at OP10-EN021 (v7), after which the modern implementation is correct.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata",
+        "yugipedia-set-pages",
+        "edisonformat-functional-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700189,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700189.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflict preserved, not resolved: the baseline's cdb text is v1 (CP01-EN015, 2006-11-11) 'when your opponent activates a CARD that has an effect which destroys...', and v2 (TU02-EN007, 2010-01-09) - the printing actually in circulation at the 2010-04-24 Edison snapshot - is equally card-scoped, while v3 (GLD3-EN041, 2010-06-18) broadened the trigger to 'a card OR effect'. Upstream's GOAT script does not reproduce the narrow card-only scope: its single-line diff leaves the modern trigger scope intact, so as shipped it behaves like the v5/v6 version minus the Damage Step allowance. Two independent parties treat the GLD3 wording as clarification rather than change - Project Ignis by not narrowing the script, and EdisonFormat.com, which states the era card can be chained to a card or an effect while openly conceding that SJC Edison was played with the TU2 printing and that adopting GLD3 is a community-convention choice. I therefore record only the Damage Step transition as implementation-relevant and flag the scope tension rather than inventing a second change the script cannot support. Intermediate rewordings v1 -> v5 (TU02 'Activate only by paying', DT05-EN041 'Spell/Trap Card or Effect Monster's effect', LCYW PSCT) are collapsed into this note."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "edisonformat-functional-errata"
+  ]
+}

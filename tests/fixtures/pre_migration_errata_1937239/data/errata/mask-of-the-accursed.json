@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-mask-of-the-accursed",
+  "modern_card": {
+    "passcode": 56948373,
+    "name": "Mask of the Accursed"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "The monster equipped with this card cannot attack. The controller of the equipped monster takes 500 points of damage during each of your Standby Phases.",
+      "summary": "Period ruling with no text counterpart, on two points. (1) Effect immunity: the GOAT variant's Standby Phase damage trigger does not activate at all when the equipped monster is immune to Mask of the Accursed's effect - its condition is 'Duel.GetTurnPlayer()==tp and e:GetHandler():GetEquipTarget()~=nil and not e:GetHandler():GetEquipTarget():IsImmuneToEffect(e)' - whereas the modern condition only checks that it is your turn (Duel.IsTurnPlayer(tp)) and inflicts the 500 damage regardless. Upstream's note: 'If monster is immuned, no damage occurs.' (2) Recipient and self-check: the GOAT operation aborts if the Mask itself is no longer related to the effect and reads the damaged player from the chain's target info (activation time), while the modern operation takes the player from GetEquipTarget():GetControler() at resolution and makes no such check. The GOAT effect also omits CATEGORY_DAMAGE, which is hint/AI metadata rather than a rules difference.",
+      "sources": [
+        "ignis-cardscripts",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700091,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700091.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at lineage v2 (DB1-EN222, 2004-10-12), the GOAT entry's exact text. The lineage is cosmetic and is not recorded as a change: v1 (LON-E019, 2003-03-01) -> v2 tightens 'the player controlling the equipped monster must take damage of 500 Life Points' to 'the controller of the equipped monster takes 500 points of damage'; v3 (SBAD-EN042, 2019-05-30, the pinned cdb text) is the PSCT rewrite whose 'Once per turn, during your Standby Phase:' formalises 'during each of your Standby Phases' - both scripts already implement it as a mandatory (TRIGGER_F) EVENT_PHASE+PHASE_STANDBY trigger with SetCountLimit(1) and a turn-player condition. The lineage has no index 0 entry. Nothing in the packet or the shared briefs dates the immunity ruling, so effective is left empty."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

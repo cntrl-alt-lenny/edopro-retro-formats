@@ -6,29 +6,14 @@
     "name": "Manticore of Darkness"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "During the End Phase, if this card is in the GY because it was sent there this turn: You can send 1 Beast, Beast-Warrior, or Winged Beast monster from your hand or face-up field to the GY; Special Summon this card from your GY.",
-      "summary": "Era timing ruling, no text difference: the goat script special-cases the End Phase hand-size adjustment (reason exactly REASON_RULE|REASON_DISCARD|REASON_ADJUST) by raising a custom single event that fires a cloned TRIGGER_O copy of the revival effect, so a Manticore discarded for hand size can still Special Summon itself during that same End Phase. The modern s.tgop returns early on REASON_ADJUST and never registers the flag the revival effect's condition reads, so the adjustment discard can never trigger it. Chronology of this ruling is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700186,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700186.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "During the End Phase, if this card is in the GY because it was sent there this turn: You can send 1 Beast, Beast-Warrior, or Winged Beast monster from your hand or face-up field to the GY; Special Summon this card from your GY.",
+    "modern_text": null,
+    "summary": "Era timing ruling, no text difference: the goat script special-cases the End Phase hand-size adjustment (reason exactly REASON_RULE|REASON_DISCARD|REASON_ADJUST) by raising a custom single event that fires a cloned TRIGGER_O copy of the revival effect, so a Manticore discarded for hand size can still Special Summon itself during that same End Phase. The modern s.tgop returns early on REASON_ADJUST and never registers the flag the revival effect's condition reads, so the adjustment discard can never trigger it. Chronology of this ruling is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700186,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700186.lua"
+  }
 }

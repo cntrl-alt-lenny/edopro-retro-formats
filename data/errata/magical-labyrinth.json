@@ -6,28 +6,14 @@
     "name": "Magical Labyrinth"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Equip \"Labyrinth Wall\" with this card. If you Tribute \"Labyrinth Wall\" equipped with this card, you can Special Summon \"Wall Shadow\" from your Deck.",
-      "summary": "Period ruling package. Activation condition: the modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` - a \"Wall Shadow\" in the Deck - while the goat target checks only for a free zone (`return ft>0`), so the Ignition effect can be used and its cost paid (both Magical Labyrinth and the equipped \"Labyrinth Wall\" are Released) with no \"Wall Shadow\" left, losing two cards for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700105,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700105.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -38,5 +24,26 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Equip \"Labyrinth Wall\" with this card. If you Tribute \"Labyrinth Wall\" equipped with this card, you can Special Summon \"Wall Shadow\" from your Deck.",
+    "modern_text": null,
+    "summary": "Period ruling package. Activation condition: the modern `s.sptg` requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` - a \"Wall Shadow\" in the Deck - while the goat target checks only for a free zone (`return ft>0`), so the Ignition effect can be used and its cost paid (both Magical Labyrinth and the equipped \"Labyrinth Wall\" are Released) with no \"Wall Shadow\" left, losing two cards for nothing. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so the change is recorded unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700105,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700105.lua"
+  }
 }

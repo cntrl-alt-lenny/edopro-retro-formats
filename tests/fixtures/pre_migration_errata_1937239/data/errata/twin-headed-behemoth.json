@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-twin-headed-behemoth",
+  "modern_card": {
+    "passcode": 43586926,
+    "name": "Twin-Headed Behemoth"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2011-03-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SDDL-EN017 (Dragunity Legion Structure Deck), the first printing naming the card in its once-per-Duel restriction"
+      },
+      "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. You can only use this effect once per Duel.",
+      "modern_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
+      "summary": "Functional erratum: the once-per-Duel limit changed from per-copy to per-name. The pre-errata script gates the End Phase revival with a cost that reads and sets a flag effect on the individual card (`c:GetFlagEffect(id)==0` / `c:RegisterFlagEffect(id,0,0,1)`), so each copy of Twin-Headed Behemoth may revive once per Duel; the modern script uses `SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)`, which spends the single use for every copy of the name. SDDL-EN017 is the first English text to say 'the effect of \"Twin-Headed Behemoth\"' instead of 'this effect'.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "kind": "cosmetic",
+      "effective": {
+        "date": "2019-01-24",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SS02-ENA06 (Speed Duel Starter Decks: Duelists of Tomorrow)"
+      },
+      "historical_text": "If this card is destroyed and sent from the field to the Graveyard, Special Summon it during the End Phase of this turn with 1000 ATK and 1000 DEF. Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel.",
+      "modern_text": "During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn: You can Special Summon this card, but its ATK/DEF become 1000. You can only use this effect of \"Twin-Headed Behemoth\" once per Duel.",
+      "summary": "Wording modernisation only from v4 to v8: 'Each player can only use' becomes 'You can only use' (the same per-player scope), PSCT restructures the trigger into 'During the End Phase, if this card is in the GY because it was destroyed on the field and sent there this turn:', and Graveyard becomes GY. The AP08 printing (v7, 2015-10-23) also switched the imperative 'Special Summon it from the Graveyard' to 'You can Special Summon this card'; both upstream scripts register that revival as the same EFFECT_TYPE_TRIGGER_O effect, so no optionality difference is recorded here.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511000868,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511000868.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The chain deliberately starts at v3 (SDRL-EN010, 2007-10-24) rather than at the packet's text_matches_version: the pre-errata cdb text matches v6 at only 0.9347 and is an upstream hybrid - v6's PSCT wording with 'each' inserted into the once-per-Duel clause - so it matches no printed English version. Behaviourally the variant implements the pre-name-lock era, whose last printing is v3; v0-v2 (LOD-063 2003-06-06, SD1-EN004 2005-01-01, CP02-EN016 2007-02-06) are cosmetic predecessors and are noted rather than recorded, with SD1-EN004 being the printing in force at the 2005-04-01 GOAT snapshot and SDRL-EN010 the one in force at the 2010-04-24 Edison snapshot. Second conflict preserved: every English text through v6 words the revival as an imperative while both upstream scripts (modern official/c43586926.lua read in full, and the pre-errata variant which does not touch that line) make it optional; following the conservative rule that PSCT formalisation is cosmetic and treating upstream's own pre-errata script as evidence of era behaviour, the v7 'You can' is recorded as non-behavioural, but a reviewer may wish to revisit it. The modern script also carries EFFECT_FLAG_CANNOT_DISABLE on the EVENT_TO_GRAVE registrar while the pre-errata one does not, so the historical card's 'destroyed this turn' registration can be negated."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

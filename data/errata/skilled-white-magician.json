@@ -6,45 +6,14 @@
     "name": "Skilled White Magician"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null,
-        "status": "verified",
-        "old_attested_through": "2005-06-16",
-        "new_attested_from": "2008-12-15",
-        "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no \"Buster Blader\" in hand, Deck or Graveyard subject to verification (the effect then disappearing); Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation in that case.",
-        "corroboration": [
-          {
-            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
-            "quote": "If there is no \"Buster Blader\" in your hand/Deck/Graveyard you can still activate this effect but your opponent can verify the contents to make certain, and then the effect disappears.",
-            "archived": true
-          },
-          {
-            "url": "http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
-            "quote": "If there are no \"Buster Blader\" in your hand, Deck, and Graveyard, you cannot activate \"Skilled White Magician's\" effect that Special Summons \"Buster Blader\".",
-            "archived": true
-          }
-        ]
-      },
-      "historical_text": "Each time you or your opponent activates 1 Spell Card, put 1 Spell Counter on this card (max. 3). Tribute this card with 3 Spell Counters on it to Special Summon 1 \"Buster Blader\" from your hand, Deck, or Graveyard.",
-      "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script reduces s.sptg to the free-zone test alone (the modern Duel.IsExistingMatchingCard over Deck, hand and Graveyard is removed), so the 3-Spell-Counter Tribute effect can be activated with no \"Buster Blader\" anywhere, and it proves the failure by revealing hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK); the Graveyard is already public); the modern script requires an available \"Buster Blader\" to activate and never reveals. Period rulings add that in the old era the effect simply disappeared on resolution.",
-      "sources": [
-        "ignis-cardscripts",
-        "ude-card-rulings-archive",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700074,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700074.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -56,5 +25,43 @@
     "ignis-cardscripts",
     "ude-card-rulings-archive",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null,
+      "status": "verified",
+      "old_attested_through": "2005-06-16",
+      "new_attested_from": "2008-12-15",
+      "basis": "Per-card ruling chronology from two archived official documents: the UDE Card Rulings capture of 2005-06-16 expressly permits activation with no \"Buster Blader\" in hand, Deck or Graveyard subject to verification (the effect then disappearing); Konami's yugioh-card.com Card FAQ capture of 2008-12-15 expressly forbids activation in that case.",
+      "corroboration": [
+        {
+          "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+          "quote": "If there is no \"Buster Blader\" in your hand/Deck/Graveyard you can still activate this effect but your opponent can verify the contents to make certain, and then the effect disappears.",
+          "archived": true
+        },
+        {
+          "url": "http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
+          "quote": "If there are no \"Buster Blader\" in your hand, Deck, and Graveyard, you cannot activate \"Skilled White Magician's\" effect that Special Summons \"Buster Blader\".",
+          "archived": true
+        }
+      ]
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Each time you or your opponent activates 1 Spell Card, put 1 Spell Counter on this card (max. 3). Tribute this card with 3 Spell Counters on it to Special Summon 1 \"Buster Blader\" from your hand, Deck, or Graveyard.",
+    "modern_text": null,
+    "summary": "Period procedure plus a per-card activation ruling, not a text erratum: the GOAT script reduces s.sptg to the free-zone test alone (the modern Duel.IsExistingMatchingCard over Deck, hand and Graveyard is removed), so the 3-Spell-Counter Tribute effect can be activated with no \"Buster Blader\" anywhere, and it proves the failure by revealing hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK); the Graveyard is already public); the modern script requires an available \"Buster Blader\" to activate and never reveals. Period rulings add that in the old era the effect simply disappeared on resolution.",
+    "sources": [
+      "ignis-cardscripts",
+      "ude-card-rulings-archive",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700074,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700074.lua"
+  }
 }

@@ -6,30 +6,14 @@
     "name": "Sphinx Teleia"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
-      "modern_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
-      "summary": "Era trigger timing, no text difference: the goat script fires the Defense-Position burn on EVENT_BATTLED - after damage calculation - and requires the battle target to have actually been battle-destroyed and to be in Defense Position at that later point (`bc:IsBattleDestroyed() and bc:IsPosition(POS_DEFENSE)`). The modern script fires on EVENT_BATTLE_DESTROYING during damage calculation and checks only the position recorded for the battle (`bc:GetBattlePosition()&POS_DEFENSE`), so the burn occupies an earlier Damage Step window and can resolve where the era version's later, destruction-confirmed check would not. The reset diff is the expansion of RESETS_STANDARD_PHASE_END (constant.lua) and is not behavioural. Chronology of this ruling is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700083,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700083.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -40,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
+    "modern_text": "You can pay 500 Life Points to Special Summon this card when \"Pyramid of Light\" is on the field. This card cannot attack during the turn that it is Normal Summoned or Special Summoned. This card cannot be Special Summoned from the Graveyard. If this card destroys a Defense Position monster as a result of battle, inflict damage to your opponent's Life Points equal to half of the DEF of the destroyed monster.",
+    "summary": "Era trigger timing, no text difference: the goat script fires the Defense-Position burn on EVENT_BATTLED - after damage calculation - and requires the battle target to have actually been battle-destroyed and to be in Defense Position at that later point (`bc:IsBattleDestroyed() and bc:IsPosition(POS_DEFENSE)`). The modern script fires on EVENT_BATTLE_DESTROYING during damage calculation and checks only the position recorded for the battle (`bc:GetBattlePosition()&POS_DEFENSE`), so the burn occupies an earlier Damage Step window and can resolve where the era version's later, destruction-confirmed check would not. The reset diff is the expansion of RESETS_STANDARD_PHASE_END (constant.lua) and is not behavioural. Chronology of this ruling is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700083,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700083.lua"
+  }
 }

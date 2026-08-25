@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-xz-tank-cannon",
+  "modern_card": {
+    "passcode": 99724761,
+    "name": "XZ-Tank Cannon"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "\"X-Head Cannon\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 face-down Spell or Trap Card on your opponent's side of the field.",
+      "summary": "Era restriction on contact-fusion material: the GOAT script's material filter gathers from LOCATION_MZONE while the modern one gathers from LOCATION_ONFIELD, so only under the modern implementation can an 'X-Head Cannon' or 'Z-Metal Tank' sitting in the Spell/Trap Zone as a Union equip be banished as material (upstream annotation: 'Only mo[n]sters in the mzone allowed as material'). The printed material clause never distinguishes the zones, so this is a period ruling; chronology unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    },
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2016-10-20",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of SDKS-EN044 (Structure Deck: Seto Kaiba), the first printing carrying the 'Must first be Special Summoned' wording"
+      },
+      "historical_text": "\"X-Head Cannon\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 face-down Spell or Trap Card on your opponent's side of the field.",
+      "modern_text": "\"X-Head Cannon\" + \"Z-Metal Tank\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) Cannot be Special Summoned from the Graveyard. You can discard 1 card, then target 1 face-down Spell/Trap Card your opponent controls; destroy that target.",
+      "summary": "Functional erratum: 'This card cannot be Special Summoned except by removing from play the above cards' became 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control ... Cannot be Special Summoned from the Graveyard', turning a strict nomi into a semi-nomi with a Graveyard ban. The GOAT script passes `true` as Fusion.AddContactProc's summon-condition argument, which creates an EFFECT_SPSUMMON_CONDITION with no value and forbids every other Special Summon of the card; the modern script passes a function allowing any Special Summon except from the Extra Deck or Graveyard, so after a proper contact fusion the modern card can be Special Summoned from banishment. The same printing reworded the discard effect into PSCT targeting wording, which the script diff shows is not a targeting change.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700177,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700177.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline text is v1 (DR1-EN108, Dark Revelation Volume 1, 2005-03-19, matched at 0.9985), the printing in force at the 2005-04-01 GOAT snapshot; v0 (MFC-053, 2003-10-10) says 'the above monsters' and predates it. Lineage v2 and v3 carry no card number, no set and no date, so they cannot be dated; both keep the strict 'This card can only be Special Summoned' form (v2 adds the redundant Graveyard line, v3 renames Fusion Deck to Extra Deck) and are behaviourally identical to v1, so they are recorded here instead of as an unresolved-chronology change that would block period snapshots, and the erratum entry collapses v1 -> v4. Trailing cosmetic v5 (SBCB-EN085, 2020-11-26: GY, 'Spell/Trap') and v6 (SBC2-ENB22, 2024-12-13: the Polymerization parenthetical dropped) are not recorded as changes. Remaining script-diff hunks (`|` versus '+' in the REASON constants) are equivalent. The Monster-Zone material ruling and the 2016 erratum cannot be sequenced against each other because the former has no chronology."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "yugipedia-set-pages"
+  ]
+}

@@ -6,34 +6,14 @@
     "name": "Gilasaurus"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2017-04-13",
-        "precision": "day",
-        "status": "reported",
-        "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN012, Dinosmasher's Fury Structure Deck)"
-      },
-      "historical_text": "You can Special Summon this card (from your hand). When you do: Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field.",
-      "modern_text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their Graveyard.",
-      "summary": "Functional erratum: targeting was removed. v4 (BP01-EN177) reads 'Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field', and upstream's pre-errata script matches it - a Continuous Effect on EVENT_SPSUMMON_SUCCESS asks the opponent (Duel.SelectEffectYesNo) and, on yes, raises a custom event for a second effect that carries EFFECT_FLAG_CARD_TARGET and declares the Graveyard monster at activation through Duel.SelectTarget. v5 (SR04-EN012) reads 'Activate this effect; your opponent can Special Summon 1 monster from their Graveyard', and the modern script is a single mandatory trigger with no EFFECT_FLAG_CARD_TARGET that asks and picks entirely on resolution, its pool filtered by aux.NecroValleyFilter.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511003006,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511003006.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -45,5 +25,31 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2017-04-13",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (SR04-EN012, Dinosmasher's Fury Structure Deck)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "You can Special Summon this card (from your hand). When you do: Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field.",
+    "modern_text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their Graveyard.",
+    "summary": "Functional erratum: targeting was removed. v4 (BP01-EN177) reads 'Your opponent can target 1 monster in their Graveyard; your opponent Special Summons that target to their side of the field', and upstream's pre-errata script matches it - a Continuous Effect on EVENT_SPSUMMON_SUCCESS asks the opponent (Duel.SelectEffectYesNo) and, on yes, raises a custom event for a second effect that carries EFFECT_FLAG_CARD_TARGET and declares the Graveyard monster at activation through Duel.SelectTarget. v5 (SR04-EN012) reads 'Activate this effect; your opponent can Special Summon 1 monster from their Graveyard', and the modern script is a single mandatory trigger with no EFFECT_FLAG_CARD_TARGET that asks and picks entirely on resolution, its pool filtered by aux.NecroValleyFilter.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511003006,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511003006.lua"
+  }
 }

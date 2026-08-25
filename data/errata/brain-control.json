@@ -6,48 +6,14 @@
     "name": "Brain Control"
   },
   "classification": "functional",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "functional",
-      "effective": {
-        "date": "2017-03-30",
-        "precision": "day",
-        "status": "verified",
-        "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN046, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
-        "corroboration": [
-          {
-            "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
-            "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
-            "quote": "the text of these cards has been altered, and they become legal for play with their new text",
-            "archived": true
-          },
-          {
-            "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
-            "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
-            "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
-            "archived": true
-          }
-        ]
-      },
-      "historical_text": "Pay 800 LP, then target 1 face-up monster your opponent controls; take control of that target until the End Phase.",
-      "modern_text": "Pay 800 LP, then target 1 face-up monster your opponent controls that can be Normal Summoned/Set; take control of that target until the End Phase.",
-      "summary": "Functional erratum: the target clause gains 'that can be Normal Summoned/Set', so the modern card can no longer take control of Extra Deck monsters or of monsters that cannot be Normal Summoned. The pre-errata script's filter is 'c:IsControlerCanBeChanged() and c:IsFaceup()' with no c:IsSummonableCard() test, so any face-up monster the opponent controls is a legal target - a Synchro Monster included, which is exactly what makes the difference load-bearing for the 2010 snapshot.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 511002995,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c511002995.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -60,5 +26,45 @@
     "ignis-cardscripts",
     "yugipedia-set-pages",
     "konami-errata-announcements"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": "2017-03-30",
+      "precision": "day",
+      "status": "verified",
+      "basis": "TCG release of the first printing carrying the errata'd text (DUSA-EN046, Duelist Saga) Independently corroborated by Konami's own errata announcement and the archived Forbidden & Limited List page carrying its effective date; the printing remains the anchor because it is when the text first became available in the TCG (the announcement and the F/L effective date differ by a few days).",
+      "corroboration": [
+        {
+          "url": "http://web.archive.org/web/20170330000000*/yugiohblog.konami.com/articles/*duelist-saga*",
+          "title": "Konami TCG Strategy Site, Duelist Saga errata announcement, 2017-03-27",
+          "quote": "the text of these cards has been altered, and they become legal for play with their new text",
+          "archived": true
+        },
+        {
+          "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata090730.pdf",
+          "title": "Konami, CURRENT CARD ERRATA LIST, compiled July 30 2009",
+          "quote": "An 'errata' is a correction to the text on a card. If a card has errata, you should always play the card as if it had the corrected text, even though your actual card might have older text.",
+          "archived": true
+        }
+      ]
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "Pay 800 LP, then target 1 face-up monster your opponent controls; take control of that target until the End Phase.",
+    "modern_text": "Pay 800 LP, then target 1 face-up monster your opponent controls that can be Normal Summoned/Set; take control of that target until the End Phase.",
+    "summary": "Functional erratum: the target clause gains 'that can be Normal Summoned/Set', so the modern card can no longer take control of Extra Deck monsters or of monsters that cannot be Normal Summoned. The pre-errata script's filter is 'c:IsControlerCanBeChanged() and c:IsFaceup()' with no c:IsSummonableCard() test, so any face-up monster the opponent controls is a legal target - a Synchro Monster included, which is exactly what makes the difference load-bearing for the 2010 snapshot.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-set-pages"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 511002995,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002995.lua"
+  }
 }

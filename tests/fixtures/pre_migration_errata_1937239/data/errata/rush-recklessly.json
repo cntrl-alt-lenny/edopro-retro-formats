@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-rush-recklessly",
+  "modern_card": {
+    "passcode": 70046172,
+    "name": "Rush Recklessly"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Increase 1 face-up monster's ATK by 700 points until the end of this turn.",
+      "summary": "Period Damage Step activation window, encoded per-card: the GOAT variant registers the activation with EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_CAL and a condition that only refuses activation after damage has been calculated, so Rush Recklessly can be activated during damage calculation; the modern script uses EFFECT_FLAG_DAMAGE_STEP + aux.StatChangeDamageStepCondition, confining it to the Damage Step before damage calculation. Targeting and the 700 ATK boost are identical in both, and the reset difference is the same constant written out. Chronology unresolved: nothing in the packet dates the narrowing.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700114,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700114.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's english_versions start at index 1 (there is no index 0), and the baseline implements v2 (SKE-036, Starter Deck: Kaiba Evolution, earliest TCG 2004-03-01) exactly. The lineage is not monotonic: v5 (SRL-043 as reprinted in Legendary Collection, 2010-10-01) reverts to v1's original 'Increase 1 monster's ATK by 700 points during the turn this card is activated' wording after v3/v4 had already moved to 'Target face-up monster gains 700 ATK'. Every English revision through v7 (BP03-EN134, 2014-07-31, the pinned modern text) is cosmetic - 'face-up' added at v2 though both scripts already require it, select -> Target, and the 'until the end of this turn' / 'until the End Phase' alternation. Engine-vs-ruling: see the Pyramid Energy note; the GOAT rule profile's damage-step flags do not rewrite per-effect Damage Step legality, so this stays 'ruling'."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

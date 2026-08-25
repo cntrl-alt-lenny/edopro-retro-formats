@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-cyber-blader",
+  "modern_card": {
+    "passcode": 10248389,
+    "name": "Cyber Blader"
+  },
+  "classification": "functional",
+  "changes": [
+    {
+      "kind": "functional",
+      "effective": {
+        "date": "2022-03-17",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of Speed Duel GX: Duel Academy Box (SGX1-ENE21), the first printing carrying the errata'd text"
+      },
+      "historical_text": "\"Etoile Cyber\" + \"Blade Skater\"A Fusion Summon of this card can only be conducted with the above Fusion Material Monsters. While your opponent controls only 1 monster, this card cannot be destroyed by battle. While your opponent controls only 2 monsters, double this card's ATK. While your opponent controls only 3 monsters, negate the effects of your opponent's Spell, Trap, and Effect Monster Cards.",
+      "modern_text": "\"Etoile Cyber\" + \"Blade Skater\"A Fusion Summon of this card can only be done with the above Fusion Materials. This card gains the following effect, based on the number of monsters your opponent controls.● 1: Cannot be destroyed by battle.● 2: This card's ATK is doubled.● 3: Your opponent's activated card effects are negated.",
+      "summary": "Functional erratum: against 3 opposing monsters the card used to switch the opponent's cards off, not merely negate what they activate. The historical script registers an EFFECT_DISABLE field effect with SetTargetRange(0,LOCATION_ONFIELD), negating the effects of every card the opponent controls, and its chain-solving negation covers effects activated from the Monster Zone or the Spell/Trap Zone; the modern script drops the EFFECT_DISABLE entirely and keeps only the EVENT_CHAIN_SOLVING negation of any effect the opponent activates ('if rp~=tp then Duel.NegateEffect(ev)'), which is what v2's 'Your opponent's activated card effects are negated' says.",
+      "sources": [
+        "yugipedia-card-errata",
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 511002991,
+    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+    "script": "pre-errata/c511002991.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Conflicting evidence on text: the variant's cdb text ('Apply these effects, depending on the number of monsters your opponent controls; 1: Cannot be destroyed by battle. 2: Double this card's ATK. 3: Negate all cards and effects your opponent controls.', with 'Blader Skater' misspelt) matches no printed English version - the packet's best match is v2 at ratio 0.798, purely on bullet structure, while its meaning is that of v0/v1. The chain is therefore started at v1 (DR04-EN092, 2007-11-14), the printing in force for the Edison snapshot, rather than at the reported text match. v0 (EEN-EN032, 2005-11-16) -> v1 is cosmetic ('is not destroyed as a result of battle' -> 'cannot be destroyed by battle'; the negation clause is unchanged); Cyber Blader is not GOAT-legal, since Elemental Energy released after the 2005-04-01 snapshot. Upstream also ships 511001600 'Cyber Blader (Anime)', a Level 6 anime card whose chain-solving negation is limited to the Spell/Trap Zone - excluded. The historical entry's e5 marker with SetCode(3682106) is 'Double Snare' validity, which the modern script expresses as aux.DoubleSnareValidity(c,LOCATION_MZONE) - an API refactor, not a behaviour change. Card data otherwise identical to modern (2100/800, Level 7, EARTH, Warrior, Fusion)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

@@ -6,29 +6,14 @@
     "name": "The Reliable Guardian"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
-      "summary": "Era damage-step legality, no text difference: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, moving the card's Damage Step activation window from the sub-steps before damage calculation (modern, PHASE_DAMAGE) to the damage-calculation sub-step itself (PHASE_DAMAGE_CAL). The other two diff lines are non-behavioural: the goat s.condition is the De Morgan equivalent of aux.StatChangeDamageStepCondition (utility.lua line 1413), and `RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END` is the literal expansion of RESETS_STANDARD_PHASE_END (constant.lua line 300). Chronology of this ruling is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700023,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700023.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
+    "modern_text": null,
+    "summary": "Era damage-step legality, no text difference: the goat script carries EFFECT_FLAG_DAMAGE_CAL where the modern script carries EFFECT_FLAG_DAMAGE_STEP, moving the card's Damage Step activation window from the sub-steps before damage calculation (modern, PHASE_DAMAGE) to the damage-calculation sub-step itself (PHASE_DAMAGE_CAL). The other two diff lines are non-behavioural: the goat s.condition is the De Morgan equivalent of aux.StatChangeDamageStepCondition (utility.lua line 1413), and `RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END` is the literal expansion of RESETS_STANDARD_PHASE_END (constant.lua line 300). Chronology of this ruling is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700023,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700023.lua"
+  }
 }

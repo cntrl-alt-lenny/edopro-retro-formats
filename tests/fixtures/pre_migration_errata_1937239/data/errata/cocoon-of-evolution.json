@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-cocoon-of-evolution",
+  "modern_card": {
+    "passcode": 40240595,
+    "name": "Cocoon of Evolution"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "You can equip this card from your hand as an Equip Spell Card to a face-up \"Petit Moth\" on the field. If equipped, the ATK and DEF of \"Cocoon of Evolution\" is applied to \"Petit Moth\".",
+      "summary": "Two period behaviours the printed text never carried, both present only in goat/c504700067.lua: the equip activation takes a cost gated on Duel.CheckSummonedCount() and calls Duel.IncreaseSummonedCount(), so equipping this Monster Card from the hand consumes your Normal Summon for the turn; and its EFFECT_EQUIP_LIMIT is registered with EFFECT_FLAG_CANNOT_DISABLE, so the card stays equipped while Spell effects are negated (the upstream annotation names Imperial Order). The modern script has neither. Chronology is unresolved: nothing in the packet or the shared chronologies dates when either ruling stopped applying, so no effective bounds are asserted.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb",
+        "yugipedia-card-errata"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700067,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700067.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The GOAT cdb text matches lineage v2 (DB1-EN148, 2004-10-12) exactly, so the chain starts there. The remaining lineage motion v2 -> v3 (Legendary Collection, 2010-10-01) -> v4 (SS03-ENB09, 2019-08-01) is cosmetic: 'You can target 1 Petit Moth you control; equip this card...' formalises targeting that BOTH scripts already implement (the s.eqtg chkc branch is unchanged across the diff, and no EFFECT_FLAG_CARD_TARGET line appears in the diff), and 'the original ATK/DEF... becomes' names the EFFECT_SET_BASE_ATTACK/EFFECT_SET_BASE_DEFENSE pair that both scripts already use. The remaining diff lines (Duel.IsTurnPlayer(tp) vs Duel.GetTurnPlayer()==tp, RESET_EVENT|RESETS_STANDARD vs RESET_EVENT+RESETS_STANDARD, listed_names id vs MODID) are notation-equivalent. The second upstream code 511600069 is 'Cocoon of Evolution (Anime)', a different card (Larvae Moth equip with turn-counter evolution Summons), and is excluded rather than folded in as a variant. Because the single recorded change has no chronology, format applicability will fail safe rather than pick a version - that is the intended outcome, not an omission."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata"
+  ]
+}

@@ -6,51 +6,82 @@
     "name": "Cost Down"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2013-09-13",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the printing carrying the PSCT text (DPKB-EN033 as reprinted in the Silver Dragon Value Box)"
       },
-      "historical_text": "Discard 1 card from your hand. Downgrade all Monster Cards in your hand by 2 Levels until the End Phase of the turn this card is activated.",
-      "modern_text": "Discard 1 card; until the End Phase, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
-      "summary": "Wording modernisation across v0 (DCR-053) -> v1 (DPKB-EN033) -> v2, including the added '(even after they are Summoned)' clarification; both the GOAT and the modern script already register the -2 EFFECT_UPDATE_LEVEL with RESET_TOFIELD excluded, so the reduction always survived the Summon, and the duration remains 'until the End Phase' throughout.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Discard 1 card from your hand. Downgrade all Monster Cards in your hand by 2 Levels until the End Phase of the turn this card is activated.",
+          "modern_text": "Discard 1 card; until the End Phase, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
+          "summary": "Wording modernisation across v0 (DCR-053) -> v1 (DPKB-EN033) -> v2, including the added '(even after they are Summoned)' clarification; both the GOAT and the modern script already register the -2 EFFECT_UPDATE_LEVEL with RESET_TOFIELD excluded, so the reduction always survived the Summon, and the duration remains 'until the End Phase' throughout.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2018-03-08",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the 'for the rest of this turn' text (LCKC-EN040, Legendary Collection Kaiba Mega Pack)"
       },
-      "historical_text": "Discard 1 card; until the End Phase, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
-      "modern_text": "Discard 1 card; for the rest of this turn, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
-      "summary": "Functional erratum: the duration changed from 'until the End Phase' to 'for the rest of this turn'. goat/c504700039.lua registers an extra EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS effect on EVENT_PHASE+PHASE_END that fires as the End Phase begins and raises a custom event, and each affected monster carries a companion continuous effect that Resets its -2 EFFECT_UPDATE_LEVEL on that event - so the Level reduction is already gone during the End Phase. The modern script omits that machinery and relies on RESET_PHASE|PHASE_END alone, which expires only once the End Phase has ended, so the reduction still applies during the End Phase.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "Discard 1 card; until the End Phase, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
+          "modern_text": "Discard 1 card; for the rest of this turn, reduce the Levels of all monsters in your hand by 2 (even after they are Summoned).",
+          "summary": "Functional erratum: the duration changed from 'until the End Phase' to 'for the rest of this turn'. goat/c504700039.lua registers an extra EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS effect on EVENT_PHASE+PHASE_END that fires as the End Phase begins and raises a custom event, and each affected monster carries a companion continuous effect that Resets its -2 EFFECT_UPDATE_LEVEL on that event - so the Level reduction is already gone during the End Phase. The modern script omits that machinery and relies on RESET_PHASE|PHASE_END alone, which expires only once the End Phase has ended, so the reduction still applies during the End Phase.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700039,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700039.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700039,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700039.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

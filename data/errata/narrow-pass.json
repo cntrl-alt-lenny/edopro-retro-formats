@@ -6,29 +6,14 @@
     "name": "Narrow Pass"
   },
   "classification": "ruling",
-  "changes": [
+  "implementation_metadata": [
     {
-      "kind": "ruling",
-      "effective": {
-        "date": null
-      },
-      "historical_text": "This card can only be activated when both players have 2 monsters or less on their respective sides of the field. Both players can only Normal Summon up to 2 additional monsters on their sides of the field.",
-      "summary": "Era reading of the Summon limit, no text difference: the goat script counts the Normal Summons each player performs after Narrow Pass resolves (an EFFECT_FLAG_CANNOT_DISABLE continuous effect on EVENT_SUMMON incrementing a per-card table s[c][player]) and blocks a Normal Summon once that player has made 2, so each player gets exactly 2 further Normal Summons while the card is face-up. The modern s.sumlimit instead blocks a Normal Summon whenever the summoning player already controls 2 or more monsters, which is a board-state cap rather than a summon budget - the two diverge as soon as monsters leave the field. Chronology of this ruling is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata"
-      ]
+      "events": [],
+      "status": "complete",
+      "tested": false
     }
   ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700066,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700066.lua",
-    "status": "complete",
-    "tested": false
-  },
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
@@ -39,5 +24,27 @@
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata"
-  ]
+  ],
+  "event": {
+    "effective": {
+      "date": null
+    },
+    "kind": "ruling",
+    "axis": null,
+    "historical_text": "This card can only be activated when both players have 2 monsters or less on their respective sides of the field. Both players can only Normal Summon up to 2 additional monsters on their sides of the field.",
+    "modern_text": null,
+    "summary": "Era reading of the Summon limit, no text difference: the goat script counts the Normal Summons each player performs after Narrow Pass resolves (an EFFECT_FLAG_CANNOT_DISABLE continuous effect on EVENT_SUMMON incrementing a per-card table s[c][player]) and blocks a Normal Summon once that player has made 2, so each player gets exactly 2 further Normal Summons while the card is face-up. The modern s.sumlimit instead blocks a Normal Summon whenever the summoning player already controls 2 or more monsters, which is a board-state cap rather than a summon budget - the two diverge as soon as monsters leave the field. Chronology of this ruling is unresolved.",
+    "sources": [
+      "ignis-cardscripts",
+      "ignis-babelcdb",
+      "yugipedia-card-errata"
+    ]
+  },
+  "coverage": {
+    "kind": "reuse-upstream",
+    "historical_passcode": 504700066,
+    "historical_variant_passcodes": [],
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700066.lua"
+  }
 }

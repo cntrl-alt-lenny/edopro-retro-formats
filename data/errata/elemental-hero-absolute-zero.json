@@ -6,30 +6,40 @@
     "name": "Elemental HERO Absolute Zero"
   },
   "classification": "cosmetic",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2017-08-03",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of OTS Tournament Pack 5 (OP05-EN023), the printing carrying the current English wording"
       },
-      "historical_text": "1 \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster + 1 WATER monsterThis monster cannot be Special Summoned except by Fusion Summon. This card gains 500 ATK for each face-up WATER monster on the field, except \"Elemental Hero Absolute Zero\". When this card is removed from the field, destroy all monsters your opponent controls.",
-      "modern_text": "1 \"HERO\" monster + 1 WATER monsterMust be Fusion Summoned. Gains 500 ATK for each WATER monster on the field, except \"Elemental HERO Absolute Zero\". If this card leaves the field: Destroy all monsters your opponent controls.",
-      "summary": "Wording modernisation only. The material line's three named archetypes ('Elemental Hero', 'Destiny Hero', 'Evil Hero') were folded into the 'HERO' umbrella at v1 (GENF-ENSE1), which cannot change the eligible material set in period play: every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. The summon restriction stays strict throughout ('This monster cannot be Special Summoned except by Fusion Summon' to 'Must be Fusion Summoned'), matching official/c40854197.lua's EFFECT_SPSUMMON_CONDITION with aux.fuslimit, and dropping 'face-up' from the ATK count is cosmetic because the script's atkfilter still requires IsFaceup().",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-cardscripts",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "1 \"Elemental Hero\", \"Destiny Hero\", or \"Evil Hero\" monster + 1 WATER monsterThis monster cannot be Special Summoned except by Fusion Summon. This card gains 500 ATK for each face-up WATER monster on the field, except \"Elemental Hero Absolute Zero\". When this card is removed from the field, destroy all monsters your opponent controls.",
+          "modern_text": "1 \"HERO\" monster + 1 WATER monsterMust be Fusion Summoned. Gains 500 ATK for each WATER monster on the field, except \"Elemental HERO Absolute Zero\". If this card leaves the field: Destroy all monsters your opponent controls.",
+          "summary": "Wording modernisation only. The material line's three named archetypes ('Elemental Hero', 'Destiny Hero', 'Evil Hero') were folded into the 'HERO' umbrella at v1 (GENF-ENSE1), which cannot change the eligible material set in period play: every HERO-setcode monster in the Edison-legal pool carries Elemental (0x3008), Destiny (0xc008) or Evil (0x6008) HERO. The summon restriction stays strict throughout ('This monster cannot be Special Summoned except by Fusion Summon' to 'Must be Fusion Summoned'), matching official/c40854197.lua's EFFECT_SPSUMMON_CONDITION with aux.fuslimit, and dropping 'face-up' from the ATK count is cosmetic because the script's atkfilter still requires IsFaceup().",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "none-needed",
-    "status": "complete"
   },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete"
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

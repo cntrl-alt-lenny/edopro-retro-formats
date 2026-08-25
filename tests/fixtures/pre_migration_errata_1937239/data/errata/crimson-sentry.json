@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-crimson-sentry",
+  "modern_card": {
+    "passcode": 28358902,
+    "name": "Crimson Sentry"
+  },
+  "classification": "ruling",
+  "changes": [
+    {
+      "kind": "ruling",
+      "effective": {
+        "date": null
+      },
+      "historical_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
+      "modern_text": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the bottom of your Deck.",
+      "summary": "Era procedure with no text change (upstream annotation: \"Works the same way as Last Will (GOAT)\"): the goat script drops the activation-time target entirely and instead registers a field watcher for the rest of the turn, so the Tribute pays for the NEXT of your monsters sent to the Graveyard by battle after activation — it then asks Yes/No and lets you send one of that group to the bottom of the Deck. The modern script targets, at activation, a monster already in your Graveyard that was destroyed by battle this turn (`c:GetTurnID()==tid and c:IsReason(REASON_BATTLE)`) and returns it mandatorily on resolution. The era version is therefore prospective, optional and non-targeting, limited to one use with the watcher reset in the End Phase. Chronology of the change is unresolved.",
+      "sources": [
+        "ignis-cardscripts",
+        "ignis-babelcdb"
+      ]
+    }
+  ],
+  "implementation": {
+    "strategy": "reuse-upstream",
+    "historical_passcode": 504700187,
+    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+    "script": "goat/c504700187.lua",
+    "status": "complete",
+    "tested": false
+  },
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Text-identical (goat 504700187 cdb text == pinned modern cards.cdb text); the errata page (revid 5737268) has no English lineage (Japanese only), so literal texts are carried on the change and there is no printing to date. Cost is Cost.SelfTribute in both scripts. Upstream quirk worth knowing when re-testing: the goat ignition effect still sets EFFECT_FLAG_CARD_TARGET although it registers no target function, so the property is vestigial there."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts"
+  ]
+}

@@ -6,52 +6,83 @@
     "name": "Red-Eyes Darkness Metal Dragon"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "cosmetic",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2016-07-07",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of SR02-EN009 (Rise of the True Dragons Structure Deck), the printing that restores the pre-v4 wording"
       },
-      "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
-      "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
-      "summary": "Reprint wording only between v3 (SDDC-EN013) and v5 (SR02-EN009); the self-Summon still banishes 1 face-up Dragon you control from the hand and the Ignition effect still revives 1 Dragon from hand or GY once per turn per copy. One anomaly inside the span: v4 (LCJW-EN050, 2013-10-11) dropped the 'face-up' qualifier from the banish cost and v5 restored it, so the requirement holds at both ends of this collapse.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+          "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+          "summary": "Reprint wording only between v3 (SDDC-EN013) and v5 (SR02-EN009); the self-Summon still banishes 1 face-up Dragon you control from the hand and the Ignition effect still revives 1 Dragon from hand or GY once per turn per copy. One anomaly inside the span: v4 (LCJW-EN050, 2013-10-11) dropped the 'face-up' qualifier from the banish cost and v5 restored it, so the requirement holds at both ends of this collapse.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2020-07-02",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (LDS1-EN004, Legendary Duelists: Season 1)"
       },
-      "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
-      "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon monster you control. You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way. During your Main Phase: You can Special Summon 1 Dragon monster from your hand or GY, except \"Red-Eyes Darkness Metal Dragon\". You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn.",
-      "summary": "Functional erratum: the self-Summon gains a once-per-turn-by-name limit ('You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way') and the revival Ignition effect's plain 'Once per turn' becomes a hard once per turn by name ('You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn'). The script diff shows exactly this: the pre-errata e1 carries no SetCountLimit at all where the modern e1 has SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH), and the pre-errata e2 uses the per-copy SetCountLimit(1) where the modern e2 uses the by-name SetCountLimit(1,{id,1}) with s.listed_names={id}. Two copies could therefore each revive a Dragon in the same turn, and multiple copies could each Special Summon themselves.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon-Type monster you control. Once per turn: You can Special Summon 1 Dragon-Type monster from your hand or Graveyard, except \"Red-Eyes Darkness Metal Dragon\".",
+          "modern_text": "You can Special Summon this card (from your hand) by banishing 1 face-up Dragon monster you control. You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way. During your Main Phase: You can Special Summon 1 Dragon monster from your hand or GY, except \"Red-Eyes Darkness Metal Dragon\". You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn.",
+          "summary": "Functional erratum: the self-Summon gains a once-per-turn-by-name limit ('You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way') and the revival Ignition effect's plain 'Once per turn' becomes a hard once per turn by name ('You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn'). The script diff shows exactly this: the pre-errata e1 carries no SetCountLimit at all where the modern e1 has SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH), and the pre-errata e2 uses the per-copy SetCountLimit(1) where the modern e2 uses the by-name SetCountLimit(1,{id,1}) with s.listed_names={id}. Two copies could therefore each revive a Dragon in the same turn, and multiple copies could each Special Summon themselves.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "edisonformat-functional-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 88264988,
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "official/c88264988.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 88264988,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "official/c88264988.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
