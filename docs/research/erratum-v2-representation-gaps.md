@@ -758,6 +758,76 @@ callers use and neither reimplements.
 No canonical `data/errata/*.json` record changes — the gap was in the v2
 REPRESENTATION, not in v1 data, which remains exactly as it was.
 
+### 6b. Final pre-migration gate — a second correction pass
+
+A subsequent review found two further live holes and one still-loose
+preservation check, closed as one atomic commit before any canonical data
+migration:
+
+- **Direct-build holes in `ReferenceIdentity`**: `from_raw()`'s
+  `tuple(raw.get("historical_variant_passcodes", []))` raised a raw
+  `TypeError` for a malformed CONTAINER (`123`, `null`) — uncaught by
+  `Repository.load()`, which only catches `DataError`, so it crashed the
+  entire repository load, not merely this one record. Fixed by accepting
+  only a genuine list (anything else becomes an empty tuple, never a
+  false-plausible reinterpretation — a bare int would explode `tuple()`,
+  a string would silently iterate into a tuple of its own characters);
+  the malformed RAW value is still there for `_reference_identity_fault()`
+  (direct build) and `_validate_v2_reference_identities()` (production
+  validator) to independently re-check and fail safe on. `script: null`/
+  `""` were not rejected as malformed (the schema's `referenceIdentity.
+  script` is a strict non-empty string, no null alternative) — fixed in
+  both places. A duplicate matching `reference_id` used to pick the FIRST
+  entry silently (`next(...)`) — fixed to fail safe
+  (`ErrataSelectionError`) on any ambiguity, matching the existing
+  matched-but-malformed contract rather than adding a new one.
+- **Validator precedence drift**: `_validate_v2_parity()` checked only
+  `errata_exclude`, never `errata_include`, before running parity
+  diagnostics — so an explicitly-included card under a parity format
+  BUILT via include/baseline semantics (the builder's `_select_v2_
+  override()` already had the correct exclude → include → parity order)
+  while the validator analysed it as if parity governed it, the exact
+  precedence drift this document's section 6a fixed for exact-identity
+  lookup vs. provenance membership, recurring one level up. Fixed
+  symmetrically: `_validate_v2_applicability()` now runs its
+  exclude/include diagnostics for a parity format's card too, and
+  `_validate_v2_parity()` defers to it whenever the card is excluded or
+  included. The blanket `format.parity-with-include-list` warning
+  ("every include is redundant under parity") was removed rather than
+  narrowed: it is not generally true under the frozen precedence, and a
+  provably-correct per-card version would need to compare the include's
+  resolution against `resolve_v2_parity()`'s own resolution for that same
+  card — a genuinely per-card fact this format-level loop cannot make.
+- **Reference-identity preservation was subset containment, not exact
+  preservation**: `_reference_identity_preserved()` verified every
+  EXPECTED entry exists, but never rejected an EXTRA, invented one — a
+  candidate that also carried a second, unrelated (even individually
+  well-formed) identity passed exactly as cleanly as one that carried
+  only what was derived. Fixed to compare the `reference_id` key SETS for
+  exact equality first (no missing, no extra, no duplicate semantic key),
+  only then comparing fields — pinned by a mutation test asserting an
+  added, otherwise-valid unexpected entry fails preservation.
+- **Top-level and transition fields were unaudited**: `candidate_v2()`
+  did not copy `applicable_formats_note`/`notes` at all (silently
+  dropping either if any record ever authored one — the current corpus
+  has zero of each, derived and reported as `applicable_formats_note_
+  count`/`notes_count` in the audit JSON, never assumed), and no checker
+  independently verified `modern_card`/`classification`/`sources`/
+  `review` (nor a change's complete `effective` chronology block, beyond
+  its documentation text) against the raw v1 record. Fixed with two new
+  independent checks, `_top_level_preserved()`/`_transition_preserved()`,
+  folded into `_data_preserved()` alongside the existing three.
+
+**Corrected readiness, re-derived after this pass**:
+`representation_ready == 247`, `representation_blocked == 0`,
+`top_level_not_preserved_ids == []`, `transition_not_preserved_ids ==
+[]` — on top of the section 6a results above, all still holding. 247/49/48
+unchanged throughout; the semantic comparator was not touched by either
+pass. See `docs/research/erratum-v2-migration-audit.md`'s "Migration
+readiness" section for the full corrected accounting and why
+`chronology_shape_ready = 236` / a `parity_only_blocked` framing is no
+longer the readiness headline.
+
 ---
 
 ## 7. Migration sequencing — representation is ready; migration has not started

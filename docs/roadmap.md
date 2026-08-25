@@ -385,37 +385,57 @@ reflects that.
      records are semantically equivalent (selection never changes) and **49** genuinely
      are not (v1's positional model and v2's real chronology disagree at some boundary —
      order-aware migration, not a rename; 47 already researched, 2 needing manual
-     review). Equivalence, chronology/shape readiness, and data-preservation
-     status are three DIFFERENT questions — of the 247, **236 have no known
-     chronology/shape obstacle** once the 11 parity-only records are set aside, but
-     this is deliberately NOT called "immediately migratable" or "safe": data
-     preservation is now a REPRESENTATION-READY claim, not a pending one —
-     `implementation_metadata[]` (v1's `status`/`tested`/`reason`/`gap.upstream_
-     checked`/`gap.behavioural_impact`, previously nowhere to go, demonstrably
-     state-specific since a change's `resulting_implementation` can carry a different
-     `status` than the record's baseline) and `reference_identities[]` (the 11
-     parity-only records' historical passcode, which v2's terminal-state-is-MODERN
-     rule cannot hold as ordinary `Coverage`) both now exist, and this project's own
-     migration-audit tooling independently verifies every one of the 247 records'
-     v1 metadata/identity round-trips into them (`metadata_unrepresented_count == 0`,
-     `parity_only_unrepresented_count == 0`). **That round-trip claim was invalid as
-     first implemented and is only valid after a review-driven correction pass**:
-     construction and checker both enumerated v1 implementation objects with the
-     COVERAGE-shaped `implementation_for_version()` lookup, which correctly returns
-     `None` for the terminal state — so all 21 zero-relevant records silently lost
-     their authored baseline metadata, and the checker, repeating the same lookup,
-     confirmed the loss as preserved. Metadata now has its own occurrence vocabulary,
-     the checker re-derives expected values from raw v1 objects, and the audit reports
+     review). **Headline, as of the final pre-migration gate: `representation_ready =
+     247`, `representation_blocked = 0`.** `implementation_metadata[]` (v1's
+     `status`/`tested`/`reason`/`gap.upstream_checked`/`gap.behavioural_impact`,
+     previously nowhere to go, demonstrably state-specific since a change's
+     `resulting_implementation` can carry a different `status` than the record's
+     baseline) and `reference_identities[]` (the 11 parity-only records' historical
+     passcode, which v2's terminal-state-is-MODERN rule cannot hold as ordinary
+     `Coverage`) both exist, and this project's own migration-audit tooling
+     independently verifies every one of the 247 records' v1 data round-trips into
+     them — not only metadata/identity but every top-level field both schemas support
+     and every change's complete transition, `effective` chronology block included
+     (`top_level_not_preserved_ids == []`, `transition_not_preserved_ids == []`,
+     `metadata_unrepresented_count == 0`, `parity_only_unrepresented_count == 0`).
+     The 11 parity-only records are now a CLASSIFICATION
+     (`parity_only_identity_count`/`parity_only_identity_ids`), not a blocker — an
+     earlier pass's `chronology_shape_ready = 236` / `parity_only_blocked = 11`
+     framing correctly described a real blocker at the time, but is now stale: it
+     would report those 11 as still blocked after their `reference_identities[]`
+     destination already exists and is verified. `chronology_shape_ready` remains in
+     the audit output as a narrower, still-true STRUCTURAL fact (does the record have
+     a `states[]`-shaped chronology), never the readiness verdict again.
+     **That round-trip claim was invalid as first implemented and is only valid
+     after two review-driven correction passes**: construction and checker both
+     enumerated v1 implementation objects with the COVERAGE-shaped
+     `implementation_for_version()` lookup, which correctly returns `None` for the
+     terminal state — so all 21 zero-relevant records silently lost their authored
+     baseline metadata, and the checker, repeating the same lookup, confirmed the
+     loss as preserved. Metadata now has its own occurrence vocabulary, the checker
+     re-derives expected values from raw v1 objects, and the audit reports
      `zero_relevant_baseline_metadata_represented_count: 21` of 21 explicitly. The
      same pass fixed the reference-parity precedence, which asked the old
      `in_reference()` provenance gate BEFORE the exact `reference_identities[]`
      lookup, making an exact entry unreachable for precisely the records it exists to
-     adjudicate; builder and validator now share one `resolve_v2_parity()` primitive.
-     247/49/48 is unchanged throughout — the semantic comparator was never touched.
+     adjudicate; builder and validator now share one `resolve_v2_parity()`
+     primitive. A second pass then closed the remaining direct-build holes (a
+     malformed `historical_variant_passcodes` container crashed `Repository.load()`
+     outright rather than failing safe; a duplicate matching `reference_id` picked
+     the first entry silently; `script: null`/`""` were not rejected), brought the
+     VALIDATOR onto the SAME exclude-then-include-then-parity precedence the builder
+     already had (an explicitly-included card under a parity format used to get
+     parity diagnostics instead of include diagnostics — removed alongside the
+     blanket, not-generally-true `format.parity-with-include-list` warning), made
+     reference-identity preservation an EXACT SET comparison (an extra, invented
+     entry used to pass silently — only missing entries were checked), and added
+     the top-level/transition preservation audit above. 247/49/48 is unchanged
+     throughout both passes — the semantic comparator was never touched.
      **`data_preservation_status` is now the literal string
      `"representation-implemented-not-migrated"`** — representation readiness is still
      not migration: no canonical record has changed, and starting migration remains a
-     separate, later decision.
+     separate, later decision gated on a reviewed dry-run migration materializer and
+     shadow-migration proof (`docs/research/erratum-v2-migration-audit.md`).
 
 ## Phase 2 — framework completeness
 

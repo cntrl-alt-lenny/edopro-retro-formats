@@ -645,6 +645,66 @@ class ReferenceIdentityParityPrecedenceTest(V2ConsumerTestBase):
         codes = {f.code for f in v.errors}
         self.assertIn("erratum.reference-identity-invalid", codes)
 
+    def test_include_under_parity_builds_and_validates_as_include_not_parity(self):
+        """Final pre-migration gate, section 2: exclude > include > parity is
+        the FULL frozen precedence, and the validator must follow it exactly
+        like the builder (lflist._select_v2_override) does - not defer
+        wholesale to parity diagnostics for every record under a parity
+        format.
+
+        Parity's exact reference_identities[] entry names passcode X
+        (511000099); an explicit include on the SAME record pins baseline,
+        which carries a DIFFERENT passcode Y (511000077). The builder must
+        select Y (include wins before parity is ever consulted). Chronology
+        is rigged so the terminal/modern state is the only one consistent
+        at snapshot - so the include contradicts chronology, and that is
+        the diagnostic that must fire: format.erratum-include-contradicts-
+        chronology, the same one a non-parity format would give. The
+        parity-flavoured equivalent (format.parity-contradicts-chronology)
+        must NOT fire - that would mean the validator analysed X/parity
+        semantics for a card the builder never resolves via parity at all."""
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={
+                "include": ["erratum-v2-beta"],
+                "reference_parity": {
+                    "reason": "test",
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": "test-source",
+                    "sources": ["test-source"],
+                },
+                "sources": ["test-source"],
+            },
+        )
+        self.add_erratum_v2(
+            id="erratum-v2-beta",
+            modern={"passcode": 200, "name": "Beta"},
+            # Past relative to the 2005-04-01 snapshot -> always confirmed
+            # NEW -> the only chronology-consistent candidate is the
+            # terminal/modern state, exactly test_K's rigging.
+            events={"e1": v2_event(effective={"date": "2000-01-01"})},
+            states=[{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000077)}],
+            reference_identities=[
+                {
+                    "reference_id": "project-ignis-goat",
+                    "provenance_source": "test-source",
+                    "historical_passcode": 511000099,  # X: DIFFERENT from the include's baseline Y
+                    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb",
+                }
+            ],
+        )
+        repo = self._repo()
+        fmt = self._fmt(repo)
+        overrides = select_applicable_errata(fmt, repo)
+        # Builder: include wins, selects Y (511000077) - never X.
+        self.assertEqual(historical_identity(overrides[200].implementation), (511000077, ()))
+        v = Validator(repo)
+        v.validate()
+        warning_codes = {w.code for w in v.warnings}
+        self.assertIn("format.erratum-include-contradicts-chronology", warning_codes)
+        self.assertNotIn("format.parity-contradicts-chronology", warning_codes)
+        self.assertNotIn("format.parity-substitutes-non-behavioural", warning_codes)
+
 
 class SelectedOverrideCarrierTest(V2ConsumerTestBase):
     """SelectedOverride/historical_identity handles ReferenceIdentity
@@ -873,7 +933,11 @@ class ReferenceIdentityFailSafeTest(V2ConsumerTestBase):
             states=states
             if states is not None
             else [{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=999888777)}],
-            reference_identities=[identity],
+            # A single identity dict is wrapped as the one-entry list the
+            # older tests below expect; a caller checking duplicate-id
+            # handling passes an already-built list of 2+ entries straight
+            # through.
+            reference_identities=identity if isinstance(identity, list) else [identity],
         )
         repo = self._repo()
         return repo, self._fmt(repo)
@@ -994,3 +1058,157 @@ class ReferenceIdentityFailSafeTest(V2ConsumerTestBase):
             codes & {"erratum.reference-identity-invalid", "erratum.reference-identity-malformed-upstream"},
             f"expected a reference-identity error, got {sorted(codes)}",
         )
+
+    # -- final pre-migration gate, section 1: the remaining direct-build
+    # holes (malformed historical_variant_passcodes CONTAINER, malformed
+    # script, duplicate matching reference_id) -------------------------------
+
+    def test_variants_container_not_a_list_fails_safe(self):
+        """`historical_variant_passcodes: 123` used to raise a raw TypeError
+        out of `ReferenceIdentity.from_raw()`, crashing `Repository.load()`
+        entirely before this fail-safe path ever ran. Reaching
+        `ErrataSelectionError` here (rather than an unhandled TypeError
+        propagating out of `self._repo()` above) is itself the proof the
+        load no longer crashes."""
+        self._assert_fails_safe(self._valid(historical_variant_passcodes=123))
+
+    def test_null_variants_container_fails_safe(self):
+        """Explicit `null` must fail exactly like `123` - never silently
+        reinterpreted as `[]` (genuinely no variants)."""
+        self._assert_fails_safe(self._valid(historical_variant_passcodes=None))
+
+    def test_variants_list_with_only_invalid_entries_fails_safe(self):
+        self._assert_fails_safe(self._valid(historical_variant_passcodes=["bad"]))
+
+    def test_null_script_fails_safe(self):
+        """script is optional (may be absent), but an AUTHORED null is
+        malformed data, not a spelling of "absent" - the schema's own
+        `referenceIdentity.script` type is a strict non-empty string, no
+        null alternative."""
+        self._assert_fails_safe(self._valid(script=None))
+
+    def test_empty_string_script_fails_safe(self):
+        self._assert_fails_safe(self._valid(script=""))
+
+    def test_duplicate_matching_reference_id_fails_safe(self):
+        """Two entries both matching the format's reference_id: declaration
+        order is not adjudication - the build must refuse to pick either,
+        even though both are individually well formed."""
+        self._assert_fails_safe([self._valid(), self._valid()])
+
+    def test_duplicate_matching_reference_id_with_conflicting_passcodes_fails_safe(self):
+        self._assert_fails_safe(
+            [self._valid(), self._valid(historical_passcode=999888777)]
+        )
+
+    def test_variants_container_not_a_list_is_a_validator_error(self):
+        repo, _fmt = self._build(self._valid(historical_variant_passcodes=123))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+    def test_null_variants_container_is_a_validator_error(self):
+        repo, _fmt = self._build(self._valid(historical_variant_passcodes=None))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+    def test_null_script_is_a_validator_error(self):
+        repo, _fmt = self._build(self._valid(script=None))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+    def test_empty_string_script_is_a_validator_error(self):
+        repo, _fmt = self._build(self._valid(script=""))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+    def test_null_reference_id_does_not_silently_coerce_to_the_string_None(self):
+        """`from_raw()` coerces reference_id through `str()` - explicit
+        null must not become the truthy-looking string "None" and sail
+        through both the missing-id check and the malformed-field check."""
+        repo, _fmt = self._build(self._valid(reference_id=None))
+        v = Validator(repo)
+        v.validate()
+        self.assertIn("erratum.reference-identity-malformed-field", {e.code for e in v.errors})
+
+
+class ParityOmitsHistoricalFalsePositiveTest(V2ConsumerTestBase):
+    """Final pre-migration gate, task section 8: the shadow-migration
+    comparison found `format.parity-omits-historical` firing on 43 real
+    corpus records it never fired on as v1 - a false positive, not a
+    genuine new finding. Root cause: the check compared the candidate's
+    EVENT-SET identity against `all_relevant_ids` ("is this the terminal
+    state?"), but v1's own `selection_at()` deliberately reports
+    `state="modern"`, not `"historical"`, for a NON-terminal version whose
+    coverage strategy is `none-needed` (model.py: "a documented decision
+    that the modern implementation stands in for this version"). A
+    non-terminal candidate can legitimately behave exactly like modern.
+    Fixed by checking the candidate's COVERAGE via `_usable_v2()` (the
+    same authority `historical_identity()`/`lflist.py` use everywhere
+    else) instead of raw event-set identity - mirrors v1's exact
+    historical-vs-modern rule instead of approximating it."""
+
+    def _fixture(self, baseline_kind, **coverage_kw):
+        self._standard_fixture(
+            pool_cards=[card(200, "Beta")],
+            errata_overrides={
+                "reference_parity": {
+                    "reason": "test",
+                    "provenance_source": "test-source",
+                    "sources": ["test-source"],
+                },
+                "sources": ["test-source"],
+            },
+        )
+        # The record's OWN sources deliberately do NOT include the format's
+        # provenance_source, so in_reference() is False and _validate_v2_
+        # parity() takes the "outside the reference" branch this test is
+        # about (format.parity-omits-historical, never parity-contradicts-
+        # chronology/parity-substitutes-non-behavioural).
+        self.write(
+            "data/sources.json",
+            {
+                "sources": [
+                    {"id": "test-source", "kind": "other", "title": "T", "url": "https://t.invalid"},
+                    {"id": "record-source", "kind": "other", "title": "R", "url": "https://r.invalid"},
+                ]
+            },
+        )
+        self.add_erratum_v2(
+            id="erratum-v2-beta",
+            modern={"passcode": 200, "name": "Beta"},
+            sources=["record-source"],
+            # Both events dated in the FUTURE relative to the 2005-04-01
+            # snapshot -> neither has occurred yet -> the only chronology-
+            # consistent candidate is the baseline ({}) state, never the
+            # terminal one - exactly the "determinate, non-terminal
+            # candidate" shape the check is about.
+            events={
+                "e1": v2_event(effective={"date": "2020-01-01"}),
+                "e2": v2_event(effective={"date": "2020-06-01"}),
+            },
+            ordering={"edges": [{"before": "e1", "after": "e2", "basis": "date-proven"}]},
+            states=[{"events": [], "coverage": v2_coverage(kind=baseline_kind, **coverage_kw)}],
+        )
+        repo = self._repo()
+        return self._warnings(repo, "format.parity-omits-historical")
+
+    def test_none_needed_baseline_does_not_warn(self):
+        """The exact false-positive shape: baseline coverage is
+        `none-needed` (matches v1's `state="modern"`, not `"historical"`)
+        - determinate, non-terminal, but NOT a genuine divergence."""
+        self.assertEqual([], self._fixture("none-needed"))
+
+    def test_reuse_upstream_baseline_still_warns(self):
+        """The check's real purpose is preserved: a genuine historical
+        substitution at a determinate, non-terminal state still warns."""
+        warnings = self._fixture("reuse-upstream", historical_passcode=511000123)
+        self.assertTrue(warnings)
+
+    def test_known_gap_baseline_does_not_warn(self):
+        """A known-gap baseline is "gap", not "historical", in v1's own
+        model too - never this warning's concern."""
+        self.assertEqual([], self._fixture("known-gap"))

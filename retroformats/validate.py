@@ -966,8 +966,14 @@ class Validator:
                 ("upstream", True),
                 ("script", False),
             ):
-                if field_name not in raw_identity or raw_identity[field_name] is None:
-                    continue  # absence is handled by the required-field checks below
+                if field_name not in raw_identity:
+                    continue  # genuinely absent: required-ness is enforced below
+                # Explicit null is NOT treated as absence here (it used to
+                # be skipped, the same hole `historical_variant_passcodes`
+                # had): reference_id/provenance_source coerce through
+                # str(None) == "None" downstream, a truthy-looking value
+                # that would otherwise sail past every "missing" check as
+                # if the author had genuinely named their reference "None".
                 value = raw_identity[field_name]
                 if not isinstance(value, str) or not value.strip():
                     self.error(
@@ -975,6 +981,15 @@ class Validator:
                         erratum.path,
                         f"{location}.{field_name}: expected a non-empty string, got "
                         f"{value!r} ({type(value).__name__})",
+                    )
+            if "historical_variant_passcodes" in raw_identity:
+                variants_raw = raw_identity["historical_variant_passcodes"]
+                if not isinstance(variants_raw, list):
+                    self.error(
+                        "erratum.reference-identity-malformed-field",
+                        erratum.path,
+                        f"{location}.historical_variant_passcodes: expected an array, got "
+                        f"{variants_raw!r} ({type(variants_raw).__name__})",
                     )
             if not identity.reference_id:
                 self.error(
@@ -1143,10 +1158,22 @@ class Validator:
     # validates cleanly here never surprises the builder).
 
     def _validate_v2_parity(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
-        from .lflist import ReferenceIdentity, resolve_v2_parity
+        from .lflist import ReferenceIdentity, _usable_v2, resolve_v2_parity
 
+        # Frozen precedence (task section 2, matching lflist._select_v2_override
+        # exactly): exclude wins, then include, and ONLY THEN does parity
+        # govern. Both are adjudications belonging to _validate_v2_applicability
+        # - an explicitly included card BUILDS from baseline/chronology
+        # semantics (never from parity), so it must be ANALYSED that way too,
+        # not have parity diagnostics run against a resolution the builder
+        # never actually uses for this card. Zero-relevant-event (parity-only)
+        # records are never excluded/included by definition in the current
+        # corpus, but the check is unconditional so it stays correct if that
+        # ever changes.
         if erratum.id in fmt.errata_exclude:
-            return
+            return  # handled by _validate_v2_applicability
+        if erratum.id in fmt.errata_include:
+            return  # handled by _validate_v2_applicability - include pins baseline, not parity
         all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
         # ONE shared primitive with the builder, so the two cannot disagree
         # about precedence: the exact reference_identities[] lookup happens
@@ -1171,7 +1198,22 @@ class Validator:
                     # CONTRADICTED edge; this is not a second, independent
                     # defect to name, only a consequence of the first.
                     return
-                if selection.chronology == "determinate" and selection.candidates[0].events != all_relevant_ids:
+                # Shadow-migration gate (task section 8) found this check
+                # firing on 43 records it never used to under v1: comparing
+                # the candidate's EVENT-SET identity against all_relevant_ids
+                # is not the same question v1 asked. v1's own selection_at()
+                # deliberately reports state="modern", not "historical", for
+                # a non-terminal version whose coverage strategy is
+                # `none-needed` (model.py: "a documented decision that the
+                # modern implementation stands in for this version") - a
+                # non-terminal state can legitimately behave exactly like
+                # modern, and warning about it here is a false positive, not
+                # a real chronology/reference disagreement. `_usable_v2()`
+                # mirrors v1's exact historical-vs-modern-vs-gap rule (only
+                # REUSE_UPSTREAM/CUSTOM_SCRIPT with a usable passcode count),
+                # so the two can no longer disagree about which candidates
+                # this warning describes.
+                if selection.chronology == "determinate" and _usable_v2(selection.candidates[0].coverage) is not None:
                     self.warn(
                         "format.parity-omits-historical",
                         fmt.path,
@@ -1217,10 +1259,17 @@ class Validator:
     def _validate_v2_applicability(self, erratum: ErratumV2, fmt: Format, snapshot: _dt.date) -> None:
         if not erratum.has_implementation_relevant_history():
             return
-        if fmt.reference_parity:
-            return  # parity governs; disagreements reported above
         excluded = erratum.id in fmt.errata_exclude
         included = erratum.id in fmt.errata_include and not excluded
+        if fmt.reference_parity and not excluded and not included:
+            # Frozen precedence (task section 2): exclude and include are
+            # adjudications that outrank parity, so a card carrying either
+            # is analysed HERE with the same include/baseline-coverage and
+            # chronology diagnostics a non-parity format gets - never with
+            # parity diagnostics for a resolution the builder does not
+            # actually use for this card. A card that is neither is parity's
+            # to govern and to report on (_validate_v2_parity).
+            return
         all_relevant_ids = frozenset(e.id for e in erratum.relevant_events())
         if erratum.review_status != "reviewed":
             if included and erratum.state_for(frozenset()).coverage.kind == Coverage.UNRESOLVED:
@@ -1328,6 +1377,12 @@ class Validator:
                 )
             # Ambiguous WITH baseline plausible: the include is exactly the
             # documented adjudication the ambiguity calls for - no finding.
+            return
+        if fmt.reference_parity:
+            # Neither excluded nor included, under a parity format: parity
+            # governs this card's selection (never unresolved_policy, which
+            # the builder's parity branch never consults), and
+            # _validate_v2_parity reports its own diagnostics for it.
             return
         if selection.chronology == "ambiguous":
             policy = fmt.unresolved_policy or {}
@@ -1740,14 +1795,19 @@ class Validator:
                 fmt.path,
                 f"unresolved_policy.choice {fmt.unresolved_policy.get('choice')!r}",
             )
-        if fmt.reference_parity and fmt.errata_include:
-            self.warn(
-                "format.parity-with-include-list",
-                fmt.path,
-                f"reference_parity already substitutes every record with a baseline "
-                f"historical implementation; the {len(fmt.errata_include)} include "
-                "entries are redundant",
-            )
+        # NOTE (task section 2): a blanket "every include is redundant under
+        # parity" warning used to live here. That is not generally true
+        # under the frozen precedence - exclude wins, then include, and only
+        # THEN does parity govern (lflist._select_v2_override,
+        # resolve_v2_parity) - so an include can deliberately pin a DIFFERENT
+        # state than parity would independently select for the same card
+        # (see test_parity_and_include_disagree_validator_analyses_include_not_parity).
+        # Proving redundancy correctly would mean comparing, per card, what
+        # the include resolves to against what resolve_v2_parity() would
+        # independently resolve to for that same card - a genuinely
+        # per-card fact, not a per-format one - so the blanket warning was
+        # removed rather than narrowed to a check this format-level loop
+        # cannot make correctly.
         if snapshot and fmt.reference_parity:
             # Parity is the format's definition, but where our own research
             # disagrees with the reference the divergence must stay visible.

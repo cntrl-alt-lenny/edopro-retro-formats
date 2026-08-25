@@ -654,7 +654,11 @@ class ImplementationMetadata:
 
     @classmethod
     def from_raw(cls, events: frozenset[str], raw: dict[str, Any]) -> "ImplementationMetadata":
-        gap = raw.get("gap") or {}
+        # Same malformed-container defence as ReferenceIdentity.from_raw():
+        # a non-dict `gap` (e.g. `gap: 123`) must not crash the whole
+        # repository load with a raw AttributeError from `.get()`.
+        gap_raw = raw.get("gap")
+        gap = gap_raw if isinstance(gap_raw, dict) else {}
         return cls(
             events=events,
             status=raw.get("status"),
@@ -694,11 +698,24 @@ class ReferenceIdentity:
 
     @classmethod
     def from_raw(cls, raw: dict[str, Any]) -> "ReferenceIdentity":
+        # `historical_variant_passcodes` is authored data, not a trusted
+        # container - a scalar (123) or explicit null must never crash the
+        # whole repository load (Repository.load only catches DataError,
+        # not a raw TypeError from deep inside record parsing), and must
+        # never be silently reinterpreted as "no variants" either: a bare
+        # int would `tuple()`-explode, and (worse) a string would silently
+        # iterate into a tuple of its own characters. Only a genuine list
+        # is accepted here; anything else becomes an empty tuple, but the
+        # RAW value stays on `raw` for _reference_identity_fault() /
+        # _validate_v2_reference_identities() to independently re-check and
+        # fail safe on - never as a look-alike empty-list.
+        variants_raw = raw.get("historical_variant_passcodes", [])
+        variants = tuple(variants_raw) if isinstance(variants_raw, list) else ()
         return cls(
             reference_id=str(raw.get("reference_id", "")),
             provenance_source=str(raw.get("provenance_source", "")),
             historical_passcode=raw.get("historical_passcode"),
-            historical_variant_passcodes=tuple(raw.get("historical_variant_passcodes", [])),
+            historical_variant_passcodes=variants,
             upstream=raw.get("upstream"),
             script=raw.get("script"),
             raw=raw,

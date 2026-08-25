@@ -77,6 +77,7 @@ import datetime as _dt
 import json
 from collections import Counter
 from pathlib import Path
+from typing import Any, Callable
 
 from retroformats.model import (
     IMPLEMENTATION_RELEVANT_KINDS,
@@ -135,7 +136,14 @@ COMPLEXITY_PROVEN_CHAIN = "proven-chain"
 COMPLEXITY_UNORDERED_RESEARCHED = "unordered-researched"
 COMPLEXITY_UNORDERED_MANUAL_REVIEW = "unordered-manual-review"
 COMPLEXITY_UNORDERED_EQUIVALENT = "unordered-equivalent"  # none in the current corpus; see categorise()
-COMPLEXITY_PARITY_ONLY_BLOCKED = "parity-only-blocked"
+# Final pre-migration gate, task section 4: the representation blocker this
+# label named is gone (implementation_metadata[]/reference_identities[] now
+# exist and are independently verified as preserved for all 11 records this
+# category covers) - "blocked" is no longer an accurate word for a category
+# that is representation-ready. Renamed to a descriptive, non-blocking label;
+# the CLASSIFICATION itself (zero relevant events, a usable historical
+# identity Coverage cannot represent) is unchanged and still worth naming.
+COMPLEXITY_PARITY_ONLY_IDENTITY = "parity-only-reference-identity"
 COMPLEXITY_NO_HISTORICAL_STATE = "no-historical-state"
 
 # --- ordering structure: "has a proven edge" is NOT "fully ordered" --------
@@ -225,6 +233,40 @@ def stray_resulting_implementations(record: Erratum) -> list[tuple[int, str]]:
     ]
 
 
+def final_relevant_resulting_implementations(record: Erratum) -> list[tuple[int, str]]:
+    """`(change index, kind)` for a `resulting_implementation` authored on
+    the record's FINAL implementation-relevant change specifically - a
+    STRONGER, DIFFERENT check than `stray_resulting_implementations()`
+    above (final pre-migration gate, task section 6): that check proves no
+    `resulting_implementation` sits on a change that is not implementation-
+    relevant at all; this one proves none sits on the *last* relevant one,
+    which can be a real functional/ruling change and still be unmappable.
+
+    v1's OWN `implementation_for_version()` never reads a value authored
+    here: `version_index >= len(relevant_changes())` unconditionally
+    returns `None` ("the modern card"), and the terminal version - the one
+    the record's FINAL relevant change creates - IS `len(relevant_
+    changes())`. So a `resulting_implementation` authored on the final
+    relevant change is already DEAD in v1's own runtime, not merely
+    unmapped by this migration. v2 does not give it anywhere to go either:
+    the terminal (all-relevant-events) down-set unconditionally
+    synthesises MODERN coverage (design doc's frozen terminal-state rule),
+    never an authored substitution - so unlike the cosmetic/engine case,
+    there is no "route it to the right down-set instead" fix available.
+    Migrating such a value (to any down-set, on any guess) would invent an
+    interpretation v1 itself never actually gave it. The current corpus
+    has none (verified by `ResultingImplementationTerminalityTest`); this
+    function exists so that stays a checked fact, not an assumption."""
+    relevant_indices = _relevant_indices(record)
+    if not relevant_indices:
+        return []
+    final_index = relevant_indices[-1]
+    change = record.changes[final_index]
+    if change.get("resulting_implementation") is not None:
+        return [(final_index, str(change.get("kind")))]
+    return []
+
+
 def _v1_metadata_occurrences(record: Erratum) -> list[tuple[tuple[str, ...], dict, str]]:
     """Every v1 implementation OBJECT whose workflow/research metadata must
     survive migration, as `(ordered down-set event ids, implementation,
@@ -278,7 +320,28 @@ def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None
     module's docstring. `reference_identities` (task section 8) is derived
     SEPARATELY, from the repository's own format policies
     (`derive_reference_identities()`) - never hard-coded here - and merged
-    in verbatim when the caller has one; most records pass none."""
+    in verbatim when the caller has one; most records pass none.
+
+    A thin wrapper around `candidate_v2_raw()` (final pre-migration gate,
+    task section 7): this function exists for SEMANTIC AUDIT (a parsed
+    `ErratumV2` to query `.authored_states`/`.implementation_metadata`/
+    `.reference_identities` against), while `candidate_v2_raw()` exists so
+    `tests/migration_materializer.py` can build the exact target JSON the
+    real migration would write without recreating this construction logic
+    a second time - one implementation, two consumers, never two competing
+    ones that could silently drift apart."""
+    return ErratumV2.load(candidate_v2_raw(record, reference_identities), record.path)
+
+
+def candidate_v2_raw(record: Erratum, reference_identities: list[dict] | None = None) -> dict:
+    """The RAW full-v2 JSON dict `candidate_v2()` parses - exposed on its
+    own (final pre-migration gate, task section 7) because it IS the exact
+    full-v2 target shape the real migration materializer writes for every
+    non-sugar-eligible record; the materializer only needs to additionally
+    flatten it into sugar shape for the 180 records eligible for that.
+    Never derives an event id, an ordering edge, or a state's down-set from
+    v1 array POSITION as evidence of anything - only as a stable, opaque
+    label (`_event_id`) or via `ordering_proof()`'s own date-based test."""
     events: dict[str, dict] = {}
     for index, change in enumerate(record.changes):
         events[_event_id(index)] = {
@@ -320,6 +383,15 @@ def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None
             f"change(s) {stray}; a non-relevant change creates no event, so there is no "
             "defined v2 down-set for its metadata - this needs a mapping decision, not a guess"
         )
+    final_relevant = final_relevant_resulting_implementations(record)
+    if final_relevant:
+        raise MigrationMappingQuestion(
+            f"{record.id}: resulting_implementation authored on the FINAL implementation-"
+            f"relevant change {final_relevant} - dead in v1's own implementation_for_version() "
+            "(version_index >= len(relevant_changes()) always returns None) and v2's terminal "
+            "down-set unconditionally synthesises MODERN coverage; this needs a mapping "
+            "decision, not a guess"
+        )
     # states[] is a COVERAGE question, answered by implementation_for_version:
     # version 0 of a zero-relevant record is the terminal/MODERN state, which
     # correctly authors no coverage.
@@ -351,7 +423,18 @@ def candidate_v2(record: Erratum, reference_identities: list[dict] | None = None
         "review": record.raw.get("review") or {"status": "imported"},
         "sources": list(record.sources),
     }
-    return ErratumV2.load(raw, record.path)
+    # Final pre-migration gate, task section 5: both schemas support these
+    # two top-level fields, and they were not copied here at all - carried
+    # across VERBATIM when the v1 record actually authored one (the current
+    # corpus has zero, per audit_corpus()'s own reported count below, but
+    # this function must not depend on that staying true). Never authored
+    # when the v1 record did not author one either - an empty string is not
+    # "preserve a value", it is inventing one.
+    if record.raw.get("applicable_formats_note"):
+        raw["applicable_formats_note"] = record.raw["applicable_formats_note"]
+    if record.raw.get("notes"):
+        raw["notes"] = record.raw["notes"]
+    return raw
 
 
 def derive_reference_identities(record: Erratum, repo) -> list[dict]:
@@ -606,7 +689,9 @@ def _v1_expected_metadata_fields(impl: dict) -> dict:
     return expected
 
 
-def _metadata_preserved(record: Erratum, v2: ErratumV2) -> bool:
+def _metadata_preserved(
+    record: Erratum, v2: ErratumV2, event_id: Callable[[int], str] | None = None
+) -> bool:
     """Independent of `candidate_v2()`'s own construction, exactly like
     `_coverage_preserved()`: re-derive what each v1 implementation OBJECT
     should carry directly from the RAW v1 record, then check the REAL
@@ -621,7 +706,17 @@ def _metadata_preserved(record: Erratum, v2: ErratumV2) -> bool:
     cannot jointly agree on a wrong one. Sharing the buggy
     `implementation_for_version()` lookup between construction and checker
     is precisely how the missing baseline metadata of 21 zero-relevant
-    records self-confirmed as preserved."""
+    records self-confirmed as preserved.
+
+    `event_id`, when given, maps a v1 change INDEX to the event id the
+    PARSED `v2` actually uses for it - defaults to `_event_id` (this
+    module's own opaque `c{index}` scheme). `candidate_v2()`'s output
+    always uses that scheme, but `migration_materializer.py`'s SUGAR shape
+    does not (`_desugar_v2_sugar()` always names a sugar record's one
+    event `"event"`, never `"c0"`) - checking a materialized sugar target
+    with the default id would look up a key that is never present and
+    report a false failure, not a true one."""
+    id_for = event_id or _event_id
     field_to_attr = {
         "status": "status",
         "tested": "tested",
@@ -629,11 +724,15 @@ def _metadata_preserved(record: Erratum, v2: ErratumV2) -> bool:
         "gap.upstream_checked": "gap_upstream_checked",
         "gap.behavioural_impact": "gap_behavioural_impact",
     }
+    # down_set_ids (from _v1_metadata_occurrences) is always expressed in
+    # the DEFAULT _event_id scheme; this reverses that to translate into
+    # whichever scheme `id_for` actually uses.
+    default_to_index = {_event_id(i): i for i in _relevant_indices(record)}
     for down_set_ids, impl, _label in _v1_metadata_occurrences(record):
         expected = _v1_expected_metadata_fields(impl)
         if not expected:
             continue  # nothing authored for this state: nothing to check
-        down_set = frozenset(down_set_ids)
+        down_set = frozenset(id_for(default_to_index[default_id]) for default_id in down_set_ids)
         metadata = v2.implementation_metadata.get(down_set)
         if metadata is None:
             return False
@@ -725,26 +824,43 @@ def _reference_identity_preserved(
     record: Erratum, v2: ErratumV2, expected_identities: list[dict] | None = None
 ) -> bool:
     """Does the candidate carry EXACTLY the reference-identity assertions
-    the v1 record and the repository's format policies imply - matched by
+    the v1 record and the repository's format policies imply - no missing
+    entry, no EXTRA/invented one, no duplicate semantic key - matched by
     `reference_id`, then compared across every field in
     `REFERENCE_IDENTITY_FIELDS`?
 
     `expected_identities` comes from `_v1_expected_reference_identities()`,
     derived independently of the candidate's own input. When None (a caller
-    that did not supply one), there is no expectation to check and this is
-    trivially True, the same answer it gave for every non-parity record
-    before.
+    that did not supply one - most callers pass a real, possibly-empty
+    list), there is no expectation to check and this is trivially True, the
+    same answer it gave for every non-parity record before.
+
+    Final pre-migration gate, task section 3: the previous version only
+    verified every EXPECTED entry exists - subset containment, not exact
+    round-trip preservation. A candidate that also carried a second,
+    unexpected (even if individually well-formed) entry passed just as
+    cleanly as one that carried exactly what was expected. Migrated data
+    must never silently gain an assertion nobody derived. The fix is an
+    exact SET comparison of reference_id keys before any field is even
+    looked at: `expected_ids == actual_ids`, not `expected_ids <= actual_ids`.
 
     Deliberately NOT "any entry with the same passcode payload": an entry
     carrying the right passcode under the wrong `reference_id`, or sourced
     to the wrong `provenance_source`, is a different assertion. Both are
     part of the identity, so both are compared."""
-    for expected in expected_identities or []:
-        identity = next(
-            (r for r in v2.reference_identities if r.reference_id == expected["reference_id"]), None
-        )
-        if identity is None:
-            return False
+    if expected_identities is None:
+        return True
+    expected_ids = [e["reference_id"] for e in expected_identities]
+    actual_ids = [r.reference_id for r in v2.reference_identities]
+    if len(expected_ids) != len(set(expected_ids)):
+        return False  # the independent expectation is not itself a valid set
+    if len(actual_ids) != len(set(actual_ids)):
+        return False  # candidate carries a duplicate semantic key - never preserved
+    if set(actual_ids) != set(expected_ids):
+        return False  # exact SET equality: no missing, no extra/invented entry
+    expected_by_id = {e["reference_id"]: e for e in expected_identities}
+    for identity in v2.reference_identities:
+        expected = expected_by_id[identity.reference_id]
         for field_name in REFERENCE_IDENTITY_FIELDS:
             actual = getattr(identity, field_name)
             if field_name == "historical_variant_passcodes":
@@ -754,20 +870,32 @@ def _reference_identity_preserved(
     return True
 
 
-def _data_preserved(
-    record: Erratum, v2: ErratumV2, expected_identities: list[dict] | None = None
+def _transition_preserved(
+    record: Erratum, v2: ErratumV2, event_id: Callable[[int], str] | None = None
 ) -> bool:
-    """Migration must not silently drop documentation fields even where
-    executable behaviour is unaffected: every change's historical_text,
-    modern_text, summary and sources must survive verbatim into its
-    candidate event's sole transition, every coverage field with a direct
-    v2 representation must survive (`_coverage_preserved`), every workflow/
-    research metadata field must survive (`_metadata_preserved`), and a
-    parity-only record's identity must survive into `reference_
-    identities[]` (`_reference_identity_preserved`)."""
+    """Independent of `candidate_v2()`'s own construction: every change's
+    COMPLETE `effective` block (not merely a derived OLD/AMBIGUOUS/NEW
+    verdict) and its `historical_text`/`modern_text`/`summary`/`sources`
+    must survive verbatim into its candidate event's sole transition.
+
+    The `effective` block matters on its own, separately from the
+    semantic-equivalence check elsewhere in this module: that check only
+    probes finitely many derived boundary dates, and a corrupted
+    `precision`/`old_attested_through`/`new_attested_from` field could
+    easily leave every one of those probes unchanged while still being
+    real historical-record loss - documentation the record no longer
+    accurately carries, even if no CURRENT snapshot happens to expose it.
+
+    `event_id`, when given, maps a v1 change INDEX to the event id the
+    PARSED `v2` actually uses for it - see `_metadata_preserved()`'s
+    docstring for why this is needed for a materialized SUGAR target."""
+    id_for = event_id or _event_id
     for index, change in enumerate(record.changes):
-        event = v2.events.get(_event_id(index))
+        event = v2.events.get(id_for(index))
         if event is None or not event.transitions:
+            return False
+        expected_effective = dict(change.get("effective") or {"date": None})
+        if dict(event.effective) != expected_effective:
             return False
         transition = event.transitions[0]
         if transition.historical_text != change.get("historical_text"):
@@ -778,8 +906,70 @@ def _data_preserved(
             return False
         if tuple(transition.sources) != tuple(change.get("sources", [])):
             return False
+    return True
+
+
+def _top_level_preserved(record: Erratum, v2: ErratumV2) -> bool:
+    """Independent of `candidate_v2()`'s own construction: every top-level
+    field the v1 AND v2 schemas both support - `modern_card`,
+    `classification`, `sources`, `review` (including `date`/`notes`),
+    `applicable_formats_note` (when authored), `notes` (when authored) -
+    must survive verbatim.
+
+    Deliberately does NOT invent an absent `review` block as data loss:
+    `candidate_v2()` synthesises `{"status": "imported"}` when the v1
+    record never authored one at all (schema-legal: `review` is optional
+    on `erratumV1`), which is the same "absent means imported" meaning the
+    v1 schema itself already carries - not a fabrication of authored
+    content. `audit_corpus()`'s summary reports how many CURRENT records
+    actually take that path (`review_absent_count`), rather than assuming
+    it is always zero.
+
+    `$schema` is deliberately EXCLUDED from this check: it is pure
+    editor-tooling metadata (points a JSON Schema-aware editor at the
+    schema file; never read by Repository.load()/Validator/lflist.py -
+    verified by grep, only the importers under retroformats/importers/
+    write it), and every current v1 record's `$schema` already points at
+    the exact same file (`schemas/erratum.schema.json`) that also defines
+    the v2 shapes - so normalising it on migration is a documented,
+    lossless no-op, never historical-data loss."""
+    if v2.modern_card.passcode != record.modern_card.passcode:
+        return False
+    if v2.modern_card.name != record.modern_card.name:
+        return False
+    if v2.classification != record.classification:
+        return False
+    if list(v2.sources) != list(record.sources):
+        return False
+    expected_review = record.raw.get("review") or {"status": "imported"}
+    if (v2.raw.get("review") or {}) != expected_review:
+        return False
+    for field_name in ("applicable_formats_note", "notes"):
+        expected_value = record.raw.get(field_name)
+        actual_value = v2.raw.get(field_name)
+        if expected_value:
+            if actual_value != expected_value:
+                return False
+        elif actual_value:
+            return False  # candidate invented a value the v1 record never authored
+    return True
+
+
+def _data_preserved(
+    record: Erratum, v2: ErratumV2, expected_identities: list[dict] | None = None
+) -> bool:
+    """Migration must not silently drop documentation fields even where
+    executable behaviour is unaffected: every top-level field the two
+    schemas share (`_top_level_preserved`), every change's complete
+    chronology and documentation text (`_transition_preserved`), every
+    coverage field with a direct v2 representation (`_coverage_preserved`),
+    every workflow/research metadata field (`_metadata_preserved`), and a
+    parity-only record's identity into `reference_identities[]`
+    (`_reference_identity_preserved`)."""
     return (
-        _coverage_preserved(record, v2)
+        _top_level_preserved(record, v2)
+        and _transition_preserved(record, v2)
+        and _coverage_preserved(record, v2)
         and _metadata_preserved(record, v2)
         and _reference_identity_preserved(record, v2, expected_identities)
     )
@@ -1088,6 +1278,11 @@ def compare(
             ordering_structure="unknown",
             structural_state_count=0,
             proven_edge_count=0,
+            top_level_preserved=False,
+            transition_preserved=False,
+            coverage_preserved=False,
+            metadata_preserved=False,
+            reference_identity_preserved=False,
             data_preserved=False,
             legacy_self_contradictory=None,
             equivalent=False,
@@ -1119,6 +1314,8 @@ def compare(
     row["baseline_metadata_represented"] = (
         v2.implementation_metadata.get(frozenset()) is not None if baseline_metadata else None
     )
+    row["top_level_preserved"] = _top_level_preserved(record, v2)
+    row["transition_preserved"] = _transition_preserved(record, v2)
     row["coverage_preserved"] = _coverage_preserved(record, v2)
     row["metadata_preserved"] = _metadata_preserved(record, v2)
     row["reference_identity_preserved"] = _reference_identity_preserved(record, v2, expected_identities)
@@ -1167,7 +1364,7 @@ def categorise(row: dict, record: Erratum, v2: ErratumV2) -> tuple[str, str, str
     computable from the data."""
     if row["relevant_event_count"] == 0:
         if row["parity_only_identity"]:
-            return CAT_PARITY_ONLY, RESEARCH_NOT_APPLICABLE, COMPLEXITY_PARITY_ONLY_BLOCKED
+            return CAT_PARITY_ONLY, RESEARCH_NOT_APPLICABLE, COMPLEXITY_PARITY_ONLY_IDENTITY
         return CAT_COSMETIC_ONLY, RESEARCH_NOT_APPLICABLE, COMPLEXITY_NO_HISTORICAL_STATE
     if not row["equivalent"]:
         if row["nonrelevant_event_count"] and _nonrelevant_is_implicated(record, v2):
@@ -1234,14 +1431,26 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
     # metadata can vanish without any check noticing.
     zero_relevant = [r for r in rows if r["relevant_event_count"] == 0]
     zero_relevant_with_metadata = [r for r in zero_relevant if r["baseline_metadata_fields"]]
+    # Final pre-migration gate, task section 4: REPRESENTATION readiness,
+    # re-derived from the same per-row preservation evidence
+    # `data_preservation_status`/`data_not_preserved_ids` already compute -
+    # never hard-coded as "0 blocked", so a future regression in any of the
+    # five preservation checks _data_preserved() ANDs together (top-level,
+    # transition, coverage, metadata, reference-identity) would correctly
+    # move a record out of "ready" rather than silently staying green.
+    representation_ready_ids = sorted(r["id"] for r in rows if r["equivalent"] and r.get("data_preserved"))
+    representation_blocked_ids = sorted(
+        r["id"] for r in rows if r["equivalent"] and not r.get("data_preserved")
+    )
     summary = {
         "records": len(rows),
         # SEMANTIC EQUIVALENCE: selection never changes at any chronology
         # boundary. Necessary, not sufficient, for migration readiness -
-        # see chronology_shape_ready / parity_only_blocked /
+        # see representation_ready / representation_blocked /
         # data_preservation_status below. Equivalence is a claim about
-        # SELECTION only; it says nothing about whether every field a v1
-        # record carries has a place to go in v2.
+        # SELECTION only; it says nothing on its own about whether every
+        # field a v1 record carries has a place to go in v2 - that is what
+        # representation_ready/data_preserved verify separately.
         "equivalent": equivalent_count,
         "semantic_equivalent": equivalent_count,  # explicit alias
         "not_equivalent": sum(1 for r in rows if not r["equivalent"]),
@@ -1254,17 +1463,36 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "research_status": dict(Counter(r.get("research_status") for r in rows)),
         "migration_complexity": dict(Counter(r.get("migration_complexity") for r in rows)),
         "data_not_preserved_ids": unpreserved_data_ids,
+        "top_level_not_preserved_ids": sorted(r["id"] for r in rows if r.get("top_level_preserved") is False),
+        "transition_not_preserved_ids": sorted(r["id"] for r in rows if r.get("transition_preserved") is False),
         "metadata_not_preserved_ids": unpreserved_metadata_ids,
         "reference_identity_not_preserved_ids": unpreserved_reference_identity_ids,
-        # CHRONOLOGY/SHAPE READINESS - deliberately NOT called "safe to
-        # migrate" or "immediately migratable". Of the 247 semantically
-        # equivalent records, 11 are parity-only identity records; the
-        # remaining 236 have no known chronology/shape obstacle to
-        # becoming v2 events{}/states[].
+        # CHRONOLOGY/SHAPE STRUCTURE - a narrower, purely structural fact
+        # (does this record have a states[]-representable chronology at
+        # all, set aside from the 11 parity-only-identity records whose
+        # only representable fact is a reference_identities[] entry, not a
+        # states[] one) - deliberately NOT the migration-readiness
+        # headline (task section 4 correction: it used to be reported that
+        # way, and the 11 parity-only records it excluded are NOT blocked
+        # any more now that reference_identities[] exists - see
+        # representation_ready/representation_blocked below for the real
+        # headline).
         "chronology_shape_ready": equivalent_count - parity_only_count,
         "chronology_shape_ready_ids": sorted(
             r["id"] for r in rows if r["equivalent"] and r.get("category") != CAT_PARITY_ONLY
         ),
+        # REPRESENTATION READINESS - the actual migration-readiness
+        # headline (task section 4), re-derived from data_preserved above,
+        # never asserted. Of the 247 semantically-equivalent records, ALL
+        # 247 now have a verified v2 representation (180 sugar + 35 full-v2
+        # one-relevant-event-with-nonrelevant-siblings + 11 fully-ordered
+        # multi-relevant + 11 parity-only-identity + 10 pure cosmetic/
+        # engine) - the representation gap this task closes was the ONLY
+        # thing blocking the 11 parity-only records, and it is closed.
+        "representation_ready": len(representation_ready_ids),
+        "representation_ready_ids": representation_ready_ids,
+        "representation_blocked": len(representation_blocked_ids),
+        "representation_blocked_ids": representation_blocked_ids,
         # REPRESENTATION status for the two gaps this task closes (task
         # section 8): `implementation_metadata[]`/`reference_identities[]`
         # now exist in the v2 schema/runtime/validator/consumer, and this
@@ -1275,25 +1503,52 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         # data/errata/*.json record has actually been changed; this only
         # reports that a destination now exists and preservation is
         # verified against the CANDIDATE, not against real migrated data.
+        # The 247 are REPRESENTATION-READY, never called "migrated" here.
         "data_preservation_status": "representation-implemented-not-migrated",
         "data_preservation_status_detail": (
             "implementation_metadata[]/reference_identities[] now exist (docs/research/"
-            "erratum-v2-representation-gaps.md); metadata_not_preserved_ids and "
-            "reference_identity_not_preserved_ids below are empty, meaning every "
-            "candidate v2 round-trips its v1 metadata/identity exactly. This figure is "
-            "trustworthy only because construction and checker no longer share the "
-            "coverage-shaped implementation_for_version() lookup: they did, so the "
-            "baseline metadata of all 21 zero-relevant records was dropped by BOTH and "
+            "erratum-v2-representation-gaps.md); metadata_not_preserved_ids, "
+            "reference_identity_not_preserved_ids, top_level_not_preserved_ids and "
+            "transition_not_preserved_ids below are empty, meaning every candidate v2 "
+            "round-trips its v1 metadata/identity/top-level-fields/transition-text exactly. "
+            "This figure is trustworthy only because construction and checker no longer "
+            "share the coverage-shaped implementation_for_version() lookup: they did, so "
+            "the baseline metadata of all 21 zero-relevant records was dropped by BOTH and "
             "self-confirmed as preserved. Metadata occurrences are now enumerated "
             "separately (_v1_metadata_occurrences) and the expected VALUES are re-derived "
             "from the raw v1 objects; see zero_relevant_* below for that population "
-            "reported explicitly. No data/errata/*.json record has been migrated - this "
-            "is a readiness finding about the REPRESENTATION, not a migration status."
+            "reported explicitly. All 247 semantically-equivalent records are "
+            "REPRESENTATION-READY (representation_ready=247, representation_blocked=0); "
+            "the 11 parity_only_identity records are a CLASSIFICATION, not a blocker, now "
+            "that reference_identities[] exists. No data/errata/*.json record has been "
+            "migrated - this is a readiness finding about the REPRESENTATION, not a "
+            "migration status."
         ),
-        "parity_only_blocked": parity_only_count,
-        "parity_only_blocked_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
+        "parity_only_identity_count": parity_only_count,
+        "parity_only_identity_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
         "parity_only_unrepresented_count": len(unpreserved_reference_identity_ids),
         "metadata_unrepresented_count": len(unpreserved_metadata_ids),
+        # Final pre-migration gate, task section 5: corpus counts for the
+        # top-level fields candidate_v2() did not used to copy at all -
+        # DERIVED, never assumed zero. (Currently 0/0: no canonical record
+        # authors applicable_formats_note/notes yet, but this audit must
+        # not depend on that staying true - see _top_level_preserved().)
+        "applicable_formats_note_count": sum(
+            1 for r in repo.errata.values() if isinstance(r, Erratum) and r.raw.get("applicable_formats_note")
+        ),
+        "notes_count": sum(1 for r in repo.errata.values() if isinstance(r, Erratum) and r.raw.get("notes")),
+        # review.notes/review.date corpus counts, and how many records take
+        # the "review absent -> synthesise {status: imported}" normalisation
+        # path _top_level_preserved() deliberately does not treat as loss.
+        "review_notes_count": sum(
+            1 for r in repo.errata.values() if isinstance(r, Erratum) and (r.raw.get("review") or {}).get("notes")
+        ),
+        "review_date_count": sum(
+            1 for r in repo.errata.values() if isinstance(r, Erratum) and (r.raw.get("review") or {}).get("date")
+        ),
+        "review_absent_count": sum(
+            1 for r in repo.errata.values() if isinstance(r, Erratum) and not r.raw.get("review")
+        ),
         # Finding 1's population, and the proof it is now carried.
         "zero_relevant_count": len(zero_relevant),
         "zero_relevant_ids": sorted(r["id"] for r in zero_relevant),

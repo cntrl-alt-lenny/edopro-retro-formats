@@ -578,19 +578,37 @@ otherwise-valid passcode.
 
 ## Migration readiness — three separate questions, not one
 
-**Still do not report "247 safe to migrate."** Semantic equivalence,
-chronology/shape readiness, and data-preservation certification remain
-three DIFFERENT questions. What changed in this pass: **both
-representation gaps that made question 3 PENDING are now closed** —
-`implementation_metadata[]` and `reference_identities[]` exist in the v2
-schema/runtime/validator/consumer (`docs/research/erratum-v2-
-representation-gaps.md`), and this audit's own candidate construction
-independently verifies every one of the 247 semantically-equivalent
-records' v1 metadata/identity round-trips into them. **This still does not
+**Headline, as of the final pre-migration gate pass: `representation_ready
+= 247`, `representation_blocked = 0`.** Both representation gaps that used
+to make question 3 PENDING are closed — `implementation_metadata[]` and
+`reference_identities[]` exist in the v2 schema/runtime/validator/consumer
+(`docs/research/erratum-v2-representation-gaps.md`), and this audit's own
+candidate construction independently verifies every one of the 247
+semantically-equivalent records' v1 data round-trips into them: not only
+metadata/identity (this pass's earlier finding) but every TOP-LEVEL field
+both schemas support and every change's COMPLETE transition, including the
+`effective` chronology block, not merely its documentation text (`_top_
+level_preserved`/`_transition_preserved`, below). **This still does not
 mean canonical migration has happened** — no `data/errata/*.json` record
-has changed. Representation readiness and migration are different claims;
-conflating them would repeat the exact mistake this section exists to
-prevent.
+has changed; `representation_ready` means "verified against the candidate
+this tooling would write," not "already written." Representation readiness
+and migration are different claims; conflating them would repeat the exact
+mistake this section exists to prevent.
+
+An earlier pass of this section reported the readiness headline as
+`chronology_shape_ready = 236` (247 equivalent minus the 11 parity-only
+records) with the 11 named `parity_only_blocked` — accurate at the time,
+because `reference_identities[]` did not exist yet and those 11 records
+genuinely had no v2 destination. That framing is now WRONG to report as
+the headline: the 11 are no longer blocked, they have a verified
+`reference_identities[]` destination like every other representation-ready
+record. `chronology_shape_ready`/`chronology_shape_ready_ids` remain in
+the audit output as a narrower, still-true STRUCTURAL fact (does this
+record have a `states[]`-shaped chronology, set aside from the 11 whose
+only representable fact is a `reference_identities[]` entry) — genuinely
+useful for planning the materializer's sugar/full split, but never the
+readiness verdict again. The 11 are now named `parity_only_identity_count`/
+`parity_only_identity_ids`: a CLASSIFICATION, not a blocker.
 
 **1. SEMANTIC EQUIVALENCE** (selection never changes at any chronology
 boundary), **unchanged by the representation work**:
@@ -613,34 +631,53 @@ boundary), **unchanged by the representation work**:
     researcher-inferred order should become an authored `basis`-carrying
     edge.
 
-**2. CHRONOLOGY/SHAPE READINESS** — a narrower, purely structural claim:
+**2. CHRONOLOGY/SHAPE STRUCTURE** — a narrower, purely structural claim:
 does the record's chronology/event-set structure have any KNOWN obstacle to
 becoming v2 `events{}`/`states[]`? Still NOT the same claim as data
-preservation, even though both are now favourable for all 247:
+preservation or the readiness headline, even though both are now
+favourable for all 247:
 
 - **236 chronology/shape-ready** — 180 sugar-eligible + 35 single-relevant-
   with-cosmetic-siblings + 11 fully-ordered multi-event.
-- **11 parity-only** — now representable via `reference_identities[]`
-  (previously a separate blocker; see below).
+- **11 parity-only-identity** — representable via `reference_identities[]`
+  instead of `states[]` (a CLASSIFICATION, not a blocker — see the
+  headline above).
 - **10 pure cosmetic/engine, no historical state** — nothing behavioural
   to migrate, but their workflow metadata (if any) is representable via
   `implementation_metadata[]` too.
 
 **3. DATA-PRESERVATION STATUS: representation-implemented-not-migrated.**
-`_data_preserved()` now checks FOUR things, not two:
-historical_text/modern_text/summary/sources, every coverage field
-(`_coverage_preserved`), every workflow/research metadata field
-(`_metadata_preserved` — `status`/`tested`/`reason`/`gap.upstream_checked`/
-`gap.behavioural_impact`, previously unrepresented), and a parity-only
-record's identity (`_reference_identity_preserved`). **Result: `metadata_
-unrepresented_count == 0`, `parity_only_unrepresented_count == 0`, every
-one of the 247 records' `data_preserved` is `True`.** This is a claim
-about the CANDIDATE v2 record the migration tooling constructs, verified
-independently (mutation tests confirm the checks have real teeth) — it is
-NOT a claim that any canonical record has been migrated. `chronology_
-shape_ready`/`chronology_shape_ready_ids` remain deliberately NOT named
-`migratable` or `safe`, and `data_preservation_status` is now the literal
-string `"representation-implemented-not-migrated"`, not `"pending"`.
+`_data_preserved()` now checks FIVE things, not two: every TOP-LEVEL field
+both schemas support — `modern_card`/`classification`/`sources`/`review`
+(including `date`/`notes`)/`applicable_formats_note`/`notes` when authored
+(`_top_level_preserved`) — every change's COMPLETE transition, the
+`effective` chronology block included, not only its documentation text
+(`_transition_preserved`), every coverage field (`_coverage_preserved`),
+every workflow/research metadata field (`_metadata_preserved` —
+`status`/`tested`/`reason`/`gap.upstream_checked`/`gap.behavioural_impact`),
+and a parity-only record's identity, compared as an EXACT SET — no missing
+entry, no extra/invented one (`_reference_identity_preserved`). **Result:
+`metadata_unrepresented_count == 0`, `parity_only_unrepresented_count ==
+0`, `top_level_not_preserved_ids == []`, `transition_not_preserved_ids ==
+[]`, every one of the 247 records' `data_preserved` is `True` —
+`representation_ready == 247`, `representation_blocked == 0`.** This is a
+claim about the CANDIDATE v2 record the migration tooling constructs,
+verified independently (mutation tests confirm every check has real teeth,
+including a dedicated test that an EXTRA/invented reference-identity entry
+is rejected, not merely a missing one) — it is NOT a claim that any
+canonical record has been migrated. `data_preservation_status` is the
+literal string `"representation-implemented-not-migrated"`, not
+`"pending"`.
+
+`applicable_formats_note_count`/`notes_count` in the audit JSON are the
+CURRENT corpus counts of records authoring those two top-level fields —
+derived, not assumed: both are `0` today (no canonical record uses either
+field yet), and `_top_level_preserved()` does not depend on that staying
+true. `review_notes_count`/`review_date_count` are both `296` (every
+current record authors a full `review` block); `review_absent_count` is
+`0`, meaning the "absent `review` → synthesise `{status: imported}`"
+normalisation in `candidate_v2()` is not currently exercised by any real
+record — reported explicitly rather than assumed never to matter.
 
 **Self-contradictory under the legacy schema (informational, orthogonal to
 all three questions above, not a blocker by itself): 48 of the 49** — the

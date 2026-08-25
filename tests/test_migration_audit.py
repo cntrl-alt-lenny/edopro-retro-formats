@@ -179,17 +179,26 @@ class MigrationAuditPartitionTest(unittest.TestCase):
         self.assertEqual(296, sum(self.summary["categories"].values()))
 
     def test_current_migration_readiness_accounting(self):
-        """Equivalence (247) is necessary, not sufficient: 236 of them have
-        no known chronology/shape obstacle once the 11 parity-only records
-        are set aside - but that is NOT a data-preservation or
-        migration-safety certification (v1 metadata with no v2
-        destination affects them too), and the bookkeeping must say so
-        explicitly rather than reporting '247 safe to migrate' or '236
-        immediately migratable'."""
+        """Final pre-migration gate, task section 4: the representation
+        blocker is gone, so the migration-readiness HEADLINE is
+        representation_ready=247/representation_blocked=0 - not the old
+        chronology_shape_ready=236/parity_only_blocked=11 framing, which
+        wrongly reported the 11 parity-only-identity records as blocked
+        after their reference_identities[] destination already exists.
+        chronology_shape_ready/parity_only_identity_count remain as
+        narrower, still-true STRUCTURAL/CLASSIFICATION facts - a record's
+        states[]-shaped chronology readiness and its parity-only identity
+        classification are real distinctions worth keeping visible - but
+        neither is the readiness verdict any more."""
         self.assertEqual(247, self.summary["semantic_equivalent"])
+        self.assertEqual(247, self.summary["representation_ready"])
+        self.assertEqual(247, len(self.summary["representation_ready_ids"]))
+        self.assertEqual(0, self.summary["representation_blocked"])
+        self.assertEqual([], self.summary["representation_blocked_ids"])
         self.assertEqual(236, self.summary["chronology_shape_ready"])
         self.assertEqual(236, len(self.summary["chronology_shape_ready_ids"]))
-        self.assertEqual(11, self.summary["parity_only_blocked"])
+        self.assertEqual(11, self.summary["parity_only_identity_count"])
+        self.assertEqual(11, len(self.summary["parity_only_identity_ids"]))
         self.assertEqual(236 + 11, self.summary["semantic_equivalent"])
         self.assertEqual(49, self.summary["nontrivial_migration_scope"])
         self.assertEqual(47, self.summary["nontrivial_already_researched"])
@@ -199,6 +208,21 @@ class MigrationAuditPartitionTest(unittest.TestCase):
             self.summary["nontrivial_needs_manual_review_ids"],
         )
         self.assertEqual(47 + 2, self.summary["nontrivial_migration_scope"])
+
+    def test_top_level_field_corpus_counts_are_derived_not_assumed(self):
+        """Final pre-migration gate, task section 5: applicable_formats_note
+        and notes counts must be DERIVED from the actual corpus, never
+        assumed zero - and every equivalent record's candidate must
+        independently preserve every top-level field and every change's
+        complete transition (effective block included, not just the
+        documentation text)."""
+        self.assertEqual(0, self.summary["applicable_formats_note_count"])
+        self.assertEqual(0, self.summary["notes_count"])
+        self.assertEqual(296, self.summary["review_notes_count"])
+        self.assertEqual(296, self.summary["review_date_count"])
+        self.assertEqual(0, self.summary["review_absent_count"])
+        self.assertEqual([], self.summary["top_level_not_preserved_ids"])
+        self.assertEqual([], self.summary["transition_not_preserved_ids"])
 
     def test_representation_implemented_but_not_migrated(self):
         """Both representation gaps now have a v2 destination
@@ -220,11 +244,13 @@ class MigrationAuditPartitionTest(unittest.TestCase):
     def test_all_247_equivalent_records_pass_full_representation_preservation(self):
         """The task's own required check: every one of the 247
         semantically-equivalent records' candidate v2 preserves everything
-        `_data_preserved()` checks (transitions, coverage, metadata,
-        reference identity)."""
+        `_data_preserved()` checks (top-level fields, transitions,
+        coverage, metadata, reference identity)."""
         for row in self.rows:
             if row["equivalent"]:
                 self.assertTrue(row["data_preserved"], row["id"])
+                self.assertTrue(row["top_level_preserved"], row["id"])
+                self.assertTrue(row["transition_preserved"], row["id"])
                 self.assertTrue(row["coverage_preserved"], row["id"])
                 self.assertTrue(row["metadata_preserved"], row["id"])
                 self.assertTrue(row["reference_identity_preserved"], row["id"])
@@ -1411,6 +1437,48 @@ class ZeroRelevantMetadataTest(unittest.TestCase):
         with self.assertRaises(audit.MigrationMappingQuestion):
             audit.candidate_v2(mutated)
 
+    def test_no_resulting_implementation_sits_on_the_final_relevant_change(self):
+        """Final pre-migration gate, task section 6: a STRONGER invariant
+        than 'not on a nonrelevant change' - a resulting_implementation on
+        the record's FINAL relevant change is dead in v1's own
+        implementation_for_version() (version_index >= len(relevant_
+        changes()) always returns None) AND has no v2 states[]
+        destination (the terminal down-set unconditionally synthesises
+        MODERN coverage), so it is a genuinely different, stronger
+        condition than the nonrelevant-change check above. Exactly 16
+        resulting_implementation occurrences exist in the current corpus
+        (audited by hand against every one, listed below); 0 sit on a
+        final relevant change."""
+        total = 0
+        offenders = {}
+        for record in self.repo.errata.values():
+            if not isinstance(record, audit.Erratum):
+                continue
+            for change in record.changes:
+                if change.get("resulting_implementation") is not None:
+                    total += 1
+            final = audit.final_relevant_resulting_implementations(record)
+            if final:
+                offenders[record.id] = final
+        self.assertEqual(16, total)
+        self.assertEqual({}, offenders)
+
+    def test_a_final_relevant_resulting_implementation_stops_the_migration(self):
+        record = self.repo.errata["erratum-a-cat-of-ill-omen"]
+        relevant = audit._relevant_indices(record)
+        self.assertEqual(1, len(relevant), "fixture must have exactly one relevant change")
+        self.assertIsNone(record.changes[relevant[0]].get("resulting_implementation"))
+        raw = json.loads(json.dumps(record.raw))
+        raw["changes"][relevant[0]]["resulting_implementation"] = {
+            "strategy": "none-needed",
+            "status": "complete",
+        }
+        mutated = audit.Erratum.load(raw, record.path)
+        self.assertEqual([], audit.stray_resulting_implementations(mutated))  # NOT the weaker case
+        self.assertTrue(audit.final_relevant_resulting_implementations(mutated))
+        with self.assertRaises(audit.MigrationMappingQuestion):
+            audit.candidate_v2(mutated)
+
 
 class ReferenceIdentityFieldComparisonTest(unittest.TestCase):
     """The review's finding 3: the identity of the assertion includes
@@ -1477,6 +1545,24 @@ class ReferenceIdentityFieldComparisonTest(unittest.TestCase):
         # ...and it really did derive the repository's actual values.
         self.assertEqual("project-ignis-goat", self.expected[0]["reference_id"])
         self.assertEqual("ignis-lflists", self.expected[0]["provenance_source"])
+
+    def test_extra_unexpected_identity_fails(self):
+        """Final pre-migration gate, section 3: the previous version only
+        verified every EXPECTED entry exists (subset containment) and did
+        not reject an EXTRA actual one. A second, otherwise well-formed
+        identity nobody derived - not missing, not wrong-valued, simply
+        invented - must fail the check exactly as surely as a missing or
+        mismatched one does. Exact SET preservation, not "at least"."""
+        extra = dict(self.identities[0], reference_id="some-other-reference-nobody-expected")
+        v2 = audit.candidate_v2(self.record, [self.identities[0], extra])
+        self.assertEqual(2, len(v2.reference_identities))
+        self.assertFalse(audit._reference_identity_preserved(self.record, v2, self.expected))
+
+    def test_duplicate_semantic_key_in_the_candidate_fails(self):
+        """Two entries sharing the SAME reference_id is never a valid
+        preserved set, regardless of whether their other fields agree."""
+        v2 = audit.candidate_v2(self.record, [self.identities[0], dict(self.identities[0])])
+        self.assertFalse(audit._reference_identity_preserved(self.record, v2, self.expected))
 
     def test_conflicting_reference_id_declarations_are_reported(self):
         """Two formats declaring the same reference_id with different

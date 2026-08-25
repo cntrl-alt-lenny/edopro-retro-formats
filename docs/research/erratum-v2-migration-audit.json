@@ -350,7 +350,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -729,7 +731,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -772,7 +776,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -813,7 +819,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -855,7 +863,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -896,7 +906,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -937,7 +949,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -981,7 +995,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1023,7 +1039,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1066,7 +1084,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1107,7 +1127,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1148,7 +1170,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1527,7 +1551,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1571,7 +1597,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -1950,7 +1978,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2329,7 +2359,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2372,7 +2404,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2413,7 +2447,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2457,7 +2493,9 @@
     "kde-tournament-policy-archive"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2499,7 +2537,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2540,7 +2580,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2582,7 +2624,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2811,7 +2855,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2853,7 +2899,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2897,7 +2945,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2941,7 +2991,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -2985,7 +3037,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3364,7 +3418,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3408,7 +3464,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3452,7 +3510,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3493,7 +3553,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3537,7 +3599,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3578,7 +3642,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3623,7 +3689,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3664,7 +3732,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3706,7 +3776,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3750,7 +3822,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3794,7 +3868,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3838,7 +3914,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -3862,7 +3940,7 @@
    "id": "erratum-bubble-crash",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -3880,7 +3958,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4259,7 +4339,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4302,7 +4384,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4346,7 +4430,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4388,7 +4474,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4432,7 +4520,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4475,7 +4565,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4499,7 +4591,7 @@
    "id": "erratum-chaosrider-gustaph",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -4518,7 +4610,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4542,7 +4636,7 @@
    "id": "erratum-cipher-soldier",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -4561,7 +4655,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4603,7 +4699,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4645,7 +4743,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4686,7 +4786,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4728,7 +4830,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4772,7 +4876,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4814,7 +4920,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4855,7 +4963,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4899,7 +5009,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4941,7 +5053,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -4983,7 +5097,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5025,7 +5141,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5067,7 +5185,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5109,7 +5229,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5151,7 +5273,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5193,7 +5317,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5217,7 +5343,7 @@
    "id": "erratum-dark-jeroid",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -5236,7 +5362,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5279,7 +5407,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5322,7 +5452,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5701,7 +5833,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -5745,7 +5879,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6124,7 +6260,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6166,7 +6304,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6210,7 +6350,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6251,7 +6393,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6624,7 +6768,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6666,7 +6812,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6708,7 +6856,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6750,7 +6900,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6794,7 +6946,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6836,7 +6990,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -6876,7 +7032,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7249,7 +7407,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7291,7 +7451,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7333,7 +7495,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7375,7 +7539,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7416,7 +7582,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7459,7 +7627,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7502,7 +7672,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7543,7 +7715,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7586,7 +7760,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -7959,7 +8135,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8001,7 +8179,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8043,7 +8223,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8086,7 +8268,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8127,7 +8311,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8170,7 +8356,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8210,7 +8398,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8252,7 +8442,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8294,7 +8486,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8336,7 +8530,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8377,7 +8573,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8419,7 +8617,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8792,7 +8992,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -8834,7 +9036,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9207,7 +9411,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9251,7 +9457,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9292,7 +9500,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9336,7 +9546,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9377,7 +9589,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9419,7 +9633,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9461,7 +9677,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9834,7 +10052,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9877,7 +10097,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9920,7 +10142,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -9963,7 +10187,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10005,7 +10231,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10049,7 +10277,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10091,7 +10321,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10133,7 +10365,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10175,7 +10409,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10548,7 +10784,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10591,7 +10829,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -10635,7 +10875,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11008,7 +11250,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11052,7 +11296,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11094,7 +11340,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11467,7 +11715,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11509,7 +11759,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11551,7 +11803,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11924,7 +12178,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -11966,7 +12222,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12008,7 +12266,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12050,7 +12310,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12093,7 +12355,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12135,7 +12399,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12179,7 +12445,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12221,7 +12489,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12245,7 +12515,7 @@
    "id": "erratum-injection-fairy-lily",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -12263,7 +12533,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12446,7 +12718,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12488,7 +12762,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12530,7 +12806,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12572,7 +12850,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12614,7 +12894,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12657,7 +12939,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12681,7 +12965,7 @@
    "id": "erratum-kazejin",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -12699,7 +12983,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12741,7 +13027,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12785,7 +13073,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -12827,7 +13117,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13010,7 +13302,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13052,7 +13346,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13094,7 +13390,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13136,7 +13434,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13180,7 +13480,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13224,7 +13526,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13266,7 +13570,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13308,7 +13614,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13350,7 +13658,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13392,7 +13702,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13435,7 +13747,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13477,7 +13791,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13519,7 +13835,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13563,7 +13881,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13936,7 +14256,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -13978,7 +14300,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14020,7 +14344,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14062,7 +14388,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14104,7 +14432,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14477,7 +14807,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14519,7 +14851,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14560,7 +14894,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14602,7 +14938,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14645,7 +14983,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14686,7 +15026,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14728,7 +15070,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14752,7 +15096,7 @@
    "id": "erratum-mirage-knight",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -14771,7 +15115,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14812,7 +15158,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14853,7 +15201,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -14894,7 +15244,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -15267,7 +15619,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -15310,7 +15664,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -15354,7 +15710,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -15397,7 +15755,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -15770,7 +16130,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16143,7 +16505,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16516,7 +16880,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16558,7 +16924,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16606,7 +16974,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 5,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16651,7 +17021,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -16693,7 +17065,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17066,7 +17440,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17107,7 +17483,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17131,7 +17509,7 @@
    "id": "erratum-nobleman-of-crossout",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -17149,7 +17527,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17173,7 +17553,7 @@
    "id": "erratum-nobleman-of-extermination",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -17192,7 +17572,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17235,7 +17617,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -17785,7 +18169,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 8,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -18158,7 +18544,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -18200,7 +18588,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -18573,7 +18963,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -18614,7 +19006,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -18987,7 +19381,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19028,7 +19424,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19068,7 +19466,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19109,7 +19509,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19150,7 +19552,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19192,7 +19596,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19234,7 +19640,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19276,7 +19684,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19320,7 +19730,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19363,7 +19775,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19406,7 +19820,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19448,7 +19864,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19491,7 +19909,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19533,7 +19953,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19580,7 +20002,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19624,7 +20048,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19666,7 +20092,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19709,7 +20137,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19751,7 +20181,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19793,7 +20225,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19836,7 +20270,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19878,7 +20314,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -19920,7 +20358,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20162,7 +20602,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20204,7 +20646,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20246,7 +20690,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20288,7 +20734,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20330,7 +20778,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20372,7 +20822,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20414,7 +20866,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20456,7 +20910,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20480,7 +20936,7 @@
    "id": "erratum-shinato-king-of-a-higher-plane",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -20498,7 +20954,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20540,7 +20998,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20582,7 +21042,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20624,7 +21086,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20669,7 +21133,9 @@
     "konami-errata-announcements"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20712,7 +21178,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20755,7 +21223,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -20797,7 +21267,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21169,7 +21641,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21211,7 +21685,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21253,7 +21729,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21626,7 +22104,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21670,7 +22150,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21712,7 +22194,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21754,7 +22238,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21796,7 +22282,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21839,7 +22327,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21882,7 +22372,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21925,7 +22417,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -21967,7 +22461,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22008,7 +22504,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22052,7 +22550,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22094,7 +22594,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22118,7 +22620,7 @@
    "id": "erratum-suijin",
    "legacy_self_contradictory": false,
    "metadata_preserved": true,
-   "migration_complexity": "parity-only-blocked",
+   "migration_complexity": "parity-only-reference-identity",
    "mismatch_count": 0,
    "no_historical_state": false,
    "nonrelevant_event_count": 1,
@@ -22137,7 +22639,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22181,7 +22685,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22224,7 +22730,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22266,7 +22774,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22309,7 +22819,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22355,7 +22867,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 5,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22728,7 +23242,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22770,7 +23286,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22812,7 +23330,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22855,7 +23375,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -22899,7 +23421,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23272,7 +23796,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23314,7 +23840,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23356,7 +23884,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23401,7 +23931,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 3,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23448,7 +23980,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23821,7 +24355,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23862,7 +24398,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23904,7 +24442,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23946,7 +24486,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -23990,7 +24532,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -24032,7 +24576,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -24076,7 +24622,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -24305,7 +24853,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -24678,7 +25228,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -25051,7 +25603,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -25424,7 +25978,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -25797,7 +26353,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -25839,7 +26397,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -25881,7 +26441,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26110,7 +26672,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26151,7 +26715,9 @@
     "ignis-cardscripts"
    ],
    "structural_state_count": 1,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26193,7 +26759,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26236,7 +26804,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26280,7 +26850,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26322,7 +26894,9 @@
     "ignis-babelcdb"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26563,7 +27137,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26605,7 +27181,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -26833,7 +27411,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27062,7 +27642,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27290,7 +27872,9 @@
     "yugipedia-set-pages"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27334,7 +27918,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27550,7 +28136,9 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 4,
-   "sugar_eligible": false
+   "sugar_eligible": false,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27594,7 +28182,9 @@
     "edisonformat-functional-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   },
   {
    "baseline_metadata_fields": [
@@ -27636,10 +28226,13 @@
     "yugipedia-card-errata"
    ],
    "structural_state_count": 2,
-   "sugar_eligible": true
+   "sugar_eligible": true,
+   "top_level_preserved": true,
+   "transition_preserved": true
   }
  ],
  "summary": {
+  "applicable_formats_note_count": 0,
   "baseline_metadata_represented_count": 296,
   "baseline_metadata_unrepresented_ids": [],
   "categories": {
@@ -27892,7 +28485,7 @@
   ],
   "data_not_preserved_ids": [],
   "data_preservation_status": "representation-implemented-not-migrated",
-  "data_preservation_status_detail": "implementation_metadata[]/reference_identities[] now exist (docs/research/erratum-v2-representation-gaps.md); metadata_not_preserved_ids and reference_identity_not_preserved_ids below are empty, meaning every candidate v2 round-trips its v1 metadata/identity exactly. This figure is trustworthy only because construction and checker no longer share the coverage-shaped implementation_for_version() lookup: they did, so the baseline metadata of all 21 zero-relevant records was dropped by BOTH and self-confirmed as preserved. Metadata occurrences are now enumerated separately (_v1_metadata_occurrences) and the expected VALUES are re-derived from the raw v1 objects; see zero_relevant_* below for that population reported explicitly. No data/errata/*.json record has been migrated - this is a readiness finding about the REPRESENTATION, not a migration status.",
+  "data_preservation_status_detail": "implementation_metadata[]/reference_identities[] now exist (docs/research/erratum-v2-representation-gaps.md); metadata_not_preserved_ids, reference_identity_not_preserved_ids, top_level_not_preserved_ids and transition_not_preserved_ids below are empty, meaning every candidate v2 round-trips its v1 metadata/identity/top-level-fields/transition-text exactly. This figure is trustworthy only because construction and checker no longer share the coverage-shaped implementation_for_version() lookup: they did, so the baseline metadata of all 21 zero-relevant records was dropped by BOTH and self-confirmed as preserved. Metadata occurrences are now enumerated separately (_v1_metadata_occurrences) and the expected VALUES are re-derived from the raw v1 objects; see zero_relevant_* below for that population reported explicitly. All 247 semantically-equivalent records are REPRESENTATION-READY (representation_ready=247, representation_blocked=0); the 11 parity_only_identity records are a CLASSIFICATION, not a blocker, now that reference_identities[] exists. No data/errata/*.json record has been migrated - this is a readiness finding about the REPRESENTATION, not a migration status.",
   "equivalent": 247,
   "legacy_self_contradictory_count": 48,
   "legacy_self_contradictory_ids": [
@@ -28901,7 +29494,7 @@
   "metadata_unrepresented_count": 0,
   "migration_complexity": {
    "no-historical-state": 10,
-   "parity-only-blocked": 11,
+   "parity-only-reference-identity": 11,
    "proven-chain": 11,
    "trivial-rename": 215,
    "unordered-manual-review": 2,
@@ -28966,14 +29559,15 @@
    "erratum-xz-tank-cannon",
    "erratum-yz-tank-dragon"
   ],
+  "notes_count": 0,
   "ordering_structure": {
    "fully-ordered": 11,
    "no-proven-ordering": 49,
    "single-event": 215,
    "zero-relevant": 21
   },
-  "parity_only_blocked": 11,
-  "parity_only_blocked_ids": [
+  "parity_only_identity_count": 11,
+  "parity_only_identity_ids": [
    "erratum-bubble-crash",
    "erratum-chaosrider-gustaph",
    "erratum-cipher-soldier",
@@ -28989,13 +29583,270 @@
   "parity_only_unrepresented_count": 0,
   "records": 296,
   "reference_identity_not_preserved_ids": [],
+  "representation_blocked": 0,
+  "representation_blocked_ids": [],
+  "representation_ready": 247,
+  "representation_ready_ids": [
+   "erratum-a-cat-of-ill-omen",
+   "erratum-a-hero-emerges",
+   "erratum-a-team-trap-disposal-unit",
+   "erratum-abyssal-designator",
+   "erratum-alien-infiltrator",
+   "erratum-altar-for-tribute",
+   "erratum-amazoness-fighter",
+   "erratum-an-owl-of-luck",
+   "erratum-ancient-fairy-dragon",
+   "erratum-andro-sphinx",
+   "erratum-anteatereatingant",
+   "erratum-aqua-chorus",
+   "erratum-armored-cybern",
+   "erratum-armored-glass",
+   "erratum-arsenal-robber",
+   "erratum-arsenal-summoner",
+   "erratum-atomic-firefly",
+   "erratum-attack-and-receive",
+   "erratum-balloon-lizard",
+   "erratum-bark-of-dark-ruler",
+   "erratum-behemoth-the-king-of-all-animals",
+   "erratum-big-shield-gardna",
+   "erratum-black-luster-soldier-envoy-of-the-beginning",
+   "erratum-blackwing-sirocco-the-dawn",
+   "erratum-blast-held-by-a-tribute",
+   "erratum-blast-with-chain",
+   "erratum-blaze-accelerator",
+   "erratum-blue-eyes-toon-dragon",
+   "erratum-blue-eyes-ultimate-dragon",
+   "erratum-boss-rush",
+   "erratum-bottomless-trap-hole",
+   "erratum-brain-control",
+   "erratum-brionac-dragon-of-the-ice-barrier",
+   "erratum-bubble-crash",
+   "erratum-burning-land",
+   "erratum-burst-stream-of-destruction",
+   "erratum-castle-walls",
+   "erratum-catapult-turtle",
+   "erratum-chaos-emperor-dragon-envoy-of-the-end",
+   "erratum-chaosrider-gustaph",
+   "erratum-cipher-soldier",
+   "erratum-clear-world",
+   "erratum-cocoon-of-evolution",
+   "erratum-combination-attack",
+   "erratum-continuous-destruction-punch",
+   "erratum-cost-down",
+   "erratum-covering-fire",
+   "erratum-crimson-sentry",
+   "erratum-crush-card-virus",
+   "erratum-curse-of-aging",
+   "erratum-curse-of-royal",
+   "erratum-cyber-blader",
+   "erratum-cyber-jar",
+   "erratum-d-d-crazy-beast",
+   "erratum-d-d-scout-plane",
+   "erratum-d-d-survivor",
+   "erratum-dark-jeroid",
+   "erratum-dark-magician-of-chaos",
+   "erratum-dark-master-zorc",
+   "erratum-dark-necrofear",
+   "erratum-dark-strike-fighter",
+   "erratum-darkness-approaches",
+   "erratum-deal-of-phantom",
+   "erratum-destiny-hero-disk-commander",
+   "erratum-dice-re-roll",
+   "erratum-diffusion-wave-motion",
+   "erratum-dimension-distortion",
+   "erratum-disc-fighter",
+   "erratum-dragon-seeker",
+   "erratum-element-doom",
+   "erratum-element-dragon",
+   "erratum-element-magician",
+   "erratum-elemental-hero-absolute-zero",
+   "erratum-elemental-hero-chaos-neos",
+   "erratum-elemental-hero-divine-neos",
+   "erratum-elemental-hero-stratos",
+   "erratum-elemental-mistress-doriado",
+   "erratum-emissary-of-the-afterlife",
+   "erratum-energy-drain",
+   "erratum-evil-hero-dark-gaia",
+   "erratum-evil-hero-infernal-prodigy",
+   "erratum-exchange-of-the-spirit",
+   "erratum-fairy-of-the-spring",
+   "erratum-falling-down",
+   "erratum-fenrir",
+   "erratum-firebird",
+   "erratum-flying-kamakiri-1",
+   "erratum-formation-union",
+   "erratum-fushioh-richie",
+   "erratum-future-fusion",
+   "erratum-gaia-soul-the-combustible-collective",
+   "erratum-garuda-the-wind-spirit",
+   "erratum-gather-your-mind",
+   "erratum-gearfried-the-iron-knight",
+   "erratum-giant-germ",
+   "erratum-gigantes",
+   "erratum-gilasaurus",
+   "erratum-gladiator-beast-heraklinos",
+   "erratum-goddess-of-whim",
+   "erratum-goyo-guardian",
+   "erratum-graceful-dice",
+   "erratum-gravekeeper-s-servant",
+   "erratum-gravekeeper-s-spy",
+   "erratum-green-baboon-defender-of-the-forest",
+   "erratum-hallowed-life-barrier",
+   "erratum-heavy-mech-support-platform",
+   "erratum-helping-robo-for-combat",
+   "erratum-hino-kagu-tsuchi",
+   "erratum-horn-of-light",
+   "erratum-horus-the-black-flame-dragon-lv6",
+   "erratum-howling-insect",
+   "erratum-hyena",
+   "erratum-ido-the-supreme-magical-force",
+   "erratum-imperial-custom",
+   "erratum-imperial-order",
+   "erratum-inferno-fire-blast",
+   "erratum-injection-fairy-lily",
+   "erratum-insect-princess",
+   "erratum-inspection",
+   "erratum-iron-blacksmith-kotetsu",
+   "erratum-jade-insect-whistle",
+   "erratum-jirai-gumo",
+   "erratum-kazejin",
+   "erratum-king-of-the-swamp",
+   "erratum-king-tiger-wanghu",
+   "erratum-knight-s-title",
+   "erratum-level-up",
+   "erratum-levia-dragon-daedalus",
+   "erratum-limiter-removal",
+   "erratum-machina-gearframe",
+   "erratum-machina-peacekeeper",
+   "erratum-machine-duplication",
+   "erratum-magical-hats",
+   "erratum-magical-labyrinth",
+   "erratum-maji-gire-panda",
+   "erratum-makyura-the-destructor",
+   "erratum-malefic-blue-eyes-white-dragon",
+   "erratum-malevolent-nuzzler",
+   "erratum-manga-ryu-ran",
+   "erratum-manticore-of-darkness",
+   "erratum-mask-of-the-accursed",
+   "erratum-mask-of-weakness",
+   "erratum-masked-beast-des-gardius",
+   "erratum-metalmorph",
+   "erratum-metalsilver-armor",
+   "erratum-metalzoa",
+   "erratum-michizure",
+   "erratum-micro-ray",
+   "erratum-mind-crush",
+   "erratum-mirage-knight",
+   "erratum-mirror-wall",
+   "erratum-mokey-mokey-smackdown",
+   "erratum-monster-gate",
+   "erratum-mustering-of-the-dark-scorpions",
+   "erratum-my-body-as-a-shield",
+   "erratum-mysterious-puppeteer",
+   "erratum-narrow-pass",
+   "erratum-necrovalley",
+   "erratum-night-assailant",
+   "erratum-nimble-momonga",
+   "erratum-nobleman-eater-bug",
+   "erratum-nobleman-of-crossout",
+   "erratum-nobleman-of-extermination",
+   "erratum-nutrient-z",
+   "erratum-penguin-soldier",
+   "erratum-pyramid-energy",
+   "erratum-rainbow-dark-dragon",
+   "erratum-rainbow-dragon",
+   "erratum-rainbow-neos",
+   "erratum-rampaging-rhynos",
+   "erratum-rare-metalmorph",
+   "erratum-reasoning",
+   "erratum-recycle",
+   "erratum-red-eyes-darkness-metal-dragon",
+   "erratum-red-eyes-wyvern",
+   "erratum-reinforcement-of-the-army",
+   "erratum-reinforcements",
+   "erratum-release-restraint",
+   "erratum-relinquished",
+   "erratum-rescue-cat",
+   "erratum-ring-of-destruction",
+   "erratum-ring-of-magnetism",
+   "erratum-rise-of-the-snake-deity",
+   "erratum-rivalry-of-warlords",
+   "erratum-rush-recklessly",
+   "erratum-ryko-lightsworn-hunter",
+   "erratum-sacred-phoenix-of-nephthys",
+   "erratum-sage-s-stone",
+   "erratum-sasuke-samurai-2",
+   "erratum-scapegoat",
+   "erratum-second-coin-toss",
+   "erratum-senet-switch",
+   "erratum-senju-of-the-thousand-hands",
+   "erratum-serpentine-princess",
+   "erratum-shadow-spell",
+   "erratum-shinato-king-of-a-higher-plane",
+   "erratum-shining-angel",
+   "erratum-silent-swordsman-lv3",
+   "erratum-silent-swordsman-lv5",
+   "erratum-sinister-serpent",
+   "erratum-skilled-dark-magician",
+   "erratum-skilled-white-magician",
+   "erratum-skull-dice",
+   "erratum-slate-warrior",
+   "erratum-snake-fang",
+   "erratum-soul-rope",
+   "erratum-spear-cretin",
+   "erratum-sphinx-teleia",
+   "erratum-spirit-reaper",
+   "erratum-spirit-ryu",
+   "erratum-spirit-s-invitation",
+   "erratum-spiritual-energy-settle-machine",
+   "erratum-splendid-venus",
+   "erratum-storm-shooter",
+   "erratum-strike-ninja",
+   "erratum-stronghold-the-moving-fortress",
+   "erratum-suijin",
+   "erratum-summoner-of-illusions",
+   "erratum-super-rejuvenation",
+   "erratum-super-vehicroid-stealth-union",
+   "erratum-swap-frog",
+   "erratum-swords-of-concealing-light",
+   "erratum-the-big-march-of-animals",
+   "erratum-the-reliable-guardian",
+   "erratum-the-rock-spirit",
+   "erratum-thousand-eyes-restrict",
+   "erratum-toll",
+   "erratum-toon-gemini-elf",
+   "erratum-toon-mermaid",
+   "erratum-toon-summoned-skull",
+   "erratum-toon-world",
+   "erratum-totem-dragon",
+   "erratum-trap-of-darkness",
+   "erratum-treeborn-frog",
+   "erratum-tri-blaze-accelerator",
+   "erratum-twin-headed-behemoth",
+   "erratum-ultimate-offering",
+   "erratum-ultimate-tyranno",
+   "erratum-vampire-s-curse",
+   "erratum-vw-tiger-catapult",
+   "erratum-w-wing-catapult",
+   "erratum-weapon-change",
+   "erratum-wild-fire",
+   "erratum-wulf-lightsworn-beast",
+   "erratum-y-dragon-head",
+   "erratum-z-metal-tank",
+   "erratum-zombyra-the-dark"
+  ],
   "research_status": {
    "already-researched": 47,
    "needs-manual-review": 2,
    "not-applicable": 247
   },
+  "review_absent_count": 0,
+  "review_date_count": 296,
+  "review_notes_count": 296,
   "semantic_equivalent": 247,
   "sugar_eligible_count": 180,
+  "top_level_not_preserved_ids": [],
+  "transition_not_preserved_ids": [],
   "zero_relevant_baseline_metadata_represented_count": 21,
   "zero_relevant_baseline_metadata_unrepresented_ids": [],
   "zero_relevant_count": 21,

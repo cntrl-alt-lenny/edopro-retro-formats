@@ -322,9 +322,22 @@ def _reference_identity_override(
     reference_id = parity.get("reference_id")
     if not reference_id:
         return _NO_REFERENCE_ID_MATCH
-    matching = next((r for r in erratum.reference_identities if r.reference_id == reference_id), None)
-    if matching is None:
+    matches = [r for r in erratum.reference_identities if r.reference_id == reference_id]
+    if not matches:
         return _NO_REFERENCE_ID_MATCH
+    if len(matches) > 1:
+        # Two authored entries claiming the SAME reference_id is ambiguous
+        # data, not a tie to break by whichever happened to be declared
+        # first - declaration order is not adjudication. Fails safe exactly
+        # like a matched-but-malformed single entry: a problem is appended
+        # and the caller must NOT fall through to the structural walk.
+        problems.append(
+            f"{erratum.id}: {len(matches)} reference_identities[] entries declare the same "
+            f"reference_id {reference_id!r}; declaration order is not adjudication - "
+            "de-duplicate or disambiguate the authored data"
+        )
+        return None
+    matching = matches[0]
     fault = _reference_identity_fault(matching, erratum, parity)
     if fault is not None:
         problems.append(
@@ -358,8 +371,22 @@ def _reference_identity_fault(
                 f"declares {field_name}={value!r}, which is not a non-empty string; "
                 "parity refuses to build from a malformed identity"
             )
-    if "script" in raw and raw["script"] is not None and not isinstance(raw["script"], str):
-        return f"declares script={raw['script']!r}, which is not a string"
+    if "script" in raw:
+        # script is optional (may be absent entirely) but, per schema,
+        # strictly a non-empty string when authored at all - an authored
+        # null or "" is malformed data, not a spelling of "absent".
+        script = raw["script"]
+        if script is None or not isinstance(script, str) or not script.strip():
+            return (
+                f"declares script={script!r}, which must be a non-empty string when "
+                "present (omit the field entirely if genuinely unknown)"
+            )
+    variants_raw = raw.get("historical_variant_passcodes", [])
+    if not isinstance(variants_raw, list):
+        return (
+            f"declares historical_variant_passcodes={variants_raw!r}, which is not a list; "
+            "parity refuses to guess whether that means no variants or malformed authored data"
+        )
     if identity.historical_passcode is None or not _valid_identity(
         identity.historical_passcode, identity.historical_variant_passcodes
     ):
