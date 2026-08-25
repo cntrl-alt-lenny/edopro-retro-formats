@@ -64,43 +64,33 @@ class ShadowMigrationTest(unittest.TestCase):
         self.assertEqual(0, validation["shadow_error_count"])
         self.assertEqual({}, validation["new_error_codes"])
 
-    def test_warning_delta_is_exactly_the_two_explained_cases(self):
-        """The full corrected picture (final pre-migration gate, task
-        section 8): a THIRD code, `format.parity-omits-historical`, used
-        to inflate this delta by +43 (21 baseline -> 64 shadow) - a real
-        bug this task found and fixed (see
-        ParityOmitsHistoricalFalsePositiveTest in
-        test_erratum_v2_representation.py), not a wording difference. With
-        that fixed, exactly two codes remain, and both are legitimately
-        v1-only diagnostics with no v2 equivalent, not lost coverage:
-
-        - `erratum.no-behavioural-change-with-override` (11 -> 0): fires
-          in v1 for a zero-relevant-event record whose strategy is
-          reuse-upstream/custom-script - EXACTLY the 11 parity-only-
-          identity records (verified: the corpus locations match 1:1).
-          v2 represents this fact properly via `reference_identities[]`
-          instead of flagging it as a computed-selection oddity; the
-          warning is superseded by the representation this task built,
-          not silently dropped.
-        - `erratum.functional-none-needed` (4 -> 0): fires in v1 for a
-          functional-classified relevant change whose coverage strategy
-          is none-needed - a genuine data-quality smell test with NO v2
-          equivalent yet (verified by reading _validate_erratum_v2() and
-          _validate_v2_states() in full - no check anywhere correlates a
-          transition's kind against its down-set's coverage kind). A real,
-          currently-unclosed gap for FUTURE v2 records - reported here
-          rather than silently accepted, out of scope for this task to
-          close (adding a new validator invariant is a design decision,
-          not a hardening fix)."""
+    def test_warning_delta_is_exactly_one_explained_case(self):
+        """The full corrected picture (final-gate corrections 1 and the
+        earlier shadow-migration pass): TWO codes used to inflate this
+        delta beyond the one legitimate case -
+        `format.parity-omits-historical` (+43, a real validator bug found
+        and fixed - see ParityOmitsHistoricalFalsePositiveTest in
+        test_erratum_v2_representation.py) and `erratum.functional-none-
+        needed` (4 -> 0, ported to `_validate_erratum_v2()` in
+        FunctionalNoneNeededV2Test in test_erratum_v2_consumers.py,
+        preserving the SAME v1 invariant across the representation
+        boundary rather than losing it). With both fixed, exactly ONE
+        code remains, and it is a legitimate representation change, not
+        lost coverage: `erratum.no-behavioural-change-with-override`
+        (11 -> 0) fires in v1 for a zero-relevant-event record whose
+        strategy is reuse-upstream/custom-script - EXACTLY the 11
+        parity-only-identity records (verified: the corpus locations
+        match 1:1, see the next test). v2 represents this fact properly
+        via `reference_identities[]` instead of flagging it as a
+        computed-selection oddity; the warning is superseded by the
+        representation this task built, not silently dropped."""
         delta = self.report["validation"]["warning_code_delta"]
         self.assertEqual(
-            {
-                "erratum.no-behavioural-change-with-override": {"baseline": 11, "shadow": 0},
-                "erratum.functional-none-needed": {"baseline": 4, "shadow": 0},
-            },
+            {"erratum.no-behavioural-change-with-override": {"baseline": 11, "shadow": 0}},
             delta,
         )
         self.assertNotIn("format.parity-omits-historical", delta)
+        self.assertNotIn("erratum.functional-none-needed", delta)
 
     def test_the_11_vanished_override_warnings_are_exactly_the_parity_only_records(self):
         parity_only_ids = {r["id"] for r in self.rows if r["equivalent"] and r["category"] == audit.CAT_PARITY_ONLY}

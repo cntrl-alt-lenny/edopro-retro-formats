@@ -1108,3 +1108,58 @@ class HistoricalIdentityStrictnessTest(unittest.TestCase):
 
         with self.assertRaises(MalformedHistoricalIdentity):
             historical_identity({"strategy": "reuse-upstream", "historical_passcode": "123"})
+
+
+class FunctionalNoneNeededV2Test(V2ConsumerTestBase):
+    """Final-gate correction 1: `erratum.functional-none-needed` ported
+    from v1 to `_validate_erratum_v2()`, preserving the SAME invariant
+    across the representation boundary (not a new architecture decision):
+    a functional text change normally requires a historical
+    implementation, so a NONE_NEEDED baseline is a documented, deliberate
+    decision worth flagging, never an oversight. Scenario letters A-D
+    match the correction's own enumeration."""
+
+    def test_A_functional_with_relevant_event_and_none_needed_baseline_warns(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            classification="functional",
+            events={"e1": v2_event(transitions=[v2_transition(kind="functional")])},
+            states=[{"events": [], "coverage": v2_coverage(kind="none-needed")}],
+        )
+        repo = self._repo()
+        self.assertTrue(self._warnings(repo, "erratum.functional-none-needed"))
+
+    def test_B_ruling_with_none_needed_baseline_does_not_warn(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            classification="ruling",
+            events={"e1": v2_event(transitions=[v2_transition(kind="ruling")])},
+            states=[{"events": [], "coverage": v2_coverage(kind="none-needed")}],
+        )
+        repo = self._repo()
+        self.assertEqual([], self._warnings(repo, "erratum.functional-none-needed"))
+
+    def test_C_functional_with_reuse_upstream_baseline_does_not_warn(self):
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            classification="functional",
+            events={"e1": v2_event(transitions=[v2_transition(kind="functional")])},
+            states=[{"events": [], "coverage": v2_coverage(kind="reuse-upstream", historical_passcode=511000123)}],
+        )
+        repo = self._repo()
+        self.assertEqual([], self._warnings(repo, "erratum.functional-none-needed"))
+
+    def test_D_functional_with_no_relevant_event_does_not_warn(self):
+        """Zero relevant events: state_for(frozenset()) would hit the
+        synthesised-MODERN terminal branch, not an authored NONE_NEEDED
+        one - but the `relevant` guard short-circuits before that branch
+        is ever reached at all, exactly like v1's own `if relevant and
+        ...` guard."""
+        self._standard_fixture(pool_cards=[card(200, "Beta")])
+        self.add_erratum_v2(
+            classification="functional",
+            events={"e1": v2_event(transitions=[v2_transition(kind="cosmetic")])},
+            states=[],
+        )
+        repo = self._repo()
+        self.assertEqual([], self._warnings(repo, "erratum.functional-none-needed"))

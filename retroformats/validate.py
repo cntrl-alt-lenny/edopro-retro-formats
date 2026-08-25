@@ -457,6 +457,27 @@ class Validator:
         if review and review.get("status") not in ("imported", "reviewed"):
             self.error("erratum.bad-review-status", erratum.path, f"review.status {review.get('status')!r}")
         relevant = erratum.relevant_events()
+        # Ported from the v1 check of the same name (final-gate correction
+        # 1): a functional text change normally requires a historical
+        # implementation, so a NONE_NEEDED baseline is a data-quality smell
+        # worth flagging as a documented, deliberate decision rather than
+        # an oversight. `state_for(frozenset())` reads the AUTHORED
+        # baseline coverage here, never the synthesised-MODERN terminal
+        # branch: that branch only fires when frozenset() == all_relevant_
+        # ids, i.e. zero relevant events, which `relevant` already rules
+        # out - so this can never warn about a record whose baseline IS
+        # the terminal/modern state.
+        if (
+            relevant
+            and erratum.classification == "functional"
+            and erratum.state_for(frozenset()).coverage.kind == Coverage.NONE_NEEDED
+        ):
+            self.warn(
+                "erratum.functional-none-needed",
+                erratum.path,
+                "a functional text change normally requires a historical implementation; "
+                "none-needed must be a documented, deliberate decision",
+            )
         if erratum.review_status != "reviewed":
             self.warn(
                 "erratum.unreviewed",

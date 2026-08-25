@@ -810,6 +810,105 @@ class CoveragePreservationTest(unittest.TestCase):
         self.assertFalse(audit._coverage_preserved(record, v2))
 
 
+class TopLevelPresencePreservationTest(unittest.TestCase):
+    """Final-gate correction 2: an authored empty string
+    (`"notes": ""`/`"applicable_formats_note": ""`) is a DIFFERENT
+    authored document than the key being absent entirely - both schemas
+    permit an authored empty string, so `candidate_v2_raw()` must copy the
+    KEY, not a truthy VALUE, and `_top_level_preserved()` must compare
+    PRESENCE, not truthiness. The original versions of both functions
+    made the identical truthiness mistake (a construction/checker
+    self-confirmation bug: neither side could have caught the other's
+    error, because they shared it), so this fixture deliberately exercises
+    the case truthiness collapses - an authored "" - which the real
+    corpus (0/0 for both fields) cannot exercise on its own."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = Repository.load(audit.REPO_ROOT)
+
+    def _record_with_empty_strings(self):
+        base = self.repo.errata["erratum-a-cat-of-ill-omen"]
+        raw = dict(base.raw, notes="", applicable_formats_note="")
+        return Erratum.load(raw, base.path)
+
+    def test_materialized_target_keeps_both_keys_present_with_empty_values(self):
+        """'materialize it' - the actual dry-run migration materializer,
+        not merely candidate_v2_raw() in isolation."""
+        from . import migration_materializer as mm
+
+        record = self._record_with_empty_strings()
+        target = mm.materialize(record, self.repo)
+        self.assertIn("notes", target)
+        self.assertIn("applicable_formats_note", target)
+        self.assertEqual("", target["notes"])
+        self.assertEqual("", target["applicable_formats_note"])
+        v2 = ErratumV2.load(target, record.path)
+        self.assertTrue(audit._top_level_preserved(record, v2))
+
+    def test_candidate_v2_raw_carries_both_keys_present(self):
+        record = self._record_with_empty_strings()
+        raw = audit.candidate_v2_raw(record)
+        self.assertIn("notes", raw)
+        self.assertIn("applicable_formats_note", raw)
+        self.assertEqual("", raw["notes"])
+        self.assertEqual("", raw["applicable_formats_note"])
+
+    def test_top_level_preserved_is_true_when_both_empty_strings_survive(self):
+        record = self._record_with_empty_strings()
+        v2 = audit.candidate_v2(record)
+        self.assertTrue(audit._top_level_preserved(record, v2))
+        self.assertTrue(audit._data_preserved(record, v2))
+
+    def test_dropping_the_notes_key_is_detected(self):
+        """Mutation: the candidate silently OMITS the key entirely
+        (absence), not merely empties the value - presence must fail, not
+        just value equality."""
+        record = self._record_with_empty_strings()
+        raw = audit.candidate_v2_raw(record)
+        del raw["notes"]
+        v2 = ErratumV2.load(raw, record.path)
+        self.assertFalse(audit._top_level_preserved(record, v2))
+
+    def test_dropping_the_applicable_formats_note_key_is_detected(self):
+        record = self._record_with_empty_strings()
+        raw = audit.candidate_v2_raw(record)
+        del raw["applicable_formats_note"]
+        v2 = ErratumV2.load(raw, record.path)
+        self.assertFalse(audit._top_level_preserved(record, v2))
+
+    def test_inventing_a_key_the_v1_record_never_authored_is_detected(self):
+        """The inverse mutation: the v1 record never authored `notes` at
+        all (real corpus shape), but the candidate invents one anyway -
+        migrated_presence True where authored_presence is False must also
+        fail, not just the reverse."""
+        record = self.repo.errata["erratum-a-cat-of-ill-omen"]
+        self.assertNotIn("notes", record.raw)
+        raw = audit.candidate_v2_raw(record)
+        self.assertNotIn("notes", raw)
+        raw["notes"] = ""
+        v2 = ErratumV2.load(raw, record.path)
+        self.assertFalse(audit._top_level_preserved(record, v2))
+
+    def test_changing_an_empty_string_to_a_non_empty_one_is_detected(self):
+        """Presence agrees, but the VALUE no longer matches - still a
+        preservation failure, exactly like any other field."""
+        record = self._record_with_empty_strings()
+        raw = audit.candidate_v2_raw(record)
+        raw["notes"] = "invented content"
+        v2 = ErratumV2.load(raw, record.path)
+        self.assertFalse(audit._top_level_preserved(record, v2))
+
+    def test_real_corpus_counts_are_still_zero(self):
+        """The fix is about SEMANTICS, not about the current corpus - the
+        real 296-record corpus authors neither field on any record, so
+        the counts must stay exactly what they were, computed correctly
+        rather than by coincidence."""
+        summary = audit.audit_corpus()["summary"]
+        self.assertEqual(0, summary["applicable_formats_note_count"])
+        self.assertEqual(0, summary["notes_count"])
+
+
 class CoverageKindDistinctionTest(unittest.TestCase):
     """Task objective 3: reuse-upstream and custom-script at the SAME
     passcode are different migration-data claims (different provenance,

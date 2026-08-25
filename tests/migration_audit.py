@@ -423,16 +423,24 @@ def candidate_v2_raw(record: Erratum, reference_identities: list[dict] | None = 
         "review": record.raw.get("review") or {"status": "imported"},
         "sources": list(record.sources),
     }
-    # Final pre-migration gate, task section 5: both schemas support these
-    # two top-level fields, and they were not copied here at all - carried
-    # across VERBATIM when the v1 record actually authored one (the current
+    # Final pre-migration gate, task section 5 (corrected by a later
+    # review pass, correction 2): both schemas support these two top-level
+    # fields, and they were not copied here at all before - carried across
+    # VERBATIM when the v1 record actually authored one (the current
     # corpus has zero, per audit_corpus()'s own reported count below, but
-    # this function must not depend on that staying true). Never authored
-    # when the v1 record did not author one either - an empty string is not
-    # "preserve a value", it is inventing one.
-    if record.raw.get("applicable_formats_note"):
+    # this function must not depend on that staying true).
+    #
+    # KEY PRESENCE, never truthiness: both schemas permit an authored
+    # empty string here, and `"notes": ""` is a different authored
+    # document than notes being absent entirely - dropping an authored ""
+    # IS data loss, exactly as much as dropping a non-empty value would
+    # be. The original version of this code used `if record.raw.get(...)`
+    # (falsy-check), which silently conflated the two - a construction/
+    # checker self-confirmation bug: _top_level_preserved() used to make
+    # the identical truthiness mistake, so neither side ever caught it.
+    if "applicable_formats_note" in record.raw:
         raw["applicable_formats_note"] = record.raw["applicable_formats_note"]
-    if record.raw.get("notes"):
+    if "notes" in record.raw:
         raw["notes"] = record.raw["notes"]
     return raw
 
@@ -945,13 +953,20 @@ def _top_level_preserved(record: Erratum, v2: ErratumV2) -> bool:
     if (v2.raw.get("review") or {}) != expected_review:
         return False
     for field_name in ("applicable_formats_note", "notes"):
-        expected_value = record.raw.get(field_name)
-        actual_value = v2.raw.get(field_name)
-        if expected_value:
-            if actual_value != expected_value:
-                return False
-        elif actual_value:
-            return False  # candidate invented a value the v1 record never authored
+        # KEY PRESENCE, never truthiness (final-gate correction 2): both
+        # schemas permit an authored empty string, and `"notes": ""` is a
+        # different authored document than notes being absent entirely -
+        # `expected_value = record.raw.get(field_name)` followed by `if
+        # expected_value:` used to conflate the two (a falsy check cannot
+        # distinguish "" from missing), which is exactly the construction/
+        # checker self-confirmation bug candidate_v2_raw() had: both sides
+        # made the identical mistake, so neither ever caught it.
+        authored_presence = field_name in record.raw
+        migrated_presence = field_name in v2.raw
+        if authored_presence != migrated_presence:
+            return False
+        if authored_presence and v2.raw[field_name] != record.raw[field_name]:
+            return False
     return True
 
 
@@ -1528,15 +1543,20 @@ def audit_corpus(errata_dir: Path | None = None) -> dict:
         "parity_only_identity_ids": sorted(r["id"] for r in rows if r.get("category") == CAT_PARITY_ONLY),
         "parity_only_unrepresented_count": len(unpreserved_reference_identity_ids),
         "metadata_unrepresented_count": len(unpreserved_metadata_ids),
-        # Final pre-migration gate, task section 5: corpus counts for the
-        # top-level fields candidate_v2() did not used to copy at all -
-        # DERIVED, never assumed zero. (Currently 0/0: no canonical record
-        # authors applicable_formats_note/notes yet, but this audit must
-        # not depend on that staying true - see _top_level_preserved().)
+        # Final pre-migration gate, task section 5 (corrected by a later
+        # review pass, correction 2): corpus counts for the top-level
+        # fields candidate_v2_raw() did not used to copy at all - DERIVED,
+        # never assumed zero. (Currently 0/0: no canonical record authors
+        # applicable_formats_note/notes yet, but this audit must not
+        # depend on that staying true - see _top_level_preserved().)
+        # AUTHORED PRESENCE, never truthiness - an authored "" is a
+        # different authored document than the key being absent, and
+        # counting only non-empty values would silently under-report an
+        # authored-but-empty field as "not authored at all".
         "applicable_formats_note_count": sum(
-            1 for r in repo.errata.values() if isinstance(r, Erratum) and r.raw.get("applicable_formats_note")
+            1 for r in repo.errata.values() if isinstance(r, Erratum) and "applicable_formats_note" in r.raw
         ),
-        "notes_count": sum(1 for r in repo.errata.values() if isinstance(r, Erratum) and r.raw.get("notes")),
+        "notes_count": sum(1 for r in repo.errata.values() if isinstance(r, Erratum) and "notes" in r.raw),
         # review.notes/review.date corpus counts, and how many records take
         # the "review absent -> synthesise {status: imported}" normalisation
         # path _top_level_preserved() deliberately does not treat as loss.
