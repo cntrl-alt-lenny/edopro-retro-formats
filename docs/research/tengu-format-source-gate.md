@@ -88,7 +88,7 @@ bytes were unchanged; 41 new product records were added.
 
 | certified quantity | result |
 |---|---:|
-| product records | 411 (404 generated + 7 curated) |
+| product records | 411 (399 generated + 12 curated) |
 | importer printings | 9,338 |
 | importer release events | 585 |
 | canonical release printings | 9,339 (including the existing curated WC2004 roster) |
@@ -99,16 +99,36 @@ bytes were unchanged; 41 new product records were added.
 | Yugipedia-only products | 34, including two newly accounted-for 2011 products |
 | unresolved pool-impacting gaps | 0 |
 
+### Release-certification correction
+
+The initial certification accidentally treated the YGOPRODeck fallback date
+for YG09-EN001 as `2011-08-07`. Konami's [official TCG card database entry
+for the product](https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1111108007&request_locale=en)
+lists the Yu-Gi-Oh! GX volume 9 Promotional Card as released on
+`2012-08-07`, with Elemental HERO Escuridao / YG09-EN001 as its only card.
+No earlier TCG printing is listed. The product is therefore curated with the
+official date and is outside the proposed snapshot; this is a correction to a
+source value, not a pool exclusion workaround.
+
+The same audit found two additional date-quality corrections that do not
+change snapshot membership: JUMP-EN045 is the January 2011 Ra promo, and
+JUMP-EN048 is the March 2011 Malefic Truth Dragon promo. JUMP-EN046 and
+JUMP-EN041 are retained at December 2010 and May 2010 respectively, but only
+at month precision. The importer would otherwise regenerate the old fallback
+values; the corrected product records are marked curated so stronger official
+evidence is not lost on re-import. No other remaining ledger-only identity was
+found to be outside the certified snapshot.
+
 The two newly reported Yugipedia-only products are harmless by explicit gap
 records: the 2011 Blu-ray promo repeats the earlier Movie Pack
 `Malefic Red-Eyes Black Dragon`, and the 2011 World Championship prize set is
-not an ordinary tournament-legal product. `Malefic Truth Dragon` is the one
-boundary ambiguity: its coarse JUMP-EN048 ledger date is resolved by the
-[official card database](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=9042&ope=2&request_locale=en),
-which identifies the TCG printing as March 2011. The research-only pool uses
-that sourced include, so no card remains ambiguous at the cutoff.
+not an ordinary tournament-legal product. `Malefic Truth Dragon` is now
+represented directly by its curated JUMP-EN048 record at month precision;
+the [official card database](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=9042&ope=2&request_locale=en)
+identifies that TCG printing as March 2011. No explicit pool include is
+needed, and no card remains ambiguous at the cutoff.
 
-The fresh candidate pool has **4,563 cards**, zero boundary ambiguities, and
+The fresh candidate pool has **4,562 cards**, zero boundary ambiguities, and
 zero unknown printings. It excludes only the period-supported Duel Terminal
 4/5/5a machine-only product events and the three Sneak Peek participation
 products. The latter exclusions are explicit legality policy, not a change to
@@ -142,9 +162,10 @@ pool-coverage failure; no existing warning disappears.
 
 TenguFormat.com's downloadable [card JSON](https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json)
 contains 5,035 current records, 4,572 with a current `tcg_date` on or before
-the proposed date. It is a useful community cross-check, not a pinned
+the proposed date after normalizing numeric passcodes (5,033 source records,
+4,572 identities). It is a useful community cross-check, not a pinned
 historical whitelist: it uses modern/alias identities and current dates, and
-differs from the ledger projection by six identities plus fifteen
+differs from the ledger projection by five identities plus fifteen
 community-only identities. Those differences are reported, not silently
 forced into the release data.
 
@@ -152,12 +173,11 @@ The exact comparison is committed in
 [`tengu-format-community-diff.json`](tengu-format-community-diff.json), whose
 source hash is
 `f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc`.
-The six raw `ours-minus-community` identities are:
+The corrected raw `ours-minus-community` identities are five:
 
 | passcode | name | classification | adjudication |
 |---:|---|---|---|
-| 10000010 | The Winged Dragon of Ra | community-omission | pre-cutoff JUMP-EN045; absent from export |
-| 33574806 | Elemental HERO Escuridao | community-omission | pre-cutoff YG09-EN001; absent from export |
+| 10000010 | The Winged Dragon of Ra | community-omission | January 2011 JUMP-EN045; absent from export |
 | 37115575 | Malefic Truth Dragon | community-date-error | pre-cutoff JUMP-EN048; export says 2012-10-26 |
 | 56043446 | Viser Des | alias-or-artwork-identity | export uses adjacent 56043447 for ABPF-EN093 |
 | 87259077 | Lightning Warrior | community-omission | pre-cutoff JUMP-EN046; absent from export |
@@ -174,11 +194,11 @@ in the certified pool: canonical `10000000, 18807108, 19230407, 35686187,
 card index. The fixture records each source date, card code, earliest
 qualifying ledger release, classification, and adjudication.
 
-The raw set difference is therefore **6 + 15**. After canonicalizing the
-fifteen alternate identities, the semantic difference is five ledger-only
-cards (`10000010, 33574806, 37115575, 87259077, 88071625`) and no
+The raw set difference is therefore **5 + 15**. After canonicalizing the
+fifteen alternate identities, the semantic difference is four ledger-only
+cards (`10000010, 37115575, 87259077, 88071625`) and no
 community-only cards. No difference changes legality at YCS Toronto:
-the six ledger-only identities are either omitted or misdated by the current
+the five ledger-only identities are either omitted or misdated by the current
 community export, and the fifteen community-only identities are alternate
 identities for cards already legally represented by the ledger. No
 release-certification defect was found.
@@ -247,7 +267,7 @@ with unresolved candidates, and 89 unresolved candidate-state occurrences.
 |---|---|---|
 | pool method | community retrospective, Edison cutoff | certified all-TCG release cutoff |
 | release ledger | through 2010-12-31 | through 2011-09-17 |
-| pool projection | existing materialised Edison pool | fresh 4,563-card research projection |
+| pool projection | existing materialised Edison pool | fresh 4,562-card research projection |
 | list | March 2010 | September 2011, 51/65/18 |
 | rules | MR1-era TCG profile | MR2-era profile plus ignition approximation |
 | Xyz | unavailable | legal, native core handling |

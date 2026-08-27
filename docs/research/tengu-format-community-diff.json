@@ -9,9 +9,9 @@
     "date_field": "tcg_date",
     "comparison_cutoff": "2011-09-17"
   },
-  "certified_pool_count": 4563,
+  "certified_pool_count": 4562,
   "canonicalized_semantic_difference": {
-    "ours_only": [10000010, 33574806, 37115575, 87259077, 88071625],
+    "ours_only": [10000010, 37115575, 87259077, 88071625],
     "community_only": []
   },
   "ours_minus_tenguformat": [
@@ -19,27 +19,18 @@
       "passcode": 10000010,
       "name": "The Winged Dragon of Ra",
       "community_record": null,
-      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-1-promotional-card", "number": "JUMP-EN045", "date": "2010-11-01", "precision": "month", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-1-promotional-card", "number": "JUMP-EN045", "date": "2011-01-01", "precision": "month", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "konami-card-database"]},
       "classification": "community-omission",
       "adjudication": "The canonical card index and release ledger identify this TCG promo as available before the snapshot; the community export has no row for the identity.",
-      "changes_toronto_legality": false
-    },
-    {
-      "passcode": 33574806,
-      "name": "Elemental HERO Escuridao",
-      "community_record": null,
-      "our_earliest_qualifying_release": {"product": "yu-gi-oh-gx-volume-9-promotional-card", "number": "YG09-EN001", "date": "2011-08-07", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
-      "classification": "community-omission",
-      "adjudication": "The canonical card index and release ledger identify the GX Volume 9 promo as available before the snapshot; the community export has no row for the identity.",
       "changes_toronto_legality": false
     },
     {
       "passcode": 37115575,
       "name": "Malefic Truth Dragon",
       "community_record": {"passcode": 37115575, "name": "Malefic Truth Dragon", "tcg_date": "2012-10-26", "card_code": "JUMP-EN048"},
-      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-3-promotional-card", "number": "JUMP-EN048", "date": "2011-01-01", "precision": "year", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-3-promotional-card", "number": "JUMP-EN048", "date": "2011-03-01", "precision": "month", "territory": "tcg-na", "sources": ["konami-card-database"]},
       "classification": "community-date-error",
-      "adjudication": "The community date contradicts the ledger's pre-snapshot JUMP-EN048 evidence and the separately sourced official card-database March-2011 boundary resolution; the card is legal by the snapshot.",
+      "adjudication": "The community date contradicts the official card database's March 2011 JUMP-EN048 release; the card is legal by the snapshot.",
       "changes_toronto_legality": false
     },
     {
@@ -55,7 +46,7 @@
       "passcode": 87259077,
       "name": "Lightning Warrior",
       "community_record": null,
-      "our_earliest_qualifying_release": {"product": "shonen-jump-december-2010-subscription-bonus", "number": "JUMP-EN046", "date": "2010-12-01", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-december-2010-subscription-bonus", "number": "JUMP-EN046", "date": "2010-12-01", "precision": "month", "territory": "tcg", "sources": ["konami-card-database"]},
       "classification": "community-omission",
       "adjudication": "The canonical card index and release ledger identify this promo as available before the snapshot; the community export has no row for the identity.",
       "changes_toronto_legality": false
@@ -64,7 +55,7 @@
       "passcode": 88071625,
       "name": "The Tyrant Neptune",
       "community_record": {"passcode": 88071625, "name": "The Tyrant Neptune", "tcg_date": "2011-11-01", "card_code": "JUMP-EN041"},
-      "our_earliest_qualifying_release": {"product": "shonen-jump-may-2010-subscription-bonus", "number": "JUMP-EN041", "date": "2010-05-01", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-may-2010-subscription-bonus", "number": "JUMP-EN041", "date": "2010-05-01", "precision": "month", "territory": "tcg", "sources": ["konami-card-database"]},
       "classification": "community-date-error",
       "adjudication": "The community date is later than the ledger's JUMP-EN041 release evidence; the card is legal by the snapshot.",
       "changes_toronto_legality": false

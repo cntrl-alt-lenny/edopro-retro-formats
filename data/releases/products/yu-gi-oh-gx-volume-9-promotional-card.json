@@ -7,12 +7,12 @@
   "release_events": [
     {
       "territory": "tcg",
-      "date": "2011-08-07",
+      "date": "2012-08-07",
       "precision": "day",
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "ygoprodeck-api"
+        "konami-card-database"
       ]
     }
   ],
@@ -26,7 +26,8 @@
     }
   ],
   "sources": [
-    "ygoprodeck-api"
+    "konami-card-database"
   ],
-  "notes": "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
+  "notes": "CURATED (2026-08 certification correction): the importer originally inherited 2011-08-07 from the YGOPRODeck bulk dump because no usable Yugipedia date was available. Konami's official TCG card database lists YG09-EN001 in Yu-Gi-Oh! GX volume 9 Promotional Card with release date 2012-08-07; no earlier TCG printing is listed.",
+  "curated": true
 }

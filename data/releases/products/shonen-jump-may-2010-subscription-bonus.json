@@ -8,11 +8,11 @@
     {
       "territory": "tcg",
       "date": "2010-05-01",
-      "precision": "day",
+      "precision": "month",
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "ygoprodeck-api"
+        "konami-card-database"
       ]
     }
   ],
@@ -33,7 +33,9 @@
     }
   ],
   "sources": [
-    "ygoprodeck-api"
+    "ygoprodeck-api",
+    "konami-card-database"
   ],
-  "notes": "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
+  "notes": "CURATED (2026-08 certification correction): official Konami TCG card-database entries identify JUMP-EN041 as the May 2010 subscription promo; exact day is not claimed. The prior bulk date is retained only as the padded month boundary. Printings remain from the YGOPRODeck bulk dump.",
+  "curated": true
 }

@@ -7,12 +7,12 @@
   "release_events": [
     {
       "territory": "tcg-na",
-      "date": "2010-11-01",
+      "date": "2011-01-01",
       "precision": "month",
       "status": "reported",
       "kind": "retail",
       "sources": [
-        "yugipedia-set-pages"
+        "konami-card-database"
       ]
     }
   ],
@@ -27,7 +27,9 @@
   ],
   "sources": [
     "ygoprodeck-api",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-database"
   ],
-  "notes": "Dates from Yugipedia set page 'Shonen Jump Vol. 9, Issue 1 promotional card'; printings from the YGOPRODeck bulk dump."
+  "notes": "CURATED (2026-08 certification correction): the prior ledger date was inconsistent with the official TCG card database, which identifies JUMP-EN045 as the January 2011 Shonen Jump promo. Yugipedia's set page also labels the issue January 2011; exact day is not claimed. Printings remain from the YGOPRODeck bulk dump.",
+  "curated": true
 }

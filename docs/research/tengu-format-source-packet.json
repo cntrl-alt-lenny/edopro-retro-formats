@@ -172,9 +172,10 @@
     "coverage_certified": true,
     "coverage_window": "2002-03-01 through 2011-09-17",
     "candidate_pool": {
-      "policy": "release-cutoff with all-TCG scope; exclude Duel Terminal 4/5/5a machine-only product events and the three Sneak Peek participation products; include Malefic Truth Dragon via its sourced March 2011 JUMP-EN048 boundary resolution",
+      "policy": "release-cutoff with all-TCG scope; exclude Duel Terminal 4/5/5a machine-only product events under the period-2011 sanctioned-legality policy and exclude the three event-only Sneak Peek participation products under the official 2011 product-archive classification",
       "duel_terminal_exclusion_source": "konami-tcg-tournament-policy-v11-2011",
-      "included_cards": 4563,
+      "sneak_peek_exclusion_source": "konami-2011-product-pages",
+      "included_cards": 4562,
       "ambiguous_cards": 0,
       "unknown_printings": 0,
       "excluded_products": [
@@ -185,9 +186,7 @@
         "extreme-victory-sneak-peek-participation-card",
         "generation-force-sneak-peek-participation-card"
       ],
-      "explicit_includes": [
-        {"passcode": 37115575, "name": "Malefic Truth Dragon", "printing": "JUMP-EN048"}
-      ]
+      "explicit_includes": []
     },
     "import_anomalies": {
       "unmatched_cards": 8,
@@ -277,17 +276,18 @@
     },
     "community_pool_cross_check": {
       "source": "https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json",
-      "fixture": "tengu-format-community-diff.json",
+      "fixture": "tengu-format-community-candidates.json",
+      "difference_fixture": "tengu-format-community-diff.json",
       "source_sha256": "f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc",
       "cards_in_source": 5035,
       "source_cards_with_tcg_date_on_or_before_snapshot": 4572,
-      "ours_minus_tenguformat": [10000010, 33574806, 37115575, 56043446, 87259077, 88071625],
+      "ours_minus_tenguformat": [10000010, 37115575, 56043446, 87259077, 88071625],
       "tenguformat_minus_ours": [10000002, 18807109, 19230408, 35686188, 39751094, 56043447, 64335805, 68540059, 73134082, 80604092, 81480461, 83011278, 83764719, 84080939, 84257640],
       "canonicalized_semantic_difference": {
-        "ours_only": [10000010, 33574806, 37115575, 87259077, 88071625],
+        "ours_only": [10000010, 37115575, 87259077, 88071625],
         "community_only": []
       },
-      "comparison_note": "The public JSON is a current community database rather than a pinned historical whitelist: its passcodes and dates use modern/alias identities and its 2011 snapshot projection differs in six ledger identities and fifteen community-only identities. It is a cross-check, not canonical input."
+      "comparison_note": "The public JSON is a current community database rather than a pinned historical whitelist: its passcodes and dates use modern/alias identities. The committed candidates fixture is independently extracted from every source record dated on or before the snapshot, normalizing only numeric passcode spelling; expected differences are computed by the test, not used to construct the source set."
     }
   },
   "proposed_engine_flags": [

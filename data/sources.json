@@ -467,7 +467,7 @@
       "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&request_locale=en",
       "publisher": "Konami",
       "retrieved": "2026-08-27",
-      "used_for": "Cross-check of individual TCG card identities and printing-era product numbers, including the JUMP-EN048 Malefic Truth Dragon boundary resolution.",
+      "used_for": "Official TCG identity, printing, and release-month cross-checks for individual cards, including YG09-EN001 Elemental HERO Escuridao (2012-08-07), JUMP-EN045 The Winged Dragon of Ra (January 2011), and JUMP-EN048 Malefic Truth Dragon (March 2011).",
       "reliability_notes": "Official card database; current pages are used for identity and set-lineage cross-checks, not as a substitute for archived historical tournament policy."
     }
   ]

@@ -22,6 +22,18 @@ from retroformats.repo import Repository
 ROOT = Path(__file__).resolve().parents[1]
 PACKET = ROOT / "docs" / "research" / "tengu-format-source-packet.json"
 COMMUNITY_DIFF = ROOT / "docs" / "research" / "tengu-format-community-diff.json"
+COMMUNITY_CANDIDATES = ROOT / "docs" / "research" / "tengu-format-community-candidates.json"
+
+DT_EXCLUDED_PRODUCTS = (
+    "duel-terminal-4",
+    "duel-terminal-5",
+    "duel-terminal-5a",
+)
+SNEAK_PEEK_EXCLUDED_PRODUCTS = (
+    "storm-of-ragnarok-sneak-peek-participation-card",
+    "extreme-victory-sneak-peek-participation-card",
+    "generation-force-sneak-peek-participation-card",
+)
 
 
 EXPECTED_EDISON_STYLE_FALLBACK = {
@@ -80,41 +92,40 @@ EXPECTED_EDISON_STYLE_FALLBACK = {
 }
 
 
-def _fresh_tengu_evaluation(repo):
-    index = ReleaseIndex.build(repo)
+def _fresh_tengu_pool_raw(pool_id):
     raw = {
         "$schema": "../../schemas/pool.schema.json",
-        "id": "research-only-tengu-community-comparison",
+        "id": pool_id,
         "region": "TCG",
         "kind": "release-cutoff",
         "cutoff": {
             "cutoff_date": "2011-09-17",
             "territories": ["tcg", "tcg-na", "tcg-eu", "tcg-oce"],
-            "include": [
-                {
-                    "card": {"passcode": 37115575, "name": "Malefic Truth Dragon"},
-                    "reason": "Sourced March 2011 JUMP-EN048 boundary resolution.",
-                    "sources": ["konami-card-database"],
-                }
-            ],
+            "include": [],
             "exclude": [],
             "exclude_products": [
                 {
                     "product": product,
-                    "reason": "Research-only Tengu legality policy.",
+                    "reason": "Period-2011 Duel Terminal sanctioned-legality policy.",
                     "sources": ["konami-tcg-tournament-policy-v11-2011"],
                 }
-                for product in (
-                    "duel-terminal-4",
-                    "duel-terminal-5",
-                    "duel-terminal-5a",
-                    "storm-of-ragnarok-sneak-peek-participation-card",
-                    "extreme-victory-sneak-peek-participation-card",
-                    "generation-force-sneak-peek-participation-card",
-                )
+                for product in DT_EXCLUDED_PRODUCTS
+            ] + [
+                {
+                    "product": product,
+                    "reason": "Official 2011 product archive identifies this as an event-only Sneak Peek participation product; it is not used as retail pool authority.",
+                    "sources": ["konami-2011-product-pages", "yugipedia-set-pages"],
+                }
+                for product in SNEAK_PEEK_EXCLUDED_PRODUCTS
             ],
         },
     }
+    return raw
+
+
+def _fresh_tengu_evaluation(repo):
+    index = ReleaseIndex.build(repo)
+    raw = _fresh_tengu_pool_raw("research-only-tengu-community-comparison")
     return evaluate_cutoff(Pool.load(raw, Path("/tmp/research-only-tengu-community-comparison.json")), repo, index)
 
 
@@ -123,6 +134,7 @@ class TenguResearchGateTest(unittest.TestCase):
     def setUpClass(cls):
         cls.repo = Repository.load(ROOT)
         cls.packet = json.loads(PACKET.read_text(encoding="utf-8"))
+        cls.community_candidates = json.loads(COMMUNITY_CANDIDATES.read_text(encoding="utf-8"))
 
     def test_gate_has_no_canonical_tengu_artifacts(self):
         self.assertFalse(any(ROOT.glob("formats/*tengu*")))
@@ -197,22 +209,29 @@ class TenguResearchGateTest(unittest.TestCase):
             },
         )
 
-    def test_community_pool_difference_is_exact_and_canonicalizes_to_zero(self):
+    def test_community_pool_difference_is_exact_and_canonicalizes_aliases(self):
         diff = json.loads(COMMUNITY_DIFF.read_text(encoding="utf-8"))
         source = diff["source"]
         self.assertEqual("https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json", source["url"])
         self.assertEqual("f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc", source["sha256"])
         self.assertEqual(5035, source["records"])
         self.assertEqual(4572, source["dated_candidate_count"])
-        self.assertEqual(4563, diff["certified_pool_count"])
+        self.assertEqual(4562, diff["certified_pool_count"])
+        candidates = self.community_candidates
+        for key in ("url", "retrieved", "sha256", "records", "date_field", "comparison_cutoff"):
+            self.assertEqual(source[key], candidates["source"][key])
+        self.assertEqual(5033, candidates["candidate_record_count"])
+        self.assertEqual(4572, candidates["candidate_identity_count"])
+        community_candidate = set(candidates["candidate_passcodes"])
+        self.assertEqual(4572, len(community_candidate))
 
         evaluation = _fresh_tengu_evaluation(self.repo)
         derived_ours = set(evaluation.included)
-        self.assertEqual(4563, len(derived_ours))
+        self.assertEqual(4562, len(derived_ours))
         self.assertEqual(0, len(evaluation.ambiguous))
 
         ours = {
-            10000010, 33574806, 37115575, 56043446, 87259077, 88071625,
+            10000010, 37115575, 56043446, 87259077, 88071625,
         }
         community = {
             10000002, 18807109, 19230408, 35686188, 39751094, 56043447,
@@ -221,40 +240,46 @@ class TenguResearchGateTest(unittest.TestCase):
         }
         self.assertEqual(ours, {row["passcode"] for row in diff["ours_minus_tenguformat"]})
         self.assertEqual(community, {row["passcode"] for row in diff["tenguformat_minus_ours"]})
-        community_candidate = (derived_ours - ours) | community
-        self.assertEqual(4572, len(community_candidate))
         self.assertEqual(ours, derived_ours - community_candidate)
         self.assertEqual(community, community_candidate - derived_ours)
         canonicalized_community = (community_candidate - community) | {
             row["our_canonical_passcode"] for row in diff["tenguformat_minus_ours"]
         }
         self.assertEqual(
-            {10000010, 33574806, 37115575, 87259077, 88071625},
+            {10000010, 37115575, 87259077, 88071625},
             derived_ours - canonicalized_community,
         )
         self.assertEqual(set(), canonicalized_community - derived_ours)
         self.assertEqual(
             {
-                "ours_only": [10000010, 33574806, 37115575, 87259077, 88071625],
+                "ours_only": [10000010, 37115575, 87259077, 88071625],
                 "community_only": [],
             },
             diff["canonicalized_semantic_difference"],
         )
-        self.assertEqual(6, len(ours))
+        self.assertEqual(5, len(ours))
         self.assertEqual(15, len(community))
         self.assertTrue(all(not row["changes_toronto_legality"] for row in diff["ours_minus_tenguformat"] + diff["tenguformat_minus_ours"]))
+        self.assertNotIn(33574806, derived_ours)
+        self.assertNotIn(33574806, community_candidate)
+        self.assertNotEqual(ours, ({33574806} | derived_ours) - community_candidate)
+        self.assertNotEqual(ours, (derived_ours - {10000010}) - community_candidate)
 
         for row in diff["tenguformat_minus_ours"]:
             canonical = row["our_canonical_passcode"]
             self.assertIn(canonical, self.repo.card_index.by_passcode)
             self.assertEqual(row["our_canonical_name"], self.repo.card_index.name_of(canonical))
             self.assertEqual("alias-or-artwork-identity", row["classification"])
+            indexed = self.repo.card_index.by_passcode.get(row["passcode"])
+            if indexed is not None and indexed.get("alias_of") is not None:
+                self.assertEqual(canonical, int(indexed["alias_of"]))
         for row in diff["ours_minus_tenguformat"]:
             self.assertEqual(row["name"], self.repo.card_index.name_of(row["passcode"]))
             self.assertIn(row["classification"], {"community-omission", "community-date-error", "alias-or-artwork-identity"})
 
         packet_cross_check = self.packet["release_certification"]["community_pool_cross_check"]
-        self.assertEqual("tengu-format-community-diff.json", packet_cross_check["fixture"])
+        self.assertEqual("tengu-format-community-candidates.json", packet_cross_check["fixture"])
+        self.assertEqual("tengu-format-community-diff.json", packet_cross_check["difference_fixture"])
         self.assertEqual(ours, set(packet_cross_check["ours_minus_tenguformat"]))
         self.assertEqual(community, set(packet_cross_check["tenguformat_minus_ours"]))
         self.assertEqual(
@@ -272,49 +297,47 @@ class TenguResearchGateTest(unittest.TestCase):
             )
         )
         index = ReleaseIndex.build(self.repo)
-        raw = {
-            "$schema": "../../schemas/pool.schema.json",
-            "id": "research-only-tengu-projection",
-            "region": "TCG",
-            "kind": "release-cutoff",
-            "cutoff": {
-                "cutoff_date": "2011-09-17",
-                "territories": ["tcg", "tcg-na", "tcg-eu", "tcg-oce"],
-                "include": [
-                    {
-                        "card": {"passcode": 37115575, "name": "Malefic Truth Dragon"},
-                        "reason": "JUMP-EN048 is identified as a March 2011 release by the official card database.",
-                        "sources": ["konami-card-database"],
-                    }
-                ],
-                "exclude": [],
-                "exclude_products": [
-                    {
-                        "product": product,
-                        "reason": "Research-only policy: Duel Terminal machine exclusives and Sneak Peek participation products are not used as ordinary retail pool authority.",
-                        "sources": ["konami-tcg-tournament-policy-v11-2011"],
-                    }
-                    for product in (
-                        "duel-terminal-4",
-                        "duel-terminal-5",
-                        "duel-terminal-5a",
-                        "storm-of-ragnarok-sneak-peek-participation-card",
-                        "extreme-victory-sneak-peek-participation-card",
-                        "generation-force-sneak-peek-participation-card",
-                    )
-                ],
-            },
-        }
+        raw = _fresh_tengu_pool_raw("research-only-tengu-projection")
         pool = Pool.load(raw, Path("/tmp/research-only-tengu-projection.json"))
         evaluation = evaluate_cutoff(pool, self.repo, index)
-        self.assertEqual(4563, len(evaluation.included))
+        self.assertEqual(4562, len(evaluation.included))
         self.assertEqual(0, len(evaluation.ambiguous))
         self.assertEqual(0, len(index.unknown_printings))
         excluded = {entry["product"] for entry in raw["cutoff"]["exclude_products"]}
         self.assertNotIn("the-shining-darkness", excluded)
         self.assertNotIn("shonen-jump-may-2010-subscription-bonus", excluded)
+        source_by_product = {entry["product"]: entry["sources"] for entry in raw["cutoff"]["exclude_products"]}
+        for product in DT_EXCLUDED_PRODUCTS:
+            self.assertEqual(["konami-tcg-tournament-policy-v11-2011"], source_by_product[product])
+        for product in SNEAK_PEEK_EXCLUDED_PRODUCTS:
+            self.assertEqual(["konami-2011-product-pages", "yugipedia-set-pages"], source_by_product[product])
 
         self.assertEqual(4593, index.dated_canonical_count())
+
+    def test_official_release_correction_removes_escuridao_from_snapshot(self):
+        product = self.repo.products["yu-gi-oh-gx-volume-9-promotional-card"]
+        event = product.events[0]
+        self.assertEqual("2012-08-07", event.date)
+        self.assertEqual("day", event.precision)
+        self.assertIn("konami-card-database", event.sources)
+        evaluation = _fresh_tengu_evaluation(self.repo)
+        self.assertNotIn(33574806, evaluation.included)
+        self.assertNotIn(33574806, evaluation.ambiguous)
+
+    def test_remaining_ledger_only_release_evidence_is_pinned(self):
+        expected = {
+            "shonen-jump-vol-9-issue-1-promotional-card": ("2011-01-01", "month", 10000010),
+            "shonen-jump-vol-9-issue-3-promotional-card": ("2011-03-01", "month", 37115575),
+            "shonen-jump-december-2010-subscription-bonus": ("2010-12-01", "month", 87259077),
+            "shonen-jump-may-2010-subscription-bonus": ("2010-05-01", "month", 88071625),
+        }
+        for product_id, (date, precision, passcode) in expected.items():
+            product = self.repo.products[product_id]
+            event = product.events[0]
+            self.assertEqual(date, event.date)
+            self.assertEqual(precision, event.precision)
+            self.assertIn("konami-card-database", event.sources)
+            self.assertIn(passcode, {printing.passcode for printing in product.printings})
 
     def test_packet_records_the_certified_projection_and_import_audit(self):
         certification = self.packet["release_certification"]
@@ -322,7 +345,7 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual(411, certification["ledger_products"])
         self.assertEqual(41, certification["new_pre_toronto_products"])
         self.assertEqual("konami-tcg-tournament-policy-v11-2011", certification["candidate_pool"]["duel_terminal_exclusion_source"])
-        self.assertEqual(4563, certification["candidate_pool"]["included_cards"])
+        self.assertEqual(4562, certification["candidate_pool"]["included_cards"])
         self.assertEqual(0, certification["candidate_pool"]["ambiguous_cards"])
         self.assertEqual(0, certification["candidate_pool"]["unknown_printings"])
         self.assertEqual(0, certification["import_anomalies"]["unresolved_pool_impacting_gaps"])
@@ -353,7 +376,8 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual(41, len(expected))
         self.assertTrue(expected.issubset(self.repo.products))
         self.assertEqual(411, len(self.repo.products))
-        self.assertEqual(404, self.repo.import_report["stats"]["products_written"])
+        self.assertEqual(399, self.repo.import_report["stats"]["products_written"])
+        self.assertEqual(12, self.repo.import_report["stats"]["curated_preserved"])
         self.assertEqual(34, self.repo.import_report["stats"]["yugipedia_only_products"])
         subjects = {s for g in self.repo.release_gaps for s in g.raw["subjects"]}
         self.assertIn("Yu-Gi-Oh! 3D Bonds Beyond Time Blu-ray promotional card", subjects)
