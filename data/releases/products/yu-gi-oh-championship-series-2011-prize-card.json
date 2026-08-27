@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-championship-series-2011-prize-card",
+  "code": "YCSW",
+  "name": "Yu-Gi-Oh! Championship Series 2011 Prize Card",
+  "kind": "promo-tournament",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-08-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-12-17",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2012-06-03",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 30757396,
+      "name": "Blood Mefist",
+      "numbers": [
+        "YCSW-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! Championship Series 2011 Prize Card'; printings from the YGOPRODeck bulk dump."
+}

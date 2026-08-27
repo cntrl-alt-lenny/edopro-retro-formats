@@ -1,0 +1,349 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-deck-dawn-of-the-xyz",
+  "code": "YS11",
+  "name": "Starter Deck: Dawn of the Xyz",
+  "kind": "starter",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-07-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-07-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-07-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 27551,
+      "name": "Limit Reverse",
+      "numbers": [
+        "YS11-EN039"
+      ]
+    },
+    {
+      "passcode": 2460565,
+      "name": "Marauding Captain",
+      "numbers": [
+        "YS11-EN015"
+      ]
+    },
+    {
+      "passcode": 3244563,
+      "name": "Shield Spear",
+      "numbers": [
+        "YS11-EN038"
+      ]
+    },
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "YS11-EN035"
+      ]
+    },
+    {
+      "passcode": 4178474,
+      "name": "Raigeki Break",
+      "numbers": [
+        "YS11-EN037"
+      ]
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole",
+      "numbers": [
+        "YS11-EN034"
+      ]
+    },
+    {
+      "passcode": 5318639,
+      "name": "Mystical Space Typhoon",
+      "numbers": [
+        "YS11-EN024"
+      ]
+    },
+    {
+      "passcode": 5438492,
+      "name": "Warrior Lady of the Wasteland",
+      "numbers": [
+        "YS11-EN020"
+      ]
+    },
+    {
+      "passcode": 8842266,
+      "name": "Poison of the Old Man",
+      "numbers": [
+        "YS11-EN029"
+      ]
+    },
+    {
+      "passcode": 10002346,
+      "name": "Gachi Gachi Gantetsu",
+      "numbers": [
+        "YS11-EN042"
+      ]
+    },
+    {
+      "passcode": 10012614,
+      "name": "Banner of Courage",
+      "numbers": [
+        "YS11-EN028"
+      ]
+    },
+    {
+      "passcode": 10118318,
+      "name": "Reinforce Truth",
+      "numbers": [
+        "YS11-EN040"
+      ]
+    },
+    {
+      "passcode": 11224934,
+      "name": "Reinforced Space",
+      "numbers": [
+        "YS11-EN031"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "YS11-EN003"
+      ]
+    },
+    {
+      "passcode": 17658803,
+      "name": "Luster Dragon #2",
+      "numbers": [
+        "YS11-EN002"
+      ]
+    },
+    {
+      "passcode": 20474741,
+      "name": "Trident Warrior",
+      "numbers": [
+        "YS11-EN019"
+      ]
+    },
+    {
+      "passcode": 22346472,
+      "name": "Blustering Winds",
+      "numbers": [
+        "YS11-EN021"
+      ]
+    },
+    {
+      "passcode": 23168060,
+      "name": "Key Man the Key Warrior",
+      "numbers": [
+        "YS11-EN009"
+      ]
+    },
+    {
+      "passcode": 24291651,
+      "name": "Ganbara Knight",
+      "numbers": [
+        "YS11-EN006"
+      ]
+    },
+    {
+      "passcode": 26046205,
+      "name": "Vengeful Shinobi",
+      "numbers": [
+        "YS11-EN017"
+      ]
+    },
+    {
+      "passcode": 32918479,
+      "name": "Majestic Mech - Senku",
+      "numbers": [
+        "YS11-EN016"
+      ]
+    },
+    {
+      "passcode": 34664411,
+      "name": "Lucky Iron Axe",
+      "numbers": [
+        "YS11-EN030"
+      ]
+    },
+    {
+      "passcode": 39507162,
+      "name": "Blade Knight",
+      "numbers": [
+        "YS11-EN014"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "YS11-EN036"
+      ]
+    },
+    {
+      "passcode": 47506081,
+      "name": "Grenosaurus",
+      "numbers": [
+        "YS11-EN043"
+      ]
+    },
+    {
+      "passcode": 50785356,
+      "name": "Feedback Warrior",
+      "numbers": [
+        "YS11-EN007"
+      ]
+    },
+    {
+      "passcode": 58441120,
+      "name": "Harmonic Waves",
+      "numbers": [
+        "YS11-EN022"
+      ]
+    },
+    {
+      "passcode": 58628539,
+      "name": "Xyz Effect",
+      "numbers": [
+        "YS11-EN032"
+      ]
+    },
+    {
+      "passcode": 59563768,
+      "name": "Tenshin",
+      "numbers": [
+        "YS11-EN010"
+      ]
+    },
+    {
+      "passcode": 60082869,
+      "name": "Dust Tornado",
+      "numbers": [
+        "YS11-EN033"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "YS11-EN025"
+      ]
+    },
+    {
+      "passcode": 69247929,
+      "name": "Gene-Warped Warwolf",
+      "numbers": [
+        "YS11-EN004"
+      ]
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light",
+      "numbers": [
+        "YS11-EN026"
+      ]
+    },
+    {
+      "passcode": 80770678,
+      "name": "Spirit of the Harp",
+      "numbers": [
+        "YS11-EN001"
+      ]
+    },
+    {
+      "passcode": 84013237,
+      "name": "Number 39: Utopia",
+      "numbers": [
+        "YS11-EN041"
+      ]
+    },
+    {
+      "passcode": 85839825,
+      "name": "Xyz Energy",
+      "numbers": [
+        "YS11-EN023"
+      ]
+    },
+    {
+      "passcode": 86174055,
+      "name": "Speed Bird",
+      "numbers": [
+        "YS11-EN008"
+      ]
+    },
+    {
+      "passcode": 86952477,
+      "name": "Shine Knight",
+      "numbers": [
+        "YS11-EN011"
+      ]
+    },
+    {
+      "passcode": 89529919,
+      "name": "Field-Commander Rahz",
+      "numbers": [
+        "YS11-EN018"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "YS11-EN027"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "YS11-EN013"
+      ]
+    },
+    {
+      "passcode": 97017120,
+      "name": "Giant Rat",
+      "numbers": [
+        "YS11-EN012"
+      ]
+    },
+    {
+      "passcode": 97896503,
+      "name": "Zubaba Knight",
+      "numbers": [
+        "YS11-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Starter Deck: Dawn of the Xyz'; printings from the YGOPRODeck bulk dump."
+}

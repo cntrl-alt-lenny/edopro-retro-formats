@@ -1,337 +1,215 @@
 # Tengu Format source and implementation gate
 
-Status: research gate only. No Tengu format, pool, banlist, rule profile, or
-generated output is canonical in this commit.
+Status: research gate only. This commit extends and certifies the shared TCG
+release ledger through the proposed snapshot, but creates no canonical Tengu
+format, banlist, pool, or rule profile.
 
-## Recommendation in one paragraph
+## Recommendation
 
-Use `2011-09-tengu`, displayed as **Tengu Format** (aliases: Tengu Plant),
-with a TCG snapshot of `2011-09-17`, the first day of YCS Toronto. The event
-was held September 17–18, 2011, and Konami's contemporary coverage calls it a
-new format under the new Forbidden & Limited List and the newly released Xyz
-cards. The community definition agrees: Format Library records `2011-09-17`,
-September 2011, TCG, and YCS Toronto; TenguFormat.com describes the same event
-and Generation Force boundary.
+Use format id `2011-09-tengu`, displayed as **Tengu Format** (alias: Tengu
+Plant), with an inclusive TCG snapshot of `2011-09-17`, the first day of YCS
+Toronto. Konami's event coverage places YCS Toronto on September 17–18, 2011;
+the event article describes it as the first YCS under the new list and calls
+out the new Xyz cards. Format Library independently records `2011-09-17`,
+September 2011, TCG, and YCS Toronto. TenguFormat.com makes the same community
+definition.
 
-This gate does **not** recommend creating the format yet. The current release
-ledger is certified only through `2010-12-31`. Its in-memory projection at the
-proposed date is 4,037 cards after the existing Edison exclusions, but that is
-an incomplete lower bound, not a defensible Tengu pool. The next implementation
-task must first extend and certify the release ledger through the snapshot.
+This is a community-retrospective format definition, not a claim that every
+territory had identical shelf availability on that day. The release ledger
+therefore uses all English-family TCG territory events and the repository's
+existing availability model.
 
-## Source hierarchy and evidence labels
-
-Claims below are labelled as follows:
-
-* **Primary historical fact** — official Konami product, event, rulebook, or
-  list material.
-* **Community convention** — Format Library or TenguFormat.com definition,
-  useful for reproducing what retro players mean by Tengu but not a substitute
-  for release or policy evidence.
-* **Implementation evidence** — pinned EDOPro/Project Ignis source or this
-  repository's tested machinery; it describes executable behaviour, not by
-  itself when a historical rule changed.
-* **Inference** — a conclusion drawn from the evidence and explicitly marked.
-* **Unresolved** — the evidence is not sufficient to claim a fact.
-
-The research used official Konami event/product/rulebook material first,
-period or archived policy material where available, then the two community
-format definitions, Yugipedia/other lineage material for discovery, and the
-project's pinned engine/repository evidence. The packet next to this document
-contains the exact researched September 2011 TCG banlist identities; it is a
-research artifact, not a file under `data/banlists/`.
-
-## Snapshot and defining event
-
-* **Primary historical fact:** Konami's Toronto coverage category identifies
-  “Championship Series – Toronto, Canada” on September 17–18, 2011. The event
-  article dated September 17 says it is the first YCS under the new list and
-  highlights the new Xyz monsters in Generation Force.
-* **Community convention:** Format Library's API identifies format 24 as
-  “Tengu”, date `2011-09-17`, category TCG, banlist “September 2011”, and event
-  “YCS Toronto - September 2011”. TenguFormat.com identifies YCS Toronto 2011
-  as September 17, 2011 and describes Generation Force as the latest core set.
-* **Recommendation:** snapshot `2011-09-17`, inclusive, TCG. This is the day-1
-  tournament snapshot, not a claim that every card physically obtainable in
-  every territory had an identical shelf date.
-
-Sources: [Konami Toronto coverage category](https://yugiohblog.konami.com/category/ycs/11-09-toronto/),
-[Konami Toronto first-timers article](https://yugiohblog.konami.com/2011/ycs/ycs-toronto-first-timers-2/),
+Sources: [Konami Toronto coverage](https://yugiohblog.konami.com/category/ycs/11-09-toronto/),
+[Konami Toronto event article](https://yugiohblog.konami.com/2011/ycs/ycs-toronto-first-timers-2/),
 [Format Library Tengu API](https://formatlibrary.com/api/formats/tengu),
-[TenguFormat.com](https://tenguformat.com/),
-[TenguFormat YCS Toronto page](https://tenguformat.com/ycs-toronto-2011/).
+[TenguFormat.com](https://tenguformat.com/ycs-toronto-2011/).
 
-## September 2011 TCG list
+## Evidence labels and reproducibility
 
-**Primary historical fact:** Konami's September 1, 2011 historical list page
-labels the list “2011 Sep 1 applicable list”. It displays OCG and TCG columns
-side by side. The OCG column has 52 Forbidden cards because it includes
-Sixth Sense; the TCG column has 51 because Sixth Sense is not in the TCG
-column. The TCG counts are therefore:
+* **Primary historical fact** means official Konami product, event, list or
+  rulebook material.
+* **Community convention** means Format Library or TenguFormat.com evidence
+  about what retro players call Tengu.
+* **Implementation evidence** means the pinned importer, BabelCDB, EDOPro or
+  ocgcore source. It describes executable behaviour, not automatically the
+  date a historical rule changed.
+* **Inference** is an explicit conclusion from those sources.
+* **Unresolved** is not silently converted into a date or legality claim.
 
-| status | count |
-| --- | ---: |
-| Forbidden | 51 |
-| Limited | 65 |
-| Semi-Limited | 18 |
-| cards released from the list | 7 |
+The raw fetch cache is intentionally not committed. The committed
+`data/imported/releases-report.json`, product records, coverage window, gap
+ledger, and card index are deterministic outputs of the offline importer and
+identity importer. The gate test reconstructs the proposed pool in memory; it
+does not create a Tengu pool file.
 
-The exact names and passcodes are in
-[`tengu-format-source-packet.json`](tengu-format-source-packet.json). The
-packet is independently cross-checked against Format Library's TCG API
-response: 51/65/18 and the same seven release-to-unlimited entries. The packet
-uses modern canonical card identities, not Format Library's internal row IDs.
+## Banlist
 
-Sources: [Konami historical September 2011 list](https://www.yugioh-card.com/japan/event/limitregulation/?list=201109),
-[Format Library September 2011 TCG list API](https://formatlibrary.com/api/banlists/september-2011?category=TCG),
-[TenguFormat list](https://tenguformat.com/banlist/).
+The official [2011 September 1 list](https://www.yugioh-card.com/japan/event/limitregulation/?list=201109)
+is the primary cross-check. Its TCG column contains 51 Forbidden, 65 Limited,
+and 18 Semi-Limited cards, with seven cards released to Unlimited. The OCG
+column has one additional Forbidden card (Sixth Sense); it is not copied into
+the TCG packet. Format Library's
+[September 2011 TCG API record](https://formatlibrary.com/api/banlists/september-2011?category=TCG)
+and TenguFormat.com's [banlist page](https://tenguformat.com/banlist/) agree on
+the TCG counts and identities.
 
-No canonical banlist file is created in this gate. The next task should create
-one TCG list with effective date `2011-09-01`, after checking the packet against
-the repository card index for any historical-identity exceptions.
+The exact modern passcodes and names are in
+[`tengu-format-source-packet.json`](tengu-format-source-packet.json). That
+packet is a research artifact, not canonical banlist data. The next
+implementation task should create one TCG list with effective date
+`2011-09-01` after checking the packet against the card index.
 
-## Card-pool cutoff and release-ledger result
+## Snapshot and release-ledger certification
 
-The project rule is to derive a pool from per-product, per-territory release
-events and then materialise a reviewable projection. A core-set label is not
-itself a legality rule. The recommended cutoff is the event snapshot date,
-`2011-09-17`, with the project's default all-TCG territory scope, followed by
-explicit product-policy exclusions/includes where period evidence demands them.
+The proposed cutoff is `2011-09-17`, scope
+`tcg`, `tcg-na`, `tcg-eu`, and `tcg-oce`. `Generation Force` is the latest
+core booster before the snapshot, but “through GENF” is not by itself a pool
+rule: the ledger includes all dated TCG products and promos through the
+cutoff.
 
-Relevant official product anchors found:
-
-| product | Konami tournament-legal date | consequence |
-| --- | --- | --- |
-| Storm of Ragnarok | 2011-02-08 | before snapshot |
-| Hidden Arsenal 4 | 2011-04-19 | before snapshot |
-| Extreme Victory | 2011-05-10 | before snapshot; includes Reborn Tengu and Tour Guide |
-| Gold Series 4 | 2011-07-01 | before snapshot |
-| Starter Deck: Dawn of the Xyz | 2011-07-12 | before snapshot; Xyz introduction product |
-| Hidden Arsenal Special Edition | 2011-08-02 | before snapshot; variant/repack product must be ledger-audited |
-| Generation Force | 2011-08-16 | before snapshot; first Xyz core booster |
-| first-wave 2011 tins | 2011-08-30 | before snapshot; promos and reprints must be ledger-audited |
-| Generation Force Special Edition | 2011-09-20 | after snapshot; exclude from Toronto |
-| second-wave 2011 tins | 2011-11-01 | after snapshot; exclude from Toronto |
-
-Sources: [GENF](https://www.yugioh-card.com/en/products/past_products/genf/),
-[Dawn of the Xyz](https://www.yugioh-card.com/en/products/past_products/starter2011/),
-[Storm of Ragnarok](https://www.yugioh-card.com/en/products/past_products/stor/),
+Official product pages were used as boundary cross-checks for [Storm of
+Ragnarok](https://www.yugioh-card.com/en/products/past_products/stor/),
 [Extreme Victory](https://www.yugioh-card.com/en/products/past_products/exvc/),
 [Hidden Arsenal 4](https://www.yugioh-card.com/en/products/past_products/ha04/),
+[Dawn of the Xyz](https://www.yugioh-card.com/en/products/past_products/starter2011/),
+[GENF](https://www.yugioh-card.com/en/products/past_products/genf/),
 [Hidden Arsenal Special Edition](https://www.yugioh-card.com/en/products/past_products/ha-se/),
-[2011 product archive](https://www.yugioh-card.com/en/products/past_products/others-archives/),
-[first-wave Wind-Up Zenmaister Tin](https://www.yugioh-card.com/en/products/past_products/tin-2011w1-wz/),
-[GENF Special Edition](https://www.yugioh-card.com/en/products/past_products/genf-se/).
+[2011 tins](https://www.yugioh-card.com/en/products/past_products/tin-2011w1-wz/),
+and the [2011 product archive](https://www.yugioh-card.com/en/products/past_products/others-archives/).
+The ledger retains regional events rather than collapsing them: for example,
+GENF is 2011-08-16 in North America and 2011-08-12 in Europe/Oceania, while
+the GENF Special Edition has 2011-09-15 European/Oceanic events and a
+2011-09-20 North American event. The Special Edition contributes no new card
+at the cutoff because its two cards were already available earlier.
 
-The live repository currently contains no 2011 product records and declares
-release coverage complete only through `2010-12-31`. Running the real
-`ReleaseIndex` and `evaluate_cutoff()` in memory against the current data gives:
+The real importer was run offline through `2011-09-17` against the fetched
+Yugipedia/YGOPRODeck inputs and the pinned BabelCDB checkout. Existing product
+bytes were unchanged; 41 new product records were added.
 
-* 4,143 dated canonical cards before the Edison pool's product/policy
-  exclusions;
-* 4,037 included cards after reusing those existing exclusions;
-* 0 current boundary ambiguities;
-* 0 unknown printings;
-* coverage certification: **false** for `2011-09-17`.
+| certified quantity | result |
+|---|---:|
+| product records | 411 (404 generated + 7 curated) |
+| importer printings | 9,338 |
+| importer release events | 585 |
+| canonical release printings | 9,339 (including the existing curated WC2004 roster) |
+| canonical release events | 587 (including the existing curated WC2004 roster) |
+| card-index rows | 4,841 |
+| unmatched cards | 8, all pre-2011 one-of-a-kind prizes |
+| products without printings | 4, all already-ledgered prize/non-card products |
+| Yugipedia-only products | 34, including two newly accounted-for 2011 products |
+| unresolved pool-impacting gaps | 0 |
 
-The 4,037 figure is deliberately reported as an **incomplete lower bound**.
-It does not contain GENF, Dawn of the Xyz, 2011 tins, later 2011 promos, or
-other 2011 records missing from the ledger. The implementation task must add
-the missing product/release/printing evidence and rerun the importer and gap
-ledger. It must then compare the derived set with the community pools at
-Format Library/TenguFormat.com; no machine-readable community whitelist was
-used as canonical input here.
+The two newly reported Yugipedia-only products are harmless by explicit gap
+records: the 2011 Blu-ray promo repeats the earlier Movie Pack
+`Malefic Red-Eyes Black Dragon`, and the 2011 World Championship prize set is
+not an ordinary tournament-legal product. `Malefic Truth Dragon` is the one
+boundary ambiguity: its coarse JUMP-EN048 ledger date is resolved by the
+[official card database](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=9042&ope=2&request_locale=en),
+which identifies the TCG printing as March 2011. The research-only pool uses
+that sourced include, so no card remains ambiguous at the cutoff.
 
-Unresolved release work includes the complete 2011 product inventory, exact
-TCG territory/date events, promo and tin contents, Special Edition/repack
-semantics, tournament-product releases, and any artwork/passcode aliases at
-the boundary. The current ledger's absence of those records is the gap; it is
-not evidence that those cards were illegal.
+The fresh candidate pool has **4,563 cards**, zero boundary ambiguities, and
+zero unknown printings. It excludes only the period-supported Duel Terminal
+4/5/5a machine-only product events and the three Sneak Peek participation
+products. The latter exclusions are explicit legality policy, not a change to
+release facts; each participation card also has an ordinary earlier release,
+so the exclusions do not alter the count. No Edison product exclusions are
+reused.
 
-## Rule-profile research
+Validation remains error-free. The warning count changes from 360 to 361:
+the only new finding is `releases.number-prefix` for `DPCT-EN005` stored under
+the `DPC5` Duelist Pack Collection Tin 2011 record. This is an upstream
+set-membership bookkeeping discrepancy preserved by the importer, not a
+pool-coverage failure; no existing warning disappears.
 
-The proposed profile is a custom explicit profile based on the Master Rule 2
-era, with the historical TCG ignition-priority approximation already documented
-for Edison. It should not be declared a bare “MR2” preset without documenting
-the TCG/OCG divergence.
+TenguFormat.com's downloadable [card JSON](https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json)
+contains 5,035 current records, 4,572 with a current `tcg_date` on or before
+the proposed date. It is a useful community cross-check, not a pinned
+historical whitelist: it uses modern/alias identities and current dates, and
+differs from the ledger projection by six identities plus fifteen
+community-only identities. Those differences are reported, not silently
+forced into the release data.
 
-Proposed flags, all present in the pinned `ocgapi_constants.h` at core commit
-`46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57`:
+## Rule-profile gate
 
-`DUEL_OCG_OBSOLETE_IGNITION`, `DUEL_1ST_TURN_DRAW`,
-`DUEL_1_FACEUP_FIELD`, `DUEL_SPSUMMON_ONCE_OLD_NEGATE`,
-`DUEL_RETURN_TO_DECK_TRIGGERS`, and `DUEL_CANNOT_SUMMON_OATH_OLD`.
+Recommendation: a future explicit MR2-era TCG profile, with the existing
+Edison ignition-priority approximation documented as an engine limitation.
+All proposed constants exist in the pinned
+[`ocgapi_constants.h`](https://github.com/edo9300/ygopro-core/blob/46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57/ocgapi_constants.h).
 
-The client constraints should remain 40–60 Main Deck, 0–15 Extra Deck, and
-0–15 Side Deck. The forbidden card types should be `TYPE_PENDULUM` and
-`TYPE_LINK`; `TYPE_XYZ` is legal. The 2011 rulebook's Extra Deck section
-allows up to 15 Xyz/Synchro/Fusion cards and its Xyz section describes
-face-up same-Level materials, stacking, and detaching to the Graveyard.
+Proposed flags:
 
-| historical rule question | source/evidence | engine treatment | result |
-| --- | --- | --- | --- |
-| Master Rule generation | 2011 Rulebook v8.0; product/event timing | explicit MR2-era flags | exact for the ordinary rules represented by those flags |
-| first-turn draw | v8.0 turn structure; core constant | `DUEL_1ST_TURN_DRAW` | retained |
-| one face-up Field Spell | v8.0 field-zone text; core constant | `DUEL_1_FACEUP_FIELD` | retained |
-| Xyz Summon/materials/detach | v8.0 pp. 12–13 and 45; current core Xyz data structures | `TYPE_XYZ`, normal current Xyz processing | ordinary 2011 rules expressible; no special historical Xyz flag found |
-| Extra Deck and Side Deck sizes | v8.0 deck rules | client limits 15/15 | exact as stated |
-| summon-negation once-per-turn behavior | Edison profile/core | `DUEL_SPSUMMON_ONCE_OLD_NEGATE` | retained pending a Tengu-specific contrary source |
-| return-to-deck triggers | Edison profile/core | `DUEL_RETURN_TO_DECK_TRIGGERS` | retained pending a Tengu-specific contrary source |
-| old summon-oath restrictions | Edison profile/core | `DUEL_CANNOT_SUMMON_OATH_OLD` | retained pending a Tengu-specific contrary source |
-| ignition priority | TCG history places removal on 2012-04-25; Toronto predates it | `DUEL_OCG_OBSOLETE_IGNITION` only as the existing least-wrong approximation | not exact: core couples summon gate and Monster-Zone location |
-| SEGOC | v8.0 says turn-player effects then opponent effects; finer TCG details unresolved in Edison research | no extra SEGOC flag | do not guess |
-| private/non-public triggers | no period source strong enough for the candidate flags | no extra flag | unresolved |
-| Trap activation in a new Chain | no Tengu-specific period proof found in this gate | no `DUEL_USE_TRAPS_IN_NEW_CHAIN` addition | unresolved |
-| repositioning by non-turn player | no Tengu-specific period proof found | no extra flag | unresolved |
-| 0-ATK battle | v7.2 added the “neither destroyed” exception before Toronto | omit Edison-only `DUEL_0_ATK_DESTROYED` | Tengu uses the later exception |
-| End Phase handling | no change source found at the boundary | current core default | no separate Tengu setting justified |
+* `DUEL_1ST_TURN_DRAW`
+* `DUEL_1_FACEUP_FIELD`
+* `DUEL_SPSUMMON_ONCE_OLD_NEGATE`
+* `DUEL_RETURN_TO_DECK_TRIGGERS`
+* `DUEL_CANNOT_SUMMON_OATH_OLD`
+* `DUEL_OCG_OBSOLETE_IGNITION` — separate, least-wrong approximation only
 
-The exact pinned constants are in [ocgapi_constants.h](https://github.com/edo9300/ygopro-core/blob/46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57/ocgapi_constants.h)
-and the coupled ignition gate is in [processor.cpp](https://github.com/edo9300/ygopro-core/blob/46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57/ocgcore/processor.cpp).
-The contemporary rulebook copy used for page-level inspection is
-[Rulebook v8.0](https://ms.yugipedia.com/3/36/Rulebook_v8.0_updated.pdf).
+The first five are the pinned core's MR2-era expansion. The ignition flag is
+not presented as exact TCG history: TCG ignition priority remained in force
+at Toronto, but the current core couples the OCG obsolete location gate to a
+broader model and cannot express the exact TCG window without a core change.
+Do not enable `DUEL_TCG_FAST_EFFECT_IGNITION`; it grants a broader post-chain
+window. Omit Edison’s `DUEL_0_ATK_DESTROYED`: the v7.2 rulebook change was
+already in force by 2011.
 
-### Ignition Priority conclusion
+The v8.0 rulebook supports ordinary early-Xyz behaviour: same-Level face-up
+monsters are overlaid, materials are underneath the Xyz monster, detach sends
+the material to the Graveyard, materials are not cards on the field, and
+Tokens cannot be Xyz materials. Current ocgcore has native Xyz handling and no
+separate early-Xyz flag. No additional historical engine flag is justified by
+this gate. Fine-grained SEGOC/private-trigger/trap-timing questions remain
+unresolved rather than guessed.
 
-**Primary/period fact:** TCG ignition priority remained in force at Toronto;
-the TCG change is independently reported as April 25, 2012, whereas the OCG
-change occurred with the earlier OCG Master Rule 2 transition. The project’s
-Edison dossier provides the strongest local analysis of the exact TCG behavior.
+## Erratum-selection audit
 
-**Recommendation:** retain `DUEL_OCG_OBSOLETE_IGNITION` as the least-wrong
-compatibility approximation, explicitly mark it as an engine gap, and do not
-enable `DUEL_TCG_FAST_EFFECT_IGNITION`. The latter grants a window after any
-chain end and is too broad; the former has the correct Summon gate but the
-wrong location restriction. Exact TCG behavior would require a core change,
-which is out of scope and must not be hidden in Tengu data.
+All 296 canonical v2 errata evaluate at the snapshot without runtime changes:
 
-### Xyz conclusion
-
-The 2011 rulebook directly supports the ordinary early-Xyz model: same-Level
-face-up monsters are overlaid, materials are underneath the Xyz monster, and
-detaching sends a material to the Graveyard. It also states that Xyz materials
-are not cards on the field, that tokens cannot be Xyz materials, and that an
-Xyz monster leaving the field sends its materials to the Graveyard. The pinned
-core has native Xyz material and detach handling and no separate “early Xyz”
-flag. No source found in this gate establishes a TCG-specific early-Xyz
-behavior that the current data profile can or must toggle. Card-specific
-rulings still need ordinary test coverage in the implementation task.
-
-## 296-record erratum audit
-
-This was run entirely in memory at `2011-09-17`; it did not create a Tengu
-format or alter any record. Every canonical record loaded as `ErratumV2`.
-
-| result | records |
-| --- | ---: |
+| selection result | records |
+|---|---:|
 | determinate MODERN | 33 |
 | determinate `reuse-upstream` | 52 |
 | determinate `known-gap` | 38 |
 | determinate `none-needed` | 3 |
-| determinate total | 126 |
-| ambiguous, MODERN possible | 161 |
-| ambiguous, MODERN impossible | 9 |
-| ambiguous total | 170 |
-| records with an unresolved candidate implementation | 47 |
+| ambiguous, modern possible | 161 |
+| ambiguous, modern impossible | 9 |
 | unresolved candidate-state occurrences | 89 |
 
-Under the existing Edison-style explicit `unresolved_policy: modern`, the
-determinately historical substitutions would be 52 upstream passcodes; the
-exact card/passcode result is reproducible with:
-
-```console
-python3 - <<'PY'
-import datetime as d
-from pathlib import Path
-from retroformats.repo import Repository
-from retroformats.model import ErratumV2
-from retroformats.lflist import select_applicable_errata
-from dataclasses import replace
-r = Repository.load(Path('.'))
-f = replace(r.formats['2010-03-edison'], id='research-tengu', snapshot='2011-09-17',
-            reference_parity=None, errata_include=[], errata_exclude=[])
-print(len(select_applicable_errata(f, r)))
-for code, o in sorted(select_applicable_errata(f, r).items()):
-    print(code, o.implementation.historical_passcode)
-PY
-```
-
-That output is an audit of what the current policy would do, not a decision
-that the future Tengu format should adopt that policy. A canonical Tengu
-format must either supply a sourced unresolved policy or leave the 170
-ambiguous cases visibly unresolved; it must not create per-card overrides to
-silence diagnostics. The 170 diagnostic IDs are mechanically the records whose
-`selection_at(date)` result is ambiguous, and the test added by this gate
-pins the total and the 161/9 modern-possibility split.
-
-The audit answers the central architecture question: the v2 erratum database
-does make the format’s historical substitutions largely automatic where
-chronology is determinate, but it does not erase unresolved chronology or
-implementation gaps. That residual uncertainty is represented by the existing
-selection model rather than a Tengu-specific abstraction.
+The existing Edison-style unresolved policy would select 52 historical
+passcodes, but that is an audit result rather than a Tengu override decision.
+No per-format erratum override is created by this gate.
 
 ## Edison → Tengu comparison
 
 | dimension | Edison (`2010-04-24`) | proposed Tengu (`2011-09-17`) |
-| --- | --- | --- |
-| event | SJC Edison | YCS Toronto |
-| pool | 3,673 verified cards | not yet certifiable; current incomplete projection 4,037 |
+|---|---|---|
+| pool method | community retrospective, Edison cutoff | certified all-TCG release cutoff |
+| release ledger | through 2010-12-31 | through 2011-09-17 |
+| pool projection | existing materialised Edison pool | fresh 4,563-card research projection |
 | list | March 2010 | September 2011, 51/65/18 |
-| Xyz | illegal | legal; first Xyz-era snapshot |
-| first-turn draw | yes | yes |
-| Field Spell | one face-up | one face-up |
-| 0-ATK tie | both destroyed (`DUEL_0_ATK_DESTROYED`) | neither destroyed; omit Edison flag |
-| ignition priority | TCG behavior, approximated by OCG-obsolete flag | same TCG behavior and same approximation |
-| erratum audit | older snapshot with Edison policy | 126 determinate, 170 ambiguous at this date |
-| engine gap | exact TCG ignition priority and several unresolved flags | same ignition gap; no new historical flag found |
+| rules | MR1-era TCG profile | MR2-era profile plus ignition approximation |
+| Xyz | unavailable | legal, native core handling |
+| errata data | same 296-record v2 corpus | same corpus evaluated at a later date |
+| unresolved historical states | represented by v2 | represented by v2; not overridden here |
 
-The pool and list differences are historical inputs, not independent format
-hand-authoring. The only expected rule-profile flag change from Edison is
-removal of `DUEL_0_ATK_DESTROYED`; Xyz is enabled by allowing `TYPE_XYZ`, not by
-inventing a new engine mode.
+The difference is produced by the shared release ledger and snapshot, not by
+hand-authoring a Tengu card list.
 
-## Architecture stress-test verdict
+## Architecture verdict
 
-**A — existing repository architecture is sufficient for a truthful canonical
-Tengu data implementation**, subject to two explicitly separate qualifications:
+**Existing architecture is sufficient for the proposed Tengu implementation
+inputs.** A future canonical implementation needs only new data files and
+tests: `formats/2011-09-tengu/format.json` and sources, a September 2011 TCG
+banlist, a certified release-cutoff pool with the documented policy entries,
+an explicit TCG MR2-era rule profile, and format-specific tests/reporting.
 
-1. The release dataset must be extended and certified through September 17,
-   2011 before a pool can be materialised. This is missing source data, not a
-   model deficiency demonstrated by this gate.
-2. Pinned `ygopro-core` cannot express the exact historical TCG ignition
-   priority because its two relevant dimensions are coupled. The existing
-   rule-profile vocabulary can record this as a known engine gap and retain a
-   least-wrong approximation; exact duel-engine fidelity would require a
-   future core change, which this gate does not authorize.
+No change to `retroformats/model.py`, `retroformats/lflist.py`,
+`retroformats/validate.py`, `schemas/`, or generated `dist/` is required by
+this gate. The only known approximation is in the existing ocgcore
+ignition-priority behavior. If exact TCG ignition behavior is later required,
+that is an engine/core task, not a data-file workaround.
 
-No deficiency requiring a change to `retroformats/model.py`,
-`retroformats/lflist.py`, `retroformats/validate.py`, or `schemas/` was found.
-No per-format erratum override is justified by this gate.
-
-## Exact next implementation work
-
-The next task should create only after review:
-
-* `formats/2011-09-tengu/format.json` and its format source record;
-* a certified TCG September 2011 banlist under `data/banlists/tcg/`;
-* a release-derived, materialised Tengu pool under `data/pools/` after the
-  2011 ledger extension and gap certification;
-* a Tengu rule profile under `data/rule-profiles/`, with the six explicit
-  flags above and the ignition approximation documented as a known gap;
-* generated `dist/` output and focused tests only after the source data passes
-  validation.
-
-This gate intentionally created none of those canonical files and did not
-modify the 296 errata, runtime, schemas, existing formats, or `dist/`.
-
-## Reproducibility checks
-
-The research-only checks are in
-[`tests/test_tengu_format_gate.py`](../../tests/test_tengu_format_gate.py).
-They verify that no Tengu artifacts exist, the packet has exact internal list
-counts and unique identities, all 296 v2 errata evaluate at the proposed
-snapshot, and the current release projection remains explicitly uncertified.
-They do not use a network request or mutate the repository.
-
-At gate time the normal live invariants remain: canonical errata `296 v2 / 0
-v1`, GOAT hash `0x28E9FC02`, Edison pool `3,673`, and no canonical Tengu data.
+Unresolved work for the next implementation task is limited to final review of
+the policy wording and community-pool differences, and creation of the
+canonical Tengu data files. This gate does not authorize that implementation.

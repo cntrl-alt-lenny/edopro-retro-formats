@@ -1,0 +1,110 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-3d-bonds-beyond-time-movie-pack",
+  "code": "YMP1",
+  "name": "Yu-Gi-Oh! 3D Bonds Beyond Time Movie Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-02-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-02-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-02-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 598988,
+      "name": "Malefic Rainbow Dragon",
+      "numbers": [
+        "YMP1-EN005"
+      ]
+    },
+    {
+      "passcode": 1710476,
+      "name": "Malefic Cyber End Dragon",
+      "numbers": [
+        "YMP1-EN004"
+      ]
+    },
+    {
+      "passcode": 8310162,
+      "name": "Malefic Paradox Dragon",
+      "numbers": [
+        "YMP1-EN007"
+      ]
+    },
+    {
+      "passcode": 9433350,
+      "name": "Malefic Blue-Eyes White Dragon",
+      "numbers": [
+        "YMP1-EN002"
+      ]
+    },
+    {
+      "passcode": 27564031,
+      "name": "Malefic World",
+      "numbers": [
+        "YMP1-EN008"
+      ]
+    },
+    {
+      "passcode": 37993923,
+      "name": "Junk Gardna",
+      "numbers": [
+        "YMP1-EN006"
+      ]
+    },
+    {
+      "passcode": 53063039,
+      "name": "Malefic Claw Stream",
+      "numbers": [
+        "YMP1-EN009"
+      ]
+    },
+    {
+      "passcode": 55343236,
+      "name": "Malefic Red-Eyes Black Dragon",
+      "numbers": [
+        "YMP1-EN001"
+      ]
+    },
+    {
+      "passcode": 74509280,
+      "name": "Malefic Parallel Gear",
+      "numbers": [
+        "YMP1-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! 3D Bonds Beyond Time Movie Pack'; printings from the YGOPRODeck bulk dump."
+}

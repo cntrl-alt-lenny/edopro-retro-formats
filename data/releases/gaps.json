@@ -779,6 +779,63 @@
       "sources": [
         "yugipedia-set-pages"
       ]
+    },
+    {
+      "id": "gap-bonds-bluray-promo",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! 3D Bonds Beyond Time Blu-ray promotional card"
+      ],
+      "territories": [
+        "tcg-eu"
+      ],
+      "possible_from": "2011-07-25",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "The Blu-ray's Malefic Red-Eyes Black Dragon (MOV2-EN001) is the same canonical card already present in the TCG Movie Pack (YMP1-EN001), released earlier in 2011. The missing roster therefore cannot add a card to a 2011-09-17 TCG cutoff pool.",
+        "cards": [
+          {
+            "passcode": 55343236,
+            "name": "Malefic Red-Eyes Black Dragon"
+          }
+        ],
+        "sources": [
+          "yugipedia-set-pages",
+          "ygoprodeck-api",
+          "konami-2011-product-archive"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "id": "gap-wc2011-prize-products",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! World Championship 2011 prize cards"
+      ],
+      "territories": [
+        "tcg"
+      ],
+      "possible_from": "2011-08-14",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "The product is the 2011 World Championship prize-card set. Its English cards are tournament-ineligible prize cards rather than ordinary TCG releases; the source page explicitly identifies them as prize cards and the official event material treats them as prizes, not tournament pool releases. The missing roster therefore contributes no playable TCG card to the Toronto snapshot.",
+        "sources": [
+          "yugipedia-set-pages",
+          "konami-2011-product-archive"
+        ]
+      },
+      "sources": [
+        "yugipedia-set-pages"
+      ]
     }
   ],
   "sources": [

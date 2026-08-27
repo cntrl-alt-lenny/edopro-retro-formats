@@ -18,8 +18,8 @@
       "title": "Project Ignis BabelCDB (card databases)",
       "url": "https://github.com/ProjectIgnis/BabelCDB",
       "publisher": "Project Ignis",
-      "revision": "da54f282c7fe8eb90b5574b87afa455391c08f0b",
-      "retrieved": "2026-08-19",
+      "revision": "0659607453a7d79d1adefbfe1ef7477d3c92434c",
+      "retrieved": "2026-08-27",
       "used_for": "Card identities (passcode, name, alias, scope) from cards.cdb; pre-errata GOAT card versions and texts from goat-entries.cdb.",
       "reliability_notes": "The canonical card database of the EDOPro ecosystem."
     },
@@ -398,6 +398,66 @@
       "title": "Legacy Yu-Gi-Oh! Wiki (now Fandom-hosted), \"Forum:Priority Q!\" (thread active 2010-03-31, 14:54-18:43 UTC)",
       "url": "https://yugioh.fandom.com/wiki/Forum:Priority_Q!",
       "notes": "A period ruling-query thread dated 2010-03-31 - less than four weeks before SJC Edison (2010-04-24) - directly corroborating the \"does not have to be the Summoned monster\" aspect of the derived row-1 rule, using Catapult Turtle as the worked example. User ATEMVEGETA, 2010-03-31 17:58 UTC: \"After a monster's Summon the Turn Player has priority to activate also an Ignition Effect of a monster other than that was Summoned. You can activate Catapult Turtle's effect since it is an Ignition Effect and tribute the Summoned monster before the opponent can respond with effects to the Summon.\" Same user, 18:26 UTC, generalizing: \"after you Summon a monster you can activate a monster's Ignition Effect before the opponent can respond with effects. By the way, you cannot activate it if there is a Trigger Effect that is triggered with a monster's Summon\" - independently corroborating the \"Summon that does not itself start a chain\" nuance also attested by yugipedia-forum-sangan-priority-2010. Catapult Turtle is a Monster-Zone card, so this thread does not independently test the location-unrestricted axis (see yugiohwiki-forum-priority-q-2010 for that). A contemporaneous community ruling-query thread, not an official Konami/UDE document. Site lineage: as with Forum:Priority Q, this page survives on the legacy \"Yu-Gi-Oh! Wiki\" (now Fandom-hosted); an identical-content mirror also exists at https://yugipedia.com/wiki/Forum:Priority_Q! Direct HTML fetches of the fandom.com URL are blocked by a Cloudflare challenge; content was retrieved and verified via the MediaWiki API on both domains. Retrieved/verified 2026-08-21."
+    },
+    {
+      "id": "konami-2011-product-archive",
+      "kind": "official",
+      "title": "Konami TCG past-products archive",
+      "url": "https://www.yugioh-card.com/en/products/past_products/others-archives/",
+      "publisher": "Konami",
+      "retrieved": "2026-08-27",
+      "used_for": "Primary product/date cross-checks for the 2011 TCG release-ledger extension, including product availability before the proposed 2011-09-17 snapshot.",
+      "reliability_notes": "Official historical product archive; individual product pages are cited in the Tengu source dossier where a product-specific date or legality boundary matters."
+    },
+    {
+      "id": "konami-september-2011-list",
+      "kind": "official",
+      "title": "Konami 2011 September 1 Forbidden and Limited List",
+      "url": "https://www.yugioh-card.com/japan/event/limitregulation/?list=201109",
+      "publisher": "Konami",
+      "retrieved": "2026-08-27",
+      "used_for": "Primary cross-check of the September 2011 TCG Forbidden/Limited/Semi-Limited counts and card identities in the research-only Tengu packet.",
+      "reliability_notes": "Official historical list page displays OCG and TCG columns; the packet uses the TCG column only."
+    },
+    {
+      "id": "konami-2011-product-pages",
+      "kind": "official",
+      "title": "Konami 2011 TCG product pages",
+      "url": "https://www.yugioh-card.com/en/products/past_products/",
+      "publisher": "Konami",
+      "retrieved": "2026-08-27",
+      "used_for": "Product-specific tournament-legal dates and product-boundary cross-checks for the 2011 release-ledger extension.",
+      "reliability_notes": "Official archive index; the dossier records the individual pages consulted for load-bearing date claims."
+    },
+    {
+      "id": "formatlibrary-tengu",
+      "kind": "community-site",
+      "title": "Format Library - Tengu format record",
+      "url": "https://formatlibrary.com/api/formats/tengu",
+      "publisher": "Format Library",
+      "retrieved": "2026-08-27",
+      "used_for": "Community cross-check of the proposed Tengu snapshot date, event name, TCG category, September 2011 banlist and Generation Force boundary.",
+      "reliability_notes": "Strong community format-definition source, not primary evidence for release chronology or tournament policy."
+    },
+    {
+      "id": "tenguformat-ycs-toronto",
+      "kind": "community-site",
+      "title": "TenguFormat.com - YCS Toronto 2011",
+      "url": "https://tenguformat.com/ycs-toronto-2011/",
+      "publisher": "TenguFormat.com",
+      "retrieved": "2026-08-27",
+      "used_for": "Community cross-check of the YCS Toronto event date, Tengu naming, expected card-pool boundary and historical format context.",
+      "reliability_notes": "Community retrospective; useful for convention and discovery, not sole authority for official dates or legality."
+    },
+    {
+      "id": "konami-card-database",
+      "kind": "official",
+      "title": "Konami TCG card database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&request_locale=en",
+      "publisher": "Konami",
+      "retrieved": "2026-08-27",
+      "used_for": "Cross-check of individual TCG card identities and printing-era product numbers, including the JUMP-EN048 Malefic Truth Dragon boundary resolution.",
+      "reliability_notes": "Official card database; current pages are used for identity and set-lineage cross-checks, not as a substitute for archived historical tournament policy."
     }
   ]
 }

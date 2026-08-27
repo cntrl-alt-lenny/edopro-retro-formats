@@ -1,0 +1,321 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "dragunity-legion-structure-deck",
+  "code": "SDDL",
+  "name": "Dragunity Legion Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-03-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-03-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-03-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 876330,
+      "name": "Dragunity Arma Mystletainn",
+      "numbers": [
+        "SDDL-EN002"
+      ]
+    },
+    {
+      "passcode": 980973,
+      "name": "Armed Dragon LV3",
+      "numbers": [
+        "SDDL-EN018"
+      ]
+    },
+    {
+      "passcode": 12800777,
+      "name": "Garuda the Wind Spirit",
+      "numbers": [
+        "SDDL-EN014"
+      ]
+    },
+    {
+      "passcode": 13361027,
+      "name": "Dragunity Darkspear",
+      "numbers": [
+        "SDDL-EN007"
+      ]
+    },
+    {
+      "passcode": 18060565,
+      "name": "Dragunity Primus Pilus",
+      "numbers": [
+        "SDDL-EN009"
+      ]
+    },
+    {
+      "passcode": 28183605,
+      "name": "Dragunity Dux",
+      "numbers": [
+        "SDDL-EN004"
+      ]
+    },
+    {
+      "passcode": 29401950,
+      "name": "Bottomless Trap Hole",
+      "numbers": [
+        "SDDL-EN037"
+      ]
+    },
+    {
+      "passcode": 30461781,
+      "name": "Legacy of Yata-Garasu",
+      "numbers": [
+        "SDDL-EN033"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "SDDL-EN027"
+      ]
+    },
+    {
+      "passcode": 31553716,
+      "name": "Spear Dragon",
+      "numbers": [
+        "SDDL-EN016"
+      ]
+    },
+    {
+      "passcode": 36870345,
+      "name": "Dragunity Aklys",
+      "numbers": [
+        "SDDL-EN003"
+      ]
+    },
+    {
+      "passcode": 37507488,
+      "name": "Relieve Monster",
+      "numbers": [
+        "SDDL-EN032"
+      ]
+    },
+    {
+      "passcode": 39191307,
+      "name": "Masked Dragon",
+      "numbers": [
+        "SDDL-EN020"
+      ]
+    },
+    {
+      "passcode": 43586926,
+      "name": "Twin-Headed Behemoth",
+      "numbers": [
+        "SDDL-EN017"
+      ]
+    },
+    {
+      "passcode": 44095762,
+      "name": "Mirror Force",
+      "numbers": [
+        "SDDL-EN035"
+      ]
+    },
+    {
+      "passcode": 46384672,
+      "name": "Armed Dragon LV5",
+      "numbers": [
+        "SDDL-EN019"
+      ]
+    },
+    {
+      "passcode": 51962254,
+      "name": "Hunter Owl",
+      "numbers": [
+        "SDDL-EN013"
+      ]
+    },
+    {
+      "passcode": 52503575,
+      "name": "Final Attack Orders",
+      "numbers": [
+        "SDDL-EN034"
+      ]
+    },
+    {
+      "passcode": 53567095,
+      "name": "Icarus Attack",
+      "numbers": [
+        "SDDL-EN039"
+      ]
+    },
+    {
+      "passcode": 54178050,
+      "name": "Dragon's Rage",
+      "numbers": [
+        "SDDL-EN036"
+      ]
+    },
+    {
+      "passcode": 54455664,
+      "name": "Dragunity Brandistock",
+      "numbers": [
+        "SDDL-EN010"
+      ]
+    },
+    {
+      "passcode": 54578613,
+      "name": "Dragunity Legionnaire",
+      "numbers": [
+        "SDDL-EN005"
+      ]
+    },
+    {
+      "passcode": 55991637,
+      "name": "Dragon's Gunfire",
+      "numbers": [
+        "SDDL-EN025"
+      ]
+    },
+    {
+      "passcode": 56747793,
+      "name": "United We Stand",
+      "numbers": [
+        "SDDL-EN023"
+      ]
+    },
+    {
+      "passcode": 59744639,
+      "name": "Windstorm of Etaqua",
+      "numbers": [
+        "SDDL-EN031"
+      ]
+    },
+    {
+      "passcode": 62265044,
+      "name": "Dragon Ravine",
+      "numbers": [
+        "SDDL-EN021"
+      ]
+    },
+    {
+      "passcode": 63487632,
+      "name": "Dragunity Arma Leyvaten",
+      "numbers": [
+        "SDDL-EN001"
+      ]
+    },
+    {
+      "passcode": 72892473,
+      "name": "Card Destruction",
+      "numbers": [
+        "SDDL-EN030"
+      ]
+    },
+    {
+      "passcode": 74848038,
+      "name": "Monster Reincarnation",
+      "numbers": [
+        "SDDL-EN028"
+      ]
+    },
+    {
+      "passcode": 79333300,
+      "name": "Spiritual Wind Art - Miyabi",
+      "numbers": [
+        "SDDL-EN038"
+      ]
+    },
+    {
+      "passcode": 80549379,
+      "name": "Dragunity Javelin",
+      "numbers": [
+        "SDDL-EN011"
+      ]
+    },
+    {
+      "passcode": 81385346,
+      "name": "Stamping Destruction",
+      "numbers": [
+        "SDDL-EN026"
+      ]
+    },
+    {
+      "passcode": 81439173,
+      "name": "Foolish Burial",
+      "numbers": [
+        "SDDL-EN029"
+      ]
+    },
+    {
+      "passcode": 81661951,
+      "name": "Dragunity Militum",
+      "numbers": [
+        "SDDL-EN008"
+      ]
+    },
+    {
+      "passcode": 81962318,
+      "name": "Dragunity Tribus",
+      "numbers": [
+        "SDDL-EN006"
+      ]
+    },
+    {
+      "passcode": 82199284,
+      "name": "Mist Valley Falcon",
+      "numbers": [
+        "SDDL-EN012"
+      ]
+    },
+    {
+      "passcode": 83746708,
+      "name": "Mage Power",
+      "numbers": [
+        "SDDL-EN024"
+      ]
+    },
+    {
+      "passcode": 84834865,
+      "name": "Flying Kamakiri #1",
+      "numbers": [
+        "SDDL-EN015"
+      ]
+    },
+    {
+      "passcode": 99659159,
+      "name": "Dragon Mastery",
+      "numbers": [
+        "SDDL-EN022"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Dragunity Legion Structure Deck'; printings from the YGOPRODeck bulk dump."
+}

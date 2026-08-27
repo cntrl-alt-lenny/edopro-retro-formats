@@ -1,0 +1,171 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-league-3-participation-cards",
+  "code": "DL12",
+  "name": "Duelist League 3 participation cards",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3897065,
+      "name": "Super Vehicroid - Stealth Union",
+      "numbers": [
+        "DL12-EN011"
+      ]
+    },
+    {
+      "passcode": 26205777,
+      "name": "Thestalos the Firestorm Monarch",
+      "numbers": [
+        "DL12-EN007"
+      ]
+    },
+    {
+      "passcode": 28529976,
+      "name": "Super Solar Nutrient",
+      "numbers": [
+        "DL12-EN017"
+      ]
+    },
+    {
+      "passcode": 38280762,
+      "name": "Enishi, Shien's Chancellor",
+      "numbers": [
+        "DL12-EN009"
+      ]
+    },
+    {
+      "passcode": 44595286,
+      "name": "Light of Judgment",
+      "numbers": [
+        "DL12-EN020"
+      ]
+    },
+    {
+      "passcode": 44656491,
+      "name": "Messenger of Peace",
+      "numbers": [
+        "DL12-EN013"
+      ]
+    },
+    {
+      "passcode": 57116033,
+      "name": "Winged Kuriboh",
+      "numbers": [
+        "DL12-EN008"
+      ]
+    },
+    {
+      "passcode": 60800381,
+      "name": "Junk Warrior",
+      "numbers": [
+        "DL12-EN012"
+      ]
+    },
+    {
+      "passcode": 60806437,
+      "name": "UFO Turtle",
+      "numbers": [
+        "DL12-EN002"
+      ]
+    },
+    {
+      "passcode": 62279055,
+      "name": "Magic Cylinder",
+      "numbers": [
+        "DL12-EN019"
+      ]
+    },
+    {
+      "passcode": 63977008,
+      "name": "Junk Synchron",
+      "numbers": [
+        "DL12-EN010"
+      ]
+    },
+    {
+      "passcode": 73431236,
+      "name": "Iron Blacksmith Kotetsu",
+      "numbers": [
+        "DL12-EN006"
+      ]
+    },
+    {
+      "passcode": 76895648,
+      "name": "Dangerous Machine Type-6",
+      "numbers": [
+        "DL12-EN016"
+      ]
+    },
+    {
+      "passcode": 77585513,
+      "name": "Jinzo",
+      "numbers": [
+        "DL12-EN005"
+      ]
+    },
+    {
+      "passcode": 85852291,
+      "name": "Magical Mallet",
+      "numbers": [
+        "DL12-EN015"
+      ]
+    },
+    {
+      "passcode": 89943723,
+      "name": "Elemental HERO Neos",
+      "numbers": [
+        "DL12-EN001"
+      ]
+    },
+    {
+      "passcode": 95178994,
+      "name": "Giant Germ",
+      "numbers": [
+        "DL12-EN003"
+      ]
+    },
+    {
+      "passcode": 96947648,
+      "name": "Salvage",
+      "numbers": [
+        "DL12-EN014"
+      ]
+    },
+    {
+      "passcode": 97077563,
+      "name": "Call of the Haunted",
+      "numbers": [
+        "DL12-EN018"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist League 3 participation cards'; printings from the YGOPRODeck bulk dump."
+}

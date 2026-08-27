@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "demo-pack",
+  "code": "DEM1",
+  "name": "Demo Pack",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-02-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2460565,
+      "name": "Marauding Captain",
+      "numbers": [
+        "DEM1-EN008"
+      ]
+    },
+    {
+      "passcode": 11321183,
+      "name": "Dark Blade",
+      "numbers": [
+        "DEM1-EN002"
+      ]
+    },
+    {
+      "passcode": 21015833,
+      "name": "Hayabusa Knight",
+      "numbers": [
+        "DEM1-EN006"
+      ]
+    },
+    {
+      "passcode": 27053506,
+      "name": "Secret Barrel",
+      "numbers": [
+        "DEM1-EN017"
+      ]
+    },
+    {
+      "passcode": 36361633,
+      "name": "Threatening Roar",
+      "numbers": [
+        "DEM1-EN018"
+      ]
+    },
+    {
+      "passcode": 37265642,
+      "name": "Sabersaurus",
+      "numbers": [
+        "DEM1-EN003"
+      ]
+    },
+    {
+      "passcode": 51196174,
+      "name": "The Calculator",
+      "numbers": [
+        "DEM1-EN012"
+      ]
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug",
+      "numbers": [
+        "DEM1-EN005"
+      ]
+    },
+    {
+      "passcode": 57882509,
+      "name": "Mask of Weakness",
+      "numbers": [
+        "DEM1-EN016"
+      ]
+    },
+    {
+      "passcode": 60306104,
+      "name": "No Entry!!",
+      "numbers": [
+        "DEM1-EN020"
+      ]
+    },
+    {
+      "passcode": 66362965,
+      "name": "The Fiend Megacyber",
+      "numbers": [
+        "DEM1-EN007"
+      ]
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure",
+      "numbers": [
+        "DEM1-EN013"
+      ]
+    },
+    {
+      "passcode": 69247929,
+      "name": "Gene-Warped Warwolf",
+      "numbers": [
+        "DEM1-EN004"
+      ]
+    },
+    {
+      "passcode": 69303178,
+      "name": "Majestic Mech - Ohka",
+      "numbers": [
+        "DEM1-EN011"
+      ]
+    },
+    {
+      "passcode": 69579761,
+      "name": "Des Koala",
+      "numbers": [
+        "DEM1-EN010"
+      ]
+    },
+    {
+      "passcode": 70368879,
+      "name": "Upstart Goblin",
+      "numbers": [
+        "DEM1-EN014"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "DEM1-EN001"
+      ]
+    },
+    {
+      "passcode": 74131780,
+      "name": "Exiled Force",
+      "numbers": [
+        "DEM1-EN009"
+      ]
+    },
+    {
+      "passcode": 78211862,
+      "name": "Rising Energy",
+      "numbers": [
+        "DEM1-EN019"
+      ]
+    },
+    {
+      "passcode": 95281259,
+      "name": "The Warrior Returning Alive",
+      "numbers": [
+        "DEM1-EN015"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Demo Pack'; printings from the YGOPRODeck bulk dump."
+}

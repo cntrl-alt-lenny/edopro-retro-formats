@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-5",
+  "code": "DT05",
+  "name": "Duel Terminal 5",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-05-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 13220032,
+      "name": "Vylon Charger",
+      "numbers": [
+        "DT05-EN032"
+      ]
+    },
+    {
+      "passcode": 52786469,
+      "name": "Laval Warrior",
+      "numbers": [
+        "DT05-EN024"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal 5'; printings from the YGOPRODeck bulk dump."
+}

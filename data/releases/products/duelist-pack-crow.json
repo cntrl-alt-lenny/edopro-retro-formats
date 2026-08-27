@@ -1,0 +1,258 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-crow",
+  "code": "DP11",
+  "name": "Duelist Pack: Crow",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-05-31",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-05-27",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-05-27",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2009101,
+      "name": "Blackwing - Gale the Whirlwind",
+      "numbers": [
+        "DP11-EN001"
+      ]
+    },
+    {
+      "passcode": 4168871,
+      "name": "Cards for Black Feathers",
+      "numbers": [
+        "DP11-EN020"
+      ]
+    },
+    {
+      "passcode": 9012916,
+      "name": "Black-Winged Dragon",
+      "numbers": [
+        "DP11-EN016"
+      ]
+    },
+    {
+      "passcode": 9109991,
+      "name": "Blackwing - Fane the Steel Chain",
+      "numbers": [
+        "DP11-EN007"
+      ]
+    },
+    {
+      "passcode": 11613567,
+      "name": "Blackwing - Elphin the Raven",
+      "numbers": [
+        "DP11-EN005"
+      ]
+    },
+    {
+      "passcode": 14785765,
+      "name": "Blackwing - Zephyros the Elite",
+      "numbers": [
+        "DP11-EN012"
+      ]
+    },
+    {
+      "passcode": 22628574,
+      "name": "Fake Feather",
+      "numbers": [
+        "DP11-EN024"
+      ]
+    },
+    {
+      "passcode": 22835145,
+      "name": "Blackwing - Blizzard the Far North",
+      "numbers": [
+        "DP11-EN003"
+      ]
+    },
+    {
+      "passcode": 25435080,
+      "name": "Blackwing - Bombardment",
+      "numbers": [
+        "DP11-EN026"
+      ]
+    },
+    {
+      "passcode": 26775203,
+      "name": "Blackwing - Ghibli the Searing Wind",
+      "numbers": [
+        "DP11-EN008"
+      ]
+    },
+    {
+      "passcode": 33236860,
+      "name": "Blackwing - Silverwind the Ascendant",
+      "numbers": [
+        "DP11-EN015"
+      ]
+    },
+    {
+      "passcode": 40279770,
+      "name": "Black Feather Beacon",
+      "numbers": [
+        "DP11-EN029"
+      ]
+    },
+    {
+      "passcode": 41902352,
+      "name": "Blackwing - Kochi the Daybreak",
+      "numbers": [
+        "DP11-EN010"
+      ]
+    },
+    {
+      "passcode": 46710683,
+      "name": "Blackwing - Mistral the Silver Shield",
+      "numbers": [
+        "DP11-EN006"
+      ]
+    },
+    {
+      "passcode": 49003716,
+      "name": "Blackwing - Bora the Spear",
+      "numbers": [
+        "DP11-EN002"
+      ]
+    },
+    {
+      "passcode": 52833089,
+      "name": "Black Thunder",
+      "numbers": [
+        "DP11-EN027"
+      ]
+    },
+    {
+      "passcode": 52869807,
+      "name": "Blackwing - Gust the Backblast",
+      "numbers": [
+        "DP11-EN009"
+      ]
+    },
+    {
+      "passcode": 58820853,
+      "name": "Blackwing - Shura the Blue Flame",
+      "numbers": [
+        "DP11-EN004"
+      ]
+    },
+    {
+      "passcode": 59839761,
+      "name": "Delta Crow - Anti Reverse",
+      "numbers": [
+        "DP11-EN022"
+      ]
+    },
+    {
+      "passcode": 64952266,
+      "name": "Against the Wind",
+      "numbers": [
+        "DP11-EN018"
+      ]
+    },
+    {
+      "passcode": 67779172,
+      "name": "Black-Winged Strafe",
+      "numbers": [
+        "DP11-EN019"
+      ]
+    },
+    {
+      "passcode": 69031175,
+      "name": "Blackwing Armor Master",
+      "numbers": [
+        "DP11-EN013"
+      ]
+    },
+    {
+      "passcode": 72278479,
+      "name": "Black Return",
+      "numbers": [
+        "DP11-EN030"
+      ]
+    },
+    {
+      "passcode": 76913983,
+      "name": "Blackwing Armed Wing",
+      "numbers": [
+        "DP11-EN014"
+      ]
+    },
+    {
+      "passcode": 86223870,
+      "name": "Level Retuner",
+      "numbers": [
+        "DP11-EN023"
+      ]
+    },
+    {
+      "passcode": 87390067,
+      "name": "Blackwing - Jetstream the Blue Sky",
+      "numbers": [
+        "DP11-EN011"
+      ]
+    },
+    {
+      "passcode": 88341502,
+      "name": "Ebon Arrow",
+      "numbers": [
+        "DP11-EN021"
+      ]
+    },
+    {
+      "passcode": 88928798,
+      "name": "Guard Mines",
+      "numbers": [
+        "DP11-EN028"
+      ]
+    },
+    {
+      "passcode": 89040386,
+      "name": "Blackwing - Backlash",
+      "numbers": [
+        "DP11-EN025"
+      ]
+    },
+    {
+      "passcode": 94681654,
+      "name": "Raptor Wing Strike",
+      "numbers": [
+        "DP11-EN017"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Crow'; printings from the YGOPRODeck bulk dump."
+}

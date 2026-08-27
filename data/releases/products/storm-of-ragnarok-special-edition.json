@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "storm-of-ragnarok-special-edition",
+  "code": "STOR",
+  "name": "Storm of Ragnarok: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-03-22",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 47297616,
+      "name": "Light and Darkness Dragon",
+      "numbers": [
+        "STOR-ENSE1"
+      ]
+    },
+    {
+      "passcode": 78792195,
+      "name": "Hand of the Six Samurai",
+      "numbers": [
+        "STOR-ENSE2"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Storm of Ragnarok: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

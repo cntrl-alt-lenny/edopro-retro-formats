@@ -1,0 +1,185 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "turbo-pack-booster-five",
+  "code": "TU05",
+  "name": "Turbo Pack: Booster Five",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-04-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-04-09",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3819470,
+      "name": "Seven Tools of the Bandit",
+      "numbers": [
+        "TU05-EN019"
+      ]
+    },
+    {
+      "passcode": 23693634,
+      "name": "Colossal Fighter",
+      "numbers": [
+        "TU05-EN000"
+      ]
+    },
+    {
+      "passcode": 30683373,
+      "name": "Shield Crush",
+      "numbers": [
+        "TU05-EN018"
+      ]
+    },
+    {
+      "passcode": 31550470,
+      "name": "Escape from the Dark Dimension",
+      "numbers": [
+        "TU05-EN010"
+      ]
+    },
+    {
+      "passcode": 33093439,
+      "name": "Cyber Eltanin",
+      "numbers": [
+        "TU05-EN008"
+      ]
+    },
+    {
+      "passcode": 33950246,
+      "name": "Royal Command",
+      "numbers": [
+        "TU05-EN020"
+      ]
+    },
+    {
+      "passcode": 44223284,
+      "name": "Abyssal Kingshark",
+      "numbers": [
+        "TU05-EN013"
+      ]
+    },
+    {
+      "passcode": 45906428,
+      "name": "Miracle Fusion",
+      "numbers": [
+        "TU05-EN017"
+      ]
+    },
+    {
+      "passcode": 51119924,
+      "name": "Puppet Plant",
+      "numbers": [
+        "TU05-EN006"
+      ]
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole",
+      "numbers": [
+        "TU05-EN001"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "TU05-EN009"
+      ]
+    },
+    {
+      "passcode": 58996430,
+      "name": "Wulf, Lightsworn Beast",
+      "numbers": [
+        "TU05-EN007"
+      ]
+    },
+    {
+      "passcode": 60417395,
+      "name": "Darkness Neosphere",
+      "numbers": [
+        "TU05-EN016"
+      ]
+    },
+    {
+      "passcode": 65685470,
+      "name": "Spirit of the Six Samurai",
+      "numbers": [
+        "TU05-EN014"
+      ]
+    },
+    {
+      "passcode": 72345736,
+      "name": "Six Samurai United",
+      "numbers": [
+        "TU05-EN004"
+      ]
+    },
+    {
+      "passcode": 78868776,
+      "name": "Gladiator Beast Laquari",
+      "numbers": [
+        "TU05-EN002"
+      ]
+    },
+    {
+      "passcode": 79852326,
+      "name": "Zoma the Spirit",
+      "numbers": [
+        "TU05-EN011"
+      ]
+    },
+    {
+      "passcode": 88671720,
+      "name": "Black Salvo",
+      "numbers": [
+        "TU05-EN015"
+      ]
+    },
+    {
+      "passcode": 91133740,
+      "name": "Snowman Eater",
+      "numbers": [
+        "TU05-EN003"
+      ]
+    },
+    {
+      "passcode": 93260132,
+      "name": "Spell Shattering Arrow",
+      "numbers": [
+        "TU05-EN005"
+      ]
+    },
+    {
+      "passcode": 95492061,
+      "name": "Manju of the Ten Thousand Hands",
+      "numbers": [
+        "TU05-EN012"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Turbo Pack: Booster Five'; printings from the YGOPRODeck bulk dump."
+}

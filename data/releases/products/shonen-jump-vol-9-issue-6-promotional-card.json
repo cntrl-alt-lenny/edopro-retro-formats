@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "shonen-jump-vol-9-issue-6-promotional-card",
+  "code": "JUMP",
+  "name": "Shonen Jump Vol. 9, Issue 6 promotional card",
+  "kind": "promo-subscription",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-06-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4545683,
+      "name": "Meklord Emperor Granel",
+      "numbers": [
+        "JUMP-EN052"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

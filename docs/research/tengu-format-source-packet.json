@@ -7,8 +7,11 @@
     "banlist_effective": "2011-09-01"
   },
   "banlist": {
-    "source": "https://formatlibrary.com/api/banlists/september-2011?category=TCG",
-    "official_cross_check": "https://www.yugioh-card.com/japan/event/limitregulation/?list=201109",
+    "source": "https://www.yugioh-card.com/japan/event/limitregulation/?list=201109",
+    "community_cross_checks": [
+      "https://formatlibrary.com/api/banlists/september-2011?category=TCG",
+      "https://tenguformat.com/banlist/"
+    ],
     "forbidden": [
       {"passcode": 82301904, "name": "Chaos Emperor Dragon - Envoy of the End"},
       {"passcode": 34124316, "name": "Cyber Jar"},
@@ -158,6 +161,71 @@
       {"passcode": 85742772, "name": "Gravity Bind"},
       {"passcode": 53567095, "name": "Icarus Attack"}
     ]
+  },
+  "release_certification": {
+    "through": "2011-09-17",
+    "scope": ["tcg", "tcg-na", "tcg-eu", "tcg-oce"],
+    "ledger_products": 411,
+    "new_pre_toronto_products": 41,
+    "source_derived_printings": 9338,
+    "source_derived_release_events": 585,
+    "coverage_certified": true,
+    "coverage_window": "2002-03-01 through 2011-09-17",
+    "candidate_pool": {
+      "policy": "release-cutoff with all-TCG scope; exclude Duel Terminal 4/5/5a machine-only product events and the three Sneak Peek participation products; include Malefic Truth Dragon via its sourced March 2011 JUMP-EN048 boundary resolution",
+      "included_cards": 4563,
+      "ambiguous_cards": 0,
+      "unknown_printings": 0,
+      "excluded_products": [
+        "duel-terminal-4",
+        "duel-terminal-5",
+        "duel-terminal-5a",
+        "storm-of-ragnarok-sneak-peek-participation-card",
+        "extreme-victory-sneak-peek-participation-card",
+        "generation-force-sneak-peek-participation-card"
+      ],
+      "explicit_includes": [
+        {"passcode": 37115575, "name": "Malefic Truth Dragon", "printing": "JUMP-EN048"}
+      ]
+    },
+    "import_anomalies": {
+      "unmatched_cards": 8,
+      "products_without_printings": 4,
+      "yugipedia_only_products": 34,
+      "resolved_new_yugipedia_only_products": 2,
+      "date_discrepancies": 62,
+      "prefix_mismatched_printings": 4,
+      "ot_conflicts": 1,
+      "unresolved_pool_impacting_gaps": 0
+    },
+    "validator_warning_delta_from_source_commit": {
+      "before": 360,
+      "after": 361,
+      "added": {
+        "releases.number-prefix": [
+          "data/releases/products/duelist-pack-collection-tin-2011.json: DPCT-EN005 does not start with DPC5"
+        ]
+      },
+      "removed": {},
+      "explanation": "The importer preserves YGOPRODeck's DPCT-EN005 printing under the Duelist Pack Collection Tin 2011 product while BabelCDB/Yugipedia identify the product prefix as DPC5. This is an existing upstream set-membership bookkeeping warning, not a pool ambiguity or an unaccounted release gap."
+    },
+    "erratum_audit_at_snapshot": {
+      "records": 296,
+      "determinate_modern": 33,
+      "determinate_reuse_upstream": 52,
+      "determinate_known_gap": 38,
+      "determinate_none_needed": 3,
+      "ambiguous_modern_possible": 161,
+      "ambiguous_modern_impossible": 9,
+      "unresolved_candidate_state_occurrences": 89,
+      "historical_substitution_count": 52
+    },
+    "community_pool_cross_check": {
+      "source": "https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json",
+      "cards_in_source": 5035,
+      "source_cards_with_tcg_date_on_or_before_snapshot": 4572,
+      "comparison_note": "The public JSON is a current community database rather than a pinned historical whitelist: its passcodes and dates use modern/alias identities and its 2011 snapshot projection differs in six ledger identities and fifteen community-only identities. It is a cross-check, not canonical input."
+    }
   },
   "proposed_engine_flags": [
     "DUEL_OCG_OBSOLETE_IGNITION",

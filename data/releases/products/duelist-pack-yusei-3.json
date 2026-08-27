@@ -1,0 +1,258 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-yusei-3",
+  "code": "DP10",
+  "name": "Duelist Pack: Yusei 3",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-01-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-01-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-01-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 3429238,
+      "name": "Drill Warrior",
+      "numbers": [
+        "DP10-EN018"
+      ]
+    },
+    {
+      "passcode": 7841112,
+      "name": "Majestic Star Dragon",
+      "numbers": [
+        "DP10-EN017"
+      ]
+    },
+    {
+      "passcode": 14017402,
+      "name": "Dragon Knight Draco-Equiste",
+      "numbers": [
+        "DP10-EN016"
+      ]
+    },
+    {
+      "passcode": 14507213,
+      "name": "Synchro Material",
+      "numbers": [
+        "DP10-EN030"
+      ]
+    },
+    {
+      "passcode": 15629801,
+      "name": "Battle Waltz",
+      "numbers": [
+        "DP10-EN023"
+      ]
+    },
+    {
+      "passcode": 21879581,
+      "name": "Synchro Barrier",
+      "numbers": [
+        "DP10-EN026"
+      ]
+    },
+    {
+      "passcode": 23535429,
+      "name": "Stronghold Guardian",
+      "numbers": [
+        "DP10-EN011"
+      ]
+    },
+    {
+      "passcode": 26842483,
+      "name": "Justice Bringer",
+      "numbers": [
+        "DP10-EN013"
+      ]
+    },
+    {
+      "passcode": 28859794,
+      "name": "Shield Wing",
+      "numbers": [
+        "DP10-EN002"
+      ]
+    },
+    {
+      "passcode": 34149830,
+      "name": "Desperate Tag",
+      "numbers": [
+        "DP10-EN028"
+      ]
+    },
+    {
+      "passcode": 34257001,
+      "name": "Dash Warrior",
+      "numbers": [
+        "DP10-EN008"
+      ]
+    },
+    {
+      "passcode": 36472900,
+      "name": "Sonic Chick",
+      "numbers": [
+        "DP10-EN001"
+      ]
+    },
+    {
+      "passcode": 39701395,
+      "name": "Cards of Consonance",
+      "numbers": [
+        "DP10-EN019"
+      ]
+    },
+    {
+      "passcode": 49267971,
+      "name": "Blind Spot Strike",
+      "numbers": [
+        "DP10-EN021"
+      ]
+    },
+    {
+      "passcode": 51047350,
+      "name": "Card Breaker",
+      "numbers": [
+        "DP10-EN005"
+      ]
+    },
+    {
+      "passcode": 52128900,
+      "name": "Synchro Gift",
+      "numbers": [
+        "DP10-EN024"
+      ]
+    },
+    {
+      "passcode": 52840598,
+      "name": "Bri Synchron",
+      "numbers": [
+        "DP10-EN014"
+      ]
+    },
+    {
+      "passcode": 53656677,
+      "name": "Power Frame",
+      "numbers": [
+        "DP10-EN027"
+      ]
+    },
+    {
+      "passcode": 56286179,
+      "name": "Drill Synchron",
+      "numbers": [
+        "DP10-EN004"
+      ]
+    },
+    {
+      "passcode": 58120309,
+      "name": "Starlight Road",
+      "numbers": [
+        "DP10-EN025"
+      ]
+    },
+    {
+      "passcode": 60741115,
+      "name": "Damage Eater",
+      "numbers": [
+        "DP10-EN009"
+      ]
+    },
+    {
+      "passcode": 65196094,
+      "name": "Variety Comes Out",
+      "numbers": [
+        "DP10-EN020"
+      ]
+    },
+    {
+      "passcode": 68543408,
+      "name": "Stardust Xiaolong",
+      "numbers": [
+        "DP10-EN003"
+      ]
+    },
+    {
+      "passcode": 75652080,
+      "name": "Double Cyclone",
+      "numbers": [
+        "DP10-EN022"
+      ]
+    },
+    {
+      "passcode": 80457744,
+      "name": "Boost Warrior",
+      "numbers": [
+        "DP10-EN012"
+      ]
+    },
+    {
+      "passcode": 88032368,
+      "name": "Second Booster",
+      "numbers": [
+        "DP10-EN006"
+      ]
+    },
+    {
+      "passcode": 88513608,
+      "name": "Card of Sacrifice",
+      "numbers": [
+        "DP10-EN029"
+      ]
+    },
+    {
+      "passcode": 89235196,
+      "name": "Big One Warrior",
+      "numbers": [
+        "DP10-EN015"
+      ]
+    },
+    {
+      "passcode": 96146814,
+      "name": "A/D Changer",
+      "numbers": [
+        "DP10-EN010"
+      ]
+    },
+    {
+      "passcode": 97268402,
+      "name": "Effect Veiler",
+      "numbers": [
+        "DP10-EN007"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yusei 3'; printings from the YGOPRODeck bulk dump."
+}

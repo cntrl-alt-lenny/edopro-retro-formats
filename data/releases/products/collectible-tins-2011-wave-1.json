@@ -1,0 +1,111 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "collectible-tins-2011-wave-1",
+  "code": "CT08",
+  "name": "Collectible Tins 2011 Wave 1",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-eu",
+      "date": "2011-08-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-08-25",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg",
+      "date": "2011-08-30",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 11366199,
+      "name": "Dark Simorgh",
+      "numbers": [
+        "CT08-EN006"
+      ]
+    },
+    {
+      "passcode": 12510878,
+      "name": "Neo-Parshath, the Sky Paladin",
+      "numbers": [
+        "CT08-EN009"
+      ]
+    },
+    {
+      "passcode": 13521194,
+      "name": "Stygian Street Patrol",
+      "numbers": [
+        "CT08-EN007"
+      ]
+    },
+    {
+      "passcode": 16304628,
+      "name": "Elemental HERO Gaia",
+      "numbers": [
+        "CT08-EN011"
+      ]
+    },
+    {
+      "passcode": 59509952,
+      "name": "Archlord Kristya",
+      "numbers": [
+        "CT08-EN010"
+      ]
+    },
+    {
+      "passcode": 68597372,
+      "name": "Wind-Up Zenmaister",
+      "numbers": [
+        "CT08-EN002"
+      ]
+    },
+    {
+      "passcode": 69610924,
+      "name": "Number 17: Leviathan Dragon",
+      "numbers": [
+        "CT08-EN001"
+      ]
+    },
+    {
+      "passcode": 78651105,
+      "name": "Beast King Barbaros",
+      "numbers": [
+        "CT08-EN005"
+      ]
+    },
+    {
+      "passcode": 98645731,
+      "name": "Pot of Duality",
+      "numbers": [
+        "CT08-EN008"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Collectible Tins 2011 Wave 1'; printings from the YGOPRODeck bulk dump."
+}

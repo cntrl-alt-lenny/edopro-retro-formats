@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duelist-pack-collection-tin-2011",
+  "code": "DPC5",
+  "name": "Duelist Pack Collection Tin 2011",
+  "kind": "tin",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-04-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-04-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-04-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 22858242,
+      "name": "Zeman the Ape King",
+      "numbers": [
+        "DPC5-EN002"
+      ]
+    },
+    {
+      "passcode": 63465535,
+      "name": "Underground Arachnid",
+      "numbers": [
+        "DPC5-EN001"
+      ]
+    },
+    {
+      "passcode": 94515289,
+      "name": "Frozen Fitzgerald",
+      "numbers": [
+        "DPCT-EN005"
+      ]
+    },
+    {
+      "passcode": 95453143,
+      "name": "Hundred Eyes Dragon",
+      "numbers": [
+        "DPC5-EN003"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duelist Pack Collection Tin 2011'; printings from the YGOPRODeck bulk dump."
+}

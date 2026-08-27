@@ -1,0 +1,747 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "generation-force",
+  "code": "GENF",
+  "name": "Generation Force",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-08-16",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-08-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-08-12",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1945387,
+      "name": "Elemental HERO Nova Master",
+      "numbers": [
+        "GENF-EN093"
+      ]
+    },
+    {
+      "passcode": 5014629,
+      "name": "Submersible Carrier Aero Shark",
+      "numbers": [
+        "GENF-EN040"
+      ]
+    },
+    {
+      "passcode": 6430659,
+      "name": "Infected Mail",
+      "numbers": [
+        "GENF-EN051"
+      ]
+    },
+    {
+      "passcode": 6836211,
+      "name": "The Great Emperor Penguin",
+      "numbers": [
+        "GENF-EN037"
+      ]
+    },
+    {
+      "passcode": 7653207,
+      "name": "Aqua Jet",
+      "numbers": [
+        "GENF-EN048"
+      ]
+    },
+    {
+      "passcode": 7953868,
+      "name": "Blue-Blooded Oni",
+      "numbers": [
+        "GENF-EN034"
+      ]
+    },
+    {
+      "passcode": 8175346,
+      "name": "Poki Draco",
+      "numbers": [
+        "GENF-EN031"
+      ]
+    },
+    {
+      "passcode": 8949584,
+      "name": "A Hero Lives",
+      "numbers": [
+        "GENF-EN098"
+      ]
+    },
+    {
+      "passcode": 9897998,
+      "name": "Gusto Codor",
+      "numbers": [
+        "GENF-EN028"
+      ]
+    },
+    {
+      "passcode": 10132124,
+      "name": "Wingtortoise",
+      "numbers": [
+        "GENF-EN022"
+      ]
+    },
+    {
+      "passcode": 10920352,
+      "name": "Masked HERO Vapor",
+      "numbers": [
+        "GENF-EN095"
+      ]
+    },
+    {
+      "passcode": 11741041,
+      "name": "Raigeki Bottle",
+      "numbers": [
+        "GENF-EN079"
+      ]
+    },
+    {
+      "passcode": 11954712,
+      "name": "Flyfang",
+      "numbers": [
+        "GENF-EN019"
+      ]
+    },
+    {
+      "passcode": 12076263,
+      "name": "Wind-Up Dog",
+      "numbers": [
+        "GENF-EN016"
+      ]
+    },
+    {
+      "passcode": 12299841,
+      "name": "Wind-Up Soldier",
+      "numbers": [
+        "GENF-EN013"
+      ]
+    },
+    {
+      "passcode": 12863633,
+      "name": "Curse of the Circle",
+      "numbers": [
+        "GENF-EN076"
+      ]
+    },
+    {
+      "passcode": 13685271,
+      "name": "Treaty on Uniform Nomenclature",
+      "numbers": [
+        "GENF-EN073"
+      ]
+    },
+    {
+      "passcode": 19019586,
+      "name": "Gem-Elephant",
+      "numbers": [
+        "GENF-EN025"
+      ]
+    },
+    {
+      "passcode": 20264508,
+      "name": "Thunder Short",
+      "numbers": [
+        "GENF-EN047"
+      ]
+    },
+    {
+      "passcode": 21143940,
+      "name": "Mask Change",
+      "numbers": [
+        "GENF-EN097"
+      ]
+    },
+    {
+      "passcode": 21507589,
+      "name": "Fish and Swaps",
+      "numbers": [
+        "GENF-EN087"
+      ]
+    },
+    {
+      "passcode": 21620076,
+      "name": "Pain Painter",
+      "numbers": [
+        "GENF-EN084"
+      ]
+    },
+    {
+      "passcode": 22842214,
+      "name": "Sea Lancer",
+      "numbers": [
+        "GENF-EN081"
+      ]
+    },
+    {
+      "passcode": 23915499,
+      "name": "Crashbug Y",
+      "numbers": [
+        "GENF-EN010"
+      ]
+    },
+    {
+      "passcode": 24103628,
+      "name": "Phantom Magician",
+      "numbers": [
+        "GENF-EN092"
+      ]
+    },
+    {
+      "passcode": 24137081,
+      "name": "Drill Barnacle",
+      "numbers": [
+        "GENF-EN007"
+      ]
+    },
+    {
+      "passcode": 24707869,
+      "name": "Bright Future",
+      "numbers": [
+        "GENF-EN070"
+      ]
+    },
+    {
+      "passcode": 24920410,
+      "name": "Overwind",
+      "numbers": [
+        "GENF-EN067"
+      ]
+    },
+    {
+      "passcode": 25259669,
+      "name": "Goblindbergh",
+      "numbers": [
+        "GENF-EN004"
+      ]
+    },
+    {
+      "passcode": 25642998,
+      "name": "Poseidon Wave",
+      "numbers": [
+        "GENF-EN064"
+      ]
+    },
+    {
+      "passcode": 26082117,
+      "name": "Gagaga Magician",
+      "numbers": [
+        "GENF-EN001"
+      ]
+    },
+    {
+      "passcode": 26864586,
+      "name": "Resonance Device",
+      "numbers": [
+        "GENF-EN061"
+      ]
+    },
+    {
+      "passcode": 27980138,
+      "name": "Quill Pen of Gulldos",
+      "numbers": [
+        "GENF-EN058"
+      ]
+    },
+    {
+      "passcode": 31386180,
+      "name": "Tiras, Keeper of Genesis",
+      "numbers": [
+        "GENF-EN044"
+      ]
+    },
+    {
+      "passcode": 32003338,
+      "name": "Number 34: Terror-Byte",
+      "numbers": [
+        "GENF-EN041"
+      ]
+    },
+    {
+      "passcode": 32703716,
+      "name": "Fish and Kicks",
+      "numbers": [
+        "GENF-EN055"
+      ]
+    },
+    {
+      "passcode": 32835363,
+      "name": "Cracking",
+      "numbers": [
+        "GENF-EN052"
+      ]
+    },
+    {
+      "passcode": 33057951,
+      "name": "Surface",
+      "numbers": [
+        "GENF-EN049"
+      ]
+    },
+    {
+      "passcode": 33225925,
+      "name": "Milla the Temporal Magician",
+      "numbers": [
+        "GENF-EN038"
+      ]
+    },
+    {
+      "passcode": 33347467,
+      "name": "Ghost Ship",
+      "numbers": [
+        "GENF-EN035"
+      ]
+    },
+    {
+      "passcode": 34160055,
+      "name": "Master of the Flaming Dragonswords",
+      "numbers": [
+        "GENF-EN032"
+      ]
+    },
+    {
+      "passcode": 37926346,
+      "name": "Steelswarm Roach",
+      "numbers": [
+        "GENF-EN099"
+      ]
+    },
+    {
+      "passcode": 45170821,
+      "name": "Vision HERO Adoration",
+      "numbers": [
+        "GENF-EN096"
+      ]
+    },
+    {
+      "passcode": 45282603,
+      "name": "Saambell the Summoner",
+      "numbers": [
+        "GENF-EN029"
+      ]
+    },
+    {
+      "passcode": 46404281,
+      "name": "Laval Magma Cannoneer",
+      "numbers": [
+        "GENF-EN026"
+      ]
+    },
+    {
+      "passcode": 46759931,
+      "name": "Vision HERO Trinity",
+      "numbers": [
+        "GENF-EN091"
+      ]
+    },
+    {
+      "passcode": 47126872,
+      "name": "Space-Time Police",
+      "numbers": [
+        "GENF-EN023"
+      ]
+    },
+    {
+      "passcode": 47349310,
+      "name": "Skystarray",
+      "numbers": [
+        "GENF-EN020"
+      ]
+    },
+    {
+      "passcode": 48135190,
+      "name": "Gravelstorm",
+      "numbers": [
+        "GENF-EN080"
+      ]
+    },
+    {
+      "passcode": 48357738,
+      "name": "Tyrant's Tummyache",
+      "numbers": [
+        "GENF-EN077"
+      ]
+    },
+    {
+      "passcode": 50292967,
+      "name": "Past Image",
+      "numbers": [
+        "GENF-EN071"
+      ]
+    },
+    {
+      "passcode": 50319138,
+      "name": "Crashbug Z",
+      "numbers": [
+        "GENF-EN011"
+      ]
+    },
+    {
+      "passcode": 50532786,
+      "name": "Jawsman",
+      "numbers": [
+        "GENF-EN008"
+      ]
+    },
+    {
+      "passcode": 51254277,
+      "name": "Big Jaws",
+      "numbers": [
+        "GENF-EN005"
+      ]
+    },
+    {
+      "passcode": 51324455,
+      "name": "Underworld Egg Clutch",
+      "numbers": [
+        "GENF-EN068"
+      ]
+    },
+    {
+      "passcode": 52140003,
+      "name": "Explosive Urchin",
+      "numbers": [
+        "GENF-EN065"
+      ]
+    },
+    {
+      "passcode": 52263685,
+      "name": "Peeking Goblin",
+      "numbers": [
+        "GENF-EN062"
+      ]
+    },
+    {
+      "passcode": 57902193,
+      "name": "Painful Return",
+      "numbers": [
+        "GENF-EN088"
+      ]
+    },
+    {
+      "passcode": 58147549,
+      "name": "Masked HERO Goka",
+      "numbers": [
+        "GENF-EN094"
+      ]
+    },
+    {
+      "passcode": 58475908,
+      "name": "Wind-Up Snail",
+      "numbers": [
+        "GENF-EN017"
+      ]
+    },
+    {
+      "passcode": 59070329,
+      "name": "Utopian Aura",
+      "numbers": [
+        "GENF-EN074"
+      ]
+    },
+    {
+      "passcode": 59297550,
+      "name": "Wind-Up Magician",
+      "numbers": [
+        "GENF-EN014"
+      ]
+    },
+    {
+      "passcode": 62476815,
+      "name": "Gogogo Golem",
+      "numbers": [
+        "GENF-EN002"
+      ]
+    },
+    {
+      "passcode": 63485233,
+      "name": "Star Changer",
+      "numbers": [
+        "GENF-EN059"
+      ]
+    },
+    {
+      "passcode": 64107820,
+      "name": "Future Glow",
+      "numbers": [
+        "GENF-EN056"
+      ]
+    },
+    {
+      "passcode": 67775894,
+      "name": "Wonder Wand",
+      "numbers": [
+        "GENF-EN045"
+      ]
+    },
+    {
+      "passcode": 68124775,
+      "name": "Orient Dragon",
+      "numbers": [
+        "GENF-EN085"
+      ]
+    },
+    {
+      "passcode": 68597372,
+      "name": "Wind-Up Zenmaister",
+      "numbers": [
+        "GENF-EN042"
+      ]
+    },
+    {
+      "passcode": 69042950,
+      "name": "Crashbug Road",
+      "numbers": [
+        "GENF-EN050"
+      ]
+    },
+    {
+      "passcode": 69320362,
+      "name": "Legendary Wind-Up Key",
+      "numbers": [
+        "GENF-EN053"
+      ]
+    },
+    {
+      "passcode": 69572169,
+      "name": "Elemental HERO Flash",
+      "numbers": [
+        "GENF-EN090"
+      ]
+    },
+    {
+      "passcode": 69610924,
+      "name": "Number 17: Leviathan Dragon",
+      "numbers": [
+        "GENF-EN039"
+      ]
+    },
+    {
+      "passcode": 69846323,
+      "name": "Piercing Moray",
+      "numbers": [
+        "GENF-EN082"
+      ]
+    },
+    {
+      "passcode": 70832512,
+      "name": "Absolute Crusader",
+      "numbers": [
+        "GENF-EN036"
+      ]
+    },
+    {
+      "passcode": 71564150,
+      "name": "Perditious Puppeteer",
+      "numbers": [
+        "GENF-EN033"
+      ]
+    },
+    {
+      "passcode": 71786742,
+      "name": "Geargiano",
+      "numbers": [
+        "GENF-EN030"
+      ]
+    },
+    {
+      "passcode": 72403299,
+      "name": "Gishki Diviner",
+      "numbers": [
+        "GENF-EN027"
+      ]
+    },
+    {
+      "passcode": 73625877,
+      "name": "Time Escaper",
+      "numbers": [
+        "GENF-EN024"
+      ]
+    },
+    {
+      "passcode": 84569017,
+      "name": "Spearfish Soldier",
+      "numbers": [
+        "GENF-EN018"
+      ]
+    },
+    {
+      "passcode": 84747429,
+      "name": "Airorca",
+      "numbers": [
+        "GENF-EN021"
+      ]
+    },
+    {
+      "passcode": 85352446,
+      "name": "Attention!",
+      "numbers": [
+        "GENF-EN078"
+      ]
+    },
+    {
+      "passcode": 85682655,
+      "name": "Wind-Up Juggler",
+      "numbers": [
+        "GENF-EN015"
+      ]
+    },
+    {
+      "passcode": 86474024,
+      "name": "United Front",
+      "numbers": [
+        "GENF-EN075"
+      ]
+    },
+    {
+      "passcode": 86690572,
+      "name": "Burgeoning Whirlflame",
+      "numbers": [
+        "GENF-EN072"
+      ]
+    },
+    {
+      "passcode": 86804246,
+      "name": "Super Crashbug",
+      "numbers": [
+        "GENF-EN012"
+      ]
+    },
+    {
+      "passcode": 87313164,
+      "name": "Oh F!sh!",
+      "numbers": [
+        "GENF-EN069"
+      ]
+    },
+    {
+      "passcode": 87526784,
+      "name": "Crashbug X",
+      "numbers": [
+        "GENF-EN009"
+      ]
+    },
+    {
+      "passcode": 90470931,
+      "name": "Oni-Gami Combo",
+      "numbers": [
+        "GENF-EN060"
+      ]
+    },
+    {
+      "passcode": 90592429,
+      "name": "Vylon Filament",
+      "numbers": [
+        "GENF-EN057"
+      ]
+    },
+    {
+      "passcode": 93396832,
+      "name": "Smashing Horn",
+      "numbers": [
+        "GENF-EN089"
+      ]
+    },
+    {
+      "passcode": 94119480,
+      "name": "Adreus, Keeper of Armageddon",
+      "numbers": [
+        "GENF-EN086"
+      ]
+    },
+    {
+      "passcode": 94770493,
+      "name": "Double or Nothing!",
+      "numbers": [
+        "GENF-EN046"
+      ]
+    },
+    {
+      "passcode": 95231062,
+      "name": "Lost Blue Breaker",
+      "numbers": [
+        "GENF-EN083"
+      ]
+    },
+    {
+      "passcode": 95714077,
+      "name": "Wind-Up Factory",
+      "numbers": [
+        "GENF-EN054"
+      ]
+    },
+    {
+      "passcode": 95992081,
+      "name": "Leviair the Sea Dragon",
+      "numbers": [
+        "GENF-EN043"
+      ]
+    },
+    {
+      "passcode": 96457619,
+      "name": "Xyz Veil",
+      "numbers": [
+        "GENF-EN000"
+      ]
+    },
+    {
+      "passcode": 98535702,
+      "name": "Damage Vaccine Ω MAX",
+      "numbers": [
+        "GENF-EN066"
+      ]
+    },
+    {
+      "passcode": 98649372,
+      "name": "Skull Kraken",
+      "numbers": [
+        "GENF-EN006"
+      ]
+    },
+    {
+      "passcode": 98865920,
+      "name": "Achacha Archer",
+      "numbers": [
+        "GENF-EN003"
+      ]
+    },
+    {
+      "passcode": 99657399,
+      "name": "Asleep at the Switch",
+      "numbers": [
+        "GENF-EN063"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Generation Force'; printings from the YGOPRODeck bulk dump."
+}

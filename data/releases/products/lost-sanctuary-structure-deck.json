@@ -1,0 +1,314 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "lost-sanctuary-structure-deck",
+  "code": "SDLS",
+  "name": "Lost Sanctuary Structure Deck",
+  "kind": "structure",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-06-14",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-06-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-06-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1353770,
+      "name": "Valhalla, Hall of the Fallen",
+      "numbers": [
+        "SDLS-EN024"
+      ]
+    },
+    {
+      "passcode": 2980764,
+      "name": "Consecrated Light",
+      "numbers": [
+        "SDLS-EN022"
+      ]
+    },
+    {
+      "passcode": 5645210,
+      "name": "Splendid Venus",
+      "numbers": [
+        "SDLS-EN009"
+      ]
+    },
+    {
+      "passcode": 12171659,
+      "name": "Zeradias, Herald of Heaven",
+      "numbers": [
+        "SDLS-EN019"
+      ]
+    },
+    {
+      "passcode": 16255442,
+      "name": "Beckoning Light",
+      "numbers": [
+        "SDLS-EN036"
+      ]
+    },
+    {
+      "passcode": 18036057,
+      "name": "Airknight Parshath",
+      "numbers": [
+        "SDLS-EN017"
+      ]
+    },
+    {
+      "passcode": 20450925,
+      "name": "Hanewata",
+      "numbers": [
+        "SDLS-EN021"
+      ]
+    },
+    {
+      "passcode": 27174286,
+      "name": "Return from the Different Dimension",
+      "numbers": [
+        "SDLS-EN034"
+      ]
+    },
+    {
+      "passcode": 28573958,
+      "name": "The Agent of Miracles - Jupiter",
+      "numbers": [
+        "SDLS-EN003"
+      ]
+    },
+    {
+      "passcode": 28890974,
+      "name": "Celestial Transformation",
+      "numbers": [
+        "SDLS-EN028"
+      ]
+    },
+    {
+      "passcode": 31305911,
+      "name": "Marshmallon",
+      "numbers": [
+        "SDLS-EN013"
+      ]
+    },
+    {
+      "passcode": 37742478,
+      "name": "Honest",
+      "numbers": [
+        "SDLS-EN020"
+      ]
+    },
+    {
+      "passcode": 38730226,
+      "name": "The Agent of Wisdom - Mercury",
+      "numbers": [
+        "SDLS-EN005"
+      ]
+    },
+    {
+      "passcode": 39552864,
+      "name": "Mystical Shine Ball",
+      "numbers": [
+        "SDLS-EN008"
+      ]
+    },
+    {
+      "passcode": 41420027,
+      "name": "Solemn Judgment",
+      "numbers": [
+        "SDLS-EN038"
+      ]
+    },
+    {
+      "passcode": 48783998,
+      "name": "Nova Summoner",
+      "numbers": [
+        "SDLS-EN018"
+      ]
+    },
+    {
+      "passcode": 48964966,
+      "name": "Athena",
+      "numbers": [
+        "SDLS-EN012"
+      ]
+    },
+    {
+      "passcode": 48976825,
+      "name": "Burial from a Different Dimension",
+      "numbers": [
+        "SDLS-EN029"
+      ]
+    },
+    {
+      "passcode": 53582587,
+      "name": "Torrential Tribute",
+      "numbers": [
+        "SDLS-EN035"
+      ]
+    },
+    {
+      "passcode": 54977057,
+      "name": "Cards from the Sky",
+      "numbers": [
+        "SDLS-EN023"
+      ]
+    },
+    {
+      "passcode": 55794644,
+      "name": "Master Hyperion",
+      "numbers": [
+        "SDLS-EN001"
+      ]
+    },
+    {
+      "passcode": 56433456,
+      "name": "The Sanctuary in the Sky",
+      "numbers": [
+        "SDLS-EN027"
+      ]
+    },
+    {
+      "passcode": 64734921,
+      "name": "The Agent of Creation - Venus",
+      "numbers": [
+        "SDLS-EN006"
+      ]
+    },
+    {
+      "passcode": 73628505,
+      "name": "Terraforming",
+      "numbers": [
+        "SDLS-EN025"
+      ]
+    },
+    {
+      "passcode": 74968065,
+      "name": "Hecatrice",
+      "numbers": [
+        "SDLS-EN014"
+      ]
+    },
+    {
+      "passcode": 75162696,
+      "name": "Victoria",
+      "numbers": [
+        "SDLS-EN011"
+      ]
+    },
+    {
+      "passcode": 77527210,
+      "name": "Soul of Purity and Light",
+      "numbers": [
+        "SDLS-EN016"
+      ]
+    },
+    {
+      "passcode": 80551130,
+      "name": "Miraculous Descent",
+      "numbers": [
+        "SDLS-EN037"
+      ]
+    },
+    {
+      "passcode": 80921533,
+      "name": "Mausoleum of the Emperor",
+      "numbers": [
+        "SDLS-EN030"
+      ]
+    },
+    {
+      "passcode": 81066751,
+      "name": "Divine Punishment",
+      "numbers": [
+        "SDLS-EN033"
+      ]
+    },
+    {
+      "passcode": 86780027,
+      "name": "Solidarity",
+      "numbers": [
+        "SDLS-EN031"
+      ]
+    },
+    {
+      "passcode": 87148330,
+      "name": "Tethys, Goddess of Light",
+      "numbers": [
+        "SDLS-EN010"
+      ]
+    },
+    {
+      "passcode": 91123920,
+      "name": "The Agent of Force - Mars",
+      "numbers": [
+        "SDLS-EN007"
+      ]
+    },
+    {
+      "passcode": 91188343,
+      "name": "The Agent of Mystery - Earth",
+      "numbers": [
+        "SDLS-EN002"
+      ]
+    },
+    {
+      "passcode": 91345518,
+      "name": "The Agent of Judgment - Saturn",
+      "numbers": [
+        "SDLS-EN004"
+      ]
+    },
+    {
+      "passcode": 92223641,
+      "name": "The Fountain in the Sky",
+      "numbers": [
+        "SDLS-EN032"
+      ]
+    },
+    {
+      "passcode": 95956346,
+      "name": "Shining Angel",
+      "numbers": [
+        "SDLS-EN015"
+      ]
+    },
+    {
+      "passcode": 97169186,
+      "name": "Smashing Ground",
+      "numbers": [
+        "SDLS-EN026"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Lost Sanctuary Structure Deck'; printings from the YGOPRODeck bulk dump."
+}

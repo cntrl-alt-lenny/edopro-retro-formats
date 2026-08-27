@@ -1,0 +1,468 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "hidden-arsenal-4-trishula-s-triumph",
+  "code": "HA04",
+  "name": "Hidden Arsenal 4: Trishula's Triumph",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-04-19",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-04-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-04-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 2377034,
+      "name": "Neo Flamvell Hedgehog",
+      "numbers": [
+        "HA04-EN032"
+      ]
+    },
+    {
+      "passcode": 16111820,
+      "name": "Jurrac Herra",
+      "numbers": [
+        "HA04-EN018"
+      ]
+    },
+    {
+      "passcode": 17548456,
+      "name": "Jurrac Meteor",
+      "numbers": [
+        "HA04-EN029"
+      ]
+    },
+    {
+      "passcode": 17760003,
+      "name": "Genex Ally Triarm",
+      "numbers": [
+        "HA04-EN026"
+      ]
+    },
+    {
+      "passcode": 17948378,
+      "name": "Jurrac Dino",
+      "numbers": [
+        "HA04-EN015"
+      ]
+    },
+    {
+      "passcode": 18060565,
+      "name": "Dragunity Primus Pilus",
+      "numbers": [
+        "HA04-EN012"
+      ]
+    },
+    {
+      "passcode": 18282103,
+      "name": "The Fabled Ganashia",
+      "numbers": [
+        "HA04-EN009"
+      ]
+    },
+    {
+      "passcode": 18482591,
+      "name": "Warlock of the Ice Barrier",
+      "numbers": [
+        "HA04-EN023"
+      ]
+    },
+    {
+      "passcode": 19605133,
+      "name": "Naturia Ladybug",
+      "numbers": [
+        "HA04-EN020"
+      ]
+    },
+    {
+      "passcode": 20127343,
+      "name": "Genex Ally Changer",
+      "numbers": [
+        "HA04-EN003"
+      ]
+    },
+    {
+      "passcode": 24644634,
+      "name": "Naturia White Oak",
+      "numbers": [
+        "HA04-EN051"
+      ]
+    },
+    {
+      "passcode": 25682811,
+      "name": "Dragunity Knight - Barcha",
+      "numbers": [
+        "HA04-EN059"
+      ]
+    },
+    {
+      "passcode": 25866285,
+      "name": "Naturia Stinkbug",
+      "numbers": [
+        "HA04-EN048"
+      ]
+    },
+    {
+      "passcode": 25988873,
+      "name": "Dragunity Partisan",
+      "numbers": [
+        "HA04-EN045"
+      ]
+    },
+    {
+      "passcode": 26304459,
+      "name": "Ancient Flamvell Deity",
+      "numbers": [
+        "HA04-EN056"
+      ]
+    },
+    {
+      "passcode": 26704411,
+      "name": "The Fabled Kokkator",
+      "numbers": [
+        "HA04-EN042"
+      ]
+    },
+    {
+      "passcode": 27527047,
+      "name": "Secret Guards of the Ice Barrier",
+      "numbers": [
+        "HA04-EN053"
+      ]
+    },
+    {
+      "passcode": 27827903,
+      "name": "Genex Ally Crusher",
+      "numbers": [
+        "HA04-EN039"
+      ]
+    },
+    {
+      "passcode": 29905795,
+      "name": "The Fabled Chawa",
+      "numbers": [
+        "HA04-EN006"
+      ]
+    },
+    {
+      "passcode": 38049541,
+      "name": "Genex Ally Chemistrer",
+      "numbers": [
+        "HA04-EN036"
+      ]
+    },
+    {
+      "passcode": 39761138,
+      "name": "Neo Flamvell Shaman",
+      "numbers": [
+        "HA04-EN033"
+      ]
+    },
+    {
+      "passcode": 42110434,
+      "name": "Naturia Butterfly",
+      "numbers": [
+        "HA04-EN019"
+      ]
+    },
+    {
+      "passcode": 43332022,
+      "name": "Jurrac Gallim",
+      "numbers": [
+        "HA04-EN016"
+      ]
+    },
+    {
+      "passcode": 43932460,
+      "name": "Naturia Landoise",
+      "numbers": [
+        "HA04-EN030"
+      ]
+    },
+    {
+      "passcode": 44155002,
+      "name": "The Fabled Unicore",
+      "numbers": [
+        "HA04-EN027"
+      ]
+    },
+    {
+      "passcode": 44877690,
+      "name": "Sacred Spirit of the Ice Barrier",
+      "numbers": [
+        "HA04-EN024"
+      ]
+    },
+    {
+      "passcode": 50032342,
+      "name": "Strategist of the Ice Barrier",
+      "numbers": [
+        "HA04-EN052"
+      ]
+    },
+    {
+      "passcode": 51254980,
+      "name": "Naturia Mantis",
+      "numbers": [
+        "HA04-EN049"
+      ]
+    },
+    {
+      "passcode": 52687916,
+      "name": "Trishula, Dragon of the Ice Barrier",
+      "numbers": [
+        "HA04-EN060"
+      ]
+    },
+    {
+      "passcode": 52709508,
+      "name": "Genex Ally Triforce",
+      "numbers": [
+        "HA04-EN057"
+      ]
+    },
+    {
+      "passcode": 52977572,
+      "name": "Dragunity Pilum",
+      "numbers": [
+        "HA04-EN046"
+      ]
+    },
+    {
+      "passcode": 53199020,
+      "name": "Fabled Dianaira",
+      "numbers": [
+        "HA04-EN043"
+      ]
+    },
+    {
+      "passcode": 53921056,
+      "name": "General Gantala of the Ice Barrier",
+      "numbers": [
+        "HA04-EN054"
+      ]
+    },
+    {
+      "passcode": 54455664,
+      "name": "Dragunity Brandistock",
+      "numbers": [
+        "HA04-EN013"
+      ]
+    },
+    {
+      "passcode": 55099248,
+      "name": "Naturia Strawberry",
+      "numbers": [
+        "HA04-EN021"
+      ]
+    },
+    {
+      "passcode": 55277252,
+      "name": "The Fabled Nozoochee",
+      "numbers": [
+        "HA04-EN010"
+      ]
+    },
+    {
+      "passcode": 56399890,
+      "name": "The Fabled Catsith",
+      "numbers": [
+        "HA04-EN007"
+      ]
+    },
+    {
+      "passcode": 56511382,
+      "name": "Genex Ally Volcannon",
+      "numbers": [
+        "HA04-EN004"
+      ]
+    },
+    {
+      "passcode": 57238939,
+      "name": "Genex Ally Remote",
+      "numbers": [
+        "HA04-EN001"
+      ]
+    },
+    {
+      "passcode": 63211608,
+      "name": "Genex Ally Reliever",
+      "numbers": [
+        "HA04-EN040"
+      ]
+    },
+    {
+      "passcode": 64034255,
+      "name": "Genex Ally Birdman",
+      "numbers": [
+        "HA04-EN037"
+      ]
+    },
+    {
+      "passcode": 65156847,
+      "name": "Neo Flamvell Garuda",
+      "numbers": [
+        "HA04-EN034"
+      ]
+    },
+    {
+      "passcode": 66378485,
+      "name": "Neo Flamvell Origin",
+      "numbers": [
+        "HA04-EN031"
+      ]
+    },
+    {
+      "passcode": 80159717,
+      "name": "Dragunity Knight - Trident",
+      "numbers": [
+        "HA04-EN028"
+      ]
+    },
+    {
+      "passcode": 80549379,
+      "name": "Dragunity Javelin",
+      "numbers": [
+        "HA04-EN014"
+      ]
+    },
+    {
+      "passcode": 80727721,
+      "name": "Jurrac Aeolo",
+      "numbers": [
+        "HA04-EN017"
+      ]
+    },
+    {
+      "passcode": 81275309,
+      "name": "General Raiho of the Ice Barrier",
+      "numbers": [
+        "HA04-EN025"
+      ]
+    },
+    {
+      "passcode": 81661951,
+      "name": "Dragunity Militum",
+      "numbers": [
+        "HA04-EN011"
+      ]
+    },
+    {
+      "passcode": 82498947,
+      "name": "Defender of the Ice Barrier",
+      "numbers": [
+        "HA04-EN022"
+      ]
+    },
+    {
+      "passcode": 82888408,
+      "name": "The Fabled Cerburrel",
+      "numbers": [
+        "HA04-EN008"
+      ]
+    },
+    {
+      "passcode": 83500096,
+      "name": "Genex Ally Solid",
+      "numbers": [
+        "HA04-EN005"
+      ]
+    },
+    {
+      "passcode": 87649699,
+      "name": "Naturia Ragweed",
+      "numbers": [
+        "HA04-EN050"
+      ]
+    },
+    {
+      "passcode": 88361177,
+      "name": "Dragunity Angusticlavii",
+      "numbers": [
+        "HA04-EN047"
+      ]
+    },
+    {
+      "passcode": 89194103,
+      "name": "The Fabled Kudabbi",
+      "numbers": [
+        "HA04-EN058"
+      ]
+    },
+    {
+      "passcode": 90616316,
+      "name": "The Fabled Peggulsus",
+      "numbers": [
+        "HA04-EN041"
+      ]
+    },
+    {
+      "passcode": 91438994,
+      "name": "Genex Ally Bellflame",
+      "numbers": [
+        "HA04-EN038"
+      ]
+    },
+    {
+      "passcode": 91554542,
+      "name": "Neo Flamvell Sabre",
+      "numbers": [
+        "HA04-EN035"
+      ]
+    },
+    {
+      "passcode": 94622638,
+      "name": "Genex Ally Powercell",
+      "numbers": [
+        "HA04-EN002"
+      ]
+    },
+    {
+      "passcode": 99594764,
+      "name": "Dragunity Corsesca",
+      "numbers": [
+        "HA04-EN044"
+      ]
+    },
+    {
+      "passcode": 99916754,
+      "name": "Naturia Exterio",
+      "numbers": [
+        "HA04-EN055"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page \"Hidden Arsenal 4: Trishula's Triumph\"; printings from the YGOPRODeck bulk dump."
+}

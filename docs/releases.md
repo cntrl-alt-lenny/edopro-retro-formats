@@ -120,7 +120,8 @@ through it:
    rebundled dataset products; `resolved-imported` must point at a real
    (usually `curated`) product record carrying the recovered roster.
 
-The 2026-08 certification pass audited all 45 then-outstanding anomalies:
+The 2026 certification passes audited the outstanding anomalies through the
+proposed Tengu snapshot:
 one genuine gap was recovered and imported (the WC2004 Toys "R" Us
 participation promo, moving Sengenjin's first availability from 2004-07-25
 back to 2004-05-22), and the rest were proven harmless with cited evidence
@@ -175,7 +176,7 @@ differ only in that entry.
 ```
 python -m retroformats.importers.fetch_release_sources --cache <dir>   # network
 python -m retroformats.importers.tcg_releases \
-    --cache <dir> --babelcdb <BabelCDB clone> --through 2010-12-31     # offline
+    --cache <dir> --babelcdb <BabelCDB clone> --through 2011-09-17     # offline
 python -m retroformats.importers.card_index --babelcdb <BabelCDB clone>
 python -m retroformats materialize && python -m retroformats build
 ```
@@ -184,7 +185,9 @@ The fetch stage downloads the YGOPRODeck bulk dumps (their documented
 single-request pattern) and enumerates products via Yugipedia's `ask` API
 (five English-family release-date properties, 1 req/s per their policy).
 The normalise stage is offline and deterministic; raw caches never enter git.
-Extending coverage past 2010 is re-running with a later `--through`.
+The current certified window runs through 2011-09-17. Extending coverage past
+that snapshot is re-running it with a later `--through` and a new research
+review.
 
 ### Source priority / conflict policy
 
@@ -215,5 +218,5 @@ alternatives recorded, and the ambiguity rules above take over.
   dates upstream (the import report and cutoff-ambiguity checks are the nets).
 - OCG release events are modelled (`ocg-*` territories) but not yet imported;
   OCG availability never grants TCG legality either way.
-- Coverage currently ends 2010-12-31 (Edison's needs); later formats extend it
-  by re-running the importer.
+- Coverage currently ends 2011-09-17 (the proposed Tengu snapshot); later
+  formats extend it by re-running the importer.

@@ -1,0 +1,398 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "gold-series-4-pyramids-edition",
+  "code": "GLD4",
+  "name": "Gold Series 4: Pyramids Edition",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-07-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-06-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-06-24",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 126218,
+      "name": "Skull Dice",
+      "numbers": [
+        "GLD4-EN046"
+      ]
+    },
+    {
+      "passcode": 423585,
+      "name": "Summoner Monk",
+      "numbers": [
+        "GLD4-EN027"
+      ]
+    },
+    {
+      "passcode": 6285791,
+      "name": "The Wicked Worm Beast",
+      "numbers": [
+        "GLD4-EN003"
+      ]
+    },
+    {
+      "passcode": 7634581,
+      "name": "Orichalcos Shunoros",
+      "numbers": [
+        "GLD4-EN029"
+      ]
+    },
+    {
+      "passcode": 9596126,
+      "name": "Chaos Sorcerer",
+      "numbers": [
+        "GLD4-EN012"
+      ]
+    },
+    {
+      "passcode": 10000000,
+      "name": "Obelisk the Tormentor",
+      "numbers": [
+        "GLD4-EN030"
+      ]
+    },
+    {
+      "passcode": 11819616,
+      "name": "Tytannial, Princess of Camellias",
+      "numbers": [
+        "GLD4-EN026"
+      ]
+    },
+    {
+      "passcode": 13604200,
+      "name": "Sage's Stone",
+      "numbers": [
+        "GLD4-EN038"
+      ]
+    },
+    {
+      "passcode": 15259703,
+      "name": "Toon World",
+      "numbers": [
+        "GLD4-EN036"
+      ]
+    },
+    {
+      "passcode": 17589298,
+      "name": "Sword of Dark Rites",
+      "numbers": [
+        "GLD4-EN042"
+      ]
+    },
+    {
+      "passcode": 21502796,
+      "name": "Ryko, Lightsworn Hunter",
+      "numbers": [
+        "GLD4-EN024"
+      ]
+    },
+    {
+      "passcode": 23205979,
+      "name": "Spirit Reaper",
+      "numbers": [
+        "GLD4-EN011"
+      ]
+    },
+    {
+      "passcode": 24317029,
+      "name": "Gravekeeper's Spy",
+      "numbers": [
+        "GLD4-EN010"
+      ]
+    },
+    {
+      "passcode": 24433920,
+      "name": "Pendulum Machine",
+      "numbers": [
+        "GLD4-EN002"
+      ]
+    },
+    {
+      "passcode": 29424328,
+      "name": "Diabolos, King of the Abyss",
+      "numbers": [
+        "GLD4-EN018"
+      ]
+    },
+    {
+      "passcode": 31038159,
+      "name": "Genesis Dragon",
+      "numbers": [
+        "GLD4-EN028"
+      ]
+    },
+    {
+      "passcode": 32012841,
+      "name": "Millennium Shield",
+      "numbers": [
+        "GLD4-EN001"
+      ]
+    },
+    {
+      "passcode": 33508719,
+      "name": "Morphing Jar",
+      "numbers": [
+        "GLD4-EN007"
+      ]
+    },
+    {
+      "passcode": 35027493,
+      "name": "Deck Devastation Virus",
+      "numbers": [
+        "GLD4-EN049"
+      ]
+    },
+    {
+      "passcode": 38120068,
+      "name": "Trade-In",
+      "numbers": [
+        "GLD4-EN043"
+      ]
+    },
+    {
+      "passcode": 40921744,
+      "name": "Darklord Zerato",
+      "numbers": [
+        "GLD4-EN022"
+      ]
+    },
+    {
+      "passcode": 48156348,
+      "name": "Gladiator Beast Gyzarus",
+      "numbers": [
+        "GLD4-EN032"
+      ]
+    },
+    {
+      "passcode": 49905576,
+      "name": "Meltiel, Sage of the Sky",
+      "numbers": [
+        "GLD4-EN016"
+      ]
+    },
+    {
+      "passcode": 50259460,
+      "name": "Versago the Destroyer",
+      "numbers": [
+        "GLD4-EN006"
+      ]
+    },
+    {
+      "passcode": 53493204,
+      "name": "Goddess with the Third Eye",
+      "numbers": [
+        "GLD4-EN004"
+      ]
+    },
+    {
+      "passcode": 55818463,
+      "name": "Lich Lord, King of the Underworld",
+      "numbers": [
+        "GLD4-EN019"
+      ]
+    },
+    {
+      "passcode": 56606928,
+      "name": "Eternal Drought",
+      "numbers": [
+        "GLD4-EN033"
+      ]
+    },
+    {
+      "passcode": 59616123,
+      "name": "Trap Stun",
+      "numbers": [
+        "GLD4-EN050"
+      ]
+    },
+    {
+      "passcode": 67169062,
+      "name": "Pot of Avarice",
+      "numbers": [
+        "GLD4-EN040"
+      ]
+    },
+    {
+      "passcode": 67227834,
+      "name": "Magic Formula",
+      "numbers": [
+        "GLD4-EN044"
+      ]
+    },
+    {
+      "passcode": 67959180,
+      "name": "Goddess of Whim",
+      "numbers": [
+        "GLD4-EN008"
+      ]
+    },
+    {
+      "passcode": 68005187,
+      "name": "Soul Exchange",
+      "numbers": [
+        "GLD4-EN035"
+      ]
+    },
+    {
+      "passcode": 71717923,
+      "name": "Mormolith",
+      "numbers": [
+        "GLD4-EN021"
+      ]
+    },
+    {
+      "passcode": 72989439,
+      "name": "Black Luster Soldier - Envoy of the Beginning",
+      "numbers": [
+        "GLD4-EN013"
+      ]
+    },
+    {
+      "passcode": 73891874,
+      "name": "White-Horned Dragon",
+      "numbers": [
+        "GLD4-EN014"
+      ]
+    },
+    {
+      "passcode": 74137509,
+      "name": "Graceful Dice",
+      "numbers": [
+        "GLD4-EN037"
+      ]
+    },
+    {
+      "passcode": 76515293,
+      "name": "Xing Zhen Hu",
+      "numbers": [
+        "GLD4-EN048"
+      ]
+    },
+    {
+      "passcode": 78700060,
+      "name": "Doomcaliber Knight",
+      "numbers": [
+        "GLD4-EN023"
+      ]
+    },
+    {
+      "passcode": 79575620,
+      "name": "Injection Fairy Lily",
+      "numbers": [
+        "GLD4-EN009"
+      ]
+    },
+    {
+      "passcode": 81191584,
+      "name": "Recurring Nightmare",
+      "numbers": [
+        "GLD4-EN041"
+      ]
+    },
+    {
+      "passcode": 82213171,
+      "name": "Prometheus, King of the Shadows",
+      "numbers": [
+        "GLD4-EN020"
+      ]
+    },
+    {
+      "passcode": 84177693,
+      "name": "Radiant Jeral",
+      "numbers": [
+        "GLD4-EN017"
+      ]
+    },
+    {
+      "passcode": 88279736,
+      "name": "Robbin' Goblin",
+      "numbers": [
+        "GLD4-EN045"
+      ]
+    },
+    {
+      "passcode": 89997728,
+      "name": "Toon Table of Contents",
+      "numbers": [
+        "GLD4-EN039"
+      ]
+    },
+    {
+      "passcode": 90960358,
+      "name": "Toon Dark Magician Girl",
+      "numbers": [
+        "GLD4-EN015"
+      ]
+    },
+    {
+      "passcode": 93016201,
+      "name": "Royal Oppression",
+      "numbers": [
+        "GLD4-EN047"
+      ]
+    },
+    {
+      "passcode": 94381039,
+      "name": "Celestia, Lightsworn Angel",
+      "numbers": [
+        "GLD4-EN025"
+      ]
+    },
+    {
+      "passcode": 94716515,
+      "name": "Eradicating Aerosol",
+      "numbers": [
+        "GLD4-EN034"
+      ]
+    },
+    {
+      "passcode": 99267150,
+      "name": "Five-Headed Dragon",
+      "numbers": [
+        "GLD4-EN031"
+      ]
+    },
+    {
+      "passcode": 99426834,
+      "name": "Beastking of the Swamps",
+      "numbers": [
+        "GLD4-EN005"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Gold Series 4: Pyramids Edition'; printings from the YGOPRODeck bulk dump."
+}

@@ -1,0 +1,377 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "duel-terminal-5a",
+  "code": "DT05",
+  "name": "Duel Terminal 5a",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-05-29",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 41777,
+      "name": "Gem-Enhancement",
+      "numbers": [
+        "DT05-EN049"
+      ]
+    },
+    {
+      "passcode": 1264319,
+      "name": "Gem-Knight Fusion",
+      "numbers": [
+        "DT05-EN043"
+      ]
+    },
+    {
+      "passcode": 1995985,
+      "name": "Silent Swordsman LV3",
+      "numbers": [
+        "DT05-EN009"
+      ]
+    },
+    {
+      "passcode": 3019642,
+      "name": "Cyberdark Keel",
+      "numbers": [
+        "DT05-EN002"
+      ]
+    },
+    {
+      "passcode": 4906301,
+      "name": "Necro Gardna",
+      "numbers": [
+        "DT05-EN004"
+      ]
+    },
+    {
+      "passcode": 11662742,
+      "name": "Gellenduo",
+      "numbers": [
+        "DT05-EN012"
+      ]
+    },
+    {
+      "passcode": 12986807,
+      "name": "Laval the Greater",
+      "numbers": [
+        "DT05-EN038"
+      ]
+    },
+    {
+      "passcode": 13108445,
+      "name": "Gem-Knight Aquamarine",
+      "numbers": [
+        "DT05-EN035"
+      ]
+    },
+    {
+      "passcode": 13220032,
+      "name": "Vylon Charger",
+      "numbers": [
+        "DT05-EN032"
+      ]
+    },
+    {
+      "passcode": 14047624,
+      "name": "Laval Judgment Lord",
+      "numbers": [
+        "DT05-EN029"
+      ]
+    },
+    {
+      "passcode": 15169262,
+      "name": "Laval Forest Sprite",
+      "numbers": [
+        "DT05-EN026"
+      ]
+    },
+    {
+      "passcode": 22567609,
+      "name": "Nimble Momonga",
+      "numbers": [
+        "DT05-EN008"
+      ]
+    },
+    {
+      "passcode": 24508238,
+      "name": "D.D. Crow",
+      "numbers": [
+        "DT05-EN003"
+      ]
+    },
+    {
+      "passcode": 26381750,
+      "name": "Soaring Eagle Above the Searing Land",
+      "numbers": [
+        "DT05-EN023"
+      ]
+    },
+    {
+      "passcode": 26701483,
+      "name": "Card Ejector",
+      "numbers": [
+        "DT05-EN013"
+      ]
+    },
+    {
+      "passcode": 27004302,
+      "name": "Gem-Armadillo",
+      "numbers": [
+        "DT05-EN020"
+      ]
+    },
+    {
+      "passcode": 27126980,
+      "name": "Gem-Knight Sapphire",
+      "numbers": [
+        "DT05-EN017"
+      ]
+    },
+    {
+      "passcode": 27769400,
+      "name": "Tualatin",
+      "numbers": [
+        "DT05-EN015"
+      ]
+    },
+    {
+      "passcode": 37195861,
+      "name": "Elemental HERO Ocean",
+      "numbers": [
+        "DT05-EN014"
+      ]
+    },
+    {
+      "passcode": 37390589,
+      "name": "Kunai with Chain",
+      "numbers": [
+        "DT05-EN048"
+      ]
+    },
+    {
+      "passcode": 37436476,
+      "name": "Molten Whirlwind Wall",
+      "numbers": [
+        "DT05-EN050"
+      ]
+    },
+    {
+      "passcode": 37970940,
+      "name": "Aussa the Earth Charmer",
+      "numbers": [
+        "DT05-EN010"
+      ]
+    },
+    {
+      "passcode": 40619741,
+      "name": "Vylon Soldier",
+      "numbers": [
+        "DT05-EN033"
+      ]
+    },
+    {
+      "passcode": 41431329,
+      "name": "Vylon Cube",
+      "numbers": [
+        "DT05-EN030"
+      ]
+    },
+    {
+      "passcode": 47658964,
+      "name": "Searing Fire Wall",
+      "numbers": [
+        "DT05-EN044"
+      ]
+    },
+    {
+      "passcode": 48370501,
+      "name": "Vylon Sigma",
+      "numbers": [
+        "DT05-EN039"
+      ]
+    },
+    {
+      "passcode": 49597193,
+      "name": "Gem-Knight Topaz",
+      "numbers": [
+        "DT05-EN036"
+      ]
+    },
+    {
+      "passcode": 51554871,
+      "name": "Kayenn, the Master Magma Blacksmith",
+      "numbers": [
+        "DT05-EN027"
+      ]
+    },
+    {
+      "passcode": 52786469,
+      "name": "Laval Warrior",
+      "numbers": [
+        "DT05-EN024"
+      ]
+    },
+    {
+      "passcode": 53408006,
+      "name": "Gem-Merchant",
+      "numbers": [
+        "DT05-EN021"
+      ]
+    },
+    {
+      "passcode": 54620698,
+      "name": "Gem-Knight Tourmaline",
+      "numbers": [
+        "DT05-EN018"
+      ]
+    },
+    {
+      "passcode": 57421866,
+      "name": "Level Eater",
+      "numbers": [
+        "DT05-EN005"
+      ]
+    },
+    {
+      "passcode": 58551308,
+      "name": "Spear Cretin",
+      "numbers": [
+        "DT05-EN006"
+      ]
+    },
+    {
+      "passcode": 59616123,
+      "name": "Trap Stun",
+      "numbers": [
+        "DT05-EN046"
+      ]
+    },
+    {
+      "passcode": 69279219,
+      "name": "My Body as a Shield",
+      "numbers": [
+        "DT05-EN041"
+      ]
+    },
+    {
+      "passcode": 70781052,
+      "name": "Summoned Skull",
+      "numbers": [
+        "DT05-EN001"
+      ]
+    },
+    {
+      "passcode": 73729209,
+      "name": "Skill Successor",
+      "numbers": [
+        "DT05-EN047"
+      ]
+    },
+    {
+      "passcode": 74657662,
+      "name": "Vylon Material",
+      "numbers": [
+        "DT05-EN045"
+      ]
+    },
+    {
+      "passcode": 75779210,
+      "name": "Vylon Epsilon",
+      "numbers": [
+        "DT05-EN040"
+      ]
+    },
+    {
+      "passcode": 75991898,
+      "name": "Lavalval Dragon",
+      "numbers": [
+        "DT05-EN037"
+      ]
+    },
+    {
+      "passcode": 76614340,
+      "name": "Gem-Knight Ruby",
+      "numbers": [
+        "DT05-EN034"
+      ]
+    },
+    {
+      "passcode": 78636495,
+      "name": "Slate Warrior",
+      "numbers": [
+        "DT05-EN011"
+      ]
+    },
+    {
+      "passcode": 81439173,
+      "name": "Foolish Burial",
+      "numbers": [
+        "DT05-EN042"
+      ]
+    },
+    {
+      "passcode": 87836938,
+      "name": "Vylon Vanguard",
+      "numbers": [
+        "DT05-EN031"
+      ]
+    },
+    {
+      "passcode": 88958576,
+      "name": "Laval Burner",
+      "numbers": [
+        "DT05-EN028"
+      ]
+    },
+    {
+      "passcode": 89770167,
+      "name": "Prominence, Molten Swordsman",
+      "numbers": [
+        "DT05-EN025"
+      ]
+    },
+    {
+      "passcode": 89893715,
+      "name": "Laval Miller",
+      "numbers": [
+        "DT05-EN022"
+      ]
+    },
+    {
+      "passcode": 90019393,
+      "name": "Gem-Knight Alexandrite",
+      "numbers": [
+        "DT05-EN019"
+      ]
+    },
+    {
+      "passcode": 91731841,
+      "name": "Gem-Knight Garnet",
+      "numbers": [
+        "DT05-EN016"
+      ]
+    },
+    {
+      "passcode": 93013676,
+      "name": "Maha Vailo",
+      "numbers": [
+        "DT05-EN007"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Duel Terminal 5a'; printings from the YGOPRODeck bulk dump."
+}

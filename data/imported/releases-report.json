@@ -2,59 +2,59 @@
   "importer": "retroformats.importers.tcg_releases",
   "window": {
     "from": "2002-03-01",
-    "through": "2010-12-31"
+    "through": "2011-09-17"
   },
   "source_revisions": {
-    "ProjectIgnis/BabelCDB": "da54f282c7fe8eb90b5574b87afa455391c08f0b",
+    "ProjectIgnis/BabelCDB": "0659607453a7d79d1adefbfe1ef7477d3c92434c",
     "fetch_manifest": {
       "cardinfo_full_misc.json": {
         "url": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes",
-        "retrieved": "2026-08-19T18:00:00+00:00",
-        "bytes": 24758045
+        "retrieved": "2026-08-27T14:24:19+00:00",
+        "bytes": 24788748
       },
       "cardsets.json": {
         "url": "https://db.ygoprodeck.com/api/v7/cardsets.php",
-        "retrieved": "2026-08-19T18:00:00+00:00",
+        "retrieved": "2026-08-27T14:24:19+00:00",
         "bytes": 174543
       },
       "products_na.json": {
-        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
-        "retrieved": "2026-08-19T18:14:17+00:00",
-        "pages": 271
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BNorth%20American%20English%20release%20date%3A%3A%3C2011-09-18%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-27T14:24:20+00:00",
+        "pages": 297
       },
       "products_eu.json": {
-        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
-        "retrieved": "2026-08-19T18:14:18+00:00",
-        "pages": 98
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEuropean%20English%20release%20date%3A%3A%3C2011-09-18%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-27T14:24:22+00:00",
+        "pages": 118
       },
       "products_oce.json": {
-        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
-        "retrieved": "2026-08-19T18:14:20+00:00",
-        "pages": 44
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BOceanic%20English%20release%20date%3A%3A%3C2011-09-18%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-27T14:24:23+00:00",
+        "pages": 61
       },
       "products_ww.json": {
-        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
-        "retrieved": "2026-08-19T18:14:21+00:00",
-        "pages": 110
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BWorldwide%20English%20release%20date%3A%3A%3C2011-09-18%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-27T14:24:24+00:00",
+        "pages": 119
       },
       "products_en.json": {
-        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3C2011-01-01%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
-        "retrieved": "2026-08-19T18:14:23+00:00",
-        "pages": 384
+        "url": "https://yugipedia.com/api.php?action=ask&format=json&api_version=2&query=%5B%5BMedium%3A%3ATCG%5D%5D%5B%5BPage%20type%3A%3ASet%20page%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3E2001-12-31%5D%5D%5B%5BEnglish%20release%20date%3A%3A%3C2011-09-18%5D%5D%7C%3FNorth%20American%20English%20release%20date%7C%3FEuropean%20English%20release%20date%7C%3FOceanic%20English%20release%20date%7C%3FWorldwide%20English%20release%20date%7C%3FEnglish%20release%20date%7C%3FEnglish%20set%20prefix%7C%3FSet%20type%7Climit%3D500%7Coffset%3D0",
+        "retrieved": "2026-08-27T14:24:26+00:00",
+        "pages": 422
       }
     }
   },
   "stats": {
-    "products_written": 363,
+    "products_written": 404,
     "curated_preserved": 7,
-    "printings": 8445,
-    "release_events": 508,
+    "printings": 9338,
+    "release_events": 585,
     "unmatched_cards": 8,
-    "name_mismatches": 6,
-    "date_discrepancies": 59,
+    "name_mismatches": 7,
+    "date_discrepancies": 62,
     "products_without_printings": 4,
-    "yugipedia_only_products": 32,
-    "prefix_mismatched_printings": 3,
+    "yugipedia_only_products": 34,
+    "prefix_mismatched_printings": 4,
     "skipped_products": 9,
     "non_playable_skipped": 1,
     "ot_conflicts": 1
@@ -147,6 +147,11 @@
       "passcode": 96938777,
       "babelcdb": "Machine Lord Ür",
       "ygoprodeck": "Machine Lord Ur"
+    },
+    {
+      "passcode": 98535702,
+      "babelcdb": "Damage Vaccine Ω MAX",
+      "ygoprodeck": "Damage Vaccine Omega MAX"
     }
   ],
   "date_discrepancies": [
@@ -206,6 +211,16 @@
       "yugipedia": {
         "ww": "2004-01-01",
         "en": "2004-01-01"
+      }
+    },
+    {
+      "product": "Duelist Pack Collection Tin 2011",
+      "ygoprodeck": "2011-03-31",
+      "yugipedia": {
+        "na": "2011-04-05",
+        "eu": "2011-04-01",
+        "oce": "2011-04-01",
+        "en": "2011-04-01"
       }
     },
     {
@@ -618,6 +633,22 @@
       }
     },
     {
+      "product": "World Championship 2011 Card Pack",
+      "ygoprodeck": "2011-08-01",
+      "yugipedia": {
+        "ww": "2011-08-13",
+        "en": "2011-08-13"
+      }
+    },
+    {
+      "product": "Yu-Gi-Oh! 5D's Volume 1 promotional card",
+      "ygoprodeck": "2011-07-06",
+      "yugipedia": {
+        "na": "2011-07-05",
+        "en": "2011-07-05"
+      }
+    },
+    {
       "product": "Yu-Gi-Oh! Power of Chaos: Yugi the Destiny Limited Collector's Edition",
       "ygoprodeck": "2003-11-18",
       "yugipedia": {
@@ -656,6 +687,7 @@
     "Toys \"R\" Us Geoffrey's Birthday Party promotional cards",
     "Toys \"R\" Us Throwdown promotional cards",
     "Upper Deck Entertainment promotional card",
+    "Yu-Gi-Oh! 3D Bonds Beyond Time Blu-ray promotional card",
     "Yu-Gi-Oh! 5D's National Championship 2009 promotional cards",
     "Yu-Gi-Oh! Duelist Volume 16 promotional card",
     "Yu-Gi-Oh! Forbidden Memories Premium Edition promotional cards",
@@ -664,6 +696,7 @@
     "Yu-Gi-Oh! World Championship 2008 prize cards",
     "Yu-Gi-Oh! World Championship 2009 prize cards",
     "Yu-Gi-Oh! World Championship 2010 prize cards",
+    "Yu-Gi-Oh! World Championship 2011 prize cards",
     "Yu-Gi-Oh! the Movie VHS and DVD promotional cards"
   ],
   "curated_covered_products": [
@@ -708,7 +741,7 @@
     }
   ],
   "non_playable_skipped": 1,
-  "prefix_mismatched_printings": 3,
+  "prefix_mismatched_printings": 4,
   "ot_conflicts": [
     {
       "passcode": 96782886,
@@ -717,6 +750,6 @@
       "note": "printed in a TCG product but cards.cdb ot lacks the TCG bit"
     }
   ],
-  "generated_products_written": 363,
+  "generated_products_written": 404,
   "curated_products_preserved": 7
 }

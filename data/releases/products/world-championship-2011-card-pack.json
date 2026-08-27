@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "world-championship-2011-card-pack",
+  "code": "WP11",
+  "name": "World Championship 2011 Card Pack",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-08-13",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1929294,
+      "name": "Key Mace",
+      "numbers": [
+        "WP11-EN002"
+      ]
+    },
+    {
+      "passcode": 3366982,
+      "name": "Alligator's Sword Dragon",
+      "numbers": [
+        "WP11-EN015"
+      ]
+    },
+    {
+      "passcode": 4149689,
+      "name": "Goblin Fan",
+      "numbers": [
+        "WP11-EN019"
+      ]
+    },
+    {
+      "passcode": 14977074,
+      "name": "Garoozis",
+      "numbers": [
+        "WP11-EN009"
+      ]
+    },
+    {
+      "passcode": 16970158,
+      "name": "Call of the Grave",
+      "numbers": [
+        "WP11-EN018"
+      ]
+    },
+    {
+      "passcode": 20101223,
+      "name": "Breath of Light",
+      "numbers": [
+        "WP11-EN017"
+      ]
+    },
+    {
+      "passcode": 20541432,
+      "name": "Key Mace #2",
+      "numbers": [
+        "WP11-EN005"
+      ]
+    },
+    {
+      "passcode": 24311372,
+      "name": "Zoa",
+      "numbers": [
+        "WP11-EN011"
+      ]
+    },
+    {
+      "passcode": 50705071,
+      "name": "Metalzoa",
+      "numbers": [
+        "WP11-EN014"
+      ]
+    },
+    {
+      "passcode": 55691901,
+      "name": "Great Bill",
+      "numbers": [
+        "WP11-EN006"
+      ]
+    },
+    {
+      "passcode": 56713552,
+      "name": "Obese Marmot of Nefariousness",
+      "numbers": [
+        "WP11-EN003"
+      ]
+    },
+    {
+      "passcode": 58074572,
+      "name": "Mooyan Curry",
+      "numbers": [
+        "WP11-EN016"
+      ]
+    },
+    {
+      "passcode": 58831685,
+      "name": "Giant Red Seasnake",
+      "numbers": [
+        "WP11-EN008"
+      ]
+    },
+    {
+      "passcode": 62762898,
+      "name": "Parrot Dragon",
+      "numbers": [
+        "WP11-EN010"
+      ]
+    },
+    {
+      "passcode": 64271667,
+      "name": "Meteor Dragon",
+      "numbers": [
+        "WP11-EN007"
+      ]
+    },
+    {
+      "passcode": 64428736,
+      "name": "Alligator's Sword",
+      "numbers": [
+        "WP11-EN012"
+      ]
+    },
+    {
+      "passcode": 68540058,
+      "name": "Metalmorph",
+      "numbers": [
+        "WP11-EN020"
+      ]
+    },
+    {
+      "passcode": 84133008,
+      "name": "Monster Eye",
+      "numbers": [
+        "WP11-EN013"
+      ]
+    },
+    {
+      "passcode": 92391084,
+      "name": "Wilmee",
+      "numbers": [
+        "WP11-EN004"
+      ]
+    },
+    {
+      "passcode": 97973387,
+      "name": "Droll Bird",
+      "numbers": [
+        "WP11-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'World Championship 2011 Card Pack'; printings from the YGOPRODeck bulk dump."
+}

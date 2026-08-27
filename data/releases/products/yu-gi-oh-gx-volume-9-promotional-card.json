@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-gx-volume-9-promotional-card",
+  "code": "YG09",
+  "name": "Yu-Gi-Oh! GX Volume 9 promotional card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-08-07",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 33574806,
+      "name": "Elemental HERO Escuridao",
+      "numbers": [
+        "YG09-EN001"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api"
+  ],
+  "notes": "No usable Yugipedia date; single unspecified-territory date from the YGOPRODeck bulk dump."
+}

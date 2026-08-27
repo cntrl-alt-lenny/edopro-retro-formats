@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "generation-force-special-edition",
+  "code": "GENF",
+  "name": "Generation Force: Special Edition",
+  "kind": "other",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-09-20",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-09-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-09-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 11747708,
+      "name": "Spore",
+      "numbers": [
+        "GENF-ENSE2"
+      ]
+    },
+    {
+      "passcode": 40854197,
+      "name": "Elemental HERO Absolute Zero",
+      "numbers": [
+        "GENF-ENSE1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Generation Force: Special Edition'; printings from the YGOPRODeck bulk dump."
+}

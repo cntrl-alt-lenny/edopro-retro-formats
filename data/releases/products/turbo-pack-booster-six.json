@@ -1,0 +1,174 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "turbo-pack-booster-six",
+  "code": "TU06",
+  "name": "Turbo Pack: Booster Six",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-08-04",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 9666558,
+      "name": "Golem Dragon",
+      "numbers": [
+        "TU06-EN019"
+      ]
+    },
+    {
+      "passcode": 17259470,
+      "name": "Zombie Master",
+      "numbers": [
+        "TU06-EN006"
+      ]
+    },
+    {
+      "passcode": 17573739,
+      "name": "Alector, Sovereign of Birds",
+      "numbers": [
+        "TU06-EN011"
+      ]
+    },
+    {
+      "passcode": 20932152,
+      "name": "Quickdraw Synchron",
+      "numbers": [
+        "TU06-EN005"
+      ]
+    },
+    {
+      "passcode": 26202165,
+      "name": "Sangan",
+      "numbers": [
+        "TU06-EN001"
+      ]
+    },
+    {
+      "passcode": 28553439,
+      "name": "Magical Dimension",
+      "numbers": [
+        "TU06-EN016"
+      ]
+    },
+    {
+      "passcode": 29071332,
+      "name": "Armory Arm",
+      "numbers": [
+        "TU06-EN010"
+      ]
+    },
+    {
+      "passcode": 31036355,
+      "name": "Creature Swap",
+      "numbers": [
+        "TU06-EN015"
+      ]
+    },
+    {
+      "passcode": 32296881,
+      "name": "Bountiful Artemis",
+      "numbers": [
+        "TU06-EN017"
+      ]
+    },
+    {
+      "passcode": 33550694,
+      "name": "Fusion Gate",
+      "numbers": [
+        "TU06-EN012"
+      ]
+    },
+    {
+      "passcode": 33846209,
+      "name": "Gemini Spark",
+      "numbers": [
+        "TU06-EN018"
+      ]
+    },
+    {
+      "passcode": 39191307,
+      "name": "Masked Dragon",
+      "numbers": [
+        "TU06-EN003"
+      ]
+    },
+    {
+      "passcode": 44508094,
+      "name": "Stardust Dragon",
+      "numbers": [
+        "TU06-EN007"
+      ]
+    },
+    {
+      "passcode": 57139487,
+      "name": "Chain Disappearance",
+      "numbers": [
+        "TU06-EN002"
+      ]
+    },
+    {
+      "passcode": 61831093,
+      "name": "Greenkappa",
+      "numbers": [
+        "TU06-EN014"
+      ]
+    },
+    {
+      "passcode": 65192027,
+      "name": "Dark Armed Dragon",
+      "numbers": [
+        "TU06-EN000"
+      ]
+    },
+    {
+      "passcode": 66094973,
+      "name": "Transforming Sphere",
+      "numbers": [
+        "TU06-EN020"
+      ]
+    },
+    {
+      "passcode": 70902743,
+      "name": "Red Dragon Archfiend",
+      "numbers": [
+        "TU06-EN008"
+      ]
+    },
+    {
+      "passcode": 71645242,
+      "name": "Black Garden",
+      "numbers": [
+        "TU06-EN009"
+      ]
+    },
+    {
+      "passcode": 79853073,
+      "name": "Cipher Soldier",
+      "numbers": [
+        "TU06-EN013"
+      ]
+    },
+    {
+      "passcode": 93369354,
+      "name": "Fishborg Blaster",
+      "numbers": [
+        "TU06-EN004"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Turbo Pack: Booster Six'; printings from the YGOPRODeck bulk dump."
+}

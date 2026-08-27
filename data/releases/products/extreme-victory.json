@@ -1,0 +1,748 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "extreme-victory",
+  "code": "EXVC",
+  "name": "Extreme Victory",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-05-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-05-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-05-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 293542,
+      "name": "T.G. Warwolf",
+      "numbers": [
+        "EXVC-EN020"
+      ]
+    },
+    {
+      "passcode": 1315120,
+      "name": "T.G. Striker",
+      "numbers": [
+        "EXVC-EN017"
+      ]
+    },
+    {
+      "passcode": 1802450,
+      "name": "Sealing Ceremony of Mokuton",
+      "numbers": [
+        "EXVC-EN077"
+      ]
+    },
+    {
+      "passcode": 2137678,
+      "name": "Meklord Army of Granel",
+      "numbers": [
+        "EXVC-EN014"
+      ]
+    },
+    {
+      "passcode": 2250266,
+      "name": "Morphtronic Staplen",
+      "numbers": [
+        "EXVC-EN011"
+      ]
+    },
+    {
+      "passcode": 2924048,
+      "name": "Karakuri Cash Shed",
+      "numbers": [
+        "EXVC-EN074"
+      ]
+    },
+    {
+      "passcode": 3072808,
+      "name": "Blackwing - Hillen the Tengu-wind",
+      "numbers": [
+        "EXVC-EN008"
+      ]
+    },
+    {
+      "passcode": 3146695,
+      "name": "Psychic Reactor",
+      "numbers": [
+        "EXVC-EN071"
+      ]
+    },
+    {
+      "passcode": 3868277,
+      "name": "TGX3-DX2",
+      "numbers": [
+        "EXVC-EN068"
+      ]
+    },
+    {
+      "passcode": 4081825,
+      "name": "Chaos Infinity",
+      "numbers": [
+        "EXVC-EN065"
+      ]
+    },
+    {
+      "passcode": 9780364,
+      "name": "Gladiator Taming",
+      "numbers": [
+        "EXVC-EN087"
+      ]
+    },
+    {
+      "passcode": 10028593,
+      "name": "Reborn Tengu",
+      "numbers": [
+        "EXVC-EN000"
+      ]
+    },
+    {
+      "passcode": 10802915,
+      "name": "Tour Guide From the Underworld",
+      "numbers": [
+        "EXVC-EN084"
+      ]
+    },
+    {
+      "passcode": 10925955,
+      "name": "Contact with the Aquamirror",
+      "numbers": [
+        "EXVC-EN059"
+      ]
+    },
+    {
+      "passcode": 11047543,
+      "name": "Psychic Feel Zone",
+      "numbers": [
+        "EXVC-EN056"
+      ]
+    },
+    {
+      "passcode": 11125718,
+      "name": "Lancer Dragonute",
+      "numbers": [
+        "EXVC-EN091"
+      ]
+    },
+    {
+      "passcode": 11264180,
+      "name": "TGX1-HL",
+      "numbers": [
+        "EXVC-EN053"
+      ]
+    },
+    {
+      "passcode": 12986778,
+      "name": "Boon of the Meklord Emperor",
+      "numbers": [
+        "EXVC-EN050"
+      ]
+    },
+    {
+      "passcode": 14198496,
+      "name": "Mystic Piper",
+      "numbers": [
+        "EXVC-EN005"
+      ]
+    },
+    {
+      "passcode": 15103313,
+      "name": "Self-Mummification",
+      "numbers": [
+        "EXVC-EN062"
+      ]
+    },
+    {
+      "passcode": 15310033,
+      "name": "Unknown Synchron",
+      "numbers": [
+        "EXVC-EN002"
+      ]
+    },
+    {
+      "passcode": 22386234,
+      "name": "Aurora Paragon",
+      "numbers": [
+        "EXVC-EN036"
+      ]
+    },
+    {
+      "passcode": 23008320,
+      "name": "Resonator Call",
+      "numbers": [
+        "EXVC-EN047"
+      ]
+    },
+    {
+      "passcode": 23408872,
+      "name": "Tradetoad",
+      "numbers": [
+        "EXVC-EN033"
+      ]
+    },
+    {
+      "passcode": 24221808,
+      "name": "Overmind Archfiend",
+      "numbers": [
+        "EXVC-EN044"
+      ]
+    },
+    {
+      "passcode": 24621460,
+      "name": "Karakuri Komachi mdl 224 \"Ninishi\"",
+      "numbers": [
+        "EXVC-EN030"
+      ]
+    },
+    {
+      "passcode": 24943456,
+      "name": "T.G. Power Gladiator",
+      "numbers": [
+        "EXVC-EN041"
+      ]
+    },
+    {
+      "passcode": 25165047,
+      "name": "Life Stream Dragon",
+      "numbers": [
+        "EXVC-EN038"
+      ]
+    },
+    {
+      "passcode": 25343017,
+      "name": "Hushed Psychic Cleric",
+      "numbers": [
+        "EXVC-EN027"
+      ]
+    },
+    {
+      "passcode": 31930787,
+      "name": "Meklord Emperor Skiel",
+      "numbers": [
+        "EXVC-EN094"
+      ]
+    },
+    {
+      "passcode": 36352429,
+      "name": "Vampire Dragon",
+      "numbers": [
+        "EXVC-EN081"
+      ]
+    },
+    {
+      "passcode": 36565699,
+      "name": "Mental Seeker",
+      "numbers": [
+        "EXVC-EN024"
+      ]
+    },
+    {
+      "passcode": 36687247,
+      "name": "T.G. Rush Rhino",
+      "numbers": [
+        "EXVC-EN021"
+      ]
+    },
+    {
+      "passcode": 37300735,
+      "name": "T.G. Jet Falcon",
+      "numbers": [
+        "EXVC-EN018"
+      ]
+    },
+    {
+      "passcode": 37349495,
+      "name": "Naturia Eggplant",
+      "numbers": [
+        "EXVC-EN098"
+      ]
+    },
+    {
+      "passcode": 38296564,
+      "name": "Safe Zone",
+      "numbers": [
+        "EXVC-EN078"
+      ]
+    },
+    {
+      "passcode": 38318146,
+      "name": "Tyrant's Tantrum",
+      "numbers": [
+        "EXVC-EN075"
+      ]
+    },
+    {
+      "passcode": 38522377,
+      "name": "Meklord Astro Dragon Asterisk",
+      "numbers": [
+        "EXVC-EN015"
+      ]
+    },
+    {
+      "passcode": 38562933,
+      "name": "Blackwing - Jin the Rain Shadow",
+      "numbers": [
+        "EXVC-EN096"
+      ]
+    },
+    {
+      "passcode": 39531794,
+      "name": "Brain Hazard",
+      "numbers": [
+        "EXVC-EN072"
+      ]
+    },
+    {
+      "passcode": 39648965,
+      "name": "Meklord Army of Wisel",
+      "numbers": [
+        "EXVC-EN012"
+      ]
+    },
+    {
+      "passcode": 40253382,
+      "name": "TG-SX1",
+      "numbers": [
+        "EXVC-EN069"
+      ]
+    },
+    {
+      "passcode": 40583194,
+      "name": "Force Resonator",
+      "numbers": [
+        "EXVC-EN006"
+      ]
+    },
+    {
+      "passcode": 41197012,
+      "name": "Red Carpet",
+      "numbers": [
+        "EXVC-EN063"
+      ]
+    },
+    {
+      "passcode": 41475424,
+      "name": "Mektimed Blast",
+      "numbers": [
+        "EXVC-EN066"
+      ]
+    },
+    {
+      "passcode": 41705642,
+      "name": "Salvage Warrior",
+      "numbers": [
+        "EXVC-EN003"
+      ]
+    },
+    {
+      "passcode": 42314669,
+      "name": "Soundproofed",
+      "numbers": [
+        "EXVC-EN060"
+      ]
+    },
+    {
+      "passcode": 45178472,
+      "name": "Full House",
+      "numbers": [
+        "EXVC-EN088"
+      ]
+    },
+    {
+      "passcode": 46272804,
+      "name": "Lancer Lindwurm",
+      "numbers": [
+        "EXVC-EN092"
+      ]
+    },
+    {
+      "passcode": 46291010,
+      "name": "Psi-Beast",
+      "numbers": [
+        "EXVC-EN085"
+      ]
+    },
+    {
+      "passcode": 47013502,
+      "name": "Dodger Dragon",
+      "numbers": [
+        "EXVC-EN082"
+      ]
+    },
+    {
+      "passcode": 47436247,
+      "name": "Shien's Dojo",
+      "numbers": [
+        "EXVC-EN057"
+      ]
+    },
+    {
+      "passcode": 49460512,
+      "name": "Blackwing - Kogarashi the Wanderer",
+      "numbers": [
+        "EXVC-EN009"
+      ]
+    },
+    {
+      "passcode": 50215517,
+      "name": "Scarlet Security",
+      "numbers": [
+        "EXVC-EN045"
+      ]
+    },
+    {
+      "passcode": 50615578,
+      "name": "Karakuri Ninja mdl 7749 \"Nanashick\"",
+      "numbers": [
+        "EXVC-EN031"
+      ]
+    },
+    {
+      "passcode": 50893987,
+      "name": "Gladiator Beast Tygerius",
+      "numbers": [
+        "EXVC-EN034"
+      ]
+    },
+    {
+      "passcode": 51447164,
+      "name": "T.G. Blade Blaster",
+      "numbers": [
+        "EXVC-EN042"
+      ]
+    },
+    {
+      "passcode": 58258899,
+      "name": "TGX300",
+      "numbers": [
+        "EXVC-EN054"
+      ]
+    },
+    {
+      "passcode": 59371387,
+      "name": "The Resolute Meklord Army",
+      "numbers": [
+        "EXVC-EN051"
+      ]
+    },
+    {
+      "passcode": 59593925,
+      "name": "Resonant Destruction",
+      "numbers": [
+        "EXVC-EN048"
+      ]
+    },
+    {
+      "passcode": 59771339,
+      "name": "Junk Berserker",
+      "numbers": [
+        "EXVC-EN037"
+      ]
+    },
+    {
+      "passcode": 61737116,
+      "name": "Elder of the Six Samurai",
+      "numbers": [
+        "EXVC-EN028"
+      ]
+    },
+    {
+      "passcode": 62560742,
+      "name": "T.G. Recipro Dragonfly",
+      "numbers": [
+        "EXVC-EN039"
+      ]
+    },
+    {
+      "passcode": 62950604,
+      "name": "Silent Psychic Wizard",
+      "numbers": [
+        "EXVC-EN025"
+      ]
+    },
+    {
+      "passcode": 63676256,
+      "name": "Buster Blaster",
+      "numbers": [
+        "EXVC-EN022"
+      ]
+    },
+    {
+      "passcode": 64550682,
+      "name": "Scrap Orthros",
+      "numbers": [
+        "EXVC-EN097"
+      ]
+    },
+    {
+      "passcode": 64681263,
+      "name": "Localized Tornado",
+      "numbers": [
+        "EXVC-EN079"
+      ]
+    },
+    {
+      "passcode": 64898834,
+      "name": "T.G. Catapult Dragon",
+      "numbers": [
+        "EXVC-EN019"
+      ]
+    },
+    {
+      "passcode": 64910482,
+      "name": "T.G. Cyber Magician",
+      "numbers": [
+        "EXVC-EN016"
+      ]
+    },
+    {
+      "passcode": 65703851,
+      "name": "Debunk",
+      "numbers": [
+        "EXVC-EN076"
+      ]
+    },
+    {
+      "passcode": 67328336,
+      "name": "Meklord Fortress",
+      "numbers": [
+        "EXVC-EN095"
+      ]
+    },
+    {
+      "passcode": 72563071,
+      "name": "Psychic Shockwave",
+      "numbers": [
+        "EXVC-EN089"
+      ]
+    },
+    {
+      "passcode": 72926163,
+      "name": "Elemental HERO Neos Knight",
+      "numbers": [
+        "EXVC-EN093"
+      ]
+    },
+    {
+      "passcode": 73285669,
+      "name": "Gladiator Beast Essedarii",
+      "numbers": [
+        "EXVC-EN086"
+      ]
+    },
+    {
+      "passcode": 73417207,
+      "name": "Mara of the Nordic Alfar",
+      "numbers": [
+        "EXVC-EN083"
+      ]
+    },
+    {
+      "passcode": 75525309,
+      "name": "Six Style - Dual Wield",
+      "numbers": [
+        "EXVC-EN073"
+      ]
+    },
+    {
+      "passcode": 75733063,
+      "name": "Meklord Army of Skiel",
+      "numbers": [
+        "EXVC-EN013"
+      ]
+    },
+    {
+      "passcode": 76641981,
+      "name": "TG1-EM1",
+      "numbers": [
+        "EXVC-EN070"
+      ]
+    },
+    {
+      "passcode": 76865611,
+      "name": "Morphtronic Lantron",
+      "numbers": [
+        "EXVC-EN010"
+      ]
+    },
+    {
+      "passcode": 77087109,
+      "name": "Clock Resonator",
+      "numbers": [
+        "EXVC-EN007"
+      ]
+    },
+    {
+      "passcode": 77700347,
+      "name": "Necro Defender",
+      "numbers": [
+        "EXVC-EN004"
+      ]
+    },
+    {
+      "passcode": 77864539,
+      "name": "Meklord Factory",
+      "numbers": [
+        "EXVC-EN067"
+      ]
+    },
+    {
+      "passcode": 78586116,
+      "name": "Power-Up Adapter",
+      "numbers": [
+        "EXVC-EN064"
+      ]
+    },
+    {
+      "passcode": 78922939,
+      "name": "Junk Servant",
+      "numbers": [
+        "EXVC-EN001"
+      ]
+    },
+    {
+      "passcode": 79718768,
+      "name": "Out of the Blue",
+      "numbers": [
+        "EXVC-EN061"
+      ]
+    },
+    {
+      "passcode": 83831356,
+      "name": "Runaway Karakuri",
+      "numbers": [
+        "EXVC-EN058"
+      ]
+    },
+    {
+      "passcode": 84653834,
+      "name": "ESP Amplifier",
+      "numbers": [
+        "EXVC-EN055"
+      ]
+    },
+    {
+      "passcode": 84914462,
+      "name": "Axe Dragonute",
+      "numbers": [
+        "EXVC-EN090"
+      ]
+    },
+    {
+      "passcode": 85775486,
+      "name": "Reboot",
+      "numbers": [
+        "EXVC-EN052"
+      ]
+    },
+    {
+      "passcode": 86997073,
+      "name": "Fortissimo the Mobile Fortress",
+      "numbers": [
+        "EXVC-EN049"
+      ]
+    },
+    {
+      "passcode": 87614611,
+      "name": "Red Dragon Vase",
+      "numbers": [
+        "EXVC-EN046"
+      ]
+    },
+    {
+      "passcode": 90075978,
+      "name": "W Nebula Meteorite",
+      "numbers": [
+        "EXVC-EN080"
+      ]
+    },
+    {
+      "passcode": 96287685,
+      "name": "Jar Turtle",
+      "numbers": [
+        "EXVC-EN035"
+      ]
+    },
+    {
+      "passcode": 97000273,
+      "name": "Scrap Kong",
+      "numbers": [
+        "EXVC-EN032"
+      ]
+    },
+    {
+      "passcode": 97836203,
+      "name": "T.G. Halberd Cannon",
+      "numbers": [
+        "EXVC-EN043"
+      ]
+    },
+    {
+      "passcode": 98126725,
+      "name": "Shien's Advisor",
+      "numbers": [
+        "EXVC-EN029"
+      ]
+    },
+    {
+      "passcode": 98358303,
+      "name": "Serene Psychic Witch",
+      "numbers": [
+        "EXVC-EN026"
+      ]
+    },
+    {
+      "passcode": 98558751,
+      "name": "T.G. Wonder Magician",
+      "numbers": [
+        "EXVC-EN040"
+      ]
+    },
+    {
+      "passcode": 98884569,
+      "name": "Blue Rose Dragon",
+      "numbers": [
+        "EXVC-EN099"
+      ]
+    },
+    {
+      "passcode": 99070951,
+      "name": "Esper Girl",
+      "numbers": [
+        "EXVC-EN023"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Extreme Victory'; printings from the YGOPRODeck bulk dump."
+}

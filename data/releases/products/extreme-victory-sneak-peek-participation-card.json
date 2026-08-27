@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "extreme-victory-sneak-peek-participation-card",
+  "code": "EXVC",
+  "name": "Extreme Victory Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-04-30",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 10028593,
+      "name": "Reborn Tengu",
+      "numbers": [
+        "EXVC-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Extreme Victory Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

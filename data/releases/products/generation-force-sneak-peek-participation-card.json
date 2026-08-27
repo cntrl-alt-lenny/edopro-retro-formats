@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "generation-force-sneak-peek-participation-card",
+  "code": "GENF",
+  "name": "Generation Force Sneak Peek Participation Card",
+  "kind": "promo-other",
+  "release_events": [
+    {
+      "territory": "tcg",
+      "date": "2011-08-06",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 96457619,
+      "name": "Xyz Veil",
+      "numbers": [
+        "GENF-ENSP1"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Generation Force Sneak Peek Participation Card'; printings from the YGOPRODeck bulk dump."
+}

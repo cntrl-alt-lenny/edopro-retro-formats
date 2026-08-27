@@ -1,0 +1,747 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "storm-of-ragnarok",
+  "code": "STOR",
+  "name": "Storm of Ragnarok",
+  "kind": "booster",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-02-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-02-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-02-10",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 1498130,
+      "name": "Kagemusha of the Six Samurai",
+      "numbers": [
+        "STOR-EN025"
+      ]
+    },
+    {
+      "passcode": 2333365,
+      "name": "Tyr of the Nordic Champions",
+      "numbers": [
+        "STOR-EN019"
+      ]
+    },
+    {
+      "passcode": 2511717,
+      "name": "Legendary Six Samurai - Kageki",
+      "numbers": [
+        "STOR-EN022"
+      ]
+    },
+    {
+      "passcode": 3129635,
+      "name": "Tiki Curse",
+      "numbers": [
+        "STOR-EN079"
+      ]
+    },
+    {
+      "passcode": 5554990,
+      "name": "Wattberyx",
+      "numbers": [
+        "STOR-EN031"
+      ]
+    },
+    {
+      "passcode": 6276588,
+      "name": "Karakuri Ninja mdl 919 \"Kuick\"",
+      "numbers": [
+        "STOR-EN028"
+      ]
+    },
+    {
+      "passcode": 10026986,
+      "name": "Worm King",
+      "numbers": [
+        "STOR-EN097"
+      ]
+    },
+    {
+      "passcode": 13455953,
+      "name": "Dverg of the Nordic Alfar",
+      "numbers": [
+        "STOR-EN016"
+      ]
+    },
+    {
+      "passcode": 14342283,
+      "name": "Token Stampede",
+      "numbers": [
+        "STOR-EN076"
+      ]
+    },
+    {
+      "passcode": 14464864,
+      "name": "Gleipnir, the Fetters of Fenrir",
+      "numbers": [
+        "STOR-EN073"
+      ]
+    },
+    {
+      "passcode": 14677495,
+      "name": "Tanngnjostr of the Nordic Beasts",
+      "numbers": [
+        "STOR-EN013"
+      ]
+    },
+    {
+      "passcode": 15286412,
+      "name": "Nordic Relic Gungnir",
+      "numbers": [
+        "STOR-EN070"
+      ]
+    },
+    {
+      "passcode": 15394083,
+      "name": "Tanngrisnir of the Nordic Beasts",
+      "numbers": [
+        "STOR-EN010"
+      ]
+    },
+    {
+      "passcode": 15576074,
+      "name": "Resonator Engine",
+      "numbers": [
+        "STOR-EN056"
+      ]
+    },
+    {
+      "passcode": 15854426,
+      "name": "Divine Wind of Mist Valley",
+      "numbers": [
+        "STOR-EN059"
+      ]
+    },
+    {
+      "passcode": 16308000,
+      "name": "Solemn Authority",
+      "numbers": [
+        "STOR-EN067"
+      ]
+    },
+    {
+      "passcode": 16516630,
+      "name": "Blackwing - Boreas the Sharp",
+      "numbers": [
+        "STOR-EN007"
+      ]
+    },
+    {
+      "passcode": 16638212,
+      "name": "D.D. Sprite",
+      "numbers": [
+        "STOR-EN004"
+      ]
+    },
+    {
+      "passcode": 16708652,
+      "name": "Karakuri Gold Dust",
+      "numbers": [
+        "STOR-EN053"
+      ]
+    },
+    {
+      "passcode": 17521642,
+      "name": "Zero Force",
+      "numbers": [
+        "STOR-EN064"
+      ]
+    },
+    {
+      "passcode": 23212990,
+      "name": "Six Strike - Thunder Blast",
+      "numbers": [
+        "STOR-EN089"
+      ]
+    },
+    {
+      "passcode": 23434538,
+      "name": "Maxx \"C\"",
+      "numbers": [
+        "STOR-EN086"
+      ]
+    },
+    {
+      "passcode": 24150026,
+      "name": "Karakuri Muso mdl 818 \"Haipa\"",
+      "numbers": [
+        "STOR-EN083"
+      ]
+    },
+    {
+      "passcode": 25373678,
+      "name": "Vortex the Whirlwind",
+      "numbers": [
+        "STOR-EN000"
+      ]
+    },
+    {
+      "passcode": 27243130,
+      "name": "Forbidden Lance",
+      "numbers": [
+        "STOR-EN061"
+      ]
+    },
+    {
+      "passcode": 27450400,
+      "name": "Cosmic Compass",
+      "numbers": [
+        "STOR-EN001"
+      ]
+    },
+    {
+      "passcode": 27821104,
+      "name": "Asceticism of the Six Samurai",
+      "numbers": [
+        "STOR-EN050"
+      ]
+    },
+    {
+      "passcode": 28643791,
+      "name": "March Towards Ragnarok",
+      "numbers": [
+        "STOR-EN047"
+      ]
+    },
+    {
+      "passcode": 29765339,
+      "name": "Watthydra",
+      "numbers": [
+        "STOR-EN044"
+      ]
+    },
+    {
+      "passcode": 29981921,
+      "name": "Legendary Six Samurai - Shi En",
+      "numbers": [
+        "STOR-EN041"
+      ]
+    },
+    {
+      "passcode": 30604579,
+      "name": "Thor, Lord of the Aesir",
+      "numbers": [
+        "STOR-EN038"
+      ]
+    },
+    {
+      "passcode": 31826057,
+      "name": "Symphonic Warrior Piaano",
+      "numbers": [
+        "STOR-EN035"
+      ]
+    },
+    {
+      "passcode": 32548609,
+      "name": "Wattmole",
+      "numbers": [
+        "STOR-EN032"
+      ]
+    },
+    {
+      "passcode": 32761286,
+      "name": "Scrap Worm",
+      "numbers": [
+        "STOR-EN029"
+      ]
+    },
+    {
+      "passcode": 33883834,
+      "name": "Shien's Squire",
+      "numbers": [
+        "STOR-EN026"
+      ]
+    },
+    {
+      "passcode": 40666140,
+      "name": "Ljosalf of the Nordic Alfar",
+      "numbers": [
+        "STOR-EN014"
+      ]
+    },
+    {
+      "passcode": 40736921,
+      "name": "Xing Zhen Hu Replica",
+      "numbers": [
+        "STOR-EN077"
+      ]
+    },
+    {
+      "passcode": 40844552,
+      "name": "Valkyrie of the Nordic Ascendant",
+      "numbers": [
+        "STOR-EN017"
+      ]
+    },
+    {
+      "passcode": 41077745,
+      "name": "Elemental HERO Ice Edge",
+      "numbers": [
+        "STOR-EN098"
+      ]
+    },
+    {
+      "passcode": 41458579,
+      "name": "Musakani Magatama",
+      "numbers": [
+        "STOR-EN074"
+      ]
+    },
+    {
+      "passcode": 41788781,
+      "name": "Guldfaxe of the Nordic Beasts",
+      "numbers": [
+        "STOR-EN011"
+      ]
+    },
+    {
+      "passcode": 41858121,
+      "name": "Vylon Matter",
+      "numbers": [
+        "STOR-EN060"
+      ]
+    },
+    {
+      "passcode": 42671151,
+      "name": "The Golden Apples",
+      "numbers": [
+        "STOR-EN071"
+      ]
+    },
+    {
+      "passcode": 42793609,
+      "name": "Nordic Relic Brisingamen",
+      "numbers": [
+        "STOR-EN068"
+      ]
+    },
+    {
+      "passcode": 43530283,
+      "name": "Hourglass of Courage",
+      "numbers": [
+        "STOR-EN091"
+      ]
+    },
+    {
+      "passcode": 45215453,
+      "name": "Vylon Delta",
+      "numbers": [
+        "STOR-EN099"
+      ]
+    },
+    {
+      "passcode": 48505422,
+      "name": "Legendary Six Samurai - Shinai",
+      "numbers": [
+        "STOR-EN023"
+      ]
+    },
+    {
+      "passcode": 49514333,
+      "name": "Tiki Soul",
+      "numbers": [
+        "STOR-EN080"
+      ]
+    },
+    {
+      "passcode": 49721904,
+      "name": "Legendary Six Samurai - Kizan",
+      "numbers": [
+        "STOR-EN020"
+      ]
+    },
+    {
+      "passcode": 50433147,
+      "name": "The Nordic Lights",
+      "numbers": [
+        "STOR-EN087"
+      ]
+    },
+    {
+      "passcode": 51555725,
+      "name": "Scrap Breaker",
+      "numbers": [
+        "STOR-EN084"
+      ]
+    },
+    {
+      "passcode": 52900379,
+      "name": "Blackwing - Brisote the Tailwind",
+      "numbers": [
+        "STOR-EN008"
+      ]
+    },
+    {
+      "passcode": 52971673,
+      "name": "Token Sundae",
+      "numbers": [
+        "STOR-EN057"
+      ]
+    },
+    {
+      "passcode": 53193261,
+      "name": "Wattkey",
+      "numbers": [
+        "STOR-EN054"
+      ]
+    },
+    {
+      "passcode": 53519297,
+      "name": "Blackboost",
+      "numbers": [
+        "STOR-EN065"
+      ]
+    },
+    {
+      "passcode": 53623827,
+      "name": "Top Runner",
+      "numbers": [
+        "STOR-EN005"
+      ]
+    },
+    {
+      "passcode": 53819808,
+      "name": "Temple of the Six",
+      "numbers": [
+        "STOR-EN051"
+      ]
+    },
+    {
+      "passcode": 53855409,
+      "name": "Doppelwarrior",
+      "numbers": [
+        "STOR-EN002"
+      ]
+    },
+    {
+      "passcode": 54031490,
+      "name": "Shien's Smoke Signal",
+      "numbers": [
+        "STOR-EN048"
+      ]
+    },
+    {
+      "passcode": 54631834,
+      "name": "Terminal World",
+      "numbers": [
+        "STOR-EN062"
+      ]
+    },
+    {
+      "passcode": 55154048,
+      "name": "Nordic Relic Draupnir",
+      "numbers": [
+        "STOR-EN045"
+      ]
+    },
+    {
+      "passcode": 57543573,
+      "name": "Worm Illidan",
+      "numbers": [
+        "STOR-EN095"
+      ]
+    },
+    {
+      "passcode": 60577362,
+      "name": "Overpowering Eye",
+      "numbers": [
+        "STOR-EN094"
+      ]
+    },
+    {
+      "passcode": 61777313,
+      "name": "Vanadis of the Nordic Ascendant",
+      "numbers": [
+        "STOR-EN081"
+      ]
+    },
+    {
+      "passcode": 63224564,
+      "name": "Cyber Shield",
+      "numbers": [
+        "STOR-EN090"
+      ]
+    },
+    {
+      "passcode": 66976526,
+      "name": "Karakuri Steel Shogun mdl 00X \"Bureido\"",
+      "numbers": [
+        "STOR-EN042"
+      ]
+    },
+    {
+      "passcode": 67098114,
+      "name": "Loki, Lord of the Aesir",
+      "numbers": [
+        "STOR-EN039"
+      ]
+    },
+    {
+      "passcode": 67211766,
+      "name": "Majioshaleon",
+      "numbers": [
+        "STOR-EN036"
+      ]
+    },
+    {
+      "passcode": 68933343,
+      "name": "Symphonic Warrior Basses",
+      "numbers": [
+        "STOR-EN033"
+      ]
+    },
+    {
+      "passcode": 69155991,
+      "name": "Scrap Shark",
+      "numbers": [
+        "STOR-EN030"
+      ]
+    },
+    {
+      "passcode": 70271583,
+      "name": "Karakuri Watchdog mdl 313 \"Saizan\"",
+      "numbers": [
+        "STOR-EN027"
+      ]
+    },
+    {
+      "passcode": 74094021,
+      "name": "Legendary Six Samurai - Mizuho",
+      "numbers": [
+        "STOR-EN024"
+      ]
+    },
+    {
+      "passcode": 75116619,
+      "name": "Legendary Six Samurai - Enishi",
+      "numbers": [
+        "STOR-EN021"
+      ]
+    },
+    {
+      "passcode": 76348260,
+      "name": "Mimir of the Nordic Ascendant",
+      "numbers": [
+        "STOR-EN018"
+      ]
+    },
+    {
+      "passcode": 76721030,
+      "name": "Tyrant's Tirade",
+      "numbers": [
+        "STOR-EN078"
+      ]
+    },
+    {
+      "passcode": 77060848,
+      "name": "Svartalf of the Nordic Alfar",
+      "numbers": [
+        "STOR-EN015"
+      ]
+    },
+    {
+      "passcode": 77847678,
+      "name": "Shien's Scheme",
+      "numbers": [
+        "STOR-EN075"
+      ]
+    },
+    {
+      "passcode": 80036543,
+      "name": "Hope for Escape",
+      "numbers": [
+        "STOR-EN063"
+      ]
+    },
+    {
+      "passcode": 80204957,
+      "name": "Karakuri Cash Cache",
+      "numbers": [
+        "STOR-EN052"
+      ]
+    },
+    {
+      "passcode": 80244114,
+      "name": "Stardust Phantom",
+      "numbers": [
+        "STOR-EN003"
+      ]
+    },
+    {
+      "passcode": 81426505,
+      "name": "Six Strike - Triple Impact",
+      "numbers": [
+        "STOR-EN049"
+      ]
+    },
+    {
+      "passcode": 84932271,
+      "name": "Worm Jetelikpse",
+      "numbers": [
+        "STOR-EN096"
+      ]
+    },
+    {
+      "passcode": 86827882,
+      "name": "Nordic Relic Megingjord",
+      "numbers": [
+        "STOR-EN088"
+      ]
+    },
+    {
+      "passcode": 88069166,
+      "name": "Odin's Eye",
+      "numbers": [
+        "STOR-EN072"
+      ]
+    },
+    {
+      "passcode": 88283496,
+      "name": "Garmr of the Nordic Beasts",
+      "numbers": [
+        "STOR-EN012"
+      ]
+    },
+    {
+      "passcode": 88305978,
+      "name": "Blackwing - Calima the Haze",
+      "numbers": [
+        "STOR-EN009"
+      ]
+    },
+    {
+      "passcode": 88369727,
+      "name": "Foolish Return",
+      "numbers": [
+        "STOR-EN058"
+      ]
+    },
+    {
+      "passcode": 89127526,
+      "name": "Barrier Resonator",
+      "numbers": [
+        "STOR-EN006"
+      ]
+    },
+    {
+      "passcode": 89181369,
+      "name": "Stardust Shimmer",
+      "numbers": [
+        "STOR-EN055"
+      ]
+    },
+    {
+      "passcode": 89792713,
+      "name": "Nordic Relic Laevateinn",
+      "numbers": [
+        "STOR-EN069"
+      ]
+    },
+    {
+      "passcode": 89914395,
+      "name": "Divine Relic Mjollnir",
+      "numbers": [
+        "STOR-EN066"
+      ]
+    },
+    {
+      "passcode": 91148083,
+      "name": "Gotterdammerung",
+      "numbers": [
+        "STOR-EN046"
+      ]
+    },
+    {
+      "passcode": 92361635,
+      "name": "Atomic Scrap Dragon",
+      "numbers": [
+        "STOR-EN043"
+      ]
+    },
+    {
+      "passcode": 93483212,
+      "name": "Odin, Father of the Aesir",
+      "numbers": [
+        "STOR-EN040"
+      ]
+    },
+    {
+      "passcode": 94215860,
+      "name": "Yaksha",
+      "numbers": [
+        "STOR-EN037"
+      ]
+    },
+    {
+      "passcode": 94230224,
+      "name": "Needle Ball",
+      "numbers": [
+        "STOR-EN092"
+      ]
+    },
+    {
+      "passcode": 94331452,
+      "name": "Symphonic Warrior Drumss",
+      "numbers": [
+        "STOR-EN034"
+      ]
+    },
+    {
+      "passcode": 97783659,
+      "name": "Blood Sucker",
+      "numbers": [
+        "STOR-EN093"
+      ]
+    },
+    {
+      "passcode": 97940434,
+      "name": "Chaos Hunter",
+      "numbers": [
+        "STOR-EN085"
+      ]
+    },
+    {
+      "passcode": 98162021,
+      "name": "Shien's Daredevil",
+      "numbers": [
+        "STOR-EN082"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Storm of Ragnarok'; printings from the YGOPRODeck bulk dump."
+}

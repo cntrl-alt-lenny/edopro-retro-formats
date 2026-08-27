@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-world-championship-qualifier-national-championships-2011-prize-cards",
+  "code": "WQ11",
+  "name": "Yu-Gi-Oh! World Championship Qualifier National Championships 2011 prize cards",
+  "kind": "promo-tournament",
+  "release_events": [
+    {
+      "territory": "tcg-na",
+      "date": "2011-05-15",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    },
+    {
+      "territory": "tcg-eu",
+      "date": "2011-05-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages",
+        "ygoprodeck-api"
+      ]
+    },
+    {
+      "territory": "tcg-oce",
+      "date": "2011-06-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-set-pages"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 4545683,
+      "name": "Meklord Emperor Granel",
+      "numbers": [
+        "WQ11-EN003"
+      ]
+    },
+    {
+      "passcode": 63468625,
+      "name": "Meklord Astro Mekanikle",
+      "numbers": [
+        "WQ11-EN001"
+      ]
+    },
+    {
+      "passcode": 90953320,
+      "name": "T.G. Hyper Librarian",
+      "numbers": [
+        "WQ11-EN002"
+      ]
+    }
+  ],
+  "sources": [
+    "ygoprodeck-api",
+    "yugipedia-set-pages"
+  ],
+  "notes": "Dates from Yugipedia set page 'Yu-Gi-Oh! World Championship Qualifier National Championships 2011 prize cards'; printings from the YGOPRODeck bulk dump."
+}
