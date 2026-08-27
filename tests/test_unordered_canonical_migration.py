@@ -165,8 +165,8 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual(self.target_ids, changed_ids)
         for rid in HISTORICAL_MANUAL_IDS:
             path = self.root / "data" / "errata" / f"{rid.removeprefix('erratum-')}.json"
-            expected = subprocess.check_output(["git", "show", f"{HISTORICAL_POST_COMMIT}:{path.relative_to(self.root)}"])
-            source = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:{path.relative_to(self.root)}"])
+            expected = subprocess.check_output(["git", "show", f"{HISTORICAL_POST_COMMIT}:{path.relative_to(self.root).as_posix()}"])
+            source = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:{path.relative_to(self.root).as_posix()}"])
             self.assertEqual(source, expected, rid)
             historical_raw = json.loads(expected)
             self.assertIn("changes", historical_raw)

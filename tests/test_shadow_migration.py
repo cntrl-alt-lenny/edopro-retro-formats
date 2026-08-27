@@ -91,7 +91,7 @@ class ShadowMigrationReproducibilityTest(unittest.TestCase):
 
     def test_every_current_format_was_compared(self):
         """No silent skip: exactly the formats/ directory's contents."""
-        self.assertEqual({"2005-04-goat", "2010-03-edison"}, set(self.report["formats"]))
+        self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.report["formats"]))
 
     def test_zero_new_validation_errors(self):
         validation = self.report["validation"]

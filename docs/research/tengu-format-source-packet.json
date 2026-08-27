@@ -166,7 +166,7 @@
     "through": "2011-09-17",
     "scope": ["tcg", "tcg-na", "tcg-eu", "tcg-oce"],
     "ledger_products": 411,
-    "new_pre_toronto_products": 41,
+    "new_product_records_added": 41,
     "source_derived_printings": 9338,
     "source_derived_release_events": 585,
     "coverage_certified": true,

@@ -32,17 +32,17 @@ treats a format the way an archivist would:
 
 ## Proof of concept status (what works today)
 
-Two fixture formats exercise the whole pipeline end-to-end:
+Three canonical formats exercise the whole pipeline end-to-end:
 
-| | GOAT (`2005-04-goat`) | Edison (`2010-03-edison`) |
-|---|---|---|
-| Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) |
-| Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* under certified coverage, cross-checked against two independent community pools, with the boundary dates, Duel Terminal exclusion, and promo cutoff corroborated by archived period Konami documents (including the event's own FAQ) |
-| Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | **partial** — a custom MR1-era 7-flag profile (not the bare `DUEL_MODE_MR1` preset), including the researched `DUEL_0_ATK_DESTROYED` addition; Ignition Effect Priority is represented by a documented approximation because no existing ocgcore flag reproduces it exactly; SEGOC (`DUEL_TCG_SEGOC_*`) and several smaller flag questions remain explicitly unresolved rather than guessed — see [docs/research/edison-rules.md](docs/research/edison-rules.md) |
-| Errata | **complete** — every substitution derived from one sourced parity policy instead of a 211-entry hand list; still entry-for-entry identical to the reference | **partial** — 72 historical implementations *computed* from evidence, with no hand-written Edison errata list |
-| Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected) |
+| | GOAT (`2005-04-goat`) | Edison (`2010-03-edison`) | Tengu (`2011-09-tengu`) |
+|---|---|---|---|
+| Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) | **complete** — September 2011 TCG list (51/65/18) sourced from Konami, cross-checked against Format Library and TenguFormat.com (exact match) |
+| Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* under certified coverage, cross-checked against two independent community pools, with the boundary dates, Duel Terminal exclusion, and promo cutoff corroborated by archived period Konami documents (including the event's own FAQ) | **verified** — 4,562 cards *derived from release history* under certified coverage through 2011-09-17, with period-sanctioned DT and Sneak Peek exclusions |
+| Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | **partial** — a custom MR1-era 7-flag profile (not the bare `DUEL_MODE_MR1` preset), including the researched `DUEL_0_ATK_DESTROYED` addition; Ignition Effect Priority is represented by a documented approximation because no existing ocgcore flag reproduces it exactly; SEGOC (`DUEL_TCG_SEGOC_*`) and several smaller flag questions remain explicitly unresolved rather than guessed — see [docs/research/edison-rules.md](docs/research/edison-rules.md) | **partial** — a custom MR2-era 6-flag profile; Ignition Effect Priority is represented by the `DUEL_OCG_OBSOLETE_IGNITION` approximation; Synchro and Xyz legal |
+| Errata | **complete** — every substitution derived from one sourced parity policy instead of a 211-entry hand list; still entry-for-entry identical to the reference | **partial** — 72 historical implementations *computed* from evidence, with no hand-written Edison errata list | **partial** — 52 historical implementations *computed* from evidence, with 38 acknowledged divergences and 9 known-wrong modern fallbacks |
+| Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected; hash `0x54508ab7`) | full `$whitelist` enforcing pool + banlist together (post-Tengu cards are rejected; hash `0x0ce5babe`) |
 
-Behind both formats' card *behaviour* sits the second backbone dataset:
+Behind card *behaviour* across all three formats sits the second backbone dataset:
 **`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
 rather than imported, distinguishing genuine text errata (functional) from
 period *rulings*, from pure wording modernisation (cosmetic). The canonical
@@ -74,9 +74,9 @@ hand-written list, and GOAT's 211-entry list was replaced by a single
 sourced statement while staying byte-identical to the Project Ignis
 reference. See [docs/errata.md](docs/errata.md).
 
-Behind the Edison pool sits the project's first shared backbone dataset:
-**`data/releases/`** — 370 TCG products (2002–2010) with per-territory,
-precision-aware, cited release events and 8,446 printings, from which any
+Behind the release-cutoff pools sits the project's first shared backbone dataset:
+**`data/releases/`** — 411 TCG products (2002–2011) with per-territory,
+precision-aware, cited release events and 9,339 printings, from which any
 release-cutoff pool is derived and continuously re-verified. Coverage
 completeness is an **earned invariant**: a gap ledger accounts for every
 importer-detected anomaly, unresolved gaps block pool materialisation, and
@@ -87,9 +87,10 @@ tournament-legality policy (the Edison boundary dates, the Duel Terminal
 exclusion, and Europe-only legality are corroborated by archived period Konami
 and UDE documents). See [docs/releases.md](docs/releases.md).
 
-The key architectural point: **neither format is special**. GOAT is an import of an
-existing reference implementation; Edison is built from primary-ish sources. A future
-`1999-05-yugi-kaiba` or `2011-09-tengu` uses exactly the same records and tooling.
+The key architectural point: **no format is special**. GOAT is an import of an
+existing reference implementation; Edison and Tengu are built from primary-ish
+sources. A future `1999-05-yugi-kaiba` or `2014-04-hat` uses exactly the same
+records and tooling.
 
 Run it yourself (Python 3.10+, standard library only — no installs; CI tests the
 3.10 floor and the current release. Older interpreters may happen to work — macOS's

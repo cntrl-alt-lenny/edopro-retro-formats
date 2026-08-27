@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/format.schema.json",
+  "id": "2011-09-tengu",
+  "name": "Tengu Format",
+  "aliases": [
+    "Tengu Plant",
+    "Tengu"
+  ],
+  "region": "TCG",
+  "period": {
+    "start": "2011-09-01",
+    "end": null,
+    "snapshot": "2011-09-17"
+  },
+  "chronology": {
+    "previous": null,
+    "next": null
+  },
+  "banlist": "tcg-2011-09",
+  "card_pool": "pool-tengu-2011",
+  "rule_profile": "rules-tcg-mr2-tengu",
+  "errata_policy": "computed",
+  "errata_overrides": {
+    "unresolved_policy": {
+      "choice": "modern",
+      "reason": "Tengu has no reference implementation to reproduce (unlike Goat Format), so where a record's chronology cannot place a change relative to 2011-09-17 this format keeps the MODERN implementation rather than assert unproven period behaviour. Where chronology cannot place a change relative to the snapshot, this policy keeps the modern implementation, and the validator surfaces each record (format.erratum-unresolved-defaulted) and reports the 9 cases known to be wrong for lack of a better determinate answer (format.erratum-modern-known-wrong). Records whose chronology IS resolved select their historical version automatically.",
+      "sources": [
+        "formatlibrary-tengu",
+        "tenguformat-ycs-toronto"
+      ]
+    }
+  },
+  "defining_events": [
+    {
+      "name": "YCS Toronto",
+      "date": "2011-09-17",
+      "sources": [
+        "formatlibrary-tengu",
+        "tenguformat-ycs-toronto",
+        "konami-2011-product-pages"
+      ]
+    }
+  ],
+  "relevant_products": [
+    "GENF",
+    "EXVC",
+    "STOR",
+    "HA04",
+    "YS11"
+  ],
+  "implementation_status": {
+    "banlist": "complete",
+    "card_pool": "verified",
+    "rule_profile": "partial",
+    "errata": "partial",
+    "overall": "partial"
+  },
+  "sources": [
+    "konami-september-2011-list",
+    "formatlibrary-tengu",
+    "tenguformat-ycs-toronto",
+    "konami-tcg-tournament-policy-v11-2011",
+    "konami-2011-product-pages",
+    "konami-2011-product-archive"
+  ],
+  "notes": "period: the September 2011 TCG list took effect 2011-09-01; snapshot is 2011-09-17 (YCS Toronto day 1), the first premier event under the list and the debut of Xyz Monsters in premier TCG competition. chronology: left null until adjacent formats are added. card_pool: materialised from data/releases/ under certified coverage (4,562 cards) with period-sanctioned Duel Terminal exclusions and event-only Sneak Peek exclusions. errata: applicability is computed from each record's reviewed chronology against 2011-09-17; exactly 52 historical implementations are substituted. Where chronology is ambiguous, unresolved_policy defaults to modern, surfacing 161 ambiguous-modern-possible defaults and 9 modern-impossible known-wrong fallbacks. See docs/research/tengu-format-source-gate.md."
+}

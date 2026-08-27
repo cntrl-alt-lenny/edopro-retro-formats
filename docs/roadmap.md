@@ -454,8 +454,7 @@ reflects that.
 
 11. A second whitelist-era format adjacent to GOAT (e.g. 2005-09) to prove banlist
     sharing and chronology links.
-12. A Synchro-era chain (Tengu/Plant 2011) to exercise MR1-vs-MR2-era profile
-    boundaries (TCG September 2011 list).
+12. ~~**A Synchro/Xyz-era format (Tengu Plant 2011)**~~ **Done (2026-08-27).** Tengu Format (`2011-09-tengu`) implemented as the third canonical format, exercising MR2-era profile boundaries, early Xyz integration, 4,562-card release-certified pool, September 2011 TCG banlist (51/65/18), and full v2 errata evaluation at snapshot 2011-09-17.
 13. HAT (2014) — MR3, pool via releases; Dragon Ruler (2013) — errata-heavy.
 14. Early-era formats (Yugi/Kaiba, Critter) — these stress the releases dataset
     (2002-2003) and pre-Advanced-format rules; expect new `known_gaps`.

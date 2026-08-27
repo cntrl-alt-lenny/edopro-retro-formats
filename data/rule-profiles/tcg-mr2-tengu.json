@@ -1,0 +1,123 @@
+{
+  "$schema": "../../schemas/rule-profile.schema.json",
+  "id": "rules-tcg-mr2-tengu",
+  "name": "TCG 2011 (Tengu era, Master Rule 2 baseline)",
+  "description": "The Master Rule 2 baseline flags plus DUEL_OCG_OBSOLETE_IGNITION, researched and confirmed for TCG play at YCS Toronto (2011-09-17). Historical TCG Ignition Effect Priority remained in force at Toronto; DUEL_OCG_OBSOLETE_IGNITION is retained as a conservative project-policy approximation because no ocgcore flag reproduces the exact historical TCG priority window without a core change. DUEL_TCG_FAST_EFFECT_IGNITION was investigated and deliberately NOT added (it grants a broader post-chain window); DUEL_0_ATK_DESTROYED is omitted because the Rulebook Version 7.2 exception was already in force by March 2011. Synchro and Xyz Monsters are legal; Pendulum/Link do not exist yet.",
+  "era": {
+    "start": "2011-09-01",
+    "end": null,
+    "official_ruleset_label": "Konami 'OFFICIAL RULEBOOK' Version 8.0 (current as of 2011-07-12, introduction of Xyz Monsters and Master Rule 2 in the TCG)"
+  },
+  "engine": {
+    "preset": null,
+    "flags": [
+      "DUEL_OCG_OBSOLETE_IGNITION",
+      "DUEL_1ST_TURN_DRAW",
+      "DUEL_1_FACEUP_FIELD",
+      "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+      "DUEL_RETURN_TO_DECK_TRIGGERS",
+      "DUEL_CANNOT_SUMMON_OATH_OLD"
+    ],
+    "ocgcore_reference": "46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57",
+    "starting_lp": 8000,
+    "starting_hand": 5,
+    "draw_count": 1
+  },
+  "client": {
+    "forbidden_card_types": [
+      "TYPE_PENDULUM",
+      "TYPE_LINK"
+    ],
+    "main_deck": [
+      40,
+      60
+    ],
+    "extra_deck": [
+      0,
+      15
+    ],
+    "side_deck": [
+      0,
+      15
+    ]
+  },
+  "differences_from_modern": [
+    {
+      "summary": "The turn player may activate ignition effects with priority after a summon or chain end, restricted to the Monster Zone (OCG-style condition). RETAINED AS A PROJECT-POLICY APPROXIMATION, not a claim that period sources prove it exact or objectively closest: it correctly grants priority for a Monster-Zone ignition effect after a Summon, but wrongly withholds it for a Graveyard/other-location ignition effect after a Summon, and wrongly grants it after a chain resolves with no Summon at all. Kept as a conservative compatibility compromise; see docs/research/edison-rules.md and docs/research/tengu-format-source-gate.md.",
+      "engine_flag": "DUEL_OCG_OBSOLETE_IGNITION",
+      "sources": [
+        "ygopro-core",
+        "formatlibrary-tengu",
+        "tenguformat-ycs-toronto"
+      ]
+    },
+    {
+      "summary": "The turn-1 player draws in their first Draw Phase.",
+      "engine_flag": "DUEL_1ST_TURN_DRAW",
+      "sources": [
+        "ygopro-core"
+      ]
+    },
+    {
+      "summary": "Only one Field Spell can be face-up at a time.",
+      "engine_flag": "DUEL_1_FACEUP_FIELD",
+      "sources": [
+        "ygopro-core"
+      ]
+    },
+    {
+      "summary": "A negated Special Summon still counts against 'only once per turn/duel' summon restrictions.",
+      "engine_flag": "DUEL_SPSUMMON_ONCE_OLD_NEGATE",
+      "sources": [
+        "ygopro-core"
+      ]
+    },
+    {
+      "summary": "Trigger effects activate when returned to the Main Deck or Extra Deck.",
+      "engine_flag": "DUEL_RETURN_TO_DECK_TRIGGERS",
+      "sources": [
+        "ygopro-core"
+      ]
+    },
+    {
+      "summary": "Old oath effect handling: cannot special summon restrictions apply retroactively if an action occurred.",
+      "engine_flag": "DUEL_CANNOT_SUMMON_OATH_OLD",
+      "sources": [
+        "ygopro-core"
+      ]
+    }
+  ],
+  "known_gaps": [
+    {
+      "summary": "Ignition Effect Priority: no existing ocgcore configuration reproduces the historical September 2011 TCG rule exactly. TCG ignition priority remained in force at YCS Toronto, but current ocgcore couples the OCG obsolete location gate to a broader model and cannot express the exact TCG window without a core change. DUEL_OCG_OBSOLETE_IGNITION is retained as the least-wrong approximation; DUEL_TCG_FAST_EFFECT_IGNITION is deliberately not enabled as it grants an over-broad post-chain window.",
+      "tracking": "docs/research/tengu-format-source-gate.md",
+      "sources": [
+        "ygopro-core",
+        "formatlibrary-tengu",
+        "tenguformat-ycs-toronto"
+      ]
+    },
+    {
+      "summary": "Simultaneous Trigger Effect ordering (SEGOC): period rulebooks describe simple two-tier ordering without mandatory/optional splits or non-public zone subtleties. Left unresolved rather than guessed.",
+      "tracking": "docs/research/tengu-format-source-gate.md",
+      "sources": [
+        "ygopro-core"
+      ]
+    },
+    {
+      "summary": "Extra Deck size limit for 2011 (15) is entered here from EDOPro MR2 defaults.",
+      "tracking": "docs/roadmap.md",
+      "sources": [
+        "edopro-source"
+      ]
+    }
+  ],
+  "sources": [
+    "ygopro-core",
+    "edopro-source",
+    "konami-2011-product-pages",
+    "formatlibrary-tengu",
+    "tenguformat-ycs-toronto",
+    "konami-tcg-tournament-policy-v11-2011"
+  ]
+}

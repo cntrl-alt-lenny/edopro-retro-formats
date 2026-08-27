@@ -258,7 +258,7 @@ class UnorderedMigrationGateTest(unittest.TestCase):
             self.assertEqual(original_bytes, self.repo.errata[record_id].path.read_bytes(), record_id)
 
     def test_all_current_format_outputs_and_substitution_maps_are_identical(self):
-        self.assertEqual({"2005-04-goat", "2010-03-edison"}, set(self.result["consumers"]["formats"]))
+        self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.result["consumers"]["formats"]))
         for fmt_id, outcome in self.result["consumers"]["formats"].items():
             self.assertTrue(outcome["text_identical"], fmt_id)
             self.assertTrue(outcome["entries_identical"], fmt_id)

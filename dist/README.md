@@ -43,3 +43,4 @@ each format's `formats/<id>/notes.md`):
 |---|---|---|---|
 | `Retro 2005-04-goat` | whitelist (pool-enforcing) | GOAT | Anything goes (pre-errata cards are `ot=8`) |
 | `Retro 2010-03-edison` | whitelist (pool-enforcing) | Master Rule 1 | Anything goes (historical cards are `ot=8`) |
+| `Retro 2011-09-tengu` | whitelist (pool-enforcing) | Master Rule 2 | Anything goes (historical cards are `ot=8`) |

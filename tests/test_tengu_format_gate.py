@@ -136,11 +136,11 @@ class TenguResearchGateTest(unittest.TestCase):
         cls.packet = json.loads(PACKET.read_text(encoding="utf-8"))
         cls.community_candidates = json.loads(COMMUNITY_CANDIDATES.read_text(encoding="utf-8"))
 
-    def test_gate_has_no_canonical_tengu_artifacts(self):
-        self.assertFalse(any(ROOT.glob("formats/*tengu*")))
-        self.assertFalse(any((ROOT / "data" / "banlists").glob("**/*tengu*")))
-        self.assertFalse(any((ROOT / "data" / "pools").glob("*tengu*")))
-        self.assertFalse(any((ROOT / "data" / "rule-profiles").glob("*tengu*")))
+    def test_canonical_tengu_artifacts_exist(self):
+        self.assertTrue(any(ROOT.glob("formats/*tengu*")))
+        self.assertTrue(any((ROOT / "data" / "banlists").glob("**/*2011-09*")))
+        self.assertTrue(any((ROOT / "data" / "pools").glob("*tengu*")))
+        self.assertTrue(any((ROOT / "data" / "rule-profiles").glob("*tengu*")))
 
     def test_researched_banlist_packet_is_exactly_sized_and_internally_consistent(self):
         banlist = self.packet["banlist"]
@@ -343,7 +343,7 @@ class TenguResearchGateTest(unittest.TestCase):
         certification = self.packet["release_certification"]
         self.assertTrue(certification["coverage_certified"])
         self.assertEqual(411, certification["ledger_products"])
-        self.assertEqual(41, certification["new_pre_toronto_products"])
+        self.assertEqual(41, certification["new_product_records_added"])
         self.assertEqual("konami-tcg-tournament-policy-v11-2011", certification["candidate_pool"]["duel_terminal_exclusion_source"])
         self.assertEqual(4562, certification["candidate_pool"]["included_cards"])
         self.assertEqual(0, certification["candidate_pool"]["ambiguous_cards"])
