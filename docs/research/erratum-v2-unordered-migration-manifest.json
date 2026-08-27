@@ -26,7 +26,7 @@
       "id": "erratum-a-deal-with-dark-ruler",
       "ordering_edge_count": 0,
       "path": "data/errata/a-deal-with-dark-ruler.json",
-      "post_migration_sha256": "8ee6d0fbd40a9421c4f8390f23bfbdb267f0f5158c18f51e21825b6421128415",
+      "post_migration_sha256": "8da5a93aeab6ca0bf29006b425d7e4f369d9aaa9524e85edf79c2a6454b7c768",
       "pre_migration_sha256": "d7a485647cab13f517cf84dfdd7b991e24911908fae6ee5df88f6407c9a39875",
       "relevant_event_count": 2
     },
@@ -36,7 +36,7 @@
       "id": "erratum-apprentice-magician",
       "ordering_edge_count": 0,
       "path": "data/errata/apprentice-magician.json",
-      "post_migration_sha256": "e621114e943e9049ab317ce65c298721dad919e0c6d847f6aef6013f9ad7d21e",
+      "post_migration_sha256": "e0df93fd6fe4accedf645f0636723843c24b6b7151aa93e262537824717f2dcb",
       "pre_migration_sha256": "f1f27b2fcc28ef0c501f6637d25b8ce356f8c38d037da48e25430953f871605b",
       "relevant_event_count": 2
     },
@@ -46,7 +46,7 @@
       "id": "erratum-armed-dragon-lv3",
       "ordering_edge_count": 0,
       "path": "data/errata/armed-dragon-lv3.json",
-      "post_migration_sha256": "35a4614ce7a0d8f1315efb07dacfa4007aaadbd013058f9455064c1901cade40",
+      "post_migration_sha256": "7db56e982ac59190131ea49decf8ea38c9e4dd4f057dea3c4bb81d1311764e56",
       "pre_migration_sha256": "ebf9b4f62e98fd0ad427fb294cdfce6dce0a5a56714313f4e394da30a1e255fd",
       "relevant_event_count": 2
     },
@@ -56,7 +56,7 @@
       "id": "erratum-armed-dragon-lv5",
       "ordering_edge_count": 0,
       "path": "data/errata/armed-dragon-lv5.json",
-      "post_migration_sha256": "4a6b56d7962bd103bd930b4d9958374ce53b9ef736eac5a2ea1384f3a967457d",
+      "post_migration_sha256": "91d9f8c7de20dd9be44472317eb714888e1bb6bcde97c4fdbbb63ccc5c62bcf4",
       "pre_migration_sha256": "02d28f23c7ed570cb9caf54bdf77158ad258129e639f2f210cc9d6b7cc241e2a",
       "relevant_event_count": 2
     },
@@ -76,7 +76,7 @@
       "id": "erratum-birdface",
       "ordering_edge_count": 0,
       "path": "data/errata/birdface.json",
-      "post_migration_sha256": "df677bca8b8da0447f30f750eb51a9ff619b67d38dbcee502fcedaee0e256eac",
+      "post_migration_sha256": "43c667fc5a967311e31d6ad0d104cc20a503f164a1294873165465bd6542f5cd",
       "pre_migration_sha256": "5be432160075423a3727a3b6926819a61c7c0999fc771f77ce4e3c675d039791",
       "relevant_event_count": 2
     },
@@ -86,7 +86,7 @@
       "id": "erratum-bubonic-vermin",
       "ordering_edge_count": 0,
       "path": "data/errata/bubonic-vermin.json",
-      "post_migration_sha256": "03f34e529db2fe5c37d432c651fb30a8498cbd7a0c86072a4a720460a8bdd756",
+      "post_migration_sha256": "be2e91ca341ddd1c5f56e4394891f5e52d9f596c81b2b611b1741e3ffa5236d5",
       "pre_migration_sha256": "4af5dbf5f70c56aacb5e64e20f5be8d14f2e5b1e62b2293ef60ea52561fb72c8",
       "relevant_event_count": 2
     },
@@ -96,7 +96,7 @@
       "id": "erratum-dark-mimic-lv1",
       "ordering_edge_count": 0,
       "path": "data/errata/dark-mimic-lv1.json",
-      "post_migration_sha256": "3428340abcf9180c88ffb50ba8cb97676028af1a27304256705876ff06a07c01",
+      "post_migration_sha256": "a5394ac7dd3549b09805f39232f91156c102fce02b7775fe395222cfc969a882",
       "pre_migration_sha256": "25e58838c41cb2a8c321f37f48e3d2731e0b6bd58cc71f265fd8cad397fd2354",
       "relevant_event_count": 2
     },
@@ -106,7 +106,7 @@
       "id": "erratum-dark-scorpion-meanae-the-thorn",
       "ordering_edge_count": 0,
       "path": "data/errata/dark-scorpion-meanae-the-thorn.json",
-      "post_migration_sha256": "0c885a6ec85813ef881df31789dd41ca2065a97deea4b1fa134aec152c1d8e82",
+      "post_migration_sha256": "0c1731f9e14cc0e2a0e6f9b0ba431a0dace2c897380d577debaf558423f0dbfc",
       "pre_migration_sha256": "7b0fcdb9da818c1451e2654a6b78952a7255243bc2b5976b8619c4536cc7d82a",
       "relevant_event_count": 2
     },
@@ -486,7 +486,7 @@
       "id": "erratum-yz-tank-dragon",
       "ordering_edge_count": 0,
       "path": "data/errata/yz-tank-dragon.json",
-      "post_migration_sha256": "0bc75a62121bfc04ca95978268b41333d9595ee8ac7717f7d0f399772155ddf2",
+      "post_migration_sha256": "12dce1bd960b3091d7b821be78cf7cea7a5ec36203a127968bc7175fd649cdd4",
       "pre_migration_sha256": "d4ab1adbbc706b164ad42e0bb7b1b04b4ed49a27c4497fc3dbe01a9df9ee5de0",
       "relevant_event_count": 2
     }

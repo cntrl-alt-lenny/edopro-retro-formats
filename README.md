@@ -46,8 +46,8 @@ Behind both formats' card *behaviour* sits the second backbone dataset:
 **`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
 rather than imported, distinguishing genuine text errata (functional) from
 period *rulings*, from pure wording modernisation (cosmetic). **Two record
-shapes coexist deliberately, not as a work-in-progress split**: 294 records
-are now represented by the **v2 historical-event DAG** (180 as flattened
+shapes remain intentionally:** 294 records are now represented by the **v2
+historical-event DAG** (180 as flattened
 single-event sugar, 114 as the full `events{}`/`ordering`/`states[]` shape) —
 an explicit graph of dated/undated historical events with a provable
 partial order, replacing the old assumption that `changes[]`'s array
@@ -59,8 +59,9 @@ were migrated as separate events with no ordering edge where the evidence
 does not establish one; no new research or architecture work was needed.
 See
 [docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
-for the model and [docs/roadmap.md](docs/roadmap.md) for the remaining-49
-migration plan. Chronology carries its own uncertainty across both shapes:
+for the model and [docs/roadmap.md](docs/roadmap.md) for current status and
+the remaining manual cases. Chronology carries its own uncertainty across
+both shapes:
 some changes/events are exactly dated, some hold bounded "old attested
 through A, new attested from B" intervals, and some are explicitly
 unresolved. **Selection never silently guesses** — absent an explicit,
