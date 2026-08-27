@@ -6,64 +6,168 @@
     "name": "Last Will"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2005-11-01",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of Tournament Pack 7 (TP7-EN015), the first printing carrying the \"was sent to your Graveyard this turn ... once during this turn\" text"
       },
-      "historical_text": "You can only use this card's effect once, and only during this turn. When a monster on your side of the field is sent to your Graveyard, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck. Then shuffle your Deck.",
-      "modern_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
-      "summary": "Functional erratum in both retroactivity and usage window. Under the era text (\"When a monster on your side of the field is sent to your Graveyard, you can Special Summon ...\") the goat script registers, at resolution, a forward-looking `EVENT_TO_GRAVE` watcher plus an EFFECT_TYPE_TRIGGER_F on a custom event, so only a monster sent to the Graveyard AFTER Last Will resolves counts, the Summon is offered as a forced trigger at that exact moment, and `e:Reset()` runs before the yes/no prompt so declining spends the effect. The TP7 text (\"If a monster ... was sent to your Graveyard this turn ... once during this turn\") is implemented by the modern script's global `EVENT_TO_GRAVE` flag, which makes a monster sent earlier in the same turn count and otherwise registers an EVENT_FREE_CHAIN continuous effect with `SetCountLimit(1)`, letting the controller Summon at any later legal point that turn.",
-      "resulting_implementation": {
-        "strategy": "unresolved",
-        "status": "missing",
-        "tested": false,
-        "gap": {
-          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
-          "upstream_checked": true,
-          "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.spcon`/`s.activate` both require `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` before offering the Summon, while the goat `s.checkop2` prompts and consumes the effect regardless of whether a monster with 1500 or less ATK is in the Deck. Failed-search verification: the goat operation calls `Duel.GoatConfirm(tp,LOCATION_DECK)` when the selection comes back empty. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": "retroactivity",
+          "historical_text": "You can only use this card's effect once, and only during this turn. When a monster on your side of the field is sent to your Graveyard, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck. Then shuffle your Deck.",
+          "modern_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "summary": "The TP7 text revision changed the condition from a forward-looking send after Last Will resolves to a turn-wide condition that can already be satisfied by an earlier send in the same turn. The pinned GOAT script installs an EVENT_TO_GRAVE watcher at resolution; the modern script uses a global turn flag.",
           "sources": [
+            "ignis-cardscripts",
             "ignis-babelcdb",
-            "ignis-cardscripts"
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        },
+        {
+          "kind": "functional",
+          "axis": "usage-window",
+          "historical_text": "You can only use this card's effect once, and only during this turn. When a monster on your side of the field is sent to your Graveyard, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck. Then shuffle your Deck.",
+          "modern_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "summary": "The same TP7 text revision changed the use window: the GOAT script raises a custom trigger at the qualifying send and resets before the prompt, while the modern script exposes a once-per-turn free-chain opportunity at a later legal point in the turn.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
           ]
         }
-      },
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
+      ],
+      "cooccurrence_sources": [
         "yugipedia-card-errata",
         "yugipedia-set-pages"
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "basis": "Last Will-specific activation-legality change; exact effective chronology not located"
       },
-      "historical_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
-      "summary": "Period ruling package on top of the text change. Activation condition: the modern `s.spcon`/`s.activate` both require `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` before offering the Summon, while the goat `s.checkop2` prompts and consumes the effect regardless of whether a monster with 1500 or less ATK is in the Deck. Failed-search verification: the goat operation calls `Duel.GoatConfirm(tp,LOCATION_DECK)` when the selection comes back empty. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "search-activation-legality",
+          "historical_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "The historical GOAT implementation permits and consumes the Last Will opportunity even when no eligible monster with 1500 or less ATK remains in the Deck; modern requires Duel.IsExistingMatchingCard before offering it. No source located dates this per-card transition or ties it to the verification-policy change.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
+      ]
+    },
+    "c2": {
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Shared TCG search-verification chronology applied to this Deck search: old failed-search verification is positively attested through 2011-02-02; the modern no-verification policy is first located 2019-04-03",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "search-reveal-procedure",
+          "historical_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "When the historical GOAT search finds no eligible monster, it reveals the Deck with Duel.GoatConfirm; the modern script has no reveal branch. Period rulings establish the general procedure and the Last Will script applies it to this Deck search. No source establishes co-occurrence with activation legality.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata",
+            "ude-card-rulings-archive",
+            "konami-set-rulings-archive",
+            "kde-tournament-policy-archive"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700147,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700147.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "chains": [
+      [
+        "c0",
+        "c2"
+      ]
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700147,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700147.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.spcon`/`s.activate` both require `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` before offering the Summon, while the goat `s.checkop2` prompts and consumes the effect regardless of whether a monster with 1500 or less ATK is in the Deck. Failed-search verification: the goat operation calls `Duel.GoatConfirm(tp,LOCATION_DECK)` when the selection comes back empty. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved."
+      }
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
-    "date": "2026-08-20",
-    "notes": "Chain starts at lineage v1 (SYE-031, Starter Deck: Yugi Evolution, 2004-03-01), which the goat cdb text matches exactly; v0 (SDY-039, 2002-03-29) predates the baseline and is not recorded. This is the one card in the batch where the functional erratum lands INSIDE the corpus window in a decisive way: TP7-EN015 released 2005-11-01, after the 2005-04-01 GOAT snapshot, so GOAT correctly takes the baseline goat script while any later period snapshot does not. Ordering rationale: the text erratum is anchored to a 2005 printing while the verification procedure is attested in force through 2011-02-02, so the functional change necessarily precedes the ruling change. IMPLEMENTATION GAP: the intermediate version - TP7 text played under the era ruling package - has no upstream implementation, so no correct script exists for a snapshot between 2005-11-01 and whenever the ruling package lapsed."
+    "date": "2026-08-27",
+    "notes": "The official Konami card database lists TP7-EN015 with the revised \"was sent ... this turn\" text and the project release ledger records Tournament Pack 7 on 2005-11-01. A June 2006 Curtis Schultz discussion explicitly describes both the retroactivity change and the ability to use Last Will later in the turn as consequences of the revised text. Those two functional transitions are therefore one sourced TP7 event. Activation legality with no eligible Deck target and failed-search Deck verification are distinct ruling questions: the pinned scripts demonstrate different operations, but no source located establishes that they changed together, so they remain separate undated events with no edge between them. The verification event uses the shared TCG procedure: old behavior is positively attested through 2011-02-02 and the first located modern no-verification policy is 2019-04-03. Only TP7 -> verification is date-proven; no ordering is asserted for activation legality. The intermediate TP7 text with the old ruling package has no upstream implementation and remains a known gap."
   },
   "sources": [
     "ignis-babelcdb",

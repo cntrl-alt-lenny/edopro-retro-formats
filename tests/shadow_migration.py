@@ -19,10 +19,10 @@ built in memory and neither is ever saved back.
 **POST-MIGRATION NOTE**: the real 247-record canonical migration has
 happened (commit immediately after
 1937239d9fd0ebfb47dc850f298c11c3a60679b0). `repo`/`rows` default to the
-LIVE on-disk repository, which now has only 49 v1 records left to
-shadow-migrate (the 247 already-migrated ones are skipped by
-`audit_corpus()`, exactly as designed) - so `run_shadow_migration()`
-called with no arguments now produces a near-empty, no-op shadow against
+LIVE on-disk repository, which now has no v1 records left to
+shadow-migrate (all 296 records are already v2, so `audit_corpus()`
+returns no migration rows, exactly as designed) - so `run_shadow_migration()`
+called with no arguments now produces an empty, no-op shadow against
 current reality. `tests/test_shadow_migration.py` calls this with an
 EXPLICIT `repo=tests.pre_migration_fixture.load_pre_migration_repo()` for
 its reproducibility check (does re-running today's materializer against

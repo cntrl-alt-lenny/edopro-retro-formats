@@ -29,7 +29,7 @@ from .schema_check import Registry, validate_erratum
 SOURCE_COMMIT = "b0b8b7d8cc129e827fd684b3d880f6fcaedb80d9"
 HISTORICAL_POST_COMMIT = "dec24733359358d993ab275ad4ec3ea7ef95044e"
 HISTORICAL_MANUAL_IDS = {"erratum-insect-imitation", "erratum-last-will"}
-CURRENT_REMAINING_V1_IDS = {"erratum-last-will"}
+CURRENT_REMAINING_V1_IDS = set()
 
 
 def _pre_migration_rows():
@@ -94,14 +94,16 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
     def test_canonical_corpus_and_exact_remaining_v1(self):
         v2 = {rid for rid, record in self.live.errata.items() if isinstance(record, ErratumV2)}
         v1 = {rid for rid, record in self.live.errata.items() if isinstance(record, Erratum)}
-        self.assertEqual(295, len(v2))
+        self.assertEqual(296, len(v2))
         self.assertEqual(CURRENT_REMAINING_V1_IDS, v1)
 
     def test_exact_discriminator_counts(self):
         counts = Counter(
             key for raw in self.raw.values() for key in ("changes", "events", "event") if key in raw
         )
-        self.assertEqual(Counter({"changes": 1, "events": 115, "event": 180}), counts)
+        self.assertEqual(0, counts.get("changes", 0))
+        self.assertEqual(116, counts["events"])
+        self.assertEqual(180, counts["event"])
         for raw in self.raw.values():
             self.assertEqual(1, sum(key in raw for key in ("changes", "events", "event")))
 
@@ -164,14 +166,12 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         for rid in HISTORICAL_MANUAL_IDS:
             path = self.root / "data" / "errata" / f"{rid.removeprefix('erratum-')}.json"
             expected = subprocess.check_output(["git", "show", f"{HISTORICAL_POST_COMMIT}:{path.relative_to(self.root)}"])
-            if rid == "erratum-insect-imitation":
-                # This historical assertion belongs to the 47-record commit;
-                # the current task subsequently adjudicates this one record.
-                continue
-            self.assertEqual(expected, path.read_bytes(), rid)
-            self.assertIn("changes", self.raw[rid])
-            self.assertNotIn("events", self.raw[rid])
-            self.assertNotIn("event", self.raw[rid])
+            source = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:{path.relative_to(self.root)}"])
+            self.assertEqual(source, expected, rid)
+            historical_raw = json.loads(expected)
+            self.assertIn("changes", historical_raw)
+            self.assertNotIn("events", historical_raw)
+            self.assertNotIn("event", historical_raw)
 
     def test_shape_distribution_and_no_cooccurrence_or_invented_ordering(self):
         self.assertEqual({"2": 41, "3": 5, "4": 1}, self.manifest["event_count_distribution"])
@@ -209,7 +209,7 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
             self.assertEqual(len(parsed.raw_edges), entry["ordering_edge_count"])
             self.assertEqual(len(parsed.authored_states), entry["authored_state_count"])
 
-    def test_all_295_v2_records_schema_valid_and_repository_loads(self):
+    def test_all_296_v2_records_schema_valid_and_repository_loads(self):
         self.assertEqual([], self.live.load_errors)
         registry = Registry()
         failures = {}
@@ -253,12 +253,12 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual([], before_validator.errors)
         self.assertEqual([], after_validator.errors)
         self.assertEqual(
-            Counter({"format.erratum-modern-known-wrong": 1}),
+            Counter({"format.erratum-modern-known-wrong": 2}),
             Counter(f.code for f in after_validator.warnings)
             - Counter(f.code for f in before_validator.warnings),
         )
         self.assertEqual(
-            Counter({"format.erratum-unresolved-defaulted": 1}),
+            Counter({"format.erratum-unresolved-defaulted": 2}),
             Counter(f.code for f in before_validator.warnings)
             - Counter(f.code for f in after_validator.warnings),
         )

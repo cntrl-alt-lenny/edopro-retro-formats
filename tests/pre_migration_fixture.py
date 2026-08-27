@@ -9,13 +9,15 @@ built and exhaustively verified against the full 296-record all-v1
 corpus - hundreds of tests exercise real, specific edge cases (ordering
 proofs, cardinality-collapse detection, self-contradiction detection,
 reference-identity precedence, top-level preservation) using actual
-named canonical records. After the migration, `data/errata/` naturally
-contains only the 49 records that were NOT migrated (still v1) - running
-`audit_corpus()` against the LIVE repository now correctly reports 49
-records, not 296, because it was always designed to audit "whatever v1
-records currently exist" (skipping ErratumV2 records entirely - "already
-v2; nothing to migrate"). That is the RIGHT behaviour for the live
-repository, but it means the rich 296-record regression surface that
+named canonical records. After the 47-record migration, `data/errata/`
+contained only the 49 records that were NOT migrated (still v1). The two
+manual adjudications then migrated those final records too; the LIVE
+repository now contains 296 v2 records. Running `audit_corpus()` against
+the LIVE repository correctly reports no migration rows, because it was
+always designed to audit "whatever v1 records currently exist" (skipping
+ErratumV2 records entirely - "already v2; nothing to migrate"). That is
+the RIGHT behaviour for the live repository, but it means the rich
+296-record regression surface that
 proved the migration was safe would otherwise silently vanish from test
 coverage the moment migration landed.
 
@@ -32,9 +34,9 @@ the migration (only `data/errata/*.json` changed, and only for 247 of its
 Tests that need to prove a fact about the FROZEN PRE-MIGRATION EVIDENCE
 (e.g. "the pre-migration corpus really did have 247 semantically-
 equivalent records") should use `load_pre_migration_repo()` here, never
-`Repository.load(REPO_ROOT)` - the latter now returns the POST-MIGRATION
-LIVE repository (247 v2 + 49 v1) and must never be silently treated as
-if it were still all-v1. Tests that need to prove a fact about the LIVE
+`Repository.load(REPO_ROOT)` - the latter now returns the fully migrated
+POST-MIGRATION LIVE repository (296 v2 + 0 v1) and must never be silently
+treated as if it were still all-v1. Tests that need to prove a fact about the LIVE
 repository should keep using `Repository.load(REPO_ROOT)` directly, exactly
 as before - this module is not a replacement for that.
 

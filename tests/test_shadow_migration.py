@@ -17,8 +17,8 @@ DIFFERENT test classes, never conflated:
 - `PostMigrationLiveRepositoryTest` - pins the CURRENT, LIVE, on-disk
   repository's guarantees DIRECTLY (`Repository.load(audit.REPO_ROOT)`,
   no shadow/baseline comparison at all, because there is nothing left to
-  compare against: the shadow IS the real repository now). Exactly 295
-  `ErratumV2` + 1 `Erratum`, exactly 180 sugar-shaped + 115 full-v2
+  compare against: the shadow IS the real repository now). Exactly 296
+  `ErratumV2` + 0 `Erratum`, exactly 180 sugar-shaped + 116 full-v2
   canonical files, all schema-valid, the live repository validates
   cleanly, and GOAT/Edison output is pinned to the same values the
   pre-migration baseline had.
@@ -178,7 +178,7 @@ class CanonicalShapeTest(unittest.TestCase):
             }.items())
         }
         cls.historical_manual_2 = {"erratum-insect-imitation", "erratum-last-will"}
-        cls.current_manual_1 = {"erratum-last-will"}
+        cls.current_manual_1 = set()
         cls.parity_only_ids = {
             r["id"] for r in cls.pre_migration_rows if r["equivalent"] and r["category"] == audit.CAT_PARITY_ONLY
         }
@@ -194,7 +194,7 @@ class CanonicalShapeTest(unittest.TestCase):
             for key in by_discriminator:
                 if key in doc:
                     by_discriminator[key] += 1
-        self.assertEqual({"changes": 1, "events": 115, "event": 180}, by_discriminator)
+        self.assertEqual({"changes": 0, "events": 116, "event": 180}, by_discriminator)
 
     def test_no_migrated_record_retains_legacy_fields(self):
         for rid in self.frozen_247 | self.unordered_47:
@@ -257,20 +257,17 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         cls.validator = Validator(cls.repo)
         cls.validator.validate()
 
-    def test_exactly_295_v2_and_1_v1(self):
+    def test_exactly_296_v2_and_zero_v1(self):
         self.assertEqual(296, len(self.repo.errata))
-        self.assertEqual(295, len(self.v2_records))
-        self.assertEqual(1, len(self.v1_records))
+        self.assertEqual(296, len(self.v2_records))
+        self.assertEqual(0, len(self.v1_records))
 
-    def test_exactly_180_sugar_and_115_full(self):
+    def test_exactly_180_sugar_and_116_full_v2(self):
         self.assertEqual(180, len(self.sugar_records))
-        self.assertEqual(115, len(self.full_records))
+        self.assertEqual(116, len(self.full_records))
         self.assertEqual(len(self.v2_records), len(self.sugar_records) + len(self.full_records))
 
-    def test_the_remaining_v1_id_is_last_will(self):
-        self.assertEqual({"erratum-last-will"}, set(self.v1_records))
-
-    def test_all_295_v2_records_are_schema_valid(self):
+    def test_all_296_v2_records_are_schema_valid(self):
         """Re-validates the ACTUAL on-disk JSON (raw file content), not
         the parsed object - the same schema checker
         test_erratum_schema.py uses."""

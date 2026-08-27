@@ -62,10 +62,10 @@ class InsectImitationV2Test(unittest.TestCase):
         cls.before = _with_erratum(cls.repo, cls.old_insect)
 
     def test_last_will_is_untouched_from_adjudication_baseline(self):
-        actual = (self.root / "data/errata/last-will.json").read_bytes()
+        historical = self.frozen.errata[LAST_WILL_ID]
         expected = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:data/errata/last-will.json"])
-        self.assertEqual(expected, actual)
-        self.assertIsInstance(self.repo.errata[LAST_WILL_ID], Erratum)
+        self.assertEqual(expected, historical.path.read_bytes())
+        self.assertIsInstance(historical, Erratum)
 
     def test_three_separate_events_and_no_cooccurrence(self):
         self.assertIsInstance(self.insect, ErratumV2)
