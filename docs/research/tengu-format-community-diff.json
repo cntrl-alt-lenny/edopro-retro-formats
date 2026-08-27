@@ -1,0 +1,90 @@
+{
+  "purpose": "Compact, offline cross-check packet for the TenguFormat.com community-pool comparison; not canonical pool data.",
+  "source": {
+    "url": "https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json",
+    "retrieved": "2026-08-27",
+    "sha256": "f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc",
+    "records": 5035,
+    "dated_candidate_count": 4572,
+    "date_field": "tcg_date",
+    "comparison_cutoff": "2011-09-17"
+  },
+  "certified_pool_count": 4563,
+  "canonicalized_semantic_difference": {
+    "ours_only": [10000010, 33574806, 37115575, 87259077, 88071625],
+    "community_only": []
+  },
+  "ours_minus_tenguformat": [
+    {
+      "passcode": 10000010,
+      "name": "The Winged Dragon of Ra",
+      "community_record": null,
+      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-1-promotional-card", "number": "JUMP-EN045", "date": "2010-11-01", "precision": "month", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]},
+      "classification": "community-omission",
+      "adjudication": "The canonical card index and release ledger identify this TCG promo as available before the snapshot; the community export has no row for the identity.",
+      "changes_toronto_legality": false
+    },
+    {
+      "passcode": 33574806,
+      "name": "Elemental HERO Escuridao",
+      "community_record": null,
+      "our_earliest_qualifying_release": {"product": "yu-gi-oh-gx-volume-9-promotional-card", "number": "YG09-EN001", "date": "2011-08-07", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
+      "classification": "community-omission",
+      "adjudication": "The canonical card index and release ledger identify the GX Volume 9 promo as available before the snapshot; the community export has no row for the identity.",
+      "changes_toronto_legality": false
+    },
+    {
+      "passcode": 37115575,
+      "name": "Malefic Truth Dragon",
+      "community_record": {"passcode": 37115575, "name": "Malefic Truth Dragon", "tcg_date": "2012-10-26", "card_code": "JUMP-EN048"},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-vol-9-issue-3-promotional-card", "number": "JUMP-EN048", "date": "2011-01-01", "precision": "year", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]},
+      "classification": "community-date-error",
+      "adjudication": "The community date contradicts the ledger's pre-snapshot JUMP-EN048 evidence and the separately sourced official card-database March-2011 boundary resolution; the card is legal by the snapshot.",
+      "changes_toronto_legality": false
+    },
+    {
+      "passcode": 56043446,
+      "name": "Viser Des",
+      "community_record": {"passcode": 56043447, "name": "Viser Des", "tcg_date": "2010-02-12", "card_code": "ABPF-EN093"},
+      "our_earliest_qualifying_release": {"product": "absolute-powerforce", "number": "ABPF-EN093", "date": "2010-02-12", "precision": "day", "territory": "tcg-eu", "sources": ["yugipedia-set-pages", "ygoprodeck-api", "konami-product-pages-2010-archive"]},
+      "classification": "alias-or-artwork-identity",
+      "adjudication": "The raw passcodes are alternate identities for the same named ABPF-EN093 printing; the canonical index uses 56043446 and the community export uses 56043447.",
+      "changes_toronto_legality": false
+    },
+    {
+      "passcode": 87259077,
+      "name": "Lightning Warrior",
+      "community_record": null,
+      "our_earliest_qualifying_release": {"product": "shonen-jump-december-2010-subscription-bonus", "number": "JUMP-EN046", "date": "2010-12-01", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
+      "classification": "community-omission",
+      "adjudication": "The canonical card index and release ledger identify this promo as available before the snapshot; the community export has no row for the identity.",
+      "changes_toronto_legality": false
+    },
+    {
+      "passcode": 88071625,
+      "name": "The Tyrant Neptune",
+      "community_record": {"passcode": 88071625, "name": "The Tyrant Neptune", "tcg_date": "2011-11-01", "card_code": "JUMP-EN041"},
+      "our_earliest_qualifying_release": {"product": "shonen-jump-may-2010-subscription-bonus", "number": "JUMP-EN041", "date": "2010-05-01", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]},
+      "classification": "community-date-error",
+      "adjudication": "The community date is later than the ledger's JUMP-EN041 release evidence; the card is legal by the snapshot.",
+      "changes_toronto_legality": false
+    }
+  ],
+  "tenguformat_minus_ours": [
+    {"passcode": 10000002, "name": "Obelisk the Tormentor", "tcg_date": "2010-01-01", "card_code": "GLD4-EN030", "our_canonical_passcode": 10000000, "our_canonical_name": "Obelisk the Tormentor", "our_earliest_qualifying_release": {"product": "shonen-jump-vol-8-issue-1-promotional-card", "number": "JUMP-EN037", "date": "2010-01-01", "precision": "month", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses a different passcode for the same card identity; the canonical identity is already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 18807109, "name": "Spellbinding Circle", "tcg_date": "2002-09-16", "card_code": "DPYG-EN026", "our_canonical_passcode": 18807108, "our_canonical_name": "Spellbinding Circle", "our_earliest_qualifying_release": {"product": "magic-ruler", "number": "MRL-006", "date": "2002-09-16", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent artwork/passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 19230408, "name": "Offerings to the Doomed", "tcg_date": "2003-03-01", "card_code": "GLD1-EN034", "our_canonical_passcode": 19230407, "our_canonical_name": "Offerings to the Doomed", "our_earliest_qualifying_release": {"product": "labyrinth-of-nightmare", "number": "LON-051", "date": "2003-03-01", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent artwork/passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 35686188, "name": "Tragedy", "tcg_date": "2004-11-20", "card_code": "DR3-EN109", "our_canonical_passcode": 35686187, "our_canonical_name": "Tragedy", "our_earliest_qualifying_release": {"product": "rise-of-destiny", "number": "RDS-EN049", "date": "2004-12-01", "precision": "day", "territory": "tcg", "sources": ["yugipedia-set-pages"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent artwork/passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 39751094, "name": "Otohime", "tcg_date": "2003-06-06", "card_code": "DB2-EN181", "our_canonical_passcode": 39751093, "our_canonical_name": "Otohime", "our_earliest_qualifying_release": {"product": "legacy-of-darkness", "number": "LOD-069", "date": "2003-06-06", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent artwork/passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 56043447, "name": "Viser Des", "tcg_date": "2010-02-12", "card_code": "ABPF-EN093", "our_canonical_passcode": 56043446, "our_canonical_name": "Viser Des", "our_earliest_qualifying_release": {"product": "absolute-powerforce", "number": "ABPF-EN093", "date": "2010-02-12", "precision": "day", "territory": "tcg-eu", "sources": ["yugipedia-set-pages", "ygoprodeck-api", "konami-product-pages-2010-archive"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the alternate passcode for the same ABPF-EN093 identity already represented canonically.", "changes_toronto_legality": false},
+    {"passcode": 64335805, "name": "Red-Eyes Black Metal Dragon", "tcg_date": "2002-11-25", "card_code": "PP01-EN015", "our_canonical_passcode": 64335804, "our_canonical_name": "Red-Eyes Black Metal Dragon", "our_earliest_qualifying_release": {"product": "yu-gi-oh-forbidden-memories-promotional-cards", "number": "FMR-001", "date": "2002-11-25", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 68540059, "name": "Metalmorph", "tcg_date": "2002-11-25", "card_code": "WP11-EN020", "our_canonical_passcode": 68540058, "our_canonical_name": "Metalmorph", "our_earliest_qualifying_release": {"product": "yu-gi-oh-forbidden-memories-promotional-cards", "number": "FMR-003", "date": "2002-11-25", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 73134082, "name": "Final Flame", "tcg_date": "2002-03-08", "card_code": "LOB-100", "our_canonical_passcode": 73134081, "our_canonical_name": "Final Flame", "our_earliest_qualifying_release": {"product": "legend-of-blue-eyes-white-dragon", "number": "LOB-100", "date": "2002-03-08", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 80604092, "name": "Ultimate Offering", "tcg_date": "2002-03-29", "card_code": "CP04-EN002", "our_canonical_passcode": 80604091, "our_canonical_name": "Ultimate Offering", "our_earliest_qualifying_release": {"product": "starter-deck-kaiba", "number": "SDK-050", "date": "2002-03-29", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 81480461, "name": "Barrel Dragon", "tcg_date": "2002-06-26", "card_code": "DT02-EN005", "our_canonical_passcode": 81480460, "our_canonical_name": "Barrel Dragon", "our_earliest_qualifying_release": {"product": "metal-raiders", "number": "MRD-126", "date": "2002-06-26", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool; its DT02 printing is not the legality authority because the card was previously released in Metal Raiders.", "changes_toronto_legality": false},
+    {"passcode": 83011278, "name": "Mystic Tomato", "tcg_date": "2002-09-16", "card_code": "SDMA-EN002", "our_canonical_passcode": 83011277, "our_canonical_name": "Mystic Tomato", "our_earliest_qualifying_release": {"product": "magic-ruler", "number": "MRL-094", "date": "2002-09-16", "precision": "day", "territory": "tcg", "sources": ["ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 83764719, "name": "Monster Reborn", "tcg_date": "2002-03-08", "card_code": "HL07-EN001", "our_canonical_passcode": 83764718, "our_canonical_name": "Monster Reborn", "our_earliest_qualifying_release": {"product": "legend-of-blue-eyes-white-dragon", "number": "LOB-118", "date": "2002-03-08", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The card index explicitly records 83764719 as an alias of canonical Monster Reborn 83764718.", "changes_toronto_legality": false},
+    {"passcode": 84080939, "name": "The Forgiving Maiden", "tcg_date": "2003-03-01", "card_code": "DB1-EN239", "our_canonical_passcode": 84080938, "our_canonical_name": "The Forgiving Maiden", "our_earliest_qualifying_release": {"product": "labyrinth-of-nightmare", "number": "LON-044", "date": "2003-03-01", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false},
+    {"passcode": 84257640, "name": "Dian Keto the Cure Master", "tcg_date": "2002-03-29", "card_code": "SYE-027", "our_canonical_passcode": 84257639, "our_canonical_name": "Dian Keto the Cure Master", "our_earliest_qualifying_release": {"product": "starter-deck-yugi", "number": "SDY-023", "date": "2002-03-29", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages", "ygoprodeck-api"]}, "classification": "alias-or-artwork-identity", "adjudication": "The community export uses the adjacent passcode identity for a card already in the certified pool.", "changes_toronto_legality": false}
+  ]
+}

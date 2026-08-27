@@ -116,6 +116,24 @@ release facts; each participation card also has an ordinary earlier release,
 so the exclusions do not alter the count. No Edison product exclusions are
 reused.
 
+### Duel Terminal legality in force before Toronto
+
+The exclusion of `duel-terminal-4`, `duel-terminal-5`, and
+`duel-terminal-5a` is supported by period-2011 policy, not by deleting their
+release events. The **KDE Official Yu-Gi-Oh! TCG Tournament Policy v1.1**,
+identified as “In Effect as of May 5, 2011,” has Card Legality §IV.F stating
+that American Duel Terminal cards are legal only if released in another
+product and that cards exclusive to the Duel Terminals are not legal in
+sanctioned events. The surviving full copy is a faithful
+[archived mirror](https://paperzz.com/doc/8874780/yu-gi-oh--tournament-policy-v-1.1---yugioh);
+a contemporary [Konami YCS Toronto FAQ](https://yugiohblog.konami.com/2012/ycs/12-08-toronto/yu-gi-oh-championship-series-toronto-faq/)
+links the original KDE PDF URL, which is no longer hosted at that path. The
+mirror limitation is recorded in `data/sources.json`; the document is not
+claimed to be an actively hosted official copy. The rule applies to sanctioned
+TCG events and was in force on 2011-09-17. Release fact and tournament policy
+remain separate: DT4/5/5a cards existed, but their exclusive machine printings
+did not independently make a card tournament legal.
+
 Validation remains error-free. The warning count changes from 360 to 361:
 the only new finding is `releases.number-prefix` for `DPCT-EN005` stored under
 the `DPC5` Duelist Pack Collection Tin 2011 record. This is an upstream
@@ -129,6 +147,41 @@ historical whitelist: it uses modern/alias identities and current dates, and
 differs from the ledger projection by six identities plus fifteen
 community-only identities. Those differences are reported, not silently
 forced into the release data.
+
+The exact comparison is committed in
+[`tengu-format-community-diff.json`](tengu-format-community-diff.json), whose
+source hash is
+`f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc`.
+The six raw `ours-minus-community` identities are:
+
+| passcode | name | classification | adjudication |
+|---:|---|---|---|
+| 10000010 | The Winged Dragon of Ra | community-omission | pre-cutoff JUMP-EN045; absent from export |
+| 33574806 | Elemental HERO Escuridao | community-omission | pre-cutoff YG09-EN001; absent from export |
+| 37115575 | Malefic Truth Dragon | community-date-error | pre-cutoff JUMP-EN048; export says 2012-10-26 |
+| 56043446 | Viser Des | alias-or-artwork-identity | export uses adjacent 56043447 for ABPF-EN093 |
+| 87259077 | Lightning Warrior | community-omission | pre-cutoff JUMP-EN046; absent from export |
+| 88071625 | The Tyrant Neptune | community-date-error | pre-cutoff JUMP-EN041; export says 2011-11-01 |
+
+The fifteen raw `community-minus-ours` identities are
+`10000002, 18807109, 19230408, 35686188, 39751094, 56043447, 64335805,
+68540059, 73134082, 80604092, 81480461, 83011278, 83764719, 84080939,
+84257640`. Every one maps by name and printing lineage to an identity already
+in the certified pool: canonical `10000000, 18807108, 19230407, 35686187,
+39751093, 56043446, 64335804, 68540058, 73134081, 80604091, 81480460,
+83011277, 83764718, 84080938, 84257639`, respectively. All are classified
+`alias-or-artwork-identity`; `83764719` is also explicitly an alias in the
+card index. The fixture records each source date, card code, earliest
+qualifying ledger release, classification, and adjudication.
+
+The raw set difference is therefore **6 + 15**. After canonicalizing the
+fifteen alternate identities, the semantic difference is five ledger-only
+cards (`10000010, 33574806, 37115575, 87259077, 88071625`) and no
+community-only cards. No difference changes legality at YCS Toronto:
+the six ledger-only identities are either omitted or misdated by the current
+community export, and the fifteen community-only identities are alternate
+identities for cards already legally represented by the ledger. No
+release-certification defect was found.
 
 ## Rule-profile gate
 
@@ -178,7 +231,15 @@ All 296 canonical v2 errata evaluate at the snapshot without runtime changes:
 
 The existing Edison-style unresolved policy would select 52 historical
 passcodes, but that is an audit result rather than a Tengu override decision.
-No per-format erratum override is created by this gate.
+No per-format erratum override is created by this gate. The exact deterministic
+`erratum id -> modern passcode -> historical passcode` mapping is stored in
+the packet's `historical_fallback_mapping` and is asserted against live
+`select_applicable_errata()` output by `tests/test_tengu_format_gate.py`; the
+count is 52 and the mapping is identity-pinned, not merely counted. The same
+packet and test pin 33 determinate MODERN, 52 determinate
+`reuse-upstream`, 38 determinate `known-gap`, 3 determinate `none-needed`,
+161 ambiguous-modern-possible, 9 ambiguous-modern-impossible, 47 records
+with unresolved candidates, and 89 unresolved candidate-state occurrences.
 
 ## Edison → Tengu comparison
 

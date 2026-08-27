@@ -246,6 +246,17 @@
       "notes": "Konami-era legality practice: per-event dated legal lists. Evidence that Europe-only GX Tag Force 3 promos (Gallis the Star Beast, Red-Eyes Wyvern, Darkness Destroyer) were explicitly legal at US premier events 2009-2010, and that Duel Terminal machine-exclusive cards were NOT legal until released in another product (mid-2009 FAQs naming Ally of Justice Catastor; Kevin Tewart's 2010-03-19 strategy-site article; the June 2010 US WCQ FAQ enumerating still-illegal DT01/DT02 numbers). Local copies cached; retrieved 2026-08-20."
     },
     {
+      "id": "konami-tcg-tournament-policy-v11-2011",
+      "kind": "official",
+      "title": "KDE Official Yu-Gi-Oh! TCG Tournament Policy v1.1 (in effect May 5, 2011; archived mirror)",
+      "url": "https://paperzz.com/doc/8874780/yu-gi-oh--tournament-policy-v-1.1---yugioh",
+      "publisher": "Konami Digital Entertainment, Inc. (KDE)",
+      "revision": "v1.1 effective 2011-05-05",
+      "retrieved": "2026-08-27",
+      "used_for": "Period-2011 sanctioned TCG legality policy: American Duel Terminal cards are legal only if released in another product; Duel Terminal-exclusive cards are not legal in sanctioned events.",
+      "reliability_notes": "The full surviving copy is a faithful mirror of the KDE document and identifies itself as official, v1.1, effective May 5, 2011. A contemporary Konami YCS Toronto FAQ links the original official PDF URL (http://www.yugioh-card.com/en/gameplay/penalty_guide/KDE_TCG_Tournament_Policy_05May11.pdf), which is no longer hosted at that path. The mirror limitation is explicit; the text is used with that provenance rather than claimed as a currently official hosted copy."
+    },
+    {
       "id": "konami-official-rulebook-v71-2010",
       "kind": "official",
       "title": "Konami \"OFFICIAL RULEBOOK Version 7.1\" (archived 2010-03-30, 25 days before SJC Edison)",
