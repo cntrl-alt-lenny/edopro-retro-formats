@@ -196,39 +196,27 @@ class RealDataTest(unittest.TestCase):
             self.assertEqual([], unknown, f"{fmt_id}: emitted codes missing from the card index")
 
     def test_card_index_covers_every_referenced_passcode(self):
-        """KNOWN GAP, found by the real canonical migration and
-        deliberately NOT patched in the migration commit (task section 4:
-        "if the migration exposes a runtime problem, STOP and report it,
-        do not patch runtime semantics in the same commit"):
-        `retroformats.importers.card_index.collect_referenced_passcodes()`
-        unconditionally reads `erratum.implementation`/`erratum.changes`
-        (v1-only attributes) with no `isinstance(erratum, ErratumV2)`
-        branch, so it raises `AttributeError` on any `ErratumV2` record.
-        Before this migration no canonical record was ever v2-shaped, so
-        this never fired; now 247 of 296 are. This is a real, tracked
-        follow-up for the importer, not a design decision to skip
-        silently - the `assertRaises(AttributeError)` immediately below,
-        in this SAME test, pins the exact failure so a future fix
-        elsewhere would make this test FAIL LOUDLY (the assertion
-        expects the crash; no crash is now a broken expectation) rather
-        than let the skip go stale silently.
+        """Every passcode the repository can legitimately reference — modern
+        cards, banlist/pool entries and variants, v1 baseline/resulting
+        implementations, and v2 authored-coverage/reference-identity
+        substitutions alike — must already be indexed in
+        data/cards/index.json. This is the broader, referenced-passcode
+        invariant, distinct from `test_every_generated_code_is_identifiable`
+        above (which only checks codes GOAT/Edison currently EMIT): a
+        passcode can be legitimately referenced by canonical data without
+        ever being emitted by either of the two currently-defined formats,
+        and this test is what would catch that drifting silently.
 
-        The narrower, operationally-relevant invariant this test also
-        wants (every code the build actually EMITS is indexable) remains
-        fully verified by `test_every_generated_code_is_identifiable`
-        above, unaffected by this gap: GOAT/Edison's emitted codes are
-        unchanged by the migration (proven byte-identical in
-        tests/test_shadow_migration.py), so the card index's coverage of
-        them was never in question."""
+        Previously a known gap (`collect_referenced_passcodes()` read only
+        v1-shaped `erratum.implementation`/`erratum.changes`, raising
+        AttributeError on any `ErratumV2` record) — the collector now reads
+        each erratum through its own native v1/v2 API, and this test
+        restores the real invariant rather than pinning the crash."""
         from retroformats.importers.card_index import collect_referenced_passcodes
 
-        with self.assertRaises(AttributeError):
-            collect_referenced_passcodes(self.repo)
-        self.skipTest(
-            "collect_referenced_passcodes() cannot walk ErratumV2 records yet (AttributeError on "
-            "erratum.implementation) - a real, tracked importer gap the migration exposed, not "
-            "fixed here per task section 4; see this test's docstring"
-        )
+        refs = collect_referenced_passcodes(self.repo)
+        missing = sorted(p for p in refs if p not in self.repo.card_index.by_passcode)
+        self.assertEqual([], missing, f"passcodes referenced by canonical data but absent from the card index: {missing}")
 
     def test_pool_cards_are_tcg_scoped_in_the_card_database(self):
         """A TCG format's pool must reference codes EDOPro treats as TCG cards

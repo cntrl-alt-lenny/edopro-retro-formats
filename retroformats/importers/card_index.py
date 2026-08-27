@@ -14,11 +14,19 @@ import argparse
 import sys
 from pathlib import Path
 
+from ..lflist import MalformedHistoricalIdentity, _usable_v2, historical_identity
+from ..model import ErratumV2
 from ..repo import Repository, find_repo_root
 from .ignis_goat import git_head, read_cdb, write_json
 
 
 def collect_referenced_passcodes(repo: Repository) -> set[int]:
+    """Every canonical passcode the repository can legitimately reference —
+    not merely codes GOAT/Edison currently emit. Mixed v1/v2 corpus: a v1
+    `Erratum` and a v2 `ErratumV2` carry historical identity in genuinely
+    different shapes (design doc §8's hard legacy/v2 boundary — no shared
+    representation), so each is read through its own native API rather than
+    a common dict-shaped guess."""
     refs: set[int] = set()
     for banlist in repo.banlists.values():
         for entry in banlist.entries:
@@ -35,9 +43,41 @@ def collect_referenced_passcodes(repo: Repository) -> set[int]:
                     pass  # validator reports the malformed entry
     for erratum in repo.errata.values():
         refs.add(erratum.modern_card.passcode)
-        # EVERY version's implementation, not just the baseline: a card with
-        # multiple historical revisions carries one per change, and a code the
-        # build can emit must be identifiable.
+        if isinstance(erratum, ErratumV2):
+            # `implementation_metadata[]` is deliberately never touched here:
+            # it is workflow/research metadata orthogonal to Coverage
+            # entirely (model.py's own ImplementationMetadata docstring),
+            # never a card identity. Only kinds that claim an executable
+            # historical substitution (REUSE_UPSTREAM/CUSTOM_SCRIPT) carry a
+            # passcode at all — `_usable_v2()` is the same gate lflist.py
+            # itself uses, so "referenced" here means exactly what "usable
+            # substitution" means everywhere else in this codebase, not a
+            # second, drifting definition. MODERN/NONE_NEEDED/KNOWN_GAP/
+            # UNRESOLVED never reach `historical_identity()` at all.
+            for coverage in erratum.authored_states.values():
+                usable = _usable_v2(coverage)
+                if usable is None:
+                    continue
+                try:
+                    passcode, variants = historical_identity(usable)
+                except MalformedHistoricalIdentity:
+                    continue  # validator reports the malformed entry
+                refs.add(passcode)
+                refs.update(variants)
+            # reference_identities[] is an exact, sourced identity claim in
+            # its own right (model.py's ReferenceIdentity docstring) — not
+            # gated by a Coverage kind at all, since it isn't Coverage.
+            for identity in erratum.reference_identities:
+                try:
+                    passcode, variants = historical_identity(identity)
+                except MalformedHistoricalIdentity:
+                    continue  # validator reports the malformed entry
+                refs.add(passcode)
+                refs.update(variants)
+            continue
+        # Legacy v1 (unchanged): EVERY version's implementation, not just the
+        # baseline — a card with multiple historical revisions carries one
+        # per change, and a code the build can emit must be identifiable.
         implementations = [
             erratum.implementation,
             *(c.get("resulting_implementation") for c in erratum.changes),

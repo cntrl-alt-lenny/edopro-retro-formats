@@ -38,22 +38,38 @@ Two fixture formats exercise the whole pipeline end-to-end:
 |---|---|---|
 | Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) |
 | Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* under certified coverage, cross-checked against two independent community pools, with the boundary dates, Duel Terminal exclusion, and promo cutoff corroborated by archived period Konami documents (including the event's own FAQ) |
-| Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | `DUEL_MODE_MR1` baseline (open question: TCG-variant flags) |
+| Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | **custom MR1-era flag set** (not the bare `DUEL_MODE_MR1` preset) — MR1's own 6 flags plus a researched addition, `DUEL_0_ATK_DESTROYED`; one behaviour, Ignition Effect Priority, has no exact ocgcore reproduction and is carried as a documented approximation/known gap rather than guessed; every other researched flag question is resolved and cited, not left open — see [docs/research/edison-rules.md](docs/research/edison-rules.md) |
 | Errata | **complete** — every substitution derived from one sourced parity policy instead of a 211-entry hand list; still entry-for-entry identical to the reference | **partial** — 72 historical implementations *computed* from evidence, with no hand-written Edison errata list |
 | Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected) |
 
 Behind both formats' card *behaviour* sits the second backbone dataset:
 **`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
-rather than imported, distinguishing genuine text errata (120 functional) from
-period *rulings* (155), from pure wording modernisation (21 cosmetic). Chronology
-carries its own uncertainty: 113 changes are exactly dated, 58 hold bounded
-"old attested through A, new attested from B" intervals, and 125 are explicitly
-unresolved. **Selection is fail-safe** — a format snapshot inside an unresolved
-transition interval blocks the build rather than silently choosing old or new
-behaviour. Applicability is *computed*: Edison's 72 historical implementations
-fall out of the evidence with no hand-written list, and GOAT's 211-entry list was
-replaced by a single sourced statement while staying byte-identical to the Project
-Ignis reference. See [docs/errata.md](docs/errata.md).
+rather than imported, distinguishing genuine text errata (functional) from
+period *rulings*, from pure wording modernisation (cosmetic). **Two record
+shapes coexist deliberately, not as a work-in-progress split**: 247 records
+have been migrated to the **v2 historical-event DAG** (180 as flattened
+single-event sugar, 67 as the full `events{}`/`ordering`/`states[]` shape) —
+an explicit graph of dated/undated historical events with a provable
+partial order, replacing the old assumption that `changes[]`'s array
+position meant anything. The remaining **49 records intentionally stay on
+the legacy v1 `changes[]` model**: their true chronology is genuinely
+unordered or only partially provable, and migrating them safely needs
+either an explicit, evidenced ordering edge or an accepted "no order
+known" annotation per record — mechanical, order-preserving migration
+would silently assert facts the evidence doesn't support, so it is
+deferred rather than rushed. See
+[docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
+for the model and [docs/roadmap.md](docs/roadmap.md) for the remaining-49
+migration plan. Chronology carries its own uncertainty across both shapes:
+some changes/events are exactly dated, some hold bounded "old attested
+through A, new attested from B" intervals, and some are explicitly
+unresolved. **Selection is fail-safe** — a format snapshot inside an
+unresolved transition interval blocks the build rather than silently
+choosing old or new behaviour, for either record shape. Applicability is
+*computed*: Edison's historical implementations fall out of the evidence
+with no hand-written list, and GOAT's 211-entry list was replaced by a
+single sourced statement while staying byte-identical to the Project Ignis
+reference. See [docs/errata.md](docs/errata.md).
 
 Behind the Edison pool sits the project's first shared backbone dataset:
 **`data/releases/`** — 370 TCG products (2002–2010) with per-territory,
@@ -82,7 +98,8 @@ $ python3 -m retroformats build         # regenerate dist/ deterministically
 $ python3 -m retroformats materialize   # derive release-cutoff pools from data/releases/
 $ python3 -m retroformats report        # per-format status, errata certification, coverage
 $ python3 -m retroformats report -v     # ...plus which cards each format substitutes
-$ python3 -m unittest discover -t . -s tests   # 220 tests incl. the Ignis-parity and Edison regressions
+$ python3 -m unittest discover -t . -s tests -v   # schema, runtime (v1+v2), build, reference-parity,
+                                                   # and migration regressions (634 tests as of this commit)
 ```
 
 ## Repository layout
@@ -156,10 +173,19 @@ Verified against the EDOPro/ocgcore source (all citations in
 
 ## Development status
 
-Working end-to-end with two certified backbone datasets (releases, errata). See
-[docs/roadmap.md](docs/roadmap.md) for the prioritised next steps (the Edison rule
-profile review, the April 2005 banlist cross-check, broader behavioural test
-coverage, more formats).
+Working end-to-end with two certified backbone datasets (releases, errata) and
+two proof formats (GOAT, Edison) — both remain the project's end-to-end
+regression targets as the errata model evolves underneath them. The
+errata-model migration to the v2 historical-event DAG is **complete for the
+247 records where it is semantics-preserving** (single-event/sugar records
+and provably-ordered multi-event records); teaching the tooling to migrate
+the remaining 49 order-uncertain records without silently asserting an
+unevidenced order is the next errata-model milestone (see
+[docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
+and [docs/roadmap.md](docs/roadmap.md)). The card-index importer now supports
+this mixed v1/v2 corpus. See [docs/roadmap.md](docs/roadmap.md) for the full
+prioritised next-steps list (the April 2005 banlist cross-check, broader
+behavioural test coverage, more formats).
 
 ## License
 
