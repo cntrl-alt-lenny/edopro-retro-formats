@@ -1,0 +1,141 @@
+{
+  "packet_version": 1,
+  "status": "research-gate-only",
+  "canonicalization": "blocked",
+  "verdict": "representable-with-format-local-approximations",
+  "target_recommendation": {
+    "requested_label": "1999-05-yugi-kaiba",
+    "requested_label_verdict": "rejected",
+    "id": "1999-08-tokyo-dome",
+    "name": "Tokyo Dome Format",
+    "region": "ocg-jp",
+    "snapshot": "1999-08-25",
+    "event": {
+      "name": "Duel Monsters II / 決闘者伝説 in TOKYO DOME",
+      "date": "1999-08-26",
+      "pool_cutoff_reason": "Use the day before the event to exclude products dated on the event day while matching the established community snapshot."
+    },
+    "previous": null,
+    "next_conventional": {
+      "name": "Exodia",
+      "snapshot": "2000-04-10",
+      "evidence_label": "community-convention"
+    }
+  },
+  "name_and_chronology": {
+    "yugi_kaiba_in_japan_1999": {
+      "products": [
+        "LIMITED EDITION 1 遊戯パック",
+        "LIMITED EDITION 1 海馬パック"
+      ],
+      "release_date": "1999-06-01",
+      "source_ids": ["konami-card-history"]
+    },
+    "yugi_kaiba_conventional_usage": {
+      "region": "tcg",
+      "snapshot": "2002-05-15",
+      "pool_summary": "Legend of Blue-Eyes plus Starter Deck Yugi and Starter Deck Kaiba",
+      "source_ids": ["format-library-yugi-kaiba", "pojo-yugi-kaiba"]
+    },
+    "early_ocg_anchor": {
+      "event_date": "1999-08-26",
+      "pre_event_snapshot": "1999-08-25",
+      "source_ids": ["konami-card-history", "konami-tokyo-dome-promos", "format-library-tokyo-dome"]
+    }
+  },
+  "product_chronology": [
+    {"date": "1999-02-04", "products": ["Vol.1"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-03-18", "products": ["STARTER BOX"], "source_ids": ["konami-starter-box", "konami-card-history"]},
+    {"date": "1999-03-27", "products": ["Vol.2"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-05-05", "products": ["Official Guide Starter Book promo"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-05-25", "products": ["Booster 2"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-05-27", "products": ["Vol.3"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-06-01", "products": ["LIMITED EDITION 1 遊戯パック", "LIMITED EDITION 1 海馬パック", "LIMITED EDITION 1 城之内パック"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-07-05", "products": ["Booster 3"], "source_ids": ["konami-booster-3"]},
+    {"date": "1999-07-08", "products": ["Duel Monsters II included-card products"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-07-13", "products": ["V-Jump Books DM2 promo"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-07-22", "products": ["Vol.4"], "source_ids": ["konami-vol-4"]},
+    {"date": "1999-08-20", "products": ["Valuable Book 1 promos"], "source_ids": ["konami-card-history"]},
+    {"date": "1999-08-26", "products": ["Booster 4", "Premium Pack", "Tokyo Dome event and attendee/prize cards"], "source_ids": ["konami-booster-4", "konami-tokyo-dome-promos"]}
+  ],
+  "rules": {
+    "source_ids": ["original-1999-rulebook", "expert-rules-secondary", "expert-rules-transcription"],
+    "facts": [
+      {"topic": "life_points", "value": 8000, "evidence": "primary-transcription"},
+      {"topic": "main_deck", "value": "minimum 40, no upper bound", "evidence": "primary-transcription"},
+      {"topic": "opening_hand", "value": 5, "evidence": "primary-transcription"},
+      {"topic": "draw", "value": "one per turn; no first-turn draw", "evidence": "primary-transcription"},
+      {"topic": "side_deck", "value": 10, "evidence": "primary-transcription"},
+      {"topic": "hand_limit", "value": "none documented", "evidence": "primary-transcription"},
+      {"topic": "main_phase_2", "value": "not documented in the first rulebook", "evidence": "primary-transcription"},
+      {"topic": "deck_out", "value": "player with higher LP wins when the opponent cannot draw", "evidence": "primary-transcription"},
+      {"topic": "expert_rules", "value": "tribute for Level 5+, multiple Spell/Trap activations, Fusion materials from hand", "evidence": "secondary-cross-check", "status": "effective boundary unresolved"},
+      {"topic": "chain_and_spell_speed", "value": "not defined in the first rulebook; later formalization boundary unresolved", "evidence": "absence-plus-secondary-history", "status": "unresolved"},
+      {"topic": "battle_damage", "value": "early ATK/DEF procedure differs from modern damage-step semantics", "evidence": "primary-transcription", "status": "engine-gap"}
+    ],
+    "candidate_core_flags": {
+      "exact_or_near_exact": ["DUEL_NO_HAND_LIMIT", "DUEL_NO_MAIN_PHASE_2", "DUEL_1_FACEUP_FIELD"],
+      "defaults_that_must_be_verified": ["no DUEL_1ST_TURN_DRAW", "no DUEL_ATTACK_FIRST_TURN"],
+      "not_justified_as_exact": ["DUEL_OCG_OBSOLETE_IGNITION"],
+      "known_gaps": ["higher-LP-wins-deck-out", "early-battle-calculation", "pre-formal-chain-and-priority-boundary"]
+    }
+  },
+  "banlist": {
+    "working_id": "ocg-1999-07",
+    "working_scope": "ocg-jp",
+    "working_entries": {"limited": ["Dark Hole", "Raigeki", "Trap Hole"], "forbidden": [], "semilimited": []},
+    "status": "source-disputed",
+    "conflict": "Secondary sources date a three-card list to July 1999, while other histories describe the first reliable application as Tokyo Dome event-only. No primary dated list has been certified in this gate.",
+    "source_ids": ["july-1999-list-wiki", "old-ocg-limit-index", "first-forbidden-cards-history"]
+  },
+  "card_pool": {
+    "pool_kind": "release-cutoff",
+    "territories": ["ocg-jp"],
+    "cutoff": "1999-08-25",
+    "community_cross_check": {
+      "identity_count": 370,
+      "in_current_card_index": 249,
+      "missing_from_current_card_index": 121,
+      "source_id": "ygoprodeck-tokyo-dome-cube",
+      "status": "non-canonical-cross-check"
+    },
+    "current_repository_coverage": {"product_count": 411, "ocg_product_count": 0, "source_id": "repository-dry-run"},
+    "same_day_exclusion": "Products dated 1999-08-26 are excluded from the proposed 1999-08-25 cutoff. Product contents and OCG printing identities still require a dedicated import and review."
+  },
+  "errata_audit": {
+    "snapshot": "1999-08-25",
+    "territories": ["ocg-jp"],
+    "total": 296,
+    "all_v2": true,
+    "chronology": {"determinate": 146, "ambiguous": 150},
+    "determinate": {"modern": 21, "historical": 125, "coverage": {"reuse-upstream": 79, "known-gap": 42, "none-needed": 4}},
+    "ambiguous": {"modern_possible": 104, "modern_impossible": 46, "candidate_occurrences": 302, "candidate_coverage_occurrences": {"reuse-upstream": 144, "unresolved": 47, "known-gap": 7, "modern": 104}},
+    "modern_policy_effect": {"explicit_policy_required": true, "determinate_historical_substitutions": 79, "ambiguous_records_left_unresolved": 150, "certifiable": false}
+  },
+  "architecture": {
+    "schema_change_required": false,
+    "runtime_change_required": false,
+    "format_local_approximation_required": true,
+    "canonical_data_ready": false,
+    "blocking_reasons": ["OCG release ledger absent", "121 community cross-check identities absent from current card index", "banlist effective scope disputed", "Expert Rules boundary unresolved", "early deck-out and battle semantics are engine gaps"]
+  },
+  "sources": [
+    {"id": "konami-card-history", "label": "Konami Japanese card database chronology", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja"},
+    {"id": "konami-starter-box", "label": "Konami STARTER BOX product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=111101000&request_locale=ja&rp=99999&sess=1"},
+    {"id": "konami-booster-3", "label": "Konami Booster 3 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301003&request_locale=ja&rp=99999&sess=1"},
+    {"id": "konami-vol-4", "label": "Konami Vol.4 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1102001&request_locale=ja&rp=99999&sess=1"},
+    {"id": "konami-booster-4", "label": "Konami Booster 4 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301004&request_locale=ja&rp=99999&sess=1"},
+    {"id": "konami-tokyo-dome-promos", "label": "Konami Tokyo Dome attendee/prize product page", "kind": "primary-event-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=131302003&request_locale=ja&rp=99999&sess=1"},
+    {"id": "original-1999-rulebook", "label": "Translation/transcription of the original Starter Box rulebook", "kind": "historical-rulebook-transcription", "url": "https://ygorganization.com/ogocg/"},
+    {"id": "expert-rules-secondary", "label": "Yu-Gi-Oh History generation-one Expert Rules research", "kind": "secondary-history", "url": "https://yugioh-history.com/environment/generation-one-4"},
+    {"id": "expert-rules-transcription", "label": "Japanese rulebook transcription and Expert Rules comparison", "kind": "secondary-rulebook-transcription", "url": "https://ygoceanbridge.blogspot.com/2022/07/blog-post_29.html?m=1"},
+    {"id": "format-library-tokyo-dome", "label": "Format Library Tokyo Dome API record", "kind": "community-convention", "url": "https://formatlibrary.com/api/formats/tokyo-dome"},
+    {"id": "format-library-yugi-kaiba", "label": "Format Library Yugi-Kaiba API record", "kind": "community-convention", "url": "https://formatlibrary.com/api/formats/yugi-kaiba"},
+    {"id": "pojo-yugi-kaiba", "label": "Community Yugi-Kaiba format guide", "kind": "community-convention", "url": "https://www.pojo.com/yu-gi-oh/FeaturedWriters/Baneful/2017/6-19.shtml"},
+    {"id": "ygoprodeck-tokyo-dome-cube", "label": "Community Tokyo Dome singleton pool", "kind": "community-cross-check", "url": "https://ygoprodeck.com/cube/view-cube/18262"},
+    {"id": "july-1999-list-wiki", "label": "July 1999 list historical reconstruction", "kind": "secondary-banlist", "url": "https://yugioh.fandom.com/wiki/July_1999_Lists"},
+    {"id": "old-ocg-limit-index", "label": "Old OCG limit-list index", "kind": "secondary-banlist", "url": "https://ocg-card.com/limit/old/"},
+    {"id": "first-forbidden-cards-history", "label": "First forbidden/limited list historical discussion", "kind": "secondary-banlist", "url": "https://yugioh-starter.com/what-is-the-first-forbidden-cards/"}
+  ],
+  "scope": {"files_added_by_gate": ["docs/research/yugi-kaiba-format-source-gate.md", "docs/research/yugi-kaiba-format-source-packet.json", "tests/test_yugi_kaiba_format_gate.py"], "canonical_format_created": false, "runtime_or_schema_changed": false, "errata_changed": false}
+}
