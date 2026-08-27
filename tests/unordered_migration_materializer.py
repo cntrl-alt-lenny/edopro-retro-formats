@@ -31,6 +31,7 @@ from .migration_materializer import SCHEMA_PATH, build_shadow_repository, findin
 from .schema_check import Registry, validate_erratum
 
 SOURCE_COMMIT = "e7be46dbd92214140eb10d6d2a7d3e7a16bd9b62"
+GATE_COMMIT = "2f1c17864330407a858b9588e8fdb0a2da500ec7"
 MANUAL_EXCLUDED_IDS = frozenset({"erratum-insect-imitation", "erratum-last-will"})
 TARGET_SELECTOR = {
     "equivalent": False,
@@ -304,11 +305,7 @@ def structural_contract(repo: Repository, scope: dict[str, Any], parsed: dict[st
 
         if any(len(event.transitions) != 1 for event in target.events.values()):
             failures.append({"id": record.id, "error": "event merged multiple transitions"})
-        if any(
-            "cooccurrence_sources" in transition.raw
-            for event in target.events.values()
-            for transition in event.transitions
-        ):
+        if any("cooccurrence_sources" in event.raw for event in target.events.values()):
             failures.append({"id": record.id, "error": "invented cooccurrence_sources"})
         if "chains" in target.raw.get("ordering", {}):
             failures.append({"id": record.id, "error": "unordered target emitted ordering.chains"})

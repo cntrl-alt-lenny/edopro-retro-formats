@@ -10,6 +10,26 @@ from retroformats.model import Coverage, Erratum, ErratumV2
 from . import migration_audit as audit
 from . import unordered_migration_materializer as gate
 
+SOURCE_COMMIT = "e7be46dbd92214140eb10d6d2a7d3e7a16bd9b62"
+GATE_COMMIT = "2f1c17864330407a858b9588e8fdb0a2da500ec7"
+HISTORICAL_PROTECTED_PATHS = (
+    "data/errata",
+    "data/banlists",
+    "data/pools",
+    "data/releases",
+    "data/rule-profiles",
+    "formats",
+    "dist",
+    "retroformats",
+    "schemas",
+)
+GATE_FILES = frozenset(
+    {
+        "docs/research/erratum-v2-unordered-migration-gate.md",
+        "tests/test_unordered_migration_materializer.py",
+        "tests/unordered_migration_materializer.py",
+    }
+)
 
 FROZEN_TARGET_IDS = frozenset(
     {
@@ -80,7 +100,8 @@ class UnorderedMigrationGateTest(unittest.TestCase):
         cls.shadow = cls.result["shadow_repository"]
 
     def test_source_and_exact_audit_selector(self):
-        self.assertEqual(gate.SOURCE_COMMIT, "e7be46dbd92214140eb10d6d2a7d3e7a16bd9b62")
+        self.assertEqual(gate.SOURCE_COMMIT, SOURCE_COMMIT)
+        self.assertEqual(gate.GATE_COMMIT, GATE_COMMIT)
         self.assertEqual(gate.SOURCE_COMMIT, self.result["source_commit"])
         self.assertEqual(FROZEN_TARGET_IDS, self.target_ids)
         self.assertEqual(47, len(self.target_ids))
@@ -238,21 +259,41 @@ class UnorderedMigrationGateTest(unittest.TestCase):
         self.assertIn("errata: 49 records", reports["baseline"])
         self.assertIn("errata: 2 records", reports["shadow"])
 
-    def test_canonical_data_and_dist_are_unchanged(self):
-        canonical = [
-            "data/errata",
-            "data/banlists",
-            "data/pools",
-            "data/releases",
-            "data/rule-profiles",
-            "formats",
-            "dist",
-        ]
+    def test_historical_scope_has_no_canonical_or_runtime_changes(self):
+        """The proof remains true after later canonical migrations land."""
         changed = subprocess.check_output(
-            ["git", "-C", str(audit.REPO_ROOT), "status", "--porcelain", "--", *canonical],
+            [
+                "git",
+                "-C",
+                str(audit.REPO_ROOT),
+                "diff",
+                "--name-only",
+                "--diff-filter=ACDMRTUXB",
+                SOURCE_COMMIT,
+                GATE_COMMIT,
+                "--",
+                *HISTORICAL_PROTECTED_PATHS,
+            ],
             text=True,
         )
-        self.assertEqual("", changed)
+        self.assertEqual([], [line for line in changed.splitlines() if line])
+
+    def test_gate_commit_changed_files_are_exactly_the_gate_files(self):
+        changed = subprocess.check_output(
+            [
+                "git",
+                "-C",
+                str(audit.REPO_ROOT),
+                "diff-tree",
+                "--no-commit-id",
+                "--name-only",
+                "--diff-filter=ACDMRTUXB",
+                "-r",
+                GATE_COMMIT,
+            ],
+            text=True,
+        )
+        self.assertEqual(GATE_FILES, {line for line in changed.splitlines() if line})
 
 
 if __name__ == "__main__":
