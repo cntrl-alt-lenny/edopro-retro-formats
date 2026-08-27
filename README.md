@@ -46,15 +46,15 @@ Behind both formats' card *behaviour* sits the second backbone dataset:
 **`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
 rather than imported, distinguishing genuine text errata (functional) from
 period *rulings*, from pure wording modernisation (cosmetic). **Two record
-shapes remain intentionally:** 294 records are now represented by the **v2
+shapes remain intentionally:** 295 records are now represented by the **v2
 historical-event DAG** (180 as flattened
-single-event sugar, 114 as the full `events{}`/`ordering`/`states[]` shape) —
+single-event sugar, 115 as the full `events{}`/`ordering`/`states[]` shape) —
 an explicit graph of dated/undated historical events with a provable
 partial order, replacing the old assumption that `changes[]`'s array
-position meant anything. The remaining **2 records require manual
-historical adjudication** and intentionally stay on the legacy v1
-`changes[]` model: Insect Imitation and Last Will are not treated as
-resolved by this migration. The 47 already-researched unordered records
+position meant anything. The remaining **1 record requires manual historical
+adjudication** and intentionally stays on the legacy v1 `changes[]` model:
+Last Will. Insect Imitation has since been independently adjudicated and
+migrated to the three-event v2 model. The 47 already-researched unordered records
 were migrated as separate events with no ordering edge where the evidence
 does not establish one; no new research or architecture work was needed.
 See
@@ -181,12 +181,12 @@ Verified against the EDOPro/ocgcore source (all citations in
 Working end-to-end with two certified backbone datasets (releases, errata) and
 two proof formats (GOAT, Edison) — both remain the project's end-to-end
 regression targets as the errata model evolves underneath them. The
-errata-model migration to the v2 historical-event DAG covers **294 of 296
-records**: the 247-record semantics-preserving pass and the subsequent 47
-already-researched unordered-event migration. The remaining **2 records**
-(Insect Imitation and Last Will) still require manual historical
-adjudication before v2 migration; this does not claim the entire errata
-migration is complete (see
+errata-model migration to the v2 historical-event DAG covers **295 of 296
+records**: the 247-record semantics-preserving pass, the subsequent 47
+already-researched unordered-event migration, and the later adjudication of
+Insect Imitation. **Last Will** is the sole remaining v1 record and still
+requires manual historical adjudication before v2 migration; this does not
+claim the entire errata migration is complete (see
 [docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
 and [docs/roadmap.md](docs/roadmap.md)). The card-index importer now supports
 this mixed v1/v2 corpus. See [docs/roadmap.md](docs/roadmap.md) for the full

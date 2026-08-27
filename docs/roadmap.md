@@ -422,13 +422,14 @@ reflects that.
      records and separately resolving the 2 manual cases — not started, not
      attempted in the migration commit that closed the 247.
 
-   - **Current errata status after the unordered migration**: `data/errata/`
-     now contains **294 v2 records** (180 sugar + 114 full-v2) and **2 v1
-     records**. The remaining v1 records are Insect Imitation and Last Will;
-     they require manual historical adjudication before v2 migration. The
-     47-record migration used the approved unordered-event materializer and
-     did not alter runtime, schema, format, or generated-output semantics.
-     Its per-record provenance is recorded in
+   - **Current errata status after the Insect Imitation adjudication**:
+     `data/errata/` now contains **295 v2 records** (180 sugar + 115 full-v2)
+     and **1 v1 record**. Last Will is the sole remaining v1 record and still
+     requires manual historical adjudication before v2 migration. The Insect
+     Imitation dossier records the three-event decomposition and its bounded,
+     explicitly uncertain chronology; no runtime, schema, format, or
+     generated-output semantics were changed. The earlier 47-record migration
+     remains documented in
      `docs/research/erratum-v2-unordered-migration-manifest.json`.
 
 ## Phase 2 — framework completeness

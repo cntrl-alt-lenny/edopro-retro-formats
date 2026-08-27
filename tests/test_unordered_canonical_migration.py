@@ -27,7 +27,9 @@ from .schema_check import Registry, validate_erratum
 
 
 SOURCE_COMMIT = "b0b8b7d8cc129e827fd684b3d880f6fcaedb80d9"
-MANUAL_IDS = {"erratum-insect-imitation", "erratum-last-will"}
+HISTORICAL_POST_COMMIT = "dec24733359358d993ab275ad4ec3ea7ef95044e"
+HISTORICAL_MANUAL_IDS = {"erratum-insect-imitation", "erratum-last-will"}
+CURRENT_REMAINING_V1_IDS = {"erratum-last-will"}
 
 
 def _pre_migration_rows():
@@ -92,22 +94,22 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
     def test_canonical_corpus_and_exact_remaining_v1(self):
         v2 = {rid for rid, record in self.live.errata.items() if isinstance(record, ErratumV2)}
         v1 = {rid for rid, record in self.live.errata.items() if isinstance(record, Erratum)}
-        self.assertEqual(294, len(v2))
-        self.assertEqual(MANUAL_IDS, v1)
+        self.assertEqual(295, len(v2))
+        self.assertEqual(CURRENT_REMAINING_V1_IDS, v1)
 
     def test_exact_discriminator_counts(self):
         counts = Counter(
             key for raw in self.raw.values() for key in ("changes", "events", "event") if key in raw
         )
-        self.assertEqual(Counter({"changes": 2, "events": 114, "event": 180}), counts)
+        self.assertEqual(Counter({"changes": 1, "events": 115, "event": 180}), counts)
         for raw in self.raw.values():
             self.assertEqual(1, sum(key in raw for key in ("changes", "events", "event")))
 
     def test_selector_is_exactly_the_approved_47_and_excludes_manual_two(self):
         self.assertEqual(47, len(self.targets))
         self.assertEqual(self.target_ids, set(self.gate_result["parsed"]))
-        self.assertTrue(self.target_ids.isdisjoint(MANUAL_IDS))
-        self.assertEqual(MANUAL_IDS, {
+        self.assertTrue(self.target_ids.isdisjoint(HISTORICAL_MANUAL_IDS))
+        self.assertEqual(HISTORICAL_MANUAL_IDS, {
             row["id"] for row in self.rows if not row["equivalent"]
         } - self.target_ids)
         self.assertEqual(46, sum(row["legacy_self_contradictory"] is True for row in self.targets))
@@ -153,15 +155,19 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
 
     def test_exactly_47_errata_paths_changed_from_source_and_manual_bytes_unchanged(self):
         changed = subprocess.check_output(
-            ["git", "diff", "--name-only", SOURCE_COMMIT, "--", "data/errata"], text=True
+            ["git", "diff", "--name-only", SOURCE_COMMIT, HISTORICAL_POST_COMMIT, "--", "data/errata"], text=True
         ).splitlines()
         changed_ids = {
             json.loads((self.root / path).read_text(encoding="utf-8"))["id"] for path in changed
         }
         self.assertEqual(self.target_ids, changed_ids)
-        for rid in MANUAL_IDS:
-            path = self.live.errata[rid].path
-            expected = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:{path.relative_to(self.root)}"])
+        for rid in HISTORICAL_MANUAL_IDS:
+            path = self.root / "data" / "errata" / f"{rid.removeprefix('erratum-')}.json"
+            expected = subprocess.check_output(["git", "show", f"{HISTORICAL_POST_COMMIT}:{path.relative_to(self.root)}"])
+            if rid == "erratum-insect-imitation":
+                # This historical assertion belongs to the 47-record commit;
+                # the current task subsequently adjudicates this one record.
+                continue
             self.assertEqual(expected, path.read_bytes(), rid)
             self.assertIn("changes", self.raw[rid])
             self.assertNotIn("events", self.raw[rid])
@@ -203,7 +209,7 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
             self.assertEqual(len(parsed.raw_edges), entry["ordering_edge_count"])
             self.assertEqual(len(parsed.authored_states), entry["authored_state_count"])
 
-    def test_all_294_v2_records_schema_valid_and_repository_loads(self):
+    def test_all_295_v2_records_schema_valid_and_repository_loads(self):
         self.assertEqual([], self.live.load_errors)
         registry = Registry()
         failures = {}
@@ -217,11 +223,11 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
 
     def test_union_of_old_new_and_manual_sets_is_all_296(self):
         old = {row["id"] for row in self.rows if row["equivalent"]}
-        self.assertEqual(296, len(old | self.target_ids | MANUAL_IDS))
-        self.assertEqual(set(self.live.errata), old | self.target_ids | MANUAL_IDS)
+        self.assertEqual(296, len(old | self.target_ids | HISTORICAL_MANUAL_IDS))
+        self.assertEqual(set(self.live.errata), old | self.target_ids | HISTORICAL_MANUAL_IDS)
         self.assertEqual(set(), old & self.target_ids)
-        self.assertEqual(set(), old & MANUAL_IDS)
-        self.assertEqual(set(), self.target_ids & MANUAL_IDS)
+        self.assertEqual(set(), old & HISTORICAL_MANUAL_IDS)
+        self.assertEqual(set(), self.target_ids & HISTORICAL_MANUAL_IDS)
 
     def test_live_outputs_validator_substitutions_and_card_index_match_pre_gate(self):
         for fmt_id in sorted(self.live.formats):
@@ -247,8 +253,14 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual([], before_validator.errors)
         self.assertEqual([], after_validator.errors)
         self.assertEqual(
-            Counter(f.code for f in before_validator.warnings),
-            Counter(f.code for f in after_validator.warnings),
+            Counter({"format.erratum-modern-known-wrong": 1}),
+            Counter(f.code for f in after_validator.warnings)
+            - Counter(f.code for f in before_validator.warnings),
+        )
+        self.assertEqual(
+            Counter({"format.erratum-unresolved-defaulted": 1}),
+            Counter(f.code for f in before_validator.warnings)
+            - Counter(f.code for f in after_validator.warnings),
         )
         refs = collect_referenced_passcodes(self.live)
         self.assertEqual([], sorted(refs - set(self.live.card_index.by_passcode)))

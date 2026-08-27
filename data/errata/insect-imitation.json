@@ -6,70 +6,159 @@
     "name": "Insect Imitation"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "functional",
+  "events": {
+    "c0": {
       "effective": {
         "date": "2009-07-24",
         "precision": "day",
         "status": "reported",
-        "basis": "TCG release of Retro Pack 2 (RP02-EN016), the first printing whose text drops the battle-position clause"
+        "basis": "TCG-EU release of Retro Pack 2 (RP02-EN016), the first printing whose text drops the battle-position clause"
       },
-      "historical_text": "Tribute 1 monster on your side of the field. Select 1 Insect-Type monster from your Deck that is 1 Level higher than the Tributed monster and Special Summon it on your side of the field in face-up Attack Position or face-down Defense Position. Then shuffle your Deck.",
-      "modern_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
-      "summary": "Functional erratum: the pre-RP02 text summons the searched Insect \"in face-up Attack Position or face-down Defense Position\", and the goat script implements exactly that (`Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)`, with the same position mask passed to `IsCanBeSpecialSummoned` in `s.spfilter`). The RP02-EN016 text drops the clause and the modern script summons `POS_FACEUP` only, so the era card can Set a Deck monster face-down - upstream's own annotation on the variant reads \"summons monsters like cyber jar\" - while the modern card cannot.",
-      "resulting_implementation": {
-        "strategy": "unresolved",
-        "status": "missing",
-        "tested": false,
-        "gap": {
-          "reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
-          "upstream_checked": true,
-          "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.cfilter` (the release-cost filter) also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv+1,e,tp)`, while the goat cfilter drops it, so the Tribute can be paid with no Insect of the right Level in the Deck. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": "summon-position",
+          "historical_text": "Tribute 1 monster on your side of the field. Select 1 Insect-Type monster from your Deck that is 1 Level higher than the Tributed monster and Special Summon it on your side of the field in face-up Attack Position or face-down Defense Position. Then shuffle your Deck.",
+          "modern_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
+          "summary": "Functional text erratum: the pre-RP02 text summons the searched Insect in face-up Attack Position or face-down Defense Position, and the GOAT script implements that position mask. RP02 drops the clause and the modern script summons face-up only, so the era card can Set the Deck monster face-down while the modern card cannot.",
           "sources": [
+            "ignis-cardscripts",
             "ignis-babelcdb",
-            "ignis-cardscripts"
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
           ]
         }
-      },
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "basis": "Insect-specific activation-legality change; exact effective date not located"
       },
-      "historical_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
-      "summary": "Period ruling package on top of the text change. Activation condition: the modern `s.cfilter` (the release-cost filter) also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv+1,e,tp)`, while the goat cfilter drops it, so the Tribute can be paid with no Insect of the right Level in the Deck. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "search-activation-legality",
+          "historical_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
+          "modern_text": null,
+          "summary": "Per-card activation rule, separate from failed-search verification: the GOAT cfilter permits paying the Tribute without an eligible Level+1 Insect remaining in the Deck, while the modern cfilter requires one before activation. A contemporaneous ruling discussion says the old UDE ruling was no longer official by 2012, but does not date this card's change or tie it to the verification-policy change.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
+      ]
+    },
+    "c2": {
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2011-02-02",
+        "new_attested_from": "2019-04-03",
+        "basis": "Shared TCG search-verification chronology applied to this Deck search: old failed-search verification is positively attested through 2011-02-02; the modern no-verification policy is first located 2019-04-03",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (capture 2005-06-16)",
+            "quote": "You must show your opponent the monster you select from your Deck for this card's effect. If you have no eligible monsters, your opponent gets to see your Deck to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
+            "title": "Konami, Machina Mayhem Structure Deck Card Rulings, compiled April 6th 2010",
+            "quote": "If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.",
+            "archived": true
+          },
+          {
+            "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
+            "title": "Konami, Storm of Ragnarok Card Rulings, compiled February 2 2011",
+            "quote": "If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.",
+            "archived": true
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "search-reveal-procedure",
+          "historical_text": "Tribute 1 monster. Special Summon 1 Insect-Type monster from your Deck whose Level is 1 higher than the Tributed monster's.",
+          "modern_text": null,
+          "summary": "Failed-search verification, separate from activation legality: when the GOAT search finds no eligible Insect, the script reveals the Deck with `Duel.GoatConfirm(tp,LOCATION_DECK)`; the modern script does not. The card-specific application is an implementation-backed inference from the same Deck-search procedure documented in the period rulings; no source located establishes that this transition co-occurred with the activation-legality change.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata",
+            "ude-card-rulings-archive",
+            "konami-set-rulings-archive",
+            "kde-tournament-policy-archive"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700171,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700171.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "chains": [
+      [
+        "c0",
+        "c2"
+      ]
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700171,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700171.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no implementation matching the RP02 text while retaining the historical activation and failed-search verification package; reproducing this intermediate state needs a custom script and reserved passcode.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.cfilter` (the release-cost filter) also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv+1,e,tp)`, while the goat cfilter drops it, so the Tribute can be paid with no Insect of the right Level in the Deck. Failed-search verification: the goat operation adds `else Duel.GoatConfirm(tp,LOCATION_DECK)`. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved."
+      }
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v2 (PSV-EN068 / Master Collection Volume 1, 2004-12-01), which the goat cdb text matches exactly; v1 (PSV-E068, 2002-10-20) is an earlier cosmetic rewording and is not recorded. Trailing v3 -> v4 (GRCR-EN052, 2022-01-27) adds \"had on the field\" and drops \"-Type\": cosmetic, since both scripts capture the Tributed monster's Level at cost time via `e:SetLabel(rg:GetFirst():GetLevel())` and never re-read it. Ordering rationale: the position erratum is anchored to a 2009 printing while the verification procedure is attested in force through 2011-02-02, so the functional change precedes the ruling change. IMPLEMENTATION GAP: the intermediate version - RP02 text (face-up only) still played under the era ruling package - has no upstream implementation, so any period snapshot after 2009-07-24 but before the ruling package lapsed has no correct script available."
+    "notes": "Adjudicated v2 model: the 2009 RP02 position/text change, the per-card activation-legality change, and the failed-search Deck-verification procedure are three separate behavioral events. The GOAT implementation contains both historical ruling behaviors, but implementation co-occurrence is not historical co-occurrence evidence; no source found establishes that the activation and verification changes occurred together or in either order. The RP02 position event is date-proven before the bounded verification event (2009-07-24 before the last old attestation on 2011-02-02), while activation remains undated and unordered. The old implementation is preserved at {}, and the RP02-only state is an explicit known gap; all other newly reachable nonterminal combinations remain mechanically UNRESOLVED."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "ude-card-rulings-archive",
+    "konami-set-rulings-archive",
+    "kde-tournament-policy-archive"
   ]
 }
