@@ -6,9 +6,8 @@
     "name": "Pyramid Turtle"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 Zombie-Type monster with a DEF 2000 or less from the Deck to the field. Then shuffle the Deck.",
-      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no Zombie-Type monster of 2000 or less DEF in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch. The printed text is untouched by this in every lineage version.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 Zombie-Type monster with a DEF 2000 or less from the Deck to the field. Then shuffle the Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no Zombie-Type monster of 2000 or less DEF in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch. The printed text is untouched by this in every lineage version.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 Zombie-Type monster with a DEF 2000 or less from the Deck to the field. Then shuffle the Deck.",
-      "summary": "Separate per-card era allowance: the goat target is `if chk==0 then return true and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end` where the modern target requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)` in place of that literal true, so the period implementation lets the trigger activate and resolve with no eligible Zombie in the Deck. No source in the packet dates when this card lost that allowance.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 Zombie-Type monster with a DEF 2000 or less from the Deck to the field. Then shuffle the Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat target is `if chk==0 then return true and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end` where the modern target requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)` in place of that literal true, so the period implementation lets the trigger activate and resolve with no eligible Zombie in the Deck. No source in the packet dates when this card lost that allowance.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700135,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700135.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700135,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700135.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

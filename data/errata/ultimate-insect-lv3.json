@@ -6,9 +6,8 @@
     "name": "Ultimate Insect LV3"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 300 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
-      "summary": "Period procedure, not a text erratum: after this card is sent to the Graveyard as the cost, if no \"Ultimate Insect LV5\" can be Special Summoned, the goat script proves the whiff by revealing BOTH hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 300 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: after this card is sent to the Graveyard as the cost, if no \"Ultimate Insect LV5\" can be Special Summoned, the goat script proves the whiff by revealing BOTH hand and Deck (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 300 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
-      "summary": "Separate per-card ruling: the goat script's activation check keeps only the free-zone test ('if chk==0 then return ft>0 end'), dropping the modern requirement that a Special Summonable \"Ultimate Insect LV5\" be in the hand or Deck, so the player may pay the cost with nothing to Summon. Nothing in the packet dates when this allowance ended, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If this card was Special Summoned by the effect of \"Ultimate Insect LV1\", as long as this card remains face-up on the field, decrease the ATK of all your opponent's monsters by 300 points. During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Ultimate Insect LV5\" from your hand or Deck. (You cannot activate this effect the turn this card is Normal Summoned, Special Summoned, or flipped face-up.)",
+          "modern_text": null,
+          "summary": "Separate per-card ruling: the goat script's activation check keeps only the free-zone test ('if chk==0 then return ft>0 end'), dropping the modern requirement that a Special Summonable \"Ultimate Insect LV5\" be in the hand or Deck, so the player may pay the cost with nothing to Summon. Nothing in the packet dates when this allowance ended, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700057,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700057.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700057,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700057.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

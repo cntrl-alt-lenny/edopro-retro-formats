@@ -6,9 +6,8 @@
     "name": "Toon Table of Contents"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "Add 1 card from your Deck to your hand that includes \"Toon\" in its card name, or is named \"Manga Ryu-Ran\".",
-      "summary": "Period procedure, not a text erratum: when the effect resolves with no \"Toon\" card left in the Deck, the goat script proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Add 1 card from your Deck to your hand that includes \"Toon\" in its card name, or is named \"Manga Ryu-Ran\".",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the effect resolves with no \"Toon\" card left in the Deck, the goat script proves the failed search by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "Add 1 card from your Deck to your hand that includes \"Toon\" in its card name, or is named \"Manga Ryu-Ran\".",
-      "summary": "Separate per-card ruling: the goat script drops the modern requirement that a \"Toon\" card exist in the Deck for activation ('if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' -> 'return true'), so the Normal Spell can be activated with nothing to fetch. Nothing in the packet dates when this card lost that allowance, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Add 1 card from your Deck to your hand that includes \"Toon\" in its card name, or is named \"Manga Ryu-Ran\".",
+          "modern_text": null,
+          "summary": "Separate per-card ruling: the goat script drops the modern requirement that a \"Toon\" card exist in the Deck for activation ('if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' -> 'return true'), so the Normal Spell can be activated with nothing to fetch. Nothing in the packet dates when this card lost that allowance, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700156,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700156.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700156,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700156.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

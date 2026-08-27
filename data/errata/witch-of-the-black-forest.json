@@ -6,9 +6,8 @@
     "name": "Witch of the Black Forest"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,51 +35,86 @@
           }
         ]
       },
-      "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with a DEF of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
-      "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
-      "summary": "Period procedure, not a text erratum: the mandatory sent-to-Graveyard search is activated regardless (neither script gates activation on a valid target), and when no monster with 1500 or less DEF remains in the Deck the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)) - the ONLY behavioural line separating the goat variant from the pre-errata variant, which is otherwise identical. The printed text meanwhile shed only its procedural select/show/shuffle wording (v1 SKE-020 -> v3 BP01-EN001) with no change to what the effect does; the reveal of the added card itself (Duel.ConfirmCards) survives in the modern script.",
-      "resulting_implementation": {
-        "strategy": "reuse-upstream",
-        "historical_passcode": 511003012,
-        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-        "script": "pre-errata/c511003012.lua",
-        "status": "complete",
-        "tested": false
-      },
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb",
-        "yugipedia-card-errata",
-        "edisonformat-functional-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with a DEF of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
+          "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
+          "summary": "Period procedure, not a text erratum: the mandatory sent-to-Graveyard search is activated regardless (neither script gates activation on a valid target), and when no monster with 1500 or less DEF remains in the Deck the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)) - the ONLY behavioural line separating the goat variant from the pre-errata variant, which is otherwise identical. The printed text meanwhile shed only its procedural select/show/shuffle wording (v1 SKE-020 -> v3 BP01-EN001) with no change to what the effect does; the reveal of the added card itself (Duel.ConfirmCards) survives in the modern script.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "edisonformat-functional-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c1": {
       "effective": {
         "date": "2017-07-06",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (BLLR-EN046, Battles of Legend: Light's Revenge)"
       },
-      "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
-      "modern_text": "If this card is sent from the field to the GY: Add 1 monster with 1500 or less DEF from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Witch of the Black Forest\" once per turn.",
-      "summary": "Functional erratum: the added monster (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. Both historical scripts show the pre-erratum state - neither the goat nor the pre-errata variant registers the modern e1:SetCountLimit(1,id) nor the EFFECT_CANNOT_ACTIVATE name-lock block with s.aclimit - so before this printing the search had no name-lock and could resolve more than once per turn.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "ignis-cardscripts",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less DEF from your Deck to your hand.",
+          "modern_text": "If this card is sent from the field to the GY: Add 1 monster with 1500 or less DEF from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Witch of the Black Forest\" once per turn.",
+          "summary": "Functional erratum: the added monster (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. Both historical scripts show the pre-erratum state - neither the goat nor the pre-errata variant registers the modern e1:SetCountLimit(1,id) nor the EFFECT_CANNOT_ACTIVATE name-lock block with s.aclimit - so before this printing the search had no name-lock and could resolve more than once per turn.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "ignis-cardscripts",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700144,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700144.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700144,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700144.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511003012,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511003012.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

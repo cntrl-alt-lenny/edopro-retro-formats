@@ -6,9 +6,8 @@
     "name": "Ninjitsu Art of Transformation"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "Activate this card by Tributing 1 face-up monster on your side of the field that includes \"Ninja\" in its card name. Special Summon 1 Beast-Type, Winged Beast-Type, or Insect-Type monster with a Level equal to or less than the Level of the Tributed card + 3 from your hand or Deck to your side of the field. When this card is removed from your side of the field, destroy the monster.",
-      "summary": "Period procedure, not a text erratum: after the Ninja is Tributed, if no Beast, Winged Beast or Insect monster of a legal Level is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script simply does nothing. No lineage version prints reveal wording.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Activate this card by Tributing 1 face-up monster on your side of the field that includes \"Ninja\" in its card name. Special Summon 1 Beast-Type, Winged Beast-Type, or Insect-Type monster with a Level equal to or less than the Level of the Tributed card + 3 from your hand or Deck to your side of the field. When this card is removed from your side of the field, destroy the monster.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: after the Ninja is Tributed, if no Beast, Winged Beast or Insect monster of a legal Level is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script simply does nothing. No lineage version prints reveal wording.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "Activate this card by Tributing 1 face-up monster on your side of the field that includes \"Ninja\" in its card name. Special Summon 1 Beast-Type, Winged Beast-Type, or Insect-Type monster with a Level equal to or less than the Level of the Tributed card + 3 from your hand or Deck to your side of the field. When this card is removed from your side of the field, destroy the monster.",
-      "summary": "Separate per-card era allowance: the modern s.cfilter requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,lv+3,e,tp)` before a 'Ninja' counts as a legal Tribute for the activation cost, and the goat cfilter drops that clause entirely. In the period implementation the card can therefore be activated and the Ninja released as cost with nothing summonable at that Level, losing the Ninja for no return. The packet dates no end for this per-card allowance.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Activate this card by Tributing 1 face-up monster on your side of the field that includes \"Ninja\" in its card name. Special Summon 1 Beast-Type, Winged Beast-Type, or Insect-Type monster with a Level equal to or less than the Level of the Tributed card + 3 from your hand or Deck to your side of the field. When this card is removed from your side of the field, destroy the monster.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the modern s.cfilter requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,lv+3,e,tp)` before a 'Ninja' counts as a legal Tribute for the activation cost, and the goat cfilter drops that clause entirely. In the period implementation the card can therefore be activated and the Ninja released as cost with nothing summonable at that Level, losing the Ninja for no return. The packet dates no end for this per-card allowance.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700115,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700115.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700115,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700115.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

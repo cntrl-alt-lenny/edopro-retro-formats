@@ -6,9 +6,8 @@
     "name": "Skull Knight #2"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
-      "summary": "Period procedure, not a text erratum: when the trigger resolves and no second \"Skull Knight #2\" is left in the Deck, the goat script proves the failed search by revealing the Deck (else branch calling Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script simply does nothing. The printed text is untouched - the goat cdb entry is byte-identical to the pinned modern text.",
-      "sources": [
-        "ignis-cardscripts",
-        "ignis-babelcdb"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the trigger resolves and no second \"Skull Knight #2\" is left in the Deck, the goat script proves the failed search by revealing the Deck (else branch calling Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script simply does nothing. The printed text is untouched - the goat cdb entry is byte-identical to the pinned modern text.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
-      "summary": "Era trigger semantics the printed text does not show, and a separate question from the verification procedure: the goat variant clones the trigger onto EVENT_MSET (s.spcon2) so Tributing this card for a Tribute SET of a Fiend also triggers it, and it resolves for the player who Tributed it - the condition demands GetPreviousControler()==GetReasonPlayer() and the replacement is Special Summoned from that player's Deck via e:SetLabel(GetPreviousControler()), whereas the modern script has no controller test and resolves for the effect's controller once the card is in the Graveyard. Upstream annotates both behaviours (\"Triggers on tribute set as well\", \"Triggers for the player that used it\"); nothing in the packet dates either ruling, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If you Tribute Summon a Fiend-Type monster by Tributing this monster, Special Summon 1 \"Skull Knight #2\" from your Deck. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Era trigger semantics the printed text does not show, and a separate question from the verification procedure: the goat variant clones the trigger onto EVENT_MSET (s.spcon2) so Tributing this card for a Tribute SET of a Fiend also triggers it, and it resolves for the player who Tributed it - the condition demands GetPreviousControler()==GetReasonPlayer() and the replacement is Special Summoned from that player's Deck via e:SetLabel(GetPreviousControler()), whereas the modern script has no controller test and resolves for the effect's controller once the card is in the Graveyard. Upstream annotates both behaviours (\"Triggers on tribute set as well\", \"Triggers for the player that used it\"); nothing in the packet dates either ruling, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700022,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700022.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700022,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700022.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

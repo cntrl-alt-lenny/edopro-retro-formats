@@ -6,20 +6,25 @@
     "name": "Armed Dragon LV3"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
-      "summary": "Era activation semantics: the goat script's target function keeps only the free-Monster-Zone test, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...) check, so the Standby Phase effect can be activated with no \"Armed Dragon LV5\" in hand or Deck. Because sending Armed Dragon LV3 to the Graveyard is a cost paid on activation, the period version lets you throw the card away for nothing; the modern script forbids the activation. No dated source for this card, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Era activation semantics: the goat script's target function keeps only the free-Monster-Zone test, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...) check, so the Standby Phase effect can be activated with no \"Armed Dragon LV5\" in hand or Deck. Because sending Armed Dragon LV3 to the Graveyard is a cost paid on activation, the period version lets you throw the card away for nothing; the modern script forbids the activation. No dated source for this card, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -47,22 +52,42 @@
           }
         ]
       },
-      "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
-      "summary": "Period procedure: when the resolution finds no \"Armed Dragon LV5\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script resolves with no reveal. The printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "During your Standby Phase, send this face-up card to the Graveyard to Special Summon 1 \"Armed Dragon LV5\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure: when the resolution finds no \"Armed Dragon LV5\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script resolves with no reveal. The printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700003,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700003.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700003,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700003.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

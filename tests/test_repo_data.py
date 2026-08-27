@@ -49,16 +49,12 @@ class RealDataTest(unittest.TestCase):
         (old_attested_through 2011-02-02); changes[1] is the activation-
         semantics (no-valid-target-required) axis, completely undated.
 
-        implementation_for_version(1) (= changes[0].resulting_implementation)
-        formally means "changes[0] alone has happened", i.e. verification=NEW
-        - a state changes[0]'s own dating already rules out at this snapshot,
-        NOT the real open question (verification=OLD, activation=NEW), which
-        has no valid version index at all under this record's changes[]
-        order. C is justified directly by Giant Rat's own review notes ("no
-        implementation exists for a state in which only one had changed"),
-        not by candidate 1 happening to be unimplemented - candidate 1 is
-        unimplemented AND represents the wrong (impossible) state; both facts
-        matter and must not be conflated. See docs/research/
+        Under the v2 event-DAG representation, the two events remain separate
+        and unordered. At this snapshot, the candidates are the baseline and
+        the state in which only the activation-semantics event has happened;
+        the latter is intentionally unresolved rather than guessed. The
+        former v1 positional candidate that treated the verification event as
+        the first axis is no longer represented. See docs/research/
         edison-behaviour-gaps.md's "A/B/C/D partition" section for the full
         per-record accounting, including the 8 sibling cluster-1 records
         whose changes[] lists the same two axes in the opposite order, for
@@ -67,10 +63,12 @@ class RealDataTest(unittest.TestCase):
         """
         erratum = self.repo.errata["erratum-giant-rat"]
         sel = erratum.selection_at(_dt.date(2010, 4, 24))
-        self.assertEqual("ambiguous", sel.state)
-        self.assertEqual((0, 1), sel.candidates)
-        self.assertIsNotNone(erratum.implementation_for_version(0))
-        self.assertIsNone(erratum.implementation_for_version(1))
+        self.assertEqual("ambiguous", sel.chronology)
+        self.assertEqual(
+            (frozenset(), frozenset({"c1"})),
+            tuple(candidate.events for candidate in sel.candidates),
+        )
+        self.assertEqual("unresolved", erratum.state_for(frozenset({"c1"})).coverage.kind.value)
 
     def test_goat_matches_ignis_reference(self):
         fixture = (FIXTURES / "ignis-GOAT.lflist.conf").read_text(encoding="utf-8")

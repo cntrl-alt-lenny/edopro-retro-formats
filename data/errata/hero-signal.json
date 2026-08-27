@@ -6,9 +6,8 @@
     "name": "Hero Signal"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,34 +35,60 @@
           }
         ]
       },
-      "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
-      "summary": "Period procedure, not a text erratum: when the GOAT script's s.operation finds no Level 4 or lower \"Elemental HERO\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the GOAT script's s.operation finds no Level 4 or lower \"Elemental HERO\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
-      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target keeps only the free-Monster-Zone check and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the Trap can be activated off a battle destruction with no eligible \"Elemental HERO\" to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card when a monster on your side of the field is destroyed and sent to the Graveyard as a result of battle. Special Summon 1 Level 4 or lower monster from your hand or Deck that includes \"Elemental Hero\" in its card name.",
+          "modern_text": null,
+          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target keeps only the free-Monster-Zone check and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the Trap can be activated off a battle destruction with no eligible \"Elemental HERO\" to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700031,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700031.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700031,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700031.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

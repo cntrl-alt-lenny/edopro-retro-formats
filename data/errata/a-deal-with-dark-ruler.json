@@ -6,20 +6,25 @@
     "name": "A Deal with Dark Ruler"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
-      "summary": "Era activation semantics: the goat script's target function keeps only 's[tp] and Duel.GetLocationCount(tp,LOCATION_MZONE)>0', dropping the modern Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,...) requirement, so the card can be activated with no \"Berserk Dragon\" anywhere in hand or Deck; the modern script refuses the activation outright. Chronology is unresolved: the fail-to-find activation allowance was withdrawn card by card at different dates and no dated source for this card was found.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Era activation semantics: the goat script's target function keeps only 's[tp] and Duel.GetLocationCount(tp,LOCATION_MZONE)>0', dropping the modern Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,...) requirement, so the card can be activated with no \"Berserk Dragon\" anywhere in hand or Deck; the modern script refuses the activation outright. Chronology is unresolved: the fail-to-find activation allowance was withdrawn card by card at different dates and no dated source for this card was found.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -47,22 +52,42 @@
           }
         ]
       },
-      "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
-      "summary": "Period procedure: when the resolution finds no \"Berserk Dragon\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script has no else-branch and resolves with no reveal. The printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "You can only activate this card during a turn in which a Level 8 or higher monster on your side of the field was sent to the Graveyard. Special Summon 1 \"Berserk Dragon\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure: when the resolution finds no \"Berserk Dragon\", the goat script calls Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK), revealing and shuffling the hand and Deck to prove the whiff; the modern script has no else-branch and resolves with no reveal. The printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700010,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700010.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700010,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700010.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

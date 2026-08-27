@@ -6,61 +6,98 @@
     "name": "Axe of Despair"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
-      "summary": "Era trigger timing, not a text erratum: the GOAT script adds EFFECT_FLAG_DELAY to the send-to-Deck trigger (upstream comment 'Doesn't miss timing'), so the optional 'When this card is sent from the field to the Graveyard' effect can still be activated when its trigger is not the last thing to have happened; the modern script omits DELAY and the effect misses timing. No printed text in the lineage carries this difference and no dated source for the change was found, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
+          "modern_text": null,
+          "summary": "Era trigger timing, not a text erratum: the GOAT script adds EFFECT_FLAG_DELAY to the send-to-Deck trigger (upstream comment 'Doesn't miss timing'), so the optional 'When this card is sent from the field to the Graveyard' effect can still be activated when its trigger is not the last thing to have happened; the modern script omits DELAY and the effect misses timing. No printed text in the lineage carries this difference and no dated source for the change was found, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2012-05-24",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the PSCT text (BP01-EN067, Battle Pack: Epic Dawn)"
       },
-      "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
-      "modern_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
-      "summary": "Wording modernisation only across two printings (v4 RP01-EN051 'The equipped monster gains 1000 ATK ... you can Tribute 1 monster to return this card to the top of the Deck', v5 BP01-EN067 PSCT colon/semicolon form); the equip ATK boost and the optional Tribute-to-top-of-Deck trigger resolve identically.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Increase the ATK of a monster equipped with this card by 1000 points. When this card is sent from the field to the Graveyard, if you Tribute 1 monster on your side of the field, this card returns to the top of your Deck.",
+          "modern_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+          "summary": "Wording modernisation only across two printings (v4 RP01-EN051 'The equipped monster gains 1000 ATK ... you can Tribute 1 monster to return this card to the top of the Deck', v5 BP01-EN067 PSCT colon/semicolon form); the equip ATK boost and the optional Tribute-to-top-of-Deck trigger resolve identically.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c2": {
       "effective": {
         "date": "2013-06-28",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the added name treatment (BP02-EN131, Battle Pack 2: War of the Giants)"
       },
-      "historical_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
-      "modern_text": "(This card is always treated as an \"Archfiend\" card.)The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
-      "summary": "The BP02 printing added '(This card is always treated as an \"Archfiend\" card.)', giving the TCG card membership of the 'Archfiend' archetype that it did not previously have; any card keying on 'Archfiend' by name treats Axe of Despair differently before and after this printing. Archetype membership is carried by the cdb setcode rather than the Lua script, so it does not appear in the script diff.",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+          "modern_text": "(This card is always treated as an \"Archfiend\" card.)The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
+          "summary": "The BP02 printing added '(This card is always treated as an \"Archfiend\" card.)', giving the TCG card membership of the 'Archfiend' archetype that it did not previously have; any card keying on 'Archfiend' by name treats Axe of Despair differently before and after this printing. Archetype membership is carried by the cdb setcode rather than the Lua script, so it does not appear in the script diff.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700068,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700068.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c1",
+        "after": "c2",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700068,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700068.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

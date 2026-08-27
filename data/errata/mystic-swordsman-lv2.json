@@ -6,9 +6,8 @@
     "name": "Mystic Swordsman LV2"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
-      "summary": "Period procedure, not a text erratum: if the End Phase effect resolves and no 'Mystic Swordsman LV4' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script has no reveal branch. No lineage version prints reveal wording.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: if the End Phase effect resolves and no 'Mystic Swordsman LV4' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script has no reveal branch. No lineage version prints reveal wording.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
-      "summary": "Separate per-card era allowance: the goat sptg is `if chk==0 then return ft>0 end` where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`. In the period implementation the End Phase effect can therefore be activated and its cost paid - this card is sent to the Graveyard - with no LV4 anywhere to Summon, spending the monster for nothing; modern rules forbid the activation outright. No source dates when this card lost that allowance.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Mystic Swordsman LV4\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat sptg is `if chk==0 then return ft>0 end` where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`. In the period implementation the End Phase effect can therefore be activated and its cost paid - this card is sent to the Graveyard - with no LV4 anywhere to Summon, spending the monster for nothing; modern rules forbid the activation outright. No source dates when this card lost that allowance.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700077,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700077.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700077,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700077.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,9 +6,8 @@
     "name": "Sangan"
   },
   "classification": "functional",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,65 +35,113 @@
           }
         ]
       },
-      "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with an ATK of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
-      "modern_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
-      "summary": "Period procedure, not a text erratum: under 2005-era TCG policy a search that finds no valid target is proven by revealing the deck (the goat script's Duel.GoatConfirm); the modern game dropped the verification procedure. Both scripts activate the mandatory trigger unconditionally (s.target is `return true` in each), so the reveal branch is the whole behavioural difference. The printed text also shed its procedural reveal-and-shuffle wording (v1 SYE-018 -> v2 RP01-EN036) with no change to what the effect does.",
-      "resulting_implementation": {
-        "strategy": "reuse-upstream",
-        "historical_passcode": 511002631,
-        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-        "script": "pre-errata/c511002631.lua",
-        "status": "complete",
-        "tested": true
-      },
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent from the field to the Graveyard, select 1 monster with an ATK of 1500 or less from your Deck, show it to your opponent, and add it to your hand. Then shuffle your Deck.",
+          "modern_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
+          "summary": "Period procedure, not a text erratum: under 2005-era TCG policy a search that finds no valid target is proven by revealing the deck (the goat script's Duel.GoatConfirm); the modern game dropped the verification procedure. Both scripts activate the mandatory trigger unconditionally (s.target is `return true` in each), so the reveal branch is the whole behavioural difference. The printed text also shed its procedural reveal-and-shuffle wording (v1 SYE-018 -> v2 RP01-EN036) with no change to what the effect does.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "cosmetic",
+    "c1": {
       "effective": {
         "date": "2011-08-04",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the new text (TU06-EN001, Turbo Pack: Booster Six)"
       },
-      "historical_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
-      "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
-      "summary": "Problem-Solving Card Text rewording (v3 Legendary Collection reprint, v4 TU06-EN001); no behavioural difference.",
-      "sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is sent from the field to the Graveyard, add 1 monster with 1500 or less ATK from your Deck to your hand.",
+          "modern_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
+          "summary": "Problem-Solving Card Text rewording (v3 Legendary Collection reprint, v4 TU06-EN001); no behavioural difference.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages"
+          ]
+        }
       ]
     },
-    {
-      "kind": "functional",
+    "c2": {
       "effective": {
         "date": "2016-09-15",
         "precision": "day",
         "status": "reported",
         "basis": "TCG release of the first printing carrying the errata'd text (DPRP-EN038, Duelist Pack: Rivals of the Pharaoh)"
       },
-      "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
-      "modern_text": "If this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Sangan\" once per turn.",
-      "summary": "Functional erratum: the searched card (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. The pre-errata effect had no name-lock and no once-per-turn limit - the pre-errata script registers neither the EFFECT_CANNOT_ACTIVATE name-lock nor SetCountLimit(1,id).",
-      "sources": [
-        "yugipedia-card-errata",
-        "ignis-babelcdb",
-        "yugipedia-set-pages",
-        "edisonformat-functional-errata"
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "When this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand.",
+          "modern_text": "If this card is sent from the field to the Graveyard: Add 1 monster with 1500 or less ATK from your Deck to your hand, but you cannot activate cards, or the effects of cards, with that name for the rest of this turn. You can only use this effect of \"Sangan\" once per turn.",
+          "summary": "Functional erratum: the searched card (and cards with its name) cannot be activated for the rest of the turn, and the effect becomes a hard once per turn. The pre-errata effect had no name-lock and no once-per-turn limit - the pre-errata script registers neither the EFFECT_CANNOT_ACTIVATE name-lock nor SetCountLimit(1,id).",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "edisonformat-functional-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700178,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700178.lua",
-    "status": "complete",
-    "tested": true
   },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c1",
+        "after": "c2",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700178,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700178.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 511002631,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c511002631.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": true
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "complete",
+      "tested": true
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

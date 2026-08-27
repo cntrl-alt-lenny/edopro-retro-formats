@@ -17,8 +17,8 @@ DIFFERENT test classes, never conflated:
 - `PostMigrationLiveRepositoryTest` - pins the CURRENT, LIVE, on-disk
   repository's guarantees DIRECTLY (`Repository.load(audit.REPO_ROOT)`,
   no shadow/baseline comparison at all, because there is nothing left to
-  compare against: the shadow IS the real repository now). Exactly 247
-  `ErratumV2` + 49 `Erratum`, exactly 180 sugar-shaped + 67 full-v2
+  compare against: the shadow IS the real repository now). Exactly 294
+  `ErratumV2` + 2 `Erratum`, exactly 180 sugar-shaped + 114 full-v2
   canonical files, all schema-valid, the live repository validates
   cleanly, and GOAT/Edison output is pinned to the same values the
   pre-migration baseline had.
@@ -168,6 +168,16 @@ class CanonicalShapeTest(unittest.TestCase):
         cls.by_id = {r["id"]: r for r in cls.pre_migration_rows}
         cls.frozen_49 = {r["id"] for r in cls.pre_migration_rows if not r["equivalent"]}
         cls.frozen_247 = {r["id"] for r in cls.pre_migration_rows if r["equivalent"]}
+        cls.unordered_47 = {
+            r["id"]
+            for r in cls.pre_migration_rows
+            if all(r.get(key) == value for key, value in {
+                "equivalent": False,
+                "research_status": "already-researched",
+                "migration_complexity": "unordered-researched",
+            }.items())
+        }
+        cls.manual_2 = {"erratum-insect-imitation", "erratum-last-will"}
         cls.parity_only_ids = {
             r["id"] for r in cls.pre_migration_rows if r["equivalent"] and r["category"] == audit.CAT_PARITY_ONLY
         }
@@ -183,23 +193,23 @@ class CanonicalShapeTest(unittest.TestCase):
             for key in by_discriminator:
                 if key in doc:
                     by_discriminator[key] += 1
-        self.assertEqual({"changes": 49, "events": 67, "event": 180}, by_discriminator)
+        self.assertEqual({"changes": 2, "events": 114, "event": 180}, by_discriminator)
 
     def test_no_migrated_record_retains_legacy_fields(self):
-        for rid in self.frozen_247:
+        for rid in self.frozen_247 | self.unordered_47:
             doc = self.raw_by_id[rid]
             self.assertNotIn("changes", doc, rid)
             self.assertNotIn("implementation", doc, rid)
 
     def test_no_remaining_v1_record_gains_v2_fields(self):
-        for rid in self.frozen_49:
+        for rid in self.manual_2:
             doc = self.raw_by_id[rid]
             for key in ("events", "event", "states", "implementation_metadata", "reference_identities"):
                 self.assertNotIn(key, doc, f"{rid}: unexpectedly carries v2 key {key!r}")
 
     def test_every_v1_and_v2_id_is_accounted_for(self):
-        self.assertEqual(set(self.raw_by_id), self.frozen_49 | self.frozen_247)
-        self.assertEqual(set(), self.frozen_49 & self.frozen_247)
+        self.assertEqual(set(self.raw_by_id), self.frozen_247 | self.unordered_47 | self.manual_2)
+        self.assertEqual(set(), (self.frozen_247 | self.unordered_47) & self.manual_2)
 
     def test_all_11_parity_only_records_carry_their_reference_identity(self):
         self.assertEqual(11, len(self.parity_only_ids))
@@ -218,7 +228,7 @@ class CanonicalShapeTest(unittest.TestCase):
         unrepresented) - the migrated file must still carry a non-empty
         implementation_metadata[] with a baseline ([]) entry."""
         missing = []
-        for rid in self.frozen_247:
+        for rid in self.frozen_247 | self.unordered_47:
             doc = self.raw_by_id[rid]
             metadata = doc.get("implementation_metadata") or []
             baseline_entries = [e for e in metadata if not e.get("events")]
@@ -246,23 +256,20 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         cls.validator = Validator(cls.repo)
         cls.validator.validate()
 
-    def test_exactly_247_v2_and_49_v1(self):
+    def test_exactly_294_v2_and_2_v1(self):
         self.assertEqual(296, len(self.repo.errata))
-        self.assertEqual(247, len(self.v2_records))
-        self.assertEqual(49, len(self.v1_records))
+        self.assertEqual(294, len(self.v2_records))
+        self.assertEqual(2, len(self.v1_records))
 
-    def test_exactly_180_sugar_and_67_full(self):
+    def test_exactly_180_sugar_and_114_full(self):
         self.assertEqual(180, len(self.sugar_records))
-        self.assertEqual(67, len(self.full_records))
+        self.assertEqual(114, len(self.full_records))
         self.assertEqual(len(self.v2_records), len(self.sugar_records) + len(self.full_records))
 
-    def test_the_49_remaining_v1_ids_match_the_frozen_non_equivalent_set(self):
-        pre_migration_rows = audit.audit_corpus(load_pre_migration_repo())["rows"]
-        frozen_49 = {r["id"] for r in pre_migration_rows if not r["equivalent"]}
-        self.assertEqual(49, len(frozen_49))
-        self.assertEqual(frozen_49, set(self.v1_records))
+    def test_the_two_remaining_v1_ids_are_the_manual_records(self):
+        self.assertEqual({"erratum-insect-imitation", "erratum-last-will"}, set(self.v1_records))
 
-    def test_all_247_v2_records_are_schema_valid(self):
+    def test_all_294_v2_records_are_schema_valid(self):
         """Re-validates the ACTUAL on-disk JSON (raw file content), not
         the parsed object - the same schema checker
         test_erratum_schema.py uses."""

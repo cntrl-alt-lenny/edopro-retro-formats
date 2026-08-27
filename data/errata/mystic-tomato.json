@@ -6,9 +6,8 @@
     "name": "Mystic Tomato"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
-      "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no DARK monster of 1500 or less ATK in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch. Printed text is behaviourally unchanged throughout the lineage.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the battle-destruction trigger resolves with no DARK monster of 1500 or less ATK in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script has no reveal branch. Printed text is behaviourally unchanged throughout the lineage.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
-      "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` while the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the trigger activate and resolve with nothing eligible in the Deck. No packet or brief source dates the end of that allowance for this card, so it is left unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can Special Summon 1 DARK monster with an ATK of 1500 or less in face-up Attack Position from your Deck. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` while the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the trigger activate and resolve with nothing eligible in the Deck. No packet or brief source dates the end of that allowance for this card, so it is left unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700142,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700142.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700142,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700142.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

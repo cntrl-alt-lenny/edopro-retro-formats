@@ -6,9 +6,8 @@
     "name": "Thunder Dragon"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
-      "summary": "Period procedure, not a text erratum: after the discard, if no \"Thunder Dragon\" remains in the Deck, the goat script proves the whiff by revealing the Deck - the else branch is guarded by 'elseif not Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) then Duel.GoatConfirm(tp,LOCATION_DECK)', so it fires only on a genuine failed search and not when the player merely declines to add. The modern script never reveals; the printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: after the discard, if no \"Thunder Dragon\" remains in the Deck, the goat script proves the whiff by revealing the Deck - the else branch is guarded by 'elseif not Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) then Duel.GoatConfirm(tp,LOCATION_DECK)', so it fires only on a genuine failed search and not when the player merely declines to add. The modern script never reveals; the printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
-      "summary": "Two era allowances the printed text does not show: the goat script can be activated with no copy in the Deck (target check relaxed from Duel.IsExistingMatchingCard to 'return true', with SetOperationInfo count 1 -> 0), and it lets the player add ZERO copies (Duel.SelectMatchingCard minimum 1 -> 0), matching the netrep ruling upstream quotes in its annotation that this card \"may be discarded to search for 0\" copies. The modern script requires a copy in the Deck to activate and forces at least one to be added. Nothing in the packet dates either allowance, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
+          "modern_text": null,
+          "summary": "Two era allowances the printed text does not show: the goat script can be activated with no copy in the Deck (target check relaxed from Duel.IsExistingMatchingCard to 'return true', with SetOperationInfo count 1 -> 0), and it lets the player add ZERO copies (Duel.SelectMatchingCard minimum 1 -> 0), matching the netrep ruling upstream quotes in its annotation that this card \"may be discarded to search for 0\" copies. The modern script requires a copy in the Deck to activate and forces at least one to be added. Nothing in the packet dates either allowance, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700054,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700054.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700054,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700054.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

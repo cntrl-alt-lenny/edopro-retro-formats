@@ -1,0 +1,503 @@
+{
+  "authored_state_count_distribution": {
+    "1": 44,
+    "2": 3
+  },
+  "event_count_distribution": {
+    "2": 41,
+    "3": 5,
+    "4": 1
+  },
+  "full_count": 47,
+  "manual_excluded_ids": [
+    "erratum-insect-imitation",
+    "erratum-last-will"
+  ],
+  "ordering_edge_count_distribution": {
+    "0": 41,
+    "1": 5,
+    "2": 1
+  },
+  "sugar_count": 0,
+  "records": [
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-a-deal-with-dark-ruler",
+      "ordering_edge_count": 0,
+      "path": "data/errata/a-deal-with-dark-ruler.json",
+      "post_migration_sha256": "8ee6d0fbd40a9421c4f8390f23bfbdb267f0f5158c18f51e21825b6421128415",
+      "pre_migration_sha256": "d7a485647cab13f517cf84dfdd7b991e24911908fae6ee5df88f6407c9a39875",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-apprentice-magician",
+      "ordering_edge_count": 0,
+      "path": "data/errata/apprentice-magician.json",
+      "post_migration_sha256": "e621114e943e9049ab317ce65c298721dad919e0c6d847f6aef6013f9ad7d21e",
+      "pre_migration_sha256": "f1f27b2fcc28ef0c501f6637d25b8ce356f8c38d037da48e25430953f871605b",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-armed-dragon-lv3",
+      "ordering_edge_count": 0,
+      "path": "data/errata/armed-dragon-lv3.json",
+      "post_migration_sha256": "35a4614ce7a0d8f1315efb07dacfa4007aaadbd013058f9455064c1901cade40",
+      "pre_migration_sha256": "ebf9b4f62e98fd0ad427fb294cdfce6dce0a5a56714313f4e394da30a1e255fd",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-armed-dragon-lv5",
+      "ordering_edge_count": 0,
+      "path": "data/errata/armed-dragon-lv5.json",
+      "post_migration_sha256": "4a6b56d7962bd103bd930b4d9958374ce53b9ef736eac5a2ea1384f3a967457d",
+      "pre_migration_sha256": "02d28f23c7ed570cb9caf54bdf77158ad258129e639f2f210cc9d6b7cc241e2a",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 3,
+      "id": "erratum-axe-of-despair",
+      "ordering_edge_count": 1,
+      "path": "data/errata/axe-of-despair.json",
+      "post_migration_sha256": "b64f58b193ee15bab22f3d585b33ad32dca398e64ecad80613dc9cb4872f6c15",
+      "pre_migration_sha256": "b94744c22a027a86c92a6172e509e2c4d454843d762282d94453f683ed7d4047",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-birdface",
+      "ordering_edge_count": 0,
+      "path": "data/errata/birdface.json",
+      "post_migration_sha256": "df677bca8b8da0447f30f750eb51a9ff619b67d38dbcee502fcedaee0e256eac",
+      "pre_migration_sha256": "5be432160075423a3727a3b6926819a61c7c0999fc771f77ce4e3c675d039791",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-bubonic-vermin",
+      "ordering_edge_count": 0,
+      "path": "data/errata/bubonic-vermin.json",
+      "post_migration_sha256": "03f34e529db2fe5c37d432c651fb30a8498cbd7a0c86072a4a720460a8bdd756",
+      "pre_migration_sha256": "4af5dbf5f70c56aacb5e64e20f5be8d14f2e5b1e62b2293ef60ea52561fb72c8",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-dark-mimic-lv1",
+      "ordering_edge_count": 0,
+      "path": "data/errata/dark-mimic-lv1.json",
+      "post_migration_sha256": "3428340abcf9180c88ffb50ba8cb97676028af1a27304256705876ff06a07c01",
+      "pre_migration_sha256": "25e58838c41cb2a8c321f37f48e3d2731e0b6bd58cc71f265fd8cad397fd2354",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-dark-scorpion-meanae-the-thorn",
+      "ordering_edge_count": 0,
+      "path": "data/errata/dark-scorpion-meanae-the-thorn.json",
+      "post_migration_sha256": "0c885a6ec85813ef881df31789dd41ca2065a97deea4b1fa134aec152c1d8e82",
+      "pre_migration_sha256": "7b0fcdb9da818c1451e2654a6b78952a7255243bc2b5976b8619c4536cc7d82a",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-dedication-through-light-and-darkness",
+      "ordering_edge_count": 0,
+      "path": "data/errata/dedication-through-light-and-darkness.json",
+      "post_migration_sha256": "dec8d0f7ceca89b0ded47186c6069a8586b3353322f4983b0272362a094a2f99",
+      "pre_migration_sha256": "f25302bc240244a79676d893aad0dbc32145a521a23be1405d75d7d29ffcd36c",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-elegant-egotist",
+      "ordering_edge_count": 0,
+      "path": "data/errata/elegant-egotist.json",
+      "post_migration_sha256": "7ba4f96c554a8cf1dbace403409132be299f583a6a53a2833aff18800f3e8cd6",
+      "pre_migration_sha256": "bd52e0061ea9c0efdcd543116d1c47496a0194da5f40cda7422d942673474764",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-emblem-of-dragon-destroyer",
+      "ordering_edge_count": 0,
+      "path": "data/errata/emblem-of-dragon-destroyer.json",
+      "post_migration_sha256": "cb2fbc9b91af86cfa5cf84cf5c2cadc420d75cbf20619eace994eacecbcb7069",
+      "pre_migration_sha256": "dc3e370e07781bd3b49e68b5783e8709415f2fea07107f933b52732ec877dd44",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-freed-the-matchless-general",
+      "ordering_edge_count": 0,
+      "path": "data/errata/freed-the-matchless-general.json",
+      "post_migration_sha256": "0a9c5f2fe66ebff5dbcf1f7d8f6a0af8428c6aa0fc3a705c5e9cfafcd4a125a9",
+      "pre_migration_sha256": "cf6a4c30cec0fea57e118fe67e3ec37fc9fad3effc83561792ef1fcc7342884f",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-fusion-sage",
+      "ordering_edge_count": 0,
+      "path": "data/errata/fusion-sage.json",
+      "post_migration_sha256": "72fb25100bd491a864800e9d0e79430c616a9302774bbfa28cfa862bc6ea0c1d",
+      "pre_migration_sha256": "b6430967f76267de61f3e259979cdffd119ec989dcf3ff6ec7c848470f5f6641",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-giant-rat",
+      "ordering_edge_count": 0,
+      "path": "data/errata/giant-rat.json",
+      "post_migration_sha256": "37ca72a4ef78c2e19f140356849f4d0d2bd38d387b9a85b4d3228b1aab5e9c83",
+      "pre_migration_sha256": "64a09c3ded4906762149ebfc2fb5df44fce64bfceb56bf1bd5bd2775b8731bdc",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-great-dezard",
+      "ordering_edge_count": 0,
+      "path": "data/errata/great-dezard.json",
+      "post_migration_sha256": "0ab09cda6768ed7ce4fbc01ac76fbb7495320af5d49016803903f2652afa0a90",
+      "pre_migration_sha256": "bc4cab6f5c88137b5ea06562438618b5f1ab3516cb6e0e8cfc156c2a33e339b2",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-hand-of-nephthys",
+      "ordering_edge_count": 0,
+      "path": "data/errata/hand-of-nephthys.json",
+      "post_migration_sha256": "1223fb5f8e8fe32af7d3dc3c285f4b6ccc315e73865fd8b565dbfa61f9ea4d6f",
+      "pre_migration_sha256": "ccaf9aa43a8de7b514b33a80bb1a41e4ab8cbc296e0120010c551681caf2294a",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-hero-signal",
+      "ordering_edge_count": 0,
+      "path": "data/errata/hero-signal.json",
+      "post_migration_sha256": "92d0874c9b95c029801d569e3a45cf9b44def10a3d946bdcb06e45c6f86a4c86",
+      "pre_migration_sha256": "4eab03a70a929bbf28b51e775e2f6131f8b089dfdebd8d1a3499d1e18a580dd9",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-horus-the-black-flame-dragon-lv4",
+      "ordering_edge_count": 0,
+      "path": "data/errata/horus-the-black-flame-dragon-lv4.json",
+      "post_migration_sha256": "fff27bfb9a0124003be9fdeff03bd9ea47280212a02ddf69b0226f2a14a569a7",
+      "pre_migration_sha256": "a0b6c0af13edda78ef58672ac83d80521fbc1e657c78cae73ebfd77bc151d743",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-manju-of-the-ten-thousand-hands",
+      "ordering_edge_count": 0,
+      "path": "data/errata/manju-of-the-ten-thousand-hands.json",
+      "post_migration_sha256": "c37654280657470ed99d86002ded7c54985a3609111e28dc652443aa0cec38bc",
+      "pre_migration_sha256": "f02c6ac8393c73c656a6574fa9a6f5e986e97a8e4d790300b9d821d5870f0acb",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-masked-dragon",
+      "ordering_edge_count": 0,
+      "path": "data/errata/masked-dragon.json",
+      "post_migration_sha256": "275b22e1f99ca72eea36c7e89bb7f6b218800b71cb96ad4475fedb91262edfc8",
+      "pre_migration_sha256": "7819316e7a07ad0edab27578d6c5231f397b84586c42d9a2d5a32d742068423f",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-mother-grizzly",
+      "ordering_edge_count": 0,
+      "path": "data/errata/mother-grizzly.json",
+      "post_migration_sha256": "42269266f23c1dd8fa730fc69457cffb10fe522b1b7a0a021855cad18e71a767",
+      "pre_migration_sha256": "c70004359320d2a64c5d8cd095913fa8264eb6f2f8f64c9e5878d4cf03636438",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-mystic-swordsman-lv2",
+      "ordering_edge_count": 0,
+      "path": "data/errata/mystic-swordsman-lv2.json",
+      "post_migration_sha256": "c8b4ab9928a5bc5edc099ec65fa9575e60c9f02b89c4b54e5d0a0f529db5e185",
+      "pre_migration_sha256": "54b1d74941b55ec6210d00c715eccd30b037f717cc05e6d2b9e93b2b48ef6c9d",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-mystic-swordsman-lv4",
+      "ordering_edge_count": 0,
+      "path": "data/errata/mystic-swordsman-lv4.json",
+      "post_migration_sha256": "209d59e9542885e568448530e3324093db832936dac52903295726088973161a",
+      "pre_migration_sha256": "f60cb6241aebbd5146049455505e2a8f6b27c073552da312d8af78e0fdba6f5e",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-mystic-tomato",
+      "ordering_edge_count": 0,
+      "path": "data/errata/mystic-tomato.json",
+      "post_migration_sha256": "31a76bb252c8f5697f1804a2461e2e327e0105d9ea8ba485ad841eb0d5cb112f",
+      "pre_migration_sha256": "3160f89df6c5fe55346b42e6ca4546457452ef9f29ea999a5ef3410958b700ae",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-ninjitsu-art-of-transformation",
+      "ordering_edge_count": 0,
+      "path": "data/errata/ninjitsu-art-of-transformation.json",
+      "post_migration_sha256": "23a5d854cbda5ab4db5d86bf622b3c924afa18711cd9bc88bdc24d2fe7cf0b43",
+      "pre_migration_sha256": "bbc3938c181bd2ff0c4d54c376dcba479240ad06d90e20f8ffea0d6ae0080f57",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 4,
+      "id": "erratum-paladin-of-white-dragon",
+      "ordering_edge_count": 2,
+      "path": "data/errata/paladin-of-white-dragon.json",
+      "post_migration_sha256": "e99a6c447398550732ed9213ea56713e235be21985d4faa1d5537a03a5db721b",
+      "pre_migration_sha256": "7511140bc1f0241c2470a2e23882ec5b7880334dd105c15d47fd918a54670773",
+      "relevant_event_count": 3
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-pandemonium",
+      "ordering_edge_count": 0,
+      "path": "data/errata/pandemonium.json",
+      "post_migration_sha256": "19b258fe86f275c6ded0fc034d82a3011280411fd80468e3ae27faac26599352",
+      "pre_migration_sha256": "b3dcd111062bfc141daf445d3095813ebdd790f930142f63949ec7ae77f6f27d",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-peten-the-dark-clown",
+      "ordering_edge_count": 0,
+      "path": "data/errata/peten-the-dark-clown.json",
+      "post_migration_sha256": "306280ed9a982604fca22f9a43709a221d2de0248a4d072151d18e86b1fda96b",
+      "pre_migration_sha256": "c757dd94802d78c52c6784665429170a8fff2a98d43a0e76603733c4adb0b8b1",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-pyramid-turtle",
+      "ordering_edge_count": 0,
+      "path": "data/errata/pyramid-turtle.json",
+      "post_migration_sha256": "8ca7ccdaa112405ba916685142711d0fce6ddfbc6722647cff667b106cbee99d",
+      "pre_migration_sha256": "11b0e82733af539697c617787345e77743850d151170c7483b18d3cd55398083",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 2,
+      "event_count": 3,
+      "id": "erratum-sangan",
+      "ordering_edge_count": 1,
+      "path": "data/errata/sangan.json",
+      "post_migration_sha256": "30732f8648c819be4afe0a3b24689762b284e0c5ec6c76ae5aef71f00113f7f3",
+      "pre_migration_sha256": "b2fcdee386da422a7289b83beb44b19901ffb829088a1daef39fc143891a75dc",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-skull-knight-2",
+      "ordering_edge_count": 0,
+      "path": "data/errata/skull-knight-2.json",
+      "post_migration_sha256": "a0aed7f95f03f35268d62f71325a1a9a707b664d8e53c38809b2d69c109a4a28",
+      "pre_migration_sha256": "79d9b28cbe879858e851bae841c7a62eddc282974ac3f417c1a0653712f99952",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-sonic-bird",
+      "ordering_edge_count": 0,
+      "path": "data/errata/sonic-bird.json",
+      "post_migration_sha256": "4d7d1758b64a3d56bc3372dde56b7709e1f45f505daef4c82f0739628cbcfbdf",
+      "pre_migration_sha256": "0ee9fd8db2e7fce2a375f6fdb45d3f85719ce9101b3d3e16f2164b47b6fba6e4",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-terraforming",
+      "ordering_edge_count": 0,
+      "path": "data/errata/terraforming.json",
+      "post_migration_sha256": "2e91a31cf0374357b99dbf1ad9a5fd29ad1edef7e7a5cfb181c9c30235d34773",
+      "pre_migration_sha256": "5435ab5b3dcdb662cbdf03ca708e5f5e38f04f7f2121f9a152975f99cdf04a4b",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-thunder-dragon",
+      "ordering_edge_count": 0,
+      "path": "data/errata/thunder-dragon.json",
+      "post_migration_sha256": "c87981639f0f6f4677f5ded6b26284ebb502ddbc6d6f424e27c083cbf38ef472",
+      "pre_migration_sha256": "ce3f63ec8e5a2d8bbd0a5501908ca5d774c24425aa63b60dc25c3588d35dede3",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-toon-table-of-contents",
+      "ordering_edge_count": 0,
+      "path": "data/errata/toon-table-of-contents.json",
+      "post_migration_sha256": "1872467fd5ab150a078e6ccffcf2098640a5cec5061815d71f930c639e425c95",
+      "pre_migration_sha256": "8c52a026d0874651b1cf5cec487b11031284d7bbe7b83eb0dec3700c865f1a00",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 3,
+      "id": "erratum-tyrant-dragon",
+      "ordering_edge_count": 1,
+      "path": "data/errata/tyrant-dragon.json",
+      "post_migration_sha256": "9c4125e90e5a40f60450af71966e3b382a6b9382c0846ed051d0237821082fcf",
+      "pre_migration_sha256": "a1d06fa83d34b310f42f98931da8bd02c63415efdec2b8d84497f8f45ff7fc2c",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-ufo-turtle",
+      "ordering_edge_count": 0,
+      "path": "data/errata/ufo-turtle.json",
+      "post_migration_sha256": "1c6aece6f77f5a34bc1cf88755d892c324ea593883f96df820a3e99b258cb0dc",
+      "pre_migration_sha256": "e53ef0f8570f125daed56048d14073cb07ebf064fedf8df504d1ec6278a4ca1f",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-ultimate-insect-lv1",
+      "ordering_edge_count": 0,
+      "path": "data/errata/ultimate-insect-lv1.json",
+      "post_migration_sha256": "a09f2b3ce2c31a4448d998904db7eaa71f11675c7fd7730f1051f04ac26a049a",
+      "pre_migration_sha256": "45b7cb613e02d8bd57fb2084dc37cff3ffe12c82b5b4f354e2c11deddb54313e",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-ultimate-insect-lv3",
+      "ordering_edge_count": 0,
+      "path": "data/errata/ultimate-insect-lv3.json",
+      "post_migration_sha256": "1b16c2cc8af5e6300fc917007b163a1a67ddcad185bc4db6d4ad1fc578081df8",
+      "pre_migration_sha256": "a5be33c2a3e22ee23881f0853561beae8fc6218f818235ae099ab83431ba171a",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-ultimate-insect-lv5",
+      "ordering_edge_count": 0,
+      "path": "data/errata/ultimate-insect-lv5.json",
+      "post_migration_sha256": "5f56edbc88bc254e2855fd2df3217341a9c82737e48505d80e28a51270722d24",
+      "pre_migration_sha256": "de75857b4b4acff1af14bdff06236370ead0c69c1e30f41d091d1b69d6a5d4fc",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 3,
+      "id": "erratum-vampire-lord",
+      "ordering_edge_count": 1,
+      "path": "data/errata/vampire-lord.json",
+      "post_migration_sha256": "e52b25f0ac551b55dd6a9ea6c9588355e1f77e7df0ec9d9bcb7f880089cfbba8",
+      "pre_migration_sha256": "8e14ee40349dcb6aa19c770c24f98d37234b26345e00bac9712863251078b257",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 2,
+      "event_count": 2,
+      "id": "erratum-witch-of-the-black-forest",
+      "ordering_edge_count": 0,
+      "path": "data/errata/witch-of-the-black-forest.json",
+      "post_migration_sha256": "8f2e71da88a467c345efa21404e5ef0aa808962b4542d1bfbbc6a89727f8ca36",
+      "pre_migration_sha256": "194b5a233104ee628f828fa8c39a324fbeccfcdc310f7694614a439fab3f9550",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-xy-dragon-cannon",
+      "ordering_edge_count": 0,
+      "path": "data/errata/xy-dragon-cannon.json",
+      "post_migration_sha256": "ece9d961eb1e7c25011c2e15258ed193a56b9caea74d11a5b897cecdb3ebb9f5",
+      "pre_migration_sha256": "be2399588b3593e82df1c53acbf890bc1a073d2ddaa18cde90a72f87295e20d1",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 3,
+      "id": "erratum-xyz-dragon-cannon",
+      "ordering_edge_count": 1,
+      "path": "data/errata/xyz-dragon-cannon.json",
+      "post_migration_sha256": "578f51d9eafd93e2648e062909b626976e84dd50fd0fa2195153520511b0db4e",
+      "pre_migration_sha256": "b8a4febc18f3055c46b2fd107ac9a5bfc21a27ba9f2af92afd2c8ffe1ab09484",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 1,
+      "event_count": 2,
+      "id": "erratum-xz-tank-cannon",
+      "ordering_edge_count": 0,
+      "path": "data/errata/xz-tank-cannon.json",
+      "post_migration_sha256": "79d943842ad2f0d413d6f8e537a373573f214b713d414a0844a51ee1847b453f",
+      "pre_migration_sha256": "4e2d776dc0b6c9c9f5b34dd0ee0bfb940c6ef2c789e47a5671d8664ccbf2da1d",
+      "relevant_event_count": 2
+    },
+    {
+      "authored_state_count": 2,
+      "event_count": 2,
+      "id": "erratum-yz-tank-dragon",
+      "ordering_edge_count": 0,
+      "path": "data/errata/yz-tank-dragon.json",
+      "post_migration_sha256": "0bc75a62121bfc04ca95978268b41333d9595ee8ac7717f7d0f399772155ddf2",
+      "pre_migration_sha256": "d4ab1adbbc706b164ad42e0bb7b1b04b4ed49a27c4497fc3dbe01a9df9ee5de0",
+      "relevant_event_count": 2
+    }
+  ],
+  "relevant_event_count_distribution": {
+    "2": 46,
+    "3": 1
+  },
+  "self_contradictory": 46,
+  "sole_incomplete_id": "erratum-yz-tank-dragon",
+  "source_commit": "b0b8b7d8cc129e827fd684b3d880f6fcaedb80d9",
+  "target_count": 47,
+  "yz_incomplete": 1
+}

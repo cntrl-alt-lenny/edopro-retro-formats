@@ -6,20 +6,25 @@
     "name": "Birdface"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
-      "summary": "Era activation semantics: the goat script's target function returns true unconditionally where the modern one requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the battle-destruction trigger can be activated with no \"Harpie Lady\" left in the Deck; the modern script cannot be activated at all in that state. No dated source for this card, so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Era activation semantics: the goat script's target function returns true unconditionally where the modern one requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the battle-destruction trigger can be activated with no \"Harpie Lady\" left in the Deck; the modern script cannot be activated at all in that state. No dated source for this card, so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -47,22 +52,42 @@
           }
         ]
       },
-      "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
-      "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no \"Harpie Lady\" remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to the Graveyard as a result of battle, you can add 1 \"Harpie Lady\" from your Deck to your hand. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no \"Harpie Lady\" remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700073,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700073.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700073,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700073.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

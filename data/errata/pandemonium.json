@@ -6,9 +6,8 @@
     "name": "Pandemonium"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
-      "summary": "Period procedure, not a text erratum: when the destruction trigger resolves and the owner has no lower-Level 'Archfiend' monster left in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK) in the else branch after Duel.ConfirmCards); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the destruction trigger resolves and the owner has no lower-Level 'Archfiend' monster left in the Deck, the goat script reveals the Deck (Duel.GoatConfirm(tp,LOCATION_DECK) in the else branch after Duel.ConfirmCards); the modern script never reveals. The printed text carries no reveal wording in any lineage version.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
-      "summary": "Separate per-card era allowance: the modern target requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,ev)` while the goat target only checks `e:GetHandler():IsRelateToEffect(e)`, so in the period implementation the optional Trigger can be activated and resolved with no eligible lower-Level 'Archfiend' in the Deck. Nothing in the packet dates the end of that allowance for this card.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "Neither player has to pay Life Points during the Standby Phase for Archfiend monsters. Each time a player's Archfiend Monster Card(s) are destroyed and sent to the Graveyard, except as a result of battle, that player can select 1 Archfiend Monster Card from his/her Deck that has a lower Level than the destroyed card and add it to his/her hand.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the modern target requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,ev)` while the goat target only checks `e:GetHandler():IsRelateToEffect(e)`, so in the period implementation the optional Trigger can be activated and resolved with no eligible lower-Level 'Archfiend' in the Deck. Nothing in the packet dates the end of that allowance for this card.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700165,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700165.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700165,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700165.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

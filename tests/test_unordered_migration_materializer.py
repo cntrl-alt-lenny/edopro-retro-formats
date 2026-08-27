@@ -6,9 +6,11 @@ import subprocess
 import unittest
 
 from retroformats.model import Coverage, Erratum, ErratumV2
+from retroformats.repo import Repository
 
 from . import migration_audit as audit
 from . import unordered_migration_materializer as gate
+from .pre_migration_fixture import load_pre_migration_repo
 
 SOURCE_COMMIT = "e7be46dbd92214140eb10d6d2a7d3e7a16bd9b62"
 GATE_COMMIT = "2f1c17864330407a858b9588e8fdb0a2da500ec7"
@@ -87,7 +89,33 @@ FROZEN_TARGET_IDS = frozenset(
 class UnorderedMigrationGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.repo = gate.Repository.load(audit.REPO_ROOT)
+        # The gate is historical proof.  Reconstruct its approved input
+        # after canonical migration from the live 247 v2 records plus the
+        # frozen 49-record v1 evidence; never reinterpret the 294-v2 live
+        # repository as a pre-migration corpus.
+        live = Repository.load(audit.REPO_ROOT)
+        frozen = load_pre_migration_repo()
+        frozen_rows = audit.audit_corpus(frozen)["rows"]
+        frozen_v1_ids = {row["id"] for row in frozen_rows if not row["equivalent"]}
+        cls.repo = Repository(
+            root=live.root,
+            banlists=live.banlists,
+            pools=live.pools,
+            rule_profiles=live.rule_profiles,
+            errata={
+                **{rid: record for rid, record in live.errata.items() if isinstance(record, ErratumV2)},
+                **{rid: frozen.errata[rid] for rid in frozen_v1_ids},
+            },
+            formats=live.formats,
+            global_sources=live.global_sources,
+            format_sources=live.format_sources,
+            card_index=live.card_index,
+            products=live.products,
+            release_coverage=live.release_coverage,
+            release_gaps=live.release_gaps,
+            import_report=live.import_report,
+            load_errors=[],
+        )
         cls.manual_bytes = {
             record_id: cls.repo.errata[record_id].path.read_bytes()
             for record_id in gate.MANUAL_EXCLUDED_IDS

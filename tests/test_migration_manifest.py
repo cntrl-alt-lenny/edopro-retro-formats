@@ -6,6 +6,10 @@ changed, derived from the live repository, never hand-maintained.
 from __future__ import annotations
 
 import unittest
+import subprocess
+import tarfile
+import tempfile
+from pathlib import Path
 
 from retroformats.model import Erratum, ErratumV2
 from retroformats.repo import Repository
@@ -15,10 +19,28 @@ from . import migration_manifest as mfst
 from .pre_migration_fixture import PRE_MIGRATION_COMMIT, load_pre_migration_repo
 
 
+HISTORICAL_MIGRATION_COMMIT = "eeb64e4bd03cb2edffbd70822f79c32d0d686774"
+
+
 class MigrationManifestTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.repo = Repository.load(audit.REPO_ROOT)
+        # This is the historical 247-record manifest.  Load the repository
+        # at the migration commit it describes rather than treating today's
+        # 294-v2 live repository as if it were still the old 247-v2 state.
+        cls.tempdir = tempfile.TemporaryDirectory()
+        archive = Path(cls.tempdir.name) / "repo.tar"
+        archive.write_bytes(
+            subprocess.check_output(
+                ["git", "-C", str(audit.REPO_ROOT), "archive", HISTORICAL_MIGRATION_COMMIT]
+            )
+        )
+        with tarfile.open(archive) as tar:
+            try:
+                tar.extractall(cls.tempdir.name, filter="data")
+            except TypeError:
+                tar.extractall(cls.tempdir.name)
+        cls.repo = Repository.load(Path(cls.tempdir.name))
         cls.manifest = mfst.generate_manifest(cls.repo)
 
     def test_counts(self):
@@ -70,7 +92,7 @@ class MigrationManifestTest(unittest.TestCase):
         import json
 
         for entry in self.manifest["records"]:
-            path = audit.REPO_ROOT / entry["path"]
+            path = self.repo.root / entry["path"]
             raw = json.loads(path.read_text(encoding="utf-8"))
             has_event = "event" in raw
             has_events = "events" in raw

@@ -6,9 +6,8 @@
     "name": "Mystic Swordsman LV4"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "If you Normal Summon this card, you must place it in face-down Defense Position. If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle send this card to the Graveyard, Special Summon 1 \"Mystic Swordsman LV6\" from your hand or Deck.",
-      "summary": "Period procedure, not a text erratum: if the End Phase effect resolves with no 'Mystic Swordsman LV6' in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text never carried reveal wording.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If you Normal Summon this card, you must place it in face-down Defense Position. If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle send this card to the Graveyard, Special Summon 1 \"Mystic Swordsman LV6\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: if the End Phase effect resolves with no 'Mystic Swordsman LV6' in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. The printed text never carried reveal wording.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "If you Normal Summon this card, you must place it in face-down Defense Position. If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle send this card to the Graveyard, Special Summon 1 \"Mystic Swordsman LV6\" from your hand or Deck.",
-      "summary": "Separate per-card era allowance: the goat sptg reduces to `ft>0` (written `ft>0 and true`) where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the effect be activated and its cost paid - sending this card to the Graveyard - with no LV6 available to Summon. Nothing in the packet dates the end of that allowance for this card.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "If you Normal Summon this card, you must place it in face-down Defense Position. If this card attacks a face-down Defense Position monster, destroy the monster immediately with this card's effect without flipping it face-up or applying damage calculation. During the End Phase of a turn that this card destroyed a monster as a result of battle send this card to the Graveyard, Special Summon 1 \"Mystic Swordsman LV6\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat sptg reduces to `ft>0` (written `ft>0 and true`) where the modern sptg also requires `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the effect be activated and its cost paid - sending this card to the Graveyard - with no LV6 available to Summon. Nothing in the packet dates the end of that allowance for this card.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700128,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700128.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700128,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700128.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

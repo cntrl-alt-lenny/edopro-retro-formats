@@ -6,20 +6,25 @@
     "name": "Apprentice Magician"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
-      "summary": "Two era behaviours the printed text does not show, grouped because they share the same unknown chronology. (1) Trigger timing: the goat script registers the revival effect on EVENT_BATTLED with condition Card.IsBattleDestroyed() instead of the modern EVENT_BATTLE_DESTROYED - upstream annotates the variant 'Triggers on the field' - so it activates while Apprentice Magician still occupies its Monster Zone, which means the free-zone test and the face-down Special Summon must find a zone other than its own. (2) Activation condition: the goat target function keeps only Duel.GetLocationCount(tp,LOCATION_MZONE)>0, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...) check, so the effect can be activated with no Level 2 or lower Spellcaster left in the Deck. Neither has a dated source, so the chronology stays unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
+          "modern_text": null,
+          "summary": "Two era behaviours the printed text does not show, grouped because they share the same unknown chronology. (1) Trigger timing: the goat script registers the revival effect on EVENT_BATTLED with condition Card.IsBattleDestroyed() instead of the modern EVENT_BATTLE_DESTROYED - upstream annotates the variant 'Triggers on the field' - so it activates while Apprentice Magician still occupies its Monster Zone, which means the free-zone test and the face-down Special Summon must find a zone other than its own. (2) Activation condition: the goat target function keeps only Duel.GetLocationCount(tp,LOCATION_MZONE)>0, dropping the modern Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...) check, so the effect can be activated with no Level 2 or lower Spellcaster left in the Deck. Neither has a dated source, so the chronology stays unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -47,22 +52,42 @@
           }
         ]
       },
-      "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
-      "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no Level 2 or lower Spellcaster remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is successfully Normal Summoned, Flip Summoned, or Special Summoned, put 1 Spell Counter on a face-up card on the field that you can put a Spell Counter on. If this card is destroyed as a result of battle, you can select 1 Spellcaster-Type monster Level 2 or lower from your deck and Special Summon it on the field in face-down Defense Position.",
+          "modern_text": null,
+          "summary": "Period procedure: on a failed Deck search the goat script calls Duel.GoatConfirm(tp,LOCATION_DECK), revealing and shuffling the Deck to prove no Level 2 or lower Spellcaster remained; the modern script has no else-branch and reveals nothing. The printed text is untouched by this.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700013,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700013.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700013,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700013.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

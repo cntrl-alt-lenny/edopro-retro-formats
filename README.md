@@ -46,22 +46,18 @@ Behind both formats' card *behaviour* sits the second backbone dataset:
 **`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
 rather than imported, distinguishing genuine text errata (functional) from
 period *rulings*, from pure wording modernisation (cosmetic). **Two record
-shapes coexist deliberately, not as a work-in-progress split**: 247 records
-have been migrated to the **v2 historical-event DAG** (180 as flattened
-single-event sugar, 67 as the full `events{}`/`ordering`/`states[]` shape) —
+shapes coexist deliberately, not as a work-in-progress split**: 294 records
+are now represented by the **v2 historical-event DAG** (180 as flattened
+single-event sugar, 114 as the full `events{}`/`ordering`/`states[]` shape) —
 an explicit graph of dated/undated historical events with a provable
 partial order, replacing the old assumption that `changes[]`'s array
-position meant anything. The remaining **49 records intentionally stay on
-the legacy v1 `changes[]` model**: the events themselves are real, dated or
-undated as the evidence allows — what's missing for these specific records
-is *evidence of their relative order*, and v2 never infers one from array
-position. 47 of the 49 are already fully researched (38 bundled/
-shared-package + 9 mechanically-distinct order-unknown, in this project's
-own classification) and migrate mechanically as separate, explicitly
-unordered events with no ordering edge — the v2 model already represents
-"unknown relative order" natively; no new research or architecture work is
-needed for them. The remaining 2 (Insect Imitation, Last Will) need a
-human researcher's adjudication before they can migrate. See
+position meant anything. The remaining **2 records require manual
+historical adjudication** and intentionally stay on the legacy v1
+`changes[]` model: Insect Imitation and Last Will are not treated as
+resolved by this migration. The 47 already-researched unordered records
+were migrated as separate events with no ordering edge where the evidence
+does not establish one; no new research or architecture work was needed.
+See
 [docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
 for the model and [docs/roadmap.md](docs/roadmap.md) for the remaining-49
 migration plan. Chronology carries its own uncertainty across both shapes:
@@ -184,14 +180,12 @@ Verified against the EDOPro/ocgcore source (all citations in
 Working end-to-end with two certified backbone datasets (releases, errata) and
 two proof formats (GOAT, Edison) — both remain the project's end-to-end
 regression targets as the errata model evolves underneath them. The
-errata-model migration to the v2 historical-event DAG covers **the 247
-records proven semantics-preserving by the migration audit**; the explicit,
-order-aware migration of the remaining 49 is the next errata-model
-milestone — mechanically migrating the 47 already-researched
-unordered-event records (no new research needed, no architecture work
-needed: v2 already represents "no evidenced order" natively), then
-separately resolving the 2 records that still need a human researcher's
-adjudication (see
+errata-model migration to the v2 historical-event DAG covers **294 of 296
+records**: the 247-record semantics-preserving pass and the subsequent 47
+already-researched unordered-event migration. The remaining **2 records**
+(Insect Imitation and Last Will) still require manual historical
+adjudication before v2 migration; this does not claim the entire errata
+migration is complete (see
 [docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
 and [docs/roadmap.md](docs/roadmap.md)). The card-index importer now supports
 this mixed v1/v2 corpus. See [docs/roadmap.md](docs/roadmap.md) for the full

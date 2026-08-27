@@ -6,9 +6,8 @@
     "name": "Sonic Bird"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
-      "summary": "Period procedure, not a text erratum: when the Normal/Flip Summon trigger resolves with no Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged across the whole lineage.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the Normal/Flip Summon trigger resolves with no Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK)); the modern script never reveals. The printed text is behaviourally unchanged across the whole lineage.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
-      "summary": "Separate per-card ruling: the goat script drops the modern activation requirement that a Ritual Spell actually be in the Deck - the target function's 'if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' becomes 'if chk==0 then return true end' - so the optional trigger may be activated on a search that cannot find anything. Nothing in the packet dates when this card lost its fail-to-find allowance (the shared verification chronology explicitly does not cover it), so the chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Spell Card from your Deck and add it to your hand. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card ruling: the goat script drops the modern activation requirement that a Ritual Spell actually be in the Deck - the target function's 'if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' becomes 'if chk==0 then return true end' - so the optional trigger may be activated on a search that cannot find anything. Nothing in the packet dates when this card lost its fail-to-find allowance (the shared verification chronology explicitly does not cover it), so the chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700092,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700092.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700092,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700092.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,9 +6,8 @@
     "name": "Manju of the Ten Thousand Hands"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
-      "summary": "Period procedure, not a text erratum: when the Summon trigger resolves with no Ritual Monster or Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK) in the else branch of the operation); the modern script never reveals. The printed text carries no reveal wording in any lineage version, so this is a ruling-layer difference only.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the Summon trigger resolves with no Ritual Monster or Ritual Spell left in the Deck, the goat script proves the whiff by revealing the Deck (Duel.GoatConfirm(tp,LOCATION_DECK) in the else branch of the operation); the modern script never reveals. The printed text carries no reveal wording in any lineage version, so this is a ruling-layer difference only.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
-      "summary": "Separate per-card era allowance: the goat script's target function is `if chk==0 then return true end` where the modern script requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)`, so the period implementation lets the Normal/Flip Summon trigger activate and resolve with nothing eligible in the Deck. Nothing in the packet or the shared briefs dates when this card lost that allowance, so the chronology is left unresolved rather than borrowed from the verification-procedure interval.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is Normal Summoned or Flip Summoned, you can select 1 Ritual Monster Card or 1 Ritual Spell Card from your Deck and add it to your hand.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat script's target function is `if chk==0 then return true end` where the modern script requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)`, so the period implementation lets the Normal/Flip Summon trigger activate and resolve with nothing eligible in the Deck. Nothing in the packet or the shared briefs dates when this card lost that allowance, so the chronology is left unresolved rather than borrowed from the verification-procedure interval.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700169,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700169.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700169,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700169.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

@@ -6,9 +6,8 @@
     "name": "Peten the Dark Clown"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,33 +35,59 @@
           }
         ]
       },
-      "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
-      "summary": "Period procedure, not a text erratum: after this card is banished as cost, if no other 'Peten the Dark Clown' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script simply resolves without effect. No lineage version prints reveal wording.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: after this card is banished as cost, if no other 'Peten the Dark Clown' is in the hand or Deck, the goat script reveals both zones (Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script simply resolves without effect. No lineage version prints reveal wording.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
-      "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` where the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the Trigger be activated and this card banished from the Graveyard as cost with no second copy to Summon - permanently losing the copy for nothing. The packet dates no end for that allowance.",
-      "sources": [
-        "ignis-cardscripts"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "When this card is sent to your Graveyard, you can remove this card from the Graveyard to Special Summon 1 \"Peten the Dark Clown\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Separate per-card era allowance: the goat target keeps only `Duel.GetLocationCount(tp,LOCATION_MZONE)>0` where the modern target also requires `Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp)`, so the period implementation lets the Trigger be activated and this card banished from the Graveyard as cost with no second copy to Summon - permanently losing the copy for nothing. The packet dates no end for that allowance.",
+          "sources": [
+            "ignis-cardscripts"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700084,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700084.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700084,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700084.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

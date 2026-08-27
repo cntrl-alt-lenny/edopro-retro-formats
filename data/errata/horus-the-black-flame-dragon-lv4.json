@@ -6,9 +6,8 @@
     "name": "Horus the Black Flame Dragon LV4"
   },
   "classification": "ruling",
-  "changes": [
-    {
-      "kind": "ruling",
+  "events": {
+    "c0": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -36,34 +35,60 @@
           }
         ]
       },
-      "historical_text": "As long as this card remains face-up on your side of the field, control of this card cannot switch. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Horus the Black Flame Dragon LV6\" from your hand or Deck.",
-      "summary": "Period procedure, not a text erratum: when the GOAT script's s.spop finds no \"Horus the Black Flame Dragon LV6\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. No lineage version carries reveal wording.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "As long as this card remains face-up on your side of the field, control of this card cannot switch. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Horus the Black Flame Dragon LV6\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Period procedure, not a text erratum: when the GOAT script's s.spop finds no \"Horus the Black Flame Dragon LV6\" in hand or Deck it reveals both zones to prove the whiff (else-branch Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)); the modern script never reveals. No lineage version carries reveal wording.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     },
-    {
-      "kind": "ruling",
+    "c1": {
       "effective": {
         "date": null
       },
-      "historical_text": "As long as this card remains face-up on your side of the field, control of this card cannot switch. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Horus the Black Flame Dragon LV6\" from your hand or Deck.",
-      "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.sptg keeps only the free-zone test (ft>0) and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the End Phase effect can be activated - sending this face-up Horus to the Graveyard as cost - with no LV6 available to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
-      "sources": [
-        "ignis-cardscripts",
-        "yugipedia-card-errata"
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "As long as this card remains face-up on your side of the field, control of this card cannot switch. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Horus the Black Flame Dragon LV6\" from your hand or Deck.",
+          "modern_text": null,
+          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.sptg keeps only the free-zone test (ft>0) and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the End Phase effect can be activated - sending this face-up Horus to the Graveyard as cost - with no LV6 available to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
       ]
     }
-  ],
-  "implementation": {
-    "strategy": "reuse-upstream",
-    "historical_passcode": 504700132,
-    "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
-    "script": "goat/c504700132.lua",
-    "status": "complete",
-    "tested": false
   },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700132,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700132.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
