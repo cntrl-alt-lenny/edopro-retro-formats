@@ -27,27 +27,84 @@
             "yugipedia-card-errata",
             "yugipedia-set-pages"
           ]
-        },
-        {
-          "kind": "functional",
-          "axis": "usage-window",
-          "historical_text": "You can only use this card's effect once, and only during this turn. When a monster on your side of the field is sent to your Graveyard, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck. Then shuffle your Deck.",
-          "modern_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
-          "summary": "The same TP7 text revision changed the use window: the GOAT script raises a custom trigger at the qualifying send and resets before the prompt, while the modern script exposes a once-per-turn free-chain opportunity at a later legal point in the turn.",
-          "sources": [
-            "ignis-cardscripts",
-            "ignis-babelcdb",
-            "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
         }
-      ],
-      "cooccurrence_sources": [
-        "yugipedia-card-errata",
-        "yugipedia-set-pages"
       ]
     },
     "c1": {
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-01-20",
+        "new_attested_from": "2006-06-21",
+        "basis": "Last Will deferral/usage-window ruling: old first-opportunity behavior is attested by Ian Estrin around 2005-01-20; later-use behavior is positively attested by Curtis Schultz on 2006-06-21; no effective date located",
+        "corroboration": [
+          {
+            "url": "https://www.goatformat.com/home/ruling-notice-last-will",
+            "title": "GoatFormat, Ruling Notice: Last Will",
+            "quote": "You cannot choose when to activate the state based effect, as it will trigger automatically the next time a monster is sent to the Graveyard."
+          },
+          {
+            "url": "https://kperovic.com/metagame/yugioh4cb2.html?tabid=33&ArticleId=6095",
+            "title": "Curtis Schultz, Duelist Academy: Last Will",
+            "quote": "Last Will has one final trick that you can take advantage of—and you don’t have to use it right away."
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "usage-window",
+          "historical_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "The pre-TP7 ruling requires the state-based opportunity to be used, if at all, at the first qualifying send; the post-TP7 ruling permits the controller to defer the Special Summon opportunity to a later point in the turn. Ian Estrin's January 2005 answer and Curtis Schultz's June 2006 explanation bound this change without dating it to TP7.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata"
+          ]
+        }
+      ]
+    },
+    "c2": {
+      "effective": {
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-02-08",
+        "new_attested_from": "2006-06-21",
+        "basis": "Last Will chain/procedure ruling: pre-TP7 period judge material treats the state trigger as starting a Chain; Curtis Schultz's 2006 post-errata explanation treats the Summon as not using the Chain; exact transition date not located",
+        "corroboration": [
+          {
+            "url": "https://www.goatformat.com/home/ruling-notice-last-will",
+            "title": "GoatFormat, Ruling Notice: Last Will",
+            "quote": "The effect of \"Monster Gate\" Tributes the monster as a cost. At this time, the \"Last Will\" wants to activate, but its effect will need to start a new chain."
+          },
+          {
+            "url": "https://kperovic.com/metagame/yugioh4cb2.html?tabid=33&ArticleId=6095",
+            "title": "Curtis Schultz, Duelist Academy: Last Will",
+            "quote": "Does using Last Will’s effect to special summon a monster use the chain? Well, no, but that doesn’t mean your opponent has no say in the matter."
+          },
+          {
+            "url": "https://www.cogonline.net/threads/playing-spell-cards-from-the-hand.38575/",
+            "title": "City of Geeks Online, period Last Will timing discussion",
+            "quote": "I think Last Will will trigger on Step 6 ... There will be 2 separate chains (NOT chain linked to each other) in step 6."
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": "chain-procedure",
+          "historical_text": "If a monster on your side of the field was sent to your Graveyard this turn, you can Special Summon 1 monster with an ATK of 1500 points or less from your Deck once during this turn. Then shuffle your Deck.",
+          "modern_text": null,
+          "summary": "Period judge material treats Last Will's triggered Summon as an effect that starts or joins a Chain, while the post-errata explanation treats the Summon as not using the Chain. The pinned scripts implement the same procedural distinction with a custom trigger versus a continuous/free-chain effect; the scripts establish implementation behavior, not the transition date.",
+          "sources": [
+            "ignis-cardscripts",
+            "yugipedia-card-errata",
+            "ignis-babelcdb"
+          ]
+        }
+      ]
+    },
+    "c3": {
       "effective": {
         "date": null,
         "basis": "Last Will-specific activation-legality change; exact effective chronology not located"
@@ -66,7 +123,7 @@
         }
       ]
     },
-    "c2": {
+    "c4": {
       "effective": {
         "date": null,
         "status": "verified",
@@ -116,7 +173,15 @@
     "chains": [
       [
         "c0",
-        "c2"
+        "c4"
+      ],
+      [
+        "c1",
+        "c4"
+      ],
+      [
+        "c2",
+        "c4"
       ]
     ]
   },
@@ -159,7 +224,7 @@
       "tested": false,
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "Period ruling package on top of the text change. Activation condition: the modern `s.spcon`/`s.activate` both require `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` before offering the Summon, while the goat `s.checkop2` prompts and consumes the effect regardless of whether a monster with 1500 or less ATK is in the Deck. Failed-search verification: the goat operation calls `Duel.GoatConfirm(tp,LOCATION_DECK)` when the selection comes back empty. Only the verification half is dated by the shared search-verification chronology, so this change is left unresolved."
+        "behavioural_impact": "Period ruling package on top of the text change. The usage-window and chain-procedure transitions are separately bounded by period ruling attestations, while activation legality remains undated. Activation condition: the modern `s.spcon`/`s.activate` both require `Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,...)` before offering the Summon, while the goat `s.checkop2` prompts and consumes the effect regardless of whether a monster with 1500 or less ATK is in the Deck. Failed-search verification: the goat operation calls `Duel.GoatConfirm(tp,LOCATION_DECK)` when the selection comes back empty."
       }
     }
   ],
@@ -167,7 +232,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-27",
-    "notes": "The official Konami card database lists TP7-EN015 with the revised \"was sent ... this turn\" text and the project release ledger records Tournament Pack 7 on 2005-11-01. A June 2006 Curtis Schultz discussion explicitly describes both the retroactivity change and the ability to use Last Will later in the turn as consequences of the revised text. Those two functional transitions are therefore one sourced TP7 event. Activation legality with no eligible Deck target and failed-search Deck verification are distinct ruling questions: the pinned scripts demonstrate different operations, but no source located establishes that they changed together, so they remain separate undated events with no edge between them. The verification event uses the shared TCG procedure: old behavior is positively attested through 2011-02-02 and the first located modern no-verification policy is 2019-04-03. Only TP7 -> verification is date-proven; no ordering is asserted for activation legality. The intermediate TP7 text with the old ruling package has no upstream implementation and remains a known gap."
+    "notes": "The official Konami card database lists TP7-EN015 with the revised \"was sent ... this turn\" text and the project release ledger records Tournament Pack 7 on 2005-11-01. That printing directly establishes the retroactivity transition only. Pre-TP7 Ian Estrin material positively attests the first-opportunity usage rule around 2005-01-20, while Curtis Schultz's June 2006 post-errata material attests later use; usage-window is therefore a separate bounded ruling event, not an exact TP7 transition. Period judge material likewise treats the old state as using the Chain, while the post-errata explanation says the Summon does not use the Chain; chain-procedure is a separate bounded ruling event. Activation legality with no eligible Deck target and failed-search Deck verification remain distinct ruling questions with no sourced co-occurrence. The verification event retains the shared TCG procedure bounds: old behavior is positively attested through 2011-02-02 and the first located modern no-verification policy is 2019-04-03. The three ruling events are independent of TP7 except that each is represented with its strongest available bounds; the date-proven ordering graph has only c0 -> c4, c1 -> c4, and c2 -> c4. The intermediate TP7 text with the old ruling package has no upstream implementation and remains a known gap at {c0}."
   },
   "sources": [
     "ignis-babelcdb",
