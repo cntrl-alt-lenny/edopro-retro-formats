@@ -323,9 +323,19 @@ ambiguous records have no historically valid modern possibility, and 47
 records contain unresolved candidate coverage. No early-format overrides are
 therefore proposed by this gate.
 
-## Architecture decision
+## Architecture decision (schema/host representability only)
 
-### B. EXISTING ARCHITECTURE SUFFICIENT WITH DOCUMENTED HOST/ENGINE APPROXIMATIONS
+> **Scope note (2026-08 consistency pass):** this section answers a narrow
+> question - can existing schemas and host configuration encode the SHAPE of
+> a Tokyo Dome format record? It does NOT answer whether the Tokyo Dome
+> format is ready for canonicalization. That separate, current question is
+> answered only in "Final hardened research state" near the end of this
+> document (verdict: `BLOCKED_BY_BOTH`), and only by
+> `tokyo_dome_research_current.architecture_verdict` in the packet JSON. In
+> the packet, this section's structured counterpart now lives at
+> `schema_host_architecture_assessment`, not `architecture`.
+
+### Schema/host representability: sufficient with documented approximations
 
 No runtime or schema change is required for this research gate, but the
 current structures store host-enforceable approximations rather than literal
@@ -460,9 +470,15 @@ event-specific Tokyo Dome application. No primary dated list or event
 rulesheet has been certified. The banlist remains a blocker, and this gate
 does not create `data/banlists/ocg-1999-07.json`.
 
-## Required architecture verdict
+## Schema/host architecture verdict (superseded as "the" verdict - see below)
 
-### B. EXISTING ARCHITECTURE SUFFICIENT WITH DOCUMENTED HOST/ENGINE APPROXIMATIONS
+> This is NOT the current unqualified Tokyo Dome architecture/canonicalization
+> verdict. It is the same narrow schema/host representability finding as
+> above, restated at the point this document originally required a verdict.
+> The current, unqualified verdict is `BLOCKED_BY_BOTH` - see "Final hardened
+> research state" near the end of this document.
+
+### Schema/host representability: sufficient with documented approximations
 
 This verdict means storage and validation can represent a future
 host-enforceable research artifact: `OCG` format region, `ocg-jp` release
@@ -949,12 +965,16 @@ Yugipedia's citation says what Yugipedia claims - not just that the
 citation is real and checkable, but that its content actually supports the
 claim. A genuinely new finding, not previously known to this research
 chain: the same page states Trap Hole's restriction was lifted again
-shortly after ("落とし穴は、すぐに制限が解除されている"), which is itself
-independent evidence favoring a one-off tournament rule over a standing
-nationwide restriction. This is still a 2004 Shueisha retrospective,
-five years after the event - not a contemporaneous 1999 document - so it
-does not settle the matter, but it is a real, verified, load-bearing
-upgrade to research confidence specifically.
+shortly after ("落とし穴は、すぐに制限が解除されている"). This is recorded as
+additional chronology/context, not as independent proof of scope - a
+restriction being lifted again soon after is compatible with several
+explanations (a one-off tournament rule, a quickly-corrected nationwide
+overreach, ordinary early banlist churn), so it does not by itself confirm
+the tournament-specific reading. The header text quoted above remains the
+strongest and primary evidence for that reading. This is still a 2004
+Shueisha retrospective, five years after the event - not a contemporaneous
+1999 document - so none of it settles the matter, but the header is a real,
+verified, load-bearing upgrade to research confidence specifically.
 
 ### Restriction list - two questions, two fields
 

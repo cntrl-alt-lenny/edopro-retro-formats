@@ -32,6 +32,35 @@ PACKET_PATH = ROOT / "docs" / "research" / "yugi-kaiba-format-source-packet.json
 BANNED_AS_CURRENT_VALUE = ("probable 2000", "genuinely disputed between agents")
 
 
+# Phrases from now-corrected/superseded framings that must never appear as
+# ACTIVE terminology anywhere under tokyo_dome_research_current. Quoting an
+# old phrase for correction purposes is fine (see EXEMPT_PATH_MARKERS below),
+# asserting it as live status text is not.
+LEGACY_BANNED_PHRASES = (
+    "bounded-to-proven",
+    "moderately, not fully, resolved",
+    "moderately resolved, not fully settled",
+)
+
+# A path is exempt from the legacy-phrase ban if any segment (case-
+# insensitive) matches one of these markers - these are exactly the kind of
+# "explicitly archival/audit field" the task calls out (prior_claim,
+# supersedes, correction-history fields).
+EXEMPT_PATH_MARKERS = ("supersedes", "prior_claim", "correction", "adversarial_audit")
+
+
+def _walk_strings(value, path=()):
+    """Yield (path_tuple, string_value) for every string leaf in a JSON tree."""
+    if isinstance(value, dict):
+        for k, v in value.items():
+            yield from _walk_strings(v, path + (k,))
+    elif isinstance(value, list):
+        for i, v in enumerate(value):
+            yield from _walk_strings(v, path + (str(i),))
+    elif isinstance(value, str):
+        yield path, value
+
+
 def _make_pool():
     raw_pool = {
         "id": "pool-ocg1999-research-only", "region": "OCG", "kind": "release-cutoff",
@@ -122,8 +151,15 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertIn("battle_damage", topics)
         self.assertIn("chain_and_spell_speed", topics)
         self.assertIn("higher-LP-wins-deck-out", rules["candidate_core_flags"]["known_gaps"])
-        architecture = self.packet["architecture"]
-        self.assertEqual("B", architecture["verdict"])
+        # Regression: the old top-level "architecture" field (bare verdict "B")
+        # no longer exists - it was renamed and explicitly scoped to
+        # schema/host representability only, so it can never be mistaken for
+        # a competing Tokyo Dome canonicalization verdict.
+        self.assertNotIn("architecture", self.packet)
+        architecture = self.packet["schema_host_architecture_assessment"]
+        self.assertNotEqual("B", architecture["verdict"])
+        self.assertIn("schema/host", architecture["verdict"].lower())
+        self.assertIn("BLOCKED_BY_BOTH", architecture["_scope"])
         self.assertFalse(architecture["schema_change_required"])
         self.assertTrue(architecture["schema_enhancement_desirable"])
         self.assertFalse(architecture["runtime_change_required"])
@@ -612,6 +648,136 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             self.assertTrue(c["exact_rule_claim"])
             self.assertTrue(c["supporting_excerpt"])
             self.assertTrue(c["what_it_establishes"])
+
+    # ------------------------------------------------------------------
+    # Final consistency-cleanup pass: recursive invariants over the whole
+    # active/current subtree, not just selected fields.
+    # ------------------------------------------------------------------
+
+    def test_A_no_superseded_active_terminology_anywhere(self):
+        # 6A: walk every scalar string under tokyo_dome_research_current and
+        # fail on legacy active-language phrases, except inside explicitly
+        # archival/audit-labeled paths (structural exclusion, not regex).
+        current = self.packet["tokyo_dome_research_current"]
+        violations = []
+        for path, s in _walk_strings(current, ("tokyo_dome_research_current",)):
+            path_str = "/".join(path).lower()
+            if any(marker in path_str for marker in EXEMPT_PATH_MARKERS):
+                continue
+            low = s.lower()
+            for phrase in LEGACY_BANNED_PHRASES:
+                if phrase in low:
+                    violations.append((path, phrase))
+        self.assertEqual([], violations, f"legacy phrases found outside archival fields: {violations}")
+
+        # The archive itself is explicitly permitted (even expected) to still
+        # contain some of this old wording, proving nothing was silently
+        # deleted, only relabeled as non-authoritative.
+        archive_text = json.dumps(self.packet["superseded_findings"], ensure_ascii=False)
+        # (Not asserting presence of every phrase here - the archive's own
+        # content is whatever the rejected pass actually wrote; this session
+        # does not edit it. The important invariant is the one above: these
+        # phrases cannot leak into the ACTIVE section.)
+        self.assertTrue(archive_text)
+
+    def test_B_no_exact_may_5_claim_inside_confirmed_semantics_fields(self):
+        # 6B: any field whose path means confirmed/proven/definitely-changed
+        # must not encode 1999-05-05 as the exact Expert Rules effective
+        # date. Checked both structurally (evidence_matrix status pairing)
+        # and via a generic recursive path-name scan - not just one entry.
+        current = self.packet["tokyo_dome_research_current"]
+
+        for row in current["evidence_matrix"]:
+            # Only the later_1999 tier's own status governs the later_1999
+            # date claim - starter_box_evidence_status is a genuinely
+            # independent sub-claim (e.g. spell_trap_response's Starter Box
+            # "no chain concept" is legitimately PROVEN even though its
+            # separate later-1999 cap-removal date is not) and must not be
+            # asserted to correlate with it.
+            if "1999-05-05" in row.get("later_1999_effective_bounds", ""):
+                self.assertNotEqual("PROVEN", row["later_1999_evidence_status"])
+                self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", row["later_1999_evidence_status"])
+
+        cb = current["change_boundary_before_tokyo_dome"]
+        self.assertNotIn("confirmed_changed_by_aug_26_1999", cb)
+        confirmed_unchanged_text = " ".join(cb["confirmed_unchanged_by_aug_26_1999"])
+        self.assertNotIn("1999-05-05", confirmed_unchanged_text)
+
+        hyp = cb["exact_date_hypothesis_for_the_above"]
+        self.assertEqual("1999-05-05", hyp["best_supported_exact_date_hypothesis"])
+        self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", hyp["evidence_status"])
+        self.assertNotEqual("PROVEN", hyp["evidence_status"])
+
+        violations = []
+        for path, s in _walk_strings(current, ()):
+            path_str = "/".join(path).lower()
+            semantically_confirmed = (
+                "confirmed" in path_str or "proven" in path_str or "definitely" in path_str
+            )
+            if semantically_confirmed and "1999-05-05" in s:
+                violations.append(path)
+        self.assertEqual([], violations, f"1999-05-05 found inside a confirmed/proven-semantics field: {violations}")
+
+    def test_C_exactly_one_unqualified_architecture_verdict(self):
+        # 6C: exactly one current unqualified format-level verdict,
+        # BLOCKED_BY_BOTH. Any legacy "B" verdict is explicitly scoped to
+        # schema/host representability, not left as a competing answer.
+        self.assertNotIn("architecture", self.packet)
+        self.assertEqual("BLOCKED_BY_BOTH", self.packet["tokyo_dome_research_current"]["architecture_verdict"])
+
+        scoped = self.packet["schema_host_architecture_assessment"]
+        self.assertNotEqual("B", scoped["verdict"])
+        self.assertNotEqual("BLOCKED_BY_BOTH", scoped["verdict"])
+        self.assertIn("schema", scoped["verdict"].lower())
+        self.assertIn("BLOCKED_BY_BOTH", scoped["_scope"])
+        self.assertIn("tokyo_dome_research_current.architecture_verdict", scoped["_scope"])
+
+    def test_D_all_active_certified_product_references_are_19(self):
+        # 6D: all active certified-product references resolve to 19; no
+        # stale "20 products" wording survives anywhere outside the archive.
+        self.assertEqual(19, self.packet["release_ledger_certification"]["certified_product_count"])
+        violations = []
+        for path, s in _walk_strings(self.packet, ()):
+            if path and path[0] == "superseded_findings":
+                continue
+            low = s.lower()
+            if "20 product" in low or "all 20" in low or "(20 curated" in low or "20-product" in low:
+                violations.append((path, s[:200]))
+        self.assertEqual([], violations, f"stale '20 products' reference(s): {violations}")
+
+    def test_E_restriction_list_status_derives_only_from_the_two_axes(self):
+        # 6E: all active restriction-list status consumers derive from
+        # research_confidence + canonicalization_status; no third legacy
+        # summary field exists to contradict them.
+        rc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual(
+            {
+                "_read_me_first", "content", "research_confidence", "canonicalization_status",
+                "master_guide_p84_verification", "yugipedia_revision_provenance",
+            },
+            set(rc.keys()),
+        )
+        self.assertEqual("BLOCKING", rc["canonicalization_status"]["status"])
+        self.assertIn("MODERATE-TO-GOOD", rc["research_confidence"]["confidence_level"])
+
+    def test_trap_hole_followup_is_context_not_independent_scope_proof(self):
+        # The Master Guide finding must remain: header = strongest evidence
+        # for tournament-limited scope; Trap Hole's later unrestriction is
+        # additional chronology/context, not independent proof of scope.
+        reasoning = self.packet["tokyo_dome_research_current"]["restriction_list_current"]["research_confidence"]["reasoning"]
+        self.assertIn("大会限定", reasoning)  # the header text is still present and load-bearing
+        self.assertIn("CHRONOLOGY/CONTEXT", reasoning)
+        self.assertIn("NOT treated here as separately proving", reasoning)
+        self.assertNotIn("independent data point supporting the tournament-specific reading", reasoning)
+        self.assertNotIn("independent evidence favoring a one-off tournament rule", reasoning)
+
+    def test_no_dangling_references_to_renamed_restriction_field(self):
+        # The prior session's restriction_list_reassessment field was
+        # renamed to restriction_list_current - no active prose may still
+        # point readers at the old, now-nonexistent name.
+        current = self.packet["tokyo_dome_research_current"]
+        for path, s in _walk_strings(current, ()):
+            self.assertNotIn("restriction_list_reassessment", s)
 
 
 if __name__ == "__main__":
