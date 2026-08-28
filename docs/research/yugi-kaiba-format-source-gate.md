@@ -502,7 +502,27 @@ This hardening gate creates no canonical Tokyo Dome format, banlist, pool,
 rule profile, generated output, release ledger, or errata mutation. Existing
 GOAT, Edison, and Tengu artifacts remain the only canonical formats.
 
-## Rules and restriction-list research gate (2026-08)
+## Rules and restriction-list research gate (2026-08) - SUPERSEDED, ARCHIVED
+
+> **This entire section is SUPERSEDED and ARCHIVED.** It was independently
+> reviewed and rejected as a historical-rules gate: the integrating
+> adjudicator of this pass promoted subagent summaries to PROVEN without
+> personally re-reading the load-bearing historical source closely enough,
+> producing several wrong conclusions (first-turn attack marked ambiguous
+> when it is proven prohibited; a guessed "probable 2000 LP" when the
+> primary source says 8000; deck-out marked exactly representable when it
+> is a genuine engine gap; an internal contradiction about the post-battle
+> Main Phase; hand-limit and Tribute Summon wrongly promoted to proven).
+> Its corresponding JSON has been moved wholesale to
+> `docs/research/yugi-kaiba-format-source-packet.json` under
+> `superseded_findings.rejected_2026_08_rules_and_restriction_research` -
+> that namespace is unmistakably archival and must never be read as
+> current. **Do not use anything in this section as current research.** For
+> the current, hardened research state, skip to "Final hardened research
+> state (2026-08, third pass)" near the end of this document, or read
+> `tokyo_dome_research_current` in the packet JSON. This section is kept
+> below, unedited, only as a preserved historical record of what the
+> rejected pass said and why it was wrong.
 
 A second, independent 5-agent research swarm (A: restriction-list chronology,
 B: Tokyo Dome event documents, C: early OCG rules chronology, D: ocgcore
@@ -510,17 +530,14 @@ representability, E: adversarial auditor) plus a direct F adjudication pass
 was run against this same commit lineage to answer two questions the prior
 hardening gate above left open: what restriction list applied to Japanese OCG
 play at the Tokyo Dome boundary, and what game rules were actually in force
-there versus what current engine architecture can represent. Full structured
-findings are in `docs/research/yugi-kaiba-format-source-packet.json` under
-`tokyo_dome_rules_and_restriction_research_2026_08`. This is a second,
-additive research pass - it does not delete or silently rewrite anything
-above; where it disagrees with a verdict recorded above, the disagreement is
-called out explicitly rather than papered over (see "Reconciliation" below).
+there versus what current engine architecture can represent. This pass's
+findings were later found untrustworthy in their methodology (see banner
+above) - what follows is preserved verbatim as archived history only.
 
-**Verdict: BLOCKED_BY_BOTH** (historical evidence AND engine representation).
-Still no canonical Tokyo Dome format, banlist, pool, rule profile, or lflist
-was created by this pass. `dist/`, runtime behavior, schemas, and the errata
-model were not touched.
+**Verdict at the time (later superseded): BLOCKED_BY_BOTH** (historical
+evidence AND engine representation). Still no canonical Tokyo Dome format,
+banlist, pool, rule profile, or lflist was created by this pass. `dist/`,
+runtime behavior, schemas, and the errata model were not touched.
 
 ### Format identity - unchanged, with a new caveat
 
@@ -670,7 +687,26 @@ would be sufficient to stop here on its own strength - together they are.
 This does not mean the format is unbuildable in principle; it means
 canonicalization is not authorized yet.
 
-## Corrective rules gate (2026-08, second pass)
+## Corrective rules gate (2026-08, second pass) - CORE FINDINGS SURVIVE, HARDENED FURTHER BELOW
+
+> **This section's JSON has moved and several specific claims were further**
+> **recalibrated by a third pass.** Its structured content used to live under
+> the packet key `tokyo_dome_rules_corrective_gate_2026_08` - that key no
+> longer exists. Its core corrections (the five items below) were correct
+> and survive, now under `tokyo_dome_research_current` in the packet, with
+> three refinements: (1) the May 5, 1999 Expert Rules date is further
+> downgraded from this pass's implied "reasonable confidence" to
+> `STRONG_SECONDARY_RECONSTRUCTION`; (2) the restriction list's single
+> `MODERATELY RESOLVED, not fully settled` field is split into a separate
+> research-confidence field (now upgraded, after personally inspecting the
+> actual cited Master Guide page) and a canonicalization-readiness field
+> (still explicitly BLOCKING); (3) the architecture verdict is re-derived
+> distinguishing historical-evidence blockers from engine-representation
+> blockers explicitly. See "Final hardened research state (2026-08, third
+> pass)" near the end of this document for the current, authoritative
+> narrative, and `tokyo_dome_research_current` in the packet JSON for the
+> current, authoritative structured data. This section is otherwise kept
+> below, unedited, as a preserved record of this pass's own reasoning.
 
 The rules/restriction-list gate immediately above was independently reviewed
 and **rejected** as a historical-rules gate - despite clean engineering and
@@ -681,9 +717,9 @@ pass, not a replacement: it does not delete anything above, but it corrects
 five specific wrong or self-contradictory conclusions and replaces the flat
 `rule_chronology` with a mechanically explicit three-tier evidence matrix
 (original Starter Box state / later-1999 Expert Rules state / Tokyo-Dome-
-effective state) that is never allowed to collapse into one bucket. Full
-structured detail is in `docs/research/yugi-kaiba-format-source-packet.json`
-under `tokyo_dome_rules_corrective_gate_2026_08`.
+effective state) that is never allowed to collapse into one bucket. (At the
+time this was written, its structured detail lived at the packet key noted
+in the banner above; that key has since been renamed - see the banner.)
 
 **Methodology change.** Before dispatching a second 6-agent swarm (A: Starter
 Box forensic reader, B: later-1999 chronology, C: Tokyo-Dome-specific, D:
@@ -847,3 +883,126 @@ created by this corrective pass. The certified 370-card pool, its digest,
 the 19-product release ledger, and the absence of the fabricated February
 1999 National Tournament product were all re-verified live against current
 repo state and remain unchanged.
+
+## Final hardened research state (2026-08, third pass)
+
+This is the current, authoritative narrative. Its structured counterpart is
+`tokyo_dome_research_current` in
+`docs/research/yugi-kaiba-format-source-packet.json` - that JSON key is the
+single current, machine-readable source of truth; nothing calling itself
+"current" exists anywhere else in the packet. Everything superseded now
+lives under the packet's `superseded_findings` key, unmistakably archival.
+
+**Why this pass exists.** Independent review found the packet, as it stood,
+contained competing truths: an older rejected section sat side by side with
+a later corrective section, and a naive consumer would need to read prose
+("this section supersedes that one") to know which structured facts were
+authoritative. That is fixed structurally now, not just narratively - the
+rejected section was moved wholesale into an archival namespace, and the
+corrective section was promoted and renamed to be the sole current
+structure. Two further calibration problems were also fixed: the May 5,
+1999 Expert Rules date was overstated, and the restriction list's research
+confidence and its canonicalization readiness were conflated into one field
+when they are genuinely different questions.
+
+### Expert Rules date - recalibrated
+
+The prior pass implied "reasonable confidence" for 1999-05-05 as the Expert
+Rules effective date. Personally re-verified this session: a book called
+the "Official Guide Starter Book" was indeed published on that date -
+independently confirmed by a fourth source (ocg-card.com's own product
+page, personally fetched this session, agreeing with Yugipedia and two
+yugioh-history.com articles). But no source anywhere in this research
+chain, across three sessions, has actually read that book's own content
+confirming it announces Expert Rules or Tribute Summon - ocg-card.com's
+description lists only "duelist essentials, deck collection, duel
+terminology dictionary," and the Japanese specialist historian who
+investigates this most carefully writes, in their own words: *"I have not
+been able to determine the original information source... if my memory is
+correct, they should have been documented in the Official Guide Starter
+Book, but I do not have the material on hand and cannot verify this."* Three
+distinct claims are now held separately rather than as one: (i) confidence
+Tribute Summon and related changes happened *at some point* before Tokyo
+Dome - MODERATE; (ii) confidence 1999-05-05 is the *exact* effective date -
+LOW; (iii) confidence these rules were *enforced at Tokyo Dome specifically*
+- UNKNOWN. The evidence matrix now labels this **STRONG_SECONDARY_
+RECONSTRUCTION**, a new status distinct from PROVEN/BOUNDED/AMBIGUOUS/
+UNKNOWN, reserved for exactly this situation: a claim resting entirely on
+secondary sources that may share an unverified common origin.
+
+### Master Guide page 84 - actually inspected, not just cited
+
+The prior pass noted nobody had read the book Yugipedia cites for the
+restriction list's scope (Shueisha's *Master Guide*, ISBN 4-08-782089-0,
+page 84). This session, the adjudicator discovered that Yugipedia's own
+citation links an uploaded scan of the actual page
+(`Media:Master Guide p84.jpg`), resolved its direct image URL via the
+MediaWiki API, downloaded it, confirmed the downloaded file's size and
+pixel dimensions matched the API's own metadata exactly, and personally
+viewed it. The page is real, is headed "DECK BEST SELECTION" covering
+"1999年2月〜8月" (February-August 1999), and carries its own boxed section
+titled **"1999年8月26日大会限定 制限・禁止カード一覧"** - "August 26, 1999
+tournament-limited restriction/forbidden card list" - directly above the
+three cards (Raigeki, Dark Hole, Trap Hole, each Limited to 1; 0 Forbidden;
+0 Semi-Limited). This is a direct, personally-read confirmation that
+Yugipedia's citation says what Yugipedia claims - not just that the
+citation is real and checkable, but that its content actually supports the
+claim. A genuinely new finding, not previously known to this research
+chain: the same page states Trap Hole's restriction was lifted again
+shortly after ("落とし穴は、すぐに制限が解除されている"), which is itself
+independent evidence favoring a one-off tournament rule over a standing
+nationwide restriction. This is still a 2004 Shueisha retrospective,
+five years after the event - not a contemporaneous 1999 document - so it
+does not settle the matter, but it is a real, verified, load-bearing
+upgrade to research confidence specifically.
+
+### Restriction list - two questions, two fields
+
+Research confidence and canonicalization readiness are no longer one field.
+**Research confidence is now MODERATE-TO-GOOD**, upgraded this session on
+the strength of the Master Guide inspection above: the best current
+hypothesis is a Tokyo-Dome-tournament-finals-specific restriction, dated
+1999-08-26, of exactly those three cards. **Canonicalization readiness
+remains explicitly BLOCKING** - a better secondary source is not a primary
+source, and nobody in this chain has inspected a contemporaneous 1999
+document. Do not read the confidence upgrade as "no longer blocked."
+
+Yugipedia's own revision history behind the "August 1999 Lists" page is now
+pinned mechanically rather than narratively: revision 3443496 (2017-03-08,
+The-Psychid, page created as "July 1999 Forbidden and Limited Lists," citing
+only an archived personal fansite whose own title read "...May 15, 2000")
+through revision 5830434 (2026-02-22, SnorlaxMonster, moved to "August 1999
+Lists," `start_date = end_date = August 26, 1999`, citing the Master Guide
+page just discussed) - seven revisions total, each with its exact revision
+ID, parent ID, timestamp, user, and comment recorded in the packet.
+
+### Event disruption - relabeled, not weakened
+
+The prior pass's "BOUNDED-to-PROVEN" language overstated the evidentiary
+tier for colorful-but-non-load-bearing event-history material. The
+underlying finding is unchanged and still strong - high confidence the
+event was severely disrupted, based on multiply-corroborating retrospective
+accounts - but it is now labeled by explicit tier rather than a label that
+sounds stronger than "no period 1999 source was personally inspected"
+actually supports.
+
+### Architecture verdict - re-derived, blockers separated by kind
+
+**BLOCKED_BY_BOTH**, unchanged as a top-line label but re-derived with the
+two blocker categories now kept explicitly separate. Historical-evidence
+blockers: restriction-list canonicalization, and the fact that almost every
+rule area's Tokyo-Dome-tier evidence status is still UNKNOWN even after this
+pass's work. Engine-representation blockers, counted only where the
+underlying historical behavior is securely known across the whole relevant
+window (not merely where a rule's Tokyo-Dome applicability happens to be
+unresolved): deck-out's LP-comparison outcome, the fundamental absence of a
+chain/priority model, and the ATK<DEF battle-recoil quirk. Tribute Summon's
+Starter-Box-era engine gap is explicitly *not* counted as a blocker, per the
+task's own reasoning: the later, engine-exact tribute-required state is the
+more likely operative rule by Tokyo Dome anyway, so an engine mismatch tied
+to a state that probably wasn't in force isn't a real blocker.
+
+No canonical Tokyo Dome format, banlist, pool, rule profile, or lflist was
+created by this hardening pass either. Runtime, schemas, and the errata
+model were not touched. The certified 370-card pool, its digest, and the
+19-product release ledger were re-verified live and remain unchanged.

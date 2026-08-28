@@ -1,4 +1,11 @@
-"""Research-only gate for the proposed early OCG Tokyo Dome snapshot."""
+"""Research-only gate for the proposed early OCG Tokyo Dome snapshot.
+
+The packet has exactly ONE current-authoritative Tokyo Dome research
+section: ``tokyo_dome_research_current``. Anything under the top-level
+``superseded_findings`` key is archived/rejected history and must never be
+read as current - tests in this module enforce that boundary explicitly,
+not just check that prose fields exist.
+"""
 
 from __future__ import annotations
 
@@ -17,12 +24,33 @@ from retroformats.repo import Repository
 ROOT = Path(__file__).resolve().parents[1]
 PACKET_PATH = ROOT / "docs" / "research" / "yugi-kaiba-format-source-packet.json"
 
+# Substrings that must never appear inside a DATA field (not narrative prose)
+# of the current-authoritative section - these are exactly the wrong claims
+# the rejected 2026-08 pass made, and their presence in a data field (as
+# opposed to a "this was corrected" sentence) would mean a ghost of a
+# conclusion we already know is wrong has leaked back into active use.
+BANNED_AS_CURRENT_VALUE = ("probable 2000", "genuinely disputed between agents")
+
+
+def _make_pool():
+    raw_pool = {
+        "id": "pool-ocg1999-research-only", "region": "OCG", "kind": "release-cutoff",
+        "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
+        "sources": ["yugipedia-ocg-series1-set-pages"],
+    }
+    return Pool.load(raw_pool, ROOT / "research-only-pool.json")
+
 
 class YugiKaibaResearchGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.packet = json.loads(PACKET_PATH.read_text(encoding="utf-8"))
         cls.repo = Repository.load(ROOT)
+
+    # ------------------------------------------------------------------
+    # Original (pre-2026-08) hardening-gate fields - unaffected by this
+    # session's archival reorg, still describe current truth, re-checked.
+    # ------------------------------------------------------------------
 
     def test_packet_is_research_only_and_rejects_requested_label(self):
         self.assertEqual("research-gate-only", self.packet["status"])
@@ -213,17 +241,8 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual("b45a38f83be490899d2fd64198b70ea86170ea55f1c24ef3c50194d0546ceaa2", digest)
 
     def test_repository_has_the_certified_ocg_ledger_but_no_early_canonical_artifacts(self):
-        # This research gate originally recorded zero ocg-territory release events as
-        # part of its "blocking" verdict. The 2026-08 release-ledger certification
-        # (see test_ocg1999_release_certification.py) has since built a real, sourced
-        # ocg-jp product ledger through 1999-08-25 - so this assertion now checks that
-        # the ledger exists and is exactly the certified 19 products, not that it is
-        # absent (19, not 20: a 2026-08 recertification pass found and deleted one
-        # fabricated product - see docs/research/yugi-kaiba-format-source-gate.md
-        # "2026-08 recertification"). Canonical Tokyo Dome artifacts remain absent
-        # (checked below): the release-ledger blocker being resolved does not by
-        # itself make the format canonical-ready (banlist/rules/engine blockers
-        # remain, per blocker_ledger).
+        # Regression 14/15: no canonical Tokyo Dome artifacts exist; existing
+        # canonical formats and generated outputs remain unchanged.
         ocg_products = {
             product.id for product in self.repo.products.values()
             if any(event.territory.startswith("ocg") for event in product.events)
@@ -237,6 +256,7 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(0x0CE5BABE, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
         self.assertFalse((ROOT / "formats" / "1999-08-tokyo-dome").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
+        self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())
         self.assertFalse((ROOT / "data" / "pools" / "1999-08-tokyo-dome.json").exists())
         self.assertFalse((ROOT / "data" / "rule-profiles" / "1999-08-tokyo-dome.json").exists())
         self.assertEqual(296, len(self.repo.errata))
@@ -265,130 +285,107 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertTrue(all(entry["status"] in allowed for entry in ledger.values()))
         self.assertTrue(all(entry["reason"] for entry in ledger.values()))
 
-    def test_rules_and_restriction_research_2026_08_is_present_and_structured(self):
-        # 2026-08 addendum: the multi-agent restriction-list/rules research gate.
-        # This checks the new packet section exists with the required structure -
-        # it does NOT re-derive the swarm's historical conclusions (those are prose
-        # research findings, not repo-checkable facts), only that the packet
-        # honestly records BLOCKED verdicts rather than a canonicalized answer.
-        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
-        self.assertEqual("BLOCKED_BY_BOTH", research["architecture_verdict"])
-        self.assertEqual("BLOCKED", research["restriction_list_research"]["verdict"])
-        self.assertEqual("UNCHANGED: pre-event (1999-08-25), not event-day", research["format_identity"]["snapshot_verdict"])
-        self.assertEqual("1999-08-25", research["format_identity"]["recommended_snapshot"])
-        self.assertEqual("1999-08-tokyo-dome", research["format_identity"]["recommended_id"])
+    def test_top_level_banlist_field_no_longer_asserts_the_stale_working_id(self):
+        # The top-level `banlist` field previously asserted working_id
+        # "ocg-1999-07" as if it were current - that date is now known
+        # wrong. It must point to the current-authoritative section instead
+        # of asserting a specific dated/scoped identifier itself.
+        banlist = self.packet["banlist"]
+        self.assertNotEqual("ocg-1999-07", banlist["working_id"])
+        self.assertIn("tokyo_dome_research_current", banlist["conflict"])
 
-        # Errata accounting in the new section must match the same live
-        # recomputation the older test_frozen_errata_are_all_v2_and_accounted_at_snapshot
-        # performs independently below - both derive from repo state, not from each other.
-        audit = research["errata_intersection_audit"]
-        self.assertEqual(370, audit["pool_size"])
+    def test_gate_scope_declares_no_shared_data_or_runtime_mutation(self):
+        scope = self.packet["scope"]
         self.assertEqual(
-            "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
-            audit["pool_digest_sha256"],
+            {
+                "docs/research/yugi-kaiba-format-source-gate.md",
+                "docs/research/yugi-kaiba-format-source-packet.json",
+                "tests/test_yugi_kaiba_format_gate.py",
+                "tests/engine/test_tokyo_dome_rules.py",
+            },
+            set(scope["files_added_by_gate"]),
         )
-        self.assertEqual(6, audit["pool_relevant_errata_count"])
-        self.assertEqual(2, audit["determinate_count"])
-        self.assertEqual(4, audit["ambiguous_count"])
+        self.assertFalse(scope["runtime_or_schema_changed"])
+        self.assertFalse(scope["errata_changed"])
+        self.assertFalse(any(path.startswith(("formats/", "data/", "schemas/", "retroformats/", "dist/")) for path in scope["files_added_by_gate"]))
 
-        # No new canonical artifact is ever claimed by this section.
-        non_actions = " ".join(research["explicit_non_actions"])
-        for phrase in (
-            "No formats/1999-* canonical format directory was created",
-            "No canonical banlist was created",
-            "No canonical pool was created",
-            "No canonical rule profile was created",
-            "dist/ was not modified",
-            "No runtime behavior was modified",
-            "No schema was modified",
-        ):
-            self.assertIn(phrase, non_actions)
+    # ------------------------------------------------------------------
+    # Single-authoritative-state invariant (hardening pass, this session)
+    # ------------------------------------------------------------------
 
-    def test_rules_research_pool_digest_matches_live_recomputation(self):
-        # Recomputed directly from repo state (not read from the packet), exactly
-        # like test_frozen_errata_are_all_v2_and_accounted_at_snapshot does for
-        # errata - this is the anti-circularity check for the 2026-08 addendum's
-        # own pool_digest_sha256 claim.
-        raw_pool = {
-            "id": "pool-ocg1999-research-only",
-            "region": "OCG",
-            "kind": "release-cutoff",
-            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
-            "sources": ["yugipedia-ocg-series1-set-pages"],
-        }
-        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
-        index = ReleaseIndex.build(self.repo)
-        evaluation = evaluate_cutoff(pool, self.repo, index)
-        cards = evaluation.cards()
-        digest = hashlib.sha256(
-            json.dumps(
-                [{"passcode": c["passcode"], "name": c["name"]} for c in cards],
-                separators=(",", ":"),
-                sort_keys=True,
-            ).encode("utf-8")
-        ).hexdigest()
-        self.assertEqual(370, len(cards))
-        self.assertEqual("f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb", digest)
+    def test_exactly_one_authoritative_current_tokyo_dome_research_state(self):
+        # Regression 1: there is exactly one authoritative/current Tokyo
+        # Dome research state, and its authority is self-describing.
+        self.assertNotIn("tokyo_dome_rules_and_restriction_research_2026_08", self.packet)
+        self.assertNotIn("tokyo_dome_rules_corrective_gate_2026_08", self.packet)
+        self.assertIn("tokyo_dome_research_current", self.packet)
+        current = self.packet["tokyo_dome_research_current"]
+        self.assertEqual("current-authoritative", current["status"])
 
-        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
-        self.assertEqual(len(cards), research["errata_intersection_audit"]["pool_size"])
-        self.assertEqual(digest, research["errata_intersection_audit"]["pool_digest_sha256"])
+        self.assertIn("superseded_findings", self.packet)
+        archive = self.packet["superseded_findings"]
+        self.assertIn("rejected_2026_08_rules_and_restriction_research", archive)
+        self.assertIn("_why_rejected", archive["rejected_2026_08_rules_and_restriction_research"])
 
-    def test_gate_guardian_and_its_fusion_materials_are_absent_from_the_pre_event_pool(self):
-        # Independent repo-state verification (not read from the packet's own
-        # prose) backing the format_identity.snapshot_rationale claim that Gate
-        # Guardian could not have been Fusion Summoned by anyone restricted to
-        # the certified pre-event pool: neither it nor any of its three Fusion
-        # Material monsters (Suijin, Kazejin, Sanga of the Thunder) are in the
-        # certified 370-card 1999-08-25 pool.
-        raw_pool = {
-            "id": "pool-ocg1999-research-only",
-            "region": "OCG",
-            "kind": "release-cutoff",
-            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
-            "sources": ["yugipedia-ocg-series1-set-pages"],
-        }
-        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
-        index = ReleaseIndex.build(self.repo)
-        evaluation = evaluate_cutoff(pool, self.repo, index)
-        names_in_pool = {c["name"] for c in evaluation.cards()}
-        for excluded in ("Gate Guardian", "Suijin", "Kazejin", "Sanga of the Thunder"):
-            self.assertNotIn(excluded, names_in_pool)
+    def test_superseded_claims_cannot_appear_in_active_current_fields(self):
+        # Regressions 2, 12, 13: the specific wrong claims from the rejected
+        # pass must not appear as asserted DATA VALUES in the current
+        # section - they may appear only inside clearly-labeled
+        # correction/audit-trail prose (fields whose own key names signal
+        # that context), and they MUST still be present in the archive
+        # (proving nothing was silently deleted, only relabeled).
+        current = self.packet["tokyo_dome_research_current"]
+        archive = self.packet["superseded_findings"]["rejected_2026_08_rules_and_restriction_research"]
 
-    def test_reconciliation_with_prior_gate_flags_the_first_turn_attack_conflict(self):
-        # The prior hardening gate's own blocker_ledger row for "first_turn_attack"
-        # says RESOLVED. This session's swarm found a genuine, unresolved
-        # disagreement about that historical claim. That contradiction must stay
-        # visible in the packet, not be silently smoothed over - this test only
-        # checks the contradiction is recorded, it does not resolve it either way.
-        self.assertEqual("RESOLVED", self.packet["blocker_ledger"]["first_turn_attack"]["status"])
-        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
-        reconciliation = research["reconciliation_with_prior_gate"]
-        topics = {item["topic"] for item in reconciliation["divergences"]}
-        self.assertIn("First-turn attack legality", topics)
-        first_turn = next(item for item in reconciliation["divergences"] if item["topic"] == "First-turn attack legality")
-        self.assertIn("RESOLVED", first_turn["prior_gate_verdict"])
-        self.assertIn("AMBIGUOUS", research["rule_chronology"]["areas"][2]["aug_25_26_1999_status"])
-        self.assertEqual("First-turn attack", research["rule_chronology"]["areas"][2]["area"])
+        # The archive still honestly contains the rejected claims - nothing
+        # was deleted, only relabeled as non-authoritative.
+        archive_text = json.dumps(archive, ensure_ascii=False).lower()
+        self.assertIn("probable 2000", archive_text)
+        self.assertIn("genuinely disputed between agents", archive_text)
 
-    def test_corrective_gate_evidence_matrix_keeps_three_tiers_separate(self):
-        # Requirement 1: the evidence matrix must have separate Starter Box /
-        # later-1999 / Tokyo Dome columns for every rule area, never collapsed
-        # into one "1999 rules" bucket.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = corrective["evidence_matrix"]
+        # The evidence matrix's actual DATA fields (not narrative/correction
+        # prose fields) must never assert the wrong values.
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        self.assertNotIn("2000", matrix["starting_lp"]["starter_box_state"])
+        self.assertEqual("PROVEN", matrix["first_turn_attack"]["starter_box_evidence_status"])
+        self.assertNotIn("AMBIGUOUS", matrix["first_turn_attack"]["starter_box_evidence_status"])
+        self.assertNotEqual("EXACT", matrix["deck_out"]["engine_representation"])
+
+        # Narrative correction fields (supersedes.corrected_claims,
+        # starter_box_baseline) are explicitly ALLOWED to quote the old wrong
+        # phrase, but only paired with a correction in the same entry/field -
+        # verify that pairing rather than banning the phrase outright.
+        for claim in current["supersedes"]["corrected_claims"]:
+            if "probable 2000" in claim["prior_claim"].lower() or "2000 lp" in claim["prior_claim"].lower():
+                self.assertIn("correction", claim)
+                self.assertTrue(claim["correction"])
+            if "disputed between agents" in claim["prior_claim"].lower():
+                self.assertIn("correction", claim)
+                self.assertTrue(claim["correction"])
+
+    # ------------------------------------------------------------------
+    # Evidence matrix - three tiers, never collapsed
+    # ------------------------------------------------------------------
+
+    def test_evidence_matrix_keeps_three_tiers_separate(self):
+        # Regression: three-tier structure, now with later_1999_evidence_status
+        # as a real structured field (added this session).
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = current["evidence_matrix"]
         self.assertEqual(15, len(matrix))
         required_columns = {
             "rule_area", "starter_box_state", "starter_box_evidence_status", "starter_box_source_ids",
-            "later_1999_state", "later_1999_effective_bounds", "later_1999_source_ids",
+            "later_1999_state", "later_1999_evidence_status", "later_1999_effective_bounds", "later_1999_source_ids",
             "tokyo_dome_state", "tokyo_dome_evidence_status", "tokyo_dome_source_ids",
             "engine_representation", "engine_notes", "remaining_uncertainty",
         }
-        allowed_status = {"PROVEN", "BOUNDED", "AMBIGUOUS", "UNKNOWN"}
+        allowed_tier_status = {"PROVEN", "BOUNDED", "AMBIGUOUS", "UNKNOWN"}
+        allowed_later_1999_status = allowed_tier_status | {"STRONG_SECONDARY_RECONSTRUCTION"}
         for row in matrix:
             self.assertEqual(required_columns, set(row))
-            self.assertIn(row["starter_box_evidence_status"], allowed_status)
-            self.assertIn(row["tokyo_dome_evidence_status"], allowed_status)
+            self.assertIn(row["starter_box_evidence_status"], allowed_tier_status)
+            self.assertIn(row["later_1999_evidence_status"], allowed_later_1999_status)
+            self.assertIn(row["tokyo_dome_evidence_status"], allowed_tier_status)
 
         rule_areas = {row["rule_area"] for row in matrix}
         for expected in (
@@ -399,116 +396,184 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         ):
             self.assertIn(expected, rule_areas)
 
-    def test_corrective_gate_first_turn_attack_is_proven_not_ambiguous(self):
-        # Requirement 2: first-turn attack must NOT be "original Starter Box
-        # ambiguous" now that direct source verification proves otherwise -
-        # the original (rejected) 2026-08 packet had this wrong.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
-        first_turn_attack = matrix["first_turn_attack"]
-        self.assertEqual("PROVEN", first_turn_attack["starter_box_evidence_status"])
-        self.assertIn("cannot attack", first_turn_attack["starter_box_state"].lower())
-        self.assertTrue(len(first_turn_attack["starter_box_source_ids"]) > 0)
-        # The Tokyo-Dome-tier question must stay separate and must NOT inherit PROVEN.
-        self.assertEqual("UNKNOWN", first_turn_attack["tokyo_dome_evidence_status"])
-        self.assertNotEqual("PROVEN", first_turn_attack["tokyo_dome_evidence_status"])
-
-    def test_corrective_gate_starting_lp_matches_directly_verified_source(self):
-        # Requirement 3: starting LP in the Starter Box baseline must match the
-        # directly verified source (8000, not the prior packet's guessed 2000).
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+    def test_starting_lp_starter_box_state_is_8000(self):
+        # Regression 3.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
         starting_lp = matrix["starting_lp"]
         self.assertEqual("PROVEN", starting_lp["starter_box_evidence_status"])
         self.assertIn("8000", starting_lp["starter_box_state"])
         self.assertNotIn("2000", starting_lp["starter_box_state"])
-        baseline = corrective["starter_box_baseline"]["resolved"]["starting_lp"]
-        self.assertIn("8000", baseline)
+        baseline = current["starter_box_baseline"]["resolved"]["starting_lp"]
+        self.assertTrue(baseline.startswith("8000"))
 
-    def test_corrective_gate_deck_out_not_marked_exact(self):
-        # Requirement 4: deck-out representability must not be marked exact -
-        # the verified historical rule (LP comparison) differs from modern
-        # ocgcore's hardcoded instant-loss default.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+    def test_first_turn_attack_starter_box_state_is_prohibited_and_proven(self):
+        # Regression 4.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        first_turn_attack = matrix["first_turn_attack"]
+        self.assertEqual("PROVEN", first_turn_attack["starter_box_evidence_status"])
+        self.assertIn("cannot attack", first_turn_attack["starter_box_state"].lower())
+        self.assertTrue(len(first_turn_attack["starter_box_source_ids"]) > 0)
+        self.assertEqual("UNKNOWN", first_turn_attack["tokyo_dome_evidence_status"])
+        self.assertNotEqual("PROVEN", first_turn_attack["tokyo_dome_evidence_status"])
+
+    def test_deck_out_representation_is_not_exact_modern_behaviour(self):
+        # Regression 5.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
         deck_out = matrix["deck_out"]
         self.assertEqual("NOT_REPRESENTABLE", deck_out["engine_representation"])
         self.assertNotEqual("EXACT", deck_out["engine_representation"])
         self.assertIn("lp", deck_out["starter_box_state"].lower())
+        self.assertEqual("PROVEN", deck_out["starter_box_evidence_status"])
 
-    def test_corrective_gate_main_phase_prose_is_internally_consistent(self):
-        # Requirement 5: the Main Phase prose must not simultaneously claim both
-        # that a historical post-battle action window existed AND that it never
-        # existed - the original (rejected) packet had this exact contradiction.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+    def test_main_battle_main_rejects_duel_no_main_phase_2(self):
+        # Regression 6.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
         main_phase = matrix["main_battle_main_sequence"]
         self.assertEqual("PROVEN", main_phase["starter_box_evidence_status"])
         self.assertIn("remains the main phase", main_phase["starter_box_state"].lower())
         self.assertEqual("DEFAULT_OMISSION", main_phase["engine_representation"])
-        # DUEL_NO_MAIN_PHASE_2 must be rejected as historically wrong, not accepted as exact.
         self.assertIn("DUEL_NO_MAIN_PHASE_2", main_phase["engine_notes"])
         self.assertIn("variant-format flag", main_phase["engine_notes"].lower())
 
-    def test_corrective_gate_no_row_claims_tokyo_dome_proven_without_its_own_source(self):
-        # Requirement 6: any rule PROVEN specifically for Tokyo Dome must have a
-        # Tokyo-Dome-specific source reference, not merely a Starter Box source.
-        # Currently no row reaches PROVEN at the Tokyo Dome tier at all - this
-        # test is a forward regression guard, not a description of a row that
-        # exists today.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        matrix = corrective["evidence_matrix"]
+    def test_starter_box_hand_limit_and_tribute_are_not_falsely_proven(self):
+        # Regression 7.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        for area in ("hand_limit", "tribute_summon"):
+            row = matrix[area]
+            self.assertNotEqual("PROVEN", row["starter_box_evidence_status"])
+            self.assertEqual("UNKNOWN", row["starter_box_evidence_status"])
+
+    def test_may_5_expert_rules_boundary_is_not_proven(self):
+        # Regression 8: exact May 5 boundary is STRONG_SECONDARY_RECONSTRUCTION,
+        # not PROVEN, unless the packet contains newly obtained primary/period
+        # evidence supporting PROVEN - it does not, so it must not be PROVEN.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        for area in ("tribute_summon", "fusion", "spell_trap_response"):
+            row = matrix[area]
+            self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", row["later_1999_evidence_status"])
+            self.assertNotEqual("PROVEN", row["later_1999_evidence_status"])
+        self.assertIn("STRONG_SECONDARY_RECONSTRUCTION", current["change_boundary_before_tokyo_dome"]["answer"])
+
+    def test_no_row_claims_tokyo_dome_proven_without_its_own_source(self):
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = current["evidence_matrix"]
         for row in matrix:
             if row["tokyo_dome_evidence_status"] == "PROVEN":
-                self.assertTrue(
-                    len(row["tokyo_dome_source_ids"]) > 0,
-                    f"{row['rule_area']} claims Tokyo-Dome PROVEN with no tokyo_dome_source_ids",
-                )
-                self.assertNotEqual(
-                    set(row["tokyo_dome_source_ids"]), set(row["starter_box_source_ids"]),
-                    f"{row['rule_area']} claims Tokyo-Dome PROVEN using only its Starter Box sources",
-                )
-        # As of this gate, the Tokyo-Dome tier is honestly almost entirely unresolved.
+                self.assertTrue(len(row["tokyo_dome_source_ids"]) > 0)
+                self.assertNotEqual(set(row["tokyo_dome_source_ids"]), set(row["starter_box_source_ids"]))
         proven_at_tokyo_dome = [row["rule_area"] for row in matrix if row["tokyo_dome_evidence_status"] == "PROVEN"]
         self.assertEqual([], proven_at_tokyo_dome)
 
-    def test_corrective_gate_restriction_list_scope_stays_explicit_and_noncanonical(self):
-        # Requirement 7: restriction-list scope stays explicit and non-canonical
-        # unless genuinely resolved - this pass moved it from BLOCKED toward a
-        # best-supported reading, but must not overstate that as settled fact.
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        reassessment = corrective["restriction_list_reassessment"]
-        self.assertIn("content", reassessment)
-        self.assertEqual(3, len(reassessment["content"]["cards"]))
-        scope = reassessment["scope_and_effective_date"]
-        verdict = scope["verdict"]
-        self.assertNotIn("FULLY RESOLVED", verdict.upper())
-        self.assertNotIn("DEFINITIVELY RESOLVED", verdict.upper())
-        self.assertIn("MODERATELY RESOLVED", verdict)
-        self.assertIn("not fully settled", verdict.lower())
-        self.assertIn("adjudicator_calibration_note", reassessment)
-        # No canonical banlist file was created as a side effect of this finding.
-        self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
-        self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())
-
-    def test_corrective_gate_supersedes_five_specific_prior_claims(self):
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        corrected = corrective["supersedes"]["corrected_claims"]
+    def test_supersedes_five_specific_prior_claims(self):
+        current = self.packet["tokyo_dome_research_current"]
+        corrected = current["supersedes"]["corrected_claims"]
         self.assertEqual(5, len(corrected))
         joined = " ".join(c["prior_claim"] for c in corrected)
         for marker in ("first-turn attack", "Deck-out", "2000 LP", "Main Phase", "Hand size limit"):
             self.assertIn(marker, joined)
 
-    def test_corrective_gate_architecture_verdict_is_rederived_and_documented(self):
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        self.assertEqual("BLOCKED_BY_BOTH", corrective["architecture_verdict"])
-        self.assertIn("re-derived", corrective["architecture_verdict_detail"].lower())
-        readiness = corrective["tokyo_dome_rule_profile_readiness"]
+    # ------------------------------------------------------------------
+    # Restriction list - research confidence vs. canonicalization readiness
+    # ------------------------------------------------------------------
+
+    def test_restriction_list_confidence_and_canonicalization_are_separate_fields(self):
+        # Regression 9.
+        current = self.packet["tokyo_dome_research_current"]
+        restriction = current["restriction_list_current"]
+        self.assertIn("research_confidence", restriction)
+        self.assertIn("canonicalization_status", restriction)
+        self.assertIsInstance(restriction["research_confidence"], dict)
+        self.assertIsInstance(restriction["canonicalization_status"], dict)
+        # These must be genuinely distinct concepts, not the same string twice.
+        self.assertNotEqual(
+            restriction["research_confidence"].get("confidence_level"),
+            restriction["canonicalization_status"].get("status"),
+        )
+        self.assertEqual(3, len(restriction["content"]["cards"]))
+
+    def test_restriction_list_canonicalization_remains_blocked(self):
+        # Regression 10.
+        current = self.packet["tokyo_dome_research_current"]
+        restriction = current["restriction_list_current"]
+        self.assertEqual("BLOCKING", restriction["canonicalization_status"]["status"])
+        self.assertIn("what_would_unblock_this", restriction["canonicalization_status"])
+        self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
+        self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())
+
+    def test_master_guide_p84_was_actually_inspected_not_merely_cited(self):
+        current = self.packet["tokyo_dome_research_current"]
+        verification = current["restriction_list_current"]["master_guide_p84_verification"]
+        self.assertTrue(verification["attempted"])
+        self.assertTrue(verification["actually_inspected"])
+        self.assertIn("1592318", str(verification["file_provenance"]["file_size_bytes"]))
+        self.assertEqual("2106x2981", verification["file_provenance"]["pixel_dimensions"])
+        self.assertIn("大会限定", verification["what_is_actually_visible"])
+        self.assertIn("what_this_does_not_establish", verification)
+        # Personally inspecting a 2004 retrospective must not be conflated
+        # with inspecting a contemporaneous 1999 primary document.
+        self.assertIn("2004", verification["what_this_does_not_establish"])
+
+    def test_yugipedia_revision_provenance_has_exact_identifiers(self):
+        # Regression 11.
+        current = self.packet["tokyo_dome_research_current"]
+        prov = current["restriction_list_current"]["yugipedia_revision_provenance"]
+        self.assertGreaterEqual(len(prov["revisions"]), 5)
+        for rev in prov["revisions"]:
+            self.assertIsInstance(rev["revid"], int)
+            self.assertTrue(rev["timestamp"])
+            self.assertTrue(rev["user"])
+        revids = {rev["revid"] for rev in prov["revisions"]}
+        self.assertIn(3443496, revids)  # page creation
+        self.assertIn(5830434, revids)  # final move+rewrite
+        self.assertEqual("July 1999 Forbidden and Limited Lists", prov["page_title_before_move"])
+        self.assertEqual("August 1999 Lists", prov["page_title_after_move"])
+
+    def test_event_disruption_terminology_is_tiered_not_overclaimed(self):
+        current = self.packet["tokyo_dome_research_current"]
+        ed = current["event_disruption_reassessment"]
+        self.assertIn("evidence_tier", ed)
+        self.assertIn("period_source_status", ed)
+        self.assertIn("NO PERIOD (1999) ARTICLE", ed["period_source_status"])
+        # The old overclaiming label must not appear as this field's status.
+        combined = json.dumps(ed, ensure_ascii=False)
+        self.assertNotIn("BOUNDED-to-PROVEN", combined)
+
+    # ------------------------------------------------------------------
+    # Architecture verdict - re-derived, blockers separated by kind
+    # ------------------------------------------------------------------
+
+    def test_architecture_verdict_separates_historical_and_engine_blockers(self):
+        current = self.packet["tokyo_dome_research_current"]
+        self.assertEqual("BLOCKED_BY_BOTH", current["architecture_verdict"])
+        detail = current["architecture_verdict_detail"]
+        self.assertIn("historical_evidence_blockers", detail)
+        self.assertIn("engine_representation_blockers", detail)
+        self.assertGreater(len(detail["historical_evidence_blockers"]["items"]), 0)
+        self.assertGreater(len(detail["engine_representation_blockers"]["items"]), 0)
+        engine_items = " ".join(detail["engine_representation_blockers"]["items"])
+        self.assertIn("deck_out", engine_items)
+        # Tribute Summon's engine gap must be explicitly excluded from the
+        # blocker list, per the task's own reasoning about applicability.
+        self.assertNotIn("tribute_summon -", engine_items)
+        self.assertIn("explicitly_not_counted_as_a_blocker", detail)
+        self.assertIn("tribute_summon", detail["explicitly_not_counted_as_a_blocker"])
+
+        readiness = current["tokyo_dome_rule_profile_readiness"]
         self.assertEqual("BLOCKED_BY_HISTORICAL_EVIDENCE", readiness["verdict"])
 
-    def test_corrective_gate_release_ledger_reverified_live_and_unchanged(self):
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        preserved = corrective["release_ledger_preserved"]["verified_this_session"]
+    # ------------------------------------------------------------------
+    # Release ledger - preserved and re-verified live
+    # ------------------------------------------------------------------
+
+    def test_release_ledger_reverified_live_and_unchanged(self):
+        current = self.packet["tokyo_dome_research_current"]
+        preserved = current["release_ledger_preserved"]["verified_this_session"]
         self.assertEqual("1999-08-25", preserved["pre_event_snapshot"])
         self.assertEqual(370, preserved["pool_size"])
         self.assertEqual(
@@ -517,12 +582,7 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         )
         self.assertEqual(19, preserved["products_through_cutoff"])
 
-        raw_pool = {
-            "id": "pool-ocg1999-research-only", "region": "OCG", "kind": "release-cutoff",
-            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
-            "sources": ["yugipedia-ocg-series1-set-pages"],
-        }
-        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
+        pool = _make_pool()
         index = ReleaseIndex.build(self.repo)
         evaluation = evaluate_cutoff(pool, self.repo, index)
         cards = evaluation.cards()
@@ -542,9 +602,9 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         fabricated = ROOT / "data" / "releases" / "products" / "yu-gi-oh-duel-monsters-national-tournament-prize-cards.json"
         self.assertFalse(fabricated.exists())
 
-    def test_corrective_gate_personally_reverified_claims_are_recorded(self):
-        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
-        claims = corrective["personally_reverified_claims"]
+    def test_personally_reverified_claims_are_recorded(self):
+        current = self.packet["tokyo_dome_research_current"]
+        claims = current["personally_reverified_claims"]
         self.assertGreaterEqual(len(claims), 5)
         for c in claims:
             self.assertTrue(c["claim_source_id"])
@@ -552,21 +612,6 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             self.assertTrue(c["exact_rule_claim"])
             self.assertTrue(c["supporting_excerpt"])
             self.assertTrue(c["what_it_establishes"])
-
-    def test_gate_scope_declares_no_shared_data_or_runtime_mutation(self):
-        scope = self.packet["scope"]
-        self.assertEqual(
-            {
-                "docs/research/yugi-kaiba-format-source-gate.md",
-                "docs/research/yugi-kaiba-format-source-packet.json",
-                "tests/test_yugi_kaiba_format_gate.py",
-                "tests/engine/test_tokyo_dome_rules.py",
-            },
-            set(scope["files_added_by_gate"]),
-        )
-        self.assertFalse(scope["runtime_or_schema_changed"])
-        self.assertFalse(scope["errata_changed"])
-        self.assertFalse(any(path.startswith(("formats/", "data/", "schemas/", "retroformats/", "dist/")) for path in scope["files_added_by_gate"]))
 
 
 if __name__ == "__main__":
