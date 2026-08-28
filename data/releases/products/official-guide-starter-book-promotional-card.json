@@ -10,11 +10,11 @@
       "territory": "ocg-jp",
       "date": "1999-05-05",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -25,8 +25,8 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "Single-card promo (\"Flame Swordsman\") bundled with the Official Guide Starter Book strategy guide."
 }

@@ -10,11 +10,11 @@
       "territory": "ocg-jp",
       "date": "1999-03-01",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -181,8 +181,8 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "First entry in the parallel \"Booster\" product line (distinct catalogue line from the numbered \"Vol.\" core boosters). Series 1 layout, no printed Card Number."
 }

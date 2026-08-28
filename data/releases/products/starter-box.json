@@ -13,8 +13,9 @@
       "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -221,8 +222,9 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "konami-card-database-ja",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "General nationwide release of the Starter Box, mostly reprints from Vol.1/Vol.2 plus 5 new cards. First general release of \"Blue-Eyes White Dragon\" and \"Raigeki\"."
 }

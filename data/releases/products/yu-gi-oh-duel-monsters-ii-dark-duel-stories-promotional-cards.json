@@ -10,11 +10,11 @@
       "territory": "ocg-jp",
       "date": "1999-07-08",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -61,8 +61,8 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "10 cards bundled with copies of the Duel Monsters II: Dark Duel Stories video game. Distinct from the two Game Guide book promos (which share the July 8 / August 5 dates but are separate products)."
 }

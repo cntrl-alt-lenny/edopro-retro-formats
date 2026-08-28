@@ -382,9 +382,9 @@ class TenguResearchGateTest(unittest.TestCase):
         # 411 at Tengu's own gate (399 generated + 12 curated); +20 curated ocg-jp
         # (pre-1999-08-25) products from the 2026-08 release ledger certification.
         # products_written (Yugipedia+YGOPRODeck-generated TCG count) is untouched.
-        self.assertEqual(431, len(self.repo.products))
+        self.assertEqual(430, len(self.repo.products))
         self.assertEqual(399, self.repo.import_report["stats"]["products_written"])
-        self.assertEqual(32, self.repo.import_report["stats"]["curated_preserved"])
+        self.assertEqual(31, self.repo.import_report["stats"]["curated_preserved"])
         self.assertEqual(34, self.repo.import_report["stats"]["yugipedia_only_products"])
         subjects = {s for g in self.repo.release_gaps for s in g.raw["subjects"]}
         self.assertIn("Yu-Gi-Oh! 3D Bonds Beyond Time Blu-ray promotional card", subjects)

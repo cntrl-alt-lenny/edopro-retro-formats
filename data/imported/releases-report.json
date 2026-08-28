@@ -46,7 +46,7 @@
   },
   "stats": {
     "products_written": 399,
-    "curated_preserved": 32,
+    "curated_preserved": 31,
     "printings": 9338,
     "release_events": 585,
     "unmatched_cards": 8,
@@ -763,5 +763,5 @@
     }
   ],
   "generated_products_written": 399,
-  "curated_products_preserved": 32
+  "curated_products_preserved": 31
 }

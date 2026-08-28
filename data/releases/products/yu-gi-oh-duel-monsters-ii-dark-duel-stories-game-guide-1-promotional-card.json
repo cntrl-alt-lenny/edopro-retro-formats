@@ -8,13 +8,14 @@
   "release_events": [
     {
       "territory": "ocg-jp",
-      "date": "1999-07-08",
+      "date": "1999-07-13",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "openbd-shueisha-metadata"
       ]
     }
   ],
@@ -25,8 +26,10 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "konami-card-database-ja",
+    "openbd-shueisha-metadata",
+    "yugipedia-ocg-series1-set-pages"
   ],
-  "notes": "Single-card promo (\"Right Arm of the Forbidden One\") bundled with the first DM2 strategy guide book."
+  "notes": "Single-card promo (\"Right Arm of the Forbidden One\") bundled with the first DM2 strategy guide book (Shueisha, ISBN 4-08-779026-6). CORRECTION (2026-08 recertification): a prior pass dated this 1999-07-08, copying the unrelated, separately-certified video-game-bundled product's date (yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards) rather than this book's own date. Independently re-verified directly against Konami's official card-level print-history for this exact card (passcode 70903634): its sole 1999 printing entry is dated 1999-07-13 - re-confirmed live on 2026-08-28 (no 1999-07-08 entry exists anywhere on that page). Corroborated by Konami's own product-catalogue listing page, which files this book under a distinct \"books\" category separate from the game-bundled promo, and by independent Japanese publisher (openBD/National Diet Library) metadata for the ISBN, which places the book's publication in July 1999 (month-level, consistent with the day-level Konami date). Status upgraded reported -> verified: 2+ independent official channels now agree. Pool impact: none - 1999-07-13 remains well before the 1999-08-25 cutoff, same as the prior, incorrect date."
 }

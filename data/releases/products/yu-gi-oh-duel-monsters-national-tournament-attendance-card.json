@@ -10,11 +10,11 @@
       "territory": "ocg-jp",
       "date": "1999-02-21",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
         "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history"
       ]
     }
   ],
@@ -26,7 +26,7 @@
   ],
   "sources": [
     "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history"
   ],
-  "notes": "400 copies of a single-card promo (\"Kanan the Swordmistress\") given to attendees of the first Duel Monsters National Tournament (held February 1-21, 1999; card distributed at the February 21 final). This is the earliest dated OCG distribution certified in this ledger, predating Vol.1 by 12 days. \"Kanan the Swordmistress\" is OCG-only (never released in the TCG) and has no other pre-cutoff source in this ledger."
+  "notes": "400 copies of a single-card promo (\"Kanan the Swordmistress\") given to attendees of the first Duel Monsters National Tournament (held February 1-21, 1999; card distributed at the February 21 final). This is the earliest dated OCG distribution certified in this ledger, predating Vol.1 by 12 days. \"Kanan the Swordmistress\" is OCG-only (never released in the TCG) and has no other pre-cutoff source in this ledger, so this record is its sole route into the certified pool. Date and identity independently re-verified 2026-08 directly against Konami's own card-level print-history for this card (passcode 12829151, cid 4358): its earliest and only 1999 printing entry is this product, dated 1999-02-21. \\n\\nCORRECTION NOTE (2026-08 recertification): an earlier pass also authored a sibling product, \"yu-gi-oh-duel-monsters-national-tournament-prize-cards\", claiming three further cards (\"Millennium Shield\", \"Megasonic Eye\", \"Yamadron\") were physically distributed on this same date as a \"qualifying tier\" of prizes. That claim was FALSE and the product has been deleted. Root cause: Yugipedia's \"...National Tournament prize cards\" page lists these results in a two-column table (\"Physical card\" / \"Video game card\") by placement tier; for the Qualifying tier, only the Video game card cell is populated (Kanan the Swordmistress, Millennium Shield, Megasonic Eye, Yamadron), each linking to a \"(DM1)\"-suffixed Yugipedia page describing a hidden/unlockable reward inside the Game Boy title Yu-Gi-Oh! Duel Monsters (released 1998-12-16, itself Non-OCG) - these pages use a distinct `{{DM1 card}}` template with a `prize_condition` field and no passcode field at all, unlike genuine OCG cards' `{{CardTable2}}`. Kanan alone is ALSO physically real, but via this wholly separate attendance-card distribution documented here - not via that table row. Konami's official database has no product id for a February \"prize cards\" release, and Millennium Shield/Megasonic Eye/Yamadron's own individual Konami print-history records show their earliest OCG printing as 1999-06-01 (Limited Edition: Yugi Pack / Joey Pack, already certified elsewhere in this ledger), with nothing earlier. Deleting the false product does not remove these 3 cards from the certified pool: they remain correctly available via their genuine June 1999 release."
 }

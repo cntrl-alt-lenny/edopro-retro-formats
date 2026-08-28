@@ -10,7 +10,7 @@
       "revision": "wikitext fetched via the MediaWiki parse API, 2026-08-28",
       "retrieved": "2026-08-28",
       "used_for": "Release dates, printed rosters, and rarities for every certified pre-1999-08-25 Japanese OCG product (Vol.1-4, Booster 1-3, Starter Box + Theatrical Release + pre-order promo, Limited Edition Yugi/Kaiba/Joey packs, Official Guide Starter Book promo, Duel Monsters II: Dark Duel Stories video-game/Game-Guide promos, The Valuable Book 1 promos, Duel Monsters National Tournament attendance card), plus individual CardTable2 lookups used to disambiguate artwork-variant and non-playable-card identities.",
-      "reliability_notes": "Community wiki; per-page jp_release_date fields are themselves sourced by Yugipedia to Konami's official Japanese card database (see konami-card-database-ja) via each page's ja_database_id. Cross-checked internally in this certification: infobox release dates, per-product card counts, and card-list roster sizes agreed in every case (no discrepancy found)."
+      "reliability_notes": "Community wiki; per-page jp_release_date fields are themselves sourced by Yugipedia to Konami's official Japanese card database (see konami-card-database-ja) via each page's ja_database_id, but Yugipedia's own infobox date fields are frequently UNCITED (no <ref> tag) - discovered during the 2026-08 recertification, when an independent multi-agent audit found two of the twenty products (the Duel Monsters II Game Guide 1/2 promos) where the uncited Yugipedia date was directly contradicted by Konami's own card-level print-history: Yugipedia said 1999-07-08/1999-08-05, Konami said 1999-07-13/1999-08-10 (Konami confirmed correct; both products corrected). A third product's claimed 1999-02-21 physical release (three cards on a since-deleted \"National Tournament prize cards\" record) turned out to be a misreading of a Yugipedia table's blank \"Physical card\" column for a video-game-only reward tier. Yugipedia therefore now governs a chronology claim only when cross-checked against konami-card-database-ja-print-history or konami-card-database-ja directly; it is not treated as self-sufficient evidence for any individual date in this ledger."
     },
     {
       "id": "yugipedia-series1-sets-navbox",
@@ -25,12 +25,32 @@
     {
       "id": "konami-card-database-ja",
       "kind": "official",
-      "title": "Konami Japanese official card database / product catalogue",
+      "title": "Konami Japanese official card database / product catalogue (product/collection list view)",
       "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja",
       "publisher": "Konami",
       "retrieved": "2026-08-28",
-      "used_for": "Primary origin of every certified product's jp_release_date and ja_database_id, as documented and aggregated by Yugipedia (see yugipedia-ocg-series1-set-pages). Directly spot-verified for Vol.1, Starter Box, Booster 3, Vol.4, and Booster 4 in the prior research gate (docs/research/yugi-kaiba-format-source-packet.json sources konami-card-history/konami-starter-box/konami-booster-3/konami-vol-4/konami-booster-4).",
-      "reliability_notes": "Official Konami database; this certification relies on it primarily through Yugipedia's aggregation rather than re-fetching every individual product page directly, which is disclosed rather than presented as independent primary verification."
+      "used_for": "Konami's own product/collection catalogue listing, browsable by release category (e.g. separating book-bundled promos from game-bundled promos). Directly consulted (not merely via Yugipedia's aggregation) during the 2026-08 recertification to independently corroborate the Duel Monsters II Game Guide 1/2 promo dates - it lists both under a distinct book-category grouping, separate from the unrelated video-game-bundled promo product, which is what the prior pass's dates had been conflated with. Also directly spot-verified for Vol.1, Starter Box, Booster 3, Vol.4, and Booster 4 in the original research gate (docs/research/yugi-kaiba-format-source-packet.json sources konami-card-history/konami-starter-box/konami-booster-3/konami-vol-4/konami-booster-4).",
+      "reliability_notes": "Official Konami database. This is the aggregate product/collection LIST page, distinct from konami-card-database-ja-print-history's per-card print-history pages - the two are independent views of the same underlying database and are cited together where both were checked. As of 2026-08 this source is directly consulted for chronology-sensitive products rather than relied on solely through Yugipedia's aggregation."
+    },
+    {
+      "id": "konami-card-database-ja-print-history",
+      "kind": "official",
+      "title": "Konami Japanese official card database - individual card print-history pages",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&request_locale=ja",
+      "publisher": "Konami",
+      "retrieved": "2026-08-28",
+      "used_for": "Per-card printing-history tables (one row per pack/product the card was printed in, each with its own product id and exact YYYY-MM-DD date) on each card's own detail page (`card_search.action?ope=2&cid=<id>`). Konami's database has no dedicated \"product landing page\" bearing its own stated release date; a product-level date is reconstructed by cross-checking 2+ of its cards' own print-history rows for agreement on the same product id and date. Used during the 2026-08 recertification to independently re-verify all 19 remaining certified ocg-jp products directly (not via Yugipedia), and to discover/confirm the corrected Game Guide 1/2 dates (1999-07-13, 1999-08-10) and the absence of any Konami-attested February 1999 printing for Millennium Shield/Megasonic Eye/Yamadron (their earliest Konami-attested printing is 1999-06-01).",
+      "reliability_notes": "Official Konami database, card-series/reconstructed evidence type (per this ledger's own evidence-type vocabulary - see tests/fixtures/ocg1999-official-chronology.json): strong for date/product-membership facts, but it is retrospective and can be silently incomplete for very small one-off giveaways (e.g. it has no queryable entry at all for the deleted, fictitious \"National Tournament prize cards (qualifying tier)\" product id a prior pass had assumed existed - absence here does not by itself prove a product never existed, only that this channel found nothing)."
+    },
+    {
+      "id": "openbd-shueisha-metadata",
+      "kind": "dataset",
+      "title": "openBD / National Diet Library Japanese book-publisher metadata (Shueisha ISBNs)",
+      "url": "https://api.openbd.jp/v1/get",
+      "publisher": "openBD (Japan Book Publishers Association) / National Diet Library",
+      "retrieved": "2026-08-28",
+      "used_for": "Independent, non-Yugipedia, non-Konami corroboration of the two Duel Monsters II: Dark Duel Stories strategy-guide books' publication months, by their Shueisha ISBNs (4-08-779026-6 for Game Guide 1, 4-08-779032-0 for Game Guide 2): openBD/NDL give July 1999 and August 1999 respectively (month-level precision), consistent with Konami's day-level dates of 1999-07-13 and 1999-08-10.",
+      "reliability_notes": "Structured Japanese publishing-industry bibliographic metadata, independent of both Konami's card database and Yugipedia; month-level precision only, so it corroborates rather than independently proves the exact day."
     },
     {
       "id": "ignis-lflists",

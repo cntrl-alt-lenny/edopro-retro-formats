@@ -13,8 +13,9 @@
       "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -221,7 +222,8 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "konami-card-database-ja",
+    "yugipedia-ocg-series1-set-pages"
   ]
 }

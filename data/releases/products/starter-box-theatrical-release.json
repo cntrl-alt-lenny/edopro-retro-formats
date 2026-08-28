@@ -10,11 +10,11 @@
       "territory": "ocg-jp",
       "date": "1999-03-06",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -221,8 +221,8 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "Limited theatrical-release variant of Starter Box, sold exclusively at cinemas showing the first Yu-Gi-Oh! movie; released 12 days before the general Starter Box. Roster overlaps but is not identical to the general release: 5 cards (Trial of Nightmare, The 13th Grave, Dark King of the Abyss, Turtle Tiger, Aqua Madoor) differ from the general Starter Box's 5 exclusive cards (Kageningen, Spiked Snail, Genin, Rock Ogre Grotto #2, King Fog)."
 }

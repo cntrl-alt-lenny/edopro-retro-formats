@@ -8,13 +8,14 @@
   "release_events": [
     {
       "territory": "ocg-jp",
-      "date": "1999-08-05",
+      "date": "1999-08-10",
       "precision": "day",
-      "status": "reported",
+      "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "openbd-shueisha-metadata"
       ]
     }
   ],
@@ -25,8 +26,10 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "konami-card-database-ja",
+    "openbd-shueisha-metadata",
+    "yugipedia-ocg-series1-set-pages"
   ],
-  "notes": "Single-card promo (\"Left Arm of the Forbidden One\") bundled with the second DM2 strategy guide book. NOTE: the prior research gate's chronology listed a \"V-Jump Books DM2 promo\" dated 1999-07-13; no such product was located under that description during this certification, and this Game Guide 2 promo (August 5, sourced directly to Yugipedia's product infobox) is the actual next dated Duel Monsters II guide-book promo after Game Guide 1. The corrected date is still before the 1999-08-25 cutoff, so this does not change pool membership."
+  "notes": "Single-card promo (\"Left Arm of the Forbidden One\") bundled with the second DM2 strategy guide book (Shueisha, ISBN 4-08-779032-0). CORRECTION (2026-08 recertification, superseding two prior incorrect notes): a prior pass dated this 1999-08-05, again apparently copying the unrelated video-game-bundled product's chronology rather than this book's own date; an even earlier pass's chronology had referenced a \"V-Jump Books DM2 promo\" dated 1999-07-13, which a subsequent pass could not locate and treated as a phantom entry - it was not a phantom, it was this exact promo, just misdated in that pass's own working notes as well (1999-07-13 is actually the correct date of the sibling Game Guide 1 promo, not this one; the two are easy to conflate since both are DM2 guide-book bonus cards). Independently re-verified directly against Konami's official card-level print-history for this exact card (passcode 7902349): its sole 1999 printing entry is dated 1999-08-10 - re-confirmed live on 2026-08-28 (no 1999-08-05 entry exists anywhere on that page). Corroborated by Konami's own product-catalogue listing page (distinct \"books\" category, separate from the game-bundled promo) and by independent Japanese publisher (openBD/National Diet Library) metadata for the ISBN, which places publication in August 1999 (month-level, consistent with the day-level Konami date). Status upgraded reported -> verified: 2+ independent official channels now agree. Pool impact: none - 1999-08-10 remains well before the 1999-08-25 cutoff, same as the prior, incorrect date."
 }

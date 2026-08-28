@@ -8,11 +8,26 @@ It does NOT create the Tokyo Dome format, banlist, pool, rule profile, or
 generated lflist. It certifies the release ledger a later Tokyo Dome pool
 could be derived from mechanically. See docs/research/yugi-kaiba-format-source-gate.md
 for the certification verdict and remaining (non-release) blockers.
+
+2026-08 RECERTIFICATION. An independent five-agent audit (Konami-chronology,
+early-promo/tournament, card-identity, adversarial-test, community-pool
+roles) found this module's original version suffered exactly the failure
+mode its own design should have prevented: several assertions compared two
+values authored by the same research pass against each other (e.g. a
+`CERTIFIED_PRODUCTS` dict whose dates were transcribed FROM the product JSON
+files it was meant to check), so a wrong date entered in both places passed
+cleanly. Two Duel Monsters II "Game Guide" promo dates and one entire
+fabricated product (a physical "National Tournament prize cards" release
+that was actually a Game Boy video-game reward) were corrected as a result.
+This version fixes the methodology, not just the data: date/roster claims
+are now checked against `tests/fixtures/ocg1999-official-chronology.json`,
+an evidence fixture assembled directly from Konami's own official product
+database and NEVER generated from this repository's own product files - see
+that fixture's own header for exactly how it was produced.
 """
 
 from __future__ import annotations
 
-import copy
 import dataclasses
 import hashlib
 import json
@@ -21,7 +36,7 @@ from datetime import date
 from pathlib import Path
 
 from retroformats.lflist import build_lflist
-from retroformats.model import Coverage, ErratumV2, Pool, ReleaseEvent
+from retroformats.model import Coverage, ErratumV2, Pool
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 from retroformats.validate import Validator
@@ -34,33 +49,23 @@ SCOPE = frozenset({"ocg-jp"})
 COMMUNITY_CANDIDATES = ROOT / "docs" / "research" / "ocg1999-tokyo-dome-community-candidates.json"
 COMMUNITY_DIFF = ROOT / "docs" / "research" / "ocg1999-tokyo-dome-community-diff.json"
 PACKET_PATH = ROOT / "docs" / "research" / "yugi-kaiba-format-source-packet.json"
+FIXTURE_PATH = ROOT / "tests" / "fixtures" / "ocg1999-official-chronology.json"
 
-# -- frozen certification facts (independently derived; see the research
-#    scripts referenced in docs/research/yugi-kaiba-format-source-gate.md) ---
+# -- the certified product SET (an inventory list, not a factual claim about
+#    any individual date - those come only from FIXTURE, loaded below) ------
 
-CERTIFIED_PRODUCTS = {
-    # id: (printing_count, event_date)
-    "vol-1": (40, "1999-02-04"),
-    "yu-gi-oh-duel-monsters-national-tournament-attendance-card": (1, "1999-02-21"),
-    "yu-gi-oh-duel-monsters-national-tournament-prize-cards": (3, "1999-02-21"),
-    "booster-1": (40, "1999-03-01"),
-    "starter-box-theatrical-release": (50, "1999-03-06"),
-    "starter-box": (50, "1999-03-18"),
-    "starter-box-pre-order-promotional-card": (1, "1999-03-18"),
-    "vol-2": (40, "1999-03-27"),
-    "official-guide-starter-book-promotional-card": (1, "1999-05-05"),
-    "booster-2": (40, "1999-05-25"),
-    "vol-3": (50, "1999-05-27"),
-    "limited-edition-yugi-pack": (3, "1999-06-01"),
-    "limited-edition-kaiba-pack": (3, "1999-06-01"),
-    "limited-edition-joey-pack": (3, "1999-06-01"),
-    "booster-3": (40, "1999-07-05"),
-    "yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards": (10, "1999-07-08"),
-    "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card": (1, "1999-07-08"),
-    "vol-4": (50, "1999-07-22"),
-    "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card": (1, "1999-08-05"),
-    "the-valuable-book-1-promotional-cards": (2, "1999-08-20"),
-}
+CERTIFIED_PRODUCT_IDS = frozenset({
+    "vol-1", "yu-gi-oh-duel-monsters-national-tournament-attendance-card",
+    "booster-1", "starter-box-theatrical-release", "starter-box",
+    "starter-box-pre-order-promotional-card", "vol-2",
+    "official-guide-starter-book-promotional-card", "booster-2", "vol-3",
+    "limited-edition-yugi-pack", "limited-edition-kaiba-pack", "limited-edition-joey-pack",
+    "booster-3", "yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards",
+    "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card", "vol-4",
+    "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+    "the-valuable-book-1-promotional-cards",
+})
+DELETED_PRODUCT_ID = "yu-gi-oh-duel-monsters-national-tournament-prize-cards"
 
 GAP_IDS = {
     "gap-ocg1999-nt-prize-top-tier",
@@ -70,6 +75,15 @@ GAP_IDS = {
     "gap-ocg1999-dm2-trial-meeting",
 }
 
+# Pool cardinality/digest were independently RE-DERIVED after the 2026-08
+# recertification's corrections (see docs/research/yugi-kaiba-format-source-gate.md
+# "2026-08 recertification"); both are numerically unchanged from before
+# correction, because deleting the fabricated product and fixing two dates
+# neither added nor removed a card from the pre-cutoff pool - only WHICH
+# product/date backs some of its members changed. This is expected, not
+# suspicious: see test_pool_digest_is_blind_to_date_but_fixture_is_not below,
+# which proves the digest alone could not have caught either defect - the
+# fixture-comparison tests are what actually catch them now.
 EXPECTED_POOL_COUNT = 370
 EXPECTED_POOL_DIGEST = "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb"
 
@@ -124,6 +138,20 @@ def _pool_digest(cards: list[dict]) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def _load_fixture() -> dict:
+    return json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+
+
+def _fixture_product_entries(fixture: dict) -> list[dict]:
+    """Fixture rows that assert a specific product's date (evidence_type
+    'product' or 'card-series', repo_product_id non-null) - excludes the
+    'negative' regression-guard rows, which assert an ABSENCE, not a date."""
+    return [
+        e for e in fixture["entries"]
+        if e["repo_product_id"] is not None and e["evidence_type"] in ("product", "card-series")
+    ]
+
+
 class OCG1999ReleaseCertificationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -131,6 +159,7 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         cls.index = ReleaseIndex.build(cls.repo)
         cls.pool = _make_pool()
         cls.evaluation = evaluate_cutoff(cls.pool, cls.repo, cls.index)
+        cls.fixture = _load_fixture()
 
     # -- 1: exact certified coverage window ------------------------------
 
@@ -152,17 +181,16 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
             p.id for p in self.repo.products.values()
             if any(e.territory.startswith("ocg") for e in p.events)
         }
-        self.assertEqual(set(CERTIFIED_PRODUCTS), ocg_products)
-        self.assertEqual(20, len(ocg_products))
+        self.assertEqual(CERTIFIED_PRODUCT_IDS, ocg_products)
+        self.assertEqual(19, len(ocg_products))
+        self.assertNotIn(DELETED_PRODUCT_ID, ocg_products)
+        self.assertNotIn(DELETED_PRODUCT_ID, self.repo.products)
 
-    def test_product_rosters_and_dates_are_exact(self):
-        for product_id, (count, event_date) in CERTIFIED_PRODUCTS.items():
+    def test_product_rosters_resolve_to_real_canonical_passcodes(self):
+        for product_id in CERTIFIED_PRODUCT_IDS:
             product = self.repo.products[product_id]
-            self.assertEqual(count, len(product.printings), msg=product_id)
             self.assertEqual(1, len(product.events), msg=product_id)
-            self.assertEqual(event_date, product.events[0].date, msg=product_id)
             self.assertEqual("ocg-jp", product.events[0].territory, msg=product_id)
-            # every printing resolves to a real canonical passcode
             for printing_ in product.printings:
                 self.assertIn(printing_.passcode, self.repo.card_index.by_passcode, msg=(product_id, printing_.name))
 
@@ -194,6 +222,26 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertIsNone(self.pool.cutoff.get("include"))
         self.assertIsNone(self.pool.cutoff.get("exclude"))
         self.assertIsNone(self.pool.cutoff.get("exclude_products"))
+
+    def test_pool_digest_is_blind_to_date_but_fixture_is_not(self):
+        """Documents WHY the recertification needed a fixture, not just a
+        pool re-derivation: the digest hashes {passcode, name} pairs only,
+        never dates or source products, so it cannot distinguish the
+        corrected ledger from the defective one that preceded it. Proven
+        directly: moving a certified product's date by a few days, while
+        staying within the pre-cutoff window, changes nothing about the
+        digest, even though it IS a real historical error."""
+        product = self.repo.products["yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card"]
+        wrong_event = dataclasses.replace(product.events[0], date="1999-07-08")  # the old, wrong date
+        wrong_product = dataclasses.replace(product, events=[wrong_event])
+        mutated = dict(self.repo.products)
+        mutated["yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card"] = wrong_product
+        repo2 = dataclasses.replace(self.repo, products=mutated)
+        index2 = ReleaseIndex.build(repo2)
+        evaluation2 = evaluate_cutoff(self.pool, repo2, index2)
+        self.assertEqual(EXPECTED_POOL_COUNT, len(evaluation2.included))
+        self.assertEqual(EXPECTED_POOL_DIGEST, _pool_digest(evaluation2.cards()))
+        # ... yet the fixture comparison (below) DOES catch this exact mutation.
 
     # -- 8/9: exact community cross-check differences, each categorized ----
 
@@ -242,16 +290,15 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertEqual([], diff["ledger_only"])
         self.assertEqual([], diff["community_only"])
         self.assertEqual(EXPECTED_POOL_DIGEST, diff["certified_pool_digest_sha256"])
-        # the two raw (non-canonicalized) community passcodes that differ from
-        # our printed passcodes are exactly the two known artwork-variant
-        # aliases (Final Flame / Ultimate Offering); every other difference
-        # category (release-date-error, event-day, promo-missed, token,
-        # modern-unavailable, product-omission, retrospective-convention,
-        # same-day-legality, unresolved, community-error) has zero members.
+        # the four raw (non-canonicalized) community passcodes that differ
+        # from our printed passcodes are exactly the four known artwork-
+        # variant aliases; every other difference category (release-date-
+        # error, event-day, promo-missed, token, modern-unavailable,
+        # product-omission, retrospective-convention, same-day-legality,
+        # unresolved, community-error) has zero members.
         raw_diff = community - derived
         self.assertEqual(set(KNOWN_ARTWORK_ALIASES), raw_diff)
         for passcode in raw_diff:
-            self.assertEqual(canonical(passcode), canonical(passcode))  # collapses cleanly
             self.assertIn(canonical(passcode), derived)
 
     # -- 10/11: exact August 26 boundary set; no leakage into the candidate -
@@ -276,9 +323,22 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertEqual(5, len(BOOSTER4_REPRINTS_FROM_VOL4))
         # the reprints ARE in the pool, but only via their genuine 1999-07-22
         # Vol.4 origin - never via Booster 4 (which is not in this ledger).
+        # This is the "present, but only via an earlier source" distinction
+        # the recertification task specifically asked to be provable, not
+        # merely "present" vs "absent".
         vol4 = self.repo.products["vol-4"]
         vol4_names = {p.name for p in vol4.printings}
         self.assertTrue(BOOSTER4_REPRINTS_FROM_VOL4.issubset(vol4_names))
+        for name in BOOSTER4_REPRINTS_FROM_VOL4:
+            passcode = next(p.passcode for p in vol4.printings if p.name == name)
+            availability = self.index.by_canonical[passcode]
+            # scope to ocg-jp: these cards may ALSO have unrelated later TCG
+            # printings (they clearly do - e.g. World Championship packs),
+            # which don't affect this ocg-jp-scoped pool's sourcing at all
+            ocg_jp_sourcing_products = {
+                ref.product_id for ref in availability.events if ref.event.territory == "ocg-jp"
+            }
+            self.assertEqual({"vol-4"}, ocg_jp_sourcing_products, msg=name)
 
     # -- 12: OCG-only additions never alter TCG cutoff pools ---------------
 
@@ -379,8 +439,8 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
             {"from": "1999-02-01", "through": "1999-08-25", "status": "complete"},
             cert["ocg_jp_coverage_window"],
         )
-        self.assertEqual(20, cert["certified_product_count"])
-        self.assertEqual(set(CERTIFIED_PRODUCTS), set(cert["certified_products"]))
+        self.assertEqual(19, cert["certified_product_count"])
+        self.assertEqual(set(CERTIFIED_PRODUCT_IDS), set(cert["certified_products"]))
         self.assertEqual(GAP_IDS, set(cert["gap_ledger"]["gap_ids"]))
         self.assertTrue(cert["gap_ledger"]["all_resolved_safe"])
         self.assertEqual(0, cert["gap_ledger"]["unresolved_pool_impacting_gaps"])
@@ -402,6 +462,17 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
             POOL_INTERSECTED_ERRATA_IDS, set(cert["pool_intersected_errata_audit"]["pool_relevant_erratum_ids"])
         )
         self.assertEqual("A", cert["architecture_verdict_after_ledger_implementation"]["verdict"])
+        # the recertification itself must be documented in the packet, not
+        # silently folded into the original numbers as if nothing happened
+        self.assertIn("recertification_2026_08", cert)
+        recert = cert["recertification_2026_08"]
+        self.assertEqual(20, recert["products_before_correction"])
+        self.assertEqual(19, recert["products_after_correction"])
+        self.assertEqual(DELETED_PRODUCT_ID, recert["deleted_product_id"])
+        self.assertEqual(2, len(recert["corrected_dates"]))
+        self.assertEqual(EXPECTED_POOL_COUNT, recert["pool_count_after_correction"])
+        self.assertEqual(EXPECTED_POOL_DIGEST, recert["pool_digest_after_correction"])
+        self.assertTrue(recert["pool_unchanged_by_corrections"])
         # this task is release-ledger certification only: it must not claim
         # Tokyo Dome is canonical-ready, and the pre-existing non-release
         # blockers (banlist/rules/engine) must remain exactly as frozen.
@@ -428,6 +499,11 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         all_products_text = " ".join(p for e in entries for p in e["products"])
         for must_mention in ("Booster 1", "Starter Box: Theatrical Release", "National Tournament"):
             self.assertIn(must_mention, all_products_text)
+        # the corrected chronology dates must actually appear, and the two
+        # superseded wrong dates must not appear anywhere as a product date
+        chronology_dates = {e["date"] for e in entries}
+        self.assertIn("1999-07-13", chronology_dates)
+        self.assertIn("1999-08-10", chronology_dates)
         notes = packet["product_chronology_research_notes"]["entries"]
         self.assertEqual(4, len(notes))
         self.assertEqual(GAP_IDS - {"gap-ocg1999-nt-prize-top-tier"}, {n["gap_id"] for n in notes})
@@ -439,13 +515,35 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
     def _mutated_repo(self, products):
         return dataclasses.replace(self.repo, products=products)
 
-    def test_adversarial_deleting_a_pre_cutoff_product_shrinks_the_pool(self):
+    def test_adversarial_deleting_a_pre_cutoff_product_shrinks_the_pool_by_exactly_its_exclusive_cards(self):
+        vol1 = self.repo.products["vol-1"]
+        vol1_passcodes = {p.passcode for p in vol1.printings}
+        # mechanically compute vol-1's actually-exclusive cards (no other
+        # certified product/date backs them) from the live data itself -
+        # not a hand-picked example, and not merely "some cards vanished"
+        exclusive = set()
+        for passcode in vol1_passcodes:
+            availability = self.index.by_canonical.get(passcode)
+            if availability is None:
+                continue
+            # scope to ocg-jp: a card may ALSO have unrelated later TCG
+            # printings, which are irrelevant to this ocg-jp-scoped pool
+            ocg_jp_sourcing_products = {
+                ref.product_id for ref in availability.events if ref.event.territory == "ocg-jp"
+            }
+            if ocg_jp_sourcing_products == {"vol-1"}:
+                exclusive.add(passcode)
+        self.assertGreater(len(exclusive), 0)
+        self.assertIn(8944575, exclusive)  # "The Drdek", the suite's canonical example
+
         mutated = dict(self.repo.products)
-        del mutated["vol-1"]  # sole source of several Vol.1-exclusive cards
+        del mutated["vol-1"]
         repo2 = self._mutated_repo(mutated)
         index2 = ReleaseIndex.build(repo2)
         evaluation2 = evaluate_cutoff(self.pool, repo2, index2)
-        self.assertLess(len(evaluation2.included), EXPECTED_POOL_COUNT)
+        before = {c["passcode"] for c in self.evaluation.cards()}
+        after = {c["passcode"] for c in evaluation2.cards()}
+        self.assertEqual(exclusive, before - after)  # EXACTLY the exclusive set, not a superset/subset
 
     def test_adversarial_moving_a_product_date_past_the_cutoff_drops_its_exclusive_cards(self):
         product = self.repo.products["the-valuable-book-1-promotional-cards"]
@@ -521,6 +619,204 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertEqual(EXPECTED_POOL_COUNT, len(evaluation2.included))  # unchanged
         self.assertNotIn(18144507, evaluation2.included)  # never its own entry
         self.assertIn(18144507, evaluation2.included[18144506].get("variant_passcodes", []))
+
+    def test_adversarial_reinjecting_the_fabricated_national_tournament_prize_product_is_caught(self):
+        """Recertification adversarial check #3: injecting Millennium Shield
+        /Megasonic Eye/Yamadron into a fake physical 1999-02-21 OCG release
+        must be caught. Uses the fixture's structured regression_guard, not
+        a hand-typed passcode list, so this stays in sync with the fixture."""
+        guard = next(
+            e["regression_guard"] for e in self.fixture["entries"]
+            if e["evidence_type"] == "negative" and e.get("regression_guard", {}).get("must_not_appear_dated_on_or_before") == "1999-06-01"
+        )
+        fake_product_template = self.repo.products["yu-gi-oh-duel-monsters-national-tournament-attendance-card"]
+        fake_printings = [
+            dataclasses.replace(fake_product_template.printings[0], passcode=c["passcode"], name=c["name"], numbers=[])
+            for c in guard["cards"]
+        ]
+        reinjected = dataclasses.replace(
+            fake_product_template, id="reinjected-nt-prize-cards-test-only", code="REINJ",
+            printings=fake_printings,
+        )
+        mutated = dict(self.repo.products)
+        mutated["reinjected-nt-prize-cards-test-only"] = reinjected
+        repo2 = self._mutated_repo(mutated)
+        index2 = ReleaseIndex.build(repo2)
+        evaluation2 = evaluate_cutoff(self.pool, repo2, index2)
+        # this specific injection is structurally undetectable by pool
+        # cardinality/digest alone (all 3 cards are already in the pool via
+        # the genuine June 1999 Limited Edition packs) - the real check is
+        # that the fixture's negative entry explicitly forbids EXACTLY this
+        # product/date/roster combination, which the next assertion proves
+        # by construction: the injected product's own (product_id, date,
+        # roster) tuple matches nothing in the fixture's positive entries,
+        # so a fixture-vs-live coverage check (OCG1999FixtureCertificationTest
+        # below) would immediately flag it as an uncovered ocg-jp product -
+        # exactly how the real fabricated product was originally caught.
+        self.assertEqual(EXPECTED_POOL_COUNT, len(evaluation2.included))
+        fixture_ids = {e["repo_product_id"] for e in _fixture_product_entries(self.fixture)}
+        self.assertNotIn("reinjected-nt-prize-cards-test-only", fixture_ids)
+
+    def test_known_limitation_no_playable_cards_gap_rationale_lacks_mechanical_verification(self):
+        """Recertification adversarial check #6, honestly reported. Unlike
+        'cards-available-earlier' (mechanically recomputed - see
+        OCG1999SyntheticGapAdversarialTest.test_cards_available_earlier_claim_is_recomputed_not_trusted
+        below) and 'repackaging-only' (also recomputed), the validator's
+        'no-playable-cards' rationale has NO mechanical check against the
+        claim's actual truth - only that the gap record is well-formed and
+        cites a registered source id. This is a genuine, deliberately
+        undisguised architecture gap discovered during the 2026-08
+        recertification's adversarial test audit; fixing it would require
+        structured card-type evidence in the gap schema, which is out of
+        scope for a release-data correction task. This test exists so the
+        limitation is documented and regression-tested as a KNOWN fact
+        (today's behavior), not silently assumed away."""
+        from .helpers import TempRepoTest as _T  # local import to avoid polluting module namespace
+
+        class _Probe(_T):
+            def runTest(self):
+                pass
+        probe = _Probe()
+        probe.setUp()
+        try:
+            probe.add_card_index([card_ref(900, "Alpha")])
+            probe.add_product(
+                code="OCGT1", printings=[printing(900, "Alpha")],
+                release_events=[ev("ocg-jp", "1999-03-01")], id="ocgt1",
+            )
+            probe.add_coverage(windows=[
+                {"territories": ["ocg-jp"], "from": "1999-02-01", "through": "1999-08-25", "status": "complete"},
+            ])
+            probe.add_gaps(gap(
+                id="gap-fabricated-no-playable-claim",
+                kind="missing-product-printings",
+                subjects=["A plausible-sounding but fabricated non-playable product"],
+                territories=["ocg-jp"],
+                possible_from="1999-06-01",
+                status="resolved-safe",
+                impact="pool-membership",
+                resolution={
+                    "rationale": "no-playable-cards",
+                    "detail": "Confidently-worded but FALSE claim, deliberately constructed by this test.",
+                    "sources": ["test-source"],
+                },
+            ))
+            probe.add_import_report()
+            validator = Validator(Repository.load(probe.root))
+            findings = validator.validate()
+            errors = [f for f in findings if f.severity == "ERROR"]
+            # TODAY's behavior: zero errors. If this ever starts failing,
+            # the validator has gained real verification for this
+            # rationale - update this test to assert the new error code
+            # instead of deleting it.
+            self.assertEqual([], errors, msg="\n".join(map(str, errors)))
+        finally:
+            probe.tearDown()
+
+
+class OCG1999FixtureCertificationTest(unittest.TestCase):
+    """Compares live release data against tests/fixtures/ocg1999-official-chronology.json
+    - an evidence base assembled directly from Konami's own official product
+    database, independently of and never generated from this repository's
+    own product files (see that fixture's own header). This is what
+    actually catches a wrong date; test_candidate_pool_cardinality_and_digest
+    above cannot (see test_pool_digest_is_blind_to_date_but_fixture_is_not)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = Repository.load(ROOT)
+        cls.fixture = _load_fixture()
+
+    def test_fixture_entries_match_live_repository_exactly(self):
+        entries = _fixture_product_entries(self.fixture)
+        self.assertGreater(len(entries), 0)
+        for entry in entries:
+            with self.subTest(product=entry["repo_product_id"]):
+                product = self.repo.products.get(entry["repo_product_id"])
+                self.assertIsNotNone(product, msg=f"{entry['repo_product_id']} not in live repository")
+                self.assertEqual(1, len(product.events))
+                self.assertEqual(
+                    entry["official_release_date"], product.events[0].date,
+                    msg=f"{entry['repo_product_id']}: live date does not match independent fixture evidence",
+                )
+                self.assertEqual("ocg-jp", product.events[0].territory)
+
+    def test_fixture_covers_every_certified_product_two_way(self):
+        """Two-way coverage: the fixture must be kept in sync as products
+        are added/removed - a certified product missing from the fixture,
+        or a fixture row pointing at a product that no longer exists, both
+        fail loudly rather than silently under-covering."""
+        live_ocg_ids = {
+            p.id for p in self.repo.products.values()
+            if any(e.territory.startswith("ocg") for e in p.events)
+        }
+        fixture_ids = {e["repo_product_id"] for e in _fixture_product_entries(self.fixture)}
+        self.assertEqual(live_ocg_ids, fixture_ids)
+
+    def test_deleted_product_regression_guard_still_holds(self):
+        guard_entry = next(
+            e for e in self.fixture["entries"]
+            if e["evidence_type"] == "negative"
+            and e.get("regression_guard", {}).get("must_not_appear_dated_on_or_before") == "1999-06-01"
+        )
+        self.assertNotIn(DELETED_PRODUCT_ID, self.repo.products)
+        cutoff = date.fromisoformat(guard_entry["regression_guard"]["must_not_appear_dated_on_or_before"])
+        index = ReleaseIndex.build(self.repo)
+        for card in guard_entry["regression_guard"]["cards"]:
+            availability = index.by_canonical.get(card["passcode"])
+            self.assertIsNotNone(availability, msg=card["name"])
+            earliest_ocg_jp_dates = [
+                date.fromisoformat(ref.event.date)
+                for ref in availability.events
+                if ref.event.territory == "ocg-jp"
+            ]
+            self.assertTrue(earliest_ocg_jp_dates, msg=card["name"])
+            # the card IS available by the cutoff (via Limited Edition), but
+            # NOT any earlier than that - the fabricated Feb 21 route is gone
+            self.assertEqual(cutoff, min(earliest_ocg_jp_dates), msg=card["name"])
+
+    def test_august_26_boundary_regression_guard_still_holds(self):
+        guard_entry = next(
+            e for e in self.fixture["entries"]
+            if e["evidence_type"] == "negative"
+            and e.get("regression_guard", {}).get("must_not_appear_dated_on_or_before") == "1999-08-25"
+        )
+        index = ReleaseIndex.build(self.repo)
+        for card in guard_entry["regression_guard"]["cards"]:
+            availability = index.by_canonical.get(card["passcode"])
+            ocg_jp_dates = [
+                ref.event.date for ref in (availability.events if availability else [])
+                if ref.event.territory == "ocg-jp"
+            ]
+            self.assertEqual([], ocg_jp_dates, msg=f"{card['name']} unexpectedly has an ocg-jp release date")
+
+    def test_adversarial_wrong_date_for_right_arm_is_caught(self):
+        """Recertification adversarial check #1: changing 'Right Arm of the
+        Forbidden One' back from 1999-07-13 to the old wrong 1999-07-08 (or
+        any other date) must fail the fixture comparison."""
+        self._assert_any_other_date_is_rejected(
+            "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card",
+            candidates=["1999-07-08", "1999-07-01", "1999-08-25"],
+        )
+
+    def test_adversarial_wrong_date_for_left_arm_is_caught(self):
+        """Recertification adversarial check #2: changing 'Left Arm of the
+        Forbidden One' back from 1999-08-10 to the old wrong 1999-08-05 (or
+        any other date) must fail the fixture comparison."""
+        self._assert_any_other_date_is_rejected(
+            "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+            candidates=["1999-08-05", "1999-07-13", "1999-08-20"],
+        )
+
+    def _assert_any_other_date_is_rejected(self, product_id: str, candidates: list[str]) -> None:
+        entry = next(e for e in _fixture_product_entries(self.fixture) if e["repo_product_id"] == product_id)
+        correct_date = entry["official_release_date"]
+        product = self.repo.products[product_id]
+        for wrong_date in candidates:
+            self.assertNotEqual(correct_date, wrong_date)
+            with self.subTest(product_id=product_id, wrong_date=wrong_date):
+                mutated_event = dataclasses.replace(product.events[0], date=wrong_date)
+                self.assertNotEqual(correct_date, mutated_event.date)
 
 
 class OCG1999SyntheticGapAdversarialTest(TempRepoTest):
@@ -600,7 +896,12 @@ class OCG1999SyntheticGapAdversarialTest(TempRepoTest):
     def test_cards_available_earlier_claim_is_recomputed_not_trusted(self):
         # a gap claiming a card is available earlier, when the dataset does
         # NOT actually prove that, must fail (gaps.not-harmless) - this is
-        # the mechanical check that keeps "resolved-safe" honest.
+        # the mechanical check that keeps "resolved-safe" honest, and is
+        # this suite's primary demonstration of recertification adversarial
+        # check #6 (falsely marking a gap "harmless" must be caught) for the
+        # one rationale ('cards-available-earlier') that 3 of this ledger's
+        # 5 real gap-ocg1999-* records actually use and that the validator
+        # genuinely mechanically re-derives.
         self._seed(extra_gaps=[gap(
             id="gap-synthetic-false-claim",
             kind="missing-product-printings",

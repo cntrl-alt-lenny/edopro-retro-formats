@@ -216,15 +216,18 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # part of its "blocking" verdict. The 2026-08 release-ledger certification
         # (see test_ocg1999_release_certification.py) has since built a real, sourced
         # ocg-jp product ledger through 1999-08-25 - so this assertion now checks that
-        # the ledger exists and is exactly the certified 20 products, not that it is
-        # absent. Canonical Tokyo Dome artifacts remain absent (checked below): the
-        # release-ledger blocker being resolved does not by itself make the format
-        # canonical-ready (banlist/rules/engine blockers remain, per blocker_ledger).
+        # the ledger exists and is exactly the certified 19 products, not that it is
+        # absent (19, not 20: a 2026-08 recertification pass found and deleted one
+        # fabricated product - see docs/research/yugi-kaiba-format-source-gate.md
+        # "2026-08 recertification"). Canonical Tokyo Dome artifacts remain absent
+        # (checked below): the release-ledger blocker being resolved does not by
+        # itself make the format canonical-ready (banlist/rules/engine blockers
+        # remain, per blocker_ledger).
         ocg_products = {
             product.id for product in self.repo.products.values()
             if any(event.territory.startswith("ocg") for event in product.events)
         }
-        self.assertEqual(20, len(ocg_products))
+        self.assertEqual(19, len(ocg_products))
         self.assertTrue(all(product_id in self.repo.products for product_id in ocg_products))
         self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.repo.formats))
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)

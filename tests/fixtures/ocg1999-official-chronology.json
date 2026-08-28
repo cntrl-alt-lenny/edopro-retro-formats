@@ -1,0 +1,333 @@
+{
+  "$comment_do_not_generate_from_repo": "This fixture MUST NOT be produced by reading data/releases/products/*.json. Every 'official_release_date' below was transcribed from Konami's own official Yu-Gi-Oh! Neuron card database product/collection listing (a single, un-paginated, chronologically-sorted page enumerating every OCG product from today back to Vol.1) fetched directly on 2026-08-28, independently of and prior to reconciling against the repository's product JSON files. The repo product id in each row is only a foreign key so the comparison test knows what to check it against - it is never the source of the date value next to it. This file supersedes an earlier partial version (5 of 19 rows, evidence_type 'product' for 3 rows including both Game Guide discrepancies) authored during the same 2026-08 recertification by an independent research agent using the identical primary source and method; this version extends that agent's findings to full 19-row coverage from the same single fetch, which happens to cover every remaining row directly (no card-series reconstruction was needed).",
+  "purpose": "Independent (non-repo-derived) evidence base for the ocg-jp 1999 pre-Tokyo-Dome release ledger, used ONLY to check the live repository's product dates against real external evidence. Covers all 19 products certified after the 2026-08 recertification, plus one deleted-product entry (negative evidence) for adversarial regression coverage.",
+  "schema_version": "1.1.0",
+  "retrieved": "2026-08-28",
+  "primary_source": {
+    "id": "konami-yugiohdb-product-list",
+    "title": "Yu-Gi-Oh! Neuron official card game card database - 収録 (\"Products/Collections\") listing, sorted 公開日の新しい順 (newest release date first)",
+    "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja",
+    "publisher": "Konami",
+    "kind": "official-product-index",
+    "notes": "A single server-rendered page (no pagination observed) enumerating every OCG product/distribution from the current date back to the OCG's first product, Vol.1 (1999/02/04) - confirmed by reading to the literal end of the DOM text content and finding Vol.1 as the last entry, immediately preceded by the 1999/02/21 National Tournament attendance-card row and nothing else in between. Each row is a <div class=\"time\">YYYY/MM/DD</div> + <div class=\"catergory\">【category】 fiscal-year-range</div> + <div class=\"main\"><p>official product/distribution name (Japanese)</p></div> block. This is DIFFERENT from, and independent of, Yugipedia and the ignis-babelcdb import pipeline the repository's own products use as their primary sources - it is Konami's own product catalogue, not a wiki's transcription of it. Verified reproducible: fetched independently by two different research passes (an automated agent and a direct curl re-fetch) on the same day, byte-identical results for every 1999 row."
+  },
+  "methodology": "The Konami product-list page was fetched directly (curl, User-Agent set, request_locale=ja) on 2026-08-28; every <div class=\"time\">1999/...</div> block and its immediately following category/name text were extracted verbatim. Every one of the ledger's 19 currently-certified ocg-jp products, plus the one deleted product, has a directly corresponding row on this single page - no card-level print-history reconstruction was needed for this fixture (evidence_type 'product' throughout). Extending this fixture for a NEW product means re-fetching this same page (or, if a product does not appear on it, falling back to card-level print-history reconstruction per the 'card-series' evidence type) - never copying data/releases/products/<id>.json's own release_events into this file.",
+  "evidence_type_definitions": {
+    "product": "A single Konami-catalogue row (収録 entry) maps 1:1 onto this repo product - the strongest evidence tier used throughout this fixture.",
+    "card-series": "No single dedicated product-level Konami row exists; the date would be reconstructed from that product's individual cards' own printing-history entries in Konami's card-level database instead (not needed for any row in this fixture's current 19-product coverage).",
+    "secondary": "No direct official Konami evidence (product-level or card-level) exists; the date is carried over from a secondary aggregator (e.g. Yugipedia) with that aggregator's own reliability caveats attached in 'notes'.",
+    "negative": "Konami's official product catalogue was checked and found to have NO row for the claimed product/date - used for the one entry documenting a deleted, fabricated product."
+  },
+  "entries": [
+    {
+      "repo_product_id": "vol-1",
+      "konami_product_name_ja": "Vol.1",
+      "konami_category": "基本ブースターパック",
+      "official_release_date": "1999-02-04",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Last (oldest) row on the page: '1999/02/04 【基本ブースターパック】 Vol.1'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date. Literally the last/oldest row on Konami's own chronological listing, independently corroborating 'Vol.1 is the first OCG product'."
+    },
+    {
+      "repo_product_id": "yu-gi-oh-duel-monsters-national-tournament-attendance-card",
+      "konami_product_name_ja": "遊戯王デュエルモンスターズ 全国大会トーナメント 入場者特典カード",
+      "konami_category": "大会",
+      "official_release_date": "1999-02-21",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/02/21 【大会】 遊戯王デュエルモンスターズ 全国大会トーナメント 入場者特典カード' (National Tournament admission/attendance bonus card), between Booster 1 (1999/03/01) and Vol.1 (1999/02/04)."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date. IMPORTANT: this is the ONLY 1999-02-21 row on Konami's entire product listing. No separate 'prize cards' product row exists anywhere on the page - see the negative entry below."
+    },
+    {
+      "repo_product_id": null,
+      "konami_product_name_ja": null,
+      "konami_category": null,
+      "official_release_date": null,
+      "evidence_type": "negative",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Entire page scanned for any 1999-02 row besides the attendance-card row above; none found."
+      },
+      "notes": "DELETED-PRODUCT REGRESSION ENTRY. A prior (pre-recertification) pass authored a product data/releases/products/yu-gi-oh-duel-monsters-national-tournament-prize-cards.json claiming a physical ocg-jp release on 1999-02-21 of three cards: Millennium Shield, Megasonic Eye, Yamadron. Konami's official product catalogue has NO row for any such product - confirmed both by this fixture's full-page scan and, separately, by each of those three cards' own individual Konami card-level print-history (checked directly: none records any printing earlier than 1999-06-01). The claim traced to a misread Yugipedia table: 'National Tournament prize cards' lists results by placement tier in two columns, 'Physical card' and 'Video game card'; the Qualifying tier's Physical-card cell is BLANK, and its Video-game-card cell (Kanan the Swordmistress, Millennium Shield, Megasonic Eye, Yamadron) links to Yu-Gi-Oh! Duel Monsters (Game Boy, 1998-12-16, itself Non-OCG) hidden-card unlock pages using a distinct {{DM1 card}} template with no passcode field. Kanan alone is ALSO physically real, but via the wholly separate, correctly-sourced yu-gi-oh-duel-monsters-national-tournament-attendance-card product. The fabricated product has been deleted; Millennium Shield/Megasonic Eye/Yamadron remain correctly in the certified pool via their genuine 1999-06-01 Limited Edition pack release (see the three limited-edition-*-pack entries below), so this correction changes zero pool membership. This entry exists so a future regression - re-adding a 1999-02-21 physical product for these three cards - has something concrete to be checked against and fail.",
+      "regression_guard": {
+        "must_not_appear_dated_on_or_before": "1999-06-01",
+        "in_territory": "ocg-jp",
+        "cards": [
+          {
+            "passcode": 32012841,
+            "name": "Millennium Shield"
+          },
+          {
+            "passcode": 7562372,
+            "name": "Megasonic Eye"
+          },
+          {
+            "passcode": 70345785,
+            "name": "Yamadron"
+          }
+        ],
+        "note": "These 3 cards' genuine earliest ocg-jp availability is 1999-06-01 (Limited Edition packs). Any product dating them EARLIER than 1999-06-01 reintroduces the fabricated-release defect this entry documents."
+      }
+    },
+    {
+      "repo_product_id": "booster-1",
+      "konami_product_name_ja": "Booster 1",
+      "konami_category": "その他ブースターパック / その他1",
+      "official_release_date": "1999-03-01",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/03/01 【その他ブースターパック】 Booster 1'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "starter-box-theatrical-release",
+      "konami_product_name_ja": "STARTER BOX 劇場限定版",
+      "konami_category": "商品同梱",
+      "official_release_date": "1999-03-06",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/03/06 【商品同梱】 STARTER BOX 劇場限定版' (theatrical-exclusive edition)."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "starter-box",
+      "konami_product_name_ja": "STARTER BOX",
+      "konami_category": "商品同梱",
+      "official_release_date": "1999-03-18",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/03/18 【商品同梱】 STARTER BOX'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "starter-box-pre-order-promotional-card",
+      "konami_product_name_ja": "STARTER BOX 予約特典カード",
+      "konami_category": "商品同梱",
+      "official_release_date": "1999-03-18",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/03/18 【商品同梱】 STARTER BOX 予約特典カード' (pre-order bonus card), immediately following the general STARTER BOX row."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "vol-2",
+      "konami_product_name_ja": "Vol.2",
+      "konami_category": "基本ブースターパック",
+      "official_release_date": "1999-03-27",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/03/27 【基本ブースターパック】 Vol.2'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "official-guide-starter-book-promotional-card",
+      "konami_product_name_ja": "遊戯王 オフィシャルカードゲーム デュエルモンスターズ 公式ガイドスターターブック",
+      "konami_category": "書籍",
+      "official_release_date": "1999-05-05",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/05/05 【書籍】 遊戯王 オフィシャルカードゲーム デュエルモンスターズ 公式ガイドスターターブック ...' (Official Guide Starter Book)."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "booster-2",
+      "konami_product_name_ja": "Booster 2",
+      "konami_category": "その他ブースターパック / その他1",
+      "official_release_date": "1999-05-25",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/05/25 【その他ブースターパック】 Booster 2'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "vol-3",
+      "konami_product_name_ja": "Vol.3",
+      "konami_category": "基本ブースターパック",
+      "official_release_date": "1999-05-27",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/05/27 【基本ブースターパック】 Vol.3'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "limited-edition-yugi-pack",
+      "konami_product_name_ja": "LIMITED EDITION － 遂戲パック －",
+      "konami_category": "書籍",
+      "official_release_date": "1999-06-01",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/06/01 【書籍】 LIMITED EDITION － 遂戲パック －'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date. Three LIMITED EDITION rows (Yugi/Kaiba/Joey) all share 1999/06/01, filed under 【書籍】 (books/publications) - a mail-order magazine-raffle category, consistent with Yugipedia's own account of this distribution."
+    },
+    {
+      "repo_product_id": "limited-edition-kaiba-pack",
+      "konami_product_name_ja": "LIMITED EDITION － 海馬パック －",
+      "konami_category": "書籍",
+      "official_release_date": "1999-06-01",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/06/01 【書籍】 LIMITED EDITION － 海馬パック －'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "limited-edition-joey-pack",
+      "konami_product_name_ja": "LIMITED EDITION － 城之内パック －",
+      "konami_category": "書籍",
+      "official_release_date": "1999-06-01",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/06/01 【書籍】 LIMITED EDITION － 城之内パック －' (Jonouchi/Joey)."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date. This exact row is also the only genuine 1999-06-01 source for Millennium Shield/Megasonic Eye/Yamadron - see the deleted-product negative entry above."
+    },
+    {
+      "repo_product_id": "booster-3",
+      "konami_product_name_ja": "Booster 3",
+      "konami_category": "その他ブースターパック / その他1",
+      "official_release_date": "1999-07-05",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/07/05 【その他ブースターパック】 Booster 3'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards",
+      "konami_product_name_ja": "遊戯王デュエルモンスターズII 闇界決闘記 同梱カード",
+      "konami_category": "ゲーム同梱",
+      "official_release_date": "1999-07-08",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/07/08 【ゲーム同梱】 遊戯王デュエルモンスターズII 闇界決闘記 同梱カード' (game-bundled cards) - a DISTINCT 【ゲーム同梱】 (game-bundled) category row from the two 【書籍】 (books) Game Guide rows below."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date. The category distinction on this single page is exactly what proves the video-game-bundled product and the two Game Guide book promos are three genuinely separate distributions, not the same thing double-counted or interchangeable dates."
+    },
+    {
+      "repo_product_id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card",
+      "konami_product_name_ja": "Vジャンプブックス 遊戯王デュエルモンスターズII 闇界決闘記 究極攻略BOOK 上巻 キャンペーンモード征服編 付録カード",
+      "konami_category": "書籍",
+      "official_release_date": "1999-07-13",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/07/13 【書籍】 ... 究極攻略BOOK 上巻 (Volume 1) キャンペーンモード征服編 付録カード', between Vol.4 (1999/07/22) and the DM2 game-bundled-cards row (1999/07/08)."
+      },
+      "notes": "CORRECTION (2026-08 recertification): repo's release_events[0].date was 1999-07-08 (copied from the unrelated game-bundled-cards product above) before this recertification; corrected to 1999-07-13, matching this row exactly. Independently re-confirmed via this card's own Konami card-level print-history (passcode 70903634, only 1999 entry = 1999-07-13) and via Japanese publisher (openBD/NDL) metadata for the book's ISBN (4-08-779026-6, July 1999). No 1999-07-08 row for this product exists anywhere on Konami's page."
+    },
+    {
+      "repo_product_id": "vol-4",
+      "konami_product_name_ja": "Vol.4",
+      "konami_category": "基本ブースターパック",
+      "official_release_date": "1999-07-22",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/07/22 【基本ブースターパック】 Vol.4'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+      "konami_product_name_ja": "Vジャンプブックス 遊戯王デュエルモンスターズII 闇界決闘記 究極攻略BOOK 下巻 通信デュエル必勝編 付録カード",
+      "konami_category": "書籍",
+      "official_release_date": "1999-08-10",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/08/10 【書籍】 ... 究極攻略BOOK 下巻 (Volume 2) 通信デュエル必勝編 付録カード', between 'The Valuable Book 1' bonus card (1999/08/20) and Vol.4 (1999/07/22)."
+      },
+      "notes": "CORRECTION (2026-08 recertification, superseding two prior incorrect notes): repo's release_events[0].date was 1999-08-05 before this recertification (an even earlier pass's chronology had also separately referenced a phantom '1999-07-13 V-Jump Books DM2 promo' that a later pass could not locate - it was not a phantom, it was Game Guide 1, see that entry above, just misdated there too). Corrected to 1999-08-10, matching this row exactly. Independently re-confirmed via this card's own Konami card-level print-history (passcode 7902349, only 1999 entry = 1999-08-10) and via Japanese publisher (openBD/NDL) metadata for the book's ISBN (4-08-779032-0, August 1999). No 1999-08-05 row for this product exists anywhere on Konami's page."
+    },
+    {
+      "repo_product_id": "the-valuable-book-1-promotional-cards",
+      "konami_product_name_ja": "公式カードカタログ ザ・ヴァリュアブル・ブック 1 付録カード",
+      "konami_category": "書籍",
+      "official_release_date": "1999-08-20",
+      "evidence_type": "product",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Row '1999/08/20 【書籍】 公式カードカタログ ザ・ヴァリュアブル・ブック 1 付録カード'."
+      },
+      "notes": "Confirmed identical to the repo's release_events[0].date."
+    },
+    {
+      "repo_product_id": null,
+      "konami_product_name_ja": "Booster 4 / PREMIUM PACK / 遊戯王デュエルモンスターズII 闇界決闘記 決闘者伝説 in TOKYO DOME (x3 rows)",
+      "konami_category": null,
+      "official_release_date": "1999-08-26",
+      "evidence_type": "negative",
+      "source_locator": {
+        "site_id": "konami-yugiohdb-product-list",
+        "locator": "Five separate 1999/08/26 rows: Booster 4, PREMIUM PACK, and three Tokyo Dome tournament rows (attendance/participation/prize)."
+      },
+      "notes": "AUGUST 26 BOUNDARY CONFIRMATION. All five Aug-26 rows are correctly EXCLUDED from this ledger's certified pre-cutoff (through 1999-08-25) product set - repo_product_id is null because no product file for any of them exists in data/releases/products/ at all. Listed here to positively confirm, via the same single-page evidence source as every certified product above, that nothing between 1999-08-21 and 1999-08-25 exists on Konami's own chronology (the next row after 1999-08-20 'The Valuable Book 1' is 1999-08-26), and that the next row after Vol.4 (1999-07-22) besides the two corrected Game Guide rows is likewise nothing until 1999-08-20.",
+      "regression_guard": {
+        "must_not_appear_dated_on_or_before": "1999-08-25",
+        "in_territory": "ocg-jp",
+        "cards": [
+          {
+            "passcode": 25833572,
+            "name": "Gate Guardian"
+          },
+          {
+            "passcode": 30208479,
+            "name": "Magician of Black Chaos"
+          },
+          {
+            "passcode": 39111158,
+            "name": "Tri-Horned Dragon"
+          },
+          {
+            "passcode": 76232340,
+            "name": "Sengenjin"
+          },
+          {
+            "passcode": 66516792,
+            "name": "Serpent Night Dragon"
+          },
+          {
+            "passcode": 23995346,
+            "name": "Blue-Eyes Ultimate Dragon"
+          },
+          {
+            "passcode": 90660762,
+            "name": "Meteor Black Dragon"
+          },
+          {
+            "passcode": 27054370,
+            "name": "Firewing Pegasus"
+          }
+        ],
+        "note": "These 8 cards are exclusive to the August 26, 1999 Tokyo Dome event/products; none has any pre-1999-08-26 ocg-jp source."
+      }
+    }
+  ]
+}

@@ -65,13 +65,13 @@
     {
       "date": "1999-02-21",
       "products": [
-        "Duel Monsters National Tournament attendance card",
-        "Duel Monsters National Tournament prize cards (qualifying tier)"
+        "Duel Monsters National Tournament attendance card"
       ],
       "source_ids": [
         "yugipedia-ocg-1999-set-pages",
         "konami-card-history"
-      ]
+      ],
+      "notes": "CORRECTION (2026-08 recertification): a 'Duel Monsters National Tournament prize cards (qualifying tier)' entry was removed from this date - it was fabricated (Millennium Shield/Megasonic Eye/Yamadron were never a physical release on this date; see release_ledger_certification.recertification_2026_08)."
     },
     {
       "date": "1999-03-01",
@@ -164,13 +164,24 @@
     {
       "date": "1999-07-08",
       "products": [
-        "Duel Monsters II included-card products",
-        "Duel Monsters II: Dark Duel Stories Game Guide 1 promotional card"
+        "Duel Monsters II included-card products"
       ],
       "source_ids": [
         "konami-card-history",
         "yugipedia-ocg-1999-set-pages"
       ]
+    },
+    {
+      "date": "1999-07-13",
+      "products": [
+        "Duel Monsters II: Dark Duel Stories Game Guide 1 promotional card"
+      ],
+      "source_ids": [
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "openbd-shueisha-metadata"
+      ],
+      "notes": "CORRECTION (2026-08 recertification): moved from a previously-claimed 1999-07-08 (which duplicated the unrelated video-game-bundled product's date above) to Konami's own directly-confirmed date."
     },
     {
       "date": "1999-07-22",
@@ -182,14 +193,16 @@
       ]
     },
     {
-      "date": "1999-08-05",
+      "date": "1999-08-10",
       "products": [
         "Duel Monsters II: Dark Duel Stories Game Guide 2 promotional card"
       ],
       "source_ids": [
-        "yugipedia-ocg-1999-set-pages"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "openbd-shueisha-metadata"
       ],
-      "notes": "Supersedes this chronology's prior '1999-07-13 V-Jump Books DM2 promo' entry: that description/date did not correspond to any product located during the 2026-08 certification. This Game Guide 2 promo (Left Arm of the Forbidden One) is the actual next dated Duel Monsters II guide-book promo after Game Guide 1; its date is directly sourced to Yugipedia's product infobox. The correction does not change the certified 1999-08-25 candidate pool (both dates are pre-cutoff)."
+      "notes": "CORRECTION (2026-08 recertification): corrected from a previously-claimed 1999-08-05 to Konami's own directly-confirmed date; supersedes the prior chronology's separate, now-understood-to-be-misdated '1999-07-13 V-Jump Books DM2 promo' entry (that date actually belongs to Game Guide 1, immediately above, not this product)."
     },
     {
       "date": "1999-08-20",
@@ -1536,6 +1549,24 @@
       "label": "This repository's 2026-08 ocg-jp release-ledger certification (data/releases/*, tests/test_ocg1999_release_certification.py)",
       "kind": "repository-research",
       "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/data/releases/coverage.json"
+    },
+    {
+      "id": "konami-card-database-ja-print-history",
+      "label": "Konami official card database - individual card print-history pages (per-card, cross-referenced to reconstruct product dates)",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&request_locale=ja"
+    },
+    {
+      "id": "openbd-shueisha-metadata",
+      "label": "openBD / National Diet Library Japanese book-publisher metadata (Shueisha ISBNs for the two DM2 Game Guide books)",
+      "kind": "secondary-history",
+      "url": "https://api.openbd.jp/v1/get"
+    },
+    {
+      "id": "konami-card-database-ja",
+      "label": "Konami official card database - product/collection list page (2026-08 recertification direct fetch)",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja"
     }
   ],
   "scope": {
@@ -1587,11 +1618,10 @@
       "through": "1999-08-25",
       "status": "complete"
     },
-    "certified_product_count": 20,
+    "certified_product_count": 19,
     "certified_products": [
       "vol-1",
       "yu-gi-oh-duel-monsters-national-tournament-attendance-card",
-      "yu-gi-oh-duel-monsters-national-tournament-prize-cards",
       "booster-1",
       "starter-box-theatrical-release",
       "starter-box",
@@ -1798,6 +1828,41 @@
         "Tokyo Dome invitation Ticket cards (same)"
       ],
       "distinct_historical_identity_representable": "Black Luster Soldier's 1999 Normal Monster prize print is representable as its own canonical passcode (10000100, a BabelCDB far alias of the modern 5405694) without any schema change; it was excluded from the pool on availability grounds (one-of-a-kind trophy), not on representability grounds."
+    },
+    "recertification_2026_08": {
+      "purpose": "An independent five-agent audit (Konami-chronology, early-promo/tournament, card-identity, adversarial-test, community-pool comparator roles) found primary-source contradictions in the original 2026-08 certification (commit 6f937e62b29b2edfcf2366a73017ba3e7635cf84). This block records exactly what changed and what did not.",
+      "products_before_correction": 20,
+      "products_after_correction": 19,
+      "deleted_product_id": "yu-gi-oh-duel-monsters-national-tournament-prize-cards",
+      "deleted_product_reason": "Fabricated: claimed a physical ocg-jp release on 1999-02-21 of Millennium Shield/Megasonic Eye/Yamadron. This was a misreading of a Yugipedia results table (two columns, 'Physical card'/'Video game card', by National Tournament placement tier); the Qualifying tier's Physical-card cell is blank, and its Video-game-card cell (which does include these 3 names, alongside Kanan the Swordmistress) links to Yu-Gi-Oh! Duel Monsters (Game Boy, 1998-12-16, itself Non-OCG) hidden-card-unlock pages, not physical OCG cards. Konami's official product catalogue has no row for any such product, and each of the 3 cards' own Konami card-level print-history shows no printing earlier than 1999-06-01. Kanan the Swordmistress is unaffected: she is physically real via the separate, correctly-sourced yu-gi-oh-duel-monsters-national-tournament-attendance-card product, confirmed directly against Konami.",
+      "corrected_dates": [
+        {
+          "repo_product_id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card",
+          "card": "Right Arm of the Forbidden One",
+          "date_before": "1999-07-08",
+          "date_after": "1999-07-13",
+          "reason": "The prior date copied the unrelated, separately-certified video-game-bundled product's date instead of this strategy-guide book's own date. Corrected to Konami's own card-level print-history date for this card, corroborated by Konami's product-catalogue book-category listing and by Japanese publisher (openBD/NDL) ISBN metadata (July 1999)."
+        },
+        {
+          "repo_product_id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+          "card": "Left Arm of the Forbidden One",
+          "date_before": "1999-08-05",
+          "date_after": "1999-08-10",
+          "reason": "Same defect as Game Guide 1. Corrected to Konami's own card-level print-history date, corroborated by Konami's product-catalogue book-category listing and by Japanese publisher (openBD/NDL) ISBN metadata (August 1999)."
+        }
+      ],
+      "pool_count_after_correction": 370,
+      "pool_digest_after_correction": "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+      "pool_unchanged_by_corrections": true,
+      "pool_unchanged_explanation": "None of the three corrections removed a card's availability before the 1999-08-25 cutoff: the two Game Guide date fixes both remain pre-cutoff, and the three cards from the deleted product remain correctly available via their genuine 1999-06-01 Limited Edition pack release. The pool's digest is a checksum of {passcode, name} pairs only, never dates or source products, so it structurally could not have caught either defect - this recertification's real regression protection is tests/fixtures/ocg1999-official-chronology.json (an evidence base independent of this repository's own product files) plus tests/test_ocg1999_release_certification.py's fixture-comparison and adversarial tests, not the pool digest.",
+      "evidence_fixture": "tests/fixtures/ocg1999-official-chronology.json",
+      "independent_agent_roles_used": [
+        "Konami chronology auditor",
+        "Early-promo/tournament historian",
+        "Card identity/alias auditor",
+        "Adversarial certification/test auditor",
+        "Independent community-pool comparator"
+      ]
     }
   }
 }

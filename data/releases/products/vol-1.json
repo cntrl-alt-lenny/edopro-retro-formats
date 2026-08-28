@@ -13,8 +13,9 @@
       "status": "verified",
       "kind": "retail",
       "sources": [
-        "yugipedia-ocg-series1-set-pages",
-        "konami-card-database-ja"
+        "konami-card-database-ja-print-history",
+        "konami-card-database-ja",
+        "yugipedia-ocg-series1-set-pages"
       ]
     }
   ],
@@ -181,8 +182,9 @@
     }
   ],
   "sources": [
-    "yugipedia-ocg-series1-set-pages",
-    "konami-card-database-ja"
+    "konami-card-database-ja-print-history",
+    "konami-card-database-ja",
+    "yugipedia-ocg-series1-set-pages"
   ],
   "notes": "First Japanese OCG booster; Series 1 card layout (no printed Card Number). Cover card \"Blue-Eyes White Dragon\" was NOT included in this set (it first released a month later in Starter Box)."
 }

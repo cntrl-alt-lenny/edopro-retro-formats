@@ -97,8 +97,13 @@ Full structured results live in
   One" head-piece reprint), and the Tokyo Dome attendance (2), participation
   (3, given per-round during the same-day tournament), and prize (3) cards
   are all dated 1999-08-26 and all confirmed absent from the 1999-08-25
-  candidate. None of the 60 Aug-26-exclusive cards appears in the community
-  cube either. The Tokyo Dome tournament itself ran August 1-26 (regional
+  candidate. Counting distinct identities (35 new Booster 4 cards + 10
+  Premium Pack + 8 tournament-exclusive = 53; the other 5 Booster 4 card
+  slots are the Vol.4 reprints already counted via their earlier source),
+  none of the 53 Aug-26-exclusive cards appears in the community cube
+  either (corrected 2026-08 recertification: an earlier draft of this
+  section said "60", a loose prose figure never backed by any committed
+  data or test - the precise count is 53). The Tokyo Dome tournament itself ran August 1-26 (regional
   qualifiers into the August 26 Tokyo Dome final), mirroring the February
   1-21 National Tournament already in this ledger; no card or product is
   dated between August 1 and August 25, so this does not affect the cutoff.
@@ -128,6 +133,87 @@ The release-ledger/card-identity blocker is resolved; the banlist, Starter
 vs. Expert Rules boundary, deck-out, battle-calculation, chain/priority, and
 errata-implementation-coverage blockers below are unchanged and remain
 BLOCKING.
+
+## Release ledger RECERTIFICATION (2026-08, correction pass)
+
+Independent review of the certification above found primary-source
+contradictions in the newly-built 1999 OCG chronology. This repository does
+not treat green tests as proof of historical correctness: a follow-on task
+re-audited the entire pre-cutoff ledger with five independent research
+roles (a Konami-chronology auditor, an early-promo/tournament historian, a
+card-identity/alias auditor, an adversarial-test auditor, and a
+community-pool comparator), each working from primary sources without
+reading the others' conclusions, followed by a separate adjudication pass.
+Full detail: `release_ledger_certification.recertification_2026_08` in
+`docs/research/yugi-kaiba-format-source-packet.json`.
+
+**Two date corrections** (both discovered independently by three of the
+five research channels, plus the author's own direct re-check of Konami's
+live database - four convergent confirmations against one contrary, uncited
+Yugipedia infobox value):
+
+| Product | Card | Was | Corrected to | Why |
+| --- | --- | --- | --- | --- |
+| DM2 Game Guide 1 promo | Right Arm of the Forbidden One | 1999-07-08 | **1999-07-13** | The old date copied the unrelated, separately-certified video-game-bundled product's date instead of this strategy-guide book's own. |
+| DM2 Game Guide 2 promo | Left Arm of the Forbidden One | 1999-08-05 | **1999-08-10** | Same defect. |
+
+Both corrections were confirmed directly against Konami's own per-card
+print-history pages (`card_search.action?ope=2&cid=...`) - each card has
+exactly one 1999 printing entry, and it is the corrected date, not the old
+one - independently corroborated by Konami's separate product-catalogue
+listing page (which files both guide books under a `【書籍】` category,
+distinct from the game-bundled promo they were previously conflated with)
+and by Japanese publisher (openBD/National Diet Library) ISBN metadata for
+both books. Neither correction changes pool membership: both new dates
+remain before the 1999-08-25 cutoff.
+
+**One product deleted** as fabricated:
+`yu-gi-oh-duel-monsters-national-tournament-prize-cards.json`, which had
+claimed a physical `ocg-jp` release on 1999-02-21 of three cards
+(Millennium Shield, Megasonic Eye, Yamadron). The root cause was identified
+and quoted: Yugipedia's "...National Tournament prize cards" page lists
+results by placement tier in a two-column table ("Physical card" / "Video
+game card"); the Qualifying tier's Physical-card cell is **blank**, and its
+Video-game-card cell (which does list all four names, including Kanan the
+Swordmistress) links to `(DM1)`-suffixed pages describing a hidden/
+unlockable reward inside the Game Boy title *Yu-Gi-Oh! Duel Monsters*
+(1998-12-16, itself already excluded from this ledger as Non-OCG), using a
+distinct template with no passcode field at all. Kanan alone is *also*
+physically real, but via the wholly separate, correctly-sourced
+`yu-gi-oh-duel-monsters-national-tournament-attendance-card` product, kept
+unchanged. Konami's official product catalogue has no row for any "prize
+cards" product on this date, and each of the three cards' own individual
+Konami print-history shows no printing earlier than 1999-06-01 (Limited
+Edition: Yugi Pack / Joey Pack, already certified elsewhere in this
+ledger). Deleting the fabricated product changes **zero** pool membership:
+all three cards remain correctly available via their genuine June 1999
+release.
+
+**Net effect:** 20 certified products -> **19**; candidate pool cardinality
+and digest **unchanged** (370 cards,
+`f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`) - proven,
+not assumed, by mechanical re-derivation after the corrections. This is
+expected, not suspicious: none of the three defects removed a card's
+pre-cutoff availability, only the accuracy of which product/date backed it.
+The pool digest is a checksum of `{passcode, name}` pairs only and is
+structurally blind to date errors of this kind - it could not have caught
+any of the three defects, and did not. What actually catches them now is a
+new evidence fixture, `tests/fixtures/ocg1999-official-chronology.json`,
+assembled directly from Konami's own official product database and never
+generated from this repository's own product files (see that file's own
+header for exactly how), which `tests/test_ocg1999_release_certification.py`
+compares the live release data against, plus dedicated adversarial tests
+proving each of the three defects (and several synthetic variants) would
+now be caught.
+
+Also corrected: honest source provenance. Every one of the 19 remaining
+products' `release_events[].sources` previously cited `konami-card-database-ja`
+in a way that implied direct verification while `data/sources.json` itself
+disclosed reliance on Yugipedia's aggregation instead. All 19 have now been
+directly re-verified against Konami (either its per-card print-history
+pages or its product-catalogue listing, both newly registered as their own
+distinct sources) and their `status` upgraded from `reported` to `verified`
+where two or more independent official channels now genuinely agree.
 
 ## Why the name and date changed
 
@@ -350,12 +436,15 @@ client ceilings, not historical maxima. A nullable or explicit `unbounded`
 schema value is desirable, but no schema change is required under the current
 project design's host-enforceable approximation model.
 
-**Update (2026-08):** the repository now has 431 release products, 20 of them
-a certified `ocg-jp` ledger through 1999-08-25 (see below); the 370-identity
-community cross-check is fully resolved (370/370 in the index, 0 absent).
-Originally: the repository had 411 release products and zero `ocg*` release
-events, and the community cross-check had 249 in-index / 121 absent - that
-was the deferred OCG release ledger this update completes.
+**Update (2026-08, recertified):** the repository now has 430 release
+products, 19 of them a certified `ocg-jp` ledger through 1999-08-25 (see
+"Release ledger certification" and "Release ledger RECERTIFICATION"
+above); the 370-identity community cross-check is fully resolved (370/370
+in the index, 0 absent). Originally: the repository had 411 release
+products and zero `ocg*` release events, and the community cross-check had
+249 in-index / 121 absent. An intermediate 2026-08 pass certified 20
+products; an independent audit then found and corrected 3 defects (2 wrong
+dates, 1 fabricated product), landing on the current 19.
 
 Konami dates Booster 4, Premium Pack, and Tokyo Dome event products to August
 26, but the source does not establish whether distributed cards were legal in
@@ -391,7 +480,7 @@ No shared schema or runtime mutation was justified by this gate.
 | --- | --- | --- |
 | Format name/date convention | RESOLVED WITH APPROXIMATION | Tokyo Dome / August 25 is a reproducible community convention, not an official format record. |
 | Event/card-pool cutoff | UNRESOLVED | Same-day products/distribution are documented; same-event legal use is not. |
-| OCG release ledger | RESOLVED | 2026-08: a real, sourced, product-by-product `ocg-jp` ledger exists through 1999-08-25 (20 products, 0 unresolved pool-impacting gaps). |
+| OCG release ledger | RESOLVED | 2026-08: a real, sourced, product-by-product `ocg-jp` ledger exists through 1999-08-25 (19 products after the 2026-08 recertification's correction - see "Release ledger certification" and "Recertification" sections above; 0 unresolved pool-impacting gaps). |
 | Missing card identities | RESOLVED | 2026-08: all 121 community cross-check identities accounted for (119 added to the card index, 2 collapsed as artwork-variant aliases). |
 | Banlist | BLOCKING | Three-card July reconstruction and broad-vs-event scope remain secondary/disputed. |
 | Starter Rules vs Expert Rules effective boundary | BLOCKING | Expert is likely, but Tokyo Dome adoption is not proven. |
