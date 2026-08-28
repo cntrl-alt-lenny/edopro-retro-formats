@@ -8,8 +8,9 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-from retroformats.model import Coverage, ErratumV2
+from retroformats.model import Coverage, ErratumV2, Pool
 from retroformats.lflist import build_lflist
+from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 
 
@@ -263,6 +264,112 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         allowed = {"RESOLVED", "RESOLVED WITH APPROXIMATION", "UNRESOLVED", "BLOCKING", "NONBLOCKING"}
         self.assertTrue(all(entry["status"] in allowed for entry in ledger.values()))
         self.assertTrue(all(entry["reason"] for entry in ledger.values()))
+
+    def test_rules_and_restriction_research_2026_08_is_present_and_structured(self):
+        # 2026-08 addendum: the multi-agent restriction-list/rules research gate.
+        # This checks the new packet section exists with the required structure -
+        # it does NOT re-derive the swarm's historical conclusions (those are prose
+        # research findings, not repo-checkable facts), only that the packet
+        # honestly records BLOCKED verdicts rather than a canonicalized answer.
+        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
+        self.assertEqual("BLOCKED_BY_BOTH", research["architecture_verdict"])
+        self.assertEqual("BLOCKED", research["restriction_list_research"]["verdict"])
+        self.assertEqual("UNCHANGED: pre-event (1999-08-25), not event-day", research["format_identity"]["snapshot_verdict"])
+        self.assertEqual("1999-08-25", research["format_identity"]["recommended_snapshot"])
+        self.assertEqual("1999-08-tokyo-dome", research["format_identity"]["recommended_id"])
+
+        # Errata accounting in the new section must match the same live
+        # recomputation the older test_frozen_errata_are_all_v2_and_accounted_at_snapshot
+        # performs independently below - both derive from repo state, not from each other.
+        audit = research["errata_intersection_audit"]
+        self.assertEqual(370, audit["pool_size"])
+        self.assertEqual(
+            "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+            audit["pool_digest_sha256"],
+        )
+        self.assertEqual(6, audit["pool_relevant_errata_count"])
+        self.assertEqual(2, audit["determinate_count"])
+        self.assertEqual(4, audit["ambiguous_count"])
+
+        # No new canonical artifact is ever claimed by this section.
+        non_actions = " ".join(research["explicit_non_actions"])
+        for phrase in (
+            "No formats/1999-* canonical format directory was created",
+            "No canonical banlist was created",
+            "No canonical pool was created",
+            "No canonical rule profile was created",
+            "dist/ was not modified",
+            "No runtime behavior was modified",
+            "No schema was modified",
+        ):
+            self.assertIn(phrase, non_actions)
+
+    def test_rules_research_pool_digest_matches_live_recomputation(self):
+        # Recomputed directly from repo state (not read from the packet), exactly
+        # like test_frozen_errata_are_all_v2_and_accounted_at_snapshot does for
+        # errata - this is the anti-circularity check for the 2026-08 addendum's
+        # own pool_digest_sha256 claim.
+        raw_pool = {
+            "id": "pool-ocg1999-research-only",
+            "region": "OCG",
+            "kind": "release-cutoff",
+            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
+            "sources": ["yugipedia-ocg-series1-set-pages"],
+        }
+        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
+        index = ReleaseIndex.build(self.repo)
+        evaluation = evaluate_cutoff(pool, self.repo, index)
+        cards = evaluation.cards()
+        digest = hashlib.sha256(
+            json.dumps(
+                [{"passcode": c["passcode"], "name": c["name"]} for c in cards],
+                separators=(",", ":"),
+                sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest()
+        self.assertEqual(370, len(cards))
+        self.assertEqual("f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb", digest)
+
+        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
+        self.assertEqual(len(cards), research["errata_intersection_audit"]["pool_size"])
+        self.assertEqual(digest, research["errata_intersection_audit"]["pool_digest_sha256"])
+
+    def test_gate_guardian_and_its_fusion_materials_are_absent_from_the_pre_event_pool(self):
+        # Independent repo-state verification (not read from the packet's own
+        # prose) backing the format_identity.snapshot_rationale claim that Gate
+        # Guardian could not have been Fusion Summoned by anyone restricted to
+        # the certified pre-event pool: neither it nor any of its three Fusion
+        # Material monsters (Suijin, Kazejin, Sanga of the Thunder) are in the
+        # certified 370-card 1999-08-25 pool.
+        raw_pool = {
+            "id": "pool-ocg1999-research-only",
+            "region": "OCG",
+            "kind": "release-cutoff",
+            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
+            "sources": ["yugipedia-ocg-series1-set-pages"],
+        }
+        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
+        index = ReleaseIndex.build(self.repo)
+        evaluation = evaluate_cutoff(pool, self.repo, index)
+        names_in_pool = {c["name"] for c in evaluation.cards()}
+        for excluded in ("Gate Guardian", "Suijin", "Kazejin", "Sanga of the Thunder"):
+            self.assertNotIn(excluded, names_in_pool)
+
+    def test_reconciliation_with_prior_gate_flags_the_first_turn_attack_conflict(self):
+        # The prior hardening gate's own blocker_ledger row for "first_turn_attack"
+        # says RESOLVED. This session's swarm found a genuine, unresolved
+        # disagreement about that historical claim. That contradiction must stay
+        # visible in the packet, not be silently smoothed over - this test only
+        # checks the contradiction is recorded, it does not resolve it either way.
+        self.assertEqual("RESOLVED", self.packet["blocker_ledger"]["first_turn_attack"]["status"])
+        research = self.packet["tokyo_dome_rules_and_restriction_research_2026_08"]
+        reconciliation = research["reconciliation_with_prior_gate"]
+        topics = {item["topic"] for item in reconciliation["divergences"]}
+        self.assertIn("First-turn attack legality", topics)
+        first_turn = next(item for item in reconciliation["divergences"] if item["topic"] == "First-turn attack legality")
+        self.assertIn("RESOLVED", first_turn["prior_gate_verdict"])
+        self.assertIn("AMBIGUOUS", research["rule_chronology"]["areas"][2]["aug_25_26_1999_status"])
+        self.assertEqual("First-turn attack", research["rule_chronology"]["areas"][2]["area"])
 
     def test_gate_scope_declares_no_shared_data_or_runtime_mutation(self):
         scope = self.packet["scope"]

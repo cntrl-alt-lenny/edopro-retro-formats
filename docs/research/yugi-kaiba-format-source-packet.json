@@ -1864,5 +1864,427 @@
         "Independent community-pool comparator"
       ]
     }
+  },
+  "tokyo_dome_rules_and_restriction_research_2026_08": {
+    "purpose": "The 2026-08 high-rigor research gate for the proposed pre-Tokyo-Dome Japanese OCG snapshot: (1) what restriction list applied to Japanese OCG play immediately before/at the August 26, 1999 Tokyo Dome event, and (2) what game rules were actually in force there, and whether current EDOPro/ocgcore architecture can represent them. This section is RESEARCH ONLY - no canonical Tokyo Dome format, banlist, pool, or rule profile was created. Green tests are necessary but not proof of historical truth; several findings below sharpen or actively CONTRADICT the prior gate's working hypotheses rather than confirming them.",
+    "swarm": {
+      "roles_used": [
+        "Agent A - restriction-list / forbidden-limited chronology specialist",
+        "Agent B - Tokyo Dome event-document specialist",
+        "Agent C - early OCG rules chronology specialist",
+        "Agent D - ocgcore / EDOPro representability specialist (took A/B/C's candidate rules as input, did not research history independently)",
+        "Agent E - adversarial historical auditor (stress-tested A-D's strongest claims, did independent verification, found NEW problems A-D missed)",
+        "Agent F - independent adjudicator (performed by the integrating agent directly, applying the specified evidence hierarchy; findings below are the adjudicated result, not a raw transcript of A-E)"
+      ],
+      "method": "A, B, C ran in parallel with no cross-visibility. D consumed A/B/C's candidate rules only (no independent historical research). E consumed A/B/C/D's reports and independently re-verified specific claims (live Yugipedia revision-history API pulls, direct re-fetch of already-cited repo sources, direct schema/code reads) rather than merely critiquing prose. F (this section) resolves disagreements using the evidence hierarchy: (1) contemporaneous official Konami tournament/rule material, (2) contemporaneous official/publisher guidebooks or archived official pages, (3) later official Konami historical database material, (4) high-quality period scans/transcriptions with traceable provenance, (5) specialist historical community research, (6) generic wikis/unsourced lists - never by vote.",
+      "engine_availability": "False in this sandbox (no RETROFORMATS_OCGCORE / pinned checkouts) - confirmed by Agent D via `python3 -c \"from tests.engine import harness as H; print(H.available())\"`. All engine-representability conclusions below are static analysis of docs/research/ocgcore-flags.md plus the ALREADY-EXISTING, ALREADY-RUN tests/engine/test_tokyo_dome_rules.py experiment (recorded in this packet's own phase_experiment block); no new engine test was added or run in this pass because pinned ocgcore was unavailable, and this is reported honestly rather than implied otherwise."
+    },
+    "format_identity": {
+      "recommended_id": "1999-08-tokyo-dome",
+      "recommended_display_name": "Tokyo Dome Format",
+      "recommended_aliases": [
+        "pre-Tokyo-Dome OCG",
+        "August 1999 OCG"
+      ],
+      "rejected_labels": [
+        "Yugi-Kaiba Format (already rejected in the original gate - wrong products/date)"
+      ],
+      "region": "OCG",
+      "recommended_snapshot": "1999-08-25",
+      "snapshot_reassessed": true,
+      "snapshot_verdict": "UNCHANGED: pre-event (1999-08-25), not event-day",
+      "snapshot_rationale": "The task's instruction was to reassess the pre-event snapshot only if evidence proves the historically meaningful playable snapshot should instead be event-day and include same-day cards. This swarm found no such evidence; if anything it found evidence CUTTING AGAINST event-day cleanliness: (1) Agent B/E independently found multiple convergent-but-hedge-heavy retrospective sources (5+ independent Japanese blogs beyond what Agent B alone found) describing the event as disrupted by overcrowding severe enough to require riot police, with a live claim that the finals tournament itself may not have concluded at the venue that day and were possibly re-held regionally later - zero primary/contemporaneous (period newspaper, Konami statement) confirmation was found either way, by either agent, despite deliberate searching. (2) Directly verified against live repo state this session (not merely asserted): Gate Guardian, the events own headline attendance promo card, is ABSENT from the certified 370-card pre-event pool - and so are all three of its Fusion Material monsters (Suijin, Kazejin, Sanga of the Thunder), confirmed by recomputing retroformats.releases.evaluate_cutoff against the certified 1999-08-25 cutoff and checking all four names directly (none present in the 370). This means Gate Guardian could not have been Fusion Summoned by anyone restricted to the certified pre-event pool, regardless of exactly when its materials were later released. Cross-referenced (medium confidence, multi-source WebSearch corroboration since a direct Konami-database fetch could not complete in this sandbox - see source_bibliography) against community card-list aggregators converging on Vol.5, 1999-09-23 as the materials actual first OCG-JP release, a full month after Tokyo Dome - consistent with, though not required to support, the repo-verified absence finding. Both findings make 'the format played that day' a more fragile historical anchor than the pre-event certified-release-ledger snapshot, which rests on the repo's own independently re-verified, twice-audited (recertified commit 334f5865) product chronology. The pre-event 1999-08-25, 370-card snapshot remains the recommended and safer choice.",
+      "event_completion_caveat": [
+        "NEW, significant finding not present in the prior gate: whether the Tokyo Dome tournament final actually concluded at the venue on August 26, 1999 as commonly assumed is itself in genuine doubt per multiple independent (but all retrospective, hedge-heavy, oral-history-based) Japanese community sources describing a crowd-control failure, riot police, cancelled Premium Pack sales, and a claim the finals never took place / were re-held regionally. No period (1999) documentary source was located by either Agent B or Agent E despite dedicated searching in both English and Japanese. This does not change the certified pre-event 370-card pool (which does not depend on the event concluding) but is material to any future claim that 'the Tokyo Dome format' represents a coherent, completed, single-day competitive event - it may represent a competitive structure that was announced and partially run, not one that cleanly concluded. Reported as an open historical question, not resolved either way."
+      ]
+    },
+    "restriction_list_research": {
+      "candidate_content": {
+        "note": "CONTENT (which 3 cards) is multiply corroborated. SCOPE (what kind of list it was, and whether it was in force for Japanese OCG play, vs. only a later community-retro-format convention) is NOT resolved - see scope_dispute below. Do not read this list as certified.",
+        "entries": [
+          {
+            "name": "Raigeki",
+            "restriction": "Limited (1 copy)",
+            "corroboration": "Agent A, B, C, E all independently surfaced this card in every restriction-list source consulted"
+          },
+          {
+            "name": "Dark Hole",
+            "restriction": "Limited (1 copy)",
+            "corroboration": "same as above"
+          },
+          {
+            "name": "Trap Hole",
+            "restriction": "Limited (1 copy)",
+            "corroboration": "same as above"
+          }
+        ],
+        "tier_model": "SINGLE-TIER (Limited only) - no 'Forbidden' tier existed in the Japanese OCG until March 2004 (Konami's first forbidden/limited/semi-limited 3-tier list). Any source describing an August 1999 'Forbidden' card is anachronistic by definition and was treated as disqualifying for that specific claim. Agent E specifically checked this against schemas/banlist.schema.json and retroformats/model.py: the schema's status enum already supports a Limited-only list with zero Forbidden/Semi-Limited entries with no model or schema change required (STATUS_TO_COUNT / UNLIMITED_COUNT=3 default already covers the 'everything else is 3 copies' case)."
+      },
+      "july_1999_fabrication_trace": {
+        "claim_examined": "Various community sources describe a 'July 1999' Japanese restriction list preceding Tokyo Dome.",
+        "finding": "Agent A traced the 'July 1999' date on Yugipedia's restricted-list history page to a specific 2017 edit (identified via the MediaWiki revisions API, action=query&prop=revisions) that introduced the date with a citation to a source that, on direct re-read, does NOT state a July date anywhere - it is undated. Agent E independently re-pulled the same revision history and confirmed the citation mismatch. Neither agent found any 1999-dated primary document naming a specific July release. The '1999-07' working_id already present in this packet from a prior session is therefore UNSUPPORTED by primary evidence and should be treated as a placeholder, not a finding - this is a correction to the prior gate's own framing, not new fabrication.",
+        "disposition": "The working_id 'ocg-1999-07' in the existing banlist.working_id field should be read as provisional/unverified going forward; no better-evidenced date was found for the restriction list's own effective/publication date, only for its CONTENT."
+      },
+      "scope_dispute": {
+        "finding": "NEW in this pass (found by Agent E, not surfaced by A/B/C): the two sources this packet already cites for the 3-card restriction list - Yugipedia and ocg-card.com - describe DIFFERENT OBJECTS when read closely. Yugipedia's page frames the 3-card list as Konami's first OFFICIAL nationwide restriction list, implicitly applicable to all sanctioned OCG play. ocg-card.com's page (an independent Japanese cataloguing site, not Konami) frames what looks like the same 3 cards as a TOURNAMENT-SPECIFIC rule sheet tied to a named 1999 regional/qualifying event, not a blanket nationwide restriction. Neither page cites a Konami-original document; both are downstream retrospectives. This produces a genuine three-way ambiguity: (a) nationwide official restriction list in force for ALL Japanese OCG play by Aug 1999, (b) a tournament-specific ruleset for one or more qualifying events that may or may not have applied at Tokyo Dome itself, (c) a modern community retro-format convention retrofitted onto 1999 with no 1999-dated basis at all. The swarm could not adjudicate between these three readings - no source examined states which one is correct, and no contemporaneous (1999) Konami document was located by any agent.",
+        "adjudication": "Applying the evidence hierarchy: both cited sources sit at tier 5-6 (specialist community research / semi-generic wiki), well below the tier-1/2 contemporaneous-official material the hierarchy prioritizes. Since the two available tier-5/6 sources actively disagree on SCOPE (not just on details within a shared scope), the hierarchy gives no basis to prefer one over the other - this is a genuine evidentiary tie at the lowest tiers, not a case where a higher-tier source resolves a lower-tier disagreement. Per the task's explicit instruction ('if evidence can't support an exact complete list, do NOT invent one - mark canonicalization BLOCKED' and 'model ordinary-OCG-restrictions vs Tokyo-Dome-tournament-restrictions vs later-retro-format-community-convention SEPARATELY if they differ'), this is exactly that condition: the three readings differ in ways that matter (nationwide legal restriction vs one-event tournament rule vs modern retrofit) and cannot be collapsed into one list without guessing which the sources meant."
+      },
+      "verdict": "BLOCKED",
+      "verdict_detail": "Restriction-list CONTENT (Raigeki/Dark Hole/Trap Hole, Limited-to-1, single-tier) is well-corroborated across independent sources and is NOT in dispute. Restriction-list SCOPE (nationwide-OCG vs Tokyo-Dome-tournament-only vs modern-retrofit) IS in dispute between the two best available sources and cannot be resolved with currently available evidence. Canonicalization of a restriction list for this format is therefore BLOCKED per the task's explicit instruction, pending discovery of a contemporaneous (tier 1-3) source that states which of the three scopes is correct."
+    },
+    "rule_chronology": {
+      "method": "Agent C built this by walking the Japanese rulebook lineage from the original 1999 Starter Box rulebook forward through the 'Expert Rules' transition, cross-checked by Agent E against independent rulebook-scan community archives. Per the task's suspicion requirement, Agent C and Agent E both explicitly flagged and discounted retrospective sources that collapse multiple distinct 1999 rule revisions into a single undifferentiated 'old rules' bucket.",
+      "areas": [
+        {
+          "area": "Main Phase structure (single Main Phase vs Main Phase 1/2)",
+          "aug_25_26_1999_status": "PROVEN: single Main Phase only, no Main Phase 2 concept",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "Corroborated by both this repo's existing ocgcore-flags.md analysis and the already-run tests/engine/test_tokyo_dome_rules.py experiment: DUEL_NO_MAIN_PHASE_2 is the closest engine analogue but removes a post-battle action window the actual 1999 rules never had in the first place, since the whole single-Main-Phase model has no post-battle window at all - see engine_representability.main_phase_2 below for why this is an approximation, not an exact match."
+        },
+        {
+          "area": "First-turn draw",
+          "aug_25_26_1999_status": "PROVEN: first player does not draw on turn 1",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "Matches DUEL_ATTACK_FIRST_TURN's companion draw-skip behavior already referenced in this repo's engine harness constants; this specific sub-rule was not in dispute among any agent."
+        },
+        {
+          "area": "First-turn attack",
+          "aug_25_26_1999_status": "AMBIGUOUS - genuinely disputed between agents, not just under-evidenced",
+          "earliest_confirmed_date": "unresolved",
+          "note": "Agent C's initial report claimed first-turn attacks were PROHIBITED in the original 1999 rules (matching modern OCG/TCG convention) and only became permitted later. Agent E directly challenged this: the rulebook scans Agent E independently located do not state an explicit first-turn-attack prohibition, and several early strategy-guide-era secondary sources describe first-turn attacks as allowed in the earliest ruleset, with the prohibition arriving in a LATER 1999 revision, not the original one. Agent C could not produce a primary source stating the prohibition applied at the ORIGINAL rulebook stage specifically. F adjudication: this is a genuine unresolved disagreement between two readings of ambiguous secondary material - no tier 1-3 source pins down whether first-turn attack was legal at the Aug 25/26 1999 boundary specifically. Reported as UNKNOWN, not resolved in either direction."
+        },
+        {
+          "area": "Tribute/Advance Summon requirements",
+          "aug_25_26_1999_status": "PROVEN: tribute summon rules for level 5+/7+ monsters were already in force",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "No disagreement among agents."
+        },
+        {
+          "area": "Fusion Summon procedure and Fusion Deck",
+          "aug_25_26_1999_status": "PROVEN: Fusion Deck existed as a separate deck with Polymerization as the activation card",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "No disagreement among agents. Note Fusion material availability is a POOL question (see core_questions_answers.D), not a rules question - the rule existed even where a given Fusion Monster's materials were not yet released."
+        },
+        {
+          "area": "Spell/Trap activation timing and chain resolution",
+          "aug_25_26_1999_status": "UNKNOWN - not confirmed either way for the Aug 1999 boundary specifically",
+          "earliest_confirmed_date": "unresolved",
+          "note": "Agent C found later (2000+) rulebook material describing a modern-style chain/priority system, but could not confirm this existed at the original 1999 rulebook stage; the original rulebook's own wording on multi-card-response resolution was not conclusively located by any agent. Treated as UNKNOWN rather than assumed-modern or assumed-absent."
+        },
+        {
+          "area": "Hand size limit / discard at end of turn",
+          "aug_25_26_1999_status": "PROVEN: 6-card hand limit with end-of-turn discard existed from the original rulebook",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "No disagreement among agents; note this predates the current OCG/TCG number and was already period-correct at 6, not the later-established number - Agent E specifically checked this was not a retrojected modern figure."
+        },
+        {
+          "area": "Deck-out (drawing from an empty deck) as a loss condition",
+          "aug_25_26_1999_status": "PROVEN: existed from the original rulebook",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "Agent C's report initially implied this might have been a later addition; Agent E located the specific rulebook clause and confirmed it was present from the first printing, correcting Agent C's hedge."
+        },
+        {
+          "area": "Old vs new Summon/Set procedure for face-down Set monsters",
+          "aug_25_26_1999_status": "PROVEN: Set (face-down defense) existed from the original rulebook, distinct from a later 'Set = face-down, any position' generalization",
+          "earliest_confirmed_date": "1999 Starter Box rulebook (first printing)",
+          "note": "No disagreement among agents."
+        }
+      ],
+      "collapsing_retrospectives_flagged": "Both Agent C and Agent E independently flagged the same category of bad source: modern 'how OCG rules used to work' retrospective articles (found by both agents, cited separately) that describe 'the 1999 rules' as a single monolithic ruleset, when in fact at least the first-turn-attack question above shows the 1999 calendar year contained more than one ruleset revision. These retrospectives were downweighted per the task's explicit suspicion instruction and are not relied on for any PROVEN classification above."
+    },
+    "engine_representability": {
+      "method": "Agent D classified every candidate rule from A/B/C using five buckets required by the task: exactly representable / representable by omission-default / approximated / not representable without runtime changes / unknown-because-historical-rule-unresolved. Agent D worked from docs/research/ocgcore-flags.md (this repo's own prior exhaustive flag audit) plus the already-recorded phase_experiment results in this packet, and did NOT run new pinned-ocgcore tests because H.available() is False in this sandbox. Agent E independently re-read ocgcore-flags.md and retroformats/model.py and confirmed Agent D's classifications without finding a misclassification, but added one omission Agent D made (event-specific tournament structure, see below).",
+      "classified_rules": [
+        {
+          "historical_rule": "Single Main Phase (no Main Phase 2)",
+          "classification": "APPROXIMATED",
+          "rationale": "DUEL_NO_MAIN_PHASE_2 is the only related flag. It removes the Main Phase 2 window entirely, which happens to match '1999 had no Main Phase 2' at a surface level, but the already-run test_tokyo_dome_rules.py experiment found DUEL_NO_MAIN_PHASE_2 also removes a distinct post-battle legal action window the actual 1999 single-Main-Phase model never had to begin with (period rules allowed certain post-battle actions inside the single Main Phase's continuation, not a discrete second phase) - so the flag changes MORE than the history requires in one direction while getting the headline behavior right in another. Classified as approximated, not exact, and this gap was already flagged in this packet's existing architecture.gaps before this pass; this pass CONFIRMS rather than newly discovers it."
+        },
+        {
+          "historical_rule": "First-turn draw skip",
+          "classification": "EXACTLY REPRESENTABLE",
+          "rationale": "DUEL_ATTACK_FIRST_TURN's companion no-draw-on-first-turn behavior is a direct flag-level match already exercised in tests/engine/test_historical_behaviour.py per the harness constants read this session."
+        },
+        {
+          "historical_rule": "First-turn attack permission",
+          "classification": "UNKNOWN-BECAUSE-HISTORICAL-RULE-UNRESOLVED",
+          "rationale": "DUEL_ATTACK_FIRST_TURN exists and can toggle this at the engine level, so the ENGINE side is exactly representable either way - but rule_chronology above found the historical fact itself (was first-turn attack legal at the Aug 25/26 1999 boundary) is unresolved between agents. Classification therefore tracks the historical unknown, not an engine limitation."
+        },
+        {
+          "historical_rule": "Tribute/Advance Summon for level 5+/7+",
+          "classification": "EXACTLY REPRESENTABLE",
+          "rationale": "Core summon-cost rules are baseline ocgcore behavior with no flag needed - this is standard current-day summon procedure that has not changed since 1999 in this respect."
+        },
+        {
+          "historical_rule": "Fusion Deck / Fusion Summon via Polymerization",
+          "classification": "EXACTLY REPRESENTABLE",
+          "rationale": "Baseline ocgcore Extra/Fusion Deck handling already matches 1999 procedure; no flag needed. (Whether specific Fusion Monsters' materials were released by the snapshot date is a pool question, already handled correctly by the existing release-cutoff pool machinery, not an engine-flag question.)"
+        },
+        {
+          "historical_rule": "Spell/Trap chain resolution and priority",
+          "classification": "UNKNOWN-BECAUSE-HISTORICAL-RULE-UNRESOLVED",
+          "rationale": "rule_chronology above found the underlying 1999 rule itself unresolved. Separately, Agent D notes even IF the historical rule were confirmed to differ from modern chain priority, ocgcore-flags.md's own section 5 already documents there is no flag governing chain-resolution/spell-speed semantics at all - so if evidence later confirms a genuinely different 1999 priority model, that specific case would fall into NOT REPRESENTABLE WITHOUT RUNTIME CHANGES, not merely unknown. Currently unknown is the binding constraint."
+        },
+        {
+          "historical_rule": "6-card hand limit with end-of-turn discard",
+          "classification": "EXACTLY REPRESENTABLE",
+          "rationale": "Baseline ocgcore hand-size/discard handling; no flag needed, matches current default behavior for this specific number."
+        },
+        {
+          "historical_rule": "Deck-out loss condition",
+          "classification": "EXACTLY REPRESENTABLE",
+          "rationale": "Baseline ocgcore behavior, unchanged since 1999 in this respect; no flag needed."
+        },
+        {
+          "historical_rule": "Old-rules Set/face-down monster procedure",
+          "classification": "REPRESENTABLE BY OMISSION-DEFAULT",
+          "rationale": "Current default Set behavior already matches the 1999 procedure without needing any flag to be explicitly set - i.e. simply not enabling any later-rule flag reproduces the correct 1999 behavior here, which is the 'omission-default' bucket as distinct from 'exactly representable' (which covers baseline behavior that was never in question)."
+        },
+        {
+          "historical_rule": "Single-tier (Limited-only) restriction list, no Forbidden tier",
+          "classification": "EXACTLY REPRESENTABLE (schema/model level)",
+          "rationale": "Confirmed by Agent D and independently re-confirmed by Agent E by direct reading of schemas/banlist.schema.json and retroformats/model.py: BanlistEntry's status enum and STATUS_TO_COUNT/UNLIMITED_COUNT=3 default already support a Limited-only list with zero Forbidden/Semi-Limited entries, with NO schema or model change required. This is a software-representability finding, separate from the still-BLOCKED restriction_list SCOPE question above - the mechanism is ready even though the historical content to feed it is not certified."
+        },
+        {
+          "historical_rule": "Deck size, side deck, match/tiebreaker rules, starting LP/hand",
+          "classification": "NOT REPRESENTABLE WITHOUT RUNTIME CHANGES (client/host-config layer, not core engine)",
+          "rationale": "ocgcore-flags.md section 5 already documents these are host/client configuration values (deck size bounds, starting LP, side-deck rules, match scoring) rather than DUEL_* core flags at all - representable in principle by a host/format config layer this repo has not built, not by any existing flag. This repeats and confirms (does not newly discover) the prior gate's own architecture.gaps entries."
+        }
+      ],
+      "rejected_flags": [
+        {
+          "flag_or_preset": "DUEL_MODE_MR1 composite preset wholesale",
+          "reason_rejected": "Per the task's explicit instruction to decompose composite presets rather than use them merely because they look close, Agent D and Agent E both explicitly checked DUEL_MODE_MR1's full bit composition against the rule_chronology findings above and found it bundles at least one flag (DUEL_OBSOLETE_IGNITION / OCG_OBSOLETE_IGNITION family, per the already-recorded phase_experiment) whose historical correctness for the Aug 1999 boundary specifically was not independently verified by this pass - the already-existing test_tokyo_dome_rules.py experiment deliberately tests WITH and WITHOUT that specific sub-flag for exactly this reason. Recommendation: if a future commit ever builds an actual rule profile, it must set individual flags with individual citations, not adopt MR1 wholesale."
+        },
+        {
+          "flag_or_preset": "DUEL_MODE_GOAT composite preset",
+          "reason_rejected": "GOAT represents a later (2005 TCG) format snapshot; Agent D confirmed its flag composition was tuned for a different historical boundary and was not evaluated as a candidate for 1999."
+        }
+      ]
+    },
+    "event_document_findings": {
+      "tournament_structure": {
+        "deck_size": "UNKNOWN - no period document specifying the Tokyo Dome tournament's exact deck-size rule was located by Agent B or Agent E; general-play deck size (40 minimum, per the original rulebook) is assumed by analogy but not confirmed as the TOURNAMENT-specific rule.",
+        "side_deck": "UNKNOWN - no period source describes a side-deck mechanic for this event.",
+        "match_structure_and_win_condition": "UNKNOWN in tournament-specific detail; single-game vs best-of-three was not confirmed by any source located.",
+        "starting_lp": "PROBABLE 2000 LP (matches the general 1999 rulebook default) but NOT confirmed as the tournament-specific figure by a period document.",
+        "unusual_or_event_specific_rules": [
+          "Agent B found repeated, multiply-corroborated (but all retrospective) claims that the event itself was severely disrupted by overcrowding, to the point that normal tournament administration (and possibly the finals) may not have proceeded as planned - see format_identity.event_completion_caveat above. This bears directly on whether ANY single, coherent 'Tokyo Dome tournament ruleset' can be said to have been applied uniformly, since a disrupted event raises the possibility that the announced structure and the actually-executed structure diverged. No period document resolving this was found by either agent."
+        ]
+      },
+      "evidence_class_breakdown": {
+        "ordinary_ocg_rules": "Handled in rule_chronology above - these are general Japanese OCG rules, not Tokyo-Dome-specific, and mostly trace to the 1999 Starter Box rulebook.",
+        "event_specific_rules": "Not confirmed for any tournament-structure question (deck size, side deck, match format, starting LP) - all UNKNOWN per above, distinct from and not to be confused with the ordinary-OCG rule chronology.",
+        "inferred_from_later_events": "Explicitly excluded from any PROVEN classification above; Agent E specifically checked rule_chronology for contamination from later (2000+) Konami official tournament formats and found none in the PROVEN entries.",
+        "anime_manga_contaminated": "Agent B and Agent E both explicitly screened for and excluded anime/manga-derived 'rules' (e.g. dramatized dueling-arena depictions) from every finding above; none of the PROVEN or AMBIGUOUS entries rely on anime/manga sourcing."
+      }
+    },
+    "errata_intersection_audit": {
+      "method": "Recomputed directly against live repo state at this commit (not from memory of the prior session) via retroformats.releases.evaluate_cutoff against the certified 1999-08-25 OCG-JP pool, then intersected with repo.errata by modern_card.passcode, then evaluated each intersecting record's selection_at(date(1999,8,25)).",
+      "pool_size": 370,
+      "pool_digest_sha256": "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+      "pool_relevant_errata_count": 6,
+      "pool_relevant_errata": [
+        {
+          "id": "erratum-castle-walls",
+          "chronology_at_snapshot": "ambiguous"
+        },
+        {
+          "id": "erratum-cocoon-of-evolution",
+          "chronology_at_snapshot": "ambiguous"
+        },
+        {
+          "id": "erratum-crush-card-virus",
+          "chronology_at_snapshot": "determinate"
+        },
+        {
+          "id": "erratum-elegant-egotist",
+          "chronology_at_snapshot": "ambiguous"
+        },
+        {
+          "id": "erratum-reinforcements",
+          "chronology_at_snapshot": "determinate"
+        },
+        {
+          "id": "erratum-ultimate-offering",
+          "chronology_at_snapshot": "ambiguous"
+        }
+      ],
+      "determinate_count": 2,
+      "ambiguous_count": 4,
+      "disposition": "This is an ACCOUNTING pass only, matching the task's instruction not to create chronology to make the format buildable. The errata model (296/296 v2) was not touched, no record was modified, and no new selection was invented for the 4 ambiguous records - they remain ambiguous at the 1999-08-25 snapshot exactly as the existing v2 errata data already computes, confirming (not changing) the frozen 296/296 baseline. Any future canonical format build would need to either accept these 4 as ambiguous-and-unresolved or find new evidence - not in scope for this research gate."
+    },
+    "event_day_pool_interaction": {
+      "candidate_aug26_products": [
+        "Tokyo Dome attendance/participation promo card(s), including Gate Guardian",
+        "Tournament prize card(s), if any beyond the attendance promo",
+        "Premium Pack (if it in fact went on sale that day - see event_completion_caveat)",
+        "Booster 4 reprints/new cards, if released on or immediately after Aug 26"
+      ],
+      "finding": "No source located by Agent B, Agent C, or Agent E establishes that any Aug-26-distributed card was legal for use IN tournament decks played that same day, as opposed to being a souvenir/take-home item distributed at or after the event concluded. The Gate Guardian promo specifically is affirmatively evidenced to have been UNUSABLE in any coherent deck at the event, since its Fusion Material monsters were not released until Sept 23, 1999 (Vol.5) - a full month later. This is strong (though indirect) evidence AGAINST the 'released at the event = legal in the event' assumption in at least this one headline case, and no evidence was found supporting that assumption for any other Aug 26 product either.",
+      "conclusion": "Per the task's explicit instruction not to infer 'released at the event' = 'legal in the event' absent proof, and given the affirmative Gate Guardian counter-evidence, the pre-event 1999-08-25 370-card pool is CONFIRMED as the safer and better-evidenced recommendation. No Aug 26 product is added to the pool by this research pass."
+    },
+    "core_questions_answers": {
+      "A_format_identity": "See format_identity above. Recommended: id='1999-08-tokyo-dome', display_name='Tokyo Dome Format', region=OCG, snapshot=1999-08-25 (pre-event, unchanged from prior gate). New caveat: whether the event itself concluded as a coherent single-day tournament is now in genuine doubt (event_completion_caveat).",
+      "B_restriction_list": "BLOCKED. Content (Raigeki/Dark Hole/Trap Hole, Limited-to-1, single-tier) is well-corroborated; scope (nationwide-OCG vs Tokyo-Dome-tournament-only vs modern community retrofit) is unresolved between the two best available sources, which actively disagree. See restriction_list_research above. No list is canonicalized.",
+      "C_rule_profile": "Not proposed as a buildable profile. See rule_chronology (historical facts, several PROVEN, two genuinely AMBIGUOUS/UNKNOWN - first-turn-attack legality and chain/priority resolution) and engine_representability (per-flag classification, decomposed rather than using composite presets). No composite preset is recommended; individual flags would need individual per-flag historical citations a future build must still assemble for the unresolved areas.",
+      "D_event_day_pool": "No Aug 26 card is added to the certified pool. See event_day_pool_interaction above; pre-event 370-card snapshot preserved unchanged.",
+      "E_errata_impact": "6 errata records intersect the 370-card pool (2 determinate, 4 ambiguous at the 1999-08-25 snapshot). No record modified; this is accounting only. See errata_intersection_audit above.",
+      "F_architecture_verdict": "BLOCKED_BY_BOTH. See architecture_verdict below."
+    },
+    "disagreements_and_adjudications": [
+      {
+        "topic": "Restriction list scope (nationwide vs tournament-specific vs modern retrofit)",
+        "positions": [
+          "Agent A: treated the 3-card list as if scope were settled (nationwide), following the framing of the source it happened to check first.",
+          "Agent E: found the second already-cited source (ocg-card.com) frames the same 3 cards as tournament-specific, contradicting Agent A's implicit assumption."
+        ],
+        "adjudication": "F: Genuine tie at the lowest evidence tiers (5-6), no higher-tier source available to break it. BLOCKED, not resolved by preferring either agent's framing. See restriction_list_research."
+      },
+      {
+        "topic": "First-turn attack legality at the original 1999 rulebook stage",
+        "positions": [
+          "Agent C: original claim was that first-turn attacks were prohibited from the start (matching later/modern convention).",
+          "Agent E: independently located rulebook-era secondary sources suggesting first-turn attacks were initially ALLOWED and the prohibition was a later-1999 revision."
+        ],
+        "adjudication": "F: Neither position is backed by a tier 1-3 source specific to the original rulebook printing. Classified UNKNOWN in rule_chronology, not resolved toward either agent's reading."
+      },
+      {
+        "topic": "Whether the Tokyo Dome event concluded as a coherent single-day tournament",
+        "positions": [
+          "Agent B: initial framing treated the event as having concluded normally, per the most commonly repeated community narrative.",
+          "Agent B (own later findings) and Agent E: both surfaced multiple independent retrospective sources describing crowd-control failure and a possible non-conclusion / regional re-holding of the finals."
+        ],
+        "adjudication": "F: No period document was found by either agent confirming completion OR disruption definitively. Treated as an open historical question (event_completion_caveat), reported honestly rather than defaulting to the more commonly repeated 'it concluded normally' framing."
+      },
+      {
+        "topic": "'Expert Rules' vs 'New Expert Rules' sourcing",
+        "positions": [
+          "Agent C: proposed treating 'Expert Rules' and 'New Expert Rules' as a clean two-stage chronology with an implied even split of sourcing confidence across both stages.",
+          "Agent E: found Agent C's own cited sources for the two stages were NOT symmetric in quality - one stage rested on markedly weaker (undated, non-primary) sourcing than the other, which Agent C's original framing obscured by presenting them side by side as if equally confirmed."
+        ],
+        "adjudication": "F: Adopted Agent E's correction. rule_chronology above does not present the two stages as symmetrically confirmed; each area entry carries its own independent confidence rather than inheriting a shared 'Expert Rules era' confidence level."
+      },
+      {
+        "topic": "DUEL_MODE_MR1 as a starting point for a future rule profile",
+        "positions": [
+          "Initial framing (carried over from the prior gate's phase_experiment work): MR1 is 'close enough' as a base preset to layer historical corrections onto.",
+          "Agent D and Agent E: both independently argued against using MR1 wholesale, since at least one bundled sub-flag (the obsolete-ignition family) was not independently re-verified as period-correct for Aug 1999 specifically in this pass."
+        ],
+        "adjudication": "F: Adopted D/E's position. rejected_flags above formally rejects wholesale MR1 adoption for any future canonical build; flags must be set and cited individually."
+      }
+    ],
+    "source_bibliography": [
+      {
+        "url": "https://yugipedia.com (restricted/forbidden list history page + revision history via action=query&prop=revisions)",
+        "kind": "community wiki + its own edit-history metadata",
+        "evidence_tier": "6 (page content); metadata pull itself is tier-1-quality PRIMARY evidence of WHEN a claim was added, not of the claim's truth",
+        "used_for": "restriction list content; tracing the 'July 1999' date to a specific unsupported 2017 edit",
+        "confidence": "medium for content, high for the provenance-tracing finding itself"
+      },
+      {
+        "url": "ocg-card.com (independent Japanese cataloguing site) restriction-list page",
+        "kind": "specialist community research",
+        "evidence_tier": "5",
+        "used_for": "restriction list content and the competing tournament-specific framing that produced the scope_dispute",
+        "confidence": "medium"
+      },
+      {
+        "url": "1999 Starter Box rulebook (first printing) - via community rulebook-scan archives",
+        "kind": "period scan/transcription with traceable provenance",
+        "evidence_tier": "4",
+        "used_for": "rule_chronology PROVEN entries (Main Phase structure, first-turn draw, tribute rules, Fusion Deck, hand limit, deck-out, Set procedure)",
+        "confidence": "high"
+      },
+      {
+        "url": "Later community rulebook-era retrospective articles (unnamed generic 'how 1999 OCG rules worked' summaries)",
+        "kind": "generic/unsourced retrospective",
+        "evidence_tier": "6",
+        "used_for": "explicitly EXCLUDED from PROVEN classifications; flagged as a collapsing-multiple-rulesets risk",
+        "confidence": "low - deliberately downweighted"
+      },
+      {
+        "url": "Multiple independent Japanese retrospective blogs (ygoceanbridge.blogspot.com and others) describing Tokyo Dome event-day disruption",
+        "kind": "oral-history / retrospective community sources",
+        "evidence_tier": "5",
+        "used_for": "event_completion_caveat, tournament_structure.unusual_or_event_specific_rules",
+        "confidence": "low-medium - multiply corroborated among themselves but zero contemporaneous confirmation found"
+      },
+      {
+        "url": "db.yugioh-card.com/yugiohdb (Konami official database, request_locale=ja) product/print-history pages",
+        "kind": "later official Konami historical database",
+        "evidence_tier": "3",
+        "used_for": "cross-checking release dates already certified in this packets release_ledger_certification (see tests/fixtures/ocg1999-official-chronology.json, fetched 2026-08-28 in the prior recertification session)",
+        "confidence": "high"
+      },
+      {
+        "url": "docs/research/ocgcore-flags.md (this repo's own prior exhaustive flag audit)",
+        "kind": "internal repo research artifact, not an external source",
+        "evidence_tier": "n/a - primary tool, not historical evidence",
+        "used_for": "engine_representability classification basis",
+        "confidence": "high (for what it documents about the engine, not about history)"
+      },
+      {
+        "url": "tests/engine/test_tokyo_dome_rules.py (already-existing, already-run pinned-core experiment)",
+        "kind": "internal repo research artifact, not an external source",
+        "evidence_tier": "n/a - implementation probe, not historical evidence",
+        "used_for": "Main Phase 2 approximation gap, confirmed not re-derived this pass since H.available() is False",
+        "confidence": "high (for what it documents about the engine, not about history)"
+      },
+      {
+        "url": "Multi-source WebSearch corroboration (yugioh-list.com Vol.5 listing, ygoldschool.com Vol.5 cardlist, toreca.net release-date-ordered cardlist, unitaro-tcgnews.com Vol.5 pull guide) - direct db.yugioh-card.com fetch was attempted but failed with a DNS resolution error in this sandbox, so this claim rests on secondary aggregators, not a direct primary-source fetch, despite those aggregators sourcing from the same Konami database",
+        "kind": "specialist community card-list aggregation, cross-corroborated across independently-run sites",
+        "evidence_tier": "5 (downgraded from the tier-3 confidence a direct Konami DB fetch would carry, specifically because that direct fetch could not be completed this session)",
+        "used_for": "confirming Gate Guardians three Fusion Material monsters (Suijin, Kazejin, Sanga of the Thunder) were first released in Vol.5 on 1999-09-23, a month after the Tokyo Dome event - the basis for the format_identity.snapshot_rationale claim that Gate Guardian could not have been Fusion Summoned at the event",
+        "confidence": "medium - multiple independent sites agree, but none checked is itself a primary Konami source, and the direct primary-source fetch failed"
+      }
+    ],
+    "remaining_blockers": [
+      "HISTORICAL: restriction-list scope (nationwide vs tournament-specific vs modern retrofit) unresolved - no tier 1-3 source found by any agent.",
+      "HISTORICAL: first-turn-attack legality at the exact Aug 25/26 1999 boundary unresolved - conflicting secondary sources, no primary source pinning the original rulebook printing specifically.",
+      "HISTORICAL: spell/trap chain resolution and priority model for 1999 unresolved - no source (primary or secondary) conclusively describes the original rulebook's multi-response resolution procedure.",
+      "HISTORICAL: Tokyo Dome tournament-specific structure (deck size, side deck, match format, starting LP as a TOURNAMENT rule rather than general-play default) unresolved - no period document located.",
+      "HISTORICAL: whether the Tokyo Dome event concluded as a coherent single-day tournament is in genuine doubt per multiply-corroborated but non-contemporaneous disruption accounts - no period source confirms or denies.",
+      "ENGINE: Main Phase 2 / single-Main-Phase model is only approximated by DUEL_NO_MAIN_PHASE_2, not exactly represented - confirmed by the already-existing phase_experiment, not newly discovered.",
+      "ENGINE: no flag exists at all for chain-resolution/spell-speed semantics, deck-size/side-deck/match-scoring/starting-LP as tournament rules (client/host-config layer not built) - per ocgcore-flags.md section 5, confirmed not newly discovered.",
+      "ENGINE: if future evidence resolves the chain-resolution historical unknown to a genuinely non-modern model, that specific gap would escalate from unknown to NOT REPRESENTABLE WITHOUT RUNTIME CHANGES."
+    ],
+    "architecture_verdict": "BLOCKED_BY_BOTH",
+    "architecture_verdict_detail": "BLOCKED_BY_HISTORICAL_EVIDENCE: restriction-list scope, first-turn-attack legality, chain-resolution model, and Tokyo-Dome-specific tournament structure are all unresolved at the required confidence level, per remaining_blockers above. BLOCKED_BY_ENGINE_REPRESENTATION: even for the historical facts that ARE proven (rule_chronology PROVEN entries), at least one (single Main Phase / no Main Phase 2) is only approximated rather than exactly representable by current ocgcore flags, and the client/host-config layer needed for deck-size/match/tournament rules does not exist in this repo. Both blocking conditions are independently sufficient; together they produce BLOCKED_BY_BOTH. This verdict does not mean the format is unbuildable in principle - it means canonicalization is not authorized at the current evidence and engine-capability level, consistent with the task's explicit instruction not to canonicalize under these conditions.",
+    "explicit_non_actions": [
+      "No formats/1999-* canonical format directory was created.",
+      "No canonical banlist was created.",
+      "No canonical pool was created (the existing certified 370-card pool digest is unchanged: f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb).",
+      "No canonical rule profile was created.",
+      "No Tokyo Dome lflist was generated.",
+      "dist/ was not modified.",
+      "No runtime behavior was modified.",
+      "No schema was modified.",
+      "No errata model change was made; no individual errata record was modified (296/296 v2 unchanged).",
+      "GOAT, Edison, and Tengu formats were not altered.",
+      "The certified 370-card pool was not altered - re-verified this session, unchanged.",
+      "No community format-list disagreement was used to silently change release history.",
+      "No missing restriction-list card was guessed to complete an incomplete list.",
+      "The July-1999-banlist sourcing problem was documented, not silently assumed resolved.",
+      "Yugipedia/community consensus was not treated as primary evidence where a scope conflict with another source existed - the conflict was surfaced (scope_dispute) rather than one side being silently preferred.",
+      "No test compares one manually transcribed repo constant against another manually transcribed repo file and calls that independent verification - the errata_intersection_audit was recomputed live from repo state, and the new fixture (see tests) is built from an independent Konami database re-fetch, not from this packet's own JSON."
+    ],
+    "reconciliation_with_prior_gate": {
+      "purpose": "This session's swarm was explicitly given the existing packet as starting context, not as unquestioned ground truth. Two places where this session's findings DIVERGE from the prior gate's own recorded verdicts are surfaced here rather than silently overwritten or silently ignored, per the user's explicit instruction not to summarize away uncertainty.",
+      "divergences": [
+        {
+          "topic": "First-turn attack legality",
+          "prior_gate_verdict": "blocker_ledger row 'First-turn attack': RESOLVED - 'Period rulebook and default absence of DUEL_ATTACK_FIRST_TURN agree.'",
+          "this_session_finding": "rule_chronology above classifies this AMBIGUOUS/UNKNOWN: Agent E located secondary sources suggesting first-turn attacks may have been ALLOWED at the original rulebook stage, with a prohibition arriving only in a later 1999 revision - directly contradicting the prior gate's RESOLVED framing. Neither this session's sources nor the prior gate's own citation trail (not re-verified line-by-line by this session) were confirmed against a tier 1-3 primary source specific to the original printing.",
+          "disposition": "This session does NOT overwrite the prior gate's blocker_ledger row (that table belongs to the prior gate's own hardening pass and is left untouched per this task's instruction to extend rather than silently rewrite existing sections). Instead this divergence is recorded here as an open reconciliation item: the prior RESOLVED verdict for first-turn attack should be treated as WEAKER than its label suggests pending either (a) a primary source confirming the prior gate's original position, or (b) a primary source confirming this session's competing reading. Any future canonical build must resolve this explicitly rather than inherit either packet's framing uncritically."
+        },
+        {
+          "topic": "Deck-out / higher-LP win-condition alternative",
+          "prior_gate_verdict": "blocker_ledger row 'Deck-out rule': BLOCKING - 'Higher-LP win is meaningful and has no pinned-core mechanism.' This implies the prior gate found evidence of an alternate 1999 rule where running out of cards to draw could be resolved by a higher-LP-wins comparison rather than an automatic loss.",
+          "this_session_finding": "This session's rule_chronology only confirmed the simpler fact that deck-out (drawing from an empty deck) was a LOSS condition from the original rulebook - it did not investigate or find evidence either way on a higher-LP-wins alternative/exception. This is a gap in this session's coverage, not a contradiction of the prior finding.",
+          "disposition": "The prior gate's BLOCKING classification for the higher-LP nuance stands unchallenged and unconfirmed by this session - it remains an open item this session did not advance either direction. Reported so it is not mistaken for having been resolved by this session's simpler deck-out-is-a-loss-condition finding."
+        }
+      ]
+    }
   }
 }

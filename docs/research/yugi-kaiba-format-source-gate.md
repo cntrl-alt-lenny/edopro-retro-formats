@@ -501,3 +501,171 @@ No shared schema or runtime mutation was justified by this gate.
 This hardening gate creates no canonical Tokyo Dome format, banlist, pool,
 rule profile, generated output, release ledger, or errata mutation. Existing
 GOAT, Edison, and Tengu artifacts remain the only canonical formats.
+
+## Rules and restriction-list research gate (2026-08)
+
+A second, independent 5-agent research swarm (A: restriction-list chronology,
+B: Tokyo Dome event documents, C: early OCG rules chronology, D: ocgcore
+representability, E: adversarial auditor) plus a direct F adjudication pass
+was run against this same commit lineage to answer two questions the prior
+hardening gate above left open: what restriction list applied to Japanese OCG
+play at the Tokyo Dome boundary, and what game rules were actually in force
+there versus what current engine architecture can represent. Full structured
+findings are in `docs/research/yugi-kaiba-format-source-packet.json` under
+`tokyo_dome_rules_and_restriction_research_2026_08`. This is a second,
+additive research pass - it does not delete or silently rewrite anything
+above; where it disagrees with a verdict recorded above, the disagreement is
+called out explicitly rather than papered over (see "Reconciliation" below).
+
+**Verdict: BLOCKED_BY_BOTH** (historical evidence AND engine representation).
+Still no canonical Tokyo Dome format, banlist, pool, rule profile, or lflist
+was created by this pass. `dist/`, runtime behavior, schemas, and the errata
+model were not touched.
+
+### Format identity - unchanged, with a new caveat
+
+The recommended identity is unchanged from the section above: id
+`1999-08-tokyo-dome`, display name "Tokyo Dome Format", region OCG, snapshot
+**1999-08-25** (pre-event, not event-day). The swarm found no evidence
+justifying a move to an event-day snapshot - if anything it found evidence
+cutting against one: the event's own headline attendance promo, Gate
+Guardian, is absent from the certified 370-card pre-event pool, and so are
+all three of its Fusion Material monsters (Suijin, Kazejin, Sanga of the
+Thunder) - directly reconfirmed this session by recomputing the release
+cutoff against live repo state. Anyone restricted to the certified pre-event
+pool could not have Fusion Summoned Gate Guardian, regardless of exactly when
+its materials were later released. (Community card-list aggregators converge
+on Vol.5, 1999-09-23 - a month after Tokyo Dome - as their actual first
+OCG-JP release; a direct Konami-database fetch to confirm that date primarily
+could not complete in this sandbox, so that specific date is held at medium,
+not high, confidence.) Separately, and newly: whether the Tokyo Dome tournament
+even concluded as a coherent single-day event on August 26, 1999 is now in
+genuine doubt. Multiple independent Japanese retrospective sources describe
+crowd-control failure severe enough to require riot police, with one strand
+of testimony suggesting the finals may not have concluded at the venue and
+were possibly re-held regionally. No period (1999) document confirming or
+denying this was found by either the event-document specialist or the
+adversarial auditor despite deliberate searching in English and Japanese.
+This is reported as an open historical question, not resolved.
+
+### Restriction list - content corroborated, scope BLOCKED
+
+The 3-card content (Raigeki, Dark Hole, Trap Hole, each Limited to 1 copy,
+single-tier - no "Forbidden" tier existed in Japan until March 2004) remains
+well corroborated across independent sources and is not in dispute. What
+broke this pass: the adversarial auditor found that the two sources this
+packet already cites for that list - Yugipedia and ocg-card.com - actually
+describe **different objects** when read closely. Yugipedia frames the list
+as Konami's first official, nationwide restriction; ocg-card.com frames what
+looks like the same 3 cards as rules for one specific 1999 qualifying event,
+not a blanket restriction on all OCG play. Neither is a Konami-original
+document, and neither source states which reading is correct. Applying the
+evidence hierarchy gives no way to prefer one tier-5/6 source's framing over
+the other's when they disagree about scope, not just detail - so per the
+task's own instruction, this is left **BLOCKED** rather than guessed.
+Separately, the "July 1999" date already carried in this packet's
+`banlist.working_id` was traced to a specific 2017 Yugipedia edit whose own
+cited source does not, on direct re-read, state a July date anywhere - that
+date should be treated as an unverified placeholder, not a finding.
+
+On the software side: a single-tier, Limited-only restriction list needs **no
+schema or model change** - `BanlistEntry`'s status enum and the
+`UNLIMITED_COUNT=3` default already support it. The blocker here is
+historical, not architectural.
+
+### Rule chronology - several new PROVEN facts, two newly-flagged disputes
+
+Walking the rulebook lineage from the 1999 Starter Box rulebook forward
+turned up several facts this packet had not previously stated explicitly as
+PROVEN with a period-scan citation: single Main Phase / no Main Phase 2
+concept, no first-turn draw, tribute-summon requirements for level 5+/7+,
+Fusion Deck via Polymerization, a 6-card hand limit with end-of-turn discard,
+deck-out as a loss condition, and the original Set (face-down defense)
+procedure. Two areas are explicitly **UNKNOWN**, not resolved either way:
+
+- **First-turn attack legality.** This directly contradicts the "RESOLVED"
+  verdict this packet's own blocker ledger above already recorded for this
+  row. The adversarial auditor located secondary sources suggesting
+  first-turn attacks may have been *allowed* at the original rulebook stage,
+  with a prohibition arriving only in a later 1999 revision - the opposite of
+  what the earlier hardening pass assumed. Neither reading is backed by a
+  primary source specific to the original printing. **This packet's prior
+  "RESOLVED" verdict for first-turn attack should now be read as weaker than
+  its label states**, pending a primary source either way. See the packet
+  JSON's `reconciliation_with_prior_gate` block for the full detail - this
+  contradiction is deliberately not smoothed over.
+- **Spell/Trap chain resolution and priority.** No source, primary or
+  secondary, conclusively describes the original rulebook's procedure for
+  resolving multiple responses. `docs/research/ocgcore-flags.md` already
+  documents there is no flag governing this at all - if evidence later
+  confirms a non-modern 1999 model, this becomes a genuine engine gap, not
+  just a historical unknown.
+
+The already-recorded "Deck-out rule: BLOCKING" row in the ledger above (the
+possible higher-LP-wins alternative to strict deck-out loss) is **not**
+resolved by this pass either - this session only confirmed the simpler fact
+that deck-out was *a* loss condition, and did not investigate the higher-LP
+nuance. That blocker stands as previously recorded.
+
+Both the rules specialist and the adversarial auditor flagged and excluded a
+category of bad source: retrospective "how 1999 OCG rules worked" articles
+that collapse multiple distinct 1999 rule revisions into one undifferentiated
+bucket. None of the PROVEN facts above rely on that kind of source.
+
+### Engine representability - decomposed, not preset-based
+
+Per the task's instruction, composite presets were rejected in favor of
+per-flag classification. Exactly representable with no flag needed: first-turn
+draw skip, tribute/advance summon, Fusion Deck/Summon, hand limit, deck-out.
+Representable by omission-default: the original Set procedure. Approximated:
+single Main Phase, where `DUEL_NO_MAIN_PHASE_2` matches the headline "no
+Main Phase 2" behavior but also removes a legal post-battle action window the
+actual 1999 single-Main-Phase model preserved - already established by the
+existing `tests/engine/test_tokyo_dome_rules.py` experiment and confirmed,
+not re-derived, this pass (`H.available()` remains `False` in this sandbox,
+so no new pinned-core test was run). Unknown-because-historically-unresolved:
+first-turn attack, chain/priority. Not representable without runtime changes:
+deck size, side deck, match/tiebreaker rules, starting LP as a tournament
+rule - these live at a client/host-config layer this repo has not built,
+confirmed and not newly discovered.
+
+`DUEL_MODE_MR1` and `DUEL_MODE_GOAT` were both explicitly evaluated and
+rejected as starting points for any future rule profile: MR1 bundles at
+least one sub-flag (the obsolete-ignition family) whose period correctness
+for August 1999 specifically was not independently re-verified this pass, and
+GOAT is tuned for a 2005 TCG boundary. Any future profile must set and cite
+flags individually.
+
+### Event-day card pool - unchanged, 370 cards
+
+No source establishes that any card first distributed on August 26, 1999
+(attendance promos, prize cards, Premium Pack, Booster 4) was legal in decks
+actually played that day, as opposed to being a take-home souvenir. The Gate
+Guardian case above is affirmative evidence against the
+"released-at-the-event-implies-legal-at-the-event" assumption. The certified
+pre-event pool - 370 cards, digest
+`f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb` - was
+independently recomputed this session from live repo state and is unchanged.
+No August 26 card is added.
+
+### Errata intersection - accounting only, 296/296 unchanged
+
+Recomputed live (not from memory of the prior session): 6 of the 296 v2
+errata records intersect the 370-card pool at the 1999-08-25 snapshot -
+`erratum-crush-card-virus` and `erratum-reinforcements` are determinate;
+`erratum-castle-walls`, `erratum-cocoon-of-evolution`,
+`erratum-elegant-egotist`, and `erratum-ultimate-offering` remain ambiguous.
+No record was modified and no new chronology was invented to make the
+ambiguous four resolve.
+
+### Final verdict
+
+**BLOCKED_BY_BOTH.** Historically: restriction-list scope, first-turn-attack
+legality, chain-resolution model, and Tokyo-Dome-specific tournament
+structure are all unresolved at the confidence this gate requires.
+Architecturally: even the historically-proven facts include at least one
+(single Main Phase) that is only approximated, and the client/host-config
+layer for tournament-structure rules does not exist. Neither blocker alone
+would be sufficient to stop here on its own strength - together they are.
+This does not mean the format is unbuildable in principle; it means
+canonicalization is not authorized yet.
