@@ -669,3 +669,181 @@ layer for tournament-structure rules does not exist. Neither blocker alone
 would be sufficient to stop here on its own strength - together they are.
 This does not mean the format is unbuildable in principle; it means
 canonicalization is not authorized yet.
+
+## Corrective rules gate (2026-08, second pass)
+
+The rules/restriction-list gate immediately above was independently reviewed
+and **rejected** as a historical-rules gate - despite clean engineering and
+useful restriction-list research - because the integrating adjudicator
+promoted agent summaries to PROVEN without personally re-reading the
+load-bearing historical source closely enough. This section is a corrective
+pass, not a replacement: it does not delete anything above, but it corrects
+five specific wrong or self-contradictory conclusions and replaces the flat
+`rule_chronology` with a mechanically explicit three-tier evidence matrix
+(original Starter Box state / later-1999 Expert Rules state / Tokyo-Dome-
+effective state) that is never allowed to collapse into one bucket. Full
+structured detail is in `docs/research/yugi-kaiba-format-source-packet.json`
+under `tokyo_dome_rules_corrective_gate_2026_08`.
+
+**Methodology change.** Before dispatching a second 6-agent swarm (A: Starter
+Box forensic reader, B: later-1999 chronology, C: Tokyo-Dome-specific, D:
+restriction-list re-verification, E: engine representability, F: adversarial
+audit), the integrating adjudicator personally fetched the primary source
+directly - not through a subagent - and obtained the corrected facts before
+the swarm ever ran, specifically so the swarm's own work could be checked
+for agreement rather than being the sole source of these facts. After the
+swarm finished, the adjudicator personally re-fetched several of its own
+highest-stakes new claims again, catching a nuance (see "Restriction list"
+below) that neither the swarm's restriction-list specialist nor its
+adversarial auditor had fully surfaced.
+
+### The five corrections
+
+**First-turn attack.** The primary source (a page-by-page English
+translation of the original 1999 OCG Starter Box rulebook, published by
+ygorganization.com after the translator's team acquired an original physical
+copy) states explicitly: *"while it's possible to play a Monster Card on the
+field on turn 1, it is not possible to attack. Attacking becomes possible
+starting from turn 2."* This is now **PROVEN** for the Starter Box, not
+ambiguous as the prior gate had it. What remains genuinely unresolved is the
+separate question of whether this rule was still in force, unmodified, five
+months later at Tokyo Dome - that stays UNKNOWN, and the two questions must
+never be conflated.
+
+**Starting Life Points.** The same primary source states: *"Each Duel starts
+with each player having 8000 points."* Not 2000 - the prior gate's "probable
+2000 LP" was a guess that turned out wrong; 2000 LP belongs to an unrelated
+manga/anime "Basic Rules" depiction, not the real tabletop OCG rule. 8000 LP
+is PROVEN for the Starter Box; the Tokyo-Dome-specific figure remains a
+separate UNKNOWN.
+
+**Deck-out.** The primary source states: *"if either player's Deck is
+emptied and said player cannot draw anymore, the outcome of the Duel is
+decided by the remaining Life Points... the player with more Life Points at
+the moment said player's Deck is emptied wins the Duel."* This is not an
+instant loss - it is an LP comparison, confirmed to have remained the rule
+through all of Series 1 (i.e. through 1999), with the modern auto-loss
+version dated to the later "New Expert Rules" (Series 2, 2000 onward). The
+prior gate's "EXACTLY REPRESENTABLE" verdict was wrong: modern ocgcore
+hardcodes instant loss on empty-deck draw failure, with no flag or
+`OCG_Player` field able to substitute an LP-comparison outcome anywhere in
+the complete 36-flag table this repo's own `docs/research/ocgcore-flags.md`
+documents. Corrected classification: **NOT_REPRESENTABLE**. This restores
+the original, pre-2026-08 hardening gate's own conclusion that deck-out is a
+genuine engine gap - the first 2026-08 rules-research pass had incorrectly
+overwritten that with "exactly representable," and this pass reverses it.
+
+**Post-battle Main Phase.** The prior gate contained a direct internal
+contradiction: one section said `DUEL_NO_MAIN_PHASE_2` removes a legal
+historical post-battle action window; another said the historical rules
+never had that window at all. The primary source resolves this cleanly:
+*"Even when the Battle Phase is over, as long as you do not move to the End
+Phase, it remains the Main Phase."* There was no phase called "Main Phase
+2" - but action could continue in the single Main Phase after Battle Phase
+ended, before the player chose to end their turn. `DUEL_NO_MAIN_PHASE_2`
+removes exactly that legal window, which is backwards - this repo's own flag
+research already categorizes it as a "variant-format flag (Speed/Rush Duel,
+not historical TCG eras)," not a rule-era flag. Correct representation:
+leave it unset (**DEFAULT_OMISSION**); the standard MP1→BP→MP2→EP flow
+already reproduces the historical substance even though the engine still
+internally labels the window "Main Phase 2," a presentational difference no
+1999-era card could ever have depended on.
+
+**Hand limit and Tribute Summon.** The prior gate promoted both to PROVEN
+"from the original rulebook." Direct re-reading found the rulebook is
+silent on both - no hand-size limit or discard rule anywhere, and no
+tribute/sacrifice cost for any monster Level, with printed Level-7/8
+monsters (e.g. Blue-Eyes White Dragon) already usable for free in the same
+March 1999 product. Both are correctly downgraded to **UNKNOWN** at the
+Starter Box tier (an absence-based finding, not an under-sourced guess).
+Separately and newly established: Tribute Summon (Level 5-6 = 1 Tribute,
+Level 7+ = 2 Tributes, the modern threshold) was introduced by the Expert
+Rules revision dated with reasonable confidence to **May 5, 1999** - PROVEN
+for the later-1999 tier, in force well before Tokyo Dome as a general OCG
+rule (though not confirmed as enforced at the Tokyo Dome tables
+specifically). The hand-size limit, by contrast, was not introduced until
+the later "New Expert Rules" (Series 2, from 2000 onward) - it almost
+certainly **postdates Tokyo Dome entirely**, a stronger and more useful
+finding than "merely unproven."
+
+### Restriction list - moderately resolved, not fully settled
+
+The restriction-list *content* (Raigeki, Dark Hole, Trap Hole, each Limited
+to 1) remains strongly corroborated and undisturbed. The *scope* question -
+nationwide OCG vs. tournament-specific vs. modern retrofit - has moved
+meaningfully. The adjudicator personally fetched Yugipedia's raw wikitext
+and its MediaWiki API revision history directly and confirmed: the page was
+renamed and substantively rewritten on **2026-02-22** by editor
+SnorlaxMonster, from "July 1999 Forbidden and Limited Lists" (nationwide
+framing, sourced only to an archived personal fan webpage whose own title
+read "Forbidden/Limited Card Lists **May 15, 2000**" - apparently itself a
+retrospective, not a primary July 1999 document) to "August 1999 Lists"
+(single-day framing, `start_date = end_date = August 26, 1999`, tied
+explicitly to the Tokyo Dome tournament finals, citing a real, page-numbered
+2004 Shueisha "Master Guide" book). The editor's own move comment: *"This
+list was only used for the Tokyo Dome finals... this is at least more
+accurate."* This is Yugipedia correcting itself, on its own initiative, away
+from the nationwide/July framing this packet's `banlist.working_id` of
+`ocg-1999-07` had provisionally carried forward - that value should now be
+read as actively wrong, not merely an unverified placeholder.
+
+A second, Japanese specialist source appeared to independently corroborate
+the tournament-specific reading - but personally re-checking it (twice, with
+a targeted follow-up query) found the corroboration weaker than the swarm
+first reported: the claim is not that source's own primary research, but a
+citation of yet a third external site, explicitly presented as "one
+hypothesis among three possibilities," with its supporting magazine
+reference supplied by an anonymous blog commenter rather than the author's
+own verified read. This downgrade is the adjudicator's own catch, not
+something either the restriction-list specialist or the adversarial auditor
+surfaced. **Net verdict: moderately resolved, not BLOCKED and not fully
+settled** - anchored by one genuinely solid citation (Yugipedia's
+self-correction) plus one weak, hedged, third-hand corroboration. Do not
+canonicalize a restriction list on this basis, but do not continue reporting
+it as fully blocked either.
+
+### A striking new finding: the Exodia win condition was unreachable until Tokyo Dome itself
+
+Personally cross-verified by the adjudicator against two independent
+Yugipedia pages: **Exodia the Forbidden One** - the fifth and final
+Forbidden One piece, without which the textually-PROVEN "assemble all five
+in hand" win condition was categorically impossible - was not available in
+Japan at all before **August 26, 1999**, when it was first printed in the
+"Premium Pack (Japanese)" product distributed at the Tokyo Dome event
+itself. Even the other four pieces were only completed as a printable set by
+August 5, 1999, three weeks before the event. The Exodia win was, in other
+words, unreachable in real OCG play until the exact date this proposed
+format is named for - and even then, only for a small, chaotic subset of
+attendees, given the venue-exclusive pack's sales were suspended and then
+cancelled after roughly two hours amid a crowd that vastly exceeded the
+Dome's capacity (Konami's own cited figures: ~55,000 admitted plus 10,000+
+turned away, against ~50,000 capacity). This does not change the certified
+pre-event pool recommendation - Exodia the Forbidden One correctly remains
+outside the 370-card 1999-08-25 pool - but it is important context for any
+future decision about event-day card legality.
+
+### Re-derived architecture verdict
+
+**BLOCKED_BY_BOTH** - unchanged as a top-line label, but re-derived rather
+than preserved by default, per the task's explicit instruction not to keep
+a verdict merely because the prior packet had it. Historically: every rule
+area's Tokyo-Dome-tier evidence status is UNKNOWN except deck-out and hand
+limit (BOUNDED) and Tribute Summon (AMBIGUOUS) - even after this pass's
+substantial strengthening of the Starter-Box and later-1999 tiers, the
+event-tier column that actually matters for a Tokyo Dome format specifically
+remains almost entirely unresolved. Architecturally: deck-out's LP
+comparison, the chain/Spell-Speed model, and the ATK<DEF battle "recoil"
+quirk all have no representable engine mechanism, independent of any
+Tokyo-Dome-specific applicability question - these are genuine blockers on
+their own historical-evidence merits. Notably, the prior pass reached the
+same top-line verdict while simultaneously misclassifying deck-out as
+exactly representable - an internally false premise that happened not to
+change the conclusion, since other genuine blockers (the chain/priority gap)
+were already present. This pass's verdict rests on the corrected evidence
+matrix throughout and no longer contains that false premise.
+
+No canonical Tokyo Dome format, banlist, pool, rule profile, or lflist was
+created by this corrective pass. The certified 370-card pool, its digest,
+the 19-product release ledger, and the absence of the fabricated February
+1999 National Tournament product were all re-verified live against current
+repo state and remain unchanged.

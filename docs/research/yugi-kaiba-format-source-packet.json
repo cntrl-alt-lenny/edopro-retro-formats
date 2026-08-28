@@ -2286,5 +2286,651 @@
         }
       ]
     }
+  },
+  "tokyo_dome_rules_corrective_gate_2026_08": {
+    "purpose": "A CORRECTIVE research-only pass over the 2026-08 rules/restriction-list gate recorded in this packet's 'tokyo_dome_rules_and_restriction_research_2026_08' section. That section was independently reviewed and REJECTED as a historical-rules gate (despite clean engineering and useful restriction-list research) because the integrating adjudicator promoted agent summaries to PROVEN without personally re-reading the load-bearing historical source closely enough. This section does not delete that prior section - its useful restriction-list scope investigation is preserved and extended - but it CORRECTS five specific wrong or contradictory conclusions the prior section reached, and replaces the prior section's flat rule_chronology with a mechanically explicit three-tier evidence matrix (original Starter Box state / later-1999 Expert Rules state / Tokyo-Dome-effective state) that is never allowed to collapse those three into one bucket.",
+    "supersedes": {
+      "target_section": "tokyo_dome_rules_and_restriction_research_2026_08",
+      "corrected_claims": [
+        {
+          "prior_claim": "rule_chronology.areas[2] (first-turn attack): 'AMBIGUOUS - genuinely disputed between agents, not just under-evidenced'",
+          "correction": "The original Starter Box rulebook explicitly and unambiguously states a monster may be placed on turn 1 but cannot attack until turn 2. This is PROVEN for the Starter Box tier, personally re-verified by the adjudicator against the primary source (see evidence_matrix row 'first_turn_attack' and personally_reverified_claims below). The prior packet's 'AMBIGUOUS' verdict was wrong - it resulted from the previous adjudicator not personally reopening the source. What remains genuinely unresolved is the SEPARATE question of whether this specific rule was still in force, unmodified, at the August 26, 1999 Tokyo Dome event five months later - that Tokyo-Dome-tier question is correctly UNKNOWN, and must never be confused with the (now resolved) Starter Box question."
+        },
+        {
+          "prior_claim": "engine_representability entries[Deck-out loss condition]: 'EXACTLY REPRESENTABLE - Baseline ocgcore behavior, unchanged since 1999 in this respect; no flag needed.'",
+          "correction": "WRONG. The original Starter Box rulebook does not use an immediate deck-out loss. It states explicitly: when a player's Deck is emptied and they cannot draw, the Duel is instead decided by comparing remaining Life Points, with the higher-LP player winning. Modern ocgcore's hardcoded default (drawing from an empty Deck is an immediate loss) does NOT match this and cannot be reconfigured to produce an LP-comparison outcome via any documented DUEL_* flag or OCG_Player field. Corrected classification: NOT_REPRESENTABLE. This restores and confirms the earlier (pre-2026-08) hardening gate's own conclusion that deck-out is a serious, genuine engine gap - the 2026-08 rules-research pass had incorrectly overwritten that with 'exactly representable', which this corrective pass reverses."
+        },
+        {
+          "prior_claim": "format_identity / rules snapshot_rationale text implies 8000 LP was never asserted, but the earlier 2026-08 pass's underlying working assumption (visible in the ORIGINAL pre-2026-08 gate's architecture.host_representation discussion of LP) was 'probable 2000 LP, matching the general 1999 rulebook default'.",
+          "correction": "WRONG. The original Starter Box rulebook states explicitly: 'Each Duel starts with each player having 8000 points.' This is PROVEN for the Starter Box tier, personally re-verified by the adjudicator. 2000 LP does not appear anywhere in the 1999 OCG rulebook - it is a figure associated with an unrelated manga/anime 'Basic Rules' depiction, not the real tabletop OCG rule, and must not be used as a stand-in for it. Whether 8000 LP (or some other figure) governed Tokyo Dome tournament play specifically remains a SEPARATE, unresolved Tokyo-Dome-tier question - UNKNOWN, not inferred from the Starter Box value."
+        },
+        {
+          "prior_claim": "engine_representability entries[Single Main Phase (no Main Phase 2)] said DUEL_NO_MAIN_PHASE_2 is 'APPROXIMATED' because it 'removes a post-battle action window the actual 1999 single-Main-Phase model never had to begin with' (in the rationale text) while ELSEWHERE (rule_chronology.areas[0]) the SAME packet said the original rules DID have continuation after Battle inside the single Main Phase - a direct internal contradiction.",
+          "correction": "RESOLVED in favor of the correct reading, which the prior packet had half-right and half-wrong in two different places. The original Starter Box rulebook states explicitly: 'Even when the Battle Phase is over, as long as you do not move to the End Phase, it remains the Main Phase' - i.e. there was no phase called 'Main Phase 2', but play COULD continue in the single Main Phase after Battle Phase ended, before the player chose to end their turn. DUEL_NO_MAIN_PHASE_2 REMOVES this legal post-battle action window entirely, which is the opposite of what the historical rule preserved - so DUEL_NO_MAIN_PHASE_2 is HISTORICALLY WRONG for this ruleset, not an approximation of it. The correct engine representation is DEFAULT_OMISSION: leave DUEL_NO_MAIN_PHASE_2 unset, and the modern MP1->BP->MP2->EP flow already reproduces the historical substance (continued action after Battle, before End Phase) even though the engine internally still labels that window 'Main Phase 2', a presentational difference no 1999-era card mechanic could ever have depended on."
+        },
+        {
+          "prior_claim": "rule_chronology.areas included 'Hand size limit / discard at end of turn' and 'Tribute/Advance Summon requirements' both marked PROVEN 'from the original rulebook (first printing)'.",
+          "correction": "WRONG for the Starter Box tier. The original Starter Box rulebook contains NO hand-size limit or end-of-turn discard rule of any kind, and NO tribute/sacrifice cost for summoning any monster regardless of Level - every monster used the same free one-per-turn placement procedure. Both are correctly downgraded to UNKNOWN at the Starter Box tier (an absence-based finding, not an under-sourced guess). Separately, and NEWLY established in this corrective pass: Tribute Summon (生け贄召喚, Level 5-6 = 1 Tribute, Level 7+ = 2 Tributes) was introduced by the May 5, 1999 Expert Rules revision - PROVEN for the later-1999 tier, dated with reasonable confidence, and therefore 'after_change'/in force as a general OCG rule well before August 26, 1999. The hand-size limit was NOT introduced until the later 'New Expert Rules' (Series 2, from 2000 onward) - i.e. it almost certainly POSTDATES Tokyo Dome entirely, a materially different and stronger conclusion than 'merely unproven'."
+        }
+      ],
+      "unchanged_from_prior_section": [
+        "The restriction-list CONTENT finding (Raigeki/Dark Hole/Trap Hole, each Limited to 1) remains correct and is not disturbed - see restriction_list_reassessment below, which extends rather than overturns it.",
+        "The 370-card pre-event OCG-JP pool, its digest, and the release-ledger certification are not reopened by this pass - see release_ledger_preserved below.",
+        "The general finding that the Tokyo Dome event was severely disrupted is preserved and substantially strengthened with new, more specific corroboration - see event_disruption_reassessment below.",
+        "docs/research/ocgcore-flags.md's flag inventory and its 'variant-format flags (Speed/Rush Duel) vs rule-era flags' categorization is unchanged and was re-used (and independently re-checked) as the engine-representability reference in this pass."
+      ]
+    },
+    "swarm": {
+      "roles_used": [
+        "Agent A - original Starter Box forensic reader (worked ONLY from the original 1999 rulebook, forbidden from borrowing later Expert Rules material to fill gaps)",
+        "Agent B - Expert Rules / later-1999 chronology specialist (dated rule CHANGES only, forbidden from writing an undated 'Expert Rules' monolith)",
+        "Agent C - Tokyo Dome event-specific specialist (forbidden from inferring an event rule merely because it was true generally)",
+        "Agent D - restriction-list specialist (re-verified content and re-investigated scope/effective-date from scratch, including re-tracing the 'July 1999' date)",
+        "Agent E - ocgcore/EDOPro engine-representability specialist (received ONLY A-D's historical candidate facts, did no independent historical research)",
+        "Agent F - adversarial auditor (assumed A-E wrong, re-fetched primary/secondary sources itself to check every claim, explicitly re-checked all five known failure areas)",
+        "Agent G (= the integrating adjudicator, i.e. this session directly, NOT a delegated subagent) - personally reopened the primary source and cross-sources for every load-bearing PROVEN claim before writing this packet; see personally_reverified_claims below"
+      ],
+      "method": "Agents A, B, C, D ran independently in parallel with no cross-visibility (Research phase). Agent E then ran once, consuming ONLY A-D's structured JSON output (Engine phase) - it was explicitly instructed not to do independent historical research, matching the task's design to prevent circular self-confirmation. Agent F then ran once, consuming A-E's full combined output (Adversarial phase) - it was explicitly instructed to assume A-E were wrong and to re-fetch sources itself rather than merely critique prose; it did so, and found three genuine problems in Agent B's chronology work (detailed in corrections_from_swarm_adversarial_audit below). Critically, per this task's central methodological correction, the FINAL adjudication step was NOT delegated to another subagent - the integrating agent (this session) personally reopened primary sources directly via WebFetch/WebSearch, both BEFORE dispatching the swarm (to ground the swarm's starting point in real, personally-confirmed text) and AFTER receiving the swarm's output (to independently check the swarm's own highest-stakes new claims, catching one further nuance - see personally_reverified_claims - that neither Agent D nor Agent F had fully surfaced about the restriction-list corroboration chain).",
+      "engine_availability": "False in this sandbox, unchanged from the prior 2026-08 pass. Agent E worked from static analysis of docs/research/ocgcore-flags.md and this packet's existing phase_experiment block, exactly as the prior pass did - no new pinned-ocgcore test was run or claimed to have been run."
+    },
+    "adjudicator_personal_verification_procedure": "Before dispatching the multi-agent swarm, the adjudicator independently located the load-bearing primary source (ygorganization.com's page-by-page English translation of the physical 1999 OCG Starter Box rulebook, made after the translator's team acquired an original physical copy) via WebSearch, then personally fetched it directly via WebFetch across two separate targeted queries, obtaining direct quotes for all five areas the independent review flagged as mishandled (starting LP, first-turn attack, deck-out, post-battle Main Phase continuation, and the absence of hand-limit/tribute-summon rules) BEFORE any subagent touched the material - this was deliberate, so the swarm's own Agent A work could be checked for agreement rather than being the sole source of these facts. After the swarm completed, the adjudicator personally re-fetched: (1) the Yugipedia MediaWiki API revision history for the restriction-list page, independently reconstructing its 2017-to-2026 edit trail; (2) the live raw wikitext of that page's current (Feb 2026) revision, confirming its exact citation (a 2004 Shueisha 'Master Guide' book, ISBN 4-08-782089-0, page 84) and its exact restriction entries; (3) the yugioh-history.com restriction-list investigative article directly, including a second, more targeted fetch specifically to determine WHO originated its 'tournament-limited list' claim (the article's own author, quoting yet another third-party site, versus a commenter) - this surfaced a chain-of-custody weakness in that source that neither Agent D nor Agent F had disclosed, and materially affects how much weight this pass gives that corroboration (see restriction_list_reassessment below); (4) Yugipedia's 'Premium Pack (Japanese)' and 'Exodia the Forbidden One' pages directly, cross-referencing them against each other to independently confirm Agent B's striking Exodia/Tokyo-Dome-release finding rather than accepting it on Agent B's word alone.",
+    "evidence_matrix": [
+      {
+        "rule_area": "starting_lp",
+        "starter_box_state": "8000 LP per player.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no source ties a specific starting LP total to Tokyo Dome tournament play itself.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "EXACT",
+        "engine_notes": "OCG_Player.startingLP (ocgapi_types.h) is a host-supplied per-duel integer, not a DUEL_* bitflag - stores 8000 with no rounding/clamping. EXACT for the Starter Box value specifically; the Tokyo Dome value is a separate, unresolved question this classification does not answer.",
+        "remaining_uncertainty": "Whether Tokyo Dome tournament play used 8000 LP (the general rule) or a tournament-specific number is UNKNOWN - no event-specific source was found by any agent or by the adjudicator's own searches."
+      },
+      {
+        "rule_area": "starting_hand",
+        "starter_box_state": "5 cards, drawn after pre-game procedure (shuffle/cut, Side Deck check, turn-order RPS).",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "EXACT",
+        "engine_notes": "OCG_Player.startingDrawCount, same host-config mechanism as starting_lp.",
+        "remaining_uncertainty": "Tokyo-Dome-specific value UNKNOWN, same caveat as starting_lp."
+      },
+      {
+        "rule_area": "first_turn_draw",
+        "starter_box_state": "The player going first skips their turn-1 Draw Phase; normal draws resume from turn 2.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "DEFAULT_OMISSION",
+        "engine_notes": "DUEL_1ST_TURN_DRAW left unset (default) reproduces this exactly - setting it would be wrong (it would make the going-first player draw turn 1, contradicting the rule).",
+        "remaining_uncertainty": "Tokyo-Dome-specific value UNKNOWN."
+      },
+      {
+        "rule_area": "first_turn_attack",
+        "starter_box_state": "A monster may be placed on turn 1 but cannot attack; attacking becomes legal from turn 2.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source on whether this rule was still in force, unmodified, at Tokyo Dome.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "DEFAULT_OMISSION",
+        "engine_notes": "DUEL_ATTACK_FIRST_TURN left unset (default) reproduces this exactly.",
+        "remaining_uncertainty": "CORRECTED FROM PRIOR PASS: the Starter Box question is now PROVEN, not ambiguous. What remains genuinely open is only whether this specific rule still applied unmodified 5 months later at Tokyo Dome - never state the Tokyo Dome column as PROVEN merely because the Starter Box column is."
+      },
+      {
+        "rule_area": "deck_out",
+        "starter_box_state": "Emptying one's Deck with nothing left to draw is NOT an instant loss. The Duel is instead decided by comparing remaining LP; the higher-LP player wins.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "Stayed the rule through all of Series 1 (covering Aug 26, 1999); the modern auto-loss version was introduced only with the later 'New Expert Rules' (Series 2, from 2000).",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (unchanged)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source, but the general rule is well-bounded as unchanged through this date.",
+        "tokyo_dome_evidence_status": "BOUNDED",
+        "tokyo_dome_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "engine_representation": "NOT_REPRESENTABLE",
+        "engine_notes": "CORRECTED FROM PRIOR PASS (was wrongly 'EXACTLY REPRESENTABLE'). Modern ocgcore hardcodes an immediate loss on failure to draw from an empty Deck. No DUEL_* flag or OCG_Player field can substitute an LP-comparison outcome - docs/research/ocgcore-flags.md's complete 36-flag table and its section 5 axis-completeness list contain nothing addressing draw-failure win/loss determination. This restores the original (pre-2026-08) hardening gate's conclusion that this is a genuine engine gap.",
+        "remaining_uncertainty": "This is now the single clearest confirmed historical-rule/engine-gap pair in the whole packet: PROVEN for the Starter Box and BOUNDED as unchanged through Aug 26, 1999, but genuinely NOT_REPRESENTABLE by the current engine."
+      },
+      {
+        "rule_area": "main_battle_main_sequence",
+        "starter_box_state": "No 'Main Phase 2' phase or terminology exists. The rulebook: 'Even when the Battle Phase is over, as long as you do not move to the End Phase, it remains the Main Phase.' Play may continue in that single Main Phase after Battle Phase ends, before the player ends their turn.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No evidence found of a Main Phase 1 / Battle Phase / Main Phase 2 split occurring before Aug 26, 1999. Exactly when that split was later introduced is an open gap, not resolved by this pass.",
+        "later_1999_effective_bounds": "unknown upper bound - no change found through 1999-08-26, later date of the eventual MP1/MP2 split not established",
+        "later_1999_source_ids": [],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "DEFAULT_OMISSION",
+        "engine_notes": "CORRECTED FROM PRIOR PASS (internal contradiction resolved). DUEL_NO_MAIN_PHASE_2 is confirmed by docs/research/ocgcore-flags.md's own categorization as a 'variant-format flag (Speed/Rush Duel, not historical TCG eras)', not a rule-era flag - setting it would REMOVE the legal post-battle action window the rulebook explicitly preserves, which is backwards. Correct representation: leave it unset. The default MP1->BP->MP2->EP flow already reproduces the historical substance (continued action after Battle, before End) even though the engine internally still labels that window 'Main Phase 2' - a presentational difference no 1999-era card mechanic could depend on.",
+        "remaining_uncertainty": "The prior packet simultaneously said (in one place) a post-battle window existed and (in another) that it never existed - this row is the single corrected source of truth and should be treated as superseding both prior statements."
+      },
+      {
+        "rule_area": "normal_summon_set",
+        "starter_box_state": "One Monster Card placement per turn: Attack Position (face-up) or Defense Position (face-down, no separately named 'Set' distinct from choosing Defense). Up to 5 monsters on the field; position changeable once per turn from turn 2 onward.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "This base once-per-turn placement action is unchanged March-Aug 1999 - only the TRIBUTE COST attached to it changed (see tribute_summon row).",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (base action unchanged)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "DEFAULT_OMISSION",
+        "engine_notes": "Leaving unset DUEL_NORMAL_SUMMON_FACEUP_DEF (only face-up Attack / face-down Defense are legal, matching the rulebook) and the classic zone-geometry flags (preserves 5-Main-Monster-Zone field) reproduces this exactly.",
+        "remaining_uncertainty": "Tokyo-Dome-specific value UNKNOWN."
+      },
+      {
+        "rule_area": "tribute_summon",
+        "starter_box_state": "NOT ADDRESSED. No tribute/sacrifice cost of any kind is described for any monster Level - every monster used the same free one-per-turn placement, including printed Level-7/8 monsters (e.g. Blue-Eyes White Dragon) already in the same March 1999 product.",
+        "starter_box_evidence_status": "UNKNOWN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "later_1999_state": "Tribute Summon introduced: Level 5-6 monsters require 1 Tribute, Level 7+ require 2 Tributes (the modern threshold). Dated to the May 5, 1999 Expert Rules / Official Guide Starter Book.",
+        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_source_ids": [
+          "yugipedia-official-card-game-page",
+          "yugioh-history-generation-one-4",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "AMBIGUOUS-leaning-UNKNOWN - Konami's own Aug 20, 1999 guidebook ('The Valuable Book 1') already showed Expert Rules in print 6 days before the event, which is circumstantial support that the general rule was in force, but no source confirms this is what was actually enforced at the Tokyo Dome tables specifically.",
+        "tokyo_dome_evidence_status": "AMBIGUOUS",
+        "tokyo_dome_source_ids": [
+          "yugioh-history-forbidden-list-1999"
+        ],
+        "engine_representation": "NOT_REPRESENTABLE for the Starter Box state / EXACT for the later-1999 (post-May-5) state",
+        "engine_notes": "CORRECTED FROM PRIOR PASS (was wrongly promoted to PROVEN from the Starter Box). Starter Box: no flag or OCG_Player field can waive the Level-based tribute requirement for high-Level monsters - core/hardcoded summon-procedure logic, NOT_REPRESENTABLE. Later-1999 (Level 5-6=1/7+=2 tribute): this IS the unconditional modern engine default, requiring no flag - EXACT for that state specifically, contingent on which historical snapshot is actually being targeted.",
+        "remaining_uncertainty": "absence-based finding, not under-sourced. The engine verdict depends entirely on which temporal snapshot is targeted - do not quote a single verdict for 'tribute summon' without specifying Starter-Box-era vs later-1999-era, since they are opposite classifications."
+      },
+      {
+        "rule_area": "fusion",
+        "starter_box_state": "Fusion Summon requires Monster A and Monster B already ON THE FIELD (not hand) plus Polymerization in hand; searches a separate Fusion Deck for the result; A, B, and Polymerization go to the Graveyard.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "Fusion Material Monsters could additionally be used directly from hand, from 1999-05-05.",
+        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_source_ids": [
+          "yugipedia-official-card-game-page",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "NOT_REPRESENTABLE (at the flag level) / representable at the card-script layer",
+        "engine_notes": "No DUEL_* flag governs fusion-material source location for either state - it is a parameter of Polymerization's own card script (LOCATION_MZONE-only vs LOCATION_HAND|LOCATION_MZONE), a database-content fact, not a core engine axis. The modern standard Polymerization script already matches the post-May-1999 state.",
+        "remaining_uncertainty": "Tokyo-Dome-specific value UNKNOWN; which script variant would be needed depends on which snapshot is targeted."
+      },
+      {
+        "rule_area": "hand_limit",
+        "starter_box_state": "NOT ADDRESSED. No maximum hand size or end-of-turn discard rule appears anywhere; the End Phase description has no hand-size clause.",
+        "starter_box_evidence_status": "UNKNOWN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "later_1999_state": "The modern 6-card hand limit was introduced only by the later 'New Expert Rules' (Series 2, from 2000 onward) - i.e. it almost certainly POSTDATES Tokyo Dome entirely.",
+        "later_1999_effective_bounds": "not yet in force as of 1999-08-26 (introduced 2000+)",
+        "later_1999_source_ids": [
+          "yugipedia-official-card-game-page",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "Very likely still absent (no hand limit) - the introducing revision postdates the event, but no Tokyo-Dome-specific source directly confirms this rather than inferring from the general timeline.",
+        "tokyo_dome_evidence_status": "BOUNDED",
+        "tokyo_dome_source_ids": [
+          "yugipedia-official-card-game-page"
+        ],
+        "engine_representation": "NOT_REPRESENTABLE (as EXACT) if the goal is reproducing 'no limit' / APPROXIMATION if actively representing it",
+        "engine_notes": "CORRECTED FROM PRIOR PASS (was wrongly promoted to PROVEN from the Starter Box; the true situation is stronger than merely unproven - the limit almost certainly did not exist yet by Aug 1999 at all). DUEL_NO_HAND_LIMIT exists and mechanically matches 'no discard, no limit' precisely, but requires ACTIVELY setting a non-default flag the repo's own doc categorizes as a modern Rush/Speed-Duel convenience rather than a verified rule-era flag - graded APPROXIMATION for taxonomy honesty even though no known imprecision was found.",
+        "remaining_uncertainty": "absence-based finding, not under-sourced. Do not present 'hand limit unproven' as the finding - the corrected, stronger finding is 'the limit had almost certainly not been introduced yet as of Aug 26, 1999'."
+      },
+      {
+        "rule_area": "deck_size",
+        "starter_box_state": "Minimum 40 cards, explicitly no upper limit. Max 3 copies of any card across Deck + Side Deck combined.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN for the numeric requirement itself. A separate, event-specific card-release-date eligibility cutoff was found (only cards released on/before Aug 25, 1999 were legal at the tournament) - this is a pool-membership rule, not a deck-size rule, and is not conflated here.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [
+          "ygoldschool-99-tokyodome-limit (WebSearch-synthesis only, page unreachable - DNS failure)"
+        ],
+        "engine_representation": "NOT_REPRESENTABLE at the core-engine level / EXACT at the client/host-config layer",
+        "engine_notes": "ocgcore itself enforces no min/max deck size in either direction - it plays whatever card-ID array it is given. This is standard client/host-config territory (EDOPro HostInfo deck-size-range fields, DeckManager::CheckDeckContent), exactly where every real format the client supports already implements this.",
+        "remaining_uncertainty": "tokyo_dome_evidence_status is UNKNOWN for the numeric deck-size requirement itself; a separate event-specific card-release-date eligibility cutoff (BOUNDED) was found and is tracked in tokyo_dome_state/tokyo_dome_source_ids, not conflated into this status field. The Aug-25-1999 event card-eligibility cutoff is a genuinely new, event-specific finding (see event_day_pool_reassessment below) but was only reached via WebSearch synthesis of a page (ygoldschool.com) that returned DNS-resolution failures for direct fetch in this sandbox - bounded, not proven, pending a reachable primary read."
+      },
+      {
+        "rule_area": "side_deck",
+        "starter_box_state": "Up to 10 'Preparation Cards' (Side Deck), swappable with the Deck between Duels of a Match; counts toward the same 3-copies-per-card cap as the Deck.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999 (still 10 cards).",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation",
+          "ygoprodeck-master-rules-history"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no source ties side-deck rules (existence or size) specifically to the Tokyo Dome tournament.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "NOT_REPRESENTABLE at the core-engine level / EXACT at the client/host layer",
+        "engine_notes": "A single OCG_Duel session has no concept of a Side Deck or of a multi-Duel Match at all - that structure lives entirely at the EDOPro client/room layer (its match/best-of/side-decking UI), exactly where modern EDOPro already implements side-decking for real formats.",
+        "remaining_uncertainty": "Tokyo-Dome-specific value UNKNOWN."
+      },
+      {
+        "rule_area": "win_condition",
+        "starter_box_state": "Three ways to win: (1) reduce opponent's LP to 0; (2) assemble all 5 named Forbidden One pieces in hand, instant win; (3) the deck-out LP comparison (see deck_out row). Simultaneous 0-0 LP is a draw.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "Rules text itself unchanged. Separately and NEWLY established: the 5th/final Forbidden One piece, 'Exodia the Forbidden One', was first released in Japan on August 26, 1999 itself, in the 'Premium Pack (Japanese)' product distributed AT the Tokyo Dome event - meaning the Exodia win was genuinely IMPOSSIBLE to achieve in OCG play before that exact date, and only became possible, in extremely limited practical form, on the event day itself.",
+        "later_1999_effective_bounds": "achievable starting 1999-08-26 (inside_uncertainty_interval - see notes)",
+        "later_1999_source_ids": [
+          "yugipedia-premium-pack-japanese",
+          "yugipedia-exodia-the-forbidden-one"
+        ],
+        "tokyo_dome_state": "The Exodia win condition's practical achievability turned live on this exact date, but distribution of the enabling card was itself severely disrupted (see event_disruption_reassessment) - sales opened, were overwhelmed, and were halted/cancelled after roughly two hours, so only a small number of attendees obtained the card that day at all.",
+        "tokyo_dome_evidence_status": "BOUNDED",
+        "tokyo_dome_source_ids": [
+          "yugipedia-premium-pack-japanese",
+          "yugioh-history-generation-one-12"
+        ],
+        "engine_representation": "NOT_REPRESENTABLE (composite verdict, weakest-link)",
+        "engine_notes": "Three sub-mechanisms: LP-reaches-0 win/draw is EXACT (hardcoded, no flag). Exodia instant-win is EXACT (driven entirely by that card's own effect script, contingent only on the card existing in the pool - a database/deck-construction matter, not an engine one). Deck-out LP-comparison is NOT_REPRESENTABLE (see deck_out row). Because full-fidelity reproduction of this rule area requires all three and one has no engine mechanism at all, the composite verdict is NOT_REPRESENTABLE even though two of three branches are individually EXACT.",
+        "remaining_uncertainty": "medium confidence on the exact Exodia sub-list wording due to an apparent transcription duplication in the source. This is the single most historically striking finding of this corrective pass: the format's headline early-win condition (Exodia) was not actually achievable in real OCG play until the literal date this format is named for, and even then only for a small, chaotic subset of attendees - a genuinely novel constraint on any future canonical event-day-pool decision, personally cross-verified by the adjudicator against two independent Yugipedia pages."
+      },
+      {
+        "rule_area": "spell_trap_response",
+        "starter_box_state": "Only Trap Cards (not Set Spell Cards already on the field) may be used during the Battle Phase. No chain, priority, or Spell-Speed concept is described anywhere.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "From 1999-05-05: the prior 1-Spell+1-Trap-activation-per-turn cap was removed entirely (still bounded by the 5-zone field cap), and Quick-Effect Monster abilities became activatable from hand as well as field.",
+        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_source_ids": [
+          "yugipedia-official-card-game-page"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "NOT_REPRESENTABLE",
+        "engine_notes": "docs/research/ocgcore-flags.md sec.5: no flag governs chain-resolution or Spell-Speed rules (hardcoded); no flag caps Spell/Trap activations per turn. The rulebook's 'only Traps respond in Battle Phase, no chain concept' model is a fundamentally different paradigm from ocgcore's hardcoded Spell-Speed 1/2/3 chain system, with no override available.",
+        "remaining_uncertainty": "but single-sourced - every located quote of this specific sentence traces back to the one primary-source transcription. CORRECTION-ADJACENT NOTE: an earlier draft of the later-1999 chronology for this row (from the swarm's Agent B) attributed a fabricated 'the rulebook notes Kuriboh could not be activated from hand' claim to the primary source - this was caught and removed by Agent F's adversarial audit and independently re-confirmed absent by the adjudicator; it does not appear in this row."
+      },
+      {
+        "rule_area": "battle_damage_procedure",
+        "starter_box_state": "Attack-Position battles: ATK vs ATK, difference dealt as LP damage (equal ATK: both destroyed, no LP change). Defense-Position battles: ATK vs DEF; ATK>DEF destroys defender only, no LP change; ATK=DEF destroys neither; ATK<DEF destroys neither BUT THE ATTACKER takes DEF-minus-ATK as LP damage (a 'recoil' mechanic absent from the modern game). No monsters on opponent's field: direct LP damage.",
+        "starter_box_evidence_status": "PROVEN",
+        "starter_box_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "later_1999_state": "No dated change found through Aug 26, 1999 - including the recoil quirk.",
+        "later_1999_effective_bounds": "1999-03-06 to 1999-08-26 (no change found)",
+        "later_1999_source_ids": [
+          "ygorganization-1999-rulebook-translation"
+        ],
+        "tokyo_dome_state": "UNKNOWN - no event-specific source.",
+        "tokyo_dome_evidence_status": "UNKNOWN",
+        "tokyo_dome_source_ids": [],
+        "engine_representation": "NOT_REPRESENTABLE (composite, due to the recoil quirk) / EXACT for the rest",
+        "engine_notes": "Core ATK-vs-ATK/DEF math, destruction rules, and direct-attack-to-empty-field are all EXACT (hardcoded, unchanged). The ATK<DEF-attacker-takes-recoil-damage quirk has no representation in the 36-flag table or the section-5 axis list - DUEL_0_ATK_DESTROYED governs a different case (0-ATK ties) and does not apply.",
+        "remaining_uncertainty": "Because the recoil quirk is explicit and load-bearing, the composite verdict is NOT_REPRESENTABLE even though most of the procedure is individually EXACT."
+      }
+    ],
+    "starter_box_baseline": {
+      "summary": "A reliable, source-quoted baseline for the original 1999 Starter Box rulebook, personally verified by the adjudicator directly against the primary source (ygorganization.com's page-by-page translation of a physical original copy), not merely inherited from agent summaries.",
+      "resolved": {
+        "starting_lp": "8000 (PROVEN) - CORRECTED from the prior packet's guess of 'probable 2000'.",
+        "first_turn_attack": "Prohibited on turn 1; legal from turn 2 (PROVEN) - CORRECTED from 'ambiguous'.",
+        "first_turn_draw": "Skipped for the going-first player on turn 1 only (PROVEN) - unchanged from prior packet, now re-verified.",
+        "deck_out": "LP comparison at the moment of draw-failure, NOT instant loss (PROVEN) - CORRECTED; the prior packet did not state this rule existed at all.",
+        "post_battle_main_continuation": "No 'Main Phase 2' exists, but action may continue in the single Main Phase after Battle Phase ends, before End Phase (PROVEN) - CORRECTED, resolving the prior packet's internal self-contradiction.",
+        "deck_size": "Minimum 40, no maximum (PROVEN) - unchanged from prior packet, now re-verified.",
+        "fusion": "Field-only Fusion Materials (Monsters must be on the field, not hand) plus Polymerization in hand (PROVEN) - unchanged from prior packet, now re-verified with an added nuance (this specific field-only restriction was itself later relaxed - see later_1999_state).",
+        "set_procedure": "Face-up Attack or face-down Defense, one placement per turn, up to 5 monsters on the field (PROVEN) - unchanged from prior packet, now re-verified."
+      },
+      "corrected_to_unknown": {
+        "hand_limit": "The original rulebook contains NO hand-size limit or discard rule at all (UNKNOWN/absence, not PROVEN as the prior packet wrongly stated).",
+        "tribute_summon": "The original rulebook contains NO tribute/sacrifice cost for any monster Level (UNKNOWN/absence, not PROVEN as the prior packet wrongly stated)."
+      },
+      "if_prior_claims_were_wrong_say_so": "The prior packet's claims for first_turn_attack (ambiguous), deck_out (unaddressed, treated as matching modern default), starting_lp (guessed at 2000), main_battle_main_sequence (internally contradictory), hand_limit and tribute_summon (both wrongly promoted to PROVEN) were each wrong in the specific ways detailed in the 'supersedes' block above. This is stated explicitly, per the task's direct instruction."
+    },
+    "change_boundary_before_tokyo_dome": {
+      "core_question": "Which rules had definitely changed by August 26, 1999? (NOT: what did 1999 rules generally look like?)",
+      "answer": "Exactly one DATED, well-evidenced rules revision is confirmed to have occurred between the original Starter Box (~March 1999) and Tokyo Dome (August 26, 1999): the 'Expert Rules' revision, dated to May 5, 1999 with reasonable (not certain) confidence, tied to Konami's 'Official Guide Starter Book'. That revision changed at least three areas with reasonable confidence: (1) introduced Tribute Summon (Level 5-6 = 1 Tribute, Level 7+ = 2 Tributes); (2) removed the original 1-Spell+1-Trap-per-turn activation cap; (3) allowed Fusion Material Monsters to be used from hand as well as field. All three are dated 'after_change' as of Aug 26, 1999 - i.e. they were very likely already in force generally by the time of Tokyo Dome, though NO source ties any of them specifically to enforcement at the Tokyo Dome tables (see the evidence_matrix's tokyo_dome_* columns, which correctly stay UNKNOWN for all of these).",
+      "confirmed_unchanged_by_aug_26_1999": [
+        "starting_lp (8000)",
+        "starting_hand (5 cards)",
+        "first_turn_draw (skip on turn 1)",
+        "first_turn_attack (prohibited turn 1, legal turn 2)",
+        "deck_out (LP comparison, not instant loss - explicitly confirmed to run through all of Series 1, i.e. through 1999, with the modern auto-loss version dated to the later 'New Expert Rules', Series 2, from 2000 onward)",
+        "main_battle_main_sequence (single Main Phase, no MP1/MP2 split)",
+        "normal_summon_set (base placement action)",
+        "deck_size (40 minimum, no maximum)",
+        "side_deck (10 cards)",
+        "battle_damage_procedure (including the ATK<DEF recoil quirk)"
+      ],
+      "confirmed_changed_by_aug_26_1999": [
+        "tribute_summon (introduced 1999-05-05)",
+        "spell_trap_response (per-turn cap removed, hand-Quick-effects enabled, 1999-05-05)",
+        "fusion (hand-based materials enabled, 1999-05-05)"
+      ],
+      "genuinely_still_unresolved": {
+        "hand_limit_timing": "Almost certainly NOT yet introduced by Aug 26, 1999 (the introducing revision, 'New Expert Rules', is dated Series 2 / 2000 onward) - BOUNDED, not PROVEN, since no source gives an exact pre-2000 date range boundary tighter than 'Series 1 vs Series 2'.",
+        "main_phase_2_split_timing": "No source found gives any date for when the later formal Main Phase 1 / Battle Phase / Main Phase 2 split was introduced - this is an open gap, reported honestly rather than assumed to postdate Tokyo Dome the same way hand_limit does.",
+        "date_precision_of_may_5_1999": "The May 5, 1999 date rests on convergence between an independently-checked Yugipedia page and a Japanese specialist history site, but that history site's own author explicitly disclaims certainty about the date's ultimate original source (see personally_reverified_claims below) - graded 'reasonable confidence', not certainty."
+      }
+    },
+    "restriction_list_reassessment": {
+      "instruction_compliance": "The prior gate's most useful result - content strongly corroborated, scope/effective-date not resolved - is preserved as the baseline. This pass does NOT arbitrarily choose one interpretation. It reports genuinely new evidence (Yugipedia's own Feb 2026 self-correction, personally verified by the adjudicator against raw wikitext) that moves the scope question from BLOCKED toward a specific, better-supported reading - but stops short of calling it fully resolved, because the adjudicator's own direct re-verification found the corroborating evidence chain is weaker than the swarm characterized it (see the 'adjudicator_calibration_note' below).",
+      "content": {
+        "verdict": "STRONG, unchanged from the prior pass.",
+        "cards": [
+          {
+            "name_en": "Raigeki",
+            "name_ja": "サンダー・ボルト (literal: Thunder Bolt - the card's actual original Japanese name; 'Raigeki' is the English localization team's invented rename, not a transliteration)",
+            "restriction": "Limited to 1"
+          },
+          {
+            "name_en": "Dark Hole",
+            "name_ja": "ブラック・ホール (literal: Black Hole)",
+            "restriction": "Limited to 1"
+          },
+          {
+            "name_en": "Trap Hole",
+            "name_ja": "落とし穴",
+            "restriction": "Limited to 1"
+          }
+        ],
+        "sources": [
+          "yugipedia-august-1999-lists (personally re-fetched via raw wikitext by the adjudicator; cites Master Guide, Shueisha, ISBN 4-08-782089-0, p.84, 'Deck Best Selection' chapter, dated 2004-09-28)",
+          "yugioh-history-forbidden-list-1999 (citing a Sept 1999 V Jump magazine issue, via a commenter - see calibration note)"
+        ]
+      },
+      "scope_and_effective_date": {
+        "prior_verdict": "BLOCKED - three-way unresolved contradiction between sources describing nationwide-OCG vs tournament-specific vs modern-retrofit scope.",
+        "new_evidence": "Personally verified by the adjudicator via direct MediaWiki API fetch: Yugipedia's own page was renamed and substantively rewritten on 2026-02-22 by editor SnorlaxMonster, FROM 'July 1999 Forbidden and Limited Lists' (nationwide framing, start_date=1999-07-08, end_date=2000-03-31, sourced only to an archived personal Japanese fan webpage whose own page title read 'Forbidden/Limited Card Lists May 15, 2000' - i.e. apparently itself a retrospective compilation, not a primary July 1999 document) TO 'August 1999 Lists' (single-event framing, start_date=end_date=1999-08-26, explicitly 'used for the finals of the ... Duelist Legend in Tokyo Dome tournament', sourced to a real, checkable 2004 print guidebook citation). The editor's own move comment states: 'This list was only used for the Tokyo Dome finals... this is at least more accurate.' This is Yugipedia correcting ITSELF, on its own initiative, away from the nationwide/July framing that the prior gate's 'July 1999' working_id had been provisionally carried forward from.",
+        "corroboration": "A separate, editorially independent Japanese specialist history site (yugioh-history.com) reaches a compatible conclusion (a tournament-day-only list, first appearing 1999-08-26, 'not intended for OCG generally') - but see the calibration note immediately below for why this corroboration is weaker than the swarm's Agent D and Agent F both represented it.",
+        "verdict": "MODERATELY RESOLVED, not BLOCKED and not fully settled. The scope question has moved meaningfully from the prior pass's three-way tie at the lowest evidence tiers to a single best-supported reading - Tokyo-Dome-tournament-finals-specific, effective date 1999-08-26 - anchored by ONE genuinely solid tier-3 source (Yugipedia's 2026 rewrite, citing a real 2004 book with page number) plus ONE weaker, hedged, third-hand corroborating source. This is not certainty: the underlying 2004 book citation is itself a later official/publisher retrospective, not a contemporaneous 1999 document, and remains unread firsthand by anyone in this research chain. Do NOT canonicalize a restriction list on this basis alone - but do not continue reporting this as fully BLOCKED either; that would understate real progress.",
+        "july_1999_disposition": "The 'July 1999' date and its implied nationwide, ~9-month effective window are now affirmatively CONTRADICTED by Yugipedia's own corrected position, not merely unsupported as the prior pass found. This packet's existing 'banlist.working_id' field of 'ocg-1999-07' should be treated as actively wrong going forward, not merely unverified placeholder text."
+      },
+      "adjudicator_calibration_note": "The adjudicator personally re-fetched the yugioh-history.com article a second time, specifically to determine authorship of its 'tournament-limited list, not for OCG generally' claim. This claim is NOT the article author's own primary-source finding - the author (遊史) cites and vouches for the reliability of a THIRD, separate external website ('遊戯王で1番最初に禁止になったカードは何？') as the source of that specific claim, explicitly presents it as 'one hypothesis among three possibilities' rather than a settled conclusion, and elsewhere writes 'this is quite vague and ambiguous phrasing' about the overall picture. Separately, the September 1999 V Jump magazine citation was supplied by an anonymous commenter (マルコヴィッチ), not directly quoted or scanned by the article's author, though the author does call it 'a valuable source' after the fact. Agent D's report characterized this as 'two independently-sourced investigations converging', and Agent F's adversarial audit did not catch this attenuation. The adjudicator judges this a real, if secondary, corroboration - it is not worthless - but it should be weighted as third-hand and hedged, not as an independent primary-source-grade confirmation standing alongside Yugipedia's citation. This downgrade is reflected in the 'MODERATELY RESOLVED, not BLOCKED and not fully settled' verdict above, which is more conservative than either Agent D's or Agent F's own characterization of the same evidence."
+    },
+    "event_disruption_reassessment": {
+      "prior_verdict": "Hedge-heavy but multiply-corroborated narrative of overcrowding/possible disruption; no period source found; reported as an open question.",
+      "new_evidence": "Substantially strengthened with specific, named, cross-checkable detail. Konami's own contemporary attendance figures (cited consistently across sources): approximately 55,000 people admitted, plus roughly 10,000+ more turned away at the gate (total demand estimates ~60,000-65,000), against a Tokyo Dome capacity of roughly 50,000. The event's central draw - the venue-exclusive 'Premium Pack (Japanese)' containing Exodia the Forbidden One (see event_day_pool_reassessment) - could not be distributed to the crowd: sales bottlenecked at a single point of sale, were suspended amid chaos after roughly two hours, and were ultimately cancelled outright. Riot police (機動隊) were deployed. A directly-fetched retrospective (game-blog.net) states outright that the tournament finals themselves were never held and prize distribution could not be completed. Konami subsequently issued a public apology (text located but reached only via WebSearch synthesis, not a directly-confirmed primary page, so held at slightly lower confidence than the core narrative).",
+      "verdict": "BOUNDED-to-PROVEN that the event did not conclude as planned, though no researcher in this chain (swarm or adjudicator) was able to personally pull an original 1999 news article - several of the most specialized candidate sources (ygoldschool.com, silent-night.jp, aoiblog.online) returned DNS-resolution failures or TLS certificate mismatches consistently across every fetch attempt in this sandboxed environment, a tooling limitation reported honestly rather than treated as evidence of anything. The convergence of many independent, mutually-corroborating retrospective sources - several read directly in full by the swarm's Agent C - leaves very little room for this being a baseless communal myth.",
+      "admission_policy_note": "One weakly-sourced but specific claim (reached only via WebSearch synthesis of a blog that could not be directly fetched) suggests admission was broadened shortly before the event from 'qualifying-tournament participants only' to 'anyone bringing a copy of Weekly Shonen Jump magazine' - which, if true, would mean Tokyo Dome did not cleanly inherit a closed qualifier-only structure and directly contributed to the overcrowding. Rated AMBIGUOUS, single-sourced, not independently confirmed."
+    },
+    "event_day_pool_reassessment": {
+      "prior_verdict": "No evidence any Aug-26-distributed card was legal in decks played that same day; Gate Guardian specifically could not have been Fusion Summoned using only pre-event-pool cards; certified pre-event 370-card, 1999-08-25 pool preserved unchanged.",
+      "new_finding": "PERSONALLY VERIFIED by the adjudicator via two independent, directly-cross-referenced Yugipedia pages (Premium Pack (Japanese): jp_release_date = August 26, 1999, 'released in Japan on August 26, 1999 at the ... Duelist Legend in Tokyo Dome tournament'; Exodia the Forbidden One: earliest Japanese OCG printing listed as 'Premium Pack (Japanese)'). This is a materially different and more striking case than Gate Guardian: Exodia the Forbidden One - the FIFTH and final Forbidden One piece, without which the Exodia win_condition was categorically impossible in any OCG deck regardless of format or ruleset - was not available in Japan AT ALL before August 26, 1999. The translator's own footnote on the original Starter Box rulebook confirms these cards 'didn't even exist yet' as printed cards when that rulebook was written. Even the other four Forbidden One pieces were only completed as a printable set by 1999-08-05 (per the swarm's Agent B research), three weeks before Tokyo Dome - so the Exodia win condition, while textually PROVEN as a rule from the very first rulebook, was PRACTICALLY UNREACHABLE in real OCG play until the exact date this proposed format is named for, and even then only for a small number of attendees given the chaotic, halted distribution documented in event_disruption_reassessment.",
+      "does_this_change_the_pool_recommendation": "NO. Exodia the Forbidden One remains correctly excluded from the certified pre-event 1999-08-25 370-card pool, consistent with the existing certification. This finding does not argue for extending the pool to include Aug-26 cards - if anything it reinforces the prior pass's caution about event-day legality, since even the one Aug-26 card most central to a 'complete' Tokyo Dome experience (the Exodia piece) was only reachable by a small, chaotic subset of attendees that day, not a reliable feature of 'the format as played'. It is reported here as important historical CONTEXT for any future canonical-format decision about event-day cards, not as a reason to alter the certified pool."
+    },
+    "release_ledger_preserved": {
+      "instruction_compliance": "Not reopened without cause. No new evidence in this pass contradicts any part of the certified release ledger.",
+      "verified_this_session": {
+        "pre_event_snapshot": "1999-08-25",
+        "pool_size": 370,
+        "pool_digest_sha256": "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+        "products_through_cutoff": 19,
+        "fabricated_february_national_tournament_product": "absent, confirmed absent again this session",
+        "no_august_26_card_in_pool": "confirmed - Gate Guardian, its 3 Fusion Materials, and Exodia the Forbidden One (see event_day_pool_reassessment) all remain outside the certified pool"
+      }
+    },
+    "tokyo_dome_rule_profile_readiness": {
+      "verdict": "BLOCKED_BY_HISTORICAL_EVIDENCE",
+      "explanation": "Every single row of the evidence_matrix has tokyo_dome_evidence_status of UNKNOWN except three: deck_out (BOUNDED - unchanged through Series 1, which covers Aug 26 1999), tribute_summon (AMBIGUOUS - circumstantial print-timing evidence only), and hand_limit (BOUNDED - the introducing revision very likely postdates the event). No rule area reaches PROVEN at the Tokyo-Dome tier. This is true EVEN THOUGH ten of the fifteen rule areas are now solidly PROVEN at the Starter Box tier and three more are PROVEN/dated at the later-1999 tier - the entire corrective effort in this pass went into strengthening the Starter Box and later-1999 tiers specifically so that the remaining Tokyo-Dome-tier gap would be honestly visible rather than silently inherited. A rule being proven in the original Starter Box does NOT prove it was still the rule at Tokyo Dome, and this pass has not manufactured Tokyo-Dome-tier evidence where none exists. A canonical Tokyo Dome rule profile cannot be responsibly proposed while its own event-tier column is this empty, regardless of how well-resolved the Starter-Box and later-1999 tiers have become.",
+      "what_would_unblock_this": "A genuinely event-specific source (an actual Tokyo Dome tournament rule sheet, organizer announcement, or contemporaneous 1999 press coverage of the tournament's mechanics) - not another retrospective inferring event rules from general OCG timing, which is exactly the trap this pass's Agent C was built to avoid falling into."
+    },
+    "architecture_verdict": "BLOCKED_BY_BOTH",
+    "architecture_verdict_detail": "Re-derived from scratch per the task's explicit instruction not to preserve the prior verdict merely because it was already BLOCKED_BY_BOTH. The re-derivation still lands on BLOCKED_BY_BOTH, but for a corrected and more precise set of reasons, and this pass explicitly separates 'known historical requirement the engine cannot reproduce' from 'possible historical requirement whose applicability is unresolved', per the task's specific instruction:\n\nBLOCKED_BY_HISTORICAL_EVIDENCE: every rule area's tokyo_dome_evidence_status is UNKNOWN or at best BOUNDED/AMBIGUOUS (see tokyo_dome_rule_profile_readiness above) - the event-tier column, which is what actually matters for a Tokyo Dome format specifically, remains almost entirely unresolved even after this pass's substantial strengthening of the Starter-Box and later-1999 tiers. The restriction-list scope is moderately (not fully) resolved. Separately identified per the task's explicit request:\n  - KNOWN historical requirements the engine cannot reproduce, independent of any Tokyo-Dome-specific applicability question: deck_out (NOT_REPRESENTABLE - LP-comparison outcome, no override exists; this is proven/bounded through the entire relevant window regardless of Tokyo-Dome-specific enforcement, so this is a genuine, load-bearing blocker even setting aside event-tier uncertainty), spell_trap_response (NOT_REPRESENTABLE - no chain/Spell-Speed override exists), battle_damage_procedure's ATK<DEF recoil quirk (NOT_REPRESENTABLE).\n  - POSSIBLE historical requirements whose Tokyo-Dome applicability is itself unresolved and should NOT automatically be treated as canonicalization blockers merely because the engine can't reproduce them for one temporal snapshot: tribute_summon's Starter-Box-era NOT_REPRESENTABLE classification is very likely moot for a Tokyo Dome snapshot specifically, since the later-1999 tribute-required state (which IS engine-EXACT) was almost certainly the operative rule generally by Aug 1999 - the engine gap here is real only for the wrong temporal target, and would evaporate entirely if a future pass confirms Tribute Summon was in force at Tokyo Dome specifically (which remains AMBIGUOUS, not yet BLOCKING on its own).\n\nBLOCKED_BY_ENGINE_REPRESENTATION independently: deck_out and spell_trap_response's NOT_REPRESENTABLE classifications hold across every temporal tier examined (Starter Box AND later-1999 AND, by extension, whatever Tokyo Dome specifically turns out to require, since no evidence anywhere suggests either area changed to something engine-representable before Aug 26 1999) - these are blockers on their own historical-evidence merits, not merely because of Tokyo-Dome-tier uncertainty.\n\nBoth conditions are independently sufficient on their own; together they justify BLOCKED_BY_BOTH. This top-line label is unchanged from the prior pass, but arrived at for corrected reasons, not merely preserved - the task explicitly warned against keeping BLOCKED_BY_BOTH just because the prior packet said so. The prior pass reached the same label while simultaneously misclassifying deck_out as EXACTLY REPRESENTABLE, an error that happened not to change the top-line verdict (other genuine blockers, like the chain/spell-speed gap, were already present) but did mean the prior reasoning chain contained an internally false premise even though its conclusion was directionally right. This pass's verdict rests on the corrected evidence matrix throughout and no longer contains that false premise.",
+    "personally_reverified_claims": [
+      {
+        "claim_source_id": "ygorganization-1999-rulebook-translation",
+        "source_url": "https://ygorganization.com/ogocg/",
+        "source_tier": "4 (period document translation, traceable provenance - team acquired an original physical copy)",
+        "exact_rule_claim": "Starting Life Points = 8000",
+        "supporting_excerpt": "\"Each Duel starts with each player having 8000 points. These points are called 'Life Points'.\" (Page 10)",
+        "what_it_establishes": "original Starter Box state (PROVEN). Personally fetched by the adjudicator BEFORE dispatching the swarm, then independently re-derived by Agent A, and re-checked a third time by Agent F - three separate direct reads of the same primary text, character-for-character consistent each time."
+      },
+      {
+        "claim_source_id": "ygorganization-1999-rulebook-translation",
+        "source_url": "https://ygorganization.com/ogocg/",
+        "source_tier": "4",
+        "exact_rule_claim": "First-turn attack is prohibited",
+        "supporting_excerpt": "\"While it's possible to play a Monster Card on the field on turn 1, it is not possible to attack. Attacking becomes possible starting from turn 2.\" (Page 15)",
+        "what_it_establishes": "original Starter Box state (PROVEN). Same triple-verification pattern as starting LP."
+      },
+      {
+        "claim_source_id": "ygorganization-1999-rulebook-translation",
+        "source_url": "https://ygorganization.com/ogocg/",
+        "source_tier": "4",
+        "exact_rule_claim": "Deck-out resolves by Life Point comparison, not instant loss",
+        "supporting_excerpt": "\"If either player's Deck is emptied and said player cannot draw anymore, the outcome of the Duel is decided by the remaining Life Points. In that case, the player with more Life Points at the moment said player's Deck is emptied wins the Duel.\" (Page 10)",
+        "what_it_establishes": "original Starter Box state (PROVEN). Same triple-verification pattern."
+      },
+      {
+        "claim_source_id": "ygorganization-1999-rulebook-translation",
+        "source_url": "https://ygorganization.com/ogocg/",
+        "source_tier": "4",
+        "exact_rule_claim": "A legal post-battle action window exists within the single Main Phase; no 'Main Phase 2' concept exists",
+        "supporting_excerpt": "\"Even when the Battle Phase is over, as long as you do not move to the End Phase, it remains the Main Phase.\"",
+        "what_it_establishes": "original Starter Box state (PROVEN). Personally fetched twice by the adjudicator with different targeted prompts (once for the general rule table, once specifically for this phase-structure question) before the swarm ran, then independently re-derived by Agent A and re-checked by Agent F."
+      },
+      {
+        "claim_source_id": "ygorganization-1999-rulebook-translation",
+        "source_url": "https://ygorganization.com/ogocg/",
+        "source_tier": "4",
+        "exact_rule_claim": "No hand-size limit or discard rule exists; no tribute/sacrifice cost exists for any monster Level",
+        "supporting_excerpt": "End Phase description (Page 16) has no discard clause; the monster-placement procedure (Pages 13-14) and Monster Card layout (Page 26) never mention a tribute cost tied to Level",
+        "what_it_establishes": "original Starter Box state (UNKNOWN/absence, correctly NOT promoted to PROVEN). Personally checked by the adjudicator via a direct query asking whether these topics were addressed at all - confirmed absent, not merely unmentioned in a summary."
+      },
+      {
+        "claim_source_id": "yugipedia-august-1999-lists (raw wikitext, current revision)",
+        "source_url": "https://yugipedia.com/wiki/August_1999_Lists?action=raw",
+        "source_tier": "3 (later official/publisher-adjacent print material, cited by a wiki that itself corrected its prior sourcing)",
+        "exact_rule_claim": "Restriction list (Raigeki/Dark Hole/Trap Hole, Limited to 1 each) applied specifically to the Tokyo Dome tournament finals, August 26, 1999 - not a standing nationwide OCG restriction",
+        "supporting_excerpt": "\"the first Forbidden and Limited list to be used in the OCG\" ... used for \"the finals of the ... Duelist Legend in Tokyo Dome tournament, held on August 26, 1999\" ... citing Master Guide, Shueisha, ISBN 4-08-782089-0, page 84, dated 2004-09-28",
+        "what_it_establishes": "Tokyo Dome state (BOUNDED, not PROVEN - the adjudicator personally fetched this raw wikitext directly, and separately confirmed via the MediaWiki API revision history that this is a genuine 2026-02-22 self-correction away from a weaker 2017 claim, not merely a static citation)."
+      },
+      {
+        "claim_source_id": "yugioh-history-forbidden-list-1999",
+        "source_url": "https://yugioh-history.com/environment/fragments/forbidden-list-1999",
+        "source_tier": "5 (specialist community research, hedged by its own author, partly relaying an uncited third-party site and an anonymous commenter)",
+        "exact_rule_claim": "Corroborating claim that the restriction list was tournament-day-only, not general OCG regulation",
+        "supporting_excerpt": "\"1番初めに禁止・制限リストが発表されたのは1999年8月26日に行われた『第1回全国大会...』での大会当日限定リストです\" (the first ban/restriction list announcement was a tournament-day-only list at the 1st National Tournament, held Aug 26 1999) - attributed by this article's author to a third external site, not the author's own primary research; the article explicitly frames this as one of three unresolved hypotheses.",
+        "what_it_establishes": "Tokyo Dome state, WEAK corroboration only - the adjudicator personally re-fetched this article twice to determine authorship of this specific claim, and found it materially weaker (third-hand, hedged) than Agent D's and Agent F's reports characterized it. See restriction_list_reassessment.adjudicator_calibration_note for the full finding."
+      },
+      {
+        "claim_source_id": "yugipedia-premium-pack-japanese",
+        "source_url": "https://yugipedia.com/wiki/Premium_Pack_(Japanese)?action=raw",
+        "source_tier": "5 (wiki article, but with a checkable infobox date field)",
+        "exact_rule_claim": "Premium Pack (Japanese), the product containing Exodia the Forbidden One's first OCG printing, was released 1999-08-26 at the Tokyo Dome event itself",
+        "supporting_excerpt": "jp_release_date = August 26, 1999; \"released in Japan on August 26, 1999 at the Yu-Gi-Oh! Duel Monsters II: Dark Duel Stories Duelist Legend in Tokyo Dome tournament\"",
+        "what_it_establishes": "later-1999/event-day state (PROVEN for the release date/venue; personally cross-referenced by the adjudicator against the separate Exodia the Forbidden One card page, independent of Agent B's own report of the same fact, catching that a first, wrong fetch of a generic 'Premium Pack' disambiguation page had returned unrelated Jump-Festa-series information before the adjudicator located and re-fetched the correct, specific 'Premium Pack (Japanese)' page)."
+      }
+    ],
+    "corrections_from_swarm_adversarial_audit": "Agent F's adversarial pass, independently re-verified by the adjudicator, found and corrected three genuine problems in Agent B's later-1999 chronology work before it reached this packet: (1) a fabricated attribution - Agent B's original draft claimed 'the rulebook notes Quick-Effect Monster abilities such as Kuriboh's could NOT be activated from the hand' as a primary-source quote; this sentence does not exist anywhere in the primary rulebook, and the term 'Kuriboh'/'Quick-Effect Monster' does not appear in either of Agent B's own cited secondary sources either - removed entirely, not present in evidence_matrix's spell_trap_response row above; (2) a misattribution - Agent B's original draft attributed 'all monsters can be Normal Summoned without Tributes' to the primary rulebook as a direct quote, when this is actually a near-verbatim lift of a SECONDARY source's (ygoprodeck's) paraphrase, directly contradicting Agent A's own correct 'UNKNOWN/silence' characterization of the identical fact - corrected in evidence_matrix's tribute_summon row, which now correctly marks the Starter Box state as UNKNOWN/absence rather than a fabricated direct quote; (3) an overstated citation - Agent B presented yugioh-history.com's May-5-1999 tribute-date citation as straightforwardly supporting evidence without disclosing that article's own author explicitly disclaims certainty about that date's ultimate source; the May 5, 1999 date survives in this packet only because it is independently and more confidently corroborated by Yugipedia's own page (checked directly via the MediaWiki API), not because of the weaker yugioh-history.com citation.",
+    "source_bibliography": [
+      {
+        "bib_source_id": "ygorganization-1999-rulebook-translation",
+        "url": "https://ygorganization.com/ogocg/",
+        "kind": "period document translation, traceable provenance (team acquired an original physical 1999 Starter Box copy)",
+        "evidence_tier": "4",
+        "used_for": "Primary source for the entire starter_box_state column of the evidence matrix",
+        "confidence": "high - personally fetched 6 separate times across the adjudicator's own pre-swarm checks, Agent A's independent pass, and Agent F's adversarial re-check, character-for-character consistent every time"
+      },
+      {
+        "bib_source_id": "ygoprodeck-master-rules-history",
+        "url": "https://ygoprodeck.com/article/master-rules-a-history-302488",
+        "kind": "specialist community history article",
+        "evidence_tier": "5",
+        "used_for": "Independent secondary corroboration for first_turn_draw, tribute_summon-absence, hand_limit-absence, side_deck, fusion-field-only; also for the later-era dating of hand-limit and deck-out-auto-loss introduction",
+        "confidence": "medium - agrees with the primary source on every point checked, but is a paraphrased summary, not a second transcription"
+      },
+      {
+        "bib_source_id": "yugioh-history-generation-one-4",
+        "url": "https://yugioh-history.com/environment/generation-one-4",
+        "kind": "Japanese specialist retrospective (rare among retrospectives in naming specific dated rule eras)",
+        "evidence_tier": "5",
+        "used_for": "Dating the Expert Rules/Tribute Summon introduction to May 5, 1999",
+        "confidence": "medium - the article's own author explicitly disclaims certainty about this date's ultimate source; survives mainly via independent Yugipedia corroboration"
+      },
+      {
+        "bib_source_id": "yugioh-history-generation-one-20",
+        "url": "https://yugioh-history.com/environment/generation-one-20",
+        "kind": "Japanese specialist retrospective, 1999 year-in-review",
+        "evidence_tier": "5",
+        "used_for": "Confirms Premium Pack 1 venue sales were cancelled due to congestion at Tokyo Dome; independently corroborates the May 5, 1999 Tribute Summon date",
+        "confidence": "medium"
+      },
+      {
+        "bib_source_id": "yugioh-history-forbidden-list-1999",
+        "url": "https://yugioh-history.com/environment/fragments/forbidden-list-1999",
+        "kind": "Japanese specialist retrospective, self-skeptical investigative essay",
+        "evidence_tier": "5, downgraded from swarm's implied confidence - see restriction_list_reassessment.adjudicator_calibration_note",
+        "used_for": "Weak corroboration for the restriction list being tournament-day-specific rather than nationwide",
+        "confidence": "low-medium - the article's central claim on this point is attributed to a third external site, not the author's own primary research, and is explicitly framed as one of three hypotheses"
+      },
+      {
+        "bib_source_id": "yugipedia-august-1999-lists",
+        "url": "https://yugipedia.com/wiki/August_1999_Lists (raw wikitext + MediaWiki API revision history)",
+        "kind": "wiki article, personally verified via raw wikitext and its own edit-history metadata",
+        "evidence_tier": "3 (for the cited 2004 book) / 6 (for the wiki page's own authorship)",
+        "used_for": "Central restriction-list scope/date finding - personally re-fetched by the adjudicator via both the raw-wikitext endpoint and the MediaWiki API revisions endpoint, independently confirming the 2017-to-2026 edit trail Agent D and Agent F both reported",
+        "confidence": "high for the fact that Yugipedia corrected itself and cites a real, page-numbered 2004 book; medium for the 2004 book's own content, which no one in this research chain has read firsthand"
+      },
+      {
+        "bib_source_id": "yugipedia-official-card-game-page",
+        "url": "https://yugipedia.com/wiki/Yu-Gi-Oh!_Official_Card_Game (via MediaWiki API, since direct fetch returned HTTP 403)",
+        "kind": "wiki article",
+        "evidence_tier": "5-6",
+        "used_for": "Later-1999 rule-change chronology (tribute summon, spell/trap cap removal, fusion-from-hand, all dated 1999-05-05)",
+        "confidence": "medium"
+      },
+      {
+        "bib_source_id": "yugipedia-premium-pack-japanese",
+        "url": "https://yugipedia.com/wiki/Premium_Pack_(Japanese)?action=raw",
+        "kind": "wiki article with a checkable infobox date field",
+        "evidence_tier": "5",
+        "used_for": "Confirms Exodia the Forbidden One's enabling product released 1999-08-26 at Tokyo Dome",
+        "confidence": "high - personally cross-referenced by the adjudicator against the separate Exodia card page"
+      },
+      {
+        "bib_source_id": "yugipedia-exodia-the-forbidden-one",
+        "url": "https://yugipedia.com/wiki/Exodia_the_Forbidden_One?action=raw",
+        "kind": "wiki article print-history section",
+        "evidence_tier": "5",
+        "used_for": "Confirms Premium Pack (Japanese) as this card's earliest OCG printing",
+        "confidence": "high - personally checked by the adjudicator"
+      },
+      {
+        "bib_source_id": "ocg-card-com-tokyo-dome-event",
+        "url": "ocg-card.com (event db pages /latest/g2t/, /latest/g1t/, /latest_cat/1999/)",
+        "kind": "Japanese OCG card-cataloguing site, fetched directly by the swarm's Agent C",
+        "evidence_tier": "5",
+        "used_for": "Tournament qualifying-pipeline structure (shop preliminary -> regional preliminary -> Tokyo Dome finals) and named prize/participation cards per stage",
+        "confidence": "medium-high, directly fetched and read in full by Agent C"
+      },
+      {
+        "bib_source_id": "ocgcore-flags-md",
+        "url": "docs/research/ocgcore-flags.md (this repo)",
+        "kind": "internal repo research artifact, not an external historical source",
+        "evidence_tier": "n/a - primary engineering reference",
+        "used_for": "Basis for every engine_representation classification in the evidence matrix",
+        "confidence": "high for what it documents about the engine; independently re-read end-to-end by both Agent E and Agent F, and its 'variant-format vs rule-era' flag categorization was the deciding factor in correcting the main_battle_main_sequence and deck_out engine verdicts"
+      }
+    ],
+    "remaining_blockers": [
+      "HISTORICAL: every rule area's tokyo_dome_evidence_status is UNKNOWN except deck_out/hand_limit (BOUNDED) and tribute_summon (AMBIGUOUS) - no genuinely event-specific source exists for the great majority of rule areas.",
+      "HISTORICAL: the restriction list's scope is moderately, not fully, resolved - the strongest corroborating secondary source turned out to be weaker (third-hand, hedged) than the swarm initially represented.",
+      "HISTORICAL: whether Tokyo Dome's tournament finals concluded as planned remains BOUNDED-to-PROVEN-NOT, not fully PROVEN, since no researcher could personally read an original 1999 news source (multiple candidate sources were unreachable from this sandbox).",
+      "HISTORICAL: the exact upper date bound for the hand-limit introduction and the Main Phase 1/2 split are both open gaps - 'sometime in/after Series 2 (2000+)' and 'unknown', respectively, not pinned dates.",
+      "ENGINE: deck_out has no representable mechanism for its LP-comparison outcome - confirmed, not merely suspected, this pass.",
+      "ENGINE: spell_trap_response's chain/Spell-Speed model and its Battle-Phase-Traps-only restriction have no representable mechanism.",
+      "ENGINE: battle_damage_procedure's ATK<DEF attacker-recoil quirk has no representable mechanism.",
+      "ENGINE: side_deck, deck_size, and starting_lp/starting_hand are NOT_REPRESENTABLE at the core ocgcore level but ARE exactly representable at the EDOPro client/host-config layer - correctly not treated as blockers on their own, since that layer already exists and is used by every other format this repo supports."
+    ],
+    "explicit_non_actions": [
+      "No formats/1999-* canonical format directory was created.",
+      "No canonical Tokyo Dome banlist was created.",
+      "No canonical Tokyo Dome pool was created (the existing certified 370-card pool digest is unchanged: f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb, re-verified live this session).",
+      "No canonical rule profile was created.",
+      "No Tokyo Dome lflist was generated.",
+      "dist/ was not modified.",
+      "No runtime behavior was modified.",
+      "No schema was modified.",
+      "No errata model change was made; no individual errata record was modified.",
+      "GOAT, Edison, and Tengu formats were not altered.",
+      "Release data was not modified - no primary contradiction was found forcing a correction; the certified 370-card pool, 19 products, and the absence of the fabricated Feb 1999 product were all re-verified live and unchanged.",
+      "The restriction-list scope was not arbitrarily resolved to make canonicalization convenient - it was moved only as far as personally-verified evidence supports (MODERATELY RESOLVED), with an explicit adjudicator calibration note explaining why it is not treated as more resolved than that."
+    ]
   }
 }

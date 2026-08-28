@@ -371,6 +371,188 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertIn("AMBIGUOUS", research["rule_chronology"]["areas"][2]["aug_25_26_1999_status"])
         self.assertEqual("First-turn attack", research["rule_chronology"]["areas"][2]["area"])
 
+    def test_corrective_gate_evidence_matrix_keeps_three_tiers_separate(self):
+        # Requirement 1: the evidence matrix must have separate Starter Box /
+        # later-1999 / Tokyo Dome columns for every rule area, never collapsed
+        # into one "1999 rules" bucket.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = corrective["evidence_matrix"]
+        self.assertEqual(15, len(matrix))
+        required_columns = {
+            "rule_area", "starter_box_state", "starter_box_evidence_status", "starter_box_source_ids",
+            "later_1999_state", "later_1999_effective_bounds", "later_1999_source_ids",
+            "tokyo_dome_state", "tokyo_dome_evidence_status", "tokyo_dome_source_ids",
+            "engine_representation", "engine_notes", "remaining_uncertainty",
+        }
+        allowed_status = {"PROVEN", "BOUNDED", "AMBIGUOUS", "UNKNOWN"}
+        for row in matrix:
+            self.assertEqual(required_columns, set(row))
+            self.assertIn(row["starter_box_evidence_status"], allowed_status)
+            self.assertIn(row["tokyo_dome_evidence_status"], allowed_status)
+
+        rule_areas = {row["rule_area"] for row in matrix}
+        for expected in (
+            "starting_lp", "starting_hand", "first_turn_draw", "first_turn_attack", "deck_out",
+            "main_battle_main_sequence", "normal_summon_set", "tribute_summon", "fusion",
+            "hand_limit", "deck_size", "side_deck", "win_condition", "spell_trap_response",
+            "battle_damage_procedure",
+        ):
+            self.assertIn(expected, rule_areas)
+
+    def test_corrective_gate_first_turn_attack_is_proven_not_ambiguous(self):
+        # Requirement 2: first-turn attack must NOT be "original Starter Box
+        # ambiguous" now that direct source verification proves otherwise -
+        # the original (rejected) 2026-08 packet had this wrong.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+        first_turn_attack = matrix["first_turn_attack"]
+        self.assertEqual("PROVEN", first_turn_attack["starter_box_evidence_status"])
+        self.assertIn("cannot attack", first_turn_attack["starter_box_state"].lower())
+        self.assertTrue(len(first_turn_attack["starter_box_source_ids"]) > 0)
+        # The Tokyo-Dome-tier question must stay separate and must NOT inherit PROVEN.
+        self.assertEqual("UNKNOWN", first_turn_attack["tokyo_dome_evidence_status"])
+        self.assertNotEqual("PROVEN", first_turn_attack["tokyo_dome_evidence_status"])
+
+    def test_corrective_gate_starting_lp_matches_directly_verified_source(self):
+        # Requirement 3: starting LP in the Starter Box baseline must match the
+        # directly verified source (8000, not the prior packet's guessed 2000).
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+        starting_lp = matrix["starting_lp"]
+        self.assertEqual("PROVEN", starting_lp["starter_box_evidence_status"])
+        self.assertIn("8000", starting_lp["starter_box_state"])
+        self.assertNotIn("2000", starting_lp["starter_box_state"])
+        baseline = corrective["starter_box_baseline"]["resolved"]["starting_lp"]
+        self.assertIn("8000", baseline)
+
+    def test_corrective_gate_deck_out_not_marked_exact(self):
+        # Requirement 4: deck-out representability must not be marked exact -
+        # the verified historical rule (LP comparison) differs from modern
+        # ocgcore's hardcoded instant-loss default.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+        deck_out = matrix["deck_out"]
+        self.assertEqual("NOT_REPRESENTABLE", deck_out["engine_representation"])
+        self.assertNotEqual("EXACT", deck_out["engine_representation"])
+        self.assertIn("lp", deck_out["starter_box_state"].lower())
+
+    def test_corrective_gate_main_phase_prose_is_internally_consistent(self):
+        # Requirement 5: the Main Phase prose must not simultaneously claim both
+        # that a historical post-battle action window existed AND that it never
+        # existed - the original (rejected) packet had this exact contradiction.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = {row["rule_area"]: row for row in corrective["evidence_matrix"]}
+        main_phase = matrix["main_battle_main_sequence"]
+        self.assertEqual("PROVEN", main_phase["starter_box_evidence_status"])
+        self.assertIn("remains the main phase", main_phase["starter_box_state"].lower())
+        self.assertEqual("DEFAULT_OMISSION", main_phase["engine_representation"])
+        # DUEL_NO_MAIN_PHASE_2 must be rejected as historically wrong, not accepted as exact.
+        self.assertIn("DUEL_NO_MAIN_PHASE_2", main_phase["engine_notes"])
+        self.assertIn("variant-format flag", main_phase["engine_notes"].lower())
+
+    def test_corrective_gate_no_row_claims_tokyo_dome_proven_without_its_own_source(self):
+        # Requirement 6: any rule PROVEN specifically for Tokyo Dome must have a
+        # Tokyo-Dome-specific source reference, not merely a Starter Box source.
+        # Currently no row reaches PROVEN at the Tokyo Dome tier at all - this
+        # test is a forward regression guard, not a description of a row that
+        # exists today.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        matrix = corrective["evidence_matrix"]
+        for row in matrix:
+            if row["tokyo_dome_evidence_status"] == "PROVEN":
+                self.assertTrue(
+                    len(row["tokyo_dome_source_ids"]) > 0,
+                    f"{row['rule_area']} claims Tokyo-Dome PROVEN with no tokyo_dome_source_ids",
+                )
+                self.assertNotEqual(
+                    set(row["tokyo_dome_source_ids"]), set(row["starter_box_source_ids"]),
+                    f"{row['rule_area']} claims Tokyo-Dome PROVEN using only its Starter Box sources",
+                )
+        # As of this gate, the Tokyo-Dome tier is honestly almost entirely unresolved.
+        proven_at_tokyo_dome = [row["rule_area"] for row in matrix if row["tokyo_dome_evidence_status"] == "PROVEN"]
+        self.assertEqual([], proven_at_tokyo_dome)
+
+    def test_corrective_gate_restriction_list_scope_stays_explicit_and_noncanonical(self):
+        # Requirement 7: restriction-list scope stays explicit and non-canonical
+        # unless genuinely resolved - this pass moved it from BLOCKED toward a
+        # best-supported reading, but must not overstate that as settled fact.
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        reassessment = corrective["restriction_list_reassessment"]
+        self.assertIn("content", reassessment)
+        self.assertEqual(3, len(reassessment["content"]["cards"]))
+        scope = reassessment["scope_and_effective_date"]
+        verdict = scope["verdict"]
+        self.assertNotIn("FULLY RESOLVED", verdict.upper())
+        self.assertNotIn("DEFINITIVELY RESOLVED", verdict.upper())
+        self.assertIn("MODERATELY RESOLVED", verdict)
+        self.assertIn("not fully settled", verdict.lower())
+        self.assertIn("adjudicator_calibration_note", reassessment)
+        # No canonical banlist file was created as a side effect of this finding.
+        self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
+        self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())
+
+    def test_corrective_gate_supersedes_five_specific_prior_claims(self):
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        corrected = corrective["supersedes"]["corrected_claims"]
+        self.assertEqual(5, len(corrected))
+        joined = " ".join(c["prior_claim"] for c in corrected)
+        for marker in ("first-turn attack", "Deck-out", "2000 LP", "Main Phase", "Hand size limit"):
+            self.assertIn(marker, joined)
+
+    def test_corrective_gate_architecture_verdict_is_rederived_and_documented(self):
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        self.assertEqual("BLOCKED_BY_BOTH", corrective["architecture_verdict"])
+        self.assertIn("re-derived", corrective["architecture_verdict_detail"].lower())
+        readiness = corrective["tokyo_dome_rule_profile_readiness"]
+        self.assertEqual("BLOCKED_BY_HISTORICAL_EVIDENCE", readiness["verdict"])
+
+    def test_corrective_gate_release_ledger_reverified_live_and_unchanged(self):
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        preserved = corrective["release_ledger_preserved"]["verified_this_session"]
+        self.assertEqual("1999-08-25", preserved["pre_event_snapshot"])
+        self.assertEqual(370, preserved["pool_size"])
+        self.assertEqual(
+            "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+            preserved["pool_digest_sha256"],
+        )
+        self.assertEqual(19, preserved["products_through_cutoff"])
+
+        raw_pool = {
+            "id": "pool-ocg1999-research-only", "region": "OCG", "kind": "release-cutoff",
+            "cutoff": {"cutoff_date": "1999-08-25", "territories": ["ocg-jp"]},
+            "sources": ["yugipedia-ocg-series1-set-pages"],
+        }
+        pool = Pool.load(raw_pool, ROOT / "research-only-pool.json")
+        index = ReleaseIndex.build(self.repo)
+        evaluation = evaluate_cutoff(pool, self.repo, index)
+        cards = evaluation.cards()
+        digest = hashlib.sha256(
+            json.dumps(
+                [{"passcode": c["passcode"], "name": c["name"]} for c in cards],
+                separators=(",", ":"), sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest()
+        self.assertEqual(370, len(cards))
+        self.assertEqual("f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb", digest)
+
+        names_in_pool = {c["name"] for c in cards}
+        for excluded in ("Gate Guardian", "Suijin", "Kazejin", "Sanga of the Thunder", "Exodia the Forbidden One"):
+            self.assertNotIn(excluded, names_in_pool)
+
+        fabricated = ROOT / "data" / "releases" / "products" / "yu-gi-oh-duel-monsters-national-tournament-prize-cards.json"
+        self.assertFalse(fabricated.exists())
+
+    def test_corrective_gate_personally_reverified_claims_are_recorded(self):
+        corrective = self.packet["tokyo_dome_rules_corrective_gate_2026_08"]
+        claims = corrective["personally_reverified_claims"]
+        self.assertGreaterEqual(len(claims), 5)
+        for c in claims:
+            self.assertTrue(c["claim_source_id"])
+            self.assertTrue(c["source_url"])
+            self.assertTrue(c["exact_rule_claim"])
+            self.assertTrue(c["supporting_excerpt"])
+            self.assertTrue(c["what_it_establishes"])
+
     def test_gate_scope_declares_no_shared_data_or_runtime_mutation(self):
         scope = self.packet["scope"]
         self.assertEqual(
