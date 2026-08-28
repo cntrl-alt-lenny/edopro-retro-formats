@@ -1,203 +1,194 @@
-# edopro-retro-formats
+<div align="center">
 
-**A source-backed historical Yu-Gi-Oh! preservation framework for [EDOPro](https://github.com/edo9300/edopro).**
+<h1>edopro-retro-formats</h1>
 
-The goal: reproduce formats from across the game's history — Goat, Edison, Tengu, HAT,
-Dragon Ruler, and eventually far more obscure eras like Yugi/Kaiba or Critter — inside
-EDOPro with the correct card pool, the correct Forbidden/Limited list, period-correct
-card behaviour, and period-appropriate game rules. Not as a pile of hand-maintained
-config files, but as a **framework**: canonical, cited data in; validated,
-EDOPro-consumable assets out.
+<p><strong>Historical Yu-Gi-Oh! formats, rebuilt from evidence.</strong></p>
 
-## Why a framework?
+<p>Source-backed, reproducible format data and EDOPro assets for the eras worth preserving.</p>
 
-Historical formats keep being rebuilt by hand, one lflist at a time, with no shared
-notion of *where a fact came from* or *whether it is still correct*. This repository
-treats a format the way an archivist would:
+<p>
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/actions/workflows/ci.yml"><img src="https://github.com/cntrl-alt-lenny/edopro-retro-formats/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f.svg" alt="MIT license"></a>
+  <a href="#project-status"><img src="https://img.shields.io/badge/status-research%20%26%20preservation-6e7781.svg" alt="Research and preservation"></a>
+</p>
 
-- **Canonical intermediate representation.** A format is a small record tying together
-  shared datasets: a banlist snapshot, a card-pool definition, a rule profile, and a set
-  of card-behaviour overrides (errata). Shared facts are stored exactly once — the
-  April 2005 banlist is one file, no matter how many formats reference it.
-- **Provenance everywhere.** Every factual record cites sources from a registry
-  (Konami lists via archives, Yugipedia, Project Ignis data at pinned git revisions,
-  Format Library's API, EdisonFormat.com). Claims we could not source are marked as
-  open questions, not silently invented. AI-generated text is never treated as
-  historical evidence.
-- **Generated, never hand-edited output.** `dist/` (EDOPro lflists, later cdb/scripts)
-  is built deterministically from the canonical data. CI fails if `dist/` drifts.
-- **Validation before breadth.** A card released after a format's cutoff must be
-  rejected; a limited card must enforce its count; chronology must be consistent;
-  every source reference must resolve. Accuracy over claiming hundreds of formats.
+<p><em>Accuracy before breadth.</em></p>
 
-## Proof of concept status (what works today)
+<p>
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#current-formats">Current formats</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#documentation">Documentation</a> ·
+  <a href="#contributing">Contributing</a>
+</p>
 
-Three canonical formats exercise the whole pipeline end-to-end:
+</div>
 
-| | GOAT (`2005-04-goat`) | Edison (`2010-03-edison`) | Tengu (`2011-09-tengu`) |
-|---|---|---|---|
-| Banlist | derived from Project Ignis's GOAT whitelist (cross-check vs the published April 2005 list still TODO) | **complete** — March 2010 TCG list transcribed from Yugipedia (which cites Konami's original), independently cross-checked against Format Library's API (exact match) | **complete** — September 2011 TCG list (51/65/18) sourced from Konami, cross-checked against Format Library and TenguFormat.com (exact match) |
-| Card pool | **complete** — 1700 canonical cards imported from Project Ignis's community-vetted whitelist | **verified** — 3,673 cards *derived from release history* under certified coverage, cross-checked against two independent community pools, with the boundary dates, Duel Terminal exclusion, and promo cutoff corroborated by archived period Konami documents (including the event's own FAQ) | **verified** — 4,562 cards *derived from release history* under certified coverage through 2011-09-17, with period-sanctioned DT and Sneak Peek exclusions |
-| Rule profile | `DUEL_MODE_GOAT` (17 individual ocgcore flags, verified against `ocgapi_constants.h`) | **partial** — a custom MR1-era 7-flag profile (not the bare `DUEL_MODE_MR1` preset), including the researched `DUEL_0_ATK_DESTROYED` addition; Ignition Effect Priority is represented by a documented approximation because no existing ocgcore flag reproduces it exactly; SEGOC (`DUEL_TCG_SEGOC_*`) and several smaller flag questions remain explicitly unresolved rather than guessed — see [docs/research/edison-rules.md](docs/research/edison-rules.md) | **partial** — a custom MR2-era 6-flag profile; Ignition Effect Priority is represented by the `DUEL_OCG_OBSOLETE_IGNITION` approximation; Synchro and Xyz legal |
-| Errata | **complete** — every substitution derived from one sourced parity policy instead of a 211-entry hand list; still entry-for-entry identical to the reference | **partial** — 72 historical implementations *computed* from evidence, with no hand-written Edison errata list | **partial** — 52 historical implementations *computed* from evidence, with 38 acknowledged divergences and 9 known-wrong modern fallbacks |
-| Generated lflist | **semantically identical to Project Ignis's `GOAT.lflist.conf`** — same 1704 code/count entries, same EDOPro banlist hash (`0x28e9fc02`) — regenerated from canonical data | full `$whitelist` enforcing pool + banlist together (post-Edison cards are rejected; hash `0x54508ab7`) | full `$whitelist` enforcing pool + banlist together (post-Tengu cards are rejected; hash `0x0ce5babe`) |
+> [!IMPORTANT]
+> This is an accuracy-first preservation project. GOAT, Edison, and Tengu are the current canonical formats. The 1999 Tokyo Dome work is a research gate only; no canonical Tokyo Dome format has been created.
 
-Behind card *behaviour* across all three formats sits the second backbone dataset:
-**`data/errata/`** — 296 per-card historical-behaviour records, each reviewed
-rather than imported, distinguishing genuine text errata (functional) from
-period *rulings*, from pure wording modernisation (cosmetic). The canonical
-errata corpus is now fully represented in v2: all 296 records are in the **v2
-historical-event DAG** (180 as flattened
-single-event sugar, 116 as the full `events{}`/`ordering`/`states[]` shape) —
-an explicit graph of dated/undated historical events with a provable
-partial order, replacing the old assumption that `changes[]`'s array
-position meant anything. Insect Imitation and Last Will were independently
-adjudicated and migrated to v2. The 47 already-researched unordered records
-were migrated as separate events with no ordering edge where the evidence
-does not establish one; no new research or architecture work was needed.
-See
-[docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
-for the model and [docs/roadmap.md](docs/roadmap.md) for current status and
-the remaining manual cases. Chronology carries its own uncertainty across
-both shapes:
-some changes/events are exactly dated, some hold bounded "old attested
-through A, new attested from B" intervals, and some are explicitly
-unresolved. **Selection never silently guesses** — absent an explicit,
-sourced format policy, a snapshot inside an unresolved transition interval
-blocks selection/build outright; a format *may* adjudicate such
-uncertainty explicitly through its own sourced `errata_overrides` policy
-(Edison's, for instance, documents a conservative "keep modern" default),
-and every card the policy touches is named individually by the validator
-and `report`, never silently absorbed. Applicability is *computed*:
-Edison's historical implementations fall out of the evidence with no
-hand-written list, and GOAT's 211-entry list was replaced by a single
-sourced statement while staying byte-identical to the Project Ignis
-reference. See [docs/errata.md](docs/errata.md).
+## What this is
 
-Behind the release-cutoff pools sits the project's first shared backbone dataset:
-**`data/releases/`** — 411 TCG products (2002–2011) with per-territory,
-precision-aware, cited release events and 9,339 printings, from which any
-release-cutoff pool is derived and continuously re-verified. Coverage
-completeness is an **earned invariant**: a gap ledger accounts for every
-importer-detected anomaly, unresolved gaps block pool materialisation, and
-harmlessness claims are mechanically recomputed — so when the project claims
-complete coverage for a date and territory, the tooling can defend it. Pools
-additionally declare a `legality_basis` separating physical availability from
-tournament-legality policy (the Edison boundary dates, the Duel Terminal
-exclusion, and Europe-only legality are corroborated by archived period Konami
-and UDE documents). See [docs/releases.md](docs/releases.md).
+`edopro-retro-formats` turns historical format research into validated, reproducible data:
 
-The key architectural point: **no format is special**. GOAT is an import of an
-existing reference implementation; Edison and Tengu are built from primary-ish
-sources. A future `1999-05-yugi-kaiba` or `2014-04-hat` uses exactly the same
-records and tooling.
-
-Run it yourself (Python 3.10+, standard library only — no installs; CI tests the
-3.10 floor and the current release. Older interpreters may happen to work — macOS's
-system 3.9 does today — but are not supported targets):
-
-```console
-$ python3 -m retroformats validate      # semantic checks over all canonical data
-$ python3 -m retroformats build         # regenerate dist/ deterministically
-$ python3 -m retroformats materialize   # derive release-cutoff pools from data/releases/
-$ python3 -m retroformats report        # per-format status, errata certification, coverage
-$ python3 -m retroformats report -v     # ...plus which cards each format substitutes
-$ python3 -m unittest discover -t . -s tests -v   # schema, runtime (v1+v2), build, reference-parity,
-                                                   # and migration regressions
+```text
+sources + dated evidence
+          ↓
+canonical formats, pools, banlists, rule profiles, and errata
+          ↓
+validated EDOPro lflists and reports
 ```
 
-## Repository layout
+The project exists for formats whose identity depends on more than a single banlist. A trustworthy reconstruction may also need release chronology, card versions, historical rulings, engine behaviour, territory, and a clear record of what is still unknown.
 
+### Project status
+
+| Layer | Current state |
+| --- | --- |
+| Canonical formats | **3** — GOAT, Edison, and Tengu |
+| Historical errata | **296 records**, all V2 |
+| Card pools | Extensional lists and release-cutoff definitions |
+| EDOPro output | Generated lflists under [`dist/`](dist/) |
+| Runtime | Python 3.10+, standard library only |
+| Quality bar | Validation, reproducible builds, regression tests, and source-linked research |
+
+## Current formats
+
+The repository currently ships three canonical, end-to-end format records. Their notes explain the evidence and remaining limitations in more depth.
+
+| Format | Snapshot | Pool | Rule / research status | Reference |
+| --- | --- | ---: | --- | --- |
+| **GOAT** | April 2005 | 1,700 cards | Reproduces the Project Ignis GOAT implementation | [`formats/2005-04-goat/`](formats/2005-04-goat/) |
+| **Edison** | 24 April 2010 | 3,673 cards | Custom MR1-era profile; historical errata are computed | [`formats/2010-03-edison/`](formats/2010-03-edison/) |
+| **Tengu** | 17 September 2011 | 4,562 cards | Custom MR2-era profile; historical errata are computed | [`formats/2011-09-tengu/`](formats/2011-09-tengu/) |
+
+The generated outputs are regression-tested against their canonical inputs. GOAT preserves the deduplicated EDOPro content hash `0x28e9fc02`; Tengu preserves `0x0ce5babe`.
+
+The next major research direction is [`1999-08-tokyo-dome`](docs/research/yugi-kaiba-format-source-gate.md). It remains blocked from canonicalization while its event rules, banlist, card-pool boundary, and engine representability are being established.
+
+## Quick start
+
+Clone the repository, then run the same checks used by CI:
+
+```bash
+python3 -m retroformats validate
+python3 -m retroformats build
+python3 -m retroformats build --check
+python3 -m retroformats report
+python3 -m unittest discover -t . -s tests -v
 ```
-schemas/          JSON Schemas documenting every record type
-data/
-  banlists/       one file per historical F/L list snapshot (region + effective date)
-  pools/          card-pool definitions (extensional lists or release-cutoff rules)
-  rule-profiles/  reusable rules-era profiles mapped to ocgcore DUEL_* flags
-  errata/         per-card historical-behaviour records (one file per card):
-                  kinds, precision-aware chronology, per-version implementations
-  releases/       per-product release events + printings (feeds cutoff pools)
-  cards/          generated card index (passcode<->name/alias ground truth)
-  sources.json    the provenance registry every record cites into
-formats/<id>/     format records: format.json + notes.md (id = yyyy-mm-slug)
-retroformats/     the toolchain (validate, build, importers) — pure stdlib Python
-dist/             generated EDOPro assets (committed, reproducible, never hand-edited)
-tests/            unit + integration tests, incl. vendored reference fixtures
-docs/             architecture, EDOPro research, data-source policy, roadmap
+
+On Windows, use `python` or the Python launcher (`py -3`) in place of `python3` if that is how Python is installed on your machine.
+
+Useful commands:
+
+```bash
+# Show the current format and errata accounting in more detail
+python3 -m retroformats report -v
+
+# Re-materialize release-cutoff pools after changing release data
+python3 -m retroformats materialize
 ```
 
-## How EDOPro integration works
+`build` writes generated EDOPro assets. `build --check` is the clean-tree guard: it fails if generated output is out of sync with canonical data.
 
-Verified against the EDOPro/ocgcore source (all citations in
-[docs/edopro-research.md](docs/edopro-research.md)):
+## Why the model is different
 
-- **Banlists**: EDOPro loads every `*.conf` from `./lflists/` and from configured git
-  repositories (`lflist_path`). Lists are identified network-wide by an
-  order-independent hash of their `(code, count)` entries — so a regenerated list with
-  identical entries is interoperable with the original. `$whitelist` lists ban
-  everything not listed, which is how closed historical pools are enforced.
-- **Historical card behaviour**: EDOPro requests the script `c<code>.lua` per card
-  code, and cdb rows carry an `alias` linking variant codes to the modern card.
-  Project Ignis already ships GOAT-era and pre-errata card versions under dedicated
-  codes (`goat-entries.cdb`, `cards-unofficial.cdb`, `script/goat/`,
-  `script/pre-errata/`); our errata records reference those implementations rather
-  than duplicating them, and our generated whitelists substitute the historical code
-  for the modern one (exactly as the upstream GOAT list does).
-- **Rules**: ocgcore exposes individual `DUEL_*` behaviour flags (64-bit) and composite
-  presets (`DUEL_MODE_GOAT`, `DUEL_MODE_MR1`, …). Rule profiles map each era to a flag
-  set. Limitation: presets are compiled into the client — a data repo cannot add one,
-  so hosts select the preset (or custom flags) manually; this is documented per format.
-- **Distribution**: this repository is shaped so `dist/` can be consumed as an EDOPro
-  repository entry (`lflist_path: "dist/lflists"`) via `config/user_configs.json`.
-  Historical card data/scripts arrive through Project Ignis's own repos today.
+### Evidence is part of the data
 
-## Accuracy philosophy
+Sources are not an afterthought. Format records, pool rules, errata chronology, and card identities carry provenance so a future maintainer can inspect why a value exists.
 
-1. **Cite or mark open.** Every banlist entry, date, and behavioural claim traces to
-   the source registry (`data/sources.json`). Unverifiable claims live in notes and the
-   roadmap as open questions.
-2. **Prefer structured sources.** Git repositories at pinned revisions, MediaWiki APIs,
-   Format Library's JSON API — HTML scraping only as a last resort, cached and never
-   committed.
-3. **Distinguish kinds of difference.** Cosmetic text modernisation, functional errata,
-   changed rulings, and rules-era differences are different things and are modelled
-   differently (see [docs/format-schema.md](docs/format-schema.md)). Only functional
-   and ruling changes can substitute a historical card; a rewording never does.
-6. **Fail safe on uncertainty.** When a format's snapshot falls inside an unresolved
-   transition interval, selection refuses rather than guessing old or new. A format
-   may state one sourced policy for such cases, and every card it touches is named.
-7. **Tested means executed.** `implementation.tested` is set only where a headless
-   ocgcore test demonstrates the historical behaviour (see
-   [docs/engine-testing.md](docs/engine-testing.md)) — never because a script exists.
-4. **Reuse vetted implementations.** Where Project Ignis already maintains a historical
-   card implementation, we reference it (`reuse-upstream`) instead of forking it.
-5. **Regression-test against references.** The generated GOAT list is asserted, in CI,
-   to remain semantically identical to Project Ignis's — the community's
-   battle-tested implementation is our baseline.
+### Uncertainty stays visible
 
-## Development status
+If a historical transition cannot be dated, the repository records the ambiguity and applies an explicit policy where one is justified. It does not silently turn an unresolved question into a fact.
 
-Working end-to-end with two certified backbone datasets (releases, errata) and
-two proof formats (GOAT, Edison) — both remain the project's end-to-end
-regression targets as the errata model evolves underneath them. The
-errata-model migration to the v2 historical-event DAG covers **all 296
-records**: the 247-record semantics-preserving pass, the subsequent 47
-already-researched unordered-event migration, and the later adjudications of
-Insect Imitation and Last Will. This completes the representation migration,
-but does not claim that every historical chronology or implementation is
-resolved, every warning is eliminated, or every erratum is perfectly
-reproduced (see
-[docs/research/erratum-state-model-v2.md](docs/research/erratum-state-model-v2.md)
-and [docs/roadmap.md](docs/roadmap.md)). The card-index importer retains v1
-support for historical fixtures and backwards compatibility. See
-[docs/roadmap.md](docs/roadmap.md) for the full prioritised next-steps list
-(the April 2005 banlist cross-check, broader behavioural test coverage, more
-formats, and unresolved historical implementation gaps).
+### Pools are reproducible
+
+A format can use an exact extensional pool or a release-cutoff rule. Release-based pools are materialized from dated product and printing data, with coverage and exclusions checked by the validator.
+
+### EDOPro is an output target, not the source of truth
+
+The project generates EDOPro-compatible lflists, but keeps historical identity, legality, chronology, and rule research in version-controlled source data. That separation makes the result reviewable and regenerable.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Sources and research] --> B[Canonical data]
+    B --> C[Schema validation]
+    B --> D[Build and materialize]
+    D --> E[EDOPro lflists]
+    C --> F[Reports and tests]
+    E --> F
+```
+
+The core pipeline is deliberately small:
+
+1. Define a format and its snapshot.
+2. Select the historical banlist, pool, rule profile, and errata policy.
+3. Validate references, schemas, chronology, and coverage.
+4. Build deterministic EDOPro output.
+5. Compare the result with tests, hashes, and human-readable reports.
+
+See [the architecture guide](docs/architecture.md) for the full data flow and [the format schema guide](docs/format-schema.md) for the record model.
+
+## EDOPro integration
+
+Generated lflists use a closed whitelist where appropriate: cards outside the historical pool are rejected even when they are legal under the banlist. Historical implementations are selected through the errata model, while rule profiles map the period's behaviour to the capabilities of the pinned ocgcore/client.
+
+For integration details, see [EDOPro research](docs/edopro-research.md), [ocgcore flags](docs/research/ocgcore-flags.md), and [engine testing](docs/engine-testing.md).
+
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| [`formats/`](formats/) | Canonical format records and format-specific notes |
+| [`data/banlists/`](data/banlists/) | Historical Forbidden/Limited list snapshots |
+| [`data/pools/`](data/pools/) | Exact pools and release-cutoff pool definitions |
+| [`data/rule-profiles/`](data/rule-profiles/) | Engine-facing historical rule profiles |
+| [`data/errata/`](data/errata/) | The versioned historical errata corpus |
+| [`data/releases/`](data/releases/) | Product, printing, territory, and release chronology |
+| [`schemas/`](schemas/) | JSON Schemas for canonical data |
+| [`retroformats/`](retroformats/) | Validator, builder, importers, and reporting tools |
+| [`tests/`](tests/) | Unit, integration, regression, and research-gate tests |
+| [`docs/`](docs/) | Architecture, methodology, research, and contributor guidance |
+| [`dist/`](dist/) | Generated EDOPro assets; never hand-edit |
+
+## Documentation
+
+The most useful paths through the repository are:
+
+| If you want to… | Start here |
+| --- | --- |
+| Understand the project | [Roadmap](docs/roadmap.md) · [Architecture](docs/architecture.md) |
+| Add or audit a format | [Format schema](docs/format-schema.md) · [Data sources](docs/data-sources.md) |
+| Understand card-version selection | [Errata guide](docs/errata.md) · [Erratum V2 state model](docs/research/erratum-state-model-v2.md) |
+| Inspect a canonical format | [GOAT notes](formats/2005-04-goat/notes.md) · [Edison notes](formats/2010-03-edison/notes.md) · [Tengu notes](formats/2011-09-tengu/notes.md) |
+| Follow current research | [Tokyo Dome source gate](docs/research/yugi-kaiba-format-source-gate.md) · [Edison rules](docs/research/edison-rules.md) · [Tengu source gate](docs/research/tengu-format-source-gate.md) |
+| Work on engine fidelity | [EDOPro research](docs/edopro-research.md) · [Engine testing](docs/engine-testing.md) |
+
+The repository's `docs/` directory is the source of truth for historical claims. Keeping research beside schemas, data, and tests means an evidence change can be reviewed together with the code that verifies it.
+
+## Contributing
+
+Research and implementation improvements are welcome. A useful contribution usually follows this shape:
+
+1. Add or improve a source record, with a direct citation and an explanation of scope.
+2. Update the smallest canonical data set that the evidence actually supports.
+3. Add or update tests so the important identity, count, hash, or coverage claim is mechanically frozen.
+4. Run validation, build checks, reports, and the full test suite.
+5. Explain unresolved questions instead of filling them with assumptions.
+
+Before opening a pull request, please include the commands run and call out any intentionally unchanged generated output. For historical research, distinguish primary evidence, later transcriptions, strong secondary reconstructions, community convention, and inference.
+
+## What this project is not
+
+- It is not an official Konami rules archive or ruling authority.
+- It is not a fork of EDOPro or a replacement for Project Ignis.
+- It is not a promise that every historical format can be represented exactly by the current engine.
+- It is not “complete” merely because a generated file builds: provenance, coverage, and uncertainty still matter.
 
 ## License
 
-Code and original documentation: [MIT](LICENSE). Card names, card text, and game data
-are © Konami and appear here as factual references for preservation and
-interoperability. Imported data retains attribution to its source project (Project
-Ignis, Yugipedia, Format Library, EdisonFormat.com) in `data/sources.json` and in each
-record's provenance fields.
+Code and original documentation are released under the [MIT License](LICENSE). Card names, card text, and game data remain the property of their respective owners; source attribution is maintained in [`data/sources.json`](data/sources.json) and the relevant format/research records.
