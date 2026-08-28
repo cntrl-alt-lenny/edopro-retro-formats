@@ -312,7 +312,11 @@ class TenguResearchGateTest(unittest.TestCase):
         for product in SNEAK_PEEK_EXCLUDED_PRODUCTS:
             self.assertEqual(["konami-2011-product-pages", "yugipedia-set-pages"], source_by_product[product])
 
-        self.assertEqual(4593, index.dated_canonical_count())
+        # 4593 at Tengu's own gate; +119 from the 2026-08 ocg-jp (pre-1999-08-25) release
+        # ledger certification, which adds dated canonical cards no TCG pool (including
+        # Tengu's) ever includes - see test_yugi_kaiba_format_gate.py and
+        # test_ocg1999_release_certification.py for the ocg-jp-scoped assertions.
+        self.assertEqual(4712, index.dated_canonical_count())
 
     def test_official_release_correction_removes_escuridao_from_snapshot(self):
         product = self.repo.products["yu-gi-oh-gx-volume-9-promotional-card"]
@@ -375,9 +379,12 @@ class TenguResearchGateTest(unittest.TestCase):
         }
         self.assertEqual(41, len(expected))
         self.assertTrue(expected.issubset(self.repo.products))
-        self.assertEqual(411, len(self.repo.products))
+        # 411 at Tengu's own gate (399 generated + 12 curated); +20 curated ocg-jp
+        # (pre-1999-08-25) products from the 2026-08 release ledger certification.
+        # products_written (Yugipedia+YGOPRODeck-generated TCG count) is untouched.
+        self.assertEqual(431, len(self.repo.products))
         self.assertEqual(399, self.repo.import_report["stats"]["products_written"])
-        self.assertEqual(12, self.repo.import_report["stats"]["curated_preserved"])
+        self.assertEqual(32, self.repo.import_report["stats"]["curated_preserved"])
         self.assertEqual(34, self.repo.import_report["stats"]["yugipedia_only_products"])
         subjects = {s for g in self.repo.release_gaps for s in g.raw["subjects"]}
         self.assertIn("Yu-Gi-Oh! 3D Bonds Beyond Time Blu-ray promotional card", subjects)

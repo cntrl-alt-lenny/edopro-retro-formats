@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "limited-edition-kaiba-pack",
+  "code": "LEK",
+  "name": "Limited Edition: Kaiba Pack",
+  "kind": "special",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-06-01",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 71280811,
+      "name": "Yaranzo"
+    },
+    {
+      "passcode": 44073668,
+      "name": "Takriminos"
+    },
+    {
+      "passcode": 33734439,
+      "name": "Three-Legged Zombies"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

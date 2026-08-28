@@ -1,0 +1,1495 @@
+{
+ "purpose": "Offline snapshot of the independent YGOPRODeck \"1999 Tokyo Dome Card Pool\" community cube; a non-canonical cross-check, not a source for ledger construction. Every passcode/name pair was extracted from the cube page's own rendered `<a href=\"/card/?search=PASSCODE\" data-name=\"PASSCODE\">Name</a>` markup.",
+ "source": {
+  "url": "https://ygoprodeck.com/cube/view-cube/18262",
+  "title": "1999 Tokyo Dome Card Pool (370 cards) - YGOPRODeck",
+  "retrieved": "2026-08-28",
+  "sha256": "c45cea560845d9f0ba32b378003e3ce7a4b805a3256888602de6e57cfdd9f12e",
+  "bytes": 1066215,
+  "extraction_method": "HTML scrape: every <a href=\"/card/?search=PASSCODE\" data-name=\"PASSCODE\">Name</a> anchor on the rendered cube page."
+ },
+ "candidate_record_count": 370,
+ "candidate_identity_count": 370,
+ "candidates": [
+  {
+   "passcode": 32864,
+   "name": "The 13th Grave"
+  },
+  {
+   "passcode": 732302,
+   "name": "Temple of Skulls"
+  },
+  {
+   "passcode": 756652,
+   "name": "Doron"
+  },
+  {
+   "passcode": 1184620,
+   "name": "Kojikocy"
+  },
+  {
+   "passcode": 1435851,
+   "name": "Dragon Treasure"
+  },
+  {
+   "passcode": 1557499,
+   "name": "Silver Bow and Arrow"
+  },
+  {
+   "passcode": 1641882,
+   "name": "Fusionist"
+  },
+  {
+   "passcode": 1761063,
+   "name": "Nekogal #1"
+  },
+  {
+   "passcode": 1784619,
+   "name": "Uraby"
+  },
+  {
+   "passcode": 1929294,
+   "name": "Key Mace"
+  },
+  {
+   "passcode": 2370081,
+   "name": "Steel Shell"
+  },
+  {
+   "passcode": 2483611,
+   "name": "Water Omotics"
+  },
+  {
+   "passcode": 2830619,
+   "name": "Flame Viper"
+  },
+  {
+   "passcode": 2863439,
+   "name": "Fiend Reflection #2"
+  },
+  {
+   "passcode": 2957055,
+   "name": "Wicked Dragon with the Ersatz Head"
+  },
+  {
+   "passcode": 3170832,
+   "name": "Takuhee"
+  },
+  {
+   "passcode": 3492538,
+   "name": "Insect Armor with Laser Cannon"
+  },
+  {
+   "passcode": 3606209,
+   "name": "One Who Hunts Souls"
+  },
+  {
+   "passcode": 3732747,
+   "name": "Water Element"
+  },
+  {
+   "passcode": 3985011,
+   "name": "Lucky Trinket"
+  },
+  {
+   "passcode": 4206964,
+   "name": "Trap Hole"
+  },
+  {
+   "passcode": 4392470,
+   "name": "Leo Wizard"
+  },
+  {
+   "passcode": 4614116,
+   "name": "Dark Energy"
+  },
+  {
+   "passcode": 4931562,
+   "name": "Mountain Warrior"
+  },
+  {
+   "passcode": 5628232,
+   "name": "Flying Penguin"
+  },
+  {
+   "passcode": 6367785,
+   "name": "Eldeen"
+  },
+  {
+   "passcode": 6368038,
+   "name": "Gaia The Fierce Knight"
+  },
+  {
+   "passcode": 6740720,
+   "name": "Seiyaryu"
+  },
+  {
+   "passcode": 6840573,
+   "name": "Barox"
+  },
+  {
+   "passcode": 7089711,
+   "name": "Hane-Hane"
+  },
+  {
+   "passcode": 7225792,
+   "name": "Mon Larvas"
+  },
+  {
+   "passcode": 7526150,
+   "name": "Golgoil"
+  },
+  {
+   "passcode": 7562372,
+   "name": "Megasonic Eye"
+  },
+  {
+   "passcode": 7902349,
+   "name": "Left Arm of the Forbidden One"
+  },
+  {
+   "passcode": 8058240,
+   "name": "Binding Chain"
+  },
+  {
+   "passcode": 8124921,
+   "name": "Right Leg of the Forbidden One"
+  },
+  {
+   "passcode": 8327462,
+   "name": "Skullbird"
+  },
+  {
+   "passcode": 8783685,
+   "name": "Hourglass of Life"
+  },
+  {
+   "passcode": 8944575,
+   "name": "The Drdek"
+  },
+  {
+   "passcode": 9076207,
+   "name": "Armed Ninja"
+  },
+  {
+   "passcode": 9159938,
+   "name": "Dark Gray"
+  },
+  {
+   "passcode": 9293977,
+   "name": "Metal Dragon"
+  },
+  {
+   "passcode": 9430387,
+   "name": "LaLa Li-oon"
+  },
+  {
+   "passcode": 9653271,
+   "name": "Kaminari Attack"
+  },
+  {
+   "passcode": 10202894,
+   "name": "Skull Red Bird"
+  },
+  {
+   "passcode": 10262698,
+   "name": "The Statue of Easter Island"
+  },
+  {
+   "passcode": 10598400,
+   "name": "Zarigun"
+  },
+  {
+   "passcode": 10859908,
+   "name": "Holograh"
+  },
+  {
+   "passcode": 11868825,
+   "name": "Goblin's Secret Remedy"
+  },
+  {
+   "passcode": 12206212,
+   "name": "Harpie Lady Sisters"
+  },
+  {
+   "passcode": 12580477,
+   "name": "Raigeki"
+  },
+  {
+   "passcode": 12829151,
+   "name": "Kanan the Swordmistress"
+  },
+  {
+   "passcode": 13039848,
+   "name": "Giant Soldier of Stone"
+  },
+  {
+   "passcode": 13193642,
+   "name": "Dark Plant"
+  },
+  {
+   "passcode": 13429800,
+   "name": "Great White"
+  },
+  {
+   "passcode": 13599884,
+   "name": "Steel Scorpion"
+  },
+  {
+   "passcode": 14037717,
+   "name": "Spirit of the Books"
+  },
+  {
+   "passcode": 15025844,
+   "name": "Mystical Elf"
+  },
+  {
+   "passcode": 15042735,
+   "name": "Hurricail"
+  },
+  {
+   "passcode": 15052462,
+   "name": "Violet Crystal"
+  },
+  {
+   "passcode": 15150371,
+   "name": "Archfiend Mirror"
+  },
+  {
+   "passcode": 15303296,
+   "name": "Ryu-Kishin"
+  },
+  {
+   "passcode": 15401633,
+   "name": "Kagemusha of the Blue Flame"
+  },
+  {
+   "passcode": 15480588,
+   "name": "Armored Lizard"
+  },
+  {
+   "passcode": 15507080,
+   "name": "Sectarian of Secrets"
+  },
+  {
+   "passcode": 15510988,
+   "name": "Thunder Kid"
+  },
+  {
+   "passcode": 15820147,
+   "name": "Monsturtle"
+  },
+  {
+   "passcode": 16353197,
+   "name": "Drooling Lizard"
+  },
+  {
+   "passcode": 16899564,
+   "name": "Beautiful Headhuntress"
+  },
+  {
+   "passcode": 16972957,
+   "name": "Doma The Angel of Silence"
+  },
+  {
+   "passcode": 17092736,
+   "name": "Ancient Telescope"
+  },
+  {
+   "passcode": 17115745,
+   "name": "Yormungarde"
+  },
+  {
+   "passcode": 17238333,
+   "name": "Wretched Ghost of the Attic"
+  },
+  {
+   "passcode": 17511156,
+   "name": "Wood Clown"
+  },
+  {
+   "passcode": 17535588,
+   "name": "Armored Starfish"
+  },
+  {
+   "passcode": 17733394,
+   "name": "Wood Remains"
+  },
+  {
+   "passcode": 17814387,
+   "name": "Reinforcements"
+  },
+  {
+   "passcode": 17881964,
+   "name": "Darkfire Dragon"
+  },
+  {
+   "passcode": 18144507,
+   "name": "Harpie's Feather Duster"
+  },
+  {
+   "passcode": 18710707,
+   "name": "The Furious Sea King"
+  },
+  {
+   "passcode": 18914778,
+   "name": "Change Slime"
+  },
+  {
+   "passcode": 18937875,
+   "name": "Burning Spear"
+  },
+  {
+   "passcode": 19159413,
+   "name": "De-Spell"
+  },
+  {
+   "passcode": 19523799,
+   "name": "Ookazi"
+  },
+  {
+   "passcode": 20060230,
+   "name": "Hard Armor"
+  },
+  {
+   "passcode": 20101223,
+   "name": "Breath of Light"
+  },
+  {
+   "passcode": 20541432,
+   "name": "Key Mace #2"
+  },
+  {
+   "passcode": 20871001,
+   "name": "Blue Medicine"
+  },
+  {
+   "passcode": 21239280,
+   "name": "Bone Mouse"
+  },
+  {
+   "passcode": 21323861,
+   "name": "Acid Rain"
+  },
+  {
+   "passcode": 21817254,
+   "name": "Mega Thunderball"
+  },
+  {
+   "passcode": 22026707,
+   "name": "Curtain of the Dark Ones"
+  },
+  {
+   "passcode": 22702055,
+   "name": "Umi"
+  },
+  {
+   "passcode": 22910685,
+   "name": "Green Phantom King"
+  },
+  {
+   "passcode": 23032273,
+   "name": "Megirus Light"
+  },
+  {
+   "passcode": 23424603,
+   "name": "Wasteland"
+  },
+  {
+   "passcode": 24094653,
+   "name": "Polymerization"
+  },
+  {
+   "passcode": 24194033,
+   "name": "Dorover"
+  },
+  {
+   "passcode": 24348204,
+   "name": "The Bewitching Phantom Thief"
+  },
+  {
+   "passcode": 25769732,
+   "name": "Machine Conversion Factory"
+  },
+  {
+   "passcode": 25882881,
+   "name": "Dokuroizo the Grim Reaper"
+  },
+  {
+   "passcode": 27094595,
+   "name": "Graveyard and the Hand of Invitation"
+  },
+  {
+   "passcode": 27324313,
+   "name": "Wattkid"
+  },
+  {
+   "passcode": 28003512,
+   "name": "The Judgement Hand"
+  },
+  {
+   "passcode": 28279543,
+   "name": "Curse of Dragon"
+  },
+  {
+   "passcode": 28593363,
+   "name": "Deepsea Shark"
+  },
+  {
+   "passcode": 28933734,
+   "name": "Mask of Darkness"
+  },
+  {
+   "passcode": 29172562,
+   "name": "Steel Ogre Grotto #1"
+  },
+  {
+   "passcode": 29948642,
+   "name": "Dig Beak"
+  },
+  {
+   "passcode": 31066283,
+   "name": "Revival of Dokurorider"
+  },
+  {
+   "passcode": 31339260,
+   "name": "Zombie Warrior"
+  },
+  {
+   "passcode": 31560081,
+   "name": "Magician of Faith"
+  },
+  {
+   "passcode": 32012841,
+   "name": "Millennium Shield"
+  },
+  {
+   "passcode": 32268901,
+   "name": "Salamandra"
+  },
+  {
+   "passcode": 32274490,
+   "name": "Skull Servant"
+  },
+  {
+   "passcode": 32452818,
+   "name": "Beaver Warrior"
+  },
+  {
+   "passcode": 33064647,
+   "name": "One-Eyed Shield Dragon"
+  },
+  {
+   "passcode": 33066139,
+   "name": "Reaper of the Cards"
+  },
+  {
+   "passcode": 33178416,
+   "name": "Misairuzame"
+  },
+  {
+   "passcode": 33691040,
+   "name": "Pragtical"
+  },
+  {
+   "passcode": 33734439,
+   "name": "Three-Legged Zombies"
+  },
+  {
+   "passcode": 34290067,
+   "name": "Corroding Shark"
+  },
+  {
+   "passcode": 34320307,
+   "name": "Living Vase"
+  },
+  {
+   "passcode": 34460851,
+   "name": "Flame Manipulator"
+  },
+  {
+   "passcode": 34536276,
+   "name": "Ganigumo"
+  },
+  {
+   "passcode": 35282433,
+   "name": "Blue-Eyed Silver Zombie"
+  },
+  {
+   "passcode": 35752363,
+   "name": "Vermillion Sparrow"
+  },
+  {
+   "passcode": 36121917,
+   "name": "Monster Egg"
+  },
+  {
+   "passcode": 36304921,
+   "name": "Witty Phantom"
+  },
+  {
+   "passcode": 36607978,
+   "name": "Mystical Moon"
+  },
+  {
+   "passcode": 36904469,
+   "name": "Akihiron"
+  },
+  {
+   "passcode": 37120512,
+   "name": "Sword of Dark Destruction"
+  },
+  {
+   "passcode": 37160778,
+   "name": "Fairywitch"
+  },
+  {
+   "passcode": 37243151,
+   "name": "Weather Control"
+  },
+  {
+   "passcode": 37313348,
+   "name": "Turtle Tiger"
+  },
+  {
+   "passcode": 37390589,
+   "name": "Kunai with Chain"
+  },
+  {
+   "passcode": 37421579,
+   "name": "Charubin the Fire Knight"
+  },
+  {
+   "passcode": 37820550,
+   "name": "Electro-Whip"
+  },
+  {
+   "passcode": 38142739,
+   "name": "Petit Angel"
+  },
+  {
+   "passcode": 38199696,
+   "name": "Red Medicine"
+  },
+  {
+   "passcode": 38942059,
+   "name": "Sonic Maid"
+  },
+  {
+   "passcode": 39004808,
+   "name": "Root Water"
+  },
+  {
+   "passcode": 39175982,
+   "name": "Winged Cleaver"
+  },
+  {
+   "passcode": 39774685,
+   "name": "Vile Germs"
+  },
+  {
+   "passcode": 39897277,
+   "name": "Elf's Light"
+  },
+  {
+   "passcode": 40200834,
+   "name": "Sleeping Lion"
+  },
+  {
+   "passcode": 40240595,
+   "name": "Cocoon of Evolution"
+  },
+  {
+   "passcode": 40374923,
+   "name": "Mammoth Graveyard"
+  },
+  {
+   "passcode": 40387124,
+   "name": "Abyss Flower"
+  },
+  {
+   "passcode": 40575313,
+   "name": "Shadow Specter"
+  },
+  {
+   "passcode": 40826495,
+   "name": "Dissolverock"
+  },
+  {
+   "passcode": 41061625,
+   "name": "Yashinoki"
+  },
+  {
+   "passcode": 41218256,
+   "name": "Claw Reacher"
+  },
+  {
+   "passcode": 41356845,
+   "name": "Acid Trap Hole"
+  },
+  {
+   "passcode": 41422426,
+   "name": "Supporter in the Shadows"
+  },
+  {
+   "passcode": 41544074,
+   "name": "Kamionwizard"
+  },
+  {
+   "passcode": 41762634,
+   "name": "Giant Flea"
+  },
+  {
+   "passcode": 41949033,
+   "name": "Dark Assailant"
+  },
+  {
+   "passcode": 42348802,
+   "name": "Trakodon"
+  },
+  {
+   "passcode": 42625254,
+   "name": "Little D"
+  },
+  {
+   "passcode": 42883273,
+   "name": "Wodan the Resident of the Forest"
+  },
+  {
+   "passcode": 43230671,
+   "name": "Ancient Lizard Warrior"
+  },
+  {
+   "passcode": 43500484,
+   "name": "Darkworld Thorns"
+  },
+  {
+   "passcode": 43530283,
+   "name": "Hourglass of Courage"
+  },
+  {
+   "passcode": 43905751,
+   "name": "Madjinn Gunn"
+  },
+  {
+   "passcode": 44073668,
+   "name": "Takriminos"
+  },
+  {
+   "passcode": 44209392,
+   "name": "Castle Walls"
+  },
+  {
+   "passcode": 44287299,
+   "name": "Masaki the Legendary Swordsman"
+  },
+  {
+   "passcode": 44519536,
+   "name": "Left Leg of the Forbidden One"
+  },
+  {
+   "passcode": 45042329,
+   "name": "Tripwire Beast"
+  },
+  {
+   "passcode": 45121025,
+   "name": "Ogre of the Black Shadow"
+  },
+  {
+   "passcode": 45231177,
+   "name": "Flame Swordsman"
+  },
+  {
+   "passcode": 45895206,
+   "name": "Dark-Piercing Light"
+  },
+  {
+   "passcode": 46009906,
+   "name": "Beast Fangs"
+  },
+  {
+   "passcode": 46130346,
+   "name": "Hinotama"
+  },
+  {
+   "passcode": 46247516,
+   "name": "Tao the Chanter"
+  },
+  {
+   "passcode": 46457856,
+   "name": "Tomozaurus"
+  },
+  {
+   "passcode": 46718686,
+   "name": "Hitodenchak"
+  },
+  {
+   "passcode": 46864967,
+   "name": "Minomushi Warrior"
+  },
+  {
+   "passcode": 46986414,
+   "name": "Dark Magician"
+  },
+  {
+   "passcode": 47060154,
+   "name": "Mystic Clown"
+  },
+  {
+   "passcode": 47695416,
+   "name": "Candle of Fate"
+  },
+  {
+   "passcode": 47852924,
+   "name": "Soul of the Pure"
+  },
+  {
+   "passcode": 47922711,
+   "name": "Tatsunootoshigo"
+  },
+  {
+   "passcode": 48109103,
+   "name": "Kappa Avenger"
+  },
+  {
+   "passcode": 48365709,
+   "name": "Ansatsu"
+  },
+  {
+   "passcode": 48531733,
+   "name": "Bolt Penguin"
+  },
+  {
+   "passcode": 48579379,
+   "name": "Perfectly Ultimate Great Moth"
+  },
+  {
+   "passcode": 49127943,
+   "name": "Man-Eating Plant"
+  },
+  {
+   "passcode": 49258578,
+   "name": "Gate Deeg"
+  },
+  {
+   "passcode": 49370026,
+   "name": "Genin"
+  },
+  {
+   "passcode": 49791927,
+   "name": "Tiger Axe"
+  },
+  {
+   "passcode": 50045299,
+   "name": "Dragon Capture Jar"
+  },
+  {
+   "passcode": 50913601,
+   "name": "Mountain"
+  },
+  {
+   "passcode": 51267887,
+   "name": "Raise Body Heat"
+  },
+  {
+   "passcode": 51482758,
+   "name": "Remove Trap"
+  },
+  {
+   "passcode": 52367652,
+   "name": "That Which Feeds on Life"
+  },
+  {
+   "passcode": 52584282,
+   "name": "Hercules Beetle"
+  },
+  {
+   "passcode": 52800428,
+   "name": "Fiend's Hand"
+  },
+  {
+   "passcode": 53129443,
+   "name": "Dark Hole"
+  },
+  {
+   "passcode": 53153481,
+   "name": "Armaill"
+  },
+  {
+   "passcode": 53293545,
+   "name": "Firegrass"
+  },
+  {
+   "passcode": 53375573,
+   "name": "Dark King of the Abyss"
+  },
+  {
+   "passcode": 53581214,
+   "name": "Fire Reaper"
+  },
+  {
+   "passcode": 53832650,
+   "name": "Meotoko"
+  },
+  {
+   "passcode": 54541900,
+   "name": "Karbonala Warrior"
+  },
+  {
+   "passcode": 54652250,
+   "name": "Man-Eater Bug"
+  },
+  {
+   "passcode": 54844990,
+   "name": "Skull Stalker"
+  },
+  {
+   "passcode": 55014050,
+   "name": "Water Girl"
+  },
+  {
+   "passcode": 55144522,
+   "name": "Pot of Greed"
+  },
+  {
+   "passcode": 55210709,
+   "name": "Lisark"
+  },
+  {
+   "passcode": 55291359,
+   "name": "Succubus Knight"
+  },
+  {
+   "passcode": 55321970,
+   "name": "Gust Fan"
+  },
+  {
+   "passcode": 55444629,
+   "name": "Lesser Dragon"
+  },
+  {
+   "passcode": 55550921,
+   "name": "Battle Warrior"
+  },
+  {
+   "passcode": 55691901,
+   "name": "Great Bill"
+  },
+  {
+   "passcode": 55784832,
+   "name": "Morinphen"
+  },
+  {
+   "passcode": 55875323,
+   "name": "Electric Lizard"
+  },
+  {
+   "passcode": 56260110,
+   "name": "Raimei"
+  },
+  {
+   "passcode": 56283725,
+   "name": "Kumootoko"
+  },
+  {
+   "passcode": 56342351,
+   "name": "M-Warrior #1"
+  },
+  {
+   "passcode": 56413937,
+   "name": "Warrior of Tradition"
+  },
+  {
+   "passcode": 56606928,
+   "name": "Eternal Drought"
+  },
+  {
+   "passcode": 56713552,
+   "name": "Obese Marmot of Nefariousness"
+  },
+  {
+   "passcode": 57305373,
+   "name": "Two-Mouth Darkruler"
+  },
+  {
+   "passcode": 57405307,
+   "name": "Winged Dragon, Guardian of the Fortress #2"
+  },
+  {
+   "passcode": 57728570,
+   "name": "Crush Card Virus"
+  },
+  {
+   "passcode": 58074572,
+   "name": "Mooyan Curry"
+  },
+  {
+   "passcode": 58192742,
+   "name": "Petit Moth"
+  },
+  {
+   "passcode": 58314394,
+   "name": "Ground Attacker Bugroth"
+  },
+  {
+   "passcode": 58528964,
+   "name": "Flame Ghost"
+  },
+  {
+   "passcode": 59036972,
+   "name": "Mavelus"
+  },
+  {
+   "passcode": 59197169,
+   "name": "Yami"
+  },
+  {
+   "passcode": 60589682,
+   "name": "Twin Long Rods #1"
+  },
+  {
+   "passcode": 60694662,
+   "name": "Skelengel"
+  },
+  {
+   "passcode": 60802233,
+   "name": "Kuwagata α"
+  },
+  {
+   "passcode": 61201220,
+   "name": "Phantom Ghost"
+  },
+  {
+   "passcode": 61454890,
+   "name": "Necrolancer the Time-lord"
+  },
+  {
+   "passcode": 61854111,
+   "name": "Legendary Sword"
+  },
+  {
+   "passcode": 62193699,
+   "name": "Rock Ogre Grotto #2"
+  },
+  {
+   "passcode": 62210247,
+   "name": "Lunar Queen Elzaim"
+  },
+  {
+   "passcode": 62403074,
+   "name": "Rhaimundos of the Red Sword"
+  },
+  {
+   "passcode": 62793020,
+   "name": "Mystery Hand"
+  },
+  {
+   "passcode": 63102017,
+   "name": "Stop Defense"
+  },
+  {
+   "passcode": 63125616,
+   "name": "The Shadow Who Controls the Dark"
+  },
+  {
+   "passcode": 63224564,
+   "name": "Cyber Shield"
+  },
+  {
+   "passcode": 63308047,
+   "name": "Terra the Terrible"
+  },
+  {
+   "passcode": 63432835,
+   "name": "Stone Armadiller"
+  },
+  {
+   "passcode": 63515678,
+   "name": "Mystical Capture Chain"
+  },
+  {
+   "passcode": 63545455,
+   "name": "Mech Mole Zombie"
+  },
+  {
+   "passcode": 64154377,
+   "name": "Embryonic Beast"
+  },
+  {
+   "passcode": 64511793,
+   "name": "Eyearmor"
+  },
+  {
+   "passcode": 66788016,
+   "name": "Fissure"
+  },
+  {
+   "passcode": 66889139,
+   "name": "Gaia the Dragon Champion"
+  },
+  {
+   "passcode": 67494157,
+   "name": "Crawling Dragon"
+  },
+  {
+   "passcode": 67841515,
+   "name": "Barrel Lily"
+  },
+  {
+   "passcode": 68401546,
+   "name": "Fairy's Gift"
+  },
+  {
+   "passcode": 68846917,
+   "name": "Rock Ogre Grotto #1"
+  },
+  {
+   "passcode": 68870276,
+   "name": "Fiend Reflection #1"
+  },
+  {
+   "passcode": 68928540,
+   "name": "Kamakiriman"
+  },
+  {
+   "passcode": 68963107,
+   "name": "Boo Koo"
+  },
+  {
+   "passcode": 69572024,
+   "name": "Tongyo"
+  },
+  {
+   "passcode": 69750536,
+   "name": "Wow Warrior"
+  },
+  {
+   "passcode": 69992868,
+   "name": "Muse-A"
+  },
+  {
+   "passcode": 70345785,
+   "name": "Yamadron"
+  },
+  {
+   "passcode": 70681994,
+   "name": "Dragoness the Wicked Knight"
+  },
+  {
+   "passcode": 70781052,
+   "name": "Summoned Skull"
+  },
+  {
+   "passcode": 70903634,
+   "name": "Right Arm of the Forbidden One"
+  },
+  {
+   "passcode": 70924884,
+   "name": "Alinsection"
+  },
+  {
+   "passcode": 71068263,
+   "name": "Stuffed Animal"
+  },
+  {
+   "passcode": 71280811,
+   "name": "Yaranzo"
+  },
+  {
+   "passcode": 71407486,
+   "name": "Fireyarou"
+  },
+  {
+   "passcode": 72076281,
+   "name": "Bat"
+  },
+  {
+   "passcode": 72269672,
+   "name": "Stone Ghost"
+  },
+  {
+   "passcode": 72299832,
+   "name": "Giant Mech-Soldier"
+  },
+  {
+   "passcode": 72302403,
+   "name": "Swords of Revealing Light"
+  },
+  {
+   "passcode": 72520073,
+   "name": "Dark Artist"
+  },
+  {
+   "passcode": 72842870,
+   "name": "Tyhone"
+  },
+  {
+   "passcode": 73051941,
+   "name": "Sand Stone"
+  },
+  {
+   "passcode": 73134082,
+   "name": "Final Flame"
+  },
+  {
+   "passcode": 73481154,
+   "name": "Destroyer Golem"
+  },
+  {
+   "passcode": 74677422,
+   "name": "Red-Eyes Black Dragon"
+  },
+  {
+   "passcode": 75356564,
+   "name": "Petit Dragon"
+  },
+  {
+   "passcode": 75376965,
+   "name": "Enchanting Mermaid"
+  },
+  {
+   "passcode": 75559356,
+   "name": "Cyber Soldier of Darkworld"
+  },
+  {
+   "passcode": 75646173,
+   "name": "Synchar"
+  },
+  {
+   "passcode": 75850803,
+   "name": "LaMoon"
+  },
+  {
+   "passcode": 75889523,
+   "name": "Archfiend Marmot of Nefariousness"
+  },
+  {
+   "passcode": 76103675,
+   "name": "Sparks"
+  },
+  {
+   "passcode": 76184692,
+   "name": "Hitotsu-Me Giant"
+  },
+  {
+   "passcode": 76211194,
+   "name": "Meda Bat"
+  },
+  {
+   "passcode": 76704943,
+   "name": "Yamatano Dragon Scroll"
+  },
+  {
+   "passcode": 76775123,
+   "name": "Patrol Robo"
+  },
+  {
+   "passcode": 76812113,
+   "name": "Harpie Lady"
+  },
+  {
+   "passcode": 77007920,
+   "name": "Laser Cannon Armor"
+  },
+  {
+   "passcode": 77027445,
+   "name": "Power of Kaishin"
+  },
+  {
+   "passcode": 77581312,
+   "name": "Masked Clown"
+  },
+  {
+   "passcode": 77603950,
+   "name": "Phantom Dewan"
+  },
+  {
+   "passcode": 77622396,
+   "name": "Reverse Trap"
+  },
+  {
+   "passcode": 77827521,
+   "name": "Trial of Nightmare"
+  },
+  {
+   "passcode": 78556320,
+   "name": "Vishwar Randi"
+  },
+  {
+   "passcode": 78780140,
+   "name": "Trent"
+  },
+  {
+   "passcode": 80141480,
+   "name": "Hunter Spider"
+  },
+  {
+   "passcode": 80516007,
+   "name": "Rare Fish"
+  },
+  {
+   "passcode": 80600490,
+   "name": "Kageningen"
+  },
+  {
+   "passcode": 80604092,
+   "name": "Ultimate Offering"
+  },
+  {
+   "passcode": 80770678,
+   "name": "Spirit of the Harp"
+  },
+  {
+   "passcode": 81057959,
+   "name": "D. Human"
+  },
+  {
+   "passcode": 81179446,
+   "name": "Kattapillar"
+  },
+  {
+   "passcode": 81386177,
+   "name": "Bottom Dweller"
+  },
+  {
+   "passcode": 81492226,
+   "name": "Ancient Jar"
+  },
+  {
+   "passcode": 81820689,
+   "name": "The Inexperienced Spy"
+  },
+  {
+   "passcode": 82065276,
+   "name": "Oscillo Hero"
+  },
+  {
+   "passcode": 82085619,
+   "name": "Shining Friendship"
+  },
+  {
+   "passcode": 82542267,
+   "name": "Gravedigger Ghoul"
+  },
+  {
+   "passcode": 82742611,
+   "name": "Serpent Marauder"
+  },
+  {
+   "passcode": 82878489,
+   "name": "Shine Palace"
+  },
+  {
+   "passcode": 83464209,
+   "name": "Mystical Sheep #2"
+  },
+  {
+   "passcode": 83678433,
+   "name": "Midnight Fiend"
+  },
+  {
+   "passcode": 83764719,
+   "name": "Monster Reborn"
+  },
+  {
+   "passcode": 83887306,
+   "name": "Two-Pronged Attack"
+  },
+  {
+   "passcode": 84285623,
+   "name": "Haniwa"
+  },
+  {
+   "passcode": 84686841,
+   "name": "King Fog"
+  },
+  {
+   "passcode": 84794011,
+   "name": "Solitude"
+  },
+  {
+   "passcode": 84916669,
+   "name": "Doriado"
+  },
+  {
+   "passcode": 84990171,
+   "name": "Bean Soldier"
+  },
+  {
+   "passcode": 85309439,
+   "name": "Ray & Temperature"
+  },
+  {
+   "passcode": 85326399,
+   "name": "Spike Seadra"
+  },
+  {
+   "passcode": 85639257,
+   "name": "Aqua Madoor"
+  },
+  {
+   "passcode": 85705804,
+   "name": "Kurama"
+  },
+  {
+   "passcode": 86088138,
+   "name": "Ocubeam"
+  },
+  {
+   "passcode": 86318356,
+   "name": "Sogen"
+  },
+  {
+   "passcode": 86421986,
+   "name": "Ancient Tree of Enlightenment"
+  },
+  {
+   "passcode": 87430998,
+   "name": "Forest"
+  },
+  {
+   "passcode": 87796900,
+   "name": "Winged Dragon, Guardian of the Fortress #1"
+  },
+  {
+   "passcode": 88435542,
+   "name": "Fire Eye"
+  },
+  {
+   "passcode": 88643173,
+   "name": "Nightmare Scorpion"
+  },
+  {
+   "passcode": 89091579,
+   "name": "Basic Insect"
+  },
+  {
+   "passcode": 89558090,
+   "name": "Dark Prisoner"
+  },
+  {
+   "passcode": 89631139,
+   "name": "Blue-Eyes White Dragon"
+  },
+  {
+   "passcode": 89904598,
+   "name": "Anthrosaurus"
+  },
+  {
+   "passcode": 90219263,
+   "name": "Elegant Egotist"
+  },
+  {
+   "passcode": 90357090,
+   "name": "Silver Fang"
+  },
+  {
+   "passcode": 90873992,
+   "name": "Warrior Elimination"
+  },
+  {
+   "passcode": 90963488,
+   "name": "Nemuriko"
+  },
+  {
+   "passcode": 91152256,
+   "name": "Celtic Guardian"
+  },
+  {
+   "passcode": 91595718,
+   "name": "Book of Secret Arts"
+  },
+  {
+   "passcode": 91939608,
+   "name": "Rogue Doll"
+  },
+  {
+   "passcode": 92391084,
+   "name": "Wilmee"
+  },
+  {
+   "passcode": 92409659,
+   "name": "White Dolphin"
+  },
+  {
+   "passcode": 92731455,
+   "name": "M-Warrior #2"
+  },
+  {
+   "passcode": 92944626,
+   "name": "Wings of Wicked Flame"
+  },
+  {
+   "passcode": 93221206,
+   "name": "Ancient Elf"
+  },
+  {
+   "passcode": 93553943,
+   "name": "Man Eater"
+  },
+  {
+   "passcode": 93788854,
+   "name": "The Wandering Doomed"
+  },
+  {
+   "passcode": 94675535,
+   "name": "Larvas"
+  },
+  {
+   "passcode": 94716515,
+   "name": "Eradicating Aerosol"
+  },
+  {
+   "passcode": 95144193,
+   "name": "Kwagar Hercules"
+  },
+  {
+   "passcode": 95952802,
+   "name": "Flower Wolf"
+  },
+  {
+   "passcode": 96851799,
+   "name": "Hinotama Soul"
+  },
+  {
+   "passcode": 97843505,
+   "name": "Djinn the Watcher of the Wind"
+  },
+  {
+   "passcode": 97973387,
+   "name": "Droll Bird"
+  },
+  {
+   "passcode": 98075147,
+   "name": "Spiked Snail"
+  },
+  {
+   "passcode": 98252586,
+   "name": "Follow Wind"
+  },
+  {
+   "passcode": 98374133,
+   "name": "Invigoration"
+  },
+  {
+   "passcode": 98795934,
+   "name": "Mabarrel"
+  },
+  {
+   "passcode": 98818516,
+   "name": "Frenzied Panda"
+  },
+  {
+   "passcode": 98898173,
+   "name": "The Melting Red Shadow"
+  },
+  {
+   "passcode": 99030164,
+   "name": "Happy Lover"
+  },
+  {
+   "passcode": 99721536,
+   "name": "Dokurorider"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "limited-edition-yugi-pack",
+  "code": "LEY",
+  "name": "Limited Edition: Yugi Pack",
+  "kind": "special",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-06-01",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 71068263,
+      "name": "Stuffed Animal"
+    },
+    {
+      "passcode": 5628232,
+      "name": "Flying Penguin"
+    },
+    {
+      "passcode": 32012841,
+      "name": "Millennium Shield"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "One of three ultra-limited 3-card character packs (Yugi/Kaiba/Joey), each entirely Ultra Secret Rare."
+}

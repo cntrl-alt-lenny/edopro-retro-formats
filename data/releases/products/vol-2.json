@@ -1,0 +1,187 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "vol-2",
+  "code": "VOL2",
+  "name": "Vol.2",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-03-27",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 15025844,
+      "name": "Mystical Elf"
+    },
+    {
+      "passcode": 72842870,
+      "name": "Tyhone"
+    },
+    {
+      "passcode": 31339260,
+      "name": "Zombie Warrior"
+    },
+    {
+      "passcode": 28279543,
+      "name": "Curse of Dragon"
+    },
+    {
+      "passcode": 54541900,
+      "name": "Karbonala Warrior"
+    },
+    {
+      "passcode": 1784619,
+      "name": "Uraby"
+    },
+    {
+      "passcode": 41544074,
+      "name": "Kamionwizard"
+    },
+    {
+      "passcode": 41422426,
+      "name": "Supporter in the Shadows"
+    },
+    {
+      "passcode": 35282433,
+      "name": "Blue-Eyed Silver Zombie"
+    },
+    {
+      "passcode": 24348204,
+      "name": "The Bewitching Phantom Thief"
+    },
+    {
+      "passcode": 94675535,
+      "name": "Larvas"
+    },
+    {
+      "passcode": 20060230,
+      "name": "Hard Armor"
+    },
+    {
+      "passcode": 93553943,
+      "name": "Man Eater"
+    },
+    {
+      "passcode": 56342351,
+      "name": "M-Warrior #1"
+    },
+    {
+      "passcode": 92731455,
+      "name": "M-Warrior #2"
+    },
+    {
+      "passcode": 80770678,
+      "name": "Spirit of the Harp"
+    },
+    {
+      "passcode": 53153481,
+      "name": "Armaill"
+    },
+    {
+      "passcode": 41218256,
+      "name": "Claw Reacher"
+    },
+    {
+      "passcode": 63308047,
+      "name": "Terra the Terrible"
+    },
+    {
+      "passcode": 24194033,
+      "name": "Dorover"
+    },
+    {
+      "passcode": 84794011,
+      "name": "Solitude"
+    },
+    {
+      "passcode": 56283725,
+      "name": "Kumootoko"
+    },
+    {
+      "passcode": 17733394,
+      "name": "Wood Remains"
+    },
+    {
+      "passcode": 76211194,
+      "name": "Meda Bat"
+    },
+    {
+      "passcode": 75376965,
+      "name": "Enchanting Mermaid"
+    },
+    {
+      "passcode": 63432835,
+      "name": "Stone Armadiller"
+    },
+    {
+      "passcode": 59036972,
+      "name": "Mavelus"
+    },
+    {
+      "passcode": 10859908,
+      "name": "Holograh"
+    },
+    {
+      "passcode": 70681994,
+      "name": "Dragoness the Wicked Knight"
+    },
+    {
+      "passcode": 33064647,
+      "name": "One-Eyed Shield Dragon"
+    },
+    {
+      "passcode": 4614116,
+      "name": "Dark Energy"
+    },
+    {
+      "passcode": 77007920,
+      "name": "Laser Cannon Armor"
+    },
+    {
+      "passcode": 39774685,
+      "name": "Vile Germs"
+    },
+    {
+      "passcode": 25769732,
+      "name": "Machine Conversion Factory"
+    },
+    {
+      "passcode": 51267887,
+      "name": "Raise Body Heat"
+    },
+    {
+      "passcode": 11868825,
+      "name": "Goblin's Secret Remedy"
+    },
+    {
+      "passcode": 73134081,
+      "name": "Final Flame"
+    },
+    {
+      "passcode": 72302403,
+      "name": "Swords of Revealing Light"
+    },
+    {
+      "passcode": 83764718,
+      "name": "Monster Reborn"
+    },
+    {
+      "passcode": 19159413,
+      "name": "De-Spell"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

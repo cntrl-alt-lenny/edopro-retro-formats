@@ -246,6 +246,12 @@
       "ot": 3
     },
     {
+      "passcode": 756652,
+      "name": "Doron",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 759393,
       "name": "Hiita the Fire Charmer",
       "alias_of": null,
@@ -894,6 +900,12 @@
       "ot": 3
     },
     {
+      "passcode": 2957055,
+      "name": "Wicked Dragon with the Ersatz Head",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 2964201,
       "name": "Ryu-Ran",
       "alias_of": null,
@@ -1044,6 +1056,12 @@
       "ot": 3
     },
     {
+      "passcode": 3492538,
+      "name": "Insect Armor with Laser Cannon",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 3493978,
       "name": "Don Turtle",
       "alias_of": null,
@@ -1072,6 +1090,12 @@
       "name": "Shreddder",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 3606209,
+      "name": "One Who Hunts Souls",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 3627449,
@@ -1114,6 +1138,12 @@
       "name": "Dark Cure",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 3732747,
+      "name": "Water Element",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 3773196,
@@ -1198,6 +1228,12 @@
       "name": "Greed Grado",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 3985011,
+      "name": "Lucky Trinket",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 4031928,
@@ -1350,6 +1386,12 @@
       "ot": 3
     },
     {
+      "passcode": 4392470,
+      "name": "Leo Wizard",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 4404099,
       "name": "The Dragon Dwelling in the Deep",
       "alias_of": null,
@@ -1492,6 +1534,12 @@
       "name": "Mobius the Frost Monarch",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 4931562,
+      "name": "Mountain Warrior",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 4941482,
@@ -1926,6 +1974,12 @@
       "ot": 3
     },
     {
+      "passcode": 6367785,
+      "name": "Eldeen",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 6368038,
       "name": "Gaia The Fierce Knight",
       "alias_of": null,
@@ -2012,6 +2066,12 @@
     {
       "passcode": 6836211,
       "name": "The Great Emperor Penguin",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 6840573,
+      "name": "Barox",
       "alias_of": null,
       "ot": 3
     },
@@ -2124,6 +2184,12 @@
       "ot": 3
     },
     {
+      "passcode": 7225792,
+      "name": "Mon Larvas",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 7264861,
       "name": "Infernity Beast",
       "alias_of": null,
@@ -2174,6 +2240,12 @@
     {
       "passcode": 7512044,
       "name": "Gather Your Mind",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 7526150,
+      "name": "Golgoil",
       "alias_of": null,
       "ot": 3
     },
@@ -2322,6 +2394,12 @@
       "ot": 3
     },
     {
+      "passcode": 8058240,
+      "name": "Binding Chain",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 8062132,
       "name": "Vennominaga the Deity of Poisonous Snakes",
       "alias_of": null,
@@ -2396,6 +2474,12 @@
     {
       "passcode": 8323633,
       "name": "Cloak and Dagger",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 8327462,
+      "name": "Skullbird",
       "alias_of": null,
       "ot": 3
     },
@@ -2484,6 +2568,12 @@
       "ot": 3
     },
     {
+      "passcode": 8783685,
+      "name": "Hourglass of Life",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 8794435,
       "name": "Maju Garzett",
       "alias_of": null,
@@ -2512,6 +2602,12 @@
       "name": "Djinn Releaser of Rituals",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 8944575,
+      "name": "The Drdek",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 8949584,
@@ -2656,6 +2752,12 @@
       "name": "Jinzo - Returner",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 9430387,
+      "name": "LaLa Li-oon",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 9433350,
@@ -3018,6 +3120,12 @@
       "ot": 3
     },
     {
+      "passcode": 10598400,
+      "name": "Zarigun",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 10651797,
       "name": "Swallow Flip",
       "alias_of": null,
@@ -3064,6 +3172,12 @@
       "name": "Great Phantom Thief",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 10859908,
+      "name": "Holograh",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 10875327,
@@ -3642,6 +3756,12 @@
       "ot": 3
     },
     {
+      "passcode": 12829151,
+      "name": "Kanan the Swordmistress",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 12863633,
       "name": "Curse of the Circle",
       "alias_of": null,
@@ -3718,6 +3838,12 @@
       "name": "Charcoal Inpachi",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 13193642,
+      "name": "Dark Plant",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 13215230,
@@ -4272,6 +4398,12 @@
       "ot": 3
     },
     {
+      "passcode": 15042735,
+      "name": "Hurricail",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 15052462,
       "name": "Violet Crystal",
       "alias_of": null,
@@ -4300,6 +4432,12 @@
       "name": "White Magical Hat",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 15150371,
+      "name": "Archfiend Mirror",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 15169262,
@@ -4504,6 +4642,12 @@
       "name": "Mind Crush",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 15820147,
+      "name": "Monsturtle",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 15839054,
@@ -4872,6 +5016,12 @@
       "ot": 3
     },
     {
+      "passcode": 17115745,
+      "name": "Yormungarde",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 17132130,
       "name": "Destiny HERO - Dogma",
       "alias_of": null,
@@ -5004,6 +5154,12 @@
       "ot": 3
     },
     {
+      "passcode": 17511156,
+      "name": "Wood Clown",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 17521642,
       "name": "Zero Force",
       "alias_of": null,
@@ -5086,6 +5242,12 @@
       "name": "Neo-Spacian Glow Moss",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 17733394,
+      "name": "Wood Remains",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 17760003,
@@ -5384,6 +5546,12 @@
     {
       "passcode": 18895832,
       "name": "System Down",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 18914778,
+      "name": "Change Slime",
       "alias_of": null,
       "ot": 3
     },
@@ -6036,6 +6204,12 @@
       "ot": 3
     },
     {
+      "passcode": 21239280,
+      "name": "Bone Mouse",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 21249921,
       "name": "Dragunity Knight - Vajrayana",
       "alias_of": null,
@@ -6278,6 +6452,12 @@
     {
       "passcode": 22020907,
       "name": "Hero Signal",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 22026707,
+      "name": "Curtain of the Dark Ones",
       "alias_of": null,
       "ot": 3
     },
@@ -6568,6 +6748,12 @@
       "name": "Resonator Call",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 23032273,
+      "name": "Megirus Light",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 23051413,
@@ -6954,6 +7140,12 @@
       "ot": 3
     },
     {
+      "passcode": 24194033,
+      "name": "Dorover",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 24221739,
       "name": "Protector of the Sanctuary",
       "alias_of": null,
@@ -7006,6 +7198,12 @@
       "name": "Gravekeeper's Spy",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 24348204,
+      "name": "The Bewitching Phantom Thief",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 24419823,
@@ -7434,6 +7632,12 @@
       "ot": 3
     },
     {
+      "passcode": 25882881,
+      "name": "Dokuroizo the Grim Reaper",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 25920413,
       "name": "Alien Skull",
       "alias_of": null,
@@ -7726,6 +7930,12 @@
       "name": "Secret Barrel",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 27094595,
+      "name": "Graveyard and the Hand of Invitation",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 27125110,
@@ -8850,6 +9060,12 @@
       "ot": 3
     },
     {
+      "passcode": 31339260,
+      "name": "Zombie Warrior",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 31383545,
       "name": "XX-Saber Darksoul",
       "alias_of": null,
@@ -9774,6 +9990,12 @@
       "ot": 3
     },
     {
+      "passcode": 34320307,
+      "name": "Living Vase",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 34334692,
       "name": "Ritual Raven",
       "alias_of": null,
@@ -9826,6 +10048,12 @@
       "name": "Ancient City - Rainbow Ruins",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 34536276,
+      "name": "Ganigumo",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 34541863,
@@ -9972,6 +10200,12 @@
       "ot": 3
     },
     {
+      "passcode": 35282433,
+      "name": "Blue-Eyed Silver Zombie",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 35316708,
       "name": "Time Seal",
       "alias_of": null,
@@ -10064,6 +10298,12 @@
     {
       "passcode": 35686187,
       "name": "Tragedy",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 35752363,
+      "name": "Vermillion Sparrow",
       "alias_of": null,
       "ot": 3
     },
@@ -10380,6 +10620,12 @@
       "ot": 3
     },
     {
+      "passcode": 36904469,
+      "name": "Akihiron",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 36931229,
       "name": "Castle Gate",
       "alias_of": null,
@@ -10458,6 +10704,12 @@
       "ot": 3
     },
     {
+      "passcode": 37160778,
+      "name": "Fairywitch",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 37169670,
       "name": "Hyper Psychic Blaster/Assault Mode",
       "alias_of": null,
@@ -10474,6 +10726,12 @@
       "name": "Lighten the Load",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 37243151,
+      "name": "Weather Control",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 37265642,
@@ -11064,6 +11322,12 @@
       "ot": 3
     },
     {
+      "passcode": 39175982,
+      "name": "Winged Cleaver",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 39180960,
       "name": "Rigorous Reaver",
       "alias_of": null,
@@ -11394,6 +11658,12 @@
       "ot": 3
     },
     {
+      "passcode": 40387124,
+      "name": "Abyss Flower",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 40391316,
       "name": "Ojama Knight",
       "alias_of": null,
@@ -11438,6 +11708,12 @@
     {
       "passcode": 40555959,
       "name": "Phantom Hand",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 40575313,
+      "name": "Shadow Specter",
       "alias_of": null,
       "ot": 3
     },
@@ -11598,6 +11874,12 @@
       "ot": 3
     },
     {
+      "passcode": 41061625,
+      "name": "Yashinoki",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 41077745,
       "name": "Elemental HERO Ice Edge",
       "alias_of": null,
@@ -11748,6 +12030,12 @@
       "ot": 3
     },
     {
+      "passcode": 41422426,
+      "name": "Supporter in the Shadows",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 41426869,
       "name": "Black Illusion Ritual",
       "alias_of": null,
@@ -11804,6 +12092,12 @@
     {
       "passcode": 41517968,
       "name": "Elemental HERO Darkbright",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 41544074,
+      "name": "Kamionwizard",
       "alias_of": null,
       "ot": 3
     },
@@ -12068,6 +12362,12 @@
     {
       "passcode": 42599677,
       "name": "Flame Champion",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 42625254,
+      "name": "Little D",
       "alias_of": null,
       "ot": 3
     },
@@ -12436,6 +12736,12 @@
       "name": "Forgotten Temple of the Deep",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 43905751,
+      "name": "Madjinn Gunn",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 43906884,
@@ -13086,6 +13392,12 @@
       "ot": 3
     },
     {
+      "passcode": 46247516,
+      "name": "Tao the Chanter",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 46263076,
       "name": "Earthbound Immortal Ccapac Apu",
       "alias_of": null,
@@ -13136,6 +13448,12 @@
     {
       "passcode": 46427957,
       "name": "Ruin, Queen of Oblivion",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 46457856,
+      "name": "Tomozaurus",
       "alias_of": null,
       "ot": 3
     },
@@ -13230,6 +13548,12 @@
       "ot": 3
     },
     {
+      "passcode": 46718686,
+      "name": "Hitodenchak",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 46759931,
       "name": "Vision HERO Trinity",
       "alias_of": null,
@@ -13258,6 +13582,12 @@
       "name": "Carrierroid",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 46864967,
+      "name": "Minomushi Warrior",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 46874015,
@@ -13512,6 +13842,12 @@
       "ot": 3
     },
     {
+      "passcode": 47695416,
+      "name": "Candle of Fate",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 47731128,
       "name": "Mei-Kou, Master of Barriers",
       "alias_of": null,
@@ -13566,6 +13902,12 @@
       "ot": 3
     },
     {
+      "passcode": 47922711,
+      "name": "Tatsunootoshigo",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 47929865,
       "name": "Magidog",
       "alias_of": null,
@@ -13612,6 +13954,12 @@
       "name": "Battle Footballer",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 48109103,
+      "name": "Kappa Avenger",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 48115277,
@@ -13736,6 +14084,12 @@
     {
       "passcode": 48505422,
       "name": "Legendary Six Samurai - Shinai",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 48531733,
+      "name": "Bolt Penguin",
       "alias_of": null,
       "ot": 3
     },
@@ -13908,6 +14262,12 @@
       "ot": 3
     },
     {
+      "passcode": 49127943,
+      "name": "Man-Eating Plant",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 49140998,
       "name": "A Feather of the Phoenix",
       "alias_of": null,
@@ -13932,6 +14292,12 @@
       "ot": 3
     },
     {
+      "passcode": 49258578,
+      "name": "Gate Deeg",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 49267971,
       "name": "Blind Spot Strike",
       "alias_of": null,
@@ -13948,6 +14314,12 @@
       "name": "Elemental HERO Storm Neos",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 49370026,
+      "name": "Genin",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 49375719,
@@ -14844,6 +15216,12 @@
       "ot": 3
     },
     {
+      "passcode": 52367652,
+      "name": "That Which Feeds on Life",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 52417194,
       "name": "Heavy Slump",
       "alias_of": null,
@@ -14950,6 +15328,12 @@
       "name": "Laval Warrior",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 52800428,
+      "name": "Fiend's Hand",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 52817046,
@@ -15210,6 +15594,12 @@
       "ot": 3
     },
     {
+      "passcode": 53581214,
+      "name": "Fire Reaper",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 53582587,
       "name": "Torrential Tribute",
       "alias_of": null,
@@ -15266,6 +15656,12 @@
     {
       "passcode": 53828396,
       "name": "Adhesive Explosive",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 53832650,
+      "name": "Meotoko",
       "alias_of": null,
       "ot": 3
     },
@@ -15522,6 +15918,12 @@
       "ot": 3
     },
     {
+      "passcode": 54844990,
+      "name": "Skull Stalker",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 54860010,
       "name": "Worm Prince",
       "alias_of": null,
@@ -15588,6 +15990,12 @@
       "ot": 3
     },
     {
+      "passcode": 55014050,
+      "name": "Water Girl",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 55063681,
       "name": "Power Supplier",
       "alias_of": null,
@@ -15634,6 +16042,12 @@
       "name": "Elemental HERO Aqua Neos",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 55210709,
+      "name": "Lisark",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 55226821,
@@ -15716,6 +16130,12 @@
     {
       "passcode": 55465441,
       "name": "Give and Take",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 55550921,
+      "name": "Battle Warrior",
       "alias_of": null,
       "ot": 3
     },
@@ -16734,6 +17154,12 @@
       "ot": 3
     },
     {
+      "passcode": 59036972,
+      "name": "Mavelus",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 59042331,
       "name": "Hedge Guard",
       "alias_of": null,
@@ -17136,6 +17562,12 @@
       "ot": 3
     },
     {
+      "passcode": 60589682,
+      "name": "Twin Long Rods #1",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 60606759,
       "name": "Renge, Gatekeeper of Dark World",
       "alias_of": null,
@@ -17308,6 +17740,12 @@
       "name": "Battery Charger",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 61201220,
+      "name": "Phantom Ghost",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 61204971,
@@ -17526,6 +17964,18 @@
       "ot": 3
     },
     {
+      "passcode": 62193699,
+      "name": "Rock Ogre Grotto #2",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
+      "passcode": 62210247,
+      "name": "Lunar Queen Elzaim",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 62265044,
       "name": "Dragon Ravine",
       "alias_of": null,
@@ -17582,6 +18032,12 @@
     {
       "passcode": 62397231,
       "name": "Hyozanryu",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 62403074,
+      "name": "Rhaimundos of the Red Sword",
       "alias_of": null,
       "ot": 3
     },
@@ -17674,6 +18130,12 @@
       "name": "Tour of Doom",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 62793020,
+      "name": "Mystery Hand",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 62867251,
@@ -17784,6 +18246,12 @@
       "ot": 3
     },
     {
+      "passcode": 63125616,
+      "name": "The Shadow Who Controls the Dark",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 63142001,
       "name": "Batteryman AA",
       "alias_of": null,
@@ -17868,6 +18336,12 @@
       "ot": 8
     },
     {
+      "passcode": 63432835,
+      "name": "Stone Armadiller",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 63442604,
       "name": "Physical Double",
       "alias_of": null,
@@ -17904,6 +18378,12 @@
       "ot": 3
     },
     {
+      "passcode": 63515678,
+      "name": "Mystical Capture Chain",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 63516460,
       "name": "Mystical Wind Typhoon",
       "alias_of": null,
@@ -17914,6 +18394,12 @@
       "name": "Thousand-Eyes Restrict",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 63545455,
+      "name": "Mech Mole Zombie",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 63571750,
@@ -18042,6 +18528,12 @@
       "ot": 3
     },
     {
+      "passcode": 64154377,
+      "name": "Embryonic Beast",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 64160836,
       "name": "Alien Kid",
       "alias_of": null,
@@ -18154,6 +18646,12 @@
       "name": "Hibikime",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 64511793,
+      "name": "Eyearmor",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 64538655,
@@ -18972,6 +19470,12 @@
       "ot": 3
     },
     {
+      "passcode": 67841515,
+      "name": "Barrel Lily",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 67934141,
       "name": "Ultimate Baseball Kid",
       "alias_of": null,
@@ -19290,6 +19794,12 @@
       "ot": 3
     },
     {
+      "passcode": 68870276,
+      "name": "Fiend Reflection #1",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 68875140,
       "name": "Hard-sellin' Goblin",
       "alias_of": null,
@@ -19302,10 +19812,22 @@
       "ot": 3
     },
     {
+      "passcode": 68928540,
+      "name": "Kamakiriman",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 68933343,
       "name": "Symphonic Warrior Basses",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 68963107,
+      "name": "Boo Koo",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 69015963,
@@ -19608,6 +20130,12 @@
       "ot": 3
     },
     {
+      "passcode": 69992868,
+      "name": "Muse-A",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 70046172,
       "name": "Rush Recklessly",
       "alias_of": null,
@@ -19832,6 +20360,12 @@
     {
       "passcode": 70903634,
       "name": "Right Arm of the Forbidden One",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 70924884,
+      "name": "Alinsection",
       "alias_of": null,
       "ot": 3
     },
@@ -20124,6 +20658,12 @@
       "ot": 3
     },
     {
+      "passcode": 72076281,
+      "name": "Bat",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 72144675,
       "name": "Troposphere",
       "alias_of": null,
@@ -20160,6 +20700,12 @@
       "ot": 3
     },
     {
+      "passcode": 72269672,
+      "name": "Stone Ghost",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 72278479,
       "name": "Black Return",
       "alias_of": null,
@@ -20168,6 +20714,12 @@
     {
       "passcode": 72287557,
       "name": "Chthonian Polymer",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 72299832,
+      "name": "Giant Mech-Soldier",
       "alias_of": null,
       "ot": 3
     },
@@ -20216,6 +20768,12 @@
     {
       "passcode": 72446038,
       "name": "Synthesis Spell",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 72520073,
+      "name": "Dark Artist",
       "alias_of": null,
       "ot": 3
     },
@@ -21126,6 +21684,12 @@
       "ot": 3
     },
     {
+      "passcode": 75646173,
+      "name": "Synchar",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 75646520,
       "name": "Metal Detector",
       "alias_of": null,
@@ -21184,6 +21748,12 @@
       "name": "Horus the Black Flame Dragon LV4",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 75850803,
+      "name": "LaMoon",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 75889523,
@@ -21430,6 +22000,12 @@
       "name": "Worm Ugly",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 76704943,
+      "name": "Yamatano Dragon Scroll",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 76714458,
@@ -21696,6 +22272,12 @@
       "ot": 3
     },
     {
+      "passcode": 77581312,
+      "name": "Masked Clown",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 77584012,
       "name": "Pseudo Space",
       "alias_of": null,
@@ -21718,6 +22300,12 @@
       "name": "Psychic Emperor",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 77603950,
+      "name": "Phantom Dewan",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 77608643,
@@ -21922,6 +22510,12 @@
       "name": "Supay",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 78556320,
+      "name": "Vishwar Randi",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 78564023,
@@ -22500,6 +23094,12 @@
       "ot": 3
     },
     {
+      "passcode": 80516007,
+      "name": "Rare Fish",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 80549379,
       "name": "Dragunity Javelin",
       "alias_of": null,
@@ -22514,6 +23114,12 @@
     {
       "passcode": 80555116,
       "name": "Naturia Guardian",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 80600490,
+      "name": "Kageningen",
       "alias_of": null,
       "ot": 3
     },
@@ -22680,6 +23286,12 @@
       "ot": 3
     },
     {
+      "passcode": 81179446,
+      "name": "Kattapillar",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 81191584,
       "name": "Recurring Nightmare",
       "alias_of": null,
@@ -22792,6 +23404,12 @@
       "name": "Stygian Dirge",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 81492226,
+      "name": "Ancient Jar",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 81510157,
@@ -23136,6 +23754,12 @@
       "ot": 3
     },
     {
+      "passcode": 82742611,
+      "name": "Serpent Marauder",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 82760689,
       "name": "Lucky Cloud",
       "alias_of": null,
@@ -23344,6 +23968,12 @@
       "name": "Token Feastevil",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 83678433,
+      "name": "Midnight Fiend",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 83682725,
@@ -23658,6 +24288,12 @@
       "ot": 3
     },
     {
+      "passcode": 84794011,
+      "name": "Solitude",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 84808313,
       "name": "Big Evolution Pill",
       "alias_of": null,
@@ -23698,6 +24334,12 @@
       "name": "Axe Dragonute",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 84916669,
+      "name": "Doriado",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 84926738,
@@ -24106,6 +24748,12 @@
       "name": "Rainbow Neos",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 86421986,
+      "name": "Ancient Tree of Enlightenment",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 86442081,
@@ -24606,6 +25254,12 @@
       "ot": 3
     },
     {
+      "passcode": 88435542,
+      "name": "Fire Eye",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 88438982,
       "name": "Worm Dimikles",
       "alias_of": null,
@@ -24640,6 +25294,12 @@
       "name": "Sorcerer of Dark Magic",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 88643173,
+      "name": "Nightmare Scorpion",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 88643579,
@@ -24888,6 +25548,12 @@
       "ot": 3
     },
     {
+      "passcode": 89558090,
+      "name": "Dark Prisoner",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
       "passcode": 89563150,
       "name": "Shining Silver Force",
       "alias_of": null,
@@ -24968,6 +25634,12 @@
     {
       "passcode": 89899996,
       "name": "D - Spirit",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 89904598,
+      "name": "Anthrosaurus",
       "alias_of": null,
       "ot": 3
     },
@@ -25590,6 +26262,12 @@
       "ot": 3
     },
     {
+      "passcode": 92409659,
+      "name": "White Dolphin",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 92421852,
       "name": "Robolady",
       "alias_of": null,
@@ -25694,6 +26372,12 @@
     {
       "passcode": 92933195,
       "name": "Mist Valley Windmaster",
+      "alias_of": null,
+      "ot": 3
+    },
+    {
+      "passcode": 92944626,
+      "name": "Wings of Wicked Flame",
       "alias_of": null,
       "ot": 3
     },
@@ -25894,6 +26578,12 @@
       "name": "Desert Sunlight",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 93788854,
+      "name": "The Wandering Doomed",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 93816465,
@@ -27048,6 +27738,12 @@
       "ot": 3
     },
     {
+      "passcode": 97843505,
+      "name": "Djinn the Watcher of the Wind",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 97885363,
       "name": "Wattdragonfly",
       "alias_of": null,
@@ -27124,6 +27820,12 @@
       "name": "Horn of Heaven",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 98075147,
+      "name": "Spiked Snail",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 98126725,
@@ -27336,6 +28038,12 @@
       "ot": 3
     },
     {
+      "passcode": 98795934,
+      "name": "Mabarrel",
+      "alias_of": null,
+      "ot": 1
+    },
+    {
       "passcode": 98818516,
       "name": "Frenzied Panda",
       "alias_of": null,
@@ -27370,6 +28078,12 @@
       "name": "Gladiator Beast's Respite",
       "alias_of": null,
       "ot": 3
+    },
+    {
+      "passcode": 98898173,
+      "name": "The Melting Red Shadow",
+      "alias_of": null,
+      "ot": 1
     },
     {
       "passcode": 98927491,

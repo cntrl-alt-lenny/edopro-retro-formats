@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-box-pre-order-promotional-card",
+  "code": "SBPRE",
+  "name": "Starter Box pre-order promotional card",
+  "kind": "promo-other",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-03-18",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 91152256,
+      "name": "Celtic Guardian"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "Single-card promo (\"Celtic Guardian\") given to customers who pre-ordered Starter Box."
+}

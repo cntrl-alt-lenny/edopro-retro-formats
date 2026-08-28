@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-duel-monsters-national-tournament-attendance-card",
+  "code": "NTA1999",
+  "name": "Yu-Gi-Oh! Duel Monsters National Tournament attendance card",
+  "kind": "promo-tournament",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-02-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 12829151,
+      "name": "Kanan the Swordmistress"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "400 copies of a single-card promo (\"Kanan the Swordmistress\") given to attendees of the first Duel Monsters National Tournament (held February 1-21, 1999; card distributed at the February 21 final). This is the earliest dated OCG distribution certified in this ledger, predating Vol.1 by 12 days. \"Kanan the Swordmistress\" is OCG-only (never released in the TCG) and has no other pre-cutoff source in this ledger."
+}

@@ -29,209 +29,1238 @@
         "LIMITED EDITION 1 海馬パック"
       ],
       "release_date": "1999-06-01",
-      "source_ids": ["konami-card-history"]
+      "source_ids": [
+        "konami-card-history"
+      ]
     },
     "yugi_kaiba_conventional_usage": {
       "region": "tcg",
       "snapshot": "2002-05-15",
       "pool_summary": "Legend of Blue-Eyes plus Starter Deck Yugi and Starter Deck Kaiba",
-      "source_ids": ["format-library-yugi-kaiba", "pojo-yugi-kaiba"]
+      "source_ids": [
+        "format-library-yugi-kaiba",
+        "pojo-yugi-kaiba"
+      ]
     },
     "early_ocg_anchor": {
       "event_date": "1999-08-26",
       "pre_event_snapshot": "1999-08-25",
-      "source_ids": ["konami-card-history", "konami-tokyo-dome-promos", "format-library-tokyo-dome"]
+      "source_ids": [
+        "konami-card-history",
+        "konami-tokyo-dome-promos",
+        "format-library-tokyo-dome"
+      ]
     }
   },
   "product_chronology": [
-    {"date": "1999-02-04", "products": ["Vol.1"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-03-18", "products": ["STARTER BOX"], "source_ids": ["konami-starter-box", "konami-card-history"]},
-    {"date": "1999-03-27", "products": ["Vol.2"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-05-05", "products": ["Official Guide Starter Book promo"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-05-25", "products": ["Booster 2"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-05-27", "products": ["Vol.3"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-06-01", "products": ["LIMITED EDITION 1 遊戯パック", "LIMITED EDITION 1 海馬パック", "LIMITED EDITION 1 城之内パック"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-07-05", "products": ["Booster 3"], "source_ids": ["konami-booster-3"]},
-    {"date": "1999-07-08", "products": ["Duel Monsters II included-card products"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-07-13", "products": ["V-Jump Books DM2 promo"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-07-22", "products": ["Vol.4"], "source_ids": ["konami-vol-4"]},
-    {"date": "1999-08-20", "products": ["Valuable Book 1 promos"], "source_ids": ["konami-card-history"]},
-    {"date": "1999-08-26", "products": ["Booster 4", "Premium Pack", "Tokyo Dome event and attendee/prize cards"], "source_ids": ["konami-booster-4", "konami-tokyo-dome-promos"]}
+    {
+      "date": "1999-02-04",
+      "products": [
+        "Vol.1"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-02-21",
+      "products": [
+        "Duel Monsters National Tournament attendance card",
+        "Duel Monsters National Tournament prize cards (qualifying tier)"
+      ],
+      "source_ids": [
+        "yugipedia-ocg-1999-set-pages",
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-03-01",
+      "products": [
+        "Booster 1"
+      ],
+      "source_ids": [
+        "yugipedia-ocg-1999-set-pages",
+        "yugipedia-series1-navbox"
+      ]
+    },
+    {
+      "date": "1999-03-06",
+      "products": [
+        "Starter Box: Theatrical Release"
+      ],
+      "source_ids": [
+        "yugipedia-ocg-1999-set-pages",
+        "yugipedia-series1-navbox"
+      ]
+    },
+    {
+      "date": "1999-03-18",
+      "products": [
+        "STARTER BOX",
+        "Starter Box pre-order promotional card"
+      ],
+      "source_ids": [
+        "konami-starter-box",
+        "konami-card-history",
+        "yugipedia-ocg-1999-set-pages"
+      ]
+    },
+    {
+      "date": "1999-03-27",
+      "products": [
+        "Vol.2"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-05-05",
+      "products": [
+        "Official Guide Starter Book promo"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-05-25",
+      "products": [
+        "Booster 2"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-05-27",
+      "products": [
+        "Vol.3"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-06-01",
+      "products": [
+        "LIMITED EDITION 1 遊戯パック",
+        "LIMITED EDITION 1 海馬パック",
+        "LIMITED EDITION 1 城之内パック"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-07-05",
+      "products": [
+        "Booster 3"
+      ],
+      "source_ids": [
+        "konami-booster-3"
+      ]
+    },
+    {
+      "date": "1999-07-08",
+      "products": [
+        "Duel Monsters II included-card products",
+        "Duel Monsters II: Dark Duel Stories Game Guide 1 promotional card"
+      ],
+      "source_ids": [
+        "konami-card-history",
+        "yugipedia-ocg-1999-set-pages"
+      ]
+    },
+    {
+      "date": "1999-07-22",
+      "products": [
+        "Vol.4"
+      ],
+      "source_ids": [
+        "konami-vol-4"
+      ]
+    },
+    {
+      "date": "1999-08-05",
+      "products": [
+        "Duel Monsters II: Dark Duel Stories Game Guide 2 promotional card"
+      ],
+      "source_ids": [
+        "yugipedia-ocg-1999-set-pages"
+      ],
+      "notes": "Supersedes this chronology's prior '1999-07-13 V-Jump Books DM2 promo' entry: that description/date did not correspond to any product located during the 2026-08 certification. This Game Guide 2 promo (Left Arm of the Forbidden One) is the actual next dated Duel Monsters II guide-book promo after Game Guide 1; its date is directly sourced to Yugipedia's product infobox. The correction does not change the certified 1999-08-25 candidate pool (both dates are pre-cutoff)."
+    },
+    {
+      "date": "1999-08-20",
+      "products": [
+        "Valuable Book 1 promos"
+      ],
+      "source_ids": [
+        "konami-card-history"
+      ]
+    },
+    {
+      "date": "1999-08-26",
+      "products": [
+        "Booster 4",
+        "Premium Pack",
+        "Tokyo Dome event and attendee/prize cards"
+      ],
+      "source_ids": [
+        "konami-booster-4",
+        "konami-tokyo-dome-promos"
+      ]
+    }
   ],
   "rule_boundary": {
     "verdict": "likely-expert-rules-but-not-proven-for-this-event",
     "canonicalization_effect": "blocking",
     "timeline": [
-      {"interval": "1999-02-04", "ruleset": "original Starter Box Official Rules", "evidence": "later-transcription-of-period-rulebook", "status": "resolved-as-publication-baseline"},
-      {"interval": "1999-05-05", "ruleset": "Expert Rules introduced in parallel with Official Rules", "evidence": "strong-secondary-reconstruction", "status": "resolved-as-secondary-date; primary-publication-source-unlocated"},
-      {"interval": "1999-08-26", "ruleset": "Tokyo Dome OCG national tournament", "evidence": "period-event-identity-but-no-event-rulesheet", "status": "unresolved-between-Expert-Rules-and-event-specific-hybrid"},
-      {"interval": "2000-04-01..2000-04-20", "ruleset": "New Expert Rules transition", "evidence": "secondary-history-with-date-boundary-conflict", "status": "bounded-but-not-exact"}
+      {
+        "interval": "1999-02-04",
+        "ruleset": "original Starter Box Official Rules",
+        "evidence": "later-transcription-of-period-rulebook",
+        "status": "resolved-as-publication-baseline"
+      },
+      {
+        "interval": "1999-05-05",
+        "ruleset": "Expert Rules introduced in parallel with Official Rules",
+        "evidence": "strong-secondary-reconstruction",
+        "status": "resolved-as-secondary-date; primary-publication-source-unlocated"
+      },
+      {
+        "interval": "1999-08-26",
+        "ruleset": "Tokyo Dome OCG national tournament",
+        "evidence": "period-event-identity-but-no-event-rulesheet",
+        "status": "unresolved-between-Expert-Rules-and-event-specific-hybrid"
+      },
+      {
+        "interval": "2000-04-01..2000-04-20",
+        "ruleset": "New Expert Rules transition",
+        "evidence": "secondary-history-with-date-boundary-conflict",
+        "status": "bounded-but-not-exact"
+      }
     ],
     "expert_rules_evidence": "A strong later reconstruction dates Expert Rules to May 5, 1999 and says recognized tournaments used them, but it also explicitly says the first publication source has not been located. The Tokyo Dome event page identifies the event and distributed cards but does not identify its rulebook or event regulations. Therefore Expert Rules are the best working hypothesis, not a proven event fact.",
-    "source_ids": ["expert-rules-secondary", "konami-tokyo-dome-promos", "original-1999-rulebook", "deck-out-history"]
+    "source_ids": [
+      "expert-rules-secondary",
+      "konami-tokyo-dome-promos",
+      "original-1999-rulebook",
+      "deck-out-history"
+    ]
   },
   "rules": {
-    "source_ids": ["original-1999-rulebook", "expert-rules-secondary", "expert-rules-transcription"],
+    "source_ids": [
+      "original-1999-rulebook",
+      "expert-rules-secondary",
+      "expert-rules-transcription"
+    ],
     "facts": [
-      {"topic": "life_points", "value": 8000, "evidence": "primary-transcription"},
-      {"topic": "main_deck", "value": "minimum 40, no upper bound", "evidence": "primary-transcription"},
-      {"topic": "opening_hand", "value": 5, "evidence": "primary-transcription"},
-      {"topic": "draw", "value": "one per turn; no first-turn draw", "evidence": "primary-transcription"},
-      {"topic": "side_deck", "value": 10, "evidence": "primary-transcription"},
-      {"topic": "hand_limit", "value": "none documented", "evidence": "primary-transcription"},
-      {"topic": "main_phase_2", "value": "modern phase label absent, but post-battle actions remain in Main until End Phase", "evidence": "primary-transcription"},
-      {"topic": "deck_out", "value": "player with higher LP wins when the opponent cannot draw", "evidence": "primary-transcription"},
-      {"topic": "expert_rules", "value": "tribute for Level 5+, multiple Spell/Trap activations, Fusion materials from hand", "evidence": "secondary-cross-check", "status": "effective boundary unresolved"},
-      {"topic": "chain_and_spell_speed", "value": "not defined in the first rulebook; later formalization boundary unresolved", "evidence": "absence-plus-secondary-history", "status": "unresolved"},
-      {"topic": "battle_damage", "value": "early ATK/DEF procedure differs from modern damage-step semantics", "evidence": "primary-transcription", "status": "engine-gap"}
+      {
+        "topic": "life_points",
+        "value": 8000,
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "main_deck",
+        "value": "minimum 40, no upper bound",
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "opening_hand",
+        "value": 5,
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "draw",
+        "value": "one per turn; no first-turn draw",
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "side_deck",
+        "value": 10,
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "hand_limit",
+        "value": "none documented",
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "main_phase_2",
+        "value": "modern phase label absent, but post-battle actions remain in Main until End Phase",
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "deck_out",
+        "value": "player with higher LP wins when the opponent cannot draw",
+        "evidence": "primary-transcription"
+      },
+      {
+        "topic": "expert_rules",
+        "value": "tribute for Level 5+, multiple Spell/Trap activations, Fusion materials from hand",
+        "evidence": "secondary-cross-check",
+        "status": "effective boundary unresolved"
+      },
+      {
+        "topic": "chain_and_spell_speed",
+        "value": "not defined in the first rulebook; later formalization boundary unresolved",
+        "evidence": "absence-plus-secondary-history",
+        "status": "unresolved"
+      },
+      {
+        "topic": "battle_damage",
+        "value": "early ATK/DEF procedure differs from modern damage-step semantics",
+        "evidence": "primary-transcription",
+        "status": "engine-gap"
+      }
     ],
     "candidate_core_flags": {
-      "accepted_for_rule_profile_research": ["DUEL_NO_HAND_LIMIT", "DUEL_1_FACEUP_FIELD", "DUEL_0_ATK_DESTROYED"],
-      "defaults_that_match_the_rulebook": ["no DUEL_1ST_TURN_DRAW", "no DUEL_ATTACK_FIRST_TURN"],
-      "rejected": ["DUEL_NO_MAIN_PHASE_2", "DUEL_OCG_OBSOLETE_IGNITION", "DUEL_TCG_FAST_EFFECT_IGNITION", "DUEL_TCG_SEGOC_NONPUBLIC", "DUEL_TCG_SEGOC_FIRSTTRIGGER", "DUEL_USE_TRAPS_IN_NEW_CHAIN", "DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP", "DUEL_6_STEP_BATLLE_STEP", "DUEL_NO_STANDBY_PHASE", "DUEL_UNLIMITED_SUMMONS", "DUEL_NORMAL_SUMMON_FACEUP_DEF"],
-      "known_gaps": ["higher-LP-wins-deck-out", "early-battle-calculation", "pre-formal-chain-and-priority-boundary"]
+      "accepted_for_rule_profile_research": [
+        "DUEL_NO_HAND_LIMIT",
+        "DUEL_1_FACEUP_FIELD",
+        "DUEL_0_ATK_DESTROYED"
+      ],
+      "defaults_that_match_the_rulebook": [
+        "no DUEL_1ST_TURN_DRAW",
+        "no DUEL_ATTACK_FIRST_TURN"
+      ],
+      "rejected": [
+        "DUEL_NO_MAIN_PHASE_2",
+        "DUEL_OCG_OBSOLETE_IGNITION",
+        "DUEL_TCG_FAST_EFFECT_IGNITION",
+        "DUEL_TCG_SEGOC_NONPUBLIC",
+        "DUEL_TCG_SEGOC_FIRSTTRIGGER",
+        "DUEL_USE_TRAPS_IN_NEW_CHAIN",
+        "DUEL_SINGLE_CHAIN_IN_DAMAGE_SUBSTEP",
+        "DUEL_6_STEP_BATLLE_STEP",
+        "DUEL_NO_STANDBY_PHASE",
+        "DUEL_UNLIMITED_SUMMONS",
+        "DUEL_NORMAL_SUMMON_FACEUP_DEF"
+      ],
+      "known_gaps": [
+        "higher-LP-wins-deck-out",
+        "early-battle-calculation",
+        "pre-formal-chain-and-priority-boundary"
+      ]
     },
     "core_flag_audit": [
-      {"historical_rule": "No hand limit", "evidence": "original rulebook", "default": "discard to 6 at End Phase", "flag": "DUEL_NO_HAND_LIMIT", "classification": "exact-axis-match", "known_mismatch": "none on this axis", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "After battle, remain in Main Phase until End Phase", "evidence": "original rulebook explicitly says this", "default": "post-battle Main Phase 2 action window", "flag": "DUEL_NO_MAIN_PHASE_2", "classification": "wrong", "known_mismatch": "removes the post-battle summon/set/activation window; rejected", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research", "phase-engine-experiment"]},
-      {"historical_rule": "Only one Field Card; newest overrides", "evidence": "original rulebook", "default": "modern Field Spell replacement", "flag": "DUEL_1_FACEUP_FIELD", "classification": "close-approximation", "known_mismatch": "core also encodes modern zone behavior and the original five-card combined Spell/Trap/Field count needs client enforcement", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "No first-turn draw", "evidence": "original rulebook", "default": "no draw unless DUEL_1ST_TURN_DRAW", "flag": "none", "classification": "exact-default", "known_mismatch": "must ensure no later preset adds DUEL_1ST_TURN_DRAW", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "No first-turn attack", "evidence": "original rulebook", "default": "first-turn attack disabled unless DUEL_ATTACK_FIRST_TURN", "flag": "none", "classification": "exact-default", "known_mismatch": "must ensure no later preset adds DUEL_ATTACK_FIRST_TURN", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "Old ignition/response timing", "evidence": "not defined by the available 1999 rulebook; Expert boundary unresolved", "default": "normal current chain/timing plus no obsolete ignition flag", "flag": "DUEL_OCG_OBSOLETE_IGNITION", "classification": "unresolved-and-rejected", "known_mismatch": "flag specifically grants OCG-style Monster-Zone summon/chain-end ignition priority; no evidence proves that is the Tokyo Dome rule", "source_ids": ["original-1999-rulebook", "expert-rules-secondary", "pinned-ocgcore-research"]},
-      {"historical_rule": "No formal Damage Step", "evidence": "original rulebook gives direct battle procedure; community reconstruction calls it simplified", "default": "formal modern Damage Step", "flag": "DUEL_6_STEP_BATLLE_STEP", "classification": "wrong-as-full-emulation", "known_mismatch": "flag only changes damage-step chain windows; it does not remove the modern phase/timing structure", "source_ids": ["original-1999-rulebook", "tokyo-dome-reconstruction", "pinned-ocgcore-research"]},
-      {"historical_rule": "Equal ATK monsters are destroyed, including equal zero ATK by literal rulebook wording", "evidence": "original rulebook", "default": "zero-ATK tie has a modern exception", "flag": "DUEL_0_ATK_DESTROYED", "classification": "close-approximation", "known_mismatch": "fixes the result for zero-ATK ties but not the surrounding historical damage timing", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "Expert Rules may have changed tribute, Spell/Trap frequency, and Fusion-material zones", "evidence": "strong secondary only", "default": "MR1-style tribute/Fusion and modern activation procedure", "flag": "DUEL_MODE_MR1/MR2", "classification": "unresolved", "known_mismatch": "composite presets include flags whose 1999 applicability is not established; no composite is approved", "source_ids": ["expert-rules-secondary", "expert-rules-transcription", "pinned-ocgcore-research"]},
-      {"historical_rule": "No evidence for TCG SEGOC or TCG ignition flags in OCG 1999", "evidence": "territory and rulebook distinction", "default": "OCG/default engine behavior", "flag": "DUEL_TCG_FAST_EFFECT_IGNITION / DUEL_TCG_SEGOC_*", "classification": "wrong", "known_mismatch": "TCG-specific flags would import later/other-territory behavior", "source_ids": ["original-1999-rulebook", "pinned-ocgcore-research"]},
-      {"historical_rule": "No formal Chain/Spell Speed/priority terminology found", "evidence": "absence in available rulebook plus later transition history", "default": "hard-coded current chain/timing", "flag": "none", "classification": "engine-gap", "known_mismatch": "no existing DUEL_* flag changes core chain legality or priority generally", "source_ids": ["original-1999-rulebook", "deck-out-history", "pinned-ocgcore-research"]}
+      {
+        "historical_rule": "No hand limit",
+        "evidence": "original rulebook",
+        "default": "discard to 6 at End Phase",
+        "flag": "DUEL_NO_HAND_LIMIT",
+        "classification": "exact-axis-match",
+        "known_mismatch": "none on this axis",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "After battle, remain in Main Phase until End Phase",
+        "evidence": "original rulebook explicitly says this",
+        "default": "post-battle Main Phase 2 action window",
+        "flag": "DUEL_NO_MAIN_PHASE_2",
+        "classification": "wrong",
+        "known_mismatch": "removes the post-battle summon/set/activation window; rejected",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research",
+          "phase-engine-experiment"
+        ]
+      },
+      {
+        "historical_rule": "Only one Field Card; newest overrides",
+        "evidence": "original rulebook",
+        "default": "modern Field Spell replacement",
+        "flag": "DUEL_1_FACEUP_FIELD",
+        "classification": "close-approximation",
+        "known_mismatch": "core also encodes modern zone behavior and the original five-card combined Spell/Trap/Field count needs client enforcement",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "No first-turn draw",
+        "evidence": "original rulebook",
+        "default": "no draw unless DUEL_1ST_TURN_DRAW",
+        "flag": "none",
+        "classification": "exact-default",
+        "known_mismatch": "must ensure no later preset adds DUEL_1ST_TURN_DRAW",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "No first-turn attack",
+        "evidence": "original rulebook",
+        "default": "first-turn attack disabled unless DUEL_ATTACK_FIRST_TURN",
+        "flag": "none",
+        "classification": "exact-default",
+        "known_mismatch": "must ensure no later preset adds DUEL_ATTACK_FIRST_TURN",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "Old ignition/response timing",
+        "evidence": "not defined by the available 1999 rulebook; Expert boundary unresolved",
+        "default": "normal current chain/timing plus no obsolete ignition flag",
+        "flag": "DUEL_OCG_OBSOLETE_IGNITION",
+        "classification": "unresolved-and-rejected",
+        "known_mismatch": "flag specifically grants OCG-style Monster-Zone summon/chain-end ignition priority; no evidence proves that is the Tokyo Dome rule",
+        "source_ids": [
+          "original-1999-rulebook",
+          "expert-rules-secondary",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "No formal Damage Step",
+        "evidence": "original rulebook gives direct battle procedure; community reconstruction calls it simplified",
+        "default": "formal modern Damage Step",
+        "flag": "DUEL_6_STEP_BATLLE_STEP",
+        "classification": "wrong-as-full-emulation",
+        "known_mismatch": "flag only changes damage-step chain windows; it does not remove the modern phase/timing structure",
+        "source_ids": [
+          "original-1999-rulebook",
+          "tokyo-dome-reconstruction",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "Equal ATK monsters are destroyed, including equal zero ATK by literal rulebook wording",
+        "evidence": "original rulebook",
+        "default": "zero-ATK tie has a modern exception",
+        "flag": "DUEL_0_ATK_DESTROYED",
+        "classification": "close-approximation",
+        "known_mismatch": "fixes the result for zero-ATK ties but not the surrounding historical damage timing",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "Expert Rules may have changed tribute, Spell/Trap frequency, and Fusion-material zones",
+        "evidence": "strong secondary only",
+        "default": "MR1-style tribute/Fusion and modern activation procedure",
+        "flag": "DUEL_MODE_MR1/MR2",
+        "classification": "unresolved",
+        "known_mismatch": "composite presets include flags whose 1999 applicability is not established; no composite is approved",
+        "source_ids": [
+          "expert-rules-secondary",
+          "expert-rules-transcription",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "No evidence for TCG SEGOC or TCG ignition flags in OCG 1999",
+        "evidence": "territory and rulebook distinction",
+        "default": "OCG/default engine behavior",
+        "flag": "DUEL_TCG_FAST_EFFECT_IGNITION / DUEL_TCG_SEGOC_*",
+        "classification": "wrong",
+        "known_mismatch": "TCG-specific flags would import later/other-territory behavior",
+        "source_ids": [
+          "original-1999-rulebook",
+          "pinned-ocgcore-research"
+        ]
+      },
+      {
+        "historical_rule": "No formal Chain/Spell Speed/priority terminology found",
+        "evidence": "absence in available rulebook plus later transition history",
+        "default": "hard-coded current chain/timing",
+        "flag": "none",
+        "classification": "engine-gap",
+        "known_mismatch": "no existing DUEL_* flag changes core chain legality or priority generally",
+        "source_ids": [
+          "original-1999-rulebook",
+          "deck-out-history",
+          "pinned-ocgcore-research"
+        ]
+      }
     ]
   },
   "phase_experiment": {
     "source_id": "phase-engine-experiment",
     "scenario": "Turn player attacks with a face-up Summoned Skull, retains a Normal Summonable Giant Rat in hand, then declines further battle.",
-    "phase_codes": {"draw": "0x0001", "standby": "0x0002", "main": "0x0004", "battle": "0x0008", "main2": "0x0100", "end": "0x0200"},
+    "phase_codes": {
+      "draw": "0x0001",
+      "standby": "0x0002",
+      "main": "0x0004",
+      "battle": "0x0008",
+      "main2": "0x0100",
+      "end": "0x0200"
+    },
     "configurations": [
-      {"label": "A", "flags": "DUEL_MODE_MR1 | DUEL_ATTACK_FIRST_TURN", "observed": ["MAIN2", "post-battle MSG_SELECT_IDLECMD", "Normal Summon offered and executed"], "classification": "mechanically-closer"},
-      {"label": "B", "flags": "DUEL_MODE_MR1 | DUEL_ATTACK_FIRST_TURN | DUEL_NO_MAIN_PHASE_2", "observed": ["END directly after Battle", "no post-battle idle action window"], "classification": "historically-wrong"},
-      {"label": "C", "flags": "DUEL_MODE_MR1 without DUEL_OCG_OBSOLETE_IGNITION | DUEL_ATTACK_FIRST_TURN", "observed": ["MAIN2", "post-battle MSG_SELECT_IDLECMD", "Normal Summon offered and executed"], "classification": "same-phase-result; ignition flag irrelevant to this scenario"}
+      {
+        "label": "A",
+        "flags": "DUEL_MODE_MR1 | DUEL_ATTACK_FIRST_TURN",
+        "observed": [
+          "MAIN2",
+          "post-battle MSG_SELECT_IDLECMD",
+          "Normal Summon offered and executed"
+        ],
+        "classification": "mechanically-closer"
+      },
+      {
+        "label": "B",
+        "flags": "DUEL_MODE_MR1 | DUEL_ATTACK_FIRST_TURN | DUEL_NO_MAIN_PHASE_2",
+        "observed": [
+          "END directly after Battle",
+          "no post-battle idle action window"
+        ],
+        "classification": "historically-wrong"
+      },
+      {
+        "label": "C",
+        "flags": "DUEL_MODE_MR1 without DUEL_OCG_OBSOLETE_IGNITION | DUEL_ATTACK_FIRST_TURN",
+        "observed": [
+          "MAIN2",
+          "post-battle MSG_SELECT_IDLECMD",
+          "Normal Summon offered and executed"
+        ],
+        "classification": "same-phase-result; ignition flag irrelevant to this scenario"
+      }
     ],
     "decision": "Reject DUEL_NO_MAIN_PHASE_2. The period source describes a Main → Battle → Main action structure even though it does not use the modern Main Phase 2 label. This is an engine approximation if a future profile uses modern MAIN2 as the closest executable action window."
   },
   "banlist": {
     "working_id": "ocg-1999-07",
     "working_scope": "ocg-jp",
-    "working_entries": {"limited": ["Dark Hole", "Raigeki", "Trap Hole"], "forbidden": [], "semilimited": []},
+    "working_entries": {
+      "limited": [
+        "Dark Hole",
+        "Raigeki",
+        "Trap Hole"
+      ],
+      "forbidden": [],
+      "semilimited": []
+    },
     "status": "source-disputed",
     "conflict": "Secondary sources date a three-card list to July 1999, while other histories describe the first reliable application as Tokyo Dome event-only. No primary dated list has been certified in this gate.",
-    "source_ids": ["july-1999-list-wiki", "old-ocg-limit-index", "first-forbidden-cards-history"]
+    "source_ids": [
+      "july-1999-list-wiki",
+      "old-ocg-limit-index",
+      "first-forbidden-cards-history"
+    ]
   },
   "card_pool": {
     "pool_kind": "release-cutoff",
     "format_region": "OCG",
-    "territories": ["ocg-jp"],
+    "territories": [
+      "ocg-jp"
+    ],
     "cutoff": "1999-08-25",
     "community_cross_check": {
       "identity_count": 370,
-      "in_current_card_index": 249,
-      "missing_from_current_card_index": 121,
+      "in_current_card_index": 370,
+      "missing_from_current_card_index": 0,
       "source_id": "ygoprodeck-tokyo-dome-cube",
-      "status": "non-canonical-cross-check"
+      "status": "cross-check-resolved-2026-08-certification",
+      "note": "Frozen diagnostic baseline at this gate's original approval was 249/370 in-index, 121 absent. The 2026-08 release-ledger certification (release_ledger_certification below) independently built a real product-by-product ocg-jp ledger, mechanically derived a 370-card candidate pool from it, and found that pool identical (after +/-10 artwork-alias canonicalization) to this same 370-identity community cube: 0 absent, 0 ledger-only, 0 community-only."
     },
-    "current_repository_coverage": {"product_count": 411, "ocg_product_count": 0, "source_id": "repository-dry-run"},
-    "same_day_exclusion": "Products dated 1999-08-26 are excluded from the proposed 1999-08-25 cutoff. Product contents and OCG printing identities still require a dedicated import and review."
+    "current_repository_coverage": {
+      "product_count": 431,
+      "ocg_product_count": 20,
+      "source_id": "repository-dry-run"
+    },
+    "same_day_exclusion": "Products dated 1999-08-26 are excluded from the proposed 1999-08-25 cutoff. The 2026-08 release-ledger certification confirms none of Booster 4, Premium Pack, or the Tokyo Dome attendance/participation/prize cards contribute any card to the certified 1999-08-25 candidate pool; see release_ledger_certification.august_26_boundary."
   },
   "errata_audit": {
     "snapshot": "1999-08-25",
-    "territories": ["ocg-jp"],
+    "territories": [
+      "ocg-jp"
+    ],
     "total": 296,
     "all_v2": true,
-    "chronology": {"determinate": 146, "ambiguous": 150},
-    "determinate": {"modern": 21, "historical": 125, "coverage": {"reuse-upstream": 79, "known-gap": 42, "none-needed": 4}},
-    "ambiguous": {"modern_possible": 104, "modern_impossible": 46, "candidate_occurrences": 302, "candidate_coverage_occurrences": {"reuse-upstream": 144, "unresolved": 47, "known-gap": 7, "modern": 104}},
-    "modern_policy_effect": {"explicit_policy_required": true, "determinate_historical_substitutions": 79, "ambiguous_records_left_unresolved": 150, "certifiable": false},
+    "chronology": {
+      "determinate": 146,
+      "ambiguous": 150
+    },
+    "determinate": {
+      "modern": 21,
+      "historical": 125,
+      "coverage": {
+        "reuse-upstream": 79,
+        "known-gap": 42,
+        "none-needed": 4
+      }
+    },
+    "ambiguous": {
+      "modern_possible": 104,
+      "modern_impossible": 46,
+      "candidate_occurrences": 302,
+      "candidate_coverage_occurrences": {
+        "reuse-upstream": 144,
+        "unresolved": 47,
+        "known-gap": 7,
+        "modern": 104
+      }
+    },
+    "modern_policy_effect": {
+      "explicit_policy_required": true,
+      "determinate_historical_substitutions": 79,
+      "ambiguous_records_left_unresolved": 150,
+      "certifiable": false
+    },
     "determinate_historical_substitutions_digest": "b45a38f83be490899d2fd64198b70ea86170ea55f1c24ef3c50194d0546ceaa2",
     "determinate_historical_substitutions": [
-      {"erratum_id":"erratum-a-cat-of-ill-omen","modern_passcode":24140059,"selected_events":[],"selected_historical_passcode":504700042,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-abyssal-designator","modern_passcode":89801755,"selected_events":[],"selected_historical_passcode":504700155,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-an-owl-of-luck","modern_passcode":23927567,"selected_events":[],"selected_historical_passcode":504700041,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-ancient-fairy-dragon","modern_passcode":25862681,"selected_events":[],"selected_historical_passcode":25862691,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-armored-cybern","modern_passcode":67159705,"selected_events":[],"selected_historical_passcode":511003055,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-arsenal-robber","modern_passcode":55348096,"selected_events":[],"selected_historical_passcode":504700089,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-arsenal-summoner","modern_passcode":85489096,"selected_events":[],"selected_historical_passcode":504700146,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-big-shield-gardna","modern_passcode":65240384,"selected_events":[],"selected_historical_passcode":65240394,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-blue-eyes-toon-dragon","modern_passcode":53183600,"selected_events":[],"selected_historical_passcode":504700086,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-brain-control","modern_passcode":87910978,"selected_events":[],"selected_historical_passcode":511002995,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-brionac-dragon-of-the-ice-barrier","modern_passcode":50321796,"selected_events":[],"selected_historical_passcode":511002993,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-burning-land","modern_passcode":24294108,"selected_events":[],"selected_historical_passcode":504700043,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-catapult-turtle","modern_passcode":95727991,"selected_events":[],"selected_historical_passcode":511000228,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-chaos-emperor-dragon-envoy-of-the-end","modern_passcode":82301904,"selected_events":[],"selected_historical_passcode":511000819,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-clear-world","modern_passcode":33900648,"selected_events":[],"selected_historical_passcode":33900658,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-cost-down","modern_passcode":23265313,"selected_events":[],"selected_historical_passcode":504700039,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-crush-card-virus","modern_passcode":57728570,"selected_events":[],"selected_historical_passcode":511000822,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-cyber-blader","modern_passcode":10248389,"selected_events":[],"selected_historical_passcode":511002991,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-dark-magician-of-chaos","modern_passcode":40737112,"selected_events":[],"selected_historical_passcode":511001039,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-dark-strike-fighter","modern_passcode":32646477,"selected_events":[],"selected_historical_passcode":511000229,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-darkness-approaches","modern_passcode":80168720,"selected_events":[],"selected_historical_passcode":511003028,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-destiny-hero-disk-commander","modern_passcode":56570271,"selected_events":[],"selected_historical_passcode":511003116,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-elemental-mistress-doriado","modern_passcode":99414168,"selected_events":[],"selected_historical_passcode":504700181,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-emissary-of-the-afterlife","modern_passcode":75043725,"selected_events":[],"selected_historical_passcode":511003027,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-exchange-of-the-spirit","modern_passcode":17484499,"selected_events":[],"selected_historical_passcode":511000820,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-future-fusion","modern_passcode":77565204,"selected_events":[],"selected_historical_passcode":511002997,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-giant-germ","modern_passcode":95178994,"selected_events":[],"selected_historical_passcode":504700167,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-gilasaurus","modern_passcode":45894482,"selected_events":[],"selected_historical_passcode":511003006,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-goyo-guardian","modern_passcode":7391448,"selected_events":[],"selected_historical_passcode":511002994,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-gravekeeper-s-spy","modern_passcode":24317029,"selected_events":[],"selected_historical_passcode":504700044,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-hallowed-life-barrier","modern_passcode":88789641,"selected_events":[],"selected_historical_passcode":504700153,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-heavy-mech-support-platform","modern_passcode":23265594,"selected_events":[],"selected_historical_passcode":511002851,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-imperial-custom","modern_passcode":9995766,"selected_events":[],"selected_historical_passcode":9995776,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-imperial-order","modern_passcode":61740673,"selected_events":[],"selected_historical_passcode":511002996,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-iron-blacksmith-kotetsu","modern_passcode":73431236,"selected_events":[],"selected_historical_passcode":504700120,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-jade-insect-whistle","modern_passcode":95214051,"selected_events":[],"selected_historical_passcode":504700168,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-jirai-gumo","modern_passcode":94773007,"selected_events":[],"selected_historical_passcode":504700190,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-king-tiger-wanghu","modern_passcode":83986578,"selected_events":[],"selected_historical_passcode":504700143,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-makyura-the-destructor","modern_passcode":21593977,"selected_events":[],"selected_historical_passcode":21593987,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-manga-ryu-ran","modern_passcode":38369349,"selected_events":[],"selected_historical_passcode":504700062,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-michizure","modern_passcode":37580756,"selected_events":[],"selected_historical_passcode":504700059,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-my-body-as-a-shield","modern_passcode":69279219,"selected_events":[],"selected_historical_passcode":504700189,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-mysterious-puppeteer","modern_passcode":54098121,"selected_events":[],"selected_historical_passcode":504700088,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-nimble-momonga","modern_passcode":22567609,"selected_events":[],"selected_historical_passcode":504700033,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-nutrient-z","modern_passcode":29389368,"selected_events":[],"selected_historical_passcode":504700051,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-red-eyes-darkness-metal-dragon","modern_passcode":88264978,"selected_events":[],"selected_historical_passcode":88264988,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-reinforcement-of-the-army","modern_passcode":32807846,"selected_events":[],"selected_historical_passcode":504700055,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-release-restraint","modern_passcode":75417459,"selected_events":[],"selected_historical_passcode":504700130,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-rescue-cat","modern_passcode":14878871,"selected_events":[],"selected_historical_passcode":504700179,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-ring-of-destruction","modern_passcode":83555666,"selected_events":[],"selected_historical_passcode":511000824,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-ryko-lightsworn-hunter","modern_passcode":21502796,"selected_events":[],"selected_historical_passcode":511003007,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-sage-s-stone","modern_passcode":13604200,"selected_events":[],"selected_historical_passcode":504700020,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-sangan","modern_passcode":26202165,"selected_events":[],"selected_historical_passcode":504700178,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-senet-switch","modern_passcode":63394872,"selected_events":[],"selected_historical_passcode":63394882,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-senju-of-the-thousand-hands","modern_passcode":23401839,"selected_events":[],"selected_historical_passcode":504700040,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-serpentine-princess","modern_passcode":71829750,"selected_events":[],"selected_historical_passcode":504700117,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-shining-angel","modern_passcode":95956346,"selected_events":[],"selected_historical_passcode":504700170,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-silent-swordsman-lv3","modern_passcode":1995985,"selected_events":[],"selected_historical_passcode":504700006,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-silent-swordsman-lv5","modern_passcode":74388798,"selected_events":[],"selected_historical_passcode":504700126,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-sinister-serpent","modern_passcode":8131171,"selected_events":[],"selected_historical_passcode":511000818,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-skilled-dark-magician","modern_passcode":73752131,"selected_events":[],"selected_historical_passcode":504700122,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-skilled-white-magician","modern_passcode":46363422,"selected_events":[],"selected_historical_passcode":504700074,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-spirit-ryu","modern_passcode":67957315,"selected_events":[],"selected_historical_passcode":504700185,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-splendid-venus","modern_passcode":5645210,"selected_events":[],"selected_historical_passcode":511003054,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-stronghold-the-moving-fortress","modern_passcode":13955608,"selected_events":[],"selected_historical_passcode":511003022,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-summoner-of-illusions","modern_passcode":14644902,"selected_events":[],"selected_historical_passcode":504700184,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-super-rejuvenation","modern_passcode":27770341,"selected_events":[],"selected_historical_passcode":504700049,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-swords-of-concealing-light","modern_passcode":12923641,"selected_events":[],"selected_historical_passcode":504700018,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-toon-mermaid","modern_passcode":65458948,"selected_events":[],"selected_historical_passcode":504700108,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-toon-summoned-skull","modern_passcode":91842653,"selected_events":[],"selected_historical_passcode":504700160,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-twin-headed-behemoth","modern_passcode":43586926,"selected_events":[],"selected_historical_passcode":511000868,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-ultimate-offering","modern_passcode":80604091,"selected_events":[],"selected_historical_passcode":511003023,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-ultimate-tyranno","modern_passcode":15894048,"selected_events":[],"selected_historical_passcode":511003009,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-w-wing-catapult","modern_passcode":96300057,"selected_events":[],"selected_historical_passcode":511002901,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-weapon-change","modern_passcode":10035717,"selected_events":[],"selected_historical_passcode":504700014,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-witch-of-the-black-forest","modern_passcode":78010363,"selected_events":[],"selected_historical_passcode":504700144,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-wulf-lightsworn-beast","modern_passcode":58996430,"selected_events":[],"selected_historical_passcode":511003020,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-y-dragon-head","modern_passcode":65622692,"selected_events":[],"selected_historical_passcode":511002852,"coverage_kind":"reuse-upstream"},
-      {"erratum_id":"erratum-z-metal-tank","modern_passcode":64500000,"selected_events":[],"selected_historical_passcode":511002853,"coverage_kind":"reuse-upstream"}
+      {
+        "erratum_id": "erratum-a-cat-of-ill-omen",
+        "modern_passcode": 24140059,
+        "selected_events": [],
+        "selected_historical_passcode": 504700042,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-abyssal-designator",
+        "modern_passcode": 89801755,
+        "selected_events": [],
+        "selected_historical_passcode": 504700155,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-an-owl-of-luck",
+        "modern_passcode": 23927567,
+        "selected_events": [],
+        "selected_historical_passcode": 504700041,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-ancient-fairy-dragon",
+        "modern_passcode": 25862681,
+        "selected_events": [],
+        "selected_historical_passcode": 25862691,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-armored-cybern",
+        "modern_passcode": 67159705,
+        "selected_events": [],
+        "selected_historical_passcode": 511003055,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-arsenal-robber",
+        "modern_passcode": 55348096,
+        "selected_events": [],
+        "selected_historical_passcode": 504700089,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-arsenal-summoner",
+        "modern_passcode": 85489096,
+        "selected_events": [],
+        "selected_historical_passcode": 504700146,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-big-shield-gardna",
+        "modern_passcode": 65240384,
+        "selected_events": [],
+        "selected_historical_passcode": 65240394,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-blue-eyes-toon-dragon",
+        "modern_passcode": 53183600,
+        "selected_events": [],
+        "selected_historical_passcode": 504700086,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-brain-control",
+        "modern_passcode": 87910978,
+        "selected_events": [],
+        "selected_historical_passcode": 511002995,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-brionac-dragon-of-the-ice-barrier",
+        "modern_passcode": 50321796,
+        "selected_events": [],
+        "selected_historical_passcode": 511002993,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-burning-land",
+        "modern_passcode": 24294108,
+        "selected_events": [],
+        "selected_historical_passcode": 504700043,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-catapult-turtle",
+        "modern_passcode": 95727991,
+        "selected_events": [],
+        "selected_historical_passcode": 511000228,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-chaos-emperor-dragon-envoy-of-the-end",
+        "modern_passcode": 82301904,
+        "selected_events": [],
+        "selected_historical_passcode": 511000819,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-clear-world",
+        "modern_passcode": 33900648,
+        "selected_events": [],
+        "selected_historical_passcode": 33900658,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-cost-down",
+        "modern_passcode": 23265313,
+        "selected_events": [],
+        "selected_historical_passcode": 504700039,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-crush-card-virus",
+        "modern_passcode": 57728570,
+        "selected_events": [],
+        "selected_historical_passcode": 511000822,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-cyber-blader",
+        "modern_passcode": 10248389,
+        "selected_events": [],
+        "selected_historical_passcode": 511002991,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-dark-magician-of-chaos",
+        "modern_passcode": 40737112,
+        "selected_events": [],
+        "selected_historical_passcode": 511001039,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-dark-strike-fighter",
+        "modern_passcode": 32646477,
+        "selected_events": [],
+        "selected_historical_passcode": 511000229,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-darkness-approaches",
+        "modern_passcode": 80168720,
+        "selected_events": [],
+        "selected_historical_passcode": 511003028,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-destiny-hero-disk-commander",
+        "modern_passcode": 56570271,
+        "selected_events": [],
+        "selected_historical_passcode": 511003116,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-elemental-mistress-doriado",
+        "modern_passcode": 99414168,
+        "selected_events": [],
+        "selected_historical_passcode": 504700181,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-emissary-of-the-afterlife",
+        "modern_passcode": 75043725,
+        "selected_events": [],
+        "selected_historical_passcode": 511003027,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-exchange-of-the-spirit",
+        "modern_passcode": 17484499,
+        "selected_events": [],
+        "selected_historical_passcode": 511000820,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-future-fusion",
+        "modern_passcode": 77565204,
+        "selected_events": [],
+        "selected_historical_passcode": 511002997,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-giant-germ",
+        "modern_passcode": 95178994,
+        "selected_events": [],
+        "selected_historical_passcode": 504700167,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-gilasaurus",
+        "modern_passcode": 45894482,
+        "selected_events": [],
+        "selected_historical_passcode": 511003006,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-goyo-guardian",
+        "modern_passcode": 7391448,
+        "selected_events": [],
+        "selected_historical_passcode": 511002994,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-gravekeeper-s-spy",
+        "modern_passcode": 24317029,
+        "selected_events": [],
+        "selected_historical_passcode": 504700044,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-hallowed-life-barrier",
+        "modern_passcode": 88789641,
+        "selected_events": [],
+        "selected_historical_passcode": 504700153,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-heavy-mech-support-platform",
+        "modern_passcode": 23265594,
+        "selected_events": [],
+        "selected_historical_passcode": 511002851,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-imperial-custom",
+        "modern_passcode": 9995766,
+        "selected_events": [],
+        "selected_historical_passcode": 9995776,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-imperial-order",
+        "modern_passcode": 61740673,
+        "selected_events": [],
+        "selected_historical_passcode": 511002996,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-iron-blacksmith-kotetsu",
+        "modern_passcode": 73431236,
+        "selected_events": [],
+        "selected_historical_passcode": 504700120,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-jade-insect-whistle",
+        "modern_passcode": 95214051,
+        "selected_events": [],
+        "selected_historical_passcode": 504700168,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-jirai-gumo",
+        "modern_passcode": 94773007,
+        "selected_events": [],
+        "selected_historical_passcode": 504700190,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-king-tiger-wanghu",
+        "modern_passcode": 83986578,
+        "selected_events": [],
+        "selected_historical_passcode": 504700143,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-makyura-the-destructor",
+        "modern_passcode": 21593977,
+        "selected_events": [],
+        "selected_historical_passcode": 21593987,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-manga-ryu-ran",
+        "modern_passcode": 38369349,
+        "selected_events": [],
+        "selected_historical_passcode": 504700062,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-michizure",
+        "modern_passcode": 37580756,
+        "selected_events": [],
+        "selected_historical_passcode": 504700059,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-my-body-as-a-shield",
+        "modern_passcode": 69279219,
+        "selected_events": [],
+        "selected_historical_passcode": 504700189,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-mysterious-puppeteer",
+        "modern_passcode": 54098121,
+        "selected_events": [],
+        "selected_historical_passcode": 504700088,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-nimble-momonga",
+        "modern_passcode": 22567609,
+        "selected_events": [],
+        "selected_historical_passcode": 504700033,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-nutrient-z",
+        "modern_passcode": 29389368,
+        "selected_events": [],
+        "selected_historical_passcode": 504700051,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-red-eyes-darkness-metal-dragon",
+        "modern_passcode": 88264978,
+        "selected_events": [],
+        "selected_historical_passcode": 88264988,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-reinforcement-of-the-army",
+        "modern_passcode": 32807846,
+        "selected_events": [],
+        "selected_historical_passcode": 504700055,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-release-restraint",
+        "modern_passcode": 75417459,
+        "selected_events": [],
+        "selected_historical_passcode": 504700130,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-rescue-cat",
+        "modern_passcode": 14878871,
+        "selected_events": [],
+        "selected_historical_passcode": 504700179,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-ring-of-destruction",
+        "modern_passcode": 83555666,
+        "selected_events": [],
+        "selected_historical_passcode": 511000824,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-ryko-lightsworn-hunter",
+        "modern_passcode": 21502796,
+        "selected_events": [],
+        "selected_historical_passcode": 511003007,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-sage-s-stone",
+        "modern_passcode": 13604200,
+        "selected_events": [],
+        "selected_historical_passcode": 504700020,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-sangan",
+        "modern_passcode": 26202165,
+        "selected_events": [],
+        "selected_historical_passcode": 504700178,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-senet-switch",
+        "modern_passcode": 63394872,
+        "selected_events": [],
+        "selected_historical_passcode": 63394882,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-senju-of-the-thousand-hands",
+        "modern_passcode": 23401839,
+        "selected_events": [],
+        "selected_historical_passcode": 504700040,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-serpentine-princess",
+        "modern_passcode": 71829750,
+        "selected_events": [],
+        "selected_historical_passcode": 504700117,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-shining-angel",
+        "modern_passcode": 95956346,
+        "selected_events": [],
+        "selected_historical_passcode": 504700170,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-silent-swordsman-lv3",
+        "modern_passcode": 1995985,
+        "selected_events": [],
+        "selected_historical_passcode": 504700006,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-silent-swordsman-lv5",
+        "modern_passcode": 74388798,
+        "selected_events": [],
+        "selected_historical_passcode": 504700126,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-sinister-serpent",
+        "modern_passcode": 8131171,
+        "selected_events": [],
+        "selected_historical_passcode": 511000818,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-skilled-dark-magician",
+        "modern_passcode": 73752131,
+        "selected_events": [],
+        "selected_historical_passcode": 504700122,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-skilled-white-magician",
+        "modern_passcode": 46363422,
+        "selected_events": [],
+        "selected_historical_passcode": 504700074,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-spirit-ryu",
+        "modern_passcode": 67957315,
+        "selected_events": [],
+        "selected_historical_passcode": 504700185,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-splendid-venus",
+        "modern_passcode": 5645210,
+        "selected_events": [],
+        "selected_historical_passcode": 511003054,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-stronghold-the-moving-fortress",
+        "modern_passcode": 13955608,
+        "selected_events": [],
+        "selected_historical_passcode": 511003022,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-summoner-of-illusions",
+        "modern_passcode": 14644902,
+        "selected_events": [],
+        "selected_historical_passcode": 504700184,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-super-rejuvenation",
+        "modern_passcode": 27770341,
+        "selected_events": [],
+        "selected_historical_passcode": 504700049,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-swords-of-concealing-light",
+        "modern_passcode": 12923641,
+        "selected_events": [],
+        "selected_historical_passcode": 504700018,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-toon-mermaid",
+        "modern_passcode": 65458948,
+        "selected_events": [],
+        "selected_historical_passcode": 504700108,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-toon-summoned-skull",
+        "modern_passcode": 91842653,
+        "selected_events": [],
+        "selected_historical_passcode": 504700160,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-twin-headed-behemoth",
+        "modern_passcode": 43586926,
+        "selected_events": [],
+        "selected_historical_passcode": 511000868,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-ultimate-offering",
+        "modern_passcode": 80604091,
+        "selected_events": [],
+        "selected_historical_passcode": 511003023,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-ultimate-tyranno",
+        "modern_passcode": 15894048,
+        "selected_events": [],
+        "selected_historical_passcode": 511003009,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-w-wing-catapult",
+        "modern_passcode": 96300057,
+        "selected_events": [],
+        "selected_historical_passcode": 511002901,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-weapon-change",
+        "modern_passcode": 10035717,
+        "selected_events": [],
+        "selected_historical_passcode": 504700014,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-witch-of-the-black-forest",
+        "modern_passcode": 78010363,
+        "selected_events": [],
+        "selected_historical_passcode": 504700144,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-wulf-lightsworn-beast",
+        "modern_passcode": 58996430,
+        "selected_events": [],
+        "selected_historical_passcode": 511003020,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-y-dragon-head",
+        "modern_passcode": 65622692,
+        "selected_events": [],
+        "selected_historical_passcode": 511002852,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-z-metal-tank",
+        "modern_passcode": 64500000,
+        "selected_events": [],
+        "selected_historical_passcode": 511002853,
+        "coverage_kind": "reuse-upstream"
+      }
     ],
-    "ambiguous_modern_impossible_ids": ["erratum-a-deal-with-dark-ruler","erratum-apprentice-magician","erratum-armed-dragon-lv3","erratum-armed-dragon-lv5","erratum-axe-of-despair","erratum-birdface","erratum-bubonic-vermin","erratum-dark-mimic-lv1","erratum-dark-scorpion-meanae-the-thorn","erratum-dedication-through-light-and-darkness","erratum-elegant-egotist","erratum-emblem-of-dragon-destroyer","erratum-freed-the-matchless-general","erratum-fusion-sage","erratum-giant-rat","erratum-great-dezard","erratum-hand-of-nephthys","erratum-hero-signal","erratum-horus-the-black-flame-dragon-lv4","erratum-insect-imitation","erratum-last-will","erratum-manju-of-the-ten-thousand-hands","erratum-masked-dragon","erratum-mother-grizzly","erratum-mystic-swordsman-lv2","erratum-mystic-swordsman-lv4","erratum-mystic-tomato","erratum-ninjitsu-art-of-transformation","erratum-paladin-of-white-dragon","erratum-pandemonium","erratum-peten-the-dark-clown","erratum-pyramid-turtle","erratum-skull-knight-2","erratum-sonic-bird","erratum-terraforming","erratum-thunder-dragon","erratum-toon-table-of-contents","erratum-tyrant-dragon","erratum-ufo-turtle","erratum-ultimate-insect-lv1","erratum-ultimate-insect-lv3","erratum-ultimate-insect-lv5","erratum-vampire-lord","erratum-xy-dragon-cannon","erratum-xyz-dragon-cannon","erratum-xz-tank-cannon"],
-    "ambiguous_unresolved_record_ids": ["erratum-a-deal-with-dark-ruler","erratum-apprentice-magician","erratum-armed-dragon-lv3","erratum-armed-dragon-lv5","erratum-axe-of-despair","erratum-birdface","erratum-bubonic-vermin","erratum-dark-mimic-lv1","erratum-dark-scorpion-meanae-the-thorn","erratum-dedication-through-light-and-darkness","erratum-elegant-egotist","erratum-emblem-of-dragon-destroyer","erratum-freed-the-matchless-general","erratum-fusion-sage","erratum-giant-rat","erratum-great-dezard","erratum-hand-of-nephthys","erratum-hero-signal","erratum-horus-the-black-flame-dragon-lv4","erratum-insect-imitation","erratum-last-will","erratum-manju-of-the-ten-thousand-hands","erratum-masked-dragon","erratum-mother-grizzly","erratum-mystic-swordsman-lv2","erratum-mystic-swordsman-lv4","erratum-mystic-tomato","erratum-ninjitsu-art-of-transformation","erratum-paladin-of-white-dragon","erratum-pandemonium","erratum-peten-the-dark-clown","erratum-pyramid-turtle","erratum-skull-knight-2","erratum-sonic-bird","erratum-terraforming","erratum-thunder-dragon","erratum-toon-table-of-contents","erratum-tyrant-dragon","erratum-ufo-turtle","erratum-ultimate-insect-lv1","erratum-ultimate-insect-lv3","erratum-ultimate-insect-lv5","erratum-vampire-lord","erratum-xy-dragon-cannon","erratum-xyz-dragon-cannon","erratum-xz-tank-cannon","erratum-yz-tank-dragon"],
+    "ambiguous_modern_impossible_ids": [
+      "erratum-a-deal-with-dark-ruler",
+      "erratum-apprentice-magician",
+      "erratum-armed-dragon-lv3",
+      "erratum-armed-dragon-lv5",
+      "erratum-axe-of-despair",
+      "erratum-birdface",
+      "erratum-bubonic-vermin",
+      "erratum-dark-mimic-lv1",
+      "erratum-dark-scorpion-meanae-the-thorn",
+      "erratum-dedication-through-light-and-darkness",
+      "erratum-elegant-egotist",
+      "erratum-emblem-of-dragon-destroyer",
+      "erratum-freed-the-matchless-general",
+      "erratum-fusion-sage",
+      "erratum-giant-rat",
+      "erratum-great-dezard",
+      "erratum-hand-of-nephthys",
+      "erratum-hero-signal",
+      "erratum-horus-the-black-flame-dragon-lv4",
+      "erratum-insect-imitation",
+      "erratum-last-will",
+      "erratum-manju-of-the-ten-thousand-hands",
+      "erratum-masked-dragon",
+      "erratum-mother-grizzly",
+      "erratum-mystic-swordsman-lv2",
+      "erratum-mystic-swordsman-lv4",
+      "erratum-mystic-tomato",
+      "erratum-ninjitsu-art-of-transformation",
+      "erratum-paladin-of-white-dragon",
+      "erratum-pandemonium",
+      "erratum-peten-the-dark-clown",
+      "erratum-pyramid-turtle",
+      "erratum-skull-knight-2",
+      "erratum-sonic-bird",
+      "erratum-terraforming",
+      "erratum-thunder-dragon",
+      "erratum-toon-table-of-contents",
+      "erratum-tyrant-dragon",
+      "erratum-ufo-turtle",
+      "erratum-ultimate-insect-lv1",
+      "erratum-ultimate-insect-lv3",
+      "erratum-ultimate-insect-lv5",
+      "erratum-vampire-lord",
+      "erratum-xy-dragon-cannon",
+      "erratum-xyz-dragon-cannon",
+      "erratum-xz-tank-cannon"
+    ],
+    "ambiguous_unresolved_record_ids": [
+      "erratum-a-deal-with-dark-ruler",
+      "erratum-apprentice-magician",
+      "erratum-armed-dragon-lv3",
+      "erratum-armed-dragon-lv5",
+      "erratum-axe-of-despair",
+      "erratum-birdface",
+      "erratum-bubonic-vermin",
+      "erratum-dark-mimic-lv1",
+      "erratum-dark-scorpion-meanae-the-thorn",
+      "erratum-dedication-through-light-and-darkness",
+      "erratum-elegant-egotist",
+      "erratum-emblem-of-dragon-destroyer",
+      "erratum-freed-the-matchless-general",
+      "erratum-fusion-sage",
+      "erratum-giant-rat",
+      "erratum-great-dezard",
+      "erratum-hand-of-nephthys",
+      "erratum-hero-signal",
+      "erratum-horus-the-black-flame-dragon-lv4",
+      "erratum-insect-imitation",
+      "erratum-last-will",
+      "erratum-manju-of-the-ten-thousand-hands",
+      "erratum-masked-dragon",
+      "erratum-mother-grizzly",
+      "erratum-mystic-swordsman-lv2",
+      "erratum-mystic-swordsman-lv4",
+      "erratum-mystic-tomato",
+      "erratum-ninjitsu-art-of-transformation",
+      "erratum-paladin-of-white-dragon",
+      "erratum-pandemonium",
+      "erratum-peten-the-dark-clown",
+      "erratum-pyramid-turtle",
+      "erratum-skull-knight-2",
+      "erratum-sonic-bird",
+      "erratum-terraforming",
+      "erratum-thunder-dragon",
+      "erratum-toon-table-of-contents",
+      "erratum-tyrant-dragon",
+      "erratum-ufo-turtle",
+      "erratum-ultimate-insect-lv1",
+      "erratum-ultimate-insect-lv3",
+      "erratum-ultimate-insect-lv5",
+      "erratum-vampire-lord",
+      "erratum-xy-dragon-cannon",
+      "erratum-xyz-dragon-cannon",
+      "erratum-xz-tank-cannon",
+      "erratum-yz-tank-dragon"
+    ],
     "ambiguity_membership_note": "The 47 unresolved value is 47 candidate-state occurrences. In this frozen corpus it also equals 47 distinct erratum records containing at least one unresolved candidate; that equality is asserted rather than assumed. These are global errata records, not proof that all affected cards are in the provisional Tokyo Dome pool."
   },
   "architecture": {
@@ -240,56 +1269,535 @@
     "schema_enhancement_desirable": true,
     "runtime_change_required": false,
     "format_local_approximation_required": true,
-    "historical_unbounded_deck_limits": {"main": [40, null], "extra": [0, null], "side": [10, 10]},
-    "host_representation": {"main": [40, 999], "extra": [0, 999], "side": [10, 10], "999_is_client_ceiling_not_historical_unbounded": true},
-    "init_lua_feasibility": {"sanctioned_hook": true, "can_exactly_intercept_deckout": false, "classification": "not-a-workaround"},
+    "historical_unbounded_deck_limits": {
+      "main": [
+        40,
+        null
+      ],
+      "extra": [
+        0,
+        null
+      ],
+      "side": [
+        10,
+        10
+      ]
+    },
+    "host_representation": {
+      "main": [
+        40,
+        999
+      ],
+      "extra": [
+        0,
+        999
+      ],
+      "side": [
+        10,
+        10
+      ],
+      "999_is_client_ceiling_not_historical_unbounded": true
+    },
+    "init_lua_feasibility": {
+      "sanctioned_hook": true,
+      "can_exactly_intercept_deckout": false,
+      "classification": "not-a-workaround"
+    },
     "canonical_data_ready": false,
-    "blocking_reasons": ["OCG release ledger absent", "121 community cross-check identities absent from current card index", "banlist effective scope disputed", "Expert Rules boundary unresolved", "early deck-out and battle semantics are engine gaps", "modern chain/priority boundary unresolved"],
+    "blocking_reasons": [
+      "OCG release ledger absent",
+      "121 community cross-check identities absent from current card index",
+      "banlist effective scope disputed",
+      "Expert Rules boundary unresolved",
+      "early deck-out and battle semantics are engine gaps",
+      "modern chain/priority boundary unresolved"
+    ],
     "verdict_text": "Existing schemas can store a host-enforceable approximation, but [40, 999] is not historically unbounded. A nullable/unbounded maximum would be a desirable future schema enhancement, not a prerequisite under the repository's host-configuration design. Exact canonicalization remains blocked by historical and engine gaps."
   },
   "blocker_ledger": {
-    "format_name_date_convention": {"status": "RESOLVED WITH APPROXIMATION", "reason": "Tokyo Dome / 1999-08-25 is a community reconstruction anchored to the 1999-08-26 event; no official canonical format record was found."},
-    "event_card_pool_cutoff": {"status": "UNRESOLVED", "reason": "Official chronology proves same-day products and event distribution, but no event rulesheet proves whether those cards were legal during the event."},
-    "ocg_release_ledger": {"status": "BLOCKING", "reason": "The repository currently has zero ocg-territory product events."},
-    "missing_card_identities": {"status": "BLOCKING", "reason": "The 370-identity community cross-check has 121 identities absent from the current index; this is not a product ledger."},
-    "banlist": {"status": "BLOCKING", "reason": "The three-card July reconstruction is secondary and its broad-vs-event-specific scope is disputed."},
-    "starter_vs_expert_effective_boundary": {"status": "BLOCKING", "reason": "Expert Rules are likely by August 1999, but Tokyo Dome-specific adoption is not proven by a primary event rulesheet."},
-    "main_battle_main_behaviour": {"status": "RESOLVED WITH APPROXIMATION", "reason": "The rulebook explicitly returns to/remains in Main after Battle; current core's Main2 action window is closer, while NO_MAIN_PHASE_2 is wrong."},
-    "first_turn_draw": {"status": "RESOLVED", "reason": "The period rulebook says no first-turn draw and the candidate profile leaves DUEL_1ST_TURN_DRAW absent."},
-    "first_turn_attack": {"status": "RESOLVED", "reason": "The period rulebook says no first-turn attack and the candidate profile leaves DUEL_ATTACK_FIRST_TURN absent."},
-    "hand_limit": {"status": "RESOLVED WITH APPROXIMATION", "reason": "No hand limit is documented and DUEL_NO_HAND_LIMIT matches the engine axis."},
-    "deck_size_representation": {"status": "RESOLVED WITH APPROXIMATION", "reason": "Historical max is unbounded, but current schema stores host limits; [40,999] must be labeled as a client ceiling."},
-    "side_fusion_deck_constraints": {"status": "RESOLVED WITH APPROXIMATION", "reason": "Side exact 10 is representable; the original Fusion Deck has no located upper bound and host [0,999] is an approximation."},
-    "deck_out_rule": {"status": "BLOCKING", "reason": "The period higher-LP rule is competitively meaningful and no pinned core flag or reliable init.lua interception reproduces it."},
-    "battle_calculation_semantics": {"status": "BLOCKING", "reason": "The original direct ATK/DEF result table lacks modern Damage Step timing; one zero-ATK flag helps one result but not exact timing."},
-    "chain_spell_speed_semantics": {"status": "BLOCKING", "reason": "The available first rulebook lacks formal Chain/Spell Speed/priority rules and no general core flag supplies the historical boundary."},
-    "errata_chronology": {"status": "RESOLVED", "reason": "The gate derives and freezes all 296 snapshot selections mechanically."},
-    "errata_implementation_coverage": {"status": "BLOCKING", "reason": "150 records remain ambiguous; 47 candidate occurrences/records remain unresolved and 46 ambiguous records cannot use modern."},
-    "engine_representability": {"status": "BLOCKING", "reason": "Exact early deck-out, battle timing, chain boundary, and historical Main naming/structure are not all reproducible in pinned ocgcore."},
-    "schema_representability": {"status": "RESOLVED WITH APPROXIMATION", "reason": "No shared schema change is required for a host-enforceable research artifact; unbounded maxima are not literal in the current integer-pair model."}
+    "format_name_date_convention": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "Tokyo Dome / 1999-08-25 is a community reconstruction anchored to the 1999-08-26 event; no official canonical format record was found."
+    },
+    "event_card_pool_cutoff": {
+      "status": "UNRESOLVED",
+      "reason": "Official chronology proves same-day products and event distribution, but no event rulesheet proves whether those cards were legal during the event."
+    },
+    "ocg_release_ledger": {
+      "status": "RESOLVED",
+      "reason": "The 2026-08 release-ledger certification built a real, sourced, product-by-product ocg-jp ledger (20 curated products, 1999-02-01 through 1999-08-25, coverage.json window status complete, 0 unresolved pool-impacting gaps) and mechanically derived a 370-card candidate pool from it (0 ambiguous, 0 unknown printings). See release_ledger_certification below and tests/test_ocg1999_release_certification.py."
+    },
+    "missing_card_identities": {
+      "status": "RESOLVED",
+      "reason": "All 121 originally-absent community-cross-check identities are now accounted for: 119 added to data/cards/index.json via the standard BabelCDB-backed card-index importer (mechanically, from real product printings - no invented passcodes), and 2 (Final Flame, Ultimate Offering) resolved as +/-10 artwork-variant aliases of already-canonical cards rather than new identities. 0 remain unresolved."
+    },
+    "banlist": {
+      "status": "BLOCKING",
+      "reason": "The three-card July reconstruction is secondary and its broad-vs-event-specific scope is disputed."
+    },
+    "starter_vs_expert_effective_boundary": {
+      "status": "BLOCKING",
+      "reason": "Expert Rules are likely by August 1999, but Tokyo Dome-specific adoption is not proven by a primary event rulesheet."
+    },
+    "main_battle_main_behaviour": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "The rulebook explicitly returns to/remains in Main after Battle; current core's Main2 action window is closer, while NO_MAIN_PHASE_2 is wrong."
+    },
+    "first_turn_draw": {
+      "status": "RESOLVED",
+      "reason": "The period rulebook says no first-turn draw and the candidate profile leaves DUEL_1ST_TURN_DRAW absent."
+    },
+    "first_turn_attack": {
+      "status": "RESOLVED",
+      "reason": "The period rulebook says no first-turn attack and the candidate profile leaves DUEL_ATTACK_FIRST_TURN absent."
+    },
+    "hand_limit": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "No hand limit is documented and DUEL_NO_HAND_LIMIT matches the engine axis."
+    },
+    "deck_size_representation": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "Historical max is unbounded, but current schema stores host limits; [40,999] must be labeled as a client ceiling."
+    },
+    "side_fusion_deck_constraints": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "Side exact 10 is representable; the original Fusion Deck has no located upper bound and host [0,999] is an approximation."
+    },
+    "deck_out_rule": {
+      "status": "BLOCKING",
+      "reason": "The period higher-LP rule is competitively meaningful and no pinned core flag or reliable init.lua interception reproduces it."
+    },
+    "battle_calculation_semantics": {
+      "status": "BLOCKING",
+      "reason": "The original direct ATK/DEF result table lacks modern Damage Step timing; one zero-ATK flag helps one result but not exact timing."
+    },
+    "chain_spell_speed_semantics": {
+      "status": "BLOCKING",
+      "reason": "The available first rulebook lacks formal Chain/Spell Speed/priority rules and no general core flag supplies the historical boundary."
+    },
+    "errata_chronology": {
+      "status": "RESOLVED",
+      "reason": "The gate derives and freezes all 296 snapshot selections mechanically."
+    },
+    "errata_implementation_coverage": {
+      "status": "BLOCKING",
+      "reason": "150 records remain ambiguous; 47 candidate occurrences/records remain unresolved and 46 ambiguous records cannot use modern."
+    },
+    "engine_representability": {
+      "status": "BLOCKING",
+      "reason": "Exact early deck-out, battle timing, chain boundary, and historical Main naming/structure are not all reproducible in pinned ocgcore."
+    },
+    "schema_representability": {
+      "status": "RESOLVED WITH APPROXIMATION",
+      "reason": "No shared schema change is required for a host-enforceable research artifact; unbounded maxima are not literal in the current integer-pair model."
+    }
   },
   "sources": [
-    {"id": "konami-card-history", "label": "Konami Japanese card database chronology", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja"},
-    {"id": "konami-starter-box", "label": "Konami STARTER BOX product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=111101000&request_locale=ja&rp=99999&sess=1"},
-    {"id": "konami-booster-3", "label": "Konami Booster 3 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301003&request_locale=ja&rp=99999&sess=1"},
-    {"id": "konami-vol-4", "label": "Konami Vol.4 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1102001&request_locale=ja&rp=99999&sess=1"},
-    {"id": "konami-booster-4", "label": "Konami Booster 4 product page", "kind": "primary-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301004&request_locale=ja&rp=99999&sess=1"},
-    {"id": "konami-tokyo-dome-promos", "label": "Konami Tokyo Dome attendee/prize product page", "kind": "primary-event-product", "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=131302003&request_locale=ja&rp=99999&sess=1"},
-    {"id": "original-1999-rulebook", "label": "Translation/transcription of the original Starter Box rulebook", "kind": "historical-rulebook-transcription", "url": "https://ygorganization.com/ogocg/"},
-    {"id": "expert-rules-secondary", "label": "Yu-Gi-Oh History generation-one Expert Rules research", "kind": "secondary-history", "url": "https://yugioh-history.com/environment/generation-one-4"},
-    {"id": "expert-rules-transcription", "label": "Japanese rulebook transcription and Expert Rules comparison", "kind": "secondary-rulebook-transcription", "url": "https://ygoceanbridge.blogspot.com/2022/07/blog-post_29.html?m=1"},
-    {"id": "format-library-tokyo-dome", "label": "Format Library Tokyo Dome API record", "kind": "community-convention", "url": "https://formatlibrary.com/api/formats/tokyo-dome"},
-    {"id": "format-library-yugi-kaiba", "label": "Format Library Yugi-Kaiba API record", "kind": "community-convention", "url": "https://formatlibrary.com/api/formats/yugi-kaiba"},
-    {"id": "pojo-yugi-kaiba", "label": "Community Yugi-Kaiba format guide", "kind": "community-convention", "url": "https://www.pojo.com/yu-gi-oh/FeaturedWriters/Baneful/2017/6-19.shtml"},
-    {"id": "ygoprodeck-tokyo-dome-cube", "label": "Community Tokyo Dome singleton pool", "kind": "community-cross-check", "url": "https://ygoprodeck.com/cube/view-cube/18262"},
-    {"id": "july-1999-list-wiki", "label": "July 1999 list historical reconstruction", "kind": "secondary-banlist", "url": "https://yugioh.fandom.com/wiki/July_1999_Lists"},
-    {"id": "old-ocg-limit-index", "label": "Old OCG limit-list index", "kind": "secondary-banlist", "url": "https://ocg-card.com/limit/old/"},
-    {"id": "first-forbidden-cards-history", "label": "First forbidden/limited list historical discussion", "kind": "secondary-banlist", "url": "https://yugioh-starter.com/what-is-the-first-forbidden-cards/"},
-    {"id": "tokyo-dome-reconstruction", "label": "Community 1999 OCG reconstruction and explicit uncertainty notes", "kind": "community-reconstruction", "url": "https://templeofra.neocities.org/yugioh-1999"},
-    {"id": "deck-out-history", "label": "Historical deck-out rule transition reconstruction", "kind": "secondary-history", "url": "https://roadoftheking.com/deck-out/"},
-    {"id": "pinned-ocgcore-research", "label": "Pinned ocgcore flag constants and semantics in this repository", "kind": "repository-research", "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/docs/research/ocgcore-flags.md"},
-    {"id": "phase-engine-experiment", "label": "Reproducible pinned-core Main/Battle/Main experiment", "kind": "repository-engine-test", "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/tests/engine/test_tokyo_dome_rules.py"},
-    {"id": "repository-dry-run", "label": "Repository release inventory used by this research gate", "kind": "repository-inventory", "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats"}
+    {
+      "id": "konami-card-history",
+      "label": "Konami Japanese card database chronology",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja"
+    },
+    {
+      "id": "konami-starter-box",
+      "label": "Konami STARTER BOX product page",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=111101000&request_locale=ja&rp=99999&sess=1"
+    },
+    {
+      "id": "konami-booster-3",
+      "label": "Konami Booster 3 product page",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301003&request_locale=ja&rp=99999&sess=1"
+    },
+    {
+      "id": "konami-vol-4",
+      "label": "Konami Vol.4 product page",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1102001&request_locale=ja&rp=99999&sess=1"
+    },
+    {
+      "id": "konami-booster-4",
+      "label": "Konami Booster 4 product page",
+      "kind": "primary-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301004&request_locale=ja&rp=99999&sess=1"
+    },
+    {
+      "id": "konami-tokyo-dome-promos",
+      "label": "Konami Tokyo Dome attendee/prize product page",
+      "kind": "primary-event-product",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=131302003&request_locale=ja&rp=99999&sess=1"
+    },
+    {
+      "id": "original-1999-rulebook",
+      "label": "Translation/transcription of the original Starter Box rulebook",
+      "kind": "historical-rulebook-transcription",
+      "url": "https://ygorganization.com/ogocg/"
+    },
+    {
+      "id": "expert-rules-secondary",
+      "label": "Yu-Gi-Oh History generation-one Expert Rules research",
+      "kind": "secondary-history",
+      "url": "https://yugioh-history.com/environment/generation-one-4"
+    },
+    {
+      "id": "expert-rules-transcription",
+      "label": "Japanese rulebook transcription and Expert Rules comparison",
+      "kind": "secondary-rulebook-transcription",
+      "url": "https://ygoceanbridge.blogspot.com/2022/07/blog-post_29.html?m=1"
+    },
+    {
+      "id": "format-library-tokyo-dome",
+      "label": "Format Library Tokyo Dome API record",
+      "kind": "community-convention",
+      "url": "https://formatlibrary.com/api/formats/tokyo-dome"
+    },
+    {
+      "id": "format-library-yugi-kaiba",
+      "label": "Format Library Yugi-Kaiba API record",
+      "kind": "community-convention",
+      "url": "https://formatlibrary.com/api/formats/yugi-kaiba"
+    },
+    {
+      "id": "pojo-yugi-kaiba",
+      "label": "Community Yugi-Kaiba format guide",
+      "kind": "community-convention",
+      "url": "https://www.pojo.com/yu-gi-oh/FeaturedWriters/Baneful/2017/6-19.shtml"
+    },
+    {
+      "id": "ygoprodeck-tokyo-dome-cube",
+      "label": "Community Tokyo Dome singleton pool",
+      "kind": "community-cross-check",
+      "url": "https://ygoprodeck.com/cube/view-cube/18262"
+    },
+    {
+      "id": "july-1999-list-wiki",
+      "label": "July 1999 list historical reconstruction",
+      "kind": "secondary-banlist",
+      "url": "https://yugioh.fandom.com/wiki/July_1999_Lists"
+    },
+    {
+      "id": "old-ocg-limit-index",
+      "label": "Old OCG limit-list index",
+      "kind": "secondary-banlist",
+      "url": "https://ocg-card.com/limit/old/"
+    },
+    {
+      "id": "first-forbidden-cards-history",
+      "label": "First forbidden/limited list historical discussion",
+      "kind": "secondary-banlist",
+      "url": "https://yugioh-starter.com/what-is-the-first-forbidden-cards/"
+    },
+    {
+      "id": "tokyo-dome-reconstruction",
+      "label": "Community 1999 OCG reconstruction and explicit uncertainty notes",
+      "kind": "community-reconstruction",
+      "url": "https://templeofra.neocities.org/yugioh-1999"
+    },
+    {
+      "id": "deck-out-history",
+      "label": "Historical deck-out rule transition reconstruction",
+      "kind": "secondary-history",
+      "url": "https://roadoftheking.com/deck-out/"
+    },
+    {
+      "id": "pinned-ocgcore-research",
+      "label": "Pinned ocgcore flag constants and semantics in this repository",
+      "kind": "repository-research",
+      "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/docs/research/ocgcore-flags.md"
+    },
+    {
+      "id": "phase-engine-experiment",
+      "label": "Reproducible pinned-core Main/Battle/Main experiment",
+      "kind": "repository-engine-test",
+      "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/tests/engine/test_tokyo_dome_rules.py"
+    },
+    {
+      "id": "repository-dry-run",
+      "label": "Repository release inventory used by this research gate",
+      "kind": "repository-inventory",
+      "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats"
+    },
+    {
+      "id": "yugipedia-ocg-1999-set-pages",
+      "label": "Yugipedia OCG Series 1 (1999) set/product/card pages",
+      "kind": "secondary-database",
+      "url": "https://yugipedia.com/api.php?action=parse"
+    },
+    {
+      "id": "yugipedia-series1-navbox",
+      "label": "Yugipedia \"Series 1 sets\" navigation template (product-list completeness cross-check)",
+      "kind": "secondary-database",
+      "url": "https://yugipedia.com/wiki/Template:Series_1_sets"
+    },
+    {
+      "id": "ocg1999-release-ledger",
+      "label": "This repository's 2026-08 ocg-jp release-ledger certification (data/releases/*, tests/test_ocg1999_release_certification.py)",
+      "kind": "repository-research",
+      "url": "https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/data/releases/coverage.json"
+    }
   ],
-  "scope": {"files_added_by_gate": ["docs/research/yugi-kaiba-format-source-gate.md", "docs/research/yugi-kaiba-format-source-packet.json", "tests/test_yugi_kaiba_format_gate.py", "tests/engine/test_tokyo_dome_rules.py"], "canonical_format_created": false, "runtime_or_schema_changed": false, "errata_changed": false}
+  "scope": {
+    "files_added_by_gate": [
+      "docs/research/yugi-kaiba-format-source-gate.md",
+      "docs/research/yugi-kaiba-format-source-packet.json",
+      "tests/test_yugi_kaiba_format_gate.py",
+      "tests/engine/test_tokyo_dome_rules.py"
+    ],
+    "canonical_format_created": false,
+    "runtime_or_schema_changed": false,
+    "errata_changed": false
+  },
+  "product_chronology_research_notes": {
+    "purpose": "Distributions discovered via yugipedia-series1-navbox during completeness verification whose cards are all redundant with (available no later than) another dated entry above, or non-playable, and are therefore accounted for by data/releases/gaps.json gap-ocg1999-* records rather than their own product_chronology row.",
+    "entries": [
+      {
+        "date": "1999-04-29",
+        "product": "Duel Monsters II tournament meeting experience promotional card",
+        "gap_id": "gap-ocg1999-dm2-trial-meeting"
+      },
+      {
+        "date": "1999-06-21",
+        "product": "V Jump August 1999 Special Present Sets A and B",
+        "gap_id": "gap-ocg1999-vjump-aug-1999-special-present"
+      },
+      {
+        "date": "1999-07-01",
+        "product": "Duel Monsters II: Dark Duel Stories Duelist Legend in Tokyo Dome invitation cards",
+        "gap_id": "gap-ocg1999-td-invitation-tickets"
+      },
+      {
+        "date": "1999-07-30",
+        "product": "V Jump Festa 1999 promotional card (disputed date; Konami DB states October 21)",
+        "gap_id": "gap-ocg1999-vjf-1999"
+      }
+    ],
+    "source_ids": [
+      "yugipedia-ocg-1999-set-pages",
+      "yugipedia-series1-navbox"
+    ]
+  },
+  "release_ledger_certification": {
+    "purpose": "The actual results of the 2026-08 Japanese OCG release-ledger certification task, mechanically derived and pinned by tests/test_ocg1999_release_certification.py. This section is release-ledger/card-identity certification only; it does NOT make Tokyo Dome canonical-ready (banlist, rule-boundary, and engine-representability blockers below are unchanged and still block canonicalization).",
+    "status": "RESOLVED WITH NONBLOCKING GAPS",
+    "status_meaning": "The release-ledger and card-identity-resolution blocker is resolved: a real, sourced, mechanically-recomputable ocg-jp product ledger exists through 1999-08-25 with zero unresolved pool-impacting gaps, and all 121 previously-missing community-cross-check identities are accounted for. 'Nonblocking gaps' refers to the 5 accounted-for research anomalies (gap-ocg1999-*) and the 2 excluded one-off/non-playable card groups, all resolved-safe and none affecting the certified pool - not to any remaining uncertainty about pool membership.",
+    "ocg_jp_coverage_window": {
+      "from": "1999-02-01",
+      "through": "1999-08-25",
+      "status": "complete"
+    },
+    "certified_product_count": 20,
+    "certified_products": [
+      "vol-1",
+      "yu-gi-oh-duel-monsters-national-tournament-attendance-card",
+      "yu-gi-oh-duel-monsters-national-tournament-prize-cards",
+      "booster-1",
+      "starter-box-theatrical-release",
+      "starter-box",
+      "starter-box-pre-order-promotional-card",
+      "vol-2",
+      "official-guide-starter-book-promotional-card",
+      "booster-2",
+      "vol-3",
+      "limited-edition-yugi-pack",
+      "limited-edition-kaiba-pack",
+      "limited-edition-joey-pack",
+      "booster-3",
+      "yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards",
+      "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card",
+      "vol-4",
+      "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+      "the-valuable-book-1-promotional-cards"
+    ],
+    "gap_ledger": {
+      "gap_ids": [
+        "gap-ocg1999-nt-prize-top-tier",
+        "gap-ocg1999-td-invitation-tickets",
+        "gap-ocg1999-vjump-aug-1999-special-present",
+        "gap-ocg1999-vjf-1999",
+        "gap-ocg1999-dm2-trial-meeting"
+      ],
+      "all_resolved_safe": true,
+      "unresolved_pool_impacting_gaps": 0,
+      "categories_used": [
+        "no-playable-cards",
+        "cards-available-earlier"
+      ]
+    },
+    "card_identity_resolution": {
+      "originally_absent_from_card_index": 121,
+      "resolved_by_card_index_addition": 119,
+      "resolved_by_artwork_alias_collapse": 2,
+      "unresolved_identities": 0,
+      "unresolved_identity_list": [],
+      "excluded_non_pool_identity_groups": {
+        "national_tournament_top_placer_trophies": {
+          "cards": [
+            "Black Luster Soldier",
+            "Zera the Mant",
+            "Super War-Lion",
+            "Fiend's Mirror"
+          ],
+          "reason": "one-of-a-kind competition trophies (1-4 physical copies each, ever); Black Luster Soldier's 1999 print is additionally a genuinely distinct historical identity (BabelCDB passcode 10000100, a far alias of the modern Ritual Monster's 5405694) that would be misrepresented by the modern card's passcode",
+          "gap_id": "gap-ocg1999-nt-prize-top-tier"
+        },
+        "tokyo_dome_invitation_tickets": {
+          "cards": [
+            "Duelist Kingdom",
+            "Set Sail for The Kingdom",
+            "Glory of the King's Hand"
+          ],
+          "reason": "card_type Ticket, printed limitation_text \"This card cannot be used in a Duel.\"",
+          "gap_id": "gap-ocg1999-td-invitation-tickets"
+        }
+      },
+      "no_invented_passcodes": true
+    },
+    "candidate_pool": {
+      "derivation": "mechanical, via retroformats.releases.evaluate_cutoff against a research-only in-memory Pool(kind=release-cutoff, region=OCG, cutoff_date=1999-08-25, territories=[ocg-jp]) - NOT materialized to data/pools/",
+      "cardinality": 370,
+      "digest_sha256": "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+      "ambiguous_cards": 0,
+      "unknown_printings": 0,
+      "manual_card_level_exceptions": 0,
+      "manual_card_level_exceptions_note": "Zero cutoff.include/exclude/exclude_products entries were needed: the pure release-cutoff derivation, with all 20 products and 5 gap-ledger resolutions in place, matches the community cube exactly with no manual patching."
+    },
+    "community_cross_check": {
+      "source": "ygoprodeck-tokyo-dome-cube (YGOPRODeck \"1999 Tokyo Dome Card Pool\", 370 cards)",
+      "candidates_file": "docs/research/ocg1999-tokyo-dome-community-candidates.json",
+      "diff_file": "docs/research/ocg1999-tokyo-dome-community-diff.json",
+      "common": 370,
+      "ledger_only": 0,
+      "community_only": 0,
+      "raw_passcode_differences_before_canonicalization": 4,
+      "raw_difference_category": "alias/artwork canonicalization (all 4 are +/-10 BabelCDB artwork-variant passcodes of already-included canonical cards: Final Flame, Ultimate Offering, Harpie's Feather Duster, Monster Reborn)",
+      "pure_release_cutoff_derivation_succeeded_without_manual_exceptions": true
+    },
+    "august_26_boundary": {
+      "purpose": "Every card/product/distribution dated 1999-08-26 that could plausibly appear in a community Tokyo Dome pool, and confirmation none leak into the certified 1999-08-25 candidate.",
+      "products": [
+        {
+          "product": "Booster 4",
+          "cards": 40,
+          "existed_before_event": false,
+          "tournament_legality_at_event": "unknown (no event rulesheet located)",
+          "excluded_from_1999_08_25_candidate": true,
+          "note": "5 of its 40 cards are reprints of cards already certified via Vol.4 (1999-07-22); those 5 ARE in the 1999-08-25 pool, but only via their genuine Vol.4 origin, never via Booster 4."
+        },
+        {
+          "product": "Premium Pack",
+          "cards": 10,
+          "existed_before_event": false,
+          "tournament_legality_at_event": "unknown (no event rulesheet located)",
+          "excluded_from_1999_08_25_candidate": true,
+          "note": "Includes the famous \"Exodia the Forbidden One\" head-piece reprint; 0 of its 10 cards appear in the community cube either."
+        },
+        {
+          "product": "Tokyo Dome attendance cards",
+          "cards": 2,
+          "cards_named": [
+            "Gate Guardian",
+            "Magician of Black Chaos"
+          ],
+          "existed_before_event": false,
+          "tournament_legality_at_event": "unknown; distributed to attendees of the same-day event",
+          "excluded_from_1999_08_25_candidate": true
+        },
+        {
+          "product": "Tokyo Dome participation cards",
+          "cards": 3,
+          "cards_named": [
+            "Tri-Horned Dragon",
+            "Sengenjin",
+            "Serpent Night Dragon"
+          ],
+          "existed_before_event": false,
+          "tournament_legality_at_event": "unknown; given per-round DURING the same-day tournament (round 1/2/3)",
+          "excluded_from_1999_08_25_candidate": true,
+          "note": "Konami's own official card database additionally misclassifies \"Tri-Horned Dragon\" as a prize card rather than a participation card (retrospective-database-inconsistency); Yugipedia corrects this. Does not affect this ledger either way."
+        },
+        {
+          "product": "Tokyo Dome prize cards",
+          "cards": 3,
+          "cards_named": [
+            "Blue-Eyes Ultimate Dragon",
+            "Meteor Black Dragon",
+            "Firewing Pegasus"
+          ],
+          "existed_before_event": false,
+          "tournament_legality_at_event": "unknown; awarded to the top 3 finishers of the same-day tournament",
+          "excluded_from_1999_08_25_candidate": true
+        }
+      ],
+      "tournament_ran_august_1_to_26": true,
+      "tournament_span_note": "Per Yugipedia, the Tokyo Dome tournament itself ran August 1-26, 1999 (regional qualifiers into the August 26 final at Tokyo Dome), directly mirroring the February 1-21 National Tournament pattern already in this ledger (whose attendance/prize cards are dated to its February 21 final, not February 1). The 1999-08-25 cutoff is unaffected either way: no card/product is dated between August 1 and August 25.",
+      "community_formats_include_retrospectively": false,
+      "community_formats_include_retrospectively_note": "0 of the 60 Aug-26-exclusive cards (Booster 4's 35 new cards, Premium Pack's 10, and the 8 tournament-exclusive cards) appear in the 370-card community cube."
+    },
+    "pool_intersected_errata_audit": {
+      "purpose": "Research output only - no unresolved-policy decision is made here. Of the 296 frozen global errata records, how many correspond to a card actually in the certified 370-card 1999-08-25 pool, and their chronology-selection breakdown at that same snapshot.",
+      "pool_relevant_erratum_count": 6,
+      "pool_relevant_erratum_ids": [
+        "erratum-castle-walls",
+        "erratum-cocoon-of-evolution",
+        "erratum-crush-card-virus",
+        "erratum-elegant-egotist",
+        "erratum-reinforcements",
+        "erratum-ultimate-offering"
+      ],
+      "determinate": 2,
+      "ambiguous": 4,
+      "determinate_modern": 0,
+      "determinate_historical": 2,
+      "determinate_historical_coverage": {
+        "reuse-upstream": 2
+      },
+      "determinate_historical_substitutions": [
+        {
+          "erratum_id": "erratum-crush-card-virus",
+          "modern_passcode": 57728570,
+          "selected_historical_passcode": 511000822
+        },
+        {
+          "erratum_id": "erratum-ultimate-offering",
+          "modern_passcode": 80604091,
+          "selected_historical_passcode": 511003023
+        }
+      ],
+      "ambiguous_modern_possible": 3,
+      "ambiguous_modern_impossible": 1,
+      "ambiguous_candidate_occurrences": 8,
+      "ambiguous_candidate_coverage_occurrences": {
+        "reuse-upstream": 4,
+        "modern": 3,
+        "unresolved": 1
+      },
+      "known_gap_relevant_to_pool": 0
+    },
+    "source_hierarchy_used": {
+      "tier_1_official": [
+        "konami-card-database-ja (via konami-card-history/konami-starter-box/konami-booster-3/konami-vol-4/konami-booster-4 for the 5 products this gate already anchored directly; relied on for the rest through Yugipedia's own aggregation, disclosed rather than claimed as independent verification)"
+      ],
+      "tier_4_structured_database": [
+        "yugipedia-ocg-1999-set-pages (primary verification method: every certified date/roster was independently checked against this)",
+        "yugipedia-series1-navbox (completeness/discovery only)"
+      ],
+      "identity_authority": [
+        "ignis-babelcdb (ProjectIgnis/BabelCDB, pinned revision 0659607453a7d79d1adefbfe1ef7477d3c92434c - unchanged from this repository's existing card index; every new identity resolved against this exact pinned checkout, zero invented passcodes)"
+      ],
+      "community_cross_check_only": [
+        "ygoprodeck-tokyo-dome-cube (used exclusively for the section-11-style comparison in candidate_pool/community_cross_check above; never as an input to the ledger's own construction)"
+      ]
+    },
+    "architecture_verdict_after_ledger_implementation": {
+      "verdict": "A",
+      "verdict_meaning": "Existing architecture (product-release schema, coverage/gap ledger, card-index importer, release-cutoff evaluate_cutoff) was fully sufficient to represent this task's historical data truthfully; no schema, runtime, or architecture change was made or found necessary.",
+      "no_playable_representation_needed": [
+        "National Tournament top-placer trophies (the coverage/gap machinery expresses their exclusion as a sourced gap, not a schema change)",
+        "Tokyo Dome invitation Ticket cards (same)"
+      ],
+      "distinct_historical_identity_representable": "Black Luster Soldier's 1999 Normal Monster prize print is representable as its own canonical passcode (10000100, a BabelCDB far alias of the modern 5405694) without any schema change; it was excluded from the pool on availability grounds (one-of-a-kind trophy), not on representability grounds."
+    }
+  }
 }

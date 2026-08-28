@@ -211,8 +211,21 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(digest, audit["determinate_historical_substitutions_digest"])
         self.assertEqual("b45a38f83be490899d2fd64198b70ea86170ea55f1c24ef3c50194d0546ceaa2", digest)
 
-    def test_current_repository_has_no_ocg_ledger_or_early_canonical_artifacts(self):
-        self.assertEqual(0, sum(1 for product in self.repo.products.values() if any(event.territory.startswith("ocg") for event in product.events)))
+    def test_repository_has_the_certified_ocg_ledger_but_no_early_canonical_artifacts(self):
+        # This research gate originally recorded zero ocg-territory release events as
+        # part of its "blocking" verdict. The 2026-08 release-ledger certification
+        # (see test_ocg1999_release_certification.py) has since built a real, sourced
+        # ocg-jp product ledger through 1999-08-25 - so this assertion now checks that
+        # the ledger exists and is exactly the certified 20 products, not that it is
+        # absent. Canonical Tokyo Dome artifacts remain absent (checked below): the
+        # release-ledger blocker being resolved does not by itself make the format
+        # canonical-ready (banlist/rules/engine blockers remain, per blocker_ledger).
+        ocg_products = {
+            product.id for product in self.repo.products.values()
+            if any(event.territory.startswith("ocg") for event in product.events)
+        }
+        self.assertEqual(20, len(ocg_products))
+        self.assertTrue(all(product_id in self.repo.products for product_id in ocg_products))
         self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.repo.formats))
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3673, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))

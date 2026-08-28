@@ -31,6 +31,104 @@ ready for canonicalization**. The remaining blockers are historical source
 adjudication and OCG release/card identity coverage, not a required schema
 redesign.
 
+## Release ledger certification (2026-08)
+
+A follow-on task built the actual Japanese OCG release ledger this gate had
+deferred, through 1999-08-25 inclusive. It is release-ledger/card-identity
+certification only - it does **not** create the Tokyo Dome format, banlist,
+pool, or rule profile, and it does **not** resolve any of the other blockers
+below (banlist scope, Starter/Expert boundary, deck-out, battle timing,
+chain/priority, errata implementation coverage, engine representability).
+Full structured results live in
+`docs/research/yugi-kaiba-format-source-packet.json` under
+`release_ledger_certification`, mechanically pinned by
+`tests/test_ocg1999_release_certification.py`.
+
+**Verdict: RESOLVED WITH NONBLOCKING GAPS.**
+
+- **Coverage window:** `ocg-jp`, 1999-02-01 through 1999-08-25, status
+  `complete` (`data/releases/coverage.json`).
+- **20 certified products**, hand-curated (`curated: true`) from Yugipedia's
+  OCG Series 1 set/product/card pages and cross-checked for completeness
+  against Yugipedia's own "Series 1 sets" navigation template: Vol.1-4,
+  Booster 1-3, Starter Box, Starter Box: Theatrical Release, the Starter Box
+  pre-order promo, the three Limited Edition Yugi/Kaiba/Joey packs, the
+  Official Guide Starter Book promo, the Duel Monsters II: Dark Duel Stories
+  video-game promo cards and both Game Guide promos, The Valuable Book 1
+  promos, and the Duel Monsters National Tournament attendance and (partial)
+  prize-card products. The earliest certified distribution is the National
+  Tournament attendance card, 1999-02-21 - 12 days before Vol.1.
+- **5 research anomalies**, all `resolved-safe` and none pool-impacting, in
+  `data/releases/gaps.json` (`gap-ocg1999-*`): the National Tournament's
+  top-placer trophy tier (Black Luster Soldier/Zera the Mant/Super
+  War-Lion/Fiend's Mirror - one-of-a-kind metal cards, 1-4 physical copies
+  ever made; Black Luster Soldier's is additionally a genuinely distinct
+  historical identity from the modern Ritual Monster), the Tokyo Dome
+  invitation Ticket cards (`This card cannot be used in a Duel.`), and three
+  small redundant promo distributions (V Jump August 1999 Special Present,
+  V Jump Festa 1999 - which also carries an unresolved Yugipedia/Konami date
+  conflict, harmless either way - and the DM2 trial-meeting card).
+- **Card identity resolution:** all 121 identities the prior gate's community
+  cross-check found absent are now accounted for - 119 added to
+  `data/cards/index.json` mechanically via the standard BabelCDB-backed
+  importer (real product printings, pinned revision
+  `0659607453a7d79d1adefbfe1ef7477d3c92434c`, unchanged; zero invented
+  passcodes), and 2 (Final Flame, Ultimate Offering) resolved as +/-10
+  artwork-variant aliases of already-canonical cards rather than new
+  identities. 0 remain unresolved.
+- **Candidate pool:** a pure `evaluate_cutoff` derivation (region `OCG`,
+  territory `ocg-jp`, cutoff `1999-08-25`, zero manual
+  `cutoff.include`/`exclude`/`exclude_products` entries) yields exactly
+  **370 canonical cards**, 0 ambiguous, 0 unknown printings. Digest (sha256
+  of the sorted `[{passcode,name}]` list):
+  `f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`. This
+  pool is derived in tests/research only - `data/pools/1999-08-tokyo-dome.json`
+  is deliberately not written.
+- **Community cross-check:** compared against the independent YGOPRODeck
+  "1999 Tokyo Dome Card Pool" cube (370 cards; snapshot in
+  `docs/research/ocg1999-tokyo-dome-community-candidates.json`, diff in
+  `docs/research/ocg1999-tokyo-dome-community-diff.json`): **common 370,
+  ledger-only 0, community-only 0** after canonicalization. The only raw
+  differences (4, before canonicalization) are all the same category -
+  alias/artwork canonicalization - and collapse cleanly.
+- **August 26 boundary audit:** Booster 4 (40 cards, 5 of them reprints
+  already certified via Vol.4 and included in the pool through that earlier
+  origin only), Premium Pack (10 cards, including the "Exodia the Forbidden
+  One" head-piece reprint), and the Tokyo Dome attendance (2), participation
+  (3, given per-round during the same-day tournament), and prize (3) cards
+  are all dated 1999-08-26 and all confirmed absent from the 1999-08-25
+  candidate. None of the 60 Aug-26-exclusive cards appears in the community
+  cube either. The Tokyo Dome tournament itself ran August 1-26 (regional
+  qualifiers into the August 26 Tokyo Dome final), mirroring the February
+  1-21 National Tournament already in this ledger; no card or product is
+  dated between August 1 and August 25, so this does not affect the cutoff.
+  Tournament legality at the event remains unproven either way (unchanged
+  from the rest of this gate).
+- **Pool-intersected errata audit** (research only, no policy chosen): of
+  the 296 frozen global errata records, 6 correspond to a card in the
+  370-card pool (`erratum-castle-walls`, `erratum-cocoon-of-evolution`,
+  `erratum-crush-card-virus`, `erratum-elegant-egotist`,
+  `erratum-reinforcements`, `erratum-ultimate-offering`): 2 determinate (both
+  historical, `reuse-upstream`), 4 ambiguous (3 modern-possible, 1
+  modern-impossible; 8 candidate occurrences: 4 `reuse-upstream`, 3
+  `modern`, 1 `unresolved`).
+- **Architecture verdict for this task: A** (existing architecture fully
+  sufficient - product-release schema, coverage/gap ledger, card-index
+  importer, and `evaluate_cutoff` truthfully represented every historical
+  fact this task needed, including the National Tournament trophies' and
+  invitation tickets' exclusions and Black Luster Soldier's distinct
+  historical identity, with no schema or runtime change). This does not
+  revise the format's overall verdict B below, which is about the remaining,
+  unrelated engine/host approximation blockers.
+- **GOAT/Edison/Tengu preserved exactly**: hash `0x28E9FC02` / pool 3,673 /
+  pool 4,562 / hash `0x0CE5BABE` respectively; `dist/` rebuilds byte-identical.
+
+Do **not** read this as "Tokyo Dome is ready for canonical implementation."
+The release-ledger/card-identity blocker is resolved; the banlist, Starter
+vs. Expert Rules boundary, deck-out, battle-calculation, chain/priority, and
+errata-implementation-coverage blockers below are unchanged and remain
+BLOCKING.
+
 ## Why the name and date changed
 
 Konami's Japanese card database places the first products in February and
@@ -80,11 +178,17 @@ been present in this early ruleset merely because current ocgcore has them.
 
 ## Card-pool and banlist gate
 
-The official product chronology supports an OCG-Japan release-cutoff pool,
-but the current repository has 411 release products and zero `ocg*` release
-events. A community singleton cross-check contains 370 card identities; 249
-are currently in the card index and 121 are absent. That cross-check is not a
-substitute for a product-by-product OCG ledger.
+**Update (2026-08, release-ledger certification):** the release-ledger and
+card-identity blocker described in this section is now RESOLVED. See
+"Release ledger certification (2026-08)" below for the full result; this
+section is kept as the original historical record of what was blocking.
+
+Originally: the official product chronology supported an OCG-Japan
+release-cutoff pool, but the repository had 411 release products and zero
+`ocg*` release events. A community singleton cross-check contained 370 card
+identities; 249 were in the card index and 121 were absent. That cross-check
+was not a substitute for a product-by-product OCG ledger - building one was
+exactly this gate's next task, now complete.
 
 The commonly reconstructed July 1999 list limits Dark Hole, Raigeki, and
 Trap Hole, with no Forbidden or Semi-Limited section. Sources disagree about
@@ -246,9 +350,13 @@ client ceilings, not historical maxima. A nullable or explicit `unbounded`
 schema value is desirable, but no schema change is required under the current
 project design's host-enforceable approximation model.
 
-The current repository has 411 release products and zero `ocg*` release
-events. A community 370-identity cross-check has 249 identities in the index
-and 121 absent; it is not a substitute for the deferred OCG release ledger.
+**Update (2026-08):** the repository now has 431 release products, 20 of them
+a certified `ocg-jp` ledger through 1999-08-25 (see below); the 370-identity
+community cross-check is fully resolved (370/370 in the index, 0 absent).
+Originally: the repository had 411 release products and zero `ocg*` release
+events, and the community cross-check had 249 in-index / 121 absent - that
+was the deferred OCG release ledger this update completes.
+
 Konami dates Booster 4, Premium Pack, and Tokyo Dome event products to August
 26, but the source does not establish whether distributed cards were legal in
 that same event. The August 25 cutoff is therefore retained as a reproducible
@@ -283,8 +391,8 @@ No shared schema or runtime mutation was justified by this gate.
 | --- | --- | --- |
 | Format name/date convention | RESOLVED WITH APPROXIMATION | Tokyo Dome / August 25 is a reproducible community convention, not an official format record. |
 | Event/card-pool cutoff | UNRESOLVED | Same-day products/distribution are documented; same-event legal use is not. |
-| OCG release ledger | BLOCKING | No current `ocg*` product events. |
-| Missing card identities | BLOCKING | 121 community cross-check identities are absent from the current index. |
+| OCG release ledger | RESOLVED | 2026-08: a real, sourced, product-by-product `ocg-jp` ledger exists through 1999-08-25 (20 products, 0 unresolved pool-impacting gaps). |
+| Missing card identities | RESOLVED | 2026-08: all 121 community cross-check identities accounted for (119 added to the card index, 2 collapsed as artwork-variant aliases). |
 | Banlist | BLOCKING | Three-card July reconstruction and broad-vs-event scope remain secondary/disputed. |
 | Starter Rules vs Expert Rules effective boundary | BLOCKING | Expert is likely, but Tokyo Dome adoption is not proven. |
 | Main/Battle/Main phase behavior | RESOLVED WITH APPROXIMATION | Main2 action window is closer; `DUEL_NO_MAIN_PHASE_2` is rejected. |

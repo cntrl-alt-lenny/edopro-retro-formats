@@ -813,6 +813,142 @@
       ]
     },
     {
+      "id": "gap-ocg1999-nt-prize-top-tier",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! Duel Monsters National Tournament prize cards (top-placer tier)"
+      ],
+      "territories": [
+        "ocg-jp"
+      ],
+      "possible_from": "1999-02-21",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "The top-4/top-3/runner-up/winner tier of the National Tournament (held February 1-21, 1999) awarded four one-of-a-kind stainless-steel metal cards - \"Black Luster Soldier\" (1 copy, winner only), \"Zera the Mant\" (2 copies), \"Super War-Lion\" (3 copies), \"Fiend's Mirror\" (4 copies) - none of which was ever otherwise available; per Yugipedia none were reprinted until a 2023 promotion (Black Luster Soldier only). These are one-of-a-kind competition trophies, not a public or repeatable release, matching this dataset's existing gap-wc-prize-products precedent for the same category of item. \"Black Luster Soldier\" specifically is additionally a genuinely distinct historical identity from the modern Ritual Monster of the same name (BabelCDB records it as passcode 10000100, a >10-distance/\"far\" alias of the modern card's 5405694, i.e. its own canonical card, not an artwork variant) - using the modern card's passcode for this 1999 Normal Monster prize print would misrepresent it, so no passcode is recorded for it at all rather than inventing or misapplying one. \"Zera the Mant\" and \"Super War-Lion\" resolve to their sole/modern BabelCDB passcodes with no historical variant recorded, and \"Fiend's Mirror\" has no BabelCDB entry referenced anywhere else in this dataset; none is used because the whole tier is excluded on availability grounds regardless of identity resolvability.",
+        "sources": [
+          "yugipedia-ocg-series1-set-pages",
+          "ignis-babelcdb"
+        ]
+      },
+      "sources": [
+        "yugipedia-ocg-series1-set-pages"
+      ]
+    },
+    {
+      "id": "gap-ocg1999-td-invitation-tickets",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Yu-Gi-Oh! Duel Monsters II: Dark Duel Stories Duelist Legend in Tokyo Dome invitation cards"
+      ],
+      "territories": [
+        "ocg-jp"
+      ],
+      "possible_from": "1999-07-01",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "no-playable-cards",
+        "detail": "All 3 cards given away at the July 1, 1999 event announcing the August 26 Tokyo Dome tournament - \"Duelist Kingdom\", \"Set Sail for The Kingdom\", \"Glory of the King's Hand\" - are card_type \"Ticket\" with printed limitation_text \"This card cannot be used in a Duel.\" per their Yugipedia CardTable2 entries (later reprinted identically, as Tickets, in Yugi's Legendary Decks). None has a passcode and none was ever tournament-playable.",
+        "sources": [
+          "yugipedia-ocg-series1-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-ocg-series1-set-pages"
+      ]
+    },
+    {
+      "id": "gap-ocg1999-vjump-aug-1999-special-present",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "V Jump August 1999 Special Present Set A",
+        "V Jump August 1999 Special Present Set B"
+      ],
+      "territories": [
+        "ocg-jp"
+      ],
+      "possible_from": "1999-06-21",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "A 50-copy-each raffle prize (individually numbered 1-50) given away by V Jump magazine for its August 1999 issue, dated June 21, 1999. All 6 cards across both sets were already OCG-available earlier via other certified products: \"Trial of Nightmare\", \"The 13th Grave\", \"Turtle Tiger\", and \"Dark King of the Abyss\" via Starter Box: Theatrical Release (1999-03-06); \"Kanan the Swordmistress\" via the National Tournament attendance card (1999-02-21); \"Celtic Guardian\" via the Starter Box pre-order promotional card (1999-03-18). The validator recomputes this claim from release data.",
+        "cards": [
+          { "passcode": 77827521, "name": "Trial of Nightmare" },
+          { "passcode": 32864, "name": "The 13th Grave" },
+          { "passcode": 37313348, "name": "Turtle Tiger" },
+          { "passcode": 53375573, "name": "Dark King of the Abyss" },
+          { "passcode": 12829151, "name": "Kanan the Swordmistress" },
+          { "passcode": 91152256, "name": "Celtic Guardian" }
+        ],
+        "sources": [
+          "yugipedia-ocg-series1-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-ocg-series1-set-pages"
+      ]
+    },
+    {
+      "id": "gap-ocg1999-vjf-1999",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "V Jump Festa 1999 promotional card"
+      ],
+      "territories": [
+        "ocg-jp"
+      ],
+      "possible_from": "1999-07-30",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "A Secret Rare \"Blue-Eyes White Dragon\" distributed at the V Jump Festa event, July 30 - August 3, 1999 per Yugipedia's page text; the same page separately notes Konami's official card database lists this product's release date as October 21, 1999 (an explicit, unresolved date conflict, flagged incomplete on Yugipedia). This gap is harmless under either date: \"Blue-Eyes White Dragon\" was already OCG-available from 1999-03-18 via Starter Box, well before both the earlier event-based date and the later official-database date. This record deliberately does not attempt to adjudicate the date conflict, since doing so cannot change pool membership at the 1999-08-25 cutoff.",
+        "cards": [
+          { "passcode": 89631139, "name": "Blue-Eyes White Dragon" }
+        ],
+        "sources": [
+          "yugipedia-ocg-series1-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-ocg-series1-set-pages"
+      ]
+    },
+    {
+      "id": "gap-ocg1999-dm2-trial-meeting",
+      "kind": "missing-product-printings",
+      "subjects": [
+        "Duel Monsters II tournament meeting experience promotional card"
+      ],
+      "territories": [
+        "ocg-jp"
+      ],
+      "possible_from": "1999-04-29",
+      "date_precision": "day",
+      "status": "resolved-safe",
+      "impact": "pool-membership",
+      "resolution": {
+        "rationale": "cards-available-earlier",
+        "detail": "3000-4000 copies of an Ultra Secret Rare \"Aqua Madoor\" given to Weekly Shonen Jump readers drawn to attend a Duel Monsters II: Dark Duel Stories trial-session preview event on April 29, 1999. \"Aqua Madoor\" was already OCG-available from 1999-03-06 via Starter Box: Theatrical Release. The validator recomputes this claim from release data.",
+        "cards": [
+          { "passcode": 85639257, "name": "Aqua Madoor" }
+        ],
+        "sources": [
+          "yugipedia-ocg-series1-set-pages"
+        ]
+      },
+      "sources": [
+        "yugipedia-ocg-series1-set-pages"
+      ]
+    },
+    {
       "id": "gap-wc2011-prize-products",
       "kind": "missing-product-printings",
       "subjects": [

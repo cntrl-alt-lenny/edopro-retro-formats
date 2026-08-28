@@ -12,6 +12,15 @@
       "through": "2011-09-17",
       "status": "complete",
       "note": "English-family TCG products enumerated from Yugipedia set pages (all five English release-date properties) joined with the YGOPRODeck bulk dump; see data/imported/releases-report.json for known gaps."
+    },
+    {
+      "territories": [
+        "ocg-jp"
+      ],
+      "from": "1999-02-01",
+      "through": "1999-08-25",
+      "status": "complete",
+      "note": "Japanese OCG products and promotional distributions from the beginning of the OCG (per Yugipedia's own \"Series 1\" window, 1999-02-01) through the day before the August 26, 1999 Tokyo Dome event, hand-curated (curated:true) from Yugipedia's Series 1 set/product/card pages and cross-verified against the \"Series 1 sets\" navigation template for completeness. 20 products certified; 5 anomalies discovered during research are accounted for in data/releases/gaps.json (gap-ocg1999-*), none unresolved. The December 16, 1998 Duel Monsters (video game 1) collector's cards are deliberately excluded: Yugipedia's own Series 1 sets template classifies them, and the entire Bandai Carddass/Sealdass card lines, as \"Non-OCG (1997-1999)\", predating the OCG's actual 1999-02 launch."
     }
   ],
   "known_gaps": [
@@ -20,11 +29,15 @@
     "62 products where YGOPRODeck's date matches no Yugipedia date (recorded in the report; Yugipedia governs)",
     "34 Yugipedia-dated in-window products matched no YGOPRODeck set and are absent (no printing rosters available)",
     "4 printings carry numbers from a different product's prefix (upstream set-membership quirks; validator warns per case)",
-    "Renamed products (Magic Ruler / Spell Ruler) import as two products sharing dates"
+    "Renamed products (Magic Ruler / Spell Ruler) import as two products sharing dates",
+    "ocg-jp 1999: the Duel Monsters National Tournament prize cards' top-placer tier, the Tokyo Dome invitation Ticket cards, and 3 small redundant promo distributions (V Jump August 1999 Special Present, V Jump Festa 1999, the DM2 trial-meeting card) are accounted for by resolved-safe gap-ocg1999-* records rather than product rosters; see data/releases/gaps.json."
   ],
   "sources": [
     "yugipedia-set-pages",
-    "ygoprodeck-api"
+    "ygoprodeck-api",
+    "yugipedia-ocg-series1-set-pages",
+    "yugipedia-series1-sets-navbox",
+    "konami-card-database-ja"
   ],
   "notes": "known_gaps above are importer-detected anomaly tallies kept for bookkeeping, NOT unresolved certification failures: certification is governed by the gap ledger (data/releases/gaps.json), and the validator requires every anomaly counted here to be accounted for by a ledger record (unaccounted anomalies fail validation as gaps.unaccounted)."
 }

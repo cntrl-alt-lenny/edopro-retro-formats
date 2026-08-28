@@ -1,0 +1,187 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "booster-2",
+  "code": "BST2",
+  "name": "Booster 2",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-05-25",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 91939608,
+      "name": "Rogue Doll"
+    },
+    {
+      "passcode": 41762634,
+      "name": "Giant Flea"
+    },
+    {
+      "passcode": 48365709,
+      "name": "Ansatsu"
+    },
+    {
+      "passcode": 36904469,
+      "name": "Akihiron"
+    },
+    {
+      "passcode": 98795934,
+      "name": "Mabarrel"
+    },
+    {
+      "passcode": 17511156,
+      "name": "Wood Clown"
+    },
+    {
+      "passcode": 3606209,
+      "name": "One Who Hunts Souls"
+    },
+    {
+      "passcode": 37160778,
+      "name": "Fairywitch"
+    },
+    {
+      "passcode": 23032273,
+      "name": "Megirus Light"
+    },
+    {
+      "passcode": 72299832,
+      "name": "Giant Mech-Soldier"
+    },
+    {
+      "passcode": 72076281,
+      "name": "Bat"
+    },
+    {
+      "passcode": 92409659,
+      "name": "White Dolphin"
+    },
+    {
+      "passcode": 10598400,
+      "name": "Zarigun"
+    },
+    {
+      "passcode": 72269672,
+      "name": "Stone Ghost"
+    },
+    {
+      "passcode": 48531733,
+      "name": "Bolt Penguin"
+    },
+    {
+      "passcode": 70924884,
+      "name": "Alinsection"
+    },
+    {
+      "passcode": 68963107,
+      "name": "Boo Koo"
+    },
+    {
+      "passcode": 92391084,
+      "name": "Wilmee"
+    },
+    {
+      "passcode": 84990171,
+      "name": "Bean Soldier"
+    },
+    {
+      "passcode": 10262698,
+      "name": "The Statue of Easter Island"
+    },
+    {
+      "passcode": 34290067,
+      "name": "Corroding Shark"
+    },
+    {
+      "passcode": 69750536,
+      "name": "Wow Warrior"
+    },
+    {
+      "passcode": 21239280,
+      "name": "Bone Mouse"
+    },
+    {
+      "passcode": 57405307,
+      "name": "Winged Dragon, Guardian of the Fortress #2"
+    },
+    {
+      "passcode": 82065276,
+      "name": "Oscillo Hero"
+    },
+    {
+      "passcode": 42625254,
+      "name": "Little D"
+    },
+    {
+      "passcode": 40387124,
+      "name": "Abyss Flower"
+    },
+    {
+      "passcode": 20541432,
+      "name": "Key Mace #2"
+    },
+    {
+      "passcode": 56713552,
+      "name": "Obese Marmot of Nefariousness"
+    },
+    {
+      "passcode": 82085619,
+      "name": "Shining Friendship"
+    },
+    {
+      "passcode": 37120512,
+      "name": "Sword of Dark Destruction"
+    },
+    {
+      "passcode": 39897277,
+      "name": "Elf's Light"
+    },
+    {
+      "passcode": 2370081,
+      "name": "Steel Shell"
+    },
+    {
+      "passcode": 98374133,
+      "name": "Invigoration"
+    },
+    {
+      "passcode": 47852924,
+      "name": "Soul of the Pure"
+    },
+    {
+      "passcode": 19523799,
+      "name": "Ookazi"
+    },
+    {
+      "passcode": 45895206,
+      "name": "Dark-Piercing Light"
+    },
+    {
+      "passcode": 18937875,
+      "name": "Burning Spear"
+    },
+    {
+      "passcode": 55321970,
+      "name": "Gust Fan"
+    },
+    {
+      "passcode": 81820689,
+      "name": "The Inexperienced Spy"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

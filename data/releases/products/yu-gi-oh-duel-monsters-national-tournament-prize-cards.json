@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-duel-monsters-national-tournament-prize-cards",
+  "code": "NTP1999",
+  "name": "Yu-Gi-Oh! Duel Monsters National Tournament prize cards",
+  "kind": "promo-tournament",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-02-21",
+      "precision": "day",
+      "status": "reported",
+      "kind": "event",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 32012841,
+      "name": "Millennium Shield"
+    },
+    {
+      "passcode": 7562372,
+      "name": "Megasonic Eye"
+    },
+    {
+      "passcode": 70345785,
+      "name": "Yamadron"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "Only the \"qualifying\" tier of this prize product is represented here: \"Millennium Shield\", \"Megasonic Eye\", and \"Yamadron\" (each also independently available from 1999-06-01 via the Limited Edition Yugi/Kaiba/Joey packs; this record documents their earlier, genuine first availability at the February 1-21, 1999 National Tournament). The qualifying tier's fourth card, \"Kanan the Swordmistress\", is carried instead by the separate yu-gi-oh-duel-monsters-national-tournament-attendance-card record (same event, same date) to avoid duplicate-sourcing one card across two files. The top-placer tier (\"Black Luster Soldier\", \"Zera the Mant\", \"Super War-Lion\", \"Fiend's Mirror\" - one-of-a-kind metal trophy cards awarded in 1 to 4 physical copies each, never otherwise available) is deliberately excluded; see gap-ocg1999-nt-prize-top-tier."
+}

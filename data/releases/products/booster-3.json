@@ -1,0 +1,187 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "booster-3",
+  "code": "BST3",
+  "name": "Booster 3",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-07-05",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 52584282,
+      "name": "Hercules Beetle"
+    },
+    {
+      "passcode": 13429800,
+      "name": "Great White"
+    },
+    {
+      "passcode": 49791927,
+      "name": "Tiger Axe"
+    },
+    {
+      "passcode": 52367652,
+      "name": "That Which Feeds on Life"
+    },
+    {
+      "passcode": 14037717,
+      "name": "Spirit of the Books"
+    },
+    {
+      "passcode": 75850803,
+      "name": "LaMoon"
+    },
+    {
+      "passcode": 732302,
+      "name": "Temple of Skulls"
+    },
+    {
+      "passcode": 62403074,
+      "name": "Rhaimundos of the Red Sword"
+    },
+    {
+      "passcode": 55210709,
+      "name": "Lisark"
+    },
+    {
+      "passcode": 28003512,
+      "name": "The Judgement Hand"
+    },
+    {
+      "passcode": 84916669,
+      "name": "Doriado"
+    },
+    {
+      "passcode": 16899564,
+      "name": "Beautiful Headhuntress"
+    },
+    {
+      "passcode": 42883273,
+      "name": "Wodan the Resident of the Forest"
+    },
+    {
+      "passcode": 41061625,
+      "name": "Yashinoki"
+    },
+    {
+      "passcode": 47060154,
+      "name": "Mystic Clown"
+    },
+    {
+      "passcode": 72520073,
+      "name": "Dark Artist"
+    },
+    {
+      "passcode": 75559356,
+      "name": "Cyber Soldier of Darkworld"
+    },
+    {
+      "passcode": 38942059,
+      "name": "Sonic Maid"
+    },
+    {
+      "passcode": 47922711,
+      "name": "Tatsunootoshigo"
+    },
+    {
+      "passcode": 7526150,
+      "name": "Golgoil"
+    },
+    {
+      "passcode": 48109103,
+      "name": "Kappa Avenger"
+    },
+    {
+      "passcode": 46864967,
+      "name": "Minomushi Warrior"
+    },
+    {
+      "passcode": 35752363,
+      "name": "Vermillion Sparrow"
+    },
+    {
+      "passcode": 60802233,
+      "name": "Kuwagata α"
+    },
+    {
+      "passcode": 8327462,
+      "name": "Skullbird"
+    },
+    {
+      "passcode": 95144193,
+      "name": "Kwagar Hercules"
+    },
+    {
+      "passcode": 17115745,
+      "name": "Yormungarde"
+    },
+    {
+      "passcode": 4392470,
+      "name": "Leo Wizard"
+    },
+    {
+      "passcode": 76775123,
+      "name": "Patrol Robo"
+    },
+    {
+      "passcode": 3170832,
+      "name": "Takuhee"
+    },
+    {
+      "passcode": 7225792,
+      "name": "Mon Larvas"
+    },
+    {
+      "passcode": 34320307,
+      "name": "Living Vase"
+    },
+    {
+      "passcode": 69992868,
+      "name": "Muse-A"
+    },
+    {
+      "passcode": 43530283,
+      "name": "Hourglass of Courage"
+    },
+    {
+      "passcode": 56413937,
+      "name": "Warrior of Tradition"
+    },
+    {
+      "passcode": 17092736,
+      "name": "Ancient Telescope"
+    },
+    {
+      "passcode": 77622396,
+      "name": "Reverse Trap"
+    },
+    {
+      "passcode": 17814387,
+      "name": "Reinforcements"
+    },
+    {
+      "passcode": 44209392,
+      "name": "Castle Walls"
+    },
+    {
+      "passcode": 80604091,
+      "name": "Ultimate Offering"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "vol-1",
+  "code": "VOL1",
+  "name": "Vol.1",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-02-04",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 76184692,
+      "name": "Hitotsu-Me Giant"
+    },
+    {
+      "passcode": 46986414,
+      "name": "Dark Magician"
+    },
+    {
+      "passcode": 6368038,
+      "name": "Gaia The Fierce Knight"
+    },
+    {
+      "passcode": 40374923,
+      "name": "Mammoth Graveyard"
+    },
+    {
+      "passcode": 90357090,
+      "name": "Silver Fang"
+    },
+    {
+      "passcode": 22026707,
+      "name": "Curtain of the Dark Ones"
+    },
+    {
+      "passcode": 46457856,
+      "name": "Tomozaurus"
+    },
+    {
+      "passcode": 9159938,
+      "name": "Dark Gray"
+    },
+    {
+      "passcode": 90963488,
+      "name": "Nemuriko"
+    },
+    {
+      "passcode": 52800428,
+      "name": "Fiend's Hand"
+    },
+    {
+      "passcode": 53581214,
+      "name": "Fire Reaper"
+    },
+    {
+      "passcode": 53293545,
+      "name": "Firegrass"
+    },
+    {
+      "passcode": 64511793,
+      "name": "Eyearmor"
+    },
+    {
+      "passcode": 9430387,
+      "name": "LaLa Li-oon"
+    },
+    {
+      "passcode": 75356564,
+      "name": "Petit Dragon"
+    },
+    {
+      "passcode": 75889523,
+      "name": "Archfiend Marmot of Nefariousness"
+    },
+    {
+      "passcode": 38142739,
+      "name": "Petit Angel"
+    },
+    {
+      "passcode": 39175982,
+      "name": "Winged Cleaver"
+    },
+    {
+      "passcode": 15510988,
+      "name": "Thunder Kid"
+    },
+    {
+      "passcode": 53832650,
+      "name": "Meotoko"
+    },
+    {
+      "passcode": 15401633,
+      "name": "Kagemusha of the Blue Flame"
+    },
+    {
+      "passcode": 46718686,
+      "name": "Hitodenchak"
+    },
+    {
+      "passcode": 8783685,
+      "name": "Hourglass of Life"
+    },
+    {
+      "passcode": 84285623,
+      "name": "Haniwa"
+    },
+    {
+      "passcode": 8944575,
+      "name": "The Drdek"
+    },
+    {
+      "passcode": 47695416,
+      "name": "Candle of Fate"
+    },
+    {
+      "passcode": 15150371,
+      "name": "Archfiend Mirror"
+    },
+    {
+      "passcode": 18710707,
+      "name": "The Furious Sea King"
+    },
+    {
+      "passcode": 15507080,
+      "name": "Sectarian of Secrets"
+    },
+    {
+      "passcode": 85705804,
+      "name": "Kurama"
+    },
+    {
+      "passcode": 61854111,
+      "name": "Legendary Sword"
+    },
+    {
+      "passcode": 46009906,
+      "name": "Beast Fangs"
+    },
+    {
+      "passcode": 15052462,
+      "name": "Violet Crystal"
+    },
+    {
+      "passcode": 91595718,
+      "name": "Book of Secret Arts"
+    },
+    {
+      "passcode": 77027445,
+      "name": "Power of Kaishin"
+    },
+    {
+      "passcode": 53129443,
+      "name": "Dark Hole"
+    },
+    {
+      "passcode": 38199696,
+      "name": "Red Medicine"
+    },
+    {
+      "passcode": 76103675,
+      "name": "Sparks"
+    },
+    {
+      "passcode": 66788016,
+      "name": "Fissure"
+    },
+    {
+      "passcode": 4206964,
+      "name": "Trap Hole"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "First Japanese OCG booster; Series 1 card layout (no printed Card Number). Cover card \"Blue-Eyes White Dragon\" was NOT included in this set (it first released a month later in Starter Box)."
+}

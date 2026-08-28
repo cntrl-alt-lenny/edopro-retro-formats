@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-promotional-cards",
+  "code": "DM2VG",
+  "name": "Yu-Gi-Oh! Duel Monsters II: Dark Duel Stories promotional cards",
+  "kind": "promo-videogame",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-07-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 48579379,
+      "name": "Perfectly Ultimate Great Moth"
+    },
+    {
+      "passcode": 6740720,
+      "name": "Seiyaryu"
+    },
+    {
+      "passcode": 3492538,
+      "name": "Insect Armor with Laser Cannon"
+    },
+    {
+      "passcode": 63224564,
+      "name": "Cyber Shield"
+    },
+    {
+      "passcode": 32268901,
+      "name": "Salamandra"
+    },
+    {
+      "passcode": 82878489,
+      "name": "Shine Palace"
+    },
+    {
+      "passcode": 18144506,
+      "name": "Harpie's Feather Duster"
+    },
+    {
+      "passcode": 37390589,
+      "name": "Kunai with Chain"
+    },
+    {
+      "passcode": 57728570,
+      "name": "Crush Card Virus"
+    },
+    {
+      "passcode": 41356845,
+      "name": "Acid Trap Hole"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "10 cards bundled with copies of the Duel Monsters II: Dark Duel Stories video game. Distinct from the two Game Guide book promos (which share the July 8 / August 5 dates but are separate products)."
+}

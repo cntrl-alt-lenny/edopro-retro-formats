@@ -1,0 +1,188 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "booster-1",
+  "code": "BST1",
+  "name": "Booster 1",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-03-01",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 15303296,
+      "name": "Ryu-Kishin"
+    },
+    {
+      "passcode": 27324313,
+      "name": "Wattkid"
+    },
+    {
+      "passcode": 49127943,
+      "name": "Man-Eating Plant"
+    },
+    {
+      "passcode": 55550921,
+      "name": "Battle Warrior"
+    },
+    {
+      "passcode": 92944626,
+      "name": "Wings of Wicked Flame"
+    },
+    {
+      "passcode": 27094595,
+      "name": "Graveyard and the Hand of Invitation"
+    },
+    {
+      "passcode": 88643173,
+      "name": "Nightmare Scorpion"
+    },
+    {
+      "passcode": 76704943,
+      "name": "Yamatano Dragon Scroll"
+    },
+    {
+      "passcode": 13193642,
+      "name": "Dark Plant"
+    },
+    {
+      "passcode": 37243151,
+      "name": "Weather Control"
+    },
+    {
+      "passcode": 63515678,
+      "name": "Mystical Capture Chain"
+    },
+    {
+      "passcode": 97843505,
+      "name": "Djinn the Watcher of the Wind"
+    },
+    {
+      "passcode": 63125616,
+      "name": "The Shadow Who Controls the Dark"
+    },
+    {
+      "passcode": 98898173,
+      "name": "The Melting Red Shadow"
+    },
+    {
+      "passcode": 29948642,
+      "name": "Dig Beak"
+    },
+    {
+      "passcode": 81492226,
+      "name": "Ancient Jar"
+    },
+    {
+      "passcode": 15042735,
+      "name": "Hurricail"
+    },
+    {
+      "passcode": 88435542,
+      "name": "Fire Eye"
+    },
+    {
+      "passcode": 77603950,
+      "name": "Phantom Dewan"
+    },
+    {
+      "passcode": 3985011,
+      "name": "Lucky Trinket"
+    },
+    {
+      "passcode": 49258578,
+      "name": "Gate Deeg"
+    },
+    {
+      "passcode": 75646173,
+      "name": "Synchar"
+    },
+    {
+      "passcode": 756652,
+      "name": "Doron"
+    },
+    {
+      "passcode": 63545455,
+      "name": "Mech Mole Zombie"
+    },
+    {
+      "passcode": 99030164,
+      "name": "Happy Lover"
+    },
+    {
+      "passcode": 61201220,
+      "name": "Phantom Ghost"
+    },
+    {
+      "passcode": 60589682,
+      "name": "Twin Long Rods #1"
+    },
+    {
+      "passcode": 97973387,
+      "name": "Droll Bird"
+    },
+    {
+      "passcode": 83678433,
+      "name": "Midnight Fiend"
+    },
+    {
+      "passcode": 78556320,
+      "name": "Vishwar Randi"
+    },
+    {
+      "passcode": 3732747,
+      "name": "Water Element"
+    },
+    {
+      "passcode": 64154377,
+      "name": "Embryonic Beast"
+    },
+    {
+      "passcode": 2957055,
+      "name": "Wicked Dragon with the Ersatz Head"
+    },
+    {
+      "passcode": 61854111,
+      "name": "Legendary Sword"
+    },
+    {
+      "passcode": 46009906,
+      "name": "Beast Fangs"
+    },
+    {
+      "passcode": 15052462,
+      "name": "Violet Crystal"
+    },
+    {
+      "passcode": 91595718,
+      "name": "Book of Secret Arts"
+    },
+    {
+      "passcode": 77027445,
+      "name": "Power of Kaishin"
+    },
+    {
+      "passcode": 20871001,
+      "name": "Blue Medicine"
+    },
+    {
+      "passcode": 56260110,
+      "name": "Raimei"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "First entry in the parallel \"Booster\" product line (distinct catalogue line from the numbered \"Vol.\" core boosters). Series 1 layout, no printed Card Number."
+}

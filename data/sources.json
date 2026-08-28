@@ -2,6 +2,37 @@
   "$schema": "../schemas/sources.schema.json",
   "sources": [
     {
+      "id": "yugipedia-ocg-series1-set-pages",
+      "kind": "wiki",
+      "title": "Yugipedia OCG Series 1 (1999) set, product, and card pages",
+      "url": "https://yugipedia.com/api.php?action=parse",
+      "publisher": "Yugipedia",
+      "revision": "wikitext fetched via the MediaWiki parse API, 2026-08-28",
+      "retrieved": "2026-08-28",
+      "used_for": "Release dates, printed rosters, and rarities for every certified pre-1999-08-25 Japanese OCG product (Vol.1-4, Booster 1-3, Starter Box + Theatrical Release + pre-order promo, Limited Edition Yugi/Kaiba/Joey packs, Official Guide Starter Book promo, Duel Monsters II: Dark Duel Stories video-game/Game-Guide promos, The Valuable Book 1 promos, Duel Monsters National Tournament attendance card), plus individual CardTable2 lookups used to disambiguate artwork-variant and non-playable-card identities.",
+      "reliability_notes": "Community wiki; per-page jp_release_date fields are themselves sourced by Yugipedia to Konami's official Japanese card database (see konami-card-database-ja) via each page's ja_database_id. Cross-checked internally in this certification: infobox release dates, per-product card counts, and card-list roster sizes agreed in every case (no discrepancy found)."
+    },
+    {
+      "id": "yugipedia-series1-sets-navbox",
+      "kind": "wiki",
+      "title": "Yugipedia \"Series 1 sets\" navigation template",
+      "url": "https://yugipedia.com/wiki/Template:Series_1_sets",
+      "publisher": "Yugipedia",
+      "retrieved": "2026-08-28",
+      "used_for": "Authoritative chronological enumeration of every Japanese OCG (and adjacent non-OCG/Bandai) product and distribution from February 1999 through March 2000, used to verify the pre-1999-08-25 product ledger is complete and to explicitly identify the Non-OCG (1997-1999) boundary that excludes the December 1998 Duel Monsters (video game 1) collector's cards from this OCG ledger.",
+      "reliability_notes": "Community-maintained navigation template; used only for completeness/discovery, not as the sole source for any individual date (every product it lists was independently verified via its own Yugipedia infobox and, where available, its Konami database id)."
+    },
+    {
+      "id": "konami-card-database-ja",
+      "kind": "official",
+      "title": "Konami Japanese official card database / product catalogue",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_list.action?request_locale=ja",
+      "publisher": "Konami",
+      "retrieved": "2026-08-28",
+      "used_for": "Primary origin of every certified product's jp_release_date and ja_database_id, as documented and aggregated by Yugipedia (see yugipedia-ocg-series1-set-pages). Directly spot-verified for Vol.1, Starter Box, Booster 3, Vol.4, and Booster 4 in the prior research gate (docs/research/yugi-kaiba-format-source-packet.json sources konami-card-history/konami-starter-box/konami-booster-3/konami-vol-4/konami-booster-4).",
+      "reliability_notes": "Official Konami database; this certification relies on it primarily through Yugipedia's aggregation rather than re-fetching every individual product page directly, which is disclosed rather than presented as independent primary verification."
+    },
+    {
       "id": "ignis-lflists",
       "kind": "repository",
       "title": "Project Ignis LFLists (official EDOPro banlist repository)",

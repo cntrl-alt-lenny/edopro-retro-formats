@@ -1,0 +1,227 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "vol-3",
+  "code": "VOL3",
+  "name": "Vol.3",
+  "kind": "booster",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-05-27",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 44519536,
+      "name": "Left Leg of the Forbidden One"
+    },
+    {
+      "passcode": 32452818,
+      "name": "Beaver Warrior"
+    },
+    {
+      "passcode": 66889139,
+      "name": "Gaia the Dragon Champion"
+    },
+    {
+      "passcode": 91939608,
+      "name": "Rogue Doll"
+    },
+    {
+      "passcode": 13039848,
+      "name": "Giant Soldier of Stone"
+    },
+    {
+      "passcode": 74677422,
+      "name": "Red-Eyes Black Dragon"
+    },
+    {
+      "passcode": 33066139,
+      "name": "Reaper of the Cards"
+    },
+    {
+      "passcode": 6840573,
+      "name": "Barox"
+    },
+    {
+      "passcode": 40200834,
+      "name": "Sleeping Lion"
+    },
+    {
+      "passcode": 48365709,
+      "name": "Ansatsu"
+    },
+    {
+      "passcode": 36304921,
+      "name": "Witty Phantom"
+    },
+    {
+      "passcode": 36904469,
+      "name": "Akihiron"
+    },
+    {
+      "passcode": 98818516,
+      "name": "Frenzied Panda"
+    },
+    {
+      "passcode": 98795934,
+      "name": "Mabarrel"
+    },
+    {
+      "passcode": 54844990,
+      "name": "Skull Stalker"
+    },
+    {
+      "passcode": 80516007,
+      "name": "Rare Fish"
+    },
+    {
+      "passcode": 71407486,
+      "name": "Fireyarou"
+    },
+    {
+      "passcode": 72299832,
+      "name": "Giant Mech-Soldier"
+    },
+    {
+      "passcode": 9293977,
+      "name": "Metal Dragon"
+    },
+    {
+      "passcode": 85326399,
+      "name": "Spike Seadra"
+    },
+    {
+      "passcode": 45042329,
+      "name": "Tripwire Beast"
+    },
+    {
+      "passcode": 10202894,
+      "name": "Skull Red Bird"
+    },
+    {
+      "passcode": 9076207,
+      "name": "Armed Ninja"
+    },
+    {
+      "passcode": 34536276,
+      "name": "Ganigumo"
+    },
+    {
+      "passcode": 95952802,
+      "name": "Flower Wolf"
+    },
+    {
+      "passcode": 54652250,
+      "name": "Man-Eater Bug"
+    },
+    {
+      "passcode": 73051941,
+      "name": "Sand Stone"
+    },
+    {
+      "passcode": 6367785,
+      "name": "Eldeen"
+    },
+    {
+      "passcode": 68928540,
+      "name": "Kamakiriman"
+    },
+    {
+      "passcode": 60694662,
+      "name": "Skelengel"
+    },
+    {
+      "passcode": 7089711,
+      "name": "Hane-Hane"
+    },
+    {
+      "passcode": 33178416,
+      "name": "Misairuzame"
+    },
+    {
+      "passcode": 93788854,
+      "name": "The Wandering Doomed"
+    },
+    {
+      "passcode": 29172562,
+      "name": "Steel Ogre Grotto #1"
+    },
+    {
+      "passcode": 55444629,
+      "name": "Lesser Dragon"
+    },
+    {
+      "passcode": 17238333,
+      "name": "Wretched Ghost of the Attic"
+    },
+    {
+      "passcode": 43500484,
+      "name": "Darkworld Thorns"
+    },
+    {
+      "passcode": 89904598,
+      "name": "Anthrosaurus"
+    },
+    {
+      "passcode": 16353197,
+      "name": "Drooling Lizard"
+    },
+    {
+      "passcode": 8058240,
+      "name": "Binding Chain"
+    },
+    {
+      "passcode": 17535588,
+      "name": "Armored Starfish"
+    },
+    {
+      "passcode": 55291359,
+      "name": "Succubus Knight"
+    },
+    {
+      "passcode": 1557499,
+      "name": "Silver Bow and Arrow"
+    },
+    {
+      "passcode": 1435851,
+      "name": "Dragon Treasure"
+    },
+    {
+      "passcode": 37820550,
+      "name": "Electro-Whip"
+    },
+    {
+      "passcode": 36607978,
+      "name": "Mystical Moon"
+    },
+    {
+      "passcode": 63102017,
+      "name": "Stop Defense"
+    },
+    {
+      "passcode": 98252586,
+      "name": "Follow Wind"
+    },
+    {
+      "passcode": 55144522,
+      "name": "Pot of Greed"
+    },
+    {
+      "passcode": 82542267,
+      "name": "Gravedigger Ghoul"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

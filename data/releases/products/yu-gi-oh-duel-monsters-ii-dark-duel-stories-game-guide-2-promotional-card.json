@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-2-promotional-card",
+  "code": "DM2GG2",
+  "name": "Yu-Gi-Oh! Duel Monsters II: Dark Duel Stories Game Guide 2 promotional card",
+  "kind": "promo-videogame",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-08-05",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 7902349,
+      "name": "Left Arm of the Forbidden One"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "Single-card promo (\"Left Arm of the Forbidden One\") bundled with the second DM2 strategy guide book. NOTE: the prior research gate's chronology listed a \"V-Jump Books DM2 promo\" dated 1999-07-13; no such product was located under that description during this certification, and this Game Guide 2 promo (August 5, sourced directly to Yugipedia's product infobox) is the actual next dated Duel Monsters II guide-book promo after Game Guide 1. The corrected date is still before the 1999-08-25 cutoff, so this does not change pool membership."
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "yu-gi-oh-duel-monsters-ii-dark-duel-stories-game-guide-1-promotional-card",
+  "code": "DM2GG1",
+  "name": "Yu-Gi-Oh! Duel Monsters II: Dark Duel Stories Game Guide 1 promotional card",
+  "kind": "promo-videogame",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-07-08",
+      "precision": "day",
+      "status": "reported",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 70903634,
+      "name": "Right Arm of the Forbidden One"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "Single-card promo (\"Right Arm of the Forbidden One\") bundled with the first DM2 strategy guide book."
+}

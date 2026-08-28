@@ -1,0 +1,228 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "starter-box",
+  "code": "STB",
+  "name": "Starter Box",
+  "kind": "starter",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-03-18",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 89631139,
+      "name": "Blue-Eyes White Dragon"
+    },
+    {
+      "passcode": 40575313,
+      "name": "Shadow Specter"
+    },
+    {
+      "passcode": 45231177,
+      "name": "Flame Swordsman"
+    },
+    {
+      "passcode": 32274490,
+      "name": "Skull Servant"
+    },
+    {
+      "passcode": 4931562,
+      "name": "Mountain Warrior"
+    },
+    {
+      "passcode": 89091579,
+      "name": "Basic Insect"
+    },
+    {
+      "passcode": 80600490,
+      "name": "Kageningen"
+    },
+    {
+      "passcode": 37421579,
+      "name": "Charubin the Fire Knight"
+    },
+    {
+      "passcode": 62793020,
+      "name": "Mystery Hand"
+    },
+    {
+      "passcode": 98075147,
+      "name": "Spiked Snail"
+    },
+    {
+      "passcode": 34460851,
+      "name": "Flame Manipulator"
+    },
+    {
+      "passcode": 61454890,
+      "name": "Necrolancer the Time-lord"
+    },
+    {
+      "passcode": 36121917,
+      "name": "Monster Egg"
+    },
+    {
+      "passcode": 17881964,
+      "name": "Darkfire Dragon"
+    },
+    {
+      "passcode": 89558090,
+      "name": "Dark Prisoner"
+    },
+    {
+      "passcode": 15820147,
+      "name": "Monsturtle"
+    },
+    {
+      "passcode": 77581312,
+      "name": "Masked Clown"
+    },
+    {
+      "passcode": 49370026,
+      "name": "Genin"
+    },
+    {
+      "passcode": 2863439,
+      "name": "Fiend Reflection #2"
+    },
+    {
+      "passcode": 1641882,
+      "name": "Fusionist"
+    },
+    {
+      "passcode": 1929294,
+      "name": "Key Mace"
+    },
+    {
+      "passcode": 96851799,
+      "name": "Hinotama Soul"
+    },
+    {
+      "passcode": 58528964,
+      "name": "Flame Ghost"
+    },
+    {
+      "passcode": 57305373,
+      "name": "Two-Mouth Darkruler"
+    },
+    {
+      "passcode": 43905751,
+      "name": "Madjinn Gunn"
+    },
+    {
+      "passcode": 40826495,
+      "name": "Dissolverock"
+    },
+    {
+      "passcode": 39004808,
+      "name": "Root Water"
+    },
+    {
+      "passcode": 62210247,
+      "name": "Lunar Queen Elzaim"
+    },
+    {
+      "passcode": 62193699,
+      "name": "Rock Ogre Grotto #2"
+    },
+    {
+      "passcode": 86421986,
+      "name": "Ancient Tree of Enlightenment"
+    },
+    {
+      "passcode": 22910685,
+      "name": "Green Phantom King"
+    },
+    {
+      "passcode": 85309439,
+      "name": "Ray & Temperature"
+    },
+    {
+      "passcode": 84686841,
+      "name": "King Fog"
+    },
+    {
+      "passcode": 83464209,
+      "name": "Mystical Sheep #2"
+    },
+    {
+      "passcode": 82742611,
+      "name": "Serpent Marauder"
+    },
+    {
+      "passcode": 18914778,
+      "name": "Change Slime"
+    },
+    {
+      "passcode": 44287299,
+      "name": "Masaki the Legendary Swordsman"
+    },
+    {
+      "passcode": 87430998,
+      "name": "Forest"
+    },
+    {
+      "passcode": 23424603,
+      "name": "Wasteland"
+    },
+    {
+      "passcode": 50913601,
+      "name": "Mountain"
+    },
+    {
+      "passcode": 86318356,
+      "name": "Sogen"
+    },
+    {
+      "passcode": 22702055,
+      "name": "Umi"
+    },
+    {
+      "passcode": 59197169,
+      "name": "Yami"
+    },
+    {
+      "passcode": 12580477,
+      "name": "Raigeki"
+    },
+    {
+      "passcode": 58074572,
+      "name": "Mooyan Curry"
+    },
+    {
+      "passcode": 46130346,
+      "name": "Hinotama"
+    },
+    {
+      "passcode": 24094653,
+      "name": "Polymerization"
+    },
+    {
+      "passcode": 51482758,
+      "name": "Remove Trap"
+    },
+    {
+      "passcode": 50045299,
+      "name": "Dragon Capture Jar"
+    },
+    {
+      "passcode": 83887306,
+      "name": "Two-Pronged Attack"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ],
+  "notes": "General nationwide release of the Starter Box, mostly reprints from Vol.1/Vol.2 plus 5 new cards. First general release of \"Blue-Eyes White Dragon\" and \"Raigeki\"."
+}

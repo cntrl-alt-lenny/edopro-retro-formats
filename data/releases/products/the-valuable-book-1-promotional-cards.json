@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../schemas/product-release.schema.json",
+  "id": "the-valuable-book-1-promotional-cards",
+  "code": "VB1",
+  "name": "The Valuable Book 1 promotional cards",
+  "kind": "promo-other",
+  "curated": true,
+  "release_events": [
+    {
+      "territory": "ocg-jp",
+      "date": "1999-08-20",
+      "precision": "day",
+      "status": "verified",
+      "kind": "retail",
+      "sources": [
+        "yugipedia-ocg-series1-set-pages",
+        "konami-card-database-ja"
+      ]
+    }
+  ],
+  "printings": [
+    {
+      "passcode": 99721536,
+      "name": "Dokurorider"
+    },
+    {
+      "passcode": 31066283,
+      "name": "Revival of Dokurorider"
+    }
+  ],
+  "sources": [
+    "yugipedia-ocg-series1-set-pages",
+    "konami-card-database-ja"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+ "purpose": "Compact cross-check packet comparing the freshly-derived ocg-jp 1999-08-25 release-cutoff pool against the independent YGOPRODeck \"1999 Tokyo Dome Card Pool\" community cube (docs/research/ocg1999-tokyo-dome-community-candidates.json); not canonical pool data.",
+ "source": {
+  "url": "https://ygoprodeck.com/cube/view-cube/18262",
+  "title": "1999 Tokyo Dome Card Pool (370 cards) - YGOPRODeck",
+  "retrieved": "2026-08-28",
+  "sha256": "c45cea560845d9f0ba32b378003e3ce7a4b805a3256888602de6e57cfdd9f12e",
+  "bytes": 1066215,
+  "extraction_method": "HTML scrape: every <a href=\"/card/?search=PASSCODE\" data-name=\"PASSCODE\">Name</a> anchor on the rendered cube page."
+ },
+ "certified_pool_count": 370,
+ "certified_pool_digest_sha256": "f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb",
+ "common_count": 370,
+ "ledger_only": [],
+ "community_only": [],
+ "adjudication_summary": "Zero differences after canonicalization: the ledger-derived 370-card pool and the community cube's 370 candidate identities are exactly the same set of canonical passcodes. Four community entries print BabelCDB artwork-variant passcodes (distance <10 from their base, category: alias/artwork canonicalization) where this ledger's own printings record the base passcode directly: Final Flame (cube 73134082, base 73134081), Ultimate Offering (cube 80604092, base 80604091), Harpie's Feather Duster (cube 18144507, base 18144506), Monster Reborn (cube 83764719, base 83764718). Each collapses to the same canonical identity as the ledger's own printing of that card and is not counted as a real difference.",
+ "raw_passcode_differences": {
+  "purpose": "The 4 cases above, before canonicalization, for exact reproducibility.",
+  "cube_passcode_to_ledger_base": {
+   "73134082": 73134081,
+   "80604092": 80604091,
+   "18144507": 18144506,
+   "83764719": 83764718
+  },
+  "category": "alias/artwork canonicalization"
+ }
+}
