@@ -1,0 +1,28 @@
+{
+  "description": "Research-only progress that cannot be derived from canonical formats. Canonical entries are read directly from formats/*/format.json.",
+  "statuses": [
+    "missing",
+    "stub",
+    "research",
+    "partial",
+    "complete",
+    "verified"
+  ],
+  "formats": {
+    "135": {
+      "name": "Tokyo Dome",
+      "kind": "research",
+      "areas": {
+        "banlist": "research",
+        "card_pool": "research",
+        "rule_profile": "research",
+        "errata": "research"
+      },
+      "note": "Active source gate only; no canonical format, banlist, pool, rule profile, or generated output exists.",
+      "sources": [
+        "docs/research/yugi-kaiba-format-source-gate.md",
+        "docs/research/yugi-kaiba-format-source-packet.json"
+      ]
+    }
+  }
+}
