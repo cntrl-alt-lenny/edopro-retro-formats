@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import re
 import unittest
 from datetime import date
 from pathlib import Path
@@ -47,6 +48,54 @@ LEGACY_BANNED_PHRASES = (
 # "explicitly archival/audit field" the task calls out (prior_claim,
 # supersedes, correction-history fields).
 EXEMPT_PATH_MARKERS = ("supersedes", "prior_claim", "correction", "adversarial_audit")
+
+# Semantic (value-content) May-5-proof-contamination check: a SENTENCE is a
+# violation if it mentions the exact Expert Rules date AND a proof/certainty
+# word, UNLESS that SAME SENTENCE also carries a negation/hedge cue ("not",
+# "NOT", "do not read ... as", etc.) - i.e. it reads as a positive assertion
+# rather than a correction/rejection. This catches contamination inside
+# ORDINARY PROSE VALUES, not just fields whose PATH happens to be named
+# "confirmed"/"proven" - the exact blind spot that let the Tribute-Summon
+# bug survive the previous pass's test_B.
+#
+# Checking is SENTENCE-scoped, not whole-string: a long field can
+# legitimately contain several sentences, only one of which discusses the
+# May-5 date, while an UNRELATED sentence elsewhere in the same field
+# happens to contain the word "not" (e.g. "not an under-sourced guess").  A
+# whole-string "does 'not' appear anywhere" check would let that unrelated
+# "not" mask a genuinely unhedged claim in a different sentence - verified
+# during this task's own adversarial self-check, where a whole-string
+# version of this function failed to catch Mutation A.
+#
+# The exemption is intentionally NARROW: only `prior_claim` (the literal
+# "here is what was wrongly claimed" quote field) is exempt. Unlike the
+# legacy-phrase check (test_A), `correction` fields are NOT blanket-exempt
+# here - a correction's own prose is ACTIVE, CURRENT text and must not
+# itself read as an unhedged positive assertion; it needs to pass the same
+# sentence-level check as any other field. `supersedes` as a whole is not a
+# safe blanket marker either, since it contains both prior_claim (safe to
+# exempt) and correction (must be checked normally).
+MAY_5_DATE_PATTERN = re.compile(r"1999-05-05|may\s+5,?\s*1999", re.I)
+PROOF_WORD_PATTERN = re.compile(r"\bproven\b|\bconfirmed\b|\bdefinitely\b", re.I)
+NEGATION_TOKEN_PATTERN = re.compile(r"\bnot\b", re.I)
+SENTENCE_SPLIT_PATTERN = re.compile(r"(?<=[.!?])\s+")
+MAY_5_CHECK_EXEMPT_PATH_MARKERS = ("prior_claim",)
+
+
+def _is_may_5_proof_violation(path, value):
+    """True if `value` positively asserts May 5 as a proven/confirmed date
+    in some sentence, outside the literal prior_claim quote field."""
+    path_str = "/".join(path).lower()
+    if any(marker in path_str for marker in MAY_5_CHECK_EXEMPT_PATH_MARKERS):
+        return False
+    for sentence in SENTENCE_SPLIT_PATTERN.split(value):
+        if (
+            MAY_5_DATE_PATTERN.search(sentence)
+            and PROOF_WORD_PATTERN.search(sentence)
+            and not NEGATION_TOKEN_PATTERN.search(sentence)
+        ):
+            return True
+    return False
 
 
 def _walk_strings(value, path=()):
@@ -488,12 +537,24 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # Regression 8: exact May 5 boundary is STRONG_SECONDARY_RECONSTRUCTION,
         # not PROVEN, unless the packet contains newly obtained primary/period
         # evidence supporting PROVEN - it does not, so it must not be PROVEN.
+        # Checked at both the structured status field AND the prose fields
+        # (later_1999_state, later_1999_effective_bounds) that sit right next
+        # to it - a status field alone doesn't stop a reader who only reads
+        # the prose from meeting an unhedged "introduced ... 1999-05-05"
+        # sentence, so the prose itself must not read as a hard boundary.
         current = self.packet["tokyo_dome_research_current"]
         matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
         for area in ("tribute_summon", "fusion", "spell_trap_response"):
             row = matrix[area]
             self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", row["later_1999_evidence_status"])
             self.assertNotEqual("PROVEN", row["later_1999_evidence_status"])
+            for field in ("later_1999_state", "later_1999_effective_bounds"):
+                value = row[field]
+                if "1999-05-05" in value:
+                    self.assertFalse(
+                        _is_may_5_proof_violation(("evidence_matrix", area, field), value),
+                        f"{area}.{field} reads as an unhedged May-5 boundary: {value!r}",
+                    )
         self.assertIn("STRONG_SECONDARY_RECONSTRUCTION", current["change_boundary_before_tokyo_dome"]["answer"])
 
     def test_no_row_claims_tokyo_dome_proven_without_its_own_source(self):
@@ -717,6 +778,68 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             if semantically_confirmed and "1999-05-05" in s:
                 violations.append(path)
         self.assertEqual([], violations, f"1999-05-05 found inside a confirmed/proven-semantics field: {violations}")
+
+    def test_B2_no_semantic_may_5_proof_contamination_in_active_prose(self):
+        # 6B strengthened: the previous test only caught contamination when
+        # the FIELD PATH happened to be named confirmed/proven/definitely.
+        # That missed ordinary prose fields (e.g.
+        # supersedes.corrected_claims[*].correction) whose VALUE positively
+        # asserted "introduced by the May 5, 1999 ... revision - PROVEN for
+        # the later-1999 tier" while the path itself said nothing special.
+        # This recursively inspects every active scalar string's CONTENT,
+        # not just its path, distinguishing a positive assertion from a
+        # correction/negation via a "not"/negation-token check - not a
+        # naive global ban on the words "PROVEN" and "1999-05-05" appearing
+        # together (see _is_may_5_proof_violation and its docstring).
+        current = self.packet["tokyo_dome_research_current"]
+        violations = [
+            (path, s) for path, s in _walk_strings(current, ())
+            if _is_may_5_proof_violation(path, s)
+        ]
+        self.assertEqual(
+            [], violations,
+            f"active prose positively asserts May 5 as proven/confirmed: {violations}",
+        )
+
+        # Archival/audit paths remain explicitly exempt by design - prove
+        # that exemption is real (not merely "no such content exists") by
+        # confirming at least one archival path DOES contain the rejected
+        # language, and the exemption is what keeps it out of the violation
+        # list above, not mere absence.
+        corrected_claims = current["supersedes"]["corrected_claims"]
+        prior_claim_text = " ".join(c["prior_claim"] for c in corrected_claims)
+        self.assertIn("PROVEN", prior_claim_text)
+
+    def test_tribute_summon_corrected_claim_matches_evidence_matrix(self):
+        # 6/item 5: direct, structural regression for the specific surviving
+        # bug - the Tribute Summon corrected-claim entry must not say the
+        # May 5 transition is PROVEN, must identify the exact date as
+        # secondary/reconstructed/unproven, and must remain consistent with
+        # the evidence_matrix's own tribute_summon row.
+        current = self.packet["tokyo_dome_research_current"]
+        corrected_claims = current["supersedes"]["corrected_claims"]
+        tribute_claim = next(
+            c for c in corrected_claims
+            if "Tribute" in c["prior_claim"] and "Tribute/Advance Summon" in c["prior_claim"]
+        )
+        correction = tribute_claim["correction"]
+
+        # Must not contain the exact bad phrase that survived the previous pass.
+        self.assertNotIn(
+            "PROVEN for the later-1999 tier, dated with reasonable confidence",
+            correction,
+        )
+        # Must explicitly identify the exact date as not proven / reconstructed.
+        self.assertIn("STRONG_SECONDARY_RECONSTRUCTION", correction)
+        self.assertIn("not PROVEN", correction)
+        self.assertFalse(_is_may_5_proof_violation(("supersedes", "corrected_claims", "4", "correction"), correction))
+
+        # Must remain consistent with the evidence_matrix's own status for
+        # this rule area - the correction is not allowed to drift from the
+        # matrix it is meant to describe.
+        tribute_row = next(r for r in current["evidence_matrix"] if r["rule_area"] == "tribute_summon")
+        self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", tribute_row["later_1999_evidence_status"])
+        self.assertEqual("UNKNOWN", tribute_row["starter_box_evidence_status"])
 
     def test_C_exactly_one_unqualified_architecture_verdict(self):
         # 6C: exactly one current unqualified format-level verdict,

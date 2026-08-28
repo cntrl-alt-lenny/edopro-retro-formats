@@ -2265,7 +2265,7 @@
         },
         {
           "prior_claim": "rule_chronology.areas included 'Hand size limit / discard at end of turn' and 'Tribute/Advance Summon requirements' both marked PROVEN 'from the original rulebook (first printing)'.",
-          "correction": "WRONG for the Starter Box tier. The original Starter Box rulebook contains NO hand-size limit or end-of-turn discard rule of any kind, and NO tribute/sacrifice cost for summoning any monster regardless of Level - every monster used the same free one-per-turn placement procedure. Both are correctly downgraded to UNKNOWN at the Starter Box tier (an absence-based finding, not an under-sourced guess). Separately, and NEWLY established in this corrective pass: Tribute Summon (生け贄召喚, Level 5-6 = 1 Tribute, Level 7+ = 2 Tributes) was introduced by the May 5, 1999 Expert Rules revision - PROVEN for the later-1999 tier, dated with reasonable confidence, and therefore 'after_change'/in force as a general OCG rule well before August 26, 1999. The hand-size limit was NOT introduced until the later 'New Expert Rules' (Series 2, from 2000 onward) - i.e. it almost certainly POSTDATES Tokyo Dome entirely, a materially different and stronger conclusion than 'merely unproven'."
+          "correction": "WRONG for the Starter Box tier. The original Starter Box rulebook contains NO hand-size limit or end-of-turn discard rule of any kind, and NO tribute/sacrifice cost for summoning any monster regardless of Level - every monster used the same free one-per-turn placement procedure. Both are correctly downgraded to UNKNOWN at the Starter Box tier (an absence-based finding, not an under-sourced guess). Separately, and NEWLY established in this corrective pass: there is meaningful secondary evidence that Tribute Summon (生け贄召喚, Level 5-6 = 1 Tribute, Level 7+ = 2 Tributes) and the other Expert Rules-era changes were in force generally before Tokyo Dome - but the exact 1999-05-05 transition date remains a STRONG_SECONDARY_RECONSTRUCTION, not PROVEN, for the later-1999 tier (matching the evidence_matrix's own later_1999_evidence_status for this row). The publication date of the 'Official Guide Starter Book' on 1999-05-05 is well supported (four independent sources), but the claim that this specific book is what introduced Expert Rules/Tribute Summon, and that 1999-05-05 is therefore the rule's exact effective date, remains unverified - no source in this research chain has actually inspected/quoted the book's own content confirming it. Do not read 'after_change as of 1999-08-26' (recorded in the evidence matrix's later_1999_effective_bounds field for this row) as a proven effective date - it is the best current hypothesis for the transition window, not a confirmed boundary. The hand-size limit was NOT introduced until the later 'New Expert Rules' (Series 2, from 2000 onward) - i.e. it almost certainly POSTDATES Tokyo Dome entirely, a materially different and stronger conclusion than 'merely unproven'."
         }
       ],
       "unchanged_from_prior_section": [
@@ -2442,9 +2442,9 @@
           "ygorganization-1999-rulebook-translation",
           "ygoprodeck-master-rules-history"
         ],
-        "later_1999_state": "Tribute Summon introduced: Level 5-6 monsters require 1 Tribute, Level 7+ require 2 Tributes (the modern threshold). Dated to the May 5, 1999 Expert Rules / Official Guide Starter Book.",
+        "later_1999_state": "Tribute Summon introduced: Level 5-6 monsters require 1 Tribute, Level 7+ require 2 Tributes (the modern threshold). Secondary reconstruction places this transition around/from the May 5, 1999 Expert Rules revision / Official Guide Starter Book publication date - the exact effective date is NOT proven, see later_1999_evidence_status.",
         "later_1999_evidence_status": "STRONG_SECONDARY_RECONSTRUCTION",
-        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_effective_bounds": "secondary reconstruction places transition around/from 1999-05-05 (after_change as of 1999-08-26); exact effective date unproven",
         "later_1999_source_ids": [
           "yugipedia-official-card-game-page",
           "yugioh-history-generation-one-4",
@@ -2466,9 +2466,9 @@
         "starter_box_source_ids": [
           "ygorganization-1999-rulebook-translation"
         ],
-        "later_1999_state": "Fusion Material Monsters could additionally be used directly from hand, from 1999-05-05.",
+        "later_1999_state": "Fusion Material Monsters could additionally be used directly from hand. Secondary reconstruction places this transition around/from 1999-05-05 - the exact effective date is NOT proven, see later_1999_evidence_status.",
         "later_1999_evidence_status": "STRONG_SECONDARY_RECONSTRUCTION",
-        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_effective_bounds": "secondary reconstruction places transition around/from 1999-05-05 (after_change as of 1999-08-26); exact effective date unproven",
         "later_1999_source_ids": [
           "yugipedia-official-card-game-page",
           "ygoprodeck-master-rules-history"
@@ -2579,9 +2579,9 @@
         "starter_box_source_ids": [
           "ygorganization-1999-rulebook-translation"
         ],
-        "later_1999_state": "From 1999-05-05: the prior 1-Spell+1-Trap-activation-per-turn cap was removed entirely (still bounded by the 5-zone field cap), and Quick-Effect Monster abilities became activatable from hand as well as field.",
+        "later_1999_state": "The prior 1-Spell+1-Trap-activation-per-turn cap was removed entirely (still bounded by the 5-zone field cap), and Quick-Effect Monster abilities became activatable from hand as well as field. Secondary reconstruction places this transition around/from 1999-05-05 - the exact effective date is NOT proven, see later_1999_evidence_status.",
         "later_1999_evidence_status": "STRONG_SECONDARY_RECONSTRUCTION",
-        "later_1999_effective_bounds": "1999-05-05 onward (after_change as of 1999-08-26)",
+        "later_1999_effective_bounds": "secondary reconstruction places transition around/from 1999-05-05 (after_change as of 1999-08-26); exact effective date unproven",
         "later_1999_source_ids": [
           "yugipedia-official-card-game-page"
         ],
@@ -2767,7 +2767,7 @@
         "url": "https://yugioh-history.com/environment/generation-one-4",
         "kind": "Japanese specialist retrospective (rare among retrospectives in naming specific dated rule eras)",
         "evidence_tier": "5",
-        "used_for": "Dating the Expert Rules/Tribute Summon introduction to May 5, 1999",
+        "used_for": "Secondary-reconstruction dating of the Expert Rules/Tribute Summon introduction to (around/from) May 5, 1999 - the exact effective date is NOT proven, see evidence_matrix later_1999_evidence_status",
         "confidence": "medium - the article's own author explicitly disclaims certainty about this date's ultimate source; survives mainly via independent Yugipedia corroboration"
       },
       {
@@ -2775,7 +2775,7 @@
         "url": "https://yugioh-history.com/environment/generation-one-20",
         "kind": "Japanese specialist retrospective, 1999 year-in-review",
         "evidence_tier": "5",
-        "used_for": "Confirms Premium Pack 1 venue sales were cancelled due to congestion at Tokyo Dome; independently corroborates the May 5, 1999 Tribute Summon date",
+        "used_for": "Confirms Premium Pack 1 venue sales were cancelled due to congestion at Tokyo Dome; independently corroborates the May 5, 1999 date as a secondary-reconstruction hypothesis for the Tribute Summon transition, not a proven effective date",
         "confidence": "medium"
       },
       {
@@ -2799,7 +2799,7 @@
         "url": "https://yugipedia.com/wiki/Yu-Gi-Oh!_Official_Card_Game (via MediaWiki API, since direct fetch returned HTTP 403)",
         "kind": "wiki article",
         "evidence_tier": "5-6",
-        "used_for": "Later-1999 rule-change chronology (tribute summon, spell/trap cap removal, fusion-from-hand, all dated 1999-05-05)",
+        "used_for": "Later-1999 rule-change chronology (tribute summon, spell/trap cap removal, fusion-from-hand - secondary reconstruction places all three around/from 1999-05-05, exact effective date unproven)",
         "confidence": "medium"
       },
       {

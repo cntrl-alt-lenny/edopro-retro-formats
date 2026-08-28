@@ -808,12 +808,14 @@ tribute/sacrifice cost for any monster Level, with printed Level-7/8
 monsters (e.g. Blue-Eyes White Dragon) already usable for free in the same
 March 1999 product. Both are correctly downgraded to **UNKNOWN** at the
 Starter Box tier (an absence-based finding, not an under-sourced guess).
-Separately and newly established: Tribute Summon (Level 5-6 = 1 Tribute,
-Level 7+ = 2 Tributes, the modern threshold) was introduced by the Expert
-Rules revision dated with reasonable confidence to **May 5, 1999** - PROVEN
-for the later-1999 tier, in force well before Tokyo Dome as a general OCG
-rule (though not confirmed as enforced at the Tokyo Dome tables
-specifically). The hand-size limit, by contrast, was not introduced until
+Separately and newly established: there is meaningful secondary evidence
+that Tribute Summon (Level 5-6 = 1 Tribute, Level 7+ = 2 Tributes, the
+modern threshold) was in force generally before Tokyo Dome - but the exact
+Expert Rules transition date of **May 5, 1999** remains a **STRONG_
+SECONDARY_RECONSTRUCTION, not PROVEN**, for the later-1999 tier (corrected
+in a later pass - see "Final hardened research state" below; the earlier
+framing on this line, at the time this section was written, overstated it).
+The hand-size limit, by contrast, was not introduced until
 the later "New Expert Rules" (Series 2, from 2000 onward) - it almost
 certainly **postdates Tokyo Dome entirely**, a stronger and more useful
 finding than "merely unproven."
