@@ -3,6 +3,7 @@
   "status": "research-gate-only",
   "canonicalization": "blocked",
   "verdict": "representable-with-format-local-approximations",
+  "verdict_scope_note": "This narrow field describes schema/engine data-shape representability only (matches schema_host_architecture_assessment.verdict) - it is NOT a canonicalization-readiness verdict and must not be read as contradicting the current, authoritative canonicalization-readiness answer, which is BLOCKED_BY_BOTH at tokyo_dome_research_current.architecture_verdict. `canonicalization` (the sibling field) is the correct field to read for current blocking status.",
   "target_recommendation": {
     "requested_label": "1999-05-yugi-kaiba",
     "requested_label_verdict": "rejected",
@@ -227,7 +228,8 @@
     }
   ],
   "rule_boundary": {
-    "verdict": "likely-expert-rules-but-not-proven-for-this-event",
+    "_scope": "This top-level field is a CURRENT DERIVED PROJECTION of the authoritative rules/date timeline - it is not an independent source of truth. Its content must mechanically agree with tokyo_dome_research_current (see authoritative_rule_matrix and primary_source_resolution_2026_08_29 there); if the two ever disagree, tokyo_dome_research_current governs. The pre-2026-08-29 version of this field is archived verbatim at superseded_findings.stale_top_level_rule_boundary_pre_2026_08_29_resolution.",
+    "verdict": "UNKNOWN - Tokyo-Dome-specific Expert Rules adoption is not proven for this event; see tokyo_dome_research_current.primary_source_resolution_2026_08_29.tokyo_dome_event_ruleset_adjudication",
     "canonicalization_effect": "blocking",
     "timeline": [
       {
@@ -239,14 +241,14 @@
       {
         "interval": "1999-05-05",
         "ruleset": "Expert Rules introduced in parallel with Official Rules",
-        "evidence": "strong-secondary-reconstruction",
-        "status": "resolved-as-secondary-date; primary-publication-source-unlocated"
+        "evidence": "PROVEN that the guide was published this date and that it directly documents Expert Rules (personally inspected 2026-08-29, archive.org scan pages 101-109); the NORMATIVE effective-date-for-competitive-play sub-claim is SUPPORTED_BUT_INCOMPLETE, not PROVEN - these are two distinct sub-claims, only the second of which remains a reconstruction.",
+        "status": "primary-source-located-and-personally-inspected; see tokyo_dome_research_current.primary_source_resolution_2026_08_29.expert_rules_primary_material"
       },
       {
         "interval": "1999-08-26",
         "ruleset": "Tokyo Dome OCG national tournament",
         "evidence": "period-event-identity-but-no-event-rulesheet",
-        "status": "unresolved-between-Expert-Rules-and-event-specific-hybrid"
+        "status": "UNKNOWN - see tokyo_dome_research_current.primary_source_resolution_2026_08_29.tokyo_dome_event_ruleset_adjudication (no event-specific rulesheet located)"
       },
       {
         "interval": "2000-04-01..2000-04-20",
@@ -255,8 +257,9 @@
         "status": "bounded-but-not-exact"
       }
     ],
-    "expert_rules_evidence": "A strong later reconstruction dates Expert Rules to May 5, 1999 and says recognized tournaments used them, but it also explicitly says the first publication source has not been located. The Tokyo Dome event page identifies the event and distributed cards but does not identify its rulebook or event regulations. Therefore Expert Rules are the best working hypothesis, not a proven event fact.",
+    "expert_rules_evidence": "The primary source (Yu-Gi-Oh! Official Card Duel Monsters Official Guide Starter Book, Shueisha/Studio Hard, published 1999-05-05) WAS located on archive.org and personally inspected (pages 101-109) on 2026-08-29 - it directly documents Expert Rules as a real Konami-published ruleset (Chapter 3 / エキスパートルール, pp.107-109), not merely a claim resting on later secondary reconstruction. What remains unresolved: the guide's own wording does not say Expert Rules became the NORMATIVE effective ruleset for tournaments on its publication date (SUPPORTED_BUT_INCOMPLETE, not PROVEN), and no Tokyo Dome event-specific rulesheet, programme, or organizer announcement has been located, so whether Tokyo Dome itself used Expert Rules remains UNKNOWN. See tokyo_dome_research_current.primary_source_resolution_2026_08_29 for the full evidence chain.",
     "source_ids": [
+      "official-guide-starter-book-1999-scan",
       "expert-rules-secondary",
       "konami-tokyo-dome-promos",
       "original-1999-rulebook",
@@ -264,6 +267,7 @@
     ]
   },
   "rules": {
+    "_scope": "This field documents STARTER-BOX-RULEBOOK-transcription facts and ENGINE-FLAG-mapping candidates for the original 1999 rulebook - it is about what that rulebook says and which DUEL_* flags approximate it, not about Tokyo-Dome-event-specific rule adoption (see tokyo_dome_research_current for that, and its architecture_verdict_detail for the current authoritative unconditional-engine-blocker list). Where a known_gaps entry's applicability to Tokyo Dome specifically is itself historically UNKNOWN rather than a confirmed engine blocker, that distinction is recorded explicitly in candidate_core_flags.known_gaps_detail - do not read the flat known_gaps list alone as three equally-confirmed Tokyo Dome blockers.",
     "source_ids": [
       "original-1999-rulebook",
       "expert-rules-secondary",
@@ -356,7 +360,22 @@
         "higher-LP-wins-deck-out",
         "early-battle-calculation",
         "pre-formal-chain-and-priority-boundary"
-      ]
+      ],
+      "known_gaps_detail": {
+        "higher-LP-wins-deck-out": {
+          "confirmed_unconditional_tokyo_dome_blocker": true,
+          "authoritative_path": "tokyo_dome_research_current.architecture_verdict_detail.engine_representation_blockers.items (deck_out)"
+        },
+        "early-battle-calculation": {
+          "confirmed_unconditional_tokyo_dome_blocker": true,
+          "authoritative_path": "tokyo_dome_research_current.architecture_verdict_detail.engine_representation_blockers.items (battle_damage_procedure)"
+        },
+        "pre-formal-chain-and-priority-boundary": {
+          "confirmed_unconditional_tokyo_dome_blocker": false,
+          "note": "Abstract engine-capability gap only (no DUEL_* flag encodes chain/priority absence). Its Tokyo-Dome-specific historical applicability is UNKNOWN, not proven, and it is explicitly NOT counted as an independent unconditional engine blocker. The narrower, PROVEN paradigm that IS a confirmed blocker is the no-chain/Traps-only-in-Battle-Phase behaviour (engine_representation_blockers item 'spell_trap_response'), which is a different and narrower claim than the full modern Chain/Spell-Speed/Priority system referenced by this known_gaps entry.",
+          "authoritative_path": "tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority).tokyo_dome.status == UNKNOWN"
+        }
+      }
     },
     "core_flag_audit": [
       {
@@ -494,7 +513,9 @@
           "original-1999-rulebook",
           "deck-out-history",
           "pinned-ocgcore-research"
-        ]
+        ],
+        "tokyo_dome_specific_applicability_status": "UNKNOWN",
+        "tokyo_dome_specific_applicability_note": "This engine-gap classification describes an abstract engine-capability limit, not a confirmed Tokyo Dome blocker on its own; see tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority)."
       }
     ]
   },
@@ -1335,7 +1356,7 @@
     },
     "chain_spell_speed_semantics": {
       "status": "BLOCKING",
-      "reason": "The available first rulebook lacks formal Chain/Spell Speed/priority rules and no general core flag supplies the historical boundary."
+      "reason": "BLOCKING via the narrower, PROVEN no-chain/Traps-only-in-Battle-Phase paradigm (tokyo_dome_research_current.architecture_verdict_detail.engine_representation_blockers item 'spell_trap_response'), which no general core flag reproduces. The BROADER modern Chain/Spell-Speed/Priority system's Tokyo-Dome-specific applicability is UNKNOWN, not proven absent from rulebook silence - it is explicitly NOT independently counted as an additional unconditional engine blocker. See tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority) for the authoritative historical-status row."
     },
     "errata_chronology": {
       "status": "RESOLVED",
@@ -2640,6 +2661,46 @@
           "remaining_uncertainty": "Because the recoil quirk is explicit and load-bearing, the composite verdict is NOT_REPRESENTABLE even though most of the procedure is individually EXACT."
         }
       ]
+    },
+    "stale_top_level_rule_boundary_pre_2026_08_29_resolution": {
+      "_why_superseded": "Verbatim copy of the top-level `rule_boundary` field as it stood through commit 7cda3a1 (2026-08-29 primary-source-resolution pass) and every commit before it. It predates this session's authority/projection consistency audit and was never updated after the archive.org Official Guide Starter Book scan was personally located and inspected (pages 101-109, 2026-08-29). Its timeline[1].status ('...primary-publication-source-unlocated') and its expert_rules_evidence prose ('the first publication source has not been located') are now FACTUALLY FALSE - the source was located and is documented in full at tokyo_dome_research_current.primary_source_resolution_2026_08_29.expert_rules_primary_material. Retained here only as an honest record of the packet's own prior state, not as a current claim.",
+      "verbatim_prior_top_level_rule_boundary": {
+        "verdict": "likely-expert-rules-but-not-proven-for-this-event",
+        "canonicalization_effect": "blocking",
+        "timeline": [
+          {
+            "interval": "1999-02-04",
+            "ruleset": "original Starter Box Official Rules",
+            "evidence": "later-transcription-of-period-rulebook",
+            "status": "resolved-as-publication-baseline"
+          },
+          {
+            "interval": "1999-05-05",
+            "ruleset": "Expert Rules introduced in parallel with Official Rules",
+            "evidence": "strong-secondary-reconstruction",
+            "status": "resolved-as-secondary-date; primary-publication-source-unlocated"
+          },
+          {
+            "interval": "1999-08-26",
+            "ruleset": "Tokyo Dome OCG national tournament",
+            "evidence": "period-event-identity-but-no-event-rulesheet",
+            "status": "unresolved-between-Expert-Rules-and-event-specific-hybrid"
+          },
+          {
+            "interval": "2000-04-01..2000-04-20",
+            "ruleset": "New Expert Rules transition",
+            "evidence": "secondary-history-with-date-boundary-conflict",
+            "status": "bounded-but-not-exact"
+          }
+        ],
+        "expert_rules_evidence": "A strong later reconstruction dates Expert Rules to May 5, 1999 and says recognized tournaments used them, but it also explicitly says the first publication source has not been located. The Tokyo Dome event page identifies the event and distributed cards but does not identify its rulebook or event regulations. Therefore Expert Rules are the best working hypothesis, not a proven event fact.",
+        "source_ids": [
+          "expert-rules-secondary",
+          "konami-tokyo-dome-promos",
+          "original-1999-rulebook",
+          "deck-out-history"
+        ]
+      }
     }
   },
   "tokyo_dome_research_current": {

@@ -3,6 +3,53 @@
 Status: research gate only. This document does not create an early OCG
 format, banlist, card pool, or rule profile.
 
+## Current authoritative state (read this first)
+
+> This section is the single mechanically-checkable current-state summary
+> for the whole document, and is pinned by
+> `test_gate_md_current_state_header_matches_authority` in
+> `tests/test_yugi_kaiba_format_gate.py`. Every section below this one is
+> preserved as point-in-time research history for audit purposes - where a
+> later section corrected an earlier one, the correction is current, the
+> earlier prose is not. **If any section below appears to disagree with
+> this one, this section and the structured JSON at
+> `tokyo_dome_research_current` in `yugi-kaiba-format-source-packet.json`
+> govern, not the older prose.**
+
+- **OCG release ledger:** 19 certified products (not 20 - an intermediate
+  2026-08 pass certified 20, then an independent recertification found and
+  corrected 3 defects), 370-card candidate pool, digest
+  `f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`.
+- **Expert Rules primary source:** LOCATED and personally inspected
+  (archive.org scan of the 1999-05-05 Shueisha/Studio Hard *Official Guide
+  Starter Book*, pages 101-109, 2026-08-29). Expert Rules are directly
+  documented in that guide - `PROVEN`, not a secondary reconstruction. What
+  remains unproven: the guide does not state a normative effective date
+  (`SUPPORTED_BUT_INCOMPLETE`), and no Tokyo Dome event-specific rulesheet
+  has been located, so Tokyo-Dome-specific Expert Rules adoption is
+  `UNKNOWN`.
+- **Restriction list:** best current hypothesis is a tournament-specific
+  (not nationwide) Limited-to-1 list for Raigeki, Dark Hole, and Trap Hole,
+  research confidence `MODERATE-TO-GOOD` (personally inspected 2004
+  Shueisha *Master Guide* p.84). Canonicalization status is
+  `UNRESOLVED_BLOCKING` regardless - no contemporaneous 1999 document has
+  been located.
+- **Full Chain/Spell-Speed/priority system:** historical adoption by
+  Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
+  engine blocker. The narrower, `PROVEN`/bounded paradigm that *is* a
+  confirmed unconditional engine blocker is the no-chain,
+  Traps-only-in-Battle-Phase behavior - see
+  `tokyo_dome_research_current.architecture_verdict_detail.`
+  `engine_representation_blockers`.
+- **Unconditional engine blockers (independent of any unresolved history):**
+  deck-out LP-comparison, the no-chain/Traps-only-Battle-Phase-response
+  paradigm, and the early battle-calculation attacker-recoil quirk.
+- **Architecture verdict:** `BLOCKED_BY_BOTH` (unresolved historical
+  evidence and unrepresentable engine behavior each independently block
+  canonicalization).
+- **No canonical Tokyo Dome format, banlist, pool, or rule profile exists.**
+  GOAT, Edison, and Tengu are unaffected.
+
 ## Verdict
 
 The requested `1999-05-yugi-kaiba` target is not a defensible canonical name
@@ -22,16 +69,27 @@ snapshot:
 | Release territory | `ocg-jp` |
 | Pool cutoff | `1999-08-25` inclusive, to exclude products released on the event date |
 | Defining event | Duel Monsters II / `決闘者伝説 in TOKYO DOME`, August 26, 1999 |
-| Banlist | July 1999 three-card limited reconstruction, still source-disputed |
+| Banlist | best current hypothesis: tournament-specific, three cards Limited to 1 (Raigeki, Dark Hole, Trap Hole) - canonicalization still `UNRESOLVED_BLOCKING`; see "Current authoritative state" above, not the July-1999 framing this row originally used |
 | Next conventional format | `Exodia`, community convention, April 10, 2000 |
 
-This is a research recommendation, not approval to add canonical files. The
-target is **representable with format-local approximations**, but it is **not
-ready for canonicalization**. The remaining blockers are historical source
-adjudication and OCG release/card identity coverage, not a required schema
-redesign.
+This is a research recommendation, not approval to add canonical files.
+*(Original 2026-XX framing, superseded by "Current authoritative state"
+above: the target was called "representable with format-local
+approximations" without qualifying that against the current unqualified
+architecture verdict.)* The current, unqualified architecture verdict is
+`BLOCKED_BY_BOTH` (historical evidence AND engine representability each
+independently block canonicalization) - see "Current authoritative state"
+above. Schema/host data-shape representability specifically (a narrower,
+different question) remains sufficient with documented approximations; it
+does not by itself make the format ready for canonicalization.
 
 ## Release ledger certification (2026-08)
+
+> **Superseded by the recertification below.** This pass's headline count
+> of **20 certified products** was later found to include 1 fabricated
+> product and 2 wrong dates; "Release ledger RECERTIFICATION" immediately
+> below corrects it to the current, authoritative **19**. Read this section
+> for the certification methodology, not for the product count.
 
 A follow-on task built the actual Japanese OCG release ledger this gate had
 deferred, through 1999-08-25 inclusive. It is release-ledger/card-identity
@@ -123,8 +181,10 @@ Full structured results live in
   fact this task needed, including the National Tournament trophies' and
   invitation tickets' exclusions and Black Luster Soldier's distinct
   historical identity, with no schema or runtime change). This does not
-  revise the format's overall verdict B below, which is about the remaining,
-  unrelated engine/host approximation blockers.
+  revise the format's overall canonicalization verdict, which is about the
+  remaining, unrelated engine/host approximation blockers - see "Current
+  authoritative state" at the top of this document (`BLOCKED_BY_BOTH`), not
+  a "verdict B" (that label no longer exists anywhere in this document).
 - **GOAT/Edison/Tengu preserved exactly**: hash `0x28E9FC02` / pool 3,673 /
   pool 4,562 / hash `0x0CE5BABE` respectively; `dist/` rebuilds byte-identical.
 
@@ -236,6 +296,14 @@ historical authority.
 
 ## Rules evidence
 
+> **Update (2026-08-29):** the paragraph below originally said the Expert
+> Rules "primary publication source has not been located." That is no
+> longer true - the guide was located and personally inspected; see
+> "Primary-source resolution pass: 2026-08-29" near the end of this
+> document and "Current authoritative state" at the top. The rest of this
+> section's Starter Box transcription content is unaffected and remains
+> current.
+
 The translated transcription of the first Japanese Starter Box rulebook is
 the period rules evidence available in this repository's research packet,
 but it is a later transcription of period material rather than an original
@@ -249,11 +317,15 @@ The same rulebook describes one monster, one Spell, and one Trap per turn,
 early battle calculations, a single Field Card, and Fusion materials on the
 field. Later Expert Rules material is secondary and reports that the Expert
 Rules introduced tribute requirements for Level 5+ monsters, allowed multiple
-Spell/Trap activations, and allowed Fusion materials from the hand. A strong
-secondary reconstruction dates Expert Rules to May 5, 1999 and says official
-tournaments used them, but its primary publication source has not been
-located. Expert Rules are therefore likely at Tokyo Dome, not proven for that
-event; do not silently merge the two rulesets.
+Spell/Trap activations, and allowed Fusion materials from the hand. The
+primary publication source for Expert Rules - the 1999-05-05 Official Guide
+Starter Book - was later located and personally inspected (2026-08-29): it
+directly documents Expert Rules as a real Konami ruleset (`PROVEN`), but its
+own wording does not say they became the normative effective ruleset that
+day (`SUPPORTED_BUT_INCOMPLETE`), and no Tokyo Dome event-specific rulesheet
+has been located, so Tokyo-Dome-specific adoption remains `UNKNOWN`
+(not "likely" - do not silently merge the two rulesets, and do not read
+"documented in a guide" as "adopted at this event").
 
 The repository can express the numeric limits and most timing toggles. It
 cannot reproduce the early damage procedure or “higher LP wins” deck-out
@@ -275,6 +347,17 @@ release-cutoff pool, but the repository had 411 release products and zero
 identities; 249 were in the card index and 121 were absent. That cross-check
 was not a substitute for a product-by-product OCG ledger - building one was
 exactly this gate's next task, now complete.
+
+> **Superseded (2026-08-29):** the "July 1999, possibly nationwide" framing
+> below is the ORIGINAL working hypothesis this gate started from. It has
+> since been researched further and materially revised - the current best
+> hypothesis is tournament-specific (not nationwide), with meaningfully
+> better-than-original research confidence (`MODERATE-TO-GOOD`, from a
+> personally-inspected 2004 retrospective), while canonicalization remains
+> `UNRESOLVED_BLOCKING` regardless. See
+> `tokyo_dome_research_current.restriction_list_current` in the packet and
+> "Current authoritative state" at the top of this document - do not use
+> the paragraph below as the current scope framing.
 
 The commonly reconstructed July 1999 list limits Dark Hole, Raigeki, and
 Trap Hole, with no Forbidden or Semi-Limited section. Sources disagree about
@@ -369,24 +452,30 @@ cross-checks only. Unresolved conflicts remain unresolved.
 
 ## Starter Rules / Expert Rules timeline
 
+> **Update (2026-08-29):** the table and paragraph below predate the
+> primary-source resolution pass. The 1999-05-05 row's "primary publication
+> source unlocated" status is no longer true - see "Current authoritative
+> state" at the top of this document and "Primary-source resolution pass:
+> 2026-08-29" near the end for the corrected evidence and status.
+
 The available evidence supports the following bounded timeline; it does not
 prove one clean Tokyo Dome transition date:
 
 | Date or interval | Ruleset/evidence | Evidence class | Status |
 | --- | --- | --- | --- |
 | 1999-02-04 | Original Starter Box Official Rules baseline | later transcription of period rulebook | publication baseline resolved |
-| 1999-05-05 | Expert Rules introduced in parallel with Official Rules | strong secondary reconstruction | date supported secondarily; primary publication source unlocated |
-| 1999-08-26 | Tokyo Dome national OCG event | period event/product evidence | event rulesheet absent; Expert versus event-specific hybrid unresolved |
+| 1999-05-05 | Expert Rules introduced in parallel with Official Rules | `PROVEN` (guide located and personally inspected, 2026-08-29) that Expert Rules are documented; normative effective date is `SUPPORTED_BUT_INCOMPLETE` | primary source located and personally inspected; see "Primary-source resolution pass: 2026-08-29" |
+| 1999-08-26 | Tokyo Dome national OCG event | period event/product evidence | event rulesheet absent; Tokyo-Dome-specific adoption `UNKNOWN` |
 | 2000-04-01 to 2000-04-20 | New Expert transition around Magic Ruler | strong secondary reconstruction with boundary conflict | bounded, not exact |
 
 The Expert reconstruction reports Level 5/6 requiring one Tribute, Level 7+
 requiring two, removal of the original one-Spell/one-Trap activation limits,
 and Fusion materials from the hand. The first rulebook transcription instead
 describes one Normal Summon/Set, one Spell activation, one Trap activation,
-and Fusion materials on the field. The best working hypothesis is Expert
-Rules by August because the secondary history says recognized tournaments used
-them; that is an inference, not Tokyo Dome-specific primary proof. The gate
-therefore records “likely Expert Rules, not proven for this event” and keeps
+and Fusion materials on the field. Expert Rules content is now `PROVEN`
+documented by 1999-05-05; whether Tokyo Dome itself used them remains
+`UNKNOWN`, not "likely" - that is a genuine unresolved question, not merely
+an unproven inference from secondary history. The gate therefore keeps
 canonicalization blocked.
 
 ## Main / Battle / Main correction and engine experiment
@@ -462,6 +551,15 @@ that same event. The August 25 cutoff is therefore retained as a reproducible
 community reconstruction, not claimed as an official tournament pool.
 
 ## Banlist status
+
+> **Update (2026-08-29):** research confidence on scope has since improved
+> (personally-inspected 2004 Master Guide p.84 points to a tournament-
+> specific reading, `MODERATE-TO-GOOD` confidence) - see
+> `tokyo_dome_research_current.restriction_list_current` and "Current
+> authoritative state" at the top of this document. The bottom-line
+> conclusion below (banlist remains a blocker; no
+> `data/banlists/ocg-1999-07.json`) is still correct; the "broad July
+> effectiveness versus event-specific" framing itself is superseded.
 
 The commonly reconstructed July 1999 list limits Dark Hole, Raigeki, and Trap
 Hole, with no Forbidden or Semi-Limited entries. Available historical sources
@@ -1186,29 +1284,41 @@ historical model is recorded with a null upper bound and the finite client
 ceiling is explicitly labelled as an approximation. This is separate from the
 format-level result, which remains `BLOCKED_BY_BOTH`.
 
-### Canonicalization blocker ledger
+### Canonicalization blocker ledger (per-topic, this pass)
+
+> This table mirrors `tokyo_dome_research_current.primary_source_resolution_`
+> `2026_08_29.canonicalization_blockers` exactly - it is a supplementary,
+> more granular, per-topic breakdown, not a second independent verdict. It
+> uses two statuses the older 18-item ledger (mid-document, "Canonicalization
+> blocker ledger" under "Explicit engine gaps") does not:
+> `HISTORY_RESOLVED_ENGINE_GAP_REMAINS` (the historical fact is established,
+> but the engine still cannot reproduce it, so it remains an active blocker,
+> NOT a resolved one - deliberately not spelled "RESOLVED" to avoid reading
+> as unblocked) and `NONBLOCKING_HOST_CONFIG_APPROXIMATION` (handled by the
+> same client/host-config layer every other format in this repository
+> already uses). Every row here is consistent with the older ledger and with
+> `architecture_verdict_detail`; where the two ledgers describe the same
+> underlying fact, they must not be read as disagreeing.
 
 | Item | Status | Reason |
 | --- | --- | --- |
-| Format name/date convention | RESOLVED | `1999-08-tokyo-dome`, event 1999-08-26; community target retained. |
-| Event/card-pool cutoff | RESOLVED WITH APPROXIMATION | Pre-event 1999-08-25 is certified and reproducible; same-day product legality is not proven. |
-| OCG release ledger | RESOLVED | 19 products / 370 cards / certified digest unchanged. |
-| Missing card identities | RESOLVED WITH APPROXIMATION | Certified pool remains the approved research snapshot; no new ledger import was started. |
-| Banlist | BLOCKING | Three-card content supported, scope `UNRESOLVED_BLOCKING`. |
-| Starter Rules vs Expert Rules boundary | BLOCKING | Expert text is now primary-inspected, but effective date and event adoption remain unresolved. |
-| Main/Battle/Main behavior | BLOCKING | Starter behavior is proven; Tokyo Dome adoption is unknown. |
-| First-turn draw | UNRESOLVED | Starter rule proven; event-specific adoption unknown. |
-| First-turn attack | UNRESOLVED | Starter prohibition proven; event-specific adoption unknown. |
-| Hand limit | UNRESOLVED | No six-card transition is proven for this event. |
-| Deck-size representation | RESOLVED WITH APPROXIMATION | Null historical maximum plus explicitly finite host ceiling. |
-| Side/Fusion deck constraints | UNRESOLVED | General Starter constraints are known; tournament enforcement is not. |
-| Deck-out rule | RESOLVED WITH APPROXIMATION | Historical LP comparison is documented but not reproduced by pinned core. |
-| Battle-calculation semantics | RESOLVED WITH APPROXIMATION | Historical attacker recoil is documented but not reproduced exactly. |
-| Chain/Spell-Speed semantics | UNRESOLVED | The early Expert text does not provide a complete formal timing model. |
-| Errata chronology | RESOLVED | 296 V2 records remain unchanged. |
-| Errata implementation coverage | RESOLVED WITH APPROXIMATION | Research audit remains frozen; no canonical Tokyo Dome policy was chosen. |
-| Engine representability | BLOCKING | Conditional deck-out and battle-calculation gaps remain. |
-| Schema representability | RESOLVED WITH APPROXIMATION | No shared schema change is required. |
+| Restriction-list scope | BLOCKING | `UNRESOLVED_BLOCKING`; later Master Guide wording is not contemporaneous proof. |
+| Tokyo Dome ruleset | BLOCKING | No inspected event-specific rule document names Starter or Expert Rules. |
+| 1999-05-05 effective transition date | UNRESOLVED | The guide publication and Expert Rules content are proven; exact effective date is not. |
+| Post-battle Main behavior | UNRESOLVED | Starter behavior is proven, event adoption is not. |
+| First-turn draw/attack, LP, hand size | UNRESOLVED | General source and event-specific adoption are separate propositions. |
+| Deck-size and Side/Fusion constraints | NONBLOCKING_HOST_CONFIG_APPROXIMATION | Historical shape is documented; not counted as a canonicalization blocker (see host/client layer note above). |
+| Deck-out rule | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical LP comparison is documented, but pinned core cannot reproduce it - still an active engine blocker. |
+| Battle-calculation semantics | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical attacker-recoil procedure is documented, but current core does not reproduce it exactly - still an active engine blocker. |
+| Engine representability | BLOCKING | Conditional deck-out and battle-calculation mismatches remain. |
+| Schema representability | NONBLOCKING_HOST_CONFIG_APPROXIMATION | No schema change was needed (see host/client layer note above). |
+
+Full chain/Spell-Speed/priority is deliberately **not** listed as its own
+row here: its Tokyo-Dome-specific historical status is `UNKNOWN`, and per
+this pass's own reasoning it is not independently counted as an
+unconditional blocker (the narrower, `PROVEN` no-chain/Traps-only-in-
+Battle-Phase paradigm already covers the confirmed engine-representation
+gap - see "Current authoritative state" at the top of this document).
 
 ### Final research verdict
 

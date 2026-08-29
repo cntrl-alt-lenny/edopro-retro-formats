@@ -120,6 +120,160 @@ def _make_pool():
     return Pool.load(raw_pool, ROOT / "research-only-pool.json")
 
 
+# ------------------------------------------------------------------
+# Authority/projection consistency invariants (this session).
+#
+# The bug class this session found: OLDER TOP-LEVEL packet fields (outside
+# tokyo_dome_research_current) and narrative gate.md sections were never
+# updated when tokyo_dome_research_current was hardened, so they kept
+# asserting claims the authoritative section had since disproven (the
+# Expert Rules primary source being "unlocated", full chain/Spell-Speed/
+# priority being promoted to a confirmed blocker from rulebook silence).
+# Every check below is whole-PACKET scoped (minus superseded_findings),
+# not tokyo_dome_research_current-scoped like test_A/test_B2 above - that
+# narrower scope is exactly what let the bug survive the previous pass's
+# hardening tests.
+# ------------------------------------------------------------------
+
+WHOLE_PACKET_SOURCE_UNLOCATED_BANNED_PHRASES = (
+    "publication source unlocated",
+    "publication source has not been located",
+    "first publication source has not been located",
+    "source has not been located",
+)
+
+
+def _walk_whole_packet_excluding_superseded(packet):
+    for path, s in _walk_strings(packet, ()):
+        if path and path[0] == "superseded_findings":
+            continue
+        yield path, s
+
+
+def _assert_no_whole_packet_source_unlocated_claim(packet):
+    """Invariant 1: no active packet projection may claim the Expert Rules
+    publication source is unlocated - it was located and personally
+    inspected 2026-08-29. Hyphens are normalized to spaces before matching:
+    the actual historical bug used both forms interchangeably (a hyphenated
+    "status" enum-style value and a spaced prose sentence), and a matcher
+    that only caught one form would have missed the other."""
+    violations = [
+        (path, phrase)
+        for path, s in _walk_whole_packet_excluding_superseded(packet)
+        for phrase in WHOLE_PACKET_SOURCE_UNLOCATED_BANNED_PHRASES
+        if phrase in s.lower().replace("-", " ")
+    ]
+    if violations:
+        raise AssertionError(
+            f"active packet projection still claims the Expert Rules source is unlocated: {violations}"
+        )
+
+
+def _assert_no_whole_packet_hyphenated_secondary_only_expert_rules_claim(packet):
+    """Invariant 2: no active projection may downgrade the guide's Expert
+    Rules content back to secondary-only evidence. Checks for the exact
+    lowercase-hyphenated "strong-secondary-reconstruction" slug that was the
+    literal (now-fixed) value of the old rule_boundary bug - this is
+    deliberately distinct from the uppercase, underscore-separated
+    STRONG_SECONDARY_RECONSTRUCTION enum token, which remains a
+    legitimately-used status value elsewhere (e.g. the exact effective-date
+    hypothesis, which genuinely is still a secondary reconstruction)."""
+    violations = [
+        path for path, s in _walk_whole_packet_excluding_superseded(packet)
+        if s == "strong-secondary-reconstruction"
+    ]
+    if violations:
+        raise AssertionError(
+            f"active projection uses the old hyphenated secondary-only-evidence slug for Expert Rules: {violations}"
+        )
+
+
+def _assert_chain_priority_not_promoted_to_unconditional_blocker(packet):
+    """Invariant 3: no active projection may promote the full modern
+    Chain/Spell-Speed/priority system to an unconditional engine blocker -
+    its Tokyo-Dome-specific historical status is UNKNOWN. The narrower,
+    PROVEN no-chain/Traps-only-in-Battle-Phase paradigm (a different,
+    narrower claim) is the one genuinely-confirmed blocker."""
+    current = packet["tokyo_dome_research_current"]
+    engine_items = " ".join(current["architecture_verdict_detail"]["engine_representation_blockers"]["items"])
+    if "chain_spell_speed_priority" in engine_items or "chain/priority" in engine_items.lower():
+        raise AssertionError("chain/priority appears as its own item in engine_representation_blockers.items")
+
+    matrix = {
+        row["rule_area"]: row
+        for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+    }
+    if matrix["chain_spell_speed_priority"]["tokyo_dome"]["status"] != "UNKNOWN":
+        raise AssertionError("chain_spell_speed_priority.tokyo_dome.status is no longer UNKNOWN")
+
+    kg_detail = packet["rules"]["candidate_core_flags"]["known_gaps_detail"]
+    if kg_detail["pre-formal-chain-and-priority-boundary"]["confirmed_unconditional_tokyo_dome_blocker"] is not False:
+        raise AssertionError("rules.known_gaps_detail now claims chain/priority is a confirmed unconditional blocker")
+
+
+def _assert_rule_boundary_agrees_with_authority(packet):
+    """Invariant 4/6: the top-level rule_boundary field (a current derived
+    projection) must mechanically agree with the authoritative section, and
+    must not regress to its pre-2026-08-29 stale content."""
+    rb = packet["rule_boundary"]
+    entry = next(t for t in rb["timeline"] if t["interval"] == "1999-05-05")
+    if "PROVEN" not in entry["evidence"]:
+        raise AssertionError("rule_boundary's 1999-05-05 timeline entry no longer records the guide as PROVEN located")
+    for banned in WHOLE_PACKET_SOURCE_UNLOCATED_BANNED_PHRASES:
+        status_norm = entry["status"].lower().replace("-", " ")
+        evidence_norm = entry["evidence"].lower().replace("-", " ")
+        if banned in status_norm or banned in evidence_norm:
+            raise AssertionError(f"rule_boundary's 1999-05-05 timeline entry regressed to a source-unlocated claim: {banned!r}")
+    if "tokyo_dome_research_current" not in rb.get("_scope", ""):
+        raise AssertionError("rule_boundary lost its pointer to the authoritative tokyo_dome_research_current section")
+
+
+def _assert_blocker_ledger_chain_reason_not_silence_based(packet):
+    """Invariant: blocker_ledger.chain_spell_speed_semantics must justify
+    BLOCKING via the narrower confirmed spell_trap_response paradigm, not
+    by inferring Tokyo-Dome absence from rulebook silence."""
+    reason = packet["blocker_ledger"]["chain_spell_speed_semantics"]["reason"]
+    if "spell_trap_response" not in reason:
+        raise AssertionError("blocker_ledger.chain_spell_speed_semantics reason no longer cites the narrower confirmed blocker")
+    if (
+        "lacks formal Chain/Spell Speed/priority rules and no general core flag supplies the historical boundary"
+        in reason
+    ):
+        raise AssertionError("blocker_ledger.chain_spell_speed_semantics reason regressed to inferring absence from rulebook silence")
+
+
+def _assert_top_level_verdict_is_scoped(packet):
+    """Invariant: the bare top-level `verdict` field must carry a scope note
+    that prevents it from being read as contradicting architecture_verdict."""
+    note = packet.get("verdict_scope_note", "")
+    if "BLOCKED_BY_BOTH" not in note or "architecture_verdict" not in note:
+        raise AssertionError("verdict_scope_note missing or no longer points at the authoritative architecture_verdict")
+
+
+def _assert_gate_md_has_current_state_header(text, packet):
+    """Invariant 7: the narrative gate has a mechanically-checkable
+    current-state header that cannot silently regress to the stale
+    primary-source framing."""
+    marker = "## Current authoritative state (read this first)"
+    if marker not in text:
+        raise AssertionError("gate.md is missing its mechanically-checkable current-state header")
+    section = text.split(marker, 1)[1].split("\n## Verdict", 1)[0]
+    current = packet["tokyo_dome_research_current"]
+    required = [
+        str(current["release_ledger_preserved"]["verified_this_session"]["products_through_cutoff"]),
+        current["architecture_verdict"],
+        current["restriction_list_current"]["canonicalization_status"]["status"],
+        "UNKNOWN",
+    ]
+    missing = [value for value in required if value not in section]
+    if missing:
+        raise AssertionError(f"gate.md current-state header is missing required authoritative value(s): {missing}")
+    section_norm = section.lower().replace("-", " ")
+    for phrase in WHOLE_PACKET_SOURCE_UNLOCATED_BANNED_PHRASES:
+        if phrase in section_norm:
+            raise AssertionError(f"gate.md current-state header itself contains a stale phrase: {phrase!r}")
+
+
 class YugiKaibaResearchGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1316,6 +1470,162 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             any("personally located" in b.lower() or "personally inspected" in b.lower() for b in current["remaining_blockers"])
             or any("personally located" in e.lower() or "personally inspected" in e.lower() for e in current["explicit_non_actions"])
         )
+
+    # ------------------------------------------------------------------
+    # Authority/projection consistency closure pass (this session): the
+    # previous hardening passes scoped their recursive walks to
+    # tokyo_dome_research_current only (see test_A/test_B2 above) - that
+    # left the top-level packet fields (rule_boundary, rules, blocker_ledger,
+    # verdict) and the earliest, unbanner-ed gate.md sections free to keep
+    # asserting claims the authoritative section had since disproven. These
+    # tests are deliberately whole-packet scoped to close that gap.
+    # ------------------------------------------------------------------
+
+    def test_K_no_whole_packet_source_unlocated_or_secondary_only_expert_rules_claim(self):
+        _assert_no_whole_packet_source_unlocated_claim(self.packet)
+        _assert_no_whole_packet_hyphenated_secondary_only_expert_rules_claim(self.packet)
+        # The exemption is real, not merely "no such content exists" -
+        # confirm the archive still honestly contains the old claim.
+        archive_text = json.dumps(self.packet["superseded_findings"], ensure_ascii=False).lower()
+        self.assertIn("has not been located", archive_text)
+
+    def test_L_chain_priority_not_promoted_to_unconditional_blocker(self):
+        _assert_chain_priority_not_promoted_to_unconditional_blocker(self.packet)
+
+    def test_M_rule_boundary_is_a_derived_projection_agreeing_with_authority(self):
+        _assert_rule_boundary_agrees_with_authority(self.packet)
+        # It must also still be a real, distinct field (not silently
+        # deleted) and its stale predecessor must be honestly archived, not
+        # erased from history.
+        self.assertIn("rule_boundary", self.packet)
+        archive = self.packet["superseded_findings"]["stale_top_level_rule_boundary_pre_2026_08_29_resolution"]
+        self.assertIn("_why_superseded", archive)
+        self.assertIn(
+            "primary-publication-source-unlocated",
+            archive["verbatim_prior_top_level_rule_boundary"]["timeline"][1]["status"],
+        )
+
+    def test_N_blocker_ledger_chain_reason_not_silence_based(self):
+        _assert_blocker_ledger_chain_reason_not_silence_based(self.packet)
+        # Status is unchanged - still BLOCKING, still one of the 18 required
+        # keys test_blocker_ledger_is_complete_and_uses_frozen_statuses
+        # pins - only the reasoning was corrected, not the classification.
+        self.assertEqual("BLOCKING", self.packet["blocker_ledger"]["chain_spell_speed_semantics"]["status"])
+
+    def test_O_top_level_verdict_is_scoped(self):
+        _assert_top_level_verdict_is_scoped(self.packet)
+        self.assertEqual(
+            "representable-with-format-local-approximations", self.packet["verdict"],
+        )
+
+    def test_gate_md_current_state_header_matches_authority(self):
+        text = (ROOT / "docs" / "research" / "yugi-kaiba-format-source-gate.md").read_text(encoding="utf-8")
+        _assert_gate_md_has_current_state_header(text, self.packet)
+
+    def test_gate_md_earliest_sections_no_longer_read_as_unscoped_current_claims(self):
+        # Direct regression for the specific pre-"2026-08" passages this
+        # session found unscoped: each must now carry an explicit
+        # superseded/update marker ahead of (or immediately inside) the
+        # stale claim, not merely exist somewhere else in the document.
+        text = (ROOT / "docs" / "research" / "yugi-kaiba-format-source-gate.md").read_text(encoding="utf-8")
+        self.assertIn("Superseded by the recertification below", text)
+        self.assertIn("**Update (2026-08-29):**", text)
+        self.assertIn("Superseded (2026-08-29)", text)
+        # The specific self-contradiction found in this session's own
+        # audit: the final "Canonicalization blocker ledger" table must no
+        # longer classify deck-out/battle-calculation as an unqualified
+        # "RESOLVED WITH APPROXIMATION" (which reads as unblocked) - it must
+        # use the distinguishing HISTORY_RESOLVED_ENGINE_GAP_REMAINS status.
+        self.assertIn("HISTORY_RESOLVED_ENGINE_GAP_REMAINS", text)
+        final_ledger = text.split("### Canonicalization blocker ledger (per-topic, this pass)", 1)[1]
+        self.assertNotIn("| Deck-out rule | RESOLVED WITH APPROXIMATION", final_ledger)
+        self.assertNotIn("| Battle-calculation semantics | RESOLVED WITH APPROXIMATION", final_ledger)
+
+    # ------------------------------------------------------------------
+    # Phase D: adversarial mutation tests for the invariants above.
+    # ------------------------------------------------------------------
+
+    def test_mutation_J_rule_boundary_regression_to_source_unlocated_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["rule_boundary"]["timeline"][1]["status"] = (
+            "resolved-as-secondary-date; primary-publication-source-unlocated"
+        )
+        mutated["rule_boundary"]["timeline"][1]["evidence"] = "strong-secondary-reconstruction"
+        with self.assertRaises(AssertionError):
+            _assert_no_whole_packet_source_unlocated_claim(mutated)
+        with self.assertRaises(AssertionError):
+            _assert_rule_boundary_agrees_with_authority(mutated)
+
+    def test_mutation_K_any_top_level_field_claiming_source_unlocated_is_rejected(self):
+        # Prove the check is genuinely whole-packet, not just rule_boundary-
+        # specific: inject the same claim into an unrelated field.
+        mutated = copy.deepcopy(self.packet)
+        mutated["target_recommendation"]["_injected_for_test"] = (
+            "The first publication source has not been located for this guide."
+        )
+        with self.assertRaises(AssertionError):
+            _assert_no_whole_packet_source_unlocated_claim(mutated)
+
+    def test_mutation_L_chain_priority_promoted_to_engine_blocker_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["architecture_verdict_detail"]["engine_representation_blockers"]["items"].append(
+            "chain_spell_speed_priority - full modern chain/priority system, promoted in error"
+        )
+        with self.assertRaises(AssertionError):
+            _assert_chain_priority_not_promoted_to_unconditional_blocker(mutated)
+
+    def test_mutation_M_known_gaps_detail_flip_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["rules"]["candidate_core_flags"]["known_gaps_detail"]["pre-formal-chain-and-priority-boundary"][
+            "confirmed_unconditional_tokyo_dome_blocker"
+        ] = True
+        with self.assertRaises(AssertionError):
+            _assert_chain_priority_not_promoted_to_unconditional_blocker(mutated)
+
+    def test_mutation_N_matrix_row_flip_to_proven_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        matrix = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+        for row in matrix:
+            if row["rule_area"] == "chain_spell_speed_priority":
+                row["tokyo_dome"]["status"] = "PROVEN"
+        with self.assertRaises(AssertionError):
+            _assert_chain_priority_not_promoted_to_unconditional_blocker(mutated)
+
+    def test_mutation_O_blocker_ledger_reason_regression_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["blocker_ledger"]["chain_spell_speed_semantics"]["reason"] = (
+            "The available first rulebook lacks formal Chain/Spell Speed/priority rules and no "
+            "general core flag supplies the historical boundary."
+        )
+        with self.assertRaises(AssertionError):
+            _assert_blocker_ledger_chain_reason_not_silence_based(mutated)
+
+    def test_mutation_P_top_level_verdict_scope_note_deleted_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        del mutated["verdict_scope_note"]
+        with self.assertRaises(AssertionError):
+            _assert_top_level_verdict_is_scoped(mutated)
+
+    def test_mutation_Q_gate_md_current_state_header_regression_is_rejected(self):
+        text = (ROOT / "docs" / "research" / "yugi-kaiba-format-source-gate.md").read_text(encoding="utf-8")
+        mutated_text = text.replace(
+            "## Current authoritative state (read this first)", "## Some other heading, no longer matched",
+        )
+        with self.assertRaises(AssertionError):
+            _assert_gate_md_has_current_state_header(mutated_text, self.packet)
+
+        # A header that exists but silently regressed to a stale claim must
+        # also be rejected, not just a missing header.
+        marker = "## Current authoritative state (read this first)"
+        section_end = text.index("\n## Verdict")
+        corrupted = (
+            text[: text.index(marker)]
+            + marker
+            + "\n\nThe primary publication source has not been located.\n"
+            + text[section_end:]
+        )
+        with self.assertRaises(AssertionError):
+            _assert_gate_md_has_current_state_header(corrupted, self.packet)
 
 
 if __name__ == "__main__":
