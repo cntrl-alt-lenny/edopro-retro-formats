@@ -42,19 +42,28 @@ format, banlist, card pool, or rule profile.
   `tokyo_dome_research_current.architecture_verdict_detail.`
   `engine_representation_blockers`.
 - **Unconditional engine blockers (independent of any unresolved history):**
-  deck-out LP-comparison, the Battle-Phase Traps-only response restriction
-  (`trap_activation_frequency`), and the early battle-calculation attacker-
-  recoil quirk. **Re-adjudicated 2026-08-29 (session 2):** these three no
-  longer rest on "PROVEN at Starter Box + no located evidence of change"
-  (the same silence-based reasoning already correctly rejected for full
-  chain/priority above) - a second, independently-dated primary source
-  (the same 1999-05-05 guide, a *different* chapter than the Expert Rules
-  one) affirmatively re-documents all three as unchanged ~113 days before
-  Tokyo Dome, and externally-corroborated evidence places the eventual
-  change ~8 months *after* Tokyo Dome. See "Continuity-evidence closure
-  pass" near the end of this document and
+  deck-out LP-comparison and the Battle-Phase Traps-only response
+  restriction (`trap_activation_frequency`). **Re-adjudicated 2026-08-29
+  (session 2):** these two no longer rest on "PROVEN at Starter Box + no
+  located evidence of change" (the same silence-based reasoning already
+  correctly rejected for full chain/priority above) - a second,
+  independently-dated primary source (the same 1999-05-05 guide, a
+  *different* chapter than the Expert Rules one) affirmatively re-documents
+  both as unchanged ~113 days before Tokyo Dome, and externally-corroborated
+  evidence places the eventual change ~8 months *after* Tokyo Dome. See
+  "Continuity-evidence closure pass" near the end of this document and
   `tokyo_dome_research_current.positive_continuity_evidence` for the full
-  chain.
+  chain. **`battle_calculation` is NOT an unconditional engine blocker
+  (re-adjudicated 2026-08-29, session 3):** its historical continuity
+  evidence is exactly as strong as the two above, but personal inspection
+  of the exact pinned ocgcore source (processor.cpp
+  `field::calculate_battle_damage`, commit `158aebe758be3c46249c75d602e3f
+  16d63d2ef31`) found the historical ATK<ATK/ATK<DEF attacker-recoil result
+  is already the engine's default behavior, matching Konami's current
+  official rules exactly - the "attacker-recoil" mechanic is not absent
+  from modern Yu-Gi-Oh!, it is the unbroken modern rule. No engine mismatch
+  exists to block on. See "Engine-representability re-adjudication:
+  battle_calculation" near the end of this document.
 - **Architecture verdict:** `BLOCKED_BY_BOTH` (unresolved historical
   evidence and unrepresentable engine behavior each independently block
   canonicalization).
@@ -616,7 +625,7 @@ No shared schema or runtime mutation was justified by this gate.
 | Deck-size representation | RESOLVED WITH APPROXIMATION | `[40,999]` is a host ceiling, not historical infinity. |
 | Side/Fusion deck constraints | RESOLVED WITH APPROXIMATION | Side exact 10 fits; Fusion maximum is unlocated and host-bounded. |
 | Deck-out rule | BLOCKING | Higher-LP win is meaningful and has no pinned-core mechanism. |
-| Battle-calculation semantics | BLOCKING | Direct historical result table is not the modern Damage Step model. |
+| Battle-calculation semantics | RESOLVED WITH APPROXIMATION | UPDATED 2026-08-29 (session 3): the historical result table (including the attacker-recoil outcome) matches the pinned engine's default behavior exactly, personally verified against `field::calculate_battle_damage` at the pinned ocgcore revision; the previously-claimed "not the modern Damage Step model" mismatch does not hold for the arithmetic. See "Engine-representability re-adjudication" near the end of this document. |
 | Chain/Spell-Speed semantics | BLOCKING | Formal boundary is absent from available early evidence and flags. |
 | Errata chronology | RESOLVED | All 296 selections and exact identity sets are mechanically frozen. |
 | Errata implementation coverage | BLOCKING | 150 ambiguous; 47 unresolved candidate occurrences/records. |
@@ -1286,7 +1295,7 @@ The engine findings are conditional where event history is unknown:
 | --- | --- | --- |
 | Post-battle Main actions | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Default flow is closer; no-MP2 is rejected. |
 | Deck-out | `NOT_REPRESENTABLE` | No pinned flag or sanctioned `init.lua` hook converts empty-deck loss into higher-LP victory. |
-| Battle calculation | `NOT_REPRESENTABLE` | Current damage handling does not reproduce the historical attacker-recoil result exactly. Adversarial caveat added 2026-08-29 (session 2): the recoil *arithmetic* itself appears unchanged even in modern Yu-Gi-Oh! rules and was not empirically re-verified against the pinned engine this session (checkouts unavailable) - the genuine gap, if any, is more likely the historical single-step, response-window-free damage *procedure*, not the arithmetic result. A future pass with engine access should re-examine this classification's precise scope. |
+| Battle calculation | `REPRESENTABLE_EXACT_BY_DEFAULT` | RECLASSIFIED 2026-08-29 (session 3): the session 2 adversarial caveat here was investigated by personally fetching and reading the exact pinned ocgcore source (`field::calculate_battle_damage`, processor.cpp, commit `158aebe758be3c46249c75d602e3f16d63d2ef31`) - the historical ATK<ATK/ATK<DEF attacker-recoil result IS the engine's default behavior, aside from the already-separately-tracked 0-ATK tie (`DUEL_0_ATK_DESTROYED`). No engine mismatch remains; see "Engine-representability re-adjudication" below. |
 | Trap-only Battle Phase | `NOT_REPRESENTABLE` | No ocgcore flag restricts Battle-Phase card usage to Trap Cards only (added 2026-08-29, session 2 - this row was previously missing despite the rule area already being counted as a blocker). |
 | Tribute / Fusion / timing | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Expert text is real, but event adoption is not established. |
 | Deck / Side / Fusion limits | `REPRESENTABLE_WITH_HOST_CONFIG` | Historical unbounded maxima can be recorded as `null`; `[40, 999]` is a documented EDOPro host ceiling, not historical unlimited. |
@@ -1324,8 +1333,8 @@ format-level result, which remains `BLOCKED_BY_BOTH`.
 | Deck-size and Side/Fusion constraints | NONBLOCKING_HOST_CONFIG_APPROXIMATION | Historical shape is documented; not counted as a canonicalization blocker (see host/client layer note above). |
 | Deck-out rule | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical LP comparison is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29); pinned core cannot reproduce it - still an active engine blocker. |
 | Battle-Phase Trap-only response restriction | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29), distinct from the per-turn activation cap Expert Rules DOES remove; no ocgcore flag reproduces it - still an active engine blocker. |
-| Battle-calculation semantics | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical attacker-recoil procedure is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29); current core does not reproduce the historical procedure exactly - still an active engine blocker (see adversarial caveat in "Engine and schema reassessment" above). |
-| Engine representability | BLOCKING | Conditional deck-out, Trap-only-response, and battle-calculation mismatches remain. |
+| Battle-calculation semantics | RESOLVED | UPDATED 2026-08-29 (session 3): historical attacker-recoil procedure is documented at Starter Box AND independently re-documented in the same guide as the Expert Rules chapter; personally verified against the pinned ocgcore source that this arithmetic/destruction table is already the engine's default behavior - no engine mismatch remains. The separate, historically UNKNOWN damage-step timing question is not evidenced and is not counted as a blocker. |
+| Engine representability | BLOCKING | Deck-out and Battle-Phase Trap-only-response mismatches remain; battle-calculation's arithmetic is engine-representable by default and is no longer counted here (UPDATED 2026-08-29, session 3). |
 | Schema representability | NONBLOCKING_HOST_CONFIG_APPROXIMATION | No schema change was needed (see host/client layer note above). |
 
 Full chain/Spell-Speed/priority is deliberately **not** listed as its own
@@ -1345,16 +1354,25 @@ proves the rules were documented by 1999-05-05 and even says tournaments may
 adopt them; no inspected source bridges that statement to this event.
 
 Architecture verdict: **`BLOCKED_BY_BOTH`** — historical evidence remains
-blocking, and the historically established early deck-out, Battle-Phase
-Trap-only response, and battle-calculation behaviors remain engine
-approximations/gaps. **Re-adjudicated 2026-08-29 (session 2):** all three now
-rest on independently-re-documented positive continuity evidence (a second
-dated primary source ~113 days before the event, not silence-based
-inference) rather than "no evidence of change was found" - see
-"Continuity-evidence closure pass" below. The schema is sufficient with
-documented host approximations. `DUEL_NO_MAIN_PHASE_2` was rejected. No
-canonical Tokyo Dome format or any related canonical artifact was created,
-and the OCG release-ledger import was not begun.
+blocking, and the historically established early deck-out and Battle-Phase
+Trap-only response behaviors remain engine approximations/gaps.
+**Re-adjudicated 2026-08-29 (session 2):** both now rest on independently-
+re-documented positive continuity evidence (a second dated primary source
+~113 days before the event, not silence-based inference) rather than "no
+evidence of change was found" - see "Continuity-evidence closure pass"
+below. **battle-calculation was REMOVED from the engine-blocker set
+2026-08-29 (session 3):** personal inspection of the exact pinned ocgcore
+source found its arithmetic already matches modern rules and the engine's
+default behavior exactly - see "Engine-representability re-adjudication"
+below. `BLOCKED_BY_BOTH` survives regardless: deck-out and Trap-only
+response remain valid unconditional engine blockers, and the historical-
+evidence blockers (restriction-list scope, event-specific ruleset, exact
+tournament structure) are untouched by this pass - both categories stay
+non-empty, so the top-line label is unchanged even though one of its three
+prior legs was removed. The schema is sufficient with documented host
+approximations. `DUEL_NO_MAIN_PHASE_2` was rejected. No canonical Tokyo
+Dome format or any related canonical artifact was created, and the OCG
+release-ledger import was not begun.
 
 The physical documents now required to close the historical gate are specific:
 
@@ -1369,6 +1387,19 @@ library, or period archive with clear title/date/page provenance would be the
 next acceptable evidence. Repeated modern summaries are not a substitute.
 
 ## Continuity-evidence closure pass: 2026-08-29 (session 2)
+
+> **UPDATE (2026-08-29, session 3):** this section's historical-continuity
+> finding (the second, dated primary source affirmatively re-documenting all
+> three rules) remains fully valid and is unchanged below. Its ENGINE-side
+> conclusion for `battle_calculation` specifically does not survive: session
+> 3 personally inspected the exact pinned ocgcore source and found the
+> historical arithmetic is already the engine's default behavior, so
+> `battle_calculation` is NOT an unconditional engine blocker after all -
+> see "Engine-representability re-adjudication: battle_calculation" near the
+> end of this document, which supersedes this section's "Result" and
+> "Adversarial review" conclusions for `battle_calculation` only.
+> `deck_out` and `trap_activation_frequency` are unaffected and remain
+> unconditional blockers on the reasoning below.
 
 This pass re-adjudicated whether `deck_out`, `trap_activation_frequency`
 (Battle-Phase Trap-only response), and `battle_calculation` are justified as
@@ -1489,7 +1520,16 @@ correctly remains `UNKNOWN` for all 21 rule areas, including these three -
 the case for retaining them as blockers rests entirely on the bounded-
 continuity reasoning above, not on any event-specific document.
 
-### Adversarial engine-representability caveat
+### Adversarial engine-representability caveat (RESOLVED - see below)
+
+> **RESOLVED 2026-08-29 (session 3):** the caveat below - that this pass
+> could not personally verify the pinned engine's behavior - is no longer
+> true. Session 3 fetched and personally read the exact pinned ocgcore
+> source and confirmed the arithmetic IS the engine's default behavior. See
+> "Engine-representability re-adjudication: battle_calculation" near the end
+> of this document. The caveat's own reasoning (below) correctly predicted
+> this outcome - it is retained as the accurate record of what session 2
+> could and could not establish at the time.
 
 The pinned ocgcore checkouts required to empirically test engine behavior
 are unavailable in this environment (all `tests/engine/*` tests skip here).
@@ -1519,10 +1559,140 @@ grounds (no documented change even decades later) and that its real
 vulnerability is the unverified engine classification, not the history -
 consistent with this pass's own adversarial caveat above.
 
-### Result
+### Result (session 2 - PARTIALLY SUPERSEDED for battle_calculation, see below)
 
 All three behaviours survive as unconditional engine blockers, on
 materially stronger and more consistent grounds than before. `BLOCKED_BY_BOTH`
 is unchanged as the top-line architecture verdict. No canonical Tokyo Dome
 artifact was created; the 19-product release ledger, 370-card pool, and
 GOAT/Edison/Tengu remain untouched.
+
+> **UPDATE (2026-08-29, session 3):** "all three" above is no longer
+> accurate. `battle_calculation` was removed from the unconditional-blocker
+> set after personal inspection of the pinned ocgcore source found no
+> engine mismatch - see "Engine-representability re-adjudication:
+> battle_calculation" below. `deck_out` and `trap_activation_frequency`
+> remain unconditional blockers exactly as concluded here.
+> `BLOCKED_BY_BOTH` still survives as the top-line verdict (both blocker
+> categories remain non-empty), and no canonical Tokyo Dome artifact exists
+> either way.
+
+## Engine-representability re-adjudication: battle_calculation (session 3, 2026-08-29)
+
+Session 2 retained `battle_calculation.classification = NOT_REPRESENTABLE`
+while explicitly admitting the pinned ocgcore was not inspected and that the
+recoil arithmetic might already match modern Yu-Gi-Oh!. This pass resolved
+that open caveat by personally fetching and reading the exact pinned engine
+source, and by independently checking Konami's current official rules.
+
+### Exact pinned revision inspected
+
+`docs/research/ocgcore-flags.md` records the pinned EDOPro ocgcore submodule
+commit as `158aebe758be3c46249c75d602e3f16d63d2ef31`
+(`edo9300/ygopro-core`). This commit is publicly accessible on GitHub even
+without a local checkout; `processor.cpp` was fetched directly from
+`https://raw.githubusercontent.com/edo9300/ygopro-core/158aebe758be3c46249c75d602e3f16d63d2ef31/processor.cpp`
+(5,233 lines, personally read in full for the relevant function) rather than
+trusted from memory or summary.
+
+### `field::calculate_battle_damage` (processor.cpp:2929-3252)
+
+Reading the function directly against every historical outcome:
+
+| Historical outcome (1999 rulebook / May 1999 guide) | Pinned engine default behavior | Source location | Match |
+| --- | --- | --- | --- |
+| ATK > ATK: defender destroyed, defender's controller takes (ATK diff) damage | Same: `damp = pd; core.battle_damage[damp] = a - d;` | processor.cpp:2960-2963 | Exact |
+| ATK = ATK (both non-zero): both destroyed, no damage | Same: `bd[0] = bd[1] = true` when `a != 0` | processor.cpp:2969-2973 | Exact |
+| ATK = ATK (both zero): 1999 rulebook says both destroyed by literal wording | Neither destroyed by default; `DUEL_0_ATK_DESTROYED` flag restores the historical result | processor.cpp:2970, `ocgcore-flags.md` §6 | Exact, via the already-tracked flag |
+| **ATK < ATK: attacker's own monster destroyed, ATTACKER's controller takes (diff) damage ("recoil")** | Same: `damp = pa; core.battle_damage[damp] = d - a;` | **processor.cpp:2964-2966** | **Exact** |
+| ATK > DEF: defender destroyed, no damage | Same: `bd[1] = true`, no damage recorded absent a pierce card effect (a later, card-specific mechanic, not a 1999 base-rule concern) | processor.cpp:2975-2979, 3120 | Exact |
+| ATK = DEF: neither destroyed, no damage | Same: neither `if` branch matches, defaults (0/false) stand | processor.cpp:3127 (implicit) | Exact |
+| **ATK < DEF: neither destroyed, ATTACKER's controller takes (DEF−ATK) damage ("recoil")** | Same: `damp = pa; core.battle_damage[damp] = d - a;` | **processor.cpp:3121-3123** | **Exact** |
+| Direct attack: full ATK dealt to the defending player (0 ATK deals no damage) | Same: `damp = 1 - pa; core.battle_damage[damp] = a;` when `a != 0` | processor.cpp:3128-3132 | Exact |
+
+The two bolded rows are the exact lines the task specifically asked to be
+verified (`damp = pa`, `core.battle_damage[damp] = d - a`) - confirmed
+present and confirmed to fire for both the ATK<ATK and ATK<DEF historical
+"attacker recoil" cases. Every historical result the packet's own primary
+sources establish is reproduced by the pinned engine's default behavior,
+with the sole, already-separately-tracked exception of the 0-ATK tie.
+
+### Independent cross-check: Konami's current official rules
+
+Fetched Yugipedia's "Damage calculation" article via the MediaWiki API
+(`action=parse&page=Damage_calculation`, since the article page itself
+returns HTTP 403) as a second-angle check, independent of the engine source
+reading:
+
+> ATK<sub>A</sub> < DEF<sub>B</sub>: B inflicts (DEF<sub>B</sub> − ATK<sub>A</sub>) battle damage to A's controller. No monster is destroyed.
+> ATK<sub>A</sub> < ATK<sub>B</sub>: B inflicts (ATK<sub>B</sub> − ATK<sub>A</sub>) battle damage to A's controller. B destroys A.
+
+This is the *current* official rule, not a retro-only mechanic - "attacker
+recoil" is not absent from modern Yu-Gi-Oh!, it is the unbroken rule since
+1999. Three independent angles (the 1999 primary sources, the pinned engine
+source code, and Konami's current official rules as reflected in this
+reference) all agree.
+
+### Arithmetic vs. timing: kept separate
+
+The historical battle-result table (arithmetic and destruction outcomes) and
+a hypothetical historical damage-step *timing*/response-window procedure are
+two different propositions with different evidence:
+
+- **Arithmetic/destruction table**: `PROVEN` at Starter Box, independently
+  re-documented in the same guide as the Expert Rules chapter (session 2's
+  finding, unchanged) - and now `REPRESENTABLE_EXACT_BY_DEFAULT` by the
+  pinned engine (this session's finding). Not a blocker: the historical
+  half of the standard is satisfied, but there is no engine mismatch to
+  block on.
+- **Damage-step timing/response windows**: no inspected 1999 source (the
+  Starter Box rulebook or the 1999-05-05 guide) establishes which response
+  windows, chain mechanics, or multi-step timing structure existed around
+  damage calculation, or that damage calculation was a single indivisible
+  operation. Absence of timing terminology is not proof that no timing
+  mechanism existed. This is `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` - the SAME
+  underlying open question already tracked as `chain_spell_speed_priority`,
+  not a separate battle-calculation-specific finding, and deliberately not
+  duplicated as a second matrix row. It is not evaluated against the engine
+  because there is no proven historical claim to test the engine against,
+  and it is not used to manufacture a blocker from an unproven historical
+  question - the exact move session 2 avoided making explicit and this
+  session made sure stayed avoided.
+
+### Consistency audit
+
+Corrected every active projection found asserting or implying the recoil
+arithmetic is unrepresentable: `rules.facts` (battle_damage entry),
+`rules.candidate_core_flags.known_gaps` (removed `early-battle-calculation`,
+archived under `superseded_findings` rather than silently deleted),
+`blocker_ledger.battle_calculation_semantics` (BLOCKING →
+RESOLVED WITH APPROXIMATION), `primary_source_resolution_2026_08_29.`
+`engine_reassessment` (NOT_REPRESENTABLE → REPRESENTABLE_EXACT_BY_DEFAULT),
+`canonicalization_blockers` (battle-calculation semantics → RESOLVED; engine
+representability summary re-derived from current state, not preserved as
+stale prose), `architecture_verdict_detail.engine_representation_blockers`
+(removed the item; replaced the stale silence-based `definition` with the
+actual current standard; corrected `explicitly_not_counted_as_a_blocker` and
+`conclusion`), and `remaining_blockers` (corrected the stale
+`battle_damage_procedure` entry, itself an old identifier that no longer
+matched any real matrix/engine_reassessment key). Historical continuity
+evidence (`positive_continuity_evidence.items.battle_calculation`) was kept,
+not deleted, and extended with the `arithmetic_vs_timing_split` structure
+above.
+
+### Architecture verdict, re-derived
+
+`BLOCKED_BY_BOTH` survives. Historical-evidence blockers (restriction-list
+scope, event-specific ruleset, exact tournament structure) are untouched by
+this pass and remain non-empty. Engine-representation blockers shrank from
+three items to two (`deck_out`, `trap_activation_frequency`) but remain
+non-empty. Per the task's own framing: if `deck_out` and
+`trap_activation_frequency` remain valid unconditional engine blockers and
+historical blockers remain unresolved, `BLOCKED_BY_BOTH` naturally survives
+even after removing `battle_calculation` - both halves of the label's
+justification are independently still true, so the label does not change
+even though one of the three legs supporting the engine half is gone.
+
+No canonical Tokyo Dome format, banlist, pool, or rule profile was created.
+The 19-product release ledger, 370-card pool, and GOAT/Edison/Tengu are
+unchanged.

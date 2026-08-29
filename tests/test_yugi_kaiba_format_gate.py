@@ -393,6 +393,41 @@ def _assert_architecture_verdict_derived_consistently(packet):
         raise AssertionError(f"architecture_verdict is {verdict!r}, but the blocker categories imply {expected!r}")
 
 
+RECOIL_ABSENT_FROM_MODERN_BANNED_PHRASES = (
+    "differs from modern damage-step semantics",
+    "does not reproduce the historical atk<def attacker-recoil result",
+    "does not reproduce the historical attacker-recoil result",
+    "lacks modern damage step timing",
+    "unrepresentable by current engine architecture",
+    "no representable mechanism",
+)
+RECOIL_ABSENT_HEDGE_CUES = ("false", "corrected", "resolved", "no longer", "updated", "removed")
+
+
+def _assert_no_active_recoil_absent_from_modern_claim(packet):
+    """Required regression: no active field may claim the historical
+    ATK<DEF/ATK<ATK attacker-recoil arithmetic is absent from modern Yu-Gi-
+    Oh! or unrepresentable by the pinned engine - personally verified false
+    against both the pinned ocgcore source and Konami's current official
+    rules. Sentence-scoped: a corrective sentence quoting the old wrong
+    claim to explain it was fixed must not be confused with a live
+    assertion of it, and an unrelated recoil-mention elsewhere in the same
+    long field (e.g. deck-out's own, still-valid, unrepresentable claim)
+    must not falsely implicate a correction sentence next to it."""
+    violations = []
+    for path, s in _walk_whole_packet_excluding_superseded(packet):
+        for sentence in SENTENCE_SPLIT_PATTERN.split(s):
+            low = sentence.lower()
+            if (
+                ("recoil" in low or "battle_calculation" in low or "battle-calculation" in low)
+                and any(phrase in low for phrase in RECOIL_ABSENT_FROM_MODERN_BANNED_PHRASES)
+                and not any(cue in low for cue in RECOIL_ABSENT_HEDGE_CUES)
+            ):
+                violations.append((path, sentence[:200]))
+    if violations:
+        raise AssertionError(f"stale 'recoil arithmetic unrepresentable' claim found: {violations}")
+
+
 class YugiKaibaResearchGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1755,13 +1790,63 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     # ------------------------------------------------------------------
 
     def test_R_unconditional_blockers_match_the_structural_standard(self):
+        # Deliberately does NOT hard-code a fixed membership or count - the
+        # set is whatever the standard structurally derives from current
+        # engine_reassessment/matrix/positive_continuity_evidence state, and
+        # must change when that state legitimately changes (as it did this
+        # session: battle_calculation dropped out after its engine
+        # classification was corrected). This test only proves the packet's
+        # own list agrees with its own inputs, not that any particular
+        # rule_area belongs there.
         _assert_unconditional_blocker_standard(self.packet)
-        # The three survivors are exactly the three the task named - no
-        # silent fourth blocker, no silent dropout.
-        self.assertEqual(
-            {"deck_out", "trap_activation_frequency", "battle_calculation"},
-            _derive_expected_unconditional_engine_blockers(self.packet),
+        expected = _derive_expected_unconditional_engine_blockers(self.packet)
+        self.assertTrue(expected, "expected at least one legitimate unconditional blocker to survive")
+
+    def test_R2_battle_calculation_is_no_longer_an_unconditional_blocker(self):
+        # Direct regression for this session's specific finding: personal
+        # inspection of the pinned ocgcore source found the historical
+        # ATK<ATK/ATK<DEF attacker-recoil arithmetic is the engine's default
+        # behavior, so battle_calculation fails the engine-incompatibility
+        # half of the standard even though its historical-applicability half
+        # (positive_continuity_evidence) remains exactly as strong as
+        # deck_out's and trap_activation_frequency's.
+        current = self.packet["tokyo_dome_research_current"]
+        psr = current["primary_source_resolution_2026_08_29"]
+        engine = {r["rule_area"]: r["classification"] for r in psr["engine_reassessment"]}
+        self.assertEqual("REPRESENTABLE_EXACT_BY_DEFAULT", engine["battle_calculation"])
+        self.assertNotEqual("NOT_REPRESENTABLE", engine["battle_calculation"])
+
+        engine_items_text = " ".join(current["architecture_verdict_detail"]["engine_representation_blockers"]["items"])
+        self.assertNotIn("battle_calculation -", engine_items_text)
+
+        expected = _derive_expected_unconditional_engine_blockers(self.packet)
+        self.assertNotIn("battle_calculation", expected)
+        # Its historical continuity evidence must survive unchanged - the
+        # architectural consequence changed, the research did not.
+        self.assertIn("battle_calculation", current["positive_continuity_evidence"]["items"])
+        self.assertIs(
+            current["positive_continuity_evidence"]["items"]["battle_calculation"]["not_silence_based"], True
         )
+
+    def test_R3_arithmetic_and_timing_are_modeled_as_separate_epistemic_claims(self):
+        split = self.packet["tokyo_dome_research_current"]["positive_continuity_evidence"]["items"][
+            "battle_calculation"
+        ]["arithmetic_vs_timing_split"]
+        arithmetic = split["arithmetic_and_destruction_table"]
+        timing = split["damage_step_timing_and_response_windows"]
+        # Different historical evidence tiers - arithmetic is well-supported,
+        # timing is genuinely unknown - must not be collapsed into one claim.
+        self.assertIn("PROVEN", arithmetic["historical_status"])
+        self.assertIn("UNKNOWN", timing["historical_status"])
+        self.assertNotEqual(arithmetic["historical_status"], timing["historical_status"])
+        # Neither sub-claim is a blocker on its own: arithmetic because the
+        # engine already represents it, timing because its historical
+        # applicability was never established.
+        self.assertIs(arithmetic["engine_blocker"], False)
+        self.assertIs(timing["engine_blocker"], False)
+
+    def test_R4_no_active_prose_claims_the_recoil_arithmetic_is_absent_from_modern_rules(self):
+        _assert_no_active_recoil_absent_from_modern_claim(self.packet)
 
     def test_S_positive_continuity_evidence_is_genuinely_not_silence_based(self):
         current = self.packet["tokyo_dome_research_current"]
@@ -1956,6 +2041,79 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         matrix = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
         non_unknown = [r["rule_area"] for r in matrix if r["tokyo_dome"]["status"] != "UNKNOWN"]
         self.assertEqual(["hand_limit"], non_unknown)
+
+    # ------------------------------------------------------------------
+    # Engine-representability re-adjudication (this session): battle_
+    # calculation was removed from the unconditional-blocker set after
+    # personally inspecting the exact pinned ocgcore source and finding its
+    # arithmetic/destruction table is already the engine's default
+    # behavior. These mutations prove the standard's engine-incompatibility
+    # half is genuinely load-bearing and generic (not special-cased for
+    # battle_calculation specifically).
+    # ------------------------------------------------------------------
+
+    def test_mutation_Y_flipping_not_representable_to_representable_removes_the_blocker(self):
+        # Generic proof the mechanism works for ANY currently-blocking rule
+        # area, not just battle_calculation: flip deck_out's engine
+        # classification away from NOT_REPRESENTABLE and it must drop out of
+        # the derived set even though its historical evidence is untouched.
+        mutated = copy.deepcopy(self.packet)
+        for row in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["engine_reassessment"]:
+            if row["rule_area"] == "deck_out":
+                row["classification"] = "REPRESENTABLE_EXACT_BY_DEFAULT"
+        expected = _derive_expected_unconditional_engine_blockers(mutated)
+        self.assertNotIn("deck_out", expected)
+        # The packet's own (unmutated) items list still claims deck_out -
+        # now stale relative to the mutated engine_reassessment - so the
+        # consistency check must fail.
+        with self.assertRaises(AssertionError):
+            _assert_unconditional_blocker_standard(mutated)
+
+    def test_mutation_Z_positive_continuity_evidence_alone_cannot_create_a_blocker(self):
+        # chain_spell_speed_priority has no engine gap of the required kind
+        # (UNKNOWN_BECAUSE_HISTORY_UNKNOWN, not NOT_REPRESENTABLE) - even if
+        # it were GIVEN strong positive_continuity_evidence, that must not
+        # be enough on its own to create a blocker without a genuine
+        # NOT_REPRESENTABLE classification.
+        mutated = copy.deepcopy(self.packet)
+        engine_areas = {
+            r["rule_area"]: r["classification"]
+            for r in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["engine_reassessment"]
+        }
+        self.assertNotEqual("NOT_REPRESENTABLE", engine_areas.get("chain_spell_speed_priority"))
+        mutated["tokyo_dome_research_current"]["positive_continuity_evidence"]["items"]["chain_spell_speed_priority"] = {
+            "mechanism": "injected for test",
+            "not_silence_based": True,
+        }
+        expected = _derive_expected_unconditional_engine_blockers(mutated)
+        self.assertNotIn("chain_spell_speed_priority", expected)
+
+    def test_mutation_AA_unknown_timing_cannot_be_smuggled_in_as_not_representable(self):
+        # Direct guard against the specific move this session reversed: an
+        # earlier pass tried to preserve battle_calculation as a blocker by
+        # reframing the gap as a "single-step, response-window-free
+        # procedure" - a historically UNKNOWN claim dressed up as an engine
+        # fact. Confirm the historical record correctly marks that timing
+        # question UNKNOWN and not a blocker, then prove that reintroducing
+        # the old unhedged justification text is exactly what test_R4's
+        # standing prose guard exists to catch.
+        current = self.packet["tokyo_dome_research_current"]
+        timing = current["positive_continuity_evidence"]["items"]["battle_calculation"][
+            "arithmetic_vs_timing_split"
+        ]["damage_step_timing_and_response_windows"]
+        self.assertIn("UNKNOWN", timing["historical_status"])
+        self.assertIs(timing["engine_blocker"], False)
+
+        mutated = copy.deepcopy(self.packet)
+        for row in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["engine_reassessment"]:
+            if row["rule_area"] == "battle_calculation":
+                row["classification"] = "NOT_REPRESENTABLE"
+                row["current_behavior"] = (
+                    "Modern damage-step behavior does not reproduce the historical ATK<DEF "
+                    "attacker-recoil result without card-script/core changes."
+                )
+        with self.assertRaises(AssertionError):
+            _assert_no_active_recoil_absent_from_modern_claim(mutated)
 
 
 if __name__ == "__main__":
