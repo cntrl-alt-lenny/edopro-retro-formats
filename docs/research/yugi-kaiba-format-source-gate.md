@@ -923,7 +923,21 @@ structure. Two further calibration problems were also fixed: the May 5,
 confidence and its canonicalization readiness were conflated into one field
 when they are genuinely different questions.
 
-### Expert Rules date - recalibrated
+### Expert Rules date - recalibrated (SUPERSEDED BY THE 2026-08-29 PRIMARY-SOURCE FIND BELOW)
+
+> **This subsection is now factually superseded, not merely re-labeled.**
+> Its central claim - "no source anywhere in this research chain... has
+> actually read that book's own content" - was true when written and is
+> **false now**: the "Official Guide Starter Book" has since been located
+> and personally inspected directly on archive.org (see "Primary-source
+> resolution pass: 2026-08-29" below, and
+> `primary_source_resolution_2026_08_29.expert_rules_primary_material` in
+> the packet). The book's Expert Rules chapter is now PROVEN to directly
+> document all three rule changes. What remains unresolved - the exact
+> normative effective date, and Tokyo-Dome-specific adoption - is narrower
+> than what this paragraph describes and is stated precisely below. Kept
+> here, unedited otherwise, as a record of what was known and unknown
+> before that discovery.
 
 The prior pass implied "reasonable confidence" for 1999-05-05 as the Expert
 Rules effective date. Personally re-verified this session: a book called
@@ -985,9 +999,13 @@ Research confidence and canonicalization readiness are no longer one field.
 the strength of the Master Guide inspection above: the best current
 hypothesis is a Tokyo-Dome-tournament-finals-specific restriction, dated
 1999-08-26, of exactly those three cards. **Canonicalization readiness
-remains explicitly BLOCKING** - a better secondary source is not a primary
+remains explicitly blocking** - a better secondary source is not a primary
 source, and nobody in this chain has inspected a contemporaneous 1999
 document. Do not read the confidence upgrade as "no longer blocked."
+(Terminology note, 2026-08-29: the packet's exact status string for this
+field was standardized to `UNRESOLVED_BLOCKING` during the primary-source
+consolidation pass, replacing the bare `BLOCKING` used when this paragraph
+was written - same substance, one consistent string across the packet.)
 
 Yugipedia's own revision history behind the "August 1999 Lists" page is now
 pinned mechanically rather than narratively: revision 3443496 (2017-03-08,
@@ -1008,7 +1026,18 @@ accounts - but it is now labeled by explicit tier rather than a label that
 sounds stronger than "no period 1999 source was personally inspected"
 actually supports.
 
-### Architecture verdict - re-derived, blockers separated by kind
+### Architecture verdict - re-derived, blockers separated by kind (PARTIALLY SUPERSEDED - see 2026-08-29 section below)
+
+> **The specific unconditional-blocker list below is corrected by the
+> 2026-08-29 primary-source consolidation.** The primary-source discovery's
+> own more careful redo of the evidence matrix found that "no chain/priority
+> concept" had been over-classified as PROVEN here from the same source's
+> mere silence on the topic (silence is not proof of absence) - it is
+> correctly UNKNOWN and is no longer counted as an unconditional engine
+> blocker. A narrower, genuinely PROVEN fact (only Trap Cards, not Spell
+> Cards, may respond during the Battle Phase) is retained as an unconditional
+> blocker instead. See `architecture_verdict_detail` in the packet for the
+> current, corrected list. The top-line `BLOCKED_BY_BOTH` label is unchanged.
 
 **BLOCKED_BY_BOTH**, unchanged as a top-line label but re-derived with the
 two blocker categories now kept explicitly separate. Historical-evidence

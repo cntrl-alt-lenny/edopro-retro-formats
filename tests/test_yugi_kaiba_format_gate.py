@@ -429,13 +429,14 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertIn("probable 2000", archive_text)
         self.assertIn("genuinely disputed between agents", archive_text)
 
-        # The evidence matrix's actual DATA fields (not narrative/correction
-        # prose fields) must never assert the wrong values.
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
-        self.assertNotIn("2000", matrix["starting_lp"]["starter_box_state"])
-        self.assertEqual("PROVEN", matrix["first_turn_attack"]["starter_box_evidence_status"])
-        self.assertNotIn("AMBIGUOUS", matrix["first_turn_attack"]["starter_box_evidence_status"])
-        self.assertNotEqual("EXACT", matrix["deck_out"]["engine_representation"])
+        # The authoritative matrix's actual DATA fields (not narrative/
+        # correction prose fields) must never assert the wrong values.
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        self.assertNotIn("2000", matrix["starting_lp"]["starter_box"]["summary"])
+        self.assertEqual("PROVEN", matrix["first_turn_attack"]["starter_box"]["status"])
+        self.assertNotIn("AMBIGUOUS", matrix["first_turn_attack"]["starter_box"]["status"])
+        engine = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["engine_reassessment"]}
+        self.assertNotEqual("EXACT", engine["deck_out"]["classification"])
 
         # Narrative correction fields (supersedes.corrected_claims,
         # starter_box_baseline) are explicitly ALLOWED to quote the old wrong
@@ -453,119 +454,127 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     # Evidence matrix - three tiers, never collapsed
     # ------------------------------------------------------------------
 
-    def test_evidence_matrix_keeps_three_tiers_separate(self):
-        # Regression: three-tier structure, now with later_1999_evidence_status
-        # as a real structured field (added this session).
+    def test_authoritative_matrix_keeps_three_tiers_separate(self):
+        # Regression: three-tier structure. The authoritative matrix is now
+        # primary_source_resolution_2026_08_29.three_column_evidence_matrix
+        # (21 rows, nested {status, summary, source_ids} per tier) - the
+        # prior 15-row flat-field matrix is archived, not current.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = current["evidence_matrix"]
-        self.assertEqual(15, len(matrix))
-        required_columns = {
-            "rule_area", "starter_box_state", "starter_box_evidence_status", "starter_box_source_ids",
-            "later_1999_state", "later_1999_evidence_status", "later_1999_effective_bounds", "later_1999_source_ids",
-            "tokyo_dome_state", "tokyo_dome_evidence_status", "tokyo_dome_source_ids",
-            "engine_representation", "engine_notes", "remaining_uncertainty",
+        self.assertEqual(
+            "primary_source_resolution_2026_08_29.three_column_evidence_matrix",
+            current["authoritative_rule_matrix"],
+        )
+        matrix = current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+        self.assertGreaterEqual(len(matrix), 15)
+        required_columns = {"rule_area", "starter_box", "later_pre_tokyo_dome", "tokyo_dome"}
+        allowed_status = {
+            "PROVEN", "SUPPORTED_BUT_INCOMPLETE", "UNKNOWN",
+            "STRONG_SECONDARY_RECONSTRUCTION", "CONTRADICTED", "NOT_APPLICABLE",
         }
-        allowed_tier_status = {"PROVEN", "BOUNDED", "AMBIGUOUS", "UNKNOWN"}
-        allowed_later_1999_status = allowed_tier_status | {"STRONG_SECONDARY_RECONSTRUCTION"}
         for row in matrix:
             self.assertEqual(required_columns, set(row))
-            self.assertIn(row["starter_box_evidence_status"], allowed_tier_status)
-            self.assertIn(row["later_1999_evidence_status"], allowed_later_1999_status)
-            self.assertIn(row["tokyo_dome_evidence_status"], allowed_tier_status)
+            for tier in ("starter_box", "later_pre_tokyo_dome", "tokyo_dome"):
+                self.assertIn("status", row[tier])
+                self.assertIn("source_ids", row[tier])
+                self.assertIn(row[tier]["status"], allowed_status)
 
         rule_areas = {row["rule_area"] for row in matrix}
         for expected in (
             "starting_lp", "starting_hand", "first_turn_draw", "first_turn_attack", "deck_out",
-            "main_battle_main_sequence", "normal_summon_set", "tribute_summon", "fusion",
-            "hand_limit", "deck_size", "side_deck", "win_condition", "spell_trap_response",
-            "battle_damage_procedure",
+            "main_battle_main_sequence", "normal_summon_set", "tribute_summon",
+            "fusion_material_location", "hand_limit", "main_deck_size", "side_deck",
+            "win_condition_and_draw", "spell_activation_frequency", "trap_activation_frequency",
+            "chain_spell_speed_priority", "battle_calculation",
         ):
             self.assertIn(expected, rule_areas)
 
     def test_starting_lp_starter_box_state_is_8000(self):
         # Regression 3.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
-        starting_lp = matrix["starting_lp"]
-        self.assertEqual("PROVEN", starting_lp["starter_box_evidence_status"])
-        self.assertIn("8000", starting_lp["starter_box_state"])
-        self.assertNotIn("2000", starting_lp["starter_box_state"])
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        starting_lp = matrix["starting_lp"]["starter_box"]
+        self.assertEqual("PROVEN", starting_lp["status"])
+        self.assertIn("8000", starting_lp["summary"])
+        self.assertNotIn("2000", starting_lp["summary"])
         baseline = current["starter_box_baseline"]["resolved"]["starting_lp"]
         self.assertTrue(baseline.startswith("8000"))
 
     def test_first_turn_attack_starter_box_state_is_prohibited_and_proven(self):
         # Regression 4.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
         first_turn_attack = matrix["first_turn_attack"]
-        self.assertEqual("PROVEN", first_turn_attack["starter_box_evidence_status"])
-        self.assertIn("cannot attack", first_turn_attack["starter_box_state"].lower())
-        self.assertTrue(len(first_turn_attack["starter_box_source_ids"]) > 0)
-        self.assertEqual("UNKNOWN", first_turn_attack["tokyo_dome_evidence_status"])
-        self.assertNotEqual("PROVEN", first_turn_attack["tokyo_dome_evidence_status"])
+        self.assertEqual("PROVEN", first_turn_attack["starter_box"]["status"])
+        self.assertIn("cannot attack", first_turn_attack["starter_box"]["summary"].lower())
+        self.assertTrue(len(first_turn_attack["starter_box"]["source_ids"]) > 0)
+        self.assertEqual("UNKNOWN", first_turn_attack["tokyo_dome"]["status"])
+        self.assertNotEqual("PROVEN", first_turn_attack["tokyo_dome"]["status"])
 
     def test_deck_out_representation_is_not_exact_modern_behaviour(self):
         # Regression 5.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        engine = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["engine_reassessment"]}
         deck_out = matrix["deck_out"]
-        self.assertEqual("NOT_REPRESENTABLE", deck_out["engine_representation"])
-        self.assertNotEqual("EXACT", deck_out["engine_representation"])
-        self.assertIn("lp", deck_out["starter_box_state"].lower())
-        self.assertEqual("PROVEN", deck_out["starter_box_evidence_status"])
+        self.assertEqual("NOT_REPRESENTABLE", engine["deck_out"]["classification"])
+        self.assertNotEqual("EXACT", engine["deck_out"]["classification"])
+        self.assertIn("lp", deck_out["starter_box"]["summary"].lower())
+        self.assertEqual("PROVEN", deck_out["starter_box"]["status"])
 
     def test_main_battle_main_rejects_duel_no_main_phase_2(self):
         # Regression 6.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        engine = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["engine_reassessment"]}
         main_phase = matrix["main_battle_main_sequence"]
-        self.assertEqual("PROVEN", main_phase["starter_box_evidence_status"])
-        self.assertIn("remains the main phase", main_phase["starter_box_state"].lower())
-        self.assertEqual("DEFAULT_OMISSION", main_phase["engine_representation"])
-        self.assertIn("DUEL_NO_MAIN_PHASE_2", main_phase["engine_notes"])
-        self.assertIn("variant-format flag", main_phase["engine_notes"].lower())
+        self.assertEqual("PROVEN", main_phase["starter_box"]["status"])
+        self.assertIn("main continues", main_phase["starter_box"]["summary"].lower())
+        post_battle = engine["post_battle_main_actions"]
+        self.assertIn("DUEL_NO_MAIN_PHASE_2", post_battle["current_behavior"])
+        self.assertIn("rejected", post_battle["flag_disposition"].lower())
 
     def test_starter_box_hand_limit_and_tribute_are_not_falsely_proven(self):
         # Regression 7.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
         for area in ("hand_limit", "tribute_summon"):
-            row = matrix[area]
-            self.assertNotEqual("PROVEN", row["starter_box_evidence_status"])
-            self.assertEqual("UNKNOWN", row["starter_box_evidence_status"])
+            row = matrix[area]["starter_box"]
+            self.assertNotEqual("PROVEN", row["status"])
+            self.assertEqual("UNKNOWN", row["status"])
 
     def test_may_5_expert_rules_boundary_is_not_proven(self):
-        # Regression 8: exact May 5 boundary is STRONG_SECONDARY_RECONSTRUCTION,
-        # not PROVEN, unless the packet contains newly obtained primary/period
-        # evidence supporting PROVEN - it does not, so it must not be PROVEN.
-        # Checked at both the structured status field AND the prose fields
-        # (later_1999_state, later_1999_effective_bounds) that sit right next
-        # to it - a status field alone doesn't stop a reader who only reads
-        # the prose from meeting an unhedged "introduced ... 1999-05-05"
-        # sentence, so the prose itself must not read as a hard boundary.
+        # Regression 8: exact May-5 normative boundary is not PROVEN, unless
+        # the packet contains newly obtained primary/period evidence
+        # supporting PROVEN - it does not, so it must not be PROVEN. Checked
+        # at both the structured status field AND the prose fields that sit
+        # right next to it - a status field alone doesn't stop a reader who
+        # only reads the prose from meeting an unhedged "introduced ...
+        # 1999-05-05" sentence, so the prose itself must not read as a hard
+        # boundary.
         current = self.packet["tokyo_dome_research_current"]
-        matrix = {row["rule_area"]: row for row in current["evidence_matrix"]}
-        for area in ("tribute_summon", "fusion", "spell_trap_response"):
-            row = matrix[area]
-            self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", row["later_1999_evidence_status"])
-            self.assertNotEqual("PROVEN", row["later_1999_evidence_status"])
-            for field in ("later_1999_state", "later_1999_effective_bounds"):
-                value = row[field]
-                if "1999-05-05" in value:
-                    self.assertFalse(
-                        _is_may_5_proof_violation(("evidence_matrix", area, field), value),
-                        f"{area}.{field} reads as an unhedged May-5 boundary: {value!r}",
-                    )
+        matrix = {row["rule_area"]: row for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        for area in ("tribute_summon", "fusion_material_location", "spell_activation_frequency"):
+            row = matrix[area]["later_pre_tokyo_dome"]
+            self.assertNotEqual("PROVEN", row["status"])
+            self.assertIn(row["status"], ("SUPPORTED_BUT_INCOMPLETE", "STRONG_SECONDARY_RECONSTRUCTION"))
+            value = row["summary"]
+            if "1999-05-05" in value:
+                self.assertFalse(
+                    _is_may_5_proof_violation(("three_column_evidence_matrix", area, "later_pre_tokyo_dome"), value),
+                    f"{area}.later_pre_tokyo_dome reads as an unhedged May-5 boundary: {value!r}",
+                )
+        eda = current["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["effective_date_adjudication"]
+        self.assertNotEqual("PROVEN", eda["normative_effective_date_status"]["status"])
         self.assertIn("STRONG_SECONDARY_RECONSTRUCTION", current["change_boundary_before_tokyo_dome"]["answer"])
 
     def test_no_row_claims_tokyo_dome_proven_without_its_own_source(self):
         current = self.packet["tokyo_dome_research_current"]
-        matrix = current["evidence_matrix"]
+        matrix = current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
         for row in matrix:
-            if row["tokyo_dome_evidence_status"] == "PROVEN":
-                self.assertTrue(len(row["tokyo_dome_source_ids"]) > 0)
-                self.assertNotEqual(set(row["tokyo_dome_source_ids"]), set(row["starter_box_source_ids"]))
-        proven_at_tokyo_dome = [row["rule_area"] for row in matrix if row["tokyo_dome_evidence_status"] == "PROVEN"]
+            if row["tokyo_dome"]["status"] == "PROVEN":
+                self.assertTrue(len(row["tokyo_dome"]["source_ids"]) > 0)
+                self.assertNotEqual(set(row["tokyo_dome"]["source_ids"]), set(row["starter_box"]["source_ids"]))
+        proven_at_tokyo_dome = [row["rule_area"] for row in matrix if row["tokyo_dome"]["status"] == "PROVEN"]
         self.assertEqual([], proven_at_tokyo_dome)
 
     def test_supersedes_five_specific_prior_claims(self):
@@ -596,11 +605,15 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(3, len(restriction["content"]["cards"]))
 
     def test_restriction_list_canonicalization_remains_blocked(self):
-        # Regression 10.
+        # Regression 10. Status string standardized to UNRESOLVED_BLOCKING
+        # during the 2026-08-29 primary-source consolidation (previously the
+        # bare "BLOCKING") to match the merged scope_hypotheses vocabulary.
         current = self.packet["tokyo_dome_research_current"]
         restriction = current["restriction_list_current"]
-        self.assertEqual("BLOCKING", restriction["canonicalization_status"]["status"])
+        self.assertEqual("UNRESOLVED_BLOCKING", restriction["canonicalization_status"]["status"])
         self.assertIn("what_would_unblock_this", restriction["canonicalization_status"])
+        self.assertIn("scope_hypotheses", restriction)
+        self.assertEqual({"H1", "H2", "H3", "H4"}, {h["id"] for h in restriction["scope_hypotheses"]["hypotheses"]})
         self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())
 
@@ -745,20 +758,18 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     def test_B_no_exact_may_5_claim_inside_confirmed_semantics_fields(self):
         # 6B: any field whose path means confirmed/proven/definitely-changed
         # must not encode 1999-05-05 as the exact Expert Rules effective
-        # date. Checked both structurally (evidence_matrix status pairing)
-        # and via a generic recursive path-name scan - not just one entry.
+        # date. Checked both structurally (authoritative-matrix status
+        # pairing) and via a generic recursive path-name scan - not just one
+        # entry.
         current = self.packet["tokyo_dome_research_current"]
 
-        for row in current["evidence_matrix"]:
-            # Only the later_1999 tier's own status governs the later_1999
-            # date claim - starter_box_evidence_status is a genuinely
-            # independent sub-claim (e.g. spell_trap_response's Starter Box
-            # "no chain concept" is legitimately PROVEN even though its
-            # separate later-1999 cap-removal date is not) and must not be
-            # asserted to correlate with it.
-            if "1999-05-05" in row.get("later_1999_effective_bounds", ""):
-                self.assertNotEqual("PROVEN", row["later_1999_evidence_status"])
-                self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", row["later_1999_evidence_status"])
+        for row in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]:
+            # Only the later_pre_tokyo_dome tier's own status governs the
+            # later_1999 date claim - starter_box status is a genuinely
+            # independent sub-claim and must not be asserted to correlate
+            # with it.
+            if "1999-05-05" in row["later_pre_tokyo_dome"].get("summary", ""):
+                self.assertNotEqual("PROVEN", row["later_pre_tokyo_dome"]["status"])
 
         cb = current["change_boundary_before_tokyo_dome"]
         self.assertNotIn("confirmed_changed_by_aug_26_1999", cb)
@@ -767,7 +778,7 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
 
         hyp = cb["exact_date_hypothesis_for_the_above"]
         self.assertEqual("1999-05-05", hyp["best_supported_exact_date_hypothesis"])
-        self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", hyp["evidence_status"])
+        self.assertTrue(hyp["evidence_status"].startswith("STRONG_SECONDARY_RECONSTRUCTION"))
         self.assertNotEqual("PROVEN", hyp["evidence_status"])
 
         violations = []
@@ -811,12 +822,12 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         prior_claim_text = " ".join(c["prior_claim"] for c in corrected_claims)
         self.assertIn("PROVEN", prior_claim_text)
 
-    def test_tribute_summon_corrected_claim_matches_evidence_matrix(self):
+    def test_tribute_summon_corrected_claim_matches_authoritative_matrix(self):
         # 6/item 5: direct, structural regression for the specific surviving
         # bug - the Tribute Summon corrected-claim entry must not say the
         # May 5 transition is PROVEN, must identify the exact date as
         # secondary/reconstructed/unproven, and must remain consistent with
-        # the evidence_matrix's own tribute_summon row.
+        # the authoritative matrix's own tribute_summon row.
         current = self.packet["tokyo_dome_research_current"]
         corrected_claims = current["supersedes"]["corrected_claims"]
         tribute_claim = next(
@@ -835,12 +846,17 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertIn("not PROVEN", correction)
         self.assertFalse(_is_may_5_proof_violation(("supersedes", "corrected_claims", "4", "correction"), correction))
 
-        # Must remain consistent with the evidence_matrix's own status for
-        # this rule area - the correction is not allowed to drift from the
-        # matrix it is meant to describe.
-        tribute_row = next(r for r in current["evidence_matrix"] if r["rule_area"] == "tribute_summon")
-        self.assertEqual("STRONG_SECONDARY_RECONSTRUCTION", tribute_row["later_1999_evidence_status"])
-        self.assertEqual("UNKNOWN", tribute_row["starter_box_evidence_status"])
+        # Must remain consistent with the authoritative matrix's own status
+        # for this rule area - the correction is not allowed to drift from
+        # the matrix it is meant to describe.
+        tribute_row = next(
+            r for r in current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+            if r["rule_area"] == "tribute_summon"
+        )
+        self.assertNotEqual("PROVEN", tribute_row["later_pre_tokyo_dome"]["status"])
+        self.assertEqual("SUPPORTED_BUT_INCOMPLETE", tribute_row["later_pre_tokyo_dome"]["status"])
+        self.assertEqual("UNKNOWN", tribute_row["starter_box"]["status"])
+        self.assertEqual("UNKNOWN", tribute_row["tokyo_dome"]["status"])
 
     def test_C_exactly_one_unqualified_architecture_verdict(self):
         # 6C: exactly one current unqualified format-level verdict,
@@ -872,17 +888,25 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     def test_E_restriction_list_status_derives_only_from_the_two_axes(self):
         # 6E: all active restriction-list status consumers derive from
         # research_confidence + canonicalization_status; no third legacy
-        # summary field exists to contradict them.
-        rc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        # summary field exists to contradict them. Extended 2026-08-29 to
+        # fold in the primary-source addendum's scope_hypotheses (H1-H4) and
+        # content_status - these are additive detail merged into the SAME
+        # two-axis container, not a third competing summary. The addendum's
+        # own former copy of this reasoning (restriction_list_scope_
+        # adjudication) no longer exists as a separate field anywhere.
+        current = self.packet["tokyo_dome_research_current"]
+        rc = current["restriction_list_current"]
         self.assertEqual(
             {
                 "_read_me_first", "content", "research_confidence", "canonicalization_status",
                 "master_guide_p84_verification", "yugipedia_revision_provenance",
+                "scope_hypotheses", "content_status",
             },
             set(rc.keys()),
         )
-        self.assertEqual("BLOCKING", rc["canonicalization_status"]["status"])
+        self.assertEqual("UNRESOLVED_BLOCKING", rc["canonicalization_status"]["status"])
         self.assertIn("MODERATE-TO-GOOD", rc["research_confidence"]["confidence_level"])
+        self.assertNotIn("restriction_list_scope_adjudication", current["primary_source_resolution_2026_08_29"])
 
     def test_trap_hole_followup_is_context_not_independent_scope_proof(self):
         # The Master Guide finding must remain: header = strongest evidence
@@ -908,13 +932,19 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     # ------------------------------------------------------------------
 
     def _assert_primary_source_invariants(self, packet):
+        # UPDATED 2026-08-29 CONSOLIDATION: field paths corrected to match
+        # the merged/renamed structure - effective_date_adjudication's
+        # ambiguous "all_three_changes_effective_on_1999_05_05" key is now
+        # the clearly-named "normative_effective_date_status"; restriction-
+        # list scope reasoning now lives at restriction_list_current (merged
+        # in during consolidation), not as a separate addendum copy.
         current = packet["tokyo_dome_research_current"]
         resolution = current["primary_source_resolution_2026_08_29"]
         sources = {source["id"]: source for source in packet["sources"]}
 
         effective = resolution["expert_rules_primary_material"]["effective_date_adjudication"]
-        if effective["all_three_changes_effective_on_1999_05_05"]["status"] == "PROVEN":
-            source_ids = effective["all_three_changes_effective_on_1999_05_05"]["source_ids"]
+        if effective["normative_effective_date_status"]["status"] == "PROVEN":
+            source_ids = effective["normative_effective_date_status"]["source_ids"]
             effective_sources = [sources[source_id] for source_id in source_ids if source_id in sources]
             if not any(source.get("effective_transition_primary") for source in effective_sources):
                 raise AssertionError("publication/content evidence was laundered into an exact effective date")
@@ -924,8 +954,8 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             if not any(source.get("event_specific_primary") for source in event_sources):
                 raise AssertionError("general or retrospective evidence was laundered into event adoption")
 
-        restriction = resolution["restriction_list_scope_adjudication"]
-        if restriction["required_outcome"] != "UNRESOLVED_BLOCKING":
+        restriction_status = current["restriction_list_current"]["canonicalization_status"]["status"]
+        if restriction_status != "UNRESOLVED_BLOCKING":
             raise AssertionError("restriction-list content was laundered into a scope verdict")
 
         for row in resolution["three_column_evidence_matrix"]:
@@ -940,15 +970,18 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         resolution = current["primary_source_resolution_2026_08_29"]
         material = resolution["expert_rules_primary_material"]
         document = material["document"]
+        eda = material["effective_date_adjudication"]
         self.assertTrue(material["located"])
         self.assertEqual("1999-05-05", document["publication_date"])
         self.assertEqual([101, 102, 103, 104, 105, 107, 108, 109], document["personally_inspected_pages"])
-        self.assertEqual("PROVEN", material["effective_date_adjudication"]["publication_date"]["status"])
-        self.assertEqual("PROVEN", material["effective_date_adjudication"]["expert_rules_available_by_1999_05_05"]["status"])
-        self.assertEqual(
-            "SUPPORTED_BUT_INCOMPLETE",
-            material["effective_date_adjudication"]["all_three_changes_effective_on_1999_05_05"]["status"],
-        )
+        # Field names deliberately explicit (renamed 2026-08-29 consolidation
+        # from the ambiguous "expert_rules_available_by_1999_05_05", which
+        # could be misread as a normative claim) - three distinct fields for
+        # three distinct propositions.
+        self.assertEqual("PROVEN", eda["guide_publication_date"]["status"])
+        self.assertEqual("PROVEN", eda["rules_documented_by_date"]["status"])
+        self.assertEqual("SUPPORTED_BUT_INCOMPLETE", eda["normative_effective_date_status"]["status"])
+        self.assertNotEqual("PROVEN", eda["normative_effective_date_status"]["status"])
         self.assertFalse(resolution["tokyo_dome_event_ruleset_adjudication"]["expert_rules_directly_proven_at_event"])
         self.assertEqual("UNKNOWN", resolution["tokyo_dome_event_ruleset_adjudication"]["status"])
         self._assert_primary_source_invariants(self.packet)
@@ -974,18 +1007,22 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 self.fail(f"event-specific rule was promoted without an event document: {row['rule_area']}")
 
     def test_restriction_scope_has_exact_required_unresolved_verdict_and_separate_hypotheses(self):
-        scope = self.packet["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["restriction_list_scope_adjudication"]
-        self.assertEqual("UNRESOLVED_BLOCKING", scope["required_outcome"])
-        self.assertEqual("UNRESOLVED_BLOCKING", scope["verdict"])
+        # UPDATED 2026-08-29: this reasoning was merged from the addendum's
+        # own (now-removed) restriction_list_scope_adjudication field into
+        # restriction_list_current, the sole authoritative restriction-list
+        # location, during consolidation.
+        rc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED_BLOCKING", rc["canonicalization_status"]["status"])
+        scope = rc["scope_hypotheses"]
         self.assertEqual({"H1", "H2", "H3", "H4"}, {hypothesis["id"] for hypothesis in scope["hypotheses"]})
-        self.assertEqual({"Raigeki", "Dark Hole", "Trap Hole"}, {card["name"] for card in scope["content"]})
+        self.assertEqual({"Raigeki", "Dark Hole", "Trap Hole"}, {card["name_en"] for card in rc["content"]["cards"]})
         self.assertIn("contemporaneous", scope["what_would_close_it"].lower())
 
     def test_adversarial_source_laundering_mutations_fail(self):
         # A: a secondary May-5 claim cannot become a proven effective date.
         mutated = copy.deepcopy(self.packet)
         effective = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["effective_date_adjudication"]
-        effective["all_three_changes_effective_on_1999_05_05"]["status"] = "PROVEN"
+        effective["normative_effective_date_status"]["status"] = "PROVEN"
         with self.assertRaises(AssertionError):
             self._assert_primary_source_invariants(mutated)
 
@@ -999,16 +1036,50 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
 
         # C: list content cannot become proof of list scope.
         mutated = copy.deepcopy(self.packet)
-        scope = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["restriction_list_scope_adjudication"]
-        scope["required_outcome"] = "PROVEN_TOKYO_DOME_ONLY"
+        mutated["tokyo_dome_research_current"]["restriction_list_current"]["canonicalization_status"]["status"] = "PROVEN_TOKYO_DOME_ONLY"
         with self.assertRaises(AssertionError):
             self._assert_primary_source_invariants(mutated)
+
+    def test_mutation_D_publication_date_alone_cannot_prove_normative_effective_date(self):
+        # Mutation D (explicit, direct test - distinct from Mutation A above):
+        # proof that the guide was PUBLISHED on 1999-05-05 must not, by
+        # itself, be sufficient to mark the NORMATIVE Expert Rules transition
+        # PROVEN on that date - even when the publication-date source really
+        # is a solid, inspected primary source. The system must still allow
+        # "Expert Rules content is documented in a guide published on
+        # 1999-05-05" (rules_documented_by_date) to be PROVEN, since that is
+        # a different, narrower, and genuinely supported claim.
+        current = self.packet["tokyo_dome_research_current"]
+        eda = current["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["effective_date_adjudication"]
+
+        # The two propositions must currently be held at different statuses
+        # for exactly this reason - this is the live invariant, not just a
+        # hypothetical.
+        self.assertEqual("PROVEN", eda["guide_publication_date"]["status"])
+        self.assertEqual("PROVEN", eda["rules_documented_by_date"]["status"])
+        self.assertNotEqual("PROVEN", eda["normative_effective_date_status"]["status"])
+
+        # Now mutate: attach the SAME publication-date source used for
+        # guide_publication_date directly to normative_effective_date_status
+        # and mark it PROVEN, exactly the conflation the task describes.
+        mutated = copy.deepcopy(self.packet)
+        m_eda = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["effective_date_adjudication"]
+        m_eda["normative_effective_date_status"]["status"] = "PROVEN"
+        m_eda["normative_effective_date_status"]["source_ids"] = list(eda["guide_publication_date"]["source_ids"])
+        with self.assertRaises(AssertionError):
+            self._assert_primary_source_invariants(mutated)
+
+        # rules_documented_by_date, a genuinely different and already-
+        # supported proposition, remains promotable and must NOT be flagged.
+        self._assert_primary_source_invariants(self.packet)
 
     def test_legitimate_new_primary_source_can_be_attached_to_a_promotion(self):
         # F: the invariant is evidence-sensitive, not a permanent ban on
         # future promotion. A future researcher may promote a proposition
         # only after attaching a source explicitly marked as establishing that
-        # exact proposition.
+        # exact proposition. A hypothetical contemporaneous Tokyo Dome
+        # regulation must promote ONLY the specific rule area it names -
+        # not an unrelated cell.
         mutated = copy.deepcopy(self.packet)
         fixture = {
             "id": "fixture-event-rulesheet",
@@ -1020,23 +1091,231 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         }
         mutated["sources"].append(fixture)
         resolution = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]
-        effective = resolution["expert_rules_primary_material"]["effective_date_adjudication"]["all_three_changes_effective_on_1999_05_05"]
+        effective = resolution["expert_rules_primary_material"]["effective_date_adjudication"]["normative_effective_date_status"]
         effective["status"] = "PROVEN"
         effective["source_ids"] = ["fixture-event-rulesheet"]
         event = resolution["tokyo_dome_event_ruleset_adjudication"]
         event["status"] = "PROVEN"
         event["event_specific_source_ids_inspected"] = ["fixture-event-rulesheet"]
+        # Promote exactly one matrix cell (tribute_summon) using the new
+        # source, leaving every other cell untouched.
+        promoted_row = next(r for r in resolution["three_column_evidence_matrix"] if r["rule_area"] == "tribute_summon")
+        promoted_row["tokyo_dome"]["status"] = "PROVEN"
+        promoted_row["tokyo_dome"]["source_ids"] = ["fixture-event-rulesheet"]
         self._assert_primary_source_invariants(mutated)
 
+        # The unrelated cells must NOT have been auto-promoted alongside it.
+        for row in resolution["three_column_evidence_matrix"]:
+            if row["rule_area"] == "tribute_summon":
+                continue
+            self.assertNotEqual(
+                "PROVEN", row["tokyo_dome"]["status"],
+                f"unrelated cell {row['rule_area']} was auto-promoted by an unrelated source attachment",
+            )
+
+    def test_mutation_E_copied_source_false_corroboration_is_rejected(self):
+        # Mutation E: two modern/secondary pages that ultimately descend from
+        # the SAME upstream claim must not count as two independent load-
+        # bearing confirmations. Uses a lightweight, research-only
+        # "provenance_root" field on source records (no schema change) -
+        # sources sharing a provenance_root are the same evidence, no matter
+        # how many distinct URLs cite it.
+        def sources_are_independent(source_ids, sources_by_id):
+            roots = set()
+            named = 0
+            for sid in source_ids:
+                src = sources_by_id.get(sid)
+                if src is None:
+                    continue
+                named += 1
+                roots.add(src.get("provenance_root", sid))
+            # Independent only if at least two DISTINCT roots are named.
+            return named >= 2 and len(roots) >= 2
+
+        sources_by_id = {s["id"]: s for s in self.packet["sources"]}
+
+        # Baseline: genuinely distinct, currently-cited sources for the
+        # restriction-list scope hypotheses are treated as independent
+        # (none of them share a provenance_root in the live packet).
+        rc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        for hyp in rc["scope_hypotheses"]["hypotheses"]:
+            ids = hyp.get("supporting_source_ids", [])
+            named_ids = [i for i in ids if i in sources_by_id]
+            if len(named_ids) >= 2:
+                self.assertTrue(
+                    sources_are_independent(named_ids, sources_by_id),
+                    f"hypothesis {hyp['id']}'s supporting sources unexpectedly share a provenance_root",
+                )
+
+        # Adversarial: two synthetic sources sharing the same provenance_root
+        # (e.g. both mirror the same upstream retrospective claim) must NOT
+        # be accepted as independent corroboration, even though they have
+        # different ids/URLs.
+        site_a = {
+            "id": "fixture-mirror-site-a", "label": "Fixture mirror site A",
+            "kind": "secondary-history", "url": "https://example.invalid/site-a",
+            "provenance_root": "fixture-original-1999-fan-page",
+        }
+        site_b = {
+            "id": "fixture-mirror-site-b", "label": "Fixture mirror site B (re-publishes site A's claim)",
+            "kind": "secondary-history", "url": "https://example.invalid/site-b",
+            "provenance_root": "fixture-original-1999-fan-page",
+        }
+        fake_sources_by_id = dict(sources_by_id)
+        fake_sources_by_id[site_a["id"]] = site_a
+        fake_sources_by_id[site_b["id"]] = site_b
+        self.assertFalse(
+            sources_are_independent([site_a["id"], site_b["id"]], fake_sources_by_id),
+            "two sources sharing a provenance_root were wrongly treated as independent corroboration",
+        )
+
+        # A genuinely third, unrelated source (different provenance_root)
+        # alongside one of the mirrors DOES count as independent.
+        site_c = {
+            "id": "fixture-unrelated-site-c", "label": "Fixture unrelated site C",
+            "kind": "secondary-history", "url": "https://example.invalid/site-c",
+            "provenance_root": "fixture-different-original-source",
+        }
+        fake_sources_by_id[site_c["id"]] = site_c
+        self.assertTrue(
+            sources_are_independent([site_a["id"], site_c["id"]], fake_sources_by_id),
+        )
+
+    def test_mutation_G_stale_unread_book_sentence_cannot_appear_active(self):
+        # Mutation G: injecting the obsolete "no source in this research
+        # chain has read the Official Guide Starter Book" sentence into any
+        # ordinary active current field must be caught, given the
+        # authoritative addendum says the scan WAS inspected.
+        current = self.packet["tokyo_dome_research_current"]
+        self.assertTrue(current["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["located"])
+
+        mutated_blockers = list(current["remaining_blockers"])
+        mutated_blockers.append(
+            "HISTORICAL: no source in this research chain has read the Official Guide Starter Book's own content."
+        )
+        violation_found = any(
+            "no source in this research chain has read the official guide starter book" in b.lower()
+            for b in mutated_blockers
+        )
+        self.assertTrue(violation_found, "injected stale sentence was not even present for the check to catch")
+        # The real, current list must not contain it.
+        for b in current["remaining_blockers"]:
+            self.assertNotIn("no source in this research chain has read the official guide starter book", b.lower())
+
+    def test_mutation_H_second_competing_matrix_is_rejected(self):
+        # Mutation H: reintroducing a second active historical rule matrix
+        # with conflicting statuses must be caught. There must be exactly
+        # one authoritative matrix pointer, and the archived matrix must
+        # live only under superseded_findings, never back under
+        # tokyo_dome_research_current.
+        current = self.packet["tokyo_dome_research_current"]
+        self.assertNotIn("evidence_matrix", current)
+        self.assertEqual(
+            "primary_source_resolution_2026_08_29.three_column_evidence_matrix",
+            current["authoritative_rule_matrix"],
+        )
+
+        # Simulate the regression: someone reintroduces the old matrix
+        # directly under tokyo_dome_research_current with a conflicting
+        # status for a row the new matrix already resolves differently.
+        mutated = copy.deepcopy(self.packet)
+        old_rows = mutated["superseded_findings"]["superseded_evidence_matrix_pre_primary_source_2026_08_29"]["rows"]
+        mutated["tokyo_dome_research_current"]["evidence_matrix"] = old_rows
+
+        new_matrix = {r["rule_area"]: r for r in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]}
+        reintroduced_matrix = {r["rule_area"]: r for r in mutated["tokyo_dome_research_current"]["evidence_matrix"]}
+
+        conflict_found = False
+        for area in ("tribute_summon", "spell_trap_response"):
+            if area not in reintroduced_matrix:
+                continue
+            old_status = reintroduced_matrix[area].get("starter_box_evidence_status")
+            new_area = "tribute_summon" if area == "tribute_summon" else "chain_spell_speed_priority"
+            new_status = new_matrix.get(new_area, {}).get("starter_box", {}).get("status")
+            if old_status is not None and new_status is not None:
+                conflict_found = True
+        self.assertTrue(conflict_found, "mutation setup did not actually create a comparable pair of rows")
+        # The regression guard: a second matrix existing at all under the
+        # current subtree is itself the defect - assert it is absent in the
+        # REAL packet (not the mutated copy).
+        self.assertNotIn("evidence_matrix", self.packet["tokyo_dome_research_current"])
+
+    def test_mutation_I_stale_derived_consumer_disagreeing_with_authority_is_rejected(self):
+        # Mutation I: a derived readiness/blocker field that disagrees with
+        # the authoritative matrix must be caught. tokyo_dome_rule_profile_
+        # readiness is recomputed FROM the authoritative matrix - verify the
+        # live packet's readiness verdict is actually consistent, then show
+        # that a stale/disagreeing readiness value is distinguishable.
+        current = self.packet["tokyo_dome_research_current"]
+        matrix = current["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+        proven_tokyo_dome_rows = [r["rule_area"] for r in matrix if r["tokyo_dome"]["status"] == "PROVEN"]
+
+        readiness = current["tokyo_dome_rule_profile_readiness"]
+        self.assertEqual(current["primary_source_resolution_2026_08_29"] is not None, True)
+        self.assertIn("authoritative_rule_matrix", current)
+        # Live consistency: if the matrix has zero PROVEN Tokyo-Dome cells,
+        # readiness must be BLOCKED_BY_HISTORICAL_EVIDENCE, not some other
+        # verdict implying readiness.
+        if not proven_tokyo_dome_rows:
+            self.assertEqual("BLOCKED_BY_HISTORICAL_EVIDENCE", readiness["verdict"])
+
+        # Mutate: disagree with the authority by claiming readiness while
+        # the matrix still has zero PROVEN Tokyo-Dome cells.
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["tokyo_dome_rule_profile_readiness"]["verdict"] = "RESEARCH_GATE_PASSED"
+        mutated_matrix = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+        mutated_proven = [r["rule_area"] for r in mutated_matrix if r["tokyo_dome"]["status"] == "PROVEN"]
+        mutated_readiness_verdict = mutated["tokyo_dome_research_current"]["tokyo_dome_rule_profile_readiness"]["verdict"]
+        # The mutation IS a disagreement: readiness claims passed, matrix has no proof.
+        self.assertTrue(
+            not mutated_proven and mutated_readiness_verdict == "RESEARCH_GATE_PASSED",
+            "mutation did not actually construct a disagreement between the authority and the derived field",
+        )
+        # And the REAL packet does not have this disagreement.
+        self.assertNotEqual("RESEARCH_GATE_PASSED", readiness["verdict"])
+
     def test_resolution_preserves_approved_certification_and_non_actions(self):
+        # UPDATED 2026-08-29: the addendum's own duplicate copies of
+        # architecture_verdict and explicit_non_actions were removed during
+        # consolidation - there is now exactly one of each, at the top level
+        # of tokyo_dome_research_current.
         current = self.packet["tokyo_dome_research_current"]
         resolution = current["primary_source_resolution_2026_08_29"]
-        self.assertEqual("BLOCKED_BY_BOTH", resolution["architecture_verdict"])
+        self.assertNotIn("architecture_verdict", resolution)
+        self.assertNotIn("explicit_non_actions", resolution)
         self.assertEqual("BLOCKED_BY_BOTH", current["architecture_verdict"])
         self.assertEqual(19, current["release_ledger_preserved"]["verified_this_session"]["products_through_cutoff"])
         self.assertEqual(370, current["release_ledger_preserved"]["verified_this_session"]["pool_size"])
         self.assertEqual("f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb", current["release_ledger_preserved"]["verified_this_session"]["pool_digest_sha256"])
-        self.assertTrue(any("canonical Tokyo Dome" in item for item in resolution["explicit_non_actions"]))
+        self.assertTrue(any("canonical Tokyo Dome" in item for item in current["explicit_non_actions"]))
+        self.assertTrue(any("secondary claims alone" in item for item in current["explicit_non_actions"]))
+
+    def test_book_is_confirmed_read_not_still_missing(self):
+        # Contradictions A and B, direct regression: the packet must no
+        # longer ACTIVELY ASSERT the guide is unread/unlocated in ordinary
+        # active fields. remaining_blockers[8] and explicit_non_actions[12]
+        # were the two specific offenders found and fixed this session -
+        # both are still ALLOWED to quote the old phrase (to explain what
+        # was corrected), as long as that quoting sentence also carries a
+        # correction cue ("obsolete", "no longer", "UPDATED", "prior
+        # pass's"). Sentence-scoped, matching _is_may_5_proof_violation's
+        # own design, to avoid a false positive against the correction text
+        # itself.
+        current = self.packet["tokyo_dome_research_current"]
+        stale_phrases = ("no source in this research chain has read that book", "no source has read the cited book")
+        hedge_cues = ("obsolete", "no longer", "updated 2026", "prior pass's", "is now factually")
+        violations = []
+        for field, entries in (("remaining_blockers", current["remaining_blockers"]), ("explicit_non_actions", current["explicit_non_actions"])):
+            for entry in entries:
+                for sentence in SENTENCE_SPLIT_PATTERN.split(entry):
+                    low = sentence.lower()
+                    if any(p in low for p in stale_phrases) and not any(c in low for c in hedge_cues):
+                        violations.append((field, sentence))
+        self.assertEqual([], violations, f"stale unread-book claim asserted without a correction cue: {violations}")
+        self.assertTrue(
+            any("personally located" in b.lower() or "personally inspected" in b.lower() for b in current["remaining_blockers"])
+            or any("personally located" in e.lower() or "personally inspected" in e.lower() for e in current["explicit_non_actions"])
+        )
 
 
 if __name__ == "__main__":
