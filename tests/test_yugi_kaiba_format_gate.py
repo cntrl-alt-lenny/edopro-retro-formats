@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import copy
 import re
 import unittest
 from datetime import date
@@ -901,6 +902,141 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         current = self.packet["tokyo_dome_research_current"]
         for path, s in _walk_strings(current, ()):
             self.assertNotIn("restriction_list_reassessment", s)
+
+    # ------------------------------------------------------------------
+    # 2026-08-29 primary-source resolution addendum
+    # ------------------------------------------------------------------
+
+    def _assert_primary_source_invariants(self, packet):
+        current = packet["tokyo_dome_research_current"]
+        resolution = current["primary_source_resolution_2026_08_29"]
+        sources = {source["id"]: source for source in packet["sources"]}
+
+        effective = resolution["expert_rules_primary_material"]["effective_date_adjudication"]
+        if effective["all_three_changes_effective_on_1999_05_05"]["status"] == "PROVEN":
+            source_ids = effective["all_three_changes_effective_on_1999_05_05"]["source_ids"]
+            effective_sources = [sources[source_id] for source_id in source_ids if source_id in sources]
+            if not any(source.get("effective_transition_primary") for source in effective_sources):
+                raise AssertionError("publication/content evidence was laundered into an exact effective date")
+        if resolution["tokyo_dome_event_ruleset_adjudication"]["status"] == "PROVEN":
+            event_ids = resolution["tokyo_dome_event_ruleset_adjudication"]["event_specific_source_ids_inspected"]
+            event_sources = [sources[source_id] for source_id in event_ids if source_id in sources]
+            if not any(source.get("event_specific_primary") for source in event_sources):
+                raise AssertionError("general or retrospective evidence was laundered into event adoption")
+
+        restriction = resolution["restriction_list_scope_adjudication"]
+        if restriction["required_outcome"] != "UNRESOLVED_BLOCKING":
+            raise AssertionError("restriction-list content was laundered into a scope verdict")
+
+        for row in resolution["three_column_evidence_matrix"]:
+            if row["tokyo_dome"]["status"] == "PROVEN":
+                event_ids = row["tokyo_dome"]["source_ids"]
+                event_sources = [sources[source_id] for source_id in event_ids if source_id in sources]
+                if not any(source.get("event_specific_primary") for source in event_sources):
+                    raise AssertionError(f"{row['rule_area']} has no event-specific primary evidence")
+
+    def test_actual_1999_expert_rules_scan_is_recorded_without_date_or_event_laundering(self):
+        current = self.packet["tokyo_dome_research_current"]
+        resolution = current["primary_source_resolution_2026_08_29"]
+        material = resolution["expert_rules_primary_material"]
+        document = material["document"]
+        self.assertTrue(material["located"])
+        self.assertEqual("1999-05-05", document["publication_date"])
+        self.assertEqual([101, 102, 103, 104, 105, 107, 108, 109], document["personally_inspected_pages"])
+        self.assertEqual("PROVEN", material["effective_date_adjudication"]["publication_date"]["status"])
+        self.assertEqual("PROVEN", material["effective_date_adjudication"]["expert_rules_available_by_1999_05_05"]["status"])
+        self.assertEqual(
+            "SUPPORTED_BUT_INCOMPLETE",
+            material["effective_date_adjudication"]["all_three_changes_effective_on_1999_05_05"]["status"],
+        )
+        self.assertFalse(resolution["tokyo_dome_event_ruleset_adjudication"]["expert_rules_directly_proven_at_event"])
+        self.assertEqual("UNKNOWN", resolution["tokyo_dome_event_ruleset_adjudication"]["status"])
+        self._assert_primary_source_invariants(self.packet)
+
+    def test_three_column_matrix_uses_the_required_status_vocabulary_and_keeps_event_unknown(self):
+        resolution = self.packet["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]
+        allowed = {
+            "PROVEN",
+            "STRONG_SECONDARY_RECONSTRUCTION",
+            "SUPPORTED_BUT_INCOMPLETE",
+            "UNKNOWN",
+            "CONTRADICTED",
+            "NOT_APPLICABLE",
+        }
+        matrix = resolution["three_column_evidence_matrix"]
+        self.assertGreaterEqual(len(matrix), 15)
+        for row in matrix:
+            self.assertEqual({"rule_area", "starter_box", "later_pre_tokyo_dome", "tokyo_dome"}, set(row))
+            for column in ("starter_box", "later_pre_tokyo_dome", "tokyo_dome"):
+                self.assertIn(row[column]["status"], allowed)
+                self.assertIn("source_ids", row[column])
+            if row["tokyo_dome"]["status"] == "PROVEN":
+                self.fail(f"event-specific rule was promoted without an event document: {row['rule_area']}")
+
+    def test_restriction_scope_has_exact_required_unresolved_verdict_and_separate_hypotheses(self):
+        scope = self.packet["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["restriction_list_scope_adjudication"]
+        self.assertEqual("UNRESOLVED_BLOCKING", scope["required_outcome"])
+        self.assertEqual("UNRESOLVED_BLOCKING", scope["verdict"])
+        self.assertEqual({"H1", "H2", "H3", "H4"}, {hypothesis["id"] for hypothesis in scope["hypotheses"]})
+        self.assertEqual({"Raigeki", "Dark Hole", "Trap Hole"}, {card["name"] for card in scope["content"]})
+        self.assertIn("contemporaneous", scope["what_would_close_it"].lower())
+
+    def test_adversarial_source_laundering_mutations_fail(self):
+        # A: a secondary May-5 claim cannot become a proven effective date.
+        mutated = copy.deepcopy(self.packet)
+        effective = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["expert_rules_primary_material"]["effective_date_adjudication"]
+        effective["all_three_changes_effective_on_1999_05_05"]["status"] = "PROVEN"
+        with self.assertRaises(AssertionError):
+            self._assert_primary_source_invariants(mutated)
+
+        # B: a general guide cannot become an event-specific proof.
+        mutated = copy.deepcopy(self.packet)
+        event = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["tokyo_dome_event_ruleset_adjudication"]
+        event["status"] = "PROVEN"
+        event["event_specific_source_ids_inspected"] = ["official-guide-starter-book-1999-scan"]
+        with self.assertRaises(AssertionError):
+            self._assert_primary_source_invariants(mutated)
+
+        # C: list content cannot become proof of list scope.
+        mutated = copy.deepcopy(self.packet)
+        scope = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["restriction_list_scope_adjudication"]
+        scope["required_outcome"] = "PROVEN_TOKYO_DOME_ONLY"
+        with self.assertRaises(AssertionError):
+            self._assert_primary_source_invariants(mutated)
+
+    def test_legitimate_new_primary_source_can_be_attached_to_a_promotion(self):
+        # F: the invariant is evidence-sensitive, not a permanent ban on
+        # future promotion. A future researcher may promote a proposition
+        # only after attaching a source explicitly marked as establishing that
+        # exact proposition.
+        mutated = copy.deepcopy(self.packet)
+        fixture = {
+            "id": "fixture-event-rulesheet",
+            "label": "Future inspected Tokyo Dome rulesheet fixture",
+            "kind": "contemporaneous-official-primary-scan",
+            "url": "https://example.invalid/future-tokyo-dome-rulesheet",
+            "event_specific_primary": True,
+            "effective_transition_primary": True,
+        }
+        mutated["sources"].append(fixture)
+        resolution = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]
+        effective = resolution["expert_rules_primary_material"]["effective_date_adjudication"]["all_three_changes_effective_on_1999_05_05"]
+        effective["status"] = "PROVEN"
+        effective["source_ids"] = ["fixture-event-rulesheet"]
+        event = resolution["tokyo_dome_event_ruleset_adjudication"]
+        event["status"] = "PROVEN"
+        event["event_specific_source_ids_inspected"] = ["fixture-event-rulesheet"]
+        self._assert_primary_source_invariants(mutated)
+
+    def test_resolution_preserves_approved_certification_and_non_actions(self):
+        current = self.packet["tokyo_dome_research_current"]
+        resolution = current["primary_source_resolution_2026_08_29"]
+        self.assertEqual("BLOCKED_BY_BOTH", resolution["architecture_verdict"])
+        self.assertEqual("BLOCKED_BY_BOTH", current["architecture_verdict"])
+        self.assertEqual(19, current["release_ledger_preserved"]["verified_this_session"]["products_through_cutoff"])
+        self.assertEqual(370, current["release_ledger_preserved"]["verified_this_session"]["pool_size"])
+        self.assertEqual("f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb", current["release_ledger_preserved"]["verified_this_session"]["pool_digest_sha256"])
+        self.assertTrue(any("canonical Tokyo Dome" in item for item in resolution["explicit_non_actions"]))
 
 
 if __name__ == "__main__":

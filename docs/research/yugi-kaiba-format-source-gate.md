@@ -1028,3 +1028,182 @@ No canonical Tokyo Dome format, banlist, pool, rule profile, or lflist was
 created by this hardening pass either. Runtime, schemas, and the errata
 model were not touched. The certified 370-card pool, its digest, and the
 19-product release ledger were re-verified live and remain unchanged.
+
+## Primary-source resolution pass: 2026-08-29
+
+This is the final adjudication for the primary-source gate. The structured
+version is `tokyo_dome_research_current.primary_source_resolution_2026_08_29`
+in `yugi-kaiba-format-source-packet.json`; that object is the machine-readable
+authority for the statuses below.
+
+### Research method and source boundary
+
+Four evidence lanes were kept independent: restriction-list provenance,
+contemporaneous Expert Rules material, Tokyo Dome event documentation, and an
+adversarial provenance audit. Agent summaries were discovery aids only. The
+final adjudicator personally inspected the load-bearing source objects before
+promoting any finding.
+
+The decisive new source is the inspectable scan of Shueisha / Studio Hard's
+*Official Guide Starter Book*, published 1999-05-05:
+
+`https://archive.org/details/yugioh-official-guide-starter-book-may-05-1999`
+
+Pages 107-109 were personally inspected. The archive item is a later-hosted
+scan of the period book; the repository does not claim ownership of the scan
+and does not commit copyrighted pages. The catalogue record independently
+confirms the 1999-05-05 publication date:
+
+`https://ocg-card.com/latest/ogs/`
+
+The scan's Chapter 3 is headed `エキスパートルール` (Expert Rules). Its
+introduction calls these special rules prepared by Konami for advanced
+duelists, adds three rules to the official rules, and says that tournaments
+*may* adopt them. The inspected pages then directly describe:
+
+- Rule 1: any-number turn use of Magic/Trap cards while in hand, subject to
+  the five-card field limit;
+- Rule 2: one field Tribute for Level 5-6 monsters and two for Level 7 or
+  higher; and
+- Rule 3: Fusion materials may be used from the hand.
+
+This proves that the Expert Rules text was documented in a 1999 guide. It does
+not prove that 1999-05-05 was the universal effective date, and it does not
+prove that the Tokyo Dome event adopted the rules. The exact transition date
+therefore remains `STRONG_SECONDARY_RECONSTRUCTION` /
+`SUPPORTED_BUT_INCOMPLETE`, not `PROVEN`.
+
+### Restriction-list adjudication
+
+The exact required outcome is **`UNRESOLVED_BLOCKING`**.
+
+The three-card content remains supported: Raigeki, Dark Hole, and Trap Hole,
+each Limited to 1. Scope is a separate question. The strongest located scope
+wording is the personally inspected 2004 Shueisha *Master Guide* page 84,
+surfaced by Yugipedia, whose header reads
+`1999年8月26日大会限定 制限・禁止カード一覧` (“August 26, 1999
+tournament-limited restriction/forbidden card list”). That is a later
+retrospective, not a 1999 event document. The specialist reconstruction that
+repeats a tournament-only reading is itself third-hand and hedged. The older
+“July 1999 nationwide” framing also lacks an inspectable contemporaneous
+Konami source. Context about Trap Hole being lifted shortly afterward is
+chronology, not independent scope proof.
+
+| Hypothesis | Current status | Why it cannot be promoted |
+| --- | --- | --- |
+| H1 — general OCG list | UNRESOLVED | List content is repeated, but no contemporaneous source proves ordinary nationwide scope. |
+| H2 — Tokyo Dome/event-only list | UNRESOLVED | The Master Guide wording is specific but five years late; no 1999 event sheet was found. |
+| H3 — other tournament-specific scope | UNRESOLVED | Tournament-oriented cataloguing exists, but the affected tournament population is unknown. |
+| H4 — retrospective reconstruction | PLAUSIBLE | The surviving web evidence is downstream and divergent; plausibility is not proof. |
+
+Accordingly, the list verdict is not `PROVEN_GENERAL_OCG`,
+`PROVEN_TOKYO_DOME_ONLY`, or `PROVEN_TOURNAMENT_SCOPE_OTHER`.
+
+### Timeline and three-layer rule matrix
+
+| Rule area | Starter Box | Later pre-Tokyo-Dome OCG | Tokyo Dome specifically |
+| --- | --- | --- | --- |
+| Starting LP / hand | `PROVEN`: 8000 LP; 5 cards. | `SUPPORTED_BUT_INCOMPLETE`: no dated change located. | `UNKNOWN`: no event rule sheet. |
+| First-turn draw / attack | `PROVEN`: first player skips the initial draw; turn-1 attacks prohibited. | `SUPPORTED_BUT_INCOMPLETE`: continuity is not separately dated. | `UNKNOWN`. |
+| Tribute Summon | `UNKNOWN`: no Level-based Tribute rule is stated. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules pages directly state 1/2 Tributes, but not their effective date. | `UNKNOWN`: “tournaments may adopt” is not adoption evidence. |
+| Fusion materials | `PROVEN`: field-only materials. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules directly permit hand materials, but adoption date is unpinned. | `UNKNOWN`. |
+| Spell/Trap frequency and response | `PROVEN` for the Starter procedure; no modern Chain/Spell Speed model is established. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules describe the activation-cap change, not a complete timing system or effective date. | `UNKNOWN`. |
+| Main/Battle/Main | `PROVEN`: Battle is inside Main and Main continues after Battle until End Phase. | `SUPPORTED_BUT_INCOMPLETE`: the date of the later MP1/MP2 terminology split is unknown. | `UNKNOWN`. |
+| Hand limit | `UNKNOWN`: no six-card limit/discard rule is stated. | `UNKNOWN`: the inspected Expert pages do not establish one. | `UNKNOWN`. |
+| Deck-out | `PROVEN`: compare remaining LP; higher LP wins. | `SUPPORTED_BUT_INCOMPLETE`: later reconstruction places automatic loss after Series 1, without a contemporaneous transition notice. | `UNKNOWN`. |
+| Battle calculation | `PROVEN`: includes the ATK<DEF attacker-recoil result. | `SUPPORTED_BUT_INCOMPLETE`: no dated change located. | `UNKNOWN`. |
+| Main / Side / Fusion deck limits | `PROVEN` for the Starter rules' 40-minimum/no-upper-bound main deck, 10-card Side Deck, and separate Fusion Deck. | `SUPPORTED_BUT_INCOMPLETE`: no event-enforcement document. | `UNKNOWN`. |
+
+The complete 21-area matrix, including Field Spell coexistence, priority,
+battle-phase structure, and win-condition/card-availability distinctions, is
+stored in the packet with one of the required statuses in every cell. No
+Tokyo-Dome cell is `PROVEN`.
+
+The timeline is therefore:
+
+1. The original Starter Box rule tier is directly available through the
+   traceable period-rulebook transcription.
+2. On 1999-05-05, the Official Guide Starter Book demonstrably contained an
+   Expert Rules chapter. This is a publication/documentation date, not a
+   proven universal transition date.
+3. On 1999-08-26, the event-specific rules remain unknown. The contemporary
+   *Los Angeles Times* report describes a Konami-sponsored Tokyo Dome event
+   centered on the recently released handheld game and a card swap meet; the
+   archived Web Japan report likewise describes the software tournament and
+   cancellation. Neither names the tabletop OCG rules.
+
+### Engine and schema reassessment
+
+`DUEL_NO_MAIN_PHASE_2` remains rejected. The historical Starter text permits
+legal Main actions after Battle and before End Phase. Current default
+MP1 → Battle → MP2 behavior preserves that action opportunity; the flag
+removes it. The modern label is an approximation of the historical action
+sequence, while the no-MP2 flag is behaviorally wrong.
+
+The engine findings are conditional where event history is unknown:
+
+| Area | Current classification | Finding |
+| --- | --- | --- |
+| Post-battle Main actions | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Default flow is closer; no-MP2 is rejected. |
+| Deck-out | `NOT_REPRESENTABLE` | No pinned flag or sanctioned `init.lua` hook converts empty-deck loss into higher-LP victory. |
+| Battle calculation | `NOT_REPRESENTABLE` | Current damage handling does not reproduce the historical attacker-recoil result exactly. |
+| Tribute / Fusion / timing | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Expert text is real, but event adoption is not established. |
+| Deck / Side / Fusion limits | `REPRESENTABLE_WITH_HOST_CONFIG` | Historical unbounded maxima can be recorded as `null`; `[40, 999]` is a documented EDOPro host ceiling, not historical unlimited. |
+| LP / first-turn settings | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Starter values are host-representable, but Tokyo Dome selection is not proven. |
+
+The repository's schema/host verdict remains **sufficient with documented
+approximations**. No schema change is required for this research state: the
+historical model is recorded with a null upper bound and the finite client
+ceiling is explicitly labelled as an approximation. This is separate from the
+format-level result, which remains `BLOCKED_BY_BOTH`.
+
+### Canonicalization blocker ledger
+
+| Item | Status | Reason |
+| --- | --- | --- |
+| Format name/date convention | RESOLVED | `1999-08-tokyo-dome`, event 1999-08-26; community target retained. |
+| Event/card-pool cutoff | RESOLVED WITH APPROXIMATION | Pre-event 1999-08-25 is certified and reproducible; same-day product legality is not proven. |
+| OCG release ledger | RESOLVED | 19 products / 370 cards / certified digest unchanged. |
+| Missing card identities | RESOLVED WITH APPROXIMATION | Certified pool remains the approved research snapshot; no new ledger import was started. |
+| Banlist | BLOCKING | Three-card content supported, scope `UNRESOLVED_BLOCKING`. |
+| Starter Rules vs Expert Rules boundary | BLOCKING | Expert text is now primary-inspected, but effective date and event adoption remain unresolved. |
+| Main/Battle/Main behavior | BLOCKING | Starter behavior is proven; Tokyo Dome adoption is unknown. |
+| First-turn draw | UNRESOLVED | Starter rule proven; event-specific adoption unknown. |
+| First-turn attack | UNRESOLVED | Starter prohibition proven; event-specific adoption unknown. |
+| Hand limit | UNRESOLVED | No six-card transition is proven for this event. |
+| Deck-size representation | RESOLVED WITH APPROXIMATION | Null historical maximum plus explicitly finite host ceiling. |
+| Side/Fusion deck constraints | UNRESOLVED | General Starter constraints are known; tournament enforcement is not. |
+| Deck-out rule | RESOLVED WITH APPROXIMATION | Historical LP comparison is documented but not reproduced by pinned core. |
+| Battle-calculation semantics | RESOLVED WITH APPROXIMATION | Historical attacker recoil is documented but not reproduced exactly. |
+| Chain/Spell-Speed semantics | UNRESOLVED | The early Expert text does not provide a complete formal timing model. |
+| Errata chronology | RESOLVED | 296 V2 records remain unchanged. |
+| Errata implementation coverage | RESOLVED WITH APPROXIMATION | Research audit remains frozen; no canonical Tokyo Dome policy was chosen. |
+| Engine representability | BLOCKING | Conditional deck-out and battle-calculation gaps remain. |
+| Schema representability | RESOLVED WITH APPROXIMATION | No shared schema change is required. |
+
+### Final research verdict
+
+Restriction-list verdict: **`UNRESOLVED_BLOCKING`**.
+
+Were Expert Rules proven in force at Tokyo Dome? **No.** The primary guide
+proves the rules were documented by 1999-05-05 and even says tournaments may
+adopt them; no inspected source bridges that statement to this event.
+
+Architecture verdict: **`BLOCKED_BY_BOTH`** — historical evidence remains
+blocking, and the historically established early deck-out and battle
+calculation behaviors remain engine approximations/gaps. The schema is
+sufficient with documented host approximations. `DUEL_NO_MAIN_PHASE_2` was
+rejected. No canonical Tokyo Dome format or any related canonical artifact was
+created, and the OCG release-ledger import was not begun.
+
+The physical documents now required to close the historical gate are specific:
+
+- a contemporaneous 1999 Konami restriction-list notice or tournament
+  regulation naming the three cards and their scope; and
+- a Tokyo Dome programme, entry/qualifier sheet, organizer rule notice, or
+  period Japanese magazine/newspaper report that names the tabletop OCG rules
+  used at the event.
+
+If those objects do not survive online, a verifiable scan from a collector,
+library, or period archive with clear title/date/page provenance would be the
+next acceptable evidence. Repeated modern summaries are not a substitute.
