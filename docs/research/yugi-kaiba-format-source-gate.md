@@ -37,13 +37,24 @@ format, banlist, card pool, or rule profile.
 - **Full Chain/Spell-Speed/priority system:** historical adoption by
   Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
   engine blocker. The narrower, `PROVEN`/bounded paradigm that *is* a
-  confirmed unconditional engine blocker is the no-chain,
-  Traps-only-in-Battle-Phase behavior - see
+  confirmed unconditional engine blocker is the Battle-Phase Traps-only
+  restriction (`trap_activation_frequency`) - see
   `tokyo_dome_research_current.architecture_verdict_detail.`
   `engine_representation_blockers`.
 - **Unconditional engine blockers (independent of any unresolved history):**
-  deck-out LP-comparison, the no-chain/Traps-only-Battle-Phase-response
-  paradigm, and the early battle-calculation attacker-recoil quirk.
+  deck-out LP-comparison, the Battle-Phase Traps-only response restriction
+  (`trap_activation_frequency`), and the early battle-calculation attacker-
+  recoil quirk. **Re-adjudicated 2026-08-29 (session 2):** these three no
+  longer rest on "PROVEN at Starter Box + no located evidence of change"
+  (the same silence-based reasoning already correctly rejected for full
+  chain/priority above) - a second, independently-dated primary source
+  (the same 1999-05-05 guide, a *different* chapter than the Expert Rules
+  one) affirmatively re-documents all three as unchanged ~113 days before
+  Tokyo Dome, and externally-corroborated evidence places the eventual
+  change ~8 months *after* Tokyo Dome. See "Continuity-evidence closure
+  pass" near the end of this document and
+  `tokyo_dome_research_current.positive_continuity_evidence` for the full
+  chain.
 - **Architecture verdict:** `BLOCKED_BY_BOTH` (unresolved historical
   evidence and unrepresentable engine behavior each independently block
   canonicalization).
@@ -1234,11 +1245,13 @@ Accordingly, the list verdict is not `PROVEN_GENERAL_OCG`,
 | First-turn draw / attack | `PROVEN`: first player skips the initial draw; turn-1 attacks prohibited. | `SUPPORTED_BUT_INCOMPLETE`: continuity is not separately dated. | `UNKNOWN`. |
 | Tribute Summon | `UNKNOWN`: no Level-based Tribute rule is stated. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules pages directly state 1/2 Tributes, but not their effective date. | `UNKNOWN`: “tournaments may adopt” is not adoption evidence. |
 | Fusion materials | `PROVEN`: field-only materials. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules directly permit hand materials, but adoption date is unpinned. | `UNKNOWN`. |
-| Spell/Trap frequency and response | `PROVEN` for the Starter procedure; no modern Chain/Spell Speed model is established. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules describe the activation-cap change, not a complete timing system or effective date. | `UNKNOWN`. |
+| Spell activation frequency | `PROVEN`: one Magic card per turn. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules directly document removing the per-turn cap, but not an effective date. | `UNKNOWN`. |
+| Trap-only Battle Phase response | `PROVEN`: only Trap Cards usable during Battle Phase. | `SUPPORTED_BUT_INCOMPLETE`, upgraded 2026-08-29 (session 2): independently re-documented verbatim in the same 1999-05-05 guide's Official Rule Reference chapter (a *different* chapter from Expert Rules, which does not touch this rule) - see "Continuity-evidence closure pass" below. | `UNKNOWN`. |
+| Chain/Spell-Speed/priority (full system) | `UNKNOWN`: no modern Chain/Spell Speed model is established. | `SUPPORTED_BUT_INCOMPLETE`: Expert Rules changes activation frequency, not a complete timing system. | `UNKNOWN`. |
 | Main/Battle/Main | `PROVEN`: Battle is inside Main and Main continues after Battle until End Phase. | `SUPPORTED_BUT_INCOMPLETE`: the date of the later MP1/MP2 terminology split is unknown. | `UNKNOWN`. |
 | Hand limit | `UNKNOWN`: no six-card limit/discard rule is stated. | `UNKNOWN`: the inspected Expert pages do not establish one. | `UNKNOWN`. |
-| Deck-out | `PROVEN`: compare remaining LP; higher LP wins. | `SUPPORTED_BUT_INCOMPLETE`: later reconstruction places automatic loss after Series 1, without a contemporaneous transition notice. | `UNKNOWN`. |
-| Battle calculation | `PROVEN`: includes the ATK<DEF attacker-recoil result. | `SUPPORTED_BUT_INCOMPLETE`: no dated change located. | `UNKNOWN`. |
+| Deck-out | `PROVEN`: compare remaining LP; higher LP wins. | `SUPPORTED_BUT_INCOMPLETE`, upgraded 2026-08-29 (session 2): independently re-documented verbatim in the same 1999-05-05 guide's Official Rule Reference chapter, not merely a later, uncited "Series 1 vs Series 2" reconstruction - see "Continuity-evidence closure pass" below. | `UNKNOWN`. |
+| Battle calculation | `PROVEN`: includes the ATK<DEF attacker-recoil result. | `SUPPORTED_BUT_INCOMPLETE`, upgraded 2026-08-29 (session 2): independently re-documented verbatim in the same 1999-05-05 guide's Official Rule Reference chapter, not merely "no dated change located" - see "Continuity-evidence closure pass" below. | `UNKNOWN`. |
 | Main / Side / Fusion deck limits | `PROVEN` for the Starter rules' 40-minimum/no-upper-bound main deck, 10-card Side Deck, and separate Fusion Deck. | `SUPPORTED_BUT_INCOMPLETE`: no event-enforcement document. | `UNKNOWN`. |
 
 The complete 21-area matrix, including Field Spell coexistence, priority,
@@ -1273,7 +1286,8 @@ The engine findings are conditional where event history is unknown:
 | --- | --- | --- |
 | Post-battle Main actions | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Default flow is closer; no-MP2 is rejected. |
 | Deck-out | `NOT_REPRESENTABLE` | No pinned flag or sanctioned `init.lua` hook converts empty-deck loss into higher-LP victory. |
-| Battle calculation | `NOT_REPRESENTABLE` | Current damage handling does not reproduce the historical attacker-recoil result exactly. |
+| Battle calculation | `NOT_REPRESENTABLE` | Current damage handling does not reproduce the historical attacker-recoil result exactly. Adversarial caveat added 2026-08-29 (session 2): the recoil *arithmetic* itself appears unchanged even in modern Yu-Gi-Oh! rules and was not empirically re-verified against the pinned engine this session (checkouts unavailable) - the genuine gap, if any, is more likely the historical single-step, response-window-free damage *procedure*, not the arithmetic result. A future pass with engine access should re-examine this classification's precise scope. |
+| Trap-only Battle Phase | `NOT_REPRESENTABLE` | No ocgcore flag restricts Battle-Phase card usage to Trap Cards only (added 2026-08-29, session 2 - this row was previously missing despite the rule area already being counted as a blocker). |
 | Tribute / Fusion / timing | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Expert text is real, but event adoption is not established. |
 | Deck / Side / Fusion limits | `REPRESENTABLE_WITH_HOST_CONFIG` | Historical unbounded maxima can be recorded as `null`; `[40, 999]` is a documented EDOPro host ceiling, not historical unlimited. |
 | LP / first-turn settings | `UNKNOWN_BECAUSE_HISTORY_UNKNOWN` | Starter values are host-representable, but Tokyo Dome selection is not proven. |
@@ -1308,17 +1322,19 @@ format-level result, which remains `BLOCKED_BY_BOTH`.
 | Post-battle Main behavior | UNRESOLVED | Starter behavior is proven, event adoption is not. |
 | First-turn draw/attack, LP, hand size | UNRESOLVED | General source and event-specific adoption are separate propositions. |
 | Deck-size and Side/Fusion constraints | NONBLOCKING_HOST_CONFIG_APPROXIMATION | Historical shape is documented; not counted as a canonicalization blocker (see host/client layer note above). |
-| Deck-out rule | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical LP comparison is documented, but pinned core cannot reproduce it - still an active engine blocker. |
-| Battle-calculation semantics | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical attacker-recoil procedure is documented, but current core does not reproduce it exactly - still an active engine blocker. |
-| Engine representability | BLOCKING | Conditional deck-out and battle-calculation mismatches remain. |
+| Deck-out rule | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical LP comparison is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29); pinned core cannot reproduce it - still an active engine blocker. |
+| Battle-Phase Trap-only response restriction | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29), distinct from the per-turn activation cap Expert Rules DOES remove; no ocgcore flag reproduces it - still an active engine blocker. |
+| Battle-calculation semantics | HISTORY_RESOLVED_ENGINE_GAP_REMAINS | Historical attacker-recoil procedure is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (session 2, 2026-08-29); current core does not reproduce the historical procedure exactly - still an active engine blocker (see adversarial caveat in "Engine and schema reassessment" above). |
+| Engine representability | BLOCKING | Conditional deck-out, Trap-only-response, and battle-calculation mismatches remain. |
 | Schema representability | NONBLOCKING_HOST_CONFIG_APPROXIMATION | No schema change was needed (see host/client layer note above). |
 
 Full chain/Spell-Speed/priority is deliberately **not** listed as its own
 row here: its Tokyo-Dome-specific historical status is `UNKNOWN`, and per
 this pass's own reasoning it is not independently counted as an
-unconditional blocker (the narrower, `PROVEN` no-chain/Traps-only-in-
-Battle-Phase paradigm already covers the confirmed engine-representation
-gap - see "Current authoritative state" at the top of this document).
+unconditional blocker (the narrower, `PROVEN` Battle-Phase Traps-only
+restriction, `trap_activation_frequency`, already covers the confirmed
+engine-representation gap - see "Current authoritative state" at the top
+of this document).
 
 ### Final research verdict
 
@@ -1329,11 +1345,16 @@ proves the rules were documented by 1999-05-05 and even says tournaments may
 adopt them; no inspected source bridges that statement to this event.
 
 Architecture verdict: **`BLOCKED_BY_BOTH`** — historical evidence remains
-blocking, and the historically established early deck-out and battle
-calculation behaviors remain engine approximations/gaps. The schema is
-sufficient with documented host approximations. `DUEL_NO_MAIN_PHASE_2` was
-rejected. No canonical Tokyo Dome format or any related canonical artifact was
-created, and the OCG release-ledger import was not begun.
+blocking, and the historically established early deck-out, Battle-Phase
+Trap-only response, and battle-calculation behaviors remain engine
+approximations/gaps. **Re-adjudicated 2026-08-29 (session 2):** all three now
+rest on independently-re-documented positive continuity evidence (a second
+dated primary source ~113 days before the event, not silence-based
+inference) rather than "no evidence of change was found" - see
+"Continuity-evidence closure pass" below. The schema is sufficient with
+documented host approximations. `DUEL_NO_MAIN_PHASE_2` was rejected. No
+canonical Tokyo Dome format or any related canonical artifact was created,
+and the OCG release-ledger import was not begun.
 
 The physical documents now required to close the historical gate are specific:
 
@@ -1346,3 +1367,162 @@ The physical documents now required to close the historical gate are specific:
 If those objects do not survive online, a verifiable scan from a collector,
 library, or period archive with clear title/date/page provenance would be the
 next acceptable evidence. Repeated modern summaries are not a substitute.
+
+## Continuity-evidence closure pass: 2026-08-29 (session 2)
+
+This pass re-adjudicated whether `deck_out`, `trap_activation_frequency`
+(Battle-Phase Trap-only response), and `battle_calculation` are justified as
+*unconditional* Tokyo Dome engine blockers, given that the packet's own
+`three_column_evidence_matrix` shows all three at `tokyo_dome.status =
+UNKNOWN` (21 of 21 rows, no exceptions) while `architecture_verdict_detail`
+treated them as unconditional blockers via a principle resembling "PROVEN at
+Starter Box + no located evidence of change" - structurally the same
+silence-based reasoning the packet had already, correctly, rejected for full
+chain/Spell-Speed/priority ("no chain concept" cannot be inferred from a
+source's mere silence on the topic). The question: is the continuity
+inference for these three *materially different* and justified, or is the
+repository applying inconsistent epistemic standards?
+
+### The decisive finding: a second, dated, primary source
+
+The archive.org scan already cited for the Expert Rules chapter
+(`official-guide-starter-book-1999-scan`, the 1999-05-05 Shueisha/Studio Hard
+*Official Guide Starter Book*) contains a **separate chapter**, not
+previously extracted in detail: an "Official Rule Reference" chapter
+(公式ルール　リファレンス), printed pages 101-106, explicitly labelled on its
+own title page to be read **backward**, from page 106 to page 101
+("なおこの章は106ページより逆に読むこと"). It sits immediately before the
+Expert Rules chapter (page 107) in the same physical book. Personally
+inspected via page image (not OCR alone - the raw DjVu OCR for this book is
+poor for Japanese text and was used only to locate candidate pages, never
+treated as evidence on its own) on 2026-08-29:
+
+- **p.105** (deck-out): "また、プレイヤーか相手のデッキが先になくなり、どちらかが
+  カードを引くことができなくなった場合は、お互いのライフポイントの差で勝負を決定
+  します。その場合は、デッキがなくなった時点でのライフポイントの数が多い方を勝利
+  とします。" - "Also, if either the player's or the opponent's deck runs out
+  first, and either side becomes unable to draw a card, the outcome is
+  decided by the difference in Life Points between the two. In that case,
+  whichever side has more Life Points at the moment the deck ran out is the
+  winner." Verbatim identical to the Starter Box rulebook.
+- **p.104** (Trap-only Battle Phase): "なお、バトルフェイズ中は、フィールドに
+  出ている罠カード以外の魔法カードを使うことができません。" - "Note: during
+  the Battle Phase, you cannot use Magic Cards other than Trap Cards that are
+  on the field." Verbatim identical to the Starter Box rulebook's "Spell
+  Cards placed on the field other than Trap Cards cannot be used during the
+  Battle Phase."
+- **pp.103-104** (battle calculation): the full ATK-vs-ATK and ATK-vs-DEF
+  damage table, including "自分の攻撃力＜敵の守備力" ("Your ATK < Enemy's
+  DEF"): "...どちらのモンスターもダメージに影響はありません。そのとき「攻撃を
+  受けたモンスターの守備力」から「攻撃を仕掛けたモンスターの攻撃力」を引いた
+  数値が、攻撃を仕掛けたプレイヤーのライフポイントから引かれます。" - "...neither
+  monster is damaged. At that time, the value obtained by subtracting the
+  attacking monster's ATK from the enemy's DEF is deducted from the
+  ATTACKING PLAYER's Life Points." The attacker-recoil result, unchanged from
+  the Starter Box.
+
+This is **not** an absence-of-evidence inference. It is a second,
+independently-dated, personally-inspected primary source that *affirmatively
+restates* each rule, published the same day as the Expert Rules chapter -
+and Expert Rules (in the same book) is confirmed to document only three
+changes (Tribute Summon, removing the one-Spell/one-Trap-per-turn activation
+cap, and hand-based Fusion materials), none of which touch deck-out,
+Battle-Phase card-type restrictions, or battle-calculation. The gap this
+narrows is Starter Box (1999-02-04) to Tokyo Dome (1999-08-26); the new
+source sits at 1999-05-05, ~113 days (about 3.7 months) before the event,
+not at the start of that window.
+
+This finding is recorded structurally in the packet at
+`tokyo_dome_research_current.positive_continuity_evidence`, distinct from
+(and cross-referenced by) the matrix's own `later_pre_tokyo_dome` tier, which
+remains `SUPPORTED_BUT_INCOMPLETE` for all three - **not** silently promoted
+to `PROVEN` - because the residual ~113-day gap to the event itself remains
+genuinely undocumented.
+
+### Externally-corroborated upper bounds
+
+Independent research (web search, personally spot-checked) found, for two of
+the three, when the rule *eventually* did change - always well after Tokyo
+Dome:
+
+- **Deck-out**: the Japanese Yu-Gi-Oh Wiki (three separate pages) and
+  yugioh-history.com (independently authored, no cross-citation between the
+  two) both state the LP-comparison rule held until the "New Expert Rule"
+  accompanying the "Magic Ruler" booster's release, **2000-04-20** - about
+  8 months after Tokyo Dome. One wiki page cites this to the rule card
+  packaged with Booster R1 (a print source, not independently viewable in
+  this pass).
+- **Trap-only Battle Phase**: Quick-Play Spell Cards (速攻魔法) - the first
+  OCG mechanism permitting a Spell/Magic card to be used during the Battle
+  Phase - were introduced in the same "Magic Ruler" booster, confirmed via
+  Konami's own Yu-Gi-Oh! Neuron card database listing (release date
+  2000-04-20).
+- **Battle calculation**: no source was found documenting the ATK/DEF
+  recoil arithmetic ever changing at all; what is documented is a later
+  formalization of Damage Step *timing* (Master Rule 3, 2014-03-21), a
+  different axis from the arithmetic result. See the adversarial engine-
+  representability caveat below.
+
+### A counter-claim, checked and rejected
+
+A 2024 tweet by manga staff member Ito Akira (@Vg_akira, verified account;
+personally fetched and confirmed 2026-08-29) recalls that "at the time" (the
+period a Studio Dice manga arc was written, published April 2000) the OCG
+deck-out rule was a "draw," not LP-comparison. This directly contradicts
+*both* personally-inspected primary documents (the Feb 1999 rulebook and
+this May 1999 guide) and is corroborated by no other source in this
+research chain - it is recorded in `personally_reverified_claims` for
+transparency, explicitly marked considered-and-rejected, not as evidence
+against continuity. A decades-later recollection of a casual writers'-room
+conversation does not outweigh two independently-dated contemporaneous
+documents that agree with each other.
+
+### Tokyo-Dome-specific rules material: still not found
+
+A tightly-scoped search for the event's own tabletop ruleset (programme,
+rule sheet, tournament regulations, contemporary press coverage naming the
+rules used) found nothing usable - some promising leads (a claimed V Jump
+September 1999 write-up, cited only by unreachable third-party pages) could
+not be verified and are not treated as evidence either way. This does not
+change the adjudication above; it means the `tokyo_dome` tier of the matrix
+correctly remains `UNKNOWN` for all 21 rule areas, including these three -
+the case for retaining them as blockers rests entirely on the bounded-
+continuity reasoning above, not on any event-specific document.
+
+### Adversarial engine-representability caveat
+
+The pinned ocgcore checkouts required to empirically test engine behavior
+are unavailable in this environment (all `tests/engine/*` tests skip here).
+This pass could not personally verify whether the ATK/DEF recoil
+*arithmetic* is actually unrepresentable by the pinned engine - independent
+research found no evidence that arithmetic has ever changed, even into
+modern rules, which raises the possibility that the genuine engine gap (if
+any) is narrower than currently described - more likely the historical
+single-step, no-response-window damage *procedure* than the recoil result
+itself. The `battle_calculation` classification is left unchanged pending a
+future pass with engine access, per this repository's standing rule against
+promoting an unverified claim to fact.
+
+### Adversarial review
+
+An independent reviewer was asked to argue against retaining each of the
+three behaviours as an unconditional blocker (`positive_continuity_evidence.`
+`adversarial_review_2026_08_29` in the packet). Its strongest finding: the
+upper-bound evidence for deck-out ("New Expert Rule") and for the Trap-only
+restriction (Quick-Play Spell Cards) both trace to the same "Magic Ruler"
+release (2000-04-20) - they are recorded as sharing ONE provenance root, not
+two independent corroborations, so they are never double-counted. This does
+not change either behaviour's core finding, which rests on the May 1999
+re-documentation, not the upper bound. The reviewer separately concluded
+battle-calculation is the *strongest* of the three on historical-persistence
+grounds (no documented change even decades later) and that its real
+vulnerability is the unverified engine classification, not the history -
+consistent with this pass's own adversarial caveat above.
+
+### Result
+
+All three behaviours survive as unconditional engine blockers, on
+materially stronger and more consistent grounds than before. `BLOCKED_BY_BOTH`
+is unchanged as the top-line architecture verdict. No canonical Tokyo Dome
+artifact was created; the 19-product release ledger, 370-card pool, and
+GOAT/Edison/Tengu remain untouched.

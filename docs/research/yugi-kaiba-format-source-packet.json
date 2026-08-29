@@ -372,7 +372,7 @@
         },
         "pre-formal-chain-and-priority-boundary": {
           "confirmed_unconditional_tokyo_dome_blocker": false,
-          "note": "Abstract engine-capability gap only (no DUEL_* flag encodes chain/priority absence). Its Tokyo-Dome-specific historical applicability is UNKNOWN, not proven, and it is explicitly NOT counted as an independent unconditional engine blocker. The narrower, PROVEN paradigm that IS a confirmed blocker is the no-chain/Traps-only-in-Battle-Phase behaviour (engine_representation_blockers item 'spell_trap_response'), which is a different and narrower claim than the full modern Chain/Spell-Speed/Priority system referenced by this known_gaps entry.",
+          "note": "Abstract engine-capability gap only (no DUEL_* flag encodes chain/priority absence). Its Tokyo-Dome-specific historical applicability is UNKNOWN, not proven, and it is explicitly NOT counted as an independent unconditional engine blocker. The narrower, PROVEN paradigm that IS a confirmed blocker is the no-chain/Traps-only-in-Battle-Phase behaviour (engine_representation_blockers item 'trap_activation_frequency'), which is a different and narrower claim than the full modern Chain/Spell-Speed/Priority system referenced by this known_gaps entry.",
           "authoritative_path": "tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority).tokyo_dome.status == UNKNOWN"
         }
       }
@@ -1356,7 +1356,7 @@
     },
     "chain_spell_speed_semantics": {
       "status": "BLOCKING",
-      "reason": "BLOCKING via the narrower, PROVEN no-chain/Traps-only-in-Battle-Phase paradigm (tokyo_dome_research_current.architecture_verdict_detail.engine_representation_blockers item 'spell_trap_response'), which no general core flag reproduces. The BROADER modern Chain/Spell-Speed/Priority system's Tokyo-Dome-specific applicability is UNKNOWN, not proven absent from rulebook silence - it is explicitly NOT independently counted as an additional unconditional engine blocker. See tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority) for the authoritative historical-status row."
+      "reason": "BLOCKING via the narrower, PROVEN no-chain/Traps-only-in-Battle-Phase paradigm (tokyo_dome_research_current.architecture_verdict_detail.engine_representation_blockers item 'trap_activation_frequency'), which no general core flag reproduces. The BROADER modern Chain/Spell-Speed/Priority system's Tokyo-Dome-specific applicability is UNKNOWN, not proven absent from rulebook silence - it is explicitly NOT independently counted as an additional unconditional engine blocker. See tokyo_dome_research_current.primary_source_resolution_2026_08_29.three_column_evidence_matrix (rule_area=chain_spell_speed_priority) for the authoritative historical-status row."
     },
     "errata_chronology": {
       "status": "RESOLVED",
@@ -1433,6 +1433,7 @@
         103,
         104,
         105,
+        106,
         107,
         108,
         109
@@ -1441,7 +1442,8 @@
       "does_not_establish": [
         "exact universal Expert Rules effective date",
         "Tokyo Dome event adoption"
-      ]
+      ],
+      "official_rule_reference_chapter_note": "Printed pages 101-106, explicitly labelled '106ページより逆に読むこと' (read starting from page 106, backward) on the chapter title page (101). Reading order is 106->105->104->103->102->101. Restates deck-out (LP-comparison), the Battle-Phase Trap-only restriction, and the ATK<DEF battle-calculation attacker-recoil rule verbatim, immediately before the Expert Rules chapter (p.107) in the same physical publication."
     },
     {
       "id": "ocg-card-official-guide-starter-book",
@@ -1557,7 +1559,8 @@
       "id": "deck-out-history",
       "label": "Historical deck-out rule transition reconstruction",
       "kind": "secondary-history",
-      "url": "https://roadoftheking.com/deck-out/"
+      "url": "https://roadoftheking.com/deck-out/",
+      "reliability_note": "PERSONALLY INSPECTED 2026-08-29 (session 2): this page's own comment thread contains a genuine, unresolved dispute - a first-hand manga-staff recollection (a 2024 tweet by mangaka Ito Akira, quoted in the comments) claims the OCG rule 'at that time' (the manga's Duel 171 arc, serialized April 2000) was that deck-out caused a DRAW, contradicting both this same page's own body text and the independently-verified LP-comparison rule. The article body's own headline claim - that the 'New Expert Rule' accompanying the Magic Ruler booster (2000-04-20) introduced the modern auto-loss deck-out rule - carries NO citation to any primary source and must not be read as more than an unverified, single-source dating claim. Do not treat this source as strong evidence for the UPPER bound of the old rule's persistence; it is retained only because its own body text happens to quote the (independently, personally verified) Starter Box rulebook accurately."
     },
     {
       "id": "pinned-ocgcore-research",
@@ -2780,12 +2783,13 @@
         "starting_hand (5 cards)",
         "first_turn_draw (skip on turn 1)",
         "first_turn_attack (prohibited turn 1, legal turn 2)",
-        "deck_out (LP comparison, not instant loss - explicitly confirmed to run through all of Series 1, i.e. through 1999, with the modern auto-loss version dated to the later 'New Expert Rules', Series 2, from 2000 onward)",
+        "deck_out (LP comparison, not instant loss - PROVEN at Starter Box, and independently re-documented (not merely absence of evidence of change) in the same-publication-date Official Guide Starter Book's own Official Rule Reference chapter, the same publication that documents Expert Rules; externally-corroborated evidence places the actual change ~8 months AFTER Tokyo Dome, 2000-04-20 with 'New Expert Rule'/Magic Ruler - see positive_continuity_evidence.items.deck_out. This supersedes the earlier, weaker framing that rested mainly on an uncited 'Series 1 vs Series 2' blog claim.)",
         "main_battle_main_sequence (single Main Phase, no MP1/MP2 split)",
         "normal_summon_set (base placement action)",
         "deck_size (40 minimum, no maximum)",
         "side_deck (10 cards)",
-        "battle_damage_procedure (including the ATK<DEF recoil quirk)"
+        "battle_damage_procedure (including the ATK<DEF recoil quirk - PROVEN at Starter Box, and independently re-documented (not merely absence of evidence of change) in the same guide (same publication date as the Expert Rules chapter) - see positive_continuity_evidence.items.battle_calculation)",
+        "trap_activation_frequency (Battle-Phase Trap-only response restriction - PROVEN at Starter Box, and independently re-documented (not merely absence of evidence of change) in the same guide (same publication date as the Expert Rules chapter), distinct from the one-Spell/one-Trap-per-turn activation cap Expert Rules DOES remove; officially-documented upper bound places the actual change ~8 months AFTER Tokyo Dome, 2000-04-20 with Quick-Play Spell Cards - see positive_continuity_evidence.items.trap_activation_frequency)"
       ],
       "genuinely_still_unresolved": {
         "hand_limit_timing": "Almost certainly NOT yet introduced by Aug 26, 1999 (the introducing revision, 'New Expert Rules', is dated Series 2 / 2000 onward) - BOUNDED, not PROVEN, since no source gives an exact pre-2000 date range boundary tighter than 'Series 1 vs Series 2'.",
@@ -2907,6 +2911,38 @@
         "exact_rule_claim": "Citation correction: the addendum's original page range for the chapter-intro finding spliced text from two distinct, non-adjacent print pages",
         "supporting_excerpt": "N/A - a provenance/citation-accuracy finding, not a rules finding.",
         "what_it_establishes": "Personally re-verified this session: the tournament-adoption sentence is on the chapter's title page (printed p.107, leaf n106), which is NOT part of the addendum's own personally_inspected_pages numbering as originally structured; the general 'recommended for duelists' sentence is on the following page (printed p.108, leaf n107). The original commit's excerpt joined both with an ellipsis, reading as one continuous passage. Corrected in expert_rules_primary_material.direct_findings[0] to cite both page locations explicitly and note the splice - the underlying quotes themselves were accurate, only the page attribution needed tightening."
+      },
+      {
+        "claim_source_id": "official-guide-starter-book-1999-scan",
+        "source_url": "https://archive.org/details/yugioh-official-guide-starter-book-may-05-1999",
+        "source_tier": "1 (contemporaneous official primary scan, personally inspected)",
+        "exact_rule_claim": "deck_out (Official Rule Reference chapter, printed p. 105)",
+        "supporting_excerpt": "\"...the outcome is decided by the difference in Life Points... whichever side has more Life Points at the moment the deck ran out is the winner.\"",
+        "what_it_establishes": "The May 5, 1999 Official Guide Starter Book (the SAME publication as the Expert Rules chapter) independently restates the LP-comparison deck-out rule as the standing Official Rule, ~113 days before Tokyo Dome. This was newly personally inspected 2026-08-29 (session 2) - the prior session's inspected_pages list already covered p.105 but had not extracted or analyzed this chapter's rule content."
+      },
+      {
+        "claim_source_id": "official-guide-starter-book-1999-scan",
+        "source_url": "https://archive.org/details/yugioh-official-guide-starter-book-may-05-1999",
+        "source_tier": "1 (contemporaneous official primary scan, personally inspected)",
+        "exact_rule_claim": "trap_activation_frequency (Official Rule Reference chapter, printed p. 104)",
+        "supporting_excerpt": "\"...during the Battle Phase, you cannot use Magic Cards other than Trap Cards that are on the field.\"",
+        "what_it_establishes": "Independently restates the Battle-Phase Trap-only restriction, textually identical to the Starter Box rulebook, in the same 1999-05-05 publication as Expert Rules (which does not touch this rule - it removes only the per-turn activation cap). Newly personally inspected 2026-08-29 (session 2)."
+      },
+      {
+        "claim_source_id": "official-guide-starter-book-1999-scan",
+        "source_url": "https://archive.org/details/yugioh-official-guide-starter-book-may-05-1999",
+        "source_tier": "1 (contemporaneous official primary scan, personally inspected)",
+        "exact_rule_claim": "battle_calculation (Official Rule Reference chapter, printed pp. 102-104)",
+        "supporting_excerpt": "\"...if the attacking player's monster's ATK is lower than the enemy's [ATK/DEF]... the value is deducted from the ATTACKING PLAYER's Life Points.\"",
+        "what_it_establishes": "Independently restates the full ATK-vs-ATK/ATK-vs-DEF damage procedure including the attacker-recoil result, textually identical to the Starter Box rulebook, in the same 1999-05-05 publication. Newly personally inspected 2026-08-29 (session 2)."
+      },
+      {
+        "claim_source_id": "ito-akira-tweet-2024",
+        "source_url": "https://x.com/Vg_akira/status/1779107282443518237",
+        "source_tier": "6 (decades-later individual social-media recollection, not a period document)",
+        "exact_rule_claim": "Deck-out resulted in a DRAW (無効試合、引き分け), contradicting the LP-comparison rule",
+        "supporting_excerpt": "\"当時のOCGではデッキが切れたら無効試合、引き分けとなるルールだったのですが\" - \"At the time, the OCG rule was that if the deck ran out, the match was voided - a draw.\" (personally fetched and verified 2026-08-29 via the tweet's public API mirror; account @Vg_akira is a verified individual, real name Ito Akira/伊藤彰, a Yu-Gi-Oh! manga staff assistant.)",
+        "what_it_establishes": "CONSIDERED AND REJECTED as evidence against deck_out continuity: this tweet directly contradicts BOTH personally-inspected primary documents (the Feb 1999 Starter Box rulebook AND the May 1999 guide, which independently agree on LP-comparison), and no other source in this research chain (Japanese wiki, yugioh-history.com, roadoftheking.com) corroborates a 'draw' rule at any point in OCG history. Recorded here for transparency, not as a load-bearing finding - a 24-years-later recollection of a casual writers'-room conversation is weaker evidence than two independently-dated contemporaneous documents."
       }
     ],
     "corrections_from_swarm_adversarial_audit": "Agent F's adversarial pass, independently re-verified by the adjudicator, found and corrected three genuine problems in Agent B's later-1999 chronology work before it reached this packet: (1) a fabricated attribution - Agent B's original draft claimed 'the rulebook notes Quick-Effect Monster abilities such as Kuriboh's could NOT be activated from the hand' as a primary-source quote; this sentence does not exist anywhere in the primary rulebook, and the term 'Kuriboh'/'Quick-Effect Monster' does not appear in either of Agent B's own cited secondary sources either - removed entirely, not present in evidence_matrix's spell_trap_response row above; (2) a misattribution - Agent B's original draft attributed 'all monsters can be Normal Summoned without Tributes' to the primary rulebook as a direct quote, when this is actually a near-verbatim lift of a SECONDARY source's (ygoprodeck's) paraphrase, directly contradicting Agent A's own correct 'UNKNOWN/silence' characterization of the identical fact - corrected in evidence_matrix's tribute_summon row, which now correctly marks the Starter Box state as UNKNOWN/absence rather than a fabricated direct quote; (3) an overstated citation - Agent B presented yugioh-history.com's May-5-1999 tribute-date citation as straightforwardly supporting evidence without disclosing that article's own author explicitly disclaims certainty about that date's ultimate source; the May 5, 1999 date survives in this packet only because it is independently and more confidently corroborated by Yugipedia's own page (checked directly via the MediaWiki API), not because of the weaker yugioh-history.com citation.",
@@ -3402,9 +3438,10 @@
           },
           "later_pre_tokyo_dome": {
             "status": "SUPPORTED_BUT_INCOMPLETE",
-            "summary": "Later reconstructions place the automatic-loss change after Series 1, but no contemporaneous transition notice was located.",
+            "summary": "Independently re-documented at 1999-05-05, not merely a lack of evidence of change: the Official Guide Starter Book's own 'Official Rule Reference' chapter (printed p.105) verbatim restates 'the outcome is decided by the difference in Life Points... whichever side has more Life Points at the moment the deck ran out is the winner' - the SAME publication that documents Expert Rules, which does not touch this rule. Still SUPPORTED_BUT_INCOMPLETE, not PROVEN: a residual ~113-day gap between this source and Tokyo Dome (1999-08-26) remains undocumented. This chapter (printed pages 101-106, explicitly labelled to be read backward from p.106 to p.101) immediately precedes the Expert Rules chapter (p.107) in the same physical publication - a second, independently-dated primary source only ~113 days (about 3.7 months) before Tokyo Dome, not a reconstruction and not silence.",
             "source_ids": [
-              "deck-out-history"
+              "deck-out-history",
+              "official-guide-starter-book-1999-scan"
             ]
           },
           "tokyo_dome": {
@@ -3536,8 +3573,8 @@
             "correction_note": "CORRECTED THIS SESSION: this addendum's original commit marked this row UNKNOWN, but the primary rulebook was already personally quoted on this exact point in an earlier pass (direct WebFetch of the same ygorganization.com translation this addendum cites elsewhere): 'Also, Spell Cards placed on the field other than Trap Cards cannot be used during the Battle Phase.' - with the translator's own footnote 'Yes, that last sentence is literally what the rulebook says.' Restored to PROVEN rather than silently letting an already-established primary-source fact regress to UNKNOWN during consolidation."
           },
           "later_pre_tokyo_dome": {
-            "status": "UNKNOWN",
-            "summary": "The inspected Expert Rules Rule 1 page is headed and written about Magic cards; it does not independently establish a Trap activation-frequency change.",
+            "status": "SUPPORTED_BUT_INCOMPLETE",
+            "summary": "Independently re-documented at 1999-05-05, not merely a lack of evidence of change: the same guide's 'Official Rule Reference' chapter (printed p.104) verbatim restates 'during the Battle Phase, you cannot use Magic Cards other than Trap Cards that are on the field' - textually identical to the Starter Box rule. Expert Rules (same publication) removes only the one-Spell/one-Trap-per-turn ACTIVATION cap, a distinct rule from this Battle-Phase card-TYPE restriction; it does not touch this restriction. Still SUPPORTED_BUT_INCOMPLETE, not PROVEN: a residual ~113-day gap to Tokyo Dome remains undocumented. This chapter (printed pages 101-106, explicitly labelled to be read backward from p.106 to p.101) immediately precedes the Expert Rules chapter (p.107) in the same physical publication - a second, independently-dated primary source only ~113 days (about 3.7 months) before Tokyo Dome, not a reconstruction and not silence.",
             "source_ids": [
               "official-guide-starter-book-1999-scan"
             ]
@@ -3646,9 +3683,10 @@
           },
           "later_pre_tokyo_dome": {
             "status": "SUPPORTED_BUT_INCOMPLETE",
-            "summary": "No dated change located, but no period event rule sheet confirms it.",
+            "summary": "Independently re-documented at 1999-05-05, not merely a lack of evidence of change: the same guide's 'Official Rule Reference' chapter (printed pp.103-104) verbatim restates the full ATK/ATK and ATK/DEF damage table, including 'if your attacking monster's ATK is lower than the enemy's [ATK/DEF], neither monster is destroyed/only your monster is destroyed... the value is deducted from the ATTACKING PLAYER's Life Points' - the attacker-recoil result, unchanged from the Starter Box. Still SUPPORTED_BUT_INCOMPLETE, not PROVEN: a residual ~113-day gap to Tokyo Dome remains undocumented. This chapter (printed pages 101-106, explicitly labelled to be read backward from p.106 to p.101) immediately precedes the Expert Rules chapter (p.107) in the same physical publication - a second, independently-dated primary source only ~113 days (about 3.7 months) before Tokyo Dome, not a reconstruction and not silence.",
             "source_ids": [
-              "original-1999-rulebook"
+              "original-1999-rulebook",
+              "official-guide-starter-book-1999-scan"
             ]
           },
           "tokyo_dome": {
@@ -3792,6 +3830,13 @@
           "flag_disposition": "Known conditional engine gap."
         },
         {
+          "rule_area": "trap_activation_frequency",
+          "historical_basis": "Battle-Phase Trap-only response restriction PROVEN for Starter Box, and independently re-documented (not merely absence of evidence of change) at 1999-05-05 - still SUPPORTED_BUT_INCOMPLETE, not PROVEN, for the full interval to Tokyo Dome (see positive_continuity_evidence.items.trap_activation_frequency). Tokyo Dome-specific continuity remains UNKNOWN in the strict event-specific sense.",
+          "classification": "NOT_REPRESENTABLE",
+          "current_behavior": "No pinned ocgcore DUEL_* flag restricts Battle-Phase card usage to Trap Cards only; modern default behavior permits Quick-Play Spells and other Battle-Phase-legal Spell/Trap effects introduced long after 1999.",
+          "flag_disposition": "Known engine gap; no workaround implemented."
+        },
+        {
           "rule_area": "deck_side_extra_limits",
           "historical_basis": "Historical deck/Side/Fusion limits are partly established generally; event enforcement UNKNOWN",
           "classification": "REPRESENTABLE_WITH_HOST_CONFIG",
@@ -3842,12 +3887,17 @@
           {
             "item": "deck-out rule",
             "status": "HISTORY_RESOLVED_ENGINE_GAP_REMAINS",
-            "reason": "Historical LP comparison is documented, but pinned core cannot reproduce it."
+            "reason": "Historical LP comparison is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (see positive_continuity_evidence), but pinned core cannot reproduce it - still an active engine blocker."
           },
           {
             "item": "battle-calculation semantics",
             "status": "HISTORY_RESOLVED_ENGINE_GAP_REMAINS",
-            "reason": "Historical attacker-recoil procedure is documented, but current core does not reproduce it exactly."
+            "reason": "Historical attacker-recoil procedure is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (see positive_continuity_evidence); current core does not reproduce the historical single-step, response-window-free procedure exactly - still an active engine blocker (see positive_continuity_evidence.items.battle_calculation.upper_bound_evidence for an open adversarial caveat on the precise scope of this gap)."
+          },
+          {
+            "item": "Battle-Phase Trap-only response restriction",
+            "status": "HISTORY_RESOLVED_ENGINE_GAP_REMAINS",
+            "reason": "Historical Trap-only Battle-Phase restriction is documented at Starter Box AND independently re-documented in the same 1999-05-05 guide (see positive_continuity_evidence.items.trap_activation_frequency), distinct from the one-Spell/one-Trap-per-turn activation cap Expert Rules DOES remove; no ocgcore flag reproduces the restriction - still an active engine blocker."
           },
           {
             "item": "engine representability",
@@ -3876,21 +3926,21 @@
       "engine_representation_blockers": {
         "definition": "Historical behavior established well enough to identify, independent of Tokyo-Dome-specific enforcement evidence, but not representable by the current engine. A historical behavior that is PROVEN at the Starter Box tier with no located evidence of change before Tokyo Dome can legitimately be an independent (unconditional) engine blocker; a behavior whose applicability to Tokyo Dome is itself the open question is NOT counted here (see explicitly_not_counted_as_a_blocker) - this distinction is what the addendum's own engine_reassessment classifies as NOT_REPRESENTABLE vs UNKNOWN_BECAUSE_HISTORY_UNKNOWN, cross-checked and adopted here.",
         "items": [
-          "deck_out - LP-comparison outcome on empty-deck draw failure, PROVEN at Starter Box tier; no DUEL_* flag or OCG_Player field can substitute it. No evidence located of a change before Tokyo Dome.",
-          "trap_activation_frequency - only Trap Cards (not Spell Cards) may respond during the Battle Phase, PROVEN at Starter Box tier (personally re-verified this session, restoring a fact the primary-source addendum's own redo had initially left at UNKNOWN - see that row's correction_note); no evidence located of a change before Tokyo Dome; no ocgcore flag restricts Battle-Phase responses to Traps only.",
-          "battle_calculation - the ATK<DEF attacker-recoil result, PROVEN at Starter Box tier; modern damage-step behavior does not reproduce it without card-script/core changes. No evidence located of a change before Tokyo Dome."
+          "deck_out - LP-comparison outcome on empty-deck draw failure, PROVEN at Starter Box tier, and independently re-documented (not a silence-based inference) in the same guide (same publication date as the Expert Rules chapter) that documents Expert Rules (which does not touch this rule) - a second, dated, positive primary source ~113 days before Tokyo Dome, not a silence-based inference. No DUEL_* flag or OCG_Player field can substitute it. See positive_continuity_evidence.items.deck_out for the full evidentiary chain, including externally-corroborated evidence that the actual change occurred ~8 months AFTER Tokyo Dome (2000-04-20, 'New Expert Rule'/Magic Ruler).",
+          "trap_activation_frequency - only Trap Cards (not Spell Cards) may respond during the Battle Phase, PROVEN at Starter Box tier, and independently re-documented (not a silence-based inference) in the same guide (same publication date as the Expert Rules chapter), distinct from the one-Spell/one-Trap-per-turn activation cap Expert Rules DOES remove; no ocgcore flag restricts Battle-Phase responses to Traps only. See positive_continuity_evidence.items.trap_activation_frequency, including the officially-documented upper bound that Quick-Play Spell Cards (the first mechanism ending this restriction) were not introduced until 2000-04-20, ~8 months after Tokyo Dome.",
+          "battle_calculation - the ATK<DEF/ATK<ATK attacker-recoil result, PROVEN at Starter Box tier, and independently re-documented (not a silence-based inference) in the same guide (same publication date as the Expert Rules chapter); modern damage-step behavior does not reproduce the historical single-step, response-window-free procedure without card-script/core changes (see positive_continuity_evidence.items.battle_calculation for an open adversarial caveat: this session could not empirically verify the pinned engine's actual behavior - pinned ocgcore checkouts are unavailable in this environment - so the precise scope of the engine gap, as opposed to the historical continuity finding, should be re-examined by a future pass with engine access)."
         ]
       },
       "explicitly_not_counted_as_a_blocker": "REVISED this session: chain_spell_speed_priority is explicitly NOT counted as an independent blocker. The prior pass had treated 'no chain/Spell-Speed concept' as PROVEN at the Starter Box tier from the same source's silence on the topic - the primary-source discovery's own more careful redo correctly reclassifies this as UNKNOWN (silence is not proof of absence), so there is no longer a secure historical basis for treating the full chain/priority model as an unconditional engine gap; only the narrower, genuinely PROVEN trap_activation_frequency fact above is retained as a blocker. tribute_summon and fusion_material_location are also explicitly NOT counted as independent blockers, per the task's own guidance: 'Do not classify an engine mismatch as a Tokyo Dome blocker if the relevant historical rule's applicability to Tokyo Dome is itself unknown.' Both are now PROVEN as DOCUMENTED in the 1999 Expert Rules guide (later_pre_tokyo_dome tier), and the modern engine default already matches that documented Expert-Rules state - so if that state turns out to be what Tokyo Dome used, there is no engine gap at all; the only open question is event adoption, which is a historical blocker already counted above, not a second engine blocker.",
       "conclusion": "Both blocker categories are independently sufficient on their own; together they justify BLOCKED_BY_BOTH. This is NOT the same reasoning as before the primary-source discovery even though the label is unchanged: the discovery meaningfully shrank the historical-evidence blockers (Expert Rules content is now documented, not merely secondary-reconstructed) and meaningfully shrank the engine blockers (chain/priority downgraded from unconditional to not-counted; tribute/fusion confirmed not to be blockers at all) - but it did not resolve either category to zero. Even a hypothetical future discovery of a primary 1999 Tokyo Dome tournament rule sheet (resolving every historical-evidence blocker) would still leave deck-out, the narrow Trap-only Battle-Phase timing rule, and the battle-calculation recoil quirk unrepresentable by current engine architecture without a runtime change, which this pass does not propose or make."
     },
     "remaining_blockers": [
-      "HISTORICAL: every rule area's tokyo_dome_evidence_status is UNKNOWN except deck_out/hand_limit (BOUNDED) and tribute_summon (AMBIGUOUS) - no genuinely event-specific source exists for the great majority of rule areas.",
+      "HISTORICAL: every one of the 21 rule areas' tokyo_dome_evidence_status is UNKNOWN (21 of 21, no exceptions) - no genuinely event-specific source exists for any rule area. deck_out, trap_activation_frequency, and battle_calculation have much stronger LATER_PRE_TOKYO_DOME-tier evidence than the rest (see positive_continuity_evidence), which is why they remain engine blockers despite this - but that is a different axis from the tokyo_dome tier itself, which is uniformly UNKNOWN.",
       "HISTORICAL: the restriction list two-axis model - research_confidence is MODERATE-TO-GOOD (upgraded this session via personal inspection of the Master Guide p.84 scan), but canonicalization_status remains BLOCKING regardless, because the strongest corroborating secondary source (a Japanese specialist retrospective) turned out to be weaker (third-hand, hedged) than initially represented, and nobody in this research chain has inspected a contemporaneous 1999 document - see restriction_list_current for both fields.",
       "HISTORICAL: whether Tokyo Dome's tournament finals concluded as planned rests on a multiply-corroborated retrospective account with HIGH confidence the event was severely disrupted, but NO period (1999) article was obtained or personally inspected, and the specific tournament-completion claim is NOT primary-source proven - see event_disruption_reassessment for the full tiered breakdown.",
       "HISTORICAL: the exact upper date bound for the hand-limit introduction and the Main Phase 1/2 split are both open gaps - 'sometime in/after Series 2 (2000+)' and 'unknown', respectively, not pinned dates.",
       "ENGINE: deck_out has no representable mechanism for its LP-comparison outcome - confirmed, not merely suspected, this pass.",
-      "ENGINE: spell_trap_response's chain/Spell-Speed model and its Battle-Phase-Traps-only restriction have no representable mechanism.",
+      "ENGINE: trap_activation_frequency's Battle-Phase-Traps-only restriction has no representable mechanism (renamed from this entry's prior 'spell_trap_response' label, which did not match any real matrix/engine_reassessment key - corrected for consistency). The BROADER full chain/Spell-Speed model is a separate, explicitly-not-a-blocker question - see chain_spell_speed_priority's UNKNOWN status and explicitly_not_counted_as_a_blocker.",
       "ENGINE: battle_damage_procedure's ATK<DEF attacker-recoil quirk has no representable mechanism.",
       "ENGINE: side_deck, deck_size, and starting_lp/starting_hand are NOT_REPRESENTABLE at the core ocgcore level but ARE exactly representable at the EDOPro client/host-config layer - correctly not treated as blockers on their own, since that layer already exists and is used by every other format this repo supports.",
       "HISTORICAL, UPDATED 2026-08-29 (obsolete 'unread book' framing removed): the 1999 Official Guide Starter Book has now been personally located, inspected, and directly quoted on archive.org (see primary_source_resolution_2026_08_29.expert_rules_primary_material) - its Expert Rules chapter directly documents repeated Magic-card use, the Level-based Tribute requirement, and hand-based Fusion materials. What remains genuinely unresolved is narrower than before: (1) the NORMATIVE effective date - the guide's own text does not say these rules became the mandatory OCG rule on 1999-05-05, only that tournaments 'may possibly adopt' them (大会などではこのルールを採用する可能性もある, personally re-verified against the page image); (2) Tokyo-Dome-specific adoption - no inspected source of any kind establishes which ruleset the Tokyo Dome event itself used.",
@@ -3912,7 +3962,78 @@
       "UPDATED 2026-08-29: the May 5, 1999 guide has since been personally located and inspected (see primary_source_resolution_2026_08_29) - the prior pass's 'no source has read the cited book' framing is now obsolete and is not carried forward as current. The book's Expert Rules content is PROVEN as documented by that date; the normative effective-date question and Tokyo-Dome-specific adoption remain unproven for the distinct reasons recorded in primary_source_resolution_2026_08_29, not because nobody read the book.",
       "The prior corrective-gate section and the original rejected 2026-08 section were not left side-by-side as competing active truths - the rejected section was moved wholesale to superseded_findings, and this section was promoted to be the sole current-authoritative structured representation.",
       "No conclusion was promoted from repeated secondary claims alone (per source_promotion_invariant)."
-    ]
+    ],
+    "positive_continuity_evidence": {
+      "_read_me_first": "This structure exists to draw the exact distinction this session's task required: 'PROVEN at Starter Box + no located evidence of change' (source silence, NOT sufficient on its own to promote a rule to an unconditional Tokyo Dome engine blocker) versus 'PROVEN at Starter Box + independently PROVEN restated in a second, dated, primary source close to the event' (positive persistence evidence, which legitimately can). Every item below requires an independently-dated primary or tier-1/2 source that AFFIRMATIVELY documents the rule as still in effect - not merely a lack of a documented change. chain_spell_speed_priority deliberately has NO entry here: no second dated source was found restating (or changing) it, so its continuity remains genuinely unknown, not merely under-evidenced silence being mistaken for proof.",
+      "standard": "An item here, combined with a matrix row's starter_box.status == PROVEN and an engine classification of NOT_REPRESENTABLE, is sufficient for the unconditional-engine-blocker standard even though the matrix's own tokyo_dome.status column correctly remains UNKNOWN (no event-specific source exists). The two are not in tension: tokyo_dome.status answers 'does a Tokyo-Dome-specific document exist' (no); this structure answers 'is there a narrower, dated, evidence-backed reason to believe the rule still applied 113 days later regardless' (yes, for these three).",
+      "items": {
+        "deck_out": {
+          "mechanism": "independently-dated intermediate primary source, not source silence",
+          "starter_box_date": "1999-02-04",
+          "intermediate_source_id": "official-guide-starter-book-1999-scan",
+          "intermediate_source_date": "1999-05-05",
+          "intermediate_source_pages": [
+            105
+          ],
+          "intermediate_source_quote_translated": "'...if either the player's or the opponent's deck runs out first, and either side becomes unable to draw a card, the outcome is decided by the difference in Life Points between the two. In that case, whichever side has more Life Points at the moment the deck ran out is the winner.' (printed p.105, personally verified against the page image 2026-08-29)",
+          "gap_starter_box_to_intermediate_source_days": 90,
+          "gap_intermediate_source_to_tokyo_dome_days": 113,
+          "expert_rules_relationship": "Expert Rules (same publication, pp.107-109) documents exactly three changes - Tribute Summon, removal of the one-Spell/one-Trap-per-turn activation cap, and hand-based Fusion materials. Deck-out is not among them; the Official Rule Reference chapter (this quote) is the standing rule Expert Rules layers on top of, unchanged.",
+          "upper_bound_evidence": "Independent, non-primary corroboration (NOT personally inspected at root - see sources.deck-out-history.reliability_note): the Japanese Yu-Gi-Oh Wiki (yugioh-wiki.net, 3 separate pages) and yugioh-history.com (independently authored, no cross-citation) agree the LP-comparison rule held until the 'New Expert Rule' accompanying Magic Ruler's release, 2000-04-20 - about 8 months AFTER Tokyo Dome. One wiki page cites this to a print rule card packaged with Booster R1. A competing claim (a 2024 tweet by manga staff member Ito Akira, personally verified accessible and quoted 2026-08-29 via mirror) recalls the rule as a 'draw' rather than LP-comparison - this directly contradicts BOTH personally-inspected primary documents (Starter Box rulebook AND this May 1999 guide) and is assessed as an unreliable decades-later recollection, not evidence against continuity; even the source that quoted the tweet ultimately sided with the LP-comparison rulebook text once checked.",
+          "not_silence_based": true,
+          "upper_bound_provenance_root": "magic-ruler-2000-04-20-rules-overhaul"
+        },
+        "trap_activation_frequency": {
+          "mechanism": "independently-dated intermediate primary source, not source silence",
+          "starter_box_date": "1999-02-04",
+          "intermediate_source_id": "official-guide-starter-book-1999-scan",
+          "intermediate_source_date": "1999-05-05",
+          "intermediate_source_pages": [
+            104
+          ],
+          "intermediate_source_quote_translated": "'...during the Battle Phase, you cannot use Magic Cards other than Trap Cards that are on the field.' (printed p.104, personally verified against the page image 2026-08-29) - textually identical to the Starter Box rulebook's 'Spell Cards placed on the field other than Trap Cards cannot be used during the Battle Phase.'",
+          "gap_starter_box_to_intermediate_source_days": 90,
+          "gap_intermediate_source_to_tokyo_dome_days": 113,
+          "expert_rules_relationship": "Expert Rules removes only the one-Spell/one-Trap-PER-TURN activation cap (any number of Magic cards may be used per turn, field-limited) - a DIFFERENT axis from which card TYPES may be used during the Battle Phase specifically. The Battle-Phase Trap-only restriction is not among Expert Rules' three documented changes.",
+          "upper_bound_evidence": "Officially documented upper bound: Quick-Play Spell Cards (速攻魔法), the first OCG mechanism permitting a Spell/Magic Card to be used during the Battle Phase, were introduced in the 'Magic Ruler' booster, confirmed via Konami's own Yu-Gi-Oh! Neuron card database listing (release date 2000-04-20) - about 8 months AFTER Tokyo Dome.",
+          "not_silence_based": true,
+          "upper_bound_provenance_root": "magic-ruler-2000-04-20-rules-overhaul"
+        },
+        "battle_calculation": {
+          "mechanism": "independently-dated intermediate primary source, not source silence",
+          "starter_box_date": "1999-02-04",
+          "intermediate_source_id": "official-guide-starter-book-1999-scan",
+          "intermediate_source_date": "1999-05-05",
+          "intermediate_source_pages": [
+            102,
+            103,
+            104
+          ],
+          "intermediate_source_quote_translated": "'...if the attacking player's monster's ATK is lower than the ATK/DEF of the attacked enemy monster, [the attacker is destroyed / neither is destroyed]; the value obtained by subtracting the attacking monster's ATK from the enemy's [ATK/DEF] is deducted from the ATTACKING PLAYER's Life Points.' (printed pp.103-104, personally verified against the page image 2026-08-29) - textually identical to the Starter Box rulebook's battle-damage procedure.",
+          "gap_starter_box_to_intermediate_source_days": 90,
+          "gap_intermediate_source_to_tokyo_dome_days": 113,
+          "expert_rules_relationship": "Expert Rules does not mention battle damage or the Damage determination procedure at all; this guide's own Official Rule Reference chapter (this quote) is presented as the unmodified, standing rule.",
+          "upper_bound_evidence": "No source found (this session's research sweep) documents the ATK-vs-ATK/ATK-vs-DEF recoil-damage ARITHMETIC ever changing; what is documented is a later formalization of Damage Step TIMING/response windows (Master Rule 3, 2014-03-21) around the same arithmetic. CAVEAT (adversarial finding, not personally engine-verified this session - pinned ocgcore checkouts are unavailable in this environment): the packet's NOT_REPRESENTABLE engine classification for this rule area should be re-examined by a future pass with engine access, since the recoil arithmetic itself may already match modern rules exactly (the genuine gap, if any, is more likely the historical single-step/no-response-window damage procedure, not the arithmetic result) - this session does not change the engine classification without being able to verify it directly.",
+          "not_silence_based": true
+        }
+      },
+      "adversarial_review_2026_08_29": {
+        "_read_me_first": "An independent adversarial reviewer was asked to argue AGAINST retaining each of the three behaviours as an unconditional blocker, per this session's task instructions. Findings below; the adjudicator's response to each follows.",
+        "deck_out": {
+          "challenge": "Two agreeing dated documents (1999-02-04, 1999-05-05) prove 90 days of stability, not the remaining ~113 days to Tokyo Dome; the upper-bound sources (Japanese wiki, yugioh-history.com) are treated more skeptically elsewhere in this packet (restriction-list section) than here, an inconsistency; Ito Akira's tweet, though factually wrong about 'draw', may still indicate genuine period confusion about this exact rule.",
+          "adjudication": "RETAINED. The residual gap is real and is exactly why later_pre_tokyo_dome stays SUPPORTED_BUT_INCOMPLETE, not PROVEN - the challenge does not identify anything that would lower it further than that. The 'inconsistency' does not hold on inspection: the restriction-list section's skepticism targets one specific, already-flagged disputed sub-claim (scope), not a blanket rejection of the site's reliability; here the claim is independently stated by two editorially-separate sources. Ito Akira's tweet is about a casual writers'-room conversation, not a citation of the codified rule, and is outweighed by two independently-dated official print publications that agree with each other."
+        },
+        "trap_activation_frequency": {
+          "challenge": "The same 113-day-gap argument as deck_out applies. More sharply: the upper-bound evidence (Quick-Play Spell Cards, Magic Ruler) and deck_out's upper-bound evidence (New Expert Rule, also Magic Ruler) may be two facets of the SAME single rules-overhaul release rather than two independently corroborating findings - risk of double-counting one data point as two.",
+          "adjudication": "RETAINED, but the provenance-root risk is real and is now recorded explicitly (upper_bound_provenance_root, shared with deck_out) so it is never miscounted as independent corroboration. This does not weaken the CORE finding, which does not depend on the upper bound at all: PROVEN at Starter Box + independently re-documented 1999-05-05 (unrelated to Magic Ruler) + Expert Rules (the one documented intervening change) confirmed not to touch it. The upper bound is corroborating context, not the primary basis."
+        },
+        "battle_calculation": {
+          "challenge": "Reviewer found this the WEAKEST case for downgrading: no source documents the recoil arithmetic ever changing, even decades later, making the 113-day interpolation safer than for the other two. The reviewer located the genuine vulnerability on the ENGINE side instead - NOT_REPRESENTABLE was not empirically verified this session (pinned ocgcore unavailable), and the recoil arithmetic may already match modern rules exactly.",
+          "adjudication": "RETAINED on historical-persistence grounds, which the adversarial review itself confirms is the strongest of the three. The engine-side caveat was already flagged (positive_continuity_evidence.items.battle_calculation.upper_bound_evidence) before this review; the review corroborates it as the real open question, not the historical continuity finding."
+        },
+        "chaos_disruption_cross_check": "Reviewer noted Tokyo Dome's documented severe disruption (near-riot conditions, cancelled finals) could let an overwhelmed volunteer judge deviate from either printed ruleset on judgment-call rules (deck-out, Trap-only responses) under pressure - a rule-specific mechanism, not the general 'which ruleset applied' uncertainty already priced into every matrix row's UNKNOWN tokyo_dome tier. Applied generally this argument would swallow all 21 matrix rows and is not specific enough on its own to earn extra weight beyond what UNKNOWN already reflects; noted as a residual acknowledged uncertainty, not a reason to downgrade."
+      }
+    }
   },
   "schema_host_architecture_assessment": {
     "_scope": "THIS FIELD ANSWERS A NARROW QUESTION ONLY: can the repository's existing JSON schemas and EDOPro host-configuration surface encode the SHAPE of a Tokyo Dome format record (pool cutoff, finite deck-size ceilings, rule-profile flags), if and when one is ever canonicalized? It does NOT answer whether the Tokyo Dome format itself is ready for canonicalization - that is a historical-evidence and engine-representability question, answered ONLY by tokyo_dome_research_current.architecture_verdict (currently BLOCKED_BY_BOTH). Do not read this field's verdict as a competing or alternative answer to that question - it is a different, narrower question about data-representability, not canonicalization-readiness.",

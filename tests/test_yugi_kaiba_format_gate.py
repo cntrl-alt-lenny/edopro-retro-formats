@@ -230,10 +230,14 @@ def _assert_rule_boundary_agrees_with_authority(packet):
 
 def _assert_blocker_ledger_chain_reason_not_silence_based(packet):
     """Invariant: blocker_ledger.chain_spell_speed_semantics must justify
-    BLOCKING via the narrower confirmed spell_trap_response paradigm, not
-    by inferring Tokyo-Dome absence from rulebook silence."""
+    BLOCKING via the narrower confirmed trap_activation_frequency paradigm
+    (the real engine_representation_blockers/engine_reassessment key - a
+    prior session's added prose mistakenly called this "spell_trap_response",
+    a name that matches no real matrix/engine_reassessment key anywhere in
+    the packet; corrected here), not by inferring Tokyo-Dome absence from
+    rulebook silence."""
     reason = packet["blocker_ledger"]["chain_spell_speed_semantics"]["reason"]
-    if "spell_trap_response" not in reason:
+    if "trap_activation_frequency" not in reason:
         raise AssertionError("blocker_ledger.chain_spell_speed_semantics reason no longer cites the narrower confirmed blocker")
     if (
         "lacks formal Chain/Spell Speed/priority rules and no general core flag supplies the historical boundary"
@@ -272,6 +276,121 @@ def _assert_gate_md_has_current_state_header(text, packet):
     for phrase in WHOLE_PACKET_SOURCE_UNLOCATED_BANNED_PHRASES:
         if phrase in section_norm:
             raise AssertionError(f"gate.md current-state header itself contains a stale phrase: {phrase!r}")
+
+
+# ------------------------------------------------------------------
+# Unconditional-engine-blocker adjudication standard (this session).
+#
+# The bug class this session investigated: the packet treated deck_out,
+# trap_activation_frequency, and battle_calculation as unconditional Tokyo
+# Dome engine blockers using a principle resembling "PROVEN at Starter Box +
+# no located evidence of change" - which is structurally the SAME kind of
+# silence-based reasoning the packet correctly REJECTED for
+# chain_spell_speed_priority ("no chain concept" was wrongly inferred from
+# the same source's silence on the topic). This session found that a
+# MATERIALLY DIFFERENT, stronger justification actually exists for the three
+# behaviours - a second, independently-dated primary source (the May 1999
+# guide's own "Official Rule Reference" chapter, personally inspected via
+# page image, not merely absence-of-evidence) that AFFIRMATIVELY restates
+# each rule as unchanged, close to the event, with externally-corroborated
+# upper bounds placing the actual eventual change months AFTER Tokyo Dome.
+# That positive evidence is encoded at tokyo_dome_research_current.
+# positive_continuity_evidence, keyed by rule_area, with an explicit
+# not_silence_based flag.
+#
+# The exact standard, re-derived structurally (not just asserted in prose):
+# a rule_area is a legitimate unconditional engine blocker iff (a) its
+# engine_reassessment classification is NOT_REPRESENTABLE, (b) its matrix
+# starter_box.status is PROVEN, and (c) EITHER its matrix tokyo_dome.status
+# is PROVEN OR it has a positive_continuity_evidence entry flagged
+# not_silence_based. Condition (a) alone (NOT_REPRESENTABLE) is NOT
+# sufficient - tribute_summon/fusion_material_location/chain_spell_speed_priority
+# all have engine gaps of one kind or another but are correctly NOT
+# unconditional blockers, because their Tokyo-Dome-tier applicability is
+# itself the open question, with no positive_continuity_evidence override.
+# ------------------------------------------------------------------
+
+def _derive_expected_unconditional_engine_blockers(packet):
+    current = packet["tokyo_dome_research_current"]
+    psr = current["primary_source_resolution_2026_08_29"]
+    matrix = {r["rule_area"]: r for r in psr["three_column_evidence_matrix"]}
+    engine = {r["rule_area"]: r for r in psr["engine_reassessment"]}
+    pce = current.get("positive_continuity_evidence", {}).get("items", {})
+
+    expected = set()
+    for area, erow in engine.items():
+        if erow.get("classification") != "NOT_REPRESENTABLE":
+            continue
+        mrow = matrix.get(area)
+        if mrow is None or mrow["starter_box"]["status"] != "PROVEN":
+            continue
+        has_tokyo_dome_proof = mrow["tokyo_dome"]["status"] == "PROVEN"
+        has_continuity_bound = area in pce and pce[area].get("not_silence_based") is True
+        if has_tokyo_dome_proof or has_continuity_bound:
+            expected.add(area)
+    return expected
+
+
+def _assert_unconditional_blocker_standard(packet):
+    """Invariants 1, 3, 4, 6: structurally re-derive the unconditional-
+    engine-blocker set from first principles and require it to match the
+    packet's own list exactly - neither a bare NOT_REPRESENTABLE
+    classification (invariant 3) nor a bare Starter-Box PROVEN + Tokyo-Dome
+    UNKNOWN pairing (invariant 1) is sufficient on its own; every listed
+    blocker must independently satisfy the full standard (invariant 4); and
+    conditional gaps that fail the standard must NOT appear in the list
+    (invariant 6)."""
+    current = packet["tokyo_dome_research_current"]
+    actual_items = current["architecture_verdict_detail"]["engine_representation_blockers"]["items"]
+    actual_areas = {item.split(" - ", 1)[0].strip() for item in actual_items}
+    expected = _derive_expected_unconditional_engine_blockers(packet)
+    if actual_areas != expected:
+        raise AssertionError(
+            f"engine_representation_blockers.items {sorted(actual_areas)} does not match "
+            f"the structurally-derived unconditional-blocker standard {sorted(expected)}"
+        )
+
+
+def _assert_continuity_evidence_not_promoted_to_proven(packet):
+    """Invariant 2: a positive_continuity_evidence entry (SUPPORTED_BUT_
+    INCOMPLETE-tier evidence) must never be accompanied by a matrix row
+    silently promoted to PROVEN at the later_pre_tokyo_dome tier - the
+    residual gap to the event is real and must stay visible in the status
+    field, not just in prose."""
+    current = packet["tokyo_dome_research_current"]
+    psr = current["primary_source_resolution_2026_08_29"]
+    matrix = {r["rule_area"]: r for r in psr["three_column_evidence_matrix"]}
+    pce = current.get("positive_continuity_evidence", {}).get("items", {})
+    for area in pce:
+        status = matrix[area]["later_pre_tokyo_dome"]["status"]
+        if status == "PROVEN":
+            raise AssertionError(
+                f"{area}'s later_pre_tokyo_dome tier was silently promoted to PROVEN despite "
+                "resting on positive_continuity_evidence, not an event-specific source"
+            )
+        if status != "SUPPORTED_BUT_INCOMPLETE":
+            raise AssertionError(f"{area}'s later_pre_tokyo_dome tier has an unexpected status: {status}")
+
+
+def _assert_architecture_verdict_derived_consistently(packet):
+    """Invariant 7: BLOCKED_BY_BOTH must hold iff both blocker categories
+    are non-empty; if either category were ever emptied, the top-line
+    verdict must change with it, not float free of its own inputs."""
+    current = packet["tokyo_dome_research_current"]
+    detail = current["architecture_verdict_detail"]
+    historical_nonempty = len(detail["historical_evidence_blockers"]["items"]) > 0
+    engine_nonempty = len(detail["engine_representation_blockers"]["items"]) > 0
+    verdict = current["architecture_verdict"]
+    if historical_nonempty and engine_nonempty:
+        expected = "BLOCKED_BY_BOTH"
+    elif historical_nonempty:
+        expected = "BLOCKED_BY_HISTORICAL_EVIDENCE"
+    elif engine_nonempty:
+        expected = "BLOCKED_BY_ENGINE"
+    else:
+        expected = "UNBLOCKED"
+    if verdict != expected:
+        raise AssertionError(f"architecture_verdict is {verdict!r}, but the blocker categories imply {expected!r}")
 
 
 class YugiKaibaResearchGateTest(unittest.TestCase):
@@ -1626,6 +1745,217 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         )
         with self.assertRaises(AssertionError):
             _assert_gate_md_has_current_state_header(corrupted, self.packet)
+
+    # ------------------------------------------------------------------
+    # Unconditional-blocker adjudication pass (this session): deck_out,
+    # trap_activation_frequency, and battle_calculation re-examined against
+    # an explicit, structural standard rather than "PROVEN at Starter Box +
+    # no located evidence of change" (the same silence-based reasoning
+    # already correctly rejected for chain_spell_speed_priority).
+    # ------------------------------------------------------------------
+
+    def test_R_unconditional_blockers_match_the_structural_standard(self):
+        _assert_unconditional_blocker_standard(self.packet)
+        # The three survivors are exactly the three the task named - no
+        # silent fourth blocker, no silent dropout.
+        self.assertEqual(
+            {"deck_out", "trap_activation_frequency", "battle_calculation"},
+            _derive_expected_unconditional_engine_blockers(self.packet),
+        )
+
+    def test_S_positive_continuity_evidence_is_genuinely_not_silence_based(self):
+        current = self.packet["tokyo_dome_research_current"]
+        pce = current["positive_continuity_evidence"]["items"]
+        self.assertEqual({"deck_out", "trap_activation_frequency", "battle_calculation"}, set(pce))
+        for area, item in pce.items():
+            self.assertIs(item["not_silence_based"], True)
+            self.assertEqual("official-guide-starter-book-1999-scan", item["intermediate_source_id"])
+            self.assertEqual("1999-05-05", item["intermediate_source_date"])
+            self.assertTrue(item["intermediate_source_quote_translated"])
+            self.assertTrue(item["expert_rules_relationship"])
+            self.assertTrue(item["upper_bound_evidence"])
+        # chain_spell_speed_priority deliberately has NO entry - its
+        # continuity is genuinely unknown, not merely under-evidenced
+        # silence being mistaken for proof.
+        self.assertNotIn("chain_spell_speed_priority", pce)
+
+    def test_S2_shared_upper_bound_provenance_root_is_recorded_not_double_counted(self):
+        # Adversarial-review finding (Phase D, this session): deck_out's
+        # "New Expert Rule" upper bound and trap_activation_frequency's
+        # "Quick-Play Spell Cards" upper bound both trace to the same
+        # Magic Ruler (2000-04-20) release - they must be recorded as ONE
+        # shared provenance root, not presented as two independent
+        # corroborating findings (matches the established provenance_root
+        # discipline used elsewhere in this packet for source clustering).
+        pce = self.packet["tokyo_dome_research_current"]["positive_continuity_evidence"]["items"]
+        self.assertEqual(
+            pce["deck_out"]["upper_bound_provenance_root"],
+            pce["trap_activation_frequency"]["upper_bound_provenance_root"],
+        )
+        self.assertTrue(pce["deck_out"]["upper_bound_provenance_root"])
+
+    def test_S3_adversarial_review_recorded_for_all_three_behaviours(self):
+        review = self.packet["tokyo_dome_research_current"]["positive_continuity_evidence"][
+            "adversarial_review_2026_08_29"
+        ]
+        for area in ("deck_out", "trap_activation_frequency", "battle_calculation"):
+            self.assertIn("challenge", review[area])
+            self.assertIn("adjudication", review[area])
+            self.assertTrue(review[area]["challenge"])
+            self.assertTrue(review[area]["adjudication"])
+
+    def test_T_continuity_evidence_does_not_silently_promote_the_matrix_tier(self):
+        _assert_continuity_evidence_not_promoted_to_proven(self.packet)
+
+    def test_U_architecture_verdict_derived_consistently_from_both_categories(self):
+        _assert_architecture_verdict_derived_consistently(self.packet)
+
+    def test_V_conditional_engine_gaps_stay_separate_from_unconditional_blockers(self):
+        # Invariant 6, direct regression: the three genuinely-conditional
+        # engine/history gaps must never appear in the unconditional list,
+        # even though each has an engine-representability wrinkle of its
+        # own (per explicitly_not_counted_as_a_blocker).
+        current = self.packet["tokyo_dome_research_current"]
+        engine_items_text = " ".join(current["architecture_verdict_detail"]["engine_representation_blockers"]["items"])
+        for conditional_area in ("tribute_summon", "fusion_material_location", "chain_spell_speed_priority"):
+            self.assertNotIn(conditional_area + " -", engine_items_text)
+        psr = current["primary_source_resolution_2026_08_29"]
+        engine = {r["rule_area"]: r["classification"] for r in psr["engine_reassessment"]}
+        self.assertEqual("UNKNOWN_BECAUSE_HISTORY_UNKNOWN", engine["tribute_summon"])
+        self.assertEqual("UNKNOWN_BECAUSE_HISTORY_UNKNOWN", engine["fusion_material_location"])
+        self.assertEqual("UNKNOWN_BECAUSE_HISTORY_UNKNOWN", engine["chain_spell_speed_priority"])
+
+    def test_W_ito_akira_counter_claim_is_recorded_as_rejected_not_current_evidence(self):
+        # Invariant 8 (narrow instance): a considered-and-rejected counter-
+        # claim may be recorded in an ACTIVE field (personally_reverified_claims)
+        # for transparency, but only if its own text unambiguously marks it
+        # rejected - it must never read as accepted current evidence.
+        current = self.packet["tokyo_dome_research_current"]
+        ito_claims = [
+            c for c in current["personally_reverified_claims"]
+            if c["claim_source_id"] == "ito-akira-tweet-2024"
+        ]
+        self.assertEqual(1, len(ito_claims))
+        establishes = ito_claims[0]["what_it_establishes"]
+        self.assertIn("CONSIDERED AND REJECTED", establishes)
+        self.assertIn("not as a load-bearing finding", establishes)
+
+    def test_X_engine_reassessment_and_canonicalization_blockers_cover_all_three_rule_areas(self):
+        # Direct regression for the specific completeness gap this session
+        # found: trap_activation_frequency previously had NO row in
+        # engine_reassessment or canonicalization_blockers at all, even
+        # though it was already cited as an unconditional blocker.
+        psr = self.packet["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]
+        engine_areas = {r["rule_area"] for r in psr["engine_reassessment"]}
+        for area in ("deck_out", "trap_activation_frequency", "battle_calculation"):
+            self.assertIn(area, engine_areas)
+        cb_item_names = " ".join(i["item"] for i in psr["canonicalization_blockers"]["items"])
+        self.assertIn("deck-out rule", cb_item_names)
+        self.assertIn("battle-calculation semantics", cb_item_names)
+        self.assertIn("Trap-only", cb_item_names)
+
+    def test_Y_no_stale_tokyo_dome_exceptions_claimed_outside_the_matrix(self):
+        # Direct regression: remaining_blockers[0] previously claimed
+        # deck_out/hand_limit were "BOUNDED" and tribute_summon "AMBIGUOUS"
+        # exceptions to "every rule area's tokyo_dome_evidence_status is
+        # UNKNOWN" - contradicting both the matrix itself (21 of 21 UNKNOWN,
+        # no exceptions) and tokyo_dome_rule_profile_readiness's own
+        # explanation. Structural check, not a substring ban: every matrix
+        # row's tokyo_dome.status must actually be UNKNOWN.
+        current = self.packet["tokyo_dome_research_current"]
+        psr = current["primary_source_resolution_2026_08_29"]
+        matrix = psr["three_column_evidence_matrix"]
+        non_unknown = [r["rule_area"] for r in matrix if r["tokyo_dome"]["status"] != "UNKNOWN"]
+        self.assertEqual([], non_unknown)
+        self.assertNotIn("BOUNDED", current["remaining_blockers"][0])
+        self.assertNotIn("AMBIGUOUS", current["remaining_blockers"][0])
+
+    # ------------------------------------------------------------------
+    # Phase D: adversarial mutation tests for the standard above.
+    # ------------------------------------------------------------------
+
+    def test_mutation_R_starter_box_proven_plus_tokyo_dome_unknown_alone_is_not_enough(self):
+        # Invariant 1: strip trap_activation_frequency's positive_continuity_
+        # evidence entry (leaving starter_box PROVEN + tokyo_dome UNKNOWN,
+        # exactly the pattern the task warned is NOT sufficient on its own)
+        # while leaving it listed as an unconditional blocker - must be caught.
+        mutated = copy.deepcopy(self.packet)
+        del mutated["tokyo_dome_research_current"]["positive_continuity_evidence"]["items"]["trap_activation_frequency"]
+        with self.assertRaises(AssertionError):
+            _assert_unconditional_blocker_standard(mutated)
+
+    def test_mutation_S_bare_not_representable_classification_is_not_enough(self):
+        # Invariant 3: flip tribute_summon's engine_reassessment
+        # classification to NOT_REPRESENTABLE (its starter_box tier is
+        # UNKNOWN, not PROVEN, and it has no positive_continuity_evidence)
+        # - this alone must not make the derived standard treat it as an
+        # unconditional blocker, but if someone ALSO added it to the items
+        # list, that must be caught.
+        mutated = copy.deepcopy(self.packet)
+        for row in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["engine_reassessment"]:
+            if row["rule_area"] == "tribute_summon":
+                row["classification"] = "NOT_REPRESENTABLE"
+        expected = _derive_expected_unconditional_engine_blockers(mutated)
+        self.assertNotIn("tribute_summon", expected, "bare NOT_REPRESENTABLE alone must not create a blocker")
+        mutated["tokyo_dome_research_current"]["architecture_verdict_detail"]["engine_representation_blockers"]["items"].append(
+            "tribute_summon - injected for test"
+        )
+        with self.assertRaises(AssertionError):
+            _assert_unconditional_blocker_standard(mutated)
+
+    def test_mutation_T_supported_but_incomplete_cannot_be_silently_rendered_proven(self):
+        mutated = copy.deepcopy(self.packet)
+        for row in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]:
+            if row["rule_area"] == "deck_out":
+                row["later_pre_tokyo_dome"]["status"] = "PROVEN"
+        with self.assertRaises(AssertionError):
+            _assert_continuity_evidence_not_promoted_to_proven(mutated)
+
+    def test_mutation_U_tokyo_dome_status_reset_to_unknown_needs_a_surviving_continuity_bound(self):
+        # Invariant 5: deck_out's tokyo_dome.status is already UNKNOWN in the
+        # live packet (correctly - no event-specific source exists), and the
+        # blocker survives ONLY because positive_continuity_evidence supplies
+        # the missing evidence. Removing BOTH must fail; removing only the
+        # (already-UNKNOWN) matrix status is a no-op and must keep passing,
+        # proving the continuity mechanism is genuinely doing the work.
+        baseline = copy.deepcopy(self.packet)
+        _assert_unconditional_blocker_standard(baseline)  # sanity: passes today
+
+        mutated = copy.deepcopy(self.packet)
+        del mutated["tokyo_dome_research_current"]["positive_continuity_evidence"]["items"]["deck_out"]
+        with self.assertRaises(AssertionError):
+            _assert_unconditional_blocker_standard(mutated)
+
+        restored = copy.deepcopy(mutated)
+        for row in restored["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]:
+            if row["rule_area"] == "deck_out":
+                row["tokyo_dome"]["status"] = "PROVEN"
+        _assert_unconditional_blocker_standard(restored)  # a real event-specific PROVEN also satisfies it
+
+    def test_mutation_V_conditional_gap_smuggled_into_unconditional_list_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["architecture_verdict_detail"]["engine_representation_blockers"]["items"].append(
+            "chain_spell_speed_priority - smuggled back in for test, no positive_continuity_evidence backs this"
+        )
+        with self.assertRaises(AssertionError):
+            _assert_unconditional_blocker_standard(mutated)
+
+    def test_mutation_W_architecture_verdict_must_track_its_own_inputs(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["architecture_verdict_detail"]["engine_representation_blockers"]["items"] = []
+        # engine blockers now empty, but the top-line verdict was not
+        # recomputed - must be rejected.
+        with self.assertRaises(AssertionError):
+            _assert_architecture_verdict_derived_consistently(mutated)
+
+    def test_mutation_X_stale_tokyo_dome_exception_reintroduced_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        for row in mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]:
+            if row["rule_area"] == "hand_limit":
+                row["tokyo_dome"]["status"] = "BOUNDED"
+        matrix = mutated["tokyo_dome_research_current"]["primary_source_resolution_2026_08_29"]["three_column_evidence_matrix"]
+        non_unknown = [r["rule_area"] for r in matrix if r["tokyo_dome"]["status"] != "UNKNOWN"]
+        self.assertEqual(["hand_limit"], non_unknown)
 
 
 if __name__ == "__main__":
