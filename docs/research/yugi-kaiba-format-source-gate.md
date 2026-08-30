@@ -3062,35 +3062,41 @@ multimodal inspection of the downloaded file.
 ### What was found
 
 No independent copy of the interior restriction-card crop or of page 20
-was found anywhere - not via marketplace listing, not via collector
-blog, not via Wayback/CDX content-hash search, not via English-language
-sources, and not via verbatim propagation of any of the crop's seven
-most distinctive sentences (zero hits for all seven, across dozens of
-query variants). The known crop's exact image file was checked directly
-against the Wayback Machine's CDX API by content digest: it has been
-captured only at its one known URL, plus two purely mechanical same-
-domain derivatives (a thumbnail and a webp-express conversion) - not
-independent uploads. This is a stronger form of the "single-hosted"
-finding than session 5's search-based conclusion: a direct content-hash
-check, not merely the absence of a search hit.
+was located via any of the channels searched - not marketplace listing,
+not collector blog, not Wayback/CDX content-hash search, not English-
+language sources, and not verbatim propagation of any of the crop's
+seven most distinctive sentences (zero hits for all seven, across dozens
+of query variants). The known crop's exact image file was checked
+directly against the Wayback Machine's CDX API by content digest: it has
+been captured only at its one known URL, plus two purely mechanical
+same-domain derivatives (a thumbnail and a webp-express conversion) -
+not independent uploads. This is the same "single-hosted" finding as
+session 5's search-based conclusion, reached by a different and more
+mechanical method: a direct content-hash check against the Wayback
+index, rather than the absence of a search hit - it narrows what wasn't
+found in that index specifically, not what exists globally.
 
 The single most significant new find was NOT the target crop: daiti0526's
 full post archive (212 URLs, enumerated via the Wayback CDX API and the
 site's own RSS feed - confirmed to contain no September 1999 V Jump post
 at all, closing that lead) includes two previously-unknown posts
-publishing EXIF-verified photographs of an authentic 1999 Konami Tokyo
-Dome invitation, guardian notification letter, and a full tournament
-rulebook. This is genuine new primary confirmation of the event's date
-(1999-08-26, Thursday, 12:00-17:30), venue (Tokyo Dome, Gate 24), and
-official identity, via a source-type - an actual period Konami-issued
-document - stronger than anything previously in this packet for that
-narrow purpose. It governs the PARALLEL Game Boy "Duel Monsters II: Dark
-Duel Stories" video-game tournament, however, with its own separate
-"cards you cannot use" list keyed to that game's internal card numbers -
-not the OCG restriction list this packet tracks, and it never mentions
-Expert Rules. It must never be read as OCG ruleset or restriction-list
-evidence; see `daiti0526-tokyo-dome-invitation-and-dm2-rulebook-2018` in
-the packet's `sources` array for the full adjudication.
+publishing photographs (EXIF-consistent with an original 2018/2019
+capture) of a document purporting to be a 1999 Konami Tokyo Dome
+invitation, guardian notification letter, and a full tournament
+rulebook. This is a strong candidate new primary confirmation of the
+event's date (1999-08-26, Thursday, 12:00-17:30), venue (Tokyo Dome,
+Gate 24), and official identity, via a source-type - a document
+purporting to be a period Konami-issued document - stronger in kind than
+anything previously in this packet for that narrow purpose, though the
+object's own provenance was not independently authenticated beyond the
+photographs' EXIF-consistent capture date. It governs the PARALLEL Game
+Boy "Duel Monsters II: Dark Duel Stories" video-game tournament, however,
+with its own separate "cards you cannot use" list keyed to that game's
+internal card numbers - not the OCG restriction list this packet tracks,
+and it never mentions Expert Rules. It must never be read as OCG ruleset
+or restriction-list evidence; see
+`daiti0526-tokyo-dome-invitation-and-dm2-rulebook-2018` in the packet's
+`sources` array for the full adjudication.
 
 Three new Mercari listings were found and personally inspected (14
 photographs viewed directly): one (`mercari-m44588227599-vjump-sept1999-
