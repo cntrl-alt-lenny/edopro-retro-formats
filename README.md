@@ -14,11 +14,13 @@
 
 </div>
 
-<a href="https://formatlibrary.com/formats/">
-  <img src="docs/assets/format-atlas.svg" alt="Format atlas showing repository progress across the complete Format Library chronology">
-</a>
+<p align="center">
+  <a href="https://raw.githubusercontent.com/cntrl-alt-lenny/edopro-retro-formats/main/docs/assets/format-atlas.svg" title="Open the full-size format atlas">
+    <img src="docs/assets/format-atlas.svg" width="760" alt="Format atlas showing repository progress across the complete Format Library chronology">
+  </a>
+</p>
 
-<p align="center"><sub>The atlas is generated from a pinned <a href="https://formatlibrary.com/formats/">Format Library</a> catalog and this repository's canonical status data.</sub></p>
+<p align="center"><sub>Click the atlas to open the full-size SVG. It is generated from a pinned <a href="https://formatlibrary.com/formats/">Format Library</a> catalog and this repository's canonical status data.</sub></p>
 
 ## The project
 

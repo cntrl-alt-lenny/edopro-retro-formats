@@ -104,6 +104,14 @@ class FormatAtlasTest(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
 
+    def test_readme_uses_compact_clickable_full_size_atlas(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(
+            'href="https://raw.githubusercontent.com/cntrl-alt-lenny/edopro-retro-formats/main/docs/assets/format-atlas.svg"',
+            readme,
+        )
+        self.assertIn('src="docs/assets/format-atlas.svg" width="760"', readme)
+
 
 if __name__ == "__main__":
     unittest.main()
