@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "docs" / "format-library-catalog.json"
 PROGRESS = ROOT / "docs" / "format-atlas-progress.json"
 SVG = ROOT / "docs" / "assets" / "format-atlas.svg"
+BANNER = ROOT / "docs" / "assets" / "format-banner.svg"
 GENERATOR = ROOT / "scripts" / "generate_format_atlas.py"
 NS = {"svg": "http://www.w3.org/2000/svg"}
 
@@ -20,8 +21,11 @@ class FormatAtlasTest(unittest.TestCase):
         cls.catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
         cls.progress = json.loads(PROGRESS.read_text(encoding="utf-8"))
         cls.root = ET.parse(SVG).getroot()
+        cls.banner_root = ET.parse(BANNER).getroot()
         cls.tiles = cls.root.findall(".//svg:g[@class='format']", NS)
         cls.tiles_by_id = {int(tile.attrib["data-format-id"]): tile for tile in cls.tiles}
+        cls.banner_tiles = cls.banner_root.findall(".//svg:g[@class='format']", NS)
+        cls.banner_tiles_by_id = {int(tile.attrib["data-format-id"]): tile for tile in cls.banner_tiles}
 
     def test_catalog_is_complete_unique_and_chronological(self):
         formats = self.catalog["formats"]
@@ -41,6 +45,8 @@ class FormatAtlasTest(unittest.TestCase):
         expected = {item["id"] for item in self.catalog["formats"]}
         self.assertEqual(len(self.tiles), len(expected))
         self.assertEqual(set(self.tiles_by_id), expected)
+        self.assertEqual(len(self.banner_tiles), len(expected))
+        self.assertEqual(set(self.banner_tiles_by_id), expected)
 
     def test_canonical_progress_is_read_from_format_records(self):
         expected = {
@@ -104,13 +110,15 @@ class FormatAtlasTest(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
 
-    def test_readme_uses_compact_clickable_full_size_atlas(self):
+    def test_readme_uses_compact_banner_and_detailed_atlas(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn(
-            'href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg"',
+            'href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-banner.svg"',
             readme,
         )
-        self.assertIn('src="docs/assets/format-atlas.svg" width="480"', readme)
+        self.assertIn('src="docs/assets/format-banner.svg" width="960"', readme)
+        self.assertIn('src="docs/assets/format-atlas.svg" width="960"', readme)
+        self.assertIn('Open the full-size detailed atlas', readme)
 
 
 if __name__ == "__main__":

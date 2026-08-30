@@ -1,0 +1,1513 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="326" viewBox="0 0 1200 326" role="img" aria-labelledby="banner-title banner-desc">
+  <title id="banner-title">EDOPro historical format progress banner</title>
+  <desc id="banner-desc">All 128 formats in the pinned Format Library catalog, with four generated implementation classifiers for banlist, card pool, rules, and historical card text.</desc>
+  <defs>
+    <linearGradient id="banner-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="0.55" stop-color="#0b1426"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="banner-aura-a">
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="banner-aura-b">
+      <stop offset="0" stop-color="#0284c7" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="banner-glow" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="326" rx="18" fill="url(#banner-panel)"/>
+  <ellipse cx="120" cy="10" rx="300" ry="130" fill="url(#banner-aura-a)"/>
+  <ellipse cx="1080" cy="10" rx="330" ry="140" fill="url(#banner-aura-b)"/>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <text x="28" y="31" font-size="19" font-weight="850" letter-spacing="2.2" fill="#f3f7fc">EDOPRO RETRO FORMATS</text>
+    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data · generated progress at a glance</text>
+    <rect x="1000" y="20" width="172" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
+    <text x="1086" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">128 FORMATS · 4 CLASSIFIERS</text>
+    <rect x="28" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="35" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">B</text>
+    <text x="48" y="76.7" font-size="8" fill="#8ea0ba">Banlist</text>
+    <rect x="112" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="119" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">P</text>
+    <text x="132" y="76.7" font-size="8" fill="#8ea0ba">Card pool</text>
+    <rect x="198" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="205" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">R</text>
+    <text x="218" y="76.7" font-size="8" fill="#8ea0ba">Rules</text>
+    <rect x="284" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="291" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">E</text>
+    <text x="304" y="76.7" font-size="8" fill="#8ea0ba">Card text</text>
+    <circle cx="430" cy="74" r="3.2" fill="#334155"/>
+    <text x="438" y="77" font-size="7.4" fill="#8ea0ba">Not started</text>
+    <circle cx="520" cy="74" r="3.2" fill="#a78bfa"/>
+    <text x="528" y="77" font-size="7.4" fill="#8ea0ba">Research</text>
+    <circle cx="608" cy="74" r="3.2" fill="#f59e0b"/>
+    <text x="616" y="77" font-size="7.4" fill="#8ea0ba">Partial</text>
+    <circle cx="693" cy="74" r="3.2" fill="#38bdf8"/>
+    <text x="701" y="77" font-size="7.4" fill="#8ea0ba">Complete</text>
+    <circle cx="785" cy="74" r="3.2" fill="#34d399"/>
+    <text x="793" y="77" font-size="7.4" fill="#8ea0ba">Verified</text>
+    <line x1="24" y1="91" x2="1176" y2="91" stroke="#26354d"/>
+    <g class="era" data-era="DM">
+      <rect x="24.0" y="101.0" width="138.0" height="16" rx="5" fill="#a78bfa" opacity="0.12"/>
+      <rect x="24.0" y="101.0" width="3" height="16" rx="1.5" fill="#a78bfa"/>
+      <text x="33.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#a78bfa">DM</text>
+      <text x="155.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">27</text>
+    </g>
+      <g class="format" data-format-id="135" data-format-name="Tokyo Dome" data-category="OCG" data-kind="research" data-banlist="research" data-card-pool="research" data-rule-profile="research" data-errata="research">
+        <title>Tokyo Dome — Research, Research, Research, Research</title>
+        <rect x="24.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#a78bfa" stroke-width="0.75"/>
+        <circle cx="29.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Tokyo Do…</text>
+        <rect x="67.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#a78bfa"/>
+        <rect x="72.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#a78bfa"/>
+        <rect x="78.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#a78bfa"/>
+        <rect x="84.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#a78bfa"/>
+      </g>
+      <g class="format" data-format-id="136" data-format-name="Exodia" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Exodia — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Exodia</text>
+        <rect x="137.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="137" data-format-name="OCG Treasure" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Treasure — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="138.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Trea…</text>
+        <rect x="67.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="138" data-format-name="Snake" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Snake — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="138.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Snake</text>
+        <rect x="137.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="139" data-format-name="Cannon" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Cannon — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Cannon</text>
+        <rect x="67.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="140" data-format-name="OCG Imperial" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Imperial — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Impe…</text>
+        <rect x="137.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="141" data-format-name="Mirror" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Mirror — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="162.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Mirror</text>
+        <rect x="67.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="142" data-format-name="OCG Android" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Android — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="162.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Andr…</text>
+        <rect x="137.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="143" data-format-name="Makyura" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Makyura — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="174.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Makyura</text>
+        <rect x="67.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="1" data-format-name="Yugi-Kaiba" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Yugi-Kaiba — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Yugi-Kai…</text>
+        <rect x="137.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="2" data-format-name="Critter" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Critter — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="29.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="34.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Critter</text>
+        <rect x="67.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="144" data-format-name="OCG Yata" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Yata — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="186.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Yata</text>
+        <rect x="137.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="93" data-format-name="Treasure" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Treasure — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="29.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="34.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Treasure</text>
+        <rect x="67.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="89" data-format-name="Imperial" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Imperial — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Imperial</text>
+        <rect x="137.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="145" data-format-name="Demon" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Demon — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="210.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Demon</text>
+        <rect x="67.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="3" data-format-name="Android" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Android — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="210.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Android</text>
+        <rect x="137.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="146" data-format-name="Goblin" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Goblin — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="217.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="222.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="223.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="223.7" font-size="5.3" font-weight="650" fill="#e5edf8">Goblin</text>
+        <rect x="67.0" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="94" data-format-name="Joey-Pegasus" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Joey-Pegasus — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="217.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="222.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="223.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="223.7" font-size="5.3" font-weight="650" fill="#e5edf8">Joey-Peg…</text>
+        <rect x="137.0" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="102" data-format-name="Fiber" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Fiber — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="229.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="234.0" r="2.6" fill="#60a5fa"/>
+        <text x="29.0" y="235.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="34.0" y="235.7" font-size="5.3" font-weight="650" fill="#e5edf8">Fiber</text>
+        <rect x="67.0" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="147" data-format-name="Envoy" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Envoy — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="229.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="234.0" r="2.6" fill="#fb7185"/>
+        <text x="99.0" y="235.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="104.0" y="235.7" font-size="5.3" font-weight="650" fill="#e5edf8">Envoy</text>
+        <rect x="137.0" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="4" data-format-name="Yata" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Yata — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="241.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="246.0" r="2.6" fill="#60a5fa"/>
+        <text x="29.0" y="247.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="34.0" y="247.7" font-size="5.3" font-weight="650" fill="#e5edf8">Yata</text>
+        <rect x="67.0" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="109" data-format-name="Scientist" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Scientist — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="241.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="246.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="247.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="247.7" font-size="5.3" font-weight="650" fill="#e5edf8">Scientist</text>
+        <rect x="137.0" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="249.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="148" data-format-name="OCG Chaos" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Chaos — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="253.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="258.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="259.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="259.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Chaos</text>
+        <rect x="67.0" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="5" data-format-name="Vampire" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Vampire — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="253.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="258.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="259.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="259.7" font-size="5.3" font-weight="650" fill="#e5edf8">Vampire</text>
+        <rect x="137.0" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="261.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="149" data-format-name="Catapult" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Catapult — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="265.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="270.0" r="2.6" fill="#fb7185"/>
+        <text x="29.0" y="271.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="34.0" y="271.7" font-size="5.3" font-weight="650" fill="#e5edf8">Catapult</text>
+        <rect x="67.0" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="6" data-format-name="Chaos" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Chaos — Not started, Not started, Not started, Not started</title>
+        <rect x="94.0" y="265.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="99.0" cy="270.0" r="2.6" fill="#60a5fa"/>
+        <text x="99.0" y="271.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="104.0" y="271.7" font-size="5.3" font-weight="650" fill="#e5edf8">Chaos</text>
+        <rect x="137.0" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="142.8" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="148.6" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="154.4" y="273.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="7" data-format-name="Warrior" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Warrior — Not started, Not started, Not started, Not started</title>
+        <rect x="24.0" y="277.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="29.0" cy="282.0" r="2.6" fill="#60a5fa"/>
+        <text x="29.0" y="283.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="34.0" y="283.7" font-size="5.3" font-weight="650" fill="#e5edf8">Warrior</text>
+        <rect x="67.0" y="285.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="72.8" y="285.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="78.6" y="285.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="84.4" y="285.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="GX">
+      <rect x="170.0" y="101.0" width="138.0" height="16" rx="5" fill="#2dd4bf" opacity="0.12"/>
+      <rect x="170.0" y="101.0" width="3" height="16" rx="1.5" fill="#2dd4bf"/>
+      <text x="179.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#2dd4bf">GX</text>
+      <text x="301.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">19</text>
+    </g>
+      <g class="format" data-format-id="150" data-format-name="Whale" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Whale — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="175.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="180.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Whale</text>
+        <rect x="213.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="151" data-format-name="OCG Goat" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Goat — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="245.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="250.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Goat</text>
+        <rect x="283.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="partial" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
+        <title>Goat — Partial, Complete, Partial, Complete</title>
+        <rect x="170.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#38bdf8" stroke-width="0.9" filter="url(#banner-glow)"/>
+        <circle cx="175.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Goat</text>
+        <rect x="213.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+        <rect x="218.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#38bdf8"/>
+        <rect x="224.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+        <rect x="230.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#38bdf8"/>
+      </g>
+      <g class="format" data-format-id="9" data-format-name="Cyber" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Cyber — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Cyber</text>
+        <rect x="283.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="152" data-format-name="Victory" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Victory — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="175.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="180.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Victory</text>
+        <rect x="213.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="153" data-format-name="Baboon" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Baboon — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="245.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="250.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Baboon</text>
+        <rect x="283.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="10" data-format-name="Reaper" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Reaper — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Reaper</text>
+        <rect x="213.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="11" data-format-name="Chaos Return" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Chaos Return — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Chaos Re…</text>
+        <rect x="283.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="131" data-format-name="OCG Airblade" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Airblade — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="174.0" r="2.6" fill="#fb7185"/>
+        <text x="175.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="180.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Airb…</text>
+        <rect x="213.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="12" data-format-name="Stein" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Stein — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Stein</text>
+        <rect x="283.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="92" data-format-name="Chimeratech" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Chimeratech — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Chimerat…</text>
+        <rect x="213.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="127" data-format-name="Destiny" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Destiny — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="186.0" r="2.6" fill="#fb7185"/>
+        <text x="245.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="250.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Destiny</text>
+        <rect x="283.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="119" data-format-name="Demise" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Demise — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Demise</text>
+        <rect x="213.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="13" data-format-name="Trooper" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Trooper — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Trooper</text>
+        <rect x="283.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="132" data-format-name="Armageddon" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Armageddon — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="210.0" r="2.6" fill="#fb7185"/>
+        <text x="175.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="180.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Armagedd…</text>
+        <rect x="213.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="96" data-format-name="Zombie" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Zombie — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="210.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Zombie</text>
+        <rect x="283.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="14" data-format-name="Perfect Circle" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Perfect Circle — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="217.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="222.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="223.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="223.7" font-size="5.3" font-weight="650" fill="#e5edf8">Perfect…</text>
+        <rect x="213.0" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="15" data-format-name="DAD Return" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>DAD Return — Not started, Not started, Not started, Not started</title>
+        <rect x="240.0" y="217.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="245.0" cy="222.0" r="2.6" fill="#60a5fa"/>
+        <text x="245.0" y="223.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="250.0" y="223.7" font-size="5.3" font-weight="650" fill="#e5edf8">DAD Retu…</text>
+        <rect x="283.0" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="288.8" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="294.6" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="300.4" y="225.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="16" data-format-name="Gladiator" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Gladiator — Not started, Not started, Not started, Not started</title>
+        <rect x="170.0" y="229.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="175.0" cy="234.0" r="2.6" fill="#60a5fa"/>
+        <text x="175.0" y="235.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="180.0" y="235.7" font-size="5.3" font-weight="650" fill="#e5edf8">Gladiator</text>
+        <rect x="213.0" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="218.8" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="224.6" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="230.4" y="237.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="5D&#x27;s">
+      <rect x="316.0" y="101.0" width="138.0" height="16" rx="5" fill="#38bdf8" opacity="0.12"/>
+      <rect x="316.0" y="101.0" width="3" height="16" rx="1.5" fill="#38bdf8"/>
+      <text x="325.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#38bdf8">5D&#x27;s</text>
+      <text x="447.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">15</text>
+    </g>
+      <g class="format" data-format-id="128" data-format-name="Dark Cat" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Dark Cat — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="321.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="326.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Dark Cat</text>
+        <rect x="359.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="133" data-format-name="OCG TeleDAD" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG TeleDAD — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="391.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="396.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Tele…</text>
+        <rect x="429.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="17" data-format-name="TeleDAD" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>TeleDAD — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">TeleDAD</text>
+        <rect x="359.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="129" data-format-name="Dark Strike" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Dark Strike — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="138.0" r="2.6" fill="#fb7185"/>
+        <text x="391.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="396.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Dark Str…</text>
+        <rect x="429.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="18" data-format-name="Cat" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Cat — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Cat</text>
+        <rect x="359.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="134" data-format-name="Lightlord" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Lightlord — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="391.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="396.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Lightlord</text>
+        <rect x="429.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="19" data-format-name="Lightsworn" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Lightsworn — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Lightswo…</text>
+        <rect x="359.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="130" data-format-name="Infernity" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Infernity — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="162.0" r="2.6" fill="#fb7185"/>
+        <text x="391.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="396.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Infernity</text>
+        <rect x="429.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="complete" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+        <title>Edison — Complete, Verified, Partial, Partial</title>
+        <rect x="316.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#38bdf8" stroke-width="0.9" filter="url(#banner-glow)"/>
+        <circle cx="321.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Edison</text>
+        <rect x="359.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#38bdf8"/>
+        <rect x="364.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#34d399"/>
+        <rect x="370.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+        <rect x="376.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+      </g>
+      <g class="format" data-format-id="98" data-format-name="Frog" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Frog — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="391.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="396.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Frog</text>
+        <rect x="429.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="99" data-format-name="X-Saber" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>X-Saber — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">X-Saber</text>
+        <rect x="359.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="154" data-format-name="Crow" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Crow — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="186.0" r="2.6" fill="#fb7185"/>
+        <text x="391.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="396.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Crow</text>
+        <rect x="429.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="22" data-format-name="Starstrike" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Starstrike — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="321.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="326.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Starstri…</text>
+        <rect x="359.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="23" data-format-name="Trishula" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Trishula — Not started, Not started, Not started, Not started</title>
+        <rect x="386.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="391.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="391.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="396.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Trishula</text>
+        <rect x="429.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="434.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="440.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="446.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="183" data-format-name="Nexus" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Nexus — Not started, Not started, Not started, Not started</title>
+        <rect x="316.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="321.0" cy="210.0" r="2.6" fill="#fb7185"/>
+        <text x="321.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="326.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Nexus</text>
+        <rect x="359.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="364.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="370.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="376.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="ZEXAL">
+      <rect x="462.0" y="101.0" width="138.0" height="16" rx="5" fill="#60a5fa" opacity="0.12"/>
+      <rect x="462.0" y="101.0" width="3" height="16" rx="1.5" fill="#60a5fa"/>
+      <text x="471.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#60a5fa">ZEXAL</text>
+      <text x="593.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">16</text>
+    </g>
+      <g class="format" data-format-id="24" data-format-name="Tengu" data-category="TCG" data-kind="canonical" data-banlist="complete" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+        <title>Tengu — Complete, Verified, Partial, Partial</title>
+        <rect x="462.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#38bdf8" stroke-width="0.9" filter="url(#banner-glow)"/>
+        <circle cx="467.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Tengu</text>
+        <rect x="505.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#38bdf8"/>
+        <rect x="510.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#34d399"/>
+        <rect x="516.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+        <rect x="522.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#f59e0b"/>
+      </g>
+      <g class="format" data-format-id="190" data-format-name="Agent" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Agent — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="126.0" r="2.6" fill="#fb7185"/>
+        <text x="537.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="542.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Agent</text>
+        <rect x="575.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="189" data-format-name="Inzektor" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Inzektor — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="138.0" r="2.6" fill="#fb7185"/>
+        <text x="467.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="472.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Inzektor</text>
+        <rect x="505.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="26" data-format-name="Dino Rabbit" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Dino Rabbit — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="537.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="542.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Dino Rab…</text>
+        <rect x="575.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="27" data-format-name="Wind-Up" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Wind-Up — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Wind-Up</text>
+        <rect x="505.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="191" data-format-name="Cosmo" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Cosmo — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="150.0" r="2.6" fill="#fb7185"/>
+        <text x="537.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="542.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Cosmo</text>
+        <rect x="575.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="113" data-format-name="Miami" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Miami — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Miami</text>
+        <rect x="505.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="192" data-format-name="OCG Baby Ruler" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Baby Ruler — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="162.0" r="2.6" fill="#fb7185"/>
+        <text x="537.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="542.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Baby…</text>
+        <rect x="575.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="28" data-format-name="Meadowlands" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Meadowlands — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Meadowla…</text>
+        <rect x="505.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="29" data-format-name="Baby Ruler" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Baby Ruler — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="537.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="542.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Baby Rul…</text>
+        <rect x="575.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="30" data-format-name="Ravine Ruler" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Ravine Ruler — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Ravine R…</text>
+        <rect x="505.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="193" data-format-name="OCG Ravine Ruler" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>OCG Ravine Ruler — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="186.0" r="2.6" fill="#fb7185"/>
+        <text x="537.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="542.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">OCG Ravi…</text>
+        <rect x="575.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="194" data-format-name="Incarnate" data-category="OCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Incarnate — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="198.0" r="2.6" fill="#fb7185"/>
+        <text x="467.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">O</text>
+        <text x="472.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Incarnate</text>
+        <rect x="505.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="31" data-format-name="Fire-Water" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Fire-Water — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="537.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="542.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Fire-Wat…</text>
+        <rect x="575.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="64" data-format-name="Vegas" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Vegas — Not started, Not started, Not started, Not started</title>
+        <rect x="462.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="467.0" cy="210.0" r="2.6" fill="#60a5fa"/>
+        <text x="467.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="472.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Vegas</text>
+        <rect x="505.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="510.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="516.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="522.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="32" data-format-name="HAT" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>HAT — Not started, Not started, Not started, Not started</title>
+        <rect x="532.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="537.0" cy="210.0" r="2.6" fill="#60a5fa"/>
+        <text x="537.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="542.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">HAT</text>
+        <rect x="575.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="580.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="586.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="592.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="ARC-V">
+      <rect x="608.0" y="101.0" width="138.0" height="16" rx="5" fill="#f472b6" opacity="0.12"/>
+      <rect x="608.0" y="101.0" width="3" height="16" rx="1.5" fill="#f472b6"/>
+      <text x="617.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#f472b6">ARC-V</text>
+      <text x="739.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">12</text>
+    </g>
+      <g class="format" data-format-id="33" data-format-name="Shaddoll" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Shaddoll — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Shaddoll</text>
+        <rect x="651.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="120" data-format-name="London" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>London — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">London</text>
+        <rect x="721.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="35" data-format-name="Burning Abyss" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Burning Abyss — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Burning…</text>
+        <rect x="651.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="36" data-format-name="Charleston" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Charleston — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Charlest…</text>
+        <rect x="721.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="37" data-format-name="Nekroz" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Nekroz — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Nekroz</text>
+        <rect x="651.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="38" data-format-name="Clown" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Clown — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Clown</text>
+        <rect x="721.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="39" data-format-name="Performapal" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Performapal — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Performa…</text>
+        <rect x="651.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="40" data-format-name="Dracoslayer" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Dracoslayer — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Dracosla…</text>
+        <rect x="721.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="41" data-format-name="Monarch" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Monarch — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Monarch</text>
+        <rect x="651.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="42" data-format-name="Invasion" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Invasion — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Invasion</text>
+        <rect x="721.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="43" data-format-name="Grass Zoo" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Grass Zoo — Not started, Not started, Not started, Not started</title>
+        <rect x="608.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="613.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="613.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="618.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Grass Zoo</text>
+        <rect x="651.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="656.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="662.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="668.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="44" data-format-name="Draco Zoo" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Draco Zoo — Not started, Not started, Not started, Not started</title>
+        <rect x="678.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="683.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="683.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="688.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Draco Zoo</text>
+        <rect x="721.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="726.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="732.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="738.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="VRAINS">
+      <rect x="754.0" y="101.0" width="138.0" height="16" rx="5" fill="#fb923c" opacity="0.12"/>
+      <rect x="754.0" y="101.0" width="3" height="16" rx="1.5" fill="#fb923c"/>
+      <text x="763.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#fb923c">VRAINS</text>
+      <text x="885.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">12</text>
+    </g>
+      <g class="format" data-format-id="111" data-format-name="Link Zoo" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Link Zoo — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Link Zoo</text>
+        <rect x="797.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="200" data-format-name="Decode" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Decode — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Decode</text>
+        <rect x="867.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="47" data-format-name="SPYRAL" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>SPYRAL — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">SPYRAL</text>
+        <rect x="797.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="48" data-format-name="Magician" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Magician — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Magician</text>
+        <rect x="867.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="49" data-format-name="Secaucus" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Secaucus — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Secaucus</text>
+        <rect x="797.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="50" data-format-name="Danger 1" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Danger 1 — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Danger 1</text>
+        <rect x="867.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="201" data-format-name="Danger 2" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Danger 2 — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Danger 2</text>
+        <rect x="797.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="52" data-format-name="Sky Striker" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Sky Striker — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Sky Stri…</text>
+        <rect x="867.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="53" data-format-name="Thunder Dragon" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Thunder Dragon — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Thunder…</text>
+        <rect x="797.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="54" data-format-name="Lunalight" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Lunalight — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Lunalight</text>
+        <rect x="867.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="55" data-format-name="TOSS" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>TOSS — Not started, Not started, Not started, Not started</title>
+        <rect x="754.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="759.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="759.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="764.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">TOSS</text>
+        <rect x="797.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="802.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="808.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="814.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="65" data-format-name="Rokket" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Rokket — Not started, Not started, Not started, Not started</title>
+        <rect x="824.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="829.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="829.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="834.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Rokket</text>
+        <rect x="867.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="872.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="878.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="884.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="SEVENS">
+      <rect x="900.0" y="101.0" width="138.0" height="16" rx="5" fill="#4ade80" opacity="0.12"/>
+      <rect x="900.0" y="101.0" width="3" height="16" rx="1.5" fill="#4ade80"/>
+      <text x="909.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#4ade80">SEVENS</text>
+      <text x="1031.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">12</text>
+    </g>
+      <g class="format" data-format-id="56" data-format-name="Adamancipator" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Adamancipator — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Adamanci…</text>
+        <rect x="943.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="57" data-format-name="Infernoble" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Infernoble — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Infernob…</text>
+        <rect x="1013.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="66" data-format-name="Virtual World" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Virtual World — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Virtual…</text>
+        <rect x="943.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="67" data-format-name="Dragon Link" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Dragon Link — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Dragon L…</text>
+        <rect x="1013.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="68" data-format-name="Tri-Brigade" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Tri-Brigade — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Tri-Brig…</text>
+        <rect x="943.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="69" data-format-name="Bird-Up" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Bird-Up — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Bird-Up</text>
+        <rect x="1013.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="83" data-format-name="Phoenix" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Phoenix — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Phoenix</text>
+        <rect x="943.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="84" data-format-name="Despia" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Despia — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Despia</text>
+        <rect x="1013.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="85" data-format-name="Elements" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Elements — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Elements</text>
+        <rect x="943.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="90" data-format-name="Darkwing" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Darkwing — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Darkwing</text>
+        <rect x="1013.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="86" data-format-name="Tearlaments" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Tearlaments — Not started, Not started, Not started, Not started</title>
+        <rect x="900.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="905.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="905.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="910.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Tearlame…</text>
+        <rect x="943.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="948.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="954.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="960.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="208" data-format-name="Hypernova" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Hypernova — Not started, Not started, Not started, Not started</title>
+        <rect x="970.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="975.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="975.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="980.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Hypernova</text>
+        <rect x="1013.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1018.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1024.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1030.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <g class="era" data-era="GO RUSH!!">
+      <rect x="1046.0" y="101.0" width="138.0" height="16" rx="5" fill="#f87171" opacity="0.12"/>
+      <rect x="1046.0" y="101.0" width="3" height="16" rx="1.5" fill="#f87171"/>
+      <text x="1055.0" y="112.5" font-size="8.3" font-weight="800" letter-spacing="0.7" fill="#f87171">GO RUSH!!</text>
+      <text x="1177.0" y="112.5" text-anchor="end" font-size="6.7" fill="#71839d">15</text>
+    </g>
+      <g class="format" data-format-id="123" data-format-name="Kashtira" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Kashtira — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Kashtira</text>
+        <rect x="1089.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="115" data-format-name="Overlord" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Overlord — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="121.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="126.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="127.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="127.7" font-size="5.3" font-weight="650" fill="#e5edf8">Overlord</text>
+        <rect x="1159.0" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="129.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="114" data-format-name="Fire King" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Fire King — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Fire King</text>
+        <rect x="1089.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="125" data-format-name="Snake-Eye" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Snake-Eye — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="133.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="138.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="139.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="139.7" font-size="5.3" font-weight="650" fill="#e5edf8">Snake-Eye</text>
+        <rect x="1159.0" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="141.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="124" data-format-name="Fiendsmith" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Fiendsmith — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Fiendsmi…</text>
+        <rect x="1089.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="187" data-format-name="Lacrima" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Lacrima — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="145.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="150.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="151.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="151.7" font-size="5.3" font-weight="650" fill="#e5edf8">Lacrima</text>
+        <rect x="1159.0" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="153.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="188" data-format-name="Ryzeal" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Ryzeal — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Ryzeal</text>
+        <rect x="1089.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="203" data-format-name="Maliss" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Maliss — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="157.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="162.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="163.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="163.7" font-size="5.3" font-weight="650" fill="#e5edf8">Maliss</text>
+        <rect x="1159.0" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="165.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="204" data-format-name="Justice" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Justice — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Justice</text>
+        <rect x="1089.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="205" data-format-name="Mjollnir" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Mjollnir — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="169.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="174.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="175.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="175.7" font-size="5.3" font-weight="650" fill="#e5edf8">Mjollnir</text>
+        <rect x="1159.0" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="177.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="206" data-format-name="Doom" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Doom — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Doom</text>
+        <rect x="1089.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="207" data-format-name="Protocol" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Protocol — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="181.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="186.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="187.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="187.7" font-size="5.3" font-weight="650" fill="#e5edf8">Protocol</text>
+        <rect x="1159.0" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="189.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="59" data-format-name="Traditional" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Traditional — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Traditio…</text>
+        <rect x="1089.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="202" data-format-name="Genesys" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Genesys — Not started, Not started, Not started, Not started</title>
+        <rect x="1116.0" y="193.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1121.0" cy="198.0" r="2.6" fill="#60a5fa"/>
+        <text x="1121.0" y="199.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1126.0" y="199.7" font-size="5.3" font-weight="650" fill="#e5edf8">Genesys</text>
+        <rect x="1159.0" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1164.8" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1170.6" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1176.4" y="201.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+      <g class="format" data-format-id="58" data-format-name="Advanced" data-category="TCG" data-kind="planned" data-banlist="missing" data-card-pool="missing" data-rule-profile="missing" data-errata="missing">
+        <title>Advanced — Not started, Not started, Not started, Not started</title>
+        <rect x="1046.0" y="205.0" width="66.0" height="10" rx="3" fill="#111b2e" stroke="#25334a" stroke-width="0.55"/>
+        <circle cx="1051.0" cy="210.0" r="2.6" fill="#60a5fa"/>
+        <text x="1051.0" y="211.8" text-anchor="middle" font-size="3.4" font-weight="800" fill="#07111f">T</text>
+        <text x="1056.0" y="211.7" font-size="5.3" font-weight="650" fill="#e5edf8">Advanced</text>
+        <rect x="1089.0" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1094.8" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1100.6" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+        <rect x="1106.4" y="213.2" width="5.3" height="1.8" rx="0.9" fill="#334155"/>
+      </g>
+    <text x="28" y="313" font-size="7.4" fill="#61738e">Pinned from formatlibrary.com · classifiers generated from canonical format records · T = TCG · O = OCG</text>
+    <text x="1172" y="313" text-anchor="end" font-size="7.4" fill="#61738e">click for the full atlas</text>
+  </g>
+</svg>

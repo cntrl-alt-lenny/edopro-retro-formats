@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the README format atlas from pinned Format Library data.
+"""Generate the README format banner and detailed atlas from pinned Format Library data.
 
 The catalog is refreshed explicitly from Format Library's public API. Ordinary
 generation is offline and deterministic: canonical progress comes from
@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "docs" / "format-library-catalog.json"
 PROGRESS_PATH = ROOT / "docs" / "format-atlas-progress.json"
 OUTPUT_PATH = ROOT / "docs" / "assets" / "format-atlas.svg"
+BANNER_OUTPUT_PATH = ROOT / "docs" / "assets" / "format-banner.svg"
 SOURCE_URL = "https://formatlibrary.com/api/formats"
 
 AREA_KEYS = ("banlist", "card_pool", "rule_profile", "errata")
@@ -377,6 +378,155 @@ def render_svg(catalog: dict[str, Any]) -> str:
     return svg
 
 
+def render_banner_svg(catalog: dict[str, Any]) -> str:
+    """Render a compact overview suitable for the top of the README.
+
+    The detailed atlas remains the inspection view.  This overview keeps every
+    catalog entry, but uses one small row per format so the hero stays wide and
+    shallow while retaining the four implementation classifiers.
+    """
+    progress = combined_progress(catalog)
+    formats_by_era = {
+        era: [item for item in catalog["formats"] if item["era"] == era]
+        for era in ERA_ORDER
+    }
+
+    width = 1200
+    height = 326
+    column_width = 138.0
+    column_gap = 8.0
+    left = 24.0
+    top = 101.0
+    row_step = 12.0
+    body: list[str] = []
+
+    for index, era in enumerate(ERA_ORDER):
+        x = left + index * (column_width + column_gap)
+        items = formats_by_era[era]
+        accent = ERA_ACCENTS[era]
+        body.append(
+            f'    <g class="era" data-era="{esc(era)}">\n'
+            f'      <rect x="{x:.1f}" y="{top:.1f}" width="{column_width:.1f}" height="16" rx="5" '
+            f'fill="{accent}" opacity="0.12"/>\n'
+            f'      <rect x="{x:.1f}" y="{top:.1f}" width="3" height="16" rx="1.5" fill="{accent}"/>\n'
+            f'      <text x="{x + 9:.1f}" y="{top + 11.5:.1f}" font-size="8.3" font-weight="800" '
+            f'letter-spacing="0.7" fill="{accent}">{esc(era)}</text>\n'
+            f'      <text x="{x + column_width - 7:.1f}" y="{top + 11.5:.1f}" text-anchor="end" '
+            f'font-size="6.7" fill="#71839d">{len(items)}</text>\n'
+            f'    </g>'
+        )
+        for row, item in enumerate(items):
+            slot = row % 2
+            line = row // 2
+            tile_x = x + slot * 70
+            tile_width = 66.0
+            y = top + 20 + line * row_step
+            state = progress.get(item["id"])
+            areas = state["areas"] if state else {key: "missing" for key in AREA_KEYS}
+            kind = state["kind"] if state else "planned"
+            stroke = "#25334a"
+            stroke_width = "0.55"
+            filter_attr = ""
+            if kind == "canonical":
+                stroke = "#38bdf8"
+                stroke_width = "0.9"
+                filter_attr = ' filter="url(#banner-glow)"'
+            elif kind == "research":
+                stroke = "#a78bfa"
+                stroke_width = "0.75"
+            territory = "O" if item["category"] == "OCG" else "T"
+            territory_color = "#fb7185" if territory == "O" else "#60a5fa"
+            bar_x = tile_x + 43
+            bars = []
+            for key in AREA_KEYS:
+                bars.append(
+                    f'        <rect x="{bar_x:.1f}" y="{y + 8.2:.1f}" width="5.3" height="1.8" '
+                    f'rx="0.9" fill="{STATUS_COLORS[areas[key]]}"/>'
+                )
+                bar_x += 5.8
+            label = item["name"] if len(item["name"]) <= 9 else item["name"][:8].rstrip() + "…"
+            body.append(
+                f'      <g class="format" data-format-id="{item["id"]}" '
+                f'data-format-name="{esc(item["name"])}" data-category="{item["category"]}" '
+                f'data-kind="{kind}" '
+                + " ".join(f'data-{key.replace("_", "-")}="{areas[key]}"' for key in AREA_KEYS)
+                + ">\n"
+                f'        <title>{esc(item["name"])} — {STATUS_LABELS[areas["banlist"]]}, '
+                f'{STATUS_LABELS[areas["card_pool"]]}, {STATUS_LABELS[areas["rule_profile"]]}, '
+                f'{STATUS_LABELS[areas["errata"]]}</title>\n'
+                f'        <rect x="{tile_x:.1f}" y="{y:.1f}" width="{tile_width:.1f}" height="10" rx="3" '
+                f'fill="#111b2e" stroke="{stroke}" stroke-width="{stroke_width}"{filter_attr}/>\n'
+                f'        <circle cx="{tile_x + 5:.1f}" cy="{y + 5:.1f}" r="2.6" fill="{territory_color}"/>\n'
+                f'        <text x="{tile_x + 5:.1f}" y="{y + 6.8:.1f}" text-anchor="middle" font-size="3.4" '
+                f'font-weight="800" fill="#07111f">{territory}</text>\n'
+                f'        <text x="{tile_x + 10:.1f}" y="{y + 6.7:.1f}" font-size="5.3" font-weight="650" '
+                f'fill="#e5edf8">{esc(label)}</text>\n'
+                + "\n".join(bars)
+                + "\n      </g>"
+            )
+
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="banner-title banner-desc">
+  <title id="banner-title">EDOPro historical format progress banner</title>
+  <desc id="banner-desc">All {catalog['count']} formats in the pinned Format Library catalog, with four generated implementation classifiers for banlist, card pool, rules, and historical card text.</desc>
+  <defs>
+    <linearGradient id="banner-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="0.55" stop-color="#0b1426"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="banner-aura-a">
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="banner-aura-b">
+      <stop offset="0" stop-color="#0284c7" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="banner-glow" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="{width}" height="{height}" rx="18" fill="url(#banner-panel)"/>
+  <ellipse cx="120" cy="10" rx="300" ry="130" fill="url(#banner-aura-a)"/>
+  <ellipse cx="1080" cy="10" rx="330" ry="140" fill="url(#banner-aura-b)"/>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <text x="28" y="31" font-size="19" font-weight="850" letter-spacing="2.2" fill="#f3f7fc">EDOPRO RETRO FORMATS</text>
+    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data · generated progress at a glance</text>
+    <rect x="1000" y="20" width="172" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
+    <text x="1086" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">{catalog['count']} FORMATS · 4 CLASSIFIERS</text>
+    <rect x="28" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="35" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">B</text>
+    <text x="48" y="76.7" font-size="8" fill="#8ea0ba">Banlist</text>
+    <rect x="112" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="119" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">P</text>
+    <text x="132" y="76.7" font-size="8" fill="#8ea0ba">Card pool</text>
+    <rect x="198" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="205" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">R</text>
+    <text x="218" y="76.7" font-size="8" fill="#8ea0ba">Rules</text>
+    <rect x="284" y="67" width="14" height="14" rx="4" fill="#17233a" stroke="#2a3a54"/>
+    <text x="291" y="76.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#d9e5f5">E</text>
+    <text x="304" y="76.7" font-size="8" fill="#8ea0ba">Card text</text>
+    <circle cx="430" cy="74" r="3.2" fill="#334155"/>
+    <text x="438" y="77" font-size="7.4" fill="#8ea0ba">Not started</text>
+    <circle cx="520" cy="74" r="3.2" fill="#a78bfa"/>
+    <text x="528" y="77" font-size="7.4" fill="#8ea0ba">Research</text>
+    <circle cx="608" cy="74" r="3.2" fill="#f59e0b"/>
+    <text x="616" y="77" font-size="7.4" fill="#8ea0ba">Partial</text>
+    <circle cx="693" cy="74" r="3.2" fill="#38bdf8"/>
+    <text x="701" y="77" font-size="7.4" fill="#8ea0ba">Complete</text>
+    <circle cx="785" cy="74" r="3.2" fill="#34d399"/>
+    <text x="793" y="77" font-size="7.4" fill="#8ea0ba">Verified</text>
+    <line x1="24" y1="91" x2="1176" y2="91" stroke="#26354d"/>
+{chr(10).join(body)}
+    <text x="28" y="313" font-size="7.4" fill="#61738e">Pinned from formatlibrary.com · classifiers generated from canonical format records · T = TCG · O = OCG</text>
+    <text x="1172" y="313" text-anchor="end" font-size="7.4" fill="#61738e">click for the full atlas</text>
+  </g>
+</svg>
+'''
+    return svg
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh", action="store_true", help="refresh the pinned catalog from Format Library before rendering")
@@ -391,16 +541,24 @@ def main() -> int:
         catalog = read_json(CATALOG_PATH)
 
     rendered = render_svg(catalog)
+    rendered_banner = render_banner_svg(catalog)
     if args.check:
+        stale = []
         if not OUTPUT_PATH.exists() or OUTPUT_PATH.read_text(encoding="utf-8") != rendered:
-            print(f"stale: {OUTPUT_PATH.relative_to(ROOT)}", file=sys.stderr)
+            stale.append(OUTPUT_PATH)
+        if not BANNER_OUTPUT_PATH.exists() or BANNER_OUTPUT_PATH.read_text(encoding="utf-8") != rendered_banner:
+            stale.append(BANNER_OUTPUT_PATH)
+        if stale:
+            for path in stale:
+                print(f"stale: {path.relative_to(ROOT)}", file=sys.stderr)
             return 1
-        print(f"ok: {OUTPUT_PATH.relative_to(ROOT)} ({catalog['count']} formats)")
+        print(f"ok: {OUTPUT_PATH.relative_to(ROOT)}, {BANNER_OUTPUT_PATH.relative_to(ROOT)} ({catalog['count']} formats)")
         return 0
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(rendered, encoding="utf-8", newline="\n")
-    print(f"generated {OUTPUT_PATH.relative_to(ROOT)} ({catalog['count']} formats)")
+    BANNER_OUTPUT_PATH.write_text(rendered_banner, encoding="utf-8", newline="\n")
+    print(f"generated {OUTPUT_PATH.relative_to(ROOT)} and {BANNER_OUTPUT_PATH.relative_to(ROOT)} ({catalog['count']} formats)")
     return 0
 
 

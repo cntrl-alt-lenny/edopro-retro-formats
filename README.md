@@ -15,12 +15,12 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg" target="_blank" rel="noopener" title="Open the full-size format atlas">
-    <img src="docs/assets/format-atlas.svg" width="480" alt="Format atlas showing repository progress across the complete Format Library chronology">
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-banner.svg" target="_blank" rel="noopener" title="Open the full-size format banner">
+    <img src="docs/assets/format-banner.svg" width="960" alt="Format banner showing all formats and their banlist, card pool, rules, and card text progress">
   </a>
 </p>
 
-<p align="center"><sub>Click the atlas to open the full-size SVG. It is generated from a pinned <a href="https://formatlibrary.com/formats/">Format Library</a> catalog and this repository's canonical status data.</sub></p>
+<p align="center"><sub>Click the banner to open the full-size SVG. It is generated from a pinned <a href="https://formatlibrary.com/formats/">Format Library</a> catalog and this repository's canonical status data.</sub></p>
 
 ## The project
 
@@ -55,6 +55,19 @@ Generated lflists live in [`dist/lflists/`](dist/lflists/). Run `python3 -m retr
 - [Release data](docs/releases.md) — deriving pools from products, dates, and territories
 - [Engine research](docs/edopro-research.md) — mapping historical rules onto EDOPro and ocgcore
 - [Roadmap](docs/roadmap.md) — research direction and open work
+
+<details>
+<summary><strong>View the detailed format atlas</strong></summary>
+
+<p align="center">
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg" target="_blank" rel="noopener" title="Open the full-size detailed format atlas">
+    <img src="docs/assets/format-atlas.svg" width="960" alt="Detailed format atlas showing repository progress across the complete Format Library chronology">
+  </a>
+</p>
+
+<p align="center"><sub><a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg">Open the full-size detailed atlas</a>.</sub></p>
+
+</details>
 
 ## Principles
 
