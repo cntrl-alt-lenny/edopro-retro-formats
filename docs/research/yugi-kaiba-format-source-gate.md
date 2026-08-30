@@ -40,16 +40,42 @@ format, banlist, card pool, or rule profile.
   adversarial review pass (same session) found the original write-up
   overclaimed on two points - genuine authorial independence for two of
   the three sources, and how tightly the effective-date window could be
-  bound - both walked back after personal re-examination; see
-  `restriction_list_current.content_status` /
-  `.scope_status` / `.effective_date_status`, the
-  `adversarial_review_2026_08_30` record, and "Contemporaneous
-  restriction-list source recovery" near the end of this document.
-  Canonicalization status remains `UNRESOLVED_BLOCKING`: neither the V
-  Jump image's authentication chain nor the exact scope boundary
-  (August 26 finals only, vs. the whole national tournament including
-  qualifiers) is fully resolved - this is a narrower, more specific
-  remaining gap than "no contemporaneous document has been located."
+  bound - both walked back after personal re-examination.
+  **RE-DERIVED 2026-09 (session 5):** the original three-axis model
+  (content/scope/effective-date) was re-examined against what an
+  August-26-Tokyo-Dome-*snapshot* banlist artifact actually requires
+  (`schemas/banlist.schema.json`, `retroformats/validate.py`,
+  `retroformats/lflist.py`), not assumed correct. Finding: a banlist's
+  `effective_date` only needs to satisfy `effective_date <= snapshot` (the
+  validator's own check, per `docs/format-schema.md`) - it does NOT need
+  to be the restriction's true first-ever historical start date, and
+  H2-vs-H3 (finals-only vs. whole-tournament) would not change a single
+  byte of an Aug-26-snapshot artifact. Split into SIX axes:
+  `content_membership_status`, `content_completeness_status`,
+  `target_event_applicability_status`, and `source_authentication_status`
+  are LOAD-BEARING (canonicalization derives from these four only);
+  `outer_scope_status` (the old H2-vs-H3 question) and
+  `first_effective_date_status` (the true origin date) are EXPLICITLY
+  NON-BLOCKING - see `restriction_list_current.banlist_artifact_
+  requirements_2026_09`. A targeted Phase F search then found two new,
+  independently-sourced marketplace photographs (Yahoo Auctions item
+  b1233880768; Mercari item m67527388590) of the physical September 1999
+  V Jump issue's cover and table of contents - the cover reads "World
+  Tournament 8.26 in TOKYO DOME, Final Recruitment!!" and the TOC confirms
+  the article starts on page 20 - meaningfully strengthening
+  `target_event_applicability_status` and, for issue-existence
+  specifically, `source_authentication_status`, though neither photograph
+  happens to capture page 20 itself (the restriction-card content remains
+  single-hosted via one blog). Canonicalization status remains
+  `UNRESOLVED_BLOCKING`: all four load-bearing axes remain
+  `SUPPORTED_BUT_INCOMPLETE`, for reasons that now exactly match the
+  artifact's own requirements rather than unrelated historical questions
+  (H2-vs-H3 and the true first-effective-date are explicitly excluded from
+  the blocking computation). See `restriction_list_current.
+  canonicalization_status`, the `adversarial_review_2026_08_30` and
+  `adversarial_review_2026_09` records, and "Contemporaneous
+  restriction-list source recovery" / "Artifact-requirements re-derivation"
+  near the end of this document.
 - **Full Chain/Spell-Speed/priority system:** historical adoption by
   Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
   engine blocker. The narrower, `PROVEN`/bounded paradigm that *is* a
@@ -1265,8 +1291,8 @@ chronology, not independent scope proof.
 | Hypothesis | Current status | Why it cannot be promoted |
 | --- | --- | --- |
 | H1 — general OCG list | UNRESOLVED | List content is repeated, but no contemporaneous source proves ordinary nationwide scope. Now against the weight of evidence (session 4) - see update below. |
-| H2 — Tokyo Dome/event-only list | UNRESOLVED | The Master Guide wording is specific but five years late; no 1999 event sheet was found. Session 4: now also supported by two independent sources, still not pinned to finals-day specifically. |
-| H3 — other tournament-specific scope | UNRESOLVED | Tournament-oriented cataloguing exists, but the affected tournament population is unknown. Session 4: the V Jump page's own context (written during ongoing qualifiers) shows the restriction was being DISCUSSED during qualifiers, which is not proof it APPLIED during qualifiers - revised after adversarial review from an earlier, overclaimed "strongest lean toward H3" reading; H2/H3 are roughly evenly unresolved. |
+| H2 — Tokyo Dome/event-only list | UNRESOLVED (non-blocking, session 5) | The Master Guide wording is specific but five years late; no 1999 event sheet was found. Session 4: now also supported by two independent sources, still not pinned to finals-day specifically. Session 5: H2-vs-H3 was determined NOT to affect an Aug-26-snapshot artifact - see `banlist_artifact_requirements_2026_09.critical_logical_test` - so this remains valuable historical research but no longer gates canonicalization. |
+| H3 — other tournament-specific scope | UNRESOLVED (non-blocking, session 5) | Tournament-oriented cataloguing exists, but the affected tournament population is unknown. Session 4: the V Jump page's own context (written during ongoing qualifiers) shows the restriction was being DISCUSSED during qualifiers, which is not proof it APPLIED during qualifiers - revised after adversarial review from an earlier, overclaimed "strongest lean toward H3" reading; H2/H3 are roughly evenly unresolved. Session 5: tracked as `outer_scope_status`, explicitly excluded from the canonicalization-readiness computation - see H2's row above. |
 | H4 — retrospective reconstruction | PLAUSIBLE | The surviving web evidence is downstream and divergent; plausibility is not proof. Session 4: weakened, not eliminated, by three independently-HOSTED sources converging (independent AUTHORSHIP is demonstrated for only two of the three groups - see the Adversarial review subsection below). |
 
 Accordingly, the list verdict is not `PROVEN_GENERAL_OCG`,
@@ -1955,3 +1981,168 @@ blocking even though this specific research thread advanced substantially -
 other historical and engine blockers (event-specific ruleset, exact
 tournament structure) remain, so canonicalization stays out of scope
 regardless.
+
+## Artifact-requirements re-derivation (session 5, 2026-09)
+
+The prior session's three-axis model (content/scope/effective-date) was a
+genuine improvement, but this pass asked a sharper question first, before
+doing more source research: **does that model's own canonicalization
+threshold require historical facts that an August-26-Tokyo-Dome snapshot
+banlist does not actually need?** The answer, derived from this
+repository's own schema and code (not inferred), is yes on two counts.
+
+### What a banlist's `effective_date` actually means
+
+`schemas/banlist.schema.json` describes a banlist as "one historical
+Forbidden/Limited list *as it took effect on a given date*." `docs/
+format-schema.md`'s Banlist section states the mechanical purpose
+explicitly: *"`effective_date` and `superseded_by_date` let the validator
+prove the list was actually in force on a format's snapshot date."*
+`retroformats/validate.py`'s `_validate_format` implements exactly this:
+`if eff and snapshot and not (eff <= snapshot): error("format.banlist-
+not-in-force", ...)`, and symmetrically for `superseded_by_date`. Critically,
+`retroformats/lflist.py`'s `build_lflist()` never reads `banlist.
+effective_date` at all - only `banlist.entries` (the card/status list) and
+the format's own `errata_policy`/`unresolved_policy` feed the generated
+bytes. `effective_date` exists solely to let the validator prove a
+format's chosen snapshot date falls inside the banlist's own validity
+window - it does **not** need to be the restriction's true first-ever
+historical start date. This repository's own existing precedent confirms
+the practical bar: `formats/2005-04-goat/format.json`'s `period.start` =
+`period.snapshot` = `data/banlists/tcg/2005-04.json`'s own `effective_date`
+(`"2005-04-01"`), and that banlist's own `notes` field admits *"the
+effective/superseded dates are the community-documented April 1 / October
+1 2005 TCG list boundaries and also need a primary citation"* - i.e. this
+project has already shipped a canonicalized banlist whose own
+`effective_date` rests on community-documented sourcing, not a personally-
+verified origin document.
+
+### The critical logical test
+
+Would choosing H2 (August 26 Tokyo Dome finals only) versus H3 (the whole
+national tournament run, including qualifying rounds) change one byte of a
+`period.snapshot = "1999-08-26"` banlist artifact? **No.** `banlist.entries`
+would be identical under either hypothesis - the same 3 cards are in force
+AT the finals either way. `effective_date` would not need to differ either:
+under H2, `effective_date = "1999-08-26"` is fully defensible (the
+restriction is proven in force by the event date); under H3, the
+restriction was also in force earlier, which would let `effective_date`
+move earlier IF that were claimed, but choosing the same conservative
+`"1999-08-26"` value remains equally valid under H3 too. No other schema
+field reads H2-vs-H3 at all. The same argument applies to the restriction's
+TRUE first-ever effective date: not knowing it does not prevent faithfully
+representing `effective_date <= 1999-08-26`, provided target-event
+applicability is independently established.
+
+**Consequence:** H2-vs-H3 (`outer_scope_status`) and the true first-effective-
+date (`first_effective_date_status`) are real, valuable, currently-
+unresolved historical research questions - retained in full, not deleted -
+but are **explicitly excluded** from the canonicalization-readiness
+computation, because resolving either would not change the artifact.
+
+### The re-derived, six-axis model
+
+`content_status`/`scope_status`/`effective_date_status` were split into six
+axes. Four are load-bearing (canonicalization derives from these and only
+these):
+
+- **`content_membership_status`** - are the 3 named cards each restricted
+  as claimed? `SUPPORTED_BUT_INCOMPLETE`.
+- **`content_completeness_status`** - is that list of 3 EXHAUSTIVE (no 4th
+  restricted card exists undiscovered)? A genuinely separate proposition
+  from membership - proving 3 cards are each restricted does not prove
+  there is no 4th. `SUPPORTED_BUT_INCOMPLETE`.
+- **`target_event_applicability_status`** - was the restriction in force AT
+  the August 26 Tokyo Dome target specifically (licensing `effective_date
+  <= snapshot`)? Deliberately excludes whether it ALSO applied to
+  qualifiers (that's `outer_scope_status`). `SUPPORTED_BUT_INCOMPLETE` -
+  the strongest-evidenced axis in this research chain.
+- **`source_authentication_status`** - does any supporting source meet this
+  project's own "verified" evidentiary bar (`schemas/common.schema.json`:
+  "corroborated by strong primary/period evidence... not merely by modern
+  community consensus"), rather than resting on convergent-but-
+  individually-unauthenticated retrospectives? `SUPPORTED_BUT_INCOMPLETE`.
+
+Two are explicitly non-blocking, tracked as historical metadata:
+
+- **`outer_scope_status`** (the old H2-vs-H3 question) - `UNRESOLVED_
+  NONBLOCKING`.
+- **`first_effective_date_status`** (the true historical origin date) -
+  `UNRESOLVED_NONBLOCKING`. Records that, should the other four axes clear,
+  the conservative representable value would be `"1999-08-26"` itself (the
+  event date), not an inferred ~1999-07-21 publication date.
+
+### Phase F: targeted V Jump authentication hunt
+
+Three parallel, independent search lanes were dispatched. Findings,
+personally inspected before being adjudicated:
+
+**Lane 1 (Suruga-ya date discrepancy + NDL/library records).** A current
+Suruga-ya catalogue listing for the exact issue (item ZNON5070) shows
+"Released date: 01 Sep 1999" - apparently conflicting with the ~1999-07-21
+on-sale inference from V Jump's general monthly-21st convention. Resolved:
+six V Jump back-issue listings across five different months and two years
+were compared, and EVERY ONE shows day = 01, with zero variation - this is
+conclusive evidence of a cataloguing placeholder (year+month tracked, day
+padded to 01), not a genuine per-issue researched street date. It neither
+confirms nor contradicts the 1999-07-21 inference; it simply is not
+evidentiary on that question. NDL confirms V Jump's existence as a serial
+since 1993 but holds no issue-level record for September 1999 and no
+digitization.
+
+**Lane 2/3 + personal inspection: two new independent marketplace
+listings.** A Yahoo Auctions Japan listing (item b1233880768, 5 original
+photos, accessed via a live Wayback "Save Page Now" fetch-proxy trick to
+bypass a geo-block on Yahoo's own CDN) and a separate Mercari listing (item
+m67527388590, a two-cover photo) were personally inspected - full-
+resolution photographs of the physical September 1999 V Jump issue's own
+COVER and TABLE OF CONTENTS, neither sharing a provenance root with the
+already-known ygoldschool.com interior crop or with each other. The cover
+reads (translated) *"Yu-Gi-Oh Duel Monsters II - Underworld Duel Story -
+World Tournament 8.26 in TOKYO DOME, FINAL RECRUITMENT!!"* - independently
+tying the issue to the event by name and date, before even reaching the
+interior article. The table of contents independently confirms the Tokyo
+Dome article begins on **page 20** of this exact issue - a specific page
+number ygoldschool.com's own crop never supplied. Neither listing's five-
+and-two photographs happen to capture page 20 itself, so the interior
+restriction-card content remains single-hosted. (An earlier draft of this
+finding double-counted the aucfan.com thumbnail cache and the full-
+resolution Yahoo CDN photo as two separate sources; corrected on
+verification - they are the SAME underlying listing, cached two ways.)
+
+**Phase G (content completeness).** A dedicated search for a table of
+contents, adjacent-page photograph, or any primary-source exhaustiveness
+statement found none. The ygoldschool.com article's own narration states
+"3 cards were designated as the first-ever restricted cards for this
+tournament" - an unambiguous "exactly 3" claim, but this is the modern
+blog author's own paraphrase of the one crop they had, not a located quote
+of the V Jump article's own text. No source anywhere in this chain has
+ever named a 4th restricted card.
+
+Three findings surfaced during this search bear on OTHER research areas
+(event-disruption/tournament-completion, Expert-Rules chronology, a
+hypothetical Tokyo Dome card pool) and were deliberately NOT acted on in
+this pass - each was flagged as a separate background task for a future,
+appropriately-scoped session rather than expanding this pass's scope.
+
+### Reassessed canonicalization status
+
+All four load-bearing axes remain `SUPPORTED_BUT_INCOMPLETE`; none reached
+`PROVEN`. `canonicalization_status` therefore remains `UNRESOLVED_BLOCKING`
+- Outcome 4 of this pass's pre-specified possibilities ("source
+authentication remains insufficient... make the remaining blocker exactly
+match the artifact requirements"). The single highest-value remaining
+target is now precisely nameable: a second, independent photograph or scan
+of V Jump 1999-09's own **page 20** - a page number no longer merely
+"somewhere in this issue" but independently confirmed by an unrelated
+source.
+
+### Adversarial review (session 5)
+
+An independent reviewer was dispatched with the full re-derivation and
+asked to argue against it, focused on two central questions: "Are we
+blocking the August 26 artifact on a historical fact that would not change
+the artifact?" and "Are we calling two URLs independent when they
+ultimately represent the same underlying historical object?" The full
+exchange is recorded in `restriction_list_current.
+contemporaneous_source_investigation_2026_08_30.adversarial_review_2026_09`.
