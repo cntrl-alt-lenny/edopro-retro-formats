@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-banner.svg" target="_blank" rel="noopener" title="Open the full-size format banner">
-    <img src="docs/assets/format-banner.svg" width="960" alt="Format banner showing all formats and their banlist, card pool, rules, and card text progress">
+    <img src="docs/assets/format-banner.svg" width="960" alt="Format banner showing per-era coverage across the full catalog and a spotlight on formats currently in progress, with generated banlist, card pool, rules, and card text status">
   </a>
 </p>
 
