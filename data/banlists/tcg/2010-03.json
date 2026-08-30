@@ -931,10 +931,10 @@
       "status": "semilimited"
     }
   ],
-  "completeness": "complete",
+  "completeness": "verified",
   "sources": [
     "yugipedia-march-2010",
     "konami-limited-2010-03"
   ],
-  "notes": "Transcribed from Yugipedia page 'March 2010 Lists (TCG)' (MediaWiki parse API); the page cites Konami's own list (see the source registry entries). Names resolved to passcodes against ProjectIgnis/BabelCDB cards.cdb, preferring base printings (alias=0). Yugipedia also records: no_longer_on_list = ['Mask of Darkness', 'Smashing Ground']."
+  "notes": "Transcribed from Yugipedia page 'March 2010 Lists (TCG)' (MediaWiki parse API); the page cites Konami's own list (see the source registry entries). Names resolved to passcodes against ProjectIgnis/BabelCDB cards.cdb, preferring base printings (alias=0). Yugipedia also records: no_longer_on_list = ['Mask of Darkness', 'Smashing Ground']. VERIFIED 2026-08-30: card-by-card reconciled against the archived Konami primary source (konami-limited-2010-03, Advanced Format Limited & Forbidden Lists, Wayback snapshot 2010-08-25, effective March 1 2010) - all 132 entries (43 forbidden, 70 limited, 19 semi-limited) matched exactly by name and status against the archive page's Advanced Format section, with zero cards on either side only and zero status mismatches; the archive's own 'No Longer on List' section also matches the no_longer_on_list note above."
 }
