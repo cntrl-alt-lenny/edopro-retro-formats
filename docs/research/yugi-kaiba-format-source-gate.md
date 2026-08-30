@@ -86,12 +86,36 @@ format, banlist, card pool, or rule profile.
   independent eighth checkbox) via a documented state machine: resolving
   scope to H1 would make the existing schema sufficient; resolving to
   tournament-specific (either H2 or H3) leaves it structurally insufficient
-  regardless of which. The SEVEN load-bearing axes are now
-  `content_membership_status`, `content_completeness_status`,
-  `target_event_applicability_status`, `source_authentication_status`,
-  `scope_class_status`, `tournament_extent_status`, and
-  `first_effective_date_status`; `schema_representability_status` is
-  tracked as the sole derived axis. Two new independently-sourced
+  regardless of which. **CORRECTED AGAIN 2026-08-30 (session 8):** session
+  7 kept `tournament_extent_status` inside `load_bearing_axes` anyway,
+  justified only as "historical completeness" - internally inconsistent,
+  and logically broken on the H1 branch, where `tournament_extent_status`'s
+  own premise (tournament-specific scope) is false. Re-derived: its
+  BLOCKING ROLE (not its own research status) is itself DERIVED from
+  `scope_class_status`, exactly like `schema_representability_status` -
+  `NOT_APPLICABLE` under H1 (the premise is false), `NON_BLOCKING_FOR_
+  TARGET_ARTIFACT` under tournament-specific (since `target_recommendation`
+  scopes the artifact narrowly to the single 1999-08-26 event, and both H2
+  and H3 entail the restriction was in force there - resolving finals-vs-
+  qualifiers would not change what THIS artifact asserts, per this
+  research chain's own central rule), `CONDITIONAL_PENDING_S1` while
+  unresolved. In no branch does it need to reach `PROVEN`. The SIX
+  load-bearing axes are now `content_membership_status`, `content_
+  completeness_status`, `target_event_applicability_status`, `source_
+  authentication_status`, `scope_class_status`, and `first_effective_
+  date_status`; `schema_representability_status` is tracked as the sole
+  derived axis; `tournament_extent_status` is tracked as the sole
+  conditionally-tracked, never-load-bearing axis. **Separately corrected
+  2026-08-30 (session 8):** the recommended pool `legality_basis` was
+  `historical-policy`, citing an ARCHIVED absence-of-evidence finding
+  (`event_day_pool_interaction`, nested under `superseded_findings`) as if
+  it were period-tournament-policy proof - `schemas/pool.schema.json`
+  requires actual period-policy evidence for `historical-policy`'s
+  exceptions, and "no evidence a card was legal" is not "evidence policy
+  prohibited it." Corrected to `community-retrospective` (matching this
+  repository's own GOAT/Edison precedent and the schema's own text), with
+  a new, separate, still-`UNRESOLVED` `historical_event_pool_legality_
+  status` tracking the genuine, non-gating open question. Two new independently-sourced
   marketplace photographs (Yahoo Auctions item b1233880768; Mercari item
   m67527388590) of the physical September 1999 V Jump issue's cover and
   table of contents were re-adjudicated in session 6: the cover reads
@@ -110,10 +134,12 @@ format, banlist, card pool, or rule profile.
   correction adds or clarifies blocking structure, it does not remove any.
   See `restriction_list_current.canonicalization_status`, the
   `adversarial_review_2026_08_30`, `adversarial_review_2026_08_30_session5`,
-  `adversarial_review_2026_08_30_session6`, and (this session's) adversarial
-  review records, and "Contemporaneous restriction-list source recovery" /
-  "Artifact-requirements re-derivation" / "Semantic-gate correction" /
-  "Temporal/scope-model correction" near the end of this document.
+  `adversarial_review_2026_08_30_session6`, `adversarial_review_2026_08_30_
+  session7`, and (this session's) adversarial review records, and
+  "Contemporaneous restriction-list source recovery" / "Artifact-
+  requirements re-derivation" / "Semantic-gate correction" / "Temporal/
+  scope-model correction" / "Legality-basis and scope-role correction" near
+  the end of this document.
 - **Full Chain/Spell-Speed/priority system:** historical adoption by
   Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
   engine blocker. The narrower, `PROVEN`/bounded paradigm that *is* a
@@ -168,6 +194,7 @@ snapshot:
 | Format region | `OCG` |
 | Release territory | `ocg-jp` |
 | Pool cutoff | `1999-08-25` inclusive, to exclude products released on the event date |
+| Pool legality basis | `community-retrospective` (corrected 2026-08-30, session 8 - was wrongly `historical-policy`; see "Current authoritative state" above and `historical_event_pool_legality_status`, which remains a separate, still-`UNRESOLVED`, non-gating question) |
 | Defining event | Duel Monsters II / `決闘者伝説 in TOKYO DOME`, August 26, 1999 |
 | Banlist | best current hypothesis: tournament-specific, three cards Limited to 1 (Raigeki, Dark Hole, Trap Hole) - canonicalization still `UNRESOLVED_BLOCKING`; see "Current authoritative state" above, not the July-1999 framing this row originally used |
 | Next conventional format | `Exodia`, community convention, April 10, 2000 |
@@ -2441,15 +2468,30 @@ in-memory (never written to `data/`/`formats/`) and run through the REAL
 - **Model B** (`snapshot=1999-08-26`, `pool.cutoff=1999-08-25`,
   `banlist.effective_date=1999-08-26`): passes this check cleanly.
 
-Model B is semantically coherent, but only under an explicit
-`legality_basis: "historical-policy"` framing for the pool (not
-`"availability"`) - the same-day exclusion is a genuine period-tournament-
-policy claim (day-of-event products were not established as tournament-
-legal that same day, per the existing `event_day_pool_interaction` Gate
-Guardian counter-evidence), not a pure physical-availability derivation.
+Model B is semantically coherent, but only under an explicit `legality_
+basis` framing for the pool that licenses divergence from pure
+snapshot-date availability - not `"availability"` itself, which would need
+the cutoff to track pure physical release timing. **CORRECTED 2026-08-30
+(session 8):** an earlier version of this paragraph named `legality_basis:
+"historical-policy"` specifically, reasoning that "day-of-event products
+were not established as tournament-legal that same day, per the existing
+`event_day_pool_interaction` Gate Guardian counter-evidence" - this
+overclaimed. `event_day_pool_interaction` is ARCHIVED (nested under
+`superseded_findings`), and even its own text establishes only an absence
+of evidence for legality plus one card's (Gate Guardian's) incidental
+technical unusability, never a period-policy fact; `historical-policy`
+requires actual period-policy evidence for its exceptions, which this
+research chain does not have. The correct framing is `legality_basis:
+"community-retrospective"` - a modern community convention (matching this
+repository's own GOAT/Edison precedent and `card_pool.community_cross_
+check`'s `ygoprodeck-tokyo-dome-cube` source), which the schema explicitly
+permits to diverge from the historical event without requiring
+period-policy proof. See "Legality-basis and scope-role correction"
+(session 8) near the end of this document for the full derivation.
 Physical availability, tournament legality, and community-retrospective
 convention remain three distinct things, none silently substituted for
-another.
+another - the pool cutoff represents the third, by community convention,
+not a policy finding about the second.
 
 ### Phase C: confronting the Aug-25/Aug-26 contradiction
 
@@ -2632,3 +2674,149 @@ None of the findings loosened `canonicalization_status`, which remains
 `UNRESOLVED_BLOCKING` throughout - the fixes make the blocking structure
 more precisely enforced, not less blocking. Full suite after both fixes:
 910 tests, 0 failures, 25 skipped (pre-existing environment gates).
+
+## Legality-basis and scope-role correction (session 8, 2026-08-30)
+
+A focused corrective pass, not a new research session: two semantic
+defects in session 7's own work, both independently cross-checked before
+implementation by a two-agent design panel that read the same schema/code/
+packet evidence from scratch and reached the same conclusions
+independently.
+
+### Defect 1: absence-of-evidence laundered into `historical-policy`
+
+`target_recommendation.pool_cutoff_note` recommended `legality_basis:
+"historical-policy"` for a future Tokyo Dome candidate pool, citing
+`event_day_pool_interaction`'s "Gate Guardian counter-evidence" as if it
+established period tournament policy. Re-reading `schemas/pool.schema.json`
+directly: `historical-policy` "reconstructs what period tournament policy
+ACTUALLY permitted... **requires period policy evidence for its
+exceptions**"; `community-retrospective` "follows the modern community's
+convention... **may deliberately differ** from what was registerable at
+the historical event," sourced to community references, not period-policy
+proof.
+
+Locating the cited source with a dict-path walk (not text search alone):
+`event_day_pool_interaction` lives at `superseded_findings.rejected_
+2026_08_rules_and_restriction_research.event_day_pool_interaction` -
+**archived, not live data**. Its own text establishes only: (a) "No source
+located... establishes that any Aug-26-distributed card was legal for use
+IN tournament decks played that same day" (an absence-of-evidence finding,
+P1) and (b) Gate Guardian specifically was "affirmatively evidenced to
+have been UNUSABLE" because its Fusion Material monsters did not exist
+until a month later - a real finding, but about ONE card's incidental
+combo-piece availability, not a category-wide tournament-policy exclusion.
+Neither is "period tournament policy prohibited Aug-26 cards" (P2). **"No
+evidence X was legal" is not "evidence policy prohibited X."** Its own
+conclusion is explicitly a precautionary default under uncertainty ("per
+the task's explicit instruction not to infer... absent proof"), not a
+discovered policy fact.
+
+`data/pools/pool-goat-2005-ignis.json` and `data/pools/edison-2010.json`
+were read directly: both are tagged `legality_basis: "community-
+retrospective"`, neither `historical-policy`. `community-retrospective`
+is what the schema licenses and what this repository's own precedent
+uses for exactly this situation (a "day before the event" convention
+matching a community reference - here, `card_pool.community_cross_
+check`'s `ygoprodeck-tokyo-dome-cube` source).
+
+**Corrected:** `target_recommendation.pool_legality_basis_recommendation`
+(a new, structurally-checkable field) = `"community-retrospective"`.
+`pool_cutoff_note`, `temporal_model_2026_08_30_session7.phase_b_model_a_
+and_b.semantic_coherence_of_model_b`, `phase_c_errata_recomputation_and_
+adjudication.adjudication`, and `T7` were all rewritten to remove the
+`historical-policy` claim and its archived, overclaimed citation. A new
+field, `target_recommendation.historical_event_pool_legality_status`
+(status `UNRESOLVED`), separately tracks the genuine, still-open, **non-
+gating** question of whether the exact 370-card pool matches actual
+1999-08-26 tournament deck-registration policy - distinct from, and not a
+precondition for, the (already-resolved) `community-retrospective`
+recommendation itself. The certified 370-card pool and its digest
+(`f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`) are
+untouched. A new structural+textual regression test,
+`_assert_pool_legality_basis_not_laundered_from_absence_of_evidence`,
+guards against this exact laundering pattern recurring.
+
+### Defect 2: S2 wrongly required to clear under the H1 branch
+
+Session 7 correctly derived `schema_representability_status` as DERIVED
+from `scope_class_status` (S1), but left `tournament_extent_status` (S2)
+inside `canonicalization_status.load_bearing_axes` anyway, justified only
+as "historical completeness" - internally inconsistent (the same
+`reasoning` field simultaneously called S2 "NOT independently load-bearing
+on its own") and logically broken on the H1 branch: if S1 resolves to H1
+(general-regional policy), S2's own premise - that the restriction was
+tournament-specific - is FALSE, so requiring S2 to independently resolve
+under that branch is incoherent.
+
+Independently cross-checked before implementation (two-agent design
+panel, each reading the packet/schema/gate.md from scratch): applying
+this research chain's own established central rule
+(`restriction_list_current._read_me_first`: "a historical uncertainty is
+a canonicalization blocker only if resolving it could change a historical
+fact ASSERTED OR IMPLIED by the canonical artifact") to S2 **specifically**
+- not to the bundled S1+S2 question session 6 actually tested when it
+restored the old `outer_scope_status` axis (its real justification, quoted
+from "Phase C: outer scope (H2-vs-H3)" above, was S1-shaped: "representing
+[a general policy] as an ordinary region-scoped banlist would be
+comparatively defensible" - the H3-as-H1 conflation session 7 already
+found and fixed for `schema_representability_status`, never actually run
+against S2 alone before) - `target_recommendation`'s own event scoping
+(`1999-08-tokyo-dome`, narrowly the single 1999-08-26 event) means
+resolving finals-vs-qualifiers would not change any fact this artifact
+asserts. **Precision fix, adversarial review:** the artifact's Aug-26-event
+coverage is NOT established by H2/H3's own labels logically entailing it
+(`tournament_extent_status`'s proposition defines H3 disjunctively - "the
+full qualifier+finals programme / **another explicitly-bounded
+population**" - and an earlier version of this reasoning silently dropped
+that second disjunct, which is not textually guaranteed to include the
+finals) - it is established by a SEPARATE, independently load-bearing
+axis, `target_event_applicability_status`, whose own proposition IS
+"restriction in force AT the Aug-26 target event" and which must
+independently reach `PROVEN` regardless of how S2 resolves. S2 only ever
+refines what ELSE, beyond that already-gated fact, the restriction
+covered - a future finding that the restriction somehow did NOT apply at
+the finals specifically would falsify `target_event_applicability_status`
+directly, not merely "resolve S2." Both independent agents, and this
+session's own derivation, reached the same non-blocking conclusion (for
+this reason) and confirmed it is NOT a reversion to session 5's rejected
+"would generated bytes change" test - it is the first genuine application
+of session 6's own corrected test to S2 in isolation, since S1 and S2 were
+bundled together until session 7's split.
+
+**Corrected:** `tournament_extent_status` moved out of `load_bearing_axes`
+into a new THIRD category, `canonicalization_status.conditionally_tracked_
+axes` (distinct from both `load_bearing_axes` - unconditionally required -
+and `derived_axes` - cleared VALUE computed from a driver). Its own
+`blocking_role` field carries a documented `state_machine`, mirroring
+`schema_representability_status`'s pattern: `CONDITIONAL_PENDING_S1` while
+`scope_class_status` is unresolved; `NOT_APPLICABLE` if S1 resolves H1
+(the premise dissolves); `NON_BLOCKING_FOR_TARGET_ARTIFACT` if S1 resolves
+tournament-specific (H2 or H3) - S2 never needs to reach `PROVEN` for
+canonicalization, in any branch. `load_bearing_axes` is now a literal,
+uncaveated match to "the six genuinely independent, evidence-based
+propositions" `canonicalization_status.reasoning` had already been
+describing (previously an approximation carrying an unexplained seventh
+member). `remaining_blockers` was corrected to match.
+
+### Adjudicated mutation set
+
+Five mutations, matching the task's own enumeration, directly proving the
+corrected policy: S1=H1 with S2 still UNRESOLVED is ACCEPTED, not
+auto-rejected merely because S2 isn't `PROVEN`
+(`test_mutation_AP2_s1_h1_with_s2_unresolved_behaves_per_state_machine_
+not_automatic_failure`); S1=H1 plus a correctly-resolved `schema_
+representability_status` is ACCEPTED
+(`test_mutation_AP3_s1_h1_plus_schema_representability_resolved_is_
+accepted`); S1=tournament-specific with `schema_representability_status`
+falsely marked sufficient is REJECTED
+(`test_mutation_AH5_schema_representability_cleared_while_scope_class_
+proven_against_h1_is_rejected`, pre-existing from session 7, re-confirmed
+still correct under the new model); S1=tournament-specific with S2
+UNRESOLVED is the adjudicated non-blocking policy
+(`test_mutation_AP4_s1_tournament_specific_with_s2_unresolved_is_the_
+adjudicated_nonblocking_policy`); S2=`PROVEN` alone while S1 is unresolved
+cannot resolve `schema_representability_status`
+(`test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_
+schema_representability`, repurposed from session 7's now-obsolete
+"H2-vs-H3 resolved alone" test).

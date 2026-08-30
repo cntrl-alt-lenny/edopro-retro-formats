@@ -480,7 +480,8 @@ def _assert_no_active_recoil_absent_from_modern_claim(packet):
 
 # ------------------------------------------------------------------
 # Restriction-list evidence-sensitive gate (2026-08-30, re-derived session
-# 5, CORRECTED session 6, CORRECTED AGAIN session 7).
+# 5, CORRECTED session 6, CORRECTED AGAIN session 7, CORRECTED AGAIN
+# session 8).
 #
 # The bug class this file guards against: canonicalization_status must not
 # be frozen permanently at UNRESOLVED_BLOCKING regardless of evidence (that
@@ -504,19 +505,30 @@ def _assert_no_active_recoil_absent_from_modern_claim(packet):
 # H3) and S2 (tournament_extent_status: IF tournament-specific, H2 vs H3) -
 # and schema_representability_status is NOT an independent axis at all, it
 # is DERIVED/CONDITIONAL on scope_class_status via a documented state
-# machine (see canonicalization_status.derived_axes and
-# schema_representability_status.state_machine in the packet): resolving
-# scope_class_status to H1 resolves schema_representability_status to
-# RESOLVED_EXISTING_SCHEMA_SUFFICIENT; resolving to tournament-specific (H2
-# or H3) leaves it structurally BLOCKING regardless of tournament_extent_
-# status. The current SEVEN load-bearing axes are content_membership_status,
-# content_completeness_status, target_event_applicability_status,
-# source_authentication_status, scope_class_status, tournament_extent_
-# status, and first_effective_date_status; schema_representability_status is
-# tracked separately as the sole derived axis. A source proving one axis
-# does not thereby prove another, and resolving tournament_extent_status
-# (S2) alone does NOT resolve schema_representability_status - only scope_
-# class_status (S1) drives that.
+# machine. Session 7 correctly derived schema_representability_status but
+# left S2 (tournament_extent_status) inside load_bearing_axes anyway,
+# justified only as "historical completeness" - internally inconsistent
+# (reasoning called it "NOT independently load-bearing" while requiring it
+# to clear like every other load-bearing axis) and logically broken on the
+# H1 branch, where S2's own premise (tournament-specific scope) is false.
+# SESSION 8 CORRECTION, independently cross-checked before implementation:
+# S2's BLOCKING ROLE (not its own research status) is itself DERIVED from
+# scope_class_status, via tournament_extent_status.blocking_role's own
+# state machine - NOT_APPLICABLE under H1, NON_BLOCKING_FOR_TARGET_ARTIFACT
+# under tournament-specific (since target_recommendation's own event
+# scoping to the single 1999-08-26 event means resolving finals-vs-
+# qualifiers would not change any fact THIS artifact asserts), CONDITIONAL_
+# PENDING_S1 while unresolved. In NO branch does S2 need to reach PROVEN
+# for canonicalization. The current SIX load-bearing axes are content_
+# membership_status, content_completeness_status, target_event_
+# applicability_status, source_authentication_status, scope_class_status,
+# and first_effective_date_status; schema_representability_status is
+# tracked separately as the sole DERIVED axis; tournament_extent_status is
+# tracked separately as the sole CONDITIONALLY-TRACKED, never-load-bearing
+# axis. A source proving one axis does not thereby prove another; resolving
+# tournament_extent_status (S2) alone does NOT resolve schema_
+# representability_status (only scope_class_status/S1 drives that), and S2
+# itself never gates canonicalization regardless of its own status.
 # ------------------------------------------------------------------
 
 RESTRICTION_LOAD_BEARING_AXES = (
@@ -525,22 +537,41 @@ RESTRICTION_LOAD_BEARING_AXES = (
     "target_event_applicability_status",
     "source_authentication_status",
     "scope_class_status",
-    "tournament_extent_status",
     "first_effective_date_status",
 )
-RESTRICTION_NONBLOCKING_AXES = ()  # empty (session 6, unchanged session 7): no axis is currently classified non-blocking
-# schema_representability_status (session 7): NOT an eighth independent
+RESTRICTION_NONBLOCKING_AXES = ()  # empty (session 6, unchanged since): no axis is UNCONDITIONALLY non-blocking
+# schema_representability_status (session 7): NOT an independent
 # load-bearing axis - a DERIVED/CONDITIONAL axis whose own cleared-ness is
 # computed from scope_class_status's resolution, not independently
-# evidenced the way the seven axes above are. It still needs its own
+# evidenced the way the six axes above are. It still needs its own
 # evidence citation (schema_citations: repo file paths, not source_ids,
 # since it is a claim about the SCHEMA's capability, not about a body of
 # external research evidence) and its own "cleared" status word
 # (RESOLVED_EXISTING_SCHEMA_SUFFICIENT, not PROVEN) - see
 # canonicalization_status.derived_axes in the packet.
 RESTRICTION_DERIVED_AXES = ("schema_representability_status",)
-RESTRICTION_ALL_AXES = RESTRICTION_LOAD_BEARING_AXES + RESTRICTION_NONBLOCKING_AXES + RESTRICTION_DERIVED_AXES
+# tournament_extent_status (session 8): also NOT an independent load-
+# bearing axis, but for a DIFFERENT reason from schema_representability_
+# status - it keeps its OWN independent evidence (source_ids) and its own
+# "PROVEN" cleared vocabulary for its underlying H2-vs-H3 research
+# question, but its BLOCKING ROLE (whether that question must resolve
+# before canonicalization) is conditionally derived from scope_class_
+# status via tournament_extent_status.blocking_role, and in every branch
+# of that state machine it is non-blocking - see
+# canonicalization_status.conditionally_tracked_axes in the packet.
+RESTRICTION_CONDITIONALLY_TRACKED_AXES = ("tournament_extent_status",)
+RESTRICTION_ALL_AXES = (
+    RESTRICTION_LOAD_BEARING_AXES + RESTRICTION_NONBLOCKING_AXES + RESTRICTION_DERIVED_AXES
+    + RESTRICTION_CONDITIONALLY_TRACKED_AXES
+)
 _AXIS_CLEARED_STATUS = {"schema_representability_status": "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"}
+# tournament_extent_status.blocking_role.current_value's three legal
+# values, keyed to which scope_class_status branch produces each - see
+# _assert_restriction_list_axes_are_independently_evidenced for where this
+# is mechanically enforced (session 8's central dependency check).
+_S2_BLOCKING_ROLE_PENDING = "CONDITIONAL_PENDING_S1"
+_S2_BLOCKING_ROLE_NOT_APPLICABLE = "NOT_APPLICABLE"
+_S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET = "NON_BLOCKING_FOR_TARGET_ARTIFACT"
 
 
 def _restriction_axis_cleared_status(axis):
@@ -549,21 +580,26 @@ def _restriction_axis_cleared_status(axis):
 
 def _assert_restriction_list_axes_are_independently_evidenced(packet):
     """Every axis must cite real, resolvable evidence - source_ids (an
-    external-source citation) for the seven independently-evidenced
-    load-bearing axes, or schema_citations (repo file paths) for the
-    derived axis schema_representability_status, which is derived from
-    this project's own schema/docs, not an external research source.
+    external-source citation) for the six independently-evidenced
+    load-bearing axes and the one conditionally-tracked axis (tournament_
+    extent_status), or schema_citations (repo file paths) for the derived
+    axis schema_representability_status, which is derived from this
+    project's own schema/docs, not an external research source.
     canonicalization_status may only leave UNRESOLVED_BLOCKING/BLOCKING if
-    ALL SEVEN LOAD-BEARING axes AND the derived axis are independently
+    ALL SIX LOAD-BEARING axes AND the derived axis are independently
     cleared (PROVEN for evidence-based axes; RESOLVED_EXISTING_SCHEMA_
     SUFFICIENT for schema_representability_status) - this is the mechanical
     evidence threshold for canonicalization readiness: it is deliberately
     NOT hard-coded to always fail, so a genuinely qualifying future
-    resolution would legitimately pass. Also asserts the DEPENDENCY
-    structure itself (session 7): schema_representability_status must be
-    declared in canonicalization_status.derived_axes, not load_bearing_axes,
-    and must declare scope_class_status as what it depends_on - encoding
-    "a dependency, not a flat AND" mechanically, not just in prose."""
+    resolution would legitimately pass. tournament_extent_status is
+    DELIBERATELY EXCLUDED from that threshold in every branch - see its
+    own value-consistency check below. Also asserts the DEPENDENCY
+    structure itself: schema_representability_status must be declared in
+    canonicalization_status.derived_axes (session 7), and tournament_
+    extent_status must be declared in canonicalization_status.
+    conditionally_tracked_axes, not load_bearing_axes (session 8) - both
+    must declare scope_class_status as what they depends_on - encoding "a
+    dependency, not a flat AND" mechanically, not just in prose."""
     rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
     known_source_ids = {s["id"] for s in packet["sources"]}
     for axis in RESTRICTION_ALL_AXES:
@@ -628,6 +664,71 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
                 "not tournament_extent_status (S2, H2-vs-H3), which is the session-6 conflation this test guards against"
             )
 
+    # Session 8: tournament_extent_status must be declared in a THIRD
+    # category (conditionally_tracked_axes), distinct from both
+    # load_bearing_axes (unconditionally required) and derived_axes
+    # (whose cleared VALUE is computed from a driver) - it keeps its own
+    # independent evidence but its BLOCKING ROLE is conditional on, and
+    # never load-bearing regardless of, scope_class_status.
+    declared_conditionally_tracked = tuple((cs.get("conditionally_tracked_axes") or {}).keys())
+    if set(declared_conditionally_tracked) != set(RESTRICTION_CONDITIONALLY_TRACKED_AXES):
+        raise AssertionError(
+            f"canonicalization_status.conditionally_tracked_axes keys {declared_conditionally_tracked} does "
+            f"not match the actual conditionally-tracked axis set {RESTRICTION_CONDITIONALLY_TRACKED_AXES}"
+        )
+    for conditional_axis in RESTRICTION_CONDITIONALLY_TRACKED_AXES:
+        depends_on = cs["conditionally_tracked_axes"][conditional_axis].get("depends_on")
+        depends_on_set = {depends_on} if isinstance(depends_on, str) else set(depends_on or ())
+        if not depends_on_set or not depends_on_set.issubset(set(RESTRICTION_LOAD_BEARING_AXES)):
+            raise AssertionError(
+                f"canonicalization_status.conditionally_tracked_axes[{conditional_axis!r}].depends_on "
+                f"{depends_on!r} must name at least one real load-bearing axis"
+            )
+        if conditional_axis == "tournament_extent_status" and depends_on_set != {"scope_class_status"}:
+            raise AssertionError(
+                f"tournament_extent_status.depends_on (as declared in conditionally_tracked_axes) is "
+                f"{depends_on!r}, expected exactly {{'scope_class_status'}} - S2's blocking role is driven "
+                "by S1, not by itself or any other axis"
+            )
+
+    # Session 8's central dependency check: tournament_extent_status.
+    # blocking_role.current_value must be mechanically consistent with
+    # scope_class_status's own live resolution, not merely declared once
+    # and left stale - mirrors the schema_representability_status check
+    # below, applied to the THIRD category this session introduces.
+    s2_blocking_role = rlc["tournament_extent_status"]["blocking_role"]
+    s1 = rlc["scope_class_status"]
+    s1_cleared = s1["status"] == _restriction_axis_cleared_status("scope_class_status")
+    s1_hypothesis = s1.get("resolved_hypothesis") if s1_cleared else None
+    if not s1_cleared:
+        expected_s2_role = _S2_BLOCKING_ROLE_PENDING
+    elif s1_hypothesis == "H1":
+        expected_s2_role = _S2_BLOCKING_ROLE_NOT_APPLICABLE
+    elif s1_hypothesis in ("H2", "H3"):
+        expected_s2_role = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+    else:
+        raise AssertionError(
+            f"scope_class_status is cleared (PROVEN) but resolved_hypothesis is {s1_hypothesis!r} - must be "
+            "exactly 'H1', 'H2', or 'H3' before tournament_extent_status.blocking_role can be evaluated"
+        )
+    if s2_blocking_role.get("current_value") != expected_s2_role:
+        raise AssertionError(
+            f"tournament_extent_status.blocking_role.current_value is "
+            f"{s2_blocking_role.get('current_value')!r}, expected {expected_s2_role!r} given "
+            f"scope_class_status.status={s1['status']!r} resolved_hypothesis={s1_hypothesis!r} - S2's "
+            "blocking role must be recomputed whenever S1 changes, not left stale"
+        )
+    # In NO branch may S2's blocking role equal a value that would make it
+    # load-bearing - this is the direct mechanical guarantee that S2 never
+    # gates canonicalization, regardless of its own research status.
+    if s2_blocking_role["current_value"] not in (
+        _S2_BLOCKING_ROLE_PENDING, _S2_BLOCKING_ROLE_NOT_APPLICABLE, _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET,
+    ):
+        raise AssertionError(
+            f"tournament_extent_status.blocking_role.current_value {s2_blocking_role['current_value']!r} is "
+            "not one of the three legal non-blocking values"
+        )
+
     # Session 7's own adversarial review found and this session personally
     # reproduced a real gap: checking that scope_class_status.status ==
     # "PROVEN" is NOT the same as checking WHICH hypothesis it proved. A
@@ -662,7 +763,7 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
     cs_status = cs["status"]
     if cs_status not in ("UNRESOLVED_BLOCKING", "BLOCKING") and not all_cleared:
         raise AssertionError(
-            f"canonicalization_status is {cs_status!r} but not all seven load-bearing axes plus the derived "
+            f"canonicalization_status is {cs_status!r} but not all six load-bearing axes plus the derived "
             f"axis ({ {a: rlc[a]['status'] for a in RESTRICTION_LOAD_BEARING_AXES + RESTRICTION_DERIVED_AXES} }) "
             "are cleared - promotion to canonicalization-ready requires all of them independently cleared"
         )
@@ -682,10 +783,11 @@ _RESTRICTION_AXIS_HEDGE_PHRASES = (
 def _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(packet):
     """Structural self-consistency: an axis whose own reasoning text still
     carries explicit hedge language must not simultaneously claim its
-    CLEARED status (PROVEN, or RESOLVED for schema_representability_status)
-    - a status field and its own justification prose disagreeing is
-    exactly the class of bug this pass's tests exist to catch. Checked
-    across all seven axes.
+    CLEARED status (PROVEN, or RESOLVED_EXISTING_SCHEMA_SUFFICIENT for
+    schema_representability_status) - a status field and its own
+    justification prose disagreeing is exactly the class of bug this pass's
+    tests exist to catch. Checked across all eight tracked axes (six
+    load-bearing, one derived, one conditionally-tracked).
 
     Checks BOTH known hedge field names AND hedge PHRASES appearing in ANY
     string field of the axis - some axes carry their hedge language under
@@ -717,31 +819,40 @@ def _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(packet)
                 )
 
 
-def _assert_seven_axes_load_bearing_and_gate_still_blocks(packet):
+def _assert_six_load_bearing_axes_and_gate_still_blocks(packet):
     """Internal-consistency check (NOT a proof of the underlying historical/
     schema claim - see _assert_effective_date_semantics_match_schema_not_
     validator_limitation for an oracle independent of this file's own
-    classification). Confirms the CURRENT packet genuinely has all seven
+    classification). Confirms the CURRENT packet genuinely has all six
     independently-evidenced axes marked load-bearing, none marked
     non-blocking, the one derived axis (schema_representability_status)
-    kept OUT of load_bearing_axes and declared in derived_axes instead, and
-    canonicalization remains blocked given their current statuses - and,
-    symmetrically, that a hypothetical full resolution of all seven PLUS the
-    derived axis WOULD be accepted, so the gate is evidence-sensitive rather
-    than permanently frozen. session 7: also confirms resolving the seven
-    load-bearing axes alone, while leaving the DERIVED axis unresolved, is
-    NOT enough - the dependency must itself be satisfied, not merely implied
-    by its driver being cleared."""
+    kept OUT of load_bearing_axes and declared in derived_axes instead, the
+    one conditionally-tracked axis (tournament_extent_status) kept OUT of
+    load_bearing_axes and declared in conditionally_tracked_axes instead,
+    and canonicalization remains blocked given their current statuses - and,
+    symmetrically, that a hypothetical full resolution of all six PLUS the
+    derived axis WOULD be accepted (with tournament_extent_status correctly
+    recomputed to NOT_APPLICABLE, not required to independently clear), so
+    the gate is evidence-sensitive rather than permanently frozen. session
+    7: also confirms resolving the six load-bearing axes alone, while
+    leaving the DERIVED axis unresolved, is NOT enough - the dependency
+    must itself be satisfied, not merely implied by its driver being
+    cleared. session 8: tournament_extent_status is proven NEVER required
+    to independently clear, in any branch."""
     rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
     cs = rlc["canonicalization_status"]
     if tuple(cs.get("explicitly_nonblocking_axes") or ()) != ():
-        raise AssertionError("session 6 requires explicitly_nonblocking_axes to be empty - all axes load-bearing")
+        raise AssertionError("session 6 requires explicitly_nonblocking_axes to be empty - no UNCONDITIONAL non-blocking carve-out")
     if set(cs.get("load_bearing_axes") or ()) != set(RESTRICTION_LOAD_BEARING_AXES):
-        raise AssertionError("canonicalization_status.load_bearing_axes does not list all seven axes")
+        raise AssertionError("canonicalization_status.load_bearing_axes does not list all six load-bearing axes")
     if set((cs.get("derived_axes") or {}).keys()) != set(RESTRICTION_DERIVED_AXES):
         raise AssertionError("canonicalization_status.derived_axes does not list the one derived axis")
+    if set((cs.get("conditionally_tracked_axes") or {}).keys()) != set(RESTRICTION_CONDITIONALLY_TRACKED_AXES):
+        raise AssertionError(
+            "canonicalization_status.conditionally_tracked_axes does not list the one conditionally-tracked axis"
+        )
 
-    # Resolving only the seven independently-evidenced axes, and leaving the
+    # Resolving only the six independently-evidenced axes, and leaving the
     # derived axis at its current (still-BLOCKING) status, must NOT look
     # fully cleared - proves the dependency is enforced, not decorative.
     partially_mutated = copy.deepcopy(packet)
@@ -774,6 +885,12 @@ def _assert_seven_axes_load_bearing_and_gate_still_blocks(packet):
     # consistent with "H1" (see _assert_restriction_list_axes_are_
     # independently_evidenced's value-consistency check below).
     mrlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+    # session 8: tournament_extent_status is DELIBERATELY left at its
+    # current (UNRESOLVED) research status here - proving S1 resolving to
+    # H1 does not require S2 to independently clear. Only its recomputed
+    # blocking_role.current_value needs to update, to NOT_APPLICABLE,
+    # matching S1's H1 resolution.
+    mrlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
     mrlc["canonicalization_status"]["status"] = "RESOLVED"
     _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
     _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(mutated)  # must NOT raise
@@ -976,6 +1093,82 @@ def _assert_context_only_sources_not_described_as_applicability_evidence(packet)
         raise AssertionError(
             f"context/authentication-only source(s) described as restriction-applicability evidence without "
             f"a qualification: {violations}"
+        )
+
+
+# ------------------------------------------------------------------
+# Phase 1 (session 8): historical-policy laundering guard.
+#
+# schemas/pool.schema.json's legality_basis enum makes historical-policy
+# require ACTUAL period-policy evidence for its exceptions - it is not
+# satisfied by an absence-of-evidence finding ("no source establishes X
+# was legal"), which the packet previously (wrongly) treated as if it were
+# such evidence for the Tokyo Dome candidate pool's same-day exclusion.
+# "No evidence X was legal" (P1) is not "evidence policy prohibited X"
+# (P2). Checks the structural recommendation field AND a textual sweep -
+# the actual bug lived entirely in free-text prose, not in a schema-
+# validated field, so a structural-only check would have missed it.
+# ------------------------------------------------------------------
+
+_HISTORICAL_POLICY_LAUNDERING_NEGATION_MARKERS = (
+    "not 'historical-policy'", "not historical-policy", "requires period-policy evidence",
+    "requires period policy evidence", "requires period-policy proof", "archived",
+    "absence of evidence", "absence-of-evidence", "does not establish", "corrected", "session 8",
+    "unsupported", "not gating", "deliberately community-retrospective", "genuine historical-policy question",
+)
+
+
+def _assert_pool_legality_basis_not_laundered_from_absence_of_evidence(packet):
+    """Structural guard (session 8): the Tokyo Dome candidate pool's
+    recommended legality_basis must never be 'historical-policy' unless
+    historical_event_pool_legality_status has actually reached PROVEN with
+    supporting period-policy evidence - it is deliberately
+    'community-retrospective' while that remains UNRESOLVED, per schemas/
+    pool.schema.json's own requirement that historical-policy's exceptions
+    need real period-policy evidence, not merely an absence of evidence
+    for legality. Checks BOTH the structural field (target_recommendation.
+    pool_legality_basis_recommendation) AND active prose (the actual bug
+    this test guards against lived entirely in target_recommendation.
+    pool_cutoff_note's free text, not in any schema-validated field).
+    ADVERSARIALLY REVIEWED (session 8): the structural half is airtight;
+    the textual half is a keyword/marker heuristic, like the effective-date
+    checker above - it catches every realistic reintroduction of the
+    original bug, but a deliberately hand-crafted sentence that asserts
+    the claim while incidentally containing an allowlisted marker word
+    (e.g. "archived", "session 8") elsewhere in the same string can defeat
+    it. Not fully adversary-proof against arbitrary natural-language
+    rewording; the structural field check is the harder guarantee."""
+    tr = packet["target_recommendation"]
+    hepls_status = (tr.get("historical_event_pool_legality_status") or {}).get("status")
+    recommendation = tr.get("pool_legality_basis_recommendation")
+    if recommendation == "historical-policy" and hepls_status != "PROVEN":
+        raise AssertionError(
+            f"target_recommendation.pool_legality_basis_recommendation is 'historical-policy' but "
+            f"historical_event_pool_legality_status.status is {hepls_status!r}, not 'PROVEN' - historical-"
+            "policy requires actual period-policy evidence per schemas/pool.schema.json, which an unresolved "
+            "status does not supply"
+        )
+
+    violations = []
+    for path, s in _walk_strings(packet, ()):
+        if path[:1] == ("superseded_findings",):
+            continue
+        # Dated adversarial-review records DISCUSS the historical-policy
+        # claim (as something reviewed and refuted) rather than asserting
+        # it live - same exemption _assert_context_only_sources_not_
+        # described_as_applicability_evidence uses for the same reason.
+        if any(isinstance(p, str) and p.startswith("adversarial_review") for p in path):
+            continue
+        low = s.lower()
+        if "historical-policy" not in low or "pool" not in low:
+            continue
+        if any(marker in low for marker in _HISTORICAL_POLICY_LAUNDERING_NEGATION_MARKERS):
+            continue
+        violations.append((path, s[:300]))
+    if violations:
+        raise AssertionError(
+            f"active prose recommends/asserts historical-policy for the Tokyo Dome candidate pool without a "
+            f"qualification or supporting-evidence marker: {violations}"
         )
 
 
@@ -1972,10 +2165,11 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             set(rc.keys()),
         )
         self.assertEqual("UNRESOLVED_BLOCKING", rc["canonicalization_status"]["status"])
-        # Each of the seven load-bearing axes plus the one derived axis is
-        # its own object with its own status and evidence citation
-        # (source_ids, or schema_citations for the schema-derived axis) -
-        # not a bare string, and not sharing one status value by accident.
+        # Each of the six load-bearing axes plus the one derived axis plus
+        # the one conditionally-tracked axis is its own object with its own
+        # status and evidence citation (source_ids, or schema_citations for
+        # the schema-derived axis) - not a bare string, and not sharing one
+        # status value by accident.
         for axis in RESTRICTION_ALL_AXES:
             self.assertIn("status", rc[axis])
             if axis in RESTRICTION_DERIVED_AXES:
@@ -3048,7 +3242,6 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             "target_event_applicability_status": "SUPPORTED_BUT_INCOMPLETE",
             "source_authentication_status": "SUPPORTED_BUT_INCOMPLETE",
             "scope_class_status": "UNRESOLVED",
-            "tournament_extent_status": "UNRESOLVED",
             "first_effective_date_status": "UNRESOLVED",
         }
         for axis in RESTRICTION_LOAD_BEARING_AXES:
@@ -3057,6 +3250,13 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # load-bearing - checked separately, with its own vocabulary.
         for axis in RESTRICTION_DERIVED_AXES:
             self.assertEqual("BLOCKING", rlc[axis]["status"])
+        # session 8: tournament_extent_status is CONDITIONALLY-TRACKED, not
+        # load-bearing - its own research status (UNRESOLVED) is
+        # independent of its blocking_role, which is currently
+        # CONDITIONAL_PENDING_S1 (scope_class_status itself unresolved).
+        for axis in RESTRICTION_CONDITIONALLY_TRACKED_AXES:
+            self.assertEqual("UNRESOLVED", rlc[axis]["status"])
+            self.assertEqual(_S2_BLOCKING_ROLE_PENDING, rlc[axis]["blocking_role"]["current_value"])
 
     def test_AH_axis_status_is_not_self_contradicting(self):
         _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(self.packet)
@@ -3131,12 +3331,32 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # live contradiction checking source_ids alone would miss.
         _assert_context_only_sources_not_described_as_applicability_evidence(self.packet)
 
-    def test_AR_all_seven_axes_load_bearing_and_gate_still_blocks(self):
-        # Internal-consistency check (session 6): confirms all seven axes
-        # are genuinely marked load-bearing (none non-blocking), and that
-        # the gate is evidence-sensitive - a hypothetical full resolution
-        # of all seven would be accepted, not permanently rejected.
-        _assert_seven_axes_load_bearing_and_gate_still_blocks(self.packet)
+    def test_AN3_pool_legality_basis_is_not_laundered_from_absence_of_evidence(self):
+        # Phase 1 (session 8): the packet previously recommended
+        # legality_basis: 'historical-policy' for the Tokyo Dome candidate
+        # pool, citing an ARCHIVED absence-of-evidence finding as if it
+        # were period-policy proof - schemas/pool.schema.json's own text
+        # requires actual period-policy evidence for historical-policy's
+        # exceptions. Confirms the corrected recommendation
+        # (community-retrospective) and the still-open, non-gating
+        # historical_event_pool_legality_status are both live.
+        _assert_pool_legality_basis_not_laundered_from_absence_of_evidence(self.packet)
+        tr = self.packet["target_recommendation"]
+        self.assertEqual("community-retrospective", tr["pool_legality_basis_recommendation"])
+        self.assertEqual("UNRESOLVED", tr["historical_event_pool_legality_status"]["status"])
+        self.assertIn(
+            "superseded_findings",
+            tr["historical_event_pool_legality_status"]["provenance_of_the_only_located_evidence"],
+        )
+
+    def test_AR_all_six_load_bearing_axes_and_gate_still_blocks(self):
+        # Internal-consistency check (session 6, corrected session 8):
+        # confirms all six load-bearing axes are genuinely marked
+        # load-bearing (none non-blocking, tournament_extent_status
+        # correctly excluded), and that the gate is evidence-sensitive - a
+        # hypothetical full resolution of all six would be accepted, not
+        # permanently rejected.
+        _assert_six_load_bearing_axes_and_gate_still_blocks(self.packet)
 
     def test_AR2_effective_date_semantics_independently_verified_against_schema_text(self):
         # The STRONGER test Phase E replaced the circular proof with: an
@@ -3218,11 +3438,11 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
     def test_mutation_AH_canonicalization_promoted_with_all_load_bearing_axes_cleared_is_accepted(self):
         # Proves the gate is genuinely evidence-sensitive, not a permanent
         # "always UNRESOLVED_BLOCKING" trap: if a future source legitimately
-        # cleared all SEVEN load-bearing axes, promotion must be ACCEPTED.
+        # cleared all SIX load-bearing axes, promotion must be ACCEPTED.
         # Delegates to the shared helper so this test cannot silently drift
-        # out of sync with the mutation _assert_seven_axes_load_bearing_and_
+        # out of sync with the mutation _assert_six_load_bearing_axes_and_
         # gate_still_blocks itself performs.
-        _assert_seven_axes_load_bearing_and_gate_still_blocks(self.packet)  # must NOT raise
+        _assert_six_load_bearing_axes_and_gate_still_blocks(self.packet)  # must NOT raise
 
     def test_mutation_AH2_reintroducing_a_nonblocking_carveout_is_rejected(self):
         # Direct regression for the exact session-5 error this pass
@@ -3455,24 +3675,95 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             self.assertNotEqual(_restriction_axis_cleared_status(axis), rlc[axis]["status"])
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # unaffected by the archive injection
 
-    def test_mutation_AP_h2_vs_h3_resolved_alone_does_not_unblock_canonicalization(self):
-        # Direct proof of the central rule via mutation (session 7: now
-        # targets tournament_extent_status specifically, the S2/H2-vs-H3
-        # axis split out of the old outer_scope_status): resolving ONLY
-        # tournament_extent_status (H2-vs-H3) to PROVEN, with scope_class_
-        # status (S1) and the other load-bearing axes untouched, must NOT
-        # be accepted as sufficient - and asserting canonicalization_status
-        # as RESOLVED on that basis must be rejected. This also proves H2-
-        # vs-H3 resolving alone cannot unblock schema_representability_
-        # status, since that axis is driven by scope_class_status, not
-        # tournament_extent_status.
+    def test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_schema_representability(self):
+        # session 8, item 5 of the adjudicated mutation set: resolving S2
+        # (tournament_extent_status, H2-vs-H3) alone, while S1
+        # (scope_class_status) remains genuinely UNRESOLVED, must NOT be
+        # capable of unblocking schema_representability_status - it is
+        # driven by S1 alone. Every OTHER load-bearing axis is cleared here
+        # so the rejection is isolated to this specific dependency, not
+        # "something else was still open" (mirrors AH4's isolation
+        # technique). Historically (session 7) this test targeted a
+        # different, now-obsolete premise (S2 being load-bearing at all,
+        # which session 8 corrected) - repurposed rather than deleted, to
+        # preserve continuity of the mutation-id sequence and cover the
+        # user-specified scenario directly.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
-        rlc["tournament_extent_status"]["status"] = "PROVEN"
-        rlc["first_effective_date_status"]["status"] = "PROVEN"
+        for axis in RESTRICTION_LOAD_BEARING_AXES:
+            if axis == "scope_class_status":
+                continue  # deliberately left UNRESOLVED
+            rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        self.assertNotEqual("PROVEN", rlc["scope_class_status"]["status"])
+        rlc["tournament_extent_status"]["status"] = "PROVEN"  # S2 resolved alone
+        rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
         rlc["canonicalization_status"]["status"] = "RESOLVED"
         with self.assertRaises(AssertionError):
             _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP2_s1_h1_with_s2_unresolved_behaves_per_state_machine_not_automatic_failure(self):
+        # session 8, item 1 of the adjudicated mutation set: S1 resolving
+        # to H1 while S2 remains genuinely UNRESOLVED must be accepted per
+        # the newly-derived state machine (S2 becomes NOT_APPLICABLE, and
+        # its own UNRESOLVED research status is irrelevant to blocking) -
+        # NOT automatically rejected merely because tournament_extent_
+        # status.status != "PROVEN". This is the direct converse of the
+        # bug session 8 fixed (S2 wrongly required to independently clear).
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        for axis in RESTRICTION_LOAD_BEARING_AXES:
+            rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        rlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+        rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
+        self.assertEqual("UNRESOLVED", rlc["tournament_extent_status"]["status"])  # deliberately still open
+        rlc["canonicalization_status"]["status"] = "RESOLVED"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
+
+    def test_mutation_AP3_s1_h1_plus_schema_representability_resolved_is_accepted(self):
+        # session 8, item 2 of the adjudicated mutation set: S1=H1 plus
+        # schema_representability_status correctly resolved to RESOLVED_
+        # EXISTING_SCHEMA_SUFFICIENT (the only value the state machine
+        # permits under H1) must be accepted, with the recomputed S2
+        # blocking_role (NOT_APPLICABLE) consistent throughout.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        for axis in RESTRICTION_LOAD_BEARING_AXES:
+            rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        rlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+        rlc["schema_representability_status"]["status"] = _restriction_axis_cleared_status(
+            "schema_representability_status"
+        )
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
+        rlc["canonicalization_status"]["status"] = "RESOLVED"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
+
+    def test_mutation_AP4_s1_tournament_specific_with_s2_unresolved_is_the_adjudicated_nonblocking_policy(self):
+        # session 8, item 4 of the adjudicated mutation set: S1 resolving
+        # to tournament-specific (H2 or H3) while S2 remains genuinely
+        # UNRESOLVED must ALSO be accepted for canonicalization purposes
+        # (S2's blocking_role recomputes to NON_BLOCKING_FOR_TARGET_
+        # ARTIFACT, not a block) - schema_representability_status,
+        # however, correctly stays BLOCKING in this branch (a SEPARATE
+        # schema-design task is required, per its own state machine) - so
+        # this test asserts the S2-specific behavior directly rather than
+        # asserting full canonicalization acceptance (which schema_
+        # representability_status alone would still legitimately prevent).
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        for axis in RESTRICTION_LOAD_BEARING_AXES:
+            if axis == "scope_class_status":
+                rlc[axis]["status"] = "PROVEN"
+                rlc[axis]["resolved_hypothesis"] = "H3"
+            else:
+                rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        self.assertEqual("UNRESOLVED", rlc["tournament_extent_status"]["status"])  # deliberately still open
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+        # schema_representability_status correctly remains BLOCKING here - do NOT clear it.
+        rlc["canonicalization_status"]["status"] = "UNRESOLVED_BLOCKING"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise: S2 is not what's blocking
+        # Confirm S2 itself is never counted among what remains to clear.
+        self.assertNotIn("tournament_extent_status", RESTRICTION_LOAD_BEARING_AXES)
 
     # ------------------------------------------------------------------
     # Adversarial review (2026-08-30, extended 2026-08-30 (session 5)): an independent
@@ -3586,6 +3877,26 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         with self.assertRaises(AssertionError):
             _assert_context_only_sources_not_described_as_applicability_evidence(mutated_groups)
 
+    def test_mutation_AQ3_historical_policy_laundering_reintroduced_is_caught(self):
+        # Direct regression for the exact session-8 bug this pass found and
+        # fixed: reintroducing a 'historical-policy' recommendation for the
+        # pool cutoff, backed only by absence-of-evidence prose, must be
+        # caught - both as a structural field flip and as free-text prose
+        # (the actual original bug's location), independently.
+        mutated_field = copy.deepcopy(self.packet)
+        mutated_field["target_recommendation"]["pool_legality_basis_recommendation"] = "historical-policy"
+        with self.assertRaises(AssertionError):
+            _assert_pool_legality_basis_not_laundered_from_absence_of_evidence(mutated_field)
+
+        mutated_prose = copy.deepcopy(self.packet)
+        mutated_prose["target_recommendation"]["pool_cutoff_note"] = (
+            "Recommended legality_basis for a future canonical pool: 'historical-policy' (a genuine "
+            "period-tournament-policy claim - day-of-event products were not established as tournament-legal "
+            "that same day, per event_day_pool_interaction's Gate Guardian counter-evidence)."
+        )
+        with self.assertRaises(AssertionError):
+            _assert_pool_legality_basis_not_laundered_from_absence_of_evidence(mutated_prose)
+
     def test_mutation_AR_adversarial_review_deleted_is_detectable(self):
         # FIXED (2026-08-30 (session 5)): previously deleted a dict key and asserted that
         # accessing the deleted key raises KeyError - that tests Python
@@ -3667,6 +3978,33 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertIn("resolved_hypothesis", self.packet["tokyo_dome_research_current"]["restriction_list_current"][
             "scope_class_status"
         ])
+
+    def test_AV4_adversarial_review_2026_08_30_session8_is_recorded_with_all_challenges_adjudicated(self):
+        review = self.packet["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["adversarial_review_2026_08_30_session8"]
+        self._assert_adversarial_review_record_present_and_complete(
+            review,
+            (
+                "challenge_1_absence_of_evidence_laundering",
+                "challenge_2_community_retrospective_vs_historical_policy_semantics",
+                "challenge_3_s2_wrongly_blocking_h1_branch",
+                "challenge_4_research_completeness_vs_artifact_correctness",
+                "challenge_5_s2_exhaustiveness_in_future_representation",
+            ),
+        )
+        # Challenge 5 is this review's substantive finding (a wording
+        # imprecision, not a logic error) - confirm the record is honest
+        # about that and that the fix it drove is actually present.
+        self.assertIn(
+            "PARTIALLY ACCEPTED",
+            review["challenge_5_s2_exhaustiveness_in_future_representation"]["adjudication"],
+        )
+        sm = self.packet["tokyo_dome_research_current"]["restriction_list_current"]["tournament_extent_status"][
+            "blocking_role"
+        ]["state_machine"]["if_scope_class_status_resolves_tournament_specific"]
+        self.assertIn("target_event_applicability_status", sm)
+        self.assertIn("another explicitly-bounded population", sm)
 
     def test_AW_content_convenience_field_and_stale_blocker_note_fixed_after_review(self):
         # Direct regression for the two minor issues the 2026-08-30 (session 5)
