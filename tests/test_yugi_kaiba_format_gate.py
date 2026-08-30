@@ -749,6 +749,33 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
             "has been established, S2 is not unresolved - H3 IS S2's answer)"
         )
 
+    # Session 10's central principle: independent OWNERSHIP is not logical
+    # INDEPENDENCE. S1 asks "general-regional or tournament-specific?"; S2
+    # asks "GIVEN tournament-specific, H2 or H3?" - S2's own premise IS a
+    # claim about S1's answer. So this is a STRICTLY ONE-WAY implication:
+    # S1==TOURNAMENT_SPECIFIC does NOT force S2 to resolve (S2 may stay
+    # UNRESOLVED/null regardless - unchanged, checked nowhere near here),
+    # and does NOT determine H2 vs H3 either (S1 does not own that
+    # distinction - unchanged, enforced above). But a CLEARED S2 (H2 or
+    # H3, either one) necessarily PROVES the restriction was tournament-
+    # specific - proving H2 or H3 is strictly narrower than, and entails,
+    # proving tournament-specific. So whenever S2 is cleared, S1 must
+    # independently be PROVEN exactly TOURNAMENT_SPECIFIC: it may not be
+    # unresolved (that would mean S2 proved something about S1 that S1
+    # itself does not yet claim), and it may not be GENERAL_REGIONAL
+    # (S2's own premise would then be false, so a PROVEN H2/H3 result
+    # could not coexist with it honestly). Session 9 stated this pair had
+    # NO cross-consistency requirement beyond S2's blocking-role state
+    # machine; that was too permissive in exactly this one direction.
+    if s2_cleared and (not s1_cleared or s1_class != _S1_CLASS_TOURNAMENT_SPECIFIC):
+        raise AssertionError(
+            f"tournament_extent_status is cleared (resolved_extent={s2_extent!r}) but scope_class_status is "
+            f"status={s1['status']!r} resolved_class={s1_class!r} - a resolved H2/H3 result necessarily "
+            f"proves the restriction was tournament-specific, so scope_class_status must independently be "
+            f"PROVEN {_S1_CLASS_TOURNAMENT_SPECIFIC!r} whenever tournament_extent_status is cleared; it may "
+            "never be unresolved or general-regional at the same time"
+        )
+
     # Session 8's central dependency check, re-derived on the corrected
     # vocabulary: tournament_extent_status.blocking_role.current_value
     # must be mechanically consistent with scope_class_status.resolved_
@@ -3740,34 +3767,146 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             self.assertNotEqual(_restriction_axis_cleared_status(axis), rlc[axis]["status"])
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # unaffected by the archive injection
 
-    def test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_schema_representability(self):
-        # session 8, item 5 of the adjudicated mutation set; Phase D item 7
-        # (session 9, vocabulary-corrected): resolving S2 (tournament_
-        # extent_status) alone to a valid extent, while S1 (scope_class_
-        # status) remains genuinely UNRESOLVED, must NOT be capable of
-        # unblocking schema_representability_status - it is driven by S1
-        # alone and never inspects S2's resolved_extent. Every OTHER
-        # load-bearing axis is cleared here so the rejection is isolated
-        # to this specific dependency, not "something else was still
-        # open" (mirrors AH4's isolation technique). Historically
-        # (session 7) this test targeted a different, now-obsolete premise
-        # (S2 being load-bearing at all, which session 8 corrected) -
-        # repurposed rather than deleted, to preserve continuity of the
-        # mutation-id sequence and cover the user-specified scenario
-        # directly.
+    def test_mutation_AP10_s2_proven_h2_while_s1_unresolved_is_rejected(self):
+        # session 10: rewritten from the old, internally-contradictory
+        # "AP" mutation. That version constructed S2 PROVEN alone while S1
+        # stayed UNRESOLVED - already a structurally invalid state under
+        # session 10's cross-consistency rule - and then went on to ALSO
+        # flip schema_representability_status and canonicalization_status,
+        # framing the interesting failure as "S2 cannot unblock schema
+        # representability." That framing no longer makes sense: the S1/S2
+        # state itself is now rejected before either of those fields is
+        # ever reached. This version isolates exactly that: S1 left at its
+        # default UNRESOLVED, S2 alone set to PROVEN/H2, nothing else
+        # touched - no other axis cleared, no schema/canonicalization
+        # promotion attempted - proving the helper rejects the state on
+        # its own terms, not merely as a side-effect of some other check.
+        # (Mutation-id AP1 was never used; this session's fixes start at
+        # AP10 to avoid renumbering the pre-existing AP2-AP9 sequence.)
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED", rlc["scope_class_status"]["status"])  # left at its default
+        self.assertIsNone(rlc["scope_class_status"]["resolved_class"])
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_FINALS_ONLY  # H2
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP11_s2_proven_h3_while_s1_unresolved_is_rejected(self):
+        # session 10: the H3 mirror of AP10 - the rejection must not be an
+        # accident of which extent value was chosen.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED", rlc["scope_class_status"]["status"])
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_WIDER_POPULATION  # H3
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP12_s1_general_regional_with_s2_proven_h2_is_rejected(self):
+        # session 10: S2 cleared to H2 while S1 has PROVEN the opposite
+        # branch (general-regional) - S2's own premise ("given tournament-
+        # specific...") is then false, so a PROVEN H2 result cannot
+        # coexist with it. blocking_role is set to the value S1=general-
+        # regional would otherwise correctly demand (NOT_APPLICABLE), so
+        # the ONLY contradiction this mutation isolates is the S1/S2
+        # cross-consistency one, not a stale-blocking-role side effect
+        # (mirrors AP6's isolation technique).
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_class_status"]["status"] = "PROVEN"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_FINALS_ONLY  # H2
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP13_s1_general_regional_with_s2_proven_h3_is_rejected(self):
+        # session 10: the H3 mirror of AP12.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_class_status"]["status"] = "PROVEN"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_WIDER_POPULATION  # H3
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP14_s1_tournament_specific_with_s2_proven_h2_is_accepted(self):
+        # session 10: the positive counterpart to AP12/AP13 - S1 PROVEN
+        # TOURNAMENT_SPECIFIC (the branch S2's premise actually requires)
+        # plus S2 cleared to H2 is a fully coherent, valid state and must
+        # be accepted. schema_representability_status correctly stays
+        # BLOCKING here (only a general-regional S1 clears it - unchanged
+        # by S2's own value; see AP16 below), so canonicalization_status
+        # stays UNRESOLVED_BLOCKING, mirroring AP4's acceptance style.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
         for axis in RESTRICTION_LOAD_BEARING_AXES:
             if axis == "scope_class_status":
-                continue  # deliberately left UNRESOLVED
-            rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
-        self.assertNotEqual("PROVEN", rlc["scope_class_status"]["status"])
-        rlc["tournament_extent_status"]["status"] = "PROVEN"  # S2 resolved alone
-        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_FINALS_ONLY  # a valid, self-consistent H2
-        rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
-        rlc["canonicalization_status"]["status"] = "RESOLVED"
-        with self.assertRaises(AssertionError):
-            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+                rlc[axis]["status"] = "PROVEN"
+                rlc[axis]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+            else:
+                rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_FINALS_ONLY  # H2
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+        # schema_representability_status correctly remains BLOCKING here - do NOT clear it.
+        rlc["canonicalization_status"]["status"] = "UNRESOLVED_BLOCKING"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
+
+    def test_mutation_AP15_s1_tournament_specific_with_s2_proven_h3_is_accepted(self):
+        # session 10: the H3 mirror of AP14 - together, AP14 and AP15
+        # prove acceptance does not depend on which extent value S2
+        # resolved to, only on S1 having independently proven the branch
+        # S2's premise requires.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        for axis in RESTRICTION_LOAD_BEARING_AXES:
+            if axis == "scope_class_status":
+                rlc[axis]["status"] = "PROVEN"
+                rlc[axis]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+            else:
+                rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_WIDER_POPULATION  # H3
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+        rlc["canonicalization_status"]["status"] = "UNRESOLVED_BLOCKING"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
+
+    def test_mutation_AP16_h2_vs_h3_never_changes_schema_representability_status(self):
+        # session 10: the test the old "AP" mutation was actually trying
+        # to reach, constructed on a logically coherent state this time.
+        # S1=TOURNAMENT_SPECIFIC, S2 cleared - schema_representability_
+        # status must stay BLOCKING regardless (it is driven by S1 alone,
+        # per session 7's depends_on pin, and never inspects S2's
+        # resolved_extent at all) - and swapping S2's own answer between
+        # H2 and H3 must not change that verdict either way, proving the
+        # independence directly rather than by construction alone.
+        for extent in (_S2_EXTENT_FINALS_ONLY, _S2_EXTENT_WIDER_POPULATION):
+            mutated = copy.deepcopy(self.packet)
+            rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+            rlc["scope_class_status"]["status"] = "PROVEN"
+            rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+            rlc["tournament_extent_status"]["status"] = "PROVEN"
+            rlc["tournament_extent_status"]["resolved_extent"] = extent
+            rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+            self.assertEqual(
+                "BLOCKING",
+                rlc["schema_representability_status"]["status"],
+                f"schema_representability_status changed merely because tournament_extent_status "
+                f"resolved to {extent!r} - it must be driven by scope_class_status alone",
+            )
+            # Attempting to clear it anyway while S1 is TOURNAMENT_SPECIFIC must still be
+            # rejected, for either extent value - session 7's depends_on pin, re-confirmed.
+            wrongly_cleared = copy.deepcopy(mutated)
+            wrongly_cleared["tokyo_dome_research_current"]["restriction_list_current"][
+                "schema_representability_status"
+            ]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
+            with self.assertRaises(AssertionError):
+                _assert_restriction_list_axes_are_independently_evidenced(wrongly_cleared)
 
     def test_mutation_AP2_s1_general_regional_with_s2_unresolved_behaves_per_state_machine_not_automatic_failure(self):
         # session 8, item 1 of the adjudicated mutation set (vocabulary

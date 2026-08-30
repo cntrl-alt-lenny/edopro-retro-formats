@@ -2889,22 +2889,30 @@ Both fields are now individually self-consistency-checked
 `tests/test_yugi_kaiba_format_gate.py`): a `PROVEN` status with a `null`
 resolved value is rejected, and a resolved value present while the status
 is not `PROVEN` is rejected - in both directions, for both S1 and S2
-independently. Crucially, there is NO cross-consistency requirement
-between S1's `resolved_class` and S2's `resolved_extent` beyond
-`tournament_extent_status.blocking_role`'s own (unchanged) state machine:
+independently. The fields are independently owned and S1 tournament-
+specific does not force S2 to resolve, but their values must remain
+logically compatible. A resolved H2/H3 child result entails
+S1=TOURNAMENT_SPECIFIC; S1=H1_GENERAL_REGIONAL makes S2 not applicable.
+(Session 9 originally stated there was no cross-consistency requirement
+beyond `tournament_extent_status.blocking_role`'s own state machine; that
+was too permissive in this one direction and was corrected in session
+10 below - independent ownership of two fields is not the same claim as
+logical independence between their values.)
 `scope_class_status.resolved_class == "TOURNAMENT_SPECIFIC"` with
 `tournament_extent_status.status == "UNRESOLVED"` and `resolved_extent ==
-null` is now a fully coherent, mechanically-accepted state - the exact
-state the old model could not honestly express.
+null` is still a fully coherent, mechanically-accepted state - the exact
+state the old model could not honestly express, and session 10 does not
+touch it: S1 tournament-specific never forces S2 to resolve.
 
 `schema_representability_status`'s state machine and `tournament_extent_
 status.blocking_role`'s state machine both still depend ONLY on `scope_
 class_status.resolved_class` - neither was ever changed to inspect
-`resolved_extent`, and a new mutation
-(`test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_
-schema_representability`) proves S2 resolving to a valid extent, alone,
-while S1 remains unresolved, still cannot unblock `schema_
-representability_status`.
+`resolved_extent`. A mutation
+(`test_mutation_AP16_h2_vs_h3_never_changes_schema_representability_
+status`, session 10) proves that a S2 resolved to either H2 or H3, with
+S1 independently PROVEN tournament-specific, still cannot unblock
+`schema_representability_status` - and that swapping H2 for H3 changes
+nothing about that verdict.
 
 ### Mutation coverage added
 
@@ -2938,3 +2946,86 @@ remains `BLOCKED_BY_BOTH`; the certified 370-card pool, its digest, the
 Aug-25/Aug-26 snapshot/cutoff split, and the `community-retrospective`
 pool-legality recommendation are all untouched. No new historical
 research was performed and no canonical Tokyo Dome artifact was created.
+
+## Parent/child cross-consistency correction (session 10, 2026-08-30)
+
+A tiny logical-consistency correction, not new historical research and
+not a gate redesign: session 9 correctly separated S1's and S2's
+machine-readable vocabularies, but its own "no cross-consistency
+requirement" claim (see above, now corrected) was too permissive in one
+direction.
+
+### The bug
+
+Independent field OWNERSHIP is not the same claim as logical
+INDEPENDENCE between the fields' values. S1 asks "was the restriction
+general-regional or tournament-specific?"; S2 asks "GIVEN tournament-
+specific, was the extent H2 (finals-only) or H3 (wider population)?" S2's
+own premise is itself a claim about S1's answer - proving H2 or H3 is
+strictly narrower than, and necessarily entails, proving tournament-
+specific. Session 9's validator allowed `tournament_extent_status` to
+clear to `PROVEN`/H2-or-H3 while `scope_class_status` stayed `UNRESOLVED`,
+or even while it was `PROVEN`/`H1_GENERAL_REGIONAL` - both states assert
+a resolved child result whose own premise the parent has not established,
+or has actively contradicted.
+
+### The fix
+
+`_assert_restriction_list_axes_are_independently_evidenced` gained one
+new, strictly one-way check: whenever `tournament_extent_status` is
+cleared (`PROVEN` with a non-null `resolved_extent`), `scope_class_status`
+must independently be `PROVEN`/`TOURNAMENT_SPECIFIC` - never `UNRESOLVED`,
+never `H1_GENERAL_REGIONAL`. The reverse direction is deliberately left
+alone: `scope_class_status == TOURNAMENT_SPECIFIC` still does not force
+`tournament_extent_status` to resolve, and still does not determine H2 vs
+H3 (S1 does not own that distinction - session 9's fix, unchanged). H2 and
+H3 remain exclusively S2's values; this correction does not collapse them
+back into S1's vocabulary.
+
+Required valid states (all mechanically accepted): (1) S1 unresolved, S2
+unresolved with `blocking_role=CONDITIONAL_PENDING_S1`; (2) S1
+`PROVEN`/`H1_GENERAL_REGIONAL`, S2 unresolved, `blocking_role=
+NOT_APPLICABLE`; (3) S1 `PROVEN`/`TOURNAMENT_SPECIFIC`, S2 unresolved,
+`blocking_role=NON_BLOCKING_FOR_TARGET_ARTIFACT`; (4)/(5) the same S1
+state with S2 `PROVEN`/H2 or `PROVEN`/H3, `blocking_role` unchanged.
+Required invalid states (all mechanically rejected): S2 `PROVEN`/H2-or-H3
+while S1 is unresolved; S2 `PROVEN`/H2-or-H3 while S1 is `PROVEN`/
+`H1_GENERAL_REGIONAL`; S1 `PROVEN`/`H1_GENERAL_REGIONAL` with any
+non-null `resolved_extent` at all.
+
+### Mutation coverage added
+
+`test_mutation_AP10_s2_proven_h2_while_s1_unresolved_is_rejected` and
+`test_mutation_AP11_s2_proven_h3_while_s1_unresolved_is_rejected`; `test_
+mutation_AP12_s1_general_regional_with_s2_proven_h2_is_rejected` and
+`test_mutation_AP13_s1_general_regional_with_s2_proven_h3_is_rejected`;
+`test_mutation_AP14_s1_tournament_specific_with_s2_proven_h2_is_accepted`
+and `test_mutation_AP15_s1_tournament_specific_with_s2_proven_h3_is_
+accepted`; `test_mutation_AP16_h2_vs_h3_never_changes_schema_
+representability_status` (proving the derived axis stays driven by S1
+alone, for both extent values). The pre-existing `test_mutation_AP_s2_
+proven_alone_while_s1_unresolved_cannot_resolve_schema_representability`
+was rewritten and renumbered as `AP10`: its old construction (S1
+unresolved, S2 `PROVEN`/H2, plus an unrelated attempt to promote
+`schema_representability_status` and `canonicalization_status`) framed
+the interesting failure as "S2 alone cannot unblock schema
+representability," but that framing no longer applies - the S1/S2 state
+itself is now rejected before either of those fields is ever reached.
+`AP10` isolates exactly that state; `AP16` separately covers what the old
+test's framing was actually reaching for, on a logically coherent state
+(S1 `PROVEN`/`TOURNAMENT_SPECIFIC`) instead. `test_no_test_ever_sets_s1_
+resolved_value_to_h2_or_h3` continues to pass unmodified - none of the
+new tests assign S1's field to a literal `"H2"`/`"H3"`.
+
+### What did not change
+
+Axis membership; the six load-bearing axes; `schema_representability_
+status` as the sole derived axis (`depends_on` still pinned to exactly
+`scope_class_status`); `tournament_extent_status` as the sole
+conditionally-tracked, non-blocking axis; the gate itself was not
+redesigned. `canonicalization_status.status` remains
+`UNRESOLVED_BLOCKING`; `architecture_verdict` remains `BLOCKED_BY_BOTH`;
+the certified 370-card pool, its digest, the Aug-25/Aug-26 snapshot/cutoff
+split, and the `community-retrospective` pool-legality recommendation are
+all untouched. No historical research was performed and no canonical
+Tokyo Dome artifact was created.
