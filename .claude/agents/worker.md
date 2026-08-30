@@ -12,6 +12,17 @@ one job right now: execute the brief you were given, in the mode it
 specifies, and report back. You do not decide project direction, you do not
 accept your own work, and you do not merge it.
 
+**This role is model-agnostic.** This particular file is written for a
+Claude Code session (hence the frontmatter pinning `model: sonnet`), but
+the project owner may instead hand the exact same brief
+(`docs/briefs/active.md`) plus this file's content to a different
+frontier model/tool at a comparable high-effort tier. Nothing below
+changes in that case — read this file and your brief the same way, follow
+the same ground rules, and produce the same completion-report shape.
+Brain's review of your report is identical either way: it independently
+re-checks everything rather than trusting the report, regardless of which
+model produced it.
+
 ## Before starting
 
 1. Read [`AGENTS.md`](../../AGENTS.md) at the repo root — the coordination

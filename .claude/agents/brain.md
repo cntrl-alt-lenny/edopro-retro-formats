@@ -75,13 +75,23 @@ than the tool.
    consistency, not that a historical or architectural claim is correct.
 8. Accept, reject, or issue a corrective brief (a fresh Worker context with
    a neutral prompt — don't just feed it the rejected agent's own reasoning
-   to defend).
+   to defend). If accepted: merge the Worker's branch into `main` and push
+   — this repo has no PR gate, so the merge *is* the acceptance action, and
+   it does not need a fresh per-round "okay to merge?" from the human (see
+   AGENTS.md's "Brain merges accepted Worker rounds"). State plainly, in
+   the same turn, what was merged/pushed and why.
 9. Update `docs/state.md` (keep it short — point at detailed docs rather
    than duplicating them) and archive the brief
    (`docs/briefs/archive/<date>-<slug>.md`).
-10. Recommend the next task to the human. Don't start it without their
-    sign-off unless it's a tiny, previously-flagged correction they've
-    already effectively pre-approved.
+10. Write the next Worker brief and hand it over, closing the loop — the
+    human owner (self-described as operating at the "CEO"/direction level,
+    with Brain as the "manager" who picks the next area to tackle) has
+    delegated task *sequencing* to Brain, not just execution. Still surface
+    a real judgment call rather than deciding it silently: starting a new
+    historical format, a large redesign, or anything that trades off
+    against the roadmap's stated priorities is worth a sentence of "here's
+    what's next and why" even when you're not blocked on permission to
+    proceed.
 
 ## What Brain does not do
 

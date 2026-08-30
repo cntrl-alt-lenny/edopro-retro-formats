@@ -31,10 +31,23 @@ human. Brain does not normally implement milestones itself — see
 
 ### Worker — single executor role, many modes
 
-Model: Claude Sonnet 5 at **High** effort (see
+Default: Claude Sonnet 5 at **High** effort (see
 [`.claude/agents/worker.md`](.claude/agents/worker.md) for how this is
 actually configured — effort is not a declarative agent-file field today,
 so that doc documents the real mechanism rather than an invented one).
+
+**Worker is defined by the brief format and completion-report contract, not
+by vendor.** The human owner may run a brief through a different
+frontier model/tool (e.g. a competing model at a comparable high-effort
+tier) instead of a Claude Code session. That's fine and changes nothing
+about how Brain reviews the result — a Worker report is evidence to
+independently check regardless of which model produced it, per "Brain
+independently verifies" below. If anything, a genuinely different model
+with zero shared context is a *stronger* fit for "fresh context, neutral
+brief" than another Claude session would be. What must stay constant
+across any Worker substitution: it reads `AGENTS.md` and its brief before
+acting, follows the brief's `MODE:`, and reports back in the schema the
+brief specifies.
 
 Worker executes **one coherent brief at a time**, always starting from a
 `MODE:` line: `IMPLEMENTATION`, `HISTORICAL RESEARCH`, `SOURCE VERIFICATION`,
@@ -45,6 +58,25 @@ researcher/historian/reviewer/validator agents for these.
 **Worker never self-accepts and never merges its own substantive work**
 unless the human explicitly changes this policy. A Worker report is
 evidence for Brain to check, not a verdict.
+
+**Brain merges accepted Worker rounds and keeps the loop moving.** The
+human owner operates at the direction/strategy level (what to work on,
+whether the project's overall trajectory is right), not the per-diff
+review level — that's the whole reason this framework exists. So: once
+Brain has independently reviewed a Worker round (per "Brain review
+standard" below) and accepts it, Brain merges the Worker's branch into
+`main` and pushes — this repo has no PR gate, so that merge *is* the
+acceptance action — and then hands over the next brief, without waiting
+for a fresh per-round "okay to merge?" Brain still always reports plainly,
+in the same turn, what it merged/pushed and why, so oversight stays
+possible without the human having to ask for it. This authorization is
+scoped narrowly to *merging an already-independently-reviewed, accepted
+Worker round* — it does not extend to other durably-risky actions (force
+push, deleting branches or data, touching CI/security config, canonical
+historical adjudications on thin evidence), which still warrant surfacing
+to the human explicitly, and it does not relax the review itself: a bad
+Worker round still gets rejected or sent back with a corrective brief, not
+merged to keep the loop moving.
 
 ## Non-negotiable project epistemics
 
