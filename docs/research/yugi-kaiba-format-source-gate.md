@@ -129,16 +129,33 @@ format, banlist, card pool, or rule profile.
   found the descriptive PROSE around these two sources (in
   `provenance_independence_assessment.independence_groups` and
   `source_contemporaneity_ledger`) had not caught up with that `source_ids`
-  move and still claimed the old relationship; corrected. Canonicalization
-  status remains `UNRESOLVED_BLOCKING` throughout, as it must - each
-  correction adds or clarifies blocking structure, it does not remove any.
-  See `restriction_list_current.canonicalization_status`, the
+  move and still claimed the old relationship; corrected. **CORRECTED
+  2026-08-30 (session 9):** `scope_class_status`'s own machine-readable
+  value (`resolved_hypothesis`, allowing `null`/`"H1"`/`"H2"`/`"H3"`)
+  wrongly let the PARENT classification (S1: general-regional vs
+  tournament-specific) encode the CHILD refinement's answer (S2: H2 vs
+  H3) - a source proving "the restriction was tournament-specific" does
+  not thereby prove "it was H2 rather than H3", but the old vocabulary
+  forced a `PROVEN` S1 to pick H2 or H3 anyway, making the legitimate
+  state "S1 proven tournament-specific, S2 genuinely still `UNRESOLVED`"
+  inexpressible without an internal contradiction (a mutation test even
+  had to construct exactly that contradiction to exercise the dependency
+  check). Renamed to `resolved_class` with exactly two non-null values -
+  `H1_GENERAL_REGIONAL`, `TOURNAMENT_SPECIFIC` - and `tournament_extent_
+  status` gained its own independent `resolved_extent` field (`null`/
+  `"H2"`/`"H3"`) for S2's own question. `schema_representability_status`
+  and `tournament_extent_status.blocking_role` still depend only on
+  `resolved_class`, unchanged in substance. Canonicalization status
+  remains `UNRESOLVED_BLOCKING` throughout, as it must - each correction
+  adds or clarifies blocking structure, it does not remove any. See
+  `restriction_list_current.canonicalization_status`, the
   `adversarial_review_2026_08_30`, `adversarial_review_2026_08_30_session5`,
   `adversarial_review_2026_08_30_session6`, `adversarial_review_2026_08_30_
-  session7`, and (this session's) adversarial review records, and
-  "Contemporaneous restriction-list source recovery" / "Artifact-
-  requirements re-derivation" / "Semantic-gate correction" / "Temporal/
-  scope-model correction" / "Legality-basis and scope-role correction" near
+  session7`, `adversarial_review_2026_08_30_session8`, and (this session's)
+  adversarial review records, and "Contemporaneous restriction-list source
+  recovery" / "Artifact-requirements re-derivation" / "Semantic-gate
+  correction" / "Temporal/scope-model correction" / "Legality-basis and
+  scope-role correction" / "Parent/child value-vocabulary correction" near
   the end of this document.
 - **Full Chain/Spell-Speed/priority system:** historical adoption by
   Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
@@ -2802,21 +2819,122 @@ member). `remaining_blockers` was corrected to match.
 ### Adjudicated mutation set
 
 Five mutations, matching the task's own enumeration, directly proving the
-corrected policy: S1=H1 with S2 still UNRESOLVED is ACCEPTED, not
-auto-rejected merely because S2 isn't `PROVEN`
-(`test_mutation_AP2_s1_h1_with_s2_unresolved_behaves_per_state_machine_
-not_automatic_failure`); S1=H1 plus a correctly-resolved `schema_
-representability_status` is ACCEPTED
-(`test_mutation_AP3_s1_h1_plus_schema_representability_resolved_is_
-accepted`); S1=tournament-specific with `schema_representability_status`
-falsely marked sufficient is REJECTED
-(`test_mutation_AH5_schema_representability_cleared_while_scope_class_
-proven_against_h1_is_rejected`, pre-existing from session 7, re-confirmed
-still correct under the new model); S1=tournament-specific with S2
-UNRESOLVED is the adjudicated non-blocking policy
-(`test_mutation_AP4_s1_tournament_specific_with_s2_unresolved_is_the_
-adjudicated_nonblocking_policy`); S2=`PROVEN` alone while S1 is unresolved
-cannot resolve `schema_representability_status`
-(`test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_
-schema_representability`, repurposed from session 7's now-obsolete
+corrected policy: S1=general-regional with S2 still UNRESOLVED is
+ACCEPTED, not auto-rejected merely because S2 isn't `PROVEN`; S1=general-
+regional plus a correctly-resolved `schema_representability_status` is
+ACCEPTED; S1=tournament-specific with `schema_representability_status`
+falsely marked sufficient is REJECTED; S1=tournament-specific with S2
+UNRESOLVED is the adjudicated non-blocking policy; S2=`PROVEN` alone while
+S1 is unresolved cannot resolve `schema_representability_status`.
+**Session-9 note:** these tests originally set `scope_class_status.
+resolved_hypothesis = "H1"` to express the general-regional branch - see
+"Parent/child value-vocabulary correction (session 9)" below for why that
+field name and those exact test bodies were themselves corrected
+afterward (the test names below are the current, post-session-9 ones,
+not what session 8 originally wrote):
+`test_mutation_AP2_s1_general_regional_with_s2_unresolved_behaves_per_
+state_machine_not_automatic_failure`,
+`test_mutation_AP3_s1_general_regional_plus_schema_representability_
+resolved_is_accepted`,
+`test_mutation_AH5_schema_representability_cleared_while_scope_class_
+proven_tournament_specific_is_rejected` (pre-existing from session 7,
+re-confirmed still correct under the session-8 model, vocabulary
+corrected again in session 9),
+`test_mutation_AP4_s1_tournament_specific_with_s2_unresolved_is_the_
+adjudicated_nonblocking_policy`,
+`test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_
+schema_representability` (repurposed from session 7's now-obsolete
 "H2-vs-H3 resolved alone" test).
+
+## Parent/child value-vocabulary correction (session 9, 2026-08-30)
+
+A small, focused state-model fix, not new historical research: session 8
+correctly separated S1 (`scope_class_status`: general-regional vs
+tournament-specific) from S2 (`tournament_extent_status`: given
+tournament-specific, finals-only H2 vs wider-population H3) and correctly
+made S2 non-blocking for the target artifact - but the MACHINE-READABLE
+value on S1, `resolved_hypothesis`, still allowed `null`/`"H1"`/`"H2"`/
+`"H3"`, collapsing S2's own answer back into S1's field.
+
+### The bug
+
+A source can prove "the restriction was tournament-specific" (S1's own
+proposition) without proving "it was H2 rather than H3" (S2's strictly
+narrower proposition, which S1 does not even ask). Under the old
+vocabulary, a `PROVEN` `scope_class_status` was FORCED to also pick `"H2"`
+or `"H3"` - there was no way to say "tournament-specific, extent
+undetermined." A pre-existing mutation test
+(`test_mutation_AH5_schema_representability_cleared_while_scope_class_
+proven_against_h1_is_rejected`, pre-rename) even had to construct exactly
+this contradiction on purpose - `scope_class_status.resolved_hypothesis =
+"H3"` while `tournament_extent_status.status` stayed `"UNRESOLVED"` - to
+exercise the schema-representability dependency check, without the
+packet's own model ever flagging that combination as internally
+inconsistent. If H3 has been established, S2 is not unresolved - H3 IS
+S2's answer - so that combination should never have been constructible in
+the first place.
+
+### The fix
+
+`scope_class_status.resolved_hypothesis` renamed to `resolved_class`,
+narrowed to exactly two non-null values: `H1_GENERAL_REGIONAL` and
+`TOURNAMENT_SPECIFIC`. Neither `"H2"` nor `"H3"` is a legal value on this
+field, structurally. `tournament_extent_status` gained its own,
+completely independent `resolved_extent` field (`null` while `status` is
+`UNRESOLVED`; `"H2"` or `"H3"` once `status` is `PROVEN`) - S2's own
+question, answered entirely on S2's own terms.
+
+Both fields are now individually self-consistency-checked
+(`_assert_restriction_list_axes_are_independently_evidenced`,
+`tests/test_yugi_kaiba_format_gate.py`): a `PROVEN` status with a `null`
+resolved value is rejected, and a resolved value present while the status
+is not `PROVEN` is rejected - in both directions, for both S1 and S2
+independently. Crucially, there is NO cross-consistency requirement
+between S1's `resolved_class` and S2's `resolved_extent` beyond
+`tournament_extent_status.blocking_role`'s own (unchanged) state machine:
+`scope_class_status.resolved_class == "TOURNAMENT_SPECIFIC"` with
+`tournament_extent_status.status == "UNRESOLVED"` and `resolved_extent ==
+null` is now a fully coherent, mechanically-accepted state - the exact
+state the old model could not honestly express.
+
+`schema_representability_status`'s state machine and `tournament_extent_
+status.blocking_role`'s state machine both still depend ONLY on `scope_
+class_status.resolved_class` - neither was ever changed to inspect
+`resolved_extent`, and a new mutation
+(`test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_
+schema_representability`) proves S2 resolving to a valid extent, alone,
+while S1 remains unresolved, still cannot unblock `schema_
+representability_status`.
+
+### Mutation coverage added
+
+Beyond re-deriving the pre-existing session-7/8 mutations onto the
+corrected vocabulary (see "Adjudicated mutation set" above), five new
+tests were added: `test_mutation_AP5_s1_general_regional_with_stale_s2_
+blocking_role_is_rejected` (S1 resolving general-regional must actually
+force S2's blocking role to `NOT_APPLICABLE`, not merely permit it);
+`test_mutation_AP6_s1_tournament_specific_with_s2_status_unresolved_but_
+extent_set_is_rejected` and `test_mutation_AP7_s2_proven_with_null_
+resolved_extent_is_rejected` (the task's own two named contradictory
+states, both directions); `test_mutation_AP8_s1_proven_with_null_
+resolved_class_is_rejected` and `test_mutation_AP9_s1_unresolved_with_
+resolved_class_set_is_rejected` (the symmetric S1-side cases of the same
+consistency requirement). A tenth check,
+`test_no_test_ever_sets_s1_resolved_value_to_h2_or_h3`, scans the test
+file's own source for any mutation assigning S1's resolved-class field
+(under either the current or the renamed-away field name) to a literal
+`"H2"` or `"H3"` - structurally verifying, not merely asserting by
+convention, that no test in this suite ever needs S1 to pretend it owns
+S2's distinction.
+
+### What did not change
+
+`canonicalization_status.load_bearing_axes` (six axes), `derived_axes`
+(`schema_representability_status`), and `conditionally_tracked_axes`
+(`tournament_extent_status`) are unchanged in membership and dependency
+structure - only the VALUE VOCABULARY on S1 and S2 changed. `canonicalization_
+status.status` remains `UNRESOLVED_BLOCKING`; `architecture_verdict`
+remains `BLOCKED_BY_BOTH`; the certified 370-card pool, its digest, the
+Aug-25/Aug-26 snapshot/cutoff split, and the `community-retrospective`
+pool-legality recommendation are all untouched. No new historical
+research was performed and no canonical Tokyo Dome artifact was created.

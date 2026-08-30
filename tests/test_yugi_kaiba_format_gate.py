@@ -572,6 +572,21 @@ _AXIS_CLEARED_STATUS = {"schema_representability_status": "RESOLVED_EXISTING_SCH
 _S2_BLOCKING_ROLE_PENDING = "CONDITIONAL_PENDING_S1"
 _S2_BLOCKING_ROLE_NOT_APPLICABLE = "NOT_APPLICABLE"
 _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET = "NON_BLOCKING_FOR_TARGET_ARTIFACT"
+# scope_class_status.resolved_class's two legal non-null values (session
+# 9) - S1 (the PARENT classification: general-regional vs tournament-
+# specific) must never encode S2's own H2-vs-H3 CHILD refinement. A source
+# can prove "the restriction was tournament-specific" (TOURNAMENT_SPECIFIC)
+# without proving "it was H2 rather than H3" - that is entirely S2's
+# question, answered (if at all) by tournament_extent_status.resolved_
+# extent below, completely independently of scope_class_status.
+_S1_CLASS_GENERAL_REGIONAL = "H1_GENERAL_REGIONAL"
+_S1_CLASS_TOURNAMENT_SPECIFIC = "TOURNAMENT_SPECIFIC"
+# tournament_extent_status.resolved_extent's two legal non-null values
+# (session 9) - S2's OWN answer, entirely separate from scope_class_
+# status.resolved_class. May legitimately stay null even while scope_
+# class_status.resolved_class == TOURNAMENT_SPECIFIC.
+_S2_EXTENT_FINALS_ONLY = "H2"
+_S2_EXTENT_WIDER_POPULATION = "H3"
 
 
 def _restriction_axis_cleared_status(axis):
@@ -691,31 +706,66 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
                 "by S1, not by itself or any other axis"
             )
 
-    # Session 8's central dependency check: tournament_extent_status.
-    # blocking_role.current_value must be mechanically consistent with
-    # scope_class_status's own live resolution, not merely declared once
-    # and left stale - mirrors the schema_representability_status check
-    # below, applied to the THIRD category this session introduces.
-    s2_blocking_role = rlc["tournament_extent_status"]["blocking_role"]
+    # Session 9's central principle, enforced mechanically: a PARENT
+    # classification (S1: what CLASS of scope is this?) must not encode
+    # the answer to a CHILD refinement (S2: if tournament-specific, how
+    # far did it extend?) - those are independently representable states.
+    # scope_class_status.resolved_class and tournament_extent_status.
+    # resolved_extent are therefore validated as two SEPARATE value/status
+    # pairs, each individually self-consistent, with no requirement that
+    # S2 resolve merely because S1 did.
     s1 = rlc["scope_class_status"]
     s1_cleared = s1["status"] == _restriction_axis_cleared_status("scope_class_status")
-    s1_hypothesis = s1.get("resolved_hypothesis") if s1_cleared else None
+    s1_class = s1.get("resolved_class")
+    if s1_cleared:
+        if s1_class not in (_S1_CLASS_GENERAL_REGIONAL, _S1_CLASS_TOURNAMENT_SPECIFIC):
+            raise AssertionError(
+                f"scope_class_status is cleared (PROVEN) but resolved_class is {s1_class!r} - must be "
+                f"exactly {_S1_CLASS_GENERAL_REGIONAL!r} or {_S1_CLASS_TOURNAMENT_SPECIFIC!r} (never an "
+                "H2/H3 value - S1 does not own that distinction)"
+            )
+    elif s1_class is not None:
+        raise AssertionError(
+            f"scope_class_status.status is {s1['status']!r} (not cleared/PROVEN) but resolved_class is "
+            f"{s1_class!r}, not null - a resolved class cannot exist without a PROVEN status"
+        )
+
+    # tournament_extent_status's OWN resolved_extent/status pair, entirely
+    # independent of S1 - this is the second half of the same principle:
+    # S2 may legitimately stay UNRESOLVED/null regardless of what S1 says.
+    s2 = rlc["tournament_extent_status"]
+    s2_cleared = s2["status"] == _restriction_axis_cleared_status("tournament_extent_status")
+    s2_extent = s2.get("resolved_extent")
+    if s2_cleared:
+        if s2_extent not in (_S2_EXTENT_FINALS_ONLY, _S2_EXTENT_WIDER_POPULATION):
+            raise AssertionError(
+                f"tournament_extent_status is cleared (PROVEN) but resolved_extent is {s2_extent!r} - must "
+                f"be exactly {_S2_EXTENT_FINALS_ONLY!r} or {_S2_EXTENT_WIDER_POPULATION!r}"
+            )
+    elif s2_extent is not None:
+        raise AssertionError(
+            f"tournament_extent_status.status is {s2['status']!r} (not cleared/PROVEN) but resolved_extent "
+            f"is {s2_extent!r}, not null - a resolved extent cannot exist without a PROVEN status (if H3 "
+            "has been established, S2 is not unresolved - H3 IS S2's answer)"
+        )
+
+    # Session 8's central dependency check, re-derived on the corrected
+    # vocabulary: tournament_extent_status.blocking_role.current_value
+    # must be mechanically consistent with scope_class_status.resolved_
+    # class alone - NEVER with tournament_extent_status's own resolved_
+    # extent, which this check does not even read.
+    s2_blocking_role = s2["blocking_role"]
     if not s1_cleared:
         expected_s2_role = _S2_BLOCKING_ROLE_PENDING
-    elif s1_hypothesis == "H1":
+    elif s1_class == _S1_CLASS_GENERAL_REGIONAL:
         expected_s2_role = _S2_BLOCKING_ROLE_NOT_APPLICABLE
-    elif s1_hypothesis in ("H2", "H3"):
+    else:  # s1_class == _S1_CLASS_TOURNAMENT_SPECIFIC, the only other value the check above admits
         expected_s2_role = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
-    else:
-        raise AssertionError(
-            f"scope_class_status is cleared (PROVEN) but resolved_hypothesis is {s1_hypothesis!r} - must be "
-            "exactly 'H1', 'H2', or 'H3' before tournament_extent_status.blocking_role can be evaluated"
-        )
     if s2_blocking_role.get("current_value") != expected_s2_role:
         raise AssertionError(
             f"tournament_extent_status.blocking_role.current_value is "
             f"{s2_blocking_role.get('current_value')!r}, expected {expected_s2_role!r} given "
-            f"scope_class_status.status={s1['status']!r} resolved_hypothesis={s1_hypothesis!r} - S2's "
+            f"scope_class_status.status={s1['status']!r} resolved_class={s1_class!r} - S2's "
             "blocking role must be recomputed whenever S1 changes, not left stale"
         )
     # In NO branch may S2's blocking role equal a value that would make it
@@ -731,7 +781,7 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
 
     # Session 7's own adversarial review found and this session personally
     # reproduced a real gap: checking that scope_class_status.status ==
-    # "PROVEN" is NOT the same as checking WHICH hypothesis it proved. A
+    # "PROVEN" is NOT the same as checking WHICH class it proved. A
     # mutation setting scope_class_status.status="PROVEN" while its prose
     # actually describes a tournament-specific finding, combined with
     # schema_representability_status separately (and wrongly) flipped to
@@ -739,21 +789,22 @@ def _assert_restriction_list_axes_are_independently_evidenced(packet):
     # structural depends_on check only verifies the DECLARED driver's
     # name, not that the derived axis's cleared VALUE is actually
     # consistent with what the driver resolved to. scope_class_status.
-    # resolved_hypothesis is the single machine-checkable source of truth
-    # for that: schema_representability_status may only be cleared when it
-    # is exactly "H1" (general-regional proven) - per schema_
-    # representability_status's own documented state_machine, "H2"/"H3"
-    # (tournament-specific) leaves it structurally BLOCKING regardless.
+    # resolved_class is the single machine-checkable source of truth for
+    # that: schema_representability_status may only be cleared when it is
+    # exactly _S1_CLASS_GENERAL_REGIONAL - per schema_representability_
+    # status's own documented state_machine, TOURNAMENT_SPECIFIC leaves it
+    # structurally BLOCKING regardless of tournament_extent_status's own
+    # resolved_extent (H2, H3, or still null - never inspected here).
     if rlc["schema_representability_status"]["status"] == _restriction_axis_cleared_status(
         "schema_representability_status"
     ):
-        resolved_hypothesis = rlc["scope_class_status"].get("resolved_hypothesis")
-        if resolved_hypothesis != "H1":
+        if s1_class != _S1_CLASS_GENERAL_REGIONAL:
             raise AssertionError(
-                f"schema_representability_status is cleared but scope_class_status.resolved_hypothesis is "
-                f"{resolved_hypothesis!r}, not 'H1' - per schema_representability_status's own state_machine, "
-                "only a PROVEN general-regional (H1) finding can clear it; a tournament-specific finding (H2 "
-                "or H3), or an unresolved scope_class_status, must leave it BLOCKING"
+                f"schema_representability_status is cleared but scope_class_status.resolved_class is "
+                f"{s1_class!r}, not {_S1_CLASS_GENERAL_REGIONAL!r} - per schema_representability_status's "
+                f"own state_machine, only a PROVEN general-regional finding can clear it; a "
+                f"{_S1_CLASS_TOURNAMENT_SPECIFIC!r} finding, or an unresolved scope_class_status, must "
+                "leave it BLOCKING"
             )
 
     all_cleared = all(
@@ -875,21 +926,23 @@ def _assert_six_load_bearing_axes_and_gate_still_blocks(packet):
         for hedge in ("not_PROVEN_because", "what_remains_unresolved", "explicit_date_never_found"):
             mrlc[axis].pop(hedge, None)
         for field_name in list(mrlc[axis].keys()):
-            if field_name in ("status", "source_ids", "schema_citations", "proposition", "depends_on", "resolved_hypothesis"):
+            if field_name in ("status", "source_ids", "schema_citations", "proposition", "depends_on", "resolved_class"):
                 continue
             if isinstance(mrlc[axis][field_name], str):
                 mrlc[axis][field_name] = "Hypothetically fully resolved by a future qualifying source."
     # scope_class_status's cleared status alone ("PROVEN") does not say
-    # WHICH hypothesis - resolved_hypothesis is the field that does, and
-    # schema_representability_status's own cleared value is only
-    # consistent with "H1" (see _assert_restriction_list_axes_are_
-    # independently_evidenced's value-consistency check below).
-    mrlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+    # WHICH class - resolved_class is the field that does, and schema_
+    # representability_status's own cleared value is only consistent with
+    # general-regional (see _assert_restriction_list_axes_are_independently_
+    # evidenced's value-consistency check below).
+    mrlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
     # session 8: tournament_extent_status is DELIBERATELY left at its
     # current (UNRESOLVED) research status here - proving S1 resolving to
-    # H1 does not require S2 to independently clear. Only its recomputed
-    # blocking_role.current_value needs to update, to NOT_APPLICABLE,
-    # matching S1's H1 resolution.
+    # general-regional does not require S2 to independently clear (session
+    # 9: nor could it meaningfully choose H2/H3 here even if it wanted to -
+    # S2's own resolved_extent stays null, consistent with its own status).
+    # Only blocking_role.current_value needs to update, to NOT_APPLICABLE,
+    # matching S1's general-regional resolution.
     mrlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
     mrlc["canonicalization_status"]["status"] = "RESOLVED"
     _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
@@ -3500,30 +3553,42 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         with self.assertRaises(AssertionError):
             _assert_restriction_list_axes_are_independently_evidenced(mutated)
 
-    def test_mutation_AH5_schema_representability_cleared_while_scope_class_proven_against_h1_is_rejected(self):
+    def test_mutation_AH5_schema_representability_cleared_while_scope_class_proven_tournament_specific_is_rejected(self):
         # Direct regression for a real gap this session's own adversarial
         # review found and this session personally reproduced (not merely
         # trusted): checking scope_class_status.status == "PROVEN" alone
-        # does NOT say WHICH hypothesis was proven. Before this test (and
-        # the resolved_hypothesis field/check it pins), a mutation setting
-        # scope_class_status.status="PROVEN" with prose describing a
-        # TOURNAMENT-SPECIFIC finding (i.e. AGAINST H1), combined with
-        # schema_representability_status separately flipped to its cleared
-        # status, passed both _assert_restriction_list_axes_are_
-        # independently_evidenced and _assert_restriction_list_axis_not_
-        # promoted_without_own_hedge_removed undetected - confirmed by
-        # direct reproduction against the pre-fix helpers before the fix
-        # landed. Every OTHER load-bearing axis is cleared, isolating the
-        # rejection to this specific value-consistency gap.
+        # does NOT say WHICH class was proven. Before this test (and the
+        # resolved_class field/check it pins), a mutation setting scope_
+        # class_status.status="PROVEN" with prose describing a TOURNAMENT-
+        # SPECIFIC finding, combined with schema_representability_status
+        # separately flipped to its cleared status, passed both
+        # _assert_restriction_list_axes_are_independently_evidenced and
+        # _assert_restriction_list_axis_not_promoted_without_own_hedge_
+        # removed undetected - confirmed by direct reproduction against
+        # the pre-fix helpers before the fix landed. Every OTHER load-
+        # bearing axis is cleared, isolating the rejection to this
+        # specific value-consistency gap. session 9: this mutation now
+        # uses resolved_class = TOURNAMENT_SPECIFIC (the class-level
+        # answer) rather than the old, semantically-wrong resolved_
+        # hypothesis = "H3" (which collapsed S2's own H2-vs-H3 answer into
+        # S1) - tournament_extent_status is left at its default UNRESOLVED/
+        # null throughout, which is now a fully coherent state, not a
+        # contradiction this test has to construct around.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
         for axis in RESTRICTION_LOAD_BEARING_AXES:
             rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
         rlc["scope_class_status"]["current_evidentiary_lean"] = (
-            "PROVEN AGAINST H1: tournament-specific scope (H2 or H3) established, general-regional policy "
+            "PROVEN AGAINST general-regional: tournament-specific scope established, general-regional policy "
             "ruled out."
         )
-        rlc["scope_class_status"]["resolved_hypothesis"] = "H3"  # tournament-specific, NOT H1
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+        # Keep tournament_extent_status.blocking_role consistent with S1's
+        # resolution, so the ONLY thing this mutation isolates is the
+        # schema_representability_status gap - not an incidental, unrelated
+        # blocking_role staleness that would also (correctly, but for the
+        # wrong stated reason) trip a different check.
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
         rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
         rlc["canonicalization_status"]["status"] = "RESOLVED"
         with self.assertRaises(AssertionError):
@@ -3676,18 +3741,20 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # unaffected by the archive injection
 
     def test_mutation_AP_s2_proven_alone_while_s1_unresolved_cannot_resolve_schema_representability(self):
-        # session 8, item 5 of the adjudicated mutation set: resolving S2
-        # (tournament_extent_status, H2-vs-H3) alone, while S1
-        # (scope_class_status) remains genuinely UNRESOLVED, must NOT be
-        # capable of unblocking schema_representability_status - it is
-        # driven by S1 alone. Every OTHER load-bearing axis is cleared here
-        # so the rejection is isolated to this specific dependency, not
-        # "something else was still open" (mirrors AH4's isolation
-        # technique). Historically (session 7) this test targeted a
-        # different, now-obsolete premise (S2 being load-bearing at all,
-        # which session 8 corrected) - repurposed rather than deleted, to
-        # preserve continuity of the mutation-id sequence and cover the
-        # user-specified scenario directly.
+        # session 8, item 5 of the adjudicated mutation set; Phase D item 7
+        # (session 9, vocabulary-corrected): resolving S2 (tournament_
+        # extent_status) alone to a valid extent, while S1 (scope_class_
+        # status) remains genuinely UNRESOLVED, must NOT be capable of
+        # unblocking schema_representability_status - it is driven by S1
+        # alone and never inspects S2's resolved_extent. Every OTHER
+        # load-bearing axis is cleared here so the rejection is isolated
+        # to this specific dependency, not "something else was still
+        # open" (mirrors AH4's isolation technique). Historically
+        # (session 7) this test targeted a different, now-obsolete premise
+        # (S2 being load-bearing at all, which session 8 corrected) -
+        # repurposed rather than deleted, to preserve continuity of the
+        # mutation-id sequence and cover the user-specified scenario
+        # directly.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
         for axis in RESTRICTION_LOAD_BEARING_AXES:
@@ -3696,41 +3763,48 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
         self.assertNotEqual("PROVEN", rlc["scope_class_status"]["status"])
         rlc["tournament_extent_status"]["status"] = "PROVEN"  # S2 resolved alone
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_FINALS_ONLY  # a valid, self-consistent H2
         rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
         rlc["canonicalization_status"]["status"] = "RESOLVED"
         with self.assertRaises(AssertionError):
             _assert_restriction_list_axes_are_independently_evidenced(mutated)
 
-    def test_mutation_AP2_s1_h1_with_s2_unresolved_behaves_per_state_machine_not_automatic_failure(self):
-        # session 8, item 1 of the adjudicated mutation set: S1 resolving
-        # to H1 while S2 remains genuinely UNRESOLVED must be accepted per
-        # the newly-derived state machine (S2 becomes NOT_APPLICABLE, and
-        # its own UNRESOLVED research status is irrelevant to blocking) -
-        # NOT automatically rejected merely because tournament_extent_
-        # status.status != "PROVEN". This is the direct converse of the
-        # bug session 8 fixed (S2 wrongly required to independently clear).
+    def test_mutation_AP2_s1_general_regional_with_s2_unresolved_behaves_per_state_machine_not_automatic_failure(self):
+        # session 8, item 1 of the adjudicated mutation set (vocabulary
+        # corrected session 9): S1 resolving to general-regional while S2
+        # remains genuinely UNRESOLVED/null must be accepted per the
+        # state machine (S2 becomes NOT_APPLICABLE, and its own UNRESOLVED
+        # research status is irrelevant to blocking) - NOT automatically
+        # rejected merely because tournament_extent_status.status !=
+        # "PROVEN". This is the direct converse of the bug session 8
+        # fixed (S2 wrongly required to independently clear). Also proves
+        # Phase D item 2 (no test ever needs to set S1's resolved value to
+        # H2 or H3) by construction - this mutation never does so.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
         for axis in RESTRICTION_LOAD_BEARING_AXES:
             rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
-        rlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
         rlc["schema_representability_status"]["status"] = "RESOLVED_EXISTING_SCHEMA_SUFFICIENT"
         rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NOT_APPLICABLE
         self.assertEqual("UNRESOLVED", rlc["tournament_extent_status"]["status"])  # deliberately still open
+        self.assertIsNone(rlc["tournament_extent_status"]["resolved_extent"])  # deliberately still null
         rlc["canonicalization_status"]["status"] = "RESOLVED"
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
 
-    def test_mutation_AP3_s1_h1_plus_schema_representability_resolved_is_accepted(self):
-        # session 8, item 2 of the adjudicated mutation set: S1=H1 plus
+    def test_mutation_AP3_s1_general_regional_plus_schema_representability_resolved_is_accepted(self):
+        # session 8, item 2 of the adjudicated mutation set (vocabulary
+        # corrected session 9), Phase D item 6: S1=general-regional plus
         # schema_representability_status correctly resolved to RESOLVED_
         # EXISTING_SCHEMA_SUFFICIENT (the only value the state machine
-        # permits under H1) must be accepted, with the recomputed S2
-        # blocking_role (NOT_APPLICABLE) consistent throughout.
+        # permits under this branch) must be accepted, with the
+        # recomputed S2 blocking_role (NOT_APPLICABLE) consistent
+        # throughout.
         mutated = copy.deepcopy(self.packet)
         rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
         for axis in RESTRICTION_LOAD_BEARING_AXES:
             rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
-        rlc["scope_class_status"]["resolved_hypothesis"] = "H1"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
         rlc["schema_representability_status"]["status"] = _restriction_axis_cleared_status(
             "schema_representability_status"
         )
@@ -3739,11 +3813,15 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
 
     def test_mutation_AP4_s1_tournament_specific_with_s2_unresolved_is_the_adjudicated_nonblocking_policy(self):
-        # session 8, item 4 of the adjudicated mutation set: S1 resolving
-        # to tournament-specific (H2 or H3) while S2 remains genuinely
-        # UNRESOLVED must ALSO be accepted for canonicalization purposes
-        # (S2's blocking_role recomputes to NON_BLOCKING_FOR_TARGET_
-        # ARTIFACT, not a block) - schema_representability_status,
+        # session 8, item 4 of the adjudicated mutation set (vocabulary
+        # corrected session 9), Phase D items 1 and 4: S1 resolving to
+        # TOURNAMENT_SPECIFIC while S2 remains genuinely UNRESOLVED/null
+        # must ALSO be accepted for canonicalization purposes (S2's
+        # blocking_role recomputes to NON_BLOCKING_FOR_TARGET_ARTIFACT,
+        # not a block) - this is the EXACT state session 9 was dispatched
+        # to make expressible: S1 PROVEN tournament-specific WITHOUT
+        # choosing H2 or H3, S2 genuinely still undetermined, and no
+        # internal contradiction. schema_representability_status,
         # however, correctly stays BLOCKING in this branch (a SEPARATE
         # schema-design task is required, per its own state machine) - so
         # this test asserts the S2-specific behavior directly rather than
@@ -3754,16 +3832,104 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         for axis in RESTRICTION_LOAD_BEARING_AXES:
             if axis == "scope_class_status":
                 rlc[axis]["status"] = "PROVEN"
-                rlc[axis]["resolved_hypothesis"] = "H3"
+                rlc[axis]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
             else:
                 rlc[axis]["status"] = _restriction_axis_cleared_status(axis)
         self.assertEqual("UNRESOLVED", rlc["tournament_extent_status"]["status"])  # deliberately still open
+        self.assertIsNone(rlc["tournament_extent_status"]["resolved_extent"])  # deliberately still null - THE point
         rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
         # schema_representability_status correctly remains BLOCKING here - do NOT clear it.
         rlc["canonicalization_status"]["status"] = "UNRESOLVED_BLOCKING"
         _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise: S2 is not what's blocking
         # Confirm S2 itself is never counted among what remains to clear.
         self.assertNotIn("tournament_extent_status", RESTRICTION_LOAD_BEARING_AXES)
+
+    def test_mutation_AP5_s1_general_regional_with_stale_s2_blocking_role_is_rejected(self):
+        # Phase D item 3 (session 9): S1 resolving to general-regional
+        # MUST produce S2 blocking_role NOT_APPLICABLE, not just "may" -
+        # leaving blocking_role at its prior (stale) value when S1
+        # changes is rejected, proving the recomputation is actually
+        # enforced rather than merely documented.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_class_status"]["status"] = "PROVEN"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_GENERAL_REGIONAL
+        self.assertEqual(
+            _S2_BLOCKING_ROLE_PENDING, rlc["tournament_extent_status"]["blocking_role"]["current_value"]
+        )  # deliberately left stale - not updated to NOT_APPLICABLE
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP6_s1_tournament_specific_with_s2_status_unresolved_but_extent_set_is_rejected(self):
+        # Phase D item 8 (session 9), the EXACT contradictory state the
+        # task names directly: S1 says tournament-specific, S2.status
+        # stays UNRESOLVED, but S2's own resolved_extent is set to 'H3' -
+        # if H3 has been established, S2 is NOT unresolved; H3 IS S2's
+        # answer. This must be rejected regardless of what S1 says -
+        # tested here specifically under S1=TOURNAMENT_SPECIFIC to prove
+        # the rejection is S2's own internal inconsistency, not merely a
+        # side-effect of S1's branch.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_class_status"]["status"] = "PROVEN"
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+        rlc["tournament_extent_status"]["blocking_role"]["current_value"] = _S2_BLOCKING_ROLE_NONBLOCKING_FOR_TARGET
+        self.assertEqual("UNRESOLVED", rlc["tournament_extent_status"]["status"])
+        rlc["tournament_extent_status"]["resolved_extent"] = _S2_EXTENT_WIDER_POPULATION  # contradiction: H3 set, but status still UNRESOLVED
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP7_s2_proven_with_null_resolved_extent_is_rejected(self):
+        # Phase D item 9 (session 9): S2.status = PROVEN but resolved_
+        # extent = null must be rejected - a cleared research status with
+        # no actual answer recorded is exactly the inverse contradiction
+        # of AP6, and both directions of this consistency must hold.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["tournament_extent_status"]["status"] = "PROVEN"
+        self.assertIsNone(rlc["tournament_extent_status"]["resolved_extent"])  # deliberately left null
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP8_s1_proven_with_null_resolved_class_is_rejected(self):
+        # The symmetric S1-side case of AP7: scope_class_status.status =
+        # PROVEN but resolved_class = null must be rejected too - the
+        # same self-consistency requirement applies to the parent axis,
+        # not only the child.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_class_status"]["status"] = "PROVEN"
+        self.assertIsNone(rlc["scope_class_status"]["resolved_class"])  # deliberately left null
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AP9_s1_unresolved_with_resolved_class_set_is_rejected(self):
+        # The symmetric S1-side case of AP6: scope_class_status.status
+        # stays UNRESOLVED but resolved_class is set to a real value -
+        # rejected for the same reason a resolved value cannot exist
+        # without a PROVEN status.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED", rlc["scope_class_status"]["status"])
+        rlc["scope_class_status"]["resolved_class"] = _S1_CLASS_TOURNAMENT_SPECIFIC
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_no_test_ever_sets_s1_resolved_value_to_h2_or_h3(self):
+        # Phase D item 10, verified structurally rather than asserted by
+        # convention: scans THIS TEST FILE's own source for any mutation
+        # that assigns scope_class_status's resolved-class field (under
+        # either the current name or the old, renamed one) to a literal
+        # 'H2' or 'H3' - S1 does not own that distinction, and no test
+        # should ever need to pretend it does, even hypothetically.
+        source = Path(__file__).read_text(encoding="utf-8")
+        violations = [
+            m.group(0)
+            for m in re.finditer(
+                r'\[["\'](?:resolved_class|resolved_hypothesis)["\']\]\s*=\s*["\'](?:H2|H3)["\']', source,
+            )
+        ]
+        self.assertEqual([], violations, f"a test sets S1's resolved value to H2/H3: {violations}")
 
     # ------------------------------------------------------------------
     # Adversarial review (2026-08-30, extended 2026-08-30 (session 5)): an independent
@@ -3975,7 +4141,12 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # folded into a uniform "ACCEPTED IN FULL" verdict) and that the
         # fix it drove is actually present on the axis it names.
         self.assertIn("CONFIRMED AS A REAL GAP", review["challenge_6_flat_and_dependency_enforcement"]["adjudication"])
-        self.assertIn("resolved_hypothesis", self.packet["tokyo_dome_research_current"]["restriction_list_current"][
+        # session 9 renamed resolved_hypothesis -> resolved_class (see the
+        # AP2/AP3/AP4/AP5/AP8/AP9 mutations above) - the underlying fix
+        # this pinning test protects (a machine-checkable value-
+        # consistency field on scope_class_status) is now named
+        # resolved_class; check for that instead.
+        self.assertIn("resolved_class", self.packet["tokyo_dome_research_current"]["restriction_list_current"][
             "scope_class_status"
         ])
 
