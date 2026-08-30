@@ -4,9 +4,11 @@ Fast rehydration for a fresh Brain session. Keep this short — point at the
 detailed doc rather than duplicating it. Every fact here is a claim to
 spot-check against live repo state, not a fact to relay forward unchecked.
 
-**Last updated:** 2026-08-30, after Brain accepted and merged the first
-Worker round (Tokyo Dome epistemic-wording fix, executed by a
-non-Claude model) and queued the next brief.
+**Last updated:** 2026-08-30, after Brain accepted and merged Worker
+round 2 (March 2010 banlist verification) and queued round 3. Full
+per-round history: `docs/agents/model-notes.md`. Coordination mechanics
+(sibling worktrees, the agent-inbox hook, project slash commands) are
+documented in `AGENTS.md` and `docs/agents/` — not repeated here.
 
 ## Repository
 
@@ -22,7 +24,7 @@ python -m retroformats build --check
 python -m unittest discover -t . -s tests -v
 ```
 
-**Canonical `main` SHA as of this writing:** `1cc6e63e78a7b8681941fcb58bc53c9619cf91ee`
+**Canonical `main` SHA as of this writing:** `079e0560c7ddac127deead128262a51f42ef977a`
 — verify with `git rev-parse origin/main`; do not trust this string once it's
 old.
 
@@ -55,7 +57,7 @@ merely modern community consensus" — this is the bar Brain checks Worker's
 | format | snapshot | pool basis | status |
 |---|---|---|---|
 | `2005-04-goat` | 2005-04-01 | extensional (Ignis GOAT whitelist) | shipped, `dist/lflists/2005-04-goat.lflist.conf` entry-for-entry identical to Ignis's reference list — same EDOPro content hash `0x28e9fc02` (order/name-independent), **not** byte-identical: Ignis's own shipped file has a duplicated line that makes its byte-level and in-client hashes diverge (see `docs/architecture.md`) |
-| `2010-03-edison` | 2010-04-24 | release-cutoff, 3,673 cards | shipped; rule profile intentionally `partial` (5 evidentially-unresolved flags, SEGOC pair highest priority — see `docs/research/edison-rules.md` §5a) |
+| `2010-03-edison` | 2010-04-24 | release-cutoff, 3,673 cards | shipped; banlist now `verified` (2026-08-30, card-by-card reconciled against the archived Konami primary source — round 2); rule profile intentionally `partial` (5 evidentially-unresolved flags, SEGOC pair highest priority — see `docs/research/edison-rules.md` §5a) |
 | `2011-09-tengu` | 2011-09-17 | release-cutoff, 4,562 cards | shipped (added 2026-08-27) |
 
 ## Current milestone
@@ -67,39 +69,46 @@ then: Tokyo Dome ("yugi-kaiba" codename) research sessions (2026-08-28
 through 2026-08-30, sessions 1-11), this framework install, and the first
 Worker round below. No format work is in flight.
 
-## Last accepted Worker round
+## Accepted Worker rounds (log: `docs/agents/model-notes.md`)
 
-**Accepted and merged (2026-08-30, commit `4624752`, executed by a
-non-Claude model — Worker is model-agnostic, see `AGENTS.md`):** the Tokyo
-Dome epistemic-wording fix. Both overclaim patterns flagged by external
-review were corrected in `docs/research/yugi-kaiba-format-source-gate.md`
-and `...-packet.json` — EXIF-authentication language ("authentic",
-"genuine primary", "an actual ... Konami-issued document") reworded to
-"purporting to be" / EXIF-consistent-with-capture framing; "found
-anywhere" / "stronger form of the single-hosted finding" reworded to scope
-explicitly to the channels actually searched. The JSON key
-`content_hash_confirmation_of_single_hosting` (which itself asserted the
-overclaim) was renamed to `wayback_content_hash_check_of_the_known_crop`
-after confirming no code/test reads it by name. Worker also caught one
-overclaim instance (`phase_g_content_completeness_result`) not listed in
-the brief. No adjudication verdict, status, digest, date, or count
-changed. Brain independently re-diffed every hunk, re-ran the grep checks
-the commit message claimed, and ran the full suite (931 tests) before
-merging — see the archived brief for the full spec:
-[`docs/briefs/archive/2026-08-30-tokyo-dome-epistemic-wording-fix.md`](briefs/archive/2026-08-30-tokyo-dome-epistemic-wording-fix.md).
+Two rounds accepted and merged so far, both 2026-08-30:
+
+1. **Tokyo Dome epistemic-wording fix** (commit `4624752`, non-Claude
+   model). Corrected the two overclaim patterns flagged by external
+   review in `docs/research/yugi-kaiba-format-source-gate.md` /
+   `...-packet.json` — see
+   [`docs/briefs/archive/001-...`](briefs/archive/001-2026-08-30-tokyo-dome-epistemic-wording-fix.md)
+   for the full spec. No adjudication verdict, status, digest, date, or
+   count changed.
+2. **March 2010 (Edison) banlist verification** (commit `079e056`,
+   Claude Sonnet 5 High). `data/banlists/tcg/2010-03.json` card-by-card
+   reconciled against its already-cited Konami archive source; exact
+   match on all 132 entries, upgraded `completeness` to `"verified"`.
+   Brain independently re-fetched the same archive page and
+   programmatically re-derived the match itself rather than trusting the
+   report — see
+   [`docs/briefs/archive/002-...`](briefs/archive/002-2026-08-30-march-2010-banlist-verification.md).
+   Also corrected an error in Brain's own brief (it guessed "46 entries"
+   from skimming; the real count is 132) — Worker counted from the real
+   data rather than anchoring on the wrong number.
+
+Both rounds: Brain independently re-diffed the commit, re-ran whatever
+the commit message claimed to have checked, and ran the full suite before
+merging — see `model-notes.md` for what each round showed about running
+Worker on the model that executed it.
 
 ## In-flight / next Worker task
 
-**Queued in [`docs/briefs/active.md`](briefs/active.md):** a
-`SOURCE VERIFICATION` task on `data/banlists/tcg/2010-03.json` (roadmap
-item 3). It already cites a Wayback-archived Konami primary source
-(`konami-limited-2010-03`, retrieved 2026-08-19) alongside Yugipedia, but
-`completeness` is still `"complete"`, not `"verified"` — meaning either
-the entries were never actually reconciled card-by-card against that
-primary source, or they were and the status just never got bumped. The
-brief asks Worker to actually do that reconciliation and report the real
-outcome (upgrade if it holds; document precisely what's missing if it
-doesn't), not assume a match either way.
+**Queued in [`docs/briefs/active.md`](briefs/active.md):** round 3, a
+`DATA/SCHEMA` task — roadmap item 2, the April 2005 GOAT banlist. Unlike
+round 2, this one has **no Yugipedia source cited yet at all**
+(`completeness: "partial"`) and needs the existing importer
+(`retroformats/importers/yugipedia_banlist.py`) actually run for the
+first time, then reconciled entry-by-entry against the current data —
+with any discrepancy reported and classified, not silently resolved
+either direction, since GOAT's defining trait is `reference_parity` with
+Project Ignis's list, which may deliberately differ from a literal
+reading of the original 2005 announcement.
 
 ## Parked research — do not reopen without new evidence
 
@@ -153,17 +162,16 @@ implementation.
   chronology representation redesign recommended but **not started**
   (`docs/research/edison-behaviour-gaps.md`) — premature to do more
   chronology research on those records until this lands.
-- Roadmap 1a/1b/1c/1e, 2, 3, 4b — see `docs/roadmap.md` Phase 1 follow-ups.
+- Roadmap 1a/1b/1c/1e, 4b — see `docs/roadmap.md` Phase 1 follow-ups.
+  (2 is in flight as round 3 above; 3 done as round 2.)
 - Edison rule profile: 5 evidentially-unresolved flags, SEGOC pair highest
   priority (`docs/research/edison-rules.md` §5a).
 
 ## Recommended next action
 
-Run the queued brief in `docs/briefs/active.md` (`SOURCE VERIFICATION`,
-March 2010 banlist reconciliation). After that: roadmap item 2 (April 2005
-GOAT banlist — currently `completeness: "partial"`, no Yugipedia source
-cited at all yet, needs an actual transcription pass, not just a
-reconciliation — bigger lift than item 3) is the natural next step. Do
-**not** start a new historical format next; the roadmap's own Phase-1
-hardening items (banlist verification, chronology) are more informative
-uses of the next few slots than breadth.
+Run the queued round-3 brief in `docs/briefs/active.md` (`DATA/SCHEMA`,
+April 2005 GOAT banlist import + reconciliation). After that, roadmap
+items 1a/1e are reasonable next candidates — both are bounded chronology/
+identity questions, not new breadth. Do **not** start a new historical
+format next; the roadmap's own Phase-1 hardening items are more
+informative uses of the next few slots than breadth.

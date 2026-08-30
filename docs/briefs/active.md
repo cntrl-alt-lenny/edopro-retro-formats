@@ -2,140 +2,165 @@
 
 Status: **queued, not started**. One brief lives here at a time; when
 Worker completes it (accepted or rejected by Brain), move this file to
-`docs/briefs/archive/<date>-<slug>.md` and replace it with the next one, or
+`docs/briefs/archive/<NNN>-<date>-<slug>.md` (zero-padded, check the
+archive for the last-used number) and replace it with the next one, or
 leave a one-line "no brief queued" placeholder.
 
 ---
 
-## MODE: SOURCE VERIFICATION
+## MODE: DATA/SCHEMA
 
 ## Goal
 
-Determine whether `data/banlists/tcg/2010-03.json`'s `completeness` field
-can be honestly upgraded from `"complete"` to `"verified"` by actually
-reconciling its 46 entries, card by card, against the Konami primary
-source already cited in `data/sources.json` — and if the reconciliation
-holds, make the upgrade; if it doesn't, or the source turns out not to
-support that, report exactly what you found instead of assuming either
-outcome going in.
+Transcribe the published April 2005 TCG Forbidden/Limited/Semi-Limited
+list from Yugipedia using the existing importer
+(`retroformats/importers/yugipedia_banlist.py`), reconcile it against
+`data/banlists/tcg/2005-04.json` (currently derived only from Project
+Ignis's GOAT whitelist counts), and upgrade `completeness` from
+`"partial"` honestly if -- and only to the extent -- the reconciliation
+actually supports it.
 
 ## Starting SHA
 
-Verify with `git log -1` on `main` before starting; note the actual SHA in
-your report.
+Verify with `git log -1` on `main` before starting; note the actual SHA
+in your report.
 
 ## Why this is next
 
-Roadmap item 3 (`docs/roadmap.md`, Phase 1) says: "Verify March 2010
-against the Konami archive snapshot (Internet Archive was unreachable this
-session); upgrade the banlist to `verified`." But `data/sources.json`
-already has a `konami-limited-2010-03` entry — a Wayback Machine URL
-pointing directly at Konami's own official list page, retrieved
-2026-08-19 — and it's already cited in `data/banlists/tcg/2010-03.json`'s
-`sources` array alongside the Yugipedia transcription. So either the
-archive access failure the roadmap note describes was resolved later that
-same session (the source's `retrieved` date matches) and the actual
-card-by-card comparison was simply never done or never reflected in the
-`completeness` field, or something else is blocking it that isn't written
-down anywhere. This brief exists to find out which, directly, rather than
-have Brain guess.
+Roadmap item 2 (`docs/roadmap.md`, Phase 1): "Cross-check the April 2005
+banlist. The GOAT banlist is currently derived from Ignis's whitelist
+counts. Transcribe the published April 2005 TCG list (Yugipedia `April
+2005 Lists (TCG)`) with the existing importer, reconcile, upgrade
+`completeness` to `complete`/`verified`, and document any deliberate GOAT
+community deviations if found." Round 3 in this project's Worker-round
+sequence, following the same pattern as round 2's March 2010 banlist
+verification (`docs/briefs/archive/002-2026-08-30-march-2010-banlist-verification.md`)
+but bigger: that banlist already had a Yugipedia source cited and just
+needed reconciling against a Konami primary; this one has no Yugipedia
+source at all yet and needs the actual import run for the first time.
 
 ## Relevant context
 
 Read:
 
-- `data/banlists/tcg/2010-03.json` — the record in question.
-- The `konami-limited-2010-03` and `yugipedia-march-2010` entries in
-  `data/sources.json` (grep for both ids).
-- `schemas/common.schema.json`'s `implementationStatus` definition — the
-  exact bar for `verified` is "complete AND the load-bearing historical
-  claims are corroborated by strong primary/period evidence, not merely
-  modern community consensus." `complete` requires "cross-checked against
-  at least one independent... source." The banlist is already `complete`;
-  the question is whether it also clears the higher `verified` bar.
-- `docs/errata.md` or `docs/releases.md` only if you need to understand
-  how `completeness` upgrades are handled elsewhere in this codebase as a
-  precedent for what "doing the work, not just changing the label" looks
-  like (skim, don't deep-read).
+- `data/banlists/tcg/2005-04.json` -- the record in question. Its own
+  `notes` field already states the exact gap: "TODO: cross-check against
+  the April 2005 TCG list as published (Yugipedia) and upgrade
+  completeness; the effective/superseded dates ... also need a primary
+  citation."
+- `retroformats/importers/yugipedia_banlist.py` -- read its module
+  docstring and `parse_limitation_list` function. It was used for the
+  March 2010 banlist; that's your worked example for exact usage
+  (`data/sources.json`'s `yugipedia-march-2010` /
+  `konami-limited-2010-03` entries show what the resulting `sources`
+  array should look like in shape, not content).
+- `docs/edopro-research.md` -- pins the BabelCDB revision this project
+  uses (`BabelCDB da54f28` as of this writing; confirm it's still what's
+  pinned, don't assume this brief's copy is current).
+- `docs/releases.md` around the `--babelcdb <BabelCDB clone>` examples --
+  shows how other importers in this codebase expect a local BabelCDB
+  clone to be passed.
 
-You do not need to read `docs/roadmap.md` beyond item 3, or any Tokyo Dome
-/ Edison rules / erratum material — unrelated to this task.
+You do not need to read anything about Tokyo Dome, Edison rules, or the
+erratum v2 model -- unrelated to this task.
 
 ## Scope
 
-1. Fetch the archived Konami page at the `konami-limited-2010-03` URL
-   (`http://web.archive.org/web/20100825095431/http://www.yugioh-card.com/en/limited/10_03_list.html`).
-   If it's unreachable from your environment, say so plainly and stop —
-   do not substitute a different source for the primary-source role
-   without flagging that substitution explicitly.
-2. Extract the actual Forbidden / Limited / Semi-Limited card list from
-   that page as it reads.
-3. Compare it, entry by entry, against `data/banlists/tcg/2010-03.json`'s
-   `entries` array (46 entries: card name + status). Note any card present
-   in one list and not the other, or with a different status, by name.
-4. If the two match exactly: update `completeness` to `"verified"` and
-   extend `notes` to state plainly that a card-by-card reconciliation
-   against the archived Konami page was performed and matched exactly
-   (name the date you did this). Do not just change the enum value without
-   this record of what was actually checked.
-5. If they don't match, or the source can't be reached, or the page's
-   list is genuinely ambiguous in some way (OCR artifacts, missing
-   section, etc.): leave `completeness` as `"complete"`, do not touch the
-   `entries` array, and report the discrepancy/blocker in full detail
-   instead. A partial or uncertain reconciliation is not grounds for
-   upgrading the status — see "Do not" below.
+1. Fetch the Yugipedia page's wikitext via the MediaWiki parse API
+   (`https://yugipedia.com/api.php?action=parse&page=April%202005%20Lists%20(TCG)&format=json&prop=wikitext`
+   -- confirm the exact page title/URL yourself; don't assume it matches
+   this exact string without checking, Yugipedia's naming isn't always
+   predictable from the March 2010 precedent).
+2. Clone BabelCDB at the pinned revision (or confirm a usable local
+   checkout already exists) so `yugipedia_banlist.py` can resolve card
+   names to passcodes.
+3. Run the importer to produce a candidate record for `tcg-2005-04`.
+4. Reconcile the importer's output against the current
+   `data/banlists/tcg/2005-04.json` entries, the same way round 2
+   reconciled the March 2010 banlist -- entry by entry, not sampled.
+5. If they match exactly: update `completeness` (to `"complete"` or
+   `"verified"` -- pick based on the actual bar each meets per
+   `schemas/common.schema.json`'s `implementationStatus` definition;
+   don't default to the higher one just because a source now exists),
+   add the new source(s) to `data/sources.json` and to this banlist's
+   `sources` array, and record in `notes` exactly what was checked and
+   against what.
+6. If they don't match: this is the interesting case the roadmap itself
+   anticipates ("document any deliberate GOAT-community deviations if
+   found"). Do not silently overwrite `entries` to match the Yugipedia
+   transcription -- GOAT's own defining characteristic (see
+   `formats/2005-04-goat/format.json`'s `errata_overrides` and its
+   `notes.md`) is `reference_parity` with the Project Ignis whitelist,
+   which may deliberately differ from a literal reading of the original
+   April 2005 announcement. Report every discrepancy by name, and
+   propose (don't unilaterally decide) whether each one looks like a
+   transcription error to fix, a genuine parity deviation to document, or
+   something else -- see "Non-goals" below on where your authority to act
+   on this stops.
+7. Also confirm (or fix, if you can source it) the `effective_date`
+   (2005-04-01) / `superseded_by_date` (2005-10-01) citation gap the
+   `notes` field flags -- these are currently "community-documented"
+   without a primary cite.
 
 ## Non-goals
 
-- Do not change any `entries` array value (card, passcode, or status)
-  based on this reconciliation without flagging it to Brain first as a
-  separate finding — this brief is about verifying the *existing* data,
-  not correcting it. If you find a genuine discrepancy, report it; don't
-  silently "fix" the JSON to match your reading of the archive page.
-- Do not touch `data/banlists/tcg/2005-04.json` (the GOAT banlist,
-  roadmap item 2) — different, larger task, not this brief.
-- Do not touch `formats/2010-03-edison/format.json`'s own
-  `implementation_status.banlist` field unless you've confirmed it
-  currently just mirrors the banlist's `completeness` (check first;
-  update only if it's supposed to track it and doesn't automatically).
-- Do not add a new source to `data/sources.json` unless the existing two
-  entries turn out to be insufficient for some reason you document.
+- Do not change GOAT's `entries` array to resolve a discrepancy against
+  Yugipedia without flagging it first -- see step 6. This brief verifies
+  and reconciles; it does not re-adjudicate GOAT's parity policy.
+- Do not touch `2010-03.json`, Edison, or Tengu data.
+- Do not touch `formats/2005-04-goat/format.json`'s
+  `implementation_status.banlist` unless you've confirmed (the same way
+  round 2 did for Edison) whether it's meant to mirror the banlist file's
+  own `completeness` -- check `retroformats/validate.py` yourself rather
+  than assume round 2's Edison finding carries over unchanged.
+- Do not touch `dist/` directly -- if anything changes that affects the
+  built lflist, regenerate via `python -m retroformats build`, don't
+  hand-edit.
 
 ## Protected invariants
 
-- `tests/test_repo_data.py::test_edison_banlist_counts` and other Edison
-  tests must still pass — they check `entries`, not `completeness`, so
-  they shouldn't be affected by a `completeness` change alone, but confirm
-  this rather than assume it.
-- `python -m retroformats validate` must still report the same error/
-  warning count for this banlist (0 errors either way; check whether any
-  warning specifically about `completeness` disappears, which would be
-  expected and fine).
-- Any Wayback Machine fetch you do is read-only evidence gathering — this
-  brief doesn't touch `dist/`, and `build --check` should be a no-op
-  either way.
+- `docs/architecture.md` and `formats/2005-04-goat/notes.md` describe
+  GOAT's output as required to stay entry-for-entry identical to Project
+  Ignis's reference list (EDOPro content hash `0x28e9fc02`,
+  order/name-independent -- see `docs/state.md` for the exact
+  "entry-for-entry, not byte-identical" distinction, already corrected
+  once this session for being overstated). `tests/test_repo_data.py`
+  pins this. If your reconciliation surfaces a genuine discrepancy
+  between Yugipedia's transcription and the current entries, resolving
+  it must not silently break that parity test -- if fixing a real error
+  would change GOAT's output, that's a bigger, separate decision to flag,
+  not something to push through in this brief.
+- Card names must resolve to real BabelCDB passcodes -- the importer
+  already refuses to guess on an unresolved/ambiguous name; don't work
+  around that by hand-resolving a name it rejected without saying so
+  explicitly in your report.
 
 ## Required investigation
 
-1. Confirm the Wayback URL is actually reachable from your environment
-   before concluding anything either way about the source itself.
-2. Do the full 46-entry reconciliation yourself — don't sample a few
-   entries and extrapolate "looks right."
-3. Check whether `formats/2010-03-edison/format.json`'s
-   `implementation_status.banlist` field is meant to mirror
-   `data/banlists/tcg/2010-03.json`'s own `completeness`, or is
-   independently set — read `docs/format-schema.md` if the relationship
-   isn't obvious from the two files alone.
+1. Confirm BabelCDB's pinned revision from `docs/edopro-research.md`
+   before cloning -- don't use `main`/`HEAD` of BabelCDB, which would be
+   inconsistent with everything else this repo cites it against.
+2. Do the full entry-by-entry reconciliation, not a sample.
+3. Check whether `formats/2005-04-goat/format.json`'s
+   `implementation_status.banlist` field is code-derived from anything
+   (grep `retroformats/validate.py` and `retroformats/model.py` for
+   `implementation_status` yourself -- round 2 already did this for a
+   different format and found no code linkage, but verify it still holds
+   here rather than citing round 2's finding as if it's a project-wide
+   guarantee).
 
 ## Acceptance criteria
 
-- A clear, evidenced answer to "does this reconcile," not a guess.
-- If upgraded: `completeness: "verified"`, `notes` records what was
-  checked and against what, `entries` array unchanged.
-- If not upgraded: `completeness` unchanged, and the report explains
-  exactly why (unreachable source / mismatch found — name it / genuine
-  ambiguity — describe it).
-- Full test suite still passes either way.
+- A real, evidenced answer on whether GOAT's current banlist entries
+  match the primary/community-published April 2005 list, not a guess.
+- Every discrepancy (if any) named explicitly, with a proposed
+  classification (transcription error / deliberate parity deviation /
+  unclear), not silently resolved.
+- If upgraded: correct `completeness` value for what was actually
+  checked, new sources cited in both `data/sources.json` and the
+  banlist's own `sources` array, `notes` states what was verified and how.
+- `tests/test_repo_data.py`'s GOAT parity/hash tests still pass.
+- Full test suite, validator, and `build --check` all still pass.
 
 ## Tests / validation
 
@@ -149,18 +174,21 @@ python -m unittest discover -t . -s tests -v
 
 ## Git expectations
 
-Commit on a new branch (e.g. `worker/verify-2010-03-banlist`). Do not
-merge to `main` yourself. Do not push unless asked.
+Work in the sibling worktree if running locally alongside a Brain session
+on the same machine (`docs/agents/worktree-mechanism.md`) -- fetch
+`origin/main` first and branch from there
+(e.g. `worker/verify-2005-04-banlist`). Do not merge to `main` yourself.
+Do not push unless asked.
 
 ## Completion-report schema
 
 Report:
 
 - Starting SHA, branch, final SHA.
-- Whether the archive page was reachable, and from where you tried it.
-- The full reconciliation result: match, or the specific discrepancies
-  found (name every card involved).
-- What you changed, file by file, if anything.
+- The exact Yugipedia page/URL used, and the BabelCDB revision cloned.
+- The full reconciliation result: exact match, or every discrepancy found
+  (name each card, both sides' status) with your proposed classification
+  for each.
+- What you changed, file by file, and why.
 - Exact output of the three validation commands.
-- Anything left genuinely uncertain — state it as uncertain, don't round
-  it to a clean yes/no if the evidence doesn't support one.
+- Anything left genuinely uncertain -- state it as uncertain.
