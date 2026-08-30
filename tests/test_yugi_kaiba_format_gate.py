@@ -2241,6 +2241,7 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 "first_effective_date_status", "source_authentication_status",
                 "schema_representability_status",
                 "source_contemporaneity_ledger", "contemporaneous_source_investigation_2026_08_30",
+                "tokyo_dome_vjump_page20_authentication_hunt_2026_08_30_session11",
             },
             set(rc.keys()),
         )

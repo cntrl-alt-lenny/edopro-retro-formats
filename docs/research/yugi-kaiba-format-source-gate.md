@@ -3029,3 +3029,123 @@ the certified 370-card pool, its digest, the Aug-25/Aug-26 snapshot/cutoff
 split, and the `community-retrospective` pool-legality recommendation are
 all untouched. No historical research was performed and no canonical
 Tokyo Dome artifact was created.
+
+## Primary-source authentication hunt (session 11, 2026-08-30)
+
+A genuine historical-research milestone, not another model correction:
+the state-model architecture is stable after ten rounds of adversarial
+correction, so this pass's mission was to locate, inspect, authenticate,
+and preserve the strongest obtainable evidence for the V Jump 1999-09
+Tokyo Dome feature - specifically, an independent copy of the interior
+restriction-card crop (still single-hosted at ygoldschool.com as of
+session 5) or of page 20 itself, whose location within the issue session
+5 already confirmed via the Yahoo Auctions table-of-contents photograph.
+
+### Search strategy
+
+Six parallel search lanes, each run to exhaustion: Japanese phrase search
+(page-number variants included); Japanese marketplace search (Yahoo
+Auctions/aucfan, Mercari, Mandarake, Suruga-ya, Rakuten, eBay, Fril);
+named-collector-lead search (daiti0526's full blog archive, other
+Japanese collector/retro blogs, forums, social posts); Wayback Machine /
+Internet Archive sweep, including a direct CDX API content-hash lookup
+for the known crop's exact image file; English-language sources (Reddit,
+Pojo, eBay, Heritage, Yugipedia/Fandom talk pages, YouTube); and an
+exact-verbatim-phrase propagation search for all seven distinctively-
+worded sentences transcribed from the known crop. Every candidate URL was
+then personally re-verified directly - not taken on a search agent's word
+alone - via direct curl/Bash fetches (routing around this sandbox's
+WebFetch-tool-level DNS failure for ygoldschool.com and its hard refusal
+of `web.archive.org` URLs) and, for every image found, personal
+multimodal inspection of the downloaded file.
+
+### What was found
+
+No independent copy of the interior restriction-card crop or of page 20
+was found anywhere - not via marketplace listing, not via collector
+blog, not via Wayback/CDX content-hash search, not via English-language
+sources, and not via verbatim propagation of any of the crop's seven
+most distinctive sentences (zero hits for all seven, across dozens of
+query variants). The known crop's exact image file was checked directly
+against the Wayback Machine's CDX API by content digest: it has been
+captured only at its one known URL, plus two purely mechanical same-
+domain derivatives (a thumbnail and a webp-express conversion) - not
+independent uploads. This is a stronger form of the "single-hosted"
+finding than session 5's search-based conclusion: a direct content-hash
+check, not merely the absence of a search hit.
+
+The single most significant new find was NOT the target crop: daiti0526's
+full post archive (212 URLs, enumerated via the Wayback CDX API and the
+site's own RSS feed - confirmed to contain no September 1999 V Jump post
+at all, closing that lead) includes two previously-unknown posts
+publishing EXIF-verified photographs of an authentic 1999 Konami Tokyo
+Dome invitation, guardian notification letter, and a full tournament
+rulebook. This is genuine new primary confirmation of the event's date
+(1999-08-26, Thursday, 12:00-17:30), venue (Tokyo Dome, Gate 24), and
+official identity, via a source-type - an actual period Konami-issued
+document - stronger than anything previously in this packet for that
+narrow purpose. It governs the PARALLEL Game Boy "Duel Monsters II: Dark
+Duel Stories" video-game tournament, however, with its own separate
+"cards you cannot use" list keyed to that game's internal card numbers -
+not the OCG restriction list this packet tracks, and it never mentions
+Expert Rules. It must never be read as OCG ruleset or restriction-list
+evidence; see `daiti0526-tokyo-dome-invitation-and-dm2-rulebook-2018` in
+the packet's `sources` array for the full adjudication.
+
+Three new Mercari listings were found and personally inspected (14
+photographs viewed directly): one (`mercari-m44588227599-vjump-sept1999-
+colophon`) is a currently-active listing whose own printed colophon gives
+this issue's precise bibliographic identity (Volume 7, Number 9, whole
+number 75, nominal issue date 1999-09-01) - a new fact, but explicitly
+NOT an effective-date finding: a magazine's printed issue date is
+customarily at or after its actual on-sale date, never a proof of it, so
+`first_effective_date_status` is unchanged. The other two (six-issue
+bundle listings) show only a card-giveaway promotional spread, not page
+20. A third, independently-hosted cover-only photograph (dejideji.com)
+was also found; it adds nothing beyond what the two existing marketplace
+cover sources already established.
+
+### Adjudication
+
+**Source-authentication verdict: C** for the specific interior-page
+authentication chain - no meaningful improvement. The one proposition
+this session's mission actually targeted was not found, despite a search
+meaningfully more exhaustive than session 5's. Per this pass's own
+instruction not to inflate B into A, the same discipline applies in the
+other direction: a more thorough negative search is not itself B -
+`source_authentication_status`'s load-bearing proposition (a source
+supporting both content membership AND target-event applicability that
+meets this project's verified bar) is not strengthened by any of this
+session's finds, since none of them bear on restriction-card content or
+applicability at all. What would still be missing for B or A is exactly
+what session 5 already named: an independent second hosting of the
+interior crop, or a documented chain of custody from the physical 1999
+magazine to the existing JPEG - neither exists after this session's
+search either.
+
+### A related, pre-existing staleness fix
+
+Independent of this session's new search: `tokyo_dome_event_ruleset_
+adjudication` (dated 2026-08-29) had never been reconciled with the V
+Jump crop's own content (discovered the next day, session 5, 2026-08-30)
+- it still read `event_specific_source_ids_inspected: []` and claimed no
+inspectable source existed, even though the crop directly states
+`採用ルールは「エキスパートルール」` ("The adopted rule is 'Expert
+Rules'") inside a feature specifically about the target event. Corrected
+to cite the source and accurately describe what it says - `status`
+remains `UNKNOWN` (unchanged; a hard-pinned regression test enforces
+this), since the source itself remains `SUPPORTED_BUT_INCOMPLETE`, not
+authenticated, so its unhedged wording does not by itself clear this
+project's verified-source bar. This is a correction of existing evidence
+that was never propagated, not new research and not an axis promotion.
+
+### What did not change
+
+No axis membership change; no gate redesign; canonicalization_status
+remains `UNRESOLVED_BLOCKING`; `architecture_verdict` remains
+`BLOCKED_BY_BOTH`; the certified 370-card pool, its digest, the
+Aug-25/Aug-26 snapshot/cutoff split, and the `community-retrospective`
+pool-legality recommendation are all untouched; the certified 19-product
+release ledger is untouched. No `formats/1999-08-tokyo-dome/` directory,
+canonical banlist, pool, or rule profile was created. `dist/` was not
+modified.
