@@ -15,8 +15,8 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/docs/assets/format-atlas.svg" title="Open the full-size format atlas">
-    <img src="docs/assets/format-atlas.svg" width="640" alt="Format atlas showing repository progress across the complete Format Library chronology">
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg" target="_blank" rel="noopener" title="Open the full-size format atlas">
+    <img src="docs/assets/format-atlas.svg" width="480" alt="Format atlas showing repository progress across the complete Format Library chronology">
   </a>
 </p>
 

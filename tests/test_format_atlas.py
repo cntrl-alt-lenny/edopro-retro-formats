@@ -107,10 +107,10 @@ class FormatAtlasTest(unittest.TestCase):
     def test_readme_uses_compact_clickable_full_size_atlas(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn(
-            'href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/docs/assets/format-atlas.svg"',
+            'href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/raw/refs/heads/main/docs/assets/format-atlas.svg"',
             readme,
         )
-        self.assertIn('src="docs/assets/format-atlas.svg" width="640"', readme)
+        self.assertIn('src="docs/assets/format-atlas.svg" width="480"', readme)
 
 
 if __name__ == "__main__":
