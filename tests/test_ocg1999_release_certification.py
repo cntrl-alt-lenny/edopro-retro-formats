@@ -477,12 +477,13 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         # Tokyo Dome is canonical-ready, and the pre-existing non-release
         # blockers (banlist/rules/engine) must remain exactly as frozen BY
         # THIS TASK - battle_calculation_semantics is deliberately excluded
-        # from that list: a later, unrelated engine-representability
-        # re-adjudication pass (2026-08-29, session 3) legitimately changed
-        # it to "RESOLVED WITH APPROXIMATION" after personally inspecting
-        # the pinned ocgcore source and finding the historical attacker-
-        # recoil arithmetic is already the engine's default behavior - that
-        # is a genuine, evidence-backed change unrelated to release-ledger
+        # from that list: later, unrelated engine-representability
+        # re-adjudication passes (2026-08-29 session 3, then 2026-08-30
+        # Phase 0 session 4) legitimately changed it to bare "RESOLVED"
+        # after personally inspecting the pinned ocgcore source and finding
+        # the historical attacker-recoil arithmetic is already the engine's
+        # EXACT default behavior (not merely an approximation) - that is a
+        # genuine, evidence-backed change unrelated to release-ledger
         # certification, not release-ledger scope creep.
         self.assertEqual("blocked", packet["canonicalization"])
         self.assertEqual(
@@ -495,7 +496,7 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         ):
             self.assertEqual("BLOCKING", packet["blocker_ledger"][still_blocking]["status"], msg=still_blocking)
         self.assertEqual(
-            "RESOLVED WITH APPROXIMATION", packet["blocker_ledger"]["battle_calculation_semantics"]["status"]
+            "RESOLVED", packet["blocker_ledger"]["battle_calculation_semantics"]["status"]
         )
         self.assertEqual("RESOLVED", packet["blocker_ledger"]["ocg_release_ledger"]["status"])
         self.assertEqual("RESOLVED", packet["blocker_ledger"]["missing_card_identities"]["status"])

@@ -30,10 +30,26 @@ format, banlist, card pool, or rule profile.
   `UNKNOWN`.
 - **Restriction list:** best current hypothesis is a tournament-specific
   (not nationwide) Limited-to-1 list for Raigeki, Dark Hole, and Trap Hole,
-  research confidence `MODERATE-TO-GOOD` (personally inspected 2004
-  Shueisha *Master Guide* p.84). Canonicalization status is
-  `UNRESOLVED_BLOCKING` regardless - no contemporaneous 1999 document has
-  been located.
+  0 Forbidden, 0 Semi-Limited. **Updated 2026-08-30 (session 4):** content
+  and tournament-specific scope are now each supported by THREE
+  non-circular, personally-inspected, independently-HOSTED sources - the
+  2004 Shueisha *Master Guide* p.84 retrospective; a page image attributed
+  to V Jump 1999-09, personally inspected via a Wayback Machine archive of
+  a blog that embeds it; and an extensive fan restriction-list chronology
+  independently archived since 2002-10, personally read in full. An
+  adversarial review pass (same session) found the original write-up
+  overclaimed on two points - genuine authorial independence for two of
+  the three sources, and how tightly the effective-date window could be
+  bound - both walked back after personal re-examination; see
+  `restriction_list_current.content_status` /
+  `.scope_status` / `.effective_date_status`, the
+  `adversarial_review_2026_08_30` record, and "Contemporaneous
+  restriction-list source recovery" near the end of this document.
+  Canonicalization status remains `UNRESOLVED_BLOCKING`: neither the V
+  Jump image's authentication chain nor the exact scope boundary
+  (August 26 finals only, vs. the whole national tournament including
+  qualifiers) is fully resolved - this is a narrower, more specific
+  remaining gap than "no contemporaneous document has been located."
 - **Full Chain/Spell-Speed/priority system:** historical adoption by
   Tokyo Dome is `UNKNOWN`. It is **not** an independent unconditional
   engine blocker. The narrower, `PROVEN`/bounded paradigm that *is* a
@@ -625,7 +641,7 @@ No shared schema or runtime mutation was justified by this gate.
 | Deck-size representation | RESOLVED WITH APPROXIMATION | `[40,999]` is a host ceiling, not historical infinity. |
 | Side/Fusion deck constraints | RESOLVED WITH APPROXIMATION | Side exact 10 fits; Fusion maximum is unlocated and host-bounded. |
 | Deck-out rule | BLOCKING | Higher-LP win is meaningful and has no pinned-core mechanism. |
-| Battle-calculation semantics | RESOLVED WITH APPROXIMATION | UPDATED 2026-08-29 (session 3): the historical result table (including the attacker-recoil outcome) matches the pinned engine's default behavior exactly, personally verified against `field::calculate_battle_damage` at the pinned ocgcore revision; the previously-claimed "not the modern Damage Step model" mismatch does not hold for the arithmetic. See "Engine-representability re-adjudication" near the end of this document. |
+| Battle-calculation semantics | RESOLVED | UPDATED 2026-08-30 (Phase 0, session 4): re-adjudicated from RESOLVED WITH APPROXIMATION to bare RESOLVED - the historical result table (including the attacker-recoil outcome) matches the pinned engine's default behavior EXACTLY, personally verified against `field::calculate_battle_damage` at the pinned ocgcore revision (the same exact-match pattern as First-turn draw/attack above, not the numeric-ceiling-approximation pattern used for e.g. Deck-size representation). See "Engine-representability re-adjudication" near the end of this document. |
 | Chain/Spell-Speed semantics | BLOCKING | Formal boundary is absent from available early evidence and flags. |
 | Errata chronology | RESOLVED | All 296 selections and exact identity sets are mechanically frozen. |
 | Errata implementation coverage | BLOCKING | 150 ambiguous; 47 unresolved candidate occurrences/records. |
@@ -1222,6 +1238,16 @@ therefore remains `STRONG_SECONDARY_RECONSTRUCTION` /
 
 ### Restriction-list adjudication
 
+> **UPDATE (2026-08-30, session 4):** this section's bottom-line outcome
+> (`UNRESOLVED_BLOCKING`) is UNCHANGED, but its evidence base below is
+> superseded - two additional, non-circular, personally-inspected sources
+> (a page image attributed to V Jump 1999-09, and an independently-archived
+> fan restriction chronology) were found this session, materially
+> strengthening the case for tournament-specific scope specifically. "The
+> specialist reconstruction... is itself third-hand and hedged" no longer
+> describes the strongest available scope evidence. See "Contemporaneous
+> restriction-list source recovery" near the end of this document.
+
 The exact required outcome is **`UNRESOLVED_BLOCKING`**.
 
 The three-card content remains supported: Raigeki, Dark Hole, and Trap Hole,
@@ -1238,10 +1264,10 @@ chronology, not independent scope proof.
 
 | Hypothesis | Current status | Why it cannot be promoted |
 | --- | --- | --- |
-| H1 — general OCG list | UNRESOLVED | List content is repeated, but no contemporaneous source proves ordinary nationwide scope. |
-| H2 — Tokyo Dome/event-only list | UNRESOLVED | The Master Guide wording is specific but five years late; no 1999 event sheet was found. |
-| H3 — other tournament-specific scope | UNRESOLVED | Tournament-oriented cataloguing exists, but the affected tournament population is unknown. |
-| H4 — retrospective reconstruction | PLAUSIBLE | The surviving web evidence is downstream and divergent; plausibility is not proof. |
+| H1 — general OCG list | UNRESOLVED | List content is repeated, but no contemporaneous source proves ordinary nationwide scope. Now against the weight of evidence (session 4) - see update below. |
+| H2 — Tokyo Dome/event-only list | UNRESOLVED | The Master Guide wording is specific but five years late; no 1999 event sheet was found. Session 4: now also supported by two independent sources, still not pinned to finals-day specifically. |
+| H3 — other tournament-specific scope | UNRESOLVED | Tournament-oriented cataloguing exists, but the affected tournament population is unknown. Session 4: the V Jump page's own context (written during ongoing qualifiers) shows the restriction was being DISCUSSED during qualifiers, which is not proof it APPLIED during qualifiers - revised after adversarial review from an earlier, overclaimed "strongest lean toward H3" reading; H2/H3 are roughly evenly unresolved. |
+| H4 — retrospective reconstruction | PLAUSIBLE | The surviving web evidence is downstream and divergent; plausibility is not proof. Session 4: weakened, not eliminated, by three independently-HOSTED sources converging (independent AUTHORSHIP is demonstrated for only two of the three groups - see the Adversarial review subsection below). |
 
 Accordingly, the list verdict is not `PROVEN_GENERAL_OCG`,
 `PROVEN_TOKYO_DOME_ONLY`, or `PROVEN_TOURNAMENT_SCOPE_OTHER`.
@@ -1666,7 +1692,9 @@ arithmetic is unrepresentable: `rules.facts` (battle_damage entry),
 `rules.candidate_core_flags.known_gaps` (removed `early-battle-calculation`,
 archived under `superseded_findings` rather than silently deleted),
 `blocker_ledger.battle_calculation_semantics` (BLOCKING →
-RESOLVED WITH APPROXIMATION), `primary_source_resolution_2026_08_29.`
+RESOLVED WITH APPROXIMATION; further re-adjudicated 2026-08-30, Phase 0
+session 4, to bare RESOLVED - see that section's own update note),
+`primary_source_resolution_2026_08_29.`
 `engine_reassessment` (NOT_REPRESENTABLE → REPRESENTABLE_EXACT_BY_DEFAULT),
 `canonicalization_blockers` (battle-calculation semantics → RESOLVED; engine
 representability summary re-derived from current state, not preserved as
@@ -1696,3 +1724,234 @@ even though one of the three legs supporting the engine half is gone.
 No canonical Tokyo Dome format, banlist, pool, or rule profile was created.
 The 19-product release ledger, 370-card pool, and GOAT/Edison/Tengu are
 unchanged.
+
+## Contemporaneous restriction-list source recovery (session 4, 2026-08-30)
+
+This pass attempted to close the restriction-list historical blocker with a
+contemporaneous 1999 source, per an explicit lead: a Japanese retrospective
+claims a restriction-list revision appeared in "Vジャンプ1999年9月号" (V
+Jump, September 1999 cover-designated issue), on sale 1999-07-21. The issue
+DESIGNATION (September) and the actual on-sale STREET DATE (July 21) are
+kept explicitly distinct throughout - never conflated.
+
+### V Jump 1999-09: found, personally inspected, not fully authenticated
+
+A page image captioned "東京ドーム大会ルール　出典:Vジャンプ1999年9月号"
+("Tokyo Dome Tournament Rule, Source: V Jump 1999 September issue") was
+located on a specialist blog (ygoldschool.com, 2021-09-17) and personally
+inspected via a Wayback Machine snapshot (the live domain fails DNS
+resolution in this sandbox; the archived copy was fetched directly and
+succeeded). Personally transcribed:
+
+> 使用枚数が制限されたカードたち！ (Cards whose usage count has been
+> RESTRICTED!)
+>
+> 左に並んでいる3種類のカードたち…。なんとこれらは、『決闘者伝説』では1枚
+> ずつしかデッキに入れることができないのだ!! じゅうぶん気をつけよう!
+> (The 3 types of cards lined up on the left... these can only be included
+> ONE COPY EACH in a deck AT "Duelist Legend" [the event]!! Be very
+> careful!)
+
+next to card images labelled 「落とし穴」(Trap Hole), 「ブラック・ホール」
+(Black Hole/Dark Hole), 「サンダー・ボルト」(Thunder Bolt/Raigeki).
+Elsewhere on the same page, in a passage explaining Expert Rules and match
+conditions:
+
+> ただいま『決闘者伝説』の全国大会出場権をかけた予選のまっただ中っ!! 大会
+> は使用Cの枚数制限などがあるので、試合用のデッキを作っておこう!
+> (Right now we are in the middle of qualifiers for a spot in the "Duelist
+> Legend" national tournament!! Since the TOURNAMENT has card-count
+> restrictions, let's prepare a match-ready deck!)
+
+This is editorial/player-facing game-guide narration (character-dialogue
+style), not a verbatim Konami press release quoted in full. It ties the
+restriction explicitly to the event by name, written while qualifiers were
+still ongoing - internal evidence the page predates the August 26 finals.
+**Authenticity caveat, not resolved:** this image is hosted by exactly ONE
+source found in this research chain; no independent second hosting, no page
+number, and no issue/date marker printed on the page itself were found -
+the September-1999 attribution rests entirely on the hosting blog's own
+caption. Unlike the Official Guide Starter Book scan elsewhere in this
+packet (file metadata cross-verified against archive.org's own API), this
+image's chain of custody is not independently documented. Treated as
+SUPPORTED_BUT_INCOMPLETE evidence, not PROVEN.
+
+The discovery trail: a commenter ("マルコヴィッチ") on the already-cited
+yugioh-history.com first named this exact V Jump issue (2020-06-16),
+citing a now-inaccessible Mercari (Japanese resale marketplace) listing
+where "the relevant part was barely visible" in the photos - that listing
+is confirmed sold/delisted (no Wayback snapshot exists, 403 on direct
+access). The ygoldschool.com photograph (2021-09-17, over a year later)
+appears to be an independent second discovery of the same source, not a
+copy of the comment.
+
+### An independent fan restriction-list chronology, archived since 2002
+
+A separate, more surprising find: an extensive personal chronology of every
+OCG restriction-list revision from 1999 through 2002-05-01
+(home.att.ne.jp/moon/puppiy/rule/E-rule/Data3.htm, "遊戯王OCGエキスパート
+ルールHP"). This exact URL was reported as exhaustively unreachable by a
+dedicated research agent earlier in this same session (WebFetch-tool
+refusal, Wayback 429 rate-limiting, CDX API failures, proxy failures) - and
+by prior research sessions before this one. It was successfully fetched
+directly via a plain HTTP request to the Wayback Machine's own hosting.
+Personally cross-checked TWO snapshots taken 3+ years apart (2002-10-17 and
+2005-12-24): word-for-word identical for the relevant entry, confirming
+stability rather than a later addition or edit. The oldest (chronologically
+first) entry reads:
+
+> ◆1999年7月〜8月　１回目の大会（東京ドーム）用に発表された制限　●制限
+> カード　１枚制限　以下のカードはデッキに１枚まで。（サイドデッキ含む）
+> 「サンダー・ボルト」「ブラック・ホール」「落とし穴」
+>
+> ("1999, July-August: the restriction announced for the 1st tournament
+> [Tokyo Dome]. Restricted cards, 1-copy limit: the following cards are
+> limited to 1 in the deck [including the side deck]: Thunder Bolt, Black
+> Hole, Trap Hole.")
+
+The page states, as of its most recent (2002-05-01) entry, that no card
+had EVER been Forbidden in OCG history up to that point - independently
+checkable against real Yu-Gi-Oh! OCG history and consistent with it, lending
+the page's overall care real weight. **Caveat:** unlike several LATER
+entries in the same chronology (which tie a revision to "X product released
+1 month prior"), this earliest 1999 entry cites no source of its own - it
+is a specialist's personal compilation, not itself a magazine scan.
+
+This resolves a previously-flagged concern: an old Yugipedia citation
+described this page's title as "Forbidden/Limited Card Lists May 15, 2000."
+The page's actual `<title>` tag, checked directly at both snapshots, reads
+"遊戯王ＯＣＧ【資料庫】３/その他" (a generic archive-page title) - the
+"2000年5月15日" string is one of many DATED SECTION HEADINGS within the
+page's own multi-year chronology, not the page's title. Most likely
+explanation: the citing 2017 Yugipedia editor used their own descriptive
+gloss rather than the literal title - not evidence the page is unreliable.
+
+### The Valuable Book 1: a second, independent circumstantial signal
+
+A named commenter ("めう", yugioh-history.com, 2021-07-06) reports
+personally checking their own physical copy of The Valuable Book 1
+(Shueisha, published 1999-08-20 - already a certified product in this
+repository's own release ledger, 6 days before Tokyo Dome): its Expert
+Rules pages have no explicit restriction notation, but every sample deck
+recipe in the book caps Thunder Bolt, Black Hole, and Trap Hole at exactly
+1 copy each, including in decks that would clearly benefit from more. Not
+personally verified by the adjudicator this session (no accessible scan of
+the book's interior was located) - recorded as a specific, checkable,
+named individual's account of an already-certified product, not as directly
+inspected evidence.
+
+### What was not found
+
+No Tokyo Dome tournament programme, entry form, rule sheet, or organizer
+announcement - a dedicated, tightly-scoped search this session for
+event-specific primary material found none. No independent second hosting
+of the V Jump page image. The Mercari listing that originated the discovery
+trail is confirmed inaccessible.
+
+### Adjudication, axis by axis
+
+*Revised 2026-08-30 after an adversarial review pass, see below - the
+walk-back described there is folded directly into this section rather than
+left in the original, more generous, first-draft wording.*
+
+**Content** (`content_status`): `SUPPORTED_BUT_INCOMPLETE`, substantially
+strengthened - three independently-HOSTED sources (Master Guide 2004; the
+V Jump image; the fan chronology) now agree on the exact same three cards,
+each Limited to 1, zero Forbidden, zero Semi-Limited. Independent HOSTING
+is demonstrated; independent AUTHORSHIP/DISCOVERY is not fully demonstrated
+for two of the three - the commenter who first named the V Jump issue
+(マルコヴィッチ, 2020) and the later image poster (ygoldschool.com, 2021)
+cite the same issue, and nothing rules out the poster having learned of it
+from that earlier comment. What the image adds beyond the comment (full
+page layout, match-condition rules, character art) argues against pure
+copying without proving independent discovery. Net: closer to two
+independence groups (Master Guide; the V-Jump-plus-fan-chronology cluster)
+than three.
+
+**Scope** (`scope_status`): `SUPPORTED_BUT_INCOMPLETE`, strengthened for
+"tournament-specific, not general/nationwide" (H1 is now against the weight
+of evidence) - but the precise finals-only (H2) versus
+whole-tournament-including-qualifiers (H3) boundary remains genuinely open
+and, on reflection, roughly EVENLY open, not H3-leaning. The V Jump intro
+sentence ("大会は使用Cの枚数制限などがあるので") sits above and introduces
+BOTH the match-conditions box and the restricted-card box on the same
+spread; its exact phrase "枚数制限" textually echoes the restricted-card
+box's own heading far more than the match-conditions box's plain count
+statements, so on vocabulary alone it more plausibly points at the 3-card
+restriction. But even under that reading, the passage only proves the
+restriction was being publicly DISCUSSED while qualifiers were running - not
+that it APPLIED to qualifying matches, as opposed to being advance notice of
+an eventual finals-only rule. "Discussed during qualifiers" and "in effect
+during qualifiers" are different claims, and only the former is textually
+supported. This tension is recorded, not force-reconciled.
+
+**Effective date** (`effective_date_status`): `SUPPORTED_BUT_INCOMPLETE` -
+no source states a single explicit "effective from" date. Triangulating a
+PUBLICATION-timing window (V Jump's on-sale convention; the fan chronology's
+"1999年7月〜8月" bracket) does not, by itself, narrow an EFFECTIVE-date
+window - doing so would silently assume H3 is correct to make the
+narrowing sound meaningful, which is circular given H3 is itself unresolved
+(see Scope above). The Valuable Book 1 finding is an unverified secondhand
+account (a comment, not a personally-inspected page) and is recorded as a
+lead, not corroboration. The only EXPLICIT date attached to the restriction
+by any source remains Master Guide's August 26, 1999, and it is attached as
+a scope qualifier ("大会限定") on that source's list header, not stated as
+an effective-date sentence. Publication date, announced future effective
+date, and tournament date remain explicitly distinguished throughout.
+
+**Canonicalization** (`canonicalization_status`): remains
+`UNRESOLVED_BLOCKING` - unchanged as a label, narrowed as a reason, though
+less dramatically narrowed than the first draft of this section claimed
+(see Adversarial review below). What would close it: independent
+authentication of the V Jump image's provenance chain, OR an explicit
+source resolving the finals-vs-whole-tournament scope question, OR an
+explicit stated effective date, OR an actual Tokyo Dome tournament
+programme/rule sheet (still not found).
+
+### Adversarial review
+
+An independent reviewer was asked to argue against every promotion above,
+specifically attacking content→scope laundering, publication-date→
+effective-date laundering, event-context→tournament-only-list laundering,
+false independent corroboration among repeated modern sources, and whether
+"three independent sources" is illusory if all three ultimately trace to
+Master Guide or to each other. The full exchange is recorded in
+`restriction_list_current.contemporaneous_source_investigation_2026_08_30.
+adversarial_review_2026_08_30`. Summary of what survived personal
+re-examination of the primary evidence (not accepted or rejected on the
+reviewer's word alone):
+
+1. **Content independence overstated** - accepted in part. "Independently-
+   authored" was too strong for the V-Jump/fan-chronology pair; revised to
+   "independently-hosted." A counter-consideration was kept on record (the
+   image contains more than the originating comment describes).
+2. **Scope: content→scope laundering** - the reviewer's literal claim (the
+   key sentence might refer to deck-size rules instead of the restriction)
+   turned out weaker than argued once the page image was personally
+   re-examined: word-choice favors the restriction reading. But the
+   reviewer's deeper point - discussed-during-qualifiers ≠
+   applied-during-qualifiers - was fully correct and is now the operative
+   reasoning. The prior "strongest concrete lean toward H3" framing has
+   been removed; H2/H3 are now presented as genuinely, roughly evenly
+   unresolved.
+3. **Effective date: circular reasoning** - accepted in full. The "tightly
+   bounded window" framing silently assumed H3 to justify itself. Removed;
+   the axis now keeps publication-timing evidence and effective-date claims
+   strictly separate, and flags the Valuable Book 1 account as unverified.
+
+The reviewer's own overall verdict: canonicalization_status was correctly
+left blocked regardless of these three challenges; if anything, the
+scope_status and effective_date_status write-ups were "slightly too
+generous" pre-review, while content_status's upgrade was "the most
+defensible of the three." No axis changed STATUS as a result of this
+review (all three remain `SUPPORTED_BUT_INCOMPLETE`, canonicalization
+remains `UNRESOLVED_BLOCKING`) - only the strength of the supporting prose
+was corrected.
+
+Scope unchanged otherwise: no canonical Tokyo Dome banlist, format, pool,
+or rule profile was created; the release ledger, 370-card pool, and
+GOAT/Edison/Tengu are untouched; the restriction-list blocker remains
+blocking even though this specific research thread advanced substantially -
+other historical and engine blockers (event-specific ruleset, exact
+tournament structure) remain, so canonicalization stays out of scope
+regardless.

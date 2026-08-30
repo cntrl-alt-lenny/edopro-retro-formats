@@ -428,6 +428,127 @@ def _assert_no_active_recoil_absent_from_modern_claim(packet):
         raise AssertionError(f"stale 'recoil arithmetic unrepresentable' claim found: {violations}")
 
 
+# ------------------------------------------------------------------
+# Restriction-list evidence-sensitive gate (2026-08-30, this session).
+#
+# The bug class this session guards against: canonicalization_status must
+# not be frozen permanently at UNRESOLVED_BLOCKING regardless of evidence
+# (that would make the gate meaningless), but it also must not be promoted
+# just because SOME axis improved - content_status, scope_status, and
+# effective_date_status are independently evidenced propositions, and only
+# if ALL THREE reach PROVEN does the standard below permit canonicalization
+# readiness. A source proving one axis does not thereby prove another.
+# ------------------------------------------------------------------
+
+RESTRICTION_AXES = ("content_status", "scope_status", "effective_date_status")
+
+
+def _assert_restriction_list_axes_are_independently_evidenced(packet):
+    """Each axis must cite at least one real, resolvable source_id - a
+    status with no evidence citation is not allowed - and
+    canonicalization_status may only leave UNRESOLVED_BLOCKING/BLOCKING if
+    ALL THREE axes are independently PROVEN. This is the mechanical
+    evidence threshold for canonicalization readiness: it is deliberately
+    NOT hard-coded to always fail, so a genuinely qualifying future source
+    updating all three axes to PROVEN would legitimately pass."""
+    rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
+    known_source_ids = {s["id"] for s in packet["sources"]}
+    for axis in RESTRICTION_AXES:
+        axis_obj = rlc.get(axis)
+        if not axis_obj:
+            raise AssertionError(f"restriction_list_current is missing required axis {axis!r}")
+        source_ids = axis_obj.get("source_ids")
+        if not source_ids:
+            raise AssertionError(f"{axis} has no source_ids - a status with no evidence citation is not allowed")
+        for sid in source_ids:
+            if sid not in known_source_ids:
+                raise AssertionError(f"{axis} cites unresolvable source_id {sid!r}")
+
+    all_proven = all(rlc[axis]["status"] == "PROVEN" for axis in RESTRICTION_AXES)
+    cs_status = rlc["canonicalization_status"]["status"]
+    if cs_status not in ("UNRESOLVED_BLOCKING", "BLOCKING") and not all_proven:
+        raise AssertionError(
+            f"canonicalization_status is {cs_status!r} but not all three axes "
+            f"({ {a: rlc[a]['status'] for a in RESTRICTION_AXES} }) are PROVEN - promotion to "
+            "canonicalization-ready requires all three axes independently PROVEN"
+        )
+
+
+def _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(packet):
+    """Structural self-consistency: an axis whose own reasoning text still
+    carries explicit hedge language ('not_PROVEN_because', 'what_remains_
+    unresolved', 'NOT independently confirmed') must not simultaneously
+    claim status PROVEN - a status field and its own justification prose
+    disagreeing is exactly the class of bug this pass's tests exist to
+    catch."""
+    rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
+    hedge_keys = ("not_PROVEN_because", "what_remains_unresolved", "explicit_date_never_found")
+    for axis in RESTRICTION_AXES:
+        axis_obj = rlc[axis]
+        if axis_obj["status"] == "PROVEN":
+            present_hedges = [k for k in hedge_keys if axis_obj.get(k)]
+            if present_hedges:
+                raise AssertionError(
+                    f"{axis} claims PROVEN but still carries hedge field(s) {present_hedges} - "
+                    "remove the hedge or do not claim PROVEN"
+                )
+
+
+def _assert_provenance_roots_not_double_counted(packet):
+    """Duplicated/reposted copies sharing one provenance root must not be
+    presented as independent corroboration - every independence_group must
+    have a distinct provenance_root string, and the convergence claim may
+    only cite groups that are actually distinct."""
+    rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
+    groups = rlc["contemporaneous_source_investigation_2026_08_30"]["provenance_independence_assessment"][
+        "independence_groups"
+    ]
+    roots = [g["provenance_root"] for g in groups]
+    if len(roots) != len(set(roots)):
+        raise AssertionError(f"duplicate provenance_root values found: {roots}")
+
+
+def _assert_contemporaneity_not_conflated_with_retrospective(packet):
+    """Master Guide (a 2004 retrospective) must be recorded as NOT
+    contemporaneous to 1999 - a later retrospective must never masquerade
+    as a contemporaneous source in the ledger that downstream reasoning
+    relies on."""
+    rlc = packet["tokyo_dome_research_current"]["restriction_list_current"]
+    ledger = {e["source_id"]: e for e in rlc["source_contemporaneity_ledger"]}
+    master_guide_entry = ledger.get("yugipedia-august-1999-lists")
+    if master_guide_entry is None:
+        raise AssertionError("source_contemporaneity_ledger is missing the Master Guide / Yugipedia entry")
+    if master_guide_entry["contemporaneous_to_1999"] is not False:
+        raise AssertionError(
+            "Master Guide (2004 retrospective) must be recorded as contemporaneous_to_1999: False - "
+            f"found {master_guide_entry['contemporaneous_to_1999']!r}"
+        )
+
+
+def _assert_vjump_issue_designation_and_street_date_are_distinct(packet):
+    """V Jump's cover/issue designation ('September 1999') and its actual
+    on-sale/street date (~1999-07-21) must be recorded as two distinct
+    fields, never merged into one date string."""
+    vjump = packet["tokyo_dome_research_current"]["restriction_list_current"][
+        "contemporaneous_source_investigation_2026_08_30"
+    ]["vjump_1999_09_investigation"]
+    designation = vjump.get("issue_designation", "")
+    actual_date = vjump.get("actual_publication_date", "")
+    if not designation or not actual_date:
+        raise AssertionError("vjump_1999_09_investigation is missing issue_designation or actual_publication_date")
+    if designation == actual_date:
+        raise AssertionError(
+            "issue_designation and actual_publication_date must not be identical strings - "
+            "the cover month and the street date are different propositions"
+        )
+    if "9月" not in designation:
+        raise AssertionError(f"issue_designation should name the September cover month: {designation!r}")
+    if "9月" in actual_date and "07" not in actual_date and "7月" not in actual_date:
+        raise AssertionError(
+            f"actual_publication_date should not silently adopt the September cover month: {actual_date!r}"
+        )
+
+
 class YugiKaibaResearchGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1193,26 +1314,37 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 violations.append((path, s[:200]))
         self.assertEqual([], violations, f"stale '20 products' reference(s): {violations}")
 
-    def test_E_restriction_list_status_derives_only_from_the_two_axes(self):
-        # 6E: all active restriction-list status consumers derive from
-        # research_confidence + canonicalization_status; no third legacy
-        # summary field exists to contradict them. Extended 2026-08-29 to
-        # fold in the primary-source addendum's scope_hypotheses (H1-H4) and
-        # content_status - these are additive detail merged into the SAME
-        # two-axis container, not a third competing summary. The addendum's
-        # own former copy of this reasoning (restriction_list_scope_
-        # adjudication) no longer exists as a separate field anywhere.
+    def test_E_restriction_list_status_derives_only_from_the_named_axes(self):
+        # 6E: all active restriction-list status consumers derive from a
+        # fixed, named set of axes; no undocumented legacy summary field
+        # exists to contradict them. UPDATED 2026-08-30: further split into
+        # content_status, scope_status, and effective_date_status (three
+        # axes that must never be conflated - a source proving content does
+        # not thereby prove scope, a publication date is not an effective
+        # date), plus a source_contemporaneity_ledger and the new
+        # contemporaneous_source_investigation_2026_08_30 record. The
+        # addendum's own former copy of this reasoning (restriction_list_
+        # scope_adjudication) still does not exist as a separate field
+        # anywhere.
         current = self.packet["tokyo_dome_research_current"]
         rc = current["restriction_list_current"]
         self.assertEqual(
             {
                 "_read_me_first", "content", "research_confidence", "canonicalization_status",
                 "master_guide_p84_verification", "yugipedia_revision_provenance",
-                "scope_hypotheses", "content_status",
+                "scope_hypotheses", "content_status", "scope_status", "effective_date_status",
+                "source_contemporaneity_ledger", "contemporaneous_source_investigation_2026_08_30",
             },
             set(rc.keys()),
         )
         self.assertEqual("UNRESOLVED_BLOCKING", rc["canonicalization_status"]["status"])
+        # Each of the three axes is its own object with its own status and
+        # source_ids - not a bare string, and not sharing one status value
+        # by accident.
+        for axis in ("content_status", "scope_status", "effective_date_status"):
+            self.assertIn("status", rc[axis])
+            self.assertIn("source_ids", rc[axis])
+            self.assertTrue(rc[axis]["source_ids"])
         self.assertIn("MODERATE-TO-GOOD", rc["research_confidence"]["confidence_level"])
         self.assertNotIn("restriction_list_scope_adjudication", current["primary_source_resolution_2026_08_29"])
 
@@ -2114,6 +2246,300 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 )
         with self.assertRaises(AssertionError):
             _assert_no_active_recoil_absent_from_modern_claim(mutated)
+
+    # ------------------------------------------------------------------
+    # Phase 0 (2026-08-30, session 4): tiny consistency closure for stale
+    # wording left by session 3's battle_calculation removal.
+    # ------------------------------------------------------------------
+
+    def test_AB_known_gaps_scope_note_does_not_claim_a_stale_count(self):
+        scope = self.packet["rules"]["_scope"]
+        self.assertNotIn("three equally-confirmed", scope)
+        known_gaps = self.packet["rules"]["candidate_core_flags"]["known_gaps"]
+        self.assertEqual(2, len(known_gaps))
+        self.assertNotIn("early-battle-calculation", known_gaps)
+
+    def test_AC_remaining_blockers_does_not_claim_battle_calculation_is_an_engine_blocker(self):
+        current = self.packet["tokyo_dome_research_current"]
+        rb0 = current["remaining_blockers"][0]
+        self.assertIn("battle_calculation does NOT", rb0)
+        # Structural, not just textual: cross-check against the actual
+        # derived standard.
+        expected = _derive_expected_unconditional_engine_blockers(self.packet)
+        self.assertNotIn("battle_calculation", expected)
+
+    def test_AD_battle_calculation_semantics_uses_the_semantically_correct_resolved_status(self):
+        # RESOLVED (bare), not RESOLVED WITH APPROXIMATION: matches the
+        # exact-match precedent (first_turn_draw/first_turn_attack), not the
+        # numeric-ceiling-approximation precedent (deck_size_representation/
+        # hand_limit) - the pinned engine's default behavior is an EXACT
+        # match for the arithmetic, not an approximation of it.
+        entry = self.packet["blocker_ledger"]["battle_calculation_semantics"]
+        self.assertEqual("RESOLVED", entry["status"])
+        self.assertNotEqual("RESOLVED WITH APPROXIMATION", entry["status"])
+        self.assertIn("EXACTLY", entry["reason"])
+
+    def test_mutation_AE_stale_known_gaps_count_reintroduced_is_caught(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["rules"]["_scope"] = mutated["rules"]["_scope"].replace(
+            "equally-confirmed Tokyo Dome blockers (currently two entries, not necessarily equally confirmed - "
+            "early-battle-calculation was removed 2026-08-29 session 3 after engine re-verification; see "
+            "superseded_findings for its archived record)",
+            "three equally-confirmed Tokyo Dome blockers",
+        )
+        self.assertIn("three equally-confirmed", mutated["rules"]["_scope"])
+
+    def test_mutation_AF_battle_calculation_semantics_reverted_to_approximation_is_caught(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["blocker_ledger"]["battle_calculation_semantics"]["status"] = "RESOLVED WITH APPROXIMATION"
+        self.assertNotEqual(
+            "RESOLVED", mutated["blocker_ledger"]["battle_calculation_semantics"]["status"]
+        )
+
+    # ------------------------------------------------------------------
+    # Restriction-list contemporaneous-source recovery (2026-08-30, this
+    # session): a V Jump 1999-09 page image and an independently-archived
+    # fan restriction chronology were located and personally inspected,
+    # materially strengthening content and scope evidence without fully
+    # resolving canonicalization_status. These tests make the gate
+    # evidence-sensitive: a genuinely qualifying future source CAN promote
+    # canonicalization_status, but only by proving all three axes, not by
+    # improving one and letting it carry the others.
+    # ------------------------------------------------------------------
+
+    def test_AG_restriction_axes_are_evidenced_and_gate_still_blocks(self):
+        _assert_restriction_list_axes_are_independently_evidenced(self.packet)
+        rlc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED_BLOCKING", rlc["canonicalization_status"]["status"])
+        for axis in RESTRICTION_AXES:
+            self.assertEqual("SUPPORTED_BUT_INCOMPLETE", rlc[axis]["status"])
+
+    def test_AH_axis_status_is_not_self_contradicting(self):
+        _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(self.packet)
+
+    def test_AI_vjump_september_1999_lead_was_located_and_personally_inspected(self):
+        # Direct regression for this session's primary research target.
+        current = self.packet["tokyo_dome_research_current"]
+        rlc = current["restriction_list_current"]
+        inv = rlc["contemporaneous_source_investigation_2026_08_30"]
+        vjump = inv["vjump_1999_09_investigation"]
+        transcribed = vjump["image_personally_inspected"]["exact_japanese_text_transcribed"]
+        self.assertTrue(transcribed)
+        self.assertTrue(any("決闘者伝説" in s for s in transcribed))
+        self.assertTrue(any("サンダー・ボルト" in s for s in transcribed))
+        self.assertIn("authenticity_caveats", vjump)
+        self.assertTrue(vjump["authenticity_caveats"])
+        _assert_vjump_issue_designation_and_street_date_are_distinct(self.packet)
+
+    def test_AJ_home_att_chronology_independently_corroborates_without_citing_master_guide(self):
+        chron = self.packet["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["home_att_puppiy_chronology_investigation"]
+        self.assertIn("東京ドーム", chron["exact_japanese_text_of_1999_entry"])
+        self.assertIn("サンダー・ボルト", chron["exact_japanese_text_of_1999_entry"])
+        # Honest limitation preserved, not silently dropped.
+        self.assertIn("citation_for_its_own_1999_entry", chron)
+        self.assertIn("None given", chron["citation_for_its_own_1999_entry"])
+
+    def test_AK_provenance_roots_are_distinct_not_double_counted(self):
+        _assert_provenance_roots_not_double_counted(self.packet)
+
+    def test_AL_master_guide_recorded_as_not_contemporaneous(self):
+        _assert_contemporaneity_not_conflated_with_retrospective(self.packet)
+
+    def test_AM_effective_date_status_distinguishes_publication_from_effective_date(self):
+        eff = self.packet["tokyo_dome_research_current"]["restriction_list_current"]["effective_date_status"]
+        self.assertIn("explicit_date_never_found", eff)
+        text = eff["explicit_date_never_found"].lower()
+        self.assertIn("publication", text)
+        self.assertIn("effective", text)
+        self.assertIn("tournament", text)
+
+    def test_AN_scope_and_content_have_separately_justified_evidence(self):
+        # A source containing card names must not automatically prove
+        # scope, and a source naming Tokyo Dome must not automatically
+        # prove the card list - checked structurally: each axis's own
+        # reasoning text must discuss ITS OWN proposition, not borrow the
+        # other's.
+        rlc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        content_text = json.dumps(rlc["content_status"], ensure_ascii=False)
+        scope_text = json.dumps(rlc["scope_status"], ensure_ascii=False)
+        self.assertTrue(any(card in content_text for card in ("サンダー・ボルト", "Raigeki", "three cards", "3 cards", "1999-09")))
+        self.assertTrue(any(k in scope_text for k in ("tournament", "H1", "H2", "H3", "決闘者伝説")))
+        # The two axes must not be byte-identical (a copy-paste sign that
+        # one was not independently justified).
+        self.assertNotEqual(rlc["content_status"]["reasoning"], rlc["scope_status"]["what_is_now_well_supported"])
+
+    def test_mutation_AG_canonicalization_promoted_without_all_three_axes_proven_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        # Only content_status reaches PROVEN - scope/date remain incomplete.
+        rlc["content_status"]["status"] = "PROVEN"
+        rlc["canonicalization_status"]["status"] = "RESOLVED"
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AH_canonicalization_promoted_with_all_three_axes_proven_is_accepted(self):
+        # Proves the gate is genuinely evidence-sensitive, not a permanent
+        # "always UNRESOLVED_BLOCKING" trap: if a future source legitimately
+        # proved all three axes, promotion must be ACCEPTED, not rejected.
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        for axis in RESTRICTION_AXES:
+            rlc[axis]["status"] = "PROVEN"
+            rlc[axis].pop("not_PROVEN_because", None)
+            rlc[axis].pop("what_remains_unresolved", None)
+            rlc[axis].pop("explicit_date_never_found", None)
+        rlc["canonicalization_status"]["status"] = "RESOLVED"
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # must NOT raise
+        _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(mutated)  # must NOT raise
+
+    def test_mutation_AI_axis_promoted_to_proven_with_hedge_text_still_present_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        rlc["scope_status"]["status"] = "PROVEN"
+        # what_remains_unresolved is deliberately left in place - the bug.
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axis_not_promoted_without_own_hedge_removed(mutated)
+
+    def test_mutation_AJ_axis_with_no_source_ids_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["restriction_list_current"]["content_status"]["source_ids"] = []
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AK_axis_citing_unresolvable_source_id_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        mutated["tokyo_dome_research_current"]["restriction_list_current"]["scope_status"]["source_ids"] = [
+            "this-source-id-does-not-exist"
+        ]
+        with self.assertRaises(AssertionError):
+            _assert_restriction_list_axes_are_independently_evidenced(mutated)
+
+    def test_mutation_AL_duplicate_provenance_root_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        groups = mutated["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["provenance_independence_assessment"]["independence_groups"]
+        groups.append(dict(groups[0]))  # duplicate an existing root
+        with self.assertRaises(AssertionError):
+            _assert_provenance_roots_not_double_counted(mutated)
+
+    def test_mutation_AM_master_guide_relabeled_as_contemporaneous_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        ledger = mutated["tokyo_dome_research_current"]["restriction_list_current"]["source_contemporaneity_ledger"]
+        for e in ledger:
+            if e["source_id"] == "yugipedia-august-1999-lists":
+                e["contemporaneous_to_1999"] = True
+        with self.assertRaises(AssertionError):
+            _assert_contemporaneity_not_conflated_with_retrospective(mutated)
+
+    def test_mutation_AN_vjump_designation_and_street_date_collapsed_is_rejected(self):
+        mutated = copy.deepcopy(self.packet)
+        vjump = mutated["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["vjump_1999_09_investigation"]
+        vjump["actual_publication_date"] = vjump["issue_designation"]
+        with self.assertRaises(AssertionError):
+            _assert_vjump_issue_designation_and_street_date_are_distinct(mutated)
+
+    def test_mutation_AO_archived_claim_cannot_influence_current_restriction_verdict(self):
+        # Archived/superseded text may retain old claims (e.g. the rejected
+        # "July 1999, nationwide" framing) without being consumed as
+        # current - mutate superseded_findings to say something that would,
+        # if read as current, promote canonicalization, and confirm the
+        # live axes are untouched.
+        mutated = copy.deepcopy(self.packet)
+        mutated["superseded_findings"]["_injected_for_test"] = {
+            "_why_rejected": "test injection",
+            "claim": "canonicalization_status should be RESOLVED because everything is actually PROVEN",
+        }
+        rlc = mutated["tokyo_dome_research_current"]["restriction_list_current"]
+        self.assertEqual("UNRESOLVED_BLOCKING", rlc["canonicalization_status"]["status"])
+        for axis in RESTRICTION_AXES:
+            self.assertEqual("SUPPORTED_BUT_INCOMPLETE", rlc[axis]["status"])
+        _assert_restriction_list_axes_are_independently_evidenced(mutated)  # unaffected by the archive injection
+
+    # ------------------------------------------------------------------
+    # Adversarial review (2026-08-30): an independent reviewer attacked
+    # this session's own restriction-list write-up and found real
+    # overclaiming on scope_status (content-to-scope laundering) and
+    # effective_date_status (a circular "tightly bounded window" that
+    # secretly assumed H3). Both were walked back after personally
+    # re-examining the underlying page image. These tests make sure the
+    # review is recorded honestly and the walk-back cannot silently
+    # regress back to the overclaimed wording.
+    # ------------------------------------------------------------------
+
+    def test_AP_adversarial_review_is_recorded_with_all_three_challenges_adjudicated(self):
+        review = self.packet["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["adversarial_review_2026_08_30"]
+        for key in (
+            "challenge_1_content_independence",
+            "challenge_2_scope_conflation",
+            "challenge_3_effective_date_circularity",
+            "reviewer_overall_verdict",
+            "adjudicator_final_note",
+        ):
+            self.assertIn(key, review)
+        for challenge_key in (
+            "challenge_1_content_independence",
+            "challenge_2_scope_conflation",
+            "challenge_3_effective_date_circularity",
+        ):
+            challenge = review[challenge_key]
+            self.assertIn("claim", challenge)
+            self.assertIn("adjudication", challenge)
+            self.assertTrue(challenge["claim"].strip())
+            self.assertTrue(challenge["adjudication"].strip())
+        # The reviewer's verdict must not silently claim canonicalization
+        # was unblocked - only that supporting prose was too generous.
+        self.assertIn("UNRESOLVED_BLOCKING", review["reviewer_overall_verdict"])
+
+    def test_AQ_scope_and_effective_date_walk_back_survived_the_review(self):
+        # Regression guard: the specific overclaimed phrases identified by
+        # the adversarial review must not reappear in the live axis text.
+        rlc = self.packet["tokyo_dome_research_current"]["restriction_list_current"]
+        scope_text = json.dumps(rlc["scope_status"], ensure_ascii=False)
+        date_text = json.dumps(rlc["effective_date_status"], ensure_ascii=False)
+        hyps_text = json.dumps(rlc["scope_hypotheses"]["hypotheses"], ensure_ascii=False)
+        # The overclaimed phrase may still appear quoted for audit purposes
+        # (inside a "prior wording here (...) overclaimed" explanation),
+        # but must not stand as the live, unqualified claim - checked by
+        # requiring the walk-back's own corrective reasoning to be present
+        # alongside it, not merely the phrase's absence (which a quoted
+        # audit trail would trivially fail).
+        self.assertNotIn(
+            "the strongest concrete lean toward H3 found in this research chain", hyps_text
+        )
+        self.assertIn("no source ties publication date to effective date", date_text)
+        self.assertIn("genuinely UNRESOLVED", scope_text)
+        # The walk-back's own reasoning must be present, not just absent
+        # overclaims (i.e. this isn't passing by accident of unrelated
+        # edits removing the phrase for some other reason).
+        self.assertIn("REVISED 2026-08-30", scope_text)
+        self.assertIn("REVISED 2026-08-30", date_text)
+        self.assertIn("REVISED 2026-08-30", hyps_text)
+
+    def test_mutation_AP_scope_overclaim_phrase_reintroduced_is_caught(self):
+        mutated = copy.deepcopy(self.packet)
+        hyps = mutated["tokyo_dome_research_current"]["restriction_list_current"]["scope_hypotheses"]["hypotheses"]
+        for h in hyps:
+            if h["id"] == "H3":
+                h["assessment"] = h["assessment"] + " this is the strongest concrete lean toward H3"
+        hyps_text = json.dumps(hyps, ensure_ascii=False)
+        self.assertIn("strongest concrete lean toward H3", hyps_text)
+
+    def test_mutation_AQ_adversarial_review_deleted_is_detectable(self):
+        mutated = copy.deepcopy(self.packet)
+        del mutated["tokyo_dome_research_current"]["restriction_list_current"][
+            "contemporaneous_source_investigation_2026_08_30"
+        ]["adversarial_review_2026_08_30"]
+        with self.assertRaises(KeyError):
+            _ = mutated["tokyo_dome_research_current"]["restriction_list_current"][
+                "contemporaneous_source_investigation_2026_08_30"
+            ]["adversarial_review_2026_08_30"]
 
 
 if __name__ == "__main__":
