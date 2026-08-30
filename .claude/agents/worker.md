@@ -108,14 +108,19 @@ explicit High effort:
    `{ agentType: 'worker', model: 'sonnet', effort: 'high' }` pins both
    model and effort precisely. Good for a self-contained brief that fits in
    one context and doesn't need its own branch/PR lifecycle.
-2. **A human launches a standalone Claude Code session** for a brief that
-   needs its own branch, commits, and independent PR review: start a normal
-   session in this repo, select Sonnet 5 as the model, set reasoning effort
-   to High via whatever the running Claude Code build's `/config` (or
-   equivalent launch flag) exposes at the time, and open with this file and
-   the brief in `docs/briefs/active.md`. This is the expected path for
-   anything Brain shouldn't just self-review inline — it preserves "Worker
-   never merges its own work" as an actual human gate, not a polite fiction.
+2. **A human launches a standalone session** (Claude Code or otherwise —
+   see "This role is model-agnostic" above) for a brief that needs its own
+   branch, commits, and independent review: start a normal session, select
+   the model/effort at launch, and open with this file and the brief in
+   `docs/briefs/active.md`. This is the expected path for anything Brain
+   shouldn't just self-review inline — it preserves "Worker never merges
+   its own work" as an actual human gate, not a polite fiction. **If this
+   runs on the same machine as a Brain session sharing the same clone,
+   point it at the sibling worktree**
+   (`docs/agents/worktree-mechanism.md`), not Brain's own checkout — two
+   sessions sharing one working directory is exactly how a Worker branch
+   once ended up with unrelated Brain commits stacked on top of it before
+   review.
 
 Do not invent a third mechanism (e.g. a made-up frontmatter `effort:` key)
 if neither of these fits — fall back to documenting the gap for the human

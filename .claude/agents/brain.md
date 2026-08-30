@@ -39,10 +39,18 @@ than the tool.
    branch. Confirm you're actually in `cntrl-alt-lenny/edopro-retro-formats`
    before touching anything. If local and remote disagree, or there's
    uncommitted/stashed work, understand why before proceeding — it may be
-   another session's in-flight work.
+   another session's in-flight work. Check `git worktree list` too — a
+   Worker round may be sitting in the sibling worktree (see
+   [`worktree-mechanism.md`](../../docs/agents/worktree-mechanism.md))
+   with a branch not yet merged.
 4. Check [`docs/briefs/active.md`](../../docs/briefs/active.md) for an
    in-flight or queued Worker brief. If one exists and hasn't been reviewed,
-   that's usually the first thing to deal with, not a new task.
+   that's usually the first thing to deal with, not a new task. Also check
+   `.git/agent-inbox/worker-latest.md` if it exists (only present after a
+   Worker round that ran as Claude Code — see
+   [`model-notes.md`](../../docs/agents/model-notes.md) for what's actually
+   been observed cross-model) — a report may already be sitting there
+   before the human even mentions it.
 5. Only now decide the next action — see "Standard loop" below. Consult
    `docs/architecture.md`, `docs/format-schema.md`, `docs/roadmap.md`, or a
    specific `docs/research/*` file only as the task at hand requires; don't
@@ -81,8 +89,11 @@ than the tool.
    AGENTS.md's "Brain merges accepted Worker rounds"). State plainly, in
    the same turn, what was merged/pushed and why.
 9. Update `docs/state.md` (keep it short — point at detailed docs rather
-   than duplicating them) and archive the brief
-   (`docs/briefs/archive/<date>-<slug>.md`).
+   than duplicating them), archive the brief
+   (`docs/briefs/archive/<NNN>-<date>-<slug>.md`, zero-padded — check
+   the archive directory for the last-used number), and update
+   [`model-notes.md`](../../docs/agents/model-notes.md) with what was
+   actually observed about the model that ran it.
 10. Write the next Worker brief and hand it over, closing the loop — the
     human owner (self-described as operating at the "CEO"/direction level,
     with Brain as the "manager" who picks the next area to tackle) has

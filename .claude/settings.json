@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "description": "Project-level Claude Code settings for edopro-retro-formats. Hooks: block a `git push` that would ship validator/build drift, and capture each session's final reply into a shared .git/agent-inbox/ so Brain and Worker (when both run as Claude Code, in the sibling worktrees described in docs/agents/worktree-mechanism.md) don't rely on the human copy-pasting reports. See each hook's own docstring for exactly what it does and its limits (notably: the inbox hook only fires for Claude Code sessions, not a Worker round run through a different vendor's tool). Hook interpreter is `python`, matching this project's own documented Windows fallback (README: 'On Windows, use python or py -3 if python3 is not available') and confirmed working on the primary dev machine, which has no python3 on PATH at all. A macOS/Linux setup where only python3 exists needs both `command` strings below changed to python3 -- there is no single invocation proven portable across this project's actual two OSes, so don't silently assume one direction is universally safer than the other.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/pre_bash.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/save_agent_reply.py"
+          }
+        ]
+      }
+    ]
+  }
+}

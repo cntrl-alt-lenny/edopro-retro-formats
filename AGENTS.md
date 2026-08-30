@@ -57,7 +57,12 @@ researcher/historian/reviewer/validator agents for these.
 
 **Worker never self-accepts and never merges its own substantive work**
 unless the human explicitly changes this policy. A Worker report is
-evidence for Brain to check, not a verdict.
+evidence for Brain to check, not a verdict. When both Brain and Worker
+run as Claude Code sessions, a `Stop` hook mirrors each session's final
+reply into `.git/agent-inbox/<role>-latest.md` so Brain can check there
+too — but don't rely on it: it never fires for a Worker round run through
+a different vendor's tool, which this project explicitly allows (above).
+A missing or stale inbox file means "unknown," never "nothing happened."
 
 **Brain merges accepted Worker rounds and keeps the loop moving.** The
 human owner operates at the direction/strategy level (what to work on,
@@ -110,7 +115,16 @@ These predate this coordination framework and outrank any process below.
 - **Protect unrelated work.** Before anything destructive
   (`reset --hard`, force-push, discarding uncommitted changes), check
   `git status` and whether another session has work in flight; stash or
-  branch instead of clobbering.
+  branch instead of clobbering. Brain and a locally-run Worker use
+  **separate sibling git worktrees**, not the same checkout with
+  branch-switching — see
+  [`docs/agents/worktree-mechanism.md`](docs/agents/worktree-mechanism.md).
+  This exists because it already went wrong once: a Worker round ran in
+  Brain's own checkout and a later Brain session didn't notice before
+  committing on top of it. Re-check `git branch`/`git status` at the
+  start of *every* discrete task within a session, not just once at
+  session start — the mistake above happened mid-session, not at the
+  top of one.
 - **Repository/source evidence outranks agent narrative.** A prior report
   (including this repo's own research docs) describing something as
   "verified" or "resolved" is a claim to re-check against the actual data,
@@ -129,8 +143,19 @@ These predate this coordination framework and outrank any process below.
 ## Where to look
 
 - Live state / what to do next: [`docs/state.md`](docs/state.md)
+  (`/status` in a Claude Code session runs the rehydration sequence)
 - Architecture and invariants: [`docs/architecture.md`](docs/architecture.md),
   [`docs/format-schema.md`](docs/format-schema.md)
-- Active/queued Worker briefs: [`docs/briefs/active.md`](docs/briefs/active.md)
+- Active/queued Worker briefs: [`docs/briefs/active.md`](docs/briefs/active.md);
+  completed ones move to `docs/briefs/archive/<NNN>-<date>-<slug>.md`
+  (zero-padded sequence number, then date, then slug — the number is the
+  primary sort key once there are enough archived briefs that dates alone
+  stop disambiguating same-day rounds)
+- How Brain and Worker share a machine without colliding:
+  [`docs/agents/worktree-mechanism.md`](docs/agents/worktree-mechanism.md)
+- What's actually been observed running Worker on different models:
+  [`docs/agents/model-notes.md`](docs/agents/model-notes.md)
 - Full research corpus: `docs/research/` (large; briefs scope what's
   relevant — don't ingest all of it for every task)
+- Project slash commands (Claude Code sessions): `/status`, `/atlas
+  [--refresh]`, `/report [-v]` — see `.claude/commands/`
