@@ -4,9 +4,9 @@ Fast rehydration for a fresh Brain session. Keep this short — point at the
 detailed doc rather than duplicating it. Every fact here is a claim to
 spot-check against live repo state, not a fact to relay forward unchecked.
 
-**Last updated:** 2026-08-30, by the Brain session that installed the
-Brain/Worker coordination framework (this file, `AGENTS.md`,
-`.claude/agents/{brain,worker}.md`, `docs/briefs/`).
+**Last updated:** 2026-08-30, after Brain accepted and merged the first
+Worker round (Tokyo Dome epistemic-wording fix, executed by a
+non-Claude model) and queued the next brief.
 
 ## Repository
 
@@ -62,41 +62,44 @@ merely modern community consensus" — this is the bar Brain checks Worker's
 
 The erratum v1→v2 migration (design frozen in
 `docs/research/erratum-state-model-v2.md`) and the Tengu format are the last
-completed substantive milestones (2026-08-25 and 2026-08-27). Since then,
-all work has been Tokyo Dome ("yugi-kaiba" codename) research sessions
-(2026-08-28 through 2026-08-30, sessions 1-11) and this framework install.
-No format work is in flight.
+completed substantive format milestones (2026-08-25 and 2026-08-27). Since
+then: Tokyo Dome ("yugi-kaiba" codename) research sessions (2026-08-28
+through 2026-08-30, sessions 1-11), this framework install, and the first
+Worker round below. No format work is in flight.
+
+## Last accepted Worker round
+
+**Accepted and merged (2026-08-30, commit `4624752`, executed by a
+non-Claude model — Worker is model-agnostic, see `AGENTS.md`):** the Tokyo
+Dome epistemic-wording fix. Both overclaim patterns flagged by external
+review were corrected in `docs/research/yugi-kaiba-format-source-gate.md`
+and `...-packet.json` — EXIF-authentication language ("authentic",
+"genuine primary", "an actual ... Konami-issued document") reworded to
+"purporting to be" / EXIF-consistent-with-capture framing; "found
+anywhere" / "stronger form of the single-hosted finding" reworded to scope
+explicitly to the channels actually searched. The JSON key
+`content_hash_confirmation_of_single_hosting` (which itself asserted the
+overclaim) was renamed to `wayback_content_hash_check_of_the_known_crop`
+after confirming no code/test reads it by name. Worker also caught one
+overclaim instance (`phase_g_content_completeness_result`) not listed in
+the brief. No adjudication verdict, status, digest, date, or count
+changed. Brain independently re-diffed every hunk, re-ran the grep checks
+the commit message claimed, and ran the full suite (931 tests) before
+merging — see the archived brief for the full spec:
+[`docs/briefs/archive/2026-08-30-tokyo-dome-epistemic-wording-fix.md`](briefs/archive/2026-08-30-tokyo-dome-epistemic-wording-fix.md).
 
 ## In-flight / next Worker task
 
-**Not started yet — this is the recommended next brief, already drafted in
-[`docs/briefs/active.md`](briefs/active.md):** a small `DOCUMENTATION`-mode
-correction to two overclaiming wording patterns in the Tokyo Dome research
-packet, flagged by external review and confirmed still present at
-`1cc6e63`:
-
-1. `docs/research/yugi-kaiba-format-source-packet.json:1704,1707` and
-   `docs/research/yugi-kaiba-format-source-gate.md:3081-3085` describe
-   collector photographs of a physical 1999 Konami invitation/rulebook with
-   language like "EXIF-verified... an authentic 1999 Konami invitation,"
-   "genuine primary," and "an actual 1999 Konami-issued document." EXIF
-   authenticates a *photograph's capture metadata*, not the *historical
-   object* depicted — the object's own provenance was never independently
-   authenticated. (This source already correctly does **not** get used as
-   OCG-restriction-list evidence — it's walled off to event-identity-only
-   for a *parallel* Game Boy tournament — the defect is purely in how
-   strongly the object itself is described.)
-2. `docs/research/yugi-kaiba-format-source-gate.md:2199,3040,3062-3075` and
-   `...-packet.json:3454,3727` declare the V Jump interior restriction-card
-   crop "single-hosted" and state no independent copy was found "anywhere"
-   — stated as an established fact rather than a bounded-search result. A
-   Wayback/CDX digest search finding no duplicate proves something about
-   the searched corpus, not global non-existence.
-
-Do not fix this inline while doing framework work — see the brief for full
-scope. Note: `evidence_tier` in the packet JSON is a **data field** parsed
-by `tests/test_yugi_kaiba_format_gate.py`, not just prose — the brief flags
-this so wording fixes don't silently break that test's assumptions.
+**Queued in [`docs/briefs/active.md`](briefs/active.md):** a
+`SOURCE VERIFICATION` task on `data/banlists/tcg/2010-03.json` (roadmap
+item 3). It already cites a Wayback-archived Konami primary source
+(`konami-limited-2010-03`, retrieved 2026-08-19) alongside Yugipedia, but
+`completeness` is still `"complete"`, not `"verified"` — meaning either
+the entries were never actually reconciled card-by-card against that
+primary source, or they were and the status just never got bumped. The
+brief asks Worker to actually do that reconciliation and report the real
+outcome (upgrade if it holds; document precisely what's missing if it
+doesn't), not assume a match either way.
 
 ## Parked research — do not reopen without new evidence
 
@@ -129,11 +132,11 @@ target event 1999-08-26. Full detail:
   `NOT_REPRESENTABLE` — active blockers.
 - V Jump interior crop (the actual restriction-list evidence) remains
   source-authentication tier C — single point of hosting, chain
-  unauthenticated. The EXIF-verified collector photos are a *different,
-  stronger-tier* source but only for event date/venue/identity of a
-  *parallel* Game Boy tournament — never restriction-list evidence. See
-  "In-flight" above for the wording defect in how that distinction is
-  currently phrased.
+  unauthenticated. The daiti0526 collector photographs are a *different,
+  stronger-in-kind candidate* source but only for event date/venue/identity
+  of a *parallel* Game Boy tournament — never restriction-list evidence,
+  and (as of the 2026-08-30 wording fix above) correctly described as
+  "purporting to be" a period document rather than authenticated as one.
 
 **Do not**: restart Tokyo research from scratch, redesign the six-axis
 canonicalization gate absent a concrete discovered defect, or canonicalize
@@ -156,10 +159,11 @@ implementation.
 
 ## Recommended next action
 
-Run the drafted brief in `docs/briefs/active.md` (Worker, `DOCUMENTATION`
-mode) to fix the two wording overclaims above. It's small, well-scoped, and
-was explicitly flagged by external review — good first Worker task to
-validate the new framework end-to-end before anything larger. Do **not**
-start a new historical format next; the roadmap's own Phase-1 hardening
-items (chronology, banlist verification) are more informative uses of the
-next slot than breadth.
+Run the queued brief in `docs/briefs/active.md` (`SOURCE VERIFICATION`,
+March 2010 banlist reconciliation). After that: roadmap item 2 (April 2005
+GOAT banlist — currently `completeness: "partial"`, no Yugipedia source
+cited at all yet, needs an actual transcription pass, not just a
+reconciliation — bigger lift than item 3) is the natural next step. Do
+**not** start a new historical format next; the roadmap's own Phase-1
+hardening items (banlist verification, chronology) are more informative
+uses of the next few slots than breadth.
