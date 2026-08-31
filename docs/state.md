@@ -46,6 +46,18 @@ Rulings that are easy to get wrong and expensive to rediscover:
   acceptance bar Brain reviews against.** `verified` specifically requires
   corroboration by strong primary/period evidence — not modern community
   consensus, however unanimous.
+- **`implementation_status.overall` has no derivation rule** — not in
+  `format.schema.json` (which only requires the key), not in the
+  validator, not in `cli.py` or the atlas generator, all of which print
+  the stored value verbatim. It is a per-format judgement, conventionally
+  bottlenecked by the weakest axis. Established by round 5; don't
+  re-investigate, and don't add a derivation rule without a brief.
+- **Status drift is structurally limited to `banlist` and `card_pool`.**
+  Only those two axes have an underlying file with its own
+  `completeness` field to fall behind. `rule_profile` and `errata` have
+  no mirrorable source at all (their schemas define no `completeness`),
+  so they are pure adjudications. Audited exhaustively in round 5 — a
+  third drifted axis is not possible without a schema change.
 - **The errata v1→v2 migration is complete; the v1 positional model is
   retired.** Don't reintroduce it.
 - **Python: standard library only.** No dependency manifest, by choice.

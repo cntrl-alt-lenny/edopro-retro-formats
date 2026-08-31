@@ -13,6 +13,56 @@ which model executed a round.
 
 ## Round log
 
+**Round 5 (2026-08-31) — status propagation / axis-drift audit /
+BabelCDB revision honesty
+(`docs/briefs/archive/005-2026-08-31-status-propagation-consistency.md`),
+model: Claude Sonnet 5 High, in the nested worktree.** Accepted without
+correction. First deliberately *bundled* round under the 2026-08-31
+operating policy (three related parts, one briefing, one review) — the
+bundling worked: no part was starved, and review cost was well under
+three separate rounds.
+
+Did not simply apply the brief's predicted upgrades: read the two
+banlists' own recorded evidence first and argued each against
+`implementationStatus`'s `verified` wording before changing anything,
+and correctly left Tengu alone. On `overall`, established there is no
+derivation rule anywhere (validator only enum-checks; `cli.py` and the
+atlas generator print the stored value) and left both at `partial`
+because `rule_profile` is the real bottleneck — the conservative
+direction, which is the right one under "statuses are earned, never
+aspirational."
+
+Part C was the strongest piece: took the honest option (freeze the
+verification claim to the revisions actually checked, flag that
+`ignis-babelcdb` has since moved, and state plainly that the
+BabelCDB-derived claims have *not* been re-verified), and explicitly
+scoped round 4's inspection of the new revision as evidence about two
+passcodes rather than a re-verification. That is exactly the
+publication-date-is-not-effective-date discipline this project exists to
+enforce.
+
+Brain verified independently rather than reading the diff: re-derived
+all six revision pins from `data/sources.json` (five match, only
+BabelCDB drifted — as claimed); traced the BabelCDB pin move to
+`0f65c3b` "Extend TCG release ledger through Tengu snapshot", confirming
+Worker's "for reasons unrelated to this document" is a fact rather than
+a guess; re-ran validate/`build --check`/946 tests at the exact final
+SHA `bcc9b6f`; and confirmed the SVG diff touches only the `data-banlist`
+attribute, the banlist swatch colour, and the banner tooltip, with the
+visible "Partial" overall label unchanged.
+
+One claim Brain re-derived by a route Worker did not state: GOAT's
+banlist notes admit `superseded_by_date` (2005-10-01) is sourced only by
+Yugipedia's convention, not primary evidence — a known gap that could
+have blocked `verified` (which requires `complete`, which requires
+"known gaps resolved or proven harmless"). It is provably harmless *at
+this format's snapshot*: `validate.py`'s check is `snapshot >=
+superseded`, GOAT's snapshot is 2005-04-01, and the list took effect
+that same day, so no value later than the effective date changes the
+outcome. The upgrade holds — but Worker reached the right answer without
+addressing the field, so this was a real gap in its argument rather than
+in its conclusion.
+
 **Round 4 (2026-08-31) — Mind Master TCG/OCG card-identity gap, roadmap
 1e (`docs/briefs/archive/004-2026-08-31-mind-master-card-identity.md`),
 model: Claude Sonnet 5 High, in the nested worktree.** Accepted without
