@@ -22,3 +22,9 @@ cache/
 .idea/
 *.swp
 .DS_Store
+
+# Worker's nested git worktree (see docs/agents/worktree-mechanism.md) --
+# a real working directory git tracks via .git/worktrees/, not project
+# output; this just keeps it out of `git status` noise in the primary
+# checkout.
+.claude/worktrees/

@@ -40,11 +40,12 @@ file as "nothing happened."
   version-controls and treats as private. No .gitignore entry needed; it
   survives `git clean -fdx` and disappears cleanly if the clone is ever
   removed.
-- Role is inferred from the current worktree's directory basename: a
-  basename ending in `-worker` is role `worker`; anything else is role
-  `brain`. This matches docs/agents/worktree-mechanism.md's fixed layout
-  (`edopro-retro-formats` / `edopro-retro-formats-worker`). If the human
-  renames the worktree directories, update this mapping.
+- Role is inferred from whether the current worktree's path runs through
+  `.claude/worktrees/`: if it does, role is `worker`; the primary checkout
+  (no such path segment) is role `brain`. This matches
+  docs/agents/worktree-mechanism.md's fixed layout (Worker's nested
+  worktree lives at `.claude/worktrees/worker/`). If the human changes
+  that layout, update this mapping.
 
 # Hook event input
 
@@ -119,7 +120,8 @@ def _last_assistant_text(transcript_path: Path) -> str | None:
 def _role_from_worktree(worktree_root: str | None) -> str:
     if not worktree_root:
         return "unknown"
-    return "worker" if Path(worktree_root).name.endswith("-worker") else "brain"
+    parts = Path(worktree_root).parts
+    return "worker" if ".claude" in parts and "worktrees" in parts else "brain"
 
 
 def _seed_readme(inbox: Path) -> None:

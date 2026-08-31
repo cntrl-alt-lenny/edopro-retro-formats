@@ -12,13 +12,19 @@ leave a one-line "no brief queued" placeholder.
 
 ## Goal
 
-Transcribe the published April 2005 TCG Forbidden/Limited/Semi-Limited
-list from Yugipedia using the existing importer
-(`retroformats/importers/yugipedia_banlist.py`), reconcile it against
-`data/banlists/tcg/2005-04.json` (currently derived only from Project
-Ignis's GOAT whitelist counts), and upgrade `completeness` from
-`"partial"` honestly if -- and only to the extent -- the reconciliation
-actually supports it.
+Resolve roadmap item 1e: Mind Master's TCG-vs-OCG card-identity gap.
+Right now the Edison pool references passcode `96782886` (the canonical
+row, which BabelCDB scopes OCG-only, `ot=1`) for a card whose actual TCG
+printing (TDGS-EN016) EDOPro represents as a *separate* upstream entry
+(`96782896`, `ot=2`, aliased to the canonical code). A TCG-format pool
+referencing an OCG-only-scoped code is a card an EDOPro official-cards
+room would reject. This is currently a single documented, allowlisted
+exception in a test (`tests/test_repo_data.py::test_pool_cards_are_tcg_scoped_in_the_card_database`)
+— not silently broken, but not actually fixed either. The goal is a
+*general* rule for choosing the region-correct implementation of a
+canonical card when release data maps a printing to a passcode BabelCDB
+scopes for the wrong region — not a one-off patch that only happens to
+fix Mind Master.
 
 ## Starting SHA
 
@@ -27,140 +33,124 @@ in your report.
 
 ## Why this is next
 
-Roadmap item 2 (`docs/roadmap.md`, Phase 1): "Cross-check the April 2005
-banlist. The GOAT banlist is currently derived from Ignis's whitelist
-counts. Transcribe the published April 2005 TCG list (Yugipedia `April
-2005 Lists (TCG)`) with the existing importer, reconcile, upgrade
-`completeness` to `complete`/`verified`, and document any deliberate GOAT
-community deviations if found." Round 3 in this project's Worker-round
-sequence, following the same pattern as round 2's March 2010 banlist
-verification (`docs/briefs/archive/002-2026-08-30-march-2010-banlist-verification.md`)
-but bigger: that banlist already had a Yugipedia source cited and just
-needed reconciling against a Konami primary; this one has no Yugipedia
-source at all yet and needs the actual import run for the first time.
+Three rounds so far (see `docs/agents/model-notes.md`) were all banlist
+*verification* — bounded, single-file, no design decisions. This is
+qualitatively different: it's a real card-identity/schema question the
+roadmap explicitly says "needs a general rule," not a data-entry check.
+Picked over roadmap 1a (125 undated-era-ruling records — much larger,
+open-ended, needs period rulings documents that may not exist) as a
+better-bounded next step: this has exactly one known instance today, a
+concrete root cause, and an existing test that already names the
+invariant it should eventually enforce without exception.
 
 ## Relevant context
 
 Read:
 
-- `data/banlists/tcg/2005-04.json` -- the record in question. Its own
-  `notes` field already states the exact gap: "TODO: cross-check against
-  the April 2005 TCG list as published (Yugipedia) and upgrade
-  completeness; the effective/superseded dates ... also need a primary
-  citation."
-- `retroformats/importers/yugipedia_banlist.py` -- read its module
-  docstring and `parse_limitation_list` function. It was used for the
-  March 2010 banlist; that's your worked example for exact usage
-  (`data/sources.json`'s `yugipedia-march-2010` /
-  `konami-limited-2010-03` entries show what the resulting `sources`
-  array should look like in shape, not content).
-- `docs/edopro-research.md` -- pins the BabelCDB revision this project
-  uses (`BabelCDB da54f28` as of this writing; confirm it's still what's
-  pinned, don't assume this brief's copy is current).
-- `docs/releases.md` around the `--babelcdb <BabelCDB clone>` examples --
-  shows how other importers in this codebase expect a local BabelCDB
-  clone to be passed.
+- `docs/roadmap.md` item 1e (the paragraph starting "**Card identity:
+  TCG-versus-OCG entries.**") — the problem statement as already
+  diagnosed. Don't re-diagnose from scratch; verify it's still accurate
+  against current data first (see "Required investigation").
+- `tests/test_repo_data.py::test_pool_cards_are_tcg_scoped_in_the_card_database`
+  — the current allowlist-based test and its docstring explaining the
+  exact mechanism (BabelCDB's `ot` bitfield, `SCOPE_TCG = 0x2`).
+- `docs/architecture.md`'s "Card identity model" section — canonical
+  card / artwork variant / historical implementation definitions, and
+  how the card index (`data/cards/index.json`) is generated.
+- `retroformats/importers/card_index.py` — how the index is built from
+  BabelCDB; this is almost certainly where any general fix needs to live
+  (or a new importer step), since the index is generated, never
+  hand-edited.
+- `data/releases/` around how a printing maps to a canonical passcode
+  (`docs/releases.md`) — the actual point where TDGS-EN016 gets mapped to
+  `96782886` today; understand this before proposing a fix, since the fix
+  might belong here instead of (or in addition to) the card index.
 
-You do not need to read anything about Tokyo Dome, Edison rules, or the
-erratum v2 model -- unrelated to this task.
+You do not need to read Tokyo Dome, Edison rules, or erratum v2 material
+— unrelated to this task.
 
 ## Scope
 
-1. Fetch the Yugipedia page's wikitext via the MediaWiki parse API
-   (`https://yugipedia.com/api.php?action=parse&page=April%202005%20Lists%20(TCG)&format=json&prop=wikitext`
-   -- confirm the exact page title/URL yourself; don't assume it matches
-   this exact string without checking, Yugipedia's naming isn't always
-   predictable from the March 2010 precedent).
-2. Clone BabelCDB at the pinned revision (or confirm a usable local
-   checkout already exists) so `yugipedia_banlist.py` can resolve card
-   names to passcodes.
-3. Run the importer to produce a candidate record for `tcg-2005-04`.
-4. Reconcile the importer's output against the current
-   `data/banlists/tcg/2005-04.json` entries, the same way round 2
-   reconciled the March 2010 banlist -- entry by entry, not sampled.
-5. If they match exactly: update `completeness` (to `"complete"` or
-   `"verified"` -- pick based on the actual bar each meets per
-   `schemas/common.schema.json`'s `implementationStatus` definition;
-   don't default to the higher one just because a source now exists),
-   add the new source(s) to `data/sources.json` and to this banlist's
-   `sources` array, and record in `notes` exactly what was checked and
-   against what.
-6. If they don't match: this is the interesting case the roadmap itself
-   anticipates ("document any deliberate GOAT-community deviations if
-   found"). Do not silently overwrite `entries` to match the Yugipedia
-   transcription -- GOAT's own defining characteristic (see
-   `formats/2005-04-goat/format.json`'s `errata_overrides` and its
-   `notes.md`) is `reference_parity` with the Project Ignis whitelist,
-   which may deliberately differ from a literal reading of the original
-   April 2005 announcement. Report every discrepancy by name, and
-   propose (don't unilaterally decide) whether each one looks like a
-   transcription error to fix, a genuine parity deviation to document, or
-   something else -- see "Non-goals" below on where your authority to act
-   on this stops.
-7. Also confirm (or fix, if you can source it) the `effective_date`
-   (2005-04-01) / `superseded_by_date` (2005-10-01) citation gap the
-   `notes` field flags -- these are currently "community-documented"
-   without a primary cite.
+1. **Confirm the gap still exists exactly as described.** Check
+   `data/cards/index.json` (or regenerate it) for both `96782886` and
+   `96782896`'s current `ot` values, and confirm the Edison pool really
+   does reference `96782886`. Report if anything has already changed
+   since the roadmap paragraph was written.
+2. **Design the general rule**, not just a Mind Master patch. The core
+   question: when a printing maps to a passcode whose BabelCDB `ot` scope
+   doesn't include the format's own region, what should happen —
+   automatically substitute the correctly-scoped upstream alias if one
+   exists (like `96782896` here), flag it as a hard validator error
+   requiring an explicit per-format override, something else? Consider
+   at least two real approaches and their tradeoffs (a hand-search of
+   whether other pool cards could hit this same class of gap in the
+   future would strengthen whichever choice you make, but isn't required
+   if it would blow the scope of this round — say so if you skip it).
+3. **If a clear best approach exists, implement it** — likely touching
+   `retroformats/importers/card_index.py` and/or the release-to-passcode
+   mapping logic, plus removing Mind Master from the test's
+   `known_exceptions` allowlist once it's genuinely fixed (the test
+   should then pass with an empty exception set, or you've proven the
+   general rule doesn't fully close this one case and should say so
+   plainly rather than leave the exception silently in place while
+   claiming the round succeeded).
+4. **If the right general rule is genuinely ambiguous** (multiple
+   reasonable designs with real tradeoffs and no clear winner from the
+   codebase's own conventions), do not unilaterally pick one — implement
+   nothing structural, and instead report the options with tradeoffs for
+   Brain/the human to decide. A wrong-but-shipped general rule is worse
+   than a well-documented open decision, since it would apply silently to
+   every future case, not just Mind Master.
 
 ## Non-goals
 
-- Do not change GOAT's `entries` array to resolve a discrepancy against
-  Yugipedia without flagging it first -- see step 6. This brief verifies
-  and reconciles; it does not re-adjudicate GOAT's parity policy.
-- Do not touch `2010-03.json`, Edison, or Tengu data.
-- Do not touch `formats/2005-04-goat/format.json`'s
-  `implementation_status.banlist` unless you've confirmed (the same way
-  round 2 did for Edison) whether it's meant to mirror the banlist file's
-  own `completeness` -- check `retroformats/validate.py` yourself rather
-  than assume round 2's Edison finding carries over unchanged.
-- Do not touch `dist/` directly -- if anything changes that affects the
-  built lflist, regenerate via `python -m retroformats build`, don't
-  hand-edit.
+- Do not touch `dist/` directly — regenerate via `python -m retroformats
+  build` if the fix changes generated output.
+- Do not touch banlist completeness/verification data (rounds 1-3's
+  territory) — unrelated to this task.
+- Do not invent a fix for cards other than Mind Master unless your
+  investigation in step 1/2 finds a second real instance in current
+  data — don't design purely hypothetically beyond what the actual data
+  needs.
 
 ## Protected invariants
 
-- `docs/architecture.md` and `formats/2005-04-goat/notes.md` describe
-  GOAT's output as required to stay entry-for-entry identical to Project
-  Ignis's reference list (EDOPro content hash `0x28e9fc02`,
-  order/name-independent -- see `docs/state.md` for the exact
-  "entry-for-entry, not byte-identical" distinction, already corrected
-  once this session for being overstated). `tests/test_repo_data.py`
-  pins this. If your reconciliation surfaces a genuine discrepancy
-  between Yugipedia's transcription and the current entries, resolving
-  it must not silently break that parity test -- if fixing a real error
-  would change GOAT's output, that's a bigger, separate decision to flag,
-  not something to push through in this brief.
-- Card names must resolve to real BabelCDB passcodes -- the importer
-  already refuses to guess on an unresolved/ambiguous name; don't work
-  around that by hand-resolving a name it rejected without saying so
-  explicitly in your report.
+- `tests/test_repo_data.py`'s other tests, and the full suite, must still
+  pass.
+- The card index remains generated-only (`docs/architecture.md`: "never
+  hand-edited") — any fix must be a code/importer change that produces
+  the corrected index, not a hand-patched `data/cards/index.json`.
+- `python -m retroformats validate` and `build --check` must still pass
+  with zero errors, matching the rest of this project's error/warning
+  discipline (warnings are fine, errors are not).
 
 ## Required investigation
 
-1. Confirm BabelCDB's pinned revision from `docs/edopro-research.md`
-   before cloning -- don't use `main`/`HEAD` of BabelCDB, which would be
-   inconsistent with everything else this repo cites it against.
-2. Do the full entry-by-entry reconciliation, not a sample.
-3. Check whether `formats/2005-04-goat/format.json`'s
-   `implementation_status.banlist` field is code-derived from anything
-   (grep `retroformats/validate.py` and `retroformats/model.py` for
-   `implementation_status` yourself -- round 2 already did this for a
-   different format and found no code linkage, but verify it still holds
-   here rather than citing round 2's finding as if it's a project-wide
-   guarantee).
+1. Regenerate or directly inspect `data/cards/index.json`'s current
+   entries for `96782886` and `96782896` before assuming the roadmap
+   paragraph's description is still accurate.
+2. Read how `retroformats/importers/card_index.py` decides which BabelCDB
+   row becomes the canonical index entry for a given passcode, and
+   whether it currently has any region-awareness at all.
+3. Check whether any other current pool entry (across all three
+   canonical formats, not just Edison) has the same `ot`-scope mismatch
+   the test's allowlist mechanism would currently be silently permitting
+   if it existed — the test only checks `pool-goat-2005-ignis` and
+   `pool-edison-2010`; consider whether `pool-tengu-2011` should be
+   checked too and isn't currently.
 
 ## Acceptance criteria
 
-- A real, evidenced answer on whether GOAT's current banlist entries
-  match the primary/community-published April 2005 list, not a guess.
-- Every discrepancy (if any) named explicitly, with a proposed
-  classification (transcription error / deliberate parity deviation /
-  unclear), not silently resolved.
-- If upgraded: correct `completeness` value for what was actually
-  checked, new sources cited in both `data/sources.json` and the
-  banlist's own `sources` array, `notes` states what was verified and how.
-- `tests/test_repo_data.py`'s GOAT parity/hash tests still pass.
-- Full test suite, validator, and `build --check` all still pass.
+- Either: a general rule is implemented, Mind Master resolves through it
+  (not a hardcoded special case), and the test's exception allowlist
+  shrinks to empty — or: a clear, evidenced writeup of 2+ real design
+  options with tradeoffs, explicitly not decided, for Brain to take to
+  the human.
+- No new pool/format regressions — GOAT and Edison's generated lflists
+  must remain exactly what they were before this round unless the fix
+  legitimately changes which passcode a card resolves to (in which case
+  say so explicitly and show the before/after).
+- Full test suite, validator, and `build --check` all pass.
 
 ## Tests / validation
 
@@ -174,21 +164,23 @@ python -m unittest discover -t . -s tests -v
 
 ## Git expectations
 
-Work in the sibling worktree if running locally alongside a Brain session
-on the same machine (`docs/agents/worktree-mechanism.md`) -- fetch
-`origin/main` first and branch from there
-(e.g. `worker/verify-2005-04-banlist`). Do not merge to `main` yourself.
-Do not push unless asked.
+Work in the nested worktree (`.claude/worktrees/worker/` inside the
+project folder — see `docs/agents/worktree-mechanism.md`) if running
+locally alongside a Brain session. Fetch `origin/main` and branch from
+there (e.g. `worker/mind-master-card-identity`). Do not merge to `main`
+yourself. Do not push unless asked.
 
 ## Completion-report schema
 
 Report:
 
 - Starting SHA, branch, final SHA.
-- The exact Yugipedia page/URL used, and the BabelCDB revision cloned.
-- The full reconciliation result: exact match, or every discrepancy found
-  (name each card, both sides' status) with your proposed classification
-  for each.
-- What you changed, file by file, and why.
+- Whether the gap still matches the roadmap's description, and what you
+  found when you checked `pool-tengu-2011` too.
+- If implemented: the general rule you chose, why, what you rejected and
+  why, exact files changed, and confirmation the test's allowlist is now
+  empty (or explain what's still not fully resolved).
+- If not implemented (ambiguous case): the real options considered, with
+  concrete tradeoffs — not a vague "it depends."
 - Exact output of the three validation commands.
-- Anything left genuinely uncertain -- state it as uncertain.
+- Anything left genuinely uncertain.
