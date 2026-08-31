@@ -13,6 +13,47 @@ which model executed a round.
 
 ## Round log
 
+**Round 4 (2026-08-31) — Mind Master TCG/OCG card-identity gap, roadmap
+1e (`docs/briefs/archive/004-2026-08-31-mind-master-card-identity.md`),
+model: Claude Sonnet 5 High, in the nested worktree.** Accepted without
+correction — the first round that was a design question rather than
+verification, and the strongest so far.
+
+Chose an explicit, sourced, per-instance mechanism
+(`pool.cutoff.region_substitutions`, mirroring the existing
+include/exclude idiom) over auto-discovery, and justified the refusal to
+automate: direct inspection of the pinned BabelCDB found the OCG and TCG
+Mind Master rows carry *functionally* different text, so silent
+substitution could swap behaviour, not just region scope. That is the
+right call under this project's historical-truth/representability
+separation, and it is exactly the "don't ship a wrong general rule
+silently" instruction the brief gave.
+
+Went beyond the brief in two useful ways: replaced the test-only
+allowlist with a real, pool-kind-agnostic validator error
+(`pool.card-region-scope-mismatch`), so the *class* now fails
+`validate()` until adjudicated rather than being pinned by one test; and
+found a second, dormant instance of the same BabelCDB pattern (Elder
+Entity Norden) not referenced by any current format. It also corrected
+the roadmap's own description of the root cause — the TCG row is in
+`cards-unofficial.cdb`, not `cards.cdb` as the roadmap assumed.
+
+Brain verified independently rather than reading the diff: recomputed all
+three lflist hashes from source (GOAT's `0x28E9FC02` unchanged, so Ignis
+parity held), confirmed the `<10` artwork-window claim against
+`validate.py`'s actual comparisons (so the `+10` offset genuinely needs
+explicit listing), checked banlist statuses carried through the
+substitution (Edison `1`/Limited, Tengu `0`/Forbidden — both preserved),
+and negative-tested the new validator rule by reverting a pool entry and
+confirming it errors. The one claim left unverified is the Elder Entity
+Norden sighting, which needs a BabelCDB clone; it is informational and
+affects nothing.
+
+Process note: Worker branched from `8f8cf0f` while `main` advanced to
+`b5b1795`, so the merge was a cherry-pick rather than a fast-forward.
+Reviewed as `665325b`, landed as `e8ef36e`; `git patch-id` confirmed the
+applied change is byte-identical to what was reviewed.
+
 **Round 1 (2026-08-30) — Tokyo Dome epistemic-wording fix
 (`docs/briefs/archive/001-2026-08-30-tokyo-dome-epistemic-wording-fix.md`),
 model: a non-Claude frontier model ("GPT 5.6 Luna" per the human's
