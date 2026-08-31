@@ -13,6 +13,56 @@ which model executed a round.
 
 ## Round log
 
+**Round 8 (2026-08-31) — deck validation tool, roadmap item 6
+(`docs/briefs/archive/008-2026-08-31-deck-validation-tool.md`), model:
+Claude Sonnet 5 High, in the nested worktree.** Accepted. The first
+round to add a real user-facing feature rather than data or documents,
+and the second consecutive round to correct its own brief.
+
+Honoured the round's load-bearing constraint without being pushed:
+`check_deck()` calls `build_lflist(fmt, repo).entries` — the same
+function that produces `dist/lflists/` — so the checker cannot disagree
+with the shipped artifact by construction. No `lflist.py` refactor was
+needed at all; the four functions it reuses were already public. Zero
+canonical data and zero `dist/` changes.
+
+Corrected the brief's `.ydk` description by reading the pinned client
+source (`deck_manager.cpp` @ `9d6fb3e8417c88`) rather than assuming:
+there is no `#main` handling whatsoever (only the literal `#extra` line
+matters), and *any* `!`-prefixed line switches to the side deck since
+the parser never inspects the text after `!`.
+
+Implemented the alias semantics faithfully to the cited source rather
+than plausibly: counting merges under the alias root unconditionally,
+while the *limit* lookup falls back to the alias only within the ±10
+artwork range on a whitelist — which is exactly what
+`LFList::GetLimitationIterator` does. Getting this backwards would have
+made pre-errata identities silently legal.
+
+On `forbidden_card_types` it neither faked the check nor silently
+skipped it: it proved redundancy structurally from release dates and
+printed a standing disclosure on every run.
+
+Brain verified independently rather than reading the diff: fetched
+`deck_manager.cpp` at the pinned revision and confirmed `LoadCardList`
+matches every parsing claim; checked the `GetLimitationIterator` source
+quoted in `edopro-lflists.md` against `_limit_for`'s implementation;
+re-derived the Xyz first-printing dates from this repo's own release
+records (2011-07-08 EU / 2011-08-12 EU — both after Edison's cutoff,
+before Tengu's); ran the tool on all six fixtures; and independently
+constructed fresh decks straight from the shipped Tengu and Edison
+lflists, confirming both validate clean. An adversarial deck Brain built
+also surfaced the alias merge working correctly in the wild — Jinzo
+`77585513` plus artwork variant `77585514` counted together against a
+limit of 1. 961 tests at the exact final SHA `197a28b`.
+
+**One over-generalisation, sent to round 9** (it is user-facing output
+text carrying an evidential argument, so not Brain's to reword): the
+disclosure says the check is redundant because "its release-cutoff pool
+cannot contain" a forbidden type — true for Edison and Tengu, but GOAT's
+pool is `kind: extensional` with no cutoff at all. The conclusion holds
+for GOAT by a different route; only the stated reason is wrong.
+
 **Round 7 (2026-08-31) — ship as an EDOPro repo, roadmap item 8
 (`docs/briefs/archive/007-2026-08-31-ship-as-edopro-repo.md`), model:
 Claude Sonnet 5 High, in the nested worktree.** Accepted. Notable for
