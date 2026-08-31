@@ -140,6 +140,39 @@ as of the migration (historical anchor: that corpus is what the freeze was
 proven against). Don't redesign without a concrete counterexample found
 during implementation.
 
+## Operating policy — the framework is done being built
+
+Set by the owner on 2026-08-31, after a setup phase in which roughly
+two-thirds of Brain's commits were framework rather than project content.
+**That phase is over.** The architecture is to be *used*, not polished.
+
+- **No further workflow/framework changes unless real project development
+  exposes a concrete problem.** Not "this could be cleaner" — an actual
+  observed failure.
+- **Larger briefs where work is naturally related.** Amortise briefing and
+  review overhead instead of artificially splitting closely-related
+  verification or data tasks into separate rounds.
+- **Tier review depth proportionally.** Deep independent re-derivation for
+  historical claims, canonical data, and any proposed general rule. Lighter
+  proportional review for mechanical, docs and bookkeeping changes.
+- **Brain may fix genuinely trivial housekeeping directly, and must keep
+  that narrow.** The risk is "this looks easy" gradually turning Brain into
+  the implementation Worker and hollowing out independent review. Anything
+  touching canonical data, or asserting an evidence level, goes to a
+  Worker even when the change itself is small.
+- **No parallel Workers yet.** Brain plus one fresh Worker is simple and
+  working. Propose parallel lanes only if Worker throughput becomes an
+  *observed* bottleneck — with evidence, not pre-optimisation.
+- **The owner stays courier and model-chooser.** Copying prompts and
+  reports is not currently the bottleneck, and per-task model choice
+  across vendors is valued. Revisit only if it becomes genuine friction.
+
+**Evidence-gathering period: the next 5-10 genuine project rounds.** If
+progress is still slower than it should be after that, identify the
+*specific* bottleneck from what actually happened — Worker speed, review
+cost, brief sizing, research difficulty — and fix that one thing. Do not
+optimise speculatively before then.
+
 ## Open items and sequencing judgements
 
 `docs/roadmap.md` is canonical for what is open. What it doesn't record —
