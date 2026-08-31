@@ -357,6 +357,24 @@ class RealDataTest(unittest.TestCase):
                     f"dist/lflists/{path.name} is stale: run python -m retroformats build",
                 )
 
+    def test_dist_readme_list_names_match_generated_output(self):
+        """dist/README.md documents each list's in-client name as `Retro <id>`.
+        Pin it against the actual generated `!`-line so the two cannot drift
+        (round 7 found and fixed several other README/reality mismatches)."""
+        readme = (REPO_ROOT / "dist" / "README.md").read_text(encoding="utf-8")
+        for fmt_id in self.repo.formats:
+            lflist_path = REPO_ROOT / "dist" / "lflists" / f"{fmt_id}.lflist.conf"
+            header_line = next(
+                line for line in lflist_path.read_text(encoding="utf-8").splitlines() if line.startswith("!")
+            )
+            list_name = header_line[1:]
+            self.assertEqual(f"Retro {fmt_id}", list_name)
+            self.assertIn(
+                f"`Retro {fmt_id}`",
+                readme,
+                f"dist/README.md does not mention the generated list name for {fmt_id}",
+            )
+
     def test_rule_profile_flags_match_preset_expansions(self):
         # Expansions verified against ocgapi_constants.h (see the rule profile
         # records and docs/edopro-research.md).
@@ -392,6 +410,18 @@ class RealDataTest(unittest.TestCase):
         edison_extra = {"DUEL_0_ATK_DESTROYED"}
         self.assertEqual(mr1 | edison_extra, set(self.repo.rule_profiles["rules-tcg-mr1-edison"].flags))
         self.assertEqual(mr1 | goat_extra, set(self.repo.rule_profiles["rules-tcg-goat"].flags))
+
+        # Tengu (round 7, dist/README.md host-settings table): its rule profile's
+        # flags are bit-for-bit MR1 (not MR2 - MR2 lacks DUEL_OCG_OBSOLETE_IGNITION),
+        # documented in formats/2011-09-tengu/notes.md as "MR2 baseline plus
+        # DUEL_OCG_OBSOLETE_IGNITION" (a deliberate 2011-TCG approximation), not as a
+        # bare MR1 alias. Both framings describe the identical flag set; pin the set
+        # itself so dist/README.md's "MR2 + one Custom Rule checkbox" instruction
+        # cannot silently drift from what this rule profile actually requires.
+        mr2 = mr1 - {"DUEL_OCG_OBSOLETE_IGNITION"}
+        tengu_extra = {"DUEL_OCG_OBSOLETE_IGNITION"}
+        self.assertEqual(mr2 | tengu_extra, set(self.repo.rule_profiles["rules-tcg-mr2-tengu"].flags))
+        self.assertEqual(mr1, set(self.repo.rule_profiles["rules-tcg-mr2-tengu"].flags))
 
 
 if __name__ == "__main__":
