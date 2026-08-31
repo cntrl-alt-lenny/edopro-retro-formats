@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from .build import build_all
+from .deckcheck import FORBIDDEN_TYPE_NOTE, parse_ydk, check_deck
 from .repo import Repository, find_repo_root
 from .validate import Validator
 
@@ -314,6 +315,38 @@ def cmd_materialize(args: argparse.Namespace) -> int:
     return 1 if failed else 0
 
 
+def cmd_check_deck(args: argparse.Namespace) -> int:
+    repo = _load(args)
+    fmt = repo.formats.get(args.format)
+    if fmt is None:
+        print(
+            f"check-deck: unknown format {args.format!r}; known formats: "
+            + ", ".join(sorted(repo.formats)),
+            file=sys.stderr,
+        )
+        return 2
+    path = Path(args.ydk)
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        print(f"check-deck: cannot read {path}: {exc}", file=sys.stderr)
+        return 2
+    deck = parse_ydk(text)
+    print(
+        f"{path.name}: {len(deck.main)} main, {len(deck.extra)} extra, "
+        f"{len(deck.side)} side against {fmt.id}"
+    )
+    result = check_deck(deck, fmt, repo)
+    if result.legal:
+        print("LEGAL: no violations found")
+    else:
+        print(f"ILLEGAL: {len(result.findings)} violation(s)")
+        for finding in result.findings:
+            print(f"  [{finding.code}] {finding.message}")
+    print(FORBIDDEN_TYPE_NOTE)
+    return 0 if result.legal else 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="retroformats",
@@ -347,6 +380,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_mat.add_argument("pools", nargs="*", help="pool ids (default: every release-cutoff pool)")
     p_mat.set_defaults(func=cmd_materialize)
+
+    p_check = sub.add_parser(
+        "check-deck",
+        help="check a .ydk deck file against one of the three formats' shipped whitelist",
+    )
+    p_check.add_argument("ydk", help="path to a .ydk deck file")
+    p_check.add_argument("format", help="format id, e.g. 2005-04-goat")
+    p_check.set_defaults(func=cmd_check_deck)
 
     args = parser.parse_args(argv)
     return args.func(args)
