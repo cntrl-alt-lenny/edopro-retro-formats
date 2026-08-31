@@ -119,6 +119,39 @@
       "reliability_notes": "Direct entry-by-entry verification against this archive snapshot is still TODO (see roadmap)."
     },
     {
+      "id": "yugipedia-april-2005",
+      "kind": "wiki",
+      "title": "April 2005 Lists - Yugipedia",
+      "url": "https://yugipedia.com/wiki/April_2005_Lists",
+      "publisher": "Yugipedia",
+      "revision": "pageid 7971, wikitext fetched via the MediaWiki parse API",
+      "retrieved": "2026-08-31",
+      "used_for": "Complete April 1, 2005 TCG Forbidden/Limited/Semi-Limited card names and the list's effective/end date range. Note: despite the '(TCG)'-suffixed naming pattern used by later Yugipedia limitation-list pages (e.g. yugipedia-march-2010), this page's title carries no region suffix; its own body text and 'medium = TCG' template field confirm it covers the TCG list only.",
+      "reliability_notes": "Community wiki; the page itself cites two period sources, both independently re-fetched and cross-checked for this record (see pojo-forbidden-restricted-2005-03 and ude-tournament-appendix-2005-08)."
+    },
+    {
+      "id": "ude-tournament-appendix-2005-08",
+      "kind": "official",
+      "title": "UDE Tournament Appendix A: Yu-Gi-Oh! TCG Policies (Upper Deck Entertainment, updated August 1, 2005), via Internet Archive",
+      "url": "http://entertainment.upperdeck.com/op/policy/files/en/UDEAppendixAYGO01aug2005_en.doc",
+      "publisher": "Upper Deck Entertainment",
+      "revision": "Wayback Machine snapshot 20060104203431; document metadata (OLE): created/last saved 2005-08-01",
+      "retrieved": "2026-08-31",
+      "used_for": "Primary source for the April 2005 TCG Advanced Format Forbidden/Limited/Semi-Limited lists. Sections A-23 through A-25 state 'The Forbidden [/Limited/Semi-Limited] list, as of April 1, 2005, is:' followed by all 17/41/15 card names, confirming both the exact card lists and the effective_date.",
+      "reliability_notes": "Official Upper Deck Entertainment tournament-policy document; UDE was the Yu-Gi-Oh! TCG's exclusive North American tournament-policy publisher under license from Konami at this time (this project's 'official' kind explicitly covers Konami/UDE material - see schemas/sources.schema.json). Fetched as a legacy .doc (OLE Compound File) via the Wayback Machine; text extracted with antiword. The document's own stated validity window ('Valid until November 1, 2005') is the document revision's shelf life, not independent confirmation of the banlist's own superseded_by_date - that date is still sourced only via yugipedia-april-2005's 'next: October 2005 Lists' field, unchanged from before this round."
+    },
+    {
+      "id": "pojo-forbidden-restricted-2005-03",
+      "kind": "community-site",
+      "title": "Yu-Gi-Oh Banned & Restricted List - Pojo.com, archived snapshot",
+      "url": "https://web.archive.org/web/20050305050643/http://www.pojo.com/yu-gi-oh/PriceGuide/Banned-Restricted-List.shtml",
+      "publisher": "Pojo.com",
+      "revision": "Wayback Machine snapshot 20050305050643",
+      "retrieved": "2026-08-31",
+      "used_for": "Independent, period-contemporary corroboration of the same April 1, 2005 Advanced Format list (all 17 forbidden/41 limited/15 semi-limited names match exactly) and its effective date ('ADVANCED FORMAT LIST EFFECTIVE APRIL 1st, 2005'); the Wayback Machine capture predates the list's own effective date by roughly three weeks, so this is a genuine period snapshot rather than a retrospective transcription.",
+      "reliability_notes": "Fan/community site (the page itself disclaims official affiliation with Konami); used only as corroborating period evidence alongside the official ude-tournament-appendix-2005-08 source, never as the sole basis for a claim."
+    },
+    {
       "id": "edisonformat-what-is",
       "kind": "community-site",
       "title": "What is Edison Format? - EdisonFormat.com",
