@@ -9,8 +9,15 @@ still preventing the first.
 
 ## Authority
 
-The human project owner is final authority over direction, acceptance, and
-merges. Nothing below overrides that.
+The human project owner is final authority over project direction and
+retains veto over anything already done. Nothing below overrides that.
+
+**The merge gate is Brain's independent review, not a human per-round
+approval.** The owner sets direction and can reverse any decision after
+the fact; they do not sign off on each round before it lands. Any
+document describing a human PR review or per-round merge approval as the
+gate is stale — this is the current policy, and it is stated once here
+rather than restated (and drifted) in each role file.
 
 ## Exactly two permanent AI roles
 
@@ -116,8 +123,9 @@ These predate this coordination framework and outrank any process below.
   (`reset --hard`, force-push, discarding uncommitted changes), check
   `git status` and whether another session has work in flight; stash or
   branch instead of clobbering. Brain and a locally-run Worker use
-  **separate sibling git worktrees**, not the same checkout with
-  branch-switching — see
+  **separate git worktrees of the same clone** (Worker's is nested at
+  `.claude/worktrees/worker/`), not one checkout with branch-switching —
+  see
   [`docs/agents/worktree-mechanism.md`](docs/agents/worktree-mechanism.md).
   This exists because it already went wrong once: a Worker round ran in
   Brain's own checkout and a later Brain session didn't notice before
@@ -135,7 +143,21 @@ These predate this coordination framework and outrank any process below.
 - **State handoff.** Durable facts that outlive one session go in
   [`docs/state.md`](docs/state.md) (kept short) or a repo doc it points to
   — never only in chat history. [`docs/briefs/`](docs/briefs/) is the
-  in-flight task queue.
+  in-flight task queue. `state.md` is a *pointer* document: when a section
+  starts accumulating per-round detail that already lives in
+  `docs/agents/model-notes.md` or an archived brief, trim it back rather
+  than letting it grow — it has already needed that once.
+- **Fix the defect class, not the first example.** When something is
+  wrong, establish whether the same root cause reaches other cases before
+  patching the one that surfaced. A one-off patch that leaves the class
+  open reads as "fixed" in every later summary. If the general fix is
+  genuinely ambiguous, say so and stop — a wrong general rule applied
+  silently to every future case is worse than a documented open decision.
+- **Prefer a mechanism over a list.** "I tried these cases and they were
+  fine" decays the moment the code changes; an executable check does not.
+  When a finding is worth preventing from recurring, land it as a test,
+  a validator rule, or a hook — and where the *reason* a design was
+  rejected matters, pin that too, so nobody re-proposes it from scratch.
 - **No guessing historical facts to satisfy a schema or a deadline.** An
   unresolved field stays unresolved and blocking until real evidence closes
   it.
@@ -153,6 +175,8 @@ These predate this coordination framework and outrank any process below.
   stop disambiguating same-day rounds)
 - How Brain and Worker share a machine without colliding:
   [`docs/agents/worktree-mechanism.md`](docs/agents/worktree-mechanism.md)
+- The pre-push data/build gate, and why it is convenience rather than
+  enforcement: [`docs/agents/push-gate.md`](docs/agents/push-gate.md)
 - What's actually been observed running Worker on different models:
   [`docs/agents/model-notes.md`](docs/agents/model-notes.md)
 - Full research corpus: `docs/research/` (large; briefs scope what's

@@ -40,7 +40,8 @@ than the tool.
    before touching anything. If local and remote disagree, or there's
    uncommitted/stashed work, understand why before proceeding — it may be
    another session's in-flight work. Check `git worktree list` too — a
-   Worker round may be sitting in the sibling worktree (see
+   Worker round may be sitting in the nested worktree at
+   `.claude/worktrees/worker/` (see
    [`worktree-mechanism.md`](../../docs/agents/worktree-mechanism.md))
    with a branch not yet merged.
 4. Check [`docs/briefs/active.md`](../../docs/briefs/active.md) for an

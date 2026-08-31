@@ -18,7 +18,9 @@ repeated here.
 
 `cntrl-alt-lenny/edopro-retro-formats`, public, default branch `main`,
 single-branch history (no long-lived branches, no PR history to date — the
-established workflow is direct, reviewed-by-the-owner commits to `main`).
+established workflow is short-lived `worker/<slug>` branches that Brain
+merges into `main` after independent review; see `AGENTS.md` § Authority.
+There is no PR gate and no human per-round merge approval).
 Pure-stdlib Python 3.10+ project; no dependency manifest exists or is
 needed. CI (`.github/workflows/ci.yml`, push+PR, Python 3.10 & 3.13) runs:
 
@@ -166,6 +168,11 @@ implementation.
   committed. Don't attempt another data-density iteration next time —
   the ask is for a different visual language, not a tighter version of
   the same one.
+- The pre-push gate is **opt-in per clone** (`git config core.hooksPath
+  .githooks`). It is set up on the Windows machine as of 2026-08-31; it
+  will need running once on the Mac and on any fresh clone. See
+  [`docs/agents/push-gate.md`](agents/push-gate.md) — and note it is
+  convenience, not enforcement: CI is the only backstop that always runs.
 
 ## Recommended next action
 

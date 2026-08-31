@@ -1,6 +1,6 @@
 ---
 name: worker
-description: Single execution role for edopro-retro-formats. Executes exactly one Brain-authored brief per invocation, in whichever MODE the brief specifies (implementation, historical research, source verification, adversarial audit, data/schema work, regression investigation, documentation). Use for a self-contained brief that fits in one context; for a brief that needs its own branch, commits, and a PR the human reviews, launch a standalone Claude Code session instead (see "Launching Worker" below).
+description: Single execution role for edopro-retro-formats. Executes exactly one Brain-authored brief per invocation, in whichever MODE the brief specifies (implementation, historical research, source verification, adversarial audit, data/schema work, regression investigation, documentation). Use for a self-contained brief that fits in one context; for a brief that needs its own branch and commits for Brain to review independently, launch a standalone session instead (see "Launching Worker" below).
 tools: "*"
 model: sonnet
 ---
@@ -107,20 +107,21 @@ explicit High effort:
    already appropriate for the surrounding task: an `agent()` call with
    `{ agentType: 'worker', model: 'sonnet', effort: 'high' }` pins both
    model and effort precisely. Good for a self-contained brief that fits in
-   one context and doesn't need its own branch/PR lifecycle.
+   one context and doesn't need its own branch lifecycle.
 2. **A human launches a standalone session** (Claude Code or otherwise —
    see "This role is model-agnostic" above) for a brief that needs its own
-   branch, commits, and independent review: start a normal session, select
-   the model/effort at launch, and open with this file and the brief in
-   `docs/briefs/active.md`. This is the expected path for anything Brain
-   shouldn't just self-review inline — it preserves "Worker never merges
-   its own work" as an actual human gate, not a polite fiction. **If this
-   runs on the same machine as a Brain session sharing the same clone,
-   point it at the sibling worktree**
-   (`docs/agents/worktree-mechanism.md`), not Brain's own checkout — two
-   sessions sharing one working directory is exactly how a Worker branch
-   once ended up with unrelated Brain commits stacked on top of it before
-   review.
+   branch and commits: start a normal session, select the model/effort at
+   launch, and open with this file and the brief in
+   `docs/briefs/active.md`. This is the expected path for most real
+   rounds. What makes "Worker never merges its own work" real is that a
+   *separate Brain context* independently re-derives the round's
+   load-bearing claims before merging (see `AGENTS.md` § Authority) — not
+   a human PR review, which this project does not use. **If this runs on
+   the same machine as a Brain session sharing the same clone, point it at
+   the nested worktree** (`docs/agents/worktree-mechanism.md`), not
+   Brain's own checkout — two sessions sharing one working directory is
+   exactly how a Worker branch once ended up with unrelated Brain commits
+   stacked on top of it before review.
 
 Do not invent a third mechanism (e.g. a made-up frontmatter `effort:` key)
 if neither of these fits — fall back to documenting the gap for the human

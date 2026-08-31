@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# pre-push: refuse to push canonical data that fails validation, or a
+# stale/hand-edited dist/. Thin shim -- all logic (and its rationale, its
+# limits, and why it is NOT at the Claude Code Bash-hook layer) lives in
+# scripts/check_push_readiness.py, which is unit-tested by
+# tests/test_push_readiness.py.
+#
+# Activate per clone (not automatic, including on a fresh clone):
+#   git config core.hooksPath .githooks
+#
+# Bypass once:  git push --no-verify
+# This is a convenience, not a control -- CI is the real backstop. See
+# docs/agents/push-gate.md.
+
+set -e
+
+repo_root=$(git rev-parse --show-toplevel)
+
+# Interpreter: this project documents `python` on Windows (where python3
+# may not exist at all) and `python3` on macOS/Linux. Try both rather than
+# hard-coding either; a hook that silently no-ops because the interpreter
+# name is wrong is worse than no hook.
+if command -v python3 >/dev/null 2>&1; then
+    PY=python3
+elif command -v python >/dev/null 2>&1; then
+    PY=python
+else
+    echo "[pre-push] no python3/python on PATH; skipping readiness check." >&2
+    echo "[pre-push] CI still runs it. To silence this, install Python or unset core.hooksPath." >&2
+    exit 0
+fi
+
+exec "$PY" "$repo_root/scripts/check_push_readiness.py"
