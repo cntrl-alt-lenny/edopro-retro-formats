@@ -58,6 +58,14 @@ Rulings that are easy to get wrong and expensive to rediscover:
   no mirrorable source at all (their schemas define no `completeness`),
   so they are pure adjudications. Audited exhaustively in round 5 — a
   third drifted axis is not possible without a schema change.
+- **`schemas/*.json` are documentation, not enforcement.** Nothing in
+  this repository runs a generic JSON-Schema validator over `data/`:
+  there is no `jsonschema` import anywhere, `Repository.load()` is a
+  hand-rolled loader, and `tests/schema_check.py` is wired only to
+  `erratum.schema.json`. Adding a field to a schema's `required` array
+  therefore changes nothing at runtime — the real gate is always
+  `retroformats/validate.py`. Established in round 6; check this before
+  believing any schema edit enforces something.
 - **The errata v1→v2 migration is complete; the v1 positional model is
   retired.** Don't reintroduce it.
 - **Python: standard library only.** No dependency manifest, by choice.

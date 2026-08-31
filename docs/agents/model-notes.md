@@ -13,6 +13,56 @@ which model executed a round.
 
 ## Round log
 
+**Round 6 (2026-08-31) — Tengu `legality_basis` + banlist source
+verification + stale-source sweep
+(`docs/briefs/archive/006-2026-08-31-tengu-legality-basis-and-banlist-evidence.md`),
+model: Claude Sonnet 5 High, in the nested worktree.** Accepted. The
+strongest round yet on evidence discipline, with one wording defect
+carried into round 7.
+
+Part B was the piece that mattered. The brief framed "can Tengu's
+banlist reach `verified`?" as a genuine question with "no" explicitly
+allowed. Worker falsified the existing primary citation rather than
+leaning on it: `konami-september-2011-list` is Konami's *Japan-domain
+OCG* regulation page, and its English column is a translation aid, not
+independent TCG evidence — proven by a forbidden entry (Sixth Sense)
+whose TCG-name cell is blank. It then found a genuine period-archived
+TCG-side page (`yugioh-card.com/en/limited/`, Wayback 2011-09-23, same
+page family as Edison's accepted precedent) and reconciled against that
+instead. It also distrusted its own tooling: a WebFetch summary claimed
+the Japan page had no TCG column at all, which was flatly wrong, and
+Worker re-verified by direct inspection rather than reporting the
+summary. That instinct is the reason this round is trustworthy.
+
+Two other things done right: it flagged unprompted that adding
+`legality_basis` to `schemas/pool.schema.json`'s `required` array has
+**zero enforcement effect**, because nothing in this repo runs a generic
+JSON-Schema validator over pools — so the real fix is the `validate.py`
+change alone. And it did a real red/green cycle on the new rule rather
+than asserting one.
+
+Brain verified independently rather than reading the diff: fetched the
+archived Konami page directly and re-derived the entire reconciliation
+from raw HTML — 134 page entries vs 134 JSON entries, 51/65/18 both
+sides, zero cards on either side only, zero status mismatches, exact
+match after normalising the page's full-width hyphens; confirmed the
+page's own "Effective September 1, 2011 / UPDATED: 8/18/11" text;
+negative-tested `pool.missing-legality-basis` by deleting the field and
+watching validate go to 1 error, then restoring; confirmed no
+`jsonschema` import exists anywhere and `tests/schema_check.py` is wired
+only to `erratum.schema.json`, so the zero-enforcement disclosure is
+accurate; and re-ran 947 tests at the exact final SHA `a81ca09`.
+
+**The one defect, sent to round 7 rather than fixed by Brain** (it is
+canonical data and an evidence claim, which the operating policy keeps
+out of Brain's hands): the note asserts Sixth Sense has "no TCG printing
+at all" — a universal negative that nothing cited establishes, and that
+this repo's own TCG coverage (ending 2011-09-17) cannot reach. Yugipedia's
+card page shows an empty `en_sets`, so the claim is probably true, but
+probably-true-and-unsourced is exactly what this project's bar excludes.
+The argument it supports is sound on the weaker period-scoped claim, so
+the conclusion stands and only the sentence needs correcting.
+
 **Round 5 (2026-08-31) — status propagation / axis-drift audit /
 BabelCDB revision honesty
 (`docs/briefs/archive/005-2026-08-31-status-propagation-consistency.md`),
