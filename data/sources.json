@@ -115,8 +115,8 @@
       "publisher": "Konami",
       "revision": "archive snapshot 2010-08-25",
       "retrieved": "2026-08-19",
-      "used_for": "Primary source for the March 2010 TCG list; currently cited via the Yugipedia page's own references.",
-      "reliability_notes": "Direct entry-by-entry verification against this archive snapshot is still TODO (see roadmap)."
+      "used_for": "Primary source for the March 2010 TCG list, entry-by-entry reconciled against data/banlists/tcg/2010-03.json.",
+      "reliability_notes": "Round 2 performed the direct entry-by-entry verification against this archive snapshot: all 132 entries (43 forbidden / 70 limited / 19 semi-limited) matched exactly, zero mismatches - see data/banlists/tcg/2010-03.json's own notes and docs/briefs/archive/002-2026-08-30-march-2010-banlist-verification.md."
     },
     {
       "id": "yugipedia-april-2005",
@@ -511,8 +511,19 @@
       "url": "https://www.yugioh-card.com/japan/event/limitregulation/?list=201109",
       "publisher": "Konami",
       "retrieved": "2026-08-27",
-      "used_for": "Primary cross-check of the September 2011 TCG Forbidden/Limited/Semi-Limited counts and card identities in the research-only Tengu packet.",
-      "reliability_notes": "Official historical list page displays OCG and TCG columns; the packet uses the TCG column only."
+      "used_for": "Secondary cross-check of the September 2011 TCG Forbidden/Limited/Semi-Limited counts and card identities in the canonical Tengu banlist (data/banlists/tcg/2011-09.json).",
+      "reliability_notes": "RE-EXAMINED 2026-08-31 (round 6): this is Konami's Japan-domain OCG regulation page (yugioh-card.com/japan/..., Japanese-language site branded 'YU-GI-OH! OCG Duel Monsters'), not a TCG-facing page. It displays two name columns per card - 'YU-GI-OH! OCG' (Japanese) and 'YU-GI-OH! TRADING CARD GAME' (English) - but the second column is an English-name annotation of the OCG's own forbidden/limited list, not an independent TCG regulation: one of its 52 forbidden entries, Sixth Sense (第六感), has no TCG printing at all and is left blank in the TCG column, proving the underlying list is the OCG's. It is therefore evidence about OCG-side regulation and English card-name mappings, never a primary or corroborating source for what the TCG's own regulation was on a given date - see konami-limited-2011-09-archive for that. (In this specific instance the OCG list's 51 TCG-translatable forbidden names, plus its 65 limited and 18 semi-limited names, happen to match the genuine TCG list exactly - confirmed by round 6's independent reconciliation - but that convergence is a historical fact about September 2011, not a property of this source that can be relied on for any other date.)"
+    },
+    {
+      "id": "konami-limited-2011-09-archive",
+      "kind": "official",
+      "title": "LIMITED & FORBIDDEN LISTS - Effective September 1, 2011 (Konami, via Internet Archive)",
+      "url": "http://web.archive.org/web/20110923171453/http://www.yugioh-card.com/en/limited/",
+      "publisher": "Konami",
+      "revision": "archive snapshot 2011-09-23",
+      "retrieved": "2026-08-31",
+      "used_for": "Primary source for the September 2011 TCG Forbidden/Limited/Semi-Limited list. Round 6 reconciled all 134 entries in data/banlists/tcg/2011-09.json against this page card-by-card (51 forbidden / 65 limited / 18 semi-limited) - exact match, no discrepancies.",
+      "reliability_notes": "The actual TCG-facing page (yugioh-card.com/en/limited/, the same page family as konami-limited-2010-03), captured by the Wayback Machine 2011-09-23 - within the list's own stated effective window ('Effective September 1, 2011, UPDATED: 8/18/11') and well before any subsequent list change. This is the primary/period evidence konami-september-2011-list cannot supply."
     },
     {
       "id": "konami-2011-product-pages",

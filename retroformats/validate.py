@@ -162,7 +162,15 @@ class Validator:
             # An unknown region would silently widen default territory scoping.
             self.error("pool.bad-region", pool.path, f"region {pool.region!r}")
         basis = pool.raw.get("legality_basis")
-        if basis is not None and basis not in ("availability", "historical-policy", "community-retrospective"):
+        if basis is None:
+            self.error(
+                "pool.missing-legality-basis",
+                pool.path,
+                "legality_basis is not set - a pool must declare what it CLAIMS to be "
+                "(availability / historical-policy / community-retrospective), see "
+                "schemas/pool.schema.json",
+            )
+        elif basis not in ("availability", "historical-policy", "community-retrospective"):
             self.error("pool.bad-legality-basis", pool.path, f"legality_basis {basis!r}")
         if pool.kind == "extensional":
             if not pool.cards:

@@ -945,11 +945,12 @@
       "status": "semilimited"
     }
   ],
-  "completeness": "complete",
+  "completeness": "verified",
   "sources": [
+    "konami-limited-2011-09-archive",
     "konami-september-2011-list",
     "formatlibrary-tengu",
     "tenguformat-ycs-toronto"
   ],
-  "notes": "Official Konami September 1, 2011 TCG Forbidden and Limited list (51 forbidden / 65 limited / 18 semi-limited), independently cross-checked against Format Library and TenguFormat.com; passcodes and names verified against cards.cdb."
+  "notes": "Official Konami September 1, 2011 TCG Forbidden and Limited list (51 forbidden / 65 limited / 18 semi-limited), independently cross-checked against Format Library and TenguFormat.com; passcodes and names verified against cards.cdb. VERIFIED 2026-08-31 (round 6): all 134 entries card-by-card reconciled against konami-limited-2011-09-archive, a genuine period-archived TCG-facing page (yugioh-card.com/en/limited/, Wayback snapshot 2011-09-23, within the list's own stated effective window) - exact match, zero discrepancies. This supersedes konami-september-2011-list as the load-bearing primary source: that entry is Konami's Japan-domain OCG regulation page, whose English-name column is a translation aid for the OCG list (not independent TCG evidence - see its own reliability_notes, corrected this round) and is retained only as a secondary cross-check, not the basis for this verified status."
 }

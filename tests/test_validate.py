@@ -96,6 +96,14 @@ class ValidRepoTest(TempRepoTest):
         validator = run_validation(self.root)
         self.assertIn("format.restricted-card-outside-pool", {f.code for f in validator.warnings})
 
+    def test_pool_without_legality_basis_fails(self):
+        self._seed_valid()
+        self.add_pool(
+            cards=[card(100, "Alpha", variant_passcodes=[101]), card(200, "Beta"), card(300, "Gamma")],
+            legality_basis=None,
+        )
+        self.assertIn("pool.missing-legality-basis", error_codes(run_validation(self.root)))
+
     def test_variant_out_of_artwork_range_fails(self):
         self._seed_valid()
         self.add_card_index(

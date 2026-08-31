@@ -67,7 +67,7 @@ class TenguFormatTest(unittest.TestCase):
         banlist = self.repo.banlists["tcg-2011-09"]
         self.assertEqual("2011-09-01", banlist.effective_date)
         self.assertEqual("TCG", banlist.region)
-        self.assertEqual("complete", banlist.raw["completeness"])
+        self.assertEqual("verified", banlist.raw["completeness"])
 
     def test_5_banlist_counts_are_exactly_51_65_18(self):
         banlist = self.repo.banlists["tcg-2011-09"]
@@ -113,6 +113,7 @@ class TenguFormatTest(unittest.TestCase):
         pool = self.repo.pools["pool-tengu-2011"]
         self.assertEqual(TENGU_POOL_COUNT, len(pool.cards))
         self.assertEqual("verified", pool.raw["completeness"])
+        self.assertEqual("community-retrospective", pool.raw["legality_basis"])
 
     def test_7_pool_has_zero_unresolved_release_ambiguities(self):
         pool = self.repo.pools["pool-tengu-2011"]

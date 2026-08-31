@@ -74,6 +74,7 @@ class TempRepoTest(unittest.TestCase):
             "kind": "extensional",
             "cards": list(cards),
             "sources": ["test-source"],
+            "legality_basis": "availability",
         }
         payload.update(kw)
         self.write(f"data/pools/{id.removeprefix('pool-')}.json", payload)
@@ -244,6 +245,7 @@ class TempRepoTest(unittest.TestCase):
             "kind": "release-cutoff",
             "cutoff": {"cutoff_date": cutoff_date, **cutoff_kw},
             "sources": ["test-source"],
+            "legality_basis": "availability",
         }
         if cards is not None:
             payload["cards"] = cards

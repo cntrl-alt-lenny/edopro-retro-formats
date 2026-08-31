@@ -4,7 +4,7 @@
   "title": "Card pool definition",
   "description": "The set of cards legally available to players at a format's snapshot date. Two representations are supported: an intensional rule (release cutoff, resolved against the releases dataset at build time) and an extensional list (explicit passcodes, typically imported from a vetted external definition). A pool may carry both; the validator cross-checks them against each other where possible.",
   "type": "object",
-  "required": ["id", "region", "kind", "sources"],
+  "required": ["id", "region", "kind", "sources", "legality_basis"],
   "additionalProperties": false,
   "properties": {
     "$schema": { "type": "string" },

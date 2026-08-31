@@ -49,13 +49,14 @@
     "YS11"
   ],
   "implementation_status": {
-    "banlist": "complete",
+    "banlist": "verified",
     "card_pool": "verified",
     "rule_profile": "partial",
     "errata": "partial",
     "overall": "partial"
   },
   "sources": [
+    "konami-limited-2011-09-archive",
     "konami-september-2011-list",
     "formatlibrary-tengu",
     "tenguformat-ycs-toronto",
