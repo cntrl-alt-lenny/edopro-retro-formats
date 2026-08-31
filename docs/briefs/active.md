@@ -21,23 +21,35 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ---
 
-## MODE: DATA/SCHEMA
+## MODE: HISTORICAL RESEARCH
+
+Read that mode's rules carefully before starting. In particular:
+**canonical data and schema changes are forbidden this round** except
+where Part A explicitly authorises a documentation fix. Findings are
+recorded in `docs/research/`; applying them to the 68 affected errata
+records is a separate, later DATA round.
 
 ## Goal
 
-Choose, prove, and document **this project's own reserved passcode
-range** — the prerequisite roadmap item 7 (`custom-script`/cdb
-generation) has been blocked on since it was written.
+Roadmap item 1b — **close, or narrow, the failed-search deck-verification
+interval.**
 
-Item 7 is the largest remaining structural piece: it is what lets this
-project ship a historical card Project Ignis does not, and it is what
-roadmap item 1c's 48 acknowledged implementation gaps feed into. It
-cannot start until there is a code range that provably cannot collide
-with anything upstream.
+This is the highest-leverage open chronology question in the project, and
+the reason is sharper than the roadmap states. Brain measured it;
+**re-derive it yourself rather than trusting these numbers**:
 
-**This round picks and proves the range. It does not build generation.**
+| format | snapshot | interval records ambiguous | determinate |
+|---|---|---|---|
+| `2005-04-goat` | 2005-04-01 | 48 | 20 |
+| `2010-03-edison` | 2010-04-24 | 48 | 20 |
+| `2011-09-tengu` | 2011-09-17 | **68** | **0** |
 
-Part A is a small correction carried over from round 8.
+68 of the 296 errata records cite both bounds. Tengu — the newest
+canonical format — sits inside the open interval on **every single one**.
+GOAT and Edison are partly protected because their snapshots precede
+`2011-02-02`, but even they are ambiguous on 48, which suggests a
+*second* cause bundled into the same records (see Part B's note on
+disentangling the two axes).
 
 ## Starting SHA
 
@@ -46,145 +58,145 @@ in your report. `main` should be clean.
 
 ---
 
-## Part A — one over-general sentence in the deck checker
+## Part A — a conflation round 9 found but correctly left alone
 
-`retroformats/deckcheck.py`'s `FORBIDDEN_TYPE_NOTE` is printed to the
-user on every `check-deck` run. It says the check is redundant because:
+Round 9 established, from `gframe/data_manager.h` at the pinned
+`edopro-source` revision, that `SCOPE_PRERELEASE` (`0x100`) is an **`ot`
+bit-flag**, not a passcode range. The prerelease *passcode* convention is
+a separate thing (`10ZZYYXXX`, per BabelCDB's own README).
 
-> its **release-cutoff pool** cannot contain a card of any type it
-> forbids, since every such type's real first TCG printing postdates
-> this format's own cutoff
+Round 9 fixed `docs/roadmap.md`'s wording but deliberately did not touch
+the research corpus. Check whether `docs/research/ignis-goat.md` and
+`docs/research/edopro-data-repos-ui.md` carry the same conflation, and
+correct it where they do — citing the pinned revisions, not this brief.
 
-That reasoning is correct for Edison and Tengu. **It is not correct for
-GOAT**, whose pool is `kind: extensional` (`data/pools/pool-goat-2005-ignis.json`)
-— an imported Ignis whitelist, with no `cutoff` at all. The message
-attributes to GOAT a pool structure it does not have.
-
-The *conclusion* still holds for GOAT, by a different route: an
-extensional pool is a fixed, vetted list, and nothing in it is of a
-forbidden type. Round 8's underlying investigation was sound; only this
-one sentence over-generalised.
-
-Fix the message so it is true for all three formats — either by stating
-both routes, or by a formulation that covers extensional and
-release-cutoff pools without asserting a structure a given format lacks.
-The same over-generalisation appears in the long `FORBIDDEN_TYPE_NOTE`
-comment block directly above it; fix both, and keep the citations.
-
-Verify your wording against all three pools rather than reasoning from
-this brief.
+If they are already correct, say so plainly; "nothing to fix" is a fine
+result. Do not rewrite either document beyond this specific point.
 
 ---
 
-## Part B — the reserved range (the substantive part)
+## Part B — the interval (the substantive part)
 
-`docs/roadmap.md` item 7 states the requirement: pick a range that
-"cannot collide with 5047xxxxx/511YYYXXX/prerelease ranges and document
-it." That instruction names the constraint but has never been discharged.
+### What is currently established
 
-### What must be established, with evidence
+From `docs/errata.md` § "What the research established" (read it, and the
+records themselves, rather than relying on this summary):
 
-1. **What is actually in use upstream.** Brain surveyed the two cdbs at
-   the pinned `ignis-babelcdb` revision as a starting point — **re-derive
-   this yourself, do not trust it**:
-   - `goat-entries.cdb`: 191 rows, all in `504700000`–`504700190`.
-   - `cards-unofficial.cdb`: 5,878 rows spanning a *wide* space —
-     minimum `301`, maximum `810000114`, with rows in nearly every
-     hundred-million bucket from 0 to 8.
+- The old procedure — Project Ignis encodes it as `Duel.GoatConfirm` —
+  was official TCG ruling-layer policy through at least **2011-02-02**
+  (Konami's Storm of Ragnarok rulings).
+- The modern no-verification policy is first attested **2019-04-03**.
+- No announcement of the change has been found, so the chronology is
+  recorded as a bounded interval rather than a date.
 
-   That second figure is the important one: the unofficial database is
-   not confined to a tidy reserved block, so "pick a big round number"
-   is not good enough. Establish the real occupied set, and check
-   `cards.cdb` too — the official database is the largest constraint of
-   all and Brain did not survey it.
+### The question
 
-2. **The documented upstream conventions**, not just observed data.
-   `docs/research/ignis-goat.md` and
-   `docs/research/edopro-data-repos-ui.md` already describe the
-   `504700000+` and `511YYYXXX` conventions and the `ot`/`alias`
-   mechanics. Cite what is *convention* versus what is merely *currently
-   observed* — a range that is empty today but conventionally reserved
-   upstream is not available to us.
+**When did the TCG stop requiring a player to reveal their Deck to verify
+a failed search?**
 
-3. **The prerelease range** the roadmap names. Establish what it
-   actually is and where that is documented. If you cannot establish it
-   from cited evidence, say so explicitly — do not assume a value.
+Any genuine narrowing helps. The single most valuable result is evidence
+either way about **2011-09-17**, Tengu's snapshot — because that one date
+flips 68 records from ambiguous to determinate for that format.
 
-4. **The engine's own limits.** `schemas/common.schema.json`'s
-   `passcode` allows up to `4294967295`, and EDOPro codes are `uint32`.
-   Confirm the ceiling from the engine research rather than the schema
-   alone, and confirm nothing in the client special-cases high codes.
+Note carefully what each outcome would mean:
 
-### What to deliver
+- Evidence the **old** state still held after 2011-09-17 → Tengu resolves
+  to the old era, like GOAT and Edison.
+- Evidence the **new** state was already in force by then → Tengu resolves
+  to the modern era, which is a materially different format.
+- Evidence narrowing the interval but not past that date → still valuable;
+  record it.
 
-- A **chosen range**, with a stated size and an argument for why that
-  size is right for the plausible number of `custom-script` cards
-  (roadmap 1c's 48 gaps is the current known demand — check that figure
-  rather than repeating it).
-- A **collision proof**: the range is disjoint from every code observed
-  in the pinned upstream databases *and* from every convention you
-  documented. Show the check, not just the conclusion.
-- **Where the reservation is recorded** so it cannot be forgotten or
-  quietly violated later. Prefer a mechanism over a note: a validator
-  rule, a constant with a test, or a schema constraint. This project's
-  own standing instruction is "prefer a mechanism over a list"
-  (`AGENTS.md` § Working discipline) — apply it here.
-- Documentation of the decision and its reasoning, sited where a future
-  reader will look (the roadmap item, and/or `docs/architecture.md`'s
-  card-identity section, which already describes the upstream ranges).
+Do not let the convenience of the first outcome shape the reading of a
+source. State what each source actually establishes.
 
-### What NOT to do
+### Where to look
 
-- **Do not generate any cdb rows, scripts, or `dist/databases/`
-  content.** That is item 7's implementation and a separate round.
-- Do not assign codes to specific cards.
-- Do not change any existing passcode, erratum, pool, or banlist.
-- Do not widen `schemas/common.schema.json`'s `passcode` bounds.
+The existing research names the shape of source that has worked before:
+period Konami/UDE rulings documents, per-set rulings PDFs, judge-list
+archives, and official Card FAQ captures. Candidate leads, none
+guaranteed:
 
-If, while proving non-collision, you conclude that **no safe range
-exists** under the constraints as stated, that is a legitimate and
-valuable finding — report it with the evidence and stop, rather than
-picking the least-bad option silently.
+- Konami TCG rulings documents for sets between 2011 and 2019, the same
+  series as the Storm of Ragnarok document already cited;
+- archived `yugioh-card.com` rulings/FAQ pages via the Wayback Machine —
+  the same technique that produced round 2's and round 6's primary
+  sources;
+- Konami's published tournament policy documents, which
+  `data/sources.json` already carries one 2011 example of
+  (`konami-tcg-tournament-policy-v11-2011`);
+- the transition to the "Problem-Solving Card Text" era and the 2019-era
+  rulings-portal change, working *backwards* from the 2019-04-03
+  attestation.
+
+### Disentangling the two axes
+
+`docs/errata.md` records a **second, separate** question in many of the
+same records: whether a card could be *activated at all* with no valid
+target, which changed **per card** and is dated for some (Reinforcement
+of the Army by 2008-12-15) and unresolved for others.
+
+Roadmap 5c already found these two axes are bundled in one upstream
+script for a large cluster and cannot be sequenced against each other.
+Establish which axis is responsible for GOAT's and Edison's 48
+ambiguities, since it is evidently not the verification axis for them.
+That is a real finding either way and it tells a future round where the
+remaining work actually is.
+
+Do **not** attempt to resolve the per-card activation axis this round —
+that is roadmap 1a and is explicitly out of scope.
+
+### A null result is a real result
+
+The roadmap already records that no announcement was found. If this round
+also fails to narrow the interval, that is an acceptable outcome — but it
+must not read as "nothing happened."
+
+Record, in the relevant `docs/research/` file: exactly which sources were
+searched, how, what was and was not found, and what the failed search
+does and does not prove. `AGENTS.md` is explicit that failing to find a
+source is evidence about the search performed, never proof of global
+non-existence. A future round must be able to see what has already been
+tried and not repeat it.
 
 ## Non-goals
 
+- Do not modify any `data/errata/*.json` record, even if you narrow the
+  interval. Report the finding; applying it across 68 records is a
+  separate DATA round with its own review.
+- Do not change any format, pool, banlist, rule profile, or schema.
+- Do not attempt to resolve the per-card activation axis (roadmap 1a).
 - Do not attempt to run, install, or screenshot EDOPro (standing
   boundary since round 7).
-- Do not change canonical data other than what a reservation mechanism
-  strictly requires.
 - Do not add a dependency; standard library only.
 
 ## Protected invariants
 
-- All three generated lflists **byte-identical** after this round.
-  Confirm via `build --check` and `git status` showing no change under
-  `dist/lflists/`.
-- GOAT's EDOPro content hash stays `0x28E9FC02`.
-- `python -m retroformats validate` stays at **0 errors**, warnings at
-  569 unless you deliberately and reportedly change them.
-- `python -m retroformats check-deck` keeps working on round 8's
-  fixtures — Part A touches its output text, so re-run it.
+- Canonical data (`data/`, `formats/`) is **unchanged** this round —
+  `git status` must show no modification under either.
+- All three generated lflists byte-identical; `dist/` unchanged.
+- `python -m retroformats validate` stays at **0 errors**, warnings 569.
 
 ## Required investigation
 
-1. Re-derive the upstream occupied code set yourself, including
-   `cards.cdb`, at the pinned revision.
-2. Separate documented convention from merely-observed occupancy.
-3. Establish or explicitly fail to establish the prerelease range.
-4. Verify Part A's wording against all three pool records.
+1. Re-derive the ambiguity table above yourself.
+2. Read what the 68 records actually encode for this axis before
+   searching — the shape of the recorded chronology tells you what a
+   useful source would have to say.
+3. Search for period evidence, recording the search as you go.
+4. Establish which axis drives GOAT's and Edison's 48 ambiguities.
 
 ## Acceptance criteria
 
-- `check-deck`'s disclosure is true for all three formats.
-- A reserved range is chosen, sized with a stated rationale, and proven
-  disjoint from documented conventions and observed upstream codes —
-  or a reasoned finding that none is available.
-- The reservation is enforced by a mechanism, not only described in
-  prose, with a test that fails without it.
-- The decision and its evidence are documented where item 7 will find
-  them.
-- `dist/lflists/` byte-identical; full suite, validator, and
-  `build --check` all pass.
+- A definite statement of whether the interval narrowed, and if so, to
+  what, with sources that meet this project's bar for the claim being
+  made.
+- If it did not narrow: a recorded, specific account of what was searched
+  and what that does and does not prove.
+- A definite answer on which axis causes GOAT's and Edison's 48
+  ambiguities.
+- Part A resolved, or a plain statement that nothing needed fixing.
+- Canonical data and `dist/` unchanged; validator and full suite pass.
 
 ## Tests / validation
 
@@ -196,15 +208,14 @@ python -m retroformats build --check
 python -m unittest discover -t . -s tests -v
 ```
 
-Plus `check-deck` output on one round-8 fixture, showing the corrected
-disclosure text.
+Plus `git status --short data/ formats/ dist/` showing no changes.
 
 ## Git expectations
 
 Work in the nested worktree (`.claude/worktrees/worker/`, see
 `docs/agents/worktree-mechanism.md`) if running locally alongside a Brain
 session. Fetch `origin/main` and branch from there
-(e.g. `worker/reserved-passcode-range`). Do not merge to `main`
+(e.g. `worker/search-verification-interval`). Do not merge to `main`
 yourself. Do not push.
 
 ## Completion-report schema
@@ -212,13 +223,14 @@ yourself. Do not push.
 Report:
 
 - Starting SHA, branch, final SHA.
-- Part A: the corrected wording, and how you verified it against all
-  three pools.
-- Part B: the occupied-code survey as you re-derived it (including
-  `cards.cdb`); documented conventions versus observed occupancy; what
-  you established or could not establish about the prerelease range;
-  the chosen range with its size rationale; the collision proof; and the
-  mechanism that enforces the reservation.
-- Exact output of the three validation commands plus `check-deck`, and
-  confirmation `dist/lflists/` is unchanged.
+- Part A: what you found in each of the two research docs, and what you
+  changed.
+- Part B: the ambiguity table as you re-derived it; every source you
+  searched and what each did or did not establish; whether the interval
+  narrowed and to what; your evidenced answer on which axis drives the
+  GOAT/Edison ambiguities.
+- What a failed search does and does not prove, stated explicitly if you
+  did not narrow the interval.
+- Exact output of the three validation commands plus the `git status`
+  check.
 - Anything left genuinely uncertain, stated as uncertain.

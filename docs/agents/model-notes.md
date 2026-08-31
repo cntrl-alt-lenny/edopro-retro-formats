@@ -13,6 +13,59 @@ which model executed a round.
 
 ## Round log
 
+**Round 9 (2026-08-31) — reserved passcode range, unblocking roadmap
+item 7 (`docs/briefs/archive/009-2026-08-31-reserved-passcode-range.md`),
+model: Claude Sonnet 5 High, in the nested worktree.** Accepted. The most
+thorough evidence-gathering of any round so far.
+
+Went well past the brief's scope on the survey: the brief described two
+cdb files; Worker downloaded **all thirteen** in BabelCDB at the pinned
+revision and queried them directly, including the `cards.cdb` the brief
+admitted Brain had not checked. It then did the thing that actually makes
+the choice defensible — fetched BabelCDB's **own README** at that
+revision to separate *documented convention* (`10ZZYYXXX`, `160ZYYXXX`,
+`30ZYYYXXX`, `511YYYXXX`) from *observed occupancy*, correctly treating a
+conventionally-reserved-but-empty range as unavailable.
+
+Corrected the roadmap's own wording on a real conflation: "prerelease
+ranges" merges a passcode range with `SCOPE_PRERELEASE` (`0x100`), which
+is an `ot` bit-flag and not a range at all.
+
+Found and fixed a second, independent error the brief did not anticipate:
+roadmap item 1c's "48 acknowledged implementation gaps" was stale. The
+care here is the notable part — rather than just changing 48 to 41, it
+established that **48 is itself a real figure for a different metric**,
+so the original number was a conflation of two true counts rather than a
+typo.
+
+Brain verified independently rather than reading the diff: re-surveyed
+all 13 cdbs at the pinned revision and reproduced every figure exactly —
+24,702 unique passcodes, range 301–810000114, `cards.cdb` max 99995595,
+and **zero codes in 600000000–699999999**; fetched BabelCDB's README and
+confirmed all four documented conventions are real (and that `5047` is
+*not* README-documented, which Worker correctly treated as observed-only);
+and negative-tested the new rule by injecting `600000042` into a pool and
+watching `card.reserved-passcode-collision` fire.
+
+On the 41/48 correction Brain's first quick count disagreed, then proved
+to be Brain's own sloppy derivation. Computed properly with the same
+logic `report` uses: divergence union across all three formats = **41**,
+known-wrong union = **48**, combined = **89** — every one of Worker's
+three figures exact. Worth recording as a caution: a crude grep is not a
+re-derivation, and nearly produced a false accusation.
+
+One observation neither side raised: the 9xx decade is *also* empty and
+would have served equally. Worker's claim was scoped to decades 0–8 and
+is true as written, and 6xx is a fine choice — no defect, just noting the
+choice was not forced.
+
+**Sequencing consequence discovered after the merge:** item 7 still
+cannot start. There are **zero `custom-script` coverages** in the corpus
+(231 reuse-upstream, 56 known-gap, 4 none-needed), so the generator has
+no input. Reserving the range first was still correct — it is expensive
+to change later — but building the generator now would be speculative
+machinery, so round 10 goes to chronology instead.
+
 **Round 8 (2026-08-31) — deck validation tool, roadmap item 6
 (`docs/briefs/archive/008-2026-08-31-deck-validation-tool.md`), model:
 Claude Sonnet 5 High, in the nested worktree.** Accepted. The first
