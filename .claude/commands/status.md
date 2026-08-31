@@ -1,29 +1,51 @@
 ---
-description: Rehydrate as Brain in one shot -- read AGENTS.md, docs/state.md, the current git/GitHub state, and docs/briefs/active.md, then summarize what's live and what's next.
+description: Rehydrate as Brain in one shot -- read the contracts and durable state, derive all live state from git, check local setup, then summarize what's live and what's next.
 argument-hint: []
 allowed-tools: Read, Bash, Grep, Glob
 ---
 
-Run Brain's standard rehydration sequence (see `.claude/agents/brain.md`
-"Startup sequence" for the full rationale) and report back concisely,
-not by dumping every file:
+Run Brain's rehydration sequence (rationale:
+`.claude/agents/brain.md` and `docs/agents/role-contracts.md`) and report
+back concisely — do not dump file contents.
 
-1. Read `AGENTS.md` and `docs/state.md`.
-2. Check live repo state: current branch, `git status`, `git fetch`, and
-   whether local `main` matches `origin/main`. If `docs/state.md`'s
-   pinned SHA is stale, say so plainly rather than silently trusting it.
-3. Check `docs/briefs/active.md` -- is a brief queued, in progress
-   (a branch matching its expected name exists locally or on `origin`),
-   or is the placeholder empty ("no brief queued")?
-4. If `.git/agent-inbox/worker-latest.md` exists (see
-   `.claude/hooks/save_agent_reply.py` -- only present if a Worker round
-   ran as a Claude Code session), check its timestamp. If it's newer
-   than the last brief-archive event, surface it -- it may be a
-   completed round nobody has reviewed yet.
+**Read (durable):**
 
-Report back in a few short sections: **Repo state** (branch/SHA
-sync), **In-flight** (what's queued/running, from where), **Parked /
-do-not-reopen reminders worth repeating** (only if something in
-`docs/state.md` is directly relevant right now), **Recommended next
-action**. Do not re-paste large chunks of `docs/state.md` verbatim --
-synthesize.
+1. `AGENTS.md` — coordination rules and epistemics.
+2. `docs/agents/role-contracts.md` — your actual contract.
+3. `docs/state.md` — durable context only. It intentionally contains no
+   live state; do not quote a SHA or queue status from it.
+
+**Derive (live — from git and the filesystem, never from a document):**
+
+4. `git status`, current branch, `git fetch`, local HEAD vs `origin/main`.
+5. `git worktree list` and `git branch -a` — is there an unmerged
+   `worker/<slug>` branch, or a Worker round sitting in
+   `.claude/worktrees/worker/`?
+6. `docs/briefs/active.md` — does a brief exist, and what does its own
+   `Status:` line say? This is the only source of truth for whether work
+   is queued.
+7. `.git/agent-inbox/worker-latest.md` if it exists — Claude Code Worker
+   rounds only. Check its timestamp. Absent or stale means **unknown**,
+   never "nothing happened."
+
+**Check local setup:**
+
+8. `git config --get core.hooksPath`.
+   - Prints `.githooks` → the pre-push data/build gate is active; say
+     nothing about it.
+   - Anything else or empty → not active in this clone (fresh clone, or a
+     different machine). Configure it: `git config core.hooksPath
+     .githooks`, then note in one line that you did. This is routine local
+     setup on the owner's own repo — do it, don't ask, and don't hand them
+     a command to run.
+   - Either way don't overstate it: `--no-verify` bypasses it and there is
+     no server-side enforcement, so CI is the real backstop.
+
+**Report** in a few short sections: **Repo state** (branch, sync, anything
+unmerged), **In flight** (what's queued or awaiting review, from
+`active.md` and git), **Setup** (only if something was configured or is
+missing), **Recommended next action**. Synthesize — don't re-paste
+`docs/state.md`.
+
+If a Worker round is awaiting review, say so first: that's the next
+action, not a new task.

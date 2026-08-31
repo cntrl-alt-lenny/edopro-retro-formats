@@ -1,10 +1,23 @@
 # Active brief
 
-Status: **queued, not started**. One brief lives here at a time; when
-Worker completes it (accepted or rejected by Brain), move this file to
-`docs/briefs/archive/<NNN>-<date>-<slug>.md` (zero-padded, check the
-archive for the last-used number) and replace it with the next one, or
-leave a one-line "no brief queued" placeholder.
+Status: **queued, not started**.
+
+<!-- Brain bookkeeping (not part of the brief): one brief lives here at a
+time; on completion move this file to
+docs/briefs/archive/<NNN>-<date>-<slug>.md (zero-padded, check the archive
+for the last-used number) and replace it with the next one, or leave a
+one-line "no brief queued" placeholder. -->
+
+## Read before acting
+
+1. [`AGENTS.md`](../../AGENTS.md) — coordination rules and the
+   non-negotiable epistemic rules. They outrank convenience.
+2. [`docs/agents/role-contracts.md`](../agents/role-contracts.md) — the
+   Worker contract: your mode's rules, the ground rules, and the
+   completion-report schema you must report back in.
+
+Then this brief in full. Read only the further docs this brief scopes as
+relevant — don't ingest `docs/research/` wholesale.
 
 ---
 

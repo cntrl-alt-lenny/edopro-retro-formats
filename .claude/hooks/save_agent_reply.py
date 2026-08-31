@@ -10,8 +10,9 @@ for the worktree layout this depends on.
 
 # Why this exists
 
-Brain and Worker run in separate sibling worktrees of the same clone
-(edopro-retro-formats / edopro-retro-formats-worker). When a Worker round
+Brain and Worker run in separate worktrees of the same clone — Brain in
+the primary checkout, Worker in the nested `.claude/worktrees/worker/`
+(see docs/agents/worktree-mechanism.md). When a Worker round
 ends without the human relaying a report, Brain has no way to see what
 happened except by re-deriving it from the diff -- fine for facts, but it
 loses whatever Worker said about things it was unsure of, blockers it

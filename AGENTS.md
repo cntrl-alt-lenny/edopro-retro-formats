@@ -19,42 +19,62 @@ document describing a human PR review or per-round merge approval as the
 gate is stale — this is the current policy, and it is stated once here
 rather than restated (and drifted) in each role file.
 
+**The owner's interface is conversation, not the repository.** Their loop
+is: ask what's next → receive one ready-to-paste Worker prompt → paste it
+into whichever tool they choose → relay that Worker finished → receive the
+verified outcome and the next prompt. Branches, worktrees, SHAs, merges,
+CI and hook setup are Brain/Worker implementation details: fine inside a
+prompt the owner pastes without reading, never something the owner must
+understand or act on. If a step would require them to open a repository
+file or run a git command to keep the loop moving, that is a defect in
+the framework, not a task for them — see the handoff rules in
+[`role-contracts.md`](docs/agents/role-contracts.md).
+
 ## Exactly two permanent AI roles
 
 There are no other standing roles. Specialist behaviour is a **mode** the
 Worker adopts for one brief, not a separate agent.
 
-### Brain — persistent project intelligence
+**Neither role is defined by a model or a vendor.** The owner runs these
+seats on Anthropic, OpenAI and Google models interchangeably. Role
+contracts and required capabilities live in
+[`docs/agents/role-contracts.md`](docs/agents/role-contracts.md); current
+model preferences are recorded in
+[`docs/agents/model-notes.md`](docs/agents/model-notes.md) and are
+preferences, not part of any contract. Files under `.claude/` are
+adapters for one specific tool — they may add launch mechanics, never
+normative rules.
 
-Model: Claude Sonnet 5, Ultracode-capable (opt in in the moment when a task
-warrants parallel research/verification — see [`.claude/agents/brain.md`](.claude/agents/brain.md)).
+### Brain — persistent project intelligence
 
 Brain owns: architecture, roadmap sequencing, durable state
 ([`docs/state.md`](docs/state.md)), writing Worker briefs
 ([`docs/briefs/`](docs/briefs/)), independently reviewing every Worker
-result, historical-epistemic discipline, and the final recommendation to the
-human. Brain does not normally implement milestones itself — see
-`.claude/agents/brain.md` for the full loop.
+result, historical-epistemic discipline, and handing the owner their next
+action. Brain does not normally implement milestones itself.
+
+The seat needs enough context and reasoning depth for architecture and
+provenance adjudication, direct repository and source access, and the
+ability to run the validator, build and tests. Full loop and review
+standard: [`role-contracts.md`](docs/agents/role-contracts.md).
 
 ### Worker — single executor role, many modes
 
-Default: Claude Sonnet 5 at **High** effort (see
-[`.claude/agents/worker.md`](.claude/agents/worker.md) for how this is
-actually configured — effort is not a declarative agent-file field today,
-so that doc documents the real mechanism rather than an invented one).
+**Worker is defined by the brief format and completion-report contract,
+not by vendor.** Running a brief through a different frontier model
+changes nothing about how Brain reviews the result — a Worker report is
+evidence to independently check regardless of which model produced it
+(see § Authority). If anything, a genuinely different model with zero
+shared context is a *stronger* fit for "fresh context, neutral brief."
 
-**Worker is defined by the brief format and completion-report contract, not
-by vendor.** The human owner may run a brief through a different
-frontier model/tool (e.g. a competing model at a comparable high-effort
-tier) instead of a Claude Code session. That's fine and changes nothing
-about how Brain reviews the result — a Worker report is evidence to
-independently check regardless of which model produced it, per "Brain
-independently verifies" below. If anything, a genuinely different model
-with zero shared context is a *stronger* fit for "fresh context, neutral
-brief" than another Claude session would be. What must stay constant
-across any Worker substitution: it reads `AGENTS.md` and its brief before
-acting, follows the brief's `MODE:`, and reports back in the schema the
-brief specifies.
+The seat needs faithful execution without scope drift, evidence
+discipline, and **filesystem and git access** — the completion report
+requires a real branch and real SHAs, so a browser-only chat assistant
+cannot fill it. Any vendor's agentic tool can.
+
+What must stay constant across any substitution: Worker reads `AGENTS.md`
+and [`role-contracts.md`](docs/agents/role-contracts.md) before acting,
+follows the brief's `MODE:`, and reports in the contracted schema.
 
 Worker executes **one coherent brief at a time**, always starting from a
 `MODE:` line: `IMPLEMENTATION`, `HISTORICAL RESEARCH`, `SOURCE VERIFICATION`,
@@ -75,20 +95,24 @@ A missing or stale inbox file means "unknown," never "nothing happened."
 human owner operates at the direction/strategy level (what to work on,
 whether the project's overall trajectory is right), not the per-diff
 review level — that's the whole reason this framework exists. So: once
-Brain has independently reviewed a Worker round (per "Brain review
-standard" below) and accepts it, Brain merges the Worker's branch into
-`main` and pushes — this repo has no PR gate, so that merge *is* the
-acceptance action — and then hands over the next brief, without waiting
-for a fresh per-round "okay to merge?" Brain still always reports plainly,
-in the same turn, what it merged/pushed and why, so oversight stays
-possible without the human having to ask for it. This authorization is
-scoped narrowly to *merging an already-independently-reviewed, accepted
-Worker round* — it does not extend to other durably-risky actions (force
-push, deleting branches or data, touching CI/security config, canonical
-historical adjudications on thin evidence), which still warrant surfacing
-to the human explicitly, and it does not relax the review itself: a bad
-Worker round still gets rejected or sent back with a corrective brief, not
-merged to keep the loop moving.
+Brain has independently reviewed a Worker round (per the review standard
+in [`role-contracts.md`](docs/agents/role-contracts.md)) and accepts it,
+Brain merges the Worker's branch into `main` and pushes — this repo has no
+PR gate, so that merge *is* the acceptance action — and then hands over
+the next brief, without waiting for a fresh per-round "okay to merge?"
+Brain still always reports plainly, in the same turn, what it merged and
+pushed and why, so oversight stays possible without the owner having to
+ask for it.
+
+Routine cleanup that follows an accepted merge — deleting the merged
+`worker/<slug>` branch, syncing the Worker worktree, configuring the local
+push hook — is part of that authorization, not a separate decision to
+surface. What is *not* covered: force-pushing, deleting data or unmerged
+branches, touching CI or security config, and canonical historical
+adjudications resting on thin evidence. Those still get surfaced
+explicitly. None of it relaxes the review itself — a bad round gets
+rejected or sent back with a corrective brief, never merged to keep the
+loop moving.
 
 ## Non-negotiable project epistemics
 
@@ -164,8 +188,12 @@ These predate this coordination framework and outrank any process below.
 
 ## Where to look
 
-- Live state / what to do next: [`docs/state.md`](docs/state.md)
-  (`/status` in a Claude Code session runs the rehydration sequence)
+- What each role must actually do (vendor-neutral; the normative contract):
+  [`docs/agents/role-contracts.md`](docs/agents/role-contracts.md)
+- Durable project context — parked research, architectural rulings, owner
+  preferences: [`docs/state.md`](docs/state.md). It deliberately stores no
+  live state; derive current SHA/branch/queue/hook status from git and
+  `docs/briefs/active.md` (`/status` does this for you)
 - Architecture and invariants: [`docs/architecture.md`](docs/architecture.md),
   [`docs/format-schema.md`](docs/format-schema.md)
 - Active/queued Worker briefs: [`docs/briefs/active.md`](docs/briefs/active.md);
