@@ -88,6 +88,22 @@ This mirrors how EDOPro/ocgcore actually work (citations in `edopro-research.md`
   "(GOAT)" cards, `511YYYXXX` or `modern+10` for `cards-unofficial.cdb` "(Pre-Errata)"
   cards. Our erratum records point at these (`strategy: reuse-upstream`) or, later, at
   our own (`custom-script`).
+- **This project's own reserved passcode range**, for `custom-script` records
+  roadmap item 7 will generate: `600000000`–`699999999` (`RESERVED_PASSCODE_RANGE`,
+  `retroformats/model.py`), chosen and proven collision-free in round 9. Every
+  BabelCDB `*.cdb` file at the pinned `ignis-babelcdb` revision was surveyed
+  (24,702 unique passcodes total, 301–810000114) — every other hundred-million
+  decade has at least one occupied code; this one has none. It also clears every
+  *documented* upstream convention (not just observed occupancy), per BabelCDB's
+  own `README.md` at that revision: prerelease OCG/TCG `10ZZYYXXX`
+  (100000000–109999999), Rush Duel `160ZYYXXX` (160000000–169999999), Speed Duel
+  `30ZYYYXXX` (300000000–309999999), and the unofficial-cards reorganisation
+  target `511YYYXXX` (511000000–511999999) — none of which touch the 6xx range.
+  Real official Konami passcodes are 8 digits (`cards.cdb`'s own observed max is
+  99995595) and so can never reach 9-digit territory at all. `retroformats/validate.py`
+  rejects any canonical passcode reference inside this range today
+  (`card.reserved-passcode-collision`) — nothing may use it until item 7's
+  generation exists and deliberately does.
 - The **card index** (`data/cards/index.json`) is generated from BabelCDB for exactly
   the passcodes this repo references, so validation is self-contained without
   shipping a full card database.

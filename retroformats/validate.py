@@ -33,6 +33,7 @@ from .model import (
     PROVEN,
     PRODUCT_KINDS,
     REGION_SCOPE_BITS,
+    RESERVED_PASSCODE_RANGE,
     STATUS_TO_COUNT,
     TERRITORIES,
     Banlist,
@@ -117,6 +118,15 @@ class Validator:
                 )
 
     def _check_card(self, passcode: int, name: str, location: Path, context: str) -> None:
+        if passcode in RESERVED_PASSCODE_RANGE:
+            self.error(
+                "card.reserved-passcode-collision",
+                location,
+                f"{context}: passcode {passcode} ({name!r}) falls inside this project's own "
+                "reserved range (retroformats/model.py's RESERVED_PASSCODE_RANGE, "
+                "600000000-699999999) - nothing in canonical data may use it yet; see "
+                "docs/roadmap.md item 7",
+            )
         index = self.repo.card_index
         if not index.by_passcode:
             return  # index absent entirely; reported once in validate()
@@ -1694,14 +1704,23 @@ class Validator:
         `int(value)` first: coercing before validating would silently
         accept "123", `True`, or 1.5 - none of which are a JSON integer -
         exactly the gap a coercive check would reopen."""
-        if _is_valid_passcode(value):
-            return value
-        self.error(
-            "erratum.malformed-passcode",
-            erratum.path,
-            f"{what}: {field} {value!r} is not a valid passcode (schema: integer, 1..4294967295)",
-        )
-        return None
+        if not _is_valid_passcode(value):
+            self.error(
+                "erratum.malformed-passcode",
+                erratum.path,
+                f"{what}: {field} {value!r} is not a valid passcode (schema: integer, 1..4294967295)",
+            )
+            return None
+        if value in RESERVED_PASSCODE_RANGE:
+            self.error(
+                "card.reserved-passcode-collision",
+                erratum.path,
+                f"{what}: {field} {value} falls inside this project's own reserved range "
+                "(retroformats/model.py's RESERVED_PASSCODE_RANGE, 600000000-699999999) - "
+                "nothing in canonical data may use it yet; see docs/roadmap.md item 7",
+            )
+            return None
+        return value
 
     def _check_card_alias(self, historical_passcode: int, erratum, what: str = "implementation") -> None:
         index = self.repo.card_index

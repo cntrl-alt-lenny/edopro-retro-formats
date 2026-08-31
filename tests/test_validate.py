@@ -70,6 +70,25 @@ class ValidRepoTest(TempRepoTest):
         self.add_banlist(entries=[{"card": card(999, "Ghost"), "status": "limited"}])
         self.assertIn("card.unknown-passcode", error_codes(run_validation(self.root)))
 
+    def test_reserved_range_passcode_in_pool_fails(self):
+        # round 9: RESERVED_PASSCODE_RANGE (retroformats/model.py,
+        # 600000000-699999999) must stay unused until roadmap item 7 actually
+        # generates codes into it - this pins the pool/banlist gate.
+        self._seed_valid()
+        self.add_pool(
+            cards=[card(100, "Alpha", variant_passcodes=[101]), card(200, "Beta"), card(600000005, "Reserved")]
+        )
+        self.assertIn("card.reserved-passcode-collision", error_codes(run_validation(self.root)))
+
+    def test_reserved_range_historical_passcode_fails(self):
+        # Same reservation, other entry point: an erratum's historical_passcode
+        # (the field a future custom-script record would eventually use).
+        self._seed_valid()
+        self.add_erratum(
+            impl={"strategy": "reuse-upstream", "historical_passcode": 600000005, "status": "complete"}
+        )
+        self.assertIn("card.reserved-passcode-collision", error_codes(run_validation(self.root)))
+
     def test_duplicate_banlist_entry_fails(self):
         self._seed_valid()
         self.add_banlist(

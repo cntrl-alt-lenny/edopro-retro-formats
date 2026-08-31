@@ -26,9 +26,15 @@ reflects that.
    through 2011-02-02 and the modern policy from 2019-04-03; no announcement of
    the change was found. Narrowing this would firm up a large group of records
    at once (both GOAT and Edison already sit determinately in the old era).
-   1c. **The 48 acknowledged implementation gaps** — period behaviours nothing
-   upstream reproduces. Each is a candidate for roadmap item 7 (`custom-script`
-   generation) once a reserved passcode range is chosen.
+   1c. **The 41 acknowledged implementation gaps** (project-wide unique count,
+   `format.erratum-known-divergence`; re-verified 2026-08-31, round 9 — the "48"
+   this bullet previously stated was a stale carry-over of a *different*,
+   project-wide `strategy == "unresolved"` count, already identified as such in
+   `docs/research/edison-behaviour-gaps.md`'s own note on the figure, but never
+   corrected here) — period behaviours nothing upstream reproduces. Each is a
+   candidate for roadmap item 7 (`custom-script` generation), which now has a
+   chosen, proven reserved passcode range (round 9; see item 7 below and
+   `docs/architecture.md`'s card-identity section).
    1d. **Contribute back upstream.** 21 cards where our chronology says GOAT
    should use a historical version but Project Ignis's list leaves them modern
    (`format.parity-omits-historical`), plus the cases where its variant is
@@ -439,8 +445,11 @@ reflects that.
    gives tests a realistic fixture surface.
 7. **cdb/script generation for `custom-script` errata**: when we need a historical
    card Ignis doesn't ship, generate `dist/databases/retro-<format>.cdb` rows
-   (`alias` → modern, `ot=8`, our own reserved code range — pick one that cannot
-   collide with 5047xxxxx/511YYYXXX/prerelease ranges and document it) plus script
+   (`alias` → modern, `ot=8`, our own reserved code range — **chosen and proven in
+   round 9: `600000000`–`699999999`, disjoint from every documented upstream
+   convention and every observed BabelCDB code at the pinned revision; enforced by
+   `retroformats/validate.py`'s `card.reserved-passcode-collision` check; see
+   `docs/architecture.md`'s card-identity section for the full evidence**) plus script
    stubs, following the upstream blueprint in docs/research/ignis-goat.md.
 8. **Ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.

@@ -32,6 +32,51 @@ REGION_SCOPE_BITS = {"OCG": SCOPE_OCG, "TCG": SCOPE_TCG}
 
 IMPLEMENTATION_STATUSES = ("missing", "stub", "partial", "complete", "verified")
 
+# This project's OWN reserved passcode range for roadmap item 7
+# (custom-script/cdb generation, not yet built — see docs/roadmap.md item 7
+# and docs/architecture.md's "Card identity" section for the full reasoning
+# and evidence trail; this comment states only the range and why it is
+# provably clear).
+#
+# Chosen: 600000000-699999999 inclusive (100,000,000 codes). Proven disjoint
+# from every upstream code this project could collide with, as of the pinned
+# `ignis-babelcdb` revision (data/sources.json, 0659607453a7d79d1adefbfe1ef7477d3c92434c):
+#
+# - Documented upstream CONVENTIONS (BabelCDB's own README.md at that
+#   revision — not merely inferred from occupancy): prerelease OCG/TCG codes
+#   `10ZZYYXXX` (100000000-109999999); Rush Duel `160ZYYXXX`
+#   (160000000-169999999); Speed Duel `30ZYYYXXX` (300000000-309999999);
+#   unofficial cards' documented reorganisation target `511YYYXXX`
+#   (511000000-511999999). None of these touch 6xxxxxxxx.
+# - Project Ignis's GOAT reference implementation's own sub-convention,
+#   `504700000`-`504700190` (goat-entries.cdb; docs/edopro-research.md),
+#   sits inside the 500000000-599999999 decade this range does not use.
+# - OBSERVED occupancy, independently re-surveyed for this decision across
+#   every *.cdb file in the pinned BabelCDB revision (cards.cdb,
+#   cards-unofficial.cdb, goat-entries.cdb, cards-rush.cdb, cards-skills.cdb,
+#   cards-skills-unofficial.cdb, and all seven prerelease-*.cdb files —
+#   24,702 unique passcodes total, spanning 301 to 810000114): every
+#   hundred-million decade from 0 to 8 has at least one occupied code except
+#   this one. 600000000-699999999 has zero rows in any surveyed file.
+# - Genuine official Konami passcodes (cards.cdb's own real 8-digit range,
+#   observed max 99995595 at this revision) cannot structurally ever reach
+#   9-digit territory at all, so this range can never collide with a real
+#   future official card either — only with another community convention,
+#   and none claims it.
+# - The engine ceiling is confirmed from ocgcore's own public API
+#   (`uint32_t code`, ocgapi_types.h, pinned ocgcore revision
+#   46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57 — matching
+#   schemas/common.schema.json's passcode maximum of 4294967295) with no
+#   special-cased high value found in the duel-creation/card-storage paths
+#   checked; 699999999 sits far below it either way.
+#
+# Enforcement: retroformats/validate.py's `_check_card` rejects any
+# canonical passcode reference that falls inside this range today
+# (`card.reserved-passcode-collision`) — nothing should use it yet; item 7
+# will need to relax this check specifically for its own generated records
+# once that generation exists, not before.
+RESERVED_PASSCODE_RANGE = range(600_000_000, 700_000_000)  # 600000000..699999999 inclusive
+
 
 class DataError(Exception):
     """A record is too malformed to load at all."""

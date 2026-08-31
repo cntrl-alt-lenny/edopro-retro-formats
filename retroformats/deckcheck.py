@@ -107,31 +107,46 @@ class Finding:
 # passcode/name/alias_of/ot, never a card type (see the brief and Non-goals —
 # extending the index is a DATA/SCHEMA decision, not this round's). Round 8
 # investigated whether the check is nonetheless redundant for these three
-# formats and found it IS: every forbidden type's real first TCG printing
-# postdates every one of the three formats' own release-cutoff dates, so a
-# release-cutoff-derived pool cannot contain one regardless —
-#   - Xyz Monsters: earliest TCG printing "Starter Deck: Dawn of the Xyz"
-#     (YS11), 2011-07-12 (data/releases/products/starter-deck-dawn-of-the-xyz.json)
-#     and Generation Force (GENF), 2011-08-16/08-12
-#     (data/releases/products/generation-force.json) — both AFTER GOAT's
-#     2005-04-01 and Edison's 2010-05-10 cutoffs (where Xyz is forbidden),
-#     and correctly BEFORE Tengu's 2011-09-17 cutoff (where Xyz is legal —
-#     Tengu's own pool notes cite GENF and "early Xyz monsters").
-#   - Pendulum/Link Monsters: real-world TCG introduction is 2014/2017
-#     respectively, both far after Tengu's 2011-09-17 cutoff — the latest of
-#     the three — and data/releases/coverage.json's own TCG window ends at
-#     that same date, so no product dated after it exists in this project's
-#     release data for ANY of the three pools to draw from.
+# formats and found it IS, but by TWO DIFFERENT ROUTES depending on pool
+# structure — round 9 corrected round 8's over-generalisation here, which
+# wrongly attributed a release cutoff to every format including GOAT, which
+# has none (`kind: extensional`, data/pools/pool-goat-2005-ignis.json):
+#   - Edison and Tengu (`kind: release-cutoff`, data/pools/edison-2010.json,
+#     data/pools/tengu-2011.json): every forbidden type's real first TCG
+#     printing postdates that format's own release-cutoff date, so a
+#     release-cutoff-derived pool cannot contain one regardless —
+#       - Xyz Monsters: earliest TCG printing "Starter Deck: Dawn of the Xyz"
+#         (YS11), 2011-07-12 (data/releases/products/starter-deck-dawn-of-the-xyz.json)
+#         and Generation Force (GENF), 2011-08-16/08-12
+#         (data/releases/products/generation-force.json) — both AFTER Edison's
+#         2010-05-10 cutoff (where Xyz is forbidden), and correctly BEFORE
+#         Tengu's 2011-09-17 cutoff (where Xyz is legal — Tengu's own pool
+#         notes cite GENF and "early Xyz monsters").
+#       - Pendulum/Link Monsters: real-world TCG introduction is 2014/2017
+#         respectively, both far after Tengu's 2011-09-17 cutoff — the latest
+#         of the two — and data/releases/coverage.json's own TCG window ends
+#         at that same date, so no product dated after it exists in this
+#         project's release data for either pool to draw from.
+#   - GOAT: has no cutoff at all to make that argument from. Its pool is a
+#     fixed, externally-vetted whitelist — Project Ignis's own GOAT reference
+#     list ("2005.4 GOAT"), imported wholesale (data/pools/pool-goat-2005-ignis.json's
+#     own notes) — reproducing the April 2005 TCG format, years before Xyz
+#     (2011), Pendulum (2014), or Link (2017) cards existed as printed cards
+#     at all. A closed list drawn entirely from a pre-2011 reference cannot
+#     contain a card type that had not been printed when that reference was
+#     defined.
 # The pool-membership check below already excludes anything not in the
 # whitelist, so this structural argument (not a card-type inspection) is
 # what makes the type check redundant here — it does not generalise to a
-# hypothetical future format whose cutoff postdates one of these dates.
+# hypothetical future format whose cutoff (or whose imported reference
+# list's own era) postdates one of these dates.
 FORBIDDEN_TYPE_NOTE = (
     "not checked: forbidden_card_types (Xyz/Pendulum/Link) has no data behind "
     "it (data/cards/index.json carries no card type) but is redundant for "
-    "this format — its release-cutoff pool cannot contain a card of any type "
-    "it forbids, since every such type's real first TCG printing postdates "
-    "this format's own cutoff. See retroformats/deckcheck.py's FORBIDDEN_TYPE_NOTE "
+    "this format — its pool cannot contain a card of any type it forbids, "
+    "whether because its release-cutoff predates that type's first TCG "
+    "printing, or because it is a fixed whitelist reproducing an era before "
+    "that type existed. See retroformats/deckcheck.py's FORBIDDEN_TYPE_NOTE "
     "comment for the exact dates and citations."
 )
 
