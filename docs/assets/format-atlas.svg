@@ -384,13 +384,13 @@
         <rect x="528.0" y="180.5" width="27.5" height="2.5" rx="1.25" fill="#334155"/>
         <rect x="558.5" y="180.5" width="27.5" height="2.5" rx="1.25" fill="#334155"/>
       </g>
-      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="partial" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
+      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
         <rect x="320.0" y="191.0" width="132" height="27" rx="7" fill="#111b2e" stroke="#38bdf8" stroke-width="1.2" filter="url(#soft-glow)"/>
         <circle cx="329.0" cy="201.0" r="5" fill="#60a5fa" opacity="0.92"/>
         <text x="329.0" y="203.3" text-anchor="middle" font-size="6.2" font-weight="800" fill="#07111f">T</text>
         <text x="338.0" y="203.8" font-size="8.8" font-weight="650" fill="#e5edf8">Goat</text>
         <text x="447.0" y="203.8" text-anchor="end" font-size="7.2" fill="#7f91aa">05.08</text>
-        <rect x="327.0" y="212.5" width="27.5" height="2.5" rx="1.25" fill="#f59e0b"/>
+        <rect x="327.0" y="212.5" width="27.5" height="2.5" rx="1.25" fill="#34d399"/>
         <rect x="357.5" y="212.5" width="27.5" height="2.5" rx="1.25" fill="#38bdf8"/>
         <rect x="388.0" y="212.5" width="27.5" height="2.5" rx="1.25" fill="#f59e0b"/>
         <rect x="418.5" y="212.5" width="27.5" height="2.5" rx="1.25" fill="#38bdf8"/>
@@ -665,13 +665,13 @@
         <rect x="528.0" y="636.5" width="27.5" height="2.5" rx="1.25" fill="#334155"/>
         <rect x="558.5" y="636.5" width="27.5" height="2.5" rx="1.25" fill="#334155"/>
       </g>
-      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="complete" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
         <rect x="320.0" y="647.0" width="132" height="27" rx="7" fill="#111b2e" stroke="#38bdf8" stroke-width="1.2" filter="url(#soft-glow)"/>
         <circle cx="329.0" cy="657.0" r="5" fill="#60a5fa" opacity="0.92"/>
         <text x="329.0" y="659.3" text-anchor="middle" font-size="6.2" font-weight="800" fill="#07111f">T</text>
         <text x="338.0" y="659.8" font-size="8.8" font-weight="650" fill="#e5edf8">Edison</text>
         <text x="447.0" y="659.8" text-anchor="end" font-size="7.2" fill="#7f91aa">10.04</text>
-        <rect x="327.0" y="668.5" width="27.5" height="2.5" rx="1.25" fill="#38bdf8"/>
+        <rect x="327.0" y="668.5" width="27.5" height="2.5" rx="1.25" fill="#34d399"/>
         <rect x="357.5" y="668.5" width="27.5" height="2.5" rx="1.25" fill="#34d399"/>
         <rect x="388.0" y="668.5" width="27.5" height="2.5" rx="1.25" fill="#f59e0b"/>
         <rect x="418.5" y="668.5" width="27.5" height="2.5" rx="1.25" fill="#f59e0b"/>

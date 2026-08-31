@@ -1,11 +1,19 @@
 # EDOPro research summary
 
 What we verified about EDOPro, ocgcore, and the Project Ignis data ecosystem before
-designing this project. Everything here was confirmed against source code at the
-pinned revisions recorded in `data/sources.json` (EDOPro client
+designing this project. Everything here was confirmed against source code at these
+revisions, as pinned in `data/sources.json` at the time of writing: EDOPro client
 `9d6fb3e`, ocgcore `46779fb`, LFLists `98ecbfd`, BabelCDB `da54f28`, CardScripts
-`383bfbd`, Distribution `54a6e23`). The full research notes, with file:line citations
-for every claim, live in [docs/research/](research/):
+`383bfbd`, Distribution `54a6e23`. EDOPro client, ocgcore, LFLists, CardScripts, and
+Distribution still match the current pins; `data/sources.json`'s `ignis-babelcdb` has
+since moved to `0659607` (retrieved 2026-08-27) for reasons unrelated to this document,
+and the BabelCDB-derived claims below (the GOAT/pre-errata entry counts and codes) have
+**not** been re-verified against that later revision. Round 4
+(`docs/briefs/archive/004-2026-08-31-mind-master-card-identity.md`) inspected the new
+revision, but only for two specific passcodes (Mind Master's TCG/OCG identity rows) —
+that is evidence about those two rows, not a re-verification of this document's
+claims. The full research notes, with file:line citations for every claim, live in
+[docs/research/](research/):
 
 - [edopro-lflists.md](research/edopro-lflists.md) — banlist discovery, parsing, hashing, enforcement
 - [edopro-data-repos-ui.md](research/edopro-data-repos-ui.md) — cdb/script loading, repo config schema, duel-rule UI

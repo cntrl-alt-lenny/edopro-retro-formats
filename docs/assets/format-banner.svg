@@ -113,8 +113,8 @@
         <rect x="119.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
         <rect x="159.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
       </g>
-      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="partial" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
-        <title>Goat — Partial, Complete, Partial, Complete</title>
+      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
+        <title>Goat — Verified, Complete, Partial, Complete</title>
         <rect x="216.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#38bdf8" stroke-width="1.1" filter="url(#banner-glow)"/>
         <rect x="216.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#2dd4bf"/>
         <circle cx="232.0" cy="182.0" r="6" fill="#60a5fa"/>
@@ -122,13 +122,13 @@
         <text x="243.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Goat</text>
         <text x="386.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">05.08</text>
         <text x="226.0" y="196.0" font-size="7" font-weight="700" fill="#f59e0b">Partial</text>
-        <rect x="226.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
+        <rect x="226.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
         <rect x="266.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#38bdf8"/>
         <rect x="307.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
         <rect x="347.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#38bdf8"/>
       </g>
-      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="complete" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
-        <title>Edison — Complete, Verified, Partial, Partial</title>
+      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+        <title>Edison — Verified, Verified, Partial, Partial</title>
         <rect x="404.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#38bdf8" stroke-width="1.1" filter="url(#banner-glow)"/>
         <rect x="404.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#38bdf8"/>
         <circle cx="420.0" cy="182.0" r="6" fill="#60a5fa"/>
@@ -136,7 +136,7 @@
         <text x="431.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Edison</text>
         <text x="574.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">10.04</text>
         <text x="414.0" y="196.0" font-size="7" font-weight="700" fill="#f59e0b">Partial</text>
-        <rect x="414.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#38bdf8"/>
+        <rect x="414.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
         <rect x="454.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
         <rect x="495.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
         <rect x="535.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>

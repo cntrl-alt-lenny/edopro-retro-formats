@@ -47,7 +47,7 @@
     "DPKB"
   ],
   "implementation_status": {
-    "banlist": "complete",
+    "banlist": "verified",
     "card_pool": "verified",
     "rule_profile": "partial",
     "errata": "partial",
