@@ -23,164 +23,162 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ## MODE: IMPLEMENTATION
 
-Part A additionally runs under **DATA/SCHEMA** discipline — it edits
-canonical data (`data/sources.json`) and touches an evidence claim.
-
 ## Goal
 
-Roadmap item 8 — **ship as an EDOPro repo**. Three canonical formats now
-build clean, pool-enforcing whitelists and all three carry `verified`
-banlists and pools. Nobody can actually use any of it.
+Roadmap item 6 — **a deck-level validation tool**. Check a `.ydk` deck
+file against a format and report what is and isn't legal, as a CLI
+subcommand.
 
-Every check this project runs on itself is internal: the validator, the
-suite, the reference-parity hash. Shipping is the first genuinely
-external check, and this round is about making the packaging honest and
-provable — starting with a dependency the repo has never stated.
-
-Part A is a small correction carried over from round 6, bundled here
-rather than given its own round.
+Round 7 made the shipped lists honest about what they need. This makes
+them *checkable* without a game client: a player or tournament organiser
+can verify a decklist, and this project gets what the roadmap calls "a
+realistic fixture surface" for tests.
 
 ## Starting SHA
 
 Verify with `git log -1` on `main` before starting; note the actual SHA
 in your report. `main` should be clean.
 
----
+## The single most important design constraint
 
-## Part A — an unsourced universal negative in `data/sources.json`
+**Do not reimplement legality logic.** `retroformats/lflist.py` already
+resolves, for each format, exactly which passcodes are legal and at what
+count — that is what `build` emits and what the shipped lists contain.
 
-Round 6 (which was otherwise excellent, and whose conclusion is correct)
-wrote this into `konami-september-2011-list`'s `reliability_notes`:
+If this checker computes legality independently, it will eventually
+disagree with the list this project actually ships, and a checker that
+contradicts the artifact is worse than no checker. Derive the answer from
+the same code path that produces `dist/lflists/`, and make that reuse
+structural rather than a copied constant.
 
-> one of its 52 forbidden entries, Sixth Sense (第六感), has **no TCG
-> printing at all** and is left blank in the TCG column, proving the
-> underlying list is the OCG's.
-
-"No TCG printing at all" is a universal negative, and nothing cited
-establishes it. The archived page shows the card's TCG-name cell blank
-**in September 2011**; this repository's TCG release coverage
-(`data/releases/coverage.json`) runs only to 2011-09-17, so the data here
-cannot speak to any later date either. That is `AGENTS.md`'s "absence of
-evidence → proof of absence" — now sitting in canonical data.
-
-The **argument is sound on the weaker claim** and does not need
-rescuing: a card with no TCG printing *in the period* and a blank
-TCG-name cell is already enough to show the underlying list is the OCG's.
-
-Fix the sentence so it claims only what is established. Either weaken it
-to the period-scoped version, or — if you can find and cite genuine
-evidence for the stronger claim — source it properly. **Do not simply
-delete the Sixth Sense example**; it is the load-bearing illustration.
-
-Then check whether the same overreach appears anywhere else this round's
-predecessors wrote: grep `data/sources.json` and
-`data/banlists/tcg/2011-09.json` for other absolute negatives ("no ...
-at all", "never", "does not exist") added recently, and report what you
-find, including "nothing else."
+If reusing it cleanly needs a small refactor of `lflist.py`, that is in
+scope — but keep the generated output **byte-identical** (see Protected
+invariants) and say what you changed and why.
 
 ---
 
-## Part B — the shipping dependency nobody has written down
+## Part A — the checker
 
-**This is the substantive part.** Brain established the following
-statically; **re-derive it yourself rather than trusting it.**
+Add a CLI subcommand alongside the existing `validate` / `build` /
+`report` / `materialize` in `retroformats/cli.py`. Name it as you judge
+best and say why; `check-deck` is the obvious candidate.
 
-Every generated whitelist references passcodes that **do not exist in
-this repository**:
+It takes a `.ydk` path and a format id, and reports legality.
 
-| list | codes ≥ `504700000` |
-|---|---|
-| `2005-04-goat` | 209 |
-| `2010-03-edison` | 67 |
-| `2011-09-tengu` | 46 |
+### `.ydk` format
 
-Those are Project Ignis's `goat-entries.cdb` / pre-errata rows, which
-ship in **upstream** repositories (BabelCDB → DeltaBagooska), not here.
-`dist/` contains only `lflists/` and a README.
+The EDOPro/YGOPro deck format is a plain text file with `#main`,
+`#extra`, and `!side` section markers and one passcode per line;
+`#created by ...` and similar comment lines appear in real files. Confirm
+the exact shape against something authoritative rather than assuming —
+`docs/research/edopro-data-repos-ui.md` and `edopro-lflists.md` are the
+in-repo research corpus, and `deck_manager.cpp` behaviour is already
+cited there for deck loading. Be tolerant of real-world files (blank
+lines, CRLF, stray whitespace) and explicit about what you reject.
 
-So this repo is **not self-contained**, and nothing in it says so. On a
-whitelist an unresolvable code is not a cosmetically missing card — that
-card simply cannot be played, silently.
+### What to check
 
-Establish and document, with citations:
+1. **Pool / whitelist membership** — is each passcode legal in this
+   format at all?
+2. **Banlist counts** — does any card exceed its allowed count? Note
+   that EDOPro counts main + extra + side **combined** for this purpose
+   (`docs/research/edopro-lflists.md` documents the client's own rule —
+   cite it rather than assuming).
+3. **Deck sizes** — `main_deck`, `extra_deck`, `side_deck` ranges live
+   in each rule profile's `client` section
+   (`data/rule-profiles/*.json`). Use them; do not hard-code 40/60.
 
-1. **Which upstream repository actually supplies those rows** at the
-   revision `data/sources.json` pins, and whether every one of the codes
-   the three lists emit is present there. Report the count checked and
-   any that are missing. If checking exhaustively needs a clone you
-   cannot make, say so and state exactly what you did check — a partial
-   check honestly labelled beats a confident guess.
-2. **What EDOPro does when a whitelist names a code no loaded cdb
-   provides.** `docs/research/edopro-data-repos-ui.md` already carries
-   file:line citations for the repo/cdb/lflist loading path — use it,
-   and cite it. If the source does not settle the behaviour, say the
-   behaviour is undetermined rather than predicting it.
-3. **Whether the default EDOPro install already satisfies the
-   dependency** (i.e. whether DeltaBagooska is a shipped default repo),
-   and what a user who has somehow removed it would experience.
+### What you probably cannot check, and must not fake
 
-Then write it down where a user will actually hit it — `dist/README.md`
-— as a plain prerequisite, not a footnote.
+`client.forbidden_card_types` lists `TYPE_XYZ` / `TYPE_PENDULUM` /
+`TYPE_LINK` (and Tengu deliberately permits Xyz where the other two
+forbid it). **`data/cards/index.json` carries only `passcode`, `name`,
+`alias_of` and `ot` — no card type.** So this check has no data behind it
+today.
 
-### Explicit scope limit: do NOT attempt a live client test
+Do not invent a type field, do not read BabelCDB at runtime (the index
+exists precisely so validation is self-contained), and do not silently
+skip the check as though it passed.
 
-Roadmap item 8 says "test in a real client." **That part is out of scope
-for this round and you should not attempt it.** Installing and driving a
-GUI game client is not something to fake, and a fabricated or inferred
-"tested it, works" is the worst possible outcome here.
+Investigate and report which of these is true:
 
-Instead: state plainly, in the round report and in `dist/README.md`,
-which claims are statically proven and which remain **untested in a real
-client**. Leaving that explicitly untested is the honest state and is a
-fully acceptable outcome for this round.
+- the check is **largely redundant** for these three formats, because a
+  whitelist already excludes any card not in the pool and none of the
+  three pools can contain a forbidden type at their snapshot — in which
+  case say so, with evidence, and have the tool state plainly that it
+  does not check types and why; or
+- it is **not** redundant (you find a real case), in which case report
+  that as a finding and **stop** — extending the card index is a
+  DATA/SCHEMA change that deserves its own decision, not a silent
+  expansion of this round.
+
+Either way the tool's output must be honest about what it did not check.
 
 ---
 
-## Part C — make the packaging match reality
+## Part B — the substitution problem
 
-`dist/README.md` already carries a `user_configs.json` snippet. Two
-things in it are wrong or unproven; re-derive both before changing them:
+This is the genuinely interesting part, and the reason a naive checker
+would mislead people.
 
-1. It sets `"data_path": "dist/databases"` and `"script_path":
-   "dist/scripts"`. **Neither directory exists.** The README's own
-   parenthetical admits they are empty, which is not the same as absent.
-   Determine from the cited EDOPro source research what the client does
-   with a configured path that does not exist, and fix the snippet so it
-   is correct for what this repo actually ships today — whether that
-   means omitting the keys, pointing them elsewhere, or creating the
-   directories with a `.gitkeep`. Justify the choice.
-2. Confirm the documented list names (`Retro 2005-04-goat` etc.) and the
-   per-format host-settings table still match what `build` actually
-   emits. Brain checked the list names and they matched at the starting
-   SHA; check the table's Duel Rule presets against each format's
-   `rule_profile`, which is the part more likely to have drifted.
+For cards with a selected historical implementation, the generated
+whitelist emits **only the historical passcode** — the modern one is
+deliberately absent (see `docs/architecture.md`, "The whitelist build
+algorithm", step 3). Round 7 measured the scale: 209 such codes in GOAT,
+67 in Edison, 46 in Tengu, 226 unique.
 
-Then add the **versioned release layout** roadmap item 8 asks for: a
-documented, repeatable way to cut a versioned release of `dist/` so a
-consumer can pin one. Keep it proportionate — this project is stdlib-only
-with no dependency manifest and that must not change. A documented
-convention plus, if warranted, a small script is enough; **do not** add
-CI publishing, external services, or a release-automation framework. If
-you conclude the honest answer is "git tags plus this documented
-convention, no tooling needed," that is a legitimate outcome — say why.
+So a deck containing the **modern** passcode of a substituted card is
+genuinely illegal in that format — and a checker that just says
+`12345678: not legal in this format` is technically right and completely
+unhelpful, because the player has the right *card* and the wrong
+*identity*.
+
+Detect this case specifically and explain it: report that the card is
+substituted in this format, name the historical passcode that **is**
+legal, and say why (the modern implementation would behave incorrectly
+for the era). The erratum records are the source for that mapping — use
+them; don't build a parallel table.
+
+Consider the reverse direction too, and report what you decide: a deck
+containing a historical passcode for a format that does **not**
+substitute that card.
+
+---
+
+## Part C — tests
+
+The roadmap's stated reason for this tool is that it gives tests a
+realistic fixture surface. Deliver that:
+
+- at least one **legal** deck fixture and several deliberately illegal
+  ones (over-count, unlisted card, wrong deck size, modern-code-instead-
+  of-substituted), each asserting the specific diagnostic;
+- a test that the checker agrees with the shipped list — i.e. a deck
+  built from `dist/lflists/<id>.lflist.conf`'s own entries validates
+  clean. This is the regression that keeps the checker and the artifact
+  from drifting apart, and it is the most valuable test here.
+
+Put fixtures where the suite already keeps them; follow the existing
+convention rather than inventing a new one.
 
 ## Non-goals
 
-- Do not attempt to run, install, or screenshot EDOPro (see Part B).
-- Do not generate `dist/databases/` or `dist/scripts/` **content** —
-  that is roadmap item 7 (custom-script/cdb generation) and needs a
-  reserved passcode range chosen first. Creating an empty placeholder
-  directory is in scope; generating card rows is not.
-- Do not change canonical data other than Part A's wording fix.
-- Do not touch banlists, pools, errata, or any `implementation_status`.
-- Do not add a dependency manifest or any third-party package.
-- Do not redesign the atlas or banner.
+- Do not attempt to run, install, or screenshot EDOPro. Same boundary as
+  round 7.
+- Do not change canonical data (`data/`, `formats/`) at all this round.
+- Do not extend `data/cards/index.json` or its importer (see Part A).
+- Do not generate `dist/databases/` or `dist/scripts/` content — that is
+  roadmap item 7.
+- Do not add a dependency; standard library only.
+- Do not build deck *editing*, deck suggestions, or anything beyond
+  checking a given file.
 
 ## Protected invariants
 
-- All three generated lflists **byte-identical** after this round —
-  nothing here should change card resolution. Confirm via `build --check`
-  and `git status` showing no change under `dist/lflists/`.
+- All three generated lflists **byte-identical** after this round. If you
+  refactor `lflist.py`, this is the check that proves you did it safely.
+  Confirm via `build --check` and `git status` showing no change under
+  `dist/lflists/`.
 - GOAT's EDOPro content hash stays `0x28E9FC02`.
 - `python -m retroformats validate` stays at **0 errors**, warnings at
   569 unless you deliberately and reportedly change them.
@@ -188,26 +186,23 @@ convention, no tooling needed," that is a legitimate outcome — say why.
 
 ## Required investigation
 
-1. Re-derive the three per-list counts of codes ≥ `504700000` yourself.
-2. Establish where those rows actually live upstream, at the pinned
-   revision.
-3. Read `docs/research/edopro-data-repos-ui.md` for the loading path
-   before asserting any client behaviour, and cite it.
-4. Verify the `dist/README.md` snippet's paths and the host-settings
-   table against what the repo actually produces.
+1. Establish the real `.ydk` shape from cited evidence, not assumption.
+2. Establish EDOPro's own main+extra+side combined counting rule from
+   the research corpus, and cite it.
+3. Determine whether `forbidden_card_types` is redundant for these three
+   formats, with evidence either way.
+4. Confirm your checker's verdicts agree with the shipped lflists.
 
 ## Acceptance criteria
 
-- `data/sources.json` no longer asserts an unsourced universal negative,
-  and the Sixth Sense argument still stands on what is established.
-- `dist/README.md` states the upstream card-data prerequisite plainly,
-  with the client behaviour on a missing code either cited or explicitly
-  marked undetermined.
-- The `user_configs.json` snippet is correct for what this repo ships
-  today.
-- A documented, proportionate versioned-release convention exists.
-- What remains untested in a real client is stated explicitly, in both
-  the report and `dist/README.md`.
+- A working CLI subcommand that checks a `.ydk` against any of the three
+  formats and reports specific, actionable diagnostics.
+- Legality derived from the same code path that generates `dist/`, not
+  reimplemented.
+- Substituted-card decks get an explanation, not just a rejection.
+- A definite, evidenced answer on `forbidden_card_types`, and honest
+  output about what is not checked.
+- Deck fixtures plus the checker-agrees-with-shipped-list regression.
 - `dist/lflists/` byte-identical; full suite, validator, and
   `build --check` all pass.
 
@@ -221,15 +216,15 @@ python -m retroformats build --check
 python -m unittest discover -t . -s tests -v
 ```
 
-If you add a check worth keeping (e.g. that the README's documented list
-names match generated output), add it as a real test.
+Also show the new subcommand's actual output on at least one legal and
+one illegal deck — paste it, don't describe it.
 
 ## Git expectations
 
 Work in the nested worktree (`.claude/worktrees/worker/`, see
 `docs/agents/worktree-mechanism.md`) if running locally alongside a Brain
 session. Fetch `origin/main` and branch from there
-(e.g. `worker/ship-as-edopro-repo`). Do not merge to `main` yourself.
+(e.g. `worker/deck-validation-tool`). Do not merge to `main` yourself.
 Do not push.
 
 ## Completion-report schema
@@ -237,15 +232,14 @@ Do not push.
 Report:
 
 - Starting SHA, branch, final SHA.
-- Part A: the corrected wording and why it now matches the evidence;
-  what the sweep for other absolute negatives found.
-- Part B: the per-list code counts as you re-derived them; where those
-  rows live upstream and how much of that you could actually verify;
-  what EDOPro does with an unresolvable whitelist code, cited — or
-  explicitly marked undetermined; what you wrote into `dist/README.md`.
-- Part C: what was wrong in the snippet and what you changed it to; the
-  release convention you chose and why it is proportionate.
-- Exactly which claims remain untested in a real client.
+- Part A: the subcommand's interface; how you reused `lflist.py` and any
+  refactor you made; the `.ydk` shape you established and from what
+  evidence; your evidenced answer on `forbidden_card_types`.
+- Part B: how you detect and explain substituted cards, and what you
+  decided about the reverse direction.
+- Part C: the fixtures and tests added, especially the
+  agrees-with-shipped-list regression.
+- Real CLI output for a legal and an illegal deck.
 - Exact output of the three validation commands, plus confirmation
   `dist/lflists/` is unchanged and the warning count.
 - Anything left genuinely uncertain, stated as uncertain.

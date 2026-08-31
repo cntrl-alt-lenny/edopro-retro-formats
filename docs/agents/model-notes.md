@@ -13,6 +13,57 @@ which model executed a round.
 
 ## Round log
 
+**Round 7 (2026-08-31) — ship as an EDOPro repo, roadmap item 8
+(`docs/briefs/archive/007-2026-08-31-ship-as-edopro-repo.md`), model:
+Claude Sonnet 5 High, in the nested worktree.** Accepted. Notable for
+being the first round to **correct the brief itself** on a matter of
+substance.
+
+Brain's brief asserted that an unresolvable code on a whitelist
+"silently removes a card." Worker checked rather than accepted it: the
+brief pointed at `edopro-data-repos-ui.md`, which does not cover the
+question, so it went to the sibling `edopro-lflists.md` §6.1 and found
+the actual mechanism — an unknown code is flagged `DeckError::UNKNOWNCARD`
+at deck-load time, *before* the whitelist check runs, and the whole deck
+submission is rejected with a typed error naming the code
+(`generic_duel.cpp:375-377,423,384-390`). That is a hard, visible
+failure, not a silent one; Worker corrected the framing in
+`dist/README.md` rather than repeating Brain's wording.
+
+It also exceeded the brief's expectations on rigour in two places. The
+brief allowed a partial upstream check; Worker did an exhaustive one —
+downloading the real `goat-entries.cdb`/`cards-unofficial.cdb` from
+BabelCDB at the exact pinned revision and querying them with stdlib
+`sqlite3`. And on "does a default install already have this data", it
+declined the easy "yes": it found DeltaBagooska's git-hosted deltas
+carry only 5 of the 226 codes, leaving 221 dependent on an
+already-recorded, still-unverified assumption about base-installer
+contents — and labelled its own DeltaBagooska check as an unpinned live
+snapshot rather than a reproducible citation.
+
+Correctly refused the out-of-scope live client test and stated, in the
+report and in `dist/README.md`, exactly what remains unobserved.
+
+Brain verified independently rather than reading the diff: re-derived the
+per-list counts from `dist/lflists/` (209/67/46, union 226); downloaded
+both cdbs at the pinned revision and confirmed all 226 resolve — 191 in
+`goat-entries.cdb`, 35 in `cards-unofficial.cdb`, zero overlap, every one
+`ot=8`, none missing; read the `UNKNOWNCARD` citation and confirmed it
+says what Worker claimed (so Brain's brief was wrong, not Worker);
+verified the MR1/MR2/GOAT flag composition against the actual
+rule-profile records, confirming Tengu's profile is bit-for-bit MR1 and
+that the previous "Master Rule 2" instruction really would have omitted
+`DUEL_OCG_OBSOLETE_IGNITION`; confirmed the "OCG Ignition Priority"
+checkbox label and `0x100` mapping against the cited §4c; and re-ran 948
+tests at the exact final SHA `5750b81`.
+
+Worker also flagged, without touching it, that
+`docs/research/ocgcore-flags.md` says GOAT is "MR1 | 12 extra flags"
+while the data shows 11. Brain confirmed the doc's own hex in the same
+sentence (`0x7F800002C`) has exactly 11 set bits, making it a
+self-contradicting typo rather than an adjudication, and fixed it
+directly as trivial housekeeping.
+
 **Round 6 (2026-08-31) — Tengu `legality_basis` + banlist source
 verification + stale-source sweep
 (`docs/briefs/archive/006-2026-08-31-tengu-legality-basis-and-banlist-evidence.md`),
