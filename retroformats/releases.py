@@ -193,6 +193,26 @@ def evaluate_cutoff(pool: Pool, repo: Repository, index: ReleaseIndex | None = N
         elif straddling:
             result.ambiguous[canonical] = straddling
 
+    # Region-scope correction: a printing's release-derived canonical passcode
+    # is region-agnostic (it's whatever BabelCDB row the printing's own raw
+    # identity resolves to), but that row can itself be scoped for the wrong
+    # region for this pool (cdb `ot` lacking this pool's region bit) when
+    # BabelCDB ships the correctly-scoped printing as a separate sibling row
+    # instead of an in-range artwork alias. Relabelling here, before
+    # include/exclude, means any include/exclude entry for this card is
+    # written against the corrected identity.
+    for sub in pool.cutoff.get("region_substitutions", []):
+        from_code = int(sub["from"]["passcode"])
+        to_code = int(sub["to"]["passcode"])
+        to_name = str(sub["to"]["name"])
+        if from_code in result.included:
+            pool_entry = result.included.pop(from_code)
+            pool_entry["passcode"] = to_code
+            pool_entry["name"] = to_name
+            result.included[to_code] = pool_entry
+        if from_code in result.ambiguous:
+            result.ambiguous[to_code] = result.ambiguous.pop(from_code)
+
     for entry in pool.cutoff.get("include", []):
         code = int(entry["card"]["passcode"])
         result.ambiguous.pop(code, None)

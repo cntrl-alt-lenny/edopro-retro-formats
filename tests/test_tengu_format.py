@@ -9,7 +9,7 @@ Verifies the complete end-to-end integration:
 - rule-profile flags, client settings, and partial status
 - errata evaluation at snapshot (52 historical substitutions, 38 divergences, 9 known-wrong fallbacks)
 - exact 52 historical substitution mapping parity
-- generated EDOPro lflist whitelist semantics, determinism, and pinned hash (0x0CE5BABE)
+- generated EDOPro lflist whitelist semantics, determinism, and pinned hash (0xBCBDBABE)
 - protected baselines for GOAT and Edison
 """
 
@@ -35,7 +35,10 @@ from retroformats.validate import Validator
 from tests.test_tengu_format_gate import EXPECTED_EDISON_STYLE_FALLBACK
 
 ROOT = Path(__file__).resolve().parents[1]
-TENGU_HASH = 0x0CE5BABE
+# Pinned 2026-08-31: Mind Master's pool passcode moved 96782886 -> 96782896
+# (region_substitutions, roadmap 1e / card-identity fix) - the only content
+# change, so only the hash moved, not cardinality or any other card's status.
+TENGU_HASH = 0xBCBDBABE
 GOAT_HASH = 0x28E9FC02
 EDISON_POOL_COUNT = 3673
 TENGU_POOL_COUNT = 4562
@@ -301,12 +304,22 @@ class TenguFormatTest(unittest.TestCase):
         pool = self.repo.pools["pool-tengu-2011"]
         banlist = self.repo.banlists["tcg-2011-09"]
         status_by_code = {e.card.passcode: e.status for e in banlist.entries}
+        # Mirrors lflist.py's own region_substitution_origin bridge: a
+        # region-substituted pool card's status is looked up under the
+        # passcode the banlist was transcribed against, not its own.
+        region_substitution_origin = {
+            int(sub["to"]["passcode"]): int(sub["from"]["passcode"])
+            for sub in (pool.cutoff or {}).get("region_substitutions", [])
+        }
         overrides = select_applicable_errata(self.fmt, self.repo)
 
         expected_codes: dict[int, int] = {}
         counts = {"forbidden": 0, "limited": 1, "semilimited": 2}
         for card in pool.cards:
-            count = counts.get(status_by_code.get(card.passcode, ""), 3)
+            status = status_by_code.get(card.passcode)
+            if status is None and card.passcode in region_substitution_origin:
+                status = status_by_code.get(region_substitution_origin[card.passcode])
+            count = counts.get(status or "", 3)
             override = overrides.get(card.passcode)
             if override is not None:
                 passcode, variants = historical_identity(override.implementation)
@@ -378,9 +391,12 @@ class TenguFormatTest(unittest.TestCase):
         self.assertEqual(1700, len(self.repo.pools["pool-goat-2005-ignis"].cards))
 
     def test_30_edison_output_remains_byte_identical_and_pool_cardinality_pinned(self):
+        # Hash pinned 2026-08-31: Mind Master's pool passcode moved
+        # 96782886 -> 96782896 (region_substitutions, roadmap 1e); pool
+        # cardinality is unaffected (substitution, not add/remove).
         edison_fmt = self.repo.formats["2010-03-edison"]
         built_edison = build_lflist(edison_fmt, self.repo)
-        self.assertEqual(0x54508AB7, built_edison.hash)
+        self.assertEqual(0x34088AB6, built_edison.hash)
         self.assertEqual(EDISON_POOL_COUNT, len(self.repo.pools["pool-edison-2010"].cards))
 
 

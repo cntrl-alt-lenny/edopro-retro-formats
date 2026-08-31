@@ -32,6 +32,7 @@ from .model import (
     PRECISIONS,
     PROVEN,
     PRODUCT_KINDS,
+    REGION_SCOPE_BITS,
     STATUS_TO_COUNT,
     TERRITORIES,
     Banlist,
@@ -231,14 +232,64 @@ class Validator:
                             )
                         else:
                             self._check_sources(list(entry["sources"]), pool.path, None, f"cutoff.{key}")
+                for entry in pool.cutoff.get("region_substitutions", []):
+                    if (
+                        not isinstance(entry, dict)
+                        or not isinstance(entry.get("from"), dict)
+                        or not isinstance(entry.get("to"), dict)
+                    ):
+                        self.error("pool.bad-exception", pool.path, f"cutoff.region_substitutions entry {entry!r}")
+                        continue
+                    try:
+                        from_code = int(entry["from"]["passcode"])
+                        from_name = str(entry["from"]["name"])
+                        to_code = int(entry["to"]["passcode"])
+                        to_name = str(entry["to"]["name"])
+                    except (TypeError, ValueError, KeyError):
+                        self.error("pool.bad-exception", pool.path, f"cutoff.region_substitutions entry {entry!r}")
+                        continue
+                    self._check_card(from_code, from_name, pool.path, "cutoff.region_substitutions.from")
+                    self._check_card(to_code, to_name, pool.path, "cutoff.region_substitutions.to")
+                    if from_code == to_code:
+                        self.error(
+                            "pool.bad-exception",
+                            pool.path,
+                            f"cutoff.region_substitutions {to_name}: from and to are the same passcode",
+                        )
+                    if not entry.get("reason"):
+                        self.error(
+                            "pool.exception-unreasoned",
+                            pool.path,
+                            f"cutoff.region_substitutions {to_name}: historical exceptions must state a reason",
+                        )
+                    if not entry.get("sources"):
+                        self.error(
+                            "pool.exception-unsourced",
+                            pool.path,
+                            f"cutoff.region_substitutions {to_name}: historical exceptions must cite sources",
+                        )
+                    else:
+                        self._check_sources(list(entry["sources"]), pool.path, None, "cutoff.region_substitutions")
         else:
             self.error("pool.bad-kind", pool.path, f"kind {pool.kind!r}")
         seen: set[int] = set()
+        region_bit = REGION_SCOPE_BITS.get(pool.region)
         for card in pool.cards:
             if card.passcode in seen:
                 self.error("pool.duplicate-card", pool.path, f"passcode {card.passcode} ({card.name}) listed twice")
             seen.add(card.passcode)
             self._check_card(card.passcode, card.name, pool.path, "pool entry")
+            if region_bit is not None:
+                row = self.repo.card_index.by_passcode.get(card.passcode)
+                ot = row.get("ot") if row else None
+                if ot is not None and not (int(ot) & region_bit):
+                    self.error(
+                        "pool.card-region-scope-mismatch",
+                        pool.path,
+                        f"{card.name}: passcode {card.passcode} (ot={ot}) is not scoped for {pool.region} - "
+                        "an EDOPro official-cards room would reject it; if BabelCDB ships a differently-scoped "
+                        "sibling for this printing, add a sourced cutoff.region_substitutions entry",
+                    )
             for variant in card.variants:
                 if variant in seen:
                     self.error("pool.duplicate-card", pool.path, f"variant passcode {variant} ({card.name}) listed twice")
@@ -1728,7 +1779,10 @@ class Validator:
                 )
 
         if banlist is not None and pool is not None and pool.cards:
-            pool_codes = pool.passcodes()
+            pool_codes = pool.passcodes() | {
+                int(sub["from"]["passcode"])
+                for sub in (pool.cutoff or {}).get("region_substitutions", [])
+            }
             for entry in banlist.entries:
                 if entry.status in ("limited", "semilimited") and entry.card.passcode not in pool_codes:
                     self.warn(

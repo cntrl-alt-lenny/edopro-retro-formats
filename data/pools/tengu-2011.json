@@ -13,6 +13,22 @@
     ],
     "include": [],
     "exclude": [],
+    "region_substitutions": [
+      {
+        "from": {
+          "passcode": 96782886,
+          "name": "Mind Master"
+        },
+        "to": {
+          "passcode": 96782896,
+          "name": "Mind Master"
+        },
+        "reason": "TDGS-EN016's release printing resolves to 96782886, BabelCDB's canonical (alias=0) row for Mind Master - but that row is scoped SCOPE_OCG-only (ot=1). BabelCDB ships the TCG-text printing as a separate row, 96782896 (cards-unofficial.cdb, ot=2 SCOPE_TCG, alias=96782886), placed exactly +10 from the base - outside EDOPro's <10 artwork-auto-extension window (IsInArtworkOffsetRange), so it does not inherit the base row's whitelist entry and must be listed explicitly. A TCG-format pool referencing 96782886 is a passcode an EDOPro official-cards room (TCG) would reject; 96782896 is the region- and text-correct identity for this printing. The banlist's own Mind Master entry is left citing 96782886 unchanged (see retroformats/lflist.py's region_substitution_origin bridge) rather than rewritten.",
+        "sources": [
+          "ignis-babelcdb"
+        ]
+      }
+    ],
     "exclude_products": [
       {
         "product": "duel-terminal-4",
@@ -17712,7 +17728,7 @@
       "name": "Swing of Memories"
     },
     {
-      "passcode": 96782886,
+      "passcode": 96782896,
       "name": "Mind Master"
     },
     {

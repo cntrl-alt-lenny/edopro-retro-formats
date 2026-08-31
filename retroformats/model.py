@@ -22,6 +22,14 @@ UNLIMITED_COUNT = 3
 # within this window marks an artwork variant of the same functional card.
 ARTWORK_OFFSET = 10
 
+# BabelCDB `ot` scope bitfield (gframe/data_manager.h; docs/research/edopro-data-repos-ui.md).
+# Only the two region bits this project's card-identity checks care about are
+# named here — the full bitfield has more (SCOPE_ILLEGAL 0x8, SCOPE_PRERELEASE
+# 0x100, ...) but nothing else currently needs a symbolic constant.
+SCOPE_OCG = 0x1
+SCOPE_TCG = 0x2
+REGION_SCOPE_BITS = {"OCG": SCOPE_OCG, "TCG": SCOPE_TCG}
+
 IMPLEMENTATION_STATUSES = ("missing", "stub", "partial", "complete", "verified")
 
 

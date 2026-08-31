@@ -1667,11 +1667,15 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         }
         self.assertEqual(19, len(ocg_products))
         self.assertTrue(all(product_id in self.repo.products for product_id in ocg_products))
+        # Tengu hash pinned 2026-08-31: Mind Master's pool passcode moved
+        # 96782886 -> 96782896 (region_substitutions, roadmap 1e); GOAT is
+        # unaffected (predates the card) and pool cardinalities are
+        # unaffected (substitution, not add/remove).
         self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.repo.formats))
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3673, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         self.assertEqual(4562, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        self.assertEqual(0x0CE5BABE, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
+        self.assertEqual(0xBCBDBABE, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
         self.assertFalse((ROOT / "formats" / "1999-08-tokyo-dome").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())

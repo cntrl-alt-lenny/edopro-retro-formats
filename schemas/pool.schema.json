@@ -81,6 +81,21 @@
               "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
             }
           }
+        },
+        "region_substitutions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "from": { "$ref": "common.schema.json#/$defs/cardRef", "description": "The passcode release derivation naturally resolves the printing to." },
+              "to": { "$ref": "common.schema.json#/$defs/cardRef", "description": "The BabelCDB sibling passcode correctly scoped (cdb `ot`) for this pool's region, used in the materialized pool instead." },
+              "reason": { "type": "string" },
+              "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            }
+          },
+          "description": "Cards whose release-derived canonical passcode is scoped (BabelCDB `ot`) for the wrong region for this pool - a code an EDOPro official-cards room in this region would reject. Substitutes the correctly-scoped sibling passcode BabelCDB ships for the same printing. Applied at materialize time (retroformats/releases.py); the banlist's own passcode is deliberately left untouched and bridged back to at lflist-build time (retroformats/lflist.py) rather than requiring banlist data to be rewritten."
         }
       }
     },

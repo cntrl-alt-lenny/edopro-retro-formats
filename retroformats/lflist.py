@@ -820,11 +820,24 @@ def _finish(lines: list[str], sections: dict[str, list[tuple[int, int, str]]]) -
 
 def _build_whitelist(fmt: Format, banlist: Banlist, pool: Pool, repo: Repository) -> BuiltList:
     status_by_code = {e.card.passcode: e.status for e in banlist.entries}
+    # A pool card region-substituted at materialize time (pool.cutoff's
+    # region_substitutions, retroformats/releases.py) carries a different
+    # passcode than the one the banlist was transcribed against - BabelCDB's
+    # region-agnostic canonical code. Rather than rewrite banlist data to
+    # match, fall back to the original passcode's status when the
+    # substituted one isn't itself separately listed.
+    region_substitution_origin = {
+        int(sub["to"]["passcode"]): int(sub["from"]["passcode"])
+        for sub in (pool.cutoff or {}).get("region_substitutions", [])
+    }
     overrides = select_applicable_errata(fmt, repo)
 
     sections: dict[str, list[tuple[int, int, str]]] = {s: [] for s in _SECTION_ORDER}
     for card in pool.cards:
-        status = status_by_code.get(card.passcode, "unlimited")
+        status = status_by_code.get(card.passcode)
+        if status is None and card.passcode in region_substitution_origin:
+            status = status_by_code.get(region_substitution_origin[card.passcode])
+        status = status or "unlimited"
         count = STATUS_TO_COUNT.get(status, UNLIMITED_COUNT)
         section = status if status in sections else "unlimited"
         override = overrides.get(card.passcode)

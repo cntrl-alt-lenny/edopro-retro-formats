@@ -16,7 +16,7 @@ from pathlib import Path
 
 from retroformats.build import build_all
 from retroformats.lflist import build_lflist, historical_identity, lflist_hash, parse_lflist
-from retroformats.model import ErratumV2
+from retroformats.model import REGION_SCOPE_BITS, ErratumV2
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
@@ -149,12 +149,22 @@ class RealDataTest(unittest.TestCase):
         pool = self.repo.pools["pool-edison-2010"]
         banlist = self.repo.banlists["tcg-2010-03"]
         status_by_code = {e.card.passcode: e.status for e in banlist.entries}
+        # Mirrors lflist.py's own region_substitution_origin bridge: a
+        # region-substituted pool card's status is looked up under the
+        # passcode the banlist was transcribed against, not its own.
+        region_substitution_origin = {
+            int(sub["to"]["passcode"]): int(sub["from"]["passcode"])
+            for sub in (pool.cutoff or {}).get("region_substitutions", [])
+        }
         overrides = select_applicable_errata(fmt, self.repo)
 
         expected_codes: dict[int, int] = {}
         counts = {"forbidden": 0, "limited": 1, "semilimited": 2}
         for card in pool.cards:
-            count = counts.get(status_by_code.get(card.passcode, ""), 3)
+            status = status_by_code.get(card.passcode)
+            if status is None and card.passcode in region_substitution_origin:
+                status = status_by_code.get(region_substitution_origin[card.passcode])
+            count = counts.get(status or "", 3)
             override = overrides.get(card.passcode)
             if override is not None:
                 passcode, variants = historical_identity(override.implementation)
@@ -169,6 +179,8 @@ class RealDataTest(unittest.TestCase):
         by_status: dict[str, int] = {}
         for card in pool.cards:
             status = status_by_code.get(card.passcode)
+            if status is None and card.passcode in region_substitution_origin:
+                status = status_by_code.get(region_substitution_origin[card.passcode])
             if status:
                 by_status[status] = by_status.get(status, 0) + 1
         self.assertEqual({"forbidden": 43, "limited": 70, "semilimited": 19}, by_status)
@@ -216,30 +228,43 @@ class RealDataTest(unittest.TestCase):
         missing = sorted(p for p in refs if p not in self.repo.card_index.by_passcode)
         self.assertEqual([], missing, f"passcodes referenced by canonical data but absent from the card index: {missing}")
 
-    def test_pool_cards_are_tcg_scoped_in_the_card_database(self):
-        """A TCG format's pool must reference codes EDOPro treats as TCG cards
-        (cdb `ot` including SCOPE_TCG 0x2). A code scoped OCG-only would be
-        rejected in an official-cards room and would carry the OCG behaviour.
+    def test_pool_cards_are_region_scoped_in_the_card_database(self):
+        """A format's pool must reference codes EDOPro scopes for that pool's
+        own region (cdb `ot` including the region's REGION_SCOPE_BITS entry).
+        A code scoped for the wrong region would be rejected in an
+        official-cards room and would carry the wrong region's text/rulings.
 
-        One documented exception, found by the errata review: Project Ignis
-        models Mind Master's TCG version as a SEPARATE entry (96782896,
-        ot=2, aliased to 96782886) because the canonical row carries the
-        OCG-only text, while our release-derived pool naturally references
-        the canonical passcode its TDGS-EN016 printing maps to. Recorded as an
-        open question in docs/roadmap.md rather than silently patched: it is a
-        card-identity question, not an errata chronology one.
+        Generalised across every current pool (not a fixed id list) so a
+        future format's pool is covered automatically. This is now also a
+        hard validator error (retroformats/validate.py's
+        pool.card-region-scope-mismatch), not merely a test: this test is a
+        second, independent pin on the same invariant.
+
+        No exceptions: Mind Master (96782886, BabelCDB's canonical row,
+        SCOPE_OCG-only) previously needed one, since the Edison/Tengu pools'
+        release-derived TDGS-EN016 printing naturally resolved to that
+        OCG-only-scoped row while BabelCDB ships the TCG-text printing as a
+        separate row (96782896, ot=2, aliased). Resolved via a general
+        mechanism, not a one-off: pool.cutoff.region_substitutions (see
+        schemas/pool.schema.json, retroformats/releases.py) substitutes the
+        correctly-scoped sibling at materialize time for any card matching
+        this class of gap; retroformats/lflist.py bridges banlist status
+        lookups back to the original passcode so banlist data never needs to
+        change. See data/pools/edison-2010.json and tengu-2011.json's own
+        region_substitutions entries for the sourced reasoning.
         """
-        known_exceptions = {96782886: "Mind Master (TCG version is upstream 96782896)"}
         index = self.repo.card_index
-        for pool_id in ("pool-goat-2005-ignis", "pool-edison-2010"):
+        for pool in self.repo.pools.values():
+            region_bit = REGION_SCOPE_BITS.get(pool.region)
+            if region_bit is None:
+                continue
             offenders = {}
-            for card in self.repo.pools[pool_id].cards:
+            for card in pool.cards:
                 row = index.by_passcode.get(card.passcode)
                 ot = row.get("ot") if row else None
-                if ot is not None and not (int(ot) & 0x2):
+                if ot is not None and not (int(ot) & region_bit):
                     offenders[card.passcode] = card.name
-            unexpected = {c: n for c, n in offenders.items() if c not in known_exceptions}
-            self.assertEqual({}, unexpected, f"{pool_id}: non-TCG-scoped pool cards")
+            self.assertEqual({}, offenders, f"{pool.id}: pool cards not scoped for region {pool.region}")
 
     def test_every_edison_substitution_rests_on_resolved_chronology(self):
         """Edison has no reference implementation to copy, so every historical
