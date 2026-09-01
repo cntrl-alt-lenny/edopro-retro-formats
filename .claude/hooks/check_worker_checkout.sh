@@ -31,10 +31,13 @@ common_dir=$(git rev-parse --git-common-dir 2>/dev/null) || {
     branch="unknown"
     fail
 }
-case "$common_dir" in
-    /*) ;;
-    *) common_dir="$repo_root/$common_dir" ;;
-esac
+# Do not classify absolute-vs-relative by a leading slash. Git for Windows
+# reports an absolute common dir as C:/path/..., which that test reads as
+# relative; prefixing the repo root then produced a path that cannot be
+# entered, so the guard refused the *correct* worktree on Windows. A relative
+# common dir is relative to the current directory, which has not changed here
+# (the resolutions above all run in subshells), so letting `cd` do the work
+# handles the relative, POSIX-absolute and Windows-absolute forms alike.
 common_dir=$(cd "$common_dir" 2>/dev/null && pwd -P) || {
     expected_root="<unavailable>"
     branch="unknown"
