@@ -252,14 +252,21 @@ the *sequencing* reasoning:
   Windows and nobody had noticed, because the broken test could not express
   the case. Let `cd` resolve the value instead of classifying it. Verified
   against the real worktree: exit 2 before, exit 0 after.
-- **Open, non-blocking: `report.py`'s atomic write loses to a concurrent
-  reader on Windows.** `os.replace` raises `PermissionError [WinError 32]`
-  when another handle has the destination open, so a reader polling
-  `<role>-latest.md` while a round writes it can make the write fail. Two
-  tests error on Windows for this reason; CI is POSIX and unaffected. The
-  canonical self-report path works normally in single-reader use (verified on
-  Windows: `write`, `status` fresh/stale/absent all correct). The fix is a
-  bounded retry around the replace, not a Windows-specific protocol.
+- **`report.py`'s atomic write loses to a concurrent reader on Windows —
+  fixed, and the test that watched for it was the worse bug.** `os.replace`
+  raises `PermissionError [WinError 32]` while another handle has the
+  destination open, which is the *normal* case for `<role>-latest.md`: one
+  role writing while another polls. Now retried for up to 5s; format, paths
+  and role derivation unchanged, so the mechanism stays provider-neutral.
+  The lesson worth keeping is the second half: the racing test held a
+  **non-daemon** reader thread and called `stop.set()` only on the success
+  path, so when the write raised, the suite printed its results and then the
+  interpreter hung forever pinning a core — observed as a 40-minute "still
+  running" task. A test that can outlive its own failure is worse than the
+  bug it was watching for: stop background threads in a `finally`, and make
+  them daemons so a mistake cannot wedge the run. Retry coverage is by fault
+  injection, so it proves the same thing on POSIX, where the path is
+  otherwise unreachable.
 
 - **A round's completion report reaches Brain by a provider-neutral
   self-report first, transcript recovery only as fallback.** The order is:

@@ -129,14 +129,17 @@ Do:
 - No new research document. Findings belong on the release/source records,
   the format notes, and the roadmap item.
 
-## Known-failing tests — not yours to fix
+## Expected suite state
 
-On Windows, `tests/test_report.py`'s
-`test_readers_during_concurrent_writes_never_see_torn_content` errors with
-`PermissionError [WinError 32]`: `os.replace` loses to a concurrent reader
-holding the destination open. It is a known, recorded, non-blocking defect
-(see `docs/state.md`) and CI is unaffected. Report it if you see it; do not
-fix it in this round, and do not let it stop you calling the suite clean.
+The full suite is green on both Windows and CI as of the SHA you are
+branching from: **1013 tests, OK, 25 skipped**, and the process exits. The
+25 skips are the engine tests that need `ocgcore` and pinned checkouts.
+
+If you see errors, they are yours to explain — do not wave them through as
+"pre-existing Windows problems". That phrase covered a real defect until
+recently: a held-open report file failed the write *and* left a non-daemon
+thread spinning so the suite process never exited. Both are fixed. A hang
+after the results print is a bug, not slowness.
 
 ## Git expectations
 
