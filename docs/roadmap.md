@@ -49,13 +49,17 @@ reflects that.
    region-correct implementation of a canonical card.
    `tests/test_repo_data.py::test_pool_cards_are_tcg_scoped_in_the_card_database`
    pins the invariant with this single documented exception.
-2. **Cross-check the April 2005 banlist.** The GOAT banlist is currently derived from
-   Ignis's whitelist counts. Transcribe the published April 2005 TCG list (Yugipedia
-   `April 2005 Lists (TCG)`) with the existing importer, reconcile, upgrade
-   `completeness` to `complete`/`verified`, and document any deliberate GOAT-community
-   deviations if found.
-3. **Verify March 2010 against the Konami archive snapshot** (Internet Archive was
-   unreachable this session); upgrade the banlist to `verified`.
+2. ~~**Cross-check the April 2005 banlist.**~~ **Done (2026-09-01).** The 73-entry
+   GOAT-derived record matches Yugipedia and Format Library membership exactly and is
+   independently corroborated by period Pojo/UDE sources. UDE Appendix A is the August
+   1 revision and establishes the April list as of April 1, not unamended continuity;
+   the official UDE October page now supplies the October 1 successor boundary.
+3. ~~**Verify March 2010 against the Konami archive snapshot.**~~ **Done (2026-09-01).**
+   Konami's archived Advanced Format page matches all 132 entries in both directions
+   (43 forbidden / 70 limited / 19 semi-limited) and states Effective March 1, 2010;
+   the archived official September successor PDF states Effective September 1, 2010.
+   Format Library `previous` markers are recorded as unreliable for deltas as a class;
+   current-list membership remains a valid cross-check.
 4. ~~**Materialise the Edison pool.**~~ **Done (2026-08-19).** `data/releases/`
    covers TCG 2002–2010 (369 products / 8,445 printings, Yugipedia per-territory
    dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every

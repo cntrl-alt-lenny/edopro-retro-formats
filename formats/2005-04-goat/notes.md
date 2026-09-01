@@ -14,7 +14,7 @@ Everything was imported from the Project Ignis reference by
   - **pool** `pool-goat-2005-ignis`: 1700 canonical cards (modern passcodes; 3 alt-art
     codes recorded as `variant_passcodes`, 1 as a historical-implementation variant);
   - **banlist** `tcg-2005-04`: 73 canonical entries derived from the whitelist's
-    0/1/2 counts (19 forbidden / 43 limited / 15 semi-limited at the code level);
+  0/1/2 counts (19 forbidden / 43 limited / 15 semi-limited at the code level);
   - **211 errata records** — one per card the whitelist represents by a historical
     implementation: 191 "(GOAT)" cards from `goat-entries.cdb` (codes
     504700000–504700190) + 20 "(Pre-Errata)" cards from `cards-unofficial.cdb`
@@ -29,8 +29,11 @@ content hash `0x28e9fc02`.
 
 ## Known caveats / TODO
 
-- The banlist is *derived* from the Ignis whitelist, not yet cross-checked against the
-  published April 2005 TCG list — hence `completeness: partial` (roadmap item 2).
+- The banlist's membership is cross-checked against Yugipedia, the live Format Library
+  API, and period Pojo/UDE evidence; its `completeness` is `verified`. Format Library's
+  `previous` markers are unreliable as a class (the current April API has six cards
+  marked previous `unlimited` where Yugipedia says `not yet released`), so only its
+  current-list membership is used.
 - The 211-entry `errata_overrides.include` list is **gone**, replaced by one sourced
   statement: `errata_overrides.reference_parity`. Goat Format is *defined* here as a
   reproduction of Project Ignis's implementation — its pool and banlist were

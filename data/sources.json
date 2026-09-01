@@ -114,9 +114,20 @@
       "url": "http://web.archive.org/web/20100825095431/http://www.yugioh-card.com/en/limited/10_03_list.html",
       "publisher": "Konami",
       "revision": "archive snapshot 2010-08-25",
-      "retrieved": "2026-08-19",
-      "used_for": "Primary source for the March 2010 TCG list, entry-by-entry reconciled against data/banlists/tcg/2010-03.json.",
-      "reliability_notes": "Round 2 performed the direct entry-by-entry verification against this archive snapshot: all 132 entries (43 forbidden / 70 limited / 19 semi-limited) matched exactly, zero mismatches - see data/banlists/tcg/2010-03.json's own notes and docs/briefs/archive/002-2026-08-30-march-2010-banlist-verification.md."
+      "retrieved": "2026-09-01",
+      "used_for": "Primary source for the March 2010 TCG Advanced Format list, entry-by-entry reconciled against data/banlists/tcg/2010-03.json.",
+      "reliability_notes": "The archived page's Advanced Format section explicitly says Effective March 1, 2010 and contains all three sections: 43 Forbidden, 70 Limited, and 19 Semi-Limited entries. A direct reconciliation in this round matched all 132 canonical entries by name and status in both directions; this page does not itself establish the next list's effective date."
+    },
+    {
+      "id": "konami-limited-2010-09",
+      "kind": "official",
+      "title": "LIMITED & FORBIDDEN LIST / ADVANCED FORMAT - Effective September 1, 2010 (Konami, via Internet Archive)",
+      "url": "https://web.archive.org/web/20100923013922/http://www.yugioh-card.com/en/limited/pdf/Limited%20%26%20Forbidden%20Cards_10-09.pdf",
+      "publisher": "Konami",
+      "revision": "archive snapshot 2010-09-23",
+      "retrieved": "2026-09-01",
+      "used_for": "Primary period evidence for the September 1, 2010 effective date of the successor TCG Advanced Format list, which supplies the superseded_by_date boundary for tcg-2010-03.",
+      "reliability_notes": "The archived Konami PDF's title explicitly says Effective September 1, 2010. It is evidence for the successor list's stated effective date, not a claim that every intervening page or regional implementation was independently inspected."
     },
     {
       "id": "yugipedia-april-2005",
@@ -130,15 +141,36 @@
       "reliability_notes": "Community wiki; the page itself cites two period sources, both independently re-fetched and cross-checked for this record (see pojo-forbidden-restricted-2005-03 and ude-tournament-appendix-2005-08)."
     },
     {
+      "id": "formatlibrary-banlist-2005-04",
+      "kind": "community-site",
+      "title": "Format Library - April 2005 TCG banlist (live API)",
+      "url": "https://formatlibrary.com/api/banlists/april-2005?category=TCG",
+      "publisher": "Format Library",
+      "retrieved": "2026-09-01",
+      "used_for": "Independent cross-check of April 2005 TCG list membership; the live API returned the same 73 entries (17 forbidden / 41 limited / 15 semi-limited) as the canonical record.",
+      "reliability_notes": "The API's previous-status change markers are unreliable as a class and must not be used to reconstruct deltas. The current response marks six entries as previous 'unlimited' where the period-referenced Yugipedia page says 'not yet released': Makyura the Destructor, Sacred Phoenix of Nephthys, Lightning Vortex, Deck Devastation Virus, Abyss Soldier, and Good Goblin Housekeeping. The status marker is not used as historical evidence here; list membership only is."
+    },
+    {
       "id": "ude-tournament-appendix-2005-08",
       "kind": "official",
       "title": "UDE Tournament Appendix A: Yu-Gi-Oh! TCG Policies (Upper Deck Entertainment, updated August 1, 2005), via Internet Archive",
       "url": "http://entertainment.upperdeck.com/op/policy/files/en/UDEAppendixAYGO01aug2005_en.doc",
       "publisher": "Upper Deck Entertainment",
       "revision": "Wayback Machine snapshot 20060104203431; document metadata (OLE): created/last saved 2005-08-01",
-      "retrieved": "2026-08-31",
+      "retrieved": "2026-09-01",
       "used_for": "Primary source for the April 2005 TCG Advanced Format Forbidden/Limited/Semi-Limited lists. Sections A-23 through A-25 state 'The Forbidden [/Limited/Semi-Limited] list, as of April 1, 2005, is:' followed by all 17/41/15 card names, confirming both the exact card lists and the effective_date.",
-      "reliability_notes": "Official Upper Deck Entertainment tournament-policy document; UDE was the Yu-Gi-Oh! TCG's exclusive North American tournament-policy publisher under license from Konami at this time (this project's 'official' kind explicitly covers Konami/UDE material - see schemas/sources.schema.json). Fetched as a legacy .doc (OLE Compound File) via the Wayback Machine; text extracted with antiword. The document's own stated validity window ('Valid until November 1, 2005') is the document revision's shelf life, not independent confirmation of the banlist's own superseded_by_date - that date is still sourced only via yugipedia-april-2005's 'next: October 2005 Lists' field, unchanged from before this round."
+      "reliability_notes": "Official Upper Deck Entertainment tournament-policy document; UDE was the Yu-Gi-Oh! TCG's exclusive North American tournament-policy publisher under license from Konami at this time (this project's 'official' kind explicitly covers Konami/UDE material - see schemas/sources.schema.json). Fetched as a legacy .doc (OLE Compound File) via the Wayback Machine; text extracted with antiword. This is the August 1, 2005 revision and its Appendix A list is explicitly stated as of April 1, 2005. It confirms the April list and effective date, but the revision date and its 'Valid until November 1, 2005' shelf-life do not by themselves prove that no amendment occurred before October; the official October successor page is separately cited for that boundary."
+    },
+    {
+      "id": "ude-limited-2005-10",
+      "kind": "official",
+      "title": "The Forbidden List for Advanced Format - Effective October 1st 2005 (Upper Deck Entertainment, via Internet Archive)",
+      "url": "https://web.archive.org/web/20051026142552/http://www.upperdeckentertainment.com/yugioh/uk/forbidden_advanced_new.htm",
+      "publisher": "Upper Deck Entertainment",
+      "revision": "Wayback Machine snapshot 20051026142552",
+      "retrieved": "2026-09-01",
+      "used_for": "Primary period evidence for April 2005 TCG banlist superseded_by_date: the official UDE Advanced Format successor page states EFFECTIVE OCTOBER 1ST 2005.",
+      "reliability_notes": "The archived UK Advanced Format page is an official UDE page captured October 26, 2005 and explicitly labels the displayed successor list effective October 1st 2005. It establishes the successor date; it does not by itself prove that the August Appendix A snapshot was unamended throughout the intervening period."
     },
     {
       "id": "pojo-forbidden-restricted-2005-03",
@@ -205,7 +237,7 @@
       "publisher": "Format Library",
       "retrieved": "2026-08-19",
       "used_for": "Independent cross-check of the March 2010 TCG list membership; matched the Yugipedia transcription exactly (43 forbidden / 70 limited / 19 semi-limited).",
-      "reliability_notes": "Format Library's 'previous status' change-markers were found unreliable in three cases (Destiny Draw, Royal Decree, Dark Strike Fighter); statuses themselves matched."
+      "reliability_notes": "Format Library's 'previous' status change-markers are unreliable as a class and must not be used to reconstruct deltas: three March 2010 entries (Destiny Draw, Royal Decree, Dark Strike Fighter) disagree with Yugipedia's historical prior-status annotations. The same defect is independently present in the April 2005 API record (see formatlibrary-banlist-2005-04). Current-list membership matched and remains the only use here."
     },
     {
       "id": "yugipedia-dpct-2010",
