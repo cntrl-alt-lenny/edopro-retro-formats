@@ -21,35 +21,17 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ---
 
-## MODE: HISTORICAL RESEARCH
-
-Read that mode's rules carefully before starting. In particular:
-**canonical data and schema changes are forbidden this round** except
-where Part A explicitly authorises a documentation fix. Findings are
-recorded in `docs/research/`; applying them to the 68 affected errata
-records is a separate, later DATA round.
+## MODE: IMPLEMENTATION
 
 ## Goal
 
-Roadmap item 1b — **close, or narrow, the failed-search deck-verification
-interval.**
+Repair two **demonstrated** defects in this repository's own Claude Code
+adapter. Both have already caused real damage in a live round, so this is
+the "real project development exposed a concrete problem" exception in
+`docs/state.md`'s operating policy — not framework polish.
 
-This is the highest-leverage open chronology question in the project, and
-the reason is sharper than the roadmap states. Brain measured it;
-**re-derive it yourself rather than trusting these numbers**:
-
-| format | snapshot | interval records ambiguous | determinate |
-|---|---|---|---|
-| `2005-04-goat` | 2005-04-01 | 48 | 20 |
-| `2010-03-edison` | 2010-04-24 | 48 | 20 |
-| `2011-09-tengu` | 2011-09-17 | **68** | **0** |
-
-68 of the 296 errata records cite both bounds. Tengu — the newest
-canonical format — sits inside the open interval on **every single one**.
-GOAT and Edison are partly protected because their snapshots precede
-`2011-02-02`, but even they are ambiguous on 48, which suggests a
-*second* cause bundled into the same records (see Part B's note on
-disentangling the two axes).
+This round is **narrowly framework-focused**. Do not combine any roadmap
+or canonical-data work with it.
 
 ## Starting SHA
 
@@ -58,179 +40,139 @@ in your report. `main` should be clean.
 
 ---
 
-## Part A — a conflation round 9 found but correctly left alone
+## Defect 1 — the Stop hook depends on one hard-coded interpreter name
 
-Round 9 established, from `gframe/data_manager.h` at the pinned
-`edopro-source` revision, that `SCOPE_PRERELEASE` (`0x100`) is an **`ot`
-bit-flag**, not a passcode range. The prerelease *passcode* convention is
-a separate thing (`10ZZYYXXX`, per BabelCDB's own README).
+`.claude/settings.json` runs `python .claude/hooks/save_agent_reply.py`.
+On a host where the `python` name does not exist but `python3` does, the
+hook exits 127 and silently writes nothing, so
+`.git/agent-inbox/worker-latest.md` is never produced and Brain silently
+loses every Worker report. The script itself is correct — only the launch
+is not portable.
 
-Round 9 fixed `docs/roadmap.md`'s wording but deliberately did not touch
-the research corpus. Check whether `docs/research/ignis-goat.md` and
-`docs/research/edopro-data-repos-ui.md` carry the same conflation, and
-correct it where they do — citing the pinned revisions, not this brief.
+Do **not** simply swap `python` for `python3`. `settings.json`'s own
+description records that the reverse host also exists in this project
+(a host with no `python3` on PATH at all), which is why the current value
+is what it is. Either direction hard-coded breaks one of the two.
 
-If they are already correct, say so plainly; "nothing to fix" is a fine
-result. Do not rewrite either document beyond this specific point.
+**The pattern to follow already exists in this repository.**
+`.githooks/pre-push` solves exactly this: a `/bin/sh` shim that probes
+`python3`, falls back to `python`, and degrades with a clear message when
+neither is present rather than silently no-opping. Its header comment
+states the principle — a hook that silently no-ops because the
+interpreter name is wrong is worse than no hook. Reuse that pattern
+rather than inventing a second one, and if you conclude it cannot be
+reused as-is for a Claude Code `Stop` hook, say why explicitly instead of
+substituting your own approach silently.
+
+Test the realistic host cases, not just the one you are running on:
+`python3` only, `python` only, both present, neither present. Neither
+present must degrade cleanly and must never block a session from ending —
+`save_agent_reply.py`'s own docstring is normative on that point.
 
 ---
 
-## Part B — the interval (the substantive part)
+## Defect 2 — a Worker can run in Brain's primary checkout (the important one)
 
-### What is currently established
+`AGENTS.md` § Working discipline records this failure: a Worker round ran
+in Brain's own checkout and a later Brain session committed on top of it.
+**It has now happened twice.** The second time, a Worker round created and
+switched to its branch inside the primary checkout while a Brain session
+was working there, and a Brain bookkeeping commit landed on the Worker's
+branch instead of `main`.
 
-From `docs/errata.md` § "What the research established" (read it, and the
-records themselves, rather than relying on this summary):
+The existing prevention is an instruction to re-check `git branch` /
+`git status`. Two occurrences is sufficient evidence that an instruction
+is not prevention. **Replace it with a mechanism.**
 
-- The old procedure — Project Ignis encodes it as `Duel.GoatConfirm` —
-  was official TCG ruling-layer policy through at least **2011-02-02**
-  (Konami's Storm of Ragnarok rulings).
-- The modern no-verification policy is first attested **2019-04-03**.
-- No announcement of the change has been found, so the chronology is
-  recorded as a bounded interval rather than a date.
+Requirements:
 
-### The question
+- Before any Worker work begins, **derive from Git** whether the session
+  is in the intended isolated Worker checkout/worktree and on an
+  appropriate Worker branch. Derive it — do not trust an environment
+  variable a Worker could forget to set, and do not ask the Worker to
+  self-declare.
+- If the session is actually in the primary/Brain checkout, **fail
+  closed**: stop clearly and visibly *before* anything is modified, with a
+  message that says what is wrong and what to do instead. Failing closed
+  matters more than being clever about recovery.
+- Decide and state where the check belongs so that it actually runs
+  before work starts. Consider the adapter's own launch path and
+  `.claude/agents/worker.md`; if you conclude no available hook point can
+  guarantee "before modification", say so plainly rather than shipping a
+  check that only fires sometimes — a partial guard that reads as
+  prevention is worse than a documented gap.
+- Do not make this depend on the Stop hook from Defect 1. They must be
+  independent.
 
-**When did the TCG stop requiring a player to reveal their Deck to verify
-a failed search?**
+`docs/agents/worktree-mechanism.md` defines the intended layout
+(`.claude/worktrees/worker/`, nested, one project folder — an owner
+preference recorded in `docs/state.md`).
 
-Any genuine narrowing helps. The single most valuable result is evidence
-either way about **2011-09-17**, Tengu's snapshot — because that one date
-flips 68 records from ambiguous to determinate for that format.
+---
 
-Note carefully what each outcome would mean:
+## Method
 
-- Evidence the **old** state still held after 2011-09-17 → Tengu resolves
-  to the old era, like GOAT and Edison.
-- Evidence the **new** state was already in force by then → Tengu resolves
-  to the modern era, which is a materially different format.
-- Evidence narrowing the interval but not past that date → still valuable;
-  record it.
+**Reproduce both defects before fixing either.** For Defect 1 that means
+demonstrating the silent 127 on a host missing the configured interpreter
+name; for Defect 2, demonstrating that a Worker-style session in the
+primary checkout is currently not stopped. Record what you actually ran
+and what it produced. A fix whose defect was never reproduced is not
+accepted this round.
 
-Do not let the convenience of the first outcome shape the reading of a
-source. State what each source actually establishes.
+Then fix the **defect classes**, per `AGENTS.md`: not "make it work on
+this laptop" and not "guard the one path that broke."
 
-### Where to look
+Add regression tests. `tests/test_push_readiness.py` is the precedent for
+testing hook behaviour in this repository — follow its shape. Both fixes
+must be covered, and the Defect 2 test must assert the fail-closed
+behaviour, not merely that a helper function exists. Standard library
+only, as everywhere else here.
 
-The existing research names the shape of source that has worked before:
-period Konami/UDE rulings documents, per-set rulings PDFs, judge-list
-archives, and official Card FAQ captures. Candidate leads, none
-guaranteed:
+Run the full suite (`python3 -m unittest discover -t . -s tests`), plus
+`validate` and `build --check` to confirm you changed nothing canonical.
 
-- Konami TCG rulings documents for sets between 2011 and 2019, the same
-  series as the Storm of Ragnarok document already cited;
-- archived `yugioh-card.com` rulings/FAQ pages via the Wayback Machine —
-  the same technique that produced round 2's and round 6's primary
-  sources;
-- Konami's published tournament policy documents, which
-  `data/sources.json` already carries one 2011 example of
-  (`konami-tcg-tournament-policy-v11-2011`);
-- the transition to the "Problem-Solving Card Text" era and the 2019-era
-  rulings-portal change, working *backwards* from the 2019-04-03
-  attestation.
+## Documentation
 
-### Disentangling the two axes
+Update the durable framework docs — `docs/agents/worktree-mechanism.md`,
+`docs/agents/push-gate.md` and `docs/state.md` as applicable — with
+**host-independent facts only**. `tests/test_state_doc_is_durable.py`
+enforces this and will fail on per-machine claims; do not name which
+machine has which interpreter, and do not record live or per-host setup
+state. The durable fact is the *class*: the adapter must not depend on one
+interpreter name, and Worker isolation is enforced mechanically rather
+than by instruction.
 
-`docs/errata.md` records a **second, separate** question in many of the
-same records: whether a card could be *activated at all* with no valid
-target, which changed **per card** and is dated for some (Reinforcement
-of the Army by 2008-12-15) and unresolved for others.
-
-Roadmap 5c already found these two axes are bundled in one upstream
-script for a large cluster and cannot be sequenced against each other.
-Establish which axis is responsible for GOAT's and Edison's 48
-ambiguities, since it is evidently not the verification axis for them.
-That is a real finding either way and it tells a future round where the
-remaining work actually is.
-
-Do **not** attempt to resolve the per-card activation axis this round —
-that is roadmap 1a and is explicitly out of scope.
-
-### A null result is a real result
-
-The roadmap already records that no announcement was found. If this round
-also fails to narrow the interval, that is an acceptable outcome — but it
-must not read as "nothing happened."
-
-Record, in the relevant `docs/research/` file: exactly which sources were
-searched, how, what was and was not found, and what the failed search
-does and does not prove. `AGENTS.md` is explicit that failing to find a
-source is evidence about the search performed, never proof of global
-non-existence. A future round must be able to see what has already been
-tried and not repeat it.
-
-## Non-goals
-
-- Do not modify any `data/errata/*.json` record, even if you narrow the
-  interval. Report the finding; applying it across 68 records is a
-  separate DATA round with its own review.
-- Do not change any format, pool, banlist, rule profile, or schema.
-- Do not attempt to resolve the per-card activation axis (roadmap 1a).
-- Do not attempt to run, install, or screenshot EDOPro (standing
-  boundary since round 7).
-- Do not add a dependency; standard library only.
-
-## Protected invariants
-
-- Canonical data (`data/`, `formats/`) is **unchanged** this round —
-  `git status` must show no modification under either.
-- All three generated lflists byte-identical; `dist/` unchanged.
-- `python -m retroformats validate` stays at **0 errors**, warnings 569.
-
-## Required investigation
-
-1. Re-derive the ambiguity table above yourself.
-2. Read what the 68 records actually encode for this axis before
-   searching — the shape of the recorded chronology tells you what a
-   useful source would have to say.
-3. Search for period evidence, recording the search as you go.
-4. Establish which axis drives GOAT's and Edison's 48 ambiguities.
-
-## Acceptance criteria
-
-- A definite statement of whether the interval narrowed, and if so, to
-  what, with sources that meet this project's bar for the claim being
-  made.
-- If it did not narrow: a recorded, specific account of what was searched
-  and what that does and does not prove.
-- A definite answer on which axis causes GOAT's and Edison's 48
-  ambiguities.
-- Part A resolved, or a plain statement that nothing needed fixing.
-- Canonical data and `dist/` unchanged; validator and full suite pass.
-
-## Tests / validation
-
-Run and report exact output:
-
-```
-python -m retroformats validate
-python -m retroformats build --check
-python -m unittest discover -t . -s tests -v
-```
-
-Plus `git status --short data/ formats/ dist/` showing no changes.
+If the instruction in `AGENTS.md` § Working discipline is now backed by a
+mechanism, update its wording to say so. Do not delete the incident
+record — it is why the mechanism exists.
 
 ## Git expectations
 
 Work in the nested worktree (`.claude/worktrees/worker/`, see
 `docs/agents/worktree-mechanism.md`) if running locally alongside a Brain
 session. Fetch `origin/main` and branch from there
-(e.g. `worker/search-verification-interval`). Do not merge to `main`
-yourself. Do not push.
+(e.g. `worker/adapter-hardening`). Do not merge to `main` yourself.
+Do not push.
+
+If your own Defect 2 guard stops you when you start this round, that is a
+successful reproduction — record it and proceed in a correct worktree.
 
 ## Completion-report schema
 
 Report:
 
 - Starting SHA, branch, final SHA.
-- Part A: what you found in each of the two research docs, and what you
-  changed.
-- Part B: the ambiguity table as you re-derived it; every source you
-  searched and what each did or did not establish; whether the interval
-  narrowed and to what; your evidenced answer on which axis drives the
-  GOAT/Edison ambiguities.
-- What a failed search does and does not prove, stated explicitly if you
-  did not narrow the interval.
-- Exact output of the three validation commands plus the `git status`
-  check.
+- Defect 1: how you reproduced the silent failure; the launch mechanism
+  you chose and why; the result for each of the four host cases
+  (`python3` only, `python` only, both, neither); whether you reused
+  `.githooks/pre-push`'s pattern and, if not, why not.
+- Defect 2: how you reproduced the unguarded case; what you derive from
+  Git and how; where the check runs and your evidence that it runs before
+  any modification; what happens on failure; any case you could not cover.
+- The regression tests added, and confirmation each one fails without its
+  fix.
+- Exact output of the full suite, `validate`, and `build --check`, plus
+  confirmation `dist/` is unchanged.
+- Which durable docs you changed, and confirmation
+  `tests/test_state_doc_is_durable.py` passes.
 - Anything left genuinely uncertain, stated as uncertain.

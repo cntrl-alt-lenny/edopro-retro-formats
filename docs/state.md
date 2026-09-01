@@ -206,6 +206,41 @@ the *sequencing* reasoning:
 - **Prefer Phase-1 hardening over breadth.** Do not start a new historical
   format while roadmap Phase-1 items remain open; they are more
   informative per unit of effort than another format.
+- **A parallel April-2005 round produced three findings `191630e` does not
+  have.** A Worker round briefed against a checkout that predated this
+  framework duplicated roadmap item 2 and landed nowhere; its transcription
+  and `verified` status are superseded by `191630e`. Three things in it are
+  additive, recorded here so they do not depend on a local ref surviving
+  (they also sit on the branch/tag `preserve/april-2005-40cc995`):
+  1. A **primary source for `superseded_by_date`** — the gap `191630e`'s own
+     notes name as unclosed: an official UDE page dated "EFFECTIVE OCTOBER
+     1ST 2005", Wayback capture `20051026142552` of
+     `upperdeckentertainment.com/yugioh/uk/forbidden_advanced_new.htm`.
+  2. **Format Library's "previous status" markers are unreliable as a
+     class** — 5 wrong in April 2005 (newly-printed cards defaulted to
+     `previous: unlimited` where Yugipedia has "not yet released"), matching
+     the 3 already recorded for March 2010. Current-list membership matched
+     exactly both times. Use it for membership, never for deltas.
+  3. UDE Appendix A is the **August 1, 2005 revision**: it proves the April
+     list was still in force in August, not that it went unamended from
+     April. With a pre-effective-date Pojo capture it brackets the period;
+     alone it does not.
+  **Sequencing: fold these into the roadmap item 3 round** (March 2010 ->
+  `verified`), which re-touches the same sources and the same supersession
+  question. Not worth a standalone round.
+
+- **The Claude adapter has two demonstrated defect classes, and the fix
+  pattern for one already exists here.** (a) The `Stop` hook launches the
+  inbox script through a single hard-coded interpreter name, so on a host
+  lacking that name it exits 127 and silently writes no Worker report —
+  and this project genuinely has hosts of both kinds, so neither name is
+  safe hard-coded. `.githooks/pre-push` already solves this by probing
+  both in a `/bin/sh` shim, with `tests/test_push_readiness.py` as the
+  testing precedent. (b) A Worker can run in Brain's primary checkout;
+  this has now happened twice, so the standing instruction to re-check
+  `git branch`/`git status` is not prevention and needs a mechanism that
+  fails closed. Both are queued as one framework round.
+
 - **Roadmap 1a is large and open-ended** (undated era rulings, needing
   period rulings documents that may not exist). Prefer better-bounded
   items unless the owner asks for it directly.
