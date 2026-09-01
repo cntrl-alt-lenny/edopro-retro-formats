@@ -206,31 +206,25 @@ the *sequencing* reasoning:
 - **Prefer Phase-1 hardening over breadth.** Do not start a new historical
   format while roadmap Phase-1 items remain open; they are more
   informative per unit of effort than another format.
-- **A parallel April-2005 round produced three findings `191630e` does not
-  have.** A Worker round briefed against a checkout that predated this
-  framework duplicated roadmap item 2 and landed nowhere; its transcription
-  and `verified` status are superseded by `191630e`. Three things in it are
-  additive, recorded here so they do not depend on a local ref surviving
-  (the earlier note named a branch/tag `preserve/april-2005-40cc995`, but that ref and
-  commit are absent from the current clone; the findings were independently rechecked
-  from the live sources in the roadmap-item-3 round):
-  1. A **primary source for `superseded_by_date`** — the gap `191630e`'s own
-     notes name as unclosed: an official UDE page dated "EFFECTIVE OCTOBER
-     1ST 2005", Wayback capture `20051026142552` of
-     `upperdeckentertainment.com/yugioh/uk/forbidden_advanced_new.htm`.
-  2. **Format Library's "previous status" markers are unreliable as a
-     class** — the current April 2005 response has six newly-printed cards
-     defaulted to `previous: unlimited` where Yugipedia has "not yet
-     released", matching the 3 already recorded for March 2010. Current-list
-     membership matched exactly both times. Use it for membership, never for
-     deltas.
-  3. UDE Appendix A is the **August 1, 2005 revision**: it proves the April
-     list was still in force in August, not that it went unamended from
-     April. With a pre-effective-date Pojo capture it brackets the period;
-     alone it does not.
-  **Sequencing: fold these into the roadmap item 3 round** (March 2010 ->
-  `verified`), which re-touches the same sources and the same supersession
-  question. Not worth a standalone round.
+- **Format Library's "previous status" markers are unreliable as a class.**
+  Landed on the source records in round 13; kept here because it is a
+  standing rule about a source, not a one-off incident. Newly-printed cards
+  are defaulted to `previous: unlimited` where Yugipedia has "not yet
+  released" — six such in the April 2005 response, three already recorded
+  for March 2010. Current-list *membership* matched canonical exactly both
+  times. Use it for membership, never for deltas. (The count moved 5 -> 6
+  between observations of a live API, which is itself the reason the marker
+  field is not evidence.)
+- **The April-2005 findings from the stranded parallel round are landed.**
+  Round 13 put all three on the canonical records: the UDE October 2005
+  successor page as a primary source for `superseded_by_date`, the Format
+  Library marker class above, and the distinction that UDE Appendix A is the
+  **August 1, 2005 revision** — it attests the April list as of April 1, not
+  that the list went unamended through August; a pre-effective-date Pojo
+  capture is what brackets the period. Nothing here depends on the ref
+  `preserve/april-2005-40cc995` any more, which is as well: that ref is
+  absent from this clone, from reachable objects and from `origin`, and was
+  independently confirmed missing by both Brain and Worker.
 
 - **The Claude adapter has four demonstrated defect classes, now covered by
   framework mechanisms and regression tests.** The Stop hook probes
@@ -242,6 +236,30 @@ the *sequencing* reasoning:
   Worker worktree is documented as per-clone state that must be derived with
   `git worktree list`, not assumed to exist. These are durable mechanism
   classes, not claims about any clone's current setup.
+
+- **A test that asserts checkout behaviour must build the git state it
+  asserts against.** The adapter's guard tests pointed at
+  `<primary>/.claude/worktrees/worker` — per-clone developer state, absent on
+  a fresh checkout — so CI was red for four consecutive pushes with a
+  `FileNotFoundError`, and the accept-case additionally depended on whichever
+  branch that worktree happened to be on. Fixed by constructing a real
+  temporary repository and a real linked worktree per test. The rule
+  generalises: ambient layout is not a fixture.
+- **`git rev-parse --git-common-dir` returns `C:/...` on Git for Windows.**
+  Classifying absolute-vs-relative by a leading `/` therefore misreads it as
+  relative; the Worker guard did exactly that, prefixed the repo root, and
+  fail-closed against the *correct* worktree — the guard was unusable on
+  Windows and nobody had noticed, because the broken test could not express
+  the case. Let `cd` resolve the value instead of classifying it. Verified
+  against the real worktree: exit 2 before, exit 0 after.
+- **Open, non-blocking: `report.py`'s atomic write loses to a concurrent
+  reader on Windows.** `os.replace` raises `PermissionError [WinError 32]`
+  when another handle has the destination open, so a reader polling
+  `<role>-latest.md` while a round writes it can make the write fail. Two
+  tests error on Windows for this reason; CI is POSIX and unaffected. The
+  canonical self-report path works normally in single-reader use (verified on
+  Windows: `write`, `status` fresh/stale/absent all correct). The fix is a
+  bounded retry around the replace, not a Windows-specific protocol.
 
 - **A round's completion report reaches Brain by a provider-neutral
   self-report first, transcript recovery only as fallback.** The order is:
