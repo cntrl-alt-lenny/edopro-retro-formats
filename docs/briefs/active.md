@@ -25,101 +25,155 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ## Goal
 
-Land, as tracked and tested repository code, the **cross-provider report
-recovery** that Brain currently runs from an untracked prototype.
+Make a finished round's completion report reach Brain **whatever tool ran
+the round**, by adopting the provider-neutral mechanism designed in the
+sibling `agentic-project-framework` repository — not by inventing a second
+protocol here.
 
-Round 11 fixed the Claude Code adapter so a *Claude Code* Worker writes
-`<git-common-dir>/agent-inbox/worker-latest.md`. That does nothing for a
-Worker round run on another provider — which is most of them here, and is
-deliberate (`AGENTS.md` values model diversity). Today the owner relays
-those reports by hand. A working prototype already recovers them from the
-provider's own local session store; this round makes it real code.
+Round 11 fixed this repository's Claude Code adapter, which helps only
+when the Worker *is* Claude Code. Most rounds here deliberately are not.
 
-**Scope discipline:** this is framework work. Do not combine roadmap or
-canonical-data work with it.
+**Scope discipline:** framework work only. No roadmap or canonical-data
+work in this round.
 
 ## Starting SHA
 
 Verify with `git log -1` on `main` before starting; note the actual SHA
 in your report. `main` should be clean.
 
-## The prototype to promote
+---
 
-Brain's working prototype lives at
-`<git-common-dir>/agent-inbox/recover_agent_report.py`, with its
-machine-local provider roots in
-`<git-common-dir>/agent-inbox/providers.local.json`. Read both. They are
-untracked runtime state, not a deliverable — **promote the mechanism, keep
-the machine-specific paths out of the repository.** Nothing naming a
-provider's install location on a particular host may enter a tracked file.
+## The architecture — get this order right
 
-Proven working against real local sessions:
+1. **Canonical, provider-neutral self-report.** The role writes its own
+   completion report into `<git-common-dir>/agent-inbox/` before finishing,
+   using only filesystem, git and a shell — capabilities every Worker
+   contract here already requires. This is the primary mechanism.
+2. **Provider transcript recovery — fallback only**, when that artifact is
+   missing or stale.
+3. **Manual owner relay — only when both fail.**
 
-- **Claude Code** — one JSONL transcript per session; every record carries
-  `cwd`, `gitBranch`, `sessionId`, `timestamp`. Final response is the last
-  assistant text record.
-- **Codex** — JSONL rollouts; `event_msg` / `task_complete` carries a
-  purpose-built `last_agent_message`. Note `session_meta` records only
-  START-of-session `cwd`/branch, so identity cannot rest on it.
+An earlier Brain prototype had this backwards, treating transcript
+recovery as primary. It is not. A transcript scraper depends on a
+provider's internal storage surviving its next release; a role writing its
+own file does not, and works on a tool that does not exist yet because it
+never asks what tool is running.
 
-Excluded, and record why rather than silently omitting: **Antigravity**
-stores conversation content in undocumented binary blob columns of a
-per-conversation SQLite database. Parsing that is precisely the fragile
-opaque-provider-database dependency this project rules out. It stays
-manual relay until a supported export exists.
+## Adopt, do not re-invent
 
-## The rule that matters most
+The mechanism already exists in
+`/Users/leo/Dev/agentic-project-framework`, **PR #2**
+(`worker/cross-provider-report-relay`, "Add a provider-neutral completion-report
+mechanism"). Read `framework/reports.md`, `tools/report.py`,
+`framework/git-and-isolation.md` and
+`adapters/claude-code/hooks/save_agent_reply.py` on that branch before
+writing anything here.
 
-**Identify the round, never "the most recent conversation."** The
-prototype earned this the hard way: a first version returned round 11's
-session for a round 10 query, because round 11 had run `git log` and so
-mentioned round 10's branch and SHA. Mentioning a round is not producing
-it.
+Reuse its schema and semantics faithfully:
 
-The prototype's current discriminator is a time anchor: the producing
-session's store is still being written within a bounded window after the
-round's own commit; anything outside that window only *read* the SHA.
-Reconcile on repository/worktree path, branch, exact head SHA and
-timestamp together.
+- Inbox at `<git-common-dir>/agent-inbox/`, resolved via
+  `git rev-parse --git-common-dir` so it is identical from any worktree.
+- `<role>-latest.md` plus an append-only `<role>-log.md`.
+- Role tag **derived from which checkout you are in**, never passed as an
+  argument — that repository asserts the parameter's absence with a test.
+- Atomic write (temp file + `os.replace`), so a reader never sees a torn
+  report.
+- Header stamping task, exact HEAD SHA at write time, timestamp, source.
+- A `status` command comparing recorded SHA against current HEAD:
+  fresh / stale / absent as exit codes, so staleness is a command rather
+  than a field a reader parses by hand.
+- Missing or stale means **UNKNOWN** — never "the round did nothing".
 
-Treat that discriminator as a starting point you must test, not as
-settled. If you can find a stronger or more direct signal, use it and say
-why. If you keep the time anchor, justify the bound rather than inheriting
-900 seconds because the prototype used it.
+**Do not fork it.** If this repository needs something that repository's
+version does not do, say so explicitly in your report so it can go back
+upstream, rather than quietly diverging.
 
-Two failure modes to cover explicitly:
+Two things you must decide and state rather than assume:
 
-- **Brain's own live session** matches its own commits. It must never be
+- **PR #2 is open, not merged.** Its schema could still move. Say how you
+  handled that — vendored at a named commit, referenced, or reimplemented
+  to the same contract — and what would need redoing if it changes.
+- **Role-tag naming.** That framework calls the primary checkout
+  `coordinator`; this repository's existing hook calls it `brain`, and its
+  linked worktree `worker`. Converging on the framework's derivation may
+  rename this repository's own inbox files. Pick one, state the reasoning,
+  and make the existing Claude adapter agree with whatever you pick — two
+  naming schemes writing to one directory is the failure this round exists
+  to prevent.
+
+## Converge the Claude adapter
+
+`.claude/hooks/save_agent_reply.py` must stop being an independent
+implementation. Per PR #2's own convergence step, the Stop hook should
+extract only the thing that tool alone can provide — the transcript — and
+hand the text to the shared writer. One writer, one schema, one place a
+regression shows up.
+
+## Make it a contract requirement
+
+Writing the report is a Worker MUST, not a convenience: add it to
+`docs/agents/role-contracts.md`'s Worker contract and to the
+completion-report schema, so every future brief inherits it. It is
+unenforceable against a session that ignores it — say so plainly rather
+than implying otherwise; that is true of every MUST in these contracts.
+
+## Transcript recovery — keep it, demote it
+
+Brain's working prototype is at
+`<git-common-dir>/agent-inbox/recover_agent_report.py`, with machine-local
+provider roots beside it in `providers.local.json`. Both are untracked
+runtime state. Promote the *mechanism*; keep every host-specific path out
+of tracked files.
+
+It is proven against real local sessions for **Claude Code** (per-session
+JSONL transcripts carrying `cwd`, `gitBranch`, `sessionId`, `timestamp`)
+and **Codex** (JSONL rollouts with a purpose-built
+`task_complete.last_agent_message`).
+
+**The round-identification rule is the part that matters.** A first
+version returned round 11's session for a round 10 query, because round 11
+had run `git log` and so mentioned round 10's branch and SHA. Mentioning a
+round is not producing it. The current discriminator is a bounded time
+anchor — the producing session's store is still being written shortly
+after that round's own commit. Test that rule; do not inherit its 900-second
+bound without justifying it. Two failure modes must be covered:
+
+- Brain's own live session matches its own commits and must never be
   returned as a Worker report.
-- **A round whose Worker ran off this machine** (cloud, or a provider with
-  no local store) must return UNKNOWN and ask for a relay — never the
-  nearest plausible session. Round 10 (`f355d79`,
-  `worker/search-verification-interval`) is a real, reproducible instance:
-  its producing session exists in no local store.
+- A round whose Worker ran off this machine must return UNKNOWN. Round 10
+  (`f355d79`, `worker/search-verification-interval`) is a real
+  reproducible instance.
 
-## Preserve these rules exactly
+## Antigravity — correct the conclusion, don't repeat it
 
-- **Absence is UNKNOWN**, never "the agent did nothing".
-- **A recovered report is evidence, not ground truth** — it is what the
-  agent *said*, to be checked against the diff, never a substitute for
-  reviewing the diff. `AGENTS.md` § Working discipline already states the
-  general form of this; the recovery path must not create an exception.
-- **Ambiguity is reported, not resolved by guessing.**
+An earlier Brain conclusion said Antigravity "requires manual relay". That
+conflated two different things and is wrong as stated. The correct split:
+
+- **Transcript recovery is unavailable for it** on evidence: conversation
+  content lives in undocumented binary blob columns
+  (`steps.step_payload` / `metadata` / `render_info`) of a per-conversation
+  SQLite database. That is the fragile opaque-store dependency this
+  project declines. (Worth relaying upstream: PR #2 reports Antigravity as
+  installed-but-never-launched with no data directory, so this is evidence
+  that repository does not have.)
+- **The canonical self-report works fine.** An Antigravity Worker with the
+  normal filesystem/git/shell capabilities writes its own report like any
+  other role. It needs no adapter and no transcript access.
+
+Say that correctly wherever providers are discussed.
 
 ## Also land
 
-The retrieval **order** as a documented procedure, in
-`docs/agents/role-contracts.md` or a new `docs/agents/report-handoff.md`
-as you judge best: (1) shared inbox; (2) determine the provider for that
-role — stated by the owner, else inferred from the round record, else ask;
-(3) recover from that provider's local store; (4) ask for a manual paste
-only when those fail.
+The retrieval order as a documented procedure — self-report, then
+transcript fallback, then manual relay — in `docs/agents/role-contracts.md`
+or a new `docs/agents/report-handoff.md` as you judge best.
 
 Tests, following `tests/test_push_readiness.py` and
-`tests/test_claude_adapter.py`: fixture session stores rather than a
-dependency on any real one, covering each supported provider, the
-round-identification rule, both failure modes above, and a missing config
-returning UNKNOWN. Standard library only.
+`tests/test_claude_adapter.py`: fixture inboxes and fixture session stores
+rather than dependence on any real one. Cover the atomic write, staleness
+detection, role derivation, the round-identification rule, both named
+failure modes, and a missing config returning UNKNOWN. Standard library
+only.
 
 ## Git expectations
 
@@ -133,13 +187,16 @@ you start in the primary checkout.
 Report:
 
 - Starting SHA, branch, final SHA.
-- Where the mechanism lives and how a host supplies its own provider paths
-  without touching a tracked file.
-- Your round-identification rule, what you tested it against, and your
-  justification for any threshold.
+- What you adopted from `agentic-project-framework` PR #2 verbatim, what
+  you adapted, and anything you deliberately did differently — with
+  reasons, flagged for upstream.
+- How you handled PR #2 being unmerged, and your role-tag naming decision.
+- How the Claude Stop hook now converges on the shared writer.
+- Your round-identification rule for the fallback path, what you tested it
+  against, and your justification for any threshold.
 - Confirmation both named failure modes return UNKNOWN, with output.
 - The tests added, and confirmation each fails without its fix.
 - Exact output of the full suite, `validate`, and `build --check`.
-- Which providers a Worker report can now be recovered from automatically,
-  and which still need a manual relay.
+- For each of Claude Code, Codex and Antigravity: whether a report arrives
+  by self-report, by transcript fallback, or needs manual relay.
 - Anything left genuinely uncertain, stated as uncertain.

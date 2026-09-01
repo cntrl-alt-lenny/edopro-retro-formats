@@ -240,23 +240,26 @@ the *sequencing* reasoning:
   `git worktree list`, not assumed to exist. These are durable mechanism
   classes, not claims about any clone's current setup.
 
-- **Worker reports are recoverable from a provider's own session store,
-  not only from the shared inbox.** The `Stop`-hook inbox only ever fires
-  for a Claude Code Worker; most rounds here deliberately run on other
-  providers. The retrieval order is: shared inbox first; then determine
-  the provider for that role (owner-stated, else inferred from the round
-  record, else ask); then recover from that provider's local session
-  store; and only then ask for a manual paste. Two providers expose a
-  supported local store (per-session JSONL, with a purpose-built
-  final-message field in one of them); a third keeps conversation content
-  in undocumented binary blobs and is deliberately excluded rather than
-  parsed. Machine-specific provider locations are local runtime state
-  under the git common dir, never a tracked file — which is why none are
-  named here. The rules that survive recovery: absence is UNKNOWN, a
-  recovered report is evidence rather than ground truth, and a session
-  must be reconciled to its round (path, branch, exact head SHA, time)
-  rather than taken as the most recent conversation — a session that
-  merely ran `git log` mentions every earlier round's SHA.
+- **A round's completion report reaches Brain by a provider-neutral
+  self-report first, transcript recovery only as fallback.** The order is:
+  (1) the role writes its own report into the shared `agent-inbox/` under
+  the git common dir, using only filesystem, git and a shell — capabilities
+  every Worker contract already requires, so it works on any tool including
+  ones with no adapter and no readable transcript store; (2) provider
+  transcript recovery, only when that artifact is missing or stale;
+  (3) manual owner relay, only when both fail. A tool-specific hook fixes
+  one member of the problem class, not the class. The canonical mechanism
+  is designed in the sibling `agentic-project-framework` repository and is
+  adopted here rather than reimplemented — including its rule that a role's
+  tag is derived from which checkout it is in, never asserted.
+  Two conclusions worth not relearning: transcript recovery being
+  unavailable for a provider does NOT mean that provider needs manual
+  relay, since its Worker can still write the canonical report; and a
+  session that merely ran `git log` mentions every earlier round's SHA, so
+  recovery must reconcile a session to the round it *produced*, not the
+  most recent conversation that mentions it. Absence stays UNKNOWN, and a
+  report — recovered or self-written — stays evidence of what the agent
+  said, never a substitute for reviewing the diff.
 
 - **Roadmap 1a is large and open-ended** (undated era rulings, needing
   period rulings documents that may not exist). Prefer better-bounded
