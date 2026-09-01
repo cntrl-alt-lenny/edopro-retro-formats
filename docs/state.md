@@ -240,6 +240,24 @@ the *sequencing* reasoning:
   `git worktree list`, not assumed to exist. These are durable mechanism
   classes, not claims about any clone's current setup.
 
+- **Worker reports are recoverable from a provider's own session store,
+  not only from the shared inbox.** The `Stop`-hook inbox only ever fires
+  for a Claude Code Worker; most rounds here deliberately run on other
+  providers. The retrieval order is: shared inbox first; then determine
+  the provider for that role (owner-stated, else inferred from the round
+  record, else ask); then recover from that provider's local session
+  store; and only then ask for a manual paste. Two providers expose a
+  supported local store (per-session JSONL, with a purpose-built
+  final-message field in one of them); a third keeps conversation content
+  in undocumented binary blobs and is deliberately excluded rather than
+  parsed. Machine-specific provider locations are local runtime state
+  under the git common dir, never a tracked file — which is why none are
+  named here. The rules that survive recovery: absence is UNKNOWN, a
+  recovered report is evidence rather than ground truth, and a session
+  must be reconciled to its round (path, branch, exact head SHA, time)
+  rather than taken as the most recent conversation — a session that
+  merely ran `git log` mentions every earlier round's SHA.
+
 - **Roadmap 1a is large and open-ended** (undated era rulings, needing
   period rulings documents that may not exist). Prefer better-bounded
   items unless the owner asks for it directly.
