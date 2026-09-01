@@ -261,6 +261,22 @@ the *sequencing* reasoning:
   report — recovered or self-written — stays evidence of what the agent
   said, never a substitute for reviewing the diff.
 
+- **The transcript-recovery fallback over-rejects real producing sessions;
+  fold the fix into the next framework touch rather than a round of its
+  own.** Its primary-checkout exclusion requires that *no* recorded working
+  directory in a candidate session is the primary checkout. Sessions
+  routinely start there and move into the worktree, and one provider
+  records only a start-of-session working directory — the exact field the
+  design says identity must not rest on — so a genuine producing session is
+  rejected. Verified by probe: the round-12 round's own session is local,
+  in-window and correct, and recovery returns UNKNOWN for it. It fails
+  closed, so it yields no answer rather than a wrong one, and the canonical
+  self-report is unaffected — which is why this is a follow-up, not a
+  blocker. The fix is to exclude *the reading session itself* rather than
+  any session that ever touched the primary checkout. Its tests pass
+  because their fixtures never touch the primary checkout, so they encode
+  the intended shape rather than the observed one.
+
 - **Roadmap 1a is large and open-ended** (undated era rulings, needing
   period rulings documents that may not exist). Prefer better-bounded
   items unless the owner asks for it directly.

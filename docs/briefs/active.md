@@ -14,27 +14,24 @@ one-line "no brief queued" placeholder. -->
    non-negotiable epistemic rules. They outrank convenience.
 2. [`docs/agents/role-contracts.md`](../agents/role-contracts.md) — the
    Worker contract: your mode's rules, the ground rules, and the
-   completion-report schema you must report back in.
+   completion-report schema you must report back in. Note the report is
+   now a MUST written from inside the round, not only displayed.
 
 Then this brief in full. Read only the further docs this brief scopes as
 relevant — don't ingest `docs/research/` wholesale.
 
 ---
 
-## MODE: IMPLEMENTATION
+## MODE: SOURCE VERIFICATION
 
 ## Goal
 
-Make a finished round's completion report reach Brain **whatever tool ran
-the round**, by adopting the provider-neutral mechanism designed in the
-sibling `agentic-project-framework` repository — not by inventing a second
-protocol here.
+Roadmap item 3 — **verify the March 2010 TCG banlist against period
+primary sources and upgrade it honestly** — and, in the same round because
+it is the same ground, land three already-researched April 2005 findings
+that were produced by a round which never landed.
 
-Round 11 fixed this repository's Claude Code adapter, which helps only
-when the Worker *is* Claude Code. Most rounds here deliberately are not.
-
-**Scope discipline:** framework work only. No roadmap or canonical-data
-work in this round.
+Two framework rounds in a row have gone by. This is project work again.
 
 ## Starting SHA
 
@@ -43,160 +40,103 @@ in your report. `main` should be clean.
 
 ---
 
-## The architecture — get this order right
+## Part A — March 2010 to `verified`
 
-1. **Canonical, provider-neutral self-report.** The role writes its own
-   completion report into `<git-common-dir>/agent-inbox/` before finishing,
-   using only filesystem, git and a shell — capabilities every Worker
-   contract here already requires. This is the primary mechanism.
-2. **Provider transcript recovery — fallback only**, when that artifact is
-   missing or stale.
-3. **Manual owner relay — only when both fail.**
+`data/banlists/tcg/2010-03.json` is `completeness: complete`, transcribed
+from Yugipedia and cross-checked against Format Library. Its source
+`konami-limited-2010-03` is an Internet Archive capture of Konami's own
+`yugioh-card.com/en/limited/` page, and its `reliability_notes` say
+outright: *"Direct entry-by-entry verification against this archive
+snapshot is still TODO."* Roadmap item 3 records that the Archive was
+unreachable in the session that wrote it.
 
-An earlier Brain prototype had this backwards, treating transcript
-recovery as primary. It is not. A transcript scraper depends on a
-provider's internal storage surviving its next release; a role writing its
-own file does not, and works on a tool that does not exist yet because it
-never asks what tool is running.
+It is reachable now. Do the verification that note defers:
 
-## Adopt, do not re-invent
+- Fetch the archived Konami page and check it **entry by entry** against
+  all 132 canonical entries — name and status, both directions.
+- Decide `complete` vs `verified` on the schema's own bar in
+  `schemas/common.schema.json`: `verified` needs load-bearing claims
+  corroborated by strong primary/period evidence, not modern community
+  consensus. If the archived page covers only part of the list (say,
+  Forbidden but not Semi-Limited), then only that part is primary-sourced —
+  say so and pick the status the *weakest* load-bearing claim supports.
+- `effective_date` and `superseded_by_date` need the same treatment as the
+  contents. Do not let a page's capture date stand in for the date a list
+  took effect.
+- If it does reach `verified`, propagate to
+  `formats/2010-03-edison/format.json`'s `implementation_status.banlist`,
+  and re-check whether `overall` should move (it is a judgement
+  conventionally bottlenecked by the weakest axis, with no derivation
+  rule — see `docs/state.md`).
 
-The mechanism already exists in
-`/Users/leo/Dev/agentic-project-framework`, **PR #2**
-(`worker/cross-provider-report-relay`, "Add a provider-neutral completion-report
-mechanism"). Read `framework/reports.md`, `tools/report.py`,
-`framework/git-and-isolation.md` and
-`adapters/claude-code/hooks/save_agent_reply.py` on that branch before
-writing anything here.
+## Part B — land the stranded April 2005 findings
 
-Reuse its schema and semantics faithfully:
+A Worker round run against a stale checkout duplicated roadmap item 2 and
+never landed. Its transcription was superseded by `191630e`, but three
+findings in it are additive and are recorded in `docs/state.md`. They also
+sit on the local branch/tag `preserve/april-2005-40cc995` — read that
+commit directly rather than working from the summary.
 
-- Inbox at `<git-common-dir>/agent-inbox/`, resolved via
-  `git rev-parse --git-common-dir` so it is identical from any worktree.
-- `<role>-latest.md` plus an append-only `<role>-log.md`.
-- Role tag **derived from which checkout you are in**, never passed as an
-  argument — that repository asserts the parameter's absence with a test.
-- Atomic write (temp file + `os.replace`), so a reader never sees a torn
-  report.
-- Header stamping task, exact HEAD SHA at write time, timestamp, source.
-- A `status` command comparing recorded SHA against current HEAD:
-  fresh / stale / absent as exit codes, so staleness is a command rather
-  than a field a reader parses by hand.
-- Missing or stale means **UNKNOWN** — never "the round did nothing".
+1. **A primary source for `superseded_by_date`.** `191630e`'s own notes
+   name this as unclosed: the October boundary is sourced only via
+   Yugipedia's dating convention. That branch has an official UDE page
+   dated "EFFECTIVE OCTOBER 1ST 2005", Wayback capture `20051026142552` of
+   `upperdeckentertainment.com/yugioh/uk/forbidden_advanced_new.htm`.
+   Verify it yourself, then cite it on `data/banlists/tcg/2005-04.json`.
+2. **Format Library's "previous status" markers are unreliable as a
+   class** — 5 wrong for April 2005, 3 already recorded for March 2010,
+   same failure mode (newly-printed cards defaulted to
+   `previous: unlimited` where Yugipedia has "not yet released"). Current
+   list membership matched exactly both times. Record the *class* on the
+   source records, not one more incident note — and apply the lesson while
+   doing Part A rather than rediscovering it.
+3. **UDE Appendix A is the August 1, 2005 revision.** It proves the April
+   list was still in force in August, not that it went unamended from
+   April; with a pre-effective-date Pojo capture it brackets the period,
+   alone it does not. Check whether the current `2005-04.json` wording
+   already makes that distinction and correct it if not.
 
-**Do not fork it.** If this repository needs something that repository's
-version does not do, say so explicitly in your report so it can go back
-upstream, rather than quietly diverging.
+Part B must not change the April 2005 entry set or downgrade its
+`verified` status — both were independently re-derived and stand. It adds
+sourcing and corrects wording.
 
-Two things you must decide and state rather than assume:
+## Guard rails
 
-- **PR #2 is open, not merged.** Its schema could still move. Say how you
-  handled that — vendored at a named commit, referenced, or reimplemented
-  to the same contract — and what would need redoing if it changes.
-- **Role-tag naming.** That framework calls the primary checkout
-  `coordinator`; this repository's existing hook calls it `brain`, and its
-  linked worktree `worker`. Converging on the framework's derivation may
-  rename this repository's own inbox files. Pick one, state the reasoning,
-  and make the existing Claude adapter agree with whatever you pick — two
-  naming schemes writing to one directory is the failure this round exists
-  to prevent.
-
-## Converge the Claude adapter
-
-`.claude/hooks/save_agent_reply.py` must stop being an independent
-implementation. Per PR #2's own convergence step, the Stop hook should
-extract only the thing that tool alone can provide — the transcript — and
-hand the text to the shared writer. One writer, one schema, one place a
-regression shows up.
-
-## Make it a contract requirement
-
-Writing the report is a Worker MUST, not a convenience: add it to
-`docs/agents/role-contracts.md`'s Worker contract and to the
-completion-report schema, so every future brief inherits it. It is
-unenforceable against a session that ignores it — say so plainly rather
-than implying otherwise; that is true of every MUST in these contracts.
-
-## Transcript recovery — keep it, demote it
-
-Brain's working prototype is at
-`<git-common-dir>/agent-inbox/recover_agent_report.py`, with machine-local
-provider roots beside it in `providers.local.json`. Both are untracked
-runtime state. Promote the *mechanism*; keep every host-specific path out
-of tracked files.
-
-It is proven against real local sessions for **Claude Code** (per-session
-JSONL transcripts carrying `cwd`, `gitBranch`, `sessionId`, `timestamp`)
-and **Codex** (JSONL rollouts with a purpose-built
-`task_complete.last_agent_message`).
-
-**The round-identification rule is the part that matters.** A first
-version returned round 11's session for a round 10 query, because round 11
-had run `git log` and so mentioned round 10's branch and SHA. Mentioning a
-round is not producing it. The current discriminator is a bounded time
-anchor — the producing session's store is still being written shortly
-after that round's own commit. Test that rule; do not inherit its 900-second
-bound without justifying it. Two failure modes must be covered:
-
-- Brain's own live session matches its own commits and must never be
-  returned as a Worker report.
-- A round whose Worker ran off this machine must return UNKNOWN. Round 10
-  (`f355d79`, `worker/search-verification-interval`) is a real
-  reproducible instance.
-
-## Antigravity — correct the conclusion, don't repeat it
-
-An earlier Brain conclusion said Antigravity "requires manual relay". That
-conflated two different things and is wrong as stated. The correct split:
-
-- **Transcript recovery is unavailable for it** on evidence: conversation
-  content lives in undocumented binary blob columns
-  (`steps.step_payload` / `metadata` / `render_info`) of a per-conversation
-  SQLite database. That is the fragile opaque-store dependency this
-  project declines. (Worth relaying upstream: PR #2 reports Antigravity as
-  installed-but-never-launched with no data directory, so this is evidence
-  that repository does not have.)
-- **The canonical self-report works fine.** An Antigravity Worker with the
-  normal filesystem/git/shell capabilities writes its own report like any
-  other role. It needs no adapter and no transcript access.
-
-Say that correctly wherever providers are discussed.
-
-## Also land
-
-The retrieval order as a documented procedure — self-report, then
-transcript fallback, then manual relay — in `docs/agents/role-contracts.md`
-or a new `docs/agents/report-handoff.md` as you judge best.
-
-Tests, following `tests/test_push_readiness.py` and
-`tests/test_claude_adapter.py`: fixture inboxes and fixture session stores
-rather than dependence on any real one. Cover the atomic write, staleness
-detection, role derivation, the round-identification rule, both named
-failure modes, and a missing config returning UNKNOWN. Standard library
-only.
+- GOAT's generated list must stay entry-for-entry identical to the Ignis
+  reference: content hash `0x28E9FC02`, asserted in five test files. If it
+  moves, stop and report rather than re-pinning.
+- Adding out-of-pool restricted entries is structurally safe —
+  `_build_whitelist()` walks the pool — but each new
+  `format.restricted-card-outside-pool` warning is a finding to confirm,
+  not noise to absorb. The current warning count is 569.
+- No new research document. Findings belong on the banlist records, the
+  format notes, and the roadmap items.
 
 ## Git expectations
 
 Work in the nested worktree (`.claude/worktrees/worker/`). Fetch
-`origin/main`, branch from it (e.g. `worker/report-recovery`). Do not
-merge to `main` yourself. Do not push. The round-11 guard will stop you if
-you start in the primary checkout.
+`origin/main`, branch from it (e.g. `worker/march-2010-verification`). Do
+not merge to `main` yourself. Do not push. The guard will stop you if you
+start in the primary checkout.
+
+Before ending the round, write your completion report with
+`python3 tools/report.py write --task <this brief's filename>` in addition
+to displaying it — see `docs/agents/report-handoff.md`.
 
 ## Completion-report schema
 
 Report:
 
 - Starting SHA, branch, final SHA.
-- What you adopted from `agentic-project-framework` PR #2 verbatim, what
-  you adapted, and anything you deliberately did differently — with
-  reasons, flagged for upstream.
-- How you handled PR #2 being unmerged, and your role-tag naming decision.
-- How the Claude Stop hook now converges on the shared writer.
-- Your round-identification rule for the fallback path, what you tested it
-  against, and your justification for any threshold.
-- Confirmation both named failure modes return UNKNOWN, with output.
-- The tests added, and confirmation each fails without its fix.
-- Exact output of the full suite, `validate`, and `build --check`.
-- For each of Claude Code, Codex and Antigravity: whether a report arrives
-  by self-report, by transcript fallback, or needs manual relay.
+- Part A: what the archived Konami page actually covers, the entry-by-entry
+  result in both directions, the status you chose and the specific evidence
+  that supports it — and, if `verified` was not reached, exactly what is
+  missing.
+- Part B: each of the three findings, verified independently rather than
+  taken from `state.md`, and where each landed.
+- Confirmation the GOAT parity hash is unchanged, the April 2005 entry set
+  is unchanged, and the warning-count delta with every new warning
+  accounted for.
+- Exact output of `validate`, `build --check`, the atlas check, and the
+  full suite.
 - Anything left genuinely uncertain, stated as uncertain.
