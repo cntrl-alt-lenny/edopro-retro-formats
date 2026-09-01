@@ -72,9 +72,11 @@ Verified endpoints:
   the maintainer (Daniel McNelis) and agree on terms + rate limits.** Single-record
   probes for cross-checking are fine and were done respectfully (< 10 requests).
 
-- Reliability note: Format Library's `previous`-status change markers disagreed with
-  Yugipedia in 3 of 132 March-2010 entries (adjudicated via the September 2009 page —
-  Yugipedia was right each time). Use FL for *current-list membership*, not deltas.
+- Reliability note: Format Library's `previous`-status change markers are unreliable
+  as a class. They disagreed with Yugipedia in 3 of 132 March-2010 entries and the
+  current April-2005 response has six cards marked `previous: unlimited` where
+  Yugipedia says `not yet released`. Use FL for *current-list membership*, not deltas;
+  the canonical source records name the affected source snapshots.
 
 ### Yugipedia
 

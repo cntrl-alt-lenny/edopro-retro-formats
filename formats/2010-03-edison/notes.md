@@ -12,13 +12,16 @@ a large functional-errata surface (many 2010 staples were errata'd later).
 
 ## Data status
 
-- **Banlist `tcg-2010-03` — complete.** Transcribed from Yugipedia's
+- **Banlist `tcg-2010-03` — verified.** Transcribed from Yugipedia's
   "March 2010 Lists (TCG)" wikitext (which cites Konami's original list via the
   Internet Archive) by `retroformats/importers/yugipedia_banlist.py`; 43 forbidden /
-  70 limited / 19 semi-limited; independently cross-checked against Format Library's
-  `/api/banlists/march-2010?category=TCG` — memberships matched exactly.
-  (Format Library's "previous status" markers disagreed on 3 cards; adjudicated
-  against Yugipedia's September 2009 page — recorded in docs/data-sources.md.)
+  70 limited / 19 semi-limited; all 132 entries were independently reconciled in both
+  directions against Konami's archived Advanced Format page. The primary page states
+  Effective March 1, 2010, and Konami's archived September successor PDF states
+  Effective September 1, 2010, supporting both stored date boundaries. Format Library
+  remains a membership cross-check only: its `previous` markers are unreliable as a
+  class (three March examples, plus six April examples), so they are not used for
+  historical deltas.
 - **Pool `pool-edison-2010` — verified (3,673 cards).** Materialised from
   `data/releases/` (everything with a TCG release event in any territory on or
   before 2010-05-10), with five sourced product exclusions (The Shining Darkness's

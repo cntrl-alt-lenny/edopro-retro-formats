@@ -211,16 +211,19 @@ the *sequencing* reasoning:
   framework duplicated roadmap item 2 and landed nowhere; its transcription
   and `verified` status are superseded by `191630e`. Three things in it are
   additive, recorded here so they do not depend on a local ref surviving
-  (they also sit on the branch/tag `preserve/april-2005-40cc995`):
+  (the earlier note named a branch/tag `preserve/april-2005-40cc995`, but that ref and
+  commit are absent from the current clone; the findings were independently rechecked
+  from the live sources in the roadmap-item-3 round):
   1. A **primary source for `superseded_by_date`** — the gap `191630e`'s own
      notes name as unclosed: an official UDE page dated "EFFECTIVE OCTOBER
      1ST 2005", Wayback capture `20051026142552` of
      `upperdeckentertainment.com/yugioh/uk/forbidden_advanced_new.htm`.
   2. **Format Library's "previous status" markers are unreliable as a
-     class** — 5 wrong in April 2005 (newly-printed cards defaulted to
-     `previous: unlimited` where Yugipedia has "not yet released"), matching
-     the 3 already recorded for March 2010. Current-list membership matched
-     exactly both times. Use it for membership, never for deltas.
+     class** — the current April 2005 response has six newly-printed cards
+     defaulted to `previous: unlimited` where Yugipedia has "not yet
+     released", matching the 3 already recorded for March 2010. Current-list
+     membership matched exactly both times. Use it for membership, never for
+     deltas.
   3. UDE Appendix A is the **August 1, 2005 revision**: it proves the April
      list was still in force in August, not that it went unamended from
      April. With a pre-effective-date Pojo capture it brackets the period;
