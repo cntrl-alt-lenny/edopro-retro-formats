@@ -70,9 +70,15 @@ import argparse
 import os
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+
+# How long _atomic_write keeps retrying a rename Windows is refusing because
+# a reader holds the destination open. Long enough to outlast a polling
+# reader, short enough that a genuinely stuck handle still surfaces.
+_REPLACE_TIMEOUT_SECONDS = 5.0
 
 __all__ = [
     "ReportError",
@@ -180,10 +186,31 @@ Not under version control: this lives inside git's own directory.
 
 
 def _atomic_write(path: Path, content: str) -> None:
-    """Write-then-rename, so a reader never observes a partially-written file."""
+    """Write-then-rename, so a reader never observes a partially-written file.
+
+    The rename is retried briefly because Windows refuses to replace a file
+    that another handle has open (PermissionError, WinError 32) -- and the
+    normal case for this file is exactly that: one role writing its report
+    while another polls it. POSIX renames over an open file happily, so the
+    retry is dead code there. This does not make the mechanism
+    platform-specific: the path, the format and the role derivation are
+    unchanged, and the rename is still a single atomic step. Only the number
+    of attempts differs.
+    """
     tmp = path.with_name(f"{path.name}.tmp-{os.getpid()}")
     tmp.write_text(content, encoding="utf-8")
-    os.replace(tmp, path)
+    deadline = time.monotonic() + _REPLACE_TIMEOUT_SECONDS
+    delay = 0.005
+    while True:
+        try:
+            os.replace(tmp, path)
+            return
+        except PermissionError:
+            if time.monotonic() >= deadline:
+                tmp.unlink(missing_ok=True)
+                raise
+            time.sleep(delay)
+            delay = min(delay * 2, 0.05)
 
 
 def _seed_readme(inbox: Path) -> None:

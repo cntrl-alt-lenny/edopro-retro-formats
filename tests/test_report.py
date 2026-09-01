@@ -18,11 +18,13 @@ file.
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import tempfile
 import threading
 import unittest
+import unittest.mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -258,13 +260,60 @@ class TestWritesAreAtomic(RepoCase):
                 if body and body not in markers:
                     observed_bad.append(body[:80])
 
-        t = threading.Thread(target=reader)
+        # daemon + try/finally: if the writes raise, the reader must still be
+        # told to stop. Without both, a failing assertion left this thread
+        # spinning in a non-daemon busy loop and the interpreter could never
+        # exit -- the suite printed its results and then hung indefinitely,
+        # pinning a core. A test that can outlive its own failure is worse
+        # than the bug it was watching for.
+        t = threading.Thread(target=reader, daemon=True)
         t.start()
-        for m in markers:
-            report.write_report(m, task="race", cwd=self.repo)
-        stop.set()
-        t.join(timeout=5)
+        try:
+            for m in markers:
+                report.write_report(m, task="race", cwd=self.repo)
+        finally:
+            stop.set()
+            t.join(timeout=5)
         self.assertEqual(observed_bad, [], "a torn (partially-written) report was observed")
+
+
+class TestReplaceRetriesWhenTheDestinationIsHeldOpen(RepoCase):
+    """Windows refuses os.replace over an open file; the writer must not lose.
+
+    Driven by a fault injector rather than by real concurrency so it proves
+    the same thing on every platform: on POSIX the retry path is unreachable
+    with real files, and a test that only bit on Windows would be no coverage
+    at all for the people whose CI is Linux.
+    """
+
+    def test_a_transient_permission_error_is_retried_not_propagated(self):
+        real_replace = os.replace
+        calls = {"n": 0}
+
+        def flaky(src, dst):
+            calls["n"] += 1
+            if calls["n"] <= 3:
+                raise PermissionError(32, "in use by another process")
+            return real_replace(src, dst)
+
+        with unittest.mock.patch.object(report.os, "replace", flaky):
+            report.write_report("held-open body", task="retry", cwd=self.repo)
+
+        self.assertGreater(calls["n"], 3, "the injected failures were not retried")
+        latest = self.inbox() / "coordinator-latest.md"
+        self.assertIn("held-open body", latest.read_text(encoding="utf-8"))
+
+    def test_a_permanent_permission_error_still_surfaces(self):
+        def always_busy(src, dst):
+            raise PermissionError(32, "in use by another process")
+
+        with unittest.mock.patch.object(report, "_REPLACE_TIMEOUT_SECONDS", 0.2):
+            with unittest.mock.patch.object(report.os, "replace", always_busy):
+                with self.assertRaises(PermissionError):
+                    report.write_report("never lands", task="retry", cwd=self.repo)
+
+        leftovers = list(self.inbox().glob("*.tmp-*"))
+        self.assertEqual(leftovers, [], "a failed write left its temp file behind")
 
 
 class TestStalenessDetection(RepoCase):
