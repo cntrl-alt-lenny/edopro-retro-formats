@@ -25,7 +25,7 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ## Goal
 
-Repair two **demonstrated** defects in this repository's own Claude Code
+Repair three **demonstrated** defects in this repository's own Claude Code
 adapter. Both have already caused real damage in a live round, so this is
 the "real project development exposed a concrete problem" exception in
 `docs/state.md`'s operating policy — not framework polish.
@@ -110,6 +110,30 @@ preference recorded in `docs/state.md`).
 
 ---
 
+## Defect 3 — the pre-push gate is tracked non-executable, so it never runs
+
+Found while pushing round 10's acceptance commit. `.githooks/pre-push` is
+tracked mode `100644`, so even in a clone with `core.hooksPath=.githooks`
+correctly set, Git skips it:
+
+    hint: The '.githooks/pre-push' hook was ignored because it's not set
+    as executable.
+
+The gate has therefore been inactive in this clone the whole time,
+reporting as "configured" to anyone who checked `core.hooksPath` — the
+same silent-no-op class as Defect 1, in a different mechanism. Fix the
+tracked mode (`git update-index --chmod=+x`, so it is the *committed* mode
+that changes, not just the local file), and add a regression test that
+asserts the tracked mode rather than the working-tree mode, since only the
+tracked one survives a fresh clone.
+
+While you are there: `docs/agents/push-gate.md` and `.githooks/pre-push`'s
+own activation comment both tell a reader to set `core.hooksPath` and stop
+there. If setting it is not by itself sufficient to make the gate run, say
+so where those instructions are.
+
+---
+
 ## Method
 
 **Reproduce both defects before fixing either.** For Defect 1 that means
@@ -169,6 +193,8 @@ Report:
 - Defect 2: how you reproduced the unguarded case; what you derive from
   Git and how; where the check runs and your evidence that it runs before
   any modification; what happens on failure; any case you could not cover.
+- Defect 3: confirmation the tracked mode changed (not just the working
+  tree), and that a fresh clone would get an executable hook.
 - The regression tests added, and confirmation each one fails without its
   fix.
 - Exact output of the full suite, `validate`, and `build --check`, plus
