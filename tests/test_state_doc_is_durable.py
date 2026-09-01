@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "docs" / "state.md"
 BRIEFS = ROOT / "docs" / "briefs"
+FRAMEWORK_DOCS = sorted((ROOT / "docs" / "agents").glob("*.md"))
 
 # A full git object name. Deliberately 40 hex exactly: the Tokyo Dome
 # certification digest is a 64-char sha256 historical anchor and the GOAT
@@ -86,6 +87,30 @@ class StateDocIsDurableTest(unittest.TestCase):
         self.assertTrue(active.is_file(), "docs/briefs/active.md is missing")
         head = active.read_text(encoding="utf-8")[:400].lower()
         self.assertIn("status:", head)
+
+
+class FrameworkDocsAreDurableTest(unittest.TestCase):
+    """Keep framework guidance host-independent and derivable."""
+
+    def test_framework_docs_do_not_pin_git_shas(self):
+        for document in FRAMEWORK_DOCS:
+            with self.subTest(document=document.name):
+                found = _GIT_SHA.findall(document.read_text(encoding="utf-8"))
+                self.assertEqual([], found, f"{document} pins a git SHA: {found}")
+
+    def test_framework_docs_do_not_pin_machine_setup(self):
+        volatile_phrases = (
+            "windows machine",
+            "on the mac as of",
+            "macbook as of",
+            "currently a windows",
+            "m1 macbook",
+        )
+        for document in FRAMEWORK_DOCS:
+            lower = document.read_text(encoding="utf-8").lower()
+            for phrase in volatile_phrases:
+                with self.subTest(document=document.name, phrase=phrase):
+                    self.assertNotIn(phrase, lower)
 
 
 if __name__ == "__main__":

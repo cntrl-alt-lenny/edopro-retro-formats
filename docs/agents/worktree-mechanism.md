@@ -36,9 +36,17 @@ primary checkout — without that entry, git does **not** automatically
 exclude a nested worktree from status output, it just looks like an
 untracked directory.
 
-The nested worktree already exists (created once via `git worktree add
---detach .claude/worktrees/worker main`); it doesn't need recreating on a
-fresh clone unless it's missing — check `git worktree list` first.
+The nested worktree is per-clone state and is not committed. The layout above
+is a convention, not a claim that every clone already has the directory.
+Derive whether it exists with `git worktree list` from the primary checkout.
+On a fresh clone (or any clone where it is absent), create it from the primary
+checkout with:
+
+```
+git worktree add --detach .claude/worktrees/worker main
+```
+
+Then enter it and create the task branch as described below.
 
 ## How to use it
 
@@ -87,10 +95,8 @@ need to clean up anyway.
 
 ## Cross-device consistency
 
-This layout is meant to be identical on every machine the human project
-owner works from (currently a Windows desktop and an M1 MacBook Pro) —
-the whole point of writing it down here rather than leaving it as
-session-local knowledge. On a fresh clone on any device: `cd
-edopro-retro-formats && git worktree add --detach
-.claude/worktrees/worker main` once, then follow "How to use it" above.
-Nothing about this mechanism is OS-specific.
+This layout is intended to be identical across clones and devices — the
+whole point of writing it down here rather than leaving it as session-local
+knowledge. On a fresh clone on any device, create the nested worktree with
+the command above, then follow "How to use it". Nothing about this mechanism
+is OS-specific.

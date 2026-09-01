@@ -18,10 +18,12 @@ of finding out from a CI run several steps later.
 git config core.hooksPath .githooks
 ```
 
-This is **not** automatic. A fresh clone on a new machine has no hook
-until this is run. There is no way to make a repository configure its own
-hooks on clone — that is a deliberate Git security property, not an
-oversight to work around.
+This is **not** automatic. A fresh clone has no hook until this is run.
+There is no way to make a repository configure its own hooks on clone —
+that is a deliberate Git security property, not an oversight to work
+around. The tracked `.githooks/pre-push` file also carries executable mode;
+if a local filesystem strips that mode, restore it with
+`chmod +x .githooks/pre-push`.
 
 Bypass a single push with `git push --no-verify`. That skips the local
 hook only; it does not skip CI.

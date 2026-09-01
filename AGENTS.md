@@ -153,10 +153,13 @@ These predate this coordination framework and outrank any process below.
   [`docs/agents/worktree-mechanism.md`](docs/agents/worktree-mechanism.md).
   This exists because it already went wrong once: a Worker round ran in
   Brain's own checkout and a later Brain session didn't notice before
-  committing on top of it. Re-check `git branch`/`git status` at the
-  start of *every* discrete task within a session, not just once at
-  session start — the mistake above happened mid-session, not at the
-  top of one.
+  committing on top of it. The Claude Code Worker adapter now also enforces
+  the nested-worktree/`worker/*`-branch check with a blocking
+  `UserPromptSubmit` hook before the prompt is processed. Still re-check
+  `git branch`/`git status` at the start of *every* discrete task within a
+  session, not just once at session start — other vendors do not run that
+  adapter hook, and the mistake above happened mid-session, not at the top
+  of one.
 - **Repository/source evidence outranks agent narrative.** A prior report
   (including this repo's own research docs) describing something as
   "verified" or "resolved" is a claim to re-check against the actual data,

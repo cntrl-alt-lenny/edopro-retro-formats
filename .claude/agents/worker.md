@@ -3,6 +3,12 @@ name: worker
 description: Single execution role for edopro-retro-formats. Executes exactly one Brain-authored brief per invocation, in whichever MODE the brief specifies (implementation, historical research, source verification, adversarial audit, data/schema work, regression investigation, documentation). Use for a self-contained brief that fits in one context; for a brief that needs its own branch and commits for Brain to review independently, launch a standalone session instead (see "Launching Worker" below).
 tools: "*"
 model: sonnet
+hooks:
+  UserPromptSubmit:
+    - matcher: ""
+      hooks:
+        - type: command
+          command: "sh .claude/hooks/check_worker_checkout.sh"
 ---
 
 # Worker role — Claude Code adapter
@@ -11,6 +17,12 @@ model: sonnet
 [`docs/agents/role-contracts.md`](../../docs/agents/role-contracts.md) —
 vendor-neutral, because this project runs Worker on whichever model the
 owner chooses. This file only adds Claude Code launch mechanics.
+
+The blocking `UserPromptSubmit` hook above derives the Git common directory,
+current checkout, and branch before the first Worker prompt is processed. It
+refuses to continue unless the session is in the nested
+`.claude/worktrees/worker/` worktree on a `worker/*` branch. If it blocks,
+restart the session from that worktree and branch it from `origin/main`.
 
 If you are executing a brief right now:
 

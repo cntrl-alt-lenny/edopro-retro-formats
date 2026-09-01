@@ -229,17 +229,16 @@ the *sequencing* reasoning:
   `verified`), which re-touches the same sources and the same supersession
   question. Not worth a standalone round.
 
-- **The Claude adapter has two demonstrated defect classes, and the fix
-  pattern for one already exists here.** (a) The `Stop` hook launches the
-  inbox script through a single hard-coded interpreter name, so on a host
-  lacking that name it exits 127 and silently writes no Worker report —
-  and this project genuinely has hosts of both kinds, so neither name is
-  safe hard-coded. `.githooks/pre-push` already solves this by probing
-  both in a `/bin/sh` shim, with `tests/test_push_readiness.py` as the
-  testing precedent. (b) A Worker can run in Brain's primary checkout;
-  this has now happened twice, so the standing instruction to re-check
-  `git branch`/`git status` is not prevention and needs a mechanism that
-  fails closed. Both are queued as one framework round.
+- **The Claude adapter has four demonstrated defect classes, now covered by
+  framework mechanisms and regression tests.** The Stop hook probes
+  `python3` then `python` through a shell shim and remains safe when neither
+  is available; the Worker adapter's blocking `UserPromptSubmit` hook derives
+  the Git common directory and refuses Brain's primary checkout or a
+  non-`worker/*` branch; the pre-push hook is tracked executable while its
+  `core.hooksPath` activation remains explicitly per-clone; and the nested
+  Worker worktree is documented as per-clone state that must be derived with
+  `git worktree list`, not assumed to exist. These are durable mechanism
+  classes, not claims about any clone's current setup.
 
 - **Roadmap 1a is large and open-ended** (undated era rulings, needing
   period rulings documents that may not exist). Prefer better-bounded

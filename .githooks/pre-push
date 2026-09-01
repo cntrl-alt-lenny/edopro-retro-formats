@@ -8,6 +8,8 @@
 #
 # Activate per clone (not automatic, including on a fresh clone):
 #   git config core.hooksPath .githooks
+# This tracked hook is executable in the repository. If a local filesystem
+# strips the mode bit, restore it with: chmod +x .githooks/pre-push
 #
 # Bypass once:  git push --no-verify
 # This is a convenience, not a control -- CI is the real backstop. See
