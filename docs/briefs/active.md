@@ -25,7 +25,7 @@ relevant — don't ingest `docs/research/` wholesale.
 
 ## Goal
 
-Repair three **demonstrated** defects in this repository's own Claude Code
+Repair four **demonstrated** defects in this repository's own Claude Code
 adapter. Both have already caused real damage in a live round, so this is
 the "real project development exposed a concrete problem" exception in
 `docs/state.md`'s operating policy — not framework polish.
@@ -134,6 +134,36 @@ so where those instructions are.
 
 ---
 
+## Defect 4 — a durable doc asserts per-clone setup as if it were repo state
+
+`docs/agents/worktree-mechanism.md` states: *"The nested worktree already
+exists (created once via `git worktree add --detach
+.claude/worktrees/worker main`); it doesn't need recreating on a fresh
+clone unless it's missing."* On this clone it did **not** exist, and the
+round-11 Worker correctly stopped because of it — Brain had to create it
+before the round could start.
+
+A worktree is per-clone state, not repository state: `.claude/worktrees/`
+is gitignored precisely so it is never committed, so *no* clone gets one
+by cloning. The sentence is therefore wrong in the same way the phrases
+`tests/test_state_doc_is_durable.py` bans from `docs/state.md` are wrong —
+a durable doc asserting per-machine setup status. Fourth instance of the
+same family this round already covers: setup that silently isn't there,
+described as though it is.
+
+Correct the wording so it describes how to *derive* whether the worktree
+exists and create it if not, rather than asserting it does. Then consider
+whether the durability guard should extend beyond `docs/state.md` to the
+other `docs/agents/*.md` framework docs — if you conclude it should not,
+say why; a guard that covers one file because that is the file someone
+happened to write a test for is not a defensible boundary.
+
+This pairs directly with Defect 2: the fail-closed check tells a Worker it
+is in the wrong place, and this tells whoever reads the docs how the right
+place comes to exist.
+
+---
+
 ## Method
 
 **Reproduce both defects before fixing either.** For Defect 1 that means
@@ -178,8 +208,11 @@ session. Fetch `origin/main` and branch from there
 (e.g. `worker/adapter-hardening`). Do not merge to `main` yourself.
 Do not push.
 
-If your own Defect 2 guard stops you when you start this round, that is a
-successful reproduction — record it and proceed in a correct worktree.
+The nested worktree at `.claude/worktrees/worker/` was created by Brain on
+2026-09-01 after a Worker round stopped because it was missing; it exists
+now, so start there. If your own Defect 2 guard stops you when you start
+this round, that is a successful reproduction — record it and proceed in a
+correct worktree.
 
 ## Completion-report schema
 
@@ -193,6 +226,8 @@ Report:
 - Defect 2: how you reproduced the unguarded case; what you derive from
   Git and how; where the check runs and your evidence that it runs before
   any modification; what happens on failure; any case you could not cover.
+- Defect 4: the corrected wording, and your reasoning on whether the
+  durability guard should extend to the other framework docs.
 - Defect 3: confirmation the tracked mode changed (not just the working
   tree), and that a fresh clone would get an executable hook.
 - The regression tests added, and confirmation each one fails without its
