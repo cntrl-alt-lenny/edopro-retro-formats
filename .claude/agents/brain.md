@@ -33,8 +33,9 @@ definition — see `AGENTS.md` for what the seat actually requires.
      `Status:` line say? That file is the single source of truth for
      whether work is queued.
    - `git config --get core.hooksPath` — see "Push-gate check" below.
-   - `.git/agent-inbox/worker-latest.md` if present (Claude Code Worker
-     rounds only; absent means *unknown*, never "nothing happened").
+   - `python3 tools/report.py status --cwd .claude/worktrees/worker` for the
+     checkout-derived Worker report; absent or stale means *unknown*, never
+     "nothing happened". Only then use transcript recovery or manual relay.
 5. Only now decide the next action. Consult `docs/architecture.md`,
    `docs/format-schema.md`, `docs/roadmap.md`, or a specific
    `docs/research/*` file as the task requires — don't re-ingest the whole

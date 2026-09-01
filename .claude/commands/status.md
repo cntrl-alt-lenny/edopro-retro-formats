@@ -24,9 +24,10 @@ back concisely — do not dump file contents.
 6. `docs/briefs/active.md` — does a brief exist, and what does its own
    `Status:` line say? This is the only source of truth for whether work
    is queued.
-7. `.git/agent-inbox/worker-latest.md` if it exists — Claude Code Worker
-   rounds only. Check its timestamp. Absent or stale means **unknown**,
-   never "nothing happened."
+7. `python3 tools/report.py status --cwd .claude/worktrees/worker` — this
+   checks the checkout-derived `worker-latest.md` report. Absent or stale
+   means **unknown**, never "nothing happened"; only then use provider
+   transcript recovery or manual relay.
 
 **Check local setup:**
 

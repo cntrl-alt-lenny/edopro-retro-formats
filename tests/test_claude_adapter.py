@@ -14,6 +14,7 @@ RUN_PYTHON = ROOT / ".claude" / "hooks" / "run_python.sh"
 WORKER_GUARD = ROOT / ".claude" / "hooks" / "check_worker_checkout.sh"
 SETTINGS = ROOT / ".claude" / "settings.json"
 WORKER_AGENT = ROOT / ".claude" / "agents" / "worker.md"
+SAVE_HOOK = ROOT / ".claude" / "hooks" / "save_agent_reply.py"
 
 
 def git_output(*args, cwd=ROOT):
@@ -84,6 +85,12 @@ class PythonHookShimTest(unittest.TestCase):
             command,
         )
         self.assertNotIn("python .claude/hooks/save_agent_reply.py", command)
+
+    def test_stop_hook_delegates_transcript_text_to_shared_writer(self):
+        text = SAVE_HOOK.read_text(encoding="utf-8")
+        self.assertIn("import report as _report", text)
+        self.assertIn("_report.write_report", text)
+        self.assertNotIn("out.write_text", text)
 
 
 class WorkerCheckoutGuardTest(unittest.TestCase):

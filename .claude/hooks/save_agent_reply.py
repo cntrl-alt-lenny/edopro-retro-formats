@@ -1,91 +1,70 @@
 #!/usr/bin/env python3
+"""Mirror a session's final reply to the shared, provider-neutral inbox.
 
-"""save_agent_reply.py -- Claude Code Stop hook.
+A CONVENIENCE, NOT A CONTROL, and not a second source of truth either. Every
+filesystem-capable Worker and Verifier already writes its own completion
+report by calling ``tools/report.py`` directly, as part of its contract — see
+``framework/reports.md``. This hook exists so that also happens automatically
+on this one tool, without the model needing to choose to run the command. It
+does the one thing only this tool can do — read a Claude Code transcript — and
+then hands off to the exact same writer every other path uses:
+``tools/report.py``'s ``write_report``. The inbox location, the role tag, the
+atomic write, and the provenance header are that module's job, not this file's;
+duplicating them here is exactly the drift ``adapters.md`` warns a restated
+policy eventually produces.
 
-Captures the final assistant turn of a Claude Code session and writes it
-to a shared inbox so a Brain session can read what a Worker session said
-without the human copy-pasting it in chat. Adapted from a pattern used in
-a sibling project (gx-spirit-caller); see docs/agents/worktree-mechanism.md
-for the worktree layout this depends on.
+Read this part before relying on anything it writes:
 
-# Why this exists
+  * It fires only for sessions run on this one tool. A round run on any other
+    tool writes nothing here, and that is normal.
+  * Therefore **a missing or stale file means UNKNOWN** — never "the task did
+    not happen", "the agent failed", or "the review did not run". The
+    fallbacks, in order, are: check the shared inbox this file writes into
+    (also written to directly by any role on any tool that followed its
+    contract); the owner pastes the report; inspect repository and pull
+    request state directly; and where that genuinely cannot answer, ask the
+    owner. Repository state can confirm that execution happened, because
+    execution leaves a branch and a diff. It cannot confirm that a review
+    happened, because a review leaves only a report.
+  * Check the timestamp before trusting a file that is there.
 
-Brain and Worker run in separate worktrees of the same clone — Brain in
-the primary checkout, Worker in the nested `.claude/worktrees/worker/`
-(see docs/agents/worktree-mechanism.md). When a Worker round
-ends without the human relaying a report, Brain has no way to see what
-happened except by re-deriving it from the diff -- fine for facts, but it
-loses whatever Worker said about things it was unsure of, blockers it
-hit, or scope it deliberately left out. This hook closes that gap: every
-time a session ends, its last assistant turn is appended to
-`<shared-git-dir>/agent-inbox/<role>-latest.md`.
+This hook cannot know which brief a session was working from — a Stop event
+carries a session id, not a task identifier, and only the agent following its
+own contract knows the brief. The report this hook writes is therefore tagged
+with the session id, not a brief id, which is honest about what this path
+actually knows rather than guessing. A role that writes its own report via its
+contract supplies the real task identifier; this hook is the fallback for
+sessions that end without having done that.
 
-# IMPORTANT CAVEAT -- this only fires for Claude Code sessions
-
-This is Claude Code's own Stop-hook protocol (a JSON event on stdin,
-listed in .claude/settings.json). It does NOT fire for a Worker round run
-in a different vendor's tool (this project's Worker role is explicitly
-model-agnostic -- see AGENTS.md -- and the human sometimes runs a brief
-through a different frontier model's own CLI/agent product). In that
-case this hook simply never runs, and the human relaying the report (as
-before) is still the way Brain finds out. Don't assume the inbox file is
-current -- check its timestamp, and don't treat a missing/stale inbox
-file as "nothing happened."
-
-# Why these path/role choices
-
-- `git rev-parse --git-common-dir` gives the repo's shared `.git/` path --
-  the same value from either worktree, regardless of where the clone
-  lives on disk.
-- `<git-common-dir>/agent-inbox/` sits inside `.git/`, which git never
-  version-controls and treats as private. No .gitignore entry needed; it
-  survives `git clean -fdx` and disappears cleanly if the clone is ever
-  removed.
-- Role is inferred from whether the current worktree's path runs through
-  `.claude/worktrees/`: if it does, role is `worker`; the primary checkout
-  (no such path segment) is role `brain`. This matches
-  docs/agents/worktree-mechanism.md's fixed layout (Worker's nested
-  worktree lives at `.claude/worktrees/worker/`). If the human changes
-  that layout, update this mapping.
-
-# Hook event input
-
-Claude Code passes a JSON event on stdin to Stop hooks. Only
-`transcript_path` is needed. If the event is missing it (older Claude
-Code, a manual test invocation), the hook exits silently -- Stop hooks
-must never block a session from ending.
+Requirements: python and git — reached through this project's
+`.claude/hooks/run_python.sh` wrapper rather than one hardcoded interpreter
+name — and ``tools/report.py`` at the project root. Non-blocking by design — any error exits 0, since a session must
+never fail to end because of this, including the case where ``tools/report.py``
+is missing from an older adopted tree that has not re-run adoption.
 """
 
 from __future__ import annotations
 
 import json
-import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 
-
-_REPO = Path(__file__).resolve().parents[2]
-
-
-def _git(args: list[str]) -> str | None:
-    try:
-        return subprocess.check_output(
-            ["git", "-C", str(_REPO), *args],
-            stderr=subprocess.DEVNULL,
-            text=True,
-        ).strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(_PROJECT_ROOT / "tools"))
+try:
+    import report as _report
+except ImportError:
+    _report = None
 
 
 def _last_assistant_text(transcript_path: Path) -> str | None:
+    """Final assistant turn from a JSONL transcript, or None."""
     try:
         lines = transcript_path.read_text(encoding="utf-8").splitlines()
     except (OSError, UnicodeDecodeError):
         return None
 
-    last_assistant = None
+    last = None
     for line in lines:
         try:
             entry = json.loads(line)
@@ -93,19 +72,15 @@ def _last_assistant_text(transcript_path: Path) -> str | None:
             continue
         role = entry.get("role") or entry.get("message", {}).get("role")
         if role == "assistant":
-            last_assistant = entry
-
-    if last_assistant is None:
+            last = entry
+    if last is None:
         return None
 
-    content = last_assistant.get("content") or (
-        last_assistant.get("message", {}).get("content")
-    )
+    content = last.get("content") or last.get("message", {}).get("content")
     if isinstance(content, str):
         return content.strip() or None
     if not isinstance(content, list):
         return None
-
     parts: list[str] = []
     for block in content:
         if isinstance(block, str):
@@ -114,38 +89,13 @@ def _last_assistant_text(transcript_path: Path) -> str | None:
             text = block.get("text")
             if isinstance(text, str):
                 parts.append(text)
-    out = "\n".join(parts).strip()
-    return out or None
-
-
-def _role_from_worktree(worktree_root: str | None) -> str:
-    if not worktree_root:
-        return "unknown"
-    parts = Path(worktree_root).parts
-    return "worker" if ".claude" in parts and "worktrees" in parts else "brain"
-
-
-def _seed_readme(inbox: Path) -> None:
-    readme = inbox / "README.md"
-    if readme.exists():
-        return
-    readme.write_text(
-        "# .git/agent-inbox/\n\n"
-        "Auto-populated by `.claude/hooks/save_agent_reply.py` (a Stop\n"
-        "hook, Claude Code sessions only -- see that script's docstring).\n"
-        "`<role>-latest.md` holds the final assistant turn of the most\n"
-        "recent Claude Code session in the matching worktree (`brain` or\n"
-        "`worker`); `<role>-log.md` is the append-only history.\n\n"
-        "Read these to see what the other side said without the human\n"
-        "shuttling text manually -- but check the timestamp: a Worker\n"
-        "round run through a non-Claude-Code tool never writes here.\n\n"
-        "Not under version control (lives inside `.git/`). Wipes cleanly\n"
-        "with a fresh clone.\n",
-        encoding="utf-8",
-    )
+    return "\n".join(parts).strip() or None
 
 
 def main() -> int:
+    if _report is None:
+        return 0
+
     try:
         raw = sys.stdin.read()
     except (OSError, KeyboardInterrupt):
@@ -168,38 +118,14 @@ def main() -> int:
     if not text:
         return 0
 
-    common_dir = _git(["rev-parse", "--git-common-dir"])
-    if not common_dir:
-        return 0
-    common = Path(common_dir)
-    if not common.is_absolute():
-        common = (_REPO / common).resolve()
-    inbox = common / "agent-inbox"
-    inbox.mkdir(parents=True, exist_ok=True)
-    _seed_readme(inbox)
-
-    worktree_root = _git(["rev-parse", "--show-toplevel"])
-    role = _role_from_worktree(worktree_root)
-
     session_id = event.get("session_id", "")
-    ts = datetime.now().isoformat(timespec="seconds")
-    header = (
-        f"<!-- captured {ts} from worktree role={role}"
-        f"{f' session={session_id}' if session_id else ''} -->\n\n"
-    )
+    task = f"claude-code-session:{session_id}" if session_id else "unspecified"
 
-    out = inbox / f"{role}-latest.md"
     try:
-        out.write_text(header + text + "\n", encoding="utf-8")
-    except OSError:
+        _report.write_report(text, task=task, cwd=_PROJECT_ROOT, source="claude-code-stop-hook")
+    except _report.ReportError:
         return 0
 
-    log = inbox / f"{role}-log.md"
-    try:
-        with log.open("a", encoding="utf-8") as f:
-            f.write(f"\n\n---\n\n{header}{text}\n")
-    except OSError:
-        pass
     return 0
 
 

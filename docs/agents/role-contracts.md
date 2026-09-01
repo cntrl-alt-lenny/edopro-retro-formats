@@ -199,6 +199,12 @@ Same executor, different constraints. These are not separate agents.
 - **Never merge or push your own work.** Commit to the branch you were
   told to use and stop there. Acceptance is Brain's, after independent
   review.
+- **Before ending a round, write the same completion report you displayed
+  to the owner to the shared inbox:**
+  `python3 tools/report.py write --task <brief-identifier>`. This is a
+  provider-neutral Worker MUST, not a Claude Code hook convenience. It is
+  unenforceable against a session that ignores it; absence therefore means
+  UNKNOWN, never that the round did nothing.
 
 ## Completion report
 
@@ -209,6 +215,8 @@ Report, plainly:
   of your process.
 - Every command you ran to validate the change, and its real output or
   exit status.
+- The report must be written to the shared inbox before the Worker ends,
+  using the task/brief identifier and the checkout-derived role tag.
 - Anything you found that contradicts the brief's assumptions, or scope
   you deliberately left out.
 - Open questions you could not resolve, stated as open questions, not
