@@ -34,7 +34,9 @@ own contract knows the brief. The report this hook writes is therefore tagged
 with the session id, not a brief id, which is honest about what this path
 actually knows rather than guessing. A role that writes its own report via its
 contract supplies the real task identifier; this hook is the fallback for
-sessions that end without having done that.
+sessions that end without having done that. Before using that fallback, it
+leaves an already-fresh report for this checkout and HEAD untouched, because
+that is the role's stronger, task-specific artifact.
 
 Requirements: python and git — reached through this project's
 `.claude/hooks/run_python.sh` wrapper rather than one hardcoded interpreter
@@ -118,12 +120,25 @@ def main() -> int:
     if not text:
         return 0
 
+    # A role's contract report carries the task and exact HEAD needed by the
+    # delivery gate. Do not replace it with this hook's necessarily
+    # session-tagged fallback when it is already fresh.
+    try:
+        status, _ = _report.check_status(_PROJECT_ROOT)
+    except Exception:
+        # An unreadable or otherwise unavailable existing report is not a
+        # fresh contract report. Try the fallback; its own errors remain
+        # non-blocking below.
+        status = 1
+    if status == 0:
+        return 0
+
     session_id = event.get("session_id", "")
     task = f"claude-code-session:{session_id}" if session_id else "unspecified"
 
     try:
         _report.write_report(text, task=task, cwd=_PROJECT_ROOT, source="claude-code-stop-hook")
-    except _report.ReportError:
+    except Exception:
         return 0
 
     return 0

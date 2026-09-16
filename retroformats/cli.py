@@ -254,7 +254,8 @@ def cmd_materialize(args: argparse.Namespace) -> int:
     validator.validate()
     blocking = [
         f for f in validator.errors
-        if f.code.startswith(("releases.", "coverage.", "gaps.", "load.", "pool.", "card.", "sources."))
+        if f.code.startswith(("releases.", "coverage.", "gaps.", "load.", "card.", "sources."))
+        or (f.code.startswith("pool.") and f.code != "pool.materialization-drift")
     ]
     if blocking:
         for finding in blocking:

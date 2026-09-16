@@ -341,6 +341,19 @@ the *sequencing* reasoning:
   period rulings documents that may not exist). Prefer better-bounded
   items unless the owner asks for it directly.
 
+- **The Claude Stop hook is fallback-only when a report is already fresh.** A
+  Stop event has a session id but no brief id, so its session-tagged report is
+  not delivery evidence. The adapter now checks the shared writer's current
+  HEAD freshness result before writing and leaves a role's own task-specific
+  report intact; missing or stale reports still receive the non-blocking
+  session fallback.
+
+- **Materialisation may repair only pool-content drift.**
+  `pool.materialization-drift` is the validator's projection mismatch and its
+  prescribed remedy is the `materialize` command itself. The command therefore
+  ignores that one error while retaining every other `pool.*` error as a
+  refusal, alongside the releases/coverage/gaps/load/card/source gates.
+
 ## Owner preferences
 
 - **One project folder.** No sibling directories next to the repo; the
