@@ -20,7 +20,7 @@ Derive live state instead:
 | what did past rounds do? | [`agents/model-notes.md`](agents/model-notes.md), `docs/briefs/archive/`, `git log` |
 | current implementation status per format | `python -m retroformats report` |
 
-`/status` runs all of that. What follows is only what git *cannot* tell
+What follows is only what git *cannot* tell
 you: rulings, blockers, owner preferences, and why things are parked.
 
 ## Architecture invariants
@@ -178,15 +178,23 @@ two-thirds of Brain's commits were framework rather than project content.
   proportional review for mechanical, docs and bookkeeping changes.
 - **Brain may fix genuinely trivial housekeeping directly, and must keep
   that narrow.** The risk is "this looks easy" gradually turning Brain into
-  the implementation Worker and hollowing out independent review. Anything
-  touching canonical data, or asserting an evidence level, goes to a
-  Worker even when the change itself is small.
+  the implementation executor and hollowing out independent review. Anything
+  touching canonical data, or asserting an evidence level, goes to the
+  Builder even when the change itself is small.
 - **Topology: Brain, one Builder, one standing Verifier** — set by the
   owner on 2026-09-16 when the shared framework was adopted. The Verifier is
   an independent reviewer, not a second executor lane; the reason it fits
   this project is in `AGENTS.md` § Topology. Treat its cost as part of the
   evidence-gathering period below: if review adds time without finding
   defects Brain would have missed, that is a finding to bring to the owner.
+- **The adoption itself was owner-commissioned Brain work, not a reviewed
+  round.** The owner assigned the framework adoption directly to Brain on
+  2026-09-16. It touched only process plumbing (docs, `tools/`, agent tests,
+  the executor guard) and no data, `dist/` or validation rule. Its gates were
+  the full suite, the neutrality and guard tests each shown red before green,
+  a fresh-context session starting from `AGENTS.md` and the Brain contract
+  alone, and CI at the merged head. It had no independent Verifier pass; if
+  a later round finds a defect in that plumbing, that is why.
 - **Still no parallel executors.** One Builder is simple and working.
   Propose parallel lanes only if executor throughput becomes an
   *observed* bottleneck — with evidence, not pre-optimisation.
@@ -196,7 +204,7 @@ two-thirds of Brain's commits were framework rather than project content.
 
 **Evidence-gathering period: the next 5-10 genuine project rounds.** If
 progress is still slower than it should be after that, identify the
-*specific* bottleneck from what actually happened — Worker speed, review
+*specific* bottleneck from what actually happened — executor speed, review
 cost, brief sizing, research difficulty — and fix that one thing. Do not
 optimise speculatively before then.
 

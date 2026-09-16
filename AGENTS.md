@@ -220,7 +220,9 @@ checkout.
 `python3 tools/report.py write` and `delivery`, so the Verifier's delivery check
 can match the Builder's report. A report's role tag comes from the checkout
 directory name, so it is `builder` or `verifier` only when run from those
-checkouts. This project's extra report-recovery fallback is in
+checkouts; Brain's primary checkout is tagged `coordinator`. Inbox files named
+`brain-*` or `worker-*` predate adoption. This project's extra report-recovery
+fallback is in
 [`docs/agents/report-handoff.md`](docs/agents/report-handoff.md).
 
 ## Working discipline
