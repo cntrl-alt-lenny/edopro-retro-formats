@@ -150,25 +150,27 @@ reflects that.
    database's own Sets records, not from either earlier report. The record for
    `10000100` is the existing `gap-ocg1999-nt-prize-top-tier` ruling in
    `data/releases/gaps.json` (lines 816-839), which identifies the physical
-   card as an OCG-JP one-of-a-kind National Tournament trophy; it has no TCG
-   printing to place in either cutoff pool. “No” in both cutoff columns means
-   the first TCG printing is after that cutoff (or, for `10000100`, none is
-   established), so no release record or pool entry is warranted.
+   card as an OCG-JP one-of-a-kind National Tournament trophy; the available
+   evidence does not settle whether this distinct identity ever had a TCG
+   printing. “No” in both cutoff columns means the first TCG printing is after
+   that cutoff; “not established” records the open question for `10000100`, so
+   no release record or pool entry is warranted.
 
    | passcode / name | base | class | already in Edison / Tengu? | first TCG print (official Sets record) | Edison `2010-05-10` | Tengu `2011-09-17` |
    |---|---:|---|---|---|---|---|
    | 2819435 / Pacifis, the Phantasm City | 22702055 Umi | (c) functional variant | no / no | `2017-05-05`, MACR-EN056, Maximum Crisis ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=12970&ope=2&request_locale=en), Sets passage: `2017-05-05 / MACR-EN056 / MAXIMUM CRISIS`) | no | no |
-   | 10000100 / Black Luster Soldier | 5405694 Black Luster Soldier | (c) functional variant | no / no | no TCG printing established; existing gap ruling records only the OCG-JP trophy ([gap record](../data/releases/gaps.json), `gap-ocg1999-nt-prize-top-tier`, resolution passage) | no | no |
+   | 10000100 / Black Luster Soldier | 5405694 Black Luster Soldier | (c) functional variant | no / no | **Open:** TCG printing for this distinct Normal Monster prize-card identity is not settled by the available evidence; the existing gap ruling records only the OCG-JP trophy ([gap record](../data/releases/gaps.json), `gap-ocg1999-nt-prize-top-tier`, resolution passage) | not established | not established |
    | 26534688 / Magellanica, the Deep Sea City | 22702055 Umi | (c) functional variant | no / no | `2020-08-07`, ROTD-EN059, Rise of the Duelist ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=15293&ope=2&request_locale=en), Sets passage: `2020-08-07 / ROTD-EN059 / RISE OF THE DUELIST`) | no | no |
    | 28306253 / Angry Burger | 30243636 Hungry Burger | (c) functional variant | no / no | `2025-07-04`, DUAD-EN029, Duelist's Advance ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=21440&ope=2&request_locale=en), Sets passage: `2025-07-04 / DUAD-EN029 / DUELIST'S ADVANCE`) | no | no |
    | 34103656 / Lemuria, the Forgotten City | 22702055 Umi | (c) functional variant | no / no | `2012-11-09`, ABYR-EN057, Abyss Rising ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=10279&ope=2&request_locale=en), Sets passage: `2012-11-09 / ABYR-EN057 / ABYSS RISING`) | no | no |
    | 74335036 / Fusion Substitute | 24094653 Polymerization | (c) functional variant | no / no | `2014-11-07`, NECH-EN081, The New Challengers ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=11504&ope=2&request_locale=en), Sets passage: `2014-11-07 / NECH-EN081 / THE NEW CHALLENGERS`) | no | no |
    | 82616239 / Light Water Dragon | 85066822 Water Dragon | (c) functional variant | no / no | `2026-02-20`, MZMU-EN031, Maze of Muertos ([Konami record](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=21623&ope=2&request_locale=en), Sets passage: `2026-02-20 / MZMU-EN031 / MAZE OF MUERTOS`) | no | no |
 
-   This closes the amendment's seven-row evidence gap. The extensional GOAT
-   pool has no release-cutoff date question; its membership remains unchanged.
-   No unresolved date remains among these seven, and no new in-scope printing
-   was found, so no data, generated pool, or `tengu-format-community-diff`
+   This closes the amendment's seven-row evidence gap except for the explicitly
+   recorded open question for the distinct `10000100` prize-card identity. The
+   extensional GOAT pool has no release-cutoff date question; its membership
+   remains unchanged. No qualifying in-scope printing was established, so no
+   release record, data, generated pool, or `tengu-format-community-diff`
    change is made.
    4c. ~~Duel Terminal ruling dossier~~ **Done (2026-08-20).** Period policy
    recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
