@@ -69,7 +69,7 @@ Two kinds:
   everything released by the date in the scoped territories, plus/minus cited
   exceptions. `python -m retroformats materialize` derives `cards` from
   `data/releases/` once coverage certifies the cutoff/scope (Edison's pool is
-  materialised this way today — 3,673 cards; see [releases.md](releases.md)).
+  materialised this way today — 3,674 cards; see [releases.md](releases.md)).
 
 ## Rule profile (`data/rule-profiles/*.json`)
 

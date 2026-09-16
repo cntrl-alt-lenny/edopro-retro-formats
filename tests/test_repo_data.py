@@ -103,10 +103,12 @@ class RealDataTest(unittest.TestCase):
     def test_edison_pool_cardinality(self):
         pool = self.repo.pools["pool-edison-2010"]
         self.assertEqual(
-            3673,
+            3674,
             len(pool.cards),
             "Edison pool cardinality changed - re-run the comparison against "
-            "YGOPRODeck's Edison tag and termitaklk before accepting",
+            "YGOPRODeck's Edison tag and termitaklk before accepting "
+            "(round 14, roadmap 4b: added 27847700, Polymerization's "
+            "far-alias artwork identity, via a corrected DPYG-EN020 printing)",
         )
 
     def test_edison_pool_edge_cases(self):

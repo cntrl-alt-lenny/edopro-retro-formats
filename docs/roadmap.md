@@ -54,12 +54,14 @@ reflects that.
    independently corroborated by period Pojo/UDE sources. UDE Appendix A is the August
    1 revision and establishes the April list as of April 1, not unamended continuity;
    the official UDE October page now supplies the October 1 successor boundary.
-3. ~~**Verify March 2010 against the Konami archive snapshot.**~~ **Done (2026-09-01).**
-   Konami's archived Advanced Format page matches all 132 entries in both directions
-   (43 forbidden / 70 limited / 19 semi-limited) and states Effective March 1, 2010;
-   the archived official September successor PDF states Effective September 1, 2010.
-   Format Library `previous` markers are recorded as unreliable for deltas as a class;
-   current-list membership remains a valid cross-check.
+3. ~~**Verify March 2010 against the Konami archive snapshot.**~~ **Done (2026-09-01,
+   attribution corrected 2026-09-16).** Konami's archived Advanced Format page
+   matches all 132 entries in both directions (43 forbidden / 70 limited / 19
+   semi-limited) and states Effective March 1, 2010; the archived official
+   September successor PDF's own page-1 body header (not its shorter /Title
+   metadata, which omits the word "Effective") states Effective September 1,
+   2010. Format Library `previous` markers are recorded as unreliable for deltas
+   as a class; current-list membership remains a valid cross-check.
 4. ~~**Materialise the Edison pool.**~~ **Done (2026-08-19).** `data/releases/`
    covers TCG 2002–2010 (369 products / 8,445 printings, Yugipedia per-territory
    dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every
@@ -71,9 +73,30 @@ reflects that.
    All five Edison boundary products (plus the TSHD Sneak Peek and both new EU
    dates) are now curated records verified against archived 2010 Konami product
    pages with explicit Tournament Legal Date fields.
-   4b. **Per-artwork printing dates** (far-alias alternate arts like Arkana Dark
-   Magician are currently absent from cutoff pools unless force-included; audit
-   which mattered in-period and encode them).
+   4b. ~~Per-artwork printing dates~~ **Done (2026-09-16).** Enumerated every
+   far alias (BabelCDB `alias_of` at distance >= `ARTWORK_OFFSET`) of a card in
+   each canonical pool: 252 rows project-wide, all but 9 the engine-internal
+   `ot=8` GOAT/pre-errata script variants out of scope here. Of the 9 real
+   (`ot` in {1,2,3}) far aliases, most (A Legendary Ocean vs Umi; Harpie Lady
+   1/2/3 and Cyber Harpie Lady vs Harpie Lady) already carry their own dated
+   release printings and were already correctly represented as separate pool
+   entries - a functional/errata name-split, not the silent-drop case 4b was
+   named for. The named example, Arkana's Dark Magician (36996508), checked
+   out clean the other way: its first-ever physical TCG print is 2015-11-12
+   (YGLD-ENB02), so its absence from Edison/Tengu is correct, not a gap - only
+   GOAT's extensional list (which mirrors Project Ignis's whitelist, not a
+   cutoff derivation) includes it, unaffected by this item. One real gap was
+   found and encoded: Polymerization's far-alias second-artwork identity
+   (27847700) has a genuine pre-cutoff TCG print, DPYG-EN020 (Duelist Pack:
+   Yugi, 2009-07-07), that our own release data had mismapped to the base
+   passcode; corrected in `data/releases/products/duelist-pack-yugi.json`
+   (and, with no pool effect, `duel-terminal-4.json`), adding one card to both
+   Edison (3,674) and Tengu (4,563). Flagged, not silently absorbed:
+   TenguFormat.com's independent candidate list does not carry this identity
+   separately either, most likely for the same passcode-collapsing reason our
+   own importer originally missed it - see
+   `docs/research/tengu-format-community-diff.json`'s entry for 27847700 for
+   the open note.
    4c. ~~Duel Terminal ruling dossier~~ **Done (2026-08-20).** Period policy
    recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
    event FAQs, Konami's 2010-03-19 article, the June 2010 WCQ FAQ's card list);

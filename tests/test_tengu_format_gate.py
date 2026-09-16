@@ -216,7 +216,7 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual("f9aae30f4501b28545ff498d494b1ac87b282b4eb4f4f99873c073531ff163cc", source["sha256"])
         self.assertEqual(5035, source["records"])
         self.assertEqual(4572, source["dated_candidate_count"])
-        self.assertEqual(4562, diff["certified_pool_count"])
+        self.assertEqual(4563, diff["certified_pool_count"])
         candidates = self.community_candidates
         for key in ("url", "retrieved", "sha256", "records", "date_field", "comparison_cutoff"):
             self.assertEqual(source[key], candidates["source"][key])
@@ -227,11 +227,11 @@ class TenguResearchGateTest(unittest.TestCase):
 
         evaluation = _fresh_tengu_evaluation(self.repo)
         derived_ours = set(evaluation.included)
-        self.assertEqual(4562, len(derived_ours))
+        self.assertEqual(4563, len(derived_ours))
         self.assertEqual(0, len(evaluation.ambiguous))
 
         ours = {
-            10000010, 37115575, 56043446, 87259077, 88071625,
+            10000010, 27847700, 37115575, 56043446, 87259077, 88071625,
         }
         community = {
             10000002, 18807109, 19230408, 35686188, 39751094, 56043447,
@@ -246,18 +246,18 @@ class TenguResearchGateTest(unittest.TestCase):
             row["our_canonical_passcode"] for row in diff["tenguformat_minus_ours"]
         }
         self.assertEqual(
-            {10000010, 37115575, 87259077, 88071625},
+            {10000010, 27847700, 37115575, 87259077, 88071625},
             derived_ours - canonicalized_community,
         )
         self.assertEqual(set(), canonicalized_community - derived_ours)
         self.assertEqual(
             {
-                "ours_only": [10000010, 37115575, 87259077, 88071625],
+                "ours_only": [10000010, 27847700, 37115575, 87259077, 88071625],
                 "community_only": [],
             },
             diff["canonicalized_semantic_difference"],
         )
-        self.assertEqual(5, len(ours))
+        self.assertEqual(6, len(ours))
         self.assertEqual(15, len(community))
         self.assertTrue(all(not row["changes_toronto_legality"] for row in diff["ours_minus_tenguformat"] + diff["tenguformat_minus_ours"]))
         self.assertNotIn(33574806, derived_ours)
@@ -300,7 +300,7 @@ class TenguResearchGateTest(unittest.TestCase):
         raw = _fresh_tengu_pool_raw("research-only-tengu-projection")
         pool = Pool.load(raw, Path("/tmp/research-only-tengu-projection.json"))
         evaluation = evaluate_cutoff(pool, self.repo, index)
-        self.assertEqual(4562, len(evaluation.included))
+        self.assertEqual(4563, len(evaluation.included))
         self.assertEqual(0, len(evaluation.ambiguous))
         self.assertEqual(0, len(index.unknown_printings))
         excluded = {entry["product"] for entry in raw["cutoff"]["exclude_products"]}
@@ -312,11 +312,13 @@ class TenguResearchGateTest(unittest.TestCase):
         for product in SNEAK_PEEK_EXCLUDED_PRODUCTS:
             self.assertEqual(["konami-2011-product-pages", "yugipedia-set-pages"], source_by_product[product])
 
-        # 4593 at Tengu's own gate; +119 from the 2026-08 ocg-jp (pre-1999-08-25) release
-        # ledger certification, which adds dated canonical cards no TCG pool (including
-        # Tengu's) ever includes - see test_yugi_kaiba_format_gate.py and
-        # test_ocg1999_release_certification.py for the ocg-jp-scoped assertions.
-        self.assertEqual(4712, index.dated_canonical_count())
+        # 4594 at Tengu's own gate (round 14 added the Polymerization far-alias
+        # artwork identity 27847700, roadmap 4b); +119 from the 2026-08 ocg-jp
+        # (pre-1999-08-25) release ledger certification, which adds dated
+        # canonical cards no TCG pool (including Tengu's) ever includes - see
+        # test_yugi_kaiba_format_gate.py and test_ocg1999_release_certification.py
+        # for the ocg-jp-scoped assertions.
+        self.assertEqual(4713, index.dated_canonical_count())
 
     def test_official_release_correction_removes_escuridao_from_snapshot(self):
         product = self.repo.products["yu-gi-oh-gx-volume-9-promotional-card"]

@@ -9,12 +9,21 @@
     "date_field": "tcg_date",
     "comparison_cutoff": "2011-09-17"
   },
-  "certified_pool_count": 4562,
+  "certified_pool_count": 4563,
   "canonicalized_semantic_difference": {
-    "ours_only": [10000010, 37115575, 87259077, 88071625],
+    "ours_only": [10000010, 27847700, 37115575, 87259077, 88071625],
     "community_only": []
   },
   "ours_minus_tenguformat": [
+    {
+      "passcode": 27847700,
+      "name": "Polymerization",
+      "community_record": null,
+      "our_earliest_qualifying_release": {"product": "duelist-pack-yugi", "number": "DPYG-EN020", "date": "2009-07-07", "precision": "day", "territory": "tcg-na", "sources": ["yugipedia-set-pages"]},
+      "classification": "community-omission",
+      "adjudication": "Round 14 (roadmap 4b) correction, added after this diff packet's original certification: Yugipedia's 'Polymerization' page lists no DPYG-EN020 printing, and its 'Polymerization (alternate password)' page attributes DPYG-EN020 to this passcode - a far alias of canonical Polymerization 24094653 (BabelCDB alias_of=24094653, distance far outside the +/-10 artwork-auto-extend window, so not folded into the base card). The TenguFormat.com export used for this diff has no row for 27847700 at all (checked directly against the frozen candidate snapshot); it appears to collapse this printing into the base passcode the same way our own importer did before the correction, not to deliberately exclude it. Unlike the other community-omission rows here, this identity was not part of the original certification audit - flagged for a second look precisely because no independent community pool (TenguFormat.com or the EdisonFormat-derived Edison comparison) currently corroborates it; if that turns out to reflect a deliberate community ruling rather than a shared tooling gap, this entry should be reverted.",
+      "changes_toronto_legality": false
+    },
     {
       "passcode": 10000010,
       "name": "The Winged Dragon of Ra",

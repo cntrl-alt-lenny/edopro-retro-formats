@@ -4,12 +4,12 @@ Verifies the complete end-to-end integration:
 - format definition and metadata
 - snapshot and region
 - banlist counts (51/65/18) and identity verification
-- release-cutoff pool derivation (4,562 canonical cards)
+- release-cutoff pool derivation (4,563 canonical cards)
 - product exclusions and boundary edge cases
 - rule-profile flags, client settings, and partial status
 - errata evaluation at snapshot (52 historical substitutions, 38 divergences, 9 known-wrong fallbacks)
 - exact 52 historical substitution mapping parity
-- generated EDOPro lflist whitelist semantics, determinism, and pinned hash (0xBCBDBABE)
+- generated EDOPro lflist whitelist semantics, determinism, and pinned hash (0x0C878718)
 - protected baselines for GOAT and Edison
 """
 
@@ -38,10 +38,13 @@ ROOT = Path(__file__).resolve().parents[1]
 # Pinned 2026-08-31: Mind Master's pool passcode moved 96782886 -> 96782896
 # (region_substitutions, roadmap 1e / card-identity fix) - the only content
 # change, so only the hash moved, not cardinality or any other card's status.
-TENGU_HASH = 0xBCBDBABE
+# Re-pinned 2026-09-16 (round 14, roadmap 4b): a corrected DPYG-EN020 printing
+# adds 27847700 (Polymerization's far-alias artwork identity) to both the
+# Edison and Tengu pools - both hashes and both pool counts moved by one card.
+TENGU_HASH = 0x0C878718
 GOAT_HASH = 0x28E9FC02
-EDISON_POOL_COUNT = 3673
-TENGU_POOL_COUNT = 4562
+EDISON_POOL_COUNT = 3674
+TENGU_POOL_COUNT = 4563
 
 
 class TenguFormatTest(unittest.TestCase):
@@ -331,7 +334,7 @@ class TenguFormatTest(unittest.TestCase):
                 expected_codes[code] = count
 
         self.assertEqual(expected_codes, built.entries)
-        self.assertEqual(4564, len(built.entries))
+        self.assertEqual(4565, len(built.entries))
 
     def test_26_historical_identity_transfer_and_no_duplicate_playable_copies(self):
         built = build_lflist(self.fmt, self.repo)
@@ -395,9 +398,11 @@ class TenguFormatTest(unittest.TestCase):
         # Hash pinned 2026-08-31: Mind Master's pool passcode moved
         # 96782886 -> 96782896 (region_substitutions, roadmap 1e); pool
         # cardinality is unaffected (substitution, not add/remove).
+        # Re-pinned 2026-09-16 (round 14, roadmap 4b): 27847700 added, see
+        # the module-level TENGU_HASH/EDISON_POOL_COUNT comment above.
         edison_fmt = self.repo.formats["2010-03-edison"]
         built_edison = build_lflist(edison_fmt, self.repo)
-        self.assertEqual(0x34088AB6, built_edison.hash)
+        self.assertEqual(0x8432B710, built_edison.hash)
         self.assertEqual(EDISON_POOL_COUNT, len(self.repo.pools["pool-edison-2010"].cards))
 
 

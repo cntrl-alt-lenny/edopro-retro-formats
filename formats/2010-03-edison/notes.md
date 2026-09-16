@@ -22,7 +22,7 @@ a large functional-errata surface (many 2010 staples were errata'd later).
   remains a membership cross-check only: its `previous` markers are unreliable as a
   class (three March examples, plus six April examples), so they are not used for
   historical deltas.
-- **Pool `pool-edison-2010` — verified (3,673 cards).** Materialised from
+- **Pool `pool-edison-2010` — verified (3,674 cards).** Materialised from
   `data/releases/` (everything with a TCG release event in any territory on or
   before 2010-05-10), with five sourced product exclusions (The Shining Darkness's
   Europe-first street date, its Sneak Peek card, Duel Terminal 1, the May 2010
@@ -31,11 +31,20 @@ a large functional-errata surface (many 2010 staples were errata'd later).
   Dragon out). Europe-only Retro Pack and GX Tag Force 3 promos are legal with no
   special-casing — they fall out of all-TCG territory scoping (e.g. Gallis the
   Star Beast). Cross-checked against YGOPRODeck's Edison tag (every reference card
-  present; our 15 extras are confirmed pre-cutoff printings their tag wrongly
-  omits) and the termitaklk community whitelist. One documented deliberate
-  deviation: Royal Knight of the Ice Barrier (Duel Terminal-only) is excluded
-  where the references include it inconsistently. Regression tests lock the
-  cardinality and sixteen edge cases.
+  present; our 15 extras, as of that cross-check, are confirmed pre-cutoff
+  printings their tag wrongly omits) and the termitaklk community whitelist.
+  One documented deliberate deviation: Royal Knight of the Ice Barrier (Duel
+  Terminal-only) is excluded where the references include it inconsistently.
+  Regression tests lock the cardinality and sixteen edge cases. Round 14
+  (roadmap 4b, 2026-09-16) added one further card not yet re-checked against
+  either community reference, 27847700 (Polymerization's far-alias
+  DPYG-EN020 artwork identity): a corrected printing record, not a forced
+  include - see `data/releases/products/duelist-pack-yugi.json`'s notes and
+  `docs/research/tengu-format-community-diff.json` for the sourcing and the
+  open note that TenguFormat.com's independent Tengu candidate list
+  (checked directly) does not carry this identity separately either, most
+  likely for the same passcode-collapsing reason our own importer originally
+  missed it.
 - **Rules `rules-tcg-mr1-edison` — partial.** EdisonFormat.com states the era rules
   are the "TCG 2008 Rules Change (the equivalent of Master Rules)" and catalogues 13
   differences vs modern play. The profile currently uses the plain `DUEL_MODE_MR1`
