@@ -20,11 +20,16 @@ something about *this project*, stop and raise it with Brain.
 The human project owner is the final authority over direction and scope, and
 retains veto and reversal over everything below.
 
-**The merge gate is Brain's independent review, not a per-round human
-approval.** The owner sets direction and can reverse any decision afterwards;
-they do not sign off on each round before it lands, and they are not expected to
-read a diff. Any document describing a human per-round merge approval as the gate
-is stale.
+**Owner override in force since 2026-09-16: every merge waits for the owner's
+explicit approval.** When Brain accepts a round it stops at "ready to merge",
+tells the owner in plain English what would be merged and why, and merges only
+after the owner approves; the housekeeping that follows a merge waits with it.
+This is an explicit owner decision overriding the routine-merge delegation in
+the constitution and the Brain contract, recorded in
+[`docs/state.md`](docs/state.md). The owner may relax it later. It does not
+change the review: acceptance is still decided by Brain's independent review,
+the owner is still not asked to read a diff or judge correctness, and work
+Brain rejects is still rejected rather than put to the owner.
 
 The full authority model — including the list of actions still reserved to the
 owner — is in [`docs/agents/CONSTITUTION.md`](docs/agents/CONSTITUTION.md). It is
@@ -56,7 +61,7 @@ Owner
 | Role | Holds | Scope |
 |---|---|---|
 | **Owner** | Direction, priorities, scope. Veto and reversal. | — |
-| **Brain** | Project context, sequencing, briefs, adjudication, and the routine merge. ([contract](docs/agents/roles/brain.md)) | Durable state ([`docs/state.md`](docs/state.md)), the brief queue ([`docs/briefs/`](docs/briefs/)), the roadmap's sequencing, and merging accepted work into `main`. Implements only narrow coordinative housekeeping. |
+| **Brain** | Project context, sequencing, briefs, adjudication, and the routine merge. ([contract](docs/agents/roles/brain.md)) | Durable state ([`docs/state.md`](docs/state.md)), the brief queue ([`docs/briefs/`](docs/briefs/)), the roadmap's sequencing, and merging accepted work into `main` once the owner approves (see § Authority). Implements only narrow coordinative housekeeping. |
 | **Builder** | One bounded brief at a time. Never self-accepts, never merges. ([contract](docs/agents/roles/worker.md)) | Everything a brief authorizes: canonical data, importers, validator, generated `dist/`, tests, research documents, tooling. Works on one `builder/<scope>` branch in `.worktrees/builder/`. |
 | **Verifier** | Independent review of an exact SHA. Writes findings, never merges. ([contract](docs/agents/roles/verifier.md)) | Read-only. Reviews one delivered Builder head in `.worktrees/verifier/`, detached. Commits nothing. |
 
@@ -210,8 +215,8 @@ checkout.
   merges.
 - **Verifier** checks out the delivered head detached, and commits and pushes
   nothing.
-- **Brain** merges an accepted branch into `main` and pushes. This repository
-  has no pull-request gate, so that merge is the acceptance action.
+- **Brain** merges an accepted branch into `main` and pushes, after the owner's
+  explicit approval (§ Authority). This repository has no pull-request gate.
 - Branches from before adoption, named for the retired executor seat or
   prefixed `preserve/`, are history. New branches use the role namespace.
 
@@ -270,11 +275,12 @@ Builder prompt plus a Verifier prompt labelled "send only after the Builder has
 finished". The Builder delivers a pushed branch and a report; the Verifier runs
 `python3 tools/report.py delivery` and reviews exactly that head, or says "not
 delivered yet"; Brain inspects the exact SHA itself, re-derives at least one
-load-bearing claim, adjudicates, merges what it accepts, archives the brief with
+load-bearing claim, adjudicates, asks the owner to approve merging what it
+accepts and merges on approval, archives the brief with
 its outcome to `docs/briefs/archive/`, and reports in plain English.
 
-**The owner's involvement in a routine round is pasting two prompts and reading
-one summary.**
+**The owner's involvement in a routine round is pasting two prompts, reading one
+summary, and approving the merge.**
 
 ## Where to look
 

@@ -161,6 +161,18 @@ as of the migration (historical anchor: that corpus is what the freeze was
 proven against). Don't redesign without a concrete counterexample found
 during implementation.
 
+## Owner decision — merges need explicit owner approval (since 2026-09-16)
+
+Set by the owner on 2026-09-16, overriding the routine-merge delegation in the
+constitution, the Brain contract and the pre-existing wording of `AGENTS.md`.
+When Brain accepts a round it stops at "ready to merge", says in plain English
+what would be merged and why, and waits for the owner's explicit approval
+before merging or doing the post-merge housekeeping. It came alongside the
+same rule for the shared framework repository. The owner may relax it once
+rounds have run smoothly for a while; until they say so, it holds for every
+Brain session on every tool. Rejections and corrective briefs do not need
+approval.
+
 ## Operating policy — the framework is done being built
 
 Set by the owner on 2026-08-31, after a setup phase in which roughly

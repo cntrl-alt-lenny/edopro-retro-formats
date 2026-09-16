@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`017-2026-09-16-roadmap-reconciliation`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
@@ -132,3 +132,56 @@ The Worker contract's report, plus a table with one row per roadmap item:
 item, previous status, new status, evidence (commit / archived brief / tree
 check), and what remains if partly done. Then a list of judgement calls left
 open, and anything you found contradicted in `docs/state.md`.
+
+---
+
+## Amendment 1 — 2026-09-16, after Brain's first adjudication
+
+The first delivery, `32ad9439a4d7b131af69835d5ead92e12a881aeb` on
+`builder/roadmap-reconciliation`, was **not accepted**. Most of it was checked
+and stands: every other status, including 1e done and 7, 8 and 9 partly done,
+matches the tree. The round stays open on the same branch and identifier.
+Continue from `32ad943`; do not rewrite or force-push history. This amendment
+lives on `origin/main`: read it with
+`git show origin/main:docs/briefs/active.md`.
+
+### 1. Dated records were rewritten — restore them
+
+Item 4 is recorded as **Done (2026-08-19)** and says Edison "materialises to
+3,673 cards"; item 12 is **Done (2026-08-27)** and says "4,562-card". Those were
+the counts on those dates. Round 14 (2026-09-16) added one card to each pool.
+The delivery replaced the old numbers with today's, so each dated record now
+states a count that was not true on its date — the brief's "Keep history"
+invariant, and the project's rule against converting a later state into an
+earlier one.
+
+Restore both original figures verbatim. Where the current count is worth
+recording, add it alongside and attribute the change to round 14 with its date,
+without altering the original sentence. Changing item 4's pointer from "4a–4c"
+to "4a–4d" is a navigation fix, not a historical claim, and may stay.
+
+### 2. Item 6 was under-credited
+
+The delivery marks item 6 partly done because forbidden card types are not
+inspected. That scope question was already adjudicated: archived brief 008
+required "a definite, evidenced answer on `forbidden_card_types`", round 8
+answered that the check is redundant for the three current formats, round 9
+corrected the reasoning, and both rounds were accepted. The evidence is in the
+comment above the `not checked: forbidden_card_types` message in
+`retroformats/deckcheck.py`. Re-read that rationale yourself and record item 6's
+status from it. Keep its limit visible: by that same rationale the argument
+covers these three formats, not future ones.
+
+### 3. Report accuracy
+
+The first report said accepted records "were not otherwise rewritten", which
+the diff contradicted. The new report must list every line in the diff that
+touches a record carrying a `Done (<date>)` marker, and say what changed.
+
+### Unchanged
+
+Scope, non-goals and evidence requirements are as above. Only
+`docs/roadmap.md` changes. Before finishing, confirm
+`git -C /Users/leo/Dev/edopro-retro-formats status --short` prints nothing. The
+report covers the whole round from base
+`35aa225ada20f1b5dc48333ca858a6da6b80b2d1`.
