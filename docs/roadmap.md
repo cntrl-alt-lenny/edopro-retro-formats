@@ -73,38 +73,77 @@ reflects that.
    All five Edison boundary products (plus the TSHD Sneak Peek and both new EU
    dates) are now curated records verified against archived 2010 Konami product
    pages with explicit Tournament Legal Date fields.
-   4b. ~~Per-artwork printing dates~~ **Done (2026-09-16).** Enumerated every
-   far alias (BabelCDB `alias_of` at distance >= `ARTWORK_OFFSET`) of a card in
-   each canonical pool: 252 rows project-wide, all but 9 the engine-internal
-   `ot=8` GOAT/pre-errata script variants out of scope here. Of the 9 real
-   (`ot` in {1,2,3}) far aliases, most (A Legendary Ocean vs Umi; Harpie Lady
-   1/2/3 and Cyber Harpie Lady vs Harpie Lady) already carry their own dated
-   release printings and were already correctly represented as separate pool
-   entries - a functional/errata name-split, not the silent-drop case 4b was
-   named for. The named example, Arkana's Dark Magician (36996508), checked
-   out clean the other way: its first-ever physical TCG print is 2015-11-12
-   (YGLD-ENB02), so its absence from Edison/Tengu is correct, not a gap - only
-   GOAT's extensional list (which mirrors Project Ignis's whitelist, not a
-   cutoff derivation) includes it, unaffected by this item. One real gap was
-   found and encoded: Polymerization's far-alias second-artwork identity
-   (27847700) has a genuine pre-cutoff TCG print, DPYG-EN020 (Duelist Pack:
-   Yugi, 2009-07-07), that our own release data had mismapped to the base
-   passcode; corrected in `data/releases/products/duelist-pack-yugi.json`
-   (and, with no pool effect, `duel-terminal-4.json`), adding one card to both
-   Edison (3,674) and Tengu (4,563). Flagged, not silently absorbed:
-   TenguFormat.com's independent candidate list does not carry this identity
-   separately either, most likely for the same passcode-collapsing reason our
-   own importer originally missed it - see
-   `docs/research/tengu-format-community-diff.json`'s entry for 27847700 for
-   the open note.
-   **Review note (2026-09-16, Brain, on acceptance):** the "252 rows / 9 real"
-   enumeration above came from `data/cards/index.json`, which only contains
-   passcodes this repository already references, so it could not see every far
-   alias in the pinned BabelCDB revision. A direct query of the pinned
-   `cards.cdb` finds 16 real far-alias rows with a base card in Edison or Tengu.
-   None of the additional rows is a pure alternate artwork, and no pool is
-   known to be wrong, but this item's audit record is incomplete until a
-   brief replaces it with an enumeration taken from the database itself.
+   4b. ~~Per-artwork printing dates~~ **Done (2026-09-16; enumeration
+   corrected 2026-09-16).** The audit is now taken from the pinned BabelCDB
+   revision `0659607453a7d79d1adefbfe1ef7477d3c92434c` recorded in
+   `data/sources.json`, not from a repository-derived card index. I queried all
+   thirteen `.cdb` files present at that revision:
+   `cards-rush.cdb`, `cards-skills-unofficial.cdb`, `cards-skills.cdb`,
+   `cards-unofficial.cdb`, `cards.cdb`, `goat-entries.cdb`,
+   `prerelease-betb-en.cdb`, `prerelease-betb.cdb`,
+   `prerelease-cards-rush.cdb`, `prerelease-dbgv.cdb`,
+   `prerelease-imph.cdb`, `prerelease-lpg2.cdb`, and
+   `prerelease-others.cdb`. The query was:
+
+   ```sql
+   SELECT d.id, t.name, d.alias, d.ot
+   FROM datas AS d LEFT JOIN texts AS t ON t.id = d.id
+   WHERE d.alias != 0 AND abs(d.id - d.alias) >= 10
+     AND d.ot IN (1, 2, 3);
+   ```
+
+   I retained a row for a pool when its `alias` (the base passcode) was in
+   that pool's canonical `cards`/`variant_passcodes` set. The raw query found
+   47 real far-alias rows across the files (45 in `cards.cdb`, 2 in
+   `cards-unofficial.cdb`); the other eleven files had zero. The retained
+   counts were GOAT 13, Edison 16, and Tengu 16; after de-duplicating rows
+   shared by pools, that is 16 unique rows:
+
+   | passcode / name | base | base in | row already in | class | CDB basis |
+   |---|---:|---|---|---|---|
+   | 295517 / A Legendary Ocean | 22702055 Umi | G/E/T | G/E/T | (c) | Adds level reduction and Umi name treatment |
+   | 2819435 / Pacifis, the Phantasm City | 22702055 Umi | G/E/T | — | (c) | Different effects and Phantasm Spiral text |
+   | 10000100 / Black Luster Soldier | 5405694 Black Luster Soldier | G/E/T | — | (c) | Vanilla text/type versus Ritual effect/type |
+   | 13857930 / Neo-Spacian Twinkle Moss | 17732278 Neo-Spacian Glow Moss | E/T | E/T | (c) | Different name, stats, and effect |
+   | 26534688 / Magellanica, the Deep Sea City | 22702055 Umi | G/E/T | — | (c) | Different effects |
+   | 27847700 / Polymerization | 24094653 Polymerization | G/E/T | G/E/T | (a) | Same card fields and text: alternate artwork |
+   | 27927359 / Harpie Lady 2 | 76812113 Harpie Lady | G/E/T | G/E/T | (c) | Distinct effect |
+   | 28306253 / Angry Burger | 30243636 Hungry Burger | G/E/T | — | (c) | Different stats, type, and effects |
+   | 34103656 / Lemuria, the Forgotten City | 22702055 Umi | G/E/T | — | (c) | Different effects |
+   | 36996508 / Dark Magician (Arkana artwork) | 46986414 Dark Magician | G/E/T | G | (a) | Same card fields and text: alternate artwork |
+   | 54415063 / Harpie Lady 3 | 76812113 Harpie Lady | G/E/T | G/E/T | (c) | Distinct effect |
+   | 74335036 / Fusion Substitute | 24094653 Polymerization | G/E/T | — | (c) | Different effect and material zone |
+   | 78734254 / Neo-Spacian Marine Dolphin | 17955766 Neo-Spacian Aqua Dolphin | E/T | E/T | (c) | Different name, stats, and effect |
+   | 80316585 / Cyber Harpie Lady | 76812113 Harpie Lady | G/E/T | G/E/T | (c) | Different ATK/DEF |
+   | 82616239 / Light Water Dragon | 85066822 Water Dragon | E/T | — | (c) | Different stats and effect |
+   | 91932350 / Harpie Lady 1 | 76812113 Harpie Lady | G/E/T | G/E/T | (c) | Distinct effect |
+
+   No row in this base-membership enumeration is class (b). The separately
+   documented Mind Master identity (96782896, alias 96782886) is the
+   region/scope case: its TCG row is already handled by each pool's
+   `region_substitutions` entry and is not counted because 96782886 is not a
+   canonical `cards` passcode in those pool lists. It remains unchanged.
+
+   The class distinction matters because the `ARTWORK_OFFSET` rule in
+   `retroformats/model.py` and `retroformats/releases.py` only folds aliases
+   within 10 passcodes; it does not establish historical printing dates.
+   GOAT is extensional: its 2005 list is a Project Ignis whitelist and has no
+   cutoff-derived membership question. Edison is release-cutoff with cutoff
+   `2010-05-10`, and Tengu is release-cutoff with cutoff `2011-09-17` (and
+   its listed TCG territories). Of the two class-(a) rows, Polymerization is
+   already present in all three pools. Arkana Dark Magician is absent from
+   Edison and Tengu; Konami's official card database lists its `YGLD-ENB02`
+   printing on `2015-11-13`, and Konami's product page gives that product's
+   launch and tournament-legal date as `11/13/2015` while describing the
+   included “Arkana's long-awaited ‘red’ Dark Magician.” See the [official
+   card database](https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4041&ope=2&request_locale=en),
+   passage containing `2015-11-13 / YGLD-ENB02`, and the [official Yugi's
+   Legendary Decks product page](https://www.yugioh-card.com/en/products/past_products/yugis_legendary_decks/),
+   `Launch Date | 11/13/2015`, `Konami Tournament Legal Date | 11/13/2015`,
+   and the “Arkana's long-awaited” passage. It therefore had no TCG printing
+   on either earlier cutoff and its absence is correct. No pool, banlist set,
+   GOAT parity hash, release record, or community-diff entry needed a data
+   change in this correction.
    4c. ~~Duel Terminal ruling dossier~~ **Done (2026-08-20).** Period policy
    recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
    event FAQs, Konami's 2010-03-19 article, the June 2010 WCQ FAQ's card list);
