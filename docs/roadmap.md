@@ -54,12 +54,14 @@ reflects that.
    independently corroborated by period Pojo/UDE sources. UDE Appendix A is the August
    1 revision and establishes the April list as of April 1, not unamended continuity;
    the official UDE October page now supplies the October 1 successor boundary.
-3. ~~**Verify March 2010 against the Konami archive snapshot.**~~ **Done (2026-09-01).**
-   Konami's archived Advanced Format page matches all 132 entries in both directions
-   (43 forbidden / 70 limited / 19 semi-limited) and states Effective March 1, 2010;
-   the archived official September successor PDF states Effective September 1, 2010.
-   Format Library `previous` markers are recorded as unreliable for deltas as a class;
-   current-list membership remains a valid cross-check.
+3. ~~**Verify March 2010 against the Konami archive snapshot.**~~ **Done (2026-09-01,
+   attribution corrected 2026-09-16).** Konami's archived Advanced Format page
+   matches all 132 entries in both directions (43 forbidden / 70 limited / 19
+   semi-limited) and states Effective March 1, 2010; the archived official
+   September successor PDF's own page-1 body header (not its shorter /Title
+   metadata, which omits the word "Effective") states Effective September 1,
+   2010. Format Library `previous` markers are recorded as unreliable for deltas
+   as a class; current-list membership remains a valid cross-check.
 4. ~~**Materialise the Edison pool.**~~ **Done (2026-08-19).** `data/releases/`
    covers TCG 2002–2010 (369 products / 8,445 printings, Yugipedia per-territory
    dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every

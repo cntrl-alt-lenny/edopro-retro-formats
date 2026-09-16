@@ -127,7 +127,7 @@
       "revision": "archive snapshot 2010-09-23",
       "retrieved": "2026-09-01",
       "used_for": "Primary period evidence for the September 1, 2010 effective date of the successor TCG Advanced Format list, which supplies the superseded_by_date boundary for tcg-2010-03.",
-      "reliability_notes": "The archived Konami PDF's title explicitly says Effective September 1, 2010. It is evidence for the successor list's stated effective date, not a claim that every intervening page or regional implementation was independently inspected."
+      "reliability_notes": "CORRECTED 2026-09-16 (round 14): page 1 of 3's own body header explicitly says Effective September 1, 2010 (verified by extracting and rendering the PDF), not the PDF's /Title metadata field - that instead reads the shorter 'Limited & Forbidden Cards / Advanced Format - Sept 1, 2010', without the word 'Effective'. /CreationDate is 2010-08-11, before the stated effective date. This document is evidence for the successor list's stated effective date, not a claim that every intervening page or regional implementation was independently inspected."
     },
     {
       "id": "yugipedia-april-2005",
