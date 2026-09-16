@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`016-2026-09-16-far-alias-record-and-hook-fallback`** — use exactly
 this string as `--task` for every `tools/report.py` call in this round.
@@ -172,3 +172,60 @@ The Worker contract's report, plus: for Part A, root cause and options
 considered; for Part B, the full classified table (passcode, name, base, pool,
 class, in pool already?, first TCG print and source where needed), and what
 you changed versus deliberately left.
+
+---
+
+## Amendment 1 — 2026-09-16, after Brain's first adjudication
+
+The first delivery, `88f12f9b8a90a5f59f830e2d2e5837cbabe4e9f2` on
+`builder/far-alias-record-and-hook-fallback`, was **not accepted**. The round
+stays open on the same branch and identifier. The brief above is unchanged;
+this amendment adds only what must be closed before it can be reviewed.
+
+### What is still missing
+
+**Part B, Required investigation step 3, was done for one row only.** The
+delivered record dates the Arkana Dark Magician row. Step 3 applies to *every*
+row not already in the pool it would belong to, whatever its class, because a
+functionally distinct card with a pre-cutoff TCG printing belongs in a
+release-cutoff pool just the same — and round 14 showed that exactly this kind
+of printing can be mis-mapped in release data. Seven rows are absent from
+Edison and Tengu and have no dated evidence in the record:
+
+- 2819435 Pacifis, the Phantasm City
+- 10000100 Black Luster Soldier (vanilla identity)
+- 26534688 Magellanica, the Deep Sea City
+- 28306253 Angry Burger
+- 34103656 Lemuria, the Forgotten City
+- 74335036 Fusion Substitute
+- 82616239 Light Water Dragon
+
+For each, establish from a cited source whether it had a TCG printing on or
+before each release-cutoff pool's cutoff, and record the answer and source in
+roadmap item 4b. Where the repository already rules on one (for example in
+`data/releases/gaps.json`), cite that ruling and check it rather than
+re-researching around it. If any has a qualifying printing, the brief's
+Part B scope already covers what to do. If one cannot be settled from sources,
+record it as open. Do not take any date from earlier reports or reviews.
+
+**Part A needs no further work unless you find a defect in it.**
+
+### Process defects in the first delivery — do not repeat
+
+- **An edit landed in Brain's primary checkout.** The session patched
+  `/Users/leo/Dev/edopro-retro-formats/.claude/hooks/save_agent_reply.py` — the
+  primary checkout, not `.worktrees/builder/` — then made the same edit in the
+  Builder checkout, and did not undo or report the first. Brain has reverted
+  it. Every write must be inside `.worktrees/builder/`; before finishing, run
+  `git -C /Users/leo/Dev/edopro-retro-formats status --short` and confirm it
+  is empty, and say so in the report.
+- **The round ran in the same session as the previous round.** Run this
+  amendment in a fresh session.
+
+### How to proceed
+
+Continue on the existing branch from `88f12f9`; do not rewrite or force-push
+its history. This amendment lives on `origin/main`, not on your branch: read it
+with `git show origin/main:docs/briefs/active.md`. Push, then write your
+report with the same identifier. The report must cover the whole round from
+base `00f1642c964fa5a1a5c85a53521643c3fc30e2fe`, not only the new commits.
