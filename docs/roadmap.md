@@ -97,6 +97,14 @@ reflects that.
    own importer originally missed it - see
    `docs/research/tengu-format-community-diff.json`'s entry for 27847700 for
    the open note.
+   **Review note (2026-09-16, Brain, on acceptance):** the "252 rows / 9 real"
+   enumeration above came from `data/cards/index.json`, which only contains
+   passcodes this repository already references, so it could not see every far
+   alias in the pinned BabelCDB revision. A direct query of the pinned
+   `cards.cdb` finds 16 real far-alias rows with a base card in Edison or Tengu.
+   None of the additional rows is a pure alternate artwork, and no pool is
+   known to be wrong, but this item's audit record is incomplete until a
+   brief replaces it with an enumeration taken from the database itself.
    4c. ~~Duel Terminal ruling dossier~~ **Done (2026-08-20).** Period policy
    recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
    event FAQs, Konami's 2010-03-19 article, the June 2010 WCQ FAQ's card list);

@@ -2,189 +2,172 @@
 
 Status: **queued, not started**.
 
-Identifier: **`014-2026-09-16-per-artwork-printing-dates`** — use exactly this
+Identifier: **`015-2026-09-16-report-and-materialize-gates`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
 
-> **Amended 2026-09-16, before issue:** the project adopted the shared agent
-> framework. The executor seat is now the **Builder**, with a standing
-> **Verifier**; the reading list, checkout, branch, push and report sections
-> below were updated to match. Part B step 3 gained one neutral lead. The task
-> itself is otherwise unchanged from the brief as queued on 2026-09-01.
-
 <!-- Brain bookkeeping (not part of the brief): one brief lives here at a
-time; on completion move this file to
-docs/briefs/archive/<NNN>-<date>-<slug>.md (zero-padded, check the archive
-for the last-used number — 013 is the latest; this brief is 014) and replace it with the next
-one, or leave a one-line "no brief queued" placeholder. -->
+time; on adjudication move this file to
+docs/briefs/archive/<NNN>-<date>-<slug>.md (014 is the latest archived) and
+replace it with the next one. -->
 
 ## Read before acting
 
-1. [`AGENTS.md`](../../AGENTS.md) — topology, the non-negotiable project
-   invariants, and the evidence table for what you touch. They outrank
-   convenience.
+1. [`AGENTS.md`](../../AGENTS.md) — topology, project invariants, and the
+   evidence table for what you touch.
 2. [`docs/agents/roles/worker.md`](../agents/roles/worker.md) — your contract
-   (the Builder holds the Worker contract): modes, ground rules, and the
-   completion-report shape.
+   (the Builder holds the Worker contract).
+3. [`docs/agents/reports.md`](../agents/reports.md) and
+   [`docs/agents/roles/verifier.md`](../agents/roles/verifier.md) § Your inputs
+   — how completion reports and the Verifier's delivery check are meant to
+   work.
 
-Then this brief in full. Read only the further docs this brief scopes as
-relevant — don't ingest `docs/research/` wholesale.
+Then this brief in full. Do not read `docs/research/`; nothing here needs it.
 
 ---
 
-## MODE: DATA/SCHEMA
+## MODE: REGRESSION INVESTIGATION
 
 ## Goal
 
-Roadmap item **4b — per-artwork printing dates**. Far-alias alternate arts
-are currently absent from cutoff-derived pools unless force-included.
-Establish which ones actually mattered in-period, and encode those with
-sources. Part B corrects one attribution defect found reviewing round 13.
+Two project mechanisms fail at exactly the moment they are needed. When this
+round is done, both do what their own documentation says they do, each is
+pinned by a test that fails on today's code, and nothing they are meant to
+guard has become weaker.
 
-## Starting SHA
+## Why this is next
 
-Verify with `git log -1` on `main` before starting and note the actual SHA
-in your report. `main` is green; keep it that way.
+Both surfaced adjudicating round 14 (archived as
+`docs/briefs/archive/014-2026-09-16-per-artwork-printing-dates.md`).
 
----
+- **Defect 1 blocks the Verifier seat.** The Verifier's delivery check
+  (`python3 tools/report.py delivery`) only accepts a Builder report whose
+  recorded task matches the brief. It reads `<git-common-dir>/agent-inbox/builder-latest.md`.
+  The Claude Code Stop hook (`.claude/hooks/save_agent_reply.py`) writes to
+  that same file at the end of every session turn with assistant text, tagged
+  with a session id instead of a task. Observed in round 14's inbox: the
+  Verifier's own self-report was replaced ten seconds after it was written. A
+  Builder that writes its report and then ends its turn normally can therefore
+  leave its Verifier reporting "not delivered yet" indefinitely. `reports.md`
+  and the hook's own docstring describe the hook as a *fallback for sessions
+  that did not write a report*; the observed behaviour is not that.
+- **Defect 2 blocks the next release-data round.** When committed pool files
+  lag release data, `validate` emits `pool.materialization-drift` with the
+  remedy "run: python -m retroformats materialize". `materialize` then refuses
+  to run, citing that same finding among its blocking errors (exit 1). Round 14
+  had to call the library function directly to get past it. Reproduced by
+  Brain on a scratch copy of round 14's head with the two pools reverted.
 
-## Part A — far-alias alternate arts (roadmap 4b)
+Neither changes any historical data.
 
-Background you can rely on, already established:
+## Base
 
-- BabelCDB models an **artwork variant** as an alias whose passcode is
-  within `ARTWORK_OFFSET` (±10) of the base code. `releases.py`'s
-  `_canonicalise()` folds those into the base card, so their printings
-  correctly contribute dates to the base card.
-- A **far alias** — alias distance ≥ 10 — is deliberately *not* folded. It
-  is treated as a distinct card. If no release printing maps to it, it
-  simply never enters a cutoff pool.
-- That is the right default. This item is about the cases where it silently
-  drops something a period player could actually have used.
+Cut from `origin/main`. Record the literal starting SHA.
 
-Do:
+## Scope
 
-1. **Enumerate the class, don't sample it.** From the pinned BabelCDB
-   revision (`data/sources.json`'s `ignis-babelcdb`), list every row that is
-   a far alias of a card in each canonical pool. Report the count per format
-   before filtering — the size of the class is itself a finding.
-2. **Separate three different things** and keep them separate in the
-   report: (a) far aliases that are pure alternate *artwork* of a pool card;
-   (b) far aliases that are a different *region/scope* of it — that is the
-   `region_substitutions` mechanism's territory, already handled, so say so
-   and leave it alone; (c) far aliases that are functionally different
-   cards (pre-errata variants). Only (a) is in scope here.
-3. **For each in-scope case, establish the printing history from release
-   data, not from the cdb.** The question is whether that artwork had a
-   printing released on or before the pool's `cutoff_date`. A cdb row
-   existing proves EDOPro can represent it; it proves nothing about 2010.
-4. **Encode only what the evidence supports.** Where a period printing is
-   established, add it through the normal release/printing records so the
-   pool derives it — do not hand-add pool entries, and do not reach for
-   `force_include` unless the pool machinery genuinely cannot express the
-   case, in which case explain why in the record.
-5. If the honest answer for a format is "none of these mattered in-period",
-   that is a perfectly good result. Say it, with the enumeration behind it.
-   Do not manufacture inclusions to make the round look productive.
+- `.claude/hooks/save_agent_reply.py`, `tools/report.py` if the fix belongs
+  there, and their tests (`tests/test_claude_adapter.py`,
+  `tests/test_report.py`, `tests/test_report_delivery.py`, or a new test file).
+- `retroformats/cli.py`'s `materialize` command, and a test for it.
+- `docs/state.md` only to record a durable fact this round establishes, and
+  `docs/agents/report-handoff.md` only if it becomes inaccurate.
 
-The named example in the roadmap is **Arkana's Dark Magician**. Treat it as
-one case to check, not as the answer.
+## Non-goals
 
-## Part B — correct one effective-date attribution
+- **Do not edit anything under `docs/agents/` other than `report-handoff.md`.**
+  Those are verbatim framework copies. If you conclude the framework's own
+  mechanism is wrong, say so in your report; Brain relays it.
+- Do not change any validator finding code, severity or condition in
+  `retroformats/validate.py`.
+- Do not touch `data/`, `formats/` or `dist/`, beyond scratch copies you
+  create and discard to reproduce defect 2.
+- Roadmap item 4b's incomplete far-alias enumeration is a separate, later
+  brief. Leave it.
 
-Round 13 landed a claim slightly stronger than its source, in exactly the
-category this project guards hardest.
+## Protected invariants
 
-`data/banlists/tcg/2010-03.json`'s note says the September 2010 successor
-PDF's *title* states "Effective September 1, 2010". Brain re-fetched that
-PDF (`web.archive.org/web/20100923013922id_/`
-`http://www.yugioh-card.com/en/limited/pdf/`
-`Limited%20%26%20Forbidden%20Cards_10-09.pdf`) and read its document
-information dictionary directly. The `/Title` is:
+- **The delivery check must not get weaker.** It exists so a Verifier never
+  reviews work the Builder did not deliver. Delivery still requires the named
+  role's own report for the named task, recorded at the branch's exact head,
+  with the branch strictly ahead of an ancestor base (`verifier.md` § Your
+  inputs). A fix that lets a session-tagged or stale report count as delivery
+  is a regression, not a fix.
+- **A missing or stale report still means UNKNOWN** (`reports.md`).
+- **The Stop hook stays non-blocking:** any error exits 0, and a session must
+  always be able to end.
+- **The report mechanism stays provider-neutral.** Roles are still derived
+  from the checkout; no role, provider or task is asserted by the tool itself.
+- **`materialize` must still refuse to derive from genuinely invalid data.**
+  The gate exists (see its comment in `cli.py`) so malformed dates, broken
+  references and unresolved coverage never reach a pool file. Only the
+  question of whether drift in the very files `materialize` rewrites should
+  block it is in scope.
+- **`tools/report.py` is deliberately not byte-identical to the framework's
+  copy** (`docs/state.md`). If you change it, record exactly what now differs
+  there, so a later re-adoption merges instead of overwriting.
+- Validator baseline 0 errors / 569 warnings; suite 1029 tests, OK, 25 skipped
+  at the base. GOAT hash `0x28E9FC02` unchanged.
 
-```
-Limited & Forbidden Cards / Advanced Format - Sept 1, 2010
-```
+## Required investigation
 
-It does not contain the word "Effective". `/CreationDate` is
-`D:20100811180154` (2010-08-11), which sits before the stated date and is
-consistent with a list published ahead of taking effect.
+Answer from the code and from reproduction, not from this brief:
 
-Do:
+1. For defect 1, establish under what exact conditions the hook replaces
+   `<role>-latest.md`, and whether anything else reads that file or depends on
+   the hook's current behaviour (Brain's `status` checks, the recovery tool,
+   existing tests). Decide what the right behaviour is, with the invariants
+   above, and say why. If the correct fix belongs in the shared framework
+   mechanism rather than in this project's adapter, or needs both, say so. If
+   the options are genuinely ambiguous and a wrong choice would be systemic,
+   stop and present them.
+2. For defect 2, establish which of the blocking error codes can be caused
+   solely by stale committed pool content that `materialize` is about to
+   rewrite, and which indicate data it must not derive from. Reproduce the
+   refusal before changing anything.
 
-1. Reword the note so it states what the title actually says. The
-   conclusion — `superseded_by_date = 2010-09-01` — is supported and should
-   stand; only the attribution changes.
-2. `docs/roadmap.md` item 3 repeats the same phrasing. Fix it too.
-3. The PDF's body text uses subsetted font encodings, so Brain could not
-   read it. **If** you can extract the body reliably and it does say
-   "Effective September 1, 2010", then cite the body rather than the title
-   and say which page/line. If you cannot extract it, say so plainly and
-   cite the title only. Do not assume the body says it.
+Note a practical consequence: this project's hook runs from the checkout it is
+in, so your own round's report goes through whichever hook version is in
+`.worktrees/builder` when your session ends.
 
-   One lead, unverified: an unreviewed, never-accepted run of round 13
-   (git ref `preserve/round13-alt-run-1bec139`) cited a different Konami
-   page for the same boundary — the `yugioh-card.com/en/limited/` index page
-   as captured by the Wayback Machine on 2010-10-05. Nothing it says about
-   that page has been checked. If you use it, re-fetch the capture yourself,
-   quote what it actually says, and state what a capture five weeks after
-   the date can and cannot establish. Do not copy text from that ref.
-4. Check whether the *April* record carries the same shape of claim about
-   the UDE October page. That page's heading was reported as "EFFECTIVE
-   OCTOBER 1ST 2005" — verify that is the heading text and not a summary of
-   it, and correct it if it is not.
+## Acceptance criteria
 
-## Guard rails
+- A test that reproduces defect 1 through the real hook and the real delivery
+  check, and fails on the base SHA.
+- A test that reproduces defect 2 through the real `materialize` command, and
+  fails on the base SHA.
+- Both pass at your head. Every pre-existing test still passes unmodified,
+  unless you show that the old assertion encoded the defect.
+- A test showing `materialize` still refuses at least one kind of genuinely
+  invalid data.
+- A test showing a session-tagged report still does not count as delivery.
+- Your own completion report is intact in `builder-latest.md` after your
+  session ends, so the Verifier's delivery check passes without any manual
+  step.
 
-- GOAT's generated list must stay entry-for-entry identical to the Ignis
-  reference: content hash `0x28E9FC02`. If it moves, stop and report rather
-  than re-pinning.
-- Current validator baseline is **0 errors, 569 warnings**. Any new warning
-  is a finding to explain, not noise to absorb.
-- Entry sets of the April 2005 and March 2010 banlists must not change.
-  Part B is wording and sourcing only.
-- `dist/` is generated — never hand-edit it; regenerate with
-  `python -m retroformats build`.
-- No new research document. Findings belong on the release/source records,
-  the format notes, and the roadmap item.
+## Required evidence
 
-## Expected suite state
-
-The full suite is green as of the SHA you are branching from: **1029
-tests, OK, 25 skipped**, and the process exits. The 25 skips are the engine
-tests that need `ocgcore` and pinned checkouts. (1013 before the framework
-adoption; it added the delivery-check and role-neutrality tests.)
-
-If you see errors, they are yours to explain — do not wave them through as
-"pre-existing Windows problems". That phrase covered a real defect until
-recently: a held-open report file failed the write *and* left a non-daemon
-thread spinning so the suite process never exited. Both are fixed. A hang
-after the results print is a bug, not slowness.
+Per `AGENTS.md`'s evidence table for agent tooling and `retroformats/` code:
+`python -m unittest discover -t . -s tests -v`, `python -m retroformats
+validate`, `python -m retroformats build --check`, each with real output and
+exit status, on Python 3.10 or newer. For each new test, show its failing
+output against the base code as well as its passing output.
 
 ## Git expectations
 
-Work only in the Builder checkout, `.worktrees/builder/`. Fetch
-`origin/main` and create branch `builder/per-artwork-printing-dates` from
-it. Commit there in focused commits, then push that branch to `origin`. Do
-not push `main`, and do not merge.
-
-Before ending the round, write your completion report from inside
+Work only in `.worktrees/builder/`. Branch `builder/report-and-materialize-gates`
+from `origin/main`. Focused commits; push the branch; never push `main`; never
+merge. After your final commit and push, write your report from inside
 `.worktrees/builder/` with
-`python3 tools/report.py write --task 014-2026-09-16-per-artwork-printing-dates`
-(use `python` if that is what resolves), in addition to displaying it. Write
-it after your final commit, so its recorded head matches the pushed branch:
-the Verifier's delivery check compares the two.
+`python3 tools/report.py write --task 015-2026-09-16-report-and-materialize-gates`
+(use a Python 3.10+ interpreter), as well as displaying it.
 
 ## Completion-report schema
 
-Report:
+The Worker contract's report, plus:
 
-- Starting SHA, branch, final SHA.
-- Part A: the enumerated far-alias class per format with counts, the (a)/(b)/(c)
-  split, what you established about each in-scope case's period printing and
-  from which source, and what you encoded versus deliberately left out.
-- Part B: the exact corrected wording, whether you could read the PDF body,
-  and the result of the April cross-check.
-- Confirmation the GOAT parity hash is unchanged, both banlist entry sets are
-  unchanged, and the warning-count delta with every new warning accounted for.
-- Exact output of `validate`, `build --check`, and the full suite.
-- Anything left genuinely uncertain, stated as uncertain.
+- For each defect: root cause in one paragraph, the options you considered,
+  and why you chose yours.
+- Whether you believe the shared framework's own copy of either mechanism has
+  the same defect, and the evidence for that belief.
+- Exactly what in `tools/report.py` now differs from the framework's copy, if
+  anything.

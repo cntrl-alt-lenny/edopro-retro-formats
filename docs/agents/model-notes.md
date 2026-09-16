@@ -375,3 +375,17 @@ location changed again after round 3 -- from a Dev/-level sibling folder
 to `.claude/worktrees/worker/` nested inside the single project folder,
 per the human's explicit preference; see
 docs/agents/worktree-mechanism.md.)
+
+**Round 14 (2026-09-16) — per-artwork printing dates and the September 2010
+attribution (`docs/briefs/archive/014-2026-09-16-per-artwork-printing-dates.md`).
+First round with the Builder / Verifier topology. Both seats ran as Claude Code
+sessions (per the inbox capture source); models were not recorded.** Accepted.
+
+The Verifier earned its seat on the first use: it found, and backed with a
+direct query of the pinned database, that the Builder's "enumerate the class"
+step had used an index restricted to cards the repository already references —
+a gap the green suite could not show and the Builder's report presented as
+complete. It also made one claim that did not reproduce (an exit status), which
+is exactly why its report is evidence rather than verdict. The Builder went
+beyond the brief usefully (it extracted the PDF body Brain had failed to read)
+and flagged its one judgement call plainly instead of absorbing it.
