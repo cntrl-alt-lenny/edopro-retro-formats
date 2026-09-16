@@ -194,6 +194,40 @@ class StopHookDeliveryRegressionTest(unittest.TestCase):
         git("commit", "-q", "-m", "deliver", cwd=builder)
         return builder
 
+    def _run_hook(self, builder: Path, session_id: str, text: str):
+        transcript = self.repo / f"{session_id}.jsonl"
+        transcript.write_text(
+            json.dumps({"role": "assistant", "content": text}) + "\n",
+            encoding="utf-8",
+        )
+        return subprocess.run(
+            [sys.executable, str(builder / ".claude" / "hooks" / "save_agent_reply.py")],
+            cwd=builder,
+            input=json.dumps({"session_id": session_id, "transcript_path": str(transcript)}),
+            capture_output=True,
+            text=True,
+        )
+
+    def test_later_hook_capture_replaces_earlier_hook_capture_at_same_head(self):
+        self.base = git_output("rev-parse", "HEAD", cwd=self.repo)
+        builder = self._builder()
+        first = self._run_hook(builder, "session-first", "First fallback text.")
+        second = self._run_hook(builder, "session-second", "Second fallback text.")
+        self.assertEqual(0, first.returncode, first.stderr)
+        self.assertEqual(0, second.returncode, second.stderr)
+
+        latest = self.repo / ".git" / "agent-inbox" / "builder-latest.md"
+        latest_text = latest.read_text(encoding="utf-8")
+        self.assertIn("task=claude-code-session:session-second", latest_text)
+        self.assertIn("Second fallback text.", latest_text)
+        self.assertNotIn("First fallback text.", latest_text)
+
+        log = (self.repo / ".git" / "agent-inbox" / "builder-log.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("First fallback text.", log)
+        self.assertIn("Second fallback text.", log)
+
     def test_real_stop_hook_preserves_own_report_for_real_delivery_check(self):
         self.base = git_output("rev-parse", "HEAD", cwd=self.repo)
         builder = self._builder()

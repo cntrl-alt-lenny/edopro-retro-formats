@@ -291,7 +291,10 @@ the *sequencing* reasoning:
   which the framework's copy did not have. Until the framework carries that
   fix, a future re-adoption must merge, not overwrite — overwriting silently
   reintroduces the Windows failure. `tests/test_report.py` pins the retry and
-  `tests/test_report_delivery.py` pins the delivery check.
+  `tests/test_report_delivery.py` pins the delivery check. The project copy
+  also exposes `latest_provenance()` so its Claude Stop adapter can distinguish
+  a role-owned fresh report from an earlier hook fallback; the shared
+  framework copy does not carry this project-specific adapter fix.
 - **An unreviewed second execution of round 13 is parked, not adopted:** ref
   `preserve/round13-alt-run-1bec139`. Round 13 was accepted from a different
   run. The parked one cites a different primary source for the September
@@ -341,12 +344,13 @@ the *sequencing* reasoning:
   period rulings documents that may not exist). Prefer better-bounded
   items unless the owner asks for it directly.
 
-- **The Claude Stop hook is fallback-only when a report is already fresh.** A
-  Stop event has a session id but no brief id, so its session-tagged report is
-  not delivery evidence. The adapter now checks the shared writer's current
-  HEAD freshness result before writing and leaves a role's own task-specific
-  report intact; missing or stale reports still receive the non-blocking
-  session fallback.
+- **The Claude Stop hook is fallback-only over a role-owned fresh report, not
+  over an earlier hook fallback.** A Stop event has a session id but no brief
+  id, so its session-tagged report is not delivery evidence. The adapter checks
+  the shared writer's current HEAD freshness and provenance: a role-owned
+  report remains intact, while a later hook capture replaces an earlier hook
+  capture at the same HEAD. Missing or stale reports still receive the
+  non-blocking session fallback.
 
 - **Materialisation may repair only pool-content drift.**
   `pool.materialization-drift` is the validator's projection mismatch and its

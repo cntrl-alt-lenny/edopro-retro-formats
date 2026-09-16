@@ -87,6 +87,7 @@ __all__ = [
     "role_tag",
     "head_sha",
     "write_report",
+    "latest_provenance",
     "check_status",
     "delivery_status",
 ]
@@ -302,6 +303,15 @@ def _parse_header(text: str) -> Provenance | None:
         source=fields.get("source"),
         stamp=stamp,
     )
+
+
+def latest_provenance(cwd: str | Path | None = None) -> Provenance | None:
+    """Read the latest report provenance for this checkout's role, if any."""
+    role = role_tag(cwd)
+    latest = git_common_dir(cwd) / "agent-inbox" / f"{role}-latest.md"
+    if not latest.is_file():
+        return None
+    return _parse_header(latest.read_text(encoding="utf-8"))
 
 
 def check_status(cwd: str | Path | None = None) -> tuple[int, str]:
