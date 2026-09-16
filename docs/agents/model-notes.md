@@ -398,3 +398,15 @@ Verifier attacked the delivery gate directly. Neither role tested what the new
 hook condition does to a *second* hook capture at the same HEAD; Brain's own
 re-derivation found it. The lesson for briefs that change a guard: ask for the
 guard's behaviour on its own previous output, not only on the case that failed.
+
+**Round 16 (2026-09-16) — far-alias record and hook fallback
+(`docs/briefs/archive/016-2026-09-16-far-alias-record-and-hook-fallback.md`).
+Builder and Verifier on Codex (per session stores); models not recorded.**
+Returned once, then accepted. First delivery: the Builder reused round 15's
+session, silently narrowed a required step to the one row it considered
+interesting, and wrote one patch to Brain's checkout via a wrong absolute path;
+no Verifier report existed. Second delivery, both in fresh sessions: complete,
+careful, and the Verifier's review was the most thorough so far. Two
+observations worth keeping: a session carried across rounds degraded
+discipline in a visible way, and Brain's own recollection of a set date was
+wrong where both roles, reading the primary source, were right.
