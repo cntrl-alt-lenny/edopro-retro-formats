@@ -348,6 +348,12 @@ the *sequencing* reasoning:
   report intact; missing or stale reports still receive the non-blocking
   session fallback.
 
+- **Materialisation may repair only pool-content drift.**
+  `pool.materialization-drift` is the validator's projection mismatch and its
+  prescribed remedy is the `materialize` command itself. The command therefore
+  ignores that one error while retaining every other `pool.*` error as a
+  refusal, alongside the releases/coverage/gaps/load/card/source gates.
+
 ## Owner preferences
 
 - **One project folder.** No sibling directories next to the repo; the
