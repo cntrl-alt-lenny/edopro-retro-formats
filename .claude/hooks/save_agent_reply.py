@@ -122,15 +122,20 @@ def main() -> int:
 
     # A role's contract report carries the task and exact HEAD needed by the
     # delivery gate. Do not replace it with this hook's necessarily
-    # session-tagged fallback when it is already fresh.
+    # session-tagged fallback when it is already fresh. An earlier hook
+    # capture is replaceable: a later Stop event is the best available
+    # fallback for the same checkout and HEAD, and must not be dropped merely
+    # because the earlier fallback made the report fresh.
     try:
         status, _ = _report.check_status(_PROJECT_ROOT)
+        provenance = _report.latest_provenance(_PROJECT_ROOT)
     except Exception:
         # An unreadable or otherwise unavailable existing report is not a
         # fresh contract report. Try the fallback; its own errors remain
         # non-blocking below.
         status = 1
-    if status == 0:
+        provenance = None
+    if status == 0 and provenance is not None and provenance.source != "claude-code-stop-hook":
         return 0
 
     session_id = event.get("session_id", "")
