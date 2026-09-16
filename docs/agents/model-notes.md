@@ -389,3 +389,12 @@ complete. It also made one claim that did not reproduce (an exit status), which
 is exactly why its report is evidence rather than verdict. The Builder went
 beyond the brief usefully (it extracted the PDF body Brain had failed to read)
 and flagged its one judgement call plainly instead of absorbing it.
+
+**Round 15 (2026-09-16) — report and materialize gates
+(`docs/briefs/archive/015-2026-09-16-report-and-materialize-gates.md`). Builder
+and Verifier, both run with a filesystem self-report; models were not recorded.**
+Accepted. Clean, well-reasoned fixes with honest options analysis, and the
+Verifier attacked the delivery gate directly. Neither role tested what the new
+hook condition does to a *second* hook capture at the same HEAD; Brain's own
+re-derivation found it. The lesson for briefs that change a guard: ask for the
+guard's behaviour on its own previous output, not only on the case that failed.
