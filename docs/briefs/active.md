@@ -2,19 +2,29 @@
 
 Status: **queued, not started**.
 
+Identifier: **`014-2026-09-16-per-artwork-printing-dates`** — use exactly this
+string as `--task` for every `tools/report.py` call in this round.
+
+> **Amended 2026-09-16, before issue:** the project adopted the shared agent
+> framework. The executor seat is now the **Builder**, with a standing
+> **Verifier**; the reading list, checkout, branch, push and report sections
+> below were updated to match. Part B step 3 gained one neutral lead. The task
+> itself is otherwise unchanged from the brief as queued on 2026-09-01.
+
 <!-- Brain bookkeeping (not part of the brief): one brief lives here at a
 time; on completion move this file to
 docs/briefs/archive/<NNN>-<date>-<slug>.md (zero-padded, check the archive
-for the last-used number — 013 is the latest) and replace it with the next
+for the last-used number — 013 is the latest; this brief is 014) and replace it with the next
 one, or leave a one-line "no brief queued" placeholder. -->
 
 ## Read before acting
 
-1. [`AGENTS.md`](../../AGENTS.md) — coordination rules and the
-   non-negotiable epistemic rules. They outrank convenience.
-2. [`docs/agents/role-contracts.md`](../agents/role-contracts.md) — the
-   Worker contract: your mode's rules, the ground rules, and the
-   completion-report schema you must report back in.
+1. [`AGENTS.md`](../../AGENTS.md) — topology, the non-negotiable project
+   invariants, and the evidence table for what you touch. They outrank
+   convenience.
+2. [`docs/agents/roles/worker.md`](../agents/roles/worker.md) — your contract
+   (the Builder holds the Worker contract): modes, ground rules, and the
+   completion-report shape.
 
 Then this brief in full. Read only the further docs this brief scopes as
 relevant — don't ingest `docs/research/` wholesale.
@@ -110,6 +120,14 @@ Do:
    "Effective September 1, 2010", then cite the body rather than the title
    and say which page/line. If you cannot extract it, say so plainly and
    cite the title only. Do not assume the body says it.
+
+   One lead, unverified: an unreviewed, never-accepted run of round 13
+   (git ref `preserve/round13-alt-run-1bec139`) cited a different Konami
+   page for the same boundary — the `yugioh-card.com/en/limited/` index page
+   as captured by the Wayback Machine on 2010-10-05. Nothing it says about
+   that page has been checked. If you use it, re-fetch the capture yourself,
+   quote what it actually says, and state what a capture five weeks after
+   the date can and cannot establish. Do not copy text from that ref.
 4. Check whether the *April* record carries the same shape of claim about
    the UDE October page. That page's heading was reported as "EFFECTIVE
    OCTOBER 1ST 2005" — verify that is the heading text and not a summary of
@@ -131,9 +149,10 @@ Do:
 
 ## Expected suite state
 
-The full suite is green on both Windows and CI as of the SHA you are
-branching from: **1013 tests, OK, 25 skipped**, and the process exits. The
-25 skips are the engine tests that need `ocgcore` and pinned checkouts.
+The full suite is green as of the SHA you are branching from: **1029
+tests, OK, 25 skipped**, and the process exits. The 25 skips are the engine
+tests that need `ocgcore` and pinned checkouts. (1013 before the framework
+adoption; it added the delivery-check and role-neutrality tests.)
 
 If you see errors, they are yours to explain — do not wave them through as
 "pre-existing Windows problems". That phrase covered a real defect until
@@ -143,15 +162,17 @@ after the results print is a bug, not slowness.
 
 ## Git expectations
 
-Work in the nested worktree (`.claude/worktrees/worker/`). Fetch
-`origin/main`, branch from it (e.g. `worker/per-artwork-printing-dates`).
-Do not merge to `main` yourself. Do not push. The guard will stop you if
-you start in the primary checkout.
+Work only in the Builder checkout, `.worktrees/builder/`. Fetch
+`origin/main` and create branch `builder/per-artwork-printing-dates` from
+it. Commit there in focused commits, then push that branch to `origin`. Do
+not push `main`, and do not merge.
 
-Before ending the round, write your completion report with
-`python3 tools/report.py write --task <this brief's filename>` (use
-`python` if that is what resolves) in addition to displaying it — see
-`docs/agents/report-handoff.md`.
+Before ending the round, write your completion report from inside
+`.worktrees/builder/` with
+`python3 tools/report.py write --task 014-2026-09-16-per-artwork-printing-dates`
+(use `python` if that is what resolves), in addition to displaying it. Write
+it after your final commit, so its recorded head matches the pushed branch:
+the Verifier's delivery check compares the two.
 
 ## Completion-report schema
 

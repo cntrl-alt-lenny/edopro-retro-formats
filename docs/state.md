@@ -13,8 +13,8 @@ Derive live state instead:
 | question | source of truth |
 |---|---|
 | current commit, branch, sync with remote | `git status`, `git rev-parse` |
-| is a Worker round in flight / queued? | [`docs/briefs/active.md`](briefs/active.md) — it states its own `Status:` |
-| is a Worker branch unmerged? | `git branch -a`, `git worktree list` |
+| is a round in flight / queued / delivered? | [`docs/briefs/active.md`](briefs/active.md) — it states its own `Status:` — and `docs/briefs/delivered/` |
+| is a Builder branch unmerged? | `git branch -a`, `git worktree list` |
 | is the local push hook configured? | `git config --get core.hooksPath` |
 | what did CI say? | the run for that exact SHA |
 | what did past rounds do? | [`agents/model-notes.md`](agents/model-notes.md), `docs/briefs/archive/`, `git log` |
@@ -102,7 +102,8 @@ Brain's merge authority rests on this actually being run, every round:
 independently re-diff the commit, re-run whatever the report claims to
 have checked, and **re-derive at least one load-bearing claim directly**
 (re-fetch the cited source, recount the entries, re-run the check). Full
-checklist: [`agents/role-contracts.md`](agents/role-contracts.md).
+checklist: [`agents/roles/brain.md`](agents/roles/brain.md) plus `AGENTS.md`
+§ What review checks here.
 
 Every round so far has justified it — reviewing the diff alone would have
 missed something a direct re-derivation caught.
@@ -180,8 +181,14 @@ two-thirds of Brain's commits were framework rather than project content.
   the implementation Worker and hollowing out independent review. Anything
   touching canonical data, or asserting an evidence level, goes to a
   Worker even when the change itself is small.
-- **No parallel Workers yet.** Brain plus one fresh Worker is simple and
-  working. Propose parallel lanes only if Worker throughput becomes an
+- **Topology: Brain, one Builder, one standing Verifier** — set by the
+  owner on 2026-09-16 when the shared framework was adopted. The Verifier is
+  an independent reviewer, not a second executor lane; the reason it fits
+  this project is in `AGENTS.md` § Topology. Treat its cost as part of the
+  evidence-gathering period below: if review adds time without finding
+  defects Brain would have missed, that is a finding to bring to the owner.
+- **Still no parallel executors.** One Builder is simple and working.
+  Propose parallel lanes only if executor throughput becomes an
   *observed* bottleneck — with evidence, not pre-optimisation.
 - **The owner stays courier and model-chooser.** Copying prompts and
   reports is not currently the bottleneck, and per-task model choice
@@ -222,18 +229,20 @@ the *sequencing* reasoning:
   **August 1, 2005 revision** — it attests the April list as of April 1, not
   that the list went unamended through August; a pre-effective-date Pojo
   capture is what brackets the period. Nothing here depends on the ref
-  `preserve/april-2005-40cc995` any more, which is as well: that ref is
-  absent from this clone, from reachable objects and from `origin`, and was
-  independently confirmed missing by both Brain and Worker.
+  `preserve/april-2005-40cc995` any more. It was reported missing from one
+  clone and from `origin`; it does exist as a local branch in another clone.
+  Refs under `preserve/` are per-clone unless pushed, so check with
+  `git branch --list 'preserve/*'` rather than trusting either observation.
 
 - **The Claude adapter has four demonstrated defect classes, now covered by
   framework mechanisms and regression tests.** The Stop hook probes
   `python3` then `python` through a shell shim and remains safe when neither
-  is available; the Worker adapter's blocking `UserPromptSubmit` hook derives
-  the Git common directory and refuses Brain's primary checkout or a
-  non-`worker/*` branch; the pre-push hook is tracked executable while its
+  is available; the executor adapter's blocking `UserPromptSubmit` hook derives
+  the Git common directory and refuses Brain's primary checkout, any checkout
+  other than `.worktrees/builder`, or a non-`builder/*` branch; the pre-push
+  hook is tracked executable while its
   `core.hooksPath` activation remains explicitly per-clone; and the nested
-  Worker worktree is documented as per-clone state that must be derived with
+  per-role worktrees are documented as per-clone state that must be derived with
   `git worktree list`, not assumed to exist. These are durable mechanism
   classes, not claims about any clone's current setup.
 
@@ -268,6 +277,20 @@ the *sequencing* reasoning:
   injection, so it proves the same thing on POSIX, where the path is
   otherwise unreachable.
 
+- **`tools/report.py` is deliberately not byte-identical to the framework's
+  copy.** Adoption took the framework's version (which adds the Verifier's
+  `delivery` check) and re-applied this project's Windows rename retry above,
+  which the framework's copy did not have. Until the framework carries that
+  fix, a future re-adoption must merge, not overwrite — overwriting silently
+  reintroduces the Windows failure. `tests/test_report.py` pins the retry and
+  `tests/test_report_delivery.py` pins the delivery check.
+- **An unreviewed second execution of round 13 is parked, not adopted:** ref
+  `preserve/round13-alt-run-1bec139`. Round 13 was accepted from a different
+  run. The parked one cites a different primary source for the September
+  2010 changeover — a Konami `limited/` index page captured 2010-10-05 —
+  which may bear on round 14's attribution fix. It is a lead to re-fetch and
+  verify from source, never text to copy.
+
 - **A round's completion report reaches Brain by a provider-neutral
   self-report first, transcript recovery only as fallback.** The order is:
   (1) the role writes its own report into the shared `agent-inbox/` under
@@ -277,8 +300,9 @@ the *sequencing* reasoning:
   transcript recovery, only when that artifact is missing or stale;
   (3) manual owner relay, only when both fail. A tool-specific hook fixes
   one member of the problem class, not the class. The canonical mechanism
-  is designed in the sibling `agentic-project-framework` repository and is
-  adopted here rather than reimplemented — including its rule that a role's
+  is designed in the shared framework repository
+  (`cntrl-alt-lenny/agentic-framework`, formerly `agentic-project-framework`)
+  and is adopted here rather than reimplemented — including its rule that a role's
   tag is derived from which checkout it is in, never asserted.
   Two conclusions worth not relearning: transcript recovery being
   unavailable for a provider does NOT mean that provider needs manual
@@ -312,8 +336,8 @@ the *sequencing* reasoning:
 ## Owner preferences
 
 - **One project folder.** No sibling directories next to the repo; the
-  Worker worktree is nested inside it
-  ([`agents/worktree-mechanism.md`](agents/worktree-mechanism.md)).
+  per-role worktrees are nested inside it, under `.worktrees/`
+  (`AGENTS.md` § Checkouts).
 - **The owner's interface is conversation.** They should never need to
   open a repo file, run a git command, or judge a diff to keep the loop
   moving — see `AGENTS.md` § Authority.

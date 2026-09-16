@@ -35,9 +35,10 @@ hook only; it does not skip CI.
 - it is opt-in per clone, so it may simply not exist wherever a given push
   comes from;
 - `--no-verify` bypasses it by design;
-- there is **no server-side enforcement behind it**. This repository has
-  no pre-receive hook or protected-branch check; nothing on the remote
-  re-runs these checks at push time.
+- there is **no server-side check behind it**. `main`'s branch protection
+  blocks force-pushes and deletion but requires no status checks, so
+  nothing on the remote re-runs these checks or refuses a red push. See
+  `AGENTS.md` § What is actually enforced.
 
 **[CI](../../.github/workflows/ci.yml) is the only backstop that always
 runs** — it executes both of these commands plus the full test suite on
@@ -73,9 +74,9 @@ it was replaced (and now pinned by
 
 At the pre-push layer there is no command text to parse: Git has already
 decided a push is happening. It is also **vendor-independent**, which
-matters more here than the parsing bugs — this project's Worker role is
-explicitly model-agnostic (`AGENTS.md`), and a Claude Code hook never
-fired at all for a Worker round run through another vendor's tool. A Git
+matters more here than the parsing bugs — every seat in this project is
+explicitly tool-agnostic (`AGENTS.md`), and a Claude Code hook never
+fired at all for a round run through another vendor's tool. A Git
 hook fires for every client: any agent tool, a plain terminal, an IDE.
 
 ## Scope limitations

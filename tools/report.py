@@ -88,6 +88,7 @@ __all__ = [
     "head_sha",
     "write_report",
     "check_status",
+    "delivery_status",
 ]
 
 
@@ -334,6 +335,161 @@ def check_status(cwd: str | Path | None = None) -> tuple[int, str]:
     )
 
 
+def _commit_for_ref(ref: str, cwd: str | Path | None = None) -> str | None:
+    candidates = [ref]
+    if not ref.startswith(("origin/", "refs/")):
+        candidates.append("origin/" + ref)
+    for candidate in candidates:
+        resolved = _git(
+            ["rev-parse", "--verify", candidate + "^{commit}"], cwd=cwd
+        )
+        if resolved:
+            return resolved
+    return None
+
+
+def _fetch_branch(branch: str, cwd: str | Path | None = None) -> None:
+    """Best-effort fetch of the named branch before resolving delivery.
+
+    A Verifier may be in a separate clone, where the Builder's later push is
+    not present in any local ref until it is fetched. A linked worktree may
+    already have the local branch, and a repository without an ``origin`` may
+    be intentionally offline; both cases remain usable because the local and
+    fetched remote refs are reconciled below and fetch failure is retryable.
+    """
+    remote_branch = branch
+    if remote_branch.startswith("refs/remotes/origin/"):
+        remote_branch = remote_branch[len("refs/remotes/origin/"):]
+    elif remote_branch.startswith("refs/heads/"):
+        remote_branch = remote_branch[len("refs/heads/"):]
+    elif remote_branch.startswith("origin/"):
+        remote_branch = remote_branch[len("origin/"):]
+    if remote_branch.startswith("refs/") or not remote_branch:
+        return
+    try:
+        subprocess.run(
+            ["git", "fetch", "--quiet", "--no-tags", "origin", remote_branch],
+            cwd=cwd,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+    except (FileNotFoundError, OSError):
+        return
+
+
+def _branch_ref_names(branch: str) -> tuple[str, str]:
+    """Return the local and origin ref names for a branch argument."""
+    name = branch
+    if name.startswith("refs/remotes/origin/"):
+        name = name[len("refs/remotes/origin/"):]
+    elif name.startswith("refs/heads/"):
+        name = name[len("refs/heads/"):]
+    elif name.startswith("origin/"):
+        name = name[len("origin/"):]
+    return name, "origin/" + name
+
+
+def _exact_commit(ref: str, cwd: str | Path | None = None) -> str | None:
+    """Resolve exactly one ref, without falling back to another namespace."""
+    return _git(["rev-parse", "--verify", ref + "^{commit}"], cwd=cwd)
+
+
+def _delivery_branch_head(
+    branch: str, cwd: str | Path | None = None,
+) -> tuple[str | None, str | None]:
+    """Reconcile a local branch with the freshly fetched origin branch.
+
+    A stale local ref must not hide a newer remote head. A local branch ahead
+    of origin is valid for a linked Builder worktree, while divergence is
+    ambiguous and must remain retryable rather than selecting either side.
+    """
+    local_ref, remote_ref = _branch_ref_names(branch)
+    local = _exact_commit(local_ref, cwd)
+    remote = _exact_commit(remote_ref, cwd)
+    if local is None:
+        if remote is None:
+            return None, None
+        return remote, None
+    if remote is None or local == remote:
+        return local, None
+    if _is_ancestor(local, remote, cwd):
+        return remote, None
+    if _is_ancestor(remote, local, cwd):
+        return local, None
+    return None, (
+        f"not delivered yet: local branch '{local_ref}' at {local} diverges "
+        f"from fetched origin/{local_ref} at {remote}"
+    )
+def _is_ancestor(base: str, head: str, cwd: str | Path | None = None) -> bool:
+    try:
+        return subprocess.run(
+            ["git", "merge-base", "--is-ancestor", base, head],
+            cwd=cwd,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode == 0
+    except (FileNotFoundError, OSError):
+        return False
+
+
+def delivery_status(
+    *,
+    branch: str,
+    base: str,
+    role: str,
+    task: str,
+    cwd: str | Path | None = None,
+) -> tuple[int, str]:
+    """Check whether a Builder has delivered this task for Verifier review.
+
+    Delivery is a conjunction, not a branch existence check: the named branch
+    must resolve to a commit strictly after an ancestor base, and the shared
+    inbox must contain the named role's report with matching task and HEAD
+    provenance. The named branch is fetched from ``origin`` first so this
+    check works in a separate Verifier clone as well as a linked worktree. A
+    missing report, a missing branch, or a branch still at the base all return
+    the same retryable "not delivered yet" state.
+    """
+    _fetch_branch(branch, cwd)
+    head, conflict = _delivery_branch_head(branch, cwd)
+    if conflict:
+        return 1, conflict
+    if head is None:
+        return 1, f"not delivered yet: branch '{branch}' is not available"
+    base_sha = _commit_for_ref(base, cwd)
+    if base_sha is None:
+        return 1, f"not delivered yet: base '{base}' is not available"
+    if head == base_sha:
+        return 1, f"not delivered yet: branch '{branch}' is still at the base"
+    if not _is_ancestor(base_sha, head, cwd):
+        return 1, (
+            f"not delivered yet: base {base_sha} is not an ancestor of "
+            f"branch '{branch}' at {head}"
+        )
+
+    latest = git_common_dir(cwd) / "agent-inbox" / f"{role}-latest.md"
+    if not latest.is_file():
+        return 1, f"not delivered yet: no report for role '{role}'"
+    try:
+        provenance = _parse_header(latest.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError):
+        provenance = None
+    if provenance is None:
+        return 1, f"not delivered yet: report for role '{role}' has no header"
+    if provenance.role != role or provenance.task != task:
+        return 1, (
+            f"not delivered yet: report provenance does not match role '{role}' "
+            f"and task '{task}'"
+        )
+    if provenance.head != head:
+        return 1, (
+            f"not delivered yet: report head={provenance.head} does not match "
+            f"branch '{branch}' at {head}"
+        )
+    return 0, f"delivered: role={role} task={task} branch={branch} head={head}"
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="command", required=True)
@@ -362,6 +518,19 @@ def main(argv: list[str] | None = None) -> int:
         help="checkout to check from (default: the current directory)",
     )
 
+    delivery_p = sub.add_parser(
+        "delivery",
+        help="check whether a role delivered work for exact-SHA review",
+    )
+    delivery_p.add_argument("--branch", required=True)
+    delivery_p.add_argument("--base", required=True)
+    delivery_p.add_argument("--role", required=True)
+    delivery_p.add_argument("--task", required=True)
+    delivery_p.add_argument(
+        "--cwd", default=None,
+        help="repository checkout to inspect (default: current directory)",
+    )
+
     args = ap.parse_args(argv)
 
     if args.command == "write":
@@ -377,6 +546,21 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "status":
         try:
             code, message = check_status(args.cwd)
+        except ReportError as exc:
+            print(f"report: {exc}", file=sys.stderr)
+            return 3
+        print(message)
+        return code
+
+    if args.command == "delivery":
+        try:
+            code, message = delivery_status(
+                branch=args.branch,
+                base=args.base,
+                role=args.role,
+                task=args.task,
+                cwd=args.cwd,
+            )
         except ReportError as exc:
             print(f"report: {exc}", file=sys.stderr)
             return 3

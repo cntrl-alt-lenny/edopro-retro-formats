@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "docs" / "state.md"
 BRIEFS = ROOT / "docs" / "briefs"
-FRAMEWORK_DOCS = sorted((ROOT / "docs" / "agents").glob("*.md"))
+FRAMEWORK_DOCS = sorted((ROOT / "docs" / "agents").rglob("*.md"))
 
 # A full git object name. Deliberately 40 hex exactly: the Tokyo Dome
 # certification digest is a 64-char sha256 historical anchor and the GOAT

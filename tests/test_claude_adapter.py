@@ -1,7 +1,8 @@
 """Regression tests for the repository's Claude Code adapter mechanics.
 
 WHY THESE TESTS BUILD THEIR OWN GIT STATE. An earlier version of this file
-pointed the Worker-checkout guard at `<primary>/.claude/worktrees/worker` --
+pointed the Worker-checkout guard at `<primary>/.claude/worktrees/worker` (the
+executor checkout has since moved to `<primary>/.worktrees/builder`) --
 a path that only exists on a machine where someone has already run
 `git worktree add`. That is per-clone developer state, not repository
 content, so CI errored with FileNotFoundError on a fresh checkout, and the
@@ -65,9 +66,9 @@ def init_repo(path: Path) -> None:
     git("commit", "-q", "-m", "init", cwd=path)
 
 
-def add_worker_worktree(repo: Path, branch: str = "worker/test-round") -> Path:
+def add_worker_worktree(repo: Path, branch: str = "builder/test-round") -> Path:
     """The nested layout the guard requires, created rather than assumed."""
-    worktree = repo / ".claude" / "worktrees" / "worker"
+    worktree = repo / ".worktrees" / "builder"
     worktree.parent.mkdir(parents=True, exist_ok=True)
     git("worktree", "add", "-q", "-b", branch, str(worktree), "HEAD", cwd=repo)
     return worktree
@@ -168,12 +169,12 @@ class WorkerCheckoutGuardTest(unittest.TestCase):
             {"WORKTREE": str(self.worker), "EXPECTED_WORKTREE": str(self.worker)},
         )
         self.assertEqual(2, process.returncode)
-        self.assertIn("do not run Worker from Brain's primary checkout", process.stderr)
+        self.assertIn("do not run Builder from Brain's primary checkout", process.stderr)
         # The message must still point at where to go instead. Assert the
         # nested-worktree suffix rather than a full path: the guard reports
         # `pwd -P` output, whose spelling differs from Python's str(Path) on
         # Windows, and pinning that spelling is what makes a test machine-bound.
-        self.assertIn(".claude/worktrees/worker", process.stderr.replace("\\", "/"))
+        self.assertIn(".worktrees/builder", process.stderr.replace("\\", "/"))
         self.assertIn("current checkout:", process.stderr)
 
     def test_accepts_nested_worker_worktree_on_worker_branch(self):
@@ -181,7 +182,7 @@ class WorkerCheckoutGuardTest(unittest.TestCase):
         self.assertEqual(0, process.returncode, process.stderr)
 
     def test_rejects_the_worker_worktree_on_a_non_worker_branch(self):
-        git("checkout", "-q", "-b", "feature/not-a-worker-branch", cwd=self.worker)
+        git("checkout", "-q", "-b", "worker/not-a-builder-branch", cwd=self.worker)
         process = self.run_guard(self.worker)
         self.assertEqual(2, process.returncode)
 
@@ -201,7 +202,7 @@ class WorkerCheckoutGuardTest(unittest.TestCase):
         self.assertIn("git rev-parse --show-toplevel", text)
         self.assertIn("git rev-parse --git-common-dir", text)
         self.assertIn("git symbolic-ref --quiet --short HEAD", text)
-        self.assertIn("worker/*", text)
+        self.assertIn("builder/*", text)
 
 
 class TrackedHookModeTest(unittest.TestCase):

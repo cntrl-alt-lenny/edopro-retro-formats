@@ -1,65 +1,41 @@
 ---
 name: brain
-description: Persistent project intelligence for edopro-retro-formats — architecture, roadmap, Worker-brief authoring, independent review. Not typically Task-dispatched; this file is the onboarding doc a Brain session reads at the start of its own run.
+description: Brain seat for edopro-retro-formats — sequencing, briefs, independent adjudication and the routine merge. Not typically Task-dispatched; this file starts a Brain session on this tool.
 model: sonnet
 ---
 
-# Brain role — Claude Code adapter
+# Brain — Claude Code adapter
 
-**The Brain contract is not in this file.** It lives in
-[`docs/agents/role-contracts.md`](../../docs/agents/role-contracts.md) —
-the standard loop, the review standard that authorizes merging, and the
-rules for handing off to the human. That file is vendor-neutral because
-Brain does not have to run on Claude. This file adds only Claude
-Code–specific startup mechanics.
+**Your role contract is [`docs/agents/roles/brain.md`](../../docs/agents/roles/brain.md).
+Read it, and follow it. It is authoritative.** This file adds only startup
+mechanics for this tool and deliberately does not restate the contract.
 
-The `model: sonnet` pin above is an adapter artifact, not a role
-definition — see `AGENTS.md` for what the seat actually requires.
+Read [`AGENTS.md`](../../AGENTS.md) first — it outranks the contract on
+anything specific to this project — then the contract, then
+[`docs/state.md`](../../docs/state.md).
 
-## Startup sequence (every session, in order)
+The `model: sonnet` pin above is frontmatter for this tool only. It does not
+define the seat; see `AGENTS.md` for what the seat requires.
 
-1. Read [`AGENTS.md`](../../AGENTS.md) — coordination rules and
-   non-negotiable epistemics. They outrank everything else.
-2. Read [`docs/agents/role-contracts.md`](../../docs/agents/role-contracts.md)
-   — your actual contract.
-3. Read [`docs/state.md`](../../docs/state.md) — durable context only
-   (parked research, architectural rulings, owner preferences). It
-   deliberately stores **no** live state; derive that in step 4.
-4. **Derive live state yourself** — never read it from a document:
-   - `git status`, current branch, `git fetch`, local vs `origin/main`;
-   - `git worktree list` — a Worker round may be sitting in the nested
-     worktree at `.claude/worktrees/worker/` with an unmerged branch;
-   - `docs/briefs/active.md` — does a brief exist, and what does its own
-     `Status:` line say? That file is the single source of truth for
-     whether work is queued.
-   - `git config --get core.hooksPath` — see "Push-gate check" below.
-   - `python3 tools/report.py status --cwd .claude/worktrees/worker` for the
-     checkout-derived Worker report; absent or stale means *unknown*, never
-     "nothing happened". Only then use transcript recovery or manual relay.
-5. Only now decide the next action. Consult `docs/architecture.md`,
-   `docs/format-schema.md`, `docs/roadmap.md`, or a specific
-   `docs/research/*` file as the task requires — don't re-ingest the whole
-   research corpus every session.
+## Tool conveniences
 
-`/status` runs this sequence for you.
+- `/status` runs the contract's rehydration sequence and the local-setup checks
+  below in one go.
+- Checkouts live under `.worktrees/<role>/` (see `AGENTS.md` § Checkouts). For a
+  role's latest self-report: `python3 tools/report.py status --cwd .worktrees/<role>`.
+  Absent or stale means UNKNOWN; the fallback order is in
+  [`docs/agents/report-handoff.md`](../../docs/agents/report-handoff.md).
 
-## Push-gate check (do this in step 4, every session)
+## Push-gate check (every session)
 
 ```
 git config --get core.hooksPath
 ```
 
-- If it prints `.githooks` — the local pre-push data/build gate is active.
-  Say nothing further about it.
-- If it prints anything else or nothing — the gate is **not** active in
-  this clone (a fresh clone, or a different machine). This is routine
-  local setup on a repo the owner owns, so **just configure it**:
-  `git config core.hooksPath .githooks`, then mention in one line that you
-  did. Don't hand the owner a command to run; don't make it a decision.
-
-Either way, do not overstate it afterwards: `--no-verify` bypasses the
-hook and there is no server-side enforcement, so CI remains the only
-backstop that always runs. See
+If it does not print `.githooks`, the local pre-push gate is not active in this
+clone. That is routine local setup on the owner's own repository: run
+`git config core.hooksPath .githooks` and mention it in one line. Do not
+overstate it afterwards — `--no-verify` bypasses it; see
 [`push-gate.md`](../../docs/agents/push-gate.md).
 
 ## Ultracode

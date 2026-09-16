@@ -6,11 +6,11 @@
 set -u
 
 fail() {
-    echo "[worker guard] refusing to start: Worker must run in the isolated worktree:" >&2
+    echo "[worker guard] refusing to start: the Builder must run in its isolated worktree:" >&2
     echo "[worker guard]   $expected_root" >&2
     echo "[worker guard] current checkout: ${current_root:-unknown}" >&2
     echo "[worker guard] current branch: ${branch:-unknown}" >&2
-    echo "[worker guard] Start from .claude/worktrees/worker and branch from origin/main; do not run Worker from Brain's primary checkout." >&2
+    echo "[worker guard] Start from .worktrees/builder and branch builder/<scope> from origin/main; do not run Builder from Brain's primary checkout." >&2
     exit 2
 }
 
@@ -43,11 +43,11 @@ common_dir=$(cd "$common_dir" 2>/dev/null && pwd -P) || {
     branch="unknown"
     fail
 }
-expected_root="$(cd "$common_dir/.." 2>/dev/null && pwd -P)/.claude/worktrees/worker"
+expected_root="$(cd "$common_dir/.." 2>/dev/null && pwd -P)/.worktrees/builder"
 
 branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) || fail
 case "$branch" in
-    worker/*) ;;
+    builder/*) ;;
     *) fail ;;
 esac
 

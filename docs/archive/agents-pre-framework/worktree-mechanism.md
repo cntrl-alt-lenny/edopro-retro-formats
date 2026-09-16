@@ -1,3 +1,7 @@
+> **RETIRED 2026-09-16 — history, not policy.** Superseded when this project
+> adopted the shared agentic framework. See [README.md](README.md) in this
+> directory for what replaced it. Links below may point at old locations.
+
 # Worktree mechanism
 
 Brain and Worker share **one visible project folder**
