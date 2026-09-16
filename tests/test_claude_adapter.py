@@ -23,6 +23,7 @@ import os
 import shutil
 import stat
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -34,6 +35,7 @@ WORKER_GUARD = ROOT / ".claude" / "hooks" / "check_worker_checkout.sh"
 SETTINGS = ROOT / ".claude" / "settings.json"
 WORKER_AGENT = ROOT / ".claude" / "agents" / "worker.md"
 SAVE_HOOK = ROOT / ".claude" / "hooks" / "save_agent_reply.py"
+REPORT_TOOL = ROOT / "tools" / "report.py"
 
 # Resolve a POSIX shell instead of hard-coding /bin/sh; None means this
 # interpreter has no shell to drive the hooks with (native Windows Python
@@ -136,6 +138,112 @@ class PythonHookShimTest(unittest.TestCase):
         self.assertIn("import report as _report", text)
         self.assertIn("_report.write_report", text)
         self.assertNotIn("out.write_text", text)
+
+
+class StopHookDeliveryRegressionTest(unittest.TestCase):
+    """The Stop fallback must not destroy a role's own delivery report."""
+
+    TASK = "015-2026-09-16-report-and-materialize-gates"
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.repo = Path(self._tmp.name)
+        init_repo(self.repo)
+        (self.repo / "tools").mkdir()
+        (self.repo / ".claude" / "hooks").mkdir(parents=True)
+        shutil.copyfile(REPORT_TOOL, self.repo / "tools" / "report.py")
+        shutil.copyfile(SAVE_HOOK, self.repo / ".claude" / "hooks" / "save_agent_reply.py")
+        git("add", "tools/report.py", ".claude/hooks/save_agent_reply.py", cwd=self.repo)
+        git("commit", "-q", "-m", "install report adapter", cwd=self.repo)
+
+    def _run_report(self, cwd: Path, *args: str, input_text: str = ""):
+        return subprocess.run(
+            [sys.executable, str(cwd / "tools" / "report.py"), *args],
+            cwd=cwd,
+            input=input_text,
+            capture_output=True,
+            text=True,
+        )
+
+    def _delivery(self):
+        return subprocess.run(
+            [
+                sys.executable,
+                str(self.repo / "tools" / "report.py"),
+                "delivery",
+                "--branch",
+                "builder/task",
+                "--base",
+                self.base,
+                "--role",
+                "builder",
+                "--task",
+                self.TASK,
+            ],
+            cwd=self.repo,
+            capture_output=True,
+            text=True,
+        )
+
+    def _builder(self):
+        builder = self.repo / ".worktrees" / "builder"
+        git("worktree", "add", "-q", "-b", "builder/task", str(builder), "HEAD", cwd=self.repo)
+        (builder / "change.txt").write_text("delivered\n", encoding="utf-8")
+        git("add", "change.txt", cwd=builder)
+        git("commit", "-q", "-m", "deliver", cwd=builder)
+        return builder
+
+    def test_real_stop_hook_preserves_own_report_for_real_delivery_check(self):
+        self.base = git_output("rev-parse", "HEAD", cwd=self.repo)
+        builder = self._builder()
+        report = self._run_report(builder, "write", "--task", self.TASK,
+                                  input_text="Builder's own completion report.\n")
+        self.assertEqual(0, report.returncode, report.stderr)
+
+        transcript = self.repo / "transcript.jsonl"
+        transcript.write_text(
+            json.dumps({"role": "assistant", "content": "Stop fallback text."}) + "\n",
+            encoding="utf-8",
+        )
+        hook = subprocess.run(
+            [sys.executable, str(builder / ".claude" / "hooks" / "save_agent_reply.py")],
+            cwd=builder,
+            input=json.dumps({"session_id": "session-123", "transcript_path": str(transcript)}),
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(0, hook.returncode, hook.stderr)
+
+        latest = self.repo / ".git" / "agent-inbox" / "builder-latest.md"
+        self.assertIn("task=" + self.TASK, latest.read_text(encoding="utf-8"))
+        self.assertIn("Builder's own completion report.", latest.read_text(encoding="utf-8"))
+        self.assertNotIn("claude-code-session:session-123", latest.read_text(encoding="utf-8"))
+        delivery = self._delivery()
+        self.assertEqual(0, delivery.returncode, delivery.stdout + delivery.stderr)
+        self.assertIn("delivered:", delivery.stdout)
+
+    def test_session_tagged_fallback_still_fails_delivery(self):
+        self.base = git_output("rev-parse", "HEAD", cwd=self.repo)
+        builder = self._builder()
+        transcript = self.repo / "transcript.jsonl"
+        transcript.write_text(
+            json.dumps({"role": "assistant", "content": "No contract report."}) + "\n",
+            encoding="utf-8",
+        )
+        hook = subprocess.run(
+            [sys.executable, str(builder / ".claude" / "hooks" / "save_agent_reply.py")],
+            cwd=builder,
+            input=json.dumps({"session_id": "session-456", "transcript_path": str(transcript)}),
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(0, hook.returncode, hook.stderr)
+        latest = self.repo / ".git" / "agent-inbox" / "builder-latest.md"
+        self.assertIn("task=claude-code-session:session-456", latest.read_text(encoding="utf-8"))
+        delivery = self._delivery()
+        self.assertEqual(1, delivery.returncode, delivery.stdout + delivery.stderr)
+        self.assertIn("not delivered yet", delivery.stdout)
 
 
 class WorkerCheckoutGuardTest(unittest.TestCase):
