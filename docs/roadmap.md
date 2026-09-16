@@ -63,10 +63,11 @@ reflects that.
    as a class; current-list membership remains a valid cross-check.
 4. ~~**Materialise the Edison pool.**~~ **Done (2026-08-19).** `data/releases/`
    covers TCG 2002–2010 (369 products / 8,445 printings, Yugipedia per-territory
-   dates + YGOPRODeck printings), Edison materialises to 3,674 cards with every
+   dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every
    boundary case explicitly resolved and sourced, the generated lflist is a full
    `$whitelist`, and regression tests lock cardinality + sixteen edge cases.
-   See docs/releases.md. Follow-ups now tracked below (4a–4d).
+   Round 14 (2026-09-16) added one card, bringing the current pool to 3,674
+   cards. See docs/releases.md. Follow-ups now tracked below (4a–4d).
 
    4a. ~~Upgrade boundary release events to `verified`~~ **Done (2026-08-20).**
    All five Edison boundary products (plus the TSHD Sneak Peek and both new EU
@@ -541,14 +542,16 @@ reflects that.
 
 ## Phase 2 — framework completeness
 
-6. **Partly done — deck-level validation tool**: check a `.ydk` against a format (pool + banlist +
-   forbidden types + deck sizes) — gives players/tournament organisers a CLI check and
-   gives tests a realistic fixture surface. The CLI, pool/banlist checks, deck-size
-   checks, fixtures, and regression tests exist in `retroformats/deckcheck.py`,
-   `retroformats/cli.py`, and `tests/test_deckcheck.py`; forbidden card types are
-   explicitly reported as not checked because `data/cards/index.json` has no type
-   data. What remains is an actual forbidden-type check (or a separately scoped
-   data decision that closes that gap).
+6. ~~**Deck-level validation tool**~~ **Done (2026-08-31).** The CLI, pool/banlist
+   checks, deck-size checks, fixtures, and regression tests exist in
+   `retroformats/deckcheck.py`, `retroformats/cli.py`, and `tests/test_deckcheck.py`.
+   Forbidden card types are explicitly reported as not checked because
+   `data/cards/index.json` has no type data, but the check is redundant for these
+   three formats by the two routes documented in `retroformats/deckcheck.py`'s
+   `FORBIDDEN_TYPE_NOTE`: Edison and Tengu's release-cutoff pools predate the
+   relevant forbidden-type printings, while GOAT is a fixed pre-2011 whitelist.
+   This conclusion is limited to these three formats; a future format needs its
+   own cutoff or whitelist-era assessment.
 7. **Partly done — cdb/script generation for `custom-script` errata**: when we need a historical
    card Ignis doesn't ship, generate `dist/databases/retro-<format>.cdb` rows
    (`alias` → modern, `ot=8`, our own reserved code range — **chosen and proven in
@@ -575,7 +578,7 @@ reflects that.
 
 11. **Open —** a second whitelist-era format adjacent to GOAT (e.g. 2005-09) to prove banlist
     sharing and chronology links.
-12. ~~**A Synchro/Xyz-era format (Tengu Plant 2011)**~~ **Done (2026-08-27; count corrected 2026-09-16).** Tengu Format (`2011-09-tengu`) implemented as the third canonical format, exercising MR2-era profile boundaries, early Xyz integration, 4,563-card release-certified pool, September 2011 TCG banlist (51/65/18), and full v2 errata evaluation at snapshot 2011-09-17.
+12. ~~**A Synchro/Xyz-era format (Tengu Plant 2011)**~~ **Done (2026-08-27).** Tengu Format (`2011-09-tengu`) implemented as the third canonical format, exercising MR2-era profile boundaries, early Xyz integration, 4,562-card release-certified pool, September 2011 TCG banlist (51/65/18), and full v2 errata evaluation at snapshot 2011-09-17. Round 14 (2026-09-16) added one card, bringing the current pool to 4,563 cards.
 13. **Open —** HAT (2014) — MR3, pool via releases; Dragon Ruler (2013) — errata-heavy.
 14. **Open —** early-era formats (Yugi/Kaiba, Critter) — these stress the releases dataset
     (2002-2003) and pre-Advanced-format rules; expect new `known_gaps`.
