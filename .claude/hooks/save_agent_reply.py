@@ -126,7 +126,10 @@ def main() -> int:
     try:
         status, _ = _report.check_status(_PROJECT_ROOT)
     except Exception:
-        return 0
+        # An unreadable or otherwise unavailable existing report is not a
+        # fresh contract report. Try the fallback; its own errors remain
+        # non-blocking below.
+        status = 1
     if status == 0:
         return 0
 
