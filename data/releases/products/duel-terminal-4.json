@@ -159,7 +159,7 @@
       ]
     },
     {
-      "passcode": 24094653,
+      "passcode": 27847700,
       "name": "Polymerization",
       "numbers": [
         "DT04-EN043"
@@ -723,5 +723,5 @@
     "ygoprodeck-api",
     "yugipedia-set-pages"
   ],
-  "notes": "Dates from Yugipedia set page 'Duel Terminal 4'; printings from the YGOPRODeck bulk dump."
+  "notes": "Dates from Yugipedia set page 'Duel Terminal 4'; printings from the YGOPRODeck bulk dump, except DT04-EN043: same identity correction as duelist-pack-yugi.json's DPYG-EN020 (round 14, roadmap 4b) - Yugipedia's 'Polymerization (alternate password)' page lists DT04-EN043 under the far-alias passcode 27847700, not the standard 24094653. No pool effect either way: this product is excluded from the Tengu pool (duel-terminal machine-exclusive policy) and its 2011-01-25 date postdates the Edison cutoff regardless."
 }

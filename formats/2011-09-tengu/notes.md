@@ -7,7 +7,7 @@ Monsters to premier competitive play).
 
 Tengu is the project's third canonical format. It stress-tests the repository
 architecture across a major rules era boundary: Master Rule 2, the introduction of
-Xyz Monsters, a 4,562-card certified release pool, an official 51/65/18 banlist,
+Xyz Monsters, a 4,563-card certified release pool, an official 51/65/18 banlist,
 and the evaluation of the 296-record v2 errata corpus at a late 2011 snapshot.
 
 ## Data status
@@ -17,14 +17,19 @@ and the evaluation of the 296-record v2 errata corpus at a late 2011 snapshot.
   cross-checked against Format Library and TenguFormat.com. The seven cards moved
   to Unlimited are historical research provenance and are not emitted as
   restricted entries.
-- **Pool `pool-tengu-2011` — verified (4,562 cards).** Materialised from
+- **Pool `pool-tengu-2011` — verified (4,563 cards).** Materialised from
   data/releases/ under certified coverage through 2011-09-17 across all TCG
   territories (`tcg`, `tcg-na`, `tcg-eu`, `tcg-oce`), with zero release ambiguities
   and zero unknown printings. Product exclusions are period-supported: Duel
   Terminal 4/5/5a machine-only cards excluded under KDE Tournament Policy v1.1
   (2011), and Sneak Peek participation cards excluded under official product-archive
   evidence. Escuridao (YG09-EN001) is absent because its official TCG release date
-  was 2012-08-07. Generation Force cards and early Xyz monsters are legal.
+  was 2012-08-07. Generation Force cards and early Xyz monsters are legal. Round 14
+  (roadmap 4b, 2026-09-16) added 27847700 (Polymerization's far-alias DPYG-EN020
+  artwork identity) via a corrected printing record; TenguFormat.com's independent
+  candidate list does not carry this identity separately - see
+  `docs/research/tengu-format-community-diff.json` for the full cross-check and the
+  open note on that divergence.
 - **Rules `rules-tcg-mr2-tengu` — partial.** Uses Master Rule 2 baseline flags:
   `DUEL_1ST_TURN_DRAW`, `DUEL_1_FACEUP_FIELD`, `DUEL_SPSUMMON_ONCE_OLD_NEGATE`,
   `DUEL_RETURN_TO_DECK_TRIGGERS`, and `DUEL_CANNOT_SUMMON_OATH_OLD`, plus

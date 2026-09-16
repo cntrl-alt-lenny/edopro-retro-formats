@@ -74,7 +74,7 @@
       ]
     },
     {
-      "passcode": 24094653,
+      "passcode": 27847700,
       "name": "Polymerization",
       "numbers": [
         "DPYG-EN020"
@@ -253,5 +253,5 @@
     "ygoprodeck-api",
     "yugipedia-set-pages"
   ],
-  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yugi'; printings from the YGOPRODeck bulk dump."
+  "notes": "Dates from Yugipedia set page 'Duelist Pack: Yugi'; printings from the YGOPRODeck bulk dump, except DPYG-EN020: the bulk dump attributes it to passcode 24094653 (the standard Polymerization artwork), but Yugipedia's 'Polymerization' page lists no DPYG printing at all and its 'Polymerization (alternate password)' page lists DPYG-EN020 under passcode 27847700 - a far alias (BabelCDB alias_of=24094653, distance >>10, so not artwork-auto-extended) for the same effect under its second artwork. Corrected to 27847700 per round 14 (roadmap 4b)."
 }

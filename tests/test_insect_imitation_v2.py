@@ -158,7 +158,7 @@ class InsectImitationV2Test(unittest.TestCase):
             after = build_lflist(self.repo.formats[fmt_id], self.repo)
             self.assertEqual((before.text, before.entries, before.hash), (after.text, after.entries, after.hash), fmt_id)
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
-        self.assertEqual(3673, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
+        self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         before_validator = Validator(self.before)
         after_validator = Validator(self.repo)
         before_validator.validate()

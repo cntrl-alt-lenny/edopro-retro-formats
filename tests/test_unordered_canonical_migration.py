@@ -245,7 +245,7 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
             if fmt_id == "2005-04-goat":
                 self.assertEqual(0x28E9FC02, after.hash)
             if fmt_id == "2010-03-edison":
-                self.assertEqual(3673, len(self.live.pools[fmt.pool_id].cards))
+                self.assertEqual(3674, len(self.live.pools[fmt.pool_id].cards))
         before_validator = Validator(self.pre_gate_repo)
         after_validator = Validator(self.live)
         before_validator.validate()

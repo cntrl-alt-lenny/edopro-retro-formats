@@ -227,7 +227,7 @@ class LastWillV2Test(unittest.TestCase):
             self.assertEqual((before.text, before.entries, before.hash), (after.text, after.entries, after.hash), fmt_id)
             self.assertEqual(gate._substitution_map(self.before.formats[fmt_id], self.before), gate._substitution_map(self.repo.formats[fmt_id], self.repo), fmt_id)
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
-        self.assertEqual(3673, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
+        self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
 
         before_validator = Validator(self.before)
         after_validator = Validator(self.repo)

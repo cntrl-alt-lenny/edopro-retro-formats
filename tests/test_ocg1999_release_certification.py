@@ -409,9 +409,9 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         # unaffected (substitution, not add/remove).
         self.assertEqual({"2005-04-goat", "2010-03-edison", "2011-09-tengu"}, set(self.repo.formats))
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
-        self.assertEqual(3673, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
-        self.assertEqual(4562, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        self.assertEqual(0xBCBDBABE, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
+        self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
+        self.assertEqual(4563, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
+        self.assertEqual(0x0C878718, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
 
     # -- 19: no canonical Tokyo Dome artifacts exist -------------------------
 
