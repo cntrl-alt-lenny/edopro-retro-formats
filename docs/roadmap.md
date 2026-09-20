@@ -24,8 +24,10 @@ reflects that.
    `unresolved_policy` fallback.
    1b. **Open — close the search-verification interval.** The old state is attested
    through 2011-02-02 and the modern policy from 2019-04-03; no announcement of
-   the change was found. Narrowing this would firm up a large group of records
-   at once (both GOAT and Edison already sit determinately in the old era).
+   the change was found. Narrowing this would not change the 38-card
+   failed-search/activation cluster's classification: Edison already sits
+   determinately in the old era for verification, so that cluster's open,
+   high-leverage question is the undated activation axis tracked by item 1a.
    1c. **Open — the 41 acknowledged implementation gaps** (project-wide unique count,
    `format.erratum-known-divergence`; re-verified 2026-08-31, round 9 — the "48"
    this bullet previously stated was a stale carry-over of a *different*,
