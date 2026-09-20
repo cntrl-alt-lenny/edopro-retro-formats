@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`018-2026-09-20-search-activation-semantics`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
@@ -164,3 +164,69 @@ The Worker contract's report, plus:
   evidence supports;
 - what you deliberately left for a later round, especially anything that would
   touch canonical records.
+
+---
+
+## Amendment 1 — 2026-09-20, after Brain's first adjudication
+
+The first delivery, `fef67eede396ef9d2cef3e8d4d556e89ba5dd9ac` on
+`builder/search-activation-semantics`, was **not accepted**. The round stays
+open on the same branch and identifier. Continue from `fef67ee`; do not rewrite
+or force-push history. This amendment lives on `origin/main`: read it with
+`git show origin/main:docs/briefs/active.md`.
+
+**The research finding itself stands and is not reopened.** Brain independently
+re-fetched the Konami Card FAQ capture and read both passages: Reinforcement of
+the Army "cannot activate … if you do not have any Level 4 or lower
+Warrior-Type monsters remaining in your Deck", while Release Restraint "you can
+still activate this card … but you will need to show your cards to your
+opponent to confirm". A same-capture per-card split, exactly as reported, and
+correctly not generalised to the 38-card class. What follows is provenance,
+which in this project is not a formality.
+
+### 1. A cited source has no record — BLOCKER
+
+`docs/research/edison-behaviour-gaps.md` cites
+`web.archive.org/web/20081215054634/…/cardfaqs/default_st.html` for the Skilled
+White Magician withdrawal, one of the three passages the per-card finding rests
+on. `data/sources.json` has no record for it; the new record covers
+`default_pr.html` only. Brain confirmed the passage is really there and that no
+record exists. Register it properly, stating what it does and does not
+establish, as the project requires of every cited source.
+
+### 2. The cited capture is not the capture that gets served
+
+`http://web.archive.org/web/20081215065604/…/default_pr.html` **302-redirects to
+the `20081216162327` capture** — 2008-12-16, not 2008-12-15. Brain observed the
+redirect and read the page it serves. The new source record, its id
+(`konami-card-faq-2008-12-15`), and the research text all assert 2008-12-15.
+The `default_st.html` URL, by contrast, returns 200 at its own timestamp.
+
+For each archived source this round cites, establish the timestamp actually
+served, and make the record and the research text say that. If an exact-capture
+URL exists for the `default_pr.html` content, prefer it; if the content is only
+available at a later capture, say so plainly. A nearest-capture redirect is a
+different document date, which is the distinction this project exists to keep.
+
+### 3. A date label that may describe the wrong thing — SHOULD FIX
+
+The research text and `data/sources.json`'s `konami-set-rulings-archive` record
+label the Starstrike Blast rulings evidence `2010-11-16`. The Verifier fetched
+that PDF and reports it says "Compiled as of November 4, 2010". Brain could not
+re-derive this: the archive index query returned nothing in that session, so
+treat both readings as unverified.
+
+Fetch the document yourself. Establish what date it states about itself, and
+whether `2010-11-16` is its compilation date, the set's release date, or
+something else. Then make both the record and the research text say which is
+which. Do the same check for the `2011-02-02` Storm of Ragnarok label, since
+that date is load-bearing: it is what attests the old verification state.
+Correct the pre-existing record if it is wrong; that is in scope now.
+
+### Unchanged
+
+Mode, scope, non-goals and evidence requirements are as above: still no
+canonical data, errata, schema, `dist/` or test change — `data/sources.json`
+and the research and roadmap documents only. The report covers the whole round
+from base `7a304d3e1d0e8ea2bf556a47b74a706119675684`, and must state, for every
+archived URL it cites, the capture timestamp actually served.
