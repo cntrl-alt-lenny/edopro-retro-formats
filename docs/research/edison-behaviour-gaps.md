@@ -957,6 +957,7 @@ by the documents themselves:
 | `http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html` | HTTP 200; memento `2008-12-15 05:46:34 GMT` | FAQ page capture; not an effective date |
 | [Starstrike Blast PDF](https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf) | HTTP 200; memento `2011-09-02 05:40:17 GMT` | Archive capture; the PDF itself says “Compiled as of November 4, 2010” |
 | [Storm of Ragnarok PDF](http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf) | HTTP 200; memento `2011-04-09 07:00:40 GMT` | Archive capture; the PDF itself says “Compiled as of February 2, 2011” |
+| `http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf` | This session returned HTTP 302 to `http://web.archive.org/web/20110102005407/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf`; following it returned HTTP 200 PDF, memento `2011-01-02 00:54:07 GMT`. Other sessions observed HTTP 200 at the requested URL, memento `2010-06-02 05:16:20 GMT` | The PDF itself says “Compiled as of April 6th, 2010 - <version 1.0>” and its Commander Covington entry says, “If you do not have a ‘Machina Force’ in your hand or Deck, you cannot activate the effect of ‘Commander Covington.’ If you no longer have one when the effect resolves, your opponent can ask to verify.” The document date is 2010-04-06; neither archive timestamp is an exact policy effective date |
 
 The replay service's treatment of the `20081215065604` URL is therefore
 recorded as unstable: Amendment 1 observed the later served capture, while a
@@ -964,7 +965,13 @@ later direct request returned the original memento. The source record cites
 the exact `20081216162327` target rather than silently calling that exact
 target a December 15 capture. The Starstrike PDF's 2010-11-04 document
 date is likewise distinct from both its 2011-09-02 archive capture and the
-2010-11-16 product-date label that had previously been attached to it.
+2010-11-16 product-date label that had previously been attached to it. The
+Machina request is also recorded by the response actually served: this session
+was redirected to a 2011-01-02 memento, while other sessions received the
+requested 2010-06-02 memento. An archive replay failing or redirecting is
+evidence about that request, not about the source: the Internet Archive
+returned a “Temporarily Offline” page to Brain earlier the same day and served
+the document normally minutes later.
 
 ### Search log and negative result
 
@@ -988,9 +995,20 @@ source set and the archived pages above. The results were:
   White Magician withdrawal. It is another card entry, not a policy
   announcement, and does not settle any of the 38 cluster records whose own
   entries are absent from that page.
-* The registered **Machina Mayhem** source remains labelled by its own passage
-  as “Compiled as of April 6th, 2010”; its archive replay was unavailable as a
-  readable PDF in this audit. The fetched **Starstrike Blast** PDF returned
+* The registered **Machina Mayhem** source says on its first page “Compiled as
+  of April 6th, 2010 - <version 1.0>”. In this session, the requested URL
+  returned HTTP 302 to the 2011-01-02-00:54:07 replay, which returned HTTP 200
+  with a readable four-page PDF. Its Commander Covington entry says, “If you
+  do not have a ‘Machina Force’ in your hand or Deck, you cannot activate the
+  effect of ‘Commander Covington.’ If you no longer have one when the effect
+  resolves, your opponent can ask to verify.” Other sessions received HTTP
+  200 from the requested URL with memento `2010-06-02 05:16:20 GMT`. The
+  document date is 2010-04-06, separate from either archive timestamp; the
+  passage establishes failed-search verification wording for the named card,
+  not a class-wide activation or exact effective date. An archive replay
+  failing is evidence about that request, not about the source: the earlier
+  “Temporarily Offline” response was followed minutes later by normal service.
+  The fetched **Starstrike Blast** PDF returned
   HTTP 200 with served archive timestamp **2011-09-02 05:40:17 GMT** and states
   on its first page, “Compiled as of November 4, 2010 - <version 1.0>” ([source
   record](https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf)). The
