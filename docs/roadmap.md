@@ -15,18 +15,18 @@ reflects that.
    historical implementations from evidence alone. See docs/errata.md.
    Follow-ups below (1a-1e).
 
-   1a. **Chronology for the undated era rulings.** 125 records are unresolved,
+   1a. **Open — chronology for the undated era rulings.** 125 records are unresolved,
    almost all undated era *rulings* carried by upstream GOAT scripts —
    damage-step activation windows, miss-timing registration, trigger
    registration. Konami never announced these per card, so they need period
    rulings documents (UDE Judge's List archives, Metagame.com judge columns,
    per-set rulings PDFs). Each one resolved shrinks Edison's
    `unresolved_policy` fallback.
-   1b. **Close the search-verification interval.** The old state is attested
+   1b. **Open — close the search-verification interval.** The old state is attested
    through 2011-02-02 and the modern policy from 2019-04-03; no announcement of
    the change was found. Narrowing this would firm up a large group of records
    at once (both GOAT and Edison already sit determinately in the old era).
-   1c. **The 41 acknowledged implementation gaps** (project-wide unique count,
+   1c. **Open — the 41 acknowledged implementation gaps** (project-wide unique count,
    `format.erratum-known-divergence`; re-verified 2026-08-31, round 9 — the "48"
    this bullet previously stated was a stale carry-over of a *different*,
    project-wide `strategy == "unresolved"` count, already identified as such in
@@ -35,20 +35,19 @@ reflects that.
    candidate for roadmap item 7 (`custom-script` generation), which now has a
    chosen, proven reserved passcode range (round 9; see item 7 below and
    `docs/architecture.md`'s card-identity section).
-   1d. **Contribute back upstream.** 21 cards where our chronology says GOAT
+   1d. **Open — contribute back upstream.** 21 cards where our chronology says GOAT
    should use a historical version but Project Ignis's list leaves them modern
    (`format.parity-omits-historical`), plus the cases where its variant is
    behaviourally identical to the modern card (`upstream-variant-cosmetic`).
 
-   1e. **Card identity: TCG-versus-OCG entries.** Mind Master (96782886) is in
-   the Edison pool but BabelCDB scopes it OCG-only (`ot=1`) and ships the TCG
-   version as a *separate* entry (96782896, `ot=2`, aliased). Our release data
-   maps its TDGS-EN016 printing to the canonical code, so the pool references
-   a card EDOPro would reject in an official-cards room. This is a card-identity
-   question, not errata chronology: it needs a general rule for choosing the
-   region-correct implementation of a canonical card.
-   `tests/test_repo_data.py::test_pool_cards_are_tcg_scoped_in_the_card_database`
-   pins the invariant with this single documented exception.
+   1e. ~~**Card identity: TCG-versus-OCG entries.**~~ **Done (2026-08-31).**
+   The tree now resolves Mind Master's OCG-only canonical row (96782886) and
+   separately shipped TCG row (96782896, `ot=2`) through the general
+   `cutoff.region_substitutions` mechanism in both Edison and Tengu. The
+   materializer applies the substitution and `retroformats/lflist.py` bridges
+   banlist status lookup back to the original passcode; no one-off card rule is
+   used. `tests/test_repo_data.py::test_pool_cards_are_region_scoped_in_the_card_database`
+   checks every current pool and has no exception allowlist.
 2. ~~**Cross-check the April 2005 banlist.**~~ **Done (2026-09-01).** The 73-entry
    GOAT-derived record matches Yugipedia and Format Library membership exactly and is
    independently corroborated by period Pojo/UDE sources. UDE Appendix A is the August
@@ -67,7 +66,8 @@ reflects that.
    dates + YGOPRODeck printings), Edison materialises to 3,673 cards with every
    boundary case explicitly resolved and sourced, the generated lflist is a full
    `$whitelist`, and regression tests lock cardinality + sixteen edge cases.
-   See docs/releases.md. Follow-ups now tracked below (4a–4c).
+   Round 14 (2026-09-16) added one card, bringing the current pool to 3,674
+   cards. See docs/releases.md. Follow-ups now tracked below (4a–4d).
 
    4a. ~~Upgrade boundary release events to `verified`~~ **Done (2026-08-20).**
    All five Edison boundary products (plus the TSHD Sneak Peek and both new EU
@@ -176,7 +176,7 @@ reflects that.
    recovered: DT machine exclusives were illegal in sanctioned play (2009-2010
    event FAQs, Konami's 2010-03-19 article, the June 2010 WCQ FAQ's card list);
    the pool exclusion is now primary-sourced.
-   4d. **Coverage certification shipped (2026-08-20):** the gap ledger
+   4d. ~~**Coverage certification.**~~ **Done (2026-08-20):** the gap ledger
    (data/releases/gaps.json) makes "complete" coverage an earned invariant -
    all 45 importer-detected anomalies audited (1 roster recovered and imported,
    the rest proven harmless with evidence, mechanically recomputed where
@@ -201,7 +201,7 @@ reflects that.
    evidence table, the adversarial review, and the correction record. Follow-ups below
    (5a, 5b).
 
-   5a. **SEGOC ordering remains unresolved.** The period-primary Official Rulebook
+   5a. **Open — SEGOC ordering remains unresolved.** The period-primary Official Rulebook
    (stable 2008-2011) describes a simple two-tier simultaneous-trigger order with no
    mandatory/optional split and no trigger-order tiebreak, directly contradicting
    EdisonFormat.com's claimed four-tier structure, which is traceable only to a 2012
@@ -213,7 +213,7 @@ reflects that.
    `DUEL_CAN_REPOS_IF_NON_SUMPLAYER`) are similarly left unresolved in `known_gaps` for
    lack of any period source in either direction.
 
-   5b. **Ignition Effect Priority is an engine-level gap, not a flag choice.**
+   5b. **Open — Ignition Effect Priority is an engine-level gap, not a flag choice.**
    Reopened, adversarial research (eight independently-dated 2009-2010 period community
    rulings threads from the same forum, corroborated by a Konami OCG FAQ ruling for
    Destiny HERO - Malicious)
@@ -542,32 +542,45 @@ reflects that.
 
 ## Phase 2 — framework completeness
 
-6. **Deck-level validation tool**: check a `.ydk` against a format (pool + banlist +
-   forbidden types + deck sizes) — gives players/tournament organisers a CLI check and
-   gives tests a realistic fixture surface.
-7. **cdb/script generation for `custom-script` errata**: when we need a historical
+6. ~~**Deck-level validation tool**~~ **Done (2026-08-31).** The CLI, pool/banlist
+   checks, deck-size checks, fixtures, and regression tests exist in
+   `retroformats/deckcheck.py`, `retroformats/cli.py`, and `tests/test_deckcheck.py`.
+   Forbidden card types are explicitly reported as not checked because
+   `data/cards/index.json` has no type data, but the check is redundant for these
+   three formats by the two routes documented in `retroformats/deckcheck.py`'s
+   `FORBIDDEN_TYPE_NOTE`: Edison and Tengu's release-cutoff pools predate the
+   relevant forbidden-type printings, while GOAT is a fixed pre-2011 whitelist.
+   This conclusion is limited to these three formats; a future format needs its
+   own cutoff or whitelist-era assessment.
+7. **Partly done — cdb/script generation for `custom-script` errata**: when we need a historical
    card Ignis doesn't ship, generate `dist/databases/retro-<format>.cdb` rows
    (`alias` → modern, `ot=8`, our own reserved code range — **chosen and proven in
    round 9: `600000000`–`699999999`, disjoint from every documented upstream
    convention and every observed BabelCDB code at the pinned revision; enforced by
    `retroformats/validate.py`'s `card.reserved-passcode-collision` check; see
    `docs/architecture.md`'s card-identity section for the full evidence**) plus script
-   stubs, following the upstream blueprint in docs/research/ignis-goat.md.
-8. **Ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
+   stubs, following the upstream blueprint in docs/research/ignis-goat.md. The
+   reserved range and collision guard exist, but no generator, database rows, or
+   script stubs are present; those remain.
+8. **Partly done — ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.
-9. **CI**: GitHub Actions running validate + build --check + unittest (workflow file
-   already included); add a link-checker for source URLs.
-10. **Importer for Format Library formats list** (after maintainer contact): seed
+   `dist/README.md` contains the snippet and versioned-release convention, but the
+   real-client test remains undone.
+9. **Partly done — CI**: GitHub Actions running validate + build --check + unittest (workflow file
+   already included); add a link-checker for source URLs. The workflow runs the
+   three required checks on Python 3.10 and 3.13; no link-checker exists, so that
+   addition remains.
+10. **Open — importer for Format Library formats list** (after maintainer contact): seed
     `formats/` skeletons for the ~90 catalogued formats with `implementation_status:
     missing`, so coverage is visible and contributors can pick tasks up.
 
 ## Phase 3 — more formats, by informativeness
 
-11. A second whitelist-era format adjacent to GOAT (e.g. 2005-09) to prove banlist
+11. **Open —** a second whitelist-era format adjacent to GOAT (e.g. 2005-09) to prove banlist
     sharing and chronology links.
-12. ~~**A Synchro/Xyz-era format (Tengu Plant 2011)**~~ **Done (2026-08-27).** Tengu Format (`2011-09-tengu`) implemented as the third canonical format, exercising MR2-era profile boundaries, early Xyz integration, 4,562-card release-certified pool, September 2011 TCG banlist (51/65/18), and full v2 errata evaluation at snapshot 2011-09-17.
-13. HAT (2014) — MR3, pool via releases; Dragon Ruler (2013) — errata-heavy.
-14. Early-era formats (Yugi/Kaiba, Critter) — these stress the releases dataset
+12. ~~**A Synchro/Xyz-era format (Tengu Plant 2011)**~~ **Done (2026-08-27).** Tengu Format (`2011-09-tengu`) implemented as the third canonical format, exercising MR2-era profile boundaries, early Xyz integration, 4,562-card release-certified pool, September 2011 TCG banlist (51/65/18), and full v2 errata evaluation at snapshot 2011-09-17. Round 14 (2026-09-16) added one card, bringing the current pool to 4,563 cards.
+13. **Open —** HAT (2014) — MR3, pool via releases; Dragon Ruler (2013) — errata-heavy.
+14. **Open —** early-era formats (Yugi/Kaiba, Critter) — these stress the releases dataset
     (2002-2003) and pre-Advanced-format rules; expect new `known_gaps`.
 
 ## Upstream conversations worth having
