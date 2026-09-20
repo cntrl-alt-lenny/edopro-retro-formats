@@ -230,3 +230,56 @@ canonical data, errata, schema, `dist/` or test change — `data/sources.json`
 and the research and roadmap documents only. The report covers the whole round
 from base `7a304d3e1d0e8ea2bf556a47b74a706119675684`, and must state, for every
 archived URL it cites, the capture timestamp actually served.
+
+---
+
+## Amendment 2 — 2026-09-20, after Brain's second adjudication
+
+The second delivery, `f059ed524e3c339376f3138be2aa5223d69fd7c7`, was **not
+accepted**. Amendment 1 is otherwise closed and is not reopened: the Skilled
+White Magician capture is now registered, the `default_pr.html` record carries
+the served 2008-12-16 timestamp, and the Starstrike and Storm documents are
+now correctly dated by what they say about themselves (2010-11-04 and
+2011-02-02) rather than by a label or a capture date. That is good work.
+
+One thing remains, and it is small.
+
+### The Machina Mayhem record now carries less evidence than before
+
+`data/sources.json`'s `konami-set-rulings-archive` note previously quoted the
+document's own verification passage. This round replaced that with: "its
+archive replay was unavailable as readable PDF during this round", and the
+research document says the same.
+
+That statement is about one session, not about the source. **Two independent
+sessions have since fetched it successfully**: the Verifier, and Brain, which
+requested
+`http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf`
+and received HTTP 200, `memento-datetime: Wed, 02 Jun 2010 05:16:20 GMT`, a
+four-page PDF whose first line is "Machina Mayhem Structure Deck – Card
+Rulings" and whose second is "Compiled as of April 6th, 2010 - <version 1.0>".
+
+Do:
+
+1. Fetch it yourself and record the served memento timestamp, as you did for
+   the others.
+2. Restore the substantive passage the record used to carry — the document's
+   own failed-search verification wording — and state its document date
+   ("Compiled as of April 6th, 2010") separately from the capture timestamp,
+   in the same shape as the Starstrike and Storm records.
+3. Correct the research document's sentence to match.
+4. If your fetch fails again, retry before concluding anything, and if it
+   still fails, say plainly that it failed **in your session** while two
+   other sessions succeeded — never that the source is unavailable.
+
+The general point, worth a sentence in the research document: an archive
+replay failing is evidence about that request, not about the source. The
+Internet Archive returned a "Temporarily Offline" page to Brain earlier the
+same day and served the document normally minutes later.
+
+### Unchanged
+
+Scope, non-goals and evidence requirements as before. No canonical data,
+errata, schema, `dist/` or test change. Continue on the same branch from
+`f059ed5`; do not rewrite history. The report covers the whole round from base
+`7a304d3e1d0e8ea2bf556a47b74a706119675684`.
