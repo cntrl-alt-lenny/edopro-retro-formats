@@ -902,69 +902,105 @@ upstream script pattern was used as historical evidence.
 The strongest evidence is a same-capture-date split in the official per-card
 FAQ, not a class-wide policy announcement:
 
-* The archived UDE Card Rulings page captured **2005-06-16** gives Rescue Cat
+* The previously cited UDE Card Rulings URL redirected to the exact served
+  replay captured **2005-07-01 23:56:27 GMT**. That served page gives Rescue Cat
   the old rule, including “only 1 or zero Level 3 or lower Beast-Type
   monsters”, with a Deck check. The same capture gives Reinforcement of the
   Army the analogous old permission, “activate this card even if you have no
   Level 4 or lower Warrior-Type monsters”, with Deck confirmation. The page is
   the per-card UDE database, not a general policy text:
-  [UDE Card Rulings archive](http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx);
+  [UDE Card Rulings archive](http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx);
   the passages are also preserved in
   `data/errata/rescue-cat.json` (`events.c0.effective.corroboration`) and
   `data/errata/reinforcement-of-the-army.json` (`event.effective.corroboration`).
 
-* The archived Konami Card FAQ captured **2008-12-15** changes
+* The previously cited Konami Card FAQ URL was observed by the prior
+  adjudication to redirect to the later exact replay captured **2008-12-16
+  16:23:27 GMT**. That served page changes
   Reinforcement of the Army to “You cannot activate ... if you do not have
   any Level 4 or lower Warrior-Type monsters”. In the same captured per-card
   FAQ, Release Restraint still permits activation with no Swordmaster and
   requires the player to show the cards to confirm. These passages
-  are in the [Konami Card FAQ archive](http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html)
-  and are recorded as the source `konami-card-faq-2008-12-15` in
+  are in the [served Konami Card FAQ archive](http://web.archive.org/web/20081216162327/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html)
+  and are recorded as the source `konami-card-faq-2008-12-16` in
   `data/sources.json`. The repository's existing
   `data/errata/release-restraint.json` review note records the same 2008
   capture as the last positive per-card attestation for its relaxed
   activation.
 
-* A second 2008 Card FAQ page gives Skilled White Magician a per-card
+* A second 2008 Card FAQ page returned HTTP 200 with the exact capture
+  timestamp **2008-12-15 05:46:34 GMT** and gives Skilled White Magician a per-card
   restriction: “If there are no ‘Buster Blader’ in your hand, Deck, and
   Graveyard, you cannot activate” its effect. The exact capture is the
   [Skilled White Magician FAQ archive](http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html),
   and the passage and source URL are preserved in
-  `data/errata/skilled-white-magician.json` (`events.c0.effective.corroboration`).
+  `data/errata/skilled-white-magician.json` (`events.c0.effective.corroboration`)
+  and the registered source `konami-card-faq-2008-12-15-skilled-white-magician`.
 
 These sources establish a bounded, card-specific result: the old
 fail-to-find activation was still documented for the cited cards in 2005;
-by the 2008-12-15 capture it had been withdrawn for Reinforcement of the Army,
+by the served 2008-12-16 capture it had been withdrawn for Reinforcement of the Army,
 Rescue Cat, and Skilled White Magician, while it remained expressly allowed
 for Release Restraint. A capture or compilation date is not an exact effective
 date, so these records bound changes to the relevant source intervals; they do
 not date an unseen announcement.
+
+### Served-capture audit
+
+The archived URLs cited for this round are distinguished from the dates stated
+by the documents themselves:
+
+| Cited archive URL | Response actually served | What that timestamp is |
+|---|---|---|
+| `http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx` | HTTP 302 to `http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx`; final memento `2005-07-01 23:56:27 GMT` | UDE page capture served by the replay; not an effective date |
+| `http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html` | Amendment 1 records HTTP 302 to `http://web.archive.org/web/20081216162327/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html`; final memento `2008-12-16 16:23:27 GMT` | FAQ page capture served by the replay; not an effective date |
+| `http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html` | HTTP 200; memento `2008-12-15 05:46:34 GMT` | FAQ page capture; not an effective date |
+| [Starstrike Blast PDF](https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf) | HTTP 200; memento `2011-09-02 05:40:17 GMT` | Archive capture; the PDF itself says “Compiled as of November 4, 2010” |
+| [Storm of Ragnarok PDF](http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf) | HTTP 200; memento `2011-04-09 07:00:40 GMT` | Archive capture; the PDF itself says “Compiled as of February 2, 2011” |
+
+The replay service's treatment of the `20081215065604` URL is therefore
+recorded as the later served capture required by Amendment 1; the source
+record cites the exact `20081216162327` target rather than silently calling the
+served page a December 15 capture. The Starstrike PDF's 2010-11-04 document
+date is likewise distinct from both its 2011-09-02 archive capture and the
+2010-11-16 product-date label that had previously been attached to it.
 
 ### Search log and negative result
 
 I searched the period material available through the repository's registered
 source set and the archived pages above. The results were:
 
-* The **2005 UDE Card Rulings** capture yielded per-card old-state passages
-  for Rescue Cat and Reinforcement of the Army. It did not state that one
-  activation policy governed all search effects, and it did not give a later
-  effective date.
-* The **2008 Konami Card FAQ** `default_pr.html` capture yielded both the
+* The **2005 UDE Card Rulings** URL redirected to the served **2005-07-01
+  23:56:27 GMT** capture, which yielded per-card old-state passages for Rescue
+  Cat and Reinforcement of the Army. It did not state that one activation
+  policy governed all search effects, and it did not give a later effective
+  date.
+* The **2008 Konami Card FAQ** `default_pr.html` URL was recorded by the prior
+  adjudication as redirecting to the served **2008-12-16 16:23:27 GMT** capture,
+  which yielded both the
   Reinforcement of the Army withdrawal and the Release Restraint permission
   on the same captured page. It therefore falsifies a claim that one
   class-wide activation state was already uniform by that date, but it does
   not prove that every card was adjudicated independently.
-* The **2008 Konami Card FAQ** `default_st.html` capture yielded the
-  Skilled White Magician withdrawal. It is another card entry, not a policy
+* The **2008 Konami Card FAQ** `default_st.html` URL returned HTTP 200 with
+  served memento timestamp **2008-12-15 05:46:34 GMT** and yielded the Skilled
+  White Magician withdrawal. It is another card entry, not a policy
   announcement, and does not settle any of the 38 cluster records whose own
   entries are absent from that page.
-* The registered **Machina Mayhem (2010-04-06)**, **Starstrike Blast
-  (2010-11-16)** and **Storm of Ragnarok (2011-02-02)** ruling sources in
-  `data/sources.json` preserve positive old-state verification passages. Their
-  recorded passages concern proving a failed search, not the earlier
-  activation gate, so they do not date the undated axis. The Machina source
-  was unavailable as a readable PDF response during this run; no claim here
-  relies on a new reading of that unavailable response.
+* The registered **Machina Mayhem** source remains labelled by its own passage
+  as “Compiled as of April 6th, 2010”; its archive replay was unavailable as a
+  readable PDF in this audit. The fetched **Starstrike Blast** PDF returned
+  HTTP 200 with served archive timestamp **2011-09-02 05:40:17 GMT** and states
+  on its first page, “Compiled as of November 4, 2010 - <version 1.0>” ([source
+  record](https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf)). The
+  fetched **Storm of Ragnarok** PDF returned HTTP 200 with served archive
+  timestamp **2011-04-09 07:00:40 GMT** and states on its first page,
+  “Compiled as of February 2, 2011 - <version 1.0>” ([source
+  record](http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf)). Thus 2010-11-04 is the
+  Starstrike document date, not 2010-11-16, while 2011-02-02 is the Storm
+  document date, not its archive capture date. These ruling sources concern
+  proving a failed search, not the earlier activation gate, so they do not
+  date the undated axis.
 * The registered **KDE tournament-policy archive** records the first located
   modern no-verification policy capture at 2019-04-03. That is the other axis
   and was not reopened here; it supplies no activation date for the 38-card
