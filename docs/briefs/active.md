@@ -283,3 +283,71 @@ Scope, non-goals and evidence requirements as before. No canonical data,
 errata, schema, `dist/` or test change. Continue on the same branch from
 `f059ed5`; do not rewrite history. The report covers the whole round from base
 `7a304d3e1d0e8ea2bf556a47b74a706119675684`.
+
+---
+
+## Amendment 3 — 2026-09-20, after Brain's third adjudication
+
+The third delivery, `b27592ca60c3a90c5209cb48324bb9e5dfc3efec`, was **not
+accepted**. The Machina correction Amendment 2 asked for is done and is not
+reopened: the record now carries the served timestamp, the document's own date,
+its Commander Covington and Machina Defender passages, and the replay variance
+stated as a property of requests rather than of the source. Good.
+
+But the same defect appeared twice more in the same delivery, and Brain
+confirmed both by diffing each changed record against its version at the base.
+
+### 1. The UDE record lost its verbatim passage
+
+At the base, `ude-card-rulings-archive` quoted the failed-search procedure
+directly:
+
+> 'If you have no eligible monsters, your opponent gets to see your Deck to
+> verify.' — stated for Sangan and Witch of the Black Forest
+
+The delivered record replaces that with Rescue Cat and Reinforcement of the
+Army wording. Both are useful; the base quotation is the one that attests the
+verification procedure itself, and it is now nowhere in the registry. Restore
+it alongside what you added.
+
+### 2. The Starstrike and Storm records carry dates but no evidence
+
+At the base, `konami-set-rulings-archive` recorded what those two documents
+*say*: Starstrike Blast extends failed-search verification to the Extra Deck,
+Storm of Ragnarok extends it to the hand, and 2011-02-02 is therefore the
+latest date the old state is positively attested. The new per-document records
+keep only capture and compilation dates. The Verifier read both PDFs and found
+the passages still there — it quotes Starstrike's "your opponent can verify
+that you have no monsters in your Extra Deck that can be Summoned" and Storm's
+"your opponent may briefly verify that this is the case".
+
+Restore those passages into their own records, in your own reading of the
+PDFs, and make sure the "old state attested through 2011-02-02" reasoning is
+supported by a quoted passage somewhere in the registry or the research
+document. That reasoning is load-bearing for the whole cluster.
+
+### 3. The rule this keeps breaking
+
+**A source record's substantive evidence is added to, never replaced.** When
+you correct a record's dates or provenance, the passages it already quoted
+stay unless you show they were wrong. Correcting how a source is described
+must not cost the project what the source says.
+
+So, in your report: for **every** source record this round changes, show its
+base version and its head version side by side, and state for each what was
+added, what was kept, and what was removed and why. Amendment 2 asked for this
+comparison and the last report did not include it.
+
+### If this recurs
+
+This is the last correction pass on this round. If the next delivery still
+drops evidence a record previously carried, Brain will reject the round,
+return the branch unmerged, and re-brief the source-registry work from the
+base with a narrower scope.
+
+### Unchanged
+
+Scope, non-goals and evidence requirements as before. No canonical data,
+errata, schema, `dist/` or test change. Continue on the same branch from
+`b27592c`; do not rewrite history. The report covers the whole round from base
+`7a304d3e1d0e8ea2bf556a47b74a706119675684`.
