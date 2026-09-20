@@ -952,16 +952,17 @@ by the documents themselves:
 
 | Cited archive URL | Response actually served | What that timestamp is |
 |---|---|---|
-| `http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx` | HTTP 302 to `http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx`; final memento `2005-07-01 23:56:27 GMT` | UDE page capture served by the replay; not an effective date |
-| `http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html` | Amendment 1 records HTTP 302 to `http://web.archive.org/web/20081216162327/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html`; final memento `2008-12-16 16:23:27 GMT` | FAQ page capture served by the replay; not an effective date |
+| `http://web.archive.org/web/20050616025109/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx` | One audit request returned HTTP 302 to `http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx`, final memento `2005-07-01 23:56:27 GMT`; a later direct request returned HTTP 200, memento `2005-06-16 02:51:09 GMT` | Replay result is unstable; neither is an effective date |
+| `http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html` | Amendment 1 records HTTP 302 to `http://web.archive.org/web/20081216162327/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html`, final memento `2008-12-16 16:23:27 GMT`; a later direct request returned HTTP 200, memento `2008-12-15 06:56:04 GMT` | Replay result is unstable; neither is an effective date |
 | `http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html` | HTTP 200; memento `2008-12-15 05:46:34 GMT` | FAQ page capture; not an effective date |
 | [Starstrike Blast PDF](https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf) | HTTP 200; memento `2011-09-02 05:40:17 GMT` | Archive capture; the PDF itself says “Compiled as of November 4, 2010” |
 | [Storm of Ragnarok PDF](http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf) | HTTP 200; memento `2011-04-09 07:00:40 GMT` | Archive capture; the PDF itself says “Compiled as of February 2, 2011” |
 
 The replay service's treatment of the `20081215065604` URL is therefore
-recorded as the later served capture required by Amendment 1; the source
-record cites the exact `20081216162327` target rather than silently calling the
-served page a December 15 capture. The Starstrike PDF's 2010-11-04 document
+recorded as unstable: Amendment 1 observed the later served capture, while a
+later direct request returned the original memento. The source record cites
+the exact `20081216162327` target rather than silently calling that exact
+target a December 15 capture. The Starstrike PDF's 2010-11-04 document
 date is likewise distinct from both its 2011-09-02 archive capture and the
 2010-11-16 product-date label that had previously been attached to it.
 
