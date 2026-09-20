@@ -161,6 +161,19 @@ as of the migration (historical anchor: that corpus is what the freeze was
 proven against). Don't redesign without a concrete counterexample found
 during implementation.
 
+## Owner decision — standing role chats (since 2026-09-16)
+
+The owner keeps **one standing Builder chat and one separate Verifier chat**
+for this project and reuses them across rounds. Brain asks for a fresh or
+cleared chat only when (1) the round is a correction after Brain rejected the
+Builder's work, or (2) a chat has grown very long — and says so explicitly next
+to that prompt, with a one-sentence reason. A Verifier prompt never goes into
+the Builder's chat. Every prompt is therefore written to work in a reused chat:
+it tells the agent to treat it as a new assignment, re-derive state from the
+repository, and not rely on anything earlier in the conversation. This
+overrides the framework's general fresh-context preference except in those two
+cases.
+
 ## Owner decision — merges need explicit owner approval (since 2026-09-16)
 
 Set by the owner on 2026-09-16, overriding the routine-merge delegation in the

@@ -410,3 +410,12 @@ careful, and the Verifier's review was the most thorough so far. Two
 observations worth keeping: a session carried across rounds degraded
 discipline in a visible way, and Brain's own recollection of a set date was
 wrong where both roles, reading the primary source, were right.
+
+**Round 17 (2026-09-16 → 2026-09-20) — roadmap reconciliation
+(`docs/briefs/archive/017-2026-09-16-roadmap-reconciliation.md`).** Returned
+once, then accepted. The first delivery silently updated two dated historical
+records to current values — the project's own "do not convert a later state
+into an earlier one" rule, applied to its own bookkeeping rather than to card
+data. Worth keeping: the Verifier caught it, and it is the same defect class as
+round 13's stale premise, seen from the other side. The second delivery, from a
+cleared Builder chat, fixed exactly what was asked and nothing else.

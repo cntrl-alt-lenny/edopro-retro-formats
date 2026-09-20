@@ -1,187 +1,166 @@
 # Active brief
 
-Status: **active — delivered once, returned for correction (Amendment 1 below)**.
+Status: **queued, not started**.
 
-Identifier: **`017-2026-09-16-roadmap-reconciliation`** — use exactly this
+Identifier: **`018-2026-09-20-search-activation-semantics`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
 
 <!-- Brain bookkeeping (not part of the brief): one brief lives here at a
 time; on adjudication move this file to
-docs/briefs/archive/<NNN>-<date>-<slug>.md (016 is the latest archived) and
+docs/briefs/archive/<NNN>-<date>-<slug>.md (017 is the latest archived) and
 replace it with the next one. -->
 
 ## Read before acting
 
-1. [`AGENTS.md`](../../AGENTS.md) — topology, project invariants, evidence
-   table.
+1. [`AGENTS.md`](../../AGENTS.md) — topology, the non-negotiable project
+   invariants, and the evidence table.
 2. [`docs/agents/roles/worker.md`](../agents/roles/worker.md) — your contract
-   (the Builder holds the Worker contract).
+   (the Builder holds the Worker contract), and its RESEARCH mode rules, which
+   this project calls HISTORICAL RESEARCH.
 3. This brief in full.
 
-Then [`docs/roadmap.md`](../roadmap.md) in full, and each archived brief in
-`docs/briefs/archive/` **only as far as an open roadmap item needs it**. Do
-not read `docs/research/` wholesale; open a research document only when a
-roadmap item or archived outcome points at it for a specific claim.
+Then, and only as far as this brief needs them:
+[`docs/research/edison-behaviour-gaps.md`](../research/edison-behaviour-gaps.md)
+— the sections on the 38-card class, its A/B/C/D partition and the
+"leverage" discussion — and the archived brief
+[`010-2026-09-01-search-verification-interval.md`](archive/010-2026-09-01-search-verification-interval.md)
+with its outcome. Do not read the rest of `docs/research/`.
 
 ---
 
-## MODE: DOCUMENTATION
+## MODE: HISTORICAL RESEARCH
 
 ## Goal
 
-Every item in `docs/roadmap.md` states its true status at the base SHA —
-done, partly done, or open — with a pointer to the evidence, so the next piece
-of project work can be chosen from the roadmap without re-checking it.
+Establish what period evidence says, if anything, about when the **activation
+semantics** of "search and reveal-on-failure" effects changed — the axis that
+is currently completely undated — and whether one historical policy governed
+the whole class or each card was decided separately. An evidenced negative is
+a complete result.
 
 ## Why this is next
 
-Sequencing depends on the roadmap, and it has already misled a round: round
-13's brief re-opened work that had been finished and merged, because the
-roadmap never recorded it. Brain found the same pattern again while choosing
-this round, and did not investigate it fully:
+Round 10 (merged) established that the *other* axis of this class, deck
+verification, is already dated well enough: Edison sits determinately in the
+old era, and narrowing that bracket further would not change a single
+classification. The ambiguity comes entirely from the undated activation axis.
+The same research records that 38 cards share both axes and one upstream
+script pattern, and that a single period source could therefore resolve all of
+them at once — but explicitly marks "one shared policy" as plausible and
+**not confirmed**. That is the question this round answers.
 
-- item 1e (Mind Master card identity) still reads as open, while archived
-  brief 004 and commit history suggest a mechanism for it was merged in
-  round 4;
-- items 6, 8 and 9 read as open, while archived briefs 007 and 008, a
-  `check-deck` command and a CI workflow suggest at least part of each exists.
-
-Treat those as leads to establish, not conclusions. There may be more; the
-roadmap has never been reconciled as a whole.
+The roadmap still describes item 1b as the high-leverage one. That is the
+opposite of what the merged research says, which is Part B.
 
 ## Base
 
 Cut from `origin/main`. Record the literal starting SHA.
 
+## Part A — the historical question
+
+Frame it as a question, not a hypothesis to confirm.
+
+1. **Define the population from the repository, not from this brief.** Derive
+   the card set and the two axes yourself from the research document and the
+   errata records, and state how many records you actually found. If it is not
+   38, that is a finding.
+2. **Establish whether the activation-semantics change was a single policy
+   event or per-card.** Both answers are useful. So is "no period source
+   settles it".
+3. **Look for period evidence with provenance**: Konami/UDE judge materials,
+   period rulings compilations, per-set rulings documents, official FAQ pages,
+   archived tournament-policy documents. For anything you find, state what it
+   actually proves — a document's date, the date it describes, and whether it
+   is contemporary or retrospective are three different things.
+4. **Say what a failed search proves.** It is evidence about the search, never
+   proof that no such policy existed. If you cannot narrow it, record exactly
+   what you searched, how, and what each source did and did not establish, the
+   way round 10 did.
+
+## Part B — correct one roadmap rationale
+
+Roadmap item 1b says narrowing the 2011-02-02..2019-04-03 verification bracket
+"would firm up a large group of records at once". The merged research in
+`edison-behaviour-gaps.md` says narrowing it "would not change this cluster's
+classification at all". Re-read both yourself, decide which is supported, and
+correct whichever is wrong — including, if that is what the evidence shows,
+the research document rather than the roadmap. Do not change the item's
+status; item 1b stays open either way unless Part A closes it.
+
 ## Scope
 
-`docs/roadmap.md` only.
+`docs/research/edison-behaviour-gaps.md` (or a new research document if your
+findings genuinely do not belong in it, with a pointer from the existing one),
+`docs/roadmap.md` item 1b's rationale, and `data/sources.json` for any source
+you actually cite.
 
 ## Non-goals
 
-- No code, data, schema, test, `dist/` or `docs/agents/` change.
-- No new research. If an item's status depends on a question no merged work
-  answered, the item is open — say so; do not investigate the question.
-- Do not reorder, reprioritise, add or delete roadmap items. Sequencing is
-  Brain's. Report anything you think should change instead.
-- `docs/state.md` is Brain's; report anything in it you find contradicted.
+- **No canonical data, schema or errata record changes.** HISTORICAL RESEARCH
+  mode forbids them, and this brief does not authorize an exception. If your
+  findings would change an erratum's chronology, report that as the recommended
+  next round; do not make the change.
+- No `dist/` regeneration, no validator or test changes.
+- Do not reopen the verification-axis bracket itself; round 10 settled its
+  relevance.
+- Do not re-derive round 10's ambiguity tables for their own sake.
 
 ## Protected invariants
 
-- **Repository state outranks every narrative, including this roadmap and the
-  archived briefs.** An archived "accepted" outcome says a round was merged; it
-  does not prove what the code does now. For every item you mark done or
-  partly done, check the present tree at the base SHA — the command exists,
-  the file exists, the test exists and passes — and cite it.
-- **Do not upgrade.** "A brief was written for it" is not "done"; "a mechanism
-  exists" is not "done" if the item asked for more than the mechanism. Where
-  the item's own wording asked for several things, account for each.
-- **Keep history.** Mark completed items the way the roadmap already does
-  (struck title, `Done (<date>)`, a short evidence sentence). Do not rewrite
-  the substance of existing accepted records such as 4b's.
-
-## Required investigation
-
-For each numbered and lettered item in `docs/roadmap.md`:
-
-1. What did the item ask for, in its own words?
-2. What merged work, if any, addresses it — commit, archived brief and
-   outcome?
-3. What does the tree at the base SHA actually contain for it, checked
-   directly?
-4. Therefore: done, partly done (and exactly what remains), or open.
-
-## Acceptance criteria
-
-- Every roadmap item has a status that matches the tree at the base SHA,
-  with an evidence pointer for anything not plainly open.
-- Nothing is marked done that the tree does not support.
-- The four leads above are each explicitly resolved one way or the other.
-- No file other than `docs/roadmap.md` changes.
-
-## Required evidence
-
-- For each status change: the command or file check you ran at the base SHA
-  and its real output.
-- `python -m unittest discover -t . -s tests -v` at your head, on Python 3.10
-  or newer, with real output and exit status (the roadmap is not under test,
-  but nothing else should have changed).
-- `git diff --stat <base>..<head>` showing only `docs/roadmap.md`.
+- **Evidence before confidence** (`AGENTS.md`). Do not convert plausible into
+  proven, retrospective into contemporary, publication date into effective
+  date, or a shared script pattern into a shared historical policy.
+- **A shared upstream implementation is engine evidence, not historical
+  evidence.** That 38 cards use one script pattern says how EDOPro models them
+  today; it says nothing on its own about 2010 policy.
+- Every source you cite gets a real record in `data/sources.json` with what it
+  does and does not establish; validator `sources.missing` applies.
+- Validator baseline: 0 errors, 569 warnings. Suite at base: 1034 tests, OK,
+  25 skipped. GOAT hash `0x28E9FC02`.
 
 ## When to stop
 
-If an item's status turns on a judgement about what the item *meant* rather
-than on what exists — for example, whether an item is done when its core
-landed but an optional part did not — do not pick. Record it as open with the
-exact question, and list it in your report.
+If the evidence supports a class-wide answer for some cards but not others, say
+so with the split rather than generalising. If you find a source that would
+change canonical records, stop at the finding and report it.
+
+## Acceptance criteria
+
+- A stated, sourced answer to Part A's question, or an explicit, specific
+  account of a failed search — with, in either case, what it does and does not
+  establish for the class.
+- The population derived and stated from the repository.
+- Part B's contradiction resolved in whichever direction the evidence supports,
+  with the reasoning visible.
+- No canonical data, schema, errata, `dist/` or test change.
+
+## Required evidence
+
+Per `AGENTS.md`'s evidence table for research documents: for every claim, the
+URL or file and the passage you actually read. Plus
+`python -m retroformats validate`, `python -m retroformats build --check` and
+`python -m unittest discover -t . -s tests -v` with real output and exit status
+on Python 3.10 or newer, and `git status --short data/ formats/ dist/` showing
+no unexpected change.
 
 ## Git expectations
 
 Work only in `.worktrees/builder/`; every file you create or edit must be
-inside it. Branch `builder/roadmap-reconciliation` from `origin/main`. Focused
-commits; push the branch; never push `main`; never merge. Before finishing, run
-`git -C /Users/leo/Dev/edopro-retro-formats status --short` and confirm it
-prints nothing. After your final commit and push, write your report from inside
-`.worktrees/builder/` with
-`python3 tools/report.py write --task 017-2026-09-16-roadmap-reconciliation`
+inside it. Branch `builder/search-activation-semantics` from `origin/main`.
+Focused commits; push the branch; never push `main`; never merge. Before
+finishing, run `git -C /Users/leo/Dev/edopro-retro-formats status --short` and
+confirm it prints nothing. After your final commit and push, write your report
+from inside `.worktrees/builder/` with
+`python3 tools/report.py write --task 018-2026-09-20-search-activation-semantics`
 (Python 3.10+), as well as displaying it.
 
 ## Completion-report schema
 
-The Worker contract's report, plus a table with one row per roadmap item:
-item, previous status, new status, evidence (commit / archived brief / tree
-check), and what remains if partly done. Then a list of judgement calls left
-open, and anything you found contradicted in `docs/state.md`.
+The Worker contract's report, plus:
 
----
-
-## Amendment 1 — 2026-09-16, after Brain's first adjudication
-
-The first delivery, `32ad9439a4d7b131af69835d5ead92e12a881aeb` on
-`builder/roadmap-reconciliation`, was **not accepted**. Most of it was checked
-and stands: every other status, including 1e done and 7, 8 and 9 partly done,
-matches the tree. The round stays open on the same branch and identifier.
-Continue from `32ad943`; do not rewrite or force-push history. This amendment
-lives on `origin/main`: read it with
-`git show origin/main:docs/briefs/active.md`.
-
-### 1. Dated records were rewritten — restore them
-
-Item 4 is recorded as **Done (2026-08-19)** and says Edison "materialises to
-3,673 cards"; item 12 is **Done (2026-08-27)** and says "4,562-card". Those were
-the counts on those dates. Round 14 (2026-09-16) added one card to each pool.
-The delivery replaced the old numbers with today's, so each dated record now
-states a count that was not true on its date — the brief's "Keep history"
-invariant, and the project's rule against converting a later state into an
-earlier one.
-
-Restore both original figures verbatim. Where the current count is worth
-recording, add it alongside and attribute the change to round 14 with its date,
-without altering the original sentence. Changing item 4's pointer from "4a–4c"
-to "4a–4d" is a navigation fix, not a historical claim, and may stay.
-
-### 2. Item 6 was under-credited
-
-The delivery marks item 6 partly done because forbidden card types are not
-inspected. That scope question was already adjudicated: archived brief 008
-required "a definite, evidenced answer on `forbidden_card_types`", round 8
-answered that the check is redundant for the three current formats, round 9
-corrected the reasoning, and both rounds were accepted. The evidence is in the
-comment above the `not checked: forbidden_card_types` message in
-`retroformats/deckcheck.py`. Re-read that rationale yourself and record item 6's
-status from it. Keep its limit visible: by that same rationale the argument
-covers these three formats, not future ones.
-
-### 3. Report accuracy
-
-The first report said accepted records "were not otherwise rewritten", which
-the diff contradicted. The new report must list every line in the diff that
-touches a record carrying a `Done (<date>)` marker, and say what changed.
-
-### Unchanged
-
-Scope, non-goals and evidence requirements are as above. Only
-`docs/roadmap.md` changes. Before finishing, confirm
-`git -C /Users/leo/Dev/edopro-retro-formats status --short` prints nothing. The
-report covers the whole round from base
-`35aa225ada20f1b5dc48333ca858a6da6b80b2d1`.
+- the population you derived, and how;
+- every source searched, with what each did and did not establish;
+- your answer to "one policy or per-card", stated at the confidence the
+  evidence supports;
+- what you deliberately left for a later round, especially anything that would
+  touch canonical records.
