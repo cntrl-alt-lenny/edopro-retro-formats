@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "label": "progress",
+  "message": "7/12 areas",
+  "color": "blue",
+  "cacheSeconds": 300,
+  "source": "formats/*/format.json implementation_status",
+  "complete_or_verified_areas": 7,
+  "total_areas": 12,
+  "formats": [
+    {
+      "id": "2005-04-goat",
+      "name": "Goat Format",
+      "areas": {
+        "banlist": "verified",
+        "card_pool": "complete",
+        "rule_profile": "partial",
+        "errata": "complete"
+      },
+      "overall": "partial"
+    },
+    {
+      "id": "2010-03-edison",
+      "name": "Edison Format",
+      "areas": {
+        "banlist": "verified",
+        "card_pool": "verified",
+        "rule_profile": "partial",
+        "errata": "partial"
+      },
+      "overall": "partial"
+    },
+    {
+      "id": "2011-09-tengu",
+      "name": "Tengu Format",
+      "areas": {
+        "banlist": "verified",
+        "card_pool": "verified",
+        "rule_profile": "partial",
+        "errata": "partial"
+      },
+      "overall": "partial"
+    }
+  ]
+}

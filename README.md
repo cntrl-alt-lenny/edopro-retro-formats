@@ -6,8 +6,9 @@
 
 <p>
   <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/actions/workflows/ci.yml"><img src="https://github.com/cntrl-alt-lenny/edopro-retro-formats/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/docs/assets/progress-badge.json"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcntrl-alt-lenny%2Fedopro-retro-formats%2Fmain%2Fdocs%2Fassets%2Fprogress-badge.json&style=flat" alt="Progress: 7/12 areas"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f.svg" alt="MIT license"></a>
+  <a href="https://github.com/cntrl-alt-lenny/edopro-retro-formats/blob/main/LICENSE"><img src="https://img.shields.io/github/license/cntrl-alt-lenny/edopro-retro-formats?style=flat" alt="license: MIT"></a>
 </p>
 
 <p>Canonical sources in. Validated EDOPro assets out.</p>
