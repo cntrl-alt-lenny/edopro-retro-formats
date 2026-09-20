@@ -285,6 +285,13 @@
       "notes": "UDE's per-card rulings database, the ruling layer in force in the GOAT era. The 2005-06-16 capture (inside the April-October 2005 GOAT window) states the failed-search verification procedure verbatim for Sangan and Witch of the Black Forest: 'If you have no eligible monsters, your opponent gets to see your Deck to verify.' Reinforcement of the Army's entry then permitted activation with no valid target subject to the same verification; by the 2008-12-15 yugioh-card.com Card FAQ capture that had changed to 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck' - per-card activation-condition chronology differs from the shared verification chronology. Retrieved 2026-08-20."
     },
     {
+      "id": "konami-card-faq-2008-12-15",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ pages (Internet Archive capture, 2008-12-15)",
+      "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+      "notes": "Per-card Card FAQ capture used for activation-semantics chronology. The Reinforcement of the Army entry says, 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck'; the Release Restraint entry says, 'If you do not have any copies of Gearfried the Swordmaster in your hand or Deck, you can still activate this card ... but you will need to show your cards to your opponent to confirm.' The capture date bounds those two card-specific states; it is not a dated announcement of a class-wide policy or an exact effective date. Retrieved 2026-09-20."
+    },
+    {
       "id": "konami-set-rulings-archive",
       "kind": "official",
       "title": "Konami per-set Card Rulings documents, 2010-2011 (yugioh-card.com, Internet Archive)",
