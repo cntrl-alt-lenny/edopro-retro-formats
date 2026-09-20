@@ -419,3 +419,14 @@ into an earlier one" rule, applied to its own bookkeeping rather than to card
 data. Worth keeping: the Verifier caught it, and it is the same defect class as
 round 13's stale premise, seen from the other side. The second delivery, from a
 cleared Builder chat, fixed exactly what was asked and nothing else.
+
+**Round 18 (2026-09-20) — search activation semantics
+(`docs/briefs/archive/018-2026-09-20-search-activation-semantics.md`).**
+Accepted on the fourth delivery. The research was right the first time; three
+rejections were all the same mechanical defect, a rewritten source record
+losing the passage it used to quote. Two lessons. First, when a round's job is
+to *correct* provenance, say explicitly that corrections are additive —
+otherwise "tidy the record" reads as "rewrite the record". Second, the
+Verifier caught two of the three instances and Brain caught the first; the
+per-record base-versus-head comparison, once demanded in the brief, made the
+fourth delivery verifiable in minutes instead of by re-reading prose.
