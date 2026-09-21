@@ -1293,3 +1293,13 @@ old/new state. At Edison (2010-04-24), the five activation axes are therefore
 attested NEW by the 2008 capture; their shared verification axis remains OLD,
 so no new implementation bracket or canonical output is implied by this
 research-only distinction.
+
+The registered per-set PDFs were also checked. Starstrike Blast's Formula
+Synchron document has a separate Mystic Tomato passage: “If your Mystic
+Tomato is attacked and destroyed while Vanity’s Emptiness is active, you
+cannot activate the effect of Mystic Tomato.” That is a global Special Summon
+restriction, not a statement about an absent eligible monster in the Deck, so
+it does not move Mystic Tomato's activation bound. Storm of Ragnarok mentions
+Giant Rat only in another card's example list, not in a Giant Rat entry, and
+Machina Mayhem has no entry for a cluster card. These per-set passages were
+therefore not used to infer any activation date.
