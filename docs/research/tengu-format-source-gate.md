@@ -258,8 +258,8 @@ the packet's `historical_fallback_mapping` and is asserted against live
 count is 52 and the mapping is identity-pinned, not merely counted. The same
 packet and test pin 33 determinate MODERN, 52 determinate
 `reuse-upstream`, 38 determinate `known-gap`, 3 determinate `none-needed`,
-161 ambiguous-modern-possible, 9 ambiguous-modern-impossible, 47 records
-with unresolved candidates, and 89 unresolved candidate-state occurrences.
+161 ambiguous-modern-possible, 9 ambiguous-modern-impossible, 42 records
+with unresolved candidates, and 79 unresolved candidate-state occurrences.
 
 ## Edison → Tengu comparison
 

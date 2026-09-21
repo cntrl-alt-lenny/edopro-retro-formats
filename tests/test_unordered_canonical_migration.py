@@ -30,6 +30,22 @@ SOURCE_COMMIT = "b0b8b7d8cc129e827fd684b3d880f6fcaedb80d9"
 HISTORICAL_POST_COMMIT = "dec24733359358d993ab275ad4ec3ea7ef95044e"
 HISTORICAL_MANUAL_IDS = {"erratum-insect-imitation", "erratum-last-will"}
 CURRENT_REMAINING_V1_IDS = set()
+DELIVERED_HEAD = "1733d7c8c0450d7c736794094cba5ce416ad6739"
+CORRECTION_GAP_IDS = frozenset(
+    {
+        "erratum-freed-the-matchless-general",
+        "erratum-fusion-sage",
+        "erratum-horus-the-black-flame-dragon-lv4",
+        "erratum-thunder-dragon",
+        "erratum-toon-table-of-contents",
+    }
+)
+CORRECTION_GAP_REASON = (
+    "Project Ignis has no implementation of this intermediate state: the modern script "
+    "already enforces the new activation requirement, but it does not reproduce the old "
+    "procedure of letting the opponent verify the Deck after a failed search."
+)
+CORRECTION_GAP_SOURCES = ["ignis-babelcdb", "ignis-cardscripts"]
 
 
 def _pre_migration_rows():
@@ -124,6 +140,33 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         for row in self.targets:
             rid = row["id"]
             expected = gate.materialize(self.frozen.errata[rid], self.frozen)
+            if rid in CORRECTION_GAP_IDS:
+                # The five records received additive, independently reviewed
+                # evidence after the migration gate was frozen. Preserve that
+                # delivered payload exactly, then pin this correction's one
+                # authorized state addition rather than weakening the payload
+                # comparison for the rest of the corpus.
+                delivered = json.loads(
+                    subprocess.check_output(
+                        [
+                            "git",
+                            "show",
+                            f"{DELIVERED_HEAD}:data/errata/{rid.removeprefix('erratum-')}.json",
+                        ],
+                        text=True,
+                    )
+                )
+                expected["events"] = delivered["events"]
+                expected["states"] = delivered["states"] + [
+                    {
+                        "events": ["c1"],
+                        "coverage": {
+                            "kind": "known-gap",
+                            "gap_reason": CORRECTION_GAP_REASON,
+                            "gap_sources": CORRECTION_GAP_SOURCES,
+                        },
+                    }
+                ]
             actual = self.raw[rid]
             # The migration payload remains authoritative for every semantic
             # field.  This cleanup intentionally permits only the separately
@@ -253,12 +296,17 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual([], before_validator.errors)
         self.assertEqual([], after_validator.errors)
         self.assertEqual(
-            Counter({"format.erratum-modern-known-wrong": 2}),
+            Counter({"format.erratum-known-divergence": 5}),
             Counter(f.code for f in after_validator.warnings)
             - Counter(f.code for f in before_validator.warnings),
         )
         self.assertEqual(
-            Counter({"format.erratum-unresolved-defaulted": 2}),
+            Counter(
+                {
+                    "format.erratum-modern-known-wrong": 3,
+                    "format.erratum-unresolved-defaulted": 2,
+                }
+            ),
             Counter(f.code for f in before_validator.warnings)
             - Counter(f.code for f in after_validator.warnings),
         )

@@ -179,8 +179,8 @@ class TenguResearchGateTest(unittest.TestCase):
             sum(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
             for s in selections.values()
         )
-        self.assertEqual(47, unresolved_records)
-        self.assertEqual(89, unresolved_occurrences)
+        self.assertEqual(42, unresolved_records)
+        self.assertEqual(79, unresolved_occurrences)
 
         fallback_format = replace(
             self.repo.formats["2010-03-edison"],
@@ -199,7 +199,7 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual(52, len(actual_mapping))
 
         audit = self.packet["release_certification"]["erratum_audit_at_snapshot"]
-        self.assertEqual(89, audit["unresolved_candidate_state_occurrences"])
+        self.assertEqual(79, audit["unresolved_candidate_state_occurrences"])
         self.assertEqual(52, audit["historical_substitution_count"])
         self.assertEqual(
             EXPECTED_EDISON_STYLE_FALLBACK,

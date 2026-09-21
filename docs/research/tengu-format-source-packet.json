@@ -217,7 +217,7 @@
       "determinate_none_needed": 3,
       "ambiguous_modern_possible": 161,
       "ambiguous_modern_impossible": 9,
-      "unresolved_candidate_state_occurrences": 89,
+      "unresolved_candidate_state_occurrences": 79,
       "historical_substitution_count": 52,
       "historical_fallback_mapping": [
         {"id":"erratum-splendid-venus","modern_passcode":5645210,"historical_passcode":511003054},

@@ -1579,17 +1579,17 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
 
         audit = self.packet["errata_audit"]
         self.assertEqual(296, audit["total"])
-        self.assertEqual(146, len(determinate))
-        self.assertEqual(150, len(ambiguous))
-        self.assertEqual(146, audit["chronology"]["determinate"])
-        self.assertEqual(150, audit["chronology"]["ambiguous"])
+        self.assertEqual(148, len(determinate))
+        self.assertEqual(148, len(ambiguous))
+        self.assertEqual(148, audit["chronology"]["determinate"])
+        self.assertEqual(148, audit["chronology"]["ambiguous"])
 
         determinate_modern = sum(selection.is_modern for selection in determinate)
         determinate_historical = len(determinate) - determinate_modern
         self.assertEqual(21, determinate_modern)
-        self.assertEqual(125, determinate_historical)
+        self.assertEqual(127, determinate_historical)
         self.assertEqual(21, audit["determinate"]["modern"])
-        self.assertEqual(125, audit["determinate"]["historical"])
+        self.assertEqual(127, audit["determinate"]["historical"])
 
         determinate_coverage = {}
         for selection in determinate:
@@ -1597,14 +1597,14 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 continue
             kind = selection.candidates[0].coverage.kind.value
             determinate_coverage[kind] = determinate_coverage.get(kind, 0) + 1
-        self.assertEqual({"reuse-upstream": 79, "known-gap": 42, "none-needed": 4}, determinate_coverage)
+        self.assertEqual({"reuse-upstream": 81, "known-gap": 42, "none-needed": 4}, determinate_coverage)
         self.assertEqual(determinate_coverage, audit["determinate"]["coverage"])
         self.assertEqual(set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed"})
 
         self.assertEqual(104, sum(selection.modern_is_possible for selection in ambiguous))
-        self.assertEqual(46, sum(not selection.modern_is_possible for selection in ambiguous))
+        self.assertEqual(44, sum(not selection.modern_is_possible for selection in ambiguous))
         self.assertEqual(104, audit["ambiguous"]["modern_possible"])
-        self.assertEqual(46, audit["ambiguous"]["modern_impossible"])
+        self.assertEqual(44, audit["ambiguous"]["modern_impossible"])
 
         coverage_occurrences = {}
         candidate_occurrences = 0
@@ -1613,10 +1613,10 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             for candidate in selection.candidates:
                 kind = candidate.coverage.kind.value
                 coverage_occurrences[kind] = coverage_occurrences.get(kind, 0) + 1
-        self.assertEqual(302, candidate_occurrences)
-        self.assertEqual(302, audit["ambiguous"]["candidate_occurrences"])
+        self.assertEqual(298, candidate_occurrences)
+        self.assertEqual(298, audit["ambiguous"]["candidate_occurrences"])
         self.assertEqual(
-            {"reuse-upstream": 144, "unresolved": 47, "known-gap": 7, "modern": 104},
+            {"reuse-upstream": 142, "unresolved": 42, "known-gap": 10, "modern": 104},
             coverage_occurrences,
         )
         self.assertEqual(coverage_occurrences, audit["ambiguous"]["candidate_coverage_occurrences"])
@@ -1631,8 +1631,8 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             if (selection := record.selection_at(snapshot)).chronology == "ambiguous"
             and any(candidate.coverage.kind is Coverage.UNRESOLVED for candidate in selection.candidates)
         )
-        self.assertEqual(46, len(modern_impossible_ids))
-        self.assertEqual(47, len(unresolved_record_ids))
+        self.assertEqual(44, len(modern_impossible_ids))
+        self.assertEqual(42, len(unresolved_record_ids))
         self.assertEqual(modern_impossible_ids, audit["ambiguous_modern_impossible_ids"])
         self.assertEqual(unresolved_record_ids, audit["ambiguous_unresolved_record_ids"])
 
@@ -1653,10 +1653,10 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         substitutions.sort(key=lambda row: row["erratum_id"])
         digest_input = json.dumps(substitutions, separators=(",", ":"), sort_keys=True).encode("utf-8")
         digest = hashlib.sha256(digest_input).hexdigest()
-        self.assertEqual(79, len(substitutions))
+        self.assertEqual(81, len(substitutions))
         self.assertEqual(substitutions, audit["determinate_historical_substitutions"])
         self.assertEqual(digest, audit["determinate_historical_substitutions_digest"])
-        self.assertEqual("b45a38f83be490899d2fd64198b70ea86170ea55f1c24ef3c50194d0546ceaa2", digest)
+        self.assertEqual("8ccefe0818807ab72ec1d7509a1e70d60787055c17881ecb589d48735b9f5df1", digest)
 
     def test_repository_has_the_certified_ocg_ledger_but_no_early_canonical_artifacts(self):
         # Regression 14/15: no canonical Tokyo Dome artifacts exist; existing
@@ -1688,7 +1688,7 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         audit = self.packet["errata_audit"]
         policy = audit["modern_policy_effect"]
         self.assertTrue(policy["explicit_policy_required"])
-        self.assertEqual(150, policy["ambiguous_records_left_unresolved"])
+        self.assertEqual(148, policy["ambiguous_records_left_unresolved"])
         self.assertFalse(policy["certifiable"])
         self.assertEqual(Coverage.UNRESOLVED.value, "unresolved")
 

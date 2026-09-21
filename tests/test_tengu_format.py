@@ -248,8 +248,8 @@ class TenguFormatTest(unittest.TestCase):
             sum(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
             for s in selections.values()
         )
-        self.assertEqual(47, unresolved_records)
-        self.assertEqual(89, unresolved_occurrences)
+        self.assertEqual(42, unresolved_records)
+        self.assertEqual(79, unresolved_occurrences)
 
     def test_20_exact_52_historical_substitutions_match_approved_mapping(self):
         overrides = select_applicable_errata(self.fmt, self.repo)
