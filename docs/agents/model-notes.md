@@ -467,3 +467,14 @@ provenance pair seen in round 18 — a rewrite dropping evidence, and a citation
 with no source record. A written rule did not prevent either. Tally since
 adoption (rounds 14-22): escaped defects 0; deliveries per accepted round
 17/9 ≈ 1.9; rounds changing card data 2 of 9.
+
+**Round 23 (2026-09-21) — citation registry check
+(`docs/briefs/archive/023-2026-09-21-citation-registry-check.md`).** Accepted
+on the third delivery. Both returns were exemption scope leaking — first across
+files, then within a file. The second was invited by Brain's own loose wording;
+restating the requirement as testable constraints ("never licenses another
+occurrence; survives unrelated edits; visible at the occurrence") produced a
+correct delivery at once. Lesson for briefs that ask for a guard: specify the
+attacks it must survive, not the property in prose. Tally since adoption
+(rounds 14-23): escaped defects 0; deliveries per accepted round 20/10 = 2.0;
+rounds changing card data 2 of 10.
