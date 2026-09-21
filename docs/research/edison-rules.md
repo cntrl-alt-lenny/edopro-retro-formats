@@ -243,8 +243,111 @@ after an unrelated chain resolves) remain recorded, unchanged, in `known_gaps`.
 | 6 | Two 0-ATK monsters battling each other are BOTH destroyed | **[period-evidence, date corrected 2026-08-21]** Official Rulebook v7.1 (25 days pre-Edison): the ATK-tie rule ("both monsters are destroyed") carries **no ATK-value exception**. The exception ("neither monster is destroyed") first appears in Official Rulebook **Version 7.2**, page 43 — packaged with **Structure Deck: Dragunity Legion**, TCG street date **~2011-03-04/08** (`yugipedia-dragunity-legion-structure-deck`), ~10.5 months after Edison — not "May 2011 / 13 months" as an earlier pass of this research wrote, which mistook the Wayback capture date of an already-released PDF for its release date. Independently confirmed by a dated (**2011-03-08**) Pojo.com Forums post from Konami's own TCG "Judge Manager," quoting the exact new clause verbatim and stating plainly it was a genuine change, "at least for the TCG" (`pojo-atk0-rulebook-change-2011`) — this is also the exact source EdisonFormat.com itself cites. `konami-official-rulebook-v72-2011-dragunity` (renamed/corrected from a mislabeled "New Master Rules" source entry — direct PDF-text inspection confirms it IS Version 7.2, not a separate later edition). | `DUEL_0_ATK_DESTROYED` (`processor.cpp:2974`, re-verified): the tie-destroys-both branch requires `a != 0` unless this flag is set. | No | **B — add `DUEL_0_ATK_DESTROYED`** | **High.** Period-primary, dated on both sides of Edison, plus an engine test (`ZeroAtkBattleFlagTest`) empirically confirms the flag's effect on real battle resolution. The historical conclusion (add the flag) is unchanged by the date correction. |
 | 7 | Attack "replay" is auto-declined and not counted against the attacker's announce count unless explicitly canceled | **[period-evidence]** Official Rulebook v7.1 (25 days pre-Edison) documents Replay as an **active choice** every time ("you can choose to attack with the same monster again, or... a different monster, or... not attack at all") — the modern discretionary procedure was already the documented rule at Edison. Read as most likely a simulator-only UX default in the first place, not a paper-TCG rule a rulebook would ever need to state either way. | `DUEL_STORE_ATTACK_REPLAYS` (`processor.cpp:2190-2220`, re-verified): auto-declines the replay prompt and conditionally skips the announce-count increment. | No | **Confirmed correct as-is — do not add.** | Medium-high (the general replay procedure is well-attested as discretionary; the flag's specific "software default" framing is inference). |
 | 8 | A monster whose control changed after being Summoned CAN be repositioned by its new controller (vs. the modern restriction, which follows the summoning player) | **[secondary only]** Only a modern community site (edisonformat.net) makes this specific claim, uncorroborated. The general rulebook clause ("cannot change the position of a monster played onto the field this turn") is worded per-monster and is **verbatim unchanged 2008→2011**, so it cannot itself date this claim either way — the real answer would need a specific period ruling/FAQ entry, which was not found in any of the rulings PDFs checked. | `DUEL_CAN_REPOS_IF_NON_SUMPLAYER` (`card.cpp:3272,3773`, re-verified): bypasses the restriction when control changed after the Summon. | No | **E — unresolved** | Low. Leave the profile as-is; the only source is an uncited modern community claim. |
-| 9 | Simultaneous Trigger Effects: TCG-specific handling of (a) hidden/non-public triggers folded into the main ordering pass, and (b) triggers from multiple different simultaneous events restricted to only the earliest event | **[period-evidence, genuinely contested]** The official Rulebook (v6.0 through v8.0, 2008-2011, bracketing Edison — text confirmed byte-identical across all four dated captures) describes a **simple two-tier system**: the turn player's simultaneous triggers go first (freely ordered by that player), then the opponent's — with **no mandatory-before-optional split and no "earlier trigger first" tiebreak** anywhere in the text. This directly **contradicts** EdisonFormat.com's own claimed four-tier structure. A 2012 forum thread (two years after Edison) claims the stricter structure was already unwritten tournament-floor practice "for years," which cannot be verified against any 2008-2011 document. Neither of the two SPECIFIC mechanics these ocgcore flags actually implement (non-public-trigger folding; first-event-only restriction) is addressed by any period source in either direction — the rulebook's own worked examples never involve a hidden-zone trigger or two distinct simultaneous events. | `DUEL_TCG_SEGOC_NONPUBLIC` (`field.cpp:3235-3251`, re-verified) and `DUEL_TCG_SEGOC_FIRSTTRIGGER` (`processor.cpp:641-653`, re-verified). | No | **E — unresolved** | Low, and genuinely contested rather than merely under-evidenced: the strongest period-primary source available (the rulebook) describes a simpler baseline than the community claims, and the two specific flag mechanics are untouched by any source found either way. Leave the profile as-is; this is the highest-value open item for future research (candidate lead: an unlocated "Rulebook v9/9.1" edition between Nov 2011 and 2017). |
+| 9 | Simultaneous Trigger Effects: TCG-specific handling of (a) hidden/non-public triggers folded into the main ordering pass, and (b) triggers from multiple different simultaneous events restricted to only the earliest event | **[period-evidence, genuinely contested]** The Official Rulebook Version 7.1 served **2010-03-30 23:18:27 GMT** says, "If effects of Spell Speed 1 cards (like Trigger effects) are activated at the same time, they will be resolved in a special Chain. This Chain is made starting with the turn player's effects. ... the turn player builds the Chain with their card effects, selecting the order in which they go on the Chain. Then the opponent continues the Chain with their effects." The archived Advanced Gameplay FAQ served **2008-12-15 06:55:52 GMT** gives the same two-tier rule and examples for Mystic Tomato, Sangan, Witch of the Black Forest, and Black Pendant. These official texts establish a general same-time ordering baseline, with no mandatory-before-optional split and no "earlier trigger first" tiebreak in the passages read. They do **not** say that a trigger whose condition is learned only from a hidden zone is folded into that ordering pass, and they do **not** restrict triggers from multiple distinct simultaneous events to the earliest event. Their examples concern one simultaneous event; the Rulebook's separate "If both players conduct actions simultaneously" paragraph says only that the turn player acts first. The 2010-04-06 Machina Mayhem rulings document likewise contains card-specific Chain statements, including "Special Summoning this monster with its effect does not start a Chain" and "The effect to Special Summon starts a Chain," but no general rule for either flag mechanic. A 2012 forum thread claims the stricter structure was already unwritten tournament-floor practice "for years," which cannot be verified against these 2008-2010 official texts. | `DUEL_TCG_SEGOC_NONPUBLIC` (`field.cpp:3235-3251`, re-verified) and `DUEL_TCG_SEGOC_FIRSTTRIGGER` (`processor.cpp:641-653`, re-verified). | No | **E — unresolved** | Low, and genuinely contested rather than merely under-evidenced: period-primary material now confirms the simple same-time ordering baseline but leaves both specific flag mechanics unaddressed. Leave the profile as-is; a later research round should seek a period ruling that directly tests hidden-zone trigger knowledge and the multiple-event earliest-only question before recommending a profile change. |
 | 10 | The starting player draws in the first Draw Phase | Already governed by `DUEL_1ST_TURN_DRAW`, part of MR1's own baseline (unchanged since GOAT; out of scope for this GOAT-extras review — see Scope). EdisonFormat.com's Rule #1 makes the same claim with no ocgcore-flag correspondence beyond this existing baseline flag. | `DUEL_1ST_TURN_DRAW` (`processor.cpp:3381`) — already active. | **Yes (inherited from MR1)** | **A — already correct, no action** | High (uncontested; not a GOAT-extra). |
+
+## Round 22 — SEGOC period evidence (2026-09-21)
+
+This round rechecked the two unresolved SEGOC mechanics separately against
+official or officially issued TCG material that could have been in effect from
+about 2009 through the Edison snapshot on 2010-04-24. The question was not
+whether a current engine flag has a plausible name: `DUEL_TCG_SEGOC_NONPUBLIC`
+removes an engine restriction on trigger effects whose conditions are learned
+in a hidden zone, while `DUEL_TCG_SEGOC_FIRSTTRIGGER` limits a group of triggers
+from different simultaneous events to the earliest event. Historical evidence
+and engine representability remain separate axes.
+
+### Source families searched and passages read
+
+* **Official Rulebook Version 7.1**, archived at
+  `https://web.archive.org/web/20100330231827/http://www.yugioh-card.com:80/en/rulebook/YGO_BegGuide_Ver7-1.pdf`, served HTTP 200 with memento
+  `2010-03-30 23:18:27 GMT`. In the “When multiple cards are activated
+  simultaneously” section, the PDF says: “If effects of Spell Speed 1 cards
+  (like Trigger effects) are activated at the same time, they will be resolved
+  in a special Chain. This Chain is made starting with the turn player's
+  effects. ... the turn player builds the Chain with their card effects,
+  selecting the order in which they go on the Chain. Then the opponent
+  continues the Chain with their effects.” Its neighboring paragraph says, for
+  effects that resolve simultaneously, “the turn player resolves the effect
+  first.” These passages establish turn-player-first ordering for effects
+  already identified as simultaneous. They do not mention a hidden-zone
+  trigger being admitted because its condition is private, and they do not say
+  that only the earliest of multiple distinct events contributes triggers.
+
+* **Konami Advanced Gameplay FAQ**, archived at
+  `https://web.archive.org/web/20081215065552/http://www.yugioh-card.com:80/en/gameplay/faqs/advancedgameplay/`, served HTTP 200 with memento
+  `2008-12-15 06:55:52 GMT`. Its “Simultaneous Effects” passage says:
+  “Whenever you have simultaneous effects, resolve them in a chain, even if
+  they are Spell Speed 1 effects,” then, “If only one player has simultaneous
+  effects being activated, then that player can choose the order in which they
+  resolve,” and, when both players have them, the turn player's effect is
+  “Step 1” followed by the opponent's. Its examples are Mystic Tomato versus
+  Mystic Tomato, two Sangans sent by Dark Hole, Witch of the Black Forest
+  versus Witch of the Black Forest, and Sangan versus Black Pendant. They are
+  same-event examples. The FAQ contains no hidden-zone/private-knowledge
+  folding rule and no earliest-event-only rule.
+
+* **Konami Machina Mayhem Card Rulings**, archived at
+  `http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf`, served HTTP 200 with memento
+  `2010-06-02 05:16:20 GMT`. The PDF's first page says “Compiled as of April
+  6th, 2010 - <version 1.0>.” Its card-specific passages say “Special
+  Summoning this monster with its effect does not start a Chain,” “The effect
+  to Special Summon starts a Chain,” and, for two monsters destroyed together,
+  “you choose which one of those monsters you will look at when you activate
+  the effect.” These passages distinguish one card's chain-start condition and
+  one card's choice of a destroyed monster; they do not establish either
+  general SEGOC mechanic. The document date is 2010-04-06, while the served
+  memento is 2010-06-02; neither is treated as an exact effective date.
+
+* **KDE Official Yu-Gi-Oh! TCG Tournament Policy v1.0**, a surviving copy at
+  `https://www.etcg.de/uploads/pdf/KDE_YuGiOh_Policy.pdf`, identifies itself as
+  “Valid as of February1, 2010” and “v1.0.” It says that Tournament Policy
+  documents explain “what is required of tournament attendees, how they should
+  prepare for the event, and what the event will be like.” I read all eight
+  pages and searched the extracted text for `simultaneous`, `SEGOC`,
+  `mandatory`, `optional`, `trigger`, `hidden`, `private`, `non-public`, and
+  `earliest`: none of those terms occurs. The only chain passage is the
+  end-of-round life-point procedure: “If Life Points are changed as a chain is
+  being created ... If Life Points are changed as a chain is resolving, all
+  effects that are already on a chain should be resolved before comparing Life
+  Points.” That is tournament timing, not trigger ordering, so this policy
+  family supplies no evidence for either mechanic.
+
+* **75th Shonen Jump Championship Edison FAQ**, archived at
+  `https://web.archive.org/web/20100411073444/http://www.yugioh-card.com/en/events/sjc/2010_FAQ/SJC-75th_FAQ.html`, served HTTP 200 with memento
+  `2010-04-11 07:34:44 GMT`. It identifies the event as “April 24 - 25, 2010”
+  and is a pre-event legality and event-information FAQ. I read the page and
+  searched for `SEGOC`, `trigger`, `chain`, `mandatory`, and `optional`; no
+  SEGOC passage was present. The two hits for “simultaneously” concern public
+  event scheduling, not duel effects. It therefore does not establish either
+  mechanic at Edison.
+
+### Separate conclusions
+
+**Hidden-zone trigger folding (`DUEL_TCG_SEGOC_NONPUBLIC`).** The period
+official texts establish that simultaneous Spell Speed 1 effects can be put
+into a special Chain and ordered by turn player then opponent. None of the
+passages read says that a trigger from the Deck, hand, or face-down Extra Deck
+is included in that ordering when the triggering condition is not public. The
+Rulebook's “Public knowledge” paragraph discusses counts of cards in hands and
+Decks and cards in Graveyards; it does not adjudicate hidden trigger
+knowledge. Historical truth is therefore unresolved, and the current engine
+flag's ability to remove a hidden-zone restriction is not evidence that TCG
+Edison had that behavior.
+
+**Earliest simultaneous event only (`DUEL_TCG_SEGOC_FIRSTTRIGGER`).** The same
+period texts establish player ordering once effects are simultaneous, but they
+do not define a group of different simultaneous events and do not select only
+the earliest event. “The turn player resolves the effect first” is a player
+ordering rule, not an earliest-event rule. Historical truth is unresolved, and
+the engine flag's first-event filter is not evidence that the TCG used it.
+
+**Recommendation for a later profile round.** Do not change the Edison rule
+profile on this evidence and do not treat the simple two-tier passages as proof
+for either flag. Preserve both as research/implementation gaps. A later round
+should seek a period card ruling or judge instruction that directly tests each
+mechanic; if none can be found, the negative search is complete but the two
+historical claims remain unknown rather than false.
 
 ### Claimed rule differences with no ocgcore flag at all
 
