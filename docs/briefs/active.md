@@ -177,3 +177,47 @@ Everything else in the brief, including not registering the backlog and not
 editing research documents or source records. The report covers the whole
 round from base `f518cc3b8f4a773e07f8bcf54de90331f7377254`, and states plainly
 anything the check still does not catch.
+
+---
+
+## Amendment 2 — 2026-09-21, after Brain's second adjudication
+
+The second delivery, `0141962f049858328d3d85ced04da4fe0802d1b9`, was **not
+accepted**. The cross-file leak is fixed and stays fixed; the backlog, ratchet
+and everything else Amendment 1 said stands still stand.
+
+### The exemption is scoped to a file, not a location
+
+The redirect-destination exemption now checks only that the occurrence is in
+`docs/research/edison-behaviour-gaps.md`. Any use of those URLs anywhere in that
+file is exempt. Brain reproduced this on a copy of the delivered head: appending
+"We cite http://www.yugioh-card.com/en/ as the source for this claim." to that
+file leaves the test green. Amendment 1 asked for exemption by file **and
+location**.
+
+Requirements for the fix, stated as constraints rather than a design:
+
+- An exemption must apply only to the specific occurrences it was reasoned for,
+  and must not license any other occurrence of the same URL, in the same file or
+  elsewhere.
+- It must survive unrelated edits to the file. Line numbers alone will not:
+  adding a paragraph above the table would silently break or move them.
+- It must be visible and reviewable at the occurrence, so a reader of the
+  research document can see that a URL is deliberately exempt and why. This
+  repository already has a precedent for an explicit, reviewable exemption
+  marker in normative text: the `guard:counterexample` blocks used in
+  `docs/agents/git-and-isolation.md`. Follow that spirit or justify something
+  better.
+- If the fix needs a marker inside the research document, that edit is
+  authorized for exactly the exempt occurrences, and nothing else in the
+  document changes.
+
+Tests: plant this round's case (the exempt URL at a new, unrelated location in
+the same file) and show it failing on the current code, then green; keep the
+cross-file test; and add a test that an unrelated edit elsewhere in the file
+does not break the legitimate exemption.
+
+### Unchanged
+
+Everything else. Continue from `0141962`; do not rewrite history. The report
+covers the whole round from base `f518cc3b8f4a773e07f8bcf54de90331f7377254`.
