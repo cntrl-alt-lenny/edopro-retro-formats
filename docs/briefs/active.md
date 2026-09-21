@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`023-2026-09-21-citation-registry-check`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
@@ -134,3 +134,46 @@ inside `.worktrees/builder/` with
 The Worker contract's report, plus: the three definitions and why; the real
 backlog count and characterisation; each red/green demonstration; and anything
 the check deliberately does not catch, stated plainly.
+
+---
+
+## Amendment 1 — 2026-09-21, after Brain's first adjudication
+
+The first delivery, `2160e9b1c063af585aa4c2626d653eff909bbd0d` on
+`builder/citation-registry-check`, was **not accepted**. Most of it stands and
+is not reopened: the scope (`docs/research/**/*.md` and `.json`), the URL
+normalisation and archived-capture matching, the 110-entry backlog (the
+Verifier's independent scan found the same 110 keys; Brain's earlier "about 61"
+was a Markdown-only estimate), and the ratchet against a growing backlog.
+
+Continue on the same branch from `2160e9b`; do not rewrite history. This
+amendment lives on `origin/main`: read it with
+`git show origin/main:docs/briefs/active.md`.
+
+### The guard has a side door
+
+An exemption is meant to apply to specific occurrences — the redirect
+destinations quoted in `docs/research/edison-behaviour-gaps.md`. The
+implementation records the exemption once per normalised URL, from whichever
+occurrence is scanned first, so every other occurrence of that URL in any
+research file inherits it. Brain reproduced this on a copy of the delivered
+head: appending `http://www.yugioh-card.com/en/` to
+`docs/research/edison-rules.md` leaves the test green, while appending a
+genuinely new unregistered URL turns it red.
+
+Make exemptions apply per occurrence — file and location — so an exempt use in
+one place never licenses an unregistered use elsewhere. Add a test that plants
+exactly this case and fails before your fix, and show it red on the current
+code and green after.
+
+**Then look for the same class.** Anything else in the check that is decided
+once per URL but should depend on where the URL appears — backlog entries,
+registry matching, anything keyed on the deduplicated URL — say whether it has
+the same flaw, and fix or justify each.
+
+### Unchanged
+
+Everything else in the brief, including not registering the backlog and not
+editing research documents or source records. The report covers the whole
+round from base `f518cc3b8f4a773e07f8bcf54de90331f7377254`, and states plainly
+anything the check still does not catch.
