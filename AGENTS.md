@@ -245,6 +245,11 @@ fallback is in
   "verified" is a claim to re-check at the current SHA, not a fact to relay.
 - **Exact-SHA verification.** A claim about CI or a commit is checked at that
   literal SHA.
+- **Evidence in a record is added to, never replaced.** When a round corrects
+  a source record's dates or provenance, the passages it already quotes stay
+  unless they are shown to be wrong. A report on any round that changes source
+  or evidence records compares each changed record with its previous version.
+  (Round 18 needed three returns for this one habit.)
 - **Fix the defect class, not the first example.** If the general fix is
   genuinely ambiguous, say so and stop.
 - **Prefer a mechanism over a list.** Land a finding worth preventing as a test,

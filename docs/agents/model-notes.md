@@ -430,3 +430,11 @@ otherwise "tidy the record" reads as "rewrite the record". Second, the
 Verifier caught two of the three instances and Brain caught the first; the
 per-record base-versus-head comparison, once demanded in the brief, made the
 fourth delivery verifiable in minutes instead of by re-reading prose.
+
+**Round 19 (2026-09-20 → 2026-09-21) — README badges
+(`docs/briefs/archive/019-2026-09-20-readme-badges.md`).** Accepted on the
+second delivery. Both roles checked the badge *images* thoroughly and missed
+the text around them: alt attributes restating a live value, and a label that
+was accurate but misleading in context. A reminder that "can this lie?" has to
+be asked of every place a value is repeated, and of how a reader will read it
+next to its neighbours, not only of the value itself.
