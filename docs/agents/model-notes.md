@@ -459,3 +459,11 @@ returned — the first time since adoption a round was accepted with a known,
 tracked wording defect, chosen because a full cycle for one sentence cost more
 than it protected. Tally since adoption (rounds 14-21): escaped defects 0;
 deliveries per accepted round 15/8 ≈ 1.9; rounds changing card data 2 of 8.
+
+**Round 22 (2026-09-21) — SEGOC period evidence
+(`docs/briefs/archive/022-2026-09-21-segoc-period-evidence.md`).** Accepted on
+the second delivery. The research was sound; the return was the same
+provenance pair seen in round 18 — a rewrite dropping evidence, and a citation
+with no source record. A written rule did not prevent either. Tally since
+adoption (rounds 14-22): escaped defects 0; deliveries per accepted round
+17/9 ≈ 1.9; rounds changing card data 2 of 9.
