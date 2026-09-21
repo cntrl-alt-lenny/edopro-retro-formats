@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`022-2026-09-21-segoc-period-evidence`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
@@ -153,3 +153,49 @@ Part A, per source family what was searched and found, a separate conclusion
 for each of the two mechanics at the confidence the evidence supports, and any
 recommendation for a later profile round; and every changed record's base and
 head versions side by side.
+
+---
+
+## Amendment 1 — 2026-09-21, after Brain's first adjudication
+
+The first delivery, `d458d09ed585708bfeb5da86c5cccfb0d6301dc0` on
+`builder/segoc-period-evidence`, was **not accepted**. Part 0 is done and
+stands: all 12 HTTP-200 and 29 HTTP-302 rows are stated with their served
+timestamps and destinations, and the Verifier matched every one. Part A's
+conclusion — that no period official material fetched settles either mechanic —
+is not in dispute. Two provenance defects remain. Brain confirmed both.
+
+Continue on the same branch from `d458d09`; do not rewrite history. This
+amendment lives on `origin/main`: read it with
+`git show origin/main:docs/briefs/active.md`.
+
+### 1. Row 9 lost evidence it carried at the base
+
+At the base, `docs/research/edison-rules.md` row 9 stated that the Official
+Rulebook's ordering text is confirmed byte-identical from v6.0 through v8.0
+(2008–2011), across four dated captures, bracketing Edison. At the delivered
+head, neither "v6.0 through v8.0" nor "byte-identical" appears anywhere in the
+file; only the v7.1 passage remains. That bracket is the main period evidence
+the row rests on. Restore it.
+
+**A row in a research table is a record.** `AGENTS.md` says evidence in a
+record is added to, never replaced, and this brief asks for every changed
+record's base and head versions side by side. That applies to table rows and
+research sections as much as to `data/` files. Show row 9 before and after in
+the report.
+
+### 2. A cited source has no record
+
+`edison-rules.md` now cites `https://www.etcg.de/uploads/pdf/KDE_YuGiOh_Policy.pdf`,
+and `data/sources.json` has no record for it. Register it, stating plainly that
+it is a copy of an official Konami Digital Entertainment document served by a
+third-party site rather than by Konami; what the document says about its own
+validity date; what it does and does not establish; and whether you could find
+it on an official host or an archive capture of one. A third-party copy of an
+official document is evidence of what the document said, only as far as the
+copy can be trusted to match it — say how far that is.
+
+### Unchanged
+
+Everything else in the brief. The report covers the whole round from base
+`118d75e00ddbd7e6864c85b245914d0291ed4d33`.
