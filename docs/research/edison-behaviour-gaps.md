@@ -1340,14 +1340,14 @@ destinations were:
 
 | Page | HTTP 302 memento timestamps actually served | Destination |
 |---|---|---|
-| `default_ac.html` | `2009-01-19 07:37:34`, `2009-02-05 22:45:50`, `2009-03-14 09:34:05`, `2009-04-15 16:15:23` GMT | archived `http://www.yugioh-card.com/` for all four |
-| `default_de.html` | `2009-01-16 17:59:07`, `2009-02-16 10:07:38`, `2009-03-19 07:00:34`, `2009-04-20 12:52:05` GMT | archived `http://www.yugioh-card.com/` for all four |
-| `default_fh.html` | `2009-01-16 18:03:25`, `2009-02-16 10:07:43`, `2009-03-19 07:15:25`, `2009-04-20 13:27:30` GMT | archived `http://www.yugioh-card.com/` for all four |
-| `default_ik.html` | `2009-01-16 17:59:12`, `2009-02-16 10:07:49`, `2009-03-19 07:09:53`, `2009-04-20 13:22:28` GMT | archived `http://www.yugioh-card.com/` for all four |
-| `default_lo.html` | `2009-02-16 10:07:54`, `2009-03-19 07:14:03`, `2009-04-20 13:19:42` GMT | archived `http://www.yugioh-card.com/` for all three |
-| `default_pr.html` | `2009-01-19 07:37:39`, `2009-02-20 01:13:22`, `2009-03-28 06:44:33`, `2009-04-29 06:26:33` GMT | archived `http://www.yugioh-card.com/` for the first two; archived `http://www.yugioh-card.com/en/` for the last two |
-| `default_st.html` | `2009-02-20 01:39:44`, `2009-03-28 09:01:38`, `2009-04-29 05:19:54` GMT | archived `http://www.yugioh-card.com/` for all three |
-| `default_uz.html` | `2009-02-16 09:53:28`, `2009-03-19 07:10:01`, `2009-04-20 13:19:49` GMT | archived `http://www.yugioh-card.com/en/` for all three |
+| `default_ac.html` | `2009-01-19 07:37:34`, `2009-02-05 22:45:50`, `2009-03-14 09:34:05`, `2009-04-15 16:15:23` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all four |
+| `default_de.html` | `2009-01-16 17:59:07`, `2009-02-16 10:07:38`, `2009-03-19 07:00:34`, `2009-04-20 12:52:05` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all four |
+| `default_fh.html` | `2009-01-16 18:03:25`, `2009-02-16 10:07:43`, `2009-03-19 07:15:25`, `2009-04-20 13:27:30` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all four |
+| `default_ik.html` | `2009-01-16 17:59:12`, `2009-02-16 10:07:49`, `2009-03-19 07:09:53`, `2009-04-20 13:22:28` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all four |
+| `default_lo.html` | `2009-02-16 10:07:54`, `2009-03-19 07:14:03`, `2009-04-20 13:19:42` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all three |
+| `default_pr.html` | `2009-01-19 07:37:39`, `2009-02-20 01:13:22`, `2009-03-28 06:44:33`, `2009-04-29 06:26:33` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for the first two; archived `http://www.yugioh-card.com/en/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for the last two |
+| `default_st.html` | `2009-02-20 01:39:44`, `2009-03-28 09:01:38`, `2009-04-29 05:19:54` GMT | archived `http://www.yugioh-card.com/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all three |
+| `default_uz.html` | `2009-02-16 09:53:28`, `2009-03-19 07:10:01`, `2009-04-20 13:19:49` GMT | archived `http://www.yugioh-card.com/en/` <!-- citation-exempt: redirect-destination; observed HTTP-302 destination, not the cited FAQ source --> for all three |
 
 None of the 29 redirect destinations was a Card FAQ page, so none supplied
 additional FAQ content; they remain part of the search result rather than

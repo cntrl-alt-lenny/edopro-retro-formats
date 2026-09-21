@@ -1,0 +1,1257 @@
+{
+  "description": "Current unregistered research URL citations at the 023 base; entries may only shrink after registry registration or citation removal.",
+  "scope": [
+    "docs/research/**/*.md",
+    "docs/research/**/*.json"
+  ],
+  "entries": [
+    {
+      "url": "https://archive.org/details/yugioh-official-guide-starter-book-may-05-1999",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-gate.md",
+          "line": 1321
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1441
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3041
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3049
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3057
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3065
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3073
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3081
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3993
+        }
+      ]
+    },
+    {
+      "url": "https://auctions.yahoo.co.jp/jp/auction/b1233880768",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1703
+        }
+      ]
+    },
+    {
+      "url": "https://aucview.aucfan.com/yahoo/b1233880768/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1703
+        }
+      ]
+    },
+    {
+      "url": "https://dejideji.com/1999year-vjamp/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3713
+        }
+      ]
+    },
+    {
+      "url": "https://formatlibrary.com/api/banlists/september-2011?category=TCG",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 52
+        },
+        {
+          "file": "docs/research/tengu-format-source-packet.json",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "url": "https://formatlibrary.com/api/formats/tokyo-dome",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1530
+        }
+      ]
+    },
+    {
+      "url": "https://formatlibrary.com/api/formats/yugi-kaiba",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1536
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/ProjectIgnis/DeltaBagooska",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/edopro-data-repos-ui.md",
+          "line": 109
+        },
+        {
+          "file": "docs/research/ignis-goat.md",
+          "line": 176
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/ProjectIgnis/Puzzles",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/edopro-data-repos-ui.md",
+          "line": 111
+        },
+        {
+          "file": "docs/research/ignis-goat.md",
+          "line": 178
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/edo9300/ygopro-core/blob/46779fbe40e6a9bd8967f5dc6a03f4eaa6550d57/ocgapi_constants.h",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 211
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/you/goat-format-pack",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/edopro-data-repos-ui.md",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "http://home.att.ne.jp/moon/puppiy/rule/E-rule/Data3.htm",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1662
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3336
+        }
+      ]
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/Vジャンプ",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1686
+        }
+      ]
+    },
+    {
+      "url": "https://jp.mercari.com/item/m44588227599",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1725
+        }
+      ]
+    },
+    {
+      "url": "https://kperovic.com/metagame/yugioh4cb2.html?tabid=33&ArticleId=6095",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "url": "https://kperovic.com/metagame/yugioha1d5.html?tabid=33&ArticleId=6222",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "url": "https://ms.yugipedia.com//5/51/Master_Guide_p84.jpg",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3269
+        }
+      ]
+    },
+    {
+      "url": "https://ms.yugipedia.com/a/a1/2003_tournament_rulings.pdf",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/insect-imitation-v2-adjudication.md",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000087566",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3539
+        }
+      ]
+    },
+    {
+      "url": "https://ocg-card.com/latest/g2t/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1512
+        }
+      ]
+    },
+    {
+      "url": "https://ocg-card.com/latest/ogs/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-gate.md",
+          "line": 1328
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1468
+        }
+      ]
+    },
+    {
+      "url": "https://ocg-card.com/limit/old/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1560
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ProjectIgnis/CardScripts/383bfbd62cefc0a28e075acfb78b0bb8203b94c7/goat/c504700147.lua",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ProjectIgnis/CardScripts/383bfbd62cefc0a28e075acfb78b0bb8203b94c7/official/c85602018.lua",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/edo9300/ygopro-core/158aebe758be3c46249c75d602e3f16d63d2ef31/processor.cpp",
+      "category": "repository/code page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-gate.md",
+          "line": 1728
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3097
+        }
+      ]
+    },
+    {
+      "url": "https://roadoftheking.com/deck-out/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1578
+        }
+      ]
+    },
+    {
+      "url": "https://templeofra.neocities.org/yugioh-1999",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1572
+        }
+      ]
+    },
+    {
+      "url": "https://tenguformat.com/banlist/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 53
+        },
+        {
+          "file": "docs/research/tengu-format-source-packet.json",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://tenguformat.com/wp-content/uploads/database/allCardsTengu.json",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-community-candidates.json",
+          "line": 1
+        },
+        {
+          "file": "docs/research/tengu-format-community-diff.json",
+          "line": 4
+        },
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 163
+        },
+        {
+          "file": "docs/research/tengu-format-source-packet.json",
+          "line": 278
+        }
+      ]
+    },
+    {
+      "url": "https://web-japan.org/kidsweb/ja/archives/cool/99-10-12/yugioh-j.html",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1487
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20021017065706/http://home.att.ne.jp/moon/puppiy/rule/E-rule/Data3.htm",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1665
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3336
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20051224104351/http://home.att.ne.jp/moon/puppiy/rule/E-rule/Data3.htm",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1666
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20070103194937/http://www.upperdeckentertainment.com/yugioh/uk/faq_specific.htm",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102003949/http://www.yugioh-card.com/en/gameplay/rulings/101109%20GoldSeries3_TF5%20Rulings%20-%20x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102004742/http://www.yugioh-card.com/en/gameplay/rulings/SOVR_sneak_ruling.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 64
+        },
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102005218/http://www.yugioh-card.com/en/gameplay/rulings/RGBT%20Rules%20v1-2.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102005442/http://www.yugioh-card.com/en/gameplay/rulings/ABPF_sneak_ruling.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 88
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102005552/http://www.yugioh-card.com/en/gameplay/rulings/CRMS_sneak_ruling.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 65
+        },
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102005855/http://www.yugioh-card.com/en/gameplay/penalty_guide/KDE_TCG_Tournament%20Policy_13Dec10.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 112
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110102005947/http://www.yugioh-card.com/en/gameplay/rulings/100325DPTin_%20HA_SDWS_ST09_Rules.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110626063446/http://www.yugioh-card.com:80/en/gameplay/rulings/EXVCRulesBook000512_1.2_x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110712120241/http://www.yugioh-card.com:80/en/gameplay/rulings/DREVRulebook110517_v1.1x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 80
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110725024153/http://www.yugioh-card.com:80/en/gameplay/rulings/ABPF%20Rules%20Booklet_110512_v1.1x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110725024218/http://www.yugioh-card.com:80/en/gameplay/rulings/HA03RulesBook110323x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110902060515/http://www.yugioh-card.com:80/en/gameplay/rulings/TSHDRulebook_100430.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20110902060847/http://www.yugioh-card.com:80/en/gameplay/rulings/ANPR_sneak_ruling.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 61
+        },
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20120807043904/http://www.yugioh-card.com/en/gameplay/errata/101105%20recent%20errata%20list%20-%20x.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20120807043904/http://www.yugioh-card.com/en/gameplay/rulings_errata.html",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20130203103237/http://www.yugioh-card.com:80/en/gameplay/penalty_guide/YGOTournamentPolicy_v1-3_Jan2013.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20130226131637/http://www.yugioh-card.com:80/en/gameplay/penalty_guide/KDE_TCG_Tournament_Policy_Feb2013.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 117
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20131215021346/http://www.yugioh-card.com:80/en/gameplay/penalty_guide/KDE%20TCG%20Tournament%20Policy%20v1.4%202013November14.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 118
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20180712131639/http://www.yugioh-card.com:80/en/gameplay/penalty_guide/KDE-US_TCG_Tournament_Policy_v2018June01.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20180712131741/http://www.yugioh-card.com:80/en/gameplay/penalty_guide/YGO_Tournament_Policy_v_2018June01.pdf",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20210827044513/https://www.yugioh-card-collection.com/entry/20190216/1550286000",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1678
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20220516110625/https://www.yugioh-card-collection.com/entry/2018/03/08/013321",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1716
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20241209111117/https://ygoldschool.com/99-tokyodome-limit/",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1642
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20241209111117im_/https://ygoldschool.com/wp-content/uploads/2021/09/tokyo-dome-ocg-rule.jpg",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1643
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3408
+        }
+      ]
+    },
+    {
+      "url": "http://web.archive.org/web/20250131180932/https://ygoldschool.com/tokyo-dome-tyuusi/",
+      "category": "archived capture",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1654
+        }
+      ]
+    },
+    {
+      "url": "https://www.angelfire.com/anime5/innovation/netrep.pdf",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4885&ope=2",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5131&ope=2&request_locale=en",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/insect-imitation-v2-adjudication.md",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=9042&ope=2&request_locale=en",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1102001&request_locale=ja&rp=99999&sess=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1417
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=111101000&request_locale=ja&rp=99999&sess=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1405
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1111108007&request_locale=en",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=1121204008&request_locale=en&rp=99999",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=131302003&request_locale=ja&rp=99999&sess=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1429
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301003&request_locale=ja&rp=99999&sess=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1411
+        }
+      ]
+    },
+    {
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=3301004&request_locale=ja&rp=99999&sess=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1423
+        }
+      ]
+    },
+    {
+      "url": "https://www.goatformat.com/home/ruling-notice-last-will",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/last-will-v2-adjudication.md",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "url": "https://www.latimes.com/archives/la-xpm-1999-sep-24-mn-13493-story.html",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1474
+        }
+      ]
+    },
+    {
+      "url": "https://www.mercari.com/jp/items/m38958545693/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3406
+        }
+      ]
+    },
+    {
+      "url": "https://www.mercari.com/jp/items/m67527388590/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1694
+        }
+      ]
+    },
+    {
+      "url": "https://www.pojo.com/yu-gi-oh/FeaturedWriters/Baneful/2017/6-19.shtml",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1542
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card-collection.com/entry/2018/03/08/013321",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1713
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card-collection.com/entry/20190216/1550286000",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1675
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/downloads/penalty_guide/YGOTCG_Policy_v_2_2.pdf",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/downloads/penalty_guide/YGOTCG_Tournament_Policy_v_2_5.pdf",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/search-verification-interval.md",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/exvc/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/genf/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/ha-se/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/ha04/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/starter2011/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/stor/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "url": "https://www.yugioh-card.com/en/products/past_products/tin-2011w1-wz/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "url": "https://x.com/Vg_akira/status/1779107282443518237",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3089
+        }
+      ]
+    },
+    {
+      "url": "https://ygoceanbridge.blogspot.com/2022/07/blog-post_29.html?m=1",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1524
+        }
+      ]
+    },
+    {
+      "url": "https://ygoldschool.com/99-tokyodome-limit/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1639
+        }
+      ]
+    },
+    {
+      "url": "https://ygoldschool.com/tokyo-dome-tyuusi/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1651
+        }
+      ]
+    },
+    {
+      "url": "https://ygoldschool.com/wp-content/uploads/2021/09/tokyo-dome-ocg-rule.jpg",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3714
+        }
+      ]
+    },
+    {
+      "url": "https://ygoprodeck.com/article/master-rules-a-history-302488",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3124
+        }
+      ]
+    },
+    {
+      "url": "https://ygoprodeck.com/cube/view-cube/18262",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/ocg1999-tokyo-dome-community-candidates.json",
+          "line": 4
+        },
+        {
+          "file": "docs/research/ocg1999-tokyo-dome-community-diff.json",
+          "line": 4
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1548
+        }
+      ]
+    },
+    {
+      "url": "https://ygorganization.com/ogocg/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1435
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 2977
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 2985
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 2993
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3001
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3009
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3116
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh-history.com/environment/fragments/forbidden-list-1999",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1506
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3025
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3148
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3715
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh-history.com/environment/generation-one-20",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3140
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh-history.com/environment/generation-one-4",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1518
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3132
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh-starter.com/what-is-the-first-forbidden-cards/",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1566
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh.fandom.com/wiki/Forum%3AInsect_Imitation",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/insect-imitation-v2-adjudication.md",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "url": "https://yugioh.fandom.com/wiki/July_1999_Lists",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1554
+        }
+      ]
+    },
+    {
+      "url": "https://yugiohblog.konami.com/2011/ycs/ycs-toronto-first-timers-2/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "url": "https://yugiohblog.konami.com/2012/ycs/12-08-toronto/yu-gi-oh-championship-series-toronto-faq/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 149
+        }
+      ]
+    },
+    {
+      "url": "https://yugiohblog.konami.com/category/ycs/11-09-toronto/",
+      "category": "official or institutional page",
+      "occurrences": [
+        {
+          "file": "docs/research/tengu-format-source-gate.md",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 2342
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/August_1999_Lists",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 1500
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3156
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/August_1999_Lists?action=raw",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3017
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/Damage_calculation",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3105
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/Exodia_the_Forbidden_One?action=raw",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3180
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/File:Master_Guide_p84.jpg",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3270
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/Premium_Pack_(Japanese)?action=raw",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3033
+        },
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3172
+        }
+      ]
+    },
+    {
+      "url": "https://yugipedia.com/wiki/Yu-Gi-Oh!_Official_Card_Game",
+      "category": "community or other external page",
+      "occurrences": [
+        {
+          "file": "docs/research/yugi-kaiba-format-source-packet.json",
+          "line": 3164
+        }
+      ]
+    }
+  ]
+}
