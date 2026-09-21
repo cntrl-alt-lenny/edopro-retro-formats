@@ -1212,3 +1212,84 @@ against a representation that cannot yet record the answer correctly for
 29 of the 38 cards it would resolve.
 
 Not started in this commit, per the task's explicit instruction.
+
+## Round 20 — per-card activation-semantics bounds (2026-09-21)
+
+This round re-opened only the activation-semantics axis for the 38-card
+search-and-reveal-on-failure cluster. I read the UDE per-card rulings replay
+and the eight Konami alphabetical Card FAQ pages directly. The UDE replay
+served memento `2005-07-01 23:56:27 GMT` at
+`http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx`.
+The Konami pages served these mementos: `default_ac` at `2008-12-16
+16:13:05 GMT`, `default_de` at `16:23:08`, `default_fh` at `16:23:13`,
+`default_ik` at `16:23:17`, `default_lo` at `16:23:23`, `default_pr` at
+`16:23:27`, `default_st` at `16:23:33`, and `default_uz` at `16:23:37`.
+The exact URLs and source-record notes are in `data/sources.json`.
+
+The preceding Round 18 statements that all 38 activation axes were undated
+are retained as that round's findings; the five bounded rows below supersede
+those statements for the current corpus.
+
+These are observations of the state served by a capture, not effective dates.
+The existing verification/reveal axis (`old_attested_through:
+2011-02-02`, `new_attested_from: 2019-04-03`) was not changed or used to infer
+an activation date. Only a card's own entry could change its activation axis;
+an entry for another card, a general failed-search rule, or a passage about a
+different effect was not substituted.
+
+| Card | Erratum | Own period entry read | Activation bound/result | Edison activation state |
+|---|---|---|---|---|
+| A Deal with Dark Ruler | `erratum-a-deal-with-dark-ruler` | UDE and `default_ac`; “If your opponent's Level 8 or higher monster than you control is sent to the Graveyard, you can activate \"A Deal with Dark Ruler\".” | No bound: the entry does not say whether a Berserk Dragon must exist. | Ambiguous |
+| Apprentice Magician | `erratum-apprentice-magician` | UDE and `default_ac`; “You must show your opponent the monster you Special Summon.” | No bound: it addresses showing the result, not whether a valid Level 2 or lower monster must exist at activation. | Ambiguous |
+| Armed Dragon LV3 | `erratum-armed-dragon-lv3` | No own entry in the UDE replay or the eight 2008 FAQ pages. | Unchanged; no per-card passage. | Ambiguous |
+| Armed Dragon LV5 | `erratum-armed-dragon-lv5` | UDE and `default_ac`; “You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy.” | No bound: this is the LV5 destruction effect, not the separate LV7 level-up effect. | Ambiguous |
+| Birdface | `erratum-birdface` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Bubonic Vermin | `erratum-bubonic-vermin` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Dark Mimic LV1 | `erratum-dark-mimic-lv1` | No own entry; `default_de` mentions it only inside Dark Mimic LV3's entry. | Unchanged; another card's passage cannot date this card. | Ambiguous |
+| Dark Scorpion - Meanae the Thorn | `erratum-dark-scorpion-meanae-the-thorn` | UDE and `default_de`; “You can use \"Meanae the Thorn\"'s effect to add a Monster, Spell, or Trap Card to your hand that includes \"Dark Scorpion\" in its name...” | No bound: it lists what may be added, but does not address an empty Deck at activation. | Ambiguous |
+| Dedication through Light and Darkness | `erratum-dedication-through-light-and-darkness` | UDE and `default_de`; “You select the \"Dark Magician of Chaos\" you wish to Special Summon when you resolve \"Dedication through Light and Darkness\", not when you activate it.” | No bound: resolution-time selection is not an activation-without-a-target ruling. | Ambiguous |
+| Elegant Egotist | `erratum-elegant-egotist` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Emblem of Dragon Destroyer | `erratum-emblem-of-dragon-destroyer` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Freed the Matchless General | `erratum-freed-the-matchless-general` | UDE and `default_fh`; see quoted bounds below. | `old_attested_through: 2005-07-01`; `new_attested_from: 2008-12-16`. | **NEW** activation; verification remains OLD, so the combined Edison implementation state is still not independently implemented. |
+| Fusion Sage | `erratum-fusion-sage` | `default_fh`; see quoted bound below. | `new_attested_from: 2008-12-16`; no old-state entry found. | **NEW** activation; verification remains OLD, so the combined Edison implementation state is still not independently implemented. |
+| Giant Rat | `erratum-giant-rat` | UDE and `default_fh`; “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” | No bound: battle-trigger timing does not address an empty Deck at activation. | Ambiguous |
+| Great Dezard | `erratum-great-dezard` | UDE and `default_fh`; “You can Special Summon only 1 \"Fushioh Richie\" by Tributing \"Great Dezard\".” | No bound: this limits the result, not activation with no target. | Ambiguous |
+| Hand of Nephthys | `erratum-hand-of-nephthys` | UDE and `default_fh`; “Tributing monsters is a cost of this card’s effect.” | No bound: cost timing does not establish whether Sacred Phoenix must be available. | Ambiguous |
+| Hero Signal | `erratum-hero-signal` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Horus the Black Flame Dragon LV4 | `erratum-horus-the-black-flame-dragon-lv4` | UDE and `default_fh`; see quoted bounds below. | `old_attested_through: 2005-07-01`; `new_attested_from: 2008-12-16`. | **NEW** activation; verification remains OLD, so the combined Edison implementation state is still not independently implemented. |
+| Manju of the Ten Thousand Hands | `erratum-manju-of-the-ten-thousand-hands` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Masked Dragon | `erratum-masked-dragon` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Mother Grizzly | `erratum-mother-grizzly` | UDE and `default_lo`; “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” | No bound: battle-trigger timing does not address an empty Deck at activation. | Ambiguous |
+| Mystic Swordsman LV2 | `erratum-mystic-swordsman-lv2` | UDE and `default_lo`; “If \"Mystic Swordsman LV2\" attacks a face-down Defense Position monster, that monster is destroyed by \"Mystic Swordsman LV2\"’s effect...” | No bound: it distinguishes destruction by effect from battle, not the LV4 availability check. | Ambiguous |
+| Mystic Swordsman LV4 | `erratum-mystic-swordsman-lv4` | UDE and `default_lo`; “If \"Mystic Swordsman LV4\" attacks a face-down Defense Position monster, you destroy the monster with \"Mystic Swordsman LV4\"’s effect...” | No bound: it does not address activation with no LV4-leveling target. | Ambiguous |
+| Mystic Tomato | `erratum-mystic-tomato` | UDE and `default_lo`; “If your opponent controls your \"Mystic Tomato\" and it is destroyed as a result of battle, you get the effect of \"Mystic Tomato\" NOT your opponent.” | No bound: controller and battle timing do not date the no-target activation allowance. | Ambiguous |
+| Ninjitsu Art of Transformation | `erratum-ninjitsu-art-of-transformation` | UDE and `default_lo`; “\"Ninjitsu Art of Transformation\" does not target; you select the monster to Special Summon when you resolve its effect.” | No bound: non-targeting and resolution-time selection do not prove activation with no legal monster. | Ambiguous |
+| Paladin of White Dragon | `erratum-paladin-of-white-dragon` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Pandemonium | `erratum-pandemonium` | UDE and `default_pr`; “When your Archfiends controlled by your opponent are sent to your Graveyard, you can add an Archfiend from your Deck to your hand with \"Pandemonium\".” | No bound: it describes the trigger and add, not an empty-Deck activation. | Ambiguous |
+| Peten the Dark Clown | `erratum-peten-the-dark-clown` | UDE and `default_pr`; “Missing the Timing: \"Peten the Dark Clown\" is a \"when… you can\" optional Trigger Effect.” | No bound: timing-window guidance is not a failed-search activation ruling. | Ambiguous |
+| Pyramid Turtle | `erratum-pyramid-turtle` | UDE and `default_pr`; “You may Special Summon a high-level monster with \"Pyramid Turtle\"'s effect ... but not a Special-Summon only monster...” | No bound: it limits the eligible monster class, but does not state the activation condition. | Ambiguous |
+| Skull Knight #2 | `erratum-skull-knight-2` | UDE and `default_st`; “If you Tribute Set a high level Fiend-Type monster by Tributing this card, you CAN Special Summon another \"Skull Knight #2\" from your Deck...” | No bound: it says the effect can resolve in that situation, not what happens with no copy in the Deck at activation. | Ambiguous |
+| Sonic Bird | `erratum-sonic-bird` | No own entry in the searched period pages; `default_ik` mentions it only in another card's example list. | Unchanged; no per-card passage. | Ambiguous |
+| Terraforming | `erratum-terraforming` | No own entry in the searched period pages. | Unchanged; no per-card passage. | Ambiguous |
+| Thunder Dragon | `erratum-thunder-dragon` | `default_st`; see quoted bound below. | `new_attested_from: 2008-12-16`; no old-state entry found. | **NEW** activation; verification remains OLD, so the combined Edison implementation state is still not independently implemented. |
+| Toon Table of Contents | `erratum-toon-table-of-contents` | `default_st`; see quoted bound below. | `new_attested_from: 2008-12-16`; no old-state entry found. | **NEW** activation; verification remains OLD, so the combined Edison implementation state is still not independently implemented. |
+| UFO Turtle | `erratum-ufo-turtle` | UDE and `default_uz`; “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” | No bound: battle-trigger timing does not address an empty Deck at activation. | Ambiguous |
+| Ultimate Insect LV1 | `erratum-ultimate-insect-lv1` | UDE and `default_uz`; “\"Ultimate Insect LV1\"’s 2nd sentence is a Ignition Effect that is activated by sending \"Ultimate Insect LV1\" to the Graveyard as a cost.” | No bound: cost and chaining do not say whether LV3 must be available. | Ambiguous |
+| Ultimate Insect LV3 | `erratum-ultimate-insect-lv3` | UDE and `default_uz`; “The effect of \"Ultimate Insect LV3\" that reduces ATK by 300 points is a Continuous Effect...” | No bound: the passage is about the continuous ATK effect, not leveling. | Ambiguous |
+| Ultimate Insect LV5 | `erratum-ultimate-insect-lv5` | UDE and `default_uz`; “You can Special Summon \"Ultimate Insect LV5\" with the effect of \"Ultimate Insect LV3\" even if that \"Ultimate Insect LV3\" was not Special Summoned by the effect of \"Ultimate Insect LV1\".” | No bound: it addresses the LV3 summon history, not whether an LV5 target must exist at activation. | Ambiguous |
+
+The five changed records carry the following verbatim activation passages in
+their `c1.effective.corroboration` arrays:
+
+- Freed, UDE, served `2005-07-01 23:56:27 GMT`: “The effect of this card that allows you to forfeit your draw to place a Warrior-Type monster from your Deck into your hand is optional. You do not have to activate it if you don’t want to. If you attempt to activate this effect and find that you do not have any Warrior-Type monsters in your Deck, you do not get your normal draw back. You have already forfeited it.” Konami `default_fh`, served `2008-12-16 16:23:13 GMT`: “\"Freed the Matchless General’s\" second effect cannot be activated if you have no Level 4 or lower Warrior-Type monsters in your Deck.”
+- Horus, UDE, served `2005-07-01 23:56:27 GMT`: “If you don’t have \"Horus the Black Flame Dragon LV 6\" in your hand or Deck, you can still send \"Horus the Black Flame Dragon LV 4\" to the Graveyard to activate its effect. But if you don’t have \"Horus the Black Flame Dragon LV 6\" then your opponent can check your Deck to confirm.” Konami `default_fh`, served `2008-12-16 16:23:13 GMT`: “If you don’t have \"Horus the Black Flame Dragon LV6\" in your hand or Deck, you cannot send \"Horus the Black Flame Dragon LV4\" to the Graveyard to activate its effect.”
+- Fusion Sage, Konami `default_fh`, served `2008-12-16 16:23:13 GMT`: “You cannot activate \"Fusion Sage\" if you do not have any copies of \"Polymerization\" in your Deck.”
+- Thunder Dragon, Konami `default_st`, served `2008-12-16 16:23:33 GMT`: “You cannot discard \"Thunder Dragon\" to activate its effect if you do not have any \"Thunder Dragon\" in your Deck.”
+- Toon Table of Contents, Konami `default_st`, served `2008-12-16 16:23:33 GMT`: “You cannot activate \"Toon Table of Contents\" if you do not have any \"Toon\" Cards, or \"Manga Ryu-Ran\", in your Deck.”
+
+The changed dates do not claim the rule changed on those dates. They record
+the latest/earliest served captures that positively attest each card's own
+old/new state. At Edison (2010-04-24), the five activation axes are therefore
+attested NEW by the 2008 capture; their shared verification axis remains OLD,
+so no new implementation bracket or canonical output is implied by this
+research-only distinction.
