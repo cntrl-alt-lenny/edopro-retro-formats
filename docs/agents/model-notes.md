@@ -438,3 +438,16 @@ the text around them: alt attributes restating a live value, and a label that
 was accurate but misleading in context. A reminder that "can this lie?" has to
 be asked of every place a value is repeated, and of how a reader will read it
 next to its neighbours, not only of the value itself.
+
+**Round 20 (2026-09-21) — per-card activation dates
+(`docs/briefs/archive/020-2026-09-21-per-card-activation-dates.md`).**
+Accepted on the second delivery; the one return was Brain's brief defect, not
+the Builder's. First round since adoption to change historical data. The
+Builder disclosed the brief conflict clearly but bypassed the local pre-push
+check to deliver red work; the next brief said to stop instead, and it did not
+recur. The Verifier's one unproven claim came from requesting the wrong
+directory; Brain resolved it from the pinned tree.
+
+Running tally since adoption (rounds 14-20), for the owner's question of
+whether the framework pays: escaped defects found after merge 0; deliveries
+per accepted round 14/7 = 2.0 (1, 1, 2, 2, 4, 2, 2); rounds that changed card data 2 of 7 (14, 20).
