@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`019-2026-09-20-readme-badges`** — use exactly this string as
 `--task` for every `tools/report.py` call in this round.
@@ -160,3 +160,54 @@ The Worker contract's report, plus:
   current;
 - anything in the standard this README still does not meet, stated plainly
   rather than left for a reader to notice.
+
+---
+
+## Amendment 1 — 2026-09-21, after Brain's first adjudication
+
+The first delivery, `8d0ae1ac7c5c2607707611439aea5b334885ba5b` on
+`builder/readme-badges`, was **not accepted**. Most of it stands and is not
+reopened: the count is correct (Brain re-derived 3 + 2 + 2 = 7 of 12 from
+`python -m retroformats report`), the generated file is guarded and the guard
+was shown red then green, CI is untouched, and only the badge row of the
+README changed. Continue on the same branch from `8d0ae1a`; do not rewrite
+history. This amendment lives on `origin/main`: read it with
+`git show origin/main:docs/briefs/active.md`.
+
+Two things break this brief's own first invariant — *a badge must not be able
+to lie*.
+
+### 1. The badges' alt text is hand-typed
+
+The progress badge's image is live, but its `alt` attribute reads
+`Progress: 7/12 areas`, and the license badge's reads `license: MIT`. Alt text
+is what screen readers announce and what anyone reading the raw README sees.
+When a format's status changes, the image updates and the alt text keeps
+saying the old number, and nothing fails. Make alt text that cannot go stale,
+or make staleness fail a test; choose, and say why.
+
+### 2. The progress badge does not say what it counts
+
+"progress 7/12 areas" means three canonical formats times four implementation
+axes. The README places it directly above a banner covering a 128-format
+catalogue, so an ordinary reader can take it as overall project progress,
+which would overstate it badly. The brief asked for a measure "a reader can
+interpret without this repository's vocabulary". Make the badge itself, not a
+linked file, say what it counts — within what a single shields badge can
+legibly hold — and justify the wording in your report. If you conclude no
+single-badge wording can be both honest and legible, stop and present the
+options.
+
+### Note, not a change request
+
+`tests/test_progress_badge.py` pins today's value (7, 12, "7/12 areas"). That
+matches this project's habit of pinning counts so that a change is deliberate,
+and it may stay. If you keep it, make its failure message say what else must
+be updated when the value legitimately changes.
+
+### Unchanged
+
+Everything else in the brief, including: no CI permissions, no CI-written
+branch, no change to what CI gates; no prose, structure or banner change.
+The report covers the whole round from base
+`42d8cee0e903a6e4f02ac0f2b8d138aa32153ea3`.
