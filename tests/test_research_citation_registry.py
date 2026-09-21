@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from .research_citation_registry import BACKLOG_RELATIVE, check, report
+from .research_citation_registry import BACKLOG_RELATIVE, REDIRECT_EXEMPTION_MARKER, check, report
 
 
 def _write_fixture(root: Path, research: str, sources: list[dict], backlog: list[str]) -> Path:
@@ -85,7 +85,8 @@ class ResearchCitationRegistryTest(unittest.TestCase):
     def test_wayback_redirect_destination_is_explicitly_exempt(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as name:
             root = Path(name)
-            backlog = _write_fixture(root, "http://www.yugioh-card.com/\n", [], [])
+            research = f"http://www.yugioh-card.com/ {REDIRECT_EXEMPTION_MARKER}\n"
+            backlog = _write_fixture(root, research, [], [])
             (root / "docs/research/example.md").rename(root / "docs/research/edison-behaviour-gaps.md")
             import tests.research_citation_registry as registry
 
@@ -99,7 +100,8 @@ class ResearchCitationRegistryTest(unittest.TestCase):
     def test_redirect_destination_exemption_is_scoped_to_its_occurrence(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as name:
             root = Path(name)
-            backlog = _write_fixture(root, "http://www.yugioh-card.com/\n", [], [])
+            research = f"http://www.yugioh-card.com/ {REDIRECT_EXEMPTION_MARKER}\n"
+            backlog = _write_fixture(root, research, [], [])
             (root / "docs/research/example.md").rename(root / "docs/research/edison-behaviour-gaps.md")
             (root / "docs/research/other.md").write_text("http://www.yugioh-card.com/\n")
             import tests.research_citation_registry as registry
@@ -112,6 +114,55 @@ class ResearchCitationRegistryTest(unittest.TestCase):
                 self.assertEqual(1, len(location_errors), errors)
                 self.assertIn("docs/research/other.md:1", location_errors[0])
                 self.assertNotIn("edison-behaviour-gaps.md", location_errors[0])
+            finally:
+                registry.BASELINE_UNREGISTERED_URLS = old
+
+    def test_redirect_destination_exemption_does_not_cover_new_location_in_same_file(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as name:
+            root = Path(name)
+            research = (
+                f"Observed redirect: `http://www.yugioh-card.com/` {REDIRECT_EXEMPTION_MARKER}\n"
+                "Unrelated note: http://www.yugioh-card.com/\n"
+            )
+            backlog = _write_fixture(root, research, [], [])
+            (root / "docs/research/example.md").rename(root / "docs/research/edison-behaviour-gaps.md")
+            import tests.research_citation_registry as registry
+
+            old = registry.BASELINE_UNREGISTERED_URLS
+            try:
+                registry.BASELINE_UNREGISTERED_URLS = frozenset()
+                errors = check(root, backlog)
+                location_errors = [error for error in errors if "not listed in backlog" in error]
+                self.assertEqual(1, len(location_errors), errors)
+                self.assertIn("docs/research/edison-behaviour-gaps.md:2", location_errors[0])
+            finally:
+                registry.BASELINE_UNREGISTERED_URLS = old
+
+    def test_unrelated_edit_does_not_break_redirect_destination_exemption(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as name:
+            root = Path(name)
+            research_path = root / "docs/research/example.md"
+            backlog = _write_fixture(
+                root,
+                (
+                    f"Observed redirect: `http://www.yugioh-card.com/` {REDIRECT_EXEMPTION_MARKER}\n"
+                    "Unrelated note: http://www.yugioh-card.com/\n"
+                ),
+                [],
+                [],
+            )
+            research_path.rename(root / "docs/research/edison-behaviour-gaps.md")
+            target = root / "docs/research/edison-behaviour-gaps.md"
+            target.write_text("Unrelated paragraph added above the table.\n\n" + target.read_text())
+            import tests.research_citation_registry as registry
+
+            old = registry.BASELINE_UNREGISTERED_URLS
+            try:
+                registry.BASELINE_UNREGISTERED_URLS = frozenset()
+                errors = check(root, backlog)
+                location_errors = [error for error in errors if "not listed in backlog" in error]
+                self.assertEqual(1, len(location_errors), errors)
+                self.assertIn("docs/research/edison-behaviour-gaps.md:4", location_errors[0])
             finally:
                 registry.BASELINE_UNREGISTERED_URLS = old
 

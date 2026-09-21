@@ -154,6 +154,10 @@ REDIRECT_DESTINATIONS = {
     "http://www.yugioh-card.com/",
     "http://www.yugioh-card.com/en/",
 }
+REDIRECT_EXEMPTION_MARKER = (
+    "<!-- citation-exempt: redirect-destination; "
+    "observed HTTP-302 destination, not the cited FAQ source -->"
+)
 
 
 @dataclass(frozen=True)
@@ -203,6 +207,11 @@ def _url_keys(url: str) -> set[str]:
     return keys
 
 
+REDIRECT_DESTINATION_KEYS = frozenset(
+    key for destination in REDIRECT_DESTINATIONS for key in _url_keys(destination)
+)
+
+
 def _wayback_original(url: str) -> str | None:
     parsed = urlsplit(url)
     if parsed.hostname not in WAYBACK_HOSTS:
@@ -214,10 +223,20 @@ def _wayback_original(url: str) -> str | None:
 
 
 def _iter_urls(text: str):
+    for url, _ in _iter_url_tokens(text):
+        yield url
+
+
+def _iter_url_tokens(text: str):
     for match in URL_RE.finditer(text):
         url = _trim_url(match.group(0))
         if url:
-            yield url
+            marker = (
+                REDIRECT_EXEMPTION_MARKER
+                if re.match(r"[ \t]*" + re.escape(REDIRECT_EXEMPTION_MARKER), text[match.end():])
+                else None
+            )
+            yield url, marker
 
 
 def _source_registry(root: Path) -> tuple[set[str], dict[str, list[str]]]:
@@ -246,7 +265,7 @@ def _source_registry(root: Path) -> tuple[set[str], dict[str, list[str]]]:
     return keys, owners
 
 
-def _exemption(url: str, occurrence: Occurrence) -> str | None:
+def _exemption(url: str, occurrence: Occurrence, marker: str | None = None) -> str | None:
     parsed = urlsplit(url)
     host = (parsed.hostname or "").lower()
     if host == "github.com" and parsed.path.lower().startswith(INTERNAL_REPOSITORY_PREFIX):
@@ -255,8 +274,8 @@ def _exemption(url: str, occurrence: Occurrence) -> str | None:
         return "URL template/example with an unresolved placeholder"
     if (
         occurrence.path == "docs/research/edison-behaviour-gaps.md"
-        and _url_keys(url)
-        and next(iter(_url_keys(url))) in {_url_keys(x).pop() for x in REDIRECT_DESTINATIONS}
+        and marker == REDIRECT_EXEMPTION_MARKER
+        and _url_keys(url).intersection(REDIRECT_DESTINATION_KEYS)
     ):
         return "observed HTTP-302 destination, not the cited FAQ source"
     return None
@@ -270,13 +289,13 @@ def scan_citations(root: Path) -> dict[str, Citation]:
             continue
         relative = path.relative_to(root).as_posix()
         for line_number, line in enumerate(path.read_text(errors="replace").splitlines(), 1):
-            for url in _iter_urls(line):
+            for url, marker in _iter_url_tokens(line):
                 keys = _url_keys(url)
                 if not keys:
                     continue
                 key = sorted(keys)[0]
                 location = Occurrence(relative, line_number)
-                occurrence = Occurrence(relative, line_number, _exemption(url, location))
+                occurrence = Occurrence(relative, line_number, _exemption(url, location, marker))
                 citation = citations.setdefault(key, Citation(url=url, key=key))
                 citation.occurrences.append(occurrence)
     return citations
