@@ -451,3 +451,11 @@ directory; Brain resolved it from the pinned tree.
 Running tally since adoption (rounds 14-20), for the owner's question of
 whether the framework pays: escaped defects found after merge 0; deliveries
 per accepted round 14/7 = 2.0 (1, 1, 2, 2, 4, 2, 2); rounds that changed card data 2 of 7 (14, 20).
+
+**Round 21 (2026-09-21) — near-Edison FAQ captures
+(`docs/briefs/archive/021-2026-09-21-near-edison-faq-captures.md`).** Accepted
+on the first delivery, with one SHOULD FIX carried forward rather than
+returned — the first time since adoption a round was accepted with a known,
+tracked wording defect, chosen because a full cycle for one sentence cost more
+than it protected. Tally since adoption (rounds 14-21): escaped defects 0;
+deliveries per accepted round 15/8 ≈ 1.9; rounds changing card data 2 of 8.

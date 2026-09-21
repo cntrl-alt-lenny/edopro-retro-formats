@@ -2,146 +2,154 @@
 
 Status: **queued, not started**.
 
-Identifier: **`021-2026-09-21-near-edison-faq-captures`** — use exactly this
+Identifier: **`022-2026-09-21-segoc-period-evidence`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
 
 <!-- Brain bookkeeping (not part of the brief): one brief lives here at a
 time; on adjudication move this file to
-docs/briefs/archive/<NNN>-<date>-<slug>.md (020 is the latest archived) and
+docs/briefs/archive/<NNN>-<date>-<slug>.md (021 is the latest archived) and
 replace it with the next one. -->
 
 ## Read before acting
 
 1. [`AGENTS.md`](../../AGENTS.md) — invariants, especially evidence before
-   confidence and evidence being added to rather than replaced.
+   confidence, evidence being added to rather than replaced, and historical
+   truth versus engine representability.
 2. [`docs/agents/roles/worker.md`](../agents/roles/worker.md) — your contract
    (the Builder holds the Worker contract).
 3. This brief in full.
-4. The archived brief
-   [`020-2026-09-21-per-card-activation-dates.md`](archive/020-2026-09-21-per-card-activation-dates.md)
-   with its Outcome, and the per-card table that round added to
-   [`docs/research/edison-behaviour-gaps.md`](../research/edison-behaviour-gaps.md).
-5. [`docs/format-schema.md`](../format-schema.md) on bounded intervals and
-   state coverage.
+4. For Part A: [`docs/research/edison-rules.md`](../research/edison-rules.md) —
+   row 9 of the evidence table, the Decision section and the Adversarial review.
+5. For Part 0: the archived brief
+   [`021-2026-09-21-near-edison-faq-captures.md`](archive/021-2026-09-21-near-edison-faq-captures.md)
+   and its Outcome.
 
 Do not read the rest of `docs/research/`.
 
 ---
 
-## MODE: HISTORICAL RESEARCH, with a data change explicitly authorized
+## Part 0 — MODE: DOCUMENTATION — one carried correction
 
-## Goal
+Round 21's research text in `docs/research/edison-behaviour-gaps.md` says there
+were no 2009-2010 Konami Card FAQ captures after the January 2009 rows, and the
+`default_ik` source record in `data/sources.json` says the timemap found no
+later capture. The timemaps also list HTTP-302 rows through April 2009, which
+redirect to non-FAQ pages (see round 21's Outcome for the counts Brain
+observed). Re-check them yourself, then make both texts say exactly what was
+searched: how many rows of each status, what the redirects led to, and that no
+later HTTP-200 FAQ-content capture exists in the window. Add to what is there;
+do not remove the existing evidence. No conclusion changes.
 
-For the 33 records round 20 left ambiguous, establish whether Konami's Card FAQ
-pages as captured **between the 2008-12-16 captures already read and the months
-around the Edison snapshot (2010-04-24)** settle any card's activation state at
-Edison — and record whatever the evidence supports. An evidenced "this source
-family settles none of them" is a complete result and closes this line of work.
+## Part A — MODE: HISTORICAL RESEARCH
 
-## Why this is next
+### The question
 
-Round 20 read the 2005 UDE replay and the 2008-12-16 Konami FAQ pages. A 2008
-capture can only ever prove the *new* rule held by then. A capture from
-2009–2010 that still shows the *old* rule for a card would prove the old rule
-held at or near Edison. That matters more: those cards already have an
-old-state implementation, so an old-state bound can change what the Edison
-build actually selects, not only how the record is described. Nothing yet
-establishes whether later captures exist for these pages, or whether they say
-anything different; that is the question.
+Edison's rule profile (`data/rule-profiles/tcg-mr1-edison.json`) omits two
+engine flags, `DUEL_TCG_SEGOC_NONPUBLIC` and `DUEL_TCG_SEGOC_FIRSTTRIGGER`, and
+records them as evidentially unresolved. `edison-rules.md` row 9 explains why:
+the official Rulebook editions of 2008-2011 describe a simple two-tier ordering
+of simultaneous triggers and never address the two specific mechanics those
+flags implement — (a) triggers from a hidden or non-public zone being folded
+into the main ordering pass, and (b) triggers from several different
+simultaneous events being restricted to the earliest event. The only claim that
+the stricter practice existed in 2010 is a 2012 forum post.
 
-## Base
+**Establish whether any official or officially sanctioned material in effect
+in the TCG between about 2009 and the Edison snapshot (2010-04-24) addresses
+either mechanic, and what it says.** Candidate families, not an exhaustive
+list: Konami judge-program materials and judge guides; Konami tournament
+policy and its annexes; official rulings articles or rules columns on Konami's
+site; per-set rulings documents; officially published event FAQs. Frame it
+neutrally: a source showing the simple ordering applied, one showing a
+stricter ordering applied, and "nothing addresses it" are all useful.
+
+### Required investigation
+
+1. For each source family you search: what you searched, how, what exists in
+   the period window, and what each item does and does not establish. A
+   failed search is evidence about the search, not proof of absence.
+2. For anything you find: its own date, the date it describes, whether it is
+   contemporary or retrospective, and whether it is official, officially
+   sanctioned, or community material. Keep those apart.
+3. Keep the two mechanics separate. A source about one does not settle the
+   other, and a source about SEGOC in general does not settle either unless it
+   actually describes that mechanic.
+4. Keep historical truth and engine representability separate. What the
+   period rule was is one question; whether a flag reproduces it exactly is
+   another, and `edison-rules.md` shows these flags implement narrower
+   behaviour than their names suggest.
+
+### Scope
+
+- `docs/research/edison-rules.md` — findings, added to row 9's record without
+  removing what it already says.
+- `data/sources.json` — a record for every source you cite, stating what it
+  does and does not establish.
+
+### Non-goals
+
+- **No change to the rule profile, to `formats/`, or to any engine flag.**
+  If the evidence would support adding or confirming the omission of either
+  flag, stop at the finding and set out the recommendation, with what an
+  engine test would need to show. Changing the profile is a separate round.
+- The other four unresolved flags, and the ignition-priority question.
+- No canonical errata change, no `dist/`, validator, schema or test change.
+
+### When to stop
+
+If a source is plausibly relevant but its date or authority cannot be
+established, record it as unresolved rather than weighing it. If the question
+cannot be advanced from the families you can reach, record exactly what you
+searched and stop; that is a complete result.
+
+## Shared
+
+### Base
 
 Cut from `origin/main`. Record the literal starting SHA.
 
-## Required investigation
-
-1. **Establish what captures exist** of the Konami Card FAQ pages
-   (`yugioh-card.com/en/gameplay/faqs/cardfaqs/default_*.html`) after
-   2008-12-16 and up to about the end of 2010. Say how you enumerated them and
-   what you found; if the archive's index cannot be queried, say so and what
-   you did instead.
-2. **For each of the 33 records, find its own entry** in those captures, and
-   record the passage and served memento timestamp. Note in particular any
-   entry whose text changed from the 2008-12-16 capture, and any entry that now
-   addresses activation with nothing valid to find.
-3. **Bound only what the evidence supports**, as in round 20: an old-state
-   passage moves `old_attested_through` later; a new-state passage moves
-   `new_attested_from` earlier; a capture date is never an effective date; one
-   card's entry never dates another card.
-4. **For every record whose Edison state becomes determinate, state what the
-   Edison build selects before and after**, and whether that makes the shipped
-   behaviour more or less historically faithful.
-
-## Scope and authorization
-
-- `data/errata/*.json` for records in the 33: chronology bounds, their
-  citations and notes.
-- **Coverage for a newly determinate state is authorized**: acknowledging a
-  known gap with a true, specific reason, or pointing at an implementation the
-  record already lists as covering that state. Nothing else about coverage or
-  implementation strategy.
-- `data/sources.json`, `docs/research/edison-behaviour-gaps.md`.
-- `dist/` only by `python -m retroformats build`.
-- Tests: only re-pinning values a legitimate data change moves, each with old
-  value, new value and reason.
-
-## Non-goals
-
-- Records outside the 33, the five round 20 settled, and the
-  deck-verification bracket.
-- Sources other than the Konami Card FAQ page family. Other families
-  (per-set rulings, judge materials, forum rulings) are a later decision.
-- Custom scripts, validator or schema changes.
-
-## Protected invariants
+### Protected invariants
 
 - Evidence before confidence; evidence added to, never replaced.
-- GOAT hash `0x28E9FC02` unchanged; April 2005 and March 2010 banlist entry
-  sets unchanged. Any Edison output change explained record by record.
-- **Gates green at your head**: `validate` 0 errors, `build --check` clean,
-  suite passing, CI green. If a gate cannot pass within this brief, stop and
-  report; do not push past a check.
+- Validator baseline 0 errors, 569 warnings; suite passing; GOAT hash
+  `0x28E9FC02`; banlist entry sets unchanged.
+- Gates green at your head, CI included. If a gate cannot pass within the
+  brief, stop and report; never bypass a check.
 
-## When to stop
+### Acceptance criteria
 
-- If no captures of the FAQ pages exist in that window, or none of them changes
-  any of the 33 records' state, record the search exactly and stop: that closes
-  this source family.
-- If a card's entry is ambiguous about activation, leave it and say why.
-
-## Acceptance criteria
-
-- The capture enumeration method and result stated.
-- Every one of the 33 accounted for: changed with a quoted, time-stamped
-  passage from its own entry, or unchanged with the reason.
-- Every newly determinate record's Edison selection before and after, stated
-  and reproducible.
+- Part 0: both texts state the redirect rows accurately, with the existing
+  evidence kept.
+- Part A: a sourced answer for each mechanic separately, or a specific account
+  of what was searched and why it does not settle it.
+- Every cited source registered with what it does and does not establish.
 - Every changed record's base and head versions side by side.
-- All gates green.
+- No rule-profile, `formats/`, errata or `dist/` change.
 
-## Required evidence
+### Required evidence
 
-`python -m retroformats validate`, `build --check`, `report`, and
+For every claim: URL or file, the passage read, and for archived pages the
+served memento timestamp. `python -m retroformats validate`,
+`python -m retroformats build --check` and
 `python -m unittest discover -t . -s tests -v`, with real output and exit
-status on Python 3.10 or newer. For every bound: URL, served memento timestamp,
-passage. GOAT hash and both banlist entry sets confirmed unchanged.
+status, on Python 3.10 or newer.
 
-## Git expectations
+### Git expectations
 
 Work only in `.worktrees/builder/`; every file you create or edit must be
-inside it. Branch `builder/near-edison-faq-captures` from `origin/main`.
-Focused commits; push the branch; never push `main`; never merge; never bypass
-a local check. Before finishing, run
+inside it. Branch `builder/segoc-period-evidence` from `origin/main`. Focused
+commits; push the branch; never push `main`; never merge; never bypass a local
+check. Before finishing, run
 `git -C /Users/leo/Dev/edopro-retro-formats status --short` and confirm it
 prints nothing. After your final commit and push, write your report from
 inside `.worktrees/builder/` with
-`python3 tools/report.py write --task 021-2026-09-21-near-edison-faq-captures`
+`python3 tools/report.py write --task 022-2026-09-21-segoc-period-evidence`
 (Python 3.10+), as well as displaying it.
 
-## Completion-report schema
+### Completion-report schema
 
-The Worker contract's report, plus: how captures were enumerated and what
-exists; a table with one row per record in the 33 (card, erratum id, entry
-found and served timestamp, passage, bound before and after, Edison state and
-Edison selection before and after); and every changed record's base and head
-versions side by side.
+The Worker contract's report, plus: for Part 0, the before and after text; for
+Part A, per source family what was searched and found, a separate conclusion
+for each of the two mechanics at the confidence the evidence supports, and any
+recommendation for a later profile round; and every changed record's base and
+head versions side by side.
