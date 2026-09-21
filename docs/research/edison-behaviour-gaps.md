@@ -1319,8 +1319,8 @@ The archive's CDX endpoint returned HTTP 503 in this session, so I used the
 Wayback timemap JSON endpoint separately for each of the eight FAQ URL patterns
 (`default_ac`, `default_de`, `default_fh`, `default_ik`, `default_lo`,
 `default_pr`, `default_st`, and `default_uz`). I filtered the returned rows to
-HTTP 200 captures with timestamps strictly after `2008-12-16` and no later than
-`2010-12-31`. The result was 12 captures:
+timestamps strictly after `2008-12-16` and no later than `2010-12-31`, retaining
+both HTTP 200 and HTTP 302 rows. The HTTP 200 subset was 12 captures:
 
 | Page | Captures in the requested window | Wayback digest |
 |---|---|---|
@@ -1333,10 +1333,36 @@ HTTP 200 captures with timestamps strictly after `2008-12-16` and no later than
 | `default_st.html` | `2008-12-20 08:28:55 GMT`, `2009-01-19 17:18:13 GMT` | `WKXWXYW7ERF2SPSSGEQGA7E5CZ2XXCDP` |
 | `default_uz.html` | `2008-12-17 10:10:48 GMT`, `2009-01-16 17:59:21 GMT` | `LZGIO37JFZ5HO66ANLP3PHSEC4O5KI7L` |
 
+The same timemap search returned 29 HTTP 302 rows. I requested every one of
+those rows directly, without following the redirect in the first request, and
+recorded the `Memento-Datetime` and `Location` headers. The rows and their
+destinations were:
+
+| Page | HTTP 302 memento timestamps actually served | Destination |
+|---|---|---|
+| `default_ac.html` | `2009-01-19 07:37:34`, `2009-02-05 22:45:50`, `2009-03-14 09:34:05`, `2009-04-15 16:15:23` GMT | archived `http://www.yugioh-card.com/` for all four |
+| `default_de.html` | `2009-01-16 17:59:07`, `2009-02-16 10:07:38`, `2009-03-19 07:00:34`, `2009-04-20 12:52:05` GMT | archived `http://www.yugioh-card.com/` for all four |
+| `default_fh.html` | `2009-01-16 18:03:25`, `2009-02-16 10:07:43`, `2009-03-19 07:15:25`, `2009-04-20 13:27:30` GMT | archived `http://www.yugioh-card.com/` for all four |
+| `default_ik.html` | `2009-01-16 17:59:12`, `2009-02-16 10:07:49`, `2009-03-19 07:09:53`, `2009-04-20 13:22:28` GMT | archived `http://www.yugioh-card.com/` for all four |
+| `default_lo.html` | `2009-02-16 10:07:54`, `2009-03-19 07:14:03`, `2009-04-20 13:19:42` GMT | archived `http://www.yugioh-card.com/` for all three |
+| `default_pr.html` | `2009-01-19 07:37:39`, `2009-02-20 01:13:22`, `2009-03-28 06:44:33`, `2009-04-29 06:26:33` GMT | archived `http://www.yugioh-card.com/` for the first two; archived `http://www.yugioh-card.com/en/` for the last two |
+| `default_st.html` | `2009-02-20 01:39:44`, `2009-03-28 09:01:38`, `2009-04-29 05:19:54` GMT | archived `http://www.yugioh-card.com/` for all three |
+| `default_uz.html` | `2009-02-16 09:53:28`, `2009-03-19 07:10:01`, `2009-04-20 13:19:49` GMT | archived `http://www.yugioh-card.com/en/` for all three |
+
+None of the 29 redirect destinations was a Card FAQ page, so none supplied
+additional FAQ content; they remain part of the search result rather than
+being silently dropped.
+
+Search interpretation: a failed archive request is evidence about that request
+in that session, not evidence that the underlying source is unavailable. The
+same rule applies to a redirect: it records the replay destination actually
+served, not the absence of the requested FAQ at every other replay.
+
 I fetched and read the later capture cited for each page. The later capture
 has the same digest as the earlier capture for that page where both exist;
-there were no 2009–2010 captures after the January 2009 rows. The eight
-fetched mementos and their served timestamps are recorded in the source
+there were no later HTTP 200 FAQ captures after the January 2009 rows, but the
+timemap did contain the 29 later HTTP 302 rows listed above. The eight fetched
+HTTP 200 mementos and their served timestamps are recorded in the source
 records `konami-card-faq-near-edison-2008-12-31-ac`,
 `konami-card-faq-near-edison-2008-12-17-de`,
 `konami-card-faq-near-edison-2008-12-17-fh`,

@@ -317,7 +317,7 @@
       "kind": "official",
       "title": "Konami TCG Card FAQ default_ik page (Internet Archive capture served 2008-12-16)",
       "url": "https://web.archive.org/web/20081216162317/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ik.html",
-      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:17 GMT. No own entry for Sonic Bird was present; the card name appears only in another card's example list. Retrieved 2026-09-21."
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:17 GMT. No own entry for Sonic Bird was present; the card name appears only in another card's example list. Retrieved 2026-09-21. Round 22 rechecked the Wayback timemap JSON for the same URL pattern, filtering strictly after 2008-12-16 through 2010-12-31: the HTTP 200 row was 2008-12-17 10:10:40 GMT, and the four later rows were HTTP 302 at 2009-01-16 17:59:12, 2009-02-16 10:07:49, 2009-03-19 07:09:53, and 2009-04-20 13:22:28 GMT. Direct requests served those four mementos with Location headers to the archived site root, respectively http://web.archive.org/web/20090116175912/http://www.yugioh-card.com/, http://web.archive.org/web/20090216100749/http://www.yugioh-card.com/, http://web.archive.org/web/20090319070953/http://www.yugioh-card.com/, and http://web.archive.org/web/20090420132228/http://www.yugioh-card.com/; none led to a Card FAQ page. The 200 2008-12-17 page was the only FAQ content read for this pattern, and it had no own Sonic Bird entry. The redirect rows are evidence about those archive requests and destinations, not evidence that the FAQ source was absent. Retrieved 2026-09-21."
     },
     {
       "id": "konami-card-faq-2008-12-16-lo",
@@ -504,6 +504,17 @@
       "retrieved": "2026-08-27",
       "used_for": "Period-2011 sanctioned TCG legality policy: American Duel Terminal cards are legal only if released in another product; Duel Terminal-exclusive cards are not legal in sanctioned events.",
       "reliability_notes": "The full surviving copy is a faithful mirror of the KDE document and identifies itself as official, v1.1, effective May 5, 2011. A contemporary Konami YCS Toronto FAQ links the original official PDF URL (http://www.yugioh-card.com/en/gameplay/penalty_guide/KDE_TCG_Tournament_Policy_05May11.pdf), which is no longer hosted at that path. The mirror limitation is explicit; the text is used with that provenance rather than claimed as a currently official hosted copy."
+    },
+    {
+      "id": "kde-tcg-tournament-policy-v10-2010-etcg-copy",
+      "kind": "official",
+      "title": "KDE Official Yu-Gi-Oh! TCG Tournament Policy v1.0 (valid as of February 1, 2010; third-party etcg.de copy)",
+      "url": "https://www.etcg.de/uploads/pdf/KDE_YuGiOh_Policy.pdf",
+      "publisher": "Konami Digital Entertainment GmbH (KDE)",
+      "revision": "v1.0; PDF title metadata KDE_YGOPolicy_Feb2010_Europe; SHA-256 bb0310b439264f2b6aa7757540f375c12431335adfc15d2e10f036552145c704",
+      "retrieved": "2026-09-21",
+      "used_for": "Round 22's SEGOC source-family check. The eight-page PDF says it is valid as of February1, 2010 and explains tournament-policy scope, but its text contains no occurrence of simultaneous, SEGOC, mandatory, optional, trigger, hidden, private, non-public, or earliest; its only chain passage concerns end-of-round Life Point timing, not trigger ordering. It therefore does not establish either hidden-zone trigger folding or an earliest-simultaneous-event rule.",
+      "reliability_notes": "This is a third-party copy served by etcg.de, not a PDF served by Konami. The first page identifies the document as 'Konami Digital Entertainment GmbH / Official Yu-Gi-Oh! TRADING CARD GAME Tournament Policy / Valid as of February1, 2010' and the PDF metadata identifies KDE_YGOPolicy_Feb2010_Europe with CreationDate 2010-02-26; the etcg.de response also reported Last-Modified Tue, 02 Mar 2010 09:21:34 GMT. An exact-title/filename search on yugioh-card.com returned no official-host result, and direct/Wayback lookup attempts did not produce an official-host copy or archive capture (the Wayback CDX endpoint returned HTTP 503 in this session), so no official-host provenance was established. The copy can be trusted as evidence of what this surviving PDF says, with internally consistent title/date/version and a reproducible digest, but not by itself as independent authentication that the file matches KDE's distributed original or as proof of an exact effective date beyond its own self-statement."
     },
     {
       "id": "konami-official-rulebook-v71-2010",
