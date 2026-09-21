@@ -1303,3 +1303,99 @@ it does not move Mystic Tomato's activation bound. Storm of Ragnarok mentions
 Giant Rat only in another card's example list, not in a Giant Rat entry, and
 Machina Mayhem has no entry for a cluster card. These per-set passages were
 therefore not used to infer any activation date.
+
+## Round 21 — near-Edison Konami Card FAQ captures (2026-09-21)
+
+This round searched only the 33 records that Round 20 left ambiguous. The
+question was whether a Konami Card FAQ capture after the eight captures served
+on 2008-12-16, and before or near the 2010-04-24 Edison snapshot, supplied a
+card-specific activation-with-no-valid-search ruling. A capture date is an
+attestation of the state served on that date, never an effective date; an entry
+for one card never dates another card.
+
+### Capture enumeration
+
+The archive's CDX endpoint returned HTTP 503 in this session, so I used the
+Wayback timemap JSON endpoint separately for each of the eight FAQ URL patterns
+(`default_ac`, `default_de`, `default_fh`, `default_ik`, `default_lo`,
+`default_pr`, `default_st`, and `default_uz`). I filtered the returned rows to
+HTTP 200 captures with timestamps strictly after `2008-12-16` and no later than
+`2010-12-31`. The result was 12 captures:
+
+| Page | Captures in the requested window | Wayback digest |
+|---|---|---|
+| `default_ac.html` | `2008-12-17 03:47:42 GMT`, `2008-12-31 02:57:49 GMT` | `XKQXD24VDNOFK3637LPMMVNVLAW3E4UO` |
+| `default_de.html` | `2008-12-17 10:10:38 GMT` | `UM5OQHHUX3CAEF7FW55IUQXVTYQR76O2` |
+| `default_fh.html` | `2008-12-17 06:15:05 GMT` | `BU54SIQLOK6WTP4KHLO6IUKA4LYN3SQS` |
+| `default_ik.html` | `2008-12-17 10:10:40 GMT` | `7OTGQ5DMLK5D33C4DHG25LNRUCTRKN5V` |
+| `default_lo.html` | `2008-12-17 03:07:43 GMT`, `2009-01-16 08:16:01 GMT` | `6TBCXUIGXJGXWB5D6HOT7PZOD5X7ESI2` |
+| `default_pr.html` | `2008-12-20 08:14:44 GMT` | `RQ2OH5OYHUVG3ROOWFULGVYU53K4ZW2N` |
+| `default_st.html` | `2008-12-20 08:28:55 GMT`, `2009-01-19 17:18:13 GMT` | `WKXWXYW7ERF2SPSSGEQGA7E5CZ2XXCDP` |
+| `default_uz.html` | `2008-12-17 10:10:48 GMT`, `2009-01-16 17:59:21 GMT` | `LZGIO37JFZ5HO66ANLP3PHSEC4O5KI7L` |
+
+I fetched and read the later capture cited for each page. The later capture
+has the same digest as the earlier capture for that page where both exist;
+there were no 2009–2010 captures after the January 2009 rows. The eight
+fetched mementos and their served timestamps are recorded in the source
+records `konami-card-faq-near-edison-2008-12-31-ac`,
+`konami-card-faq-near-edison-2008-12-17-de`,
+`konami-card-faq-near-edison-2008-12-17-fh`,
+`konami-card-faq-near-edison-2008-12-17-ik`,
+`konami-card-faq-near-edison-2009-01-16-lo`,
+`konami-card-faq-near-edison-2008-12-20-pr`,
+`konami-card-faq-near-edison-2009-01-19-st`, and
+`konami-card-faq-near-edison-2009-01-16-uz`.
+
+### Per-record result
+
+All 33 records remain activation-chronology ambiguous. In the table,
+“unresolved” means the activation event's `effective` object remains undated;
+the old verification event already retained by each record is not being used
+to date it. “Modern fallback” means the Edison format's documented
+`unresolved_policy` still causes the shipped build to use the modern card when
+the activation chronology is unresolved. No record became determinate, so no
+Edison output changed and there is no before/after faithfulness improvement to
+claim.
+
+| Card | Erratum | Own entry in a searched capture; passage actually read | Activation bound before → after | Edison state and selection before → after |
+|---|---|---|---|---|
+| A Deal with Dark Ruler | `erratum-a-deal-with-dark-ruler` | `default_ac`, served `2008-12-31 02:57:49 GMT`: “If your opponent's Level 8 or higher monster than you control is sent to the Graveyard, you can activate \"A Deal with Dark Ruler\".” This does not say whether Berserk Dragon exists. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Apprentice Magician | `erratum-apprentice-magician` | `default_ac`, served `2008-12-31 02:57:49 GMT`: “You must show your opponent the monster you Special Summon.” This concerns showing the result, not activation with no Level 2 or lower Spellcaster. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Armed Dragon LV3 | `erratum-armed-dragon-lv3` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages; another card's passage cannot date Armed Dragon LV3. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Armed Dragon LV5 | `erratum-armed-dragon-lv5` | `default_ac`, served `2008-12-31 02:57:49 GMT`: “You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy.” This is the LV5 destruction effect, not the separate LV7 level-up effect. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Birdface | `erratum-birdface` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Bubonic Vermin | `erratum-bubonic-vermin` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Dark Mimic LV1 | `erratum-dark-mimic-lv1` | No own entry in `default_de`, served `2008-12-17 10:10:38 GMT`, or the other seven pages; the name occurs only in another card's passage. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Dark Scorpion - Meanae the Thorn | `erratum-dark-scorpion-meanae-the-thorn` | `default_de`, served `2008-12-17 10:10:38 GMT`: “You can use \"Meanae the Thorn\"'s effect to add a Monster, Spell, or Trap Card to your hand that includes \"Dark Scorpion\" in its name, including \"Mustering of the Dark Scorpions\" and \"Dark Scorpion Combination\".” It lists eligible additions, not an empty-Deck activation rule. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Dedication through Light and Darkness | `erratum-dedication-through-light-and-darkness` | `default_de`, served `2008-12-17 10:10:38 GMT`: “You select the \"Dark Magician of Chaos\" you wish to Special Summon when you resolve \"Dedication through Light and Darkness\", not when you activate it.” Resolution-time selection is not an activation bound. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Elegant Egotist | `erratum-elegant-egotist` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Emblem of Dragon Destroyer | `erratum-emblem-of-dragon-destroyer` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Giant Rat | `erratum-giant-rat` | `default_fh`, served `2008-12-17 06:15:05 GMT`: “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” This is timing after the trigger, not activation with no Deck target. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Great Dezard | `erratum-great-dezard` | `default_fh`, served `2008-12-17 06:15:05 GMT`: “You can Special Summon only 1 \"Fushioh Richie\" by Tributing \"Great Dezard\".” This limits the result and does not address an empty Deck at activation. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Hand of Nephthys | `erratum-hand-of-nephthys` | `default_fh`, served `2008-12-17 06:15:05 GMT`: “Tributing monsters is a cost of this card’s effect.” Cost timing does not establish whether Sacred Phoenix must be available. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Hero Signal | `erratum-hero-signal` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Manju of the Ten Thousand Hands | `erratum-manju-of-the-ten-thousand-hands` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Masked Dragon | `erratum-masked-dragon` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Mother Grizzly | `erratum-mother-grizzly` | `default_lo`, served `2009-01-16 08:16:01 GMT`: “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” This is battle-trigger timing, not activation with no Deck target. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Mystic Swordsman LV2 | `erratum-mystic-swordsman-lv2` | `default_lo`, served `2009-01-16 08:16:01 GMT`: “If \"Mystic Swordsman LV2\" attacks a face-down Defense Position monster, that monster is destroyed by \"Mystic Swordsman LV2\"’s effect, not as a result of battle.” This distinguishes destruction modes, not LV4 availability at activation. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Mystic Swordsman LV4 | `erratum-mystic-swordsman-lv4` | `default_lo`, served `2009-01-16 08:16:01 GMT`: “If \"Mystic Swordsman LV4\" attacks a face-down Defense Position monster, you destroy the monster with \"Mystic Swordsman LV4\"’s effect before flipping the monster face-up.” It does not address activation with no level-up target. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Mystic Tomato | `erratum-mystic-tomato` | `default_lo`, served `2009-01-16 08:16:01 GMT`: “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” This is a timing restriction, not an empty-Deck activation ruling. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Ninjitsu Art of Transformation | `erratum-ninjitsu-art-of-transformation` | `default_lo`, served `2009-01-16 08:16:01 GMT`: “\"Ninjitsu Art of Transformation\" does not target; you select the monster to Special Summon when you resolve its effect.” Non-targeting and resolution-time selection do not prove an activation bound. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Paladin of White Dragon | `erratum-paladin-of-white-dragon` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Pandemonium | `erratum-pandemonium` | `default_pr`, served `2008-12-20 08:14:44 GMT`: “When your Archfiends controlled by your opponent are sent to your Graveyard, you can add an Archfiend from your Deck to your hand with \"Pandemonium\".” This describes the trigger and add, not an empty-Deck activation. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Peten the Dark Clown | `erratum-peten-the-dark-clown` | `default_pr`, served `2008-12-20 08:14:44 GMT`: “Missing the Timing: \"Peten the Dark Clown\" is a \"when… you can\" optional Trigger Effect.” Timing-window guidance is not a failed-search activation ruling. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Pyramid Turtle | `erratum-pyramid-turtle` | `default_pr`, served `2008-12-20 08:14:44 GMT`: “You may Special Summon a high-level monster with \"Pyramid Turtle's\" effect ... but not a Special-Summon only monster.” This limits the eligible result class, not activation with no result. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Skull Knight #2 | `erratum-skull-knight-2` | `default_st`, served `2009-01-19 17:18:13 GMT`: “If you Tribute Set a high level Fiend-Type monster by Tributing this card, you CAN Special Summon another \"Skull Knight #2\" from your Deck and you do NOT have to reveal your Set monster to prove it is a Fiend-Type.” It does not address activation with no copy in the Deck. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Sonic Bird | `erratum-sonic-bird` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages; a name mention in another card's example list is not this card's entry. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Terraforming | `erratum-terraforming` | No own `CardNameLabel` entry in any of the eight fetched FAQ pages. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| UFO Turtle | `erratum-ufo-turtle` | `default_uz`, served `2009-01-16 17:59:21 GMT`: “Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.” This is battle-trigger timing, not activation with no Deck target. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Ultimate Insect LV1 | `erratum-ultimate-insect-lv1` | `default_uz`, served `2009-01-16 17:59:21 GMT`: “\"Ultimate Insect LV1\"’s 2nd sentence is a Ignition Effect that is activated by sending \"Ultimate Insect LV1\" to the Graveyard as a cost.” Cost and chaining do not say whether LV3 must be available. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Ultimate Insect LV3 | `erratum-ultimate-insect-lv3` | `default_uz`, served `2009-01-16 17:59:21 GMT`: “The effect of \"Ultimate Insect LV3\" that reduces ATK by 300 points is a Continuous Effect.” This is about the continuous ATK effect, not leveling. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+| Ultimate Insect LV5 | `erratum-ultimate-insect-lv5` | `default_uz`, served `2009-01-16 17:59:21 GMT`: “You can Special Summon \"Ultimate Insect LV5\" with the effect of \"Ultimate Insect LV3\" even if that \"Ultimate Insect LV3\" was not Special Summoned by the effect of \"Ultimate Insect LV1\".” This addresses summon history, not whether an LV5 target must exist at activation. | unresolved → unresolved | ambiguous / modern fallback → unchanged |
+
+The 33 records therefore have no changed activation bounds, no newly
+determinate Edison states, no Edison selection changes, and no canonical-data
+or generated-output changes. The FAQ source family is closed for this line of
+work: captures exist, but the later captures either repeat the earlier page
+content or contain only entries about timing, cost, result restrictions, or
+resolution rather than the activation-with-no-valid-search question.
