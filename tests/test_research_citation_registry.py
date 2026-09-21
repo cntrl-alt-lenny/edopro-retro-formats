@@ -96,6 +96,25 @@ class ResearchCitationRegistryTest(unittest.TestCase):
             finally:
                 registry.BASELINE_UNREGISTERED_URLS = old
 
+    def test_redirect_destination_exemption_is_scoped_to_its_occurrence(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as name:
+            root = Path(name)
+            backlog = _write_fixture(root, "http://www.yugioh-card.com/\n", [], [])
+            (root / "docs/research/example.md").rename(root / "docs/research/edison-behaviour-gaps.md")
+            (root / "docs/research/other.md").write_text("http://www.yugioh-card.com/\n")
+            import tests.research_citation_registry as registry
+
+            old = registry.BASELINE_UNREGISTERED_URLS
+            try:
+                registry.BASELINE_UNREGISTERED_URLS = frozenset()
+                errors = check(root, backlog)
+                location_errors = [error for error in errors if "not listed in backlog" in error]
+                self.assertEqual(1, len(location_errors), errors)
+                self.assertIn("docs/research/other.md:1", location_errors[0])
+                self.assertNotIn("edison-behaviour-gaps.md", location_errors[0])
+            finally:
+                registry.BASELINE_UNREGISTERED_URLS = old
+
     def test_report_is_green_on_current_tree(self):
         root = Path(__file__).resolve().parents[1]
         self.assertIn("OK", report(root))

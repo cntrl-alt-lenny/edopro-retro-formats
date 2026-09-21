@@ -160,6 +160,7 @@ REDIRECT_DESTINATIONS = {
 class Occurrence:
     path: str
     line: int
+    exemption: str | None = None
 
 
 @dataclass
@@ -167,7 +168,6 @@ class Citation:
     url: str
     key: str
     occurrences: list[Occurrence] = field(default_factory=list)
-    exemption: str | None = None
 
 
 def _trim_url(raw: str) -> str:
@@ -275,11 +275,10 @@ def scan_citations(root: Path) -> dict[str, Citation]:
                 if not keys:
                     continue
                 key = sorted(keys)[0]
-                occurrence = Occurrence(relative, line_number)
+                location = Occurrence(relative, line_number)
+                occurrence = Occurrence(relative, line_number, _exemption(url, location))
                 citation = citations.setdefault(key, Citation(url=url, key=key))
                 citation.occurrences.append(occurrence)
-                if citation.exemption is None:
-                    citation.exemption = _exemption(url, occurrence)
     return citations
 
 
@@ -308,7 +307,10 @@ def unregistered_citations(root: Path) -> tuple[dict[str, Citation], dict[str, l
     registered, owners = _source_registry(root)
     unregistered: dict[str, Citation] = {}
     for key, citation in citations.items():
-        if citation.exemption is None and key not in registered:
+        # A URL key is unregistered when at least one occurrence is not
+        # exempt.  An exemption is a property of its use, not a license for
+        # every occurrence of the same normalized resource.
+        if any(occurrence.exemption is None for occurrence in citation.occurrences) and key not in registered:
             original = _wayback_original(citation.url)
             if original and _url_keys(original).isdisjoint(registered):
                 unregistered[key] = citation
@@ -351,7 +353,9 @@ def check(root: Path, backlog_path: Path | None = None) -> list[str]:
     if current != listed:
         for key in sorted(current - listed):
             citation = unregistered[key]
-            locations = ", ".join(f"{o.path}:{o.line}" for o in citation.occurrences)
+            locations = ", ".join(
+                f"{o.path}:{o.line}" for o in citation.occurrences if o.exemption is None
+            )
             errors.append(f"unregistered citation not listed in backlog: {citation.url} ({locations})")
         for key in sorted(listed - current):
             errors.append(f"backlog entry is no longer an unregistered citation: {backlog[key]['url']}")
@@ -374,7 +378,7 @@ def report(root: Path, backlog_path: Path | None = None) -> str:
     backlog_path = backlog_path or root / BACKLOG_RELATIVE
     citations = scan_citations(root)
     unregistered, _ = unregistered_citations(root)
-    exempt = [c for c in citations.values() if c.exemption]
+    exempt = [c for c in citations.values() if any(o.exemption for o in c.occurrences)]
     counts = Counter(category(c.url) for c in unregistered.values())
     lines = [
         f"research citation registry: {len(citations)} unique URL tokens; "
