@@ -51,7 +51,25 @@
     },
     "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-07-01",
+        "new_attested_from": "2008-12-16",
+        "basis": "This card's own UDE ruling capture states that the draw-replacement effect may be attempted with no eligible Warrior in the Deck; its own Konami Card FAQ entry later says activation is forbidden in that case. The served memento dates are state attestations, not effective dates.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (served memento 2005-07-01 23:56:27 GMT)",
+            "quote": "The effect of this card that allows you to forfeit your draw to place a Warrior-Type monster from your Deck into your hand is optional. You do not have to activate it if you don’t want to. If you attempt to activate this effect and find that you do not have any Warrior-Type monsters in your Deck, you do not get your normal draw back. You have already forfeited it.",
+            "archived": true
+          },
+          {
+            "url": "https://web.archive.org/web/20081216162313/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
+            "title": "Konami TCG Card FAQ default_fh (served memento 2008-12-16 16:23:13 GMT)",
+            "quote": "\"\"Freed the Matchless General’s\" second effect cannot be activated if you have no Level 4 or lower Warrior-Type monsters in your Deck.",
+            "archived": true
+          }
+        ]
       },
       "transitions": [
         {
@@ -59,7 +77,7 @@
           "axis": null,
           "historical_text": "Negate the effect of any Spell Card that targets this card and destroy it. As long as this card remains face-up on the field, you can add 1 Level 4 or lower Warrior-Type monster from your Deck to your hand per turn instead of drawing 1 card from your Deck during your Draw Phase. Then shuffle your Deck.",
           "modern_text": null,
-          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target returns true unconditionally where the modern script requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the player may give up the normal draw for the turn (the EFFECT_DRAW_COUNT 0 replacement is still registered) with no eligible Warrior in the Deck - a real cost paid for nothing. No source in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.target returns true unconditionally where the modern script requires Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,...), so the player may give up the normal draw for the turn (the EFFECT_DRAW_COUNT 0 replacement is still registered) with no eligible Warrior in the Deck - a real cost paid for nothing. This card's own UDE and Konami captures attest the old and new states by 2005-07-01 and 2008-12-16 respectively; those captures do not assert an effective date.",
           "sources": [
             "ignis-cardscripts",
             "yugipedia-card-errata"
@@ -78,6 +96,19 @@
         "historical_variant_passcodes": [],
         "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
         "script": "goat/c504700082.lua"
+      }
+    },
+    {
+      "events": [
+        "c1"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis has no implementation of this intermediate state: the modern script already enforces the new activation requirement, but it does not reproduce the old procedure of letting the opponent verify the Deck after a failed search.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
       }
     }
   ],

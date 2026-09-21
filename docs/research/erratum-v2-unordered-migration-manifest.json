@@ -146,7 +146,7 @@
       "id": "erratum-freed-the-matchless-general",
       "ordering_edge_count": 0,
       "path": "data/errata/freed-the-matchless-general.json",
-      "post_migration_sha256": "0a9c5f2fe66ebff5dbcf1f7d8f6a0af8428c6aa0fc3a705c5e9cfafcd4a125a9",
+      "post_migration_sha256": "d261ef65f184146b3a4ebfe92a5887bfa3aed4b0c695caabda4af9d74e3e310e",
       "pre_migration_sha256": "cf6a4c30cec0fea57e118fe67e3ec37fc9fad3effc83561792ef1fcc7342884f",
       "relevant_event_count": 2
     },
@@ -156,7 +156,7 @@
       "id": "erratum-fusion-sage",
       "ordering_edge_count": 0,
       "path": "data/errata/fusion-sage.json",
-      "post_migration_sha256": "72fb25100bd491a864800e9d0e79430c616a9302774bbfa28cfa862bc6ea0c1d",
+      "post_migration_sha256": "2e7905ab448f5f7b0d677a813650aca3e9320a590f7d837c3ba5297bb0037b41",
       "pre_migration_sha256": "b6430967f76267de61f3e259979cdffd119ec989dcf3ff6ec7c848470f5f6641",
       "relevant_event_count": 2
     },
@@ -206,7 +206,7 @@
       "id": "erratum-horus-the-black-flame-dragon-lv4",
       "ordering_edge_count": 0,
       "path": "data/errata/horus-the-black-flame-dragon-lv4.json",
-      "post_migration_sha256": "fff27bfb9a0124003be9fdeff03bd9ea47280212a02ddf69b0226f2a14a569a7",
+      "post_migration_sha256": "34bec962f1f5550a0251ca5839e50ec3e6bb7e57afc076e65d66ab4a6ce3e3d7",
       "pre_migration_sha256": "a0b6c0af13edda78ef58672ac83d80521fbc1e657c78cae73ebfd77bc151d743",
       "relevant_event_count": 2
     },
@@ -366,7 +366,7 @@
       "id": "erratum-thunder-dragon",
       "ordering_edge_count": 0,
       "path": "data/errata/thunder-dragon.json",
-      "post_migration_sha256": "c87981639f0f6f4677f5ded6b26284ebb502ddbc6d6f424e27c083cbf38ef472",
+      "post_migration_sha256": "06939f7f7528e011b9c6d6919a8dc775b03db5624a422f5440246a49a00db084",
       "pre_migration_sha256": "ce3f63ec8e5a2d8bbd0a5501908ca5d774c24425aa63b60dc25c3588d35dede3",
       "relevant_event_count": 2
     },
@@ -376,7 +376,7 @@
       "id": "erratum-toon-table-of-contents",
       "ordering_edge_count": 0,
       "path": "data/errata/toon-table-of-contents.json",
-      "post_migration_sha256": "1872467fd5ab150a078e6ccffcf2098640a5cec5061815d71f930c639e425c95",
+      "post_migration_sha256": "81ffb31be41d0cd87494d545a53a055cd3e5d215ff53637200734fb57369028f",
       "pre_migration_sha256": "8c52a026d0874651b1cf5cec487b11031284d7bbe7b83eb0dec3700c865f1a00",
       "relevant_event_count": 2
     },

@@ -51,7 +51,19 @@
     },
     "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": null,
+        "new_attested_from": "2008-12-16",
+        "basis": "The card's own Konami Card FAQ capture says activation is forbidden when no Thunder Dragon remains in the Deck. This served memento date attests the new state; it is not an effective date, and no period entry establishing the old state was found.",
+        "corroboration": [
+          {
+            "url": "https://web.archive.org/web/20081216162333/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
+            "title": "Konami TCG Card FAQ default_st (served memento 2008-12-16 16:23:33 GMT)",
+            "quote": "You cannot discard \"Thunder Dragon\" to activate its effect if you do not have any \"Thunder Dragon\" in your Deck.",
+            "archived": true
+          }
+        ]
       },
       "transitions": [
         {
@@ -59,7 +71,7 @@
           "axis": null,
           "historical_text": "Discard this card from your hand to the Graveyard to add up to 2 \"Thunder Dragon\" cards from your Deck to your hand. Then shuffle your Deck. You can only use this effect during your Main Phase.",
           "modern_text": null,
-          "summary": "Two era allowances the printed text does not show: the goat script can be activated with no copy in the Deck (target check relaxed from Duel.IsExistingMatchingCard to 'return true', with SetOperationInfo count 1 -> 0), and it lets the player add ZERO copies (Duel.SelectMatchingCard minimum 1 -> 0), matching the netrep ruling upstream quotes in its annotation that this card \"may be discarded to search for 0\" copies. The modern script requires a copy in the Deck to activate and forces at least one to be added. Nothing in the packet dates either allowance, so the chronology is unresolved.",
+          "summary": "Two era allowances the printed text does not show: the goat script can be activated with no copy in the Deck (target check relaxed from Duel.IsExistingMatchingCard to 'return true', with SetOperationInfo count 1 -> 0), and it lets the player add ZERO copies (Duel.SelectMatchingCard minimum 1 -> 0), matching the netrep ruling upstream quotes in its annotation that this card \"may be discarded to search for 0\" copies. The modern script requires a copy in the Deck to activate and forces at least one to be added. Its own Konami capture attests the new activation requirement by 2008-12-16; that capture does not assert an effective date, and no period entry establishing the old state was found.",
           "sources": [
             "ignis-cardscripts"
           ]
@@ -77,6 +89,19 @@
         "historical_variant_passcodes": [],
         "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
         "script": "goat/c504700054.lua"
+      }
+    },
+    {
+      "events": [
+        "c1"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis has no implementation of this intermediate state: the modern script already enforces the new activation requirement, but it does not reproduce the old procedure of letting the opponent verify the Deck after a failed search.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
       }
     }
   ],

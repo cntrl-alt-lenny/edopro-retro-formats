@@ -615,43 +615,43 @@
   },
   "errata_audit": {
     "snapshot": "1999-08-26",
-    "snapshot_note_2026_08_30_session7": "CORRECTED from 1999-08-25 (matching target_recommendation.snapshot's correction - see restriction_list_current.temporal_model_2026_08_30_session7). Mechanically re-verified this change is a no-op for every result below: all 296 errata (selection_at()) resolve identically at 1999-08-25 and 1999-08-26, so total/chronology/determinate/ambiguous counts and determinate_historical_substitutions_digest are UNCHANGED and did not need recomputation.",
+    "snapshot_note_2026_08_30_session7": "CORRECTED from 1999-08-25 (matching target_recommendation.snapshot's correction - see restriction_list_current.temporal_model_2026_08_30_session7). A later per-card activation coverage correction was then re-verified at both dates: it leaves the event bounds unchanged, but acknowledging the five c1 implementation gaps makes Freed the Matchless General and Horus the Black Flame Dragon LV4 determinate baseline substitutions and removes all five records from the ambiguous unresolved-candidate set, so the audit counts and substitution digest below were recomputed.",
     "territories": [
       "ocg-jp"
     ],
     "total": 296,
     "all_v2": true,
     "chronology": {
-      "determinate": 146,
-      "ambiguous": 150
+      "determinate": 148,
+      "ambiguous": 148
     },
     "determinate": {
       "modern": 21,
-      "historical": 125,
+      "historical": 127,
       "coverage": {
-        "reuse-upstream": 79,
+        "reuse-upstream": 81,
         "known-gap": 42,
         "none-needed": 4
       }
     },
     "ambiguous": {
       "modern_possible": 104,
-      "modern_impossible": 46,
-      "candidate_occurrences": 302,
+      "modern_impossible": 44,
+      "candidate_occurrences": 298,
       "candidate_coverage_occurrences": {
-        "reuse-upstream": 144,
-        "unresolved": 47,
-        "known-gap": 7,
+        "reuse-upstream": 142,
+        "unresolved": 42,
+        "known-gap": 10,
         "modern": 104
       }
     },
     "modern_policy_effect": {
       "explicit_policy_required": true,
-      "determinate_historical_substitutions": 79,
-      "ambiguous_records_left_unresolved": 150,
+      "determinate_historical_substitutions": 81,
+      "ambiguous_records_left_unresolved": 148,
       "certifiable": false
     },
-    "determinate_historical_substitutions_digest": "b45a38f83be490899d2fd64198b70ea86170ea55f1c24ef3c50194d0546ceaa2",
+    "determinate_historical_substitutions_digest": "8ccefe0818807ab72ec1d7509a1e70d60787055c17881ecb589d48735b9f5df1",
     "determinate_historical_substitutions": [
       {
         "erratum_id": "erratum-a-cat-of-ill-omen",
@@ -829,6 +829,13 @@
         "coverage_kind": "reuse-upstream"
       },
       {
+        "erratum_id": "erratum-freed-the-matchless-general",
+        "modern_passcode": 49681811,
+        "selected_events": [],
+        "selected_historical_passcode": 504700082,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
         "erratum_id": "erratum-future-fusion",
         "modern_passcode": 77565204,
         "selected_events": [],
@@ -875,6 +882,13 @@
         "modern_passcode": 23265594,
         "selected_events": [],
         "selected_historical_passcode": 511002851,
+        "coverage_kind": "reuse-upstream"
+      },
+      {
+        "erratum_id": "erratum-horus-the-black-flame-dragon-lv4",
+        "modern_passcode": 75830094,
+        "selected_events": [],
+        "selected_historical_passcode": 504700132,
         "coverage_kind": "reuse-upstream"
       },
       {
@@ -1220,13 +1234,11 @@
       "erratum-dedication-through-light-and-darkness",
       "erratum-elegant-egotist",
       "erratum-emblem-of-dragon-destroyer",
-      "erratum-freed-the-matchless-general",
       "erratum-fusion-sage",
       "erratum-giant-rat",
       "erratum-great-dezard",
       "erratum-hand-of-nephthys",
       "erratum-hero-signal",
-      "erratum-horus-the-black-flame-dragon-lv4",
       "erratum-insect-imitation",
       "erratum-last-will",
       "erratum-manju-of-the-ten-thousand-hands",
@@ -1268,13 +1280,10 @@
       "erratum-dedication-through-light-and-darkness",
       "erratum-elegant-egotist",
       "erratum-emblem-of-dragon-destroyer",
-      "erratum-freed-the-matchless-general",
-      "erratum-fusion-sage",
       "erratum-giant-rat",
       "erratum-great-dezard",
       "erratum-hand-of-nephthys",
       "erratum-hero-signal",
-      "erratum-horus-the-black-flame-dragon-lv4",
       "erratum-insect-imitation",
       "erratum-last-will",
       "erratum-manju-of-the-ten-thousand-hands",
@@ -1291,8 +1300,6 @@
       "erratum-skull-knight-2",
       "erratum-sonic-bird",
       "erratum-terraforming",
-      "erratum-thunder-dragon",
-      "erratum-toon-table-of-contents",
       "erratum-tyrant-dragon",
       "erratum-ufo-turtle",
       "erratum-ultimate-insect-lv1",
