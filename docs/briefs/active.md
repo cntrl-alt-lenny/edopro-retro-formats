@@ -1,6 +1,6 @@
 # Active brief
 
-Status: **queued, not started**.
+Status: **active — delivered once, returned for correction (Amendment 1 below)**.
 
 Identifier: **`020-2026-09-21-per-card-activation-dates`** — use exactly this
 string as `--task` for every `tools/report.py` call in this round.
@@ -156,3 +156,68 @@ population: card, erratum id, activation bound before, bound after, source and
 served timestamp, quoted passage, Edison-snapshot state before and after. Then
 the list of cards left ambiguous and why, and every changed record's base and
 head versions side by side.
+
+---
+
+## Amendment 1 — 2026-09-21, after Brain's first adjudication
+
+The first delivery, `1733d7c8c0450d7c736794094cba5ce416ad6739` on
+`builder/per-card-activation-dates`, was **not accepted**, because the
+repository is not valid at that head: `validate` reports five
+`format.erratum-implementation-gap` errors, `build --check` refuses to build,
+the suite fails, and CI is red.
+
+**The historical work stands and is not reopened.** The Verifier confirmed each
+of the five bounds against the card's own period entry, and Brain independently
+re-fetched the Fusion Sage capture (HTTP 200, memento 2008-12-16 16:23:13 GMT)
+and read: "You cannot activate 'Fusion Sage' if you do not have any copies of
+'Polymerization' in your Deck." The records keep everything they cited before.
+
+**The failure is this brief's defect, not the Builder's.** Bounding the
+activation axis makes state `c1` (activation new, verification still old)
+determinate at the Edison snapshot for five records, and the validator requires
+a determinate state with no implementation to be acknowledged on the record.
+The brief forbade touching coverage, so a valid delivery was impossible. This
+amendment removes that conflict.
+
+### Now authorized, for exactly these five records
+
+Freed the Matchless General, Fusion Sage, Horus the Black Flame Dragon LV4,
+Thunder Dragon, Toon Table of Contents:
+
+1. **Acknowledge the gap for state `c1`** using the project's existing
+   mechanism — coverage `known-gap` with a stated reason — the same way the
+   existing acknowledged divergences are recorded. The reason must be true and
+   specific: say what the modern implementation reproduces and what it does not.
+   Brain's reading, to be checked rather than copied: the modern script already
+   enforces the new activation requirement, and what it cannot reproduce is the
+   old procedure of letting the opponent verify the Deck.
+2. **Establish what Edison actually ships for each of the five, before and
+   after.** Previously these records were ambiguous at the snapshot; say what
+   the build selected then and what it selects now, and whether that is more or
+   less historically faithful.
+3. **Re-pin only what legitimately moves** — Edison's divergence and warning
+   counts, any Edison hash, any `dist/` output — regenerating `dist/` with
+   `python -m retroformats build`. For every test you re-pin, give the old
+   value, the new value, and the one-line reason it moved.
+
+Not authorized: any other record, any validator or schema change, any
+implementation strategy other than acknowledging these five gaps, any custom
+script.
+
+### Gates must be green
+
+The delivery must have `validate` at 0 errors, `build --check` clean, the full
+suite passing, and CI green at the head. The GOAT hash `0x28E9FC02` and the
+April 2005 and March 2010 banlist entry sets must still be unchanged.
+
+**If a gate cannot be satisfied within the brief, stop and report — do not
+push past it.** The first delivery bypassed the local pre-push check with
+`--no-verify` to deliver red work. It was disclosed, and CI caught it, but the
+right move when the brief and a gate conflict is to stop and say so.
+
+### Unchanged
+
+Continue on the same branch from `1733d7c`; do not rewrite history. The report
+covers the whole round from base `b5a5c0065c8179e80b23998f9455976fda9796d0`,
+with every changed record's base and head versions side by side.
