@@ -282,14 +282,14 @@
       "kind": "official",
       "title": "Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings page (Internet Archive replay)",
       "url": "http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
-      "notes": "UDE's per-card rulings database, the ruling layer in force in the GOAT era. The previously cited 2005-06-16 URL (web/20050616025109/...) returned an HTTP 302 to this exact July 1 replay in one audit request; a later direct replay request returned HTTP 200 with memento-datetime Thu, 16 Jun 2005 02:51:09 GMT. The exact July 1 target itself returned memento-datetime Fri, 01 Jul 2005 23:56:27 GMT and is the deterministic URL cited by the research text. This replay instability is recorded rather than treated as an effective-date claim. The 2005-06-16 served page states the failed-search verification procedure verbatim for Sangan and Witch of the Black Forest: 'If you have no eligible monsters, your opponent gets to see your Deck to verify.' Reinforcement of the Army's entry then permitted activation with no valid target subject to the same verification; by the 2008-12-15 yugioh-card.com Card FAQ capture that had changed to 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck' - per-card activation-condition chronology differs from the shared verification chronology. The later July 1 replay also states for Rescue Cat that activation is permitted with only 1 or zero eligible Beasts and the Deck may be checked, and gives the analogous old permission for Reinforcement of the Army. This source establishes the per-card old-state rule and the observed capture timestamps; it does not establish an exact effective date or a class-wide policy. Retrieved 2026-09-20."
+      "notes": "UDE's per-card rulings database, the ruling layer in force in the GOAT era. The previously cited 2005-06-16 URL (web/20050616025109/...) returned an HTTP 302 to this exact July 1 replay in one audit request; a later direct replay request returned HTTP 200 with memento-datetime Thu, 16 Jun 2005 02:51:09 GMT. The exact July 1 target itself returned memento-datetime Fri, 01 Jul 2005 23:56:27 GMT and is the deterministic URL cited by the research text. This replay instability is recorded rather than treated as an effective-date claim. The 2005-06-16 served page states the failed-search verification procedure verbatim for Sangan and Witch of the Black Forest: 'If you have no eligible monsters, your opponent gets to see your Deck to verify.' Reinforcement of the Army's entry then permitted activation with no valid target subject to the same verification; by the 2008-12-15 yugioh-card.com Card FAQ capture that had changed to 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck' - per-card activation-condition chronology differs from the shared verification chronology. The later July 1 replay also states for Rescue Cat that activation is permitted with only 1 or zero eligible Beasts and the Deck may be checked, and gives the analogous old permission for Reinforcement of the Army. For the present per-card activation audit, the July 1 replay states for Freed the Matchless General: 'The effect of this card that allows you to forfeit your draw to place a Warrior-Type monster from your Deck into your hand is optional. You do not have to activate it if you don’t want to. If you attempt to activate this effect and find that you do not have any Warrior-Type monsters in your Deck, you do not get your normal draw back. You have already forfeited it.' It also states for Horus the Black Flame Dragon LV 4: 'If you don’t have \"Horus the Black Flame Dragon LV 6\" in your hand or Deck, you can still send \"Horus the Black Flame Dragon LV 4\" to the Graveyard to activate its effect. But if you don’t have \"Horus the Black Flame Dragon LV 6\" then your opponent can check your Deck to confirm.' These are card-specific old-state passages served at memento Fri, 01 Jul 2005 23:56:27 GMT. This source establishes the per-card old-state rule and the observed capture timestamps; it does not establish an exact effective date or a class-wide policy. Retrieved 2026-09-21."
     },
     {
       "id": "konami-card-faq-2008-12-16",
       "kind": "official",
       "title": "Konami TCG Card FAQ pages (Internet Archive capture served 2008-12-16)",
       "url": "http://web.archive.org/web/20081216162327/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
-      "notes": "Per-card Card FAQ capture used for activation-semantics chronology. Amendment 1 records the previously cited 2008-12-15 URL (web/20081215065604/...) as an HTTP 302 to this exact later capture; a later direct replay request returned HTTP 200 with memento-datetime Mon, 15 Dec 2008 06:56:04 GMT, so the archive timegate is not stable. This exact target returned memento-datetime Tue, 16 Dec 2008 16:23:27 GMT and is the deterministic URL cited by the research text. The Reinforcement of the Army entry says, 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck'; the Release Restraint entry says, 'If you do not have any copies of Gearfried the Swordmaster in your hand or Deck, you can still activate this card ... but you will need to show your cards to your opponent to confirm.' The observed capture dates bound those card-specific states; they are not a dated announcement of a class-wide policy or an exact effective date. Retrieved 2026-09-20."
+      "notes": "Per-card Card FAQ capture used for activation-semantics chronology. Amendment 1 records the previously cited 2008-12-15 URL (web/20081215065604/...) as an HTTP 302 to this exact later capture; a later direct replay request returned HTTP 200 with memento-datetime Mon, 15 Dec 2008 06:56:04 GMT, so the archive timegate is not stable. This exact target returned memento-datetime Tue, 16 Dec 2008 16:23:27 GMT and is the deterministic URL cited by the research text. The Reinforcement of the Army entry says, 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck'; the Release Restraint entry says, 'If you do not have any copies of Gearfried the Swordmaster in your hand or Deck, you can still activate this card ... but you will need to show your cards to your opponent to confirm.' The page also has own entries for Pandemonium, Peten the Dark Clown, and Pyramid Turtle, but their passages concern adding one Archfiend, optional-trigger timing, and the level of a Special Summoned monster; none addresses activation with no valid search result. The observed capture dates bound those card-specific states; they are not a dated announcement of a class-wide policy or an exact effective date. Retrieved 2026-09-21."
     },
     {
       "id": "konami-card-faq-2008-12-15-skilled-white-magician",
@@ -297,6 +297,55 @@
       "title": "Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
       "notes": "The URL returned HTTP 200 with memento-datetime Mon, 15 Dec 2008 05:46:34 GMT. Its Skilled White Magician entry says that if there are no 'Buster Blader' in hand, Deck, or Graveyard, the effect cannot be activated. This establishes a per-card state in the served FAQ capture; it does not establish an exact effective date, a class-wide policy, or the activation state of the 38-card research population. Retrieved 2026-09-20."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-ac",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216161305/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ac.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:13:05 GMT. The page has its own entries for A Deal with Dark Ruler, Apprentice Magician, and Armed Dragon LV5. Their passages concern the triggering event, showing the Special Summoned monster, and the LV5 destruction effect respectively; none addresses whether the cluster's search/reveal-on-failure effect may activate with no named card available. The Armed Dragon LV5 passage, 'You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy,' is therefore not used as evidence for the separate LV7 level-up effect. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-de",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162308/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_de.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:08 GMT. The page has its own entries for Dark Scorpion - Meanae the Thorn and Dedication through Light and Darkness. Meanae's entry permits adding a Monster, Spell, or Trap whose name includes 'Dark Scorpion'; Dedication's entry says, 'You select the \"Dark Magician of Chaos\" you wish to Special Summon when you resolve \"Dedication through Light and Darkness\", not when you activate it.' Neither passage addresses activation with no valid search result. Dark Mimic LV1 appears only in other cards' passages, not as its own entry. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-ik",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_ik page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162317/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ik.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:17 GMT. No own entry for Sonic Bird was present; the card name appears only in another card's example list. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-lo",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_lo page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162323/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_lo.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:23 GMT. The page has its own entries for Mother Grizzly, Mystic Swordsman LV2, Mystic Swordsman LV4, Mystic Tomato, and Ninjitsu Art of Transformation. Those passages cover battle-trigger timing, level-up condition reset, and resolution-time selection; none states an activation bound for the cluster's failed search. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-fh",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162313/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:13 GMT. The Freed the Matchless General entry says, '\"\"Freed the Matchless General’s\" second effect cannot be activated if you have no Level 4 or lower Warrior-Type monsters in your Deck.' The Fusion Sage entry says, 'You cannot activate \"Fusion Sage\" if you do not have any copies of \"Polymerization\" in your Deck.' The Horus the Black Flame Dragon LV4 entry says, 'If you don’t have \"Horus the Black Flame Dragon LV6\" in your hand or Deck, you cannot send \"Horus the Black Flame Dragon LV4\" to the Graveyard to activate its effect.' The page also has own entries for Giant Rat, Great Dezard, and Hand of Nephthys, but their passages concern battle-trigger timing, achieved effects, and cost/chain timing; none addresses activation with no valid search result. These are each card's own activation passages; the capture date attests the state and is not an exact effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-st",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_st page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162333/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:33 GMT. The Thunder Dragon entry says, 'You cannot discard \"Thunder Dragon\" to activate its effect if you do not have any \"Thunder Dragon\" in your Deck.' The Toon Table of Contents entry says, 'You cannot activate \"Toon Table of Contents\" if you do not have any \"Toon\" Cards, or \"Manga Ryu-Ran\", in your Deck.' The page also has its own entry for Skull Knight #2, but it describes when the effect activates after a Tribute Set and not activation with no Deck target. These are each card's own activation passages; the capture date attests the state and is not an exact effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-2008-12-16-uz",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_uz page (Internet Archive capture served 2008-12-16)",
+      "url": "https://web.archive.org/web/20081216162337/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_uz.html",
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:37 GMT. The page has its own entries for Pyramid Turtle, UFO Turtle, and Ultimate Insect LV1/LV3/LV5. The passages cover the legal level of a Pyramid Turtle Special Summon, battle-trigger timing, and level-up timing/condition reset; none states an activation bound for the cluster's failed search. Retrieved 2026-09-21."
     },
     {
       "id": "konami-set-rulings-archive",

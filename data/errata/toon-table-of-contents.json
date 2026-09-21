@@ -51,7 +51,19 @@
     },
     "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": null,
+        "new_attested_from": "2008-12-16",
+        "basis": "The card's own Konami Card FAQ capture says activation is forbidden when no Toon card or Manga Ryu-Ran remains in the Deck. This served memento date attests the new state; it is not an effective date, and no period entry establishing the old state was found.",
+        "corroboration": [
+          {
+            "url": "https://web.archive.org/web/20081216162333/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
+            "title": "Konami TCG Card FAQ default_st (served memento 2008-12-16 16:23:33 GMT)",
+            "quote": "You cannot activate \"Toon Table of Contents\" if you do not have any \"Toon\" Cards, or \"Manga Ryu-Ran\", in your Deck.",
+            "archived": true
+          }
+        ]
       },
       "transitions": [
         {
@@ -59,7 +71,7 @@
           "axis": null,
           "historical_text": "Add 1 card from your Deck to your hand that includes \"Toon\" in its card name, or is named \"Manga Ryu-Ran\".",
           "modern_text": null,
-          "summary": "Separate per-card ruling: the goat script drops the modern requirement that a \"Toon\" card exist in the Deck for activation ('if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' -> 'return true'), so the Normal Spell can be activated with nothing to fetch. Nothing in the packet dates when this card lost that allowance, so the chronology is unresolved.",
+          "summary": "Separate per-card ruling: the goat script drops the modern requirement that a \"Toon\" card exist in the Deck for activation ('if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end' -> 'return true'), so the Normal Spell can be activated with nothing to fetch. Its own Konami capture attests the new activation requirement by 2008-12-16; that capture does not assert an effective date, and no period entry establishing the old state was found.",
           "sources": [
             "ignis-cardscripts"
           ]

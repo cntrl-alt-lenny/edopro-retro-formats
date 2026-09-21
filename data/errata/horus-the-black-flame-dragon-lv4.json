@@ -51,7 +51,25 @@
     },
     "c1": {
       "effective": {
-        "date": null
+        "date": null,
+        "status": "verified",
+        "old_attested_through": "2005-07-01",
+        "new_attested_from": "2008-12-16",
+        "basis": "This card's own UDE ruling capture allows the End Phase effect to be attempted with no LV6 in hand or Deck, while its own Konami Card FAQ entry later prohibits that activation. The served memento dates are state attestations, not effective dates.",
+        "corroboration": [
+          {
+            "url": "http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
+            "title": "UDE official Yu-Gi-Oh! Card Rulings (served memento 2005-07-01 23:56:27 GMT)",
+            "quote": "If you don’t have \"Horus the Black Flame Dragon LV 6\" in your hand or Deck, you can still send \"Horus the Black Flame Dragon LV 4\" to the Graveyard to activate its effect. But if you don’t have \"Horus the Black Flame Dragon LV 6\" then your opponent can check your Deck to confirm.",
+            "archived": true
+          },
+          {
+            "url": "https://web.archive.org/web/20081216162313/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
+            "title": "Konami TCG Card FAQ default_fh (served memento 2008-12-16 16:23:13 GMT)",
+            "quote": "If you don’t have \"Horus the Black Flame Dragon LV6\" in your hand or Deck, you cannot send \"Horus the Black Flame Dragon LV4\" to the Graveyard to activate its effect.",
+            "archived": true
+          }
+        ]
       },
       "transitions": [
         {
@@ -59,7 +77,7 @@
           "axis": null,
           "historical_text": "As long as this card remains face-up on your side of the field, control of this card cannot switch. During the End Phase of a turn that this card destroyed a monster as a result of battle, send this card to the Graveyard to Special Summon 1 \"Horus the Black Flame Dragon LV6\" from your hand or Deck.",
           "modern_text": null,
-          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.sptg keeps only the free-zone test (ft>0) and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the End Phase effect can be activated - sending this face-up Horus to the Graveyard as cost - with no LV6 available to Special Summon. Nothing in the packet dates the end of this per-card allowance, so its chronology is unresolved.",
+          "summary": "Era activation semantics, separate from the verification procedure: the GOAT s.sptg keeps only the free-zone test (ft>0) and drops the modern script's Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,...), so the End Phase effect can be activated - sending this face-up Horus to the Graveyard as cost - with no LV6 available to Special Summon. This card's own UDE and Konami captures attest the old and new states by 2005-07-01 and 2008-12-16 respectively; those captures do not assert an effective date.",
           "sources": [
             "ignis-cardscripts",
             "yugipedia-card-errata"
