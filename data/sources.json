@@ -348,6 +348,62 @@
       "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:37 GMT. The page has its own entries for Pyramid Turtle, UFO Turtle, and Ultimate Insect LV1/LV3/LV5. The passages cover the legal level of a Pyramid Turtle Special Summon, battle-trigger timing, and level-up timing/condition reset; none states an activation bound for the cluster's failed search. Retrieved 2026-09-21."
     },
     {
+      "id": "konami-card-faq-near-edison-2008-12-31-ac",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-31)",
+      "url": "https://web.archive.org/web/20081231025749/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ac.html",
+      "notes": "The HTTP 200 response carried memento-datetime Wed, 31 Dec 2008 02:57:49 GMT. The A Deal with Dark Ruler entry says, 'If your opponent's Level 8 or higher monster than you control is sent to the Graveyard, you can activate \"A Deal with Dark Ruler\".' The Apprentice Magician entry says, 'You must show your opponent the monster you Special Summon.' The Armed Dragon LV5 entry says, 'You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy.' These passages concern the trigger/result or the separate LV5 destruction effect; none addresses activation with no valid search result for the 33-card population. Timemap enumeration also found the 2008-12-17 03:47:42 capture with the same digest; this later capture was fetched and read. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2008-12-17-de",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-17)",
+      "url": "https://web.archive.org/web/20081217101038/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_de.html",
+      "notes": "The HTTP 200 response carried memento-datetime Wed, 17 Dec 2008 10:10:38 GMT. The Dark Scorpion - Meanae the Thorn entry says, 'You can use \"Meanae the Thorn\"'s effect to add a Monster, Spell, or Trap Card to your hand that includes \"Dark Scorpion\" in its name, including \"Mustering of the Dark Scorpions\" and \"Dark Scorpion Combination\".' The Dedication through Light and Darkness entry says, '\"Dedication through Light and Darkness\" does not target. You select the \"Dark Magician of Chaos\" you wish to Special Summon when you resolve \"Dedication through Light and Darkness\", not when you activate it.' Neither passage addresses activation with no valid search result. Dark Mimic LV1 has no own entry; its name occurs only in another card's passage. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2008-12-17-fh",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-17)",
+      "url": "https://web.archive.org/web/20081217061505/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
+      "notes": "The HTTP 200 response carried memento-datetime Wed, 17 Dec 2008 06:15:05 GMT. The Giant Rat entry says, 'Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.' The Great Dezard entry says, 'You can Special Summon only 1 \"Fushioh Richie\" by Tributing \"Great Dezard\".' The Hand of Nephthys entry says, 'Tributing monsters is a cost of this card’s effect.' These are battle-timing, result-limit, and cost passages, not activation-with-no-valid-search rulings. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2008-12-17-ik",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_ik page (Internet Archive capture served 2008-12-17)",
+      "url": "https://web.archive.org/web/20081217101040/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ik.html",
+      "notes": "The HTTP 200 response carried memento-datetime Wed, 17 Dec 2008 10:10:40 GMT. No own entry for Sonic Bird was present in the page read; the card name appears only in another card’s example list. No other one of the 33 population cards belongs to this page. Timemap enumeration found no later capture in the requested window. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2009-01-16-lo",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_lo page (Internet Archive capture served 2009-01-16)",
+      "url": "https://web.archive.org/web/20090116081601/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_lo.html",
+      "notes": "The HTTP 200 response carried memento-datetime Fri, 16 Jan 2009 08:16:01 GMT. The Mother Grizzly and Mystic Tomato entries say, 'Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.' The Mystic Swordsman LV2 entry says, 'If \"Mystic Swordsman LV2\" attacks a face-down Defense Position monster, that monster is destroyed by \"Mystic Swordsman LV2\"’s effect, not as a result of battle.' The Mystic Swordsman LV4 entry says, 'If \"Mystic Swordsman LV4\" attacks a face-down Defense Position monster, you destroy the monster with \"Mystic Swordsman LV4\"’s effect before flipping the monster face-up.' The Ninjitsu Art of Transformation entry says, '\"Ninjitsu Art of Transformation\" does not target; you select the monster to Special Summon when you resolve its effect.' None addresses activation with no valid search result. Timemap enumeration also found the 2008-12-17 03:07:43 capture with the same digest; this later capture was fetched and read. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2008-12-20-pr",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_pr page (Internet Archive capture served 2008-12-20)",
+      "url": "https://web.archive.org/web/20081220081444/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+      "notes": "The HTTP 200 response carried memento-datetime Sat, 20 Dec 2008 08:14:44 GMT. The Pandemonium entry says, 'When your Archfiends controlled by your opponent are sent to your Graveyard, you can add an Archfiend from your Deck to your hand with \"Pandemonium\".' The Peten the Dark Clown entry says, 'Missing the Timing: \"Peten the Dark Clown\" is a \"when… you can\" optional Trigger Effect.' The Pyramid Turtle entry says, 'You may Special Summon a high-level monster with \"Pyramid Turtle's\" effect ... but not a Special-Summon only monster.' These passages concern the trigger/add, timing window, and eligible result class; none addresses activation with no valid search result. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2009-01-19-st",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_st page (Internet Archive capture served 2009-01-19)",
+      "url": "https://web.archive.org/web/20090119171813/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
+      "notes": "The HTTP 200 response carried memento-datetime Mon, 19 Jan 2009 17:18:13 GMT. The Skull Knight #2 entry says, 'If you Tribute Set a high level Fiend-Type monster by Tributing this card, you CAN Special Summon another \"Skull Knight #2\" from your Deck and you do NOT have to reveal your Set monster to prove it is a Fiend-Type.' The remaining text concerns trigger timing and chaining after the Tribute Set. It does not address activation with no copy in the Deck. Timemap enumeration also found the 2008-12-20 08:28:55 capture with the same digest; this later capture was fetched and read. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
+      "id": "konami-card-faq-near-edison-2009-01-16-uz",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_uz page (Internet Archive capture served 2009-01-16)",
+      "url": "https://web.archive.org/web/20090116175921/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_uz.html",
+      "notes": "The HTTP 200 response carried memento-datetime Fri, 16 Jan 2009 17:59:21 GMT. The UFO Turtle entry says, 'Since the Special Summoning occurs during the Damage Step, \"Torrential Tribute\", etc. cannot be used.' The Ultimate Insect LV1 entry says, '\"Ultimate Insect LV1\"’s 2nd sentence is a Ignition Effect that is activated by sending \"Ultimate Insect LV1\" to the Graveyard as a cost.' The Ultimate Insect LV3 entry says, 'The effect of \"Ultimate Insect LV3\" that reduces ATK by 300 points is a Continuous Effect.' The Ultimate Insect LV5 entry says, 'You can Special Summon \"Ultimate Insect LV5\" with the effect of \"Ultimate Insect LV3\" even if that \"Ultimate Insect LV3\" was not Special Summoned by the effect of \"Ultimate Insect LV1\".' None addresses activation with no valid search result. Timemap enumeration also found the 2008-12-17 10:10:48 capture with the same digest; this later capture was fetched and read. The capture date is evidence of the served page state, not an effective date. Retrieved 2026-09-21."
+    },
+    {
       "id": "konami-set-rulings-archive",
       "kind": "official",
       "title": "Konami per-set Card Rulings documents, 2010-2011 (yugioh-card.com, Internet Archive)",
