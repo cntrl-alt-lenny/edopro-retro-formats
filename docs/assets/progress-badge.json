@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "label": "progress",
-  "message": "7/12 areas",
+  "label": "canonical areas",
+  "message": "7/12 complete",
   "color": "blue",
   "cacheSeconds": 300,
   "source": "formats/*/format.json implementation_status",

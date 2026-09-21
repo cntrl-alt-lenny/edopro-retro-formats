@@ -44,8 +44,8 @@ def build_payload() -> dict[str, object]:
     total_areas = len(formats) * len(AREA_KEYS)
     return {
         "schemaVersion": 1,
-        "label": "progress",
-        "message": f"{complete_or_verified}/{total_areas} areas",
+        "label": "canonical areas",
+        "message": f"{complete_or_verified}/{total_areas} complete",
         "color": "blue",
         "cacheSeconds": 300,
         "source": "formats/*/format.json implementation_status",
