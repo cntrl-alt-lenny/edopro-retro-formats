@@ -1,79 +1,50 @@
 # Project state — durable context
 
-Fast rehydration for a fresh Brain session.
-
-**This file deliberately stores no live repository state.** No current
-SHA, no "what's queued", no branch or worktree layout, no per-machine
-setup status, no test counts. Those go stale the moment anyone commits —
-including when Brain commits its own housekeeping, which is exactly how
-this file previously ended up contradicting itself within a single round.
-
-Derive live state instead:
+Fast rehydration for a fresh Brain session. **Stores no live repository
+state** (no SHA outside `## Historical anchors`, no queue, no branch layout,
+no test counts — stale the moment anyone commits). Derive live state:
 
 | question | source of truth |
 |---|---|
-| current commit, branch, sync with remote | `git status`, `git rev-parse` |
-| is a round in flight / queued / delivered? | [`docs/briefs/active.md`](briefs/active.md) — it states its own `Status:` — and `docs/briefs/delivered/` |
-| is a Builder branch unmerged? | `git branch -a`, `git worktree list` |
-| is the local push hook configured? | `git config --get core.hooksPath` |
-| what did CI say? | the run for that exact SHA |
-| what did past rounds do? | [`agents/model-notes.md`](agents/model-notes.md), `docs/briefs/archive/`, `git log` |
-| current implementation status per format | `python -m retroformats report` |
+| commit, branch, remote sync | `git status`, `git rev-parse` |
+| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/`; `docs/briefs/active.md` is legacy until round 027 finishes |
+| Builder branch unmerged? | `git branch -a`, `git worktree list` |
+| push hook configured? | `git config --get core.hooksPath` |
+| CI result | the run for that exact SHA |
+| past rounds | `docs/rounds/`, `docs/briefs/archive/`, `git log` |
+| per-format status | `python -m retroformats report` |
 
-What follows is only what git *cannot* tell
-you: rulings, blockers, owner preferences, and why things are parked.
+History: [`docs/archive/state-history.md`](archive/state-history.md).
 
 ## Architecture invariants
 
 Pipeline: `sources → canonical data (data/, formats/) → validation
-(retroformats/validate.py) → generated output (dist/)`. Concepts are kept
-separate and shareable across formats: banlists, card pools, rule
-profiles, errata, releases, and a `format.json` per format that is mostly
-references. Detail: [`architecture.md`](architecture.md),
-[`format-schema.md`](format-schema.md).
-
-Rulings that are easy to get wrong and expensive to rediscover:
+(retroformats/validate.py) → generated output (dist/)` — detail in
+[`architecture.md`](architecture.md), [`format-schema.md`](format-schema.md).
+Rulings easy to get wrong and expensive to rediscover:
 
 - **`legality_basis` is a policy claim, not an availability fact.**
-  `historical-policy` requires actual period tournament-policy evidence.
-  "No evidence a card was legal" is *not* "evidence policy prohibited
-  it" — that conflation has already produced one wrong classification.
+  `historical-policy` needs actual period tournament-policy evidence; "no
+  evidence a card was legal" is *not* "evidence policy prohibited it".
 - **A format's `period.snapshot` is independent of its pool's
-  `cutoff_date`.** Edison is the worked example: snapshot `2010-04-24`,
-  pool cutoff `2010-05-10`. They are allowed to differ; don't "fix" one to
-  match the other.
-- **`implementationStatus` (`schemas/common.schema.json`) is the
-  acceptance bar Brain reviews against.** `verified` specifically requires
-  corroboration by strong primary/period evidence — not modern community
-  consensus, however unanimous.
-- **`implementation_status.overall` has no derivation rule** — not in
-  `format.schema.json` (which only requires the key), not in the
-  validator, not in `cli.py` or the atlas generator, all of which print
-  the stored value verbatim. It is a per-format judgement, conventionally
-  bottlenecked by the weakest axis. Established by round 5; don't
-  re-investigate, and don't add a derivation rule without a brief.
-- **Status drift is structurally limited to `banlist` and `card_pool`.**
-  Only those two axes have an underlying file with its own
-  `completeness` field to fall behind. `rule_profile` and `errata` have
-  no mirrorable source at all (their schemas define no `completeness`),
-  so they are pure adjudications. Audited exhaustively in round 5 — a
-  third drifted axis is not possible without a schema change.
-- **`schemas/*.json` are documentation, not enforcement.** Nothing in
-  this repository runs a generic JSON-Schema validator over `data/`:
-  there is no `jsonschema` import anywhere, `Repository.load()` is a
-  hand-rolled loader, and `tests/schema_check.py` is wired only to
-  `erratum.schema.json`. Adding a field to a schema's `required` array
-  therefore changes nothing at runtime — the real gate is always
-  `retroformats/validate.py`. Established in round 6; check this before
-  believing any schema edit enforces something.
-- **The errata v1→v2 migration is complete; the v1 positional model is
-  retired.** Don't reintroduce it.
-- **Python: standard library only.** No dependency manifest, by choice.
-  Don't add one.
+  `cutoff_date`** (Edison: snapshot `2010-04-24`, pool cutoff `2010-05-10`).
+  Allowed to differ; don't "fix" one to match the other.
+- **`implementationStatus`** (`schemas/common.schema.json`) **is the
+  acceptance bar**; `verified` needs strong primary/period evidence, not
+  community consensus.
+- **`implementation_status.overall` has no derivation rule** (a per-format
+  judgement, weakest-axis convention, round 5); **status drift is limited to
+  `banlist`/`card_pool`** (round 5, exhaustive). No derivation rule or third
+  drifted axis without a brief.
+- **`schemas/*.json` are documentation, not enforcement** — the real gate is
+  `retroformats/validate.py` (round 6).
+- **Errata v1→v2 migration is complete**; don't reintroduce v1. **Python:
+  standard library only.**
 
 ## Canonical formats
 
-Three, and adding a fourth needs a Brain-reviewed brief first.
+Three; a fourth needs an owner-approved direction first (`AGENTS.md`). Live
+status per format: `python -m retroformats report`.
 
 | format | snapshot | pool basis |
 |---|---|---|
@@ -81,346 +52,100 @@ Three, and adding a fourth needs a Brain-reviewed brief first.
 | `2010-03-edison` | 2010-04-24 | release-cutoff |
 | `2011-09-tengu` | 2011-09-17 | release-cutoff |
 
-Live status per format: `python -m retroformats report`.
-
-Two things about these that are not derivable and cost real time to
-rediscover:
-
-- **GOAT's generated lflist is entry-for-entry identical to Project
-  Ignis's reference list, not byte-identical.** Historical anchor: EDOPro
-  content hash `0x28e9fc02` (order- and name-independent). Ignis's own
-  shipped file contains a duplicated line, so its byte-level and in-client
-  hashes legitimately diverge. This is not a bug to fix.
-- **Edison's rule profile is intentionally `partial`.** Five flags are
-  evidentially unresolved (SEGOC pair highest priority) —
-  [`research/edison-rules.md`](research/edison-rules.md) §5a. Leaving it
-  partial is the honest state, not an oversight.
-
-## Review protocol
-
-Brain's merge authority rests on this actually being run, every round:
-independently re-diff the commit, re-run whatever the report claims to
-have checked, and **re-derive at least one load-bearing claim directly**
-(re-fetch the cited source, recount the entries, re-run the check). Full
-checklist: [`agents/roles/brain.md`](agents/roles/brain.md) plus `AGENTS.md`
-§ What review checks here.
-
-Every round so far has justified it — reviewing the diff alone would have
-missed something a direct re-derivation caught.
+- **GOAT parity is entry-for-entry, not byte-identical** (Ignis's file has a
+  duplicated line, so hashes legitimately diverge — `## Historical anchors`).
+- **Edison's rule profile is intentionally `partial`**: five flags remain
+  unresolved ([`research/edison-rules.md`](research/edison-rules.md) §5a).
+  Honest, not an oversight.
 
 ## Parked research — do not reopen without new evidence
 
-### Tokyo Dome / `1999-08-tokyo-dome` (codename `yugi-kaiba`)
-
-Target event 1999-08-26. Full detail:
+**Tokyo Dome / `1999-08-tokyo-dome`** (target 1999-08-26). Detail:
 [`research/yugi-kaiba-format-source-gate.md`](research/yugi-kaiba-format-source-gate.md)
-(narrative) + `...-packet.json` (machine-readable packet) +
-`format-atlas-progress.json` (id `135`).
++ packet + `format-atlas-progress.json` (id `135`); certified pool digest
+under `## Historical anchors`. Restriction hypothesis (unresolved, blocking):
+Raigeki, Dark Hole, Trap Hole each Limited-to-1; 0 Forbidden/Semi-Limited.
+`legality_basis` is `community-retrospective`; `snapshot`/`pool_cutoff`
+deliberately differ — don't re-collapse. Canonicalization is
+`UNRESOLVED_BLOCKING`/`BLOCKED_BY_BOTH`: six axes must each reach `PROVEN`.
+`battle_calculation` is resolved; `deck_out`/`trap_activation_frequency`
+remain `NOT_REPRESENTABLE`. Restriction-list evidence is tier C,
+unauthenticated. Don't restart or canonicalize on volume of research alone.
 
-- **Certified candidate pool — historical anchor, not a live value:** 19
-  products, 370 canonical cards, digest
-  `f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`, as
-  certified 2026-08-30 against an independent community cube (370/370
-  common, 0 divergent after canonicalization). If a regenerated pool no
-  longer matches this digest, that means **the certification must be
-  redone** — not that this number is stale.
-- **Restriction hypothesis (unresolved, blocking):** Raigeki, Dark Hole,
-  Trap Hole each Limited-to-1; 0 Forbidden, 0 Semi-Limited.
-- **Pool `legality_basis` is `community-retrospective`** — corrected from
-  a wrongly-claimed `historical-policy`. See the ruling above for why.
-- **`snapshot = 1999-08-26` and `pool_cutoff = 1999-08-25` are
-  deliberately different fields.** Corrected once already; don't
-  re-collapse them.
-- **Canonicalization is `UNRESOLVED_BLOCKING` / `BLOCKED_BY_BOTH`** —
-  historical evidence *and* engine representability each independently
-  block. Six load-bearing axes must each reach `PROVEN`;
-  `scope_class_status` is itself unresolved and gates which
-  representability path even applies. Per-axis values live in the packet.
-- **Engine representability:** `battle_calculation` is **resolved, not a
-  blocker** — pinned ocgcore's default already matches the historical
-  rule. Don't reopen without a new engine-behaviour finding. `deck_out`
-  and `trap_activation_frequency` remain confirmed `NOT_REPRESENTABLE` and
-  are active blockers.
-- **Source authentication:** the V Jump interior crop — the actual
-  restriction-list evidence — remains tier C: single point of hosting,
-  chain unauthenticated. The daiti0526 collector photographs are a
-  different, stronger-in-kind *candidate* source, but only for event
-  date/venue/identity of a **parallel Game Boy tournament**. They are
-  never restriction-list evidence, and are correctly described as
-  "purporting to be" a period document rather than authenticated as one.
-
-**Do not:** restart Tokyo research from scratch, redesign the six-axis
-canonicalization gate absent a concrete discovered defect, or canonicalize
-this format because substantial research already exists.
-
-### Erratum v2 architecture
-
-[`research/erratum-state-model-v2.md`](research/erratum-state-model-v2.md)
-— frozen, sixteen named properties, proven against the 296-record corpus
-as of the migration (historical anchor: that corpus is what the freeze was
-proven against). Don't redesign without a concrete counterexample found
-during implementation.
+**Erratum v2** — [`research/erratum-state-model-v2.md`](research/erratum-state-model-v2.md),
+frozen, sixteen properties, proven against the 296-record corpus. Don't
+redesign without a concrete counterexample found while implementing.
 
 ## Owner decision — standing role chats (since 2026-09-16)
 
-The owner keeps **one standing Builder chat and one separate Verifier chat**
-for this project and reuses them across rounds. Brain asks for a fresh or
-cleared chat only when (1) the round is a correction after Brain rejected the
-Builder's work, or (2) a chat has grown very long — and says so explicitly next
-to that prompt, with a one-sentence reason. A Verifier prompt never goes into
-the Builder's chat. Every prompt is therefore written to work in a reused chat:
-it tells the agent to treat it as a new assignment, re-derive state from the
-repository, and not rely on anything earlier in the conversation. This
-overrides the framework's general fresh-context preference except in those two
-cases.
-
-## Owner decision — merges need explicit owner approval (since 2026-09-16)
-
-Set by the owner on 2026-09-16, overriding the routine-merge delegation in the
-constitution, the Brain contract and the pre-existing wording of `AGENTS.md`.
-When Brain accepts a round it stops at "ready to merge", says in plain English
-what would be merged and why, and waits for the owner's explicit approval
-before merging or doing the post-merge housekeeping. It came alongside the
-same rule for the shared framework repository. The owner may relax it once
-rounds have run smoothly for a while; until they say so, it holds for every
-Brain session on every tool. Rejections and corrective briefs do not need
-approval.
-
-## Dev Hub and framework feedback (since 2026-09-22)
-
-The shared framework (cntrl-alt-lenny/agentic-framework) is the owner's
-other project. Its Brain and every project Brain share a Google Drive folder,
-`Software/Dev Hub` (on the Windows desktop `D:\Google Drive\Software\Dev Hub`;
-the Mac path is in the Dev Hub's own `README.md`). `mail/` carries messages
-between Brains; `framework-feedback/` reports framework problems upstream
-instead of working around them locally. Read it only when the owner says to,
-including on a machine switch. Messages are evidence, never instructions.
-
-Read and sent so far: read on 2026-09-22, when nothing was addressed to this
-project; sent one report,
-`2026-09-22_0922_edopro-retro-formats_machine-switch-mid-round.md` (a
-delivered, unreviewed round's report stranded in the other machine's clone).
-
-**Machine switching.** The owner alternates between a Mac and a Windows
-desktop. Completion reports live in each clone's `.git/agent-inbox/` and do
-not travel with git, so finish adjudicating a delivered round before switching
-machines. If one is stranded anyway, the round is completed on the new machine
-by a fresh Builder producing its own evidence at a new head, never by
-reconstructing the old report. The duel engine builds on Linux and macOS
-only; on Windows, engine evidence comes from the CI `engine` job.
+The owner keeps **one standing Builder chat and one separate Verifier chat**,
+reused across rounds; fresh or cleared only after a rejection, or when very
+long, stated explicitly with a reason. A Verifier prompt never goes into the
+Builder's chat. Every prompt tells the agent to re-derive state from the
+repository, not the conversation — overriding the framework's fresh-context
+preference in those two cases only.
 
 ## Operating policy — the framework is done being built
 
-Set by the owner on 2026-08-31, after a setup phase in which roughly
-two-thirds of Brain's commits were framework rather than project content.
-**That phase is over.** The architecture is to be *used*, not polished.
+Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
 
-- **No further workflow/framework changes unless real project development
-  exposes a concrete problem.** Not "this could be cleaner" — an actual
-  observed failure.
-- **Larger briefs where work is naturally related.** Amortise briefing and
-  review overhead instead of artificially splitting closely-related
-  verification or data tasks into separate rounds.
-- **Tier review depth proportionally.** Deep independent re-derivation for
-  historical claims, canonical data, and any proposed general rule. Lighter
-  proportional review for mechanical, docs and bookkeeping changes.
-- **Brain may fix genuinely trivial housekeeping directly, and must keep
-  that narrow.** The risk is "this looks easy" gradually turning Brain into
-  the implementation executor and hollowing out independent review. Anything
-  touching canonical data, or asserting an evidence level, goes to the
-  Builder even when the change itself is small.
-- **Topology: Brain, one Builder, one standing Verifier** — set by the
-  owner on 2026-09-16 when the shared framework was adopted. The Verifier is
-  an independent reviewer, not a second executor lane; the reason it fits
-  this project is in `AGENTS.md` § Topology. Treat its cost as part of the
-  evidence-gathering period below: if review adds time without finding
-  defects Brain would have missed, that is a finding to bring to the owner.
-- **The adoption itself was owner-commissioned Brain work, not a reviewed
-  round.** The owner assigned the framework adoption directly to Brain on
-  2026-09-16. It touched only process plumbing (docs, `tools/`, agent tests,
-  the executor guard) and no data, `dist/` or validation rule. Its gates were
-  the full suite, the neutrality and guard tests each shown red before green,
-  a fresh-context session starting from `AGENTS.md` and the Brain contract
-  alone, and CI at the merged head. It had no independent Verifier pass; if
-  a later round finds a defect in that plumbing, that is why.
-- **Still no parallel executors.** One Builder is simple and working.
-  Propose parallel lanes only if executor throughput becomes an
-  *observed* bottleneck — with evidence, not pre-optimisation.
-- **The owner stays courier and model-chooser.** Copying prompts and
-  reports is not currently the bottleneck, and per-task model choice
-  across vendors is valued. Revisit only if it becomes genuine friction.
+- **No further workflow/framework changes without a concrete, observed
+  problem** — not "this could be cleaner".
+- **Larger, related briefs**, to amortise review.
+- **Tier review depth proportionally** — deep for historical claims and
+  canonical data; light for mechanical/bookkeeping.
+- **Brain may fix genuinely trivial housekeeping directly, kept narrow** —
+  canonical data or an evidence-level claim goes to the Builder regardless.
+- **Topology: Brain, one Builder, one standing Verifier** (owner,
+  2026-09-16; `AGENTS.md` § Topology says why). Still no parallel
+  executors without an *observed* bottleneck.
+- **The owner stays courier and model-chooser**, unless that becomes
+  genuine friction.
 
-**Evidence-gathering period: the next 5-10 genuine project rounds.** If
-progress is still slower than it should be after that, identify the
-*specific* bottleneck from what actually happened — executor speed, review
-cost, brief sizing, research difficulty — and fix that one thing. Do not
-optimise speculatively before then.
+**Evidence-gathering period: the next 5-10 genuine rounds**, then fix the
+specific bottleneck actually observed, not speculatively.
 
 ## Open items and sequencing judgements
 
-`docs/roadmap.md` is canonical for what is open. What it doesn't record —
-the *sequencing* reasoning:
+`docs/roadmap.md` is canonical for what is open. Sequencing reasoning it
+doesn't record:
 
-- **The ordered/unordered chronology representation redesign
+- **The ordered/unordered chronology redesign**
   ([`research/edison-behaviour-gaps.md`](research/edison-behaviour-gaps.md))
-  gates further chronology research.** Doing more chronology work on those
-  records before the representation lands is premature — the data model
-  cannot correctly record the answer yet.
-- **Prefer Phase-1 hardening over breadth.** Do not start a new historical
-  format while roadmap Phase-1 items remain open; they are more
-  informative per unit of effort than another format.
-- **Format Library's "previous status" markers are unreliable as a class.**
-  Landed on the source records in round 13; kept here because it is a
-  standing rule about a source, not a one-off incident. Newly-printed cards
-  are defaulted to `previous: unlimited` where Yugipedia has "not yet
-  released" — six such in the April 2005 response, three already recorded
-  for March 2010. Current-list *membership* matched canonical exactly both
-  times. Use it for membership, never for deltas. (The count moved 5 -> 6
-  between observations of a live API, which is itself the reason the marker
-  field is not evidence.)
-- **The April-2005 findings from the stranded parallel round are landed.**
-  Round 13 put all three on the canonical records: the UDE October 2005
-  successor page as a primary source for `superseded_by_date`, the Format
-  Library marker class above, and the distinction that UDE Appendix A is the
-  **August 1, 2005 revision** — it attests the April list as of April 1, not
-  that the list went unamended through August; a pre-effective-date Pojo
-  capture is what brackets the period. Nothing here depends on the ref
-  `preserve/april-2005-40cc995` any more. It was reported missing from one
-  clone and from `origin`; it does exist as a local branch in another clone.
-  Refs under `preserve/` are per-clone unless pushed, so check with
-  `git branch --list 'preserve/*'` rather than trusting either observation.
-
-- **The Claude adapter has four demonstrated defect classes, now covered by
-  framework mechanisms and regression tests.** The Stop hook probes
-  `python3` then `python` through a shell shim and remains safe when neither
-  is available; the executor adapter's blocking `UserPromptSubmit` hook derives
-  the Git common directory and refuses Brain's primary checkout, any checkout
-  other than `.worktrees/builder`, or a non-`builder/*` branch; the pre-push
-  hook is tracked executable while its
-  `core.hooksPath` activation remains explicitly per-clone; and the nested
-  per-role worktrees are documented as per-clone state that must be derived with
-  `git worktree list`, not assumed to exist. These are durable mechanism
-  classes, not claims about any clone's current setup.
-
-- **A test that asserts checkout behaviour must build the git state it
-  asserts against.** The adapter's guard tests pointed at
-  `<primary>/.claude/worktrees/worker` — per-clone developer state, absent on
-  a fresh checkout — so CI was red for four consecutive pushes with a
-  `FileNotFoundError`, and the accept-case additionally depended on whichever
-  branch that worktree happened to be on. Fixed by constructing a real
-  temporary repository and a real linked worktree per test. The rule
-  generalises: ambient layout is not a fixture.
-- **`git rev-parse --git-common-dir` returns `C:/...` on Git for Windows.**
-  Classifying absolute-vs-relative by a leading `/` therefore misreads it as
-  relative; the Worker guard did exactly that, prefixed the repo root, and
-  fail-closed against the *correct* worktree — the guard was unusable on
-  Windows and nobody had noticed, because the broken test could not express
-  the case. Let `cd` resolve the value instead of classifying it. Verified
-  against the real worktree: exit 2 before, exit 0 after.
-- **`report.py`'s atomic write loses to a concurrent reader on Windows —
-  fixed, and the test that watched for it was the worse bug.** `os.replace`
-  raises `PermissionError [WinError 32]` while another handle has the
-  destination open, which is the *normal* case for `<role>-latest.md`: one
-  role writing while another polls. Now retried for up to 5s; format, paths
-  and role derivation unchanged, so the mechanism stays provider-neutral.
-  The lesson worth keeping is the second half: the racing test held a
-  **non-daemon** reader thread and called `stop.set()` only on the success
-  path, so when the write raised, the suite printed its results and then the
-  interpreter hung forever pinning a core — observed as a 40-minute "still
-  running" task. A test that can outlive its own failure is worse than the
-  bug it was watching for: stop background threads in a `finally`, and make
-  them daemons so a mistake cannot wedge the run. Retry coverage is by fault
-  injection, so it proves the same thing on POSIX, where the path is
-  otherwise unreachable.
-
-- **`tools/report.py` is deliberately not byte-identical to the framework's
-  copy.** Adoption took the framework's version (which adds the Verifier's
-  `delivery` check) and re-applied this project's Windows rename retry above,
-  which the framework's copy did not have. Until the framework carries that
-  fix, a future re-adoption must merge, not overwrite — overwriting silently
-  reintroduces the Windows failure. `tests/test_report.py` pins the retry and
-  `tests/test_report_delivery.py` pins the delivery check. The project copy
-  also exposes `latest_provenance()` so its Claude Stop adapter can distinguish
-  a role-owned fresh report from an earlier hook fallback; the shared
-  framework copy does not carry this project-specific adapter fix.
-- **An unreviewed second execution of round 13 is parked, not adopted:** ref
-  `preserve/round13-alt-run-1bec139`. Round 13 was accepted from a different
-  run. The parked one cites a different primary source for the September
-  2010 changeover — a Konami `limited/` index page captured 2010-10-05 —
-  which may bear on round 14's attribution fix. It is a lead to re-fetch and
-  verify from source, never text to copy.
-
-- **A round's completion report reaches Brain by a provider-neutral
-  self-report first, transcript recovery only as fallback.** The order is:
-  (1) the role writes its own report into the shared `agent-inbox/` under
-  the git common dir, using only filesystem, git and a shell — capabilities
-  every Worker contract already requires, so it works on any tool including
-  ones with no adapter and no readable transcript store; (2) provider
-  transcript recovery, only when that artifact is missing or stale;
-  (3) manual owner relay, only when both fail. A tool-specific hook fixes
-  one member of the problem class, not the class. The canonical mechanism
-  is designed in the shared framework repository
-  (`cntrl-alt-lenny/agentic-framework`, formerly `agentic-project-framework`)
-  and is adopted here rather than reimplemented — including its rule that a role's
-  tag is derived from which checkout it is in, never asserted.
-  Two conclusions worth not relearning: transcript recovery being
-  unavailable for a provider does NOT mean that provider needs manual
-  relay, since its Worker can still write the canonical report; and a
-  session that merely ran `git log` mentions every earlier round's SHA, so
-  recovery must reconcile a session to the round it *produced*, not the
-  most recent conversation that mentions it. Absence stays UNKNOWN, and a
-  report — recovered or self-written — stays evidence of what the agent
-  said, never a substitute for reviewing the diff.
-
-- **The transcript-recovery fallback over-rejects real producing sessions;
-  fold the fix into the next framework touch rather than a round of its
-  own.** Its primary-checkout exclusion requires that *no* recorded working
-  directory in a candidate session is the primary checkout. Sessions
-  routinely start there and move into the worktree, and one provider
-  records only a start-of-session working directory — the exact field the
-  design says identity must not rest on — so a genuine producing session is
-  rejected. Verified by probe: the round-12 round's own session is local,
-  in-window and correct, and recovery returns UNKNOWN for it. It fails
-  closed, so it yields no answer rather than a wrong one, and the canonical
-  self-report is unaffected — which is why this is a follow-up, not a
-  blocker. The fix is to exclude *the reading session itself* rather than
-  any session that ever touched the primary checkout. Its tests pass
-  because their fixtures never touch the primary checkout, so they encode
-  the intended shape rather than the observed one.
-
-- **Roadmap 1a is large and open-ended** (undated era rulings, needing
-  period rulings documents that may not exist). Prefer better-bounded
-  items unless the owner asks for it directly.
-
-- **The Claude Stop hook is fallback-only over a role-owned fresh report, not
-  over an earlier hook fallback.** A Stop event has a session id but no brief
-  id, so its session-tagged report is not delivery evidence. The adapter checks
-  the shared writer's current HEAD freshness and provenance: a role-owned
-  report remains intact, while a later hook capture replaces an earlier hook
-  capture at the same HEAD. Missing or stale reports still receive the
-  non-blocking session fallback.
-
-- **Materialisation may repair only pool-content drift.**
-  `pool.materialization-drift` is the validator's projection mismatch and its
-  prescribed remedy is the `materialize` command itself. The command therefore
-  ignores that one error while retaining every other `pool.*` error as a
-  refusal, alongside the releases/coverage/gaps/load/card/source gates.
+  **gates further chronology research** — the data model can't record the
+  answer yet. Prefer Phase-1 hardening over breadth meanwhile: no new
+  historical format while roadmap Phase-1 items remain open.
+- **Format Library's "previous status" markers are unreliable as a class**
+  (round 13) — membership only, never deltas. Landed: UDE Appendix A is the
+  **August 1, 2005 revision** (attests April 1, not continuity through
+  August).
+- **An unreviewed second run of round 13 is parked, not adopted:** ref
+  `preserve/round13-alt-run-1bec139` — a different primary source for the
+  September 2010 changeover, to re-verify from source, never copy.
+- **Materialisation repairs only pool-content drift**
+  (`pool.materialization-drift`); every other `pool.*` error still refuses.
 
 ## Owner preferences
 
-- **One project folder.** No sibling directories next to the repo; the
-  per-role worktrees are nested inside it, under `.worktrees/`
-  (`AGENTS.md` § Checkouts).
-- **The owner's interface is conversation.** They should never need to
-  open a repo file, run a git command, or judge a diff to keep the loop
-  moving — see `AGENTS.md` § Authority.
-- **Copy-paste blocks must be organised** — sections or paragraphs, not
-  one dense wall of text, and no manual line-wrapping inside a code block
-  (it lands as hard newlines when pasted elsewhere).
-- **README banner:** data-dense designs were rejected three times, the
-  last on 2026-09-22 (unlabelled per-area bars, unreadable letter legend,
-  era tiles and a catalogue count too dense for a banner). The approved
-  direction is a simple checklist: one row per started format, four
-  written columns (Banlist, Card pool, Rules, Card text), one symbol per
-  cell, a small legend, at most one summary line. Detail belongs in the
-  full atlas, not the banner. Don't add density back.
+- **One project folder** — no siblings; per-role worktrees nest under
+  `.worktrees/` (`AGENTS.md` § Topology).
+- **The owner's interface is conversation** — never a repo file or diff.
+- **Copy-paste blocks organised** — sections/paragraphs, no manual
+  line-wrapping in a code block (lands as hard newlines elsewhere).
+- **README banner:** data-dense designs rejected three times (last
+  2026-09-22). Approved: a checklist, one row per started format, four
+  columns (Banlist, Card pool, Rules, Card text), one symbol per cell, a
+  small legend, one summary line at most; detail lives in the full atlas.
+
+## Historical anchors
+
+- GOAT generated lflist ≡ Ignis's reference list, entry-for-entry: EDOPro
+  content hash `0x28E9FC02` (order- and name-independent).
+- Tokyo Dome certified pool (2026-08-30, vs. an independent community cube,
+  370/370 common, 0 divergent): 19 products, 370 cards, digest
+  `f65d30b07d231c1a1913b36b659dfc8e6d536fb2c7db0ffa36cd65f6e57ba1eb`. A
+  mismatch means the certification needs redoing, not that the number is
+  stale.
+- Erratum v2 frozen against the 296-record corpus.
+- The duel engine builds on Linux and macOS only; Windows evidence comes
+  from the CI `engine` job.

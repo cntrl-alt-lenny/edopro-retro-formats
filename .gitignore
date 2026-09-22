@@ -23,10 +23,7 @@ cache/
 *.swp
 .DS_Store
 
-# Per-role nested git worktrees (see AGENTS.md § Checkouts and
-# docs/agents/git-and-isolation.md) -- real working directories git tracks
-# via .git/worktrees/, not project output. Kept out of `git status` noise in
-# the primary checkout. The retired pre-adoption location stays ignored so an
-# old clone's leftover checkout does not show up as untracked content.
+# Per-role nested git worktrees (see AGENTS.md § Checkouts), an optional
+# convenience -- real working directories git tracks via .git/worktrees/,
+# not project output. Kept out of `git status` noise in the primary checkout.
 .worktrees/
-.claude/worktrees/
