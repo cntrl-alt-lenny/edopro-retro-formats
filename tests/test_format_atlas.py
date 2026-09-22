@@ -174,6 +174,44 @@ class FormatAtlasTest(unittest.TestCase):
                     self.assertEqual(tile.attrib["data-rule-profile"], record["implementation_status"]["rule_profile"])
                     self.assertEqual(tile.attrib["data-errata"], record["implementation_status"]["errata"])
 
+    def test_banner_canonical_date_is_the_format_s_own_period_start(self):
+        # Round 26: the banner used to print the Format Library catalog's
+        # event date next to each format's own name, which is not this
+        # project's date and disagreed with the canonical record (e.g. Goat
+        # printed "05.08" while formats/2005-04-goat/format.json's
+        # period.start is 2005-04-01). A cell's date must agree with its own
+        # canonical record, not the catalog.
+        expected = {
+            8: "2005-04-goat",
+            20: "2010-03-edison",
+            24: "2011-09-tengu",
+        }
+        month_abbr = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+        for format_library_id, format_id in expected.items():
+            with self.subTest(format_id=format_id):
+                record = json.loads((ROOT / "formats" / format_id / "format.json").read_text(encoding="utf-8"))
+                period_start = record["period"]["start"]
+                tile = self.banner_tiles_by_id[format_library_id]
+                self.assertEqual(tile.attrib["data-date"], period_start)
+                expected_label = f"{month_abbr[int(period_start[5:7]) - 1]} {period_start[:4]}"
+                date_texts = [
+                    text.text
+                    for text in tile.findall("svg:text", NS)
+                    if text.text and text.text.startswith(month_abbr)
+                ]
+                self.assertEqual(date_texts, [expected_label])
+
+    def test_banner_research_row_shows_no_unsourced_date(self):
+        # docs/format-atlas-progress.json records no "date" for Tokyo Dome
+        # (id 135) today, so the banner must not borrow the catalog's date
+        # for it - showing one would claim a sourced date this project does
+        # not have.
+        self.assertNotIn("date", self.progress["formats"]["135"])
+        tokyo_dome = self.banner_tiles_by_id[135]
+        self.assertEqual(tokyo_dome.attrib["data-date"], "")
+        name_and_date_texts = [t.text for t in tokyo_dome.findall("svg:text", NS)]
+        self.assertEqual(name_and_date_texts, ["Tokyo Dome"])
+
     def test_research_progress_is_explicit_and_does_not_claim_canonical_status(self):
         canonical_ids = {8, 20, 24}
         research_ids = {int(item_id) for item_id in self.progress["formats"]}
