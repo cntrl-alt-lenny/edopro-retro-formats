@@ -2,144 +2,114 @@
 
 Status: **queued, not started**.
 
-Identifier: **`025-2026-09-22-checklist-banner`** — use exactly this string
-as `--task` for every `tools/report.py` call in this round.
+Identifier: **`026-2026-09-22-banner-dates-and-engine-wording`** — use exactly
+this string as `--task` for every `tools/report.py` call in this round.
 
 <!-- Brain bookkeeping (not part of the brief): one brief lives here at a
 time; on adjudication move this file to
-docs/briefs/archive/<NNN>-<date>-<slug>.md (024 is the latest archived) and
+docs/briefs/archive/<NNN>-<date>-<slug>.md (025 is the latest archived) and
 replace it with the next one. -->
 
 ## Read before acting
 
-1. [`AGENTS.md`](../../AGENTS.md) — invariants and the evidence table's
-   "Format status, README banner" row.
+1. [`AGENTS.md`](../../AGENTS.md) — the epistemic invariants, especially
+   "publication date → effective date" and "unknowns stay unknown".
 2. [`docs/agents/roles/worker.md`](../agents/roles/worker.md) — your contract
    (the Builder holds the Worker contract).
 3. This brief in full.
-4. `scripts/generate_format_atlas.py`, `tests/test_format_atlas.py`, and the
-   top of `README.md` where the banner is embedded.
-5. `docs/state.md` § Owner preferences, the README banner entry.
+4. `scripts/generate_format_atlas.py` (the banner renderer),
+   `tests/test_format_atlas.py`, `docs/format-atlas-progress.json`, and the
+   `period` object in each `formats/*/format.json`.
+5. `docs/engine-testing.md`, the "CI covers Linux x86-64 only" paragraph.
 
 ---
 
 ## MODE: IMPLEMENTATION
 
-## Goal
+Two small, unrelated corrections, bundled to save a round. Keep them in
+separate commits.
 
-The README banner reads at a glance: a short, clean checklist of the formats
-this project has started, showing for each one how far along its banlist, card
-pool, rules and card text are. It stays generated from the project's data, as
-it is today.
+## Part 1 — the banner shows dates this project doesn't claim
 
-## Why this is next
+### Problem
 
-The owner reviewed the current banner and rejected it: at README width its
-per-area bars are unlabelled, the letter legend doesn't read, and eight era
-tiles plus a 128-format count make it too dense for a banner. This is the
-third rejection of a data-dense design, so the problem is the design language,
-not its tuning.
+Each banner row shows a date taken from the Format Library catalogue (for
+example `05.08` for Goat, `10.04` for Edison). Those are that site's dates, not
+this project's: Goat's canonical `period.start` is April 2005, Edison's March
+2010. A project whose purpose is historical accuracy should not print, next to
+its own formats, a date that disagrees with its own records and doesn't say
+whose it is. `YY.MM` is also hard to read on a banner.
 
-## The design the owner approved in direction
+### Goal
 
-A checklist table. Rows are the formats that have started (today: Goat, Edison,
-Tengu, and Tokyo Dome as research), each with its short name and date. Four
-columns with written headers: **Banlist, Card pool, Rules, Card text**. Each
-cell is one symbol, and a small legend explains them:
+Every date on the banner is either this project's own canonical date or
+clearly not presented as one, and reads plainly (e.g. `Apr 2005`).
 
-| Area status | Symbol |
-|---|---|
-| verified | filled check (e.g. check inside a filled circle) |
-| complete | plain check |
-| partial | half-filled circle |
-| research | magnifier or dot, visually distinct from partial |
-| missing / stub | empty circle |
+### Requirements
 
-One short summary line at most (e.g. "3 shipped · 1 in research"). No era
-tiles, no catalogue-wide count in the banner; the full atlas keeps that detail
-and the README's link to it stays.
+- Canonical formats show the month and year of their own `period.start`, read
+  from `formats/*/format.json`. Establish yourself that `period.start` is the
+  right field (what `notes` and the schema say it means) and say so in the
+  report; if it is not, stop and report rather than choosing another.
+- Research-only rows have no canonical period. Show a date only if the
+  project's research-progress data already records one with a source; do not
+  add a date by copying the catalogue's value into it. If no sourced date
+  exists, show no date, or a label that makes clear it is not an established
+  date. Say which you chose and why.
+- A test fails if a canonical row's banner date disagrees with its
+  `period.start`. Show it red in a scratch copy, then green.
+- The banner otherwise stays as round 25 left it. The full atlas is out of
+  scope and must stay byte-identical.
 
-These are the owner's explicit constraints; treat them as requirements:
+## Part 2 — an unevidenced line in the engine-testing notes
 
-- **Readable as a banner.** Text large enough to read comfortably at the
-  README's display width; nothing that needs zooming. Prefer fewer elements.
-- **Symbols carry meaning without colour alone**, and colour is consistent:
-  one colour family for done, one for partial, one for research, grey for not
-  started.
-- **Complete and verified must stay visibly different.** Showing complete as
-  verified would claim more than the data says.
-
-Beyond these, the visual details are yours. Aim for clean and slick, not
-decorated.
-
-## Required investigation
-
-1. How GitHub renders an SVG embedded as `<img>`: no scripts, no external fonts,
-   and whatever text or symbol technique you use must render in that context.
-   State what you relied on and how you checked it.
-2. How the banner looks on GitHub's light and dark README themes. It needs to
-   read well on both, whether by carrying its own background or otherwise.
-
-## Scope
-
-- `scripts/generate_format_atlas.py` — the banner renderer only. The full atlas
-  (`format-atlas.svg`) is out of scope and must not change.
-- `docs/assets/format-banner.svg`, regenerated, never hand-edited.
-- `tests/test_format_atlas.py` — the banner's tests. Tests that pin the old
-  layout (era tiles, tile markup) are replaced because this brief's purpose is
-  the redesign. Every guarantee they encoded that still applies must survive,
-  in particular: only started formats appear, and the banner agrees with the
-  canonical data.
-- The README's banner `alt` text, so it describes the new banner accurately.
+`docs/engine-testing.md` says the pinned engine "also builds and passes on
+macOS arm64 (that is how it was first exercised)". No evidence of that
+survives in the project. Reword it so it claims only what is evidenced — CI
+covers Linux x86-64; other platforms are untested here — unless you can
+produce the evidence yourself in this round, in which case include it and
+say how. Do not change anything else in that document.
 
 ## Non-goals
 
-- No change to canonical data, `dist/`, the full atlas, the progress badge, or
-  any format's status.
-- No new dependency; the generator stays standard-library only.
-- No change to what CI runs.
+- No change to canonical data, `dist/`, the full atlas, the progress badge,
+  or any format's status.
+- No change to CI or the engine helper.
 
 ## Acceptance criteria
 
-- The regenerated banner is the checklist described above, and
-  `python scripts/generate_format_atlas.py --check` is clean.
-- A test fails if a cell's symbol disagrees with that area's status in the
-  data. Show it: change one area's status in a scratch copy, the test goes red,
-  restore it, green.
-- A test fails if complete and verified would render the same.
-- The full atlas SVG is byte-identical to the base.
-- A rendered image of the new banner at README width (a PNG or a screenshot)
-  is included with the report, in both light and dark README themes if you can
-  produce them. Say how you produced it.
+- Banner rows show `Mon YYYY` dates from `period.start` for the three
+  canonical formats, and the research row follows the rule above.
+- `python scripts/generate_format_atlas.py --check` clean; full atlas
+  byte-identical to base.
+- The date test shown red, then green.
+- The engine-testing line claims nothing unevidenced.
 
 ## Required evidence
 
 `python scripts/generate_format_atlas.py --check`; the full suite
 `python -m unittest discover -t . -s tests -v`; `python -m retroformats
-validate` and `python -m retroformats build --check` unchanged at
-0 errors / 569 warnings; the red/green demonstration; the rendered images;
-and the URL of `docs/assets/format-banner.svg` on your pushed branch, so a
-reviewer can view it as GitHub renders it.
-
-## When to stop
-
-If GitHub's rendering cannot show the symbols or text reliably in an `<img>`
-SVG, stop and report what you found rather than falling back to a dense or
-text-only design.
+validate` (0 errors / 569 warnings) and `python -m retroformats build
+--check`; the red/green demonstration; the full atlas's SHA-256 at base and
+head; the URL of `docs/assets/format-banner.svg` on the pushed branch; and a
+rendered image of the banner saved **inside `.worktrees/builder/`** outside
+any tracked path (for example `.worktrees/builder/.review/banner.png`,
+untracked and uncommitted), with its full path given in the report, so the
+reviewer can find it.
 
 ## Git expectations
 
 Work only in `.worktrees/builder/`; every file you create or edit must be
-inside it. Branch `builder/checklist-banner` from `origin/main`. Focused
-commits; push the branch; never push `main`; never merge; never bypass a local
-check. After your final commit and push, write your report from inside
-`.worktrees/builder/` with
-`python3 tools/report.py write --task 025-2026-09-22-checklist-banner`
+inside it. Branch `builder/banner-dates-and-engine-wording` from
+`origin/main`. Focused commits; push the branch; never push `main`; never
+merge; never bypass a local check. After your final commit and push, write
+your report from inside `.worktrees/builder/` with
+`python3 tools/report.py write --task 026-2026-09-22-banner-dates-and-engine-wording`
 (`python` where `python3` does not resolve), as well as displaying it.
 
 ## Completion-report schema
 
-The Worker contract's report, plus: how the banner was checked in GitHub's
-`<img>` context; the rendered images and how they were made; which old tests
-were replaced and which guarantee each replacement keeps; the red/green
-demonstration; and the pushed SVG's URL.
+The Worker contract's report, plus: what `period.start` means and where that
+is stated; what the research row shows and why; the red/green demonstration;
+the atlas hashes; the image's path; and the exact before/after text of the
+engine-testing line.
