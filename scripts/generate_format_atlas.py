@@ -156,6 +156,11 @@ def canonical_progress(catalog: dict[str, Any]) -> dict[int, dict[str, Any]]:
             "format_id": record["id"],
             "areas": areas,
             "overall": statuses["overall"],
+            # schemas/format.schema.json: period.start is "First day the
+            # format's defining conditions held (usually a banlist effective
+            # date)" - this project's own researched date, not the Format
+            # Library catalog's event/tournament date.
+            "period_start": record["period"]["start"],
         }
     return result
 
@@ -188,6 +193,17 @@ def format_date(raw_date: str | None) -> str:
     if not raw_date:
         return "live"
     return f"{raw_date[2:4]}.{raw_date[5:7]}"
+
+
+MONTH_ABBR = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+
+def month_year(iso_date: str) -> str:
+    """'2005-04-01' -> 'Apr 2005'. For this project's own researched dates only -
+    never the Format Library catalog's date (see format_date, used by the full
+    atlas), which the banner used to show for started formats without saying
+    whose date it was (round 26)."""
+    return f"{MONTH_ABBR[int(iso_date[5:7]) - 1]} {iso_date[:4]}"
 
 
 def year_span(items: list[dict[str, Any]]) -> str:
@@ -528,12 +544,22 @@ def render_banner_svg(catalog: dict[str, Any]) -> str:
                 f'fill="#0d1729" opacity="0.55"/>'
             )
 
+        # This project's own date, never the Format Library catalog's: for a
+        # canonical format, period.start (the format's own defining/effective
+        # date - see canonical_progress). For a research row, only a date the
+        # research-progress record itself already sources; there is none for
+        # Tokyo Dome today (docs/format-atlas-progress.json has no "date" key
+        # for it), so it shows no date rather than inventing one (round 26).
+        date_source = state["period_start"] if kind == "canonical" else state.get("date", "")
+        date_label = month_year(date_source) if date_source else ""
+
         metadata = " ".join(
             [
                 f'data-format-id="{item["id"]}"',
                 f'data-format-name="{esc(item["name"])}"',
                 f'data-category="{item["category"]}"',
                 f'data-kind="{kind}"',
+                f'data-date="{esc(date_source)}"',
                 *[f'data-{key.replace("_", "-")}="{areas[key]}"' for key in AREA_KEYS],
             ]
         )
@@ -542,10 +568,11 @@ def render_banner_svg(catalog: dict[str, Any]) -> str:
             f'      <text x="{left:.1f}" y="{y_mid + 4.6:.1f}" font-size="13.5" font-weight="750" '
             f'fill="#e5edf8">{esc(item["name"])}</text>'
         )
-        body.append(
-            f'      <text x="{left + name_col_w - 8:.1f}" y="{y_mid + 4.2:.1f}" text-anchor="end" '
-            f'font-size="10.5" fill="#7f91aa">{format_date(item.get("date"))}</text>'
-        )
+        if date_label:
+            body.append(
+                f'      <text x="{left + name_col_w - 8:.1f}" y="{y_mid + 4.2:.1f}" text-anchor="end" '
+                f'font-size="10.5" fill="#7f91aa">{esc(date_label)}</text>'
+            )
         for index, key in enumerate(AREA_KEYS):
             cx = status_col_x0 + status_col_w * (index + 0.5)
             status = areas[key]

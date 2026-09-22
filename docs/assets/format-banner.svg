@@ -31,9 +31,8 @@
     <text x="833.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">RULES</text>
     <text x="1059.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">CARD TEXT</text>
     <line x1="28.0" y1="122.0" x2="1172.0" y2="122.0" stroke="#26354d"/>
-    <g class="format" data-format-id="135" data-format-name="Tokyo Dome" data-category="OCG" data-kind="research" data-banlist="research" data-card-pool="research" data-rule-profile="research" data-errata="research">
+    <g class="format" data-format-id="135" data-format-name="Tokyo Dome" data-category="OCG" data-kind="research" data-date="" data-banlist="research" data-card-pool="research" data-rule-profile="research" data-errata="research">
       <text x="28.0" y="147.6" font-size="13.5" font-weight="750" fill="#e5edf8">Tokyo Dome</text>
-      <text x="260.0" y="147.2" text-anchor="end" font-size="10.5" fill="#7f91aa">99.08</text>
       <g class="cell" data-area="banlist" data-status="research" data-symbol="magnifier">
         <title>Banlist: Research</title>
         <circle cx="379.9" cy="141.9" r="5.4" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="383.7" y1="145.7" x2="386.1" y2="148.1" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
@@ -53,9 +52,9 @@
     </g>
     <line x1="28.0" y1="164.0" x2="1172.0" y2="164.0" stroke="#1c2a40"/>
     <rect x="24.0" y="164.0" width="1152.0" height="42.0" fill="#0d1729" opacity="0.55"/>
-    <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
+    <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-date="2005-04-01" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
       <text x="28.0" y="189.6" font-size="13.5" font-weight="750" fill="#e5edf8">Goat</text>
-      <text x="260.0" y="189.2" text-anchor="end" font-size="10.5" fill="#7f91aa">05.08</text>
+      <text x="260.0" y="189.2" text-anchor="end" font-size="10.5" fill="#7f91aa">Apr 2005</text>
       <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
         <title>Banlist: Verified</title>
         <circle cx="381.0" cy="185.0" r="8.2" fill="#34d399"/><path d="M 375.9,185.3 L 379.6,187.8 L 385.3,182.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,9 +73,9 @@
       </g>
     </g>
     <line x1="28.0" y1="206.0" x2="1172.0" y2="206.0" stroke="#1c2a40"/>
-    <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+    <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-date="2010-03-01" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
       <text x="28.0" y="231.6" font-size="13.5" font-weight="750" fill="#e5edf8">Edison</text>
-      <text x="260.0" y="231.2" text-anchor="end" font-size="10.5" fill="#7f91aa">10.04</text>
+      <text x="260.0" y="231.2" text-anchor="end" font-size="10.5" fill="#7f91aa">Mar 2010</text>
       <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
         <title>Banlist: Verified</title>
         <circle cx="381.0" cy="227.0" r="8.2" fill="#34d399"/><path d="M 375.9,227.3 L 379.6,229.8 L 385.3,224.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -96,9 +95,9 @@
     </g>
     <line x1="28.0" y1="248.0" x2="1172.0" y2="248.0" stroke="#1c2a40"/>
     <rect x="24.0" y="248.0" width="1152.0" height="42.0" fill="#0d1729" opacity="0.55"/>
-    <g class="format" data-format-id="24" data-format-name="Tengu" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+    <g class="format" data-format-id="24" data-format-name="Tengu" data-category="TCG" data-kind="canonical" data-date="2011-09-01" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
       <text x="28.0" y="273.6" font-size="13.5" font-weight="750" fill="#e5edf8">Tengu</text>
-      <text x="260.0" y="273.2" text-anchor="end" font-size="10.5" fill="#7f91aa">11.09</text>
+      <text x="260.0" y="273.2" text-anchor="end" font-size="10.5" fill="#7f91aa">Sep 2011</text>
       <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
         <title>Banlist: Verified</title>
         <circle cx="381.0" cy="269.0" r="8.2" fill="#34d399"/><path d="M 375.9,269.3 L 379.6,271.8 L 385.3,266.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>

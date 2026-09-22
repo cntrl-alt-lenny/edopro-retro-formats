@@ -121,8 +121,10 @@ Stated plainly, so a green engine job is not read as more than it is:
 - **Card data is a merge of three databases** (`cards.cdb`, `goat-entries.cdb`,
   `cards-unofficial.cdb`) and scripts are resolved by the harness's own
   filename search, modelled on EDOPro's but not EDOPro's code.
-- **CI covers Linux x86-64 only.** The pinned core also builds and passes on
-  macOS arm64 (that is how it was first exercised), but CI does not.
+- **CI covers Linux x86-64 only.** Other platforms are untested here: no
+  evidence survives in this project of the pinned core being built or run on
+  macOS, Windows, or any architecture other than what the `engine` job's
+  runner uses.
 
 ## How a scenario works
 
