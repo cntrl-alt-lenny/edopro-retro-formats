@@ -171,12 +171,15 @@ Use `python` where `python3` does not resolve; either must be 3.10 or newer.
 | `dist/` | Never edited directly. Only ever regenerated with `python -m retroformats build`; `build --check` must be clean. |
 | Format status, README banner | `python scripts/generate_format_atlas.py --check`. |
 | Research documents only, `docs/research/` | No suite run is evidence for a historical claim. Cite, for every claim, the URL or file and the passage actually read. |
+| Engine tests, harness, engine CI: `tests/engine/`, `scripts/engine_env.py`, the `engine` job in `.github/workflows/ci.yml` | `python scripts/engine_env.py prepare --dest DIR` then `run --dest DIR --expect-at-least N` on Linux or macOS, with the real `executed=… skipped=…` line; the `engine` job's log at the exact pushed head; for a new engine test or gate change, show it failing on deliberately wrong behaviour (or a forced skip) first. See [`docs/engine-testing.md`](docs/engine-testing.md). |
 | Agent tooling: `tools/`, `.githooks/`, `.claude/` | The full suite, which includes `tests/test_report.py`, `test_report_delivery.py`, `test_report_recovery.py`, `test_claude_adapter.py`, `test_push_readiness.py` and `test_role_neutrality.py`. For a guard, show it failing on the broken state first. |
 | Coordination documents: `AGENTS.md`, `docs/agents/`, `docs/state.md` | `tests/test_role_neutrality.py` and `tests/test_state_doc_is_durable.py`. |
 
 The full suite is `python -m unittest discover -t . -s tests -v`. Its skips are
 the engine tests needing `ocgcore` and pinned checkouts; anything else skipping is
-a finding.
+a finding. Those skips are not evidence the engine tests pass: they execute only in
+CI's `engine` job (or locally via `scripts/engine_env.py`), which builds ocgcore from
+the pinned revision and fails on any skip.
 
 **For historical claims, the suite structurally cannot fail.** Citing a green
 suite as evidence that a date, list or ruling is historically correct is a
@@ -263,7 +266,7 @@ fallback is in
 | Layer | Strength | Status |
 |---|---|---|
 | GitHub branch protection on `main` | Server-side | Force-push and deletion are blocked, including for administrators. **No required status checks and no required pull request**: a direct push to `main` with red data is accepted by the server. Read from the repository's protection settings on 2026-09-16 — re-check rather than trust this line. |
-| CI (`.github/workflows/ci.yml`) | Always runs, never blocks | `validate`, `build --check` and the full suite on Python 3.10 and 3.13, on every push and pull request. It reports after the fact. |
+| CI (`.github/workflows/ci.yml`) | Always runs, never blocks | The `check` job: `validate`, `build --check` and the full suite on Python 3.10 and 3.13. The `engine` job: builds ocgcore from the pinned source and runs `tests/engine` against the pinned BabelCDB and CardScripts, failing on any skip. Both on every push and pull request. It reports after the fact. |
 | Local `pre-push` hook | Convenience | `validate` + `build --check`. Opt-in per clone (`git config core.hooksPath .githooks`), bypassable with `--no-verify`. See [`docs/agents/push-gate.md`](docs/agents/push-gate.md). |
 | Claude Code executor guard | Weakest | Refuses to start that tool's executor agent outside `.worktrees/builder` on a `builder/*` branch. Fires only for that tool, only when launched through that agent file. |
 

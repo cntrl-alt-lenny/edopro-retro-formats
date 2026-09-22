@@ -10,9 +10,12 @@ file existing proves nothing, an executed behavioural difference does.
 The same core and card scripts EDOPro executes:
 
 - **Core**: the OCG API 11 library (`edo9300/ygopro-core`), loaded through
-  `ctypes` from `$RETROFORMATS_OCGCORE`. Project Ignis ships production
-  builds in [DeltaBagooska](https://github.com/ProjectIgnis/DeltaBagooska)
-  under `bin/` (`libocgcore.so`, `ocgcore.dll`, …).
+  `ctypes` from `$RETROFORMATS_OCGCORE`. CI and `scripts/engine_env.py` compile
+  it from the source revision `data/sources.json` pins for `ygopro-core`. Project
+  Ignis's prebuilt binaries in
+  [DeltaBagooska](https://github.com/ProjectIgnis/DeltaBagooska) (`bin/`) load
+  fine but are **not** used for verification: nothing ties one to a source
+  revision (see "Pinned inputs").
 - **Card data**: the pinned BabelCDB checkout (`cards.cdb`,
   `goat-entries.cdb`, `cards-unofficial.cdb`) under `$RETROFORMATS_REPOS`,
   merged the way a client merges them.
@@ -27,31 +30,99 @@ The same core and card scripts EDOPro executes:
 
 ## Running it
 
+**In CI**, the `engine` job in `.github/workflows/ci.yml` prepares the pinned
+inputs and runs every engine test on each push and pull request. The `check` job
+next to it is unchanged: it still runs the whole suite on Python 3.10 and 3.13,
+where the engine tests skip, so the main suite stays standard-library-only with no
+network access.
+
+**Locally** (Linux or macOS), the same two commands CI runs:
+
 ```bash
-RETROFORMATS_OCGCORE=~/.cache/retroformats/engine/libocgcore.so \
-RETROFORMATS_REPOS=~/.cache/retroformats/repos \
+python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 25
+```
+
+`prepare` fetches and verifies the pinned inputs and compiles the core (it needs
+`git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 25
+tests execute. The layout it produces is `DEST/repos/babelcdb`,
+`DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
+
+The harness itself only needs two environment variables, so a core and checkouts
+obtained some other way also work, but then nothing has verified them against the
+pins:
+
+```bash
+RETROFORMATS_OCGCORE=DEST/engine/libocgcore.so \
+RETROFORMATS_REPOS=DEST/repos \
 python3 -m unittest discover -t . -s tests/engine -v
 ```
 
-Without those variables the engine tests **skip** (they are part of
-`unittest discover -t . -s tests` and skip there too), so the stdlib-only,
-no-download contract of the main suite is preserved and CI stays green on a
-bare runner.
+Without those variables the engine tests **skip** - in `unittest discover -t . -s
+tests` too, which is why the main suite stays green on a bare runner. A skip is
+not a pass: plain `unittest` exits 0 with all 25 skipped, which is exactly the
+state this project was in before the `engine` job. Only `engine_env.py run`
+refuses it.
 
 **Windows**: DeltaBagooska's `ocgcore.dll` is 32-bit while a stock CPython is
-64-bit, so `ctypes` cannot load it. Run the engine tests under WSL against
-`libocgcore.so` (verified working), or build a 64-bit core.
+64-bit, so `ctypes` cannot load it, and the helper builds for Linux and macOS
+only. Run the engine tests under WSL.
 
-Fetching the prerequisites:
+## Pinned inputs
 
-```bash
-mkdir -p ~/.cache/retroformats/engine
-curl -L -o ~/.cache/retroformats/engine/libocgcore.so \
-  https://raw.githubusercontent.com/ProjectIgnis/DeltaBagooska/master/bin/libocgcore.so
-```
+Every external input the engine job uses is taken at a recorded revision and
+checked, so a moved upstream cannot silently change what is tested. The
+revisions are the ones `data/sources.json` already records for the project's
+claims; the helper reads them from there rather than keeping its own copy.
 
-BabelCDB and CardScripts are cloned at the revisions pinned in
-`data/sources.json`.
+| Input | Pinned by | Verified how |
+|---|---|---|
+| BabelCDB | `ignis-babelcdb` revision | fetched by full commit hash; `git rev-parse HEAD` must equal the pin and no tracked file may differ |
+| CardScripts | `ignis-cardscripts` revision | same |
+| ocgcore source | `ygopro-core` revision | same |
+| Lua | the core's own `lua/src` submodule, at the commit the core's tree records for the pinned revision | same, fetched from the URL in the core's `.gitmodules` |
+| premake5 | version `5.0.0-beta2`, the one the core's `scripts/install-premake5.sh` downloads | SHA-256 in `scripts/engine_env.py`, checked before unpacking |
+| the built library | compiled from the four sources above | its SHA-256 is recorded in `manifest.json` at build time and re-checked by `run`; the manifest also records the source revisions and the compiler |
+
+Fetching by full hash means the server either serves that commit or the fetch
+fails, so a force-pushed or deleted upstream fails the job loudly instead of
+testing something else. `run` repeats the checkout checks offline before every
+run, so a stale or edited cache is refused, not tested.
+
+**Why the core is built rather than downloaded.** DeltaBagooska's `bin/` commits
+say "Update core" and link a core commit (for the latest `libocgcore.so`
+commit when this was written, `8eba148`, that is `fd2a557`, which is not the
+pinned revision). The binary itself is stripped and carries no revision string
+(checked with `strings`), so nothing independent confirms what it was built
+from. A binary from
+there could only be pinned by its own checksum, which would pin a file, not the
+claim "this is the pinned ygopro-core revision". Building from the pinned source,
+with the core's own premake5 configuration, is the only route that makes that
+claim true.
+
+## How the engine differs from what EDOPro players run
+
+Stated plainly, so a green engine job is not read as more than it is:
+
+- **The binary is built here, not shipped by Project Ignis.** Same source
+  revision, but compiled with the runner's compiler (`ubuntu-latest`'s `g++`,
+  recorded in the log, not pinned) in the Release configuration of the core's
+  premake5 build. It is not byte-identical to any binary players have.
+- **The pin is a point in time.** EDOPro follows the core's current development
+  and Project Ignis's current card scripts; the pinned revisions are the ones this
+  project last recorded. Behaviour changes upstream after the pin are not seen
+  until the pin is deliberately moved.
+- **Only what is asserted is tested.** The harness is headless and answers
+  prompts from scripted responses. There is no client layer: no deck or
+  banlist enforcement, no room/duel-flag setup by the client, no networking or
+  UI. Duel flags come from this project's rule profiles, not from whatever a
+  given EDOPro room sets.
+- **Card data is a merge of three databases** (`cards.cdb`, `goat-entries.cdb`,
+  `cards-unofficial.cdb`) and scripts are resolved by the harness's own
+  filename search, modelled on EDOPro's but not EDOPro's code.
+- **CI covers Linux x86-64 only.** The pinned core also builds and passes on
+  macOS arm64 (that is how it was first exercised), but CI does not.
 
 ## How a scenario works
 
