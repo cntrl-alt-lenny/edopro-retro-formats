@@ -1,13 +1,13 @@
 # Project state — durable context
 
-Fast rehydration for a fresh Brain session. **Stores no live repository
-state** (no SHA outside `## Historical anchors`, no queue, no branch layout,
-no test counts — stale the moment anyone commits). Derive live state:
+**Stores no live repository state** (no SHA outside `## Historical
+anchors`, no queue, no branch layout, no test counts — stale the moment
+anyone commits). Derive live state:
 
 | question | source of truth |
 |---|---|
 | commit, branch, remote sync | `git status`, `git rev-parse` |
-| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/`; `docs/briefs/active.md` is legacy until round 027 finishes |
+| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/` |
 | Builder branch unmerged? | `git branch -a`, `git worktree list` |
 | push hook configured? | `git config --get core.hooksPath` |
 | CI result | the run for that exact SHA |
@@ -121,7 +121,8 @@ doesn't record:
   August).
 - **An unreviewed second run of round 13 is parked, not adopted:** ref
   `preserve/round13-alt-run-1bec139` — a different primary source for the
-  September 2010 changeover, to re-verify from source, never copy.
+  September 2010 changeover, to re-verify from source, never copy. It is
+  per-clone and not on `origin`.
 - **Materialisation repairs only pool-content drift**
   (`pool.materialization-drift`); every other `pool.*` error still refuses.
 

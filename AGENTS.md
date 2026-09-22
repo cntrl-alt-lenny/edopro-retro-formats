@@ -56,7 +56,8 @@ worktrees nested under `.worktrees/<role>/` inside this one project folder
 (`git worktree add --detach .worktrees/<role> origin/main`) are this
 project's usual convenience — never required, and `.worktrees/` is
 git-ignored, per-clone state (check `git worktree list`, don't assume it
-exists).
+exists). Adding or retiring a seat is the owner's decision; a tool or
+provider never creates one.
 
 **Why a standing Verifier**, when this project could run Brain → Builder
 alone: this project's costliest defects pass every local check. A source
@@ -154,7 +155,7 @@ either must be 3.10 or newer.
 | Canonical data: `data/`, `formats/` | `python -m retroformats validate` — error count and warning count, with every new warning code explained; `python -m retroformats build --check`; the full suite. Explicitly state whether the GOAT hash and each touched banlist's entry set changed. |
 | Pool derivation or release data: `data/releases/` | All of the above, plus `python -m retroformats materialize` then `build --check`, and whether any pool's card count moved and why. |
 | Validator, importers, `retroformats/` code | `python -m unittest discover -t . -s tests -v`, `validate`, `build --check`. A new rule needs a test that fails without it; say so and show it. |
-| `dist/` | Never edited directly. Only ever regenerated with `python -m retroformats build`; `build --check` must be clean. |
+| `dist/` | Never edited directly. Only ever regenerated with `python -m retroformats build`; `build --check` must be clean. `build --check` regenerates `dist/` before comparing, so it catches committed drift but silently overwrites an *uncommitted* hand-edit rather than reporting it. |
 | Format status, README banner | `python scripts/generate_format_atlas.py --check`. |
 | Research documents only, `docs/research/` | No suite run is evidence for a historical claim. Cite, for every claim, the URL or file and the passage actually read. |
 | Engine tests, harness, engine CI: `tests/engine/`, `scripts/engine_env.py`, the `engine` job in `.github/workflows/ci.yml` | `python scripts/engine_env.py prepare --dest DIR` then `run --dest DIR --expect-at-least N` on Linux or macOS, with the real `executed=… skipped=…` line; the `engine` job's log at the exact pushed head; for a new engine test or gate change, show it failing on deliberately wrong behaviour (or a forced skip) first. See [`docs/engine-testing.md`](docs/engine-testing.md). |
