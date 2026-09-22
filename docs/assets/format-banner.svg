@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="273" viewBox="0 0 1200 273" role="img" aria-labelledby="banner-title banner-desc">
-  <title id="banner-title">EDOPro historical format progress banner</title>
-  <desc id="banner-desc">Coverage across all 128 formats in the pinned Format Library catalog, era by era, plus a spotlight on the 4 formats with real progress today: 3 shipped canonical, 1 in research.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="banner-title banner-desc">
+  <title id="banner-title">EDOPro historical format progress checklist</title>
+  <desc id="banner-desc">A checklist of the 4 formats this repository has started - 3 shipped canonical, 1 in research - each with one symbol per area: banlist, card pool, rules, and historical card text.</desc>
   <defs>
     <linearGradient id="banner-panel" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07101f"/>
@@ -8,177 +8,136 @@
       <stop offset="1" stop-color="#111827"/>
     </linearGradient>
     <radialGradient id="banner-aura-a">
-      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.18"/>
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.16"/>
       <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="banner-aura-b">
-      <stop offset="0" stop-color="#0284c7" stop-opacity="0.16"/>
+      <stop offset="0" stop-color="#0284c7" stop-opacity="0.14"/>
       <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
     </radialGradient>
-    <filter id="banner-glow" x="-20%" y="-80%" width="140%" height="260%">
-      <feGaussianBlur stdDeviation="0.8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect width="1200" height="273" rx="18" fill="url(#banner-panel)"/>
+  <rect width="1200" height="360" rx="18" fill="url(#banner-panel)"/>
   <ellipse cx="120" cy="10" rx="300" ry="130" fill="url(#banner-aura-a)"/>
   <ellipse cx="1080" cy="10" rx="330" ry="140" fill="url(#banner-aura-b)"/>
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
     <text x="28" y="31" font-size="19" font-weight="850" letter-spacing="2.2" fill="#f3f7fc">EDOPRO RETRO FORMATS</text>
-    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data · generated progress at a glance</text>
-    <rect x="919.5" y="20" width="252.5" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
-    <text x="1045.8" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">3 SHIPPED · 1 IN RESEARCH · 128 TRACKED</text>
+    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data</text>
+    <rect x="999.4" y="20" width="172.6" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
+    <text x="1085.7" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">3 SHIPPED · 1 IN RESEARCH</text>
     <line x1="24" y1="76" x2="1176" y2="76" stroke="#26354d"/>
-    <g class="era" data-era="DM" data-active="1" data-total="27">
-      <title>DM: 1 of 27 formats have started</title>
-      <rect x="28.0" y="101.0" width="137.8" height="34.0" rx="7" fill="#a78bfa" opacity="0.08" stroke="#a78bfa" stroke-opacity="0.35"/>
-      <text x="36.0" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#a78bfa">DM</text>
-      <text x="157.8" y="113.5" text-anchor="end" font-size="7" fill="#71839d">27</text>
-      <rect x="35.0" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <rect x="35.0" y="120.0" width="4.6" height="4" rx="2" fill="#a78bfa"/>
-      <text x="96.9" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">1 started</text>
-    </g>
-    <g class="era" data-era="GX" data-active="1" data-total="19">
-      <title>GX: 1 of 19 formats have started</title>
-      <rect x="171.8" y="101.0" width="137.8" height="34.0" rx="7" fill="#2dd4bf" opacity="0.08" stroke="#2dd4bf" stroke-opacity="0.35"/>
-      <text x="179.8" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#2dd4bf">GX</text>
-      <text x="301.5" y="113.5" text-anchor="end" font-size="7" fill="#71839d">19</text>
-      <rect x="178.8" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <rect x="178.8" y="120.0" width="6.5" height="4" rx="2" fill="#2dd4bf"/>
-      <text x="240.6" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">1 started</text>
-    </g>
-    <g class="era" data-era="5D&#x27;s" data-active="1" data-total="15">
-      <title>5D&#x27;s: 1 of 15 formats have started</title>
-      <rect x="315.5" y="101.0" width="137.8" height="34.0" rx="7" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-opacity="0.35"/>
-      <text x="323.5" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#38bdf8">5D&#x27;s</text>
-      <text x="445.2" y="113.5" text-anchor="end" font-size="7" fill="#71839d">15</text>
-      <rect x="322.5" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <rect x="322.5" y="120.0" width="8.2" height="4" rx="2" fill="#38bdf8"/>
-      <text x="384.4" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">1 started</text>
-    </g>
-    <g class="era" data-era="ZEXAL" data-active="1" data-total="16">
-      <title>ZEXAL: 1 of 16 formats have started</title>
-      <rect x="459.2" y="101.0" width="137.8" height="34.0" rx="7" fill="#60a5fa" opacity="0.08" stroke="#60a5fa" stroke-opacity="0.35"/>
-      <text x="467.2" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#60a5fa">ZEXAL</text>
-      <text x="589.0" y="113.5" text-anchor="end" font-size="7" fill="#71839d">16</text>
-      <rect x="466.2" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <rect x="466.2" y="120.0" width="7.7" height="4" rx="2" fill="#60a5fa"/>
-      <text x="528.1" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">1 started</text>
-    </g>
-    <g class="era" data-era="ARC-V" data-active="0" data-total="12">
-      <title>ARC-V: 0 of 12 formats have started</title>
-      <rect x="603.0" y="101.0" width="137.8" height="34.0" rx="7" fill="#f472b6" opacity="0.08" stroke="#f472b6" stroke-opacity="0.35"/>
-      <text x="611.0" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#f472b6">ARC-V</text>
-      <text x="732.8" y="113.5" text-anchor="end" font-size="7" fill="#71839d">12</text>
-      <rect x="610.0" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <text x="671.9" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">0 started</text>
-    </g>
-    <g class="era" data-era="VRAINS" data-active="0" data-total="12">
-      <title>VRAINS: 0 of 12 formats have started</title>
-      <rect x="746.8" y="101.0" width="137.8" height="34.0" rx="7" fill="#fb923c" opacity="0.08" stroke="#fb923c" stroke-opacity="0.35"/>
-      <text x="754.8" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#fb923c">VRAINS</text>
-      <text x="876.5" y="113.5" text-anchor="end" font-size="7" fill="#71839d">12</text>
-      <rect x="753.8" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <text x="815.6" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">0 started</text>
-    </g>
-    <g class="era" data-era="SEVENS" data-active="0" data-total="12">
-      <title>SEVENS: 0 of 12 formats have started</title>
-      <rect x="890.5" y="101.0" width="137.8" height="34.0" rx="7" fill="#4ade80" opacity="0.08" stroke="#4ade80" stroke-opacity="0.35"/>
-      <text x="898.5" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#4ade80">SEVENS</text>
-      <text x="1020.2" y="113.5" text-anchor="end" font-size="7" fill="#71839d">12</text>
-      <rect x="897.5" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <text x="959.4" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">0 started</text>
-    </g>
-    <g class="era" data-era="GO RUSH!!" data-active="0" data-total="15">
-      <title>GO RUSH!!: 0 of 15 formats have started</title>
-      <rect x="1034.2" y="101.0" width="137.8" height="34.0" rx="7" fill="#f87171" opacity="0.08" stroke="#f87171" stroke-opacity="0.35"/>
-      <text x="1042.2" y="113.5" font-size="8.6" font-weight="800" letter-spacing="0.5" fill="#f87171">GO RUSH!!</text>
-      <text x="1164.0" y="113.5" text-anchor="end" font-size="7" fill="#71839d">15</text>
-      <rect x="1041.2" y="120.0" width="123.8" height="4" rx="2" fill="#1c2a40"/>
-      <text x="1103.1" y="132.5" text-anchor="middle" font-size="6.6" fill="#71839d">0 started</text>
-    </g>
-    <text x="28.0" y="155.0" font-size="9" font-weight="800" letter-spacing="1.4" fill="#c9d8eb">IN PROGRESS</text>
-    <text x="1172.0" y="155.0" text-anchor="end" font-size="8" fill="#61738e">4 of 128 formats have started</text>
-      <g class="format" data-format-id="135" data-format-name="Tokyo Dome" data-category="OCG" data-kind="research" data-banlist="research" data-card-pool="research" data-rule-profile="research" data-errata="research">
-        <title>Tokyo Dome — Research, Research, Research, Research</title>
-        <rect x="28.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#a78bfa" stroke-width="0.9"/>
-        <rect x="28.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#a78bfa"/>
-        <circle cx="44.0" cy="182.0" r="6" fill="#fb7185"/>
-        <text x="44.0" y="184.3" text-anchor="middle" font-size="6.8" font-weight="800" fill="#07111f">O</text>
-        <text x="55.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Tokyo Dome</text>
-        <text x="198.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">99.08</text>
-        <text x="38.0" y="196.0" font-size="7" font-weight="700" fill="#a78bfa">Research</text>
-        <rect x="38.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
-        <rect x="78.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
-        <rect x="119.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
-        <rect x="159.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#a78bfa"/>
+    <text x="28.0" y="112.2" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">FORMAT</text>
+    <text x="381.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">BANLIST</text>
+    <text x="607.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">CARD POOL</text>
+    <text x="833.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">RULES</text>
+    <text x="1059.0" y="112.2" text-anchor="middle" font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">CARD TEXT</text>
+    <line x1="28.0" y1="122.0" x2="1172.0" y2="122.0" stroke="#26354d"/>
+    <g class="format" data-format-id="135" data-format-name="Tokyo Dome" data-category="OCG" data-kind="research" data-banlist="research" data-card-pool="research" data-rule-profile="research" data-errata="research">
+      <text x="28.0" y="147.6" font-size="13.5" font-weight="750" fill="#e5edf8">Tokyo Dome</text>
+      <text x="260.0" y="147.2" text-anchor="end" font-size="10.5" fill="#7f91aa">99.08</text>
+      <g class="cell" data-area="banlist" data-status="research" data-symbol="magnifier">
+        <title>Banlist: Research</title>
+        <circle cx="379.9" cy="141.9" r="5.4" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="383.7" y1="145.7" x2="386.1" y2="148.1" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
       </g>
-      <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
-        <title>Goat — Verified, Complete, Partial, Complete</title>
-        <rect x="216.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#38bdf8" stroke-width="1.1" filter="url(#banner-glow)"/>
-        <rect x="216.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#2dd4bf"/>
-        <circle cx="232.0" cy="182.0" r="6" fill="#60a5fa"/>
-        <text x="232.0" y="184.3" text-anchor="middle" font-size="6.8" font-weight="800" fill="#07111f">T</text>
-        <text x="243.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Goat</text>
-        <text x="386.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">05.08</text>
-        <text x="226.0" y="196.0" font-size="7" font-weight="700" fill="#f59e0b">Partial</text>
-        <rect x="226.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
-        <rect x="266.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#38bdf8"/>
-        <rect x="307.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
-        <rect x="347.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#38bdf8"/>
+      <g class="cell" data-area="card_pool" data-status="research" data-symbol="magnifier">
+        <title>Card pool: Research</title>
+        <circle cx="605.9" cy="141.9" r="5.4" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="609.7" y1="145.7" x2="612.1" y2="148.1" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
       </g>
-      <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
-        <title>Edison — Verified, Verified, Partial, Partial</title>
-        <rect x="404.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#38bdf8" stroke-width="1.1" filter="url(#banner-glow)"/>
-        <rect x="404.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#38bdf8"/>
-        <circle cx="420.0" cy="182.0" r="6" fill="#60a5fa"/>
-        <text x="420.0" y="184.3" text-anchor="middle" font-size="6.8" font-weight="800" fill="#07111f">T</text>
-        <text x="431.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Edison</text>
-        <text x="574.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">10.04</text>
-        <text x="414.0" y="196.0" font-size="7" font-weight="700" fill="#f59e0b">Partial</text>
-        <rect x="414.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
-        <rect x="454.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
-        <rect x="495.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
-        <rect x="535.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
+      <g class="cell" data-area="rule_profile" data-status="research" data-symbol="magnifier">
+        <title>Rules: Research</title>
+        <circle cx="831.9" cy="141.9" r="5.4" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="835.7" y1="145.7" x2="838.1" y2="148.1" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
       </g>
-      <g class="format" data-format-id="24" data-format-name="Tengu" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
-        <title>Tengu — Verified, Verified, Partial, Partial</title>
-        <rect x="592.0" y="169.0" width="178.0" height="46.0" rx="8" fill="#111b2e" stroke="#38bdf8" stroke-width="1.1" filter="url(#banner-glow)"/>
-        <rect x="592.0" y="169.0" width="3" height="46.0" rx="1.5" fill="#60a5fa"/>
-        <circle cx="608.0" cy="182.0" r="6" fill="#60a5fa"/>
-        <text x="608.0" y="184.3" text-anchor="middle" font-size="6.8" font-weight="800" fill="#07111f">T</text>
-        <text x="619.0" y="184.5" font-size="9.6" font-weight="700" fill="#e5edf8">Tengu</text>
-        <text x="762.0" y="181.5" text-anchor="end" font-size="6.6" fill="#7f91aa">11.09</text>
-        <text x="602.0" y="196.0" font-size="7" font-weight="700" fill="#f59e0b">Partial</text>
-        <rect x="602.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
-        <rect x="642.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#34d399"/>
-        <rect x="683.0" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
-        <rect x="723.5" y="206.0" width="36.5" height="3" rx="1.5" fill="#f59e0b"/>
+      <g class="cell" data-area="errata" data-status="research" data-symbol="magnifier">
+        <title>Card text: Research</title>
+        <circle cx="1057.9" cy="141.9" r="5.4" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="1061.7" y1="145.7" x2="1064.1" y2="148.1" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
       </g>
-    <rect x="28.0" y="228.0" width="13" height="13" rx="4" fill="#17233a" stroke="#2a3a54"/>
-    <text x="34.5" y="237.3" text-anchor="middle" font-size="6" font-weight="800" fill="#d9e5f5">B</text>
-    <text x="46.0" y="237.2" font-size="7.6" fill="#8ea0ba">Banlist</text>
-    <rect x="128.0" y="228.0" width="13" height="13" rx="4" fill="#17233a" stroke="#2a3a54"/>
-    <text x="134.5" y="237.3" text-anchor="middle" font-size="6" font-weight="800" fill="#d9e5f5">P</text>
-    <text x="146.0" y="237.2" font-size="7.6" fill="#8ea0ba">Card pool</text>
-    <rect x="228.0" y="228.0" width="13" height="13" rx="4" fill="#17233a" stroke="#2a3a54"/>
-    <text x="234.5" y="237.3" text-anchor="middle" font-size="6" font-weight="800" fill="#d9e5f5">R</text>
-    <text x="246.0" y="237.2" font-size="7.6" fill="#8ea0ba">Rules</text>
-    <rect x="328.0" y="228.0" width="13" height="13" rx="4" fill="#17233a" stroke="#2a3a54"/>
-    <text x="334.5" y="237.3" text-anchor="middle" font-size="6" font-weight="800" fill="#d9e5f5">E</text>
-    <text x="346.0" y="237.2" font-size="7.6" fill="#8ea0ba">Card text</text>
-    <circle cx="428.0" cy="234.0" r="3" fill="#334155"/>
-    <text x="436.0" y="237.2" font-size="7.6" fill="#8ea0ba">Not started</text>
-    <circle cx="506.0" cy="234.0" r="3" fill="#a78bfa"/>
-    <text x="514.0" y="237.2" font-size="7.6" fill="#8ea0ba">Research</text>
-    <circle cx="584.0" cy="234.0" r="3" fill="#f59e0b"/>
-    <text x="592.0" y="237.2" font-size="7.6" fill="#8ea0ba">Partial</text>
-    <circle cx="662.0" cy="234.0" r="3" fill="#38bdf8"/>
-    <text x="670.0" y="237.2" font-size="7.6" fill="#8ea0ba">Complete</text>
-    <circle cx="740.0" cy="234.0" r="3" fill="#34d399"/>
-    <text x="748.0" y="237.2" font-size="7.6" fill="#8ea0ba">Verified</text>
-    <line x1="24" y1="251.0" x2="1176" y2="251.0" stroke="#26354d"/>
-    <text x="28" y="259.0" font-size="7.4" fill="#61738e">Pinned from formatlibrary.com · classifiers generated from canonical format records · T = TCG · O = OCG</text>
-    <text x="1172" y="259.0" text-anchor="end" font-size="7.4" fill="#61738e">click for the full atlas ↓</text>
+    </g>
+    <line x1="28.0" y1="164.0" x2="1172.0" y2="164.0" stroke="#1c2a40"/>
+    <rect x="24.0" y="164.0" width="1152.0" height="42.0" fill="#0d1729" opacity="0.55"/>
+    <g class="format" data-format-id="8" data-format-name="Goat" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="complete" data-rule-profile="partial" data-errata="complete">
+      <text x="28.0" y="189.6" font-size="13.5" font-weight="750" fill="#e5edf8">Goat</text>
+      <text x="260.0" y="189.2" text-anchor="end" font-size="10.5" fill="#7f91aa">05.08</text>
+      <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
+        <title>Banlist: Verified</title>
+        <circle cx="381.0" cy="185.0" r="8.2" fill="#34d399"/><path d="M 375.9,185.3 L 379.6,187.8 L 385.3,182.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="card_pool" data-status="complete" data-symbol="check">
+        <title>Card pool: Complete</title>
+        <path d="M 601.1,185.3 L 605.3,188.2 L 612.0,181.8" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="rule_profile" data-status="partial" data-symbol="half-circle">
+        <title>Rules: Partial</title>
+        <circle cx="833.0" cy="185.0" r="8.2" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 833.0,176.80 A 8.20,8.20 0 0 0 833.0,193.20 Z" fill="#f59e0b"/>
+      </g>
+      <g class="cell" data-area="errata" data-status="complete" data-symbol="check">
+        <title>Card text: Complete</title>
+        <path d="M 1053.1,185.3 L 1057.3,188.2 L 1064.0,181.8" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+    <line x1="28.0" y1="206.0" x2="1172.0" y2="206.0" stroke="#1c2a40"/>
+    <g class="format" data-format-id="20" data-format-name="Edison" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+      <text x="28.0" y="231.6" font-size="13.5" font-weight="750" fill="#e5edf8">Edison</text>
+      <text x="260.0" y="231.2" text-anchor="end" font-size="10.5" fill="#7f91aa">10.04</text>
+      <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
+        <title>Banlist: Verified</title>
+        <circle cx="381.0" cy="227.0" r="8.2" fill="#34d399"/><path d="M 375.9,227.3 L 379.6,229.8 L 385.3,224.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="card_pool" data-status="verified" data-symbol="check-circle">
+        <title>Card pool: Verified</title>
+        <circle cx="607.0" cy="227.0" r="8.2" fill="#34d399"/><path d="M 601.9,227.3 L 605.6,229.8 L 611.3,224.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="rule_profile" data-status="partial" data-symbol="half-circle">
+        <title>Rules: Partial</title>
+        <circle cx="833.0" cy="227.0" r="8.2" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 833.0,218.80 A 8.20,8.20 0 0 0 833.0,235.20 Z" fill="#f59e0b"/>
+      </g>
+      <g class="cell" data-area="errata" data-status="partial" data-symbol="half-circle">
+        <title>Card text: Partial</title>
+        <circle cx="1059.0" cy="227.0" r="8.2" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 1059.0,218.80 A 8.20,8.20 0 0 0 1059.0,235.20 Z" fill="#f59e0b"/>
+      </g>
+    </g>
+    <line x1="28.0" y1="248.0" x2="1172.0" y2="248.0" stroke="#1c2a40"/>
+    <rect x="24.0" y="248.0" width="1152.0" height="42.0" fill="#0d1729" opacity="0.55"/>
+    <g class="format" data-format-id="24" data-format-name="Tengu" data-category="TCG" data-kind="canonical" data-banlist="verified" data-card-pool="verified" data-rule-profile="partial" data-errata="partial">
+      <text x="28.0" y="273.6" font-size="13.5" font-weight="750" fill="#e5edf8">Tengu</text>
+      <text x="260.0" y="273.2" text-anchor="end" font-size="10.5" fill="#7f91aa">11.09</text>
+      <g class="cell" data-area="banlist" data-status="verified" data-symbol="check-circle">
+        <title>Banlist: Verified</title>
+        <circle cx="381.0" cy="269.0" r="8.2" fill="#34d399"/><path d="M 375.9,269.3 L 379.6,271.8 L 385.3,266.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="card_pool" data-status="verified" data-symbol="check-circle">
+        <title>Card pool: Verified</title>
+        <circle cx="607.0" cy="269.0" r="8.2" fill="#34d399"/><path d="M 601.9,269.3 L 605.6,271.8 L 611.3,266.2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g class="cell" data-area="rule_profile" data-status="partial" data-symbol="half-circle">
+        <title>Rules: Partial</title>
+        <circle cx="833.0" cy="269.0" r="8.2" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 833.0,260.80 A 8.20,8.20 0 0 0 833.0,277.20 Z" fill="#f59e0b"/>
+      </g>
+      <g class="cell" data-area="errata" data-status="partial" data-symbol="half-circle">
+        <title>Card text: Partial</title>
+        <circle cx="1059.0" cy="269.0" r="8.2" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 1059.0,260.80 A 8.20,8.20 0 0 0 1059.0,277.20 Z" fill="#f59e0b"/>
+      </g>
+    </g>
+    <line x1="28.0" y1="290.0" x2="1172.0" y2="290.0" stroke="#1c2a40"/>
+    <g class="legend-entry" data-status="verified">
+      <circle cx="36.0" cy="320.0" r="6.5" fill="#34d399"/><path d="M 32.0,320.2 L 34.9,322.2 L 39.4,317.8" fill="none" stroke="#f8fafc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="48.0" y="323.2" font-size="9.5" fill="#8ea0ba">Verified</text>
+    </g>
+    <g class="legend-entry" data-status="complete">
+      <path d="M 260.1,320.2 L 263.5,322.6 L 268.8,317.4" fill="none" stroke="#34d399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="276.8" y="323.2" font-size="9.5" fill="#8ea0ba">Complete</text>
+    </g>
+    <g class="legend-entry" data-status="partial">
+      <circle cx="493.6" cy="320.0" r="6.5" fill="none" stroke="#f59e0b" stroke-width="1.6"/><path d="M 493.6,313.50 A 6.50,6.50 0 0 0 493.6,326.50 Z" fill="#f59e0b"/>
+      <text x="505.6" y="323.2" font-size="9.5" fill="#8ea0ba">Partial</text>
+    </g>
+    <g class="legend-entry" data-status="research">
+      <circle cx="721.5" cy="319.1" r="4.3" fill="none" stroke="#a78bfa" stroke-width="1.9"/><line x1="724.6" y1="322.2" x2="726.4" y2="324.0" stroke="#a78bfa" stroke-width="2.1" stroke-linecap="round"/>
+      <text x="734.4" y="323.2" font-size="9.5" fill="#8ea0ba">Research</text>
+    </g>
+    <g class="legend-entry" data-status="missing">
+      <circle cx="951.2" cy="320.0" r="6.5" fill="none" stroke="#64748b" stroke-width="1.6"/>
+      <text x="963.2" y="323.2" font-size="9.5" fill="#8ea0ba">Not started</text>
+    </g>
+    <line x1="24" y1="336.0" x2="1176" y2="336.0" stroke="#26354d"/>
+    <text x="28" y="346.0" font-size="7.4" fill="#61738e">Generated from canonical format records · full atlas below</text>
   </g>
 </svg>
