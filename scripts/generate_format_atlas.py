@@ -378,41 +378,110 @@ def render_svg(catalog: dict[str, Any]) -> str:
     return svg
 
 
-def card_text_size(name: str) -> float:
-    length = len(name)
-    if length >= 16:
-        return 8.0
-    if length >= 12:
-        return 8.8
-    return 9.6
-
-
 def badge_width(text: str, font_size: float, padding: float = 30.0) -> float:
     return len(text) * font_size * 0.62 + padding
 
 
-def render_banner_svg(catalog: dict[str, Any]) -> str:
-    """Render a compact hero for the top of the README.
+# Which drawn glyph represents each area status, and its colour family. Two
+# statuses can legitimately share a colour (the done family covers both
+# "complete" and "verified") because the glyph, not the colour, is what must
+# tell them apart -- see render_status_icon.
+STATUS_SYMBOL = {
+    "verified": "check-circle",
+    "complete": "check",
+    "partial": "half-circle",
+    "research": "magnifier",
+    "stub": "empty-circle",
+    "missing": "empty-circle",
+}
+STATUS_ICON_COLORS = {
+    "verified": "#34d399",
+    "complete": "#34d399",
+    "partial": "#f59e0b",
+    "research": "#a78bfa",
+    "stub": "#64748b",
+    "missing": "#64748b",
+}
+LEGEND_STATUSES = (
+    ("verified", "Verified"),
+    ("complete", "Complete"),
+    ("partial", "Partial"),
+    ("research", "Research"),
+    ("missing", "Not started"),
+)
 
-    The detailed atlas (below the fold) is the exhaustive inspection view with
-    one tile per catalog entry. The banner is deliberately not a second copy
-    of that grid: it shows (1) a one-line-per-era coverage strip so the whole
-    128-format universe is represented without 128 boxes, and (2) a
-    "spotlight" row containing only formats that have actually started
-    (canonical or research) with their real classifier progress. The
-    spotlight row is the part that grows as work happens; formats that are
-    merely catalogued and untouched never get a box here at all — that's the
-    whole point.
+
+def _check_path(cx: float, cy: float, scale: float, stroke: str, width: float) -> str:
+    x1, y1 = cx - scale, cy + scale * 0.05
+    x2, y2 = cx - scale * 0.28, cy + scale * 0.55
+    x3, y3 = cx + scale * 0.85, cy - scale * 0.55
+    return (
+        f'<path d="M {x1:.1f},{y1:.1f} L {x2:.1f},{y2:.1f} L {x3:.1f},{y3:.1f}" '
+        f'fill="none" stroke="{stroke}" stroke-width="{width:.1f}" stroke-linecap="round" stroke-linejoin="round"/>'
+    )
+
+
+def render_status_icon(cx: float, cy: float, status: str, r: float = 8.2) -> str:
+    """A vector glyph for one area's status - never a font glyph or emoji.
+
+    GitHub's sanitized rendering of a raw SVG behind an <img> tag only
+    reliably shows generic-family text and plain shapes; a checkmark drawn as
+    a text glyph depends on whatever font a viewer's system substitutes for
+    the missing web font, which is exactly the kind of thing that silently
+    stops working on some viewers. Paths never have that problem.
+    """
+    symbol = STATUS_SYMBOL[status]
+    color = STATUS_ICON_COLORS[status]
+    if symbol == "check-circle":
+        return (
+            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{color}"/>'
+            + _check_path(cx, cy, r * 0.62, stroke="#f8fafc", width=r * 0.22)
+        )
+    if symbol == "check":
+        return _check_path(cx, cy, r * 0.72, stroke=color, width=r * 0.26)
+    if symbol == "half-circle":
+        d = f"M {cx:.1f},{cy - r:.2f} A {r:.2f},{r:.2f} 0 0 0 {cx:.1f},{cy + r:.2f} Z"
+        return (
+            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="none" stroke="{color}" stroke-width="1.6"/>'
+            f'<path d="{d}" fill="{color}"/>'
+        )
+    if symbol == "magnifier":
+        lens_r = r * 0.66
+        lens_cx, lens_cy = cx - r * 0.14, cy - r * 0.14
+        hx1 = lens_cx + lens_r * 0.72
+        hy1 = lens_cy + lens_r * 0.72
+        hx2 = cx + r * 0.62
+        hy2 = cy + r * 0.62
+        return (
+            f'<circle cx="{lens_cx:.1f}" cy="{lens_cy:.1f}" r="{lens_r:.1f}" fill="none" '
+            f'stroke="{color}" stroke-width="1.9"/>'
+            f'<line x1="{hx1:.1f}" y1="{hy1:.1f}" x2="{hx2:.1f}" y2="{hy2:.1f}" '
+            f'stroke="{color}" stroke-width="2.1" stroke-linecap="round"/>'
+        )
+    # empty-circle: "missing" and "stub" both render as an unfilled ring.
+    return f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="none" stroke="{color}" stroke-width="1.6"/>'
+
+
+def render_banner_svg(catalog: dict[str, Any]) -> str:
+    """Render the README hero: a checklist of formats that have started.
+
+    Design direction from the owner after three rejections of data-dense
+    banners (docs/state.md, Owner preferences, "README banner"): one row per
+    started format (canonical or research), four written columns - Banlist,
+    Card pool, Rules, Card text - one glyph per cell, a small legend, and at
+    most one summary line. Untouched catalog entries never get a row; that
+    detail stays in the full atlas below the fold.
     """
     progress = combined_progress(catalog)
-    total = catalog["count"]
 
     def kind_of(item: dict[str, Any]) -> str:
         state = progress.get(item["id"])
         return state["kind"] if state else "planned"
 
-    era_items = {era: [i for i in catalog["formats"] if i["era"] == era] for era in ERA_ORDER}
-    active_items = [item for item in catalog["formats"] if kind_of(item) != "planned"]
+    active_items = sorted(
+        (item for item in catalog["formats"] if kind_of(item) != "planned"),
+        key=lambda item: item.get("date") or "",
+    )
     canonical_count = sum(1 for item in active_items if kind_of(item) == "canonical")
     research_count = sum(1 for item in active_items if kind_of(item) == "research")
 
@@ -423,92 +492,41 @@ def render_banner_svg(catalog: dict[str, Any]) -> str:
 
     body: list[str] = []
 
-    # -- Era coverage strip: one equal-width chip per era, always 8 chips
-    # regardless of how lopsided era sizes are, so it stays legible as the
-    # catalog is refreshed. Each chip's fill bar is the only thing that moves
-    # as work progresses.
-    era_top = 101.0
-    era_gap = 6.0
-    era_h = 34.0
-    era_chip_w = (content_width - era_gap * (len(ERA_ORDER) - 1)) / len(ERA_ORDER)
-    for index, era in enumerate(ERA_ORDER):
-        items = era_items[era]
-        active_in_era = sum(1 for item in items if kind_of(item) != "planned")
-        accent = ERA_ACCENTS[era]
-        x = left + index * (era_chip_w + era_gap)
-        fraction = (active_in_era / len(items)) if items else 0.0
-        track_x = x + 7
-        track_w = era_chip_w - 14
-        fill_w = max(track_w * fraction, 0.0) if active_in_era else 0.0
-        body.append(
-            f'    <g class="era" data-era="{esc(era)}" data-active="{active_in_era}" data-total="{len(items)}">\n'
-            f'      <title>{esc(era)}: {active_in_era} of {len(items)} formats have started</title>\n'
-            f'      <rect x="{x:.1f}" y="{era_top:.1f}" width="{era_chip_w:.1f}" height="{era_h:.1f}" rx="7" '
-            f'fill="{accent}" opacity="0.08" stroke="{accent}" stroke-opacity="0.35"/>\n'
-            f'      <text x="{x + 8:.1f}" y="{era_top + 12.5:.1f}" font-size="8.6" font-weight="800" '
-            f'letter-spacing="0.5" fill="{accent}">{esc(era)}</text>\n'
-            f'      <text x="{x + era_chip_w - 8:.1f}" y="{era_top + 12.5:.1f}" text-anchor="end" '
-            f'font-size="7" fill="#71839d">{len(items)}</text>\n'
-            f'      <rect x="{track_x:.1f}" y="{era_top + 19:.1f}" width="{track_w:.1f}" height="4" rx="2" '
-            f'fill="#1c2a40"/>\n'
-            + (
-                f'      <rect x="{track_x:.1f}" y="{era_top + 19:.1f}" width="{fill_w:.1f}" height="4" rx="2" '
-                f'fill="{accent}"/>\n'
-                if fill_w > 0
-                else ""
-            )
-            + f'      <text x="{x + era_chip_w / 2:.1f}" y="{era_top + 31.5:.1f}" text-anchor="middle" '
-            f'font-size="6.6" fill="#71839d">{active_in_era} started</text>\n'
-            f'    </g>'
-        )
+    # -- Table: one row per started format, four status columns.
+    name_col_w = 240.0
+    status_col_w = (content_width - name_col_w) / len(AREA_KEYS)
+    status_col_x0 = left + name_col_w
 
-    # -- Spotlight: only formats that have actually started. Wraps to further
-    # rows automatically as more formats do.
-    spotlight_top = era_top + era_h + 20.0
-    spotlight_card_w = 178.0
-    spotlight_card_h = 46.0
-    spotlight_gap_x = 10.0
-    spotlight_gap_y = 10.0
-    per_row = max(1, int((content_width + spotlight_gap_x) // (spotlight_card_w + spotlight_gap_x)))
+    table_top = 96.0
+    header_row_h = 26.0
+    row_h = 42.0
 
     body.append(
-        f'    <text x="{left:.1f}" y="{spotlight_top:.1f}" font-size="9" font-weight="800" '
-        f'letter-spacing="1.4" fill="#c9d8eb">IN PROGRESS</text>\n'
-        f'    <text x="{right:.1f}" y="{spotlight_top:.1f}" text-anchor="end" font-size="8" '
-        f'fill="#61738e">{len(active_items)} of {total} formats have started</text>'
+        f'    <text x="{left:.1f}" y="{table_top + header_row_h / 2 + 3.2:.1f}" font-size="9" '
+        f'font-weight="800" letter-spacing="1.1" fill="#c9d8eb">FORMAT</text>'
     )
-    cards_top = spotlight_top + 14.0
+    for index, (_, label) in enumerate(AREA_LABELS):
+        cx = status_col_x0 + status_col_w * (index + 0.5)
+        body.append(
+            f'    <text x="{cx:.1f}" y="{table_top + header_row_h / 2 + 3.2:.1f}" text-anchor="middle" '
+            f'font-size="9" font-weight="800" letter-spacing="1.1" fill="#c9d8eb">{esc(label.upper())}</text>'
+        )
+    header_bottom = table_top + header_row_h
+    body.append(f'    <line x1="{left:.1f}" y1="{header_bottom:.1f}" x2="{right:.1f}" y2="{header_bottom:.1f}" stroke="#26354d"/>')
 
-    for index, item in enumerate(active_items):
-        row, col = divmod(index, per_row)
-        x = left + col * (spotlight_card_w + spotlight_gap_x)
-        y = cards_top + row * (spotlight_card_h + spotlight_gap_y)
+    rows_top = header_bottom
+    for row_index, item in enumerate(active_items):
+        y0 = rows_top + row_index * row_h
+        y_mid = y0 + row_h / 2
         state = progress[item["id"]]
         areas = state["areas"]
         kind = state["kind"]
-        era_accent = ERA_ACCENTS[item["era"]]
-        if kind == "canonical":
-            overall = state["overall"]
-            status_label = STATUS_LABELS[overall]
-            status_color = STATUS_COLORS[overall]
-            stroke, stroke_width, filter_attr = "#38bdf8", "1.1", ' filter="url(#banner-glow)"'
-        else:
-            status_label = "Research"
-            status_color = STATUS_COLORS["research"]
-            stroke, stroke_width, filter_attr = "#a78bfa", "0.9", ""
-        territory = "O" if item["category"] == "OCG" else "T"
-        territory_color = "#fb7185" if territory == "O" else "#60a5fa"
-        name = item["name"] if len(item["name"]) <= 20 else item["name"][:19].rstrip() + "…"
 
-        bars = []
-        bar_x = x + 10
-        bar_w = (spotlight_card_w - 20 - 3 * 4) / 4
-        for key in AREA_KEYS:
-            bars.append(
-                f'        <rect x="{bar_x:.1f}" y="{y + 37:.1f}" width="{bar_w:.1f}" height="3" rx="1.5" '
-                f'fill="{STATUS_COLORS[areas[key]]}"/>'
+        if row_index % 2 == 1:
+            body.append(
+                f'    <rect x="{left - 4:.1f}" y="{y0:.1f}" width="{content_width + 8:.1f}" height="{row_h:.1f}" '
+                f'fill="#0d1729" opacity="0.55"/>'
             )
-            bar_x += bar_w + 4
 
         metadata = " ".join(
             [
@@ -519,59 +537,61 @@ def render_banner_svg(catalog: dict[str, Any]) -> str:
                 *[f'data-{key.replace("_", "-")}="{areas[key]}"' for key in AREA_KEYS],
             ]
         )
+        body.append(f'    <g class="format" {metadata}>')
         body.append(
-            f'      <g class="format" {metadata}>\n'
-            f'        <title>{esc(item["name"])} — {STATUS_LABELS[areas["banlist"]]}, '
-            f'{STATUS_LABELS[areas["card_pool"]]}, {STATUS_LABELS[areas["rule_profile"]]}, '
-            f'{STATUS_LABELS[areas["errata"]]}</title>\n'
-            f'        <rect x="{x:.1f}" y="{y:.1f}" width="{spotlight_card_w:.1f}" height="{spotlight_card_h:.1f}" '
-            f'rx="8" fill="#111b2e" stroke="{stroke}" stroke-width="{stroke_width}"{filter_attr}/>\n'
-            f'        <rect x="{x:.1f}" y="{y:.1f}" width="3" height="{spotlight_card_h:.1f}" rx="1.5" '
-            f'fill="{era_accent}"/>\n'
-            f'        <circle cx="{x + 16:.1f}" cy="{y + 13:.1f}" r="6" fill="{territory_color}"/>\n'
-            f'        <text x="{x + 16:.1f}" y="{y + 15.3:.1f}" text-anchor="middle" font-size="6.8" '
-            f'font-weight="800" fill="#07111f">{territory}</text>\n'
-            f'        <text x="{x + 27:.1f}" y="{y + 15.5:.1f}" font-size="{card_text_size(name):.1f}" '
-            f'font-weight="700" fill="#e5edf8">{esc(name)}</text>\n'
-            f'        <text x="{x + spotlight_card_w - 8:.1f}" y="{y + 12.5:.1f}" text-anchor="end" '
-            f'font-size="6.6" fill="#7f91aa">{format_date(item.get("date"))}</text>\n'
-            f'        <text x="{x + 10:.1f}" y="{y + 27:.1f}" font-size="7" font-weight="700" '
-            f'fill="{status_color}">{esc(status_label)}</text>\n'
-            + "\n".join(bars)
-            + "\n      </g>"
+            f'      <text x="{left:.1f}" y="{y_mid + 4.6:.1f}" font-size="13.5" font-weight="750" '
+            f'fill="#e5edf8">{esc(item["name"])}</text>'
+        )
+        body.append(
+            f'      <text x="{left + name_col_w - 8:.1f}" y="{y_mid + 4.2:.1f}" text-anchor="end" '
+            f'font-size="10.5" fill="#7f91aa">{format_date(item.get("date"))}</text>'
+        )
+        for index, key in enumerate(AREA_KEYS):
+            cx = status_col_x0 + status_col_w * (index + 0.5)
+            status = areas[key]
+            body.append(
+                f'      <g class="cell" data-area="{key}" data-status="{status}" '
+                f'data-symbol="{STATUS_SYMBOL[status]}">\n'
+                f'        <title>{esc(AREA_LABELS[index][1])}: {esc(STATUS_LABELS[status])}</title>\n'
+                f'        {render_status_icon(cx, y_mid, status)}\n'
+                f'      </g>'
+            )
+        body.append('    </g>')
+        body.append(
+            f'    <line x1="{left:.1f}" y1="{y0 + row_h:.1f}" x2="{right:.1f}" y2="{y0 + row_h:.1f}" stroke="#1c2a40"/>'
         )
 
-    spotlight_rows = -(-len(active_items) // per_row) if active_items else 0
-    spotlight_bottom = cards_top + spotlight_rows * spotlight_card_h + max(spotlight_rows - 1, 0) * spotlight_gap_y
+    rows_bottom = rows_top + len(active_items) * row_h
 
-    legend_top = spotlight_bottom + 22.0
-    legend_x = left
-    for short, label in AREA_LABELS:
+    # -- Legend: one entry per status the design defines, always shown even
+    # if today's data never uses it (e.g. no started format is "stub" yet).
+    legend_top = rows_bottom + 30.0
+    legend_col_w = content_width / len(LEGEND_STATUSES)
+    for index, (status, label) in enumerate(LEGEND_STATUSES):
+        x = left + index * legend_col_w
         body.append(
-            f'    <rect x="{legend_x:.1f}" y="{legend_top - 9:.1f}" width="13" height="13" rx="4" '
-            f'fill="#17233a" stroke="#2a3a54"/>\n'
-            f'    <text x="{legend_x + 6.5:.1f}" y="{legend_top + 0.3:.1f}" text-anchor="middle" font-size="6" '
-            f'font-weight="800" fill="#d9e5f5">{short}</text>\n'
-            f'    <text x="{legend_x + 18:.1f}" y="{legend_top + 0.2:.1f}" font-size="7.6" fill="#8ea0ba">{label}</text>'
+            f'    <g class="legend-entry" data-status="{status}">\n'
+            f'      {render_status_icon(x + 8, legend_top, status, r=6.5)}\n'
+            f'      <text x="{x + 20:.1f}" y="{legend_top + 3.2:.1f}" font-size="9.5" '
+            f'fill="#8ea0ba">{esc(label)}</text>\n'
+            f'    </g>'
         )
-        legend_x += 100
-    for status in ("missing", "research", "partial", "complete", "verified"):
-        body.append(
-            f'    <circle cx="{legend_x:.1f}" cy="{legend_top - 3:.1f}" r="3" fill="{STATUS_COLORS[status]}"/>\n'
-            f'    <text x="{legend_x + 8:.1f}" y="{legend_top + 0.2:.1f}" font-size="7.6" fill="#8ea0ba">{STATUS_LABELS[status]}</text>'
-        )
-        legend_x += 78
 
-    footer_top = legend_top + 22.0
+    footer_top = legend_top + 26.0
     height = int(footer_top + 14.0)
 
-    header_badge_text = f"{canonical_count} SHIPPED · {research_count} IN RESEARCH · {total} TRACKED"
-    header_badge_w = badge_width(header_badge_text, 9.2)
-    header_badge_x = right - header_badge_w
+    summary_parts = []
+    if canonical_count:
+        summary_parts.append(f"{canonical_count} SHIPPED")
+    if research_count:
+        summary_parts.append(f"{research_count} IN RESEARCH")
+    summary_text = " · ".join(summary_parts) if summary_parts else "NO FORMATS STARTED YET"
+    summary_w = badge_width(summary_text, 9.2)
+    summary_x = right - summary_w
 
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="banner-title banner-desc">
-  <title id="banner-title">EDOPro historical format progress banner</title>
-  <desc id="banner-desc">Coverage across all {total} formats in the pinned Format Library catalog, era by era, plus a spotlight on the {len(active_items)} formats with real progress today: {canonical_count} shipped canonical, {research_count} in research.</desc>
+  <title id="banner-title">EDOPro historical format progress checklist</title>
+  <desc id="banner-desc">A checklist of the {len(active_items)} formats this repository has started - {canonical_count} shipped canonical, {research_count} in research - each with one symbol per area: banlist, card pool, rules, and historical card text.</desc>
   <defs>
     <linearGradient id="banner-panel" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07101f"/>
@@ -579,31 +599,26 @@ def render_banner_svg(catalog: dict[str, Any]) -> str:
       <stop offset="1" stop-color="#111827"/>
     </linearGradient>
     <radialGradient id="banner-aura-a">
-      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.18"/>
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.16"/>
       <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="banner-aura-b">
-      <stop offset="0" stop-color="#0284c7" stop-opacity="0.16"/>
+      <stop offset="0" stop-color="#0284c7" stop-opacity="0.14"/>
       <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
     </radialGradient>
-    <filter id="banner-glow" x="-20%" y="-80%" width="140%" height="260%">
-      <feGaussianBlur stdDeviation="0.8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
   <rect width="{width}" height="{height}" rx="18" fill="url(#banner-panel)"/>
   <ellipse cx="120" cy="10" rx="300" ry="130" fill="url(#banner-aura-a)"/>
   <ellipse cx="1080" cy="10" rx="330" ry="140" fill="url(#banner-aura-b)"/>
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
     <text x="28" y="31" font-size="19" font-weight="850" letter-spacing="2.2" fill="#f3f7fc">EDOPRO RETRO FORMATS</text>
-    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data · generated progress at a glance</text>
-    <rect x="{header_badge_x:.1f}" y="20" width="{header_badge_w:.1f}" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
-    <text x="{header_badge_x + header_badge_w / 2:.1f}" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">{esc(header_badge_text)}</text>
+    <text x="28" y="51" font-size="10.5" fill="#91a3bd">Historical formats · reconstructed as data</text>
+    <rect x="{summary_x:.1f}" y="20" width="{summary_w:.1f}" height="27" rx="13.5" fill="#101d32" stroke="#2b3d59"/>
+    <text x="{summary_x + summary_w / 2:.1f}" y="37.5" text-anchor="middle" font-size="9.2" font-weight="750" fill="#c9d8eb">{esc(summary_text)}</text>
     <line x1="24" y1="76" x2="1176" y2="76" stroke="#26354d"/>
 {chr(10).join(body)}
-    <line x1="24" y1="{footer_top - 8:.1f}" x2="1176" y2="{footer_top - 8:.1f}" stroke="#26354d"/>
-    <text x="28" y="{footer_top:.1f}" font-size="7.4" fill="#61738e">Pinned from formatlibrary.com · classifiers generated from canonical format records · T = TCG · O = OCG</text>
-    <text x="1172" y="{footer_top:.1f}" text-anchor="end" font-size="7.4" fill="#61738e">click for the full atlas ↓</text>
+    <line x1="24" y1="{footer_top - 10:.1f}" x2="1176" y2="{footer_top - 10:.1f}" stroke="#26354d"/>
+    <text x="28" y="{footer_top:.1f}" font-size="7.4" fill="#61738e">Generated from canonical format records · full atlas below</text>
   </g>
 </svg>
 '''
