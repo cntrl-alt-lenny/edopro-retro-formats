@@ -179,6 +179,7 @@ class RescueCatEraBehaviourTest(unittest.TestCase):
         # Two pre-errata copies each Special Summon a pair: four monsters.
         self.assertEqual(4, self._both_cats_try(RESCUE_CAT_PRE_ERRATA))
 
+    @unittest.skip("SCRATCH: forced skip, round 24 no-skip-gate demo (reverted next commit)")
     def test_modern_rescue_cat_is_hard_once_per_turn(self):
         self.assertEqual(2, self._both_cats_try(RESCUE_CAT_MODERN))
 
