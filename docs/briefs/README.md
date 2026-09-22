@@ -1,4 +1,9 @@
-# Brief lifecycle
+# Brief lifecycle (history)
+
+New rounds live in [`docs/rounds/`](../rounds/) — see
+[`docs/agents/FRAMEWORK.md`](../agents/FRAMEWORK.md). This file describes the
+pre-3.0.0 brief lifecycle and is kept for the archived briefs below that still
+use it.
 
 A brief moves through five states. The state is written on the brief itself as a
 `Status:` line, and is also encoded in which directory the file sits in — so

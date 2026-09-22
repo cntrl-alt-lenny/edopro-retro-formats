@@ -2,7 +2,7 @@
 
 """Pre-push readiness check: canonical data validates, generated output is fresh.
 
-Invoked by `.githooks/pre-push` (see docs/agents/push-gate.md). Runs the
+Invoked by `.githooks/pre-push` (see AGENTS.md § What is actually enforced). Runs the
 same two commands CI runs before anything reaches the remote:
 
     python -m retroformats validate

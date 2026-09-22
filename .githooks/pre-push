@@ -13,7 +13,7 @@
 #
 # Bypass once:  git push --no-verify
 # This is a convenience, not a control -- CI is the real backstop. See
-# docs/agents/push-gate.md.
+# AGENTS.md § What is actually enforced.
 
 set -e
 

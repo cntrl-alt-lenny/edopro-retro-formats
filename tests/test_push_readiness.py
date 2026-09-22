@@ -90,10 +90,20 @@ class PushHookShimTest(unittest.TestCase):
     def test_hook_is_not_wired_as_a_claude_code_bash_hook(self):
         """Regression guard: this gate is vendor-independent by design. A
         Claude Code PreToolUse hook only fires for Claude Code sessions,
-        and this project's Worker role is explicitly model-agnostic."""
+        and this project's Worker role is explicitly model-agnostic.
+
+        No `.claude/settings.json` is shipped at all (the 3.0.0 adapter
+        retired its Stop hook, which was that file's only content), so the
+        invariant this test protects -- no Claude-Code-only Bash push hook
+        -- holds vacuously. Assert that absence explicitly rather than
+        skipping, so a settings file reintroduced later is actually checked."""
         settings = ROOT / ".claude" / "settings.json"
         if not settings.is_file():
-            self.skipTest("no .claude/settings.json in this checkout")
+            self.assertFalse(
+                (ROOT / ".claude" / "hooks" / "pre_bash.py").exists(),
+                "the regex-based Bash push hook was removed; see this file's docstring",
+            )
+            return
         text = settings.read_text(encoding="utf-8")
         self.assertNotIn("pre_bash", text)
         self.assertFalse(
@@ -140,6 +150,21 @@ class CommandTextParsingRegressionTest(unittest.TestCase):
         self.assertTrue(false_alarms, "expected the old regex to fire on non-pushes")
         self.assertIn("git -C /some/path push", missed)
         self.assertIn('git commit -m "docs: explain the git push flow"', false_alarms)
+
+
+class TrackedHookModeTest(unittest.TestCase):
+    """Moved from tests/test_claude_adapter.py when the 3.0.0 adapter update
+    retired that file's other tests (the Stop hook, its shim, and the
+    checkout guard, all removed as of that round) -- the push gate itself,
+    and its guard, stay."""
+
+    def test_pre_push_is_tracked_executable(self):
+        entry = subprocess.check_output(
+            ["git", "ls-files", "-s", "--", ".githooks/pre-push"],
+            cwd=str(ROOT),
+            text=True,
+        ).strip()
+        self.assertTrue(entry.startswith("100755 "), entry)
 
 
 if __name__ == "__main__":
