@@ -1597,9 +1597,21 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 continue
             kind = selection.candidates[0].coverage.kind.value
             determinate_coverage[kind] = determinate_coverage.get(kind, 0) + 1
-        self.assertEqual({"reuse-upstream": 81, "known-gap": 42, "none-needed": 4}, determinate_coverage)
-        self.assertEqual(determinate_coverage, audit["determinate"]["coverage"])
-        self.assertEqual(set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed"})
+        # Round 029 (roadmap item 7) moved three records' baseline state from
+        # known-gap to custom-script (Metalzoa, Super Vehicroid - Stealth Union,
+        # Night Assailant). The frozen research packet still records the
+        # earlier 42/0; it is not rewritten, and the expected numbers below
+        # are the packet's own with exactly that documented delta applied.
+        self.assertEqual(
+            {"reuse-upstream": 81, "known-gap": 39, "none-needed": 4, "custom-script": 3}, determinate_coverage
+        )
+        packet_with_round_029 = dict(audit["determinate"]["coverage"])
+        packet_with_round_029["known-gap"] -= 3
+        packet_with_round_029["custom-script"] = packet_with_round_029.get("custom-script", 0) + 3
+        self.assertEqual(determinate_coverage, packet_with_round_029)
+        self.assertEqual(
+            set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed", "custom-script"}
+        )
 
         self.assertEqual(104, sum(selection.modern_is_possible for selection in ambiguous))
         self.assertEqual(44, sum(not selection.modern_is_possible for selection in ambiguous))

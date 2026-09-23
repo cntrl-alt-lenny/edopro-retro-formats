@@ -29,6 +29,18 @@ from . import migration_materializer as mm
 from .pre_migration_fixture import load_pre_migration_repo
 
 
+# Fields of the three records round 029 (roadmap item 7) edited after the
+# migration, when Metalzoa, Super Vehicroid - Stealth Union and Night Assailant
+# went from a known gap to a `custom-script` coverage. The coverage (or, for
+# the full v2 record, its `states`), the implementation metadata for that
+# state, and Night Assailant's added reference identity are the only changes.
+ROUND_029_EDITED_FIELDS = {
+    "erratum-metalzoa": ("coverage", "implementation_metadata"),
+    "erratum-super-vehicroid-stealth-union": ("coverage", "implementation_metadata"),
+    "erratum-night-assailant": ("states", "implementation_metadata", "reference_identities"),
+}
+
+
 class MaterializedCorpusTest(unittest.TestCase):
     """The section 9 headline, reproduced against the FROZEN pre-migration
     snapshot: every one of the 247 semantically-equivalent records'
@@ -82,10 +94,25 @@ class MaterializedCorpusTest(unittest.TestCase):
             path = live_repo.errata[record_id].path
             on_disk_text = path.read_text(encoding="utf-8")
             on_disk = json.loads(on_disk_text)
-            if on_disk != target:
+            # Round 029 (roadmap item 7) deliberately edited three of these
+            # records after the migration: only the listed top-level fields
+            # may differ, and only for those three ids; everything else must
+            # still equal the materialized target exactly.
+            allowed = ROUND_029_EDITED_FIELDS.get(record_id, ())
+            if allowed:
+                on_disk_cmp = {k: v for k, v in on_disk.items() if k not in allowed}
+                target_cmp = {k: v for k, v in target.items() if k not in allowed}
+                self.assertNotEqual(
+                    {k: on_disk.get(k) for k in allowed},
+                    {k: target.get(k) for k in allowed},
+                    f"{record_id}: the round 029 edit is expected to have changed {allowed}",
+                )
+            else:
+                on_disk_cmp, target_cmp = on_disk, target
+            if on_disk_cmp != target_cmp:
                 content_mismatches.append(record_id)
                 continue
-            expected_text = json.dumps(target, indent=2, ensure_ascii=False) + "\n"
+            expected_text = json.dumps(on_disk if allowed else target, indent=2, ensure_ascii=False) + "\n"
             if expected_text != on_disk_text:
                 byte_mismatches.append(record_id)
         self.assertEqual([], content_mismatches, "materialized content differs from the on-disk file")
