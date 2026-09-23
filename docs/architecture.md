@@ -8,8 +8,8 @@ external sources                canonical data                    generated outp
 ProjectIgnis/LFLists   ─┐
 ProjectIgnis/BabelCDB  ─┤ importers   data/banlists/*.json  ─┐
 Yugipedia (MediaWiki)  ─┼──────────►  data/pools/*.json      │ build    dist/lflists/*.lflist.conf
-Format Library API     ─┤             data/rule-profiles/    ├────────► dist/databases/   (future)
-EdisonFormat.com       ─┘             data/errata/*.json     │          dist/scripts/     (future)
+Format Library API     ─┤             data/rule-profiles/    ├────────► dist/databases/   (custom cards)
+EdisonFormat.com       ─┘             data/errata/*.json     │          dist/scripts/     (custom cards)
                                       data/releases/         │
         every record cites ──────►    data/sources.json     ─┘
                                       formats/<id>/format.json
@@ -86,8 +86,8 @@ This mirrors how EDOPro/ocgcore actually work (citations in `edopro-research.md`
   cdb rows with far-away codes, `alias` → modern code, `ot = 8` (`SCOPE_ILLEGAL`), and
   their own Lua script. Upstream conventions: `504700000+` for `goat-entries.cdb`
   "(GOAT)" cards, `511YYYXXX` or `modern+10` for `cards-unofficial.cdb` "(Pre-Errata)"
-  cards. Our erratum records point at these (`strategy: reuse-upstream`) or, later, at
-  our own (`custom-script`).
+  cards. Our erratum records point at these (`strategy: reuse-upstream`) or at
+  our own (`custom-script`, see below).
 - **This project's own reserved passcode range**, for `custom-script` records
   roadmap item 7 will generate: `600000000`–`699999999` (`RESERVED_PASSCODE_RANGE`,
   `retroformats/model.py`), chosen and proven collision-free in round 9. Every
@@ -101,9 +101,14 @@ This mirrors how EDOPro/ocgcore actually work (citations in `edopro-research.md`
   target `511YYYXXX` (511000000–511999999) — none of which touch the 6xx range.
   Real official Konami passcodes are 8 digits (`cards.cdb`'s own observed max is
   99995595) and so can never reach 9-digit territory at all. `retroformats/validate.py`
-  rejects any canonical passcode reference inside this range today
-  (`card.reserved-passcode-collision`) — nothing may use it until item 7's
-  generation exists and deliberately does.
+  rejects any canonical passcode reference inside this range
+  (`card.reserved-passcode-collision`) except one: a `custom-script` coverage may name
+  a code that has its own record in `data/custom-cards/` (round 029, roadmap item 7).
+  The generated row `alias`es the modern card, so in a duel and in deck-limit counting
+  it *is* that card; a whitelist follows an alias only within +/-10, so the lflist
+  names each generated code itself. `data/cards/index.json` carries these codes too
+  (identity taken from their own record, not BabelCDB), and the validator checks the
+  index row against the record.
 - The **card index** (`data/cards/index.json`) is generated from BabelCDB for exactly
   the passcodes this repo references, so validation is self-contained without
   shipping a full card database.

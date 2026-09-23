@@ -40,12 +40,12 @@ network access.
 
 ```bash
 python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
-python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 25
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 45
 ```
 
 `prepare` fetches and verifies the pinned inputs and compiles the core (it needs
 `git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
-`tests/engine` and **fails on any skip**, failure or error, or if fewer than 25
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 45
 tests execute. The layout it produces is `DEST/repos/babelcdb`,
 `DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
 
@@ -61,7 +61,7 @@ python3 -m unittest discover -t . -s tests/engine -v
 
 Without those variables the engine tests **skip** - in `unittest discover -t . -s
 tests` too, which is why the main suite stays green on a bare runner. A skip is
-not a pass: plain `unittest` exits 0 with all 25 skipped, which is exactly the
+not a pass: plain `unittest` exits 0 with every engine test skipped, which is exactly the
 state this project was in before the `engine` job. Only `engine_env.py run`
 refuses it.
 
@@ -173,6 +173,26 @@ research established are *behaviourally* load-bearing, in both directions
 Each asserts *gameplay*, not file existence, and each pairs the historical
 implementation against the modern one so the difference — not merely the
 behaviour — is what the test locks down.
+
+### Generated historical cards
+
+`tests/engine/test_edison_historical_scripts.py` covers the three cards this project
+writes itself (`docs/errata.md`, "Generated historical cards"). The harness merges
+`dist/databases/*.cdb` into its card data and searches `dist/scripts/` after the
+upstream folders, as a client with `data_path`/`script_path` pointed at `dist/` would
+(`RETROFORMATS_DIST` overrides the folder). Each scenario runs against the modern card
+and the generated one:
+
+| Card | Behaviour asserted | Historical (generated) | Modern |
+|---|---|---|---|
+| Metalzoa | revival by Monster Reborn | not a legal target | a legal target |
+| Super Vehicroid - Stealth Union | equip effect | only a monster you control; unusable with none | any face-up monster, either side |
+| Night Assailant | discarded from the hand | returns itself | cannot (nor can Ignis's pre-errata card) |
+
+Beside each difference are control scenarios (summon procedure, equip, piercing damage,
+attack-all, the FLIP effect) that must behave the same, so a script cannot pass by doing
+nothing. They prove the scripts against those scenarios only: each record's
+`not_reproduced` lists what is neither tested nor established.
 
 ## Extending it
 

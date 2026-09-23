@@ -131,6 +131,42 @@ An acknowledged gap lets the format keep the modern card, raises
 merely unfinished. This mirrors the release gap ledger — known holes are
 recorded with evidence and stay visible.
 
+### Generated historical cards (`custom-script`)
+
+When Project Ignis ships no version of a card that matches the period text, a record can
+say `custom-script` instead of a known gap, and this repository writes the card. Three
+files describe it, and `python -m retroformats build` turns them into `dist/`:
+
+- the **erratum record** states what was true, and its `coverage` (v2) or `implementation`
+  (v1) names the reserved passcode and the script path;
+- `data/custom-cards/c<passcode>.json` is the card: alias (the modern card), the
+  database row's fields with their provenance, the period text **copied from the
+  erratum record**, `fidelity` and `not_reproduced` (where the script only approximates
+  the period card, stated here so an engine workaround never quietly becomes a
+  historical claim), and `authorship`;
+- `data/custom-cards/c<passcode>.lua` is the script, copied unchanged to
+  `dist/scripts/c<passcode>.lua`.
+
+`dist/databases/retro-formats.cdb` gets one row per record (`alias` = modern, `ot = 8`).
+The build refuses to leave a stale or unclaimed file in `dist/databases/` or
+`dist/scripts/`. What the validator enforces is the `custom-card.*` family in
+`retroformats/validate.py`; the reserved range still rejects every other use
+(`card.reserved-passcode-collision`).
+
+**Scripts are original.** Project Ignis's CardScripts are AGPL-3.0-or-later and this
+repository is MIT, so a script derived from one is a licensing decision for the owner;
+`authorship.kind` must be `original`. `tested: true` on the state's
+`implementation_metadata` means an engine test (`tests/engine/test_edison_historical_scripts.py`)
+runs the same scenario against the modern card and the generated one and asserts the
+difference; it never means the script is exact (`fidelity` says that).
+
+**Two hazards found building the first three.** A record shared by several formats
+changes all of them: a `custom-script` on the state that applies at Edison also applies
+at Tengu whenever that record's state does. And a v2 record's *structural* parity walk
+takes the first usable substitution, so giving a card Ignis's GOAT reference substitutes
+a usable baseline coverage silently moves the GOAT list unless the record also carries
+the exact `reference_identities` entry for it (Night Assailant does).
+
 ## The pipeline
 
 Raw network fetching and offline normalisation are separate stages, and the
