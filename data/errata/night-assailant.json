@@ -67,12 +67,9 @@
     {
       "events": [],
       "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis's only historical Night Assailant (cards-unofficial 16226796) implements the DT03-EN056 text; no upstream script implements the AST-080 text that both period snapshots need, so reproducing it needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
+        "kind": "custom-script",
+        "historical_passcode": 600000003,
+        "script": "data/custom-cards/c600000003.lua"
       }
     },
     {
@@ -91,7 +88,9 @@
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 029: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000003.json; passcode 600000003). Previously recorded as a known gap with gap_reason \"Project Ignis's only historical Night Assailant (cards-unofficial 16226796) implements the DT03-EN056 text; no upstream script implements the AST-080 text that both period snapshots need, so reproducing it needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
       "gap": {
         "upstream_checked": true,
         "behavioural_impact": "In GOAT and Edison a Night Assailant sent from the hand to the Graveyard should be able to return itself (the era text names no exception); with the shipped pre-errata or modern script that choice is blocked, removing a recursion line the era decks had."
@@ -105,7 +104,16 @@
       "tested": false
     }
   ],
-  "reference_identities": [],
+  "reference_identities": [
+    {
+      "reference_id": "project-ignis-goat",
+      "provenance_source": "ignis-lflists",
+      "historical_passcode": 16226796,
+      "historical_variant_passcodes": [],
+      "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+      "script": "pre-errata/c16226796.lua"
+    }
+  ],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",

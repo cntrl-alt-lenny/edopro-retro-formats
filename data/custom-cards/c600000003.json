@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000003,
+  "alias": 16226786,
+  "erratum": "erratum-night-assailant",
+  "events": [],
+  "name": "Night Assailant (Retro Formats)",
+  "desc": "FLIP: Select 1 monster on your opponent's side of the field and destroy it. When this card is sent directly from your hand to the Graveyard, return 1 Flip Effect Monster from your Graveyard to your hand.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 2097185,
+    "atk": 200,
+    "def": 500,
+    "level": 3,
+    "race": 8,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (16226786) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000003.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 029 investigation; a derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "Optionality: the return effect is implemented as a mandatory (forced) trigger. The record's sources do not establish whether the period effect was mandatory or optional.",
+    "Selection timing: the Flip Effect Monster to return is chosen on resolution (the effect does not target), following the absence of the word \"select\" in the period text for this half. The record states only that the discarded copy is itself eligible; the later texts target. A response that removes the chosen monster is not tested.",
+    "\"Sent directly from your hand to the Graveyard\" is implemented as: the card's previous location is the hand, for any reason. What the period meant by \"directly\" is not established by the record's sources.",
+    "The FLIP half selects (targets) any monster in the opponent's Monster Zone, then destroys it. That this half is unchanged across the text lineage is the record's own note; it is tested only against a face-up monster.",
+    "The Graveyard selection uses the engine's Necrovalley filter convention. That is an engine convention, not a period-sourced behaviour.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}
