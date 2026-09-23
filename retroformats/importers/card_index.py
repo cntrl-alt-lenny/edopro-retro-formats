@@ -3,7 +3,9 @@
 The index is the validator's ground truth for passcode<->name pairs and alias
 relationships. It contains ONLY cards this repository actually references
 (banlists, pools incl. variants, errata modern + historical codes), looked up
-in local clones of ProjectIgnis/BabelCDB (cards.cdb, goat-entries.cdb).
+in local clones of ProjectIgnis/BabelCDB (cards.cdb, goat-entries.cdb), except for
+generated custom-script cards (data/custom-cards/), which take their identity from
+their own canonical record.
 
 Run:  python -m retroformats.importers.card_index --babelcdb /path/to/BabelCDB
 """
@@ -106,7 +108,15 @@ def run(babelcdb_dir: Path, root: Path) -> int:
     missing: list[int] = []
     rows = []
     for code in sorted(refs):
-        row = goat_cdb.get(code) or cards_cdb.get(code)
+        custom = repo.custom_cards.get(code)
+        if custom is not None:
+            # A generated card has no BabelCDB row by construction (its
+            # passcode is in the project's reserved range); its identity is
+            # the canonical record's own, and the validator cross-checks the
+            # index row against it (custom-card.index-mismatch).
+            row = {"name": custom.name, "alias": custom.alias, "ot": custom.cdb["ot"]}
+        else:
+            row = goat_cdb.get(code) or cards_cdb.get(code)
         if row is None:
             missing.append(code)
             continue

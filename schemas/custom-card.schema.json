@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edopro-retro-formats/schemas/custom-card.schema.json",
+  "title": "Custom (generated) historical card",
+  "description": "One card this project implements itself (roadmap item 7): the identity, database row and script behind a `custom-script` coverage in an erratum record. data/custom-cards/c<passcode>.json, next to its script c<passcode>.lua. `retroformats build` generates dist/databases/retro-formats.cdb (one row per record) and dist/scripts/c<passcode>.lua from these; nothing there is hand-edited. Documentation only: the real gate is retroformats/validate.py (`custom-card.*` codes), which also enforces what this schema cannot (that the erratum claims the code, that `desc` is a text the erratum carries, that the script exists).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["passcode", "alias", "erratum", "events", "name", "desc", "cdb", "script", "authorship", "fidelity", "not_reproduced", "sources"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "passcode": { "type": "integer", "minimum": 600000000, "maximum": 699999999, "description": "This project's reserved range (retroformats/model.py RESERVED_PASSCODE_RANGE). The file is named c<passcode>.json." },
+    "alias": { "$ref": "common.schema.json#/$defs/passcode", "description": "The modern card's passcode: exactly the erratum's modern_card. In a duel the row is that card for every name/code check; copies count under it in deck building." },
+    "erratum": { "type": "string", "description": "Id of the erratum record whose custom-script coverage names this passcode." },
+    "events": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "The historical state this card implements: the erratum's event set for that coverage ([] = before every recorded event). Empty for a v1 record." },
+    "name": { "type": "string", "minLength": 1, "description": "The row's name, suffixed so it is never mistaken for the modern or an upstream variant." },
+    "desc": { "type": "string", "minLength": 1, "description": "The row's text: copied verbatim from a text the erratum record carries (transcribed there from a cited source), never typed a second time." },
+    "cdb": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ot", "setcode", "type", "atk", "def", "level", "race", "attribute", "category"],
+      "description": "The `datas` columns. ot is 8 (SCOPE_ILLEGAL): legal only through a whitelist. All integers.",
+      "properties": {
+        "ot": { "const": 8 },
+        "setcode": { "type": "integer" },
+        "type": { "type": "integer" },
+        "atk": { "type": "integer" },
+        "def": { "type": "integer" },
+        "level": { "type": "integer" },
+        "race": { "type": "integer" },
+        "attribute": { "type": "integer" },
+        "category": { "type": "integer" }
+      }
+    },
+    "cdb_provenance": { "type": "object", "description": "Where the statline came from and what was not checked. Free-form documentation." },
+    "script": { "type": "string", "description": "Always data/custom-cards/c<passcode>.lua." },
+    "authorship": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "const": "original", "description": "Written from the record's period text and the engine's Lua API. A script derived from Project Ignis's CardScripts (AGPL-3.0-or-later) cannot be asserted here: distributing it in this MIT repository is an owner licensing decision." },
+        "note": { "type": "string" }
+      }
+    },
+    "fidelity": { "enum": ["exact", "approximate"], "description": "approximate means the script only approximates the period card; not_reproduced then must say where. History and representability stay separate axes: this record states the second." },
+    "not_reproduced": { "type": "array", "items": { "type": "string" }, "description": "What the script does not establish. Required non-empty when fidelity is approximate, empty when exact." },
+    "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+  }
+}

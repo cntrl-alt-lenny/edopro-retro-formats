@@ -10,6 +10,7 @@ from typing import Any
 from .model import (
     Banlist,
     CardIndex,
+    CustomCard,
     DataError,
     Erratum,
     ErratumV2,
@@ -50,6 +51,7 @@ class Repository:
     pools: dict[str, Pool] = field(default_factory=dict)
     rule_profiles: dict[str, RuleProfile] = field(default_factory=dict)
     errata: dict[str, Erratum | ErratumV2] = field(default_factory=dict)
+    custom_cards: dict[int, CustomCard] = field(default_factory=dict)
     formats: dict[str, Format] = field(default_factory=dict)
     global_sources: dict[str, Source] = field(default_factory=dict)
     format_sources: dict[str, dict[str, Source]] = field(default_factory=dict)
@@ -78,6 +80,9 @@ class Repository:
             try_load(path, lambda raw, p: repo._add(repo.rule_profiles, RuleProfile.load(raw, p)))
         for path in sorted((root / "data" / "errata").glob("*.json")):
             try_load(path, lambda raw, p: repo._add(repo.errata, load_erratum_record(raw, p)))
+
+        for path in sorted((root / "data" / "custom-cards").glob("*.json")):
+            try_load(path, lambda raw, p: repo._add_custom_card(CustomCard.load(raw, p)))
 
         sources_path = root / "data" / "sources.json"
         if sources_path.exists():
@@ -135,6 +140,18 @@ class Repository:
             )
             return
         table[record.id] = record
+
+    def _add_custom_card(self, card: CustomCard) -> None:
+        if card.passcode in self.custom_cards:
+            self.load_errors.append(
+                DataError(
+                    card.path,
+                    f"duplicate custom card passcode {card.passcode} "
+                    f"(also in {self.custom_cards[card.passcode].path})",
+                )
+            )
+            return
+        self.custom_cards[card.passcode] = card
 
     def _load_sources(self, raw: dict[str, Any], path: Path, format_id: str | None) -> None:
         target = self.global_sources if format_id is None else self.format_sources.setdefault(format_id, {})

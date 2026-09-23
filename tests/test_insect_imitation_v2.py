@@ -37,6 +37,7 @@ def _with_erratum(repo: Repository, record) -> Repository:
         banlists=repo.banlists,
         pools=repo.pools,
         rule_profiles=repo.rule_profiles,
+        custom_cards=repo.custom_cards,
         errata={**repo.errata, record.id: record},
         formats=repo.formats,
         global_sources=repo.global_sources,

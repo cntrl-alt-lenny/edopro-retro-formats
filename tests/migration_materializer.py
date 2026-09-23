@@ -205,6 +205,7 @@ def build_shadow_repository(repo, replacement_records: dict[str, Any]):
         banlists=repo.banlists,
         pools=repo.pools,
         rule_profiles=repo.rule_profiles,
+        custom_cards=repo.custom_cards,
         errata=shadow_errata,
         formats=repo.formats,
         global_sources=repo.global_sources,

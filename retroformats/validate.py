@@ -20,6 +20,9 @@ from .model import (
     COVERAGE_FIELDS,
     CHANGE_KINDS,
     CONTRADICTED,
+    CUSTOM_CARD_CDB_FIELDS,
+    CUSTOM_CARD_FIDELITIES,
+    CUSTOM_CARD_OT,
     EFFECTIVE_STATUSES,
     EVENT_KINDS,
     EVENT_STATUSES,
@@ -38,6 +41,7 @@ from .model import (
     TERRITORIES,
     Banlist,
     Coverage,
+    Erratum,
     ErratumV2,
     Format,
     Pool,
@@ -1185,7 +1189,9 @@ class Validator:
                     f"{location}.coverage: strategy {kind} but no historical_passcode",
                 )
             else:
-                hist_int = self._safe_passcode(hist, erratum, f"{location}.coverage", "historical_passcode")
+                hist_int = self._safe_passcode(
+                    hist, erratum, f"{location}.coverage", "historical_passcode", custom_script=(kind == "custom-script")
+                )
                 if hist_int is not None:
                     self._check_card_alias(hist_int, erratum, f"{location}.coverage")
                 for variant in coverage.get("historical_variant_passcodes", []) or []:
@@ -1678,7 +1684,9 @@ class Validator:
                 self._check_sources(list(gap["sources"]), erratum.path, None, f"{what} gap")
         hist = impl.get("historical_passcode")
         if not hist_missing:
-            hist_int = self._safe_passcode(hist, erratum, what, "historical_passcode")
+            hist_int = self._safe_passcode(
+                hist, erratum, what, "historical_passcode", custom_script=(strategy == "custom-script")
+            )
             if hist_int is not None:
                 self._check_card_alias(hist_int, erratum, what)
             for variant in impl.get("historical_variant_passcodes", []) or []:
@@ -1694,7 +1702,9 @@ class Validator:
                     )
                 self._check_card_alias(variant_int, erratum, what)
 
-    def _safe_passcode(self, value: object, erratum, what: str, field: str) -> int | None:
+    def _safe_passcode(
+        self, value: object, erratum, what: str, field: str, custom_script: bool = False
+    ) -> int | None:
         """Guarded against malformed passcode data (schema's `passcode` def:
         an integer in 1..4294967295, matching `_is_valid_passcode()`'s
         strict, non-coercive check) - `Repository.load()` keeps
@@ -1712,12 +1722,18 @@ class Validator:
             )
             return None
         if value in RESERVED_PASSCODE_RANGE:
+            if custom_script and value in self.repo.custom_cards:
+                # The one legitimate user of the reserved range: the code of a
+                # generated custom-script card, which has its own record under
+                # data/custom-cards/ (checked by _validate_custom_cards).
+                return value
             self.error(
                 "card.reserved-passcode-collision",
                 erratum.path,
                 f"{what}: {field} {value} falls inside this project's own reserved range "
                 "(retroformats/model.py's RESERVED_PASSCODE_RANGE, 600000000-699999999) - "
-                "nothing in canonical data may use it yet; see docs/roadmap.md item 7",
+                "only a custom-script coverage naming a record in data/custom-cards/ may use "
+                "it; see docs/roadmap.md item 7",
             )
             return None
         return value
@@ -2627,6 +2643,178 @@ class Validator:
 
     # -- entry point -----------------------------------------------------
 
+    # -- custom-script cards (roadmap item 7) -----------------------------
+
+    def _custom_script_claims(self, erratum: Erratum | ErratumV2) -> dict[int, tuple[str, ...]]:
+        """{historical passcode: event ids of the state that claims it} for
+        every custom-script coverage/implementation in one erratum record.
+        A v1 record has no event sets, so its claims carry an empty tuple."""
+        claims: dict[int, tuple[str, ...]] = {}
+        if isinstance(erratum, ErratumV2):
+            for events, coverage in erratum.authored_states.items():
+                if coverage.kind == Coverage.CUSTOM_SCRIPT and isinstance(coverage.historical_passcode, int):
+                    claims[coverage.historical_passcode] = tuple(sorted(events))
+            return claims
+        impls = [erratum.implementation, *(c.get("resulting_implementation") for c in erratum.changes)]
+        for impl in impls:
+            if (
+                impl
+                and impl.get("strategy") == "custom-script"
+                and isinstance(impl.get("historical_passcode"), int)
+            ):
+                claims[impl["historical_passcode"]] = ()
+        return claims
+
+    @staticmethod
+    def _record_texts(erratum: Erratum | ErratumV2) -> set[str]:
+        """Every card text the erratum record itself carries (transcribed from
+        cited sources), so a custom card's text can be checked as a copy of it
+        rather than something typed a second time."""
+        texts: set[str] = set()
+        raw = erratum.raw
+        transitions = [
+            t for e in (raw.get("events") or {}).values() if isinstance(e, dict) for t in e.get("transitions", [])
+        ]
+        for item in [*transitions, *(raw.get("changes") or [])]:
+            if not isinstance(item, dict):
+                continue
+            for key in ("historical_text", "modern_text"):
+                if isinstance(item.get(key), str):
+                    texts.add(item[key])
+        return texts
+
+    def _validate_custom_cards(self) -> None:
+        """Every generated card must be a faithful, checkable projection of an
+        erratum record: same card, its own reserved passcode, a text copied
+        from the record, an existing script, and an honest statement of how far
+        the script reproduces the period card. The reverse also holds: a
+        reserved passcode used by an erratum coverage without such a record is
+        already `card.reserved-passcode-collision` (see `_safe_passcode`)."""
+        for passcode, card in sorted(self.repo.custom_cards.items()):
+            where = card.path
+            if passcode not in RESERVED_PASSCODE_RANGE:
+                self.error(
+                    "custom-card.bad-passcode",
+                    where,
+                    f"passcode {passcode} is outside this project's reserved range (600000000-699999999); "
+                    "a generated card must never take a code any upstream convention could own",
+                )
+            if where.name != f"c{passcode}.json":
+                self.error(
+                    "custom-card.bad-filename",
+                    where,
+                    f"record for {passcode} must be named c{passcode}.json",
+                )
+            erratum = self.repo.errata.get(card.erratum)
+            if erratum is None:
+                self.error(
+                    "custom-card.unknown-erratum",
+                    where,
+                    f"erratum {card.erratum!r} is not a record in data/errata/",
+                )
+            else:
+                if card.alias != erratum.modern_card.passcode:
+                    self.error(
+                        "custom-card.alias-mismatch",
+                        where,
+                        f"aliases {card.alias} but the erratum's modern card is "
+                        f"{erratum.modern_card.passcode} ({erratum.modern_card.name!r}); the row must "
+                        "alias exactly the modern card or it is a different card in a duel and in deck limits",
+                    )
+                claim = self._custom_script_claims(erratum).get(passcode)
+                if claim is None:
+                    self.error(
+                        "custom-card.orphan",
+                        where,
+                        f"no custom-script coverage in {card.erratum} names passcode {passcode}; "
+                        "a generated card must be claimed by exactly the record it implements",
+                    )
+                elif isinstance(erratum, ErratumV2) and tuple(sorted(card.events)) != claim:
+                    self.error(
+                        "custom-card.events-mismatch",
+                        where,
+                        f"records events {sorted(card.events)} but the erratum's coverage for this "
+                        f"passcode is state {list(claim)}",
+                    )
+                if card.desc not in self._record_texts(erratum):
+                    self.error(
+                        "custom-card.text-not-in-record",
+                        where,
+                        "desc is not a card text carried by the erratum record; copy the sourced "
+                        "text from the record instead of typing a second version",
+                    )
+            authorship = card.raw.get("authorship")
+            if not isinstance(authorship, dict) or authorship.get("kind") != "original":
+                self.error(
+                    "custom-card.authorship-not-original",
+                    where,
+                    "authorship.kind must be 'original'. Project Ignis's CardScripts are "
+                    "AGPL-3.0-or-later and this repository is MIT: a script derived from one "
+                    "is a licensing decision for the owner, not something a record may assert",
+                )
+            if not card.name.strip():
+                self.error("custom-card.bad-name", where, "name is empty")
+            cdb = card.cdb
+            for key in CUSTOM_CARD_CDB_FIELDS:
+                value = cdb.get(key)
+                if not isinstance(value, int) or isinstance(value, bool):
+                    self.error(
+                        "custom-card.bad-cdb",
+                        where,
+                        f"cdb.{key} must be an integer, got {value!r}",
+                    )
+            if cdb.get("ot") != CUSTOM_CARD_OT:
+                self.error(
+                    "custom-card.bad-cdb",
+                    where,
+                    f"cdb.ot must be {CUSTOM_CARD_OT} (SCOPE_ILLEGAL): the row must never be legal "
+                    f"in an official-cards room, got {cdb.get('ot')!r}",
+                )
+            for extra in sorted(set(cdb) - set(CUSTOM_CARD_CDB_FIELDS)):
+                self.error("custom-card.bad-cdb", where, f"cdb has an unknown field {extra!r}")
+            expected_script = f"data/custom-cards/c{passcode}.lua"
+            if card.script != expected_script:
+                self.error(
+                    "custom-card.bad-script-path",
+                    where,
+                    f"script must be {expected_script!r}, got {card.script!r}",
+                )
+            script_path = self.repo.root / card.script
+            if not script_path.is_file():
+                self.error("custom-card.script-missing", where, f"script {card.script!r} does not exist")
+            elif not script_path.read_bytes().strip():
+                self.error("custom-card.script-missing", where, f"script {card.script!r} is empty")
+            if card.fidelity not in CUSTOM_CARD_FIDELITIES:
+                self.error(
+                    "custom-card.bad-fidelity",
+                    where,
+                    f"fidelity {card.fidelity!r}; expected one of {list(CUSTOM_CARD_FIDELITIES)}",
+                )
+            elif card.fidelity == "approximate" and not any(str(n).strip() for n in card.not_reproduced):
+                self.error(
+                    "custom-card.approximation-undisclosed",
+                    where,
+                    "fidelity is 'approximate' but not_reproduced lists nothing; a script that only "
+                    "approximates the period card must say where, on the record",
+                )
+            elif card.fidelity == "exact" and card.not_reproduced:
+                self.error(
+                    "custom-card.approximation-undisclosed",
+                    where,
+                    "fidelity is 'exact' but not_reproduced is not empty",
+                )
+            self._check_sources(list(card.sources), where, None, "custom card")
+            row = self.repo.card_index.by_passcode.get(passcode)
+            if row is not None:
+                alias = row.get("alias_of")
+                if row.get("name") != card.name or (alias and int(alias)) != card.alias or row.get("ot") != CUSTOM_CARD_OT:
+                    self.error(
+                        "custom-card.index-mismatch",
+                        where,
+                        f"data/cards/index.json row for {passcode} ({row!r}) disagrees with the custom "
+                        "card record; regenerate the index",
+                    )
+
     def validate(self) -> list[Finding]:
         for exc in self.repo.load_errors:
             self.error("load.failed", exc.path, exc.message)
@@ -2642,6 +2830,7 @@ class Validator:
             self._validate_pool(pool)
         self._validate_rule_profiles()
         self._validate_errata()
+        self._validate_custom_cards()
         for fmt in self.repo.formats.values():
             self._validate_format(fmt)
         self._validate_products()
