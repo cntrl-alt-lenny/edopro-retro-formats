@@ -570,11 +570,16 @@ reflects that.
    approximation whose gaps its record lists. **Remaining:** the other 43 Edison
    `format.erratum-known-divergence` cards. Two things found in round 029 that any of
    them needs first. (1) 38 of the 46 record the same state at Tengu's snapshot, so a
-   `custom-script` for one also changes Tengu's list; the three done here were chosen
-   from the eight that differ (their historical state ends before Tengu), and the rest
-   need a decision on Tengu. (2) A card Ignis's GOAT reference already substitutes needs
-   an exact `reference_identities` entry first (as Night Assailant now has), or the GOAT
-   list moves.
+   `custom-script` for one also changes Tengu's list unless a decision says that is
+   wanted. Eight differ (their state at Tengu is modern, or ambiguous and resolved to
+   modern by policy); three of those are done here. The other five - Freed the
+   Matchless General, Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon,
+   Toon Table of Contents - apply an intermediate state at Edison that no script
+   implements (the modern activation requirement plus the period reveal on a failed
+   search); their difference from the modern card only shows when a response empties
+   the Deck mid-chain, so the engine test is a heavier scenario. (2) A card Ignis's
+   GOAT reference already substitutes needs an exact `reference_identities` entry
+   first (as Night Assailant now has), or the GOAT list moves.
 8. **Partly done — ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.
    `dist/README.md` contains the snippet and versioned-release convention, but the
