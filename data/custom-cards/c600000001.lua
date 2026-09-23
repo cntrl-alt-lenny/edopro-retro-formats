@@ -15,6 +15,7 @@ local s,id=GetID()
 local CARD_ZOA=24311372
 local CARD_METALMORPH=68540058
 function s.initial_effect(c)
+	c:EnableReviveLimit()
 	--cannot be Normal Summoned or Set
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -29,7 +30,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e2:SetValue(aux.FALSE)
+	e2:SetValue(aux.TRUE)
 	c:RegisterEffect(e2)
 	--Special Summon from the Deck by Tributing "Zoa" equipped with "Metalmorph"
 	local e3=Effect.CreateEffect(c)
