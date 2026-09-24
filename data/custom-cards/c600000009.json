@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000009,
+  "alias": 37383714,
+  "erratum": "erratum-soul-rope",
+  "events": [],
+  "name": "Soul Rope (Retro Formats)",
+  "desc": "Activate only by paying 1000 Life Points when a monster you control is destroyed and sent to the Graveyard, Special Summon 1 Level 4 monster from your Deck.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 4,
+    "atk": 0,
+    "def": 0,
+    "level": 0,
+    "race": 0,
+    "attribute": 0,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (37383714) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000009.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. The erratum record's notes describe which event, flag and filter an upstream script uses; the same behaviour is written here with ordinary engine API. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "Damage Step activation is the engine's own window for a card carrying EFFECT_FLAG_DAMAGE_STEP: the record's sources establish that the period text carries no Damage Step exclusion, not where in the Damage Step a period player could have activated it. The record itself notes that its sources establish that the 2012 printing added \"(except during the Damage Step)\", not that period policy independently allowed Damage Step activation of a trap with a general destruction trigger. Only the fact that it is offered after a monster is destroyed by battle is tested.",
+    "\"Activate only by paying 1000 Life Points\" is implemented as a cost paid on activation.",
+    "\"Is destroyed and sent to the Graveyard\" is implemented as the engine's to-Graveyard event for a monster the activating player controlled on the field that was destroyed; it applies to any destruction cause.",
+    "The Level 4 monster is chosen from the Deck at resolution and Special Summoned face-up Attack Position into any free Monster Zone; whether it may be Special Summoned at all is the engine's ordinary check (Level 4 in the Deck), and monsters with their own Special Summon conditions are not modelled.",
+    "The Trap row has no statline; its type and text come from the modern row and the record."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

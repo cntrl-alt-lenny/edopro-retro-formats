@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000007,
+  "alias": 16067089,
+  "erratum": "erratum-rise-of-the-snake-deity",
+  "events": [],
+  "name": "Rise of the Snake Deity (Retro Formats)",
+  "desc": "Activate only when a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed. Special Summon 1 \"Vennominaga the Deity of Poisonous Snakes\" from your hand or Deck.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 4,
+    "atk": 0,
+    "def": 0,
+    "level": 0,
+    "race": 0,
+    "attribute": 0,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (16067089) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000007.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. The erratum record's notes describe which event and flag an upstream script uses; the same behaviour is written here with ordinary engine API. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "Damage Step activation is the engine's own window for a card carrying EFFECT_FLAG_DAMAGE_STEP: the record's sources establish that the period text carries no Damage Step exclusion, not where in the Damage Step a period player could have activated it. Only the fact that it is offered after Vennominon is destroyed by battle is tested.",
+    "\"Is destroyed\" is implemented as any destruction of a face-up \"Vennominon the King of Poisonous Snakes\" the activating player controlled (its previous position and controller on the field); whether it must also have reached the Graveyard is not stated by the period text and is not required.",
+    "\"Vennominaga the Deity of Poisonous Snakes\" comes from the hand or the Deck into any free Monster Zone in face-up Attack Position. The engine refused the Special Summon while Vennominaga's own summoning condition was checked, and the period text does not say how that condition was met, so the Special Summon ignores summoning conditions, as the engine's Special Summon call allows. That it can be Summoned is tested.",
+    "The Trap row has no statline; its type and text come from the modern row and the record."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-cardscripts",
+    "ignis-babelcdb"
+  ]
+}

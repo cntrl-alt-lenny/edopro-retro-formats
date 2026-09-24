@@ -31,9 +31,10 @@ from retroformats.model import RESERVED_PASSCODE_RANGE, STATUS_TO_COUNT
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import REPO_ROOT, TempRepoTest, card, change
+from .helpers import REPO_ROOT, ROUND_031_PASSCODES, TempRepoTest, card, change
 
 EDISON = "2010-03-edison"
+TENGU = "2011-09-tengu"
 GOAT_HASH = 0x28E9FC02
 
 
@@ -56,11 +57,18 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         cls.cards = cards_sorted(cls.repo)
         cls.dist = REPO_ROOT / "dist"
 
-    def test_this_round_implements_exactly_two_cards(self):
+    def test_the_repository_generates_exactly_these_cards(self):
         self.assertEqual(
             [
                 (600000001, "erratum-metalzoa"),
                 (600000002, "erratum-super-vehicroid-stealth-union"),
+                # 600000003 stays unassigned: held for Night Assailant (roadmap item 7).
+                (600000004, "erratum-goddess-of-whim"),
+                (600000005, "erratum-strike-ninja"),
+                (600000006, "erratum-green-baboon-defender-of-the-forest"),
+                (600000007, "erratum-rise-of-the-snake-deity"),
+                (600000008, "erratum-malefic-blue-eyes-white-dragon"),
+                (600000009, "erratum-soul-rope"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
@@ -118,35 +126,63 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         finally:
             con.close()
 
-    def test_edison_list_uses_each_historical_card_instead_of_the_modern_one(self):
-        fmt = self.repo.formats[EDISON]
+    def _assert_list_uses(self, fmt_id, cards):
+        fmt = self.repo.formats[fmt_id]
         built = build_lflist(fmt, self.repo)
         banlist = self.repo.banlists[fmt.banlist_id]
         status_by_code = {e.card.passcode: e.status for e in banlist.entries}
-        for c in self.cards:
-            with self.subTest(passcode=c.passcode):
+        for c in cards:
+            with self.subTest(format=fmt_id, passcode=c.passcode):
                 modern = self.repo.errata[c.erratum].modern_card.passcode
                 self.assertIn(c.passcode, built.entries)
                 self.assertNotIn(modern, built.entries, "the modern card would behave incorrectly")
                 # Deck limits: the whitelist follows an alias only within +/-10,
                 # so the historical code is listed itself, with the modern
-                # card's own count. In a duel and when counting copies the row
-                # is its modern card via `alias` (see the engine test).
+                # card's own count under THIS format's banlist. In a duel and
+                # when counting copies the row is its modern card via `alias`
+                # (see the engine tests).
                 expected = STATUS_TO_COUNT.get(status_by_code.get(modern, ""), 3)
                 self.assertEqual(expected, built.entries[c.passcode])
+        return built
 
-    def test_goat_and_tengu_do_not_use_any_generated_card(self):
+    def test_edison_list_uses_each_historical_card_instead_of_the_modern_one(self):
+        self._assert_list_uses(EDISON, self.cards)
+
+    def test_tengu_list_uses_exactly_the_cards_whose_state_applies_at_its_snapshot(self):
+        # Round 031: the six cards whose record puts the same historical state at Tengu's
+        # snapshot (2011-09-17) as at Edison's. Metalzoa and Super Vehicroid - Stealth Union
+        # are not among them: their erratum (2011-08-13 and earlier) predates Tengu's
+        # snapshot, so Tengu keeps the modern card for both.
+        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in ROUND_031_PASSCODES])
+        self.assertEqual(ROUND_031_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
+        for c in self.cards:
+            if c.passcode not in ROUND_031_PASSCODES:
+                with self.subTest(passcode=c.passcode):
+                    self.assertIn(self.repo.errata[c.erratum].modern_card.passcode, tengu.entries)
+
+    def test_goat_does_not_use_any_generated_card(self):
         generated = {c.passcode for c in self.cards}
-        for fmt_id in ("2005-04-goat", "2011-09-tengu"):
-            with self.subTest(format=fmt_id):
-                built = build_lflist(self.repo.formats[fmt_id], self.repo)
-                self.assertEqual(set(), generated & set(built.entries))
-        # The two cards' modern codes are exactly what those two lists used
-        # before this round. Night Assailant is not generated (it is held
-        # back, roadmap item 7), and GOAT keeps its Project Ignis variant.
-        goat = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
-        self.assertEqual(GOAT_HASH, goat.hash)
-        self.assertIn(16226796, goat.entries)
+        built = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
+        self.assertEqual(set(), generated & set(built.entries))
+        # The cards' modern codes are exactly what the list used before generation.
+        # Night Assailant is not generated (it is held back, roadmap item 7), and GOAT
+        # keeps its Project Ignis variant.
+        self.assertEqual(GOAT_HASH, built.hash)
+        self.assertIn(16226796, built.entries)
+        for c in self.cards:
+            modern = self.repo.errata[c.erratum].modern_card.passcode
+            with self.subTest(passcode=c.passcode):
+                self.assertEqual(modern in built.entries, modern in self._goat_before_generation())
+
+    def _goat_before_generation(self):
+        """The modern codes GOAT holds, from Project Ignis's own reference list."""
+        fixture = REPO_ROOT / "tests" / "fixtures" / "ignis-GOAT.lflist.conf"
+        codes = set()
+        for line in fixture.read_text(encoding="utf-8").splitlines():
+            head = line.split("--", 1)[0].split()
+            if len(head) == 2 and head[0].isdigit():
+                codes.add(int(head[0]))
+        return codes
 
     def test_generated_codes_are_indexed_and_identifiable(self):
         for c in self.cards:

@@ -344,3 +344,29 @@ def gap(id="gap-test", **kw):
     }
     record.update(kw)
     return record
+
+
+# Round 031 (roadmap item 7): the six generated cards whose historical state applies at BOTH
+# the Edison (2010-04-24) and the Tengu (2011-09-17) snapshot, so both lists name them.
+# {erratum id: (modern passcode, generated passcode)}.
+ROUND_031_GENERATED = {
+    "erratum-goddess-of-whim": (67959180, 600000004),
+    "erratum-strike-ninja": (41006930, 600000005),
+    "erratum-green-baboon-defender-of-the-forest": (46668237, 600000006),
+    "erratum-rise-of-the-snake-deity": (16067089, 600000007),
+    "erratum-malefic-blue-eyes-white-dragon": (9433350, 600000008),
+    "erratum-soul-rope": (37383714, 600000009),
+}
+ROUND_031_PASSCODES = frozenset(generated for _modern, generated in ROUND_031_GENERATED.values())
+
+
+def swap_generated_back(entries, custom_cards, passcodes=None):
+    """A built lflist's {code: count} with each generated card's code replaced by
+    the modern card it aliases (only `passcodes` if given). The result is what
+    the list held before those cards were generated, so a pin taken then can
+    still be asserted against it."""
+    out = dict(entries)
+    for card in custom_cards.values():
+        if (passcodes is None or card.passcode in passcodes) and card.passcode in out:
+            out[card.alias] = out.pop(card.passcode)
+    return out

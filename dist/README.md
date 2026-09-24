@@ -8,9 +8,10 @@ Everything in this directory is **generated** from the canonical data in `data/`
 
 **This repository is not self-contained.** All three generated whitelists reference
 passcodes that exist only in **upstream** Project Ignis repositories, not in `dist/`
-or anywhere else in this repo. The one exception is **two cards in the Edison list**
-(`600000001` and `600000002`, below), which this repository itself generates into
-`dist/databases/` and `dist/scripts/`. The counts here are upstream identities only
+or anywhere else in this repo. The one exception is **eight cards**: all eight are in the Edison list and six of them
+are also in the Tengu list (`600000001`, `600000002` and `600000004`–`600000009`,
+below), which this repository itself generates into `dist/databases/` and
+`dist/scripts/`. The counts here are upstream identities only
 (codes ≥ `504700000` and < `600000000`):
 
 | list | upstream codes ≥ `504700000` (pre-errata / GOAT-variant identities) |
@@ -67,7 +68,7 @@ removed DeltaBagooska (or whose client predates these cards being added upstream
 will hit a hard, visible `UNKNOWNCARD` failure the moment anyone tries to actually
 play one of the 226 affected cards — not a warning, not a cosmetic gap.
 
-## Cards this repository generates itself (Edison)
+## Cards this repository generates itself (Edison and Tengu)
 
 Project Ignis ships no historical version of some cards whose 2010 behaviour differs
 from the modern card, so this repository writes them. `python -m retroformats build`
@@ -80,12 +81,23 @@ generates, from `data/custom-cards/` and the erratum records that claim them:
 
 Each row uses a passcode in this project's reserved range (`600000000`–`699999999`),
 `alias` = the modern card and `ot = 8` (`SCOPE_ILLEGAL`, so it is legal only through a
-whitelist). Generated so far, all used by `Retro 2010-03-edison` in place of the modern card:
+whitelist). Generated so far, each used in place of the modern card by the lists named. A
+card is used by a list only when its erratum record puts the same historical state at that
+list's snapshot (Edison 2010-04-24, Tengu 2011-09-17): Metalzoa's and Stealth Union's errata
+are already in force at Tengu, so Tengu keeps the modern card for those two.
 
-| passcode | modern card (alias) | what differs from the modern card |
-|---|---|---|
-| `600000001` | Metalzoa (`50705071`) | can be Special Summoned only by its own procedure, so it can never be revived |
-| `600000002` | Super Vehicroid - Stealth Union (`3897065`) | its equip effect selects only a monster you control |
+| passcode | modern card (alias) | lists | what differs from the modern card |
+|---|---|---|---|
+| `600000001` | Metalzoa (`50705071`) | Edison | can be Special Summoned only by its own procedure, so it can never be revived |
+| `600000002` | Super Vehicroid - Stealth Union (`3897065`) | Edison | its equip effect selects only a monster you control |
+| `600000004` | Goddess of Whim (`67959180`) | Edison, Tengu | its coin-toss effect has no once-per-turn limit |
+| `600000005` | Strike Ninja (`41006930`) | Edison, Tengu | each copy may use its effect once per turn, not one use per turn across all copies |
+| `600000006` | Green Baboon, Defender of the Forest (`46668237`) | Edison, Tengu | can be Special Summoned when a face-down Beast is destroyed, and when a Beast is destroyed in battle |
+| `600000007` | Rise of the Snake Deity (`16067089`) | Edison, Tengu | can be activated when Vennominon is destroyed by battle |
+| `600000008` | Malefic Blue-Eyes White Dragon (`9433350`) | Edison, Tengu | can be Special Summoned only by its own procedure, so it can never be revived |
+| `600000009` | Soul Rope (`37383714`) | Edison, Tengu | can be activated when a monster is destroyed by battle, not only by a card effect |
+
+`600000003` is not used: it is held for Night Assailant, which is held back (`docs/roadmap.md` item 7).
 
 **In a duel** a generated card *is* its modern card for every name and code check (the
 `alias`), while stats, text and script come from its own row. **In deck building**
@@ -97,8 +109,8 @@ gives the modern card.
 engine's Lua API, not copies or adaptations of Project Ignis's CardScripts** (AGPL-3.0-or-later;
 this repository is MIT). Every one is an *approximation*: each record in
 `data/custom-cards/` lists, in `not_reproduced`, what its script does not establish.
-Their engine tests are in `tests/engine/test_edison_historical_scripts.py`. Not
-tested in a real client (see the last section).
+Their engine tests are in `tests/engine/test_edison_historical_scripts.py` and
+`tests/engine/test_shared_historical_scripts.py`. Not tested in a real client (see the last section).
 
 ## Using the lflists in EDOPro
 
@@ -128,12 +140,12 @@ EDOPro install:
 ```
 
 `data_path` and `script_path` point at the generated card database and scripts above,
-so the two generated Edison cards resolve without any manual copying. EDOPro loads every
+so the generated cards resolve without any manual copying. EDOPro loads every
 `*.cdb` directly in `data_path` and adds `script_path` and its subfolders to the script
 search path (`docs/research/edopro-data-repos-ui.md` section 2a). The upstream card data
 this repository does not ship (previous section) still has to come from Project Ignis.
-Without these two keys a client falls back to its own defaults and the two generated
-Edison cards are unknown to it (`UNKNOWNCARD` at deck-load time), exactly like a missing upstream
+Without these two keys a client falls back to its own defaults and the generated
+cards are unknown to it (`UNKNOWNCARD` at deck-load time), exactly like a missing upstream
 row.
 
 ## Host settings are NOT in the lflist

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000004,
+  "alias": 67959180,
+  "erratum": "erratum-goddess-of-whim",
+  "events": [],
+  "name": "Goddess of Whim (Retro Formats)",
+  "desc": "Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 33,
+    "atk": 950,
+    "def": 700,
+    "level": 3,
+    "race": 4,
+    "attribute": 16,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (67959180) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000004.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The record's sources establish that the period text carries no use limit (the 2012 erratum added \"Once per turn\"). They do not say how period rulings treated a second activation in the same turn while the first is still resolving or with other effects in play; the script has no limit at all, and a further activation is offered whenever the engine's ordinary rules offer an Ignition effect.",
+    "Halving rounds the result up. That is a convention of the game, not something the record's sources state, and the ATK values after a toss are not tested (the outcome of the coin is random); only that the effect can be activated again is.",
+    "The ATK change is a final-ATK setting applied at resolution to the ATK the card has at that moment; how it combines with other ATK-changing effects is not modelled or tested.",
+    "The call is made by the controller before the toss, as the engine's Duel.CallCoin does; the record's sources do not describe how the period rules ordered the call and the toss.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000006,
+  "alias": 46668237,
+  "erratum": "erratum-green-baboon-defender-of-the-forest",
+  "events": [],
+  "name": "Green Baboon, Defender of the Forest (Retro Formats)",
+  "desc": "When a Beast-Type monster you control is destroyed and sent to the Graveyard, you can pay 1000 Life Points to Special Summon this card from your hand or the Graveyard.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 33,
+    "atk": 2600,
+    "def": 1800,
+    "level": 7,
+    "race": 16384,
+    "attribute": 1,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (46668237) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000006.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. The erratum record's summary says which event and flags an upstream script uses; the same behaviour is written here with ordinary engine API. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "Damage Step activation is the engine's own window for a card carrying EFFECT_FLAG_DAMAGE_STEP: the record's sources establish that the period text carries no Damage Step exclusion, not where in the Damage Step a period player could have activated it. Only the fact that it is offered after a Beast is destroyed by battle is tested.",
+    "The record's sources establish that the period text has no face-up requirement on the destroyed Beast. The race of a Beast destroyed face-down is read from the engine's record of the monster's race on the field; only a face-down Beast destroyed by a card effect is tested.",
+    "The period text does not say whether this card being destroyed itself counts as the trigger. The script does not count it, so this card must already be in the hand or Graveyard when another Beast is destroyed.",
+    "\"You can pay 1000 Life Points to Special Summon\" is implemented as a cost paid on activation.",
+    "The Special Summon is from the hand or Graveyard into any free Monster Zone in face-up Attack Position; the effect is one trigger for both locations.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages"
+  ]
+}

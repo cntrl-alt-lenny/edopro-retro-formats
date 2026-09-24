@@ -35,13 +35,13 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-from retroformats.lflist import build_lflist
+from retroformats.lflist import build_lflist, lflist_hash
 from retroformats.model import Coverage, ErratumV2, Pool
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import TempRepoTest, card as card_ref, event as ev, gap, printing
+from .helpers import ROUND_031_PASSCODES, TempRepoTest, swap_generated_back, card as card_ref, event as ev, gap, printing
 
 ROOT = Path(__file__).resolve().parents[1]
 CUTOFF = date(1999, 8, 25)
@@ -411,7 +411,13 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         self.assertEqual(4563, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        self.assertEqual(0x0C878718, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
+        # Re-pinned round 031: six generated cards (600000004-9) are in Tengu's list now;
+        # swapping them back reproduces the earlier pin.
+        tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
+        self.assertEqual(0x45A6E446, tengu.hash)
+        self.assertEqual(
+            0x0C878718, lflist_hash(swap_generated_back(tengu.entries, self.repo.custom_cards, ROUND_031_PASSCODES))
+        )
 
     # -- 19: no canonical Tokyo Dome artifacts exist -------------------------
 

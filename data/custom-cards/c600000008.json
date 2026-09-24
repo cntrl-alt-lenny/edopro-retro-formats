@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000008,
+  "alias": 9433350,
+  "erratum": "erratum-malefic-blue-eyes-white-dragon",
+  "events": [],
+  "name": "Malefic Blue-Eyes White Dragon (Retro Formats)",
+  "desc": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 \"Blue-Eyes White Dragon\" from your Deck. There can only be 1 face-up \"Malefic\" monster on the field. Other monsters you control cannot declare an attack. If there is no face-up Field Spell Card on the field, destroy this card.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 14483491,
+    "type": 33554465,
+    "atk": 3000,
+    "def": 2500,
+    "level": 8,
+    "race": 8192,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (9433350) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000008.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The period text names no zone for the Special Summon. The script allows it only from the hand, banishing \"Blue-Eyes White Dragon\" from the Deck; a Special Summon from the Deck or another zone by the procedure is not reproduced.",
+    "\"Malefic\" is the archetype code carried by the pinned BabelCDB row, not a period ruling; which cards counted as \"Malefic\" in 2010 is not modelled.",
+    "\"There can only be 1 face-up \\\"Malefic\\\" monster on the field\" uses the engine's unique-on-field check, which counts face-up cards only, as the period text says. The modern card's script behaves the same way in the engine for a face-down Malefic, so that part of the period text is not an observed difference; a second face-up Malefic on the field being destroyed when this card is Special Summoned is tested against the modern card.",
+    "The self-destruction with no face-up Field Spell Card is a continuous effect checked against both players' Field Zones; its timing relative to the Special Summon (the card is destroyed at once if no such Field Spell exists) is not established by the record's sources.",
+    "\"Blue-Eyes White Dragon\" is identified by its canonical code (its alternate-art codes alias to it).",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

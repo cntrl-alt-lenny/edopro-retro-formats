@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000005,
+  "alias": 41006930,
+  "erratum": "erratum-strike-ninja",
+  "events": [],
+  "name": "Strike Ninja (Retro Formats)",
+  "desc": "You can remove this card from play until the End Phase of this turn by removing 2 DARK monsters in your Graveyard from play. You can use this effect during either player's turn. You can only use this effect once per turn.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 43,
+    "type": 33,
+    "atk": 1700,
+    "def": 1200,
+    "level": 4,
+    "race": 1,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (41006930) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000005.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. A derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The use limit belongs to each copy (one use per turn per Strike Ninja on the field). That is the erratum record's own reading of the bare \"once per turn\" in the period text; no period ruling is cited for it here.",
+    "The 2 DARK monsters are banished as a cost, from the period wording \"by removing 2 DARK monsters in your Graveyard from play\"; whether the period card treated that as a cost is not established by the record's sources.",
+    "It is a Quick Effect that may be used whenever a player has priority, but not during the Damage Step; whether the period card could be used there is not established and is not implemented.",
+    "The card is banished with the engine's temporary-banish mechanism and returns during the End Phase in the position it left; a return into an occupied or unavailable zone, a second Strike Ninja's interaction with the first, and effects that respond to the banishing are not modelled. Only the banish, the return and two copies each using the effect once are tested.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+  ]
+}

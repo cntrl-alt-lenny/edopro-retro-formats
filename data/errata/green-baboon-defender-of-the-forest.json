@@ -9,7 +9,9 @@
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000006.json; passcode 600000006). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
       "gap": {
         "upstream_checked": true,
         "behavioural_impact": "In an Edison snapshot EDOPro refuses the Damage Step Green Baboon revival after a Beast is destroyed by battle, and refuses it entirely when the destroyed Beast was face-down, so a period Beast deck loses plays that its 2007-2010 text allows."
@@ -48,11 +50,8 @@
     ]
   },
   "coverage": {
-    "kind": "known-gap",
-    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-    "gap_sources": [
-      "ignis-babelcdb",
-      "yugipedia-card-errata"
-    ]
+    "kind": "custom-script",
+    "historical_passcode": 600000006,
+    "script": "data/custom-cards/c600000006.lua"
   }
 }
