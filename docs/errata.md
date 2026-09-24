@@ -156,13 +156,15 @@ The build refuses to leave a stale or unclaimed file in `dist/databases/` or
 **Scripts are original.** Project Ignis's CardScripts are AGPL-3.0-or-later and this
 repository is MIT, so a script derived from one is a licensing decision for the owner;
 `authorship.kind` must be `original`. `tested: true` on the state's
-`implementation_metadata` means an engine test (`tests/engine/test_edison_historical_scripts.py`)
-runs the same scenario against the modern card and the generated one and asserts the
+`implementation_metadata` means an engine test (`tests/engine/test_edison_historical_scripts.py`,
+`tests/engine/test_shared_historical_scripts.py`) runs the same scenario against the modern card and the generated one and asserts the
 difference; it never means the script is exact (`fidelity` says that).
 
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
-at Tengu whenever that record's state does. And a v2 record's *structural* parity walk
+at Tengu whenever that record's state does. The owner decided on 2026-09-24 that this is
+allowed (`docs/state.md`): round 031 generated six cards that both lists now use, each
+because its record puts the same state at both snapshots. And a v2 record's *structural* parity walk
 takes the first usable substitution, so giving a card Ignis's GOAT reference substitutes
 a usable baseline coverage silently moves the GOAT list unless the record also carries
 the exact `reference_identities` entry for it.
