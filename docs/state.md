@@ -104,9 +104,8 @@ bottleneck actually observed.
 Ignis's CardScripts are AGPL-3.0-or-later; this repository is MIT.
 Generated scripts must be original, never adapted from Ignis's; shipping a
 derived one is the owner's call. Night Assailant is held back (licence and
-thin evidence; round 029's Verifier report). 38 of Edison's 46
-known-divergence records also apply at Tengu: scripting one changes Tengu's
-list, so decide that first.
+thin evidence; round 029's Verifier report). A script whose historical
+state also applies at Tengu may change Tengu's list too (owner, 2026-09-24).
 
 ## Open items and sequencing judgements
 
