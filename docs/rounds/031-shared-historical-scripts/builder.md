@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 031-shared-historical-scripts
+role: builder
+branch: builder/031-shared-historical-scripts
+head: 4a74e292edb141705c133fc86e79972384cac2c4
+os: macOS 27.0
+python: 3.9.6
+written: 2026-09-24T07:55:19Z
+-->
 ## Verified
 
 All project commands ran with `/opt/homebrew/bin/python3.13` (`python3` here is 3.9), on macOS arm64, at code head `fce563b59b39c1c927baa6319e42c27509b7514e` (pushed; the report commit above it touches only this file). Base: `origin/main` = `b50dc49`; this branch started at `911f98f` (`fw.py start` → exit 0).
