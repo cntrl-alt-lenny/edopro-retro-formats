@@ -31,7 +31,7 @@ from __future__ import annotations
 
 import unittest
 
-from retroformats.lflist import build_lflist
+from retroformats.lflist import build_lflist, lflist_hash
 from retroformats.model import Erratum, ErratumV2
 from retroformats.repo import Repository
 from retroformats.validate import Validator
@@ -304,9 +304,25 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         fmt = self.repo.formats["2010-03-edison"]
         built = build_lflist(fmt, self.repo)
 
-        self.assertEqual(pre_built.hash, built.hash)
-        self.assertEqual(pre_built.text, built.text)
-        self.assertEqual(pre_built.entries, built.entries)
+        # Round 029/030 (roadmap item 7) deliberately replaced exactly two
+        # modern codes in the Edison list with generated historical ones
+        # (data/custom-cards/). Nothing else may differ from the pre-migration
+        # snapshot: the expected output is the snapshot's own with those two
+        # entries renamed, same counts, and every other line identical.
+        swaps = {c.alias: c.passcode for c in self.repo.custom_cards.values()}
+        self.assertEqual(2, len(swaps))
+        expected_entries = dict(pre_built.entries)
+        for modern, generated in swaps.items():
+            expected_entries[generated] = expected_entries.pop(modern)
+        self.assertEqual(expected_entries, built.entries)
+        self.assertEqual(lflist_hash(expected_entries), built.hash)
+        pre_lines = pre_built.text.splitlines()
+        lines = built.text.splitlines()
+        self.assertEqual(len(pre_lines), len(lines))
+        removed = set(pre_lines) - set(lines)
+        added = set(lines) - set(pre_lines)
+        self.assertEqual(set(swaps), {int(line.split()[0]) for line in removed})
+        self.assertEqual(set(swaps.values()), {int(line.split()[0]) for line in added})
 
     def test_dist_is_byte_identical_to_a_fresh_build(self):
         """build --check's own guarantee, re-verified directly: rebuilding

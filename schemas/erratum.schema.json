@@ -93,7 +93,7 @@
           "type": "array",
           "items": { "$ref": "common.schema.json#/$defs/passcode" }
         },
-        "script": { "type": "string", "minLength": 1, "description": "Path of the Lua script implementing the historical behaviour (this project's own dist/scripts path)." },
+        "script": { "type": "string", "minLength": 1, "description": "Path of the canonical Lua script implementing the historical behaviour: data/custom-cards/c<passcode>.lua, which retroformats build copies to dist/scripts/ (never a hand-edited dist path). The generated card's other fields live in data/custom-cards/c<passcode>.json (schemas/custom-card.schema.json)." },
         "upstream": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Rarely meaningful here — custom-script means the implementation is OURS, not upstream's; present only if genuinely relevant (e.g. adapted from an upstream starting point)." }
       },
       "description": "This project provides a historical passcode and Lua script. Both historical_passcode and script are required — this is exactly what distinguishes custom-script from reuse-upstream: the implementation is ours, not upstream's."

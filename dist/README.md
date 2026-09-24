@@ -4,13 +4,16 @@ Everything in this directory is **generated** from the canonical data in `data/`
 `formats/` by `python -m retroformats build`. Do not edit by hand; CI rejects drift
 (`build --check`).
 
-## Prerequisite: this repo does not ship card data
+## Prerequisite: this repo ships only a few cards of its own
 
 **This repository is not self-contained.** All three generated whitelists reference
 passcodes that exist only in **upstream** Project Ignis repositories, not in `dist/`
-or anywhere else in this repo:
+or anywhere else in this repo. The one exception is **two cards in the Edison list**
+(`600000001` and `600000002`, below), which this repository itself generates into
+`dist/databases/` and `dist/scripts/`. The counts here are upstream identities only
+(codes ≥ `504700000` and < `600000000`):
 
-| list | codes ≥ `504700000` (pre-errata / GOAT-variant identities) |
+| list | upstream codes ≥ `504700000` (pre-errata / GOAT-variant identities) |
 |---|---|
 | `2005-04-goat` | 209 |
 | `2010-03-edison` | 67 |
@@ -64,6 +67,39 @@ removed DeltaBagooska (or whose client predates these cards being added upstream
 will hit a hard, visible `UNKNOWNCARD` failure the moment anyone tries to actually
 play one of the 226 affected cards — not a warning, not a cosmetic gap.
 
+## Cards this repository generates itself (Edison)
+
+Project Ignis ships no historical version of some cards whose 2010 behaviour differs
+from the modern card, so this repository writes them. `python -m retroformats build`
+generates, from `data/custom-cards/` and the erratum records that claim them:
+
+| file | contents |
+|---|---|
+| `dist/databases/retro-formats.cdb` | one `datas` + `texts` row per card, in the BabelCDB layout |
+| `dist/scripts/c<passcode>.lua` | that card's script (found by filename, as EDOPro finds any script) |
+
+Each row uses a passcode in this project's reserved range (`600000000`–`699999999`),
+`alias` = the modern card and `ot = 8` (`SCOPE_ILLEGAL`, so it is legal only through a
+whitelist). Generated so far, all used by `Retro 2010-03-edison` in place of the modern card:
+
+| passcode | modern card (alias) | what differs from the modern card |
+|---|---|---|
+| `600000001` | Metalzoa (`50705071`) | can be Special Summoned only by its own procedure, so it can never be revived |
+| `600000002` | Super Vehicroid - Stealth Union (`3897065`) | its equip effect selects only a monster you control |
+
+**In a duel** a generated card *is* its modern card for every name and code check (the
+`alias`), while stats, text and script come from its own row. **In deck building**
+copies are counted under the alias root, and a whitelist follows an alias only within
++/-10, so the lflist names each generated code itself, with the count the banlist
+gives the modern card.
+
+**These are original scripts, written from the erratum records' period text and the
+engine's Lua API, not copies or adaptations of Project Ignis's CardScripts** (AGPL-3.0-or-later;
+this repository is MIT). Every one is an *approximation*: each record in
+`data/custom-cards/` lists, in `not_reproduced`, what its script does not establish.
+Their engine tests are in `tests/engine/test_edison_historical_scripts.py`. Not
+tested in a real client (see the last section).
+
 ## Using the lflists in EDOPro
 
 Quick way: copy `dist/lflists/*.lflist.conf` into your EDOPro `lflists/` folder and
@@ -81,6 +117,8 @@ EDOPro install:
       "repo_name": "Retro Formats",
       "repo_path": "./repositories/retro-formats",
       "lflist_path": "dist/lflists",
+      "data_path": "dist/databases",
+      "script_path": "dist/scripts",
       "should_update": true
     }
   ],
@@ -89,16 +127,14 @@ EDOPro install:
 }
 ```
 
-Deliberately **not set**: `data_path` and `script_path`. This repo ships no `.cdb`
-or script files of its own — `dist/databases/` and `dist/scripts/` exist only as
-empty placeholders (`.gitkeep`) reserved for roadmap item 7 (custom-script/cdb
-generation, not yet built). Pointing `data_path`/`script_path` at them today would
-configure EDOPro to scan two directories that are always empty, which is harmless
-but pointless; omitting the keys lets the client fall back to its own defaults
-(`data_path` defaults to the repo root, `script_path` to `./script/` — see
-`docs/research/edopro-data-repos-ui.md` §2a) instead of naming paths that add
-nothing. All historical card identities this project's whitelists depend on come
-from the upstream repos above, not from this repository.
+`data_path` and `script_path` point at the generated card database and scripts above,
+so the two generated Edison cards resolve without any manual copying. EDOPro loads every
+`*.cdb` directly in `data_path` and adds `script_path` and its subfolders to the script
+search path (`docs/research/edopro-data-repos-ui.md` section 2a). The upstream card data
+this repository does not ship (previous section) still has to come from Project Ignis.
+Without these two keys a client falls back to its own defaults and the two generated
+Edison cards are unknown to it (`UNKNOWNCARD` at deck-load time), exactly like a missing upstream
+row.
 
 ## Host settings are NOT in the lflist
 
@@ -166,6 +202,9 @@ upstream data — not an observation of the running game. In particular, unverif
 whether a stock EDOPro install's base installer actually bundles the full upstream
 card set (see above); whether the described Custom Rule checkboxes produce the
 intended in-duel behaviour end-to-end; whether the repo-way `user_configs.json`
-snippet above actually registers and loads correctly in a real client session. This
+snippet above actually registers and loads correctly in a real client session, including
+whether a real client loads `dist/databases/retro-formats.cdb` and `dist/scripts/` through
+its `data_path`/`script_path` (the generated cards are exercised only in the headless
+engine harness, `docs/engine-testing.md`). This
 is deliberate — a live client test is out of scope for this round (roadmap item 8's
 "test in a real client" is not yet done) and remains open work.

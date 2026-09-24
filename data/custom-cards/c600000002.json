@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000002,
+  "alias": 3897065,
+  "erratum": "erratum-super-vehicroid-stealth-union",
+  "events": [],
+  "name": "Super Vehicroid - Stealth Union (Retro Formats)",
+  "desc": "\"Truckroid\" + \"Expressroid\" + \"Drillroid\" + \"Stealthroid\"When this card attacks, its original ATK is halved until the end of the Damage Step. During battle between this attacking card and a Defense Position monster whose DEF is lower than the ATK of this card, inflict the difference as Battle Damage to your opponent. Once per turn, you can select 1 monster you control, except a Machine-Type monster, and equip it to this card. While equipped by this effect, this card can attack all monsters your opponent controls once each.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 4118,
+    "type": 97,
+    "atk": 3600,
+    "def": 3000,
+    "level": 9,
+    "race": 32,
+    "attribute": 1,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (3897065) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000002.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 029 investigation; a derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The record's period text says \"select 1 monster you control, except a Machine-Type monster\", without \"face-up\". The script only selects face-up monsters. Whether a face-down monster could be selected in the period is not established by the record's sources.",
+    "\"Select\" is implemented as targeting (EFFECT_FLAG_CARD_TARGET) and \"once per turn\" as a soft once per turn (SetCountLimit(1) on the effect); how the period rules applied either to this effect is not established by the record's sources.",
+    "The halving of the original ATK when this card attacks is a continuous effect at the attack declaration, not a chainable trigger. A period reading in which a player could respond to it is not reproduced and not tested.",
+    "The Fusion Summon procedure uses the engine's standard fusion-material procedure with the four named materials (fusion substitutes allowed). The engine tests place the card on the field directly, so the Summon itself is not exercised.",
+    "The equipped monster follows the engine's default equip rules (it goes to the Graveyard when this card leaves the field; control changes and negation are not modelled). Only equip, the ATK halving, piercing damage and attacking every opposing monster once are tested.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb"
+  ]
+}

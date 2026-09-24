@@ -44,4 +44,4 @@ jobs:
       - name: Fetch pinned engine inputs and build ocgcore from the pinned source
         run: python scripts/engine_env.py prepare --dest "$RUNNER_TEMP/engine"
       - name: Run engine tests (a skip fails the job)
-        run: python scripts/engine_env.py run --dest "$RUNNER_TEMP/engine" --expect-at-least 25
+        run: python scripts/engine_env.py run --dest "$RUNNER_TEMP/engine" --expect-at-least 40

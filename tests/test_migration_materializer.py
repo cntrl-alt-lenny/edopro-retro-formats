@@ -29,6 +29,53 @@ from . import migration_materializer as mm
 from .pre_migration_fixture import load_pre_migration_repo
 
 
+# The two records round 029 edited after the migration (kept by round 030,
+# roadmap item 7), when Metalzoa and Super Vehicroid - Stealth Union went from a
+# known gap to a `custom-script` coverage. For each, the record on disk must be
+# the frozen materialized target with exactly two fields replaced, and the
+# replacements are pinned here, not merely "different": `coverage` and the one
+# `implementation_metadata` entry. Any other edit to either record, or a stray
+# edit inside those two fields, no longer equals the expected record.
+ROUND_029_CUSTOM_SCRIPT_PASSCODES = {
+    "erratum-metalzoa": 600000001,
+    "erratum-super-vehicroid-stealth-union": 600000002,
+}
+
+
+def expected_after_round_029(record_id, target):
+    """The frozen `target`, with round 029's coverage and metadata edit applied."""
+    passcode = ROUND_029_CUSTOM_SCRIPT_PASSCODES[record_id]
+    old_coverage = target["coverage"]
+    assert old_coverage["kind"] == "known-gap", old_coverage
+    assert set(old_coverage) == {"kind", "gap_reason", "gap_sources"}, old_coverage
+    assert len(target["implementation_metadata"]) == 1, target["implementation_metadata"]
+    old_entry = target["implementation_metadata"][0]
+    assert old_entry["status"] == "missing" and list(old_entry) == ["events", "status", "gap"], old_entry
+    reason = (
+        f"Round 029: implemented by a project-authored script under the custom-script strategy "
+        f"(data/custom-cards/c{passcode}.json; passcode {passcode}). Previously recorded as a known gap "
+        f'with gap_reason "{old_coverage["gap_reason"]}" '
+        f"(gap_sources {old_coverage['gap_sources'][0]}, {old_coverage['gap_sources'][1]}). "
+        f"Status is partial, not complete: the custom card's not_reproduced list names what the "
+        f"script does not establish."
+    )
+    new_entry = {
+        "events": old_entry["events"],
+        "status": "partial",
+        "tested": True,
+        "reason": reason,
+        "gap": old_entry["gap"],
+    }
+    expected = dict(target)
+    expected["implementation_metadata"] = [new_entry]
+    expected["coverage"] = {
+        "kind": "custom-script",
+        "historical_passcode": passcode,
+        "script": f"data/custom-cards/c{passcode}.lua",
+    }
+    return expected
+
+
 class MaterializedCorpusTest(unittest.TestCase):
     """The section 9 headline, reproduced against the FROZEN pre-migration
     snapshot: every one of the 247 semantically-equivalent records'
@@ -82,6 +129,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             path = live_repo.errata[record_id].path
             on_disk_text = path.read_text(encoding="utf-8")
             on_disk = json.loads(on_disk_text)
+            # Round 029 (roadmap item 7) deliberately edited two of these
+            # records after the migration; their expected content is pinned
+            # exactly (expected_after_round_029). Every other record must
+            # still equal the materialized target exactly.
+            if record_id in ROUND_029_CUSTOM_SCRIPT_PASSCODES:
+                target = expected_after_round_029(record_id, target)
             if on_disk != target:
                 content_mismatches.append(record_id)
                 continue

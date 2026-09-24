@@ -1,13 +1,13 @@
 # Project state — durable context
 
-Fast rehydration for a fresh Brain session. **Stores no live repository
-state** (no SHA outside `## Historical anchors`, no queue, no branch layout,
-no test counts — stale the moment anyone commits). Derive live state:
+**Stores no live repository state** (no SHA outside `## Historical
+anchors`, no queue, no branch layout, no test counts — stale the moment
+anyone commits). Derive live state:
 
 | question | source of truth |
 |---|---|
 | commit, branch, remote sync | `git status`, `git rev-parse` |
-| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/`; `docs/briefs/active.md` is legacy until round 027 finishes |
+| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/` |
 | Builder branch unmerged? | `git branch -a`, `git worktree list` |
 | push hook configured? | `git config --get core.hooksPath` |
 | CI result | the run for that exact SHA |
@@ -63,14 +63,13 @@ status per format: `python -m retroformats report`.
 **Tokyo Dome / `1999-08-tokyo-dome`** (target 1999-08-26). Detail:
 [`research/yugi-kaiba-format-source-gate.md`](research/yugi-kaiba-format-source-gate.md)
 + packet + `format-atlas-progress.json` (id `135`); certified pool digest
-under `## Historical anchors`. Restriction hypothesis (unresolved, blocking):
-Raigeki, Dark Hole, Trap Hole each Limited-to-1; 0 Forbidden/Semi-Limited.
-`legality_basis` is `community-retrospective`; `snapshot`/`pool_cutoff`
-deliberately differ — don't re-collapse. Canonicalization is
-`UNRESOLVED_BLOCKING`/`BLOCKED_BY_BOTH`: six axes must each reach `PROVEN`.
-`battle_calculation` is resolved; `deck_out`/`trap_activation_frequency`
-remain `NOT_REPRESENTABLE`. Restriction-list evidence is tier C,
-unauthenticated. Don't restart or canonicalize on volume of research alone.
+under `## Historical anchors`. The restriction hypothesis (three cards
+Limited-to-1) is unresolved and blocking; its evidence is tier C,
+unauthenticated. `legality_basis` is `community-retrospective`;
+`snapshot`/`pool_cutoff` deliberately differ — don't re-collapse.
+Canonicalization is `UNRESOLVED_BLOCKING`: six axes must each reach `PROVEN`
+(per-axis status in the gate document). Don't restart or canonicalize on
+volume of research alone.
 
 **Erratum v2** — [`research/erratum-state-model-v2.md`](research/erratum-state-model-v2.md),
 frozen, sixteen properties, proven against the 296-record corpus. Don't
@@ -79,31 +78,37 @@ redesign without a concrete counterexample found while implementing.
 ## Owner decision — standing role chats (since 2026-09-16)
 
 The owner keeps **one standing Builder chat and one separate Verifier chat**,
-reused across rounds; fresh or cleared only after a rejection, or when very
-long, stated explicitly with a reason. A Verifier prompt never goes into the
-Builder's chat. Every prompt tells the agent to re-derive state from the
-repository, not the conversation — overriding the framework's fresh-context
-preference in those two cases only.
+reused across rounds; fresh only after a rejection or when very long, with
+the reason stated. A Verifier prompt never goes into the Builder's chat.
+Every prompt tells the agent to re-derive state from the repository, not the
+conversation.
 
 ## Operating policy — the framework is done being built
 
 Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
 
-- **No further workflow/framework changes without a concrete, observed
-  problem** — not "this could be cleaner".
+- **No workflow/framework changes without a concrete, observed problem.**
 - **Larger, related briefs**, to amortise review.
 - **Tier review depth proportionally** — deep for historical claims and
-  canonical data; light for mechanical/bookkeeping.
-- **Brain may fix genuinely trivial housekeeping directly, kept narrow** —
-  canonical data or an evidence-level claim goes to the Builder regardless.
-- **Topology: Brain, one Builder, one standing Verifier** (owner,
-  2026-09-16; `AGENTS.md` § Topology says why). Still no parallel
-  executors without an *observed* bottleneck.
+  canonical data; light for bookkeeping.
+- **Brain may fix trivial housekeeping directly** — canonical data or an
+  evidence-level claim goes to the Builder regardless.
+- **No parallel executors** without an *observed* bottleneck (topology:
+  `AGENTS.md`).
 - **The owner stays courier and model-chooser**, unless that becomes
   genuine friction.
 
 **Evidence-gathering period: the next 5-10 genuine rounds**, then fix the
 specific bottleneck actually observed, not speculatively.
+
+## Owner decision — card scripts and licence (2026-09-23)
+
+Ignis's CardScripts are AGPL-3.0-or-later; this repository is MIT.
+Generated scripts must be original, never adapted from Ignis's; shipping a
+derived one is the owner's call. Night Assailant is held back (licence and
+thin evidence; round 029's Verifier report). 38 of Edison's 46
+known-divergence records also apply at Tengu: scripting one changes Tengu's
+list, so decide that first.
 
 ## Open items and sequencing judgements
 
@@ -116,12 +121,11 @@ doesn't record:
   answer yet. Prefer Phase-1 hardening over breadth meanwhile: no new
   historical format while roadmap Phase-1 items remain open.
 - **Format Library's "previous status" markers are unreliable as a class**
-  (round 13) — membership only, never deltas. Landed: UDE Appendix A is the
-  **August 1, 2005 revision** (attests April 1, not continuity through
-  August).
+  (round 13) — membership only, never deltas.
 - **An unreviewed second run of round 13 is parked, not adopted:** ref
   `preserve/round13-alt-run-1bec139` — a different primary source for the
-  September 2010 changeover, to re-verify from source, never copy.
+  September 2010 changeover, to re-verify from source, never copy. It is
+  per-clone and not on `origin`.
 - **Materialisation repairs only pool-content drift**
   (`pool.materialization-drift`); every other `pool.*` error still refuses.
 

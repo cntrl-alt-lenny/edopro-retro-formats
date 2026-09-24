@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000001,
+  "alias": 50705071,
+  "erratum": "erratum-metalzoa",
+  "events": [],
+  "name": "Metalzoa (Retro Formats)",
+  "desc": "This monster can only be Special Summoned from your Deck to your side of the field by offering \"Zoa\" equipped with \"Metalmorph\" as a Tribute.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 33554465,
+    "atk": 3000,
+    "def": 2300,
+    "level": 8,
+    "race": 32,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (50705071) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000001.lua",
+  "authorship": {
+    "kind": "original",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 029 investigation; a derived script would need an owner licensing decision."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The summon procedure Tributes the Zoa with a plain card selection and Duel.Release(REASON_COST). Whether the period procedure treated the offering as a cost, and its timing relative to effects that respond to a Tribute, is not established by the erratum record's sources and is not tested beyond the Zoa going to the Graveyard and Metalzoa arriving from the Deck.",
+    "The Metalmorph requirement is the card named \"Metalmorph\" (either of its two printing codes) currently equipped to the Zoa; it is not required to have been equipped by Metalmorph's own effect, and cards that count as either name for other effects are not modelled.",
+    "\"Cannot be Normal Summoned or Set\" is implemented from the record's own reading that the period wording (\"can only be Special Summoned\") already forbade both. No period ruling is cited for it here.",
+    "\"To your side of the field\" is implemented only as: the one permitted Special Summon is this procedure, and it puts the monster under its own controller.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "yugipedia-set-pages"
+  ]
+}

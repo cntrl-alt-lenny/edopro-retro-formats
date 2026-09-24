@@ -33,7 +33,7 @@ REGION_SCOPE_BITS = {"OCG": SCOPE_OCG, "TCG": SCOPE_TCG}
 IMPLEMENTATION_STATUSES = ("missing", "stub", "partial", "complete", "verified")
 
 # This project's OWN reserved passcode range for roadmap item 7
-# (custom-script/cdb generation, not yet built — see docs/roadmap.md item 7
+# (custom-script/cdb generation, built in round 029 — see docs/roadmap.md item 7
 # and docs/architecture.md's "Card identity" section for the full reasoning
 # and evidence trail; this comment states only the range and why it is
 # provably clear).
@@ -70,11 +70,12 @@ IMPLEMENTATION_STATUSES = ("missing", "stub", "partial", "complete", "verified")
 #   special-cased high value found in the duel-creation/card-storage paths
 #   checked; 699999999 sits far below it either way.
 #
-# Enforcement: retroformats/validate.py's `_check_card` rejects any
-# canonical passcode reference that falls inside this range today
-# (`card.reserved-passcode-collision`) — nothing should use it yet; item 7
-# will need to relax this check specifically for its own generated records
-# once that generation exists, not before.
+# Enforcement: retroformats/validate.py rejects any canonical passcode
+# reference that falls inside this range (`card.reserved-passcode-collision`)
+# EXCEPT a custom-script coverage's historical_passcode that has its own record
+# in data/custom-cards/ (retroformats/custom_cards.py generates the row and the
+# script). Banlists, pools, reuse-upstream identities, reference identities
+# and variants still may not use the range.
 RESERVED_PASSCODE_RANGE = range(600_000_000, 700_000_000)  # 600000000..699999999 inclusive
 
 
@@ -1460,6 +1461,66 @@ class Source:
     title: str
     url: str | None
     raw: dict[str, Any]
+
+
+CUSTOM_CARD_CDB_FIELDS = ("ot", "setcode", "type", "atk", "def", "level", "race", "attribute", "category")
+CUSTOM_CARD_FIDELITIES = ("exact", "approximate")
+# BabelCDB `ot` scope for a card that is not legal in an official-cards room
+# (gframe/data_manager.h SCOPE_ILLEGAL): every historical-implementation row
+# upstream carries it, and a whitelist is what makes it playable.
+CUSTOM_CARD_OT = 8
+
+
+@dataclass(frozen=True)
+class CustomCard:
+    """One card this project itself implements and generates (roadmap item 7):
+    a `custom-script` coverage's identity, database row and Lua script.
+
+    The erratum record says WHAT was true in the period; this record is the
+    implementation of that statement: the reserved passcode, the cdb row that
+    aliases the modern card, and the canonical script the generator copies to
+    dist/scripts/. History and representability stay separate axes: `fidelity`
+    and `not_reproduced` say, on this record, where the script only
+    approximates the period card."""
+
+    passcode: int
+    alias: int
+    erratum: str
+    events: tuple[str, ...]
+    name: str
+    desc: str
+    cdb: dict[str, Any]
+    script: str
+    fidelity: str
+    not_reproduced: tuple[str, ...]
+    sources: tuple[str, ...]
+    path: Path
+    raw: dict[str, Any]
+
+    @classmethod
+    def load(cls, raw: dict[str, Any], path: Path) -> "CustomCard":
+        try:
+            return cls(
+                passcode=raw["passcode"],
+                alias=raw["alias"],
+                erratum=str(raw["erratum"]),
+                events=tuple(raw.get("events", [])),
+                name=str(raw["name"]),
+                desc=str(raw["desc"]),
+                cdb=dict(raw["cdb"]),
+                script=str(raw["script"]),
+                fidelity=str(raw["fidelity"]),
+                not_reproduced=tuple(raw.get("not_reproduced", [])),
+                sources=tuple(raw.get("sources", [])),
+                path=path,
+                raw=raw,
+            )
+        except (KeyError, TypeError) as exc:
+            raise DataError(path, f"custom card record is missing or malformed: {exc!r}") from exc
+
+    def __post_init__(self) -> None:
+        if not _is_valid_passcode(self.passcode) or not _is_valid_passcode(self.alias):
+            raise DataError(self.path, "custom card passcode and alias must be valid passcodes")
 
 
 @dataclass

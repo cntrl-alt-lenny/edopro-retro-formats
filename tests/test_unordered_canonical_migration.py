@@ -68,6 +68,7 @@ def _pre_migration_gate_repo(live, frozen, rows):
         banlists=live.banlists,
         pools=live.pools,
         rule_profiles=live.rule_profiles,
+        custom_cards=live.custom_cards,
         errata={
             **{rid: record for rid, record in live.errata.items() if isinstance(record, ErratumV2)},
             **{rid: frozen.errata[rid] for rid in frozen_v1_ids},

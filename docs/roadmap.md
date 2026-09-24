@@ -554,16 +554,38 @@ reflects that.
    relevant forbidden-type printings, while GOAT is a fixed pre-2011 whitelist.
    This conclusion is limited to these three formats; a future format needs its
    own cutoff or whitelist-era assessment.
-7. **Partly done — cdb/script generation for `custom-script` errata**: when we need a historical
-   card Ignis doesn't ship, generate `dist/databases/retro-<format>.cdb` rows
-   (`alias` → modern, `ot=8`, our own reserved code range — **chosen and proven in
-   round 9: `600000000`–`699999999`, disjoint from every documented upstream
-   convention and every observed BabelCDB code at the pinned revision; enforced by
-   `retroformats/validate.py`'s `card.reserved-passcode-collision` check; see
-   `docs/architecture.md`'s card-identity section for the full evidence**) plus script
-   stubs, following the upstream blueprint in docs/research/ignis-goat.md. The
-   reserved range and collision guard exist, but no generator, database rows, or
-   script stubs are present; those remain.
+7. **Partly done — cdb/script generation for `custom-script` errata** (round 029): when we need a
+   historical card Ignis doesn't ship, `python -m retroformats build` generates
+   `dist/databases/retro-formats.cdb` rows (`alias` → modern, `ot=8`, our own reserved code
+   range — **chosen and proven in round 9: `600000000`–`699999999`, disjoint from every
+   documented upstream convention and every observed BabelCDB code at the pinned revision;
+   see `docs/architecture.md`'s card-identity section for the full evidence**) and
+   `dist/scripts/c<passcode>.lua`, from `data/custom-cards/` plus the erratum record whose
+   `custom-script` coverage names the code (`retroformats/custom_cards.py`; rules in
+   `retroformats/validate.py`, `custom-card.*`; see `docs/errata.md`, "Generated historical
+   cards"). Two Edison cards are done end to end - Metalzoa and Super Vehicroid - Stealth
+   Union - each with an engine test that fails against the modern
+   behaviour (`tests/engine/test_edison_historical_scripts.py`). The scripts are original
+   (Project Ignis's CardScripts are AGPL-3.0-or-later, this repository MIT) and each is an
+   approximation whose gaps its record lists. **Night Assailant is held back** (round 030,
+   owner decision 2026-09-23): its script has to be licence-clean, and its period
+   behaviour needs better evidence for whether the effect is optional and whether it
+   targets; round 029's script matched Project Ignis's AGPL-3.0-or-later script too
+   closely to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`).
+   It stays a known gap, with the modern card in Edison's list. **Remaining:** the other 43 Edison
+   `format.erratum-known-divergence` cards (46 in all, less these two and Night Assailant). Two things found in round 029 that any of
+   them needs first. (1) 38 of the 46 record the same state at Tengu's snapshot, so a
+   `custom-script` for one also changes Tengu's list unless a decision says that is
+   wanted. Eight differ (their state at Tengu is modern, or ambiguous and resolved to
+   modern by policy); two of those are done here and Night Assailant is held back. The other five - Freed the
+   Matchless General, Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon,
+   Toon Table of Contents - apply an intermediate state at Edison that no script
+   implements (the modern activation requirement plus the period reveal on a failed
+   search); their difference from the modern card only shows when a response empties
+   the Deck mid-chain, so the engine test is a heavier scenario. (2) A card Ignis's
+   GOAT reference already substitutes needs an exact `reference_identities` entry
+   first, or the GOAT list moves: when a record's `known-gap` becomes a `custom-script`,
+   GOAT's structural parity walk can pick up the new state.
 8. **Partly done — ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.
    `dist/README.md` contains the snippet and versioned-release convention, but the

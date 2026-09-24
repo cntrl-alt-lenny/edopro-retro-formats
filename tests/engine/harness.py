@@ -10,7 +10,9 @@ This drives the same core and card scripts EDOPro executes:
   goat-entries.cdb, cards-unofficial.cdb) under $RETROFORMATS_REPOS;
 - scripts come from the pinned CardScripts checkout (official/, goat/,
   pre-errata/, unofficial/ + constant.lua/utility.lua), resolved by filename
-  exactly like EDOPro resolves them (docs/research/ignis-goat.md section 4);
+  exactly like EDOPro resolves them (docs/research/ignis-goat.md section 4),
+  then from this repository's own generated dist/scripts/; the generated
+  dist/databases/*.cdb are merged in after the upstream databases;
 - scenarios are set up with the core's own Debug API (Debug.ReloadFieldBegin
   / SetPlayerInfo / AddCard / ReloadFieldEnd), the mechanism EDOPro puzzles
   use, so any board state is reachable without scripting a whole duel.
@@ -182,6 +184,14 @@ def repos_path() -> Path:
     return Path.home() / ".cache" / "retroformats" / "repos"
 
 
+def dist_path() -> Path:
+    """The generated dist/ tree whose databases and scripts (this project's own
+    historical cards, roadmap item 7) are loaded next to the upstream ones,
+    the way a client with data_path/script_path pointed at dist/ would."""
+    value = os.environ.get("RETROFORMATS_DIST")
+    return Path(value) if value else Path(__file__).resolve().parents[2] / "dist"
+
+
 def available() -> bool:
     path = core_path()
     return bool(
@@ -195,10 +205,12 @@ def available() -> bool:
 class CardDatabase:
     """Card data for the reader callback, merged like a client would."""
 
-    def __init__(self, babel: Path):
+    def __init__(self, babel: Path, extra: Path | None = None):
         self.rows: dict[int, tuple] = {}
-        for cdb in ("cards.cdb", "goat-entries.cdb", "cards-unofficial.cdb"):
-            path = babel / cdb
+        paths = [babel / cdb for cdb in ("cards.cdb", "goat-entries.cdb", "cards-unofficial.cdb")]
+        if extra is not None and extra.is_dir():
+            paths.extend(sorted(extra.glob("*.cdb")))
+        for path in paths:
             if not path.exists():
                 continue
             con = sqlite3.connect(path)
@@ -297,7 +309,7 @@ class Duel:
 
         repos = repos_path()
         self.scripts_root = repos / "cardscripts"
-        self.db = CardDatabase(repos / "babelcdb")
+        self.db = CardDatabase(repos / "babelcdb", dist_path() / "databases")
         self.log: list[tuple[int, str]] = []
         self.messages: list[Message] = []
         self.responders: list = []
@@ -354,6 +366,10 @@ class Duel:
                 return bool(
                     self.lib.OCG_LoadScript(duel, content, len(content), base.encode())
                 )
+        generated = dist_path() / "scripts" / base
+        if generated.exists():
+            content = generated.read_bytes()
+            return bool(self.lib.OCG_LoadScript(duel, content, len(content), base.encode()))
         return False
 
     def load_scenario(self, lua: str) -> None:
@@ -520,6 +536,40 @@ def answer_battle(action: int, index: int = 0) -> bytes:
     return struct.pack("<i", (action & 0xFFFF) | (index << 16))
 
 
+def battle_lists(prompt: Message) -> dict[str, list[int]]:
+    """Parse a MSG_SELECT_BATTLECMD prompt (playerop.cpp SelectBattleCmd):
+    u8 player, the chainable list (code u32, con u8, loc u8, seq u32,
+    description u64, client mode u8), then the attackable list (code u32,
+    con u8, loc u8, seq u8, direct u8). Returns the codes of each."""
+    prompt._buf.seek(0)
+    prompt.u8()  # player
+    chains = []
+    for _ in range(prompt.u32()):
+        chains.append(prompt.u32())
+        prompt.u8()
+        prompt.u8()
+        prompt.u32()
+        prompt.u64()
+        prompt.u8()
+    attackers = []
+    for _ in range(prompt.u32()):
+        attackers.append(prompt.u32())
+        prompt.u8()
+        prompt.u8()
+        prompt.u8()
+        prompt.u8()
+    return {"chainable": chains, "attackable": attackers}
+
+
+def answer_battle_attack_or_end(prompt: Message) -> bytes:
+    """SELECT_BATTLECMD: attack with the first attacker offered, or go to the
+    End Phase when none is. Lets a scenario keep attacking until the core stops
+    offering attacks (an attack-all effect, or nothing left to hit)."""
+    if battle_lists(prompt)["attackable"]:
+        return answer_battle(1, 0)
+    return answer_battle(3)
+
+
 def answer_position(position: int) -> bytes:
     return struct.pack("<i", position)
 
@@ -543,6 +593,58 @@ def answer_idle_activate_or_end(prompt: Message) -> bytes:
     if activatable:
         return answer_idle(5, 0)
     return answer_idle(7)  # to End Phase
+
+
+def card_candidates(prompt: Message) -> list[int]:
+    """Card codes offered by a MSG_SELECT_CARD prompt (playerop.cpp SelectCard):
+    u8 player, u8 cancelable, u32 min, u32 max, u32 count, then per card the
+    row's code (`data.code`, NOT its alias) and a loc_info (u8 controler,
+    u8 location, u32 sequence, u32 position)."""
+    prompt._buf.seek(0)
+    prompt.u8()  # player
+    prompt.u8()  # cancelable
+    prompt.u32()  # min
+    prompt.u32()  # max
+    count = prompt.u32()
+    codes = []
+    for _ in range(count):
+        codes.append(prompt.u32())
+        prompt.loc_info()
+    return codes
+
+
+def idle_lists(prompt: Message) -> dict[str, list[tuple[int, int]]]:
+    """Parse a MSG_SELECT_IDLECMD prompt into its five card lists plus the
+    activatable list, each as (code, sequence-or-description) pairs. Layout as
+    in answer_idle_activate_or_end: u8 player, then summonable / spsummonable /
+    repositionable / msetable / ssetable (entries code u32, con u8, loc u8,
+    seq u32 - repositionable has a u8 sequence), then the activatable list
+    (code u32, con u8, loc u8, seq u32, description u64, client mode u8)."""
+    prompt._buf.seek(0)
+    prompt.u8()  # player
+    out: dict[str, list[tuple[int, int]]] = {}
+    for name in ("summonable", "spsummonable", "repositionable", "msetable", "ssetable"):
+        count = prompt.u32()
+        rows = []
+        for _ in range(count):
+            code = prompt.u32()
+            prompt.u8()  # controler
+            prompt.u8()  # location
+            seq = prompt.u8() if name == "repositionable" else prompt.u32()
+            rows.append((code, seq))
+        out[name] = rows
+    count = prompt.u32()
+    rows = []
+    for _ in range(count):
+        code = prompt.u32()
+        prompt.u8()
+        prompt.u8()
+        seq = prompt.u32()
+        prompt.u64()  # effect description
+        prompt.u8()  # client mode
+        rows.append((code, seq))
+    out["activatable"] = rows
+    return out
 
 
 def answer_place_first_free(prompt: Message) -> bytes:

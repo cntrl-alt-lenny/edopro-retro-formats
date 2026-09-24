@@ -4,12 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from .custom_cards import build_custom_cards
 from .lflist import build_lflist
 from .repo import Repository
 
 
 def build_all(repo: Repository, dist: Path | None = None) -> dict[str, Path]:
-    """Regenerate every dist/ artifact. Returns {format id: written path}.
+    """Regenerate every dist/ artifact. Returns {format id: written path} for
+    the lflists; the custom-card database and scripts are written as well.
 
     Outputs are deterministic; running twice without data changes must be a
     no-op at the byte level (tests/test_build.py enforces this).
@@ -29,4 +31,7 @@ def build_all(repo: Repository, dist: Path | None = None) -> dict[str, Path]:
         with out.open("w", encoding="utf-8", newline="\n") as fh:
             fh.write(built.text)
         written[fmt.id] = out
+    # Generated card database and scripts (roadmap item 7). Not part of the
+    # returned {format id: path} map, which is per format.
+    build_custom_cards(repo, dist)
     return written

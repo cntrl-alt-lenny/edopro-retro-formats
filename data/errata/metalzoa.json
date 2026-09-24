@@ -9,7 +9,9 @@
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 029: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000001.json; passcode 600000001). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
       "gap": {
         "upstream_checked": true,
         "behavioural_impact": "In a period format EDOPro lets a Metalzoa that reached the field once be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, which the era's \"can only be Special Summoned from your Deck\" text forbids outright."
@@ -46,11 +48,8 @@
     ]
   },
   "coverage": {
-    "kind": "known-gap",
-    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-    "gap_sources": [
-      "ignis-babelcdb",
-      "yugipedia-card-errata"
-    ]
+    "kind": "custom-script",
+    "historical_passcode": 600000001,
+    "script": "data/custom-cards/c600000001.lua"
   }
 }
