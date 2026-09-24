@@ -31,11 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--can only be Special Summoned by its own procedure
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e2:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e2:SetValue(aux.FALSE)
-	c:RegisterEffect(e2)
+	c:EnableReviveLimit()
 	--Special Summon from the hand by banishing "Blue-Eyes White Dragon" from the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
