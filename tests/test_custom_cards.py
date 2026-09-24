@@ -56,12 +56,11 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         cls.cards = cards_sorted(cls.repo)
         cls.dist = REPO_ROOT / "dist"
 
-    def test_this_round_implements_exactly_three_cards(self):
+    def test_this_round_implements_exactly_two_cards(self):
         self.assertEqual(
             [
                 (600000001, "erratum-metalzoa"),
                 (600000002, "erratum-super-vehicroid-stealth-union"),
-                (600000003, "erratum-night-assailant"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
@@ -142,9 +141,9 @@ class LiveGeneratedOutputTest(unittest.TestCase):
             with self.subTest(format=fmt_id):
                 built = build_lflist(self.repo.formats[fmt_id], self.repo)
                 self.assertEqual(set(), generated & set(built.entries))
-        # The three cards' modern codes are exactly what those two lists used
-        # before this round, except Night Assailant in GOAT, which stays on
-        # Project Ignis's own variant by an explicit reference identity.
+        # The two cards' modern codes are exactly what those two lists used
+        # before this round. Night Assailant is not generated (it is held
+        # back, roadmap item 7), and GOAT keeps its Project Ignis variant.
         goat = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
         self.assertEqual(GOAT_HASH, goat.hash)
         self.assertIn(16226796, goat.entries)
@@ -194,7 +193,7 @@ class StaleOutputGuardTest(unittest.TestCase):
         db = self.dist / "databases" / CDB_NAME
         con = sqlite3.connect(str(db))
         try:
-            con.execute("UPDATE datas SET atk = atk + 1 WHERE id = 600000003")
+            con.execute("UPDATE datas SET atk = atk + 1 WHERE id = 600000002")
             con.commit()
         finally:
             con.close()

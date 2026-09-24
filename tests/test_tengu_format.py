@@ -44,7 +44,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TENGU_HASH = 0x0C878718
 GOAT_HASH = 0x28E9FC02
 EDISON_POOL_COUNT = 3674
-# The Edison list's hash before round 029 replaced three modern codes with
+# The Edison list's hash before round 029/030 replaced two modern codes with
 # generated historical ones (see test_30_edison_output_...).
 EDISON_PRE_ROUND_029_HASH = 0x8432B710
 TENGU_POOL_COUNT = 4563
@@ -403,17 +403,18 @@ class TenguFormatTest(unittest.TestCase):
         # cardinality is unaffected (substitution, not add/remove).
         # Re-pinned 2026-09-16 (round 14, roadmap 4b): 27847700 added, see
         # the module-level TENGU_HASH/EDISON_POOL_COUNT comment above.
-        # Re-pinned round 029 (roadmap item 7): the Edison list now names three
-        # generated historical cards (600000001-3) in place of the modern
-        # Metalzoa, Super Vehicroid - Stealth Union and Night Assailant. The
-        # hash before that round is not discarded: swapping the three generated
+        # Re-pinned round 030 (roadmap item 7, after round 029): the Edison list
+        # now names two generated historical cards (600000001-2) in place of the
+        # modern Metalzoa and Super Vehicroid - Stealth Union. Night Assailant
+        # stays on its modern code. The hash before that is not discarded:
+        # swapping the two generated
         # codes back to their modern cards must still reproduce it exactly, so
         # nothing else in the list moved.
         edison_fmt = self.repo.formats["2010-03-edison"]
         built_edison = build_lflist(edison_fmt, self.repo)
-        self.assertEqual(0xB85ECBD7, built_edison.hash)
+        self.assertEqual(0xD5E90AFA, built_edison.hash)
         swapped_back = dict(built_edison.entries)
-        self.assertEqual(3, len(self.repo.custom_cards))
+        self.assertEqual(2, len(self.repo.custom_cards))
         for custom in self.repo.custom_cards.values():
             swapped_back[custom.alias] = swapped_back.pop(custom.passcode)
         self.assertEqual(EDISON_PRE_ROUND_029_HASH, lflist_hash(swapped_back))

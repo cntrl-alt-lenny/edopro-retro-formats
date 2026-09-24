@@ -160,12 +160,12 @@ repository is MIT, so a script derived from one is a licensing decision for the 
 runs the same scenario against the modern card and the generated one and asserts the
 difference; it never means the script is exact (`fidelity` says that).
 
-**Two hazards found building the first three.** A record shared by several formats
+**Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
 at Tengu whenever that record's state does. And a v2 record's *structural* parity walk
 takes the first usable substitution, so giving a card Ignis's GOAT reference substitutes
 a usable baseline coverage silently moves the GOAT list unless the record also carries
-the exact `reference_identities` entry for it (Night Assailant does).
+the exact `reference_identities` entry for it.
 
 ## The pipeline
 

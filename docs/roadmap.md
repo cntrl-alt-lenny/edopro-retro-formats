@@ -563,23 +563,29 @@ reflects that.
    `dist/scripts/c<passcode>.lua`, from `data/custom-cards/` plus the erratum record whose
    `custom-script` coverage names the code (`retroformats/custom_cards.py`; rules in
    `retroformats/validate.py`, `custom-card.*`; see `docs/errata.md`, "Generated historical
-   cards"). Three Edison cards are done end to end - Metalzoa, Super Vehicroid - Stealth
-   Union and Night Assailant - each with an engine test that fails against the modern
+   cards"). Two Edison cards are done end to end - Metalzoa and Super Vehicroid - Stealth
+   Union - each with an engine test that fails against the modern
    behaviour (`tests/engine/test_edison_historical_scripts.py`). The scripts are original
    (Project Ignis's CardScripts are AGPL-3.0-or-later, this repository MIT) and each is an
-   approximation whose gaps its record lists. **Remaining:** the other 43 Edison
-   `format.erratum-known-divergence` cards. Two things found in round 029 that any of
+   approximation whose gaps its record lists. **Night Assailant is held back** (round 030,
+   owner decision 2026-09-23): its script has to be licence-clean, and its period
+   behaviour needs better evidence for whether the effect is optional and whether it
+   targets; round 029's script matched Project Ignis's AGPL-3.0-or-later script too
+   closely to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`).
+   It stays a known gap, with the modern card in Edison's list. **Remaining:** the other 43 Edison
+   `format.erratum-known-divergence` cards (46 in all, less these two and Night Assailant). Two things found in round 029 that any of
    them needs first. (1) 38 of the 46 record the same state at Tengu's snapshot, so a
    `custom-script` for one also changes Tengu's list unless a decision says that is
    wanted. Eight differ (their state at Tengu is modern, or ambiguous and resolved to
-   modern by policy); three of those are done here. The other five - Freed the
+   modern by policy); two of those are done here and Night Assailant is held back. The other five - Freed the
    Matchless General, Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon,
    Toon Table of Contents - apply an intermediate state at Edison that no script
    implements (the modern activation requirement plus the period reveal on a failed
    search); their difference from the modern card only shows when a response empties
    the Deck mid-chain, so the engine test is a heavier scenario. (2) A card Ignis's
    GOAT reference already substitutes needs an exact `reference_identities` entry
-   first (as Night Assailant now has), or the GOAT list moves.
+   first, or the GOAT list moves: when a record's `known-gap` becomes a `custom-script`,
+   GOAT's structural parity walk can pick up the new state.
 8. **Partly done — ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.
    `dist/README.md` contains the snippet and versioned-release convention, but the

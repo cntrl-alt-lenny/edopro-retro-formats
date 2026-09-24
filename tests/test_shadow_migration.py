@@ -304,13 +304,13 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         fmt = self.repo.formats["2010-03-edison"]
         built = build_lflist(fmt, self.repo)
 
-        # Round 029 (roadmap item 7) deliberately replaced exactly three
+        # Round 029/030 (roadmap item 7) deliberately replaced exactly two
         # modern codes in the Edison list with generated historical ones
         # (data/custom-cards/). Nothing else may differ from the pre-migration
-        # snapshot: the expected output is the snapshot's own with those three
+        # snapshot: the expected output is the snapshot's own with those two
         # entries renamed, same counts, and every other line identical.
         swaps = {c.alias: c.passcode for c in self.repo.custom_cards.values()}
-        self.assertEqual(3, len(swaps))
+        self.assertEqual(2, len(swaps))
         expected_entries = dict(pre_built.entries)
         for modern, generated in swaps.items():
             expected_entries[generated] = expected_entries.pop(modern)

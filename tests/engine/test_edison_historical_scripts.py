@@ -1,6 +1,6 @@
 """Engine tests for the historical cards this project generates itself
-(roadmap item 7, round 029): Metalzoa, Super Vehicroid - Stealth Union and
-Night Assailant as they were in the Edison format (2010-04-24).
+(roadmap item 7, rounds 029/030): Metalzoa and Super Vehicroid - Stealth Union
+as they were in the Edison format (2010-04-24).
 
 Every test runs one scenario against the real ocgcore, once with the modern
 card (its cards.cdb code, the script Project Ignis ships) and once with this
@@ -37,9 +37,7 @@ from .test_historical_behaviour import (
 DUEL_MODE_EDISON = DUEL_MODE_MR1 | DUEL_0_ATK_DESTROYED
 
 MONSTER_REBORN = 83764718
-CARD_DESTRUCTION = 72892473
 GIANT_RAT = 97017120  # 1400 ATK / 1450 DEF, trigger when destroyed by battle
-MAN_EATER_BUG = 54652250  # Flip Effect Monster
 
 METALZOA_MODERN = 50705071
 METALZOA_HISTORICAL = 600000001
@@ -49,15 +47,10 @@ METALMORPH = 68540058
 STEALTH_UNION_MODERN = 3897065
 STEALTH_UNION_HISTORICAL = 600000002
 
-NIGHT_ASSAILANT_MODERN = 16226786
-NIGHT_ASSAILANT_PRE_ERRATA = 16226796  # Project Ignis, implements the DT03-EN056 text
-NIGHT_ASSAILANT_HISTORICAL = 600000003
-
-# The three (modern, historical) pairs, for the identity test.
+# The two (modern, historical) pairs, for the identity test.
 HISTORICAL_PAIRS = (
     ("Metalzoa", METALZOA_MODERN, METALZOA_HISTORICAL),
     ("Super Vehicroid - Stealth Union", STEALTH_UNION_MODERN, STEALTH_UNION_HISTORICAL),
-    ("Night Assailant", NIGHT_ASSAILANT_MODERN, NIGHT_ASSAILANT_HISTORICAL),
 )
 
 
@@ -362,102 +355,6 @@ class StealthUnionEdisonTest(unittest.TestCase):
             STEALTH_UNION_HISTORICAL, equip_first=False, defender_position="POS_FACEUP_ATTACK", opponent_monsters=2
         )
         self.assertEqual(1, len(duel.seen(H.MSG_ATTACK)))
-
-
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class NightAssailantEdisonTest(unittest.TestCase):
-    """Era text (AST-080): "When this card is sent directly from your hand to
-    the Graveyard, return 1 Flip Effect Monster from your Graveyard to your
-    hand." No exception is named, so the Night Assailant just discarded is
-    itself an eligible choice. The later texts (DT03-EN056 onwards, which both
-    the modern card and Project Ignis's pre-errata card implement) exclude it."""
-
-    def _discard(self, code: int, other_flip_in_graveyard: bool = False):
-        setup = (
-            f"Debug.AddCard({CARD_DESTRUCTION},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({code},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
-        )
-        if other_flip_in_graveyard:
-            setup += f"Debug.AddCard({MAN_EATER_BUG},0,0,LOCATION_GRAVE,0,POS_FACEUP)\n"
-        duel = scenario(DUEL_MODE_EDISON, setup + deck_fillers())
-        self.addCleanup(duel.close)
-        offered: list[list[int]] = []
-
-        def take_first(prompt):
-            offered.append(H.card_candidates(prompt))
-            return H.answer_cards(0)
-
-        duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # Card Destruction discards the hand
-        duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
-        duel.default_response(H.MSG_SELECT_CARD, take_first)
-        duel.default_response(H.MSG_SELECT_EFFECTYN, H.answer_int(1))
-        standing_answers(duel)
-        duel.run(turns=1)
-        returned = [
-            m["code"]
-            for m in duel.moves()
-            if m["from"]["location"] == H.LOCATION_GRAVE and m["to"]["location"] == H.LOCATION_HAND
-        ]
-        return returned, offered
-
-    def test_modern_night_assailant_cannot_return_itself(self):
-        returned, _ = self._discard(NIGHT_ASSAILANT_MODERN)
-        self.assertEqual([], returned)
-
-    def test_project_ignis_pre_errata_night_assailant_cannot_return_itself(self):
-        # The upstream variant implements the DT03-EN056 text, which is why it
-        # cannot stand in for the period card at Edison (the record's own gap).
-        returned, _ = self._discard(NIGHT_ASSAILANT_PRE_ERRATA)
-        self.assertEqual([], returned)
-
-    def test_historical_night_assailant_returns_itself_from_the_graveyard(self):
-        returned, offered = self._discard(NIGHT_ASSAILANT_HISTORICAL)
-        self.assertEqual([NIGHT_ASSAILANT_HISTORICAL], returned)
-        self.assertEqual([[NIGHT_ASSAILANT_HISTORICAL]], offered)
-
-    def test_with_another_flip_monster_present_the_era_card_may_choose_either(self):
-        returned, offered = self._discard(NIGHT_ASSAILANT_HISTORICAL, other_flip_in_graveyard=True)
-        self.assertEqual(1, len(offered))
-        self.assertCountEqual([NIGHT_ASSAILANT_HISTORICAL, MAN_EATER_BUG], offered[0])
-        modern_returned, modern_offered = self._discard(NIGHT_ASSAILANT_MODERN, other_flip_in_graveyard=True)
-        self.assertEqual([MAN_EATER_BUG], modern_returned, "the modern card can only ever take the other monster")
-        for candidates in modern_offered:
-            self.assertNotIn(NIGHT_ASSAILANT_MODERN, candidates)
-
-    def test_flip_effect_destroys_a_monster_the_opponent_controls_like_the_modern_card(self):
-        results = {}
-        for label, code in (("modern", NIGHT_ASSAILANT_MODERN), ("historical", NIGHT_ASSAILANT_HISTORICAL)):
-            setup = (
-                f"Debug.AddCard({code},0,0,LOCATION_MZONE,0,POS_FACEDOWN_DEFENSE)\n"
-                f"Debug.AddCard({MILLENNIUM_SHIELD},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n" + deck_fillers()
-            )
-            duel = scenario(DUEL_MODE_EDISON, setup)
-            self.addCleanup(duel.close)
-            duel.default_response(H.MSG_SELECT_IDLECMD, _flip_then_end())
-            duel.default_response(H.MSG_SELECT_CARD, H.answer_cards(0))
-            standing_answers(duel)
-            duel.run(turns=1)
-            results[label] = [
-                (m["code"], m["from"]["controler"], m["to"]["location"])
-                for m in duel.moves()
-                if m["to"]["location"] == H.LOCATION_GRAVE
-            ]
-        self.assertEqual([(MILLENNIUM_SHIELD, 1, H.LOCATION_GRAVE)], results["modern"])
-        self.assertEqual(results["modern"], results["historical"])
-
-
-def _flip_then_end():
-    """Flip the first repositionable card face-up, then end the turn."""
-    state = {"flipped": False}
-
-    def answer(prompt):
-        lists = H.idle_lists(prompt)
-        if not state["flipped"] and lists["repositionable"]:
-            state["flipped"] = True
-            return H.answer_idle(2, 0)
-        return H.answer_idle(7)
-
-    return answer
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -8,8 +8,8 @@ Everything in this directory is **generated** from the canonical data in `data/`
 
 **This repository is not self-contained.** All three generated whitelists reference
 passcodes that exist only in **upstream** Project Ignis repositories, not in `dist/`
-or anywhere else in this repo. The one exception is **three cards in the Edison list**
-(`600000001`–`600000003`, below), which this repository itself generates into
+or anywhere else in this repo. The one exception is **two cards in the Edison list**
+(`600000001` and `600000002`, below), which this repository itself generates into
 `dist/databases/` and `dist/scripts/`. The counts here are upstream identities only
 (codes ≥ `504700000` and < `600000000`):
 
@@ -86,7 +86,6 @@ whitelist). Generated so far, all used by `Retro 2010-03-edison` in place of the
 |---|---|---|
 | `600000001` | Metalzoa (`50705071`) | can be Special Summoned only by its own procedure, so it can never be revived |
 | `600000002` | Super Vehicroid - Stealth Union (`3897065`) | its equip effect selects only a monster you control |
-| `600000003` | Night Assailant (`16226786`) | when discarded, the Night Assailant just discarded is itself a legal choice to return |
 
 **In a duel** a generated card *is* its modern card for every name and code check (the
 `alias`), while stats, text and script come from its own row. **In deck building**
@@ -129,12 +128,12 @@ EDOPro install:
 ```
 
 `data_path` and `script_path` point at the generated card database and scripts above,
-so the three Edison cards resolve without any manual copying. EDOPro loads every
+so the two generated Edison cards resolve without any manual copying. EDOPro loads every
 `*.cdb` directly in `data_path` and adds `script_path` and its subfolders to the script
 search path (`docs/research/edopro-data-repos-ui.md` section 2a). The upstream card data
 this repository does not ship (previous section) still has to come from Project Ignis.
-Without these two keys a client falls back to its own defaults and the three Edison
-cards are unknown to it (`UNKNOWNCARD` at deck-load time), exactly like a missing upstream
+Without these two keys a client falls back to its own defaults and the two generated
+Edison cards are unknown to it (`UNKNOWNCARD` at deck-load time), exactly like a missing upstream
 row.
 
 ## Host settings are NOT in the lflist
