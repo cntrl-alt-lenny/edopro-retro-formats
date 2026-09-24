@@ -40,12 +40,12 @@ network access.
 
 ```bash
 python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
-python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 40
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 56
 ```
 
 `prepare` fetches and verifies the pinned inputs and compiles the core (it needs
 `git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
-`tests/engine` and **fails on any skip**, failure or error, or if fewer than 40
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 56
 tests execute. The layout it produces is `DEST/repos/babelcdb`,
 `DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
 
@@ -176,20 +176,30 @@ behaviour — is what the test locks down.
 
 ### Generated historical cards
 
-`tests/engine/test_edison_historical_scripts.py` covers the two cards this project
-writes itself (`docs/errata.md`, "Generated historical cards"). The harness merges
+`tests/engine/test_edison_historical_scripts.py` (Metalzoa, Stealth Union: Edison only) and
+`tests/engine/test_shared_historical_scripts.py` (six cards whose historical state also applies
+at Tengu) cover the eight cards this project writes itself (`docs/errata.md`, "Generated
+historical cards"). The harness merges
 `dist/databases/*.cdb` into its card data and searches `dist/scripts/` after the
 upstream folders, as a client with `data_path`/`script_path` pointed at `dist/` would
 (`RETROFORMATS_DIST` overrides the folder). Each scenario runs against the modern card
-and the generated one:
+and the generated one; the shared cards' scenarios run under Edison's and under Tengu's duel
+options (`data/rule-profiles/`; Tengu's flag set is the compiled Master Rule 1 set, Edison's
+is that plus the 0-ATK rule):
 
 | Card | Behaviour asserted | Historical (generated) | Modern |
 |---|---|---|---|
 | Metalzoa | revival by Monster Reborn | not a legal target | a legal target |
 | Super Vehicroid - Stealth Union | equip effect | only a monster you control; unusable with none | any face-up monster, either side |
+| Goddess of Whim | using the coin-toss effect again in the same turn | offered again | not offered |
+| Strike Ninja | two copies, each using its effect | both may use it | only one use in the turn |
+| Green Baboon | a face-down Beast destroyed; a Beast destroyed in battle | offered, Special Summons itself | not offered |
+| Rise of the Snake Deity | Vennominon destroyed in battle | offered, Special Summons Vennominaga | not offered |
+| Malefic Blue-Eyes White Dragon | revival by Monster Reborn | not a legal target | a legal target |
+| Soul Rope | a monster destroyed in battle | offered, Special Summons a Level 4 monster | not offered |
 
-Beside each difference are control scenarios (summon procedure, equip, piercing damage,
-attack-all) that must behave the same, so a script cannot pass by doing
+Beside each difference are control scenarios (summon procedures, equip, piercing damage,
+attack-all, destruction by a card effect, the coin toss, banish and return) that must behave the same, so a script cannot pass by doing
 nothing. They prove the scripts against those scenarios only: each record's
 `not_reproduced` lists what is neither tested nor established.
 

@@ -47,10 +47,17 @@ METALMORPH = 68540058
 STEALTH_UNION_MODERN = 3897065
 STEALTH_UNION_HISTORICAL = 600000002
 
-# The two (modern, historical) pairs, for the identity test.
+# The (modern, historical) pairs, for the identity test.
 HISTORICAL_PAIRS = (
     ("Metalzoa", METALZOA_MODERN, METALZOA_HISTORICAL),
     ("Super Vehicroid - Stealth Union", STEALTH_UNION_MODERN, STEALTH_UNION_HISTORICAL),
+    # Round 031: the cards shared with Tengu (tests/engine/test_shared_historical_scripts.py).
+    ("Goddess of Whim", 67959180, 600000004),
+    ("Strike Ninja", 41006930, 600000005),
+    ("Green Baboon, Defender of the Forest", 46668237, 600000006),
+    ("Rise of the Snake Deity", 16067089, 600000007),
+    ("Malefic Blue-Eyes White Dragon", 9433350, 600000008),
+    ("Soul Rope", 37383714, 600000009),
 )
 
 
