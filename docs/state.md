@@ -81,7 +81,7 @@ The owner keeps **one standing Builder chat and one separate Verifier chat**,
 reused across rounds; fresh only after a rejection or when very long, with
 the reason stated. A Verifier prompt never goes into the Builder's chat.
 Every prompt tells the agent to re-derive state from the repository, not the
-conversation.
+conversation. This overrides the framework's fresh-session default.
 
 ## Operating policy — the framework is done being built
 
@@ -93,13 +93,11 @@ Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
   canonical data; light for bookkeeping.
 - **Brain may fix trivial housekeeping directly** — canonical data or an
   evidence-level claim goes to the Builder regardless.
-- **No parallel executors** without an *observed* bottleneck (topology:
-  `AGENTS.md`).
-- **The owner stays courier and model-chooser**, unless that becomes
-  genuine friction.
+- **No parallel executors** without an *observed* bottleneck.
+- **The owner stays courier and model-chooser** unless that becomes friction.
 
 **Evidence-gathering period: the next 5-10 genuine rounds**, then fix the
-specific bottleneck actually observed, not speculatively.
+bottleneck actually observed.
 
 ## Owner decision — card scripts and licence (2026-09-23)
 
