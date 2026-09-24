@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 030-edison-two-historical-scripts
+role: builder
+branch: builder/030-edison-two-historical-scripts
+head: f74602e280d9924fab78c7db0e635f1c4ac9a594
+os: macOS 27.0
+python: 3.9.6
+written: 2026-09-24T06:48:20Z
+-->
 ## Verified
 
 All project commands ran with `/opt/homebrew/bin/python3.13` (`python3` here is 3.9), on macOS arm64, at commit `de08abf` (pushed; report commit sits on top and touches only docs).
