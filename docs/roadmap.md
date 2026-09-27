@@ -569,13 +569,17 @@ reflects that.
    record puts the same historical state at Edison's and at Tengu's snapshot, which both
    lists use - Goddess of Whim, Strike Ninja, Green Baboon, Rise of the Snake Deity, Malefic
    Blue-Eyes White Dragon and Soul Rope (`tests/engine/test_shared_historical_scripts.py`).
-   The scripts are original
-   (Project Ignis's CardScripts are AGPL-3.0-or-later, this repository MIT) and each is an
-   approximation whose gaps its record lists. **Night Assailant is held back** (round 030,
-   owner decision 2026-09-23): its script has to be licence-clean, and its period
-   behaviour needs better evidence for whether the effect is optional and whether it
-   targets; round 029's script matched Project Ignis's AGPL-3.0-or-later script too
-   closely to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`).
+   Each script states its origin and licence (round 032, owner decision 2026-09-27):
+   Metalzoa, Stealth Union and Malefic Blue-Eyes are original and MIT, and an engine test
+   keeps an original script measurably different from Project Ignis's
+   (`tests/engine/test_script_origin.py`); Goddess of Whim, Strike Ninja, Green Baboon,
+   Rise of the Snake Deity and Soul Rope are derived from Ignis's scripts, credited and
+   AGPL-3.0-or-later (`LICENSES/`, `dist/scripts/LICENSES.md`). Each is an approximation
+   whose gaps its record lists. **Night Assailant is held back** (round 030, owner decision
+   2026-09-23): its period behaviour needs better evidence for whether the effect is
+   optional and whether it targets. Round 029's script matched Project Ignis's too closely
+   to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`); since
+   round 032 a derived, credited script would be allowed, so the evidence is what holds it back.
    It stays a known gap, with the modern card in Edison's list. **Remaining:** 38 Edison
    `format.erratum-known-divergence` cards (`validate` at round 031's head): Night Assailant,
    five cards that apply an intermediate state at Edison only (Freed the Matchless General,

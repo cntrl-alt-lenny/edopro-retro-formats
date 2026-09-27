@@ -94,4 +94,4 @@ python3 scripts/generate_format_atlas.py --check
 
 ## License
 
-Code and original documentation are available under the [MIT License](LICENSE). Yu-Gi-Oh! card names, text, and game data remain the property of their respective owners.
+Code and original documentation are available under the [MIT License](LICENSE), with one exception: five generated card scripts are adapted from [Project Ignis's CardScripts](https://github.com/ProjectIgnis/CardScripts) and stay under its licence, the GNU Affero General Public License, version 3 or later ([`LICENSES/AGPL-3.0-or-later.txt`](LICENSES/AGPL-3.0-or-later.txt)). They are `data/custom-cards/c600000004.lua`, `c600000005.lua`, `c600000006.lua`, `c600000007.lua` and `c600000009.lua`, and their copies in `dist/scripts/`; each one's first line says so, and `dist/scripts/LICENSES.md` lists every script's licence and origin. Everything else is MIT. Yu-Gi-Oh! card names, text, and game data remain the property of their respective owners.

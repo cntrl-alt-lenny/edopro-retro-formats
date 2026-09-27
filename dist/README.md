@@ -78,6 +78,7 @@ generates, from `data/custom-cards/` and the erratum records that claim them:
 |---|---|
 | `dist/databases/retro-formats.cdb` | one `datas` + `texts` row per card, in the BabelCDB layout |
 | `dist/scripts/c<passcode>.lua` | that card's script (found by filename, as EDOPro finds any script) |
+| `dist/scripts/LICENSES.md`, `LICENSE-*.txt` | which licence each script carries, and the licence texts (below) |
 
 Each row uses a passcode in this project's reserved range (`600000000`–`699999999`),
 `alias` = the modern card and `ot = 8` (`SCOPE_ILLEGAL`, so it is legal only through a
@@ -105,9 +106,20 @@ copies are counted under the alias root, and a whitelist follows an alias only w
 +/-10, so the lflist names each generated code itself, with the count the banlist
 gives the modern card.
 
-**These are original scripts, written from the erratum records' period text and the
-engine's Lua API, not copies or adaptations of Project Ignis's CardScripts** (AGPL-3.0-or-later;
-this repository is MIT). Every one is an *approximation*: each record in
+**Licences: the scripts do not all share this repository's MIT licence.**
+
+| scripts | licence | origin |
+|---|---|---|
+| `c600000001.lua`, `c600000002.lua`, `c600000008.lua` | MIT | original: written for this repository, and measured as different from Project Ignis's script for the same card |
+| `c600000004.lua`, `c600000005.lua`, `c600000006.lua`, `c600000007.lua`, `c600000009.lua` | **AGPL-3.0-or-later** | derived: Project Ignis's CardScripts `official/` script for the modern card, with only the period difference applied; each header names the upstream file and revision, Project Ignis's copyright notice, and what was changed and when |
+
+Everything else in this repository, including the rest of `dist/`, is MIT. The
+generated `dist/scripts/LICENSES.md` lists each script's licence and origin, and
+`dist/scripts/` carries both licence texts (`LICENSE-MIT.txt`,
+`LICENSE-AGPL-3.0-or-later.txt`), so a copy of that folder alone keeps them. Every
+script's first line is its SPDX licence identifier.
+
+Every script is an *approximation*: each record in
 `data/custom-cards/` lists, in `not_reproduced`, what its script does not establish.
 Their engine tests are in `tests/engine/test_edison_historical_scripts.py` and
 `tests/engine/test_shared_historical_scripts.py`. Not tested in a real client (see the last section).
