@@ -24,7 +24,8 @@
   "script": "data/custom-cards/c600000002.lua",
   "authorship": {
     "kind": "original",
-    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 029 investigation; a derived script would need an owner licensing decision."
+    "licence": "MIT",
+    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 029 investigation. Round 032 measured it against Project Ignis's script for its alias at the ignis-cardscripts pin: line-sequence ratio 0.31, under the 0.40 limit tests/engine/test_script_origin.py enforces for an original script (retroformats/script_similarity.py)."
   },
   "fidelity": "approximate",
   "not_reproduced": [

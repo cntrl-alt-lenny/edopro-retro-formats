@@ -1,22 +1,23 @@
+--SPDX-License-Identifier: AGPL-3.0-or-later
 --Rise of the Snake Deity (historical implementation, Retro Formats)
---Original script for edopro-retro-formats (MIT). Written from the period card text
---and the engine's Lua API; it is not a copy or an adaptation of any Project Ignis
---CardScripts file, whose licence (AGPL-3.0-or-later) this repository does not carry.
+--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/383bfbd62cefc0a28e075acfb78b0bb8203b94c7/official/c16067089.lua
+--Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file.
+--Modified by edopro-retro-formats on 2026-09-27: activation allowed in the Damage Step (EFFECT_FLAG_DAMAGE_STEP), so destruction by battle also triggers it, as the period text has no "except by battle".
+--This modified file is licensed, like its upstream, under the GNU Affero General
+--Public License, version 3 or (at your option) any later version. The licence
+--text is LICENSE-AGPL-3.0-or-later.txt next to this file in dist/scripts/, and
+--LICENSES/AGPL-3.0-or-later.txt in the edopro-retro-formats repository.
 --
 --Period text: "Activate only when a face-up "Vennominon the King of Poisonous Snakes"
 --you control is destroyed. Special Summon 1 "Vennominaga the Deity of Poisonous Snakes"
 --from your hand or Deck."
 --
---Vennominaga has a Special Summon condition of its own in the engine (this card was not
---accepted by it), so the Special Summon ignores summoning conditions.
---Implemented: a Normal Trap activated when a face-up "Vennominon the King of Poisonous
---Snakes" you control is destroyed by any cause. Unlike the modern card ("except by
---battle") that includes battle, so it may be activated in the Damage Step.
 --See data/custom-cards/c600000007.json for what this script does not reproduce.
+--蛇神降臨
+--Rise of the Snake Deity
 local s,id=GetID()
-local CARD_VENNOMINON=72677437
-local CARD_VENNOMINAGA=8062132
 function s.initial_effect(c)
+	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -24,31 +25,32 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
+	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+s.listed_names={72677437,8062132}
 function s.cfilter(c,tp)
-	return c:IsPreviousControler(tp) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsPreviousLocation(LOCATION_MZONE) and c:IsCode(CARD_VENNOMINON)
+	return c:IsCode(72677437) and c:IsPreviousControler(tp)
+		and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEUP)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
-function s.spfilter(c,e,tp)
-	return c:IsCode(CARD_VENNOMINAGA) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+function s.filter(c,e,tp)
+	return c:IsCode(8062132) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp)
-	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_DECK|LOCATION_HAND)
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp)
-	if #g>0 then
-		Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,1,1,nil,e,tp)
+	local tc=g:GetFirst()
+	if tc then
+		Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
+		tc:CompleteProcedure()
 	end
 end

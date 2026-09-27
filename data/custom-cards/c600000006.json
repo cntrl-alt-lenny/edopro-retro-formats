@@ -23,14 +23,26 @@
   },
   "script": "data/custom-cards/c600000006.lua",
   "authorship": {
-    "kind": "original",
-    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. The erratum record's summary says which event and flags an upstream script uses; the same behaviour is written here with ordinary engine API. A derived script would need an owner licensing decision."
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c46668237.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-27",
+      "summary": "no face-up requirement, and activation allowed in the Damage Step (EFFECT_FLAG_DAMAGE_STEP), as the period text has neither restriction; the effect description is read from the modern card's strings."
+    },
+    "note": "Adapted from Project Ignis's script for the modern card, official/c46668237.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT. Round 031 labelled it original, written without opening any Project Ignis card script; round 031's review measured that version as too close to this upstream file to be independent, and the owner decided on 2026-09-27 that such scripts are credited, labelled derived and kept under the upstream's licence. Round 032 rebased it on the upstream file itself."
   },
   "fidelity": "approximate",
   "not_reproduced": [
     "Damage Step activation is the engine's own window for a card carrying EFFECT_FLAG_DAMAGE_STEP: the record's sources establish that the period text carries no Damage Step exclusion, not where in the Damage Step a period player could have activated it. Only the fact that it is offered after a Beast is destroyed by battle is tested.",
-    "The record's sources establish that the period text has no face-up requirement on the destroyed Beast. The race of a Beast destroyed face-down is read from the engine's record of the monster's race on the field; only a face-down Beast destroyed by a card effect is tested.",
-    "The period text does not say whether this card being destroyed itself counts as the trigger. The script does not count it, so this card must already be in the hand or Graveyard when another Beast is destroyed.",
+    "The record's sources establish that the period text has no face-up requirement on the destroyed Beast. As in the upstream script, the destroyed monster must be a Beast both in the Graveyard and by the engine's record of its race on the field; only a face-down Beast destroyed by a card effect is tested.",
+    "The period text does not say whether this card being destroyed itself counts as the trigger. As in the upstream script, it is not offered when this card is itself among the cards sent to the Graveyard in that event, even if another Beast was destroyed with it.",
+    "As in the upstream script, the trigger carries no EFFECT_FLAG_DELAY, so it follows the engine's rule for an optional \"when\" trigger and can miss its timing if the destruction is not the last thing to happen (round 031's script used the delayed form). Which the period card followed is not established by the record's sources, and it is not tested.",
     "\"You can pay 1000 Life Points to Special Summon\" is implemented as a cost paid on activation.",
     "The Special Summon is from the hand or Graveyard into any free Monster Zone in face-up Attack Position; the effect is one trigger for both locations.",
     "The card row's statline is copied from the modern row and not checked against the period printing."

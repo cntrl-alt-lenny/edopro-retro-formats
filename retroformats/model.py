@@ -1470,6 +1470,16 @@ CUSTOM_CARD_FIDELITIES = ("exact", "approximate")
 # upstream carries it, and a whitelist is what makes it playable.
 CUSTOM_CARD_OT = 8
 
+# Who wrote a generated script and under which licence it is distributed
+# (owner decision 2026-09-27, docs/state.md "card scripts and licence"). An
+# `original` script is this repository's own work and MIT like the rest of it;
+# a `derived` one is adapted from an upstream file and keeps that file's
+# licence. Only the sources named here may be derived from, each with the
+# licence its repository states (ProjectIgnis/CardScripts README.md and
+# COPYING: AGPL-3.0-or-later).
+CUSTOM_CARD_ORIGINAL_LICENCE = "MIT"
+CUSTOM_CARD_DERIVABLE_SOURCES = {"ignis-cardscripts": "AGPL-3.0-or-later"}
+
 
 @dataclass(frozen=True)
 class CustomCard:

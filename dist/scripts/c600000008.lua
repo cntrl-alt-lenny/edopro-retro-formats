@@ -1,3 +1,4 @@
+--SPDX-License-Identifier: MIT
 --Malefic Blue-Eyes White Dragon (historical implementation, Retro Formats)
 --Original script for edopro-retro-formats (MIT). Written from the period card text
 --and the engine's Lua API; it is not a copy or an adaptation of any Project Ignis

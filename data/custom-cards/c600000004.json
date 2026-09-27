@@ -23,13 +23,24 @@
   },
   "script": "data/custom-cards/c600000004.lua",
   "authorship": {
-    "kind": "original",
-    "note": "Written from the record's period text and the ocgcore Lua API, not derived from any Project Ignis CardScripts file, whose licence is AGPL-3.0-or-later (ProjectIgnis/CardScripts COPYING at the ignis-cardscripts pin). Round 031: no Project Ignis card script was opened while writing it; constant.lua and utility.lua (the engine's shared API) were read, and the modern card's behaviour was only observed by running it in the engine harness. A derived script would need an owner licensing decision."
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c67959180.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-27",
+      "summary": "removed the once-per-turn limit, which the 2012 erratum added; the effect description is read from the modern card's strings."
+    },
+    "note": "Adapted from Project Ignis's script for the modern card, official/c67959180.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT. Round 031 labelled it original, written without opening any Project Ignis card script; round 031's review measured that version as too close to this upstream file to be independent, and the owner decided on 2026-09-27 that such scripts are credited, labelled derived and kept under the upstream's licence. Round 032 rebased it on the upstream file itself."
   },
   "fidelity": "approximate",
   "not_reproduced": [
     "The record's sources establish that the period text carries no use limit (the 2012 erratum added \"Once per turn\"). They do not say how period rulings treated a second activation in the same turn while the first is still resolving or with other effects in play; the script has no limit at all, and a further activation is offered whenever the engine's ordinary rules offer an Ignition effect.",
-    "Halving rounds the result up. That is a convention of the game, not something the record's sources state, and the ATK values after a toss are not tested (the outcome of the coin is random); only that the effect can be activated again is.",
+    "Halving is the upstream script's c:GetAttack()/2; how the engine rounds half of an odd ATK is not something the record's sources state, and the ATK values after a toss are not tested (the outcome of the coin is random); only that the effect can be activated again is.",
     "The ATK change is a final-ATK setting applied at resolution to the ATK the card has at that moment; how it combines with other ATK-changing effects is not modelled or tested.",
     "The call is made by the controller before the toss, as the engine's Duel.CallCoin does; the record's sources do not describe how the period rules ordered the call and the toss.",
     "The card row's statline is copied from the modern row and not checked against the period printing."

@@ -1,18 +1,24 @@
+--SPDX-License-Identifier: AGPL-3.0-or-later
 --Goddess of Whim (historical implementation, Retro Formats)
---Original script for edopro-retro-formats (MIT). Written from the period card text
---and the engine's Lua API; it is not a copy or an adaptation of any Project Ignis
---CardScripts file, whose licence (AGPL-3.0-or-later) this repository does not carry.
+--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/383bfbd62cefc0a28e075acfb78b0bb8203b94c7/official/c67959180.lua
+--Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file.
+--Modified by edopro-retro-formats on 2026-09-27: removed the once-per-turn limit, which the 2012 erratum added; the effect description is read from the modern card's strings.
+--This modified file is licensed, like its upstream, under the GNU Affero General
+--Public License, version 3 or (at your option) any later version. The licence
+--text is LICENSE-AGPL-3.0-or-later.txt next to this file in dist/scripts/, and
+--LICENSES/AGPL-3.0-or-later.txt in the edopro-retro-formats repository.
 --
 --Period text: "Toss a coin and call Heads or Tails. Call it right and this card's ATK
 --will be doubled during this turn. Call it wrong and it will be halved during this turn."
 --
---Implemented: an Ignition effect of this card on the field with no limit on how often
---it may be used, unlike the modern card ("Once per turn"). Each resolution doubles or
---halves the ATK the card has at that moment, until the End Phase.
 --See data/custom-cards/c600000004.json for what this script does not reproduce.
+--きまぐれの女神
+--Goddess of Whim
 local s,id=GetID()
 function s.initial_effect(c)
+	--Toss a coin and either double or halve ATK
 	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(67959180,0))
 	e1:SetCategory(CATEGORY_COIN)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
@@ -20,25 +26,23 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
+s.toss_coin=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-	local atk=c:GetAttack()
-	local right=Duel.CallCoin(tp)
-	if not c:IsFaceup() then return end
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	if right then
-		e1:SetValue(atk*2)
-	else
-		e1:SetValue(math.ceil(atk/2))
+	if c:IsRelateToEffect(e) and c:IsFaceup() then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetReset(RESETS_STANDARD_DISABLE_PHASE_END)
+		if Duel.CallCoin(tp) then
+			e1:SetValue(c:GetAttack()*2)
+		else
+			e1:SetValue(c:GetAttack()/2)
+		end
+		c:RegisterEffect(e1)
 	end
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
-	c:RegisterEffect(e1)
 end
