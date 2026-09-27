@@ -40,12 +40,12 @@ network access.
 
 ```bash
 python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
-python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 56
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 59
 ```
 
 `prepare` fetches and verifies the pinned inputs and compiles the core (it needs
 `git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
-`tests/engine` and **fails on any skip**, failure or error, or if fewer than 56
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 59
 tests execute. The layout it produces is `DEST/repos/babelcdb`,
 `DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
 
@@ -202,6 +202,15 @@ Beside each difference are control scenarios (summon procedures, equip, piercing
 attack-all, destruction by a card effect, the coin toss, banish and return) that must behave the same, so a script cannot pass by doing
 nothing. They prove the scripts against those scenarios only: each record's
 `not_reproduced` lists what is neither tested nor established.
+
+### Script origin
+
+`tests/engine/test_script_origin.py` needs only the pinned CardScripts checkout, but
+lives here so the `engine` job runs it and a skip fails. It measures every generated
+script labelled `original` against Project Ignis's script for its alias and fails at a
+line-sequence ratio of 0.40 or more (`retroformats/script_similarity.py`, which records
+the calibration). It also checks that every `derived` script's upstream file exists at
+the pinned revision, and that `LICENSES/AGPL-3.0-or-later.txt` is Ignis's `COPYING`.
 
 ## Extending it
 
