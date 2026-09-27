@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 032-derived-scripts-licence
+role: builder
+branch: builder/032-derived-scripts-licence
+head: 62191ed24de3d3ec5e54b30b73ca3210133267d9
+os: macOS 27.0
+python: 3.9.6
+written: 2026-09-27T16:45:03Z
+-->
 ## Verified
 
 All project commands ran with `/opt/homebrew/bin/python3.13` (`python3` here is 3.9) on macOS arm64, on branch `builder/032-derived-scripts-licence`, code head `2e5abb5d4ec1481fbd33c77c80478aef7ae96129` (pushed; the report commit above it touches only this file). `python3 tools/fw.py start --role builder --round 032-derived-scripts-licence` → exit 0 at `fb726e3`. I read Project Ignis's scripts for the five cards (allowed this round), their `COPYING` and `README.md`, all from the pinned checkout `scripts/engine_env.py prepare` fetched (`git rev-parse HEAD` = `383bfbd62cefc0a28e075acfb78b0bb8203b94c7`).
