@@ -129,8 +129,8 @@ doesn't record:
 
 ## Owner preferences
 
-- **One project folder** — no siblings; per-role worktrees nest under
-  `.worktrees/` (`AGENTS.md` § Topology).
+- **One project folder** — no siblings; per-seat worktrees nest under
+  `.worktrees/<role>-<number>` (`AGENTS.md` § Topology).
 - **The owner's interface is conversation** — never a repo file or diff.
 - **Copy-paste blocks organised** — sections/paragraphs, no manual
   line-wrapping in a code block (lands as hard newlines elsewhere).
