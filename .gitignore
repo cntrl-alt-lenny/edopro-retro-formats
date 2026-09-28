@@ -23,7 +23,7 @@ cache/
 *.swp
 .DS_Store
 
-# Per-role nested git worktrees (see AGENTS.md § Checkouts), an optional
+# Per-seat nested git worktrees (see AGENTS.md § Topology), an optional
 # convenience -- real working directories git tracks via .git/worktrees/,
 # not project output. Kept out of `git status` noise in the primary checkout.
 .worktrees/
