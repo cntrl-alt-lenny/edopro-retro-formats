@@ -32,6 +32,8 @@ from retroformats.model import Coverage, ErratumV2
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 from retroformats.validate import Validator
+from retroformats.model import RESERVED_PASSCODE_RANGE
+from tests.helpers import ROUND_031_GENERATED, ROUND_031_PASSCODES, swap_generated_back
 from tests.test_tengu_format_gate import EXPECTED_EDISON_STYLE_FALLBACK
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,12 +43,18 @@ ROOT = Path(__file__).resolve().parents[1]
 # Re-pinned 2026-09-16 (round 14, roadmap 4b): a corrected DPYG-EN020 printing
 # adds 27847700 (Polymerization's far-alias artwork identity) to both the
 # Edison and Tengu pools - both hashes and both pool counts moved by one card.
-TENGU_HASH = 0x0C878718
+# Re-pinned round 031 (roadmap item 7): six generated historical cards (600000004-9)
+# replace their modern codes in this list. The hash before that is not discarded:
+# test_28 swaps the six back and asserts it.
+TENGU_HASH = 0x45A6E446
+TENGU_PRE_ROUND_031_HASH = 0x0C878718
 GOAT_HASH = 0x28E9FC02
 EDISON_POOL_COUNT = 3674
 # The Edison list's hash before round 029/030 replaced two modern codes with
 # generated historical ones (see test_30_edison_output_...).
 EDISON_PRE_ROUND_029_HASH = 0x8432B710
+EDISON_PRE_ROUND_031_HASH = 0xD5E90AFA
+EDISON_HASH = 0x9CC869A4
 TENGU_POOL_COUNT = 4563
 
 
@@ -237,7 +245,12 @@ class TenguFormatTest(unittest.TestCase):
 
         self.assertEqual(33, sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate))
         self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
-        self.assertEqual(38, sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate))
+        # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their sum.
+        known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
+        custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
+        self.assertEqual(32, known_gap)
+        self.assertEqual(6, custom_script)
+        self.assertEqual(38, known_gap + custom_script)
         self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
 
         self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
@@ -260,12 +273,20 @@ class TenguFormatTest(unittest.TestCase):
             override.erratum.id: (modern_passcode, override.implementation.historical_passcode)
             for modern_passcode, override in overrides.items()
         }
-        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, actual_mapping)
-        self.assertEqual(52, len(actual_mapping))
+        # Round 031: six more substitutions are generated cards, not upstream ones.
+        upstream = {k: v for k, v in actual_mapping.items() if v[1] not in RESERVED_PASSCODE_RANGE}
+        generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
+        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
+        self.assertEqual(52, len(upstream))
+        self.assertEqual(ROUND_031_GENERATED, generated)
+        self.assertEqual(58, len(actual_mapping))
 
     def test_21_no_unexpected_extra_substitutions(self):
         overrides = select_applicable_errata(self.fmt, self.repo)
-        self.assertEqual(set(EXPECTED_EDISON_STYLE_FALLBACK.keys()), {o.erratum.id for o in overrides.values()})
+        self.assertEqual(
+            set(EXPECTED_EDISON_STYLE_FALLBACK.keys()) | set(ROUND_031_GENERATED),
+            {o.erratum.id for o in overrides.values()},
+        )
 
     def test_22_nine_ambiguous_modern_impossible_are_known_wrong_fallbacks(self):
         snapshot = _dt.date(2011, 9, 17)
@@ -303,7 +324,9 @@ class TenguFormatTest(unittest.TestCase):
             sel = e.selection_at(snapshot)
             if sel.chronology == "determinate" and sel.candidates[0].coverage.kind == Coverage.KNOWN_GAP:
                 divergences.append(e.modern_card.name)
-        self.assertEqual(38, len(divergences))
+        # Round 031: six of the earlier 38 are implemented now (custom-script).
+        self.assertEqual(32, len(divergences))
+        self.assertEqual(38, len(divergences) + len(ROUND_031_GENERATED))
 
     def test_25_generated_tengu_lflist_contains_every_legal_card_correctly(self):
         built = build_lflist(self.fmt, self.repo)
@@ -390,6 +413,11 @@ class TenguFormatTest(unittest.TestCase):
         built = build_lflist(self.fmt, self.repo)
         self.assertEqual(TENGU_HASH, built.hash)
         self.assertEqual(TENGU_HASH, lflist_hash(built.entries))
+        # Swapping the six round-031 generated codes back to their modern cards must
+        # still reproduce the hash pinned before that round, so nothing else moved.
+        self.assertEqual(6, len(ROUND_031_PASSCODES & set(built.entries)))
+        swapped_back = swap_generated_back(built.entries, self.repo.custom_cards)
+        self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swapped_back))
 
     def test_29_goat_output_remains_byte_identical_and_hash_pinned(self):
         goat_fmt = self.repo.formats["2005-04-goat"]
@@ -412,12 +440,15 @@ class TenguFormatTest(unittest.TestCase):
         # nothing else in the list moved.
         edison_fmt = self.repo.formats["2010-03-edison"]
         built_edison = build_lflist(edison_fmt, self.repo)
-        self.assertEqual(0xD5E90AFA, built_edison.hash)
-        swapped_back = dict(built_edison.entries)
-        self.assertEqual(2, len(self.repo.custom_cards))
-        for custom in self.repo.custom_cards.values():
-            swapped_back[custom.alias] = swapped_back.pop(custom.passcode)
-        self.assertEqual(EDISON_PRE_ROUND_029_HASH, lflist_hash(swapped_back))
+        # Re-pinned round 031: six more generated cards (600000004-9) are in this list.
+        # Swapping those six back reproduces the round-030 hash, and swapping all
+        # eight back reproduces the pre-round-029 hash.
+        self.assertEqual(EDISON_HASH, built_edison.hash)
+        self.assertEqual(8, len(self.repo.custom_cards))
+        six_back = swap_generated_back(built_edison.entries, self.repo.custom_cards, ROUND_031_PASSCODES)
+        self.assertEqual(EDISON_PRE_ROUND_031_HASH, lflist_hash(six_back))
+        all_back = swap_generated_back(built_edison.entries, self.repo.custom_cards)
+        self.assertEqual(EDISON_PRE_ROUND_029_HASH, lflist_hash(all_back))
         self.assertEqual(EDISON_POOL_COUNT, len(self.repo.pools["pool-edison-2010"].cards))
 
 

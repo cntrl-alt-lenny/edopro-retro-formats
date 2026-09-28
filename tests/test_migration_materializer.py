@@ -18,6 +18,7 @@ either way: it uses synthetic fixtures, never the corpus.
 
 from __future__ import annotations
 
+import copy
 import json
 import unittest
 
@@ -29,50 +30,70 @@ from . import migration_materializer as mm
 from .pre_migration_fixture import load_pre_migration_repo
 
 
-# The two records round 029 edited after the migration (kept by round 030,
-# roadmap item 7), when Metalzoa and Super Vehicroid - Stealth Union went from a
-# known gap to a `custom-script` coverage. For each, the record on disk must be
-# the frozen materialized target with exactly two fields replaced, and the
-# replacements are pinned here, not merely "different": `coverage` and the one
-# `implementation_metadata` entry. Any other edit to either record, or a stray
-# edit inside those two fields, no longer equals the expected record.
-ROUND_029_CUSTOM_SCRIPT_PASSCODES = {
-    "erratum-metalzoa": 600000001,
-    "erratum-super-vehicroid-stealth-union": 600000002,
+# The records edited after the migration when a known gap became a `custom-script`
+# coverage (roadmap item 7): Metalzoa and Super Vehicroid - Stealth Union in round 029
+# (kept by 030), and six cards shared by Edison and Tengu in round 031. For each, the
+# record on disk must be the frozen materialized target with exactly two things
+# replaced, and the replacements are pinned here, not merely "different": the coverage
+# of the state with no events (a top-level `coverage`, or `states[].coverage` on a full
+# v2 record) and the one `implementation_metadata` entry. Any other edit to one of these
+# records, or a stray edit inside those two, no longer equals the expected record. Every
+# other record is compared with its target exactly.
+# {erratum id: (generated passcode, round that generated it)}
+CUSTOM_SCRIPT_RECORDS = {
+    "erratum-metalzoa": (600000001, 29),
+    "erratum-super-vehicroid-stealth-union": (600000002, 29),
+    "erratum-goddess-of-whim": (600000004, 31),
+    "erratum-strike-ninja": (600000005, 31),
+    "erratum-green-baboon-defender-of-the-forest": (600000006, 31),
+    "erratum-rise-of-the-snake-deity": (600000007, 31),
+    "erratum-malefic-blue-eyes-white-dragon": (600000008, 31),
+    "erratum-soul-rope": (600000009, 31),
 }
 
 
-def expected_after_round_029(record_id, target):
-    """The frozen `target`, with round 029's coverage and metadata edit applied."""
-    passcode = ROUND_029_CUSTOM_SCRIPT_PASSCODES[record_id]
-    old_coverage = target["coverage"]
-    assert old_coverage["kind"] == "known-gap", old_coverage
-    assert set(old_coverage) == {"kind", "gap_reason", "gap_sources"}, old_coverage
-    assert len(target["implementation_metadata"]) == 1, target["implementation_metadata"]
-    old_entry = target["implementation_metadata"][0]
-    assert old_entry["status"] == "missing" and list(old_entry) == ["events", "status", "gap"], old_entry
-    reason = (
-        f"Round 029: implemented by a project-authored script under the custom-script strategy "
-        f"(data/custom-cards/c{passcode}.json; passcode {passcode}). Previously recorded as a known gap "
-        f'with gap_reason "{old_coverage["gap_reason"]}" '
-        f"(gap_sources {old_coverage['gap_sources'][0]}, {old_coverage['gap_sources'][1]}). "
-        f"Status is partial, not complete: the custom card's not_reproduced list names what the "
-        f"script does not establish."
-    )
-    new_entry = {
-        "events": old_entry["events"],
-        "status": "partial",
-        "tested": True,
-        "reason": reason,
-        "gap": old_entry["gap"],
-    }
-    expected = dict(target)
-    expected["implementation_metadata"] = [new_entry]
-    expected["coverage"] = {
+def expected_after_custom_script(record_id, target):
+    """The frozen `target`, with the round's coverage and metadata edit applied."""
+    passcode, round_number = CUSTOM_SCRIPT_RECORDS[record_id]
+    new_coverage = {
         "kind": "custom-script",
         "historical_passcode": passcode,
         "script": f"data/custom-cards/c{passcode}.lua",
     }
+    expected = dict(target)
+    if "states" in target:
+        states = copy.deepcopy(target["states"])
+        baseline = [state for state in states if state["events"] == []]
+        assert len(baseline) == 1, states
+        old_coverage = baseline[0]["coverage"]
+        baseline[0]["coverage"] = new_coverage
+        expected["states"] = states
+    else:
+        old_coverage = target["coverage"]
+        expected["coverage"] = new_coverage
+    assert old_coverage["kind"] == "known-gap", old_coverage
+    assert set(old_coverage) == {"kind", "gap_reason", "gap_sources"}, old_coverage
+    assert len(target["implementation_metadata"]) == 1, target["implementation_metadata"]
+    old_entry = target["implementation_metadata"][0]
+    assert old_entry["events"] == [], old_entry
+    assert old_entry["status"] == "missing" and list(old_entry) == ["events", "status", "gap"], old_entry
+    reason = (
+        f"Round {round_number:03d}: implemented by a project-authored script under the custom-script strategy "
+        f"(data/custom-cards/c{passcode}.json; passcode {passcode}). Previously recorded as a known gap "
+        f'with gap_reason "{old_coverage["gap_reason"]}" '
+        f"(gap_sources {', '.join(old_coverage['gap_sources'])}). "
+        f"Status is partial, not complete: the custom card's not_reproduced list names what the "
+        f"script does not establish."
+    )
+    expected["implementation_metadata"] = [
+        {
+            "events": old_entry["events"],
+            "status": "partial",
+            "tested": True,
+            "reason": reason,
+            "gap": old_entry["gap"],
+        }
+    ]
     return expected
 
 
@@ -129,12 +150,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             path = live_repo.errata[record_id].path
             on_disk_text = path.read_text(encoding="utf-8")
             on_disk = json.loads(on_disk_text)
-            # Round 029 (roadmap item 7) deliberately edited two of these
+            # Rounds 029 and 031 (roadmap item 7) deliberately edited eight of these
             # records after the migration; their expected content is pinned
-            # exactly (expected_after_round_029). Every other record must
+            # exactly (expected_after_custom_script). Every other record must
             # still equal the materialized target exactly.
-            if record_id in ROUND_029_CUSTOM_SCRIPT_PASSCODES:
-                target = expected_after_round_029(record_id, target)
+            if record_id in CUSTOM_SCRIPT_RECORDS:
+                target = expected_after_custom_script(record_id, target)
             if on_disk != target:
                 content_mismatches.append(record_id)
                 continue

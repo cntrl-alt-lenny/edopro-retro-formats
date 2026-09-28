@@ -72,8 +72,8 @@ Canonicalization is `UNRESOLVED_BLOCKING`: six axes must each reach `PROVEN`
 volume of research alone.
 
 **Erratum v2** — [`research/erratum-state-model-v2.md`](research/erratum-state-model-v2.md),
-frozen, sixteen properties, proven against the 296-record corpus. Don't
-redesign without a concrete counterexample found while implementing.
+frozen (`## Historical anchors`). Don't redesign without a concrete
+counterexample.
 
 ## Owner decision — standing role chats (since 2026-09-16)
 
@@ -99,14 +99,14 @@ Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
 **Evidence-gathering period: the next 5-10 genuine rounds**, then fix the
 bottleneck actually observed.
 
-## Owner decision — card scripts and licence (2026-09-23)
+## Owner decision — card scripts and licence (2026-09-27)
 
-Ignis's CardScripts are AGPL-3.0-or-later; this repository is MIT.
-Generated scripts must be original, never adapted from Ignis's; shipping a
-derived one is the owner's call. Night Assailant is held back (licence and
-thin evidence; round 029's Verifier report). 38 of Edison's 46
-known-divergence records also apply at Tengu: scripting one changes Tengu's
-list, so decide that first.
+Ignis's CardScripts are AGPL-3.0-or-later; this repository is MIT. AI
+"from scratch" scripts reproduced Ignis's from memory (rounds 029, 031), so
+scripts adapted from Ignis's are allowed: labelled `derived`, credited, and
+kept AGPL-3.0-or-later. A script labelled `original` must measurably differ
+from Ignis's. Night Assailant is held back on thin evidence. A script whose state also applies
+at Tengu may change Tengu's list (2026-09-24).
 
 ## Open items and sequencing judgements
 

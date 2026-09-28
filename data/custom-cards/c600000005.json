@@ -1,0 +1,54 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000005,
+  "alias": 41006930,
+  "erratum": "erratum-strike-ninja",
+  "events": [],
+  "name": "Strike Ninja (Retro Formats)",
+  "desc": "You can remove this card from play until the End Phase of this turn by removing 2 DARK monsters in your Graveyard from play. You can use this effect during either player's turn. You can only use this effect once per turn.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 43,
+    "type": 33,
+    "atk": 1700,
+    "def": 1200,
+    "level": 4,
+    "race": 1,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (41006930) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000005.lua",
+  "authorship": {
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c41006930.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-27",
+      "summary": "the use limit is per copy (SetCountLimit(1), not SetCountLimit(1,id)), as the period text carries no name qualifier; the effect description is read from the modern card's strings."
+    },
+    "note": "Adapted from Project Ignis's script for the modern card, official/c41006930.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT. Round 031 labelled it original, written without opening any Project Ignis card script; round 031's review measured that version as too close to this upstream file to be independent, and the owner decided on 2026-09-27 that such scripts are credited, labelled derived and kept under the upstream's licence. Round 032 rebased it on the upstream file itself."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The use limit belongs to each copy (one use per turn per Strike Ninja on the field). That is the erratum record's own reading of the bare \"once per turn\" in the period text; no period ruling is cited for it here.",
+    "The 2 DARK monsters are banished as a cost, from the period wording \"by removing 2 DARK monsters in your Graveyard from play\"; whether the period card treated that as a cost is not established by the record's sources. The cost filter is the upstream script's: face-up DARK monsters in the Graveyard, or on the field only while an effect such as Spirit Elimination applies (aux.SpElimFilter), never this card itself.",
+    "It is a Quick Effect that may be used whenever a player has priority, but not during the Damage Step; whether the period card could be used there is not established and is not implemented.",
+    "The card is banished with the engine's temporary-banish mechanism and returns during the End Phase in the position it left; a return into an occupied or unavailable zone, a second Strike Ninja's interaction with the first, and effects that respond to the banishing are not modelled. Only the banish, the return and two copies each using the effect once are tested.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "edisonformat-functional-errata"
+  ]
+}

@@ -35,9 +35,33 @@
     "script": { "type": "string", "description": "Always data/custom-cards/c<passcode>.lua." },
     "authorship": {
       "type": "object",
-      "required": ["kind"],
+      "description": "Who wrote the script and under which licence it is distributed (owner decision 2026-09-27, docs/state.md). The script's header repeats it on fixed lines and the validator rejects a mismatch (custom-card.bad-authorship, custom-card.authorship-header-mismatch).",
+      "required": ["kind", "licence"],
       "properties": {
-        "kind": { "const": "original", "description": "Written from the record's period text and the engine's Lua API. A script derived from Project Ignis's CardScripts (AGPL-3.0-or-later) cannot be asserted here: distributing it in this MIT repository is an owner licensing decision." },
+        "kind": { "enum": ["original", "derived"], "description": "original: this project's own work, MIT, first header line `--SPDX-License-Identifier: MIT`, and measurably different from Project Ignis's script for the alias (tests/engine/test_script_origin.py). derived: adapted from an upstream file and kept under that file's licence." },
+        "licence": { "type": "string", "description": "SPDX identifier. MIT for original; for derived, the upstream source's licence (retroformats/model.py CUSTOM_CARD_DERIVABLE_SOURCES: ignis-cardscripts is AGPL-3.0-or-later)." },
+        "upstream": {
+          "type": "object",
+          "description": "derived only. The header carries `--Upstream: <source url>/blob/<revision>/<path>` and `--<copyright>`.",
+          "additionalProperties": false,
+          "required": ["source", "path", "revision", "copyright"],
+          "properties": {
+            "source": { "type": "string", "description": "Id in data/sources.json of a source a script may be derived from." },
+            "path": { "type": "string", "description": "The upstream file, relative to the repository root, e.g. official/c67959180.lua." },
+            "revision": { "type": "string", "description": "Must equal the source's pinned revision in data/sources.json." },
+            "copyright": { "type": "string", "description": "The upstream's copyright notice as its repository states it." }
+          }
+        },
+        "modified": {
+          "type": "object",
+          "description": "derived only: the notice AGPL-3.0 section 5(a) asks for. The header carries `--Modified by edopro-retro-formats on <date>: <summary>`.",
+          "additionalProperties": false,
+          "required": ["date", "summary"],
+          "properties": {
+            "date": { "type": "string", "format": "date" },
+            "summary": { "type": "string", "minLength": 1 }
+          }
+        },
         "note": { "type": "string" }
       }
     },

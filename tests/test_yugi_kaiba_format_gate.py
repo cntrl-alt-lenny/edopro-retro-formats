@@ -18,9 +18,11 @@ from datetime import date
 from pathlib import Path
 
 from retroformats.model import Coverage, ErratumV2, Pool
-from retroformats.lflist import build_lflist
+from retroformats.lflist import build_lflist, lflist_hash
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
+
+from .helpers import ROUND_031_PASSCODES, swap_generated_back
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1597,18 +1599,18 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
                 continue
             kind = selection.candidates[0].coverage.kind.value
             determinate_coverage[kind] = determinate_coverage.get(kind, 0) + 1
-        # Round 029/030 (roadmap item 7) moved two records' baseline state from
-        # known-gap to custom-script (Metalzoa, Super Vehicroid - Stealth Union).
-        # The frozen research packet still records the
-        # earlier 42/0; it is not rewritten, and the expected numbers below
+        # Rounds 029/030/031 (roadmap item 7) moved eight records' baseline state from
+        # known-gap to custom-script (Metalzoa and Super Vehicroid - Stealth Union in
+        # 029/030; six cards shared with Tengu in 031). The frozen research packet still
+        # records the earlier 42/0; it is not rewritten, and the expected numbers below
         # are the packet's own with exactly that documented delta applied.
         self.assertEqual(
-            {"reuse-upstream": 81, "known-gap": 40, "none-needed": 4, "custom-script": 2}, determinate_coverage
+            {"reuse-upstream": 81, "known-gap": 34, "none-needed": 4, "custom-script": 8}, determinate_coverage
         )
-        packet_with_round_029 = dict(audit["determinate"]["coverage"])
-        packet_with_round_029["known-gap"] -= 2
-        packet_with_round_029["custom-script"] = packet_with_round_029.get("custom-script", 0) + 2
-        self.assertEqual(determinate_coverage, packet_with_round_029)
+        packet_with_generated_cards = dict(audit["determinate"]["coverage"])
+        packet_with_generated_cards["known-gap"] -= 8
+        packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8
+        self.assertEqual(determinate_coverage, packet_with_generated_cards)
         self.assertEqual(
             set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed", "custom-script"}
         )
@@ -1687,7 +1689,13 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         self.assertEqual(4563, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        self.assertEqual(0x0C878718, build_lflist(self.repo.formats["2011-09-tengu"], self.repo).hash)
+        # Re-pinned round 031: six generated cards (600000004-9) are in Tengu's list now;
+        # swapping them back reproduces the earlier pin.
+        tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
+        self.assertEqual(0x45A6E446, tengu.hash)
+        self.assertEqual(
+            0x0C878718, lflist_hash(swap_generated_back(tengu.entries, self.repo.custom_cards, ROUND_031_PASSCODES))
+        )
         self.assertFalse((ROOT / "formats" / "1999-08-tokyo-dome").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())

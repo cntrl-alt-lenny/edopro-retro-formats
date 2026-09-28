@@ -153,16 +153,35 @@ The build refuses to leave a stale or unclaimed file in `dist/databases/` or
 `retroformats/validate.py`; the reserved range still rejects every other use
 (`card.reserved-passcode-collision`).
 
-**Scripts are original.** Project Ignis's CardScripts are AGPL-3.0-or-later and this
-repository is MIT, so a script derived from one is a licensing decision for the owner;
-`authorship.kind` must be `original`. `tested: true` on the state's
-`implementation_metadata` means an engine test (`tests/engine/test_edison_historical_scripts.py`)
-runs the same scenario against the modern card and the generated one and asserts the
+**Each script states its origin and licence.** Project Ignis's CardScripts are
+AGPL-3.0-or-later and this repository is MIT. The owner decided on 2026-09-27 that a
+script may be adapted from Ignis's (`docs/state.md`), so `authorship.kind` is one of:
+
+- `original`: this project's own work, `licence: MIT`, first line
+  `--SPDX-License-Identifier: MIT`. The label is measured, not trusted:
+  `tests/engine/test_script_origin.py` fails when the script's line-sequence ratio against
+  Ignis's script for its alias reaches 0.40 (`retroformats/script_similarity.py`).
+  Metalzoa, Stealth Union and Malefic Blue-Eyes are original.
+- `derived`: adapted from an upstream file and kept under its licence,
+  `AGPL-3.0-or-later`. The record names the upstream file, the pinned revision and the
+  upstream's copyright notice, and dates and summarises this project's change (AGPL-3.0
+  section 5(a)); the script's header repeats each on a fixed line. Goddess of Whim,
+  Strike Ninja, Green Baboon, Rise of the Snake Deity and Soul Rope are derived: each is
+  Ignis's `official/` script with only the period difference applied.
+
+The validator rejects anything else (`custom-card.bad-authorship`) and a header that
+disagrees with its record (`custom-card.authorship-header-mismatch`). The AGPL text is
+`LICENSES/AGPL-3.0-or-later.txt`, and the build writes `dist/scripts/LICENSES.md` with both
+licence texts next to the scripts. `tested: true` on the state's
+`implementation_metadata` means an engine test (`tests/engine/test_edison_historical_scripts.py`,
+`tests/engine/test_shared_historical_scripts.py`) runs the same scenario against the modern card and the generated one and asserts the
 difference; it never means the script is exact (`fidelity` says that).
 
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
-at Tengu whenever that record's state does. And a v2 record's *structural* parity walk
+at Tengu whenever that record's state does. The owner decided on 2026-09-24 that this is
+allowed (`docs/state.md`): round 031 generated six cards that both lists now use, each
+because its record puts the same state at both snapshots. And a v2 record's *structural* parity walk
 takes the first usable substitution, so giving a card Ignis's GOAT reference substitutes
 a usable baseline coverage silently moves the GOAT list unless the record also carries
 the exact `reference_identities` entry for it.

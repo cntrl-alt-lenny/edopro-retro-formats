@@ -21,8 +21,10 @@ from .model import (
     CHANGE_KINDS,
     CONTRADICTED,
     CUSTOM_CARD_CDB_FIELDS,
+    CUSTOM_CARD_DERIVABLE_SOURCES,
     CUSTOM_CARD_FIDELITIES,
     CUSTOM_CARD_OT,
+    CUSTOM_CARD_ORIGINAL_LICENCE,
     EFFECTIVE_STATUSES,
     EVENT_KINDS,
     EVENT_STATUSES,
@@ -2683,6 +2685,121 @@ class Validator:
                     texts.add(item[key])
         return texts
 
+    def _check_authorship(self, card, where: Path) -> None:
+        """A generated script's origin and licence, stated on the record and in
+        the script's own header, and the two must agree (owner decision
+        2026-09-27, docs/state.md "card scripts and licence").
+
+        - `original`: licence MIT, no upstream; the header's first line is
+          `--SPDX-License-Identifier: MIT` and names no upstream. That the
+          script really differs from Project Ignis's is measured, not trusted:
+          tests/engine/test_script_origin.py.
+        - `derived`: an upstream file in a source this project may derive
+          from (CUSTOM_CARD_DERIVABLE_SOURCES), at that source's pinned
+          revision, with the upstream's copyright notice and licence, and the
+          modification notice AGPL-3.0 section 5(a) asks for (date and
+          summary). The header repeats each of them on a fixed line.
+
+        Anything else is `custom-card.bad-authorship`; a header that disagrees
+        with the record is `custom-card.authorship-header-mismatch`."""
+        authorship = card.raw.get("authorship")
+        problems: list[str] = []
+        expected_header: list[str] = []
+        if not isinstance(authorship, dict):
+            self.error("custom-card.bad-authorship", where, "authorship must be an object with kind and licence")
+            return
+        kind = authorship.get("kind")
+        licence = authorship.get("licence")
+        if kind == "original":
+            if licence != CUSTOM_CARD_ORIGINAL_LICENCE:
+                problems.append(
+                    f"an original script is this repository's own work and carries licence "
+                    f"{CUSTOM_CARD_ORIGINAL_LICENCE!r}, got {licence!r}"
+                )
+            for key in ("upstream", "modified"):
+                if key in authorship:
+                    problems.append(f"an original script has no {key!r}; a script adapted from another file is 'derived'")
+            expected_header = [f"--SPDX-License-Identifier: {CUSTOM_CARD_ORIGINAL_LICENCE}"]
+        elif kind == "derived":
+            upstream = authorship.get("upstream")
+            modified = authorship.get("modified")
+            if not isinstance(upstream, dict):
+                problems.append("a derived script needs upstream {source, path, revision, copyright}")
+                upstream = {}
+            if not isinstance(modified, dict):
+                problems.append("a derived script needs modified {date, summary} (AGPL-3.0 section 5(a))")
+                modified = {}
+            source_id = upstream.get("source")
+            path = upstream.get("path")
+            revision = upstream.get("revision")
+            copyright_ = upstream.get("copyright")
+            date = modified.get("date")
+            summary = modified.get("summary")
+            source = self.repo.global_sources.get(source_id) if isinstance(source_id, str) else None
+            upstream_licence = CUSTOM_CARD_DERIVABLE_SOURCES.get(source_id) if isinstance(source_id, str) else None
+            if upstream_licence is None or source is None:
+                problems.append(
+                    f"upstream.source {source_id!r} is not a source a script may be derived from "
+                    f"({sorted(CUSTOM_CARD_DERIVABLE_SOURCES)})"
+                )
+            elif licence != upstream_licence:
+                problems.append(f"licence must be the upstream's, {upstream_licence!r}, got {licence!r}")
+            pinned = source.raw.get("revision") if source is not None else None
+            if not isinstance(revision, str) or revision != pinned:
+                problems.append(f"upstream.revision must be the source's pinned revision {pinned!r}, got {revision!r}")
+            if (
+                not isinstance(path, str)
+                or not re.fullmatch(r"[A-Za-z0-9_-]+(/[A-Za-z0-9_-]+)*\.lua", path)
+            ):
+                problems.append(f"upstream.path must be a relative path to a .lua file, got {path!r}")
+            if not isinstance(copyright_, str) or not copyright_.strip():
+                problems.append("upstream.copyright must carry the upstream's copyright notice")
+            if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date) or self._date(date) is None:
+                problems.append(f"modified.date must be an ISO date, got {date!r}")
+            if not isinstance(summary, str) or not summary.strip():
+                problems.append("modified.summary must say what this project changed")
+            if not problems:
+                url = (source.url or "").rstrip("/")
+                expected_header = [
+                    f"--SPDX-License-Identifier: {licence}",
+                    f"--Upstream: {url}/blob/{revision}/{path}",
+                    f"--{copyright_}",
+                    f"--Modified by edopro-retro-formats on {date}: {summary}",
+                ]
+        else:
+            problems.append(f"authorship.kind must be 'original' or 'derived', got {kind!r}")
+        for problem in problems:
+            self.error("custom-card.bad-authorship", where, problem)
+        if problems:
+            return
+        script_path = self.repo.root / card.script
+        if not script_path.is_file():
+            return  # custom-card.script-missing says so
+        header: list[str] = []
+        for line in script_path.read_bytes().decode("utf-8", errors="replace").splitlines():
+            if not line.startswith("--"):
+                break
+            header.append(line.rstrip("\r"))
+        if not header or header[0] != expected_header[0]:
+            self.error(
+                "custom-card.authorship-header-mismatch",
+                where,
+                f"the script's first line must be {expected_header[0]!r}, got {header[0] if header else None!r}",
+            )
+        for line in expected_header[1:]:
+            if line not in header:
+                self.error(
+                    "custom-card.authorship-header-mismatch",
+                    where,
+                    f"the script's header must carry the line {line!r} as the record states it",
+                )
+        if kind == "original" and any(line.startswith("--Upstream:") for line in header):
+            self.error(
+                "custom-card.authorship-header-mismatch",
+                where,
+                "the script's header names an upstream but the record says the script is original",
+            )
+
     def _validate_custom_cards(self) -> None:
         """Every generated card must be a faithful, checkable projection of an
         erratum record: same card, its own reserved passcode, a text copied
@@ -2743,15 +2860,7 @@ class Validator:
                         "desc is not a card text carried by the erratum record; copy the sourced "
                         "text from the record instead of typing a second version",
                     )
-            authorship = card.raw.get("authorship")
-            if not isinstance(authorship, dict) or authorship.get("kind") != "original":
-                self.error(
-                    "custom-card.authorship-not-original",
-                    where,
-                    "authorship.kind must be 'original'. Project Ignis's CardScripts are "
-                    "AGPL-3.0-or-later and this repository is MIT: a script derived from one "
-                    "is a licensing decision for the owner, not something a record may assert",
-                )
+            self._check_authorship(card, where)
             if not card.name.strip():
                 self.error("custom-card.bad-name", where, "name is empty")
             cdb = card.cdb

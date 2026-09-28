@@ -14,9 +14,11 @@ from dataclasses import replace
 from pathlib import Path
 
 from retroformats.lflist import select_applicable_errata
-from retroformats.model import Coverage, ErratumV2, Pool
+from retroformats.model import RESERVED_PASSCODE_RANGE, Coverage, ErratumV2, Pool
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
+
+from .helpers import ROUND_031_GENERATED
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -165,7 +167,11 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual(170, len(ambiguous))
         self.assertEqual(33, sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate))
         self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
-        self.assertEqual(38, sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate))
+        # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their sum.
+        known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
+        custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
+        self.assertEqual((32, 6), (known_gap, custom_script))
+        self.assertEqual(38, known_gap + custom_script)
         self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
         self.assertEqual(126, 33 + 52 + 38 + 3)
         self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
@@ -195,8 +201,12 @@ class TenguResearchGateTest(unittest.TestCase):
             override.erratum.id: (modern_passcode, override.implementation.historical_passcode)
             for modern_passcode, override in fallback.items()
         }
-        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, actual_mapping)
-        self.assertEqual(52, len(actual_mapping))
+        # Round 031: six more substitutions are generated cards, not upstream ones.
+        upstream = {k: v for k, v in actual_mapping.items() if v[1] not in RESERVED_PASSCODE_RANGE}
+        generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
+        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
+        self.assertEqual(52, len(upstream))
+        self.assertEqual(ROUND_031_GENERATED, generated)
 
         audit = self.packet["release_certification"]["erratum_audit_at_snapshot"]
         self.assertEqual(79, audit["unresolved_candidate_state_occurrences"])

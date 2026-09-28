@@ -31,9 +31,10 @@ from retroformats.model import RESERVED_PASSCODE_RANGE, STATUS_TO_COUNT
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import REPO_ROOT, TempRepoTest, card, change
+from .helpers import REPO_ROOT, ROUND_031_PASSCODES, TempRepoTest, card, change
 
 EDISON = "2010-03-edison"
+TENGU = "2011-09-tengu"
 GOAT_HASH = 0x28E9FC02
 
 
@@ -56,17 +57,44 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         cls.cards = cards_sorted(cls.repo)
         cls.dist = REPO_ROOT / "dist"
 
-    def test_this_round_implements_exactly_two_cards(self):
+    def test_the_repository_generates_exactly_these_cards(self):
         self.assertEqual(
             [
                 (600000001, "erratum-metalzoa"),
                 (600000002, "erratum-super-vehicroid-stealth-union"),
+                # 600000003 stays unassigned: held for Night Assailant (roadmap item 7).
+                (600000004, "erratum-goddess-of-whim"),
+                (600000005, "erratum-strike-ninja"),
+                (600000006, "erratum-green-baboon-defender-of-the-forest"),
+                (600000007, "erratum-rise-of-the-snake-deity"),
+                (600000008, "erratum-malefic-blue-eyes-white-dragon"),
+                (600000009, "erratum-soul-rope"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
 
     def test_dist_holds_exactly_the_generated_databases_and_scripts(self):
         self.assertEqual([], stale_generated_files(self.repo, self.dist))
+
+    def test_the_scripts_licences_travel_with_the_scripts(self):
+        # Round 032: someone who takes dist/scripts/ alone still gets each
+        # script's licence, origin and the licence texts.
+        scripts = self.dist / "scripts"
+        self.assertEqual((REPO_ROOT / "LICENSE").read_bytes(), (scripts / "LICENSE-MIT.txt").read_bytes())
+        self.assertEqual(
+            (REPO_ROOT / "LICENSES" / "AGPL-3.0-or-later.txt").read_bytes(),
+            (scripts / "LICENSE-AGPL-3.0-or-later.txt").read_bytes(),
+        )
+        notice = (scripts / "LICENSES.md").read_text(encoding="utf-8")
+        for c in self.cards:
+            with self.subTest(passcode=c.passcode):
+                authorship = c.raw["authorship"]
+                row = next(line for line in notice.splitlines() if line.startswith(f"| `c{c.passcode}.lua` |"))
+                self.assertIn(f"| {authorship['licence']} |", row)
+                if authorship["kind"] == "derived":
+                    self.assertIn(authorship["upstream"]["path"], row)
+                    self.assertIn(authorship["upstream"]["revision"], row)
+                    self.assertIn(authorship["modified"]["date"], row)
 
     def test_every_generated_script_is_the_canonical_script_byte_for_byte(self):
         for c in self.cards:
@@ -118,35 +146,63 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         finally:
             con.close()
 
-    def test_edison_list_uses_each_historical_card_instead_of_the_modern_one(self):
-        fmt = self.repo.formats[EDISON]
+    def _assert_list_uses(self, fmt_id, cards):
+        fmt = self.repo.formats[fmt_id]
         built = build_lflist(fmt, self.repo)
         banlist = self.repo.banlists[fmt.banlist_id]
         status_by_code = {e.card.passcode: e.status for e in banlist.entries}
-        for c in self.cards:
-            with self.subTest(passcode=c.passcode):
+        for c in cards:
+            with self.subTest(format=fmt_id, passcode=c.passcode):
                 modern = self.repo.errata[c.erratum].modern_card.passcode
                 self.assertIn(c.passcode, built.entries)
                 self.assertNotIn(modern, built.entries, "the modern card would behave incorrectly")
                 # Deck limits: the whitelist follows an alias only within +/-10,
                 # so the historical code is listed itself, with the modern
-                # card's own count. In a duel and when counting copies the row
-                # is its modern card via `alias` (see the engine test).
+                # card's own count under THIS format's banlist. In a duel and
+                # when counting copies the row is its modern card via `alias`
+                # (see the engine tests).
                 expected = STATUS_TO_COUNT.get(status_by_code.get(modern, ""), 3)
                 self.assertEqual(expected, built.entries[c.passcode])
+        return built
 
-    def test_goat_and_tengu_do_not_use_any_generated_card(self):
+    def test_edison_list_uses_each_historical_card_instead_of_the_modern_one(self):
+        self._assert_list_uses(EDISON, self.cards)
+
+    def test_tengu_list_uses_exactly_the_cards_whose_state_applies_at_its_snapshot(self):
+        # Round 031: the six cards whose record puts the same historical state at Tengu's
+        # snapshot (2011-09-17) as at Edison's. Metalzoa and Super Vehicroid - Stealth Union
+        # are not among them: their erratum (2011-08-13 and earlier) predates Tengu's
+        # snapshot, so Tengu keeps the modern card for both.
+        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in ROUND_031_PASSCODES])
+        self.assertEqual(ROUND_031_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
+        for c in self.cards:
+            if c.passcode not in ROUND_031_PASSCODES:
+                with self.subTest(passcode=c.passcode):
+                    self.assertIn(self.repo.errata[c.erratum].modern_card.passcode, tengu.entries)
+
+    def test_goat_does_not_use_any_generated_card(self):
         generated = {c.passcode for c in self.cards}
-        for fmt_id in ("2005-04-goat", "2011-09-tengu"):
-            with self.subTest(format=fmt_id):
-                built = build_lflist(self.repo.formats[fmt_id], self.repo)
-                self.assertEqual(set(), generated & set(built.entries))
-        # The two cards' modern codes are exactly what those two lists used
-        # before this round. Night Assailant is not generated (it is held
-        # back, roadmap item 7), and GOAT keeps its Project Ignis variant.
-        goat = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
-        self.assertEqual(GOAT_HASH, goat.hash)
-        self.assertIn(16226796, goat.entries)
+        built = build_lflist(self.repo.formats["2005-04-goat"], self.repo)
+        self.assertEqual(set(), generated & set(built.entries))
+        # The cards' modern codes are exactly what the list used before generation.
+        # Night Assailant is not generated (it is held back, roadmap item 7), and GOAT
+        # keeps its Project Ignis variant.
+        self.assertEqual(GOAT_HASH, built.hash)
+        self.assertIn(16226796, built.entries)
+        for c in self.cards:
+            modern = self.repo.errata[c.erratum].modern_card.passcode
+            with self.subTest(passcode=c.passcode):
+                self.assertEqual(modern in built.entries, modern in self._goat_before_generation())
+
+    def _goat_before_generation(self):
+        """The modern codes GOAT holds, from Project Ignis's own reference list."""
+        fixture = REPO_ROOT / "tests" / "fixtures" / "ignis-GOAT.lflist.conf"
+        codes = set()
+        for line in fixture.read_text(encoding="utf-8").splitlines():
+            head = line.split("--", 1)[0].split()
+            if len(head) == 2 and head[0].isdigit():
+                codes.add(int(head[0]))
+        return codes
 
     def test_generated_codes_are_indexed_and_identifiable(self):
         for c in self.cards:
@@ -154,10 +210,22 @@ class LiveGeneratedOutputTest(unittest.TestCase):
                 self.assertEqual(c.name, self.repo.card_index.name_of(c.passcode))
                 self.assertEqual(c.alias, self.repo.card_index.alias_of(c.passcode))
 
-    def test_every_record_declares_original_authorship_and_its_approximations(self):
+    def test_every_record_declares_its_origin_licence_and_approximations(self):
+        # Round 032: the five round-031 scripts that measured close to Project
+        # Ignis's are derived from them and AGPL-3.0-or-later; the three that
+        # measured independent stay original and MIT.
+        kinds = {c.passcode: c.raw["authorship"]["kind"] for c in self.cards}
+        self.assertEqual({600000001, 600000002, 600000008}, {p for p, k in kinds.items() if k == "original"})
+        self.assertEqual(
+            {600000004, 600000005, 600000006, 600000007, 600000009},
+            {p for p, k in kinds.items() if k == "derived"},
+        )
         for c in self.cards:
             with self.subTest(passcode=c.passcode):
-                self.assertEqual("original", c.raw["authorship"]["kind"])
+                licence = c.raw["authorship"]["licence"]
+                self.assertEqual("MIT" if kinds[c.passcode] == "original" else "AGPL-3.0-or-later", licence)
+                first = (REPO_ROOT / c.script).read_text(encoding="utf-8").splitlines()[0]
+                self.assertEqual(f"--SPDX-License-Identifier: {licence}", first)
                 self.assertEqual("approximate", c.fidelity)
                 self.assertTrue(c.not_reproduced)
 
@@ -233,7 +301,7 @@ class CustomCardValidationTest(TempRepoTest):
     CODE = 600000001
     TEXT = "Old Beta text."
 
-    def _seed(self, **overrides):
+    def _seed(self, lua=None, **overrides):
         record = {
             "passcode": self.CODE,
             "alias": 200,
@@ -253,7 +321,7 @@ class CustomCardValidationTest(TempRepoTest):
                 "category": 0,
             },
             "script": f"data/custom-cards/c{self.CODE}.lua",
-            "authorship": {"kind": "original", "note": "written from the text"},
+            "authorship": {"kind": "original", "licence": "MIT", "note": "written from the text"},
             "fidelity": "approximate",
             "not_reproduced": ["timing is not established"],
             "sources": ["test-source"],
@@ -274,7 +342,9 @@ class CustomCardValidationTest(TempRepoTest):
             },
         )
         self.write(f"data/custom-cards/c{self.CODE}.json", record)
-        (self.root / "data" / "custom-cards" / f"c{self.CODE}.lua").write_text("--script\n", encoding="utf-8")
+        (self.root / "data" / "custom-cards" / f"c{self.CODE}.lua").write_text(
+            lua if lua is not None else "--SPDX-License-Identifier: MIT\n--script\n", encoding="utf-8"
+        )
         return record
 
     def test_a_well_formed_custom_card_validates_cleanly(self):
@@ -366,15 +436,154 @@ class CustomCardValidationTest(TempRepoTest):
         self._seed(fidelity="close enough")
         self.assertIn("custom-card.bad-fidelity", _error_codes(_validate(self.root)))
 
-    def test_a_derived_script_is_not_something_a_record_may_assert(self):
-        self._seed(authorship={"kind": "derived", "note": "adapted from Project Ignis"})
-        self.assertIn("custom-card.authorship-not-original", _error_codes(_validate(self.root)))
+    # -- authorship (round 032) --------------------------------------------
+
+    REVISION = "383bfbd62cefc0a28e075acfb78b0bb8203b94c7"
+    COPYRIGHT = "Copyright (C) 2020  Project Ignis contributors."
+
+    def _add_cardscripts_source(self):
+        self.write(
+            "data/sources.json",
+            {
+                "sources": [
+                    {"id": "test-source", "kind": "other", "title": "Test source", "url": "https://example.invalid"},
+                    {
+                        "id": "ignis-cardscripts",
+                        "kind": "repository",
+                        "title": "Project Ignis CardScripts",
+                        "url": "https://github.com/ProjectIgnis/CardScripts",
+                        "revision": self.REVISION,
+                    },
+                ]
+            },
+        )
+
+    def _derived(self, **changes):
+        authorship = {
+            "kind": "derived",
+            "licence": "AGPL-3.0-or-later",
+            "upstream": {
+                "source": "ignis-cardscripts",
+                "path": "official/c200.lua",
+                "revision": self.REVISION,
+                "copyright": self.COPYRIGHT,
+            },
+            "modified": {"date": "2026-09-27", "summary": "removed the use limit."},
+            "note": "adapted",
+        }
+        for key, value in changes.items():
+            section, _, field = key.partition("__")
+            target = authorship[section] if field else authorship
+            name = field or section
+            if value is None:
+                del target[name]
+            else:
+                target[name] = value
+        return authorship
+
+    def _derived_header(self, drop=None):
+        lines = [
+            "--SPDX-License-Identifier: AGPL-3.0-or-later",
+            "--Beta (historical implementation, Retro Formats)",
+            f"--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/{self.REVISION}/official/c200.lua",
+            f"--{self.COPYRIGHT}",
+            "--Modified by edopro-retro-formats on 2026-09-27: removed the use limit.",
+            "--Beta",
+        ]
+        return "\n".join(line for line in lines if line != drop) + "\nlocal s,id=GetID()\n"
+
+    def _seed_derived(self, lua=None, **changes):
+        self._add_cardscripts_source()
+        return self._seed(
+            authorship=self._derived(**changes), lua=lua if lua is not None else self._derived_header()
+        )
+
+    def test_authorship_kind_is_original_or_derived(self):
+        self._seed(authorship={"kind": "adapted", "licence": "MIT"})
+        self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
 
     def test_missing_authorship_fails(self):
         record = self._seed()
         del record["authorship"]
         self.write(f"data/custom-cards/c{self.CODE}.json", record)
-        self.assertIn("custom-card.authorship-not-original", _error_codes(_validate(self.root)))
+        self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_an_original_script_is_mit(self):
+        for licence in (None, "AGPL-3.0-or-later", "GPL-2.0"):
+            with self.subTest(licence=licence):
+                authorship = {"kind": "original", "note": "x"}
+                if licence:
+                    authorship["licence"] = licence
+                self._seed(authorship=authorship)
+                self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_an_original_script_names_no_upstream(self):
+        self._add_cardscripts_source()
+        authorship = self._derived()
+        authorship.update(kind="original", licence="MIT")
+        self._seed(authorship=authorship, lua="--SPDX-License-Identifier: MIT\n")
+        self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_an_original_scripts_header_must_state_its_licence(self):
+        for lua in ("--script\n", "--SPDX-License-Identifier: AGPL-3.0-or-later\n", "local s,id=GetID()\n"):
+            with self.subTest(lua=lua):
+                self._seed(lua=lua)
+                self.assertIn("custom-card.authorship-header-mismatch", _error_codes(_validate(self.root)))
+
+    def test_an_original_scripts_header_must_not_name_an_upstream(self):
+        self._seed(lua="--SPDX-License-Identifier: MIT\n--Upstream: https://example.invalid/c200.lua\n")
+        self.assertIn("custom-card.authorship-header-mismatch", _error_codes(_validate(self.root)))
+
+    def test_a_well_formed_derived_script_validates_cleanly(self):
+        self._seed_derived()
+        validator = _validate(self.root)
+        self.assertEqual([], validator.errors, "\n".join(map(str, validator.errors)))
+
+    def test_a_derived_script_needs_upstream_path_revision_licence_and_notices(self):
+        for key in (
+            "upstream",
+            "upstream__path",
+            "upstream__revision",
+            "upstream__source",
+            "upstream__copyright",
+            "licence",
+            "modified",
+            "modified__date",
+            "modified__summary",
+        ):
+            with self.subTest(missing=key):
+                self._seed_derived(**{key: None})
+                self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_a_derived_scripts_fields_must_be_the_real_ones(self):
+        for key, value in (
+            ("upstream__revision", "0" * 40),  # not the pinned revision
+            ("upstream__source", "test-source"),  # not a source a script may be derived from
+            ("upstream__path", "../official/c200.lua"),
+            ("upstream__path", "official/c200.txt"),
+            ("licence", "MIT"),  # not the upstream's licence
+            ("modified__date", "27 September 2026"),
+            ("modified__summary", " "),
+            ("upstream__copyright", ""),
+        ):
+            with self.subTest(field=key, value=value):
+                self._seed_derived(**{key: value})
+                self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_a_derived_scripts_header_must_match_the_record(self):
+        full = self._derived_header().splitlines()
+        for line in [full[0], full[2], full[3], full[4]]:
+            with self.subTest(dropped=line):
+                self._seed_derived(lua=self._derived_header(drop=line))
+                self.assertIn("custom-card.authorship-header-mismatch", _error_codes(_validate(self.root)))
+        with self.subTest(changed="revision in the header"):
+            self._seed_derived(lua=self._derived_header().replace(self.REVISION, "f" * 40))
+            self.assertIn("custom-card.authorship-header-mismatch", _error_codes(_validate(self.root)))
+        with self.subTest(changed="the header states a line only after the code starts"):
+            header = self._derived_header().splitlines()
+            moved = "\n".join([header[0], "local s,id=GetID()", *header[1:]]) + "\n"
+            self._seed_derived(lua=moved)
+            self.assertIn("custom-card.authorship-header-mismatch", _error_codes(_validate(self.root)))
 
     def test_sources_must_resolve(self):
         self._seed(sources=["nope"])
