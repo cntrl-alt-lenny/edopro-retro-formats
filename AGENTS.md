@@ -52,8 +52,8 @@ Owner
 **Builder is this project's name for the executor seat**, holding the Worker
 contract unchanged. **Seats work from any checkout**: `fw.py start` puts a
 session on the right branch at the right commit wherever it runs. Linked
-worktrees nested under `.worktrees/<role>/` inside this one project folder
-(`git worktree add --detach .worktrees/<role> origin/main`) are this
+worktrees nested under `.worktrees/<role>-<number>/` inside this one project
+folder (the seat prompt from `fw.py prompt` gives the command) are this
 project's usual convenience — never required, and `.worktrees/` is
 git-ignored, per-clone state (check `git worktree list`, don't assume it
 exists). Adding or retiring a seat is the owner's decision; a tool or
