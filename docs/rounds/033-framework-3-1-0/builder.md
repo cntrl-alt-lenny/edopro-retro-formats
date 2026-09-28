@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 033-framework-3-1-0
+role: builder
+branch: builder/033-framework-3-1-0
+head: 21126cf62aab02362f8f4d4d4471d8884c0fb4b8
+os: macOS 27.0
+python: 3.9.6
+written: 2026-09-28T15:47:20Z
+-->
 # Builder report — 033-framework-3-1-0
 
 The one personal path in `adopt.py`'s output (its first line, the project folder) is shown as `<project>`; nothing else is altered.
