@@ -294,12 +294,13 @@ erratum's own verdict at each snapshot (supported, contradicted, unresolved) is 
 **When a check is required.** A transition is in scope when it is `functional`; its event is not
 yet in effect at the snapshot of `2010-03-edison` or `2011-09-tengu` (state `old`), or cannot be
 placed against it (state `ambiguous`, an undated event); and the record is not implemented by a
-generated card (the card's own check covers it). Three transitions are exempt, by name
-(`ERRATUM_RULINGS_GATE_EXEMPT`): the ones rounds 035 and 036 checked and recorded on their own
-sources before the check existed (Dark Necrofear's `c2`, Fushioh Richie's and Second Coin Toss's).
-Citing a ruling source excuses nothing else: a ruling cited for one point does not say which
-rulings were searched for another. GOAT is not a gate format: its list is entry-for-entry Project
-Ignis's and reads no erratum record.
+generated card (the card's own check covers it). **No transition is exempt by name.** Round 037
+exempted three (Dark Necrofear's `c2`, Fushioh Richie's and Second Coin Toss's: rounds 035 and 036
+had recorded their rulings on the transition's sources, before the check existed); round 038 gave
+each a `rulings_check` built from that evidence, re-read, and deleted the list and its code path.
+Citing a ruling source excuses nothing: a ruling cited for one point does not say which rulings were
+searched for another. GOAT is not a gate format: its list is entry-for-entry Project Ignis's and
+reads no erratum record.
 
 | code | severity | when |
 |---|---|---|
@@ -314,6 +315,16 @@ the transition `cosmetic` (for a `reuse-upstream` record the list then uses the 
 keeping every existing passage and moving the replaced summary into the review notes. A check that
 still records a contradicted point belongs to a transition that stays functional on another
 difference, and needs the owner's decision like a generated card's.
+
+**When two period sources disagree on a claimed difference** (round 038, the owner's rules of
+2026-09-29, `docs/state.md`): a Konami document current at the snapshot outranks an earlier UDE-era
+ruling on the same point (rule 1); between two versions of the same UDE FAQ the latest version in
+force at the snapshot governs (rule 2). Neither rule decides a conflict inside one entry of one
+document, which stays `unresolved` (round 038's brief). The rules are applied in the record, not in the validator: the governing
+ruling and the outranked one are both recorded in the check (a difference the governing ruling
+contradicts is withdrawn from the summary, the old summary kept verbatim in the review notes), and the
+notes say which rule decided it. Silence is not a ruling: a governing source that does not name the
+point leaves it `unresolved`.
 
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies

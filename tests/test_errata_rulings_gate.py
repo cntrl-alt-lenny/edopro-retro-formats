@@ -21,9 +21,9 @@ import json
 import shutil
 import types
 import unittest
-from unittest import mock
 
-from retroformats.model import ERRATUM_RULINGS_GATE_EXEMPT, change_state_at
+from retroformats import model, validate
+from retroformats.model import change_state_at
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
@@ -183,19 +183,15 @@ class ErratumRulingsGateTest(TempRepoTest):
         errors, warnings = self._codes()
         self.assertIn("erratum.rulings-check-missing", errors | warnings)
 
-    def test_only_the_three_transitions_rounds_035_and_036_checked_are_exempt(self):
-        self.assertEqual(
-            {
-                ("erratum-dark-necrofear", "c2"),
-                ("erratum-fushioh-richie", "event"),
-                ("erratum-second-coin-toss", "event"),
-            },
-            set(ERRATUM_RULINGS_GATE_EXEMPT),
-        )
+    def test_no_transition_is_exempt_by_name(self):
+        # Round 037 exempted three transitions by name (Dark Necrofear's c2, Fushioh Richie's and Second Coin
+        # Toss's). Round 038 gave each a check and deleted the list and its code path: a transition is gated by what
+        # it claims and when it applies, never by its name.
+        self.assertFalse(hasattr(model, "ERRATUM_RULINGS_GATE_EXEMPT"))
+        self.assertFalse(hasattr(validate, "ERRATUM_RULINGS_GATE_EXEMPT"))
         self._seed()
-        with mock.patch("retroformats.validate.ERRATUM_RULINGS_GATE_EXEMPT", frozenset({("erratum-beta", "e1")})):
-            errors, warnings = self._codes()
-        self.assertNotIn("erratum.rulings-check-missing", errors | warnings)
+        errors, warnings = self._codes()
+        self.assertIn("erratum.rulings-check-missing", errors | warnings)
 
     def test_a_transition_a_generated_card_implements_is_covered_by_the_cards_check(self):
         # The card's own `rulings_check` covers the transition it implements, so the record is not
@@ -351,13 +347,11 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
         cls.repo = Repository.load(REPO_ROOT)
         cls.validator = Validator(cls.repo)
         cls.validator.validate()
-        cls.exempt = ERRATUM_RULINGS_GATE_EXEMPT
 
     def _independent_scope(self):
         """The transitions in scope, re-derived from the raw JSON with no use of the validator:
-        (a) `functional`, (b) not one of the three that rounds 035 and 036 checked (they cite a ruling
-        source), (c) not yet in effect at Edison's snapshot (or undated), (d) on a record no generated
-        card implements."""
+        (a) `functional`, (b) not yet in effect at Edison's snapshot (or undated), (c) on a record no
+        generated card implements. No transition is exempt by name."""
         linked = {
             json.loads(p.read_text(encoding="utf-8"))["erratum"]
             for p in (REPO_ROOT / "data" / "custom-cards").glob("*.json")
@@ -377,7 +371,6 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
                 for event_id, effective, transitions in events
                 for transition in transitions
                 if transition["kind"] == "functional"
-                and (raw["id"], event_id) not in self.exempt
                 and change_state_at({"effective": effective}, EDISON_SNAPSHOT) != "new"
             ]
             if hits:
@@ -391,6 +384,28 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
             for event_id, transition in hits:
                 with self.subTest(record=stem, event=event_id):
                     self.assertIsInstance(transition.get("rulings_check"), dict)
+
+    def test_the_three_transitions_round_037_exempted_are_gated_now(self):
+        """Round 037 exempted these by name. Each now carries a check, and without it the gate fires."""
+        repo = Repository.load(REPO_ROOT)
+        for record_id, event_id in (
+            ("erratum-dark-necrofear", "c2"),
+            ("erratum-fushioh-richie", "event"),
+            ("erratum-second-coin-toss", "event"),
+        ):
+            with self.subTest(record=record_id, event=event_id):
+                erratum = repo.errata[record_id]
+                transition = erratum.events[event_id].transitions[0]
+                check = transition.raw.pop("rulings_check")
+                try:
+                    validator = Validator(repo)
+                    validator._check_erratum_rulings(erratum)
+                    self.assertEqual(
+                        ["erratum.rulings-check-missing"],
+                        [f.code for f in validator.findings],
+                    )
+                finally:
+                    transition.raw["rulings_check"] = check
 
     def test_no_finding_of_the_gate_is_left_in_the_repository(self):
         codes = {f.code for f in self.validator.findings}
@@ -408,7 +423,6 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
                 for transition in event.transitions:
                     if (
                         transition.kind == "functional"
-                        and (erratum.id, event_id) not in self.exempt
                         and event.state_at(EDISON_SNAPSHOT) != "new"
                         and not any(c.erratum == erratum.id for c in self.repo.custom_cards.values())
                     ):
