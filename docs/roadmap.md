@@ -563,10 +563,11 @@ reflects that.
    `dist/scripts/c<passcode>.lua`, from `data/custom-cards/` plus the erratum record whose
    `custom-script` coverage names the code (`retroformats/custom_cards.py`; rules in
    `retroformats/validate.py`, `custom-card.*`; see `docs/errata.md`, "Generated historical
-   cards"). Four cards are done end to end, each with an engine test that fails against the
+   cards"). Seven cards are done end to end, each with an engine test that fails against the
    modern behaviour: Super Vehicroid - Stealth Union, which only Edison uses
-   (`tests/engine/test_edison_historical_scripts.py`), and Goddess of Whim, Strike Ninja and
-   Green Baboon, whose record puts the same historical state at Edison's and at Tengu's snapshot
+   (`tests/engine/test_edison_historical_scripts.py`), and Strike Ninja, Dice Re-Roll, Machina
+   Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos and Treeborn Frog, whose record
+   puts the same historical state at Edison's and at Tengu's snapshot
    (`tests/engine/test_shared_historical_scripts.py`). **Round 035 checked all sixteen cards
    the project had generated or drafted against period rulings** (`docs/research/period-rulings-generated-scripts.md`)
    and found that rounds 029, 031 and 034 had read the printed English text as the period
@@ -576,20 +577,29 @@ reflects that.
    Snake Deity and Soul Rope (a Normal Trap could not be activated in the Damage Step) and
    Green Baboon (Konami's lists forbid its Damage Step activation). The first four generated
    cards were removed and their erratum records reclassified (Soul Rope's remaining difference
-   is a known gap again); Green Baboon keeps only its no-face-up difference. **Retired numbers,
-   never assigned again:** `600000001`, `600000003`, `600000007`–`600000009`, and
-   `600000010`–`600000017`. Round 034's eight cards were not shipped: the five strict-nomi cards
-   (Gigantes, The Rock Spirit, Garuda the Wind Spirit, VW-Tiger Catapult, Gladiator Beast
-   Heraklinos) are contradicted, and Dark Master - Zorc, Dice Re-Roll and Second Coin Toss rest on
-   UDE rulings whose range in force at the snapshots is not shown. **The rulings gate** (round
-   035): the validator refuses a generated card with no recorded rulings check
-   (`custom-card.rulings-check-*`, `docs/errata.md`, "The rulings gate"). The questions left for
-   the owner are the unresolved UDE rulings (Goddess of Whim, Green Baboon's face-up
-   requirement, Zorc, Second Coin Toss); they show as `custom-card.contradicting-ruling-range-unresolved`.
+   is a known gap again). **The rulings gate** (round 035): the validator refuses a generated card
+   with no recorded rulings check (`custom-card.rulings-check-*`, `docs/errata.md`, "The rulings
+   gate"). **Round 036 applied the owner's decision of 2026-09-29** (`docs/state.md`, "Period
+   rulings": a script follows period rulings, and UDE-era card rulings count at Edison and Tengu
+   unless a later Konami document replaced them). The gate can record it (`in_force: by-decision`,
+   for a source registered `ruling_class: ude-era-ruling`, naming the later Konami documents
+   checked). Under it Goddess of Whim (the card FAQ: once per turn) and Green Baboon (Konami's lists
+   and the Netrep answer and card FAQ: no Damage Step, face-up only) are modern-correct and their
+   generated cards were removed, and so are Dark Master - Zorc (the Netrep answer: once per turn) and
+   round 034's five strict-nomi cards (Konami's class answer, applied to every record it settles:
+   `docs/research/period-rulings-generated-scripts.md`, "Round 036"). Second Coin Toss stays a
+   known gap: the rulings agree with the modern card on everything they establish, and whether
+   each copy has its own use is not settled by any source. Five cards were added, each with a
+   `supported` verdict at both snapshots (Dice Re-Roll, Machina Peacekeeper, Machina Gearframe,
+   Elemental HERO Chaos Neos, Treeborn Frog); twenty other shared cards were examined and not
+   shipped (Necrovalley was left out: its state differs at the two snapshots), each with its
+   verdict in the research document. **Retired numbers, never assigned
+   again:** `600000001`, `600000003`, `600000004`, `600000006`–`600000009`, `600000010`–`600000015`
+   and `600000017`.
    Each script states its origin and licence (round 032, owner decision 2026-09-27):
    Stealth Union is original and MIT, and an engine test keeps an original script measurably
    different from Project Ignis's (`tests/engine/test_script_origin.py`; the limit, 0.40, is
-   pinned by `tests/test_script_similarity.py`); Goddess of Whim, Strike Ninja and Green Baboon
+   pinned by `tests/test_script_similarity.py`); Strike Ninja and round 036's five cards
    are derived from Ignis's scripts, credited and AGPL-3.0-or-later (`LICENSES/`,
    `dist/scripts/LICENSES.md`). Since round 034 (carried into round 035) a derived record's
    upstream file must be the card's own script (validator `custom-card.upstream-not-own-script`,
@@ -603,14 +613,14 @@ reflects that.
    optional and whether it targets. Round 029's script matched Project Ignis's too closely
    to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`); since
    round 032 a derived, credited script would be allowed, so the evidence is what holds it back.
-   It stays a known gap, with the modern card in Edison's list. **Remaining:** 39 Edison
-   `format.erratum-known-divergence` cards (`validate` at round 035's head): Night Assailant,
+   It stays a known gap, with the modern card in Edison's list. **Remaining:** 28 Edison
+   `format.erratum-known-divergence` cards (`validate` at round 036's head; 39 at round 035's): Night Assailant,
    five cards that apply an intermediate state at Edison only (Freed the Matchless General,
    Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon, Toon Table of Contents -
    the modern activation requirement plus the period reveal on a failed search, which only
    shows when a response empties the Deck mid-chain, so the engine test is a heavier
-   scenario), and 33 whose historical state also applies at Tengu's snapshot (32 before round
-   035, plus Soul Rope). Round 035 also found that a strict-nomi reading needs a period ruling
+   scenario), and 22 whose historical state also applies at Tengu's snapshot (32 before round
+   035, plus Soul Rope, less the eleven round 036 corrected or shipped). Round 035 also found that a strict-nomi reading needs a period ruling
    (the wording alone was not evidence), and left the other records that rest on it or on any
    printed-text-only functional call unadjudicated: 104 records, counted mechanically in the
    research document, section 7 (`docs/research/edison-behaviour-gaps.md`, section 2 carries

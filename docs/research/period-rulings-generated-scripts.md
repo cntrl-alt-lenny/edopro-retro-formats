@@ -481,3 +481,140 @@ themselves.
   its check.
 
 Owner's questions from this research are stated in plain terms in the round report.
+
+## 11. Round 036: the owner's decision, the corrections, the new cards
+
+On 2026-09-29 the owner decided that a generated script follows period rulings, not printed text
+alone, and that UDE-era card rulings count at Edison and Tengu unless a later Konami document
+replaced them (`docs/state.md`, "Period rulings"). Section 5 above left the range of those rulings
+unresolved for the class; the decision closes it as a product decision, not as a finding: it says
+nothing about *when* Konami withdrew them, which is still unknown. It does not make a Yugipedia line
+a source, an OCG ruling a TCG one, or printed text a ruling.
+
+### 11.1 How the gate records it
+
+`rulings_check` accepts `in_force: by-decision` (`docs/errata.md`, "The rulings gate"). The source must
+be registered in `data/sources.json` as `ruling_class: ude-era-ruling` (a UDE card FAQ entry or Netrep
+answer, including the Konami-hosted copy of the FAQ); the entry says `later_konami_replacement:
+none-found` and names the later Konami documents checked, each registered as `ruling_class:
+konami-document`; and a contradicting finding in force by decision still needs an `owner_decision`.
+"Later Konami documents checked" in every entry below means: the three errata lists (compiled
+2009-07-30, 2010-01-05, 2010-11-05, searched by card name), the fifteen per-set ruling documents that
+Konami's Gameplay page linked on 2011-09-18 (retrieved from the Internet Archive and text-searched by
+name; `konami-set-rulings-archive` stands for them) and, where a rulebook matters, Versions 7.1, 7.2
+and 8.0. The FAQ pages themselves stopped being served at their URLs in early 2009 (the Konami host
+redirects from the capture of 2009-01-19, the UDE host from 2009-02-27); that shows the pages were
+removed from those URLs, not that a ruling was withdrawn, and no Konami document read says so.
+
+### 11.2 The five cards round 035 left open (part B)
+
+Each ruling was re-read at its archive capture before acting.
+
+| card | ruling, as read | action |
+|---|---|---|
+| Goddess of Whim (`600000004`) | Konami-hosted card FAQ page F-H, capture 2008-12-15: "\"Goddess of Whim's\" effect is an Ignition Effect. It can only be used once per turn, during your Main Phase." Not on Konami's errata lists. | The era card is used once per turn, as the modern card is. Record reclassified `cosmetic`, generated card removed, number retired. The script differed from Ignis's only by the missing `SetCountLimit(1)`. |
+| Green Baboon (`600000006`) | (a) Konami's errata lists 2009-07-30, 2010-01-05, 2010-11-05: "You cannot activate the effect of this card during the Damage Step." and "When a Beast-Type monster is destroyed and sent to the Graveyard, you can only Special Summon 1 \"Green Baboon, Defender of the Forest,\" even if multiple copies are available in your hand/Graveyard." (b) UDE Netrep, answer 2007-09-28, thread 859107, to a Beast destroyed face-down: "You cannot activate the effect of \"Green Baboon, Defender of the Forest\" in this case."; card FAQ F-H (2008-12-15): "This effect can be activated after a Beast-Type monster you control is destroyed and sent to the Graveyard, if that monster was face-up ..." and "You cannot activate this effect when a face-down Beast-Type monster you control is destroyed by a card effect." Konami's lists say nothing on face-up. | Nothing else differs: the generated script differed from Ignis's `official/c46668237.lua` only by the missing `IsPreviousPosition(POS_FACEUP)` (its Damage Step flag went in round 035). Record `cosmetic`, card removed, number retired. The FAQ's "Damage Step" line is the entry Konami's lists replaced; the face-up lines are not replaced. |
+| Dark Master - Zorc (`600000015`, never shipped) | UDE Judge List thread 883212, capture 2007-10-27: the Netrep (answer 2007-10-11) to "Can you use its effect more than once per turn?": "No. You can only roll the 6-sided die once. Ex: If you use the effect during Main Phase 1, you would not be able to use it again during Main Phase 2." | Matches the modern card. The 2012 transition is `cosmetic`; the record is cosmetic-only. Edison and Tengu stop reporting a divergence. |
+| Second Coin Toss (`600000017`, never shipped) | Konami-hosted card FAQ page S-T, capture 2008-12-15: "The effect of this card only applies when you perform a coin toss, not when your opponent performs a coin toss."; "If an effect requires multiple coin flips, like \"Barrel Dragon\", you would redo all 3 coin flips."; "Even if multiple \"Second Coin Toss\" cards are active, you can only redo each coin toss once."; "Even if the original coin toss came out in your favor, you may use the effect of \"Second Coin Toss\" and redo the toss." Not on Konami's lists. | **Stays a known gap, rulings cited.** Project Ignis's script (`official/c36562627.lua`) redoes the controller's own tosses only, redoes every flip, and allows one redo per player per turn, so it agrees with all four rulings, and a toss can be redone at most once under both. The only observable difference left between a per-copy and a per-name limit is two copies each redoing a *different* toss in one turn, and no ruling says whether copies have separate uses ("each toss once" is also what a per-name limit gives for one toss). Round 034's per-copy script would let a second copy redo an already redone toss, which the FAQ forbids, so it is not the behaviour the rulings describe either. No third behaviour is established, so none ships. |
+| Dice Re-Roll (`600000016`, round 034) | Card FAQ, UDE page 2005-07-01 and Konami-hosted 2008-12-15 page D-E: "You activate \"Dice Re-Roll\" before you activate the effect which will let you roll a die. Then you can use the effect of \"Dice Re-Roll\" once during the turn in which you activated it." Not on Konami's lists or set rulings. | Ships, from round 034's script (each activation registers its own re-roll). Round 034's test re-rolled an already re-rolled result, which no ruling covers; it is replaced by two activations, each before its own roll (two Dark Master - Zorc give two rolls): the modern card re-rolls one of the two, the generated card both. |
+
+### 11.3 The class answers across the errata corpus (part C)
+
+Round 035's two class answers are Konami documents current at both snapshots: a monster worded "can
+only be Special Summoned by" can be revived after one proper Special Summon (rulebook Versions 7.0
+to 8.0, the strategy article printed 2009-12-07, the Extreme Victory ruling of 2011-05-12), and the
+rulebook's Damage Step rule. All quoted passages were re-read this round (rulebook 7.1, the Extreme
+Victory PDF and the article at their captures). The scan was mechanical and then read: a pattern
+over the 117 records with a functional transition for Special Summon wording and "Damage Step",
+followed by reading each hit. A record whose texts use neither phrase was not read.
+
+**Corrected `cosmetic` (the class was the only functional change):** Gigantes, The Rock Spirit, Garuda
+the Wind Spirit, VW-Tiger Catapult, Gladiator Beast Heraklinos (round 034's five nomi cards, none
+shipped), and, from part B, Goddess of Whim, Green Baboon and Dark Master - Zorc. VW-Tiger
+Catapult's 2018 printing also rewrote its discard effect with explicit targeting; the record's earlier
+reading called only the revival a difference, no ruling read addresses the targeting, and it is
+neither established nor adjudicated here (an open question in the round report).
+
+**Narrowed, another functional difference kept:** Dark Necrofear (c2: the End Phase equip became a
+targeting effect restricted to a face-up monster; its own FAQ entry confirms the class: "If you
+successfully Special Summon it using this method, and then wish to use \"Monster Reborn\" to Special
+Summon it from the Graveyard, you do not have to remove 3 more Fiend-Type monsters from the
+Graveyard."); Elemental HERO Chaos Neos (the coin effect's phase; its FAQ entry confirms the
+class: it "can be Special Summoned from the Graveyard if it was first Special Summoned according to its
+text"); Fushioh Richie (the negation is continuous and chain-less, against a Quick Effect; its FAQ
+entry: "You can use \"Premature Burial\" or \"Call of the Haunted\" to Special Summon \"Fushioh
+Richie\" from your Graveyard, as long as ... Special Summoned using the proper method"). Each
+keeps its passages; the withdrawn half of the summary and of the gap statement is kept
+verbatim in the notes.
+
+**Looked at and left alone.** "Cannot be Special Summoned **except** by" wording is the case Konami's
+article and the card FAQ keep locked (Berserk Dragon, Horus LV8), so the record's strict reading
+is supported, not contradicted: Anteater Eating Ant, Elemental HERO Divine Neos, Evil HERO Dark
+Gaia, Masked Beast Des Gardius, XY-Dragon Cannon, XZ-Tank Cannon, YZ-Tank Dragon. XYZ-Dragon
+Cannon's era text says "can only be" but carries an explicit "cannot be Special Summoned from the
+Graveyard", and its FAQ entry says "even after"; the class answer is about the Graveyard, so it does not
+touch what is left. Chaos Emperor Dragon - Envoy of the End's record already says the era card is
+revivable. Blue-Eyes Toon Dragon, Toon Mermaid and Toon Summoned Skull say "can only be Special
+Summoned while you control Toon World", a condition, and their functional changes are the attack
+lock and the Tribute count. Wulf, Lightsworn Beast had no summon restriction in the era. For the
+Damage Step: no record other than Rise of the Snake Deity, Soul Rope and Green Baboon says the era
+card could be activated there; Michizure and My Body as a Shield say the reverse (the era card
+cannot, the modern one can), which the rulebook confirms, and Nutrient Z has a window of its own.
+No card-specific ruling disagreed with a class answer, so the stop condition did not fire.
+
+### 11.4 New cards (part D)
+
+The shared Edison/Tengu divergences `validate` reports were 33. Excluded: the cards of parts B and C
+(eight), and Necrovalley (the record's state differs at the two snapshots). Night Assailant and the
+five Edison-only intermediate-state cards are not among the 33. Examined: 24; shipped: 4.
+
+**Shipped** (each a derived script, a quoted ruling, a red engine run under both formats):
+
+| card | difference | ruling in force, as read |
+|---|---|---|
+| Machina Peacekeeper (`600000018`), Machina Gearframe (`600000019`) | a monster can only be equipped with 1 Union monster at a time | Konami-hosted Advanced Game Play FAQ (2008-12-15): "A monster can only be equipped with 1 Union Monster at a time, but can still be equipped with other Equip Spell Cards such as \"Axe of Despair\", etc."; card FAQ A-C (2008-12-16), Cyber Phoenix: "(The Machine-Type monster can still only be equipped with 1 Union Monster at a time, because that is a condition, not an effect)."; Konami's The Shining Darkness rulings (compiled 2010-04-30, so Tengu only), Delta Tri: "You cannot activate the effect to equip a Union monster if Delta Tri is already equipped with a Union monster." Konami's Machina Mayhem rulings (2010-04-06) print the Condition on both cards and rule on other points. Nothing replaces it. The era text's "unequip ... in face-up Attack Position" is printed text only: no ruling addresses it, so it is not implemented (`not_reproduced`). |
+| Elemental HERO Chaos Neos (`600000020`) | the coin effect can be used in Main Phase 2 | Konami's rulebook Versions 7.1 (capture 2010-03-30), 7.2, 8.0: Ignition Effect: "You use this type of effect just by declaring its activation during your Main Phase." Main Phase 2: "The actions a player can perform in this phase are the same as in Main Phase 1. However, if the player already did something in Main Phase 1 that has a limit to the number of times it can be done, the player cannot do it again in Main Phase 2." Card FAQ D-E, Dark Master - Zorc: "Because \"Dark Master - Zorc\"'s effect is a Ignition Effect, you roll the die during Main Phase 1 or 2 of your turn only." **This rests on a general Konami rule applied through the printed text and a sibling's FAQ entry; no ruling names Chaos Neos's effect.** The round report puts it to the owner. |
+| Treeborn Frog (`600000021`) | the Standby Phase effect can be activated again in the same Standby Phase after a negation | Card FAQ S-T (Konami-hosted 2008-12-15): "If the effect of \"Treeborn Frog\" is negated, you can activate its effect again during the same Standby Phase and Special Summon it." Not in the errata lists; the two set rulings that name the Frog (Ancient Prophecy, Starstrike Blast) are about negation by another card. Engine: round 031 judged this not expressible; removing `SetCountLimit(1)` from Ignis's script does let a negated activation be made again (tested), while the FAQ's second entry (a Frog summoned then sent away returns) already holds for the modern script, because a card that moved is new to its own "once per turn" (a control test). |
+
+**Examined and not shipped.** The research was carried out by four read-only passes over six cards each,
+each reading the Yugipedia `Card_Rulings` page as a pointer, its cited sources, the Konami-hosted and
+UDE-hosted card FAQ pages, the three errata lists and the fifteen set rulings; the Builder re-read
+Machina Peacekeeper, Machina Gearframe, Chaos Neos, Treeborn Frog and, as a spot check, A Hero Emerges and
+Blackwing - Sirocco the Dawn. The other verdicts are the passes' and were not re-read at source.
+
+| card | verdict at Edison and Tengu | what was found |
+|---|---|---|
+| A Hero Emerges | contradicted | The card FAQ (A-C): "if your opponent selects a Special Summon-only monster like \"Dark Necrofear\", or a Spirit Monster, it is sent to the Graveyard." The modern behaviour. |
+| Blackwing - Sirocco the Dawn | contradicted | Konami's Crimson Crisis rulings (compiled 2009-02-27): "cannot activate its ATK boost in Main Phase 2." and "The ATK boost lasts until the End Phase." The modern behaviour. |
+| Blast Held by a Tribute | not addressed | No ruling on what "Tribute Summoned or Set" covers; the modern script may already fire for a Tribute Set monster that was flipped. |
+| Blaze Accelerator | contradicted | The FAQ says the Pyro send "is not a cost" and the effect targets; the modern script already sends the Pyro and then checks the target. |
+| Tri-Blaze Accelerator | not addressed | The FAQ contradicts the "send is a cost" premise; no ruling on whether the 500 damage needs the destruction. |
+| Wild Fire | not addressed / contradicted | No ruling on how many Blaze Accelerators are destroyed; the FAQ supports the modern dependency of the wipe and the Token. |
+| Boss Rush | contradicted | FAQ: "You cannot activate \"Boss Rush\" if you have already Normal Summoned or Set a monster this turn." (the modern condition); nothing on controller or face-down triggers. |
+| D.D. Scout Plane | contradicted | FAQ: "can only activate once during the same End Phase" (the modern cap). |
+| D.D. Survivor | contradicted | FAQ: "can only be activated once per turn" (the recorded difference is wrong). It also says a Survivor re-banished in the End Phase returns "during the next turn's End Phase", which the modern script does not do: a supported difference the record does not list. |
+| Dark Necrofear | contradicted / unrecorded | The recorded differences are contradicted; the FAQ supports two the record does not list (Tailor of the Fickle or Collected Power can move it; a Necrofear whose Summon was negated still equips). |
+| Ido the Supreme Magical Force | not addressed | No TCG ruling on Setting under Ido; Konami's OCG note (2014) says Setting is blocked (OCG only). |
+| Masked Beast Des Gardius | not addressed | The only entry is a Prohibition line; nothing on the untargeted equip. |
+| Mustering of the Dark Scorpions | not addressed | The entries do not touch Don Zaloog or name matching. |
+| Red-Eyes Wyvern | not addressed / unresolved | Targeting: only uncited or contradictory forum claims; nothing on the B. Chick exclusion. |
+| Soul Rope (2015 difference) | not addressed | No ruling on any cause of destruction other than by a card effect. |
+| Swap Frog | not addressed | Konami's Stardust Overdrive rulings (compiled 2009-10-29) cover only the Deck send, the cost and one extra Summon; nothing on a face-down send or on Frog the Jam. |
+| Totem Dragon | not addressed | No ruling on the card; the Treeborn Frog and Sinister Serpent entries reach the era behaviour for cards with the same structure, which is a sibling ruling, not a ruling on this card. |
+| Trap of Darkness | not addressed | No ruling on copying or targeting a second Trap of Darkness. |
+| Elemental HERO Divine Neos | not addressed | The only ruling on Neo Space Pathfinder as a Neos material is OCG. |
+| Evil HERO Dark Gaia | not addressed | Nothing on boosted-material ATK or on mandatory versus optional. |
+
+Three findings the round did not act on, because they change a record's transitions rather than a
+script: D.D. Survivor's "next turn's End Phase" return, Dark Necrofear's two rulings, and (by
+inference from the Stardust Overdrive ruling) a second Swap Frog copy's activation, are supported
+differences that the erratum records do not describe.
+
+### 11.5 What round 036 does not establish
+
+- When Konami withdrew the UDE card FAQ, if it did (the decision makes it a product rule).
+- Anything about GOAT (2005-04-01) for the class answers or the new cards.
+- Whether two Second Coin Toss copies have separate uses.
+- Whether the era VW-Tiger Catapult discard effect targeted.
+- Chaos Neos's Main Phase 2 use by a card-specific ruling.
+- The rejected candidates' verdicts at source, apart from the two spot checks named above.

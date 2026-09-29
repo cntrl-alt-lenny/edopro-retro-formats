@@ -166,9 +166,11 @@ script may be adapted from Ignis's (`docs/state.md`), so `authorship.kind` is on
 - `derived`: adapted from an upstream file and kept under its licence,
   `AGPL-3.0-or-later`. The record names the upstream file, the pinned revision and the
   upstream's copyright notice, and dates and summarises this project's change (AGPL-3.0
-  section 5(a)); the script's header repeats each on a fixed line. Goddess of Whim,
-  Strike Ninja and Green Baboon are derived: each is Ignis's `official/` script with only the
-  period difference applied. The upstream file must be the card's own script (round 034,
+  section 5(a)); the script's header repeats each on a fixed line. Strike Ninja, Dice Re-Roll,
+  Machina Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos and Treeborn Frog are derived:
+  each is Ignis's `official/` script with only the period difference applied (Peacekeeper and
+  Gearframe write out `proc_union.lua`'s Union procedure so that its equip effect can use the old
+  rule for one Union monster per monster, and nothing else of it changes). The upstream file must be the card's own script (round 034,
   carried into round 035): the validator rejects any other path
   (`custom-card.upstream-not-own-script`; `official/c<alias>.lua`, or a `pre-errata/`
   variant), and `tests/engine/test_script_origin.py` checks against the pinned checkout that a
@@ -199,8 +201,11 @@ refuses a record with no `rulings_check`, an object with these fields:
       "looked_for": "what was searched for in that source",
       "finding": "supports | contradicts | does-not-address",
       "passage": "the passage read, quoted briefly (required unless does-not-address)",
-      "in_force": "shown | not-shown",           // required with supports/contradicts
-      "in_force_basis": "what shows the ruling held at the snapshots this record applies at"
+      "in_force": "shown | not-shown | by-decision",   // required with supports/contradicts
+      "in_force_basis": "what shows the ruling held at the snapshots this record applies at",
+      // only with by-decision (below):
+      "later_konami_replacement": "none-found",
+      "later_documents_checked": ["konami-errata-list-2010-01-05", "..."]
     }
   ],
   "owner_decision": { "date": "2026-10-01", "decision": "...", "recorded_in": "docs/state.md" }
@@ -209,22 +214,53 @@ refuses a record with no `rulings_check`, an object with these fields:
 
 A ruling's date is not its range in force: `in_force` is `shown` only with a stated basis. When
 nothing was found, the entry says what was looked for (`does-not-address`). An OCG ruling is
-recorded as `does-not-address` for a TCG format (it is evidence about the OCG). The codes:
+recorded as `does-not-address` for a TCG format (it is evidence about the OCG).
+
+**`by-decision` (round 036).** The owner decided on 2026-09-29 (`docs/state.md`, "Period
+rulings") that a UDE-era card ruling counts at Edison and Tengu unless a later Konami document
+replaced it. A third answer to "did the ruling hold" records that:
+
+- **The source must be a UDE-era ruling.** `data/sources.json` marks each source that is one with
+  `"ruling_class": "ude-era-ruling"`: a UDE card FAQ entry or Netrep answer, including the
+  Konami-hosted copy of the UDE card FAQ (2008-12-15). A Konami-authored statement of the rules or
+  the text to play (rulebook, errata list, per-set ruling document) is `"ruling_class":
+  "konami-document"`. A source with neither, or a `konami-document`, cannot be `by-decision`
+  (`custom-card.decision-source-not-ude`); any other value of the field is
+  `sources.bad-ruling-class`.
+- **The entry says no later Konami document replaces the ruling on that point and names the
+  documents checked.** `later_konami_replacement` is `none-found` and `later_documents_checked` is a
+  non-empty list of registered `konami-document` sources (`custom-card.decision-later-documents-missing`;
+  `custom-card.decision-document-not-konami` for a listed source that is not one, and a UDE-era ruling
+  is not a later Konami document). If a later Konami document does replace the ruling, the ruling is
+  not `by-decision`: record what replaced it.
+- **`in_force_basis` names the decision.** The decision covers a ruling's *range in force* and
+  nothing else: it does not make a Yugipedia line a source, an OCG ruling a TCG one, or printed text
+  a ruling.
+- **A contradicting finding in force by decision still needs an `owner_decision`**, exactly as one
+  shown in force does (`custom-card.contradicting-ruling-unaccepted`). A decision about which
+  rulings count is not a decision to ship a contradicted script.
+
+The codes:
 
 | code | severity | when |
 |---|---|---|
 | `custom-card.rulings-check-missing` | error | no `rulings_check` |
 | `custom-card.rulings-check-malformed` | error | the check is incomplete or a value is outside its closed set |
 | `sources.unresolved` | error | a `source` is not in `data/sources.json` (the existing rule) |
-| `custom-card.contradicting-ruling-unaccepted` | error | a `contradicts` finding shown in force and no complete `owner_decision` |
+| `custom-card.contradicting-ruling-unaccepted` | error | a `contradicts` finding shown in force, or in force by decision, and no complete `owner_decision` |
 | `custom-card.contradicting-ruling-range-unresolved` | warning | a `contradicts` finding whose range in force is not shown: the card stays, and it is a tracked question for the owner |
+| `custom-card.decision-source-not-ude` | error | `in_force: by-decision` on a source that is not registered `ruling_class: ude-era-ruling` |
+| `custom-card.decision-later-documents-missing` | error | `by-decision` without `later_konami_replacement: none-found`, or without a list of the later Konami documents checked |
+| `custom-card.decision-document-not-konami` | error | a document listed as checked that is not registered `ruling_class: konami-document` |
+| `sources.bad-ruling-class` | error | a source's `ruling_class` is not one of the two values |
 
 This tightens the rules and loosens none. A contradicting ruling shown in force means the script
 is wrong: correct the card, or (with an owner decision) accept it knowingly. If the period
 behaviour matches the modern card, correct the erratum record (reclassify the transition, keep
 every passage, move the old summary into the review notes) and remove the generated card; its
-number is retired and never assigned again (`600000001`, `600000003`, `600000007` to `600000009`
-and `600000010` to `600000017` are).
+number is retired and never assigned again (`600000001`, `600000003`, `600000004`, `600000006`,
+`600000007` to `600000009`, `600000010` to `600000015` and `600000017` are; round 036 assigned
+`600000016` to Dice Re-Roll and `600000018` to `600000021` to the four cards after it).
 
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
