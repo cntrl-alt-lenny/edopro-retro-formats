@@ -1,8 +1,7 @@
 # Project state — durable context
 
 **Stores no live repository state** (no SHA outside `## Historical
-anchors`, no queue, no branch layout, no test counts — stale the moment
-anyone commits). Derive live state:
+anchors`, queue, branch layout or test counts). Derive live state:
 
 | question | source of truth |
 |---|---|
@@ -38,13 +37,11 @@ Rulings easy to get wrong and expensive to rediscover:
   drifted axis without a brief.
 - **`schemas/*.json` are documentation, not enforcement** — the real gate is
   `retroformats/validate.py` (round 6).
-- **Errata v1→v2 migration is complete**; don't reintroduce v1. **Python:
-  standard library only.**
+- **Errata v1→v2 migration is complete**; don't reintroduce v1.
 
 ## Canonical formats
 
-Three; a fourth needs an owner-approved direction first (`AGENTS.md`). Live
-status per format: `python -m retroformats report`.
+Three; a fourth needs an owner-approved direction first (`AGENTS.md`).
 
 | format | snapshot | pool basis |
 |---|---|---|
@@ -56,7 +53,6 @@ status per format: `python -m retroformats report`.
   duplicated line, so hashes legitimately diverge — `## Historical anchors`).
 - **Edison's rule profile is intentionally `partial`**: five flags remain
   unresolved ([`research/edison-rules.md`](research/edison-rules.md) §5a).
-  Honest, not an oversight.
 
 ## Parked research — do not reopen without new evidence
 
@@ -85,7 +81,7 @@ conversation. This overrides the framework's fresh-session default.
 
 ## Operating policy — the framework is done being built
 
-Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
+Owner, 2026-08-31: **stop polishing the framework, use it.**
 
 - **No workflow/framework changes without a concrete, observed problem.**
 - **Larger, related briefs**, to amortise review.
@@ -99,14 +95,19 @@ Set by the owner on 2026-08-31: **stop polishing the framework, use it.**
 **Evidence-gathering period: the next 5-10 genuine rounds**, then fix the
 bottleneck actually observed.
 
-## Owner decision — card scripts and licence (2026-09-27)
+## Owner decisions — card scripts
 
-Ignis's CardScripts are AGPL-3.0-or-later; this repository is MIT. AI
-"from scratch" scripts reproduced Ignis's from memory (rounds 029, 031), so
-scripts adapted from Ignis's are allowed: labelled `derived`, credited, and
-kept AGPL-3.0-or-later. A script labelled `original` must measurably differ
-from Ignis's. Night Assailant is held back on thin evidence. A script whose state also applies
-at Tengu may change Tengu's list (2026-09-24).
+- **Licence (2026-09-27).** Ignis's CardScripts are AGPL-3.0-or-later; this
+  repository is MIT. "From scratch" scripts reproduced Ignis's (rounds 029,
+  031), so adapted scripts are allowed: `derived`, credited,
+  AGPL-3.0-or-later. An `original` script must measurably differ from
+  Ignis's. Night Assailant is held back on thin evidence. A script whose
+  state also applies at Tengu may change Tengu's list (2026-09-24).
+- **Period rulings (2026-09-29).** A script follows period rulings, not
+  printed text alone. UDE-era card rulings count at Edison and Tengu unless
+  a later Konami document replaced them. When Konami withdrew them is
+  unknown: a product decision, not a finding
+  ([`research/period-rulings-generated-scripts.md`](research/period-rulings-generated-scripts.md)).
 
 ## Open items and sequencing judgements
 
@@ -122,8 +123,8 @@ doesn't record:
   (round 13) — membership only, never deltas.
 - **An unreviewed second run of round 13 is parked, not adopted:** ref
   `preserve/round13-alt-run-1bec139` — a different primary source for the
-  September 2010 changeover, to re-verify from source, never copy. It is
-  per-clone and not on `origin`.
+  September 2010 changeover, to re-verify from source, never copy;
+  per-clone, not on `origin`.
 - **Materialisation repairs only pool-content drift**
   (`pool.materialization-drift`); every other `pool.*` error still refuses.
 
