@@ -45,6 +45,34 @@
     "The card is banished with the engine's temporary-banish mechanism and returns during the End Phase in the position it left; a return into an occupied or unavailable zone, a second Strike Ninja's interaction with the first, and effects that respond to the banishing are not modelled. Only the banish, the return and two copies each using the effect once are tested.",
     "The card row's statline is copied from the modern row and not checked against the period printing."
   ],
+  "rulings_check": {
+    "difference": "The use limit belongs to each copy, so two Strike Ninjas can each use the effect in one turn; the modern card is limited by name.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+        "looked_for": "a ruling on the use limit or on several copies",
+        "finding": "does-not-address",
+        "passage": "The entries say the effect cannot be activated during the Damage Step, is a Quick Effect usable outside the Main Phases, needs the card face-up on the field, and that removing the 2 DARK monsters is a cost. None addresses several copies."
+      },
+      {
+        "source": "ude-card-rulings-archive",
+        "looked_for": "a ruling on the use limit or on several copies",
+        "finding": "does-not-address",
+        "passage": "The 2005-07-01 page carries the same four entries as the 2008-12-15 FAQ (there called a Multi-Trigger effect); none addresses several copies."
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name; not listed",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-11-05",
+        "looked_for": "the card by name; not listed",
+        "finding": "does-not-address"
+      }
+    ]
+  },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",

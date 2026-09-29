@@ -22,7 +22,13 @@ from retroformats.lflist import build_lflist, lflist_hash
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 
-from .helpers import ROUND_031_PASSCODES, swap_generated_back
+from .helpers import (
+    ROUND_031_PASSCODES,
+    ROUND_035_RETIRED_AT_TENGU_PASSCODES,
+    swap_back,
+    swap_generated_back,
+    swap_retired_forward,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1588,8 +1594,11 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
 
         determinate_modern = sum(selection.is_modern for selection in determinate)
         determinate_historical = len(determinate) - determinate_modern
-        self.assertEqual(21, determinate_modern)
-        self.assertEqual(127, determinate_historical)
+        # Round 035: Metalzoa, Rise of the Snake Deity and Malefic Blue-Eyes are cosmetic-only
+        # records now (modern at every snapshot), so 24 modern and 124 historical where the
+        # frozen packet records 21 and 127.
+        self.assertEqual(21 + 3, determinate_modern)
+        self.assertEqual(127 - 3, determinate_historical)
         self.assertEqual(21, audit["determinate"]["modern"])
         self.assertEqual(127, audit["determinate"]["historical"])
 
@@ -1604,12 +1613,16 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # 029/030; six cards shared with Tengu in 031). The frozen research packet still
         # records the earlier 42/0; it is not rewritten, and the expected numbers below
         # are the packet's own with exactly that documented delta applied.
+        # Round 035 took four of those eight back out: Metalzoa, Rise of the Snake Deity and
+        # Malefic Blue-Eyes are modern-correct (cosmetic-only records, so not in this count) and
+        # Soul Rope is a known gap again. The frozen packet's 42 known-gap: -8 to custom-script,
+        # +1 (Soul Rope) back; custom-script 0 + 8 - 4 = 4.
         self.assertEqual(
-            {"reuse-upstream": 81, "known-gap": 34, "none-needed": 4, "custom-script": 8}, determinate_coverage
+            {"reuse-upstream": 81, "known-gap": 35, "none-needed": 4, "custom-script": 4}, determinate_coverage
         )
         packet_with_generated_cards = dict(audit["determinate"]["coverage"])
-        packet_with_generated_cards["known-gap"] -= 8
-        packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8
+        packet_with_generated_cards["known-gap"] += -8 + 1
+        packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8 - 4
         self.assertEqual(determinate_coverage, packet_with_generated_cards)
         self.assertEqual(
             set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed", "custom-script"}
@@ -1689,13 +1702,14 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         self.assertEqual(4563, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        # Re-pinned round 031: six generated cards (600000004-9) are in Tengu's list now;
-        # swapping them back reproduces the earlier pin.
+        # Re-pinned round 031: six generated cards (600000004-9) were in Tengu's list; round 035
+        # took three of them out again (600000007-9), so the list holds three now. Swapping the
+        # three forward reproduces the round-031 pin, and swapping all six back the earlier one.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x45A6E446, tengu.hash)
-        self.assertEqual(
-            0x0C878718, lflist_hash(swap_generated_back(tengu.entries, self.repo.custom_cards, ROUND_031_PASSCODES))
-        )
+        self.assertEqual(0x410A9E85, tengu.hash)
+        forward = swap_retired_forward(tengu.entries, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
+        self.assertEqual(0x45A6E446, lflist_hash(forward))
+        self.assertEqual(0x0C878718, lflist_hash(swap_back(forward, ROUND_031_PASSCODES)))
         self.assertFalse((ROOT / "formats" / "1999-08-tokyo-dome").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "ocg-1999-07.json").exists())
         self.assertFalse((ROOT / "data" / "banlists" / "1999-08-tokyo-dome.json").exists())

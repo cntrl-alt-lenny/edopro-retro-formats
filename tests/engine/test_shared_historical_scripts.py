@@ -1,16 +1,18 @@
 """Engine tests for the historical cards this project generates for BOTH the
 Edison (2010-04-24) and Tengu (2011-09-17) formats (roadmap item 7, round 031):
-Goddess of Whim, Strike Ninja, Green Baboon, Rise of the Snake Deity, Malefic
-Blue-Eyes White Dragon and Soul Rope.
+Goddess of Whim, Strike Ninja and Green Baboon, plus one test for each of the four
+cards round 035 removed (Metalzoa, Rise of the Snake Deity, Malefic Blue-Eyes White
+Dragon, Soul Rope), which assert that the modern card is used and does what Konami's
+period rulings say (docs/research/period-rulings-generated-scripts.md).
 
-Each record's historical state applies at both snapshots, so each generated card
-replaces the modern one in both lists. Every difference test therefore runs its
-scenario under both formats' duel options (`FORMATS`), once with the modern card
-(its cards.cdb code, the script Project Ignis ships) and once with this
-repository's generated card (`dist/databases/retro-formats.cdb`,
-`dist/scripts/c<passcode>.lua`), in the same scenario, and asserts the difference
-the erratum record claims. A generated script that behaved like the modern card
-would leave the two runs identical and the historical assertion would be red.
+Each generated card's record puts the same historical state at both snapshots, so each
+generated card replaces the modern one in both lists. Every difference test therefore runs
+its scenario under both formats' duel options (`FORMATS`), once with the modern card (its
+cards.cdb code, the script Project Ignis ships) and once with this repository's generated
+card (`dist/databases/retro-formats.cdb`, `dist/scripts/c<passcode>.lua`), in the same
+scenario, and asserts the difference the erratum record claims. A generated script that
+behaved like the modern card would leave the two runs identical and the historical
+assertion would be red.
 
 "Control" tests exist so a script cannot pass by doing nothing: they show it
 still behaves like the modern card where the period text and the modern text
@@ -23,8 +25,10 @@ whose data_path/script_path point at dist/ would).
 
 from __future__ import annotations
 
+import sqlite3
 import struct
 import unittest
+from pathlib import Path
 
 from . import harness as H
 from .test_edison_historical_scripts import (
@@ -63,18 +67,20 @@ BABOON_MODERN = 46668237
 BABOON_HISTORICAL = 600000006
 
 SNAKE_MODERN = 16067089
-SNAKE_HISTORICAL = 600000007
+SNAKE_RETIRED = 600000007  # removed in round 035: the modern card is used
 VENNOMINON = 72677437
 VENNOMINAGA = 8062132
 
 MALEFIC_MODERN = 9433350
-MALEFIC_HISTORICAL = 600000008
+MALEFIC_RETIRED = 600000008  # removed in round 035
+METALZOA_MODERN = 50705071
+METALZOA_RETIRED = 600000001  # removed in round 035
 BLUE_EYES = 89631139
 SOGEN = 86318356  # Field Spell
 MALEFIC_PARADOX = 8310162
 
 ROPE_MODERN = 37383714
-ROPE_HISTORICAL = 600000009
+ROPE_RETIRED = 600000009  # removed in round 035
 
 # -- prompt helpers -----------------------------------------------------------
 
@@ -296,7 +302,11 @@ class GreenBaboonSharedTest(unittest.TestCase):
     """Period text: "When a Beast-Type monster you control is destroyed and sent
     to the Graveyard, you can pay 1000 Life Points to Special Summon this card
     from your hand or the Graveyard." The modern card needs the Beast to have
-    been face-up and cannot be used in the Damage Step."""
+    been face-up and cannot be used in the Damage Step. Konami's errata lists
+    (compiled 2009-07-30, 2010-01-05, 2010-11-05) say "You cannot activate the
+    effect of this card during the Damage Step", so the generated card keeps only
+    the no-face-up difference (round 035; a UDE ruling says otherwise on that, its
+    range in force is not shown, and it is on the owner's list)."""
 
     def _dark_hole(self, baboon: int, beast_position: str, beast: int, mode: int):
         setup = (
@@ -337,14 +347,40 @@ class GreenBaboonSharedTest(unittest.TestCase):
         self.assertEqual(1, len(historical.seen(H.MSG_PAY_LPCOST)), "1000 Life Points are paid")
 
     @in_both_formats
-    def test_a_beast_destroyed_by_battle_offers_the_period_card_but_not_the_modern_one(self, mode):
+    def test_a_beast_destroyed_by_battle_offers_neither_card_in_the_damage_step(self, mode):
+        # Round 035: the round-031 script allowed the Damage Step (EFFECT_FLAG_DAMAGE_STEP); Konami's
+        # errata lists and rulebook forbid it, so the period card is not offered, like the modern one.
         modern, modern_offers = self._battle(BABOON_MODERN, mode)
         historical, offers = self._battle(BABOON_HISTORICAL, mode)
         self.assertEqual(1, moved(modern, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
         self.assertFalse(modern_offers.was_offered(), "the modern card is barred from the Damage Step")
         self.assertEqual(1, moved(historical, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertTrue(offers.was_offered())
-        self.assertEqual(1, moved(historical, BABOON_HISTORICAL, H.LOCATION_HAND, H.LOCATION_MZONE))
+        self.assertFalse(offers.was_offered(), "so is the period card: Konami's lists say so")
+        self.assertEqual(0, moved(historical, BABOON_HISTORICAL, H.LOCATION_HAND, H.LOCATION_MZONE))
+
+    @in_both_formats
+    def test_with_two_copies_available_only_one_is_special_summoned_like_the_modern_card(self, mode):
+        # Konami's lists: "you can only Special Summon 1 "Green Baboon, Defender of the Forest," even if
+        # multiple copies are available in your hand/Graveyard." Both cards satisfy it in this scenario.
+        for baboon in (BABOON_MODERN, BABOON_HISTORICAL):
+            with self.subTest(card=baboon):
+                setup = (
+                    f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+                    f"Debug.AddCard({baboon},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
+                    f"Debug.AddCard({baboon},0,0,LOCATION_HAND,2,POS_FACEDOWN_DEFENSE)\n"
+                    f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+                )
+                offers = Offers(baboon)
+                duel = scenario(mode, setup + deck_fillers())
+                duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
+                duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
+                duel.default_response(H.MSG_SELECT_CARD, select_minimum)
+                standing_answers(duel)
+                duel.default_response(H.MSG_SELECT_CHAIN, offers)
+                duel.run(turns=1)
+                self.assertTrue(offers.was_offered())
+                self.assertEqual(1, moved(duel, baboon, H.LOCATION_HAND, H.LOCATION_MZONE))
+                self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
 
     @in_both_formats
     def test_a_face_up_beast_destroyed_by_a_card_effect_works_and_a_rock_does_not_like_the_modern_card(self, mode):
@@ -359,76 +395,40 @@ class GreenBaboonSharedTest(unittest.TestCase):
                 self.assertEqual(0, moved(duel, baboon, H.LOCATION_HAND, H.LOCATION_MZONE))
 
 
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class RiseOfTheSnakeDeitySharedTest(unittest.TestCase):
-    """Period text: "Activate only when a face-up "Vennominon the King of
-    Poisonous Snakes" you control is destroyed. Special Summon 1 "Vennominaga
-    the Deity of Poisonous Snakes" from your hand or Deck." The modern card adds
-    "except by battle"."""
+LFLIST_DIR = Path(__file__).resolve().parents[2] / "dist" / "lflists"
+DIST_DIR = Path(__file__).resolve().parents[2] / "dist"
 
-    def _run(self, snake: int, mode: int, *, by_battle: bool, victim: int = VENNOMINON, position: str = "POS_FACEUP_ATTACK"):
-        setup = (
-            f"Debug.AddCard({snake},0,0,LOCATION_SZONE,0,POS_FACEDOWN)\n"
-            f"Debug.AddCard({victim},0,0,LOCATION_MZONE,0,{position})\n"
-            f"Debug.AddCard({VENNOMINAGA},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
-        )
-        offers = Offers(snake)
-        if by_battle:
-            setup += f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-            duel = run_scenario(
-                setup, mode | DUEL_ATTACK_FIRST_TURN, idle=H.answer_idle(6), offers=offers, battle=attack_once()
-            )
-        else:
-            setup += f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            duel = scenario(mode, setup + deck_fillers())
-            duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
-            duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
-            duel.default_response(H.MSG_SELECT_CARD, select_minimum)
-            standing_answers(duel)
-            duel.default_response(H.MSG_SELECT_CHAIN, offers)
-            duel.run(turns=1)
-        return duel, offers
 
-    @in_both_formats
-    def test_vennominon_destroyed_in_battle_lets_the_period_card_summon_vennominaga(self, mode):
-        modern, modern_offers = self._run(SNAKE_MODERN, mode, by_battle=True)
-        historical, offers = self._run(SNAKE_HISTORICAL, mode, by_battle=True)
-        self.assertEqual(1, moved(modern, VENNOMINON, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertFalse(modern_offers.was_offered(), "the modern card excludes destruction by battle")
-        self.assertEqual(0, moved(modern, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
-        self.assertEqual(1, moved(historical, VENNOMINON, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertTrue(offers.was_offered())
-        self.assertEqual(1, moved(historical, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
-        self.assertEqual(1, moved(historical, SNAKE_HISTORICAL, H.LOCATION_SZONE, H.LOCATION_GRAVE))
-
-    @in_both_formats
-    def test_vennominon_destroyed_by_a_card_effect_works_like_the_modern_card(self, mode):
-        for snake, deity in ((SNAKE_MODERN, VENNOMINAGA), (SNAKE_HISTORICAL, VENNOMINAGA)):
-            with self.subTest(card=snake):
-                duel, offers = self._run(snake, mode, by_battle=False)
-                self.assertTrue(offers.was_offered())
-                self.assertEqual(1, moved(duel, deity, H.LOCATION_DECK, H.LOCATION_MZONE))
-                self.assertEqual(1, moved(duel, snake, H.LOCATION_SZONE, H.LOCATION_GRAVE))
-
-    @in_both_formats
-    def test_another_monster_or_a_face_down_vennominon_destroyed_does_not_activate_either_card(self, mode):
-        for snake in (SNAKE_MODERN, SNAKE_HISTORICAL):
-            with self.subTest(card=snake, victim="another monster"):
-                duel, offers = self._run(snake, mode, by_battle=False, victim=PALE_BEAST)
-                self.assertFalse(offers.was_offered())
-                self.assertEqual(0, moved(duel, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
-            with self.subTest(card=snake, victim="face-down Vennominon"):
-                duel, offers = self._run(snake, mode, by_battle=False, position="POS_FACEDOWN_DEFENSE")
-                self.assertFalse(offers.was_offered())
-                self.assertEqual(0, moved(duel, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
+def listed_codes(format_id: str) -> set[int]:
+    """The passcodes a built lflist whitelists, read from dist/ as a client would."""
+    codes = set()
+    for line in (LFLIST_DIR / f"{format_id}.lflist.conf").read_text(encoding="utf-8").splitlines():
+        head = line.split("--", 1)[0].split()
+        if len(head) == 2 and head[0].isdigit():
+            codes.add(int(head[0]))
+    return codes
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class MaleficBlueEyesSharedTest(unittest.TestCase):
-    """Period text: "This card cannot be Normal Summoned or Set. This card can
-    only be Special Summoned by removing from play 1 "Blue-Eyes White Dragon"
-    from your Deck. ..." Nothing else can Special Summon it; the modern card
-    may be revived after one proper Summon."""
+class RetiredCardsUseTheModernCardTest(unittest.TestCase):
+    """Round 035 removed four generated cards because Konami's period rulings show the modern card
+    behaves as the era card did (docs/research/period-rulings-generated-scripts.md). Each test asserts
+    that the lists name the modern code and no generated code, that the generated row and script are
+    gone, and that the modern card does what those rulings say. Red on the wrong behaviour: restore
+    the generated code to a list, or put back the round-031 script (the scratch runs in the report)."""
+
+    def _assert_the_modern_card_is_used(self, modern: int, retired: int, formats: tuple[str, ...]):
+        for format_id in formats:
+            with self.subTest(format=format_id):
+                codes = listed_codes(format_id)
+                self.assertIn(modern, codes, "the list names the modern card")
+                self.assertNotIn(retired, codes, "and no longer the generated one")
+        self.assertFalse((DIST_DIR / "scripts" / f"c{retired}.lua").exists())
+        con = sqlite3.connect(f"file:{DIST_DIR / 'databases' / 'retro-formats.cdb'}?mode=ro", uri=True)
+        try:
+            self.assertEqual([], con.execute("SELECT id FROM datas WHERE id = ?", (retired,)).fetchall())
+        finally:
+            con.close()
 
     def _reborn_candidates(self, code: int, mode: int) -> list[int]:
         setup = (
@@ -453,103 +453,27 @@ class MaleficBlueEyesSharedTest(unittest.TestCase):
         return offered[0]
 
     @in_both_formats
-    def test_the_period_card_cannot_be_revived_by_monster_reborn(self, mode):
-        self.assertIn(MALEFIC_MODERN, self._reborn_candidates(MALEFIC_MODERN, mode))
-        candidates = self._reborn_candidates(MALEFIC_HISTORICAL, mode)
-        self.assertNotIn(MALEFIC_HISTORICAL, candidates)
-        self.assertEqual([GIANT_RAT], candidates, "Monster Reborn still works: only Malefic is excluded")
+    def test_metalzoa_is_the_modern_card_and_can_be_revived_after_a_proper_summon(self, mode):
+        # Konami's rulebook: a Special Summon Monster may be Special Summoned by another card's effect
+        # once it was properly Special Summoned; "can only be Special Summoned by" is not "except by".
+        # Metalzoa's erratum precedes Tengu's snapshot, so only Edison's list ever carried the generated card.
+        self._assert_the_modern_card_is_used(METALZOA_MODERN, METALZOA_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        self.assertIn(METALZOA_MODERN, self._reborn_candidates(METALZOA_MODERN, mode))
 
-    def _procedure(self, code: int, mode: int, extra_setup: str = "", field_spell: bool = True):
+    @in_both_formats
+    def test_malefic_blue_eyes_is_the_modern_card_and_can_be_revived_after_a_proper_summon(self, mode):
+        self._assert_the_modern_card_is_used(MALEFIC_MODERN, MALEFIC_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        candidates = self._reborn_candidates(MALEFIC_MODERN, mode)
+        self.assertIn(MALEFIC_MODERN, candidates)
+        self.assertIn(GIANT_RAT, candidates)
+
+    def _snake(self, mode: int, *, by_battle: bool):
         setup = (
-            f"Debug.AddCard({code},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({BLUE_EYES},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
-            + (f"Debug.AddCard({SOGEN},0,0,LOCATION_SZONE,5,POS_FACEUP)\n" if field_spell else "")
-            + extra_setup
+            f"Debug.AddCard({SNAKE_MODERN},0,0,LOCATION_SZONE,0,POS_FACEDOWN)\n"
+            f"Debug.AddCard({VENNOMINON},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({VENNOMINAGA},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
         )
-        idle_lists = []
-
-        def idle(prompt):
-            lists = H.idle_lists(prompt)
-            idle_lists.append(lists)
-            if len(idle_lists) == 1 and lists["spsummonable"]:
-                return H.answer_idle(1, 0)
-            return H.answer_idle(7)
-
-        duel = run_scenario(setup, mode, idle=idle)
-        return duel, idle_lists
-
-    @in_both_formats
-    def test_the_procedure_special_summons_from_the_hand_banishing_blue_eyes_from_the_deck(self, mode):
-        modern, modern_lists = self._procedure(MALEFIC_MODERN, mode)
-        historical, lists = self._procedure(MALEFIC_HISTORICAL, mode)
-        self.assertEqual([MALEFIC_HISTORICAL], [c for c, _seq in lists[0]["spsummonable"]])
-        self.assertEqual(1, moved(historical, BLUE_EYES, H.LOCATION_DECK, H.LOCATION_REMOVED))
-        self.assertEqual(1, moved(historical, MALEFIC_HISTORICAL, H.LOCATION_HAND, H.LOCATION_MZONE))
-        self.assertEqual(
-            [(BLUE_EYES, H.LOCATION_DECK, H.LOCATION_REMOVED), ("malefic", H.LOCATION_HAND, H.LOCATION_MZONE)],
-            [
-                (m["code"] if m["code"] == BLUE_EYES else "malefic", m["from"]["location"], m["to"]["location"])
-                for m in historical.moves()
-                if m["code"] in (BLUE_EYES, MALEFIC_HISTORICAL)
-            ],
-        )
-        self.assertEqual(1, moved(modern, MALEFIC_MODERN, H.LOCATION_HAND, H.LOCATION_MZONE), "same as the modern card")
-
-    @in_both_formats
-    def test_it_can_be_neither_normal_summoned_nor_set(self, mode):
-        tribute_fodder = "".join(
-            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_MZONE,{seq},POS_FACEUP_ATTACK)\n" for seq in range(3)
-        )
-        for code in (MALEFIC_MODERN, MALEFIC_HISTORICAL):
-            with self.subTest(card=code):
-                _duel, lists = self._procedure(code, mode, extra_setup=tribute_fodder)
-                self.assertEqual([], lists[0]["summonable"])
-                self.assertEqual([], lists[0]["msetable"])
-
-    @in_both_formats
-    def test_a_second_face_up_malefic_is_destroyed_and_no_field_spell_destroys_it_like_the_modern_card(self, mode):
-        for code, other in ((MALEFIC_MODERN, MALEFIC_PARADOX), (MALEFIC_HISTORICAL, MALEFIC_PARADOX)):
-            with self.subTest(card=code, case="another face-up Malefic on the field"):
-                duel, _ = self._procedure(
-                    code, mode, extra_setup=f"Debug.AddCard({other},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-                )
-                self.assertEqual(1, moved(duel, other, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-                self.assertEqual(0, moved(duel, code, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-            with self.subTest(card=code, case="no face-up Field Spell"):
-                duel, _ = self._procedure(code, mode, field_spell=False)
-                self.assertEqual(1, moved(duel, code, H.LOCATION_HAND, H.LOCATION_MZONE))
-                self.assertEqual(1, moved(duel, code, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-            with self.subTest(card=code, case="other monsters cannot attack"):
-                setup = (
-                    f"Debug.AddCard({SOGEN},0,0,LOCATION_SZONE,5,POS_FACEUP)\n"
-                    f"Debug.AddCard({code},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-                    f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
-                    f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-                )
-                attackers: list[list[int]] = []
-
-                def battle(prompt):
-                    attackers.append(H.battle_lists(prompt)["attackable"])
-                    return H.answer_battle(3)
-
-                run_scenario(setup, mode | DUEL_ATTACK_FIRST_TURN, idle=H.answer_idle(6), battle=battle)
-                self.assertEqual([[code]], attackers, "only Malefic itself may attack")
-
-
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class SoulRopeSharedTest(unittest.TestCase):
-    """Period text: "Activate only by paying 1000 Life Points when a monster you
-    control is destroyed and sent to the Graveyard, Special Summon 1 Level 4
-    monster from your Deck." The modern card: destroyed "by a card effect",
-    "except during the Damage Step"."""
-
-    def _run(self, rope: int, mode: int, *, by_battle: bool):
-        setup = (
-            f"Debug.AddCard({rope},0,0,LOCATION_SZONE,0,POS_FACEDOWN)\n"
-            f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
-        )
-        offers = Offers(rope)
+        offers = Offers(SNAKE_MODERN)
         if by_battle:
             setup += f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
             duel = run_scenario(
@@ -567,26 +491,55 @@ class SoulRopeSharedTest(unittest.TestCase):
         return duel, offers
 
     @in_both_formats
-    def test_a_monster_destroyed_in_battle_lets_the_period_card_special_summon_from_the_deck(self, mode):
-        modern, modern_offers = self._run(ROPE_MODERN, mode, by_battle=True)
-        historical, offers = self._run(ROPE_HISTORICAL, mode, by_battle=True)
-        self.assertEqual(1, moved(modern, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertFalse(modern_offers.was_offered(), "the modern card ignores destruction by battle")
-        self.assertEqual(0, moved(modern, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
-        self.assertEqual(1, moved(historical, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertTrue(offers.was_offered())
-        self.assertEqual(1, moved(historical, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
-        self.assertEqual(1, len(historical.seen(H.MSG_PAY_LPCOST)), "1000 Life Points are paid")
+    def test_rise_of_the_snake_deity_is_the_modern_card_which_is_not_offered_in_the_damage_step(self, mode):
+        # Konami's rulebook: only Counter Traps and cards that change ATK/DEF may be activated in the
+        # Damage Step, and the UDE Netrep answered for this card that it cannot be. So the period card,
+        # like the modern one, cannot respond to a Vennominon destroyed in battle.
+        self._assert_the_modern_card_is_used(SNAKE_MODERN, SNAKE_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        duel, offers = self._snake(mode, by_battle=True)
+        self.assertEqual(1, moved(duel, VENNOMINON, H.LOCATION_MZONE, H.LOCATION_GRAVE))
+        self.assertFalse(offers.was_offered())
+        self.assertEqual(0, moved(duel, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
+        duel, offers = self._snake(mode, by_battle=False)
+        self.assertTrue(offers.was_offered(), "destroyed by a card effect it is offered")
+        self.assertEqual(1, moved(duel, VENNOMINAGA, H.LOCATION_DECK, H.LOCATION_MZONE))
+
+    def _rope(self, mode: int, *, by_battle: bool):
+        setup = (
+            f"Debug.AddCard({ROPE_MODERN},0,0,LOCATION_SZONE,0,POS_FACEDOWN)\n"
+            f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n"
+        )
+        offers = Offers(ROPE_MODERN)
+        if by_battle:
+            setup += f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            duel = run_scenario(
+                setup, mode | DUEL_ATTACK_FIRST_TURN, idle=H.answer_idle(6), offers=offers, battle=attack_once()
+            )
+        else:
+            setup += f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
+            duel = scenario(mode, setup + deck_fillers())
+            duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
+            duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
+            duel.default_response(H.MSG_SELECT_CARD, select_minimum)
+            standing_answers(duel)
+            duel.default_response(H.MSG_SELECT_CHAIN, offers)
+            duel.run(turns=1)
+        return duel, offers
 
     @in_both_formats
-    def test_a_monster_destroyed_by_a_card_effect_works_like_the_modern_card(self, mode):
-        for rope in (ROPE_MODERN, ROPE_HISTORICAL):
-            with self.subTest(card=rope):
-                duel, offers = self._run(rope, mode, by_battle=False)
-                self.assertTrue(offers.was_offered())
-                self.assertEqual(1, moved(duel, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
-                self.assertEqual(1, moved(duel, rope, H.LOCATION_SZONE, H.LOCATION_GRAVE))
-                self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
+    def test_soul_rope_is_the_modern_card_which_is_not_offered_in_the_damage_step(self, mode):
+        # Same rulebook rule as Rise of the Snake Deity. The 2015 "by a card effect" difference
+        # is not reproduced and is a known gap on the record.
+        self._assert_the_modern_card_is_used(ROPE_MODERN, ROPE_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        duel, offers = self._rope(mode, by_battle=True)
+        self.assertEqual(1, moved(duel, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
+        self.assertFalse(offers.was_offered())
+        self.assertEqual(0, moved(duel, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
+        duel, offers = self._rope(mode, by_battle=False)
+        self.assertTrue(offers.was_offered(), "destroyed by a card effect it is offered")
+        self.assertEqual(1, moved(duel, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
+        self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
 
 
 if __name__ == "__main__":  # pragma: no cover

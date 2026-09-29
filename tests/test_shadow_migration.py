@@ -39,6 +39,7 @@ from retroformats.validate import Validator
 from . import migration_audit as audit
 from . import migration_materializer as mm
 from . import shadow_migration as sm
+from .helpers import ROUND_035_CONVERTED_TO_FULL_V2, ROUND_035_RETIRED
 from .pre_migration_fixture import load_pre_migration_repo
 from .schema_check import Registry, validate_erratum
 
@@ -194,7 +195,10 @@ class CanonicalShapeTest(unittest.TestCase):
             for key in by_discriminator:
                 if key in doc:
                     by_discriminator[key] += 1
-        self.assertEqual({"changes": 0, "events": 116, "event": 180}, by_discriminator)
+        # Round 035 converted three sugar records to full v2 (tests/helpers.py); before it the
+        # corpus was 116 full v2 and 180 sugar records.
+        converted = len(ROUND_035_CONVERTED_TO_FULL_V2)
+        self.assertEqual({"changes": 0, "events": 116 + converted, "event": 180 - converted}, by_discriminator)
 
     def test_no_migrated_record_retains_legacy_fields(self):
         for rid in self.frozen_247 | self.unordered_47:
@@ -263,8 +267,12 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         self.assertEqual(0, len(self.v1_records))
 
     def test_exactly_180_sugar_and_116_full_v2(self):
-        self.assertEqual(180, len(self.sugar_records))
-        self.assertEqual(116, len(self.full_records))
+        # 180 sugar and 116 full v2 records until round 035, which converted the three records
+        # in ROUND_035_CONVERTED_TO_FULL_V2 (the sugar cannot carry a cosmetic transition).
+        converted = ROUND_035_CONVERTED_TO_FULL_V2
+        self.assertTrue(converted <= set(self.full_records))
+        self.assertEqual(180, len(self.sugar_records) + len(converted))
+        self.assertEqual(116, len(self.full_records) - len(converted))
         self.assertEqual(len(self.v2_records), len(self.sugar_records) + len(self.full_records))
 
     def test_all_296_v2_records_are_schema_valid(self):
@@ -306,11 +314,14 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
 
         # Rounds 029-031 (roadmap item 7) deliberately replaced exactly eight
         # modern codes in the Edison list with generated historical ones
-        # (data/custom-cards/). Nothing else may differ from the pre-migration
-        # snapshot: the expected output is the snapshot's own with those eight
+        # (data/custom-cards/); round 035 took four of them back out (Metalzoa, Rise of the
+        # Snake Deity, Malefic Blue-Eyes, Soul Rope: period rulings show the modern card
+        # behaves as the era card did), so four remain. Nothing else may differ from the
+        # pre-migration snapshot: the expected output is the snapshot's own with those
         # entries renamed, same counts, and every other line identical.
         swaps = {c.alias: c.passcode for c in self.repo.custom_cards.values()}
-        self.assertEqual(8, len(swaps))
+        self.assertEqual(4, len(swaps))
+        self.assertEqual(8, len(swaps) + len(ROUND_035_RETIRED))
         expected_entries = dict(pre_built.entries)
         for modern, generated in swaps.items():
             expected_entries[generated] = expected_entries.pop(modern)

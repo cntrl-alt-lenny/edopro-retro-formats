@@ -1465,6 +1465,10 @@ class Source:
 
 CUSTOM_CARD_CDB_FIELDS = ("ot", "setcode", "type", "atk", "def", "level", "race", "attribute", "category")
 CUSTOM_CARD_FIDELITIES = ("exact", "approximate")
+# The rulings gate (round 035): what a searched source said about the difference the
+# script implements, and whether the ruling is shown to have held at the snapshots.
+RULINGS_FINDINGS = ("supports", "contradicts", "does-not-address")
+RULINGS_IN_FORCE = ("shown", "not-shown")
 # BabelCDB `ot` scope for a card that is not legal in an official-cards room
 # (gframe/data_manager.h SCOPE_ILLEGAL): every historical-implementation row
 # upstream carries it, and a whitelist is what makes it playable.

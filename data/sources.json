@@ -740,6 +740,132 @@
       "retrieved": "2026-08-27",
       "used_for": "Official TCG identity, printing, and release-month cross-checks for individual cards, including YG09-EN001 Elemental HERO Escuridao (2012-08-07), JUMP-EN045 The Winged Dragon of Ra (January 2011), and JUMP-EN048 Malefic Truth Dragon (March 2011).",
       "reliability_notes": "Official card database; current pages are used for identity and set-lineage cross-checks, not as a substitute for archived historical tournament policy."
+    },
+    {
+      "id": "konami-official-rulebook-v8-2011",
+      "kind": "official",
+      "title": "Konami \"OFFICIAL RULEBOOK Version 8.0\" (Internet Archive capture 2011-11-19; linked as the rulebook from Konami's Gameplay page captured 2011-09-18)",
+      "url": "https://web.archive.org/web/20111119172146/http://www.yugioh-card.com/en/rulebook/YGO_RuleBook_EN-v8.pdf",
+      "notes": "The Konami rulebook that Konami's own Gameplay page (capture 2011-09-18) points to, so the rulebook current at Tengu (2011-09-17). Two passages matter to round 035. The summoning page, under \"Special Summon with a Card's Effect\": \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" The Damage Step Rules: \"During the Damage Step, you can only activate Counter Trap Cards, or cards with effects that directly change a monster's ATK or DEF. Also, these cards can only be activated up until the start of damage calculation.\" Both passages are also present, by phrase search, in Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30) and 7.2 (2011-05-16). A capture date is not an effective date; the 2011-11-19 capture postdates Tengu, and the link from the 2011-09-18 page is what puts Version 8.0 in force at Tengu. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-gameplay-page-2010-03-22",
+      "kind": "official",
+      "title": "Konami \"Gameplay\" page, yugioh-card.com/en/gameplay/ (Internet Archive capture 2010-03-22)",
+      "url": "http://web.archive.org/web/20100322204132/http://www.yugioh-card.com/en/gameplay/",
+      "notes": "Lists errata/YGOErrata100105.pdf as \"Current Errata\" and the per-set card-rulings PDFs; it does not link the per-card FAQ. Used to show which Konami documents were current about a month before Edison. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-gameplay-page-2011-09-18",
+      "kind": "official",
+      "title": "Konami \"Gameplay\" page, yugioh-card.com/en/gameplay/ (Internet Archive capture 2011-09-18)",
+      "url": "http://web.archive.org/web/20110918002333/http://www.yugioh-card.com/en/gameplay/",
+      "notes": "One day after the Tengu snapshot. Lists \"Nov 15, 2010 Current Errata\" (errata/101105 recent errata list - x.pdf), the rulebook YGO_RuleBook_EN-v8.pdf, the per-set card-rulings PDFs including \"Extreme Victory -- Card Rulings\", and the Tournament Policy of 2011-05-05. It does not link the per-card FAQ. Used to show which Konami documents were current at Tengu. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-errata-list-2009-07-30",
+      "kind": "official",
+      "title": "Konami \"CURRENT CARD ERRATA LIST, Compiled as of July 30, 2009\" (Internet Archive capture 2009-12-29)",
+      "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com:80/en/gameplay/errata/YGOErrata090730.pdf",
+      "notes": "Under \"From Retro Pack 2, Dark Legend, and SHONEN JUMP Magazine\": \"Green Baboon, Defender of the Forest ... You cannot activate the effect of this card during the Damage Step.\" and \"When a Beast-Type monster is destroyed and sent to the Graveyard, you can only Special Summon 1 \\\"Green Baboon, Defender of the Forest,\\\" even if multiple copies are available in your hand/Graveyard.\" The earliest dated Konami statement found for either. The list's own text: play the card as if it had the corrected text. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-errata-list-2010-01-05",
+      "kind": "official",
+      "title": "Konami \"CURRENT CARD ERRATA LIST, Compiled as of January 5, 2010\" (Internet Archive capture 2010-03-31)",
+      "url": "http://web.archive.org/web/20100331022617/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata100105.pdf",
+      "notes": "The list Konami's Gameplay page captured 2010-03-22 calls \"Current Errata\", 33 days before Edison. Carries the same two Green Baboon, Defender of the Forest bullets as the 2009-07-30 list. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-errata-list-2010-11-05",
+      "kind": "official",
+      "title": "Konami \"RECENT CARD ERRATA LIST, Compiled as of November 5, 2010\" (Internet Archive capture 2010-12-14)",
+      "url": "http://web.archive.org/web/20101214022808/http://www.yugioh-card.com:80/en/gameplay/errata/101105%20recent%20errata%20list%20-%20x.pdf",
+      "notes": "The list Konami's Gameplay page captured 2011-09-18 calls \"Current Errata\" (dated Nov 15, 2010 on the page). Carries the same two Green Baboon, Defender of the Forest bullets. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-extreme-victory-rulings-2011-05",
+      "kind": "official",
+      "title": "Konami \"EXTREME VICTORY - CARD RULINGS, Compiled as of May 12, 2011 <version 1.2>\" (Internet Archive capture 2011-09-18)",
+      "url": "http://web.archive.org/web/20110918002333/http://www.yugioh-card.com/en/gameplay/rulings/EXVCRulesBook000512_1.2_x.pdf",
+      "notes": "Linked from Konami's Gameplay page captured 2011-09-18. For Meklord Astro Dragon Asterisk (EXVC-EN015), text \"This card cannot be Normal Summoned or Set. This card can only be Special Summoned by controlling 3 or more face-up \\\"Meklord\\\" monsters.\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" A Konami TCG ruling on the \"can only be Special Summoned by\" wording, dated before Tengu. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-tcg-strategy-special-summons-2009",
+      "kind": "official",
+      "title": "Konami TCG Strategy Site, \"Special Summons - Spotting the Different Kinds\" by Gregory Taketa (the page prints December 7th, 2009; Internet Archive capture 2015-11-06)",
+      "url": "https://web.archive.org/web/20151106193938/https://yugiohblog.konami.com/articles/?p=1099",
+      "notes": "Distinguishes \"This card cannot be Normal Summoned or Set. This card can only be Special Summoned by...\" (after one proper Summon, \"you can use cards like \\\"Call of the Haunted\\\" to Special Summon them again from the Graveyard\") from \"...cannot be Special Summoned except by...\" (\"you cannot use another card's effect to Special Summon it from the Graveyard afterwards\"), and says Contact Fusions follow the \"can only be Special Summoned by\" rule. CAVEAT: the earliest archive capture is 2015-11-06; the 2009 date is the page's own statement and the 2009 text is not authenticated. Retrieved 2026-09-29 (round 035). Original URL: https://yugiohblog.konami.com/articles/?p=1099"
+    },
+    {
+      "id": "konami-card-faq-2008-12-15-de",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15)",
+      "url": "http://web.archive.org/web/20081215054617/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_de.html",
+      "notes": "Konami-hosted copy of the UDE per-card FAQ, cards D-E. Entries read: \"DARK MASTER - ZORC\" (Ignition Effect, roll in Main Phase 1 or 2 only; a 6 also destroys Zorc), \"DICE RE-ROLL\" (\"you can use the effect of \\\"Dice Re-Roll\\\" once during the turn in which you activated it\"), \"DIMENSION FUSION\" (\"cannot Special Summon a \\\"Special Summon-only\\\" monster, like a Ritual Monster or \\\"Chaos Emperor Dragon - Envoy of the End\\\", unless it was properly summoned first\"). Text identical to the UDE-hosted copy of 2009-02-18. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-card-faq-2008-12-15-fh",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-15)",
+      "url": "http://web.archive.org/web/20081215054619/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
+      "notes": "Konami-hosted copy of the UDE per-card FAQ, cards F-H. Entries read: \"GODDESS OF WHIM\" (\"It can only be used once per turn, during your Main Phase.\"), \"GREEN BABOON, DEFENDER OF THE FOREST\" (usable in either player's turn; \"if that monster was face-up\"; \"This effect can be activated during the Damage Step, at the same time as effects like \\\"Giant Rat's\\\"\"; \"You cannot activate this effect when a face-down Beast-Type monster you control is destroyed by a card effect\"), \"HORUS THE BLACK FLAME DRAGON LV8\" (the word \"except\" in its Summoning conditions means it cannot be revived even if Special Summoned properly), \"GLADIATOR BEAST HERAKLINOS\" (only \"See Gladiator Beast Alexander\"). Text identical to the UDE-hosted copy of 2009-02-26. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-card-faq-2008-12-15-pr",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_pr page (Internet Archive capture served 2008-12-15)",
+      "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
+      "notes": "Konami-hosted copy of the UDE per-card FAQ, cards P-R. \"RISE OF THE SNAKE DEITY\" has three entries (needs Vennominaga in hand or Deck; several copies in one Chain; a Vennominon treated as a Spell Card) and none on the Damage Step. Text identical to the UDE-hosted copy of 2009-02-20. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-card-faq-2008-12-15-uz",
+      "kind": "official",
+      "title": "Konami TCG Card FAQ default_uz page (Internet Archive capture served 2008-12-15)",
+      "url": "http://web.archive.org/web/20081215054635/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_uz.html",
+      "notes": "Konami-hosted copy of the UDE per-card FAQ, cards U-Z. \"VWXYZ-DRAGON CATAPULT CANNON\": \"Once properly Summoned by the method written in the text this card can be Special Summoned from the Graveyard with effects like \\\"Call of the Haunted\\\" or \\\"Re-Fusion\\\".\" \"XYZ FUSION MONSTERS\": cannot be Special Summoned from the Extra Deck \"except by the method described in their text\" and \"cannot be Special Summoned from the Graveyard even after\". Text identical to the UDE-hosted copy of 2009-02-26. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "ude-card-faq-2009-02-26-uz",
+      "kind": "official",
+      "title": "Upper Deck Entertainment per-card FAQ, cards U-Z (Internet Archive capture 2009-02-26; the other letter pages were captured 2009-02-17 to 2009-02-26)",
+      "url": "http://web.archive.org/web/20090226215920/http://entertainment.upperdeck.com/yugioh/en/gameplay/faqs/cardfaqs/default.aspx?first=U&last=Z",
+      "notes": "The UDE-hosted copy of the card FAQ; the last state either host shows (no capture of either host's card FAQ after 2009-02-26 in the Internet Archive CDX listing; Konami-hosted copies end 2009-01-19). The entries round 035 relies on are identical to the Konami-hosted copies of 2008-12-15: Dark Master - Zorc, Dice Re-Roll, Goddess of Whim, Green Baboon, Heraklinos, Rise of the Snake Deity, Second Coin Toss (\"Even if multiple \\\"Second Coin Toss\\\" cards are active, you can only redo each coin toss once.\"), Strike Ninja, Super Vehicroid - Stealth Union, Dimension Fusion, VWXYZ-Dragon Catapult Cannon. Retrieved 2026-09-29 (round 035). Original URL: http://entertainment.upperdeck.com/yugioh/en/gameplay/faqs/cardfaqs/default.aspx?first=U&last=Z (the archive's own record of the capture is the URL above; a retrieval through replay.waybackmachine.org redirects to it)."
+    },
+    {
+      "id": "ude-judge-list-zorc-2007",
+      "kind": "official",
+      "title": "UDE Judge List, \"Dark Master - Zorc : once per turn?\" (Internet Archive capture 2007-10-27; thread 883212)",
+      "url": "http://web.archive.org/web/20071027075924/entertainment.upperdeck.com/community/forums/thread/883212.aspx",
+      "notes": "Question 2007-10-08: \"Can you use its effect more than once per turn?\" Answer by UDE Netrep Curtis Schultz, 2007-10-11: \"No. You can only roll the 6-sided die once. Ex: If you use the effect during Main Phase 1, you would not be able to use it again during Main Phase 2.\" A Netrep answer; its range in force at 2010-04-24 or 2011-09-17 is not shown. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "ude-judge-list-snake-deity-2007",
+      "kind": "official",
+      "title": "UDE Judge List, \"Rise of the Snake Deity - Damage Step?\" (Internet Archive capture 2007-11-01; thread 830322)",
+      "url": "http://web.archive.org/web/20071101080500/http:/entertainment.upperdeck.com/community/forums/thread/830322.aspx",
+      "notes": "Question 2007-08-11 (specifically when Vennominon is destroyed by battle). Answer by UDE Netrep Curtis Schultz, 2007-08-17: \"\\\"Rise of the Snake Deity\\\" cannot be activated in the Damage Step.\" The thread's last post, 2007-08-31 (the post id in the URL), adds that Damage Step exceptions are case by case and that \"a small handful of Trap Cards have been given special privledges for the Damage Step.\" Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "ude-judge-list-green-baboon-2007",
+      "kind": "official",
+      "title": "UDE Judge List, \"Green Baboon, Defender of the Forest Vs. face-downs, DNA Surgery\" (Internet Archive capture 2007-10-15; thread 859107)",
+      "url": "http://web.archive.org/web/20071015170441/http:/entertainment.upperdeck.com/community/forums/thread/859107.aspx",
+      "notes": "Question 2007-09-27: a Beast destroyed while face-down (Torrential Tribute, Shield Crash). Answer by UDE Netrep Curtis Schultz, 2007-09-28: \"You cannot activate the effect of \\\"Green Baboon, Defender of the Forest\\\" in this case.\" Range in force at the snapshots: not shown. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "yugipedia-card-rulings",
+      "kind": "wiki",
+      "title": "Yugipedia Card_Rulings:<card> pages (MediaWiki API, wikitext)",
+      "url": "https://yugipedia.com/api.php?action=parse&prop=wikitext&format=json",
+      "notes": "A compilation used only as a pointer to the sources it cites; several UDE rulings it lists carry no citation and were found at the UDE/Konami card FAQ instead. The \"Previously Official Rulings\" template says these UDE rulings \"have since been deemed unofficial by Konami\", citing a Konami Judge Program forum thread that needs a login (its archived copy is the login page), so the claim and its date are not established. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-ocg-card-database-faq",
+      "kind": "official",
+      "title": "Konami OCG card database Q&A pages (Japanese, current, undated): Gigantes cid 5831, Gladiator Beast Heraklinos cid 7303, Metalzoa cid 4398, Malefic Blue-Eyes White Dragon cid 8864",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&request_locale=ja",
+      "notes": "OCG rulings, not TCG. Each page says the card, once Special Summoned by its printed method and then sent to the Graveyard (Heraklinos and Malefic: or banished face-up), can be Special Summoned by another card's effect (Gigantes and Metalzoa name Monster Reborn). The pages are the current state and carry no ruling date. Retrieved 2026-09-29 (round 035)."
     }
   ]
 }

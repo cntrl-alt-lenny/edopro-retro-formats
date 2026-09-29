@@ -11,6 +11,7 @@ stale-output guard fails when a generated script or row is missing or stale.
 from __future__ import annotations
 
 import copy
+import dataclasses
 import shutil
 import sqlite3
 import tempfile
@@ -22,6 +23,7 @@ from retroformats.custom_cards import (
     build_cdb_bytes,
     build_custom_cards,
     cards_sorted,
+    _zero_unused_page_space,
     expected_outputs,
     read_cdb_rows,
     stale_generated_files,
@@ -31,7 +33,15 @@ from retroformats.model import RESERVED_PASSCODE_RANGE, STATUS_TO_COUNT
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import REPO_ROOT, ROUND_031_PASSCODES, TempRepoTest, card, change
+from .helpers import (
+    REPO_ROOT,
+    RETIRED_PASSCODES,
+    ROUND_035_RETIRED,
+    TENGU_GENERATED_PASSCODES,
+    TempRepoTest,
+    card,
+    change,
+)
 
 EDISON = "2010-03-edison"
 TENGU = "2011-09-tengu"
@@ -58,20 +68,44 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         cls.dist = REPO_ROOT / "dist"
 
     def test_the_repository_generates_exactly_these_cards(self):
+        # Round 035 removed Metalzoa (600000001), Rise of the Snake Deity (600000007), Malefic
+        # Blue-Eyes White Dragon (600000008) and Soul Rope (600000009): Konami's period rulings
+        # show the modern card behaves as the era card did. Their numbers, 600000003 and round
+        # 034's 600000010-600000017 are retired (RETIRED_PASSCODES) and are never assigned again.
         self.assertEqual(
             [
-                (600000001, "erratum-metalzoa"),
                 (600000002, "erratum-super-vehicroid-stealth-union"),
-                # 600000003 stays unassigned: held for Night Assailant (roadmap item 7).
                 (600000004, "erratum-goddess-of-whim"),
                 (600000005, "erratum-strike-ninja"),
                 (600000006, "erratum-green-baboon-defender-of-the-forest"),
-                (600000007, "erratum-rise-of-the-snake-deity"),
-                (600000008, "erratum-malefic-blue-eyes-white-dragon"),
-                (600000009, "erratum-soul-rope"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
+
+    def test_every_live_record_passes_the_rulings_gate(self):
+        # Round 035 (part B): no generated card without a recorded rulings check. The rule
+        # itself is tested in CustomCardValidationTest; this is the live data.
+        validator = _validate(REPO_ROOT)
+        gate = [f for f in validator.errors if f.code.startswith(("custom-card.", "sources."))]
+        self.assertEqual([], gate, "\n".join(map(str, gate)))
+        for c in self.cards:
+            with self.subTest(passcode=c.passcode):
+                check = c.raw["rulings_check"]
+                self.assertTrue(check["difference"].strip())
+                self.assertTrue(check["searched"], "an empty search is not a search")
+
+    def test_a_retired_number_is_never_assigned_again(self):
+        self.assertEqual(set(), RETIRED_PASSCODES & {c.passcode for c in self.cards})
+        self.assertEqual(set(), RETIRED_PASSCODES & set(self.repo.custom_cards))
+        for erratum_id, (modern, generated) in ROUND_035_RETIRED.items():
+            with self.subTest(card=erratum_id):
+                self.assertNotIn(generated, self.repo.card_index.by_passcode)
+                self.assertFalse((REPO_ROOT / "data" / "custom-cards" / f"c{generated}.json").exists())
+                self.assertFalse((REPO_ROOT / "dist" / "scripts" / f"c{generated}.lua").exists())
+                erratum = self.repo.errata[erratum_id]
+                self.assertEqual(modern, erratum.modern_card.passcode)
+                # the record no longer names a generated card: it is cosmetic or known-gap
+                self.assertNotIn("custom-script", str(erratum.raw.get("states")) + str(erratum.raw.get("coverage")))
 
     def test_dist_holds_exactly_the_generated_databases_and_scripts(self):
         self.assertEqual([], stale_generated_files(self.repo, self.dist))
@@ -131,6 +165,54 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         self.assertEqual(b"\x00\x00\x00\x00", data[96:100])
         self.assertEqual(data, (self.dist / "databases" / CDB_NAME).read_bytes())
 
+    def _sixteen_cards(self):
+        """Sixteen rows: the live cards under fresh passcodes. Round 034's data made the file span
+        several pages; after round 035 the live file holds four rows and fits in three, so the
+        page-splitting behaviour these tests are about needs rows of its own."""
+        cards = [
+            dataclasses.replace(c, passcode=600000900 + i * 4 + n, name=f"{c.name} copy {i}")
+            for i in range(4)
+            for n, c in enumerate(self.cards)
+        ]
+        return cards
+
+    @staticmethod
+    def _unused_ranges(data):
+        """(start, end) of every b-tree page's unused space, read straight from
+        the page headers (https://www.sqlite.org/fileformat.html section 1.6)."""
+        page_size = int.from_bytes(data[16:18], "big") or 65536
+        for index in range(len(data) // page_size):
+            base = index * page_size
+            header = base + (100 if index == 0 else 0)
+            cells = int.from_bytes(data[header + 3 : header + 5], "big")
+            content = int.from_bytes(data[header + 5 : header + 7], "big") or 65536
+            yield header + (12 if data[header] in (2, 5) else 8) + 2 * cells, base + content
+
+    def test_database_bytes_carry_no_stale_bytes_in_unused_page_space(self):
+        # Round 034: with 16 rows the texts table needs several pages, and each SQLite
+        # version then leaves different stale bytes in the unused space of the pages it
+        # split, so a Linux and a macOS build of the same Python wrote different files.
+        # The generator zeroes that space; nothing may be left in it.
+        data = build_cdb_bytes(self._sixteen_cards())
+        self.assertGreater(len(data) // 4096, 3, "the file must span several pages, or this proves nothing")
+        for start, end in self._unused_ranges(data):
+            self.assertEqual(bytes(end - start), data[start:end])
+
+    def test_zeroing_unused_page_space_makes_two_layouts_of_the_same_rows_equal(self):
+        data = bytearray(build_cdb_bytes(self._sixteen_cards()))
+        poisoned = bytearray(data)
+        for start, end in self._unused_ranges(data):
+            poisoned[start:end] = b"\xaa" * (end - start)
+        self.assertNotEqual(bytes(data), bytes(poisoned), "there must be unused space to poison")
+        _zero_unused_page_space(poisoned)
+        self.assertEqual(bytes(data), bytes(poisoned))
+
+    def test_zeroing_refuses_a_page_it_cannot_read_as_a_btree_page(self):
+        data = bytearray(build_cdb_bytes(self._sixteen_cards()))
+        data[4096] = 0  # page 2's type byte
+        with self.assertRaises(ValueError):
+            _zero_unused_page_space(data)
+
     def test_database_opens_as_a_bare_babelcdb_layout(self):
         con = sqlite3.connect(f"file:{self.dist / 'databases' / CDB_NAME}?mode=ro", uri=True)
         try:
@@ -169,14 +251,14 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         self._assert_list_uses(EDISON, self.cards)
 
     def test_tengu_list_uses_exactly_the_cards_whose_state_applies_at_its_snapshot(self):
-        # Round 031: the six cards whose record puts the same historical state at Tengu's
-        # snapshot (2011-09-17) as at Edison's. Metalzoa and Super Vehicroid - Stealth Union
-        # are not among them: their erratum (2011-08-13 and earlier) predates Tengu's
-        # snapshot, so Tengu keeps the modern card for both.
-        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in ROUND_031_PASSCODES])
-        self.assertEqual(ROUND_031_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
+        # The generated cards whose record puts the same historical state at Tengu's snapshot
+        # (2011-09-17) as at Edison's: Goddess of Whim, Strike Ninja and Green Baboon. Super
+        # Vehicroid - Stealth Union is not among them (its erratum, 2011-06-01, predates Tengu's
+        # snapshot), and neither was Metalzoa (2011-08-13) before round 035 removed it.
+        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in TENGU_GENERATED_PASSCODES])
+        self.assertEqual(TENGU_GENERATED_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
         for c in self.cards:
-            if c.passcode not in ROUND_031_PASSCODES:
+            if c.passcode not in TENGU_GENERATED_PASSCODES:
                 with self.subTest(passcode=c.passcode):
                     self.assertIn(self.repo.errata[c.erratum].modern_card.passcode, tengu.entries)
 
@@ -211,13 +293,14 @@ class LiveGeneratedOutputTest(unittest.TestCase):
                 self.assertEqual(c.alias, self.repo.card_index.alias_of(c.passcode))
 
     def test_every_record_declares_its_origin_licence_and_approximations(self):
-        # Round 032: the five round-031 scripts that measured close to Project
-        # Ignis's are derived from them and AGPL-3.0-or-later; the three that
-        # measured independent stay original and MIT.
+        # Round 032: the round-031 scripts that measured close to Project Ignis's are derived
+        # from them and AGPL-3.0-or-later; the one that measured independent stays original and
+        # MIT. Round 035 removed the other original scripts (Metalzoa, Malefic Blue-Eyes) and
+        # two derived ones (Rise of the Snake Deity, Soul Rope).
         kinds = {c.passcode: c.raw["authorship"]["kind"] for c in self.cards}
-        self.assertEqual({600000001, 600000002, 600000008}, {p for p, k in kinds.items() if k == "original"})
+        self.assertEqual({600000002}, {p for p, k in kinds.items() if k == "original"})
         self.assertEqual(
-            {600000004, 600000005, 600000006, 600000007, 600000009},
+            {600000004, 600000005, 600000006},
             {p for p, k in kinds.items() if k == "derived"},
         )
         for c in self.cards:
@@ -245,8 +328,8 @@ class StaleOutputGuardTest(unittest.TestCase):
         self.assertEqual([], stale_generated_files(self.repo, self.dist))
 
     def test_a_missing_script_is_reported(self):
-        (self.dist / "scripts" / "c600000001.lua").unlink()
-        self.assertEqual(["missing: dist/scripts/c600000001.lua"], stale_generated_files(self.repo, self.dist))
+        (self.dist / "scripts" / "c600000002.lua").unlink()
+        self.assertEqual(["missing: dist/scripts/c600000002.lua"], stale_generated_files(self.repo, self.dist))
 
     def test_a_stale_script_is_reported(self):
         path = self.dist / "scripts" / "c600000002.lua"
@@ -280,7 +363,7 @@ class StaleOutputGuardTest(unittest.TestCase):
         self.assertEqual([], stale_generated_files(self.repo, self.dist))
 
     def test_a_rebuild_restores_a_hand_edited_script(self):
-        path = self.dist / "scripts" / "c600000001.lua"
+        path = self.dist / "scripts" / "c600000002.lua"
         original = path.read_bytes()
         path.write_bytes(b"--tampered\n")
         build_custom_cards(self.repo, self.dist)
@@ -300,6 +383,38 @@ class CustomCardValidationTest(TempRepoTest):
 
     CODE = 600000001
     TEXT = "Old Beta text."
+
+    @staticmethod
+    def _finding(**changes):
+        """One searched source. A `contradicts` finding of a ruling shown to be in force
+        is the one the gate refuses without an owner decision."""
+        entry = {
+            "source": "test-source",
+            "looked_for": "a ruling on Beta's use limit",
+            "finding": "supports",
+            "passage": "Beta can be used once.",
+            "in_force": "shown",
+            "in_force_basis": "The document was current at both snapshots.",
+        }
+        for key, value in changes.items():
+            if value is None:
+                entry.pop(key, None)
+            else:
+                entry[key] = value
+        return entry
+
+    def _rulings_check(self, *findings, **changes):
+        check = {
+            "difference": "Beta has no use limit; the modern card is once per turn.",
+            "checked": "2026-09-29",
+            "searched": list(findings) or [self._finding()],
+        }
+        for key, value in changes.items():
+            if value is None:
+                check.pop(key, None)
+            else:
+                check[key] = value
+        return check
 
     def _seed(self, lua=None, **overrides):
         record = {
@@ -324,6 +439,7 @@ class CustomCardValidationTest(TempRepoTest):
             "authorship": {"kind": "original", "licence": "MIT", "note": "written from the text"},
             "fidelity": "approximate",
             "not_reproduced": ["timing is not established"],
+            "rulings_check": self._rulings_check(),
             "sources": ["test-source"],
         }
         record.update(overrides)
@@ -481,11 +597,11 @@ class CustomCardValidationTest(TempRepoTest):
                 target[name] = value
         return authorship
 
-    def _derived_header(self, drop=None):
+    def _derived_header(self, drop=None, path="official/c200.lua"):
         lines = [
             "--SPDX-License-Identifier: AGPL-3.0-or-later",
             "--Beta (historical implementation, Retro Formats)",
-            f"--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/{self.REVISION}/official/c200.lua",
+            f"--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/{self.REVISION}/{path}",
             f"--{self.COPYRIGHT}",
             "--Modified by edopro-retro-formats on 2026-09-27: removed the use limit.",
             "--Beta",
@@ -570,6 +686,35 @@ class CustomCardValidationTest(TempRepoTest):
                 self._seed_derived(**{key: value})
                 self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
 
+    def test_a_derived_scripts_upstream_must_be_the_script_of_its_own_card(self):
+        # Round 034 (carried over by round 035). The record's alias is 200. Offline the validator can
+        # see only the path: official/c<alias>.lua is the card's own script; pre-errata/ files carry
+        # Ignis's own private codes, so any of them passes here and the engine test
+        # (tests/engine/test_script_origin.py) shows the file is tied to the alias. Every
+        # other file at the pin is another card's script, or a folder Ignis does not tie to
+        # a real card's history.
+        for path in (
+            "official/c201.lua",  # another card's script
+            "official/c2000.lua",  # not a prefix match either
+            "official/c20.lua",
+            "goat/c200.lua",
+            "unofficial/c200.lua",
+            "pre-release/c200.lua",
+            "rush/c200.lua",
+            "skill/c200.lua",
+            "c200.lua",
+            "pre-errata/c200x.lua",
+            "utility.lua",
+        ):
+            with self.subTest(path=path, allowed=False):
+                self._seed_derived(lua=self._derived_header(path=path), upstream__path=path)
+                self.assertIn("custom-card.upstream-not-own-script", _error_codes(_validate(self.root)))
+        for path in ("official/c200.lua", "pre-errata/c511002631.lua"):
+            with self.subTest(path=path, allowed=True):
+                self._seed_derived(lua=self._derived_header(path=path), upstream__path=path)
+                validator = _validate(self.root)
+                self.assertEqual([], validator.errors, "\n".join(map(str, validator.errors)))
+
     def test_a_derived_scripts_header_must_match_the_record(self):
         full = self._derived_header().splitlines()
         for line in [full[0], full[2], full[3], full[4]]:
@@ -595,6 +740,125 @@ class CustomCardValidationTest(TempRepoTest):
             [card(200, "Beta"), card(self.CODE, "Some other name", alias_of=200, ot=8)]
         )
         self.assertIn("custom-card.index-mismatch", _error_codes(_validate(self.root)))
+
+    # -- the rulings gate (round 035) ----------------------------------------
+
+    def _codes(self):
+        validator = _validate(self.root)
+        return {f.code for f in validator.errors}, {f.code for f in validator.warnings}
+
+    def test_a_record_with_no_rulings_check_is_refused(self):
+        record = self._seed()
+        del record["rulings_check"]
+        self.write(f"data/custom-cards/c{self.CODE}.json", record)
+        errors, _ = self._codes()
+        self.assertIn("custom-card.rulings-check-missing", errors)
+
+    def test_a_rulings_check_must_be_an_object_saying_what_was_searched(self):
+        for name, check in (
+            ("a string", "checked"),
+            ("a list", []),
+            ("no difference", self._rulings_check(difference=None)),
+            ("a blank difference", self._rulings_check(difference="  ")),
+            ("no date", self._rulings_check(checked=None)),
+            ("a date that is not ISO", self._rulings_check(checked="29 September 2026")),
+            ("no searched list", self._rulings_check(searched=None)),
+            ("an empty searched list", self._rulings_check(searched=[])),
+            ("a searched entry that is not an object", self._rulings_check("test-source")),
+        ):
+            with self.subTest(check=name):
+                self._seed(rulings_check=check)
+                errors, _ = self._codes()
+                self.assertIn("custom-card.rulings-check-malformed", errors)
+
+    def test_each_searched_source_says_what_it_looked_for_and_what_it_found(self):
+        for name, finding in (
+            ("no source", self._finding(source=None)),
+            ("no looked_for", self._finding(looked_for=None)),
+            ("a blank looked_for", self._finding(looked_for=" ")),
+            ("no finding", self._finding(finding=None)),
+            ("a finding outside the closed set", self._finding(finding="partly supports")),
+            ("supports with no passage", self._finding(finding="supports", passage=None)),
+            ("contradicts with a blank passage", self._finding(finding="contradicts", passage=" ")),
+            ("supports with no in_force", self._finding(in_force=None, in_force_basis=None)),
+            ("in_force outside the closed set", self._finding(in_force="probably")),
+            ("shown with no basis", self._finding(in_force="shown", in_force_basis=None)),
+            ("shown with a blank basis", self._finding(in_force="shown", in_force_basis=" ")),
+        ):
+            with self.subTest(finding=name):
+                self._seed(rulings_check=self._rulings_check(finding))
+                errors, _ = self._codes()
+                self.assertIn("custom-card.rulings-check-malformed", errors)
+
+    def test_a_search_that_found_nothing_is_a_complete_record(self):
+        # "When nothing was found, the record says what was searched."
+        nothing = self._finding(
+            finding="does-not-address", passage=None, in_force=None, in_force_basis=None,
+            looked_for="an entry for Beta in the card FAQ; none exists",
+        )
+        self._seed(rulings_check=self._rulings_check(nothing))
+        errors, warnings = self._codes()
+        self.assertEqual(set(), errors)
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    def test_a_searched_source_must_be_a_registered_source(self):
+        self._seed(rulings_check=self._rulings_check(self._finding(source="not-a-source")))
+        errors, _ = self._codes()
+        self.assertIn("sources.unresolved", errors)
+
+    def test_a_contradicting_ruling_shown_in_force_needs_an_owner_decision(self):
+        contradicting = self._finding(finding="contradicts")
+        self._seed(rulings_check=self._rulings_check(contradicting))
+        errors, _ = self._codes()
+        self.assertIn("custom-card.contradicting-ruling-unaccepted", errors)
+
+    def test_an_owner_decision_accepts_a_contradicting_ruling(self):
+        decision = {
+            "date": "2026-10-01",
+            "decision": "Keep the card as it is: the ruling is not reproducible in the engine.",
+            "recorded_in": "docs/state.md",
+        }
+        self._seed(rulings_check=self._rulings_check(self._finding(finding="contradicts"), owner_decision=decision))
+        errors, _ = self._codes()
+        self.assertNotIn("custom-card.contradicting-ruling-unaccepted", errors)
+        self.assertEqual(set(), errors)
+
+    def test_an_owner_decision_must_say_when_what_and_where(self):
+        complete = {"date": "2026-10-01", "decision": "Keep it.", "recorded_in": "docs/state.md"}
+        for key in ("date", "decision", "recorded_in"):
+            with self.subTest(missing=key):
+                decision = {k: v for k, v in complete.items() if k != key}
+                self._seed(
+                    rulings_check=self._rulings_check(self._finding(finding="contradicts"), owner_decision=decision)
+                )
+                errors, _ = self._codes()
+                self.assertIn("custom-card.contradicting-ruling-unaccepted", errors)
+        with self.subTest(date="not ISO"):
+            decision = dict(complete, date="October first")
+            self._seed(rulings_check=self._rulings_check(self._finding(finding="contradicts"), owner_decision=decision))
+            errors, _ = self._codes()
+            self.assertIn("custom-card.contradicting-ruling-unaccepted", errors)
+
+    def test_a_contradicting_ruling_whose_range_is_not_shown_is_a_tracked_warning_not_an_error(self):
+        # A UDE-era ruling that contradicts the script but is not shown to have held at the
+        # format's snapshots: the card stays, the owner is told (a warning is a tracked TODO).
+        unshown = self._finding(finding="contradicts", in_force="not-shown", in_force_basis=None)
+        self._seed(rulings_check=self._rulings_check(unshown))
+        errors, warnings = self._codes()
+        self.assertEqual(set(), errors)
+        self.assertIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    def test_a_supporting_or_silent_search_raises_neither_finding(self):
+        self._seed(
+            rulings_check=self._rulings_check(
+                self._finding(finding="supports"),
+                self._finding(finding="does-not-address", passage=None, in_force=None, in_force_basis=None),
+            )
+        )
+        errors, warnings = self._codes()
+        self.assertEqual(set(), errors)
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
 
     def test_duplicate_passcode_fails_to_load(self):
         self._seed()

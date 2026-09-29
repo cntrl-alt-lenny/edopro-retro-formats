@@ -32,25 +32,61 @@
       "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
     },
     "modified": {
-      "date": "2026-09-27",
-      "summary": "no face-up requirement, and activation allowed in the Damage Step (EFFECT_FLAG_DAMAGE_STEP), as the period text has neither restriction; the effect description is read from the modern card's strings."
+      "date": "2026-09-29",
+      "summary": "no face-up requirement, as the period text has none (a UDE ruling that says otherwise is not shown to have held at the snapshots); the effect description is read from the modern card's strings."
     },
-    "note": "Adapted from Project Ignis's script for the modern card, official/c46668237.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT. Round 031 labelled it original, written without opening any Project Ignis card script; round 031's review measured that version as too close to this upstream file to be independent, and the owner decided on 2026-09-27 that such scripts are credited, labelled derived and kept under the upstream's licence. Round 032 rebased it on the upstream file itself."
+    "note": "Adapted from Project Ignis's script for the modern card, official/c46668237.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT. Round 031 labelled it original, written without opening any Project Ignis card script; round 031's review measured that version as too close to this upstream file to be independent, and the owner decided on 2026-09-27 that such scripts are credited, labelled derived and kept under the upstream's licence. Round 032 rebased it on the upstream file itself. Round 035 (2026-09-29): the Damage Step flag (EFFECT_FLAG_DAMAGE_STEP) was removed after Konami's errata lists and rulebook were found to forbid Damage Step activation; the script now differs from Ignis's only in dropping the face-up requirement. Superseded modification notice, kept: \"no face-up requirement, and activation allowed in the Damage Step (EFFECT_FLAG_DAMAGE_STEP), as the period text has neither restriction\" (2026-09-27)."
   },
   "fidelity": "approximate",
   "not_reproduced": [
-    "Damage Step activation is the engine's own window for a card carrying EFFECT_FLAG_DAMAGE_STEP: the record's sources establish that the period text carries no Damage Step exclusion, not where in the Damage Step a period player could have activated it. Only the fact that it is offered after a Beast is destroyed by battle is tested.",
-    "The record's sources establish that the period text has no face-up requirement on the destroyed Beast. As in the upstream script, the destroyed monster must be a Beast both in the Graveyard and by the engine's record of its race on the field; only a face-down Beast destroyed by a card effect is tested.",
+    "The script excludes the Damage Step, as the modern card does, because Konami's errata lists (compiled 2009-07-30, 2010-01-05, 2010-11-05) say \"You cannot activate the effect of this card during the Damage Step\". Not reproduced: the earlier UDE/Konami card FAQ entry that allowed it (2008-12-15), which those lists replace; and where outside the Damage Step a period player could activate it, which is the engine's ordinary timing for an optional \"when\" trigger.",
+    "The record's sources establish that the period text has no face-up requirement on the destroyed Beast. As in the upstream script, the destroyed monster must be a Beast both in the Graveyard and by the engine's record of its race on the field; only a face-down Beast destroyed by a card effect is tested. A UDE ruling (Netrep 2007-09-28; card FAQ 2008-12-15) says a face-down destroyed Beast does not trigger the card; whether it held at the snapshots is not shown, so this difference stays and is on the owner's list.",
     "The period text does not say whether this card being destroyed itself counts as the trigger. As in the upstream script, it is not offered when this card is itself among the cards sent to the Graveyard in that event, even if another Beast was destroyed with it.",
     "As in the upstream script, the trigger carries no EFFECT_FLAG_DELAY, so it follows the engine's rule for an optional \"when\" trigger and can miss its timing if the destruction is not the last thing to happen (round 031's script used the delayed form). Which the period card followed is not established by the record's sources, and it is not tested.",
     "\"You can pay 1000 Life Points to Special Summon\" is implemented as a cost paid on activation.",
     "The Special Summon is from the hand or Graveyard into any free Monster Zone in face-up Attack Position; the effect is one trigger for both locations.",
-    "The card row's statline is copied from the modern row and not checked against the period printing."
+    "The card row's statline is copied from the modern row and not checked against the period printing.",
+    "Konami's errata lists say that when several copies are available only 1 may be Special Summoned. One two-copy scenario was run (Dark Hole, two copies in hand): the modern and the generated script each Special Summoned one; the rule is not otherwise tested."
   ],
+  "rulings_check": {
+    "difference": "The destroyed Beast need not have been face-up; the modern card requires a face-up Beast.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "ude-judge-list-green-baboon-2007",
+        "looked_for": "a UDE Netrep answer on a Beast destroyed face-down",
+        "finding": "contradicts",
+        "passage": "You cannot activate the effect of \"Green Baboon, Defender of the Forest\" in this case. (a Beast destroyed while face-down, by Torrential Tribute or Shield Crash)",
+        "in_force": "not-shown"
+      },
+      {
+        "source": "konami-card-faq-2008-12-15-fh",
+        "looked_for": "a card FAQ entry on the face-up requirement",
+        "finding": "contradicts",
+        "passage": "You cannot activate this effect when a face-down Beast-Type monster you control is destroyed by a card effect.",
+        "in_force": "not-shown"
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "a Konami statement on the face-up requirement; the list carries two bullets for this card (no activation in the Damage Step; only 1 copy Special Summoned) and none on face-up",
+        "finding": "does-not-address",
+        "passage": "You cannot activate the effect of this card during the Damage Step. (The corrected script excludes the Damage Step, as the modern card does, so this is no longer a difference.)"
+      },
+      {
+        "source": "konami-errata-list-2010-11-05",
+        "looked_for": "the same bullets in the list Konami's Gameplay page called \"Current Errata\" on 2011-09-18",
+        "finding": "does-not-address"
+      }
+    ]
+  },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-errata-list-2010-01-05",
+    "konami-errata-list-2010-11-05",
+    "konami-card-faq-2008-12-15-fh",
+    "ude-judge-list-green-baboon-2007"
   ]
 }

@@ -359,6 +359,35 @@ ROUND_031_GENERATED = {
 }
 ROUND_031_PASSCODES = frozenset(generated for _modern, generated in ROUND_031_GENERATED.values())
 
+# Round 035: cards whose generated version was removed because Konami's period rulings show
+# the modern card behaves as the era card did (docs/research/period-rulings-generated-scripts.md).
+# {erratum id: (modern passcode, retired generated passcode)}. The lists use the modern code
+# again; swap_retired_forward() reconstructs what they held before, so every pin taken then
+# can still be asserted.
+ROUND_035_RETIRED = {
+    "erratum-metalzoa": (50705071, 600000001),
+    "erratum-rise-of-the-snake-deity": (16067089, 600000007),
+    "erratum-malefic-blue-eyes-white-dragon": (9433350, 600000008),
+    "erratum-soul-rope": (37383714, 600000009),
+}
+# The three of them whose erratum record had to become a full v2 record: the single-event
+# sugar cannot carry a cosmetic transition (model._desugar_v2_sugar). Before round 035 the
+# corpus was 180 sugar records and 116 full v2 records; it is now 177 and 119.
+ROUND_035_CONVERTED_TO_FULL_V2 = frozenset(
+    {"erratum-metalzoa", "erratum-malefic-blue-eyes-white-dragon", "erratum-rise-of-the-snake-deity"}
+)
+ROUND_035_RETIRED_PASSCODES = frozenset(generated for _modern, generated in ROUND_035_RETIRED.values())
+# The round-031 cards that are still generated and whose state applies at Tengu's snapshot.
+TENGU_GENERATED_PASSCODES = ROUND_031_PASSCODES - ROUND_035_RETIRED_PASSCODES
+# The removed cards whose generated code Tengu's list carried before round 035 (Metalzoa's
+# never was: its erratum, 2011-08-13, precedes Tengu's snapshot).
+ROUND_035_RETIRED_AT_TENGU_PASSCODES = ROUND_035_RETIRED_PASSCODES - {600000001}
+# Every number in the reserved range that was assigned or held for a generated card and is not
+# generated now. None is ever assigned again: 600000003 (Night Assailant, held back on thin
+# evidence, round 029), the four above, and 600000010-600000017 (round 034's eight cards, which
+# period rulings did not support; that round was never merged).
+RETIRED_PASSCODES = frozenset({600000003} | ROUND_035_RETIRED_PASSCODES | set(range(600000010, 600000018)))
+
 
 def swap_generated_back(entries, custom_cards, passcodes=None):
     """A built lflist's {code: count} with each generated card's code replaced by
@@ -370,3 +399,41 @@ def swap_generated_back(entries, custom_cards, passcodes=None):
         if (passcodes is None or card.passcode in passcodes) and card.passcode in out:
             out[card.alias] = out.pop(card.passcode)
     return out
+
+
+def swap_retired_forward(entries, passcodes=None):
+    """A built lflist's {code: count} with each round-035 card's modern code replaced by
+    the generated code it had before the card was removed (only `passcodes` if given), so
+    a hash taken before round 035 can still be asserted against a list built now. Only
+    codes the list holds are swapped: a list that never carried the generated card (Tengu
+    never carried Metalzoa's) is left alone."""
+    out = dict(entries)
+    for modern, generated in ROUND_035_RETIRED.values():
+        if (passcodes is None or generated in passcodes) and modern in out:
+            out[generated] = out.pop(modern)
+    return out
+
+
+# Every generated card any round ever put in a list: {generated passcode: the modern card it
+# aliases}. Rounds 029-030 (Metalzoa, Super Vehicroid - Stealth Union) and 031 (the six
+# above), including the four round 035 removed. swap_back() undoes them, so a hash pinned
+# at any earlier round can still be asserted against today's list.
+ALL_GENERATED_ALIASES = {
+    600000001: 50705071,
+    600000002: 3897065,
+    **{generated: modern for modern, generated in ROUND_031_GENERATED.values()},
+}
+# The round-031 substitutions still in force at Tengu's snapshot ({erratum id: (modern, generated)}).
+TENGU_GENERATED = {k: v for k, v in ROUND_031_GENERATED.items() if k not in ROUND_035_RETIRED}
+
+
+def swap_back(entries, passcodes=None):
+    """A built lflist's {code: count} with each generated code (only `passcodes` if given)
+    replaced by the modern card it aliases, from the static ALL_GENERATED_ALIASES map, so
+    it also undoes a card that no longer exists in data/custom-cards/."""
+    out = dict(entries)
+    for generated, modern in ALL_GENERATED_ALIASES.items():
+        if (passcodes is None or generated in passcodes) and generated in out:
+            out[modern] = out.pop(generated)
+    return out
+

@@ -41,7 +41,18 @@ from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
-from .helpers import ROUND_031_PASSCODES, TempRepoTest, swap_generated_back, card as card_ref, event as ev, gap, printing
+from .helpers import (
+    ROUND_031_PASSCODES,
+    ROUND_035_RETIRED_AT_TENGU_PASSCODES,
+    TempRepoTest,
+    swap_back,
+    swap_generated_back,
+    swap_retired_forward,
+    card as card_ref,
+    event as ev,
+    gap,
+    printing,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CUTOFF = date(1999, 8, 25)
@@ -411,13 +422,14 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         self.assertEqual(0x28E9FC02, build_lflist(self.repo.formats["2005-04-goat"], self.repo).hash)
         self.assertEqual(3674, len(self.repo.pools[self.repo.formats["2010-03-edison"].pool_id].cards))
         self.assertEqual(4563, len(self.repo.pools[self.repo.formats["2011-09-tengu"].pool_id].cards))
-        # Re-pinned round 031: six generated cards (600000004-9) are in Tengu's list now;
-        # swapping them back reproduces the earlier pin.
+        # Re-pinned round 031: six generated cards (600000004-9) were in Tengu's list; round 035
+        # took three of them out again (600000007-9), so the list holds three now. Swapping the
+        # three forward reproduces the round-031 pin, and swapping all six back the earlier one.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x45A6E446, tengu.hash)
-        self.assertEqual(
-            0x0C878718, lflist_hash(swap_generated_back(tengu.entries, self.repo.custom_cards, ROUND_031_PASSCODES))
-        )
+        self.assertEqual(0x410A9E85, tengu.hash)
+        forward = swap_retired_forward(tengu.entries, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
+        self.assertEqual(0x45A6E446, lflist_hash(forward))
+        self.assertEqual(0x0C878718, lflist_hash(swap_back(forward, ROUND_031_PASSCODES)))
 
     # -- 19: no canonical Tokyo Dome artifacts exist -------------------------
 

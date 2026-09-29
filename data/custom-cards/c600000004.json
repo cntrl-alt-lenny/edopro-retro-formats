@@ -45,6 +45,34 @@
     "The call is made by the controller before the toss, as the engine's Duel.CallCoin does; the record's sources do not describe how the period rules ordered the call and the toss.",
     "The card row's statline is copied from the modern row and not checked against the period printing."
   ],
+  "rulings_check": {
+    "difference": "The effect has no use limit, so it can be activated again in the same turn; the modern card is \"Once per turn\".",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-card-faq-2008-12-15-fh",
+        "looked_for": "a ruling on how often the effect may be used",
+        "finding": "contradicts",
+        "passage": "\"Goddess of Whim's\" effect is an Ignition Effect. It can only be used once per turn, during your Main Phase.",
+        "in_force": "not-shown"
+      },
+      {
+        "source": "ude-card-rulings-archive",
+        "looked_for": "an entry for the card on the 2005-07-01 page; there is none",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name; not listed",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-11-05",
+        "looked_for": "the card by name; not listed",
+        "finding": "does-not-address"
+      }
+    ]
+  },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",

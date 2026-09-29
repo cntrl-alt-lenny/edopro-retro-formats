@@ -16,14 +16,16 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "Activate only by paying 1000 Life Points when a monster you control is destroyed and sent to the Graveyard, Special Summon 1 Level 4 monster from your Deck.",
           "modern_text": "When a monster you control is destroyed and sent to the Graveyard (except during the Damage Step): Pay 1000 Life Points; Special Summon 1 Level 4 monster from your Deck.",
-          "summary": "Activation window narrowed: v1 (LCYW-EN102) added '(except during the Damage Step)', which the v0 text (LODT-ENSE2) does not carry. v0 triggers whenever a monster you control is destroyed and sent to the Graveyard, and battle destruction happens inside the Damage Step, so under the era text the trap had to be usable there for its battle-destruction case to function at all. The same printing moved the 1000 Life Point payment from 'Activate only by paying 1000 Life Points when ...' into PSCT cost position, which does not change that it is a cost.",
+          "summary": "Wording only, on Konami's period rulebook (round 035). v1 (LCYW-EN102) added \"(except during the Damage Step)\". Under Konami's rulebook (Versions 7.0 to 8.0) a Normal Trap Card could not be activated in the Damage Step in any case (\"During the Damage Step, you can only activate Counter Trap Cards, or cards with effects that directly change a monster's ATK or DEF\"), so the era card could not respond to a monster destroyed in battle, as the added words state. No TCG ruling read gives Soul Rope a Damage Step exception. The 2015 change (c1, \"by a card effect\") is untouched.",
           "sources": [
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
+            "yugipedia-set-pages",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v8-2011"
           ]
         }
       ]
@@ -65,21 +67,22 @@
     {
       "events": [],
       "coverage": {
-        "kind": "custom-script",
-        "historical_passcode": 600000009,
-        "script": "data/custom-cards/c600000009.lua"
+        "kind": "known-gap",
+        "gap_reason": "Round 035: the round 031 script was removed because it let the Trap be activated in the Damage Step, which Konami's period rulebook forbids. The remaining difference, that the era card triggered on any destruction of a monster you control outside the Damage Step while the modern card requires destruction by a card effect, is not reproduced and no engine test observes it.",
+        "gap_sources": [
+          "konami-official-rulebook-v71-2010",
+          "yugipedia-card-errata"
+        ]
       }
     }
   ],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "partial",
-      "tested": true,
-      "reason": "Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000009.json; passcode 600000009). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
+      "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In a period format Soul Rope cannot be used when your monster is destroyed in battle - the era text's main case - because the modern card only triggers on destruction by a card effect and is barred from the Damage Step."
+        "behavioural_impact": "In a period format EDOPro's Soul Rope triggers only on destruction by a card effect. The era card (before 2015-11-12) triggered on any destruction of a monster you control outside the Damage Step; ordinary play does not separate the two, because destruction by battle is inside the Damage Step, where neither card may be activated. Destruction that is neither a card effect nor battle is the unreproduced residual."
       }
     }
   ],
@@ -87,12 +90,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations lists only 511001593 'Soul Rope (Anime)', a distinct card whose text ('When a monster(s) you control is destroyed: Pay 1000 LP; ...') matches no lineage version (ratio 0.7388) and which drops the 'sent to the Graveyard' requirement entirely; it is not substitutable, so the gap stands. It is a useful reference for the shape an era script needs: EVENT_DESTROYED with EFFECT_FLAG_DAMAGE_STEP and a cfilter carrying no REASON_EFFECT/REASON_DESTROY test, plus the 'sent to the Graveyard' requirement the anime card lacks. Dating: v0's earliest tcg date is tcg-oce 2008-01-01 at YEAR precision, with the NA/EU Special Edition at 2008-06-18; either way v0 is the text in force at both the GOAT and Edison snapshots, since v1 is 2012-09-29. No supported period snapshot falls inside the intermediate window 2012-09-29 .. 2015-11-12, so I attached no resulting_implementation to the first change - the intermediate version is not needed by any format. CAVEAT on that first change: the packet establishes that the '(except during the Damage Step)' exclusion was added, not that era policy independently permitted Damage Step activation of a trap whose trigger is general destruction rather than battle destruction specifically. I recorded the text fact and the inference, and flagged nothing further, because the era version is v0 under either reading and the gap is required by the second change regardless."
+    "notes": "upstream_implementations lists only 511001593 'Soul Rope (Anime)', a distinct card whose text ('When a monster(s) you control is destroyed: Pay 1000 LP; ...') matches no lineage version (ratio 0.7388) and which drops the 'sent to the Graveyard' requirement entirely; it is not substitutable, so the gap stands. It is a useful reference for the shape an era script needs: EVENT_DESTROYED with EFFECT_FLAG_DAMAGE_STEP and a cfilter carrying no REASON_EFFECT/REASON_DESTROY test, plus the 'sent to the Graveyard' requirement the anime card lacks. Dating: v0's earliest tcg date is tcg-oce 2008-01-01 at YEAR precision, with the NA/EU Special Edition at 2008-06-18; either way v0 is the text in force at both the GOAT and Edison snapshots, since v1 is 2012-09-29. No supported period snapshot falls inside the intermediate window 2012-09-29 .. 2015-11-12, so I attached no resulting_implementation to the first change - the intermediate version is not needed by any format. CAVEAT on that first change: the packet establishes that the '(except during the Damage Step)' exclusion was added, not that era policy independently permitted Damage Step activation of a trap whose trigger is general destruction rather than battle destruction specifically. I recorded the text fact and the inference, and flagged nothing further, because the era version is v0 under either reading and the gap is required by the second change regardless.\n\nRound 035 (2026-09-29) correction. The Damage Step half of the round 031 script was contradicted by Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18): only Counter Trap Cards and cards that directly change ATK or DEF may be activated in the Damage Step. The caveat above (this record inferred a Damage Step permission from the text alone) is resolved against it. Superseded summary of the first change, kept verbatim: \"Activation window narrowed: v1 (LCYW-EN102) added '(except during the Damage Step)', which the v0 text (LODT-ENSE2) does not carry. v0 triggers whenever a monster you control is destroyed and sent to the Graveyard, and battle destruction happens inside the Damage Step, so under the era text the trap had to be usable there for its battle-destruction case to function at all. The same printing moved the 1000 Life Point payment from 'Activate only by paying 1000 Life Points when ...' into PSCT cost position, which does not change that it is a cost.\" Superseded implementation note, kept verbatim: \"Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000009.json; passcode 600000009). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.\" Superseded gap statement, kept verbatim: \"In a period format Soul Rope cannot be used when your monster is destroyed in battle - the era text's main case - because the modern card only triggers on destruction by a card effect and is barred from the Damage Step.\" Effect: the first change is cosmetic, the generated card 600000009 was removed and its number retired, and the state that applies at Edison and Tengu (before the 2015 change) is again a known gap for the remaining difference: the era card triggered on any destruction of a monster you control outside the Damage Step, the modern card only on destruction by a card effect. No scenario this repository can observe separates the two (destruction by battle is inside the Damage Step, where neither card may be activated); destruction that is neither a card effect nor battle is the residual case. Evidence: docs/research/period-rulings-generated-scripts.md, sections 4 and 6.8."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v8-2011"
   ]
 }

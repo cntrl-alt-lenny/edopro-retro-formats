@@ -563,36 +563,65 @@ reflects that.
    `dist/scripts/c<passcode>.lua`, from `data/custom-cards/` plus the erratum record whose
    `custom-script` coverage names the code (`retroformats/custom_cards.py`; rules in
    `retroformats/validate.py`, `custom-card.*`; see `docs/errata.md`, "Generated historical
-   cards"). Eight cards are done end to end, each with an engine test that fails against the
-   modern behaviour: Metalzoa and Super Vehicroid - Stealth Union, which only Edison uses
-   (`tests/engine/test_edison_historical_scripts.py`), and, from round 031, six cards whose
-   record puts the same historical state at Edison's and at Tengu's snapshot, which both
-   lists use - Goddess of Whim, Strike Ninja, Green Baboon, Rise of the Snake Deity, Malefic
-   Blue-Eyes White Dragon and Soul Rope (`tests/engine/test_shared_historical_scripts.py`).
+   cards"). Four cards are done end to end, each with an engine test that fails against the
+   modern behaviour: Super Vehicroid - Stealth Union, which only Edison uses
+   (`tests/engine/test_edison_historical_scripts.py`), and Goddess of Whim, Strike Ninja and
+   Green Baboon, whose record puts the same historical state at Edison's and at Tengu's snapshot
+   (`tests/engine/test_shared_historical_scripts.py`). **Round 035 checked all sixteen cards
+   the project had generated or drafted against period rulings** (`docs/research/period-rulings-generated-scripts.md`)
+   and found that rounds 029, 031 and 034 had read the printed English text as the period
+   behaviour. Konami's rulebook, errata lists and rulings contradicted five: Metalzoa and
+   Malefic Blue-Eyes (a "can only be Special Summoned by" monster could be revived after one
+   proper Summon; only "cannot be Special Summoned except by" locked a monster), Rise of the
+   Snake Deity and Soul Rope (a Normal Trap could not be activated in the Damage Step) and
+   Green Baboon (Konami's lists forbid its Damage Step activation). The first four generated
+   cards were removed and their erratum records reclassified (Soul Rope's remaining difference
+   is a known gap again); Green Baboon keeps only its no-face-up difference. **Retired numbers,
+   never assigned again:** `600000001`, `600000003`, `600000007`–`600000009`, and
+   `600000010`–`600000017`. Round 034's eight cards were not shipped: the five strict-nomi cards
+   (Gigantes, The Rock Spirit, Garuda the Wind Spirit, VW-Tiger Catapult, Gladiator Beast
+   Heraklinos) are contradicted, and Dark Master - Zorc, Dice Re-Roll and Second Coin Toss rest on
+   UDE rulings whose range in force at the snapshots is not shown. **The rulings gate** (round
+   035): the validator refuses a generated card with no recorded rulings check
+   (`custom-card.rulings-check-*`, `docs/errata.md`, "The rulings gate"). The questions left for
+   the owner are the unresolved UDE rulings (Goddess of Whim, Green Baboon's face-up
+   requirement, Zorc, Second Coin Toss); they show as `custom-card.contradicting-ruling-range-unresolved`.
    Each script states its origin and licence (round 032, owner decision 2026-09-27):
-   Metalzoa, Stealth Union and Malefic Blue-Eyes are original and MIT, and an engine test
-   keeps an original script measurably different from Project Ignis's
-   (`tests/engine/test_script_origin.py`); Goddess of Whim, Strike Ninja, Green Baboon,
-   Rise of the Snake Deity and Soul Rope are derived from Ignis's scripts, credited and
-   AGPL-3.0-or-later (`LICENSES/`, `dist/scripts/LICENSES.md`). Each is an approximation
-   whose gaps its record lists. **Night Assailant is held back** (round 030, owner decision
+   Stealth Union is original and MIT, and an engine test keeps an original script measurably
+   different from Project Ignis's (`tests/engine/test_script_origin.py`; the limit, 0.40, is
+   pinned by `tests/test_script_similarity.py`); Goddess of Whim, Strike Ninja and Green Baboon
+   are derived from Ignis's scripts, credited and AGPL-3.0-or-later (`LICENSES/`,
+   `dist/scripts/LICENSES.md`). Since round 034 (carried into round 035) a derived record's
+   upstream file must be the card's own script (validator `custom-card.upstream-not-own-script`,
+   and the engine test for a `pre-errata/` variant). Each is an approximation whose gaps its
+   record lists.
+   **Open (found in round 032's review, not closed):** the similarity gate measures an
+   `original` script only against Ignis's script for its *own alias*, so a script adapted from
+   a different Ignis card would pass it as original. Closing it needs a measurement against
+   the other scripts too, and is a later round. **Night Assailant is held back** (round 030, owner decision
    2026-09-23): its period behaviour needs better evidence for whether the effect is
    optional and whether it targets. Round 029's script matched Project Ignis's too closely
    to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`); since
    round 032 a derived, credited script would be allowed, so the evidence is what holds it back.
-   It stays a known gap, with the modern card in Edison's list. **Remaining:** 38 Edison
-   `format.erratum-known-divergence` cards (`validate` at round 031's head): Night Assailant,
+   It stays a known gap, with the modern card in Edison's list. **Remaining:** 39 Edison
+   `format.erratum-known-divergence` cards (`validate` at round 035's head): Night Assailant,
    five cards that apply an intermediate state at Edison only (Freed the Matchless General,
    Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon, Toon Table of Contents -
    the modern activation requirement plus the period reveal on a failed search, which only
    shows when a response empties the Deck mid-chain, so the engine test is a heavier
-   scenario), and 32 whose historical state also applies at Tengu's snapshot. Two things any
+   scenario), and 33 whose historical state also applies at Tengu's snapshot (32 before round
+   035, plus Soul Rope). Round 035 also found that a strict-nomi reading needs a period ruling
+   (the wording alone was not evidence), and left the other records that rest on it or on any
+   printed-text-only functional call unadjudicated: 104 records, counted mechanically in the
+   research document, section 7 (`docs/research/edison-behaviour-gaps.md`, section 2 carries
+   a dated note). Two things any
    of them needs first. (1) A `custom-script` on a record whose state applies at Tengu also
    changes Tengu's list; the owner decided on 2026-09-24 that this is allowed for a card whose
    record says its state applies there (`docs/state.md`), as round 031 did. (2) A card Ignis's
    GOAT reference already substitutes needs an exact `reference_identities` entry
    first, or the GOAT list moves: when a record's `known-gap` becomes a `custom-script`,
-   GOAT's structural parity walk can pick up the new state.
+   GOAT's structural parity walk can pick up the new state. (3) A rulings check
+   (`docs/errata.md`, "The rulings gate"), with the period rulings searched and read first.
 8. **Partly done — ship as an EDOPro repo**: add a documented `user_configs.json` snippet +
    versioned release layout so `dist/` is consumable directly; test in a real client.
    `dist/README.md` contains the snippet and versioned-release convention, but the
