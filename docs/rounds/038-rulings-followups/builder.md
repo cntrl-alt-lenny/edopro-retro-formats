@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 038-rulings-followups
+role: builder
+branch: builder/038-rulings-followups
+head: 47ea5ef514c327d29bc182306d619f2526454d8d
+os: macOS 27.0
+python: 3.13.15
+written: 2026-09-29T17:44:23Z
+-->
 ## Verified
 
 Commands run with Python 3.13 (`python3` on the owner's Mac is 3.9, below the floor). "Code head" is `54cf250`; the only commit after it is this report. No suite run is evidence for a historical claim: every quotation below was re-read in the archived capture (fetched from the Internet Archive's raw captures on 2026-09-29; PDFs through `pdftotext`, HTML stripped), and `data/errata/*.json` passages were machine-checked as verbatim substrings of the converted document they cite before they were written.
