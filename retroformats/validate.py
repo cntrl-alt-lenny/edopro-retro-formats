@@ -2689,6 +2689,17 @@ class Validator:
                     texts.add(item[key])
         return texts
 
+    @staticmethod
+    def _is_own_upstream_path(path: str, alias: int) -> bool:
+        """Whether `path` (in Project Ignis's CardScripts) can be the script of the
+        card with passcode `alias`, judged from the path alone. `official/` files
+        are named by the card's own passcode. Ignis's `pre-errata/` variants carry
+        private codes (511xxxxxx) that say nothing about the card, so any such file
+        passes here and the engine test checks its tie to `alias` against the pinned
+        databases. `goat/`, `unofficial/`, `pre-release/` and the rest are not
+        history of a real card's script and never qualify."""
+        return path == f"official/c{alias}.lua" or re.fullmatch(r"pre-errata/c\d+\.lua", path) is not None
+
     def _check_authorship(self, card, where: Path) -> None:
         """A generated script's origin and licence, stated on the record and in
         the script's own header, and the two must agree (owner decision
@@ -2756,6 +2767,15 @@ class Validator:
                 or not re.fullmatch(r"[A-Za-z0-9_-]+(/[A-Za-z0-9_-]+)*\.lua", path)
             ):
                 problems.append(f"upstream.path must be a relative path to a .lua file, got {path!r}")
+            if isinstance(path, str) and not self._is_own_upstream_path(path, card.alias):
+                self.error(
+                    "custom-card.upstream-not-own-script",
+                    where,
+                    f"upstream.path {path!r} is not the script of the card this row aliases: expected "
+                    f"'official/c{card.alias}.lua' (or a 'pre-errata/' script, whose tie to the alias "
+                    "tests/engine/test_script_origin.py checks); a derived script credits and copies "
+                    "that card's own upstream script, not another card's",
+                )
             if not isinstance(copyright_, str) or not copyright_.strip():
                 problems.append("upstream.copyright must carry the upstream's copyright notice")
             if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date) or self._date(date) is None:
