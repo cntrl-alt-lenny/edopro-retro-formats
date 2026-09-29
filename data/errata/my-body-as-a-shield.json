@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Conflict preserved, not resolved: the baseline's cdb text is v1 (CP01-EN015, 2006-11-11) 'when your opponent activates a CARD that has an effect which destroys...', and v2 (TU02-EN007, 2010-01-09) - the printing actually in circulation at the 2010-04-24 Edison snapshot - is equally card-scoped, while v3 (GLD3-EN041, 2010-06-18) broadened the trigger to 'a card OR effect'. Upstream's GOAT script does not reproduce the narrow card-only scope: its single-line diff leaves the modern trigger scope intact, so as shipped it behaves like the v5/v6 version minus the Damage Step allowance. Two independent parties treat the GLD3 wording as clarification rather than change - Project Ignis by not narrowing the script, and EdisonFormat.com, which states the era card can be chained to a card or an effect while openly conceding that SJC Edison was played with the TU2 printing and that adopting GLD3 is a community-convention choice. I therefore record only the Damage Step transition as implementation-relevant and flag the scope tension rather than inventing a second change the script cannot support. Intermediate rewordings v1 -> v5 (TU02 'Activate only by paying', DT05-EN041 'Spell/Trap Card or Effect Monster's effect', LCYW PSCT) are collapsed into this note."
+    "notes": "Conflict preserved, not resolved: the baseline's cdb text is v1 (CP01-EN015, 2006-11-11) 'when your opponent activates a CARD that has an effect which destroys...', and v2 (TU02-EN007, 2010-01-09) - the printing actually in circulation at the 2010-04-24 Edison snapshot - is equally card-scoped, while v3 (GLD3-EN041, 2010-06-18) broadened the trigger to 'a card OR effect'. Upstream's GOAT script does not reproduce the narrow card-only scope: its single-line diff leaves the modern trigger scope intact, so as shipped it behaves like the v5/v6 version minus the Damage Step allowance. Two independent parties treat the GLD3 wording as clarification rather than change - Project Ignis by not narrowing the script, and EdisonFormat.com, which states the era card can be chained to a card or an effect while openly conceding that SJC Edison was played with the TU2 printing and that adopting GLD3 is a community-convention choice. I therefore record only the Damage Step transition as implementation-relevant and flag the scope tension rather than inventing a second change the script cannot support. Intermediate rewordings v1 -> v5 (TU02 'Activate only by paying', DT05-EN041 'Spell/Trap Card or Effect Monster's effect', LCYW PSCT) are collapsed into this note.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, My Body as a Shield). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
@@ -25,7 +25,9 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-official-rulebook-v71-2010"
   ],
   "event": {
     "effective": {
@@ -44,8 +46,75 @@
       "ignis-babelcdb",
       "yugipedia-card-errata",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-card-faq-2008-12-16-lo",
+      "konami-official-rulebook-v71-2010"
+    ],
+    "rulings_check": {
+      "difference": "Era: My Body as a Shield cannot be activated during the Damage Step; modern (2019 text): it can be activated in the Damage Step.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: Era: My Body as a Shield cannot be activated during the Damage Step; modern (2019 text): it can be activated in the Damage Step.",
+          "finding": "supports",
+          "passage": "You cannot activate \"My Body as a Shield\" during the Damage Step, so you cannot use it against a \"Man-Eater Bug\" or \"Cyber Jar\" flipped by an attack, but you can use it when these monsters are Flip Summoned.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Era: My Body as a Shield cannot be activated during the Damage Step; modern (2019 text): it can be activated in the Damage Step.",
+          "finding": "does-not-address",
+          "passage": "During the Damage Step, you can only activate Counter Trap Cards,"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "My Body as a Shield on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "My Body as a Shield in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "My Body as a Shield in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:My Body as a Shield' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

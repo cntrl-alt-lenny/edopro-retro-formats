@@ -20,13 +20,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Era text at the Edison snapshot is v1 (DP06-EN010, 2008-01-26); v0 (GLAS-EN040, 2007-11-14) differs only by parenthesising the Flip-effect reminder, so the chain starts at v1. Trailing cosmetic step after the recorded change, not entered as a change: v3 (LDS3-EN029, 2022-07-21, what the pinned cards.cdb text matches) writes '1 Fiend monster + 1 Rock monster', 'becomes' for 'is equal to', and trims 'and cannot be Special Summoned by other ways' - the standard redundancy trim, not a loosening; official/c58332301.lua still carries EFFECT_SPSUMMON_CONDITION with aux.EvilHeroLimit alongside c:EnableReviveLimit(), so the Dark Fusion-only restriction remains strict in every version. This card has no upstream historical or unofficial variant of any kind."
+    "notes": "Era text at the Edison snapshot is v1 (DP06-EN010, 2008-01-26); v0 (GLAS-EN040, 2007-11-14) differs only by parenthesising the Flip-effect reminder, so the chain starts at v1. Trailing cosmetic step after the recorded change, not entered as a change: v3 (LDS3-EN029, 2022-07-21, what the pinned cards.cdb text matches) writes '1 Fiend monster + 1 Rock monster', 'becomes' for 'is equal to', and trims 'and cannot be Special Summoned by other ways' - the standard redundancy trim, not a loosening; official/c58332301.lua still carries EFFECT_SPSUMMON_CONDITION with aux.EvilHeroLimit alongside c:EnableReviveLimit(), so the Dark Fusion-only restriction remains strict in every version. This card has no upstream historical or unofficial variant of any kind.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Evil HERO Dark Gaia). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-15-de",
+    "konami-crimson-crisis-rulings-2009",
+    "konami-storm-of-ragnarok-rulings-archive"
   ],
   "event": {
     "effective": {
@@ -44,8 +47,55 @@
       "yugipedia-card-errata",
       "yugipedia-set-pages",
       "ignis-cardscripts",
-      "ignis-babelcdb"
-    ]
+      "ignis-babelcdb",
+      "konami-card-faq-2008-12-15-de",
+      "konami-crimson-crisis-rulings-2009",
+      "konami-storm-of-ragnarok-rulings-archive"
+    ],
+    "rulings_check": {
+      "difference": "The era card sets its original ATK to the combined ATK of the materials as they stood on the field at the Fusion Summon (boosts included); the modern card sums the materials' original ATK (script reads them from the Graveyard). The era attack-declaration position change is mandatory; the modern one is optional ('You can change ...').",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "d1: The era card sets its original ATK to the combined ATK of the materials as they stood on the field at the Fusion Summon (boosts included); the modern card sums the materials' original ATK (script rea…",
+          "finding": "does-not-address",
+          "passage": "If a face-down monster is used as a Fusion Material Monster, the original ATK of the face-down monster will be applied to determine the original ATK of \"Evil Hero Dark Gaia\"."
+        },
+        {
+          "source": "konami-crimson-crisis-rulings-2009",
+          "looked_for": "d1: The era card sets its original ATK to the combined ATK of the materials as they stood on the field at the Fusion Summon (boosts included); the modern card sums the materials' original ATK (script rea…",
+          "finding": "does-not-address",
+          "passage": "If you Tribute a Warrior with variable ATK, like \"Evil Hero Dark Gaia\", the original ATK is treated as 0 so \"Turret Warrior\""
+        },
+        {
+          "source": "konami-storm-of-ragnarok-rulings-archive",
+          "looked_for": "d1: The era card sets its original ATK to the combined ATK of the materials as they stood on the field at the Fusion Summon (boosts included); the modern card sums the materials' original ATK (script rea…",
+          "finding": "does-not-address",
+          "passage": "If you target your opponent's Evil Hero Dark Gaia or Chimeratech Fortress Dragon, your monster's ATK will be"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Evil HERO Dark Gaia on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Evil HERO Dark Gaia in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Evil HERO Dark Gaia' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

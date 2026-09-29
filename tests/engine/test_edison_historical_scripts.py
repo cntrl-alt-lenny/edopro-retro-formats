@@ -72,6 +72,7 @@ def deck_fillers(count: int = 3) -> str:
 def standing_answers(duel: H.Duel) -> None:
     duel.default_response(H.MSG_SELECT_CHAIN, H.answer_chain_decline_unless_forced)
     duel.default_response(H.MSG_SELECT_PLACE, H.answer_place_first_free)
+    duel.default_response(H.MSG_SELECT_DISFIELD, H.answer_place_first_free)
     duel.default_response(H.MSG_SELECT_POSITION, H.answer_position(H.POS_FACEUP_ATTACK))
 
 

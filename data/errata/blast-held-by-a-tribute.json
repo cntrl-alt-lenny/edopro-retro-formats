@@ -20,11 +20,13 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "CAUTION on the packet's upstream entry: upstream_implementations lists passcode 511005091 'Blast Held by a Tribute (Anime)' from cards-unofficial.cdb (script unofficial/c511005091.lua, annotated 'original script by Shad3'). That is an anime-only card with an entirely different effect - it is chosen when Set, tracks the monster Tributed for the opponent's Tribute Summon, and destroys that attacker for damage equal to its ATK - and its text_matches_version ratio against the lineage is 0.4723. It is NOT a period implementation of the TCG card and must not be reused as a baseline; hence the acknowledged-gap baseline and the conflicting-evidence flag. Chain starts at v0 (DCR-104, 2003-12-01), the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots, since the DT05 reprint is 2011-09-29. Trailing v1 -> v2 (DPRP-EN034, 2016-09-15) is the PSCT rewrite ('Destroy as many face-up Attack Position monsters they control as possible, and if you do, inflict 1000 damage'), matching the pinned cdb text; it conditionalises the burn on at least one destruction, which is standard PSCT formalisation, so it is not recorded as a behavioural change. No entry for this card in edison-functional-errata.md."
+    "notes": "CAUTION on the packet's upstream entry: upstream_implementations lists passcode 511005091 'Blast Held by a Tribute (Anime)' from cards-unofficial.cdb (script unofficial/c511005091.lua, annotated 'original script by Shad3'). That is an anime-only card with an entirely different effect - it is chosen when Set, tracks the monster Tributed for the opponent's Tribute Summon, and destroys that attacker for damage equal to its ATK - and its text_matches_version ratio against the lineage is 0.4723. It is NOT a period implementation of the TCG card and must not be reused as a baseline; hence the acknowledged-gap baseline and the conflicting-evidence flag. Chain starts at v0 (DCR-104, 2003-12-01), the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots, since the DT05 reprint is 2011-09-29. Trailing v1 -> v2 (DPRP-EN034, 2016-09-15) is the PSCT rewrite ('Destroy as many face-up Attack Position monsters they control as possible, and if you do, inflict 1000 damage'), matching the pinned cdb text; it conditionalises the burn on at least one destruction, which is standard PSCT formalisation, so it is not recorded as a behavioural change. No entry for this card in edison-functional-errata.md.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Blast Held by a Tribute). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-raging-battle-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -40,8 +42,48 @@
     "summary": "Functional erratum: the DCR-104 activation condition is an attack by an opponent's monster 'that has been Tribute Summoned or Set'; DT05-EN099 drops 'or Set', leaving only 'a Tribute Summoned monster they control'. In a period format an opponent's monster that was Tribute Set and later turned face-up still lets the Trap resolve; after the erratum only a Tribute Summoned attacker does.",
     "sources": [
       "yugipedia-card-errata",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-16-ac",
+      "konami-raging-battle-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "The era condition also covers an opponent's attacker that was Tribute Set (then flipped face-up); the modern condition covers only a Tribute Summoned attacker.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: The era condition also covers an opponent's attacker that was Tribute Set (then flipped face-up); the modern condition covers only a Tribute Summoned attacker.",
+          "finding": "does-not-address",
+          "passage": "When your opponent attacks with a monster that you Tribute Summoned, and your opponent took control of, you can activate \"Blast Held by a Tribute\"."
+        },
+        {
+          "source": "konami-raging-battle-rulings-2009",
+          "looked_for": "d1: The era condition also covers an opponent's attacker that was Tribute Set (then flipped face-up); the modern condition covers only a Tribute Summoned attacker.",
+          "finding": "does-not-address",
+          "passage": "You cannot use \"Rockstone Tokens\" for a Tribute Set because that is still a Tribute Summon."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Blast Held by a Tribute on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Blast Held by a Tribute in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Blast Held by a Tribute' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

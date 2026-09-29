@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-vw-tiger-catapult",
+  "modern_card": {
+    "passcode": 58859575,
+    "name": "VW-Tiger Catapult"
+  },
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2018-03-08",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCKC-EN060, Legendary Collection Kaiba Mega Pack)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control. (You do not use \"Polymerization\"). You can discard 1 card to change the battle position of 1 monster your opponent controls. (Flip Effects are not activated at this time.)",
+          "modern_text": "\"V-Tiger Jet\" + \"W-Wing Catapult\"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control. (You do not use \"Polymerization\".) You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position. (Flip Effects are not activated.)",
+          "summary": "Wording only, on Konami's period rulings (round 036). The era text \"This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control.\" says \"can only be\", not \"cannot be Special Summoned except by\". Konami's rulebook (Versions 7.0 to 8.0) lets a Special Summon Monster be Special Summoned by another card's effect once it was properly Special Summoned first, and Konami's strategy article (printed 2009-12-07) applies that to \"can only be Special Summoned by\" wording and keeps the permanent lock for \"except by\". So the era card and the errata'd \"Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control.\" revive alike. The same printing rewrites the discard effect into PSCT with explicit targeting; this record's earlier reading called only the revival a behavioural difference, and no period ruling read here addresses the targeting, so none is established or adjudicated by this correction. No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-babelcdb",
+            "konami-official-rulebook-v71-2010",
+            "konami-tcg-strategy-special-summons-2009",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-card-faq-2008-12-15-uz"
+          ]
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 036: no generated card was shipped for this record (round 034's script was proposed and never merged; its number 600000013 stays retired). On Konami's period rulings the modern card behaves as the era card did at the snapshots this record applies at, so the modern implementation is used; no script or engine test is needed for it."
+    }
+  ],
+  "reference_identities": [],
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Chain starts at v3, the 'Extra Deck' wording that was in force at the Edison snapshot. Caveat recorded: the packet lists v3 with number null, sets [] and dating_set null, so it carries no printing and no date - it is the post-2008 Fusion Deck / Extra Deck rename of v2 (DR04-EN090, 2007-11-14) and is behaviourally identical to it, and it is used here for display text only; no date evidence is drawn from it (the recorded change is dated by v4, LCKC-EN060, 2018-03-08). Earlier transitions precede the baseline and are not recorded: v0 (EEN-EN030, 2005-11-16) -> v1 (DP2-EN016, 2006-02-08) is a moved parenthesis, and v1 -> v2 (DR04-EN090) reworded 'on your side of the field' to 'you control' and 'By discarding 1 card from your hand, change...' to 'You can discard 1 card to change...'. Trailing v5 (SGX1-ENC22, 2022-03-17) drops the '(You do not use \"Polymerization\".)' reminder and lowercases 'Flip effects' - cosmetic, not recorded. The pinned BabelCDB text matches v5 at ratio 0.9981; the residue is the line break between the Fusion-material line and the effect text, not a wording difference. The card's first printing (2005-11-16) postdates the 2005-04-01 GOAT pool, so only Edison-era play is affected. upstream_implementations is empty; the card is not on EdisonFormat.com's functional errata page.\n\nRound 036 (2026-09-29) correction. This record's strict-nomi call (\"can only be Special Summoned\" read as a permanent lock) was read from the printed wording alone and cited no period ruling. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18), says of Special Summon Monsters: \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" Konami's TCG strategy article (printed date 2009-12-07; earliest capture 2015-11-06) says a monster worded \"This card can only be Special Summoned by...\" can be Special Summoned again from the Graveyard after one proper Summon, and reserves the permanent lock for \"cannot be Special Summoned except by...\". Konami's Extreme Victory card rulings (compiled 2011-05-12, version 1.2; listed on Konami's Gameplay page on 2011-09-18) rule, for a card whose text is \"This card can only be Special Summoned by controlling 3 or more face-up \"Meklord\" monsters\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" This card's text says \"can only be\" and none of its printed texts says \"except\", so the era card and the errata'd card revive alike. For its contact-Fusion sibling the UDE/Konami card FAQ (Konami-hosted 2008-12-15, page U-Z) rules: \"Once properly Summoned by the method written in the text this card can be Special Summoned from the Graveyard with effects like \"Call of the Haunted\" or \"Re-Fusion\"\" (\"VWXYZ-Dragon Catapult Cannon\"), and Konami's strategy article says Fusion monsters that say \"You do not use \"Polymerization\"\" \"follow the same rules as monsters like \"Chaos Sorcerer\" that say \"This card can only be Special Summoned by...\"\". The card itself has no FAQ entry. Not adjudicated: whether the era discard effect targeted, which the era text does not say and the record's earlier reading did not call a difference (open question for the owner, round 036 report). Evidence and its limits: docs/research/period-rulings-generated-scripts.md, sections 3 and 6.9 and the round-036 section. Not established: the Graveyard-revival answer for GOAT (2005-04-01), which is out of this record's scope. Superseded summary, kept verbatim: \"Functional erratum: 'This card can only be Special Summoned from your Extra Deck by removing from play the above cards you control' becomes 'Must first be Special Summoned (from your Extra Deck) by banishing the above cards you control'. The period wording barred every Special Summon that was not that banish procedure, so the card could never be returned to the field once it left; the modern semi-Nomi wording allows any later Special Summon, revival from the Graveyard included, after the card has been properly Special Summoned once. The same printing also rewrote the discard effect into PSCT with explicit targeting ('You can discard 1 card to change the battle position of 1 monster your opponent controls' -> 'You can discard 1 card, then target 1 monster your opponent controls; change that target's battle position'), with the discard remaining an activation cost in both.\" Superseded gap statement, kept verbatim: \"In Edison the EDOPro card can be revived from the Graveyard by Monster Reborn, Call of the Haunted or Premature Burial after one proper summon, which the period Nomi text forbade entirely.\" Superseded coverage, kept verbatim: \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata)."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-tcg-strategy-special-summons-2009",
+    "konami-extreme-victory-rulings-2011-05",
+    "konami-card-faq-2008-12-15-uz"
+  ]
+}

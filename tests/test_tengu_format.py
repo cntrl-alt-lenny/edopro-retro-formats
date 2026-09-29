@@ -39,10 +39,13 @@ from tests.helpers import (
     ROUND_035_RETIRED_PASSCODES,
     ROUND_036_ADDED,
     ROUND_036_RETIRED,
+    ROUND_037_COSMETIC_RECORDS,
+    ROUND_037_TO_MODERN,
     TENGU_GENERATED,
     swap_back,
     swap_retired_forward,
     to_round_035,
+    to_round_036,
 )
 from tests.test_tengu_format_gate import EXPECTED_EDISON_STYLE_FALLBACK
 
@@ -65,7 +68,10 @@ ROOT = Path(__file__).resolve().parents[1]
 # generated cards are in the list: Dice Re-Roll, Machina Peacekeeper, Machina Gearframe, Elemental
 # HERO Chaos Neos and Treeborn Frog (600000016, 600000018-21). test_28 undoes both and asserts the
 # round-035 hash.
-TENGU_HASH = 0x79D06437
+# Round 037 (docs/research/text-only-errata-audit.md): Imperial Custom and Senet Switch use the modern card again in
+# both lists, so both hashes moved; the round-036 values are asserted through to_round_036().
+TENGU_HASH = 0x77E064D4
+TENGU_PRE_ROUND_037_HASH = 0x79D06437
 TENGU_PRE_ROUND_036_HASH = 0x410A9E85
 TENGU_PRE_ROUND_035_HASH = 0x45A6E446
 TENGU_PRE_ROUND_031_HASH = 0x0C878718
@@ -80,7 +86,8 @@ EDISON_PRE_ROUND_031_HASH = 0xD5E90AFA
 EDISON_PRE_ROUND_035_HASH = 0x9CC869A4
 # Re-pinned round 036: the same swaps as for Tengu; test_30 undoes them and asserts the round-035 hash.
 EDISON_PRE_ROUND_036_HASH = 0xC2ED2D57
-EDISON_HASH = 0x56875063
+EDISON_HASH = 0x58B75080
+EDISON_PRE_ROUND_037_HASH = 0x56875063
 TENGU_POOL_COUNT = 4563
 
 
@@ -275,10 +282,15 @@ class TenguFormatTest(unittest.TestCase):
         # The Rock Spirit, Garuda the Wind Spirit, VW-Tiger Catapult and Gladiator Beast Heraklinos),
         # so 43 modern.
         modern = sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate)
-        self.assertEqual(43, modern)
-        self.assertEqual(35, modern - 8)
-        self.assertEqual(33, modern - 8 - 2)
-        self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
+        # Round 037: seven more (A Hero Emerges, D.D. Scout Plane, Soul Rope, Diffusion Wave-Motion, Gaia Soul the
+        # Combustible Collective became cosmetic-only records; Imperial Custom and Senet Switch did too and leave
+        # reuse-upstream): 50 modern.
+        self.assertEqual(50, modern)
+        self.assertEqual(43, modern - 7)
+        self.assertEqual(35, modern - 7 - 8)
+        self.assertEqual(33, modern - 7 - 8 - 2)
+        self.assertEqual(50, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
+        self.assertEqual(52, 2 + sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
         # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their
         # sum. Round 035 took three of the six back out (Rise and Malefic are modern-correct, Soul
         # Rope is a known gap again). Round 036 took Goddess of Whim and Green Baboon out (modern-
@@ -287,16 +299,22 @@ class TenguFormatTest(unittest.TestCase):
         # Chaos Neos, Treeborn Frog): 22 known gaps and 6 custom-script records now.
         known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
         custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
-        self.assertEqual(22, known_gap)
+        # Round 037: three known gaps (A Hero Emerges, D.D. Scout Plane, Soul Rope) and two none-needed records
+        # (Diffusion Wave-Motion, Gaia Soul) are modern-correct: 19 known gaps and 1 none-needed record now.
+        self.assertEqual(19, known_gap)
         self.assertEqual(6, custom_script)
-        self.assertEqual(33, known_gap + 11)
+        self.assertEqual(33, known_gap + 3 + 11)
         self.assertEqual(3, custom_script - 3)
-        self.assertEqual(36, known_gap + custom_script + 8)
-        self.assertEqual(38, known_gap + custom_script + 8 + 2)
-        self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
+        self.assertEqual(36, known_gap + 3 + custom_script + 8)
+        self.assertEqual(38, known_gap + 3 + custom_script + 8 + 2)
+        self.assertEqual(1, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
+        self.assertEqual(3, 2 + sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
 
-        self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
-        self.assertEqual(9, sum(not s.modern_is_possible for s in ambiguous))
+        # Round 037: Axe of Despair and Tyrant Dragon's corrections made the modern state one of the possible ones.
+        self.assertEqual(163, sum(s.modern_is_possible for s in ambiguous))
+        self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous) - 2)
+        self.assertEqual(7, sum(not s.modern_is_possible for s in ambiguous))
+        self.assertEqual(9, sum(not s.modern_is_possible for s in ambiguous) + 2)
 
         unresolved_records = sum(
             any(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
@@ -306,8 +324,12 @@ class TenguFormatTest(unittest.TestCase):
             sum(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
             for s in selections.values()
         )
-        self.assertEqual(42, unresolved_records)
-        self.assertEqual(79, unresolved_occurrences)
+        # Round 037: Axe of Despair and Tyrant Dragon have no unresolved state any more (a dated 2013
+        # transition became cosmetic): 40 records and 77 occurrences, from 42 and 79.
+        self.assertEqual(40, unresolved_records)
+        self.assertEqual(42, unresolved_records + 2)
+        self.assertEqual(77, unresolved_occurrences)
+        self.assertEqual(79, unresolved_occurrences + 2)
 
     def test_20_exact_52_historical_substitutions_match_approved_mapping(self):
         overrides = select_applicable_errata(self.fmt, self.repo)
@@ -318,21 +340,26 @@ class TenguFormatTest(unittest.TestCase):
         # Round 031: six more substitutions are generated cards, not upstream ones.
         upstream = {k: v for k, v in actual_mapping.items() if v[1] not in RESERVED_PASSCODE_RANGE}
         generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
-        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
-        self.assertEqual(52, len(upstream))
+        # Round 037: Imperial Custom and Senet Switch use the modern card now, so 50 of the approved 52 remain.
+        self.assertEqual(
+            {k: v for k, v in EXPECTED_EDISON_STYLE_FALLBACK.items() if k not in ROUND_037_COSMETIC_RECORDS}, upstream
+        )
+        self.assertEqual(50, len(upstream))
+        self.assertEqual(52, len(upstream) + len(ROUND_037_COSMETIC_RECORDS))
         # Round 035: three of the six were still generated at Tengu's snapshot. Round 036: Goddess of
         # Whim and Green Baboon are gone and five cards are added, so Strike Ninja and the five.
         self.assertEqual(TENGU_GENERATED, generated)
         self.assertEqual(6, len(TENGU_GENERATED))
         self.assertEqual(3, len(TENGU_GENERATED) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
         self.assertEqual(6, len(TENGU_GENERATED) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED) + 3)  # round 031's six
-        self.assertEqual(58, len(actual_mapping))
-        self.assertEqual(55, len(actual_mapping) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
+        self.assertEqual(56, len(actual_mapping))
+        self.assertEqual(58, len(actual_mapping) + len(ROUND_037_COSMETIC_RECORDS))
+        self.assertEqual(55, len(actual_mapping) + len(ROUND_037_COSMETIC_RECORDS) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
 
     def test_21_no_unexpected_extra_substitutions(self):
         overrides = select_applicable_errata(self.fmt, self.repo)
         self.assertEqual(
-            set(EXPECTED_EDISON_STYLE_FALLBACK.keys()) | set(TENGU_GENERATED),
+            (set(EXPECTED_EDISON_STYLE_FALLBACK.keys()) - ROUND_037_COSMETIC_RECORDS) | set(TENGU_GENERATED),
             {o.erratum.id for o in overrides.values()},
         )
 
@@ -346,18 +373,19 @@ class TenguFormatTest(unittest.TestCase):
             if sel.chronology == "ambiguous" and not sel.modern_is_possible:
                 known_wrong.append(e.modern_card.name)
         expected_known_wrong = {
-            "Axe of Despair",
             "Paladin of White Dragon",
             "Sangan",
-            "Tyrant Dragon",
             "Vampire Lord",
             "Witch of the Black Forest",
             "XY-Dragon Cannon",
             "XYZ-Dragon Cannon",
             "XZ-Tank Cannon",
         }
+        # Round 037 corrected Axe of Despair and Tyrant Dragon (a dated 2013 transition became cosmetic),
+        # so the modern state is possible for them and they are defaulted, not known-wrong: 7 of the 9.
         self.assertEqual(expected_known_wrong, set(known_wrong))
-        self.assertEqual(9, len(known_wrong))
+        self.assertEqual(7, len(known_wrong))
+        self.assertEqual(9, len(known_wrong) + 2)
 
     def test_23_ambiguous_modern_possible_records_use_documented_unresolved_policy(self):
         self.assertIsNotNone(self.fmt.unresolved_policy)
@@ -378,10 +406,12 @@ class TenguFormatTest(unittest.TestCase):
         # six known gaps are modern-correct (Dark Master - Zorc and the five strict-nomi cards) and
         # five are custom-script (round 036's additions), so 22 now.
         moved_to_modern, moved_to_custom, generated_after_035 = 6, len(ROUND_036_ADDED), 3
-        self.assertEqual(22, len(divergences))
-        self.assertEqual(33, len(divergences) + moved_to_modern + moved_to_custom)
-        self.assertEqual(32, len(divergences) + moved_to_modern + moved_to_custom - 1)
-        self.assertEqual(38, len(divergences) + moved_to_modern + moved_to_custom + generated_after_035 + 2)
+        # Round 037: three of them (A Hero Emerges, D.D. Scout Plane, Soul Rope) are modern-correct: 19 now.
+        self.assertEqual(19, len(divergences))
+        self.assertEqual(22, len(divergences) + 3)
+        self.assertEqual(33, len(divergences) + 3 + moved_to_modern + moved_to_custom)
+        self.assertEqual(32, len(divergences) + 3 + moved_to_modern + moved_to_custom - 1)
+        self.assertEqual(38, len(divergences) + 3 + moved_to_modern + moved_to_custom + generated_after_035 + 2)
 
     def test_25_generated_tengu_lflist_contains_every_legal_card_correctly(self):
         built = build_lflist(self.fmt, self.repo)
@@ -468,6 +498,9 @@ class TenguFormatTest(unittest.TestCase):
         built = build_lflist(self.fmt, self.repo)
         self.assertEqual(TENGU_HASH, built.hash)
         self.assertEqual(TENGU_HASH, lflist_hash(built.entries))
+        # Round 037: putting Imperial Custom's and Senet Switch's variants back reproduces round 036's hash.
+        self.assertEqual(2, sum(modern in built.entries for modern in ROUND_037_TO_MODERN))
+        self.assertEqual(TENGU_PRE_ROUND_037_HASH, lflist_hash(to_round_036(built.entries)))
         # Round 036: undoing its two removals and five additions (to_round_035) must reproduce the
         # round-035 hash, so nothing else moved.
         self.assertEqual(
@@ -487,7 +520,7 @@ class TenguFormatTest(unittest.TestCase):
         self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swapped_back))
         self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swap_back(forward)))
         # and swapping every generated code in today's list back reaches the same hash directly
-        self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swap_back(built.entries)))
+        self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swap_back(to_round_036(built.entries))))
 
     def test_29_goat_output_remains_byte_identical_and_hash_pinned(self):
         goat_fmt = self.repo.formats["2005-04-goat"]
@@ -518,6 +551,8 @@ class TenguFormatTest(unittest.TestCase):
         # Re-pinned round 036: two of the four were removed and five generated cards added; undoing
         # both (to_round_035) reproduces the round-035 hash.
         self.assertEqual(EDISON_HASH, built_edison.hash)
+        # Round 037: putting Imperial Custom's and Senet Switch's variants back reproduces round 036's hash.
+        self.assertEqual(EDISON_PRE_ROUND_037_HASH, lflist_hash(to_round_036(built_edison.entries)))
         self.assertEqual(7, len(self.repo.custom_cards))
         round_035 = to_round_035(built_edison.entries)
         self.assertEqual(EDISON_PRE_ROUND_036_HASH, lflist_hash(round_035))

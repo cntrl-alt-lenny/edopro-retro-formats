@@ -265,6 +265,186 @@ def check_round_036_edit(test, record_id, on_disk):
     test.assertEqual([], lost, f"{record_id}: passages of the earlier record that are gone")
 
 
+# Round 037 (docs/research/text-only-errata-audit.md) checked every erratum record whose `functional`
+# transition applies at Edison's or Tengu's snapshot against period rulings, and edited each one:
+# a `rulings_check` on the transition, the sources it rests on, and a dated paragraph in the review
+# notes. Some were corrected as well:
+#   "checked":   only the check, the sources and the notes were added;
+#   "narrowed":  a ruling contradicted part of the claim, so the summary was narrowed and the transition
+#                stays functional on what remains;
+#   "cosmetic":  every claimed difference was contradicted, the transition became cosmetic and the
+#                record is cosmetic-only and complete on the modern implementation.
+# The edits are pinned as the rule the project keeps ("Evidence in a record is added to, never
+# replaced", AGENTS.md), against the record as it stood on `main` before the round
+# (tests/fixtures/round-037-before/): every passage of the earlier record survives verbatim, a replaced
+# summary or coverage is kept verbatim in the review notes, and the kinds after the edit are exactly those
+# named here. {erratum id: (fixture file, outcome, {event id: kind after the edit}, ids of events whose summary changed)}
+ROUND_037_EDITED: dict = {
+    'erratum-a-hero-emerges': ('a-hero-emerges', 'cosmetic', {'c0': 'cosmetic', 'c1': 'cosmetic'}, {'c1'}),
+    'erratum-ancient-fairy-dragon': ('ancient-fairy-dragon', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-anteatereatingant': ('anteatereatingant', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-armored-cybern': ('armored-cybern', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-armored-glass': ('armored-glass', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-axe-of-despair': ('axe-of-despair', 'ruling', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'cosmetic'}, {'c2'}),
+    'erratum-big-shield-gardna': ('big-shield-gardna', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-blackwing-sirocco-the-dawn': ('blackwing-sirocco-the-dawn', 'functional', {'c0': 'functional', 'c1': 'cosmetic', 'c2': 'cosmetic'}, {'c2', 'c0'}),
+    'erratum-blast-held-by-a-tribute': ('blast-held-by-a-tribute', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-blaze-accelerator': ('blaze-accelerator', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-blue-eyes-toon-dragon': ('blue-eyes-toon-dragon', 'functional', {'c0': 'cosmetic', 'c1': 'functional', 'c2': 'functional'}, frozenset()),
+    'erratum-boss-rush': ('boss-rush', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-brain-control': ('brain-control', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-brionac-dragon-of-the-ice-barrier': ('brionac-dragon-of-the-ice-barrier', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-burning-land': ('burning-land', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-catapult-turtle': ('catapult-turtle', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-chaos-emperor-dragon-envoy-of-the-end': ('chaos-emperor-dragon-envoy-of-the-end', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-clear-world': ('clear-world', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-cost-down': ('cost-down', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-crush-card-virus': ('crush-card-virus', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-curse-of-royal': ('curse-of-royal', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-cyber-blader': ('cyber-blader', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-d-d-scout-plane': ('d-d-scout-plane', 'cosmetic', {'c0': 'cosmetic', 'c1': 'cosmetic'}, {'c1'}),
+    'erratum-d-d-survivor': ('d-d-survivor', 'functional', {'event': ['cosmetic', 'functional']}, {'event'}),
+    'erratum-dark-magician-of-chaos': ('dark-magician-of-chaos', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-dark-necrofear': ('dark-necrofear', 'functional', {'c0': 'functional', 'c1': 'cosmetic', 'c2': 'functional'}, frozenset()),
+    'erratum-dark-strike-fighter': ('dark-strike-fighter', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-darkness-approaches': ('darkness-approaches', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-destiny-hero-disk-commander': ('destiny-hero-disk-commander', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-diffusion-wave-motion': ('diffusion-wave-motion', 'cosmetic', {'c0': 'cosmetic', 'c1': 'cosmetic'}, {'c1'}),
+    'erratum-dimension-distortion': ('dimension-distortion', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-elemental-hero-divine-neos': ('elemental-hero-divine-neos', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-evil-hero-dark-gaia': ('evil-hero-dark-gaia', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-evil-hero-infernal-prodigy': ('evil-hero-infernal-prodigy', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-exchange-of-the-spirit': ('exchange-of-the-spirit', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-future-fusion': ('future-fusion', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-gaia-soul-the-combustible-collective': ('gaia-soul-the-combustible-collective', 'cosmetic', {'event': 'cosmetic'}, {'event'}),
+    'erratum-gilasaurus': ('gilasaurus', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-goyo-guardian': ('goyo-guardian', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-hallowed-life-barrier': ('hallowed-life-barrier', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-heavy-mech-support-platform': ('heavy-mech-support-platform', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-ido-the-supreme-magical-force': ('ido-the-supreme-magical-force', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-imperial-custom': ('imperial-custom', 'cosmetic', {'event': 'cosmetic'}, {'event'}),
+    'erratum-imperial-order': ('imperial-order', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-jirai-gumo': ('jirai-gumo', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-king-tiger-wanghu': ('king-tiger-wanghu', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-makyura-the-destructor': ('makyura-the-destructor', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-manga-ryu-ran': ('manga-ryu-ran', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-masked-beast-des-gardius': ('masked-beast-des-gardius', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-mustering-of-the-dark-scorpions': ('mustering-of-the-dark-scorpions', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-my-body-as-a-shield': ('my-body-as-a-shield', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-mysterious-puppeteer': ('mysterious-puppeteer', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-necrovalley': ('necrovalley', 'functional', {'c0': 'functional', 'c1': 'functional', 'c2': 'functional', 'c3': 'functional'}, frozenset()),
+    'erratum-night-assailant': ('night-assailant', 'functional', {'c0': 'functional', 'c1': 'functional'}, frozenset()),
+    'erratum-nutrient-z': ('nutrient-z', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-paladin-of-white-dragon': ('paladin-of-white-dragon', 'functional', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'ruling', 'c3': 'functional'}, frozenset()),
+    'erratum-red-eyes-darkness-metal-dragon': ('red-eyes-darkness-metal-dragon', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-red-eyes-wyvern': ('red-eyes-wyvern', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, {'c1'}),
+    'erratum-rescue-cat': ('rescue-cat', 'functional', {'c0': 'ruling', 'c1': 'functional'}, frozenset()),
+    'erratum-ring-of-destruction': ('ring-of-destruction', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-ryko-lightsworn-hunter': ('ryko-lightsworn-hunter', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-sangan': ('sangan', 'functional', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'functional'}, frozenset()),
+    'erratum-senet-switch': ('senet-switch', 'cosmetic', {'event': 'cosmetic'}, {'event'}),
+    'erratum-sinister-serpent': ('sinister-serpent', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-soul-rope': ('soul-rope', 'cosmetic', {'c0': 'cosmetic', 'c1': 'cosmetic'}, {'c1'}),
+    'erratum-spirit-ryu': ('spirit-ryu', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-spirit-s-invitation': ('spirit-s-invitation', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-splendid-venus': ('splendid-venus', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-stronghold-the-moving-fortress': ('stronghold-the-moving-fortress', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-summoner-of-illusions': ('summoner-of-illusions', 'functional', {'c0': 'cosmetic', 'c1': 'functional'}, frozenset()),
+    'erratum-super-rejuvenation': ('super-rejuvenation', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-swap-frog': ('swap-frog', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-swords-of-concealing-light': ('swords-of-concealing-light', 'functional', {'c0': 'functional', 'c1': 'functional', 'c2': 'functional', 'c3': 'functional'}, frozenset()),
+    'erratum-toon-mermaid': ('toon-mermaid', 'functional', {'c0': 'cosmetic', 'c1': 'functional', 'c2': 'functional'}, frozenset()),
+    'erratum-toon-summoned-skull': ('toon-summoned-skull', 'functional', {'c0': 'cosmetic', 'c1': 'functional', 'c2': 'cosmetic', 'c3': 'cosmetic', 'c4': 'functional'}, {'c2'}),
+    'erratum-totem-dragon': ('totem-dragon', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-trap-of-darkness': ('trap-of-darkness', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-tri-blaze-accelerator': ('tri-blaze-accelerator', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-twin-headed-behemoth': ('twin-headed-behemoth', 'functional', {'c0': 'functional', 'c1': 'cosmetic'}, frozenset()),
+    'erratum-tyrant-dragon': ('tyrant-dragon', 'ruling', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'cosmetic'}, {'c2'}),
+    'erratum-ultimate-tyranno': ('ultimate-tyranno', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-vampire-lord': ('vampire-lord', 'functional', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'functional'}, frozenset()),
+    'erratum-vw-tiger-catapult': ('vw-tiger-catapult', 'cosmetic', {'event': 'cosmetic'}, frozenset()),
+    'erratum-w-wing-catapult': ('w-wing-catapult', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-wild-fire': ('wild-fire', 'functional', {'event': 'functional'}, {'event'}),
+    'erratum-witch-of-the-black-forest': ('witch-of-the-black-forest', 'functional', {'c0': 'ruling', 'c1': 'functional'}, frozenset()),
+    'erratum-wulf-lightsworn-beast': ('wulf-lightsworn-beast', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-xy-dragon-cannon': ('xy-dragon-cannon', 'functional', {'c0': 'ruling', 'c1': 'functional'}, frozenset()),
+    'erratum-xyz-dragon-cannon': ('xyz-dragon-cannon', 'functional', {'c0': 'ruling', 'c1': 'cosmetic', 'c2': 'functional'}, frozenset()),
+    'erratum-xz-tank-cannon': ('xz-tank-cannon', 'functional', {'c0': 'ruling', 'c1': 'functional'}, frozenset()),
+    'erratum-y-dragon-head': ('y-dragon-head', 'functional', {'event': 'functional'}, frozenset()),
+    'erratum-yz-tank-dragon': ('yz-tank-dragon', 'functional', {'c0': 'ruling', 'c1': 'functional'}, frozenset()),
+    'erratum-z-metal-tank': ('z-metal-tank', 'functional', {'event': 'functional'}, frozenset()),
+}
+ROUND_037_FIXTURES = Path(__file__).resolve().parent / "fixtures" / "round-037-before"
+
+
+# Transitions round 037 added to a record (part D): D.D. Survivor's second transition.
+ROUND_037_ADDED_TRANSITIONS = {"erratum-d-d-survivor": 1}
+
+
+def check_round_037_edit(test, record_id, on_disk):
+    """`on_disk` is the record now; its state on `main` before round 037 is the fixture."""
+    fixture, classification, kinds, changed_ids = ROUND_037_EDITED[record_id]
+    added = ROUND_037_ADDED_TRANSITIONS.get(record_id, 0)
+    before = json.loads((ROUND_037_FIXTURES / f"{fixture}.json").read_text(encoding="utf-8"))
+    if record_id in ROUND_036_EDITED:
+        # the chain: the record on main is itself a round-036 edit and must still satisfy that round's rule
+        check_round_036_edit(test, record_id, before)
+    for key in ("$schema", "id", "modern_card", "reference_identities"):
+        test.assertEqual(before[key], on_disk[key], f"{record_id}: {key}")
+    test.assertEqual((before["review"]["status"], before["review"]["date"]), (on_disk["review"]["status"], on_disk["review"]["date"]))
+    notes = on_disk["review"]["notes"]
+    test.assertTrue(notes.startswith(before["review"]["notes"]), f"{record_id}: the old review notes are kept verbatim")
+    test.assertIn("Round 037 (2026-09-29)", notes)
+    test.assertTrue(set(before["sources"]) <= set(on_disk["sources"]), f"{record_id}: no source is dropped")
+    old_transitions, new_transitions = _transitions(before), _transitions(on_disk)
+    test.assertEqual(set(old_transitions), set(new_transitions))
+    test.assertEqual(_effective(before), _effective(on_disk), f"{record_id}: chronology is unchanged")
+    changed = set()
+    for eid, old_list in old_transitions.items():
+        new_list = new_transitions[eid]
+        test.assertEqual(len(old_list) + (added if eid in kinds and isinstance(kinds[eid], list) else 0), len(new_list))
+        expected_kinds = kinds[eid] if isinstance(kinds[eid], list) else [kinds[eid]]
+        test.assertEqual(expected_kinds, [t["kind"] for t in new_list], f"{record_id}/{eid}: the kinds after the edit")
+        for old, new in zip(old_list, new_list):
+            for key in ("axis", "historical_text", "modern_text"):
+                test.assertEqual(old[key], new[key], f"{record_id}/{eid}: {key}")
+            test.assertTrue(set(old["sources"]) <= set(new["sources"]), f"{record_id}/{eid}: no source is dropped")
+            if eid in changed_ids:
+                changed.add(eid)
+                test.assertNotEqual(old["summary"], new["summary"], f"{record_id}/{eid}: the summary is corrected")
+                test.assertIn(old["summary"], notes, f"{record_id}/{eid}: the old summary is kept verbatim")
+            else:
+                test.assertEqual(old["kind"], new["kind"], f"{record_id}/{eid}: an untouched transition keeps its kind")
+                test.assertEqual(old["summary"], new["summary"], f"{record_id}/{eid}: an untouched transition is unchanged")
+    test.assertEqual(changed_ids, changed)
+    test.assertEqual(classification, on_disk["classification"])
+    if classification == "cosmetic":
+        test.assertEqual([], on_disk["states"])
+        test.assertNotIn("coverage", on_disk)
+        test.assertEqual(1, len(on_disk["implementation_metadata"]))
+        meta = on_disk["implementation_metadata"][0]
+        test.assertEqual({"events": [], "status": "complete", "tested": False}, {k: meta[k] for k in ("events", "status", "tested")})
+        test.assertTrue("Round 037" in meta["reason"] or "Round 036" in meta["reason"], "the implementation note names the round that made the record cosmetic")
+    else:
+        # coverage is untouched; a sugar record that became a full one carries it as its baseline state
+        if "coverage" in on_disk:
+            test.assertEqual(before["coverage"], on_disk["coverage"])
+        else:
+            before_states = before["states"] if "states" in before else [{"events": [], "coverage": before["coverage"]}]
+            test.assertEqual(before_states, on_disk["states"])
+    # The rule: every passage of the earlier record survives verbatim in the record now.
+    dump = json.dumps(on_disk, ensure_ascii=False)
+    lost = [
+        path
+        for path, text in _string_leaves(before)
+        if len(text) >= MIN_PASSAGE
+        and json.dumps(text, ensure_ascii=False)[1:-1] not in dump
+        # a reclassified record's coverage object goes; its script path is a pointer, not a passage
+        and not (classification == "cosmetic" and path.endswith("/coverage/script"))
+    ]
+    test.assertEqual([], lost, f"{record_id}: passages of the earlier record that are gone")
+
+
 def expected_after_custom_script(record_id, target):
     """The frozen `target`, with the round's coverage and metadata edit applied."""
     passcode, round_number = CUSTOM_SCRIPT_RECORDS[record_id]
@@ -375,6 +555,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             # records after the migration; their expected content is pinned
             # exactly (expected_after_custom_script). Every other record must
             # still equal the materialized target exactly.
+            if record_id in ROUND_037_EDITED:
+                # round 037: pinned as a rule, against the record on main (see ROUND_037_EDITED)
+                check_round_037_edit(self, record_id, on_disk)
+                if json.dumps(on_disk, indent=2, ensure_ascii=False) + "\n" != on_disk_text:
+                    byte_mismatches.append(record_id)
+                continue
             if record_id in ROUND_036_EDITED:
                 # round 036: pinned as a rule, against the record on main (see ROUND_036_EDITED)
                 check_round_036_edit(self, record_id, on_disk)

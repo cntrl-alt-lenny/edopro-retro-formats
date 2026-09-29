@@ -20,11 +20,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Chain starts at v2 (PSV-EN019 as reprinted in Master Collection Volume 1, 2004-12-01), the newest dated text before the GOAT snapshot; pre-baseline v0 (PSV-019, 2002-10-20) and v1 (PSV-E019) differ only by the Magic->Spell terminology rename and by v2 adding the redundant 'only' to the activation clause, all behaviourally identical. The 'Equip Spell Card' -> 'Equip Card' rewrite lands in v3, which has number null, sets [] and no dating_set, so there is no set-release evidence to attach and the change is recorded with effective {}: whether the 2005-04-01 GOAT and 2010-04-24 Edison snapshots sit before or after it is genuinely unknown, and the applier's fail-safe (BLOCKED inside an unresolved interval) is the honest outcome. Trailing v3 -> v4 (PSV-EN019 in Pharaoh's Servant 25th Anniversary Edition, 2023-04-20) merely drops 'only' and is the text pinned in cards.cdb; it is not recorded as a change. No entry for this card in edison-functional-errata.md."
+    "notes": "upstream_implementations is empty. Chain starts at v2 (PSV-EN019 as reprinted in Master Collection Volume 1, 2004-12-01), the newest dated text before the GOAT snapshot; pre-baseline v0 (PSV-019, 2002-10-20) and v1 (PSV-E019) differ only by the Magic->Spell terminology rename and by v2 adding the redundant 'only' to the activation clause, all behaviourally identical. The 'Equip Spell Card' -> 'Equip Card' rewrite lands in v3, which has number null, sets [] and no dating_set, so there is no set-release evidence to attach and the change is recorded with effective {}: whether the 2005-04-01 GOAT and 2010-04-24 Edison snapshots sit before or after it is genuinely unknown, and the applier's fail-safe (BLOCKED inside an unresolved interval) is the honest outcome. Trailing v3 -> v4 (PSV-EN019 in Pharaoh's Servant 25th Anniversary Edition, 2023-04-20) merely drops 'only' and is the text pinned in cards.cdb; it is not recorded as a change. No entry for this card in edison-functional-errata.md.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Armored Glass). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-rulebook-2008-v70",
+    "konami-card-faq-2008-12-16-ik",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-card-faq-2008-12-16-lo"
   ],
   "event": {
     "effective": {
@@ -37,8 +41,73 @@
     "summary": "Functional scope change with no datable printing: 'Equip Spell Card' becomes 'Equip Card' in both halves of the effect, so both the activation condition (a monster equipped with an Equip Card) and the negation (the effects of all Equip Cards on the field) widen from Equip Spells alone to every card treated as an Equip Card - Union monsters equipped to a monster and Trap Cards that equip included. The lineage version that introduces the wording carries no card number and no set, so the date of the change cannot be established from the packet.",
     "sources": [
       "yugipedia-card-errata",
-      "ignis-babelcdb"
-    ]
+      "ignis-babelcdb",
+      "konami-rulebook-2008-v70",
+      "konami-card-faq-2008-12-16-ik",
+      "konami-card-faq-2008-12-15-skilled-white-magician",
+      "konami-card-faq-2008-12-16-lo"
+    ],
+    "rulings_check": {
+      "difference": "Activation condition: era 'a monster is equipped with an Equip Spell Card'; later 'an Equip Card', which also counts a Union monster equipped to a monster or a Trap Card that equips. Negation: era negates 'all Equip Spell Cards on the field'; later 'all Equip Cards', which also shuts off equipped Union monsters and equipping Traps.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Activation condition: era 'a monster is equipped with an Equip Spell Card'; later 'an Equip Card', which also counts a Union monster equipped to a monster or a Trap Card that equips.",
+          "finding": "does-not-address",
+          "passage": "In addition to Equip Spell Cards, sometimes Trap Cards or Monster Cards are treated as an Equip Card; and the rules about Equip Spell Cards apply to them. The term \"Equip Card\" includes both those cards and Equip Spells."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ik",
+          "looked_for": "d1: Activation condition: era 'a monster is equipped with an Equip Spell Card'; later 'an Equip Card', which also counts a Union monster equipped to a monster or a Trap Card that equips.",
+          "finding": "does-not-address",
+          "passage": "If you take control of a Union Monster with \"Jowls of Dark Demise\", and equip it to your monster, control of the Union Monster Card does not return to your opponent at the end of the turn because it is an Equip Spell Card."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d1: Activation condition: era 'a monster is equipped with an Equip Spell Card'; later 'an Equip Card', which also counts a Union monster equipped to a monster or a Trap Card that equips.",
+          "finding": "does-not-address",
+          "passage": "When \"Skull Zoma\" is equipped to \"Relinquished\" by its effect, it is only treated as an Equip Spell Card, not a Trap Card or Monster Card."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: Activation condition: era 'a monster is equipped with an Equip Spell Card'; later 'an Equip Card', which also counts a Union monster equipped to a monster or a Trap Card that equips.",
+          "finding": "does-not-address",
+          "passage": "\"Mage Power\" includes itself, Field Spell Cards on your side of the field, and monsters acting like Equip Spell Cards, such as Union Monsters."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d2: Negation: era negates 'all Equip Spell Cards on the field'; later 'all Equip Cards', which also shuts off equipped Union monsters and equipping Traps.",
+          "finding": "does-not-address",
+          "passage": "When a Union Monster is equipped to a DARK monster you control, it is negated and destroyed by \"Obsidian Dragon's\" effect after equipping to the DARK monster."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "an entry for Armored Glass and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Armored Glass on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Armored Glass in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Armored Glass in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Armored Glass' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

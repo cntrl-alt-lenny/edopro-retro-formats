@@ -45,8 +45,52 @@
           "sources": [
             "yugipedia-card-errata",
             "ignis-cardscripts",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-16-ac"
+          ],
+          "rulings_check": {
+            "difference": "(c1, 2012 erratum) Era: 'This card cannot attack during the turn it is Summoned', which covers any Summon including a Flip Summon (reachable when the opponent's Book of Moon turns the Dragon face-down and it is Flip Summoned back). Modern: only 'the turn it is Special Summoned'.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "d1: (c1, 2012 erratum) Era: 'This card cannot attack during the turn it is Summoned', which covers any Summon including a Flip Summon (reachable when the opponent's Book of Moon turns the Dragon face-dow…",
+                "finding": "does-not-address",
+                "passage": "Monsters which cannot attack still cannot attack (Toon Monsters the turn they are Summoned, \"Ultimate Obedient Fiend\" under the wrong conditions, etc.)"
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "d1: (c1, 2012 erratum) Era: 'This card cannot attack during the turn it is Summoned', which covers any Summon including a Flip Summon (reachable when the opponent's Book of Moon turns the Dragon face-dow…",
+                "finding": "does-not-address",
+                "passage": "If you Summon \"Armor Exe\", flip it face-down with \"Book of Moon\", and flip it face-up with \"Book of Taiyou\", it CAN attack because its non-attack effect was reset and because flipping it face-up with \"Book of Taiyou\" was NOT a Flip Summon."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Blue-Eyes Toon Dragon on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Blue-Eyes Toon Dragon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Blue-Eyes Toon Dragon in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Blue-Eyes Toon Dragon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     },
@@ -67,8 +111,53 @@
           "sources": [
             "yugipedia-card-errata",
             "ignis-cardscripts",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "konami-card-faq-2008-12-16-ac"
+          ],
+          "rulings_check": {
+            "difference": "(c2, 2015 erratum) Era: the Special Summon costs 'the same number of monsters needed for a Tribute Summon', which follows the card's current Level (Level 5-6: 1 Tribute, Level 4 or less: none, 7+: 2). Modern: always 'Tributing 2 monsters'.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: (c2, 2015 erratum) Era: the Special Summon costs 'the same number of monsters needed for a Tribute Summon', which follows the card's current Level (Level 5-6: 1 Tribute, Level 4 or less: none, 7+: 2)…",
+                "finding": "does-not-address",
+                "passage": "You may offer Sheep Tokens as Tributes for Toon Monsters, since they are Special Summoned and not Tribute Summoned."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "d2: (c2, 2015 erratum) Era: the Special Summon costs 'the same number of monsters needed for a Tribute Summon', which follows the card's current Level (Level 5-6: 1 Tribute, Level 4 or less: none, 7+: 2)…",
+                "finding": "does-not-address",
+                "passage": "If \"Cloudian – Nimbusman's\" Level is reduced to 4 or less by another card effect (\"A Legendary Ocean\", \"Level Conversion Lab,\" etc.), you will not be able to Tribute any monsters when it is Normal Summoned because you do not offer Tributes to Normal Summon a Level 4 or lower monster."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Blue-Eyes Toon Dragon on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Blue-Eyes Toon Dragon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Blue-Eyes Toon Dragon in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Blue-Eyes Toon Dragon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -139,13 +228,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "IMPLEMENTATION GAP is not load-bearing for this project: the version created by the 2012-09-29 erratum (narrow attack lock, still level-scaled Tributes) has no upstream implementation, but it only applies to snapshots between 2012-09-29 and 2015-06-19, and both project snapshots (2005-04-01, 2010-04-24) sit before the whole chain, where the baseline applies. Bug observed in the historical script, worth knowing before anyone tests it: s.spcon computes 'amt=(lv>6 and 2) or (lv>4 and 1) or 0' while s.sptg computes '(lv>6 and 2) or (lv>5 and 1) or 0', so at Level 5 the availability check demands a Tribute the selection step never asks for. Secondary difference not recorded as its own change: the modern attack-lock effect carries EFFECT_FLAG_CANNOT_DISABLE and the goat one does not. Earlier version v0 (MRL-000, 2002-09-16) predates the baseline text and is the pre-Special-Summon-rules wording. Remaining diff is effect renumbering (e1..e7 shifted by one) plus goat's expanded RESETS_STANDARD_PHASE_END."
+    "notes": "IMPLEMENTATION GAP is not load-bearing for this project: the version created by the 2012-09-29 erratum (narrow attack lock, still level-scaled Tributes) has no upstream implementation, but it only applies to snapshots between 2012-09-29 and 2015-06-19, and both project snapshots (2005-04-01, 2010-04-24) sit before the whole chain, where the baseline applies. Bug observed in the historical script, worth knowing before anyone tests it: s.spcon computes 'amt=(lv>6 and 2) or (lv>4 and 1) or 0' while s.sptg computes '(lv>6 and 2) or (lv>5 and 1) or 0', so at Level 5 the availability check demands a Tribute the selection step never asks for. Secondary difference not recorded as its own change: the modern attack-lock effect carries EFFECT_FLAG_CANNOT_DISABLE and the goat one does not. Earlier version v0 (MRL-000, 2002-09-16) predates the baseline text and is the pre-Special-Summon-rules wording. Remaining diff is effect renumbering (e1..e7 shifted by one) plus goat's expanded RESETS_STANDARD_PHASE_END.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Blue-Eyes Toon Dragon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu. [c2] d2 unresolved at Edison, unresolved at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Blue-Eyes Toon Dragon: at Level 5 the variant script requires one Tribute to be available but pays none; no ruling covers the case."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-cardscripts"
+    "ignis-cardscripts",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-card-faq-2008-12-15-skilled-white-magician"
   ]
 }

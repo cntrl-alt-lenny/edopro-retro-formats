@@ -39,7 +39,7 @@ from retroformats.validate import Validator
 from . import migration_audit as audit
 from . import migration_materializer as mm
 from . import shadow_migration as sm
-from .helpers import CONVERTED_TO_FULL_V2, ROUND_035_RETIRED, ROUND_036_ADDED, ROUND_036_RETIRED
+from .helpers import CONVERTED_TO_FULL_V2, ROUND_035_RETIRED, ROUND_036_ADDED, ROUND_036_RETIRED, ROUND_037_TO_MODERN
 from .pre_migration_fixture import load_pre_migration_repo
 from .schema_check import Registry, validate_erratum
 
@@ -329,6 +329,10 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         expected_entries = dict(pre_built.entries)
         for modern, generated in swaps.items():
             expected_entries[generated] = expected_entries.pop(modern)
+        # Round 037: two more records became cosmetic on period rulings, so the list holds the modern card
+        # where the snapshot (whose records all substituted an Ignis variant) held the variant.
+        for modern, variant in ROUND_037_TO_MODERN.items():
+            expected_entries[modern] = expected_entries.pop(variant)
         self.assertEqual(expected_entries, built.entries)
         self.assertEqual(lflist_hash(expected_entries), built.hash)
         pre_lines = pre_built.text.splitlines()
@@ -336,8 +340,8 @@ class PostMigrationLiveRepositoryTest(unittest.TestCase):
         self.assertEqual(len(pre_lines), len(lines))
         removed = set(pre_lines) - set(lines)
         added = set(lines) - set(pre_lines)
-        self.assertEqual(set(swaps), {int(line.split()[0]) for line in removed})
-        self.assertEqual(set(swaps.values()), {int(line.split()[0]) for line in added})
+        self.assertEqual(set(swaps) | set(ROUND_037_TO_MODERN.values()), {int(line.split()[0]) for line in removed})
+        self.assertEqual(set(swaps.values()) | set(ROUND_037_TO_MODERN), {int(line.split()[0]) for line in added})
 
     def test_dist_is_byte_identical_to_a_fresh_build(self):
         """build --check's own guarantee, re-verified directly: rebuilding

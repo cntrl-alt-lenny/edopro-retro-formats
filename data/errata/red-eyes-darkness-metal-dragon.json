@@ -49,7 +49,43 @@
             "ignis-babelcdb",
             "yugipedia-set-pages",
             "edisonformat-functional-errata"
-          ]
+          ],
+          "rulings_check": {
+            "difference": "Era: no limit on Special Summoning this card from the hand by banishing a face-up Dragon (several copies can each do it in one turn). Modern (2020): 'You can only Special Summon \"Red-Eyes Darkness Metal Dragon\" once per turn this way'. Era: the Ignition effect's 'Once per turn' applies per copy (two copies can each revive a Dragon in the same turn). Modern: hard once per turn by name ('You can only use this effect of \"Red-Eyes Darkness Metal Dragon\" once per turn').",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-pr",
+                "looked_for": "an entry for Red-Eyes Darkness Metal Dragon and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Red-Eyes Darkness Metal Dragon on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Red-Eyes Darkness Metal Dragon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Red-Eyes Darkness Metal Dragon in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Red-Eyes Darkness Metal Dragon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -86,7 +122,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "CATEGORY MISMATCH, resolved in favour of the packet: this card was assigned in the 'gap-no-upstream' batch, but upstream_implementations is not empty - Project Ignis ships an official pre-errata variant, 88264988 'Red-Eyes Darkness Metal Dragon (Pre-Errata)', whose cdb text matches lineage v3 exactly (ratio 1.0). No gap shape is warranted; the record reuses that variant. The packet's second upstream code, 511000670 'Red-Eyes Darkness Metal Dragon (Anime)', is a distinct card (Tribute a Red-Eyes Darkness Dragon equipped with Metal Plus, ATK gain per GY Dragon, Spell negation) and is not an artwork variant of 88264988, so no code folding applies. Earlier lineage transitions that predate the baseline's version are behaviourally inert and are recorded here rather than as changes: v0 (JUMP-EN030, 2009-02, month precision) -> v1 (ABPF-ENSE2, 2010-03-26) added 'face-up' to the banish cost and 'during your Main Phase' to the revival; v1 -> v2 (DT04-EN060, 2011-01-25) added '(from your hand)'; v2 -> v3 dropped 'during your Main Phase'. Separate observation, not part of this card's errata record: edisonformat-functional-errata also claims the era revival does not target in the GY and so is not stopped by Necrovalley, but both the modern and the pre-errata upstream scripts apply aux.NecroValleyFilter identically, so that divergence lives in Necrovalley's own era ruling (Necrovalley is not in this batch) and cannot be fixed by substituting this card."
+    "notes": "CATEGORY MISMATCH, resolved in favour of the packet: this card was assigned in the 'gap-no-upstream' batch, but upstream_implementations is not empty - Project Ignis ships an official pre-errata variant, 88264988 'Red-Eyes Darkness Metal Dragon (Pre-Errata)', whose cdb text matches lineage v3 exactly (ratio 1.0). No gap shape is warranted; the record reuses that variant. The packet's second upstream code, 511000670 'Red-Eyes Darkness Metal Dragon (Anime)', is a distinct card (Tribute a Red-Eyes Darkness Dragon equipped with Metal Plus, ATK gain per GY Dragon, Spell negation) and is not an artwork variant of 88264988, so no code folding applies. Earlier lineage transitions that predate the baseline's version are behaviourally inert and are recorded here rather than as changes: v0 (JUMP-EN030, 2009-02, month precision) -> v1 (ABPF-ENSE2, 2010-03-26) added 'face-up' to the banish cost and 'during your Main Phase' to the revival; v1 -> v2 (DT04-EN060, 2011-01-25) added '(from your hand)'; v2 -> v3 dropped 'during your Main Phase'. Separate observation, not part of this card's errata record: edisonformat-functional-errata also claims the era revival does not target in the GY and so is not stopped by Necrovalley, but both the modern and the pre-errata upstream scripts apply aux.NecroValleyFilter identically, so that divergence lives in Necrovalley's own era ruling (Necrovalley is not in this batch) and cannot be fixed by substituting this card.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Red-Eyes Darkness Metal Dragon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",

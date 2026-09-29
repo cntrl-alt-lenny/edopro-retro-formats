@@ -17,13 +17,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v1 (BP02-EN070, 2013-06-28). v0 (TDGS-EN094, 2008-09-02) -> v1 is wording only ('the activation and effects of your Spell and Trap Cards' -> 'of Spell/Trap Cards you control'), so it precedes the baseline and is not recorded; v0 is the printing in force at the Edison snapshot and is behaviourally the same as v1, and the erratum is dated 2018, nearly eight years after that snapshot. The baseline's cdb text reproduces v1's second sentence verbatim and paraphrases the first ('All monsters, except Fairy-Type monsters, lose 500 ATK/DEF' against 'All non-Fairy-Type monsters lose 500 ATK and DEF'), ratio 0.92; the pin to v1 rests on the second sentence, which is the one the erratum rewrote. Full scripts were read (pre-errata/c511003054.lua vs official/c5645210.lua) to confirm both elements above; the ATK/DEF debuff is identical in both."
+    "notes": "Chain starts at lineage v1 (BP02-EN070, 2013-06-28). v0 (TDGS-EN094, 2008-09-02) -> v1 is wording only ('the activation and effects of your Spell and Trap Cards' -> 'of Spell/Trap Cards you control'), so it precedes the baseline and is not recorded; v0 is the printing in force at the Edison snapshot and is behaviourally the same as v1, and the erratum is dated 2018, nearly eight years after that snapshot. The baseline's cdb text reproduces v1's second sentence verbatim and paraphrases the first ('All monsters, except Fairy-Type monsters, lose 500 ATK/DEF' against 'All non-Fairy-Type monsters lose 500 ATK and DEF'), ratio 0.92; the pin to v1 rests on the second sentence, which is the one the erratum rewrote. Full scripts were read (pre-errata/c511003054.lua vs official/c5645210.lua) to confirm both elements above; the ATK/DEF debuff is identical in both.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Splendid Venus). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-skilled-white-magician"
   ],
   "event": {
     "effective": {
@@ -41,8 +42,52 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-15-skilled-white-magician"
+    ],
+    "rulings_check": {
+      "difference": "Era Splendid Venus keeps the continuous effects of every Spell/Trap Card you control from being negated (the script adds EFFECT_CANNOT_DISABLE over your whole Spell/Trap side, Set cards included); the modern card only covers Spell/Trap Cards activated on your field and has no such static effect. Era effect-negation protection covers Spell/Trap effects you activate from anywhere; the modern filter additionally requires the triggering location to include the field, so effects activated from outside the field (hand, Graveyard) are no longer covered.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d1: Era Splendid Venus keeps the continuous effects of every Spell/Trap Card you control from being negated (the script adds EFFECT_CANNOT_DISABLE over your whole Spell/Trap side, Set cards included); th… (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "The Continuous Effects of Trap Cards controlled by the player with \"Splendid Venus\" are not negated."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d2: Era effect-negation protection covers Spell/Trap effects you activate from anywhere; the modern filter additionally requires the triggering location to include the field, so effects activated from ou…",
+          "finding": "does-not-address",
+          "passage": "If \"Jinzo\" and \"Splendid Venus\" are face-up on the field, Trap Cards and the effects of Trap Cards still cannot be activated because \"Jinzo\" prevents Trap Cards and Trap Card effects from being activated."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Splendid Venus on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Splendid Venus in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Splendid Venus in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Splendid Venus' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

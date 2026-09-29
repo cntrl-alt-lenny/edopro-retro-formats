@@ -6,6 +6,203 @@
     "name": "D.D. Survivor"
   },
   "classification": "functional",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2011-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN224, Legendary Collection 2: The Duel Academy Years Mega Pack)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
+          "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: The era card has no once-per-turn cap on the End Phase return, so a copy banished again in the same End Phase returns again; the modern card returns once per turn. A period ruling in force says otherwise: Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"The effect of \"D.D. Survivor\" can only be activated once per turn.\" No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "edisonformat-functional-errata",
+            "konami-card-faq-2008-12-15-de"
+          ],
+          "rulings_check": {
+            "difference": "The era card has no once-per-turn cap on the End Phase return, so a copy banished again in the same End Phase returns again; the modern card returns once per turn.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: The era card has no once-per-turn cap on the End Phase return, so a copy banished again in the same End Phase returns again; the modern card returns once per turn.",
+                "finding": "contradicts",
+                "passage": "The effect of \"D.D. Survivor\" can only be activated once per turn.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: The era card has no once-per-turn cap on the End Phase return, so a copy banished again in the same End Phase returns again; the modern card returns once per turn.",
+                "finding": "contradicts",
+                "passage": "If \"D.D. Survivor's\" effect is activated in the End Phase, and it is removed from play again (by \"Bottomless Trap Hole\", or \"Torrential Tribute\" while \"Dimensional Fissure\" is in play, etc.), its effect will activate during the next turn's End Phase.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "D.D. Survivor on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "D.D. Survivor in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "D.D. Survivor in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:D.D. Survivor' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "functional",
+          "axis": "end-phase-return-next-turn",
+          "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
+          "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
+          "summary": "Functional (round 037, part D; a difference round 036 found and the record did not list). The UDE card FAQ rules: if the card's End Phase return has been used and it is banished again in that End Phase, its effect activates during the next turn's End Phase. The errata'd text ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.') returns only a card banished this turn and only once, so the modern card, and Ignis's script for it, does not return at the next turn's End Phase. Supported at Edison and at Tengu by a UDE-era ruling counted under the owner's decision of 2026-09-29; no Konami document in the corpus replaces it.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-de"
+          ],
+          "rulings_check": {
+            "difference": "If D.D. Survivor is banished again after its End Phase return, the era card returns at the next turn's End Phase; the errata'd card returns only a card banished this turn, once per turn.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "D.D. Survivor's own entry: a second return after a re-banishment in the End Phase",
+                "finding": "supports",
+                "passage": "If \"D.D. Survivor's\" effect is activated in the End Phase, and it is removed from play again (by \"Bottomless Trap Hole\", or \"Torrential Tribute\" while \"Dimensional Fissure\" is in play, etc.), its effect will activate during the next turn's End Phase.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-pr",
+                "looked_for": "a ruling on a D.D. Survivor Special Summoned by Return from the Different Dimension and banished again in the End Phase (another path: its own effect has not been used)",
+                "finding": "does-not-address",
+                "passage": "If \"D.D. Survivor\" or \"D.D. Scout Plane\" is Special Summoned by \"Return from the Different Dimension\", when it is removed from play during the End Phase it will be Special Summoned back to the field during the same End Phase."
+              }
+            ]
+          }
+        }
+      ],
+      "cooccurrence_sources": [
+        "yugipedia-card-errata",
+        "yugipedia-set-pages"
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    }
+  ],
   "implementation_metadata": [
     {
       "events": [],
@@ -20,37 +217,12 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. The Lost Millennium released 2005-06-01, after the 2005-04-01 GOAT snapshot, so only the Edison pool is in scope; the text in force at 2010-04-24 is v3 (SDDE-EN014, 2008-04-02), which is the baseline. Pre-baseline versions are behaviourally the same trigger with drifting phrasing: v0 (TLM-EN023, 2005-06-01) 'this card is Special Summoned to the owner's side of the field', v1 (DR3-EN203, 2006-11-25), and v2 (CP04-EN019, 2007-09-06), which momentarily drops 'on your side of the field' before SDDE restores it. Trailing v4 -> v5 (SGX3-ENF06, 2023-03-30) is 'on your side of the field' -> 'on your field' and is the pinned cdb text. Independent corroboration that this card's era behaviour is documented as differing from the modern card: edisonformat.com's Functional Errata list carries a D.D. Survivor entry stating the End Phase return Trigger 'cannot activate if the card was face-down when attacked and destroyed' - a face-up-before-banishment requirement the era text states explicitly. That entry corroborates era-specific handling of this Trigger; it does not itself speak to the once-per-turn erratum recorded here, and per the shared briefs it dates nothing."
+    "notes": "upstream_implementations is empty. The Lost Millennium released 2005-06-01, after the 2005-04-01 GOAT snapshot, so only the Edison pool is in scope; the text in force at 2010-04-24 is v3 (SDDE-EN014, 2008-04-02), which is the baseline. Pre-baseline versions are behaviourally the same trigger with drifting phrasing: v0 (TLM-EN023, 2005-06-01) 'this card is Special Summoned to the owner's side of the field', v1 (DR3-EN203, 2006-11-25), and v2 (CP04-EN019, 2007-09-06), which momentarily drops 'on your side of the field' before SDDE restores it. Trailing v4 -> v5 (SGX3-ENF06, 2023-03-30) is 'on your side of the field' -> 'on your field' and is the pinned cdb text. Independent corroboration that this card's era behaviour is documented as differing from the modern card: edisonformat.com's Functional Errata list carries a D.D. Survivor entry stating the End Phase return Trigger 'cannot activate if the card was face-down when attacked and destroyed' - a face-up-before-banishment requirement the era text states explicitly. That entry corroborates era-specific handling of this Trigger; it does not itself speak to the once-per-turn erratum recorded here, and per the shared briefs it dates nothing.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, D.D. Survivor). A period ruling in force contradicts every difference the transition claimed: The era card has no once-per-turn cap on the End Phase return, so a copy banished again in the same End Phase returns again; the modern card returns once per turn. Contradicted by Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"The effect of \"D.D. Survivor\" can only be activated once per turn.\" Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"If \"D.D. Survivor's\" effect is activated in the End Phase, and it is removed from play again (by \"Bottomless Trap Hole\", or \"Torrential Tribute\" while \"Dimensional Fissure\" is in play, etc.), its effect will activate during the next turn's End Phase.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [event] d1 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: LCGX-EN224 appends 'This effect can only activate once per turn' to a Trigger Effect that carried no use limit in any earlier printing ('When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase'). Without the limit the return can fire more than once in the same End Phase - the card comes back, is banished again in that End Phase, and returns again - which the errata'd card refuses. The same printing restates the trigger in PSCT form ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn').\" The same FAQ entry says 'The effect of \"D.D. Survivor\" can only be activated once per turn.', so the first transition (no once-per-turn cap) is contradicted and cosmetic, and the returns the ruling describes differ from the errata'd card only at the next turn's End Phase; the new second transition records that. Nothing in Ignis's modern script (a flag reset each End Phase) returns the card on a later turn."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
-  ],
-  "event": {
-    "effective": {
-      "date": "2011-10-04",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN224, Legendary Collection 2: The Duel Academy Years Mega Pack)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase.",
-    "modern_text": "During the End Phase, if this card was banished while face-up, on your side of the field, this turn: Special Summon this banished card. This effect can only activate once per turn.",
-    "summary": "Functional erratum: LCGX-EN224 appends 'This effect can only activate once per turn' to a Trigger Effect that carried no use limit in any earlier printing ('When this card is removed from play while face-up on your side of the field, you Special Summon it during the End Phase'). Without the limit the return can fire more than once in the same End Phase - the card comes back, is banished again in that End Phase, and returns again - which the errata'd card refuses. The same printing restates the trigger in PSCT form ('During the End Phase, if this card was banished while face-up, on your side of the field, this turn').",
-    "sources": [
-      "yugipedia-card-errata",
-      "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
-  },
-  "coverage": {
-    "kind": "known-gap",
-    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-    "gap_sources": [
-      "ignis-babelcdb",
-      "yugipedia-card-errata"
-    ]
-  }
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-15-de"
+  ]
 }

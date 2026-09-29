@@ -12,7 +12,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In a period format Anteatereatingant should be unrevivable by Monster Reborn/Call of the Haunted and should be able to blow up a Spell/Trap more than once per turn (at the price of not attacking); the shipped card is revivable after a proper summon and is capped at one destruction per turn."
+        "behavioural_impact": "In a period format Anteatereatingant should be unrevivable by Monster Reborn/Call of the Haunted and should be able to blow up a Spell/Trap more than once per turn (at the price of not attacking); the shipped card is revivable after a proper summon and is capped at one destruction per turn. Round 037 (2026-09-29): withdrawn as a difference on period rulings: Era (DR04) text puts no once-per-turn limit on the destruction effect, so it could be used repeatedly at the price of not attacking; the shipped text is 'Once per turn'. Era text names no selection at activation; the shipped text destroys a targeted Spell/Trap. (review notes)."
       }
     }
   ],
@@ -20,11 +20,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. The English lineage stops at v1 (DR04-EN142, 2007-11-14) - the card never received a later English printing - and the pinned cards.cdb text is explicitly marked '* The above text is unofficial and describes the card's functionality in the OCG', with modern_text_matches_version ratio 0.6121 against v1. So the divergence recorded here is between the last TCG text and an undated OCG-derived implementation, not a dated TCG erratum: that is why the change carries effective {} with no date_evidence and modern_text_version null (there is no lineage index holding the shipped text). Pre-baseline v0 (SOI-EN022, 2006-03-01) differs from v1 only in phrasing ('on your side of the field' -> 'you control', clause order of the attack restriction) and is behaviourally identical, so the chain starts at v1, the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots (the card postdates GOAT's snapshot in any case - Shadow of Infinity released 2006-03-01). Flagged conflicting-evidence because the cdb text matches no lineage version; flagged chronology-unresolved because dating the OCG change would require inventing a date."
+    "notes": "upstream_implementations is empty. The English lineage stops at v1 (DR04-EN142, 2007-11-14) - the card never received a later English printing - and the pinned cards.cdb text is explicitly marked '* The above text is unofficial and describes the card's functionality in the OCG', with modern_text_matches_version ratio 0.6121 against v1. So the divergence recorded here is between the last TCG text and an undated OCG-derived implementation, not a dated TCG erratum: that is why the change carries effective {} with no date_evidence and modern_text_version null (there is no lineage index holding the shipped text). Pre-baseline v0 (SOI-EN022, 2006-03-01) differs from v1 only in phrasing ('on your side of the field' -> 'you control', clause order of the attack restriction) and is behaviourally identical, so the chain starts at v1, the text in force at both the 2005-04-01 GOAT and 2010-04-24 Edison snapshots (the card postdates GOAT's snapshot in any case - Shadow of Infinity released 2006-03-01). Flagged conflicting-evidence because the cdb text matches no lineage version; flagged chronology-unresolved because dating the OCG change would require inventing a date.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Anteatereatingant). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: Era (DR04) text puts no once-per-turn limit on the destruction effect, so it could be used repeatedly at the price of not attacking; the shipped text is 'Once per turn'. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"You can only activate this card's effect once per turn.\" Era text names no selection at activation; the shipped text destroys a targeted Spell/Trap. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"The effect of \"Anteatereatingant\" targets 1 Spell or Trap Card.\" The transition stays functional on what remains, d1a, d1b. Verdicts: [event] d1a supported at Edison, supported at Tengu; d1b unresolved at Edison, unresolved at Tengu; d2 contradicted at Edison, contradicted at Tengu; d3 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"The shipped card differs from the last English printing in three ways. (1) Summoning restriction: 'This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard' is a strict Nomi condition that bars every other Special Summon and does not restrict its own procedure to the hand, while the shipped 'Must be Special Summoned (from your hand) by sending 2 Spells/Traps you control to the GY' both confines the proper summon to the hand and, lacking a 'cannot be Special Summoned by other ways' clause, lets the card be revived afterwards. (2) Use limit: the DR04 text puts no once-per-turn on the destruction effect; the shipped text is 'Once per turn'. (3) The shipped text destroys a targeted Spell/Trap, where the printed text names no selection at activation. Chronology is unresolved: no English printing carries the shipped text and no dated announcement of the change appears in the packet.\""
   },
   "sources": [
     "ignis-babelcdb",
-    "yugipedia-card-errata"
+    "yugipedia-card-errata",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-card-faq-2008-12-15-de",
+    "konami-rulebook-2008-v70",
+    "konami-card-faq-2008-12-16-ac"
   ],
   "event": {
     "effective": {
@@ -34,11 +39,153 @@
     "axis": null,
     "historical_text": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard. You can destroy 1 Spell or Trap Card your opponent controls. If you activate this effect, this card cannot attack during this turn.",
     "modern_text": null,
-    "summary": "The shipped card differs from the last English printing in three ways. (1) Summoning restriction: 'This card cannot be Special Summoned except by sending 2 Spell or Trap Cards you control to the Graveyard' is a strict Nomi condition that bars every other Special Summon and does not restrict its own procedure to the hand, while the shipped 'Must be Special Summoned (from your hand) by sending 2 Spells/Traps you control to the GY' both confines the proper summon to the hand and, lacking a 'cannot be Special Summoned by other ways' clause, lets the card be revived afterwards. (2) Use limit: the DR04 text puts no once-per-turn on the destruction effect; the shipped text is 'Once per turn'. (3) The shipped text destroys a targeted Spell/Trap, where the printed text names no selection at activation. Chronology is unresolved: no English printing carries the shipped text and no dated announcement of the change appears in the packet.",
+    "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d1a) Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the 'except' rule, cannot be revived from the Graveyard even after a proper Summon; the shipped 'Must be Special Summoned ... by sending' has no such clause and lets it be revived. (d1b) Era text does not confine the Special Summon procedure to the hand; the shipped text says 'from your hand'. Withdrawn as a difference: Era (DR04) text puts no once-per-turn limit on the destruction effect, so it could be used repeatedly at the price of not attacking; the shipped text is 'Once per turn'. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"You can only activate this card's effect once per turn.\" Era text names no selection at activation; the shipped text destroys a targeted Spell/Trap. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"The effect of \"Anteatereatingant\" targets 1 Spell or Trap Card.\"",
     "sources": [
       "ignis-babelcdb",
-      "yugipedia-card-errata"
-    ]
+      "yugipedia-card-errata",
+      "konami-card-faq-2008-12-15-fh",
+      "konami-card-faq-2008-12-16-lo",
+      "konami-card-faq-2008-12-15-de",
+      "konami-rulebook-2008-v70",
+      "konami-card-faq-2008-12-16-ac"
+    ],
+    "rulings_check": {
+      "difference": "Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the 'except' rule, cannot be revived from the Graveyard even after a proper Summon; the shipped 'Must be Special Summoned ... by sending' has no such clause and lets it be revived. Era text does not confine the Special Summon procedure to the hand; the shipped text says 'from your hand'.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d1a: Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the…",
+          "finding": "supports",
+          "passage": "Note that \"Horus the Black Flame Dragon LV8\" has the word \"except\" in its Summoning conditions, which means that even if Special Summoned properly, you cannot revive it with \"Monster Reborn\" afterwards if it is destroyed.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1a: Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the…",
+          "finding": "supports",
+          "passage": "You cannot use \"Monster Reborn\", etc. on \"Mazera DeVille\" even if he is Special Summoned properly, because he \"cannot be Special Summoned, EXCEPT by...\".",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "d1a: Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the…",
+          "finding": "supports",
+          "passage": "\"Dark Paladin\" cannot be Special Summoned, EXCEPT by Fusion Summon. So you cannot Special Summon \"Dark Paladin\" using \"Monster Reborn\", etc., even if he was properly Summoned before.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1a: Era text 'cannot be Special Summoned except by sending 2 Spell/Trap Cards you control to the Graveyard' is a full 'except' restriction: the card cannot be Special Summoned any other way and, per the…",
+          "finding": "does-not-address",
+          "passage": "You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1b: Era text does not confine the Special Summon procedure to the hand; the shipped text says 'from your hand'.",
+          "finding": "does-not-address",
+          "passage": "You can send a Field Spell Card to the Graveyard as part of the cost to Special Summon \"Anteatereatingant\"."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Anteatereatingant on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Anteatereatingant in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Anteatereatingant in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Anteatereatingant' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

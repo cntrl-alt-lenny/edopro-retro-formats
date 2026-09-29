@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at v3 (H5SE-EN001, 2012-03-30), the version the baseline best matches. Earlier transitions v0 (HA01-EN022, 2009-11-05) -> v1 (undated) -> v2 (DT01-EN031, 2010-01-29) -> v3 are PSCT rewordings ('discard any number of cards to return the same number of cards from the field to the hand' -> 'discard ... to target the same number of cards on the field; return those targets to the hand') that formalise targeting without changing resolution; the Edison-era printing is v2 and behaves as the baseline implements. Trailing v4 -> v5 (DUDE-EN008, 2019-10-10) is the Graveyard/GY rewording, cosmetic, not recorded. Minor note: the variant's cdb text ('You can discard any number of cards, then target an equal number of cards on the field; return them to the hand.') is upstream's own paraphrase rather than any printed version (closest v3, ratio 0.8397), though it states the same behaviour as v2/v3. Card data identical to modern (2300/1400, Level 6, WATER, Sea Serpent, Synchro)."
+    "notes": "Chain starts at v3 (H5SE-EN001, 2012-03-30), the version the baseline best matches. Earlier transitions v0 (HA01-EN022, 2009-11-05) -> v1 (undated) -> v2 (DT01-EN031, 2010-01-29) -> v3 are PSCT rewordings ('discard any number of cards to return the same number of cards from the field to the hand' -> 'discard ... to target the same number of cards on the field; return those targets to the hand') that formalise targeting without changing resolution; the Edison-era printing is v2 and behaves as the baseline implements. Trailing v4 -> v5 (DUDE-EN008, 2019-10-10) is the Graveyard/GY rewording, cosmetic, not recorded. Minor note: the variant's cdb text ('You can discard any number of cards, then target an equal number of cards on the field; return them to the hand.') is upstream's own paraphrase rather than any printed version (closest v3, ratio 0.8397), though it states the same behaviour as v2/v3. Card data identical to modern (2300/1400, Level 6, WATER, Sea Serpent, Synchro).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Brionac, Dragon of the Ice Barrier). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
@@ -25,7 +25,10 @@
     "ignis-babelcdb",
     "yugipedia-set-pages",
     "edisonformat-functional-errata",
-    "konami-errata-announcements"
+    "konami-errata-announcements",
+    "konami-errata-list-2010-01-05",
+    "konami-duelist-pack-tin-rulings-2010-03",
+    "konami-set-rulings-archive"
   ],
   "event": {
     "effective": {
@@ -58,8 +61,67 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-errata-list-2010-01-05",
+      "konami-duelist-pack-tin-rulings-2010-03",
+      "konami-set-rulings-archive"
+    ],
+    "rulings_check": {
+      "difference": "Era: the discard-to-bounce effect has no once-per-turn limit and can be used repeatedly in a turn. Modern: hard once per turn ('You can only use this effect of \"Brionac, Dragon of the Ice Barrier\" once per turn'). Era: the effect returns 'the same number of cards from the field', so it can target cards on either player's side of the field. Modern: only cards the opponent controls.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "d1: Era: the discard-to-bounce effect has no once-per-turn limit and can be used repeatedly in a turn. Modern: hard once per turn ('You can only use this effect of \"Brionac, Dragon of the Ice Barrier\" on…",
+          "finding": "does-not-address",
+          "passage": "You can discard any number of cards to the Graveyard to return the same number of cards from the field to the hand."
+        },
+        {
+          "source": "konami-duelist-pack-tin-rulings-2010-03",
+          "looked_for": "d1: Era: the discard-to-bounce effect has no once-per-turn limit and can be used repeatedly in a turn. Modern: hard once per turn ('You can only use this effect of \"Brionac, Dragon of the Ice Barrier\" on…",
+          "finding": "does-not-address",
+          "passage": "Discarding cards to the Graveyard is a cost."
+        },
+        {
+          "source": "konami-duelist-pack-tin-rulings-2010-03",
+          "looked_for": "d2: Era: the effect returns 'the same number of cards from the field', so it can target cards on either player's side of the field. Modern: only cards the opponent controls.",
+          "finding": "does-not-address",
+          "passage": "You can discard any number of cards to the Graveyard to return the same number of cards from the field to the hand."
+        },
+        {
+          "source": "konami-duelist-pack-tin-rulings-2010-03",
+          "looked_for": "d2: Era: the effect returns 'the same number of cards from the field', so it can target cards on either player's side of the field. Modern: only cards the opponent controls.",
+          "finding": "does-not-address",
+          "passage": "If 1 or more of the targeted cards are removed from the field before the effect resolves, the rest will still be returned to the owner's hand."
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "d2: Era: the effect returns 'the same number of cards from the field', so it can target cards on either player's side of the field. Modern: only cards the opponent controls.",
+          "finding": "does-not-address",
+          "passage": "your opponent's \"Brionac, Dragon of the Ice Barrier\" you first decide whether or not you want to Chain any effects."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "an entry for Brionac, Dragon of the Ice Barrier and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Brionac, Dragon of the Ice Barrier on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Brionac, Dragon of the Ice Barrier' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

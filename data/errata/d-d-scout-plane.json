@@ -5,7 +5,7 @@
     "passcode": 3773196,
     "name": "D.D. Scout Plane"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "events": {
     "c0": {
       "effective": {
@@ -37,15 +37,175 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "If this card is removed from play, Special Summon it in face-up Attack Position during the End Phase of this turn.",
           "modern_text": "Once per turn, during the End Phase, if this card is currently banished, and was banished this turn: Special Summon it in face-up Attack Position.",
-          "summary": "Functional erratum: LCYW-EN216 adds a once-per-turn limit ('Once per turn, during the End Phase') and a still-banished check ('if this card is currently banished, and was banished this turn') that the DR2/SDDE texts do not carry. Without the limit the trigger can fire again in the same End Phase after the card has already come back and been banished a second time (for example by a Bottomless Trap Hole answering the first return); the errata'd card returns once per turn only.",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: The era card has no once-per-turn limit, so a copy banished again during the same End Phase (for example by Bottomless Trap Hole) returns again; the modern card returns once per turn. The modern card checks that it is currently banished and was banished this turn; the era trigger is claimed to have no still-banished check. A period ruling in force says otherwise: Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"\"D. D. Scout Plane\"'s effect can only activate once during the same End Phase, so if a combo of \"Banisher of the Light\" and \"King Tiger Wanghu\" is set up, \"D. D. Scout Plane\" will only be Special Summoned once.\" Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"If \"D. D. Scout Plane\" is removed from play and then returned to the Graveyard with \"Miracle Dig\" the same turn, its effect is reset and it remains in the Graveyard and is not Special Summoned.\" No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-de",
+            "ude-card-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "The era card has no once-per-turn limit, so a copy banished again during the same End Phase (for example by Bottomless Trap Hole) returns again; the modern card returns once per turn. The modern card checks that it is currently banished and was banished this turn; the era trigger is claimed to have no still-banished check.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: The era card has no once-per-turn limit, so a copy banished again during the same End Phase (for example by Bottomless Trap Hole) returns again; the modern card returns once per turn.",
+                "finding": "contradicts",
+                "passage": "\"D. D. Scout Plane\"'s effect can only activate once during the same End Phase, so if a combo of \"Banisher of the Light\" and \"King Tiger Wanghu\" is set up, \"D. D. Scout Plane\" will only be Special Summoned once.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: The era card has no once-per-turn limit, so a copy banished again during the same End Phase (for example by Bottomless Trap Hole) returns again; the modern card returns once per turn.",
+                "finding": "contradicts",
+                "passage": "\"D. D. Scout Plane\"'s effect can only activate once during the same End Phase, so if a combo of \"Banisher of the Light\" and \"King Tiger Wanghu\" is set up, \"D. D. Scout Plane\" will only be Special Summoned once.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d2: The modern card checks that it is currently banished and was banished this turn; the era trigger is claimed to have no still-banished check.",
+                "finding": "contradicts",
+                "passage": "If \"D. D. Scout Plane\" is removed from play and then returned to the Graveyard with \"Miracle Dig\" the same turn, its effect is reset and it remains in the Graveyard and is not Special Summoned.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d2: The modern card checks that it is currently banished and was banished this turn; the era trigger is claimed to have no still-banished check.",
+                "finding": "contradicts",
+                "passage": "If \"D. D. Scout Plane\" is removed during an End Phase, it is Special Summoned with its effect during that same End Phase.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "D.D. Scout Plane in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "D.D. Scout Plane in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:D.D. Scout Plane' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -59,37 +219,25 @@
       }
     ]
   },
-  "states": [
-    {
-      "events": [],
-      "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
-      }
-    }
-  ],
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In GOAT and Edison, D.D. Scout Plane's End Phase return has no once-per-turn cap, so a copy banished again during that same End Phase should come back again; the shipped card allows only one return per turn."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 037 (2026-09-29): no generated card exists or is needed for this record. A period ruling in force says the era card played as the modern card does on every point the record claimed, so the modern implementation is used at the snapshots this record applies at."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Packet anomaly: errata_page.english_versions begins at index 1 (DR2-EN012, 2005-10-20) - there is no index 0 in the packet, so the card's original-printing English text is not available and a GOAT-era snapshot maps to the v1 wording by default. v1 and v2 are behaviourally identical, so this does not affect resolution, only displayed text. Chain therefore starts at v1; the text in force at the 2010-04-24 Edison snapshot is v2 (SDDE-EN011, 2008-04-02), with the erratum arriving 2012-09-29, well after. Trailing v3 -> v4 (SGX3-ENF07, 2023-03-30) only moves the once-per-turn clause to the end as 'This effect can only activate once per turn'; it is the pinned cdb text and is cosmetic. No entry for this card in edison-functional-errata.md (its sibling D.D. Survivor does appear there)."
+    "notes": "upstream_implementations is empty. Packet anomaly: errata_page.english_versions begins at index 1 (DR2-EN012, 2005-10-20) - there is no index 0 in the packet, so the card's original-printing English text is not available and a GOAT-era snapshot maps to the v1 wording by default. v1 and v2 are behaviourally identical, so this does not affect resolution, only displayed text. Chain therefore starts at v1; the text in force at the 2010-04-24 Edison snapshot is v2 (SDDE-EN011, 2008-04-02), with the erratum arriving 2012-09-29, well after. Trailing v3 -> v4 (SGX3-ENF07, 2023-03-30) only moves the once-per-turn clause to the end as 'This effect can only activate once per turn'; it is the pinned cdb text and is cosmetic. No entry for this card in edison-functional-errata.md (its sibling D.D. Survivor does appear there).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, D.D. Scout Plane). A period ruling in force contradicts every difference the transition claimed: The era card has no once-per-turn limit, so a copy banished again during the same End Phase (for example by Bottomless Trap Hole) returns again; the modern card returns once per turn. Contradicted by Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"\"D. D. Scout Plane\"'s effect can only activate once during the same End Phase, so if a combo of \"Banisher of the Light\" and \"King Tiger Wanghu\" is set up, \"D. D. Scout Plane\" will only be Special Summoned once.\" Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings page (Internet Archive replay): \"\"D. D. Scout Plane\"'s effect can only activate once during the same End Phase, so if a combo of \"Banisher of the Light\" and \"King Tiger Wanghu\" is set up, \"D. D. Scout Plane\" will only be Special Summoned once.\" The modern card checks that it is currently banished and was banished this turn; the era trigger is claimed to have no still-banished check. Contradicted by Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"If \"D. D. Scout Plane\" is removed from play and then returned to the Graveyard with \"Miracle Dig\" the same turn, its effect is reset and it remains in the Graveyard and is not Special Summoned.\" Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15): \"If \"D. D. Scout Plane\" is removed during an End Phase, it is Special Summoned with its effect during that same End Phase.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [c1] d1 contradicted at Edison, contradicted at Tengu; d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: LCYW-EN216 adds a once-per-turn limit ('Once per turn, during the End Phase') and a still-banished check ('if this card is currently banished, and was banished this turn') that the DR2/SDDE texts do not carry. Without the limit the trigger can fire again in the same End Phase after the card has already come back and been banished a second time (for example by a Bottomless Trap Hole answering the first return); the errata'd card returns once per turn only.\" Superseded coverage, kept verbatim: kind: \"known-gap\"; gap_reason: \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\"; gap_sources: [\"ignis-babelcdb\"; \"yugipedia-card-errata\"]. Superseded gap statement, kept verbatim: \"In GOAT and Edison, D.D. Scout Plane's End Phase return has no once-per-turn cap, so a copy banished again during that same End Phase should come back again; the shipped card allows only one return per turn.\""
   },
   "sources": [
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-de",
+    "ude-card-rulings-archive"
   ]
 }

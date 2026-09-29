@@ -20,13 +20,17 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "UNSETTLED - see needs-escalation. The English lineage has two versions only: v0 (CRMS-EN096, 2009-03-03, the Edison-era text) and v1 (MP24-EN026, 2024-09-19). The single behavioural difference is the added Normal Set prohibition. I could not determine whether that is a true functional erratum or a correction of an English translation omission: BabelCDB's pinned text for 35984222 is \"While you control this card, you cannot Summon, and cannot Normal Set.\" and carries the cdb's own note \"* The above text is unofficial and describes the card's functionality in the OCG\", i.e. Ignis implements the OCG function, and the packet contains no period TCG ruling about Setting under Ido. Recorded as functional so the divergence stays visible; if a reviewer establishes that 2009-2010 TCG rulings already forbade Normal Setting, this record should collapse to cosmetic with baseline none-needed. Note also that cards.cdb matches no lineage version exactly (index 1, ratio 0.8194) because it carries the unofficial OCG description rather than the 2024 official text. The packet's one upstream entry, 511003208 \"Ido The Supreme Magical Force (Anime)\", is a different card (a continuous \"destroy all other monsters you control\" plus an End Phase self-revival; text ratio 0.3149) and is not usable as a historical implementation."
+    "notes": "UNSETTLED - see needs-escalation. The English lineage has two versions only: v0 (CRMS-EN096, 2009-03-03, the Edison-era text) and v1 (MP24-EN026, 2024-09-19). The single behavioural difference is the added Normal Set prohibition. I could not determine whether that is a true functional erratum or a correction of an English translation omission: BabelCDB's pinned text for 35984222 is \"While you control this card, you cannot Summon, and cannot Normal Set.\" and carries the cdb's own note \"* The above text is unofficial and describes the card's functionality in the OCG\", i.e. Ignis implements the OCG function, and the packet contains no period TCG ruling about Setting under Ido. Recorded as functional so the divergence stays visible; if a reviewer establishes that 2009-2010 TCG rulings already forbade Normal Setting, this record should collapse to cosmetic with baseline none-needed. Note also that cards.cdb matches no lineage version exactly (index 1, ratio 0.8194) because it carries the unofficial OCG description rather than the 2024 official text. The packet's one upstream entry, 511003208 \"Ido The Supreme Magical Force (Anime)\", is a different card (a continuous \"destroy all other monsters you control\" plus an End Phase self-revival; text ratio 0.3149) and is not usable as a historical implementation.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Ido the Supreme Magical Force). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v8-2011",
+    "ude-card-rulings-archive",
+    "konami-crimson-crisis-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -44,8 +48,63 @@
       "yugipedia-card-errata",
       "ignis-babelcdb",
       "ignis-cardscripts",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-official-rulebook-v71-2010",
+      "konami-official-rulebook-v8-2011",
+      "ude-card-rulings-archive",
+      "konami-crimson-crisis-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "Defense Position IS NOT considered Summoned. It has been Set and can"
+        },
+        {
+          "source": "konami-official-rulebook-v8-2011",
+          "looked_for": "d1: Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "Defense Position IS NOT considered Summoned. It has been Set and can"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d1: Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You may Set monsters when you have this card active on your side of the field, but you cannot Flip Summon them."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d1: Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "If you have two \"Jam Breeding Machines\" on your side of the field you cannot Summon any monsters, even Slime Tokens."
+        },
+        {
+          "source": "konami-crimson-crisis-rulings-2009",
+          "looked_for": "d1: Under the era text 'You cannot Summon monsters', Normal Setting a monster is still legal while Ido is on the field; the errata'd text and the modern script forbid Normal Set too.",
+          "finding": "does-not-address",
+          "passage": "You cannot Summon monsters. You can only control 1 \"Ido the Supreme Magical Force\"."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ik",
+          "looked_for": "an entry for Ido the Supreme Magical Force and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Ido the Supreme Magical Force in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Ido the Supreme Magical Force' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

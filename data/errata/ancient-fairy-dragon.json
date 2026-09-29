@@ -17,14 +17,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at v3, the version the baseline implements (text_matches_version index 3, ratio 0.9985). Earlier transitions v0 (CT06-EN002, 2009-08-18) -> v1 -> v2 (LC5D-EN238, 2014-10-23) -> v3 (LCKC-EN070, 2018-03-08) are PSCT rewordings ('destroy a Field Spell Card. If you do, gain 1000 Life Points, and you can add...' -> 'destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add...') which resolve identically, especially under the era's single shared Field Spell Zone; they predate the baseline and are not recorded. Caveat for display: the variant's cdb text is the 2018 LCKC wording, so an Edison snapshot shows a later printing's text than the era's CT06-EN002 while behaviour matches. EdisonFormat's entry corroborates the era resolution (non-targeting destruction; no LP gain or search if the Field Spell is not destroyed; destruction and LP gain simultaneous, search afterwards), and the historical script matches it exactly: 'if not (#dg>0 and Duel.Destroy(dg,REASON_EFFECT)>0 and Duel.Recover(tp,1000,REASON_EFFECT)>0) then return end'. Per the shared transcription, Ancient Fairy Dragon was only added to that community page between 2023-06-09 and 2023-12-03, so it is used as behavioural corroboration only, never as a chronology anchor. Remaining script differences (Duel.IsPhase vs Duel.GetCurrentPhase, RESET_PHASE|PHASE_END vs +) are equivalent forms. Card data is identical between 25862691 and 25862681 (2100/3000, Level 7, LIGHT, Dragon)."
+    "notes": "Chain starts at v3, the version the baseline implements (text_matches_version index 3, ratio 0.9985). Earlier transitions v0 (CT06-EN002, 2009-08-18) -> v1 -> v2 (LC5D-EN238, 2014-10-23) -> v3 (LCKC-EN070, 2018-03-08) are PSCT rewordings ('destroy a Field Spell Card. If you do, gain 1000 Life Points, and you can add...' -> 'destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add...') which resolve identically, especially under the era's single shared Field Spell Zone; they predate the baseline and are not recorded. Caveat for display: the variant's cdb text is the 2018 LCKC wording, so an Edison snapshot shows a later printing's text than the era's CT06-EN002 while behaviour matches. EdisonFormat's entry corroborates the era resolution (non-targeting destruction; no LP gain or search if the Field Spell is not destroyed; destruction and LP gain simultaneous, search afterwards), and the historical script matches it exactly: 'if not (#dg>0 and Duel.Destroy(dg,REASON_EFFECT)>0 and Duel.Recover(tp,1000,REASON_EFFECT)>0) then return end'. Per the shared transcription, Ancient Fairy Dragon was only added to that community page between 2023-06-09 and 2023-12-03, so it is used as behavioural corroboration only, never as a chronology anchor. Remaining script differences (Duel.IsPhase vs Duel.GetCurrentPhase, RESET_PHASE|PHASE_END vs +) are equivalent forms. Card data is identical between 25862691 and 25862681 (2100/3000, Level 7, LIGHT, Dragon).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Ancient Fairy Dragon). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: Modern destroys 'as many cards in the Field Zones as possible (min. 1)'; the record treats this as widened from 'Field Spells on the field'. In the era only Field Spells occupied the Field Zone, so the era and modern destroy the same set of cards. Contradicted by Konami's Ancient Prophecy sneak peek card rulings: \"If there are 2 Field Spell Cards on the field the effect of \"Ancient Fairy Dragon\" will destroy both of them.\" Konami's Ancient Prophecy sneak peek card rulings: \"The effect of \"Ancient Fairy Dragon\" can destroy Set Field Spell Cards.\" The transition stays functional on what remains, d1, d3. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d3 unresolved at Edison, unresolved at Tengu; d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum in three parts, each visible in the script diff. Both effects became hard once per turn by name (modern SetCountLimit(1,{id,0}) and SetCountLimit(1,{id,1}) against the historical plain SetCountLimit(1), which is once per turn per copy, so two copies each got a use). The destruction widened from Field Spells to 'as many cards in the Field Zones as possible (min. 1)'. And the follow-up search may no longer add a Field Spell sharing a name with a destroyed card - the modern thfilter takes Duel.GetOperatedGroup() and excludes those codes, while the historical thfilter only checks IsFieldSpell and IsAbleToHand.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-ancient-prophecy-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -37,14 +38,58 @@
     "axis": null,
     "historical_text": "1 Tuner + 1+ non-Tuner monstersOnce per turn: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. Once per turn: You can destroy as many Field Spells on the field as possible, and if you do, gain 1000 LP, then you can add 1 Field Spell from your Deck to your hand.",
     "modern_text": "1 Tuner + 1+ non-Tuner monstersDuring your Main Phase: You can Special Summon 1 Level 4 or lower monster from your hand. You cannot conduct your Battle Phase the turn you activate this effect. During your Main Phase: You can destroy as many cards in the Field Zones as possible (min. 1), and if you do, gain 1000 LP, then you can add 1 Field Spell with a different name than the destroyed card(s), from your Deck to your hand. You can only use each effect of \"Ancient Fairy Dragon\" once per turn.",
-    "summary": "Functional erratum in three parts, each visible in the script diff. Both effects became hard once per turn by name (modern SetCountLimit(1,{id,0}) and SetCountLimit(1,{id,1}) against the historical plain SetCountLimit(1), which is once per turn per copy, so two copies each got a use). The destruction widened from Field Spells to 'as many cards in the Field Zones as possible (min. 1)'. And the follow-up search may no longer add a Field Spell sharing a name with a destroyed card - the modern thfilter takes Duel.GetOperatedGroup() and excludes those codes, while the historical thfilter only checks IsFieldSpell and IsAbleToHand.",
+    "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d1) Era: each of the two effects is a plain 'Once per turn' (a separate limit for each copy of the card, so two copies each get a use). Modern: each effect is a hard once per turn shared by name ('You can only use each effect of \"Ancient Fairy Dragon\" once per turn'). (d3) Modern: the follow-up search may not add a Field Spell sharing a name with a destroyed card ('with a different name than the destroyed card(s)'). Era: any Field Spell from the Deck may be added. Withdrawn as a difference: Modern destroys 'as many cards in the Field Zones as possible (min. 1)'; the record treats this as widened from 'Field Spells on the field'. In the era only Field Spells occupied the Field Zone, so the era and modern destroy the same set of cards. Contradicted by Konami's Ancient Prophecy sneak peek card rulings: \"If there are 2 Field Spell Cards on the field the effect of \"Ancient Fairy Dragon\" will destroy both of them.\"",
     "sources": [
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-ancient-prophecy-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "Era: each of the two effects is a plain 'Once per turn' (a separate limit for each copy of the card, so two copies each get a use). Modern: each effect is a hard once per turn shared by name ('You can only use each effect of \"Ancient Fairy Dragon\" once per turn'). Modern: the follow-up search may not add a Field Spell sharing a name with a destroyed card ('with a different name than the destroyed card(s)'). Era: any Field Spell from the Deck may be added.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-ancient-prophecy-rulings-2009",
+          "looked_for": "d1: Era: each of the two effects is a plain 'Once per turn' (a separate limit for each copy of the card, so two copies each get a use). Modern: each effect is a hard once per turn shared by name ('You ca…",
+          "finding": "does-not-address",
+          "passage": "Once per turn, you can Special Summon 1 Level 4 or lower monster from your hand."
+        },
+        {
+          "source": "konami-ancient-prophecy-rulings-2009",
+          "looked_for": "d3: Modern: the follow-up search may not add a Field Spell sharing a name with a destroyed card ('with a different name than the destroyed card(s)'). Era: any Field Spell from the Deck may be added.",
+          "finding": "does-not-address",
+          "passage": "If you activate the effect of \"Ancient Fairy Dragon\" to destroy a Field Spell Card, you must both destroy a Field Spell Card"
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "an entry for Ancient Fairy Dragon and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Ancient Fairy Dragon on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Ancient Fairy Dragon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Ancient Fairy Dragon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

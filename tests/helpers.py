@@ -476,9 +476,56 @@ TENGU_GENERATED_PASSCODES_NOW = frozenset(generated for _modern, generated in TE
 ALL_GENERATED_ALIASES.update({generated: modern for modern, generated in ROUND_036_ADDED.values()})
 
 
+# Round 037 (docs/research/text-only-errata-audit.md): period rulings show two more records' modern card
+# behaves as the era card did, so Edison's and Tengu's lists use the modern code again instead of Ignis's
+# pre-errata variant. {modern passcode: the variant's passcode before round 037}.
+ROUND_037_TO_MODERN = {
+    9995766: 9995776,  # Imperial Custom
+    63394872: 63394882,  # Senet Switch
+}
+# The four records that had to become full v2 records in round 037: the single-event sugar cannot carry a
+# cosmetic transition, nor two transitions in one event (Gaia Soul, Imperial Custom and Senet Switch
+# became cosmetic; D.D. Survivor gained a second transition). The corpus was 174 sugar and 122 full v2
+# records before round 037, and is now 170 and 126.
+ROUND_037_CONVERTED_TO_FULL_V2 = frozenset(
+    {
+        "erratum-gaia-soul-the-combustible-collective",
+        "erratum-imperial-custom",
+        "erratum-senet-switch",
+        "erratum-d-d-survivor",
+    }
+)
+ROUND_037_FIXTURES = Path(__file__).resolve().parent / "fixtures" / "round-037-before"
+# All three rounds' conversions: before round 035 the corpus was 116 full v2 and 180 sugar records.
+CONVERTED_TO_FULL_V2 = CONVERTED_TO_FULL_V2 | ROUND_037_CONVERTED_TO_FULL_V2
+
+
+# The two of round 037's cosmetic records that used an Ignis variant (erratum ids).
+ROUND_037_COSMETIC_RECORDS = frozenset({"erratum-imperial-custom", "erratum-senet-switch"})
+
+
+def to_round_036(entries):
+    """A built lflist's {code: count} as round 036 left it: each record round 037 made cosmetic that
+    used an Ignis variant holds that variant again instead of the modern card."""
+    out = dict(entries)
+    for modern, variant in ROUND_037_TO_MODERN.items():
+        if modern in out:
+            out[variant] = out.pop(modern)
+    return out
+
+
+def record_before_round_037(path):
+    """The bytes of a data/errata record as it stood on main before round 037 when round 037 edited it
+    (tests/fixtures/round-037-before/), else its bytes now. For the frozen migration tests, whose pins
+    were taken on the earlier record."""
+    fixture = ROUND_037_FIXTURES / Path(path).name
+    return (fixture if fixture.is_file() else Path(path)).read_bytes()
+
+
 def to_round_035(entries):
     """A built lflist's {code: count} as round 035 left it: each card round 036 added is its modern
     card again, and each card round 036 removed is its generated code again."""
+    entries = to_round_036(entries)
     out = dict(entries)
     for modern, generated in ROUND_036_ADDED.values():
         if generated in out:
@@ -499,3 +546,15 @@ def swap_back(entries, passcodes=None):
             out[modern] = out.pop(generated)
     return out
 
+
+
+# Round 037: the frozen pre-migration corpora that the migration harnesses re-materialise and validate
+# predate the rulings gate on errata records (`erratum.rulings-check-missing`), which asks for a check
+# no frozen record carries. The harnesses keep asserting that they add no OTHER error; the live
+# repository, which does carry the checks, is held to the gate by tests/test_errata_rulings_gate.py.
+FROZEN_CORPUS_EXEMPT_CODES = frozenset({"erratum.rulings-check-missing"})
+
+
+def errors_without_the_frozen_exemption(validator):
+    """A validator's errors, less the rulings-gate code the frozen migration corpora cannot carry."""
+    return [f for f in validator.errors if f.code not in FROZEN_CORPUS_EXEMPT_CODES]

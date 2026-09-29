@@ -25,8 +25,61 @@
             "yugipedia-card-errata",
             "ignis-cardscripts",
             "ignis-babelcdb",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "konami-card-faq-2008-12-15-fh",
+            "konami-shining-darkness-rulings-2010-04"
+          ],
+          "rulings_check": {
+            "difference": "Era 'You can only use this effect once per Duel' is a per-copy limit (each copy of the card may revive once); the March 2011 text 'Each player can only use the effect of \"Twin-Headed Behemoth\" once per Duel' is per name (one use per player across all copies). Script-implied difference in whose use is spent when control changes: the era per-card flag stays with the card, the modern count limit is per player.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: Era 'You can only use this effect once per Duel' is a per-copy limit (each copy of the card may revive once); the March 2011 text 'Each player can only use the effect of \"Twin-Headed Behemoth\" once p…",
+                "finding": "does-not-address",
+                "passage": "The condition that this card's effect can only be used once per Duel cannot be reset."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-fh",
+                "looked_for": "d1: Era 'You can only use this effect once per Duel' is a per-copy limit (each copy of the card may revive once); the March 2011 text 'Each player can only use the effect of \"Twin-Headed Behemoth\" once p…",
+                "finding": "does-not-address",
+                "passage": "If \"Twin-Headed Behemoth\" is returned to the Deck by the effect of \"Fiber Jar\" and its effect has already been used once this Duel, that condition is not reset."
+              },
+              {
+                "source": "konami-shining-darkness-rulings-2010-04",
+                "looked_for": "d1: Era 'You can only use this effect once per Duel' is a per-copy limit (each copy of the card may revive once); the March 2011 text 'Each player can only use the effect of \"Twin-Headed Behemoth\" once p…",
+                "finding": "does-not-address",
+                "passage": "Each player can use the effect of Spore once per Duel, no matter how many copies they have."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Script-implied difference in whose use is spent when control changes: the era per-card flag stays with the card, the modern count limit is per player.",
+                "finding": "does-not-address",
+                "passage": "If this card is controlled by your opponent and is destroyed, it will be Special Summoned on your side of the field with ATK/DEF of 1000 points. (If you have not already used this effect once.)"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Twin-Headed Behemoth on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Twin-Headed Behemoth in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Twin-Headed Behemoth' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     },
@@ -85,13 +138,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "The chain deliberately starts at v3 (SDRL-EN010, 2007-10-24) rather than at the packet's text_matches_version: the pre-errata cdb text matches v6 at only 0.9347 and is an upstream hybrid - v6's PSCT wording with 'each' inserted into the once-per-Duel clause - so it matches no printed English version. Behaviourally the variant implements the pre-name-lock era, whose last printing is v3; v0-v2 (LOD-063 2003-06-06, SD1-EN004 2005-01-01, CP02-EN016 2007-02-06) are cosmetic predecessors and are noted rather than recorded, with SD1-EN004 being the printing in force at the 2005-04-01 GOAT snapshot and SDRL-EN010 the one in force at the 2010-04-24 Edison snapshot. Second conflict preserved: every English text through v6 words the revival as an imperative while both upstream scripts (modern official/c43586926.lua read in full, and the pre-errata variant which does not touch that line) make it optional; following the conservative rule that PSCT formalisation is cosmetic and treating upstream's own pre-errata script as evidence of era behaviour, the v7 'You can' is recorded as non-behavioural, but a reviewer may wish to revisit it. The modern script also carries EFFECT_FLAG_CANNOT_DISABLE on the EVENT_TO_GRAVE registrar while the pre-errata one does not, so the historical card's 'destroyed this turn' registration can be negated."
+    "notes": "The chain deliberately starts at v3 (SDRL-EN010, 2007-10-24) rather than at the packet's text_matches_version: the pre-errata cdb text matches v6 at only 0.9347 and is an upstream hybrid - v6's PSCT wording with 'each' inserted into the once-per-Duel clause - so it matches no printed English version. Behaviourally the variant implements the pre-name-lock era, whose last printing is v3; v0-v2 (LOD-063 2003-06-06, SD1-EN004 2005-01-01, CP02-EN016 2007-02-06) are cosmetic predecessors and are noted rather than recorded, with SD1-EN004 being the printing in force at the 2005-04-01 GOAT snapshot and SDRL-EN010 the one in force at the 2010-04-24 Edison snapshot. Second conflict preserved: every English text through v6 words the revival as an imperative while both upstream scripts (modern official/c43586926.lua read in full, and the pre-errata variant which does not touch that line) make it optional; following the conservative rule that PSCT formalisation is cosmetic and treating upstream's own pre-errata script as evidence of era behaviour, the v7 'You can' is recorded as non-behavioural, but a reviewer may wish to revisit it. The modern script also carries EFFECT_FLAG_CANNOT_DISABLE on the EVENT_TO_GRAVE registrar while the pre-errata one does not, so the historical card's 'destroyed this turn' registration can be negated.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Twin-Headed Behemoth). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c0] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Twin-Headed Behemoth: the variant script lets Skill Drain stop the revival's bookkeeping; the FAQ says the revival still happens under Skill Drain."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-shining-darkness-rulings-2010-04"
   ]
 }

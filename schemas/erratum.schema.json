@@ -202,7 +202,8 @@
         "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text before this transition, transcribed from a cited source. null while not yet transcribed — never paraphrase from memory." },
         "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }], "description": "Card text after this transition, transcribed from a cited source." },
         "summary": { "type": "string", "description": "Plain-language description of the behavioural difference (or the wording change, for cosmetic entries), citing script/database evidence where the difference is behavioural." },
-        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+        "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+        "rulings_check": { "$ref": "custom-card.schema.json#/properties/rulings_check", "description": "The rulings gate on errata records (round 037; docs/errata.md, \"The rulings gate on errata records\"). Required on a `functional` transition that applies at the snapshot of 2010-03-edison or 2011-09-tengu (its event is not yet in effect there, or undated), unless a generated card implements the record or it is one of the three transitions rounds 035 and 036 checked (ERRATUM_RULINGS_GATE_EXEMPT): `erratum.rulings-check-missing` (an error). The same shape and rules as a generated card's rulings_check, under `erratum.` codes; `difference` is the difference this transition claims. A schema edit alone enforces nothing: the gate is retroformats/validate.py." }
       }
     },
     "event": {
@@ -529,7 +530,8 @@
             "historical_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
             "modern_text": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
             "summary": { "type": "string" },
-            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" }
+            "sources": { "$ref": "common.schema.json#/$defs/sourceRefs" },
+            "rulings_check": { "$ref": "#/$defs/transition/properties/rulings_check" }
           }
         },
         "coverage": {

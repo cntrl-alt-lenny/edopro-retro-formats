@@ -27,6 +27,7 @@ from retroformats.repo import Repository
 from retroformats.validate import Validator
 
 from . import migration_audit as audit
+from .helpers import errors_without_the_frozen_exemption
 from .migration_materializer import SCHEMA_PATH, build_shadow_repository, finding_location
 from .schema_check import Registry, validate_erratum
 
@@ -178,7 +179,7 @@ def verify_targets(repo: Repository, scope: dict[str, Any], materialized: dict[s
         }
         validation_errors = [
             {"id": location_to_id[finding.location], "code": finding.code, "message": finding.message}
-            for finding in validator.errors
+            for finding in errors_without_the_frozen_exemption(validator)
             if finding.location in location_to_id
         ]
     return {
@@ -406,8 +407,8 @@ def shadow_consumers(repo: Repository, scope: dict[str, Any], materialized: dict
     baseline_validator.validate()
     shadow_validator = Validator(shadow)
     shadow_validator.validate()
-    baseline_errors = Counter(f.code for f in baseline_validator.errors)
-    shadow_errors = Counter(f.code for f in shadow_validator.errors)
+    baseline_errors = Counter(f.code for f in errors_without_the_frozen_exemption(baseline_validator))
+    shadow_errors = Counter(f.code for f in errors_without_the_frozen_exemption(shadow_validator))
     baseline_warnings = Counter(f.code for f in baseline_validator.warnings)
     shadow_warnings = Counter(f.code for f in shadow_validator.warnings)
     warning_delta = {
@@ -442,8 +443,8 @@ def shadow_consumers(repo: Repository, scope: dict[str, Any], materialized: dict
         "shadow_repository": shadow,
         "formats": formats,
         "substitution_maps": substitution_maps,
-        "baseline_error_count": len(baseline_validator.errors),
-        "shadow_error_count": len(shadow_validator.errors),
+        "baseline_error_count": len(errors_without_the_frozen_exemption(baseline_validator)),
+        "shadow_error_count": len(errors_without_the_frozen_exemption(shadow_validator)),
         "baseline_error_codes": dict(baseline_errors),
         "shadow_error_codes": dict(shadow_errors),
         "new_error_codes": {

@@ -20,12 +20,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Only two English versions: v0 (TDGS-EN092, 2008-09-02), the text in force at the Edison snapshot, and v1 (SR06-EN036, 2018-04-19). Pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty. The self-exclusion clause is the ONLY behavioural delta I can see in the lineage; the packet carries no period ruling establishing whether the exclusion was already enforced by rulings in 2008-2010, so the verdict rests on the printed text alone, and the practical stakes are narrow (it takes a second copy of Trap of Darkness already in the Graveyard for the two texts to diverge). The card does not appear on EdisonFormat.com's functional errata page. The cost/effect split is unchanged in both readings: paying 1000 LP is an activation cost before and after."
+    "notes": "Only two English versions: v0 (TDGS-EN092, 2008-09-02), the text in force at the Edison snapshot, and v1 (SR06-EN036, 2018-04-19). Pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty. The self-exclusion clause is the ONLY behavioural delta I can see in the lineage; the packet carries no period ruling establishing whether the exclusion was already enforced by rulings in 2008-2010, so the verdict rests on the printed text alone, and the practical stakes are narrow (it takes a second copy of Trap of Darkness already in the Graveyard for the two texts to diverge). The card does not appear on EdisonFormat.com's functional errata page. The cost/effect split is unchanged in both readings: paying 1000 LP is an activation cost before and after.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Trap of Darkness). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "ude-judge-list-imperial-iron-wall-2008",
+    "konami-extreme-victory-rulings-2011-05",
+    "konami-starstrike-blast-rulings-archive"
   ],
   "event": {
     "effective": {
@@ -42,8 +45,60 @@
     "sources": [
       "yugipedia-card-errata",
       "yugipedia-set-pages",
-      "ignis-babelcdb"
-    ]
+      "ignis-babelcdb",
+      "ude-judge-list-imperial-iron-wall-2008",
+      "konami-extreme-victory-rulings-2011-05",
+      "konami-starstrike-blast-rulings-archive"
+    ],
+    "rulings_check": {
+      "difference": "Era: the copied Normal Trap may be another \"Trap of Darkness\" in the Graveyard; modern: \"except Trap of Darkness\" bars it.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "ude-judge-list-imperial-iron-wall-2008",
+          "looked_for": "d1: Era: the copied Normal Trap may be another \"Trap of Darkness\" in the Graveyard; modern: \"except Trap of Darkness\" bars it.",
+          "finding": "does-not-address",
+          "passage": "\"Trap of Darkness\" cannot be activated while \"Imperial Iron Wall\" is active. If \"Trap of Darkness\" is activated and \"Imperial Iron Wall\" is chained, the effect of \"Trap of Darkness\" still resolves, but the Normal Trap Card is not removed from play."
+        },
+        {
+          "source": "konami-extreme-victory-rulings-2011-05",
+          "looked_for": "d1: Era: the copied Normal Trap may be another \"Trap of Darkness\" in the Graveyard; modern: \"except Trap of Darkness\" bars it.",
+          "finding": "does-not-address",
+          "passage": "You do not draw if the effect of Jar of Greed is copied by Trap of Darkness."
+        },
+        {
+          "source": "konami-starstrike-blast-rulings-archive",
+          "looked_for": "d1: Era: the copied Normal Trap may be another \"Trap of Darkness\" in the Graveyard; modern: \"except Trap of Darkness\" bars it.",
+          "finding": "does-not-address",
+          "passage": "If you activate Trap of Darkness choosing this card, you cannot Normal Summon or Set a monster that turn."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "an entry for Trap of Darkness and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Trap of Darkness on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Trap of Darkness in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Trap of Darkness' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

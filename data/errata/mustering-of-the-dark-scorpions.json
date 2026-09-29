@@ -45,8 +45,65 @@
           "sources": [
             "yugipedia-card-errata",
             "ignis-babelcdb",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-16-lo",
+            "konami-card-faq-2008-12-15-de"
+          ],
+          "rulings_check": {
+            "difference": "The era card Special Summons only cards with \"Dark Scorpion\" in their English card name plus \"Cliff the Trap Remover\"; the modern card Special Summons any \"Dark Scorpion\" archetype monster, so a second \"Don Zaloog\" (name lacks the string) is reachable only by the modern card.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d1: The era card Special Summons only cards with \"Dark Scorpion\" in their English card name plus \"Cliff the Trap Remover\"; the modern card Special Summons any \"Dark Scorpion\" archetype monster, so a seco…",
+                "finding": "does-not-address",
+                "passage": "If you have 2 copies of \"Cliff the Trap Remover\" (for example) in your hand, you can Special Summon 1 of them with \"Mustering of the Dark Scorpions\"."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d1: The era card Special Summons only cards with \"Dark Scorpion\" in their English card name plus \"Cliff the Trap Remover\"; the modern card Special Summons any \"Dark Scorpion\" archetype monster, so a seco…",
+                "finding": "does-not-address",
+                "passage": "If your opponent chains \"Ring of Destruction\" to \"Mustering of the Dark Scorpions\" to destroy your \"Don Zaloog\", \"Mustering of the Dark Scorpions\" still resolves."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d1: The era card Special Summons only cards with \"Dark Scorpion\" in their English card name plus \"Cliff the Trap Remover\"; the modern card Special Summons any \"Dark Scorpion\" archetype monster, so a seco…",
+                "finding": "does-not-address",
+                "passage": "You don't have to Special Summon all possible monsters with \"Mustering of the Dark Scorpions\"; you can keep some in your hand if you want."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: The era card Special Summons only cards with \"Dark Scorpion\" in their English card name plus \"Cliff the Trap Remover\"; the modern card Special Summons any \"Dark Scorpion\" archetype monster, so a seco…",
+                "finding": "does-not-address",
+                "passage": "You can use \"Meanae the Thorn\"'s effect to add a Monster, Spell, or Trap Card to your hand that includes \"Dark Scorpion\" in its name, including \"Mustering of the Dark Scorpions\" and \"Dark Scorpion Combination\"."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Mustering of the Dark Scorpions on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Mustering of the Dark Scorpions in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Mustering of the Dark Scorpions in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Mustering of the Dark Scorpions' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -87,11 +144,13 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 68191243 exists upstream. v1 (DR1-EN255, 2005-03-19) landed 13 days before the GOAT snapshot (2005-04-01), so v1 is the text in force for both GOAT and Edison (2010-04-24) and the erratum at 2012-06-07 postdates both. cards.cdb matches v2 exactly. Caveat on the functional verdict: the packet does not enumerate \"Dark Scorpion\" archetype membership, so the concrete widening rests on an internal-textual inference - the era text needed an explicit \"or are named \\\"Cliff the Trap Remover\\\"\" clause precisely because name matching does not catch him, and the errata'd text drops that clause while naming only the archetype, which means the archetype set is strictly wider than the name-match set. If a reviewer establishes that the archetype contains nothing beyond the name-matching cards plus Cliff, the change collapses to cosmetic. Mustering of the Dark Scorpions does not appear on the EdisonFormat.com Functional Errata list. The errata page lists German as the only other language, which is not used here."
+    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 68191243 exists upstream. v1 (DR1-EN255, 2005-03-19) landed 13 days before the GOAT snapshot (2005-04-01), so v1 is the text in force for both GOAT and Edison (2010-04-24) and the erratum at 2012-06-07 postdates both. cards.cdb matches v2 exactly. Caveat on the functional verdict: the packet does not enumerate \"Dark Scorpion\" archetype membership, so the concrete widening rests on an internal-textual inference - the era text needed an explicit \"or are named \\\"Cliff the Trap Remover\\\"\" clause precisely because name matching does not catch him, and the errata'd text drops that clause while naming only the archetype, which means the archetype set is strictly wider than the name-match set. If a reviewer establishes that the archetype contains nothing beyond the name-matching cards plus Cliff, the change collapses to cosmetic. Mustering of the Dark Scorpions does not appear on the EdisonFormat.com Functional Errata list. The errata page lists German as the only other language, which is not used here.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Mustering of the Dark Scorpions). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-card-faq-2008-12-15-de"
   ]
 }

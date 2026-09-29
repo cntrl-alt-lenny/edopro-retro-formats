@@ -17,14 +17,17 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Two unresolved problems sit behind an otherwise clean functional record. (1) Era mismatch: applying this record to a pre-2017 snapshot selects the pre-errata implementation, which reproduces the 2012 PSCT text. That is only right for Edison if v3 -> v4 (BP01-EN177, 2012-05-24) merely formalised targeting that v3's 'If you do, your opponent can Special Summon 1 monster from their Graveyard' already had; the packet contains no evidence either way, because upstream ships no implementation of v3. (2) A larger, undated gap sits before the baseline: v0 (LON-071, 2003-03-01) and v1 (DB2-EN008, 2005-07-27) read 'You may/can treat the Normal Summon of this card as a Special Summon', which on its face consumes your Normal Summon, and v2 (SD09-EN005, 2006-10-20) replaced that with 'You can Special Summon this card from your hand'. Both shipped scripts implement only the later reading - EFFECT_SPSUMMON_PROC from the hand with SetValue(1), which does not consume the Normal Summon - so the GOAT-era version of this card has no implementation at all and no chronology is asserted for that transition. Per the instructions the chain still starts at the version the baseline implements (v4), with these earlier transitions recorded here rather than invented into the chain. Trailing cosmetic: v5 -> v6 (SS03-ENA10, 2019-08-01) is Graveyard -> GY. Secondary observation: the pre-errata script omits aux.NecroValleyFilter, but since it targets in the Graveyard, era Necrovalley would stop it anyway under the interpretation EdisonFormat.com records (negation applies only to effects that target in a Graveyard)."
+    "notes": "Two unresolved problems sit behind an otherwise clean functional record. (1) Era mismatch: applying this record to a pre-2017 snapshot selects the pre-errata implementation, which reproduces the 2012 PSCT text. That is only right for Edison if v3 -> v4 (BP01-EN177, 2012-05-24) merely formalised targeting that v3's 'If you do, your opponent can Special Summon 1 monster from their Graveyard' already had; the packet contains no evidence either way, because upstream ships no implementation of v3. (2) A larger, undated gap sits before the baseline: v0 (LON-071, 2003-03-01) and v1 (DB2-EN008, 2005-07-27) read 'You may/can treat the Normal Summon of this card as a Special Summon', which on its face consumes your Normal Summon, and v2 (SD09-EN005, 2006-10-20) replaced that with 'You can Special Summon this card from your hand'. Both shipped scripts implement only the later reading - EFFECT_SPSUMMON_PROC from the hand with SetValue(1), which does not consume the Normal Summon - so the GOAT-era version of this card has no implementation at all and no chronology is asserted for that transition. Per the instructions the chain still starts at the version the baseline implements (v4), with these earlier transitions recorded here rather than invented into the chain. Trailing cosmetic: v5 -> v6 (SS03-ENA10, 2019-08-01) is Graveyard -> GY. Secondary observation: the pre-errata script omits aux.NecroValleyFilter, but since it targets in the Graveyard, era Necrovalley would stop it anyway under the interpretation EdisonFormat.com records (negation applies only to effects that target in a Graveyard).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Gilasaurus). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-card-faq-2008-12-15-skilled-white-magician"
   ],
   "event": {
     "effective": {
@@ -42,8 +45,66 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-15-fh",
+      "konami-card-faq-2008-12-16-lo",
+      "konami-card-faq-2008-12-15-skilled-white-magician"
+    ],
+    "rulings_check": {
+      "difference": "Era (per the record's 2012 wording): the effect uses targeting - your opponent decides to use it, then targets 1 monster in their Graveyard at activation and Special Summons that target; modern: no targeting, the choice is made entirely on resolution.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d1: Era (per the record's 2012 wording): the effect uses targeting - your opponent decides to use it, then targets 1 monster in their Graveyard at activation and Special Summons that target; modern: no t…",
+          "finding": "does-not-address",
+          "passage": "You can use the effect of this card to change its Normal Summon to a Special Summon even if your opponent has no monsters in their Graveyard."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: Era (per the record's 2012 wording): the effect uses targeting - your opponent decides to use it, then targets 1 monster in their Graveyard at activation and Special Summons that target; modern: no t…",
+          "finding": "does-not-address",
+          "passage": "If \"Necrovalley\" is on the field, you can Special Summon \"Gilasaurus\" using its effect, but the effect that lets your opponent Special Summon is negated."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d1: Era (per the record's 2012 wording): the effect uses targeting - your opponent decides to use it, then targets 1 monster in their Graveyard at activation and Special Summons that target; modern: no t…",
+          "finding": "does-not-address",
+          "passage": "While \"The End of Anubis\" is on the field, if you Special Summon \"Gilasaurus\", your opponent can't Special Summon."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d1: Era (per the record's 2012 wording): the effect uses targeting - your opponent decides to use it, then targets 1 monster in their Graveyard at activation and Special Summons that target; modern: no t…",
+          "finding": "does-not-address",
+          "passage": "You can Special Summon \"Gilasaurus\" while \"Skill Drain\" is active, but its effect is negated so your opponent does not get to Special Summon."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Gilasaurus on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Gilasaurus in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Gilasaurus in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Gilasaurus' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

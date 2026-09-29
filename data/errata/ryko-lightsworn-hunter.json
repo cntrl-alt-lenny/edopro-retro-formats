@@ -17,14 +17,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v4 (SDLI-EN015, 2014-06-27), whose text the baseline's cdb entry matches exactly. Earlier transitions precede the baseline and are behaviourally identical, progressively formalising the same resolution: v0 (LODT-EN022, 2008-05-13, the printing in force at the Edison snapshot) 'You can destroy 1 card on the field'; v1 (GLD4-EN024, 2011-06-24) 'select 1 card on the field, and destroy it'; v2 (SDDC-EN023, 2012-02-03) PSCT 'target 1 card; destroy that target'; v3 (PGLD-EN086, 2014-03-28) adds '(if any), also, after that'; v4 splits into bullets 'Apply these effects in sequence'. EdisonFormat's entry confirms the era behaviour of the v0 printing matches what the v4-era script does, which is why starting the chain at v4 does not misdate the period behaviour. No trailing cosmetic transitions: v5 is the modern text."
+    "notes": "Chain starts at lineage v4 (SDLI-EN015, 2014-06-27), whose text the baseline's cdb entry matches exactly. Earlier transitions precede the baseline and are behaviourally identical, progressively formalising the same resolution: v0 (LODT-EN022, 2008-05-13, the printing in force at the Edison snapshot) 'You can destroy 1 card on the field'; v1 (GLD4-EN024, 2011-06-24) 'select 1 card on the field, and destroy it'; v2 (SDDC-EN023, 2012-02-03) PSCT 'target 1 card; destroy that target'; v3 (PGLD-EN086, 2014-03-28) adds '(if any), also, after that'; v4 splits into bullets 'Apply these effects in sequence'. EdisonFormat's entry confirms the era behaviour of the v0 printing matches what the v4-era script does, which is why starting the chain at v4 does not misdate the period behaviour. No trailing cosmetic transitions: v5 is the modern text.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Ryko, Lightsworn Hunter). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-15-pr",
+    "konami-crimson-crisis-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -43,8 +45,81 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-card-faq-2008-12-15-pr",
+      "konami-crimson-crisis-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "Era: the destruction targets (the card is chosen at activation). Modern (2017): no targeting; the card is chosen at resolution. Era: the destruction and the 3-card mill are applied in sequence, so the mill is a separate timing after the destruction. Modern: applied simultaneously.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d1: Era: the destruction targets (the card is chosen at activation). Modern (2017): no targeting; the card is chosen at resolution.",
+          "finding": "supports",
+          "passage": "You choose if you will destroy a card when \"Ryko, Lightsworn Hunter's\" effect activates. If you choose to destroy a card, this effect targets the card to be destroyed..",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d2: Era: the destruction and the 3-card mill are applied in sequence, so the mill is a separate timing after the destruction. Modern: applied simultaneously. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "If \"Peten the Dark Clown\" is destroyed by \"Ryko, Lightsworn Hunter\", its effect cannot be activated. If \"Peten the Dark Clown\" is sent from the top of the Deck to the Graveyard by \"Ryko, Lightsworn Hunter's\" effect, its effect can be activated if there are no other effects remaining on the Chain."
+        },
+        {
+          "source": "konami-crimson-crisis-rulings-2009",
+          "looked_for": "d2: Era: the destruction and the 3-card mill are applied in sequence, so the mill is a separate timing after the destruction. Modern: applied simultaneously. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "with its effect, but no cards are sent from the Deck to the Graveyard after that."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Ryko, Lightsworn Hunter on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Ryko, Lightsworn Hunter in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Ryko, Lightsworn Hunter' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

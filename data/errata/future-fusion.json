@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v4 (LCGX-EN186, 2011-10-04), the version the baseline implements (cdb text ratio 0.809 - an upstream condensation of v4 that keeps v4's 'Reveal 1 Fusion Monster in your Extra Deck', the 2nd Standby Phase Summon and the 'target it with this card' wording). Earlier transitions precede the baseline and are not recorded: v0 (POTD-EN044, 2006-08-16) -> v1 (DP04-EN023, 2007-03-07) adds the same-name clarification; v1 -> v2 is a UDE Card Reference text update whose caption on the errata page is a web.archive.org capture of Upper Deck's Official Card Reference (captured 2008-12-16) rather than a printing; v2 -> v3 (GLD2-EN039, 2009-04-21) is Fusion Deck -> Extra Deck. Trailing v5 -> v6 (LEDD-ENB17, 2017-10-05) is Graveyard->GY only. The packet's second upstream entry, 'Future Fusion (Anime)' 513000094, is an anime-effect card (Fusion Summons on activation and equips itself to the monster; cards-unofficial.cdb ot=4, anime scope), not a historical TCG printing, so it is excluded rather than folded in as a variant."
+    "notes": "Chain starts at lineage v4 (LCGX-EN186, 2011-10-04), the version the baseline implements (cdb text ratio 0.809 - an upstream condensation of v4 that keeps v4's 'Reveal 1 Fusion Monster in your Extra Deck', the 2nd Standby Phase Summon and the 'target it with this card' wording). Earlier transitions precede the baseline and are not recorded: v0 (POTD-EN044, 2006-08-16) -> v1 (DP04-EN023, 2007-03-07) adds the same-name clarification; v1 -> v2 is a UDE Card Reference text update whose caption on the errata page is a web.archive.org capture of Upper Deck's Official Card Reference (captured 2008-12-16) rather than a printing; v2 -> v3 (GLD2-EN039, 2009-04-21) is Fusion Deck -> Extra Deck. Trailing v5 -> v6 (LEDD-ENB17, 2017-10-05) is Graveyard->GY only. The packet's second upstream entry, 'Future Fusion (Anime)' 513000094, is an anime-effect card (Fusion Summons on activation and equips itself to the monster; cards-unofficial.cdb ot=4, anime scope), not a historical TCG printing, so it is excluded rather than folded in as a variant.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Future Fusion). The rulings read support d1, d2 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 supported at Edison, supported at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Future Fusion: the variant script appears to let contact-Fusion-only monsters be selected, which the card FAQ forbids (read from the script, not run)."
   },
   "sources": [
     "yugipedia-card-errata",
@@ -25,7 +25,9 @@
     "ignis-babelcdb",
     "yugipedia-set-pages",
     "edisonformat-functional-errata",
-    "konami-errata-announcements"
+    "konami-errata-announcements",
+    "konami-crimson-crisis-rulings-2009",
+    "konami-card-faq-2008-12-15-fh"
   ],
   "event": {
     "effective": {
@@ -58,8 +60,83 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-crimson-crisis-rulings-2009",
+      "konami-card-faq-2008-12-15-fh"
+    ],
+    "rulings_check": {
+      "difference": "Era: the Fusion Monster is revealed and the Fusion Materials are sent from the Main Deck to the Graveyard as the effect of the activation itself (on resolution of the Spell); modern: this is a separate Trigger Effect in your 1st Standby Phase after activation. Era: Future Fusion cannot be activated unless you have a Fusion Monster in your Extra Deck whose listed Fusion Materials are in your Main Deck; modern: it can always be activated (the check happens later).",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-crimson-crisis-rulings-2009",
+          "looked_for": "d1: Era: the Fusion Monster is revealed and the Fusion Materials are sent from the Main Deck to the Graveyard as the effect of the activation itself (on resolution of the Spell); modern: this is a separa…",
+          "finding": "supports",
+          "passage": "\"Future Fusion\" cannot be activated while \"Dimension Fortress Weapon\" is on the field. If \"Future Fusion\" is activated, and \"Dimension Fortress Weapon\" is Summoned in a chain, the effect of \"Future Fusion\" is not applied, no monsters are sent to the Graveyard, no Fusion Monster is Special Summoned, and \"Future Fusion\" remains on the field meaninglessly.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Crimson Crisis sneak peek card rulings (compiled 2009-02-27) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d1: Era: the Fusion Monster is revealed and the Fusion Materials are sent from the Main Deck to the Graveyard as the effect of the activation itself (on resolution of the Spell); modern: this is a separa…",
+          "finding": "does-not-address",
+          "passage": "You can chain \"Royal Oppression\" to negate \"Future Fusion\" when it is activated (placed face-up on the field)."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d2: Era: Future Fusion cannot be activated unless you have a Fusion Monster in your Extra Deck whose listed Fusion Materials are in your Main Deck; modern: it can always be activated (the check happens l…",
+          "finding": "supports",
+          "passage": "You cannot activate \"Future Fusion\" if you do not have a Fusion Monster in your Extra Deck and the appropriate Fusion Material Monsters in your Main Deck.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Future Fusion on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Future Fusion in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Future Fusion' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

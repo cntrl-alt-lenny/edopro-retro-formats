@@ -17,14 +17,20 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Conflicting evidence preserved: lineage v3 and v4 both carry the card number DPKB-EN016 with different texts, and the packet dates v4 by its other printing, the Silver Dragon Value Box (2013-09-13). That places the baseline's text after both period snapshots. The unrecorded v3->v4 transition is not obviously cosmetic: v0-v3 read 'This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard' while v4 reads 'Must first be Special Summoned (from your hand) by banishing...', which adds an explicit hand restriction and the 'first' that permits later revival. The packet contains no ruling source settling how the era read the v0-v3 wording, and Project Ignis ships no implementation of v0-v3, so the transition is left in these notes rather than invented as a dated change. The cdb text is a near (0.9297) not exact match to v4, differing in 'in your Graveyard' vs 'from your Graveyard' and 'for each card sent this way' vs 'for each card sent to the Graveyard by this effect'. Also unrecorded because it predates the baseline: v0 (IOC-000) lacked the 'cannot be Normal Summoned or Set' clause added in v1."
+    "notes": "Conflicting evidence preserved: lineage v3 and v4 both carry the card number DPKB-EN016 with different texts, and the packet dates v4 by its other printing, the Silver Dragon Value Box (2013-09-13). That places the baseline's text after both period snapshots. The unrecorded v3->v4 transition is not obviously cosmetic: v0-v3 read 'This card can only be Special Summoned by removing from play 1 LIGHT and 1 DARK monster in your Graveyard' while v4 reads 'Must first be Special Summoned (from your hand) by banishing...', which adds an explicit hand restriction and the 'first' that permits later revival. The packet contains no ruling source settling how the era read the v0-v3 wording, and Project Ignis ships no implementation of v0-v3, so the transition is left in these notes rather than invented as a dated change. The cdb text is a near (0.9297) not exact match to v4, differing in 'in your Graveyard' vs 'from your Graveyard' and 'for each card sent this way' vs 'for each card sent to the Graveyard by this effect'. Also unrecorded because it predates the baseline: v0 (IOC-000) lacked the 'cannot be Normal Summoned or Set' clause added in v1.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Chaos Emperor Dragon - Envoy of the End). The rulings read support d3, d4 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d2 unresolved at Edison, unresolved at Tengu; d3 supported at Edison, supported at Tengu; d4 supported at Edison, supported at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-cardscripts"
+    "ignis-cardscripts",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-rulebook-2008-v70",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v72-2011-dragunity",
+    "ude-card-rulings-archive",
+    "konami-card-faq-2008-12-15-de"
   ],
   "event": {
     "effective": {
@@ -42,8 +48,246 @@
       "yugipedia-card-errata",
       "yugipedia-set-pages",
       "ignis-babelcdb",
-      "ignis-cardscripts"
-    ]
+      "ignis-cardscripts",
+      "konami-card-faq-2008-12-16-ac",
+      "konami-rulebook-2008-v70",
+      "konami-official-rulebook-v71-2010",
+      "konami-official-rulebook-v72-2011-dragunity",
+      "ude-card-rulings-archive",
+      "konami-card-faq-2008-12-15-de"
+    ],
+    "rulings_check": {
+      "difference": "Era: the Ignition effect has no per-turn limit (it can be activated again whenever the cost can be paid, e.g. after the card is revived); modern: hard once per turn. Era: no restriction on activating other cards or effects in the turn its effect is activated; modern: 'You cannot activate other cards or effects during the turn you activate this card's effect'. Era: the damage is 300 for every card sent to the Graveyard by the effect, whether owned by either player (cards BOTH players send); modern: 300 only for cards sent to the opponent's Graveyard. Era: after it has been properly Special Summoned, the card can be Special Summoned again from the Graveyard (for example by Monster Reborn or Dimension Fusion); modern: the Special Summon condition forbids any Special Summon other than its own procedure, so it cannot be revived.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: Era: the Ignition effect has no per-turn limit (it can be activated again whenever the cost can be paid, e.g. after the card is revived); modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate \"Barrel Behind the Door\" against Ignition Effects like \"Cannon Soldier\", \"Catapult Turtle\", \"The Agent of Judgment - Saturn\", and \"Chaos Emperor Dragon - Envoy of the End\"."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Era: the Ignition effect has no per-turn limit (it can be activated again whenever the cost can be paid, e.g. after the card is revived); modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Era: the Ignition effect has no per-turn limit (it can be activated again whenever the cost can be paid, e.g. after the card is revived); modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "or Effect Monster Cards as many times as you want during this"
+        },
+        {
+          "source": "konami-official-rulebook-v72-2011-dragunity",
+          "looked_for": "d1: Era: the Ignition effect has no per-turn limit (it can be activated again whenever the cost can be paid, e.g. after the card is revived); modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d2: Era: no restriction on activating other cards or effects in the turn its effect is activated; modern: 'You cannot activate other cards or effects during the turn you activate this card's effect'.",
+          "finding": "does-not-address",
+          "passage": "\"Barrel Behind the Door\" and \"Trap of Board Eraser\" can be chained to \"Chaos Emperor Dragon - Envoy of the End\"'s effect."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: Era: the damage is 300 for every card sent to the Graveyard by the effect, whether owned by either player (cards BOTH players send); modern: 300 only for cards sent to the opponent's Graveyard.",
+          "finding": "supports",
+          "passage": "The damage that \"Chaos Emperor Dragon - Envoy of the End\" inflicts is equal to the number of cards BOTH players send to the Graveyard times 300 points.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d3: Era: the damage is 300 for every card sent to the Graveyard by the effect, whether owned by either player (cards BOTH players send); modern: 300 only for cards sent to the opponent's Graveyard.",
+          "finding": "supports",
+          "passage": "The damage that \"Chaos Emperor Dragon - Envoy of the End\" inflicts is equal to the number of cards BOTH players send to the Graveyard times 300 points.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: Era: the damage is 300 for every card sent to the Graveyard by the effect, whether owned by either player (cards BOTH players send); modern: 300 only for cards sent to the opponent's Graveyard.",
+          "finding": "supports",
+          "passage": "\"Chaos Emperor Dragon - Envoy of the End\" sends itself to the Graveyard as part of its effect, and counts itself for determining how much damage it inflicts.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "d4: Era: after it has been properly Special Summoned, the card can be Special Summoned again from the Graveyard (for example by Monster Reborn or Dimension Fusion); modern: the Special Summon condition f…",
+          "finding": "supports",
+          "passage": "\"Dimension Fusion\" cannot Special Summon a \"Special Summon-only\" monster, like a Ritual Monster or \"Chaos Emperor Dragon - Envoy of the End\", unless it was properly summoned first.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d4: Era: after it has been properly Special Summoned, the card can be Special Summoned again from the Graveyard (for example by Monster Reborn or Dimension Fusion); modern: the Special Summon condition f…",
+          "finding": "supports",
+          "passage": "\"Dimension Fusion\" cannot Special Summon a \"Special Summon-only\" monster, like a Ritual Monster or \"Chaos Emperor Dragon - Envoy of the End\", unless it was properly summoned first.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-official-rulebook-v72-2011-dragunity",
+          "looked_for": "d4: Era: after it has been properly Special Summoned, the card can be Special Summoned again from the Graveyard (for example by Monster Reborn or Dimension Fusion); modern: the Special Summon condition f…",
+          "finding": "supports",
+          "passage": "You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Official Rulebook Version 7.2 (captured 2011-05-16) was current at Tengu's snapshot (2011-09-17) only: it postdates Edison's (2010-04-24)."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d4: Era: after it has been properly Special Summoned, the card can be Special Summoned again from the Graveyard (for example by Monster Reborn or Dimension Fusion); modern: the Special Summon condition f…",
+          "finding": "supports",
+          "passage": "You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Official Rulebook Version 7.0 (captured 2008-12-30) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Chaos Emperor Dragon - Envoy of the End in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Chaos Emperor Dragon - Envoy of the End in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Chaos Emperor Dragon - Envoy of the End' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

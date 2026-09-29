@@ -104,6 +104,18 @@ CHAOS_NEOS_HISTORICAL = 600000020
 FROG_MODERN = 12538374
 FROG_HISTORICAL = 600000021
 
+# Round 037: two records whose Ignis variant the lists no longer use, because period rulings show the modern
+# card plays as the era card did. (name, modern card, the variant's code the lists held before).
+IMPERIAL_CUSTOM_MODERN = 9995766
+IMPERIAL_CUSTOM_VARIANT = 9995776
+SENET_SWITCH_MODERN = 63394872
+SENET_SWITCH_VARIANT = 63394882
+IMPERIAL_ORDER = 61740673  # a Continuous Trap
+ROUND_037_COSMETIC = (
+    ("Imperial Custom", IMPERIAL_CUSTOM_MODERN, IMPERIAL_CUSTOM_VARIANT),
+    ("Senet Switch", SENET_SWITCH_MODERN, SENET_SWITCH_VARIANT),
+)
+
 # Round 034's five strict-nomi proposals, never shipped: (name, modern card, the number round 034 proposed).
 NOMI_CARDS = (
     ("Gigantes", 47606319, 600000010),
@@ -798,6 +810,89 @@ class RetiredCardsUseTheModernCardTest(unittest.TestCase):
             with self.subTest(card=name):
                 self._assert_the_modern_card_is_used(modern, proposed, ("2010-03-edison", "2011-09-tengu"))
                 self.assertIn(modern, self._reborn_candidates(modern, mode))
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class Round037CosmeticRecordsUseTheModernCardTest(unittest.TestCase):
+    """Round 037 (docs/research/text-only-errata-audit.md) made two records cosmetic-only because a period
+    ruling in force says the modern card plays as the era card did, so Edison's and Tengu's lists name the
+    modern code instead of Ignis's pre-errata variant:
+
+    - Imperial Custom: Konami's Ancient Prophecy ruling, "If you do not pay the maintenance cost for "Mirror
+      Wall" or "Imperial Order" while "Imperial Custom" is face-up on the field, those cards will still be
+      destroyed." The variant makes every Continuous Trap indestructible for every reason (`SetValue(1)`);
+      the modern card only for destruction by battle or card effect.
+    - Senet Switch: the card FAQ (Konami-hosted 2008-12-15), "If "Ojama Trio" is chained to the effect of "Senet
+      Switch" so that the designated Monster Card Zone is now occupied, the effect of "Senet Switch" is not
+      applied and the monster does not move." The variant picks a free adjacent zone at resolution; the modern
+      card designates the zone when the effect is activated.
+
+    One parametrised test asserts the lists (no variant, the modern code), that no variant is in the lists'
+    Edison and Tengu codes, and that the modern card does what the ruling says in a duel."""
+
+    def _lists(self, modern: int, variant: int):
+        for format_id in ("2010-03-edison", "2011-09-tengu"):
+            with self.subTest(format=format_id):
+                codes = listed_codes(format_id)
+                self.assertIn(modern, codes, "the list names the modern card")
+                self.assertNotIn(variant, codes, "and no longer Ignis's pre-errata variant")
+
+    def _imperial_custom(self, mode: int):
+        # A face-up Continuous Trap and Imperial Custom; a probe destroys the Trap at the start of the turn by
+        # a cost (a failed maintenance payment is destruction as a cost) and again by a card effect.
+        setup = (
+            f"Debug.AddCard({IMPERIAL_CUSTOM_MODERN},0,0,LOCATION_SZONE,0,POS_FACEUP)\n"
+            f"local order=Debug.AddCard({IMPERIAL_ORDER},0,0,LOCATION_SZONE,1,POS_FACEUP)\n"
+            "local probe=Effect.GlobalEffect()\n"
+            "probe:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+            "probe:SetCode(EVENT_PHASE+PHASE_END)\n"
+            "probe:SetCountLimit(1)\n"
+            'probe:SetOperation(function() Debug.Message("BYEFFECT "..Duel.Destroy(order,REASON_EFFECT)); '
+            'Debug.Message("BYCOST "..Duel.Destroy(order,REASON_COST)) end)\n'
+            "Duel.RegisterEffect(probe,0)\n"
+        )
+        duel = run_scenario(setup, mode, idle=H.answer_idle(7))
+        lines = [text for _kind, text in duel.log if text.startswith(("BYEFFECT", "BYCOST"))]
+        self.assertEqual(["BYEFFECT 0", "BYCOST 1"], lines, "protected from a card effect, destroyed as a cost")
+
+    def _senet_switch(self, mode: int, code: int):
+        # Senet Switch (face-up) moves the first monster it is offered, in zone 2 (a second monster stands in zone 4,
+        # so it is not chosen). Zones 1 and 3 are free. A probe answers the activation by moving the monster in
+        # zone 4 into zone 1, the zone the modern card designated (the first free zone the standing answer
+        # picks). The modern effect then does nothing; the variant chooses at resolution and moves the monster
+        # to the zone that is still free.
+        setup = (
+            f"Debug.AddCard({code},0,0,LOCATION_SZONE,0,POS_FACEUP)\n"
+            f"local m=Debug.AddCard({GIANT_RAT},0,0,LOCATION_MZONE,2,POS_FACEUP_ATTACK)\n"
+            f"local x=Debug.AddCard({GIANT_RAT},0,0,LOCATION_MZONE,4,POS_FACEUP_ATTACK)\n"
+            "local moved=false\n"
+            "local block=Effect.GlobalEffect()\n"
+            "block:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+            "block:SetCode(EVENT_CHAINING)\n"
+            "block:SetOperation(function() if not moved then moved=true; Duel.MoveSequence(x,1) end end)\n"
+            "Duel.RegisterEffect(block,0)\n"
+            "local probe=Effect.GlobalEffect()\n"
+            "probe:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+            "probe:SetCode(EVENT_PHASE+PHASE_END)\n"
+            "probe:SetCountLimit(1)\n"
+            'probe:SetOperation(function() Debug.Message("SEQ "..m:GetSequence()) end)\n'
+            "Duel.RegisterEffect(probe,0)\n"
+        )
+        duel = run_scenario(setup, mode, idle=activate_capped(1))
+        return [int(text.split()[1]) for _kind, text in duel.log if text.startswith("SEQ ")]
+
+    @in_both_formats
+    def test_each_record_uses_the_modern_card_and_it_plays_as_the_ruling_says(self, mode):
+        for name, modern, variant in ROUND_037_COSMETIC:
+            with self.subTest(card=name):
+                self._lists(modern, variant)
+        with self.subTest(card="Imperial Custom"):
+            self._imperial_custom(mode)
+        with self.subTest(card="Senet Switch"):
+            modern = self._senet_switch(mode, SENET_SWITCH_MODERN)
+            self.assertEqual([2], modern, "the zone was designated at activation and is occupied: the monster stays")
+            variant = self._senet_switch(mode, SENET_SWITCH_VARIANT)
+            self.assertEqual([3], variant, "the variant chooses at resolution, so the same setup moves the monster")
 
 
 if __name__ == "__main__":  # pragma: no cover

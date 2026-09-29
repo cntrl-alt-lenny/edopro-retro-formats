@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v3 (LC5D-EN231, 2014-10-23), which the baseline implements (cdb text ratio 0.975, differing only by '1+' vs '1 or more'). Earlier transitions v0 (TDGS-EN042, 2008-09-02) -> v1 (DTP1-EN030, 2009-06-20) -> v2 (DT01-EN087, 2010-01-29) -> v3 are punctuation/PSCT only; v0 is the printing in force at the Edison snapshot and is behaviourally identical to v3. Trailing v4 -> v5 (BLAR-EN057, 2020-07-23) is GY / '1+' cosmetic. Secondary script differences that the erratum did not cause and that no source documents as an era ruling: the pre-errata spells its trigger condition inline (requires Goyo to be related to the battle and face-up) instead of aux.bdogcon (which instead checks STATUS_OPPO_BATTLE), and its target check calls bc:IsCanBeSpecialSummoned(e,0,tp,false,false) without the POS_FACEUP_DEFENSE argument the modern check passes. Recorded here rather than in the summary because they are implementation drift, not the documented behavioural difference."
+    "notes": "Chain starts at lineage v3 (LC5D-EN231, 2014-10-23), which the baseline implements (cdb text ratio 0.975, differing only by '1+' vs '1 or more'). Earlier transitions v0 (TDGS-EN042, 2008-09-02) -> v1 (DTP1-EN030, 2009-06-20) -> v2 (DT01-EN087, 2010-01-29) -> v3 are punctuation/PSCT only; v0 is the printing in force at the Edison snapshot and is behaviourally identical to v3. Trailing v4 -> v5 (BLAR-EN057, 2020-07-23) is GY / '1+' cosmetic. Secondary script differences that the erratum did not cause and that no source documents as an era ruling: the pre-errata spells its trigger condition inline (requires Goyo to be related to the battle and face-up) instead of aux.bdogcon (which instead checks STATUS_OPPO_BATTLE), and its target check calls bc:IsCanBeSpecialSummoned(e,0,tp,false,false) without the POS_FACEUP_DEFENSE argument the modern check passes. Recorded here rather than in the summary because they are implementation drift, not the documented behavioural difference.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Goyo Guardian). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
@@ -25,7 +25,8 @@
     "ignis-babelcdb",
     "yugipedia-set-pages",
     "edisonformat-functional-errata",
-    "konami-errata-announcements"
+    "konami-errata-announcements",
+    "konami-card-faq-2008-12-15-fh"
   ],
   "event": {
     "effective": {
@@ -58,8 +59,46 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-card-faq-2008-12-15-fh"
+    ],
+    "rulings_check": {
+      "difference": "Era: any Tuner is a legal Synchro Material ('1 Tuner + 1 or more non-Tuner monsters'); modern: the Tuner must be an EARTH Tuner.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d1: Era: any Tuner is a legal Synchro Material ('1 Tuner + 1 or more non-Tuner monsters'); modern: the Tuner must be an EARTH Tuner.",
+          "finding": "does-not-address",
+          "passage": "If \"Goyo Guardian\" destroys your monster that your opponent controls, you can Special Summon it from your Graveyard."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Goyo Guardian on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Goyo Guardian in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Goyo Guardian in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Goyo Guardian' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

@@ -5,50 +5,123 @@
     "passcode": 63394872,
     "name": "Senet Switch"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2022-08-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (TAMA-EN042, Tactical Masters)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Once per turn, during your Main Phase, you can move 1 monster on your side of the field to an adjacent (horizontal) unoccupied Monster Card Zone.",
+          "modern_text": "Once per turn: You can target 1 monster in your Main Monster Zone and choose 1 of its unused adjacent (horizontal) Monster Zones; move that target to the chosen adjacent zone.",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: Era Senet Switch designates the destination Monster Card Zone when the effect is activated and does nothing if that zone is filled before resolution; the pre-errata script instead picks any still-free adjacent zone at resolution (the modern script stores the zone at activation and aborts if it is filled). Modern text restricts the target to a monster in your Main Monster Zone; the era text says any monster on your side of the field. A period ruling in force says otherwise: Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15): \"If \"Ojama Trio\" is chained to the effect of \"Senet Switch\" so that the designated Monster Card Zone is now occupied, the effect of \"Senet Switch\" is not applied and the monster does not move.\" Konami's Official Rulebook Version 7.1: \"takes up 1 of your 5 Monster Card Zones.\" No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "konami-official-rulebook-v71-2010"
+          ],
+          "rulings_check": {
+            "difference": "Era Senet Switch designates the destination Monster Card Zone when the effect is activated and does nothing if that zone is filled before resolution; the pre-errata script instead picks any still-free adjacent zone at resolution (the modern script stores the zone at activation and aborts if it is filled). Modern text restricts the target to a monster in your Main Monster Zone; the era text says any monster on your side of the field.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: Era Senet Switch designates the destination Monster Card Zone when the effect is activated and does nothing if that zone is filled before resolution; the pre-errata script instead picks any still-fre…",
+                "finding": "contradicts",
+                "passage": "If \"Ojama Trio\" is chained to the effect of \"Senet Switch\" so that the designated Monster Card Zone is now occupied, the effect of \"Senet Switch\" is not applied and the monster does not move.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "d2: Modern text restricts the target to a monster in your Main Monster Zone; the era text says any monster on your side of the field.",
+                "finding": "contradicts",
+                "passage": "takes up 1 of your 5 Monster Card Zones.",
+                "in_force": "shown",
+                "in_force_basis": "Konami's Official Rulebook Version 7.1 (captured 2010-03-30) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Senet Switch on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Senet Switch in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Senet Switch in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Senet Switch' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
       "status": "complete",
-      "tested": false
+      "tested": false,
+      "reason": "Round 037 (2026-09-29): no generated card exists or is needed for this record. A period ruling in force says the era card played as the modern card does on every point the record claimed, so the modern implementation is used at the snapshots this record applies at."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v1, whose text the baseline's cdb entry matches exactly. v0 (CDIP-EN048, 2006-11-15) -> v1 adds only the '(horizontal)' parenthetical, so it precedes the baseline and is not recorded; v1 carries no printing - its caption is a web.archive.org capture of the Konami Card Database taken 2022-08-12 and explicitly labelled as prior to the TAMA release - which means v1 is the database text still in force immediately before the errata'd printing, and it is the text in force across both period snapshots. The Japanese table on the same errata page carries the matching erratum at DBTM-JP042 (Deck-Build Pack: Tactical Masters). This card is the dated analogue of Rampaging Rhynos and Storm Shooter in this batch: the same zone-move mechanism, but here the reformulated wording did reach an English printing, so the transition is dateable by set-release evidence."
+    "notes": "Chain starts at lineage v1, whose text the baseline's cdb entry matches exactly. v0 (CDIP-EN048, 2006-11-15) -> v1 adds only the '(horizontal)' parenthetical, so it precedes the baseline and is not recorded; v1 carries no printing - its caption is a web.archive.org capture of the Konami Card Database taken 2022-08-12 and explicitly labelled as prior to the TAMA release - which means v1 is the database text still in force immediately before the errata'd printing, and it is the text in force across both period snapshots. The Japanese table on the same errata page carries the matching erratum at DBTM-JP042 (Deck-Build Pack: Tactical Masters). This card is the dated analogue of Rampaging Rhynos and Storm Shooter in this batch: the same zone-move mechanism, but here the reformulated wording did reach an English printing, so the transition is dateable by set-release evidence.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Senet Switch). A period ruling in force contradicts every difference the transition claimed: Era Senet Switch designates the destination Monster Card Zone when the effect is activated and does nothing if that zone is filled before resolution; the pre-errata script instead picks any still-free adjacent zone at resolution (the modern script stores the zone at activation and aborts if it is filled). Contradicted by Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15): \"If \"Ojama Trio\" is chained to the effect of \"Senet Switch\" so that the designated Monster Card Zone is now occupied, the effect of \"Senet Switch\" is not applied and the monster does not move.\" Modern text restricts the target to a monster in your Main Monster Zone; the era text says any monster on your side of the field. Contradicted by Konami's Official Rulebook Version 7.1: \"takes up 1 of your 5 Monster Card Zones.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [event] d1 contradicted at Edison, contradicted at Tengu; d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: the destination zone is now chosen when the effect is activated ('choose 1 of its unused adjacent (horizontal) Monster Zones'), and the monster moved must be in your Main Monster Zone. The pre-errata script targets only the monster and calls tc:MoveAdjacent() at resolution, picking any still-free adjacent zone then; the modern script stores the chosen zone at target time (e:SetLabel(tc:SelectAdjacent())) and aborts at resolution if Duel.CheckLocation(tp,LOCATION_MZONE,seq) shows that zone has since been filled.\" Superseded coverage, kept verbatim: kind: \"reuse-upstream\"; historical_passcode: 63394882; historical_variant_passcodes: []; upstream: \"ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts\"; script: \"pre-errata/c63394882.lua\"."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
-  ],
-  "event": {
-    "effective": {
-      "date": "2022-08-25",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (TAMA-EN042, Tactical Masters)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "Once per turn, during your Main Phase, you can move 1 monster on your side of the field to an adjacent (horizontal) unoccupied Monster Card Zone.",
-    "modern_text": "Once per turn: You can target 1 monster in your Main Monster Zone and choose 1 of its unused adjacent (horizontal) Monster Zones; move that target to the chosen adjacent zone.",
-    "summary": "Functional erratum: the destination zone is now chosen when the effect is activated ('choose 1 of its unused adjacent (horizontal) Monster Zones'), and the monster moved must be in your Main Monster Zone. The pre-errata script targets only the monster and calls tc:MoveAdjacent() at resolution, picking any still-free adjacent zone then; the modern script stores the chosen zone at target time (e:SetLabel(tc:SelectAdjacent())) and aborts at resolution if Duel.CheckLocation(tp,LOCATION_MZONE,seq) shows that zone has since been filled.",
-    "sources": [
-      "yugipedia-card-errata",
-      "ignis-cardscripts",
-      "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
-  },
-  "coverage": {
-    "kind": "reuse-upstream",
-    "historical_passcode": 63394882,
-    "historical_variant_passcodes": [],
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c63394882.lua"
-  }
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-official-rulebook-v71-2010"
+  ]
 }

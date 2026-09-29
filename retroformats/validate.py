@@ -40,6 +40,9 @@ from .model import (
     PRODUCT_KINDS,
     REGION_SCOPE_BITS,
     RESERVED_PASSCODE_RANGE,
+    ERRATUM_RULINGS_GATE_EXEMPT,
+    ERRATUM_RULINGS_GATE_FORMATS,
+    NEW,
     RULINGS_FINDINGS,
     RULINGS_IN_FORCE,
     RULINGS_LATER_REPLACEMENT_NONE,
@@ -533,6 +536,7 @@ class Validator:
         self._validate_v2_states(erratum)
         self._validate_v2_implementation_metadata(erratum)
         self._validate_v2_reference_identities(erratum)
+        self._check_erratum_rulings(erratum)
 
         review = erratum.raw.get("review") or {}
         if review and review.get("status") not in ("imported", "reviewed"):
@@ -579,6 +583,61 @@ class Validator:
                 "formats whose snapshot could straddle it must adjudicate explicitly",
             )
         self._check_sources(erratum.sources, erratum.path, None, "erratum")
+
+    def _check_erratum_rulings(self, erratum: ErratumV2) -> None:
+        """The rulings gate on errata records (round 037; docs/errata.md, "The rulings gate on
+        errata records"): a `functional` transition that applies at Edison's or Tengu's snapshot
+        must record which period rulings sources were searched for the difference it claims, and
+        what each said: `rulings_check` on the transition, the same shape and rules as a generated
+        card's (`_check_rulings_body`, codes under `erratum.`).
+
+        A transition applies at a snapshot when its event is not yet in effect there (OLD) or
+        cannot be placed relative to it (AMBIGUOUS): the era card is then the one the format
+        plays. Not required: a transition of a record that a generated card implements (the
+        card's own `rulings_check` covers it), and the three transitions in
+        `ERRATUM_RULINGS_GATE_EXEMPT` (rounds 035 and 036 recorded their rulings on the
+        transition's sources, before the check existed). Citing a ruling source does not excuse a
+        transition: a ruling cited for another point does not say which rulings were searched for
+        this one. Every transition that does carry a check is validated, whatever its kind.
+
+        - `erratum.rulings-check-missing`: a transition in scope with no check.
+        - `erratum.rulings-check-malformed`, `erratum.contradicting-ruling-unaccepted`,
+          `erratum.contradicting-ruling-range-unresolved`, `erratum.decision-*`: as for a
+          generated card, for a transition that still claims a difference (functional or ruling).
+          A cosmetic transition may carry the check that made it cosmetic: its contradicting
+          findings are that evidence, and raise neither finding."""
+        snapshots = [
+            fmt.snapshot_date
+            for format_id in ERRATUM_RULINGS_GATE_FORMATS
+            if (fmt := self.repo.formats.get(format_id)) is not None
+        ]
+        linked = any(card.erratum == erratum.id for card in self.repo.custom_cards.values())
+        for event_id, event in erratum.events.items():
+            for index, transition in enumerate(event.transitions):
+                subject = f"events.{event_id}.transitions[{index}]"
+                check = transition.raw.get("rulings_check")
+                if check is not None:
+                    self._check_rulings_body(
+                        check,
+                        erratum.path,
+                        "erratum",
+                        f"{subject} rulings_check",
+                        claims_a_difference=transition.kind in ("functional", "ruling"),
+                    )
+                    continue
+                if transition.kind != "functional" or linked:
+                    continue
+                if not any(event.state_at(snapshot) != NEW for snapshot in snapshots):
+                    continue
+                if (erratum.id, event_id) in ERRATUM_RULINGS_GATE_EXEMPT:
+                    continue
+                self.error(
+                    "erratum.rulings-check-missing",
+                    erratum.path,
+                    f"{subject} is a functional transition that applies at Edison's or Tengu's snapshot "
+                    "and records no rulings_check: which period rulings sources were searched for the "
+                    "difference it claims, and what each said (docs/errata.md)",
+                )
 
     def _validate_v2_event(self, erratum: ErratumV2, event_id: str, event) -> list[str]:
         """One event's chronology and transitions; returns its transitions'
@@ -2826,7 +2885,9 @@ class Validator:
                 "the script's header names an upstream but the record says the script is original",
             )
 
-    def _check_decision_entry(self, entry: dict[str, Any], label: str, where: Path) -> None:
+    def _check_decision_entry(
+        self, entry: dict[str, Any], label: str, where: Path, prefix: str = "custom-card", subject: str = "rulings_check"
+    ) -> None:
         """An entry `in_force: by-decision` (round 036, part A): the source must be a UDE-era
         ruling, the entry must say no later Konami document replaces it, and it must name the
         Konami documents checked. Each of those is its own code (see `_check_rulings`)."""
@@ -2834,36 +2895,36 @@ class Validator:
         source = self.repo.resolve_source(source_id) if isinstance(source_id, str) else None
         if source is not None and source.raw.get("ruling_class") != "ude-era-ruling":
             self.error(
-                "custom-card.decision-source-not-ude",
+                f"{prefix}.decision-source-not-ude",
                 where,
-                f"rulings_check {label}: {source_id!r} is not registered as a UDE-era ruling "
+                f"{subject} {label}: {source_id!r} is not registered as a UDE-era ruling "
                 "(ruling_class 'ude-era-ruling' in data/sources.json); the owner's decision covers only "
                 "UDE card FAQ entries and Netrep answers",
             )
         checked = entry.get("later_documents_checked")
         if entry.get("later_konami_replacement") != RULINGS_LATER_REPLACEMENT_NONE:
             self.error(
-                "custom-card.decision-later-documents-missing",
+                f"{prefix}.decision-later-documents-missing",
                 where,
-                f"rulings_check {label}: a ruling in force by decision must say that no later Konami "
+                f"{subject} {label}: a ruling in force by decision must say that no later Konami "
                 f"document replaces it (later_konami_replacement: {RULINGS_LATER_REPLACEMENT_NONE!r})",
             )
         if not isinstance(checked, list) or not checked or not all(isinstance(c, str) and c.strip() for c in checked):
             self.error(
-                "custom-card.decision-later-documents-missing",
+                f"{prefix}.decision-later-documents-missing",
                 where,
-                f"rulings_check {label}: a ruling in force by decision must name the later Konami documents "
+                f"{subject} {label}: a ruling in force by decision must name the later Konami documents "
                 "checked (later_documents_checked: a non-empty list of source ids)",
             )
             return
-        self._check_sources(checked, where, None, f"rulings_check {label} later_documents_checked")
+        self._check_sources(checked, where, None, f"{subject} {label} later_documents_checked")
         for document_id in checked:
             document = self.repo.resolve_source(document_id)
             if document is not None and document.raw.get("ruling_class") != "konami-document":
                 self.error(
-                    "custom-card.decision-document-not-konami",
+                    f"{prefix}.decision-document-not-konami",
                     where,
-                    f"rulings_check {label}: {document_id!r} is not registered as a Konami document "
+                    f"{subject} {label}: {document_id!r} is not registered as a Konami document "
                     "(ruling_class 'konami-document' in data/sources.json); only a later Konami document "
                     "can replace a UDE-era ruling",
                 )
@@ -2913,8 +2974,26 @@ class Validator:
                 "found about the difference its script implements (rulings_check; docs/errata.md)",
             )
             return
+        self._check_rulings_body(check, where)
+
+    def _check_rulings_body(
+        self,
+        check: Any,
+        where: Path,
+        prefix: str = "custom-card",
+        subject: str = "rulings_check",
+        claims_a_difference: bool = True,
+    ) -> None:
+        """The shape of one `rulings_check` and what its findings oblige, shared by the generated
+        cards (`custom-card.*`, above) and the errata records' transitions (`erratum.*`, round 037,
+        `_check_erratum_rulings`): the same finding values, `in_force` values, decision rules and
+        owner_decision, under the code prefix of whichever record carries the check.
+
+        `claims_a_difference` is False for a cosmetic transition of an erratum record: it claims no
+        difference, so a contradicting finding is the evidence that made it cosmetic, not a claim a
+        ruling contradicts, and asks for no owner decision."""
         if not isinstance(check, dict):
-            self.error("custom-card.rulings-check-malformed", where, "rulings_check must be an object")
+            self.error(f"{prefix}.rulings-check-malformed", where, f"{subject} must be an object")
             return
 
         def text_ok(value: Any) -> bool:
@@ -2943,7 +3022,7 @@ class Validator:
             if not text_ok(source):
                 problems.append(f"{label}.source must be a source id from data/sources.json")
             else:
-                self._check_sources([source], where, None, f"rulings_check {label}")
+                self._check_sources([source], where, None, f"{subject} {label}")
             if not text_ok(entry.get("looked_for")):
                 problems.append(f"{label}.looked_for must say what was searched for in that source")
             finding = entry.get("finding")
@@ -2968,11 +3047,11 @@ class Validator:
                         f"{label}.in_force is 'by-decision': in_force_basis must name the owner's decision "
                         "(docs/state.md, \"Period rulings\") that makes the ruling count"
                     )
-                self._check_decision_entry(entry, label, where)
+                self._check_decision_entry(entry, label, where, prefix, subject)
             if finding == "contradicts" and in_force in RULINGS_IN_FORCE:
                 contradictions.append((label, in_force))
         for problem in problems:
-            self.error("custom-card.rulings-check-malformed", where, problem)
+            self.error(f"{prefix}.rulings-check-malformed", where, problem)
 
         decision = check.get("owner_decision")
         accepted = (
@@ -2983,21 +3062,21 @@ class Validator:
             and text_ok(decision.get("decision"))
             and text_ok(decision.get("recorded_in"))
         )
-        for label, in_force in contradictions:
+        for label, in_force in contradictions if claims_a_difference else ():
             if in_force in ("shown", "by-decision") and not accepted:
                 self.error(
-                    "custom-card.contradicting-ruling-unaccepted",
+                    f"{prefix}.contradicting-ruling-unaccepted",
                     where,
-                    f"rulings_check {label} contradicts the script's difference and is "
+                    f"{subject} {label} contradicts the script's difference and is "
                     f"{'shown to have been in force' if in_force == 'shown' else 'in force by the owner decision on which rulings count'}"
                     "; correct the card, or name the owner's decision accepting it in owner_decision "
                     "{date, decision, recorded_in}",
                 )
             elif in_force == "not-shown":
                 self.warn(
-                    "custom-card.contradicting-ruling-range-unresolved",
+                    f"{prefix}.contradicting-ruling-range-unresolved",
                     where,
-                    f"rulings_check {label} contradicts the script's difference; whether it held at the "
+                    f"{subject} {label} contradicts the script's difference; whether it held at the "
                     "snapshots is not shown. A tracked question for the owner",
                 )
 

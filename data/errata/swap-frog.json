@@ -20,13 +20,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; the gap is real. Edison-era text is v0 (SOVR-EN034, 2009-11-17), which is 158 days before the Edison snapshot (2010-04-24); the erratum is 2016-11-17, so no period snapshot reaches it. Trailing cosmetic transition not recorded as a change: v1 -> v2 (DUOV-EN063, 2020-03-19) only reorders 'Aqua-Type WATER' to 'WATER Aqua' and moves to GY wording; modern cdb text matches v2 exactly (ratio 1.0). I deliberately did NOT record the once-per-turn parenthetical as the functional element, because edisonformat-functional-errata describes the era behaviour as already granting only one extra Normal Summon however many copies resolve - i.e. the parenthetical codifies the era ruling, and treating it as a new restriction would have overstated the erratum. The two differences that do survive that test are the face-up requirement on the field-send and the removal of the 'Frog the Jam' exclusion; both are narrow but concrete in a Frog deck, which is a real Edison archetype."
+    "notes": "upstream_implementations is empty; the gap is real. Edison-era text is v0 (SOVR-EN034, 2009-11-17), which is 158 days before the Edison snapshot (2010-04-24); the erratum is 2016-11-17, so no period snapshot reaches it. Trailing cosmetic transition not recorded as a change: v1 -> v2 (DUOV-EN063, 2020-03-19) only reorders 'Aqua-Type WATER' to 'WATER Aqua' and moves to GY wording; modern cdb text matches v2 exactly (ratio 1.0). I deliberately did NOT record the once-per-turn parenthetical as the functional element, because edisonformat-functional-errata describes the era behaviour as already granting only one extra Normal Summon however many copies resolve - i.e. the parenthetical codifies the era ruling, and treating it as a new restriction would have overstated the erratum. The two differences that do survive that test are the face-up requirement on the field-send and the removal of the 'Frog the Jam' exclusion; both are narrow but concrete in a Frog deck, which is a real Edison archetype.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Swap Frog). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-babelcdb",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-stardust-overdrive-rulings-2009",
+    "konami-card-faq-2008-12-16-lo",
+    "ude-card-faq-2009-02-26-uz"
   ],
   "event": {
     "effective": {
@@ -44,8 +47,78 @@
       "yugipedia-card-errata",
       "yugipedia-set-pages",
       "ignis-babelcdb",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-stardust-overdrive-rulings-2009",
+      "konami-card-faq-2008-12-16-lo",
+      "ude-card-faq-2009-02-26-uz"
+    ],
+    "rulings_check": {
+      "difference": "Era: the Summon-trigger mill may send a face-down Level 2 or lower Aqua WATER monster from your side of the field to the Graveyard; modern: only face-up from the field. Era: the extra Normal Summon cannot be spent on \"Frog the Jam\" (exclusion is \"Swap Frog\" or \"Frog the Jam\"); modern: excludes only \"Swap Frog\", so the modern card may grant that Summon to \"Frog the Jam\".",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d1: Era: the Summon-trigger mill may send a face-down Level 2 or lower Aqua WATER monster from your side of the field to the Graveyard; modern: only face-up from the field.",
+          "finding": "does-not-address",
+          "passage": "Sending a monster from your Deck to the Graveyard does not target."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: Era: the Summon-trigger mill may send a face-down Level 2 or lower Aqua WATER monster from your side of the field to the Graveyard; modern: only face-up from the field.",
+          "finding": "does-not-address",
+          "passage": "You can send a face-down Beast, Beast-Warrior, or Winged Beast-Type monster to the Graveyard for \"Manticore of Darkness\"' effect."
+        },
+        {
+          "source": "ude-card-faq-2009-02-26-uz",
+          "looked_for": "d1: Era: the Summon-trigger mill may send a face-down Level 2 or lower Aqua WATER monster from your side of the field to the Graveyard; modern: only face-up from the field.",
+          "finding": "does-not-address",
+          "passage": "You cannot send a face-down FIRE monster to the Graveyard to activate \"Ultimate Baseball Kid's effect\"."
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d2: Era: the extra Normal Summon cannot be spent on \"Frog the Jam\" (exclusion is \"Swap Frog\" or \"Frog the Jam\"); modern: excludes only \"Swap Frog\", so the modern card may grant that Summon to \"Frog the J…",
+          "finding": "does-not-address",
+          "passage": "You do not Normal Summon at the resolution of \"Swap Frog's\" effect. It allows you to Normal Summon a \"Frog\" monster at any time you would be able to Normal Summon a monster during that turn."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "an entry for Swap Frog and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Swap Frog on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Swap Frog in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Swap Frog' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "round 036's candidate difference, a second Swap Frog copy: the ruling on more than one copy (it matches the modern text's '(You can only gain this effect once per turn.)', so no difference between the era card and the modern card is shown and no transition is added)",
+          "finding": "does-not-address",
+          "passage": "If you activate the effect of more than 1 \"Swap Frog,\" you can only Normal Summon 1 time in addition to your regular Normal Summon or Set."
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "the same entry on Skill Drain and on the Normal Summon at resolution (no bearing on the claimed differences)",
+          "finding": "does-not-address",
+          "passage": "You do not Normal Summon at the resolution of \"Swap Frog's\" effect. It allows you to Normal Summon a \"Frog\" monster at any time you would be able to Normal Summon a monster during that turn."
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

@@ -12,7 +12,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In Edison a Volcanic player who activates Blaze Accelerator has already sent Volcanic Shell (or another small Pyro) to the Graveyard as a cost even if the destruction is answered, and the destroyed monster is not chosen until resolution; the shipped card targets on activation and keeps the Pyro monster in hand whenever the effect fails to resolve."
+        "behavioural_impact": "In Edison a Volcanic player who activates Blaze Accelerator has already sent Volcanic Shell (or another small Pyro) to the Graveyard as a cost even if the destruction is answered, and the destroyed monster is not chosen until resolution; the shipped card targets on activation and keeps the Pyro monster in hand whenever the effect fails to resolve. Round 037 (2026-09-29): withdrawn as a difference on period rulings: The era card pays the hand-send of the Pyro-Type monster as a cost at activation (before any response); the modern card performs the send on resolution. The era card names no target and the destroyed monster is chosen at resolution; the modern card targets 1 monster when it is activated. (review notes)."
       }
     }
   ],
@@ -20,11 +20,12 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Chain starts at v0 (FOTB-EN040, 2007-05-16), the text in force at the 2010-04-24 Edison snapshot (the card postdates the GOAT snapshot); the next printing, SDOK-EN025, is 2013-02-08. Trailing v1 -> v2 (SGX1-ENH14, 2022-03-17) is Pyro-Type->Pyro, Graveyard->GY and 'You cannot declare an attack' -> 'Your monsters cannot attack', which is the pinned cdb text and is cosmetic. Caveat on the targeting half of the call: the instructions require a script diff (EFFECT_FLAG_CARD_TARGET) before treating a targeting difference as functional, and no script diff exists for this card. The verdict here does not rest on a select->target rewording - the FOTB text contains no selection or targeting language at all, and the cost-versus-resolution placement of the hand-send is independently visible in the old 'to' construction versus the PSCT semicolon. No entry for this card in edison-functional-errata.md."
+    "notes": "upstream_implementations is empty. Chain starts at v0 (FOTB-EN040, 2007-05-16), the text in force at the 2010-04-24 Edison snapshot (the card postdates the GOAT snapshot); the next printing, SDOK-EN025, is 2013-02-08. Trailing v1 -> v2 (SGX1-ENH14, 2022-03-17) is Pyro-Type->Pyro, Graveyard->GY and 'You cannot declare an attack' -> 'Your monsters cannot attack', which is the pinned cdb text and is cosmetic. Caveat on the targeting half of the call: the instructions require a script diff (EFFECT_FLAG_CARD_TARGET) before treating a targeting difference as functional, and no script diff exists for this card. The verdict here does not rest on a select->target rewording - the FOTB text contains no selection or targeting language at all, and the cost-versus-resolution placement of the hand-send is independently visible in the old 'to' construction versus the PSCT semicolon. No entry for this card in edison-functional-errata.md.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Blaze Accelerator). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: The era card pays the hand-send of the Pyro-Type monster as a cost at activation (before any response); the modern card performs the send on resolution. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"Sending 1 Pyro-Type monster with 500 or less ATK to the Graveyard is part of this card's effect. It is not a cost.\" Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"Sending 1 Pyro-Type Monster from your hand to the Graveyard is not a cost. The Pyro-Type Monster is sent to the Graveyard when \"Blaze Accelerator's\" effect resolves.\" The era card names no target and the destroyed monster is chosen at resolution; the modern card targets 1 monster when it is activated. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"\"Blaze Accelerator's\" effect targets.\" The transition stays functional on what remains, d3. Verdicts: [event] d3 unresolved (sources conflict) at Edison, unresolved (sources conflict) at Tengu; d1 contradicted at Edison, contradicted at Tengu; d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: 'You can send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard to destroy 1 monster your opponent controls' is restructured into 'You can target 1 monster your opponent controls; send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard, and if you do, destroy that target.' The old 'send ... to destroy ...' construction pays the hand-send as a cost at activation and names no target; the PSCT text locks a target on activation and moves the send into the resolution, so if the target leaves the field first the modern card sends nothing while the period card has already put the Pyro monster in the Graveyard.\""
   },
   "sources": [
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-16-ac"
   ],
   "event": {
     "effective": {
@@ -37,11 +38,84 @@
     "axis": null,
     "historical_text": "You can send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard to destroy 1 monster your opponent controls, but you cannot declare an attack during this turn if you do.",
     "modern_text": "You can target 1 monster your opponent controls; send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard, and if you do, destroy that target. You cannot declare an attack during the turn you activate this effect.",
-    "summary": "Functional erratum: 'You can send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard to destroy 1 monster your opponent controls' is restructured into 'You can target 1 monster your opponent controls; send 1 Pyro-Type monster with 500 or less ATK from your hand to the Graveyard, and if you do, destroy that target.' The old 'send ... to destroy ...' construction pays the hand-send as a cost at activation and names no target; the PSCT text locks a target on activation and moves the send into the resolution, so if the target leaves the field first the modern card sends nothing while the period card has already put the Pyro monster in the Graveyard.",
+    "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d3) If the opposing monster leaves the field in response, the era card still puts the Pyro-Type monster into the Graveyard; the modern card (per the record) sends nothing because the target is gone. Withdrawn as a difference: The era card pays the hand-send of the Pyro-Type monster as a cost at activation (before any response); the modern card performs the send on resolution. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"Sending 1 Pyro-Type monster with 500 or less ATK to the Graveyard is part of this card's effect. It is not a cost.\" The era card names no target and the destroyed monster is chosen at resolution; the modern card targets 1 monster when it is activated. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"\"Blaze Accelerator's\" effect targets.\"",
     "sources": [
       "yugipedia-card-errata",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-16-ac"
+    ],
+    "rulings_check": {
+      "difference": "If the opposing monster leaves the field in response, the era card still puts the Pyro-Type monster into the Graveyard; the modern card (per the record) sends nothing because the target is gone.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: If the opposing monster leaves the field in response, the era card still puts the Pyro-Type monster into the Graveyard; the modern card (per the record) sends nothing because the target is gone.",
+          "finding": "supports",
+          "passage": "If an effect is chained that removes the targeted monster from your opponent's side of the field, you must still send the Pyro-Type Monster to the Graveyard.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: If the opposing monster leaves the field in response, the era card still puts the Pyro-Type monster into the Graveyard; the modern card (per the record) sends nothing because the target is gone.",
+          "finding": "contradicts",
+          "passage": "If you activate \"Blaze Accelerator's\" effect and an effect is chained that removes the selected target from the field, \"Blaze Accelerator's\" effect disappears, but you still cannot declare an attack during the turn.",
+          "in_force": "not-shown",
+          "in_force_basis": "another period source in the same FAQ entry says the opposite (see the record's review notes); which governs is the owner's call."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Blaze Accelerator on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Blaze Accelerator in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Blaze Accelerator in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Blaze Accelerator' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

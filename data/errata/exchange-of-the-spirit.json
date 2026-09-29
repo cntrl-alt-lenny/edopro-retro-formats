@@ -17,14 +17,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v2 (DLG1-EN100, 2008-11-21), which the baseline implements (cdb text is a PSCT-style paraphrase of v2, ratio 0.937 - it splits the LP payment out as a cost the way v2's text does). Earlier transitions v0 (SP1-EN004, 2005-11-05) -> v1 (RP01-EN099) -> v2 move the 1000 LP payment from the activation clause into a separate cost sentence and drop the 'put it on the Deck Zone' procedure wording; behaviourally identical, so not recorded. Trailing v3 -> v4 (MAMA-EN032, 2022-11-03) is Graveyard->GY only. Minor implementation detail with no observable effect: the modern operation swaps in turn-player order (Duel.GetTurnPlayer first), the pre-errata swaps controller-first. Data note: the packet's Retro Pack entry carries a tcg-na date of 2024-08-23 alongside tcg-eu 2008-07-08, which looks wrong, but v1 is not used to date anything here."
+    "notes": "Chain starts at lineage v2 (DLG1-EN100, 2008-11-21), which the baseline implements (cdb text is a PSCT-style paraphrase of v2, ratio 0.937 - it splits the LP payment out as a cost the way v2's text does). Earlier transitions v0 (SP1-EN004, 2005-11-05) -> v1 (RP01-EN099) -> v2 move the 1000 LP payment from the activation clause into a separate cost sentence and drop the 'put it on the Deck Zone' procedure wording; behaviourally identical, so not recorded. Trailing v3 -> v4 (MAMA-EN032, 2022-11-03) is Graveyard->GY only. Minor implementation detail with no observable effect: the modern operation swaps in turn-player order (Duel.GetTurnPlayer first), the pre-errata swaps controller-first. Data note: the packet's Retro Pack entry carries a tcg-na date of 2024-08-23 alongside tcg-eu 2008-07-08, which looks wrong, but v1 is not used to date anything here.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Exchange of the Spirit). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages",
-    "konami-errata-announcements"
+    "konami-errata-announcements",
+    "konami-card-faq-2008-12-15-de"
   ],
   "event": {
     "effective": {
@@ -62,8 +63,106 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-15-de"
+    ],
+    "rulings_check": {
+      "difference": "Era: the card only needs 15 or more cards in YOUR Graveyard (the opponent's Graveyard may have any number, even 0); modern: both players need 15 or more cards in their Graveyards. Era: no once-per-Duel limit (a second copy can be activated later in the same Duel); modern: only 1 'Exchange of the Spirit' can be activated per Duel.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "d1: Era: the card only needs 15 or more cards in YOUR Graveyard (the opponent's Graveyard may have any number, even 0); modern: both players need 15 or more cards in their Graveyards.",
+          "finding": "supports",
+          "passage": "You need 15 cards in your Graveyard to activate \"Exchange of the Spirit\".",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "d1: Era: the card only needs 15 or more cards in YOUR Graveyard (the opponent's Graveyard may have any number, even 0); modern: both players need 15 or more cards in their Graveyards.",
+          "finding": "supports",
+          "passage": "Your opponent can have any number of cards in their Graveyard when you activate \"Exchange of the Spirit\", including 0.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Exchange of the Spirit on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Exchange of the Spirit in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Exchange of the Spirit in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Exchange of the Spirit' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

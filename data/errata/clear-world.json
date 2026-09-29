@@ -17,13 +17,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at v1 (LCGX-EN217, 2011-10-04), which the baseline implements exactly (ratio 1.0). v0 (SOVR-EN099, 2009-11-17) -> v1 is the PSCT formalisation of the same mandatory Trigger Effects, so the Edison-era printing (v0, in force from 2009-11-17) behaves as the baseline implements. The 'Once per turn' wording added at v2 has no script counterpart - both scripts already apply SetCountLimit(1) to the End Phase pay-500-or-destroy maintenance - so the recorded behavioural difference is the Trigger-to-continuous and targeting change. Upstream also ships 511000306 'Clear World (VG)', the video-game version with materially different text ('You cannot activate Spell Cards'; 'Once per turn, during your turn: Destroy 1 monster you control'; DARK stops all attacks rather than only at 2+ monsters) - not a TCG historical version, excluded. Remaining modern-only code (the fid / STATUS_COPYING_EFFECT guards and the EFFECT_TYPE_SINGLE marker effect) is upstream robustness for effect-copying, not an erratum. Card data identical between 33900658 and 33900648."
+    "notes": "Chain starts at v1 (LCGX-EN217, 2011-10-04), which the baseline implements exactly (ratio 1.0). v0 (SOVR-EN099, 2009-11-17) -> v1 is the PSCT formalisation of the same mandatory Trigger Effects, so the Edison-era printing (v0, in force from 2009-11-17) behaves as the baseline implements. The 'Once per turn' wording added at v2 has no script counterpart - both scripts already apply SetCountLimit(1) to the End Phase pay-500-or-destroy maintenance - so the recorded behavioural difference is the Trigger-to-continuous and targeting change. Upstream also ships 511000306 'Clear World (VG)', the video-game version with materially different text ('You cannot activate Spell Cards'; 'Once per turn, during your turn: Destroy 1 monster you control'; DARK stops all attacks rather than only at 2+ monsters) - not a TCG historical version, excluded. Remaining modern-only code (the fid / STATUS_COPYING_EFFECT guards and the EFFECT_TYPE_SINGLE marker effect) is upstream robustness for effect-copying, not an erratum. Card data identical between 33900658 and 33900648.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Clear World). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-stardust-overdrive-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -41,8 +42,70 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-stardust-overdrive-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "Era: the EARTH, WATER and FIRE penalties are Trigger Effects that each start their own Chain (so they can be responded to or negated, and resolve without effect if the player is unaffected); modern: continuous effects that start no Chain. Era: the EARTH penalty targets the Defense Position monster when it is put on the Chain ('Target 1 face-up Defense Position monster you control'); modern: no target, the monster is chosen on resolution.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d1: Era: the EARTH, WATER and FIRE penalties are Trigger Effects that each start their own Chain (so they can be responded to or negated, and resolve without effect if the player is unaffected); modern:…",
+          "finding": "supports",
+          "passage": "The EARTH, FIRE, and WATER effects of \"Clear World\" each start their own Chain. You do not form a single Chain with all 3 effects.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Stardust Overdrive sneak peek card rulings (compiled 2009-10-29) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d1: Era: the EARTH, WATER and FIRE penalties are Trigger Effects that each start their own Chain (so they can be responded to or negated, and resolve without effect if the player is unaffected); modern:…",
+          "finding": "supports",
+          "passage": "The LIGHT, DARK, and WIND effects of \"Clear World\" do not start a Chain.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Stardust Overdrive sneak peek card rulings (compiled 2009-10-29) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d1: Era: the EARTH, WATER and FIRE penalties are Trigger Effects that each start their own Chain (so they can be responded to or negated, and resolve without effect if the player is unaffected); modern:…",
+          "finding": "supports",
+          "passage": "If you control \"Clear Vice Dragon\" and any EARTH, FIRE, or WATER monsters, the effect of \"Clear World\" will still start a Chain but it will resolve without effect.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Stardust Overdrive sneak peek card rulings (compiled 2009-10-29) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-stardust-overdrive-rulings-2009",
+          "looked_for": "d2: Era: the EARTH penalty targets the Defense Position monster when it is put on the Chain ('Target 1 face-up Defense Position monster you control'); modern: no target, the monster is chosen on resoluti…",
+          "finding": "does-not-address",
+          "passage": "●EARTH: During your Standby Phase, destroy 1 face-up Defense Position monster you control."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "an entry for Clear World and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Clear World on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Clear World in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Clear World' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

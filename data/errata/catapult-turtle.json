@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "The pre-errata cdb text matches lineage v5 (LCYW-EN019, 2012-09-29) exactly, so the recorded chain starts there; the earlier transitions v0 (MRD-075, 2002) through v4 (DPYG-EN006, 2009) are wording modernisations of the same Tribute-for-half-ATK effect and predate the baseline implementation, so they are not recorded as changes. One further script difference is NOT text-driven and is not recorded as its own change: the modern script gates the Release cost on s.cfilter (c:GetAttack()>0) while the pre-errata script passes nil, so the historical implementation permits Tributing a 0-ATK monster for 0 damage. No source in the packet dates that refinement; it is carried by the baseline implementation, which every pre-2014-06-27 snapshot selects anyway, so it does not need its own (blocking) unresolved-chronology entry. The second upstream code 511004015 is 'Catapult Turtle (Anime)' - a different card with three anime-only effects - and is excluded rather than folded in as an artwork variant."
+    "notes": "The pre-errata cdb text matches lineage v5 (LCYW-EN019, 2012-09-29) exactly, so the recorded chain starts there; the earlier transitions v0 (MRD-075, 2002) through v4 (DPYG-EN006, 2009) are wording modernisations of the same Tribute-for-half-ATK effect and predate the baseline implementation, so they are not recorded as changes. One further script difference is NOT text-driven and is not recorded as its own change: the modern script gates the Release cost on s.cfilter (c:GetAttack()>0) while the pre-errata script passes nil, so the historical implementation permits Tributing a 0-ATK monster for 0 damage. No source in the packet dates that refinement; it is carried by the baseline implementation, which every pre-2014-06-27 snapshot selects anyway, so it does not need its own (blocking) unresolved-chronology entry. The second upstream code 511004015 is 'Catapult Turtle (Anime)' - a different card with three anime-only effects - and is excluded rather than folded in as an artwork variant.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Catapult Turtle). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
@@ -25,7 +25,11 @@
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-rulebook-2008-v70",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v72-2011-dragunity"
   ],
   "event": {
     "effective": {
@@ -44,8 +48,62 @@
       "yugipedia-set-pages",
       "ignis-babelcdb",
       "ignis-cardscripts",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-card-faq-2008-12-16-ac",
+      "konami-rulebook-2008-v70",
+      "konami-official-rulebook-v71-2010",
+      "konami-official-rulebook-v72-2011-dragunity"
+    ],
+    "rulings_check": {
+      "difference": "Era: the Tribute-for-damage Ignition effect has no use limit, so it can be activated repeatedly in a turn as long as a monster can be Tributed each time; modern: hard once per turn.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: Era: the Tribute-for-damage Ignition effect has no use limit, so it can be activated repeatedly in a turn as long as a monster can be Tributed each time; modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "Tributing 1 monster is a cost. This effect is an Ignition Effect."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Era: the Tribute-for-damage Ignition effect has no use limit, so it can be activated repeatedly in a turn as long as a monster can be Tributed each time; modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Era: the Tribute-for-damage Ignition effect has no use limit, so it can be activated repeatedly in a turn as long as a monster can be Tributed each time; modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "or Effect Monster Cards as many times as you want during this"
+        },
+        {
+          "source": "konami-official-rulebook-v72-2011-dragunity",
+          "looked_for": "d1: Era: the Tribute-for-damage Ignition effect has no use limit, so it can be activated repeatedly in a turn as long as a monster can be Tributed each time; modern: hard once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Catapult Turtle on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Catapult Turtle in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Catapult Turtle in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Catapult Turtle' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

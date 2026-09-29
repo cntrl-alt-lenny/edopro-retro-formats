@@ -18,7 +18,13 @@ from retroformats.model import RESERVED_PASSCODE_RANGE, Coverage, ErratumV2, Poo
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 
-from .helpers import ROUND_031_GENERATED, ROUND_036_ADDED, ROUND_036_RETIRED, TENGU_GENERATED
+from .helpers import (
+    ROUND_031_GENERATED,
+    ROUND_036_ADDED,
+    ROUND_036_RETIRED,
+    ROUND_037_COSMETIC_RECORDS,
+    TENGU_GENERATED,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -170,10 +176,14 @@ class TenguResearchGateTest(unittest.TestCase):
         # modern-correct (Goddess of Whim, Green Baboon, Dark Master - Zorc and the five strict-nomi
         # cards): 43 modern.
         modern = sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate)
-        self.assertEqual(43, modern)
-        self.assertEqual(35, modern - 8)
-        self.assertEqual(33, modern - 8 - 2)
-        self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
+        # Round 037: seven more (five cosmetic-only records, and Imperial Custom and Senet Switch, which
+        # leave reuse-upstream): 50 modern.
+        self.assertEqual(50, modern)
+        self.assertEqual(43, modern - 7)
+        self.assertEqual(35, modern - 7 - 8)
+        self.assertEqual(33, modern - 7 - 8 - 2)
+        self.assertEqual(50, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
+        self.assertEqual(52, 2 + sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
         # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their
         # sum. Round 035 took three of the six back out (Rise and Malefic are modern-correct,
         # Soul Rope is a known gap again). Round 036: six known gaps are modern-correct (Zorc and
@@ -181,14 +191,20 @@ class TenguResearchGateTest(unittest.TestCase):
         # custom-script for modern-correct: 22 known gaps and 6 custom-script records.
         known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
         custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
-        self.assertEqual((22, 6), (known_gap, custom_script))
-        self.assertEqual((33, 3), (known_gap + 6 + 5, custom_script - 5 + 2))
-        self.assertEqual((32, 6), (known_gap + 6 + 5 - 1, custom_script - 5 + 2 + 3))
-        self.assertEqual(38, known_gap + 6 + 5 + (custom_script - 5 + 2) + 2)
-        self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
-        self.assertEqual(126, 33 + 52 + 38 + 3)
-        self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
-        self.assertEqual(9, sum(not s.modern_is_possible for s in ambiguous))
+        # Round 037: three known gaps (A Hero Emerges, D.D. Scout Plane, Soul Rope) and two none-needed
+        # records (Diffusion Wave-Motion, Gaia Soul) are modern-correct.
+        self.assertEqual((19, 6), (known_gap, custom_script))
+        self.assertEqual((22, 6), (known_gap + 3, custom_script))
+        self.assertEqual((33, 3), (known_gap + 3 + 6 + 5, custom_script - 5 + 2))
+        self.assertEqual((32, 6), (known_gap + 3 + 6 + 5 - 1, custom_script - 5 + 2 + 3))
+        self.assertEqual(38, known_gap + 3 + 6 + 5 + (custom_script - 5 + 2) + 2)
+        self.assertEqual(1, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
+        self.assertEqual(126, 50 - 7 - 8 - 2 + 52 + 38 + 3)
+        # Axe of Despair and Tyrant Dragon: the modern state is possible now.
+        self.assertEqual(163, sum(s.modern_is_possible for s in ambiguous))
+        self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous) - 2)
+        self.assertEqual(7, sum(not s.modern_is_possible for s in ambiguous))
+        self.assertEqual(9, sum(not s.modern_is_possible for s in ambiguous) + 2)
 
         unresolved_records = sum(
             any(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
@@ -198,8 +214,8 @@ class TenguResearchGateTest(unittest.TestCase):
             sum(candidate.coverage.kind == Coverage.UNRESOLVED for candidate in s.candidates)
             for s in selections.values()
         )
-        self.assertEqual(42, unresolved_records)
-        self.assertEqual(79, unresolved_occurrences)
+        self.assertEqual(40, unresolved_records)
+        self.assertEqual(77, unresolved_occurrences)
 
         fallback_format = replace(
             self.repo.formats["2010-03-edison"],
@@ -217,8 +233,11 @@ class TenguResearchGateTest(unittest.TestCase):
         # Round 031: six more substitutions are generated cards, not upstream ones.
         upstream = {k: v for k, v in actual_mapping.items() if v[1] not in RESERVED_PASSCODE_RANGE}
         generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
-        self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
-        self.assertEqual(52, len(upstream))
+        self.assertEqual(
+            {k: v for k, v in EXPECTED_EDISON_STYLE_FALLBACK.items() if k not in ROUND_037_COSMETIC_RECORDS}, upstream
+        )
+        self.assertEqual(50, len(upstream))
+        self.assertEqual(52, len(upstream) + len(ROUND_037_COSMETIC_RECORDS))
         # Round 035: three of round 031's six (Rise, Malefic, Soul Rope) were not substitutions any
         # more. Round 036: Goddess of Whim and Green Baboon are not either, and five cards are: Strike
         # Ninja and Round 036's five.
@@ -228,6 +247,7 @@ class TenguResearchGateTest(unittest.TestCase):
         self.assertEqual(3, len(generated) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
 
         audit = self.packet["release_certification"]["erratum_audit_at_snapshot"]
+        # The packet is the frozen research record: it keeps its own numbers.
         self.assertEqual(79, audit["unresolved_candidate_state_occurrences"])
         self.assertEqual(52, audit["historical_substitution_count"])
         self.assertEqual(

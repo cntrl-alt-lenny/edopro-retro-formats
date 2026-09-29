@@ -39,7 +39,7 @@
   },
   "fidelity": "approximate",
   "not_reproduced": [
-    "The unequip effect is not limited to face-up Attack Position: the period text says \"unequip it to Special Summon this card in face-up Attack Position\" and the modern card lets the controller choose, but no ruling read addresses it (Konami's Machina Mayhem rulings of 2010-04-06 reproduce the text and rule on other points), so the script keeps the modern choice and that difference is neither implemented nor tested.",
+    "The unequip effect is not limited to face-up Attack Position: the period text says \"unequip it to Special Summon this card in face-up Attack Position\" and the modern card lets the controller choose, but no ruling read addresses it (Konami's Machina Mayhem rulings of 2010-04-06 reproduce the text and rule on other points), so the script keeps the modern choice and that difference is neither implemented nor tested. Round 037 searched the whole corpus again for the clause and found no ruling on it (rulings_check).",
     "Other Union monsters keep their modern scripts. The period Condition is reproduced through this card only: it is refused a monster that carries another Union monster, and another Union monster is refused a monster that carries it (the card is marked old_union). Another card's own Condition is not reproduced.",
     "The Condition counts Union monsters through the engine's EFFECT_UNION_STATUS marker; a Union monster placed as an Equip Card by a route that does not call the Union procedure is not counted. Only equips made by Union effects are tested.",
     "The destruction substitute is the modern procedure's (battle and card effect); the period text's \"If the equipped monster would be destroyed, destroy this card instead\" is not narrowed by any source read.",
@@ -103,6 +103,23 @@
       {
         "source": "konami-official-rulebook-v71-2010",
         "looked_for": "Union monsters in Konami's rulebook Version 7.1 (captured 2010-03-30; Versions 7.0, 7.2 and 8.0 searched too); the rulebook has no entry on them",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-card-faq-2008-12-16-ac",
+        "looked_for": "round 037, part D: the clause 'unequip it to Special Summon this card in face-up Attack Position' across the corpus: every Union entry of the Konami-hosted UDE card FAQ (2008-12) and of the 2005 UDE rulings page. The only line that mentions the position is a 'Combination Attack' entry that assumes it; no entry rules that an unequipped Union monster must be Special Summoned in Attack Position",
+        "finding": "does-not-address",
+        "passage": "Both the equipped monster and the Union Monster can attack after \"Combination Attack\" is used, assuming the Union Monster was Special Summoned in face-up Attack Position."
+      },
+      {
+        "source": "konami-card-faq-2008-12-15-de",
+        "looked_for": "round 037, part D: the FAQ entries on a Union monster's unequip effect; the Doitsu entry rules that the effect is applied normally under a negater and names no position",
+        "finding": "does-not-address",
+        "passage": "Also, the effect of \"Doitsu\" that allows it to unequip and be Special Summoned is applied normally."
+      },
+      {
+        "source": "konami-shining-darkness-rulings-2010-04",
+        "looked_for": "round 037, part D: Konami's per-set ruling documents that reproduce the clause as printed card text (The Shining Darkness, Absolute Powerforce, Extreme Victory, Machina Mayhem); none adds a ruling on the position, and the rulings they carry for Union monsters concern the Condition and the equip effect",
         "finding": "does-not-address"
       }
     ]

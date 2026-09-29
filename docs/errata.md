@@ -262,6 +262,59 @@ number is retired and never assigned again (`600000001`, `600000003`, `600000004
 `600000007` to `600000009`, `600000010` to `600000015` and `600000017` are; round 036 assigned
 `600000016` to Dice Re-Roll and `600000018` to `600000021` to the four cards after it).
 
+### The rulings gate on errata records
+
+**A `functional` transition that applies at Edison's or Tengu's snapshot must record that period
+rulings were checked** (round 037). Round 036 found the same reading of printed text as period
+behaviour in the erratum records themselves: seven of nine records checked against period rulings
+were wrong or overstated, and 72 of the records classified `functional` on printed text alone made a
+list use one of Project Ignis's historical variant scripts in place of the modern card. So the
+transition carries a `rulings_check`, in the same shape as a generated card's, with the same finding
+values, `in_force` values, `by-decision` conditions and `owner_decision` rule
+(`Validator._check_rulings_body` is the one implementation; only the code prefix differs):
+
+```jsonc
+"transitions": [{
+  "kind": "functional",
+  "summary": "...",
+  "rulings_check": {
+    "difference": "one sentence: the difference this transition claims",
+    "checked": "2026-09-30",
+    "searched": [ { "source": "...", "looked_for": "...", "finding": "supports | contradicts | does-not-address", ... } ]
+  }
+}]
+```
+
+On the flattened single-event shape the check sits on the `event` object beside `kind` and
+`summary`. The fields, and what each finding oblige, are those of "The rulings gate" above; the
+erratum's own verdict at each snapshot (supported, contradicted, unresolved) is what the
+`searched` entries and `in_force` values add up to, and it is written out per record in
+`docs/research/text-only-errata-audit.md`.
+
+**When a check is required.** A transition is in scope when it is `functional`; its event is not
+yet in effect at the snapshot of `2010-03-edison` or `2011-09-tengu` (state `old`), or cannot be
+placed against it (state `ambiguous`, an undated event); and the record is not implemented by a
+generated card (the card's own check covers it). Three transitions are exempt, by name
+(`ERRATUM_RULINGS_GATE_EXEMPT`): the ones rounds 035 and 036 checked and recorded on their own
+sources before the check existed (Dark Necrofear's `c2`, Fushioh Richie's and Second Coin Toss's).
+Citing a ruling source excuses nothing else: a ruling cited for one point does not say which
+rulings were searched for another. GOAT is not a gate format: its list is entry-for-entry Project
+Ignis's and reads no erratum record.
+
+| code | severity | when |
+|---|---|---|
+| `erratum.rulings-check-missing` | error | a transition in scope with no `rulings_check` |
+| `erratum.rulings-check-malformed` | error | the check is incomplete or a value is outside its closed set |
+| `erratum.contradicting-ruling-unaccepted` | error | a `contradicts` finding shown in force, or in force by decision, and no complete `owner_decision` |
+| `erratum.contradicting-ruling-range-unresolved` | warning | a `contradicts` finding whose range in force is not shown |
+| `erratum.decision-source-not-ude`, `erratum.decision-later-documents-missing`, `erratum.decision-document-not-konami` | error | as the `custom-card.decision-*` codes |
+
+A contradicting ruling in force means the transition's claim is wrong for that difference: reclassify
+the transition `cosmetic` (for a `reuse-upstream` record the list then uses the modern card again),
+keeping every existing passage and moving the replaced summary into the review notes. A check that
+still records a contradicted point belongs to a transition that stays functional on another
+difference, and needs the owner's decision like a generated card's.
+
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
 at Tengu whenever that record's state does. The owner decided on 2026-09-24 that this is

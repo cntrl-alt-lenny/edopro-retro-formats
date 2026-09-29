@@ -22,7 +22,7 @@ from retroformats.validate import Validator
 
 from . import migration_audit as audit
 from . import unordered_migration_materializer as gate
-from .helpers import CONVERTED_TO_FULL_V2
+from .helpers import CONVERTED_TO_FULL_V2, ROUND_037_CONVERTED_TO_FULL_V2, record_before_round_037
 from .pre_migration_fixture import load_pre_migration_repo
 from .schema_check import Registry, validate_erratum
 
@@ -102,10 +102,10 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
                 encoding="utf-8"
             )
         )
+        # The records round 037 edited are read as they stood on main before it (the pins below were
+        # taken on those; round 037's own edits are pinned by tests/test_migration_materializer.py).
         cls.raw = {
-            json.loads(path.read_text(encoding="utf-8"))["id"]: json.loads(
-                path.read_text(encoding="utf-8")
-            )
+            json.loads(record_before_round_037(path))["id"]: json.loads(record_before_round_037(path))
             for path in sorted((cls.root / "data/errata").glob("*.json"))
         }
 
@@ -122,7 +122,8 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual(0, counts.get("changes", 0))
         # Rounds 035 and 036 converted three sugar records each to full v2 (tests/helpers.py); the corpus
         # was 116 full v2 and 180 sugar records before them.
-        converted = len(CONVERTED_TO_FULL_V2)
+        # (the records are read as they stood before round 037, so its four conversions do not count)
+        converted = len(CONVERTED_TO_FULL_V2 - ROUND_037_CONVERTED_TO_FULL_V2)
         self.assertEqual(116 + converted, counts["events"])
         self.assertEqual(180 - converted, counts["event"])
         for raw in self.raw.values():
@@ -198,7 +199,7 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual(self.target_ids, {entry["id"] for entry in self.manifest["records"]})
         for entry in self.manifest["records"]:
             path = self.root / entry["path"]
-            self.assertEqual(entry["post_migration_sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
+            self.assertEqual(entry["post_migration_sha256"], hashlib.sha256(record_before_round_037(path)).hexdigest())
             source_bytes = subprocess.check_output(["git", "show", f"{SOURCE_COMMIT}:{entry['path']}"])
             self.assertEqual(entry["pre_migration_sha256"], hashlib.sha256(source_bytes).hexdigest())
             self.assertNotEqual(entry["pre_migration_sha256"], entry["post_migration_sha256"])
@@ -303,13 +304,18 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
         self.assertEqual(
             Counter({"format.erratum-known-divergence": 5}),
             Counter(f.code for f in after_validator.warnings)
-            - Counter(f.code for f in before_validator.warnings),
+            - Counter(f.code for f in before_validator.warnings)
+            # round 037: two records now carry only an undated implementation-relevant event, which the
+            # modern-fallback policy defaults at both snapshots (they were known-wrong fallbacks before)
+            - Counter({"erratum.undated": 2, "format.erratum-unresolved-defaulted": 2}),
         )
         self.assertEqual(
             Counter(
                 {
-                    "format.erratum-modern-known-wrong": 3,
-                    "format.erratum-unresolved-defaulted": 2,
+                    # 3 before round 037; +4: Axe of Despair and Tyrant Dragon (two snapshots each) are no
+                    # longer known-wrong fallbacks, because their round-037 corrections made the modern
+                    # state one of the possible ones, and they are defaulted instead (in `after` only)
+                    "format.erratum-modern-known-wrong": 7,
                 }
             ),
             Counter(f.code for f in before_validator.warnings)

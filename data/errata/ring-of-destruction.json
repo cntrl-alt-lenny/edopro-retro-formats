@@ -17,7 +17,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Upstream codes 511000824 and 511000825 are artwork variants of one implementation (identical cdb text, identical script diff, codes within +/-10), folded per instruction 4 with the lower code as historical_passcode. The third upstream entry, 511027037 'Ring of Destruction (Manga)' in the unofficial script folder, is a different card - it activates on EVENT_ATTACK_ANNOUNCE against the attacking monster and damages only the opponent - so it is not a period TCG implementation and is excluded rather than escalated. Pre-baseline lineage v0 -> v4 is cosmetic ('Direct Damage' -> 'damage', 'to the Life Points of both you and your opponent' -> 'to both players', 'Select and destroy' -> PSCT 'Target ... destroy that target, and if you do'); the pre-errata script keeps EFFECT_FLAG_CARD_TARGET, so the select/target rewording is not a targeting change. This card does not appear on EdisonFormat.com's Functional Errata page, so no community corroboration is cited; the erratum is dated solely from the lineage printing."
+    "notes": "Upstream codes 511000824 and 511000825 are artwork variants of one implementation (identical cdb text, identical script diff, codes within +/-10), folded per instruction 4 with the lower code as historical_passcode. The third upstream entry, 511027037 'Ring of Destruction (Manga)' in the unofficial script folder, is a different card - it activates on EVENT_ATTACK_ANNOUNCE against the attacking monster and damages only the opponent - so it is not a period TCG implementation and is excluded rather than escalated. Pre-baseline lineage v0 -> v4 is cosmetic ('Direct Damage' -> 'damage', 'to the Life Points of both you and your opponent' -> 'to both players', 'Select and destroy' -> PSCT 'Target ... destroy that target, and if you do'); the pre-errata script keeps EFFECT_FLAG_CARD_TARGET, so the select/target rewording is not a targeting change. This card does not appear on EdisonFormat.com's Functional Errata page, so no community corroboration is cited; the erratum is dated solely from the lineage printing.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Ring of Destruction). The rulings read support d4, d5 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d2 unresolved at Edison, unresolved at Tengu; d3 unresolved at Edison, unresolved at Tengu; d4 supported at Edison, supported at Tengu; d5 supported at Edison, supported at Tengu; d6 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
@@ -25,7 +25,12 @@
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "yugipedia-set-pages",
-    "konami-errata-announcements"
+    "konami-errata-announcements",
+    "konami-rulebook-2008-v70",
+    "konami-official-rulebook-v71-2010",
+    "konami-card-faq-2008-12-15-pr",
+    "ude-card-rulings-archive",
+    "ude-judge-list-ring-of-destruction-2007"
   ],
   "event": {
     "effective": {
@@ -63,8 +68,262 @@
       "yugipedia-card-errata",
       "ignis-babelcdb",
       "ignis-cardscripts",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-rulebook-2008-v70",
+      "konami-official-rulebook-v71-2010",
+      "konami-card-faq-2008-12-15-pr",
+      "ude-card-rulings-archive",
+      "ude-judge-list-ring-of-destruction-2007"
+    ],
+    "rulings_check": {
+      "difference": "Era: no turn condition; a Set Ring of Destruction can be activated during either player's turn. Modern (2015): only during your opponent's turn. Era: may target any face-up monster on the field, either player's. Modern: only a face-up monster your opponent controls. Era: no ceiling on the target's ATK. Modern: the target's ATK must be at most your opponent's Life Points. Era: the damage equals the destroyed monster's CURRENT ATK (counters, Equips, doublers apply). Modern: equal to its ORIGINAL ATK. Era: Ring deals the full damage to BOTH players at once. Modern: you take the damage first, then your opponent takes an equal amount (and nothing if you are already at 0 Life Points). Era: no limit on Rings per turn. Modern: 'You can only activate 1 \"Ring of Destruction\" per turn'.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Era: no turn condition; a Set Ring of Destruction can be activated during either player's turn. Modern (2015): only during your opponent's turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You cannot activate a Trap in the same turn that you Set it, but you can activate it at any time after that"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Era: no turn condition; a Set Ring of Destruction can be activated during either player's turn. Modern (2015): only during your opponent's turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You cannot activate a Trap in the same turn that you Set it, but you can activate it at any time after that"
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d1: Era: no turn condition; a Set Ring of Destruction can be activated during either player's turn. Modern (2015): only during your opponent's turn.",
+          "finding": "does-not-address",
+          "passage": "You cannot activate \"Ring of Destruction\" during the Damage Step."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d2: Era: may target any face-up monster on the field, either player's. Modern: only a face-up monster your opponent controls.",
+          "finding": "does-not-address",
+          "passage": "This card targets a monster."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d3: Era: no ceiling on the target's ATK. Modern: the target's ATK must be at most your opponent's Life Points.",
+          "finding": "does-not-address",
+          "passage": "If this reduces the player's Life Points to zero, then they cannot use \"Witch of the Black Forest\"'s effect (to retrieve a 5th Exodia piece, for example)."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d4: Era: the damage equals the destroyed monster's CURRENT ATK (counters, Equips, doublers apply). Modern: equal to its ORIGINAL ATK.",
+          "finding": "supports",
+          "passage": "\"Ring of Destruction\" inflicts damage based on the current (total) ATK value, NOT the original ATK.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d4: Era: the damage equals the destroyed monster's CURRENT ATK (counters, Equips, doublers apply). Modern: equal to its ORIGINAL ATK.",
+          "finding": "supports",
+          "passage": "\"Ring of Destruction\" inflicts damage based on the current (total) ATK value, NOT the original ATK.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-judge-list-ring-of-destruction-2007",
+          "looked_for": "d4: Era: the damage equals the destroyed monster's CURRENT ATK (counters, Equips, doublers apply). Modern: equal to its ORIGINAL ATK.",
+          "finding": "supports",
+          "passage": "\"Limiter Removal\" resolves first and doubles \"Cyber Dragon's\" ATK, from 2100 to 4200.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-judge-list-ring-of-destruction-2007",
+          "looked_for": "d5: Era: Ring deals the full damage to BOTH players at once. Modern: you take the damage first, then your opponent takes an equal amount (and nothing if you are already at 0 Life Points).",
+          "finding": "supports",
+          "passage": "\"Ring of Destruction\" resolves next and destroys the \"Cyber Dragon\", inflicting 4200 damage to both players' Life Points.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d5: Era: Ring deals the full damage to BOTH players at once. Modern: you take the damage first, then your opponent takes an equal amount (and nothing if you are already at 0 Life Points).",
+          "finding": "supports",
+          "passage": "If I chain \"Ring of Destruction\" to the placement of a Spell Counter on \"Breaker, the Magical Warrior\", \"Ring of Destruction\" does 1600 damage to each player because the action of placing the Spell Counter has not resolved.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d5: Era: Ring deals the full damage to BOTH players at once. Modern: you take the damage first, then your opponent takes an equal amount (and nothing if you are already at 0 Life Points).",
+          "finding": "supports",
+          "passage": "If a monster equipped with \"Heavy Mech Support Platform\" is targeted by \"Ring of Destruction\", then \"Heavy Mech Support Platform\" is destroyed instead of the equipped monster, and the damage inflicted to both players by \"Ring of Destruction\" is 0",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Ring of Destruction in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Ring of Destruction in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Ring of Destruction' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",
