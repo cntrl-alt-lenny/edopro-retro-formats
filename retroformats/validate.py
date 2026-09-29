@@ -14,6 +14,7 @@ import datetime as _dt
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from .model import (
     AVAILABILITY_KINDS,
@@ -39,10 +40,13 @@ from .model import (
     PRODUCT_KINDS,
     REGION_SCOPE_BITS,
     RESERVED_PASSCODE_RANGE,
+    RULINGS_FINDINGS,
+    RULINGS_IN_FORCE,
     STATUS_TO_COUNT,
     TERRITORIES,
     Banlist,
     Coverage,
+    CustomCard,
     Erratum,
     ErratumV2,
     Format,
@@ -2800,6 +2804,116 @@ class Validator:
                 "the script's header names an upstream but the record says the script is original",
             )
 
+    def _check_rulings(self, card: CustomCard, where: Path) -> None:
+        """The rulings gate (round 035): no generated card without a recorded check of
+        period rulings against the one difference its script implements.
+
+        A card's script changes something from the modern card because the period text says
+        so. Round 031 and 034 read that text as the period behaviour, and period rulings
+        contradicted it for several cards (docs/research/period-rulings-generated-scripts.md).
+        So every record states which sources were searched and what each said about the
+        difference: `supports`, `contradicts` or `does-not-address`. A finding that supports or
+        contradicts quotes its passage and says whether the ruling is shown to have been in
+        force at the snapshots the record applies at (`in_force`: shown, with its basis, or
+        not-shown; a ruling's date is not its range in force). When nothing was found, the
+        entry says what was looked for.
+
+        - `custom-card.rulings-check-missing` / `custom-card.rulings-check-malformed`: the record
+          has no check, or the check is incomplete (an error).
+        - `custom-card.contradicting-ruling-unaccepted`: a `contradicts` finding shown to be in
+          force, and no `owner_decision` {date, decision, recorded_in} accepting it (an error).
+        - `custom-card.contradicting-ruling-range-unresolved`: a `contradicts` finding whose
+          range in force is not shown (a warning: a tracked TODO for the owner).
+        A schema edit alone enforces none of this (AGENTS.md); this is the gate."""
+        check = card.raw.get("rulings_check")
+        if check is None:
+            self.error(
+                "custom-card.rulings-check-missing",
+                where,
+                "a generated card must record which period rulings sources were searched and what each "
+                "found about the difference its script implements (rulings_check; docs/errata.md)",
+            )
+            return
+        if not isinstance(check, dict):
+            self.error("custom-card.rulings-check-malformed", where, "rulings_check must be an object")
+            return
+
+        def text_ok(value: Any) -> bool:
+            return isinstance(value, str) and bool(value.strip())
+
+        problems: list[str] = []
+        if not text_ok(check.get("difference")):
+            problems.append("difference must say, in a sentence, what the script does that the modern card does not")
+        checked = check.get("checked")
+        if not isinstance(checked, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", checked) or self._date(checked) is None:
+            problems.append(f"checked must be the ISO date the search was done, got {checked!r}")
+        searched = check.get("searched")
+        if not isinstance(searched, list) or not searched:
+            problems.append(
+                "searched must list every source looked at, including the ones that found nothing; "
+                "an empty list is not a search"
+            )
+            searched = []
+        contradictions: list[tuple[str, Any]] = []
+        for index, entry in enumerate(searched):
+            label = f"searched[{index}]"
+            if not isinstance(entry, dict):
+                problems.append(f"{label} must be an object")
+                continue
+            source = entry.get("source")
+            if not text_ok(source):
+                problems.append(f"{label}.source must be a source id from data/sources.json")
+            else:
+                self._check_sources([source], where, None, f"rulings_check {label}")
+            if not text_ok(entry.get("looked_for")):
+                problems.append(f"{label}.looked_for must say what was searched for in that source")
+            finding = entry.get("finding")
+            if finding not in RULINGS_FINDINGS:
+                problems.append(f"{label}.finding must be one of {list(RULINGS_FINDINGS)}, got {finding!r}")
+                continue
+            if finding == "does-not-address":
+                continue
+            if not text_ok(entry.get("passage")):
+                problems.append(f"{label} {finding} the difference: quote the passage that was read in passage")
+            in_force = entry.get("in_force")
+            if in_force not in RULINGS_IN_FORCE:
+                problems.append(f"{label}.in_force must be one of {list(RULINGS_IN_FORCE)}, got {in_force!r}")
+            elif in_force == "shown" and not text_ok(entry.get("in_force_basis")):
+                problems.append(
+                    f"{label}.in_force is 'shown': in_force_basis must say what shows the ruling held at "
+                    "the snapshots this record applies at (a ruling's date is not its range in force)"
+                )
+            if finding == "contradicts" and in_force in RULINGS_IN_FORCE:
+                contradictions.append((label, in_force))
+        for problem in problems:
+            self.error("custom-card.rulings-check-malformed", where, problem)
+
+        decision = check.get("owner_decision")
+        accepted = (
+            isinstance(decision, dict)
+            and isinstance(decision.get("date"), str)
+            and re.fullmatch(r"\d{4}-\d{2}-\d{2}", decision["date"]) is not None
+            and self._date(decision["date"]) is not None
+            and text_ok(decision.get("decision"))
+            and text_ok(decision.get("recorded_in"))
+        )
+        for label, in_force in contradictions:
+            if in_force == "shown" and not accepted:
+                self.error(
+                    "custom-card.contradicting-ruling-unaccepted",
+                    where,
+                    f"rulings_check {label} contradicts the script's difference and is shown to have been in "
+                    "force; correct the card, or name the owner's decision accepting it in owner_decision "
+                    "{date, decision, recorded_in}",
+                )
+            elif in_force == "not-shown":
+                self.warn(
+                    "custom-card.contradicting-ruling-range-unresolved",
+                    where,
+                    f"rulings_check {label} contradicts the script's difference; whether it held at the "
+                    "snapshots is not shown. A tracked question for the owner",
+                )
+
     def _validate_custom_cards(self) -> None:
         """Every generated card must be a faithful, checkable projection of an
         erratum record: same card, its own reserved passcode, a text copied
@@ -2913,6 +3027,7 @@ class Validator:
                     "fidelity is 'exact' but not_reproduced is not empty",
                 )
             self._check_sources(list(card.sources), where, None, "custom card")
+            self._check_rulings(card, where)
             row = self.repo.card_index.by_passcode.get(passcode)
             if row is not None:
                 alias = row.get("alias_of")

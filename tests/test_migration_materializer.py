@@ -52,6 +52,93 @@ CUSTOM_SCRIPT_RECORDS = {
 }
 
 
+# Round 035 edited five of those records again, because period rulings contradicted the
+# scripts (docs/research/period-rulings-generated-scripts.md): Metalzoa, Rise of the Snake
+# Deity and Malefic Blue-Eyes became cosmetic-only records (their generated cards were removed),
+# Soul Rope's first transition became cosmetic and its state a known gap again, and Green
+# Baboon gained the evidence and lost its Damage Step difference. Their edits are too large
+# to pin as text, so what is pinned is the rule the project keeps ("Evidence in a record is
+# added to, never replaced", AGENTS.md): for each, the round-031 record's every passage
+# survives in the round-035 record, and the edits made are exactly the classification changes
+# named here.
+# {erratum id: (kind of each transition after the edit, or None when it is unchanged)}
+ROUND_035_EDITED = {
+    "erratum-metalzoa": {"event": "cosmetic"},
+    "erratum-malefic-blue-eyes-white-dragon": {"event": "cosmetic"},
+    "erratum-rise-of-the-snake-deity": {"event": "cosmetic"},
+    "erratum-soul-rope": {"c0": "cosmetic", "c1": "functional"},
+    "erratum-green-baboon-defender-of-the-forest": None,
+}
+
+
+def _transitions(record):
+    """{event id: [transition, ...]} for a sugar or full v2 record."""
+    if "event" in record and isinstance(record["event"], dict) and "transitions" not in record["event"]:
+        e = record["event"]
+        return {"event": [{k: e[k] for k in ("kind", "axis", "historical_text", "modern_text", "summary", "sources")}]}
+    return {eid: ev["transitions"] for eid, ev in record["events"].items()}
+
+
+def _effective(record):
+    if "event" in record and isinstance(record["event"], dict) and "transitions" not in record["event"]:
+        return {"event": record["event"]["effective"]}
+    return {eid: ev["effective"] for eid, ev in record["events"].items()}
+
+
+def check_round_035_edit(test, record_id, round_031, on_disk):
+    """`round_031` is the frozen target with round 029/031's edit applied, i.e. the record
+    as it stood before round 035; `on_disk` is the record now."""
+    for key in ("$schema", "id", "modern_card", "reference_identities"):
+        test.assertEqual(round_031[key], on_disk[key], f"{record_id}: {key}")
+    old_review, new_review = round_031["review"], on_disk["review"]
+    test.assertEqual((old_review["status"], old_review["date"]), (new_review["status"], new_review["date"]))
+    test.assertTrue(new_review["notes"].startswith(old_review["notes"]), f"{record_id}: the old review notes are kept verbatim")
+    test.assertIn("Round 035 (2026-09-29)", new_review["notes"])
+    test.assertTrue(set(round_031["sources"]) <= set(on_disk["sources"]), f"{record_id}: no source is dropped")
+    old_transitions, new_transitions = _transitions(round_031), _transitions(on_disk)
+    test.assertEqual(set(old_transitions), set(new_transitions))
+    test.assertEqual(_effective(round_031), _effective(on_disk), f"{record_id}: chronology is unchanged")
+    expected_kinds = ROUND_035_EDITED[record_id]
+    for eid, old_list in old_transitions.items():
+        new_list = new_transitions[eid]
+        test.assertEqual(len(old_list), len(new_list))
+        for old, new in zip(old_list, new_list):
+            for key in ("axis", "historical_text", "modern_text"):
+                test.assertEqual(old[key], new[key], f"{record_id}/{eid}: {key}")
+            test.assertTrue(set(old["sources"]) <= set(new["sources"]), f"{record_id}/{eid}: no source is dropped")
+            if expected_kinds is None:
+                test.assertEqual(old["kind"], new["kind"])
+                test.assertEqual(old["summary"], new["summary"])
+            else:
+                test.assertEqual("functional", old["kind"])
+                test.assertEqual(expected_kinds[eid], new["kind"], f"{record_id}/{eid}")
+                if new["kind"] != old["kind"]:
+                    # the reclassified transition's old summary moves into the review notes, verbatim
+                    test.assertIn(old["summary"], new_review["notes"], f"{record_id}/{eid}: old summary kept")
+    old_meta = round_031["implementation_metadata"][0]
+    new_meta = on_disk["implementation_metadata"][0]
+    if record_id in ("erratum-metalzoa", "erratum-malefic-blue-eyes-white-dragon", "erratum-rise-of-the-snake-deity"):
+        test.assertEqual("cosmetic", on_disk["classification"])
+        test.assertEqual({"events": [], "status": "complete", "tested": False}, {k: new_meta[k] for k in ("events", "status", "tested")})
+        test.assertEqual([], on_disk["states"])
+        test.assertNotIn("coverage", on_disk)
+    elif record_id == "erratum-soul-rope":
+        test.assertEqual("functional", on_disk["classification"])
+        baseline = [s for s in on_disk["states"] if s["events"] == []]
+        test.assertEqual(1, len(baseline))
+        test.assertEqual("known-gap", baseline[0]["coverage"]["kind"])
+        test.assertEqual("missing", new_meta["status"])
+    else:  # Green Baboon: still generated; the notes gain the evidence, nothing is replaced
+        test.assertEqual(round_031["coverage"], on_disk["coverage"])
+        test.assertEqual(old_meta["status"], new_meta["status"])
+        test.assertTrue(new_meta["reason"].startswith(old_meta["reason"]))
+        test.assertTrue(new_meta["gap"]["behavioural_impact"].startswith(old_meta["gap"]["behavioural_impact"]))
+    if record_id != "erratum-green-baboon-defender-of-the-forest":
+        # the round-031 implementation note and gap statement survive, verbatim, in the notes
+        test.assertIn(old_meta["reason"], new_review["notes"], f"{record_id}: old implementation note kept")
+        test.assertIn(old_meta["gap"]["behavioural_impact"], new_review["notes"], f"{record_id}: old gap statement kept")
+
+
 def expected_after_custom_script(record_id, target):
     """The frozen `target`, with the round's coverage and metadata edit applied."""
     passcode, round_number = CUSTOM_SCRIPT_RECORDS[record_id]
@@ -156,6 +243,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             # still equal the materialized target exactly.
             if record_id in CUSTOM_SCRIPT_RECORDS:
                 target = expected_after_custom_script(record_id, target)
+            if record_id in ROUND_035_EDITED:
+                # round 035: pinned as a rule, not as text (see ROUND_035_EDITED)
+                check_round_035_edit(self, record_id, target, on_disk)
+                if json.dumps(on_disk, indent=2, ensure_ascii=False) + "\n" != on_disk_text:
+                    byte_mismatches.append(record_id)
+                continue
             if on_disk != target:
                 content_mismatches.append(record_id)
                 continue

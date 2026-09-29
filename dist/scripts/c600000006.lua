@@ -2,7 +2,7 @@
 --Green Baboon, Defender of the Forest (historical implementation, Retro Formats)
 --Upstream: https://github.com/ProjectIgnis/CardScripts/blob/383bfbd62cefc0a28e075acfb78b0bb8203b94c7/official/c46668237.lua
 --Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file.
---Modified by edopro-retro-formats on 2026-09-27: no face-up requirement, and activation allowed in the Damage Step (EFFECT_FLAG_DAMAGE_STEP), as the period text has neither restriction; the effect description is read from the modern card's strings.
+--Modified by edopro-retro-formats on 2026-09-29: no face-up requirement, as the period text has none (a UDE ruling that says otherwise is not shown to have held at the snapshots); the effect description is read from the modern card's strings.
 --This modified file is licensed, like its upstream, under the GNU Affero General
 --Public License, version 3 or (at your option) any later version. The licence
 --text is LICENSE-AGPL-3.0-or-later.txt next to this file in dist/scripts/, and
@@ -24,7 +24,6 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCode(EVENT_TO_GRAVE)
-	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCondition(s.condition)
 	e1:SetCost(Cost.PayLP(1000))
 	e1:SetTarget(s.target)

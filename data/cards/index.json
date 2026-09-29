@@ -29778,12 +29778,6 @@
       "ot": 8
     },
     {
-      "passcode": 600000001,
-      "name": "Metalzoa (Retro Formats)",
-      "alias_of": 50705071,
-      "ot": 8
-    },
-    {
       "passcode": 600000002,
       "name": "Super Vehicroid - Stealth Union (Retro Formats)",
       "alias_of": 3897065,
@@ -29805,24 +29799,6 @@
       "passcode": 600000006,
       "name": "Green Baboon, Defender of the Forest (Retro Formats)",
       "alias_of": 46668237,
-      "ot": 8
-    },
-    {
-      "passcode": 600000007,
-      "name": "Rise of the Snake Deity (Retro Formats)",
-      "alias_of": 16067089,
-      "ot": 8
-    },
-    {
-      "passcode": 600000008,
-      "name": "Malefic Blue-Eyes White Dragon (Retro Formats)",
-      "alias_of": 9433350,
-      "ot": 8
-    },
-    {
-      "passcode": 600000009,
-      "name": "Soul Rope (Retro Formats)",
-      "alias_of": 37383714,
       "ot": 8
     }
   ]

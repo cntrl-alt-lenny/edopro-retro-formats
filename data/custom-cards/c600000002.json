@@ -36,6 +36,33 @@
     "The equipped monster follows the engine's default equip rules (it goes to the Graveyard when this card leaves the field; control changes and negation are not modelled). Only equip, the ATK halving, piercing damage and attacking every opposing monster once are tested.",
     "The card row's statline is copied from the modern row and not checked against the period printing."
   ],
+  "rulings_check": {
+    "difference": "The equip effect selects only a monster you control; the modern card selects any face-up non-Machine monster on the field, an opponent's included.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+        "looked_for": "a ruling on whose monsters the equip effect may select",
+        "finding": "does-not-address",
+        "passage": "Two entries speak to the selection: \"You can equip \"Super Vehicroid - Stealth Union\" with more than 1 monster with its effect. (Although you can only activate the equipping effect once per turn)\" and \"You cannot select a face-down monster to equip ... because a face-down monster's Monster Type cannot be determined.\" Neither says whose monsters may be chosen. The UDE-hosted copy of 2009-02-26 is identical."
+      },
+      {
+        "source": "ude-card-rulings-archive",
+        "looked_for": "an entry for the card on the 2005-07-01 page; there is none (the card was first printed in 2007)",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-11-05",
+        "looked_for": "the card by name; not listed (its erratum is the printing DL12-EN011 of 2011-06-01)",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-extreme-victory-rulings-2011-05",
+        "looked_for": "the card by name; not listed",
+        "finding": "does-not-address"
+      }
+    ]
+  },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",

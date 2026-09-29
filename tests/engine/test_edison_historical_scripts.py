@@ -1,6 +1,8 @@
 """Engine tests for the historical cards this project generates itself
-(roadmap item 7, rounds 029/030): Metalzoa and Super Vehicroid - Stealth Union
-as they were in the Edison format (2010-04-24).
+(roadmap item 7, rounds 029/030): Super Vehicroid - Stealth Union as it was in the
+Edison format (2010-04-24). Metalzoa was generated here too until round 035 removed it:
+Konami's period rulings show the modern card behaves as the era card did
+(tests/engine/test_shared_historical_scripts.py).
 
 Every test runs one scenario against the real ocgcore, once with the modern
 card (its cards.cdb code, the script Project Ignis ships) and once with this
@@ -39,25 +41,16 @@ DUEL_MODE_EDISON = DUEL_MODE_MR1 | DUEL_0_ATK_DESTROYED
 MONSTER_REBORN = 83764718
 GIANT_RAT = 97017120  # 1400 ATK / 1450 DEF, trigger when destroyed by battle
 
-METALZOA_MODERN = 50705071
-METALZOA_HISTORICAL = 600000001
-ZOA = 24311372
-METALMORPH = 68540058
-
 STEALTH_UNION_MODERN = 3897065
 STEALTH_UNION_HISTORICAL = 600000002
 
 # The (modern, historical) pairs, for the identity test.
 HISTORICAL_PAIRS = (
-    ("Metalzoa", METALZOA_MODERN, METALZOA_HISTORICAL),
     ("Super Vehicroid - Stealth Union", STEALTH_UNION_MODERN, STEALTH_UNION_HISTORICAL),
     # Round 031: the cards shared with Tengu (tests/engine/test_shared_historical_scripts.py).
     ("Goddess of Whim", 67959180, 600000004),
     ("Strike Ninja", 41006930, 600000005),
     ("Green Baboon, Defender of the Forest", 46668237, 600000006),
-    ("Rise of the Snake Deity", 16067089, 600000007),
-    ("Malefic Blue-Eyes White Dragon", 9433350, 600000008),
-    ("Soul Rope", 37383714, 600000009),
 )
 
 
@@ -100,137 +93,6 @@ class GeneratedCardIdentityTest(unittest.TestCase):
                     "in a duel the historical row must resolve to the modern code (alias) "
                     "while keeping its own original code",
                 )
-
-
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class MetalzoaEdisonTest(unittest.TestCase):
-    """Era text (AST/TFK-002): "This monster can only be Special Summoned from
-    your Deck to your side of the field by offering "Zoa" equipped with
-    "Metalmorph" as a Tribute." Modern text: once properly Summoned it may be
-    Special Summoned again (revived) from the Graveyard."""
-
-    def _monster_reborn_candidates(self, metalzoa: int) -> list[int]:
-        # Metalzoa is placed in the Graveyard already marked as properly
-        # Summoned (Debug.AddCard's `proc` argument): the modern card's best
-        # case for revival, and no shortcut for the historical one, which
-        # allows no Special Summon outside its own procedure at all.
-        setup = (
-            f"Debug.AddCard({MONSTER_REBORN},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({metalzoa},0,0,LOCATION_GRAVE,0,POS_FACEUP,true)\n"
-            f"Debug.AddCard({GIANT_RAT},0,0,LOCATION_GRAVE,1,POS_FACEUP)\n" + deck_fillers()
-        )
-        duel = scenario(DUEL_MODE_EDISON, setup)
-        self.addCleanup(duel.close)
-        offered: list[list[int]] = []
-
-        def take_first(prompt):
-            offered.append(H.card_candidates(prompt))
-            return H.answer_cards(0)
-
-        duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Monster Reborn
-        duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
-        duel.default_response(H.MSG_SELECT_CARD, take_first)
-        standing_answers(duel)
-        duel.run(turns=1)
-        self.assertEqual(1, len(offered), "Monster Reborn must ask for exactly one target")
-        return offered[0]
-
-    def test_modern_metalzoa_can_be_revived_by_monster_reborn(self):
-        self.assertIn(METALZOA_MODERN, self._monster_reborn_candidates(METALZOA_MODERN))
-
-    def test_historical_metalzoa_cannot_be_revived_by_monster_reborn(self):
-        candidates = self._monster_reborn_candidates(METALZOA_HISTORICAL)
-        self.assertNotIn(METALZOA_HISTORICAL, candidates)
-        self.assertEqual(
-            [GIANT_RAT], candidates, "Monster Reborn still works: only Metalzoa is excluded"
-        )
-
-    def _procedure_run(self, code: int, equip_metalmorph: bool) -> tuple[list[dict], list[int]]:
-        setup = f"Debug.AddCard({ZOA},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-        # Metalmorph is a Trap that equips itself when it resolves, so it is
-        # activated for real rather than attached with Debug.PreEquip (a Trap
-        # placed that way is destroyed by the core as soon as the duel starts).
-        setup += f"Debug.AddCard({METALMORPH},0,0,LOCATION_SZONE,0,POS_FACEDOWN)\n"
-        setup += f"Debug.AddCard({code},0,0,LOCATION_DECK,0,POS_FACEDOWN_DEFENSE)\n" + deck_fillers()
-        duel = scenario(DUEL_MODE_EDISON, setup)
-        self.addCleanup(duel.close)
-        spsummonable: list[int] = []
-        seen_first = []
-
-        def idle(prompt):
-            lists = H.idle_lists(prompt)
-            spsummonable.extend(code_ for code_, _seq in lists["spsummonable"])
-            if not seen_first:
-                seen_first.append(True)
-                if equip_metalmorph:
-                    return H.answer_idle(5, 0)  # activate Metalmorph on Zoa
-                return H.answer_idle(7)
-            if lists["spsummonable"]:
-                return H.answer_idle(1, 0)
-            return H.answer_idle(7)
-
-        duel.default_response(H.MSG_SELECT_IDLECMD, idle)
-        duel.default_response(H.MSG_SELECT_CARD, H.answer_cards(0))
-        standing_answers(duel)
-        duel.run(turns=1)
-        return duel.moves(), spsummonable
-
-    def test_historical_procedure_summons_from_deck_by_tributing_the_equipped_zoa(self):
-        moves, offered = self._procedure_run(METALZOA_HISTORICAL, equip_metalmorph=True)
-        self.assertIn(METALZOA_HISTORICAL, offered)
-        released = [m for m in moves if m["code"] == ZOA and m["to"]["location"] == H.LOCATION_GRAVE]
-        self.assertTrue(released, "Zoa must be Tributed for the procedure")
-        self.assertTrue(released[-1]["reason"] & 0x80, "Zoa leaves as a Release")
-        summoned = [
-            m
-            for m in moves
-            if m["code"] == METALZOA_HISTORICAL
-            and m["from"]["location"] == H.LOCATION_DECK
-            and m["to"]["location"] == H.LOCATION_MZONE
-        ]
-        self.assertEqual(1, len(summoned), "Metalzoa must be Special Summoned from the Deck")
-
-    def test_historical_procedure_matches_the_modern_card_summoning_from_the_deck(self):
-        modern_moves, _ = self._procedure_run(METALZOA_MODERN, equip_metalmorph=True)
-        hist_moves, _ = self._procedure_run(METALZOA_HISTORICAL, equip_metalmorph=True)
-
-        def shape(moves, code):
-            return [
-                (
-                    ZOA if m["code"] == ZOA else METALMORPH if m["code"] == METALMORPH else "metalzoa",
-                    m["from"]["location"],
-                    m["to"]["location"],
-                )
-                for m in moves
-                if m["code"] in (ZOA, METALMORPH, code)
-            ]
-
-        self.assertEqual(shape(modern_moves, METALZOA_MODERN), shape(hist_moves, METALZOA_HISTORICAL))
-
-    def test_historical_procedure_is_not_offered_without_metalmorph(self):
-        _moves, offered = self._procedure_run(METALZOA_HISTORICAL, equip_metalmorph=False)
-        self.assertEqual([], offered, "Zoa alone is not enough: it must be equipped with Metalmorph")
-
-    def test_historical_metalzoa_cannot_be_normal_summoned_or_set(self):
-        setup = f"Debug.AddCard({METALZOA_HISTORICAL},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-        # two Tributes are available, so only a rule against Normal Summoning
-        # can stop a Level 8
-        setup += f"Debug.AddCard({MILLENNIUM_SHIELD},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-        setup += f"Debug.AddCard({MILLENNIUM_SHIELD},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
-        duel = scenario(DUEL_MODE_EDISON, setup + deck_fillers())
-        self.addCleanup(duel.close)
-        lists: list[dict] = []
-
-        def idle(prompt):
-            lists.append(H.idle_lists(prompt))
-            return H.answer_idle(7)
-
-        duel.default_response(H.MSG_SELECT_IDLECMD, idle)
-        standing_answers(duel)
-        duel.run(turns=1)
-        self.assertTrue(lists)
-        self.assertEqual([], lists[0]["summonable"])
-        self.assertEqual([], lists[0]["msetable"])
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")

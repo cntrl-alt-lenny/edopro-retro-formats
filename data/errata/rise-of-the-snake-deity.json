@@ -5,53 +5,60 @@
     "passcode": 16067089,
     "name": "Rise of the Snake Deity"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2011-10-04",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN219, Legendary Collection 2: The Duel Academy Years Mega Pack)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Activate only when a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed. Special Summon 1 \"Vennominaga the Deity of Poisonous Snakes\" from your hand or Deck.",
+          "modern_text": "When a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed, except by battle: Special Summon 1 \"Vennominaga the Deity of Poisonous Snakes\" from your hand or Deck.",
+          "summary": "Wording only, on Konami's period rulebook (round 035). The era Trap \"Activate only when a face-up \\\"Vennominon the King of Poisonous Snakes\\\" you control is destroyed\" could not be activated in the Damage Step: Konami's rulebook (Versions 7.0 to 8.0) allows only Counter Traps and cards that directly change a monster's ATK or DEF there, and the UDE Netrep answered for this card on 2007-08-17 that it \"cannot be activated in the Damage Step\". A monster destroyed by battle is destroyed in the Damage Step, so the era card could not respond to it, which is what \"except by battle\" (LCGX-EN219) states. No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "yugipedia-set-pages",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v8-2011",
+            "ude-judge-list-snake-deity-2007",
+            "konami-card-faq-2008-12-15-pr"
+          ]
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "partial",
-      "tested": true,
-      "reason": "Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000007.json; passcode 600000007). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In a period format Vennominon dying in battle no longer fetches 'Vennominaga the Deity of Poisonous Snakes' from the hand or Deck, which removes the era card's most common line of play."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 035: the generated card 600000007 (rounds 029 and 031) was removed and its number retired. On Konami's period rulings the modern card behaves as the era card did at the snapshots this record applies at, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Edison- and GOAT-era text is v0 (TAEV-EN069, 2007-08-15); the erratum is 2011-10-04, after both snapshots. The modern cdb text matches lineage v1 exactly (ratio 1.0), so there is no cdb/lineage conflict here - the difference is a genuine printed erratum. The packet's one upstream code, 511002525, is NOT usable as the historical implementation: it is a different card, named 'Rise of the Sacred Deity (Anime)', so substituting it would rename the card and change any name-keyed handling. It is however an exact engineering reference for the fix - its only script difference from the modern card is the added EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY on the destruction trigger, which is precisely what an era script needs to let battle destruction in the Damage Step start the chain. I have not claimed the DELAY half is era-attested; only the battle-destruction legality follows from the text lineage."
+    "notes": "Edison- and GOAT-era text is v0 (TAEV-EN069, 2007-08-15); the erratum is 2011-10-04, after both snapshots. The modern cdb text matches lineage v1 exactly (ratio 1.0), so there is no cdb/lineage conflict here - the difference is a genuine printed erratum. The packet's one upstream code, 511002525, is NOT usable as the historical implementation: it is a different card, named 'Rise of the Sacred Deity (Anime)', so substituting it would rename the card and change any name-keyed handling. It is however an exact engineering reference for the fix - its only script difference from the modern card is the added EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY on the destruction trigger, which is precisely what an era script needs to let battle destruction in the Damage Step start the chain. I have not claimed the DELAY half is era-attested; only the battle-destruction legality follows from the text lineage.\n\nRound 035 (2026-09-29) correction. The battle-destruction trigger was inferred from the printed text, which has no \"except by battle\" (this record's summary says so) and no period ruling was cited. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18): \"During the Damage Step, you can only activate Counter Trap Cards, or cards with effects that directly change a monster's ATK or DEF.\" The UDE Judge List (question 2007-08-11, Netrep answer 2007-08-17, capture 2007-11-01) asks this card's exact case, Vennominon destroyed by battle: \"Rise of the Snake Deity cannot be activated in the Damage Step.\" Ignis's anime card 511002525, which the earlier summary cited, is a different card and shows only the engine flag, not a period ruling. Evidence and its limits: docs/research/period-rulings-generated-scripts.md, sections 4 and 6.6. Superseded summary, kept verbatim: \"Functional erratum: v1 (LCGX-EN219) inserted 'except by battle' into the trigger condition, so the modern card only activates when a face-up 'Vennominon the King of Poisonous Snakes' you control is destroyed by a non-battle cause. The v0 text (TAEV-EN069) says only 'Activate only when a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed', with no battle exclusion, so battle destruction was a legal trigger in the era. Ignis's anime card 511002525 shows the engine delta directly: its script is the modern script plus EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY on the EVENT_DESTROYED trigger.\" Superseded implementation note, kept verbatim: \"Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000007.json; passcode 600000007). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.\" Superseded gap statement, kept verbatim: \"In a period format Vennominon dying in battle no longer fetches 'Vennominaga the Deity of Poisonous Snakes' from the hand or Deck, which removes the era card's most common line of play.\" Not established: a separate ruling on a Trap's timing after the Damage Step ends; the modern card is used at both snapshots and the engine handles that timing as it does for the modern card."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "ignis-babelcdb"
-  ],
-  "event": {
-    "effective": {
-      "date": "2011-10-04",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (LCGX-EN219, Legendary Collection 2: The Duel Academy Years Mega Pack)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "Activate only when a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed. Special Summon 1 \"Vennominaga the Deity of Poisonous Snakes\" from your hand or Deck.",
-    "modern_text": "When a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed, except by battle: Special Summon 1 \"Vennominaga the Deity of Poisonous Snakes\" from your hand or Deck.",
-    "summary": "Functional erratum: v1 (LCGX-EN219) inserted 'except by battle' into the trigger condition, so the modern card only activates when a face-up 'Vennominon the King of Poisonous Snakes' you control is destroyed by a non-battle cause. The v0 text (TAEV-EN069) says only 'Activate only when a face-up \"Vennominon the King of Poisonous Snakes\" you control is destroyed', with no battle exclusion, so battle destruction was a legal trigger in the era. Ignis's anime card 511002525 shows the engine delta directly: its script is the modern script plus EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY on the EVENT_DESTROYED trigger.",
-    "sources": [
-      "yugipedia-card-errata",
-      "yugipedia-set-pages",
-      "ignis-cardscripts",
-      "ignis-babelcdb"
-    ]
-  },
-  "coverage": {
-    "kind": "custom-script",
-    "historical_passcode": 600000007,
-    "script": "data/custom-cards/c600000007.lua"
-  }
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v8-2011",
+    "ude-judge-list-snake-deity-2007",
+    "konami-card-faq-2008-12-15-pr"
+  ]
 }

@@ -5,51 +5,58 @@
     "passcode": 50705071,
     "name": "Metalzoa"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2011-08-13",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (WP11-EN014, World Championship 2011 Card Pack)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "This monster can only be Special Summoned from your Deck to your side of the field by offering \"Zoa\" equipped with \"Metalmorph\" as a Tribute.",
+          "modern_text": "Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \"Zoa\" equipped with \"Metalmorph\".",
+          "summary": "Wording only, on Konami's period rulings (round 035). The era text \"This monster can only be Special Summoned from your Deck to your side of the field by offering \\\"Zoa\\\" equipped with \\\"Metalmorph\\\" as a Tribute\" says \"can only be\", not \"cannot be Special Summoned except by\". Konami's rulebook (Versions 7.0 to 8.0) lets a Special Summon Monster be Special Summoned by another card's effect once it was properly Special Summoned, and Konami's strategy article (printed 2009-12-07) applies that to \"can only be Special Summoned by\" wording and keeps the permanent lock for \"except by\". So the era card and the errata'd \"Must first be Special Summoned (from your Deck) by Tributing \\\"Zoa\\\" equipped with \\\"Metalmorph\\\"\" revive alike. The errata'd text also spells out \"Cannot be Normal Summoned or Set\", which the era wording implies for a Special Summon Monster (this record's earlier reading); no source read rules on that for this card. No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-official-rulebook-v71-2010",
+            "konami-tcg-strategy-special-summons-2009",
+            "konami-card-faq-2008-12-15-uz",
+            "konami-ocg-card-database-faq"
+          ]
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "partial",
-      "tested": true,
-      "reason": "Round 029: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000001.json; passcode 600000001). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In a period format EDOPro lets a Metalzoa that reached the field once be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, which the era's \"can only be Special Summoned from your Deck\" text forbids outright."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 035: the generated card 600000001 (rounds 029 and 031) was removed and its number retired. On Konami's period rulings the modern card behaves as the era card did at the snapshots this record applies at, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 50705071 exists upstream. v0 (TFK-002, Yu-Gi-Oh! The Falsebound Kingdom promos, 2003-11-04 NA / 2004-11-19 EU) is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24); the erratum arrives 2011-08-13, after both. Trailing cosmetic revision v1 -> v2 (LCJW-EN178, 2013-10-11: \"Normal Summoned or Set\" -> \"Normal Summoned/Set\") is not recorded as a change; cards.cdb matches v2 exactly. Metalzoa does not appear on the EdisonFormat.com Functional Errata list."
+    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 50705071 exists upstream. v0 (TFK-002, Yu-Gi-Oh! The Falsebound Kingdom promos, 2003-11-04 NA / 2004-11-19 EU) is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24); the erratum arrives 2011-08-13, after both. Trailing cosmetic revision v1 -> v2 (LCJW-EN178, 2013-10-11: \"Normal Summoned or Set\" -> \"Normal Summoned/Set\") is not recorded as a change; cards.cdb matches v2 exactly. Metalzoa does not appear on the EdisonFormat.com Functional Errata list.\n\nRound 035 (2026-09-29) correction. The strict-nomi call was read from the printed wording alone (this record's own review says so) and no period ruling was cited for it. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18), says of Special Summon Monsters: \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" Konami's TCG strategy article (printed date 2009-12-07; earliest capture 2015-11-06) says a monster worded \"This card can only be Special Summoned by...\" can be Special Summoned again from the Graveyard after one proper Summon, and reserves the permanent lock for \"cannot be Special Summoned except by...\". This card's text says \"can only be\", so the era card and the errata'd card revive alike. Evidence and its limits: docs/research/period-rulings-generated-scripts.md, sections 3 and 6. Superseded summary, kept verbatim: \"Functional erratum: the era text \"This monster can only be Special Summoned from your Deck to your side of the field by offering \\\"Zoa\\\" equipped with \\\"Metalmorph\\\" as a Tribute\" is a strict nomi - the Deck procedure is the only way Metalzoa can ever be Special Summoned, so a Metalzoa in the Graveyard is dead. The errata'd \"Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \\\"Zoa\\\" equipped with \\\"Metalmorph\\\"\" is semi-nomi: once it has been properly Summoned out of the Deck, the modern card may be Special Summoned again by generic revival. The explicit \"Cannot be Normal Summoned or Set\" line only spells out what the era nomi clause already imposed.\" Superseded implementation note, kept verbatim: \"Round 029: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000001.json; passcode 600000001). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.\" Superseded gap statement, kept verbatim: \"In a period format EDOPro lets a Metalzoa that reached the field once be revived from the Graveyard by Monster Reborn, Premature Burial or Call of the Haunted, which the era's \"can only be Special Summoned from your Deck\" text forbids outright.\" Not established for this card: whether the period card could be Normal Summoned (its text lacks the sentence); the modern card cannot. The GOAT-era behaviour is unresolved; the erratum (2011-08-13) precedes Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
-  ],
-  "event": {
-    "effective": {
-      "date": "2011-08-13",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (WP11-EN014, World Championship 2011 Card Pack)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "This monster can only be Special Summoned from your Deck to your side of the field by offering \"Zoa\" equipped with \"Metalmorph\" as a Tribute.",
-    "modern_text": "Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \"Zoa\" equipped with \"Metalmorph\".",
-    "summary": "Functional erratum: the era text \"This monster can only be Special Summoned from your Deck to your side of the field by offering \\\"Zoa\\\" equipped with \\\"Metalmorph\\\" as a Tribute\" is a strict nomi - the Deck procedure is the only way Metalzoa can ever be Special Summoned, so a Metalzoa in the Graveyard is dead. The errata'd \"Cannot be Normal Summoned or Set. Must first be Special Summoned (from your Deck) by Tributing \\\"Zoa\\\" equipped with \\\"Metalmorph\\\"\" is semi-nomi: once it has been properly Summoned out of the Deck, the modern card may be Special Summoned again by generic revival. The explicit \"Cannot be Normal Summoned or Set\" line only spells out what the era nomi clause already imposed.",
-    "sources": [
-      "yugipedia-card-errata",
-      "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
-  },
-  "coverage": {
-    "kind": "custom-script",
-    "historical_passcode": 600000001,
-    "script": "data/custom-cards/c600000001.lua"
-  }
+    "yugipedia-set-pages",
+    "konami-official-rulebook-v71-2010",
+    "konami-tcg-strategy-special-summons-2009",
+    "konami-card-faq-2008-12-15-uz",
+    "konami-ocg-card-database-faq"
+  ]
 }

@@ -490,16 +490,6 @@
       ]
     },
     {
-      "url": "https://web.archive.org/web/20110626063446/http://www.yugioh-card.com:80/en/gameplay/rulings/EXVCRulesBook000512_1.2_x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 78
-        }
-      ]
-    },
-    {
       "url": "https://web.archive.org/web/20110712120241/http://www.yugioh-card.com:80/en/gameplay/rulings/DREVRulebook110517_v1.1x.pdf",
       "category": "archived capture",
       "occurrences": [
@@ -550,16 +540,6 @@
         {
           "file": "docs/research/search-verification-interval.md",
           "line": 91
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20120807043904/http://www.yugioh-card.com/en/gameplay/errata/101105%20recent%20errata%20list%20-%20x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 102
         }
       ]
     },
