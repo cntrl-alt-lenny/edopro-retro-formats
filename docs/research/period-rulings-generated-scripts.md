@@ -612,6 +612,8 @@ differences that the erratum records do not describe.
 
 ### 11.5 What round 036 does not establish
 
+*Round 037 followed it: every erratum record with a text-only `functional` call was checked against the same corpus, and round 036's open questions (VW-Tiger Catapult's targeting, the three missing differences, the Machina Attack Position clause) were settled where evidence allows: `text-only-errata-audit.md`.*
+
 - When Konami withdrew the UDE card FAQ, if it did (the decision makes it a product rule).
 - Anything about GOAT (2005-04-01) for the class answers or the new cards.
 - Whether two Second Coin Toss copies have separate uses.

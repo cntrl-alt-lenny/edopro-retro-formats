@@ -21,8 +21,9 @@ import json
 import shutil
 import types
 import unittest
+from unittest import mock
 
-from retroformats.model import change_state_at
+from retroformats.model import ERRATUM_RULINGS_GATE_EXEMPT, change_state_at
 from retroformats.repo import Repository
 from retroformats.validate import Validator
 
@@ -176,10 +177,24 @@ class ErratumRulingsGateTest(TempRepoTest):
         errors, warnings = self._codes()
         self.assertNotIn("erratum.rulings-check-missing", errors | warnings)
 
-    def test_a_transition_that_cites_a_ruling_source_is_not_asked_again(self):
-        # Rounds 035 and 036 recorded those rulings on the transition's own sources.
+    def test_citing_a_ruling_source_does_not_excuse_a_transition(self):
+        # A ruling cited for another point does not say which rulings were searched for this one.
         self._seed(events={"e1": self._event(sources=["test-source", "test-ude-ruling"])})
         errors, warnings = self._codes()
+        self.assertIn("erratum.rulings-check-missing", errors | warnings)
+
+    def test_only_the_three_transitions_rounds_035_and_036_checked_are_exempt(self):
+        self.assertEqual(
+            {
+                ("erratum-dark-necrofear", "c2"),
+                ("erratum-fushioh-richie", "event"),
+                ("erratum-second-coin-toss", "event"),
+            },
+            set(ERRATUM_RULINGS_GATE_EXEMPT),
+        )
+        self._seed()
+        with mock.patch("retroformats.validate.ERRATUM_RULINGS_GATE_EXEMPT", frozenset({("erratum-beta", "e1")})):
+            errors, warnings = self._codes()
         self.assertNotIn("erratum.rulings-check-missing", errors | warnings)
 
     def test_a_transition_a_generated_card_implements_is_covered_by_the_cards_check(self):
@@ -299,6 +314,26 @@ class ErratumRulingsGateTest(TempRepoTest):
         errors, _ = self._codes()
         self.assertIn("erratum.contradicting-ruling-unaccepted", errors)
 
+    def test_a_cosmetic_transition_may_carry_the_check_that_made_it_cosmetic(self):
+        # Round 037 reclassifies a transition cosmetic because a ruling in force contradicts the difference it
+        # claimed. Its check keeps that finding as the evidence; the transition claims nothing a ruling contradicts.
+        contradicting = _check(_finding(finding="contradicts"))
+        event = self._event(kind="cosmetic")
+        event["transitions"][0]["rulings_check"] = contradicting
+        self._seed(events={"e1": event}, classification="cosmetic", states=[])
+        errors, warnings = self._codes()
+        self.assertNotIn("erratum.contradicting-ruling-unaccepted", errors)
+        self.assertNotIn("erratum.contradicting-ruling-range-unresolved", warnings)
+        # The same finding on a transition that still claims a difference is refused.
+        self._with_check(contradicting)
+        errors, _ = self._codes()
+        self.assertIn("erratum.contradicting-ruling-unaccepted", errors)
+        # and the check is still validated on a cosmetic transition
+        event["transitions"][0]["rulings_check"] = _check(_finding(finding="partly"))
+        self._seed(events={"e1": event}, classification="cosmetic", states=[])
+        errors, _ = self._codes()
+        self.assertIn("erratum.rulings-check-malformed", errors)
+
     def test_the_two_records_share_one_body_and_only_the_code_prefix_differs(self):
         # `Validator._check_rulings_body` is the generated cards' check and the errata records'
         # check at once: the same finding values, in_force values and owner_decision rules.
@@ -316,14 +351,13 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
         cls.repo = Repository.load(REPO_ROOT)
         cls.validator = Validator(cls.repo)
         cls.validator.validate()
-        sources = {s.id: s for s in cls.repo.global_sources.values()}
-        cls.ruled = {sid for sid, s in sources.items() if s.raw.get("ruling_class")}
+        cls.exempt = ERRATUM_RULINGS_GATE_EXEMPT
 
     def _independent_scope(self):
-        """The records in scope, re-derived from the brief's conditions and the raw JSON, with no
-        use of the validator: (a) a `functional` transition, (b) citing no source with a
-        `ruling_class`, (c) not yet in effect at Edison's snapshot (or undated), (d) not
-        implemented by a generated card."""
+        """The transitions in scope, re-derived from the raw JSON with no use of the validator:
+        (a) `functional`, (b) not one of the three that rounds 035 and 036 checked (they cite a ruling
+        source), (c) not yet in effect at Edison's snapshot (or undated), (d) on a record no generated
+        card implements."""
         linked = {
             json.loads(p.read_text(encoding="utf-8"))["erratum"]
             for p in (REPO_ROOT / "data" / "custom-cards").glob("*.json")
@@ -343,7 +377,7 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
                 for event_id, effective, transitions in events
                 for transition in transitions
                 if transition["kind"] == "functional"
-                and not any(s in self.ruled for s in transition.get("sources", []))
+                and (raw["id"], event_id) not in self.exempt
                 and change_state_at({"effective": effective}, EDISON_SNAPSHOT) != "new"
             ]
             if hits:
@@ -374,7 +408,7 @@ class LiveErratumRulingsGateTest(unittest.TestCase):
                 for transition in event.transitions:
                     if (
                         transition.kind == "functional"
-                        and not any(s in self.ruled for s in transition.sources)
+                        and (erratum.id, event_id) not in self.exempt
                         and event.state_at(EDISON_SNAPSHOT) != "new"
                         and not any(c.erratum == erratum.id for c in self.repo.custom_cards.values())
                     ):

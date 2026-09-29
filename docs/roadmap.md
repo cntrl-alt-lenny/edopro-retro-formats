@@ -613,14 +613,26 @@ reflects that.
    optional and whether it targets. Round 029's script matched Project Ignis's too closely
    to call original (see `docs/rounds/029-edison-historical-scripts/verifier.md`); since
    round 032 a derived, credited script would be allowed, so the evidence is what holds it back.
-   It stays a known gap, with the modern card in Edison's list. **Remaining:** 28 Edison
-   `format.erratum-known-divergence` cards (`validate` at round 036's head; 39 at round 035's): Night Assailant,
+   It stays a known gap, with the modern card in Edison's list. **Round 037** checked every erratum record whose
+   `functional` transition applies at Edison's or Tengu's snapshot and that no ruling had been asked about (83 by
+   the brief's four conditions, 91 by the per-transition gate: the six undated ones and the two with a later
+   functional change too) against the period rulings, and recorded the check on each transition (`rulings_check`, `docs/errata.md`,
+   "The rulings gate on errata records": a missing check is now a validator error). Rulings contradict part or
+   all of the claim on 19 records: seven became cosmetic-only (A Hero Emerges, D.D. Scout Plane, Diffusion Wave-Motion, Gaia Soul the
+   Combustible Collective, Imperial Custom, Senet Switch, Soul Rope), five more had one transition made cosmetic (D.D. Survivor, where a
+   second, supported transition was recorded, Axe of Despair, Tyrant Dragon, Toon Summoned Skull and Blackwing - Sirocco the Dawn), and
+   seven were narrowed (Ancient Fairy Dragon, Anteatereatingant, Blaze Accelerator, Boss Rush, Red-Eyes Wyvern, Tri-Blaze Accelerator, Wild Fire). **Imperial Custom and Senet Switch use the modern card
+   again in the Edison and Tengu lists** (the only list change); Axe of Despair's and Tyrant Dragon's 2013 transitions became
+   cosmetic. Anything thin or in conflict between period sources was left alone and is listed for the owner in
+   `docs/research/text-only-errata-audit.md`, section 8; so are the points where an Ignis script and a ruling disagree
+   (section 9). **Remaining:** 25 Edison
+   `format.erratum-known-divergence` cards (`validate` at round 037's head; 28 at round 036's): Night Assailant,
    five cards that apply an intermediate state at Edison only (Freed the Matchless General,
    Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon, Toon Table of Contents -
    the modern activation requirement plus the period reveal on a failed search, which only
    shows when a response empties the Deck mid-chain, so the engine test is a heavier
-   scenario), and 22 whose historical state also applies at Tengu's snapshot (32 before round
-   035, plus Soul Rope, less the eleven round 036 corrected or shipped). Round 035 also found that a strict-nomi reading needs a period ruling
+   scenario), and 19 whose historical state also applies at Tengu's snapshot (32 before round
+   035, plus Soul Rope, less the eleven round 036 corrected or shipped, less A Hero Emerges, D.D. Scout Plane and Soul Rope, which round 037 made modern-correct). Round 035 also found that a strict-nomi reading needs a period ruling
    (the wording alone was not evidence), and left the other records that rest on it or on any
    printed-text-only functional call unadjudicated: 104 records, counted mechanically in the
    research document, section 7 (`docs/research/edison-behaviour-gaps.md`, section 2 carries

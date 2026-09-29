@@ -293,13 +293,13 @@ erratum's own verdict at each snapshot (supported, contradicted, unresolved) is 
 
 **When a check is required.** A transition is in scope when it is `functional`; its event is not
 yet in effect at the snapshot of `2010-03-edison` or `2011-09-tengu` (state `old`), or cannot be
-placed against it (state `ambiguous`, an undated event); the record is not implemented by a
-generated card (the card's own check covers it); and it cites no source registered with a
-`ruling_class` (rounds 035 and 036 recorded those rulings on the transition's sources). GOAT is not
-a gate format: its list is entry-for-entry Project Ignis's and reads no erratum record. A limit to
-know: a transition that cites a ruling source is not asked again, so a ruling cited for another
-point would excuse it; adding a ruling source to a transition alongside a check is what round 037
-does.
+placed against it (state `ambiguous`, an undated event); and the record is not implemented by a
+generated card (the card's own check covers it). Three transitions are exempt, by name
+(`ERRATUM_RULINGS_GATE_EXEMPT`): the ones rounds 035 and 036 checked and recorded on their own
+sources before the check existed (Dark Necrofear's `c2`, Fushioh Richie's and Second Coin Toss's).
+Citing a ruling source excuses nothing else: a ruling cited for one point does not say which
+rulings were searched for another. GOAT is not a gate format: its list is entry-for-entry Project
+Ignis's and reads no erratum record.
 
 | code | severity | when |
 |---|---|---|

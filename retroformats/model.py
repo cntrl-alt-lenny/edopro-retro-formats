@@ -1481,6 +1481,17 @@ RULINGS_LATER_REPLACEMENT_NONE = "none-found"
 # `rulings_check`. GOAT is not among them: its list is entry-for-entry Project Ignis's and reads no
 # erratum record.
 ERRATUM_RULINGS_GATE_FORMATS = ("2010-03-edison", "2011-09-tengu")
+# The three transitions rounds 035 and 036 checked against period rulings and recorded on their own sources,
+# before the check existed: (erratum id, event id). Round 036 left them as they are (Second Coin Toss stays as
+# that round left it), so they are not asked for a check. No other transition is exempt, whatever it cites:
+# a ruling cited for another point does not excuse a transition from saying which rulings were searched.
+ERRATUM_RULINGS_GATE_EXEMPT = frozenset(
+    {
+        ("erratum-dark-necrofear", "c2"),
+        ("erratum-fushioh-richie", "event"),
+        ("erratum-second-coin-toss", "event"),
+    }
+)
 # What a source is, when it is a ruling (an optional field of data/sources.json). `ude-era-ruling`:
 # a UDE card FAQ entry or Netrep answer, including the Konami-hosted copy of the UDE card FAQ
 # (2008-12-15). `konami-document`: a Konami-authored statement of the rules or the text to play

@@ -40,6 +40,7 @@ from .model import (
     PRODUCT_KINDS,
     REGION_SCOPE_BITS,
     RESERVED_PASSCODE_RANGE,
+    ERRATUM_RULINGS_GATE_EXEMPT,
     ERRATUM_RULINGS_GATE_FORMATS,
     NEW,
     RULINGS_FINDINGS,
@@ -593,9 +594,11 @@ class Validator:
         A transition applies at a snapshot when its event is not yet in effect there (OLD) or
         cannot be placed relative to it (AMBIGUOUS): the era card is then the one the format
         plays. Not required: a transition of a record that a generated card implements (the
-        card's own `rulings_check` covers it), and one that already cites a source registered
-        with a `ruling_class` (round 035 and 036 recorded those rulings). Every transition that
-        does carry a check is validated, whatever its kind.
+        card's own `rulings_check` covers it), and the three transitions in
+        `ERRATUM_RULINGS_GATE_EXEMPT` (rounds 035 and 036 recorded their rulings on the
+        transition's sources, before the check existed). Citing a ruling source does not excuse a
+        transition: a ruling cited for another point does not say which rulings were searched for
+        this one. Every transition that does carry a check is validated, whatever its kind.
 
         - `erratum.rulings-check-missing`: a transition in scope with no check.
         - `erratum.rulings-check-malformed`, `erratum.contradicting-ruling-unaccepted`,
@@ -626,10 +629,7 @@ class Validator:
                     continue
                 if not any(event.state_at(snapshot) != NEW for snapshot in snapshots):
                     continue
-                if any(
-                    (source := self.repo.resolve_source(source_id)) is not None and source.raw.get("ruling_class")
-                    for source_id in transition.sources
-                ):
+                if (erratum.id, event_id) in ERRATUM_RULINGS_GATE_EXEMPT:
                     continue
                 self.error(
                     "erratum.rulings-check-missing",

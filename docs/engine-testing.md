@@ -40,12 +40,12 @@ network access.
 
 ```bash
 python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
-python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 62
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 63
 ```
 
 `prepare` fetches and verifies the pinned inputs and compiles the core (it needs
 `git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
-`tests/engine` and **fails on any skip**, failure or error, or if fewer than 62
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 63
 tests execute. The layout it produces is `DEST/repos/babelcdb`,
 `DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
 
@@ -214,6 +214,14 @@ seventeen added (Dice Re-Roll 2, Machina Peacekeeper 3, Machina Gearframe 3, Ele
 Chaos Neos 2, Treeborn Frog 3, and the four modern-card tests). Dice Re-Roll's test activates a
 copy before each of two rolls; it never re-rolls an already re-rolled result, which no ruling
 covers (round 034's scenario did, and was dropped).
+
+Round 037 made Imperial Custom and Senet Switch cosmetic-only records (Edison's and Tengu's lists use the
+modern card again, instead of Ignis's pre-errata variant), with one parametrised test
+(`Round037CosmeticRecordsUseTheModernCardTest`): the lists name the modern code and not the variant, and in a duel
+the modern card does what the ruling says (Imperial Custom does not protect a Continuous Trap from destruction as a
+cost; Senet Switch's zone is designated at activation, so a monster moved into it in response leaves the effect
+with nothing to do, where the variant moves to whichever zone is free). The engine floor moved 62 to 63. A harness
+message was added for it: `MSG_SELECT_DISFIELD` (the zone prompt `Card.SelectAdjacent` raises).
 
 Beside each difference are control scenarios (equip, piercing damage,
 attack-all, destruction by a card effect, the coin toss, banish and return) that must behave the same, so a script cannot pass by doing
