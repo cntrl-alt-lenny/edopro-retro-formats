@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 036-apply-ude-rulings
+role: builder
+branch: builder/036-apply-ude-rulings
+head: 42d946edf0d4679663c642a6bac7b947d742cc29
+os: macOS 27.0
+python: 3.9.6
+written: 2026-09-29T11:55:23Z
+-->
 ## Verified
 
 Commands were run with Python 3.13 (`python3` on the owner's Mac is 3.9, below the floor). "Head"
