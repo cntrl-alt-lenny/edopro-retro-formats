@@ -64,8 +64,46 @@
           "sources": [
             "yugipedia-card-errata",
             "ignis-cardscripts",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-uz"
+          ],
+          "rulings_check": {
+            "difference": "The 2016 text prefixes 'Once per turn,' to the Standby Phase revival; the earlier text has no such limit (event c2).",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-uz",
+                "looked_for": "d1: The 2016 text prefixes 'Once per turn,' to the Standby Phase revival; the earlier text has no such limit (event c2).",
+                "finding": "does-not-address",
+                "passage": "You can keep Special Summoning Vampire Lord as long as each time he is destroyed by your opponent's card effect."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Vampire Lord on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Vampire Lord in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Vampire Lord in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Vampire Lord' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -102,13 +140,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Baseline text is v1 (SD2-EN003, 2005-01-01), an exact match to the goat cdb entry and the printing in force at the 2005-04-01 GOAT snapshot. Note for the Edison snapshot: v4 (DPKB-EN013) reached shelves 2010-04-16, eight days before 2010-04-24, so the Edison-era printing is v4; the cosmetic run is collapsed at v7 as instructed (at most one cosmetic entry between behavioural changes), which means period records will display v1's text - acceptable because v1 through v7 are behaviourally identical. Remaining script-diff hunks are API/macro-equivalent: `EVENT_PHASE|PHASE_STANDBY` vs '+', `(r&0x41)~=0x41` vs `r&(REASON_DESTROY|REASON_EFFECT)~=...` (0x41 is exactly REASON_DESTROY|REASON_EFFECT), `Duel.IsTurnPlayer`/`Duel.IsPhase` vs `Duel.GetTurnPlayer()==tp`/`Duel.GetCurrentPhase()==...`. Conflicting evidence preserved on the 2016 once-per-turn clause: it is a real printed restriction but is invisible in both scripts, so a reviewer may prefer to downgrade it to cosmetic. Trailing cosmetic v8 -> v11 (LCKC-EN024 2018-03-08 GY wording, SBSC-EN007 2019-08-01 'If this card inflicts', SGX3-ENC05 2023-03-30 'card type') is not recorded as a change."
+    "notes": "Baseline text is v1 (SD2-EN003, 2005-01-01), an exact match to the goat cdb entry and the printing in force at the 2005-04-01 GOAT snapshot. Note for the Edison snapshot: v4 (DPKB-EN013) reached shelves 2010-04-16, eight days before 2010-04-24, so the Edison-era printing is v4; the cosmetic run is collapsed at v7 as instructed (at most one cosmetic entry between behavioural changes), which means period records will display v1's text - acceptable because v1 through v7 are behaviourally identical. Remaining script-diff hunks are API/macro-equivalent: `EVENT_PHASE|PHASE_STANDBY` vs '+', `(r&0x41)~=0x41` vs `r&(REASON_DESTROY|REASON_EFFECT)~=...` (0x41 is exactly REASON_DESTROY|REASON_EFFECT), `Duel.IsTurnPlayer`/`Duel.IsPhase` vs `Duel.GetTurnPlayer()==tp`/`Duel.GetCurrentPhase()==...`. Conflicting evidence preserved on the 2016 once-per-turn clause: it is a real printed restriction but is invisible in both scripts, so a reviewer may prefer to downgrade it to cosmetic. Trailing cosmetic v8 -> v11 (LCKC-EN024 2018-03-08 GY wording, SBSC-EN007 2019-08-01 'If this card inflicts', SGX3-ENC05 2023-03-30 'card type') is not recorded as a change.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Vampire Lord). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c2] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-uz"
   ]
 }

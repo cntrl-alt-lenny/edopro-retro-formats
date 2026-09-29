@@ -20,11 +20,49 @@
           "axis": null,
           "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributing. Once per turn, you can select 1 face-up \"Blackwing\" monster you control. It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself. Monsters other than the selected monster cannot attack the turn you activate this effect.",
           "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon or Set this card without Tributes. Once per turn: You can target 1 face-up \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters currently on the field, except itself. Monsters other than that target cannot attack during the turn you activate this effect.",
-          "summary": "The CRMS-EN010 text states no duration for the boost ('It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself') and sums the Blackwings on the field with no snapshot wording; TU07-EN018 writes the duration out as 'until the End Phase' and fixes the amount to the Blackwings 'currently on the field'. As printed, the period card's ATK gain has no expiry and the modern one lapses in the End Phase. The same printing converts 'select' to 'target'.",
+          "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d3) The CRMS text sums the Blackwings with no snapshot wording (possibly recalculated as Blackwings enter or leave); the modern text fixes the amount to the Blackwings currently on the field. Raised only in the record's review notes, not in its behavioural_impact. Withdrawn as a difference: The CRMS-era card's ATK boost has no expiry; the modern card's lapses in the End Phase (c0 transition, 2012). Contradicted by Konami's Crimson Crisis sneak peek card rulings: \"The ATK boost lasts until the End Phase.\"",
           "sources": [
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-crimson-crisis-rulings-2009"
+          ],
+          "rulings_check": {
+            "difference": "The CRMS text sums the Blackwings with no snapshot wording (possibly recalculated as Blackwings enter or leave); the modern text fixes the amount to the Blackwings currently on the field. Raised only in the record's review notes, not in its behavioural_impact.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-crimson-crisis-rulings-2009",
+                "looked_for": "d3: The CRMS text sums the Blackwings with no snapshot wording (possibly recalculated as Blackwings enter or leave); the modern text fixes the amount to the Blackwings currently on the field. Raised only…",
+                "finding": "does-not-address",
+                "passage": "Your opponent's \"Blackwing\" monsters are also counted."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "an entry for Blackwing - Sirocco the Dawn and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Blackwing - Sirocco the Dawn on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Blackwing - Sirocco the Dawn in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Blackwing - Sirocco the Dawn' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     },
@@ -58,16 +96,56 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn: You can target 1 \"Blackwing\" monster you control; until the End Phase, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
           "modern_text": "If your opponent controls a monster and you control no monsters, you can Normal Summon/Set this card without Tributing. Once per turn, during your Main Phase 1: You can target 1 \"Blackwing\" monster you control; until the end of this turn, it gains ATK equal to the total ATK of all \"Blackwing\" monsters currently on the field, except itself. Monsters other than the targeted monster cannot attack during the turn you activate this effect.",
-          "summary": "Functional erratum: the effect gains an activation window - 'Once per turn, during your Main Phase 1' - which none of the CRMS/TU07/DL17 texts carry, so the period card's once-per-turn Ignition effect can also be used in Main Phase 2 while the errata'd card cannot. The same printing restates the duration as 'until the end of this turn'.",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: The CRMS-era effect can also be used in Main Phase 2; the 2014 errata card cannot (Main Phase 1 only) (c2 transition). A period ruling in force says otherwise: Konami's Crimson Crisis sneak peek card rulings: \"\"Blackwing – Sirocco the Dawn\" cannot activate its ATK boost in Main Phase 2.\" No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
             "yugipedia-set-pages",
-            "ignis-babelcdb"
-          ]
+            "ignis-babelcdb",
+            "konami-crimson-crisis-rulings-2009"
+          ],
+          "rulings_check": {
+            "difference": "The CRMS-era effect can also be used in Main Phase 2; the 2014 errata card cannot (Main Phase 1 only) (c2 transition).",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-crimson-crisis-rulings-2009",
+                "looked_for": "d2: The CRMS-era effect can also be used in Main Phase 2; the 2014 errata card cannot (Main Phase 1 only) (c2 transition).",
+                "finding": "contradicts",
+                "passage": "\"Blackwing – Sirocco the Dawn\" cannot activate its ATK boost in Main Phase 2.",
+                "in_force": "shown",
+                "in_force_basis": "Konami's Crimson Crisis sneak peek card rulings (compiled 2009-02-27) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "an entry for Blackwing - Sirocco the Dawn and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Blackwing - Sirocco the Dawn on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Blackwing - Sirocco the Dawn in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Blackwing - Sirocco the Dawn' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -110,7 +188,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In Edison, Sirocco's boost is printed with no expiry and with no phase restriction on its use, so a Blackwing pumped by it should keep the ATK past the End Phase and the effect should be usable in Main Phase 2; the shipped card expires the gain at end of turn and refuses the effect outside Main Phase 1."
+        "behavioural_impact": "In Edison, Sirocco's boost is printed with no expiry and with no phase restriction on its use, so a Blackwing pumped by it should keep the ATK past the End Phase and the effect should be usable in Main Phase 2; the shipped card expires the gain at end of turn and refuses the effect outside Main Phase 1. Round 037 (2026-09-29): withdrawn as a difference on period rulings: The CRMS-era card's ATK boost has no expiry; the modern card's lapses in the End Phase (c0 transition, 2012). (review notes)."
       }
     }
   ],
@@ -118,11 +196,12 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Crimson Crisis released 2009-03-03, so this card is Edison-pool only (it postdates the 2005-04-01 GOAT snapshot); the text in force at the 2010-04-24 Edison snapshot is the baseline v0 CRMS-EN010 printing, since the next printing (TU07-EN018) is 2012-01-01. Conservatism note on change 1: the duration insertion is the one call I could not settle from period rulings - PSCT conversions routinely make implicit durations explicit, and if the CRMS gain was already ruled to end in the End Phase the change would be cosmetic. It is recorded functional because 'until the End Phase' is a deliberate PSCT specification (PSCT also leaves durations off for permanent gains) and because the un-snapshotted sum and the snapshotted sum resolve differently when Blackwings enter or leave between activation and resolution. No implementation is attached to the 2012-01-01 .. 2014-10-23 intermediate version: no configured period snapshot falls inside that interval, so it is not needed. The cdb text is exactly v3 (LC5D-EN112); the later v4 (BLCR-EN058, 2022-11-17), which changes the summon condition to 'If only your opponent controls a monster' and rewrites the attack lock as 'you can only attack with that monster', sits beyond the shipped implementation and is not recorded. No entry for this card in edison-functional-errata.md."
+    "notes": "upstream_implementations is empty. Crimson Crisis released 2009-03-03, so this card is Edison-pool only (it postdates the 2005-04-01 GOAT snapshot); the text in force at the 2010-04-24 Edison snapshot is the baseline v0 CRMS-EN010 printing, since the next printing (TU07-EN018) is 2012-01-01. Conservatism note on change 1: the duration insertion is the one call I could not settle from period rulings - PSCT conversions routinely make implicit durations explicit, and if the CRMS gain was already ruled to end in the End Phase the change would be cosmetic. It is recorded functional because 'until the End Phase' is a deliberate PSCT specification (PSCT also leaves durations off for permanent gains) and because the un-snapshotted sum and the snapshotted sum resolve differently when Blackwings enter or leave between activation and resolution. No implementation is attached to the 2012-01-01 .. 2014-10-23 intermediate version: no configured period snapshot falls inside that interval, so it is not needed. The cdb text is exactly v3 (LC5D-EN112); the later v4 (BLCR-EN058, 2022-11-17), which changes the summon condition to 'If only your opponent controls a monster' and rewrites the attack lock as 'you can only attack with that monster', sits beyond the shipped implementation and is not recorded. No entry for this card in edison-functional-errata.md.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Blackwing - Sirocco the Dawn). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: The CRMS-era card's ATK boost has no expiry; the modern card's lapses in the End Phase (c0 transition, 2012). Contradicted by Konami's Crimson Crisis sneak peek card rulings: \"The ATK boost lasts until the End Phase.\" The transition stays functional on what remains, d3. A period ruling in force contradicts every difference the transition claimed: The CRMS-era effect can also be used in Main Phase 2; the 2014 errata card cannot (Main Phase 1 only) (c2 transition). Contradicted by Konami's Crimson Crisis sneak peek card rulings: \"\"Blackwing – Sirocco the Dawn\" cannot activate its ATK boost in Main Phase 2.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [c0] d3 unresolved at Edison, unresolved at Tengu; d1 contradicted at Edison, contradicted at Tengu. [c2] d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"The CRMS-EN010 text states no duration for the boost ('It gains ATK equal to the total ATK of all face-up \"Blackwing\" monsters on the field except itself') and sums the Blackwings on the field with no snapshot wording; TU07-EN018 writes the duration out as 'until the End Phase' and fixes the amount to the Blackwings 'currently on the field'. As printed, the period card's ATK gain has no expiry and the modern one lapses in the End Phase. The same printing converts 'select' to 'target'.\" Superseded summary, kept verbatim: \"Functional erratum: the effect gains an activation window - 'Once per turn, during your Main Phase 1' - which none of the CRMS/TU07/DL17 texts carry, so the period card's once-per-turn Ignition effect can also be used in Main Phase 2 while the errata'd card cannot. The same printing restates the duration as 'until the end of this turn'.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-crimson-crisis-rulings-2009"
   ]
 }

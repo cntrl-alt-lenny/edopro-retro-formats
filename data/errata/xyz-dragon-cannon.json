@@ -65,8 +65,68 @@
             "yugipedia-card-errata",
             "ignis-cardscripts",
             "ignis-babelcdb",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-uz",
+            "ude-card-faq-2009-02-26-uz",
+            "ude-card-rulings-archive",
+            "konami-card-faq-2008-12-15-de"
+          ],
+          "rulings_check": {
+            "difference": "Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-nomi that can be Special Summoned from banishment once properly summoned, and only the Graveyard is barred.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-uz",
+                "looked_for": "d1: Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-n… (inference only: not counted)",
+                "finding": "does-not-address",
+                "passage": "These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-uz",
+                "looked_for": "d1: Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-n… (inference only: not counted)",
+                "finding": "does-not-address",
+                "passage": "They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
+              },
+              {
+                "source": "ude-card-faq-2009-02-26-uz",
+                "looked_for": "d1: Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-n… (inference only: not counted)",
+                "finding": "does-not-address",
+                "passage": "They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-n… (inference only: not counted)",
+                "finding": "does-not-address",
+                "passage": "These monsters cannot be Special Summoned EXCEPT by the way described in their text."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: Era XYZ-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-n… (inference only: not counted)",
+                "finding": "does-not-address",
+                "passage": "When a \"Special Summon-only\" monster is removed, without returning to the hand or Deck, after it is Special Summoned properly, it can be Special Summoned by \"Dimension Distortion\"."
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "XYZ-Dragon Cannon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "XYZ-Dragon Cannon in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:XYZ-Dragon Cannon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -103,13 +163,17 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Baseline text is v1 (DR1-EN107, 2005-03-19, matched at 0.9985), the printing in force at the 2005-04-01 GOAT snapshot; v0 (BPT-010, Collectible Tins 2003, month precision) says 'the above monsters' and predates it. Unlike its two siblings this card's errata'd text is dated by a reprint rather than a new number: Yugipedia lists v5 under the same code DPKB-EN025 as v4, with the Silver Dragon Value Box (2013-09-13) as its dating set, so XYZ-Dragon Cannon lost the strict nomi three years before XY-Dragon Cannon and XZ-Tank Cannon did with SDKS (2016-10-20). Both the 2005-04-01 and 2010-04-24 snapshots fall before 2013-09-13, so the baseline covers them. Lineage v3 is undated (no number, no set) but sits inside the collapsed cosmetic run, which is dated by v4, so no unresolved interval is introduced. Remaining script-diff hunks (`|` versus '+' in the REASON constants) are equivalent. The Monster-Zone material ruling cannot be sequenced against the erratum because it has no chronology."
+    "notes": "Baseline text is v1 (DR1-EN107, 2005-03-19, matched at 0.9985), the printing in force at the 2005-04-01 GOAT snapshot; v0 (BPT-010, Collectible Tins 2003, month precision) says 'the above monsters' and predates it. Unlike its two siblings this card's errata'd text is dated by a reprint rather than a new number: Yugipedia lists v5 under the same code DPKB-EN025 as v4, with the Silver Dragon Value Box (2013-09-13) as its dating set, so XYZ-Dragon Cannon lost the strict nomi three years before XY-Dragon Cannon and XZ-Tank Cannon did with SDKS (2016-10-20). Both the 2005-04-01 and 2010-04-24 snapshots fall before 2013-09-13, so the baseline covers them. Lineage v3 is undated (no number, no set) but sits inside the collapsed cosmetic run, which is dated by v4, so no unresolved interval is introduced. Remaining script-diff hunks (`|` versus '+' in the REASON constants) are equivalent. The Monster-Zone material ruling cannot be sequenced against the erratum because it has no chronology.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, XYZ-Dragon Cannon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c2] d1 unresolved (inference only) at Edison, unresolved (inference only) at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-uz",
+    "ude-card-faq-2009-02-26-uz",
+    "ude-card-rulings-archive",
+    "konami-card-faq-2008-12-15-de"
   ]
 }

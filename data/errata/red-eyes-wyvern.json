@@ -41,12 +41,59 @@
           "axis": null,
           "historical_text": "During your End Phase, if you did not Normal Summon/Set a monster this turn: You can banish this card from your Graveyard; Special Summon 1 \"Red-Eyes\" monster from your Graveyard, except \"Red-Eyes B. Chick\".",
           "modern_text": "Once per turn, during your End Phase: You can banish this card from your GY, then target 1 \"Red-Eyes\" monster in your GY; Special Summon that target. You cannot Normal Summon/Set during the turn you activate this effect.",
-          "summary": "Functional erratum with three separable changes: the 'if you did not Normal Summon/Set a monster this turn' activation requirement becomes a post-activation restriction ('You cannot Normal Summon/Set during the turn you activate this effect'); the revival becomes a targeting effect ('then target 1 \"Red-Eyes\" monster in your GY; Special Summon that target') where the old effect selected on resolution without targeting; and the 'except \"Red-Eyes B. Chick\"' exclusion is dropped, so the modern card can revive Red-Eyes B. Chick. An explicit 'Once per turn' is also added, which is inert on an effect that banishes itself as its cost.",
+          "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d1) Era: activation requires that you did not Normal Summon/Set a monster this turn (an activation condition). Modern: no such condition; instead you cannot Normal Summon/Set the turn you activate, so the modern card can be activated after a Normal Summon or Set. (d2) Era: the Special Summon selects the Red-Eyes monster on resolution (no target). Modern: the Red-Eyes monster is targeted on activation. (d4) Era text excludes \"Red-Eyes B. Chick\" from the revival; the modern text drops the exclusion, so the modern card can revive B. Chick. Withdrawn as a difference: Consequence claimed by the record: because the modern card targets in the Graveyard, it is stopped by Necrovalley where the era card, under a targeting-only Necrovalley ruling, was not. Contradicted by Konami TCG Card FAQ default_lo page (Internet Archive capture served 2008-12-16): \"\"Necrovalley\" negates costs and effects that require removing cards from the Graveyard.\"",
           "sources": [
             "yugipedia-card-errata",
             "yugipedia-set-pages",
-            "ignis-babelcdb"
-          ]
+            "ignis-babelcdb",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "konami-rulebook-2008-v70"
+          ],
+          "rulings_check": {
+            "difference": "Era: activation requires that you did not Normal Summon/Set a monster this turn (an activation condition). Modern: no such condition; instead you cannot Normal Summon/Set the turn you activate, so the modern card can be activated after a Normal Summon or Set. Era: the Special Summon selects the Red-Eyes monster on resolution (no target). Modern: the Red-Eyes monster is targeted on activation. Era text excludes \"Red-Eyes B. Chick\" from the revival; the modern text drops the exclusion, so the modern card can revive B. Chick.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-duelist-pack-tin-rulings-2010-03",
+                "looked_for": "d1: Era: activation requires that you did not Normal Summon/Set a monster this turn (an activation condition). Modern: no such condition; instead you cannot Normal Summon/Set the turn you activate, so th…",
+                "finding": "does-not-address",
+                "passage": "You can activate the effect of \"Red-Eyes Wyvern\" during the End Phase of the turn you could not Normal Summon due to the effect of \"Hidden Armory.\""
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: Era: activation requires that you did not Normal Summon/Set a monster this turn (an activation condition). Modern: no such condition; instead you cannot Normal Summon/Set the turn you activate, so th…",
+                "finding": "does-not-address",
+                "passage": "The effect that prohibits Normal Summons or Sets until the end of your next turn is not a restriction on this card's activation. So you can activate this card if you Normal Summoned earlier in the turn."
+              },
+              {
+                "source": "konami-rulebook-2008-v70",
+                "looked_for": "d2: Era: the Special Summon selects the Red-Eyes monster on resolution (no target). Modern: the Red-Eyes monster is targeted on activation.",
+                "finding": "does-not-address",
+                "passage": "An effect that requires players to make a selection when the effect is resolving also does not target."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-pr",
+                "looked_for": "an entry for Red-Eyes Wyvern and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Red-Eyes Wyvern on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Red-Eyes Wyvern in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Red-Eyes Wyvern' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -79,7 +126,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In a period format the modern card revives 'Red-Eyes B. Chick' (which the era text excludes) and its Summon targets in the GY, so it can be stopped by targeting protection - and, under the era's targeting-only Necrovalley ruling, by Necrovalley - where the era effect resolved without targeting."
+        "behavioural_impact": "In a period format the modern card revives 'Red-Eyes B. Chick' (which the era text excludes) and its Summon targets in the GY, so it can be stopped by targeting protection - and, under the era's targeting-only Necrovalley ruling, by Necrovalley - where the era effect resolved without targeting. Round 037 (2026-09-29): withdrawn as a difference on period rulings: Consequence claimed by the record: because the modern card targets in the Graveyard, it is stopped by Necrovalley where the era card, under a targeting-only Necrovalley ruling, was not. (review notes)."
       }
     }
   ],
@@ -87,11 +134,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; Ignis ships neither a goat nor a pre-errata variant, so the gap is real and recorded. Edison-era text is v0 (GX06-EN002, 2008-11-28, tcg-eu); the first rewording is 2013-10-11 and the erratum 2020-07-02, so both snapshots sit on v0. The leading cosmetic entry is recorded separately from the functional one so that the erratum is dated at its own printing rather than at the reprint. Note the direction of the once-per-turn addition: it is not the usual per-copy-to-per-name tightening, because the cost banishes the card itself, so it changes nothing; the load-bearing differences are the targeting and the removed 'Red-Eyes B. Chick' exclusion. The replacement of the 'did not Normal Summon/Set this turn' requirement by a restriction is recorded as part of the same erratum; the packet does not settle whether the modern restriction also forbids activating after a Normal Summon has already been used, and I did not guess."
+    "notes": "upstream_implementations is empty; Ignis ships neither a goat nor a pre-errata variant, so the gap is real and recorded. Edison-era text is v0 (GX06-EN002, 2008-11-28, tcg-eu); the first rewording is 2013-10-11 and the erratum 2020-07-02, so both snapshots sit on v0. The leading cosmetic entry is recorded separately from the functional one so that the erratum is dated at its own printing rather than at the reprint. Note the direction of the once-per-turn addition: it is not the usual per-copy-to-per-name tightening, because the cost banishes the card itself, so it changes nothing; the load-bearing differences are the targeting and the removed 'Red-Eyes B. Chick' exclusion. The replacement of the 'did not Normal Summon/Set this turn' requirement by a restriction is recorded as part of the same erratum; the packet does not settle whether the modern restriction also forbids activating after a Normal Summon has already been used, and I did not guess.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Red-Eyes Wyvern). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: Consequence claimed by the record: because the modern card targets in the Graveyard, it is stopped by Necrovalley where the era card, under a targeting-only Necrovalley ruling, was not. Contradicted by Konami TCG Card FAQ default_lo page (Internet Archive capture served 2008-12-16): \"\"Necrovalley\" negates costs and effects that require removing cards from the Graveyard.\" Konami's Extreme Victory card rulings: \"If you cannot remove monsters in the Graveyard from play because of Necrovalley, you cannot activate Debunk when a monster's effect activates in the Graveyard.\" The transition stays functional on what remains, d1, d2, d4. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu; d4 unresolved at Edison, unresolved at Tengu; d3 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum with three separable changes: the 'if you did not Normal Summon/Set a monster this turn' activation requirement becomes a post-activation restriction ('You cannot Normal Summon/Set during the turn you activate this effect'); the revival becomes a targeting effect ('then target 1 \"Red-Eyes\" monster in your GY; Special Summon that target') where the old effect selected on resolution without targeting; and the 'except \"Red-Eyes B. Chick\"' exclusion is dropped, so the modern card can revive Red-Eyes B. Chick. An explicit 'Once per turn' is also added, which is inert on an effect that banishes itself as its cost.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-duelist-pack-tin-rulings-2010-03",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-rulebook-2008-v70"
   ]
 }

@@ -17,14 +17,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Lineage v0 and v1 (both SDK-043, 2002-03-29) predate the baseline version - upstream's GOAT cdb text is exactly v2 (SKE-017, Starter Deck: Kaiba Evolution, 2004-03) - so they are noted rather than recorded. Minor packet observation, not a conflict: modern_text_matches_version reports index 3 at ratio 0.9952 because the pinned cards.cdb text carries a CRLF between the '(This card is not treated as a \"Puppet\" card.)' note and the effect line where the Yugipedia clean text runs them together; no wording differs. That parenthetical arrived with the same OP21 printing and is a name-collision clarification, not part of the behavioural change."
+    "notes": "Lineage v0 and v1 (both SDK-043, 2002-03-29) predate the baseline version - upstream's GOAT cdb text is exactly v2 (SKE-017, Starter Deck: Kaiba Evolution, 2004-03) - so they are noted rather than recorded. Minor packet observation, not a conflict: modern_text_matches_version reports index 3 at ratio 0.9952 because the pinned cards.cdb text carries a CRLF between the '(This card is not treated as a \"Puppet\" card.)' note and the effect line where the Yugipedia clean text runs them together; no wording differs. That parenthetical arrived with the same OP21 printing and is a name-collision clarification, not part of the behavioural change.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Mysterious Puppeteer). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-card-faq-2008-12-16-ik"
   ],
   "event": {
     "effective": {
@@ -42,8 +44,53 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-card-errata",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-16-lo",
+      "konami-card-faq-2008-12-16-ik"
+    ],
+    "rulings_check": {
+      "difference": "Era: Mysterious Puppeteer's own Normal Summon or Flip Summon also triggers its effect (you gain 500 Life Points for it too); modern (2023): the trigger needs another monster to be Normal or Flip Summoned, so it never triggers on its own Summon.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: Era: Mysterious Puppeteer's own Normal Summon or Flip Summon also triggers its effect (you gain 500 Life Points for it too); modern (2023): the trigger needs another monster to be Normal or Flip Summ…",
+          "finding": "does-not-address",
+          "passage": "When you have \"Mysterious Puppeteer\" face-up on the field, if you Summon a monster and you opponent activates \"Trap Hole\" your monster is destroyed and you still gain 500 Life Points, since the monster was Summoned and then destroyed."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ik",
+          "looked_for": "d1: Era: Mysterious Puppeteer's own Normal Summon or Flip Summon also triggers its effect (you gain 500 Life Points for it too); modern (2023): the trigger needs another monster to be Normal or Flip Summ…",
+          "finding": "does-not-address",
+          "passage": "If \"King Tiger Wanghu\" is Normal Summoned or Special Summoned, and its own ATK is reduced below 1400 by a pre-existing effect, then it destroys itself when Summoned."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Mysterious Puppeteer on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Mysterious Puppeteer in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Mysterious Puppeteer in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Mysterious Puppeteer' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

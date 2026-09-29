@@ -5,7 +5,7 @@
     "passcode": 40619825,
     "name": "Axe of Despair"
   },
-  "classification": "functional",
+  "classification": "ruling",
   "events": {
     "c0": {
       "effective": {
@@ -55,16 +55,115 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
           "modern_text": "(This card is always treated as an \"Archfiend\" card.)The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; return this card to the top of the Deck.",
-          "summary": "The BP02 printing added '(This card is always treated as an \"Archfiend\" card.)', giving the TCG card membership of the 'Archfiend' archetype that it did not previously have; any card keying on 'Archfiend' by name treats Axe of Despair differently before and after this printing. Archetype membership is carried by the cdb setcode rather than the Lua script, so it does not appear in the script diff.",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: (c2, 2013 erratum) Modern: '(This card is always treated as an \"Archfiend\" card.)', so cards keyed on 'Archfiend' count Axe of Despair. The record says the era card was not an Archfiend. A period ruling in force says otherwise: Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-15): \"The Archfiend you need for \"Falling Down\" doesn't have to be a monster. Cards like \"Axe of Despair\", or an Archfiend monster equipped to your \"Relinquished\", will prevent \"Falling Down\" from being destroyed.\" No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
             "ignis-babelcdb",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-fh",
+            "ude-card-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "(c2, 2013 erratum) Modern: '(This card is always treated as an \"Archfiend\" card.)', so cards keyed on 'Archfiend' count Axe of Despair. The record says the era card was not an Archfiend.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-fh",
+                "looked_for": "d1: (c2, 2013 erratum) Modern: '(This card is always treated as an \"Archfiend\" card.)', so cards keyed on 'Archfiend' count Axe of Despair. The record says the era card was not an Archfiend.",
+                "finding": "contradicts",
+                "passage": "The Archfiend you need for \"Falling Down\" doesn't have to be a monster. Cards like \"Axe of Despair\", or an Archfiend monster equipped to your \"Relinquished\", will prevent \"Falling Down\" from being destroyed.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: (c2, 2013 erratum) Modern: '(This card is always treated as an \"Archfiend\" card.)', so cards keyed on 'Archfiend' count Axe of Despair. The record says the era card was not an Archfiend.",
+                "finding": "contradicts",
+                "passage": "The Archfiend you need for \"Falling Down\" doesn't have to be a monster. Cards like \"Axe of Despair\", or an Archfiend monster equipped to your \"Relinquished\", will prevent \"Falling Down\" from being destroyed.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "an entry for Axe of Despair and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Axe of Despair in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Axe of Despair in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Axe of Despair' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -101,13 +200,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Second script hunk is a no-op: the goat 'Duel.SendtoDeck(c,nil,0,REASON_EFFECT)' uses the literal 0, and constant.lua:28 defines SEQ_DECKTOP = 0, so it is identical to the modern SEQ_DECKTOP call. ERA MISMATCH on the cdb side: I queried both databases - goat-entries.cdb 504700068 and cards.cdb 40619825 both carry setcode 69 (0x45, Archfiend), so the GOAT variant already grants the 2013 'Archfiend' treatment about nine years early. It is behaviourally inert for GOAT/Edison (no period card keys on 'Archfiend' Spell cards), but the record should not pretend the historical entry is clean. No intermediate implementation is proposed between the undated ruling change and the 2013 functional change: the ruling change's chronology is unresolved, and both project snapshots (2005-04-01, 2010-04-24) precede 2013-06-28, so only the baseline is ever selected. Trailing cosmetics after v6: v7 (YS14-EN026, 2014-07-10, 'place this card on the top of your Deck') and v8 (LART-EN051, 2022-12-16, GY). The pinned modern cdb text matches v7 at 0.9976 (a line break after the parenthetical), not v8."
+    "notes": "Second script hunk is a no-op: the goat 'Duel.SendtoDeck(c,nil,0,REASON_EFFECT)' uses the literal 0, and constant.lua:28 defines SEQ_DECKTOP = 0, so it is identical to the modern SEQ_DECKTOP call. ERA MISMATCH on the cdb side: I queried both databases - goat-entries.cdb 504700068 and cards.cdb 40619825 both carry setcode 69 (0x45, Archfiend), so the GOAT variant already grants the 2013 'Archfiend' treatment about nine years early. It is behaviourally inert for GOAT/Edison (no period card keys on 'Archfiend' Spell cards), but the record should not pretend the historical entry is clean. No intermediate implementation is proposed between the undated ruling change and the 2013 functional change: the ruling change's chronology is unresolved, and both project snapshots (2005-04-01, 2010-04-24) precede 2013-06-28, so only the baseline is ever selected. Trailing cosmetics after v6: v7 (YS14-EN026, 2014-07-10, 'place this card on the top of your Deck') and v8 (LART-EN051, 2022-12-16, GY). The pinned modern cdb text matches v7 at 0.9976 (a line break after the parenthetical), not v8.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Axe of Despair). A period ruling in force contradicts every difference the transition claimed: (c2, 2013 erratum) Modern: '(This card is always treated as an \"Archfiend\" card.)', so cards keyed on 'Archfiend' count Axe of Despair. The record says the era card was not an Archfiend. Contradicted by Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-15): \"The Archfiend you need for \"Falling Down\" doesn't have to be a monster. Cards like \"Axe of Despair\", or an Archfiend monster equipped to your \"Relinquished\", will prevent \"Falling Down\" from being destroyed.\" Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings page (Internet Archive replay): \"The Archfiend you need for \"Falling Down\" doesn't have to be a monster. Cards like \"Axe of Despair\", or an Archfiend monster equipped to your \"Relinquished\", will prevent \"Falling Down\" from being destroyed.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [c2] d1 contradicted at Edison, contradicted at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Axe of Despair: the variant script (from the undated c0 ruling event, left alone) can return the card even after its trigger missed timing; the card FAQ (after Cyber Jar) says the timing has passed. Superseded summary, kept verbatim: \"The BP02 printing added '(This card is always treated as an \"Archfiend\" card.)', giving the TCG card membership of the 'Archfiend' archetype that it did not previously have; any card keying on 'Archfiend' by name treats Axe of Despair differently before and after this printing. Archetype membership is carried by the cdb setcode rather than the Lua script, so it does not appear in the script diff.\""
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "ignis-cardscripts",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-fh",
+    "ude-card-rulings-archive"
   ]
 }

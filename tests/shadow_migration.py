@@ -41,6 +41,7 @@ from retroformats.repo import Repository
 from retroformats.validate import Validator
 
 from . import migration_audit as audit
+from .helpers import errors_without_the_frozen_exemption
 from . import migration_materializer as mm
 
 
@@ -106,8 +107,8 @@ def compare_validation(baseline_repo, shadow_repo) -> dict[str, Any]:
     shadow_validator = Validator(shadow_repo)
     shadow_validator.validate()
 
-    baseline_error_codes = Counter(f.code for f in baseline_validator.errors)
-    shadow_error_codes = Counter(f.code for f in shadow_validator.errors)
+    baseline_error_codes = Counter(f.code for f in errors_without_the_frozen_exemption(baseline_validator))
+    shadow_error_codes = Counter(f.code for f in errors_without_the_frozen_exemption(shadow_validator))
     new_error_codes = {
         code: shadow_error_codes[code] - baseline_error_codes.get(code, 0)
         for code in shadow_error_codes
@@ -124,8 +125,8 @@ def compare_validation(baseline_repo, shadow_repo) -> dict[str, Any]:
     }
 
     return {
-        "baseline_error_count": len(baseline_validator.errors),
-        "shadow_error_count": len(shadow_validator.errors),
+        "baseline_error_count": len(errors_without_the_frozen_exemption(baseline_validator)),
+        "shadow_error_count": len(errors_without_the_frozen_exemption(shadow_validator)),
         "new_error_codes": new_error_codes,
         "baseline_warning_count": len(baseline_validator.warnings),
         "shadow_warning_count": len(shadow_validator.warnings),

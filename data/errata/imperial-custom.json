@@ -5,50 +5,99 @@
     "passcode": 9995766,
     "name": "Imperial Custom"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2020-07-09",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (SDSA-EN038, Structure Deck: Sacred Beasts)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Face-up Continuous Trap Cards cannot be destroyed, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
+          "modern_text": "Face-up Continuous Traps cannot be destroyed by battle or card effect, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
+          "summary": "Wording only, on period rulings (round 037, 2026-09-29). The record claimed: The era text ('cannot be destroyed') protects face-up Continuous Traps from destruction for every reason, including destruction as a cost or by game rule; the modern text protects only against destruction by battle or card effect, so cost destruction (e.g. failing a maintenance cost) now goes through. A period ruling in force says otherwise: Konami's Ancient Prophecy sneak peek card rulings: \"If you do not pay the maintenance cost for \"Mirror Wall\" or \"Imperial Order\" while \"Imperial Custom\" is face-up on the field, those cards will still be destroyed.\" No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-ancient-prophecy-rulings-2009"
+          ],
+          "rulings_check": {
+            "difference": "The era text ('cannot be destroyed') protects face-up Continuous Traps from destruction for every reason, including destruction as a cost or by game rule; the modern text protects only against destruction by battle or card effect, so cost destruction (e.g. failing a maintenance cost) now goes through.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-ancient-prophecy-rulings-2009",
+                "looked_for": "d1: The era text ('cannot be destroyed') protects face-up Continuous Traps from destruction for every reason, including destruction as a cost or by game rule; the modern text protects only against destru…",
+                "finding": "contradicts",
+                "passage": "If you do not pay the maintenance cost for \"Mirror Wall\" or \"Imperial Order\" while \"Imperial Custom\" is face-up on the field, those cards will still be destroyed.",
+                "in_force": "shown",
+                "in_force_basis": "Konami's Ancient Prophecy sneak peek card rulings (compiled 2009-08-11) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+              },
+              {
+                "source": "konami-ancient-prophecy-rulings-2009",
+                "looked_for": "d1: The era text ('cannot be destroyed') protects face-up Continuous Traps from destruction for every reason, including destruction as a cost or by game rule; the modern text protects only against destru…",
+                "finding": "does-not-address",
+                "passage": "If \"Depth Amulet\" would be destroyed by its own effect while \"Imperial Custom\" is face-up on the field, it will not be destroyed and you can continue to use its effect."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ik",
+                "looked_for": "an entry for Imperial Custom and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Imperial Custom on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Imperial Custom in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Imperial Custom' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
       "status": "complete",
-      "tested": false
+      "tested": false,
+      "reason": "Round 037 (2026-09-29): no generated card exists or is needed for this record. A period ruling in force says the era card played as the modern card does on every point the record claimed, so the modern implementation is used at the snapshots this record applies at."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "The lineage has exactly two English versions and the baseline's cdb text is an exact match for v0 (ANPR-EN067, 2009-09-01), the only printing available at the Edison snapshot; the erratum is dated 2020-07-09, more than ten years after it, so the historical implementation governs the whole period range. The Japanese table on the same errata page corroborates the same change at SD38-JP038 (Structure Deck: Sacred Beasts of Chaos), which is where the OCG text gained the battle/effect qualifier. Cosmetic-only script drift: the pre-errata filter uses (c:GetType()&0x20004)==0x20004 and c:GetOriginalCode()~=id where the modern uses c:IsContinuousTrap() and c:GetCode()~=id - the same set of cards except under name-changing effects."
+    "notes": "The lineage has exactly two English versions and the baseline's cdb text is an exact match for v0 (ANPR-EN067, 2009-09-01), the only printing available at the Edison snapshot; the erratum is dated 2020-07-09, more than ten years after it, so the historical implementation governs the whole period range. The Japanese table on the same errata page corroborates the same change at SD38-JP038 (Structure Deck: Sacred Beasts of Chaos), which is where the OCG text gained the battle/effect qualifier. Cosmetic-only script drift: the pre-errata filter uses (c:GetType()&0x20004)==0x20004 and c:GetOriginalCode()~=id where the modern uses c:IsContinuousTrap() and c:GetCode()~=id - the same set of cards except under name-changing effects.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Imperial Custom). A period ruling in force contradicts every difference the transition claimed: The era text ('cannot be destroyed') protects face-up Continuous Traps from destruction for every reason, including destruction as a cost or by game rule; the modern text protects only against destruction by battle or card effect, so cost destruction (e.g. failing a maintenance cost) now goes through. Contradicted by Konami's Ancient Prophecy sneak peek card rulings: \"If you do not pay the maintenance cost for \"Mirror Wall\" or \"Imperial Order\" while \"Imperial Custom\" is face-up on the field, those cards will still be destroyed.\" The transition is cosmetic: no difference between the era card and the modern card is established. Verdicts: [event] d1 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: the protection narrowed from 'cannot be destroyed' to 'cannot be destroyed by battle or card effect'. The pre-errata script registers EFFECT_INDESTRUCTABLE with SetValue(1), i.e. immunity to destruction for every reason, while the modern script's value function indesval returns true only when the reason includes REASON_EFFECT or REASON_BATTLE, so other destruction reasons (a card destroying itself as a cost, or game-rule destruction) now go through on face-up Continuous Traps.\" Superseded coverage, kept verbatim: kind: \"reuse-upstream\"; historical_passcode: 9995776; historical_variant_passcodes: []; upstream: \"ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts\"; script: \"pre-errata/c9995776.lua\"."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
-  ],
-  "event": {
-    "effective": {
-      "date": "2020-07-09",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (SDSA-EN038, Structure Deck: Sacred Beasts)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "Face-up Continuous Trap Cards cannot be destroyed, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
-    "modern_text": "Face-up Continuous Traps cannot be destroyed by battle or card effect, except \"Imperial Custom\". You can only control 1 \"Imperial Custom\".",
-    "summary": "Functional erratum: the protection narrowed from 'cannot be destroyed' to 'cannot be destroyed by battle or card effect'. The pre-errata script registers EFFECT_INDESTRUCTABLE with SetValue(1), i.e. immunity to destruction for every reason, while the modern script's value function indesval returns true only when the reason includes REASON_EFFECT or REASON_BATTLE, so other destruction reasons (a card destroying itself as a cost, or game-rule destruction) now go through on face-up Continuous Traps.",
-    "sources": [
-      "yugipedia-card-errata",
-      "ignis-cardscripts",
-      "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
-  },
-  "coverage": {
-    "kind": "reuse-upstream",
-    "historical_passcode": 9995776,
-    "historical_variant_passcodes": [],
-    "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
-    "script": "pre-errata/c9995776.lua"
-  }
+    "yugipedia-set-pages",
+    "konami-ancient-prophecy-rulings-2009"
+  ]
 }

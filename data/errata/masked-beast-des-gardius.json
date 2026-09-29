@@ -20,12 +20,17 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 48948935 exists upstream. The lineage records only two English texts, and v0 stands unchanged from the card's original release until 2020, so it is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). Dating caveat, recorded but not load-bearing: the packet dates v0 by TAEV-ENSE1 (Tactical Evolution: Special Edition, 2007-09-12), a reprint rather than the card's first printing, so v0's earliest_tcg_date understates how long that text was in force; the only recorded change is dated by v1, so the applier's chronology is unaffected. cards.cdb matches v1 exactly. Des Gardius does not appear on the EdisonFormat.com Functional Errata list."
+    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 48948935 exists upstream. The lineage records only two English texts, and v0 stands unchanged from the card's original release until 2020, so it is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). Dating caveat, recorded but not load-bearing: the packet dates v0 by TAEV-ENSE1 (Tactical Evolution: Special Edition, 2007-09-12), a reprint rather than the card's first printing, so v0's earliest_tcg_date understates how long that text was in force; the only recorded change is dated by v1, so the applier's chronology is unaffected. cards.cdb matches v1 exactly. Des Gardius does not appear on the EdisonFormat.com Functional Errata list.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Masked Beast Des Gardius). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 unresolved at Edison, unresolved at Tengu; d3 unresolved at Edison, unresolved at Tengu; d4 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-absolute-powerforce-rulings-2010-02",
+    "konami-rulebook-2008-v70",
+    "konami-card-faq-2008-12-15-pr"
   ],
   "event": {
     "effective": {
@@ -42,8 +47,126 @@
     "sources": [
       "yugipedia-card-errata",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-15-fh",
+      "konami-card-faq-2008-12-16-lo",
+      "konami-absolute-powerforce-rulings-2010-02",
+      "konami-rulebook-2008-v70",
+      "konami-card-faq-2008-12-15-pr"
+    ],
+    "rulings_check": {
+      "difference": "The era text is a strict 'cannot be Special Summoned except by Tributing' condition, so Des Gardius can never be Special Summoned again from the Graveyard; the modern 'Must first be Special Summoned (from your hand)' text lets it be revived by generic effects afterwards. The era trigger names no target: the equipped monster is chosen on resolution; the modern trigger targets 1 monster when it activates (so target-removal responses and targeting protection apply). The era trigger can equip the Mask to any monster on the field, either side; the modern trigger equips only to a monster your opponent controls. The era trigger can equip a face-down monster; the modern trigger needs a face-up monster.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d1: The era text is a strict 'cannot be Special Summoned except by Tributing' condition, so Des Gardius can never be Special Summoned again from the Graveyard; the modern 'Must first be Special Summoned…",
+          "finding": "supports",
+          "passage": "Note that \"Horus the Black Flame Dragon LV8\" has the word \"except\" in its Summoning conditions, which means that even if Special Summoned properly, you cannot revive it with \"Monster Reborn\" afterwards if it is destroyed.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-lo",
+          "looked_for": "d1: The era text is a strict 'cannot be Special Summoned except by Tributing' condition, so Des Gardius can never be Special Summoned again from the Graveyard; the modern 'Must first be Special Summoned…",
+          "finding": "supports",
+          "passage": "You cannot use \"Monster Reborn\", etc. on \"Mazera DeVille\" even if he is Special Summoned properly, because he \"cannot be Special Summoned, EXCEPT by...\".",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-absolute-powerforce-rulings-2010-02",
+          "looked_for": "d1: The era text is a strict 'cannot be Special Summoned except by Tributing' condition, so Des Gardius can never be Special Summoned again from the Graveyard; the modern 'Must first be Special Summoned…",
+          "finding": "supports",
+          "passage": "\"Reptilianne Vaskii\" cannot be Special Summoned except from your hand by the method written on the card.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's Absolute Powerforce card rulings, version 1.0 (compiled 2010-02-05) was current at both snapshots: it predates Edison's (2010-04-24) and Konami's Gameplay page still linked or carried it at Tengu's (2011-09-17)."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: The era text is a strict 'cannot be Special Summoned except by Tributing' condition, so Des Gardius can never be Special Summoned again from the Graveyard; the modern 'Must first be Special Summoned…",
+          "finding": "does-not-address",
+          "passage": "You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-pr",
+          "looked_for": "d2: The era trigger names no target: the equipped monster is chosen on resolution; the modern trigger targets 1 monster when it activates (so target-removal responses and targeting protection apply).",
+          "finding": "does-not-address",
+          "passage": "\"The Mask of Remnants\" will be equipped from the Deck onto the opponent's monster."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d2: The era trigger names no target: the equipped monster is chosen on resolution; the modern trigger targets 1 monster when it activates (so target-removal responses and targeting protection apply).",
+          "finding": "does-not-address",
+          "passage": "Effects that require you to select 1 or more specific cards when"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Masked Beast Des Gardius on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Masked Beast Des Gardius in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Masked Beast Des Gardius' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

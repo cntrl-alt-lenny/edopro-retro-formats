@@ -17,13 +17,19 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Escalation, not about the erratum but about the shipped script: pre-errata/c511000229.lua omits c:EnableReviveLimit(), which official/c32646477.lua calls and which Synchro.AddProcedure does not set on its own. As it stands the historical entry can be Special Summoned back from the Graveyard without ever having been properly Synchro Summoned - an era-incorrect behaviour on top of the intended difference; it needs a one-line fix or a local override before use. The variant's cdb text is a PSCT-style rendering of v0 (CRMS-EN040, 2009-03-03), the Edison-era printing, rather than v0 verbatim (ratio 0.8253). Upstream also lists 513000079 'TBR - Dark Strike Fighter (Anime)', a Token-typed placeholder with the literal text 'Replaced by OCG/Pre-Errata' and no script - excluded. Card data of 511000229 matches modern exactly (2600/1800, Level 7, DARK, Machine, Synchro)."
+    "notes": "Escalation, not about the erratum but about the shipped script: pre-errata/c511000229.lua omits c:EnableReviveLimit(), which official/c32646477.lua calls and which Synchro.AddProcedure does not set on its own. As it stands the historical entry can be Special Summoned back from the Graveyard without ever having been properly Synchro Summoned - an era-incorrect behaviour on top of the intended difference; it needs a one-line fix or a local override before use. The variant's cdb text is a PSCT-style rendering of v0 (CRMS-EN040, 2009-03-03), the Edison-era printing, rather than v0 verbatim (ratio 0.8253). Upstream also lists 513000079 'TBR - Dark Strike Fighter (Anime)', a Token-typed placeholder with the literal text 'Replaced by OCG/Pre-Errata' and no script - excluded. Card data of 511000229 matches modern exactly (2600/1800, Level 7, DARK, Machine, Synchro).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Dark Strike Fighter). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d2 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Dark Strike Fighter: the variant script omits the Synchro revive limit; the rulebook and the Crimson Crisis ruling say a Synchro Monster cannot be revived without a proper Synchro Summon."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-crimson-crisis-rulings-2009",
+    "konami-rulebook-2008-v70",
+    "konami-official-rulebook-v71-2010",
+    "konami-official-rulebook-v72-2011-dragunity",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "ude-card-rulings-archive"
   ],
   "event": {
     "effective": {
@@ -41,8 +47,83 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-crimson-crisis-rulings-2009",
+      "konami-rulebook-2008-v70",
+      "konami-official-rulebook-v71-2010",
+      "konami-official-rulebook-v72-2011-dragunity",
+      "konami-card-faq-2008-12-15-skilled-white-magician",
+      "ude-card-rulings-archive"
+    ],
+    "rulings_check": {
+      "difference": "Era: the Tribute-for-damage effect has no use limit and can be repeated as long as a monster can be Tributed each time; modern: once per turn. Era: the effect is not restricted to Main Phase 1 and can be used in Main Phase 2 as well; modern: 'During your Main Phase 1'.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-crimson-crisis-rulings-2009",
+          "looked_for": "d1: Era: the Tribute-for-damage effect has no use limit and can be repeated as long as a monster can be Tributed each time; modern: once per turn.",
+          "finding": "does-not-address",
+          "passage": "Tributing a monster is a cost."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Era: the Tribute-for-damage effect has no use limit and can be repeated as long as a monster can be Tributed each time; modern: once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "d1: Era: the Tribute-for-damage effect has no use limit and can be repeated as long as a monster can be Tributed each time; modern: once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "or Effect Monster Cards as many times as you want during this"
+        },
+        {
+          "source": "konami-official-rulebook-v72-2011-dragunity",
+          "looked_for": "d1: Era: the Tribute-for-damage effect has no use limit and can be repeated as long as a monster can be Tributed each time; modern: once per turn. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can activate Spell and Trap Cards, or the effects of Spell, Trap, or Effect Monster Cards as many times as you want during this phase, as long as you can keep paying any costs involved."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "d2: Era: the effect is not restricted to Main Phase 1 and can be used in Main Phase 2 as well; modern: 'During your Main Phase 1'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can only activate \"Sasuke Samurai #2\"'s effect during your Main Phase 1 or 2 because it's an Ignition Effect."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "d2: Era: the effect is not restricted to Main Phase 1 and can be used in Main Phase 2 as well; modern: 'During your Main Phase 1'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "You can only activate \"Sasuke Samurai #2\"'s effect during your Main Phase 1 or 2 because it's an Ignition Effect."
+        },
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d2: Era: the effect is not restricted to Main Phase 1 and can be used in Main Phase 2 as well; modern: 'During your Main Phase 1'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "The actions a player can perform in this phase are the same as in Main Phase 1."
+        },
+        {
+          "source": "konami-official-rulebook-v72-2011-dragunity",
+          "looked_for": "d2: Era: the effect is not restricted to Main Phase 1 and can be used in Main Phase 2 as well; modern: 'During your Main Phase 1'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "The actions a player can perform in this phase are the same as in Main Phase 1."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-de",
+          "looked_for": "an entry for Dark Strike Fighter and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Dark Strike Fighter in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Dark Strike Fighter' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

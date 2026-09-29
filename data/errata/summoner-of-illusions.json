@@ -46,8 +46,108 @@
             "ignis-cardscripts",
             "ignis-babelcdb",
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "Era Summoner of Illusions pays the Tribute as a cost when the effect is activated (paid even if the effect is then negated); modern Tributes on resolution ('Tribute 1 other monster, and if you do, Special Summon ...'). Because the Tribute is a cost, the era effect cannot be activated unless a Summonable Fusion Monster exists (and a monster to Tribute); the modern effect activates regardless and simply does nothing if it cannot resolve.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: Era Summoner of Illusions pays the Tribute as a cost when the effect is activated (paid even if the effect is then negated); modern Tributes on resolution ('Tribute 1 other monster, and if you do, Sp…",
+                "finding": "supports",
+                "passage": "Tributing 1 monster is a cost.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-storm-of-ragnarok-rulings-archive",
+                "looked_for": "d1: Era Summoner of Illusions pays the Tribute as a cost when the effect is activated (paid even if the effect is then negated); modern Tributes on resolution ('Tribute 1 other monster, and if you do, Sp…",
+                "finding": "does-not-address",
+                "passage": "If Shinai is Tributed during the Damage Step by Summoner of Illusions, the effect to add 1 “Six Samurai”"
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Because the Tribute is a cost, the era effect cannot be activated unless a Summonable Fusion Monster exists (and a monster to Tribute); the modern effect activates regardless and simply does nothing…",
+                "finding": "supports",
+                "passage": "If you have no cards in your Extra Deck, the effect cannot activate and you do not Tribute 1 monster.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Summoner of Illusions on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Summoner of Illusions in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Summoner of Illusions' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -84,13 +184,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Baseline goat/c504700184.lua matches lineage v0 (LON-063, Labyrinth of Nightmare, 2003-03-01) exactly. Both target eras fall before the v2 erratum (GOAT 2005-04-01 and Edison 2010-04-24 are both earlier than 2012-09-29), so both take the goat variant. Trailing cosmetic rewording v2 -> v3 (FUEN-EN038, 2017-02-23, '. Destroy that Fusion Monster during the End Phase of this turn' -> ', but destroy it during the End Phase of this turn'; v3 is the pinned modern text) is not recorded as a change. The classification is functional rather than cosmetic despite the transition being a PSCT rewording, because the script diff carries positive evidence of a resolution difference (SetCost vs an in-resolution Release) rather than mere formalisation; the remaining diff items - CATEGORY_RELEASE on the modern effect, where s.rfilter is defined, and RESETS_STANDARD_PHASE_END vs its expanded spelling - are hint-only or identical."
+    "notes": "Baseline goat/c504700184.lua matches lineage v0 (LON-063, Labyrinth of Nightmare, 2003-03-01) exactly. Both target eras fall before the v2 erratum (GOAT 2005-04-01 and Edison 2010-04-24 are both earlier than 2012-09-29), so both take the goat variant. Trailing cosmetic rewording v2 -> v3 (FUEN-EN038, 2017-02-23, '. Destroy that Fusion Monster during the End Phase of this turn' -> ', but destroy it during the End Phase of this turn'; v3 is the pinned modern text) is not recorded as a change. The classification is functional rather than cosmetic despite the transition being a PSCT rewording, because the script diff carries positive evidence of a resolution difference (SetCost vs an in-resolution Release) rather than mere formalisation; the remaining diff items - CATEGORY_RELEASE on the modern effect, where s.rfilter is defined, and RESETS_STANDARD_PHASE_END vs its expanded spelling - are hint-only or identical.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Summoner of Illusions). The rulings read support d1, d2 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [c1] d1 supported at Edison, supported at Tengu; d2 supported at Edison, supported at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-cardscripts"
+    "ignis-cardscripts",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-storm-of-ragnarok-rulings-archive"
   ]
 }

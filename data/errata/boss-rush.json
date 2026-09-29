@@ -12,7 +12,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In Edison, Boss Rush can be activated on a turn you already Normal Summoned, triggers off any 'B.E.S.' monster or 'Big Core' destroyed and sent to the Graveyard (including the opponent's), and can Special Summon 'Big Core' itself from the Deck; the shipped card refuses all three."
+        "behavioural_impact": "In Edison, Boss Rush can be activated on a turn you already Normal Summoned, triggers off any 'B.E.S.' monster or 'Big Core' destroyed and sent to the Graveyard (including the opponent's), and can Special Summon 'Big Core' itself from the Deck; the shipped card refuses all three. Round 037 (2026-09-29): withdrawn as a difference on period rulings: The modern card has an activation restriction (not activable if you already Normal Summoned/Set this turn) that the era card is claimed not to have. The modern trigger requires Boss Rush to have been face-up in the Spell & Trap Zone when the monster was destroyed; the era text is claimed to have no such requirement. (review notes)."
       }
     }
   ],
@@ -20,12 +20,13 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Elemental Energy released 2005-11-16, so the card postdates the 2005-04-01 GOAT snapshot and only the Edison pool is in scope; the text in force at 2010-04-24 is v1 (DR04-EN107, 2007-11-14), which is the baseline. Pre-baseline v0 (EEN-EN047, 2005-11-16) confines the trigger and the search to 'a monster on your side of the field'; v1's removal of that clause is itself a broadening, but it predates every configured period snapshot for this card, so it is recorded here rather than as a change. CONFLICT: the pinned cards.cdb text is flagged '* The above text is unofficial and describes the card's functionality in the OCG' and does not match v2 exactly (modern_text_matches_version ratio 0.6901) - it lacks v2's 'while this card was face-up in your Spell & Trap Zone' clause. The recorded boundary (OP30-EN017, 2026-02-11) is therefore the attested TCG date for the new text, not the date the OCG behaviour the simulator implements came into force, which the packet does not date and which certainly predates that printing. Either way the boundary sits far after the Edison snapshot, so format applicability is unaffected. No entry for this card in edison-functional-errata.md."
+    "notes": "upstream_implementations is empty. Elemental Energy released 2005-11-16, so the card postdates the 2005-04-01 GOAT snapshot and only the Edison pool is in scope; the text in force at 2010-04-24 is v1 (DR04-EN107, 2007-11-14), which is the baseline. Pre-baseline v0 (EEN-EN047, 2005-11-16) confines the trigger and the search to 'a monster on your side of the field'; v1's removal of that clause is itself a broadening, but it predates every configured period snapshot for this card, so it is recorded here rather than as a change. CONFLICT: the pinned cards.cdb text is flagged '* The above text is unofficial and describes the card's functionality in the OCG' and does not match v2 exactly (modern_text_matches_version ratio 0.6901) - it lacks v2's 'while this card was face-up in your Spell & Trap Zone' clause. The recorded boundary (OP30-EN017, 2026-02-11) is therefore the attested TCG date for the new text, not the date the OCG behaviour the simulator implements came into force, which the packet does not date and which certainly predates that printing. Either way the boundary sits far after the Edison snapshot, so format applicability is unaffected. No entry for this card in edison-functional-errata.md.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Boss Rush). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: The modern card has an activation restriction (not activable if you already Normal Summoned/Set this turn) that the era card is claimed not to have. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"You cannot activate \"Boss Rush\" if you have already Normal Summoned or Set a monster this turn.\" The modern trigger requires Boss Rush to have been face-up in the Spell & Trap Zone when the monster was destroyed; the era text is claimed to have no such requirement. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"\"Boss Rush\" must be face-up on the field when the \"B.E.S.\" or \"Big Core\" monster is destroyed for you to use its effect.\" The transition stays functional on what remains, d3, d4, d5. Verdicts: [event] d3 unresolved at Edison, unresolved at Tengu; d4 unresolved at Edison, unresolved at Tengu; d5 unresolved at Edison, unresolved at Tengu; d1 contradicted at Edison, contradicted at Tengu; d2 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum on three counts. (1) An activation restriction appears that the DR04 text does not have: 'Activate only if you did not Normal Summon/Set this turn'. (2) The trigger narrows from 'a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard' - any such monster, either player's, face-up or face-down - to 'a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone'. (3) The Deck Summon narrows from '1 \"B.E.S.\" monster or 1 \"Big Core\"' to '1 \"B.E.S.\" monster', dropping the separately named 'Big Core'.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-16-ac"
   ],
   "event": {
     "effective": {
@@ -38,12 +39,50 @@
     "axis": null,
     "historical_text": "You cannot Normal Summon or Set. During the End Phase of the turn that a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard, you can Special Summon 1 \"B.E.S.\" monster or 1 \"Big Core\" from your Deck.",
     "modern_text": "Activate only if you did not Normal Summon/Set this turn. You cannot Normal Summon/Set. During the End Phase, if a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone: You can Special Summon 1 \"B.E.S.\" monster from your Deck.",
-    "summary": "Functional erratum on three counts. (1) An activation restriction appears that the DR04 text does not have: 'Activate only if you did not Normal Summon/Set this turn'. (2) The trigger narrows from 'a \"B.E.S.\" monster or a \"Big Core\" is destroyed and sent to the Graveyard' - any such monster, either player's, face-up or face-down - to 'a face-up \"B.E.S.\" monster(s) you control was destroyed and sent to the GY this turn while this card was face-up in your Spell & Trap Zone'. (3) The Deck Summon narrows from '1 \"B.E.S.\" monster or 1 \"Big Core\"' to '1 \"B.E.S.\" monster', dropping the separately named 'Big Core'.",
+    "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d3) The era trigger fires for a B.E.S. monster or Big Core destroyed on either side of the field; the modern trigger only for a B.E.S. monster you control. (d4) The era trigger counts a monster destroyed face-down; the modern trigger only a face-up B.E.S. monster. (d5) The era Deck Summon can take 1 'Big Core' as well as 1 'B.E.S.' monster; the modern text names only 'B.E.S.' monsters. Withdrawn as a difference: The modern card has an activation restriction (not activable if you already Normal Summoned/Set this turn) that the era card is claimed not to have. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"You cannot activate \"Boss Rush\" if you have already Normal Summoned or Set a monster this turn.\" The modern trigger requires Boss Rush to have been face-up in the Spell & Trap Zone when the monster was destroyed; the era text is claimed to have no such requirement. Contradicted by Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"\"Boss Rush\" must be face-up on the field when the \"B.E.S.\" or \"Big Core\" monster is destroyed for you to use its effect.\"",
     "sources": [
       "yugipedia-card-errata",
       "yugipedia-set-pages",
-      "ignis-babelcdb"
-    ]
+      "ignis-babelcdb",
+      "konami-card-faq-2008-12-16-ac"
+    ],
+    "rulings_check": {
+      "difference": "The era trigger fires for a B.E.S. monster or Big Core destroyed on either side of the field; the modern trigger only for a B.E.S. monster you control. The era trigger counts a monster destroyed face-down; the modern trigger only a face-up B.E.S. monster. The era Deck Summon can take 1 'Big Core' as well as 1 'B.E.S.' monster; the modern text names only 'B.E.S.' monsters.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: The era trigger fires for a B.E.S. monster or Big Core destroyed on either side of the field; the modern trigger only for a B.E.S. monster you control.",
+          "finding": "does-not-address",
+          "passage": "You can use the effect of \"Boss Rush\" during your opponent's turn, as long as it was already face-up on the field and an appropriate monster was destroyed during that turn."
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Boss Rush on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Boss Rush in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Boss Rush in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Boss Rush' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

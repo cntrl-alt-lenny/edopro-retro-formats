@@ -69,8 +69,121 @@
             "ignis-cardscripts",
             "ignis-babelcdb",
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "ude-card-rulings-archive",
+            "konami-card-faq-2008-12-16-ac"
+          ],
+          "rulings_check": {
+            "difference": "c2 (2012): monsters that cannot be turned face-down (Monster Tokens, which are always face-up) are left alone; in the era they are simply changed to Defense Position. Modern script flips only monsters that can be turned face-down. Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters controlled at activation; c3 (2017) returns to resolution-time. Only c2 is a difference between the era and a later version, c3 undoes it.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: c2 (2012): monsters that cannot be turned face-down (Monster Tokens, which are always face-up) are left alone; in the era they are simply changed to Defense Position. Modern script flips only monster…",
+                "finding": "supports",
+                "passage": "Since there's no such thing as a face-down Monster Token, Monster Tokens are simply changed to Defense Position when the effect of \"Swords of Concealing Light\" is applied.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: c2 (2012): monsters that cannot be turned face-down (Monster Tokens, which are always face-up) are left alone; in the era they are simply changed to Defense Position. Modern script flips only monster…",
+                "finding": "supports",
+                "passage": "Since there's no such thing as a face-down Monster Token, Monster Tokens are simply changed to Defense Position when the effect of \"Swords of Concealing Light\" is applied.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "d1: c2 (2012): monsters that cannot be turned face-down (Monster Tokens, which are always face-up) are left alone; in the era they are simply changed to Defense Position. Modern script flips only monster…",
+                "finding": "does-not-address",
+                "passage": "You cannot flip a Monster Token face-down because Monster Tokens are always face-up."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters contr…",
+                "finding": "does-not-address",
+                "passage": "Because \"Swords of Concealing Light\" is a Continuous Spell Card (unlike \"Swords of Revealing Light\"), if \"Mystical Space Typhoon\" is chained to its activation and destroys it, none of its effects will resolve (including the effect that changes your opponent's monsters to face-down Defense Position)."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters contr…",
+                "finding": "does-not-address",
+                "passage": "While your \"Swords of Concealing Light\" is active on the field, your opponent can still Summon new monsters in Attack Position."
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Swords of Concealing Light in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Swords of Concealing Light in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Swords of Concealing Light' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     },
@@ -92,8 +205,52 @@
             "ignis-cardscripts",
             "ignis-babelcdb",
             "yugipedia-card-errata",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-skilled-white-magician"
+          ],
+          "rulings_check": {
+            "difference": "Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters controlled at activation; c3 (2017) returns to resolution-time. Only c2 is a difference between the era and a later version, c3 undoes it.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters contr…",
+                "finding": "does-not-address",
+                "passage": "Because \"Swords of Concealing Light\" is a Continuous Spell Card (unlike \"Swords of Revealing Light\"), if \"Mystical Space Typhoon\" is chained to its activation and destroys it, none of its effects will resolve (including the effect that changes your opponent's monsters to face-down Defense Position)."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d2: Which monsters are flipped: the era/goat card flips those on the opponent's field when the card resolves (so a monster Special Summoned in response is flipped); c2 (2012) snapshots the monsters contr…",
+                "finding": "does-not-address",
+                "passage": "While your \"Swords of Concealing Light\" is active on the field, your opponent can still Summon new monsters in Attack Position."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Swords of Concealing Light on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Swords of Concealing Light in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Swords of Concealing Light in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Swords of Concealing Light' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -223,13 +380,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Two upstream codes exist and they implement DIFFERENT historical versions, so they are not folded: goat 504700018 matches lineage v0 (FET-EN042, 2005-03-01) exactly and is the baseline; pre-errata 511003008 implements v3 (its cdb text is a 0.9639 active-voice paraphrase of LCYW-EN281 - 'Change all monsters your opponent controlled when this card was activated to face-down Defense Position' vs the lineage's passive 'are changed to') and is attached to change 3. Both target eras resolve cleanly: GOAT (2005-04-01) precedes the v1 window and takes the baseline; Edison (2010-04-24) falls in 2006-11-25 .. 2012-09-29 and takes change 2's goat implementation. The v1 excursion is recorded rather than smoothed because it is a real printed behavioural clause dated by two printings in the packet, but it is unimplemented by anyone - hence the implementation-gap flag and the deliberately fail-safe BLOCKED interval for any snapshot inside 2005-11-02 .. 2006-11-25. Change 2 reuses the baseline passcode as its resulting_implementation because v2's behaviour is v0's behaviour; that is intentional, not a duplication. Observation, not a change: lineage v5 (RA05-EN059, Rarity Collection 5, 2026-04-09) is newer than the pinned cards.cdb text and rewrites the flip again as 'When this card is activated: If your opponent controls a face-up monster, flip all monsters they control to face-down Defense Position'; the pinned modern text matches v4 exactly, so the record stops at v4 and the RA05 printing is left for a later refresh. Remaining diff items across both variants - CATEGORY_SET on the modern activate, the SetOperationInfo hint parameters, EVENT_PHASE|PHASE_STANDBY vs '+', the reset spelling and Duel.IsTurnPlayer(tp) vs GetTurnPlayer()==tp - are hint-only or identical; the 2nd-Standby-Phase self-destruction is the same turn-counter routine in all three scripts."
+    "notes": "Two upstream codes exist and they implement DIFFERENT historical versions, so they are not folded: goat 504700018 matches lineage v0 (FET-EN042, 2005-03-01) exactly and is the baseline; pre-errata 511003008 implements v3 (its cdb text is a 0.9639 active-voice paraphrase of LCYW-EN281 - 'Change all monsters your opponent controlled when this card was activated to face-down Defense Position' vs the lineage's passive 'are changed to') and is attached to change 3. Both target eras resolve cleanly: GOAT (2005-04-01) precedes the v1 window and takes the baseline; Edison (2010-04-24) falls in 2006-11-25 .. 2012-09-29 and takes change 2's goat implementation. The v1 excursion is recorded rather than smoothed because it is a real printed behavioural clause dated by two printings in the packet, but it is unimplemented by anyone - hence the implementation-gap flag and the deliberately fail-safe BLOCKED interval for any snapshot inside 2005-11-02 .. 2006-11-25. Change 2 reuses the baseline passcode as its resulting_implementation because v2's behaviour is v0's behaviour; that is intentional, not a duplication. Observation, not a change: lineage v5 (RA05-EN059, Rarity Collection 5, 2026-04-09) is newer than the pinned cards.cdb text and rewrites the flip again as 'When this card is activated: If your opponent controls a face-up monster, flip all monsters they control to face-down Defense Position'; the pinned modern text matches v4 exactly, so the record stops at v4 and the RA05 printing is left for a later refresh. Remaining diff items across both variants - CATEGORY_SET on the modern activate, the SetOperationInfo hint parameters, EVENT_PHASE|PHASE_STANDBY vs '+', the reset spelling and Duel.IsTurnPlayer(tp) vs GetTurnPlayer()==tp - are hint-only or identical; the 2nd-Standby-Phase self-destruction is the same turn-counter routine in all three scripts.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Swords of Concealing Light). The rulings read support d1 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c2] d1 supported at Edison, supported at Tengu; d2 unresolved at Edison, unresolved at Tengu. [c3] d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-cardscripts"
+    "ignis-cardscripts",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "ude-card-rulings-archive",
+    "konami-card-faq-2008-12-16-ac"
   ]
 }

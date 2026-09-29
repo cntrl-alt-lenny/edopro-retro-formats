@@ -412,124 +412,12 @@
       ]
     },
     {
-      "url": "https://web.archive.org/web/20110102003949/http://www.yugioh-card.com/en/gameplay/rulings/101109%20GoldSeries3_TF5%20Rulings%20-%20x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 76
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110102004742/http://www.yugioh-card.com/en/gameplay/rulings/SOVR_sneak_ruling.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 64
-        },
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 93
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110102005218/http://www.yugioh-card.com/en/gameplay/rulings/RGBT%20Rules%20v1-2.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 77
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110102005442/http://www.yugioh-card.com/en/gameplay/rulings/ABPF_sneak_ruling.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 88
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110102005552/http://www.yugioh-card.com/en/gameplay/rulings/CRMS_sneak_ruling.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 65
-        },
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 92
-        }
-      ]
-    },
-    {
       "url": "https://web.archive.org/web/20110102005855/http://www.yugioh-card.com/en/gameplay/penalty_guide/KDE_TCG_Tournament%20Policy_13Dec10.pdf",
       "category": "archived capture",
       "occurrences": [
         {
           "file": "docs/research/search-verification-interval.md",
           "line": 112
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110102005947/http://www.yugioh-card.com/en/gameplay/rulings/100325DPTin_%20HA_SDWS_ST09_Rules.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 75
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110712120241/http://www.yugioh-card.com:80/en/gameplay/rulings/DREVRulebook110517_v1.1x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 80
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110725024153/http://www.yugioh-card.com:80/en/gameplay/rulings/ABPF%20Rules%20Booklet_110512_v1.1x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 84
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110725024218/http://www.yugioh-card.com:80/en/gameplay/rulings/HA03RulesBook110323x.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 79
-        }
-      ]
-    },
-    {
-      "url": "https://web.archive.org/web/20110902060847/http://www.yugioh-card.com:80/en/gameplay/rulings/ANPR_sneak_ruling.pdf",
-      "category": "archived capture",
-      "occurrences": [
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 61
-        },
-        {
-          "file": "docs/research/search-verification-interval.md",
-          "line": 91
         }
       ]
     },

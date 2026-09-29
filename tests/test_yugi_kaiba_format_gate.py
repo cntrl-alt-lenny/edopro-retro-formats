@@ -29,6 +29,7 @@ from .helpers import (
     swap_generated_back,
     swap_retired_forward,
     to_round_035,
+    to_round_036,
 )
 
 
@@ -1600,9 +1601,13 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # packet records 21 and 127. Round 036 made eight more cosmetic-only (Goddess of Whim, Green
         # Baboon, Dark Master - Zorc, Gigantes, The Rock Spirit, Garuda the Wind Spirit, VW-Tiger
         # Catapult, Gladiator Beast Heraklinos): 32 modern and 116 historical now.
-        self.assertEqual(21 + 3 + 8, determinate_modern)
-        self.assertEqual(127 - 3 - 8, determinate_historical)
-        self.assertEqual((24, 124), (determinate_modern - 8, determinate_historical + 8))
+        # Round 037 made four more records cosmetic-only here (A Hero Emerges, D.D. Scout Plane, Soul Rope,
+        # Diffusion Wave-Motion and Gaia Soul: five; Imperial Custom and Senet Switch as well: seven), so
+        # 39 modern and 109 historical.
+        self.assertEqual(21 + 3 + 8 + 7, determinate_modern)
+        self.assertEqual(127 - 3 - 8 - 7, determinate_historical)
+        self.assertEqual((32, 116), (determinate_modern - 7, determinate_historical + 7))
+        self.assertEqual((24, 124), (determinate_modern - 7 - 8, determinate_historical + 7 + 8))
         self.assertEqual(21, audit["determinate"]["modern"])
         self.assertEqual(127, audit["determinate"]["historical"])
 
@@ -1625,20 +1630,34 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # and the five strict-nomi cards), five became custom-script (Dice Re-Roll, Machina
         # Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos, Treeborn Frog), and Goddess of
         # Whim and Green Baboon left custom-script for modern-correct: 24 known gaps, 7 custom-script.
+        # Round 037: three known gaps (A Hero Emerges, D.D. Scout Plane, Soul Rope), two none-needed records
+        # (Diffusion Wave-Motion, Gaia Soul) and two reuse-upstream records (Imperial Custom, Senet Switch) are
+        # modern-correct cosmetic-only records now: 21 known gaps, 2 none-needed, 79 reuse-upstream.
         self.assertEqual(
-            {"reuse-upstream": 81, "known-gap": 24, "none-needed": 4, "custom-script": 7}, determinate_coverage
+            {"reuse-upstream": 79, "known-gap": 21, "none-needed": 2, "custom-script": 7}, determinate_coverage
         )
-        self.assertEqual((35, 4), (determinate_coverage["known-gap"] + 6 + 5, determinate_coverage["custom-script"] - 5 + 2))
+        self.assertEqual({"reuse-upstream": 81, "known-gap": 24, "none-needed": 4, "custom-script": 7}, {
+            "reuse-upstream": determinate_coverage["reuse-upstream"] + 2,
+            "known-gap": determinate_coverage["known-gap"] + 3,
+            "none-needed": determinate_coverage["none-needed"] + 2,
+            "custom-script": determinate_coverage["custom-script"],
+        })
+        self.assertEqual((35, 4), (determinate_coverage["known-gap"] + 3 + 6 + 5, determinate_coverage["custom-script"] - 5 + 2))
         packet_with_generated_cards = dict(audit["determinate"]["coverage"])
-        packet_with_generated_cards["known-gap"] += -8 + 1 - 6 - 5
+        packet_with_generated_cards["known-gap"] += -8 + 1 - 6 - 5 - 3
+        packet_with_generated_cards["reuse-upstream"] -= 2
+        packet_with_generated_cards["none-needed"] -= 2
         packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8 - 4 + 5 - 2
         self.assertEqual(determinate_coverage, packet_with_generated_cards)
         self.assertEqual(
             set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed", "custom-script"}
         )
 
-        self.assertEqual(104, sum(selection.modern_is_possible for selection in ambiguous))
-        self.assertEqual(44, sum(not selection.modern_is_possible for selection in ambiguous))
+        # Round 037: Axe of Despair and Tyrant Dragon's corrections make the modern state possible for them.
+        self.assertEqual(106, sum(selection.modern_is_possible for selection in ambiguous))
+        self.assertEqual(104, sum(selection.modern_is_possible for selection in ambiguous) - 2)
+        self.assertEqual(42, sum(not selection.modern_is_possible for selection in ambiguous))
+        self.assertEqual(44, sum(not selection.modern_is_possible for selection in ambiguous) + 2)
         self.assertEqual(104, audit["ambiguous"]["modern_possible"])
         self.assertEqual(44, audit["ambiguous"]["modern_impossible"])
 
@@ -1652,10 +1671,14 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         self.assertEqual(298, candidate_occurrences)
         self.assertEqual(298, audit["ambiguous"]["candidate_occurrences"])
         self.assertEqual(
-            {"reuse-upstream": 142, "unresolved": 42, "known-gap": 10, "modern": 104},
+            {"reuse-upstream": 142, "unresolved": 40, "known-gap": 10, "modern": 106},
             coverage_occurrences,
         )
-        self.assertEqual(coverage_occurrences, audit["ambiguous"]["candidate_coverage_occurrences"])
+        # The frozen packet records the numbers before round 037, which corrected Axe of Despair and Tyrant
+        # Dragon (two unresolved candidates replaced by two modern ones).
+        self.assertEqual(
+            {**coverage_occurrences, "unresolved": 42, "modern": 104}, audit["ambiguous"]["candidate_coverage_occurrences"]
+        )
 
         modern_impossible_ids = sorted(
             record.id for record in errata
@@ -1667,10 +1690,11 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
             if (selection := record.selection_at(snapshot)).chronology == "ambiguous"
             and any(candidate.coverage.kind is Coverage.UNRESOLVED for candidate in selection.candidates)
         )
-        self.assertEqual(44, len(modern_impossible_ids))
-        self.assertEqual(42, len(unresolved_record_ids))
-        self.assertEqual(modern_impossible_ids, audit["ambiguous_modern_impossible_ids"])
-        self.assertEqual(unresolved_record_ids, audit["ambiguous_unresolved_record_ids"])
+        self.assertEqual(42, len(modern_impossible_ids))
+        self.assertEqual(40, len(unresolved_record_ids))
+        round_037 = ["erratum-axe-of-despair", "erratum-tyrant-dragon"]
+        self.assertEqual(modern_impossible_ids, [i for i in audit["ambiguous_modern_impossible_ids"] if i not in round_037])
+        self.assertEqual(unresolved_record_ids, [i for i in audit["ambiguous_unresolved_record_ids"] if i not in round_037])
 
         substitutions = []
         for record in errata:
@@ -1689,10 +1713,20 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         substitutions.sort(key=lambda row: row["erratum_id"])
         digest_input = json.dumps(substitutions, separators=(",", ":"), sort_keys=True).encode("utf-8")
         digest = hashlib.sha256(digest_input).hexdigest()
-        self.assertEqual(81, len(substitutions))
-        self.assertEqual(substitutions, audit["determinate_historical_substitutions"])
-        self.assertEqual(digest, audit["determinate_historical_substitutions_digest"])
-        self.assertEqual("8ccefe0818807ab72ec1d7509a1e70d60787055c17881ecb589d48735b9f5df1", digest)
+        # Round 037: Imperial Custom and Senet Switch use the modern card again, so 79 of the packet's 81.
+        self.assertEqual(79, len(substitutions))
+        self.assertEqual(
+            substitutions,
+            [s for s in audit["determinate_historical_substitutions"]
+             if s["erratum_id"] not in ("erratum-imperial-custom", "erratum-senet-switch")],
+        )
+        # The frozen packet's own digest still describes its own list; the live one moved with round 037.
+        packet_digest = hashlib.sha256(
+            json.dumps(audit["determinate_historical_substitutions"], separators=(",", ":"), sort_keys=True).encode("utf-8")
+        ).hexdigest()
+        self.assertEqual(packet_digest, audit["determinate_historical_substitutions_digest"])
+        self.assertEqual("8ccefe0818807ab72ec1d7509a1e70d60787055c17881ecb589d48735b9f5df1", packet_digest)
+        self.assertEqual("280abb427c71516fa01c4780563e22528cfaf7ee37069de84f2a4fa3254c479a", digest)
 
     def test_repository_has_the_certified_ocg_ledger_but_no_early_canonical_artifacts(self):
         # Regression 14/15: no canonical Tokyo Dome artifacts exist; existing
@@ -1718,7 +1752,10 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # cards (600000016, 600000018-21) are in the list; to_round_035 undoes both and reproduces the
         # round-035 pin.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x79D06437, tengu.hash)
+        self.assertEqual(0x77E064D4, tengu.hash)
+        # Round 037: Imperial Custom and Senet Switch use the modern card again; to_round_036 puts their
+        # variants back and reproduces the round-036 pin.
+        self.assertEqual(0x79D06437, lflist_hash(to_round_036(tengu.entries)))
         round_035 = to_round_035(tengu.entries)
         self.assertEqual(0x410A9E85, lflist_hash(round_035))
         forward = swap_retired_forward(round_035, ROUND_035_RETIRED_AT_TENGU_PASSCODES)

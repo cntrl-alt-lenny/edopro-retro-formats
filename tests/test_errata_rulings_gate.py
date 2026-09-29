@@ -130,8 +130,8 @@ class ErratumRulingsGateTest(TempRepoTest):
 
     def test_a_functional_transition_after_the_snapshot_needs_a_check(self):
         self._seed()
-        _, warnings = self._codes()
-        self.assertIn("erratum.rulings-check-missing", warnings)
+        errors, warnings = self._codes()
+        self.assertIn("erratum.rulings-check-missing", errors | warnings)
 
     def test_the_finding_is_an_error_not_a_warning(self):
         # Round 037 introduced the rule as a warning and made it an error once every record in

@@ -69,8 +69,53 @@
             "yugipedia-card-errata",
             "ignis-babelcdb",
             "ignis-cardscripts",
-            "yugipedia-set-pages"
-          ]
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-uz",
+            "konami-card-faq-2008-12-16-lo"
+          ],
+          "rulings_check": {
+            "difference": "Era effect has no name-lock: the card added to hand (and copies of it) can still be activated or used the same turn. The 2017 text bars activating cards or effects with that name for the rest of the turn. Era effect can resolve more than once per turn (no limit, each copy triggers on its own); the 2017 text says the effect of 'Witch of the Black Forest' can be used only once per turn.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-uz",
+                "looked_for": "d1: Era effect has no name-lock: the card added to hand (and copies of it) can still be activated or used the same turn. The 2017 text bars activating cards or effects with that name for the rest of the…",
+                "finding": "does-not-address",
+                "passage": "You must show your opponent the monster you select from your Deck for this card's effect."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d2: Era effect can resolve more than once per turn (no limit, each copy triggers on its own); the 2017 text says the effect of 'Witch of the Black Forest' can be used only once per turn.",
+                "finding": "does-not-address",
+                "passage": "If you Tribute \"Sangan\" and \"Witch of the Black Forest\" to Tribute Summon \"Light and Darkness Dragon\", the effect of \"Sangan\" and \"Witch of the Black Forest\" form a Chain."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Witch of the Black Forest on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Witch of the Black Forest in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Witch of the Black Forest in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Witch of the Black Forest' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -118,7 +163,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at lineage v1 (SKE-020), the version the goat baseline implements; v0 (MRD-116, 2002) precedes it and is behaviourally identical. v2 (MRD-116 in Legendary Collection, 2010-10-01) is a cosmetic intermediate between v1 and v3 and is folded into the first change. Unlike the other searchers in this batch, the goat variant relaxes NO activation condition - Witch's trigger is mandatory and neither script tests for a valid target - so only the verification half of the era package applies here and both changes are datable; no chronology-unresolved flag. The shared verification chronology's own evidence includes the 2005-06-16 UDE ruling written for this card, and EdisonFormat.com's period reference corroborates the behaviour independently."
+    "notes": "Chain starts at lineage v1 (SKE-020), the version the goat baseline implements; v0 (MRD-116, 2002) precedes it and is behaviourally identical. v2 (MRD-116 in Legendary Collection, 2010-10-01) is a cosmetic intermediate between v1 and v3 and is folded into the first change. Unlike the other searchers in this batch, the goat variant relaxes NO activation condition - Witch's trigger is mandatory and neither script tests for a valid target - so only the verification half of the era package applies here and both changes are datable; no chronology-unresolved flag. The shared verification chronology's own evidence includes the 2005-06-16 UDE ruling written for this card, and EdisonFormat.com's period reference corroborates the behaviour independently.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Witch of the Black Forest). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
@@ -126,6 +171,8 @@
     "ignis-cardscripts",
     "yugipedia-card-errata",
     "edisonformat-functional-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-uz",
+    "konami-card-faq-2008-12-16-lo"
   ]
 }

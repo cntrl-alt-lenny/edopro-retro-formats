@@ -17,13 +17,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Earlier transitions are cosmetic and precede the baseline's recorded version: v0 (SD10-EN031, 2007-01-17) -> v1 (DPYG-EN030 1st Edition, 2009-07-07) -> v2 (LCYW-EN101, 2012-09-29) -> v3 (BP02-EN188, 2013-06-28) only move the \"(This card is also still a Trap Card.)\" clause, drop \"After activation\", and reword the Gadget requirement (\"are all face-up on your side of the field\" -> \"you control\"); all keep \"ATK becomes 3000\" and all require face-up Gadgets, which both scripts check with a face-up filter. v1 is the text in force at the Edison snapshot (2010-04-24) and is behaviourally identical to v3, which is what the baseline's cdb text matches (it differs from v3 only by the article \"a\" before \"Green Gadget\"; packet ratio 0.9959). The card postdates the GOAT snapshot (first TCG printing 2007-01-17). Apparent date conflict at v4, resolved: the row bundles card number DPYG-EN030 again, but as the Unlimited Edition reprint distributed in Duelist Pack: Yugi & Kaiba Special Edition (2013-10-25), not the 2009 1st Edition; v2 (2012-09-29) and v3 (2013-06-28) still carry the old text, so the lineage ordering supports the 2013 dating the packet used. Trailing cosmetic changes v4 -> v5 (YGLD-ENC39, 2015-11-12) -> v6 (OP11-EN021, 2019-08-15) are Machine-Type -> Machine and Trap Card -> Trap only; not recorded as changes. The packet's second upstream code, 511015121 \"Stronghold the Moving Fortress (Manga)\", is a manga-only card with a different effect (negate a declared direct attack, then Special Summon itself face-up as a non-Trap Effect Monster) scripted under unofficial/; it is not a historical version of the TCG card and is not folded in."
+    "notes": "Earlier transitions are cosmetic and precede the baseline's recorded version: v0 (SD10-EN031, 2007-01-17) -> v1 (DPYG-EN030 1st Edition, 2009-07-07) -> v2 (LCYW-EN101, 2012-09-29) -> v3 (BP02-EN188, 2013-06-28) only move the \"(This card is also still a Trap Card.)\" clause, drop \"After activation\", and reword the Gadget requirement (\"are all face-up on your side of the field\" -> \"you control\"); all keep \"ATK becomes 3000\" and all require face-up Gadgets, which both scripts check with a face-up filter. v1 is the text in force at the Edison snapshot (2010-04-24) and is behaviourally identical to v3, which is what the baseline's cdb text matches (it differs from v3 only by the article \"a\" before \"Green Gadget\"; packet ratio 0.9959). The card postdates the GOAT snapshot (first TCG printing 2007-01-17). Apparent date conflict at v4, resolved: the row bundles card number DPYG-EN030 again, but as the Unlimited Edition reprint distributed in Duelist Pack: Yugi & Kaiba Special Edition (2013-10-25), not the 2009 1st Edition; v2 (2012-09-29) and v3 (2013-06-28) still carry the old text, so the lineage ordering supports the 2013 dating the packet used. Trailing cosmetic changes v4 -> v5 (YGLD-ENC39, 2015-11-12) -> v6 (OP11-EN021, 2019-08-15) are Machine-Type -> Machine and Trap Card -> Trap only; not recorded as changes. The packet's second upstream code, 511015121 \"Stronghold the Moving Fortress (Manga)\", is a manga-only card with a different effect (negate a declared direct attack, then Special Summon itself face-up as a non-Trap Effect Monster) scripted under unofficial/; it is not a historical version of the TCG card and is not folded in.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Stronghold the Moving Fortress). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-card-errata",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-raging-battle-rulings-2009"
   ],
   "event": {
     "effective": {
@@ -41,8 +43,65 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-card-errata",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-card-faq-2008-12-16-ac",
+      "konami-raging-battle-rulings-2009"
+    ],
+    "rulings_check": {
+      "difference": "Era 'this card's ATK becomes 3000' sets the ATK to 3000 while the three Gadgets are face-up, overriding ATK modifiers applied earlier; modern 'this card gains 3000 ATK' adds 3000 on top of every other modifier. The variant script's EFFECT_SET_ATTACK_FINAL also ignores ATK modifiers applied after the Gadget effect begins to apply, whereas period rulings on other 'ATK becomes' effects say later modifiers adjust from the new value.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: Era 'this card's ATK becomes 3000' sets the ATK to 3000 while the three Gadgets are face-up, overriding ATK modifiers applied earlier; modern 'this card gains 3000 ATK' adds 3000 on top of every othe…",
+          "finding": "does-not-address",
+          "passage": "Since \"Cybernetic Magician\" makes the ATK \"become\" 2000, that is the new value. Even if the monster was equipped with an Equip Spell Card, the ATK is 2000 and is not adjusted, even if the Equip Spell Card is destroyed."
+        },
+        {
+          "source": "konami-raging-battle-rulings-2009",
+          "looked_for": "d1: Era 'this card's ATK becomes 3000' sets the ATK to 3000 while the three Gadgets are face-up, overriding ATK modifiers applied earlier; modern 'this card gains 3000 ATK' adds 3000 on top of every othe…",
+          "finding": "does-not-address",
+          "passage": "If “Sea Dragon Lord Gishilnodon” has its ATK altered by a Field Spell Card, etc., and then its effect is triggered, its ATK becomes 3000."
+        },
+        {
+          "source": "konami-raging-battle-rulings-2009",
+          "looked_for": "d2: The variant script's EFFECT_SET_ATTACK_FINAL also ignores ATK modifiers applied after the Gadget effect begins to apply, whereas period rulings on other 'ATK becomes' effects say later modifiers adju…",
+          "finding": "does-not-address",
+          "passage": "If an effect that would alter its ATK is activated afterwards, its ATK will be re-adjusted from 3000 (so it would be 3000 plus or minus the new adjustment)."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d2: The variant script's EFFECT_SET_ATTACK_FINAL also ignores ATK modifiers applied after the Gadget effect begins to apply, whereas period rulings on other 'ATK becomes' effects say later modifiers adju…",
+          "finding": "does-not-address",
+          "passage": "(However, if equipped after the effect of \"Cybernetic Magician\" resolves, the ATK will be adjusted from the new level of 2000 points.)"
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "an entry for Stronghold the Moving Fortress and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Stronghold the Moving Fortress on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Stronghold the Moving Fortress in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Stronghold the Moving Fortress' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

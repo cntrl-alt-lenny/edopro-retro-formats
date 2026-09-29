@@ -12,7 +12,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In Edison the EDOPro card only sends the Pyro monster during resolution and withholds the 500 damage whenever the destruction fails, where the period card paid the monster on activation and dealt the damage alongside the destruction."
+        "behavioural_impact": "In Edison the EDOPro card only sends the Pyro monster during resolution and withholds the 500 damage whenever the destruction fails, where the period card paid the monster on activation and dealt the damage alongside the destruction. Round 037 (2026-09-29): withdrawn as a difference on period rulings: Era (record's reading): the Pyro monster is sent from the hand as a cost paid on activation of the effect; modern: the send happens during resolution. (review notes)."
       }
     }
   ],
@@ -20,12 +20,14 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Only two English versions: v0 (FOTB-EN041, 2007-05-16), the text in force at the Edison snapshot, and v1 (SGX1-ENH15, 2022-03-17). Pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty, so there is no script diff and no upstream annotation to check the cost/effect split against: the verdict rests on the printed structure alone - the pre-PSCT '[send] to [destroy] ... and inflict' construction versus the modern post-semicolon 'and if you do / and if you do that' chain. EdisonFormat.com documents the analogous pre-PSCT behaviour of 'and' on Dark End Dragon and Light End Dragon (the second clause still applies when the first fails), but Tri-Blaze Accelerator is not itself listed there, so that page is cited neither as a source on the change nor as corroboration - it is noted only as a family pattern. The attack restriction is unchanged in substance ('you cannot declare an attack during this turn if you do' -> 'Your monsters cannot attack the turn you activate this effect'), as is the activation cost of sending a face-up 'Blaze Accelerator' you control."
+    "notes": "Only two English versions: v0 (FOTB-EN041, 2007-05-16), the text in force at the Edison snapshot, and v1 (SGX1-ENH15, 2022-03-17). Pinned BabelCDB text matches v1 exactly (ratio 1.0). upstream_implementations is empty, so there is no script diff and no upstream annotation to check the cost/effect split against: the verdict rests on the printed structure alone - the pre-PSCT '[send] to [destroy] ... and inflict' construction versus the modern post-semicolon 'and if you do / and if you do that' chain. EdisonFormat.com documents the analogous pre-PSCT behaviour of 'and' on Dark End Dragon and Light End Dragon (the second clause still applies when the first fails), but Tri-Blaze Accelerator is not itself listed there, so that page is cited neither as a source on the change nor as corroboration - it is noted only as a family pattern. The attack restriction is unchanged in substance ('you cannot declare an attack during this turn if you do' -> 'Your monsters cannot attack the turn you activate this effect'), as is the activation cost of sending a face-up 'Blaze Accelerator' you control.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Tri-Blaze Accelerator). A period ruling in force contradicts part of the claim, which is withdrawn as a difference: Era (record's reading): the Pyro monster is sent from the hand as a cost paid on activation of the effect; modern: the send happens during resolution. Contradicted by Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15): \"Sending 1 Pyro-Type monster with 500 or less ATK to the Graveyard is part of this card's effect. It is not a cost.\" Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16): \"Sending 1 Pyro-Type Monster from your hand to the Graveyard is not a cost. The Pyro-Type Monster is sent to the Graveyard when \"Blaze Accelerator's\" effect resolves.\" The transition stays functional on what remains, d2, d3, d4. Verdicts: [event] d2 unresolved at Edison, unresolved at Tengu; d3 unresolved at Edison, unresolved at Tengu; d4 unresolved at Edison, unresolved at Tengu; d1 contradicted at Edison, contradicted at Tengu. Superseded summary, kept verbatim: \"Functional erratum: the FOTB-EN041 text sends the Pyro monster in the pre-PSCT cost construction 'You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage', where the send is paid up front and the destruction and the burn stand side by side; the modern text moves the send behind the semicolon so it happens during resolution and chains the results strictly - 'send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage' - so a failed send now cancels the destruction and a failed destruction now cancels the burn. The modern text also makes the destruction explicitly target at activation. The added 'During your Main Phase:' only spells out the Ignition-effect default and is not a new restriction.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-15-uz",
+    "konami-card-faq-2008-12-16-ac"
   ],
   "event": {
     "effective": {
@@ -38,12 +40,68 @@
     "axis": null,
     "historical_text": "Activate only by sending 1 face-up \"Blaze Accelerator\" on your side of the field to the Graveyard. You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage to your opponent, but you cannot declare an attack during this turn if you do.",
     "modern_text": "Activate this card by sending 1 face-up \"Blaze Accelerator\" you control to the GY. During your Main Phase: You can target 1 monster your opponent controls; send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage to your opponent. Your monsters cannot attack the turn you activate this effect.",
-    "summary": "Functional erratum: the FOTB-EN041 text sends the Pyro monster in the pre-PSCT cost construction 'You can send 1 Pyro-Type monster from your hand to the Graveyard to destroy 1 monster your opponent controls and inflict 500 damage', where the send is paid up front and the destruction and the burn stand side by side; the modern text moves the send behind the semicolon so it happens during resolution and chains the results strictly - 'send 1 Pyro monster from your hand to the GY, and if you do, destroy that target, and if you do that, inflict 500 damage' - so a failed send now cancels the destruction and a failed destruction now cancels the burn. The modern text also makes the destruction explicitly target at activation. The added 'During your Main Phase:' only spells out the Ignition-effect default and is not a new restriction.",
+    "summary": "Functional erratum, narrowed by round 037 (2026-09-29) to what no period ruling contradicts: (d2) Era: the destruction happens even if the Pyro send fails (send and destroy read as separate results); modern: 'send ..., and if you do, destroy', so a failed send cancels the destruction. (d3) Era: the 500 damage is inflicted alongside the destruction even if the destruction fails; modern: 'and if you do that, inflict', so a failed destruction cancels the damage. (d4) Era: the destruction chooses its monster on resolution (no target); modern: the monster is targeted on activation. Withdrawn as a difference: Era (record's reading): the Pyro monster is sent from the hand as a cost paid on activation of the effect; modern: the send happens during resolution. Contradicted by Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15): \"Sending 1 Pyro-Type monster with 500 or less ATK to the Graveyard is part of this card's effect. It is not a cost.\"",
     "sources": [
       "yugipedia-card-errata",
       "yugipedia-set-pages",
-      "ignis-babelcdb"
-    ]
+      "ignis-babelcdb",
+      "konami-card-faq-2008-12-15-uz",
+      "konami-card-faq-2008-12-16-ac"
+    ],
+    "rulings_check": {
+      "difference": "Era: the destruction happens even if the Pyro send fails (send and destroy read as separate results); modern: 'send ..., and if you do, destroy', so a failed send cancels the destruction. Era: the 500 damage is inflicted alongside the destruction even if the destruction fails; modern: 'and if you do that, inflict', so a failed destruction cancels the damage. Era: the destruction chooses its monster on resolution (no target); modern: the monster is targeted on activation.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-15-uz",
+          "looked_for": "d3: Era: the 500 damage is inflicted alongside the destruction even if the destruction fails; modern: 'and if you do that, inflict', so a failed destruction cancels the damage.",
+          "finding": "does-not-address",
+          "passage": "When \"Yubel - The Ultimate Nightmare\" battles with a monster that cannot be destroyed by its effect, like \"Vennominaga, the Deity of Poisonous Snakes\", \"Yubel - The Ultimate Nightmare's\" effect still inflicts damage but will not destroy the monster."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: Era: the 500 damage is inflicted alongside the destruction even if the destruction fails; modern: 'and if you do that, inflict', so a failed destruction cancels the damage.",
+          "finding": "does-not-address",
+          "passage": "If you activate \"Blaze Accelerator's\" effect and an effect is chained that removes the selected target from the field, \"Blaze Accelerator's\" effect disappears, but you still cannot declare an attack during the turn."
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d4: Era: the destruction chooses its monster on resolution (no target); modern: the monster is targeted on activation.",
+          "finding": "does-not-address",
+          "passage": "\"Blaze Accelerator's\" effect targets."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+          "looked_for": "an entry for Tri-Blaze Accelerator and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Tri-Blaze Accelerator on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Tri-Blaze Accelerator in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Tri-Blaze Accelerator in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Tri-Blaze Accelerator' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "known-gap",

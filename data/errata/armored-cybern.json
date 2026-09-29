@@ -17,14 +17,19 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at v2 (SDCR-EN011, 2014-02-06), which the baseline implements (ratio 0.9929). Earlier transitions predate it and are cosmetic for our purposes: v0 (PTDN-EN009, 2008-02-13) -> v1 (SDMM-EN018, 2010-02-19) only adds 'during your Main Phase' to an effect the era already treated as an Ignition effect, and v1 -> v2 is the PSCT formalisation of the same equip/unequip and ATK-loss-then-destroy sequence; the Edison-era printing is v1, in force 64 days before the 2010-04-24 snapshot, and behaves as the baseline implements. Upstream also ships 511002821 'Armored Cybern (Anime)', a different anime card (equips to any 'Cyber' Machine-Type monster and destroys 1 card the opponent controls, with no ATK-loss prerequisite structure) - not a historical version of the TCG card, excluded rather than escalated. EdisonFormat attributes the general Union-Condition removal to the 2016 Structure Deck: Seto Kaiba wave; for this card the lineage dates the removal to its own LEDD-ENB10 printing (2017-10-05), and per the shared brief set-release evidence is preferred over the site's claim. Card data is identical between 511003055 and 67159705 (0/2000, Level 4, LIGHT, Machine, Union)."
+    "notes": "Chain starts at v2 (SDCR-EN011, 2014-02-06), which the baseline implements (ratio 0.9929). Earlier transitions predate it and are cosmetic for our purposes: v0 (PTDN-EN009, 2008-02-13) -> v1 (SDMM-EN018, 2010-02-19) only adds 'during your Main Phase' to an effect the era already treated as an Ignition effect, and v1 -> v2 is the PSCT formalisation of the same equip/unequip and ATK-loss-then-destroy sequence; the Edison-era printing is v1, in force 64 days before the 2010-04-24 snapshot, and behaves as the baseline implements. Upstream also ships 511002821 'Armored Cybern (Anime)', a different anime card (equips to any 'Cyber' Machine-Type monster and destroys 1 card the opponent controls, with no ATK-loss prerequisite structure) - not a historical version of the TCG card, excluded rather than escalated. EdisonFormat attributes the general Union-Condition removal to the 2016 Structure Deck: Seto Kaiba wave; for this card the lineage dates the removal to its own LEDD-ENB10 printing (2017-10-05), and per the shared brief set-release evidence is preferred over the site's claim. Card data is identical between 511003055 and 67159705 (0/2000, Level 4, LIGHT, Machine, Union).\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Armored Cybern). The rulings read support d1, d3 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [event] d1 supported at Edison, supported at Tengu; d2 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d3 supported at Edison, supported at Tengu. Variant-script points a ruling contradicts, listed for the owner (Ignis's script is not edited): Armored Cybern: the variant script destroys the target even when the equipped monster's ATK cannot be reduced, where the card FAQ says the effect then disappears (read from the script, not run)."
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-cardscripts",
     "ignis-babelcdb",
     "yugipedia-set-pages",
-    "edisonformat-functional-errata"
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-shining-darkness-rulings-2010-04",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-card-faq-2008-12-15-uz",
+    "konami-set-rulings-archive"
   ],
   "event": {
     "effective": {
@@ -43,8 +48,164 @@
       "ignis-cardscripts",
       "ignis-babelcdb",
       "yugipedia-set-pages",
-      "edisonformat-functional-errata"
-    ]
+      "edisonformat-functional-errata",
+      "konami-card-faq-2008-12-16-ac",
+      "konami-shining-darkness-rulings-2010-04",
+      "konami-card-faq-2008-12-15-fh",
+      "konami-card-faq-2008-12-15-uz",
+      "konami-set-rulings-archive"
+    ],
+    "rulings_check": {
+      "difference": "Era: 'A monster can only be equipped with 1 Union monster at a time' is a Union condition, so a monster carries only one Union at a time. Modern: the condition is gone and a monster may carry several Unions. Era: the equipped monster's replacement ('destroy this card instead') applies only to destruction by battle. Modern: 'destroyed by battle or card effect'. Era: the 1000 ATK loss ends when Armored Cybern is unequipped or leaves the field. Modern: the loss is permanent ('even if this card leaves the field').",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: Era: 'A monster can only be equipped with 1 Union monster at a time' is a Union condition, so a monster carries only one Union at a time. Modern: the condition is gone and a monster may carry several…",
+          "finding": "supports",
+          "passage": "The Machine-Type monster can still only be equipped with 1 Union Monster at a time, because that is a condition, not an effect",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d1: Era: 'A monster can only be equipped with 1 Union monster at a time' is a Union condition, so a monster carries only one Union at a time. Modern: the condition is gone and a monster may carry several…",
+          "finding": "supports",
+          "passage": "If multiple Union Monsters are going to be equipped to 1 legal target monster by \"Collected Power\", you select 1 of them and equip it to the target monster, and the other Union Monster Cards are destroyed.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "konami-shining-darkness-rulings-2010-04",
+          "looked_for": "d1: Era: 'A monster can only be equipped with 1 Union monster at a time' is a Union condition, so a monster carries only one Union at a time. Modern: the condition is gone and a monster may carry several…",
+          "finding": "supports",
+          "passage": "You cannot activate the effect to equip a Union monster if Delta Tri is already equipped with a Union monster.",
+          "in_force": "shown",
+          "in_force_basis": "Konami's The Shining Darkness card rulings (compiled 2010-04-30) was current at Tengu's snapshot (2011-09-17) only: it postdates Edison's (2010-04-24)."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-fh",
+          "looked_for": "d2: Era: the equipped monster's replacement ('destroy this card instead') applies only to destruction by battle. Modern: 'destroyed by battle or card effect'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "Note that \"Heavy Mech Support Platform\" is different from other Union Monsters in that its last sentence is applied if the monster it is equipped to is destroyed (period), not just when the monster is destroyed as a result of battle. This extra effect does not apply to previous Union Monsters."
+        },
+        {
+          "source": "konami-card-faq-2008-12-15-uz",
+          "looked_for": "d2: Era: the equipped monster's replacement ('destroy this card instead') applies only to destruction by battle. Modern: 'destroyed by battle or card effect'. (a general rule or another card's ruling: not counted as support)",
+          "finding": "does-not-address",
+          "passage": "including the \"If the monster that this card is equipped to is destroyed in battle, this card is destroyed instead.\" effect."
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "d2: Era: the equipped monster's replacement ('destroy this card instead') applies only to destruction by battle. Modern: 'destroyed by battle or card effect'.",
+          "finding": "does-not-address",
+          "passage": "1 Union Monster at a time. If the equipped monster would be destroyed, destroy this card instead.)"
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "d3: Era: the 1000 ATK loss ends when Armored Cybern is unequipped or leaves the field. Modern: the loss is permanent ('even if this card leaves the field').",
+          "finding": "supports",
+          "passage": "When \"Armored Cybern\" is unequipped or removed from the field, the ATK lost with its effect is no longer applied.",
+          "in_force": "by-decision",
+          "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+          "later_konami_replacement": "none-found",
+          "later_documents_checked": [
+            "konami-absolute-powerforce-rulings-2010-02",
+            "konami-absolute-powerforce-rulings-2011-05",
+            "konami-ancient-prophecy-rulings-2009",
+            "konami-crimson-crisis-rulings-2009",
+            "konami-duelist-pack-tin-rulings-2010-03",
+            "konami-duelist-revolution-rulings-2011-05",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-gold-series-3-rulings-2010-09",
+            "konami-hidden-arsenal-3-rulings-2011-04",
+            "konami-official-rulebook-v71-2010",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-official-rulebook-v8-2011",
+            "konami-raging-battle-rulings-2009",
+            "konami-rulebook-2008-v70",
+            "konami-set-rulings-archive",
+            "konami-shining-darkness-rulings-2010-04",
+            "konami-stardust-overdrive-rulings-2009",
+            "konami-starstrike-blast-rulings-archive",
+            "konami-storm-of-ragnarok-rulings-archive"
+          ]
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Armored Cybern on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Armored Cybern in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-official-rulebook-v71-2010",
+          "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Armored Cybern' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

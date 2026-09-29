@@ -17,14 +17,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "The goat cdb text matches v2 (DB1-EN177, 2004-10-12) exactly and the lineage has no English version between v2 (2004) and v3 (2015), so the erratum is dated only by that single printing. Versions v0/v1 (PSV, 2002-10-20) precede the baseline text and differ cosmetically ('Magic' -> 'Spell', 'both players take 500 points of Direct Damage' -> 'Inflict 500 points of damage to each player'). Remaining diff lines are inert: 'EVENT_PHASE+PHASE_STANDBY' equals 'EVENT_PHASE|PHASE_STANDBY', and Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE) covers the same cards as Duel.GetMatchingGroup(aux.TRUE,0,LOCATION_FZONE,LOCATION_FZONE,nil). The packet's second upstream entry, 511002578 'Burning Land (Anime)', is a different card - it destroys only the opponent's Field Spell via EFFECT_SELF_DESTRUCT and applies -700 DEF to the opponent's monsters, with no Standby Phase burn - and is not used. Upstream labels the goat entry's comment 'Burning Land (Pre-Errata)' even though the passcode lives in goat-entries.cdb; that is an upstream naming quirk, not an era claim I could not reconcile."
+    "notes": "The goat cdb text matches v2 (DB1-EN177, 2004-10-12) exactly and the lineage has no English version between v2 (2004) and v3 (2015), so the erratum is dated only by that single printing. Versions v0/v1 (PSV, 2002-10-20) precede the baseline text and differ cosmetically ('Magic' -> 'Spell', 'both players take 500 points of Direct Damage' -> 'Inflict 500 points of damage to each player'). Remaining diff lines are inert: 'EVENT_PHASE+PHASE_STANDBY' equals 'EVENT_PHASE|PHASE_STANDBY', and Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE) covers the same cards as Duel.GetMatchingGroup(aux.TRUE,0,LOCATION_FZONE,LOCATION_FZONE,nil). The packet's second upstream entry, 511002578 'Burning Land (Anime)', is a different card - it destroys only the opponent's Field Spell via EFFECT_SELF_DESTRUCT and applies -700 DEF to the opponent's monsters, with no Standby Phase burn - and is not used. Upstream labels the goat entry's comment 'Burning Land (Pre-Errata)' even though the passcode lives in goat-entries.cdb; that is an upstream naming quirk, not an era claim I could not reconcile.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Burning Land). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [event] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
     "ignis-lflists",
     "yugipedia-card-errata",
     "ignis-cardscripts",
-    "yugipedia-set-pages"
+    "yugipedia-set-pages",
+    "konami-rulebook-2008-v70"
   ],
   "event": {
     "effective": {
@@ -42,8 +43,46 @@
       "yugipedia-card-errata",
       "ignis-cardscripts",
       "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
+      "yugipedia-set-pages",
+      "konami-rulebook-2008-v70"
+    ],
+    "rulings_check": {
+      "difference": "Era: 'Destroy all Field Spell Cards on the field' is a standing effect, so a Field Spell that appears while Burning Land is face-up is destroyed as well. Modern: a one-shot 'When this card is activated: If there are any Field Spell Cards on the field, destroy them'.",
+      "checked": "2026-09-29",
+      "searched": [
+        {
+          "source": "konami-rulebook-2008-v70",
+          "looked_for": "d1: Era: 'Destroy all Field Spell Cards on the field' is a standing effect, so a Field Spell that appears while Burning Land is face-up is destroyed as well. Modern: a one-shot 'When this card is activat…",
+          "finding": "does-not-address",
+          "passage": "Whenever a new Field Spell Card"
+        },
+        {
+          "source": "konami-card-faq-2008-12-16-ac",
+          "looked_for": "an entry for Burning Land and any ruling on the claimed difference, on the Konami-hosted copy of the UDE card FAQ of 2008-12 (the page for its letter; the other letter pages were also searched by name); no entry answers the difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "ude-card-rulings-archive",
+          "looked_for": "Burning Land on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-errata-list-2010-01-05",
+          "looked_for": "Burning Land in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "konami-set-rulings-archive",
+          "looked_for": "Burning Land in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+          "finding": "does-not-address"
+        },
+        {
+          "source": "yugipedia-card-rulings-pointer",
+          "looked_for": "'Card Rulings:Burning Land' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+          "finding": "does-not-address"
+        }
+      ]
+    }
   },
   "coverage": {
     "kind": "reuse-upstream",

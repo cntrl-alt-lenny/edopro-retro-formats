@@ -42,8 +42,66 @@
           "sources": [
             "ignis-cardscripts",
             "ignis-babelcdb",
-            "yugipedia-card-errata"
-          ]
+            "yugipedia-card-errata",
+            "konami-card-faq-2008-12-15-de",
+            "konami-card-faq-2008-12-16-lo",
+            "konami-card-faq-2008-12-16-ac"
+          ],
+          "rulings_check": {
+            "difference": "Era text 'Select 1 removed from play monster and Special Summon it on your side of the field' has no owner restriction (so it could take a monster the opponent banished); the shipped implementation only reaches your own banished monsters.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: Era text 'Select 1 removed from play monster and Special Summon it on your side of the field' has no owner restriction (so it could take a monster the opponent banished); the shipped implementation o…",
+                "finding": "does-not-address",
+                "passage": "\"Dimension Distortion\" can only Special Summon a monster that is face-up while removed from play (cannot Special Summon a monster removed with \"Lightforce Sword\" or \"Different Dimension Capsule\")."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d1: Era text 'Select 1 removed from play monster and Special Summon it on your side of the field' has no owner restriction (so it could take a monster the opponent banished); the shipped implementation o…",
+                "finding": "does-not-address",
+                "passage": "NOTE: When a monster is removed from play, it goes to a \"removed zone\" (for lack of a better term) of the original owner."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: Era text 'Select 1 removed from play monster and Special Summon it on your side of the field' has no owner restriction (so it could take a monster the opponent banished); the shipped implementation o…",
+                "finding": "does-not-address",
+                "passage": "\"D.D.M. – Different Dimension Master\" can Special Summon monsters in the \"removed zone\" of its controller."
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-ac",
+                "looked_for": "d1: Era text 'Select 1 removed from play monster and Special Summon it on your side of the field' has no owner restriction (so it could take a monster the opponent banished); the shipped implementation o…",
+                "finding": "does-not-address",
+                "passage": "You may select cards from either players Removed Zone."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "Dimension Distortion on the 2005 UDE card rulings page, and on UDE's card FAQ of 2009-02-26 (U to Z); nothing on the claimed difference",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Dimension Distortion in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Dimension Distortion in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Dimension Distortion' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -77,12 +135,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "The pinned cards.cdb text matches no lineage version (best match index 1 at ratio 0.4577) because it is an unofficial rendering of the OCG card's functionality; the English lineage stops at DR2-EN044 (2005-10-20). Recorded exactly as observed: the printed TCG text never restricted the banished monster to your own, the shipped implementation does. Chronology left open rather than guessed - no printing, no UDE Card Text Updates entry and no other packet evidence dates the restriction. NEEDS ESCALATION: someone should decide whether the TCG card is governed by the OCG erratum at all, since Konami never reprinted it in English; that decision determines whether GOAT (2005-04-01, v0 text) and Edison (2010-04-24, v1 text) get a custom script or keep the modern one. The v0-to-v1 rewording is cosmetic and dated, so only the undated transition blocks snapshot resolution. This card has no upstream historical or unofficial variant of any kind."
+    "notes": "The pinned cards.cdb text matches no lineage version (best match index 1 at ratio 0.4577) because it is an unofficial rendering of the OCG card's functionality; the English lineage stops at DR2-EN044 (2005-10-20). Recorded exactly as observed: the printed TCG text never restricted the banished monster to your own, the shipped implementation does. Chronology left open rather than guessed - no printing, no UDE Card Text Updates entry and no other packet evidence dates the restriction. NEEDS ESCALATION: someone should decide whether the TCG card is governed by the OCG erratum at all, since Konami never reprinted it in English; that decision determines whether GOAT (2005-04-01, v0 text) and Edison (2010-04-24, v1 text) get a custom script or keep the modern one. The v0-to-v1 rewording is cosmetic and dated, so only the undated transition blocks snapshot resolution. This card has no upstream historical or unofficial variant of any kind.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Dimension Distortion). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-15-de",
+    "konami-card-faq-2008-12-16-lo",
+    "konami-card-faq-2008-12-16-ac"
   ]
 }

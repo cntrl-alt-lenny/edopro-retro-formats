@@ -49,6 +49,7 @@ from .helpers import (
     swap_generated_back,
     swap_retired_forward,
     to_round_035,
+    to_round_036,
     card as card_ref,
     event as ev,
     gap,
@@ -430,7 +431,10 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         # cards (600000016, 600000018-21) are in the list; to_round_035 undoes both and reproduces the
         # round-035 pin.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x79D06437, tengu.hash)
+        self.assertEqual(0x77E064D4, tengu.hash)
+        # Round 037: Imperial Custom and Senet Switch use the modern card again; to_round_036 puts their
+        # variants back and reproduces the round-036 pin.
+        self.assertEqual(0x79D06437, lflist_hash(to_round_036(tengu.entries)))
         round_035 = to_round_035(tengu.entries)
         self.assertEqual(0x410A9E85, lflist_hash(round_035))
         forward = swap_retired_forward(round_035, ROUND_035_RETIRED_AT_TENGU_PASSCODES)

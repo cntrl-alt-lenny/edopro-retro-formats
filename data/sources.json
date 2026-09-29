@@ -320,14 +320,16 @@
       "kind": "official",
       "title": "Konami TCG Card FAQ default_ik page (Internet Archive capture served 2008-12-16)",
       "url": "https://web.archive.org/web/20081216162317/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ik.html",
-      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:17 GMT. No own entry for Sonic Bird was present; the card name appears only in another card's example list. Retrieved 2026-09-21. Round 22 rechecked the Wayback timemap JSON for the same URL pattern, filtering strictly after 2008-12-16 through 2010-12-31: the HTTP 200 row was 2008-12-17 10:10:40 GMT, and the four later rows were HTTP 302 at 2009-01-16 17:59:12, 2009-02-16 10:07:49, 2009-03-19 07:09:53, and 2009-04-20 13:22:28 GMT. Direct requests served those four mementos with Location headers to the archived site root, respectively http://web.archive.org/web/20090116175912/http://www.yugioh-card.com/, http://web.archive.org/web/20090216100749/http://www.yugioh-card.com/, http://web.archive.org/web/20090319070953/http://www.yugioh-card.com/, and http://web.archive.org/web/20090420132228/http://www.yugioh-card.com/; none led to a Card FAQ page. The 200 2008-12-17 page was the only FAQ content read for this pattern, and it had no own Sonic Bird entry. The redirect rows are evidence about those archive requests and destinations, not evidence that the FAQ source was absent. Retrieved 2026-09-21."
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:17 GMT. No own entry for Sonic Bird was present; the card name appears only in another card's example list. Retrieved 2026-09-21. Round 22 rechecked the Wayback timemap JSON for the same URL pattern, filtering strictly after 2008-12-16 through 2010-12-31: the HTTP 200 row was 2008-12-17 10:10:40 GMT, and the four later rows were HTTP 302 at 2009-01-16 17:59:12, 2009-02-16 10:07:49, 2009-03-19 07:09:53, and 2009-04-20 13:22:28 GMT. Direct requests served those four mementos with Location headers to the archived site root, respectively http://web.archive.org/web/20090116175912/http://www.yugioh-card.com/, http://web.archive.org/web/20090216100749/http://www.yugioh-card.com/, http://web.archive.org/web/20090319070953/http://www.yugioh-card.com/, and http://web.archive.org/web/20090420132228/http://www.yugioh-card.com/; none led to a Card FAQ page. The 200 2008-12-17 page was the only FAQ content read for this pattern, and it had no own Sonic Bird entry. The redirect rows are evidence about those archive requests and destinations, not evidence that the FAQ source was absent. Retrieved 2026-09-21. Round 037: ruling_class ude-era-ruling (the Konami-hosted copy of the UDE per-card FAQ, as its sibling pages).",
+      "ruling_class": "ude-era-ruling"
     },
     {
       "id": "konami-card-faq-2008-12-16-lo",
       "kind": "official",
       "title": "Konami TCG Card FAQ default_lo page (Internet Archive capture served 2008-12-16)",
       "url": "https://web.archive.org/web/20081216162323/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_lo.html",
-      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:23 GMT. The page has its own entries for Mother Grizzly, Mystic Swordsman LV2, Mystic Swordsman LV4, Mystic Tomato, and Ninjitsu Art of Transformation. Those passages cover battle-trigger timing, level-up condition reset, and resolution-time selection; none states an activation bound for the cluster's failed search. Retrieved 2026-09-21."
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:23:23 GMT. The page has its own entries for Mother Grizzly, Mystic Swordsman LV2, Mystic Swordsman LV4, Mystic Tomato, and Ninjitsu Art of Transformation. Those passages cover battle-trigger timing, level-up condition reset, and resolution-time selection; none states an activation bound for the cluster's failed search. Retrieved 2026-09-21. Round 037: ruling_class ude-era-ruling (the Konami-hosted copy of the UDE per-card FAQ, as its sibling pages).",
+      "ruling_class": "ude-era-ruling"
     },
     {
       "id": "konami-card-faq-2008-12-16-fh",
@@ -897,6 +899,121 @@
       "title": "Konami \"THE SHINING DARKNESS SNEAK PEEK - CARD RULINGS, Compiled as of April 30, 2010 <version 1.0>\" (Internet Archive capture 2010-06-01)",
       "url": "http://web.archive.org/web/20100601061927/http://www.yugioh-card.com/en/gameplay/rulings/TSHDRulebook_100430.pdf",
       "notes": "The capture's origin Last-Modified header is Fri, 30 Apr 2010, six days after Edison's snapshot; Konami's Gameplay page linked the file on 2011-09-18, so it holds at Tengu's. Under \"Delta Tri\" (TSHD-EN030): \"You cannot activate the effect to equip a Union monster if Delta Tri is already equipped with a Union monster.\" Retrieved 2026-09-29 (round 036)."
+    },
+    {
+      "id": "konami-ancient-prophecy-rulings-2009",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"ANCIENT PROPHECY SNEAK PEEK – CARD RULINGS Compiled as of August 11, 2009 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20100331022658/http://www.yugioh-card.com/en/gameplay/rulings/ANPR_sneak_ruling.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2009-08-11. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-crimson-crisis-rulings-2009",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"CRIMSON CRISIS SNEAK PEEK – CARD RULINGS Compiled as of Feb. 27, 2009 - <version 2.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20100215175324/http://www.yugioh-card.com/en/gameplay/rulings/CRMS_sneak_ruling.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2009-02-27. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-raging-battle-rulings-2009",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"RAGING BATTLE SNEAK PEEK – CARD RULINGS Compiled as of May 27, 2009 - <version 1.2>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20100215180804/http://www.yugioh-card.com/en/gameplay/rulings/RGBT%20Rules%20v1-2.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2009-05-27. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-stardust-overdrive-rulings-2009",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"STARDUST OVERDRIVE SNEAK PEEK – CARD RULINGS Compiled as of October 29, 2009 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20100331022705/http://www.yugioh-card.com/en/gameplay/rulings/SOVR_sneak_ruling.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2009-10-29. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-absolute-powerforce-rulings-2010-02",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"ABSOLUTE POWERFORCE – CARD RULINGS Compiled as of February 5, 2010 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20100214180532/http://www.yugioh-card.com/en/gameplay/rulings/ABPF_sneak_ruling.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2010-02-05. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-absolute-powerforce-rulings-2011-05",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"ABSOLUTE POWERFORCE – CARD RULINGS Compiled as of May 12, 2011 - <version 1.1>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20110725024153/http://www.yugioh-card.com/en/gameplay/rulings/ABPF%20Rules%20Booklet_110512_v1.1x.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2011-05-12. Postdates Edison's snapshot; current at Tengu's only. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-duelist-pack-tin-rulings-2010-03",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"Duelist Pack Collection Tin 2010 – Card Rulings Compiled as of March 24th, 2010 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20110905063335/http://www.yugioh-card.com/en/gameplay/rulings/100325DPTin_%20HA_SDWS_ST09_Rules.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2010-03-24. Current at both snapshots. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-duelist-revolution-rulings-2011-05",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"DUELIST REVOLUTION SNEAK PEEK – Card Rulings Compiled as of May 12, 2011 - <version 1.1>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20110929002848/http://www.yugioh-card.com/en/gameplay/rulings/DREVRulebook110517_v1.1x.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2011-05-12. Postdates Edison's snapshot; current at Tengu's only. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-hidden-arsenal-3-rulings-2011-04",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"HIDDEN ARSENAL 3 – CARD RULINGS Compiled as of April 1, 2011 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20110929002950/http://www.yugioh-card.com/en/gameplay/rulings/HA03RulesBook110323x.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2011-04-01. Postdates Edison's snapshot; current at Tengu's only. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "konami-gold-series-3-rulings-2010-09",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"GOLD SERIES 3 – CARD RULINGS Compiled as of September 9, 2010 - <version 1.0>\" (Internet Archive capture)",
+      "url": "https://web.archive.org/web/20110902053858/http://www.yugioh-card.com/en/gameplay/rulings/101109%20GoldSeries3_TF5%20Rulings%20-%20x.pdf",
+      "notes": "Linked from Konami's Gameplay page (captures 2010-03-22 and 2011-09-18); compiled 2010-09-09. Postdates Edison's snapshot; current at Tengu's only. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "ude-judge-list-big-shield-gardna-2007",
+      "kind": "official",
+      "ruling_class": "ude-era-ruling",
+      "title": "UDE Judge List, \"big shield gardna vs. soul exchange\" (Internet Archive; capture 2007-11-18)",
+      "url": "http://web.archive.org/web/20071118005446/entertainment.upperdeck.com/community/forums/thread/856578.aspx",
+      "notes": "capture 2007-11-18; thread 856578; answered by the UDE Netrep 2007-09-25. A UDE Netrep answer, read as a primary document (Yugipedia's Card Rulings page for the card links it). Its range in force at 2010-04-24 or 2011-09-17 is not shown; it counts under the owner's decision of 2026-09-29. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "ude-judge-list-ring-of-destruction-2007",
+      "kind": "official",
+      "ruling_class": "ude-era-ruling",
+      "title": "UDE Judge List, \"Ring of Destruction vs Limiter Removal\" (Internet Archive; capture 2007-11-01)",
+      "url": "http://web.archive.org/web/20071101093428/http:/entertainment.upperdeck.com/COMMUNITY/forums/thread/812804.aspx",
+      "notes": "capture 2007-11-01; thread 812804; answered by the UDE Netrep 2007-08-12. A UDE Netrep answer, read as a primary document (Yugipedia's Card Rulings page for the card links it). Its range in force at 2010-04-24 or 2011-09-17 is not shown; it counts under the owner's decision of 2026-09-29. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "ude-judge-list-imperial-iron-wall-2008",
+      "kind": "official",
+      "ruling_class": "ude-era-ruling",
+      "title": "UDE Judge List, \"Imperial Iron Wall\" (Internet Archive; capture 2008-10-30)",
+      "url": "http://web.archive.org/web/20081030021146/http://entertainment.upperdeck.com/COMMUNITY/forums/thread/1485893.aspx",
+      "notes": "capture 2008-10-30; thread 1485893; answered by the UDE Netrep 2008-10-23. A UDE Netrep answer, read as a primary document (Yugipedia's Card Rulings page for the card links it). Its range in force at 2010-04-24 or 2011-09-17 is not shown; it counts under the owner's decision of 2026-09-29. Retrieved 2026-09-29 (round 037)."
+    },
+    {
+      "id": "yugipedia-card-rulings-pointer",
+      "kind": "wiki",
+      "title": "Yugipedia 'Card Rulings:<card name>' pages (MediaWiki API, retrieved 2026-09-29)",
+      "url": "https://yugipedia.com/api.php?action=parse",
+      "publisher": "Yugipedia",
+      "revision": "wikitext fetched via the MediaWiki parse API, 2026-09-29",
+      "retrieved": "2026-09-29",
+      "used_for": "A pointer only, never a source of a ruling: the links each page carries to Konami's ruling documents and to archived UDE judge-list threads. Every ruling cited in this repository is read at the archived primary document, not at the wiki line.",
+      "reliability_notes": "Most TCG entries link the OCG database (db.yugioh-card.com, yugioh.faq.konami.jp), which is not a TCG ruling and is recorded as does-not-address."
     }
   ]
 }

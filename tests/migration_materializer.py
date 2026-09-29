@@ -42,6 +42,7 @@ from retroformats.model import Erratum
 from retroformats.repo import Repository
 
 from . import migration_audit as audit
+from .helpers import errors_without_the_frozen_exemption
 
 SCHEMA_PATH = "../../schemas/erratum.schema.json"
 """The exact `$schema` value every current v1 record carries (verified:
@@ -304,7 +305,7 @@ def verify_materialized_corpus(repo=None, rows: list[dict] | None = None) -> dic
         # 247 this materializer actually generated.
         validation_errors = [
             {"id": path_to_id[e.location], "code": e.code, "message": e.message}
-            for e in validator.errors
+            for e in errors_without_the_frozen_exemption(validator)
             if e.location in path_to_id
         ]
 

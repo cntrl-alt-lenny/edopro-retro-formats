@@ -600,7 +600,9 @@ class Validator:
         - `erratum.rulings-check-missing`: a transition in scope with no check.
         - `erratum.rulings-check-malformed`, `erratum.contradicting-ruling-unaccepted`,
           `erratum.contradicting-ruling-range-unresolved`, `erratum.decision-*`: as for a
-          generated card."""
+          generated card, for a transition that still claims a difference (functional or ruling).
+          A cosmetic transition may carry the check that made it cosmetic: its contradicting
+          findings are that evidence, and raise neither finding."""
         snapshots = [
             fmt.snapshot_date
             for format_id in ERRATUM_RULINGS_GATE_FORMATS
@@ -612,7 +614,13 @@ class Validator:
                 subject = f"events.{event_id}.transitions[{index}]"
                 check = transition.raw.get("rulings_check")
                 if check is not None:
-                    self._check_rulings_body(check, erratum.path, "erratum", f"{subject} rulings_check")
+                    self._check_rulings_body(
+                        check,
+                        erratum.path,
+                        "erratum",
+                        f"{subject} rulings_check",
+                        claims_a_difference=transition.kind in ("functional", "ruling"),
+                    )
                     continue
                 if transition.kind != "functional" or linked:
                     continue
@@ -623,7 +631,7 @@ class Validator:
                     for source_id in transition.sources
                 ):
                     continue
-                self.warn(
+                self.error(
                     "erratum.rulings-check-missing",
                     erratum.path,
                     f"{subject} is a functional transition that applies at Edison's or Tengu's snapshot "
@@ -2969,12 +2977,21 @@ class Validator:
         self._check_rulings_body(check, where)
 
     def _check_rulings_body(
-        self, check: Any, where: Path, prefix: str = "custom-card", subject: str = "rulings_check"
+        self,
+        check: Any,
+        where: Path,
+        prefix: str = "custom-card",
+        subject: str = "rulings_check",
+        claims_a_difference: bool = True,
     ) -> None:
         """The shape of one `rulings_check` and what its findings oblige, shared by the generated
         cards (`custom-card.*`, above) and the errata records' transitions (`erratum.*`, round 037,
         `_check_erratum_rulings`): the same finding values, `in_force` values, decision rules and
-        owner_decision, under the code prefix of whichever record carries the check."""
+        owner_decision, under the code prefix of whichever record carries the check.
+
+        `claims_a_difference` is False for a cosmetic transition of an erratum record: it claims no
+        difference, so a contradicting finding is the evidence that made it cosmetic, not a claim a
+        ruling contradicts, and asks for no owner decision."""
         if not isinstance(check, dict):
             self.error(f"{prefix}.rulings-check-malformed", where, f"{subject} must be an object")
             return
@@ -3045,7 +3062,7 @@ class Validator:
             and text_ok(decision.get("decision"))
             and text_ok(decision.get("recorded_in"))
         )
-        for label, in_force in contradictions:
+        for label, in_force in contradictions if claims_a_difference else ():
             if in_force in ("shown", "by-decision") and not accepted:
                 self.error(
                     f"{prefix}.contradicting-ruling-unaccepted",

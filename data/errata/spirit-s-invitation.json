@@ -41,8 +41,57 @@
           "summary": "The shipped implementation does not match any English printing, and its chronology is unresolved because no printing introduces it. BabelCDB's pinned text - self-labelled as unofficial and describing the OCG functionality - reads 'Your opponent chooses 1 monster they control, and you return it to the hand', whereas every English version reads 'select 1 monster on your opponent's side of the field and return it to its owner's hand': the choice of which monster is bounced moves from the Spirit's Invitation player to the opponent. The same text also narrows the trigger to a Spirit monster returning 'from the field' to your hand. No English erratum ever introduced either change, so no set-release date can be attached.",
           "sources": [
             "ignis-babelcdb",
-            "yugipedia-card-errata"
-          ]
+            "yugipedia-card-errata",
+            "konami-rulebook-2008-v70",
+            "konami-official-rulebook-v72-2011-dragunity",
+            "konami-card-faq-2008-12-15-skilled-white-magician",
+            "ude-card-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "Era text: the Spirit's Invitation player selects the opponent's monster to return ('select 1 monster on your opponent's side of the field and return it'); the shipped OCG-derived text has the opponent choose which of their monsters is returned. Trigger: era 'each time your Spirit monster returns to your hand'; the shipped text narrows it to a Spirit monster returning 'from the field'.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-rulebook-2008-v70",
+                "looked_for": "d1: Era text: the Spirit's Invitation player selects the opponent's monster to return ('select 1 monster on your opponent's side of the field and return it'); the shipped OCG-derived text has the opponen… (a general rule or another card's ruling: not counted as support)",
+                "finding": "does-not-address",
+                "passage": "Effects that require you to select 1 or more specific cards when activated “target” the selected cards."
+              },
+              {
+                "source": "konami-official-rulebook-v72-2011-dragunity",
+                "looked_for": "d1: Era text: the Spirit's Invitation player selects the opponent's monster to return ('select 1 monster on your opponent's side of the field and return it'); the shipped OCG-derived text has the opponen… (a general rule or another card's ruling: not counted as support)",
+                "finding": "does-not-address",
+                "passage": "Effects that require you to select 1 or more specific cards when activated “target” the selected cards."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+                "looked_for": "d1: Era text: the Spirit's Invitation player selects the opponent's monster to return ('select 1 monster on your opponent's side of the field and return it'); the shipped OCG-derived text has the opponen…",
+                "finding": "does-not-address",
+                "passage": "The effect of this card is applied even when a Spirit Monster is returned to its owner's hand by the effect of another card, such as \"Penguin Soldier\"."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d2: Trigger: era 'each time your Spirit monster returns to your hand'; the shipped text narrows it to a Spirit monster returning 'from the field'.",
+                "finding": "does-not-address",
+                "passage": "The effect of this card is applied even when a Spirit Monster is returned to its owner's hand by the effect of another card, such as \"Penguin Soldier\"."
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Spirit's Invitation in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Spirit's Invitation in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Spirit's Invitation' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
         }
       ]
     }
@@ -75,11 +124,15 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; the gap is real. The English/TCG record for this card is cosmetic only - three printings, all 2003-2005, differing in one clause of wording - so there is no dated erratum to hang the behavioural difference on. What the sweep found is a divergence between the era English text and the shipped implementation, and I recorded it as an undated functional entry rather than inventing a transition: modern_text_matches_version is index 1 at ratio 0.5813, i.e. the cdb text matches no lineage version, and the cdb text itself carries the footnote that it is unofficial and describes the card's functionality in the OCG. Both halves of the divergence (opponent chooses the bounce target; trigger limited to Spirit monsters returning from the field) are stated only in that unofficial text. Chronology is left open with effective {} and flagged; I did not attempt to date a change that the TCG record does not contain. Note for the applier: modern_text_version is null on the functional entry because the modern text is off-lineage - the literal text is in the packet's modern_text field if a literal copy is preferred. The cosmetic entry is dated at DB2-EN204 (2005-07-27), which is after the GOAT snapshot (2005-04-01); v0/v1 and v2 are behaviourally identical, so the GOAT/Edison split across that date has no consequence."
+    "notes": "upstream_implementations is empty; the gap is real. The English/TCG record for this card is cosmetic only - three printings, all 2003-2005, differing in one clause of wording - so there is no dated erratum to hang the behavioural difference on. What the sweep found is a divergence between the era English text and the shipped implementation, and I recorded it as an undated functional entry rather than inventing a transition: modern_text_matches_version is index 1 at ratio 0.5813, i.e. the cdb text matches no lineage version, and the cdb text itself carries the footnote that it is unofficial and describes the card's functionality in the OCG. Both halves of the divergence (opponent chooses the bounce target; trigger limited to Spirit monsters returning from the field) are stated only in that unofficial text. Chronology is left open with effective {} and flagged; I did not attempt to date a change that the TCG record does not contain. Note for the applier: modern_text_version is null on the functional entry because the modern text is off-lineage - the literal text is in the packet's modern_text field if a literal copy is preferred. The cosmetic entry is dated at DB2-EN204 (2005-07-27), which is after the GOAT snapshot (2005-04-01); v0/v1 and v2 are behaviourally identical, so the GOAT/Edison split across that date has no consequence.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Spirit's Invitation). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved (general rule only) at Edison, unresolved (general rule only) at Tengu; d2 unresolved at Edison, unresolved at Tengu."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-rulebook-2008-v70",
+    "konami-official-rulebook-v72-2011-dragunity",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "ude-card-rulings-archive"
   ]
 }
