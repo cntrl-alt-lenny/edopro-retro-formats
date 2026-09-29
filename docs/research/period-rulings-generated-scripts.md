@@ -300,8 +300,10 @@ Format: implemented difference; sources with passages; verdicts; action.
   monster you control is destroyed by a card effect." Konami's errata lists say nothing on
   face-up either way. Range in force: not shown.
 - **Also in the Konami lists.** "you can only Special Summon 1 "Green Baboon, Defender
-  of the Forest," even if multiple copies are available in your hand/Graveyard." The
-  round's engine check of the script is in section 6.5 of the report.
+  of the Forest," even if multiple copies are available in your hand/Graveyard." One engine
+  scenario was run (Dark Hole destroying a Beast with two copies in hand): the modern card and
+  the generated script each Special Summoned one, so the script does not contradict the
+  bullet there. That scenario is a control test now; the bullet is not otherwise tested.
 - **Verdicts.** (a) Edison and Tengu: contradicted. (b) both: unresolved. GOAT: not
   applicable (JUMP-EN014, 2007).
 - **Action.** The script is changed to match (a): no activation in the Damage Step.
@@ -463,5 +465,19 @@ themselves.
   Stardust Overdrive, Ancient Prophecy, Raging Battle and Crimson Crisis were not
   retrievable in this session (Internet Archive timeouts). Those read (Extreme Victory,
   Hidden Arsenal 3, Storm of Ragnarok, Gold Series 3 / Tag Force 5, Starstrike Blast) contain none of the sixteen cards.
+
+## 10. Consequences in the repository (round 035)
+
+- Removed generated cards (numbers retired, never reassigned): `600000001` Metalzoa,
+  `600000007` Rise of the Snake Deity, `600000008` Malefic Blue-Eyes White Dragon,
+  `600000009` Soul Rope. With `600000003` (Night Assailant, held back) and round 034's
+  `600000010` to `600000017`, which were not shipped, the retired set is
+  `600000001`, `600000003`, `600000007` to `600000017`.
+- Corrected: Green Baboon's script no longer allows the Damage Step.
+- Unchanged and on the owner's list: Goddess of Whim, Green Baboon's face-up difference,
+  and, unshipped, Dark Master - Zorc and Second Coin Toss (each contradicted by a UDE ruling of
+  unshown range); Dice Re-Roll (supported by one, range unshown).
+- The rulings gate (`docs/errata.md`, "The rulings gate") makes every remaining record carry
+  its check.
 
 Owner's questions from this research are stated in plain terms in the round report.

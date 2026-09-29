@@ -176,10 +176,11 @@ behaviour — is what the test locks down.
 
 ### Generated historical cards
 
-`tests/engine/test_edison_historical_scripts.py` (Metalzoa, Stealth Union: Edison only) and
-`tests/engine/test_shared_historical_scripts.py` (six cards whose historical state also applies
-at Tengu) cover the eight cards this project writes itself (`docs/errata.md`, "Generated
-historical cards"). The harness merges
+`tests/engine/test_edison_historical_scripts.py` (Stealth Union: Edison only) and
+`tests/engine/test_shared_historical_scripts.py` (Goddess of Whim, Strike Ninja and Green
+Baboon, whose historical state also applies at Tengu; and one test for each of the four
+cards round 035 removed) cover the four cards this project writes itself (`docs/errata.md`,
+"Generated historical cards"). The harness merges
 `dist/databases/*.cdb` into its card data and searches `dist/scripts/` after the
 upstream folders, as a client with `data_path`/`script_path` pointed at `dist/` would
 (`RETROFORMATS_DIST` overrides the folder). Each scenario runs against the modern card
@@ -189,16 +190,23 @@ is that plus the 0-ATK rule):
 
 | Card | Behaviour asserted | Historical (generated) | Modern |
 |---|---|---|---|
-| Metalzoa | revival by Monster Reborn | not a legal target | a legal target |
 | Super Vehicroid - Stealth Union | equip effect | only a monster you control; unusable with none | any face-up monster, either side |
 | Goddess of Whim | using the coin-toss effect again in the same turn | offered again | not offered |
 | Strike Ninja | two copies, each using its effect | both may use it | only one use in the turn |
-| Green Baboon | a face-down Beast destroyed; a Beast destroyed in battle | offered, Special Summons itself | not offered |
-| Rise of the Snake Deity | Vennominon destroyed in battle | offered, Special Summons Vennominaga | not offered |
-| Malefic Blue-Eyes White Dragon | revival by Monster Reborn | not a legal target | a legal target |
-| Soul Rope | a monster destroyed in battle | offered, Special Summons a Level 4 monster | not offered |
+| Green Baboon | a face-down Beast destroyed | offered, Special Summons itself | not offered |
 
-Beside each difference are control scenarios (summon procedures, equip, piercing damage,
+Round 035 (`docs/research/period-rulings-generated-scripts.md`) removed four generated cards
+because Konami's period rulings show the modern card behaves as the era card did, and
+corrected a fifth. A **retired card** has one test (`RetiredCardsUseTheModernCardTest`): the
+lists name the modern code and no generated code, the generated row and script are gone, and
+the modern card does what the rulings say (Metalzoa and Malefic Blue-Eyes are legal Monster
+Reborn targets after a proper Summon; Rise of the Snake Deity and Soul Rope are not offered
+when a monster is destroyed in battle, and are when it is destroyed by a card effect). Green
+Baboon's Damage Step activation was removed: it is offered for neither card when a Beast is
+destroyed in battle, and with two copies in hand one is Special Summoned, like the modern
+card (Konami's errata lists).
+
+Beside each difference are control scenarios (equip, piercing damage,
 attack-all, destruction by a card effect, the coin toss, banish and return) that must behave the same, so a script cannot pass by doing
 nothing. They prove the scripts against those scenarios only: each record's
 `not_reproduced` lists what is neither tested nor established.
@@ -209,8 +217,15 @@ nothing. They prove the scripts against those scenarios only: each record's
 lives here so the `engine` job runs it and a skip fails. It measures every generated
 script labelled `original` against Project Ignis's script for its alias and fails at a
 line-sequence ratio of 0.40 or more (`retroformats/script_similarity.py`, which records
-the calibration). It also checks that every `derived` script's upstream file exists at
-the pinned revision, and that `LICENSES/AGPL-3.0-or-later.txt` is Ignis's `COPYING`.
+the calibration; `tests/test_script_similarity.py` pins the limit, which cannot move without
+a brief). It also checks that every `derived` script's upstream file exists at the pinned
+revision **and is Ignis's script for that card** (round 034, carried into round 035;
+`official/c<alias>.lua`, or a `pre-errata/` variant whose database row aliases the card),
+and that `LICENSES/AGPL-3.0-or-later.txt` is Ignis's `COPYING`. The validator's rule
+`custom-card.upstream-not-own-script` runs the half that needs no checkout (the path must be
+`official/c<alias>.lua` or under `pre-errata/`); the engine test runs the half that needs the
+pinned files. The gate still measures an `original` script only against Ignis's script for its
+own alias; a script adapted from a different card would pass it (roadmap item 7, still open).
 
 ## Extending it
 

@@ -143,7 +143,7 @@ files describe it, and `python -m retroformats build` turns them into `dist/`:
   database row's fields with their provenance, the period text **copied from the
   erratum record**, `fidelity` and `not_reproduced` (where the script only approximates
   the period card, stated here so an engine workaround never quietly becomes a
-  historical claim), and `authorship`;
+  historical claim), `authorship`, and `rulings_check` (the rulings gate, below);
 - `data/custom-cards/c<passcode>.lua` is the script, copied unchanged to
   `dist/scripts/c<passcode>.lua`.
 
@@ -160,14 +160,19 @@ script may be adapted from Ignis's (`docs/state.md`), so `authorship.kind` is on
 - `original`: this project's own work, `licence: MIT`, first line
   `--SPDX-License-Identifier: MIT`. The label is measured, not trusted:
   `tests/engine/test_script_origin.py` fails when the script's line-sequence ratio against
-  Ignis's script for its alias reaches 0.40 (`retroformats/script_similarity.py`).
-  Metalzoa, Stealth Union and Malefic Blue-Eyes are original.
+  Ignis's script for its alias reaches 0.40 (`retroformats/script_similarity.py`; the limit
+  itself is pinned by `tests/test_script_similarity.py`, so it cannot move without a brief).
+  Stealth Union is original. Round 035 removed Metalzoa and Malefic Blue-Eyes, which were too.
 - `derived`: adapted from an upstream file and kept under its licence,
   `AGPL-3.0-or-later`. The record names the upstream file, the pinned revision and the
   upstream's copyright notice, and dates and summarises this project's change (AGPL-3.0
   section 5(a)); the script's header repeats each on a fixed line. Goddess of Whim,
-  Strike Ninja, Green Baboon, Rise of the Snake Deity and Soul Rope are derived: each is
-  Ignis's `official/` script with only the period difference applied.
+  Strike Ninja and Green Baboon are derived: each is Ignis's `official/` script with only the
+  period difference applied. The upstream file must be the card's own script (round 034,
+  carried into round 035): the validator rejects any other path
+  (`custom-card.upstream-not-own-script`; `official/c<alias>.lua`, or a `pre-errata/`
+  variant), and `tests/engine/test_script_origin.py` checks against the pinned checkout that a
+  `pre-errata/` variant's database row aliases the card.
 
 The validator rejects anything else (`custom-card.bad-authorship`) and a header that
 disagrees with its record (`custom-card.authorship-header-mismatch`). The AGPL text is
@@ -177,11 +182,55 @@ licence texts next to the scripts. `tested: true` on the state's
 `tests/engine/test_shared_historical_scripts.py`) runs the same scenario against the modern card and the generated one and asserts the
 difference; it never means the script is exact (`fidelity` says that).
 
+### The rulings gate
+
+**A generated card must record that period rulings were checked.** Rounds 029, 031 and 034 read
+the period *printed* text as the period behaviour; period rulings later contradicted several of
+those scripts (`docs/research/period-rulings-generated-scripts.md`, round 035). So the validator
+refuses a record with no `rulings_check`, an object with these fields:
+
+```jsonc
+"rulings_check": {
+  "difference": "one sentence: what the script does that the modern card does not",
+  "checked": "2026-09-29",                       // ISO date of the search
+  "searched": [                                  // every source looked at, including empty ones
+    {
+      "source": "konami-official-rulebook-v71-2010",   // an id in data/sources.json
+      "looked_for": "what was searched for in that source",
+      "finding": "supports | contradicts | does-not-address",
+      "passage": "the passage read, quoted briefly (required unless does-not-address)",
+      "in_force": "shown | not-shown",           // required with supports/contradicts
+      "in_force_basis": "what shows the ruling held at the snapshots this record applies at"
+    }
+  ],
+  "owner_decision": { "date": "2026-10-01", "decision": "...", "recorded_in": "docs/state.md" }
+}
+```
+
+A ruling's date is not its range in force: `in_force` is `shown` only with a stated basis. When
+nothing was found, the entry says what was looked for (`does-not-address`). An OCG ruling is
+recorded as `does-not-address` for a TCG format (it is evidence about the OCG). The codes:
+
+| code | severity | when |
+|---|---|---|
+| `custom-card.rulings-check-missing` | error | no `rulings_check` |
+| `custom-card.rulings-check-malformed` | error | the check is incomplete or a value is outside its closed set |
+| `sources.unresolved` | error | a `source` is not in `data/sources.json` (the existing rule) |
+| `custom-card.contradicting-ruling-unaccepted` | error | a `contradicts` finding shown in force and no complete `owner_decision` |
+| `custom-card.contradicting-ruling-range-unresolved` | warning | a `contradicts` finding whose range in force is not shown: the card stays, and it is a tracked question for the owner |
+
+This tightens the rules and loosens none. A contradicting ruling shown in force means the script
+is wrong: correct the card, or (with an owner decision) accept it knowingly. If the period
+behaviour matches the modern card, correct the erratum record (reclassify the transition, keep
+every passage, move the old summary into the review notes) and remove the generated card; its
+number is retired and never assigned again (`600000001`, `600000003`, `600000007` to `600000009`
+and `600000010` to `600000017` are).
+
 **Two hazards found building the first cards.** A record shared by several formats
 changes all of them: a `custom-script` on the state that applies at Edison also applies
 at Tengu whenever that record's state does. The owner decided on 2026-09-24 that this is
-allowed (`docs/state.md`): round 031 generated six cards that both lists now use, each
-because its record puts the same state at both snapshots. And a v2 record's *structural* parity walk
+allowed (`docs/state.md`): round 031 generated six cards that both lists used, each
+because its record puts the same state at both snapshots (round 035 kept three of them). And a v2 record's *structural* parity walk
 takes the first usable substitution, so giving a card Ignis's GOAT reference substitutes
 a usable baseline coverage silently moves the GOAT list unless the record also carries
 the exact `reference_identities` entry for it.

@@ -655,6 +655,19 @@ pass from each card's own erratum text:
   "Must first be Special Summoned... by X," loosening a permanent lock into a
   one-time-procedure lock. Edison predates this wave; the Edison-era text is
   the strict version.
+
+  > **Note added 2026-09-29 (round 035); nothing above is changed.** The "strict" reading
+  > was asserted from the wording pattern and is a claim to test, not evidence. Tested
+  > against period sources for the seven cards above whose text says "can only be Special
+  > Summoned by" (every one but Elemental HERO Chaos Neos was checked; that card is not
+  > adjudicated): Konami's rulebook (Versions 7.0 to 8.0) lets a properly Special Summoned
+  > Special Summon Monster be Special Summoned by another card's effect, Konami's Extreme
+  > Victory rulings (2011-05-12) say so for a card with that wording, and Konami's strategy
+  > article reserves the permanent lock for "cannot be Special Summoned **except** by". So
+  > the Edison-era text was **not** a strict lock for these cards, and the custom scripts
+  > this section proposed for them are not supported. Evidence, passages and limits:
+  > `docs/research/period-rulings-generated-scripts.md`, section 3. GOAT-era behaviour is
+  > unresolved.
 - **Union Condition removal** (2 of 12: Machina Gearframe, Machina
   Peacekeeper): the "a monster can only be equipped with 1 Union monster at a
   time" clause, printed on every period Union monster, was later dropped from
