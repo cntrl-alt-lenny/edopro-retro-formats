@@ -1,0 +1,88 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000021,
+  "alias": 12538374,
+  "erratum": "erratum-treeborn-frog",
+  "events": [],
+  "name": "Treeborn Frog (Retro Formats)",
+  "desc": "If this card is in your Graveyard during your Standby Phase and you control no Spell or Trap Cards, you can Special Summon it. This effect cannot be activated if you control a face-up \"Treeborn Frog\".",
+  "cdb": {
+    "ot": 8,
+    "setcode": 18,
+    "type": 33,
+    "atk": 100,
+    "def": 100,
+    "level": 1,
+    "race": 64,
+    "attribute": 2,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (12538374) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000021.lua",
+  "authorship": {
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c12538374.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-29",
+      "summary": "the Standby Phase effect has no once-per-turn limit (SetCountLimit(1) removed), as the period text carries none and the card FAQ lets it be activated again in the same Standby Phase; the effect description is read from the modern card's strings."
+    },
+    "note": "Derived from Project Ignis's script for the modern card, official/c12538374.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states and the rulings support (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The record's sources establish that the period text carries no use limit (2017 added \"Once per turn\") and the card FAQ says the effect can be activated again in the same Standby Phase after a negation and after a second Summon that leaves the field. The script removes only the count limit. The engine already lets the modern script return the Frog after it has left the field (a card that moved is new to its own \"once per turn\"), so that second FAQ entry is not a difference in the engine and is only a control test; the difference implemented and tested is the repeat after a negated activation. How often the period card could repeat when nothing negates or removes it is not established, and the FAQ's note that doing so without purpose is stalling (a Tournament Policy violation) is not modelled.",
+    "The other conditions are the modern script's: the Special Summon needs no Spell or Trap Card on your field at activation and at resolution, and no face-up \"Treeborn Frog\" (the modern script already reads \"face-up\", as the era text does; a Set copy is not tested). Whether the modern \"do not control\" wording changed that for Set copies is not established.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "rulings_check": {
+    "difference": "The Standby Phase effect has no once-per-turn limit, so after a negated activation it can be activated again in the same Standby Phase; the modern card is \"Once per turn\", and a negated activation uses that up.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-card-faq-2008-12-15-skilled-white-magician",
+        "looked_for": "a card FAQ entry on activating the effect more than once in a Standby Phase (entry TREEBORN FROG, Konami-hosted card FAQ page S-T)",
+        "finding": "supports",
+        "passage": "If the effect of \"Treeborn Frog\" is negated, you can activate its effect again during the same Standby Phase and Special Summon it. / If you Special Summon \"Treeborn Frog\" during your Standby Phase, then it's sent to the Graveyard during that same Standby Phase (like if it's Tributed for \"Enemy Controller\"), you can Special Summon \"Treeborn Frog\" again that same Standby Phase.",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The entry is the Konami-hosted copy of the UDE card FAQ (2008-12-15), page S-T.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive",
+          "konami-official-rulebook-v71-2010"
+        ]
+      },
+      {
+        "source": "konami-set-rulings-archive",
+        "looked_for": "the two Konami set rulings that name the Frog (Ancient Prophecy, compiled 2009-08-11, under Armed Sea Hunter; Starstrike Blast, compiled 2010-11-04, under Wattsquirrel): both say its Graveyard effect is negated by another card, and neither speaks to activating it more than once or repeats or withdraws the FAQ entries",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name; not listed (nor in the lists of 2009-07-30 and 2010-11-05, nor in the other of the 15 Konami per-set ruling documents linked from Konami's Gameplay page on 2011-09-18)",
+        "finding": "does-not-address"
+      }
+    ]
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-set-rulings-archive",
+    "konami-errata-list-2010-01-05"
+  ]
+}

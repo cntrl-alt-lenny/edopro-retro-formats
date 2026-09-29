@@ -1,0 +1,123 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000019,
+  "alias": 42940404,
+  "erratum": "erratum-machina-gearframe",
+  "events": [],
+  "name": "Machina Gearframe (Retro Formats)",
+  "desc": "When this card is Normal Summoned, you can add 1 \"Machina\" monster, except \"Machina Gearframe\", from your Deck to your hand. Once per turn, during your Main Phase, you can equip this card to a Machine-Type monster you control as an Equip Card, OR unequip it to Special Summon this card in face-up Attack Position. (A monster can only be equipped with 1 Union Monster at a time. If the equipped monster would be destroyed, destroy this card instead.)",
+  "cdb": {
+    "ot": 8,
+    "setcode": 54,
+    "type": 1057,
+    "atk": 1800,
+    "def": 0,
+    "level": 4,
+    "race": 32,
+    "attribute": 1,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (42940404) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000019.lua",
+  "authorship": {
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c42940404.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-29",
+      "summary": "a monster can only be equipped with 1 Union monster at a time, as the period text prints it as a Condition (the equip effect is offered only for a monster carrying no Union monster, and the card counts as an old-rule Union for other Union cards' equip checks; proc_union.lua's procedure is written out in the script with Auxiliary.UnionTarget's old rule); the effect description is read from the modern card's strings."
+    },
+    "note": "Derived from Project Ignis's script for the modern card, official/c42940404.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states and the rulings support (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The unequip effect is not limited to face-up Attack Position: the period text says \"unequip it to Special Summon this card in face-up Attack Position\" and the modern card lets the controller choose, but no ruling read addresses it (Konami's Machina Mayhem rulings of 2010-04-06 reproduce the text and rule on other points), so the script keeps the modern choice and that difference is neither implemented nor tested.",
+    "Other Union monsters keep their modern scripts. The period Condition is reproduced through this card only: it is refused a monster that carries another Union monster, and another Union monster is refused a monster that carries it (the card is marked old_union). Another card's own Condition is not reproduced.",
+    "The Condition counts Union monsters through the engine's EFFECT_UNION_STATUS marker; a Union monster placed as an Equip Card by a route that does not call the Union procedure is not counted. Only equips made by Union effects are tested.",
+    "The destruction substitute is the modern procedure's (battle and card effect); the period text's \"If the equipped monster would be destroyed, destroy this card instead\" is not narrowed by any source read.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "rulings_check": {
+    "difference": "A monster can only be equipped with 1 Union monster at a time: the equip effect is refused for a monster that carries another Union monster, and other Union monsters are refused a monster that carries this card. The modern card has no such limit.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-advanced-gameplay-faq-2008",
+        "looked_for": "a ruling on how many Union monsters one monster can carry (the Union Monsters section of Konami's Advanced Game Play FAQ)",
+        "finding": "supports",
+        "passage": "A monster can only be equipped with 1 Union Monster at a time, but can still be equipped with other Equip Spell Cards such as \"Axe of Despair\", etc.",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive",
+          "konami-shining-darkness-rulings-2010-04",
+          "konami-official-rulebook-v71-2010"
+        ]
+      },
+      {
+        "source": "konami-card-faq-2008-12-16-ac",
+        "looked_for": "a card FAQ entry that applies the Union limit (the Cyber Phoenix entry, Konami-hosted card FAQ A-C)",
+        "finding": "supports",
+        "passage": "(The Machine-Type monster can still only be equipped with 1 Union Monster at a time, because that is a condition, not an effect).",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive",
+          "konami-shining-darkness-rulings-2010-04",
+          "konami-official-rulebook-v71-2010"
+        ]
+      },
+      {
+        "source": "konami-shining-darkness-rulings-2010-04",
+        "looked_for": "a Konami ruling on the limit: Delta Tri (TSHD-EN030), compiled 2010-04-30, six days after Edison's snapshot, so it can only show the rule at Tengu's snapshot; it is linked from Konami's Gameplay page of 2011-09-18",
+        "finding": "supports",
+        "passage": "You cannot activate the effect to equip a Union monster if Delta Tri is already equipped with a Union monster.",
+        "in_force": "not-shown"
+      },
+      {
+        "source": "konami-set-rulings-archive",
+        "looked_for": "the card's entry in Konami's Machina Mayhem card rulings (compiled 2010-04-06): it reproduces the card text, including the Condition, and rules only that equipping is an Ignition Effect of a monster, that Special Summoning the Equipped Card is the effect of a Spell Card, and that the search works in the Damage Step; it makes no statement about the limit itself",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name, and any Union entry; not listed (nor in the lists of 2009-07-30 and 2010-11-05, nor in any of the 15 Konami per-set ruling documents linked from Konami's Gameplay page on 2011-09-18 apart from the ones above)",
+        "finding": "does-not-address"
+      },
+      {
+        "source": "konami-official-rulebook-v71-2010",
+        "looked_for": "Union monsters in Konami's rulebook Version 7.1 (captured 2010-03-30; Versions 7.0, 7.2 and 8.0 searched too); the rulebook has no entry on them",
+        "finding": "does-not-address"
+      }
+    ]
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "edisonformat-functional-errata",
+    "konami-advanced-gameplay-faq-2008",
+    "konami-card-faq-2008-12-16-ac",
+    "konami-shining-darkness-rulings-2010-04",
+    "konami-set-rulings-archive",
+    "konami-errata-list-2010-01-05",
+    "konami-official-rulebook-v71-2010"
+  ]
+}

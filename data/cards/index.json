@@ -29784,21 +29784,39 @@
       "ot": 8
     },
     {
-      "passcode": 600000004,
-      "name": "Goddess of Whim (Retro Formats)",
-      "alias_of": 67959180,
-      "ot": 8
-    },
-    {
       "passcode": 600000005,
       "name": "Strike Ninja (Retro Formats)",
       "alias_of": 41006930,
       "ot": 8
     },
     {
-      "passcode": 600000006,
-      "name": "Green Baboon, Defender of the Forest (Retro Formats)",
-      "alias_of": 46668237,
+      "passcode": 600000016,
+      "name": "Dice Re-Roll (Retro Formats)",
+      "alias_of": 83241722,
+      "ot": 8
+    },
+    {
+      "passcode": 600000018,
+      "name": "Machina Peacekeeper (Retro Formats)",
+      "alias_of": 78349103,
+      "ot": 8
+    },
+    {
+      "passcode": 600000019,
+      "name": "Machina Gearframe (Retro Formats)",
+      "alias_of": 42940404,
+      "ot": 8
+    },
+    {
+      "passcode": 600000020,
+      "name": "Elemental HERO Chaos Neos (Retro Formats)",
+      "alias_of": 17032740,
+      "ot": 8
+    },
+    {
+      "passcode": 600000021,
+      "name": "Treeborn Frog (Retro Formats)",
+      "alias_of": 12538374,
       "ot": 8
     }
   ]

@@ -1,0 +1,91 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000020,
+  "alias": 17032740,
+  "erratum": "erratum-elemental-hero-chaos-neos",
+  "events": [],
+  "name": "Elemental HERO Chaos Neos (Retro Formats)",
+  "desc": "\"Elemental Hero Neos\" + \"Neo-Spacian Dark Panther\" + \"Neo-Spacian Glow Moss\"This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck. (You do not use \"Polymerization\".) During the End Phase, return this card to the Fusion Deck then Set all face-up monsters currently on the field. Once per turn, you can toss a coin 3 times and apply the appropriate effect: ● 3 Heads: Destroy all monsters your opponent controls. ● 2 Heads: This turn, the effects of all face-up monsters your opponent controls are negated. ● 1 Head: Return all monsters you control to their owner's hand.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 889058832392,
+    "type": 97,
+    "atk": 3000,
+    "def": 2500,
+    "level": 9,
+    "race": 1,
+    "attribute": 32,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (17032740) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000020.lua",
+  "authorship": {
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c17032740.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-29",
+      "summary": "the coin effect has no Main Phase 1 condition (Konami's rulebook lets an Ignition Effect that names no phase be used in either Main Phase); the effect description is read from the modern card's strings."
+    },
+    "note": "Derived from Project Ignis's script for the modern card, official/c17032740.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states and the rulings support (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The ruling that the coin effect can be used in Main Phase 2 is Konami's general rule for Ignition Effects (Version 7.1 to 8.0), applied through the card's printed text, which names no phase; no card-specific ruling names this effect, and none of the card's own FAQ entries mentions a phase. The script removes only the Main Phase 1 condition.",
+    "Everything else is the modern script's (Project Ignis's): the contact Fusion procedure (the card can be Special Summoned again from the Graveyard or banishment after one proper Summon, which the card FAQ, Konami-hosted 2008-12-15, rules for it), the End Phase return and Set of all face-up monsters, and the effects of the three coin results. The era text's \"Fusion Deck\" and \"currently on the field\" wording is not tested.",
+    "The coin is random: the test observes only that the effect can be activated in Main Phase 2 and only once in a turn, not the result of the toss.",
+    "The card row's statline is copied from the modern row and not checked against the period printing."
+  ],
+  "rulings_check": {
+    "difference": "The coin effect can be used in either Main Phase; the modern card can use it in Main Phase 1 only.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-official-rulebook-v71-2010",
+        "looked_for": "when an Ignition Effect with no phase named can be activated, and what Main Phase 2 allows (Konami's Official Rulebook Version 7.1, captured 2010-03-30; Versions 7.2 and 8.0 searched too)",
+        "finding": "supports",
+        "passage": "Ignition Effect: \"You use this type of effect just by declaring its activation during your Main Phase.\" Main Phase 2: \"The actions a player can perform in this phase are the same as in Main Phase 1. However, if the player already did something in Main Phase 1 that has a limit to the number of times it can be done, the player cannot do it again in Main Phase 2.\"",
+        "in_force": "shown",
+        "in_force_basis": "Konami's Official Rulebook Version 7.1 was captured 2010-03-30, 25 days before Edison's snapshot; Version 7.2 (capture 2011-05-16) and Version 8.0 (linked from Konami's Gameplay page on 2011-09-18) carry the same two passages, so the rules are bracketed on both sides of both snapshots. They are general rules: no ruling names this card's coin effect."
+      },
+      {
+        "source": "konami-card-faq-2008-12-15-de",
+        "looked_for": "a card FAQ entry that applies the Ignition Effect timing to an effect that names no phase (the Dark Master - Zorc entry), and any entry of this card's own on the phase of its coin effect",
+        "finding": "supports",
+        "passage": "Because \"Dark Master - Zorc\"'s effect is a Ignition Effect, you roll the die during Main Phase 1 or 2 of your turn only.",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The entry is about a sibling card, applying the rulebook rule to a die-rolling Ignition Effect whose text names no phase; this card's own entries (the Konami-hosted card FAQ, page D-E) say nothing about a phase.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive",
+          "konami-official-rulebook-v71-2010"
+        ]
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name; not listed (nor in the lists of 2009-07-30 and 2010-11-05, nor in any of the 15 Konami per-set ruling documents linked from Konami's Gameplay page on 2011-09-18)",
+        "finding": "does-not-address"
+      }
+    ]
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "konami-official-rulebook-v71-2010",
+    "konami-card-faq-2008-12-15-de",
+    "konami-errata-list-2010-01-05"
+  ]
+}

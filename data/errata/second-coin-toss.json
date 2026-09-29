@@ -12,7 +12,7 @@
       "status": "missing",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In a period format a player controlling two Second Coin Tosses gets one redo per turn instead of two, and the shipped implementation also redoes every flip of a multi-flip toss and only the controller's own tosses, neither of which the era text states."
+        "behavioural_impact": "In a period format a player controlling two Second Coin Tosses gets one redo per turn instead of two, and the shipped implementation also redoes every flip of a multi-flip toss and only the controller's own tosses, neither of which the era text states. Round 036 (2026-09-29): the last two clauses of this statement (only the controller's own tosses; every flip of a multi-flip toss) are withdrawn as differences: the period card FAQ rules both, as the modern implementation does. What remains is whether two copies could each redo a different toss in one turn, which no source read settles."
       }
     }
   ],
@@ -20,12 +20,16 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; the gap is real. Edison- and GOAT-era text is the LOD printing (2003-06-06); the erratum is 2013-10-11. PACKET ODDITY: the english_versions array in this packet starts at index 1 - there is no index 0 - so the chain is recorded from index 1, which is the first (and only pre-errata) English text available. CONFLICT recorded, not resolved: the pinned BabelCDB text is not the official v2 (ratio 0.7914). It reads 'redo your coin toss' and 'redo all of yours' where the official English v2 reads 'redo the coin toss' and 'redo all of them', and it carries the footnote that the text is unofficial and describes the OCG functionality. So the shipped implementation restricts redoes to the controller's own tosses, a restriction no English printing states, on top of the dated erratum above; a custom era script should follow the era English text and not inherit that restriction. I did not treat the old text's 'negate the effects of a card requiring a coin toss' framing as a separate behavioural difference - it describes the same redo outcome - and I did not guess at the era ruling for 3-flip cards, which the packet cannot settle."
+    "notes": "upstream_implementations is empty; the gap is real. Edison- and GOAT-era text is the LOD printing (2003-06-06); the erratum is 2013-10-11. PACKET ODDITY: the english_versions array in this packet starts at index 1 - there is no index 0 - so the chain is recorded from index 1, which is the first (and only pre-errata) English text available. CONFLICT recorded, not resolved: the pinned BabelCDB text is not the official v2 (ratio 0.7914). It reads 'redo your coin toss' and 'redo all of yours' where the official English v2 reads 'redo the coin toss' and 'redo all of them', and it carries the footnote that the text is unofficial and describes the OCG functionality. So the shipped implementation restricts redoes to the controller's own tosses, a restriction no English printing states, on top of the dated erratum above; a custom era script should follow the era English text and not inherit that restriction. I did not treat the old text's 'negate the effects of a card requiring a coin toss' framing as a separate behavioural difference - it describes the same redo outcome - and I did not guess at the era ruling for 3-flip cards, which the packet cannot settle.\n\nRound 036 (2026-09-29) rulings recorded; the record stays a known gap. The UDE/Konami card FAQ (Konami-hosted 2008-12-15, page S-T, entry \"SECOND COIN TOSS\") rules: \"The effect of this card only applies when you perform a coin toss, not when your opponent performs a coin toss.\"; \"If an effect requires multiple coin flips, like \"Barrel Dragon\", you would redo all 3 coin flips.\"; \"Even if multiple \"Second Coin Toss\" cards are active, you can only redo each coin toss once.\"; and \"Even if the original coin toss came out in your favor, you may use the effect of \"Second Coin Toss\" and redo the toss.\" Under the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. None of Konami's errata lists (compiled 2009-07-30, 2010-01-05, 2010-11-05) names the card. Compared with the modern implementation (Project Ignis's official/c36562627.lua: the controller's own tosses only, every flip redone, one redo per player per turn): on the first two rulings the two agree; on the third, a toss can be redone at most once under both, because the modern limit stops a second redo of the same toss. The only observable difference left between a per-copy limit and the modern per-name limit is two copies each redoing a DIFFERENT toss in one turn. No ruling read says whether the copies have separate uses: \"each coin toss once\" is what a per-name limit also gives for one toss, and inferring separate uses from the ruling's existence would be a guess. Round 034's script (a per-copy flag, otherwise Ignis's) lets a second copy redo an already redone toss, which the FAQ forbids, so it is not the behaviour the rulings describe either. No third behaviour is established, so no script ships and the passcode 600000017 stays retired. Superseded summary, kept verbatim: \"Functional erratum: the once-per-turn limit moves from the individual card to the card name. The era text (LOD-EN083) reads 'As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss', which is a per-copy limit on a Continuous Spell, so two face-up copies granted two redos in a turn; v2 replaces it with 'You can only use the effect of \"Second Coin Toss\" once per turn', a hard once per turn by name. The same printing added the multi-flip clause '(If the toss involved multiple coin flips, redo all of them.)', which the era text left unstated for multi-flip cards such as Barrel Dragon.\" Evidence and its limits: docs/research/period-rulings-generated-scripts.md, section 6.12 and the round-036 section."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-card-faq-2008-12-15-skilled-white-magician",
+    "konami-errata-list-2009-07-30",
+    "konami-errata-list-2010-01-05",
+    "konami-errata-list-2010-11-05"
   ],
   "event": {
     "effective": {
@@ -38,11 +42,15 @@
     "axis": null,
     "historical_text": "As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss.",
     "modern_text": "When a coin toss is performed, you can choose to redo the coin toss. (If the toss involved multiple coin flips, redo all of them.) You can only use the effect of \"Second Coin Toss\" once per turn.",
-    "summary": "Functional erratum: the once-per-turn limit moves from the individual card to the card name. The era text (LOD-EN083) reads 'As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss', which is a per-copy limit on a Continuous Spell, so two face-up copies granted two redos in a turn; v2 replaces it with 'You can only use the effect of \"Second Coin Toss\" once per turn', a hard once per turn by name. The same printing added the multi-flip clause '(If the toss involved multiple coin flips, redo all of them.)', which the era text left unstated for multi-flip cards such as Barrel Dragon.",
+    "summary": "Functional erratum, narrowed by round 036 to what is still unresolved: the once-per-turn limit moves from the individual card to the card name. The era text (LOD-EN083) reads \"As long as this card remains face-up on the field, you can negate the effects of a card requiring a coin toss once per turn and redo the coin toss\", a per-copy limit on a Continuous Spell on its face; v2 replaces it with \"You can only use the effect of \"Second Coin Toss\" once per turn\", a hard once per turn by name. Whether two face-up copies could each redo a different toss in one turn is not settled by any source read (see the review notes). The multi-flip clause added by the same printing is withdrawn as a difference: the period card FAQ rules that all the flips are redone.",
     "sources": [
       "yugipedia-card-errata",
       "yugipedia-set-pages",
-      "ignis-babelcdb"
+      "ignis-babelcdb",
+      "konami-card-faq-2008-12-15-skilled-white-magician",
+      "konami-errata-list-2009-07-30",
+      "konami-errata-list-2010-01-05",
+      "konami-errata-list-2010-11-05"
     ]
   },
   "coverage": {

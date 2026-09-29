@@ -5,7 +5,7 @@
     "passcode": 97642679,
     "name": "Dark Master - Zorc"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "events": {
     "c0": {
       "effective": {
@@ -37,15 +37,20 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "This card can only be Ritual Summoned with the Ritual Spell Card, \"Contract with the Dark Master\". During your Main Phase, you can roll 1 six-sided die. On a 1 or 2, destroy all monsters on your opponent's side of the field. On a 3, 4, or 5, destroy 1 monster on your opponent's side of the field. On a 6, destroy all monsters on your side of the field.",
           "modern_text": "You can Ritual Summon this card with \"Contract with the Dark Master\". Once per turn: You can roll a six-sided die, then destroy all monsters your opponent controls if you roll 1 or 2, destroy 1 monster your opponent controls if you roll 3, 4 or 5, or destroy all monsters you control if you roll 6.",
-          "summary": "Functional erratum: LCYW-EN123 puts 'Once per turn:' in front of the die roll. No earlier printing limits how often the effect may be used - 'During your Main Phase, you can roll 1 six-sided die' caps the roll at one die per activation, not one activation per turn - so the period card can roll repeatedly in a Main Phase, re-rolling after a 3/4/5 single destruction or risking further 6s, while the errata'd card gets exactly one roll per turn.",
+          "summary": "Wording only, on a UDE ruling counted under the owner's decision (round 036). The era text (\"During your Main Phase, you can roll 1 six-sided die...\") carries no per-turn limit and the errata'd text prefixes \"Once per turn:\", but the UDE Netrep answered on 2007-10-11 to \"Can you use its effect more than once per turn?\": \"No. You can only roll the 6-sided die once. Ex: If you use the effect during Main Phase 1, you would not be able to use it again during Main Phase 2.\" Under the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. None of Konami's errata lists (compiled 2009-07-30, 2010-01-05, 2010-11-05) names the card. So the era card and the errata'd card roll once per turn alike. No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
             "yugipedia-set-pages",
-            "ignis-babelcdb"
+            "ignis-babelcdb",
+            "ude-judge-list-zorc-2007",
+            "konami-card-faq-2008-12-15-de",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05"
           ]
         }
       ]
@@ -60,38 +65,29 @@
       }
     ]
   },
-  "states": [
-    {
-      "events": [],
-      "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
-      }
-    }
-  ],
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In GOAT and Edison a resolved Dark Master - Zorc can roll its die as many times as its controller dares in a Main Phase, so a single Zorc can keep rolling until it clears the opponent's field (or wipes its own); the shipped card stops after one roll per turn."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 036: no generated card was shipped for this record (round 034's script was proposed and never merged; its number 600000015 stays retired). On the UDE Netrep answer of 2007-10-11, counted under the owner's decision of 2026-09-29, the era card rolls once per turn, as the modern card, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty. Chain starts at v1 (DR1-EN244, 2005-03-19), the text in force at the 2005-04-01 GOAT snapshot - Dark Revelation Volume 1 landed thirteen days before it. Pre-baseline v0 (DCR-082, 2003-12-01) differs only in the 'offer as a Tribute'/'Level Stars' phrasing of the same Ritual clause. The Edison snapshot (2010-04-24) falls after CP02-EN010 (2007-02-06), so Edison uses v2 and GOAT uses v1; both precede the 2012-09-29 erratum, so both need the unlimited-roll behaviour. On the cosmetic call for 'During your turn' -> 'During your Main Phase': an Ignition Effect is restricted to the controller's Main Phase by the game rules whatever the card says, so the reprint narrows the printed wording without narrowing the legal window - it is recorded cosmetic for that reason, and no separate implementation is needed between GOAT and Edison. No entry for this card in edison-functional-errata.md."
+    "notes": "upstream_implementations is empty. Chain starts at v1 (DR1-EN244, 2005-03-19), the text in force at the 2005-04-01 GOAT snapshot - Dark Revelation Volume 1 landed thirteen days before it. Pre-baseline v0 (DCR-082, 2003-12-01) differs only in the 'offer as a Tribute'/'Level Stars' phrasing of the same Ritual clause. The Edison snapshot (2010-04-24) falls after CP02-EN010 (2007-02-06), so Edison uses v2 and GOAT uses v1; both precede the 2012-09-29 erratum, so both need the unlimited-roll behaviour. On the cosmetic call for 'During your turn' -> 'During your Main Phase': an Ignition Effect is restricted to the controller's Main Phase by the game rules whatever the card says, so the reprint narrows the printed wording without narrowing the legal window - it is recorded cosmetic for that reason, and no separate implementation is needed between GOAT and Edison. No entry for this card in edison-functional-errata.md.\n\nRound 036 (2026-09-29) correction. The round-034 reading (no limit, so repeated rolls in a Main Phase) rested on the printed text alone. The UDE Judge List thread (asked 2007-10-08, answered by the UDE Netrep 2007-10-11) was re-read at its archived capture (2007-10-27): \"Answer: No. You can only roll the 6-sided die once. Ex: If you use the effect during Main Phase 1, you would not be able to use it again during Main Phase 2.\" The card FAQ (Konami-hosted 2008-12-15, page D-E) says only that \"you roll the die during Main Phase 1 or 2 of your turn only\" and that a 6 destroys Zorc as well. Under the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. Konami's errata lists of 2009-07-30, 2010-01-05 and 2010-11-05 were searched by name and do not list the card. The era card is therefore limited to one roll, as the modern card. Not established: the Japanese first printing's \"１ターンに１度\" (OCG, transcribed only on Yugipedia, printing not opened). Evidence and its limits: docs/research/period-rulings-generated-scripts.md, section 6.10 and the round-036 section. Superseded summary, kept verbatim: \"Functional erratum: LCYW-EN123 puts 'Once per turn:' in front of the die roll. No earlier printing limits how often the effect may be used - 'During your Main Phase, you can roll 1 six-sided die' caps the roll at one die per activation, not one activation per turn - so the period card can roll repeatedly in a Main Phase, re-rolling after a 3/4/5 single destruction or risking further 6s, while the errata'd card gets exactly one roll per turn.\" Superseded coverage, kept verbatim: \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Superseded gap statement, kept verbatim: \"In GOAT and Edison a resolved Dark Master - Zorc can roll its die as many times as its controller dares in a Main Phase, so a single Zorc can keep rolling until it clears the opponent's field (or wipes its own); the shipped card stops after one roll per turn.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "ude-judge-list-zorc-2007",
+    "konami-card-faq-2008-12-15-de",
+    "konami-errata-list-2009-07-30",
+    "konami-errata-list-2010-01-05",
+    "konami-errata-list-2010-11-05"
   ]
 }

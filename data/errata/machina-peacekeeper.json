@@ -65,19 +65,18 @@
     {
       "events": [],
       "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
+        "kind": "custom-script",
+        "historical_passcode": 600000018,
+        "script": "data/custom-cards/c600000018.lua"
       }
     }
   ],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 036: implemented by a script derived from Project Ignis's official/c78349103.lua (AGPL-3.0-or-later) under the custom-script strategy (data/custom-cards/c600000018.json; passcode 600000018). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish. The generated card implements only the first half of the gap statement below (the Union Condition); its Attack Position half is not implemented, because no ruling read addresses it.",
       "gap": {
         "upstream_checked": true,
         "behavioural_impact": "In an Edison snapshot EDOPro lets Machina Peacekeeper equip to a Machine monster that already carries another Union monster and be Special Summoned back in Defense Position, both of which the era's printed Union Condition and Attack Position clause forbid."
