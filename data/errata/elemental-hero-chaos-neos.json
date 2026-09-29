@@ -9,10 +9,12 @@
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 036: implemented by a script derived from Project Ignis's official/c17032740.lua (AGPL-3.0-or-later) under the custom-script strategy (data/custom-cards/c600000020.json; passcode 600000020). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, ignis-cardscripts, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
       "gap": {
         "upstream_checked": true,
-        "behavioural_impact": "In a period format the modern card refuses the 3-coin effect in Main Phase 2 and accepts revival from the Graveyard by Monster Reborn or Call of the Haunted, neither of which the Edison-era printing allowed."
+        "behavioural_impact": "In a period format the modern card refuses the 3-coin effect in Main Phase 2 and accepts revival from the Graveyard by Monster Reborn or Call of the Haunted, neither of which the Edison-era printing allowed. Round 036 (2026-09-29): the revival half of this statement is withdrawn; the UDE/Konami card FAQ (Konami-hosted 2008-12-15) says \"\"Elemental Hero Chaos Neos\" can be Special Summoned from the Graveyard if it was first Special Summoned according to its text and sent to the Graveyard afterwards.\", so the modern card is period-correct there. The Main Phase 2 half stands."
       }
     }
   ],
@@ -20,13 +22,17 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Era text at the Edison snapshot is v0 (GLAS-EN036, 2007-11-14). Trailing cosmetic steps after the recorded change, not entered as changes: v2 (SHVA-EN035, 2018-08-16) added 'Once per turn,' and 'and if you do,' to the mandatory End Phase return, v3 (BLAR-EN055, 2020-07-23) adjusted the 'Polymerization' parenthetical and is what the pinned cards.cdb text matches, and v4 (BLC1-EN140, 2024-02-22) dropped that parenthetical. The 2-Heads option's 'This turn' to 'For the rest of this turn' and '1 Head' returning monsters 'to their owner's hand' to 'to the hand' are likewise cosmetic."
+    "notes": "Era text at the Edison snapshot is v0 (GLAS-EN036, 2007-11-14). Trailing cosmetic steps after the recorded change, not entered as changes: v2 (SHVA-EN035, 2018-08-16) added 'Once per turn,' and 'and if you do,' to the mandatory End Phase return, v3 (BLAR-EN055, 2020-07-23) adjusted the 'Polymerization' parenthetical and is what the pinned cards.cdb text matches, and v4 (BLC1-EN140, 2024-02-22) dropped that parenthetical. The 2-Heads option's 'This turn' to 'For the rest of this turn' and '1 Head' returning monsters 'to their owner's hand' to 'to the hand' are likewise cosmetic.\n\nRound 036 (2026-09-29) class answer applied. The summary said the era wording is a strict nomi that cannot be revived. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18), says of Special Summon Monsters: \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" Konami's TCG strategy article (printed date 2009-12-07; earliest capture 2015-11-06) says a monster worded \"This card can only be Special Summoned by...\" can be Special Summoned again from the Graveyard after one proper Summon, and reserves the permanent lock for \"cannot be Special Summoned except by...\". Konami's Extreme Victory card rulings (compiled 2011-05-12, version 1.2; listed on Konami's Gameplay page on 2011-09-18) rule, for a card whose text is \"This card can only be Special Summoned by controlling 3 or more face-up \"Meklord\" monsters\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" This card's text says \"can only be\" and not \"except\", and the card's own FAQ entry agrees (Konami-hosted 2008-12-15, page D-E: \"\"Elemental Hero Chaos Neos\" can be Special Summoned from the Graveyard if it was first Special Summoned according to its text and sent to the Graveyard afterwards. \"Elemental Hero Chaos Neos\" can also be Special Summoned from the Removed Zone if it was Special Summoned according to its text and then removed from play afterwards.\"). The coin effect's phase restriction (2011-10-04) is not addressed by any source read, so the transition stays functional on it. Superseded summary, kept verbatim: \"Two behavioural changes arrived in one printing. First, the strict summon restriction 'This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck' became 'Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck', so the modern card may be revived from the Graveyard after one proper contact Fusion; official/c17032740.lua encodes the loose form, passing s.splimit (true whenever the card is not in the Extra Deck) to Fusion.AddContactProc. Second, the coin effect gained a phase restriction: the era text is a plain 'Once per turn, you can toss a coin 3 times' Ignition effect usable in either Main Phase, while the modern text and the script confine it to your Main Phase 1 (s.coincon returns Duel.IsPhase(PHASE_MAIN1)).\" Evidence and its limits: docs/research/period-rulings-generated-scripts.md, section 3 and the round-036 section."
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
     "ignis-cardscripts",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-tcg-strategy-special-summons-2009",
+    "konami-extreme-victory-rulings-2011-05",
+    "konami-card-faq-2008-12-15-de"
   ],
   "event": {
     "effective": {
@@ -39,21 +45,21 @@
     "axis": null,
     "historical_text": "\"Elemental Hero Neos\" + \"Neo-Spacian Dark Panther\" + \"Neo-Spacian Glow Moss\"This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck. (You do not use \"Polymerization\".) During the End Phase, return this card to the Fusion Deck then Set all face-up monsters currently on the field. Once per turn, you can toss a coin 3 times and apply the appropriate effect: ● 3 Heads: Destroy all monsters your opponent controls. ● 2 Heads: This turn, the effects of all face-up monsters your opponent controls are negated. ● 1 Head: Return all monsters you control to their owner's hand.",
     "modern_text": "\"Elemental HERO Neos\" + \"Neo-Spacian Dark Panther\" + \"Neo-Spacian Glow Moss\"Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck. (You do not use \"Polymerization.\") During the End Phase: Shuffle this card into the Extra Deck, then Set all face-up monsters on the field. Once per turn, during your Main Phase 1: You can toss a coin 3 times. ● 3 Heads: Destroy all monsters your opponent controls. ● 2 Heads: For the rest of this turn, the effects of all face-up monsters your opponent controls are negated. ● 1 Head: Return all monsters you control to the hand.",
-    "summary": "Two behavioural changes arrived in one printing. First, the strict summon restriction 'This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck' became 'Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck', so the modern card may be revived from the Graveyard after one proper contact Fusion; official/c17032740.lua encodes the loose form, passing s.splimit (true whenever the card is not in the Extra Deck) to Fusion.AddContactProc. Second, the coin effect gained a phase restriction: the era text is a plain 'Once per turn, you can toss a coin 3 times' Ignition effect usable in either Main Phase, while the modern text and the script confine it to your Main Phase 1 (s.coincon returns Duel.IsPhase(PHASE_MAIN1)).",
+    "summary": "Functional erratum, narrowed by round 036 to what is still functional: the coin effect gained a phase restriction. The era text is a plain \"Once per turn, you can toss a coin 3 times\" Ignition effect usable in either Main Phase, while the modern text and script confine it to your Main Phase 1 (s.coincon returns Duel.IsPhase(PHASE_MAIN1)). The other change of the earlier summary is withdrawn as a difference: the era \"This card can only be Special Summoned from your Fusion Deck by returning the above cards you control to the Deck\" says \"can only be\", not \"except\", and on Konami's period rulings and the card's own FAQ entry it can be Special Summoned again once it was Special Summoned as its text says, as the modern card can.",
     "sources": [
       "yugipedia-card-errata",
       "yugipedia-set-pages",
       "ignis-cardscripts",
-      "ignis-babelcdb"
+      "ignis-babelcdb",
+      "konami-official-rulebook-v71-2010",
+      "konami-tcg-strategy-special-summons-2009",
+      "konami-extreme-victory-rulings-2011-05",
+      "konami-card-faq-2008-12-15-de"
     ]
   },
   "coverage": {
-    "kind": "known-gap",
-    "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-    "gap_sources": [
-      "ignis-babelcdb",
-      "ignis-cardscripts",
-      "yugipedia-card-errata"
-    ]
+    "kind": "custom-script",
+    "historical_passcode": 600000020,
+    "script": "data/custom-cards/c600000020.lua"
   }
 }

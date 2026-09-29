@@ -1468,7 +1468,17 @@ CUSTOM_CARD_FIDELITIES = ("exact", "approximate")
 # The rulings gate (round 035): what a searched source said about the difference the
 # script implements, and whether the ruling is shown to have held at the snapshots.
 RULINGS_FINDINGS = ("supports", "contradicts", "does-not-address")
-RULINGS_IN_FORCE = ("shown", "not-shown")
+# `by-decision` (round 036): the owner decided on 2026-09-29 (docs/state.md, "Period rulings") that a
+# UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. It is a
+# third answer to "did this ruling hold at the snapshot", for a source of the `ude-era-ruling` class
+# only, and it says which Konami documents were checked and that none replaced the ruling.
+RULINGS_IN_FORCE = ("shown", "not-shown", "by-decision")
+RULINGS_LATER_REPLACEMENT_NONE = "none-found"
+# What a source is, when it is a ruling (an optional field of data/sources.json). `ude-era-ruling`:
+# a UDE card FAQ entry or Netrep answer, including the Konami-hosted copy of the UDE card FAQ
+# (2008-12-15). `konami-document`: a Konami-authored statement of the rules or the text to play
+# (rulebook, errata list, per-set ruling document): what could replace a UDE-era ruling.
+SOURCE_RULING_CLASSES = ("ude-era-ruling", "konami-document")
 # BabelCDB `ot` scope for a card that is not legal in an official-cards room
 # (gframe/data_manager.h SCOPE_ILLEGAL): every historical-implementation row
 # upstream carries it, and a whitelist is what makes it playable.

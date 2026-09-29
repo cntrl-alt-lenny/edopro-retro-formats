@@ -5,7 +5,7 @@
     "passcode": 27346636,
     "name": "Gladiator Beast Heraklinos"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "events": {
     "c0": {
       "effective": {
@@ -37,15 +37,20 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "\"Gladiator Beast Laquari\" + 2 \"Gladiator Beast\" monstersThis card can only be Special Summoned from your Extra Deck, by returning the above cards you control to the Deck. (You do not use \"Polymerization\".) You can discard 1 card from your hand to negate the activation of a Spell or Trap Card and destroy it. You can use this effect during either player's turn.",
           "modern_text": "\"Gladiator Beast Laquari\" + 2 \"Gladiator Beast\" monstersMust first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck. (You do not use \"Polymerization\".) During either player's turn, when a Spell/Trap Card is activated: You can discard 1 card; negate the activation and destroy it. This card must be face-up on the field to activate and to resolve this effect.",
-          "summary": "Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned from your Extra Deck, by returning the above cards you control to the Deck\" - so a Heraklinos that has left the field can never be brought back by any other Special Summon. The errata'd text is semi-nomi, \"Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck\", so once it has been properly Fusion Summoned the modern card may afterwards be Special Summoned from the Graveyard by generic revival. The same revision recasts the negation into PSCT (\"When a Spell/Trap Card is activated: You can discard 1 card; negate the activation and destroy it\") and adds \"This card must be face-up on the field to activate and to resolve this effect\", which codify the existing Quick Effect behaviour rather than change it.",
+          "summary": "Wording only, on Konami's period rulings (round 036). The era text \"This card can only be Special Summoned from your Extra Deck, by returning the above cards you control to the Deck.\" says \"can only be\", not \"cannot be Special Summoned except by\". Konami's rulebook (Versions 7.0 to 8.0) lets a Special Summon Monster be Special Summoned by another card's effect once it was properly Special Summoned first, and Konami's strategy article (printed 2009-12-07) applies that to \"can only be Special Summoned by\" wording and keeps the permanent lock for \"except by\". So the era card and the errata'd \"Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck.\" revive alike. The same revision recasts the negation into PSCT and adds \"This card must be face-up on the field to activate and to resolve this effect\", which this record's earlier reading called a codification of the existing Quick Effect behaviour; no source read rules on it. No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
             "ignis-babelcdb",
-            "yugipedia-set-pages"
+            "yugipedia-set-pages",
+            "konami-official-rulebook-v71-2010",
+            "konami-tcg-strategy-special-summons-2009",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-card-faq-2008-12-15-uz",
+            "konami-ocg-card-database-faq"
           ]
         }
       ]
@@ -60,38 +65,29 @@
       }
     ]
   },
-  "states": [
-    {
-      "events": [],
-      "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
-      }
-    }
-  ],
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In an Edison snapshot EDOPro lets a Heraklinos sitting in the Graveyard be revived by Monster Reborn, Call of the Haunted or Escape from the Dark Dimension after a proper Fusion Summon, a line the era's \"can only be Special Summoned from your Extra Deck\" text makes illegal - a material difference for a top-tier Edison Gladiator Beast deck."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 036: no generated card was shipped for this record (round 034's script was proposed and never merged; its number 600000014 stays retired). On Konami's period rulings the modern card behaves as the era card did at the snapshots this record applies at, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 27346636 exists upstream. Edison (2010-04-24) falls on v1 (TDGS-ENSE2, 2008-10-07); the erratum lands 2011-10-04, well after. Trailing cosmetic revision v2 -> v3 (MZTM-EN084, 2025-03-13: \"(Quick Effect)\" tag and \"negate the activation, and if you do, destroy it\") is not recorded as a change. Evidence discrepancy noted: the pinned cards.cdb text retains the reminder \"(You do not use \"Polymerization\".)\" but the lineage's v3 clean text omits it (modern_text_matches_version index 3, ratio 0.9528, not exact); every earlier lineage version carries the reminder, and it is a non-behavioural reminder line, so this reads as a Yugipedia text-extraction artifact rather than a real text event. Heraklinos does not appear on the EdisonFormat.com Functional Errata list."
+    "notes": "upstream_implementations is empty; no goat or pre-errata variant of 27346636 exists upstream. Edison (2010-04-24) falls on v1 (TDGS-ENSE2, 2008-10-07); the erratum lands 2011-10-04, well after. Trailing cosmetic revision v2 -> v3 (MZTM-EN084, 2025-03-13: \"(Quick Effect)\" tag and \"negate the activation, and if you do, destroy it\") is not recorded as a change. Evidence discrepancy noted: the pinned cards.cdb text retains the reminder \"(You do not use \"Polymerization\".)\" but the lineage's v3 clean text omits it (modern_text_matches_version index 3, ratio 0.9528, not exact); every earlier lineage version carries the reminder, and it is a non-behavioural reminder line, so this reads as a Yugipedia text-extraction artifact rather than a real text event. Heraklinos does not appear on the EdisonFormat.com Functional Errata list.\n\nRound 036 (2026-09-29) correction. This record's strict-nomi call (\"can only be Special Summoned\" read as a permanent lock) was read from the printed wording alone and cited no period ruling. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18), says of Special Summon Monsters: \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" Konami's TCG strategy article (printed date 2009-12-07; earliest capture 2015-11-06) says a monster worded \"This card can only be Special Summoned by...\" can be Special Summoned again from the Graveyard after one proper Summon, and reserves the permanent lock for \"cannot be Special Summoned except by...\". Konami's Extreme Victory card rulings (compiled 2011-05-12, version 1.2; listed on Konami's Gameplay page on 2011-09-18) rule, for a card whose text is \"This card can only be Special Summoned by controlling 3 or more face-up \"Meklord\" monsters\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" This card's text says \"can only be\" and none of its printed texts says \"except\", so the era card and the errata'd card revive alike. The UDE/Konami card FAQ (Konami-hosted 2008-12-15) has the entry \"See \"Gladiator Beast Alexander\" for additional rulings\" and none of the Alexander entries concerns revival. The Konami OCG card database (cid 7303) says a Heraklinos properly Special Summoned can later be Special Summoned from the Graveyard; that is OCG evidence and is recorded, not counted. Evidence and its limits: docs/research/period-rulings-generated-scripts.md, sections 3 and 6.9 and the round-036 section. Not established: the Graveyard-revival answer for GOAT (2005-04-01), which is out of this record's scope. Superseded summary, kept verbatim: \"Functional erratum: the era text is a strict nomi - \"This card can only be Special Summoned from your Extra Deck, by returning the above cards you control to the Deck\" - so a Heraklinos that has left the field can never be brought back by any other Special Summon. The errata'd text is semi-nomi, \"Must first be Special Summoned (from your Extra Deck) by shuffling the above cards you control into the Deck\", so once it has been properly Fusion Summoned the modern card may afterwards be Special Summoned from the Graveyard by generic revival. The same revision recasts the negation into PSCT (\"When a Spell/Trap Card is activated: You can discard 1 card; negate the activation and destroy it\") and adds \"This card must be face-up on the field to activate and to resolve this effect\", which codify the existing Quick Effect behaviour rather than change it.\" Superseded coverage, kept verbatim: \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Superseded gap statement, kept verbatim: \"In an Edison snapshot EDOPro lets a Heraklinos sitting in the Graveyard be revived by Monster Reborn, Call of the Haunted or Escape from the Dark Dimension after a proper Fusion Summon, a line the era's \"can only be Special Summoned from your Extra Deck\" text makes illegal - a material difference for a top-tier Edison Gladiator Beast deck.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-tcg-strategy-special-summons-2009",
+    "konami-extreme-victory-rulings-2011-05",
+    "konami-card-faq-2008-12-15-uz",
+    "konami-ocg-card-database-faq"
   ]
 }

@@ -22,7 +22,7 @@ from retroformats.validate import Validator
 
 from . import migration_audit as audit
 from . import unordered_migration_materializer as gate
-from .helpers import ROUND_035_CONVERTED_TO_FULL_V2
+from .helpers import CONVERTED_TO_FULL_V2
 from .pre_migration_fixture import load_pre_migration_repo
 from .schema_check import Registry, validate_erratum
 
@@ -120,9 +120,9 @@ class UnorderedCanonicalMigrationTest(unittest.TestCase):
             key for raw in self.raw.values() for key in ("changes", "events", "event") if key in raw
         )
         self.assertEqual(0, counts.get("changes", 0))
-        # Round 035 converted three sugar records to full v2 (tests/helpers.py); the corpus was
-        # 116 full v2 and 180 sugar records before it.
-        converted = len(ROUND_035_CONVERTED_TO_FULL_V2)
+        # Rounds 035 and 036 converted three sugar records each to full v2 (tests/helpers.py); the corpus
+        # was 116 full v2 and 180 sugar records before them.
+        converted = len(CONVERTED_TO_FULL_V2)
         self.assertEqual(116 + converted, counts["events"])
         self.assertEqual(180 - converted, counts["event"])
         for raw in self.raw.values():

@@ -5,7 +5,7 @@
     "passcode": 76305638,
     "name": "The Rock Spirit"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
   "events": {
     "c0": {
       "effective": {
@@ -37,15 +37,19 @@
       },
       "transitions": [
         {
-          "kind": "functional",
+          "kind": "cosmetic",
           "axis": null,
           "historical_text": "This card cannot be Normal Summoned or Set. This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard. Increase the ATK of this monster by 300 points during your opponent's Battle Phase.",
           "modern_text": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY. Gains 300 ATK during your opponent's Battle Phase only.",
-          "summary": "Functional erratum: the strict 'This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard' becomes 'Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY'. Under the period text every Special Summon of the card had to be that procedure, so the card could never be revived by any other means; the modern semi-Nomi wording permits any later Special Summon - Monster Reborn, Call of the Haunted, Premature Burial - once the card has been properly Special Summoned. The modern text also pins the inherent summon to the hand, which the period text left unstated.",
+          "summary": "Wording only, on Konami's period rulings (round 036). The era text \"This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard.\" says \"can only be\", not \"cannot be Special Summoned except by\". Konami's rulebook (Versions 7.0 to 8.0) lets a Special Summon Monster be Special Summoned by another card's effect once it was properly Special Summoned first, and Konami's strategy article (printed 2009-12-07) applies that to \"can only be Special Summoned by\" wording and keeps the permanent lock for \"except by\". So the era card and the errata'd \"Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY.\" revive alike. The errata'd text also pins the proper Summon to the hand, which the era wording leaves unstated; no source read rules on that. No difference between the era card and the modern card is established.",
           "sources": [
             "yugipedia-card-errata",
             "yugipedia-set-pages",
-            "ignis-babelcdb"
+            "ignis-babelcdb",
+            "konami-official-rulebook-v71-2010",
+            "konami-tcg-strategy-special-summons-2009",
+            "konami-extreme-victory-rulings-2011-05",
+            "konami-card-faq-2008-12-15-uz"
           ]
         }
       ]
@@ -60,38 +64,28 @@
       }
     ]
   },
-  "states": [
-    {
-      "events": [],
-      "coverage": {
-        "kind": "known-gap",
-        "gap_reason": "Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode",
-        "gap_sources": [
-          "ignis-babelcdb",
-          "yugipedia-card-errata"
-        ]
-      }
-    }
-  ],
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "missing",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In a period format the EDOPro card can be Special Summoned out of the Graveyard by revival cards after one proper summon, a line the period Nomi text forbade outright."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 036: no generated card was shipped for this record (round 034's script was proposed and never merged; its number 600000011 stays retired). On Konami's period rulings the modern card behaves as the era card did at the snapshots this record applies at, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Chain starts at v1 (LON-EN069 / Master Collection Volume 1, 2004-12-01), the text in force at the GOAT snapshot; v2 (DB2-EN007, 2005-07-27) is the text in force at the Edison snapshot and is behaviourally identical to v1. The earlier v0 -> v1 transition (LON-069, 2003-03-01 -> LON-EN069, which added 'This card cannot be Normal Summoned or Set.') predates both recorded eras and is therefore not recorded as a change. The pinned BabelCDB text matches lineage v3 exactly (ratio 1.0). upstream_implementations is empty - Project Ignis ships neither a goat nor a pre-errata variant, so both the GOAT-era and Edison-era behaviour are unimplemented. The Rock Spirit does not appear on EdisonFormat.com's functional errata page, so there is no community corroboration for this record; the verdict rests on the printed lineage alone, where the Nomi -> 'Must first be Special Summoned' shift is the pattern the review instructions name explicitly as functional."
+    "notes": "Chain starts at v1 (LON-EN069 / Master Collection Volume 1, 2004-12-01), the text in force at the GOAT snapshot; v2 (DB2-EN007, 2005-07-27) is the text in force at the Edison snapshot and is behaviourally identical to v1. The earlier v0 -> v1 transition (LON-069, 2003-03-01 -> LON-EN069, which added 'This card cannot be Normal Summoned or Set.') predates both recorded eras and is therefore not recorded as a change. The pinned BabelCDB text matches lineage v3 exactly (ratio 1.0). upstream_implementations is empty - Project Ignis ships neither a goat nor a pre-errata variant, so both the GOAT-era and Edison-era behaviour are unimplemented. The Rock Spirit does not appear on EdisonFormat.com's functional errata page, so there is no community corroboration for this record; the verdict rests on the printed lineage alone, where the Nomi -> 'Must first be Special Summoned' shift is the pattern the review instructions name explicitly as functional.\n\nRound 036 (2026-09-29) correction. This record's strict-nomi call (\"can only be Special Summoned\" read as a permanent lock) was read from the printed wording alone and cited no period ruling. Konami's rulebook, Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30), 7.2 (2011-05-16) and 8.0 (linked from Konami's Gameplay page on 2011-09-18), says of Special Summon Monsters: \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" Konami's TCG strategy article (printed date 2009-12-07; earliest capture 2015-11-06) says a monster worded \"This card can only be Special Summoned by...\" can be Special Summoned again from the Graveyard after one proper Summon, and reserves the permanent lock for \"cannot be Special Summoned except by...\". Konami's Extreme Victory card rulings (compiled 2011-05-12, version 1.2; listed on Konami's Gameplay page on 2011-09-18) rule, for a card whose text is \"This card can only be Special Summoned by controlling 3 or more face-up \"Meklord\" monsters\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" This card's text says \"can only be\" and none of its printed texts says \"except\", so the era card and the errata'd card revive alike. The UDE/Konami card FAQ (Konami-hosted 2008-12-15) has no entry for the card. Evidence and its limits: docs/research/period-rulings-generated-scripts.md, sections 3 and 6.9 and the round-036 section. Not established: the Graveyard-revival answer for GOAT (2005-04-01), which is out of this record's scope. Superseded summary, kept verbatim: \"Functional erratum: the strict 'This card can only be Special Summoned by removing from play 1 EARTH monster in your Graveyard' becomes 'Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY'. Under the period text every Special Summon of the card had to be that procedure, so the card could never be revived by any other means; the modern semi-Nomi wording permits any later Special Summon - Monster Reborn, Call of the Haunted, Premature Burial - once the card has been properly Special Summoned. The modern text also pins the inherent summon to the hand, which the period text left unstated.\" Superseded coverage, kept verbatim: \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Superseded gap statement, kept verbatim: \"In a period format the EDOPro card can be Special Summoned out of the Graveyard by revival cards after one proper summon, a line the period Nomi text forbade outright.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "yugipedia-set-pages",
-    "ignis-babelcdb"
+    "ignis-babelcdb",
+    "konami-official-rulebook-v71-2010",
+    "konami-tcg-strategy-special-summons-2009",
+    "konami-extreme-victory-rulings-2011-05",
+    "konami-card-faq-2008-12-15-uz"
   ]
 }

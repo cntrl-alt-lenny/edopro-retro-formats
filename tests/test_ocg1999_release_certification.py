@@ -48,6 +48,7 @@ from .helpers import (
     swap_back,
     swap_generated_back,
     swap_retired_forward,
+    to_round_035,
     card as card_ref,
     event as ev,
     gap,
@@ -425,9 +426,14 @@ class OCG1999ReleaseCertificationTest(unittest.TestCase):
         # Re-pinned round 031: six generated cards (600000004-9) were in Tengu's list; round 035
         # took three of them out again (600000007-9), so the list holds three now. Swapping the
         # three forward reproduces the round-031 pin, and swapping all six back the earlier one.
+        # Re-pinned round 036: Goddess of Whim and Green Baboon are modern codes again and five generated
+        # cards (600000016, 600000018-21) are in the list; to_round_035 undoes both and reproduces the
+        # round-035 pin.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x410A9E85, tengu.hash)
-        forward = swap_retired_forward(tengu.entries, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
+        self.assertEqual(0x79D06437, tengu.hash)
+        round_035 = to_round_035(tengu.entries)
+        self.assertEqual(0x410A9E85, lflist_hash(round_035))
+        forward = swap_retired_forward(round_035, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
         self.assertEqual(0x45A6E446, lflist_hash(forward))
         self.assertEqual(0x0C878718, lflist_hash(swap_back(forward, ROUND_031_PASSCODES)))
 

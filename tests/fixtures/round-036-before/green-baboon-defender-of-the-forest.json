@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-green-baboon-defender-of-the-forest",
+  "modern_card": {
+    "passcode": 46668237,
+    "name": "Green Baboon, Defender of the Forest"
+  },
+  "classification": "functional",
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "partial",
+      "tested": true,
+      "reason": "Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000006.json; passcode 600000006). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish. Round 035 (2026-09-29): the script no longer allows the Damage Step (Konami's errata lists and rulebook forbid it); only the face-up difference remains.",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In an Edison snapshot EDOPro refuses the Damage Step Green Baboon revival after a Beast is destroyed by battle, and refuses it entirely when the destroyed Beast was face-down, so a period Beast deck loses plays that its 2007-2010 text allows. Round 035 (2026-09-29): the Damage Step half of this statement is withdrawn; Konami's period lists forbid the Damage Step activation, so the modern card is period-correct there. The face-down half stands on the printed text alone; a UDE ruling says otherwise and is on the owner's list."
+      }
+    }
+  ],
+  "reference_identities": [],
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The packet's single upstream entry, 511001661 \"Green Baboon, Defender of the Forest (Manga)\" in cards-unofficial.cdb, is a DIFFERENT card, not a historical version of 46668237: it triggers off Insect/Beast/Plant/Beast-Warrior monsters on either side of the field and its text matches the lineage at only ratio 0.7277. It cannot serve as a baseline implementation, so this card remains a genuine gap. Its script is still useful corroboration: the older-style trigger is scripted with EVENT_DESTROYED plus EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY, while the modern Green Baboon script (the '-' side of the diff) uses EVENT_TO_GRAVE with no damage-step property - the script-level counterpart of the errata's added \"(except during the Damage Step)\". Era text: v0 (JUMP-EN014, 2007-07-15) is in force for Edison (2010-04-24); the card postdates GOAT. Trailing cosmetic revision v1 -> v2 (SBCB-EN053, 2020-11-26: GY wording, \"Beast monster\", location clause moved) is not recorded as a change; cards.cdb matches v2 exactly. Green Baboon is not on the EdisonFormat.com Functional Errata list.\n\nRound 035 (2026-09-29) evidence, added and nothing replaced. (a) The Damage Step half of the summary above is contradicted at both snapshots by Konami's own lists: \"Green Baboon, Defender of the Forest ... You cannot activate the effect of this card during the Damage Step.\" (Current Card Errata Lists compiled 2009-07-30, 2010-01-05 and 2010-11-05; Konami's Gameplay page called the 2010-01-05 list \"Current Errata\" on 2010-03-22 and the 2010-11-05 list on 2011-09-18), and by Konami's rulebook Damage Step rule (Versions 7.0 to 8.0). The earlier UDE/Konami card FAQ said the opposite (\"can be activated during the Damage Step\", capture 2008-12-15); the later Konami list overrides it. The generated script now excludes the Damage Step. (b) The face-up half: the UDE Netrep (answer 2007-09-28) and the card FAQ (2008-12-15) say a face-down Beast destroyed does not trigger it; Konami's lists are silent on face-up. Whether that ruling held at the snapshots is not shown, so the script keeps the printed-text reading (no face-up requirement) and the question is on the owner's list. (c) Konami's lists also say that when several copies are available only 1 may be Special Summoned; in the one two-copy scenario run (Dark Hole, two copies in hand) the modern and the generated script each Special Summoned one. Evidence: docs/research/period-rulings-generated-scripts.md, section 6.5."
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "konami-errata-list-2009-07-30",
+    "konami-errata-list-2010-01-05",
+    "konami-errata-list-2010-11-05",
+    "konami-card-faq-2008-12-15-fh",
+    "ude-judge-list-green-baboon-2007",
+    "konami-official-rulebook-v71-2010"
+  ],
+  "event": {
+    "effective": {
+      "date": "2012-09-29",
+      "precision": "day",
+      "status": "reported",
+      "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN165, Legendary Collection 3: Yugi's World Mega Pack)"
+    },
+    "kind": "functional",
+    "axis": null,
+    "historical_text": "When a Beast-Type monster you control is destroyed and sent to the Graveyard, you can pay 1000 Life Points to Special Summon this card from your hand or the Graveyard.",
+    "modern_text": "If this card is in your hand or Graveyard when a face-up Beast-Type monster you control is destroyed and sent to the Graveyard (except during the Damage Step): You can pay 1000 Life Points; Special Summon this card.",
+    "summary": "Functional erratum on two points. The era text triggers off \"a Beast-Type monster you control is destroyed and sent to the Graveyard\" with no position requirement and no Damage Step exclusion; the errata'd text requires the destroyed Beast to have been face-up and adds \"(except during the Damage Step)\". So the era card can pay 1000 LP and Special Summon itself off a face-down Beast being destroyed, and can do so inside the Damage Step when a Beast is destroyed by battle - the exact window a period Beast deck uses. Both restrictions are baked into the modern implementation, whose trigger is EVENT_TO_GRAVE with a POS_FACEUP previous-position filter and no EFFECT_FLAG_DAMAGE_STEP property.",
+    "sources": [
+      "yugipedia-card-errata",
+      "ignis-babelcdb",
+      "ignis-cardscripts",
+      "yugipedia-set-pages",
+      "konami-errata-list-2009-07-30",
+      "konami-errata-list-2010-01-05",
+      "konami-errata-list-2010-11-05",
+      "konami-card-faq-2008-12-15-fh",
+      "ude-judge-list-green-baboon-2007",
+      "konami-official-rulebook-v71-2010"
+    ]
+  },
+  "coverage": {
+    "kind": "custom-script",
+    "historical_passcode": 600000006,
+    "script": "data/custom-cards/c600000006.lua"
+  }
+}

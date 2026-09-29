@@ -280,6 +280,7 @@
     {
       "id": "ude-card-rulings-archive",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Upper Deck Entertainment official Yu-Gi-Oh! Card Rulings page (Internet Archive replay)",
       "url": "http://web.archive.org/web/20050701235627/http://entertainment.upperdeck.com/yugioh/en/faq_card_rulings.aspx",
       "notes": "UDE's per-card rulings database, the ruling layer in force in the GOAT era. The previously cited 2005-06-16 URL (web/20050616025109/...) returned an HTTP 302 to this exact July 1 replay in one audit request; a later direct replay request returned HTTP 200 with memento-datetime Thu, 16 Jun 2005 02:51:09 GMT. The exact July 1 target itself returned memento-datetime Fri, 01 Jul 2005 23:56:27 GMT and is the deterministic URL cited by the research text. This replay instability is recorded rather than treated as an effective-date claim. The 2005-06-16 served page states the failed-search verification procedure verbatim for Sangan and Witch of the Black Forest: 'If you have no eligible monsters, your opponent gets to see your Deck to verify.' Reinforcement of the Army's entry then permitted activation with no valid target subject to the same verification; by the 2008-12-15 yugioh-card.com Card FAQ capture that had changed to 'You cannot activate ... if you do not have any Level 4 or lower Warrior-Type monsters remaining in your Deck' - per-card activation-condition chronology differs from the shared verification chronology. The later July 1 replay also states for Rescue Cat that activation is permitted with only 1 or zero eligible Beasts and the Deck may be checked, and gives the analogous old permission for Reinforcement of the Army. For the present per-card activation audit, the July 1 replay states for Freed the Matchless General: 'The effect of this card that allows you to forfeit your draw to place a Warrior-Type monster from your Deck into your hand is optional. You do not have to activate it if you don’t want to. If you attempt to activate this effect and find that you do not have any Warrior-Type monsters in your Deck, you do not get your normal draw back. You have already forfeited it.' It also states for Horus the Black Flame Dragon LV 4: 'If you don’t have \"Horus the Black Flame Dragon LV 6\" in your hand or Deck, you can still send \"Horus the Black Flame Dragon LV 4\" to the Graveyard to activate its effect. But if you don’t have \"Horus the Black Flame Dragon LV 6\" then your opponent can check your Deck to confirm.' These are card-specific old-state passages served at memento Fri, 01 Jul 2005 23:56:27 GMT. This source establishes the per-card old-state rule and the observed capture timestamps; it does not establish an exact effective date or a class-wide policy. Retrieved 2026-09-21."
@@ -294,6 +295,7 @@
     {
       "id": "konami-card-faq-2008-12-15-skilled-white-magician",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Skilled White Magician Card FAQ (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215054634/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_st.html",
       "notes": "The URL returned HTTP 200 with memento-datetime Mon, 15 Dec 2008 05:46:34 GMT. Its Skilled White Magician entry says that if there are no 'Buster Blader' in hand, Deck, or Graveyard, the effect cannot be activated. This establishes a per-card state in the served FAQ capture; it does not establish an exact effective date, a class-wide policy, or the activation state of the 38-card research population. Retrieved 2026-09-20."
@@ -301,9 +303,10 @@
     {
       "id": "konami-card-faq-2008-12-16-ac",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Card FAQ default_ac page (Internet Archive capture served 2008-12-16)",
       "url": "https://web.archive.org/web/20081216161305/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_ac.html",
-      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:13:05 GMT. The page has its own entries for A Deal with Dark Ruler, Apprentice Magician, and Armed Dragon LV5. Their passages concern the triggering event, showing the Special Summoned monster, and the LV5 destruction effect respectively; none addresses whether the cluster's search/reveal-on-failure effect may activate with no named card available. The Armed Dragon LV5 passage, 'You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy,' is therefore not used as evidence for the separate LV7 level-up effect. Retrieved 2026-09-21."
+      "notes": "The HTTP 200 response carried memento-datetime Tue, 16 Dec 2008 16:13:05 GMT. The page has its own entries for A Deal with Dark Ruler, Apprentice Magician, and Armed Dragon LV5. Their passages concern the triggering event, showing the Special Summoned monster, and the LV5 destruction effect respectively; none addresses whether the cluster's search/reveal-on-failure effect may activate with no named card available. The Armed Dragon LV5 passage, 'You cannot activate \"Armed Dragon LV5\"’s effect if there isn’t a monster you can destroy,' is therefore not used as evidence for the separate LV7 level-up effect. Retrieved 2026-09-21. Round 036 (2026-09-29): the Cyber Phoenix entry reads \"(The Machine-Type monster can still only be equipped with 1 Union Monster at a time, because that is a condition, not an effect).\""
     },
     {
       "id": "konami-card-faq-2008-12-16-de",
@@ -406,13 +409,15 @@
     {
       "id": "konami-set-rulings-archive",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami per-set Card Rulings documents, 2010-2011 (yugioh-card.com, Internet Archive)",
       "url": "http://web.archive.org/web/20100602051620/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf",
-      "notes": "Konami's official rulings documents for the Konami era. In this session, the requested Machina Mayhem URL returned HTTP 302 to the exact replay at http://web.archive.org/web/20110102005407/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf; following it returned HTTP 200 with memento-datetime Sun, 02 Jan 2011 00:54:07 GMT. The four-page PDF's first page reads, 'Machina Mayhem Structure Deck – Card Rulings' and 'Compiled as of April 6th, 2010 - <version 1.0>'; the document date is therefore 2010-04-06, separate from the served archive capture date 2011-01-02. Its Commander Covington entry says, 'If you do not have a “Machina Force” in your hand or Deck, you cannot activate the effect of “Commander Covington.” If you no longer have one when the effect resolves, your opponent can ask to verify.' Its Machina Defender entry also says, 'If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.' Other sessions observed the requested URL itself serving HTTP 200 with memento-datetime Wed, 02 Jun 2010 05:16:20 GMT; this replay variance is recorded rather than treated as source unavailability. The Machina document is evidence that these named searches had failed-search verification wording in its stated document period; it does not establish an exact effective date or a class-wide policy. The separately registered Starstrike Blast document's Formula Synchron entry says, 'If you cannot, your opponent can verify that you have no monsters in your Extra Deck that can be Summoned,' extending the same failed-search verification wording to the Extra Deck in the document compiled 2010-11-04. Its HTTP 200 archive response carried memento-datetime Fri, 02 Sep 2011 05:40:17 GMT; 2010-11-16 is not its compilation date. The separately registered Storm of Ragnarok document's hand-search ruling says, 'If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case,' extending the wording to the hand in the document compiled 2011-02-02. Its HTTP 200 archive response carried memento-datetime Sat, 09 Apr 2011 07:00:40 GMT; 2011-02-02 is its compilation date, not its archive capture date, and is the latest date this registry positively attests the old verification wording. The documents' stated dates and passages are evidence about the ruling documents, not exact effective dates of a general policy. Retrieved 2026-09-20."
+      "notes": "Konami's official rulings documents for the Konami era. In this session, the requested Machina Mayhem URL returned HTTP 302 to the exact replay at http://web.archive.org/web/20110102005407/http://www.yugioh-card.com/en/gameplay/rulings/10406SDMachinaMayhem_Rules.pdf; following it returned HTTP 200 with memento-datetime Sun, 02 Jan 2011 00:54:07 GMT. The four-page PDF's first page reads, 'Machina Mayhem Structure Deck – Card Rulings' and 'Compiled as of April 6th, 2010 - <version 1.0>'; the document date is therefore 2010-04-06, separate from the served archive capture date 2011-01-02. Its Commander Covington entry says, 'If you do not have a “Machina Force” in your hand or Deck, you cannot activate the effect of “Commander Covington.” If you no longer have one when the effect resolves, your opponent can ask to verify.' Its Machina Defender entry also says, 'If you do not have \"Commander Covington\" in your Deck, your opponent can ask to verify.' Other sessions observed the requested URL itself serving HTTP 200 with memento-datetime Wed, 02 Jun 2010 05:16:20 GMT; this replay variance is recorded rather than treated as source unavailability. The Machina document is evidence that these named searches had failed-search verification wording in its stated document period; it does not establish an exact effective date or a class-wide policy. The separately registered Starstrike Blast document's Formula Synchron entry says, 'If you cannot, your opponent can verify that you have no monsters in your Extra Deck that can be Summoned,' extending the same failed-search verification wording to the Extra Deck in the document compiled 2010-11-04. Its HTTP 200 archive response carried memento-datetime Fri, 02 Sep 2011 05:40:17 GMT; 2010-11-16 is not its compilation date. The separately registered Storm of Ragnarok document's hand-search ruling says, 'If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case,' extending the wording to the hand in the document compiled 2011-02-02. Its HTTP 200 archive response carried memento-datetime Sat, 09 Apr 2011 07:00:40 GMT; 2011-02-02 is its compilation date, not its archive capture date, and is the latest date this registry positively attests the old verification wording. The documents' stated dates and passages are evidence about the ruling documents, not exact effective dates of a general policy. Retrieved 2026-09-20. Round 036 (2026-09-29): the fifteen per-set ruling documents that Konami's Gameplay page linked on 2011-09-18 (Duelist Pack Collection Tin 2010; Gold Series 3 / Tag Force 5; Machina Mayhem; Absolute Powerforce v1.0 and v1.1; Ancient Prophecy; Crimson Crisis; Duelist Revolution; Extreme Victory; Hidden Arsenal 3; Raging Battle; Stardust Overdrive; Starstrike Blast; Storm of Ragnarok; The Shining Darkness) were retrieved from the Internet Archive and text-searched by card name; this record stands for them as later Konami documents checked."
     },
     {
       "id": "konami-starstrike-blast-rulings-archive",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami Starstrike Blast Card Rulings (Internet Archive capture)",
       "url": "https://web.archive.org/web/20110902054017/http://www.yugioh-card.com:80/en/gameplay/rulings/STBLRule_101104_ver1.0.pdf",
       "notes": "The HTTP 200 PDF response carried memento-datetime Fri, 02 Sep 2011 05:40:17 GMT. Its first page reads, 'STARSTRIKE BLAST – CARD RULINGS' and 'Compiled as of November 4, 2010 - <version 1.0>'. In the Formula Synchron entry, the document says, 'You must Synchro Summon when the effect resolves, if possible, using Formula Synchron and the face-up monsters are available to you. If you cannot, your opponent can verify that you have no monsters in your Extra Deck that can be Summoned.' This is the document's failed-search verification passage for the Extra Deck. The document date is therefore 2010-11-04; 2011-09-02 is the archive capture date, and 2010-11-16 is not established by this PDF. The document's self-stated compilation date and verification passage do not by themselves establish an exact effective date for a general policy. Retrieved 2026-09-20."
@@ -420,6 +425,7 @@
     {
       "id": "konami-storm-of-ragnarok-rulings-archive",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami Storm of Ragnarok Card Rulings (Internet Archive capture)",
       "url": "http://web.archive.org/web/20110409070040/http://www.yugioh-card.com/en/gameplay/rulings/STOR_Rulebook_20110202.pdf",
       "notes": "The HTTP 200 PDF response carried memento-datetime Sat, 09 Apr 2011 07:00:40 GMT. Its first page reads, 'STORM OF RAGNAROK – CARD RULINGS' and 'Compiled as of February 2, 2011 - <version 1.0>'. In the hand-search ruling, the document says, 'If there is no longer a monster in your hand that you can Special Summon when this effect resolves, your opponent may briefly verify that this is the case.' This is the document's failed-search verification passage for the hand. The document date is therefore 2011-02-02; 2011-04-09 is the archive capture date. The document's self-stated compilation date and verification passage do not by themselves establish an exact effective date for a general verification policy. Retrieved 2026-09-20."
@@ -519,6 +525,7 @@
     {
       "id": "konami-official-rulebook-v71-2010",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"OFFICIAL RULEBOOK Version 7.1\" (archived 2010-03-30, 25 days before SJC Edison)",
       "url": "https://web.archive.org/web/20100330231827/http://www.yugioh-card.com:80/en/rulebook/YGO_BegGuide_Ver7-1.pdf",
       "notes": "The general TCG rulebook current at Edison. Defines Ignition Effects as usable \"just by declaring its activation during your Main Phase\" and describes the general \"Turn Player's Priority\" rule (no card/effect activation while the turn player holds it) - this general prose is genuinely ambiguous on its own about whether the special immediate \"Ignition Effect Priority\" window (see docs/research/edison-rules.md #1) applies after any chain resolution or only after a Summon; period forum sources, not this rulebook text, resolve that question. States the ATK-tie battle rule (\"both monsters are destroyed\") with no 0-ATK exception. Text verbatim-identical to the Dec-2008 V7.0 capture and the Nov-2011 V8.0 capture (which already includes Xyz Monsters), so this document brackets Edison on both sides. Retrieved 2026-08-21."
@@ -526,6 +533,7 @@
     {
       "id": "konami-rulebook-2008-v70",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"Official Rulebook\" Version 7.0 (archived 2008-12-30)",
       "url": "https://web.archive.org/web/20081230072315/http://www.yugioh-card.com:80/en/gameplay/rulebook/V7_English_Rlbk_lores.pdf",
       "notes": "Earlier bracket for the V7.1 (2010) rulebook comparison: confirms Ignition Effect/Priority wording and the ATK-tie battle rule were already the same 16 months before Edison, not a recent change."
@@ -533,6 +541,7 @@
     {
       "id": "konami-official-rulebook-v72-2011-dragunity",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"OFFICIAL RULEBOOK Version 7.2\" (packaged with Structure Deck: Dragunity Legion, TCG release ~2011-03-04/08; archived on the general rulebook download page 2011-05-16)",
       "url": "https://web.archive.org/web/20110516005009/http://www.yugioh-card.com:80/en/rulebook/EN_Rulebook_lr.pdf",
       "notes": "Adds the explicit \"0 ATK monsters... neither monster is destroyed\" exception (p.43), absent from V7.1/V7.0 - dates the 0-ATK-tie-destroys-both-to-0-ATK-tie-destroys-neither change to on or shortly before the Dragunity Legion Structure Deck's TCG street date (~10.5 months after Edison), not May 2011: the PDF's own embedded metadata (title \"3R03450 - SD Dragunity Rulebook EN.pdf\", CreationDate 2011-03-04) and cover text (\"OFFICIAL RULEBOOK Version 7.2\") confirm it is the same document Konami and community sources both call \"Version 7.2\", not a later \"New Master Rules\" edition (that name does not appear in this file or Konami's rulebook index page at any point in the archived history checked); the 2011-05-16 Wayback capture is simply when this already-released PDF was captured on the general public download page. Priority/Ignition-Effect prose is otherwise unchanged from the 2008/2010 editions. Corrected 2026-08-21 from an earlier, mislabeled \"New Master Rules\" / \"13 months after Edison\" citation - see docs/research/edison-rules.md #6 for the correction record."
@@ -561,9 +570,10 @@
     {
       "id": "konami-advanced-gameplay-faq-2008",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami \"Advanced Gameplay FAQ\" page, section \"Simultaneous Effects\" (archived 2008-12-15 / 2009-01-05)",
       "url": "https://web.archive.org/web/20081215065552/http://www.yugioh-card.com:80/en/gameplay/faqs/advancedgameplay/",
-      "notes": "Official FAQ (not the rulebook booklet) describing SEGOC as a simple two-tier system - turn player's simultaneous Trigger Effects first (freely ordered), then the opponent's - citing \"pages 35-37 of the Official Rulebook version 6.0\", which pushes this rule's attested pedigree back to ~2007/08. No mandatory-before-optional split or trigger-order tiebreak appears in this text. Worked example given: Mystic Tomato vs. Mystic Tomato."
+      "notes": "Official FAQ (not the rulebook booklet) describing SEGOC as a simple two-tier system - turn player's simultaneous Trigger Effects first (freely ordered), then the opponent's - citing \"pages 35-37 of the Official Rulebook version 6.0\", which pushes this rule's attested pedigree back to ~2007/08. No mandatory-before-optional split or trigger-order tiebreak appears in this text. Worked example given: Mystic Tomato vs. Mystic Tomato. Round 036 (2026-09-29): the Union Monsters section of the same capture reads \"A monster can only be equipped with 1 Union Monster at a time, but can still be equipped with other Equip Spell Cards such as \\\"Axe of Despair\\\", etc.\""
     },
     {
       "id": "pojo-damage-step-2009",
@@ -744,6 +754,7 @@
     {
       "id": "konami-official-rulebook-v8-2011",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"OFFICIAL RULEBOOK Version 8.0\" (Internet Archive capture 2011-11-19; linked as the rulebook from Konami's Gameplay page captured 2011-09-18)",
       "url": "https://web.archive.org/web/20111119172146/http://www.yugioh-card.com/en/rulebook/YGO_RuleBook_EN-v8.pdf",
       "notes": "The Konami rulebook that Konami's own Gameplay page (capture 2011-09-18) points to, so the rulebook current at Tengu (2011-09-17). Two passages matter to round 035. The summoning page, under \"Special Summon with a Card's Effect\": \"You cannot use a card effect to Special Summon those monsters from your hand, Deck, or the Graveyard unless it was properly Special Summoned first.\" The Damage Step Rules: \"During the Damage Step, you can only activate Counter Trap Cards, or cards with effects that directly change a monster's ATK or DEF. Also, these cards can only be activated up until the start of damage calculation.\" Both passages are also present, by phrase search, in Versions 7.0 (capture 2008-12-30), 7.1 (2010-03-30) and 7.2 (2011-05-16). A capture date is not an effective date; the 2011-11-19 capture postdates Tengu, and the link from the 2011-09-18 page is what puts Version 8.0 in force at Tengu. Retrieved 2026-09-29 (round 035)."
@@ -765,6 +776,7 @@
     {
       "id": "konami-errata-list-2009-07-30",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"CURRENT CARD ERRATA LIST, Compiled as of July 30, 2009\" (Internet Archive capture 2009-12-29)",
       "url": "http://web.archive.org/web/20091229035333/http://www.yugioh-card.com:80/en/gameplay/errata/YGOErrata090730.pdf",
       "notes": "Under \"From Retro Pack 2, Dark Legend, and SHONEN JUMP Magazine\": \"Green Baboon, Defender of the Forest ... You cannot activate the effect of this card during the Damage Step.\" and \"When a Beast-Type monster is destroyed and sent to the Graveyard, you can only Special Summon 1 \\\"Green Baboon, Defender of the Forest,\\\" even if multiple copies are available in your hand/Graveyard.\" The earliest dated Konami statement found for either. The list's own text: play the card as if it had the corrected text. Retrieved 2026-09-29 (round 035)."
@@ -772,6 +784,7 @@
     {
       "id": "konami-errata-list-2010-01-05",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"CURRENT CARD ERRATA LIST, Compiled as of January 5, 2010\" (Internet Archive capture 2010-03-31)",
       "url": "http://web.archive.org/web/20100331022617/http://www.yugioh-card.com/en/gameplay/errata/YGOErrata100105.pdf",
       "notes": "The list Konami's Gameplay page captured 2010-03-22 calls \"Current Errata\", 33 days before Edison. Carries the same two Green Baboon, Defender of the Forest bullets as the 2009-07-30 list. Retrieved 2026-09-29 (round 035)."
@@ -779,6 +792,7 @@
     {
       "id": "konami-errata-list-2010-11-05",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"RECENT CARD ERRATA LIST, Compiled as of November 5, 2010\" (Internet Archive capture 2010-12-14)",
       "url": "http://web.archive.org/web/20101214022808/http://www.yugioh-card.com:80/en/gameplay/errata/101105%20recent%20errata%20list%20-%20x.pdf",
       "notes": "The list Konami's Gameplay page captured 2011-09-18 calls \"Current Errata\" (dated Nov 15, 2010 on the page). Carries the same two Green Baboon, Defender of the Forest bullets. Retrieved 2026-09-29 (round 035)."
@@ -786,6 +800,7 @@
     {
       "id": "konami-extreme-victory-rulings-2011-05",
       "kind": "official",
+      "ruling_class": "konami-document",
       "title": "Konami \"EXTREME VICTORY - CARD RULINGS, Compiled as of May 12, 2011 <version 1.2>\" (Internet Archive capture 2011-09-18)",
       "url": "http://web.archive.org/web/20110918002333/http://www.yugioh-card.com/en/gameplay/rulings/EXVCRulesBook000512_1.2_x.pdf",
       "notes": "Linked from Konami's Gameplay page captured 2011-09-18. For Meklord Astro Dragon Asterisk (EXVC-EN015), text \"This card cannot be Normal Summoned or Set. This card can only be Special Summoned by controlling 3 or more face-up \\\"Meklord\\\" monsters.\": \"If you Special Summon this card correctly, it can later be Special Summoned back from the Graveyard.\" A Konami TCG ruling on the \"can only be Special Summoned by\" wording, dated before Tengu. Retrieved 2026-09-29 (round 035)."
@@ -800,6 +815,7 @@
     {
       "id": "konami-card-faq-2008-12-15-de",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Card FAQ default_de page (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215054617/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_de.html",
       "notes": "Konami-hosted copy of the UDE per-card FAQ, cards D-E. Entries read: \"DARK MASTER - ZORC\" (Ignition Effect, roll in Main Phase 1 or 2 only; a 6 also destroys Zorc), \"DICE RE-ROLL\" (\"you can use the effect of \\\"Dice Re-Roll\\\" once during the turn in which you activated it\"), \"DIMENSION FUSION\" (\"cannot Special Summon a \\\"Special Summon-only\\\" monster, like a Ritual Monster or \\\"Chaos Emperor Dragon - Envoy of the End\\\", unless it was properly summoned first\"). Text identical to the UDE-hosted copy of 2009-02-18. Retrieved 2026-09-29 (round 035)."
@@ -807,6 +823,7 @@
     {
       "id": "konami-card-faq-2008-12-15-fh",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Card FAQ default_fh page (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215054619/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_fh.html",
       "notes": "Konami-hosted copy of the UDE per-card FAQ, cards F-H. Entries read: \"GODDESS OF WHIM\" (\"It can only be used once per turn, during your Main Phase.\"), \"GREEN BABOON, DEFENDER OF THE FOREST\" (usable in either player's turn; \"if that monster was face-up\"; \"This effect can be activated during the Damage Step, at the same time as effects like \\\"Giant Rat's\\\"\"; \"You cannot activate this effect when a face-down Beast-Type monster you control is destroyed by a card effect\"), \"HORUS THE BLACK FLAME DRAGON LV8\" (the word \"except\" in its Summoning conditions means it cannot be revived even if Special Summoned properly), \"GLADIATOR BEAST HERAKLINOS\" (only \"See Gladiator Beast Alexander\"). Text identical to the UDE-hosted copy of 2009-02-26. Retrieved 2026-09-29 (round 035)."
@@ -814,6 +831,7 @@
     {
       "id": "konami-card-faq-2008-12-15-pr",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Card FAQ default_pr page (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215065604/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_pr.html",
       "notes": "Konami-hosted copy of the UDE per-card FAQ, cards P-R. \"RISE OF THE SNAKE DEITY\" has three entries (needs Vennominaga in hand or Deck; several copies in one Chain; a Vennominon treated as a Spell Card) and none on the Damage Step. Text identical to the UDE-hosted copy of 2009-02-20. Retrieved 2026-09-29 (round 035)."
@@ -821,6 +839,7 @@
     {
       "id": "konami-card-faq-2008-12-15-uz",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Konami TCG Card FAQ default_uz page (Internet Archive capture served 2008-12-15)",
       "url": "http://web.archive.org/web/20081215054635/http://www.yugioh-card.com/en/gameplay/faqs/cardfaqs/default_uz.html",
       "notes": "Konami-hosted copy of the UDE per-card FAQ, cards U-Z. \"VWXYZ-DRAGON CATAPULT CANNON\": \"Once properly Summoned by the method written in the text this card can be Special Summoned from the Graveyard with effects like \\\"Call of the Haunted\\\" or \\\"Re-Fusion\\\".\" \"XYZ FUSION MONSTERS\": cannot be Special Summoned from the Extra Deck \"except by the method described in their text\" and \"cannot be Special Summoned from the Graveyard even after\". Text identical to the UDE-hosted copy of 2009-02-26. Retrieved 2026-09-29 (round 035)."
@@ -828,6 +847,7 @@
     {
       "id": "ude-card-faq-2009-02-26-uz",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "Upper Deck Entertainment per-card FAQ, cards U-Z (Internet Archive capture 2009-02-26; the other letter pages were captured 2009-02-17 to 2009-02-26)",
       "url": "http://web.archive.org/web/20090226215920/http://entertainment.upperdeck.com/yugioh/en/gameplay/faqs/cardfaqs/default.aspx?first=U&last=Z",
       "notes": "The UDE-hosted copy of the card FAQ; the last state either host shows (no capture of either host's card FAQ after 2009-02-26 in the Internet Archive CDX listing; Konami-hosted copies end 2009-01-19). The entries round 035 relies on are identical to the Konami-hosted copies of 2008-12-15: Dark Master - Zorc, Dice Re-Roll, Goddess of Whim, Green Baboon, Heraklinos, Rise of the Snake Deity, Second Coin Toss (\"Even if multiple \\\"Second Coin Toss\\\" cards are active, you can only redo each coin toss once.\"), Strike Ninja, Super Vehicroid - Stealth Union, Dimension Fusion, VWXYZ-Dragon Catapult Cannon. Retrieved 2026-09-29 (round 035). Original URL: http://entertainment.upperdeck.com/yugioh/en/gameplay/faqs/cardfaqs/default.aspx?first=U&last=Z (the archive's own record of the capture is the URL above; a retrieval through replay.waybackmachine.org redirects to it)."
@@ -835,6 +855,7 @@
     {
       "id": "ude-judge-list-zorc-2007",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "UDE Judge List, \"Dark Master - Zorc : once per turn?\" (Internet Archive capture 2007-10-27; thread 883212)",
       "url": "http://web.archive.org/web/20071027075924/entertainment.upperdeck.com/community/forums/thread/883212.aspx",
       "notes": "Question 2007-10-08: \"Can you use its effect more than once per turn?\" Answer by UDE Netrep Curtis Schultz, 2007-10-11: \"No. You can only roll the 6-sided die once. Ex: If you use the effect during Main Phase 1, you would not be able to use it again during Main Phase 2.\" A Netrep answer; its range in force at 2010-04-24 or 2011-09-17 is not shown. Retrieved 2026-09-29 (round 035)."
@@ -842,6 +863,7 @@
     {
       "id": "ude-judge-list-snake-deity-2007",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "UDE Judge List, \"Rise of the Snake Deity - Damage Step?\" (Internet Archive capture 2007-11-01; thread 830322)",
       "url": "http://web.archive.org/web/20071101080500/http:/entertainment.upperdeck.com/community/forums/thread/830322.aspx",
       "notes": "Question 2007-08-11 (specifically when Vennominon is destroyed by battle). Answer by UDE Netrep Curtis Schultz, 2007-08-17: \"\\\"Rise of the Snake Deity\\\" cannot be activated in the Damage Step.\" The thread's last post, 2007-08-31 (the post id in the URL), adds that Damage Step exceptions are case by case and that \"a small handful of Trap Cards have been given special privledges for the Damage Step.\" Retrieved 2026-09-29 (round 035)."
@@ -849,6 +871,7 @@
     {
       "id": "ude-judge-list-green-baboon-2007",
       "kind": "official",
+      "ruling_class": "ude-era-ruling",
       "title": "UDE Judge List, \"Green Baboon, Defender of the Forest Vs. face-downs, DNA Surgery\" (Internet Archive capture 2007-10-15; thread 859107)",
       "url": "http://web.archive.org/web/20071015170441/http:/entertainment.upperdeck.com/community/forums/thread/859107.aspx",
       "notes": "Question 2007-09-27: a Beast destroyed while face-down (Torrential Tribute, Shield Crash). Answer by UDE Netrep Curtis Schultz, 2007-09-28: \"You cannot activate the effect of \\\"Green Baboon, Defender of the Forest\\\" in this case.\" Range in force at the snapshots: not shown. Retrieved 2026-09-29 (round 035)."
@@ -866,6 +889,14 @@
       "title": "Konami OCG card database Q&A pages (Japanese, current, undated): Gigantes cid 5831, Gladiator Beast Heraklinos cid 7303, Metalzoa cid 4398, Malefic Blue-Eyes White Dragon cid 8864",
       "url": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&request_locale=ja",
       "notes": "OCG rulings, not TCG. Each page says the card, once Special Summoned by its printed method and then sent to the Graveyard (Heraklinos and Malefic: or banished face-up), can be Special Summoned by another card's effect (Gigantes and Metalzoa name Monster Reborn). The pages are the current state and carry no ruling date. Retrieved 2026-09-29 (round 035)."
+    },
+    {
+      "id": "konami-shining-darkness-rulings-2010-04",
+      "kind": "official",
+      "ruling_class": "konami-document",
+      "title": "Konami \"THE SHINING DARKNESS SNEAK PEEK - CARD RULINGS, Compiled as of April 30, 2010 <version 1.0>\" (Internet Archive capture 2010-06-01)",
+      "url": "http://web.archive.org/web/20100601061927/http://www.yugioh-card.com/en/gameplay/rulings/TSHDRulebook_100430.pdf",
+      "notes": "The capture's origin Last-Modified header is Fri, 30 Apr 2010, six days after Edison's snapshot; Konami's Gameplay page linked the file on 2011-09-18, so it holds at Tengu's. Under \"Delta Tri\" (TSHD-EN030): \"You cannot activate the effect to equip a Union monster if Delta Tri is already equipped with a Union monster.\" Retrieved 2026-09-29 (round 036)."
     }
   ]
 }

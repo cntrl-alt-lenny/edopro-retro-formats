@@ -48,9 +48,15 @@ STEALTH_UNION_HISTORICAL = 600000002
 HISTORICAL_PAIRS = (
     ("Super Vehicroid - Stealth Union", STEALTH_UNION_MODERN, STEALTH_UNION_HISTORICAL),
     # Round 031: the cards shared with Tengu (tests/engine/test_shared_historical_scripts.py).
-    ("Goddess of Whim", 67959180, 600000004),
+    # Round 036 removed Goddess of Whim (600000004) and Green Baboon (600000006) and generated
+    # Dice Re-Roll, Machina Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos and
+    # Treeborn Frog.
     ("Strike Ninja", 41006930, 600000005),
-    ("Green Baboon, Defender of the Forest", 46668237, 600000006),
+    ("Dice Re-Roll", 83241722, 600000016),
+    ("Machina Peacekeeper", 78349103, 600000018),
+    ("Machina Gearframe", 42940404, 600000019),
+    ("Elemental HERO Chaos Neos", 17032740, 600000020),
+    ("Treeborn Frog", 12538374, 600000021),
 )
 
 

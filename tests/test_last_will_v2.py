@@ -17,7 +17,7 @@ from retroformats.repo import Repository
 from retroformats.validate import Validator
 
 from . import unordered_migration_materializer as gate
-from .helpers import ROUND_035_CONVERTED_TO_FULL_V2
+from .helpers import CONVERTED_TO_FULL_V2
 from .pre_migration_fixture import load_pre_migration_repo
 from .schema_check import Registry, validate_erratum
 
@@ -89,9 +89,9 @@ class LastWillV2Test(unittest.TestCase):
             for key in ("changes", "events", "event")
             if key in json.loads(path.read_text(encoding="utf-8"))
         )
-        # Round 035 converted three sugar records to full v2 (tests/helpers.py): the corpus was
-        # 116 full v2 + 180 sugar and is now 119 + 177.
-        converted = len(ROUND_035_CONVERTED_TO_FULL_V2)
+        # Rounds 035 and 036 converted three sugar records each to full v2 (tests/helpers.py): the corpus
+        # was 116 full v2 + 180 sugar and is now 122 + 174.
+        converted = len(CONVERTED_TO_FULL_V2)
         self.assertEqual(Counter({"events": 116 + converted, "event": 180 - converted}), counts)
         self.assertNotIn("changes", self.raw)
 

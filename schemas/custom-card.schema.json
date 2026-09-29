@@ -69,7 +69,7 @@
     "not_reproduced": { "type": "array", "items": { "type": "string" }, "description": "What the script does not establish. Required non-empty when fidelity is approximate, empty when exact." },
     "rulings_check": {
       "type": "object",
-      "description": "The rulings gate (round 035; docs/errata.md, \"The rulings gate\"). Which period rulings sources were searched, and what each found about the ONE difference the script implements. Missing or incomplete: `custom-card.rulings-check-missing` / `custom-card.rulings-check-malformed` (errors). A `contradicts` finding shown in force needs an `owner_decision`: `custom-card.contradicting-ruling-unaccepted` (error); one whose range in force is not shown is `custom-card.contradicting-ruling-range-unresolved` (a warning, a tracked question for the owner). A schema edit alone enforces nothing: the gate is retroformats/validate.py.",
+      "description": "The rulings gate (round 035; docs/errata.md, \"The rulings gate\"). Which period rulings sources were searched, and what each found about the ONE difference the script implements. Missing or incomplete: `custom-card.rulings-check-missing` / `custom-card.rulings-check-malformed` (errors). A `contradicts` finding shown in force, or in force by the owner's decision on which rulings count, needs an `owner_decision`: `custom-card.contradicting-ruling-unaccepted` (error); one whose range in force is not shown is `custom-card.contradicting-ruling-range-unresolved` (a warning, a tracked question for the owner). A schema edit alone enforces nothing: the gate is retroformats/validate.py.",
       "required": ["difference", "checked", "searched"],
       "additionalProperties": false,
       "properties": {
@@ -88,8 +88,10 @@
               "looked_for": { "type": "string", "minLength": 1, "description": "What was searched for in that source; for a search that found nothing, this is the record of it." },
               "finding": { "enum": ["supports", "contradicts", "does-not-address"], "description": "What the source says about the implemented difference. An OCG ruling for a TCG format is does-not-address: it is evidence about the OCG." },
               "passage": { "type": "string", "description": "The passage actually read, quoted briefly. Required for supports and contradicts." },
-              "in_force": { "enum": ["shown", "not-shown"], "description": "Whether the ruling is shown to have held at the snapshots this record applies at. Required for supports and contradicts. A ruling's date is not its range in force." },
-              "in_force_basis": { "type": "string", "description": "Required when in_force is shown: what shows it (a Konami document current at the snapshot, or a later capture of the same text bracketing it)." }
+              "in_force": { "enum": ["shown", "not-shown", "by-decision"], "description": "Whether the ruling held at the snapshots this record applies at. Required for supports and contradicts. A ruling's date is not its range in force. `shown`: a basis shows it. `not-shown`: nothing does (a contradicting ruling then leaves a warning). `by-decision`: the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") that a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it; only for a source registered with ruling_class `ude-era-ruling` (`custom-card.decision-source-not-ude`)." },
+              "in_force_basis": { "type": "string", "description": "Required when in_force is shown (what shows it: a Konami document current at the snapshot, or a later capture of the same text bracketing it) or by-decision (the decision, named)." },
+              "later_konami_replacement": { "const": "none-found", "description": "Required when in_force is by-decision: the entry says that no later Konami document found replaces the ruling on the same point (`custom-card.decision-later-documents-missing`)." },
+              "later_documents_checked": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Required when in_force is by-decision: ids in data/sources.json of the later Konami documents that were checked, each registered with ruling_class `konami-document` (`custom-card.decision-document-not-konami`; a UDE-era ruling is not one)." }
             }
           }
         },

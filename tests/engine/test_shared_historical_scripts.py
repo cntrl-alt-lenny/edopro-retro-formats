@@ -1,9 +1,12 @@
 """Engine tests for the historical cards this project generates for BOTH the
-Edison (2010-04-24) and Tengu (2011-09-17) formats (roadmap item 7, round 031):
-Goddess of Whim, Strike Ninja and Green Baboon, plus one test for each of the four
-cards round 035 removed (Metalzoa, Rise of the Snake Deity, Malefic Blue-Eyes White
-Dragon, Soul Rope), which assert that the modern card is used and does what Konami's
-period rulings say (docs/research/period-rulings-generated-scripts.md).
+Edison (2010-04-24) and Tengu (2011-09-17) formats (roadmap item 7): Strike Ninja and
+Dice Re-Roll, plus tests for the cards that were removed or never shipped because period
+rulings show the modern card behaves as the era card did: Metalzoa, Rise of the Snake Deity,
+Malefic Blue-Eyes White Dragon, Soul Rope (round 035), and Goddess of Whim, Green Baboon,
+Dark Master - Zorc and the five strict-nomi cards Gigantes, The Rock Spirit, Garuda the Wind
+Spirit, VW-Tiger Catapult and Gladiator Beast Heraklinos (round 036). Those tests assert that
+the modern card is used and does what the rulings say
+(docs/research/period-rulings-generated-scripts.md).
 
 Each generated card's record puts the same historical state at both snapshots, so each
 generated card replaces the modern one in both lists. Every difference test therefore runs
@@ -57,14 +60,14 @@ PALE_BEAST = 21263083  # vanilla Level 4 Beast, 1500 ATK
 GIGANTES = 47606319  # 1900 ATK Rock: the monster that wins a battle against the cards above
 
 GODDESS_MODERN = 67959180
-GODDESS_HISTORICAL = 600000004
+GODDESS_RETIRED = 600000004  # removed in round 036: the modern card is used
 
 NINJA_MODERN = 41006930
 NINJA_HISTORICAL = 600000005
 FERAL_IMP = 41392891  # DARK
 
 BABOON_MODERN = 46668237
-BABOON_HISTORICAL = 600000006
+BABOON_RETIRED = 600000006  # removed in round 036
 
 SNAKE_MODERN = 16067089
 SNAKE_RETIRED = 600000007  # removed in round 035: the modern card is used
@@ -81,6 +84,34 @@ MALEFIC_PARADOX = 8310162
 
 ROPE_MODERN = 37383714
 ROPE_RETIRED = 600000009  # removed in round 035
+
+ZORC_MODERN = 97642679
+ZORC_RETIRED = 600000015  # proposed in round 034, never shipped
+
+DICE_MODERN = 83241722
+DICE_HISTORICAL = 600000016
+MSG_TOSS_DICE = 131
+
+# Round 036: the Union Condition (Machina Peacekeeper, Machina Gearframe) and Chaos Neos.
+MECHANICALCHASER = 7359741  # vanilla Level 4 Machine
+HEAVY_MECH_SUPPORT_PLATFORM = 23265594  # a Union monster under the current rules
+PEACEKEEPER_MODERN = 78349103
+PEACEKEEPER_HISTORICAL = 600000018
+GEARFRAME_MODERN = 42940404
+GEARFRAME_HISTORICAL = 600000019
+CHAOS_NEOS_MODERN = 17032740
+CHAOS_NEOS_HISTORICAL = 600000020
+FROG_MODERN = 12538374
+FROG_HISTORICAL = 600000021
+
+# Round 034's five strict-nomi proposals, never shipped: (name, modern card, the number round 034 proposed).
+NOMI_CARDS = (
+    ("Gigantes", 47606319, 600000010),
+    ("The Rock Spirit", 76305638, 600000011),
+    ("Garuda the Wind Spirit", 12800777, 600000012),
+    ("VW-Tiger Catapult", 58859575, 600000013),
+    ("Gladiator Beast Heraklinos", 27346636, 600000014),
+)
 
 # -- prompt helpers -----------------------------------------------------------
 
@@ -215,44 +246,6 @@ def in_both_formats(test):
 
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class GoddessOfWhimSharedTest(unittest.TestCase):
-    """Period text: "Toss a coin and call Heads or Tails. Call it right and this
-    card's ATK will be doubled during this turn. Call it wrong and it will be
-    halved during this turn." No use limit. The modern card: "Once per turn:"."""
-
-    def _run(self, code: int, mode: int, cap: int):
-        setup = (
-            f"local g=Debug.AddCard({code},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-            "local probe=Effect.GlobalEffect()\n"
-            "probe:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
-            "probe:SetCode(EVENT_PHASE+PHASE_END)\n"
-            "probe:SetCountLimit(1)\n"
-            'probe:SetOperation(function() Debug.Message("ATK "..g:GetAttack()) end)\n'
-            "Duel.RegisterEffect(probe,0)\n"
-        )
-        duel = run_scenario(setup, mode, idle=activate_capped(cap))
-        atk = [int(text.split()[1]) for _kind, text in duel.log if text.startswith("ATK ")]
-        return duel, atk
-
-    @in_both_formats
-    def test_the_period_card_can_be_activated_again_in_the_same_turn(self, mode):
-        modern, _ = self._run(GODDESS_MODERN, mode, cap=3)
-        historical, _ = self._run(GODDESS_HISTORICAL, mode, cap=3)
-        self.assertEqual([GODDESS_MODERN], chained_codes(modern), "the modern card is limited to once per turn")
-        self.assertEqual([GODDESS_HISTORICAL] * 3, chained_codes(historical), "the period card has no limit")
-        self.assertEqual(3, len(historical.seen(MSG_TOSS_COIN)), "each activation tosses a coin")
-
-    @in_both_formats
-    def test_one_activation_tosses_a_coin_and_doubles_or_halves_atk_like_the_modern_card(self, mode):
-        modern, modern_atk = self._run(GODDESS_MODERN, mode, cap=1)
-        historical, historical_atk = self._run(GODDESS_HISTORICAL, mode, cap=1)
-        self.assertEqual(1, len(modern.seen(MSG_TOSS_COIN)))
-        self.assertEqual(1, len(historical.seen(MSG_TOSS_COIN)))
-        self.assertIn(historical_atk[0], (1900, 475), "950 ATK doubled or halved (rounded up)")
-        self.assertEqual(modern_atk[0], historical_atk[0], "same seed, same call: same result and amount")
-
-
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
 class StrikeNinjaSharedTest(unittest.TestCase):
     """Period text: "... You can only use this effect once per turn." No name
     qualifier, so each copy has its own use. The modern card: "You can only use
@@ -297,102 +290,299 @@ class StrikeNinjaSharedTest(unittest.TestCase):
         self.assertEqual(1, moved(historical, NINJA_HISTORICAL, H.LOCATION_REMOVED, H.LOCATION_MZONE))
 
 
-@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
-class GreenBaboonSharedTest(unittest.TestCase):
-    """Period text: "When a Beast-Type monster you control is destroyed and sent
-    to the Graveyard, you can pay 1000 Life Points to Special Summon this card
-    from your hand or the Graveyard." The modern card needs the Beast to have
-    been face-up and cannot be used in the Damage Step. Konami's errata lists
-    (compiled 2009-07-30, 2010-01-05, 2010-11-05) say "You cannot activate the
-    effect of this card during the Damage Step", so the generated card keeps only
-    the no-face-up difference (round 035; a UDE ruling says otherwise on that, its
-    range in force is not shown, and it is on the owner's list)."""
 
-    def _dark_hole(self, baboon: int, beast_position: str, beast: int, mode: int):
-        setup = (
-            f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({baboon},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({beast},0,0,LOCATION_MZONE,0,{beast_position})\n"
-        )
-        offers = Offers(baboon)
-        duel = scenario(mode, setup + deck_fillers())
-        duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
-        duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
-        duel.default_response(H.MSG_SELECT_CARD, select_minimum)
-        standing_answers(duel)
-        duel.default_response(H.MSG_SELECT_CHAIN, offers)
-        duel.run(turns=1)
-        return duel, offers
+class UnionConditionMixin:
+    """Konami's Advanced Game Play FAQ and its Cyber Phoenix entry (counted under the owner's decision of
+    2026-09-29), and Konami's Delta Tri ruling of 2010-04-30 (Tengu): "A monster can only be equipped with
+    1 Union Monster at a time". The modern Union procedure has no such limit.
 
-    def _battle(self, baboon: int, mode: int):
-        setup = (
-            f"Debug.AddCard({baboon},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
-            f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
-            f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+    The scenarios equip a real Union monster (Heavy Mech Support Platform, a modern-rule Union) to a
+    Machine, then ask whether the card under test can be equipped to the same Machine (and the reverse).
+    The unequip position is NOT tested: no ruling read covers it."""
+
+    MODERN: int
+    HISTORICAL: int
+
+    def _idle_offers(self, code: int, mode: int, setup: str) -> tuple[H.Duel, bool, list[int]]:
+        seen: list[list[int]] = []
+
+        def idle(prompt):
+            codes = [c for c, _seq in H.idle_lists(prompt)["activatable"]]
+            seen.append(codes)
+            return H.answer_idle(7)
+
+        duel = run_scenario(setup, mode, idle=idle)
+        return duel, any(code in codes for codes in seen), seen[0] if seen else []
+
+    def _carrying(self, union: int) -> str:
+        return (
+            f"local x=Debug.AddCard({MECHANICALCHASER},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"local u=Debug.AddCard({union},0,0,LOCATION_SZONE,0,POS_FACEUP)\n"
+            "Debug.PreEquip(u,x)\n"
+            "aux.SetUnionState(u)\n"
         )
-        offers = Offers(baboon)
-        duel = run_scenario(
-            setup, mode | DUEL_ATTACK_FIRST_TURN, idle=H.answer_idle(6), offers=offers, battle=attack_once()
-        )
-        return duel, offers
 
     @in_both_formats
-    def test_a_face_down_beast_destroyed_lets_the_period_card_special_summon_itself(self, mode):
-        modern, modern_offers = self._dark_hole(BABOON_MODERN, "POS_FACEDOWN_DEFENSE", PALE_BEAST, mode)
-        historical, offers = self._dark_hole(BABOON_HISTORICAL, "POS_FACEDOWN_DEFENSE", PALE_BEAST, mode)
-        self.assertFalse(modern_offers.was_offered(), "the modern card needs a face-up Beast")
-        self.assertEqual(0, moved(modern, BABOON_MODERN, H.LOCATION_HAND, H.LOCATION_MZONE))
-        self.assertTrue(offers.was_offered())
-        self.assertEqual(1, moved(historical, BABOON_HISTORICAL, H.LOCATION_HAND, H.LOCATION_MZONE))
-        self.assertEqual(1, len(historical.seen(H.MSG_PAY_LPCOST)), "1000 Life Points are paid")
-
-    @in_both_formats
-    def test_a_beast_destroyed_by_battle_offers_neither_card_in_the_damage_step(self, mode):
-        # Round 035: the round-031 script allowed the Damage Step (EFFECT_FLAG_DAMAGE_STEP); Konami's
-        # errata lists and rulebook forbid it, so the period card is not offered, like the modern one.
-        modern, modern_offers = self._battle(BABOON_MODERN, mode)
-        historical, offers = self._battle(BABOON_HISTORICAL, mode)
-        self.assertEqual(1, moved(modern, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertFalse(modern_offers.was_offered(), "the modern card is barred from the Damage Step")
-        self.assertEqual(1, moved(historical, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
-        self.assertFalse(offers.was_offered(), "so is the period card: Konami's lists say so")
-        self.assertEqual(0, moved(historical, BABOON_HISTORICAL, H.LOCATION_HAND, H.LOCATION_MZONE))
-
-    @in_both_formats
-    def test_with_two_copies_available_only_one_is_special_summoned_like_the_modern_card(self, mode):
-        # Konami's lists: "you can only Special Summon 1 "Green Baboon, Defender of the Forest," even if
-        # multiple copies are available in your hand/Graveyard." Both cards satisfy it in this scenario.
-        for baboon in (BABOON_MODERN, BABOON_HISTORICAL):
-            with self.subTest(card=baboon):
-                setup = (
-                    f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n"
-                    f"Debug.AddCard({baboon},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
-                    f"Debug.AddCard({baboon},0,0,LOCATION_HAND,2,POS_FACEDOWN_DEFENSE)\n"
-                    f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+    def test_a_monster_carrying_a_union_cannot_be_given_a_second_one(self, mode):
+        for code in (self.MODERN, self.HISTORICAL):
+            with self.subTest(card=code):
+                setup = self._carrying(HEAVY_MECH_SUPPORT_PLATFORM) + (
+                    f"Debug.AddCard({code},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
                 )
-                offers = Offers(baboon)
-                duel = scenario(mode, setup + deck_fillers())
-                duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
-                duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
-                duel.default_response(H.MSG_SELECT_CARD, select_minimum)
-                standing_answers(duel)
-                duel.default_response(H.MSG_SELECT_CHAIN, offers)
-                duel.run(turns=1)
-                self.assertTrue(offers.was_offered())
-                self.assertEqual(1, moved(duel, baboon, H.LOCATION_HAND, H.LOCATION_MZONE))
-                self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
+                duel, offered, _ = self._idle_offers(code, mode, setup)
+                if code == self.MODERN:
+                    self.assertTrue(offered, "the modern card can join a Union monster on the same Machine")
+                else:
+                    self.assertFalse(offered, "the period card cannot: a monster carries 1 Union monster at a time")
 
     @in_both_formats
-    def test_a_face_up_beast_destroyed_by_a_card_effect_works_and_a_rock_does_not_like_the_modern_card(self, mode):
-        for baboon in (BABOON_MODERN, BABOON_HISTORICAL):
-            with self.subTest(card=baboon):
-                duel, offers = self._dark_hole(baboon, "POS_FACEUP_ATTACK", PALE_BEAST, mode)
-                self.assertTrue(offers.was_offered())
-                self.assertEqual(1, moved(duel, baboon, H.LOCATION_HAND, H.LOCATION_MZONE))
-                self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
-                duel, offers = self._dark_hole(baboon, "POS_FACEUP_ATTACK", GIGANTES, mode)
-                self.assertFalse(offers.was_offered(), "a destroyed Rock is not a Beast")
-                self.assertEqual(0, moved(duel, baboon, H.LOCATION_HAND, H.LOCATION_MZONE))
+    def test_a_union_cannot_be_given_to_a_monster_carrying_the_card(self, mode):
+        for code in (self.MODERN, self.HISTORICAL):
+            with self.subTest(card=code):
+                setup = self._carrying(code) + (
+                    f"Debug.AddCard({HEAVY_MECH_SUPPORT_PLATFORM},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
+                )
+                duel, offered, _ = self._idle_offers(HEAVY_MECH_SUPPORT_PLATFORM, mode, setup)
+                if code == self.MODERN:
+                    self.assertTrue(offered, "under the modern card another Union monster can be equipped")
+                else:
+                    self.assertFalse(offered, "under the period card the monster already carries its 1 Union monster")
+
+    @in_both_formats
+    def test_a_machine_with_no_union_is_equipped_like_the_modern_card(self, mode):
+        for code in (self.MODERN, self.HISTORICAL):
+            with self.subTest(card=code):
+                setup = (
+                    f"Debug.AddCard({MECHANICALCHASER},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+                    f"Debug.AddCard({code},0,0,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
+                )
+                state = {"done": False}
+
+                def idle(prompt, code=code, state=state):
+                    activatable = [c for c, _seq in H.idle_lists(prompt)["activatable"]]
+                    if not state["done"] and code in activatable:
+                        state["done"] = True
+                        return H.answer_idle(5, activatable.index(code))
+                    return H.answer_idle(7)
+
+                duel = run_scenario(setup, mode, idle=idle)
+                self.assertTrue(state["done"], "the equip effect is offered")
+                self.assertEqual(1, moved(duel, code, H.LOCATION_MZONE, H.LOCATION_SZONE), "it becomes an Equip Card")
+                self.assertEqual(
+                    1,
+                    sum(1 for m in duel.seen(H.MSG_EQUIP)),
+                    "and is equipped to the Machine",
+                )
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class MachinaPeacekeeperSharedTest(UnionConditionMixin, unittest.TestCase):
+    MODERN = PEACEKEEPER_MODERN
+    HISTORICAL = PEACEKEEPER_HISTORICAL
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class MachinaGearframeSharedTest(UnionConditionMixin, unittest.TestCase):
+    MODERN = GEARFRAME_MODERN
+    HISTORICAL = GEARFRAME_HISTORICAL
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class ChaosNeosSharedTest(unittest.TestCase):
+    """Konami's rulebook (Versions 7.0 to 8.0): an Ignition Effect is used "just by declaring its activation
+    during your Main Phase", and Main Phase 2 allows "the same" actions as Main Phase 1 (a limit on the number
+    of times something can be done still applies across both). The era text has no phase for the coin effect;
+    the modern text says "during your Main Phase 1". Only the phase is tested: the coin is random, and the
+    contact Fusion procedure and the revival rule are the modern script's."""
+
+    def _run(self, code: int, mode: int, *, use_in_main_phase_1: bool):
+        setup = (
+            f"Debug.AddCard({code},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK,true)\n"
+            f"Debug.AddCard({GIANT_RAT},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+        )
+        seen: list[bool] = []
+        state = {"used": False}
+
+        def idle(prompt):
+            activatable = [c for c, _seq in H.idle_lists(prompt)["activatable"]]
+            offered = code in activatable
+            seen.append(offered)
+            if len(seen) == 1:
+                if use_in_main_phase_1 and offered:
+                    state["used"] = True
+                    return H.answer_idle(5, activatable.index(code))
+                return H.answer_idle(6)  # to the Battle Phase
+            return H.answer_idle(7)
+
+        duel = run_scenario(setup, mode | DUEL_ATTACK_FIRST_TURN, idle=idle, battle=lambda prompt: H.answer_battle(2))  # 2: to Main Phase 2
+        return duel, seen, state["used"]
+
+    @in_both_formats
+    def test_the_coin_effect_can_be_used_in_main_phase_2_under_the_period_card_only(self, mode):
+        _, modern, _ = self._run(CHAOS_NEOS_MODERN, mode, use_in_main_phase_1=False)
+        _, historical, _ = self._run(CHAOS_NEOS_HISTORICAL, mode, use_in_main_phase_1=False)
+        self.assertEqual([True, False], modern[:2], "the modern card: Main Phase 1 only")
+        self.assertEqual([True, True], historical[:2], "the period card: either Main Phase")
+
+    @in_both_formats
+    def test_once_used_in_main_phase_1_it_is_not_offered_again_in_main_phase_2_like_the_modern_card(self, mode):
+        for code in (CHAOS_NEOS_MODERN, CHAOS_NEOS_HISTORICAL):
+            with self.subTest(card=code):
+                duel, seen, used = self._run(code, mode, use_in_main_phase_1=True)
+                self.assertTrue(used)
+                self.assertEqual(1, len(duel.seen(MSG_TOSS_COIN)), "one toss of three coins in the whole turn")
+                self.assertEqual(0, moved(duel, code, H.LOCATION_MZONE, H.LOCATION_HAND), "the coin did not bounce it: the check is meaningful")
+                self.assertFalse(seen[1], "the once-per-turn limit holds across both Main Phases")
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class TreebornFrogSharedTest(unittest.TestCase):
+    """Card FAQ (Konami-hosted 2008-12-15, page S-T; counted under the owner's decision of 2026-09-29): "If the
+    effect of "Treeborn Frog" is negated, you can activate its effect again during the same Standby Phase and
+    Special Summon it." and "If you Special Summon "Treeborn Frog" during your Standby Phase, then it's sent to the
+    Graveyard during that same Standby Phase (like if it's Tributed for "Enemy Controller"), you can Special Summon
+    "Treeborn Frog" again that same Standby Phase." The era text has no use limit; the modern card is "Once per
+    turn". Each scenario uses one standing effect of the scenario's own (a negation, or a send to the Graveyard),
+    limited to one use, so a period card that could repeat has something to repeat after."""
+
+    NEGATE_FIRST = (
+        "local e=Effect.GlobalEffect()\n"
+        "e:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+        "e:SetCode(EVENT_CHAINING)\n"
+        "e:SetCountLimit(1)\n"
+        f"e:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return re:GetHandler():IsCode({FROG_MODERN}) end)\n"
+        "e:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateActivation(ev) end)\n"
+        "Duel.RegisterEffect(e,0)\n"
+    )
+    SEND_FIRST_SUMMON_AWAY = (
+        "local e=Effect.GlobalEffect()\n"
+        "e:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+        "e:SetCode(EVENT_SPSUMMON_SUCCESS)\n"
+        "e:SetCountLimit(1)\n"
+        f"e:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return eg:IsExists(Card.IsCode,1,nil,{FROG_MODERN}) end)\n"
+        "e:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.SendtoGrave(eg,REASON_EFFECT) end)\n"
+        "Duel.RegisterEffect(e,0)\n"
+    )
+
+    def _run(self, code: int, mode: int, extra: str):
+        setup = f"Debug.AddCard({code},0,0,LOCATION_GRAVE,0,POS_FACEUP)\n" + extra
+        offers = Offers(code)
+        duel = run_scenario(setup, mode, idle=H.answer_idle(7), offers=offers, turns=1)
+        return duel
+
+    @in_both_formats
+    def test_a_negated_activation_can_be_made_again_in_the_same_standby_phase(self, mode):
+        modern = self._run(FROG_MODERN, mode, self.NEGATE_FIRST)
+        historical = self._run(FROG_HISTORICAL, mode, self.NEGATE_FIRST)
+        self.assertEqual([FROG_MODERN], chained_codes(modern), "once per turn: the negated activation used it up")
+        self.assertEqual(0, moved(modern, FROG_MODERN, H.LOCATION_GRAVE, H.LOCATION_MZONE))
+        self.assertEqual([FROG_HISTORICAL] * 2, chained_codes(historical), "no limit: it is activated again")
+        self.assertEqual(1, moved(historical, FROG_HISTORICAL, H.LOCATION_GRAVE, H.LOCATION_MZONE))
+
+    @in_both_formats
+    def test_a_frog_sent_away_after_its_summon_can_be_summoned_again_like_the_modern_card(self, mode):
+        # The FAQ's second entry. It is NOT a difference in the engine: a card that has left the field is a new
+        # card as far as its "once per turn" is concerned, so the modern script also lets the Frog return. The
+        # test pins that, so the difference above cannot be mistaken for this one.
+        for code in (FROG_MODERN, FROG_HISTORICAL):
+            with self.subTest(card=code):
+                duel = self._run(code, mode, self.SEND_FIRST_SUMMON_AWAY)
+                self.assertEqual([code] * 2, chained_codes(duel))
+                self.assertEqual(2, moved(duel, code, H.LOCATION_GRAVE, H.LOCATION_MZONE), "summoned twice")
+                self.assertEqual(1, moved(duel, code, H.LOCATION_MZONE, H.LOCATION_GRAVE), "sent away once")
+
+    @in_both_formats
+    def test_an_ordinary_standby_phase_special_summons_it_once_like_the_modern_card(self, mode):
+        for code in (FROG_MODERN, FROG_HISTORICAL):
+            with self.subTest(card=code):
+                duel = self._run(code, mode, "")
+                self.assertEqual([code], chained_codes(duel))
+                self.assertEqual(1, moved(duel, code, H.LOCATION_GRAVE, H.LOCATION_MZONE))
+
+
+@unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
+class DiceRerollSharedTest(unittest.TestCase):
+    """Card FAQ (UDE 2005-07-01, Konami-hosted 2008-12-15; counted under the owner's decision of
+    2026-09-29): "You activate "Dice Re-Roll" before you activate the effect which will let you roll a
+    die. Then you can use the effect of "Dice Re-Roll" once during the turn in which you activated it."
+    So each activation has its own re-roll. The modern card: "(You can only gain this effect once per
+    turn.)" - one re-roll per turn however many copies are activated.
+
+    The scenario is the one the ruling describes and no more: each copy is activated BEFORE the die roll
+    it answers (two Dark Master - Zorc give two separate rolls in one turn). No copy ever re-rolls an
+    already re-rolled result: no ruling read covers that (round 034's scenario did it, and was dropped)."""
+
+    def _run(self, reroll: int, mode: int, copies: int):
+        setup = "".join(
+            f"Debug.AddCard({ZORC_MODERN},0,0,LOCATION_MZONE,{seq},POS_FACEUP_ATTACK,true)\n" for seq in range(copies)
+        )
+        setup += f"Debug.AddCard({GIANT_RAT},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+        setup += "".join(f"Debug.AddCard({reroll},0,0,LOCATION_SZONE,{seq},POS_FACEDOWN)\n" for seq in range(copies))
+        plan = [code for _ in range(copies) for code in (reroll, ZORC_MODERN)]
+        state = {"step": 0}
+
+        def idle(prompt):
+            activatable = [code for code, _seq in H.idle_lists(prompt)["activatable"]]
+            if state["step"] < len(plan) and plan[state["step"]] in activatable:
+                code = plan[state["step"]]
+                state["step"] += 1
+                return H.answer_idle(5, activatable.index(code))
+            return H.answer_idle(7)
+
+        duel = run_scenario(setup, mode, idle=idle)
+        self.assertEqual(len(plan), state["step"], "every planned activation was made")
+        return duel
+
+    @in_both_formats
+    def test_a_second_activation_in_the_turn_gives_a_second_re_roll(self, mode):
+        modern = self._run(DICE_MODERN, mode, copies=2)
+        historical = self._run(DICE_HISTORICAL, mode, copies=2)
+        self.assertEqual(
+            [DICE_MODERN, ZORC_MODERN] * 2,
+            [c for c in chained_codes(modern) if c in (DICE_MODERN, ZORC_MODERN)],
+        )
+        self.assertEqual(
+            [DICE_HISTORICAL, ZORC_MODERN] * 2,
+            [c for c in chained_codes(historical) if c in (DICE_HISTORICAL, ZORC_MODERN)],
+        )
+        self.assertEqual(3, len(modern.seen(MSG_TOSS_DICE)), "two rolls and one re-roll: the flag is per player")
+        self.assertEqual(4, len(historical.seen(MSG_TOSS_DICE)), "two rolls and one re-roll for each activation")
+
+    @in_both_formats
+    def test_one_activation_gives_one_re_roll_like_the_modern_card(self, mode):
+        modern = self._run(DICE_MODERN, mode, copies=1)
+        historical = self._run(DICE_HISTORICAL, mode, copies=1)
+        self.assertEqual(2, len(modern.seen(MSG_TOSS_DICE)), "one roll and one re-roll")
+        self.assertEqual(2, len(historical.seen(MSG_TOSS_DICE)))
+
+
+def dark_hole_baboon(baboon: int, beast_position: str, beast: int, mode: int, copies: int = 1):
+    """Dark Hole destroys `beast` with `copies` of `baboon` in hand; returns (duel, offers)."""
+    setup = f"Debug.AddCard({DARK_HOLE},0,0,LOCATION_HAND,0,POS_FACEDOWN_DEFENSE)\n" + "".join(
+        f"Debug.AddCard({baboon},0,0,LOCATION_HAND,{1 + i},POS_FACEDOWN_DEFENSE)\n" for i in range(copies)
+    )
+    setup += f"Debug.AddCard({beast},0,0,LOCATION_MZONE,0,{beast_position})\n"
+    offers = Offers(baboon)
+    duel = scenario(mode, setup + deck_fillers())
+    duel.respond(H.MSG_SELECT_IDLECMD, H.answer_idle(5, 0))  # activate Dark Hole
+    duel.default_response(H.MSG_SELECT_IDLECMD, H.answer_idle(7))
+    duel.default_response(H.MSG_SELECT_CARD, select_minimum)
+    standing_answers(duel)
+    duel.default_response(H.MSG_SELECT_CHAIN, offers)
+    duel.run(turns=1)
+    return duel, offers
+
+
+def battle_baboon(baboon: int, mode: int):
+    """A Beast of the player's is destroyed in battle with `baboon` in hand; returns (duel, offers)."""
+    setup = (
+        f"Debug.AddCard({baboon},0,0,LOCATION_HAND,1,POS_FACEDOWN_DEFENSE)\n"
+        f"Debug.AddCard({PALE_BEAST},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+        f"Debug.AddCard({GIGANTES},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+    )
+    offers = Offers(baboon)
+    duel = run_scenario(setup, mode | DUEL_ATTACK_FIRST_TURN, idle=H.answer_idle(6), offers=offers, battle=attack_once())
+    return duel, offers
 
 
 LFLIST_DIR = Path(__file__).resolve().parents[2] / "dist" / "lflists"
@@ -411,11 +601,13 @@ def listed_codes(format_id: str) -> set[int]:
 
 @unittest.skipUnless(H.available(), "ocgcore + pinned checkouts not available")
 class RetiredCardsUseTheModernCardTest(unittest.TestCase):
-    """Round 035 removed four generated cards because Konami's period rulings show the modern card
-    behaves as the era card did (docs/research/period-rulings-generated-scripts.md). Each test asserts
-    that the lists name the modern code and no generated code, that the generated row and script are
-    gone, and that the modern card does what those rulings say. Red on the wrong behaviour: restore
-    the generated code to a list, or put back the round-031 script (the scratch runs in the report)."""
+    """Round 035 removed four generated cards, and round 036 two more (Goddess of Whim, Green Baboon) and
+    stopped three proposals (round 034's Dark Master - Zorc and its strict-nomi cards), because period
+    rulings show the modern card behaves as the era card did
+    (docs/research/period-rulings-generated-scripts.md). Each test asserts that the lists name the modern
+    code and no generated code, that no generated row or script exists, and that the modern card does
+    what those rulings say. Red on the wrong behaviour: restore the generated code to a list, or put back
+    the earlier script (the scratch runs in the report)."""
 
     def _assert_the_modern_card_is_used(self, modern: int, retired: int, formats: tuple[str, ...]):
         for format_id in formats:
@@ -540,6 +732,72 @@ class RetiredCardsUseTheModernCardTest(unittest.TestCase):
         self.assertTrue(offers.was_offered(), "destroyed by a card effect it is offered")
         self.assertEqual(1, moved(duel, GIANT_RAT, H.LOCATION_DECK, H.LOCATION_MZONE))
         self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)))
+
+
+    @in_both_formats
+    def test_goddess_of_whim_is_the_modern_card_and_is_used_once_per_turn(self, mode):
+        # The card FAQ (Konami-hosted 2008-12-15): "It can only be used once per turn, during your Main
+        # Phase." So the era card is limited to one use a turn, like the modern one.
+        self._assert_the_modern_card_is_used(GODDESS_MODERN, GODDESS_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        setup = (
+            f"local g=Debug.AddCard({GODDESS_MODERN},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            "local probe=Effect.GlobalEffect()\n"
+            "probe:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)\n"
+            "probe:SetCode(EVENT_PHASE+PHASE_END)\n"
+            "probe:SetCountLimit(1)\n"
+            'probe:SetOperation(function() Debug.Message("ATK "..g:GetAttack()) end)\n'
+            "Duel.RegisterEffect(probe,0)\n"
+        )
+        duel = run_scenario(setup, mode, idle=activate_capped(3))
+        self.assertEqual([GODDESS_MODERN], chained_codes(duel), "a second activation is refused")
+        self.assertEqual(1, len(duel.seen(MSG_TOSS_COIN)))
+        atk = [int(text.split()[1]) for _kind, text in duel.log if text.startswith("ATK ")]
+        self.assertIn(atk[0], (1900, 475), "950 ATK doubled or halved (rounded up)")
+
+    @in_both_formats
+    def test_green_baboon_is_the_modern_card_and_needs_a_face_up_beast_outside_the_damage_step(self, mode):
+        # The UDE Netrep (2007-09-28) and the card FAQ (Konami-hosted 2008-12-15): a Beast destroyed
+        # face-down does not trigger it; Konami's errata lists (2009-07-30 onward): "You cannot activate
+        # the effect of this card during the Damage Step", and only 1 copy may be Special Summoned.
+        self._assert_the_modern_card_is_used(BABOON_MODERN, BABOON_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        duel, offers = dark_hole_baboon(BABOON_MODERN, "POS_FACEDOWN_DEFENSE", PALE_BEAST, mode)
+        self.assertFalse(offers.was_offered(), "a face-down Beast does not trigger it")
+        self.assertEqual(0, moved(duel, BABOON_MODERN, H.LOCATION_HAND, H.LOCATION_MZONE))
+        duel, offers = battle_baboon(BABOON_MODERN, mode)
+        self.assertEqual(1, moved(duel, PALE_BEAST, H.LOCATION_MZONE, H.LOCATION_GRAVE))
+        self.assertFalse(offers.was_offered(), "not in the Damage Step")
+        duel, offers = dark_hole_baboon(BABOON_MODERN, "POS_FACEUP_ATTACK", PALE_BEAST, mode)
+        self.assertTrue(offers.was_offered(), "a face-up Beast destroyed by a card effect triggers it")
+        self.assertEqual(1, moved(duel, BABOON_MODERN, H.LOCATION_HAND, H.LOCATION_MZONE))
+        self.assertEqual(1, len(duel.seen(H.MSG_PAY_LPCOST)), "1000 Life Points are paid")
+        duel, offers = dark_hole_baboon(BABOON_MODERN, "POS_FACEUP_ATTACK", GIGANTES, mode)
+        self.assertFalse(offers.was_offered(), "a destroyed Rock is not a Beast")
+        duel, offers = dark_hole_baboon(BABOON_MODERN, "POS_FACEUP_ATTACK", PALE_BEAST, mode, copies=2)
+        self.assertEqual(1, moved(duel, BABOON_MODERN, H.LOCATION_HAND, H.LOCATION_MZONE), "only one copy is summoned")
+
+    @in_both_formats
+    def test_dark_master_zorc_is_the_modern_card_and_rolls_once_per_turn(self, mode):
+        # The UDE Netrep (2007-10-11): "You can only roll the 6-sided die once. Ex: If you use the effect
+        # during Main Phase 1, you would not be able to use it again during Main Phase 2."
+        self._assert_the_modern_card_is_used(ZORC_MODERN, ZORC_RETIRED, ("2010-03-edison", "2011-09-tengu"))
+        setup = (
+            f"Debug.AddCard({ZORC_MODERN},0,0,LOCATION_MZONE,0,POS_FACEUP_ATTACK,true)\n"
+            f"Debug.AddCard({GIANT_RAT},1,1,LOCATION_MZONE,0,POS_FACEUP_ATTACK)\n"
+            f"Debug.AddCard({GIANT_RAT},1,1,LOCATION_MZONE,1,POS_FACEUP_ATTACK)\n"
+        )
+        duel = run_scenario(setup, mode, idle=activate_capped(2))
+        self.assertEqual([ZORC_MODERN], chained_codes(duel), "a second roll in the turn is refused")
+        self.assertEqual(1, len(duel.seen(MSG_TOSS_DICE)))
+
+    @in_both_formats
+    def test_the_five_nomi_cards_are_the_modern_cards_and_can_be_revived_after_a_proper_summon(self, mode):
+        # Konami's rulebook, strategy article and Extreme Victory ruling (the class answer of round 035):
+        # a monster worded "can only be Special Summoned by" can be Special Summoned again once it was
+        # properly Special Summoned. All five say "can only be", none says "except".
+        for name, modern, proposed in NOMI_CARDS:
+            with self.subTest(card=name):
+                self._assert_the_modern_card_is_used(modern, proposed, ("2010-03-edison", "2011-09-tengu"))
+                self.assertIn(modern, self._reborn_candidates(modern, mode))
 
 
 if __name__ == "__main__":  # pragma: no cover

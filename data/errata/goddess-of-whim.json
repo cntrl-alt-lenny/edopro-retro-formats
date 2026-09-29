@@ -5,51 +5,58 @@
     "passcode": 67959180,
     "name": "Goddess of Whim"
   },
-  "classification": "functional",
+  "classification": "cosmetic",
+  "events": {
+    "event": {
+      "effective": {
+        "date": "2012-09-29",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN241, Legendary Collection 3: Yugi's World Mega Pack)"
+      },
+      "transitions": [
+        {
+          "kind": "cosmetic",
+          "axis": null,
+          "historical_text": "Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.",
+          "modern_text": "Once per turn: You can toss a coin and call Heads or Tails. If you call it right, double this card's ATK during this turn. If you call it wrong, halve its ATK during this turn.",
+          "summary": "Wording only, on the period card rulings (round 036). The era text (\"Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.\") carries no use limit and the errata'd text prefixes \"Once per turn:\", but the UDE/Konami card FAQ (Konami-hosted 2008-12-15, page F-H) rules: \"\"Goddess of Whim's\" effect is an Ignition Effect. It can only be used once per turn, during your Main Phase.\" Under the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. None of Konami's errata lists (compiled 2009-07-30, 2010-01-05, 2010-11-05) names the card. So the era card and the errata'd card are used once per turn alike. No difference between the era card and the modern card is established.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-15-fh",
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05"
+          ]
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [],
   "implementation_metadata": [
     {
       "events": [],
-      "status": "partial",
-      "tested": true,
-      "reason": "Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000004.json; passcode 600000004). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.",
-      "gap": {
-        "upstream_checked": true,
-        "behavioural_impact": "In a period format EDOPro allows only one coin toss per turn, so a player cannot chain repeated activations to push Goddess of Whim's ATK past 3800 (or gamble it down) the way the era text permits."
-      }
+      "status": "complete",
+      "tested": false,
+      "reason": "Round 036: the generated card 600000004 (round 031) was removed and its number retired. On the UDE/Konami card FAQ, counted under the owner's decision of 2026-09-29, the era card is used once per turn, as the modern card, so the modern implementation is used; no script or engine test is needed for it."
     }
   ],
   "reference_identities": [],
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "upstream_implementations is empty; no historical variant of 67959180 exists upstream. The English lineage has only two versions: v0 (MP1-003, McDonald's Promotional Cards, 2002-12-20) and v1 (LCYW-EN241, 2012-09-29), so v0 is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). The pinned cards.cdb text matches v1 exactly. Goddess of Whim is not on the EdisonFormat.com Functional Errata list, so the once-per-turn addition is corroborated only by the lineage; the list does document the same pattern for other pre-2011 cards (Catapult Turtle, Brionac, Treeborn Frog \"no once-per-turn restriction in Edison\"), which is context, not evidence about this card."
+    "notes": "upstream_implementations is empty; no historical variant of 67959180 exists upstream. The English lineage has only two versions: v0 (MP1-003, McDonald's Promotional Cards, 2002-12-20) and v1 (LCYW-EN241, 2012-09-29), so v0 is the text in force for both GOAT (2005-04-01) and Edison (2010-04-24). The pinned cards.cdb text matches v1 exactly. Goddess of Whim is not on the EdisonFormat.com Functional Errata list, so the once-per-turn addition is corroborated only by the lineage; the list does document the same pattern for other pre-2011 cards (Catapult Turtle, Brionac, Treeborn Frog \"no once-per-turn restriction in Edison\"), which is context, not evidence about this card.\n\nRound 036 (2026-09-29) correction. The round-031 reading (no use limit, so repeated activations) rested on the printed text alone, as this record's earlier review says. The UDE/Konami card FAQ (Konami-hosted 2008-12-15, page F-H; the entry is not on the UDE page of 2005-07-01 and is identical on the UDE-hosted copy of 2009-02-26) says: \"\"Goddess of Whim's\" effect is an Ignition Effect. It can only be used once per turn, during your Main Phase.\" Under the owner's decision of 2026-09-29 (docs/state.md, \"Period rulings\") a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. Konami's errata lists of 2009-07-30, 2010-01-05 and 2010-11-05 were searched by name and do not list the card. The era card is therefore used once per turn, as the modern card. Evidence and its limits: docs/research/period-rulings-generated-scripts.md, section 6.3 and the round-036 section. The erratum (2012-09-29) follows both snapshots. Superseded summary, kept verbatim: \"Functional erratum: the era text \"Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.\" carries no activation limit, so the Ignition effect may be activated more than once in the same Main Phase, each resolution again doubling or halving the card's current ATK. The errata'd text prefixes \"Once per turn:\", a hard once-per-turn cap. The remaining rewording (\"You can\", \"If you call it right, double this card's ATK\") is PSCT.\" Superseded implementation note, kept verbatim: \"Round 031: implemented by a project-authored script under the custom-script strategy (data/custom-cards/c600000004.json; passcode 600000004). Previously recorded as a known gap with gap_reason \"Project Ignis ships no historical implementation of this card; reproducing the era behaviour needs a custom script and a reserved passcode\" (gap_sources ignis-babelcdb, yugipedia-card-errata). Status is partial, not complete: the custom card's not_reproduced list names what the script does not establish.\" Superseded gap statement, kept verbatim: \"In a period format EDOPro allows only one coin toss per turn, so a player cannot chain repeated activations to push Goddess of Whim's ATK past 3800 (or gamble it down) the way the era text permits.\""
   },
   "sources": [
     "yugipedia-card-errata",
     "ignis-babelcdb",
-    "yugipedia-set-pages"
-  ],
-  "event": {
-    "effective": {
-      "date": "2012-09-29",
-      "precision": "day",
-      "status": "reported",
-      "basis": "TCG release of the first printing carrying the errata'd text (LCYW-EN241, Legendary Collection 3: Yugi's World Mega Pack)"
-    },
-    "kind": "functional",
-    "axis": null,
-    "historical_text": "Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.",
-    "modern_text": "Once per turn: You can toss a coin and call Heads or Tails. If you call it right, double this card's ATK during this turn. If you call it wrong, halve its ATK during this turn.",
-    "summary": "Functional erratum: the era text \"Toss a coin and call Heads or Tails. Call it right and this card's ATK will be doubled during this turn. Call it wrong and it will be halved during this turn.\" carries no activation limit, so the Ignition effect may be activated more than once in the same Main Phase, each resolution again doubling or halving the card's current ATK. The errata'd text prefixes \"Once per turn:\", a hard once-per-turn cap. The remaining rewording (\"You can\", \"If you call it right, double this card's ATK\") is PSCT.",
-    "sources": [
-      "yugipedia-card-errata",
-      "ignis-babelcdb",
-      "yugipedia-set-pages"
-    ]
-  },
-  "coverage": {
-    "kind": "custom-script",
-    "historical_passcode": 600000004,
-    "script": "data/custom-cards/c600000004.lua"
-  }
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-errata-list-2009-07-30",
+    "konami-errata-list-2010-01-05",
+    "konami-errata-list-2010-11-05"
+  ]
 }

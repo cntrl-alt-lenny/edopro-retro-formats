@@ -37,7 +37,10 @@ from .helpers import (
     REPO_ROOT,
     RETIRED_PASSCODES,
     ROUND_035_RETIRED,
+    ROUND_036_ADDED,
+    ROUND_036_RETIRED,
     TENGU_GENERATED_PASSCODES,
+    TENGU_GENERATED_PASSCODES_NOW,
     TempRepoTest,
     card,
     change,
@@ -70,17 +73,29 @@ class LiveGeneratedOutputTest(unittest.TestCase):
     def test_the_repository_generates_exactly_these_cards(self):
         # Round 035 removed Metalzoa (600000001), Rise of the Snake Deity (600000007), Malefic
         # Blue-Eyes White Dragon (600000008) and Soul Rope (600000009): Konami's period rulings
-        # show the modern card behaves as the era card did. Their numbers, 600000003 and round
-        # 034's 600000010-600000017 are retired (RETIRED_PASSCODES) and are never assigned again.
+        # show the modern card behaves as the era card did. Round 036 removed Goddess of Whim
+        # (600000004) and Green Baboon (600000006) for the same reason, under the owner's decision
+        # that UDE-era rulings count, and generated Dice Re-Roll (600000016), Machina Peacekeeper
+        # (600000018), Machina Gearframe (600000019), Elemental HERO Chaos Neos (600000020) and
+        # Treeborn Frog (600000021), each supported by a ruling. Every retired number is in
+        # RETIRED_PASSCODES and is never assigned again.
         self.assertEqual(
             [
                 (600000002, "erratum-super-vehicroid-stealth-union"),
-                (600000004, "erratum-goddess-of-whim"),
                 (600000005, "erratum-strike-ninja"),
-                (600000006, "erratum-green-baboon-defender-of-the-forest"),
+                (600000016, "erratum-dice-re-roll"),
+                (600000018, "erratum-machina-peacekeeper"),
+                (600000019, "erratum-machina-gearframe"),
+                (600000020, "erratum-elemental-hero-chaos-neos"),
+                (600000021, "erratum-treeborn-frog"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
+        for erratum_id, (_modern, generated) in {**ROUND_036_ADDED}.items():
+            self.assertIn(generated, {c.passcode for c in self.cards}, erratum_id)
+        for erratum_id, (_modern, generated) in ROUND_036_RETIRED.items():
+            self.assertNotIn(generated, {c.passcode for c in self.cards}, erratum_id)
+            self.assertIn(generated, RETIRED_PASSCODES)
 
     def test_every_live_record_passes_the_rulings_gate(self):
         # Round 035 (part B): no generated card without a recorded rulings check. The rule
@@ -93,6 +108,33 @@ class LiveGeneratedOutputTest(unittest.TestCase):
                 check = c.raw["rulings_check"]
                 self.assertTrue(check["difference"].strip())
                 self.assertTrue(check["searched"], "an empty search is not a search")
+
+    def test_the_registered_ruling_classes_the_decision_relies_on(self):
+        # Round 036, part A: the owner's period-rulings decision covers a source only when the
+        # registry says it is a UDE-era ruling, and only a Konami document can replace one. The
+        # registry is data; this pins the classes, so a source cannot drift into the decision.
+        classes = {sid: source.raw.get("ruling_class") for sid, source in self.repo.global_sources.items()}
+        ude = {sid for sid, cls in classes.items() if cls == "ude-era-ruling"}
+        konami = {sid for sid, cls in classes.items() if cls == "konami-document"}
+        for sid in (
+            "ude-card-rulings-archive",
+            "ude-card-faq-2009-02-26-uz",
+            "ude-judge-list-zorc-2007",
+            "ude-judge-list-snake-deity-2007",
+            "ude-judge-list-green-baboon-2007",
+            "konami-card-faq-2008-12-15-fh",
+        ):
+            self.assertIn(sid, ude)
+        for sid in (
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-official-rulebook-v71-2010",
+            "konami-extreme-victory-rulings-2011-05",
+        ):
+            self.assertIn(sid, konami)
+        self.assertEqual(set(), ude & konami)
+        self.assertEqual(set(), set(classes.values()) - {None, "ude-era-ruling", "konami-document"})
 
     def test_a_retired_number_is_never_assigned_again(self):
         self.assertEqual(set(), RETIRED_PASSCODES & {c.passcode for c in self.cards})
@@ -169,12 +211,11 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         """Sixteen rows: the live cards under fresh passcodes. Round 034's data made the file span
         several pages; after round 035 the live file holds four rows and fits in three, so the
         page-splitting behaviour these tests are about needs rows of its own."""
-        cards = [
-            dataclasses.replace(c, passcode=600000900 + i * 4 + n, name=f"{c.name} copy {i}")
-            for i in range(4)
-            for n, c in enumerate(self.cards)
+        # Round 036: the live file holds seven rows, so the sixteen are the live cards cycled.
+        return [
+            dataclasses.replace(c, passcode=600000900 + i, name=f"{c.name} copy {i}")
+            for i, c in ((i, self.cards[i % len(self.cards)]) for i in range(16))
         ]
-        return cards
 
     @staticmethod
     def _unused_ranges(data):
@@ -252,13 +293,15 @@ class LiveGeneratedOutputTest(unittest.TestCase):
 
     def test_tengu_list_uses_exactly_the_cards_whose_state_applies_at_its_snapshot(self):
         # The generated cards whose record puts the same historical state at Tengu's snapshot
-        # (2011-09-17) as at Edison's: Goddess of Whim, Strike Ninja and Green Baboon. Super
+        # (2011-09-17) as at Edison's: Strike Ninja and the five cards round 036 added. Super
         # Vehicroid - Stealth Union is not among them (its erratum, 2011-06-01, predates Tengu's
-        # snapshot), and neither was Metalzoa (2011-08-13) before round 035 removed it.
-        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in TENGU_GENERATED_PASSCODES])
-        self.assertEqual(TENGU_GENERATED_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
+        # snapshot), and neither was Metalzoa (2011-08-13) before round 035 removed it. Round 031's
+        # Goddess of Whim and Green Baboon were among them until round 036 removed them.
+        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in TENGU_GENERATED_PASSCODES_NOW])
+        self.assertEqual(TENGU_GENERATED_PASSCODES_NOW, {c.passcode for c in self.cards} & set(tengu.entries))
+        self.assertEqual({600000005}, TENGU_GENERATED_PASSCODES & TENGU_GENERATED_PASSCODES_NOW)
         for c in self.cards:
-            if c.passcode not in TENGU_GENERATED_PASSCODES:
+            if c.passcode not in TENGU_GENERATED_PASSCODES_NOW:
                 with self.subTest(passcode=c.passcode):
                     self.assertIn(self.repo.errata[c.erratum].modern_card.passcode, tengu.entries)
 
@@ -296,11 +339,12 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         # Round 032: the round-031 scripts that measured close to Project Ignis's are derived
         # from them and AGPL-3.0-or-later; the one that measured independent stays original and
         # MIT. Round 035 removed the other original scripts (Metalzoa, Malefic Blue-Eyes) and
-        # two derived ones (Rise of the Snake Deity, Soul Rope).
+        # two derived ones (Rise of the Snake Deity, Soul Rope); round 036 removed two more derived
+        # ones (Goddess of Whim, Green Baboon) and added five, all derived.
         kinds = {c.passcode: c.raw["authorship"]["kind"] for c in self.cards}
         self.assertEqual({600000002}, {p for p, k in kinds.items() if k == "original"})
         self.assertEqual(
-            {600000004, 600000005, 600000006},
+            {600000005, 600000016, 600000018, 600000019, 600000020, 600000021},
             {p for p, k in kinds.items() if k == "derived"},
         )
         for c in self.cards:
@@ -858,6 +902,122 @@ class CustomCardValidationTest(TempRepoTest):
         errors, warnings = self._codes()
         self.assertEqual(set(), errors)
         self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    # -- the owner's period-rulings decision (round 036, part A) -------------
+
+    def _register_ruling_sources(self, **overrides):
+        """The temp registry plus one UDE-era ruling, one Konami document and, for the
+        negative cases, one Konami document that is not a ruling class of its own."""
+        sources = [
+            {"id": "test-source", "kind": "other", "title": "Test source", "url": "https://example.invalid"},
+            {"id": "test-ude-ruling", "kind": "official", "title": "A UDE card FAQ", "ruling_class": "ude-era-ruling"},
+            {"id": "test-konami-list", "kind": "official", "title": "A Konami errata list", "ruling_class": "konami-document"},
+        ]
+        for source in sources:
+            source.update(overrides.get(source["id"], {}))
+        self.write("data/sources.json", {"sources": sources})
+
+    def _decided(self, **changes):
+        """A finding in force by the owner's decision: a UDE-era source, the statement that no
+        later Konami document replaces it, and the Konami documents checked."""
+        base = dict(
+            source="test-ude-ruling",
+            in_force="by-decision",
+            in_force_basis="Owner decision 2026-09-29 (docs/state.md): UDE-era rulings count at the snapshots.",
+            later_konami_replacement="none-found",
+            later_documents_checked=["test-konami-list"],
+        )
+        base.update(changes)
+        return self._finding(**base)
+
+    def test_a_ude_era_ruling_can_be_recorded_as_in_force_by_the_owners_decision(self):
+        self._seed(rulings_check=self._rulings_check(self._decided()))
+        self._register_ruling_sources()
+        validator = _validate(self.root)
+        self.assertEqual([], validator.errors, "\n".join(map(str, validator.errors)))
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", {f.code for f in validator.warnings})
+
+    def test_the_decision_covers_only_a_source_marked_as_a_ude_era_ruling(self):
+        for name, source, overrides in (
+            ("a source with no ruling class", "test-source", {}),
+            ("a Konami document", "test-konami-list", {}),
+        ):
+            with self.subTest(source=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(source=source)))
+                self._register_ruling_sources(**overrides)
+                errors, _ = self._codes()
+                self.assertIn("custom-card.decision-source-not-ude", errors)
+
+    def test_the_decision_must_say_no_later_konami_document_replaces_the_ruling(self):
+        for name, changes in (
+            ("no replacement statement", dict(later_konami_replacement=None)),
+            ("a replacement statement of another value", dict(later_konami_replacement="replaced")),
+            ("no documents checked", dict(later_documents_checked=None)),
+            ("an empty list of documents checked", dict(later_documents_checked=[])),
+            ("documents checked that are not a list", dict(later_documents_checked="test-konami-list")),
+            ("a blank basis", dict(in_force_basis=" ")),
+        ):
+            with self.subTest(case=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(**changes)))
+                self._register_ruling_sources()
+                errors, _ = self._codes()
+                self.assertTrue(
+                    {"custom-card.decision-later-documents-missing", "custom-card.rulings-check-malformed"} & errors,
+                    errors,
+                )
+
+    def test_the_documents_checked_must_be_registered_konami_documents(self):
+        for name, documents in (
+            ("a source with no ruling class", ["test-source"]),
+            ("a UDE-era ruling, which is not a later Konami document", ["test-ude-ruling"]),
+            ("one Konami document and one that is not", ["test-konami-list", "test-source"]),
+        ):
+            with self.subTest(case=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(later_documents_checked=documents)))
+                self._register_ruling_sources()
+                errors, _ = self._codes()
+                self.assertIn("custom-card.decision-document-not-konami", errors)
+        with self.subTest(case="an unregistered document"):
+            self._seed(rulings_check=self._rulings_check(self._decided(later_documents_checked=["not-a-source"])))
+            self._register_ruling_sources()
+            errors, _ = self._codes()
+            self.assertIn("sources.unresolved", errors)
+
+    def test_a_contradicting_finding_in_force_by_decision_still_needs_an_owner_decision(self):
+        # A decision about which rulings count is not a decision to ship a contradicted script.
+        contradicting = self._decided(finding="contradicts")
+        self._seed(rulings_check=self._rulings_check(contradicting))
+        self._register_ruling_sources()
+        errors, warnings = self._codes()
+        self.assertIn("custom-card.contradicting-ruling-unaccepted", errors)
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+        decision = {"date": "2026-10-01", "decision": "Keep it.", "recorded_in": "docs/state.md"}
+        self._seed(rulings_check=self._rulings_check(contradicting, owner_decision=decision))
+        self._register_ruling_sources()
+        errors, _ = self._codes()
+        self.assertEqual(set(), errors)
+
+    def test_by_decision_is_not_a_way_around_the_other_in_force_values(self):
+        # `shown` still needs its basis and `not-shown` still leaves the warning: the decision
+        # adds a value, it loosens neither.
+        self._seed(rulings_check=self._rulings_check(self._finding(in_force="shown", in_force_basis=None)))
+        errors, _ = self._codes()
+        self.assertIn("custom-card.rulings-check-malformed", errors)
+        unshown = self._finding(source="test-ude-ruling", finding="contradicts", in_force="not-shown", in_force_basis=None)
+        self._seed(rulings_check=self._rulings_check(unshown))
+        self._register_ruling_sources()
+        errors, warnings = self._codes()
+        self.assertEqual(set(), errors)
+        self.assertIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    def test_a_source_ruling_class_is_a_closed_set(self):
+        self._seed()
+        self._register_ruling_sources(**{"test-ude-ruling": {"ruling_class": "ude"}})
+        errors, _ = self._codes()
+        self.assertIn("sources.bad-ruling-class", errors)
+        self._register_ruling_sources(**{"test-ude-ruling": {"ruling_class": None}})
+        errors, _ = self._codes()
+        self.assertNotIn("sources.bad-ruling-class", errors)
 
 
     def test_duplicate_passcode_fails_to_load(self):

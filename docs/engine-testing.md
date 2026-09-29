@@ -40,12 +40,12 @@ network access.
 
 ```bash
 python scripts/engine_env.py prepare --dest ~/.cache/retroformats   # network, ~1-2 min
-python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 51
+python scripts/engine_env.py run --dest ~/.cache/retroformats --expect-at-least 62
 ```
 
 `prepare` fetches and verifies the pinned inputs and compiles the core (it needs
 `git`, `make` and a C++17 compiler); `run` re-verifies them offline, then runs
-`tests/engine` and **fails on any skip**, failure or error, or if fewer than 51
+`tests/engine` and **fails on any skip**, failure or error, or if fewer than 62
 tests execute. The layout it produces is `DEST/repos/babelcdb`,
 `DEST/repos/cardscripts` and `DEST/engine/libocgcore.{so,dylib}`.
 
@@ -177,9 +177,10 @@ behaviour — is what the test locks down.
 ### Generated historical cards
 
 `tests/engine/test_edison_historical_scripts.py` (Stealth Union: Edison only) and
-`tests/engine/test_shared_historical_scripts.py` (Goddess of Whim, Strike Ninja and Green
-Baboon, whose historical state also applies at Tengu; and one test for each of the four
-cards round 035 removed) cover the four cards this project writes itself (`docs/errata.md`,
+`tests/engine/test_shared_historical_scripts.py` (Strike Ninja, Dice Re-Roll, Machina
+Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos and Treeborn Frog, whose historical
+state also applies at Tengu; and a test for each card removed or never shipped because the
+modern card is right) cover the seven cards this project writes itself (`docs/errata.md`,
 "Generated historical cards"). The harness merges
 `dist/databases/*.cdb` into its card data and searches `dist/scripts/` after the
 upstream folders, as a client with `data_path`/`script_path` pointed at `dist/` would
@@ -191,9 +192,11 @@ is that plus the 0-ATK rule):
 | Card | Behaviour asserted | Historical (generated) | Modern |
 |---|---|---|---|
 | Super Vehicroid - Stealth Union | equip effect | only a monster you control; unusable with none | any face-up monster, either side |
-| Goddess of Whim | using the coin-toss effect again in the same turn | offered again | not offered |
 | Strike Ninja | two copies, each using its effect | both may use it | only one use in the turn |
-| Green Baboon | a face-down Beast destroyed | offered, Special Summons itself | not offered |
+| Dice Re-Roll | a second copy activated before a second roll | the second roll can be re-rolled | it cannot |
+| Machina Peacekeeper, Machina Gearframe | equipping to a Machine that carries another Union monster, and a Union equipped to a Machine that carries the card | refused | offered |
+| Elemental HERO Chaos Neos | the coin effect in Main Phase 2 | offered | not offered |
+| Treeborn Frog | its Standby Phase effect after a negated activation | offered again | not offered |
 
 Round 035 (`docs/research/period-rulings-generated-scripts.md`) removed four generated cards
 because Konami's period rulings show the modern card behaves as the era card did, and
@@ -201,10 +204,16 @@ corrected a fifth. A **retired card** has one test (`RetiredCardsUseTheModernCar
 lists name the modern code and no generated code, the generated row and script are gone, and
 the modern card does what the rulings say (Metalzoa and Malefic Blue-Eyes are legal Monster
 Reborn targets after a proper Summon; Rise of the Snake Deity and Soul Rope are not offered
-when a monster is destroyed in battle, and are when it is destroyed by a card effect). Green
-Baboon's Damage Step activation was removed: it is offered for neither card when a Beast is
-destroyed in battle, and with two copies in hand one is Special Summoned, like the modern
-card (Konami's errata lists).
+when a monster is destroyed in battle, and are when it is destroyed by a card effect). Round
+036 (the owner's decision that UDE-era rulings count) removed Goddess of Whim and Green
+Baboon the same way, and stopped Dark Master - Zorc and five strict-nomi cards from being
+generated (one test each for Goddess, Baboon and Zorc, and one for the five: the modern card
+is the list's code, no generated row or script exists, and it does what the rulings say). The
+engine floor moved 51 to 62: six tests removed (Goddess of Whim's and Green Baboon's) and
+seventeen added (Dice Re-Roll 2, Machina Peacekeeper 3, Machina Gearframe 3, Elemental HERO
+Chaos Neos 2, Treeborn Frog 3, and the four modern-card tests). Dice Re-Roll's test activates a
+copy before each of two rolls; it never re-rolls an already re-rolled result, which no ruling
+covers (round 034's scenario did, and was dropped).
 
 Beside each difference are control scenarios (equip, piercing damage,
 attack-all, destruction by a card effect, the coin toss, banish and return) that must behave the same, so a script cannot pass by doing

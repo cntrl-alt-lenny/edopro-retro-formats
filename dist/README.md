@@ -8,8 +8,8 @@ Everything in this directory is **generated** from the canonical data in `data/`
 
 **This repository is not self-contained.** All three generated whitelists reference
 passcodes that exist only in **upstream** Project Ignis repositories, not in `dist/`
-or anywhere else in this repo. The one exception is **four cards**: all four are in the Edison list and three of them
-are also in the Tengu list (`600000002` and `600000004`–`600000006`,
+or anywhere else in this repo. The one exception is **seven cards**: all seven are in the Edison list and six of them
+are also in the Tengu list (`600000002`, `600000005`, `600000016` and `600000018`–`600000021`,
 below), which this repository itself generates into `dist/databases/` and
 `dist/scripts/`. The counts here are upstream identities only
 (codes ≥ `504700000` and < `600000000`):
@@ -90,21 +90,33 @@ is already in force at Tengu, so Tengu keeps the modern card for it.
 | passcode | modern card (alias) | lists | what differs from the modern card |
 |---|---|---|---|
 | `600000002` | Super Vehicroid - Stealth Union (`3897065`) | Edison | its equip effect selects only a monster you control |
-| `600000004` | Goddess of Whim (`67959180`) | Edison, Tengu | its coin-toss effect has no once-per-turn limit |
 | `600000005` | Strike Ninja (`41006930`) | Edison, Tengu | each copy may use its effect once per turn, not one use per turn across all copies |
-| `600000006` | Green Baboon, Defender of the Forest (`46668237`) | Edison, Tengu | can be Special Summoned when a face-down Beast is destroyed (a period ruling from the UDE card FAQ says otherwise, and is not shown to have held at the snapshots) |
+| `600000016` | Dice Re-Roll (`83241722`) | Edison, Tengu | each activation grants its own re-roll, not one re-roll per turn however many copies are activated (the card FAQ) |
+| `600000018` | Machina Peacekeeper (`78349103`) | Edison, Tengu | a monster can only be equipped with 1 Union monster at a time (Konami's Advanced Game Play FAQ and its Cyber Phoenix entry; Delta Tri's ruling, 2010-04-30) |
+| `600000019` | Machina Gearframe (`42940404`) | Edison, Tengu | the same Union Condition |
+| `600000020` | Elemental HERO Chaos Neos (`17032740`) | Edison, Tengu | its coin effect can be used in Main Phase 2 as well as Main Phase 1 (Konami's rulebook: an Ignition Effect naming no phase) |
+| `600000021` | Treeborn Frog (`12538374`) | Edison, Tengu | its Standby Phase effect can be activated again in the same Standby Phase after a negation (the card FAQ), not once per turn |
 
 Round 035 checked every generated card against period rulings and removed four of the
 original eight because Konami's rulebook, errata lists and rulings show the modern card
 behaves as the era card did: Metalzoa (`600000001`) and Malefic Blue-Eyes White Dragon
 (`600000008`) could be revived after one proper Special Summon, and neither Rise of the
 Snake Deity (`600000007`) nor Soul Rope (`600000009`) could be activated in the Damage
-Step. Green Baboon's Damage Step activation was removed for the same reason. The lists use
-the modern codes for those four again (`docs/research/period-rulings-generated-scripts.md`).
+Step. The lists use the modern codes for those four again.
+
+Round 036 applied the owner's decision of 2026-09-29 (a script follows period rulings; UDE-era
+card rulings count at Edison and Tengu unless a later Konami document replaced them). It removed
+two more: Goddess of Whim (`600000004`, the card FAQ says once per turn) and Green Baboon
+(`600000006`, Konami's lists bar its Damage Step activation and the Netrep answer and card FAQ
+require a face-up Beast). It added five, each resting on a quoted ruling: Dice Re-Roll, Machina
+Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos and Treeborn Frog. The lists use the
+modern codes for Goddess of Whim and Green Baboon again
+(`docs/research/period-rulings-generated-scripts.md`).
 
 **Retired numbers, never assigned again:** `600000001`, `600000003` (Night Assailant, held back,
-`docs/roadmap.md` item 7), `600000007`, `600000008`, `600000009`, and `600000010`–`600000017`
-(round 034's eight cards, which were never merged: period rulings did not support them).
+`docs/roadmap.md` item 7), `600000004`, `600000006`, `600000007`, `600000008`, `600000009`,
+`600000010`–`600000015` (round 034's five strict-nomi cards and Dark Master - Zorc: the modern
+card is right) and `600000017` (Second Coin Toss: no ruling establishes a third behaviour).
 
 **In a duel** a generated card *is* its modern card for every name and code check (the
 `alias`), while stats, text and script come from its own row. **In deck building**
@@ -117,7 +129,7 @@ gives the modern card.
 | scripts | licence | origin |
 |---|---|---|
 | `c600000002.lua` | MIT | original: written for this repository, and measured as different from Project Ignis's script for the same card |
-| `c600000004.lua`, `c600000005.lua`, `c600000006.lua` | **AGPL-3.0-or-later** | derived: Project Ignis's CardScripts `official/` script for the modern card, with only the period difference applied; each header names the upstream file and revision, Project Ignis's copyright notice, and what was changed and when |
+| `c600000005.lua`, `c600000016.lua`, `c600000018.lua`, `c600000019.lua`, `c600000020.lua`, `c600000021.lua` | **AGPL-3.0-or-later** | derived: Project Ignis's CardScripts `official/` script for the modern card, with only the period difference applied; each header names the upstream file and revision, Project Ignis's copyright notice, and what was changed and when |
 
 Everything else in this repository, including the rest of `dist/`, is MIT. The
 generated `dist/scripts/LICENSES.md` lists each script's licence and origin, and

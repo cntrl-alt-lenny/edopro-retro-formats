@@ -18,7 +18,7 @@ from retroformats.model import RESERVED_PASSCODE_RANGE, Coverage, ErratumV2, Poo
 from retroformats.releases import ReleaseIndex, evaluate_cutoff
 from retroformats.repo import Repository
 
-from .helpers import ROUND_031_GENERATED, TENGU_GENERATED
+from .helpers import ROUND_031_GENERATED, ROUND_036_ADDED, ROUND_036_RETIRED, TENGU_GENERATED
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -165,20 +165,26 @@ class TenguResearchGateTest(unittest.TestCase):
         ambiguous = [s for s in selections.values() if s.chronology == "ambiguous"]
         self.assertEqual(126, len(determinate))
         self.assertEqual(170, len(ambiguous))
-        # Round 035: Rise of the Snake Deity and Malefic Blue-Eyes are modern-correct now (33
-        # modern before it) and Soul Rope is a known gap again.
+        # Round 035: Rise of the Snake Deity and Malefic Blue-Eyes were modern-correct (33 modern
+        # before it) and Soul Rope a known gap again. Round 036 made eight more records
+        # modern-correct (Goddess of Whim, Green Baboon, Dark Master - Zorc and the five strict-nomi
+        # cards): 43 modern.
         modern = sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate)
-        self.assertEqual(35, modern)
-        self.assertEqual(33, modern - 2)
+        self.assertEqual(43, modern)
+        self.assertEqual(35, modern - 8)
+        self.assertEqual(33, modern - 8 - 2)
         self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
         # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their
         # sum. Round 035 took three of the six back out (Rise and Malefic are modern-correct,
-        # Soul Rope is a known gap again).
+        # Soul Rope is a known gap again). Round 036: six known gaps are modern-correct (Zorc and
+        # the five nomi cards), five became custom-script, and Goddess of Whim and Green Baboon left
+        # custom-script for modern-correct: 22 known gaps and 6 custom-script records.
         known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
         custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
-        self.assertEqual((33, 3), (known_gap, custom_script))
-        self.assertEqual((32, 6), (known_gap - 1, custom_script + 3))
-        self.assertEqual(38, known_gap + custom_script + 2)
+        self.assertEqual((22, 6), (known_gap, custom_script))
+        self.assertEqual((33, 3), (known_gap + 6 + 5, custom_script - 5 + 2))
+        self.assertEqual((32, 6), (known_gap + 6 + 5 - 1, custom_script - 5 + 2 + 3))
+        self.assertEqual(38, known_gap + 6 + 5 + (custom_script - 5 + 2) + 2)
         self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
         self.assertEqual(126, 33 + 52 + 38 + 3)
         self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
@@ -213,11 +219,13 @@ class TenguResearchGateTest(unittest.TestCase):
         generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
         self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
         self.assertEqual(52, len(upstream))
-        # Round 035: three of round 031's six (Rise, Malefic, Soul Rope) are not substitutions any
-        # more; the other three still are.
+        # Round 035: three of round 031's six (Rise, Malefic, Soul Rope) were not substitutions any
+        # more. Round 036: Goddess of Whim and Green Baboon are not either, and five cards are: Strike
+        # Ninja and Round 036's five.
         self.assertEqual(TENGU_GENERATED, generated)
         self.assertEqual(6, len(ROUND_031_GENERATED))
-        self.assertEqual(3, len(generated))
+        self.assertEqual(6, len(generated))
+        self.assertEqual(3, len(generated) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
 
         audit = self.packet["release_certification"]["erratum_audit_at_snapshot"]
         self.assertEqual(79, audit["unresolved_candidate_state_occurrences"])

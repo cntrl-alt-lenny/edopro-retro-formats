@@ -1,0 +1,96 @@
+{
+  "$schema": "../../schemas/custom-card.schema.json",
+  "passcode": 600000016,
+  "alias": 83241722,
+  "erratum": "erratum-dice-re-roll",
+  "events": [],
+  "name": "Dice Re-Roll (Retro Formats)",
+  "desc": "Once this turn, negate 1 six-sided die roll and re-roll it.",
+  "cdb": {
+    "ot": 8,
+    "setcode": 0,
+    "type": 4,
+    "atk": 0,
+    "def": 0,
+    "level": 0,
+    "race": 0,
+    "attribute": 0,
+    "category": 0
+  },
+  "cdb_provenance": {
+    "source": "ignis-babelcdb",
+    "detail": "type, atk, def, level, race, attribute and setcode are copied from the row for the modern card (83241722) in cards.cdb at the ignis-babelcdb revision pinned in data/sources.json. They are NOT independently checked against a period printing: a stat change between the period card and the modern one would not be reproduced. category (a client search filter, not gameplay) is left 0 rather than copied. ot is 8 (SCOPE_ILLEGAL) as for every historical-implementation row upstream."
+  },
+  "script": "data/custom-cards/c600000016.lua",
+  "authorship": {
+    "kind": "derived",
+    "licence": "AGPL-3.0-or-later",
+    "upstream": {
+      "source": "ignis-cardscripts",
+      "path": "official/c83241722.lua",
+      "revision": "383bfbd62cefc0a28e075acfb78b0bb8203b94c7",
+      "copyright": "Copyright (C) 2020  Project Ignis contributors. See version history and author credit line for each file."
+    },
+    "modified": {
+      "date": "2026-09-29",
+      "summary": "each activation grants its own re-roll (the once-per-turn record moves from the player to the effect that the activation registers), as the period text names no per-turn limit and the card FAQ lets each activation's effect be used once; the effect description is read from the modern card's strings."
+    },
+    "note": "Derived from Project Ignis's script for the modern card, official/c83241722.lua at the ignis-cardscripts pin, by applying only the period difference the erratum record states (the summary above) and pointing the effect description at the modern card's strings, because this generated row carries none. It is licensed AGPL-3.0-or-later like its upstream (LICENSES/AGPL-3.0-or-later.txt); the rest of this repository stays MIT."
+  },
+  "fidelity": "approximate",
+  "not_reproduced": [
+    "The record's sources establish that the period text carries no \"once per turn\" rider (2013 added \"You can only gain this effect once per turn\") and the card FAQ says each activation's effect can be used once in the turn it was activated. They do not say how period rulings treated a re-roll of a roll that was itself a re-roll; the script lets another copy's effect answer the re-rolled result, as the engine's ordinary event nesting does. That case is not tested, and no ruling read covers it.",
+    "The period text is \"negate 1 six-sided die roll and re-roll it\"; upstream's script offers the re-roll for any die roll by either player and re-rolls all the dice of the roll, and the script inherits that. The card FAQ says it can re-roll an Archfiend's roll and a roll in the Damage Step and that it negates both rolls of \"Roulette Barrel\", which the inherited behaviour matches, but whether the era effect covered the opponent's rolls is not in the sources and is not tested.",
+    "The yes/no question that offers the re-roll is upstream's; declining it leaves the copy's re-roll unused for the rest of the turn, as upstream's flag did."
+  ],
+  "rulings_check": {
+    "difference": "Each activation grants its own re-roll; the modern card grants a re-roll once per turn per player however many copies are activated.",
+    "checked": "2026-09-29",
+    "searched": [
+      {
+        "source": "konami-card-faq-2008-12-15-de",
+        "looked_for": "a card FAQ entry on how often the re-roll may be used",
+        "finding": "supports",
+        "passage": "You activate \"Dice Re-Roll\" before you activate the effect which will let you roll a die. Then you can use the effect of \"Dice Re-Roll\" once during the turn in which you activated it.",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The entry is the Konami-hosted copy of the UDE card FAQ (2008-12-15) and is identical on the UDE-hosted copy of 2009-02.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive"
+        ]
+      },
+      {
+        "source": "ude-card-rulings-archive",
+        "looked_for": "the same entry on the UDE page captured 2005-07-01",
+        "finding": "supports",
+        "passage": "You activate \"Dice Re-Roll\" before you activate the effect which will let you roll a die. Then you can use the effect of \"Dice Re-Roll\" once during the turn in which you activated it.",
+        "in_force": "by-decision",
+        "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it.",
+        "later_konami_replacement": "none-found",
+        "later_documents_checked": [
+          "konami-errata-list-2009-07-30",
+          "konami-errata-list-2010-01-05",
+          "konami-errata-list-2010-11-05",
+          "konami-set-rulings-archive"
+        ]
+      },
+      {
+        "source": "konami-errata-list-2010-01-05",
+        "looked_for": "the card by name; not listed (also not in the lists of 2009-07-30 and 2010-11-05, nor in the 15 Konami per-set ruling documents linked from Konami's Gameplay page on 2011-09-18)",
+        "finding": "does-not-address"
+      }
+    ]
+  },
+  "sources": [
+    "yugipedia-card-errata",
+    "yugipedia-set-pages",
+    "ignis-babelcdb",
+    "ignis-cardscripts",
+    "konami-card-faq-2008-12-15-de",
+    "ude-card-rulings-archive",
+    "konami-errata-list-2010-01-05"
+  ]
+}
