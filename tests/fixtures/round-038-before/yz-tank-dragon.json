@@ -1,0 +1,171 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-yz-tank-dragon",
+  "modern_card": {
+    "passcode": 25119460,
+    "name": "YZ-Tank Dragon"
+  },
+  "classification": "functional",
+  "events": {
+    "c0": {
+      "effective": {
+        "date": null
+      },
+      "transitions": [
+        {
+          "kind": "ruling",
+          "axis": null,
+          "historical_text": "\"Y-Dragon Head\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 face-down Monster Card on your opponent's side of the field.",
+          "modern_text": null,
+          "summary": "Era material restriction with no text counterpart: the GOAT script gathers contact-fusion material from LOCATION_MZONE only (Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE,0,nil)), while the modern script searches LOCATION_ONFIELD, so a \"Y-Dragon Head\" or \"Z-Metal Tank\" that is currently equipped as a Union monster - and therefore sits in the Spell & Trap Zone (Auxiliary.AddUnionProcedure registers its unequip effect with SetRange(LOCATION_SZONE)) - can be banished as material in the modern game but not in the period build. Upstream annotates the variant \"Only mosnters in the mzone allowed as material\". Chronology is unresolved: the printed text carries no matching change (v1 already reads \"the above cards on your side of the field\") and nothing in the packet dates when the interpretation moved.",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata"
+          ]
+        }
+      ]
+    },
+    "c1": {
+      "effective": {
+        "date": null
+      },
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "\"Y-Dragon Head\" + \"Z-Metal Tank\"This card cannot be Special Summoned except by removing from play the above cards on your side of the field; then you can Special Summon this card from your Fusion Deck (You do not use \"Polymerization\"). Discard 1 card from your hand to destroy 1 face-down Monster Card on your opponent's side of the field.",
+          "modern_text": "\"Y-Dragon Head\" + \"Z-Metal Tank\"This card can only be Special Summoned from your Fusion Deck by removing from play the above cards on your side of the field. (You do not use \"Polymerization\"). This card cannot be Special Summoned from the Graveyard. Discard 1 card from your hand to destroy 1 face-down Monster Card on your opponent's side of the field.",
+          "summary": "Functional loosening of the summoning restriction: the GOAT script passes the literal true as Fusion.AddContactProc's spsummon-condition argument, which registers a bare EFFECT_SPSUMMON_CONDITION with no value, so the card can be Special Summoned only by the contact-fusion procedure - v1's \"This card cannot be Special Summoned except by removing from play the above cards\" (full nomi). The modern script instead passes s.splimit, returning not IsLocation(LOCATION_EXTRA|LOCATION_GRAVE), which permits any Special Summon from outside the Extra Deck and the GY; that is the two-clause restriction the lineage first shows at v2 (\"can only be Special Summoned from your Fusion Deck by ...\" plus \"This card cannot be Special Summoned from the Graveyard\"), later rendered in PSCT at v4 as \"Must first be Special Summoned\". Chronology is unresolved because lineage v2 and v3 carry no printing (number and dating_set are null).",
+          "sources": [
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-card-errata",
+            "konami-card-faq-2008-12-15-uz",
+            "ude-card-faq-2009-02-26-uz",
+            "ude-card-rulings-archive",
+            "konami-card-faq-2008-12-15-fh",
+            "konami-card-faq-2008-12-15-de"
+          ],
+          "rulings_check": {
+            "difference": "Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any Special Summon from a zone other than the Extra Deck and Graveyard (two-clause text: can only be Special Summoned from the Fusion Deck by the procedure; cannot be Special Summoned from the Graveyard).",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-15-uz",
+                "looked_for": "d1: Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any…",
+                "finding": "does-not-address",
+                "passage": "These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text. So they cannot be Special Summoned by the effect of \"Magical Scientist\" or \"Summoner of Illusions\". They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
+              },
+              {
+                "source": "ude-card-faq-2009-02-26-uz",
+                "looked_for": "d1: Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any…",
+                "finding": "does-not-address",
+                "passage": "These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text. So they cannot be Special Summoned by the effect of \"Magical Scientist\" or \"Summoner of Illusions\". They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any…",
+                "finding": "does-not-address",
+                "passage": "These monsters cannot be Special Summoned EXCEPT by the way described in their text. They cannot be Special Summoned with \"Monster Reborn\", \"Magical Scientist\", etc."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-fh",
+                "looked_for": "d1: Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any…",
+                "finding": "does-not-address",
+                "passage": "You cannot select a Fusion Monster that can only be Special Summoned by the method written in its text, like \"Gladiator Beast Heraklinos\", \"Elemental Hero Grand Neos\", \"XYZ-Dragon Cannon\", or \"Evil Hero Dark Gaia\"."
+              },
+              {
+                "source": "konami-card-faq-2008-12-15-de",
+                "looked_for": "d1: Summoning restriction: era (v1) 'cannot be Special Summoned except by removing from play the above cards' is a full 'except' restriction (no other Special Summon at all); the modern script allows any…",
+                "finding": "does-not-address",
+                "passage": "When a \"Special Summon-only\" monster is removed, without returning to the hand or Deck, after it is Special Summoned properly, it can be Special Summoned by \"Dimension Distortion\"."
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "YZ-Tank Dragon in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "YZ-Tank Dragon in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:YZ-Tank Dragon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "ordering": {},
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 504700045,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB goat-entries.cdb + ProjectIgnis/CardScripts",
+        "script": "goat/c504700045.lua"
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis ships no implementation matching this version: none of the upstream historical variants in the pinned databases carries this version's card text. Reproducing it needs a custom script and a reserved passcode.",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "ignis-cardscripts"
+        ]
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "complete",
+      "tested": false
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "missing",
+      "tested": false,
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "Functional loosening of the summoning restriction: the GOAT script passes the literal true as Fusion.AddContactProc's spsummon-condition argument, which registers a bare EFFECT_SPSUMMON_CONDITION with no value, so the card can be Special Summoned only by the contact-fusion procedure - v1's \"This card cannot be Special Summoned except by removing from play the above cards\" (full nomi). The modern script instead passes s.splimit, returning not IsLocation(LOCATION_EXTRA|LOCATION_GRAVE), which permits any Special Summon from outside the Extra Deck and the GY; that is the two-clause restriction the lineage first shows at v2 (\"can only be Special Summoned from your Fusion Deck by ...\" plus \"This card cannot be Special Summoned from the Graveyard\"), later rendered in PSCT at v4 as \"Must first be Special Summoned\". Chronology is unresolved because lineage v2 and v3 carry no printing (number and dating_set are null)."
+      }
+    }
+  ],
+  "reference_identities": [],
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "Baseline is the GOAT variant, whose cdb text matches lineage v1 (DR1-EN109, 2005-03-19) apart from a line break (ratio 0.9985). Two era differences are encoded in goat/c504700045.lua and both are recorded. Verified against the checked-out sources at C:\\Users\\leona\\.cache\\retroformats\\repos\\cardscripts: in proc_fusion.lua, Fusion.CreateContactProc's fourth positional argument is the EFFECT_SPSUMMON_CONDITION value, so the variant's literal true yields a value-less condition (nomi) while the modern s.splimit is a function permitting Special Summons whose handler is not in the Extra Deck or GY (semi-nomi). CONFLICTING EVIDENCE: the pre-baseline transition v0 (MFC-054, 2003-10-10) -> v1 changed \"the above monsters on your side of the field\" to \"the above cards\", which is the wording the modern LOCATION_ONFIELD material search matches; the GOAT script's Monster-Zone-only restriction tracks v0's \"monsters\" while its own cdb text is v1's \"cards\". Recorded rather than silently resolved. CHRONOLOGY: neither change can be dated from the packet. v2 and v3 have no printing, so the version that first loosened the summon restriction cannot be dated; if the loosening in fact only took effect with v4's PSCT \"Must first be Special Summoned\" (DPRP-EN027, 2016-09-15) then both period formats would sit determinately in the old era. GOAT (2005-04-01) is on v1 either way, since DR1-EN109 released 2005-03-19 and no later printing intervenes before the snapshot; Edison (2010-04-24) cannot be placed against the undated v2/v3 - escalated. The legacy v1 representation listed the two changes as a ruling-then-functional chain for continuity, but their actual relative order is unknown. v2 therefore keeps them as separate unordered events; the resulting intermediate state (era material rule lifted, nomi restriction still in force) has no upstream implementation, hence implementation-gap. TRAILING COSMETICS after v2: v3 renames Fusion Deck to Extra Deck; v4 (DPRP-EN027, 2016-09-15) is PSCT (\"banishing\", \"you control\", \"You can discard 1 card, then target 1 face-down monster ...\") - both scripts already set EFFECT_FLAG_CARD_TARGET on the destroy effect, so the explicit \"target\" is not a targeting change; v5 (SBCB-EN086, 2020-11-26) is Graveyard -> GY and matches the pinned modern text. The REASON_COST|REASON_MATERIAL vs REASON_COST+REASON_MATERIAL and DiscardHand differences are Lua idiom only, with identical values.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, YZ-Tank Dragon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved (inference only) at Edison, unresolved (inference only) at Tengu."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "ignis-cardscripts",
+    "yugipedia-card-errata",
+    "konami-card-faq-2008-12-15-uz",
+    "ude-card-faq-2009-02-26-uz",
+    "ude-card-rulings-archive",
+    "konami-card-faq-2008-12-15-fh",
+    "konami-card-faq-2008-12-15-de"
+  ]
+}

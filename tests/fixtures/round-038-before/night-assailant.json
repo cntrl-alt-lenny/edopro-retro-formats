@@ -1,0 +1,415 @@
+{
+  "$schema": "../../schemas/erratum.schema.json",
+  "id": "erratum-night-assailant",
+  "modern_card": {
+    "passcode": 16226786,
+    "name": "Night Assailant"
+  },
+  "classification": "functional",
+  "events": {
+    "c0": {
+      "effective": {
+        "date": "2010-09-25",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of DT03-EN056 (Duel Terminal 3)"
+      },
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "FLIP: Select 1 monster on your opponent's side of the field and destroy it. When this card is sent directly from your hand to the Graveyard, return 1 Flip Effect Monster from your Graveyard to your hand.",
+          "modern_text": "FLIP: Select 1 monster your opponent controls, and destroy it. When this card is sent directly from your hand to the Graveyard, select 1 Flip Effect Monster in your Graveyard, except this card, and return it to your hand.",
+          "summary": "The hand-to-Graveyard retrieval gained a self-exclusion and an explicit selection step: AST-080 said only 'return 1 Flip Effect Monster from your Graveyard to your hand', naming no exception, so the Night Assailant just sent there is itself an eligible choice, while DT03-EN056 reads 'select 1 Flip Effect Monster in your Graveyard, except this card, and return it to your hand'. Project Ignis's pre-errata script implements the post-DT03 version - it targets and passes e:GetHandler() as the SelectTarget exception - so no upstream script reproduces the AST-era behaviour.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-16-lo",
+            "ude-card-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "Era (AST-080 wording, which names no exception): the Night Assailant that was just sent from the hand to the Graveyard is itself an eligible choice for its own return effect; the DT03-EN056 text and the modern text exclude it. Era (AST-080 'return 1 Flip Effect Monster from your Graveyard to your hand', no 'select'): the return effect does not target. DT03-EN056 and modern add an explicit selection.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d1: Era (AST-080 wording, which names no exception): the Night Assailant that was just sent from the hand to the Graveyard is itself an eligible choice for its own return effect; the DT03-EN056 text and…",
+                "finding": "contradicts",
+                "passage": "You cannot select the \"Night Assailant\" that was itself sent to the Graveyard, so there is no infinite loop.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d1: Era (AST-080 wording, which names no exception): the Night Assailant that was just sent from the hand to the Graveyard is itself an eligible choice for its own return effect; the DT03-EN056 text and…",
+                "finding": "contradicts",
+                "passage": "You cannot select the \"Night Assailant\" that was itself sent to the Graveyard, so there is no infinite loop.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d2: Era (AST-080 'return 1 Flip Effect Monster from your Graveyard to your hand', no 'select'): the return effect does not target. DT03-EN056 and modern add an explicit selection.",
+                "finding": "contradicts",
+                "passage": "Both of \"Night Assailant\"'s effects target.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d2: Era (AST-080 'return 1 Flip Effect Monster from your Graveyard to your hand', no 'select'): the return effect does not target. DT03-EN056 and modern add an explicit selection.",
+                "finding": "contradicts",
+                "passage": "Both of \"Night Assailant\"'s effects target.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Night Assailant in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Night Assailant in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Night Assailant' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ],
+            "owner_decision": {
+              "date": "2026-09-23",
+              "decision": "Night Assailant is held back on thin evidence: its period behaviour needs better evidence for whether the effect is optional and whether it targets; it stays a known gap with the modern card in Edison's list. Recorded here, not acted on, so a ruling that contradicts a claimed point is not applied to the record or the lists in this round.",
+              "recorded_in": "docs/state.md (Owner decisions — card scripts), docs/roadmap.md item 7"
+            }
+          }
+        }
+      ]
+    },
+    "c1": {
+      "effective": {
+        "date": "2022-06-15",
+        "precision": "day",
+        "status": "reported",
+        "basis": "TCG release of OP19-EN016 (OTS Tournament Pack 19)"
+      },
+      "transitions": [
+        {
+          "kind": "functional",
+          "axis": null,
+          "historical_text": "FLIP: Target 1 monster your opponent controls; destroy that target.When this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except this card; return that target to the hand.",
+          "modern_text": "FLIP: Target 1 monster your opponent controls; destroy that target.If this card is sent from the hand to the GY: Target 1 Flip monster in your GY, except \"Night Assailant\"; add that target to your hand.",
+          "summary": "Functional erratum: 'except this card' became 'except \"Night Assailant\"'. The pre-errata script excludes only the physical copy (SelectTarget exception e:GetHandler()), so a second copy of Night Assailant in the Graveyard is a legal retrieval; the modern filter adds 'not c:IsCode(id)', excluding every card with that name.",
+          "sources": [
+            "yugipedia-card-errata",
+            "ignis-cardscripts",
+            "ignis-babelcdb",
+            "yugipedia-set-pages",
+            "konami-card-faq-2008-12-16-lo",
+            "ude-card-rulings-archive"
+          ],
+          "rulings_check": {
+            "difference": "Era text ('except this card'): the exclusion is the physical card only, so a second Night Assailant in the Graveyard (even one sent at the same time) is a legal retrieval. The OP19-EN016 / modern text excludes every card named Night Assailant.",
+            "checked": "2026-09-29",
+            "searched": [
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d3: Era text ('except this card'): the exclusion is the physical card only, so a second Night Assailant in the Graveyard (even one sent at the same time) is a legal retrieval. The OP19-EN016 / modern tex…",
+                "finding": "supports",
+                "passage": "When multiple \"Night Assailants\" are sent to the Graveyard at the same time because of \"Graceful Charity\", etc., both can be returned to your hand because \"Night Assailant\" cannot select itself but CAN select a different \"Night Assailant\", even one that was sent to the Graveyard at the same time.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-card-faq-2008-12-16-lo",
+                "looked_for": "d3: Era text ('except this card'): the exclusion is the physical card only, so a second Night Assailant in the Graveyard (even one sent at the same time) is a legal retrieval. The OP19-EN016 / modern tex…",
+                "finding": "supports",
+                "passage": "Then you can activate the effect of \"Night Assailant\" to retrieve the other \"Night Assailant\".",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "ude-card-rulings-archive",
+                "looked_for": "d3: Era text ('except this card'): the exclusion is the physical card only, so a second Night Assailant in the Graveyard (even one sent at the same time) is a legal retrieval. The OP19-EN016 / modern tex…",
+                "finding": "supports",
+                "passage": "When multiple \"Night Assailants\" are sent to the Graveyard at the same time because of \"Graceful Charity\", etc., both can be returned to your hand because \"Night Assailant\" cannot select itself but CAN select a different \"Night Assailant\", even one that was sent to the Graveyard at the same time.",
+                "in_force": "by-decision",
+                "in_force_basis": "Owner decision 2026-09-29 (docs/state.md, \"Period rulings\"): a UDE-era card ruling counts at Edison and Tengu unless a later Konami document replaced it. The Konami documents listed were searched for this card and this difference; none was found to replace this ruling.",
+                "later_konami_replacement": "none-found",
+                "later_documents_checked": [
+                  "konami-absolute-powerforce-rulings-2010-02",
+                  "konami-absolute-powerforce-rulings-2011-05",
+                  "konami-ancient-prophecy-rulings-2009",
+                  "konami-crimson-crisis-rulings-2009",
+                  "konami-duelist-pack-tin-rulings-2010-03",
+                  "konami-duelist-revolution-rulings-2011-05",
+                  "konami-errata-list-2009-07-30",
+                  "konami-errata-list-2010-01-05",
+                  "konami-errata-list-2010-11-05",
+                  "konami-extreme-victory-rulings-2011-05",
+                  "konami-gold-series-3-rulings-2010-09",
+                  "konami-hidden-arsenal-3-rulings-2011-04",
+                  "konami-official-rulebook-v71-2010",
+                  "konami-official-rulebook-v72-2011-dragunity",
+                  "konami-official-rulebook-v8-2011",
+                  "konami-raging-battle-rulings-2009",
+                  "konami-rulebook-2008-v70",
+                  "konami-set-rulings-archive",
+                  "konami-shining-darkness-rulings-2010-04",
+                  "konami-stardust-overdrive-rulings-2009",
+                  "konami-starstrike-blast-rulings-archive",
+                  "konami-storm-of-ragnarok-rulings-archive"
+                ]
+              },
+              {
+                "source": "konami-errata-list-2010-01-05",
+                "looked_for": "Night Assailant in Konami's card errata lists compiled 2009-07-30, 2010-01-05 and 2010-11-05 (the last is Tengu-only); a list of text errata, not a ruling on play",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-official-rulebook-v71-2010",
+                "looked_for": "the general rules bearing on the claimed difference, in Konami's Official Rulebook Versions 7.0 (2008), 7.1 (2010-03-30), 7.2 (2011-05) and 8.0 (2011-09)",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "konami-set-rulings-archive",
+                "looked_for": "Night Assailant in Konami's per-set card ruling documents linked from its Gameplay page (Crimson Crisis, Raging Battle, Ancient Prophecy, Stardust Overdrive, Absolute Powerforce, Duelist Pack Collection Tin 2010, Machina Mayhem, The Shining Darkness, Starstrike Blast, Storm of Ragnarok, Extreme Victory, Duelist Revolution, Hidden Arsenal 3, Gold Series 3); the Tengu-only ones count at Tengu only",
+                "finding": "does-not-address"
+              },
+              {
+                "source": "yugipedia-card-rulings-pointer",
+                "looked_for": "'Card Rulings:Night Assailant' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
+                "finding": "does-not-address"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "ordering": {
+    "edges": [
+      {
+        "before": "c0",
+        "after": "c1",
+        "basis": "date-proven"
+      }
+    ]
+  },
+  "states": [
+    {
+      "events": [],
+      "coverage": {
+        "kind": "known-gap",
+        "gap_reason": "Project Ignis's only historical Night Assailant (cards-unofficial 16226796) implements the DT03-EN056 text; no upstream script implements the AST-080 text that both period snapshots need, so reproducing it needs a custom script and a reserved passcode",
+        "gap_sources": [
+          "ignis-babelcdb",
+          "yugipedia-card-errata"
+        ]
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "coverage": {
+        "kind": "reuse-upstream",
+        "historical_passcode": 16226796,
+        "historical_variant_passcodes": [],
+        "upstream": "ProjectIgnis/BabelCDB cards-unofficial.cdb + ProjectIgnis/CardScripts",
+        "script": "pre-errata/c16226796.lua"
+      }
+    }
+  ],
+  "implementation_metadata": [
+    {
+      "events": [],
+      "status": "missing",
+      "gap": {
+        "upstream_checked": true,
+        "behavioural_impact": "In GOAT and Edison a Night Assailant sent from the hand to the Graveyard should be able to return itself (the era text names no exception); with the shipped pre-errata or modern script that choice is blocked, removing a recursion line the era decks had."
+      }
+    },
+    {
+      "events": [
+        "c0"
+      ],
+      "status": "complete",
+      "tested": false
+    }
+  ],
+  "reference_identities": [],
+  "review": {
+    "status": "reviewed",
+    "date": "2026-08-20",
+    "notes": "The upstream code 16226796 is the card's own passcode +10, upstream's pre-errata convention, not an artwork variant. Its cdb text is exactly lineage v3 (SBCB-EN114, 2020-11-26), and v1 -> v2 (BP01-EN187, 2012-05-24, PSCT) -> v3 (GY wording) are cosmetic, so it implements the v1-v3 behaviour band. Remaining diff lines are cosmetic: the EFFECT_FLAG_CARD_TARGET property line is only reordered, function names differ (destg/desop vs target/operation), and the modern filter's added c:IsMonster() is redundant with TYPE_FLIP. The FLIP destruction half is unchanged across the whole lineage.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, Night Assailant). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. The rulings read support d3 at both snapshots (the passages are in the check); nothing contradicts a claimed difference, so kind, summary and coverage are unchanged. Verdicts: [c0] d1 contradicted at Edison, contradicted at Tengu; d2 contradicted at Edison, contradicted at Tengu. [c1] d3 supported at Edison, supported at Tengu. Held back by the owner's decision of 2026-09-23 (docs/state.md): recorded, not acted on."
+  },
+  "sources": [
+    "ignis-babelcdb",
+    "ignis-lflists",
+    "yugipedia-card-errata",
+    "ignis-cardscripts",
+    "yugipedia-set-pages",
+    "konami-card-faq-2008-12-16-lo",
+    "ude-card-rulings-archive"
+  ]
+}
