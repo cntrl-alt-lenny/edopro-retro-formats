@@ -115,7 +115,7 @@
               },
               {
                 "source": "yugipedia-card-rulings-pointer",
-                "looked_for": "'Card Rulings:Dark Necrofear' on Yugipedia (a pointer, never a source), read 2026-09-29: it reproduces the UDE card FAQ entry and links no archived UDE judge-list thread and no other Konami ruling on the claimed difference",
+                "looked_for": "'Card Rulings:Dark Necrofear' on Yugipedia (a pointer, never a source), read 2026-09-29: it reproduces the UDE card FAQ entry and lists rulings on other cards that name it; it links no archived UDE judge-list thread, and its only Konami link (the Version 8.0 rulebook, on changing an Equip Card's target) does not bear on a face-up condition",
                 "finding": "does-not-address"
               }
             ]
