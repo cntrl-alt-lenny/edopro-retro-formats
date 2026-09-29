@@ -870,6 +870,8 @@ def _desugar_v2_sugar(raw: dict[str, Any], path: Path) -> dict[str, Any]:
         "summary": event_raw.get("summary"),
         "sources": event_raw.get("sources", []),
     }
+    if "rulings_check" in event_raw:
+        transition_raw["rulings_check"] = event_raw["rulings_check"]
     desugared = {k: v for k, v in raw.items() if k not in ("event", "coverage")}
     desugared["events"] = {
         "event": {"effective": event_raw.get("effective") or {}, "transitions": [transition_raw]}
@@ -1474,6 +1476,11 @@ RULINGS_FINDINGS = ("supports", "contradicts", "does-not-address")
 # only, and it says which Konami documents were checked and that none replaced the ruling.
 RULINGS_IN_FORCE = ("shown", "not-shown", "by-decision")
 RULINGS_LATER_REPLACEMENT_NONE = "none-found"
+# The rulings gate on errata records (round 037): a functional transition that still applies at the
+# snapshot of one of these formats (its era card differs from the modern card there) must carry a
+# `rulings_check`. GOAT is not among them: its list is entry-for-entry Project Ignis's and reads no
+# erratum record.
+ERRATUM_RULINGS_GATE_FORMATS = ("2010-03-edison", "2011-09-tengu")
 # What a source is, when it is a ruling (an optional field of data/sources.json). `ude-era-ruling`:
 # a UDE card FAQ entry or Netrep answer, including the Konami-hosted copy of the UDE card FAQ
 # (2008-12-15). `konami-document`: a Konami-authored statement of the rules or the text to play
