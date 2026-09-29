@@ -94,6 +94,33 @@ class LiveGeneratedOutputTest(unittest.TestCase):
                 self.assertTrue(check["difference"].strip())
                 self.assertTrue(check["searched"], "an empty search is not a search")
 
+    def test_the_registered_ruling_classes_the_decision_relies_on(self):
+        # Round 036, part A: the owner's period-rulings decision covers a source only when the
+        # registry says it is a UDE-era ruling, and only a Konami document can replace one. The
+        # registry is data; this pins the classes, so a source cannot drift into the decision.
+        classes = {sid: source.raw.get("ruling_class") for sid, source in self.repo.global_sources.items()}
+        ude = {sid for sid, cls in classes.items() if cls == "ude-era-ruling"}
+        konami = {sid for sid, cls in classes.items() if cls == "konami-document"}
+        for sid in (
+            "ude-card-rulings-archive",
+            "ude-card-faq-2009-02-26-uz",
+            "ude-judge-list-zorc-2007",
+            "ude-judge-list-snake-deity-2007",
+            "ude-judge-list-green-baboon-2007",
+            "konami-card-faq-2008-12-15-fh",
+        ):
+            self.assertIn(sid, ude)
+        for sid in (
+            "konami-errata-list-2009-07-30",
+            "konami-errata-list-2010-01-05",
+            "konami-errata-list-2010-11-05",
+            "konami-official-rulebook-v71-2010",
+            "konami-extreme-victory-rulings-2011-05",
+        ):
+            self.assertIn(sid, konami)
+        self.assertEqual(set(), ude & konami)
+        self.assertEqual(set(), set(classes.values()) - {None, "ude-era-ruling", "konami-document"})
+
     def test_a_retired_number_is_never_assigned_again(self):
         self.assertEqual(set(), RETIRED_PASSCODES & {c.passcode for c in self.cards})
         self.assertEqual(set(), RETIRED_PASSCODES & set(self.repo.custom_cards))
@@ -858,6 +885,122 @@ class CustomCardValidationTest(TempRepoTest):
         errors, warnings = self._codes()
         self.assertEqual(set(), errors)
         self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    # -- the owner's period-rulings decision (round 036, part A) -------------
+
+    def _register_ruling_sources(self, **overrides):
+        """The temp registry plus one UDE-era ruling, one Konami document and, for the
+        negative cases, one Konami document that is not a ruling class of its own."""
+        sources = [
+            {"id": "test-source", "kind": "other", "title": "Test source", "url": "https://example.invalid"},
+            {"id": "test-ude-ruling", "kind": "official", "title": "A UDE card FAQ", "ruling_class": "ude-era-ruling"},
+            {"id": "test-konami-list", "kind": "official", "title": "A Konami errata list", "ruling_class": "konami-document"},
+        ]
+        for source in sources:
+            source.update(overrides.get(source["id"], {}))
+        self.write("data/sources.json", {"sources": sources})
+
+    def _decided(self, **changes):
+        """A finding in force by the owner's decision: a UDE-era source, the statement that no
+        later Konami document replaces it, and the Konami documents checked."""
+        base = dict(
+            source="test-ude-ruling",
+            in_force="by-decision",
+            in_force_basis="Owner decision 2026-09-29 (docs/state.md): UDE-era rulings count at the snapshots.",
+            later_konami_replacement="none-found",
+            later_documents_checked=["test-konami-list"],
+        )
+        base.update(changes)
+        return self._finding(**base)
+
+    def test_a_ude_era_ruling_can_be_recorded_as_in_force_by_the_owners_decision(self):
+        self._seed(rulings_check=self._rulings_check(self._decided()))
+        self._register_ruling_sources()
+        validator = _validate(self.root)
+        self.assertEqual([], validator.errors, "\n".join(map(str, validator.errors)))
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", {f.code for f in validator.warnings})
+
+    def test_the_decision_covers_only_a_source_marked_as_a_ude_era_ruling(self):
+        for name, source, overrides in (
+            ("a source with no ruling class", "test-source", {}),
+            ("a Konami document", "test-konami-list", {}),
+        ):
+            with self.subTest(source=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(source=source)))
+                self._register_ruling_sources(**overrides)
+                errors, _ = self._codes()
+                self.assertIn("custom-card.decision-source-not-ude", errors)
+
+    def test_the_decision_must_say_no_later_konami_document_replaces_the_ruling(self):
+        for name, changes in (
+            ("no replacement statement", dict(later_konami_replacement=None)),
+            ("a replacement statement of another value", dict(later_konami_replacement="replaced")),
+            ("no documents checked", dict(later_documents_checked=None)),
+            ("an empty list of documents checked", dict(later_documents_checked=[])),
+            ("documents checked that are not a list", dict(later_documents_checked="test-konami-list")),
+            ("a blank basis", dict(in_force_basis=" ")),
+        ):
+            with self.subTest(case=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(**changes)))
+                self._register_ruling_sources()
+                errors, _ = self._codes()
+                self.assertTrue(
+                    {"custom-card.decision-later-documents-missing", "custom-card.rulings-check-malformed"} & errors,
+                    errors,
+                )
+
+    def test_the_documents_checked_must_be_registered_konami_documents(self):
+        for name, documents in (
+            ("a source with no ruling class", ["test-source"]),
+            ("a UDE-era ruling, which is not a later Konami document", ["test-ude-ruling"]),
+            ("one Konami document and one that is not", ["test-konami-list", "test-source"]),
+        ):
+            with self.subTest(case=name):
+                self._seed(rulings_check=self._rulings_check(self._decided(later_documents_checked=documents)))
+                self._register_ruling_sources()
+                errors, _ = self._codes()
+                self.assertIn("custom-card.decision-document-not-konami", errors)
+        with self.subTest(case="an unregistered document"):
+            self._seed(rulings_check=self._rulings_check(self._decided(later_documents_checked=["not-a-source"])))
+            self._register_ruling_sources()
+            errors, _ = self._codes()
+            self.assertIn("sources.unresolved", errors)
+
+    def test_a_contradicting_finding_in_force_by_decision_still_needs_an_owner_decision(self):
+        # A decision about which rulings count is not a decision to ship a contradicted script.
+        contradicting = self._decided(finding="contradicts")
+        self._seed(rulings_check=self._rulings_check(contradicting))
+        self._register_ruling_sources()
+        errors, warnings = self._codes()
+        self.assertIn("custom-card.contradicting-ruling-unaccepted", errors)
+        self.assertNotIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+        decision = {"date": "2026-10-01", "decision": "Keep it.", "recorded_in": "docs/state.md"}
+        self._seed(rulings_check=self._rulings_check(contradicting, owner_decision=decision))
+        self._register_ruling_sources()
+        errors, _ = self._codes()
+        self.assertEqual(set(), errors)
+
+    def test_by_decision_is_not_a_way_around_the_other_in_force_values(self):
+        # `shown` still needs its basis and `not-shown` still leaves the warning: the decision
+        # adds a value, it loosens neither.
+        self._seed(rulings_check=self._rulings_check(self._finding(in_force="shown", in_force_basis=None)))
+        errors, _ = self._codes()
+        self.assertIn("custom-card.rulings-check-malformed", errors)
+        unshown = self._finding(source="test-ude-ruling", finding="contradicts", in_force="not-shown", in_force_basis=None)
+        self._seed(rulings_check=self._rulings_check(unshown))
+        self._register_ruling_sources()
+        errors, warnings = self._codes()
+        self.assertEqual(set(), errors)
+        self.assertIn("custom-card.contradicting-ruling-range-unresolved", warnings)
+
+    def test_a_source_ruling_class_is_a_closed_set(self):
+        self._seed()
+        self._register_ruling_sources(**{"test-ude-ruling": {"ruling_class": "ude"}})
+        errors, _ = self._codes()
+        self.assertIn("sources.bad-ruling-class", errors)
+        self._register_ruling_sources(**{"test-ude-ruling": {"ruling_class": None}})
+        errors, _ = self._codes()
+        self.assertNotIn("sources.bad-ruling-class", errors)
 
 
     def test_duplicate_passcode_fails_to_load(self):

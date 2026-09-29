@@ -42,6 +42,8 @@ from .model import (
     RESERVED_PASSCODE_RANGE,
     RULINGS_FINDINGS,
     RULINGS_IN_FORCE,
+    RULINGS_LATER_REPLACEMENT_NONE,
+    SOURCE_RULING_CLASSES,
     STATUS_TO_COUNT,
     TERRITORIES,
     Banlist,
@@ -2824,6 +2826,48 @@ class Validator:
                 "the script's header names an upstream but the record says the script is original",
             )
 
+    def _check_decision_entry(self, entry: dict[str, Any], label: str, where: Path) -> None:
+        """An entry `in_force: by-decision` (round 036, part A): the source must be a UDE-era
+        ruling, the entry must say no later Konami document replaces it, and it must name the
+        Konami documents checked. Each of those is its own code (see `_check_rulings`)."""
+        source_id = entry.get("source")
+        source = self.repo.resolve_source(source_id) if isinstance(source_id, str) else None
+        if source is not None and source.raw.get("ruling_class") != "ude-era-ruling":
+            self.error(
+                "custom-card.decision-source-not-ude",
+                where,
+                f"rulings_check {label}: {source_id!r} is not registered as a UDE-era ruling "
+                "(ruling_class 'ude-era-ruling' in data/sources.json); the owner's decision covers only "
+                "UDE card FAQ entries and Netrep answers",
+            )
+        checked = entry.get("later_documents_checked")
+        if entry.get("later_konami_replacement") != RULINGS_LATER_REPLACEMENT_NONE:
+            self.error(
+                "custom-card.decision-later-documents-missing",
+                where,
+                f"rulings_check {label}: a ruling in force by decision must say that no later Konami "
+                f"document replaces it (later_konami_replacement: {RULINGS_LATER_REPLACEMENT_NONE!r})",
+            )
+        if not isinstance(checked, list) or not checked or not all(isinstance(c, str) and c.strip() for c in checked):
+            self.error(
+                "custom-card.decision-later-documents-missing",
+                where,
+                f"rulings_check {label}: a ruling in force by decision must name the later Konami documents "
+                "checked (later_documents_checked: a non-empty list of source ids)",
+            )
+            return
+        self._check_sources(checked, where, None, f"rulings_check {label} later_documents_checked")
+        for document_id in checked:
+            document = self.repo.resolve_source(document_id)
+            if document is not None and document.raw.get("ruling_class") != "konami-document":
+                self.error(
+                    "custom-card.decision-document-not-konami",
+                    where,
+                    f"rulings_check {label}: {document_id!r} is not registered as a Konami document "
+                    "(ruling_class 'konami-document' in data/sources.json); only a later Konami document "
+                    "can replace a UDE-era ruling",
+                )
+
     def _check_rulings(self, card: CustomCard, where: Path) -> None:
         """The rulings gate (round 035): no generated card without a recorded check of
         period rulings against the one difference its script implements.
@@ -2844,6 +2888,21 @@ class Validator:
           force, and no `owner_decision` {date, decision, recorded_in} accepting it (an error).
         - `custom-card.contradicting-ruling-range-unresolved`: a `contradicts` finding whose
           range in force is not shown (a warning: a tracked TODO for the owner).
+
+        Round 036 adds a third answer to "did the ruling hold": `in_force: by-decision`, the
+        owner's decision of 2026-09-29 (docs/state.md, "Period rulings") that a UDE-era card
+        ruling counts at Edison and Tengu unless a later Konami document replaced it. The entry
+        must say that none did (`later_konami_replacement: none-found`) and name the Konami
+        documents checked (`later_documents_checked`). It is accepted only for a source
+        registered as a `ude-era-ruling` (`ruling_class` in data/sources.json):
+        - `custom-card.decision-source-not-ude`: `by-decision` on any other source.
+        - `custom-card.decision-later-documents-missing`: no statement that no later Konami
+          document replaces the ruling, or no list of the documents checked.
+        - `custom-card.decision-document-not-konami`: a document checked that is not a registered
+          `konami-document` (a UDE-era ruling is not a later Konami document).
+        A contradicting finding in force by decision still needs an `owner_decision`, exactly
+        as one shown in force does: a decision about which rulings count is not a decision to
+        ship a contradicted script.
         A schema edit alone enforces none of this (AGENTS.md); this is the gate."""
         check = card.raw.get("rulings_check")
         if check is None:
@@ -2903,6 +2962,13 @@ class Validator:
                     f"{label}.in_force is 'shown': in_force_basis must say what shows the ruling held at "
                     "the snapshots this record applies at (a ruling's date is not its range in force)"
                 )
+            elif in_force == "by-decision":
+                if not text_ok(entry.get("in_force_basis")):
+                    problems.append(
+                        f"{label}.in_force is 'by-decision': in_force_basis must name the owner's decision "
+                        "(docs/state.md, \"Period rulings\") that makes the ruling count"
+                    )
+                self._check_decision_entry(entry, label, where)
             if finding == "contradicts" and in_force in RULINGS_IN_FORCE:
                 contradictions.append((label, in_force))
         for problem in problems:
@@ -2918,12 +2984,13 @@ class Validator:
             and text_ok(decision.get("recorded_in"))
         )
         for label, in_force in contradictions:
-            if in_force == "shown" and not accepted:
+            if in_force in ("shown", "by-decision") and not accepted:
                 self.error(
                     "custom-card.contradicting-ruling-unaccepted",
                     where,
-                    f"rulings_check {label} contradicts the script's difference and is shown to have been in "
-                    "force; correct the card, or name the owner's decision accepting it in owner_decision "
+                    f"rulings_check {label} contradicts the script's difference and is "
+                    f"{'shown to have been in force' if in_force == 'shown' else 'in force by the owner decision on which rulings count'}"
+                    "; correct the card, or name the owner's decision accepting it in owner_decision "
                     "{date, decision, recorded_in}",
                 )
             elif in_force == "not-shown":
@@ -3059,9 +3126,24 @@ class Validator:
                         "card record; regenerate the index",
                     )
 
+    def _validate_source_registry(self) -> None:
+        """`ruling_class` is optional on a source and, when present, one of a closed set
+        (`sources.bad-ruling-class`): the rulings gate reads it (round 036, part A)."""
+        registries = [self.repo.global_sources, *(v for _, v in sorted(self.repo.format_sources.items()))]
+        for sources in registries:
+            for source in sources.values():
+                ruling_class = source.raw.get("ruling_class")
+                if ruling_class is not None and ruling_class not in SOURCE_RULING_CLASSES:
+                    self.error(
+                        "sources.bad-ruling-class",
+                        f"sources:{source.id}",
+                        f"ruling_class must be one of {list(SOURCE_RULING_CLASSES)}, got {ruling_class!r}",
+                    )
+
     def validate(self) -> list[Finding]:
         for exc in self.repo.load_errors:
             self.error("load.failed", exc.path, exc.message)
+        self._validate_source_registry()
         if not self.repo.card_index.by_passcode:
             self.warn(
                 "card.index-missing",

@@ -27,6 +27,10 @@
           "revision": { "type": "string", "description": "Git commit, API version or page revision id pinning exactly what was consulted." },
           "retrieved": { "$ref": "common.schema.json#/$defs/isoDate" },
           "used_for": { "type": "string", "description": "What facts this source backs in this repository." },
+          "ruling_class": {
+            "enum": ["ude-era-ruling", "konami-document"],
+            "description": "Optional (round 036). What a source is, when it is a ruling: `ude-era-ruling`, a UDE card FAQ entry or Netrep answer, including the Konami-hosted copy of the UDE card FAQ (2008-12-15); `konami-document`, a Konami-authored statement of the rules or the text to play (rulebook, errata list, per-set ruling document), which is what could replace a UDE-era ruling. The rulings gate reads it: a card's rulings_check may record a ruling `in_force: by-decision` only for a `ude-era-ruling` source, and must name `konami-document` sources as the later documents checked (`custom-card.decision-*`; `sources.bad-ruling-class` for any other value)."
+          },
           "reliability_notes": { "type": "string" }
         }
       }
