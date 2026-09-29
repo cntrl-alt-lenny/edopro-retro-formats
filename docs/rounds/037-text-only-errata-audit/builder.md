@@ -1,3 +1,12 @@
+<!-- fw-report
+round: 037-text-only-errata-audit
+role: builder
+branch: builder/037-text-only-errata-audit
+head: 3bebab4fefc37ba08a944b59198768784547f86b
+os: macOS 27.0
+python: 3.13.15
+written: 2026-09-29T13:30:52Z
+-->
 ## Verified
 
 Commands run with Python 3.13 (`python3` on the owner's Mac is 3.9, below the floor). "Head" is the last code commit,
