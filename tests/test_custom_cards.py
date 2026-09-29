@@ -11,6 +11,7 @@ stale-output guard fails when a generated script or row is missing or stale.
 from __future__ import annotations
 
 import copy
+import dataclasses
 import shutil
 import sqlite3
 import tempfile
@@ -22,6 +23,7 @@ from retroformats.custom_cards import (
     build_cdb_bytes,
     build_custom_cards,
     cards_sorted,
+    _zero_unused_page_space,
     expected_outputs,
     read_cdb_rows,
     stale_generated_files,
@@ -162,6 +164,54 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         self.assertEqual(b"\x00\x00\x00\x01", data[92:96])
         self.assertEqual(b"\x00\x00\x00\x00", data[96:100])
         self.assertEqual(data, (self.dist / "databases" / CDB_NAME).read_bytes())
+
+    def _sixteen_cards(self):
+        """Sixteen rows: the live cards under fresh passcodes. Round 034's data made the file span
+        several pages; after round 035 the live file holds four rows and fits in three, so the
+        page-splitting behaviour these tests are about needs rows of its own."""
+        cards = [
+            dataclasses.replace(c, passcode=600000900 + i * 4 + n, name=f"{c.name} copy {i}")
+            for i in range(4)
+            for n, c in enumerate(self.cards)
+        ]
+        return cards
+
+    @staticmethod
+    def _unused_ranges(data):
+        """(start, end) of every b-tree page's unused space, read straight from
+        the page headers (https://www.sqlite.org/fileformat.html section 1.6)."""
+        page_size = int.from_bytes(data[16:18], "big") or 65536
+        for index in range(len(data) // page_size):
+            base = index * page_size
+            header = base + (100 if index == 0 else 0)
+            cells = int.from_bytes(data[header + 3 : header + 5], "big")
+            content = int.from_bytes(data[header + 5 : header + 7], "big") or 65536
+            yield header + (12 if data[header] in (2, 5) else 8) + 2 * cells, base + content
+
+    def test_database_bytes_carry_no_stale_bytes_in_unused_page_space(self):
+        # Round 034: with 16 rows the texts table needs several pages, and each SQLite
+        # version then leaves different stale bytes in the unused space of the pages it
+        # split, so a Linux and a macOS build of the same Python wrote different files.
+        # The generator zeroes that space; nothing may be left in it.
+        data = build_cdb_bytes(self._sixteen_cards())
+        self.assertGreater(len(data) // 4096, 3, "the file must span several pages, or this proves nothing")
+        for start, end in self._unused_ranges(data):
+            self.assertEqual(bytes(end - start), data[start:end])
+
+    def test_zeroing_unused_page_space_makes_two_layouts_of_the_same_rows_equal(self):
+        data = bytearray(build_cdb_bytes(self._sixteen_cards()))
+        poisoned = bytearray(data)
+        for start, end in self._unused_ranges(data):
+            poisoned[start:end] = b"\xaa" * (end - start)
+        self.assertNotEqual(bytes(data), bytes(poisoned), "there must be unused space to poison")
+        _zero_unused_page_space(poisoned)
+        self.assertEqual(bytes(data), bytes(poisoned))
+
+    def test_zeroing_refuses_a_page_it_cannot_read_as_a_btree_page(self):
+        data = bytearray(build_cdb_bytes(self._sixteen_cards()))
+        data[4096] = 0  # page 2's type byte
+        with self.assertRaises(ValueError):
+            _zero_unused_page_space(data)
 
     def test_database_opens_as_a_bare_babelcdb_layout(self):
         con = sqlite3.connect(f"file:{self.dist / 'databases' / CDB_NAME}?mode=ro", uri=True)

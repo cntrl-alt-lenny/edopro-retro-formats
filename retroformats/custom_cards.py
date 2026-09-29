@@ -26,8 +26,12 @@ explicitly, because a whitelist follows an alias only within +/-10.
 
 Everything here is standard library only. `sqlite3` writes the database, so the
 file's bytes must not depend on the SQLite version that wrote it: the three
-header fields that record it are normalised (`_normalise_sqlite_header`), and the
-page layout for one fixed schema and sorted inserts is otherwise deterministic.
+header fields that record it are normalised (`_normalise_sqlite_header`), and
+the bytes a b-tree page does not use are zeroed (`_zero_unused_page_space`). The
+page layout for one fixed schema and sorted inserts is otherwise deterministic,
+but only until a table outgrows one page: then different SQLite versions leave
+different stale bytes in the unused part of the pages they split (round 034:
+16 rows, 5 pages; a Linux and a macOS build of the same Python disagreed).
 `tests/test_custom_cards.py` pins that by comparing bytes.
 """
 
@@ -76,6 +80,35 @@ def _normalise_sqlite_header(data: bytearray) -> None:
     data[24:28] = (1).to_bytes(4, "big")
     data[92:96] = (1).to_bytes(4, "big")
     data[96:100] = (0).to_bytes(4, "big")
+
+
+def _zero_unused_page_space(data: bytearray) -> None:
+    """Zero every byte of a b-tree page that no cell, header or pointer uses.
+
+    SQLite leaves stale bytes in that space when it splits a page (in the cell
+    pointer array beyond the last pointer, and in the gap before the cell content
+    area), and which stale bytes depends on the SQLite version. The file has no
+    freeblocks and no overflow or freelist pages for this schema; if that ever
+    stops being true this refuses rather than guess
+    (https://www.sqlite.org/fileformat.html section 1.6)."""
+    page_size = int.from_bytes(data[16:18], "big") or 65536
+    if data[20] != 0 or len(data) % page_size:
+        raise ValueError("unexpected SQLite header: reserved bytes or a partial page")
+    for index in range(len(data) // page_size):
+        base = index * page_size
+        header = base + (100 if index == 0 else 0)
+        page_type = data[header]
+        if page_type not in (2, 5, 10, 13):
+            raise ValueError(f"page {index + 1} is not a b-tree page (type {page_type})")
+        if int.from_bytes(data[header + 1 : header + 3], "big"):
+            raise ValueError(f"page {index + 1} has a freeblock")
+        cells = int.from_bytes(data[header + 3 : header + 5], "big")
+        content = int.from_bytes(data[header + 5 : header + 7], "big") or 65536
+        start = header + (12 if page_type in (2, 5) else 8) + 2 * cells
+        end = base + content
+        if start > end:
+            raise ValueError(f"page {index + 1}: the cell pointer array overlaps the cell content")
+        data[start:end] = bytes(end - start)
 
 
 def cards_sorted(repo: Repository) -> list[CustomCard]:
@@ -127,6 +160,7 @@ def build_cdb_bytes(cards: list[CustomCard]) -> bytes:
             if leftover.exists():
                 leftover.unlink()
     _normalise_sqlite_header(data)
+    _zero_unused_page_space(data)
     return bytes(data)
 
 
