@@ -547,11 +547,11 @@ class CustomCardValidationTest(TempRepoTest):
                 target[name] = value
         return authorship
 
-    def _derived_header(self, drop=None):
+    def _derived_header(self, drop=None, path="official/c200.lua"):
         lines = [
             "--SPDX-License-Identifier: AGPL-3.0-or-later",
             "--Beta (historical implementation, Retro Formats)",
-            f"--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/{self.REVISION}/official/c200.lua",
+            f"--Upstream: https://github.com/ProjectIgnis/CardScripts/blob/{self.REVISION}/{path}",
             f"--{self.COPYRIGHT}",
             "--Modified by edopro-retro-formats on 2026-09-27: removed the use limit.",
             "--Beta",
@@ -635,6 +635,35 @@ class CustomCardValidationTest(TempRepoTest):
             with self.subTest(field=key, value=value):
                 self._seed_derived(**{key: value})
                 self.assertIn("custom-card.bad-authorship", _error_codes(_validate(self.root)))
+
+    def test_a_derived_scripts_upstream_must_be_the_script_of_its_own_card(self):
+        # Round 034 (carried over by round 035). The record's alias is 200. Offline the validator can
+        # see only the path: official/c<alias>.lua is the card's own script; pre-errata/ files carry
+        # Ignis's own private codes, so any of them passes here and the engine test
+        # (tests/engine/test_script_origin.py) shows the file is tied to the alias. Every
+        # other file at the pin is another card's script, or a folder Ignis does not tie to
+        # a real card's history.
+        for path in (
+            "official/c201.lua",  # another card's script
+            "official/c2000.lua",  # not a prefix match either
+            "official/c20.lua",
+            "goat/c200.lua",
+            "unofficial/c200.lua",
+            "pre-release/c200.lua",
+            "rush/c200.lua",
+            "skill/c200.lua",
+            "c200.lua",
+            "pre-errata/c200x.lua",
+            "utility.lua",
+        ):
+            with self.subTest(path=path, allowed=False):
+                self._seed_derived(lua=self._derived_header(path=path), upstream__path=path)
+                self.assertIn("custom-card.upstream-not-own-script", _error_codes(_validate(self.root)))
+        for path in ("official/c200.lua", "pre-errata/c511002631.lua"):
+            with self.subTest(path=path, allowed=True):
+                self._seed_derived(lua=self._derived_header(path=path), upstream__path=path)
+                validator = _validate(self.root)
+                self.assertEqual([], validator.errors, "\n".join(map(str, validator.errors)))
 
     def test_a_derived_scripts_header_must_match_the_record(self):
         full = self._derived_header().splitlines()
