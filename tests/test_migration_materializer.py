@@ -21,6 +21,7 @@ from __future__ import annotations
 import copy
 import json
 import unittest
+from pathlib import Path
 
 from retroformats.model import ErratumV2
 from retroformats.repo import Repository
@@ -49,6 +50,20 @@ CUSTOM_SCRIPT_RECORDS = {
     "erratum-rise-of-the-snake-deity": (600000007, 31),
     "erratum-malefic-blue-eyes-white-dragon": (600000008, 31),
     "erratum-soul-rope": (600000009, 31),
+    # Round 036 (derived scripts: Dice Re-Roll was proposed in round 034, never merged, and shipped here).
+    "erratum-dice-re-roll": (600000016, 36),
+    "erratum-machina-peacekeeper": (600000018, 36),
+    "erratum-machina-gearframe": (600000019, 36),
+    "erratum-treeborn-frog": (600000021, 36),
+}
+# The rounds whose scripts are derived from Project Ignis's (the implementation note says so).
+DERIVED_ROUNDS = frozenset({36})
+# A sentence some implementation notes add: the generated card implements only the half of the gap
+# statement a ruling supports, and the note says which half is left.
+REASON_SUFFIX = {
+    "erratum-machina-peacekeeper": " The generated card implements only the first half of the gap statement below (the Union Condition); its Attack Position half is not implemented, because no ruling read addresses it.",
+    "erratum-machina-gearframe": " The generated card implements only the first half of the gap statement below (the Union Condition); its Attack Position half is not implemented, because no ruling read addresses it.",
+    "erratum-dice-re-roll": " The generated card implements only the first half of the gap statement below (a re-roll for each activation); its six-sided-die-only half is not implemented, because no ruling read addresses it.",
 }
 
 
@@ -139,6 +154,117 @@ def check_round_035_edit(test, record_id, round_031, on_disk):
         test.assertIn(old_meta["gap"]["behavioural_impact"], new_review["notes"], f"{record_id}: old gap statement kept")
 
 
+# Round 036 edited twelve more records (docs/research/period-rulings-generated-scripts.md, "Round 036"):
+# under the owner's decision that UDE-era rulings count, and Konami's class answers of round 035.
+#   "cosmetic":  every functional transition became cosmetic and the record is cosmetic-only and
+#                complete on the modern implementation (Goddess of Whim, Green Baboon, Dark Master -
+#                Zorc, and the five strict-nomi cards Gigantes, The Rock Spirit, Garuda the Wind
+#                Spirit, VW-Tiger Catapult and Gladiator Beast Heraklinos);
+#   "narrowed":  the record keeps another functional difference, so its transition stays functional
+#                with a narrowed summary (Dark Necrofear, Elemental HERO Chaos Neos, Fushioh Richie,
+#                and Second Coin Toss, which stays a known gap with the rulings cited).
+# The edits are too large to pin as text. What is pinned is the rule the project keeps ("Evidence in a
+# record is added to, never replaced", AGENTS.md), against the record as it stood on `main` before the
+# round (tests/fixtures/round-036-before/): every passage of the earlier record survives, verbatim, in
+# the round-036 record, and the edits made are exactly the classification changes named here.
+# {erratum id: (fixture file, outcome, {event id: kind after the edit}, ids of the events whose summary changed)}
+ROUND_036_EDITED = {
+    "erratum-goddess-of-whim": ("goddess-of-whim", "cosmetic", {"event": "cosmetic"}, {"event"}),
+    "erratum-green-baboon-defender-of-the-forest": ("green-baboon-defender-of-the-forest", "cosmetic", {"event": "cosmetic"}, {"event"}),
+    "erratum-dark-master-zorc": ("dark-master-zorc", "cosmetic", {"c0": "cosmetic", "c1": "cosmetic"}, {"c1"}),
+    "erratum-gigantes": ("gigantes", "cosmetic", {"c0": "cosmetic", "c1": "cosmetic"}, {"c1"}),
+    "erratum-the-rock-spirit": ("the-rock-spirit", "cosmetic", {"c0": "cosmetic", "c1": "cosmetic"}, {"c1"}),
+    "erratum-garuda-the-wind-spirit": ("garuda-the-wind-spirit", "cosmetic", {"c0": "cosmetic", "c1": "cosmetic"}, {"c1"}),
+    "erratum-vw-tiger-catapult": ("vw-tiger-catapult", "cosmetic", {"event": "cosmetic"}, {"event"}),
+    "erratum-gladiator-beast-heraklinos": ("gladiator-beast-heraklinos", "cosmetic", {"c0": "cosmetic", "c1": "cosmetic"}, {"c1"}),
+    "erratum-dark-necrofear": ("dark-necrofear", "narrowed", {"c0": "functional", "c1": "cosmetic", "c2": "functional"}, {"c2"}),
+    "erratum-elemental-hero-chaos-neos": ("elemental-hero-chaos-neos", "narrowed", {"event": "functional"}, {"event"}),
+    "erratum-fushioh-richie": ("fushioh-richie", "narrowed", {"event": "functional"}, {"event"}),
+    "erratum-second-coin-toss": ("second-coin-toss", "narrowed", {"event": "functional"}, {"event"}),
+}
+ROUND_036_FIXTURES = Path(__file__).resolve().parent / "fixtures" / "round-036-before"
+MIN_PASSAGE = 25  # shorter strings are labels and ids, not passages
+
+
+def _string_leaves(value, path=""):
+    if isinstance(value, str):
+        yield path, value
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            yield from _string_leaves(item, f"{path}/{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            yield from _string_leaves(item, f"{path}[{index}]")
+
+
+def check_round_036_edit(test, record_id, on_disk):
+    """`on_disk` is the record now; its `main`-before-round-036 state is the fixture."""
+    fixture, outcome, kinds, changed_ids = ROUND_036_EDITED[record_id]
+    before = json.loads((ROUND_036_FIXTURES / f"{fixture}.json").read_text(encoding="utf-8"))
+    for key in ("$schema", "id", "modern_card", "reference_identities"):
+        test.assertEqual(before[key], on_disk[key], f"{record_id}: {key}")
+    test.assertEqual((before["review"]["status"], before["review"]["date"]), (on_disk["review"]["status"], on_disk["review"]["date"]))
+    test.assertTrue(on_disk["review"]["notes"].startswith(before["review"]["notes"]), f"{record_id}: the old review notes are kept verbatim")
+    test.assertIn("Round 036 (2026-09-29)", on_disk["review"]["notes"])
+    test.assertTrue(set(before["sources"]) <= set(on_disk["sources"]), f"{record_id}: no source is dropped")
+    old_transitions, new_transitions = _transitions(before), _transitions(on_disk)
+    test.assertEqual(set(old_transitions), set(new_transitions))
+    test.assertEqual(_effective(before), _effective(on_disk), f"{record_id}: chronology is unchanged")
+    changed = 0
+    for eid, old_list in old_transitions.items():
+        new_list = new_transitions[eid]
+        test.assertEqual(len(old_list), len(new_list))
+        for old, new in zip(old_list, new_list):
+            for key in ("axis", "historical_text", "modern_text"):
+                test.assertEqual(old[key], new[key], f"{record_id}/{eid}: {key}")
+            test.assertTrue(set(old["sources"]) <= set(new["sources"]), f"{record_id}/{eid}: no source is dropped")
+            test.assertEqual(kinds[eid], new["kind"], f"{record_id}/{eid}: the kind after the edit")
+            if eid in changed_ids:
+                changed += 1
+                test.assertEqual("functional", old["kind"], f"{record_id}/{eid}: only a functional transition is corrected")
+                test.assertNotEqual(old["summary"], new["summary"], f"{record_id}/{eid}: the summary is corrected")
+                test.assertIn(old["summary"], on_disk["review"]["notes"], f"{record_id}/{eid}: the old summary is kept verbatim")
+            else:
+                test.assertEqual(old["kind"], new["kind"], f"{record_id}/{eid}: an untouched transition keeps its kind")
+                test.assertEqual(old["summary"], new["summary"], f"{record_id}/{eid}: an untouched transition is unchanged")
+    test.assertGreaterEqual(changed, 1, f"{record_id}: at least one functional transition was corrected")
+    if outcome == "cosmetic":
+        test.assertEqual("cosmetic", on_disk["classification"])
+        test.assertEqual([], on_disk["states"])
+        test.assertNotIn("coverage", on_disk)
+        test.assertEqual(1, len(on_disk["implementation_metadata"]))
+        meta = on_disk["implementation_metadata"][0]
+        test.assertEqual({"events": [], "status": "complete", "tested": False}, {k: meta[k] for k in ("events", "status", "tested")})
+        test.assertIn("Round 036", meta["reason"])
+    else:
+        test.assertEqual("functional", on_disk["classification"])
+        test.assertEqual(before["classification"], on_disk["classification"])
+        # the gap statement of the baseline state only gains a dated withdrawal; nothing is replaced
+        old_meta = [m for m in before["implementation_metadata"] if m["events"] == []][0]
+        new_meta = [m for m in on_disk["implementation_metadata"] if m["events"] == []][0]
+        test.assertTrue(new_meta["gap"]["behavioural_impact"].startswith(old_meta["gap"]["behavioural_impact"]))
+        test.assertIn("Round 036 (2026-09-29)", new_meta["gap"]["behavioural_impact"])
+        if record_id == "erratum-elemental-hero-chaos-neos":
+            test.assertEqual("custom-script", on_disk["coverage"]["kind"])
+            test.assertEqual(600000020, on_disk["coverage"]["historical_passcode"])
+            test.assertEqual("partial", new_meta["status"])
+        else:
+            test.assertEqual(before.get("coverage") or before["states"], on_disk.get("coverage") or on_disk["states"])
+            test.assertEqual("missing", new_meta["status"])
+    # The rule: every passage of the earlier record survives verbatim in the record now.
+    dump = json.dumps(on_disk, ensure_ascii=False)
+    # A removed generated card's `coverage.script` path is a pointer, not a passage: the coverage object
+    # goes with the card (the implementation note that named it stays, verbatim).
+    lost = [
+        path
+        for path, text in _string_leaves(before)
+        if len(text) >= MIN_PASSAGE
+        and json.dumps(text, ensure_ascii=False)[1:-1] not in dump
+        and not (outcome == "cosmetic" and path.endswith("/coverage/script"))
+    ]
+    test.assertEqual([], lost, f"{record_id}: passages of the earlier record that are gone")
+
+
 def expected_after_custom_script(record_id, target):
     """The frozen `target`, with the round's coverage and metadata edit applied."""
     passcode, round_number = CUSTOM_SCRIPT_RECORDS[record_id]
@@ -164,14 +290,22 @@ def expected_after_custom_script(record_id, target):
     old_entry = target["implementation_metadata"][0]
     assert old_entry["events"] == [], old_entry
     assert old_entry["status"] == "missing" and list(old_entry) == ["events", "status", "gap"], old_entry
+    if round_number in DERIVED_ROUNDS:
+        alias = target["modern_card"]["passcode"]
+        what = (
+            f"a script derived from Project Ignis's official/c{alias}.lua (AGPL-3.0-or-later) under the "
+            f"custom-script strategy"
+        )
+    else:
+        what = "a project-authored script under the custom-script strategy"
     reason = (
-        f"Round {round_number:03d}: implemented by a project-authored script under the custom-script strategy "
+        f"Round {round_number:03d}: implemented by {what} "
         f"(data/custom-cards/c{passcode}.json; passcode {passcode}). Previously recorded as a known gap "
         f'with gap_reason "{old_coverage["gap_reason"]}" '
         f"(gap_sources {', '.join(old_coverage['gap_sources'])}). "
         f"Status is partial, not complete: the custom card's not_reproduced list names what the "
         f"script does not establish."
-    )
+    ) + REASON_SUFFIX.get(record_id, "")
     expected["implementation_metadata"] = [
         {
             "events": old_entry["events"],
@@ -241,6 +375,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             # records after the migration; their expected content is pinned
             # exactly (expected_after_custom_script). Every other record must
             # still equal the materialized target exactly.
+            if record_id in ROUND_036_EDITED:
+                # round 036: pinned as a rule, against the record on main (see ROUND_036_EDITED)
+                check_round_036_edit(self, record_id, on_disk)
+                if json.dumps(on_disk, indent=2, ensure_ascii=False) + "\n" != on_disk_text:
+                    byte_mismatches.append(record_id)
+                continue
             if record_id in CUSTOM_SCRIPT_RECORDS:
                 target = expected_after_custom_script(record_id, target)
             if record_id in ROUND_035_EDITED:

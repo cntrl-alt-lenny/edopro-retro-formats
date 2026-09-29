@@ -386,7 +386,17 @@ ROUND_035_RETIRED_AT_TENGU_PASSCODES = ROUND_035_RETIRED_PASSCODES - {600000001}
 # generated now. None is ever assigned again: 600000003 (Night Assailant, held back on thin
 # evidence, round 029), the four above, and 600000010-600000017 (round 034's eight cards, which
 # period rulings did not support; that round was never merged).
-RETIRED_PASSCODES = frozenset({600000003} | ROUND_035_RETIRED_PASSCODES | set(range(600000010, 600000018)))
+#
+# Round 036 changes that set: 600000016 is generated again (Dice Re-Roll) and 600000018-21 are
+# assigned; 600000004 and 600000006 are retired with the cards above; 600000010-15 (the five
+# strict-nomi cards and Dark Master - Zorc: the modern card is right) and 600000017 (Second Coin
+# Toss: no third behaviour is established) stay retired.
+RETIRED_PASSCODES = frozenset(
+    {600000003, 600000004, 600000006}
+    | ROUND_035_RETIRED_PASSCODES
+    | set(range(600000010, 600000016))
+    | {600000017}
+)
 
 
 def swap_generated_back(entries, custom_cards, passcodes=None):
@@ -423,8 +433,60 @@ ALL_GENERATED_ALIASES = {
     600000002: 3897065,
     **{generated: modern for modern, generated in ROUND_031_GENERATED.values()},
 }
+# The round-031 substitutions still in force at Tengu's snapshot after round 035 ({erratum id: (modern, generated)}).
+TENGU_GENERATED_AFTER_ROUND_035 = {k: v for k, v in ROUND_031_GENERATED.items() if k not in ROUND_035_RETIRED}
+
+# Round 036: the owner decided on 2026-09-29 that UDE-era card rulings count at Edison and Tengu
+# unless a later Konami document replaced them. Two more generated cards are removed because a
+# ruling shows the modern card behaves as the era card did (Goddess of Whim: the card FAQ says
+# once per turn; Green Baboon: the Damage Step by Konami's lists and the face-up requirement by
+# the Netrep answer and the card FAQ), and five are added because a ruling supports the
+# difference: Dice Re-Roll (round 034's script, reworked), Machina Peacekeeper and Machina
+# Gearframe (the Union Condition), Elemental HERO Chaos Neos (either Main Phase) and Treeborn
+# Frog (no use limit). {erratum id: (modern passcode, generated passcode)}; every one applies at both
+# snapshots. to_round_035() reconstructs the list as round 035 left it, so every pin taken then
+# can still be asserted against a list built now.
+ROUND_036_RETIRED = {
+    "erratum-goddess-of-whim": (67959180, 600000004),
+    "erratum-green-baboon-defender-of-the-forest": (46668237, 600000006),
+}
+ROUND_036_ADDED = {
+    "erratum-dice-re-roll": (83241722, 600000016),
+    "erratum-machina-peacekeeper": (78349103, 600000018),
+    "erratum-machina-gearframe": (42940404, 600000019),
+    "erratum-elemental-hero-chaos-neos": (17032740, 600000020),
+    "erratum-treeborn-frog": (12538374, 600000021),
+}
+ROUND_036_RETIRED_PASSCODES = frozenset(generated for _modern, generated in ROUND_036_RETIRED.values())
+ROUND_036_ADDED_PASSCODES = frozenset(generated for _modern, generated in ROUND_036_ADDED.values())
+# The three round-036 records that had to become full v2 records (the single-event sugar cannot carry a
+# cosmetic transition): before round 036 the corpus was 177 sugar and 119 full v2 records, now 174 and 122.
+ROUND_036_CONVERTED_TO_FULL_V2 = frozenset(
+    {"erratum-goddess-of-whim", "erratum-green-baboon-defender-of-the-forest", "erratum-vw-tiger-catapult"}
+)
+# Both conversions: before round 035 the corpus was 116 full v2 and 180 sugar records.
+CONVERTED_TO_FULL_V2 = ROUND_035_CONVERTED_TO_FULL_V2 | ROUND_036_CONVERTED_TO_FULL_V2
 # The round-031 substitutions still in force at Tengu's snapshot ({erratum id: (modern, generated)}).
-TENGU_GENERATED = {k: v for k, v in ROUND_031_GENERATED.items() if k not in ROUND_035_RETIRED}
+TENGU_GENERATED = {
+    **{k: v for k, v in TENGU_GENERATED_AFTER_ROUND_035.items() if k not in ROUND_036_RETIRED},
+    **ROUND_036_ADDED,
+}
+TENGU_GENERATED_PASSCODES_NOW = frozenset(generated for _modern, generated in TENGU_GENERATED.values())
+# swap_back() also undoes the cards round 036 added.
+ALL_GENERATED_ALIASES.update({generated: modern for modern, generated in ROUND_036_ADDED.values()})
+
+
+def to_round_035(entries):
+    """A built lflist's {code: count} as round 035 left it: each card round 036 added is its modern
+    card again, and each card round 036 removed is its generated code again."""
+    out = dict(entries)
+    for modern, generated in ROUND_036_ADDED.values():
+        if generated in out:
+            out[modern] = out.pop(generated)
+    for modern, generated in ROUND_036_RETIRED.values():
+        if modern in out:
+            out[generated] = out.pop(modern)
+    return out
 
 
 def swap_back(entries, passcodes=None):

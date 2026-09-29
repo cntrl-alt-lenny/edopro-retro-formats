@@ -37,7 +37,10 @@ from .helpers import (
     REPO_ROOT,
     RETIRED_PASSCODES,
     ROUND_035_RETIRED,
+    ROUND_036_ADDED,
+    ROUND_036_RETIRED,
     TENGU_GENERATED_PASSCODES,
+    TENGU_GENERATED_PASSCODES_NOW,
     TempRepoTest,
     card,
     change,
@@ -70,17 +73,29 @@ class LiveGeneratedOutputTest(unittest.TestCase):
     def test_the_repository_generates_exactly_these_cards(self):
         # Round 035 removed Metalzoa (600000001), Rise of the Snake Deity (600000007), Malefic
         # Blue-Eyes White Dragon (600000008) and Soul Rope (600000009): Konami's period rulings
-        # show the modern card behaves as the era card did. Their numbers, 600000003 and round
-        # 034's 600000010-600000017 are retired (RETIRED_PASSCODES) and are never assigned again.
+        # show the modern card behaves as the era card did. Round 036 removed Goddess of Whim
+        # (600000004) and Green Baboon (600000006) for the same reason, under the owner's decision
+        # that UDE-era rulings count, and generated Dice Re-Roll (600000016), Machina Peacekeeper
+        # (600000018), Machina Gearframe (600000019), Elemental HERO Chaos Neos (600000020) and
+        # Treeborn Frog (600000021), each supported by a ruling. Every retired number is in
+        # RETIRED_PASSCODES and is never assigned again.
         self.assertEqual(
             [
                 (600000002, "erratum-super-vehicroid-stealth-union"),
-                (600000004, "erratum-goddess-of-whim"),
                 (600000005, "erratum-strike-ninja"),
-                (600000006, "erratum-green-baboon-defender-of-the-forest"),
+                (600000016, "erratum-dice-re-roll"),
+                (600000018, "erratum-machina-peacekeeper"),
+                (600000019, "erratum-machina-gearframe"),
+                (600000020, "erratum-elemental-hero-chaos-neos"),
+                (600000021, "erratum-treeborn-frog"),
             ],
             [(c.passcode, c.erratum) for c in self.cards],
         )
+        for erratum_id, (_modern, generated) in {**ROUND_036_ADDED}.items():
+            self.assertIn(generated, {c.passcode for c in self.cards}, erratum_id)
+        for erratum_id, (_modern, generated) in ROUND_036_RETIRED.items():
+            self.assertNotIn(generated, {c.passcode for c in self.cards}, erratum_id)
+            self.assertIn(generated, RETIRED_PASSCODES)
 
     def test_every_live_record_passes_the_rulings_gate(self):
         # Round 035 (part B): no generated card without a recorded rulings check. The rule
@@ -196,12 +211,11 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         """Sixteen rows: the live cards under fresh passcodes. Round 034's data made the file span
         several pages; after round 035 the live file holds four rows and fits in three, so the
         page-splitting behaviour these tests are about needs rows of its own."""
-        cards = [
-            dataclasses.replace(c, passcode=600000900 + i * 4 + n, name=f"{c.name} copy {i}")
-            for i in range(4)
-            for n, c in enumerate(self.cards)
+        # Round 036: the live file holds seven rows, so the sixteen are the live cards cycled.
+        return [
+            dataclasses.replace(c, passcode=600000900 + i, name=f"{c.name} copy {i}")
+            for i, c in ((i, self.cards[i % len(self.cards)]) for i in range(16))
         ]
-        return cards
 
     @staticmethod
     def _unused_ranges(data):
@@ -279,13 +293,15 @@ class LiveGeneratedOutputTest(unittest.TestCase):
 
     def test_tengu_list_uses_exactly_the_cards_whose_state_applies_at_its_snapshot(self):
         # The generated cards whose record puts the same historical state at Tengu's snapshot
-        # (2011-09-17) as at Edison's: Goddess of Whim, Strike Ninja and Green Baboon. Super
+        # (2011-09-17) as at Edison's: Strike Ninja and the five cards round 036 added. Super
         # Vehicroid - Stealth Union is not among them (its erratum, 2011-06-01, predates Tengu's
-        # snapshot), and neither was Metalzoa (2011-08-13) before round 035 removed it.
-        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in TENGU_GENERATED_PASSCODES])
-        self.assertEqual(TENGU_GENERATED_PASSCODES, {c.passcode for c in self.cards} & set(tengu.entries))
+        # snapshot), and neither was Metalzoa (2011-08-13) before round 035 removed it. Round 031's
+        # Goddess of Whim and Green Baboon were among them until round 036 removed them.
+        tengu = self._assert_list_uses(TENGU, [c for c in self.cards if c.passcode in TENGU_GENERATED_PASSCODES_NOW])
+        self.assertEqual(TENGU_GENERATED_PASSCODES_NOW, {c.passcode for c in self.cards} & set(tengu.entries))
+        self.assertEqual({600000005}, TENGU_GENERATED_PASSCODES & TENGU_GENERATED_PASSCODES_NOW)
         for c in self.cards:
-            if c.passcode not in TENGU_GENERATED_PASSCODES:
+            if c.passcode not in TENGU_GENERATED_PASSCODES_NOW:
                 with self.subTest(passcode=c.passcode):
                     self.assertIn(self.repo.errata[c.erratum].modern_card.passcode, tengu.entries)
 
@@ -323,11 +339,12 @@ class LiveGeneratedOutputTest(unittest.TestCase):
         # Round 032: the round-031 scripts that measured close to Project Ignis's are derived
         # from them and AGPL-3.0-or-later; the one that measured independent stays original and
         # MIT. Round 035 removed the other original scripts (Metalzoa, Malefic Blue-Eyes) and
-        # two derived ones (Rise of the Snake Deity, Soul Rope).
+        # two derived ones (Rise of the Snake Deity, Soul Rope); round 036 removed two more derived
+        # ones (Goddess of Whim, Green Baboon) and added five, all derived.
         kinds = {c.passcode: c.raw["authorship"]["kind"] for c in self.cards}
         self.assertEqual({600000002}, {p for p, k in kinds.items() if k == "original"})
         self.assertEqual(
-            {600000004, 600000005, 600000006},
+            {600000005, 600000016, 600000018, 600000019, 600000020, 600000021},
             {p for p, k in kinds.items() if k == "derived"},
         )
         for c in self.cards:

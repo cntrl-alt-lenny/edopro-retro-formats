@@ -37,10 +37,12 @@ from tests.helpers import (
     ROUND_031_GENERATED,
     ROUND_031_PASSCODES,
     ROUND_035_RETIRED_PASSCODES,
+    ROUND_036_ADDED,
+    ROUND_036_RETIRED,
     TENGU_GENERATED,
     swap_back,
-    swap_generated_back,
     swap_retired_forward,
+    to_round_035,
 )
 from tests.test_tengu_format_gate import EXPECTED_EDISON_STYLE_FALLBACK
 
@@ -58,7 +60,13 @@ ROOT = Path(__file__).resolve().parents[1]
 # Rise of the Snake Deity, Malefic Blue-Eyes and Soul Rope (600000007-9), so those three
 # codes are modern again and three generated cards remain. test_28 swaps the three forward
 # and asserts the round-031 hash.
-TENGU_HASH = 0x410A9E85
+# Re-pinned round 036: the owner decided that UDE-era rulings count (docs/state.md, "Period
+# rulings"). Goddess of Whim and Green Baboon (600000004, 600000006) are modern codes again, and five
+# generated cards are in the list: Dice Re-Roll, Machina Peacekeeper, Machina Gearframe, Elemental
+# HERO Chaos Neos and Treeborn Frog (600000016, 600000018-21). test_28 undoes both and asserts the
+# round-035 hash.
+TENGU_HASH = 0x79D06437
+TENGU_PRE_ROUND_036_HASH = 0x410A9E85
 TENGU_PRE_ROUND_035_HASH = 0x45A6E446
 TENGU_PRE_ROUND_031_HASH = 0x0C878718
 GOAT_HASH = 0x28E9FC02
@@ -70,7 +78,9 @@ EDISON_PRE_ROUND_031_HASH = 0xD5E90AFA
 # Re-pinned round 035: four of the eight generated cards were removed (Metalzoa, Rise of the
 # Snake Deity, Malefic Blue-Eyes, Soul Rope); test_30 swaps them forward and asserts the old hash.
 EDISON_PRE_ROUND_035_HASH = 0x9CC869A4
-EDISON_HASH = 0xC2ED2D57
+# Re-pinned round 036: the same swaps as for Tengu; test_30 undoes them and asserts the round-035 hash.
+EDISON_PRE_ROUND_036_HASH = 0xC2ED2D57
+EDISON_HASH = 0x56875063
 TENGU_POOL_COUNT = 4563
 
 
@@ -259,21 +269,30 @@ class TenguFormatTest(unittest.TestCase):
         self.assertEqual(126, len(determinate))
         self.assertEqual(170, len(ambiguous))
 
-        # Round 035: Rise of the Snake Deity and Malefic Blue-Eyes are modern-correct now (they
-        # were 33 modern before), and Soul Rope is a known gap again.
+        # Round 035: Rise of the Snake Deity and Malefic Blue-Eyes were modern-correct (33 modern
+        # before), and Soul Rope a known gap again. Round 036: eight more records are modern-correct
+        # (Goddess of Whim, Green Baboon, Dark Master - Zorc and the five strict-nomi cards Gigantes,
+        # The Rock Spirit, Garuda the Wind Spirit, VW-Tiger Catapult and Gladiator Beast Heraklinos),
+        # so 43 modern.
         modern = sum(s.candidates[0].coverage.kind == Coverage.MODERN for s in determinate)
-        self.assertEqual(35, modern)
-        self.assertEqual(33, modern - 2)
+        self.assertEqual(43, modern)
+        self.assertEqual(35, modern - 8)
+        self.assertEqual(33, modern - 8 - 2)
         self.assertEqual(52, sum(s.candidates[0].coverage.kind == Coverage.REUSE_UPSTREAM for s in determinate))
         # Round 031 moved six of the 38 known-gap records to custom-script; the earlier 38 is their
-        # sum. Round 035 took three of the six back out (Rise and Malefic are modern-correct,
-        # Soul Rope is a known gap again).
+        # sum. Round 035 took three of the six back out (Rise and Malefic are modern-correct, Soul
+        # Rope is a known gap again). Round 036 took Goddess of Whim and Green Baboon out (modern-
+        # correct), moved Zorc and the five nomi cards to modern-correct, and moved five known gaps
+        # to custom-script (Dice Re-Roll, Machina Peacekeeper, Machina Gearframe, Elemental HERO
+        # Chaos Neos, Treeborn Frog): 22 known gaps and 6 custom-script records now.
         known_gap = sum(s.candidates[0].coverage.kind == Coverage.KNOWN_GAP for s in determinate)
         custom_script = sum(s.candidates[0].coverage.kind == Coverage.CUSTOM_SCRIPT for s in determinate)
-        self.assertEqual(33, known_gap)
-        self.assertEqual(3, custom_script)
-        self.assertEqual(32, known_gap - 1)
-        self.assertEqual(38, known_gap + custom_script + 2)
+        self.assertEqual(22, known_gap)
+        self.assertEqual(6, custom_script)
+        self.assertEqual(33, known_gap + 11)
+        self.assertEqual(3, custom_script - 3)
+        self.assertEqual(36, known_gap + custom_script + 8)
+        self.assertEqual(38, known_gap + custom_script + 8 + 2)
         self.assertEqual(3, sum(s.candidates[0].coverage.kind == Coverage.NONE_NEEDED for s in determinate))
 
         self.assertEqual(161, sum(s.modern_is_possible for s in ambiguous))
@@ -301,10 +320,14 @@ class TenguFormatTest(unittest.TestCase):
         generated = {k: v for k, v in actual_mapping.items() if v[1] in RESERVED_PASSCODE_RANGE}
         self.assertEqual(EXPECTED_EDISON_STYLE_FALLBACK, upstream)
         self.assertEqual(52, len(upstream))
-        # Round 035: three of the six are still generated at Tengu's snapshot.
+        # Round 035: three of the six were still generated at Tengu's snapshot. Round 036: Goddess of
+        # Whim and Green Baboon are gone and five cards are added, so Strike Ninja and the five.
         self.assertEqual(TENGU_GENERATED, generated)
-        self.assertEqual(6, len(TENGU_GENERATED) + 3)  # round 031's six, less Rise, Malefic and Soul Rope
-        self.assertEqual(55, len(actual_mapping))
+        self.assertEqual(6, len(TENGU_GENERATED))
+        self.assertEqual(3, len(TENGU_GENERATED) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
+        self.assertEqual(6, len(TENGU_GENERATED) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED) + 3)  # round 031's six
+        self.assertEqual(58, len(actual_mapping))
+        self.assertEqual(55, len(actual_mapping) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
 
     def test_21_no_unexpected_extra_substitutions(self):
         overrides = select_applicable_errata(self.fmt, self.repo)
@@ -351,10 +374,14 @@ class TenguFormatTest(unittest.TestCase):
                 divergences.append(e.modern_card.name)
         # Round 031: six of the earlier 38 were implemented (custom-script). Round 035: two of
         # those (Rise of the Snake Deity, Malefic Blue-Eyes) are modern-correct, and one (Soul
-        # Rope) is a known gap again, so 33 now and 38 == 33 + 3 remaining generated + 2.
-        self.assertEqual(33, len(divergences))
-        self.assertEqual(32, len(divergences) - 1)
-        self.assertEqual(38, len(divergences) + len(TENGU_GENERATED) + 2)
+        # Rope) is a known gap again, so 33 then and 38 == 33 + 3 remaining generated + 2. Round 036:
+        # six known gaps are modern-correct (Dark Master - Zorc and the five strict-nomi cards) and
+        # five are custom-script (round 036's additions), so 22 now.
+        moved_to_modern, moved_to_custom, generated_after_035 = 6, len(ROUND_036_ADDED), 3
+        self.assertEqual(22, len(divergences))
+        self.assertEqual(33, len(divergences) + moved_to_modern + moved_to_custom)
+        self.assertEqual(32, len(divergences) + moved_to_modern + moved_to_custom - 1)
+        self.assertEqual(38, len(divergences) + moved_to_modern + moved_to_custom + generated_after_035 + 2)
 
     def test_25_generated_tengu_lflist_contains_every_legal_card_correctly(self):
         built = build_lflist(self.fmt, self.repo)
@@ -441,17 +468,26 @@ class TenguFormatTest(unittest.TestCase):
         built = build_lflist(self.fmt, self.repo)
         self.assertEqual(TENGU_HASH, built.hash)
         self.assertEqual(TENGU_HASH, lflist_hash(built.entries))
+        # Round 036: undoing its two removals and five additions (to_round_035) must reproduce the
+        # round-035 hash, so nothing else moved.
+        self.assertEqual(
+            5, sum(generated in built.entries for _modern, generated in ROUND_036_ADDED.values())
+        )
+        round_035 = to_round_035(built.entries)
+        self.assertEqual(TENGU_PRE_ROUND_036_HASH, lflist_hash(round_035))
         # Swapping the three round-035 removals forward to the generated codes they had must
         # reproduce the round-031 hash, and swapping all six round-031 codes back to their
         # modern cards the hash pinned before that round, so nothing else moved. (Metalzoa's
         # generated card was never in Tengu's list: its erratum precedes the snapshot.)
-        self.assertEqual(3, len(ROUND_031_PASSCODES & set(built.entries)))
-        forward = swap_retired_forward(built.entries, ROUND_035_RETIRED_PASSCODES - {600000001})
+        self.assertEqual(3, len(ROUND_031_PASSCODES & set(round_035)))
+        forward = swap_retired_forward(round_035, ROUND_035_RETIRED_PASSCODES - {600000001})
         self.assertEqual(6, len(ROUND_031_PASSCODES & set(forward)))
         self.assertEqual(TENGU_PRE_ROUND_035_HASH, lflist_hash(forward))
-        swapped_back = swap_generated_back(built.entries, self.repo.custom_cards)
+        swapped_back = swap_back(round_035)  # the static alias map: the round-035 list names cards no longer generated
         self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swapped_back))
         self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swap_back(forward)))
+        # and swapping every generated code in today's list back reaches the same hash directly
+        self.assertEqual(TENGU_PRE_ROUND_031_HASH, lflist_hash(swap_back(built.entries)))
 
     def test_29_goat_output_remains_byte_identical_and_hash_pinned(self):
         goat_fmt = self.repo.formats["2005-04-goat"]
@@ -479,10 +515,18 @@ class TenguFormatTest(unittest.TestCase):
         # eight back reproduces the pre-round-029 hash.
         # Re-pinned round 035: four of the eight generated cards were removed. Swapping those
         # four forward reproduces the round-031 hash, and the older ones follow from it.
+        # Re-pinned round 036: two of the four were removed and five generated cards added; undoing
+        # both (to_round_035) reproduces the round-035 hash.
         self.assertEqual(EDISON_HASH, built_edison.hash)
-        self.assertEqual(4, len(self.repo.custom_cards))
-        self.assertEqual(8, len(self.repo.custom_cards) + len(ROUND_035_RETIRED_PASSCODES))
-        forward = swap_retired_forward(built_edison.entries)
+        self.assertEqual(7, len(self.repo.custom_cards))
+        round_035 = to_round_035(built_edison.entries)
+        self.assertEqual(EDISON_PRE_ROUND_036_HASH, lflist_hash(round_035))
+        self.assertEqual(4, len(self.repo.custom_cards) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED))
+        self.assertEqual(
+            8,
+            len(self.repo.custom_cards) - len(ROUND_036_ADDED) + len(ROUND_036_RETIRED) + len(ROUND_035_RETIRED_PASSCODES),
+        )
+        forward = swap_retired_forward(round_035)
         self.assertEqual(EDISON_PRE_ROUND_035_HASH, lflist_hash(forward))
         six_back = swap_back(forward, ROUND_031_PASSCODES)
         self.assertEqual(EDISON_PRE_ROUND_031_HASH, lflist_hash(six_back))

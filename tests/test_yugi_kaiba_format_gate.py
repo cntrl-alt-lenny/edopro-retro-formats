@@ -28,6 +28,7 @@ from .helpers import (
     swap_back,
     swap_generated_back,
     swap_retired_forward,
+    to_round_035,
 )
 
 
@@ -1595,10 +1596,13 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         determinate_modern = sum(selection.is_modern for selection in determinate)
         determinate_historical = len(determinate) - determinate_modern
         # Round 035: Metalzoa, Rise of the Snake Deity and Malefic Blue-Eyes are cosmetic-only
-        # records now (modern at every snapshot), so 24 modern and 124 historical where the
-        # frozen packet records 21 and 127.
-        self.assertEqual(21 + 3, determinate_modern)
-        self.assertEqual(127 - 3, determinate_historical)
+        # records (modern at every snapshot), so 24 modern and 124 historical where the frozen
+        # packet records 21 and 127. Round 036 made eight more cosmetic-only (Goddess of Whim, Green
+        # Baboon, Dark Master - Zorc, Gigantes, The Rock Spirit, Garuda the Wind Spirit, VW-Tiger
+        # Catapult, Gladiator Beast Heraklinos): 32 modern and 116 historical now.
+        self.assertEqual(21 + 3 + 8, determinate_modern)
+        self.assertEqual(127 - 3 - 8, determinate_historical)
+        self.assertEqual((24, 124), (determinate_modern - 8, determinate_historical + 8))
         self.assertEqual(21, audit["determinate"]["modern"])
         self.assertEqual(127, audit["determinate"]["historical"])
 
@@ -1617,12 +1621,17 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # Malefic Blue-Eyes are modern-correct (cosmetic-only records, so not in this count) and
         # Soul Rope is a known gap again. The frozen packet's 42 known-gap: -8 to custom-script,
         # +1 (Soul Rope) back; custom-script 0 + 8 - 4 = 4.
+        # Round 036: six known gaps are modern-correct cosmetic-only records now (Dark Master - Zorc
+        # and the five strict-nomi cards), five became custom-script (Dice Re-Roll, Machina
+        # Peacekeeper, Machina Gearframe, Elemental HERO Chaos Neos, Treeborn Frog), and Goddess of
+        # Whim and Green Baboon left custom-script for modern-correct: 24 known gaps, 7 custom-script.
         self.assertEqual(
-            {"reuse-upstream": 81, "known-gap": 35, "none-needed": 4, "custom-script": 4}, determinate_coverage
+            {"reuse-upstream": 81, "known-gap": 24, "none-needed": 4, "custom-script": 7}, determinate_coverage
         )
+        self.assertEqual((35, 4), (determinate_coverage["known-gap"] + 6 + 5, determinate_coverage["custom-script"] - 5 + 2))
         packet_with_generated_cards = dict(audit["determinate"]["coverage"])
-        packet_with_generated_cards["known-gap"] += -8 + 1
-        packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8 - 4
+        packet_with_generated_cards["known-gap"] += -8 + 1 - 6 - 5
+        packet_with_generated_cards["custom-script"] = packet_with_generated_cards.get("custom-script", 0) + 8 - 4 + 5 - 2
         self.assertEqual(determinate_coverage, packet_with_generated_cards)
         self.assertEqual(
             set(), set(determinate_coverage) - {"reuse-upstream", "known-gap", "none-needed", "custom-script"}
@@ -1705,9 +1714,14 @@ class YugiKaibaResearchGateTest(unittest.TestCase):
         # Re-pinned round 031: six generated cards (600000004-9) were in Tengu's list; round 035
         # took three of them out again (600000007-9), so the list holds three now. Swapping the
         # three forward reproduces the round-031 pin, and swapping all six back the earlier one.
+        # Re-pinned round 036: Goddess of Whim and Green Baboon are modern codes again and five generated
+        # cards (600000016, 600000018-21) are in the list; to_round_035 undoes both and reproduces the
+        # round-035 pin.
         tengu = build_lflist(self.repo.formats["2011-09-tengu"], self.repo)
-        self.assertEqual(0x410A9E85, tengu.hash)
-        forward = swap_retired_forward(tengu.entries, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
+        self.assertEqual(0x79D06437, tengu.hash)
+        round_035 = to_round_035(tengu.entries)
+        self.assertEqual(0x410A9E85, lflist_hash(round_035))
+        forward = swap_retired_forward(round_035, ROUND_035_RETIRED_AT_TENGU_PASSCODES)
         self.assertEqual(0x45A6E446, lflist_hash(forward))
         self.assertEqual(0x0C878718, lflist_hash(swap_back(forward, ROUND_031_PASSCODES)))
         self.assertFalse((ROOT / "formats" / "1999-08-tokyo-dome").exists())
