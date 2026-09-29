@@ -445,6 +445,84 @@ def check_round_037_edit(test, record_id, on_disk):
     test.assertEqual([], lost, f"{record_id}: passages of the earlier record that are gone")
 
 
+# Round 038 (docs/research/text-only-errata-audit.md, section 11) edited nine of those records again: it applied the
+# owner's two tie-break rules to the source conflicts round 037 left (Necrovalley: rule 1; the four contact-Fusion
+# records: rule 2), fixed what round 037's review found (Night Assailant's owner_decision, Dark Necrofear's c2), and
+# gave the three transitions the gate had exempted by name a rulings check (Dark Necrofear's c2, Fushioh Richie,
+# Second Coin Toss). Pinned as the same rule, against the record as it stood on `main` before the round
+# (tests/fixtures/round-038-before/), which itself must still satisfy round 037's rule:
+# every passage of the earlier record survives verbatim, a replaced summary is kept verbatim in the review notes,
+# and no kind, chronology, text or coverage changes.
+# {erratum id: (fixture file, ids of the events whose summary changed)}
+ROUND_038_EDITED: dict = {
+    'erratum-necrovalley': ('necrovalley', {'c0', 'c1'}),
+    'erratum-yz-tank-dragon': ('yz-tank-dragon', frozenset()),
+    'erratum-xy-dragon-cannon': ('xy-dragon-cannon', frozenset()),
+    'erratum-xyz-dragon-cannon': ('xyz-dragon-cannon', frozenset()),
+    'erratum-xz-tank-cannon': ('xz-tank-cannon', frozenset()),
+    'erratum-night-assailant': ('night-assailant', frozenset()),
+    'erratum-dark-necrofear': ('dark-necrofear', {'c2'}),
+    'erratum-fushioh-richie': ('fushioh-richie', frozenset()),
+    'erratum-second-coin-toss': ('second-coin-toss', frozenset()),
+}
+ROUND_038_FIXTURES = Path(__file__).resolve().parent / "fixtures" / "round-038-before"
+
+
+def check_round_038_edit(test, record_id, on_disk):
+    """`on_disk` is the record now; its state on `main` before round 038 is the fixture."""
+    fixture, changed_ids = ROUND_038_EDITED[record_id]
+    before = json.loads((ROUND_038_FIXTURES / f"{fixture}.json").read_text(encoding="utf-8"))
+    # the chain: the record on main is itself a round-037 (or, for the two records round 037 did not audit,
+    # a round-036) edit and must still satisfy that round's rule
+    if record_id in ROUND_037_EDITED:
+        check_round_037_edit(test, record_id, before)
+    else:
+        test.assertIn(record_id, ROUND_036_EDITED)
+        check_round_036_edit(test, record_id, before)
+    for key in ("$schema", "id", "modern_card", "reference_identities", "classification"):
+        test.assertEqual(before[key], on_disk[key], f"{record_id}: {key}")
+    test.assertEqual((before["review"]["status"], before["review"]["date"]), (on_disk["review"]["status"], on_disk["review"]["date"]))
+    notes = on_disk["review"]["notes"]
+    test.assertTrue(notes.startswith(before["review"]["notes"]), f"{record_id}: the old review notes are kept verbatim")
+    test.assertIn("Round 038 (2026-09-29)", notes)
+    test.assertTrue(set(before["sources"]) <= set(on_disk["sources"]), f"{record_id}: no source is dropped")
+    old_transitions, new_transitions = _transitions(before), _transitions(on_disk)
+    test.assertEqual(set(old_transitions), set(new_transitions))
+    test.assertEqual(_effective(before), _effective(on_disk), f"{record_id}: chronology is unchanged")
+    changed = set()
+    for eid, old_list in old_transitions.items():
+        new_list = new_transitions[eid]
+        test.assertEqual([t["kind"] for t in old_list], [t["kind"] for t in new_list], f"{record_id}/{eid}: no kind changes")
+        for old, new in zip(old_list, new_list):
+            for key in ("axis", "historical_text", "modern_text"):
+                test.assertEqual(old[key], new[key], f"{record_id}/{eid}: {key}")
+            test.assertTrue(set(old["sources"]) <= set(new["sources"]), f"{record_id}/{eid}: no source is dropped")
+            if eid in changed_ids:
+                changed.add(eid)
+                test.assertNotEqual(old["summary"], new["summary"], f"{record_id}/{eid}: the summary is narrowed")
+                test.assertIn(old["summary"], notes, f"{record_id}/{eid}: the old summary is kept verbatim")
+            else:
+                test.assertEqual(old["summary"], new["summary"], f"{record_id}/{eid}: an untouched transition is unchanged")
+    test.assertEqual(set(changed_ids), changed)
+    # coverage is untouched
+    for key in ("coverage", "states"):
+        test.assertEqual(before.get(key), on_disk.get(key), f"{record_id}: {key}")
+    # a gap statement only gains a dated withdrawal; nothing is replaced
+    for old_meta, new_meta in zip(before["implementation_metadata"], on_disk["implementation_metadata"]):
+        test.assertEqual(old_meta["events"], new_meta["events"])
+        test.assertEqual(old_meta["status"], new_meta["status"])
+        if "gap" in old_meta:
+            test.assertTrue(new_meta["gap"]["behavioural_impact"].startswith(old_meta["gap"]["behavioural_impact"]))
+    # The rule: every passage of the earlier record survives verbatim in the record now.
+    dump = json.dumps(on_disk, ensure_ascii=False)
+    lost = [
+        path
+        for path, text in _string_leaves(before)
+        if len(text) >= MIN_PASSAGE and json.dumps(text, ensure_ascii=False)[1:-1] not in dump
+    ]
+    test.assertEqual([], lost, f"{record_id}: passages of the earlier record that are gone")
+
+
 def expected_after_custom_script(record_id, target):
     """The frozen `target`, with the round's coverage and metadata edit applied."""
     passcode, round_number = CUSTOM_SCRIPT_RECORDS[record_id]
@@ -555,6 +633,12 @@ class MaterializedCorpusTest(unittest.TestCase):
             # records after the migration; their expected content is pinned
             # exactly (expected_after_custom_script). Every other record must
             # still equal the materialized target exactly.
+            if record_id in ROUND_038_EDITED:
+                # round 038: pinned as a rule, against the record on main (see ROUND_038_EDITED)
+                check_round_038_edit(self, record_id, on_disk)
+                if json.dumps(on_disk, indent=2, ensure_ascii=False) + "\n" != on_disk_text:
+                    byte_mismatches.append(record_id)
+                continue
             if record_id in ROUND_037_EDITED:
                 # round 037: pinned as a rule, against the record on main (see ROUND_037_EDITED)
                 check_round_037_edit(self, record_id, on_disk)

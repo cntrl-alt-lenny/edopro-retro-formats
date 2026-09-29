@@ -49,8 +49,7 @@
             "ude-card-faq-2009-02-26-uz",
             "ude-card-rulings-archive",
             "konami-card-faq-2008-12-15-fh",
-            "konami-card-faq-2008-12-15-de",
-            "konami-card-faq-near-edison-2009-01-16-uz"
+            "konami-card-faq-2008-12-15-de"
           ],
           "rulings_check": {
             "difference": "Era XY-Dragon Cannon cannot be Special Summoned by any route except its own contact procedure (strict nomi, so it cannot come back from banishment after a proper summon); the modern card is a semi-nomi that can be Special Summoned from banishment once properly summoned, and only the Graveyard is barred.",
@@ -111,36 +110,6 @@
                 "source": "yugipedia-card-rulings-pointer",
                 "looked_for": "'Card Rulings:XY-Dragon Cannon' on Yugipedia (a pointer, never a source) for links to archived UDE judge-list threads or Konami rulings; the ones it links were read as primary documents, and none of the others names the card's difference",
                 "finding": "does-not-address"
-              },
-              {
-                "source": "ude-card-rulings-archive",
-                "looked_for": "d1, round 038 (2026-09-29), rule 2 (between two versions of the same UDE FAQ, the latest version in force at the snapshot governs): the outranked wording. The 2005 UDE card rulings page words the shared XYZ FUSION MONSTERS entry (these four cards) as \"cannot be Special Summoned EXCEPT by the way described in their text\", with Monster Reborn and Magical Scientist as its examples. It never names the banished zone. Kept as the finding it was (it supported d1)",
-                "finding": "does-not-address",
-                "passage": "These monsters cannot be Special Summoned EXCEPT by the way described in their text."
-              },
-              {
-                "source": "konami-card-faq-2008-12-15-uz",
-                "looked_for": "d1, round 038, rule 2: the governing wording. The Konami-hosted copy of 2008-12-15 (and the copies of 2008-12-16, 2009-01-16 and UDE's own U-Z page of 2009-02-26, which carry the same entry word for word) bars the Extra Deck route except by the card's own method and bars the Graveyard even after a proper Summon. It names no other zone: nothing in it says whether the card could be Special Summoned from the banished zone after a proper Summon",
-                "finding": "does-not-address",
-                "passage": "These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text. So they cannot be Special Summoned by the effect of \"Magical Scientist\" or \"Summoner of Illusions\". They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
-              },
-              {
-                "source": "konami-card-faq-near-edison-2009-01-16-uz",
-                "looked_for": "d1, round 038, rule 2: the latest Konami-hosted capture before Edison's snapshot (2009-01-16) of the same entry: word for word the 2008-12-15 wording above",
-                "finding": "does-not-address",
-                "passage": "These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text."
-              },
-              {
-                "source": "ude-card-faq-2009-02-26-uz",
-                "looked_for": "d1, round 038, rule 2: UDE's own card FAQ, cards U-Z (captured 2009-02-26), the latest version of the same entry in the corpus: word for word the 2008-12-15 wording above; the banished zone is not named",
-                "finding": "does-not-address",
-                "passage": "They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts."
-              },
-              {
-                "source": "konami-card-faq-2008-12-15-de",
-                "looked_for": "d1, round 038, rule 2: the Dimension Distortion sentence is identical in the 2005 page and in the 2008-12 pages, so rule 2 decides nothing about it. It speaks of \"Special Summon-only\" monsters in general (the FAQ's own examples are Ritual Monsters and Chaos Emperor Dragon - Envoy of the End) and names none of these four cards; reading it as covering them is an inference, not counted",
-                "finding": "does-not-address",
-                "passage": "When a \"Special Summon-only\" monster is removed, without returning to the hand or Deck, after it is Special Summoned properly, it can be Special Summoned by \"Dimension Distortion\"."
               }
             ]
           }
@@ -172,7 +141,7 @@
   "review": {
     "status": "reviewed",
     "date": "2026-08-20",
-    "notes": "Baseline text is v1 (DR1-EN106, Dark Revelation Volume 1, 2005-03-19, matched at 0.9985 - the residue is line-break handling), which is also the printing in force at the 2005-04-01 GOAT snapshot. v0 (MFC-051, 2003-10-10) says 'the above monsters' and predates the baseline. Lineage v2 and v3 carry no card number, no set and no date in the packet, so they cannot be dated by set-release evidence; both keep the strict 'This card can only be Special Summoned ... by removing from play the above cards' form (v2 adds the redundant 'cannot be Special Summoned from the Graveyard' line, v3 renames Fusion Deck to Extra Deck), so they are behaviourally identical to v1 and are recorded here rather than as an unresolved-chronology change that would needlessly block period snapshots. The erratum entry therefore collapses v1 -> v4. The two remaining script-diff hunks (`REASON_COST|REASON_MATERIAL` and `REASON_COST|REASON_DISCARD` versus the '+' forms) are equivalent. The Monster-Zone material ruling and the 2016 erratum cannot be sequenced against each other because the former has no chronology.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, XY-Dragon Cannon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved (inference only) at Edison, unresolved (inference only) at Tengu.\n\nRound 038 (2026-09-29), rule 2 (docs/state.md, \"Owner decisions - card scripts\", \"Period rulings\": between versions of the same UDE FAQ, the latest in force governs). The FAQ entry shared by XYZ-Dragon Cannon, YZ-Tank Dragon, XY-Dragon Cannon and XZ-Tank Cannon (XYZ FUSION MONSTERS) reads differently in two versions. 2005 UDE card rulings page: \"These monsters cannot be Special Summoned EXCEPT by the way described in their text. They cannot be Special Summoned with \"Monster Reborn\", \"Magical Scientist\", etc.\" The Konami-hosted 2008-12-15 and 2008-12-16 copies, the 2009-01-16 capture and UDE's own U-Z page of 2009-02-26, word for word: \"These monsters cannot be Special Summoned from the Extra Deck except by the method described in their text. So they cannot be Special Summoned by the effect of \"Magical Scientist\" or \"Summoner of Illusions\". They cannot be Special Summoned from the Graveyard even after they have been Special Summoned by the method described in their texts.\" Rule 2 makes the later wording govern. It bars the Extra Deck route and the Graveyard and names no other zone; in particular it does not say whether the card could be Special Summoned from the banished zone after a proper Summon. The Dimension Distortion sentence (\"When a \"Special Summon-only\" monster is removed, without returning to the hand or Deck, after it is Special Summoned properly, it can be Special Summoned by \"Dimension Distortion\".\") is identical in the 2005 page and the 2008-12 pages and names none of these four cards. Verdict: d1 unresolved at Edison and at Tengu, unchanged: the governing wording is silent on the banished zone, and the outranked \"EXCEPT\" wording listed the Graveyard and Extra Deck examples only. Action: none on the transition (kind, summary and coverage unchanged, so no list changes); the outranked and governing wordings are recorded in the check. The Horus the Black Flame Dragon LV8 line of the 2008-12 page F-H (\"has the word \"except\" in its Summoning conditions\") speaks to revival from the Graveyard, which the governing wording already covers."
+    "notes": "Baseline text is v1 (DR1-EN106, Dark Revelation Volume 1, 2005-03-19, matched at 0.9985 - the residue is line-break handling), which is also the printing in force at the 2005-04-01 GOAT snapshot. v0 (MFC-051, 2003-10-10) says 'the above monsters' and predates the baseline. Lineage v2 and v3 carry no card number, no set and no date in the packet, so they cannot be dated by set-release evidence; both keep the strict 'This card can only be Special Summoned ... by removing from play the above cards' form (v2 adds the redundant 'cannot be Special Summoned from the Graveyard' line, v3 renames Fusion Deck to Extra Deck), so they are behaviourally identical to v1 and are recorded here rather than as an unresolved-chronology change that would needlessly block period snapshots. The erratum entry therefore collapses v1 -> v4. The two remaining script-diff hunks (`REASON_COST|REASON_MATERIAL` and `REASON_COST|REASON_DISCARD` versus the '+' forms) are equivalent. The Monster-Zone material ruling and the 2016 erratum cannot be sequenced against each other because the former has no chronology.\n\nRound 037 (2026-09-29). Checked against period rulings: the differences the functional transition claims were searched for in the Konami-hosted UDE card FAQ (2008-12), the 2005 UDE card rulings page, Konami's errata lists, rulebooks and per-set ruling documents, and the archived UDE judge-list threads Yugipedia points to (the transition's rulings_check; docs/research/text-only-errata-audit.md, XY-Dragon Cannon). No period ruling in the corpus settles a claimed difference, so the functional call stands unchanged (`unresolved` at both snapshots); the search is recorded in the check. Verdicts: [c1] d1 unresolved (inference only) at Edison, unresolved (inference only) at Tengu."
   },
   "sources": [
     "ignis-babelcdb",
@@ -184,7 +153,6 @@
     "ude-card-faq-2009-02-26-uz",
     "ude-card-rulings-archive",
     "konami-card-faq-2008-12-15-fh",
-    "konami-card-faq-2008-12-15-de",
-    "konami-card-faq-near-edison-2009-01-16-uz"
+    "konami-card-faq-2008-12-15-de"
   ]
 }

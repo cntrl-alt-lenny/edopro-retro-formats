@@ -63,8 +63,8 @@ under `## Historical anchors`. The restriction hypothesis (three cards
 Limited-to-1) is unresolved and blocking; its evidence is tier C,
 unauthenticated. `legality_basis` is `community-retrospective`;
 `snapshot`/`pool_cutoff` deliberately differ — don't re-collapse.
-Canonicalization is `UNRESOLVED_BLOCKING`: six axes must each reach `PROVEN`
-(per-axis status in the gate document). Don't restart or canonicalize on
+Canonicalization is `UNRESOLVED_BLOCKING`: six axes must each reach `PROVEN`.
+Don't restart or canonicalize on
 volume of research alone.
 
 **Erratum v2** — [`research/erratum-state-model-v2.md`](research/erratum-state-model-v2.md),
@@ -85,8 +85,8 @@ Owner, 2026-08-31: **stop polishing the framework, use it.**
 
 - **No workflow/framework changes without a concrete, observed problem.**
 - **Larger, related briefs**, to amortise review.
-- **Tier review depth proportionally** — deep for historical claims and
-  canonical data; light for bookkeeping.
+- **Tier review depth proportionally**: deep for historical claims and
+  canonical data, light for bookkeeping.
 - **Brain may fix trivial housekeeping directly** — canonical data or an
   evidence-level claim goes to the Builder regardless.
 - **No parallel executors** without an *observed* bottleneck.
@@ -98,15 +98,17 @@ bottleneck actually observed.
 ## Owner decisions — card scripts
 
 - **Licence (2026-09-27).** Ignis's CardScripts are AGPL-3.0-or-later; this
-  repository is MIT. "From scratch" scripts reproduced Ignis's (rounds 029,
-  031), so adapted scripts are allowed: `derived`, credited,
+  repository is MIT. "From scratch" scripts copied Ignis's (rounds 029, 031),
+  so adapted scripts are allowed: `derived`, credited,
   AGPL-3.0-or-later. An `original` script must measurably differ from
-  Ignis's. Night Assailant is held back on thin evidence. A script whose
-  state also applies at Tengu may change Tengu's list (2026-09-24).
+  Ignis's. Night Assailant is held back on thin evidence (confirmed
+  2026-09-29). A script whose state also applies at Tengu may change
+  Tengu's list (2026-09-24).
 - **Period rulings (2026-09-29).** A script follows period rulings, not
   printed text alone. UDE-era card rulings count at Edison and Tengu unless
-  a later Konami document replaced them. When Konami withdrew them is
-  unknown: a product decision, not a finding
+  a later Konami document replaced them; between versions of the same UDE
+  FAQ, the latest in force governs. Their withdrawal date is unknown: a
+  product decision
   ([`research/period-rulings-generated-scripts.md`](research/period-rulings-generated-scripts.md)).
 
 ## Open items and sequencing judgements
@@ -119,8 +121,8 @@ doesn't record:
   **gates further chronology research** — the data model can't record the
   answer yet. Prefer Phase-1 hardening over breadth meanwhile: no new
   historical format while roadmap Phase-1 items remain open.
-- **Format Library's "previous status" markers are unreliable as a class**
-  (round 13) — membership only, never deltas.
+- **Format Library's "previous status" markers are unreliable** (round 13):
+  membership only, never deltas.
 - **An unreviewed second run of round 13 is parked, not adopted:** ref
   `preserve/round13-alt-run-1bec139` — a different primary source for the
   September 2010 changeover, to re-verify from source, never copy;
