@@ -625,7 +625,14 @@ reflects that.
    again in the Edison and Tengu lists** (the only list change); Axe of Despair's and Tyrant Dragon's 2013 transitions became
    cosmetic. Anything thin or in conflict between period sources was left alone and is listed for the owner in
    `docs/research/text-only-errata-audit.md`, section 8; so are the points where an Ignis script and a ruling disagree
-   (section 9). **Remaining:** 25 Edison
+   (section 9). **Round 038** applied the owner's two tie-break rules of 2026-09-29: rule 1 decided Necrovalley at Edison
+   (Konami's Raging Battle ruling outranks the UDE-era FAQ sentence, so c1 is narrowed to what is left), rule 2 decided which wording of
+   the contact-Fusion FAQ entry governs XYZ-Dragon Cannon, YZ-Tank Dragon, XY-Dragon Cannon and XZ-Tank Cannon (2008-12 over 2005;
+   it still does not name the banished zone, so the verdict stays `unresolved`), and Blaze Accelerator's conflict inside one entry stays
+   unresolved. It also fixed round 037's review findings, removed the gate's three by-name exemptions by giving Dark Necrofear's `c2`,
+   Fushioh Richie and Second Coin Toss a check, and made the Edison and Tengu format notes state no count
+   (`docs/research/text-only-errata-audit.md`, section 11). No list changed. The points where an Ignis script and a ruling disagree
+   (section 9) are still for a later round. **Remaining:** 25 Edison
    `format.erratum-known-divergence` cards (`validate` at round 037's head; 28 at round 036's): Night Assailant,
    five cards that apply an intermediate state at Edison only (Freed the Matchless General,
    Fusion Sage, Horus the Black Flame Dragon LV4, Thunder Dragon, Toon Table of Contents -
