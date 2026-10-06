@@ -6,11 +6,10 @@ anchors`, queue, branch layout or test counts). Derive live state:
 | question | source of truth |
 |---|---|
 | commit, branch, remote sync | `git status`, `git rev-parse` |
-| round queued / in flight / delivered? | `fw.py status`, `docs/rounds/` |
-| Builder branch unmerged? | `git branch -a`, `git worktree list` |
+| batch unmerged? | `fw.py status`, `git branch -a`, `git worktree list` |
 | push hook configured? | `git config --get core.hooksPath` |
 | CI result | the run for that exact SHA |
-| past rounds | `docs/rounds/`, `docs/briefs/archive/`, `git log` |
+| past work | `docs/batches/`, `docs/rounds/`, `docs/briefs/archive/`, `git log` |
 | per-format status | `python -m retroformats report` |
 
 History: [`docs/archive/state-history.md`](archive/state-history.md).
@@ -129,6 +128,10 @@ doesn't record:
   per-clone, not on `origin`.
 - **Materialisation repairs only pool-content drift**
   (`pool.materialization-drift`); every other `pool.*` error still refuses.
+
+## Scorecard
+
+First line due 2026-10-20.
 
 ## Owner preferences
 
