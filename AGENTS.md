@@ -11,17 +11,17 @@ still preventing the first.
 is [`docs/agents/FRAMEWORK.md`](docs/agents/FRAMEWORK.md) and the role cards
 in [`docs/agents/roles/`](docs/agents/roles/), copied verbatim from the
 shared framework ([`cntrl-alt-lenny/agentic-framework`](https://github.com/cntrl-alt-lenny/agentic-framework))
-and never edited here — see `docs/agents/FRAMEWORK.md` rule 14. This file is
+and never edited here — see `docs/agents/FRAMEWORK.md` rule 10. This file is
 the project-specific part: the topology, the merge rule, the invariants, the
 evidence each kind of change must produce, and where things are. Where it and
 a role card seem to disagree on something generic, the card wins; where they
 disagree on something about *this project*, stop and raise it with Brain.
 
-**Merge rule: owner-approves.** After Brain accepts a round it shows the
+**Merge rule: owner-approves.** After Brain accepts a batch it shows the
 owner a four-line merge card (what changed, what was verified and how, what
 was not verified, and the risk) and merges only after the owner says yes.
 Set by the owner on 2026-09-16, alongside the same rule for the shared
-framework repository. Rejections and corrective briefs need no approval. The
+framework repository. Rejections and corrective prompts need no approval. The
 owner may relax this later; until they say so it holds on every tool.
 
 Two project-specific additions to `docs/agents/FRAMEWORK.md`'s owner-reserved
@@ -45,22 +45,20 @@ Owner
 | Role | Holds | Scope |
 |---|---|---|
 | **Owner** | Direction, priorities, scope. Veto and reversal. | — |
-| **Brain** | Project context, sequencing, briefs, adjudication, and the routine merge. ([contract](docs/agents/roles/brain.md)) | Durable state ([`docs/state.md`](docs/state.md)) and the round queue (`docs/rounds/`). |
-| **Builder** | One bounded brief at a time. Never self-accepts, never merges. ([contract](docs/agents/roles/worker.md)) | Everything a brief authorizes: canonical data, importers, validator, generated `dist/`, tests, research documents, tooling. Its role tag in every `fw.py` command is `builder`. |
-| **Verifier** | Independent review of an exact SHA. Writes and commits only its report, on its own branch; never merges. ([contract](docs/agents/roles/verifier.md)) | Read-only review of one delivered Builder head. |
+| **Brain** | Project context, sequencing, prompts, adjudication, and the routine merge. ([contract](docs/agents/roles/brain.md)) | Durable state ([`docs/state.md`](docs/state.md)) and which batch comes next. |
+| **Builder** | One batch at a time, on `worker/<batch>`, ending with its summary in `docs/batches/`. Never self-accepts, never merges. ([contract](docs/agents/roles/worker.md)) | Everything a prompt authorizes: canonical data, importers, validator, generated `dist/`, tests, research documents, tooling. |
+| **Verifier** | Independent review of an exact SHA on a Checked batch. Writes only its review, `docs/batches/<batch>-review.md`; never merges. ([contract](docs/agents/roles/verifier.md)) | Read-only review of one delivered Builder head. |
 
 **Builder is this project's name for the executor seat**, holding the Worker
-contract unchanged. **Seats work from any checkout**: `fw.py start` puts a
-session on the right branch at the right commit wherever it runs. Linked
-worktrees nested under `.worktrees/<role>-<number>/` inside this one project
-folder (the seat prompt from `fw.py prompt` gives the command) are this
+contract unchanged. **Seats work from any checkout.** Linked worktrees
+nested under `.worktrees/` inside this one project folder are this
 project's usual convenience — never required, and `.worktrees/` is
 git-ignored, per-clone state (check `git worktree list`, don't assume it
 exists). Adding or retiring a seat is the owner's decision; a tool or
 provider never creates one.
 
-**Why a standing Verifier**, when this project could run Brain → Builder
-alone: this project's costliest defects pass every local check. A source
+**Why the Checked path is wide here**, when most work could run Brain →
+Builder alone: this project's costliest defects pass every local check. A source
 cited for a stronger claim than it makes, a publication date read as an
 effective date, a stale premise in a brief — the suite is green for all of
 them, because tests prove internal consistency, not history. Round 13 is the
@@ -69,16 +67,20 @@ Effective September 1, 2010") that the title does not support, and it was a
 direct re-fetch at review, not any test, that caught it. The Verifier exists
 to find that class before acceptance rather than after.
 
+So the **Checked** path (Builder, Verifier, then Brain) covers canonical data
+(`data/`, `formats/`), release and pool data, validator rules, and any
+historical claim or research finding. Other code changes with tests are
+**Normal**; notes, `docs/state.md` and framework updates are **Small**.
+
 ## Modes this project uses
 
-A brief's `Mode:` line uses `docs/agents/roles/brain.md`'s brief-template
-vocabulary (implementation, research, investigation, data, documentation,
-audit). Two project notes:
+A prompt may name its mode (implementation, research, investigation, data,
+documentation, audit). Two project notes:
 
 - **`HISTORICAL RESEARCH`** is this project's name for `research` mode.
   Findings go, with provenance, into the `docs/research/` file or packet the
-  brief names. Canonical data, schema and format changes are forbidden in
-  this mode unless the brief explicitly authorizes them.
+  prompt names. Canonical data, schema and format changes are forbidden in
+  this mode unless the prompt explicitly authorizes them.
 - **`audit`** is the Verifier's, not the Builder's — doing it on the Builder
   seat would collapse the separation that makes the Verifier worth having.
 
@@ -125,13 +127,13 @@ These predate the coordination framework and outrank any process below.
   message text, and a change to a code's meaning or severity is a rule
   change, not a wording change.
 - **No validation rule is loosened, and no regression test is deleted or
-  weakened, without a brief that names that as its purpose.** Changing a test
+  weakened, without a prompt that names that as its purpose.** Changing a test
   to match new behaviour first requires establishing which of the two — the
   test or the behaviour — is actually wrong; that is what an `investigation`-mode
-  brief is for.
+  batch is for.
 - **GOAT parity is a historical anchor.** The generated GOAT list is
   entry-for-entry identical to Project Ignis's reference: EDOPro content hash
-  `0x28E9FC02`. If it moves, stop and report; never re-pin it to make a round
+  `0x28E9FC02`. If it moves, stop and report; never re-pin it to make a batch
   pass.
 - **Standard library only, Python 3.10+.** No dependency manifest, by
   choice. CI runs 3.10 and 3.13.
@@ -145,7 +147,7 @@ pool cutoff, what `verified` requires — are in
 ## Evidence discipline
 
 Agent reports are evidence, not ground truth; repository, source, test and CI
-state are authoritative — see `docs/agents/FRAMEWORK.md` rules 7 and 10. Run
+state are authoritative — see `docs/agents/FRAMEWORK.md` rules 3 and 5. Run
 what is relevant to what you touched, paste real output with exit status, and
 say what you did **not** run. Use `python` where `python3` does not resolve;
 either must be 3.10 or newer.
@@ -174,7 +176,7 @@ blocking finding, not a style note.
 
 ### What review checks here
 
-On top of the Brain and Verifier contracts, review of any round touching
+On top of the Brain and Verifier contracts, review of any batch touching
 historical data checks: dates, and effective-date semantics specifically;
 source authentication versus mere convergence of unauthenticated sources;
 `legality_basis`; engine-representability claims, kept distinct from
@@ -186,7 +188,7 @@ already been made.
 
 ## Working discipline
 
-- **One coherent task at a time.** If the real fix is bigger than the brief,
+- **One coherent task at a time.** If the real fix is bigger than the prompt,
   stop and report that rather than expanding.
 - **Re-check branch and status at the start of *every* discrete task**, not
   only at session start. The shared-checkout failure this rule prevents
@@ -200,9 +202,9 @@ already been made.
   relay.
 - **Exact-SHA verification.** A claim about CI or a commit is checked at that
   literal SHA.
-- **Evidence in a record is added to, never replaced.** When a round corrects
+- **Evidence in a record is added to, never replaced.** When a batch corrects
   a source record's dates or provenance, the passages it already quotes stay
-  unless they are shown to be wrong. A report on any round that changes
+  unless they are shown to be wrong. The summary of any batch that changes
   source or evidence records compares each changed record with its previous
   version. (Round 18 needed three returns for this one habit.)
 - **Fix the defect class, not the first example.** If the general fix is
@@ -211,7 +213,7 @@ already been made.
   test, a validator rule or a hook, and pin *why* a rejected design was
   rejected.
 - **State handoff.** Durable facts go in [`docs/state.md`](docs/state.md),
-  kept short and pointing elsewhere rather than accumulating per-round
+  kept short and pointing elsewhere rather than accumulating per-batch
   detail; live state is derived, never stored.
 
 ## What is actually enforced
@@ -240,13 +242,14 @@ locally.
 - Durable project context — rulings, parked research, owner preferences:
   [`docs/state.md`](docs/state.md). To answer a question about the repo,
   this file plus the specific document the question is about is usually
-  enough. It stores no live state; derive branch, SHA, round status and CI
-  from git, `python3 tools/fw.py status` and `docs/rounds/`.
-- Rounds — brief and each seat's report: `docs/rounds/<id>/`; history from
-  before this framework: `docs/briefs/`
+  enough. It stores no live state; derive branch, SHA, batch status and CI
+  from git, `python3 tools/fw.py status` and `docs/batches/`.
+- Batches — summary and review: `docs/batches/`; 3.x rounds in
+  `docs/rounds/<id>/` and pre-framework history in `docs/briefs/`, kept as
+  history
 - Architecture and schema: [`docs/architecture.md`](docs/architecture.md),
   [`docs/format-schema.md`](docs/format-schema.md)
 - What is open: [`docs/roadmap.md`](docs/roadmap.md)
-- Research corpus: `docs/research/` — large; briefs scope what is relevant
+- Research corpus: `docs/research/` — large; prompts scope what is relevant
 - Tool adapter for Claude Code: `.claude/` (launch mechanics and
   conveniences only; `/status`, `/atlas`, `/report`)
