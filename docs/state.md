@@ -76,7 +76,7 @@ The owner keeps **one standing Builder chat and one separate Verifier chat**,
 reused across rounds; fresh only after a rejection or when very long, with
 the reason stated. A Verifier prompt never goes into the Builder's chat.
 Every prompt tells the agent to re-derive state from the repository, not the
-conversation. This overrides the framework's fresh-session default.
+conversation. Parallel research batches get fresh chats.
 
 ## Operating policy — the framework is done being built
 
